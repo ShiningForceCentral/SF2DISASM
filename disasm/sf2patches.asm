@@ -2,30 +2,6 @@ BUGFIX_SEARCH_IN_BATTLE: equ 0          ; 0 = OFF, 1 = ON
 
 ; ---------------------------------------------------------------------------
 
-; patch Easy_Battle_Test
-;
-;     0 = OFF, 1 = ON
-;
-EASY_BATTLE_TEST: equ 0
-
-; ---------------------------------------------------------------------------
-
-; patch Easy_Configuration_Mode
-;
-;     0 = OFF, 1 = ON
-;
-EASY_CONFIGURATION_MODE: equ 0
-
-; ---------------------------------------------------------------------------
-
-; patch Easy_Debug_Mode
-;
-;     0 = OFF, 1 = ON
-;
-EASY_DEBUG_MODE: equ 0
-
-; ---------------------------------------------------------------------------
-
 ; patch Percent_Poison_Damage
 ;
 ;     0 = OFF, 1-100 = n% of max HP

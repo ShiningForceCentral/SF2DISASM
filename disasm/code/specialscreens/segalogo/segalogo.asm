@@ -42,23 +42,11 @@ loc_280AA:
                 move.l  #InputSequence_ConfigurationMode,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                
-                if (EASY_CONFIGURATION_MODE=1)
-                dc.l VInt_ActivateConfigurationModeCheat
-                else
                 dc.l VInt_CheckConfigurationModeCheat
-                endif
-                
                 move.l  #InputSequence_DebugMode,((ENTITY_WALKING_PARAMS-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                
-                if (EASY_DEBUG_MODE=1)
-                dc.l VInt_ActivateDebugModeCheat
-                else
                 dc.l VInt_CheckDebugModeCheat
-                endif
-                
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
@@ -99,13 +87,7 @@ loc_28164:
                 bne.w   loc_2818E
                 subq.w  #1,d0
                 bne.s   loc_28164
-                
-                if (EASY_CONFIGURATION_MODE=1)
-                bra.s   @Done
-                else
                 trap    #VINT_FUNCTIONS
-                endif
-                
                 dc.w VINTS_REMOVE
                 dc.l VInt_CheckConfigurationModeCheat
 @Done:
