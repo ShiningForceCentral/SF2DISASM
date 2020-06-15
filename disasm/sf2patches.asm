@@ -77,14 +77,6 @@ CAPITALIZED_CHARACTER_NAMES: equ 0
 
 ; ---------------------------------------------------------------------------
 
-; patch Bugfix_Search_In_Battle
-;
-;     0 = OFF, 1 = ON
-;
-BUGFIX_SEARCH_IN_BATTLE: equ 0
-
-; ---------------------------------------------------------------------------
-
 ; patch Bugfix_Skipped_Turns
 ;
 ;     Fixes an oversight where randomized AGI, for the purpose of determining
