@@ -3,7 +3,6 @@ name: build/standard auto-update
 on:
   push:
     branches:
-    - master
     - nopatch
 
 jobs:
@@ -17,7 +16,7 @@ jobs:
     - name: Auto merge on branch 'build/standard'
       uses: robotology/gh-action-nightly-merge@v1.2.0
       with:
-        stable_branch: 'master'
+        stable_branch: 'nopatch'
         development_branch: 'build/standard'
         user_name: 'GitHub Auto Merge Action'  
       env:
