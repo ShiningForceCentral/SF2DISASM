@@ -941,7 +941,16 @@ HandleAfterTurnEffects:
                 andi.w  #STATUSEFFECTS_MASK_POISON,d1
                 beq.s   @UpdateStats
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                
+                if (PERCENT_POISON_DAMAGE>=1)
+                jsr     GetMaxHP
+                mulu.w  #PERCENT_POISON_DAMAGE,d1
+                divu.w  #100,d1
+                andi.l  #$FFFF,d1
+                else
                 moveq   #POISON_DAMAGE,d1 ; constant poison damage
+                endif
+                
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     $133            ; "{CLEAR}{NAME} gets damaged{N}by {#} because of the poison.{D3}"
                 jsr     j_DecreaseCurrentHP
