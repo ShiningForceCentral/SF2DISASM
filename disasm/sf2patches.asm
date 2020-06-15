@@ -38,15 +38,3 @@ FULL_CLASS_NAMES: equ 0
 ;     0 = OFF, 1 = ON
 ;
 FORCE_MEMBERS_EXPANSION: equ 0
-
-; ---------------------------------------------------------------------------
-
-; patch Capitalized_Character_Names
-;
-;     Also fixes the Chess Army's "EVIL BISHOP", and "JAR" enemy names
-;
-;     0 = OFF, 1 = ON
-;
-CAPITALIZED_CHARACTER_NAMES: equ 0
-
-; ---------------------------------------------------------------------------
