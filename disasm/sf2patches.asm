@@ -5,14 +5,6 @@ EASY_DEBUG_MODE: equ 0                  ; 0 = OFF, 1 = ON
 
 ; ---------------------------------------------------------------------------
 
-; patch Percent_Poison_Damage
-;
-;     0 = OFF, 1-100 = n% of max HP
-;
-PERCENT_POISON_DAMAGE: equ 0
-
-; ---------------------------------------------------------------------------
-
 ; patch Three_Digits_Stats
 ;
 ;     0 = OFF, 1 = ON
