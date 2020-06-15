@@ -44,14 +44,3 @@ FORCE_MEMBERS_EXPANSION: equ 0
 CAPITALIZED_CHARACTER_NAMES: equ 0
 
 ; ---------------------------------------------------------------------------
-
-; patch Bugfix_Skipped_Turns
-;
-;     Fixes an oversight where randomized AGI, for the purpose of determining
-;     turn order, is not capped at 127 as it should which occasionally
-;     results in combatants with high enough current AGI to skip getting
-;     a turn during battle.
-;
-;     0 = OFF, 1 = ON
-;
-BUGFIX_SKIPPED_TURNS: equ 0
