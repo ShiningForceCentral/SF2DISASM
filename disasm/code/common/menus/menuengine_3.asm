@@ -111,7 +111,11 @@ DrawLandEffectWindow:
 
     ; End of function DrawLandEffectWindow
 
-aLandEffect:    dc.b 'LAND',$B,'EFFECT',0
+aLandEffect:    if (THREE_DIGITS_STATS=1)
+                dc.b 'LE'
+                else
+                dc.b 'LAND',$B,'EFFECT',0
+                endif
 
 ; =============== S U B R O U T I N E =======================================
 

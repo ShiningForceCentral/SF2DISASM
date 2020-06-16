@@ -25,6 +25,12 @@ MemberStatsWindowLayout:
                 dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_WINDOW_CORNER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                
+; ---------------------------------------------------------------------------
+                
+                ; 2nd line
+                
+@blankLine:     macro
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
@@ -46,6 +52,13 @@ MemberStatsWindowLayout:
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endm
+                
+                @blankLine
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 3rd line
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
@@ -72,8 +85,11 @@ MemberStatsWindowLayout:
                 
                 ; 4th line
                 
+@firstStatsLine:    macro
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=0)
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_ASCII_UPPERCASE_L|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_V|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
@@ -81,21 +97,43 @@ MemberStatsWindowLayout:
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY ; LV
+                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY
+                endif
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_A|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_T|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_T|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=0)
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY ; ATT
+                else
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @blankLine
+                else
+                @firstStatsLine
+                endif
+                
                 ; ---------------------------------------------------------------------------
                 
                 ; 5th line
+                
+                if (FULL_CLASS_NAMES=1)
+                @firstStatsLine
+                else
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
@@ -117,27 +155,63 @@ MemberStatsWindowLayout:
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 6th line
+                
+@secondStatsLine:   macro
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=0)
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_ASCII_UPPERCASE_H|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_P|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY ; current HP
+                endif
                 dc.w VDPTILE_ASCII_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY ; max HP
+                endif
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_D|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_E|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_F|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=0)
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY ; DEF
+                else
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @blankLine
+                else
+                @secondStatsLine
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 7th line
+                
+                if (FULL_CLASS_NAMES=1)
+                @secondStatsLine
+                else
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
@@ -159,27 +233,63 @@ MemberStatsWindowLayout:
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 8th line
+                
+@thirdStatsLine:    macro
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=0)
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_ASCII_UPPERCASE_M|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_P|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY ; current MP
+                endif
                 dc.w VDPTILE_ASCII_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY ; max MP
+                endif
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_A|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_G|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_I|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=0)
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY ; AGI
+                else
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @blankLine
+                else
+                @thirdStatsLine
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 9th line
+                
+                if (FULL_CLASS_NAMES=1)
+                @thirdStatsLine
+                else
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
@@ -201,8 +311,17 @@ MemberStatsWindowLayout:
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 10th line
+                
+@fourthStatsLine:   macro
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=0)
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_ASCII_UPPERCASE_E|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_X|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_UPPERCASE_P|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
@@ -210,6 +329,10 @@ MemberStatsWindowLayout:
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=1)
+                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY      ; EXP
+                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY
+                endif
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
@@ -220,8 +343,25 @@ MemberStatsWindowLayout:
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_QUESTION_MARK|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                if (THREE_DIGITS_STATS=0)
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endm
+                
+                if (FULL_CLASS_NAMES=1)
+                @blankLine
+                else
+                @fourthStatsLine
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 11th line
+                
+                if (FULL_CLASS_NAMES=1)
+                @fourthStatsLine
+                else
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
@@ -243,6 +383,11 @@ MemberStatsWindowLayout:
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+                endif
+                
+                ; ---------------------------------------------------------------------------
+                
+                ; 12th line
                 dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
                 dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
