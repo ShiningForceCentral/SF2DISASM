@@ -1108,15 +1108,6 @@ tbl_SpriteDefs_TextHighlight_MemberList:
                 dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_LINK
                 dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_PROPS
                 dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_INIT_X
-                
-                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                dc.w $104
-                dc.b 1
-                dc.b $A
-                dc.w $C5C2
-                dc.w $BC
-                endif
-                
                 dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_INIT_Y
                 dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_SIZE
                 dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_LINK
@@ -1265,55 +1256,15 @@ WriteMemberListText:
                 move.w  #WINDOW_MEMBERLIST_SIZE,d0
                 bsr.w   CopyWindowTilesToRam
                 movea.l -6(a6),a1
-                
-@HEADER_NAME_OFFSET: equ 62
-@HEADER_NAME_LENGTH: equ 4
-                
-@writeHeader_Name:  macro
-                adda.w  #@HEADER_NAME_OFFSET,a1
-                moveq   #@HEADER_NAME_LENGTH,d7
-                lea     aName(pc), a0
-                bsr.w   WriteTilesFromAsciiWithRegularFont
-                    if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                    adda.w  #10,a1
-                    else
-                    addq.w  #8,a1
-                    endif
-                endm
-                
-                if (FULL_CLASS_NAMES=1)
-                @writeHeader_Name
-                elseif (THREE_DIGITS_STATS=1)
-                @writeHeader_Name
-                else
                 move.w  #$FFC6,d1
                 suba.w  d1,a1
                 addq.w  #4,a1
-                endif
-                
                 moveq   #WINDOW_MEMBERLIST_HEADER_LENGTH,d7
                 move.b  ((CURRENT_MEMBERLIST_PAGE-$1000000)).w,d0
                 bne.s   @DetermineHeader_HpMpAtDfAgMv
                 lea     aNameClassLevExp(pc), a0
                 bra.s   @WriteHeader
 @DetermineHeader_HpMpAtDfAgMv:
-                
-                
-@PAGE_HPMAXMPMAX: equ 1
-                
-@determineHeader_HpMaxMpMax:    macro
-                cmpi.b  #@PAGE_HPMAXMPMAX,d0
-                bne.s   @DetermineHeader_AttDefAgiMvEx
-                lea     aHpMaxMpMax(pc), a0
-                bra.s   @WriteHeader
-@DetermineHeader_AttDefAgiMvEx:
-                endm
-                
-                if (FULL_CLASS_NAMES=1)
-                @determineHeader_HpMaxMpMax
-                elseif (THREE_DIGITS_STATS=1)
-                @determineHeader_HpMaxMpMax
-                endif
                 
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMPATDFAGMV,d0
                 bne.s   @DetermineHeader_AttackDefense
@@ -1365,30 +1316,13 @@ WriteMemberListText:
                 bne.s   @WriteEntry_HpMpAtDfAgMv
                 move.l  a1,-(sp)
                 move.w  -$10(a6),d0
-                
-                if (FULL_CLASS_NAMES=1)
-                jsr     GetFullClassName_Wrapper
-                else
                 jsr     j_GetClass
                 jsr     j_GetClassName
-                endif
-                
                 moveq   #$FFFFFFC6,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movea.l (sp)+,a1
                 lea     WINDOW_MEMBERLIST_ENTRY_LEVEL_OFFSET(a1),a1
                 move.w  -$10(a6),d0
-                
-@writeNumber:   macro
-                jsr     \1
-                bsr.w   WriteTilesFromNumber_Wrapper
-                endm
-                
-                if (FULL_CLASS_NAMES=1)
-                @writeNumber GetCurrentLevel
-                elseif (THREE_DIGITS_STATS=1)
-                @writeNumber GetCurrentLevel
-                else
                 jsr     j_GetCurrentLevel
                 moveq   #LV_DIGITS_NUMBER,d7
                 move.w  d1,d0
@@ -1401,55 +1335,10 @@ WriteMemberListText:
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
-                endif
-                
 @WriteEntry_HpMpAtDfAgMv:
-                
-                
-                if (THREE_DIGITS_STATS=1)
-@CURRENT_MP_OFFSET: equ 4
-                else
-@CURRENT_MP_OFFSET: equ 8
-                endif
-                
-@writeEntry_HpMaxMpMax: macro
-                cmpi.b  #@PAGE_HPMAXMPMAX,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
-                bne.s   @WriteEntry_AttDefAgiMvEx
-                    if (THREE_DIGITS_STATS=0)
-                    addq.w  #2,a1
-                    endif
-                move.w  -$10(a6),d0
-                jsr     GetCurrentHP
-                bsr.w   WriteStatValue_Wrapper
-                move.w  #VDPTILE_ASCII_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
-                move.w  -$10(a6),d0
-                jsr     GetMaxHP
-                bsr.w   WriteStatValue_Wrapper
-                addq.w  #@CURRENT_MP_OFFSET,a1
-                move.w  -$10(a6),d0
-                jsr     GetCurrentMP
-                bsr.w   WriteStatValue_Wrapper
-                move.w  #VDPTILE_ASCII_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
-                move.w  -$10(a6),d0
-                jsr     GetMaxMP
-                bsr.w   WriteStatValue_Wrapper
-@WriteEntry_AttDefAgiMvEx:
-                endm
-                
-                if (FULL_CLASS_NAMES=1)
-                @writeEntry_HpMaxMpMax
-                elseif (THREE_DIGITS_STATS=1)
-                @writeEntry_HpMaxMpMax
-                endif
                 
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMPATDFAGMV,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.w   @WriteEntry_Unequippable
-                
-                if (FULL_CLASS_NAMES=1)
-                    if (THREE_DIGITS_STATS=0)
-                    addq.w  #2,a1
-                    endif
-                else
                 move.w  -$10(a6),d0
                 jsr     j_GetCurrentHP
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -1464,90 +1353,34 @@ WriteMemberListText:
                 ext.l   d0
                 bsr.w   WriteStatValue  
                 addq.l  #WINDOW_MEMBERLIST_PAGE_NEWATTANDDEF,a1
-                endif
-                
                 move.w  -$10(a6),d0
-                
-; ---------------------------------------------------------------------------
-                
-@writeStatValue:    macro
-                jsr     \1
-                bsr.w   WriteStatValue_Wrapper
-                addq.w  #2,a1
-                endm
-                
-                if (FULL_CLASS_NAMES=1)
-                @writeStatValue GetCurrentATT
-                elseif (THREE_DIGITS_STATS=1)
-                @writeStatValue GetCurrentATT
-                else
                 jsr     j_GetCurrentATT
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
                 addq.l  #WINDOW_MEMBERLIST_PAGE_NEWATTANDDEF,a1
-                endif
-                
                 move.w  -$10(a6),d0
-                
-                if (FULL_CLASS_NAMES=1)
-                @writeStatValue GetCurrentDEF
-                elseif (THREE_DIGITS_STATS=1)
-                @writeStatValue GetCurrentDEF
-                else
                 jsr     j_GetCurrentDEF
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
                 addq.l  #WINDOW_MEMBERLIST_PAGE_NEWATTANDDEF,a1
-                endif
-                
                 move.w  -$10(a6),d0
-                
-                if (FULL_CLASS_NAMES=1)
-                @writeStatValue GetCurrentAGI
-                elseif (THREE_DIGITS_STATS=1)
-                @writeStatValue GetCurrentAGI
-                else
                 jsr     j_GetCurrentAGI
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
                 addq.l  #WINDOW_MEMBERLIST_PAGE_NEWATTANDDEF,a1
-                endif
-                
                 move.w  -$10(a6),d0
-                
-; ---------------------------------------------------------------------------
-                
-@writeNumber_CurrentMOVandEXP:  macro
-                jsr     GetCurrentMOV
-                bsr.w   WriteTilesFromNumber_Wrapper
-                    if (THREE_DIGITS_STATS=1)
-                    addq.w  #2,a1
-                    else
-                    addq.w  #6,a1
-                    endif
-                move.w  -$10(a6),d0
-                @writeNumber GetCurrentEXP
-                endm
-                
-                if (FULL_CLASS_NAMES=1)
-                @writeNumber_CurrentMOVandEXP
-                elseif (THREE_DIGITS_STATS=1)
-                @writeNumber_CurrentMOVandEXP
-                else
                 jsr     j_GetCurrentMOV
                 moveq   #MOV_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
                 bsr.w   WriteStatValue  
                 addq.l  #WINDOW_MEMBERLIST_PAGE_NEWATTANDDEF,a1
-                endif
-                
 @WriteEntry_Unequippable:
                 
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_NEWATTANDDEF,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
@@ -1565,30 +1398,8 @@ WriteMemberListText:
 @WriteEntry_NewATTandDEF:
                 
                 jsr     j_GetEquipmentNewATTandDEF
-                
-                if (THREE_DIGITS_STATS=0)
                 addq.l  #2,a1
-                endif
-                
                 move.w  -$10(a6),d0
-                
-; ---------------------------------------------------------------------------
-                
-@writeNewATT:   macro
-                jsr     GetCurrentATT
-                bsr.w   WriteStatValue_Wrapper
-                move.w  #VDPTILE_HORIZONTAL_ARROW|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
-                moveq   #STATS_DIGITS_NUMBER,d7
-                move.w  d2,d0
-                bsr.w   WriteStatValue
-                addq.w  #WINDOW_MEMBERLIST_ENTRY_NEWDEFENSE_OFFSET,a1
-                endm
-                
-                if (FULL_CLASS_NAMES=1)
-                @writeNewATT
-                elseif (THREE_DIGITS_STATS=1)
-                @writeNewATT
-                else
                 jsr     j_GetCurrentATT
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
@@ -1600,24 +1411,7 @@ WriteMemberListText:
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue  
                 addq.l  #WINDOW_MEMBERLIST_ENTRY_NEWDEFENSE_OFFSET,a1
-                endif
-                
                 move.w  -$10(a6),d0
-                
-@writeNewDEF:   macro
-                jsr     GetCurrentDEF
-                bsr.w   WriteStatValue_Wrapper
-                move.w  #VDPTILE_HORIZONTAL_ARROW|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
-                moveq   #STATS_DIGITS_NUMBER,d7
-                move.w  d3,d0
-                bsr.w   WriteStatValue
-                endm
-                
-                if (FULL_CLASS_NAMES=1)
-                @writeNewDEF
-                elseif (THREE_DIGITS_STATS=1)
-                @writeNewDEF
-                else
                 jsr     j_GetCurrentDEF
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
@@ -1629,8 +1423,6 @@ WriteMemberListText:
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue  
                 addq.l  #2,a1
-                endif
-                
 @NextEntry:
                 
                 movea.l (sp)+,a1
@@ -1692,15 +1484,6 @@ loc_1381E:
                 bsr.w   WriteTilesFromNumber
                 movea.l -6(a6),a1
                 adda.w  #$4E,a1 
-                
-                if (FULL_CLASS_NAMES=1)
-                move.l  d3,-(sp)
-                move.l  a1,d3
-                elseif (THREE_DIGITS_STATS=1)
-                move.l  d3,-(sp)
-                move.l  a1,d3
-                endif
-                
                 move.w  -2(a6),d0
                 jsr     j_GetStatus
                 move.w  d1,d2
@@ -1765,15 +1548,6 @@ loc_138C4:
                 move.l  #$C0DDC0DF,d0
                 bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
 loc_138D6:
-                
-                
-; ---------------------------------------------------------------------------
-                
-                if (FULL_CLASS_NAMES=1)
-                move.l  (sp)+,d3
-                elseif (THREE_DIGITS_STATS=1)
-                move.l  (sp)+,d3
-                endif
                 
                 move.b  ((word_FFAF8C-$1000000)).w,d0
                 bne.s   loc_138E2
@@ -2205,75 +1979,14 @@ loc_13CDE:
 
     ; End of function CopyWindowTilesToRam
 
-; ---------------------------------------------------------------------------
-                
-aName:          
-                
-                if (FULL_CLASS_NAMES=1)
-                dc.b 'NAME'
-                elseif (THREE_DIGITS_STATS=1)
-                dc.b 'NAME'
-                endif
-                
 aNameClassLevExp:
-                
-                if (FULL_CLASS_NAMES=1)
-                dc.b 'CLASS          LV'
-                elseif (THREE_DIGITS_STATS=1)
-                dc.b 'CLASS          LV'
-                else
                 dc.b 'NAME    '
-                    if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                    dc.b ' '
-                    endif
 aClassLevExp:   dc.b 'CLASS     LEV EXP',0
-                endif
-                
-; ---------------------------------------------------------------------------
-                
-aHpMaxMpMax:
-                
-                if (FULL_CLASS_NAMES=1)
-                dc.b ' HP/MAX   MP/MAX',0
-                elseif (THREE_DIGITS_STATS=1)
-                dc.b ' HP/MAX   MP/MAX',0
-                endif
-                
 aNameHpMpAtDfAgMv:
-                
-; ---------------------------------------------------------------------------
-                
-                if (FULL_CLASS_NAMES=1)
-                    if (THREE_DIGITS_STATS=1)
-                    dc.b 'ATT DEF AGI MV EX'
-                    else
-                    dc.b ' AT DF AG MV  EXP'
-                    endif
-                else
                 dc.b 'NAME    '
-                    if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                    dc.b ' '
-                    endif
-aHpMpAtDfAgMv:  
-                if (THREE_DIGITS_STATS=1)
-                dc.b 'ATT DEF AGI MV EX',0
-                else
-                dc.b 'HP MP AT DF AG MV',0
-                endif
-                
-                endif
-                
+aHpMpAtDfAgMv:  dc.b 'HP MP AT DF AG MV',0
 aNameAttackDefense:
-                
-; ---------------------------------------------------------------------------
-                
-                if (FULL_CLASS_NAMES=0)
                 dc.b 'NAME    '
-                    if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                    dc.b ' '
-                    endif
-                endif
-                
 aAttackDefense: dc.b 'ATTACK   DEFENSE',0
 aMagicItem:     dc.b 'MAGIC     ITEM'
 aItem_3:        dc.b '- ITEM -',0
@@ -3181,15 +2894,6 @@ tbl_SpriteDefs_TextHighlight_ItemList:
                 dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_LINK
                 dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_PROPS
                 dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_1_INIT_X
-                
-                if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                dc.w $104
-                dc.b 1
-                dc.b $A
-                dc.w $C5C2
-                dc.w $BC
-                endif
-                
                 dc.w SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_INIT_Y
                 dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_SIZE
                 dc.b SPRITEDEF_TEXTHIGHLIGHT_MEMBERLIST_2_LINK
