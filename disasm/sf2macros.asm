@@ -303,12 +303,6 @@ allyName:	macro
 	dc.b \1
 	endm
 	
-allyNameIfExpandedRom:	macro
-	if (EXPANDED_ROM=1)
-	allyName \1
-	endc
-	endm
-	
 enemyName:	macro
 	if (narg=2)				; if there are 2 arguments, it must be Jaro's bugged enemy name ending with a null character
 	dc.b strlen(\1)+1
@@ -409,12 +403,6 @@ className:	macro
 	
 allyBattleSprite:	macro
 	dc.b ALLYBATTLESPRITE_\1,\2
-	endm
-    
-allyBattleSpriteIfExpandedRom:	macro
-	if (EXPANDED_ROM=1)
-	allyBattleSprite \1,\2
-	endc
 	endm
 	
 enemyBattleSprite:	macro
@@ -610,12 +598,6 @@ randomBattles:	macro
 	
 forClass:	macro
 	dc.b CLASS_\1
-	endm
-    
-forClassIfExpandedRom:	macro
-	if (EXPANDED_ROM=1)
-	forClass \1
-	endc
 	endm
 	
 hpGrowth:	macro Start,Proj,Curve
