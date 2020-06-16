@@ -346,14 +346,7 @@ loc_6574:
 class:
                 
                 bsr.w   sub_6648
-                
-                if (FULL_CLASS_NAMES=1)
-                bsr.w   GetFullClassName
-                nop
-                else
                 jsr     j_GetClassName
-                endif
-                
                 bsr.w   CopyAsciiBytesForDialogueString
 loc_658C:
                 
