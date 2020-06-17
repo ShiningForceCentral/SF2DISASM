@@ -31,10 +31,3 @@ AllyNames:      allyName "BOWIE"
                 allyName "CHAZ"
                 allyName "LEMON"
                 allyName "CLAUDE"
-                
-                ; Additional entries to be defined with force members expansion patch
-                if (FORCE_MEMBERS_EXPANSION=1)
-                allyName ""
-                allyName ""
-                endif
-                
