@@ -33,8 +33,8 @@ p_BaseTiles:    dc.l BaseTiles
                 include "data\stats\allies\classes\fullclassnames.asm"
                 wordAlign
                 endif
-                include "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
-                include "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
+                includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
+                includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
 unused_BasePalettes:
                 incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
 BaseTiles:      incbin "data/graphics/tech/basetiles.bin"

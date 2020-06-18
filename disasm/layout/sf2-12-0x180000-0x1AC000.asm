@@ -18,7 +18,8 @@ p_pt_AllyAnimations:
                 dc.l pt_AlliesAnimations
 p_pt_EnemyAnimations:
                 dc.l pt_EnemyAnimations
-                include "data\graphics\battles\battlesprites\allies\entries.asm"    ; Ally battlesprites
+                includeIfExpandedRom "data\scripting\text\entries.asm"    ; Textbank entries
+                includeIfVanillaRom "data\graphics\battles\battlesprites\allies\entries.asm"    ; Ally battlesprites
 StatusAnimationTiles:
                 incbin "data/graphics/tech/statusanimationtiles.bin"
 pt_battlesceneTransitionTiles:
