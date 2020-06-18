@@ -22,7 +22,7 @@ CheckBattle:
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
 loc_79B2:
                 
-                conditionalPc lea,BattleMapCoordinates,a0
+                lea     BattleMapCoordinates(pc), a0
                 moveq   #44,d6          ; HARDCODED number of battles
                 clr.w   d7
 loc_79BA:

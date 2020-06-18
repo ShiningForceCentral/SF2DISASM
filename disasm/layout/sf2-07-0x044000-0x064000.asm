@@ -180,6 +180,5 @@ j_ClearEntities:
                 include data\battles\entries\battlecutscenesstorage.asm
                 include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
                 include "data\maps\mapsetups.asm"    ; Map setups table
-                ;includeIfVanillaRom data\maps\mapsetupsstorage.asm
                 include data\maps\mapsetupsstorage.asm
                 align $64000
