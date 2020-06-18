@@ -6,7 +6,9 @@
 
 EndGame:
                 
+                enableSram              
                 bset    #7,(SAVE_FLAGS).l
+                disableSram
                 jsr     (DisableDisplayAndInterrupts).w
                 movea.l (p_WitchEndTiles).l,a0
                 lea     (FF6802_LOADING_SPACE).l,a1

@@ -81,7 +81,7 @@ aGmMk13150:     dc.b 'GM MK-1315 -0'    ; Serial Number
                 dc.w $8921              ; checksum
 aJ:             dc.b 'J               '
                 dc.l 0                  ; Rom Start Adress
-RomEndAddress:  dc.l $1FFFFF            ; Rom End Adress
+RomEndAddress:  declareRomEnd           ; Rom End Adress
                 dc.l $FF0000            ; Ram Start Adress
                 dc.l $FFFFFF            ; Ram End Adress
                 dc.l $5241F820          ; SRam data
