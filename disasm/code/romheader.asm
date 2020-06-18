@@ -81,7 +81,7 @@ aGmMk13150:     dc.b 'GM MK-1315 -0'    ; Serial Number
                 dc.w $8921              ; checksum
 aJ:             dc.b 'J               '
                 dc.l 0                  ; Rom Start Adress
-RomEndAddress:  declareRomEnd           ; Rom End Adress
+RomEndAddress:  dc.l $1FFFFF            ; Rom End Adress
                 dc.l $FF0000            ; Ram Start Adress
                 dc.l $FFFFFF            ; Ram End Adress
                 dc.l $5241F820          ; SRam data
@@ -90,4 +90,4 @@ RomEndAddress:  declareRomEnd           ; Rom End Adress
                 dc.b '            '     ; Modem data
                 dc.b '                    ' ; Memo
                 dc.b '                    '
-aU:             headerRegion            ; Countries codes
+aU:             dc.b 'U               ' ; Countries codes

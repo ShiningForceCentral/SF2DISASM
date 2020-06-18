@@ -80,7 +80,7 @@ j_SuspendGame:
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions
                 include "code\common\tech\graphics\specialsprites.asm"    ; Special Sprites functions
-                includeIfVanillaRom "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
+                include "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
                 include "code\common\tech\graphics\specialspritesanims.asm"    ; Special Sprites Animations
                 include "code\specialscreens\suspend\suspend.asm"    ; Suspend functions
                 include "code\specialscreens\witchend\witchend.asm"    ; Witch end functions
