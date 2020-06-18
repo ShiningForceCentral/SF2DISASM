@@ -81,7 +81,6 @@ loc_74B4:
                 move.b  #3,((CURRENT_MAP-$1000000)).w
                 move.b  #3,((EGRESS_MAP_INDEX-$1000000)).w
                 bsr.w   SaveGame
-                disableSram
                 clsTxt
                 move.b  #MAP_GRANSEAL,d0 ; HARDCODED new game starting map
                 move.w  #$38,d1 ; HARDCODED main entity starting X
@@ -120,7 +119,6 @@ loc_74FE:
                 subq.w  #1,d0
                 move.w  d0,((SAVE_SLOT_INDEX-$1000000)).w
                 bsr.w   LoadGame
-                disableSram
                 txt     $E2             ; "{NAME;0}, yes!  I knew it!{W2}"
                 bsr.w   CheatModeConfiguration
                 txt     $E0             ; "Now, good luck!{N}You have no time to waste!{W1}"

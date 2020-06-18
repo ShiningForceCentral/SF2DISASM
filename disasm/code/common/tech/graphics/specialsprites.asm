@@ -92,16 +92,16 @@ loc_25CB0:
 sub_25CB6:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                conditionalPc lea,(SpecialSprites_EvilSpirit+$20),a0
+                lea     (SpecialSprites_EvilSpirit+$20)(pc), a0
                 tst.w   d0
                 beq.s   loc_25CD2
                 cmpi.b  #1,d0
                 bne.s   loc_25CCE
-                conditionalPc lea,SpecialSprites_EvilSpiritAlt,a0
+                lea     SpecialSprites_EvilSpiritAlt(pc), a0
                 bra.s   loc_25CD2
 loc_25CCE:
                 
-                conditionalPc lea,(SpecialSprites_Zeon+$20),a0
+                lea     (SpecialSprites_Zeon+$20)(pc), a0
 loc_25CD2:
                 
                 lea     (FF6802_LOADING_SPACE).l,a1
