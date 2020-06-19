@@ -1104,8 +1104,14 @@ EquipEffect_IncreaseDoubleAttackProwess:
 @Continue:
                 
                 lsl.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2
+                
+                if (BUGFIX_INCREASE_DOUBLE_RESETS_COUNTER=0)
                 andi.b  #PROWESS_MASK_CRITICAL,(a2) ; <BUG> chance to counter attack is being set to 1/32
                                         ; setting should be masked as well
+                else
+                andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_COUNTER,(a2)
+                endif
+                
                 or.b    d2,(a2)
                 rts
 
