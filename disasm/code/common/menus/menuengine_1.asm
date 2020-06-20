@@ -3543,7 +3543,9 @@ aNA:            dc.b 'N/A',0
 
 BuildMemberStatsWindow:
                 
+                module
                 link    a6,#-6
+                    
                 move.w  d0,-2(a6)
                 move.l  a1,-6(a6)
                 movea.l (p_WindowLayout_MemberStats).l,a0
@@ -3832,7 +3834,7 @@ BuildMemberStatsWindow:
                 clr.w   d1
                 jsr     j_GetItemAndNumberOfItems
                 tst.w   d2
-                beq.w   Write_Nothing
+                beq.w   @Write_Nothing
                 movea.l -6(a6),a1
                 adda.w  #$236,a1
                 moveq   #3,d6
@@ -3843,7 +3845,7 @@ BuildMemberStatsWindow:
                 sub.w   d6,d1
                 jsr     j_GetItemAndNumberOfItems
                 cmpi.b  #ITEM_NOTHING,d1
-                beq.w   CopyJewelIcons
+                beq.w   @CopyJewelIcons
                 bsr.w   CopyMemberScreenIconsToVdpTileOrder
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
@@ -3868,7 +3870,7 @@ BuildMemberStatsWindow:
                 
                 adda.w  #$7E,a1 
                 dbf     d6,@ItemNames_Loop
-                bra.w   CopyJewelIcons
+                bra.w   @CopyJewelIcons
 aNothing_0:
                 
                 dc.b '\Nothing',0
@@ -3881,7 +3883,7 @@ aNothing_1:
 aJewel:
                 
                 dc.b 'JEWEL',0
-Write_Nothing:
+@Write_Nothing:
                 
                 move.w  d7,-(sp)
                 lea     aNothing_1(pc), a0
@@ -3891,7 +3893,7 @@ Write_Nothing:
                 moveq   #$A,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  (sp)+,d7
-CopyJewelIcons:
+@CopyJewelIcons:
                 
                 move.w  -2(a6),d0
                 bne.s   @DrawSpellIcons
@@ -4052,6 +4054,7 @@ CopyJewelIcons:
 
     ; End of function BuildMemberStatsWindow
 
+                modend
                 dc.w $FFFF              ; useless padding bytes
 
 ; =============== S U B R O U T I N E =======================================
