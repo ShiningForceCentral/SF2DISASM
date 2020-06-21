@@ -6,6 +6,7 @@
     include "sf2cutscenemacros.asm"
     include "sf2mapmacros.asm"
     include "sf2mapsetupmacros.asm"
+    include "sf2battlescenemacros.asm"
 
 align: macro
     if (narg=1)

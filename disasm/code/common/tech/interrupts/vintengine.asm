@@ -1120,11 +1120,12 @@ ClearCram:
                 move.w  #$C000,(VDP_Control).l
                 move.w  #$80,(VDP_Control).l  ; CRAM address 0x80
                 move.w  #0,(VDP_Data).l
-loc_EC8:
+@WaitForDmaFree:
                 
                 move.w  (VDP_Control).l,d0
-                andi.w  #2,d0           ; wait for DMA free
-                bne.s   loc_EC8
+                andi.w  #2,d0
+                bne.s   @WaitForDmaFree
+                
                 move.w  (VDP_REG01_STATUS).l,d3
                 move.w  d3,(VDP_Control).l
                 move.w  #$8F02,(VDP_Control).l ; auto increment : 2

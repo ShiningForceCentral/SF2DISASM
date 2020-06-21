@@ -3545,7 +3545,7 @@ BuildMemberStatsWindow:
                 
                 module
                 link    a6,#-6
-                    
+                
                 move.w  d0,-2(a6)
                 move.l  a1,-6(a6)
                 movea.l (p_WindowLayout_MemberStats).l,a0

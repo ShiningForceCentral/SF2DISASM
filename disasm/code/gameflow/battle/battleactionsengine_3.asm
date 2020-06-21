@@ -85,20 +85,10 @@ WriteSkirmishScript_EnemyDropItem:
                 jsr     AddItem         
                 tst.b   d2
                 bne.w   @AddRareItemToDeals ; add rare item to deals section if character is unable to pick it up
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_DROPPED_ITEM,(a6)+ ; {NAME} dropped{N}a {ITEM}.{D1}
-                move.b  #0,(a6)+
-                move.b  (a5),(a6)+
-                move.w  d1,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_RECEIVED_ITEM,(a6)+ ; {NAME} received{N}the {ITEM}.
-                move.b  #0,(a6)+
-                move.b  (a4),(a6)+
-                move.w  d1,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_DROPPED_ITEM,(a5),d1,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
+                displayMessage #MESSAGE_BATTLE_RECEIVED_ITEM,(a4),d1,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 bra.w   @Done
 @AddRareItemToDeals:
                 
