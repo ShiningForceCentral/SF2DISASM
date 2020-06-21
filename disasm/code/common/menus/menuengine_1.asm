@@ -3640,8 +3640,8 @@ aNA:            dc.b 'N/A',0
 BuildMemberStatsWindow:
                 
                 module
-                
                 link    a6,#-6
+                
                 move.w  d0,-2(a6)
                 move.l  a1,-6(a6)
                 movea.l (p_WindowLayout_MemberStats).l,a0
@@ -4317,7 +4317,6 @@ aJewel:
     ; End of function BuildMemberStatsWindow
 
                 modend
-                
                 dc.w $FFFF              ; useless padding bytes
 
 ; =============== S U B R O U T I N E =======================================
@@ -4364,4 +4363,3 @@ loc_1261C:
                 jmp     (WaitForDmaQueueProcessing).w
 
     ; End of function sub_12606
-

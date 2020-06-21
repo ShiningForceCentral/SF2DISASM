@@ -53,25 +53,15 @@ loc_9BE4:
                 bsr.w   InitSkirmishDisplayedCombatants
                 tst.b   -BCSTACK_OFFSET_INACTION_CURSE(a2)
                 beq.s   loc_9C5A
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_IS_CURSED_AND_STUNNED,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a4),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_IS_CURSED_AND_STUNNED,(a4),#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 bra.w   loc_9DC4
 loc_9C5A:
                 
                 tst.b   -BCSTACK_OFFSET_INACTION_STUN(a2)
                 beq.s   loc_9C7E
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_IS_STUNNED_AND_CANNOT_MOVE,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a4),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_IS_STUNNED_AND_CANNOT_MOVE,(a4),#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 bra.w   loc_9DC4
 loc_9C7E:
                 
@@ -79,13 +69,7 @@ loc_9C7E:
                 bsr.w   CreateBattleSceneAnimation
                 tst.b   -BCSTACK_OFFSET_SILENCED(a2)
                 beq.s   loc_9CAA
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_SILENCED,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a4),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_SILENCED,(a4),#0,#0 ; Message, Combatant, Item or Spell, Number
                 bra.w   loc_9DC4
 loc_9CAA:
                 
@@ -124,7 +108,7 @@ loc_9CE0:
                 move.b  d1,-1(a2)
                 move.b  d1,-4(a2)
                 move.b  d1,-$F(a2)
-                move.w  #$C,(a6)+
+                makeActorIdleAndEndAnimation
                 exg     a4,a5
                 bsr.w   WriteSkirmishScript_SwitchTargets
                 exg     a4,a5
@@ -150,7 +134,7 @@ loc_9D3E:
                 move.b  d1,-BCSTACK_OFFSET_TARGETDIES(a2)
                 move.b  d1,-BCSTACK_OFFSET_FORCEDCRIT(a2)
                 move.b  d1,-BCSTACK_OFFSET_INEFFECTIVEATTACK(a2)
-                move.w  #$C,(a6)+
+                makeActorIdleAndEndAnimation
                 exg     a4,a5
                 bsr.w   WriteSkirmishScript_SwitchTargets
                 exg     a4,a5
@@ -170,7 +154,7 @@ loc_9D9C:
                 move.b  #0,-BCSTACK_OFFSET_EXPLODE(a2)
                 move.w  #BATTLEACTION_BURST_ROCK,(a3)
                 move.b  -BCSTACK_OFFSET_EXPLODECHAR(a2),(a4)
-                move.w  #$C,(a6)+
+                makeActorIdleAndEndAnimation
                 bsr.w   DetermineTargetsByAction
                 bra.w   loc_9C7E
 loc_9DC4:
@@ -501,12 +485,7 @@ CreateBattleSceneText:
                 move.w  #MESSAGE_BATTLE_COUNTER_ATTACK,d1 ; {NAME}'s counter{N}attack!
 @BattleMessage_Attack:
                 
-                move.w  #$10,(a6)+
-                move.w  d1,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage d1,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 bra.w   @Done
 @CheckCastSpell:
                 
@@ -552,35 +531,20 @@ CreateBattleSceneText:
                 move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
                 move.w  ((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w,d3
                 addq.w  #1,d3
-                move.w  #$10,(a6)+
-                move.w  d1,(a6)+
-                move.w  d0,(a6)+
-                move.w  d2,(a6)+
-                move.w  #0,(a6)+
-                move.w  d3,(a6)+
+                displayMessage d1,d0,d2,d3 ; Message, Combatant, Item or Spell, Number
                 bra.w   @Done
 @CheckUseItem:
                 
                 cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
                 bne.w   @CheckBurstRock
                 move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d2
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_USED_ITEM,(a6)+
-                move.w  d0,(a6)+
-                move.w  d2,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_USED_ITEM,d0,d2,#0 ; Message, Combatant, Item or Spell, Number
                 bra.w   @Done
 @CheckBurstRock:
                 
                 cmpi.w  #BATTLEACTION_BURST_ROCK,(a3)
                 bne.w   @CheckMuddled
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_EXPLODED,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_EXPLODED,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 bra.s   @Done
 @CheckMuddled:
                 
@@ -597,12 +561,7 @@ CreateBattleSceneText:
                 
                 add.w   d0,d1
                 move.w  d2,d0
-                move.w  #$10,(a6)+
-                move.w  d1,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage d1,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 bra.s   @Done
 @CheckPrismLaser:
                 
@@ -618,12 +577,7 @@ CreateBattleSceneText:
                 move.w  #MESSAGE_BATTLE_PRISM_LASER,d1 ; 013F=Prism laser!
 @BattleMessage_PrismLaser:
                 
-                move.w  #$10,(a6)+
-                move.w  d1,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage d1,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
 @Done:
                 
                 movem.l (sp)+,d0-d3/a0
@@ -651,25 +605,17 @@ CreateBattleSceneAnimation:
                 neg.w   d2
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  d2,(a6)+
-                move.w  d1,(a6)+
-                move.w  #0,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,d2,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @CheckMuddled
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  d2,(a6)+
-                move.w  d1,(a6)+
-                move.w  #0,(a6)+
+                executeEnemyReaction #0,d2,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
 @CheckMuddled:
                 
                 cmpi.w  #BATTLEACTION_NOTHING,(a3)
                 beq.w   @Skip           ; skip if action type is "muddled"
-                move.w  #$12,(a6)+
+                bscHideTextBox
                 bsr.w   GetSpellAnimation
                 moveq   #BATTLEANIMATION_ATTACK,d5
                 tst.w   (a3)
@@ -743,19 +689,11 @@ CreateBattleSceneAnimation:
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyReaction_BurstRock
-                move.w  #$B,(a6)+       ; write ally reaction command when action type is "burst rock"
-                move.w  d2,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeAllyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BurstRockSelfDestruction
 @EnemyReaction_BurstRock:
                 
-                move.w  #$A,(a6)+
-                move.w  d2,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeEnemyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BurstRockSelfDestruction:
                 
                 moveq   #0,d1           ; Burst Rock is killed when it explodes
@@ -773,7 +711,7 @@ CreateBattleSceneAnimation:
 sub_A34E:
                 
                 movem.l d0-d3/a0,-(sp)
-                move.w  #$D,(a6)+
+                endAnimation
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
                 moveq   #3,d6
                 bsr.w   WriteSkirmishScript_SwitchTargets
@@ -828,14 +766,14 @@ loc_A3D4:
 loc_A3D6:
                 
                 cmpi.w  #COMBATANT_ENEMIES_END,d0
-                bgt.s   loc_A3E6
+                bgt.s   byte_A3E6
                 move.w  -(a0),d1
                 jsr     SetCurrentHP
                 bra.s   loc_A3D4
-loc_A3E6:
+byte_A3E6:
                 
-                move.w  #$12,(a6)+
-                move.w  #$FFFF,(a6)+
+                bscHideTextBox
+                bscEnd
                 movem.l (sp)+,d0-d3/a0
                 rts
 
@@ -1155,16 +1093,12 @@ GetSpellAnimation:
 WriteSkirmishScript_AnimateSprite:
                 
                 btst    #COMBATANT_BIT_ENEMY,(a4)
-                bne.s   @Enemy
-                move.w  #1,(a6)+
-                move.w  d5,(a6)+
-                move.w  d4,(a6)+
+                bne.s   @Enemy          
+                animateAllyAction d5,d4 ; Animation Type, Spell/Item/Projectile
                 bra.s   @Return
 @Enemy:
                 
-                move.w  #0,(a6)+
-                move.w  d5,(a6)+
-                move.w  d4,(a6)+
+                animateEnemyAction d5,d4 ; Animation Type, Spell/Item/Projectile
 @Return:
                 
                 rts
@@ -1181,7 +1115,7 @@ WriteSkirmishScript_SwitchTargets:
                 jsr     GetCurrentHP
                 tst.w   d1
                 beq.w   loc_A7CA
-                move.w  #$12,(a6)+
+                bscHideTextBox
                 move.w  d6,d1
                 tst.b   -BCSTACK_OFFSET_SAMESIDE(a2)
                 bne.w   loc_A72C
@@ -1197,25 +1131,21 @@ loc_A72C:
                 beq.s   loc_A77E
                 move.b  d0,((SKIRMISH_LAST_ALLY-$1000000)).w
                 tst.b   -BCSTACK_OFFSET_RANGED(a2)
-                bne.w   loc_A772
+                bne.w   byte_A772       
                 cmpi.b  #$FF,((SKIRMISH_LAST_ENEMY-$1000000)).w
-                beq.s   loc_A75E
+                beq.s   byte_A75E       
                 cmpi.w  #BATTLEACTION_BURST_ROCK,(a3)
-                beq.w   loc_A772
+                beq.w   byte_A772       
                 cmpi.w  #BATTLEACTION_PRISM_LASER,(a3)
-                beq.w   loc_A772
-loc_A75E:
+                beq.w   byte_A772       
+byte_A75E:
                 
-                move.w  #$E,(a6)+
-                move.w  #$1E,(a6)+
-                move.w  #7,(a6)+
-                move.w  d0,(a6)+
-                move.w  d1,(a6)+
+                bscWait #$1E            ; Duration (in frames)
+                switchAllies d0,d1      ; Combatant, Direction (0 = Right, 1 = Left)
                 bra.w   loc_A7CA
-loc_A772:
+byte_A772:
                 
-                move.w  #9,(a6)+
-                move.w  d0,(a6)+
+                switchToAllyAlone d0    ; Combatant
                 move.b  #$FF,((SKIRMISH_LAST_ENEMY-$1000000)).w
 loc_A77E:
                 
@@ -1226,25 +1156,21 @@ loc_A780:
                 beq.s   loc_A7CA
                 move.b  d0,((SKIRMISH_LAST_ENEMY-$1000000)).w
                 tst.b   -BCSTACK_OFFSET_RANGED(a2)
-                bne.w   loc_A7BE
+                bne.w   byte_A7BE       
                 cmpi.b  #$FF,((SKIRMISH_LAST_ALLY-$1000000)).w
-                beq.s   loc_A7AA
+                beq.s   byte_A7AA       
                 cmpi.w  #BATTLEACTION_BURST_ROCK,(a3)
-                beq.w   loc_A7BE
+                beq.w   byte_A7BE       
                 cmpi.w  #BATTLEACTION_PRISM_LASER,(a3)
-                beq.w   loc_A7BE
-loc_A7AA:
+                beq.w   byte_A7BE       
+byte_A7AA:
                 
-                move.w  #$E,(a6)+
-                move.w  #$1E,(a6)+
-                move.w  #6,(a6)+
-                move.w  d0,(a6)+
-                move.w  d1,(a6)+
+                bscWait #$1E            ; Duration (in frames)
+                switchEnemies d0,d1     ; Combatant, Direction (0 = Right, 1 = Left)
                 bra.w   loc_A7CA
-loc_A7BE:
+byte_A7BE:
                 
-                move.w  #8,(a6)+
-                move.w  d0,(a6)+
+                switchToEnemyAlone d0   ; Combatant
                 move.b  #$FF,((SKIRMISH_LAST_ALLY-$1000000)).w
 loc_A7CA:
                 
@@ -1264,12 +1190,12 @@ WriteSkirmishScript_IdleSprite:
                 tst.w   d1
                 beq.w   loc_A7F2
                 btst    #COMBATANT_BIT_ENEMY,(a4)
-                bne.s   loc_A7EE
-                move.w  #5,(a6)+
+                bne.s   byte_A7EE
+                makeAllyIdle
                 bra.s   loc_A7F2
-loc_A7EE:
+byte_A7EE:
                 
-                move.w  #4,(a6)+
+                makeEnemyIdle
 loc_A7F2:
                 
                 movem.l (sp)+,d1
@@ -1312,23 +1238,18 @@ loc_A82C:
 loc_A83A:
                 
                 tst.w   d1
-                bgt.s   loc_A840
+                bgt.s   byte_A840
                 moveq   #1,d1
-loc_A840:
+byte_A840:
                 
-                move.w  #$F,(a6)+
-                move.w  d1,(a6)+
+                giveEXP d1
 loc_A846:
                 
                 move.w  ((BATTLESCENE_GOLD-$1000000)).w,d1
                 tst.w   d1
                 beq.s   loc_A86A
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_FOUND_GOLD_COINS,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_FOUND_GOLD_COINS,#0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
                 jsr     IncreaseGold
 loc_A86A:
                 
@@ -1749,13 +1670,7 @@ WriteSkirmishScript_DodgeAttack:
                 move.w  #1,d5
                 exg     a4,a5
                 bsr.w   WriteSkirmishScript_AnimateSprite
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_DODGE,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a4),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_DODGE,(a4),#0,#0 ; Message, Combatant, Item or Spell, Number
                 bsr.w   WriteSkirmishScript_IdleSprite
                 exg     a4,a5
                 move.b  #$FF,-BCSTACK_OFFSET_DODGE(a2)

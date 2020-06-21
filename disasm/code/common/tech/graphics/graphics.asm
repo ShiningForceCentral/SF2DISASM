@@ -19,6 +19,7 @@ InitSprites:
                 move.w  #1,(a0)+
                 addq.w  #1,d1
                 dbf     d0,@Loop
+                
                 subq.l  #6,a0
                 clr.w   (a0)
                 movem.l (sp)+,d0-d1/a0
