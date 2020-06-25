@@ -2439,6 +2439,10 @@ UpdateAllEnemiesAI:
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,@Loop
+                
+                if (BUGFIX_GODDESS_STAFF_DEALS_ABUSE=1)
+                rts
+                endif
 
     ; End of function UpdateAllEnemiesAI
 
