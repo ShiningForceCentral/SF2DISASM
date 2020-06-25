@@ -10,3 +10,4 @@ THREE_DIGITS_STATS: equ 0                       ; 0 = OFF, 1 = ON
 EIGHT_CHARACTERS_MEMBER_NAMES: equ 0            ; 0 = OFF, 1 = ON
 FULL_CLASS_NAMES: equ 0                         ; 0 = OFF, 1 = ON
 BUGFIX_INCREASE_DOUBLE_RESETS_COUNTER: equ 0    ; 0 = OFF, 1 = ON
+BUGFIX_GODDESS_STAFF_DEALS_ABUSE: equ 0         ; 0 = OFF, 1 = ON
