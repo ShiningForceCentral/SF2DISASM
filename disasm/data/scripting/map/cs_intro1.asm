@@ -2,6 +2,9 @@
 ; ASM FILE data\scripting\map\cs_intro1.asm :
 ; 0x47F7E..0x48380 : Intro cutscene 1
 IntroCutscene1: textCursor $105A
+                if (CHAPTER_SCREEN=1)
+                executeSubroutine ChapterScreen1
+                endif
                 mapLoad MAP_FORCE_SWORD_SHRINE,2,5
                 csWait 1
                 loadMapEntities ce_48340
