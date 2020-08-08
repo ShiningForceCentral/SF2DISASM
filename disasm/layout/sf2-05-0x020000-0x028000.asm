@@ -37,7 +37,7 @@ j_BattleLoop_Unused:
 j_GetEntityEventIndex:                
                 jmp     GetEntityEventIndex(pc)
 j_GetEntityIndex:                
-                jmp     GetEntityNumberOfCombatant(pc)
+                jmp     GetEntityIndexForCombatant(pc)
 j_FadeOut_WaitForP1Input:                
                 jmp     FadeOut_WaitForP1Input(pc)
 j_SetEntityPosition:                

@@ -1,12 +1,14 @@
 
 ; ASM FILE code\gameflow\battle\aiengine.asm :
-; 0xDEFC..0xF9C4 : AI engine
+; 0xDEFC..0xF9B4 : AI engine
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
+; related to AI controlled unit (enemy, auto-control cheat, MUDDLEd force member)
+; 
+;     In: D0 = character index
 
-j_sub_DEFC_0:
+sub_DEFC:
                 
                 movem.l d0-a5,-(sp)
                 move.w  d0,d7
@@ -184,7 +186,7 @@ loc_E0AA:
                 movem.l (sp)+,d0-a5
                 rts
 
-    ; End of function j_sub_DEFC_0
+    ; End of function sub_DEFC
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1359,8 +1361,6 @@ sub_EBA4:
                 bne.s   loc_EBC8
                 move.w  #$FFFF,d1
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
-loc_EBB8:
-                
                 move.w  #3,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #$FF,(a0)
@@ -1410,7 +1410,7 @@ loc_EC22:
 loc_EC3A:
                 
                 move.w  d1,d6
-                bsr.w   GetSpellDefAddress
+                bsr.w   FindSpellDefAddress
                 clr.w   d2
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d2
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d5
@@ -2215,17 +2215,17 @@ loc_F39E:
                 btst    #7,d0
                 beq.w   loc_F404
                 bsr.w   GetEnemyIndex   
-                cmpi.b  #$A,d1          ; HARDCODED enemy indexes
+                cmpi.b  #ENEMY_KRAKEN_LEG,d1 ; HARDCODED enemy indexes
                 bne.s   loc_F3B8
                 bra.w   loc_F3D0
 loc_F3B8:
                 
-                cmpi.b  #$3B,d1 
+                cmpi.b  #ENEMY_KRAKEN_ARM,d1
                 bne.s   loc_F3C2
                 bra.w   loc_F3D0
 loc_F3C2:
                 
-                cmpi.b  #$57,d1 
+                cmpi.b  #ENEMY_KRAKEN_HEAD,d1
                 bne.s   loc_F3CC
                 bra.w   loc_F3D0
 loc_F3CC:
@@ -2243,7 +2243,7 @@ loc_F3D0:
                 lea     (byte_FF4400).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
-                lea     KrakenMoveCosts(pc), a5
+                lea     tbl_KrakenMoveCosts(pc), a5
                 nop
                 bra.w   loc_F43A
 loc_F404:
@@ -2792,19 +2792,3 @@ loc_F9AC:
 
     ; End of function sub_F8EA
 
-KrakenMoveCosts:dc.b $F                 ; special move cost list for Kraken Arm, Kraken Leg, Kraken Head
-                dc.b 2
-                dc.b 2
-                dc.b 3
-                dc.b 4
-                dc.b 3
-                dc.b 3
-                dc.b $FF
-                dc.b 2
-                dc.b $FF
-                dc.b $FF
-                dc.b $FF
-                dc.b $FF
-                dc.b $FF
-                dc.b $FF
-                dc.b $FF

@@ -12,7 +12,7 @@ p_Start:        dc.l Start              ; Start Address
                 dc.l Int_ZeroDivide     ; Zero Divide
                 dc.l Int_OtherError     ; CHK instruction
                 dc.l Int_OtherError     ; TRAPV instruction
-                dc.l Int_OtherError     ; Privilege Violation
+off_20:         dc.l Int_OtherError     ; Privilege Violation
                 dc.l Int_OtherError     ; Trace
                 dc.l Int_OtherError     ; Line 1010 Emulator
                 dc.l Int_OtherError     ; Line 1111 Emulator
@@ -80,13 +80,13 @@ aGmMk13150:     dc.b 'GM MK-1315 -0'    ; Serial Number
                 dc.b $30
                 dc.w $8921              ; checksum
 aJ:             dc.b 'J               '
-                dc.l 0                  ; Rom Start Adress
-RomEndAddress:  dc.l $1FFFFF            ; Rom End Adress
-                dc.l $FF0000            ; Ram Start Adress
-                dc.l $FFFFFF            ; Ram End Adress
-                dc.l $5241F820          ; SRam data
-                dc.l $200001            ; Sram Start Address
-                dc.l $203FFF            ; Sram End Address
+                dc.l 0                  ; ROM Start Adress
+RomEndAddress:  dc.l $1FFFFF            ; ROM End Adress
+                dc.l $FF0000            ; RAM Start Adress
+                dc.l $FFFFFF            ; RAM End Adress
+                dc.l $5241F820          ; SRAM data
+                dc.l $200001            ; SRAM Start Address
+                dc.l $203FFF            ; SRAM End Address
                 dc.b '            '     ; Modem data
                 dc.b '                    ' ; Memo
                 dc.b '                    '

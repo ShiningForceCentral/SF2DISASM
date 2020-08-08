@@ -116,7 +116,7 @@ sub_21B42:
 byte_21B58:
                 
                 clsTxt
-                move.w  -$A(a6),((word_FFB13A-$1000000)).w
+                move.w  -$A(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
@@ -140,7 +140,7 @@ loc_21B7C:
 loc_21BAC:
                 
                 move.w  -$A(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #0,d2
                 beq.s   loc_21BE4
                 move.w  -$A(a6),d1
@@ -174,7 +174,7 @@ loc_21BE4:
                 cmpi.w  #0,d0
                 bne.w   byte_21CD0      
                 move.w  -$A(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_21C6E
                 move.w  -6(a6),d0
@@ -182,7 +182,7 @@ loc_21BE4:
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_21C9A
                 move.w  d2,d1
-                jsr     j_UnequipItemIfNotCursed
+                jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_21C9A
                 move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -195,7 +195,7 @@ loc_21C6E:
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_21C9A
                 move.w  d2,d1
-                jsr     j_UnequipItemIfNotCursed
+                jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_21C9A
                 move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -207,7 +207,7 @@ loc_21C9A:
                 jsr     j_GetItemAndNumberOfItems
                 move.w  d2,d1
                 subq.w  #1,d1
-                jsr     j_EquipItem
+                jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.s   byte_21CC8      
                 sndCom  MUSIC_CURSED_ITEM
@@ -234,7 +234,7 @@ byte_21CDE:
                 txt     $C7             ; "What kind of material do you{N}have?{D1}"
                 clsTxt
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_21E30
@@ -250,7 +250,7 @@ byte_21D1A:
                 txt     $C9             ; "{CLEAR}Whose weapon should I{N}make?{D1}"
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_21CDE      
@@ -422,60 +422,63 @@ PickMithrilWeapon:
                 
                 movem.l d0-a0,-(sp)
                 clr.w   d0
-                lea     MithrilWeaponClassLists(pc), a0
-                move.w  #7,d7
-loc_21EE4:
+                lea     tbl_MithrilWeaponClasses(pc), a0
+                move.w  #MITHRILWEAPONCLASSES_COUNTER,d7
+@FindWeaponClass_Loop:
                 
-                move.w  (a0)+,d6
+                move.w  (a0)+,d6        ; D6 = number of character classes
                 subq.w  #1,d6
-loc_21EE8:
+@FindCharacterClass_Loop:
                 
-                move.w  (a0)+,d1
-                move.w  -$18(a6),d2
+                move.w  (a0)+,d1        ; D1 = weapon class
+                move.w  -$18(a6),d2     ; D2 = character class
                 cmp.w   d1,d2
-                beq.w   loc_21F16
-                dbf     d6,loc_21EE8
+                beq.w   @GetWeaponsEntryAddress ; found character class belonging to weapon class
+                dbf     d6,@FindCharacterClass_Loop
+                
                 addi.w  #1,d0
-                dbf     d7,loc_21EE4
+                dbf     d7,@FindWeaponClass_Loop
+                
+                ; Randomly determine weapon class for classes BRN and RDBN
                 clr.w   d0
                 move.w  #2,d6
                 jsr     (GenerateRandomNumber).w
                 cmpi.w  #0,d7
-                bne.w   loc_21F16
+                bne.w   @GetWeaponsEntryAddress
                 move.w  #2,d0
-loc_21F16:
+@GetWeaponsEntryAddress:
                 
-                lsl.w   #3,d0
-                lea     MithrilWeaponLists(pc), a0
+                lsl.w   #3,d0           ; D0 = weapon class index * 8 (weapons entry size)
+                lea     tbl_MithrilWeapons(pc), a0
                 adda.w  d0,a0
-                move.w  #3,d5
-loc_21F22:
+                move.w  #MITHRILWEAPONS_COUNTER,d5
+@PickWeapon_Loop:
                 
                 clr.w   d0
                 clr.w   d1
-                move.b  (a0)+,d0
-                move.b  (a0)+,d1
+                move.b  (a0)+,d0        ; D0 = parameter
+                move.b  (a0)+,d1        ; D1 = item index
                 move.w  d0,d6
                 jsr     (GenerateRandomNumber).w
                 cmpi.w  #0,d7
-                beq.w   loc_21F3C
-                dbf     d5,loc_21F22
-loc_21F3C:
+                beq.w   @LoadIndex
+                dbf     d5,@PickWeapon_Loop
+@LoadIndex:
                 
                 lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
-                move.w  #3,d7
-loc_21F44:
+                move.w  #MITHRILWEAPONSLOTS_COUNTER,d7
+@LoadIndex_Loop:
                 
                 cmpi.w  #0,(a0)
-                bne.w   loc_21F52
+                bne.w   @Next           ; check next weapon slot if current one is occupied
                 move.w  d1,(a0)
-                bra.w   loc_21F5C
-loc_21F52:
+                bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
+@Next:
                 
                 move.w  #2,d0
                 adda.w  d0,a0
-                dbf     d7,loc_21F44
-loc_21F5C:
+                dbf     d7,@LoadIndex_Loop
+@Done:
                 
                 movem.l (sp)+,d0-a0
                 rts

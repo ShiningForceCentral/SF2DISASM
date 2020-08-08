@@ -1302,7 +1302,7 @@ CheckChestItem:
                 blt.s   loc_41F0
                 jsr     j_CheckFlag
                 beq.s   loc_41DE
-                move.w  #$7F,d2 
+                move.w  #ITEM_NOTHING,d2 ; no item if chest has already been opened
 loc_41DE:
                 
                 move.w  (a2,d0.w),d0
@@ -1328,7 +1328,7 @@ CheckNonChestItem:
                 blt.s   loc_4214
                 jsr     j_CheckFlag
                 beq.s   loc_420E
-                move.w  #$7F,d2 
+                move.w  #ITEM_NOTHING,d2
 loc_420E:
                 
                 jsr     j_SetFlag

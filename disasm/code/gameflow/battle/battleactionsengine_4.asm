@@ -1,75 +1,106 @@
 
 ; ASM FILE code\gameflow\battle\battleactionsengine_4.asm :
-; 0xC024..0xC09A : Battle actions engine
+; 0xBD24..0xBE52 : Battle actions engine
 
 ; =============== S U B R O U T I N E =======================================
 
-GetEnemyDestination:
-                
-                movem.l d0/a0,-(sp)
-                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                jsr     GetYPos
-                move.w  d1,d2
-                jsr     GetXPos
-loc_C03A:
-                
-                move.b  (a0)+,d0
-                cmpi.b  #$FF,d0
-                beq.w   loc_C06A
-                tst.b   d0
-                bne.s   loc_C04C
-                addq.w  #1,d1
-                bra.s   loc_C068
-loc_C04C:
-                
-                subq.b  #1,d0
-                bne.s   loc_C054
-                subq.w  #1,d2
-                bra.s   loc_C068
-loc_C054:
-                
-                subq.b  #1,d0
-                bne.s   loc_C05C
-                subq.w  #1,d1
-                bra.s   loc_C068
-loc_C05C:
-                
-                subq.b  #1,d0
-                bne.s   loc_C064
-                addq.w  #1,d2
-                bra.s   loc_C068
-loc_C064:
-                
-                bra.w   loc_C06A
-loc_C068:
-                
-                bra.s   loc_C03A
-loc_C06A:
-                
-                movem.l (sp)+,d0/a0
-                rts
+; In: A2 = battlescene stack
+;     A3 = scene action type in RAM
+;     A4 = actor index in RAM
+;     A5 = target index in RAM
 
-    ; End of function GetEnemyDestination
-
-
-; =============== S U B R O U T I N E =======================================
-
-ClearEnemyMoveInfo:
+WriteBattlesceneScript_EnemyDropItem:
                 
-                movem.l d0-a6,-(sp)
-                lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a0
-                lea     ((byte_FFB1DC-$1000000)).w,a1
+                movem.l d0-d3/a0,-(sp)
+                btst    #COMBATANT_BIT_ENEMY,(a4)
+                bne.w   @Done           ; skip function if attacker is an enemy
+                btst    #COMBATANT_BIT_ENEMY,(a5)
+                beq.w   @Done           ; skip function if target is an ally
+                tst.b   -BCSTACK_OFFSET_TARGETDIES(a2)
+                beq.w   @Done           ; skip function if target was not defeated
+                move.b  ((CURRENT_BATTLE-$1000000)).w,d3
+                lea     tbl_EnemyItemDrops(pc), a0
+@FindEntry_Loop:
+                
+                cmp.b   (a0),d3
+                bne.w   @Next           ; move on to next entry if current battle doesn't match
+                move.b  (a5),d0
+                cmp.b   ENEMYITEMDROP_OFFSET_ENTITY(a0),d0
+                bne.w   @Next
+                clr.w   d1
+                move.b  ENEMYITEMDROP_OFFSET_ITEM(a0),d1
+                bsr.w   GetItemSlotContainingIndex
+                cmpi.w  #CODE_NOTHING_WORD,d2
+                bne.w   @EntryFound
+@Next:
+                
+                adda.w  #ENEMYITEMDROP_ENTRY_SIZE,a0
+                cmpi.w  #CODE_TERMINATOR_WORD,(a0)
+                bne.s   @FindEntry_Loop
+                bra.w   @Done
+@EntryFound:
+                
+                move.w  d1,d3
+                andi.w  #ITEMENTRY_MASK_INDEX,d3
+                move.w  d2,d4
+                cmpi.w  #ITEM_TAROS_SWORD,d3 ; HARDCODED special items with 1/32 drop chances
+                beq.w   @DetermineRandomDrop
+                cmpi.w  #ITEM_IRON_BALL,d3
+                beq.w   @DetermineRandomDrop
+                cmpi.w  #ITEM_COUNTER_SWORD,d3
+                beq.w   @DetermineRandomDrop
+                bra.w   @DropItem
+@DetermineRandomDrop:
+                
+                moveq   #ENEMYITEMDROP_RANDOM_CHANCE,d0
+                jsr     (GetRandomOrDebugValue).w
+                tst.w   d0
+                bne.w   @Done
+                bra.w   @DropItem
+                jsr     j_DoesBattleUpgrade
+                tst.w   d1
+                beq.w   @DropItem       ; if battle index not in list
+                moveq   #3,d0           ; else
+                jsr     (GetRandomOrDebugValue).w
+                tst.w   d0
+                beq.w   @Done
+@DropItem:
+                
                 clr.w   d0
-                move.w  #$30,d1 
-loc_C082:
+                move.b  ENEMYITEMDROP_OFFSET_FLAG(a0),d0
+                lea     ((ENEMY_ITEM_DROPS-$1000000)).w,a0
+                divu.w  #8,d0
+                adda.w  d0,a0
+                swap    d0
+                bset    d0,(a0)         ; set item dropped flag
+                bne.w   @Done
+                move.b  (a5),d0
+                move.w  d4,d1
+                jsr     RemoveItemBySlot
+                move.b  (a4),d0
+                jsr     GetCurrentHP
+                tst.w   d1
+                beq.w   @AddRareItemToDeals
+                move.w  d3,d1
+                jsr     AddItem         
+                tst.b   d2
+                bne.w   @AddRareItemToDeals ; add rare item to deals section if character is unable to pick it up
+                displayMessage #MESSAGE_BATTLE_DROPPED_ITEM,(a5),d1,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
+                displayMessage #MESSAGE_BATTLE_RECEIVED_ITEM,(a4),d1,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
+                bra.w   @Done
+@AddRareItemToDeals:
                 
-                move.b  #$FF,(a0,d0.w)
-                move.b  #0,(a1,d0.w)
-                addq.w  #1,d0
-                subq.w  #1,d1
-                bne.s   loc_C082
-                movem.l (sp)+,d0-a6
+                move.w  d3,d1
+                jsr     j_GetItemDefAddress
+                btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
+                beq.s   @Done
+                jsr     AddItemToDeals  
+@Done:
+                
+                movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function ClearEnemyMoveInfo
+    ; End of function WriteBattlesceneScript_EnemyDropItem
 
