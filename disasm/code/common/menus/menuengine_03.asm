@@ -382,7 +382,9 @@ LoadTileDataForMemberScreen:
                 adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
                 move.w  -2(a6),d0
                 tst.b   d0
-                blt.s   loc_11F5A       ; character index is negative (an enemy), so do not display kills
+                blt.s   @CheckDebugMode ; character index is negative (an enemy), so do not display kills
+                
+                ; Write kills and defeats
                 jsr     j_GetKills
                 move.w  d1,d0
                 ext.l   d0
@@ -395,10 +397,12 @@ LoadTileDataForMemberScreen:
                 ext.l   d0
                 moveq   #WINDOW_MEMBER_KD_TEXT_DEFEATS_LENGTH,d7
                 bsr.w   WriteTilesFromNumber
-loc_11F5A:
+@CheckDebugMode:
                 
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
-                beq.s   loc_11FA6
+                beq.s   @CheckPortrait
+                
+                ; Write combatant index inside kills/defeat window in debug mode
                 move.w  -8(a6),d0
                 lea     AllyKillDefeatWindowLayout(pc), a0
                 move.w  #$101,d1
@@ -406,32 +410,33 @@ loc_11F5A:
                 move.w  -2(a6),d0       ; get character index from stack
                 lsr.w   #4,d0
                 andi.w  #$F,d0
-                cmpi.w  #$A,d0
-                blt.s   loc_11F86
+                cmpi.w  #10,d0
+                blt.s   @Continue1
                 addi.w  #-$3FC9,d0
-                bra.s   loc_11F8A
-loc_11F86:
+                bra.s   @WriteIndexFirstDigit
+@Continue1:
                 
                 addi.w  #-$3FD0,d0
-loc_11F8A:
+@WriteIndexFirstDigit:
                 
                 move.w  d0,(a1)+
                 move.w  -2(a6),d0
                 andi.w  #$F,d0
-                cmpi.w  #$A,d0
-                blt.s   loc_11FA0
+                cmpi.w  #10,d0
+                blt.s   @Continue2
                 addi.w  #-$3FC9,d0
-                bra.s   loc_11FA4
-loc_11FA0:
+                bra.s   @WriteIndexSecondDigit
+@Continue2:
                 
                 addi.w  #-$3FD0,d0
-loc_11FA4:
+@WriteIndexSecondDigit:
                 
                 move.w  d0,(a1)+
-loc_11FA6:
+@CheckPortrait:
                 
                 move.w  -$C(a6),d0
-                blt.s   return_11FEA
+                blt.s   @Return         ; return if no portrait to display (and assume that it's an enemy, so skip drawing gold window as well)
+                
                 move.w  -6(a6),d0
                 lea     WindowBorderTiles(pc), a0
                 clr.w   d1
@@ -449,7 +454,7 @@ loc_11FA6:
                 move.l  d1,d0
                 moveq   #6,d7
                 bsr.w   WriteTilesFromNumber
-return_11FEA:
+@Return:
                 
                 rts
 
