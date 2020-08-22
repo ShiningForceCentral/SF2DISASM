@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_01.asm :
-; 0x10000..0x114BE : Menu engine
+; 0x10000..0x10E1C : Menu engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -15,7 +15,7 @@ j_ExecuteMenu:
 
 sub_10004:
                 
-                jmp     sub_10586(pc)
+                jmp     sub_10586(pc)   
 
     ; End of function sub_10004
 
@@ -24,7 +24,7 @@ sub_10004:
 
 sub_10008:
                 
-                jmp     sub_10586(pc)
+                jmp     sub_10586(pc)   
 
     ; End of function sub_10008
 
@@ -33,7 +33,7 @@ sub_10008:
 
 sub_1000C:
                 
-                jmp     sub_10586(pc)
+                jmp     sub_10586(pc)   
 
     ; End of function sub_1000C
 
@@ -42,7 +42,7 @@ sub_1000C:
 
 sub_10010:
                 
-                jmp     sub_10A4A(pc)
+                jmp     sub_10A4A(pc)   
 
     ; End of function sub_10010
 
@@ -159,7 +159,7 @@ sub_10040:
 
 sub_10044:
                 
-                jmp     loc_13004(pc)
+                jmp     sub_13004(pc)
 
     ; End of function sub_10044
 
@@ -168,7 +168,7 @@ sub_10044:
 
 sub_10048:
                 
-                jmp     loc_13030(pc)
+                jmp     sub_13030(pc)
 
     ; End of function sub_10048
 
@@ -1038,6 +1038,11 @@ loc_1057C:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: D0 = current diamenu choice
+;     D1 = 
+;     D2 = 
+;     A0 = 
+
 sub_10586:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
@@ -1059,7 +1064,7 @@ loc_105B2:
                 
                 jsr     (CreateWindow).w
                 move.w  d0,-$C(a6)
-                bsr.w   sub_10748
+                bsr.w   BuildItemMenu
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
@@ -1153,7 +1158,7 @@ loc_106B4:
                 bsr.w   sub_107EA       
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
-                bsr.w   sub_10748
+                bsr.w   BuildItemMenu
                 move.l  -8(a6),d0
                 beq.s   loc_106D6
                 movea.l d0,a0
@@ -1213,13 +1218,13 @@ loc_10726:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_10748:
+BuildItemMenu:
                 
-                lea     UnidentifiedLayout02(pc), a0
+                lea     ItemMenuLayout(pc), a0
                 move.w  -$C(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  #$D8,d7 
+                move.w  #MENU_ITEM_LAYOUT_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 lsl.w   #1,d0
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
@@ -1228,45 +1233,46 @@ sub_10748:
                 lsl.w   #1,d0
                 move.w  (a0,d0.w),d1
                 cmpi.w  #ICON_UNARMED,d1
-                bne.s   loc_10798
+                bne.s   @WriteItemName
                 move.w  #ITEM_NOTHING,((word_FFB18C-$1000000)).w
                 move.w  -$C(a6),d0
-                move.w  #$903,d1
+                move.w  #MENU_ITEM_NOTHING_STRING_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 lea     aNothing(pc), a0
                 moveq   #$FFFFFFDC,d1
                 moveq   #$A,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
-                bra.s   return_107D4
-loc_10798:
+                bra.s   @Return
+@WriteItemName:
                 
                 move.w  d1,((word_FFB18C-$1000000)).w
                 move.w  d1,-(sp)
                 jsr     j_FindItemName
                 move.w  -$C(a6),d0
-                move.w  #$902,d1
+                move.w  #MENU_ITEM_NAME_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 moveq   #$FFFFFFDC,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  (sp)+,d1
                 tst.b   d1
-                bpl.s   return_107D4
+                bpl.s   @Return
                 lea     aEquipped(pc), a0
                 move.w  -$C(a6),d0
-                move.w  #$904,d1
+                move.w  #MENU_ITEM_EQUIPPED_STRING_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 moveq   #$FFFFFFDC,d1
                 moveq   #$A,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
-return_107D4:
+@Return:
                 
                 rts
 
-    ; End of function sub_10748
+    ; End of function BuildItemMenu
 
 aEquipped:      dc.b '\Equipped',0
 aNothing:       dc.b '\Nothing',0
-                dc.b $FF
+                
+                wordAlign
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1455,13 +1461,13 @@ LoadHighlightableSpellIcon:
                 
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 cmpi.w  #SPELL_NOTHING,d0
-                bne.s   loc_10950
+                bne.s   @GetSpellIcon
                 move.w  #ICON_NOTHING,d0
-                bra.s   loc_10954
-loc_10950:
+                bra.s   @Continue
+@GetSpellIcon:
                 
                 addi.w  #ICON_SPELLS_START,d0
-loc_10954:
+@Continue:
                 
                 bra.w   LoadHighlightableIcon
 
@@ -1483,19 +1489,20 @@ LoadHighlightableItemIcon:
 
 LoadHighlightableIcon:
                 
-                adda.w  #$C0,a1 
-                mulu.w  #$C0,d0 
+                adda.w  #ICONTILES_BYTESIZE,a1
+                mulu.w  #ICONTILES_BYTESIZE,d0
                 movea.l (p_IconTiles).l,a0
                 adda.w  d0,a0           ; icon offset
                 move.w  #$2F,d1 
                 lea     IconHighlightTiles(pc), a2
-loc_1097A:
+@Loop:
                 
                 move.l  (a0)+,d0
-                move.l  d0,-$C0(a1)
+                move.l  d0,-ICONTILES_BYTESIZE(a1)
                 and.l   (a2)+,d0
                 move.l  d0,(a1)+
-                dbf     d1,loc_1097A
+                dbf     d1,@Loop
+                
                 rts
 
     ; End of function LoadHighlightableIcon
@@ -1504,6 +1511,10 @@ IconHighlightTiles:
                 incbin "data/graphics/tech/iconhighlighttiles.bin"
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: D1 = 
+;     D2 = 
+;     A0 = 
 
 sub_10A4A:
                 
@@ -1525,7 +1536,7 @@ loc_10A74:
                 
                 jsr     (CreateWindow).w
                 move.w  d0,-$C(a6)
-                bsr.w   sub_10C22
+                bsr.w   BuildMagicMenu
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
                 bsr.w   LoadHighlightableSpellIcon
@@ -1621,7 +1632,7 @@ loc_10B76:
                 bsr.w   sub_10CB0       
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
-                bsr.w   sub_10C22
+                bsr.w   BuildMagicMenu
                 move.w  -$C(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
@@ -1653,7 +1664,7 @@ loc_10BBC:
                 bsr.w   sub_10CC6
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_10BEC
-                bsr.w   sub_10C22
+                bsr.w   BuildMagicMenu
                 move.w  -$C(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
@@ -1686,13 +1697,13 @@ loc_10C02:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_10C22:
+BuildMagicMenu:
                 
-                lea     UnidentifiedLayout01(pc), a0
+                lea     MagicMenuLayout(pc), a0
                 move.w  -$C(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  #$D8,d7 
+                move.w  #MENU_MAGIC_LAYOUT_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 lsl.w   #1,d0
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
@@ -1704,12 +1715,12 @@ sub_10C22:
                 move.w  d1,-(sp)
                 jsr     j_FindSpellName
                 move.w  -$C(a6),d0
-                move.w  #$902,d1
+                move.w  #MENU_MAGIC_SPELL_NAME_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 moveq   #$FFFFFFDC,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  -$C(a6),d0
-                move.w  #$903,d1
+                move.w  #MENU_MAGIC_SPELL_LEVEL_TILES_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d1
                 move.w  d1,-(sp)
@@ -1723,7 +1734,7 @@ sub_10C22:
                 moveq   #$C,d7
                 jsr     (CopyBytes).w   
                 move.w  -$C(a6),d0
-                move.w  #$C04,d1
+                move.w  #MENU_MAGIC_MP_COST_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d1
                 jsr     j_GetSpellCost
@@ -1732,7 +1743,7 @@ sub_10C22:
                 bsr.w   WriteTilesFromNumber
                 rts
 
-    ; End of function sub_10C22
+    ; End of function BuildMagicMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1905,504 +1916,4 @@ loc_10E18:
                 bra.w   sub_101E6
 
     ; End of function sub_10DE2
-
-DiamondMenuLayout:
-                incbin "data/graphics/tech/menus/diamondmenulayout.bin" 
-                                                        ; tile layout for diamond menus
-UnidentifiedLayout01:
-                incbin "data/graphics/tech/menus/unidentifiedlayout01.bin"
-UnidentifiedLayout02:
-                incbin "data/graphics/tech/menus/unidentifiedlayout02.bin"
-pt_SpellLevelTilesLayouts:
-                dc.l SpellLevelTilesLayout1
-                dc.l SpellLevelTilesLayout1
-                dc.l SpellLevelTilesLayout1
-                dc.l SpellLevelTilesLayout1
-                dc.l SpellLevelTilesLayout1in2
-                dc.l SpellLevelTilesLayout2
-                dc.l SpellLevelTilesLayout2
-                dc.l SpellLevelTilesLayout2
-                dc.l SpellLevelTilesLayout1in3
-                dc.l SpellLevelTilesLayout2in3
-                dc.l SpellLevelTilesLayout3
-                dc.l SpellLevelTilesLayout3
-                dc.l SpellLevelTilesLayout1in4
-                dc.l SpellLevelTilesLayout2in4
-                dc.l SpellLevelTilesLayout3in4
-                dc.l SpellLevelTilesLayout4
-SpellLevelTilesLayout1:
-                
-; Syntax        vdpBaseTile [VDPTILE_]index[|mirror|flip]
-                
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV2
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-SpellLevelTilesLayout2:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-SpellLevelTilesLayout3:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV2
-                vdpBaseTile SPACE
-SpellLevelTilesLayout4:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-SpellLevelTilesLayout1in2:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV6
-                vdpBaseTile SPELL_LV5
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-SpellLevelTilesLayout2in3:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPELL_LV5|MIRROR
-                vdpBaseTile SPELL_LV8
-                vdpBaseTile SPACE
-SpellLevelTilesLayout3in4:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV6
-                vdpBaseTile SPELL_LV5
-SpellLevelTilesLayout1in3:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV6
-                vdpBaseTile SPELL_LV5
-                vdpBaseTile SPELL_LV5|MIRROR
-                vdpBaseTile SPELL_LV8
-                vdpBaseTile SPACE
-SpellLevelTilesLayout2in4:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPELL_LV5|MIRROR
-                vdpBaseTile SPELL_LV7
-                vdpBaseTile SPELL_LV5
-SpellLevelTilesLayout1in4:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV6
-                vdpBaseTile SPELL_LV5
-                vdpBaseTile SPELL_LV5|MIRROR
-                vdpBaseTile SPELL_LV7
-                vdpBaseTile SPELL_LV5
-pt_MenuTiles:   dc.b $85                ; starting with references to uncompressed main menu tiles
-                dc.b 1
-                dc.b 2
-                dc.b 4
-                dc.b $80
-                dc.b 1
-                dc.b 2
-                dc.b 3
-                dc.b $80
-                dc.b 1
-                dc.b 2
-                dc.b 4
-                dc.l p_MenuTiles_Item
-                dc.l p_MenuTiles_BattleField
-                dc.l p_Menutiles_Church
-                dc.l p_MenuTiles_Shop
-                dc.l p_MenuTiles_Caravan
-                dc.l p_MenuTiles_Depot
-pt_MenuOptions: dc.l pt_FieldMenu_Names
-                dc.l pt_BattleMenu_Names
-                dc.l pt_BattleMenuOverItem_Names
-                dc.l pt_ItemMenu_Names
-                dc.l pt_BattlefieldMenu_Names
-                dc.l pt_ChurchMenu_Names
-                dc.l pt_ShopMenu_Names
-                dc.l pt_CaravanMenu_Names
-                dc.l pt_DepotMenu_Names
-pt_FieldMenu_Names:
-                dc.l aMember            
-                dc.l aMagic             
-                dc.l aItem              
-                dc.l aSearch            
-aMember:        dc.b 'MEMBER',0
-aMagic:         dc.b 'MAGIC',0
-aItem:          dc.b 'ITEM',0
-aSearch:        dc.b 'SEARCH',0
-                dc.b $FF
-pt_BattleMenu_Names:
-                dc.l aAttack_0          
-                dc.l aMagic_0           
-                dc.l aItem_0            
-                dc.l aStay              
-aAttack_0:      dc.b 'ATTACK',0
-aMagic_0:       dc.b 'MAGIC',0
-aItem_0:        dc.b 'ITEM',0
-aStay:          dc.b 'STAY',0
-                dc.b $FF
-pt_BattleMenuOverItem_Names:
-                dc.l aAttack_1          
-                dc.l aMagic_1           
-                dc.l aItem_1            
-                dc.l aSearch_0          
-aAttack_1:      dc.b 'ATTACK',0
-aMagic_1:       dc.b 'MAGIC',0
-aItem_1:        dc.b 'ITEM',0
-aSearch_0:      dc.b 'SEARCH',0
-                dc.b $FF
-pt_ItemMenu_Names:
-                dc.l aUse               
-                dc.l aGive              
-                dc.l aEquip             
-                dc.l aDrop              
-aUse:           dc.b 'USE',0
-aGive:          dc.b 'GIVE',0
-aEquip:         dc.b 'EQUIP',0
-aDrop:          dc.b 'DROP',0
-pt_BattlefieldMenu_Names:
-                dc.l aMember_0          
-                dc.l aMap               
-                dc.l aSpeed_0           
-                dc.l aQuit              
-aMember_0:      dc.b 'MEMBER',0
-aMap:           dc.b 'MAP',0
-aSpeed_0:       dc.b 'SPEED',0
-aQuit:          dc.b 'QUIT',0
-pt_ChurchMenu_Names:
-                dc.l aRaise             
-                dc.l aCure              
-                dc.l aPromo_            
-                dc.l aSave              
-aRaise:         dc.b 'RAISE',0
-aCure:          dc.b 'CURE',0
-aPromo_:        dc.b 'PROMO.',0
-aSave:          dc.b 'SAVE',0
-                dc.b $FF
-pt_ShopMenu_Names:
-                dc.l aBuy               
-                dc.l aSell              
-                dc.l aRepair            
-                dc.l aDeals             
-aBuy:           dc.b 'BUY',0
-aSell:          dc.b 'SELL',0
-aRepair:        dc.b 'REPAIR',0
-aDeals:         dc.b 'DEALS',0
-pt_CaravanMenu_Names:
-                dc.l aJoin              
-                dc.l aDepot             
-                dc.l aItem_2            
-                dc.l aPurge             
-aJoin:          dc.b 'JOIN',0
-aDepot:         dc.b 'DEPOT',0
-aItem_2:        dc.b 'ITEM',0
-aPurge:         dc.b 'PURGE',0
-pt_DepotMenu_Names:
-                dc.l aLook              
-                dc.l aDepos_            
-                dc.l aDerive            
-                dc.l aDrop_0            
-aLook:          dc.b 'LOOK',0
-aDepos_:        dc.b 'DEPOS.',0
-aDerive:        dc.b 'DERIVE',0
-aDrop_0:        dc.b 'DROP',0
-MenuHBarTiles:  dc.b 2
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $2C
-                dc.b $CB
-                dc.b $BB
-                dc.b $BB
-                dc.b 2
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BC
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-byte_11336:     dc.b 2
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $2C
-                dc.b $CB
-                dc.b $BB
-                dc.b $BB
-                dc.b $22
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b 2
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-byte_11366:     dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $20
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $22
-                dc.b $BB
-                dc.b $BB
-                dc.b $BC
-                dc.b $C2
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $20
-byte_11396:     dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $CB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $20
-                dc.b $BB
-                dc.b $BB
-                dc.b $BC
-                dc.b $C2
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $22
-                dc.b $20
-
-; =============== S U B R O U T I N E =======================================
-
-sub_113C6:
-                
-                movem.l d0-a2,-(sp)
-                move.w  #$A09,d0
-                move.w  #$F612,d1
-                jsr     (CreateWindow).w
-                move.w  d0,((byte_FFB18E-$1000000)).w
-                lea     BattleEquipWindowLayout(pc), a0
-                move.w  #$B4,d7 
-                jsr     (CopyBytes).w   
-                bsr.w   DrawBattleEquipWindowStats
-                move.w  ((byte_FFB18E-$1000000)).w,d0
-                move.w  #$212,d1
-                move.w  #4,d2
-                jsr     (MoveWindowWithSfx).w
-                jsr     (WaitForWindowMovementEnd).w
-                movem.l (sp)+,d0-a2
-                rts
-
-    ; End of function sub_113C6
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_11404:
-                
-                movem.l d0-a2,-(sp)
-                bsr.w   DrawBattleEquipWindowStats
-                move.w  ((byte_FFB18E-$1000000)).w,d0
-                move.w  #$8080,d1
-                jsr     (SetWindowDestination).w
-                movem.l (sp)+,d0-a2
-                rts
-
-    ; End of function sub_11404
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_1141E:
-                
-                movem.l d0-a2,-(sp)
-                move.w  ((byte_FFB18E-$1000000)).w,d0
-                move.w  #$F612,d1
-                moveq   #4,d2
-                jsr     (MoveWindowWithSfx).w
-                jsr     (WaitForWindowMovementEnd).w
-                move.w  ((byte_FFB18E-$1000000)).w,d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
-                movem.l (sp)+,d0-a2
-                rts
-
-    ; End of function sub_1141E
-
-
-; =============== S U B R O U T I N E =======================================
-
-DrawBattleEquipWindowStats:
-                
-                link    a6,#-4
-                move.w  ((byte_FFB18E-$1000000)).w,d0
-                move.w  #WINDOW_BATTLEEQUIP_STATS_TILE_COORDS,d1
-                jsr     (GetWindowTileAddress).w
-                move.l  a1,-4(a6)
-                move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentATT
-                move.w  d1,d0
-                movea.l -4(a6),a1
-                moveq   #STATS_DIGITS_NUMBER,d7
-                bsr.w   WriteStatValue  
-                move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentDEF
-                move.w  d1,d0
-                movea.l -4(a6),a1
-                adda.w  #$28,a1 
-                moveq   #STATS_DIGITS_NUMBER,d7
-                bsr.w   WriteStatValue  
-                move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentAGI
-                move.w  d1,d0
-                movea.l -4(a6),a1
-                adda.w  #$50,a1 
-                moveq   #STATS_DIGITS_NUMBER,d7
-                bsr.w   WriteStatValue  
-                move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentMOV
-                move.w  d1,d0
-                movea.l -4(a6),a1
-                adda.w  #$78,a1 
-                moveq   #STATS_DIGITS_NUMBER,d7
-                bsr.w   WriteStatValue  
-                unlk    a6
-                rts
-
-    ; End of function DrawBattleEquipWindowStats
 

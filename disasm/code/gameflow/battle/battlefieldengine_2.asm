@@ -532,7 +532,7 @@ CreateTargetGrid:
                 move.w  d2,d4
                 lsl.w   #2,d4
                 adda.w  d4,a1
-                cmpi.b  #$19,d1
+                cmpi.b  #SPELL_B_ROCK,d1
                 bne.s   loc_C668
                 subq.b  #1,d2
 loc_C668:

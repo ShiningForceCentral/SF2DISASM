@@ -1,463 +1,459 @@
 
 ; ASM FILE code\common\menus\menuengine_03.asm :
-; 0x11B46..0x11FF0 : Menu engine
+; 0x11572..0x118BE : Menu engine
 
 ; =============== S U B R O U T I N E =======================================
 
-InitPortraitWindow:
-                
-                tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                bne.w   return_11BE0
-                addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                movem.l d0-a1,-(sp)
-                move.w  d0,-(sp)
-                move.b  d2,((PORTRAIT_IS_FLIPPED-$1000000)).w
-                move.b  d1,((PORTRAIT_IS_ON_RIGHT-$1000000)).w
-                move.w  #$A7C0,((word_FFB07E-$1000000)).w
-                move.w  #$14,((BLINK_COUNTER-$1000000)).w
-                move.w  #6,((word_FFB07C-$1000000)).w
-                move.w  #$80A,d0
-                move.w  #$2F6,d1
-                tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
-                beq.s   loc_11B84
-                addi.w  #$1500,d1
-loc_11B84:
-                
-                jsr     (CreateWindow).w
-                addq.w  #1,d0
-                move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                tst.b   ((PORTRAIT_IS_FLIPPED-$1000000)).w
-                bne.s   loc_11B9A
-                lea     WindowBorderTiles(pc), a0
-                bra.s   loc_11B9E
-loc_11B9A:
-                
-                lea     PortraitWindowLayout(pc), a0
-loc_11B9E:
-                
-                move.w  #$A0,d7 
-                jsr     (CopyBytes).w   
-                move.w  (sp)+,d0
-                bsr.w   GetAllyPortrait 
-                bsr.w   LoadPortrait    
-                move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
-                subq.w  #1,d0
-                move.w  #$201,d1
-                tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
-                beq.s   loc_11BC4
-                addi.w  #$1500,d1
-loc_11BC4:
-                
-                moveq   #4,d2
-                jsr     (MoveWindowWithSfx).w
-                jsr     (WaitForWindowMovementEnd).w
-                trap    #VINT_FUNCTIONS
-                dc.w VINTS_ADD
-                dc.l VInt_HandlePortraitBlinking
-                move.b  #$FF,((byte_FFB082-$1000000)).w
-                movem.l (sp)+,d0-a1
-return_11BE0:
-                
-                rts
-
-    ; End of function InitPortraitWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-HidePortraitWindow:
-                
-                tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                beq.s   return_11BE0
-                movem.l d0-a1,-(sp)
-                trap    #VINT_FUNCTIONS
-                dc.w VINTS_REMOVE
-                dc.l VInt_HandlePortraitBlinking
-                move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
-                subq.w  #1,d0
-                move.w  #$2F6,d1
-                tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
-                beq.s   loc_11C08
-                addi.w  #$1500,d1
-loc_11C08:
-                
-                moveq   #4,d2
-                jsr     (MoveWindowWithSfx).w
-                jsr     (WaitForWindowMovementEnd).w
-                move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
-                subq.w  #1,d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
-                clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                movem.l (sp)+,d0-a1
-                subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                rts
-
-    ; End of function HidePortraitWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-; Create and display member stats screen
-; 
-;       In: D0 = character index
-
-BuildMemberStatsScreen:
+CreateFighterMiniStatusWindow:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a2,-(sp)
-                link    a6,#-$10
-                move.w  d0,-2(a6)
-                clr.b   ((PORTRAIT_IS_FLIPPED-$1000000)).w
-                clr.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
-                move.w  #WINDOW_MEMBERSTATS_SIZE,d0
-                move.w  #WINDOW_MEMBERSTATS_DEST,d1
-                jsr     (CreateWindow).w ; stats window, on the right
-                move.w  d0,-4(a6)
-                move.w  #WINDOW_MEMBER_PORTRAIT_SIZE,d0
-                move.w  #WINDOW_MEMBER_PORTRAIT_DEST,d1
-                jsr     (CreateWindow).w ; portrait, upper left
-                move.w  d0,-6(a6)
-                addq.w  #1,d0
-                move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                move.w  #WINDOW_MEMBER_KD_SIZE,d0
-                move.w  #WINDOW_MEMBER_KD_DEST,d1
-                jsr     (CreateWindow).w ; kills/defeat, middle left
-                move.w  d0,-8(a6)
-                move.w  #WINDOW_MEMBER_GOLD_SIZE,d0
-                move.w  #WINDOW_MEMBER_GOLD_DEST,d1
-                jsr     (CreateWindow).w ; gold, bottom left
-                move.w  d0,-$A(a6)
-                move.w  -2(a6),d0
-                bsr.w   GetCombatantPortrait
-                move.w  d0,-$C(a6)
-                bsr.w   LoadTileDataForMemberScreen
-                move.w  -$C(a6),d0
-                blt.s   loc_11CA6
-                bsr.w   GetAllyPortrait 
-                bsr.w   LoadPortrait    
-loc_11CA6:
+                move.w  d0,-(sp)
+                move.w  #WINDOW_FIGHTERMINISTATUS_SIZE,d0
+                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
+                lea     ((FIGHTER_MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
+                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                beq.s   loc_11594
+                addq.l  #2,a2
+                addi.w  #$15,d1
+loc_11594:
                 
-                move.w  -4(a6),d0
-                move.w  #WINDOW_MEMBERSTATS_POSITION,d1
-                moveq   #4,d2
-                jsr     (MoveWindowWithSfx).w
-                move.w  -8(a6),d0
-                move.w  #WINDOW_MEMBER_KD_POSITION,d1
-                jsr     (MoveWindowWithSfx).w
-                move.w  -$C(a6),d0
-                blt.s   loc_11CD2
-                move.w  -6(a6),d0
-                move.w  #WINDOW_MEMBER_PORTRAIT_POSITION,d1
-                jsr     (MoveWindowWithSfx).w
-loc_11CD2:
-                
-                move.w  -2(a6),d0
-                tst.b   d0
-                blt.s   loc_11CE6
-                move.w  -$A(a6),d0
-                move.w  #WINDOW_MEMBER_GOLD_POSITION,d1
-                jsr     (MoveWindowWithSfx).w
-loc_11CE6:
-                
-                jsr     (WaitForWindowMovementEnd).w
-                move.w  #$A7C0,((word_FFB07E-$1000000)).w
-                move.w  #$14,((BLINK_COUNTER-$1000000)).w
-                move.w  #6,((word_FFB07C-$1000000)).w
-                trap    #VINT_FUNCTIONS
-                dc.w VINTS_ADD
-                dc.l VInt_HandlePortraitBlinking
-                move.b  #$FF,((byte_FFB082-$1000000)).w
-                lea     ((ENTITY_DATA-$1000000)).w,a0
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
-                bne.s   loc_11D1A
-                clr.w   d0
-                bra.s   loc_11D32
-loc_11D1A:
-                
-                move.w  -2(a6),d0
-                jsr     j_GetCurrentHP
-                tst.w   d1
-                bne.s   loc_11D2C
-                clr.w   d0
-                bra.s   loc_11D32
-loc_11D2C:
-                
-                jsr     j_GetEntityIndex
-loc_11D32:
-                
-                move.l  a1,-(sp)
-                move.w  d0,d1
-                addi.w  #$10,d1
-                lea     ((byte_FFAFA0-$1000000)).w,a1
-                adda.w  d1,a1
-                move.b  (a1),d1
-                move.w  d1,-(sp)
-                move.b  #1,(a1)
-                lsl.w   #5,d0
-                adda.w  d0,a0
-                move.w  #$240,d0
-                move.w  #$740,d1
-                tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                bne.s   loc_11D64
-                add.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
-                add.w   ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
-                bra.s   loc_11D6C
-loc_11D64:
-                
-                add.w   ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
-                add.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
-loc_11D6C:
-                
-                move.b  $11(a0),d7
-                move.w  d7,-(sp)
-                move.w  $C(a0),-(sp)
-                move.w  $E(a0),-(sp)
-                move.w  $10(a0),-(sp)
-                move.w  d0,(a0)
-                move.w  d1,2(a0)
-                move.w  d0,$C(a0)
-                move.w  d1,$E(a0)
-                move.b  #$40,$11(a0) 
-                andi.b  #$7F,$1D(a0) 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
-                bne.s   loc_11DBC
-                clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-                move.w  -2(a6),d0
-                jsr     j_GetAllyMapSprite
-                clr.w   d0
-                moveq   #3,d1
-                moveq   #$FFFFFFFF,d2
-                move.w  d4,d3
-                jsr     (UpdateEntityProperties).w
-                bra.s   loc_11DDC
-loc_11DBC:
-                
-                move.w  -2(a6),d0
-                jsr     j_GetCurrentHP
-                tst.w   d1
-                bne.s   loc_11DDC
-                clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-                clr.w   d0
-                moveq   #3,d1
-                moveq   #$FFFFFFFF,d2
-                move.w  #$AB,d3 
-                jsr     (UpdateEntityProperties).w
-loc_11DDC:
-                
-                move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
-                andi.b  #INPUT_B|INPUT_C|INPUT_A,d0
-                beq.s   loc_11DDC
-                move.w  (sp)+,$10(a0)
-                move.w  (sp)+,d1
+                jsr     (CreateWindow).w
+                move.w  d0,(a2)
+                clr.w   d1
+                jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d0
-                move.w  d0,(a0)
-                move.w  d1,2(a0)
-                move.w  d0,$C(a0)
-                move.w  d1,$E(a0)
-                move.w  (sp)+,d7
-                move.b  d7,$11(a0)
-                move.w  (sp)+,d0
-                move.b  d0,(a1)
-                movea.l (sp)+,a1
-                clr.b   ((byte_FFB082-$1000000)).w
-                trap    #VINT_FUNCTIONS
-                dc.w VINTS_REMOVE
-                dc.l VInt_HandlePortraitBlinking
-                move.w  -4(a6),d0
-                move.w  #$2001,d1
+                bsr.w   BuildFighterMiniStatusWindow
+                move.w  #1,d1
+                move.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
+                move.w  #$1F,d4
+                sub.w   d3,d4
+                lsl.w   #8,d4
+                or.w    d4,d1
                 moveq   #4,d2
-                jsr     (MoveWindowWithSfx).w
-                move.w  -8(a6),d0
-                move.w  #$F80B,d1
-                jsr     (MoveWindowWithSfx).w
-                move.w  -$C(a6),d0
-                blt.s   loc_11E40
-                move.w  -6(a6),d0
-                move.w  #$F8F6,d1
-                jsr     (MoveWindowWithSfx).w
-loc_11E40:
+                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                beq.s   loc_115C4
+                addi.w  #$15,d1
+loc_115C4:
                 
-                move.w  -2(a6),d0
-                tst.b   d0
-                blt.s   loc_11E54
-                move.w  -$A(a6),d0
-                move.w  #$F81C,d1
+                move.w  (a2),d0
+                move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
-loc_11E54:
-                
-                clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 jsr     (WaitForVInt).w
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
-                bne.s   loc_11E94
-                clr.w   d0
-                tst.b   ((PLAYER_TYPE-$1000000)).w
-                bne.s   loc_11E74
-                jsr     j_GetAllyMapSprite
-                bra.s   loc_11E82
-loc_11E74:
-                
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
-                bne.s   loc_11E80
-                moveq   #$3E,d4 
-                bra.s   loc_11E82
-loc_11E80:
-                
-                moveq   #$3D,d4 
-loc_11E82:
-                
-                clr.w   d0
-                clr.w   d1
-                move.b  $10(a0),d1
-                moveq   #$FFFFFFFF,d2
-                move.w  d4,d3
-                jsr     (UpdateEntityProperties).w
-                bra.s   loc_11EBA
-loc_11E94:
-                
-                move.w  -2(a6),d0
-                jsr     j_GetCurrentHP
-                tst.w   d1
-                bne.s   loc_11EBA
-                clr.w   d0
-                jsr     j_GetAllyMapSprite
-                clr.w   d0
-                clr.w   d1
-                move.b  $10(a0),d1
-                moveq   #$FFFFFFFF,d2
-                move.w  d4,d3
-                jsr     (UpdateEntityProperties).w
-loc_11EBA:
-                
+                bsr.w   sub_11804
                 jsr     (WaitForWindowMovementEnd).w
-                move.w  -$A(a6),d0
+                movem.l (sp)+,d0-a2
+                rts
+
+    ; End of function CreateFighterMiniStatusWindow
+
+
+; =============== S U B R O U T I N E =======================================
+
+HideFighterMiniStatusWindow:
+                
+                movem.l d0-a2,-(sp)
+                lea     ((FIGHTER_MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
+                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                beq.s   loc_115F0
+                addq.l  #2,a2
+loc_115F0:
+                
+                move.w  (a2),d0
+                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
+                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                beq.s   loc_11600
+                addi.w  #$15,d1
+loc_11600:
+                
+                moveq   #4,d2
+                jsr     (MoveWindowWithSfx).w
+                jsr     (WaitForWindowMovementEnd).w
+                move.w  (a2),d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
-                move.w  -8(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
-                move.w  -6(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
-                move.w  -4(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
-                unlk    a6
                 movem.l (sp)+,d0-a2
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function BuildMemberStatsScreen
+    ; End of function HideFighterMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A1 = address of VDP tile order in RAM
-
-AddStatusEffectTileIndexesToVdpTileOrder:
+sub_1161A:
                 
-                move.l  d0,(a1)
-                subq.l  #4,a1
-                cmpi.w  #VDPTILE_SPACE|VDPTILE_PLT3|VDPTILE_PRIORITY,(a1)
-                beq.s   @Return
-                movea.l -6(a6),a1
-                adda.w  #$78,a1 
-@Return:
-                
+                jsr     (InitWindowProperties).w
+                move.w  #WINDOW_FIGHTERMINISTATUS_SIZE,d0
+                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
+                jsr     (CreateWindow).w
+                move.w  #WINDOW_FIGHTERMINISTATUS_SIZE,d0
+                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
+                jsr     (CreateWindow).w
                 rts
 
-    ; End of function AddStatusEffectTileIndexesToVdpTileOrder
+    ; End of function sub_1161A
 
 
 ; =============== S U B R O U T I N E =======================================
 
-LoadTileDataForMemberScreen:
+sub_11638:
                 
-                move.w  -4(a6),d0
+                cmpi.b  #$FF,d0
+                beq.w   return_11714
+                movem.l d0-a1,-(sp)
+                move.w  d1,-(sp)
+                clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                movem.w d0,-(sp)
+                clr.w   d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  -2(a6),d0
-                bsr.w   BuildMemberStatsWindow
-                move.w  -8(a6),d0
-                lea     AllyKillDefeatWindowLayout(pc), a0
+                movem.w (sp)+,d0
+                bsr.w   BuildFighterMiniStatusWindow
+                move.w  (sp)+,d1
+                bne.s   loc_11670
+                move.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
+                move.w  #$1F,d1
+                sub.w   d3,d1
+                lsl.w   #8,d1
+                bra.s   loc_11674
+loc_11670:
+                
+                move.w  #$100,d1
+loc_11674:
+                
+                ori.w   #1,d1
+                clr.w   d0
+                moveq   #1,d2
+                jsr     (MoveWindow).l  
+                jsr     (WaitForVInt).w
+                bsr.w   sub_11804
+                jsr     (WaitForWindowMovementEnd).w
+                movem.l (sp)+,d0-a1
+                rts
+
+    ; End of function sub_11638
+
+
+; =============== S U B R O U T I N E =======================================
+
+RemoveAllyBattlesceneWindow:
+                
+                cmpi.b  #$FF,d0
+                beq.w   return_11714
+                movem.l d0-a1,-(sp)
+                clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                clr.w   d0
+                move.w  #$2006,d1
+                moveq   #1,d2
+                jsr     (MoveWindow).l  
+                movem.l (sp)+,d0-a1
+                rts
+
+    ; End of function RemoveAllyBattlesceneWindow
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_116B8:
+                
+                cmpi.b  #$FF,d0
+                beq.w   return_11714
+                movem.l d0-a1,-(sp)
+                move.w  d1,-(sp)
+                move.b  #$FF,((FIGHTER_IS_TARGETTING-$1000000)).w
+                movem.w d0,-(sp)
+                moveq   #1,d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  #WINDOW_MEMBER_KD_VDPTILEORDER_BYTESIZE,d7
-                jsr     (CopyBytes).w   
-                adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
-                move.w  -2(a6),d0
-                tst.b   d0
-                blt.s   @CheckDebugMode ; character index is negative (an enemy), so do not display kills
+                movem.w (sp)+,d0
+                bsr.w   BuildFighterMiniStatusWindow
+                move.w  (sp)+,d1
+                beq.s   loc_116F2
+                move.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
+                move.w  #$1F,d1
+                sub.w   d3,d1
+                lsl.w   #8,d1
+                bra.s   loc_116F6
+loc_116F2:
                 
-                ; Write kills and defeats
-                jsr     j_GetKills
-                move.w  d1,d0
+                move.w  #$100,d1
+loc_116F6:
+                
+                ori.w   #$14,d1
+                moveq   #1,d0
+                moveq   #1,d2
+                jsr     (MoveWindow).l  
+                jsr     (WaitForVInt).w
+                bsr.w   sub_11804
+                jsr     (WaitForWindowMovementEnd).w
+                movem.l (sp)+,d0-a1
+return_11714:
+                
+                rts
+
+    ; End of function sub_116B8
+
+
+; =============== S U B R O U T I N E =======================================
+
+RemoveEnemyBattlesceneWindow:
+                
+                cmpi.b  #$FF,d0
+                beq.s   return_11714
+                movem.l d0-a1,-(sp)
+                move.b  #$FF,((FIGHTER_IS_TARGETTING-$1000000)).w
+                moveq   #1,d0
+                move.w  #$2006,d1
+                moveq   #1,d2
+                jsr     (MoveWindow).l  
+                movem.l (sp)+,d0-a1
+                rts
+
+    ; End of function RemoveEnemyBattlesceneWindow
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Draw colored stat bars into ministatus window layout at A1
+; 
+; In: A0 = loading space address
+;     D0 = current HP/MP value
+;     D1 = max HP/MP value
+;     D2 = VDP tile index
+
+DrawColoredStatBar:
+                
+                movem.l d0-a1,-(sp)
+                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                beq.s   @InitVdpTileEntry
+                addi.w  #$A,d2          ; draw bar in bottom left window
+@InitVdpTileEntry:
+                
+                ori.w   #VDPTILE_PLT3|VDPTILE_PRIORITY,d2
+                cmp.w   d0,d1
+                bge.s   @ClearLoadingSpace ; keep highest of current or max stat value
+                move.w  d0,d1
+@ClearLoadingSpace:
+                
+                move.l  a0,-(sp)
+                moveq   #111,d7
+@ClearLoadingSpace_Loop:
+                
+                clr.l   (a0)+
+                dbf     d7,@ClearLoadingSpace_Loop
+                
+                movea.l (sp)+,a0
+                clr.w   d7
+                
+                ; Draw an empty column
+                moveq   #1,d4
+                bsr.w   WriteStatBarColumn
+                
+                ; Draw left border
+                clr.w   d4
+                bsr.w   WriteStatBarColumn
                 ext.l   d0
-                moveq   #WINDOW_MEMBER_KD_TEXT_KILLS_LENGTH,d7
-                bsr.w   WriteTilesFromNumber
-                adda.w  #WINDOW_MEMBER_KD_TEXT_DEFEATS_OFFSET,a1
-                move.w  -2(a6),d0
-                jsr     j_GetDefeats
-                move.w  d1,d0
-                ext.l   d0
-                moveq   #WINDOW_MEMBER_KD_TEXT_DEFEATS_LENGTH,d7
-                bsr.w   WriteTilesFromNumber
-@CheckDebugMode:
+                divs.w  #100,d0
+                move.w  d0,d4
+                addq.w  #3,d4           ; stat bar color index -> D4
+                clr.w   d6
+                swap    d0              ; D0 = remainder of current value / 100
+                cmpi.w  #100,d1
+                ble.s   @DrawStatBarContent ; stat bar content capped at 100 columns
+                moveq   #99,d3
+                bra.s   @DrawStatBarContent_Loop
+@DrawStatBarContent:
                 
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
-                beq.s   @CheckPortrait
+                move.w  d1,d3
+                subq.w  #1,d3
+                bmi.w   @DrawRightBorder
+@DrawStatBarContent_Loop:
                 
-                ; Write combatant index inside kills/defeat window in debug mode
-                move.w  -8(a6),d0
-                lea     AllyKillDefeatWindowLayout(pc), a0
-                move.w  #$101,d1
-                jsr     (GetWindowTileAddress).w
-                move.w  -2(a6),d0       ; get character index from stack
-                lsr.w   #4,d0
-                andi.w  #$F,d0
-                cmpi.w  #10,d0
-                blt.s   @Continue1
-                addi.w  #-$3FC9,d0
-                bra.s   @WriteIndexFirstDigit
-@Continue1:
+                cmp.w   d0,d6
+                blt.s   @Continue
+                subq.w  #1,d4           ; when done drawing remainder of current value, start drawing underlying color
+                move.w  #999,d0
+@Continue:
                 
-                addi.w  #-$3FD0,d0
-@WriteIndexFirstDigit:
+                bsr.w   WriteStatBarColumn
+                addq.w  #1,d6
+                dbf     d3,@DrawStatBarContent_Loop
+@DrawRightBorder:
                 
-                move.w  d0,(a1)+
-                move.w  -2(a6),d0
-                andi.w  #$F,d0
-                cmpi.w  #10,d0
-                blt.s   @Continue2
-                addi.w  #-$3FC9,d0
-                bra.s   @WriteIndexSecondDigit
-@Continue2:
+                clr.w   d4
+                bsr.w   WriteStatBarColumn
+                moveq   #1,d4
+                moveq   #15,d3
+@DrawEmptyColumns_Loop:
                 
-                addi.w  #-$3FD0,d0
-@WriteIndexSecondDigit:
+                bsr.w   WriteStatBarColumn
+                dbf     d3,@DrawEmptyColumns_Loop
                 
-                move.w  d0,(a1)+
-@CheckPortrait:
+                ; Copy VDP tiles into window layout
+                movem.l d2/a0,-(sp)
+                moveq   #11,d7
+                move.l  8(a0),d6        ; get 3rd column in 1st tile -> D6
+                move.w  d2,(a1)+
+@CopyTiles_Loop:
                 
-                move.w  -$C(a6),d0
-                blt.s   @Return         ; return if no portrait to display (and assume that it's an enemy, so skip drawing gold window as well)
+                lea     $20(a0),a0      ; advance 8 columns
+                move.l  8(a0),d3        ; get 3rd column in current tile -> D3
+                cmpi.l  #$FFFFFFFF,d3
+                beq.w   @Done           ; if 3rd column in current tile is empty, we're done
+                cmp.l   d3,d6
+                bne.s   @NextTile       ; if 3rd columns in previous and current tiles are not the same, start drawing next VDP tile
                 
-                move.w  -6(a6),d0
-                lea     WindowBorderTiles(pc), a0
-                clr.w   d1
-                jsr     (GetWindowTileAddress).w
-                move.w  #$A0,d7 
-                jsr     (CopyBytes).w   
-                lea     GoldWindowLayout(pc), a0
-                move.w  -$A(a6),d0
-                clr.w   d1
-                jsr     (GetWindowTileAddress).w
-                move.w  #$40,d7 
-                jsr     (CopyBytes).w   
-                adda.w  #$22,a1 
-                jsr     j_GetGold
-                move.l  d1,d0
-                moveq   #6,d7
-                bsr.w   WriteTilesFromNumber
+                ; Shift remaining columns to current position
+                moveq   #95,d3
+                movem.l a0-a1,-(sp)
+                movea.l a0,a1
+                lea     $20(a1),a1
+@ShiftColumns_Loop:
+                
+                move.l  (a1)+,(a0)+
+                dbf     d3,@ShiftColumns_Loop
+                
+                movem.l (sp)+,a0-a1
+                lea     -$20(a0),a0
+                bra.s   @CopyTile
+@NextTile:
+                
+                move.l  d3,d6
+                addq.w  #1,d2           ; increment VDP tile index
+@CopyTile:
+                
+                move.w  d2,(a1)+
+                dbf     d7,@CopyTiles_Loop
+@Done:
+                
+                movem.l (sp)+,d2/a0
+                movem.l (sp)+,d0-a1
+                rts
+
+    ; End of function DrawColoredStatBar
+
+
+; =============== S U B R O U T I N E =======================================
+
+sub_11804:
+                
+                movem.l d0-d2/a0-a1,-(sp)
+                lea     (FF8804_LOADING_SPACE).l,a0
+                moveq   #1,d2           ; HP bar VDP tile start index
+                bsr.w   DmaStatBarTiles
+                lea     (FF8A04_LOADING_SPACE).l,a0
+                moveq   #6,d2           ; MP bar VDP tile start index
+                bsr.w   DmaStatBarTiles
+                movem.l (sp)+,d0-d2/a0-a1
+                rts
+
+    ; End of function sub_11804
+
+
+; =============== S U B R O U T I N E =======================================
+
+DmaStatBarTiles:
+                
+                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                beq.s   @Continue
+                addi.w  #$A,d2          ; draw bar in bottom left window
+@Continue:
+                
+                lsl.w   #5,d2
+                movea.w d2,a1
+                move.w  #$50,d0 
+                moveq   #2,d1
+                jmp     (ApplyVIntVramDma).w
+
+    ; End of function DmaStatBarTiles
+
+tbl_StatBarColumns:
+                
+; Colors that stay consistant in battlescenes:
+; 
+;     0 = clear
+;     1 = white
+;     2 = black
+;     5 = green
+;     6 = blue
+;     7 = orange
+;     $A = red
+;     $B = yellow
+;     $C = brown
+;     $F = dark blue (window background)
+                
+                dc.l $F11111FF          ; white border
+                dc.l $FFFFFFFF          ; empty column
+                dc.l $1AAAAA1F          ; red
+                dc.l $1BBBBB1F          ; yellow
+                dc.l $1555551F          ; green
+                dc.l $1666661F          ; blue
+                dc.l $1222221F          ; black
+                dc.l $1222221F          ; black
+                dc.l $1222221F          ; black
+
+; =============== S U B R O U T I N E =======================================
+
+; Write one column of HP/MP bar pixels into A0
+; 
+;     In: D4 = stat bar column index
+;         D7 = drawn columns count
+
+WriteStatBarColumn:
+                
+                movem.l d3-a0,-(sp)
+                moveq   #7,d3
+                move.w  d7,d6
+                andi.w  #7,d6
+                lsl.w   #2,d6
+                lsr.w   #3,d7
+                lsl.w   #5,d7
+                lsl.w   #2,d4
+                move.l  tbl_StatBarColumns(pc,d4.w),d4
+@Loop:
+                
+                move.l  d4,d5
+                andi.l  #$F0000000,d5
+                lsr.l   d6,d5
+                or.l    d5,(a0,d7.w)
+                rol.l   #4,d4
+                addq.l  #4,a0
+                dbf     d3,@Loop
+                
+                movem.l (sp)+,d3-a0
+                addq.w  #1,d7
+                rts
+
+    ; End of function WriteStatBarColumn
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Check ASCII name at A0 for two special characters
+
+AdjustStringLengthForSpecialCharacters:
+                
+                movem.w d0/a0,-(sp)
+                move.w  d7,d0
+                subq.w  #1,d0
+                bmi.w   @Return
+@Loop:
+                
+                cmpi.b  #$9E,(a0)
+                bne.s   @Continue
+                subq.w  #1,d7
+@Continue:
+                
+                cmpi.b  #$9F,(a0)+
+                bne.s   @Next
+                subq.w  #1,d7
+@Next:
+                
+                dbf     d0,@Loop
+                movem.w (sp)+,d0/a0
 @Return:
                 
                 rts
 
-    ; End of function LoadTileDataForMemberScreen
+    ; End of function AdjustStringLengthForSpecialCharacters
 
-aNA:            dc.b 'N/A',0

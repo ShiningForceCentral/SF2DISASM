@@ -12,7 +12,7 @@ p_Start:        dc.l Start              ; Start Address
                 dc.l Int_ZeroDivide     ; Zero Divide
                 dc.l Int_OtherError     ; CHK instruction
                 dc.l Int_OtherError     ; TRAPV instruction
-off_20:         dc.l Int_OtherError     ; Privilege Violation
+                dc.l Int_OtherError     ; Privilege Violation
                 dc.l Int_OtherError     ; Trace
                 dc.l Int_OtherError     ; Line 1010 Emulator
                 dc.l Int_OtherError     ; Line 1111 Emulator

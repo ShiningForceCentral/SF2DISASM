@@ -817,9 +817,6 @@
 #split	0x309E,0x30BE,data/graphics/tech/basepalette.bin
 #split	0x31CE,0x364E,data/maps/global/mapoffsethashtable.bin
 #split	0x1098A,0x10A4A,data/graphics/tech/iconhighlighttiles.bin
-#split	0x10E1C,0x10EF4,data/graphics/tech/menus/diamondmenulayout.bin
-#split	0x10EF4,0x10FCC,data/graphics/tech/menus/unidentifiedlayout01.bin
-#split	0x10FCC,0x110A4,data/graphics/tech/menus/unidentifiedlayout02.bin
 #split	0x1264E,0x126EE,data/graphics/tech/windowbordertiles.bin
 #split	0x13D9E,0x13EDE,data/graphics/tech/texthighlighttiles.bin
 #split	0x14EFC,0x14F7C,data/graphics/tech/shoppricetagtiles-blank.bin
