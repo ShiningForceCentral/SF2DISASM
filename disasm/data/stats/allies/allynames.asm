@@ -34,7 +34,7 @@ AllyNames:      allyName "BOWIE"
                 
                 ; Additional entries to be defined with force members expansion patch
                 if (FORCE_MEMBERS_EXPANSION=1)
-                allyName ""
-                allyName ""
+                allyName "0"
+                allyName "0"
                 endif
                 
