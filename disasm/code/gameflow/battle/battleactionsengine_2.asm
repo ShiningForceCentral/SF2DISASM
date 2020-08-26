@@ -16,13 +16,8 @@ WriteSkirmishScript_InflictDamage:
                 bne.s   @CheckCounterAttack ; otherwise, go to next step
                 tst.b   -BCSTACK_OFFSET_INEFFECTIVEATTACK(a2)
                 beq.s   @CheckCounterAttack
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_INEFFECTIVE_ATTACK,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a5),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_INEFFECTIVE_ATTACK,(a5),#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 bra.w   @Return
 @CheckCounterAttack:
                 
@@ -92,20 +87,12 @@ WriteSkirmishScript_InflictDamage:
                 
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  d2,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineBattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  d2,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeEnemyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineBattleMessage:
                 
                 btst    #COMBATANT_BIT_ENEMY,(a4)
@@ -136,13 +123,7 @@ WriteSkirmishScript_InflictDamage:
                 move.w  #MESSAGE_BATTLE_CUTOFF,d1 ; message when target is cut off
 @DisplayBattleMessage:
                 
-                move.w  #$10,(a6)+
-                move.w  d1,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a5),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d6,(a6)+
+                displayMessage d1,(a5),#0,d6 ; Message, Combatant, Item or Spell, Number
 @Return:
                 
                 rts
@@ -168,19 +149,11 @@ WriteSkirmishScript_InflictAilment:
                 jsr     (a1)
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @WriteEnemyReactionCommand
-                move.w  #$B,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #0,(a6)+
+                executeAllyReaction #0,#0,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @Return
 @WriteEnemyReactionCommand:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #0,(a6)+
+                executeEnemyReaction #0,#0,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
 @Return:
                 
                 rts
@@ -195,73 +168,27 @@ SkirmishAilmentFuncTable:
                 dc.l WriteSkirmishScript_InflictSlow
                 dc.l WriteSkirmishScript_DrainMP
                 dc.l WriteSkirmishScript_InflictSilence
-
-; =============== S U B R O U T I N E =======================================
-
 WriteSkirmishScript_InflictPoison:
-                
-                move.w  #$11,(a6)+
-                move.w  #MESSAGE_BATTLE_IS_POISONED,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessageWithNoWait #MESSAGE_BATTLE_IS_POISONED,d0,#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 ori.w   #STATUSEFFECTS_MASK_POISON,d1
                 rts
-
-    ; End of function WriteSkirmishScript_InflictPoison
-
-
-; =============== S U B R O U T I N E =======================================
-
 WriteSkirmishScript_InflictSleep:
-                
-                move.w  #$11,(a6)+
-                move.w  #MESSAGE_BATTLE_FELL_ASLEEP,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessageWithNoWait #MESSAGE_BATTLE_FELL_ASLEEP,d0,#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 ori.w   #STATUSEFFECTS_MASK_SLEEP,d1
                 rts
-
-    ; End of function WriteSkirmishScript_InflictSleep
-
-
-; =============== S U B R O U T I N E =======================================
-
 WriteSkirmishScript_InflictStun:
-                
-                move.w  #$11,(a6)+
-                move.w  #MESSAGE_BATTLE_IS_STUNNED,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessageWithNoWait #MESSAGE_BATTLE_IS_STUNNED,d0,#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 ori.w   #STATUSEFFECTS_MASK_STUN,d1
                 rts
-
-    ; End of function WriteSkirmishScript_InflictStun
-
-
-; =============== S U B R O U T I N E =======================================
-
 WriteSkirmishScript_InflictMuddle:
-                
-                move.w  #$11,(a6)+
-                move.w  #MESSAGE_BATTLE_BECOMES_CONFUSED,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-loc_AF08:
-                
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessageWithNoWait #MESSAGE_BATTLE_BECOMES_CONFUSED,d0,#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 ori.w   #STATUSEFFECTS_MASK_MUDDLE2,d1
                 ori.w   #STATUSEFFECTS_MASK_MUDDLE1,d1
                 rts
-
-    ; End of function WriteSkirmishScript_InflictMuddle
-
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -302,12 +229,8 @@ WriteSkirmishScript_InflictSilence:
                 jsr     GetSpellAndNumberOfSpells
                 tst.w   d2
                 beq.s   @Skip           ; skip if target has no spells
-                move.w  #$11,(a6)+
-                move.w  #MESSAGE_BATTLE_HAS_BEEN_SILENCED,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessageWithNoWait #MESSAGE_BATTLE_HAS_BEEN_SILENCED,d0,#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 ori.w   #STATUSEFFECTS_MASK_SILENCE,d3
 @Skip:
                 
@@ -354,29 +277,17 @@ WriteSkirmishScript_InflictCurseDamage:
                 move.b  (a4),d0
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  d2,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  d2,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeEnemyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                move.w  #$12,(a6)+
-                move.w  #$10,(a6)+
-                move.w  #$168,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d3,(a6)+
+                bscHideTextBox
+                displayMessage #MESSAGE_BATTLE_IS_CURSED_AND_DAMAGED,d0,#0,d3 
+                                                        ; Message, Combatant, Item or Spell, Number
 @Return:
                 
                 rts
@@ -454,12 +365,7 @@ WriteSkirmishScript_DeathMessage:
                 move.w  #MESSAGE_BATTLE_WAS_DEFEATED,d1
 @WriteBattleMessageCommand:
                 
-                move.w  #$10,(a6)+
-                move.w  d1,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage d1,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
     ; End of function WriteSkirmishScript_DeathMessage
@@ -559,33 +465,16 @@ SpellEffect_Heal:
                 move.b  (a5),d0
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+
-                move.w  d6,(a6)+
-                dc.b $3C 
-                dc.b $FC 
-                dc.l loc_3CBE+3
-                dc.b $3C 
-                dc.b $FC 
-                dc.b   0
-                dc.b   2
-                dc.b $60 
-                dc.b $10
+                bne.s   @EnemyReaction  
+                executeAllyReaction d6,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
+                bra.s   @BattleMessage  
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  d6,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction d6,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_RECOVERED_HIT_POINTS,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d6,(a6)+
+                displayMessage #MESSAGE_BATTLE_RECOVERED_HIT_POINTS,d0,#0,d6 
+                                                        ; Message, Combatant, Item or Spell, Number
                 bsr.w   CalculateHealingEXP
                 rts
 
@@ -628,50 +517,30 @@ loc_B1D6:
                 beq.w   @Ineffective
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @WriteEnemyReactionCommand
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @CheckIfPoisonCured
 @WriteEnemyReactionCommand:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @CheckIfPoisonCured:
                 
                 bsr.w   GiveStatusEffectSpellsEXP
                 btst    #0,d2
                 beq.s   @CheckIfStunCured
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_IS_NO_LONGER_POISONED,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_IS_NO_LONGER_POISONED,d0,#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
 @CheckIfStunCured:
                 
                 btst    #1,d2
                 beq.s   @CheckIfCurseCured
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_IS_NO_LONGER_STUNNED,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_IS_NO_LONGER_STUNNED,d0,#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
 @CheckIfCurseCured:
                 
                 btst    #2,d2
                 beq.s   @Skip
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_IS_NO_LONGER_CURSED,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_IS_NO_LONGER_CURSED,d0,#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 jsr     UnequipAllItemsIfNotCursed
 @Skip:
                 
@@ -706,41 +575,25 @@ SpellEffect_Boost:
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 bsr.w   GiveStatusEffectSpellsEXP
                 jsr     GetBaseAGI
                 mulu.w  #3,d1
                 lsr.l   #3,d1
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
                 jsr     GetBaseDEF
                 mulu.w  #3,d1
                 lsr.l   #3,d1
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_BOOST_SPELL_DEF_INCREASE,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_BOOST_SPELL_DEF_INCREASE,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
                 rts
 
     ; End of function SpellEffect_Boost
@@ -767,20 +620,12 @@ SpellEffect_Slow:
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @GiveEXP
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @GiveEXP:
                 
                 bsr.w   GiveStatusEffectSpellsEXP
@@ -795,21 +640,13 @@ WriteSkirmishScript_SlowMessage:
                 jsr     GetBaseAGI
                 mulu.w  #3,d1
                 lsr.l   #3,d1
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_AGILITY_DECREASED_BY,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_AGILITY_DECREASED_BY,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
                 jsr     GetBaseDEF
                 mulu.w  #3,d1
                 lsr.l   #3,d1
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_DEFENSE_DECREASED_BY,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_DEFENSE_DECREASED_BY,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
                 rts
 
     ; End of function WriteSkirmishScript_SlowMessage
@@ -831,34 +668,20 @@ SpellEffect_Attack:
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 bsr.w   GiveStatusEffectSpellsEXP
                 jsr     GetBaseATT
                 mulu.w  #3,d1
                 lsr.l   #3,d1
-loc_B404:
-                
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_ATTACK_SPELL_EFFECT,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_ATTACK_SPELL_EFFECT,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
                 rts
 
     ; End of function SpellEffect_Attack
@@ -886,29 +709,17 @@ SpellEffect_Dispel:
                 jsr     GetStatus
                 ori.w   #STATUSEFFECTS_MASK_SILENCE,d1
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 bsr.w   GiveStatusEffectSpellsEXP
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_HAS_BEEN_SILENCED,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_HAS_BEEN_SILENCED,d0,#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 rts
 
     ; End of function SpellEffect_Dispel
@@ -944,29 +755,16 @@ SpellEffect_Muddle:
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 bsr.w   GiveStatusEffectSpellsEXP
-                move.w  #$10,(a6)+
-                move.w  d2,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage d2,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
     ; End of function SpellEffect_Muddle
@@ -980,38 +778,25 @@ SpellEffect_Desoul:
                 bsr.w   ApplyRandomEffectiveness
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #$8000,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #$8000,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineBattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #$8000,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeEnemyReaction #$8000,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineBattleMessage:
                 
                 bsr.w   GiveEXPandGoldForKill
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
                 move.w  #MESSAGE_BATTLE_SOUL_WAS_STOLEN_ALLY,d2 ; ally message
-                bra.s   @BattleMessage
+                bra.s   @BattleMessage  
 @EnemyMessage:
                 
                 move.w  #MESSAGE_BATTLE_SOUL_WAS_STOLEN_ENEMY,d2
 @BattleMessage:
                 
-                move.w  #$10,(a6)+
-                move.w  d2,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage d2,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 move.b  #$FF,-4(a2)
                 rts
 
@@ -1027,29 +812,16 @@ SpellEffect_Sleep:
                 jsr     GetStatus
                 ori.w   #STATUSEFFECTS_MASK_SLEEP,d1
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 bsr.w   GiveStatusEffectSpellsEXP
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_FELL_ASLEEP,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_FELL_ASLEEP,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
     ; End of function SpellEffect_Sleep
@@ -1076,58 +848,37 @@ SpellEffect_DrainMP:
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyTargetReaction
-                move.w  #$B,(a6)+       ; write ally target reaction command
-                move.w  #0,(a6)+
-                move.w  d3,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeAllyReaction #0,d3,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @WriteCasterReactionCommand
 @EnemyTargetReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  d3,(a6)+
-                move.w  d1,(a6)+
-                move.w  #1,(a6)+
+                executeEnemyReaction #0,d3,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @WriteCasterReactionCommand:
                 
                 move.b  (a4),d0
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyCasterReaction
-                move.w  #$B,(a6)+       ; write ally caster reaction command
-                move.w  #0,(a6)+
-                move.w  d2,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeAllyReaction #0,d2,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineBattleMessage
 @EnemyCasterReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  d2,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,d2,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineBattleMessage:
                 
                 bsr.w   GiveStatusEffectSpellsEXP
-                move.w  #$12,(a6)+
+                bscHideTextBox
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
                 move.w  #MESSAGE_BATTLE_ABSORBED_MAGIC_POINTS,d1 ; ally message
-                bra.s   @BattleMessage
+                bra.s   @BattleMessage  
 @EnemyMessage:
                 
                 move.b  (a5),d0
                 move.w  #MESSAGE_BATTLE_MP_WAS_DRAINED_BY,d1
 @BattleMessage:
                 
-                move.w  #$10,(a6)+
-                move.w  d1,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d2,(a6)+
+                displayMessage d1,d0,#0,d2 ; Message, Combatant, Item or Spell, Number
                 rts
 
     ; End of function SpellEffect_DrainMP
@@ -1140,32 +891,19 @@ SpellEffect_PowerWater:
                 move.b  (a5),d0
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #2,d0
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_ATTACK_POWER_IS_BOOSTED_BY,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a5),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d0,(a6)+
+                displayMessage #MESSAGE_BATTLE_ATTACK_POWER_IS_BOOSTED_BY,(a5),#0,d0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseATT
@@ -1184,32 +922,19 @@ loc_B6E8:
                 
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #2,d0
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_DEFENSIVE_POWER_IS_BOOSTED_BY,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a5),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d0,(a6)+
+                displayMessage #MESSAGE_BATTLE_DEFENSIVE_POWER_IS_BOOSTED_BY,(a5),#0,d0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseDEF
@@ -1226,32 +951,19 @@ SpellEffect_QuickChicken:
                 move.b  (a5),d0
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #2,d0
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_AGILITY_IS_BOOSTED_BY,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a5),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d0,(a6)+
+                displayMessage #MESSAGE_BATTLE_AGILITY_IS_BOOSTED_BY,(a5),#0,d0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseAGI
@@ -1268,38 +980,26 @@ SpellEffect_RunningPimento:
                 move.b  (a5),d0
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineIncreaseValue
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineIncreaseValue:
                 
                 jsr     GetBaseMOV
                 clr.w   d2
                 cmpi.b  #9,d1
-                beq.w   @BattleMessage
+                beq.w   @BattleMessage  
                 moveq   #1,d2
                 cmpi.b  #8,d1
-                beq.w   @BattleMessage
+                beq.w   @BattleMessage  
                 moveq   #2,d2
 @BattleMessage:
                 
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_MOVEMENT_RANGE_IS_ENLARGED_BY,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d2,(a6)+
+                displayMessage #MESSAGE_BATTLE_MOVEMENT_RANGE_IS_ENLARGED_BY,d0,#0,d2 
+                                                        ; Message, Combatant, Item or Spell, Number
                 move.w  d2,d1
                 jsr     IncreaseBaseMOV
                 jsr     ApplyStatusEffectsAndItemsOnStats
@@ -1315,32 +1015,19 @@ SpellEffect_CheerfulBread:
                 move.b  (a5),d0
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #2,d0
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_MAX_HP_ARE_RAISED_BY,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a5),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d0,(a6)+
+                displayMessage #MESSAGE_BATTLE_MAX_HP_ARE_RAISED_BY,(a5),#0,d0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseMaxHP
@@ -1366,32 +1053,19 @@ loc_B888:
                 move.b  (a5),d0
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 moveq   #3,d0
                 jsr     (GetRandomOrDebugValue).w
                 addq.w  #2,d0
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_MAX_MP_ARE_RAISED_BY,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a5),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d0,(a6)+
+                displayMessage #MESSAGE_BATTLE_MAX_MP_ARE_RAISED_BY,(a5),#0,d0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseMaxMP
@@ -1418,78 +1092,46 @@ SpellEffect_BraveApple:
                 move.b  (a5),d0
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+       ; write ally reaction command
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
                 clr.l   d1
                 move.b  (a1)+,d1
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_BECAME_LEVEL,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_BECAME_LEVEL,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
                 move.b  (a1)+,d1        ; evaluate stat gain : HP
                 beq.s   @EvaluateStatGain_MP
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_HP_INCREASED_BY,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_HP_INCREASED_BY,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
 @EvaluateStatGain_MP:
                 
                 move.b  (a1)+,d1
                 beq.s   @EvaluateStatGain_ATT
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_MP_INCREASED_BY,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_MP_INCREASED_BY,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
 @EvaluateStatGain_ATT:
                 
                 move.b  (a1)+,d1
                 beq.s   @EvaluateStatGain_DEF
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_ATTACK_INCREASED_BY,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_ATTACK_INCREASED_BY,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
 @EvaluateStatGain_DEF:
                 
                 move.b  (a1)+,d1
                 beq.s   @EvaluateStatGain_AGI
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_DEFENSE_INCREASED_BY,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_DEFENSE_INCREASED_BY,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
 @EvaluateStatGain_AGI:
                 
                 move.b  (a1)+,d1
                 beq.s   @EvaluateLearnedSpell
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_AGILITY_INCREASED_BY,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_AGILITY_INCREASED_BY,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
 @EvaluateLearnedSpell:
                 
                 move.b  (a1)+,d1
@@ -1499,22 +1141,14 @@ SpellEffect_BraveApple:
                 andi.w  #$3F,d2 
                 lsr.w   #6,d1
                 bne.s   @SpellLevelIncreasedMessage
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_LEARNED_THE_NEW_MAGIC_SPELL,(a6)+
-                move.w  d0,(a6)+
-                move.w  d2,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_LEARNED_THE_NEW_MAGIC_SPELL,d0,d2,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 bra.s   @Return
 @SpellLevelIncreasedMessage:
                 
                 addq.w  #1,d1
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_SPELL_INCREASED_TO_LEVEL,(a6)+
-                move.w  d2,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d1,(a6)+
+                displayMessage #MESSAGE_BATTLE_SPELL_INCREASED_TO_LEVEL,d2,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
 @Return:
                 
                 rts
@@ -1548,28 +1182,16 @@ SpellEffect_FairyTear:
                 move.b  (a5),d0
                 jsr     GetStatus
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction
-                move.w  #$B,(a6)+
-                move.w  #0,(a6)+
-                move.w  d6,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
-                bra.s   @BattleMessage
+                bne.s   @EnemyReaction  
+                executeAllyReaction #0,d6,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
+                bra.s   @BattleMessage  
 @EnemyReaction:
                 
-                move.w  #$A,(a6)+
-                move.w  #0,(a6)+
-                move.w  d6,(a6)+
-                move.w  d1,(a6)+
-                move.w  #2,(a6)+
+                executeEnemyReaction #0,d6,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                move.w  #$10,(a6)+
-                move.w  #MESSAGE_BATTLE_RECOVERED_MAGIC_POINTS,(a6)+
-                move.w  d0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  d6,(a6)+
+                displayMessage #MESSAGE_BATTLE_RECOVERED_MAGIC_POINTS,d0,#0,d6 
+                                                        ; Message, Combatant, Item or Spell, Number
                 bsr.w   CalculateHealingEXP
                 rts
 
@@ -1599,13 +1221,8 @@ ApplyRandomEffectiveness:
                 jsr     (GetRandomOrDebugValue).w
                 cmp.w   d2,d0
                 bcc.s   @Success
-                move.w  #$10,(a6)+      ; write battle message command : ineffective spell
-                move.w  #MESSAGE_BATTLE_THE_SPELL_HAS_NO_EFFECT,(a6)+
-                move.b  #0,(a6)+
-                move.b  (a5),(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage #MESSAGE_BATTLE_THE_SPELL_HAS_NO_EFFECT,(a5),#0,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
                 move.b  #$FF,-BCSTACK_OFFSET_DODGE(a2)
                 move.l  (sp)+,d0
                 move.l  (sp)+,d0
@@ -1848,12 +1465,7 @@ WriteSkirmishScript_BreakUsedItem:
                 moveq   #0,d0
                 jsr     GetItemBreakMessage(pc)
                 nop
-                move.w  #$10,(a6)+
-                move.w  d3,(a6)+
-                move.w  d1,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage d3,d1,#0,#0 ; Message, Combatant, Item or Spell, Number
                 move.b  (a4),d0
                 move.w  6(a3),d1
                 jsr     BreakItem       
@@ -1865,12 +1477,7 @@ WriteSkirmishScript_BreakUsedItem:
                 moveq   #1,d0
                 jsr     GetItemBreakMessage(pc)
                 nop
-                move.w  #$10,(a6)+
-                move.w  d3,(a6)+
-                move.w  d1,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
-                move.w  #0,(a6)+
+                displayMessage d3,d1,#0,#0 ; Message, Combatant, Item or Spell, Number
                 move.b  (a4),d0
                 move.w  6(a3),d1
                 jsr     RemoveItemBySlot

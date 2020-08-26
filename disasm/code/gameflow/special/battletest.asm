@@ -10,7 +10,7 @@ DebugModeBattleTest:
                 move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
                 
                 if (FORCE_MEMBERS_EXPANSION=1)
-                move.w  #COM_ALLIES_COUNTER-1,d1
+                move.w  #COMBATANT_ALLIES_COUNTER-1,d1
                 moveq   #1,d0
 @JoinForce_Loop:
                 
@@ -138,7 +138,7 @@ loc_7820:
                 clr.w   d1
                 move.b  d0,d1
                 mulu.w  #7,d0
-                lea     BattleMapCoordinates(pc), a0
+                conditionalPc lea,BattleMapCoordinates,a0
                 nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
