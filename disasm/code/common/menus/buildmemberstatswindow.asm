@@ -157,8 +157,12 @@ BuildMemberStatsWindow:
 @WriteLVandEXP:
                 
                 move.w  -2(a6),d0
+                
+                if (SHOW_ENEMY_LEVEL=0)
                 tst.b   d0
                 blt.s   @WriteEnemyLVandEXP
+                endif
+                
                 jsr     j_GetCurrentLevel
                 movea.l -6(a6),a1
                 adda.w  #WINDOW_MEMBERSTATS_OFFSET_LV,a1
@@ -167,6 +171,12 @@ BuildMemberStatsWindow:
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
                 move.w  -2(a6),d0
+                
+                if (SHOW_ENEMY_LEVEL>=1)
+                tst.b   d0
+                blt.s   @WriteEnemyEXP
+                endif
+                
                 jsr     j_GetCurrentEXP
                 movea.l -6(a6),a1
                 adda.w  #WINDOW_MEMBERSTATS_OFFSET_EXP,a1
@@ -182,6 +192,8 @@ BuildMemberStatsWindow:
                 adda.w  #WINDOW_MEMBERSTATS_OFFSET_ENEMY_LV,a1
                 moveq   #WINDOW_MEMBERSTATS_NA_STRING_LENGTH,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
+@WriteEnemyEXP:
+                
                 lea     aNA(pc), a0     
                 movea.l -6(a6),a1
                 adda.w  #WINDOW_MEMBERSTATS_OFFSET_ENEMY_EXP,a1

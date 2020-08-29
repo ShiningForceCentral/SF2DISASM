@@ -1,0 +1,1 @@
+SHOW_ENEMY_LEVEL: equ 0 ; 0 = OFF, 1 = ON
