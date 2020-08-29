@@ -254,11 +254,14 @@ BuildMemberStatsWindow:
                 jsr     j_GetSpellAndNumberOfSpells
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @Break          ; break out of loop if no spells learned
+                
+                if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
                 movem.l d1/a0,-(sp)
                 jsr     j_FindSpellDefAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 movem.l (sp)+,d1/a0
                 beq.w   @NextSpell
+                endif
                 
                 ; Copy icon tiles to window layout
                 bsr.w   CopyMemberScreenIconsToVdpTileOrder
