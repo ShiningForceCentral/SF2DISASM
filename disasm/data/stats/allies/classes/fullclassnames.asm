@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\classes\fullclassnames.asm :
-; Full class names table : required by patch Full_Class_Names
-FullClassNames: 
+; Full class names table : Included when patch FULL_CLASS_NAMES is enabled.
+tbl_FullClassNames: 
                 className "Swordsman"
                 className "Knight"
                 className "Warrior"
@@ -11,23 +11,23 @@ FullClassNames:
                 className "Birdman"
                 className "Wolfman"
                 className "Ranger"
-                className "Phoenix Kid"
+                className "Phoenix", 13, "Kid"
                 className "Thief"
                 className "Tortoise"
                 className "Hero"
                 className "Paladin"
-                className "Pegasus Knight"
+                className "Pegasus", 13, "Knight"
                 className "Gladiator"
                 className "Baron"
                 className "Wizard"
                 className "Sorcerer"
                 className "Vicar"
-                className "Master Monk"
+                className "Master", 13, "Monk"
                 className "Sniper"
-                className "Brass Gunner"
-                className "Bird Battler"
-                className "Wolf Baron"
-                className "Bow Knight"
+                className "Brass", 13, "Gunner"
+                className "Bird", 13, "Battler"
+                className "Wolf", 13, "Baron"
+                className "Bow", 13, "Knight"
                 className "Phoenix"
                 className "Ninja"
                 className "Monster"

@@ -1,11 +1,18 @@
 
 ; ASM FILE data\stats\items\mithrilweapons.asm :
 ; 0x21F92..0x21FD2 : Mithril weapon lists
-MithrilWeaponLists:
-                ; 4 entries per weapon class, 2 bytes each :
-;  a : Chance to obtain = 1/a
-;  b : enum Items : ITEM_*
-    
+tbl_MithrilWeapons:
+                
+; 4 entries per weapon class, 2 bytes each :
+;       0: chance to pick = 1/parameter
+;       1: item index
+;
+; Syntax        mithrilWeapons &
+;                   parameter, [ITEM_]index, &
+;                   parameter, [ITEM_]index, &
+;                   parameter, [ITEM_]index, &
+;                   parameter, [ITEM_]index, &
+                
                 mithrilWeapons &
                     16, LEVANTER, &
                     8, COUNTER_SWORD, &

@@ -134,7 +134,7 @@ loc_4F5F0:
 loc_4F610:
                 
                 move.w  -4(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_4F65C
                 move.w  -2(a6),d0

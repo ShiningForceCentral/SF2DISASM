@@ -8,7 +8,7 @@
 
 ExecuteMapScript:
                 
-                move.l  #byte_FF9004,(dword_FFB1A4).l
+                move.l  #FF9004_LOADING_SPACE,(dword_FFB1A4).l
                 movem.l d0-a6,-(sp)
                 movea.l a0,a6
                 clr.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w

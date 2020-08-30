@@ -255,6 +255,10 @@ raftResetMapCoords: macro
     dc.b \4
     endm
     
+itemIndex: macro
+    defineShorthand.b ITEM_,\1
+    endm
+    
 classType: macro
     defineShorthand.b CLASSTYPE_,\1
     endm
@@ -312,7 +316,11 @@ defineName: macro
     endm
 
 spellName: macro
+    if (narg=3)
+    defineName \1,\2,\3
+    else
     defineName \1
+    endc
     endm
     
 allyName: macro
@@ -336,7 +344,11 @@ itemName: macro
     endm
     
 className: macro
+    if (narg=3)
+    defineName \1,\2,\3
+    else
     defineName \1
+    endc
     endm
     
 ; Item definitions
@@ -396,18 +408,33 @@ power: macro
     dc.b \1
     endm
     
+forClass: macro
+    defineShorthand.b CLASS_,\1
+    endm
+    
 allyBattleSprite: macro
     defineShorthand.b ALLYBATTLESPRITE_,\1
-    if (narg=2)
+    if (narg=2) ; legacy support for old ally battle sprite and palette
     dc.b \2
     endc
     endm
     
+allyBattleSprAndPlt: macro
+    forClass \1
+    allyBattleSprite \2
+    dc.b \3
+    endm
+    
 enemyBattleSprite: macro
     defineShorthand.b ENEMYBATTLESPRITE_,\1
-    if (narg=2)
+    if (narg=2) ; legacy support for old enemy battle sprite and palette
     dc.b \2
     endc
+    endm
+    
+enemyBattleSprAndPlt: macro
+    enemyBattleSprite \1
+    dc.b \2
     endm
     
 weaponSprite: macro
@@ -418,10 +445,15 @@ weaponPalette: macro
     defineShorthand.b WEAPONPALETTE_,\1
     endm
     
+weaponGraphics: macro
+    weaponSprite \1
+    weaponPalette \2
+    endm
+    
 shopDef: macro
     dc.b narg
     rept narg
-    defineShorthand.b ITEM_,\1
+    itemIndex \1
     shift
     endr
     endm
@@ -437,7 +469,7 @@ promotionSection: macro
 promotionItems: macro
     dc.b narg
     rept narg
-    defineShorthand.b ITEM_,\1
+    itemIndex \1
     shift
     endr
     endm
@@ -452,23 +484,23 @@ mithrilWeaponClass: macro
     
 mithrilWeapons: macro
     dc.b \1
-    defineShorthand.b ITEM_,\2
+    itemIndex \2
     dc.b \3
-    defineShorthand.b ITEM_,\4
+    itemIndex \4
     dc.b \5
-    defineShorthand.b ITEM_,\6
+    itemIndex \6
     dc.b \7
-    defineShorthand.b ITEM_,\8
+    itemIndex \8
     endm
     
 specialCaravanDescription: macro
-    defineShorthand.b ITEM_,\1
+    itemIndex \1
     dc.b \2
     defineShorthand.w MESSAGE_CARAVANDESC_,\3
     endm
     
-usableOutsideBattleItem: macro
-    defineShorthand.b ITEM_,\1
+usableOutsideBattleItem: macro  ; alias
+    itemIndex \1
     endm
     
 input: macro
@@ -518,8 +550,12 @@ maxMp: macro
     dc.b \1,0
     endm
     
-baseAtk: macro
+baseAtt: macro
     dc.b \1,0
+    endm
+    
+baseAtk: macro ; alias
+    baseAtt \1
     endm
     
 baseDef: macro
@@ -559,7 +595,7 @@ spells: macro
     endm
     
 initialStatus: macro
-    defineBitfield.w STATUSEFFECTS_MASK_,\1
+    defineBitfield.w STATUSEFFECT_,\1
     dcb.b 3,0
     endm
     
@@ -577,11 +613,21 @@ randomBattles: macro
     endr
     endm
     
-; Ally stats
-    
-forClass: macro
-    defineShorthand.b CLASS_,\1
+upgradeRange: macro
+    dc.b \1
+    defineShorthand.b ENEMY_,\2
+    defineShorthand.b ENEMY_,\3
     endm
+    
+excludedEnemies: macro
+    dc.b narg
+    rept narg
+    defineShorthand.b ENEMY_,\1
+    shift
+    endr
+    endm
+    
+; Ally stats
     
 defineStatGrowth: macro Start,Proj,Curve
     defineShorthand.b GROWTHCURVE_,\Curve
@@ -596,8 +642,12 @@ mpGrowth: macro
     defineStatGrowth \1,\2,\3
     endm
     
-atkGrowth: macro
+attGrowth: macro
     defineStatGrowth \1,\2,\3
+    endm
+    
+atkGrowth: macro ; alias
+    attGrowth \1,\2,\3
     endm
     
 defGrowth: macro
@@ -650,7 +700,7 @@ resistance: macro
     endm
     
 moveType: macro
-    defineBitfield.b MOVETYPE_,\1
+    defineBitfield.b MOVETYPE_UPPER_,\1
     endm
     
 prowess: macro
@@ -659,11 +709,20 @@ prowess: macro
     
 ; VDP tiles
     
-vdpTile: macro vdp_tile
-    defineBitfieldWithParam.w VDPTILE_, \vdp_tile, VDPTILE_PALETTE3|VDPTILE_PRIORITY
+vdpTile: macro
+    defineBitfield.w VDPTILE_,\1
     endm
     
-vdpTilePortraitWindow: macro vdp_tile
-    defineBitfieldWithParam.w VDPTILE_PORTRAITWINDOW_, \vdp_tile, VDPTILE_PRIORITY
+vdpBaseTile: macro
+    defineBitfieldWithParam.w VDPTILE_,\1,VDPTILE_PLT3|VDPTILE_PRIORITY
+    endm
+    
+; VDP sprites
+
+vdpSprite: macro
+    dc.w \1
+    defineBitfield.w VDPSPRITESIZE_,\2
+    vdpTile \3
+    dc.w \4
     endm
     

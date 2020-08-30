@@ -144,7 +144,7 @@ EndGame:
                 move.w  #$12C,d0
                 jsr     (Sleep).w       
                 sndCom  SOUND_COMMAND_FADE_OUT
-                move.w  #$2A30,d0       ; wait for 3 minutes
+                move.w  #END_GAME_TIMER,d0 ; wait for 3 minutes
                 jsr     (Sleep).w       
                 txt     $1D1            ; "And more...{W1}"
                 clsTxt

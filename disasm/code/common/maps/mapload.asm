@@ -1034,14 +1034,14 @@ loc_29BC:
                 cmpi.w  #$1F,d7
                 bne.s   loc_29CA
                 add.w   d1,(a0)
-                add.w   d0,6(a0)
+                add.w   d0,VDPSPRITE_OFFSET_X(a0)
                 bra.s   loc_29D6
 loc_29CA:
                 
                 cmpi.w  #1,(a0)
                 beq.s   loc_29D6
                 add.w   d3,(a0)
-                add.w   d2,6(a0)
+                add.w   d2,VDPSPRITE_OFFSET_X(a0)
 loc_29D6:
                 
                 addq.l  #8,a0

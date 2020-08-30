@@ -1,52 +1,54 @@
 
 ; ASM FILE data\battles\global\enemyleaderpresence.asm :
 ; 0x47C8E..0x47CBC : Enemy leader presence table
-EnemyLeaderPresence:
-                ; 0 = no enemy leader
-    
-                dc.b 0                  ; Battle 0
-                dc.b 0                  ; Battle 1
-                dc.b 0                  ; Battle 2
-                dc.b 0                  ; Battle 3
-                dc.b 0                  ; Battle 4
-                dc.b 0                  ; Battle 5
-                dc.b 0                  ; Battle 6
-                dc.b 0                  ; Battle 7
-                dc.b 0                  ; Battle 8
-                dc.b 0                  ; Battle 9
-                dc.b 0                  ; Battle 10
-                dc.b 0                  ; Battle 11
-                dc.b 255                ; Battle 12
-                dc.b 255                ; Battle 13
-                dc.b 0                  ; Battle 14
-                dc.b 255                ; Battle 15
-                dc.b 255                ; Battle 16
-                dc.b 0                  ; Battle 17
-                dc.b 255                ; Battle 18
-                dc.b 255                ; Battle 19
-                dc.b 0                  ; Battle 20
-                dc.b 255                ; Battle 21
-                dc.b 255                ; Battle 22
-                dc.b 255                ; Battle 23
-                dc.b 0                  ; Battle 24
-                dc.b 0                  ; Battle 25
-                dc.b 255                ; Battle 26
-                dc.b 255                ; Battle 27
-                dc.b 255                ; Battle 28
-                dc.b 255                ; Battle 29
-                dc.b 255                ; Battle 30
-                dc.b 255                ; Battle 31
-                dc.b 255                ; Battle 32
-                dc.b 255                ; Battle 33
-                dc.b 255                ; Battle 34
-                dc.b 255                ; Battle 35
-                dc.b 255                ; Battle 36
-                dc.b 255                ; Battle 37
-                dc.b 255                ; Battle 38
-                dc.b 255                ; Battle 39
-                dc.b 255                ; Battle 40
-                dc.b 255                ; Battle 41
-                dc.b 255                ; Battle 42
-                dc.b 255                ; Battle 43
-                dc.b 255                ; Battle 44
-                dc.b 255                ; Battle 45
+tbl_EnemyLeaderPresence:
+                
+; 0 = no enemy leader
+                
+                dc.b 0                  ; 0: Versus all bosses
+                dc.b 0                  ; 1: Inside Ancient Tower
+                dc.b 0                  ; 2: To Yeel
+                dc.b 0                  ; 3: To Hawel's house
+                dc.b 0                  ; 4: Ambushed by Galam Soldiers
+                dc.b 0                  ; 5: Galam Castle
+                dc.b 0                  ; 6: To Granseal
+                dc.b 0                  ; 7: Versus Dark Smokes
+                dc.b 0                  ; 8: North Cliff
+                dc.b 0                  ; 9: To Ribble
+                dc.b 0                  ; 10: To the East
+                dc.b 0                  ; 11: Cave of Darkness
+                dc.b 255                ; 12: Mt. Volcano
+                dc.b 255                ; 13: Polca Village
+                dc.b 0                  ; 14: Southeast Desert
+                dc.b 255                ; 15: Shrine south of Ribble
+                dc.b 255                ; 16: Versus Kraken
+                dc.b 0                  ; 17: To Taros's Shrine
+                dc.b 255                ; 18: Versus Taros
+                dc.b 255                ; 19: Outside Elven Village
+                dc.b 0                  ; 20: Harpies' Pond
+                dc.b 255                ; 21: Devil's Tail
+                dc.b 255                ; 22: Chessboard
+                dc.b 255                ; 23: Versus Willard
+                dc.b 0                  ; 24: To North Parmecia
+                dc.b 0                  ; 25: North Cave
+                dc.b 255                ; 26: Outside Ketto
+                dc.b 255                ; 27: To Tristan
+                dc.b 255                ; 28: Pangoat Valley bridge
+                dc.b 255                ; 29: Outside Mitula's Shrine
+                dc.b 255                ; 30: Versus Zalbard
+                dc.b 255                ; 31: Pacalon
+                dc.b 255                ; 32: To Moun
+                dc.b 255                ; 33: Inside Moun
+                dc.b 255                ; 34: Versus Cameela
+                dc.b 255                ; 35: To Roft
+                dc.b 255                ; 36: Versus Prism Flowers
+                dc.b 255                ; 37: Versus Red Baron
+                dc.b 255                ; 38: Versus Geshp
+                dc.b 255                ; 39: To Ancient Shrine
+                dc.b 255                ; 40: Versus Odd Eye
+                dc.b 255                ; 41: Outside Ancient Tower
+                dc.b 255                ; 42: Versus Galam
+                dc.b 255                ; 43: Versus Zeon
+                dc.b 255                ; 44: Fairy Woods
+                
+                dc.b 255

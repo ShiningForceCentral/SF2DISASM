@@ -162,7 +162,7 @@ loc_20BF4:
                 move.w  -$C(a6),d0
                 move.w  d2,d1
                 andi.w  #$FFFD,d1
-                jsr     j_SetStatus
+                jsr     j_SetStatusEffects
                 sndCom  MUSIC_CURE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop

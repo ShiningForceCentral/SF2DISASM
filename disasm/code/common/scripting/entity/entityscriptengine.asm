@@ -107,34 +107,34 @@ loc_4D5C:
                 add.w   d4,d5
                 addi.w  #$80,d0 
                 addi.w  #$70,d1 
-                move.w  d0,6(a1)
+                move.w  d0,VDPSPRITE_OFFSET_X(a1)
                 move.w  d1,(a1)
-                move.w  #$40,d6 
+                move.w  #64,d6          ; link
                 sub.w   d7,d6
-                addi.w  #$A00,d6
-                move.w  d6,2(a1)
-                ori.w   #$4000,d5
+                addi.w  #VDPSPRITESIZE_V3|VDPSPRITESIZE_H3,d6
+                move.w  d6,VDPSPRITE_OFFSET_SIZE(a1)
+                ori.w   #VDPTILE_PLT3,d5
                 move.b  $1D(a0),d0
                 andi.w  #3,d0
                 cmpi.w  #2,d0
                 bne.s   loc_4DA0
-                ori.w   #$1000,d5
+                ori.w   #VDPTILE_FLIP,d5
 loc_4DA0:
                 
                 move.b  $10(a0),d0
                 ext.w   d0
                 move.b  byte_4E16(pc,d0.w),d0
                 bne.s   loc_4DB0
-                ori.w   #$800,d5
+                ori.w   #VDPTILE_MIRROR,d5
 loc_4DB0:
                 
                 move.b  ((WINDOW_IS_PRESENT-$1000000)).w,d6
                 cmp.b   $11(a0),d6
                 bge.s   loc_4DBE
-                ori.w   #$8000,d5
+                ori.w   #VDPTILE_PRIORITY,d5
 loc_4DBE:
                 
-                move.w  d5,4(a1)
+                move.w  d5,VDPSPRITE_OFFSET_TILE(a1)
                 move.w  (sp)+,d6
 loc_4DC4:
                 
@@ -196,13 +196,13 @@ sub_4E24:
                 move.w  #$40,d6 
 loc_4E30:
                 
-                cmpi.b  #$10,3(a1,d6.w)
+                cmpi.b  #$10,VDPSPRITE_OFFSET_LINK(a1,d6.w)
                 beq.s   loc_4E3E
                 addq.w  #8,d6
                 dbf     d7,loc_4E30
 loc_4E3E:
                 
-                clr.b   3(a1,d6.w)
+                clr.b   VDPSPRITE_OFFSET_LINK(a1,d6.w)
                 move.w  #$38,d6 
                 moveq   #$2F,d7 
                 lea     ((byte_FFAFB0-$1000000)).w,a0
@@ -212,7 +212,7 @@ loc_4E4C:
                 beq.s   loc_4E5E
                 move.w  #$3F,d0 
                 sub.w   d7,d0
-                move.b  d0,3(a1,d6.w)
+                move.b  d0,VDPSPRITE_OFFSET_LINK(a1,d6.w)
                 move.w  d0,d6
                 lsl.w   #3,d6
 loc_4E5E:
@@ -226,7 +226,7 @@ loc_4E68:
                 bne.s   loc_4E7A
                 move.w  #$3F,d0 
                 sub.w   d7,d0
-                move.b  d0,3(a1,d6.w)
+                move.b  d0,VDPSPRITE_OFFSET_LINK(a1,d6.w)
                 move.w  d0,d6
                 lsl.w   #3,d6
 loc_4E7A:
@@ -234,7 +234,7 @@ loc_4E7A:
                 dbf     d7,loc_4E68
 loc_4E7E:
                 
-                move.b  #8,3(a1,d6.w)
+                move.b  #8,VDPSPRITE_OFFSET_LINK(a1,d6.w)
                 rts
 
     ; End of function sub_4E24
@@ -2710,9 +2710,9 @@ DmaMapSprite:
                 clr.w   d6
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d6
                 move.b  FacingValues(pc,d6.w),d6
-                bne.s   loc_6198
+                bne.s   @Continue
                 addq.w  #2,d6
-loc_6198:
+@Continue:
                 
                 movem.l a0-a1,-(sp)
                 clr.w   d1
@@ -2720,12 +2720,12 @@ loc_6198:
                 move.w  d1,-(sp)
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-                cmpi.w  #240,d1         ; HARDCODED special sprite mapsprite start index
-                blt.s   loc_61BA
+                cmpi.w  #MAPSPRITE_SPECIALS_START,d1 ; HARDCODED special sprite mapsprite start index
+                blt.s   @LoadRegularSprite
                 jsr     j_LoadSpecialSprite
                 move.w  (sp)+,d1
-                bra.s   loc_61F6
-loc_61BA:
+                bra.s   @Done
+@LoadRegularSprite:
                 
                 move.w  d1,d0
                 add.w   d1,d1
@@ -2748,7 +2748,7 @@ loc_61BA:
                 move.w  #$120,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-loc_61F6:
+@Done:
                 
                 movem.l (sp)+,a0-a1
                 rts

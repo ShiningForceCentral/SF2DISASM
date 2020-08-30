@@ -1,50 +1,51 @@
 
 ; ASM FILE data\stats\spells\spellelements.asm :
 ; 0xC24E..0xC27A : Spell elements table
-SpellElementsTable:
-                ; enum SpellElements : SPELLELEMENT_*
-    
-                spellElement UNDEFINED1 ; HEAL
-                spellElement UNDEFINED1 ; AURA
-                spellElement STATUS     ; DETOX
-                spellElement STATUS     ; BOOST
-                spellElement STATUS     ; SLOW
-                spellElement STATUS     ; ATTACK
-                spellElement STATUS     ; DISPEL
-                spellElement STATUS     ; MUDDLE
-                spellElement STATUS     ; DESOUL
-                spellElement STATUS     ; SLEEP
-                spellElement UNDEFINED1 ; EGRESS
-                spellElement FIRE       ; BLAZE
-                spellElement ICE        ; FREEZE
-                spellElement LIGHTNING  ; BOLT
-                spellElement WIND       ; BLAST
-                spellElement UNDEFINED1 ; SPOIT
-                spellElement UNDEFINED1 ; HEALIN
-                spellElement FIRE       ; FLAME
-                spellElement ICE        ; SNOW
-                spellElement UNDEFINED1 ; DEMON
-                spellElement UNDEFINED1 ; POWER
-                spellElement UNDEFINED1 ; GUARD
-                spellElement UNDEFINED1 ; SPEED
-                spellElement UNDEFINED1 ; IDATEN
-                spellElement UNDEFINED1 ; HEALTH
-                spellElement UNDEFINED1 ; B.ROCK
-                spellElement UNDEFINED1 ; LASER
-                spellElement UNDEFINED1 ; KATON
-                spellElement UNDEFINED1 ; RAIJIN
-                spellElement WIND       ; DAO
-                spellElement FIRE       ; APOLLO
-                spellElement ICE        ; NEPTUN
-                spellElement UNDEFINED1 ; ATLAS
-                spellElement UNDEFINED1 ; POWDER
-                spellElement UNDEFINED1 ; G.TEAR
-                spellElement UNDEFINED1 ; HANNY
-                spellElement UNDEFINED1 ; BRAVE
-                spellElement FIRE       ; F.BALL
-                spellElement ICE        ; BREZAD
-                spellElement LIGHTNING  ; THUNDR
-                spellElement ICE        ; AQUA
-                spellElement FIRE       ; KIWI
-                spellElement UNDEFINED1 ; SHINE
-                spellElement LIGHTNING  ; ODDEYE
+tbl_SpellElements:
+                
+; Syntax        spellElement [SPELLELEMENT_]index
+                
+                spellElement NEUTRAL    ; 0: HEAL
+                spellElement NEUTRAL    ; 1: AURA
+                spellElement STATUS     ; 2: DETOX
+                spellElement STATUS     ; 3: BOOST
+                spellElement STATUS     ; 4: SLOW
+                spellElement STATUS     ; 5: ATTACK
+                spellElement STATUS     ; 6: DISPEL
+                spellElement STATUS     ; 7: MUDDLE
+                spellElement STATUS     ; 8: DESOUL
+                spellElement STATUS     ; 9: SLEEP
+                spellElement NEUTRAL    ; 10: EGRESS
+                spellElement FIRE       ; 11: BLAZE
+                spellElement ICE        ; 12: FREEZE
+                spellElement LIGHTNING  ; 13: BOLT
+                spellElement WIND       ; 14: BLAST
+                spellElement NEUTRAL    ; 15: SPOIT
+                spellElement NEUTRAL    ; 16: HEALIN
+                spellElement FIRE       ; 17: FLAME
+                spellElement ICE        ; 18: SNOW
+                spellElement NEUTRAL    ; 19: DEMON
+                spellElement NEUTRAL    ; 20: POWER
+                spellElement NEUTRAL    ; 21: GUARD
+                spellElement NEUTRAL    ; 22: SPEED
+                spellElement NEUTRAL    ; 23: IDATEN
+                spellElement NEUTRAL    ; 24: HEALTH
+                spellElement NEUTRAL    ; 25: B.ROCK
+                spellElement NEUTRAL    ; 26: LASER
+                spellElement NEUTRAL    ; 27: KATON
+                spellElement NEUTRAL    ; 28: RAIJIN
+                spellElement WIND       ; 29: DAO
+                spellElement FIRE       ; 30: APOLLO
+                spellElement ICE        ; 31: NEPTUN
+                spellElement NEUTRAL    ; 32: ATLAS
+                spellElement NEUTRAL    ; 33: POWDER
+                spellElement NEUTRAL    ; 34: G.TEAR
+                spellElement NEUTRAL    ; 35: HANNY
+                spellElement NEUTRAL    ; 36: BRAVE
+                spellElement FIRE       ; 37: F.BALL
+                spellElement ICE        ; 38: BREZAD
+                spellElement LIGHTNING  ; 39: THUNDR
+                spellElement ICE        ; 40: AQUA
+                spellElement FIRE       ; 41: KIWI
+                spellElement NEUTRAL    ; 42: SHINE
+                spellElement LIGHTNING  ; 43: ODDEYE

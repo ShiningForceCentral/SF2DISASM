@@ -23,4 +23,4 @@ FollowersTable: follower 66, ALLY_SARAH, $FF, 1
                 follower 83, FOLLOWER_D, MAPSPRITE_MINISTER, 1
                 follower 84, ALLY_ROHDE, $FF, 1
                 
-                    tableEnd
+                tableEnd

@@ -12,6 +12,5 @@
                 include "data\stats\enemies\enemydefs.asm"    ; Enemy definitions
                 includeIfVanillaRom "data\battles\spritesetentries.asm"    ; Battle sprite sets
                 include "data\battles\global\randombattles.asm"    ; Random battles table
-                include "code\gameflow\battle\battle_s13_3.asm"    ; Data related to UpgradeUnitIdx function
                 includeIfVanillaRom "code\specialscreens\endkiss\graphics.asm"    ; End Kiss Graphics
                 align $1B8000

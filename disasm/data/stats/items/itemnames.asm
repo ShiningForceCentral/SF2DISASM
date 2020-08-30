@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\items\itemnames.asm :
-; 0x1796E..0x17F3D : Item names
-ItemNames:      itemName "Medical", 13, "Herb"
+; 0x1796E..0x17F3E : Item names
+tbl_ItemNames:  itemName "Medical", 13, "Herb"
                 itemName "Healing", 13, "Seed"
                 itemName "Healing", 13, "Drop"
                 itemName "Antidote"
@@ -129,4 +129,6 @@ ItemNames:      itemName "Medical", 13, "Herb"
                 itemName "Cotton", 13, "Balloon"
                 itemName "Chirrup", 13, "Sandals"
                 itemName "Empty"
+                
+                wordAlign
                 

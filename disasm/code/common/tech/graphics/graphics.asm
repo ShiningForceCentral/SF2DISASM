@@ -449,7 +449,7 @@ loc_1A1C:
                 tst.b   ((FADING_TIMER-$1000000)).w
                 bne.s   return_1A7E
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
-                tst.b   ((byte_FFDFAB-$1000000)).w
+                tst.b   ((FADING_TIMER+1-$1000000)).w
                 bne.w   sub_19C8        
 return_1A7E:
                 

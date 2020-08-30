@@ -39,7 +39,12 @@ j_EndKissPictureSequence:
                 jmp     EndKissPictureSequence(pc)
 j_LoadTitleScreenFont:                
                 jmp     LoadTitleScreenFont(pc)
-                include "code\specialscreens\segalogo\segalogo.asm"    ; SEGA logo functions
+                include "code\specialscreens\segalogo\segalogo_0.asm"    ; SEGA logo functions
+                include "data\tech\configurationmodeinputsequence.asm"    ; Configuration mode input sequence
+                wordAlign
+                include "code\specialscreens\segalogo\segalogo_1.asm"    ; SEGA logo functions
+                include "data\tech\debugmodeinputsequence.asm"    ; Debug mode input sequence
+                wordAlign
 VariableWidthFont:
                 incbin "data/graphics/tech/fonts/variablewidthfont.bin"
 MenuTiles_Uncompressed:
