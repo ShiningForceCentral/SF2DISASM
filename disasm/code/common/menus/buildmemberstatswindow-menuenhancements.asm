@@ -185,8 +185,12 @@ character_index     = -2
                 
                 ; LV
                 move.w  character_index(a6),d0
+                
+                if (SHOW_ENEMY_LEVEL=0)
                 tst.b   d0
                 bmi.s   @EnemyLVandEXP
+                endif
+                
                 jsr     GetCurrentLevel
                 movea.l window_tile_address(a6),a1
                 adda.w  #WINDOW_MEMBERSTATS_OFFSET_LV,a1
@@ -194,6 +198,12 @@ character_index     = -2
                 
                 ; EXP
                 move.w  character_index(a6),d0
+                
+                if (SHOW_ENEMY_LEVEL>=1)
+                tst.b   d0
+                bmi.s   @EnemyEXP
+                endif
+                
                 jsr     GetCurrentEXP
                 movea.l window_tile_address(a6),a1
                 adda.w  #WINDOW_MEMBERSTATS_OFFSET_EXP,a1
@@ -202,11 +212,15 @@ character_index     = -2
                 bra.s   @ATT
                 
 @EnemyLVandEXP:
+                if (SHOW_ENEMY_LEVEL=0)
                 lea     aNA(pc), a0     
                 movea.l window_tile_address(a6),a1
                 adda.w  #WINDOW_MEMBERSTATS_OFFSET_ENEMY_LV,a1
                 moveq   #WINDOW_MEMBERSTATS_NA_STRING_LENGTH,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
+                endif
+                
+@EnemyEXP:
                 lea     aNA(pc), a0     
                 movea.l window_tile_address(a6),a1
                 adda.w  #WINDOW_MEMBERSTATS_OFFSET_ENEMY_EXP,a1
