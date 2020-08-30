@@ -277,10 +277,12 @@ character_index     = -2
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @WriteSpells_Break          ; break out of loop if no spells learned
                 
+                if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
                 ; Do not display spell that is not affected by silence
                 jsr     FindSpellDefAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 beq.w   @NextSpell      ; skip if spell is not affected by silence
+                endif
                 
                 ; Copy icon tiles to window layout
                 movea.l d4,a1
