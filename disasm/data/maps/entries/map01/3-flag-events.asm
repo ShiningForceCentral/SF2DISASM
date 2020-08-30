@@ -1,11 +1,11 @@
 
 ; ASM FILE data\maps\entries\map01\3-flag-events.asm :
 ; 0x95F26..0x95F38 : 
-                fbcFlag $1AE            ; Battle 30 unlocked
+                fbcFlag 430             ; Battle 30 unlocked
                   fbcSource 2, 12
                   fbcSize   1, 1
                   fbcDest   2, 13
-                fbcFlag $1AE            ; Battle 30 unlocked
+                fbcFlag 430             ; Battle 30 unlocked
                   fbcSource 20, 12
                   fbcSize   1, 1
                   fbcDest   20, 13

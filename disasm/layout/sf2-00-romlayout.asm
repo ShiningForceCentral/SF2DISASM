@@ -23,4 +23,3 @@
                 include "layout\sf2-16-0x1D8000-0x1E0000.asm"    ; 0x1D8000..0x1E0000 : Icons
                 include "layout\sf2-17-0x1E0000-0x1F0000.asm"    ; 0x1E0000..0x1F0000 : PCM Banks, YM Instruments, sound driver, char stats, witch screens
                 include "layout\sf2-18-0x1F0000-0x200000.asm"    ; 0x1F0000..0x200000 : Music banks 1 and 0
-                conditionalRomExpand    ; if EXPANDED_ROM = 1, then include next layout file to fill the ROM up to 0x3FFFFF

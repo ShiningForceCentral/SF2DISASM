@@ -74,7 +74,7 @@ loc_21102:
 FindPromotionSection:
                 
                 movem.l d0/d6,-(sp)
-                lea     Promotions(pc), a0
+                lea     tbl_Promotions(pc), a0
                 move.w  d2,d6
                 subq.w  #1,d6
                 bcs.w   loc_21126
@@ -176,7 +176,7 @@ loc_211F0:
                 move.w  -$C(a6),d0
                 move.w  d2,d1
                 andi.w  #$FFFE,d1
-                jsr     j_SetStatus
+                jsr     j_SetStatusEffects
                 sndCom  MUSIC_CURE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
@@ -222,7 +222,7 @@ sub_2124A:
                 move.w  d4,d3
                 tst.b   d1
                 beq.w   loc_2126C
-                bsr.w   GetEntityNumberOfCombatant
+                bsr.w   GetEntityIndexForCombatant
                 tst.b   d0
                 ble.s   loc_21278
 loc_2126C:

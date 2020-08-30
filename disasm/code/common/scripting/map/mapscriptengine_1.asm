@@ -1760,7 +1760,7 @@ csc31_moveEntityAboveEntity:
 GetEntityAddressFromCharacter:
                 
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a5
-                andi.w  #COMBATANT_MASK,d0
+                andi.w  #COMBATANT_MASK_ALL,d0
                 tst.b   d0
                 bpl.s   loc_4705A
                 subi.b  #$60,d0 
