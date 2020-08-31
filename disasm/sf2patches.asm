@@ -1,0 +1,1 @@
+BUGFIX_GARBLED_HP_BAR: equ 0   ; 0 = OFF, 1 = ON. Prevents drawing garbage pixels when HP is greater then 600.
