@@ -408,6 +408,14 @@ WriteStatBarColumn:
                 lsl.w   #2,d6
                 lsr.w   #3,d7
                 lsl.w   #5,d7
+                
+                if (BUGFIX_GARBLED_HP_BAR>=1)
+                cmpi.w  #(WriteStatBarColumn-tbl_StatBarColumns-4)/4,d4
+                ble.s   @Continue
+                moveq   #(WriteStatBarColumn-tbl_StatBarColumns-4)/4,d4
+@Continue:
+                endif
+                
                 lsl.w   #2,d4
                 move.l  tbl_StatBarColumns(pc,d4.w),d4
 @Loop:
