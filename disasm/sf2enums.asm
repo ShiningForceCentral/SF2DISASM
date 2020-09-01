@@ -1464,6 +1464,7 @@ MENU_ITEM_EQUIPPED_STRING_COORDS: equ $904
 ; ---------------------------------------------------------------------------
 
 ; enum Menu_Magic
+MENU_MAGIC_OFFSET_MP_COST: equ $2A
 MENU_MAGIC_LAYOUT_BYTESIZE: equ $D8
 MENU_MAGIC_SPELL_LEVEL_TILES_COORDS: equ $903
 
