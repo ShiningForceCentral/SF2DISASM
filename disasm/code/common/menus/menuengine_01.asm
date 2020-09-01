@@ -1871,7 +1871,7 @@ sub_10D56:
                 movea.l (a0,d4.w),a0
                 move.w  d0,-(sp)
                 move.w  -$C(a6),d0
-                move.w  #$903,d1
+                move.w  #MENU_MAGIC_SPELL_LEVEL_TILES_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #$C,d7
                 jsr     (CopyBytes).w   
@@ -1883,7 +1883,7 @@ sub_10D56:
                 jsr     j_GetSpellCost
                 move.w  d1,d0
                 moveq   #3,d7
-                adda.w  #$2A,a1 
+                adda.w  #MENU_MAGIC_OFFSET_MP_COST,a1
                 bsr.w   WriteTilesFromNumber
                 move.l  -8(a6),d0
                 beq.s   loc_10DAE
@@ -1909,17 +1909,16 @@ loc_10DCE:
 
     ; End of function sub_10D56
 
-dword_10DD2:    dc.l $13C0D09
-                dc.l $C5E00124
-                dc.l $13C0D10
-                dc.l $CDE0013C
+spr_SpellLevelHighlight:
+                vdpSprite 316, V2|H4|9, 1504|PLT3|PRIORITY, 292
+                vdpSprite 316, V2|H4|16, 1504|MIRROR|PLT3|PRIORITY, 316
 
 ; =============== S U B R O U T I N E =======================================
 
 sub_10DE2:
                 
                 lea     (SPRITE_08).l,a1
-                lea     dword_10DD2(pc), a0
+                lea     spr_SpellLevelHighlight(pc), a0
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
