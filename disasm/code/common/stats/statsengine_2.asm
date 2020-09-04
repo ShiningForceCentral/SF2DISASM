@@ -2790,8 +2790,15 @@ LevelUp:
                 bsr.w   SetLevel
                 move.b  d5,(a1)
                 bsr.w   GetClass        
-                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED - CHAR_CLASS_FIRSTPROMOTED should be compared here OR...
-                blt.s   @NotPromoted    ;  alternatively, this branch condition should be "lower than or equal"
+                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; <BUG> -- TORT class is being wrongfully treated as promoted here
+                                        ; Should either compare to first promoted class, or change branch condition to "lower than or equal".
+                
+                if (BUGFIX_KIWI_SPELLS_LEARNING_LEVEL=0)
+                blt.s   @NotPromoted
+                else
+                ble.s   @NotPromoted
+                endif
+                
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5
 @NotPromoted:
                 
@@ -2876,9 +2883,15 @@ InitCharacterStats:
                 move.w  (sp)+,d4        ; <- restore starting level
                 move.w  d4,d5           ; D5 = effective level (takes additional levels into account if promoted for the purpose of spell learning)
                 bsr.w   GetClass        
-                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; <BUG> TORT is wrongfully being treated as a promoted class here
-                                        ; should either compare to first promoted class, or change conditional branch to "branch on lower than or equal"
+                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; <BUG> -- TORT class is being wrongfully treated as promoted here
+                                        ; Should either compare to first promoted class, or change branch condition to "lower than or equal".
+                
+                if (BUGFIX_KIWI_SPELLS_LEARNING_LEVEL=0)
                 blt.s   @GetAllyStatsEntryAddress
+                else
+                ble.s   @GetAllyStatsEntryAddress
+                endif
+                
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5 ; add 20 to effective level if promoted
 @GetAllyStatsEntryAddress:
                 
