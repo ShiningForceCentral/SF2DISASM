@@ -162,7 +162,7 @@ loc_20BF4:
                 move.w  -$C(a6),d0
                 move.w  d2,d1
                 andi.w  #$FFFD,d1
-                jsr     j_SetStatus
+                jsr     j_SetStatusEffects
                 sndCom  MUSIC_CURE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
@@ -465,9 +465,7 @@ loc_20FE6:
                 move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP_INDEX-$1000000)).w
                 move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
                 setFlg  $18F            ; Set after first battle's cutscene OR first save? Checked at witch screens
-                enableSram
                 jsr     (SaveGame).w
-                disableSram
                 sndCom  MUSIC_SAVE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop

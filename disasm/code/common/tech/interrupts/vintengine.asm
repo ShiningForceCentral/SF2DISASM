@@ -1067,6 +1067,7 @@ ClearSpriteTable:
                 addq.w  #8,a0
                 addq.b  #1,d0
                 dbf     d1,@Loop
+                
                 clr.b   -5(a0)
                 movem.l (sp)+,d0-d1/a0
                 rts
@@ -1107,6 +1108,8 @@ loc_E70:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused DMA
+
 ClearCram:
                 
                 movem.l d0-d3,-(sp)
@@ -1120,11 +1123,12 @@ ClearCram:
                 move.w  #$C000,(VDP_Control).l
                 move.w  #$80,(VDP_Control).l  ; CRAM address 0x80
                 move.w  #0,(VDP_Data).l
-loc_EC8:
+@WaitForDmaFree:
                 
                 move.w  (VDP_Control).l,d0
-                andi.w  #2,d0           ; wait for DMA free
-                bne.s   loc_EC8
+                andi.w  #2,d0
+                bne.s   @WaitForDmaFree
+                
                 move.w  (VDP_REG01_STATUS).l,d3
                 move.w  d3,(VDP_Control).l
                 move.w  #$8F02,(VDP_Control).l ; auto increment : 2
@@ -1479,7 +1483,7 @@ ApplyVIntVramDma:
                 movem.l d0/a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.l  d1,d2
-                addi.w  #$8F00,d1
+                addi.w  #-$7100,d1
                 move.w  d1,(a6)+        ; Apply auto-increment from D1
                 move.l  d2,d1
                 clr.w   d2

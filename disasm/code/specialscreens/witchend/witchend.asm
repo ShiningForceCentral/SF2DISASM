@@ -6,9 +6,7 @@
 
 EndGame:
                 
-                enableSram              
                 bset    #7,(SAVE_FLAGS).l
-                disableSram
                 jsr     (DisableDisplayAndInterrupts).w
                 movea.l (p_WitchEndTiles).l,a0
                 lea     (FF6802_LOADING_SPACE).l,a1
@@ -144,7 +142,7 @@ EndGame:
                 move.w  #$12C,d0
                 jsr     (Sleep).w       
                 sndCom  SOUND_COMMAND_FADE_OUT
-                move.w  #$2A30,d0       ; wait for 3 minutes
+                move.w  #END_GAME_TIMER,d0 ; wait for 3 minutes
                 jsr     (Sleep).w       
                 txt     $1D1            ; "And more...{W1}"
                 clsTxt

@@ -1,9 +1,9 @@
 
 ; ASM FILE data\stats\allies\stats\allystats25.asm :
 ; 0x1EE748..0x1EE771 : Ally stats 25
-AllyStats25:    forClass MMNK
-                hpGrowth 29, 79, LINEAR
-                mpGrowth 31, 65, LINEAR
+AllyStats25:    forClass  MMNK
+                hpGrowth  29, 79, LINEAR
+                mpGrowth  31, 65, LINEAR
                 atkGrowth 19, 36, LINEAR
                 defGrowth 19, 61, EARLYANDLATE
                 agiGrowth 21, 62, LINEAR

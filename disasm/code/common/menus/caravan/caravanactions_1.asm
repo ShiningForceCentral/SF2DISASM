@@ -257,7 +257,7 @@ loc_221C0:
                 bsr.w   DisplaySpecialCaravanDescription
                 bne.w   loc_222A8
                 move.w  -4(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 tst.w   d2
                 bne.s   loc_221E8
                 txt     $5C             ; "It's a tool.{W2}"
@@ -285,7 +285,7 @@ byte_22210:
 loc_22214:
                 
                 move.w  -4(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 tst.w   d2
                 beq.w   loc_222A8
                 cmpi.w  #ITEM_POWER_RING,d1
@@ -349,8 +349,8 @@ loc_222C0:
                 
                 clr.l   d1
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d1
-                mulu.w  #ITEMENTRY_SELLPRICE_MULTIPLIER,d1
-                lsr.l   #ITEMENTRY_SELLPRICE_BITSHIFTRIGHT,d1
+                mulu.w  #ITEMSELLPRICE_MULTIPLIER,d1
+                lsr.l   #ITEMSELLPRICE_BITSHIFTRIGHT,d1
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     $65             ; "It brings {#} gold coins{N}at a shop.{W2}"
 byte_222D4:
@@ -397,7 +397,7 @@ Caravan_StoreItem:
                 move.w  #MESSAGE_CARAVAN_STORE_WHOSE_ITEM,d1 ; "Store whose item?{W2}"
                 bsr.w   ChooseCaravanPortrait
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-2(a6)
                 move.w  d1,-6(a6)
@@ -463,7 +463,7 @@ Caravan_PassItem:
                 move.w  #MESSAGE_CARAVAN_PASS_THE_ITEM_TO_WHOM,d1 ; "Pass the {ITEM}{N}to whom?{W2}"
                 bsr.w   ChooseCaravanPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
-                move.w  -4(a6),((word_FFB13A-$1000000)).w
+                move.w  -4(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-8(a6)
                 move.w  d1,-$C(a6)
@@ -654,7 +654,7 @@ loc_22574:
                 moveq   #0,d1
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-2(a6)
                 move.w  d1,-6(a6)
@@ -662,7 +662,7 @@ loc_22574:
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_225FA      
                 move.w  -4(a6),d1
-                jsr     sub_229CA
+                jsr     FindUsableOutsideBattleItem
                 tst.w   d2
                 bne.s   loc_225EA
                 move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -723,7 +723,7 @@ loc_22618:
                 moveq   #0,d1
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-2(a6)
                 move.w  d1,-6(a6)
@@ -736,7 +736,7 @@ loc_22618:
                 move.w  #$1D,d1
                 bsr.w   ChooseCaravanPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
-                move.w  -4(a6),((word_FFB13A-$1000000)).w
+                move.w  -4(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-8(a6)
                 move.w  d1,-$C(a6)
@@ -835,7 +835,7 @@ loc_2277E:
                 moveq   #0,d1
                 bsr.w   sub_228D8
                 move.b  #3,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_227A6
@@ -868,7 +868,7 @@ loc_227B8:
                 moveq   #0,d1
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-2(a6)
                 move.w  d1,-6(a6)
@@ -934,7 +934,7 @@ DisplaySpecialCaravanDescription:
                 
                 movem.l d0-d1/a0,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                lea     SpecialCaravanDescriptions(pc), a0
+                lea     tbl_SpecialCaravanDescriptions(pc), a0
 loc_22870:
                 
                 cmpi.w  #$FFFF,(a0)

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\enemies\enemynames-capitalized.asm :
-; Capitalized enemy names -- included when patch Capitalized_Character_Names is enabled
-EnemyNames:     enemyName "Ooze"
+; Capitalized enemy names : Included when patch CAPITALIZED_CHARACTER_NAMES is enabled.
+tbl_EnemyNames: enemyName "Ooze"
                 enemyName "Huge Rat"
                 enemyName "Galam Soldier"
                 enemyName "Galam Knight"

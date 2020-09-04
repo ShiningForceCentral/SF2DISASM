@@ -404,7 +404,7 @@ loc_4483E:
                 clr.w   d1
                 jsr     j_SetMaxHP
                 jsr     j_SetCurrentHP
-                jsr     j_SetStatus
+                jsr     j_SetStatusEffects
                 jsr     j_GetCharacterWord34
                 ori.w   #8,d1
                 jsr     j_SetCharacterWord34
