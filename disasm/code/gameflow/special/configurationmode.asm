@@ -15,6 +15,8 @@ CheatModeConfiguration:
                 endif
                 
                 beq.w   return_7EC4
+@CheckInput_Up:
+                
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 beq.s   loc_7E58
                 enableSram

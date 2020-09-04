@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\allynames-capitalized.asm :
-; Capitalized ally names -- included when patch Capitalized_Character_Names is enabled
-AllyNames:      allyName "Bowie"
+; Capitalized ally names : Included when patch CAPITALIZED_CHARACTER_NAMES is enabled.
+tbl_AllyNames:  allyName "Bowie"
                 allyName "Sarah"
                 allyName "Chester"
                 allyName "Jaha"
@@ -31,10 +31,4 @@ AllyNames:      allyName "Bowie"
                 allyName "Chaz"
                 allyName "Lemon"
                 allyName "Claude"
-                
-                ; Additional entries to be defined with force members expansion patch
-                if (FORCE_MEMBERS_EXPANSION=1)
-                allyName ""
-                allyName ""
-                endif
                 
