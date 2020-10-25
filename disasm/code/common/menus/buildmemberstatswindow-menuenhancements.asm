@@ -444,7 +444,7 @@ character_index     = -2
                 
 @WriteJewels:
                 if (ALTERNATE_JEWEL_ICONS_DISPLAY=0)
-                tst.b   character_index(a6)
+                tst.w   character_index(a6)
                 bne.w   @DmaIcons       ; skip if anyone other than Bowie
                 chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 beq.w   @DmaIcons       ; skip if we haven't obtained Jewel of Light

@@ -9,12 +9,6 @@ WriteMemberListText:
 current_character_index = -16
 window_tiles_address = -6
 selected_member = -2
-
-    if (EIGHT_CHARACTERS_MEMBER_NAMES=0)
-@OFFSET_HEADER: equ 8
-    else
-@OFFSET_HEADER: equ 10
-    endif
                 
                 link    a6,#-16
                 move.w  d0,selected_member(a6)
@@ -27,7 +21,7 @@ selected_member = -2
                 moveq   #4,d7   ; 'NAME' length
                 lea     aName(pc), a0
                 bsr.w   WriteTilesFromAsciiWithRegularFont
-                adda.w  #@OFFSET_HEADER,a1
+                adda.w  #10,a1  ; header string offset
                 moveq   #WINDOW_MEMBERLIST_HEADER_LENGTH,d7
                 
                 ; Determine header string
@@ -237,14 +231,9 @@ selected_member = -2
     ; End of function WriteMemberListText
 
 aName:          dc.b 'NAME'
-aClassLvExp:    dc.b 'CLASS'
-                if (EIGHT_CHARACTERS_MEMBER_NAMES=0)
-                dc.b '      LV EXP'
-                else
-                dc.b '     LV EXP',0
-                endif
-aHpMaxMpMax:    dc.b ' HP/MAX   MP/MAX',0
-aAttDefAgiMov:  dc.b ' ATT DEF AGI MOV',0
-aAttackDefense: dc.b 'ATTACK   DEFENSE',0
+aClassLvExp:    dc.b 'CLASS     LV EXP'
+aHpMaxMpMax:    dc.b ' HP/MAX   MP/MAX'
+aAttDefAgiMov:  dc.b ' ATT DEF AGI MOV'
+aAttackDefense: dc.b 'ATTACK   DEFENSE'
 
                 wordAlign
