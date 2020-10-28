@@ -1,1376 +1,1379 @@
 
 ; ASM FILE data\stats\items\itemdefs.asm :
 ; 0x16EA6..0x176A6 : Item definitions
-ItemDefs:       
-; Syntax        equipFlags   equip_flags_bitfield
-;               range        min_range_value, max_range_value (0..3)
-;               price        price_value (0..65535)
-;               itemType     item_type_bitfield
-;               useSpell     spell_index
-;               equipEffects equip_effect_index, value (value range depends on effect)
+tbl_ItemDefs:   
+; Syntax        equipFlags [EQUIPFLAG_]bitfield
+;               range      min, max (0-3)
+;               price      0-65535
+;               itemType   [ITEMTYPE_]bitfield
+;               useSpell   [SPELL_]index[|level]
+;               equipEffects &
+;                   [EQUIPEFFECT_]index, parameter, & (value range depends on effect)
+;                   [EQUIPEFFECT_]index, parameter, &
+;                   [EQUIPEFFECT_]index, parameter
                 
-                equipFlags NONE         ; Medical Herb
-                range 0, 1
-                price 10
-                itemType CONSUMABLE
-                useSpell HEALIN
+                equipFlags NONE         ; 0: Medical Herb
+                range      0, 1
+                price      10
+                itemType   CONSUMABLE
+                useSpell   HEALIN
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Healing Seed
-                range 0, 1
-                price 200
-                itemType CONSUMABLE
-                useSpell HEALIN|LV2
+                equipFlags NONE         ; 1: Healing Seed
+                range      0, 1
+                price      200
+                itemType   CONSUMABLE
+                useSpell   HEALIN|LV2
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Healing Drop
-                range 0, 1
-                price 300
-                itemType CONSUMABLE
-                useSpell HEALIN|LV3
+                equipFlags NONE         ; 2: Healing Drop
+                range      0, 1
+                price      300
+                itemType   CONSUMABLE
+                useSpell   HEALIN|LV3
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Antidote
-                range 0, 1
-                price 20
-                itemType CONSUMABLE
-                useSpell DETOX
+                equipFlags NONE         ; 3: Antidote
+                range      0, 1
+                price      20
+                itemType   CONSUMABLE
+                useSpell   DETOX
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Angel Wing
-                range 0, 0
-                price 40
-                itemType CONSUMABLE
-                useSpell EGRESS
+                equipFlags NONE         ; 4: Angel Wing
+                range      0, 0
+                price      40
+                itemType   CONSUMABLE
+                useSpell   EGRESS
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Fairy Powder
-                range 0, 1
-                price 100
-                itemType CONSUMABLE
-                useSpell POWDER
+                equipFlags NONE         ; 5: Fairy Powder
+                range      0, 1
+                price      100
+                itemType   CONSUMABLE
+                useSpell   POWDER
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Healing Water
-                range 0, 1
-                price 400
-                itemType CONSUMABLE
-                useSpell HEAL|LV4
+                equipFlags NONE         ; 6: Healing Water
+                range      0, 1
+                price      400
+                itemType   CONSUMABLE
+                useSpell   HEAL|LV4
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Fairy Tear
-                range 0, 1
-                price 300
-                itemType CONSUMABLE
-                useSpell G_TEAR|LV2
+                equipFlags NONE         ; 7: Fairy Tear
+                range      0, 1
+                price      300
+                itemType   CONSUMABLE
+                useSpell   G_TEAR|LV2
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Healing Rain
-                range 0, 0
-                price 10000
-                itemType RARE|CONSUMABLE
-                useSpell AURA|LV4
+                equipFlags NONE         ; 8: Healing Rain
+                range      0, 0
+                price      10000
+                itemType   RARE|CONSUMABLE
+                useSpell   AURA|LV4
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Power Water
-                range 0, 0
-                price 500
-                itemType CONSUMABLE
-                useSpell POWER
+                equipFlags NONE         ; 9: Power Water
+                range      0, 0
+                price      500
+                itemType   CONSUMABLE
+                useSpell   POWER
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Protect Milk
-                range 0, 0
-                price 500
-                itemType CONSUMABLE
-                useSpell GUARD
+                equipFlags NONE         ; 10: Protect Milk
+                range      0, 0
+                price      500
+                itemType   CONSUMABLE
+                useSpell   GUARD
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Quick Chicken
-                range 0, 0
-                price 500
-                itemType CONSUMABLE
-                useSpell SPEED
+                equipFlags NONE         ; 11: Quick Chicken
+                range      0, 0
+                price      500
+                itemType   CONSUMABLE
+                useSpell   SPEED
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Running Pimento
-                range 0, 0
-                price 1500
-                itemType CONSUMABLE
-                useSpell IDATEN
+                equipFlags NONE         ; 12: Running Pimento
+                range      0, 0
+                price      1500
+                itemType   CONSUMABLE
+                useSpell   IDATEN
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Cheerful Bread
-                range 0, 0
-                price 500
-                itemType CONSUMABLE
-                useSpell HEALTH
+                equipFlags NONE         ; 13: Cheerful Bread
+                range      0, 0
+                price      500
+                itemType   CONSUMABLE
+                useSpell   HEALTH
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Bright Honey
-                range 0, 0
-                price 500
-                itemType CONSUMABLE
-                useSpell HANNY
+                equipFlags NONE         ; 14: Bright Honey
+                range      0, 0
+                price      500
+                itemType   CONSUMABLE
+                useSpell   HANNY
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Brave Apple
-                range 0, 0
-                price 500
-                itemType CONSUMABLE
-                useSpell BRAVE
+                equipFlags NONE         ; 15: Brave Apple
+                range      0, 0
+                price      500
+                itemType   CONSUMABLE
+                useSpell   BRAVE
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Shining Ball
-                range 0, 1
-                price 1000
-                itemType RARE|CONSUMABLE
-                useSpell FBALL
+                equipFlags NONE         ; 16: Shining Ball
+                range      0, 1
+                price      1000
+                itemType   RARE|CONSUMABLE
+                useSpell   FBALL
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Blizzard
-                range 0, 1
-                price 1200
-                itemType RARE|CONSUMABLE
-                useSpell BREZAD
+                equipFlags NONE         ; 17: Blizzard
+                range      0, 1
+                price      1200
+                itemType   RARE|CONSUMABLE
+                useSpell   BREZAD
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Holy Thunder
-                range 0, 1
-                price 1500
-                itemType RARE|CONSUMABLE
-                useSpell THUNDR
+                equipFlags NONE         ; 18: Holy Thunder
+                range      0, 1
+                price      1500
+                itemType   RARE|CONSUMABLE
+                useSpell   THUNDR
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags ALL          ; Power Ring
-                range 0, 0
-                price 3000
-                itemType RING|RARE|BREAKABLE
-                useSpell ATTACK
+                equipFlags ALL          ; 19: Power Ring
+                range      0, 0
+                price      3000
+                itemType   RING|RARE|BREAKABLE
+                useSpell   ATTACK
                 equipEffects &
                     INCREASE_ATT, 5, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags ALL          ; Protect Ring
-                range 0, 0
-                price 3000
-                itemType RING|RARE|BREAKABLE
-                useSpell BOOST
+                equipFlags ALL          ; 20: Protect Ring
+                range      0, 0
+                price      3000
+                itemType   RING|RARE|BREAKABLE
+                useSpell   BOOST
                 equipEffects &
                     INCREASE_DEF, 5, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags ALL          ; Quick Ring
-                range 0, 0
-                price 3000
-                itemType RING|RARE|BREAKABLE
-                useSpell NOTHING
+                equipFlags ALL          ; 21: Quick Ring
+                range      0, 0
+                price      3000
+                itemType   RING|RARE|BREAKABLE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_AGI, 5, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags ALL          ; Running Ring
-                range 0, 0
-                price 3000
-                itemType RING|RARE
-                useSpell NOTHING
+                equipFlags ALL          ; 22: Running Ring
+                range      0, 0
+                price      3000
+                itemType   RING|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_MOV, 2, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; White Ring
+                equipFlags &            ; 23: White Ring
                     HERO|VICR
-                range 0, 0
-                price 5000
-                itemType RING|RARE|BREAKABLE
-                useSpell AURA|LV2
+                range      0, 0
+                price      5000
+                itemType   RING|RARE|BREAKABLE
+                useSpell   AURA|LV2
                 equipEffects &
                     INCREASE_DEF, 10, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Black Ring
+                equipFlags &            ; 24: Black Ring
                     WIZ|SORC
-                range 0, 0
-                price 5000
-                itemType RING|RARE|CURSED|BREAKABLE
-                useSpell BLAZE|LV2
+                range      0, 0
+                price      5000
+                itemType   RING|RARE|CURSED|BREAKABLE
+                useSpell   BLAZE|LV2
                 equipEffects &
                     INCREASE_ATT, 10, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Evil Ring
+                equipFlags &            ; 25: Evil Ring
                     WIZ|SORC|VICR
-                range 0, 0
-                price 5000
-                itemType RING|RARE|CURSED|BREAKABLE
-                useSpell BOLT|LV2
+                range      0, 0
+                price      5000
+                itemType   RING|RARE|CURSED|BREAKABLE
+                useSpell   BOLT|LV2
                 equipEffects &
                     INCREASE_ATT, 15, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Leather Glove
+                equipFlags &            ; 26: Leather Glove
                     MMNK
-                range 1, 1
-                price 1300
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      1300
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 26, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Power Glove
+                equipFlags &            ; 27: Power Glove
                     MMNK
-                range 1, 1
-                price 1800
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      1800
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 33, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Brass Knuckles
+                equipFlags &            ; 28: Brass Knuckles
                     MMNK
-                range 1, 1
-                price 2900
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      2900
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 39, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Iron Knuckles
+                equipFlags &            ; 29: Iron Knuckles
                     MMNK
-                range 1, 1
-                price 4800
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      4800
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 43, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Misty Knuckles
+                equipFlags &            ; 30: Misty Knuckles
                     MMNK
-                range 1, 1
-                price 5500
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell SPOIT
+                range      1, 1
+                price      5500
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   SPOIT
                 equipEffects &
                     INCREASE_ATT, 48, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Giant Knuckles
+                equipFlags &            ; 31: Giant Knuckles
                     MMNK
-                range 1, 1
-                price 7500
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell MUDDLE
+                range      1, 1
+                price      7500
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   MUDDLE
                 equipEffects &
                     INCREASE_ATT, 55, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Evil Knuckles
+                equipFlags &            ; 32: Evil Knuckles
                     MMNK
-                range 1, 1
-                price 9500
-                itemType WEAPON|RARE|CURSED
-                useSpell NOTHING
+                range      1, 1
+                price      9500
+                itemType   WEAPON|RARE|CURSED
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 63, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Short Axe
+                equipFlags &            ; 33: Short Axe
                     WARR|GLDT|BRN|RDBN
-                range 1, 1
-                price 120
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      120
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 5, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Hand Axe
+                equipFlags &            ; 34: Hand Axe
                     WARR|GLDT|BRN|RDBN
-                range 1, 1
-                price 340
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      340
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 9, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Middle Axe
+                equipFlags &            ; 35: Middle Axe
                     WARR|GLDT|BRN|RDBN
-                range 1, 1
-                price 610
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      610
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 13, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Power Axe
+                equipFlags &            ; 36: Power Axe
                     WARR|GLDT|BRN|RDBN
-                range 1, 1
-                price 1100
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      1100
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 17, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Battle Axe
+                equipFlags &            ; 37: Battle Axe
                     WARR|GLDT|BRN|RDBN
-                range 1, 1
-                price 1370
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      1370
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 21, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Large Axe
+                equipFlags &            ; 38: Large Axe
                     GLDT|BRN|RDBN
-                range 1, 1
-                price 2250
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      2250
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 25, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Great Axe
+                equipFlags &            ; 39: Great Axe
                     GLDT|BRN|RDBN
-                range 1, 1
-                price 4600
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      4600
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 28, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Heat Axe
+                equipFlags &            ; 40: Heat Axe
                     GLDT|BRN|RDBN
-                range 1, 1
-                price 7200
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell BLAZE|LV2
+                range      1, 1
+                price      7200
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   BLAZE|LV2
                 equipEffects &
                     INCREASE_ATT, 32, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Atlas Axe
+                equipFlags &            ; 41: Atlas Axe
                     GLDT|BRN|RDBN
-                range 1, 1
-                price 9600
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell BLAZE|LV3
+                range      1, 1
+                price      9600
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   BLAZE|LV3
                 equipEffects &
                     INCREASE_ATT, 35, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Ground Axe
+                equipFlags &            ; 42: Ground Axe
                     GLDT|BRN|RDBN
-                range 1, 1
-                price 10000
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      10000
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 39, &
                     INCREASE_MOV, 1, &
                     NONE, 0
                     
-                equipFlags &            ; Rune Axe
+                equipFlags &            ; 43: Rune Axe
                     GLDT|BRN|RDBN
-                range 1, 1
-                price 10000
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell DETOX|LV2
+                range      1, 1
+                price      10000
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   DETOX|LV2
                 equipEffects &
                     INCREASE_ATT, 42, &
                     INCREASE_CRITICAL, 1, &
                     NONE, 0
                     
-                equipFlags &            ; Evil Axe
+                equipFlags &            ; 44: Evil Axe
                     GLDT|BRN|RDBN
-                range 1, 1
-                price 15000
-                itemType WEAPON|RARE|CURSED
-                useSpell NOTHING
+                range      1, 1
+                price      15000
+                itemType   WEAPON|RARE|CURSED
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 50, &
                     DECREASE_DEF, 5, &
                     NONE, 0
                     
-                equipFlags &            ; Wooden Arrow
+                equipFlags &            ; 45: Wooden Arrow
                     ACHR|RNGR|SNIP|BRGN|BWNT
-                range 2, 2
-                price 250
-                itemType WEAPON
-                useSpell NOTHING
+                range      2, 2
+                price      250
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 7, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Iron Arrow
+                equipFlags &            ; 46: Iron Arrow
                     ACHR|RNGR|SNIP|BRGN|BWNT
-                range 2, 2
-                price 600
-                itemType WEAPON
-                useSpell NOTHING
+                range      2, 2
+                price      600
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 12, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Steel Arrow
+                equipFlags &            ; 47: Steel Arrow
                     ACHR|RNGR|SNIP|BRGN|BWNT
-                range 2, 2
-                price 1270
-                itemType WEAPON
-                useSpell NOTHING
+                range      2, 2
+                price      1270
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 17, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Robin Arrow
+                equipFlags &            ; 48: Robin Arrow
                     SNIP|BRGN|BWNT
-                range 2, 3
-                price 1480
-                itemType WEAPON
-                useSpell NOTHING
+                range      2, 3
+                price      1480
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 21, &
                     INCREASE_CRITICAL, 1, &
                     NONE, 0
                     
-                equipFlags &            ; Assault Shell
+                equipFlags &            ; 49: Assault Shell
                     SNIP|BRGN|BWNT
-                range 2, 3
-                price 2500
-                itemType WEAPON
-                useSpell NOTHING
+                range      2, 3
+                price      2500
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 25, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Great Shot
+                equipFlags &            ; 50: Great Shot
                     SNIP|BRGN|BWNT
-                range 2, 3
-                price 5000
-                itemType WEAPON
-                useSpell NOTHING
+                range      2, 3
+                price      5000
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 29, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Nazca Cannon
+                equipFlags &            ; 51: Nazca Cannon
                     SNIP|BRGN|BWNT
-                range 2, 3
-                price 3000
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      2, 3
+                price      3000
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 33, &
                     INCREASE_CRITICAL, 1, &
                     NONE, 0
                     
-                equipFlags &            ; Buster Shot
+                equipFlags &            ; 52: Buster Shot
                     SNIP|BRGN|BWNT
-                range 2, 3
-                price 6800
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      2, 3
+                price      6800
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 37, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Hyper Cannon
+                equipFlags &            ; 53: Hyper Cannon
                     SNIP|BRGN|BWNT
-                range 2, 3
-                price 8700
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      2, 3
+                price      8700
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 40, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Grand Cannon
+                equipFlags &            ; 54: Grand Cannon
                     SNIP|BRGN|BWNT
-                range 2, 3
-                price 9800
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell DISPEL
+                range      2, 3
+                price      9800
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   DISPEL
                 equipEffects &
                     INCREASE_ATT, 43, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Evil Shot
+                equipFlags &            ; 55: Evil Shot
                     SNIP|BRGN|BWNT
-                range 2, 3
-                price 13000
-                itemType WEAPON|RARE|CURSED
-                useSpell NOTHING
+                range      2, 3
+                price      13000
+                itemType   WEAPON|RARE|CURSED
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 51, &
                     DECREASE_DEF, 5, &
                     NONE, 0
                     
-                equipFlags &            ; Wooden Stick
+                equipFlags &            ; 56: Wooden Stick
                     KNTE|PLDN|PGNT
-                range 1, 1
-                price 70
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      70
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 3, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Short Sword
+                equipFlags &            ; 57: Short Sword
                     SDMN|BDMN|HERO|BRN|BDBT|NINJ|RDBN
-                range 1, 1
-                price 140
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      140
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 5, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Middle Sword
+                equipFlags &            ; 58: Middle Sword
                     SDMN|BDMN|HERO|BRN|BDBT|NINJ|RDBN
-                range 1, 1
-                price 340
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      340
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 8, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Long Sword
+                equipFlags &            ; 59: Long Sword
                     SDMN|BDMN|HERO|BRN|BDBT|NINJ|RDBN
-                range 1, 1
-                price 620
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      620
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 12, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Steel Sword
+                equipFlags &            ; 60: Steel Sword
                     SDMN|BDMN|HERO|BRN|BDBT|NINJ|RDBN
-                range 1, 1
-                price 1120
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      1120
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 16, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Achilles Sword
+                equipFlags &            ; 61: Achilles Sword
                     SDMN|HERO
-                range 1, 1
-                price 1350
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      1350
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 19, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Broad Sword
+                equipFlags &            ; 62: Broad Sword
                     HERO|BRN|BDBT|NINJ|RDBN
-                range 1, 1
-                price 1600
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      1600
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 22, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Buster Sword
+                equipFlags &            ; 63: Buster Sword
                     HERO|BRN|BDBT|NINJ|RDBN
-                range 1, 1
-                price 2600
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      2600
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 26, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Great Sword
+                equipFlags &            ; 64: Great Sword
                     HERO|BRN|BDBT|NINJ|RDBN
-                range 1, 1
-                price 5100
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      5100
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 29, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Critical Sword
+                equipFlags &            ; 65: Critical Sword
                     HERO|BRN|BDBT|NINJ|RDBN
-                range 1, 1
-                price 7200
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      7200
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 32, &
                     INCREASE_CRITICAL, 1, &
                     NONE, 0
                     
-                equipFlags &            ; Battle Sword
+                equipFlags &            ; 66: Battle Sword
                     HERO|BRN|BDBT|RDBN
-                range 1, 1
-                price 9200
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      9200
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 35, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Force Sword
+                equipFlags &            ; 67: Force Sword
                     HERO
-                range 1, 1
-                price 10000
-                itemType WEAPON|RARE|UNSELLABLE
-                useSpell NOTHING
+                range      1, 1
+                price      10000
+                itemType   WEAPON|RARE|UNSELLABLE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 46, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Counter Sword
+                equipFlags &            ; 68: Counter Sword
                     HERO|BRN|BDBT|RDBN
-                range 1, 1
-                price 13000
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      13000
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 39, &
                     INCREASE_COUNTER, 1, &
                     NONE, 0
                     
-                equipFlags &            ; Levanter
+                equipFlags &            ; 69: Levanter
                     HERO
-                range 1, 1
-                price 14000
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell BLAZE|LV3
+                range      1, 1
+                price      14000
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   BLAZE|LV3
                 equipEffects &
                     INCREASE_ATT, 42, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Dark Sword
+                equipFlags &            ; 70: Dark Sword
                     HERO|BRN|BDBT|NINJ|RDBN
-                range 1, 1
-                price 17000
-                itemType WEAPON|RARE|CURSED|BREAKABLE
-                useSpell DESOUL
+                range      1, 1
+                price      17000
+                itemType   WEAPON|RARE|CURSED|BREAKABLE
+                useSpell   DESOUL
                 equipEffects &
                     INCREASE_ATT, 50, &
                     DECREASE_DEF, 5, &
                     NONE, 0
                     
-                equipFlags &            ; Wooden Sword
+                equipFlags &            ; 71: Wooden Sword
                     SDMN|BDMN|HERO|BRN|BDBT|NINJ|RDBN
-                range 1, 1
-                price 60
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      60
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 3, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Short Spear
+                equipFlags &            ; 72: Short Spear
                     KNTE|PLDN|PGNT
-                range 1, 2
-                price 120
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 2
+                price      120
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 6, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Bronze Lance
+                equipFlags &            ; 73: Bronze Lance
                     KNTE|PLDN|PGNT
-                range 1, 1
-                price 260
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      260
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 9, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Spear
+                equipFlags &            ; 74: Spear
                     KNTE|PLDN|PGNT
-                range 1, 2
-                price 460
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 2
+                price      460
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 12, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Steel Lance
+                equipFlags &            ; 75: Steel Lance
                     KNTE|PLDN|PGNT
-                range 1, 1
-                price 810
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      810
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 16, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Power Spear
+                equipFlags &            ; 76: Power Spear
                     KNTE|PLDN|PGNT
-                range 1, 2
-                price 1270
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 2
+                price      1270
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 20, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Heavy Lance
+                equipFlags &            ; 77: Heavy Lance
                     PLDN|PGNT
-                range 1, 1
-                price 1600
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      1600
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 23, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Javelin
+                equipFlags &            ; 78: Javelin
                     PLDN|PGNT
-                range 1, 2
-                price 3400
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 2
+                price      3400
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 26, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Chrome Lance
+                equipFlags &            ; 79: Chrome Lance
                     PLDN|PGNT
-                range 1, 1
-                price 6900
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      6900
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 31, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Valkyrie
+                equipFlags &            ; 80: Valkyrie
                     PLDN|PGNT
-                range 1, 2
-                price 7700
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell ATTACK
+                range      1, 2
+                price      7700
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   ATTACK
                 equipEffects &
                     INCREASE_ATT, 33, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Holy Lance
+                equipFlags &            ; 81: Holy Lance
                     PLDN|PGNT
-                range 1, 1
-                price 9300
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell HEALIN
+                range      1, 1
+                price      9300
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   HEALIN
                 equipEffects &
                     INCREASE_ATT, 39, &
                     INCREASE_DEF, 5, &
                     NONE, 0
                     
-                equipFlags &            ; Mist Javelin
+                equipFlags &            ; 82: Mist Javelin
                     PLDN|PGNT
-                range 1, 2
-                price 9900
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 2
+                price      9900
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 42, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Halberd
+                equipFlags &            ; 83: Halberd
                     PLDN|PGNT
-                range 1, 1
-                price 7300
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell BOLT
+                range      1, 1
+                price      7300
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   BOLT
                 equipEffects &
                     INCREASE_ATT, 37, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Evil Lance
+                equipFlags &            ; 84: Evil Lance
                     PLDN|PGNT
-                range 1, 1
-                price 11000
-                itemType WEAPON|RARE|CURSED
-                useSpell NOTHING
+                range      1, 1
+                price      11000
+                itemType   WEAPON|RARE|CURSED
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 48, &
                     DECREASE_MOV, 2, &
                     NONE, 0
                     
-                equipFlags &            ; Wooden Rod
+                equipFlags &            ; 85: Wooden Rod
                     MAGE|PRST|WIZ|SORC|VICR
-                range 1, 1
-                price 60
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      60
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 3, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Short Rod
+                equipFlags &            ; 86: Short Rod
                     MAGE|PRST|WIZ|SORC|VICR
-                range 1, 1
-                price 130
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      130
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 5, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Bronze Rod
+                equipFlags &            ; 87: Bronze Rod
                     MAGE|PRST|WIZ|SORC|VICR
-                range 1, 1
-                price 360
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      360
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 8, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Iron Rod
+                equipFlags &            ; 88: Iron Rod
                     MAGE|PRST|WIZ|SORC|VICR
-                range 1, 1
-                price 560
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      560
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 12, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Power Stick
+                equipFlags &            ; 89: Power Stick
                     MAGE|PRST|WIZ|SORC|VICR
-                range 1, 1
-                price 1050
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      1050
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 15, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Flail
+                equipFlags &            ; 90: Flail
                     WIZ|SORC|VICR
-                range 1, 1
-                price 1490
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      1490
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 19, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Guardian Staff
+                equipFlags &            ; 91: Guardian Staff
                     WIZ|SORC|VICR
-                range 1, 1
-                price 2380
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      2380
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 22, &
                     INCREASE_DEF, 5, &
                     NONE, 0
                     
-                equipFlags &            ; Indra Staff
+                equipFlags &            ; 92: Indra Staff
                     WIZ|SORC|VICR
-                range 1, 1
-                price 3200
-                itemType WEAPON|BREAKABLE
-                useSpell SPOIT
+                range      1, 1
+                price      3200
+                itemType   WEAPON|BREAKABLE
+                useSpell   SPOIT
                 equipEffects &
                     INCREASE_ATT, 25, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Mage Staff
+                equipFlags &            ; 93: Mage Staff
                     WIZ|SORC
-                range 1, 1
-                price 6300
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell BLAZE|LV2
+                range      1, 1
+                price      6300
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   BLAZE|LV2
                 equipEffects &
                     INCREASE_ATT, 27, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Wish Staff
+                equipFlags &            ; 94: Wish Staff
                     VICR
-                range 1, 1
-                price 6100
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell ATTACK
+                range      1, 1
+                price      6100
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   ATTACK
                 equipEffects &
                     INCREASE_ATT, 26, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Great Rod
+                equipFlags &            ; 95: Great Rod
                     WIZ|SORC|VICR
-                range 1, 1
-                price 7900
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      7900
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 28, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Supply Staff
+                equipFlags &            ; 96: Supply Staff
                     WIZ|SORC
-                range 1, 1
-                price 8500
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell SPOIT
+                range      1, 1
+                price      8500
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   SPOIT
                 equipEffects &
                     INCREASE_ATT, 32, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Holy Staff
+                equipFlags &            ; 97: Holy Staff
                     VICR
-                range 1, 1
-                price 9000
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      9000
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 29, &
                     UNDEFINED1, 3, &
                     NONE, 0
                     
-                equipFlags &            ; Freeze Staff
+                equipFlags &            ; 98: Freeze Staff
                     WIZ|SORC
-                range 1, 1
-                price 9500
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell FREEZE|LV3
+                range      1, 1
+                price      9500
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   FREEZE|LV3
                 equipEffects &
                     INCREASE_ATT, 37, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Goddess Staff
+                equipFlags &            ; 99: Goddess Staff
                     VICR
-                range 1, 1
-                price 9700
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell AURA|LV2
+                range      1, 1
+                price      9700
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   AURA|LV2
                 equipEffects &
                     INCREASE_ATT, 31, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Mystery Staff
+                equipFlags &            ; 100: Mystery Staff
                     WIZ|SORC|VICR
-                range 1, 1
-                price 10000
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      10000
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 39, &
                     UNDEFINED2, 2, &
                     NONE, 0
                     
-                equipFlags &            ; Demon Rod
+                equipFlags &            ; 101: Demon Rod
                     WIZ|SORC|VICR
-                range 1, 1
-                price 12500
-                itemType WEAPON|RARE|CURSED|BREAKABLE
-                useSpell SPOIT
+                range      1, 1
+                price      12500
+                itemType   WEAPON|RARE|CURSED|BREAKABLE
+                useSpell   SPOIT
                 equipEffects &
                     INCREASE_ATT, 50, &
                     DECREASE_AGI, 10, &
                     NONE, 0
                     
-                equipFlags NONE         ; Iron Ball
-                range 1, 1
-                price 3800
-                itemType WEAPON|RARE|CURSED|BREAKABLE
-                useSpell BLAZE|LV3
+                equipFlags NONE         ; 102: Iron Ball
+                range      1, 1
+                price      3800
+                itemType   WEAPON|RARE|CURSED|BREAKABLE
+                useSpell   BLAZE|LV3
                 equipEffects &
                     INCREASE_ATT, 44, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Short Knife
+                equipFlags &            ; 103: Short Knife
                     THIF
-                range 1, 1
-                price 70
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      70
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 5, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Dagger
+                equipFlags &            ; 104: Dagger
                     THIF
-                range 1, 1
-                price 320
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      320
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 8, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Knife
+                equipFlags &            ; 105: Knife
                     THIF
-                range 1, 1
-                price 500
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      500
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 12, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Thieve's Dagger
+                equipFlags &            ; 106: Thieve's Dagger
                     THIF
-                range 1, 1
-                price 940
-                itemType WEAPON
-                useSpell NOTHING
+                range      1, 1
+                price      940
+                itemType   WEAPON
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 17, &
                     INCREASE_AGI, 5, &
                     NONE, 0
                     
-                equipFlags &            ; Katana
+                equipFlags &            ; 107: Katana
                     NINJ
-                range 1, 1
-                price 9600
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      9600
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 34, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Ninja Katana
+                equipFlags &            ; 108: Ninja Katana
                     NINJ
-                range 1, 1
-                price 11500
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      11500
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 39, &
                     INCREASE_DOUBLE, 1, &
                     NONE, 0
                     
-                equipFlags &            ; Gisarme
+                equipFlags &            ; 109: Gisarme
                     NINJ
-                range 1, 1
-                price 15000
-                itemType WEAPON|RARE
-                useSpell NOTHING
+                range      1, 1
+                price      15000
+                itemType   WEAPON|RARE
+                useSpell   NOTHING
                 equipEffects &
                     INCREASE_ATT, 42, &
                     SET_CRITICAL, 6, &
                     NONE, 0
                     
-                equipFlags NONE         ; Taros Sword
-                range 1, 2
-                price 10000
-                itemType WEAPON|RARE|BREAKABLE
-                useSpell BOLT|LV2
+                equipFlags NONE         ; 110: Taros Sword
+                range      1, 2
+                price      10000
+                itemType   WEAPON|RARE|BREAKABLE
+                useSpell   BOLT|LV2
                 equipEffects &
                     INCREASE_ATT, 32, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Right of Hope
-                range 0, 0
-                price 10000
-                itemType RARE|CONSUMABLE
-                useSpell SHINE
+                equipFlags NONE         ; 111: Right of Hope
+                range      0, 0
+                price      10000
+                itemType   RARE|CONSUMABLE
+                useSpell   SHINE
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Wooden Panel
-                range 0, 0
-                price 0
-                itemType RARE|UNSELLABLE
-                useSpell NOTHING
+                equipFlags NONE         ; 112: Wooden Panel
+                range      0, 0
+                price      0
+                itemType   RARE|UNSELLABLE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Sky Orb
-                range 0, 0
-                price 0
-                itemType RARE|UNSELLABLE
-                useSpell NOTHING
+                equipFlags NONE         ; 113: Sky Orb
+                range      0, 0
+                price      0
+                itemType   RARE|UNSELLABLE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Cannon
-                range 0, 0
-                price 0
-                itemType RARE|UNSELLABLE
-                useSpell NOTHING
+                equipFlags NONE         ; 114: Cannon
+                range      0, 0
+                price      0
+                itemType   RARE|UNSELLABLE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Dry Stone
-                range 0, 0
-                price 0
-                itemType RARE|UNSELLABLE
-                useSpell NOTHING
+                equipFlags NONE         ; 115: Dry Stone
+                range      0, 0
+                price      0
+                itemType   RARE|UNSELLABLE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Dynamite
-                range 0, 0
-                price 0
-                itemType RARE|UNSELLABLE
-                useSpell NOTHING
+                equipFlags NONE         ; 116: Dynamite
+                range      0, 0
+                price      0
+                itemType   RARE|UNSELLABLE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Arm of Golem
-                range 0, 0
-                price 0
-                itemType RARE|UNSELLABLE
-                useSpell NOTHING
+                equipFlags NONE         ; 117: Arm of Golem
+                range      0, 0
+                price      0
+                itemType   RARE|UNSELLABLE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Pegasus Wing
-                range 0, 0
-                price 3000
-                itemType RARE
-                useSpell NOTHING
+                equipFlags NONE         ; 118: Pegasus Wing
+                range      0, 0
+                price      3000
+                itemType   RARE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Warrior Pride
-                range 0, 0
-                price 3000
-                itemType RARE
-                useSpell NOTHING
+                equipFlags NONE         ; 119: Warrior Pride
+                range      0, 0
+                price      3000
+                itemType   RARE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Silver Tank
-                range 0, 0
-                price 3000
-                itemType RARE
-                useSpell NOTHING
+                equipFlags NONE         ; 120: Silver Tank
+                range      0, 0
+                price      3000
+                itemType   RARE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Secret Book
-                range 0, 0
-                price 3000
-                itemType RARE
-                useSpell NOTHING
+                equipFlags NONE         ; 121: Secret Book
+                range      0, 0
+                price      3000
+                itemType   RARE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Vigor Ball
-                range 0, 0
-                price 3000
-                itemType RARE
-                useSpell NOTHING
+                equipFlags NONE         ; 122: Vigor Ball
+                range      0, 0
+                price      3000
+                itemType   RARE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Mithril
-                range 0, 0
-                price 2000
-                itemType RARE
-                useSpell NOTHING
+                equipFlags NONE         ; 123: Mithril
+                range      0, 0
+                price      2000
+                itemType   RARE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags &            ; Life Ring
+                equipFlags &            ; 124: Life Ring
                     HERO|PLDN|PGNT|GLDT|BRN|WIZ|SORC|VICR|MMNK|SNIP|BRGN|BDBT|WFBR|BWNT|PHNX|NINJ|MNST|RBT|GLM|RDBN
-                range 0, 0
-                price 5000
-                itemType RING|RARE
-                useSpell NOTHING
+                range      0, 0
+                price      5000
+                itemType   RING|RARE
+                useSpell   NOTHING
                 equipEffects &
                     UNDEFINED1, 5, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Cotton Balloon
-                range 0, 0
-                price 0
-                itemType RARE|UNSELLABLE
-                useSpell NOTHING
+                equipFlags NONE         ; 125: Cotton Balloon
+                range      0, 0
+                price      0
+                itemType   RARE|UNSELLABLE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags ALL          ; Chirrup Sandals
-                range 0, 0
-                price 5
-                itemType RING|RARE
-                useSpell NOTHING
+                equipFlags ALL          ; 126: Chirrup Sandals
+                range      0, 0
+                price      5
+                itemType   RING|RARE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &
                     NONE, 0
                     
-                equipFlags NONE         ; Empty
-                range 0, 0
-                price 0
-                itemType NONE
-                useSpell NOTHING
+                equipFlags NONE         ; 127: Empty
+                range      0, 0
+                price      0
+                itemType   NONE
+                useSpell   NOTHING
                 equipEffects &
                     NONE, 0, &
                     NONE, 0, &

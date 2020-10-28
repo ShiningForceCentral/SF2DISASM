@@ -1,9 +1,9 @@
 
 ; ASM FILE data\stats\items\itembreakmessages.asm :
 ; 0xBCF0..0xBD24 : Item break messages
-ItemBreakMessages:
+tbl_ItemBreakMessages:
                 
-; Syntax        itemBreakMessage item_index, message_offset
+; Syntax        itemBreakMessage [ITEM_]index, message_offset
 ;
 ; Note: offset is added to base message index, refer to GetItemBreakMessage for implementation details
                 
@@ -33,4 +33,4 @@ ItemBreakMessages:
                 itemBreakMessage GODDESS_STAFF, 3
                 itemBreakMessage DEMON_ROD, 3
                 
-                    tableEnd
+                tableEnd

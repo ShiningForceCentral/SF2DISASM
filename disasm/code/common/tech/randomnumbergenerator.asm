@@ -77,9 +77,7 @@ GetRandomValueUnsigned:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = value range
-; 
-; Out: D0 = random value
+; Get random value in range D0 -> D0
 ; 
 ; Debug mode allows values 0-3 depending on player direction
 

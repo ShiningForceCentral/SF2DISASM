@@ -48,7 +48,7 @@ loc_200C6:
 byte_200CE:
                 
                 txt     $A2             ; "What do you want to buy?"
-                jsr     sub_207E6(pc)
+                jsr     CreateCurrentShopInventory(pc)
                 nop
                 jsr     sub_1004C
                 cmpi.w  #$FFFF,d0
@@ -93,7 +93,7 @@ loc_2015E:
                 move.b  (a0)+,(a1)+
                 dbf     d7,loc_2015E
                 clsTxt
-                move.w  -$C(a6),((word_FFB13A-$1000000)).w
+                move.w  -$C(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
@@ -112,7 +112,7 @@ loc_2015E:
 loc_201AC:
                 
                 move.w  -$C(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_201E4
                 move.w  -$C(a6),d1
@@ -141,7 +141,7 @@ loc_201E4:
                 cmpi.w  #0,d0
                 bne.w   byte_202BE      
                 move.w  -$C(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_2025E
                 move.w  -$A(a6),d0
@@ -149,7 +149,7 @@ loc_201E4:
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_2028A
                 move.w  d2,d1
-                jsr     j_UnequipItemIfNotCursed
+                jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_2028A
                 move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -162,7 +162,7 @@ loc_2025E:
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_2028A
                 move.w  d2,d1
-                jsr     j_UnequipItemIfNotCursed
+                jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_2028A
                 move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -174,7 +174,7 @@ loc_2028A:
                 jsr     j_GetItemAndNumberOfItems
                 move.w  d2,d1
                 subq.w  #1,d1
-                jsr     j_EquipItem
+                jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.s   byte_202B8      
                 sndCom  MUSIC_CURSED_ITEM
@@ -216,7 +216,7 @@ loc_202F4:
                 dbf     d7,loc_202F4
                 clsTxt
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #$7F,((word_FFB13A-$1000000)).w 
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_207CC
@@ -262,7 +262,7 @@ loc_20388:
 loc_2039C:
                 
                 move.w  -$C(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_203DC
                 move.w  -$A(a6),d0
@@ -327,7 +327,7 @@ loc_2046C:
                 dbf     d7,loc_2046C
                 clsTxt
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #$7F,((word_FFB13A-$1000000)).w 
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_207CC
@@ -373,7 +373,7 @@ loc_204FE:
 loc_2051A:
                 
                 move.w  -$C(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_2055A
                 move.w  -$A(a6),d0
@@ -468,7 +468,7 @@ loc_20652:
                 move.b  (a0)+,(a1)+
                 dbf     d7,loc_20652
                 clsTxt
-                move.w  -$C(a6),((word_FFB13A-$1000000)).w
+                move.w  -$C(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
@@ -487,7 +487,7 @@ loc_20652:
 loc_206A0:
                 
                 move.w  -$C(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_206D8
                 move.w  -$C(a6),d1
@@ -518,7 +518,7 @@ loc_206D8:
                 cmpi.w  #0,d0
                 bne.w   byte_207C0      
                 move.w  -$C(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_2075C
                 move.w  -$A(a6),d0
@@ -526,7 +526,7 @@ loc_206D8:
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_20788
                 move.w  d2,d1
-                jsr     j_UnequipItemIfNotCursed
+                jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_20788
                 move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -539,7 +539,7 @@ loc_2075C:
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_20788
                 move.w  d2,d1
-                jsr     j_UnequipItemIfNotCursed
+                jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_20788
                 move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -551,7 +551,7 @@ loc_20788:
                 jsr     j_GetItemAndNumberOfItems
                 move.w  d2,d1
                 subq.w  #1,d1
-                jsr     j_EquipItem
+                jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.s   byte_207BA      
                 sndCom  MUSIC_CURSED_ITEM
@@ -598,7 +598,7 @@ WaitForMusicResumeAndPlayerInput_Shop:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_207E6:
+CreateCurrentShopInventory:
                 
                 lea     ((INDEX_LIST-$1000000)).w,a1
                 bsr.s   GetCurrentShopDefAddress
@@ -606,16 +606,18 @@ sub_207E6:
                 move.b  (a0)+,d7
                 move.w  d7,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 subq.b  #1,d7
-loc_207F6:
+@Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_207F6
+                dbf     d7,@Loop
                 rts
 
-    ; End of function sub_207E6
+    ; End of function CreateCurrentShopInventory
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Create list of deals items not normally sold in current shop
 
 DetermineDealsItemsNotInCurrentShop:
                 
@@ -623,20 +625,20 @@ DetermineDealsItemsNotInCurrentShop:
                 lea     ((INDEX_LIST-$1000000)).w,a0
                 clr.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
                 clr.w   d1
-                moveq   #ITEMENTRY_MAX_INDEX,d7
-loc_2080E:
+                moveq   #DEALS_ITEMS_COUNTER,d7
+@Loop:
                 
                 jsr     j_GetDealsItemAmount
                 tst.b   d2
-                beq.w   loc_20828
+                beq.w   @Next
                 bsr.w   DoesCurrentShopContainItem
-                beq.w   loc_20828
+                beq.w   @Next
                 move.b  d1,(a0)+
                 addq.w  #1,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
-loc_20828:
+@Next:
                 
                 addq.w  #1,d1
-                dbf     d7,loc_2080E
+                dbf     d7,@Loop
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
@@ -646,7 +648,8 @@ loc_20828:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: D1 = item index
-; Out: Z = 0 = yes, 1 = no
+; 
+; Out: Zero-bit clear = yes, set = no
 
 DoesCurrentShopContainItem:
                 
@@ -655,12 +658,12 @@ DoesCurrentShopContainItem:
                 clr.w   d7
                 move.b  (a0)+,d7
                 subq.b  #1,d7
-loc_20842:
+@Loop:
                 
                 cmp.b   (a0)+,d1
-                beq.w   loc_2084C
-                dbf     d7,loc_20842
-loc_2084C:
+                beq.w   @Done
+                dbf     d7,@Loop
+@Done:
                 
                 movem.l (sp)+,d7-a0
                 rts
@@ -670,21 +673,23 @@ loc_2084C:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Get current shop definition address -> A0
+
 GetCurrentShopDefAddress:
                 
                 movem.l d0/d7,-(sp)
-                lea     ShopDefs(pc), a0
+                lea     tbl_ShopDefs(pc), a0
                 clr.w   d7
                 move.b  (CURRENT_SHOP_INDEX).l,d7
                 subq.b  #1,d7
-                bcs.w   loc_20872
+                bcs.w   @Done           ; if current shop index = 0, we're done
                 clr.w   d0
-loc_2086A:
+@Loop:
                 
                 move.b  (a0)+,d0
                 adda.w  d0,a0
-                dbf     d7,loc_2086A
-loc_20872:
+                dbf     d7,@Loop
+@Done:
                 
                 movem.l (sp)+,d0/d7
                 rts

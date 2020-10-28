@@ -6,80 +6,81 @@ SramCheckString:dc.b 'Taguchi New Supra'
 
 ; =============== S U B R O U T I N E =======================================
 
+; Out: D0, D1 = -1 if slot 1, or slot 2 failed checksum
+
 CheckSram:
                 
                 movem.l d7-a1,-(sp)
                 lea     SramCheckString(pc), a0
                 lea     (SRAM_STRING).l,a1
                 moveq   #$10,d7
-loc_6EB6:
+@CheckSramString_Loop:
                 
                 cmpm.b  (a0)+,(a1)+
                 lea     1(a1),a1
-                dbne    d7,loc_6EB6
-                bne.w   loc_6F38
+                dbne    d7,@CheckSramString_Loop
+                bne.w   @InitSram
+                
+                ; is slot 2 occupied ?
                 btst    #1,(SAVE_FLAGS).l
-                bne.s   loc_6ED2
+                bne.s   @ChecksumSlot2
                 clr.w   d1
-                bra.s   loc_6EFC
-loc_6ED2:
+                bra.s   @Slot1
+@ChecksumSlot2:
                 
                 lea     (SAVE2_CHARACTER_DATA).l,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
-loc_6EDE:
-                
-                move.w  #$FB0,d7
+                move.w  #SAVE_SLOT_SIZE,d7
                 bsr.w   CopyBytesFromSram
                 cmp.b   (SAVE2_CHECKSUM).l,d0
-                bne.s   loc_6EF2
+                bne.s   @ClearSlot2
                 moveq   #1,d1
-                bra.s   loc_6EFC
-loc_6EF2:
+                bra.s   @Slot1
+@ClearSlot2:
                 
                 moveq   #$FFFFFFFF,d1
                 bclr    #1,(SAVE_FLAGS).l
-loc_6EFC:
+@Slot1:
                 
                 btst    #0,(SAVE_FLAGS).l
-                bne.s   loc_6F0A
+                bne.s   @ChecksumSlot1
                 clr.w   d0
-                bra.s   loc_6F34
-loc_6F0A:
+                bra.s   @Continue
+@ChecksumSlot1:
                 
                 lea     (SAVE1_CHARACTER_DATA).l,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
-                move.w  #$FB0,d7
+                move.w  #SAVE_SLOT_SIZE,d7
                 bsr.w   CopyBytesFromSram
                 cmp.b   (SAVE1_CHECKSUM).l,d0
-                bne.s   loc_6F2A
+                bne.s   @ClearSlot1
                 moveq   #1,d0
-                bra.s   loc_6F34
-loc_6F2A:
+                bra.s   @Continue
+@ClearSlot1:
                 
                 moveq   #$FFFFFFFF,d0
                 bclr    #0,(SAVE_FLAGS).l
-loc_6F34:
+@Continue:
                 
-                bra.w   loc_6F64
-loc_6F38:
+                bra.w   @Done
+@InitSram:
                 
                 lea     (SRAM_START).l,a0
-                move.w  #$1FFF,d7
-loc_6F42:
+                move.w  #SRAM_COUNTER,d7
+@ClearSram_Loop:
                 
                 clr.b   (a0)
                 addq.l  #2,a0
-                dbf     d7,loc_6F42
+                dbf     d7,@ClearSram_Loop
+                
                 lea     SramCheckString(pc), a0
                 lea     (SRAM_STRING).l,a1
                 moveq   #$11,d7         ; copy string to sram ... again ?
-loc_6F56:
-                
                 bsr.w   CopyBytesToSram 
                 clr.b   (SAVE_FLAGS).l  
                 clr.w   d0
                 clr.w   d1
-loc_6F64:
+@Done:
                 
                 movem.l (sp)+,d7-a1
                 rts
@@ -94,19 +95,19 @@ SaveGame:
                 movem.l d0-d1/d7-a2,-(sp)
                 lea     (COMBATANT_ENTRIES).l,a0
                 tst.b   d0
-                bne.s   loc_6F88
+                bne.s   @Slot2
                 lea     (SAVE1_CHARACTER_DATA).l,a1
                 lea     (SAVE1_CHECKSUM).l,a2
                 clr.w   d1
-                bra.s   loc_6F96
-loc_6F88:
+                bra.s   @Continue
+@Slot2:
                 
                 lea     (SAVE2_CHARACTER_DATA).l,a1
                 lea     (SAVE2_CHECKSUM).l,a2
                 moveq   #1,d1
-loc_6F96:
+@Continue:
                 
-                move.w  #$FB0,d7
+                move.w  #SAVE_SLOT_SIZE,d7
                 bsr.w   CopyBytesToSram 
                 move.b  d0,(a2)         ; d0 = save checksum
                 bset    d1,(SAVE_FLAGS).l ; indicate busy save slot
@@ -123,19 +124,17 @@ LoadGame:
                 movem.l d0-d1/d7-a2,-(sp)
                 lea     (COMBATANT_ENTRIES).l,a1
                 tst.b   d0
-                bne.s   loc_6FC4
-loc_6FBA:
-                
+                bne.s   @Slot2
                 lea     (SAVE1_CHARACTER_DATA).l,a0
                 clr.w   d1
-                bra.s   loc_6FCC
-loc_6FC4:
+                bra.s   @Continue
+@Slot2:
                 
                 lea     (SAVE2_CHARACTER_DATA).l,a0
                 moveq   #1,d1
-loc_6FCC:
+@Continue:
                 
-                move.w  #$FB0,d7
+                move.w  #SAVE_SLOT_SIZE,d7
                 bsr.w   CopyBytesFromSram
                 movem.l (sp)+,d0-d1/d7-a2
                 rts
@@ -163,13 +162,13 @@ CopySave:
 ClearSaveSlotFlag:
                 
                 tst.b   d0
-                bne.s   loc_6FFA
+                bne.s   @Slot2
                 bclr    #0,(SAVE_FLAGS).l
-                bra.s   return_7002
-loc_6FFA:
+                bra.s   @Return
+@Slot2:
                 
                 bclr    #1,(SAVE_FLAGS).l
-return_7002:
+@Return:
                 
                 rts
 
@@ -178,21 +177,21 @@ return_7002:
 
 ; =============== S U B R O U T I N E =======================================
 
-; a0 = source address
-; a1 = destination address
-; d7 = number of bytes to copy
+; In: A0 = source address
+;     A1 = destination address
+;     D7 = number of bytes to copy
 
 CopyBytesToSram:
                 
                 movem.l d7-a1,-(sp)
                 clr.w   d0
                 subq.w  #1,d7
-loc_700C:
+@Loop:
                 
                 move.b  (a0),(a1)
                 add.b   (a0)+,d0
                 addq.l  #2,a1
-                dbf     d7,loc_700C
+                dbf     d7,@Loop
                 movem.l (sp)+,d7-a1
                 rts
 
@@ -208,14 +207,12 @@ CopyBytesFromSram:
                 movem.l d7-a1,-(sp)
                 clr.w   d0
                 subq.w  #1,d7
-loc_7024:
+@Loop:
                 
                 move.b  (a0),(a1)+
                 add.b   (a0),d0
                 addq.l  #2,a0
-                dbf     d7,loc_7024
-loc_702E:
-                
+                dbf     d7,@Loop
                 movem.l (sp)+,d7-a1
                 rts
 

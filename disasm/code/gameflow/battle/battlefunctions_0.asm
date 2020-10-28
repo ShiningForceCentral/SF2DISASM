@@ -9,7 +9,7 @@ LevelUpCutscene:
                 moveq   #0,d1
                 jsr     j_SetCurrentEXP
                 jsr     j_LevelUp
-                lea     ((byte_FFAF82-$1000000)).w,a5
+                lea     ((LEVELUP_ARGUMENTS-$1000000)).w,a5
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 clr.l   d1
                 move.b  (a5)+,d1
@@ -360,7 +360,7 @@ UpdateControlledUnitPos:
 
 GetEntityCombatantNumber:
                 
-                bsr.w   GetEntityNumberOfCombatant
+                bsr.w   GetEntityIndexForCombatant
                 rts
 
     ; End of function GetEntityCombatantNumber
@@ -368,25 +368,23 @@ GetEntityCombatantNumber:
 
 ; =============== S U B R O U T I N E =======================================
 
-;     Convert combatant number to entity number.
-;     In: D0 = combatant number
-;     Out: D0 = entity number
+; Get entity index for combatant D0 -> D0
 
-GetEntityNumberOfCombatant:
+GetEntityIndexForCombatant:
                 
                 move.l  a0,-(sp)
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
-                tst.b   d0              ; test if d0 represents an enemy index ?
-                bpl.s   loc_22F3E
+                tst.b   d0              ; test if D0 represents an enemy index
+                bpl.s   @Ally
                 subi.b  #$60,d0 
-loc_22F3E:
+@Ally:
                 
-                andi.w  #$FF,d0
+                andi.w  #COMBATANT_MASK_ALL,d0
                 move.b  (a0,d0.w),d0
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function GetEntityNumberOfCombatant
+    ; End of function GetEntityIndexForCombatant
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -614,7 +612,7 @@ loc_23158:
                 move.w  d5,d4
 loc_2315E:
                 
-                bsr.w   GetEntityNumberOfCombatant
+                bsr.w   GetEntityIndexForCombatant
                 move.w  d4,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
@@ -715,7 +713,7 @@ sub_2322C:
                 move.w  d1,d2
                 jsr     j_GetYPos
                 move.w  d1,d3
-                bsr.w   GetEntityNumberOfCombatant
+                bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 jsr     (WaitForVInt).w
                 bsr.w   sub_23256
@@ -956,7 +954,7 @@ loc_23448:
 SetEntityBlinkingFlag:
                 
                 movem.l d0/a0,-(sp)
-                bsr.w   GetEntityNumberOfCombatant
+                bsr.w   GetEntityIndexForCombatant
                 lsl.w   #5,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 bset    #7,$1D(a0,d0.w)
@@ -971,7 +969,7 @@ SetEntityBlinkingFlag:
 ClearEntityBlinkingFlag:
                 
                 movem.l d0/a0,-(sp)
-                bsr.w   GetEntityNumberOfCombatant
+                bsr.w   GetEntityIndexForCombatant
                 lsl.w   #5,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 bclr    #7,$1D(a0,d0.w)
@@ -1090,7 +1088,7 @@ WaitForUnitCursor:
 sub_23554:
                 
                 movem.l d0-d2/d7-a1,-(sp)
-                lea     word_2358C(pc), a0
+                lea     spr_2358C(pc), a0
                 clr.w   d2
                 move.b  ((word_FFAF8E-$1000000)).w,d2
                 andi.w  #$F,d2
@@ -1114,102 +1112,34 @@ loc_23572:
 
     ; End of function sub_23554
 
-word_2358C:     dc.w $74
-                dc.w $F10
-                dc.w $4680
-                dc.w $7C
-                dc.w 1
-                dc.w $F0A
-                dc.w $4680
-                dc.w 1
-                dc.w 1
-                dc.w $F0B
-                dc.w $4680
-                dc.w 1
-                dc.w 1
-                dc.w $F0C
-                dc.w $4680
-                dc.w 1
-                dc.w 1
-                dc.w $F0D
-                dc.w $4680
-                dc.w 1
-                dc.w 1
-                dc.w $F0E
-                dc.w $4680
-                dc.w 1
-                dc.w 1
-                dc.w $F0F
-                dc.w $4680
-                dc.w 1
-                dc.w 1
-                dc.w $F10
-                dc.w $4680
-                dc.w 1
-                dc.w $56
-                dc.w $F09
-                dc.w $4690
-                dc.w $7C
-                dc.w $74
-                dc.w $F0A
-                dc.w $46A0
-                dc.w $64
-                dc.w $92
-                dc.w $F0B
-                dc.w $5690
-                dc.w $7C
-                dc.w $74
-                dc.w $F10
-                dc.w $4EA0
-                dc.w $94
-                dc.w 1
-                dc.w $F0D
-                dc.w $4680
-                dc.w 1
-                dc.w 1
-                dc.w $F0E
-                dc.w $4680
-                dc.w 1
-                dc.w 1
-                dc.w $F0F
-                dc.w $4680
-                dc.w 1
-                dc.w 1
-                dc.w $F10
-                dc.w $4680
-                dc.w 1
-                dc.w $3E
-                dc.w $F09
-                dc.w $4690
-                dc.w $7C
-                dc.w $74
-                dc.w $F0A
-                dc.w $46A0
-                dc.w $4C
-                dc.w $AA
-                dc.w $F0B
-                dc.w $5690
-                dc.w $7C
-                dc.w $74
-                dc.w $F0C
-                dc.w $4EA0
-                dc.w $AC
-                dc.w $56
-                dc.w $F0D
-                dc.w $46B0
-                dc.w $5F
-                dc.w $56
-                dc.w $F0E
-                dc.w $4EB0
-                dc.w $99
-                dc.w $92
-                dc.w $F0F
-                dc.w $56B0
-                dc.w $5F
-                dc.w $92
-                dc.w $F10
-                dc.w $5EB0
-                dc.w $99
+spr_2358C:      ; unknown sprite definitions
+                
+; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
+                
+                vdpSprite 116, V4|H4|16, 1664|PLT3, 124
+                vdpSprite 1, V4|H4|10, 1664|PLT3, 1
+                vdpSprite 1, V4|H4|11, 1664|PLT3, 1
+                vdpSprite 1, V4|H4|12, 1664|PLT3, 1
+                vdpSprite 1, V4|H4|13, 1664|PLT3, 1
+                vdpSprite 1, V4|H4|14, 1664|PLT3, 1
+                vdpSprite 1, V4|H4|15, 1664|PLT3, 1
+                vdpSprite 1, V4|H4|16, 1664|PLT3, 1
+                vdpSprite 86, V4|H4|9, 1680|PLT3, 124
+                vdpSprite 116, V4|H4|10, 1696|PLT3, 100
+                vdpSprite 146, V4|H4|11, 1680|FLIP|PLT3, 124
+                vdpSprite 116, V4|H4|16, 1696|MIRROR|PLT3, 148
+                vdpSprite 1, V4|H4|13, 1664|PLT3, 1
+                vdpSprite 1, V4|H4|14, 1664|PLT3, 1
+                vdpSprite 1, V4|H4|15, 1664|PLT3, 1
+                vdpSprite 1, V4|H4|16, 1664|PLT3, 1
+                vdpSprite 62, V4|H4|9, 1680|PLT3, 124
+                vdpSprite 116, V4|H4|10, 1696|PLT3, 76
+                vdpSprite 170, V4|H4|11, 1680|FLIP|PLT3, 124
+                vdpSprite 116, V4|H4|12, 1696|MIRROR|PLT3, 172
+                vdpSprite 86, V4|H4|13, 1712|PLT3, 95
+                vdpSprite 86, V4|H4|14, 1712|MIRROR|PLT3, 153
+                vdpSprite 146, V4|H4|15, 1712|FLIP|PLT3, 95
+                vdpSprite 146, V4|H4|16, 1712|MIRROR|FLIP|PLT3, 153
 
 ; =============== S U B R O U T I N E =======================================
 

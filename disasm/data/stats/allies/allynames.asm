@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\allynames.asm :
 ; 0xFAD6..0xFB8A : Ally names
-AllyNames:      allyName "BOWIE"
+tbl_AllyNames:  allyName "BOWIE"
                 allyName "SARAH"
                 allyName "CHESTER"
                 allyName "JAHA"

@@ -181,7 +181,7 @@ MemorizePath:
                 movem.l d0-a6,-(sp)     ; copy current moving unit's terrain list to memory
                 jsr     GetUpperMoveType
                 lsl.w   #4,d1
-                lea     MoveTypeTerrainCosts(pc), a0
+                lea     tbl_LandEffectSettingsAndMoveCosts(pc), a0
                 adda.w  d1,a0
                 lea     ((MOVE_COST_LIST-$1000000)).w,a1
                 moveq   #$F,d7
@@ -230,7 +230,7 @@ GetLandEffectSetting:
                 movem.l d0/d2-a6,-(sp)
                 jsr     GetUpperMoveType
                 lsl.w   #MOVETYPE_NIBBLE_SHIFTCOUNT,d1
-                lea     MoveTypeTerrainCosts(pc), a0
+                lea     tbl_LandEffectSettingsAndMoveCosts(pc), a0
                 adda.w  d1,a0
                 bsr.w   GetCurrentTerrainType
                 andi.w  #TERRAIN_MASK_TYPE,d0
@@ -268,23 +268,18 @@ SetMovableAtCoord:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get resistance to spell of combatant
-; 
-;       In: D0 = combatant index
-;           D1 = spell index
-; 
-;       Out: D2 = resistance bitmask
+; Get combatant D0's resistance setting to spell D1 -> D2
 
 GetResistanceToSpell:
                 
                 movem.l d0-d1/d3-a6,-(sp)
                 andi.b  #SPELLENTRY_MASK_INDEX,d1
-                move.b  SpellElementsTable(pc,d1.w),d2
+                move.b  tbl_SpellElements(pc,d1.w),d2
                 jsr     GetCurrentResistance
-                andi.w  #SPELLENTRY_MASK_ALL_RESISTANCES,d1
+                andi.w  #RESISTANCEENTRY_MASK_ALL,d1
                 ror.w   d2,d1
                 move.w  d1,d2
-                andi.w  #SPELLENTRY_MASK_RESISTANCE,d2
+                andi.w  #RESISTANCEENTRY_LOWERMASK_SETTING,d2
                 movem.l (sp)+,d0-d1/d3-a6
                 rts
 

@@ -9,19 +9,19 @@ ResetAlliesBattleStats:
                 movem.l d0-d7,-(sp)
                 clr.w   d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7 ; HARDCODED max number of allies
-loc_478CE:
+@Loop:
                 
                 jsr     j_GetCurrentHP
                 jsr     j_GetMaxHP
                 jsr     j_SetCurrentHP
                 jsr     j_GetMaxMP
                 jsr     j_SetCurrentMP
-                jsr     j_GetStatus
-                andi.w  #7,d1
-                jsr     j_SetStatus
+                jsr     j_GetStatusEffects
+                andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE,d1
+                jsr     j_SetStatusEffects
                 jsr     j_ApplyStatusEffectsAndItemsOnStats
                 addq.w  #1,d0
-                dbf     d7,loc_478CE
+                dbf     d7,@Loop
                 movem.l (sp)+,d0-d7
                 rts
 

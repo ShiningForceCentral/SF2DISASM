@@ -85,7 +85,7 @@ loc_21354:
 loc_21366:
                 
                 move.b  -$1A(a6),d1
-                jsr     j_GetSpellDefAddress
+                jsr     j_FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  -4(a6),d0
                 jsr     j_DecreaseCurrentMP
@@ -106,7 +106,7 @@ byte_213A8:
                 txt     $6C             ; "Use magic on whom?{D1}"
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                move.w  #$7F,((word_FFB13A-$1000000)).w 
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-6(a6)
                 cmpi.w  #$FFFF,d0
@@ -117,12 +117,12 @@ byte_213A8:
                 txt     $F3             ; "{NAME} cast{N}{SPELL} level {#}!"
                 clsTxt
                 move.b  -$1A(a6),d1
-                jsr     j_GetSpellDefAddress
+                jsr     j_FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  -4(a6),d0
                 jsr     j_DecreaseCurrentMP
                 move.w  -6(a6),d0
-                jsr     j_GetStatus
+                jsr     j_GetStatusEffects
                 moveq   #0,d2
                 cmpi.l  #1,-$20(a6)
                 beq.w   loc_2144E
@@ -156,7 +156,7 @@ loc_21460:
 byte_21468:
                 
                 clsTxt
-                jsr     j_SetStatus
+                jsr     j_SetStatusEffects
                 jsr     j_ApplyStatusEffectsAndItemsOnStats
 loc_21478:
                 
@@ -180,7 +180,7 @@ loc_214A4:
                 
                 bsr.w   sub_219EC       
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #$7F,((word_FFB13A-$1000000)).w 
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-4(a6)
                 move.w  d1,-$C(a6)
@@ -205,7 +205,7 @@ loc_214A4:
 loc_2150E:
                 
                 move.w  -8(a6),d1
-                jsr     sub_229CA
+                jsr     FindUsableOutsideBattleItem
                 tst.w   d2
                 beq.w   loc_21558
                 bsr.w   sub_22C60       
@@ -247,7 +247,7 @@ loc_2159E:
                 
                 bsr.w   sub_219EC       
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #$7F,((word_FFB13A-$1000000)).w 
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_215C0
@@ -258,7 +258,7 @@ loc_215C0:
                 move.w  d1,-$C(a6)
                 move.w  d2,-8(a6)
                 move.w  -8(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_21618
                 move.w  -4(a6),d0
@@ -300,7 +300,7 @@ loc_21662:
                 txt     $36             ; "Pass the {ITEM}{N}to whom?{D1}"
                 clsTxt
                 move.b  #2,((byte_FFB13C-$1000000)).w
-                move.w  -8(a6),((word_FFB13A-$1000000)).w
+                move.w  -8(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_2168E
@@ -342,7 +342,7 @@ loc_216F8:
                 move.w  -$E(a6),d1
                 jsr     j_GetItemAndNumberOfItems
                 move.w  d1,-$A(a6)
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_21758
                 move.w  -6(a6),d0
@@ -382,7 +382,7 @@ loc_2179E:
                 
                 move.w  -4(a6),d0
                 move.w  -$C(a6),d1
-                jsr     j_UnequipItemIfNotCursed
+                jsr     j_UnequipItemBySlotIfNotCursed
                 move.w  -6(a6),d2
                 cmp.w   -4(a6),d2
                 bne.w   loc_217C4
@@ -438,7 +438,7 @@ loc_21856:
                 bne.w   loc_21898
                 bsr.w   sub_219EC       
                 move.b  #3,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_21880
@@ -456,7 +456,7 @@ loc_21898:
                 
                 bsr.w   sub_219EC       
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_218BA
@@ -488,7 +488,7 @@ loc_218F2:
 loc_21910:
                 
                 move.w  -8(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_21962
                 move.w  -4(a6),d0

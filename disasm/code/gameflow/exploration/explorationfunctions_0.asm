@@ -244,7 +244,7 @@ return_2399A:
 
 GetChestGoldAmount:
                 
-                subi.w  #ITEMENTRY_INDEX_GOLD_CHESTS_START,d2
+                subi.w  #ITEMINDEX_GOLDCHESTS_START,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d2
                 add.w   d2,d2
                 move.w  ChestGoldAmounts(pc,d2.w),d1
