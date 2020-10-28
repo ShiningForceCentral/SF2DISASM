@@ -34,7 +34,7 @@
                 endif
                 
                 include "code\common\menus\menuengine_05.asm"    ; Menu engine
-
+                
                 if (FORCE_MEMBERS_EXPANSION=1)
                 include "code\common\menus\getcombatantportrait-expanded.asm"
                 else
