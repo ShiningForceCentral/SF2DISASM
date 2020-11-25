@@ -1747,6 +1747,12 @@ loc_24C94:
 loc_24CC4:
                 
                 move.w  d4,d1
+                
+                if (BUGFIX_HIGINS_SPELL>=1)
+                cmpi.w  #COMBATANT_ITEMSLOTS,d1
+                bge.s   return_24CF4
+                endif
+                
                 jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.w   return_24CF4

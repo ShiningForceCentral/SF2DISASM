@@ -1526,6 +1526,12 @@ sub_1477E:
 loc_147B8:
                 
                 move.w  d4,d1
+                
+                if (BUGFIX_HIGINS_SPELL>=1)
+                cmpi.w  #COMBATANT_ITEMSLOTS,d1
+                bge.s   return_147E6
+                endif
+                
                 jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.w   return_147E6
