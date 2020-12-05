@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle34\cs_beforebattle.asm :
 ; 0x4D342..0x4D4B6 : Cutscene before battle 34
-bbcs_34:        textCursor $B4F
+bbcs_34:        textCursor 2895
                 loadMapFadeIn MAP_CAMEELA_ARENA,21,22
                 loadMapEntities ce_4D48E
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -9,7 +9,7 @@ bbcs_34:        textCursor $B4F
                 setPos ALLY_PETER,30,28,LEFT
                 setActscriptWait FOLLOWER_B,eas_Init
                 setPos FOLLOWER_B,30,30,LEFT
-                jumpIfFlagClear $4C,cs_4D38E ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4D38E ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,31,29,LEFT
 cs_4D38E:       animEntityFX 129,6
@@ -25,7 +25,7 @@ cs_4D38E:       animEntityFX 129,6
                 entityActions 130
                  moveLeft 3
                 endActions
-                jumpIfFlagClear $4C,cs_4D3C6 ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4D3C6 ; Zynk is a follower
                 entityActions ALLY_ZYNK
                  moveLeft 3
                 endActions

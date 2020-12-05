@@ -20,21 +20,21 @@ Map33_DefaultZoneEvent:
 Map33_ZoneEvent0:
                 
                  
-                chkFlg  $306            ; Set after the first scene with Goliath at Creed's Mansion
+                chkFlg  774             ; Set after the first scene with Goliath at Creed's Mansion
                 bne.s   byte_5AAAA      
                 script  cs_5AC58
-                setFlg  $306            ; Set after the first scene with Goliath at Creed's Mansion
+                setFlg  774             ; Set after the first scene with Goliath at Creed's Mansion
                 bra.s   return_5AAC8
 byte_5AAAA:
                 
-                chkFlg  $311            ; Set after the fairy tags along at Creed's
+                chkFlg  785             ; Set after the fairy tags along at Creed's
                 beq.s   return_5AAC8
-                chkFlg  $312            ; Set after Oddler elects to stay behind at Creed's Mansion
+                chkFlg  786             ; Set after Oddler elects to stay behind at Creed's Mansion
                 bne.s   return_5AAC8
                 script  cs_5B466
-                setFlg  $312            ; Set after Oddler elects to stay behind at Creed's Mansion
-                setFlg  $45             ; Fairy is a follower
-                clrFlg  $44             ; Oddler is a follower
+                setFlg  786             ; Set after Oddler elects to stay behind at Creed's Mansion
+                setFlg  69              ; Fairy is a follower
+                clrFlg  68              ; Oddler is a follower
 return_5AAC8:
                 
                 rts
@@ -47,7 +47,7 @@ return_5AAC8:
 Map33_ZoneEvent1:
                 
                  
-                chkFlg  $30F            ; Set after the scene where Creed restores the Force and heads down the basement
+                chkFlg  783             ; Set after the scene where Creed restores the Force and heads down the basement
                 bne.s   return_5AAD6
                 script  cs_5AF36
 return_5AAD6:

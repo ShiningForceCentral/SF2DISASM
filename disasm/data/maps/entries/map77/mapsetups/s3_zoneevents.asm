@@ -9,9 +9,9 @@ ms_map77_ZoneEvents:
 Map77_DefaultZoneEvent:
                 
                  
-                chkFlg  $219            ; Battle 37 completed
+                chkFlg  537             ; Battle 37 completed
                 bne.s   return_50A80
-                setFlg  $1B5            ; Battle 37 unlocked
+                setFlg  437             ; Battle 37 unlocked
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_50A80:
                 

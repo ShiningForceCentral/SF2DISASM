@@ -24,7 +24,7 @@ Map40_EntityEvent1:
                 
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 clr.w   ((SPEECH_SFX-$1000000)).w
-                txt     $3E8            ; "He's already dead.{N}{LEADER} feels regret.{W1}"
+                txt     1000            ; "He's already dead.{N}{LEADER} feels regret.{W1}"
 Map40_DefaultEntityEvent:
                 
                 rts

@@ -19,14 +19,14 @@ Map41_DefaultItemEvent1:
 Map41_ItemEvent0:
                 
                  
-                chkFlg  $3A2            ; Set after opening Devil's Head with the Force Sword
+                chkFlg  930             ; Set after opening Devil's Head with the Force Sword
                 bne.s   return_5F49E
                 script  cs_5F4B8
-                setFlg  $3A2            ; Set after opening Devil's Head with the Force Sword
-                chkFlg  $1C             ; Lemon joined
+                setFlg  930             ; Set after opening Devil's Head with the Force Sword
+                chkFlg  28              ; Lemon joined
                 bne.s   loc_5F49A
                 script  cs_5F594
-                setFlg  $47             ; Lemon is a follower
+                setFlg  71              ; Lemon is a follower
 loc_5F49A:
                 
                 move.w  #$FFFF,d6

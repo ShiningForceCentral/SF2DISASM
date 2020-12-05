@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle07\cs_afterbattle.asm :
 ; 0x49F7E..0x4A952 : Cutscene after battle 7
-abcs_battle07:  textCursor $951
+abcs_battle07:  textCursor 2385
                 loadMapFadeIn MAP_ANCIENT_TOWER_UNDERGROUND_ROOM,8,16
                 loadMapEntities ce_4A912
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -514,17 +514,17 @@ abcs_battle07:  textCursor $951
                 setCameraEntity 65535
                 cameraSpeed $28
                 nextSingleText $FF,255  ; "The two jewels merge{N}together.{W1}"
-                setF $181               ; Set after Bowie obtains King Galam's jewel
+                setF 385                ; Set after Bowie obtains King Galam's jewel
                 setCamDest 8,3
                 waitIdle 130
                 setFacing 130,DOWN
                 setFacing 132,DOWN
                 animEntityFX 129,6
                 nextSingleText $C0,130  ; "I have to go back and get{N}my jewel....{N}Noooooooo!{W1}"
-                setActscript 130,eas_463AE
+                setActscript 130,eas_TwirlShrinkDisappear
                 animEntityFX 128,6
                 nextSingleText $0,132   ; "Father...{N}{LEADER}...help meeeeee!{W1}"
-                setActscriptWait 132,eas_463AE
+                setActscriptWait 132,eas_TwirlShrinkDisappear
                 setActscriptWait 131,eas_Init
                 customActscriptWait 131
                  ac_setSpeed 32,32      ;   
@@ -639,8 +639,8 @@ abcs_battle07:  textCursor $951
                 followEntity 131,ALLY_BOWIE,2
                 followEntity 133,131,2
                 followEntity 134,133,2
-                setF $4A                ; Astral + King are followers
-                setF $280               ; Set after the end of battle 7's long sequence, cleared at docks?
+                setF 74                 ; Astral + King are followers
+                setF 640                ; Set after the end of battle 7's long sequence, cleared at docks?
                 csc_end
 ce_4A912:       mainEntity 13,23,UP
                 entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init

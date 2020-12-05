@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle37\cs_afterbattle.asm :
 ; 0x4DB94..0x4DDA4 : Cutscene after battle 37
-abcs_battle37:  textCursor $B9C
+abcs_battle37:  textCursor 2972
                 loadMapFadeIn MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE,31,54
                 loadMapEntities ce_4DD8C
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -11,7 +11,7 @@ abcs_battle37:  textCursor $B9C
                 setPos FOLLOWER_B,34,57,DOWN
                 setActscriptWait FOLLOWER_A,eas_Init
                 setPos FOLLOWER_A,37,59,LEFT
-                jumpIfFlagClear $4C,cs_4DBEE ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4DBEE ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,63,62,DOWN
 cs_4DBEE:       stopEntity ALLY_LEMON

@@ -10,7 +10,7 @@ ms_map63_Section5:
 Map63_ItemEvent0:
                 
                  
-                chkFlg  $1D             ; Claude joined
+                chkFlg  29              ; Claude joined
                 bne.s   loc_5CA4C
                 moveq   #$75,d0 ; Golem Arm
                 jsr     RemoveItemFromInventory

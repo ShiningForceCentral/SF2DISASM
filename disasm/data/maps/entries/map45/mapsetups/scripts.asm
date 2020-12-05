@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map45\mapsetups\scripts.asm :
 ; 0x600CE..0x603AE : 
-cs_600CE:       textCursor $823
+cs_600CE:       textCursor 2083
                 setActscriptWait FOLLOWER_B,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
                 setActscriptWait ALLY_ZYNK,eas_Init

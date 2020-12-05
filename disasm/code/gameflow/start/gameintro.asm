@@ -114,7 +114,7 @@ loc_729C:
                 bpl.s   loc_7332
                 move.l  #1,((TEXT_NUMBER-$1000000)).w
                 sndCom  MUSIC_CORRUPTED_SAVE
-                txt     $ED             ; "Ooops!  Record {#} has{N}vanished!{W2}"
+                txt     237             ; "Ooops!  Record {#} has{N}vanished!{W2}"
                 jsr     j_FadeOut_WaitForP1Input
 loc_7332:
                 
@@ -122,31 +122,31 @@ loc_7332:
                 bpl.s   loc_734C
                 move.l  #2,((TEXT_NUMBER-$1000000)).w
                 sndCom  MUSIC_CORRUPTED_SAVE
-                txt     $ED             ; "Ooops!  Record {#} has{N}vanished!{W2}"
+                txt     237             ; "Ooops!  Record {#} has{N}vanished!{W2}"
                 jsr     j_FadeOut_WaitForP1Input
 loc_734C:
                 
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   loc_73AA
-                txt     $D8             ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
+                txt     216             ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
                 bsr.w   WaitForVInt
                 bsr.w   UpdateWitchHead
                 bsr.w   WaitForVInt
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
                 move.b  #$FF,((byte_FFB082-$1000000)).w
-                txt     $D9             ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
+                txt     217             ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
 loc_737C:
                 
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_73C2       
-                txt     $DA             ; "Yes, yes...I used a spell{N}on you.{W2}"
+                txt     218             ; "Yes, yes...I used a spell{N}on you.{W2}"
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_73C2       
-                txt     $DB             ; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
+                txt     219             ; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_73C2       
-                txt     $DC             ; "from this mystery forest{N}unless you help me.{W2}"
+                txt     220             ; "from this mystery forest{N}unless you help me.{W2}"
                 bra.w   byte_73C2       
 loc_73AA:
                 
@@ -157,7 +157,7 @@ loc_73AA:
                 move.b  #$FF,((byte_FFB082-$1000000)).w
 byte_73C2:
                 
-                txt     $DD             ; "{CLEAR}Whatcha gonna do?"
+                txt     221             ; "{CLEAR}Whatcha gonna do?"
                 move.b  (SAVE_FLAGS).l,d3
                 andi.w  #3,d3
                 bne.s   loc_73D8

@@ -627,10 +627,8 @@ SpellEffect_Slow:
 @GiveEXP:
                 
                 bsr.w   GiveStatusEffectSpellsEXP
-
-    ; End of function SpellEffect_Slow
-
 WriteBattlesceneScript_SlowMessage:
+                
                 jsr     GetBaseAGI
                 mulu.w  #3,d1
                 lsr.l   #3,d1
@@ -642,6 +640,9 @@ WriteBattlesceneScript_SlowMessage:
                 displayMessage #MESSAGE_BATTLE_DEFENSE_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
+
+    ; End of function SpellEffect_Slow
+
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -882,10 +883,10 @@ SpellEffect_PowerWater:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @Enemy          
+                bne.s   @EnemyTarget    
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @Continue
-@Enemy:
+@EnemyTarget:
                 
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @Continue:

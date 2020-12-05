@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle18\cs_afterbattle.asm :
 ; 0x4B2F2..0x4B6CE : Cutscene after battle 18
-abcs_battle18:  textCursor $9E0
+abcs_battle18:  textCursor 2528
                 loadMapFadeIn MAP_TAROS_SHRINE,7,5
                 loadMapEntities ce_4B6BE
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -258,8 +258,8 @@ abcs_battle18:  textCursor $9E0
                 setFacing ALLY_PETER,DOWN
                 setFacing FOLLOWER_B,DOWN
                 csWait 180
-                setF $41                ; Caravan is unlocked
-                clearF $54              ; Rohde is a follower
+                setF 65                 ; Caravan is unlocked
+                clearF 84               ; Rohde is a follower
                 csc_end
 ce_4B6BE:       mainEntity 12,9,UP
                 entity 12,5,DOWN,MAPSPRITE_CARAVAN,eas_Init

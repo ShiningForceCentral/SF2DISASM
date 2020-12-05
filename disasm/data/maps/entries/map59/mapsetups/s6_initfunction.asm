@@ -7,23 +7,23 @@
 ms_map59_InitFunction:
                 
                  
-                chkFlg  $3E7            ; Set after the Nazca ship shootdown scene
+                chkFlg  999             ; Set after the Nazca ship shootdown scene
                 bne.s   byte_5EB18      
                 script  cs_5EB44
                 script  cs_5EBFC
                 script  cs_5ED06
                 script  cs_5EDB8
                 script  cs_5EF60
-                setFlg  $3E7            ; Set after the Nazca ship shootdown scene
+                setFlg  999             ; Set after the Nazca ship shootdown scene
                 move.b  #$2D,((EGRESS_MAP_INDEX-$1000000)).w 
-                setFlg  $1B4            ; Battle 36 unlocked
-                setFlg  $1B8            ; Battle 40 unlocked
-                setFlg  $1BA            ; Battle 42 unlocked
-                setFlg  $1BB            ; Battle 43 unlocked
+                setFlg  436             ; Battle 36 unlocked
+                setFlg  440             ; Battle 40 unlocked
+                setFlg  442             ; Battle 42 unlocked
+                setFlg  443             ; Battle 43 unlocked
                 rts
 byte_5EB18:
                 
-                chkFlg  $1BB            ; Battle 43 unlocked
+                chkFlg  443             ; Battle 43 unlocked
                 beq.s   return_5EB24
                 script  cs_5EB26
 return_5EB24:
@@ -50,7 +50,7 @@ loc_5EB3C:
 
     ; End of function csub_5EB34
 
-cs_5EB44:       textCursor $E73
+cs_5EB44:       textCursor 3699
                 setCameraEntity 65535
                 reloadMap 8,2
                 loadMapEntities ce_5F19E
@@ -96,7 +96,7 @@ cs_5EB44:       textCursor $E73
                 nextSingleText $0,128   ; "Anyway, it will be a{N}fantastic show!  Ha, ha!{W1}"
                 csc_end
 cs_5EBFC:       loadMapFadeIn MAP_PRISM_FLOWERS_FIELD,8,14
-                textCursor $E8B
+                textCursor 3723
                 loadMapEntities ce_5F1DE
                 setActscriptWait ALLY_BOWIE,eas_Init
                 stopEntity 130
@@ -161,7 +161,7 @@ cs_5EBFC:       loadMapFadeIn MAP_PRISM_FLOWERS_FIELD,8,14
                 nod 129
                 nod 129
                 csc_end
-cs_5ED06:       textCursor $E91
+cs_5ED06:       textCursor 3729
                 loadMapFadeIn MAP_OVERWORLD_NEW_GRANSEAL_SHORE,0,0
                 loadMapEntities ce_5F1BE
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -196,7 +196,7 @@ cs_5ED06:       textCursor $E91
                 nextText $0,FOLLOWER_B  ; "(Grumble)....{W2}"
                 nextSingleText $0,FOLLOWER_B ; "Someday, {NAME;7}....{W1}"
                 csc_end
-cs_5EDB8:       textCursor $E99
+cs_5EDB8:       textCursor 3737
                 loadMapFadeIn MAP_PRISM_FLOWERS_FIELD,10,13
                 loadMapEntities ce_5F28E
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -299,7 +299,7 @@ eas_5EF46:       ac_setAnimSpeedX2 $FFFF
                  ac_autoFacing $0
                  ac_setSpeed 64,64
                  ac_jump eas_Idle
-cs_5EF60:       textCursor $E9B
+cs_5EF60:       textCursor 3739
                 loadMapFadeIn MAP_NAZCA_SHIP_INTERIOR,4,6
                 loadEntitiesFromMapSetup 9,11,DOWN
                 executeSubroutine InitNazcaShipForceMembers
@@ -428,7 +428,7 @@ csub_5F14C:
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_1_BASE).l,a0
-                clr.b   ((FADING_TIMER+1-$1000000)).w
+                clr.b   ((FADING_TIMER_BYTE-$1000000)).w
                 jsr     (sub_19C8).w    
                 rts
 

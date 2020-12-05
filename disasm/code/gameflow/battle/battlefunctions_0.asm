@@ -15,40 +15,40 @@ LevelUpCutscene:
                 move.b  (a5)+,d1
                 cmpi.b  #$FF,d1
                 bne.s   loc_22BEA
-                txt     $94             ; "It has no use.{W2}"
+                txt     148             ; "It has no use.{W2}"
                 bra.w   byte_22C5A      
 loc_22BEA:
                 
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $F4             ; "{NAME} became{N}level {#}!"
+                txt     244             ; "{NAME} became{N}level {#}!"
                 move.b  (a5)+,d1
                 beq.s   loc_22BFE
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $10A            ; "{D1}HP increased by {#}!"
+                txt     266             ; "{D1}HP increased by {#}!"
 loc_22BFE:
                 
                 move.b  (a5)+,d1
                 beq.s   loc_22C0A
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $10B            ; "{D1}MP increased by {#}!"
+                txt     267             ; "{D1}MP increased by {#}!"
 loc_22C0A:
                 
                 move.b  (a5)+,d1
                 beq.s   loc_22C16
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $10C            ; "{D1}Attack increased by {#}!"
+                txt     268             ; "{D1}Attack increased by {#}!"
 loc_22C16:
                 
                 move.b  (a5)+,d1
                 beq.s   loc_22C22
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $10D            ; "{D1}Defense increased by {#}!"
+                txt     269             ; "{D1}Defense increased by {#}!"
 loc_22C22:
                 
                 move.b  (a5)+,d1
                 beq.s   loc_22C2E
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $10E            ; "{D1}Agility increased by {#}!"
+                txt     270             ; "{D1}Agility increased by {#}!"
 loc_22C2E:
                 
                 move.b  (a5)+,d1
@@ -59,17 +59,17 @@ loc_22C2E:
                 lsr.w   #6,d1
                 bne.s   loc_22C4C
                 move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     $10F            ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
+                txt     271             ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
                 bra.s   byte_22C5A      
 loc_22C4C:
                 
                 addq.w  #1,d1
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 move.w  d2,((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $110            ; "{D1}{SPELL} increased to{N}level {#}!"
+                txt     272             ; "{D1}{SPELL} increased to{N}level {#}!"
 byte_22C5A:
                 
-                txt     $DC3            ; "{W1}"
+                txt     3523            ; "{W1}"
                 rts
 
     ; End of function LevelUpCutscene
@@ -79,7 +79,7 @@ byte_22C5A:
 
 ; get first entity's X, Y and facing
 
-sub_22C60:
+GetCurrentPosition:
                 
                 move.w  (ENTITY_DATA).l,d1
                 move.w  (ENTITY_Y).l,d2
@@ -91,12 +91,10 @@ sub_22C60:
                 andi.w  #3,d3
                 rts
 
-    ; End of function sub_22C60
+    ; End of function GetCurrentPosition
 
 
 ; =============== S U B R O U T I N E =======================================
-
-;     Update some map stuff ???
 
 CreateMoveableRangeForUnit:
                 
@@ -235,7 +233,7 @@ ControlUnitCursor:
                 move.w  d3,2(a0)
                 move.w  d2,$C(a0)
                 move.w  d3,$E(a0)
-                move.b  #$FF,((byte_FFDE9D-$1000000)).w
+                move.b  #$FF,((CONTROLLING_UNIT_CURSOR-$1000000)).w
                 move.b  #$30,((VIEW_TARGET_ENTITY-$1000000)).w 
 loc_22DD2:
                 
@@ -255,7 +253,7 @@ loc_22DD2:
                 jsr     j_SetEntityMovescriptToIdle
                 move.w  #$6F00,(a0)
                 move.w  #$6F00,$C(a0)
-                clr.b   ((byte_FFDE9D-$1000000)).w
+                clr.b   ((CONTROLLING_UNIT_CURSOR-$1000000)).w
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 rts
 

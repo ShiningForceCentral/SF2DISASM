@@ -12,11 +12,11 @@ ms_map66_ZoneEvents:
 Map66_ZoneEvent0:
                 
                  
-                chkFlg  $219            ; Battle 37 completed
+                chkFlg  537             ; Battle 37 completed
                 beq.s   return_4FAB8
-                chkFlg  $21A            ; Battle 38 completed
+                chkFlg  538             ; Battle 38 completed
                 bne.s   return_4FAB8
-                setFlg  $1B6            ; Battle 38 unlocked
+                setFlg  438             ; Battle 38 unlocked
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FAB8:
                 
@@ -30,11 +30,11 @@ return_4FAB8:
 Map66_ZoneEvent2:
                 
                  
-                chkFlg  $21A            ; Battle 38 completed
+                chkFlg  538             ; Battle 38 completed
                 beq.s   return_4FAD2
-                chkFlg  $21B            ; Battle 39 completed
+                chkFlg  539             ; Battle 39 completed
                 bne.s   return_4FAD2
-                setFlg  $1B7            ; Battle 39 unlocked
+                setFlg  439             ; Battle 39 unlocked
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FAD2:
                 

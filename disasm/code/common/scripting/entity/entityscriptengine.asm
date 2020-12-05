@@ -679,7 +679,7 @@ loc_5220:
                 bne.s   loc_5256
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_5256
-                chkFlg  $41             ; Caravan is unlocked
+                chkFlg  65              ; Caravan is unlocked
                 beq.s   loc_5256
                 move.w  #2,((MAP_EVENT_TYPE-$1000000)).w
                 movem.w (sp)+,d2-d3
@@ -690,7 +690,7 @@ loc_5256:
                 bne.s   loc_5278
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_5278
-                chkFlg  $40             ; Raft is unlocked
+                chkFlg  64              ; Raft is unlocked
                 beq.s   loc_5278
                 move.w  #3,((MAP_EVENT_TYPE-$1000000)).w
                 movem.w (sp)+,d2-d3

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle08\cs_afterbattle.asm :
 ; 0x4AA74..0x4ABFE : Cutscene after battle 8
-abcs_battle08:  textCursor $9A4
+abcs_battle08:  textCursor 2468
                 loadMapFadeIn MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,8,32
                 loadMapEntities ce_4ABBE
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -12,7 +12,7 @@ abcs_battle08:  textCursor $9A4
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                jumpIfFlagSet $6,cs_4AAB6 ; Kiwi joined
+                jumpIfFlagSet 6,cs_4AAB6 ; Kiwi joined
                 setPos ALLY_KIWI,63,63,DOWN
 cs_4AAB6:       fadeInB
                 nextSingleText $0,128   ; "Oh, my...hey!{N}Are you OK?!{W1}"

@@ -9,9 +9,9 @@ ms_map76_ZoneEvents:
 Map76_DefaultZoneEvent:
                 
                  
-                chkFlg  $217            ; Battle 35 completed
+                chkFlg  535             ; Battle 35 completed
                 bne.s   return_50A3A
-                setFlg  $1B3            ; Battle 35 unlocked
+                setFlg  435             ; Battle 35 unlocked
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_50A3A:
                 

@@ -205,7 +205,7 @@ GenerateTargetRangeLists:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C404:
+j_sub_C404_0:
                 
                 movem.l d0-a6,-(sp)
                 bsr.w   ClearTargetGrid 
@@ -234,7 +234,7 @@ loc_C43C:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_C404
+    ; End of function j_sub_C404_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -323,7 +323,7 @@ loc_C4D8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C4E8:
+j_sub_C4E8_0:
                 
                 movem.l d0-a6,-(sp)
                 bsr.w   ClearTargetGrid 
@@ -337,7 +337,7 @@ sub_C4E8:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_C4E8
+    ; End of function j_sub_C4E8_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -482,7 +482,7 @@ CreateTargetGridFromUsedItem:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_C5FA:
+j_sub_C5FA_0:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
@@ -496,7 +496,7 @@ loc_C618:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_C5FA
+    ; End of function j_sub_C5FA_0
 
 
 ; =============== S U B R O U T I N E =======================================

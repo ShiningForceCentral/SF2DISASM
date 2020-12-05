@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map06\mapsetups\scripts.asm :
 ; 0x54E86..0x5537E : 
-cs_54E86:       textCursor $42A
+cs_54E86:       textCursor 1066
                 setCameraEntity 139
                 nextSingleText $0,139   ; "A strange animal?{N}Really?{W1}"
                 nextSingleText $0,138   ; "Yeah!  It's a very big bird!{W1}"
@@ -48,7 +48,7 @@ cs_54E86:       textCursor $42A
                 endActions
                 hide 138
                 csc_end
-cs_54F26:       textCursor $432
+cs_54F26:       textCursor 1074
                 customActscriptWait ALLY_PETER
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -277,7 +277,7 @@ cs_54F26:       textCursor $432
                 endActions
                 setFacing 130,DOWN
                 csc_end
-cs_55242:       textCursor $463
+cs_55242:       textCursor 1123
                 newEntity 142,11,0,DOWN,MAPSPRITE_SOLDIER1
                 customActscriptWait 142
                  ac_setSpeed 40,40      ;   
@@ -296,7 +296,7 @@ cs_55242:       textCursor $463
                 endActions
                 hide 142
                 csc_end
-cs_55288:       textCursor $466
+cs_55288:       textCursor 1126
                 newEntity ALLY_JANET,16,22,DOWN,ALLY_JANET
                 setActscriptWait FOLLOWER_B,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

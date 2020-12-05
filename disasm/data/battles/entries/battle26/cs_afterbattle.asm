@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle26\cs_afterbattle.asm :
 ; 0x4BCAA..0x4BE6A : Cutscene after battle 26
-abcs_battle26:  textCursor $A4D
+abcs_battle26:  textCursor 2637
                 loadMapFadeIn MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,13,11
                 loadMapEntities ce_4BE4A
                 setActscriptWait ALLY_BOWIE,eas_Init

@@ -14,9 +14,9 @@ ms_map30_EntityEvents:
 Map30_EntityEvent0:
                 
                  
-                chkFlg  $2F8            ; Set after the fairy cures the sick dwarf in the mine
+                chkFlg  760             ; Set after the fairy cures the sick dwarf in the mine
                 bne.s   loc_5A230
-                txt     $6A9            ; "We came from Grans to look{N}for Mithril.{W1}"
+                txt     1705            ; "We came from Grans to look{N}for Mithril.{W1}"
                 bra.s   return_5A234
 loc_5A230:
                 
@@ -33,8 +33,8 @@ return_5A234:
 Map30_EntityEvent1:
                 
                  
-                txt     $6AA            ; "Recent earthquakes have{N}buried the tunnel.{W2}{N}My friend is sick now, and{N}we can't dig out the tunnel{N}without him.{W1}"
-                setFlg  $2F7            ; Set after talking to one of the dwarves in the mine near the Fairy Woods
+                txt     1706            ; "Recent earthquakes have{N}buried the tunnel.{W2}{N}My friend is sick now, and{N}we can't dig out the tunnel{N}without him.{W1}"
+                setFlg  759             ; Set after talking to one of the dwarves in the mine near the Fairy Woods
                 rts
 
     ; End of function Map30_EntityEvent1
@@ -46,9 +46,9 @@ Map30_EntityEvent2:
                 
                  
                 script  cs_5A256
-                txt     $6AB            ; "(Shiver)...cold...{N}Oh...I'm so cold....{W1}"
+                txt     1707            ; "(Shiver)...cold...{N}Oh...I'm so cold....{W1}"
                 script  cs_5A256
-                setFlg  $2F7            ; Set after talking to one of the dwarves in the mine near the Fairy Woods
+                setFlg  759             ; Set after talking to one of the dwarves in the mine near the Fairy Woods
                 rts
 
     ; End of function Map30_EntityEvent2
@@ -61,14 +61,14 @@ cs_5A256:       shiver 130
 Map30_EntityEvent3:
                 
                  
-                chkFlg  $2F9            ; Set after the dwarf gives Bowie the cannon
+                chkFlg  761             ; Set after the dwarf gives Bowie the cannon
                 bne.s   byte_5A26C      
-                txt     $6AC            ; "One of us went to look for{N}the fairy.{W2}{N}I hope he's alright.{W1}"
-                setFlg  $2F7            ; Set after talking to one of the dwarves in the mine near the Fairy Woods
+                txt     1708            ; "One of us went to look for{N}the fairy.{W2}{N}I hope he's alright.{W1}"
+                setFlg  759             ; Set after talking to one of the dwarves in the mine near the Fairy Woods
                 bra.s   return_5A270
 byte_5A26C:
                 
-                txt     $6AE            ; "Hey, visit us in the Dwarven{N}Village when you come to{N}Grans!{W1}"
+                txt     1710            ; "Hey, visit us in the Dwarven{N}Village when you come to{N}Grans!{W1}"
 return_5A270:
                 
                 rts
@@ -81,7 +81,7 @@ return_5A270:
 Map30_EntityEvent4:
                 
                  
-                txt     $6AD            ; "Dig, dig!{N}Hey hoo, hey hoo!{W2}{N}To Grans we are a diggin'!{N}Hey hoo, hey hoo!{W1}"
+                txt     1709            ; "Dig, dig!{N}Hey hoo, hey hoo!{W2}{N}To Grans we are a diggin'!{N}Hey hoo, hey hoo!{W1}"
 Map30_DefaultEntityEvent:
                 
                 rts
@@ -94,14 +94,14 @@ Map30_DefaultEntityEvent:
 sub_5A278:
                 
                  
-                txt     $6BE            ; "Thanks to you, he recovered.{W2}"
-                txt     $6BF            ; "We all thank you.{N}Take this gift.{W1}"
+                txt     1726            ; "Thanks to you, he recovered.{W2}"
+                txt     1727            ; "We all thank you.{N}Take this gift.{W1}"
                 moveq   #0,d0
                 moveq   #0,d1
                 jsr     j_GetItemAndNumberOfItems
                 cmpi.w  #4,d2
                 bne.s   loc_5A296
-                txt     $6C1            ; "Oh, your hands are full.{N}I'll give it to you later.{W1}"
+                txt     1729            ; "Oh, your hands are full.{N}I'll give it to you later.{W1}"
                 bra.s   return_5A2C0
 loc_5A296:
                 
@@ -109,11 +109,11 @@ loc_5A296:
                 moveq   #$72,d1 
                 jsr     j_AddItem
                 sndCom  MUSIC_ITEM
-                txt     $6C0            ; "{LEADER} is given a{N}Cannon.{W1}"
+                txt     1728            ; "{LEADER} is given a{N}Cannon.{W1}"
                 moveq   #$64,d0 
                 jsr     (Sleep).w       
                 clsTxt
-                setFlg  $2F9            ; Set after the dwarf gives Bowie the cannon
+                setFlg  761             ; Set after the dwarf gives Bowie the cannon
                 sndCom  SOUND_COMMAND_PLAY_PREVIOUS_MUSIC
                 script  cs_5A4FE
 return_5A2C0:

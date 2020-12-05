@@ -1,7 +1,7 @@
 
 ; ASM FILE data\scripting\map\cs_intro3.asm :
 ; 0x48540..0x48A78 : Intro cutscene 3
-IntroCutscene3: textCursor $1077
+IntroCutscene3: textCursor 4215
                 mapLoad MAP_FORCE_SWORD_SHRINE,21,1
                 loadMapEntities ce_48A50
                 setActscriptWait ALLY_BOWIE,eas_Init

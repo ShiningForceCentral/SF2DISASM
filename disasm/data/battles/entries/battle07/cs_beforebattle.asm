@@ -1,8 +1,8 @@
 
 ; ASM FILE data\battles\entries\battle07\cs_beforebattle.asm :
 ; 0x49CE2..0x49F7E : Cutscene before battle 7
-bbcs_07:        textCursor $935
-                clearF $53              ; King + Minister are followers
+bbcs_07:        textCursor 2357
+                clearF 83               ; King + Minister are followers
                 loadMapFadeIn MAP_ANCIENT_TOWER_UNDERGROUND_ROOM,8,29
                 loadMapEntities ce_49F36
                 setActscriptWait ALLY_BOWIE,eas_Init

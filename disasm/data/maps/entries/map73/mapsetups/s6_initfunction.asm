@@ -7,19 +7,19 @@
 ms_map73_InitFunction:
                 
                  
-                chkFlg  $2BC            ; Set after ship arrives in Parmecia and you regain control of Bowie
+                chkFlg  700             ; Set after ship arrives in Parmecia and you regain control of Bowie
                 bne.s   byte_50354      
                 script  cs_503A6
-                setFlg  $2BC            ; Set after ship arrives in Parmecia and you regain control of Bowie
+                setFlg  700             ; Set after ship arrives in Parmecia and you regain control of Bowie
                 rts
 byte_50354:
                 
-                chkFlg  $1FC            ; Battle 8 completed
+                chkFlg  508             ; Battle 8 completed
                 beq.s   return_5036C
-                chkFlg  $2C1            ; Set after you automatically walk into New Granseal after it is built
+                chkFlg  705             ; Set after you automatically walk into New Granseal after it is built
                 bne.s   return_5036C
                 script  cs_50806
-                setFlg  $2C1            ; Set after you automatically walk into New Granseal after it is built
+                setFlg  705             ; Set after you automatically walk into New Granseal after it is built
                 rts
 return_5036C:
                 
@@ -79,7 +79,7 @@ sub_5039E:
 
     ; End of function sub_5039E
 
-cs_503A6:       textCursor $8BF
+cs_503A6:       textCursor 2239
                 resetForceBattleStats
                 reloadMap 0,0
                 setCameraEntity 65535
@@ -88,7 +88,7 @@ cs_503A6:       textCursor $8BF
                 setBlocks 0,10,22,10,42,10
                 playSound MUSIC_TOWN
                 fadeInB
-                textCursor $8A5
+                textCursor 2213
                 nextSingleText $0,128   ; "We were almost swallowed{N}by that chasm.{W1}"
                 nextSingleText $C0,ALLY_BOWIE ; "That was close!{W1}"
                 nextSingleText $C0,ALLY_SARAH ; "Sir Astral, where should{N}we go now?{W1}"
@@ -99,7 +99,7 @@ cs_503A6:       textCursor $8BF
                 nextSingleText $FF,255  ; "And so the ship heads east{N}for Parmecia.{W1}"
                 csWait 120
                 nextSingleText $0,ALLY_SARAH ; "I feel...sick...to my...{N}stomach...ohhh....{W1}"
-                jumpIfFlagClear $6,cs_50426 ; Kiwi joined
+                jumpIfFlagClear 6,cs_50426 ; Kiwi joined
                 nextSingleText $C0,ALLY_KIWI ; "{NAME;1}, look!{W1}"
                 nextSingleText $0,ALLY_SARAH ; "Sorry, {NAME;6}...I can't{N}do anything right now....{W1}"
                 nextSingleText $C0,ALLY_KIWI ; "That's not what...{W1}"
@@ -108,7 +108,7 @@ cs_503A6:       textCursor $8BF
                 nextSingleText $0,ALLY_SARAH ; "What?  Oh, it's true!{N}Sir Astral, we can see the {N}mainland!{W1}"
                 nextSingleText $0,128   ; "Finally we've arrived.{N}King Granseal, can you see{N}Parmecia?{W1}"
                 nextSingleText $0,130   ; "Oh, that's good...{W1}"
-cs_50426:       textCursor $8B5
+cs_50426:       textCursor 2229
                 nextSingleText $0,128   ; "Minister, we're approaching{N}Parmecia!{W1}"
                 nextSingleText $0,129   ; "Land the ship, captain.{W1}"
                 nextSingleText $C0,131  ; "Where?{W1}"
@@ -138,7 +138,7 @@ cs_50426:       textCursor $8B5
                 csWait 30
                 stopEntity 132
                 csWait 30
-                textCursor $8BF
+                textCursor 2239
                 nextSingleText $FF,255  ; "The people of Granseal have{N}arrived at their new home.{W1}"
                 loadMapFadeIn MAP_SHIP_DAMAGED,18,25
                 loadMapEntities ce_5072E
@@ -213,7 +213,7 @@ cs_50426:       textCursor $8B5
                 stopEntity 131
                 stopEntity 132
                 stopEntity 133
-                jumpIfFlagSet $6,cs_50624 ; Kiwi joined
+                jumpIfFlagSet 6,cs_50624 ; Kiwi joined
                 hide ALLY_KIWI
 cs_50624:       fadeInB
                 entityActionsWait ALLY_JAHA
@@ -304,7 +304,7 @@ ce_5079E:       mainEntity 40,8,LEFT
                 entity 45,6,DOWN,MAPSPRITE_OBJECT2,eas_Init
                 entity 46,6,LEFT,MAPSPRITE_OBJECT2,eas_Init
                 dc.w $FFFF
-cs_50806:       textCursor $8F0
+cs_50806:       textCursor 2288
                 loadMapEntities ce_5094A
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait 128,eas_Init

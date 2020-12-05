@@ -19,9 +19,9 @@ Map22_DefaultZoneEvent:
 Map22_ZoneEvent0:
                 
                  
-                chkFlg  $309            ; Set after the Desktop King tells you to fight on the chessboard
+                chkFlg  777             ; Set after the Desktop King tells you to fight on the chessboard
                 beq.s   return_59600
-                chkFlg  $20A            ; Battle 22 completed
+                chkFlg  522             ; Battle 22 completed
                 bne.s   return_59600
                 move.b  #$16,((EGRESS_MAP_INDEX-$1000000)).w
                 script  cs_5994E

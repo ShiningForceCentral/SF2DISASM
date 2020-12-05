@@ -711,7 +711,7 @@ loc_DD5A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; unused, pointless
+; unused
 
 AddAllToStack:
                 

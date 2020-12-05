@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map16\mapsetups\scripts.asm :
 ; 0x51F88..0x52284 : 
-cs_51F88:       textCursor $3C2
+cs_51F88:       textCursor 962
                 nextSingleText $C0,128  ; "Listen, everybody!{N}We're going to Granseal!{W1}"
                 setFacing ALLY_SLADE,DOWN
                 setFacing ALLY_BOWIE,DOWN
@@ -157,7 +157,7 @@ cs_51F88:       textCursor $3C2
                 nextText $C0,ALLY_SLADE ; "You're serious?{N}Do you think you can stop{N}the war?{W2}"
                 nextSingleText $0,ALLY_SLADE ; "I will leave you once I'm{N}outside the gate!{W1}"
                 csc_end
-cs_521BA:       textCursor $3DA
+cs_521BA:       textCursor 986
                 setPos 146,17,16,UP
                 setPos 147,17,15,DOWN
                 nextSingleText $0,145   ; "You!{W1}"
@@ -197,6 +197,6 @@ cs_521BA:       textCursor $3DA
                 setActscriptWait 145,eas_Jump
                 setActscriptWait 145,eas_Jump
                 nextSingleText $0,145   ; "Intruders!  Intruders!{N}Arrest them!{W1}"
-                setStoryFlag $5         ; Battle 5 unlocked
+                setStoryFlag 5          ; Battle 5 unlocked
 cs_5227C:       warp MAP_GALAM_CASTLE,0,0,RIGHT
                 csc_end

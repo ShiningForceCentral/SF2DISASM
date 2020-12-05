@@ -382,7 +382,7 @@ sub_19C8:
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a1
                 move.w  #$80,d7 
                 jsr     CopyBytes(pc)   
-                move.b  #$20,((FADING_TIMER-$1000000)).w 
+                move.b  #$20,((FADING_TIMER_WORD-$1000000)).w 
                 movem.l (sp)+,d7-a1
                 rts
 
@@ -396,7 +396,7 @@ sub_19C8:
 sub_19F8:
                 
                 clr.w   d6
-                move.b  ((FADING_TIMER-$1000000)).w,d6
+                move.b  ((FADING_TIMER_WORD-$1000000)).w,d6
                 bne.s   loc_1A02
                 rts
 loc_1A02:
@@ -406,7 +406,7 @@ loc_1A02:
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a2
                 moveq   #$3F,d7 
                 subq.w  #1,d6
-                move.b  d6,((FADING_TIMER-$1000000)).w
+                move.b  d6,((FADING_TIMER_WORD-$1000000)).w
                 lsr.w   #2,d6
 loc_1A1C:
                 
@@ -446,10 +446,10 @@ loc_1A1C:
                 move.w  (sp)+,d7
                 dbf     d7,loc_1A1C
                 jsr     ApplyVIntCramDma(pc)
-                tst.b   ((FADING_TIMER-$1000000)).w
+                tst.b   ((FADING_TIMER_WORD-$1000000)).w
                 bne.s   return_1A7E
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
-                tst.b   ((FADING_TIMER+1-$1000000)).w
+                tst.b   ((FADING_TIMER_BYTE-$1000000)).w
                 bne.w   sub_19C8        
 return_1A7E:
                 

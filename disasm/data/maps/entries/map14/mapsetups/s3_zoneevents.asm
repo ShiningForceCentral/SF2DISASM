@@ -11,17 +11,17 @@ Map14_ZoneEvent0:
                 
                  
                 script  cs_58E5C
-                setFlg  $101            ; TEMP FLAG #01
+                setFlg  257             ; TEMP FLAG #01
 Map14_DefaultZoneEvent:
                 
                 rts
 
     ; End of function Map14_ZoneEvent0
 
-cs_58E5C:       textCursor $8D5
+cs_58E5C:       textCursor 2261
                 nextText $FF,255        ; "Bring up the plank?"
                 yesNo
-                jumpIfFlagClear $59,cs_58EB8 ; YES/NO prompt answer
+                jumpIfFlagClear 89,cs_58EB8 ; YES/NO prompt answer
                 hideText
                 entityActionsWait ALLY_BOWIE
                  moveDown 1

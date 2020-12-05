@@ -360,7 +360,8 @@ eas_46310:       ac_set1Db3 $FFFF
                  ac_set1Db3 $0
                  ac_setSize 18
                  ac_jump eas_Init
-eas_463AE:       ac_wait 5
+eas_TwirlShrinkDisappear:
+                 ac_wait 5
                  ac_set1Db3 $FFFF
                  ac_setFacing DOWN
                  ac_setSize 22
@@ -402,6 +403,7 @@ eas_463AE:       ac_wait 5
                  ac_set1Db3 $0
                  ac_setSize 18
                  ac_jump eas_Idle
+eas_ShrinkDisappear:
                  ac_wait 5
                  ac_set1Db3 $FFFF
                  ac_setSize 22

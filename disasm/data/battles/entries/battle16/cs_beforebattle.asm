@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle16\cs_beforebattle.asm :
 ; 0x4AFBE..0x4B1BC : Cutscene before battle 16
-bbcs_16:        textCursor $9D1
+bbcs_16:        textCursor 2513
                 loadMapFadeIn MAP_KRAKEN_RAFT,9,10
                 executeSubroutine csub_4B1CA
                 loadMapEntities ce_4B15C

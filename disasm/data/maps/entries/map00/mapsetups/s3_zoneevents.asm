@@ -11,17 +11,17 @@ ms_map0_ZoneEvents:
 Map0_ZoneEvent0:
                 
                  
-                chkFlg  $321            ; Set after Zalbard taunts you in the scene outside the Mitula Shrine
+                chkFlg  801             ; Set after Zalbard taunts you in the scene outside the Mitula Shrine
                 bne.s   Map0_DefaultZoneEvent
                 script  cs_5E3C2
-                setFlg  $321            ; Set after Zalbard taunts you in the scene outside the Mitula Shrine
+                setFlg  801             ; Set after Zalbard taunts you in the scene outside the Mitula Shrine
 Map0_DefaultZoneEvent:
                 
                 rts
 
     ; End of function Map0_ZoneEvent0
 
-cs_5E3C2:       textCursor $AAB
+cs_5E3C2:       textCursor 2731
                 setActscriptWait ALLY_PETER,eas_Init
                 setActscriptWait FOLLOWER_B,eas_Init
                 nextSingleText $0,128   ; "Welcome, Granseal force!{W1}"
@@ -159,5 +159,5 @@ cs_5E3C2:       textCursor $AAB
                 followEntity FOLLOWER_B,ALLY_BOWIE,2
                 followEntity ALLY_PETER,FOLLOWER_B,2
                 setBlocks 0,38,2,3,14,10
-                setF $348               ; Set after the door to the Mitula Shrine is opened
+                setF 840                ; Set after the door to the Mitula Shrine is opened
                 csc_end

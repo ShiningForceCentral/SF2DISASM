@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle40\cs_afterbattle.asm :
 ; 0x4EA94..0x4ED0E : Cutscene after battle 40
-abcs_battle40:  textCursor $BF9
+abcs_battle40:  textCursor 3065
                 loadMapFadeIn MAP_ODDEYE_ARENA,10,4
                 loadMapEntities ce_4ECD6
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -11,7 +11,7 @@ abcs_battle40:  textCursor $BF9
                 setPos FOLLOWER_B,15,6,DOWN
                 setActscriptWait ALLY_LEMON,eas_Init
                 setPos ALLY_LEMON,17,8,LEFT
-                jumpIfFlagClear $4C,cs_4EAEE ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4EAEE ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,63,62,DOWN
 cs_4EAEE:       setBlocks 11,6,11,29,44,0

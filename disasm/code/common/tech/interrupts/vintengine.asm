@@ -431,9 +431,6 @@ loc_91E:
                 clr.w   (a0)
                 cmpi.b  #$FB,d0
                 bne.s   loc_95A         ; if command FB, play back previous music
-                                        ; NOTE : for future cube save/resume feature,
-                                        ; send proper resume command instead of previous music index !
-                                        ; Cube should save current music at every new music index !
                 tst.b   ((MUSIC_STACK_LENGTH-$1000000)).w
                 beq.s   loc_94E
                 movem.l d7-a0,-(sp)
@@ -472,8 +469,7 @@ loc_97A:
 loc_994:
                 
                 movem.l d0,-(sp)
-                andi.b  #$7F,d0 ; a music/sfx index mask that must be changed to allow indexes above $80
-                                        ; also change stuff at 9AA then !
+                andi.b  #$7F,d0 ; a music/sfx index mask, so max index value is $7F
                 cmp.b   ((MUSIC_STACK-$1000000)).w,d0 ; compare with last played music
                 movem.l (sp)+,d0
                 bne.s   loc_9AA
@@ -510,7 +506,7 @@ loc_9DC:
 loc_9F6:
                 
                 bsr.w   UpdatePlayerInputs
-                tst.b   ((byte_FFDE9D-$1000000)).w
+                tst.b   ((CONTROLLING_UNIT_CURSOR-$1000000)).w
                 bne.s   loc_A60
                 moveq   #2,d0
                 move.b  ((P1_INPUT-$1000000)).w,d1
@@ -914,7 +910,7 @@ FadeOutToWhite:
 
 ExecuteFading:
                 
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -1107,8 +1103,6 @@ loc_E70:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; unused DMA
 
 ClearCram:
                 

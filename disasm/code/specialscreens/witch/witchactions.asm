@@ -7,7 +7,7 @@
 WitchNew:
                 
                  
-                txt     $DE             ; "What should I call you?{W2}"
+                txt     222             ; "What should I call you?{W2}"
                 move.b  (SAVE_FLAGS).l,d2
                 andi.w  #3,d2
                 eori.w  #3,d2
@@ -50,9 +50,9 @@ loc_746A:
                 dbf     d7,loc_7464
 byte_7476:
                 
-                txt     $DF             ; "{NAME;0}....{N}Nice name, huh?{W2}"
+                txt     223             ; "{NAME;0}....{N}Nice name, huh?{W2}"
                 bsr.w   CheatModeConfiguration
-                txt     $E8             ; "I'll let you decide the{N}difficulty level at this time."
+                txt     232             ; "I'll let you decide the{N}difficulty level at this time."
                 clr.w   d0
                 moveq   #3,d1
                 moveq   #$F,d2
@@ -64,17 +64,17 @@ loc_7494:
                 
                 btst    #0,d0
                 beq.s   loc_749E
-                setFlg  $4E             ; Difficulty bit 0
+                setFlg  78              ; Difficulty bit 0
 loc_749E:
                 
                 btst    #1,d0
                 beq.s   loc_74A8        
-                setFlg  $4F             ; Difficulty bit 1
+                setFlg  79              ; Difficulty bit 1
 loc_74A8:
                 
                 addi.w  #$E9,d0 ; HARDCODED text index for difficulty choice reactions
                 bsr.w   DisplayText     
-                txt     $E0             ; "Now, good luck!{N}You have no time to waste!{W1}"
+                txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
 loc_74B4:
                 
                 move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
@@ -99,7 +99,7 @@ loc_74DE:
 WitchLoad:
                 
                  
-                txt     $E1             ; "By the way, who are you?"
+                txt     225             ; "By the way, who are you?"
                 move.b  (SAVE_FLAGS).l,d2
                 andi.w  #3,d2
                 lsl.w   #1,d2
@@ -119,12 +119,12 @@ loc_74FE:
                 subq.w  #1,d0
                 move.w  d0,((SAVE_SLOT_INDEX-$1000000)).w
                 bsr.w   LoadGame
-                txt     $E2             ; "{NAME;0}, yes!  I knew it!{W2}"
+                txt     226             ; "{NAME;0}, yes!  I knew it!{W2}"
                 bsr.w   CheatModeConfiguration
-                txt     $E0             ; "Now, good luck!{N}You have no time to waste!{W1}"
+                txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
                 clsTxt
                 clr.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
-                chkFlg  $58             ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
+                chkFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 beq.s   loc_753A
                 jsr     j_BattleLoop
                 bra.w   loc_75E0        
@@ -145,7 +145,7 @@ loc_753A:
 WitchCopy:
                 
                  
-                txt     $E3             ; "Copy?  Really?"
+                txt     227             ; "Copy?  Really?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.w   byte_73C2       
@@ -153,7 +153,7 @@ WitchCopy:
                 andi.w  #3,d0
                 subq.w  #1,d0
                 bsr.w   CopySave
-                txt     $E4             ; "Hee, hee!  It's done.{W2}"
+                txt     228             ; "Hee, hee!  It's done.{W2}"
                 bra.w   byte_73C2       
 
     ; End of function WitchCopy
@@ -164,7 +164,7 @@ WitchCopy:
 WitchDel:
                 
                  
-                txt     $E5             ; "Delete which one?"
+                txt     229             ; "Delete which one?"
                 move.b  (SAVE_FLAGS).l,d2
                 andi.w  #3,d2
                 lsl.w   #1,d2
@@ -183,13 +183,13 @@ loc_7590:
                 bmi.w   byte_73C2       
                 subq.w  #1,d0
                 move.w  d0,((SAVE_SLOT_INDEX-$1000000)).w
-                txt     $E6             ; "Delete?  Are you sure?"
+                txt     230             ; "Delete?  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.w   byte_73C2       
                 move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
                 bsr.w   ClearSaveSlotFlag
-                txt     $E7             ; "Hee, hee!  It's gone!{W2}"
+                txt     231             ; "Hee, hee!  It's gone!{W2}"
                 bra.w   byte_73C2       
 
     ; End of function WitchDel

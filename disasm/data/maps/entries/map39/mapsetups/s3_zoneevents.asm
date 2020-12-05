@@ -19,10 +19,10 @@ Map39_DefaultZoneEvent:
 Map39_ZoneEvent0:
                 
                  
-                chkFlg  $33E            ; Set after the Gyan join scene in the Moun underground
+                chkFlg  830             ; Set after the Gyan join scene in the Moun underground
                 bne.s   return_5E0CC
                 script  cs_5E0F8
-                setFlg  $33E            ; Set after the Gyan join scene in the Moun underground
+                setFlg  830             ; Set after the Gyan join scene in the Moun underground
 return_5E0CC:
                 
                 rts

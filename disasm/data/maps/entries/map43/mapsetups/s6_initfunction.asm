@@ -8,17 +8,17 @@ ms_map43_InitFunction:
                 
                  
                 script  cs_540C0
-                setFlg  $264            ; Set after event at Hawel's house
-                setFlg  $28A            ; Set after event at Hawel's house
-                clrFlg  $48             ; Kazin is a follower
+                setFlg  612             ; Set after event at Hawel's house
+                setFlg  650             ; Set after event at Hawel's house
+                clrFlg  72              ; Kazin is a follower
                 move.b  #$2B,((EGRESS_MAP_INDEX-$1000000)).w 
-return_540BE:
+ms_map43_flag612_InitFunction:
                 
                 rts
 
     ; End of function ms_map43_InitFunction
 
-cs_540C0:       textCursor $32B
+cs_540C0:       textCursor 811
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_KAZIN,eas_Init
                 setPos 128,7,4,DOWN
@@ -192,6 +192,6 @@ cs_540C0:       textCursor $32B
                 join 32772
                 nextSingleText $0,ALLY_KAZIN ; "Now, let's go to the{N}Ancient Shrine!{W1}"
                 followEntity ALLY_KAZIN,ALLY_BOWIE,2
-                clearF $48              ; Kazin is a follower
-                setStoryFlag $4         ; Battle 4 unlocked
+                clearF 72               ; Kazin is a follower
+                setStoryFlag 4          ; Battle 4 unlocked
                 csc_end

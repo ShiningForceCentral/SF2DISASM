@@ -24,9 +24,9 @@ Map70_ZoneEvent0:
 Map70_DefaultZoneEvent:
                 
                  
-                chkFlg  $1FE            ; Battle 10 completed
+                chkFlg  510             ; Battle 10 completed
                 bne.s   return_4FE30
-                setFlg  $19A            ; Battle 10 unlocked
+                setFlg  410             ; Battle 10 unlocked
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FE30:
                 

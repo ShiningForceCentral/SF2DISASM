@@ -7,20 +7,20 @@
 ms_map17_InitFunction:
                 
                  
-                chkFlg  $294            ; Set after initial wake-up in prison sequence
+                chkFlg  660             ; Set after initial wake-up in prison sequence
                 bne.s   byte_52460      
                 script  cs_5249E
-                setFlg  $294            ; Set after initial wake-up in prison sequence
+                setFlg  660             ; Set after initial wake-up in prison sequence
 byte_52460:
                 
-                chkFlg  $297            ; Set after Galam and Lemon leave with their army
+                chkFlg  663             ; Set after Galam and Lemon leave with their army
                 beq.s   byte_52476      
                 move.w  #$83,d0 
                 jsr     MoveEntityOutOfMap
                 script  cs_5247C
 byte_52476:
                 
-                setFlg  $263            ; Set after prison wake-up sequence IF 0297 is *not* also set
+                setFlg  611             ; Set after prison wake-up sequence IF 0297 is *not* also set
                 rts
 
     ; End of function ms_map17_InitFunction
@@ -36,7 +36,7 @@ cs_5249E:       playSound $FD
                 loadEntitiesFromMapSetup 0,0,RIGHT
                 csWait 60
                 fadeInB
-                textCursor $370
+                textCursor 880
                 reloadMap 52,1
                 setPos ALLY_BOWIE,59,4,UP
                 nextSingleText $0,ALLY_SARAH ; "Impossible!{N}Galam and Granseal are{N}allies!{W1}"
@@ -62,7 +62,7 @@ cs_5249E:       playSound $FD
                 setFacing ALLY_BOWIE,LEFT
                 csWait 40
                 setFacing ALLY_CHESTER,RIGHT
-                textCursor $37C
+                textCursor 892
                 nextText $0,ALLY_CHESTER ; "{LEADER}!{N}You finally woke up!{W2}"
                 nextSingleText $0,ALLY_CHESTER ; "We're talking about{N}Ground Seal.{N}Please, join in.{W1}"
                 setFacing ALLY_CHESTER,LEFT

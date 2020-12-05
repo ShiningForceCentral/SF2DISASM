@@ -1196,7 +1196,7 @@ j_WriteBattlesceneScript:
 
 j_sub_C404:
                 
-                jmp     sub_C404(pc)
+                jmp     j_sub_C404_0(pc)
 
     ; End of function j_sub_C404
 
@@ -1223,7 +1223,7 @@ j_CreateItemRangeGrid:
 
 j_sub_C4E8:
                 
-                jmp     sub_C4E8(pc)
+                jmp     j_sub_C4E8_0(pc)
 
     ; End of function j_sub_C4E8
 
@@ -1241,7 +1241,7 @@ j_CreateTargetGridFromUsedItem:
 
 j_sub_C5FA:
                 
-                jmp     sub_C5FA(pc)
+                jmp     j_sub_C5FA_0(pc)
 
     ; End of function j_sub_C5FA
 

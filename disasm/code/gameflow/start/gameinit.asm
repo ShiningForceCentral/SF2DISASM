@@ -37,7 +37,7 @@ loc_7118:
                 dc.l VInt_UpdateWindows
                 move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
                 bsr.w   InitWindowProperties
-                setFlg  $18F            ; Set after first battle's cutscene OR first save? Checked at witch screens
+                setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 moveq   #0,d0
                 moveq   #0,d1
                 moveq   #$38,d2 

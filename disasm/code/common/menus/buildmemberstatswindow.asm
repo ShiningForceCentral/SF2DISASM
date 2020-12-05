@@ -382,7 +382,7 @@ aJewel:
                 
                 move.w  -2(a6),d0
                 bne.s   @LoadSpellIcons ; skip if anyone other than Bowie
-                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                chkFlg  384             ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 beq.s   @LoadSpellIcons
                 move.w  d7,-(sp)
                 lea     aJewel(pc), a0  
@@ -398,7 +398,7 @@ aJewel:
                 adda.w  #WINDOW_MEMBERSTATS_OFFSET_JEWEL_OF_LIGHT,a1
                 move.w  #$92,d1 ; ?
                 bsr.w   CopyMemberScreenIconsToVdpTileOrder
-                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
+                chkFlg  385             ; Set after Bowie obtains King Galam's jewel
                 beq.s   @LoadSpellIcons
                 movea.l -6(a6),a1
                 adda.w  #WINDOW_MEMBERSTATS_OFFSET_JEWEL_OF_EVIL,a1

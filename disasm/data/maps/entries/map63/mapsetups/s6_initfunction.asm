@@ -7,7 +7,7 @@
 ms_map63_InitFunction:
                 
                  
-                chkFlg  $1D             ; Claude joined
+                chkFlg  29              ; Claude joined
                 bne.s   return_5CA5C
                 script  cs_5CA5E
 return_5CA5C:

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle01\cs_afterbattle.asm :
 ; 0x496DC..0x4980E : Cutscene after battle 1
-abcs_battle01:  textCursor $901
+abcs_battle01:  textCursor 2305
                 resetForceBattleStats
                 loadMapFadeIn MAP_ANCIENT_TOWER_FIRST_ROOM,2,0
                 loadMapEntities ce_497F6

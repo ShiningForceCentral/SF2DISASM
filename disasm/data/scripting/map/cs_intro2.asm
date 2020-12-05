@@ -1,7 +1,7 @@
 
 ; ASM FILE data\scripting\map\cs_intro2.asm :
 ; 0x48380..0x48540 : Intro cutscene 2
-IntroCutscene2: textCursor $106A
+IntroCutscene2: textCursor 4202
                 mapLoad MAP_GRANSEAL_CASTLE,7,2
                 loadMapEntities ce_48510
                 setActscriptWait ALLY_BOWIE,eas_Init

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map52\mapsetups\scripts.asm :
 ; 0x5C4EE..0x5C638 : 
-cs_5C4EE:       textCursor $575
+cs_5C4EE:       textCursor 1397
                 cameraSpeed $30
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -76,11 +76,11 @@ cs_5C4EE:       textCursor $575
                 setFacing 128,UP
                 setFacing 131,UP
                 nextSingleText $0,128   ; "They shall never return{N}alive!{W1}"
-                setStoryFlag $C         ; Battle 12 unlocked
+                setStoryFlag 12         ; Battle 12 unlocked
                 warp MAP_PATH_TO_MOUNT_VOLCANON,0,0,RIGHT
                 csc_end
 cs_5C622:       setPos ALLY_PETER,22,8,RIGHT
-                textCursor $9BD
+                textCursor 2493
                 fadeInB
                 nextText $0,ALLY_PETER  ; "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"
                 nextSingleText $0,ALLY_PETER ; "Why do the devils want you?{W1}"

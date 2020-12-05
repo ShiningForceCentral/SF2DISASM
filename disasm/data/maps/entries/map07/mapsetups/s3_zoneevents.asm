@@ -14,25 +14,25 @@ ms_map7_ZoneEvents:
 Map7_ZoneEvent0:
                 
                  
-                chkFlg  $322            ; Set after the event in the basement of Creed's Mansion
+                chkFlg  802             ; Set after the event in the basement of Creed's Mansion
                 bne.s   byte_557D8      
-                chkFlg  $2BD            ; Set after the scene with Peter and the kids in New Granseal
+                chkFlg  701             ; Set after the scene with Peter and the kids in New Granseal
                 beq.s   loc_557D6
-                chkFlg  $2BE            ; Set after the scene with Peter at the Castle (ends with you leaving the Castle)
+                chkFlg  702             ; Set after the scene with Peter at the Castle (ends with you leaving the Castle)
                 bne.s   loc_557D6
                 script  cs_55A36
-                setFlg  $2BE            ; Set after the scene with Peter at the Castle (ends with you leaving the Castle)
-                setFlg  $43             ; Peter is a follower
+                setFlg  702             ; Set after the scene with Peter at the Castle (ends with you leaving the Castle)
+                setFlg  67              ; Peter is a follower
 loc_557D6:
                 
                 bra.s   Map7_DefaultZoneEvent
 byte_557D8:
                 
-                chkFlg  $325            ; Set after coming back to New Granseal after Creed's Mansion,when Astral joins
+                chkFlg  805             ; Set after coming back to New Granseal after Creed's Mansion,when Astral joins
                 bne.s   Map7_DefaultZoneEvent
                 script  cs_55BEE
-                setFlg  $325            ; Set after coming back to New Granseal after Creed's Mansion,when Astral joins
-                setFlg  $46             ; Astral is a follower
+                setFlg  805             ; Set after coming back to New Granseal after Creed's Mansion,when Astral joins
+                setFlg  70              ; Astral is a follower
 Map7_DefaultZoneEvent:
                 
                 rts

@@ -10,21 +10,21 @@ ms_map74_ZoneEvents:
 Map74_ZoneEvent0:
                 
                  
-                chkFlg  $20F            ; Battle 27 completed
+                chkFlg  527             ; Battle 27 completed
                 bne.s   byte_509AC      
-                setFlg  $1AB            ; Battle 27 unlocked
+                setFlg  427             ; Battle 27 unlocked
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
-                setFlg  $1AC            ; Battle 28 unlocked
-                setFlg  $1AD            ; Battle 29 unlocked
-                setFlg  $1AE            ; Battle 30 unlocked
+                setFlg  428             ; Battle 28 unlocked
+                setFlg  429             ; Battle 29 unlocked
+                setFlg  430             ; Battle 30 unlocked
                 bra.s   Map74_DefaultZoneEvent
 byte_509AC:
                 
-                chkFlg  $32B            ; Set after Frayja asks to go to Moun with you
+                chkFlg  811             ; Set after Frayja asks to go to Moun with you
                 beq.s   Map74_DefaultZoneEvent
-                chkFlg  $214            ; Battle 32 completed
+                chkFlg  532             ; Battle 32 completed
                 bne.s   Map74_DefaultZoneEvent
-                setFlg  $1B0            ; Battle 32 unlocked
+                setFlg  432             ; Battle 32 unlocked
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 Map74_DefaultZoneEvent:
                 

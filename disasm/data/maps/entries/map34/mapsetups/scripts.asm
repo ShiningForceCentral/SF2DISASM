@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map34\mapsetups\scripts.asm :
 ; 0x5B6C0..0x5BFEE : 
-cs_5B6C0:       textCursor $C87
+cs_5B6C0:       textCursor 3207
                 setCamDest 2,4
                 nextText $80,128        ; "Yeeenn...queeen...{N}tillooora...synooora...{N}hear my voice....{W2}"
                 nextSingleText $80,128  ; "Evil Spirit, come.{W1}"

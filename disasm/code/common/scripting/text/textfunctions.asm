@@ -1035,8 +1035,6 @@ loc_6A0C:
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to text box
-
 HideTextBox:
                 
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0

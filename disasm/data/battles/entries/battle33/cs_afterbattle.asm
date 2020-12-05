@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle33\cs_afterbattle.asm :
 ; 0x4D09A..0x4D342 : Cutscene after battle 33
-abcs_battle33:  textCursor $B3C
+abcs_battle33:  textCursor 2876
                 loadMapFadeIn MAP_MOUN,8,6
                 loadMapEntities ce_4D322
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -159,7 +159,7 @@ abcs_battle33:  textCursor $B3C
                 nextSingleText $0,FOLLOWER_B ; "{NAME;26} knows where{N}they're hiding.{W1}"
                 followEntity FOLLOWER_B,ALLY_BOWIE,2
                 followEntity ALLY_PETER,FOLLOWER_B,2
-                setF $341               ; Set after the scene after you win the battle in Moun plays out
+                setF 833                ; Set after the scene after you win the battle in Moun plays out
                 csc_end
 ce_4D322:       mainEntity 11,11,UP
                 entity 13,11,UP,ALLY_PETER,eas_Init

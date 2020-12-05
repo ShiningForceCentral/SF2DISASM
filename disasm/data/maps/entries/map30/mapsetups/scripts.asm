@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map30\mapsetups\scripts.asm :
 ; 0x5A33A..0x5A646 : 
-cs_5A33A:       textCursor $6AF
+cs_5A33A:       textCursor 1711
                 setCamDest 0,7
                 setActscriptWait 158,eas_Init2
                 followEntity FOLLOWER_B,ALLY_PETER,2
@@ -123,7 +123,7 @@ cs_5A33A:       textCursor $6AF
                  moveLeft 3
                 endActions
                 csc_end
-cs_5A4FE:       textCursor $6C2
+cs_5A4FE:       textCursor 1730
                 setFacing 129,LEFT
                 setFacing 130,LEFT
                 setFacing 131,LEFT

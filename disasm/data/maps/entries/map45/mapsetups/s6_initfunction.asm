@@ -7,7 +7,7 @@
 ms_map45_InitFunction:
                 
                  
-                chkFlg  $19             ; Shiela joined
+                chkFlg  25              ; Shiela joined
                 beq.s   byte_600AA
                 move.w  #$19,d0
                 jsr     MoveEntityOutOfMap

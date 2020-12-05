@@ -10,7 +10,7 @@ ms_map55_ZoneEvents:
 Map55_ZoneEvent0:
                 
                  
-                chkFlg  $216            ; Battle 34 completed
+                chkFlg  534             ; Battle 34 completed
                 beq.s   Map55_DefaultZoneEvent
                 script  cs_5E27C
 Map55_DefaultZoneEvent:

@@ -52,5 +52,5 @@ rbcs_battle40_1:cameraSpeed $30
                 setBlocks 11,11,1,1,15,19
                 csWait 1
                 setBlocks 11,11,1,1,19,22
-                setF $183               ; Set after the first set of tile changes in the Oddeye battle
+                setF 387                ; Set after the first set of tile changes in the Oddeye battle
                 csc_end

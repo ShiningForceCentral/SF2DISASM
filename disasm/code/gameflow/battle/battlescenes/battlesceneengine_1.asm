@@ -46,7 +46,7 @@ loc_19EA8:
 FadeInFromBlackIntoBattlescene:
                 
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -60,7 +60,7 @@ FadeInFromBlackIntoBattlescene:
 FadeOutToBlackForBattlescene:
                 
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -745,8 +745,6 @@ loc_1A324:
 
 ; =============== S U B R O U T I N E =======================================
 
-; code for invocations
-
 LoadInvocationSpell:
                 
                 movem.l d0/a6,-(sp)
@@ -855,7 +853,7 @@ loc_1A418:
                 beq.s   return_1A474
                 bsr.w   bsc0D_endAnimation
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -7491,7 +7489,7 @@ loc_1DB2E:
                 bne.s   loc_1DB62
                 bsr.w   sub_1DC36
                 move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -7505,7 +7503,7 @@ loc_1DB62:
                 bne.s   loc_1DB8E
                 bsr.w   sub_1DC48
                 move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -8522,7 +8520,7 @@ loc_1E33C:
                 move.w  #$563|VDPTILE_PLT3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
                 sndCom  SFX_PRISM_LASER_FIRING
                 move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -8536,7 +8534,7 @@ loc_1E36C:
                 addq.w  #1,2(a5)
                 move.w  #$1E,4(a5)
                 move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -8805,7 +8803,7 @@ loc_1E5DC:
                 lea     byte_1E786(pc), a0
                 move.w  d6,d0
                 bsr.w   sub_19F5E
-                sndCom  SFX_LANDSTALKER_SWITCH
+                sndCom  SFX_SPAWN
                 bra.w   loc_1E730
 loc_1E622:
                 
@@ -9324,7 +9322,7 @@ loc_1EA22:
                 bne.w   loc_1EA46
                 lea     byte_1EB88(pc), a0
                 bsr.w   sub_19F5E
-                sndCom  SFX_LANDSTALKER_SWITCH
+                sndCom  SFX_SPAWN
                 bra.w   loc_1EA98
 loc_1EA46:
                 
@@ -9758,8 +9756,6 @@ sub_1EE1A:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; and other stuff ?
 
 VInt_UpdateBattlesceneGraphics:
                 

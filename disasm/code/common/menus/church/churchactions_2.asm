@@ -147,16 +147,16 @@ loc_21170:
                 beq.w   loc_21220
                 addi.w  #1,-$18(a6)
                 move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $84             ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
+                txt     132             ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
                 move.l  #$14,-8(a6)
                 move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
-                txt     $7B             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
+                txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
                 jsr     sub_10050
                 jsr     j_YesNoChoiceBox
                 jsr     sub_10058
                 cmpi.w  #0,d0
                 beq.w   loc_211D6
-                txt     $7C             ; "You don't need my help?{W2}"
+                txt     124             ; "You don't need my help?{W2}"
                 bra.w   loc_21220
 loc_211D6:
                 
@@ -165,7 +165,7 @@ loc_211D6:
                 move.l  -8(a6),d0
                 cmp.l   d0,d1
                 bcc.s   loc_211F0
-                txt     $7D             ; "You can't afford it?!{N}What a pity....{W2}"
+                txt     125             ; "You can't afford it?!{N}What a pity....{W2}"
                 clr.w   d7
                 bra.s   loc_21220
 loc_211F0:
@@ -181,14 +181,14 @@ loc_211F0:
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
                 move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $85             ; "{NAME} is no longer{N}paralyzed.{W2}"
+                txt     133             ; "{NAME} is no longer{N}paralyzed.{W2}"
 loc_21220:
                 
                 movem.l (sp)+,a0
                 dbf     d7,loc_21170
                 cmpi.w  #0,-$18(a6)
                 bne.w   return_21236
-                txt     $86             ; "Nobody is paralyzed.{W2}"
+                txt     134             ; "Nobody is paralyzed.{W2}"
 return_21236:
                 
                 rts
