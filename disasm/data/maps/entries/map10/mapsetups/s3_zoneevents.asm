@@ -21,10 +21,10 @@ Map10_DefaultZoneEvent:
 Map10_ZoneEvent0:
                 
                  
-                chkFlg  $2D0            ; Set after the King of Bedoe speaks to his soldiers and they disperse
+                chkFlg  720             ; Set after the King of Bedoe speaks to his soldiers and they disperse
                 bne.s   return_56FAC
                 script  cs_573EC
-                setFlg  $2D0            ; Set after the King of Bedoe speaks to his soldiers and they disperse
+                setFlg  720             ; Set after the King of Bedoe speaks to his soldiers and they disperse
 return_56FAC:
                 
                 rts
@@ -37,10 +37,10 @@ return_56FAC:
 Map10_ZoneEvent1:
                 
                  
-                chkFlg  $2D1            ; Set after you approach the King of Bedoe, starts with Luke speaking to Peter
+                chkFlg  721             ; Set after you approach the King of Bedoe, starts with Luke speaking to Peter
                 bne.s   return_56FBE
                 script  cs_574A6
-                setFlg  $2D1            ; Set after you approach the King of Bedoe, starts with Luke speaking to Peter
+                setFlg  721             ; Set after you approach the King of Bedoe, starts with Luke speaking to Peter
 return_56FBE:
                 
                 rts

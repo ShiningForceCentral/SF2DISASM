@@ -10,6 +10,8 @@ tbl_SpecialCaravanDescriptions:
 ;
 ; Syntax        specialCaravanDescription [ITEM_]index, parameter, [MESSAGE_CARAVANDESC_]index
                 
-                specialCaravanDescription CHIRRUP_SANDALS, 2, CHIRRUP_SANDALS
+                specialCaravanDescription CHIRRUP_SANDALS, 2, CHIRRUP_SANDALS 
+                                                        ; "Chirrup sandals.{W2}"
+                                        ; "They make you happy when{N}you wear them.{W1}"
                 
                 tableEnd

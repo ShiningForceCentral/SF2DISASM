@@ -7,25 +7,25 @@
 ms_map22_InitFunction:
                 
                  
-                chkFlg  $308            ; Set after the scene where Goliath places you on the Desktop
+                chkFlg  776             ; Set after the scene where Goliath places you on the Desktop
                 bne.s   byte_5963E      
                 script  cs_59656
-                setFlg  $308            ; Set after the scene where Goliath places you on the Desktop
+                setFlg  776             ; Set after the scene where Goliath places you on the Desktop
 byte_5963E:
                 
-                chkFlg  $20A            ; Battle 22 completed
+                chkFlg  522             ; Battle 22 completed
                 beq.s   return_59654
-                chkFlg  $30A            ; Set after the scene that plays after you win the chess battle
+                chkFlg  778             ; Set after the scene that plays after you win the chess battle
                 bne.s   return_59654
                 script  cs_5996E
-                setFlg  $30A            ; Set after the scene that plays after you win the chess battle
+                setFlg  778             ; Set after the scene that plays after you win the chess battle
 return_59654:
                 
                 rts
 
     ; End of function ms_map22_InitFunction
 
-cs_59656:       textCursor $6D4
+cs_59656:       textCursor 1748
                 reloadMap 0,19
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

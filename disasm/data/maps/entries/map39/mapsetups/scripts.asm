@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map39\mapsetups\scripts.asm :
 ; 0x5E0F8..0x5E22C : 
-cs_5E0F8:       textCursor $805
+cs_5E0F8:       textCursor 2053
                 setCameraEntity ALLY_GYAN
                 setDest ALLY_BOWIE,19,7
                 entityActionsWait ALLY_PETER
@@ -73,7 +73,7 @@ cs_5E0F8:       textCursor $805
                 followEntity ALLY_GYAN,FOLLOWER_B,2
                 setPos ALLY_ZYNK,4,12,UP
                 csc_end
-cs_5E20A:       textCursor $819
+cs_5E20A:       textCursor 2073
                 nextSingleText $0,ALLY_ZYNK ; "I happened to overhear your{N}conversation with {NAME;24}.{W2}"
                 nextSingleText $0,ALLY_ZYNK ; "I want to go to Grans, too.{W1}"
                 nextSingleText $0,128   ; "They decide to take the{N}ancient soldier {NAME;26}{N}with them.{W1}"

@@ -75,7 +75,7 @@ CheckSram:
                 
                 lea     SramCheckString(pc), a0
                 lea     (SRAM_STRING).l,a1
-                moveq   #$11,d7         ; copy string to sram ... again ?
+                moveq   #$11,d7
                 bsr.w   CopyBytesToSram 
                 clr.b   (SAVE_FLAGS).l  
                 clr.w   d0

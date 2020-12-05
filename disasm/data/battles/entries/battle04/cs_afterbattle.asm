@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle04\cs_afterbattle.asm :
 ; 0x498EE..0x49AB2 : Cutscene after battle 4
-abcs_battle04:  textCursor $90F
+abcs_battle04:  textCursor 2319
                 loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,9,16
                 loadMapEntities ce_49A6A
                 setActscriptWait ALLY_BOWIE,eas_Init

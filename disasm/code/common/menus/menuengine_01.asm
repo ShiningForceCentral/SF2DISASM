@@ -647,8 +647,6 @@ sub_101E6:
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to menus
-; 
 ; In: A0 = special subroutine address to handle menu, default handling if not supplied (unused functionality)
 ;     D0 = initial choice (00=up, 01=left, 02=right, 03=down)
 ;     D1 = animate-in direction (00=from bottom, other=from right)

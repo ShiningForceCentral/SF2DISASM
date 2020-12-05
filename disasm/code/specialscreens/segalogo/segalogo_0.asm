@@ -51,7 +51,7 @@ DisplaySegaLogo:
                 dc.w VINTS_ADD
                 dc.l VInt_CheckDebugModeCheat
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -1128,8 +1128,6 @@ LoadSegaLogoPalette:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Checksum
-
 CalculateRomChecksum:
                 
                 jsr     (WaitForVInt).w
@@ -1147,7 +1145,7 @@ CalculateRomChecksum:
                 moveq   #0,d0
 loc_28F88:
                 
-                add.w   (a0)+,d0        ; big ROM content sum stored in a RAM word
+                add.w   (a0)+,d0        ; sum stored in a RAM word
                 dbf     d2,loc_28F88    
                 dbf     d1,loc_28F88    
                 move.w  d0,((ROM_CHECKSUM-$1000000)).w

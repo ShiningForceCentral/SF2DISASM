@@ -7,19 +7,19 @@
 ms_map9_InitFunction:
                 
                  
-                chkFlg  $206            ; Battle 18 completed
+                chkFlg  518             ; Battle 18 completed
                 bne.s   byte_568D4      
                 move.w  #$89,d0 
                 jsr     MoveEntityOutOfMap
 byte_568D4:
                 
-                chkFlg  $41             ; Caravan is unlocked
+                chkFlg  65              ; Caravan is unlocked
                 beq.s   byte_568E4      
                 move.w  #$B,d0
                 jsr     MoveEntityOutOfMap
 byte_568E4:
                 
-                chkFlg  $C              ; Rick joined
+                chkFlg  12              ; Rick joined
                 beq.s   return_568F4
                 move.w  #$C,d0
                 jsr     MoveEntityOutOfMap

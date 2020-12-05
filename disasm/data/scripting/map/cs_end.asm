@@ -198,7 +198,7 @@ dms_01:         faceEntity 134,ALLY_BOWIE
 cs_4934A:       entityFlashWhite ALLY_BOWIE,$B4
                 jump cs_4934A
                 csc_end
-                textCursor $142
+                textCursor 322
                 csc15 ALLY_SARAH,$1,eas_ControlledCharacter
                 showPortrait $0,ALLY_BOWIE
                 setQuake 32770
@@ -275,7 +275,7 @@ sub_493EC:
                 animEntityFX ALLY_KIWI,7
                 playSound MUSIC_PROMOTED_ATTACK_LOOP
                 csc_end
-                textCursor $18A
+                textCursor 394
                 showPortrait $0,ALLY_BOWIE
                 nextTextVar $0,ALLY_BOWIE,$0,$3,$A ; "{NAME} found{N}the {ITEM}.{D1}"
                 nextSingleTextVar $0,ALLY_BOWIE,$0,$4 ; "{NAME} received{N}the {ITEM}."

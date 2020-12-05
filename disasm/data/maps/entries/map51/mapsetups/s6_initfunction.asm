@@ -7,7 +7,7 @@
 ms_map51_InitFunction:
                 
                  
-                chkFlg  $1D6            ; Set after you approach the pond to rescue Elric at the Harpy Pond
+                chkFlg  470             ; Set after you approach the pond to rescue Elric at the Harpy Pond
                 bne.s   return_5C3D6
                 script  cs_5C3D8
 return_5C3D6:
@@ -16,7 +16,7 @@ return_5C3D6:
 
     ; End of function ms_map51_InitFunction
 
-cs_5C3D8:       textCursor $9F6
+cs_5C3D8:       textCursor 2550
                 setActscriptWait FOLLOWER_B,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
                 setPos ALLY_BOWIE,11,22,UP

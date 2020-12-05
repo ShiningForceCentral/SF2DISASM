@@ -117,8 +117,6 @@ InitAllEnemiesBattlePositions:
 
 ; =============== S U B R O U T I N E =======================================
 
-; (also checks for Jaro)
-
 InitEnemyBattlePosition:
                 
                 movem.l d0-a6,-(sp)
@@ -126,9 +124,9 @@ InitEnemyBattlePosition:
                 move.b  (a0),d1
                 cmpi.b  #BATTLE_TO_MOUN,d1
                 bne.s   loc_1B132E
-                cmpi.b  #$8F,d0         ; check if enemy 15 is present
+                cmpi.b  #$8F,d0
                 bne.s   loc_1B132E
-                bsr.w   HasJaroJoinedTheForce
+                bsr.w   HasJaroJoinedTheForce ; HARDCODED check for Jaro in battle 32
                 tst.w   d1
                 beq.s   loc_1B132E
                 bra.w   loc_1B139A      ; skip positioning enemy 15 in battle 32 if Jaro has joined the Force
@@ -266,7 +264,7 @@ loc_1B142C:
                 move.b  8(a0),d2
                 jsr     j_SetKills
                 move.w  4(a0),d1
-                bsr.w   InitEnemyItems  
+                bsr.w   InitEnemyItems
                 jsr     j_GetCharacterWord34
                 move.w  d1,d2
                 andi.w  #$F000,d2
@@ -310,8 +308,6 @@ loc_1B14F4:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; Handle custom item index of enemy list entry starting at A0 -> ???
 
 InitEnemyItems:
                 

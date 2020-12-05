@@ -30,7 +30,7 @@ loc_440E2:
                 
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
-                bsr.w   ClearEntities   
+                bsr.w   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
                 lea     $20(a1),a2
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a3
@@ -135,7 +135,7 @@ loc_441D2:
                 bra.s   loc_441D2
 byte_441F0:
                 
-                chkFlg  $40             ; Raft is unlocked
+                chkFlg  64              ; Raft is unlocked
                 beq.w   loc_44262
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
                 cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0

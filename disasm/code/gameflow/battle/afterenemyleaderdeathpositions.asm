@@ -26,7 +26,7 @@ loc_47DCA:
                 beq.w   loc_47E66
                 cmp.w   (a0),d1
                 beq.w   loc_47DEE       ; entry first word is battle index
-                adda.w  #6,a0           ; 6-byte entries ?
+                adda.w  #6,a0
                 bra.s   loc_47DCA
                 move.w  #$80FF,(DEAD_COMBATANTS_LIST).l ; dead code ?
                 move.w  #1,(DEAD_COMBATANTS_LIST_LENGTH).l

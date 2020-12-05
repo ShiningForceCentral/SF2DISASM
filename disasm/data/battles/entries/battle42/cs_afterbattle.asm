@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle42\cs_afterbattle.asm :
 ; 0x4EF04..0x4F358 : Cutscene after battle 42
-abcs_battle42:  textCursor $C22
+abcs_battle42:  textCursor 3106
                 loadMapFadeIn MAP_ZEON_ARENA,8,13
                 loadMapEntities ce_4F328
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -11,7 +11,7 @@ abcs_battle42:  textCursor $C22
                 setPos FOLLOWER_B,11,15,RIGHT
                 setActscriptWait ALLY_LEMON,eas_Init
                 setPos ALLY_LEMON,12,19,RIGHT
-                jumpIfFlagClear $4C,cs_4EF5E ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4EF5E ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,63,62,DOWN
 cs_4EF5E:       stopEntity 128
@@ -268,7 +268,7 @@ cs_4EF5E:       stopEntity 128
                 setFacing ALLY_BOWIE,UP
                 setFacing ALLY_PETER,UP
                 nod ALLY_BOWIE
-                setStoryFlag $2B        ; Battle 43 unlocked
+                setStoryFlag 43         ; Battle 43 unlocked
                 csc_end
 ce_4F328:       mainEntity 13,17,UP
                 entity 15,15,LEFT,ALLY_PETER,eas_Init

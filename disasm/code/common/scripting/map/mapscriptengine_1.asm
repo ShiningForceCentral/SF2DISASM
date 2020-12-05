@@ -107,7 +107,7 @@ csc36_resetMap:
 csc37_loadMapAndFadeIn:
                 
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   (FADING_TIMER).l
+                clr.w   (FADING_TIMER_WORD).l
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -450,7 +450,7 @@ LaunchFading:
                 
                 move.b  d3,-(sp)
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,d3
-                clr.w   (FADING_TIMER).l
+                clr.w   (FADING_TIMER_WORD).l
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  d0,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.b  d1,((FADING_COUNTER_MAX-$1000000)).w
@@ -899,8 +899,6 @@ loc_46A5E:
 
 ; =============== S U B R O U T I N E =======================================
 
-; if character dead, then get new character index from next word ? This doesn't make sense.
-
 csc1B_startEntityAnim:
                 
                 move.w  (a6),d0
@@ -915,8 +913,6 @@ csc1B_startEntityAnim:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; if character xxxx dead, then do it to entity yyyy ?!
 
 csc1C_stopEntityAnim:
                 
@@ -937,7 +933,7 @@ csc1D_showPortrait:
                 
                 move.w  (a6)+,d0
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                bne.w   return_46AD0    ; do nothing if ther's already a portrait ?
+                bne.w   return_46AD0
                 moveq   #0,d3
                 btst    #$F,d0
                 beq.s   loc_46AAC
@@ -1177,8 +1173,6 @@ loc_46C1A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; set entity yyyy facing zzzz according to character's xxxx alive status ?!
-
 csc23_setEntityFacing:
                 
                 move.b  (a6),d0
@@ -1219,8 +1213,6 @@ loc_46C52:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; wtf, copy entity number of entity 00xx into entity number of entity 00yy ?!
 
 csc25_cloneEntity:
                 

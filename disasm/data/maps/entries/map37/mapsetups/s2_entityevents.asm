@@ -287,7 +287,7 @@ sub_5F9A0:
 Map37_EntityEvent24:
                 
                  
-                txt     $D30            ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
+                txt     3376            ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
                 rts
 
     ; End of function Map37_EntityEvent24
@@ -328,7 +328,7 @@ Map37_EntityEvent25:
 sub_5F9C6:
                 
                  
-                txt     $B              ; "{LEADER}, take it easy!{W1}"
+                txt     11              ; "{LEADER}, take it easy!{W1}"
                 rts
 
     ; End of function sub_5F9C6
@@ -339,7 +339,7 @@ sub_5F9C6:
 Map37_EntityEvent26:
                 
                  
-                txt     $B              ; "{LEADER}, take it easy!{W1}"
+                txt     11              ; "{LEADER}, take it easy!{W1}"
 Map37_EntityEvent27:
                 
                 rts

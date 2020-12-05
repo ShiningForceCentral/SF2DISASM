@@ -7,13 +7,13 @@
 ms_map10_InitFunction:
                 
                  
-                chkFlg  $2CF            ; Set after the initial Bedoe scene (where the guards confront you)
+                chkFlg  719             ; Set after the initial Bedoe scene (where the guards confront you)
                 bne.s   byte_57040      
                 script  cs_570B0
-                setFlg  $2CF            ; Set after the initial Bedoe scene (where the guards confront you)
+                setFlg  719             ; Set after the initial Bedoe scene (where the guards confront you)
 byte_57040:
                 
-                chkFlg  $2D0            ; Set after the King of Bedoe speaks to his soldiers and they disperse
+                chkFlg  720             ; Set after the King of Bedoe speaks to his soldiers and they disperse
                 beq.s   return_5708C
                 move.w  #$96,d0 
                 jsr     MoveEntityOutOfMap

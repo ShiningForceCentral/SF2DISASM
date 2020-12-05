@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map42\mapsetups\scripts.asm :
 ; 0x5FE9A..0x5FF62 : 
-cs_5FE9A:       textCursor $D09
+cs_5FE9A:       textCursor 3337
                 nextText $FF,255        ; "The Jewel of Light begins{N}to glow.{W2}"
                 nextSingleText $FF,255  ; "The light seems to pull{N}{LEADER}.{D3}"
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -37,7 +37,7 @@ cs_5FE9A:       textCursor $D09
                 csWait 60
                 nextSingleText $0,FOLLOWER_B ; "Oh, an opening!{N}The light is leading us!{W1}"
                 csc_end
-cs_5FF06:       textCursor $D07
+cs_5FF06:       textCursor 3335
                 hideText
                 entityFlashWhite ALLY_BOWIE,$3C
                 setBlocks 33,2,1,1,39,2

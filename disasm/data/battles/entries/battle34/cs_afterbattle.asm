@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle34\cs_afterbattle.asm :
 ; 0x4D4B6..0x4D6CE : Cutscene after battle 34
-abcs_battle34:  textCursor $B5F
+abcs_battle34:  textCursor 2911
                 loadMapFadeIn MAP_CAMEELA_ARENA,2,7
                 loadMapEntities ce_4D69E
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -9,7 +9,7 @@ abcs_battle34:  textCursor $B5F
                 setPos ALLY_PETER,9,11,UP
                 setActscriptWait FOLLOWER_B,eas_Init
                 setPos FOLLOWER_B,5,11,UP
-                jumpIfFlagClear $4C,cs_4D502 ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4D502 ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,8,12,UP
 cs_4D502:       stopEntity 128
@@ -40,7 +40,7 @@ cs_4D502:       stopEntity 128
                 setActscript 128,eas_AnimSpeedx2
                 setActscript ALLY_BOWIE,eas_Jump
                 setActscript ALLY_PETER,eas_Jump
-                jumpIfFlagClear $4C,cs_4D592 ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4D592 ; Zynk is a follower
                 setActscript ALLY_ZYNK,eas_Jump
 cs_4D592:       setActscriptWait FOLLOWER_B,eas_Jump
                 nextSingleText $0,128   ; "Geshp!{W1}"
@@ -59,7 +59,7 @@ cs_4D592:       setActscriptWait FOLLOWER_B,eas_Jump
                 nextSingleText $0,ALLY_PETER ; "Prism Flowers?{N}What are they?{W1}"
                 setFacing FOLLOWER_B,RIGHT
                 nextSingleText $0,FOLLOWER_B ; "I have no idea, but it's{N}probably a trap.{W1}"
-                jumpIfFlagClear $4C,cs_4D620 ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4D620 ; Zynk is a follower
                 customActscriptWait ALLY_ZYNK
                  ac_setSpeed 24,24      ;   
                  ac_jump eas_Idle       ;   
@@ -78,7 +78,7 @@ cs_4D592:       setActscriptWait FOLLOWER_B,eas_Jump
                 setFacing ALLY_ZYNK,UP
                 csWait 30
                 nextSingleText $0,ALLY_ZYNK ; "I cannot explain....{W1}"
-cs_4D620:       textCursor $B74
+cs_4D620:       textCursor 2932
                 entityActionsWait ALLY_PETER
                  moveLeft 1
                 endActions
@@ -88,7 +88,7 @@ cs_4D620:       textCursor $B74
                  moveUp 1
                 endActions
                 setFacing ALLY_PETER,LEFT
-                jumpIfFlagClear $4C,cs_4D654 ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4D654 ; Zynk is a follower
                 entityActionsWait ALLY_ZYNK
                  moveRight 1
                 endActions
@@ -102,7 +102,7 @@ cs_4D654:       nod ALLY_BOWIE
                 followEntity 130,ALLY_BOWIE,2
                 followEntity ALLY_PETER,130,1
                 followEntity FOLLOWER_B,130,3
-                jumpIfFlagClear $4C,cs_4D692 ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4D692 ; Zynk is a follower
                 followEntity ALLY_ZYNK,130,2
 cs_4D692:       csc_end
 

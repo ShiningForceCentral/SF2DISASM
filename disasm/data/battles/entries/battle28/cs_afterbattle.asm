@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle28\cs_afterbattle.asm :
 ; 0x4C07C..0x4C3DC : Cutscene after battle 28
-abcs_battle28:  textCursor $A6E
+abcs_battle28:  textCursor 2670
                 loadMapFadeIn MAP_PANGOAT_VALLEY_BRIDGE,7,25
                 loadMapEntities ce_4C3B4
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -186,7 +186,7 @@ abcs_battle28:  textCursor $A6E
                 setFacing 128,DOWN
                 nextSingleText $0,128   ; "Be careful of Geshp and{N}Zalbard!{W1}"
                 setActscriptWait 128,eas_JumpLeft
-                setActscriptWait 128,eas_463AE
+                setActscriptWait 128,eas_TwirlShrinkDisappear
                 setCamDest 8,26
                 setFacing FOLLOWER_B,DOWN
                 nextSingleText $0,FOLLOWER_B ; "Ah, she's gone....{N}OK, {LEADER}.{N}Let's go to Tristan.{W1}"

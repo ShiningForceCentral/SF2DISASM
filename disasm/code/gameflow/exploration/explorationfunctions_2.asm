@@ -33,7 +33,7 @@ loc_257D0:
                 jsr     j_InitMapEntities
                 jsr     (LoadMapEntitySprites).w
                 bsr.w   ClearMapTempFlags
-                setFlg  $50             ; Set @ loc_257D0, also set during exploration loop at 0x25824
+                setFlg  80              ; Set @ loc_257D0, also set during exploration loop at 0x25824
                 bra.s   loc_25836
 loc_25828:
                 
@@ -134,7 +134,7 @@ loc_258CE:
 FadeOutToBlackAll:
                 
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -256,7 +256,7 @@ loc_259CC:
                 move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
                 cmpi.b  #MAP_OVERWORLD_AROUND_PACALON,d0
                 bne.s   loc_259E8       ; HARDCODED check if map is overworld pacalon, switch if water not restored
-                chkFlg  $212            ; Battle 30 completed
+                chkFlg  530             ; Battle 30 completed
                 beq.s   loc_259E8
                 move.w  #MAP_OVERWORLD_PACALON_2,d0
 loc_259E8:
@@ -302,7 +302,7 @@ UpdatePlayerPosFromMapEvent:
                 ext.l   d2
                 divs.w  #$180,d2
                 clr.w   d3
-                move.b  ENTITYDEF_OFFSET_FACING(a0),d3 ; Facing
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d3
                 movea.l (sp)+,a0
                 rts
 

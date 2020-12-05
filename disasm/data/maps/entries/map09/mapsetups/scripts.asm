@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map09\mapsetups\scripts.asm :
 ; 0x568F6..0x56B84 : 
-cs_568F6:       textCursor $55C
+cs_568F6:       textCursor 1372
                 setFacing ALLY_BOWIE,RIGHT
                 csWait 20
                 entityActionsWait 130
@@ -60,7 +60,7 @@ cs_568F6:       textCursor $55C
                 setFacing ALLY_BOWIE,LEFT
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 csc_end
-cs_569BC:       textCursor $566
+cs_569BC:       textCursor 1382
                 setDest ALLY_PETER,15,57
                 setFacing ALLY_PETER,DOWN
                 setFacing ALLY_BOWIE,DOWN
@@ -95,7 +95,7 @@ cs_569BC:       textCursor $566
                 nextText $C0,ALLY_ROHDE ; "I'm the only one who can{N}drive it!{W2}"
                 nextText $C0,ALLY_ROHDE ; "You are going to get the{N}Caravan, aren't you?!{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_56A82 ; YES/NO prompt answer
+                jumpIfFlagSet 89,cs_56A82 ; YES/NO prompt answer
                 customActscriptWait ALLY_ROHDE
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -104,11 +104,11 @@ cs_569BC:       textCursor $566
                 entityActionsWait ALLY_ROHDE
                  moveDown 1
                 endActions
-cs_56A70:       textCursor $56F
+cs_56A70:       textCursor 1391
                 nextSingleText $C0,ALLY_ROHDE ; "You don't know what you'll{N}be missing!{W1}"
                 setFacing ALLY_ROHDE,DOWN
                 jump cs_56AD4
-cs_56A82:       textCursor $572
+cs_56A82:       textCursor 1394
                 nextSingleText $C0,ALLY_ROHDE ; "Great!  Good lad!{W1}"
                 nextSingleText $FF,255  ; "{CLEAR}{LEADER} decides to take{N}Dr. {NAME;11} with him.{W1}{CLEAR}"
                 setActscriptWait ALLY_ROHDE,eas_Init
@@ -118,20 +118,20 @@ cs_56A82:       textCursor $572
                 setActscript ALLY_ROHDE,eas_Jump
                 nextSingleText $C0,ALLY_ROHDE ; "Let's go!{W1}"
                 setPriority ALLY_BOWIE,$FFFF
-                setF $2D5               ; Set after telling Rohde that you're going to get the Caravan
-                setF $54                ; Rohde is a follower
-                setStoryFlag $12        ; Battle 18 unlocked
+                setF 725                ; Set after telling Rohde that you're going to get the Caravan
+                setF 84                 ; Rohde is a follower
+                setStoryFlag 18         ; Battle 18 unlocked
                 followEntity ALLY_ROHDE,FOLLOWER_B,2
 cs_56AD4:       setActscriptWait ALLY_BOWIE,eas_Init
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 csc_end
-cs_56AE6:       textCursor $570
+cs_56AE6:       textCursor 1392
                 nextText $C0,ALLY_ROHDE ; "You again?!{W1}"
                 nextText $C0,ALLY_ROHDE ; "You changed your mind?{N}Hmmm....{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_56A82 ; YES/NO prompt answer
+                jumpIfFlagSet 89,cs_56A82 ; YES/NO prompt answer
                 jump cs_56A70
-cs_56B02:       textCursor $583
+cs_56B02:       textCursor 1411
                 setPriority ALLY_RICK,$FFFF
                 setPriority ALLY_BOWIE,$0
                 nextText $0,ALLY_RICK   ; "Are you the boy who killed{N}the legendary Kraken?{W2}"

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map10\mapsetups\scripts.asm :
 ; 0x570B0..0x579CA : 
-cs_570B0:       textCursor $650
+cs_570B0:       textCursor 1616
                 reloadMap 6,19
                 setPos ALLY_BOWIE,11,25,UP
                 setPos ALLY_PETER,11,26,UP
@@ -222,7 +222,7 @@ cs_570B0:       textCursor $650
                 setPos 150,34,51,UP
                 setPos 151,35,51,UP
                 csc_end
-cs_573EC:       textCursor $669
+cs_573EC:       textCursor 1641
                 setCamDest 31,47
                 nextText $0,148         ; "Yes, the greater devil was{N}very strong.{W1}"
                 nextSingleText $0,148   ; "But, God Volcanon swept{N}away all the devils.{W1}"
@@ -284,7 +284,7 @@ cs_573EC:       textCursor $669
                  faceDown 1
                 endActions
                 csc_end
-cs_574A6:       textCursor $673
+cs_574A6:       textCursor 1651
                 setCamDest 34,47
                 entityActionsWait ALLY_LUKE
                  moveDown 1
@@ -412,7 +412,7 @@ cs_574A6:       textCursor $673
                 nextSingleText $0,ALLY_PETER ; "OK.{N}Anyway, let's go.{W1}"
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 csc_end
-cs_5766C:       textCursor $690
+cs_5766C:       textCursor 1680
                 setCameraEntity 153
                 nextText $0,153         ; "I had a dream last night.{N}I flew!{W2}"
                 nextSingleText $0,153   ; "Watch!  I can fly!{W1}"
@@ -494,7 +494,7 @@ cs_5766C:       textCursor $690
                 setFacing ALLY_PETER,RIGHT
                 nextSingleText $0,153   ; "See.  I told you!{N}I can fly...sort of.{W1}"
                 csc_end
-cs_5779C:       textCursor $696
+cs_5779C:       textCursor 1686
                 setPos 153,6,10,DOWN
                 setFacing 152,UP
                 setCamDest 1,5
@@ -612,7 +612,7 @@ cs_5779C:       textCursor $696
                 setPriority ALLY_BOWIE,$FFFF
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 csc_end
-cs_5797A:       textCursor $647
+cs_5797A:       textCursor 1607
                 faceEntity ALLY_PETER,147
                 nextText $0,147         ; "You're a man of honor!{N}Why don't you go see Creed?{W2}"
                 nextText $0,147         ; "He's an ex-greater devil.{N}He may give you some{N}information.{W2}"

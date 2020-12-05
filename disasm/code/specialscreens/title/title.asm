@@ -106,7 +106,7 @@ loc_100104:
                 jsr     (UpdateForegroundHScrollData).w
                 jsr     (EnableDmaQueueProcessing).w
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -115,7 +115,7 @@ loc_100104:
                 moveq   #$20,d0 
                 bsr.w   TitleScreenLoop1
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -124,7 +124,7 @@ loc_100104:
                 moveq   #$32,d0 
                 bsr.w   WaitForPlayer1InputStart
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #4,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -152,7 +152,7 @@ loc_1001EC:
 
 ; =============== S U B R O U T I N E =======================================
 
-; wait during d0 frames
+; wait for max d0 frames
 
 WaitForPlayer1InputStart:
                 

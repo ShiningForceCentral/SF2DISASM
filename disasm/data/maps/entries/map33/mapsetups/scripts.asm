@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map33\mapsetups\scripts.asm :
 ; 0x5AC58..0x5B5B6 : 
-cs_5AC58:       textCursor $70C
+cs_5AC58:       textCursor 1804
                 nextSingleText $0,129   ; "You may go now.{N}I need to talk to fairy.{W1}"
                 nextSingleText $0,128   ; "Yes, sir.{W1}"
                 setCamDest 12,11
@@ -189,7 +189,7 @@ cs_5AC58:       textCursor $70C
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 csc_end
-cs_5AF36:       textCursor $72A
+cs_5AF36:       textCursor 1834
                 setActscriptWait 128,eas_Init
                 setActscriptWait 128,eas_Jump
                 customActscriptWait 128
@@ -217,9 +217,9 @@ cs_5AF36:       textCursor $72A
                 flashScreenWhite $4
                 csWait 10
                 flashScreenWhite $1E
-                setActscript ALLY_BOWIE,eas_463AE
-                setActscript ALLY_PETER,eas_463AE
-                setActscript FOLLOWER_B,eas_463AE
+                setActscript ALLY_BOWIE,eas_TwirlShrinkDisappear
+                setActscript ALLY_PETER,eas_TwirlShrinkDisappear
+                setActscript FOLLOWER_B,eas_TwirlShrinkDisappear
                 csWait 60
                 nextSingleText $0,128   ; "What stupid kids!{W1}"
                 setActscriptWait 128,eas_Init
@@ -244,7 +244,7 @@ cs_5AF36:       textCursor $72A
                 csWait 20
                 warp MAP_CREED_DESKTOP_WORLD,0,0,DOWN
                 csc_end
-cs_5B016:       textCursor $730
+cs_5B016:       textCursor 1840
                 reloadMap 12,2
                 setPos ALLY_BOWIE,63,63,DOWN
                 setPos ALLY_PETER,63,63,DOWN
@@ -533,7 +533,7 @@ cs_5B016:       textCursor $730
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 csc_end
-cs_5B466:       textCursor $78C
+cs_5B466:       textCursor 1932
                 setCamDest 12,15
                 csWait 20
                 setFacing ALLY_PETER,UP

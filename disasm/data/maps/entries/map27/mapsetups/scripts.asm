@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map27\mapsetups\scripts.asm :
 ; 0x59FB8..0x5A09E : 
-cs_59FB8:       textCursor $6C5
+cs_59FB8:       textCursor 1733
                 setActscriptWait FOLLOWER_B,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
                 cameraSpeed $30
@@ -39,6 +39,6 @@ cs_59FB8:       textCursor $6C5
                 nextSingleText $C0,129  ; "It's dinner time!{W1}"
                 setActscript 128,eas_Jump
                 setActscriptWait 130,eas_Jump
-                setStoryFlag $17        ; Battle 23 unlocked
+                setStoryFlag 23         ; Battle 23 unlocked
                 warp MAP_CREED_WILLARD_CAVE,0,0,RIGHT
                 csc_end

@@ -1575,7 +1575,7 @@ sub_1477E:
                 beq.w   return_147E6
                 jsr     sub_14422(pc)
                 sndCom  MUSIC_CURSED_ITEM
-                txt     $2B             ; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
+                txt     43              ; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput_0
                 clsTxt
                 jsr     sub_1443E(pc)
@@ -1595,7 +1595,7 @@ loc_147B8:
                 move.w  d0,(TEXT_NAME_INDEX_1).l
                 jsr     sub_14422(pc)
                 sndCom  MUSIC_CURSED_ITEM
-                txt     $22             ; "Gosh!  {NAME} is{N}cursed!{W2}"
+                txt     34              ; "Gosh!  {NAME} is{N}cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput_0
                 clsTxt
                 jsr     sub_1443E(pc)

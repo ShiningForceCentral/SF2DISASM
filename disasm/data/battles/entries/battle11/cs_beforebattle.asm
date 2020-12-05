@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle11\cs_beforebattle.asm :
 ; 0x4ABFE..0x4ACC8 : Cutscene before battle 11
-bbcs_11:        textCursor $9B3
+bbcs_11:        textCursor 2483
                 setCameraEntity ALLY_BOWIE
                 loadMapFadeIn MAP_CAVERNS_OF_DARKNESS,8,19
                 loadMapEntities ce_4ACA0

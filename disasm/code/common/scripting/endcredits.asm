@@ -84,13 +84,13 @@ loc_1AC10E:
                 move.w  d7,(VERTICAL_SCROLL_DATA+2).l
                 move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.w  #$B4,d0 
                 jsr     (Sleep).w       
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 moveq   #$2C,d0 

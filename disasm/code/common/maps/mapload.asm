@@ -386,7 +386,6 @@ return_2370:
 
 ; =============== S U B R O U T I N E =======================================
 
-; decompress map blocks ?
 ; a0 : input ROM block data
 ; a1 : output RAM data
 

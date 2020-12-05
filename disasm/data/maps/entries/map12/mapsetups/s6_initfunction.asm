@@ -7,12 +7,12 @@
 ms_map12_InitFunction:
                 
                  
-                chkFlg  $2D5            ; Set after telling Rohde that you're going to get the Caravan
+                chkFlg  725             ; Set after telling Rohde that you're going to get the Caravan
                 bne.s   byte_57D10      
                 script  cs_57D22
 byte_57D10:
                 
-                chkFlg  $206            ; Battle 18 completed
+                chkFlg  518             ; Battle 18 completed
                 beq.s   return_57D20
                 move.w  #$80,d0 
                 jsr     MoveEntityOutOfMap
@@ -22,7 +22,7 @@ return_57D20:
 
     ; End of function ms_map12_InitFunction
 
-cs_57D22:       textCursor $C7D
+cs_57D22:       textCursor 3197
                 cameraSpeed $30
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

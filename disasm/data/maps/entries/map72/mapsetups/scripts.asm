@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map72\mapsetups\scripts.asm :
 ; 0x4FFDA..0x50312 : 
-cs_4FFDA:       textCursor $D0D
+cs_4FFDA:       textCursor 3341
                 newEntity ALLY_ROHDE,63,63,UP,ALLY_ROHDE
                 newEntity 128,63,63,LEFT,MAPSPRITE_OBJECT4
                 newEntity 129,63,63,LEFT,MAPSPRITE_EFFECT3
@@ -137,9 +137,9 @@ cs_4FFDA:       textCursor $D0D
                 followEntity FOLLOWER_A,ALLY_BOWIE,2
                 followEntity ALLY_PETER,FOLLOWER_A,1
                 followEntity FOLLOWER_B,FOLLOWER_A,3
-                setStoryFlag $19        ; Battle 25 unlocked
+                setStoryFlag 25         ; Battle 25 unlocked
                 csc_end
-cs_5023E:       textCursor $D1D
+cs_5023E:       textCursor 3357
                 setActscriptWait ALLY_PETER,eas_Init
                 setActscriptWait FOLLOWER_B,eas_Init
                 setActscriptWait FOLLOWER_A,eas_Init

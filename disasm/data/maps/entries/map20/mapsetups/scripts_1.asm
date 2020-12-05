@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map20\mapsetups\scripts_1.asm :
 ; 0x53B66..0x53E18 : 
 cs_53B66:       playSound $FD
-                textCursor $895
+                textCursor 2197
                 setActscriptWait 130,eas_46172
                 setActscriptWait 128,eas_46172
                 customActscriptWait 130
@@ -60,7 +60,7 @@ cs_53B66:       playSound $FD
                 ac_end
                 csWait 120
 cs_53C42:       setCamDest 19,48
-                textCursor $898
+                textCursor 2200
                 setActscriptWait 130,eas_Init
                 setFacing 130,DOWN
                 csWait 10
@@ -182,7 +182,7 @@ cs_53C42:       setCamDest 19,48
                 reloadMap 0,0
                 csWait 1
                 nextSingleText $FF,255  ; "Astral is exhausted.{N}He won't wake up!{W2}{N}The Minister summons the{N}soldiers to the hall to kill{N}the evil spirit.{W1}"
-                setF $261               ; Set after the scene where Astral exorcises the Gizmo
+                setF 609                ; Set after the scene where Astral exorcises the Gizmo
                 warp MAP_GRANSEAL_CASTLE_2F,29,8,UP
                 playSound MUSIC_CASTLE
                 csc_end

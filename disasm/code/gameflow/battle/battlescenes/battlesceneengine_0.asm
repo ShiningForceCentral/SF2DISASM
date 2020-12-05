@@ -343,10 +343,8 @@ rjt_BattlesceneScriptCommands:
                 
                 dc.w bsc00_animateEnemyAction-rjt_BattlesceneScriptCommands
                 dc.w bsc01_animateAllyAction-rjt_BattlesceneScriptCommands
-                dc.w bsc02_moveEnemyBattleSprite-rjt_BattlesceneScriptCommands 
-                                                        ; not found any use case, still to figure out
-                dc.w bsc03_moveAllyBattleSprite-rjt_BattlesceneScriptCommands 
-                                                        ; same as previous command
+                dc.w bsc02_moveEnemyBattleSprite-rjt_BattlesceneScriptCommands
+                dc.w bsc03_moveAllyBattleSprite-rjt_BattlesceneScriptCommands
                 dc.w bsc04_makeEnemyIdle-rjt_BattlesceneScriptCommands
                 dc.w bsc05_makeAllyIdle-rjt_BattlesceneScriptCommands
                 dc.w bsc06_switchEnemies-rjt_BattlesceneScriptCommands
@@ -355,10 +353,8 @@ rjt_BattlesceneScriptCommands:
                 dc.w bsc09_switchToAllyAlone-rjt_BattlesceneScriptCommands
                 dc.w bsc0A_executeEnemyReaction-rjt_BattlesceneScriptCommands
                 dc.w bsc0B_executeAllyReaction-rjt_BattlesceneScriptCommands
-                dc.w bsc0C_makeActorIdleAndEndAnimation-rjt_BattlesceneScriptCommands 
-                                                        ; still to figure out exactly, not found any use case yet
-                dc.w bsc0D_endAnimation-rjt_BattlesceneScriptCommands 
-                                                        ; still to figure out more precisely
+                dc.w bsc0C_makeActorIdleAndEndAnimation-rjt_BattlesceneScriptCommands
+                dc.w bsc0D_endAnimation-rjt_BattlesceneScriptCommands
                 dc.w bsc0E_sleep-rjt_BattlesceneScriptCommands
                 dc.w bsc0F_giveEXP-rjt_BattlesceneScriptCommands
                 dc.w bsc10_displayMessage-rjt_BattlesceneScriptCommands
@@ -1784,7 +1780,7 @@ bsc0F_giveEXP:
                 btst    #$F,d1
                 bne.s   loc_1910C
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $107            ; "{NAME} earned {#}{N}EXP. points.{D1}"
+                txt     263             ; "{NAME} earned {#}{N}EXP. points.{D1}"
 loc_1910C:
                 
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
@@ -1806,40 +1802,40 @@ loc_1910C:
                 andi.w  #2,d1
                 jsr     sub_10020
                 sndCom  SFX_LEVEL_UP
-                txt     $F4             ; "{NAME} became{N}level {#}!"
+                txt     244             ; "{NAME} became{N}level {#}!"
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 beq.s   loc_19174
                 move.l  d0,((TEXT_NUMBER-$1000000)).w
-                txt     $10A            ; "{D1}HP increased by {#}!"
+                txt     266             ; "{D1}HP increased by {#}!"
 loc_19174:
                 
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 beq.s   loc_19182
                 move.l  d0,((TEXT_NUMBER-$1000000)).w
-                txt     $10B            ; "{D1}MP increased by {#}!"
+                txt     267             ; "{D1}MP increased by {#}!"
 loc_19182:
                 
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 beq.s   loc_19190
                 move.l  d0,((TEXT_NUMBER-$1000000)).w
-                txt     $10C            ; "{D1}Attack increased by {#}!"
+                txt     268             ; "{D1}Attack increased by {#}!"
 loc_19190:
                 
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 beq.s   loc_1919E
                 move.l  d0,((TEXT_NUMBER-$1000000)).w
-                txt     $10D            ; "{D1}Defense increased by {#}!"
+                txt     269             ; "{D1}Defense increased by {#}!"
 loc_1919E:
                 
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 beq.s   loc_191AC
                 move.l  d0,((TEXT_NUMBER-$1000000)).w
-                txt     $10E            ; "{D1}Agility increased by {#}!"
+                txt     270             ; "{D1}Agility increased by {#}!"
 loc_191AC:
                 
                 moveq   #0,d0
@@ -1852,14 +1848,14 @@ loc_191AC:
                 bne.s   loc_191D0
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  d0,((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     $10F            ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
+                txt     271             ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
                 bra.s   return_191DE
 loc_191D0:
                 
                 addq.w  #1,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $110            ; "{D1}{SPELL} increased to{N}level {#}!"
+                txt     272             ; "{D1}{SPELL} increased to{N}level {#}!"
 return_191DE:
                 
                 rts
@@ -1886,7 +1882,7 @@ bsc10_displayMessage:
                 jsr     (DisplayText).l 
                 tst.b   ((MESSAGE_SPEED-$1000000)).w
                 bne.s   loc_1920C
-                txt     $16A            ; "{DICT}{W2}"
+                txt     362             ; "{DICT}{W2}"
                 rts
 loc_1920C:
                 
@@ -1929,7 +1925,7 @@ bsc11_displayMessageWithNoWait:
 
 bsc12_hideTextBox:
                 
-                jmp     (HideTextBox).l 
+                jmp     (HideTextBox).l
 
     ; End of function bsc12_hideTextBox
 
@@ -3262,14 +3258,14 @@ LoadBattleBackground:
                 movea.l (p_pt_Backgrounds).l,a2
                 lsl.w   #2,d0
                 movea.l (a2,d0.w),a2
-                move.w  (a2)+,d0        ; tiles offset
+                move.w  (a2)+,d0        ; tileset 1 offset
                 movem.l a1-a2,-(sp)
                 lea     -2(a2,d0.w),a0
                 jsr     (LoadCompressedData).w
                 movem.l (sp)+,a1-a2
                 move.w  (a2)+,d0
                 move.l  a2,-(sp)
-                lea     -2(a2,d0.w),a0  ; another tile offset ?
+                lea     -2(a2,d0.w),a0  ; tileset 2 offset
                 lea     $1800(a1),a1
                 jsr     (LoadCompressedData).w
                 movea.l (sp)+,a2
@@ -3562,7 +3558,7 @@ loc_19E48:
                 
                 jsr     j_GetCurrentTerrainType
                 andi.w  #$F,d0          ; get background according to terrain type
-                move.b  tbl_TerrainBackgrounds(pc,d0.w),d1 ; mostly used for overworld battles, I guess !
+                move.b  tbl_TerrainBackgrounds(pc,d0.w),d1
                 ext.w   d1
 loc_19E58:
                 

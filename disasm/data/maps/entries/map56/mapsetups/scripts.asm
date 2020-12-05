@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map56\mapsetups\scripts.asm :
 ; 0x6150A..0x6153E : 
-cs_6150A:       textCursor $E14
+cs_6150A:       textCursor 3604
                 faceEntity 128,ALLY_BOWIE
                 nextSingleText $0,128   ; "Unbelievable!  You've{N}finally arrived.{W1}"
                 faceEntity ALLY_BOWIE,128

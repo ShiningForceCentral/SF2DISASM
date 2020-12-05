@@ -1305,7 +1305,7 @@ GetEquippedRing:
     ; End of function GetEquippedRing
 
 
-; =============== S U B R O U T I N E =======================================
+; START OF FUNCTION CHUNK FOR GetEquippedWeapon
 
 GetEquippedItemByType:
                 
@@ -1342,7 +1342,7 @@ GetEquippedItemByType:
                 movem.l (sp)+,d3-d4/a0-a1
                 rts
 
-    ; End of function GetEquippedItemByType
+; END OF FUNCTION CHUNK FOR GetEquippedWeapon
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1943,7 +1943,7 @@ loc_9088:
                 bcc.s   loc_90A0
                 move.w  (a0),d0         ; if d0 > d3 ?
                 move.w  (a1),d3
-                move.w  d0,(a3)         ; wtf a3 ?! unused bugged subroutine ?
+                move.w  d0,(a3)         ; why use a3 there ? unused bugged subroutine ?
                 move.w  d3,(a0)
 loc_90A0:
                 

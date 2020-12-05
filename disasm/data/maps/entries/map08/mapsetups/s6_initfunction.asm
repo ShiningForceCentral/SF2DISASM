@@ -7,7 +7,7 @@
 ms_map8_InitFunction:
                 
                  
-                chkFlg  $8              ; May joined
+                chkFlg  8               ; May joined
                 beq.s   return_563B0
                 moveq   #8,d0
                 jsr     MoveEntityOutOfMap

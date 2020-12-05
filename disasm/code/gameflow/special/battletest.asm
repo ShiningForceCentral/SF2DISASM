@@ -110,7 +110,7 @@ DebugModeBattleTest:
                 bsr.w   CheatModeConfiguration
 byte_77DE:
                 
-                txt     $1C8            ; "Battle number?{D1}"
+                txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
                 move.w  #$31,d2 
@@ -148,7 +148,7 @@ loc_7820:
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
                 jsr     j_BattleLoop
                 jsr     j_ChurchMenuActions
-                txt     $1CC            ; "Shop number?{D1}"
+                txt     460             ; "Shop number?{D1}"
                 move.w  #0,d0
                 move.w  #0,d1
                 move.w  #$64,d2 

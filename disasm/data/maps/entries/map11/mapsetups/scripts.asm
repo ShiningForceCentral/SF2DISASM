@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map11\mapsetups\scripts.asm :
 ; 0x57AAA..0x57CCC : 
-cs_57AAA:       textCursor $C4F
+cs_57AAA:       textCursor 3151
                 setActscriptWait ALLY_PETER,eas_Init
                 setDest ALLY_BOWIE,39,11
                 entityActionsWait ALLY_BOWIE

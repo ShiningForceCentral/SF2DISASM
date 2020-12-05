@@ -30,9 +30,9 @@ Map17_EntityEvent9:
 Map17_EntityEvent7:
                 
                  
-                chkFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
+                chkFlg  661             ; Set after prison scene, ending in Slade unlocking/Sarah accusing
                 bne.s   return_5235C
-                txt     $37D            ; "We're talking about{N}Ground Seal.{N}Please, join in.{W1}"
+                txt     893             ; "We're talking about{N}Ground Seal.{N}Please, join in.{W1}"
 return_5235C:
                 
                 rts
@@ -45,9 +45,9 @@ return_5235C:
 Map17_EntityEvent8:
                 
                  
-                chkFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
+                chkFlg  661             ; Set after prison scene, ending in Slade unlocking/Sarah accusing
                 bne.s   return_52368
-                txt     $380            ; "Hey!  Don't interrupt!{N}Sit down next to me!{W1}"
+                txt     896             ; "Hey!  Don't interrupt!{N}Sit down next to me!{W1}"
 return_52368:
                 
                 rts
@@ -60,9 +60,9 @@ return_52368:
 Map17_EntityEvent10:
                 
                  
-                chkFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
+                chkFlg  661             ; Set after prison scene, ending in Slade unlocking/Sarah accusing
                 bne.s   return_52374
-                txt     $37F            ; "Hey, {LEADER}!{N}King Galam also knows about{N}Ground Seal!{W1}"
+                txt     895             ; "Hey, {LEADER}!{N}King Galam also knows about{N}Ground Seal!{W1}"
 return_52374:
                 
                 rts
@@ -75,7 +75,7 @@ return_52374:
 Map17_EntityEvent11:
                 
                  
-                txt     $3B1            ; "I didn't mean to...{W1}"
+                txt     945             ; "I didn't mean to...{W1}"
                 rts
 
     ; End of function Map17_EntityEvent11
@@ -86,7 +86,7 @@ Map17_EntityEvent11:
 Map17_EntityEvent0:
                 
                  
-                txt     $343            ; "This is the treasure room!{N}You may not pass!{W1}"
+                txt     835             ; "This is the treasure room!{N}You may not pass!{W1}"
                 rts
 
     ; End of function Map17_EntityEvent0
@@ -97,9 +97,9 @@ Map17_EntityEvent0:
 Map17_EntityEvent1:
                 
                  
-                txt     $344            ; "It's true that the messenger{N}met with an unnatural death.{W2}"
-                txt     $345            ; "But, that doesn't mean that{N}Granseal did it....{W2}"
-                txt     $346            ; "I don't understand.{N}Why is King Galam so{N}impatient?{W1}"
+                txt     836             ; "It's true that the messenger{N}met with an unnatural death.{W2}"
+                txt     837             ; "But, that doesn't mean that{N}Granseal did it....{W2}"
+                txt     838             ; "I don't understand.{N}Why is King Galam so{N}impatient?{W1}"
                 rts
 
     ; End of function Map17_EntityEvent1
@@ -110,10 +110,10 @@ Map17_EntityEvent1:
 Map17_EntityEvent2:
                 
                  
-                txt     $347            ; "When the messenger was found{N}dead, the King suffured a{N}great deal of pain.{W2}"
-                txt     $348            ; "Thank goodness, he{N}recovered quickly.{W2}"
-                txt     $349            ; "It's Granseals fault!{W2}"
-                txt     $34A            ; "I believe in my King!{W1}"
+                txt     839             ; "When the messenger was found{N}dead, the King suffured a{N}great deal of pain.{W2}"
+                txt     840             ; "Thank goodness, he{N}recovered quickly.{W2}"
+                txt     841             ; "It's Granseals fault!{W2}"
+                txt     842             ; "I believe in my King!{W1}"
                 rts
 
     ; End of function Map17_EntityEvent2
@@ -124,13 +124,13 @@ Map17_EntityEvent2:
 Map17_EntityEvent4:
                 
                  
-                chkFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
+                chkFlg  661             ; Set after prison scene, ending in Slade unlocking/Sarah accusing
                 bne.s   byte_523AE      
-                txt     $37E            ; "You got a raw deal, huh?{N}The same thing happened to{N}the rat next door.{W1}"
+                txt     894             ; "You got a raw deal, huh?{N}The same thing happened to{N}the rat next door.{W1}"
                 bra.s   return_523B2
 byte_523AE:
                 
-                txt     $381            ; "There are a lot of Galam{N}soldiers upstairs.{N}You still want to go?{W1}"
+                txt     897             ; "There are a lot of Galam{N}soldiers upstairs.{N}You still want to go?{W1}"
 return_523B2:
                 
                 rts
@@ -143,7 +143,7 @@ return_523B2:
 Map17_EntityEvent5:
                 
                  
-                txt     $382            ; "You're so brave.{N}Good luck!{W1}"
+                txt     898             ; "You're so brave.{N}Good luck!{W1}"
                 rts
 
     ; End of function Map17_EntityEvent5
@@ -154,14 +154,14 @@ Map17_EntityEvent5:
 Map17_EntityEvent3:
                 
                  
-                chkFlg  $100            ; TEMP FLAG #00
+                chkFlg  256             ; TEMP FLAG #00
                 bne.s   byte_523CC      
                 script  cs_52A3C
-                setFlg  $100            ; TEMP FLAG #00
+                setFlg  256             ; TEMP FLAG #00
                 bra.s   return_523D0
 byte_523CC:
                 
-                txt     $383            ; "Don't tell anybody{N}that I neglected my work.{N}If you do{D1}.{D1}.{D1}.{D1}I'll kill you!{W1}"
+                txt     899             ; "Don't tell anybody{N}that I neglected my work.{N}If you do{D1}.{D1}.{D1}.{D1}I'll kill you!{W1}"
 return_523D0:
                 
                 rts
@@ -174,7 +174,7 @@ return_523D0:
 Map17_EntityEvent6:
                 
                  
-                txt     $384            ; "Oh, I'm so busy!{W1}"
+                txt     900             ; "Oh, I'm so busy!{W1}"
                 rts
 
     ; End of function Map17_EntityEvent6
@@ -194,8 +194,8 @@ Map17_DefaultEntityEvent:
 sub_523DA:
                 
                  
-                txt     $384            ; "Oh, I'm so busy!{W1}"
-                txt     $384            ; "Oh, I'm so busy!{W1}"
+                txt     900             ; "Oh, I'm so busy!{W1}"
+                txt     900             ; "Oh, I'm so busy!{W1}"
                 rts
 
     ; End of function sub_523DA

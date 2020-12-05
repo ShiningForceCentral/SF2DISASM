@@ -298,8 +298,6 @@ loc_47352:
 
 ; =============== S U B R O U T I N E =======================================
 
-; set cutscene dialogue index
-
 csc04_setTextIndex:
                 
                 move.w  (a6)+,((CUTSCENE_DIALOG_INDEX-$1000000)).w
@@ -309,8 +307,6 @@ csc04_setTextIndex:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; play sound of index 00xx
 
 csc05_playSound:
                 
@@ -370,7 +366,7 @@ loc_473B4:
                 jsr     j_JoinForce
                 move.w  #2,d0
                 jsr     j_JoinForce
-                txt     $1BF            ; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
+                txt     447             ; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
                 bra.s   loc_473EC
 loc_473D4:
                 
@@ -378,7 +374,7 @@ loc_473D4:
                 jsr     j_GetClass
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     $1BE            ; "{NAME} the {CLASS} {N}has joined the force."
+                txt     446             ; "{NAME} the {CLASS} {N}has joined the force."
 loc_473EC:
                 
                 jsr     j_FadeOut_WaitForP1Input
@@ -391,8 +387,6 @@ loc_473EC:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; related to portrait window
 
 csc09_hideTextBoxAndPortrait:
                 
@@ -469,8 +463,6 @@ return_4743E:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; branch if something
 
 csc0E_jumpIfForceMemberInList:
                 
@@ -609,7 +601,7 @@ csc13_setStoryFlag:
 sub_474EE:
                 
                 moveq   #0,d0
-                move.b  #$11,((CURRENT_MAP-$1000000)).w ; Mt Volcanon Shrine ?
+                move.b  #MAP_GALAM_CASTLE_INNER,((CURRENT_MAP-$1000000)).w
                 bsr.w   RunMapSetupEntityEvent
                 rts
 

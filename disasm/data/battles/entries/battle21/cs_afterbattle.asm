@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle21\cs_afterbattle.asm :
 ; 0x4B88C..0x4B958 : Cutscene after battle 21
-abcs_battle21:  textCursor $A17
+abcs_battle21:  textCursor 2583
                 loadMapFadeIn MAP_OVERWORLD_DEVILS_TAIL,4,18
                 loadMapEntities ce_4B948
                 setActscriptWait ALLY_BOWIE,eas_Init
