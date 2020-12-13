@@ -13,9 +13,9 @@ abcs_battle04:  textCursor 2319
                 nod ALLY_BOWIE
                 nextSingleText $0,ALLY_LEMON ; "Your battle strategy was{N}wonderful!  I praise you.{W1}"
                 csWait 5
-                setActscript ALLY_JAHA,eas_461B6
+                setActscript ALLY_JAHA,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_KAZIN,eas_461B6
+                setActscript ALLY_KAZIN,eas_2xRightLeft
                 setActscript ALLY_SARAH,eas_Jump
                 setActscriptWait ALLY_CHESTER,eas_Jump
                 setActscript ALLY_SARAH,eas_Jump
@@ -39,7 +39,7 @@ abcs_battle04:  textCursor 2319
                 entityActionsWait ALLY_LEMON
                  moveLeft 4
                 endActions
-                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_BOWIE
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -63,8 +63,8 @@ abcs_battle04:  textCursor 2319
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setFacing ALLY_BOWIE,DOWN
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

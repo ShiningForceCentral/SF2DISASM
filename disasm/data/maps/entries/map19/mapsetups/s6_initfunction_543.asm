@@ -176,7 +176,7 @@ cs_62D0E:       textCursor 3967
                 csWait 40
                 setCamDest 24,7
                 csWait 5
-                setActscript ALLY_JAHA,eas_461B6
+                setActscript ALLY_JAHA,eas_2xRightLeft
                 csWait 100
                 entityActionsWait ALLY_JAHA
                  moveDown 1
@@ -198,7 +198,7 @@ cs_62D0E:       textCursor 3967
                 nextText $0,ALLY_JAHA   ; "I understand what my friends{N}are saying, but...I love{N}her.{W2}"
                 nextSingleText $0,ALLY_JAHA ; "May I kiss her?{N}Somebody, say yes!{W1}"
                 csWait 5
-                setActscript ALLY_JAHA,eas_461B6
+                setActscript ALLY_JAHA,eas_2xRightLeft
                 shiver ALLY_SARAH
                 csWait 20
                 setFacing ALLY_PETER,DOWN

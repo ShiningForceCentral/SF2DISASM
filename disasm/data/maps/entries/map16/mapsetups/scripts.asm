@@ -22,7 +22,7 @@ cs_51F88:       textCursor 962
                 nextText $0,ALLY_LEMON  ; "But, King Galam must{N}have a good reason!{W2}"
                 nextText $0,ALLY_LEMON  ; "I believe the King!{N}How about you?{N}Anyone disagree?{W1}"
                 csWait 5
-                setActscript ALLY_LEMON,eas_461B6
+                setActscript ALLY_LEMON,eas_2xRightLeft
                 csWait 60
                 nextSingleText $0,ALLY_LEMON ; "No?  Good!{W1}"
                 setFacing ALLY_LEMON,DOWN

@@ -29,13 +29,13 @@ bbcs_18:        textCursor 2520
                 endActions
                 nextSingleText $0,128   ; "Stop!{W1}"
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_ROHDE,eas_461E4
+                setActscript ALLY_ROHDE,eas_2xUpDown
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 30
                 entityActionsWait ALLY_PETER
                  moveUp 1

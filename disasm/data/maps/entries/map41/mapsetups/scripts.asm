@@ -10,11 +10,11 @@ cs_5F4B8:       setActscriptWait ALLY_BOWIE,eas_Init
                 csWait 40
                 playSound SFX_BIG_DOOR_RUMBLE
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 playSound SFX_BIG_DOOR_RUMBLE
                 csWait 40
                 playSound SFX_BIG_DOOR_RUMBLE

@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45858:
+OrientSpriteLeft:
                 
                 movem.l d0-d1/d5-a0,-(sp)
                 link    a6,#-$240
@@ -97,12 +97,12 @@ loc_45914:
                 movem.l (sp)+,d0-d1/d5-a0
                 rts
 
-    ; End of function sub_45858
+    ; End of function OrientSpriteLeft
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45974:
+OrientSpriteRight:
                 
                 movem.l d0-d1/d5-a0,-(sp)
                 link    a6,#-$240
@@ -195,7 +195,7 @@ loc_45A2C:
                 movem.l (sp)+,d0-d1/d5-a0
                 rts
 
-    ; End of function sub_45974
+    ; End of function OrientSpriteRight
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -313,7 +313,7 @@ loc_45B78:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45B84:
+ApplySpriteGhostEffect:
                 
                 movem.l d0-d1/d7-a0,-(sp)
                 move.w  #$23F,d7
@@ -347,12 +347,12 @@ loc_45BB0:
                 movem.l (sp)+,d0-d1/d7-a0
                 rts
 
-    ; End of function sub_45B84
+    ; End of function ApplySpriteGhostEffect
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45BBE:
+ResizeSprite:
                 
                 movem.l d0-a5,-(sp)
                 link    a6,#-$240
@@ -435,7 +435,7 @@ loc_45C5C:
                 movem.l (sp)+,d0-a5
                 rts
 
-    ; End of function sub_45BBE
+    ; End of function ResizeSprite
 
 byte_45C6A:     dc.b 0
                 dc.b 0
@@ -464,35 +464,35 @@ byte_45C6A:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45C82:
+ApplySpriteImmersedEffect:
                 
                 movem.l d0-d1,-(sp)
                 moveq   #$A,d0
                 moveq   #$B,d1
-                bsr.w   sub_45CA6
+                bsr.w   ApplySpriteCropEffect
                 movem.l (sp)+,d0-d1
                 rts
 
-    ; End of function sub_45C82
+    ; End of function ApplySpriteImmersedEffect
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45C94:
+ApplyMinorSpriteCropEffect:
                 
                 movem.l d0-d1,-(sp)
                 moveq   #1,d0
                 moveq   #$B,d1
-                bsr.w   sub_45CA6
+                bsr.w   ApplySpriteCropEffect
                 movem.l (sp)+,d0-d1
                 rts
 
-    ; End of function sub_45C94
+    ; End of function ApplyMinorSpriteCropEffect
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_45CA6:
+ApplySpriteCropEffect:
                 
                 movem.l d7-a1,-(sp)
                 move.w  d1,d7
@@ -533,7 +533,7 @@ loc_45D16:
                 movem.l (sp)+,d7-a1
                 rts
 
-    ; End of function sub_45CA6
+    ; End of function ApplySpriteCropEffect
 
 
 ; =============== S U B R O U T I N E =======================================

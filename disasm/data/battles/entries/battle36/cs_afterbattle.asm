@@ -17,7 +17,7 @@ cs_4D9F0:       animEntityFX 128,6
                 animEntityFX 128,7
                 setActscriptWait 128,eas_Jump
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 120
                 setFacing 128,DOWN
                 nextText $0,128         ; "Prism Flowers?{W2}"

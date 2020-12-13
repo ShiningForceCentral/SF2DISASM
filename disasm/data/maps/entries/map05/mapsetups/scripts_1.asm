@@ -62,11 +62,11 @@ cs_607DE:       textCursor 3388
                 fadeInB
                 nextSingleText $0,ALLY_LEMON ; "I'm guilty!{W1}"
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461E4
+                setActscript ALLY_PETER,eas_2xUpDown
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 80
                 entityActionsWait ALLY_PETER
                  moveUp 2
@@ -79,7 +79,7 @@ cs_607DE:       textCursor 3388
                 setFacing ALLY_LEMON,DOWN
                 shiver ALLY_LEMON
                 nextSingleText $0,ALLY_LEMON ; "The guilt is too much to{N}handle.  I must die!{W1}"
-                setActscriptWait ALLY_LEMON,eas_46172
+                setActscriptWait ALLY_LEMON,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_LEMON
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
@@ -92,12 +92,12 @@ cs_607DE:       textCursor 3388
                 endActions
                 setFacing ALLY_LEMON,DOWN
                 customActscriptWait ALLY_LEMON
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_LEMON,eas_46172
+                setActscriptWait ALLY_LEMON,eas_DeactivateAutoFacing
                 playSound SFX_FALLING
                 entityActionsWait ALLY_LEMON
                  moveDown 6
@@ -303,7 +303,7 @@ cs_60BA6:       textCursor 3434
                 setFacing ALLY_CHAZ,DOWN
                 nextSingleText $0,128   ; "Let me help you.{W1}"
                 csWait 5
-                setActscript 128,eas_461E4
+                setActscript 128,eas_2xUpDown
                 csWait 120
                 nextSingleText $0,128   ; "I would like to give you{N}a hand.{W1}"
                 entityActionsWait FOLLOWER_B

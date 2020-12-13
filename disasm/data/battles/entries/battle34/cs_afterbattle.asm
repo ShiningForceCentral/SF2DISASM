@@ -14,13 +14,13 @@ abcs_battle34:  textCursor 2911
                 setPos ALLY_ZYNK,8,12,UP
 cs_4D502:       stopEntity 128
                 customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 stopEntity 131
-                setActscriptWait 131,eas_46172
+                setActscriptWait 131,eas_DeactivateAutoFacing
                 fadeInB
                 shiver 128
                 nextSingleText $0,128   ; "{LEADER}, I lost?!{N}Take this.{W1}"

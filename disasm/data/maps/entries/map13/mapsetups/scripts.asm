@@ -7,12 +7,12 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 0
                 csWait 20
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript 133,eas_461E4
+                setActscript 133,eas_2xUpDown
                 csWait 50
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 100
                 textCursor 1452
                 setPos 140,29,7,LEFT
@@ -32,7 +32,7 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                 entityActionsWait 140
                  moveLeft 1
                 endActions
-                setActscriptWait 140,eas_46172
+                setActscriptWait 140,eas_DeactivateAutoFacing
                 customActscriptWait 140
                  ac_setSpeed 32,32      ;   
                  ac_jump eas_Idle       ;   
@@ -41,10 +41,10 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                  moveDown 1
                 endActions
                 csWait 2
-                setActscriptWait 140,eas_461AA
+                setActscriptWait 140,eas_StopMoving
                 customActscriptWait 140
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -101,15 +101,15 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                  moveLeft 1
                 endActions
                 csWait 3
-                setActscriptWait 133,eas_461AA
-                setActscriptWait 137,eas_461AA
+                setActscriptWait 133,eas_StopMoving
+                setActscriptWait 137,eas_StopMoving
                 setFacing 137,LEFT
                 csWait 30
                 entityActions 140
                  moveUp 1
                 endActions
                 csWait 2
-                setActscriptWait 140,eas_461AA
+                setActscriptWait 140,eas_StopMoving
                 csWait 30
                 setCameraEntity 65535
                 entityActions 137
@@ -130,7 +130,7 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                 reloadEntities ms_map13_flag710_Entities
                 csc_end
 cs_58512:       customActscriptWait 130
-                 ac_set1Cb7 $0          ;   
+                 ac_entityObstructable OFF ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 setCameraEntity 65535
@@ -150,7 +150,7 @@ cs_58512:       customActscriptWait 130
                 setActscriptWait ALLY_BOWIE,eas_BumpUp
                 csWait 20
                 nextSingleText $0,130   ; "Good, good!{N}Push!{W1}"
-                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
                 entityActionsWait ALLY_BOWIE
                  moveDown 1
                 endActions
@@ -167,7 +167,7 @@ cs_58512:       customActscriptWait 130
                 setQuake 0
                 animEntityFX 130,6
                 customActscript 130
-                 ac_setFlip $0          ;   
+                 ac_orientUp            ;   
                  ac_setSprite MAPSPRITE_FAIRY ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -175,8 +175,8 @@ cs_58512:       customActscriptWait 130
                 csWait 40
                 setFacing 130,DOWN
                 nextSingleText $0,130   ; "(Giggle)...sorry, I had to{N}test you.{W2}{N}I'm happy to meet you.{N}He must like you.{W2}{N}Oh no, I can't tell you who{N}HE is.{N}See you later!{W1}"
-                setActscriptWait 130,eas_Init2
-                setActscriptWait 130,eas_46172
+                setActscriptWait 130,eas_InitSlow
+                setActscriptWait 130,eas_DeactivateAutoFacing
                 entityActionsWait 130
                  moveUp 10
                 endActions
@@ -200,8 +200,8 @@ cs_585FE:       playSound $FD
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 131,eas_46172
-                setActscriptWait 132,eas_46172
+                setActscriptWait 131,eas_DeactivateAutoFacing
+                setActscriptWait 132,eas_DeactivateAutoFacing
                 textCursor 1468
                 setActscriptWait ALLY_PETER,eas_Init
                 nextSingleText $0,128   ; "Bedoe soldiers are cowards!{W1}"
@@ -243,7 +243,7 @@ cs_585FE:       playSound $FD
                 setFacing ALLY_LUKE,RIGHT
                 nextSingleText $0,128   ; "You're our captive.  Don't{N}force me to kill you.{W1}"
                 csWait 5
-                setActscript 128,eas_461E4
+                setActscript 128,eas_2xUpDown
                 csWait 20
                 setFacing 128,LEFT
                 nextText $0,128         ; "No more funny business, you{N}can't resist us!{W2}"
@@ -258,11 +258,11 @@ cs_585FE:       playSound $FD
                 csWait 20
                 nextSingleText $0,ALLY_GERHALT ; "Don't listen to him!{W2}"
                 csWait 5
-                setActscript 128,eas_461E4
+                setActscript 128,eas_2xUpDown
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 setFacing ALLY_LUKE,UP
                 csWait 40
                 setCamDest 6,6
@@ -320,7 +320,7 @@ cs_585FE:       playSound $FD
                  moveUp 1
                  moveLeft 1
                 endActions
-                setActscriptWait ALLY_LUKE,eas_46172
+                setActscriptWait ALLY_LUKE,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_LUKE
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -333,8 +333,8 @@ cs_585FE:       playSound $FD
                  moveDown 1
                 endActions
                 customActscriptWait ALLY_LUKE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -396,7 +396,7 @@ cs_58856:       textCursor 1487
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 137,eas_46172
+                setActscriptWait 137,eas_DeactivateAutoFacing
                 entityActionsWait 137
                  moveUp 1
                 endActions
@@ -423,8 +423,8 @@ cs_58856:       textCursor 1487
                 setActscriptWait 137,eas_Jump
                 setActscript 137,eas_Jump
                 nextSingleText $0,137   ; "Oh, thank you!{N}A raft, OK.{W1}"
-                setActscriptWait ALLY_LUKE,eas_46172
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_LUKE,eas_DeactivateAutoFacing
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 setFacing ALLY_LUKE,LEFT
                 entityActions ALLY_LUKE
                  moveRight 2
@@ -612,8 +612,8 @@ cs_58BEA:       textCursor 1541
                 endActions
                 setFacing 140,UP
                 customActscriptWait 140
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -687,8 +687,8 @@ cs_58D4C:       textCursor 1532
                 endActions
                 setFacing 140,UP
                 customActscriptWait 140
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

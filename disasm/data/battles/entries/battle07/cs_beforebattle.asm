@@ -24,7 +24,7 @@ bbcs_07:        textCursor 2357
                 csWait 20
                 setActscriptWait 130,eas_Jump
                 csWait 30
-                setActscriptWait 130,eas_46172
+                setActscriptWait 130,eas_DeactivateAutoFacing
                 entityActionsWait 130
                  moveUp 1
                 endActions
@@ -71,8 +71,8 @@ bbcs_07:        textCursor 2357
                 setQuake 0
                 setActscript 128,eas_Jump
                 nod 129
-                setActscriptWait 128,eas_46172
-                setActscriptWait 129,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
+                setActscriptWait 129,eas_DeactivateAutoFacing
                 csWait 30
                 entityActions 128
                  moveUp 1
@@ -85,14 +85,14 @@ bbcs_07:        textCursor 2357
                 stopEntity 128
                 stopEntity 129
                 customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 customActscriptWait 129
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

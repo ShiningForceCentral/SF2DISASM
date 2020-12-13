@@ -52,7 +52,7 @@ cs_5C312:       textCursor 2555
                 setActscript FOLLOWER_B,eas_Jump
                 setActscriptWait ALLY_PETER,eas_Jump
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 nextSingleText $0,ALLY_PETER ; "Who said that?{W1}"
                 setCamDest 3,12

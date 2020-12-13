@@ -26,7 +26,7 @@ cs_54E86:       textCursor 1066
                 setFacing 139,DOWN
                 csWait 30
                 csWait 5
-                setActscript 139,eas_461B6
+                setActscript 139,eas_2xRightLeft
                 csWait 60
                 entityActionsWait 139
                  moveLeft 1
@@ -65,7 +65,7 @@ cs_54F26:       textCursor 1074
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 setCameraEntity 136
                 setFacing 136,LEFT
                 nextSingleText $0,136   ; "Oooo...it's big!{N}I want to touch him!{W1}"
@@ -133,7 +133,7 @@ cs_54F26:       textCursor 1074
                 endActions
                 nextSingleText $0,136   ; "Shut up, bird!{W1}"
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 nextText $0,ALLY_PETER  ; "How barbaric!{W2}"
                 nextSingleText $0,ALLY_PETER ; "I didn't know humans were{N}so impolite.{W1}"
                 setFacing 136,RIGHT

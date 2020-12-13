@@ -23,23 +23,23 @@ cs_615E6:       textCursor 3760
                 setPriority ALLY_BOWIE,$0
                 setPriority 128,$FFFF
                 setBlocks 12,39,7,4,10,3
-                setActscriptWait 130,eas_46172
-                setActscriptWait 128,eas_46172
-                setActscriptWait 131,eas_46172
+                setActscriptWait 130,eas_DeactivateAutoFacing
+                setActscriptWait 128,eas_DeactivateAutoFacing
+                setActscriptWait 131,eas_DeactivateAutoFacing
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscript 129,eas_Transparent
                 customActscriptWait 134
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 134,eas_46172
+                setActscriptWait 134,eas_DeactivateAutoFacing
                 entityActions 134
                  moveDown 1
                 endActions
                 csWait 2
-                setActscriptWait 134,eas_461AA
+                setActscriptWait 134,eas_StopMoving
                 csWait 5
                 fadeInB
                 csWait 40
@@ -91,7 +91,7 @@ cs_615E6:       textCursor 3760
                 setSprite 132,MAPSPRITE_ELIS
                 setFacing 132,DOWN
                 setFacing 134,DOWN
-                setActscriptWait 134,eas_46172
+                setActscriptWait 134,eas_DeactivateAutoFacing
                 customActscriptWait 134
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
@@ -100,14 +100,14 @@ cs_615E6:       textCursor 3760
                  moveRight 1
                 endActions
                 csWait 5
-                setActscriptWait 134,eas_461AA
+                setActscriptWait 134,eas_StopMoving
                 entityActions 134
                  moveUp 1
                 endActions
                 csWait 2
-                setActscriptWait 134,eas_461AA
+                setActscriptWait 134,eas_StopMoving
                 nextSingleText $FF,255  ; "King Galam grabbed Elis'{N}arms!{W1}"
-                setActscriptWait 132,eas_46172
+                setActscriptWait 132,eas_DeactivateAutoFacing
                 customActscriptWait 134
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -165,10 +165,10 @@ cs_615E6:       textCursor 3760
                 setActscript ALLY_PETER,eas_Jump
                 setActscript 133,eas_Jump
                 setActscriptWait ALLY_LEMON,eas_Jump
-                setActscriptWait 132,eas_46172
+                setActscriptWait 132,eas_DeactivateAutoFacing
                 setActscript 132,eas_AnimSpeedx2
                 nextSingleText $80,ALLY_PETER ; "Zeon!{W1}"
-                setActscriptWait ALLY_LEMON,eas_46172
+                setActscriptWait ALLY_LEMON,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_LEMON
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -259,18 +259,18 @@ cs_615E6:       textCursor 3760
                  moveLeft 1
                 endActions
                 csWait 15
-                setActscriptWait ALLY_PETER,eas_461AA
+                setActscriptWait ALLY_PETER,eas_StopMoving
                 nextSingleText $FF,255  ; "{NAME;7} tugs at the{N}jewel.{W1}"
                 csWait 20
                 nextSingleText $80,ALLY_PETER ; "Nope.  Let me try this.{W1}"
                 shiver ALLY_PETER
                 nextSingleText $FF,255  ; "{NAME;7} removed the{N}jewel from {LEADER}'s neck.{W1}"
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 entityActions ALLY_PETER
                  moveRight 1
                 endActions
                 csWait 15
-                setActscriptWait ALLY_PETER,eas_461AA
+                setActscriptWait ALLY_PETER,eas_StopMoving
                 nextSingleText $80,ALLY_PETER ; "Oh, my!{W1}"
                 csWait 30
                 setFacing ALLY_PETER,UP
@@ -295,7 +295,7 @@ cs_615E6:       textCursor 3760
                  moveRight 2
                 endActions
                 nextSingleText $0,134   ; "Excellent!{N}Finally, I have it back!{W1}"
-                setActscriptWait 134,eas_46172
+                setActscriptWait 134,eas_DeactivateAutoFacing
                 customActscriptWait 134
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -348,8 +348,8 @@ cs_615E6:       textCursor 3760
                 endActions
                 setFacing 132,UP
                 customActscriptWait 132
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -391,8 +391,8 @@ cs_615E6:       textCursor 3760
                 endActions
                 setFacing ALLY_LEMON,DOWN
                 customActscriptWait ALLY_LEMON
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -422,8 +422,8 @@ cs_615E6:       textCursor 3760
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_PETER,eas_46172
-                setActscriptWait 133,eas_46172
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
+                setActscriptWait 133,eas_DeactivateAutoFacing
                 setActscript 134,eas_BumpRight
                 entityFlashWhite 134,$28
                 playSound SFX_BLAST_SPELL
@@ -441,15 +441,15 @@ cs_615E6:       textCursor 3760
                 setDest 134,13,8
                 setFacing ALLY_PETER,LEFT
                 customActscriptWait ALLY_PETER
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 setFacing 133,UP
                 customActscriptWait 133
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -467,7 +467,7 @@ cs_615E6:       textCursor 3760
                 nextSingleText $FF,255  ; "{LEADER} slapped the jewel{N}out of Zeon's hand.{W1}"
                 playSound $FD
                 setPos 129,14,8,DOWN
-                setActscriptWait 129,eas_46172
+                setActscriptWait 129,eas_DeactivateAutoFacing
                 entityActions 129
                  moveRight 2
                 endActions
@@ -478,7 +478,7 @@ cs_615E6:       textCursor 3760
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
                 setActscript 134,eas_BumpDown
                 entityFlashWhite 134,$A
                 playSound SFX_BLAST_SPELL
@@ -492,8 +492,8 @@ cs_615E6:       textCursor 3760
                 setQuake 4
                 setFacing ALLY_BOWIE,UP
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -507,7 +507,7 @@ cs_615E6:       textCursor 3760
                 setFacing 134,DOWN
                 stopEntity 134
                 csWait 5
-                setActscript 134,eas_461B6
+                setActscript 134,eas_2xRightLeft
                 csWait 60
                 startEntity 134
                 nextSingleText $80,134  ; "That's what you get!{W1}"
@@ -574,7 +574,7 @@ cs_615E6:       textCursor 3760
                  moveRight 1
                 endActions
                 nextSingleText $80,134  ; "Die!{W1}"
-                setActscriptWait ALLY_LEMON,eas_46172
+                setActscriptWait ALLY_LEMON,eas_DeactivateAutoFacing
                 playSound SFX_BLAST_SPELL
                 flashScreenWhite $4
                 csWait 20
@@ -653,10 +653,10 @@ cs_615E6:       textCursor 3760
                  moveRight 1
                 endActions
                 csWait 25
-                setActscriptWait ALLY_LEMON,eas_461AA
+                setActscriptWait ALLY_LEMON,eas_StopMoving
                 nextSingleText $80,134  ; "No, I'll never go back to{N}such a terrible...{W1}"
                 headshake 134
-                setActscriptWait 134,eas_46172
+                setActscriptWait 134,eas_DeactivateAutoFacing
                 customActscriptWait 134
                  ac_setSpeed 5,5        ;   
                  ac_jump eas_Idle       ;   
@@ -675,8 +675,8 @@ cs_615E6:       textCursor 3760
                 headshake 134
                 waitIdle 134
                 nextSingleText $80,134  ; "I shall return!{N}Remember!{W1}"
-                setActscriptWait ALLY_LEMON,eas_46172
-                setActscriptWait 134,eas_46172
+                setActscriptWait ALLY_LEMON,eas_DeactivateAutoFacing
+                setActscriptWait 134,eas_DeactivateAutoFacing
                 setFacing 134,DOWN
                 setFacing ALLY_LEMON,DOWN
                 setPriority 134,$FFFF
@@ -685,7 +685,7 @@ cs_615E6:       textCursor 3760
                  moveUpRight 1
                 endActions
                 csWait 8
-                setActscriptWait ALLY_LEMON,eas_461AA
+                setActscriptWait ALLY_LEMON,eas_StopMoving
                 entityActions 134
                  moveUp 3
                 endActions
@@ -828,12 +828,12 @@ cs_615E6:       textCursor 3760
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 133,eas_46172
+                setActscriptWait 133,eas_DeactivateAutoFacing
                 entityActions 133
                  moveLeft 1
                 endActions
                 csWait 16
-                setActscriptWait 133,eas_461AA
+                setActscriptWait 133,eas_StopMoving
                 csWait 40
                 nextSingleText $FF,255  ; "Astral examines Elis.{W1}"
                 csWait 40
@@ -841,7 +841,7 @@ cs_615E6:       textCursor 3760
                  moveRight 1
                 endActions
                 csWait 16
-                setActscriptWait 133,eas_461AA
+                setActscriptWait 133,eas_StopMoving
                 setFacing 133,DOWN
                 nextText $80,133        ; "No. She's cold, but she's{N}breathing.{W2}"
                 nextSingleText $80,133  ; "I don't understand....{W1}"
@@ -849,11 +849,11 @@ cs_615E6:       textCursor 3760
                 playSound $FD
                 nextSingleText $0,135   ; "She's in a coma.{W1}"
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript 133,eas_461B6
+                setActscript 133,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461E4
+                setActscript ALLY_PETER,eas_2xUpDown
                 csWait 120
                 setFacing ALLY_BOWIE,UP
                 setFacing 133,UP
@@ -887,12 +887,12 @@ cs_615E6:       textCursor 3760
                 setActscriptWait ALLY_PETER,eas_Jump
                 nextSingleText $80,ALLY_PETER ; "We?  I don't see anybody{N}else?{W1}"
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 80
                 nextSingleText $0,135   ; "C'mon, {NAME;7}.{N}You know what I mean.{W1}"
                 setFacing ALLY_PETER,UP
                 nextSingleText $80,ALLY_PETER ; "Volcanon?{W1}"
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_PETER
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -951,7 +951,7 @@ cs_615E6:       textCursor 3760
                 setFacing 133,DOWN
                 setFacing ALLY_PETER,DOWN
                 csWait 30
-                setActscriptWait 135,eas_46172
+                setActscriptWait 135,eas_DeactivateAutoFacing
                 customActscriptWait 135
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -960,17 +960,17 @@ cs_615E6:       textCursor 3760
                  moveDown 1
                 endActions
                 csWait 16
-                setActscriptWait 135,eas_461AA
+                setActscriptWait 135,eas_StopMoving
                 entityFlashWhite 135,$28
                 entityActions 135
                  moveUp 1
                 endActions
                 csWait 16
-                setActscriptWait 135,eas_461AA
+                setActscriptWait 135,eas_StopMoving
                 nextSingleText $FF,255  ; "Mitula took the Jewel of{N}Light from {LEADER}.{W1}"
                 nod 135
                 nextSingleText $0,135   ; "And I need the Jewel of Evil.{W1}"
-                setActscriptWait 135,eas_Init2
+                setActscriptWait 135,eas_InitSlow
                 csWait 10
                 entityActionsWait 135
                  moveRight 3
@@ -1064,7 +1064,7 @@ cs_615E6:       textCursor 3760
                  moveUp 1
                 endActions
                 csWait 2
-                setActscriptWait ALLY_BOWIE,eas_461AA
+                setActscriptWait ALLY_BOWIE,eas_StopMoving
                 entityActionsWait ALLY_BOWIE
                  moveRight 1
                  faceDown 20
@@ -1075,9 +1075,9 @@ cs_615E6:       textCursor 3760
                 setSprite ALLY_BOWIE,MAPSPRITE_POSE2
                 csWait 30
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 5
-                setActscript 133,eas_461E4
+                setActscript 133,eas_2xUpDown
                 setQuake 32771
                 playSound MUSIC_BOSS_ATTACK
                 nextSingleText $0,133   ; "Oops!  She's sealing the{N}tower!{W1}"
@@ -1085,7 +1085,7 @@ cs_615E6:       textCursor 3760
                  moveDown 1
                 endActions
                 csWait 2
-                setActscriptWait ALLY_BOWIE,eas_461AA
+                setActscriptWait ALLY_BOWIE,eas_StopMoving
                 entityActionsWait ALLY_PETER
                  moveDown 1
                 endActions
@@ -1098,7 +1098,7 @@ cs_615E6:       textCursor 3760
                 setPriority ALLY_BOWIE,$FFFF
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity 133,ALLY_PETER,2
-                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
                 setCameraEntity ALLY_BOWIE
                 entityActions ALLY_BOWIE
                  moveDown 1

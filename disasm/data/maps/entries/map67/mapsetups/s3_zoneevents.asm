@@ -64,7 +64,7 @@ cs_4FB64:       textCursor 2543
                 nextSingleText $0,FOLLOWER_B ; "Wait!{W1}"
                 setDest FOLLOWER_B,60,27
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 setCamDest 53,24
                 setDest ALLY_PETER,59,27
@@ -76,7 +76,7 @@ cs_4FB64:       textCursor 2543
                 nextSingleText $0,FOLLOWER_B ; "{LEADER}...{NAME;7}...can{N}you hear that?{W1}"
                 nextSingleText $C0,ALLY_PETER ; "Hear what?{W1}"
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 setFacing ALLY_PETER,DOWN
                 nextSingleText $C0,ALLY_PETER ; "I don't hear anything.{W1}"
@@ -84,7 +84,7 @@ cs_4FB64:       textCursor 2543
                  moveDown 1
                 endActions
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 nextText $0,FOLLOWER_B  ; "Somebody is crying for help...{W2}"
                 nextSingleText $0,FOLLOWER_B ; "from...over here.{W1}"

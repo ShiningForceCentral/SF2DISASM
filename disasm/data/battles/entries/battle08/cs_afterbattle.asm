@@ -7,8 +7,8 @@ abcs_battle08:  textCursor 2468
                 setActscriptWait ALLY_BOWIE,eas_Init
                 stopEntity 129
                 customActscriptWait 129
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -35,7 +35,7 @@ cs_4AAB6:       fadeInB
                 nextSingleText $C0,129  ; "Huh?  Where is it?{W1}"
                 setActscriptWait 129,eas_Init
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 120
                 setFacing 129,LEFT
                 startEntity 129

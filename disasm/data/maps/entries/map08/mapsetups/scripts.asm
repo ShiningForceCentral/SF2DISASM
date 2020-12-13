@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map08\mapsetups\scripts.asm :
 ; 0x563B2..0x56636 : 
 cs_563B2:       textCursor 1291
-                setActscriptWait 129,eas_46172
+                setActscriptWait 129,eas_DeactivateAutoFacing
                 entityActionsWait 129
                  moveRight 4
                 endActions
@@ -35,8 +35,8 @@ cs_56422:       textCursor 1294
                 setActscriptWait ALLY_PETER,eas_Init
                 setDest ALLY_PETER,14,10
                 setFacing ALLY_PETER,UP
-                setActscriptWait ALLY_BOWIE,eas_46172
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 customActscriptWait 129
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   

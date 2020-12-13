@@ -1069,7 +1069,7 @@ csc22_animateEntityFadeInOrOut:
 loc_46B74:
                 
                 bsr.w   LoadMapsprite
-                jsr     sub_45CA6
+                jsr     ApplySpriteCropEffect
                 bsr.w   sub_4709E       
                 jsr     (WaitForVInt).w
                 jsr     (WaitForVInt).w

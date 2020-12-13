@@ -56,9 +56,9 @@ bbcs_28:        textCursor 2661
                  moveDown 1
                 endActions
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461E4
+                setActscript ALLY_PETER,eas_2xUpDown
                 csWait 100
                 setActscriptWait FOLLOWER_B,eas_Jump
                 customActscriptWait FOLLOWER_B
@@ -81,8 +81,8 @@ bbcs_28:        textCursor 2661
                 endActions
                 setFacing ALLY_BOWIE,UP
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

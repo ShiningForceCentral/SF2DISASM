@@ -8,8 +8,8 @@ abcs_battle13:  textCursor 2495
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setPos ALLY_PETER,15,13,RIGHT
                 customActscriptWait ALLY_LUKE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -23,7 +23,7 @@ abcs_battle13:  textCursor 2495
                 headshake ALLY_LUKE
                 nextSingleText $C0,ALLY_LUKE ; "Squawk!  They knocked me{N}senseless.{W1}"
                 csWait 5
-                setActscript ALLY_LUKE,eas_461B6
+                setActscript ALLY_LUKE,eas_2xRightLeft
                 csWait 60
                 nextText $C0,ALLY_LUKE  ; "Where are the devils?{N}{LEADER}, did you defeat{N}them?{W2}"
                 setFacing ALLY_LUKE,UP

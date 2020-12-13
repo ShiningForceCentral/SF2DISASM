@@ -27,9 +27,9 @@ cs_58E5C:       textCursor 2261
                  moveDown 1
                 endActions
                 csWait 40
-                setActscriptWait 131,eas_46172
-                setActscriptWait 132,eas_46172
-                setActscriptWait 133,eas_46172
+                setActscriptWait 131,eas_DeactivateAutoFacing
+                setActscriptWait 132,eas_DeactivateAutoFacing
+                setActscriptWait 133,eas_DeactivateAutoFacing
                 entityActions ALLY_BOWIE
                  moveDown 3
                 endActions

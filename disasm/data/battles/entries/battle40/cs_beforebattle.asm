@@ -99,7 +99,7 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
                 csWait 20
                 flickerOnce
                 setActscript 130,eas_AnimSpeedx2
-                setActscriptWait 130,eas_46172
+                setActscriptWait 130,eas_DeactivateAutoFacing
                 setPos 130,16,8,UP
                 entityActionsWait 130
                  moveUp 2

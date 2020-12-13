@@ -129,7 +129,7 @@ cs_53176:       setCameraEntity 65535
                 setFacing 138,RIGHT
                 nextSingleText $80,138  ; "Here I am.{W1}"
                 csWait 5
-                setActscript 140,eas_461E4
+                setActscript 140,eas_2xUpDown
                 csWait 120
                 setFacing 140,LEFT
                 nextSingleText $0,140   ; "Did our soldiers leave{N}for the subjugation?{W1}"

@@ -21,8 +21,8 @@ return_600B0:
 
     ; End of function ms_map45_InitFunction
 
-cs_600B2:       setActscriptWait ALLY_SHEELA,eas_45F9C
+cs_600B2:       setActscriptWait ALLY_SHEELA,eas_Immersed
                 setSprite ALLY_SHEELA,MAPSPRITE_POSE7
-                setActscriptWait ALLY_SHEELA,eas_Init3
+                setActscriptWait ALLY_SHEELA,eas_InitFixedSprite
                 setFacing ALLY_SHEELA,UP
                 csc_end

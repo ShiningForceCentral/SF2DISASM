@@ -17,15 +17,15 @@ abcs_battle40:  textCursor 3065
 cs_4EAEE:       setBlocks 11,6,11,29,44,0
                 setBlocks 0,52,10,7,13,10
                 customActscriptWait 131
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 stopEntity 131
-                setActscriptWait 128,eas_46172
-                setActscriptWait 129,eas_46172
-                setActscriptWait 130,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
+                setActscriptWait 129,eas_DeactivateAutoFacing
+                setActscriptWait 130,eas_DeactivateAutoFacing
                 setActscript 128,eas_AnimSpeedx2
                 setActscript 129,eas_AnimSpeedx2
                 setActscript 130,eas_AnimSpeedx2

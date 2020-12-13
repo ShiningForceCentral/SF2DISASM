@@ -22,8 +22,8 @@ return_53F28:
     ; End of function ms_map21_InitFunction
 
 cs_53F2A:       customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

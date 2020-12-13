@@ -946,11 +946,11 @@ ac_waitDest:	macro
 	dc.w 1
 	endm
 
-ac_02:	macro
+ac_controlCharacter:	macro
 	dc.w 2
 	endm
 
-ac_03:	macro
+ac_follow:	macro
 	dc.w 3
 	dc.w \1
 	dc.w \2
@@ -969,7 +969,7 @@ ac_moveAbs:	macro
 	dc.w \2
 	endm
 
-ac_06:	macro
+ac_randomWalk:	macro
 	dc.w 6
 	dc.w \1
 	dc.w \2
@@ -984,7 +984,7 @@ ac_controlCaravan:	macro
 	dc.w 8
 	endm
 
-ac_09:	macro
+ac_moveFacRelPos:	macro
 	dc.w 9
 	dc.w \1
 	dc.w \2
@@ -1010,7 +1010,7 @@ ac_clonePos:	macro
 	dc.w \1
 	endm
 
-ac_0E:	macro
+ac_moveEntFacRelPos:	macro
 	dc.w $E
 	dc.w \1
 	dc.w \2
@@ -1035,15 +1035,17 @@ ac_11:	macro
 
 ac_12:	macro
 	dc.w $12
-	dc.w \1
+	dc.b \1
+	dc.b \2
 	endm
 
 ac_13:	macro
 	dc.w $13
-	dc.w \1
+	dc.b \1
+	dc.b \2
 	endm
 
-ac_setAnimCounter:	macro
+ac_motion:	macro
 	dc.w $14
 	dc.w \1
 	endm
@@ -1063,27 +1065,42 @@ ac_setSprite:	macro
 	dc.w \1
 	endm
 
-ac_set1Cb7:	macro
+ac_entityObstructable:	macro
 	dc.w $18
 	dc.w \1
 	endm
 
-ac_set1Cb6:	macro
+ac_mapUncollidable:	macro
 	dc.w $19
 	dc.w \1
 	endm
 
-ac_set1Cb5:	macro
+ac_entityUncollidable:	macro
 	dc.w $1A
 	dc.w \1
 	endm
 
-ac_setFlip:	macro
+ac_orientUp:	macro
 	dc.w $1B
-	dc.w \1
+	dc.w 0
 	endm
 
-ac_setTransparency:	macro
+ac_orientLeft:	macro
+	dc.w $1B
+	dc.w 1
+	endm
+
+ac_orientDown:	macro
+	dc.w $1B
+	dc.w 2
+	endm
+
+ac_orientRight:	macro
+	dc.w $1B
+	dc.w 3
+	endm
+
+ac_transparency:	macro
 	dc.w $1C
 	dc.w \1
 	endm
@@ -1093,17 +1110,17 @@ ac_setGhost:	macro
 	dc.w \1
 	endm
 
-ac_setAnimSpeedX2:	macro
+ac_animSpeedX2:	macro
 	dc.w $1E
 	dc.w \1
 	endm
 
-ac_set1Db3:	macro
+ac_resizable:	macro
 	dc.w $1F
 	dc.w \1
 	endm
 
-ac_inWater:	macro
+ac_immersed:	macro
 	dc.w $20
 	dc.w \1
 	endm
@@ -1132,7 +1149,7 @@ ac_jump:	macro
 	dc.l \1
 	endm
 
-ac_40:	macro
+ac_checkMapBlockCopy:	macro
 	dc.w $40
 	endm
 

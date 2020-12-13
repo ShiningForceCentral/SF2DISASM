@@ -28,7 +28,7 @@ cs_52530:       textCursor 901
                  moveRight 1
                 endActions
                 csWait 5
-                setActscript ALLY_SLADE,eas_461B6
+                setActscript ALLY_SLADE,eas_2xRightLeft
                 csWait 30
                 nextSingleText $0,ALLY_SLADE ; "Where...?{N}...I...why am I...?{W1}"
                 setFacing ALLY_SLADE,DOWN
@@ -54,8 +54,8 @@ cs_52530:       textCursor 901
                 endActions
                 setFacing ALLY_SLADE,UP
                 customActscriptWait ALLY_SLADE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -83,8 +83,8 @@ cs_52530:       textCursor 901
                 nextSingleText $0,ALLY_SARAH ; "Is it related to the opened{N}door?{W1}"
                 nextSingleText $0,ALLY_SLADE ; "Hey!{W1}"
                 customActscriptWait ALLY_SLADE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $0          ;   
+                 ac_motion OFF          ;   
+                 ac_orientUp            ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -168,11 +168,11 @@ cs_52530:       textCursor 901
                 nextSingleText $0,ALLY_SARAH ; "Why are you being so nice{N}to us?  You don't know us.{W1}"
                 shiver ALLY_SLADE
                 csWait 5
-                setActscript ALLY_SLADE,eas_461B6
+                setActscript ALLY_SLADE,eas_2xRightLeft
                 nextSingleText $C0,ALLY_SLADE ; "Ah, that's because...{N}well...{W1}"
                 csWait 20
                 setFacing ALLY_SLADE,UP
-                setActscriptWait ALLY_SLADE,eas_46172
+                setActscriptWait ALLY_SLADE,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_SLADE
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   

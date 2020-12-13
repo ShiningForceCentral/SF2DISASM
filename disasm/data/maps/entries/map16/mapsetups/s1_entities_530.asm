@@ -16,7 +16,7 @@ ms_map16_flag530_Entities:
                 msWalkingEntity 18, 19, DOWN, MAPSPRITE_SOLDIER1, 18, 19, 1
                 msWalkingEntity 3, 13, DOWN, MAPSPRITE_SOLDIER1, 3, 13, 1
                 msWalkingEntity 7, 20, DOWN, MAPSPRITE_SOLDIER2, 7, 20, 1
-                msFixedEntity 23, 24, DOWN, MAPSPRITE_ORB, eas_Init3
+                msFixedEntity 23, 24, DOWN, MAPSPRITE_ORB, eas_InitFixedSprite
                 msFixedEntity 39, 24, DOWN, MAPSPRITE_SAILOR, eas_Init
                 msFixedEntity 17, 10, DOWN, MAPSPRITE_SOLDIER2, eas_Init
                 msFixedEntity 29, 23, DOWN, MAPSPRITE_CARAVAN, eas_Init

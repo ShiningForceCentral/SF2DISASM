@@ -12,7 +12,7 @@ cs_5AC58:       textCursor 1804
                  moveDown 3
                 endActions
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 80
                 nextSingleText $0,128   ; "Tum-de-dum-dum.  Oh...{N}Time to check the{N}collections.{W1}"
                 setCameraEntity 128
@@ -142,9 +142,9 @@ cs_5AC58:       textCursor 1804
                 shiver 128
                 nextText $0,128         ; "You impolite kids!{N}You can't go in!{W2}"
                 nextSingleText $0,128   ; "Mr. Creed is too busy!{N}Go away!{W1}"
-                setActscriptWait ALLY_BOWIE,eas_46172
-                setActscriptWait ALLY_PETER,eas_46172
-                setActscriptWait FOLLOWER_B,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
+                setActscriptWait FOLLOWER_B,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_BOWIE
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -171,7 +171,7 @@ cs_5AC58:       textCursor 1804
                 setActscriptWait FOLLOWER_B,eas_Init
                 csWait 25
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 nextText $0,ALLY_PETER  ; "{LEADER}, on our left!{N}That door might lead to{N}Mr. Creed!{W2}"
                 setFacing ALLY_PETER,DOWN
@@ -208,11 +208,11 @@ cs_5AF36:       textCursor 1834
                 csWait 30
                 flashScreenWhite $4
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461E4
+                setActscript ALLY_PETER,eas_2xUpDown
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 20
                 flashScreenWhite $4
                 csWait 10
@@ -323,7 +323,7 @@ cs_5B016:       textCursor 1840
                 setFacing 129,DOWN
                 nextSingleText $80,129  ; "What?{W1}"
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 120
                 entityActionsWait 129
                  moveDown 1
@@ -332,7 +332,7 @@ cs_5B016:       textCursor 1840
                 csWait 20
                 nextSingleText $FF,255  ; "Ah...{W1}"
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 nextSingleText $80,129  ; "I heard something.{W1}"
                 csWait 30
                 entityActionsWait 129
@@ -355,7 +355,7 @@ cs_5B016:       textCursor 1840
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 129,eas_46172
+                setActscriptWait 129,eas_DeactivateAutoFacing
                 entityActionsWait 129
                  moveUp 1
                 endActions
@@ -375,18 +375,18 @@ cs_5B016:       textCursor 1840
                 csWait 10
                 flashScreenWhite $1E
                 setPos ALLY_BOWIE,16,9,DOWN
-                setActscript ALLY_BOWIE,eas_46310
+                setActscript ALLY_BOWIE,eas_TwirlGrow
                 setPos ALLY_PETER,15,9,DOWN
-                setActscript ALLY_PETER,eas_46310
+                setActscript ALLY_PETER,eas_TwirlGrow
                 setPos FOLLOWER_B,17,9,DOWN
-                setActscript FOLLOWER_B,eas_46310
+                setActscript FOLLOWER_B,eas_TwirlGrow
                 csWait 60
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461E4
+                setActscript ALLY_PETER,eas_2xUpDown
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 setFacing ALLY_PETER,RIGHT
                 nextSingleText $0,ALLY_PETER ; "Wow, we're back to normal!{N}I can't believe we were so{N}small!{W1}"
@@ -414,7 +414,7 @@ cs_5B016:       textCursor 1840
                 nod ALLY_BOWIE
                 nextSingleText $FF,255  ; "{LEADER} nods.{W1}"
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 nextSingleText $0,130   ; "No way!  You're kidding!{N}I can't believe it!{W1}"
                 setActscriptWait 129,eas_Init
                 entityActionsWait 129
@@ -423,7 +423,7 @@ cs_5B016:       textCursor 1840
                 setFacing 130,DOWN
                 setFacing 129,RIGHT
                 nextSingleText $80,129  ; "Noisy fairy!{N}Be quiet!{W1}"
-                setActscriptWait 130,eas_46172
+                setActscriptWait 130,eas_DeactivateAutoFacing
                 entityActions 130
                  moveRight 1
                 endActions
@@ -473,7 +473,7 @@ cs_5B016:       textCursor 1840
                  moveDown 2
                 endActions
                 csWait 20
-                setActscriptWait 130,eas_Init2
+                setActscriptWait 130,eas_InitSlow
                 entityActionsWait 130
                  moveUp 1
                 endActions
@@ -489,7 +489,7 @@ cs_5B016:       textCursor 1840
                 nextSingleText $0,129   ; "Indeed...Zeon is extremely{N}powerful!{W1}"
                 setFacing 128,UP
                 shiver 128
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 customActscriptWait 128
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   
@@ -517,7 +517,7 @@ cs_5B016:       textCursor 1840
                  moveLeft 4
                 endActions
                 hide 129
-                setActscriptWait 130,eas_Init2
+                setActscriptWait 130,eas_InitSlow
                 entityActionsWait 130
                  moveLeft 1
                  moveDown 1

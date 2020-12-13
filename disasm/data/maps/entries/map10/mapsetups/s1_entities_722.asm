@@ -9,8 +9,8 @@ ms_map10_flag722_Entities:
                 msWalkingEntity 44, 26, DOWN, MAPSPRITE_BEDOE_MINISTER, 44, 26, 1
                 msFixedEntity 41, 27, RIGHT, MAPSPRITE_BIRDMAN, eas_Init
                 msFixedEntity 42, 29, LEFT, MAPSPRITE_BIRDMAN, eas_Init
-                msFixedEntity 30, 34, DOWN, MAPSPRITE_BEDOE_SOLDIER, eas_Init3
-                msFixedEntity 30, 37, DOWN, MAPSPRITE_BEDOE_SOLDIER, eas_Init3
+                msFixedEntity 30, 34, DOWN, MAPSPRITE_BEDOE_SOLDIER, eas_InitFixedSprite
+                msFixedEntity 30, 37, DOWN, MAPSPRITE_BEDOE_SOLDIER, eas_InitFixedSprite
                 msWalkingEntity 41, 35, UP, MAPSPRITE_BIRDMAN, 41, 35, 2
                 msFixedEntity 28, 28, DOWN, MAPSPRITE_SAILOR, eas_Init
                 msFixedEntity 27, 33, DOWN, MAPSPRITE_PRIEST, eas_Init

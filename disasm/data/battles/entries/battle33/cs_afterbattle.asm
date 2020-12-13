@@ -11,26 +11,26 @@ abcs_battle33:  textCursor 2876
                 setPos FOLLOWER_B,12,9,DOWN
                 setBlocks 3,39,1,1,16,8
                 stopEntity 128
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActions 128
                  moveDown 1
                 endActions
                 csWait 4
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 entityActions ALLY_ZYNK
                  moveDown 1
                 endActions
                 csWait 2
-                setActscriptWait ALLY_ZYNK,eas_461AA
-                setActscriptWait ALLY_ZYNK,eas_45F9C
+                setActscriptWait ALLY_ZYNK,eas_StopMoving
+                setActscriptWait ALLY_ZYNK,eas_Immersed
                 fadeInB
                 nextSingleText $0,FOLLOWER_B ; "There may be some survivors{N}somewhere.{W1}"
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript FOLLOWER_B,eas_461E4
+                setActscript FOLLOWER_B,eas_2xUpDown
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 entityActions 128
                  moveUp 1
@@ -48,7 +48,7 @@ abcs_battle33:  textCursor 2876
                  moveDown 1
                 endActions
                 csWait 3
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 setFacing ALLY_PETER,RIGHT
                 setActscriptWait ALLY_PETER,eas_Jump
                 csWait 40
@@ -66,7 +66,7 @@ abcs_battle33:  textCursor 2876
                  moveUp 1
                 endActions
                 csWait 8
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 csWait 50
                 customActscriptWait 128
                  ac_setSpeed 48,48      ;   
@@ -77,7 +77,7 @@ abcs_battle33:  textCursor 2876
                 endActions
                 csWait 4
                 setQuake 2
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 csWait 10
                 setQuake 0
                 csWait 40
@@ -86,7 +86,7 @@ abcs_battle33:  textCursor 2876
                 endActions
                 nextSingleText $0,128   ; "Do not touch my rock!{W1}"
                 setActscriptWait ALLY_PETER,eas_Jump
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_PETER
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -103,7 +103,7 @@ abcs_battle33:  textCursor 2876
                  moveUp 1
                 endActions
                 csWait 8
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 nextText $0,128         ; "Did you defeat all those{N}devils?{W2}"
                 nextSingleText $0,128   ; "I was wondering why it became{N}quiet so suddenly.{W1}"
                 entityActions FOLLOWER_B
@@ -131,14 +131,14 @@ abcs_battle33:  textCursor 2876
                  ac_setSpeed 56,56      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActions 128
                  moveDown 1
                 endActions
                 setPos ALLY_ZYNK,16,8,DOWN
                 setActscriptWait ALLY_ZYNK,eas_Init
                 csWait 3
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 setQuake 2
                 csWait 20
                 setQuake 0

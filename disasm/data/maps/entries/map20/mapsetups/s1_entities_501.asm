@@ -9,6 +9,6 @@ ms_map20_flag501_Entities:
                 msFixedEntity 17, 37, RIGHT, MAPSPRITE_SOLDIER1, eas_Init
                 msFixedEntity 21, 37, DOWN, MAPSPRITE_SOLDIER1, eas_Init
                 msFixedEntity 22, 40, LEFT, MAPSPRITE_SOLDIER1, eas_Init
-                msFixedEntity 63, 63, LEFT, MAPSPRITE_MIST_DEMON, eas_Init2
+                msFixedEntity 63, 63, LEFT, MAPSPRITE_MIST_DEMON, eas_InitSlow
                 msFixedEntity 63, 63, LEFT, MAPSPRITE_EFFECT3, eas_Init
                 msEntitiesEnd

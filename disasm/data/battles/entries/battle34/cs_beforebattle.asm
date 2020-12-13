@@ -62,7 +62,7 @@ cs_4D3C6:       entityActionsWait FOLLOWER_B
                 setFacing 128,DOWN
                 csWait 30
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 120
                 setFacing 128,DOWN
                 nextSingleText $0,128   ; "Geshp, you coward!{N}I'll kill you first!{W1}"

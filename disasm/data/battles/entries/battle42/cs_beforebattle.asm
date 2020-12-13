@@ -16,8 +16,8 @@ bbcs_42:        textCursor 3088
                 setPos ALLY_ZYNK,63,62,DOWN
 cs_4EDE8:       stopEntity 129
                 customActscriptWait 129
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

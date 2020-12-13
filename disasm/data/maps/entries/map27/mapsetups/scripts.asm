@@ -8,7 +8,7 @@ cs_59FB8:       textCursor 1733
                 setCamDest 22,15
                 setDest FOLLOWER_B,26,20
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 nextSingleText $0,FOLLOWER_B ; "(Sniff, sniff)...{N}It smells like a ditch!{W1}"
                 setDest ALLY_PETER,27,20

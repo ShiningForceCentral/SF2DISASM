@@ -101,7 +101,7 @@ cs_53996:       textCursor 2176
                 setFacing 131,RIGHT
                 nextSingleText $0,131   ; "Sir Astral, who are they?{W1}"
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 nextSingleText $80,130  ; "Oh...{D1}well...{D1}(mumble)...{D1}{N}They're my pupils....{W1}"
                 entityActionsWait 131
                  moveRight 1

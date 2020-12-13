@@ -31,8 +31,8 @@ return_5830E:
 
 cs_58310:       setFacing 130,DOWN
                 customActscriptWait 130
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
