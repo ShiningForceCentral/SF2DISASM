@@ -3,9 +3,9 @@
 ; 0x51840..0x51912 : 
 eas_FallInEarthquakeCrack:
                  ac_setSpeed 0,0
-                 ac_11 $101
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 1,1
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
                  ac_entityObstructable ON
                  ac_mapUncollidable OFF
                  ac_entityUncollidable OFF

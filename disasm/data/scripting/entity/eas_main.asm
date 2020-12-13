@@ -36,9 +36,9 @@ eas_ControlledCharacter:
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
                  ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 0,0
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
 byte_44E5A:      ac_checkMapBlockCopy
                  ac_controlCharacter
                  ac_waitDest
@@ -48,9 +48,9 @@ eas_Raft:        ac_entityObstructable ON
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
                  ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 0,0
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
 byte_44E80:      ac_checkMapBlockCopy
                  ac_controlRaft
                  ac_waitDest
@@ -60,9 +60,9 @@ eas_Caravan:     ac_entityObstructable ON
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
                  ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 0,0
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
 byte_44EA6:      ac_checkMapBlockCopy
                  ac_controlCaravan
                  ac_waitDest
@@ -73,9 +73,9 @@ eas_UnitCursorSpeedx2:
                  ac_mapUncollidable OFF
                  ac_entityUncollidable OFF
                  ac_setSpeed 64,64
-                 ac_11 $0
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 0,0
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
 byte_44ECC:      ac_controlCharacter
                  ac_waitDest
 word_44ED0:      ac_branch
@@ -83,9 +83,9 @@ word_44ED0:      ac_branch
 eas_UnitCursor:  ac_entityObstructable OFF
                  ac_mapUncollidable OFF
                  ac_entityUncollidable OFF
-                 ac_11 $101
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 1,1
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
 byte_44EEC:      ac_waitDest
                  ac_wait 1
 word_44EF2:      ac_branch
@@ -94,22 +94,22 @@ eas_44EF6:       ac_entityObstructable OFF
                  ac_mapUncollidable OFF
                  ac_entityUncollidable OFF
                  ac_setSpeed 64,64
-                 ac_11 $0
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 0,0
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
 word_44F12:      ac_branch
                 dc.w (byte_44EEC-word_44F12) & $FFFF
 eas_44F16:       ac_entityObstructable OFF
                  ac_mapUncollidable ON
                  ac_entityUncollidable OFF
                  ac_setSpeed 8,8
-                 ac_11 $808
+                 ac_accelFactors 8,8
 word_44F2A:      ac_branch
                 dc.w (byte_44EEC-word_44F2A) & $FFFF
 eas_Follower1:   ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_accelFactors 0,0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_entityObstructable OFF
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
@@ -118,9 +118,9 @@ byte_44F4A:      ac_follow 0,-24,0
 word_44F54:      ac_branch
                 dc.w (byte_44F4A-word_44F54) & $FFFF
 eas_Follower2:   ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_accelFactors 0,0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_entityObstructable OFF
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
@@ -129,9 +129,9 @@ byte_44F74:      ac_follow 1,-24,0
 word_44F7E:      ac_branch
                 dc.w (byte_44F74-word_44F7E) & $FFFF
 eas_Follower3:   ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_accelFactors 0,0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_entityObstructable OFF
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
@@ -141,9 +141,9 @@ word_44FA8:      ac_branch
                 dc.w (byte_44F9E-word_44FA8) & $FFFF
 eas_OverworldFollower2:
                  ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_accelFactors 0,0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_entityObstructable OFF
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
@@ -153,9 +153,9 @@ word_44FD4:      ac_branch
                 dc.w (byte_44FC8-word_44FD4) & $FFFF
 eas_OverworldFollower3:
                  ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_accelFactors 0,0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_entityObstructable OFF
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
@@ -163,9 +163,9 @@ byte_44FF4:      ac_follow 0,-24,24
 word_44FFC:      ac_branch
                 dc.w (byte_44FF4-word_44FFC) & $FFFF
 eas_Follower4:   ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_accelFactors 0,0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_entityObstructable OFF
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
@@ -175,9 +175,9 @@ word_45026:      ac_branch
                 dc.w (byte_4501C-word_45026) & $FFFF
 eas_OverworldFollower5:
                  ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_accelFactors 0,0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_entityObstructable OFF
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
@@ -187,9 +187,9 @@ word_45050:      ac_branch
                 dc.w (byte_45046-word_45050) & $FFFF
 eas_Walking:     ac_wait 30
                  ac_setSpeed 0,0
-                 ac_11 $101
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 1,1
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
                  ac_entityObstructable ON
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
@@ -198,54 +198,55 @@ byte_45074:      ac_randomWalk 16,16,12
                  ac_wait 20
 word_45082:      ac_branch
                 dc.w (byte_45074-word_45082) & $FFFF
-byte_45086:      ac_11 $102
+byte_45086:      ac_accelFactors 1,2
                  ac_setSpeed 0,26
-                 ac_12 $FF,$0
-                 ac_13 $FF,$FF
+                 ac_acceleration ON,OFF
+                 ac_deceleration ON,ON
                  ac_moveRel -2,-2
                  ac_waitDest
-eas_4509E:       ac_11 $201
+eas_EvilGizmoCircle:
+                 ac_accelFactors 2,1
                  ac_setSpeed 26,0
-                 ac_12 $FF,$FF
-                 ac_13 $FF,$0
+                 ac_acceleration ON,ON
+                 ac_deceleration ON,OFF
                  ac_moveRel -2,2
                  ac_waitDest
-                 ac_11 $102
+                 ac_accelFactors 1,2
                  ac_setSpeed 0,26
-                 ac_12 $FF,$0
-                 ac_13 $FF,$FF
+                 ac_acceleration ON,OFF
+                 ac_deceleration ON,ON
                  ac_moveRel 2,2
                  ac_waitDest
-                 ac_11 $201
+                 ac_accelFactors 2,1
                  ac_setSpeed 26,0
-                 ac_12 $FF,$FF
-                 ac_13 $FF,$0
+                 ac_acceleration ON,ON
+                 ac_deceleration ON,OFF
                  ac_moveRel 2,-2
                  ac_waitDest
 word_450E6:      ac_branch
                 dc.w (byte_45086-word_450E6) & $FFFF
-byte_450EA:      ac_11 $102
+byte_450EA:      ac_accelFactors 1,2
                  ac_setSpeed 0,32
-                 ac_12 $FF,$0
-                 ac_13 $FF,$FF
+                 ac_acceleration ON,OFF
+                 ac_deceleration ON,ON
                  ac_moveRel -3,-3
                  ac_waitDest
-                 ac_11 $201
+                 ac_accelFactors 2,1
                  ac_setSpeed 32,0
-                 ac_12 $FF,$FF
-                 ac_13 $FF,$0
+                 ac_acceleration ON,ON
+                 ac_deceleration ON,OFF
                  ac_moveRel -3,3
                  ac_waitDest
-                 ac_11 $102
+                 ac_accelFactors 1,2
                  ac_setSpeed 0,32
-                 ac_12 $FF,$0
-                 ac_13 $FF,$FF
+                 ac_acceleration ON,OFF
+                 ac_deceleration ON,ON
                  ac_moveRel 3,3
                  ac_waitDest
-                 ac_11 $201
+                 ac_accelFactors 2,1
                  ac_setSpeed 32,0
-                 ac_12 $FF,$FF
-                 ac_13 $FF,$0
+                 ac_acceleration ON,ON
+                 ac_deceleration ON,OFF
                  ac_moveRel 3,-3
                  ac_waitDest
 word_4514A:      ac_branch
@@ -261,10 +262,10 @@ word_4514A:      ac_branch
 word_4516A:      ac_branch
                 dc.w eas_Idle-word_4516A
                  ac_autoFacing OFF
-                 ac_11 $0
+                 ac_accelFactors 0,0
                  ac_setSpeed 32,32
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_moveRel 0,-1
                  ac_wait 5
                  ac_moveRel 0,1
@@ -273,10 +274,10 @@ word_4516A:      ac_branch
                  ac_autoFacing ON
 word_451A0:      ac_branch
                 dc.w eas_Idle-word_451A0
-                 ac_11 $101
+                 ac_accelFactors 1,1
                  ac_setSpeed 32,32
-                 ac_12 $FE,$FF
-                 ac_13 $0,$0
+                 ac_acceleration -2,ON
+                 ac_deceleration OFF,OFF
                  ac_moveRel 0,-2
                  ac_waitDest
                  ac_moveRel 2,0
@@ -291,9 +292,9 @@ word_451A0:      ac_branch
 word_451DC:      ac_branch
                 dc.w eas_Idle-word_451DC
 eas_Standing:    ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_accelFactors 0,0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_entityObstructable OFF
                  ac_mapUncollidable ON
                  ac_entityUncollidable OFF

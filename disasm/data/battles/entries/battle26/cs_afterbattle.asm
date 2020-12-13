@@ -39,7 +39,7 @@ abcs_battle26:  textCursor 2637
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscript 128,eas_4509E
+                setActscript 128,eas_EvilGizmoCircle
                 csWait 200
                 setActscriptWait 128,eas_Die
                 setCamDest 13,11
