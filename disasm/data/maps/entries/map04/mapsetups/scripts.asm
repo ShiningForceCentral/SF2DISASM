@@ -1,16 +1,17 @@
 
 ; ASM FILE data\maps\entries\map04\mapsetups\scripts.asm :
 ; 0x51840..0x51912 : 
-eas_51840:       ac_setSpeed 0,0
+eas_FallInEarthquakeCrack:
+                 ac_setSpeed 0,0
                  ac_11 $101
-                 ac_12 $FEFF
-                 ac_13 $FEFF
-                 ac_set1Cb7 $FFFF
-                 ac_set1Cb6 $0
-                 ac_set1Cb5 $0
-                 ac_autoFacing $0
+                 ac_12 $FE,$FF
+                 ac_13 $FE,$FF
+                 ac_entityObstructable ON
+                 ac_mapUncollidable OFF
+                 ac_entityUncollidable OFF
+                 ac_autoFacing OFF
                  ac_moveRel 0,2
-                 ac_set1Db3 $FFFF
+                 ac_resizable ON
                  ac_soundCommand SFX_FALLING
                  ac_setFacing RIGHT
                  ac_setSize 22

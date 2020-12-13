@@ -23,11 +23,11 @@ bbcs_16:        textCursor 2513
                 fadeInB
                 csWait 30
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 entityActionsWait ALLY_PETER
                  moveRight 1
@@ -59,7 +59,7 @@ bbcs_16:        textCursor 2513
                 setQuake 32770
                 playSound SFX_BIG_DOOR_RUMBLE
                 csWait 30
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 customActscriptWait 128
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   

@@ -11,10 +11,10 @@ cs_5E27C:       setActscriptWait ALLY_BOWIE,eas_5E2C4
                 setActscriptWait ALLY_ZYNK,eas_5E2C4
 cs_5E2BC:       warp MAP_NAZCA_SHIP_INTERIOR,29,8,LEFT
                 csc_end
-eas_5E2C4:       ac_set1Cb5 $0
+eas_5E2C4:       ac_entityUncollidable OFF
                  ac_moveAbs 7,7
                  ac_wait 6
-                 ac_set1Db3 $FFFF
+                 ac_resizable ON
                  ac_setSize 22
                  ac_updateSprite
                  ac_wait 1

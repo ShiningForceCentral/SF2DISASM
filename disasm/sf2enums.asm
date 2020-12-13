@@ -2846,3 +2846,19 @@ VDPSPRITESIZE_H1: equ $0
 VDPSPRITESIZE_H2: equ $400
 VDPSPRITESIZE_H3: equ $800
 VDPSPRITESIZE_H4: equ $C00
+
+; ---------------------------------------------------------------------------
+
+; enum Activation
+OFF: equ $0
+ON: equ $FFFF
+
+; ---------------------------------------------------------------------------
+
+; enum Map_Events
+MAPEVENT_WARP: equ $1
+MAPEVENT_GETINTOCARAVAN: equ $2
+MAPEVENT_GETINTORAFT: equ $3
+MAPEVENT_GETOUTOFCARAVAN: equ $4
+MAPEVENT_GETOUTOFRAFT: equ $5
+MAPEVENT_ZONE_EVENT: equ $6

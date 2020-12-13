@@ -44,7 +44,7 @@ bbcs_06:        textCursor 2342
                 endActions
                 nextSingleText $0,128   ; "Hand it over.{N}I'll deliver it to...?{N}You!!!{W1}"
                 setCameraEntity 65535
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 128
                  moveDown 1
                 endActions

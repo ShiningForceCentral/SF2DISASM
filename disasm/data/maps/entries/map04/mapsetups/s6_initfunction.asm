@@ -66,9 +66,9 @@ cs_51750:       textCursor 715
                 csWait 10
                 setBlocks 51,32,11,7,24,3
                 csWait 10
-                setActscript 128,eas_51840
+                setActscript 128,eas_FallInEarthquakeCrack
                 csWait 5
-                setActscriptWait 129,eas_51840
+                setActscriptWait 129,eas_FallInEarthquakeCrack
                 playSound SFX_BIG_DOOR_RUMBLE
                 setBlocks 51,0,5,4,27,0
                 csWait 10

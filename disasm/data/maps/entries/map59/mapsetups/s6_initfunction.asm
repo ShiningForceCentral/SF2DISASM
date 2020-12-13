@@ -293,10 +293,10 @@ cs_5EDB8:       textCursor 3737
                  moveUpRight 10
                 endActions
                 csc_end
-eas_5EF46:       ac_setAnimSpeedX2 $FFFF
-                 ac_setTransparency $FFFF
-                 ac_set1Cb5 $0
-                 ac_autoFacing $0
+eas_5EF46:       ac_animSpeedX2 ON
+                 ac_transparency ON
+                 ac_entityUncollidable OFF
+                 ac_autoFacing OFF
                  ac_setSpeed 64,64
                  ac_jump eas_Idle
 cs_5EF60:       textCursor 3739

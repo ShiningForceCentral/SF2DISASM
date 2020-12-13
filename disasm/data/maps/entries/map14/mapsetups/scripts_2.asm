@@ -17,7 +17,7 @@ cs_58FA4:       textCursor 2262
                  ac_moveRel 0,1         ;   
                  ac_waitDest            ;   
                  ac_wait 600            ;   
-                 ac_moveRel 0,65529     ;   
+                 ac_moveRel 0,-7        ;   
                  ac_waitDest            ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -225,7 +225,7 @@ ce_59270:       mainEntity 13,11,DOWN
                 entity 9,13,LEFT,MAPSPRITE_MAN2,eas_Init
                 entity 16,13,RIGHT,MAPSPRITE_MAN1,eas_Init
                 entity 13,20,UP,MAPSPRITE_WORKER,eas_Init
-                entity 12,11,RIGHT,MAPSPRITE_OBJECT2,eas_Init3
-                entity 13,11,DOWN,MAPSPRITE_OBJECT2,eas_Init3
-                entity 14,11,LEFT,MAPSPRITE_OBJECT2,eas_Init3
+                entity 12,11,RIGHT,MAPSPRITE_OBJECT2,eas_InitFixedSprite
+                entity 13,11,DOWN,MAPSPRITE_OBJECT2,eas_InitFixedSprite
+                entity 14,11,LEFT,MAPSPRITE_OBJECT2,eas_InitFixedSprite
                 dc.w $FFFF

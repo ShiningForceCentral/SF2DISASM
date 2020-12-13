@@ -18,6 +18,6 @@ ms_map19_flag982_Entities:
                 msFixedEntity 24, 16, RIGHT, MAPSPRITE_WOMAN3, eas_Init
                 msWalkingEntity 23, 26, DOWN, MAPSPRITE_SOLDIER1, 23, 26, 2
                 msWalkingEntity 34, 26, DOWN, MAPSPRITE_SOLDIER1, 34, 26, 2
-                msFixedEntity 14, 25, DOWN, MAPSPRITE_SOLDIER1, eas_Init3
-                msFixedEntity 17, 25, DOWN, MAPSPRITE_SOLDIER1, eas_Init3
+                msFixedEntity 14, 25, DOWN, MAPSPRITE_SOLDIER1, eas_InitFixedSprite
+                msFixedEntity 17, 25, DOWN, MAPSPRITE_SOLDIER1, eas_InitFixedSprite
                 msEntitiesEnd

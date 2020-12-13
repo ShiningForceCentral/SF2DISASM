@@ -10,8 +10,8 @@ cs_4FFDA:       textCursor 3341
                 setActscriptWait FOLLOWER_A,eas_Init
                 stopEntity 128
                 stopEntity 129
-                setActscriptWait 128,eas_46172
-                setActscriptWait 129,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
+                setActscriptWait 129,eas_DeactivateAutoFacing
                 setCamDest 21,33
                 setDest 32798,27,39
                 setDest 32799,28,37
@@ -102,7 +102,7 @@ cs_4FFDA:       textCursor 3341
                 nextSingleText $0,ALLY_ROHDE ; "Wow, now I can fight along{N}side you!{W1}"
                 join ALLY_ROHDE
                 nextSingleText $0,ALLY_ROHDE ; "Please call me when you{N}need my help.{W1}"
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActions 128
                  moveDown 2
                 endActions

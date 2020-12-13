@@ -27,7 +27,7 @@ cs_5C3D8:       textCursor 2550
                  moveUp 2
                 endActions
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 setFacing FOLLOWER_B,UP
                 nextSingleText $0,FOLLOWER_B ; "It's coming from this{N}direction.{W1}"

@@ -145,29 +145,29 @@ cs_50426:       textCursor 2229
                 setActscriptWait ALLY_BOWIE,eas_Init
                 fadeInB
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 csWait 5
-                setActscript 131,eas_461B6
+                setActscript 131,eas_2xRightLeft
                 csWait 5
-                setActscript 132,eas_461B6
+                setActscript 132,eas_2xRightLeft
                 csWait 5
-                setActscript 133,eas_461B6
+                setActscript 133,eas_2xRightLeft
                 csWait 5
-                setActscript 134,eas_461B6
+                setActscript 134,eas_2xRightLeft
                 csWait 5
-                setActscript 135,eas_461B6
+                setActscript 135,eas_2xRightLeft
                 csWait 5
-                setActscript 136,eas_461B6
+                setActscript 136,eas_2xRightLeft
                 csWait 5
-                setActscript 137,eas_461B6
+                setActscript 137,eas_2xRightLeft
                 csWait 5
-                setActscript 138,eas_461B6
+                setActscript 138,eas_2xRightLeft
                 csWait 5
-                setActscript 139,eas_461B6
+                setActscript 139,eas_2xRightLeft
                 csWait 5
-                setActscript 140,eas_461B6
+                setActscript 140,eas_2xRightLeft
                 setFacing 128,LEFT
                 csWait 60
                 setFacing 128,RIGHT
@@ -234,7 +234,7 @@ cs_50624:       fadeInB
                 csWait 60
                 nextText $0,ALLY_JAHA   ; "Ugh...ugghhh...{N}It's stuck!{W2}"
                 nextSingleText $0,ALLY_JAHA ; "Heave!  Heave!{N}Come oooooooooon!{W1}"
-                setActscriptWait ALLY_JAHA,eas_46172
+                setActscriptWait ALLY_JAHA,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_JAHA
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   

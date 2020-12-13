@@ -186,7 +186,7 @@ Map8_DefaultEntityEvent:
     ; End of function Map8_2C4_EntityEvent12
 
 cs_56146:       setActscriptWait ALLY_MAY,eas_Init
-                setActscriptWait ALLY_MAY,eas_461AA
+                setActscriptWait ALLY_MAY,eas_StopMoving
                 faceEntity ALLY_MAY,ALLY_BOWIE
                 textCursor 1347
                 nextSingleText $0,ALLY_MAY ; "The people in this village{N}are cowards!{W2}{N}When do they ever go{N}adventuring?{N}I can't take it anymore!{W2}{N}Hey, would you mind if I{N}joined you?{W1}"

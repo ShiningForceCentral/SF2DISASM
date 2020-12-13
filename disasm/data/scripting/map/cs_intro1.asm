@@ -6,9 +6,9 @@ IntroCutscene1: textCursor 4186
                 csWait 1
                 loadMapEntities ce_48340
                 setActscriptWait ALLY_BOWIE,eas_Init
-                setActscriptWait 131,eas_Init3
-                setActscriptWait 132,eas_Init3
-                setActscriptWait 133,eas_Init3
+                setActscriptWait 131,eas_InitFixedSprite
+                setActscriptWait 132,eas_InitFixedSprite
+                setActscriptWait 133,eas_InitFixedSprite
                 setActscript 130,eas_Transparent
                 fadeInFromBlackHalf
                 csWait 30
@@ -235,11 +235,11 @@ IntroCutscene1: textCursor 4186
                  moveRight 4
                 endActions
                 csWait 5
-                setActscript ALLY_SLADE,eas_461E4
+                setActscript ALLY_SLADE,eas_2xUpDown
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 60
                 entityActionsWait ALLY_SLADE
                  moveRight 2

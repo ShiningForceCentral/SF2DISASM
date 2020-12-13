@@ -25,8 +25,8 @@ cs_540C0:       textCursor 811
                 setPos ALLY_BOWIE,6,11,UP
                 setPos ALLY_KAZIN,5,11,UP
                 customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -121,8 +121,8 @@ cs_540C0:       textCursor 811
                 endActions
                 playSound SFX_BLO
                 customActscriptWait ALLY_KAZIN
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

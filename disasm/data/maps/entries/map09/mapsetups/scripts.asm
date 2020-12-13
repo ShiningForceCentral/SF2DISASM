@@ -27,7 +27,7 @@ cs_568F6:       textCursor 1372
                 csWait 20
                 nextSingleText $0,ALLY_PETER ; "What do you mean?{W1}"
                 csWait 40
-                setActscriptWait 130,eas_Init2
+                setActscriptWait 130,eas_InitSlow
                 setFacing 130,DOWN
                 csWait 30
                 setFacing 130,LEFT
@@ -75,7 +75,7 @@ cs_569BC:       textCursor 1382
                  ac_setSpeed 40,40      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
                 entityActions ALLY_ROHDE
                  moveUp 1
                 endActions
@@ -100,7 +100,7 @@ cs_569BC:       textCursor 1382
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_ROHDE,eas_46172
+                setActscriptWait ALLY_ROHDE,eas_DeactivateAutoFacing
                 entityActionsWait ALLY_ROHDE
                  moveDown 1
                 endActions

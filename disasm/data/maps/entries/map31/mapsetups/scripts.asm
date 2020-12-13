@@ -20,7 +20,7 @@ cs_5D65E:       textCursor 2027
                 setDest ALLY_PETER,27,4
                 setDest FOLLOWER_B,27,5
                 setFacing 136,UP
-                setActscriptWait 136,eas_46172
+                setActscriptWait 136,eas_DeactivateAutoFacing
                 entityActionsWait 136
                  moveLeft 1
                 endActions
@@ -42,7 +42,7 @@ cs_5D65E:       textCursor 2027
                  moveRight 1
                 endActions
                 csWait 60
-                setActscriptWait 136,eas_Init2
+                setActscriptWait 136,eas_InitSlow
                 setFacing 136,UP
                 nextSingleText $0,136   ; "Finished!{W1}"
                 entityActionsWait 136

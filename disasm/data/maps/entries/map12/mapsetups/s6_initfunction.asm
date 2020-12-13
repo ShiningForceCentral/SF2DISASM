@@ -50,11 +50,11 @@ cs_57D22:       textCursor 3197
                 setActscriptWait FOLLOWER_B,eas_Jump
                 csWait 30
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461E4
+                setActscript ALLY_PETER,eas_2xUpDown
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 80
                 entityActionsWait ALLY_PETER
                  moveUp 1

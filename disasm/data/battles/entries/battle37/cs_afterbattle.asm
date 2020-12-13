@@ -16,8 +16,8 @@ abcs_battle37:  textCursor 2972
                 setPos ALLY_ZYNK,63,62,DOWN
 cs_4DBEE:       stopEntity ALLY_LEMON
                 customActscriptWait ALLY_LEMON
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -65,7 +65,7 @@ cs_4DBEE:       stopEntity ALLY_LEMON
                 setFacing ALLY_LEMON,DOWN
                 nextSingleText $C0,ALLY_LEMON ; "What?!{W1}"
                 csWait 5
-                setActscript ALLY_LEMON,eas_461B6
+                setActscript ALLY_LEMON,eas_2xRightLeft
                 csWait 120
                 setFacing ALLY_LEMON,UP
                 nextText $C0,ALLY_LEMON ; "Oh, Sir Astral!  I had an{N}awful nightmare.{W2}"

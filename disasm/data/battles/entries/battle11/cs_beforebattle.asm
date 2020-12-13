@@ -25,9 +25,9 @@ bbcs_11:        textCursor 2483
                  moveUp 1
                 endActions
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461E4
+                setActscript ALLY_PETER,eas_2xUpDown
                 csWait 120
                 setFacing ALLY_BOWIE,UP
                 entityActionsWait ALLY_PETER

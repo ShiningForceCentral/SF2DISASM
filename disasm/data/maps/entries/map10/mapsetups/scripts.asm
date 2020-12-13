@@ -53,7 +53,7 @@ cs_570B0:       textCursor 1616
                 endActions
                 csWait 30
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 entityActionsWait ALLY_PETER
                  moveRight 2
@@ -111,8 +111,8 @@ cs_570B0:       textCursor 1616
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 150,eas_46172
-                setActscriptWait 151,eas_46172
+                setActscriptWait 150,eas_DeactivateAutoFacing
+                setActscriptWait 151,eas_DeactivateAutoFacing
                 entityActions 150
                  moveUp 1
                 endActions
@@ -190,8 +190,8 @@ cs_570B0:       textCursor 1616
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 150,eas_46172
-                setActscriptWait 151,eas_46172
+                setActscriptWait 150,eas_DeactivateAutoFacing
+                setActscriptWait 151,eas_DeactivateAutoFacing
                 entityActions 150
                  moveUp 1
                 endActions
@@ -423,7 +423,7 @@ cs_5766C:       textCursor 1680
                  jumpRight 1
                 endActions
                 setSprite 153,MAPSPRITE_CHICK_FLYING
-                setActscriptWait 153,eas_46172
+                setActscriptWait 153,eas_DeactivateAutoFacing
                 customActscriptWait 153
                  ac_setSpeed 4,4        ;   
                  ac_jump eas_Idle       ;   
@@ -459,7 +459,7 @@ cs_5766C:       textCursor 1680
                  jumpRight 1
                 endActions
                 setSprite 153,MAPSPRITE_CHICK_FLYING
-                setActscriptWait 153,eas_46172
+                setActscriptWait 153,eas_DeactivateAutoFacing
                 entityActionsWait 153
                  moveDown 1
                 endActions
@@ -478,11 +478,11 @@ cs_5766C:       textCursor 1680
                 entityActionsWait 153
                  moveDown 8
                 endActions
-                setActscript 153,eas_464E2
+                setActscript 153,eas_CounterClockwiseMoveUpRight
                 startEntity 153
                 csWait 12
                 cameraSpeed $20
-                setActscriptWait 153,eas_Init2
+                setActscriptWait 153,eas_InitSlow
                 entityActionsWait 153
                  moveUp 2
                  moveRight 1
@@ -507,7 +507,7 @@ cs_5779C:       textCursor 1686
                 endActions
                 setFacing ALLY_BOWIE,UP
                 setActscriptWait 153,eas_46198
-                setActscriptWait 153,eas_46172
+                setActscriptWait 153,eas_DeactivateAutoFacing
                 playSound SFX_JUMP
                 entityActionsWait 153
                  moveUp 2
@@ -541,7 +541,7 @@ cs_5779C:       textCursor 1686
                 nextSingleText $0,152   ; "Oh my, {NAME;20}!{W1}"
                 setPriority ALLY_BOWIE,$0
                 setPriority 153,$FFFF
-                setActscriptWait 153,eas_46172
+                setActscriptWait 153,eas_DeactivateAutoFacing
                 customActscriptWait 153
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -566,8 +566,8 @@ cs_5779C:       textCursor 1686
                 setQuake 3
                 setFacing ALLY_BOWIE,UP
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

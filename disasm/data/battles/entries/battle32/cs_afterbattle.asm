@@ -36,7 +36,7 @@ abcs_battle32:  textCursor 2853
                 setFacing ALLY_JARO,DOWN
                 nextSingleText $C0,ALLY_JARO ; "You need a professional{N}soldier like me.{W1}"
                 nextSingleText $0,FOLLOWER_B ; "Oh, we welcome you.{W1}"
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 entityActionsWait ALLY_PETER
                  moveRight 1
                 endActions

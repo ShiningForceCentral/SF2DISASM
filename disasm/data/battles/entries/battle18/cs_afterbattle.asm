@@ -91,7 +91,7 @@ abcs_battle18:  textCursor 2528
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
                 entityActions ALLY_BOWIE
                  moveLeft 1
                 endActions
@@ -115,7 +115,7 @@ abcs_battle18:  textCursor 2528
                 setFacing ALLY_PETER,DOWN
                 setFacing FOLLOWER_B,DOWN
                 csWait 150
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActions 128
                  moveUp 9
                 endActions
@@ -149,14 +149,14 @@ abcs_battle18:  textCursor 2528
                 setFacing ALLY_PETER,LEFT
                 csWait 10
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 customActscriptWait ALLY_PETER
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

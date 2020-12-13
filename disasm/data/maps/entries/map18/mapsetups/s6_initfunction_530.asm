@@ -45,7 +45,7 @@ cs_612BE:       textCursor 3681
                 setQuake 0
                 nextText $80,130        ; "No more excuses!{W2}"
                 nextSingleText $80,130  ; "This is your last chance.{N}Kill {LEADER} this time,{N}or I'll kill you!{W1}"
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 customActscriptWait 128
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   

@@ -18,7 +18,7 @@ abcs_battle05:  textCursor 2332
                 setF 384                ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 csWait 30
                 nextText $0,ALLY_SLADE  ; "Ummm...I can't remove it!{N}Is it cursed?{W2}"
-                setActscriptWait ALLY_SLADE,eas_46172
+                setActscriptWait ALLY_SLADE,eas_DeactivateAutoFacing
                 nextText $0,ALLY_SLADE  ; "We'll go to the church{N}later to see if it's cursed.{N}At least we have it now.{W1}"
                 nextText $0,ALLY_SLADE  ; "The knight said that King{N}Galam took the other jewel{N}with him.{W2}"
                 nextSingleText $0,ALLY_SLADE ; "{LEADER}, I'll go to{N}Granseal with you.{W1}"

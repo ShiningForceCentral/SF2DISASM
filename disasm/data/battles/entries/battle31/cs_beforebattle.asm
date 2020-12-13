@@ -48,7 +48,7 @@ bbcs_31:        textCursor 2811
                 setPos 130,21,1,LEFT
                 csWait 30
                 setActscriptWait ALLY_FRAYJA,eas_Jump
-                setActscriptWait ALLY_FRAYJA,eas_46172
+                setActscriptWait ALLY_FRAYJA,eas_DeactivateAutoFacing
                 entityActionsWait ALLY_FRAYJA
                  moveDown 1
                 endActions
@@ -75,7 +75,7 @@ bbcs_31:        textCursor 2811
                 ac_end
                 setActscriptWait 128,eas_Jump
                 setActscriptWait 128,eas_Jump
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 128
                  moveUp 1
                 endActions

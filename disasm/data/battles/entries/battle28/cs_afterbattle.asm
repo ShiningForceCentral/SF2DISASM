@@ -44,7 +44,7 @@ abcs_battle28:  textCursor 2670
                  moveUp 2
                 endActions
                 csWait 14
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 entityActionsWait ALLY_PETER
                  moveLeft 1
                  moveDown 1
@@ -127,7 +127,7 @@ abcs_battle28:  textCursor 2670
                 entityFlashWhite FOLLOWER_B,$28
                 setActscriptWait 128,eas_Jump
                 nextSingleText $C0,128  ; "Ooops!{W1}"
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 128
                  moveLeft 1
                 endActions
@@ -136,7 +136,7 @@ abcs_battle28:  textCursor 2670
                  ac_setSpeed 56,56      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 130,eas_46172
+                setActscriptWait 130,eas_DeactivateAutoFacing
                 customActscriptWait 128
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   

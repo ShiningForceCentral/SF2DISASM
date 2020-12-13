@@ -88,10 +88,10 @@ IntroCutscene2: textCursor 4202
                 animEntityFX 131,6
                 tintMap
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 30
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 playSound SFX_DEMON_BREATH
                 csWait 30
                 executeSubroutine ApplyStormEffect
@@ -101,10 +101,10 @@ IntroCutscene2: textCursor 4202
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 30
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 70
                 fadeOutToBlackHalf
                 csWait 30

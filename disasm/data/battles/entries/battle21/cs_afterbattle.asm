@@ -16,7 +16,7 @@ abcs_battle21:  textCursor 2583
                  ac_jump eas_Idle       ;   
                 ac_end
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 entityActionsWait FOLLOWER_B
                  moveLeft 3

@@ -3,7 +3,7 @@
 ; 0x5A33A..0x5A646 : 
 cs_5A33A:       textCursor 1711
                 setCamDest 0,7
-                setActscriptWait 158,eas_Init2
+                setActscriptWait 158,eas_InitSlow
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 customActscriptWait 158
                  ac_setSpeed 0,0        ;   
@@ -12,7 +12,7 @@ cs_5A33A:       textCursor 1711
                 setDest 158,8,11
                 nextSingleText $0,158   ; "Where is the sick dwarf?{W1}"
                 csWait 5
-                setActscript 158,eas_461B6
+                setActscript 158,eas_2xRightLeft
                 csWait 50
                 setCamDest 5,7
                 entityActionsWait 128
@@ -49,7 +49,7 @@ cs_5A33A:       textCursor 1711
                 mapFadeInFromWhite
                 csWait 50
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 100
                 entityActionsWait 129
                  moveDown 1
@@ -65,7 +65,7 @@ cs_5A33A:       textCursor 1711
                 startEntity 130
                 nextSingleText $0,130   ; "Whoa!{W1}"
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 csWait 100
                 setFacing 130,UP
                 nextSingleText $0,130   ; "What?{W1}"

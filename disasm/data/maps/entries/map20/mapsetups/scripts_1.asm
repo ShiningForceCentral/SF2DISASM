@@ -3,8 +3,8 @@
 ; 0x53B66..0x53E18 : 
 cs_53B66:       playSound $FD
                 textCursor 2197
-                setActscriptWait 130,eas_46172
-                setActscriptWait 128,eas_46172
+                setActscriptWait 130,eas_DeactivateAutoFacing
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 customActscriptWait 130
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -47,14 +47,14 @@ cs_53B66:       playSound $FD
                 endActions
                 playSound SFX_DESOUL_HOVERING
                 setActscript 128,eas_BumpRight
-                setActscriptWait 130,eas_46172
+                setActscriptWait 130,eas_DeactivateAutoFacing
                 entityActionsWait 130
                  moveRight 2
                 endActions
                 setFacing 130,LEFT
                 customActscriptWait 130
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -73,7 +73,7 @@ cs_53C42:       setCamDest 19,48
                  moveUp 1
                 endActions
                 setFacing ALLY_BOWIE,DOWN
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 customActscriptWait 130
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   
@@ -121,8 +121,8 @@ cs_53C42:       setCamDest 19,48
                  moveLeft 1
                 endActions
                 customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -139,7 +139,7 @@ cs_53C42:       setCamDest 19,48
                 animEntityFX 135,5
                 nextSingleText $80,130  ; "Did it work?{W1}"
                 shiver 135
-                setActscriptWait 135,eas_46172
+                setActscriptWait 135,eas_DeactivateAutoFacing
                 customActscriptWait 135
                  ac_setSpeed 0,0        ;   
                  ac_jump eas_Idle       ;   
@@ -153,7 +153,7 @@ cs_53C42:       setCamDest 19,48
                 startEntity 128
                 setActscriptWait 128,eas_Init
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 100
                 setFacing 128,RIGHT
                 csWait 40
@@ -167,8 +167,8 @@ cs_53C42:       setCamDest 19,48
                 nextSingleText $0,128   ; "What are you talking about?{N}I don't understand.{W1}"
                 csWait 50
                 customActscriptWait 130
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

@@ -1480,7 +1480,7 @@ loc_4314:
                 bne.w   loc_4340
 loc_4322:
                 
-                move.w  #1,((MAP_EVENT_TYPE-$1000000)).w
+                move.w  #MAPEVENT_WARP,((MAP_EVENT_TYPE-$1000000)).w
                 move.l  2(a2),((MAP_EVENT_PARAM_1-$1000000)).w
                 move.w  6(a2),((MAP_EVENT_PARAM_5-$1000000)).w
                 move.w  #SFX_WARP,((WARP_SFX-$1000000)).w

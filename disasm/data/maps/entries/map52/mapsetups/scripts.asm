@@ -13,14 +13,14 @@ cs_5C4EE:       textCursor 1397
                 nextSingleText $0,ALLY_PETER ; "Who are they?{W1}"
                 setCamDest 16,4
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 nextSingleText $0,ALLY_PETER ; "They're looking for something.{W1}"
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 entityActionsWait 131
                  moveUp 6
                 endActions
@@ -37,7 +37,7 @@ cs_5C4EE:       textCursor 1397
                 nextText $0,128         ; "Could be...{W2}"
                 nextSingleText $0,128   ; "see those volcanic rocks?{W1}"
                 csWait 5
-                setActscript 129,eas_461E4
+                setActscript 129,eas_2xUpDown
                 csWait 60
                 nextText $0,128         ; "Nobody but Volcanon can do{N}that!{W2}"
                 setFacing 129,RIGHT
@@ -62,7 +62,7 @@ cs_5C4EE:       textCursor 1397
                 csWait 50
                 setCamDest 16,7
                 setActscriptWait 131,eas_Init
-                setActscriptWait 131,eas_46172
+                setActscriptWait 131,eas_DeactivateAutoFacing
                 entityActionsWait 131
                  moveUp 1
                 endActions

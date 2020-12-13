@@ -7,8 +7,8 @@ bbcs_08:        textCursor 2461
                 setActscriptWait ALLY_BOWIE,eas_Init
                 stopEntity 129
                 customActscriptWait 129
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

@@ -77,20 +77,20 @@ cs_59656:       textCursor 1748
                 hide 154
                 hide 155
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 customActscriptWait ALLY_PETER
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 customActscriptWait FOLLOWER_B
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -122,14 +122,14 @@ cs_59656:       textCursor 1748
                 endActions
                 nextSingleText $C0,FOLLOWER_B ; "Small?  How small?{W1}"
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 100
                 entityActionsWait ALLY_PETER
                  moveDown 2
                  moveRight 1
                 endActions
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 130
                 setFacing ALLY_PETER,UP
                 setFacing ALLY_BOWIE,DOWN
@@ -143,12 +143,12 @@ cs_59656:       textCursor 1748
                  moveRight 1
                 endActions
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 10
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 130
                 setFacing ALLY_PETER,DOWN
                 setFacing ALLY_BOWIE,DOWN
@@ -157,8 +157,8 @@ cs_59656:       textCursor 1748
                 setActscript ALLY_PETER,eas_Jump
                 shiver ALLY_BOWIE
                 shiver ALLY_PETER
-                setActscriptWait ALLY_BOWIE,eas_46172
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 entityActions ALLY_BOWIE
                  moveUp 1
                 endActions

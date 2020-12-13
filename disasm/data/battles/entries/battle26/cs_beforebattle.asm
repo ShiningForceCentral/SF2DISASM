@@ -42,7 +42,7 @@ bbcs_26:        textCursor 2596
                 animEntityFX 128,6
                 waitIdle 133
                 csWait 5
-                setActscript 133,eas_461B6
+                setActscript 133,eas_2xRightLeft
                 csWait 120
                 setFacing 131,LEFT
                 setFacing 133,DOWN
@@ -139,8 +139,8 @@ bbcs_26:        textCursor 2596
                 nextSingleText $0,128   ; "Ha, ha!  Welcome our new{N}leader!{W1}"
                 stopEntity ALLY_HIGINS
                 customActscriptWait ALLY_HIGINS
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -156,7 +156,7 @@ bbcs_26:        textCursor 2596
                  moveDown 3
                 endActions
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 120
                 entityActionsWait 128
                  moveLeft 1
@@ -169,7 +169,7 @@ bbcs_26:        textCursor 2596
                 nextSingleText $0,128   ; "Where did you come from?{W1}"
                 nextSingleText $C0,FOLLOWER_B ; "We're from Granseal!{W1}"
                 nextSingleText $0,128   ; "But, that's on the other....{W1}"
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 customActscriptWait 128
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   

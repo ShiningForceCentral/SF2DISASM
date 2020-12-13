@@ -6,8 +6,8 @@ abcs_battle26:  textCursor 2637
                 loadMapEntities ce_4BE4A
                 setActscriptWait ALLY_BOWIE,eas_Init
                 customActscriptWait ALLY_HIGINS
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -44,8 +44,8 @@ abcs_battle26:  textCursor 2637
                 setActscriptWait 128,eas_Die
                 setCamDest 13,11
                 customActscriptWait ALLY_HIGINS
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $0          ;   
+                 ac_motion OFF          ;   
+                 ac_orientUp            ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

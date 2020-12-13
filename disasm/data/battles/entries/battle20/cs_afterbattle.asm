@@ -16,7 +16,7 @@ abcs_battle20:  textCursor 2566
                 nextSingleText $C0,ALLY_PETER ; "He heard your cry for help{N}and brought us here.{W1}"
                 setFacing ALLY_PETER,RIGHT
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 setFacing FOLLOWER_B,UP
                 nextSingleText $C0,FOLLOWER_B ; "Oh well, it was nothing.{W1}"
