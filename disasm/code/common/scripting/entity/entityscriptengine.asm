@@ -341,9 +341,9 @@ rjt_EntityScriptCommands:
                 dc.w esc0E_moveToEntityFacingRelativePosition-rjt_EntityScriptCommands
                 dc.w esc0F_waitUntilOtherEntityReachesDest-rjt_EntityScriptCommands
                 dc.w esc10_setSpeed-rjt_EntityScriptCommands
-                dc.w esc11_-rjt_EntityScriptCommands
-                dc.w esc12_-rjt_EntityScriptCommands
-                dc.w esc13_-rjt_EntityScriptCommands
+                dc.w esc11_setAccelerationFactors-rjt_EntityScriptCommands
+                dc.w esc12_activateAcceleration-rjt_EntityScriptCommands
+                dc.w esc13_activateDeceleration-rjt_EntityScriptCommands
                 dc.w esc14_setAnimationCounter-rjt_EntityScriptCommands
                 dc.w esc15_setAutoFacing-rjt_EntityScriptCommands
                 dc.w esc16_setEntityNumber-rjt_EntityScriptCommands
@@ -1647,22 +1647,18 @@ esc10_setSpeed:
 
 ; =============== S U B R O U T I N E =======================================
 
-; set entity 18-19 values with xxxx
-
-esc11_:
+esc11_setAccelerationFactors:
                 
-                move.w  2(a1),$18(a0)
+                move.w  2(a1),ENTITY_OFFSET_XACCEL(a0)
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-    ; End of function esc11_
+    ; End of function esc11_setAccelerationFactors
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; set or clear entity value 1C bits 0-1 according to xxxx
-
-esc12_:
+esc12_activateAcceleration:
                 
                 tst.b   2(a1)
                 bne.s   loc_5AEE
@@ -1685,14 +1681,12 @@ loc_5B08:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-    ; End of function esc12_
+    ; End of function esc12_activateAcceleration
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; set or clear entity value 1C bits 2-3 according to xxxx
-
-esc13_:
+esc13_activateDeceleration:
                 
                 tst.b   2(a1)
                 bne.s   loc_5B1C
@@ -1715,7 +1709,7 @@ loc_5B36:
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
-    ; End of function esc13_
+    ; End of function esc13_activateDeceleration
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -220,9 +220,9 @@ eas_493A2:       ac_entityObstructable ON
                  ac_mapUncollidable ON
                  ac_entityUncollidable ON
                  ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 0,0
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
                  ac_checkMapBlockCopy
                  ac_controlCharacter
                  ac_waitDest

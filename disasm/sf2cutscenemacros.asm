@@ -1028,21 +1028,22 @@ ac_setSpeed:	macro
 	dc.b \2
 	endm
 
-ac_11:	macro
+ac_accelFactors:	macro
 	dc.w $11
-	dc.w \1
+	dc.b \1
+	dc.b \2
 	endm
 
-ac_12:	macro
+ac_acceleration:	macro
 	dc.w $12
-	dc.b \1
-	dc.b \2
+	dc.b \1&$FF
+	dc.b \2&$FF
 	endm
 
-ac_13:	macro
+ac_deceleration:	macro
 	dc.w $13
-	dc.b \1
-	dc.b \2
+	dc.b \1&$FF
+	dc.b \2&$FF
 	endm
 
 ac_motion:	macro

@@ -165,10 +165,10 @@ eas_Die:         ac_motion OFF
                  ac_wait 8
                  ac_setPos 63,63
                  ac_jump eas_Idle
-eas_Init:        ac_11 $0
+eas_Init:        ac_accelFactors 0,0
                  ac_setSpeed 32,32
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_entityObstructable ON
                  ac_entityUncollidable OFF
                  ac_mapUncollidable OFF
@@ -179,9 +179,9 @@ eas_Init:        ac_11 $0
                  ac_updateSprite
                  ac_jump eas_Idle
 eas_InitSlow:    ac_setSpeed 16,16
-                 ac_11 $101
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 1,1
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
                  ac_entityObstructable ON
                  ac_entityUncollidable OFF
                  ac_mapUncollidable OFF
@@ -192,10 +192,10 @@ eas_InitSlow:    ac_setSpeed 16,16
                  ac_updateSprite
                  ac_jump eas_Idle
 eas_InitFixedSprite:
-                 ac_11 $0
+                 ac_accelFactors 0,0
                  ac_setSpeed 32,32
-                 ac_12 $0,$0
-                 ac_13 $0,$0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
                  ac_entityObstructable ON
                  ac_entityUncollidable OFF
                  ac_mapUncollidable OFF
@@ -210,15 +210,15 @@ eas_InitFixedSprite:
 eas_DeactivateAutoFacing:
                  ac_autoFacing OFF
                  ac_jump eas_Idle
-                 ac_11 $101
-                 ac_12 $FE,$FF
+                 ac_accelFactors 1,1
+                 ac_acceleration -2,ON
                  ac_jump eas_Idle
-eas_4618A:       ac_11 $101
-                 ac_13 $FE,$FF
+eas_4618A:       ac_accelFactors 1,1
+                 ac_deceleration -2,ON
                  ac_jump eas_Idle
-eas_46198:       ac_11 $101
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+eas_46198:       ac_accelFactors 1,1
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
                  ac_jump eas_Idle
 eas_StopMoving:  ac_moveRel 0,0
                  ac_jump eas_Idle
@@ -250,9 +250,9 @@ eas_2xUpDown:    ac_setFacing UP
                  ac_jump eas_Idle
 eas_RightLeftLoop:
                  ac_setSpeed 0,0
-                 ac_11 $101
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 1,1
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
                  ac_entityObstructable ON
                  ac_entityUncollidable OFF
                  ac_mapUncollidable OFF
@@ -266,9 +266,9 @@ word_46242:      ac_branch
                 dc.w (byte_4622E-word_46242) & $FFFF
 eas_LeftRightMoveLoop:
                  ac_setSpeed 0,0
-                 ac_11 $101
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 1,1
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
                  ac_entityObstructable ON
                  ac_entityUncollidable ON
                  ac_mapUncollidable OFF
@@ -276,9 +276,9 @@ word_46262:      ac_branch
                 dc.w byte_462AE-word_46262
 eas_RightLeftMoveLoop:
                  ac_setSpeed 0,0
-                 ac_11 $101
-                 ac_12 $FE,$FF
-                 ac_13 $FE,$FF
+                 ac_accelFactors 1,1
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
                  ac_entityObstructable ON
                  ac_entityUncollidable ON
                  ac_mapUncollidable OFF
