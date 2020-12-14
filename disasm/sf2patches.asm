@@ -12,6 +12,7 @@ BUGFIX_GODDESS_STAFF_DEALS_ABUSE: equ 0         ; 0 = OFF, 1 = ON
 BUGFIX_GARBLED_HP_BAR: equ 0                    ; 0 = OFF, 1 = ON. Prevents drawing garbage pixels when HP is greater then 600.
 BUGFIX_KIWI_SPELLS_LEARNING_LEVEL: equ 0        ; 0 = OFF, 1 = ON. Kiwi's base class is wrongfully treated as promoted for the purpose of learning spells.
 BUGFIX_HIGINS_SPELL: equ 0                      ; 0 = OFF, 1 = ON. Prevent unequipping from possibly corrupting characters spell entries.
+BUGFIX_MOVEMENT_GLITCH: equ 1                   ; 0 = OFF, 1 = ON.
 ; Menu enhancements
 THREE_DIGITS_STATS: equ 0                       ; 0 = OFF, 1 = ON
 EIGHT_CHARACTERS_MEMBER_NAMES: equ 0            ; 0 = OFF, 1 = ON
