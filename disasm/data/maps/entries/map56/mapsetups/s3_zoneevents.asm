@@ -10,16 +10,16 @@ ms_map56_ZoneEvents:
 Map56_ZoneEvent0:
                 
                  
-                chkFlg  $388            ; Will be set with the 0387, but only if the event isn't triggered by speaking
+                chkFlg  904             ; Will be set with the 0387, but only if the event isn't triggered by speaking
                 bne.s   Map56_DefaultZoneEvent
-                chkFlg  $387            ; Set after the first time you talk to Creed on path up Ancient Tower
+                chkFlg  903             ; Set after the first time you talk to Creed on path up Ancient Tower
                 bne.s   byte_614F4      
                 script  cs_6150A
-                setFlg  $387            ; Set after the first time you talk to Creed on path up Ancient Tower
+                setFlg  903             ; Set after the first time you talk to Creed on path up Ancient Tower
 byte_614F4:
                 
-                setFlg  $1B9            ; Battle 41 unlocked
-                setFlg  $388            ; Will be set with the 0387, but only if the event isn't triggered by speaking
+                setFlg  441             ; Battle 41 unlocked
+                setFlg  904             ; Will be set with the 0387, but only if the event isn't triggered by speaking
 Map56_DefaultZoneEvent:
                 
                 rts

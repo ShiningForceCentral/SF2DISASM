@@ -21,7 +21,7 @@ loc_2C5A6:
                 clr.l   (a0)+
                 dbf     d7,loc_2C5A6
                 lea     (PALETTE_1_BASE).l,a0
-                clr.b   (byte_FFDFAB).l
+                clr.b   (FADING_TIMER_BYTE).l
                 jsr     (sub_19C8).w    
                 move.w  #$366,d0        ; wait for 14 seconds
                 jsr     (Sleep).w       
@@ -32,7 +32,7 @@ loc_2C5CC:
                 clr.l   (a0)+
                 dbf     d7,loc_2C5CC
                 lea     (PALETTE_1_BASE).l,a0
-                clr.b   (byte_FFDFAB).l
+                clr.b   (FADING_TIMER_BYTE).l
                 jsr     (sub_19C8).w    
                 rts
 
@@ -67,7 +67,7 @@ loc_2C61C:
                 move.l  d0,(a0)+
                 dbf     d7,loc_2C61C
                 lea     (PALETTE_1_BASE).l,a0
-                clr.b   (byte_FFDFAB).l
+                clr.b   (FADING_TIMER_BYTE).l
                 jsr     (sub_19C8).w    
                 movem.l (sp)+,d0-a3
                 rts

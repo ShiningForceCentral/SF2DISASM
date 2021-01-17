@@ -146,8 +146,6 @@ loc_445A0:
 
 ; =============== S U B R O U T I N E =======================================
 
-; declare new entity ?
-
 DeclareNewEntity:
                 
                 move.l  a0,-(sp)
@@ -209,8 +207,6 @@ loc_4463C:
 
 ; =============== S U B R O U T I N E =======================================
 
-; clear entities in memory
-
 ClearEntities:
                 
                 movem.l d7-a0,-(sp)
@@ -247,7 +243,7 @@ MoveEntitiesToBattlePositions:
                 
                 movem.l d0-a1,-(sp)
                 link    a6,#-$10
-                bsr.s   ClearEntities   
+                bsr.s   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   -4(a6)
@@ -404,7 +400,7 @@ loc_4483E:
                 clr.w   d1
                 jsr     j_SetMaxHP
                 jsr     j_SetCurrentHP
-                jsr     j_SetStatus
+                jsr     j_SetStatusEffects
                 jsr     j_GetCharacterWord34
                 ori.w   #8,d1
                 jsr     j_SetCharacterWord34

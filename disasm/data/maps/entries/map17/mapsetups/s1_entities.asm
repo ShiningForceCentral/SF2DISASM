@@ -6,4 +6,4 @@ ms_map17_Entities:
                 msFixedEntity 54, 5, DOWN, ALLY_JAHA, eas_Init
                 msFixedEntity 51, 5, RIGHT, ALLY_SARAH, eas_Init
                 msFixedEntity 55, 5, DOWN, ALLY_KAZIN, eas_Init
-                msFixedEntity 48, 4, DOWN, ALLY_SLADE, eas_Init3
+                msFixedEntity 48, 4, DOWN, ALLY_SLADE, eas_InitFixedSprite

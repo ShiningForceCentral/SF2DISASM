@@ -1,16 +1,16 @@
 
 ; ASM FILE data\battles\entries\battle39\cs_beforebattle.asm :
 ; 0x4E3D2..0x4E4DC : Cutscene before battle 39
-bbcs_39:        textCursor $BD5
+bbcs_39:        textCursor 3029
                 loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,3,5
                 loadMapEntities ce_4E4AC
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setPos ALLY_PETER,9,8,DOWN
                 setPos FOLLOWER_B,7,8,DOWN
                 setPos FOLLOWER_A,8,8,DOWN
-                jumpIfFlagClear $4C,cs_4E40C ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4E40C ; Zynk is a follower
                 setPos ALLY_ZYNK,8,7,DOWN
-cs_4E40C:       jumpIfFlagClear $47,cs_4E41A ; Lemon is a follower
+cs_4E40C:       jumpIfFlagClear 71,cs_4E41A ; Lemon is a follower
                 setPos ALLY_LEMON,63,62,DOWN
 cs_4E41A:       fadeInB
                 cameraSpeed $30

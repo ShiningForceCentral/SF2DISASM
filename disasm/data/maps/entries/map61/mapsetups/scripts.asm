@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map61\mapsetups\scripts.asm :
 ; 0x5C6CA..0x5C76A : 
-cs_5C6CA:       textCursor $E3A
+cs_5C6CA:       textCursor 3642
                 setActscriptWait ALLY_PETER,eas_Init
                 setActscriptWait FOLLOWER_A,eas_Init
                 setActscriptWait FOLLOWER_B,eas_Init
@@ -25,7 +25,7 @@ cs_5C6CA:       textCursor $E3A
                 setQuake 0
                 setFacing FOLLOWER_A,DOWN
                 nextSingleText $0,FOLLOWER_A ; "OK, you go first!{W1}"
-                setStoryFlag $F         ; Battle 15 unlocked
+                setStoryFlag 15         ; Battle 15 unlocked
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 followEntity FOLLOWER_A,FOLLOWER_B,2

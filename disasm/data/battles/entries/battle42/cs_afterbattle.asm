@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle42\cs_afterbattle.asm :
 ; 0x4EF04..0x4F358 : Cutscene after battle 42
-abcs_battle42:  textCursor $C22
+abcs_battle42:  textCursor 3106
                 loadMapFadeIn MAP_ZEON_ARENA,8,13
                 loadMapEntities ce_4F328
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -11,21 +11,21 @@ abcs_battle42:  textCursor $C22
                 setPos FOLLOWER_B,11,15,RIGHT
                 setActscriptWait ALLY_LEMON,eas_Init
                 setPos ALLY_LEMON,12,19,RIGHT
-                jumpIfFlagClear $4C,cs_4EF5E ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4EF5E ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,63,62,DOWN
 cs_4EF5E:       stopEntity 128
                 customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 stopEntity 129
                 customActscriptWait 129
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -116,7 +116,7 @@ cs_4EF5E:       stopEntity 128
                 csWait 30
                 setQuake 0
                 csWait 5
-                setActscript ALLY_LEMON,eas_461B6
+                setActscript ALLY_LEMON,eas_2xRightLeft
                 csWait 120
                 setFacing ALLY_LEMON,DOWN
                 setQuake 2
@@ -128,17 +128,17 @@ cs_4EF5E:       stopEntity 128
                  moveLeft 1
                 endActions
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461E4
+                setActscript ALLY_BOWIE,eas_2xUpDown
                 entityActionsWait ALLY_PETER
                  moveRight 2
                 endActions
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 entityActionsWait FOLLOWER_B
                  moveRight 1
                 endActions
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 nextSingleText $0,ALLY_PETER ; "An earthquake!{N}Deep below us....{W1}"
                 nextSingleText $0,ALLY_LEMON ; "Something is coming up{N}through the earth...{W1}"
@@ -221,8 +221,8 @@ cs_4EF5E:       stopEntity 128
                 setFacing 129,DOWN
                 stopEntity 129
                 customActscriptWait 129
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -259,7 +259,7 @@ cs_4EF5E:       stopEntity 128
                 csWait 30
                 nextSingleText $0,ALLY_LEMON ; "And now we're surrounded{N}by devils.{W1}"
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 setFacing FOLLOWER_B,LEFT
                 csWait 40
                 setFacing FOLLOWER_B,UP
@@ -268,7 +268,7 @@ cs_4EF5E:       stopEntity 128
                 setFacing ALLY_BOWIE,UP
                 setFacing ALLY_PETER,UP
                 nod ALLY_BOWIE
-                setStoryFlag $2B        ; Battle 43 unlocked
+                setStoryFlag 43         ; Battle 43 unlocked
                 csc_end
 ce_4F328:       mainEntity 13,17,UP
                 entity 15,15,LEFT,ALLY_PETER,eas_Init

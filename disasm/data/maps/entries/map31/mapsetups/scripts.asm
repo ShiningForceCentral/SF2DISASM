@@ -4,12 +4,12 @@
 cs_5D644:       setPos 137,8,3,LEFT
                 animEntityFX 137,5
                 csc_end
-cs_5D652:       textCursor $7E8
+cs_5D652:       textCursor 2024
                 nextSingleText $0,136   ; "Oh, you're cute!{N}(Cough)...well...{W1}"
                 nextText $0,136         ; "May I paint your portrait?"
-cs_5D65E:       textCursor $7EB
+cs_5D65E:       textCursor 2027
                 yesNo
-                jumpIfFlagClear $59,cs_5D712 ; YES/NO prompt answer
+                jumpIfFlagClear 89,cs_5D712 ; YES/NO prompt answer
                 hideText
                 nextSingleText $0,136   ; "Excellent!{W1}"
                 nextSingleText $0,136   ; "Then, would you stand over{N}there, in front of the{N}flowers?{W1}"
@@ -20,7 +20,7 @@ cs_5D65E:       textCursor $7EB
                 setDest ALLY_PETER,27,4
                 setDest FOLLOWER_B,27,5
                 setFacing 136,UP
-                setActscriptWait 136,eas_46172
+                setActscriptWait 136,eas_DeactivateAutoFacing
                 entityActionsWait 136
                  moveLeft 1
                 endActions
@@ -42,7 +42,7 @@ cs_5D65E:       textCursor $7EB
                  moveRight 1
                 endActions
                 csWait 60
-                setActscriptWait 136,eas_Init2
+                setActscriptWait 136,eas_InitSlow
                 setFacing 136,UP
                 nextSingleText $0,136   ; "Finished!{W1}"
                 entityActionsWait 136
@@ -52,12 +52,12 @@ cs_5D65E:       textCursor $7EB
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 csc_end
-cs_5D712:       textCursor $7EA
+cs_5D712:       textCursor 2026
                 hideText
                 nextText $0,136         ; "Oh, please!  It won't take{N}long.  Will you pose{N}for me?"
                 jump cs_5D65E
                 csc_end
-cs_5D724:       textCursor $7EE
+cs_5D724:       textCursor 2030
                 nextText $0,136         ; "It's you!{W2}"
                 nextSingleText $0,136   ; "Ah, how talented I am!{N}Hmmmm?{W1}"
                 csc_end

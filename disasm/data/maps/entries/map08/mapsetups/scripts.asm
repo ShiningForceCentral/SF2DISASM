@@ -1,8 +1,8 @@
 
 ; ASM FILE data\maps\entries\map08\mapsetups\scripts.asm :
 ; 0x563B2..0x56636 : 
-cs_563B2:       textCursor $50B
-                setActscriptWait 129,eas_46172
+cs_563B2:       textCursor 1291
+                setActscriptWait 129,eas_DeactivateAutoFacing
                 entityActionsWait 129
                  moveRight 4
                 endActions
@@ -31,12 +31,12 @@ cs_563B2:       textCursor $50B
                 endActions
                 setPos 129,15,7,DOWN
                 csc_end
-cs_56422:       textCursor $50E
+cs_56422:       textCursor 1294
                 setActscriptWait ALLY_PETER,eas_Init
                 setDest ALLY_PETER,14,10
                 setFacing ALLY_PETER,UP
-                setActscriptWait ALLY_BOWIE,eas_46172
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 customActscriptWait 129
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -158,7 +158,7 @@ cs_56422:       textCursor $50E
                 setBlocks 32,2,1,1,22,24
                 setBlocks 32,2,1,1,7,25
                 setBlocks 32,3,2,1,6,15
-                setF $2C5               ; Set after the mayor in Ribble scene... this flag unlocks the doors
+                setF 709                ; Set after the mayor in Ribble scene... this flag unlocks the doors
                 executeSubroutine csub_56632
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 csWait 50

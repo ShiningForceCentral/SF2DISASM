@@ -198,7 +198,7 @@ dms_01:         faceEntity 134,ALLY_BOWIE
 cs_4934A:       entityFlashWhite ALLY_BOWIE,$B4
                 jump cs_4934A
                 csc_end
-                textCursor $142
+                textCursor 322
                 csc15 ALLY_SARAH,$1,eas_ControlledCharacter
                 showPortrait $0,ALLY_BOWIE
                 setQuake 32770
@@ -216,17 +216,17 @@ cs_4934A:       entityFlashWhite ALLY_BOWIE,$B4
                 startEntity ALLY_KAZIN
                 hidePortrait
                 csc_end
-eas_493A2:       ac_set1Cb7 $FFFF
-                 ac_set1Cb6 $FFFF
-                 ac_set1Cb5 $FFFF
+eas_493A2:       ac_entityObstructable ON
+                 ac_mapUncollidable ON
+                 ac_entityUncollidable ON
                  ac_setSpeed 32,32
-                 ac_11 $0
-                 ac_12 $FEFF
-                 ac_13 $FEFF
-                 ac_40
-                 ac_02
+                 ac_accelFactors 0,0
+                 ac_acceleration -2,ON
+                 ac_deceleration -2,ON
+                 ac_checkMapBlockCopy
+                 ac_controlCharacter
                  ac_waitDest
-                 ac_40
+                 ac_checkMapBlockCopy
                  ac_wait 1
 word_493CA:      ac_branch
                 dc.w (eas_ControlledCharacter-word_493CA) & $FFFF
@@ -275,31 +275,32 @@ sub_493EC:
                 animEntityFX ALLY_KIWI,7
                 playSound MUSIC_PROMOTED_ATTACK_LOOP
                 csc_end
-                textCursor $18A
+                textCursor 394          ; Unused cutscene with parsing mistake here and below, letting it unformatted.
                 showPortrait $0,ALLY_BOWIE
                 nextTextVar $0,ALLY_BOWIE,$0,$3,$A ; "{NAME} found{N}the {ITEM}.{D1}"
                 nextSingleTextVar $0,ALLY_BOWIE,$0,$4 ; "{NAME} received{N}the {ITEM}."
-                dc.l $14001D            ; Unused cutscene with parsing mistake here and below, letting it unformatted.
-                 ac_wait 32888          ;   
-                 ac_setAnimSpeedX2 $4   ;   
-                dc.w $142               ;   Unkown command : 142
-                 ac_02                  ;   
-                 ac_wait 0              ;   
-                 ac_wait 65535          ;   
-                 ac_setAnimCounter $501 ;   
-                 ac_autoFacing $0       ;   
-                 ac_11 $1               ;   
-                 ac_setSpeed 0,32       ;   
-                 ac_12 $0               ;   
-                 ac_13 $FFFF            ;   
-                 ac_moveRel 0,65535     ;   
-                 ac_wait 5              ;   
-                 ac_moveRel 0,1         ;   
-                 ac_wait 5              ;   
-                 ac_moveRel 0,0         ;   
-                 ac_wait 5              ;   
-                 ac_autoFacing $FFFF    ;   
-word_494AC:      ac_branch              ;   
+                dc.l $14001D
+                dc.l $8078
+                dc.l $1E0004
+                dc.l $1420002
+                dc.l 0
+                dc.l $FFFF
+                dc.l $140501
+                dc.l $150000
+                dc.l $110001
+                dc.l $100020
+                dc.l $120000
+                dc.l $13FFFF
+                dc.l $40000
+                dc.l $FFFF0000
+                dc.l $50004
+                dc.l 1
+                dc.l 5
+                dc.l $40000
+                dc.l 0
+                dc.l $50015
+                dc.w $FFFF
+word_494AC:      ac_branch
                 dc.w (eas_Idle-word_494AC) & $FFFF
                 ac_end
                 showPortrait $0,ALLY_BOWIE

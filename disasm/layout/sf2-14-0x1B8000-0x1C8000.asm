@@ -4,11 +4,11 @@
 ; FREE SPACE : 474 bytes.
 
 
-p_pt_BattleSceneGrounds:
+p_pt_BattlesceneGrounds:
                 dc.l pt_Grounds
 p_pt_WeaponSprites:
                 dc.l pt_WeaponSprites
-p_plt_BattleSceneWeaponColors:
+p_plt_BattlesceneWeaponColors:
                 dc.l WeaponPalette00
 p_pt_SpellGraphics:
                 dc.l pt_SpellGraphics

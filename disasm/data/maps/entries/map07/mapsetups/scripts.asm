@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map07\mapsetups\scripts.asm :
 ; 0x55A36..0x55F8E : 
-cs_55A36:       textCursor $4AE
+cs_55A36:       textCursor 1198
                 setCamDest 6,2
                 nextSingleText $0,139   ; "Are you a phoenix?{N}The legendary bird?{W1}"
                 nextText $C0,ALLY_PETER ; "Y...yeah, I'm a phoenix.{W2}"
@@ -125,7 +125,7 @@ cs_55A36:       textCursor $4AE
                 endActions
                 warp MAP_NEW_GRANSEAL,11,1,DOWN
                 csc_end
-cs_55BEE:       textCursor $4E1
+cs_55BEE:       textCursor 1249
                 setActscriptWait ALLY_PETER,eas_Init
                 nextSingleText $0,128   ; "Welcome back, {LEADER}.{W1}"
                 setDest 32768,11,7
@@ -315,7 +315,7 @@ cs_55BEE:       textCursor $4E1
                 nod ALLY_BOWIE
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 addNewFollower 139
-                setF $46                ; Astral is a follower
+                setF 70                 ; Astral is a follower
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -364,7 +364,7 @@ loc_55F34:
                 or.w    d3,d4
                 move.w  d4,(a1)+
                 dbf     d0,loc_55F06
-                clr.b   ((byte_FFDFAB-$1000000)).w
+                clr.b   ((FADING_TIMER_BYTE-$1000000)).w
                 lea     (PALETTE_1_BASE).l,a0
                 jmp     (sub_19C8).w    
 
@@ -387,7 +387,7 @@ plt_55F6A:      dc.w $E0C
 
 sub_55F82:
                 
-                clr.b   ((byte_FFDFAB-$1000000)).w
+                clr.b   ((FADING_TIMER_BYTE-$1000000)).w
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
                 jmp     (sub_19C8).w    
 

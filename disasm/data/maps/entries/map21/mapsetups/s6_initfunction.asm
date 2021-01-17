@@ -7,12 +7,12 @@
 ms_map21_InitFunction:
                 
                  
-                chkFlg  $1F5            ; Battle 1 completed
-                beq.s   byte_53F1C      
+                chkFlg  501             ; Battle 1 completed
+                beq.s   ms_map21_flag609_InitFunction
                 script  cs_53F2A
-byte_53F1C:
+ms_map21_flag609_InitFunction:
                 
-                chkFlg  $1FB            ; Battle 7 completed
+                chkFlg  507             ; Battle 7 completed
                 beq.s   return_53F28
                 script  cs_53FD8
 return_53F28:
@@ -22,8 +22,8 @@ return_53F28:
     ; End of function ms_map21_InitFunction
 
 cs_53F2A:       customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

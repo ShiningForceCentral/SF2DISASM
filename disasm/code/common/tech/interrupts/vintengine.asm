@@ -431,9 +431,6 @@ loc_91E:
                 clr.w   (a0)
                 cmpi.b  #$FB,d0
                 bne.s   loc_95A         ; if command FB, play back previous music
-                                        ; NOTE : for future cube save/resume feature,
-                                        ; send proper resume command instead of previous music index !
-                                        ; Cube should save current music at every new music index !
                 tst.b   ((MUSIC_STACK_LENGTH-$1000000)).w
                 beq.s   loc_94E
                 movem.l d7-a0,-(sp)
@@ -472,8 +469,7 @@ loc_97A:
 loc_994:
                 
                 movem.l d0,-(sp)
-                andi.b  #$7F,d0 ; a music/sfx index mask that must be changed to allow indexes above $80
-                                        ; also change stuff at 9AA then !
+                andi.b  #$7F,d0 ; a music/sfx index mask, so max index value is $7F
                 cmp.b   ((MUSIC_STACK-$1000000)).w,d0 ; compare with last played music
                 movem.l (sp)+,d0
                 bne.s   loc_9AA
@@ -510,7 +506,7 @@ loc_9DC:
 loc_9F6:
                 
                 bsr.w   UpdatePlayerInputs
-                tst.b   ((byte_FFDE9D-$1000000)).w
+                tst.b   ((CONTROLLING_UNIT_CURSOR-$1000000)).w
                 bne.s   loc_A60
                 moveq   #2,d0
                 move.b  ((P1_INPUT-$1000000)).w,d1
@@ -914,7 +910,7 @@ FadeOutToWhite:
 
 ExecuteFading:
                 
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -1067,6 +1063,7 @@ ClearSpriteTable:
                 addq.w  #8,a0
                 addq.b  #1,d0
                 dbf     d1,@Loop
+                
                 clr.b   -5(a0)
                 movem.l (sp)+,d0-d1/a0
                 rts
@@ -1120,11 +1117,12 @@ ClearCram:
                 move.w  #$C000,(VDP_Control).l
                 move.w  #$80,(VDP_Control).l  ; CRAM address 0x80
                 move.w  #0,(VDP_Data).l
-loc_EC8:
+@WaitForDmaFree:
                 
                 move.w  (VDP_Control).l,d0
-                andi.w  #2,d0           ; wait for DMA free
-                bne.s   loc_EC8
+                andi.w  #2,d0
+                bne.s   @WaitForDmaFree
+                
                 move.w  (VDP_REG01_STATUS).l,d3
                 move.w  d3,(VDP_Control).l
                 move.w  #$8F02,(VDP_Control).l ; auto increment : 2
@@ -1479,7 +1477,7 @@ ApplyVIntVramDma:
                 movem.l d0/a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.l  d1,d2
-                addi.w  #$8F00,d1
+                addi.w  #-$7100,d1
                 move.w  d1,(a6)+        ; Apply auto-increment from D1
                 move.l  d2,d1
                 clr.w   d2

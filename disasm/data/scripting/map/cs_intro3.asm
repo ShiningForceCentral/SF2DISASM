@@ -1,7 +1,7 @@
 
 ; ASM FILE data\scripting\map\cs_intro3.asm :
 ; 0x48540..0x48A78 : Intro cutscene 3
-IntroCutscene3: textCursor $1077
+IntroCutscene3: textCursor 4215
                 mapLoad MAP_FORCE_SWORD_SHRINE,21,1
                 loadMapEntities ce_48A50
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -76,7 +76,7 @@ IntroCutscene3: textCursor $1077
                  moveUp 1
                 endActions
                 csWait 6
-                setActscriptWait ALLY_SLADE,eas_461AA
+                setActscriptWait ALLY_SLADE,eas_StopMoving
                 setFacing ALLY_SLADE,DOWN
                 setSprite ALLY_SLADE,MAPSPRITE_EFFECT6
                 csWait 20
@@ -101,12 +101,12 @@ IntroCutscene3: textCursor $1077
                  moveDown 1
                 endActions
                 csWait 6
-                setActscriptWait ALLY_SLADE,eas_461AA
+                setActscriptWait ALLY_SLADE,eas_StopMoving
                 customActscriptWait ALLY_SLADE
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_SLADE,eas_46172
+                setActscriptWait ALLY_SLADE,eas_DeactivateAutoFacing
                 setSprite ALLY_SLADE,ALLY_SLADE
                 setFacing ALLY_SLADE,UP
                 entityActionsWait ALLY_SLADE
@@ -135,7 +135,7 @@ IntroCutscene3: textCursor $1077
                  moveUp 1
                 endActions
                 csWait 6
-                setActscriptWait ALLY_SLADE,eas_461AA
+                setActscriptWait ALLY_SLADE,eas_StopMoving
                 setFacing ALLY_SLADE,DOWN
                 setSprite ALLY_SLADE,MAPSPRITE_EFFECT6
                 nextSingleText $FF,255  ; "{NAME;5} the thief{N}grabbed the two jewels.{D2}"
@@ -148,7 +148,7 @@ IntroCutscene3: textCursor $1077
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_SLADE,eas_46172
+                setActscriptWait ALLY_SLADE,eas_DeactivateAutoFacing
                 hide 130
                 setBlocks 26,18,1,1,26,4
                 setSprite ALLY_SLADE,ALLY_SLADE
@@ -157,7 +157,7 @@ IntroCutscene3: textCursor $1077
                  moveDown 1
                 endActions
                 csWait 3
-                setActscriptWait ALLY_SLADE,eas_461AA
+                setActscriptWait ALLY_SLADE,eas_StopMoving
                 entityActionsWait ALLY_SLADE
                  moveDown 5
                 endActions
@@ -170,8 +170,8 @@ IntroCutscene3: textCursor $1077
                 endActions
                 setFacing ALLY_SLADE,LEFT
                 customActscriptWait ALLY_SLADE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -224,11 +224,11 @@ IntroCutscene3: textCursor $1077
                 csWait 40
                 setQuake 0
                 csWait 5
-                setActscript ALLY_SLADE,eas_461B6
+                setActscript ALLY_SLADE,eas_2xRightLeft
                 csWait 5
-                setActscript 128,eas_461E4
+                setActscript 128,eas_2xUpDown
                 csWait 5
-                setActscript 129,eas_461E4
+                setActscript 129,eas_2xUpDown
                 csWait 60
                 setQuake 3
                 csWait 40
@@ -304,8 +304,8 @@ IntroCutscene3: textCursor $1077
                  moveRight 1
                 endActions
                 customActscriptWait 129
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

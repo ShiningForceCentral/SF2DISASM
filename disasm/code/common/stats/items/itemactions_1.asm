@@ -4,21 +4,23 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_229CA:
+; Out: D2 = 0 if true, $FFFFFFFF if false
+
+FindUsableOutsideBattleItem:
                 
                 moveq   #0,d2
-                lea     UsableOutsideBattleItems(pc), a0
+                lea     tbl_UsableOutsideBattleItems(pc), a0
                 nop
-loc_229D2:
+@Loop:
                 
                 cmp.b   (a0)+,d1
-                beq.w   return_229E0
+                beq.w   @Return
                 cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
-                bne.s   loc_229D2
+                bne.s   @Loop
                 moveq   #$FFFFFFFF,d2
-return_229E0:
+@Return:
                 
                 rts
 
-    ; End of function sub_229CA
+    ; End of function FindUsableOutsideBattleItem
 

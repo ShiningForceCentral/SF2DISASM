@@ -14,7 +14,7 @@ ms_map67_ZoneEvents:
 Map67_ZoneEvent1:
                 
                  
-                chkFlg  $208            ; Battle 20 completed
+                chkFlg  520             ; Battle 20 completed
                 bne.s   return_4FB30
                 script  cs_4FB64
 return_4FB30:
@@ -29,16 +29,16 @@ return_4FB30:
 Map67_ZoneEvent0:
                 
                  
-                chkFlg  $2EF            ; Set after Elric opens the passage to Devil's Tail
+                chkFlg  751             ; Set after Elric opens the passage to Devil's Tail
                 bne.s   return_4FB56
-                chkFlg  $D              ; Elric joined
+                chkFlg  13              ; Elric joined
                 beq.s   return_4FB56
                 move.w  #$D,d0
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.s   return_4FB56
                 script  cs_4FC32
-                setFlg  $2EF            ; Set after Elric opens the passage to Devil's Tail
+                setFlg  751             ; Set after Elric opens the passage to Devil's Tail
 return_4FB56:
                 
                 rts
@@ -56,7 +56,7 @@ Map67_DefaultZoneEvent:
 
     ; End of function Map67_DefaultZoneEvent
 
-cs_4FB64:       textCursor $9EF
+cs_4FB64:       textCursor 2543
                 setActscriptWait FOLLOWER_B,eas_Init
                 setActscriptWait FOLLOWER_A,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -64,7 +64,7 @@ cs_4FB64:       textCursor $9EF
                 nextSingleText $0,FOLLOWER_B ; "Wait!{W1}"
                 setDest FOLLOWER_B,60,27
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 setCamDest 53,24
                 setDest ALLY_PETER,59,27
@@ -76,7 +76,7 @@ cs_4FB64:       textCursor $9EF
                 nextSingleText $0,FOLLOWER_B ; "{LEADER}...{NAME;7}...can{N}you hear that?{W1}"
                 nextSingleText $C0,ALLY_PETER ; "Hear what?{W1}"
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 setFacing ALLY_PETER,DOWN
                 nextSingleText $C0,ALLY_PETER ; "I don't hear anything.{W1}"
@@ -84,7 +84,7 @@ cs_4FB64:       textCursor $9EF
                  moveDown 1
                 endActions
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 nextText $0,FOLLOWER_B  ; "Somebody is crying for help...{W2}"
                 nextSingleText $0,FOLLOWER_B ; "from...over here.{W1}"
@@ -97,7 +97,7 @@ cs_4FB64:       textCursor $9EF
                 setPos ALLY_BOWIE,63,63,DOWN
                 warp MAP_HARPY_POOL,11,22,UP
                 csc_end
-cs_4FC32:       textCursor $A21
+cs_4FC32:       textCursor 2593
                 newEntity ALLY_ELRIC,57,25,UP,MAPSPRITE_TAROS
                 setActscriptWait ALLY_ELRIC,eas_Init
                 entityActionsWait ALLY_ELRIC

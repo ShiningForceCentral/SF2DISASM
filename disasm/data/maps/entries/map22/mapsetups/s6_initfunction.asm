@@ -7,25 +7,25 @@
 ms_map22_InitFunction:
                 
                  
-                chkFlg  $308            ; Set after the scene where Goliath places you on the Desktop
+                chkFlg  776             ; Set after the scene where Goliath places you on the Desktop
                 bne.s   byte_5963E      
                 script  cs_59656
-                setFlg  $308            ; Set after the scene where Goliath places you on the Desktop
+                setFlg  776             ; Set after the scene where Goliath places you on the Desktop
 byte_5963E:
                 
-                chkFlg  $20A            ; Battle 22 completed
+                chkFlg  522             ; Battle 22 completed
                 beq.s   return_59654
-                chkFlg  $30A            ; Set after the scene that plays after you win the chess battle
+                chkFlg  778             ; Set after the scene that plays after you win the chess battle
                 bne.s   return_59654
                 script  cs_5996E
-                setFlg  $30A            ; Set after the scene that plays after you win the chess battle
+                setFlg  778             ; Set after the scene that plays after you win the chess battle
 return_59654:
                 
                 rts
 
     ; End of function ms_map22_InitFunction
 
-cs_59656:       textCursor $6D4
+cs_59656:       textCursor 1748
                 reloadMap 0,19
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -77,20 +77,20 @@ cs_59656:       textCursor $6D4
                 hide 154
                 hide 155
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 customActscriptWait ALLY_PETER
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 customActscriptWait FOLLOWER_B
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -122,14 +122,14 @@ cs_59656:       textCursor $6D4
                 endActions
                 nextSingleText $C0,FOLLOWER_B ; "Small?  How small?{W1}"
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 100
                 entityActionsWait ALLY_PETER
                  moveDown 2
                  moveRight 1
                 endActions
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 130
                 setFacing ALLY_PETER,UP
                 setFacing ALLY_BOWIE,DOWN
@@ -143,12 +143,12 @@ cs_59656:       textCursor $6D4
                  moveRight 1
                 endActions
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 10
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 130
                 setFacing ALLY_PETER,DOWN
                 setFacing ALLY_BOWIE,DOWN
@@ -157,8 +157,8 @@ cs_59656:       textCursor $6D4
                 setActscript ALLY_PETER,eas_Jump
                 shiver ALLY_BOWIE
                 shiver ALLY_PETER
-                setActscriptWait ALLY_BOWIE,eas_46172
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 entityActions ALLY_BOWIE
                  moveUp 1
                 endActions

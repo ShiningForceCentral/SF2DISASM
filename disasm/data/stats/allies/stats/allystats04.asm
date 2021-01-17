@@ -1,9 +1,9 @@
 
 ; ASM FILE data\stats\allies\stats\allystats04.asm :
 ; 0x1EE3D1..0x1EE426 : Ally stats 04
-AllyStats04:    forClass MAGE
-                hpGrowth 10, 34, LINEAR
-                mpGrowth 7, 54, EARLY
+AllyStats04:    forClass  MAGE
+                hpGrowth  10, 34, LINEAR
+                mpGrowth  7, 54, EARLY
                 atkGrowth 4, 18, LINEAR
                 defGrowth 4, 26, LINEAR
                 agiGrowth 6, 42, LINEAR
@@ -18,17 +18,17 @@ AllyStats04:    forClass MAGE
                     29, DESOUL|LV2, &
                     35, BLAZE|LV4
                     
-                forClass WIZ
-                hpGrowth 26, 77, LATE
-                mpGrowth 40, 83, LINEAR
+                forClass  WIZ
+                hpGrowth  26, 77, LATE
+                mpGrowth  40, 83, LINEAR
                 atkGrowth 13, 28, LINEAR
                 defGrowth 18, 57, LINEAR
                 agiGrowth 29, 83, EARLYANDLATE
                 useFirstSpellList
                     
-                forClass SORC
-                hpGrowth 26, 77, LATE
-                mpGrowth 40, 90, LINEAR
+                forClass  SORC
+                hpGrowth  26, 77, LATE
+                mpGrowth  40, 90, LINEAR
                 atkGrowth 13, 28, LINEAR
                 defGrowth 18, 60, LINEAR
                 agiGrowth 29, 60, EARLYANDLATE

@@ -39,7 +39,12 @@ j_EndKissPictureSequence:
                 jmp     EndKissPictureSequence(pc)
 j_LoadTitleScreenFont:                
                 jmp     LoadTitleScreenFont(pc)
-                include "code\specialscreens\segalogo\segalogo.asm"    ; SEGA logo functions
+                include "code\specialscreens\segalogo\segalogo_0.asm"    ; SEGA logo functions
+                include "data\tech\configurationmodeinputsequence.asm"    ; Configuration mode input sequence
+                wordAlign
+                include "code\specialscreens\segalogo\segalogo_1.asm"    ; SEGA logo functions
+                include "data\tech\debugmodeinputsequence.asm"    ; Debug mode input sequence
+                wordAlign
 VariableWidthFont:
                 incbin "data/graphics/tech/fonts/variablewidthfont.bin"
 MenuTiles_Uncompressed:
@@ -62,7 +67,7 @@ SpeechBalloonTiles:
                 include "code\specialscreens\endkiss\endkissfunctions_0.asm"    ; End kiss function
                 include "code\specialscreens\title\loadfont.asm"    ; Title screen font loading function
 UnusedCloudTiles:
-                incbin "data/graphics/tech/unusedcloudtiles.bin" ; no reference to that ? looks like compressed tiles but no idea of what they represent (32x8 tiles)
+                incbin "data/graphics/tech/unusedcloudtiles.bin" ; looks like compressed tiles but no idea of what they represent (32x8 tiles)
 StaticWidthFont:incbin "data/graphics/tech/fonts/staticwidthfont.bin" 
                                                         ; used for title screen
 TitleScreenPalettes:

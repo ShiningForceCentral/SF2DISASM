@@ -11,14 +11,14 @@ ms_map8_Section5:
 Map8_ItemEvent0:
                 
                  
-                chkFlg  $2DB            ; Set after you open the tree in Ribble with the wooden plank
+                chkFlg  731             ; Set after you open the tree in Ribble with the wooden plank
                 beq.s   byte_562FC
                 moveq   #0,d6
                 bra.s   Map8_DefaultItemEvent2
 byte_562FC:
                 
                 script  cs_56314
-                setFlg  $2DB            ; Set after you open the tree in Ribble with the wooden plank
+                setFlg  731             ; Set after you open the tree in Ribble with the wooden plank
                 moveq   #$70,d0 
                 jsr     RemoveItemFromInventory ; remove wooden panel from items ?
                 move.w  #$FFFF,d6

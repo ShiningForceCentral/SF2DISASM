@@ -117,8 +117,6 @@ InitAllEnemiesBattlePositions:
 
 ; =============== S U B R O U T I N E =======================================
 
-; (also checks for Jaro)
-
 InitEnemyBattlePosition:
                 
                 movem.l d0-a6,-(sp)
@@ -126,9 +124,9 @@ InitEnemyBattlePosition:
                 move.b  (a0),d1
                 cmpi.b  #BATTLE_TO_MOUN,d1
                 bne.s   loc_1B132E
-                cmpi.b  #$8F,d0         ; check if enemy 15 is present
+                cmpi.b  #$8F,d0
                 bne.s   loc_1B132E
-                bsr.w   HasJaroJoinedTheForce
+                bsr.w   HasJaroJoinedTheForce ; HARDCODED check for Jaro in battle 32
                 tst.w   d1
                 beq.s   loc_1B132E
                 bra.w   loc_1B139A      ; skip positioning enemy 15 in battle 32 if Jaro has joined the Force
@@ -231,7 +229,7 @@ InitEnemyStats:
                 bsr.w   UpgradeEnemyIndex
                 move.w  d1,d6
                 mulu.w  #$38,d1 
-                lea     EnemyDefs(pc), a1
+                lea     tbl_EnemyDefs(pc), a1
                 adda.w  d1,a1
                 move.l  a0,-(sp)
                 jsr     j_GetCombatantEntryAddress_0
@@ -266,7 +264,7 @@ loc_1B142C:
                 move.b  8(a0),d2
                 jsr     j_SetKills
                 move.w  4(a0),d1
-                bsr.w   InitEnemyItems  
+                bsr.w   InitEnemyItems
                 jsr     j_GetCharacterWord34
                 move.w  d1,d2
                 andi.w  #$F000,d2
@@ -311,8 +309,6 @@ loc_1B14F4:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Handle custom item index of enemy list entry starting at A0 -> ???
-
 InitEnemyItems:
                 
                 movem.l d0-a0,-(sp)
@@ -334,7 +330,7 @@ loc_1B152E:
                 cmp.b   d1,d3
                 bne.s   loc_1B1546
                 move.w  d5,d1
-                jsr     j_EquipItem
+                jsr     j_EquipItemBySlot
                 bra.w   loc_1B154E
 loc_1B1546:
                 
@@ -537,7 +533,7 @@ GetCombatantStartingPositions:
                 bra.w   @Done
 @GetAllyEntryAddress:
                 
-                andi.w  #COMBATANT_MASK,d0
+                andi.w  #COMBATANT_MASK_ALL,d0
                 mulu.w  #BATTLESPRITESET_COMBATANT_ENTRY_SIZE,d0
                 adda.w  d0,a0
                 bra.s   @GetStartingPositions
@@ -755,228 +751,235 @@ loc_1B1846:
 UpgradeEnemyIndex:
                 
                 movem.l d0/d2-a6,-(sp)
-                move.w  d1,d5
+                move.w  d1,d5           ; D5 = original enemy index backup
                 bsr.w   DoesBattleUpgrade
                 tst.w   d1
-                bne.s   loc_1B1860
+                bne.s   @DetermineUpgrade
                 move.w  d5,d1
-                bra.w   loc_1B1A22
-loc_1B1860:
+                bra.w   @Done
+@DetermineUpgrade:
                 
                 bsr.s   ShouldBattleUpgrade
                 tst.w   d1
-                bne.s   loc_1B186C
+                bne.s   @DoUpgrade
                 move.w  d5,d1
-                bra.w   loc_1B1A22
-loc_1B186C:
+                bra.w   @Done
+@DoUpgrade:
                 
                 clr.w   d4
                 clr.l   d1
+                
+                ; Get pointer to enemy upgrade data based on move type -> A0
                 move.b  d5,d1
                 mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
-                lea     EnemyDefs(pc), a1
+                lea     tbl_EnemyDefs(pc), a1
                 adda.w  d1,a1
                 move.b  ENEMYDEF_OFFSET_MOVETYPE(a1),d2
-                lsr.w   #4,d2           ; shift movetype upper nibble to lower position
+                lsr.w   #MOVETYPE_NIBBLE_SHIFTCOUNT,d2 ; shift movetype upper nibble to lower position
                 andi.b  #MOVETYPE_MASK_LOWERNIBBLE,d2
+                
+                ; Check regular move type
                 cmpi.b  #MOVETYPE_LOWER_REGULAR,d2
-                bne.s   loc_1B1896
-                lea     byte_1B6DBC(pc), a0
+                bne.s   @CheckCentaur
+                lea     tbl_EnemyUpgradeDef_Melee(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B1896:
+                bra.w   @GetLeaderEffectiveLevel
+@CheckCentaur:
                 
                 cmpi.b  #MOVETYPE_LOWER_CENTAUR,d2
-                bne.s   loc_1B18A6
-                lea     byte_1B6DBC(pc), a0
+                bne.s   @CheckStealth
+                lea     tbl_EnemyUpgradeDef_Melee(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B18A6:
+                bra.w   @GetLeaderEffectiveLevel
+@CheckStealth:
                 
                 cmpi.b  #MOVETYPE_LOWER_STEALTH,d2
-                bne.s   loc_1B18B6
-                lea     byte_1B6DBC(pc), a0
+                bne.s   @CheckGunner
+                lea     tbl_EnemyUpgradeDef_Melee(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B18B6:
+                bra.w   @GetLeaderEffectiveLevel
+@CheckGunner:
                 
                 cmpi.b  #MOVETYPE_LOWER_BRASS_GUNNER,d2
-                bne.s   loc_1B18C6
-                lea     byte_1B6DBC(pc), a0
+                bne.s   @CheckFlying
+                lea     tbl_EnemyUpgradeDef_Melee(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B18C6:
+                bra.w   @GetLeaderEffectiveLevel
+@CheckFlying:
                 
                 cmpi.b  #MOVETYPE_LOWER_FLYING,d2
-                bne.s   loc_1B18D6
-                lea     byte_1B6DC6(pc), a0
+                bne.s   @CheckHovering
+                lea     tbl_EnemyUpgradeDef_Air(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B18D6:
+                bra.w   @GetLeaderEffectiveLevel
+@CheckHovering:
                 
                 cmpi.b  #MOVETYPE_LOWER_HOVERING,d2
-                bne.s   loc_1B18E6
-                lea     byte_1B6DC6(pc), a0
+                bne.s   @CheckArcher
+                lea     tbl_EnemyUpgradeDef_Air(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B18E6:
+                bra.w   @GetLeaderEffectiveLevel
+@CheckArcher:
                 
                 cmpi.b  #MOVETYPE_LOWER_ARCHER,d2
-                bne.s   loc_1B18F6
-                lea     byte_1B6DCA(pc), a0
+                bne.s   @CheckCentaurArcher
+                lea     tbl_EnemyUpgradeDef_Ranged(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B18F6:
+                bra.w   @GetLeaderEffectiveLevel
+@CheckCentaurArcher:
                 
                 cmpi.b  #MOVETYPE_LOWER_CENTAUR_ARCHER,d2
-                bne.s   loc_1B1906
-                lea     byte_1B6DCA(pc), a0
+                bne.s   @CheckStealthArcher
+                lea     tbl_EnemyUpgradeDef_Ranged(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B1906:
+                bra.w   @GetLeaderEffectiveLevel
+@CheckStealthArcher:
                 
                 cmpi.b  #MOVETYPE_LOWER_STEALTH_ARCHER,d2
-                bne.s   loc_1B1916
-                lea     byte_1B6DCA(pc), a0
+                bne.s   @CheckMage
+                lea     tbl_EnemyUpgradeDef_Ranged(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B1916:
+                bra.w   @GetLeaderEffectiveLevel
+@CheckMage:
                 
                 cmpi.b  #MOVETYPE_LOWER_MAGE,d2
-                bne.s   loc_1B1926
-                lea     byte_1B6DD0(pc), a0
+                bne.s   @CheckHealer
+                lea     tbl_EnemyUpgradeDef_Mage(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B1926:
+                bra.w   @GetLeaderEffectiveLevel
+@CheckHealer:
                 
                 cmpi.b  #MOVETYPE_LOWER_HEALER,d2
-                bne.s   loc_1B1936
-                lea     byte_1B6DD5(pc), a0
+                bne.s   @Default1
+                lea     tbl_EnemyUpgradeDef_Healer(pc), a0
                 nop
-                bra.w   loc_1B193C
-loc_1B1936:
+                bra.w   @GetLeaderEffectiveLevel
+@Default1:
                 
                 move.w  d5,d1
-                bra.w   loc_1B1A22
-loc_1B193C:
+                bra.w   @Done           ; no valid move type found, default to original enemy
+@GetLeaderEffectiveLevel:
                 
                 clr.w   d3
-                move.b  d5,d3
+                move.b  d5,d3           ; D3 = original enemy index backup
                 clr.w   d2
                 clr.w   d0
+                
+                ; Get Bowie's effective level -> D2
                 jsr     j_GetCurrentLevel
                 move.w  d1,d2
                 jsr     j_GetClass
                 cmpi.b  #CHAR_CLASS_LASTNONPROMOTED,d1
-                ble.s   loc_1B195C
+                ble.s   @Continue
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d2
-loc_1B195C:
+@Continue:
                 
                 lea     ((CURRENT_BATTLE-$1000000)).w,a1
                 clr.w   d1
                 move.b  (a1),d1
-                sub.w   d1,d2           ; subtract battle index from force leader's effective level
-                bne.s   loc_1B197A
+                sub.w   d1,d2           ; subtract battle index from Bowie's effective level
+                bne.s   @CheckPositive
                 tst.w   d4
-                bne.s   loc_1B1974
+                bne.s   @Default2
                 move.w  #1,d4
-                bra.s   loc_1B193C
-                bra.s   loc_1B197A
-loc_1B1974:
+                bra.s   @GetLeaderEffectiveLevel
+                bra.s   @CheckPositive
+@Default2:
                 
                 move.w  d5,d1
-                bra.w   loc_1B1A22
-loc_1B197A:
+                bra.w   @Done
+@CheckPositive:
                 
-                bpl.s   loc_1B198E
+                bpl.s   @CalculateUpgradeMultiplier
                 tst.w   d4
-                bne.s   loc_1B1988
+                bne.s   @Default3
                 move.w  #1,d4
-                bra.s   loc_1B193C
-                bra.s   loc_1B198E
-loc_1B1988:
+                bra.s   @GetLeaderEffectiveLevel ; if less than 1, do it all over again once more for laughs !
+                bra.s   @CalculateUpgradeMultiplier
+@Default3:
                 
                 move.w  d5,d1
-                bra.w   loc_1B1A22
-loc_1B198E:
+                bra.w   @Done
+@CalculateUpgradeMultiplier:
                 
-                divu.w  #$A,d2
+                divu.w  #10,d2          ; D2 = bowie_level - battle_index / 10
                 andi.l  #$FF,d2
                 tst.w   d2
-                bne.s   loc_1B19A2
+                bne.s   @CalculateUpgradeRange
                 move.w  d5,d1
-                bra.w   loc_1B1A22
-loc_1B19A2:
+                bra.w   @Done           ; default to original enemy if Bowie is less than 10 levels over current battle
+@CalculateUpgradeRange:
                 
                 clr.w   d6
-                move.b  (a0),d6
+                move.b  (a0),d6         ; D6 = base upgrade range
                 cmpi.b  #5,d6
-                bne.s   loc_1B19B0
-                mulu.w  d6,d2
+                bne.s   @GetStrongestEnemy
+                mulu.w  d6,d2           ; apply upgrade multiplier D2
                 subq.w  #5,d2
-loc_1B19B0:
+@GetStrongestEnemy:
                 
                 add.w   d2,d3
-                move.w  d3,d2
+                move.w  d3,d2           ; strongest enemy upgrade currently allowed -> D2
                 addi.w  #1,d6
-loc_1B19B8:
+@UpgradeEnemy_Loop:
                 
                 jsr     (GenerateRandomNumber).w
                 add.w   d7,d3
-                cmp.b   1(a0),d3
-                bge.s   loc_1B19D8
+                cmp.b   1(a0),d3        ; compare to first upgradable enemy
+                bge.s   @IsEnemyUpgradable
                 tst.w   d4
-                bne.s   loc_1B19D2
+                bne.s   @Default4
                 move.w  #1,d4
                 move.w  d2,d3
-                bra.s   loc_1B19B8
-                bra.s   loc_1B19D8
-loc_1B19D2:
+                bra.s   @UpgradeEnemy_Loop ; fall back to enemy D2 and try again one more time
+                bra.s   @IsEnemyUpgradable
+@Default4:
                 
                 move.w  d5,d1
-                bra.w   loc_1B1A22
-loc_1B19D8:
+                bra.w   @Done
+@IsEnemyUpgradable:
                 
-                cmp.b   2(a0),d3
-                ble.s   loc_1B19F2
+                cmp.b   2(a0),d3        ; compare to last upgradable enemy
+                ble.s   @CheckExcludedEnemies ; keep going if enemy is upgradable
                 tst.w   d4
-                bne.s   loc_1B19EC
+                bne.s   @Default5
                 move.w  #1,d4
                 move.w  d2,d3
-                bra.s   loc_1B19B8
-                bra.s   loc_1B19F2
-loc_1B19EC:
+                bra.s   @UpgradeEnemy_Loop ; fall back to enemy D2 and try again one more time
+                bra.s   @CheckExcludedEnemies
+@Default5:
                 
                 move.w  d5,d1
-                bra.w   loc_1B1A22
-loc_1B19F2:
+                bra.w   @Done
+@CheckExcludedEnemies:
                 
                 movea.l a0,a1
-                adda.w  #3,a1
+                adda.w  #3,a1           ; A1 = pointer to excluded enemies list
                 clr.w   d1
                 move.b  (a1)+,d1
-                subi.w  #1,d1
-loc_1B1A00:
+                subi.w  #1,d1           ; D1 = loop counter
+@FindExcludedEnemy_Loop:
                 
                 move.b  (a1)+,d0
                 cmp.b   d0,d3
-                bne.s   loc_1B1A1A
+                bne.s   @Next
                 tst.w   d4
-                bne.s   loc_1B1A14
+                bne.s   @Default6
                 move.w  #1,d4
                 move.w  d2,d3
-                bra.s   loc_1B19B8
-                bra.s   loc_1B1A1A
-loc_1B1A14:
+                bra.s   @UpgradeEnemy_Loop ; fall back to enemy D2 and try again one more time
+                bra.s   @Next
+@Default6:
                 
                 move.w  d5,d1
-                bra.w   loc_1B1A22
-loc_1B1A1A:
+                bra.w   @Done
+@Next:
                 
-                dbf     d1,loc_1B1A00
+                dbf     d1,@FindExcludedEnemy_Loop
+                
                 clr.w   d1
-                move.b  d3,d1
-loc_1B1A22:
+                move.b  d3,d1           ; D1 = upgraded enemy index
+@Done:
                 
                 movem.l (sp)+,d0/d2-a6
                 rts

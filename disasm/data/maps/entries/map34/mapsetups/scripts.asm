@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map34\mapsetups\scripts.asm :
 ; 0x5B6C0..0x5BFEE : 
-cs_5B6C0:       textCursor $C87
+cs_5B6C0:       textCursor 3207
                 setCamDest 2,4
                 nextText $80,128        ; "Yeeenn...queeen...{N}tillooora...synooora...{N}hear my voice....{W2}"
                 nextSingleText $80,128  ; "Evil Spirit, come.{W1}"
@@ -123,12 +123,12 @@ cs_5B6C0:       textCursor $C87
                  moveDown 1
                 endActions
                 nextSingleText $80,128  ; "Let me see it.{W1}"
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActions 128
                  moveDown 1
                 endActions
                 csWait 2
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 stopEntity 128
                 csWait 20
                 entityFlashWhite ALLY_BOWIE,$28
@@ -137,7 +137,7 @@ cs_5B6C0:       textCursor $C87
                  moveUp 1
                 endActions
                 csWait 2
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 headshake 128
                 nextText $80,128        ; "Whhoooa!{W2}"
                 nextSingleText $80,128  ; "What's that light?{N}There are two!{W1}"
@@ -322,10 +322,10 @@ cs_5B6C0:       textCursor $C87
                 setPos 142,7,5,RIGHT
                 setPos 143,6,6,RIGHT
                 setPos 144,7,7,RIGHT
-                setActscript 141,eas_464BE
-                setActscript 142,eas_464C6
-                setActscript 143,eas_464CE
-                setActscript 144,eas_464D6
+                setActscript 141,eas_ClockwiseMoveUpLeft
+                setActscript 142,eas_ClockwiseMoveUpRight
+                setActscript 143,eas_ClockwiseMoveDownRight
+                setActscript 144,eas_ClockwiseMoveDownLeft
                 setPos 145,8,6,LEFT
                 setPos 146,7,7,LEFT
                 setPos 147,6,6,LEFT
@@ -334,26 +334,26 @@ cs_5B6C0:       textCursor $C87
                  moveRight 1
                 endActions
                 csWait 2
-                setActscriptWait 145,eas_461AA
+                setActscriptWait 145,eas_StopMoving
                 entityActions 146
                  moveDown 1
                 endActions
                 csWait 2
-                setActscriptWait 146,eas_461AA
+                setActscriptWait 146,eas_StopMoving
                 entityActions 147
                  moveLeft 1
                 endActions
                 csWait 2
-                setActscriptWait 147,eas_461AA
+                setActscriptWait 147,eas_StopMoving
                 entityActions 148
                  moveUp 1
                 endActions
                 csWait 2
-                setActscriptWait 148,eas_461AA
-                setActscript 145,eas_464E2
-                setActscript 146,eas_464EA
-                setActscript 147,eas_464F2
-                setActscript 148,eas_464FA
+                setActscriptWait 148,eas_StopMoving
+                setActscript 145,eas_CounterClockwiseMoveUpRight
+                setActscript 146,eas_CounterClockwiseMoveUpLeft
+                setActscript 147,eas_CounterClockwiseMoveDownLeft
+                setActscript 148,eas_CounterClockwiseMoveDownRight
                 playSound SFX_BATTLEFIELD_DEATH
                 setPos 133,7,6,RIGHT
                 setPos 134,7,6,RIGHT

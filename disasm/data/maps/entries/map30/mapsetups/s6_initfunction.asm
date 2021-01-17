@@ -7,12 +7,12 @@
 ms_map30_InitFunction:
                 
                  
-                chkFlg  $2F9            ; Set after the dwarf gives Bowie the cannon
+                chkFlg  761             ; Set after the dwarf gives Bowie the cannon
                 beq.s   byte_5A2FE      
                 script  cs_5A30C
 byte_5A2FE:
                 
-                chkFlg  $2F8            ; Set after the fairy cures the sick dwarf in the mine
+                chkFlg  760             ; Set after the fairy cures the sick dwarf in the mine
                 bne.s   return_5A30A
                 script  cs_5A31E
 return_5A30A:
@@ -25,8 +25,8 @@ cs_5A30C:       setBlocks 21,6,2,2,7,5
                 setBlocks 21,0,4,4,6,0
                 csc_end
 cs_5A31E:       customActscriptWait 130
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $3          ;   
+                 ac_motion OFF          ;   
+                 ac_orientRight         ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

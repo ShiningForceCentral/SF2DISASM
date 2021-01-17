@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map44\mapsetups\scripts.asm :
 ; 0x54578..0x5473E : 
-cs_54578:       textCursor $3F5
+cs_54578:       textCursor 1013
                 nextSingleText $0,FOLLOWER_B ; "OK.  Let's go!{W1}"
                 nod 138
                 setFacing 138,DOWN
@@ -68,7 +68,7 @@ Map21_DefaultZoneEvent:
                 endActions
                 setCamDest 11,12
                 nextSingleText $C0,FOLLOWER_B ; "It's too dangerous to stay{N}here.{N}Weigh anchor right now!{W1}"
-                clearF $4A              ; Astral + King are followers
+                clearF 74               ; Astral + King are followers
                 setCamDest 11,13
                 executeSubroutine csub_54714
                 csWait 120
@@ -107,7 +107,7 @@ Map21_DefaultZoneEvent:
                 setQuake 0
                 csWait 120
                 warp MAP_OVERWORLD_NEW_GRANSEAL_SHORE,26,13,RIGHT
-                clearF $280             ; Set after the end of battle 7's long sequence, cleared at docks?
+                clearF 640              ; Set after the end of battle 7's long sequence, cleared at docks?
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================

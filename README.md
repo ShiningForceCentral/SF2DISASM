@@ -61,10 +61,10 @@ Content produced from project SF2RE.
 ### 'feature/xxx', 'fix/xxx' branches :
 Single feature/fix developments which should stay optional patches by using declarations in file sf2patches.asm.  
 Created from master branch.   
-Content of these branches can then be combined into build branches.
+Content of these branches can then be combined into build branches.  
 Manually updated with master branch progress when needed : before working on it, and before merging it into a build branch.
 ### 'build/xxx' branches :
-Branches which combine content from feature/fix branches in order to produce a consistent set of compatible changes which can be used as a stable starting point for further projects.
+Branches which combine content from feature/fix branches in order to produce a consistent set of compatible changes which can be used as a stable starting point for further projects.  
 Automatically updated with master branch progress, through GitHub Actions configured in directory .github/workflows/.
 ### 'build/standard' :
 Main build branch, containing all features and fixes considered as the maintained standard set.  
@@ -77,7 +77,7 @@ Update master branch with SF2RE output and txt documentations.
 ### Creating a new game project :
 Fork the repository, and then start project by creating a new branch from build/standard branch content.
 ### Creating a new patch :
-Fork the repository, and create a new branch from master branch content.
-Declare optional patch in disasm/sf2patches.asm.
-The patch can then be merged into a target build branch to be combined with other patches for future projects.
+Fork the repository, and create a new branch from master branch content.  
+Declare optional patch in disasm/sf2patches.asm.  
+The patch can then be merged into a target build branch to be combined with other patches for future projects.  
 Several patches can be stored in the same branch, either when necessary for patch combination management, or when they simply form a functionally coherent set.

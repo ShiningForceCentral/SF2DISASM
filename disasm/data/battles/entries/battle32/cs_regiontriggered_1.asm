@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle32\cs_regiontriggered_1.asm :
 ; 0x4CD10..0x4CDB4 : Region-activated cutscene for battle 32
-rbcs_battle32:  textCursor $B21
+rbcs_battle32:  textCursor 2849
                 executeSubroutine csub_4CD56
                 cameraSpeed $38
                 setCameraEntity ALLY_JARO
@@ -17,7 +17,7 @@ rbcs_battle32:  textCursor $B21
                 setFacing ALLY_JARO,DOWN
                 nextSingleText $0,ALLY_JARO ; "Hey, Granseal guys!{N}I'm on your side from now{N}on! OK?{W1}"
                 joinForceAI ALLY_JARO,$FFFF ; 0054 JOIN FORCE WITH AI
-                setF $182               ; Set during battle 32, after Jaro switches sides
+                setF 386                ; Set during battle 32, after Jaro switches sides
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================

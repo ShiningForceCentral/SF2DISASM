@@ -30,7 +30,7 @@ GetAllyMapSprite:
                 
                 cmpi.b  #ALLY_ROHDE,d0  ; Rhode !
                 bne.s   @GetMapSpriteForClass
-                chkFlg  $B              ; Rohde joined
+                chkFlg  11              ; Rohde joined
                 bne.s   @GetMapSpriteForClass
                 move.w  #MAPSPRITE_NPC_ROHDE,d4
                 bra.w   @Done           ; Rhode hasn't joined yet, so use his NPC sprite

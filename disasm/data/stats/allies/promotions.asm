@@ -1,9 +1,11 @@
 
 ; ASM FILE data\stats\allies\promotions.asm :
 ; 0x21046..0x21072 : Promotions
-Promotions:     ; promotionSection enum Classes : CLASS_*
-; promotionItems   enum Items : ITEM_*
-    
+tbl_Promotions: 
+; Syntax        promotionSection [CLASS_]index,..[CLASS_]index
+;               
+;               promotionItems   [ITEM_]index,..[ITEM_]index
+                
                 promotionSection &      ; Regular base classes
                     SDMN, KNTE, WARR, MAGE, PRST, ACHR, BDMN, WFMN, RNGR, PHNK, THIF, TORT
                     

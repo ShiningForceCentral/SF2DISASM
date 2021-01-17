@@ -24,8 +24,8 @@ ms_map38_EntityEvents:
 Map38_EntityEvent0:
                 
                  
-                txt     $859            ; "Welcome to Roft.{W2}"
-                txt     $85A            ; "Every peaceful person is{N}welcome!{W1}"
+                txt     2137            ; "Welcome to Roft.{W2}"
+                txt     2138            ; "Every peaceful person is{N}welcome!{W1}"
                 rts
 
     ; End of function Map38_EntityEvent0
@@ -36,7 +36,7 @@ Map38_EntityEvent0:
 Map38_EntityEvent1:
                 
                  
-                txt     $85B            ; "Mr. Petro and Mr. Paseran{N}came from the south.{W1}"
+                txt     2139            ; "Mr. Petro and Mr. Paseran{N}came from the south.{W1}"
                 rts
 
     ; End of function Map38_EntityEvent1
@@ -47,7 +47,7 @@ Map38_EntityEvent1:
 Map38_EntityEvent2:
                 
                  
-                txt     $85C            ; "{NAME;26}, are you OK?{N}You were captured by the{N}devils!{W1}"
+                txt     2140            ; "{NAME;26}, are you OK?{N}You were captured by the{N}devils!{W1}"
                 rts
 
     ; End of function Map38_EntityEvent2
@@ -58,7 +58,7 @@ Map38_EntityEvent2:
 Map38_EntityEvent3:
                 
                  
-                txt     $85D            ; "The devils kidnapped{N}Mr. Petro and stole the{N}Nazca Ship.{W1}"
+                txt     2141            ; "The devils kidnapped{N}Mr. Petro and stole the{N}Nazca Ship.{W1}"
                 rts
 
     ; End of function Map38_EntityEvent3
@@ -69,9 +69,9 @@ Map38_EntityEvent3:
 Map38_EntityEvent4:
                 
                  
-                txt     $85E            ; "Mr. Paseran came here{N}through the tunnel in the{N}south.{W2}"
-                txt     $85F            ; "We've been told that devils{N}live there.{W2}"
-                txt     $860            ; "And we have seen many{N}devils here since he came{N}to Roft.{W1}"
+                txt     2142            ; "Mr. Paseran came here{N}through the tunnel in the{N}south.{W2}"
+                txt     2143            ; "We've been told that devils{N}live there.{W2}"
+                txt     2144            ; "And we have seen many{N}devils here since he came{N}to Roft.{W1}"
                 rts
 
     ; End of function Map38_EntityEvent4
@@ -82,8 +82,8 @@ Map38_EntityEvent4:
 Map38_EntityEvent5:
                 
                  
-                txt     $861            ; "Red Baron is a cruel killer.{W2}"
-                txt     $862            ; "He has smeared his armor with{N}the blood of his enemies.{W1}"
+                txt     2145            ; "Red Baron is a cruel killer.{W2}"
+                txt     2146            ; "He has smeared his armor with{N}the blood of his enemies.{W1}"
                 rts
 
     ; End of function Map38_EntityEvent5
@@ -94,9 +94,9 @@ Map38_EntityEvent5:
 Map38_EntityEvent6:
                 
                  
-                txt     $863            ; "Do you know of Mithril?{W2}"
-                txt     $864            ; "Mithril weapons are awfully{N}strong.{W2}"
-                txt     $865            ; "They may help you in your{N}battles.{W1}"
+                txt     2147            ; "Do you know of Mithril?{W2}"
+                txt     2148            ; "Mithril weapons are awfully{N}strong.{W2}"
+                txt     2149            ; "They may help you in your{N}battles.{W1}"
                 rts
 
     ; End of function Map38_EntityEvent6
@@ -107,8 +107,8 @@ Map38_EntityEvent6:
 Map38_EntityEvent7:
                 
                  
-                txt     $866            ; "We were able to find Mithril{N}on Grans before.{W2}"
-                txt     $867            ; "The Dwarven Blacksmith lives{N}in Grans Forest.{W1}"
+                txt     2150            ; "We were able to find Mithril{N}on Grans before.{W2}"
+                txt     2151            ; "The Dwarven Blacksmith lives{N}in Grans Forest.{W1}"
                 rts
 
     ; End of function Map38_EntityEvent7
@@ -119,7 +119,7 @@ Map38_EntityEvent7:
 Map38_EntityEvent8:
                 
                  
-                txt     $868            ; "Nobody but the Dwarven{N}Blacksmith can work with{N}Mithril.{W1}"
+                txt     2152            ; "Nobody but the Dwarven{N}Blacksmith can work with{N}Mithril.{W1}"
                 rts
 
     ; End of function Map38_EntityEvent8
@@ -130,37 +130,37 @@ Map38_EntityEvent8:
 Map38_EntityEvent9:
                 
                  
-                chkFlg  $38E            ; Set after the initial scene on entering Roft (where the guy thinks you're Galam)
+                chkFlg  910             ; Set after the initial scene on entering Roft (where the guy thinks you're Galam)
                 beq.s   return_5DC54
-                chkFlg  $102            ; TEMP FLAG #02
+                chkFlg  258             ; TEMP FLAG #02
                 beq.s   byte_5DC34      
-                chkFlg  $38F            ; Set after the Petro death scene in Roft
+                chkFlg  911             ; Set after the Petro death scene in Roft
                 beq.s   loc_5DC32
-                chkFlg  $100            ; TEMP FLAG #00
+                chkFlg  256             ; TEMP FLAG #00
                 bne.s   byte_5DC2E      
-                txt     $871            ; "(Sob...sob...){N}He's gone....{W2}"
-                txt     $872            ; "We never had a chance to fly{N}in the Nazca Ship!{W1}"
-                setFlg  $100            ; TEMP FLAG #00
+                txt     2161            ; "(Sob...sob...){N}He's gone....{W2}"
+                txt     2162            ; "We never had a chance to fly{N}in the Nazca Ship!{W1}"
+                setFlg  256             ; TEMP FLAG #00
                 bra.s   loc_5DC32
 byte_5DC2E:
                 
-                txt     $871            ; "(Sob...sob...){N}He's gone....{W2}"
+                txt     2161            ; "(Sob...sob...){N}He's gone....{W2}"
 loc_5DC32:
                 
                 bra.s   return_5DC54
 byte_5DC34:
                 
-                chkFlg  $38F            ; Set after the Petro death scene in Roft
+                chkFlg  911             ; Set after the Petro death scene in Roft
                 beq.s   return_5DC54
-                chkFlg  $100            ; TEMP FLAG #00
+                chkFlg  256             ; TEMP FLAG #00
                 bne.s   byte_5DC50      
-                txt     $875            ; "The Nazca Ship crashed?{W1}"
-                txt     $876            ; "I hope Petro gets on the{N}Nazca Ship in the great{N}beyond.{W1}"
-                setFlg  $100            ; TEMP FLAG #00
+                txt     2165            ; "The Nazca Ship crashed?{W1}"
+                txt     2166            ; "I hope Petro gets on the{N}Nazca Ship in the great{N}beyond.{W1}"
+                setFlg  256             ; TEMP FLAG #00
                 bra.w   return_5DC54
 byte_5DC50:
                 
-                txt     $875            ; "The Nazca Ship crashed?{W1}"
+                txt     2165            ; "The Nazca Ship crashed?{W1}"
 return_5DC54:
                 
                 rts
@@ -173,37 +173,37 @@ return_5DC54:
 Map38_EntityEvent10:
                 
                  
-                chkFlg  $38E            ; Set after the initial scene on entering Roft (where the guy thinks you're Galam)
+                chkFlg  910             ; Set after the initial scene on entering Roft (where the guy thinks you're Galam)
                 beq.s   return_5DCA2
-                chkFlg  $102            ; TEMP FLAG #02
+                chkFlg  258             ; TEMP FLAG #02
                 beq.s   byte_5DC82      
-                chkFlg  $38F            ; Set after the Petro death scene in Roft
+                chkFlg  911             ; Set after the Petro death scene in Roft
                 beq.s   loc_5DC80
-                chkFlg  $101            ; TEMP FLAG #01
+                chkFlg  257             ; TEMP FLAG #01
                 bne.s   byte_5DC7C      
-                txt     $873            ; "The devils killed Petro.{N}They lied to us!{W2}"
-                txt     $874            ; "How cruel they are!{W1}"
-                setFlg  $101            ; TEMP FLAG #01
+                txt     2163            ; "The devils killed Petro.{N}They lied to us!{W2}"
+                txt     2164            ; "How cruel they are!{W1}"
+                setFlg  257             ; TEMP FLAG #01
                 bra.s   loc_5DC80
 byte_5DC7C:
                 
-                txt     $873            ; "The devils killed Petro.{N}They lied to us!{W2}"
+                txt     2163            ; "The devils killed Petro.{N}They lied to us!{W2}"
 loc_5DC80:
                 
                 bra.s   return_5DCA2
 byte_5DC82:
                 
-                chkFlg  $38F            ; Set after the Petro death scene in Roft
+                chkFlg  911             ; Set after the Petro death scene in Roft
                 beq.s   return_5DCA2
-                chkFlg  $101            ; TEMP FLAG #01
+                chkFlg  257             ; TEMP FLAG #01
                 bne.s   byte_5DC9E      
-                txt     $877            ; "The devils lied, and then{N}killed Petro.{W2}"
-                txt     $878            ; "Please defeat the devils for{N}him!{W1}"
-                setFlg  $101            ; TEMP FLAG #01
+                txt     2167            ; "The devils lied, and then{N}killed Petro.{W2}"
+                txt     2168            ; "Please defeat the devils for{N}him!{W1}"
+                setFlg  257             ; TEMP FLAG #01
                 bra.w   return_5DCA2
 byte_5DC9E:
                 
-                txt     $877            ; "The devils lied, and then{N}killed Petro.{W2}"
+                txt     2167            ; "The devils lied, and then{N}killed Petro.{W2}"
 return_5DCA2:
                 
                 rts
@@ -248,7 +248,7 @@ Map38_EntityEvent13:
 Map38_EntityEvent14:
                 
                  
-                txt     $869            ; "Huh!  Huh!{W1}"
+                txt     2153            ; "Huh!  Huh!{W1}"
                 rts
 
     ; End of function Map38_EntityEvent14

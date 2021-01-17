@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle33\cs_beforebattle.asm :
 ; 0x4CF0C..0x4D09A : Cutscene before battle 33
-bbcs_33:        textCursor $B32
+bbcs_33:        textCursor 2866
                 loadMapFadeIn MAP_MOUN,22,29
                 loadMapEntities ce_4D048
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -78,10 +78,10 @@ bbcs_33:        textCursor $B32
                 nextSingleText $0,FOLLOWER_B ; "{LEADER}, {NAME;22} will be{N}a great asset.{W1}"
                 joinBatParty ALLY_FRAYJA
                 executeSubroutine sub_4D078
-                textCursor $B3B
+                textCursor 2875
                 nextSingleText $0,FOLLOWER_B ; "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
-                setF $33F               ; Set after Frayja forces his way into the party just before the battle in Moun
-                clearF $52              ; Frayja is a follower
+                setF 831                ; Set after Frayja forces his way into the party just before the battle in Moun
+                clearF 82               ; Frayja is a follower
                 csc_end
 ce_4D048:       mainEntity 26,37,LEFT
                 entity 27,38,LEFT,ALLY_PETER,eas_Init
@@ -97,10 +97,10 @@ sub_4D078:
                 
                 cmpi.w  #$FFFF,(TEXT_NAME_INDEX_1).l
                 beq.s   return_4D098
-                jsr     (HideTextBox).l 
+                jsr     (HideTextBox).l
                 move.w  #$B3A,d0
                 jsr     (DisplayText).l 
-                jsr     (HideTextBox).l 
+                jsr     (HideTextBox).l
 return_4D098:
                 
                 rts

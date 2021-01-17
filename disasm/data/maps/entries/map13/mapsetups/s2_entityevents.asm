@@ -22,15 +22,15 @@ ms_map13_EntityEvents:
 Map13_EntityEvent1:
                 
                  
-                chkFlg  $100            ; TEMP FLAG #00
+                chkFlg  256             ; TEMP FLAG #00
                 bne.s   byte_58068      
-                txt     $58C            ; "How did you come to{N}Polca Village?{W2}"
-                txt     $58D            ; "Through the cave?{N}Nobody has come to this{N}village since...{W2}"
-                setFlg  $100            ; TEMP FLAG #00
+                txt     1420            ; "How did you come to{N}Polca Village?{W2}"
+                txt     1421            ; "Through the cave?{N}Nobody has come to this{N}village since...{W2}"
+                setFlg  256             ; TEMP FLAG #00
 byte_58068:
                 
-                txt     $58E            ; "Oh, you defeated that{N}hobgoblin?  Wow!{W2}"
-                txt     $58F            ; "Now we can use that tunnel{N}to travel between Polca and{N}the wilderness area!{W1}"
+                txt     1422            ; "Oh, you defeated that{N}hobgoblin?  Wow!{W2}"
+                txt     1423            ; "Now we can use that tunnel{N}to travel between Polca and{N}the wilderness area!{W1}"
                 rts
 
     ; End of function Map13_EntityEvent1
@@ -41,7 +41,7 @@ byte_58068:
 Map13_EntityEvent2:
                 
                  
-                txt     $590            ; "Breathe deeply....{W2}{N}Wonderful air, huh?{W1}"
+                txt     1424            ; "Breathe deeply....{W2}{N}Wonderful air, huh?{W1}"
                 rts
 
     ; End of function Map13_EntityEvent2
@@ -52,14 +52,14 @@ Map13_EntityEvent2:
 Map13_EntityEvent3:
                 
                  
-                chkFlg  $2C7            ; Set after you dislodge the turtle/fairy in Polca, also set after you speak to Volcanon
+                chkFlg  711             ; Set after you dislodge the turtle/fairy in Polca, also set after you speak to Volcanon
                 bne.s   byte_5808A      
                 script  cs_58512
-                setFlg  $2C7            ; Set after you dislodge the turtle/fairy in Polca, also set after you speak to Volcanon
+                setFlg  711             ; Set after you dislodge the turtle/fairy in Polca, also set after you speak to Volcanon
                 bra.s   return_5808E
 byte_5808A:
                 
-                txt     $591            ; "In ancient times, there{N}were magic tunnels.{W2}{N}People traveled easily{N}through the tunnels.{W1}"
+                txt     1425            ; "In ancient times, there{N}were magic tunnels.{W2}{N}People traveled easily{N}through the tunnels.{W1}"
 return_5808E:
                 
                 rts
@@ -94,15 +94,15 @@ Map13_EntityEvent5:
 Map13_EntityEvent6:
                 
                  
-                chkFlg  $2C6            ; Set after Oddler wanders down from the mountain
+                chkFlg  710             ; Set after Oddler wanders down from the mountain
                 bne.s   byte_580B8      
-                txt     $592            ; "To the east is the sacred{N}area of Volcanon.{W1}"
+                txt     1426            ; "To the east is the sacred{N}area of Volcanon.{W1}"
                 bra.s   return_580C4
 byte_580B8:
                 
-                txt     $5B9            ; "He came down from the{N}mountain....{W2}"
-                txt     $5BA            ; "He's not from Polca, or{N}Bedoe....{W2}"
-                txt     $5BB            ; "Where did he come from?{W1}"
+                txt     1465            ; "He came down from the{N}mountain....{W2}"
+                txt     1466            ; "He's not from Polca, or{N}Bedoe....{W2}"
+                txt     1467            ; "Where did he come from?{W1}"
 return_580C4:
                 
                 rts
@@ -125,7 +125,7 @@ Map13_EntityEvent7:
 Map13_EntityEvent8:
                 
                  
-                txt     $593            ; "Mt. Volcano is home to{N}beastmen.{W2}{N}We were a warlike tribe, but{N}we've almost forgotten how{N}to fight.{W1}"
+                txt     1427            ; "Mt. Volcano is home to{N}beastmen.{W2}{N}We were a warlike tribe, but{N}we've almost forgotten how{N}to fight.{W1}"
                 rts
 
     ; End of function Map13_EntityEvent8
@@ -136,7 +136,7 @@ Map13_EntityEvent8:
 Map13_EntityEvent9:
                 
                  
-                txt     $594            ; "Young men these days are{N}lucky!  I wish I was young{N}again!{W1}"
+                txt     1428            ; "Young men these days are{N}lucky!  I wish I was young{N}again!{W1}"
                 rts
 
     ; End of function Map13_EntityEvent9
@@ -147,23 +147,23 @@ Map13_EntityEvent9:
 Map13_EntityEvent10:
                 
                  
-                chkFlg  $2C6            ; Set after Oddler wanders down from the mountain
+                chkFlg  710             ; Set after Oddler wanders down from the mountain
                 bne.s   byte_580FC      
-                chkFlg  $101            ; TEMP FLAG #01
+                chkFlg  257             ; TEMP FLAG #01
                 bne.s   byte_580F2      
                 script  cs_58116
-                setFlg  $101            ; TEMP FLAG #01
+                setFlg  257             ; TEMP FLAG #01
                 bra.s   loc_580FA
 byte_580F2:
                 
-                txt     $597            ; "Whoa!  Mt. Volcano erupted!{W2}"
-                txt     $598            ; "It's an evil omen.{W1}"
+                txt     1431            ; "Whoa!  Mt. Volcano erupted!{W2}"
+                txt     1432            ; "It's an evil omen.{W1}"
 loc_580FA:
                 
                 bra.s   return_58100
 byte_580FC:
                 
-                txt     $5B7            ; "Oh, this is serious!{N}I hope he survives the night.{W1}"
+                txt     1463            ; "Oh, this is serious!{N}I hope he survives the night.{W1}"
 return_58100:
                 
                 rts
@@ -176,7 +176,7 @@ return_58100:
 Map13_EntityEvent11:
                 
                  
-                txt     $599            ; "Clank!  Clank!{N}All of our weapons are made{N}by me!{W2}{N}But, who uses them in this{N}peaceful country?{W1}"
+                txt     1433            ; "Clank!  Clank!{N}All of our weapons are made{N}by me!{W2}{N}But, who uses them in this{N}peaceful country?{W1}"
                 rts
 
     ; End of function Map13_EntityEvent11
@@ -187,7 +187,7 @@ Map13_EntityEvent11:
 Map13_EntityEvent0:
                 
                  
-                txt     $59A            ; "Hirsute?  'Cause I'm a{N}beastman.{W2}{N}I'm not hairy enough though.{N}I envy those hairy guys!{W1}"
+                txt     1434            ; "Hirsute?  'Cause I'm a{N}beastman.{W2}{N}I'm not hairy enough though.{N}I envy those hairy guys!{W1}"
                 rts
 
     ; End of function Map13_EntityEvent0
@@ -198,7 +198,7 @@ Map13_EntityEvent0:
 Map13_EntityEvent12:
                 
                  
-                txt     $5B8            ; "Ah...stop...no!{N}I don't want...to see....{N}My...head...aches....{W1}"
+                txt     1464            ; "Ah...stop...no!{N}I don't want...to see....{N}My...head...aches....{W1}"
                 rts
 
     ; End of function Map13_EntityEvent12
@@ -212,7 +212,7 @@ Map13_DefaultEntityEvent:
 
     ; End of function Map13_DefaultEntityEvent
 
-cs_58116:       textCursor $595
+cs_58116:       textCursor 1429
                 nextSingleText $0,137   ; "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
                 csWait 30
                 setQuake 32770

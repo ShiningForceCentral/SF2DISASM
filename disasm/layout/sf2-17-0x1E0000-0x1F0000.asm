@@ -8,11 +8,12 @@
                 incbin "data/sound/pcmbank1.bin"
                 incbin "data/sound/yminst.bin"
 SoundDriver:    incbin "data/sound/sounddriver.bin"
-p_StatGrowthCurves:
-                dc.l StatGrowthCurves   
+p_tbl_StatGrowthCurves:
+                dc.l tbl_StatGrowthCurves
 p_pt_AllyStats: dc.l pt_AllyStats       
-p_AllyStartDefs:dc.l AllyStartDefs      
-p_ClassDefs:    dc.l ClassDefs          
+p_tbl_AllyStartDefs:
+                dc.l tbl_AllyStartDefs  
+p_tbl_ClassDefs:dc.l tbl_ClassDefs      
 p_JewelEndScreenTiles:
                 dc.l JewelsEndScreenTiles
 p_JewelEndScreenLayout:

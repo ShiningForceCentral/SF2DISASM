@@ -66,7 +66,7 @@ cs_5CB34:       setBlocksVar 16,53,1,1,15,54
                 setBlocks 16,53,1,1,14,48
                 csWait 1
                 csc_end
-cs_5CBB4:       textCursor $1053
+cs_5CBB4:       textCursor 4179
                 nextSingleText $FF,255  ; "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
                 setSprite ALLY_CLAUDE,ALLY_CLAUDE
                 startEntity ALLY_CLAUDE
@@ -181,7 +181,7 @@ cs_5CCF6:       entityFlashWhite ALLY_BOWIE,$32
                 entityFlashWhite ALLY_BOWIE,$32
                 setActscriptWait ALLY_BOWIE,eas_Init
                 startEntity ALLY_BOWIE
-                jumpIfFlagSet $1D,cs_5CDDA ; Claude joined
+                jumpIfFlagSet 29,cs_5CDDA ; Claude joined
                 setSprite ALLY_CLAUDE,MAPSPRITE_POSE3
                 setFacing ALLY_CLAUDE,DOWN
                 stopEntity ALLY_CLAUDE

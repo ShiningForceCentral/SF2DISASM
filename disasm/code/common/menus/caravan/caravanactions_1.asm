@@ -64,7 +64,7 @@ sub_22028:
                 tst.w   d1
                 bne.s   loc_22070
                 move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $13             ; "{NAME} is dead.{N}Are you sure?"
+                txt     19              ; "{NAME} is dead.{N}Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.w   loc_220FE
@@ -106,14 +106,14 @@ loc_220DC:
                 bra.s   loc_220E6
 byte_220DE:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
 loc_220E6:
                 
                 bra.s   loc_220F2
 byte_220E8:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -166,7 +166,7 @@ loc_22142:
                 bra.s   loc_2214E
 byte_22144:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -242,7 +242,7 @@ Caravan_DescribeItem:
                 move.w  d2,-4(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_222E0      
-                chkFlg  $46             ; Astral is a follower
+                chkFlg  70              ; Astral is a follower
                 bne.s   loc_221BE
                 moveq   #PORTRAIT_ROHDE,d0
                 bra.s   loc_221C0
@@ -257,35 +257,35 @@ loc_221C0:
                 bsr.w   DisplaySpecialCaravanDescription
                 bne.w   loc_222A8
                 move.w  -4(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 tst.w   d2
                 bne.s   loc_221E8
-                txt     $5C             ; "It's a tool.{W2}"
+                txt     92              ; "It's a tool.{W2}"
                 bra.s   loc_221F8
 loc_221E8:
                 
                 cmpi.w  #1,d2
                 bne.s   byte_221F4      
-                txt     $5A             ; "It's a weapon.{W2}"
+                txt     90              ; "It's a weapon.{W2}"
                 bra.s   loc_221F8
 byte_221F4:
                 
-                txt     $5B             ; "It's a ring.{W2}"
+                txt     91              ; "It's a ring.{W2}"
 loc_221F8:
                 
                 move.w  -4(a6),d1
                 jsr     j_GetItemDefAddress
                 cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
                 beq.s   byte_22210      
-                txt     $5D             ; "It has a special effect when{N}used in battle.{W2}"
+                txt     93              ; "It has a special effect when{N}used in battle.{W2}"
                 bra.s   loc_22214
 byte_22210:
                 
-                txt     $5E             ; "It has no effect in battle.{W2}"
+                txt     94              ; "It has no effect in battle.{W2}"
 loc_22214:
                 
                 move.w  -4(a6),d1
-                jsr     j_GetItemType
+                jsr     j_GetEquipmentType
                 tst.w   d2
                 beq.w   loc_222A8
                 cmpi.w  #ITEM_POWER_RING,d1
@@ -298,7 +298,7 @@ loc_22214:
                 beq.w   byte_222A4      
                 move.w  -4(a6),d1
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $60             ; "The {ITEM} is for{N}"
+                txt     96              ; "The {ITEM} is for{N}"
                 jsr     j_UpdateForce
                 move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
                 subq.w  #1,d7
@@ -311,48 +311,48 @@ loc_22266:
                 jsr     j_IsWeaponOrRingEquippable
                 bcc.s   loc_2228E
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
-                txt     $62             ; "{DICT}{NAME},"
+                txt     98              ; "{DICT}{NAME},"
                 addq.w  #1,d6
                 cmpi.w  #1,d6
                 bne.s   loc_22284
-                txt     $63             ; "{N}"
+                txt     99              ; "{N}"
 loc_22284:
                 
                 cmpi.w  #4,d6
                 bne.s   loc_2228E
-                txt     $63             ; "{N}"
+                txt     99              ; "{N}"
 loc_2228E:
                 
                 dbf     d7,loc_22266
                 tst.w   d6
                 bne.s   byte_2229C      
-                txt     $61             ; "nobody so far.{W2}"
+                txt     97              ; "nobody so far.{W2}"
                 bra.s   loc_222A0
 byte_2229C:
                 
-                txt     $64             ; "to equip.{W2}"
+                txt     100             ; "to equip.{W2}"
 loc_222A0:
                 
                 bra.w   loc_222A8
 byte_222A4:
                 
-                txt     $5F             ; "Everybody can equip it.{W2}"
+                txt     95              ; "Everybody can equip it.{W2}"
 loc_222A8:
                 
                 move.w  -4(a6),d1
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   loc_222C0
-                txt     $66             ; "You can't sell it at a shop.{W2}"
+                txt     102             ; "You can't sell it at a shop.{W2}"
                 bra.s   byte_222D4
 loc_222C0:
                 
                 clr.l   d1
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d1
-                mulu.w  #ITEMENTRY_SELLPRICE_MULTIPLIER,d1
-                lsr.l   #ITEMENTRY_SELLPRICE_BITSHIFTRIGHT,d1
+                mulu.w  #ITEMSELLPRICE_MULTIPLIER,d1
+                lsr.l   #ITEMSELLPRICE_BITSHIFTRIGHT,d1
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $65             ; "It brings {#} gold coins{N}at a shop.{W2}"
+                txt     101             ; "It brings {#} gold coins{N}at a shop.{W2}"
 byte_222D4:
                 
                 clsTxt
@@ -360,7 +360,7 @@ byte_222D4:
                 bra.s   loc_222EA
 byte_222E0:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -397,7 +397,7 @@ Caravan_StoreItem:
                 move.w  #MESSAGE_CARAVAN_STORE_WHOSE_ITEM,d1 ; "Store whose item?{W2}"
                 bsr.w   ChooseCaravanPortrait
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-2(a6)
                 move.w  d1,-6(a6)
@@ -418,7 +418,7 @@ Caravan_StoreItem:
                 bra.s   loc_22374
 byte_2236A:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 loc_22374:
@@ -463,7 +463,7 @@ Caravan_PassItem:
                 move.w  #MESSAGE_CARAVAN_PASS_THE_ITEM_TO_WHOM,d1 ; "Pass the {ITEM}{N}to whom?{W2}"
                 bsr.w   ChooseCaravanPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
-                move.w  -4(a6),((word_FFB13A-$1000000)).w
+                move.w  -4(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-8(a6)
                 move.w  d1,-$C(a6)
@@ -510,7 +510,7 @@ loc_2247C:
                 bra.s   loc_22488
 byte_2247E:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -554,7 +554,7 @@ Caravan_DiscardItem:
                 cmpi.w  #$FFFF,-4(a6)
                 beq.s   byte_2251E      
                 move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $2C             ; "The {ITEM} will be{N}discarded.  Are you sure?"
+                txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.s   byte_22518      
@@ -573,13 +573,13 @@ loc_22508:
                 bra.s   loc_2251C
 byte_22518:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
 loc_2251C:
                 
                 bra.s   loc_22528
 byte_2251E:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -654,7 +654,7 @@ loc_22574:
                 moveq   #0,d1
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-2(a6)
                 move.w  d1,-6(a6)
@@ -662,7 +662,7 @@ loc_22574:
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_225FA      
                 move.w  -4(a6),d1
-                jsr     sub_229CA
+                jsr     FindUsableOutsideBattleItem
                 tst.w   d2
                 bne.s   loc_225EA
                 move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -680,7 +680,7 @@ loc_22574:
                 bra.s   loc_225E8
 byte_225E4:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
 loc_225E8:
                 
                 bra.s   loc_225F8
@@ -694,7 +694,7 @@ loc_225F8:
                 bra.s   loc_22604
 byte_225FA:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -723,7 +723,7 @@ loc_22618:
                 moveq   #0,d1
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-2(a6)
                 move.w  d1,-6(a6)
@@ -736,7 +736,7 @@ loc_22618:
                 move.w  #$1D,d1
                 bsr.w   ChooseCaravanPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
-                move.w  -4(a6),((word_FFB13A-$1000000)).w
+                move.w  -4(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-8(a6)
                 move.w  d1,-$C(a6)
@@ -800,13 +800,13 @@ loc_22758:
                 bra.s   loc_2275E
 byte_2275A:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
 loc_2275E:
                 
                 bra.s   loc_2276A
 byte_22760:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -835,11 +835,11 @@ loc_2277E:
                 moveq   #0,d1
                 bsr.w   sub_228D8
                 move.b  #3,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_227A6
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -868,7 +868,7 @@ loc_227B8:
                 moveq   #0,d1
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     sub_10044
                 move.w  d0,-2(a6)
                 move.w  d1,-6(a6)
@@ -881,7 +881,7 @@ loc_227B8:
                 jsr     sub_2299E
                 bcs.w   loc_22858
                 move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $2C             ; "The {ITEM} will be{N}discarded.  Are you sure?"
+                txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.s   byte_22844      
@@ -901,14 +901,14 @@ loc_22834:
                 bra.s   loc_2284C
 byte_22844:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
 loc_2284C:
                 
                 bra.s   loc_22858
 byte_2284E:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -934,7 +934,7 @@ DisplaySpecialCaravanDescription:
                 
                 movem.l d0-d1/a0,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                lea     SpecialCaravanDescriptions(pc), a0
+                lea     tbl_SpecialCaravanDescriptions(pc), a0
 loc_22870:
                 
                 cmpi.w  #$FFFF,(a0)

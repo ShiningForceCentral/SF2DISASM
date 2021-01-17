@@ -10,11 +10,11 @@ ms_map34_ZoneEvents:
 Map34_ZoneEvent0:
                 
                  
-                chkFlg  $310            ; Set after the event in the basement of Creed's Mansion
+                chkFlg  784             ; Set after the event in the basement of Creed's Mansion
                 bne.s   Map34_DefaultZoneEvent
                 script  cs_5B6C0
-                setFlg  $310            ; Set after the event in the basement of Creed's Mansion
-                setFlg  $322            ; Set after the event in the basement of Creed's Mansion
+                setFlg  784             ; Set after the event in the basement of Creed's Mansion
+                setFlg  802             ; Set after the event in the basement of Creed's Mansion
 Map34_DefaultZoneEvent:
                 
                 rts

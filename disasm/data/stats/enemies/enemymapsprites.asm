@@ -3,111 +3,111 @@
 ; 0x44AA4..0x44B4A : Enemy map sprite indexes table
 tbl_EnemyMapSprites:
                 
-; Syntax        mapSprite index (enum Mapsprites : MAPSPRITE_*)
+; Syntax        mapSprite [MAPSPRITE_]index
                 
-                mapSprite OOZE          ; OOZE
-                mapSprite HUGE_RAT      ; HUGE RAT
-                mapSprite GALAM_SOLDIER ; GALAM SOLDIER
-                mapSprite GALAM_KNIGHT  ; GALAM KNIGHT
-                mapSprite GOBLIN        ; GOBLIN
-                mapSprite GREEN_OOZE    ; GREEN OOZE
-                mapSprite DARK_DWARF    ; DARK DWARF
-                mapSprite HOBGOBLIN     ; HOBGOBLIN
-                mapSprite ZOMBIE        ; ZOMBIE
-                mapSprite GOLEM         ; GOLEM
-                mapSprite KRAKEN_LEG    ; KRAKEN LEG
-                mapSprite SOULSOWER     ; SOULSOWER
-                mapSprite ORC           ; ORC
-                mapSprite PAWN          ; PAWN
-                mapSprite KNIGHT        ; KNIGHT
-                mapSprite RAT           ; RAT
-                mapSprite BUBBLING_OOZE ; BUBBLING OOZE
-                mapSprite SKELETON      ; SKELETON
-                mapSprite DARK_SOLDIER  ; DARK SOLDIER
-                mapSprite LIZARDMAN     ; LIZARDMAN
-                mapSprite WORM          ; WORM
-                mapSprite DARK_KNIGHT   ; DARK KNIGHT
-                mapSprite ORC_LORD      ; ORC LORD
-                mapSprite DEVIL_SOLDIER ; DEVIL SOLDIER
-                mapSprite CERBERUS      ; CERBERUS
-                mapSprite MUD_MAN       ; MUD MAN
-                mapSprite DRAGONEWT     ; DRAGONEWT
-                mapSprite PURPLE_WORM   ; PURPLE WORM
-                mapSprite EXECUTIONER   ; EXECUTIONER
-                mapSprite HELL_HOUND    ; HELL HOUND
-                mapSprite MINOTAUR      ; MINOTAUR
-                mapSprite CYCLOPS       ; CYCLOPS
-                mapSprite BURST_ROCK    ; BURST ROCK
-                mapSprite HYDRA         ; HYDRA
-                mapSprite CHAOS_WARRIOR ; CHAOS WARRIOR
-                mapSprite REAPER        ; REAPER
-                mapSprite EVIL_BEAST    ; EVIL BEAST
-                mapSprite PYROHYDRA     ; PYROHYDRA
-                mapSprite ZEON_GUARD    ; ZEON GUARD
-                mapSprite GIZMO         ; GIZMO
-                mapSprite HUGE_BAT      ; HUGE BAT
-                mapSprite VAMPIRE_BAT   ; VAMPIRE BAT
-                mapSprite EVIL_CLOUD    ; EVIL CLOUD
-                mapSprite GARGOYLE      ; GARGOYLE
-                mapSprite HARPY         ; HARPY
-                mapSprite LESSER_DEMON  ; LESSER DEMON
-                mapSprite WYVERN        ; WYVERN
-                mapSprite HARPY_QUEEN   ; HARPY QUEEN
-                mapSprite PEGASUS_KNIGHT ; PEGASUS KNIGHT
-                mapSprite GRIFFIN       ; GRIFFIN
-                mapSprite MIST_DEMON    ; MIST DEMON
-                mapSprite WHITE_DRAGON  ; WHITE DRAGON
-                mapSprite DEMON         ; DEMON
-                mapSprite CHAOS_DRAGON  ; CHAOS DRAGON
-                mapSprite DEVIL_GRIFFIN ; DEVIL GRIFFIN
-                mapSprite ARCH_DEMON    ; ARCH DEMON
-                mapSprite GALAM_ARCHER  ; GALAM ARCHER
-                mapSprite HUNTER_GOBLIN ; HUNTER GOBLIN
-                mapSprite DEATH_ARCHER  ; DEATH ARCHER
-                mapSprite KRAKEN_ARM    ; KRAKEN ARM
-                mapSprite ARROW_LAUNCHER ; ARROW LAUNCHER
-                mapSprite ROOK          ; ROOK
-                mapSprite DARK_SNIPER   ; DARK SNIPER
-                mapSprite BOW_MASTER    ; BOW MASTER
-                mapSprite BOW_RIDER     ; BOW RIDER
-                mapSprite DARK_GUNNER   ; DARK GUNNER
-                mapSprite HORSEMAN      ; HORSEMAN
-                mapSprite GALAM_MAGE    ; GALAM MAGE
-                mapSprite WITCH         ; WITCH
-                mapSprite MASTER_MAGE   ; MASTER MAGE
-                mapSprite DARK_MADAM    ; DARK MADAM
-                mapSprite QUEEN         ; QUEEN
-                mapSprite WIZARD        ; WIZARD
-                mapSprite NECROMANCER   ; NECROMANCER
-                mapSprite CHAOS_WIZARD  ; CHAOS WIZARD
-                mapSprite DEMON_MASTER  ; DEMON MASTER
-                mapSprite DARK_CLERIC   ; DARK CLERIC
-                mapSprite DEATH_MONK    ; DEATH MONK
-                mapSprite BLACK_MONK    ; BLACK MONK
-                mapSprite HIGH_PRIEST   ; HIGH PRIEST
-                mapSprite BISHOP        ; EVIL BISHOP
-                mapSprite DARK_BISHOP   ; DARK BISHOP
-                mapSprite MASTER_MONK   ; MASTER MONK
-                mapSprite SHAMAN        ; SHAMAN
-                mapSprite EVIL_BISHOP   ; EVIL BISHOP
-                mapSprite BLUE_SHAMAN   ; BLUE SHAMAN
-                mapSprite DARK_SMOKE    ; DARK SMOKE
-                mapSprite KRAKEN        ; KRAKEN HEAD
-                mapSprite TAROS         ; TAROS
-                mapSprite KING          ; KING
-                mapSprite WILLARD       ; WILLARD
-                mapSprite ZALBARD       ; ZALBARD
-                mapSprite CAMEELA       ; CAMEELA
-                mapSprite PRISM_FLOWER  ; PRISM FLOWER
-                mapSprite RED_BARON     ; RED BARON
-                mapSprite GESHP         ; GESHP
-                mapSprite ODD_EYE       ; ODD EYE
-                mapSprite GALAM_EVIL    ; GALAM
-                mapSprite ZEON          ; ZEON
-                mapSprite JARO_SPECIAL  ; JAR
-                mapSprite MASTER_MAGE   ; MASTER MAGE
-                mapSprite NECROMANCER   ; NECROMANCER
-                mapSprite BLUE_SHAMAN   ; BLUE SHAMAN
+                mapSprite OOZE          ; 0: OOZE
+                mapSprite HUGE_RAT      ; 1: HUGE RAT
+                mapSprite GALAM_SOLDIER ; 2: GALAM SOLDIER
+                mapSprite GALAM_KNIGHT  ; 3: GALAM KNIGHT
+                mapSprite GOBLIN        ; 4: GOBLIN
+                mapSprite GREEN_OOZE    ; 5: GREEN OOZE
+                mapSprite DARK_DWARF    ; 6: DARK DWARF
+                mapSprite HOBGOBLIN     ; 7: HOBGOBLIN
+                mapSprite ZOMBIE        ; 8: ZOMBIE
+                mapSprite GOLEM         ; 9: GOLEM
+                mapSprite KRAKEN_LEG    ; 10: KRAKEN LEG
+                mapSprite SOULSOWER     ; 11: SOULSOWER
+                mapSprite ORC           ; 12: ORC
+                mapSprite PAWN          ; 13: PAWN
+                mapSprite KNIGHT        ; 14: KNIGHT
+                mapSprite RAT           ; 15: RAT
+                mapSprite BUBBLING_OOZE ; 16: BUBBLING OOZE
+                mapSprite SKELETON      ; 17: SKELETON
+                mapSprite DARK_SOLDIER  ; 18: DARK SOLDIER
+                mapSprite LIZARDMAN     ; 19: LIZARDMAN
+                mapSprite WORM          ; 20: WORM
+                mapSprite DARK_KNIGHT   ; 21: DARK KNIGHT
+                mapSprite ORC_LORD      ; 22: ORC LORD
+                mapSprite DEVIL_SOLDIER ; 23: DEVIL SOLDIER
+                mapSprite CERBERUS      ; 24: CERBERUS
+                mapSprite MUD_MAN       ; 25: MUD MAN
+                mapSprite DRAGONEWT     ; 26: DRAGONEWT
+                mapSprite PURPLE_WORM   ; 27: PURPLE WORM
+                mapSprite EXECUTIONER   ; 28: EXECUTIONER
+                mapSprite HELL_HOUND    ; 29: HELL HOUND
+                mapSprite MINOTAUR      ; 30: MINOTAUR
+                mapSprite CYCLOPS       ; 31: CYCLOPS
+                mapSprite BURST_ROCK    ; 32: BURST ROCK
+                mapSprite HYDRA         ; 33: HYDRA
+                mapSprite CHAOS_WARRIOR ; 34: CHAOS WARRIOR
+                mapSprite REAPER        ; 35: REAPER
+                mapSprite EVIL_BEAST    ; 36: EVIL BEAST
+                mapSprite PYROHYDRA     ; 37: PYROHYDRA
+                mapSprite ZEON_GUARD    ; 38: ZEON GUARD
+                mapSprite GIZMO         ; 39: GIZMO
+                mapSprite HUGE_BAT      ; 40: HUGE BAT
+                mapSprite VAMPIRE_BAT   ; 41: VAMPIRE BAT
+                mapSprite EVIL_CLOUD    ; 42: EVIL CLOUD
+                mapSprite GARGOYLE      ; 43: GARGOYLE
+                mapSprite HARPY         ; 44: HARPY
+                mapSprite LESSER_DEMON  ; 45: LESSER DEMON
+                mapSprite WYVERN        ; 46: WYVERN
+                mapSprite HARPY_QUEEN   ; 47: HARPY QUEEN
+                mapSprite PEGASUS_KNIGHT ; 48: PEGASUS KNIGHT
+                mapSprite GRIFFIN       ; 49: GRIFFIN
+                mapSprite MIST_DEMON    ; 50: MIST DEMON
+                mapSprite WHITE_DRAGON  ; 51: WHITE DRAGON
+                mapSprite DEMON         ; 52: DEMON
+                mapSprite CHAOS_DRAGON  ; 53: CHAOS DRAGON
+                mapSprite DEVIL_GRIFFIN ; 54: DEVIL GRIFFIN
+                mapSprite ARCH_DEMON    ; 55: ARCH DEMON
+                mapSprite GALAM_ARCHER  ; 56: GALAM ARCHER
+                mapSprite HUNTER_GOBLIN ; 57: HUNTER GOBLIN
+                mapSprite DEATH_ARCHER  ; 58: DEATH ARCHER
+                mapSprite KRAKEN_ARM    ; 59: KRAKEN ARM
+                mapSprite ARROW_LAUNCHER ; 60: ARROW LAUNCHER
+                mapSprite ROOK          ; 61: ROOK
+                mapSprite DARK_SNIPER   ; 62: DARK SNIPER
+                mapSprite BOW_MASTER    ; 63: BOW MASTER
+                mapSprite BOW_RIDER     ; 64: BOW RIDER
+                mapSprite DARK_GUNNER   ; 65: DARK GUNNER
+                mapSprite HORSEMAN      ; 66: HORSEMAN
+                mapSprite GALAM_MAGE    ; 67: GALAM MAGE
+                mapSprite WITCH         ; 68: WITCH
+                mapSprite MASTER_MAGE   ; 69: MASTER MAGE
+                mapSprite DARK_MADAM    ; 70: DARK MADAM
+                mapSprite QUEEN         ; 71: QUEEN
+                mapSprite WIZARD        ; 72: WIZARD
+                mapSprite NECROMANCER   ; 73: NECROMANCER
+                mapSprite CHAOS_WIZARD  ; 74: CHAOS WIZARD
+                mapSprite DEMON_MASTER  ; 75: DEMON MASTER
+                mapSprite DARK_CLERIC   ; 76: DARK CLERIC
+                mapSprite DEATH_MONK    ; 77: DEATH MONK
+                mapSprite BLACK_MONK    ; 78: BLACK MONK
+                mapSprite HIGH_PRIEST   ; 79: HIGH PRIEST
+                mapSprite BISHOP        ; 80: EVIL BISHOP
+                mapSprite DARK_BISHOP   ; 81: DARK BISHOP
+                mapSprite MASTER_MONK   ; 82: MASTER MONK
+                mapSprite SHAMAN        ; 83: SHAMAN
+                mapSprite EVIL_BISHOP   ; 84: EVIL BISHOP
+                mapSprite BLUE_SHAMAN   ; 85: BLUE SHAMAN
+                mapSprite DARK_SMOKE    ; 86: DARK SMOKE
+                mapSprite KRAKEN        ; 87: KRAKEN HEAD
+                mapSprite TAROS         ; 88: TAROS
+                mapSprite KING          ; 89: KING
+                mapSprite WILLARD       ; 90: WILLARD
+                mapSprite ZALBARD       ; 91: ZALBARD
+                mapSprite CAMEELA       ; 92: CAMEELA
+                mapSprite PRISM_FLOWER  ; 93: PRISM FLOWER
+                mapSprite RED_BARON     ; 94: RED BARON
+                mapSprite GESHP         ; 95: GESHP
+                mapSprite ODD_EYE       ; 96: ODD EYE
+                mapSprite GALAM_EVIL    ; 97: GALAM
+                mapSprite ZEON          ; 98: ZEON
+                mapSprite JARO_SPECIAL  ; 99: JAR
+                mapSprite MASTER_MAGE   ; 100: MASTER MAGE
+                mapSprite NECROMANCER   ; 101: NECROMANCER
+                mapSprite BLUE_SHAMAN   ; 102: BLUE SHAMAN
                 mapSprite FILLER7
                 mapSprite FILLER8
                 mapSprite FILLER9

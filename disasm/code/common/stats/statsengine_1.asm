@@ -67,29 +67,29 @@ j_GetUpperMoveType:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetStatus:
+j_GetStatusEffects:
                 
-                jmp     GetStatus(pc)
+                jmp     GetStatusEffects(pc)
 
-    ; End of function j_GetStatus
+    ; End of function j_GetStatusEffects
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetCurrentSpecialAbility:
+j_GetGetCurrentProwess:
                 
                 jmp     GetCurrentProwess(pc)
 
-    ; End of function j_GetCurrentSpecialAbility
+    ; End of function j_GetGetCurrentProwess
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetBaseSpecialAbility:
+j_GetBaseProwess:
                 
                 jmp     GetBaseProwess(pc)
 
-    ; End of function j_GetBaseSpecialAbility
+    ; End of function j_GetBaseProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -339,11 +339,11 @@ j_SetMoveType:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_SetStatus:
+j_SetStatusEffects:
                 
-                jmp     SetStatus(pc)
+                jmp     SetStatusEffects(pc)
 
-    ; End of function j_SetStatus
+    ; End of function j_SetStatusEffects
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -852,11 +852,11 @@ j_GetItemAndNumberOfItems:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetItemType:
+j_GetEquipmentType:
                 
-                jmp     GetItemType(pc) 
+                jmp     GetEquipmentType(pc)
 
-    ; End of function j_GetItemType
+    ; End of function j_GetEquipmentType
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -897,20 +897,20 @@ j_RepairItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_EquipItem:
+j_EquipItemBySlot:
                 
                 jmp     EquipItemBySlot(pc)
 
-    ; End of function j_EquipItem
+    ; End of function j_EquipItemBySlot
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_UnequipItemIfNotCursed:
+j_UnequipItemBySlotIfNotCursed:
                 
                 jmp     UnequipItemBySlotIfNotCursed(pc)
 
-    ; End of function j_UnequipItemIfNotCursed
+    ; End of function j_UnequipItemBySlotIfNotCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1077,11 +1077,11 @@ j_FindSpellName:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetSpellDefAddress:
+j_FindSpellDefAddress:
                 
-                jmp     GetSpellDefAddress(pc)
+                jmp     FindSpellDefAddress(pc)
 
-    ; End of function j_GetSpellDefAddress
+    ; End of function j_FindSpellDefAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1185,11 +1185,11 @@ j_DebugModeActionSelect:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_WriteSkirmishScript:
+j_WriteBattlesceneScript:
                 
-                jmp     WriteSkirmishScript(pc)
+                jmp     WriteBattlesceneScript(pc)
 
-    ; End of function j_WriteSkirmishScript
+    ; End of function j_WriteBattlesceneScript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1518,11 +1518,11 @@ j_AddAllToStack:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_sub_DEFC:
+sub_82A0:
                 
-                jmp     j_sub_DEFC_0(pc)
+                jmp     sub_DEFC(pc)    
 
-    ; End of function j_sub_DEFC
+    ; End of function sub_82A0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1598,9 +1598,11 @@ j_GetDifficulty:
 
     ; End of function j_GetDifficulty
 
-p_SpellNames:   dc.l SpellNames
-p_AllyNames:    dc.l AllyNames
-p_EnemyNames:   dc.l EnemyNames
+p_tbl_SpellNames:
+                dc.l tbl_SpellNames
+p_tbl_AllyNames:dc.l tbl_AllyNames
+p_tbl_EnemyNames:
+                dc.l tbl_EnemyNames
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1630,7 +1632,7 @@ GetCombatantName:
                 
                 clr.w   d1
                 bsr.w   GetEnemyIndex   
-                movea.l (p_EnemyNames).l,a0
+                movea.l (p_tbl_EnemyNames).l,a0
                 bsr.w   FindName        
 @Done:
                 
@@ -1642,9 +1644,7 @@ GetCombatantName:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-; 
-; Out: D1 = class index
+; Get combatant D0's class index -> D1
 
 GetClass:
                 
@@ -1658,6 +1658,8 @@ GetClass:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Get combatant D0's current level -> D1
 
 GetCurrentLevel:
                 
@@ -1884,7 +1886,7 @@ GetCurrentProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
-GetStatus:
+GetStatusEffects:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_STATUSEFFECTS,d7
@@ -1892,7 +1894,7 @@ GetStatus:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetStatus
+    ; End of function GetStatusEffects
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1901,8 +1903,6 @@ GetXPos:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_X,d7
-loc_843C:
-                
                 bsr.w   GetCombatantByte
                 ext.w   d1
                 movem.l (sp)+,d7-a0

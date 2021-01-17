@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map14\mapsetups\scripts_2.asm :
 ; 0x58FA4..0x592E0 : 
-cs_58FA4:       textCursor $8D6
+cs_58FA4:       textCursor 2262
                 reloadMap 8,7
                 loadMapEntities ce_59270
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -17,7 +17,7 @@ cs_58FA4:       textCursor $8D6
                  ac_moveRel 0,1         ;   
                  ac_waitDest            ;   
                  ac_wait 600            ;   
-                 ac_moveRel 0,65529     ;   
+                 ac_moveRel 0,-7        ;   
                  ac_waitDest            ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -113,21 +113,21 @@ cs_58FA4:       textCursor $8D6
                 setFacing 128,UP
                 csWait 30
                 nextText $0,128         ; "{LEADER}, did you{N}hear that?{W2}"
-cs_59122:       textCursor $8E3
+cs_59122:       textCursor 2275
                 nextText $0,128         ; "Would you go to North{N}Cliff and check on his{N}friend?{D1}"
                 yesNo
-                jumpIfFlagSet $59,cs_59142 ; YES/NO prompt answer
+                jumpIfFlagSet 89,cs_59142 ; YES/NO prompt answer
                 nextText $0,128         ; "What did you say?{N}I didn't hear you.{W2}"
                 nextText $0,128         ; "OK, once again!{W1}"
                 jump cs_59122
-cs_59142:       textCursor $8E6
+cs_59142:       textCursor 2278
                 nextText $0,128         ; "Oh, you're so brave!{W2}"
                 nextSingleText $0,128   ; "Hey, he's going with you!{W1}"
                 entityActionsWait 128
                  moveLeft 1
                 endActions
                 setFacing 128,RIGHT
-                textCursor $8E8
+                textCursor 2280
                 entityActionsWait 131
                  moveUp 2
                 endActions
@@ -211,7 +211,7 @@ cs_59142:       textCursor $8E6
                 entityActionsWait ALLY_KIWI
                  moveDown 7
                 endActions
-                setStoryFlag $8         ; Battle 8 unlocked
+                setStoryFlag 8          ; Battle 8 unlocked
                 warp MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,1,1,DOWN
                 csc_end
 ce_59270:       mainEntity 13,11,DOWN
@@ -225,7 +225,7 @@ ce_59270:       mainEntity 13,11,DOWN
                 entity 9,13,LEFT,MAPSPRITE_MAN2,eas_Init
                 entity 16,13,RIGHT,MAPSPRITE_MAN1,eas_Init
                 entity 13,20,UP,MAPSPRITE_WORKER,eas_Init
-                entity 12,11,RIGHT,MAPSPRITE_OBJECT2,eas_Init3
-                entity 13,11,DOWN,MAPSPRITE_OBJECT2,eas_Init3
-                entity 14,11,LEFT,MAPSPRITE_OBJECT2,eas_Init3
+                entity 12,11,RIGHT,MAPSPRITE_OBJECT2,eas_InitFixedSprite
+                entity 13,11,DOWN,MAPSPRITE_OBJECT2,eas_InitFixedSprite
+                entity 14,11,LEFT,MAPSPRITE_OBJECT2,eas_InitFixedSprite
                 dc.w $FFFF

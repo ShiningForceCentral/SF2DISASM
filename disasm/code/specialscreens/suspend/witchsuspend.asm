@@ -4,8 +4,6 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; witch suspend screen
-
 WitchSuspend:
                 
                  
@@ -14,7 +12,7 @@ WitchSuspend:
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
                 move.b  #$FF,((byte_FFB082-$1000000)).w
-                txt     $F0             ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
+                txt     240             ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
                 clsTxt
                 clr.b   ((byte_FFB082-$1000000)).w
                 bsr.w   sub_7CDC

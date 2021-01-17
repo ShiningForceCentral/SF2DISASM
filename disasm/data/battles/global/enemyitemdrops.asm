@@ -1,11 +1,12 @@
 
 ; ASM FILE data\battles\global\enemyitemdrops.asm :
 ; 0xBE52..0xBECC : Enemy item drops
-EnemyItemDrops: 
-; Syntax        battle      battle_index
-;               enemyEntity enemy_combatant_index
-;               itemDrop    item_index
-;               dropFlag    dropped_flag_index
+tbl_EnemyItemDrops:
+                
+; Syntax        battle      [BATTLE_]index
+;               enemyEntity enemy_entity_index (0-31)
+;               itemDrop    [ITEM_]index
+;               dropFlag    item_dropped_flag_index
                 
                 battle      TO_HAWEL_HOUSE
                 enemyEntity 2

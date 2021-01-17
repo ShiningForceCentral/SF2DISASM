@@ -21,7 +21,7 @@ ms_map9_EntityEvents:
 Map9_EntityEvent2:
                 
                  
-                txt     $553            ; "Hassan is a port town.{W2}{N}But, we've had no trading{N}recently.{W1}"
+                txt     1363            ; "Hassan is a port town.{W2}{N}But, we've had no trading{N}recently.{W1}"
                 rts
 
     ; End of function Map9_EntityEvent2
@@ -32,7 +32,7 @@ Map9_EntityEvent2:
 Map9_EntityEvent3:
                 
                  
-                txt     $554            ; "Our ancestors came here from{N}Rune by way of the sea.{W2}{N}They should've avoided such{N}an inconvenient place like{N}this.{W1}"
+                txt     1364            ; "Our ancestors came here from{N}Rune by way of the sea.{W2}{N}They should've avoided such{N}an inconvenient place like{N}this.{W1}"
                 rts
 
     ; End of function Map9_EntityEvent3
@@ -43,7 +43,7 @@ Map9_EntityEvent3:
 Map9_EntityEvent4:
                 
                  
-                txt     $565            ; "I think I'll take a nap{N}now.  Bye.{W1}"
+                txt     1381            ; "I think I'll take a nap{N}now.  Bye.{W1}"
                 rts
 
     ; End of function Map9_EntityEvent4
@@ -86,9 +86,9 @@ Map9_EntityEvent7:
 Map9_EntityEvent8:
                 
                  
-                chkFlg  $2D5            ; Set after telling Rohde that you're going to get the Caravan
+                chkFlg  725             ; Set after telling Rohde that you're going to get the Caravan
                 bne.s   byte_567C2      
-                txt     $555            ; "Dr. {NAME;11} lives in the{N}house over there.{W2}"
+                txt     1365            ; "Dr. {NAME;11} lives in the{N}house over there.{W2}"
                 move.w  #$86,d0 
                 moveq   #3,d1
                 jsr     sub_4781A       
@@ -99,11 +99,11 @@ Map9_EntityEvent8:
                 addq.w  #2,d1
                 andi.w  #3,d1
                 jsr     sub_4781A       
-                txt     $556            ; "He is eccentric.{N}He hates talking, but...{W2}{N}a historical topic may{N}interest him.{W1}"
+                txt     1366            ; "He is eccentric.{N}He hates talking, but...{W2}{N}a historical topic may{N}interest him.{W1}"
                 bra.s   return_567C6
 byte_567C2:
                 
-                txt     $55A            ; "Dr. {NAME;11}!  Hmmm,{N}are you a magician?{W1}"
+                txt     1370            ; "Dr. {NAME;11}!  Hmmm,{N}are you a magician?{W1}"
 return_567C6:
                 
                 rts
@@ -116,8 +116,8 @@ return_567C6:
 Map9_EntityEvent9:
                 
                  
-                txt     $557            ; "How on earth did you come{N}to Hassan?{W2}"
-                txt     $558            ; "By raft?  Wow!{N}You killed the Kraken?!{W1}"
+                txt     1367            ; "How on earth did you come{N}to Hassan?{W2}"
+                txt     1368            ; "By raft?  Wow!{N}You killed the Kraken?!{W1}"
                 rts
 
     ; End of function Map9_EntityEvent9
@@ -128,7 +128,7 @@ Map9_EntityEvent9:
 Map9_EntityEvent10:
                 
                  
-                txt     $559            ; "The river is drying up{N}because of the drought.{W2}{N}To the west?{N}If you really want to go,{N}ask Dr. {NAME;11}....{W1}"
+                txt     1369            ; "The river is drying up{N}because of the drought.{W2}{N}To the west?{N}If you really want to go,{N}ask Dr. {NAME;11}....{W1}"
                 rts
 
     ; End of function Map9_EntityEvent10
@@ -150,20 +150,20 @@ Map9_EntityEvent11:
 Map9_EntityEvent0:
                 
                  
-                chkFlg  $2D7            ; Set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
+                chkFlg  727             ; Set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
                 bne.s   byte_5682A      
                 moveq   #$3D,d1 ; Achilles Sword
                 jsr     j_GetItemInventoryLocation
                 cmpi.w  #$FFFF,d0
                 bne.s   byte_56804      
-                txt     $55B            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
-                setFlg  $31E            ; Set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
+                txt     1371            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
+                setFlg  798             ; Set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
                 bra.s   loc_56828
 byte_56804:
                 
-                chkFlg  $31E            ; Set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
+                chkFlg  798             ; Set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
                 bne.s   byte_5681E
-                txt     $55B            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
+                txt     1371            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
                 jsr     j_HidePortraitWindow
                 clsTxt
                 moveq   #$28,d0 
@@ -171,13 +171,13 @@ byte_56804:
 byte_5681E:
                 
                 script  cs_569BC
-                setFlg  $2D7            ; Set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
+                setFlg  727             ; Set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
 loc_56828:
                 
                 bra.s   return_56840
 byte_5682A:
                 
-                chkFlg  $2D5            ; Set after telling Rohde that you're going to get the Caravan
+                chkFlg  725             ; Set after telling Rohde that you're going to get the Caravan
                 bne.s   return_56840
                 move.w  #$B,d0
                 jsr     sub_47832       
@@ -194,10 +194,10 @@ return_56840:
 Map9_EntityEvent1:
                 
                  
-                chkFlg  $100            ; TEMP FLAG #00
+                chkFlg  256             ; TEMP FLAG #00
                 bne.s   return_56852
                 script  cs_56B02
-                setFlg  $100            ; TEMP FLAG #00
+                setFlg  256             ; TEMP FLAG #00
 return_56852:
                 
                 rts

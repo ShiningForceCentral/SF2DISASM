@@ -50,20 +50,20 @@ j_ExecuteBattleRegionCutscene:
                 jmp     ExecuteBattleRegionCutscene(pc)
 j_LaunchFading:                
                 jmp     LaunchFading(pc)
-sub_4405C:                
-                jmp     sub_45858(pc)
-sub_44060:                
-                jmp     sub_45858(pc)
-sub_44064:                
-                jmp     sub_45974(pc)
-sub_44068:                
-                jmp     sub_45BBE(pc)
-sub_4406C:                
-                jmp     sub_45C94(pc)
-sub_44070:                
-                jmp     sub_45C82(pc)
-sub_44074:                
-                jmp     sub_45B84(pc)
+j_OrientSpriteLeft_bis:                
+                jmp     OrientSpriteLeft(pc)
+j_OrientSpriteLeft:                
+                jmp     OrientSpriteLeft(pc)
+j_OrientSpriteRight:                
+                jmp     OrientSpriteRight(pc)
+j_ResizeSprite:                
+                jmp     ResizeSprite(pc)
+j_ApplyMinorSpriteCropEffect:                
+                jmp     ApplyMinorSpriteCropEffect(pc)
+j_ApplySpriteImmersedEffect:                
+                jmp     ApplySpriteImmersedEffect(pc)
+j_ApplySpriteGhostEffect:                
+                jmp     ApplySpriteGhostEffect(pc)
 sub_44078:                
                 jmp     sub_474EE(pc)
 j_RunMapSetupEntityEvent:                

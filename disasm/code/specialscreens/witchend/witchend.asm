@@ -51,12 +51,12 @@ EndGame:
                 dc.w VINTS_ADD
                 dc.l VInt_WitchEndBlink
                 move.w  #$46,((SPEECH_SFX-$1000000)).w 
-                txt     $EF             ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
+                txt     239             ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
                 clsTxt
                 move.w  #$5A,d0 
                 jsr     (Sleep).w       
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -72,7 +72,7 @@ EndGame:
                 moveq   #$1E,d0
                 jsr     (Sleep).w       
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -113,7 +113,7 @@ EndGame:
                 jsr     (CopyBytes).w   
                 jsr     (EnableDisplayAndInterrupts).w
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -137,16 +137,16 @@ EndGame:
                 moveq   #$78,d0 
                 jsr     (Sleep).w       
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.w  #$12C,d0
                 jsr     (Sleep).w       
                 sndCom  SOUND_COMMAND_FADE_OUT
-                move.w  #$2A30,d0       ; wait for 3 minutes
+                move.w  #END_GAME_TIMER,d0 ; wait for 3 minutes
                 jsr     (Sleep).w       
-                txt     $1D1            ; "And more...{W1}"
+                txt     465             ; "And more...{W1}"
                 clsTxt
                 move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
                 jsr     (FadeOutToBlack).w
@@ -157,7 +157,7 @@ loc_27C2C:
                 clr.l   (a0)+
                 dbf     d7,loc_27C2C
                 jsr     j_ClearEntities
-                setFlg  $190            ; Battle 0 unlocked
+                setFlg  400             ; Battle 0 unlocked
                 move.w  #$3F,d0 
                 jsr     (CheckBattle).w 
                 move.w  d7,d1

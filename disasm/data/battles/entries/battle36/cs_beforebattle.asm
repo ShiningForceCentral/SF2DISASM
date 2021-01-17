@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle36\cs_beforebattle.asm :
 ; 0x4D88A..0x4D9A4 : Cutscene before battle 36
-bbcs_36:        textCursor $B82
+bbcs_36:        textCursor 2946
                 loadMapFadeIn MAP_PRISM_FLOWERS_FIELD,15,0
                 loadMapEntities ce_4D964
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -9,7 +9,7 @@ bbcs_36:        textCursor $B82
                 setPos ALLY_PETER,18,0,DOWN
                 setActscriptWait FOLLOWER_B,eas_Init
                 setPos FOLLOWER_B,20,0,DOWN
-                jumpIfFlagClear $4C,cs_4D8D6 ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4D8D6 ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,63,62,DOWN
 cs_4D8D6:       playSound MUSIC_BATTLE_THEME_1

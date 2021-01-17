@@ -28,8 +28,8 @@ Map2_DefaultEntityEvent:
 Map2_EntityEvent0:
                 
                  
-                txt     $DFF            ; "You're not devils, are you?{W2}"
-                txt     $E00            ; "How did you get here safely?{W1}"
+                txt     3583            ; "You're not devils, are you?{W2}"
+                txt     3584            ; "How did you get here safely?{W1}"
                 rts
 
     ; End of function Map2_EntityEvent0
@@ -40,7 +40,7 @@ Map2_EntityEvent0:
 Map2_EntityEvent1:
                 
                  
-                txt     $E01            ; "I'm hungry....{W1}"
+                txt     3585            ; "I'm hungry....{W1}"
                 rts
 
     ; End of function Map2_EntityEvent1
@@ -51,7 +51,7 @@ Map2_EntityEvent1:
 Map2_EntityEvent2:
                 
                  
-                txt     $E02            ; "Are you strong?  Will you{N}please kill the devils?{W1}"
+                txt     3586            ; "Are you strong?  Will you{N}please kill the devils?{W1}"
                 rts
 
     ; End of function Map2_EntityEvent2
@@ -62,8 +62,8 @@ Map2_EntityEvent2:
 Map2_EntityEvent3:
                 
                  
-                txt     $E03            ; "Pacalon soldiers are so{N}proud!{W2}"
-                txt     $E04            ; "But, they're just cowards{N}that hide in the castle.{W1}"
+                txt     3587            ; "Pacalon soldiers are so{N}proud!{W2}"
+                txt     3588            ; "But, they're just cowards{N}that hide in the castle.{W1}"
                 rts
 
     ; End of function Map2_EntityEvent3
@@ -74,7 +74,7 @@ Map2_EntityEvent3:
 Map2_EntityEvent4:
                 
                  
-                txt     $E05            ; "What will we do when we{N}lose?{W1}"
+                txt     3589            ; "What will we do when we{N}lose?{W1}"
                 rts
 
     ; End of function Map2_EntityEvent4
@@ -85,9 +85,9 @@ Map2_EntityEvent4:
 Map2_EntityEvent5:
                 
                  
-                txt     $E06            ; "Do you know Geshp?{W2}"
-                txt     $E07            ; "He sometimes comes here.{N}He seems so friendly.{W2}"
-                txt     $E08            ; "Are all devils like him?{N}If so, I like them.{W1}"
+                txt     3590            ; "Do you know Geshp?{W2}"
+                txt     3591            ; "He sometimes comes here.{N}He seems so friendly.{W2}"
+                txt     3592            ; "Are all devils like him?{N}If so, I like them.{W1}"
                 rts
 
     ; End of function Map2_EntityEvent5
@@ -98,8 +98,8 @@ Map2_EntityEvent5:
 Map2_EntityEvent6:
                 
                  
-                txt     $E09            ; "Do you think Pacalon can{N}beat the devils?{W2}"
-                txt     $E0A            ; "Say yes!  Pacalon has the{N}best fighters in the world!{W1}"
+                txt     3593            ; "Do you think Pacalon can{N}beat the devils?{W2}"
+                txt     3594            ; "Say yes!  Pacalon has the{N}best fighters in the world!{W1}"
                 rts
 
     ; End of function Map2_EntityEvent6

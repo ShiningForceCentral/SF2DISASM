@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Load base tiles and ...  generate font from basetile font !
+; Generates font from basetile font.
 ; Stretches characters from 1 tile to 2 tiles vertically.
 ; Also creates a shadow effect using palette index 2.
 
@@ -1723,8 +1723,6 @@ loc_1AD0D4:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; loads terrain data for current battle
 
 LoadBattleTerrainData:
                 

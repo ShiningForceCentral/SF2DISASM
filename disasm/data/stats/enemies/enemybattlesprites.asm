@@ -3,108 +3,108 @@
 ; 0x1F914..0x1F9E2 : Enemy battle sprites table
 tbl_EnemyBattleSprites:
                 
-; Syntax        enemyBattleSprite index, palette
+; Syntax        enemyBattleSprAndPlt [ENEMYBATTLESPRITE_]index, palette
                 
-                enemyBattleSprite OOZE, 1 ; OOZE
-                enemyBattleSprite RAT, 0 ; HUGE RAT
-                enemyBattleSprite SOLDIER, 0 ; GALAM SOLDIER
-                enemyBattleSprite KNIGHT, 0 ; GALAM KNIGHT
-                enemyBattleSprite GOBLIN, 0 ; GOBLIN
-                enemyBattleSprite OOZE, 0 ; GREEN OOZE
-                enemyBattleSprite DWARF, 2 ; DARK DWARF
-                enemyBattleSprite GOBLIN, 2 ; HOBGOBLIN
-                enemyBattleSprite ZOMBIE, 0 ; ZOMBIE
-                enemyBattleSprite GOLEM, 0 ; GOLEM
-                enemyBattleSprite KRAKEN_LEG, 0 ; KRAKEN LEG
-                enemyBattleSprite SOULSOWER, 0 ; SOULSOWER
-                enemyBattleSprite ORC, 0 ; ORC
-                enemyBattleSprite SOLDIER, 1 ; PAWN
-                enemyBattleSprite KNIGHT, 1 ; KNIGHT
-                enemyBattleSprite RAT, 1 ; RAT
-                enemyBattleSprite OOZE, 2 ; BUBBLING OOZE
-                enemyBattleSprite SKELETON, 0 ; SKELETON
-                enemyBattleSprite DWARF, 1 ; DARK SOLDIER
-                enemyBattleSprite LIZARDMAN, 0 ; LIZARDMAN
-                enemyBattleSprite WORM, 1 ; WORM
-                enemyBattleSprite KNIGHT, 2 ; DARK KNIGHT
-                enemyBattleSprite ORC, 2 ; ORC LORD
-                enemyBattleSprite SOLDIER, 2 ; DEVIL SOLDIER
-                enemyBattleSprite CERBERUS, 0 ; CERBERUS
-                enemyBattleSprite GOLEM, 1 ; MUD MAN
-                enemyBattleSprite LIZARDMAN, 1 ; DRAGONEWT
-                enemyBattleSprite WORM, 2 ; PURPLE WORM
-                enemyBattleSprite REAPER, 1 ; EXECUTIONER
-                enemyBattleSprite CERBERUS, 1 ; HELL HOUND
-                enemyBattleSprite MINOTAUR, 1 ; MINOTAUR
-                enemyBattleSprite CYCLOPS, 0 ; CYCLOPS
-                enemyBattleSprite BURST_ROCK, 0 ; BURST ROCK
-                enemyBattleSprite HYDRA, 0 ; HYDRA
-                enemyBattleSprite CHAOS_WARRIOR, 0 ; CHAOS WARRIOR
-                enemyBattleSprite REAPER, 0 ; REAPER
-                enemyBattleSprite EVIL_BEAST, 0 ; EVIL BEAST
-                enemyBattleSprite HYDRA, 1 ; PYROHYDRA
-                enemyBattleSprite PRISM_FLOWER, 1 ; ZEON GUARD
-                enemyBattleSprite GIZMO, 2 ; GIZMO
-                enemyBattleSprite BAT, 0 ; HUGE BAT
-                enemyBattleSprite BAT, 2 ; VAMPIRE BAT
-                enemyBattleSprite GIZMO, 1 ; EVIL CLOUD
-                enemyBattleSprite GARGOYLE, 0 ; GARGOYLE
-                enemyBattleSprite HARPY, 0 ; HARPY
-                enemyBattleSprite GARGOYLE, 1 ; LESSER DEMON
-                enemyBattleSprite WYVERN, 0 ; WYVERN
-                enemyBattleSprite HARPY, 1 ; HARPY QUEEN
-                enemyBattleSprite PEGASUS_KNIGHT, 0 ; PEGASUS KNIGHT
-                enemyBattleSprite GRIFFIN, 0 ; GRIFFIN
-                enemyBattleSprite GIZMO, 3 ; MIST DEMON
-                enemyBattleSprite DRAGON, 1 ; WHITE DRAGON
-                enemyBattleSprite DEMON, 1 ; DEMON
-                enemyBattleSprite DRAGON, 0 ; CHAOS DRAGON
-                enemyBattleSprite GRIFFIN, 1 ; DEVIL GRIFFIN
-                enemyBattleSprite DEMON, 0 ; ARCH DEMON
-                enemyBattleSprite ARCHER, 0 ; GALAM ARCHER
-                enemyBattleSprite HUNTER_GOBLIN, 0 ; HUNTER GOBLIN
-                enemyBattleSprite ARCHER, 1 ; DEATH ARCHER
-                enemyBattleSprite KRAKEN_ARM, 0 ; KRAKEN ARM
-                enemyBattleSprite ARROW_LAUNCHER, 0 ; ARROW LAUNCHER
-                enemyBattleSprite ARROW_LAUNCHER, 1 ; ROOK
-                enemyBattleSprite HUNTER_GOBLIN, 1 ; DARK SNIPER
-                enemyBattleSprite ARCHER, 2 ; BOW MASTER
-                enemyBattleSprite BOW_RIDER, 0 ; BOW RIDER
-                enemyBattleSprite ARROW_LAUNCHER, 2 ; DARK GUNNER
-                enemyBattleSprite BOW_RIDER, 1 ; HORSEMAN
-                enemyBattleSprite MAGE, 0 ; GALAM MAGE
-                enemyBattleSprite WITCH, 0 ; WITCH
-                enemyBattleSprite MAGE, 1 ; MASTER MAGE
-                enemyBattleSprite WITCH, 1 ; DARK MADAM
-                enemyBattleSprite WITCH, 2 ; QUEEN
-                enemyBattleSprite WIZARD, 0 ; WIZARD
-                enemyBattleSprite NECROMANCER, 0 ; NECROMANCER
-                enemyBattleSprite WIZARD, 1 ; CHAOS WIZARD
-                enemyBattleSprite NECROMANCER, 1 ; DEMON MASTER
-                enemyBattleSprite CLERIC, 0 ; DARK CLERIC
-                enemyBattleSprite MONK, 0 ; DEATH MONK
-                enemyBattleSprite MONK, 1 ; BLACK MONK
-                enemyBattleSprite CLERIC, 1 ; HIGH PRIEST
-                enemyBattleSprite BISHOP, 0 ; EVIL BISHOP
-                enemyBattleSprite BISHOP, 1 ; DARK BISHOP
-                enemyBattleSprite MONK, 2 ; MASTER MONK
-                enemyBattleSprite SHAMAN, 0 ; SHAMAN
-                enemyBattleSprite BISHOP, 2 ; EVIL BISHOP
-                enemyBattleSprite SHAMAN, 1 ; BLUE SHAMAN
-                enemyBattleSprite GIZMO, 0 ; DARK SMOKE
-                enemyBattleSprite KRAKEN_HEAD, 0 ; KRAKEN HEAD
-                enemyBattleSprite TAROS, 0 ; TAROS
-                enemyBattleSprite KING, 1 ; KING
-                enemyBattleSprite RAT, 2 ; WILLARD
-                enemyBattleSprite ZALBARD, 0 ; ZALBARD
-                enemyBattleSprite CAMEELA, 0 ; CAMEELA
-                enemyBattleSprite PRISM_FLOWER, 0 ; PRISM FLOWER
-                enemyBattleSprite RED_BARON, 0 ; RED BARON
-                enemyBattleSprite GESHP, 0 ; GESHP
-                enemyBattleSprite ODD_EYE, 0 ; ODD EYE
-                enemyBattleSprite KING, 0 ; GALAM
-                enemyBattleSprite ZEON, 0 ; ZEON
-                enemyBattleSprite PEGASUS_KNIGHT, 1 ; JAR
-                enemyBattleSprite MAGE, 1 ; MASTER MAGE
-                enemyBattleSprite NECROMANCER, 0 ; NECROMANCER
-                enemyBattleSprite SHAMAN, 1 ; BLUE SHAMAN
+                enemyBattleSprAndPlt OOZE, 1 ; 0: OOZE
+                enemyBattleSprAndPlt RAT, 0 ; 1: HUGE RAT
+                enemyBattleSprAndPlt SOLDIER, 0 ; 2: GALAM SOLDIER
+                enemyBattleSprAndPlt KNIGHT, 0 ; 3: GALAM KNIGHT
+                enemyBattleSprAndPlt GOBLIN, 0 ; 4: GOBLIN
+                enemyBattleSprAndPlt OOZE, 0 ; 5: GREEN OOZE
+                enemyBattleSprAndPlt DWARF, 2 ; 6: DARK DWARF
+                enemyBattleSprAndPlt GOBLIN, 2 ; 7: HOBGOBLIN
+                enemyBattleSprAndPlt ZOMBIE, 0 ; 8: ZOMBIE
+                enemyBattleSprAndPlt GOLEM, 0 ; 9: GOLEM
+                enemyBattleSprAndPlt KRAKEN_LEG, 0 ; 10: KRAKEN LEG
+                enemyBattleSprAndPlt SOULSOWER, 0 ; 11: SOULSOWER
+                enemyBattleSprAndPlt ORC, 0 ; 12: ORC
+                enemyBattleSprAndPlt SOLDIER, 1 ; 13: PAWN
+                enemyBattleSprAndPlt KNIGHT, 1 ; 14: KNIGHT
+                enemyBattleSprAndPlt RAT, 1 ; 15: RAT
+                enemyBattleSprAndPlt OOZE, 2 ; 16: BUBBLING OOZE
+                enemyBattleSprAndPlt SKELETON, 0 ; 17: SKELETON
+                enemyBattleSprAndPlt DWARF, 1 ; 18: DARK SOLDIER
+                enemyBattleSprAndPlt LIZARDMAN, 0 ; 19: LIZARDMAN
+                enemyBattleSprAndPlt WORM, 1 ; 20: WORM
+                enemyBattleSprAndPlt KNIGHT, 2 ; 21: DARK KNIGHT
+                enemyBattleSprAndPlt ORC, 2 ; 22: ORC LORD
+                enemyBattleSprAndPlt SOLDIER, 2 ; 23: DEVIL SOLDIER
+                enemyBattleSprAndPlt CERBERUS, 0 ; 24: CERBERUS
+                enemyBattleSprAndPlt GOLEM, 1 ; 25: MUD MAN
+                enemyBattleSprAndPlt LIZARDMAN, 1 ; 26: DRAGONEWT
+                enemyBattleSprAndPlt WORM, 2 ; 27: PURPLE WORM
+                enemyBattleSprAndPlt REAPER, 1 ; 28: EXECUTIONER
+                enemyBattleSprAndPlt CERBERUS, 1 ; 29: HELL HOUND
+                enemyBattleSprAndPlt MINOTAUR, 1 ; 30: MINOTAUR
+                enemyBattleSprAndPlt CYCLOPS, 0 ; 31: CYCLOPS
+                enemyBattleSprAndPlt BURST_ROCK, 0 ; 32: BURST ROCK
+                enemyBattleSprAndPlt HYDRA, 0 ; 33: HYDRA
+                enemyBattleSprAndPlt CHAOS_WARRIOR, 0 ; 34: CHAOS WARRIOR
+                enemyBattleSprAndPlt REAPER, 0 ; 35: REAPER
+                enemyBattleSprAndPlt EVIL_BEAST, 0 ; 36: EVIL BEAST
+                enemyBattleSprAndPlt HYDRA, 1 ; 37: PYROHYDRA
+                enemyBattleSprAndPlt PRISM_FLOWER, 1 ; 38: ZEON GUARD
+                enemyBattleSprAndPlt GIZMO, 2 ; 39: GIZMO
+                enemyBattleSprAndPlt BAT, 0 ; 40: HUGE BAT
+                enemyBattleSprAndPlt BAT, 2 ; 41: VAMPIRE BAT
+                enemyBattleSprAndPlt GIZMO, 1 ; 42: EVIL CLOUD
+                enemyBattleSprAndPlt GARGOYLE, 0 ; 43: GARGOYLE
+                enemyBattleSprAndPlt HARPY, 0 ; 44: HARPY
+                enemyBattleSprAndPlt GARGOYLE, 1 ; 45: LESSER DEMON
+                enemyBattleSprAndPlt WYVERN, 0 ; 46: WYVERN
+                enemyBattleSprAndPlt HARPY, 1 ; 47: HARPY QUEEN
+                enemyBattleSprAndPlt PEGASUS_KNIGHT, 0 ; 48: PEGASUS KNIGHT
+                enemyBattleSprAndPlt GRIFFIN, 0 ; 49: GRIFFIN
+                enemyBattleSprAndPlt GIZMO, 3 ; 50: MIST DEMON
+                enemyBattleSprAndPlt DRAGON, 1 ; 51: WHITE DRAGON
+                enemyBattleSprAndPlt DEMON, 1 ; 52: DEMON
+                enemyBattleSprAndPlt DRAGON, 0 ; 53: CHAOS DRAGON
+                enemyBattleSprAndPlt GRIFFIN, 1 ; 54: DEVIL GRIFFIN
+                enemyBattleSprAndPlt DEMON, 0 ; 55: ARCH DEMON
+                enemyBattleSprAndPlt ARCHER, 0 ; 56: GALAM ARCHER
+                enemyBattleSprAndPlt HUNTER_GOBLIN, 0 ; 57: HUNTER GOBLIN
+                enemyBattleSprAndPlt ARCHER, 1 ; 58: DEATH ARCHER
+                enemyBattleSprAndPlt KRAKEN_ARM, 0 ; 59: KRAKEN ARM
+                enemyBattleSprAndPlt ARROW_LAUNCHER, 0 ; 60: ARROW LAUNCHER
+                enemyBattleSprAndPlt ARROW_LAUNCHER, 1 ; 61: ROOK
+                enemyBattleSprAndPlt HUNTER_GOBLIN, 1 ; 62: DARK SNIPER
+                enemyBattleSprAndPlt ARCHER, 2 ; 63: BOW MASTER
+                enemyBattleSprAndPlt BOW_RIDER, 0 ; 64: BOW RIDER
+                enemyBattleSprAndPlt ARROW_LAUNCHER, 2 ; 65: DARK GUNNER
+                enemyBattleSprAndPlt BOW_RIDER, 1 ; 66: HORSEMAN
+                enemyBattleSprAndPlt MAGE, 0 ; 67: GALAM MAGE
+                enemyBattleSprAndPlt WITCH, 0 ; 68: WITCH
+                enemyBattleSprAndPlt MAGE, 1 ; 69: MASTER MAGE
+                enemyBattleSprAndPlt WITCH, 1 ; 70: DARK MADAM
+                enemyBattleSprAndPlt WITCH, 2 ; 71: QUEEN
+                enemyBattleSprAndPlt WIZARD, 0 ; 72: WIZARD
+                enemyBattleSprAndPlt NECROMANCER, 0 ; 73: NECROMANCER
+                enemyBattleSprAndPlt WIZARD, 1 ; 74: CHAOS WIZARD
+                enemyBattleSprAndPlt NECROMANCER, 1 ; 75: DEMON MASTER
+                enemyBattleSprAndPlt CLERIC, 0 ; 76: DARK CLERIC
+                enemyBattleSprAndPlt MONK, 0 ; 77: DEATH MONK
+                enemyBattleSprAndPlt MONK, 1 ; 78: BLACK MONK
+                enemyBattleSprAndPlt CLERIC, 1 ; 79: HIGH PRIEST
+                enemyBattleSprAndPlt BISHOP, 0 ; 80: EVIL BISHOP
+                enemyBattleSprAndPlt BISHOP, 1 ; 81: DARK BISHOP
+                enemyBattleSprAndPlt MONK, 2 ; 82: MASTER MONK
+                enemyBattleSprAndPlt SHAMAN, 0 ; 83: SHAMAN
+                enemyBattleSprAndPlt BISHOP, 2 ; 84: EVIL BISHOP
+                enemyBattleSprAndPlt SHAMAN, 1 ; 85: BLUE SHAMAN
+                enemyBattleSprAndPlt GIZMO, 0 ; 86: DARK SMOKE
+                enemyBattleSprAndPlt KRAKEN_HEAD, 0 ; 87: KRAKEN HEAD
+                enemyBattleSprAndPlt TAROS, 0 ; 88: TAROS
+                enemyBattleSprAndPlt KING, 1 ; 89: KING
+                enemyBattleSprAndPlt RAT, 2 ; 90: WILLARD
+                enemyBattleSprAndPlt ZALBARD, 0 ; 91: ZALBARD
+                enemyBattleSprAndPlt CAMEELA, 0 ; 92: CAMEELA
+                enemyBattleSprAndPlt PRISM_FLOWER, 0 ; 93: PRISM FLOWER
+                enemyBattleSprAndPlt RED_BARON, 0 ; 94: RED BARON
+                enemyBattleSprAndPlt GESHP, 0 ; 95: GESHP
+                enemyBattleSprAndPlt ODD_EYE, 0 ; 96: ODD EYE
+                enemyBattleSprAndPlt KING, 0 ; 97: GALAM
+                enemyBattleSprAndPlt ZEON, 0 ; 98: ZEON
+                enemyBattleSprAndPlt PEGASUS_KNIGHT, 1 ; 99: JAR
+                enemyBattleSprAndPlt MAGE, 1 ; 100: MASTER MAGE
+                enemyBattleSprAndPlt NECROMANCER, 0 ; 101: NECROMANCER
+                enemyBattleSprAndPlt SHAMAN, 1 ; 102: BLUE SHAMAN

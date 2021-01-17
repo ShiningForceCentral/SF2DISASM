@@ -1302,7 +1302,7 @@ CheckChestItem:
                 blt.s   loc_41F0
                 jsr     j_CheckFlag
                 beq.s   loc_41DE
-                move.w  #$7F,d2 
+                move.w  #ITEM_NOTHING,d2 ; no item if chest has already been opened
 loc_41DE:
                 
                 move.w  (a2,d0.w),d0
@@ -1328,7 +1328,7 @@ CheckNonChestItem:
                 blt.s   loc_4214
                 jsr     j_CheckFlag
                 beq.s   loc_420E
-                move.w  #$7F,d2 
+                move.w  #ITEM_NOTHING,d2
 loc_420E:
                 
                 jsr     j_SetFlag
@@ -1480,7 +1480,7 @@ loc_4314:
                 bne.w   loc_4340
 loc_4322:
                 
-                move.w  #1,((MAP_EVENT_TYPE-$1000000)).w
+                move.w  #MAPEVENT_WARP,((MAP_EVENT_TYPE-$1000000)).w
                 move.l  2(a2),((MAP_EVENT_PARAM_1-$1000000)).w
                 move.w  6(a2),((MAP_EVENT_PARAM_5-$1000000)).w
                 move.w  #SFX_WARP,((WARP_SFX-$1000000)).w
