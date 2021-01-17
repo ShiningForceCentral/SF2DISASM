@@ -34,6 +34,7 @@ echo End of assembly, produced %buildname%
 echo -------------------------------------------------------------
 echo Checking build ...
 cd ../build/
+IF EXIST "%buildname%" ..\tools\fixheader "%buildname%"
 IF EXIST "%buildname%" (echo "%buildname%" exists in build directory. Success!) ELSE echo "%buildname%" does not exist, probably due to an assembly error. Check output.log.
 
 
