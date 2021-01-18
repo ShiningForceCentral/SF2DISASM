@@ -854,6 +854,7 @@
 #split	0x2E196,0x2E394,data/scripting/text/huffmantreeoffsets.bin
 #split	0x2E394,0x2EB34,data/scripting/text/huffmantrees.bin
 #split	0x4201E,0x425ED,data/scripting/gamestaff.bin
+#split	0x49444,0x494BC,data/scripting/map/debuggingscript.bin
 #split	0x1002BE,0x10033E,data/graphics/specialscreens/titlescreen/titlepalettes.bin
 #split	0x10033E,0x1014E0,data/graphics/specialscreens/titlescreen/titletiles.bin
 #split	0x1014E0,0x101BE0,data/graphics/specialscreens/titlescreen/titlelayoutA.bin
