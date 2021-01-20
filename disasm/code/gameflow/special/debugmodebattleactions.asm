@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DebugModeActionSelect:
                 
                 movem.l d0-d3/a0,-(sp)
@@ -54,7 +55,7 @@ loc_9B06:
                 
                 moveq   #0,d0           ; use item
                 moveq   #0,d1
-                moveq   #$7F,d2 
+                moveq   #ITEMINDEX_MAX,d2
                 jsr     j_NumberPrompt
                 move.w  d0,(a0)+
                 bsr.w   DebugModeSelectTargetEnemy
@@ -88,6 +89,7 @@ loc_9B3E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DebugModeSelectTargetEnemy:
                 
                 move.l  #COMBATANT_ENEMIES_START,d0
@@ -101,21 +103,46 @@ DebugModeSelectTargetEnemy:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: A2 = battlescene script stack frame
+
+allCombatantsCurrentHpTable = -24
+debugDodge = -23
+debugCritical = -22
+debugDouble = -21
+debugCounter = -20
+explodingActor = -17
+explode = -16
+specialCritical = -15
+ineffectiveAttack = -14
+doubleAttack = -13
+counterAttack = -12
+silencedActor = -11
+stunInaction = -10
+curseInaction = -9
+muddledActor = -8
+targetIsOnSameSide = -7
+rangedAttack = -6
+dodge = -5
+targetDies = -4
+criticalHit = -3
+inflictAilment = -2
+cutoff = -1
+
 DebugModeSelectHits:
                 
                 movem.l d0/a0-a6,-(sp)
                 jsr     j_YesNoPrompt
                 tst.w   d0
-                seq     -BCSTACK_OFFSET_DEBUGDODGE(a2)
+                seq     debugDodge(a2)
                 jsr     j_YesNoPrompt
                 tst.w   d0
-                seq     -BCSTACK_OFFSET_DEBUGCRIT(a2)
+                seq     debugCritical(a2)
                 jsr     j_YesNoPrompt
                 tst.w   d0
-                seq     -BCSTACK_OFFSET_DEBUGDOUBLE(a2)
+                seq     debugDouble(a2)
                 jsr     j_YesNoPrompt
                 tst.w   d0
-                seq     -BCSTACK_OFFSET_DEBUGCOUNTER(a2)
+                seq     debugCounter(a2)
                 movem.l (sp)+,d0/a0-a6
                 rts
 

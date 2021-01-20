@@ -24,6 +24,7 @@ ms_map16_flag530_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_EntityEvent0:
                 
                  
@@ -36,6 +37,7 @@ Map16_212_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_EntityEvent1:
                 
                  
@@ -47,6 +49,7 @@ Map16_212_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_EntityEvent2:
                 
                  
@@ -57,6 +60,7 @@ Map16_212_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_212_EntityEvent3:
                 
@@ -70,6 +74,7 @@ Map16_212_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_EntityEvent4:
                 
                  
@@ -81,6 +86,7 @@ Map16_212_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_212_EntityEvent5:
                 
@@ -94,6 +100,7 @@ Map16_212_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_EntityEvent6:
                 
                  
@@ -104,6 +111,7 @@ Map16_212_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_212_EntityEvent7:
                 
@@ -116,6 +124,7 @@ Map16_212_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_EntityEvent8:
                 
                  
@@ -126,6 +135,7 @@ Map16_212_EntityEvent8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_212_EntityEvent9:
                 
@@ -138,6 +148,7 @@ Map16_212_EntityEvent9:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_EntityEvent10:
                 
                 jsr     j_ChurchMenuActions
@@ -147,6 +158,7 @@ Map16_212_EntityEvent10:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_212_EntityEvent11:
                 
@@ -160,6 +172,7 @@ Map16_212_EntityEvent11:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_EntityEvent12:
                 
                  
@@ -171,6 +184,7 @@ Map16_212_EntityEvent12:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_EntityEvent13:
                 
                  
@@ -181,6 +195,7 @@ Map16_212_EntityEvent13:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_212_EntityEvent14:
                 
@@ -196,6 +211,7 @@ Map16_212_EntityEvent14:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_EntityEvent15:
                 
                 move.b  #$E,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -206,6 +222,7 @@ Map16_212_EntityEvent15:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_212_EntityEvent16:
                 
@@ -218,6 +235,7 @@ Map16_212_EntityEvent16:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_212_EntityEvent17:
                 

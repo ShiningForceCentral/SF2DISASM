@@ -2,14 +2,21 @@
 ; ASM FILE data\graphics\tech\menus\magicmenulayout.asm :
 ; 0x10EF4..0x10FCC : Magic menu layout
 MagicMenuLayout:
-; Syntax        vdpTile [VDPTILE_]index[|mirror|flip|palette|priority]
+; Syntax        vdpTile [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
 ; 1st line
                 vdpTile 0
                 vdpTile 0
                 vdpTile 0
-                vdpTile 1472|PLT3|PRIORITY
-                vdpTile 1473|PLT3|PRIORITY
+                vdpTile MENU1|PALETTE3|PRIORITY
+                vdpTile MENU2|PALETTE3|PRIORITY
                 vdpTile 0
                 vdpTile 0
                 vdpTile 0
@@ -26,81 +33,81 @@ MagicMenuLayout:
                 
 ; 2nd line
                 vdpTile 0
-                vdpTile 1478|PLT3|PRIORITY
-                vdpTile 1479|PLT3|PRIORITY
-                vdpTile 1474|PLT3|PRIORITY
-                vdpTile 1475|PLT3|PRIORITY
-                vdpTile 1492|PLT3|PRIORITY
-                vdpTile 1493|PLT3|PRIORITY
+                vdpTile MENU7|PALETTE3|PRIORITY
+                vdpTile MENU8|PALETTE3|PRIORITY
+                vdpTile MENU3|PALETTE3|PRIORITY
+                vdpTile MENU4|PALETTE3|PRIORITY
+                vdpTile MENU21|PALETTE3|PRIORITY
+                vdpTile MENU22|PALETTE3|PRIORITY
                 vdpTile 0
-                vdpTile CORNER|PLT3|PRIORITY
-                vdpTile H_BORDER|PLT3|PRIORITY
-                vdpTile H_BORDER|PLT3|PRIORITY
-                vdpTile H_BORDER|PLT3|PRIORITY
-                vdpTile H_BORDER|PLT3|PRIORITY
-                vdpTile H_BORDER|PLT3|PRIORITY
-                vdpTile H_BORDER|PLT3|PRIORITY
-                vdpTile CORNER|MIRROR|PLT3|PRIORITY
+                vdpTile CORNER|PALETTE3|PRIORITY
+                vdpTile H_BORDER|PALETTE3|PRIORITY
+                vdpTile H_BORDER|PALETTE3|PRIORITY
+                vdpTile H_BORDER|PALETTE3|PRIORITY
+                vdpTile H_BORDER|PALETTE3|PRIORITY
+                vdpTile H_BORDER|PALETTE3|PRIORITY
+                vdpTile H_BORDER|PALETTE3|PRIORITY
+                vdpTile CORNER|MIRROR|PALETTE3|PRIORITY
                 vdpTile 0
                 vdpTile 0
                 
 ; 3rd line
                 vdpTile 0
-                vdpTile 1480|PLT3|PRIORITY
-                vdpTile 1481|PLT3|PRIORITY
-                vdpTile 1476|PLT3|PRIORITY
-                vdpTile 1477|PLT3|PRIORITY
-                vdpTile 1494|PLT3|PRIORITY
-                vdpTile 1495|PLT3|PRIORITY
+                vdpTile MENU9|PALETTE3|PRIORITY
+                vdpTile MENU10|PALETTE3|PRIORITY
+                vdpTile MENU5|PALETTE3|PRIORITY
+                vdpTile MENU6|PALETTE3|PRIORITY
+                vdpTile MENU23|PALETTE3|PRIORITY
+                vdpTile MENU24|PALETTE3|PRIORITY
                 vdpTile 0
-                vdpTile V_BORDER|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile V_BORDER|MIRROR|PLT3|PRIORITY
+                vdpTile V_BORDER|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile V_BORDER|MIRROR|PALETTE3|PRIORITY
                 vdpTile 0
                 vdpTile 0
                 
 ; 4th line
                 vdpTile 0
-                vdpTile 1482|PLT3|PRIORITY
-                vdpTile 1483|PLT3|PRIORITY
-                vdpTile 1486|PLT3|PRIORITY
-                vdpTile 1487|PLT3|PRIORITY
-                vdpTile 1496|PLT3|PRIORITY
-                vdpTile 1497|PLT3|PRIORITY
+                vdpTile MENU11|PALETTE3|PRIORITY
+                vdpTile MENU12|PALETTE3|PRIORITY
+                vdpTile MENU15|PALETTE3|PRIORITY
+                vdpTile MENU16|PALETTE3|PRIORITY
+                vdpTile MENU25|PALETTE3|PRIORITY
+                vdpTile MENU26|PALETTE3|PRIORITY
                 vdpTile 0
-                vdpTile V_BORDER|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile V_BORDER|MIRROR|PLT3|PRIORITY
+                vdpTile V_BORDER|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile V_BORDER|MIRROR|PALETTE3|PRIORITY
                 vdpTile 0
                 vdpTile 0
                 
 ; 5th line
                 vdpTile 0
-                vdpTile 1484|PLT3|PRIORITY
-                vdpTile 1485|PLT3|PRIORITY
-                vdpTile 1488|PLT3|PRIORITY
-                vdpTile 1489|PLT3|PRIORITY
-                vdpTile 1498|PLT3|PRIORITY
-                vdpTile 1499|PLT3|PRIORITY
+                vdpTile MENU13|PALETTE3|PRIORITY
+                vdpTile MENU14|PALETTE3|PRIORITY
+                vdpTile MENU17|PALETTE3|PRIORITY
+                vdpTile MENU18|PALETTE3|PRIORITY
+                vdpTile MENU27|PALETTE3|PRIORITY
+                vdpTile MENU28|PALETTE3|PRIORITY
                 vdpTile 0
-                vdpTile V_BORDER|PLT3|PRIORITY
-                vdpTile UPPERCASE_M|PLT3|PRIORITY
-                vdpTile UPPERCASE_P|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile SPACE|PLT3|PRIORITY
-                vdpTile V_BORDER|MIRROR|PLT3|PRIORITY
+                vdpTile V_BORDER|PALETTE3|PRIORITY
+                vdpTile UPPERCASE_M|PALETTE3|PRIORITY
+                vdpTile UPPERCASE_P|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile SPACE|PALETTE3|PRIORITY
+                vdpTile V_BORDER|MIRROR|PALETTE3|PRIORITY
                 vdpTile 0
                 vdpTile 0
                 
@@ -108,18 +115,18 @@ MagicMenuLayout:
                 vdpTile 0
                 vdpTile 0
                 vdpTile 0
-                vdpTile 1490|PLT3|PRIORITY
-                vdpTile 1491|PLT3|PRIORITY
+                vdpTile MENU19|PALETTE3|PRIORITY
+                vdpTile MENU20|PALETTE3|PRIORITY
                 vdpTile 0
                 vdpTile 0
                 vdpTile 0
-                vdpTile CORNER|FLIP|PLT3|PRIORITY
-                vdpTile H_BORDER|FLIP|PLT3|PRIORITY
-                vdpTile H_BORDER|FLIP|PLT3|PRIORITY
-                vdpTile H_BORDER|FLIP|PLT3|PRIORITY
-                vdpTile H_BORDER|FLIP|PLT3|PRIORITY
-                vdpTile H_BORDER|FLIP|PLT3|PRIORITY
-                vdpTile H_BORDER|FLIP|PLT3|PRIORITY
-                vdpTile CORNER|MIRROR|FLIP|PLT3|PRIORITY
+                vdpTile CORNER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile CORNER|MIRROR|FLIP|PALETTE3|PRIORITY
                 vdpTile 0
                 vdpTile 0

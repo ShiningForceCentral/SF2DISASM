@@ -189,6 +189,7 @@ cs_5CDDA:       csc_end
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csub_5CDDC:
                 
                 move.b  #$A9,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
@@ -198,6 +199,7 @@ csub_5CDDC:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5CDE4:
                 
@@ -209,6 +211,7 @@ sub_5CDE4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_5CDEC:
                 
                 subq.b  #4,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
@@ -219,6 +222,7 @@ sub_5CDEC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_5CDF2:
                 
                 addq.b  #4,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
@@ -228,6 +232,7 @@ sub_5CDF2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5CDF8:
                 

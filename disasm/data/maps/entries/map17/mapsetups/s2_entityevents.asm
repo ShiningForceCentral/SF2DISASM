@@ -18,6 +18,7 @@ ms_map17_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_EntityEvent9:
                 
                 rts
@@ -26,6 +27,7 @@ Map17_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map17_EntityEvent7:
                 
@@ -42,6 +44,7 @@ return_5235C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_EntityEvent8:
                 
                  
@@ -56,6 +59,7 @@ return_52368:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map17_EntityEvent10:
                 
@@ -72,6 +76,7 @@ return_52374:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_EntityEvent11:
                 
                  
@@ -83,6 +88,7 @@ Map17_EntityEvent11:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_EntityEvent0:
                 
                  
@@ -93,6 +99,7 @@ Map17_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map17_EntityEvent1:
                 
@@ -107,6 +114,7 @@ Map17_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_EntityEvent2:
                 
                  
@@ -120,6 +128,7 @@ Map17_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map17_EntityEvent4:
                 
@@ -140,6 +149,7 @@ return_523B2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_EntityEvent5:
                 
                  
@@ -150,6 +160,7 @@ Map17_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map17_EntityEvent3:
                 
@@ -171,6 +182,7 @@ return_523D0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_EntityEvent6:
                 
                  
@@ -182,6 +194,7 @@ Map17_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_DefaultEntityEvent:
                 
                 rts
@@ -190,6 +203,7 @@ Map17_DefaultEntityEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_523DA:
                 

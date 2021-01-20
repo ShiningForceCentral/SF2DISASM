@@ -4,15 +4,16 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-CreateFighterMiniStatusWindow:
+
+CreateBattlefieldMiniStatusWindow:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a2,-(sp)
                 move.w  d0,-(sp)
-                move.w  #WINDOW_FIGHTERMINISTATUS_SIZE,d0
-                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
-                lea     ((FIGHTER_MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
-                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                move.w  #WINDOW_MINISTATUS_SIZE,d0
+                move.w  #WINDOW_MINISTATUS_DEST,d1
+                lea     ((MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
+                tst.b   ((IS_TARGETING-$1000000)).w
                 beq.s   loc_11594
                 addq.l  #2,a2
                 addi.w  #$15,d1
@@ -23,15 +24,15 @@ loc_11594:
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d0
-                bsr.w   BuildFighterMiniStatusWindow
+                bsr.w   BuildMiniStatusWindow
                 move.w  #1,d1
-                move.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
+                move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
                 move.w  #$1F,d4
                 sub.w   d3,d4
                 lsl.w   #8,d4
                 or.w    d4,d1
                 moveq   #4,d2
-                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                tst.b   ((IS_TARGETING-$1000000)).w
                 beq.s   loc_115C4
                 addi.w  #$15,d1
 loc_115C4:
@@ -45,23 +46,24 @@ loc_115C4:
                 movem.l (sp)+,d0-a2
                 rts
 
-    ; End of function CreateFighterMiniStatusWindow
+    ; End of function CreateBattlefieldMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-HideFighterMiniStatusWindow:
+
+HideMiniStatusWindow:
                 
                 movem.l d0-a2,-(sp)
-                lea     ((FIGHTER_MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
-                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                lea     ((MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
+                tst.b   ((IS_TARGETING-$1000000)).w
                 beq.s   loc_115F0
                 addq.l  #2,a2
 loc_115F0:
                 
                 move.w  (a2),d0
-                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
-                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                move.w  #WINDOW_MINISTATUS_DEST,d1
+                tst.b   ((IS_TARGETING-$1000000)).w
                 beq.s   loc_11600
                 addi.w  #$15,d1
 loc_11600:
@@ -75,26 +77,28 @@ loc_11600:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function HideFighterMiniStatusWindow
+    ; End of function HideMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1161A:
+
+CreateBattlesceneMiniStatusWindows:
                 
                 jsr     (InitWindowProperties).w
-                move.w  #WINDOW_FIGHTERMINISTATUS_SIZE,d0
-                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
+                move.w  #WINDOW_MINISTATUS_SIZE,d0
+                move.w  #WINDOW_MINISTATUS_DEST,d1
                 jsr     (CreateWindow).w
-                move.w  #WINDOW_FIGHTERMINISTATUS_SIZE,d0
-                move.w  #WINDOW_FIGHTERMINISTATUS_DEST,d1
+                move.w  #WINDOW_MINISTATUS_SIZE,d0
+                move.w  #WINDOW_MINISTATUS_DEST,d1
                 jsr     (CreateWindow).w
                 rts
 
-    ; End of function sub_1161A
+    ; End of function CreateBattlesceneMiniStatusWindows
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_11638:
                 
@@ -102,16 +106,16 @@ sub_11638:
                 beq.w   return_11714
                 movem.l d0-a1,-(sp)
                 move.w  d1,-(sp)
-                clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                clr.b   ((IS_TARGETING-$1000000)).w
                 movem.w d0,-(sp)
                 clr.w   d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 movem.w (sp)+,d0
-                bsr.w   BuildFighterMiniStatusWindow
+                bsr.w   BuildMiniStatusWindow
                 move.w  (sp)+,d1
                 bne.s   loc_11670
-                move.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
+                move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
                 move.w  #$1F,d1
                 sub.w   d3,d1
                 lsl.w   #8,d1
@@ -136,12 +140,13 @@ loc_11674:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 RemoveAllyBattlesceneWindow:
                 
                 cmpi.b  #$FF,d0
                 beq.w   return_11714
                 movem.l d0-a1,-(sp)
-                clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                clr.b   ((IS_TARGETING-$1000000)).w
                 clr.w   d0
                 move.w  #$2006,d1
                 moveq   #1,d2
@@ -154,22 +159,23 @@ RemoveAllyBattlesceneWindow:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_116B8:
                 
                 cmpi.b  #$FF,d0
                 beq.w   return_11714
                 movem.l d0-a1,-(sp)
                 move.w  d1,-(sp)
-                move.b  #$FF,((FIGHTER_IS_TARGETTING-$1000000)).w
+                move.b  #$FF,((IS_TARGETING-$1000000)).w
                 movem.w d0,-(sp)
                 moveq   #1,d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 movem.w (sp)+,d0
-                bsr.w   BuildFighterMiniStatusWindow
+                bsr.w   BuildMiniStatusWindow
                 move.w  (sp)+,d1
                 beq.s   loc_116F2
-                move.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
+                move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
                 move.w  #$1F,d1
                 sub.w   d3,d1
                 lsl.w   #8,d1
@@ -196,12 +202,13 @@ return_11714:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 RemoveEnemyBattlesceneWindow:
                 
                 cmpi.b  #$FF,d0
                 beq.s   return_11714
                 movem.l d0-a1,-(sp)
-                move.b  #$FF,((FIGHTER_IS_TARGETTING-$1000000)).w
+                move.b  #$FF,((IS_TARGETING-$1000000)).w
                 moveq   #1,d0
                 move.w  #$2006,d1
                 moveq   #1,d2
@@ -221,15 +228,16 @@ RemoveEnemyBattlesceneWindow:
 ;     D1 = max HP/MP value
 ;     D2 = VDP tile index
 
+
 DrawColoredStatBar:
                 
                 movem.l d0-a1,-(sp)
-                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                tst.b   ((IS_TARGETING-$1000000)).w
                 beq.s   @InitVdpTileEntry
                 addi.w  #$A,d2          ; draw bar in bottom left window
 @InitVdpTileEntry:
                 
-                ori.w   #VDPTILE_PLT3|VDPTILE_PRIORITY,d2
+                ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
                 cmp.w   d0,d1
                 bge.s   @ClearLoadingSpace ; keep highest of current or max stat value
                 move.w  d0,d1
@@ -335,6 +343,7 @@ DrawColoredStatBar:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_11804:
                 
                 movem.l d0-d2/a0-a1,-(sp)
@@ -352,9 +361,10 @@ sub_11804:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DmaStatBarTiles:
                 
-                tst.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                tst.b   ((IS_TARGETING-$1000000)).w
                 beq.s   @Continue
                 addi.w  #$A,d2          ; draw bar in bottom left window
 @Continue:
@@ -399,6 +409,7 @@ tbl_StatBarColumns:
 ;     In: D4 = stat bar column index
 ;         D7 = drawn columns count
 
+
 WriteStatBarColumn:
                 
                 movem.l d3-a0,-(sp)
@@ -430,6 +441,7 @@ WriteStatBarColumn:
 ; =============== S U B R O U T I N E =======================================
 
 ; Check ASCII name at A0 for two special characters
+
 
 AdjustStringLengthForSpecialCharacters:
                 

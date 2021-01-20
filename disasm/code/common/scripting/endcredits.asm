@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 PlayEndCredits:
                 
                 jmp     *+4(pc)
@@ -53,9 +54,9 @@ loc_1AC09E:
                 moveq   #$78,d0 
                 jsr     (Sleep).w       
                 jsr     j_UpdateForce
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                lea     ((TARGETS_LIST-$1000000)).w,a0
 loc_1AC10E:
                 
                 movem.l d7-a0,-(sp)
@@ -116,6 +117,7 @@ loc_1AC1A8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ClearPalette2:
                 
                 lea     (PALLETE_2_BASE).l,a0
@@ -133,6 +135,7 @@ ClearPalette2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 VInt_EndCredits:
                 
@@ -166,6 +169,7 @@ loc_1AC220:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 EndCreditSubroutine:
                 

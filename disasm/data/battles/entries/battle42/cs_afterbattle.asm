@@ -268,7 +268,7 @@ cs_4EF5E:       stopEntity 128
                 setFacing ALLY_BOWIE,UP
                 setFacing ALLY_PETER,UP
                 nod ALLY_BOWIE
-                setStoryFlag 43         ; Battle 43 unlocked
+                setStoryFlag 43         ; Battle 43 unlocked - BATTLE_VERSUS_ZEON               
                 csc_end
 ce_4F328:       mainEntity 13,17,UP
                 entity 15,15,LEFT,ALLY_PETER,eas_Init

@@ -6,6 +6,7 @@
 
 ; Never called, probably what remains of some debugging code ?
 
+
 BattleDebugFunction1B120A:
                 
                 moveq   #4,d1
@@ -41,6 +42,7 @@ loc_1B126E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 InitAllAlliesBattlePositions:
                 
@@ -98,6 +100,7 @@ InitAllAlliesBattlePositions:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitAllEnemiesBattlePositions:
                 
                 movem.l d0/d7,-(sp)
@@ -116,6 +119,7 @@ InitAllEnemiesBattlePositions:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 InitEnemyBattlePosition:
                 
@@ -178,6 +182,7 @@ loc_1B139A:
 ; 
 ; Out: carry = 0 if respawn, 1 if not
 
+
 UpdateEnemyStatsForRespawn:
                 
                 movem.l d0-a6,-(sp)
@@ -220,6 +225,7 @@ loc_1B1404:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: A0 = address of current combatant from battle def
+
 
 InitEnemyStats:
                 
@@ -283,6 +289,7 @@ loc_1B142C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitEnemyList:
                 
                 movem.l d1/a0-a1,-(sp)
@@ -309,6 +316,7 @@ loc_1B14F4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitEnemyItems:
                 
                 movem.l d0-a0,-(sp)
@@ -319,14 +327,14 @@ InitEnemyItems:
                 beq.s   loc_1B154E
                 move.w  d1,d3
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 subi.w  #1,d2
                 move.w  d2,d4
                 clr.w   d5
 loc_1B152E:
                 
                 move.w  d5,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 cmp.b   d1,d3
                 bne.s   loc_1B1546
                 move.w  d5,d1
@@ -349,6 +357,7 @@ loc_1B154E:
 ; In: D3 = enemy starting tile x (from battle def)
 ;     D4 = enemy starting tile y (from battle def)
 ; Out: carry = if anyone is on D3/D4
+
 
 GetEnemyOriginalPosOccupied:
                 
@@ -396,6 +405,7 @@ loc_1B15A4:
 
 ; Set enemy base ATT according to difficulty
 
+
 SetEnemyBaseATT:
                 
                 move.l  d1,-(sp)
@@ -433,6 +443,7 @@ SetEnemyBaseATT:
 
 ; coords of anchor point used in AI byte D0 -> D1, D2
 
+
 GetEnemyAITargetPosition:
                 
                 movem.l d0/a0,-(sp)
@@ -469,6 +480,7 @@ loc_1B162A:
 ; 
 ;       Out: A0 = subsection address
 ;            D1 = subsection size
+
 
 GetBattleSpriteSetSubsection:
                 
@@ -518,6 +530,7 @@ loc_1B1698:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get starting X and Y of combatant D0 -> D1, D2
+
 
 GetCombatantStartingPositions:
                 
@@ -571,6 +584,7 @@ GetCombatantStartingPositions:
 ; 
 ;       In: D1 = 
 ;           D2 = 
+
 
 sub_1B16FE:
                 
@@ -626,6 +640,7 @@ loc_1B177A:
 
 ; Check if current battle can be upgraded (0x0000=no, 0xffff=yes) -> D1
 
+
 DoesBattleUpgrade:
                 
                 movem.l d0/d2-a6,-(sp)
@@ -665,6 +680,7 @@ loc_1B17B6:
 
 ; Strange use case where "Battle completed" flag is set for battle 4 in spite of being alreeady set earlier.
 
+
 UpgradeBattle:
                 
                 movem.l d0-a6,-(sp)
@@ -700,6 +716,7 @@ loc_1B17F8:
 ; =============== S U B R O U T I N E =======================================
 
 ; check if battle should be upgraded based on index in RAM:f712 and if normal battle was done (0=no, 1=yes) -> D1
+
 
 ShouldBattleUpgrade:
                 
@@ -747,6 +764,7 @@ loc_1B1846:
 ; In: D1 = original enemy index
 ; 
 ; Out: D1 = upgraded enemy index
+
 
 UpgradeEnemyIndex:
                 
@@ -993,14 +1011,15 @@ UpgradeEnemyIndex:
 ; 
 ;       Out: D1 = 0 if false, 1 if true
 
+
 HasJaroJoinedTheForce:
                 
                 movem.l d0/d2-a6,-(sp)
                 jsr     j_UpdateForce
-                lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
+                lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  (a0),d7
                 subi.w  #1,d7
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.l   d6
 @Loop:
                 

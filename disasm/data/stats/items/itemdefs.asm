@@ -3,14 +3,22 @@
 ; 0x16EA6..0x176A6 : Item definitions
 tbl_ItemDefs:   
 ; Syntax        equipFlags [EQUIPFLAG_]bitfield
-;               range      min, max (0-3)
+;               range      min, max 0-3
 ;               price      0-65535
 ;               itemType   [ITEMTYPE_]bitfield
-;               useSpell   [SPELL_]index[|level]
+;               useSpell   [SPELL_]enum[|level]
 ;               equipEffects &
-;                   [EQUIPEFFECT_]index, parameter, & (value range depends on effect)
-;                   [EQUIPEFFECT_]index, parameter, &
-;                   [EQUIPEFFECT_]index, parameter
+;                   [EQUIPEFFECT_]enum, parameter, &
+;                   [EQUIPEFFECT_]enum, parameter, &
+;                   [EQUIPEFFECT_]enum, parameter
+;
+;        level: LV1 = 0 (default when omitted)
+;               LV2 = $40
+;               LV3 = $80
+;               LV4 = $C0
+;
+; Notes: Equip parameter range depends on effect.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 equipFlags NONE         ; 0: Medical Herb
                 range      0, 1

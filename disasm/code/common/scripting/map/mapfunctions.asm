@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitMapEntities:
                 
                 movem.l d0-a5,-(sp)
@@ -14,10 +15,11 @@ InitMapEntities:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_440D4:
                 
                 movem.l d0-a5,-(sp)
-                lea     GetEntityPortaitAndSpeechSound(pc), a0
+                lea     GetEntityPortaitAndSpeechSfx(pc), a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
 
@@ -110,6 +112,7 @@ loc_44180:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_441AA:
                 
                 movem.l d0-a1,-(sp)
@@ -177,6 +180,7 @@ loc_44262:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 IsOverworldMap:
                 

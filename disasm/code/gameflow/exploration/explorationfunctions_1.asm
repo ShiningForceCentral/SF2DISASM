@@ -22,7 +22,7 @@ loc_239EE:
                 move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     413             ; "{NAME} found{N}{ITEM}.{W2}{CLEAR}"
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 cmpi.w  #4,d2
                 bge.s   loc_23A1E
                 move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d1
@@ -35,7 +35,7 @@ loc_23A1E:
                 
                 jsr     j_UpdateForce
                 lea     ((byte_FFB653-$1000000)).w,a0
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #2,d7
                 bmi.w   loc_23A66
 loc_23A32:
@@ -43,7 +43,7 @@ loc_23A32:
                 clr.w   d0
                 move.b  (a0)+,d0
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 cmpi.w  #4,d2
                 bge.s   loc_23A62
                 move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d1

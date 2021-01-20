@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GameIntro:
                 
                 bra.w   GameIntro
@@ -12,6 +13,7 @@ j_GameIntro:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_j_DisplaySegaLogo:
                 

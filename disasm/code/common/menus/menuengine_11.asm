@@ -4,28 +4,34 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_4 = -4
+
 WitchMainMenu:
                 
                 movem.l d1-a1,-(sp)
-                link    a6,#-$10
+                link    a6,#-16
                 andi.w  #$F,d0
-                move.w  d2,-$C(a6)
+                move.w  d2,var_12(a6)
                 beq.w   loc_16756
-                move.w  d1,-$A(a6)
-                move.w  #$A,-8(a6)
+                move.w  d1,var_10(a6)
+                move.w  #$A,var_8(a6)
                 movem.w d0,-(sp)
                 move.w  #$1C0C,d0
                 move.w  #$2001,d1
                 jsr     (CreateWindow).l
-                move.w  d0,-6(a6)
-                move.l  a1,-4(a6)
+                move.w  d0,var_6(a6)
+                move.l  a1,var_4(a6)
                 movea.l (p_plt_WitchChoice).l,a0
                 lea     (PALETTE_2_CURRENT).l,a1
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   
                 jsr     (ApplyVIntCramDma).w
                 bsr.w   sub_1679E
-                move.w  -6(a6),d0
+                move.w  var_6(a6),d0
                 move.w  #$202,d1
                 jsr     (SetWindowDestination).l
                 jsr     (WaitForVInt).w
@@ -34,7 +40,7 @@ loc_166C2:
                 
                 bsr.w   sub_1679E
                 movem.w d0,-(sp)
-                move.w  -6(a6),d0
+                move.w  var_6(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
                 movem.w (sp)+,d0
@@ -73,9 +79,9 @@ loc_16714:
                 jsr     (GenerateRandomNumber).w
                 movem.l (sp)+,d6-d7
                 jsr     (WaitForVInt).w
-                subq.w  #1,-8(a6)
+                subq.w  #1,var_8(a6)
                 bne.s   loc_16752
-                move.w  #$14,-8(a6)
+                move.w  #$14,var_8(a6)
 loc_16752:
                 
                 bra.w   loc_166C2
@@ -86,11 +92,11 @@ byte_1675A:
                 
                 sndCom  SFX_VALIDATION
                 movem.w d0,-(sp)
-                move.w  -6(a6),d0
+                move.w  var_6(a6),d0
                 move.w  #$2001,d1
                 jsr     (SetWindowDestination).l
                 jsr     (WaitForVInt).w
-                move.w  -6(a6),d0
+                move.w  var_6(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).l
                 movem.w (sp)+,d0
                 unlk    a6
@@ -102,13 +108,19 @@ byte_1675A:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_4 = -4
+
 sub_1678A:
                 
                  
                 sndCom  SFX_MENU_SELECTION
                 add.w   d3,d0
                 andi.w  #3,d0
-                move.w  -$C(a6),d1
+                move.w  var_12(a6),d1
                 btst    d0,d1
                 beq.s   sub_1678A
                 rts
@@ -118,15 +130,21 @@ sub_1678A:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_4 = -4
+
 sub_1679E:
                 
-                movea.l -4(a6),a0
+                movea.l var_4(a6),a0
                 move.w  #$A7,d7 
 loc_167A6:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_167A6
-                move.w  -$C(a6),d6
+                move.w  var_12(a6),d6
                 btst    #0,d6
                 beq.s   loc_167C6
                 move.w  #0,d3
@@ -166,13 +184,19 @@ return_16808:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_4 = -4
+
 DrawWitchMenuBubble:
                 
                 movea.l (p_WitchBubbleAnimation).l,a0
-                movea.l -4(a6),a1
+                movea.l var_4(a6),a1
                 cmp.b   d0,d3
                 bne.s   loc_1683A
-                move.w  -8(a6),d7
+                move.w  var_8(a6),d7
                 cmpi.w  #5,d7
                 blt.s   loc_16826
                 addi.w  #$50,d2 
@@ -208,7 +232,7 @@ loc_16846:
                 addq.l  #2,a1
 loc_16864:
                 
-                move.w  -$A(a6),d1
+                move.w  var_10(a6),d1
                 bne.w   loc_168A4
                 adda.w  #$72,a1 
                 lsl.w   #2,d3
@@ -256,15 +280,16 @@ aData2:         dc.b 'DATA2',0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_168D8:
                 
                 subq.w  #1,d1
                 bne.w   sub_16942
                 movem.l d7-a1,-(sp)
-                lea     (SAVE1_CHARACTER_DATA).l,a0
+                lea     (SAVE1_DATA).l,a0
                 cmpi.w  #2,d3
                 blt.s   loc_168F4
-                lea     (SAVE2_CHARACTER_DATA).l,a0
+                lea     (SAVE2_DATA).l,a0
 loc_168F4:
                 
                 lea     (FF8804_LOADING_SPACE).l,a1
@@ -299,6 +324,7 @@ return_16940:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_16942:
                 
                 adda.w  #$72,a1 
@@ -323,11 +349,12 @@ aOuch:          dc.b 'OUCH!',0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1697C:
                 
                 movem.w d0,-(sp)
                 movem.l d7/a1,-(sp)
-                moveq   #$FFFFFFC8,d1
+                moveq   #-56,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movem.l (sp)+,d7/a1
                 subq.w  #1,d7
@@ -345,6 +372,7 @@ loc_16990:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_169AE:
                 
@@ -369,8 +397,8 @@ sub_169AE:
                 move.w  #$1E,d1
                 sub.w   d0,d1
                 adda.w  d1,a1
-                moveq   #$FFFFFFF0,d1
-                moveq   #$A,d7
+                moveq   #-16,d1
+                moveq   #10,d7
                 tst.w   d2
                 bne.s   loc_16A0C
                 bsr.w   WriteTilesFromAsciiWithOrangeFont
@@ -395,6 +423,7 @@ loc_16A2A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_16A30:
                 

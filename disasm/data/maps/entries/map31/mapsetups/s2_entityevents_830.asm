@@ -16,6 +16,7 @@ ms_map31_flag830_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map31_33E_EntityEvent0:
                 
                  
@@ -28,6 +29,7 @@ Map31_33E_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map31_33E_EntityEvent1:
                 
                 move.b  #$C,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -38,6 +40,7 @@ Map31_33E_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map31_33E_EntityEvent2:
                 
@@ -50,6 +53,7 @@ Map31_33E_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map31_33E_EntityEvent3:
                 
                  
@@ -61,6 +65,7 @@ Map31_33E_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map31_33E_EntityEvent4:
                 
@@ -83,6 +88,7 @@ return_5D50C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map31_33E_EntityEvent5:
                 
                  
@@ -93,6 +99,7 @@ Map31_33E_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map31_33E_EntityEvent6:
                 
@@ -106,6 +113,7 @@ Map31_33E_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map31_33E_EntityEvent7:
                 
                 jsr     j_ChurchMenuActions
@@ -115,6 +123,7 @@ Map31_33E_EntityEvent7:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map31_33E_EntityEvent8:
                 
@@ -136,6 +145,7 @@ return_5D53E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 nullsub_5D540:
                 
                 rts
@@ -144,6 +154,7 @@ nullsub_5D540:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map31_33E_EntityEvent9:
                 
@@ -155,6 +166,7 @@ Map31_33E_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map31_DefaultEntityEvent:
                 

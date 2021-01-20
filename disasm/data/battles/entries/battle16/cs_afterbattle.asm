@@ -7,6 +7,7 @@ abcs_battle16:  executeSubroutine csub_4B1D0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csub_4B1CA:
                 
                 clr.b   ((PLAYER_TYPE-$1000000)).w
@@ -16,6 +17,7 @@ csub_4B1CA:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csub_4B1D0:
                 

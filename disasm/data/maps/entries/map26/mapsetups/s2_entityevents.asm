@@ -12,6 +12,7 @@ ms_map26_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map26_EntityEvent0:
                 
                  
@@ -23,6 +24,7 @@ Map26_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map26_EntityEvent1:
                 
@@ -36,6 +38,7 @@ Map26_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map26_EntityEvent2:
                 
                  
@@ -48,6 +51,7 @@ Map26_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map26_EntityEvent4:
                 
                 jsr     j_ChurchMenuActions
@@ -58,6 +62,7 @@ Map26_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map26_EntityEvent5:
                 
                 jsr     j_CaravanActions
@@ -67,6 +72,7 @@ Map26_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map26_EntityEvent3:
                 

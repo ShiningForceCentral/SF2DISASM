@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map7_InitFunction:
                 
                  
@@ -12,7 +13,7 @@ ms_map7_InitFunction:
                 move.b  #6,((EGRESS_MAP_INDEX-$1000000)).w
                 script  cs_55832
                 setFlg  707             ; Set after the "one year has passed" text, after New Granseal is built
-                setFlg  411             ; Battle 11 unlocked
+                setFlg  411             ; Battle 11 unlocked - BATTLE_CAVE_OF_DARKNESS          
 return_55830:
                 
                 rts

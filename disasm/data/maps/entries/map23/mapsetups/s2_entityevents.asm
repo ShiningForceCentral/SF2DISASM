@@ -12,6 +12,7 @@ ms_map23_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_EntityEvent0:
                 
                  
@@ -24,6 +25,7 @@ Map23_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_EntityEvent1:
                 
                  
@@ -34,6 +36,7 @@ Map23_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map23_EntityEvent2:
                 
@@ -47,6 +50,7 @@ Map23_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_EntityEvent3:
                 
                  
@@ -58,6 +62,7 @@ Map23_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map23_EntityEvent4:
                 
@@ -80,6 +85,7 @@ return_59B9C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_EntityEvent5:
                 
                 jsr     j_ChurchMenuActions
@@ -89,6 +95,7 @@ Map23_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map23_DefaultEntityEvent:
                 

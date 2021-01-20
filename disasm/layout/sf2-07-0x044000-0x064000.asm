@@ -104,8 +104,8 @@ j_PlayIntroOrEndCutscene:
                 jmp     PlayIntroOrEndCutscene(pc)
 j_ExecuteFlashScreenScript:                
                 jmp     ExecuteFlashScreenScript(pc)
-j_GetEntityPortaitAndSpeechSound:                
-                jmp     GetEntityPortaitAndSpeechSound(pc)
+j_GetEntityPortaitAndSpeechSfx:                
+                jmp     GetEntityPortaitAndSpeechSfx(pc)
 j_ClearEntities:                
                 jmp     ClearEntities(pc)
                 include "code\common\scripting\map\mapfunctions.asm"    ; Map functions

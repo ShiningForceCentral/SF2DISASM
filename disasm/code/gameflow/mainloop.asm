@@ -12,6 +12,7 @@
 ;     D7 = battle index ($FFFF for none)
 ; ...more
 
+
 MainLoop:
                 
                 clr.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w

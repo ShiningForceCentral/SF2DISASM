@@ -16,9 +16,9 @@ cs_5DA28:       textCursor 3323
                 nextSingleText $FF,255  ; "{LEADER} decides to take{N}{NAME;22} with him.{W1}"
                 nextSingleText $0,ALLY_FRAYJA ; "Thank you very much.{W1}"
                 followEntity ALLY_FRAYJA,FOLLOWER_B,2
-                setStoryFlag 31         ; Battle 31 unlocked
-                setStoryFlag 33         ; Battle 33 unlocked
-                setStoryFlag 34         ; Battle 34 unlocked
+                setStoryFlag 31         ; Battle 31 unlocked - BATTLE_PACALON                   
+                setStoryFlag 33         ; Battle 33 unlocked - BATTLE_INSIDE_MOUN               
+                setStoryFlag 34         ; Battle 34 unlocked - BATTLE_VERSUS_CAMEELA            
                 csc_end
 cs_5DA7A:       setCameraEntity 131
                 setDest ALLY_BOWIE,4,23

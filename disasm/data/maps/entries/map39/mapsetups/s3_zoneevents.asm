@@ -7,6 +7,7 @@ ms_map39_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map39_DefaultZoneEvent:
                 
                 rts
@@ -15,6 +16,7 @@ Map39_DefaultZoneEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map39_ZoneEvent0:
                 

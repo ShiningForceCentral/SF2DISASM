@@ -15,6 +15,7 @@ ms_map2_flag530_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_212_EntityEvent0:
                 
                  
@@ -27,6 +28,7 @@ Map2_212_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_212_EntityEvent1:
                 
                  
@@ -38,6 +40,7 @@ Map2_212_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_212_EntityEvent2:
                 
                  
@@ -48,6 +51,7 @@ Map2_212_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map2_212_EntityEvent3:
                 
@@ -61,6 +65,7 @@ Map2_212_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_212_EntityEvent4:
                 
                  
@@ -72,6 +77,7 @@ Map2_212_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map2_212_EntityEvent5:
                 

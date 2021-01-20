@@ -7,6 +7,7 @@ ms_map3_flag543_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_21F_DefaultZoneEvent:
                 
                 rts
@@ -15,6 +16,7 @@ Map3_21F_DefaultZoneEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_21F_ZoneEvent0:
                 

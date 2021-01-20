@@ -26,7 +26,7 @@ abcs_battle05:  textCursor 2332
                 nextText $0,ALLY_SLADE  ; "I have an obligation to find{N}the other jewel!{W2}"
                 nextSingleText $0,ALLY_SLADE ; "Let's go to Granseal!{W1}"
                 clearF 73               ; Slade is a follower
-                setStoryFlag 6          ; Battle 6 unlocked
+                setStoryFlag 6          ; Battle 6 unlocked - BATTLE_TO_GRANSEAL               
                 followEntity ALLY_SLADE,ALLY_BOWIE,2
                 warp MAP_GALAM_CASTLE,16,18,DOWN
                 csc_end

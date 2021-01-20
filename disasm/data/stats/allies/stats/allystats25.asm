@@ -4,7 +4,7 @@
 AllyStats25:    forClass  MMNK
                 hpGrowth  29, 79, LINEAR
                 mpGrowth  31, 65, LINEAR
-                atkGrowth 19, 36, LINEAR
+                attGrowth 19, 36, LINEAR
                 defGrowth 19, 61, EARLYANDLATE
                 agiGrowth 21, 62, LINEAR
                 spellList &

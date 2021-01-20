@@ -4,7 +4,7 @@
 AllyStats15:    forClass  PRST
                 hpGrowth  5, 48, LINEAR
                 mpGrowth  5, 56, LINEAR
-                atkGrowth 5, 26, LINEAR
+                attGrowth 5, 26, LINEAR
                 defGrowth 6, 27, LINEAR
                 agiGrowth 6, 29, LINEAR
                 spellList &
@@ -25,7 +25,7 @@ AllyStats15:    forClass  PRST
                 forClass  VICR
                 hpGrowth  33, 92, LATE
                 mpGrowth  38, 91, MIDDLE
-                atkGrowth 19, 23, MIDDLE
+                attGrowth 19, 23, MIDDLE
                 defGrowth 20, 45, EARLYANDLATE
                 agiGrowth 21, 62, LINEAR
                 useFirstSpellList
@@ -33,7 +33,7 @@ AllyStats15:    forClass  PRST
                 forClass  MMNK
                 hpGrowth  33, 92, LATE
                 mpGrowth  38, 71, MIDDLE
-                atkGrowth 19, 46, MIDDLE
+                attGrowth 19, 46, MIDDLE
                 defGrowth 20, 55, LATE
                 agiGrowth 21, 62, LINEAR
                 useFirstSpellList

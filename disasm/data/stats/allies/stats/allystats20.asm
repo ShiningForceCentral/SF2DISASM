@@ -4,7 +4,7 @@
 AllyStats20:    forClass  BDBT
                 hpGrowth  33, 86, LINEAR
                 mpGrowth  0, 0, NONE
-                atkGrowth 24, 50, LATE
+                attGrowth 24, 50, LATE
                 defGrowth 22, 67, LINEAR
                 agiGrowth 24, 64, LINEAR
                 spellList 

@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map38_AreaDescriptions:
                 
                 move.w  #$104B,d3       ; "A book...{N}MAN-EATING PLANTS{W1}"

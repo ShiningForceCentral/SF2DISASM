@@ -18,6 +18,7 @@ ms_map15_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map15_EntityEvent0:
                 
                  
@@ -29,6 +30,7 @@ Map15_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map15_EntityEvent1:
                 
@@ -42,6 +44,7 @@ Map15_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map15_EntityEvent2:
                 
                  
@@ -53,6 +56,7 @@ Map15_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map15_EntityEvent3:
                 
@@ -66,6 +70,7 @@ Map15_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map15_EntityEvent4:
                 
                  
@@ -77,6 +82,7 @@ Map15_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map15_EntityEvent5:
                 
@@ -90,6 +96,7 @@ Map15_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map15_EntityEvent6:
                 
                  
@@ -101,6 +108,7 @@ Map15_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map15_EntityEvent7:
                 
@@ -114,6 +122,7 @@ Map15_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map15_EntityEvent8:
                 
                  
@@ -126,6 +135,7 @@ Map15_EntityEvent8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map15_EntityEvent9:
                 
                 move.b  #$1A,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -137,6 +147,7 @@ Map15_EntityEvent9:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map15_EntityEvent10:
                 
                 jsr     j_ChurchMenuActions
@@ -146,6 +157,7 @@ Map15_EntityEvent10:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map15_EntityEvent11:
                 
@@ -157,6 +169,7 @@ Map15_EntityEvent11:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map15_DefaultEntityEvent:
                 

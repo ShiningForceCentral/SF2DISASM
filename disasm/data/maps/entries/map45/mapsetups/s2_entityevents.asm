@@ -10,6 +10,7 @@ ms_map45_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map45_EntityEvent0:
                 
                  
@@ -22,6 +23,7 @@ Map45_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map45_EntityEvent1:
                 
                  
@@ -33,6 +35,7 @@ Map45_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map45_EntityEvent2:
                 
                  
@@ -43,6 +46,7 @@ Map45_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map45_EntityEvent3:
                 
@@ -56,6 +60,7 @@ Map45_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map45_DefaultEntityEvent:
                 

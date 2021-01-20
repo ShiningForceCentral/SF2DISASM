@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map59_InitFunction:
                 
                  
@@ -16,14 +17,14 @@ ms_map59_InitFunction:
                 script  cs_5EF60
                 setFlg  999             ; Set after the Nazca ship shootdown scene
                 move.b  #$2D,((EGRESS_MAP_INDEX-$1000000)).w 
-                setFlg  436             ; Battle 36 unlocked
-                setFlg  440             ; Battle 40 unlocked
-                setFlg  442             ; Battle 42 unlocked
-                setFlg  443             ; Battle 43 unlocked
+                setFlg  436             ; Battle 36 unlocked - BATTLE_VERSUS_PRISM_FLOWERS      
+                setFlg  440             ; Battle 40 unlocked - BATTLE_VERSUS_ODD_EYE            
+                setFlg  442             ; Battle 42 unlocked - BATTLE_VERSUS_GALAM              
+                setFlg  443             ; Battle 43 unlocked - BATTLE_VERSUS_ZEON               
                 rts
 byte_5EB18:
                 
-                chkFlg  443             ; Battle 43 unlocked
+                chkFlg  443             ; Battle 43 unlocked - BATTLE_VERSUS_ZEON               
                 beq.s   return_5EB24
                 script  cs_5EB26
 return_5EB24:
@@ -37,6 +38,7 @@ cs_5EB26:       executeSubroutine csub_5EB34
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csub_5EB34:
                 
@@ -421,6 +423,7 @@ cs_5EF60:       textCursor 3739
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csub_5F14C:
                 
                 lea     plt_5F17E(pc), a0
@@ -436,6 +439,7 @@ csub_5F14C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5F16C:
                 
@@ -523,6 +527,7 @@ ce_5F28E:       mainEntity 0,0,UP
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_5F31E:
                 
                 move.b  #$F0,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
@@ -537,6 +542,7 @@ csub_5F326:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_5F32E:
                 
                 move.b  #$F8,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
@@ -547,6 +553,7 @@ sub_5F32E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5F338:
                 

@@ -4,6 +4,6 @@
 ; FREE SPACE : 126 bytes.
 
 
-p_IconTiles:    dc.l IconTiles
-IconTiles:      incbin "data/graphics/icons/icons.bin"
-                align $1E0000
+p_Icons:        dc.l Icon000
+                include "data\graphics\icons\entries.asm"    ; Icons
+                align $8000

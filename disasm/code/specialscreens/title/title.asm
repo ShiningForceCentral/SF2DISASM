@@ -4,11 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 TitleScreen:
                 
                 jmp     *+4(pc)
-loc_10000C:
-                
                 jsr     (DisableDisplayAndInterrupts).w
                 jsr     (ClearVsramAndSprites).w
                 move.w  #$8C00,d0
@@ -154,6 +153,7 @@ loc_1001EC:
 
 ; wait for max d0 frames
 
+
 WaitForPlayer1InputStart:
                 
                 jsr     (WaitForVInt).w
@@ -167,6 +167,7 @@ WaitForPlayer1InputStart:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 TitleScreenLoop1:
                 
@@ -188,6 +189,7 @@ loc_10022C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 TitleScreenLoop2:
                 
@@ -223,6 +225,7 @@ loc_100260:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 TitleScreenEnd:
                 

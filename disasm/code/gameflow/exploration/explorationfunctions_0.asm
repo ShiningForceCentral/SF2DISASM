@@ -8,6 +8,7 @@
 ;      D1 = activated entity's facing
 ;      D2 = player entity's facing
 
+
 GetActivatedEntity:
                 
                 move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d0
@@ -96,6 +97,7 @@ loc_23840:
 ; In: D0 = entity index
 ; Out: Z = entity is NOT follower
 
+
 CheckIfEntityIsFollower:
                 
                 movem.l d0/a0,-(sp)
@@ -118,6 +120,7 @@ loc_2385C:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get item or area description
+
 
 CheckArea:
                 
@@ -241,6 +244,7 @@ return_2399A:
 ; =============== S U B R O U T I N E =======================================
 
 ; get amount of gold (D2 - 0x80) as an offset from the gold table (see constants)
+
 
 GetChestGoldAmount:
                 

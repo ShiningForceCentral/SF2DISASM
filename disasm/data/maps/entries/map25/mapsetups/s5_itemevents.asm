@@ -6,6 +6,7 @@ ms_map25_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map25_DefaultItemEvent0:
                 
                 rts

@@ -10,6 +10,7 @@
 ;      D2 = Y
 ;      D3 = facing
 
+
 GetSavePointForMap:
                 
                  

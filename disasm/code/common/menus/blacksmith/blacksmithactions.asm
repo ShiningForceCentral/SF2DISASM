@@ -4,10 +4,21 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+var_22 = -22
+var_20 = -20
+var_18 = -18
+var_16 = -16
+var_14 = -14
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_4 = -4
+
 BlacksmithActions:
                 
                 movem.l d0-a5,-(sp)
-                link    a6,#-$18
+                link    a6,#-24
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
                 blt.s   byte_21A50      
@@ -16,10 +27,10 @@ byte_21A50:
                 
                 txt     194             ; "Welcome to the Dwarf{N}Craftsman!{D3}"
                 jsr     j_HidePortraitWindow
-                clr.w   -$12(a6)
-                clr.w   -$E(a6)
-                clr.w   -$10(a6)
-                clr.w   -$14(a6)
+                clr.w   var_18(a6)
+                clr.w   var_14(a6)
+                clr.w   var_16(a6)
+                clr.w   var_20(a6)
                 bsr.w   sub_21A92
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
@@ -39,54 +50,65 @@ byte_21A7C:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_22 = -22
+var_20 = -20
+var_18 = -18
+var_16 = -16
+var_14 = -14
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_4 = -4
+
 sub_21A92:
                 
                 jsr     j_UpdateForce
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                lea     ((INDEX_LIST-$1000000)).w,a1
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,((GENERIC_LIST_LENGTH-$1000000)).w
+                lea     ((TARGETS_LIST-$1000000)).w,a0
+                lea     ((GENERIC_LIST-$1000000)).w,a1
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.b  #1,d7
 loc_21AAC:
                 
                 move.b  (a0)+,(a1)+
                 dbf     d7,loc_21AAC
                 bsr.w   sub_21E48
-                cmpi.w  #1,-$14(a6)
+                cmpi.w  #1,var_20(a6)
                 bne.w   loc_21AE8
                 move.w  #4,d7
                 subq.w  #1,d7
                 lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
 loc_21ACA:
                 
-                move.w  (a0)+,-$A(a6)
-                cmpi.w  #0,-$A(a6)
+                move.w  (a0)+,var_10(a6)
+                cmpi.w  #0,var_10(a6)
                 beq.s   loc_21AE4
-                move.w  d7,-$16(a6)
-                addi.w  #1,-$16(a6)
+                move.w  d7,var_22(a6)
+                addi.w  #1,var_22(a6)
                 bsr.w   sub_21B42
 loc_21AE4:
                 
                 dbf     d7,loc_21ACA
 loc_21AE8:
                 
-                cmpi.w  #0,-$12(a6)
+                cmpi.w  #0,var_18(a6)
                 beq.w   loc_21B0E
-                move.w  -$12(a6),d0
-                add.w   -$E(a6),d0
-                sub.w   -$10(a6),d0
+                move.w  var_18(a6),d0
+                add.w   var_14(a6),d0
+                sub.w   var_16(a6),d0
                 cmpi.w  #4,d0
                 beq.w   return_21B40
                 txt     196             ; "{CLEAR}Anything else?"
                 bra.w   loc_21B3C
 loc_21B0E:
                 
-                cmpi.w  #0,-$E(a6)
+                cmpi.w  #0,var_14(a6)
                 beq.w   byte_21B38      
                 txt     206             ; "Oops...{N}I needs some more time.{W1}"
-                move.w  -$12(a6),d0
-                add.w   -$E(a6),d0
-                sub.w   -$10(a6),d0
+                move.w  var_18(a6),d0
+                add.w   var_14(a6),d0
+                sub.w   var_16(a6),d0
                 cmpi.w  #4,d0
                 beq.w   return_21B40
                 txt     196             ; "{CLEAR}Anything else?"
@@ -106,17 +128,28 @@ return_21B40:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_22 = -22
+var_20 = -20
+var_18 = -18
+var_16 = -16
+var_14 = -14
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_4 = -4
+
 sub_21B42:
                 
                 movem.l d0-a1,-(sp)
-                move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_10(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     207             ; "{CLEAR}I've been waiting!{N}This {ITEM} is for{N}you.  Isn't it great?!{W1}"
                 txt     166             ; "Who gets it?{W2}"
                 clsTxt
 byte_21B58:
                 
                 clsTxt
-                move.w  -$A(a6),((SELECTED_ITEM_INDEX-$1000000)).w
+                move.w  var_10(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
@@ -125,12 +158,12 @@ byte_21B58:
                 bra.w   loc_21CD4
 loc_21B7C:
                 
-                move.w  d0,-6(a6)
+                move.w  d0,var_6(a6)
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 cmpi.w  #4,d2
                 bcs.s   loc_21BAC
-                move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     208             ; "{NAME}'s hands are are{N}full.  May I pass it to{N}somebody else?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
@@ -139,45 +172,45 @@ loc_21B7C:
                 bra.w   loc_21CD4
 loc_21BAC:
                 
-                move.w  -$A(a6),d1
+                move.w  var_10(a6),d1
                 jsr     j_GetEquipmentType
                 cmpi.w  #0,d2
                 beq.s   loc_21BE4
-                move.w  -$A(a6),d1
-                move.w  -6(a6),d0
+                move.w  var_10(a6),d1
+                move.w  var_6(a6),d0
                 jsr     j_IsWeaponOrRingEquippable
                 bcs.s   loc_21BE4
-                move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
                 bne.w   byte_21B58
 loc_21BE4:
                 
-                move.w  -6(a6),d0
-                move.w  -$A(a6),d1
+                move.w  var_6(a6),d0
+                move.w  var_10(a6),d1
                 jsr     j_AddItem
                 move.w  #4,d6
-                sub.w   -$16(a6),d6
+                sub.w   var_22(a6),d6
                 lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a1
                 lsl.w   #1,d6
                 adda.w  d6,a1
                 move.w  (a1),d2
                 move.w  #0,(a1)
-                addi.w  #1,-$10(a6)
-                move.w  -$A(a6),d1
-                move.w  -6(a6),d0
+                addi.w  #1,var_16(a6)
+                move.w  var_10(a6),d1
+                move.w  var_6(a6),d0
                 jsr     j_IsWeaponOrRingEquippable
                 bcc.w   byte_21CD0      
                 txt     173             ; "{CLEAR}Equip it now?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
                 bne.w   byte_21CD0      
-                move.w  -$A(a6),d1
+                move.w  var_10(a6),d1
                 jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_21C6E
-                move.w  -6(a6),d0
+                move.w  var_6(a6),d0
                 jsr     j_GetEquippedWeapon
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_21C9A
@@ -185,12 +218,12 @@ loc_21BE4:
                 jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_21C9A
-                move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_21CD0      
 loc_21C6E:
                 
-                move.w  -6(a6),d0
+                move.w  var_6(a6),d0
                 jsr     j_GetEquippedRing
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_21C9A
@@ -198,13 +231,13 @@ loc_21C6E:
                 jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_21C9A
-                move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_21CD0      
 loc_21C9A:
                 
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d2,d1
                 subq.w  #1,d1
                 jsr     j_EquipItemBySlot
@@ -212,7 +245,7 @@ loc_21C9A:
                 bne.s   byte_21CC8      
                 sndCom  MUSIC_CURSED_ITEM
                 bsr.w   WaitForMusicResumeAndPlayerInput_Blacksmith
-                move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     175             ; "Gee, {NAME} gets{N}cursed.{W2}"
                 bra.w   loc_21CD4
 byte_21CC8:
@@ -238,9 +271,9 @@ byte_21CDE:
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_21E30
-                move.w  d0,-6(a6)
-                move.w  d1,-$C(a6)
-                move.w  d2,-$A(a6)
+                move.w  d0,var_6(a6)
+                move.w  d1,var_12(a6)
+                move.w  d2,var_10(a6)
                 cmpi.w  #$7B,d2 
                 beq.w   byte_21D1A      
                 txt     200             ; "Sorry, I've never worked{N}with that before....{W1}"
@@ -254,12 +287,12 @@ byte_21D1A:
                 jsr     sub_10044
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_21CDE      
-                move.w  d0,-8(a6)
+                move.w  d0,var_8(a6)
                 jsr     j_GetClass
                 move.w  d1,-$18(a6)
                 cmpi.w  #$C,d1
                 bcc.w   loc_21D5C
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     211             ; "{NAME} has to be promoted{N}first.{W1}"
                 bra.s   byte_21D1A      
 loc_21D5C:
@@ -267,17 +300,17 @@ loc_21D5C:
                 bsr.w   sub_21E8E
                 cmpi.w  #0,d0
                 beq.w   loc_21D74
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     212             ; "Sorry, I can't create a{N}weapon for {NAME}.{W1}"
                 bra.s   byte_21D1A      
 loc_21D74:
                 
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  #$1388,((TEXT_NUMBER-$1000000)).w
                 txt     202             ; "For {NAME}!  It will cost{N}{#} gold coins.  OK?"
-                jsr     sub_10050
+                jsr     j_CreateGoldWindow
                 jsr     j_YesNoChoiceBox
-                jsr     sub_10058
+                jsr     j_HideGoldWindow
                 cmpi.w  #0,d0
                 beq.s   loc_21DA6
                 txt     197             ; "{CLEAR}What a pity!{W2}"
@@ -285,7 +318,7 @@ loc_21D74:
 loc_21DA6:
                 
                 jsr     j_GetGold
-                move.l  d1,-4(a6)
+                move.l  d1,var_4(a6)
                 cmpi.l  #$1388,d1
                 bcc.w   loc_21DC2
                 txt     203             ; "You have to bring more{N}money.{W2}"
@@ -294,18 +327,18 @@ loc_21DC2:
                 
                 move.l  #$1388,d1
                 jsr     j_DecreaseGold
-                addi.w  #1,-$E(a6)
-                move.w  -6(a6),d0
-                move.w  -$C(a6),d1
+                addi.w  #1,var_14(a6)
+                move.w  var_6(a6),d0
+                move.w  var_12(a6),d1
                 jsr     j_DropItemBySlot
                 bsr.w   PickMithrilWeapon
                 move.w  #$50,d1 
                 jsr     j_ClearFlag
                 txt     204             ; "{CLEAR}Great!{W2}"
                 txt     205             ; "Please stop by shortly.{N}I'll surprise you!{W1}"
-                move.w  -$E(a6),d0
-                move.w  -$12(a6),d1
-                move.w  -$10(a6),d2
+                move.w  var_14(a6),d0
+                move.w  var_18(a6),d1
+                move.w  var_16(a6),d2
                 add.w   d1,d0
                 sub.w   d2,d0
                 cmpi.w  #4,d0
@@ -330,6 +363,7 @@ loc_21E30:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WaitForMusicResumeAndPlayerInput_Blacksmith:
                 
                 move.w  d0,-(sp)
@@ -344,12 +378,23 @@ WaitForMusicResumeAndPlayerInput_Blacksmith:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_22 = -22
+var_20 = -20
+var_18 = -18
+var_16 = -16
+var_14 = -14
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_4 = -4
+
 sub_21E48:
                 
                 move.w  #$50,d1 
                 jsr     j_CheckFlag
                 beq.w   loc_21E5C
-                move.w  #1,-$14(a6)
+                move.w  #1,var_20(a6)
 loc_21E5C:
                 
                 move.w  #4,d7
@@ -360,13 +405,13 @@ loc_21E66:
                 move.w  (a0)+,d1
                 cmpi.w  #0,d1
                 beq.w   loc_21E88
-                cmpi.w  #1,-$14(a6)
+                cmpi.w  #1,var_20(a6)
                 bne.s   loc_21E82
-                addi.w  #1,-$12(a6)
+                addi.w  #1,var_18(a6)
                 bra.w   loc_21E88
 loc_21E82:
                 
-                addi.w  #1,-$E(a6)
+                addi.w  #1,var_14(a6)
 loc_21E88:
                 
                 dbf     d7,loc_21E66
@@ -376,6 +421,7 @@ loc_21E88:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_21E8E:
                 
@@ -417,6 +463,7 @@ word_21EB6:     dc.w $F
                 dc.w $1F
 
 ; =============== S U B R O U T I N E =======================================
+
 
 PickMithrilWeapon:
                 

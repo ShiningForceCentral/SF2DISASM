@@ -7,6 +7,7 @@ ms_map26_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map26_ZoneEvent0:
                 
                  
@@ -22,6 +23,7 @@ return_59DCE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map26_DefaultZoneEvent:
                 

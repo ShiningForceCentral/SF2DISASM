@@ -10,6 +10,7 @@ ms_map23_flag762_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_2FA_EntityEvent0:
                 
                  
@@ -21,6 +22,7 @@ Map23_2FA_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_2FA_EntityEvent1:
                 
                  
@@ -31,6 +33,7 @@ Map23_2FA_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map23_2FA_EntityEvent2:
                 

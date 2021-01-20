@@ -8,6 +8,7 @@ SramCheckString:dc.b 'Taguchi New Supra'
 
 ; Out: D0, D1 = -1 if slot 1, or slot 2 failed checksum
 
+
 CheckSram:
                 
                 movem.l d7-a1,-(sp)
@@ -28,7 +29,7 @@ CheckSram:
                 bra.s   @Slot1
 @ChecksumSlot2:
                 
-                lea     (SAVE2_CHARACTER_DATA).l,a0
+                lea     (SAVE2_DATA).l,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  #SAVE_SLOT_SIZE,d7
                 bsr.w   CopyBytesFromSram
@@ -48,7 +49,7 @@ CheckSram:
                 bra.s   @Continue
 @ChecksumSlot1:
                 
-                lea     (SAVE1_CHARACTER_DATA).l,a0
+                lea     (SAVE1_DATA).l,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  #SAVE_SLOT_SIZE,d7
                 bsr.w   CopyBytesFromSram
@@ -90,19 +91,20 @@ CheckSram:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SaveGame:
                 
                 movem.l d0-d1/d7-a2,-(sp)
                 lea     (COMBATANT_ENTRIES).l,a0
                 tst.b   d0
                 bne.s   @Slot2
-                lea     (SAVE1_CHARACTER_DATA).l,a1
+                lea     (SAVE1_DATA).l,a1
                 lea     (SAVE1_CHECKSUM).l,a2
                 clr.w   d1
                 bra.s   @Continue
 @Slot2:
                 
-                lea     (SAVE2_CHARACTER_DATA).l,a1
+                lea     (SAVE2_DATA).l,a1
                 lea     (SAVE2_CHECKSUM).l,a2
                 moveq   #1,d1
 @Continue:
@@ -119,18 +121,19 @@ SaveGame:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadGame:
                 
                 movem.l d0-d1/d7-a2,-(sp)
                 lea     (COMBATANT_ENTRIES).l,a1
                 tst.b   d0
                 bne.s   @Slot2
-                lea     (SAVE1_CHARACTER_DATA).l,a0
+                lea     (SAVE1_DATA).l,a0
                 clr.w   d1
                 bra.s   @Continue
 @Slot2:
                 
-                lea     (SAVE2_CHARACTER_DATA).l,a0
+                lea     (SAVE2_DATA).l,a0
                 moveq   #1,d1
 @Continue:
                 
@@ -143,6 +146,7 @@ LoadGame:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CopySave:
                 
@@ -158,6 +162,7 @@ CopySave:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ClearSaveSlotFlag:
                 
@@ -181,6 +186,7 @@ ClearSaveSlotFlag:
 ;     A1 = destination address
 ;     D7 = number of bytes to copy
 
+
 CopyBytesToSram:
                 
                 movem.l d7-a1,-(sp)
@@ -202,6 +208,7 @@ CopyBytesToSram:
 
 ; and calculate checksum
 
+
 CopyBytesFromSram:
                 
                 movem.l d7-a1,-(sp)
@@ -213,6 +220,7 @@ CopyBytesFromSram:
                 add.b   (a0),d0
                 addq.l  #2,a0
                 dbf     d7,@Loop
+                
                 movem.l (sp)+,d7-a1
                 rts
 

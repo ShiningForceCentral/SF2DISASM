@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map20_AreaDescriptions:
                 
                 move.w  #$FD7,d3        ; "A book...{N}BODY BUILDING{W1}"

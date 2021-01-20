@@ -4,10 +4,12 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+battleEntity = -4
+
 sub_444A2:
                 
-                link    a6,#-$10
-                move.w  d0,-4(a6)
+                link    a6,#-16
+                move.w  d0,battleEntity(a6)
                 movem.l d0-d7,-(sp)
                 jsr     j_GetYPos
                 move.w  d1,d2
@@ -61,6 +63,7 @@ loc_4450A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_44536:
                 
                 movem.l d0-d5/d7-a0,-(sp)
@@ -95,6 +98,7 @@ loc_4455C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 InitializeNewEntity:
                 
@@ -145,6 +149,7 @@ loc_445A0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DeclareNewEntity:
                 
@@ -207,6 +212,7 @@ loc_4463C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ClearEntities:
                 
                 movem.l d7-a0,-(sp)
@@ -239,32 +245,34 @@ loc_44688:
 
 ; =============== S U B R O U T I N E =======================================
 
+battleEntity = -4
+
 MoveEntitiesToBattlePositions:
                 
                 movem.l d0-a1,-(sp)
-                link    a6,#-$10
+                link    a6,#65520
                 bsr.s   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
-                clr.w   -4(a6)
+                clr.w   battleEntity(a6)
                 clr.w   d0
 loc_446B8:
                 
                 move.w  d0,-(sp)
-                move.w  -4(a6),d0
+                move.w  battleEntity(a6),d0
                 jsr     j_GetYPos
                 move.w  (sp)+,d0
                 move.w  d1,d2
                 tst.b   d2
                 bmi.w   loc_44732
                 move.w  d0,-(sp)
-                move.w  -4(a6),d0
+                move.w  battleEntity(a6),d0
                 jsr     j_GetXPos
                 move.w  (sp)+,d0
                 tst.b   d1
                 bmi.w   loc_44732
                 movem.w d0-d1,-(sp)
-                move.w  -4(a6),d0
+                move.w  battleEntity(a6),d0
                 jsr     j_GetUpperMoveType
                 clr.w   d6
                 cmpi.b  #5,d1
@@ -296,34 +304,34 @@ loc_44732:
                 move.b  #$FF,(a1)+
 loc_44736:
                 
-                addq.w  #1,-4(a6)
+                addq.w  #1,battleEntity(a6)
                 dbf     d7,loc_446B8
                 lea     ((byte_FFB160-$1000000)).w,a1
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
-                move.w  #COMBATANT_ENEMIES_START,-4(a6)
+                move.w  #COMBATANT_ENEMIES_START,battleEntity(a6)
 loc_4474A:
                 
                 move.w  d0,-(sp)
-                move.w  -4(a6),d0
+                move.w  battleEntity(a6),d0
                 jsr     j_GetCharacterWord34
                 move.w  (sp)+,d0
                 andi.w  #8,d1
                 bne.w   loc_447F6
                 move.w  d0,-(sp)
-                move.w  -4(a6),d0
+                move.w  battleEntity(a6),d0
                 jsr     j_GetYPos
                 move.w  (sp)+,d0
                 move.w  d1,d2
                 tst.b   d2
                 bmi.w   loc_447F6
                 move.w  d0,-(sp)
-                move.w  -4(a6),d0
+                move.w  battleEntity(a6),d0
                 jsr     j_GetXPos
                 move.w  (sp)+,d0
                 tst.b   d1
                 bmi.w   loc_447F6
                 movem.w d0-d1,-(sp)
-                move.w  -4(a6),d0
+                move.w  battleEntity(a6),d0
                 jsr     j_GetUpperMoveType
                 clr.w   d6
                 cmpi.b  #5,d1
@@ -366,7 +374,7 @@ loc_447F6:
                 move.b  #$FF,(a1)+
 loc_447FA:
                 
-                addq.w  #1,-4(a6)
+                addq.w  #1,battleEntity(a6)
                 dbf     d7,loc_4474A
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
@@ -390,13 +398,13 @@ loc_44830:
                 bra.s   loc_44830
 loc_44838:
                 
-                move.w  #$9F,-4(a6) 
+                move.w  #$9F,battleEntity(a6) 
 loc_4483E:
                 
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_448BC
                 move.w  d0,-(sp)
-                move.w  -4(a6),d0
+                move.w  battleEntity(a6),d0
                 clr.w   d1
                 jsr     j_SetMaxHP
                 jsr     j_SetCurrentHP
@@ -430,7 +438,7 @@ loc_4483E:
                 move.b  #$FF,(a1)+
 loc_448B6:
                 
-                subq.w  #1,-4(a6)
+                subq.w  #1,battleEntity(a6)
                 bra.s   loc_4483E
 loc_448BC:
                 

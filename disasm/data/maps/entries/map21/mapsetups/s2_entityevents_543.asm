@@ -7,6 +7,7 @@ ms_map21_flag543_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map21_21F_DefaultEntityEvent:
                 
                 rts
@@ -15,6 +16,7 @@ Map21_21F_DefaultEntityEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map21_21F_EntityEvent0:
                 
