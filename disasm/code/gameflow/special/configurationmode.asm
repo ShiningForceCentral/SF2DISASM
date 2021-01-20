@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CheatModeConfiguration:
                 
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
@@ -16,29 +17,29 @@ loc_7E58:
                 
                 tst.b   ((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
                 beq.w   return_7EC4
-                txt     $1C0            ; "Configuration....{D3}"
-                txt     $1C2            ; "{CLEAR}Special Turbo"
+                txt     448             ; "Configuration....{D3}"
+                txt     450             ; "{CLEAR}Special Turbo"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.s   byte_7E78       
                 move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
 byte_7E78:
                 
-                txt     $1C3            ; "{CLEAR}Control Opponent"
+                txt     451             ; "{CLEAR}Control Opponent"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.s   byte_7E8C       
                 move.b  #$FF,((CONTROL_OPPONENT_CHEAT-$1000000)).w
 byte_7E8C:
                 
-                txt     $1C4            ; "{CLEAR}Auto Battle"
+                txt     452             ; "{CLEAR}Auto Battle"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.s   byte_7EA0       
                 move.b  #$FF,((AUTO_BATTLE_CHEAT-$1000000)).w
 byte_7EA0:
                 
-                txt     $1C7            ; "{CLEAR}Game Completed"
+                txt     455             ; "{CLEAR}Game Completed"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.s   loc_7EB8
@@ -49,7 +50,7 @@ loc_7EB8:
                 bclr    #7,(SAVE_FLAGS).l
 byte_7EC0:
                 
-                txt     $1CD            ; "Configuration is done.{N}Go ahead!{W1}"
+                txt     461             ; "Configuration is done.{N}Go ahead!{W1}"
 return_7EC4:
                 
                 rts

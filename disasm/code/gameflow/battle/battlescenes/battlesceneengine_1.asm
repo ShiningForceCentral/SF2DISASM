@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_19E6E:
                 
                 cmpi.w  #COMBATANT_ENEMIES_START,d0
@@ -26,6 +27,7 @@ sub_19E6E:
 
 ; Get a boolean depending on background index
 
+
 sub_19E96:
                 
                 movem.l a0,-(sp)
@@ -43,10 +45,11 @@ loc_19EA8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FadeInFromBlackIntoBattlescene:
                 
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -57,10 +60,11 @@ FadeInFromBlackIntoBattlescene:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FadeOutToBlackForBattlescene:
                 
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -71,7 +75,8 @@ FadeOutToBlackForBattlescene:
 
 ; =============== S U B R O U T I N E =======================================
 
-; spell animation subroutine
+; Execute spell animation D0
+
 
 ExecuteSpellAnimation:
                 
@@ -88,7 +93,7 @@ ExecuteSpellAnimation:
                 bset    #7,d1
 loc_19F0A:
                 
-                move.b  d1,((byte_FFB586-$1000000)).w
+                move.b  d1,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 andi.w  #$1F,d0
                 add.w   d0,d0
                 move.w  rjt_SpellAnimation(pc,d0.w),d0
@@ -103,9 +108,9 @@ rjt_SpellAnimation:
                 dc.w sa05_Blast-rjt_SpellAnimation
                 dc.w sa06_Detox-rjt_SpellAnimation
                 dc.w sa07_Bolt-rjt_SpellAnimation
-                dc.w sa08_BuffSpell-rjt_SpellAnimation
-                dc.w sa09_DebuffSpell-rjt_SpellAnimation
-                dc.w sa0A_MagicDrain-rjt_SpellAnimation
+                dc.w sa08_Buff1-rjt_SpellAnimation
+                dc.w sa09_Debuff1-rjt_SpellAnimation
+                dc.w sa0A_Absorb-rjt_SpellAnimation
                 dc.w sa0B_DemonBreath-rjt_SpellAnimation
                 dc.w sa0C_FlameBreath-rjt_SpellAnimation
                 dc.w sa0D_ArrowsAndSpears-rjt_SpellAnimation
@@ -113,20 +118,20 @@ rjt_SpellAnimation:
                 dc.w sa0F_ShotProjectile-rjt_SpellAnimation
                 dc.w sa10_GunnerProjectile-rjt_SpellAnimation
                 dc.w sa11_Dao-rjt_SpellAnimation
-                dc.w sa12_Atlas-rjt_SpellAnimation
+                dc.w sa12_Apollo-rjt_SpellAnimation
                 dc.w sa13_Neptun-rjt_SpellAnimation
-                dc.w sa14_Apollo-rjt_SpellAnimation
+                dc.w sa14_Atlas-rjt_SpellAnimation
                 dc.w sa15_PrismLaser-rjt_SpellAnimation
                 dc.w sa16_BubbleBreath-rjt_SpellAnimation
-                dc.w sa17_Snowstorm-rjt_SpellAnimation
+                dc.w sa17_SnowBreath-rjt_SpellAnimation
                 dc.w sa18_CutOff-rjt_SpellAnimation
-                dc.w sa19_-rjt_SpellAnimation
-                dc.w sa1A_Detox-rjt_SpellAnimation
-                dc.w sa1B_-rjt_SpellAnimation
-                dc.w sa1C_-rjt_SpellAnimation
-                dc.w sa1D_Blast-rjt_SpellAnimation
+                dc.w sa19_Buff2-rjt_SpellAnimation
+                dc.w sa1A_AttackSpell-rjt_SpellAnimation ; SFCD's ATTACK spell (unused)
+                dc.w sa1B_Debuff2-rjt_SpellAnimation
+                dc.w sa1C_Debuff3-rjt_SpellAnimation
+                dc.w sa1D_PhoenixAttack-rjt_SpellAnimation
                 dc.w sa1E_BurstRockExplosion-rjt_SpellAnimation
-                dc.w sa1F_OddeyeBeam-rjt_SpellAnimation
+                dc.w sa1F_OddEyeBeam-rjt_SpellAnimation
 return_19F5C:
                 
                 rts
@@ -135,6 +140,7 @@ return_19F5C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_19F5E:
                 
@@ -168,6 +174,7 @@ sub_19F5E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_19FAA:
                 
@@ -212,6 +219,7 @@ loc_19FC8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1A00A:
                 
                 moveq   #$26,d0 
@@ -233,72 +241,76 @@ word_1A020:     dc.w 1
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1A028:
                 
                 tst.b   ((byte_FFB584-$1000000)).w
                 beq.w   nullsub_1A090
-                bsr.w   sub_1A0AA
+                bsr.w   CopyPalettes
 
     ; End of function sub_1A028
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A034:
+
+TintScreen:
                 
                 clr.w   d0
-                move.b  ((byte_FFB587-$1000000)).w,d0
+                move.b  ((CURRENT_SPELLANIMATION-$1000000)).w,d0
                 add.w   d0,d0
-                move.w  rjt_1A048(pc,d0.w),d0
-                jsr     rjt_1A048(pc,d0.w)
+                move.w  rjt_TintScreenFunctions(pc,d0.w),d0
+                jsr     rjt_TintScreenFunctions(pc,d0.w)
                 bra.w   loc_1A088
 
-    ; End of function sub_1A034
+    ; End of function TintScreen
 
-rjt_1A048:      dc.w nullsub_1A090-rjt_1A048 ; related to ally or enemy reaction
-                dc.w sub_1A21C-rjt_1A048
-                dc.w sub_1A198-rjt_1A048
-                dc.w sub_1A198-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w sub_1A146-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w sub_1A11E-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w sub_1A146-rjt_1A048
-                dc.w sub_1A21C-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w sub_1A222-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w sub_1A11E-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w sub_1A198-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
-                dc.w nullsub_1A090-rjt_1A048
+rjt_TintScreenFunctions:
+                dc.w nullsub_1A090-rjt_TintScreenFunctions ; related to ally or enemy reaction
+                dc.w TintScreen_Red-rjt_TintScreenFunctions ; 01: Blaze
+                dc.w TintScreen_Greyscale-rjt_TintScreenFunctions ; 02: Freeze
+                dc.w TintScreen_Greyscale-rjt_TintScreenFunctions ; 03: Desoul
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w TintScreen_Dark-rjt_TintScreenFunctions ; 05: Blast
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w TintScreen_Darker-rjt_TintScreenFunctions ; 07: Bolt
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w TintScreen_Dark-rjt_TintScreenFunctions ; 11: Demon Breath
+                dc.w TintScreen_Red-rjt_TintScreenFunctions ; 12: Flame Breath
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w TintScreen_Apollo-rjt_TintScreenFunctions ; 18: Apollo
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w TintScreen_Darker-rjt_TintScreenFunctions ; 21: Prism Laser
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w TintScreen_Greyscale-rjt_TintScreenFunctions ; 23: Cutoff
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
+                dc.w nullsub_1A090-rjt_TintScreenFunctions
 
-; START OF FUNCTION CHUNK FOR sub_1A034
+; START OF FUNCTION CHUNK FOR TintScreen
 
 loc_1A088:
                 
                 jsr     (ApplyVIntCramDma).w
                 jmp     (EnableDmaQueueProcessing).w
 
-; END OF FUNCTION CHUNK FOR sub_1A034
+; END OF FUNCTION CHUNK FOR TintScreen
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 nullsub_1A090:
                 
@@ -308,6 +320,7 @@ nullsub_1A090:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1A092:
                 
@@ -319,7 +332,7 @@ sub_1A092:
 loc_1A0A2:
                 
                 bsr.w   sub_1A270
-                bsr.s   sub_1A034
+                bsr.s   TintScreen
 return_1A0A8:
                 
                 rts
@@ -329,23 +342,26 @@ return_1A0A8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A0AA:
+
+CopyPalettes:
                 
                 movem.l d7-a1,-(sp)
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 lea     ((PALETTE_1_BASE-$1000000)).w,a1
                 moveq   #$1F,d7
-loc_1A0B8:
+@Loop:
                 
                 move.l  (a0)+,(a1)+
-                dbf     d7,loc_1A0B8
+                dbf     d7,@Loop
+                
                 movem.l (sp)+,d7-a1
                 rts
 
-    ; End of function sub_1A0AA
+    ; End of function CopyPalettes
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1A0C4:
                 
@@ -362,6 +378,9 @@ sub_1A0C4:
 
 ; =============== S U B R O U T I N E =======================================
 
+; restore some colors
+
+
 sub_1A0E2:
                 
                 movem.l a0-a1,-(sp)
@@ -377,18 +396,22 @@ sub_1A0E2:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Lower brightness of most elements on the screen to 50%
+
+
 sub_1A100:
                 
                 movem.l d6-a0,-(sp)
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
-                moveq   #$3F,d7 
-loc_1A10A:
+                moveq   #CRAM_COLORS_COUNTER,d7
+@Loop:
                 
                 move.w  (a0),d6
                 lsr.w   #1,d6
                 andi.w  #$777,d6
                 move.w  d6,(a0)+
-                dbf     d7,loc_1A10A
+                dbf     d7,@Loop
+                
                 movem.l (sp)+,d6-a0
                 rts
 
@@ -397,22 +420,26 @@ loc_1A10A:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A11E:
-                
-                bsr.s   sub_1A100
-                bra.s   sub_1A0E2
 
-    ; End of function sub_1A11E
+TintScreen_Darker:
+                
+                bsr.s   sub_1A100       
+                bra.s   sub_1A0E2       
+
+    ; End of function TintScreen_Darker
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Lower the brightness of most elements on the screen to 75%
+
 
 sub_1A122:
                 
                 movem.l d5-a0,-(sp)
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
-                moveq   #$3F,d7 
-loc_1A12C:
+                moveq   #CRAM_COLORS_COUNTER,d7
+@Loop:
                 
                 move.w  (a0),d6
                 lsr.w   #1,d6
@@ -421,7 +448,8 @@ loc_1A12C:
                 andi.w  #$333,d5
                 add.w   d5,d6
                 move.w  d6,(a0)+
-                dbf     d7,loc_1A12C
+                dbf     d7,@Loop
+                
                 movem.l (sp)+,d5-a0
                 rts
 
@@ -430,22 +458,26 @@ loc_1A12C:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A146:
-                
-                bsr.s   sub_1A122
-                bra.s   sub_1A0E2
 
-    ; End of function sub_1A146
+TintScreen_Dark:
+                
+                bsr.s   sub_1A122       
+                bra.s   sub_1A0E2       
+
+    ; End of function TintScreen_Dark
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Apply a greyscale palette to most elements on the screen
+
 
 sub_1A14A:
                 
                 movem.l d0-d2/a0,-(sp)
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
-                moveq   #$3F,d2 
-loc_1A154:
+                moveq   #CRAM_COLORS_COUNTER,d2
+@Loop:
                 
                 move.w  (a0),d0
                 andi.w  #$F,d0
@@ -463,9 +495,9 @@ loc_1A154:
                 ext.l   d0
                 divu.w  #3,d0
                 cmpi.w  #$E,d0
-                bls.s   loc_1A182
+                bls.s   @Continue
                 moveq   #$E,d0
-loc_1A182:
+@Continue:
                 
                 move.w  d0,d1
                 lsl.w   #4,d1
@@ -473,7 +505,8 @@ loc_1A182:
                 lsl.w   #4,d1
                 or.w    d1,d0
                 move.w  d0,(a0)+
-                dbf     d2,loc_1A154
+                dbf     d2,@Loop
+                
                 movem.l (sp)+,d0-d2/a0
                 rts
 
@@ -482,31 +515,36 @@ loc_1A182:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A198:
-                
-                bsr.s   sub_1A14A
-                bra.w   sub_1A0E2
 
-    ; End of function sub_1A198
+TintScreen_Greyscale:
+                
+                bsr.s   sub_1A14A       
+                bra.w   sub_1A0E2       
+
+    ; End of function TintScreen_Greyscale
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Tint the screen blue
+
 
 sub_1A19E:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
-                moveq   #$3F,d7 
-loc_1A1A8:
+                moveq   #CRAM_COLORS_COUNTER,d7
+@Loop:
                 
                 move.w  (a0),d0
                 move.w  d0,d1
-                andi.w  #$E00,d0
-                lsr.w   #1,d1
+                andi.w  #$E00,d0        ; isolate blue component
+                lsr.w   #1,d1           ; and halve the others
                 andi.w  #$EE,d1 
                 or.w    d1,d0
                 move.w  d0,(a0)+
-                dbf     d7,loc_1A1A8
+                dbf     d7,@Loop
+                
                 movem.l (sp)+,d0-d1/a0
                 rts
 
@@ -515,31 +553,36 @@ loc_1A1A8:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A1C4:
-                
-                bsr.s   sub_1A19E
-                bra.w   sub_1A0E2
 
-    ; End of function sub_1A1C4
+TintScreen_Blue:
+                
+                bsr.s   sub_1A19E       
+                bra.w   sub_1A0E2       
+
+    ; End of function TintScreen_Blue
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Tint the screen green
+
 
 sub_1A1CA:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
-                moveq   #$3F,d7 
-loc_1A1D4:
+                moveq   #CRAM_COLORS_COUNTER,d7
+@Loop:
                 
                 move.w  (a0),d0
                 move.w  d0,d1
-                andi.w  #$E0,d0 
-                lsr.w   #1,d1
+                andi.w  #$E0,d0 ; isolate green component
+                lsr.w   #1,d1           ; and halve the others
                 andi.w  #$E0E,d1
                 or.w    d1,d0
                 move.w  d0,(a0)+
-                dbf     d7,loc_1A1D4
+                dbf     d7,@Loop
+                
                 movem.l (sp)+,d0-d1/a0
                 rts
 
@@ -548,31 +591,36 @@ loc_1A1D4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A1F0:
-                
-                bsr.s   sub_1A1CA
-                bra.w   sub_1A0E2
 
-    ; End of function sub_1A1F0
+TintScreen_Green:
+                
+                bsr.s   sub_1A1CA       
+                bra.w   sub_1A0E2       
+
+    ; End of function TintScreen_Green
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Tint the screen red
+
 
 sub_1A1F6:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
-                moveq   #$3F,d7 
-loc_1A200:
+                moveq   #CRAM_COLORS_COUNTER,d7
+@Loop:
                 
                 move.w  (a0),d0
                 move.w  d0,d1
-                andi.w  #$E,d0
-                lsr.w   #1,d1
+                andi.w  #$E,d0          ; isolate red component
+                lsr.w   #1,d1           ; and halve the others
                 andi.w  #$EE0,d1
                 or.w    d1,d0
                 move.w  d0,(a0)+
-                dbf     d7,loc_1A200
+                dbf     d7,@Loop
+                
                 movem.l (sp)+,d0-d1/a0
                 rts
 
@@ -581,61 +629,70 @@ loc_1A200:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A21C:
-                
-                bsr.s   sub_1A1F6
-                bra.w   sub_1A0E2
 
-    ; End of function sub_1A21C
+TintScreen_Red:
+                
+                bsr.s   sub_1A1F6       
+                bra.w   sub_1A0E2       
+
+    ; End of function TintScreen_Red
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A222:
+; Tint parts of the screen red
+
+
+TintScreen_Apollo:
                 
                 movem.l d0/a0-a1,-(sp)
-                bsr.s   sub_1A1F6
+                bsr.s   sub_1A1F6       
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 lea     ((PALETTE_1_BASE-$1000000)).w,a1
                 moveq   #7,d0
-loc_1A232:
+@Palette1_Loop:
                 
-                move.l  (a1)+,(a0)+
-                dbf     d0,loc_1A232
+                move.l  (a1)+,(a0)+     ; restore palette 1
+                dbf     d0,@Palette1_Loop
+                
                 lea     $20(a0),a0
                 lea     $20(a1),a1
                 moveq   #7,d0
-loc_1A242:
+@Palette3_Loop:
                 
-                move.l  (a1)+,(a0)+
-                dbf     d0,loc_1A242
+                move.l  (a1)+,(a0)+     ; restore palette 3
+                dbf     d0,@Palette3_Loop
+                
                 movem.l (sp)+,d0/a0-a1
                 rts
 
-    ; End of function sub_1A222
+    ; End of function TintScreen_Apollo
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1A24E:
+
+RestorePalettes:
                 
                 movem.l d7-a1,-(sp)
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 lea     ((PALETTE_1_BASE-$1000000)).w,a1
-                moveq   #$1F,d7
-loc_1A25C:
+                moveq   #CRAM_LONGWORDS_COUNTER,d7
+@Loop:
                 
                 move.l  (a1)+,(a0)+
-                dbf     d7,loc_1A25C
+                dbf     d7,@Loop
+                
                 jsr     (ApplyVIntCramDma).w
                 jsr     (EnableDmaQueueProcessing).w
                 movem.l (sp)+,d7-a1
                 rts
 
-    ; End of function sub_1A24E
+    ; End of function RestorePalettes
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1A270:
                 
@@ -664,11 +721,12 @@ loc_1A286:
 
 ;     In: D0 = color to flash
 
+
 ExecSpellAnimationFlash:
                 
                 move.w  d0,d6
                 moveq   #3,d7
-loc_1A2AA:
+@Loop:
                 
                 move.w  d6,((PALETTE_1_CURRENT-$1000000)).w
                 move.w  d6,((PALETTE_3_CURRENT_02-$1000000)).w
@@ -680,7 +738,8 @@ loc_1A2AA:
                 jsr     (ApplyVIntCramDma).w
                 moveq   #3,d0
                 jsr     (Sleep).w       
-                dbf     d7,loc_1A2AA
+                dbf     d7,@Loop
+                
                 rts
 
     ; End of function ExecSpellAnimationFlash
@@ -689,6 +748,7 @@ loc_1A2AA:
 ; =============== S U B R O U T I N E =======================================
 
 ;     Clears a portion at RAM:b406 and RAM:b532 for spell properties.
+
 
 ClearSpellAnimationProperties:
                 
@@ -712,6 +772,7 @@ loc_1A2EA:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1A2F6:
                 
@@ -747,11 +808,12 @@ loc_1A324:
 
 ; code for invocations
 
+
 LoadInvocationSpell:
                 
                 movem.l d0/a6,-(sp)
                 sndCom  SFX_SPELL_CAST
-                move.w  #$CCE,d0
+                move.w  #INVOCATION_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,((word_FFB400-$1000000)).w
                 lea     ((byte_FFB562-$1000000)).w,a6
@@ -775,6 +837,7 @@ LoadInvocationSpell:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1A380:
                 
@@ -823,6 +886,7 @@ loc_1A3C6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1A3E8:
                 
                 lea     ((SPRITE_20_TILE_FLAGS-$1000000)).w,a0
@@ -855,7 +919,7 @@ loc_1A418:
                 beq.s   return_1A474
                 bsr.w   bsc0D_endAnimation
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -887,6 +951,7 @@ return_1A474:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 nullsub_1A476:
                 
                 rts
@@ -895,6 +960,7 @@ nullsub_1A476:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sa00_Nothing:
                 
@@ -905,25 +971,26 @@ sa00_Nothing:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa01_Blaze:
                 
                 bsr.s   nullsub_1A476
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
-                move.w  #$22E,d0
+                move.w  #BLAZE_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #2,d0
+                moveq   #SPELLGRAPHICS_BLAZE,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
-                btst    #7,d1
-                bne.s   loc_1A4A2
+                btst    #SPELLANIMATION_BIT_MIRRORED,d1
+                bne.s   @Mirrored
                 lea     loc_1A58A(pc), a1
-                bra.s   loc_1A4A6
-loc_1A4A2:
+                bra.s   @Continue
+@Mirrored:
                 
                 lea     byte_1A5B2(pc), a1
-loc_1A4A6:
+@Continue:
                 
                 andi.w  #7,d1
                 add.w   d1,d1
@@ -955,7 +1022,7 @@ loc_1A4A6:
                 move.b  5(a1),d1
                 beq.s   loc_1A52A
                 subq.w  #1,d1
-loc_1A500:
+@Loop:
                 
                 moveq   #$F,d6
                 jsr     (GenerateRandomNumber).w
@@ -970,10 +1037,10 @@ loc_1A500:
                 add.w   d4,d7
                 addq.w  #1,d7
                 move.b  d7,3(a0)
-                dbf     d1,loc_1A500
+                dbf     d1,@Loop
 loc_1A52A:
                 
-                btst    #2,((byte_FFB586-$1000000)).w
+                btst    #2,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.w   loc_1A56E
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
@@ -996,7 +1063,7 @@ loc_1A552:
 loc_1A56E:
                 
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #1,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_BLAZE,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  5(a1),d0
                 addq.b  #1,d0
@@ -1203,15 +1270,16 @@ byte_1A614:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa02_Freeze:
                 
                 bsr.w   nullsub_1A476
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
-                move.w  #$E22,d0
+                move.w  #FREEZE_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #$B,d0
+                moveq   #SPELLGRAPHICS_FREEZE,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 lea     (loc_1A6CC+2)(pc), a0 ; need to fix that ugly offset reference with the true data begin label
@@ -1231,7 +1299,7 @@ loc_1A680:
                 move.l  (a0)+,(a1)+
                 move.l  (a0),(a1)
                 moveq   #1,d1
-                btst    #2,((byte_FFB586-$1000000)).w
+                btst    #2,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1A6B4
                 moveq   #$14,d0
                 bsr.w   sub_1A2F6
@@ -1242,7 +1310,7 @@ loc_1A6B4:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #2,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_FREEZE,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
 loc_1A6CC:
                 
@@ -1351,16 +1419,17 @@ loc_1A6CC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa03_Desoul:
                 
                 bsr.w   nullsub_1A476
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
-                move.w  #$222,d0
+                move.w  #DESOUL_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
                 bsr.w   sub_1A00A
-                moveq   #$D,d0
+                moveq   #SPELLGRAPHICS_DESOUL,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a0
@@ -1408,7 +1477,7 @@ loc_1A7E2:
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.b  #5,((byte_FFB583-$1000000)).w
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #3,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_DESOUL,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  d2,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
@@ -1474,14 +1543,15 @@ byte_1A820:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa04_HealingFairy:
                 
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
-                move.w  #$CAC,d0
+                move.w  #HEALING_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #6,d0
+                moveq   #SPELLGRAPHICS_HEALING,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 bclr    #7,d1
@@ -1536,7 +1606,7 @@ loc_1A898:
                 addq.w  #2,d0
                 dbf     d1,loc_1A898
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #4,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_HEALING_FAIRY,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 bra.w   sub_1A028
 
@@ -1597,15 +1667,16 @@ byte_1A918:     dc.b $FF
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa05_Blast:
                 
                 bsr.w   nullsub_1A476
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
-                move.w  #$CC2,d0
+                move.w  #BLAST_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #$F,d0
+                moveq   #SPELLGRAPHICS_BLAST,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a2
@@ -1671,7 +1742,7 @@ loc_1A99E:
 loc_1AA06:
                 
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #5,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_BLAST,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
@@ -1706,6 +1777,7 @@ byte_1AA28:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa06_Detox:
                 
                  
@@ -1713,7 +1785,7 @@ sa06_Detox:
                 move.w  #$A8A,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #7,d0
+                moveq   #SPELLGRAPHICS_DETOX,d0
                 bsr.w   LoadSpellGraphics
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
@@ -1722,7 +1794,7 @@ sa06_Detox:
                 moveq   #$26,d0 
                 bsr.w   sub_19F5E
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #6,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_DETOX,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
@@ -1740,15 +1812,16 @@ byte_1AA88:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa07_Bolt:
                 
                 bsr.w   nullsub_1A476
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
-                move.w  #$ECA,d0
+                move.w  #BOLT_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #4,d0
+                moveq   #SPELLGRAPHICS_BOLT,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 lea     loc_1AB4A(pc), a1
@@ -1757,7 +1830,7 @@ sa07_Bolt:
                 adda.w  d1,a1
                 move.l  (a1),((byte_FFB532-$1000000)).w
                 moveq   #$10,d0
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1AACC
                 addi.w  #$80,d0 
 loc_1AACC:
@@ -1781,7 +1854,7 @@ loc_1AAD4:
                 mulu.w  #5,d0
                 addi.w  #$26,d0 
                 lea     byte_1AB5E(pc), a0
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1AB0C
                 lea     $20(a0),a0
 loc_1AB0C:
@@ -1798,7 +1871,7 @@ loc_1AB0C:
 loc_1AB2C:
                 
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #7,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_BOLT,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  1(a1),((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
@@ -1891,26 +1964,37 @@ byte_1AB5E:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sa08_BuffSpell:
+
+sa08_Buff1:
                 
                 move.w  #$FFFE,d0
                 moveq   #$1E,d1
                 bra.w   loc_1ABAC
 
-    ; End of function sa08_BuffSpell
+    ; End of function sa08_Buff1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sa19_:
+
+sa19_Buff2:
                 
                 moveq   #2,d0
                 moveq   #2,d1
+
+    ; End of function sa19_Buff2
+
+
+; START OF FUNCTION CHUNK FOR sa08_Buff1
+
 loc_1ABAC:
                 
                 movem.w d0-d1,-(sp)
-                sndCom  SFX_SPELL_CAST
-                move.w  #$2C2,d0
+
+; END OF FUNCTION CHUNK FOR sa08_Buff1
+
+                dc.b $4E, $40, 0, $4D
+                move.w  #BUFF_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
                 movem.w (sp)+,d0-d1
@@ -1920,53 +2004,53 @@ loc_1ABAC:
                 move.w  #1,2(a0)
                 move.w  d1,4(a0)
                 move.w  #$11D,((byte_FFB404-$1000000)).w
-                move.b  #8,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_BUFF1,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
 
-    ; End of function sa19_
-
-
 ; =============== S U B R O U T I N E =======================================
 
-sa09_DebuffSpell:
+
+sa09_Debuff1:
                 
                 lea     byte_1ACC6(pc), a0
                 bra.w   loc_1AC08
 
-    ; End of function sa09_DebuffSpell
+    ; End of function sa09_Debuff1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sa1B_:
+
+sa1B_Debuff2:
                 
                 lea     byte_1ACCC(pc), a0
                 bra.w   loc_1AC08
 
-    ; End of function sa1B_
+    ; End of function sa1B_Debuff2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sa1C_:
+
+sa1C_Debuff3:
                 
                 lea     byte_1ACD2(pc), a0
 
-    ; End of function sa1C_
+    ; End of function sa1C_Debuff3
 
 
-; START OF FUNCTION CHUNK FOR sa09_DebuffSpell
+; START OF FUNCTION CHUNK FOR sa09_Debuff1
 
 loc_1AC08:
                 
                 move.l  a0,-(sp)
                 sndCom  SFX_SPELL_CAST
-                move.w  #$E22,d0
+                move.w  #DEBUFF_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #9,d0
+                moveq   #SPELLGRAPHICS_DEBUFF,d0
                 bsr.w   LoadSpellGraphics
                 movea.l (sp)+,a0
                 lea     ((PALETTE_3_CURRENT-$1000000)).w,a1
@@ -1979,7 +2063,7 @@ loc_1AC08:
                 move.w  (a0),$1C(a2)
                 jsr     (ApplyVIntCramDma).w
                 lea     ((byte_FFB532-$1000000)).w,a0
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1AC5C
                 move.w  #$40,(a0)+ 
                 move.w  #$20,(a0) 
@@ -2012,12 +2096,12 @@ loc_1AC64:
                 addi.w  #$12,d7
                 move.w  d7,4(a0)
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #9,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_DEBUFF1,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #4,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
 
-; END OF FUNCTION CHUNK FOR sa09_DebuffSpell
+; END OF FUNCTION CHUNK FOR sa09_Debuff1
 
 byte_1ACC6:     dc.b 8
                 dc.b $88
@@ -2040,23 +2124,25 @@ byte_1ACD2:     dc.b 8
 
 ; =============== S U B R O U T I N E =======================================
 
-sa0A_MagicDrain:
+
+sa0A_Absorb:
                 
                  
                 sndCom  SFX_WARP
-                move.w  #$F,d0
+                move.w  #ABSORB_FLASH_COLOR,d0
                 bra.w   ExecSpellAnimationFlash
 
-    ; End of function sa0A_MagicDrain
+    ; End of function sa0A_Absorb
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sa0B_DemonBreath:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #$16,d0
+                moveq   #SPELLGRAPHICS_DEMON_BREATH,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a1
@@ -2074,7 +2160,7 @@ loc_1AD16:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #$B,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_DEMON_BREATH,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
@@ -2085,11 +2171,12 @@ loc_1AD16:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa0C_FlameBreath:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #1,d0
+                moveq   #SPELLGRAPHICS_FLAME_BREATH,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a1
@@ -2112,7 +2199,7 @@ loc_1AD6A:
                 bsr.w   sub_1A2F6
                 move.w  (a1),2(a0)
                 move.w  #$11D,((byte_FFB404-$1000000)).w
-                move.b  #$C,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_FLAME_BREATH,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
@@ -2123,11 +2210,12 @@ loc_1AD6A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa0D_ArrowsAndSpears:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #5,d0
+                moveq   #SPELLGRAPHICS_ARROWS_AND_SPEARS,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d0
                 clr.w   d1
@@ -2163,7 +2251,7 @@ loc_1ADDA:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #$72,((byte_FFB404-$1000000)).w 
-                move.b  #$D,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_ARROWS_AND_SPEARS,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
 loc_1AE16:
@@ -2320,11 +2408,12 @@ byte_1AE40:     dc.b $E
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa0E_CannonProjectile:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #$12,d0
+                moveq   #SPELLGRAPHICS_CANNON_PROJECTILE,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d0
                 lea     byte_1AEFA(pc), a1
@@ -2339,7 +2428,7 @@ loc_1AECA:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #$11D,((byte_FFB404-$1000000)).w
-                move.b  #$E,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_CANNON_PROJECTILE,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
@@ -2366,11 +2455,12 @@ byte_1AEFA:     dc.b $F3
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa0F_ShotProjectile:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #$10,d0
+                moveq   #SPELLGRAPHICS_EXPLOSION,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d0
                 lea     byte_1AF7C(pc), a0
@@ -2390,7 +2480,7 @@ loc_1AF2C:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #$11D,((byte_FFB404-$1000000)).w
-                move.b  #$F,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_SHOT_PROJECTILE,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
@@ -2441,11 +2531,12 @@ byte_1AF7C:     dc.b 1
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa10_GunnerProjectile:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #$11,d0
+                moveq   #SPELLGRAPHICS_GUNNER_PROJECTILE,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d0
                 lea     byte_1B002(pc), a0
@@ -2464,9 +2555,9 @@ loc_1AFAE:
                 bsr.w   sub_19F5E
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
-                bsr.w   sub_1A0AA
+                bsr.w   CopyPalettes
                 move.w  #$11D,((byte_FFB404-$1000000)).w
-                move.b  #$10,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_GUNNER_PROJECTILE,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
@@ -2517,6 +2608,7 @@ byte_1B002:     dc.b 1
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa11_Dao:
                 
                 bsr.w   ClearSpellAnimationProperties
@@ -2546,7 +2638,7 @@ loc_1B040:
                 movem.w (sp)+,d1-d2
                 addq.w  #1,d1
                 dbf     d2,loc_1B026
-                moveq   #3,d0
+                moveq   #SPELLGRAPHICS_DA0,d0
                 bsr.w   LoadSpellGraphics
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
@@ -2565,7 +2657,7 @@ loc_1B076:
                 move.b  #1,((byte_FFB56B-$1000000)).w
                 bclr    #3,((byte_FFB56E-$1000000)).w
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #$11,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_DAO,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
@@ -2580,7 +2672,8 @@ byte_1B0CE:     dc.b 3
 
 ; =============== S U B R O U T I N E =======================================
 
-sa12_Atlas:
+
+sa12_Apollo:
                 
                 bsr.w   ClearSpellAnimationProperties
                 bclr    #6,((byte_FFB56E-$1000000)).w
@@ -2661,13 +2754,13 @@ loc_1B1A4:
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.b  #5,((byte_FFB583-$1000000)).w
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #$12,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_APOLLO,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #2,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-    ; End of function sa12_Atlas
+    ; End of function sa12_Apollo
 
 byte_1B1FA:     dc.b 1
                 dc.b $12
@@ -2703,6 +2796,7 @@ byte_1B202:     dc.b 0
                 dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sa13_Neptun:
                 
@@ -2764,16 +2858,16 @@ loc_1B2A0:
                 moveq   #2,d0
                 bchg    #0,d1
                 bne.s   loc_1B2B8
-                move.w  #$78C|VDPTILE_PLT3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #$78C|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
                 bra.s   loc_1B2BE
 loc_1B2B8:
                 
-                move.w  #$786|VDPTILE_PLT3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #$786|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
 loc_1B2BE:
                 
                 jsr     (WaitForVInt).w
                 dbf     d2,loc_1B2A0
-                moveq   #$E,d0
+                moveq   #SPELLGRAPHICS_NEPTUN,d0
                 bsr.w   LoadSpellGraphics
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
@@ -2805,7 +2899,7 @@ loc_1B314:
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.b  #5,((byte_FFB583-$1000000)).w
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #$13,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_NEPTUN,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #4,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
@@ -2852,7 +2946,8 @@ byte_1B36C:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sa14_Apollo:
+
+sa14_Atlas:
                 
                 bsr.w   ClearSpellAnimationProperties
                 bclr    #6,((byte_FFB56E-$1000000)).w
@@ -2883,21 +2978,22 @@ loc_1B3D8:
                 move.b  #2,(a1)+
                 dbf     d0,loc_1B3D8
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #$14,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_ATLAS,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #2,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-    ; End of function sa14_Apollo
+    ; End of function sa14_Atlas
 
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa15_PrismLaser:
                 
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #8,d0
+                moveq   #SPELLGRAPHICS_PRSIM_LASER,d0
                 bsr.w   LoadSpellGraphics
                 moveq   #1,d0
                 jsr     sub_1A2F6(pc)
@@ -2930,7 +3026,7 @@ loc_1B456:
                 move.b  #2,(a1)+
                 dbf     d0,loc_1B456
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #$15,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_PRISM_LASER,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB589-$1000000)).w
@@ -2948,6 +3044,7 @@ byte_1B480:     dc.b 0
                 dc.b $20
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sa16_BubbleBreath:
                 
@@ -2974,7 +3071,7 @@ sa16_BubbleBreath:
 loc_1B4CE:
                 
                 move.w  #$E4,((byte_FFB404-$1000000)).w 
-                move.b  #$16,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_BUBBLE_BREATH,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
@@ -2991,6 +3088,7 @@ byte_1B4F0:     dc.b $C
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa18_CutOff:
                 
                 andi.w  #7,d1
@@ -3002,7 +3100,7 @@ sa18_CutOff:
 loc_1B508:
                 
                 bclr    #3,((byte_FFB56E-$1000000)).w
-                move.w  #$EEE,d0
+                move.w  #CUTOFF_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 move.l  #byte_1B53A,((dword_FFB3C6-$1000000)).w
                 move.w  #1,((word_FFB3CA-$1000000)).w
@@ -3022,7 +3120,7 @@ byte_1B53A:
                 dc.b $18
 loc_1B53E:
                 
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1B55C
                 cmpi.w  #$35,((ENEMY_BATTLE_SPRITE-$1000000)).w 
                 bne.s   loc_1B550
@@ -3048,12 +3146,12 @@ loc_1B566:
 loc_1B570:
                 
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #$A,d0
+                moveq   #SPELLGRAPHICS_CUTOFF,d0
                 bsr.w   LoadSpellGraphics
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((word_FFB3FA-$1000000)).w,a3
                 lea     word_1B608(pc), a0
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1B594
                 addq.w  #8,a0
                 lea     ((word_FFB3F6-$1000000)).w,a3
@@ -3081,7 +3179,7 @@ loc_1B5CA:
                 move.w  #$FFFF,(a3)
 loc_1B5D2:
                 
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1B5E0
                 addq.w  #1,VDPSPRITE_OFFSET_X(a4)
                 bra.s   loc_1B5E4
@@ -3115,14 +3213,15 @@ word_1B608:     dc.w $138
 
 ; =============== S U B R O U T I N E =======================================
 
-sa1A_Detox:
+
+sa1A_AttackSpell:
                 
                  
                 sndCom  SFX_SPELL_CAST
-                move.w  #$8A8,d0
+                move.w  #ATTACK_SPELL_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #7,d0
+                moveq   #SPELLGRAPHICS_DETOX,d0
                 bsr.w   LoadSpellGraphics
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
@@ -3131,23 +3230,24 @@ sa1A_Detox:
                 moveq   #$26,d0 
                 bsr.w   sub_19F5E
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #$1A,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_ATTACK_SPELL,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
 
-    ; End of function sa1A_Detox
+    ; End of function sa1A_AttackSpell
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sa17_Snowstorm:
+
+sa17_SnowBreath:
                 
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #$C,d0
+                moveq   #SPELLGRAPHICS_SNOW_BREATH,d0
                 bsr.w   LoadSpellGraphics
                 lea     ((byte_FFB532-$1000000)).w,a1
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1B67C
                 move.w  #$50,(a1) 
                 bra.s   loc_1B680
@@ -3159,27 +3259,28 @@ loc_1B680:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #$17,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_SNOW_BREATH,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-    ; End of function sa17_Snowstorm
+    ; End of function sa17_SnowBreath
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sa1D_Blast:
+
+sa1D_PhoenixAttack:
                 
                 bsr.w   ClearSpellAnimationProperties
                 btst    #0,d1
                 beq.s   loc_1B6B6
-                moveq   #$14,d0
+                moveq   #SPELLGRAPHICS_PHOENIX_ATTACK,d0
                 bra.s   loc_1B6B8
 loc_1B6B6:
                 
-                moveq   #$F,d0
+                moveq   #SPELLGRAPHICS_BLAST,d0
 loc_1B6B8:
                 
                 bsr.w   LoadSpellGraphics
@@ -3187,26 +3288,27 @@ loc_1B6B8:
                 bsr.w   sub_1A2F6
                 move.w  #$D0,4(a0) 
                 move.w  #$64,((byte_FFB404-$1000000)).w 
-                move.b  #$1D,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_PHOENIX_ATTACK,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-    ; End of function sa1D_Blast
+    ; End of function sa1D_PhoenixAttack
 
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sa1E_BurstRockExplosion:
                 
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #$10,d0
+                moveq   #SPELLGRAPHICS_EXPLOSION,d0
                 bsr.w   LoadSpellGraphics
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #$1E,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_BURST_ROCK_EXPLOSION,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
@@ -3218,11 +3320,12 @@ sa1E_BurstRockExplosion:
 
 ; and maybe Zynk's beam too ?
 
-sa1F_OddeyeBeam:
+
+sa1F_OddEyeBeam:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellAnimationProperties
-                moveq   #$15,d0
+                moveq   #SPELLGRAPHICS_ODD_EYE_BEAM,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 lea     byte_1B794(pc), a0
@@ -3238,7 +3341,7 @@ loc_1B732:
                 bsr.w   sub_19F5E
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1B756
                 move.w  #$38,2(a0) 
                 bra.s   loc_1B75C
@@ -3254,14 +3357,14 @@ loc_1B764:
                 move.b  #2,(a1)+
                 dbf     d0,loc_1B764
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
-                move.b  #$1F,((byte_FFB587-$1000000)).w
+                move.b  #SPELLANIMATION_ODD_EYE_BEAM,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 move.b  #1,((byte_FFB589-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-    ; End of function sa1F_OddeyeBeam
+    ; End of function sa1F_OddEyeBeam
 
 byte_1B794:     dc.b 1
                 dc.b 4
@@ -3294,7 +3397,8 @@ byte_1B794:     dc.b 1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1B7B0:
+
+UpdateSpellAnimation:
                 
                 tst.b   ((byte_FFB584-$1000000)).w
                 beq.s   return_1B7C8
@@ -3319,48 +3423,50 @@ loc_1B7CE:
 loc_1B7D8:
                 
                 clr.w   d7
-                move.b  ((byte_FFB587-$1000000)).w,d7
+                move.b  ((CURRENT_SPELLANIMATION-$1000000)).w,d7
                 add.w   d7,d7
-                move.w  rjt_SpellAnimations(pc,d7.w),d7
-                jmp     rjt_SpellAnimations(pc,d7.w)
+                move.w  rjt_SpellAnimationUpdates(pc,d7.w),d7
+                jmp     rjt_SpellAnimationUpdates(pc,d7.w)
 
-    ; End of function sub_1B7B0
+    ; End of function UpdateSpellAnimation
 
-rjt_SpellAnimations:
-                dc.w nullsub_1B93A-rjt_SpellAnimations
-                dc.w sub_1B93C-rjt_SpellAnimations
-                dc.w sub_1BE9E-rjt_SpellAnimations
-                dc.w sub_1C248-rjt_SpellAnimations
-                dc.w sub_1C53E-rjt_SpellAnimations
-                dc.w sub_1C7F6-rjt_SpellAnimations
-                dc.w sub_1CC56-rjt_SpellAnimations
-                dc.w spellanim_Bolt-rjt_SpellAnimations
-                dc.w sub_1CFFC-rjt_SpellAnimations
-                dc.w sub_1D038-rjt_SpellAnimations
-                dc.w nullsub_1B828-rjt_SpellAnimations
-                dc.w sub_1D0FE-rjt_SpellAnimations
-                dc.w sub_1D2E6-rjt_SpellAnimations
-                dc.w sub_1D4E6-rjt_SpellAnimations
-                dc.w sub_1D5C6-rjt_SpellAnimations
-                dc.w sub_1D786-rjt_SpellAnimations
-                dc.w sub_1D9FC-rjt_SpellAnimations
-                dc.w sub_1DCE8-rjt_SpellAnimations
-                dc.w sub_1DE24-rjt_SpellAnimations
-                dc.w sub_1DFD4-rjt_SpellAnimations
-                dc.w sub_1E134-rjt_SpellAnimations
-                dc.w sub_1E2D4-rjt_SpellAnimations
-                dc.w sub_1E5D0-rjt_SpellAnimations
-                dc.w sub_1E7B2-rjt_SpellAnimations
-                dc.w nullsub_1B828-rjt_SpellAnimations
-                dc.w sub_1CFFC-rjt_SpellAnimations
-                dc.w sub_1E958-rjt_SpellAnimations
-                dc.w sub_1D038-rjt_SpellAnimations
-                dc.w sub_1D038-rjt_SpellAnimations
-                dc.w loc_1EA0C-rjt_SpellAnimations
-                dc.w sub_1EBBA-rjt_SpellAnimations
-                dc.w sub_1ECC8-rjt_SpellAnimations
+rjt_SpellAnimationUpdates:
+                dc.w nullsub_1B93A-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Blaze-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Freeze-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Desoul-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_HealingFairy-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Blast-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Detox-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Bolt-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Buff-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Debuff-rjt_SpellAnimationUpdates
+                dc.w nullsub_1B828-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_DemonBreath-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_FlameBreath-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_ArrowsAndSpears-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_CannonProjectile-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_ShotProjectile-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_GunnerProjectile-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Dao-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Apollo-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Neptun-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Atlas-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_PrismLaser-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_BubbleBreath-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_SnowBreath-rjt_SpellAnimationUpdates
+                dc.w nullsub_1B828-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Buff-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_AttackSpell-rjt_SpellAnimationUpdates 
+                                                        ; SFCD's ATTACK spell (unused)
+                dc.w UpdateSpellAnimation_Debuff-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_Debuff-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_PhoenixAttack-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_BurstRockExplosion-rjt_SpellAnimationUpdates
+                dc.w UpdateSpellAnimation_OddEyeBeam-rjt_SpellAnimationUpdates
 
 ; =============== S U B R O U T I N E =======================================
+
 
 nullsub_1B828:
                 
@@ -3371,6 +3477,7 @@ nullsub_1B828:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1B82A:
                 
                 clr.w   ((PALETTE_1_CURRENT-$1000000)).w
@@ -3379,17 +3486,17 @@ sub_1B82A:
                 jsr     (EnableDmaQueueProcessing).w
                 bsr.w   sub_1A00A
                 bsr.w   ClearSpellAnimationProperties
-                cmpi.b  #$11,((byte_FFB587-$1000000)).w
+                cmpi.b  #SPELLANIMATION_DAO,((CURRENT_SPELLANIMATION-$1000000)).w
                 bcs.s   loc_1B858
-                cmpi.b  #$14,((byte_FFB587-$1000000)).w
+                cmpi.b  #SPELLANIMATION_ATLAS,((CURRENT_SPELLANIMATION-$1000000)).w
                 bhi.s   loc_1B858
                 moveq   #$10,d0
                 jsr     (InitSprites).w 
 loc_1B858:
                 
                 clr.w   ((byte_FFB404-$1000000)).w
-                clr.b   ((byte_FFB586-$1000000)).w
-                clr.b   ((byte_FFB587-$1000000)).w
+                clr.b   ((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                clr.b   ((CURRENT_SPELLANIMATION-$1000000)).w
                 clr.b   ((byte_FFB585-$1000000)).w
                 clr.b   ((byte_FFB584-$1000000)).w
                 clr.b   ((byte_FFB568-$1000000)).w
@@ -3403,6 +3510,7 @@ loc_1B858:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1B884:
                 
@@ -3432,6 +3540,7 @@ loc_1B8AC:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1B8B2:
                 
@@ -3470,6 +3579,7 @@ loc_1B8F8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1B8FE:
                 
                 tst.b   ((byte_FFB56A-$1000000)).w
@@ -3483,6 +3593,7 @@ return_1B90A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1B90C:
                 
@@ -3516,6 +3627,7 @@ word_1B930:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 nullsub_1B93A:
                 
                 rts
@@ -3525,9 +3637,8 @@ nullsub_1B93A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; desoul ?
 
-sub_1B93C:
+UpdateSpellAnimation_Blaze:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -3616,7 +3727,7 @@ loc_1BA00:
 loc_1BA30:
                 
                 bsr.w   sub_19F5E
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BA42
                 bset    #3,VDPSPRITE_OFFSET_TILE(a4)
 loc_1BA42:
@@ -3631,7 +3742,7 @@ loc_1BA42:
                 move.w  #$100,d6
                 jsr     (GenerateRandomNumber).w
                 addi.w  #$300,d7
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BA70
                 neg.w   d7
 loc_1BA70:
@@ -3714,7 +3825,7 @@ loc_1BB2A:
                 move.w  (a0),d1
                 addi.w  #-$4000,d1
                 move.w  d1,VDPSPRITE_OFFSET_TILE(a4)
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BB42
                 bset    #3,VDPSPRITE_OFFSET_TILE(a4)
 loc_1BB42:
@@ -3800,7 +3911,7 @@ loc_1BC0A:
                 bsr.w   sub_1B90C
                 tst.b   ((byte_FFB584-$1000000)).w
                 beq.w   sub_1B82A
-                btst    #2,((byte_FFB586-$1000000)).w
+                btst    #2,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BC20
                 rts
 loc_1BC20:
@@ -3933,10 +4044,11 @@ return_1BD4A:
                 
                 rts
 
-    ; End of function sub_1B93C
+    ; End of function UpdateSpellAnimation_Blaze
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1BD4C:
                 
@@ -3979,6 +4091,7 @@ loc_1BD92:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1BDA0:
                 
@@ -4175,12 +4288,13 @@ word_1BE82:     dc.w $C
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1BE9E:
+
+UpdateSpellAnimation_Freeze:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
                 moveq   #$26,d0 
-                btst    #2,((byte_FFB586-$1000000)).w
+                btst    #2,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.w   loc_1BF5C
                 tst.w   (a5)
                 beq.w   loc_1BF54
@@ -4196,7 +4310,7 @@ loc_1BEC8:
                 move.w  #2,(a5)
                 tst.w   2(a5)
                 bne.w   loc_1BF1E
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BEEC
                 move.w  #$B8,d1 
                 move.w  #$C8,d2 
@@ -4212,7 +4326,7 @@ loc_1BEF4:
                 add.w   d7,d2
                 move.w  d2,(a4)
                 move.w  #VDPSPRITESIZE_V3|VDPSPRITESIZE_H1,VDPSPRITE_OFFSET_SIZE(a4)
-                move.w  #$570|VDPTILE_PLT3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
+                move.w  #$570|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
                 moveq   #$30,d6 
                 jsr     (GenerateRandomNumber).w
                 add.w   d7,d1
@@ -4250,7 +4364,7 @@ loc_1BF5C:
                 move.b  $C(a3),$D(a3)
                 lea     loc_1C170(pc), a2
                 lea     (loc_1C184+2)(pc), a1 ; undefine operand to undo
-                move.b  ((byte_FFB586-$1000000)).w,d2
+                move.b  ((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w,d2
                 andi.w  #7,d2
                 move.w  d2,d1
                 mulu.w  #$2A,d2 
@@ -4269,7 +4383,7 @@ loc_1BF88:
                 lea     (byte_FFAFA0).l,a0
                 moveq   #$28,d6 
                 jsr     (GenerateRandomNumber).w
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BFBC
                 addi.w  #$8C,d7 
                 move.b  #1,(a0,d0.w)
@@ -4446,7 +4560,7 @@ loc_1C184:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1BE9E
+    ; End of function UpdateSpellAnimation_Freeze
 
                 dc.b 0
                 dc.b 0
@@ -4641,7 +4755,8 @@ byte_1C242:     dc.b $E
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1C248:
+
+UpdateSpellAnimation_Desoul:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -4814,7 +4929,7 @@ loc_1C42A:
                 clr.w   4(a3)
 loc_1C43A:
                 
-                btst    #1,((byte_FFB586-$1000000)).w
+                btst    #1,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.w   loc_1C464
                 lea     $C(a5),a5
                 lea     $20(a4),a4
@@ -4831,10 +4946,11 @@ loc_1C464:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1C248
+    ; End of function UpdateSpellAnimation_Desoul
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1C46E:
                 
@@ -4882,6 +4998,7 @@ return_1C4D6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1C4D8:
                 
@@ -4967,7 +5084,8 @@ byte_1C51E:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1C53E:
+
+UpdateSpellAnimation_HealingFairy:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -5219,7 +5337,7 @@ loc_1C7D8:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1C53E
+    ; End of function UpdateSpellAnimation_HealingFairy
 
 byte_1C7EE:     dc.b 0
                 dc.b $60
@@ -5232,7 +5350,8 @@ byte_1C7EE:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1C7F6:
+
+UpdateSpellAnimation_Blast:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -5593,10 +5712,11 @@ loc_1CB94:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1C7F6
+    ; End of function UpdateSpellAnimation_Blast
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1CBA6:
                 
@@ -5769,7 +5889,8 @@ byte_1CC48:     dc.b $60
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1CC56:
+
+UpdateSpellAnimation_Detox:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -5924,7 +6045,7 @@ loc_1CDF2:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1CC56
+    ; End of function UpdateSpellAnimation_Detox
 
 byte_1CE0C:     dc.b 0
                 dc.b 8
@@ -5997,7 +6118,8 @@ byte_1CE48:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-spellanim_Bolt:
+
+UpdateSpellAnimation_Bolt:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -6050,7 +6172,7 @@ loc_1CEBE:
                 adda.w  d1,a0
                 moveq   #5,d1
                 move.w  6(a5),d2
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1CEDA
                 clr.w   d3
                 bra.s   loc_1CEDC
@@ -6076,7 +6198,7 @@ loc_1CEF6:
                 dbf     d1,loc_1CEF6
                 movea.l (sp)+,a4
                 clr.b   ((byte_FFB588-$1000000)).w
-                move.b  ((byte_FFB586-$1000000)).w,d6
+                move.b  ((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w,d6
                 andi.w  #7,d6
                 add.w   d6,d6
                 jsr     (GenerateRandomNumber).w
@@ -6111,7 +6233,7 @@ loc_1CF46:
                 bra.w   loc_1CF84
 loc_1CF68:
                 
-                move.b  ((byte_FFB586-$1000000)).w,d6
+                move.b  ((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w,d6
                 andi.w  #7,d6
                 lsl.w   #2,d6
                 jsr     (GenerateRandomNumber).w
@@ -6169,7 +6291,7 @@ loc_1CFEA:
                 lea     word_1CFF6(pc), a0
                 bra.w   sub_1B8B2
 
-    ; End of function spellanim_Bolt
+    ; End of function UpdateSpellAnimation_Bolt
 
 word_1CFF6:     dc.w $EAA
                 dc.w $E
@@ -6177,7 +6299,8 @@ word_1CFF6:     dc.w $EAA
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1CFFC:
+
+UpdateSpellAnimation_Buff:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((byte_FFB532-$1000000)).w,a3
@@ -6199,12 +6322,13 @@ return_1D036:
                 
                 rts
 
-    ; End of function sub_1CFFC
+    ; End of function UpdateSpellAnimation_Buff
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D038:
+
+UpdateSpellAnimation_Debuff:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -6271,7 +6395,7 @@ loc_1D0D4:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1D038
+    ; End of function UpdateSpellAnimation_Debuff
 
 byte_1D0EE:     dc.b 0
                 dc.b 0
@@ -6292,7 +6416,8 @@ byte_1D0F6:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D0FE:
+
+UpdateSpellAnimation_DemonBreath:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -6368,7 +6493,7 @@ loc_1D1B6:
                 add.w   d0,(a4)
                 cmpi.w  #$E,(a5)
                 bne.s   loc_1D1C8
-                move.w  #$530|VDPTILE_PLT3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
+                move.w  #$530|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
 loc_1D1C8:
                 
                 move.w  4(a4),d0
@@ -6397,7 +6522,7 @@ loc_1D208:
                 move.w  d7,2(a5)
                 clr.w   4(a5)
                 clr.l   8(a5)
-                move.w  #$540|VDPTILE_PLT3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
+                move.w  #$540|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
                 bra.w   loc_1D288
 loc_1D22E:
                 
@@ -6447,7 +6572,7 @@ loc_1D288:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1D0FE
+    ; End of function UpdateSpellAnimation_DemonBreath
 
 byte_1D2A2:     dc.b 0
                 dc.b 0
@@ -6519,7 +6644,8 @@ word_1D2AA:     dc.w $20
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D2E6:
+
+UpdateSpellAnimation_FlameBreath:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -6535,7 +6661,7 @@ loc_1D2F6:
                 cmpi.w  #2,(a5)
                 bne.w   loc_1D348
                 lea     byte_1D4A0(pc), a0
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.w   loc_1D33C
                 addq.w  #8,a0
                 move.w  ((ENEMY_BATTLE_SPRITE-$1000000)).w,d2
@@ -6695,7 +6821,7 @@ loc_1D494:
                 dbf     d0,loc_1D466
                 rts
 
-    ; End of function sub_1D2E6
+    ; End of function UpdateSpellAnimation_FlameBreath
 
 byte_1D4A0:     dc.b 1
                 dc.b $1C
@@ -6770,7 +6896,8 @@ byte_1D4C8:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D4E6:
+
+UpdateSpellAnimation_ArrowsAndSpears:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -6865,12 +6992,13 @@ return_1D5C4:
                 
                 rts
 
-    ; End of function sub_1D4E6
+    ; End of function UpdateSpellAnimation_ArrowsAndSpears
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D5C6:
+
+UpdateSpellAnimation_CannonProjectile:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -6885,7 +7013,7 @@ loc_1D5D6:
                 move.w  2(a5),d1
                 bne.w   loc_1D612
                 lea     byte_1D776(pc), a0
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1D5F6
                 addq.w  #8,a0
 loc_1D5F6:
@@ -7036,10 +7164,11 @@ loc_1D748:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1D5C6
+    ; End of function UpdateSpellAnimation_CannonProjectile
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1D762:
                 
@@ -7072,7 +7201,8 @@ byte_1D776:     dc.b 1
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D786:
+
+UpdateSpellAnimation_ShotProjectile:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -7292,10 +7422,11 @@ loc_1D9A8:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1D786
+    ; End of function UpdateSpellAnimation_ShotProjectile
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1D9B2:
                 
@@ -7361,7 +7492,8 @@ byte_1D9EA:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1D9FC:
+
+UpdateSpellAnimation_GunnerProjectile:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -7491,7 +7623,7 @@ loc_1DB2E:
                 bne.s   loc_1DB62
                 bsr.w   sub_1DC36
                 move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -7505,7 +7637,7 @@ loc_1DB62:
                 bne.s   loc_1DB8E
                 bsr.w   sub_1DC48
                 move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -7572,10 +7704,11 @@ return_1DC12:
                 
                 rts
 
-    ; End of function sub_1D9FC
+    ; End of function UpdateSpellAnimation_GunnerProjectile
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1DC14:
                 
@@ -7601,6 +7734,7 @@ loc_1DC30:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1DC36:
                 
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
@@ -7616,6 +7750,7 @@ loc_1DC40:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1DC48:
                 
@@ -7639,6 +7774,7 @@ loc_1DC56:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadPalette1FromFFB41E:
                 
@@ -7752,7 +7888,8 @@ byte_1DC88:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DCE8:
+
+UpdateSpellAnimation_Dao:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -7857,7 +7994,7 @@ loc_1DDE8:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1DCE8
+    ; End of function UpdateSpellAnimation_Dao
 
 byte_1DE06:     dc.b 0
                 dc.b 0
@@ -7892,7 +8029,8 @@ byte_1DE1E:     dc.b 2
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DE24:
+
+UpdateSpellAnimation_Apollo:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -8027,7 +8165,7 @@ loc_1DF7E:
                 bcs.w   sub_1B82A
                 rts
 
-    ; End of function sub_1DE24
+    ; End of function UpdateSpellAnimation_Apollo
 
 byte_1DFA2:     dc.b 1
                 dc.b $12
@@ -8082,7 +8220,8 @@ byte_1DFCE:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1DFD4:
+
+UpdateSpellAnimation_Neptun:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 tst.w   (a5)
@@ -8178,10 +8317,11 @@ loc_1E0C0:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1DFD4
+    ; End of function UpdateSpellAnimation_Neptun
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1E0DA:
                 
@@ -8251,7 +8391,8 @@ byte_1E10E:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1E134:
+
+UpdateSpellAnimation_Atlas:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_20-$1000000)).w,a4
@@ -8269,10 +8410,11 @@ loc_1E152:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1E134
+    ; End of function UpdateSpellAnimation_Atlas
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1E160:
                 
@@ -8482,7 +8624,8 @@ byte_1E290:     dc.b $89
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1E2D4:
+
+UpdateSpellAnimation_PrismLaser:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -8519,10 +8662,10 @@ loc_1E33C:
                 bne.w   loc_1E3A8
                 tst.w   6(a5)
                 bne.s   loc_1E36C
-                move.w  #$563|VDPTILE_PLT3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
+                move.w  #$563|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
                 sndCom  SFX_PRISM_LASER_FIRING
                 move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -8536,7 +8679,7 @@ loc_1E36C:
                 addq.w  #1,2(a5)
                 move.w  #$1E,4(a5)
                 move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -8601,10 +8744,11 @@ return_1E452:
                 
                 rts
 
-    ; End of function sub_1E2D4
+    ; End of function UpdateSpellAnimation_PrismLaser
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1E454:
                 
@@ -8634,6 +8778,7 @@ loc_1E476:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1E48A:
                 
                 move.w  6(a5),d2
@@ -8654,6 +8799,7 @@ loc_1E4A0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1E4AC:
                 
@@ -8780,7 +8926,8 @@ loc_1E5C6:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1E5D0:
+
+UpdateSpellAnimation_BubbleBreath:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -8805,7 +8952,7 @@ loc_1E5DC:
                 lea     byte_1E786(pc), a0
                 move.w  d6,d0
                 bsr.w   sub_19F5E
-                sndCom  SFX_LANDSTALKER_SWITCH
+                sndCom  SFX_SPAWN
                 bra.w   loc_1E730
 loc_1E622:
                 
@@ -8951,7 +9098,7 @@ loc_1E770:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1E5D0
+    ; End of function UpdateSpellAnimation_BubbleBreath
 
 byte_1E786:     dc.b 0
                 dc.b $D4
@@ -9000,7 +9147,8 @@ byte_1E78E:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1E7B2:
+
+UpdateSpellAnimation_SnowBreath:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -9018,7 +9166,7 @@ loc_1E7CC:
                 cmpi.w  #2,(a5)
                 bne.w   loc_1E806
                 lea     byte_1E8E2(pc), a0
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1E7EE
                 addq.w  #8,a0
 loc_1E7EE:
@@ -9116,7 +9264,7 @@ loc_1E8D6:
                 beq.w   sub_1B82A
                 bra.w   loc_1D45C
 
-    ; End of function sub_1E7B2
+    ; End of function UpdateSpellAnimation_SnowBreath
 
 byte_1E8E2:     dc.b 1
                 dc.b $1C
@@ -9239,7 +9387,8 @@ byte_1E8F2:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1E958:
+
+UpdateSpellAnimation_AttackSpell:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -9271,7 +9420,7 @@ loc_1E994:
                 bra.w   loc_1CD70
 loc_1E9B4:
                 
-                btst    #7,((byte_FFB586-$1000000)).w
+                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1E9D0
                 btst    #2,((byte_FFB56F-$1000000)).w
                 bne.s   loc_1E9CA
@@ -9306,11 +9455,18 @@ loc_1E9E2:
                 addi.w  #$D0,d2 
                 move.w  d2,(a4)
                 bra.w   loc_1CD10
-loc_1EA0C:
+
+    ; End of function UpdateSpellAnimation_AttackSpell
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+UpdateSpellAnimation_PhoenixAttack:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
-                btst    #0,((byte_FFB586-$1000000)).w
+                btst    #0,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.w   loc_1EAB2
                 moveq   #$26,d0 
                 moveq   #2,d1
@@ -9324,7 +9480,7 @@ loc_1EA22:
                 bne.w   loc_1EA46
                 lea     byte_1EB88(pc), a0
                 bsr.w   sub_19F5E
-                sndCom  SFX_LANDSTALKER_SWITCH
+                sndCom  SFX_SPAWN
                 bra.w   loc_1EA98
 loc_1EA46:
                 
@@ -9438,7 +9594,7 @@ loc_1EB7E:
                 bcc.w   sub_1B82A
                 rts
 
-    ; End of function sub_1E958
+    ; End of function UpdateSpellAnimation_PhoenixAttack
 
 byte_1EB88:     dc.b 1
                 dc.b $1C
@@ -9493,7 +9649,8 @@ byte_1EBAA:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1EBBA:
+
+UpdateSpellAnimation_BurstRockExplosion:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -9575,7 +9732,7 @@ loc_1EC80:
                 beq.w   sub_1B82A
                 rts
 
-    ; End of function sub_1EBBA
+    ; End of function UpdateSpellAnimation_BurstRockExplosion
 
 byte_1EC9A:     dc.b 0
                 dc.b 0
@@ -9626,7 +9783,8 @@ byte_1ECBC:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1ECC8:
+
+UpdateSpellAnimation_OddEyeBeam:
                 
                 lea     ((byte_FFB406-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
@@ -9709,10 +9867,11 @@ return_1EDDA:
                 
                 rts
 
-    ; End of function sub_1ECC8
+    ; End of function UpdateSpellAnimation_OddEyeBeam
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1EDDC:
                 
@@ -9746,6 +9905,7 @@ loc_1EE00:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1EE1A:
                 
                 move.w  4(a5),d0
@@ -9759,7 +9919,6 @@ sub_1EE1A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; and other stuff ?
 
 VInt_UpdateBattlesceneGraphics:
                 
@@ -9769,7 +9928,7 @@ VInt_UpdateBattlesceneGraphics:
                 bsr.w   UpdateAllyBattleSprite
                 bsr.w   sub_1EFD8
                 bsr.w   sub_1F282
-                bsr.w   sub_1B7B0
+                bsr.w   UpdateSpellAnimation
                 bsr.w   sub_1F148
                 bsr.w   sub_1F176
                 jmp     (sub_1942).w    
@@ -9778,6 +9937,7 @@ VInt_UpdateBattlesceneGraphics:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateEnemyBattleSprite:
                 
@@ -9798,6 +9958,7 @@ UpdateEnemyBattleSprite:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 UpdateAllyBattleSprite:
                 
                 btst    #1,((byte_FFB56E-$1000000)).w
@@ -9816,6 +9977,7 @@ UpdateAllyBattleSprite:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateWeaponSprite:
                 
@@ -9887,6 +10049,7 @@ return_1EF2C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1EF2E:
                 
                 bsr.w   sub_1EF50
@@ -9896,6 +10059,7 @@ sub_1EF2E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1EF36:
                 
@@ -9910,6 +10074,7 @@ sub_1EF36:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1EF50:
                 
@@ -9985,6 +10150,7 @@ return_1EFD6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1EFD8:
                 
@@ -10068,6 +10234,7 @@ loc_1F082:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1F0B0:
                 
@@ -10160,6 +10327,7 @@ word_1F140:     dc.w 1
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1F148:
                 
                 cmpi.w  #$FFFF,((BATTLESCENE_ENEMY-$1000000)).w
@@ -10184,6 +10352,7 @@ return_1F174:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1F176:
                 
@@ -10227,6 +10396,7 @@ return_1F1CA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1F1CC:
                 
                 movem.l d0/a0,-(sp)
@@ -10248,6 +10418,7 @@ loc_1F1DA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1F1F0:
                 
                 movem.l d0/a0,-(sp)
@@ -10268,6 +10439,7 @@ loc_1F1FE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1F214:
                 
@@ -10301,6 +10473,7 @@ loc_1F23E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1F254:
                 
                 movem.l d0/a0,-(sp)
@@ -10326,6 +10499,7 @@ loc_1F26C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1F282:
                 
@@ -10374,6 +10548,7 @@ return_1F2F4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1F2F6:
                 
@@ -10563,6 +10738,7 @@ return_1F45C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1F45E:
                 
                 lea     $17C(a3),a0
@@ -10592,6 +10768,7 @@ loc_1F470:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1F496:
                 
@@ -10692,6 +10869,7 @@ byte_1F530:     dc.b $FF
                 dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1F540:
                 

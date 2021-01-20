@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DisplayHeadquartersQuote:
                 
                 jsr     sub_100AC
@@ -33,6 +34,7 @@ loc_4793C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 InitNazcaShipForceMembers:
                 
@@ -65,6 +67,7 @@ loc_47982:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 InitHeadquartersForceMembers:
                 

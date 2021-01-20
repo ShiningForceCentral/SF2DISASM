@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle20\cs_afterbattle.asm :
 ; 0x4B6CE..0x4B790 : Cutscene after battle 20
-abcs_battle20:  textCursor $A06
+abcs_battle20:  textCursor 2566
                 loadMapFadeIn MAP_HARPY_POOL,2,6
                 loadMapEntities ce_4B780
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -16,7 +16,7 @@ abcs_battle20:  textCursor $A06
                 nextSingleText $C0,ALLY_PETER ; "He heard your cry for help{N}and brought us here.{W1}"
                 setFacing ALLY_PETER,RIGHT
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 120
                 setFacing FOLLOWER_B,UP
                 nextSingleText $C0,FOLLOWER_B ; "Oh well, it was nothing.{W1}"

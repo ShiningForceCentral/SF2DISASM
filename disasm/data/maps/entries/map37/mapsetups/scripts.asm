@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map37\mapsetups\scripts.asm :
 ; 0x5FB30..0x5FDE4 : 
-cs_5FB30:       textCursor $D25
+cs_5FB30:       textCursor 3365
                 setActscriptWait 128,eas_Init
                 setFacing 128,DOWN
                 headshake 128
@@ -17,7 +17,7 @@ cs_5FB30:       textCursor $D25
                 endActions
                 hide 128
                 csc_end
-cs_5FB6A:       textCursor $D31
+cs_5FB6A:       textCursor 3377
                 playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 1
                 setActscriptWait ALLY_PETER,eas_Init
@@ -122,6 +122,7 @@ cs_5FB6A:       textCursor $D31
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csub_5FD3A:
                 
                 moveq   #7,d7
@@ -137,6 +138,7 @@ loc_5FD3C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5FD4C:
                 
@@ -154,6 +156,7 @@ loc_5FD4E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_5FD5E:
                 
                 move.b  #$18,((byte_FFAEEE+5-$1000000)).w
@@ -163,6 +166,7 @@ sub_5FD5E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5FD66:
                 
@@ -183,6 +187,7 @@ loc_5FD68:
 
 ; unused
 
+
 sub_5FD7C:
                 
                 bsr.w   sub_5FD92       
@@ -202,9 +207,10 @@ loc_5FD82:
 
 ; unused
 
+
 sub_5FD92:
                 
-                move.b  #1,((FADING_TIMER+1-$1000000)).w
+                move.b  #1,((FADING_TIMER_BYTE-$1000000)).w
                 lea     plt_5FDB4(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
                 moveq   #$20,d7 

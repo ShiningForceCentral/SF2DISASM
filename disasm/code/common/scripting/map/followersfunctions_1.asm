@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitializeFollowerEntities:
                 
                 cmpi.b  #MAP_NEW_GRANSEAL_HQ,((CURRENT_MAP-$1000000)).w 
@@ -17,7 +18,7 @@ InitializeFollowerEntities:
                 lea     pt_eas_Followers(pc), a6
                 lea     ((byte_FFAFB0-$1000000)).w,a5
                 move.b  #1,(a5)
-                chkFlg  $41             ; Caravan is unlocked
+                chkFlg  65              ; Caravan is unlocked
                 beq.s   loc_442D2
                 bsr.s   IsOverworldMap
                 beq.s   loc_442D2

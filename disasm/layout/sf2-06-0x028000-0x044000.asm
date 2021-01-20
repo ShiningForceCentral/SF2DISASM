@@ -67,7 +67,7 @@ SpeechBalloonTiles:
                 include "code\specialscreens\endkiss\endkissfunctions_0.asm"    ; End kiss function
                 include "code\specialscreens\title\loadfont.asm"    ; Title screen font loading function
 UnusedCloudTiles:
-                incbin "data/graphics/tech/unusedcloudtiles.bin" ; no reference to that ? looks like compressed tiles but no idea of what they represent (32x8 tiles)
+                incbin "data/graphics/tech/unusedcloudtiles.bin" ; looks like compressed tiles but no idea of what they represent (32x8 tiles)
 StaticWidthFont:incbin "data/graphics/tech/fonts/staticwidthfont.bin" 
                                                         ; used for title screen
 TitleScreenPalettes:

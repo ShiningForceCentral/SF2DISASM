@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map25_AreaDescriptions:
                 
                 move.w  #$1024,d3       ; "A book...{N}TRAVELS{W1}"

@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ResetAlliesBattleStats:
                 
                 movem.l d0-d7,-(sp)

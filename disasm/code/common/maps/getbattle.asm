@@ -10,6 +10,7 @@
 ; Out: D7 = battle index to trigger ($FFFF if none)
 ; ...more
 
+
 CheckBattle:
                 
                 movem.l d1-d6/a0,-(sp)

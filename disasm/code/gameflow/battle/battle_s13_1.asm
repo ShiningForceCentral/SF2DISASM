@@ -4,9 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Load base tiles and ...  generate font from basetile font !
+; Generates font from basetile font.
 ; Stretches characters from 1 tile to 2 tiles vertically.
 ; Also creates a shadow effect using palette index 2.
+
 
 LoadEndCreditsFont:
                 
@@ -102,6 +103,7 @@ loc_1AC362:
 
 ; AI-related
 
+
 sub_1AC38E:
                 
                 movem.l d0/d5-a6,-(sp)
@@ -192,6 +194,7 @@ loc_1AC434:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetMoveListForEnemyTarget:
                 
                 movem.l d0-a6,-(sp)
@@ -271,6 +274,7 @@ loc_1AC4EA:
 ; =============== S U B R O U T I N E =======================================
 
 ; something with targetting grid or ???
+
 
 sub_1AC4F0:
                 
@@ -353,6 +357,7 @@ loc_1AC5A4:
 
 ; AI-related
 
+
 sub_1AC5AA:
                 
                 movem.l d0-a6,-(sp)
@@ -428,6 +433,7 @@ loc_1AC64E:
 
 ; clear upper two bits from all tiles in terrain list
 
+
 ClearTerrainListObstructions:
                 
                 movem.l d0-a6,-(sp)
@@ -463,6 +469,7 @@ loc_1AC684:
 ; =============== S U B R O U T I N E =======================================
 
 ; AI-related
+
 
 sub_1AC69A:
                 
@@ -523,6 +530,11 @@ loc_1AC722:
 
 ; AI-related
 
+var_4 = -4
+var_3 = -3
+var_2 = -2
+var_1 = -1
+
 sub_1AC728:
                 
                 movem.l d0-a6,-(sp)
@@ -531,49 +543,49 @@ sub_1AC728:
                 move.w  d4,d7
                 cmpi.b  #0,d1
                 bne.s   loc_1AC74E
-                move.b  #0,-1(a6)
-                move.b  d7,-2(a6)
-                move.b  d6,-3(a6)
-                move.b  #$2F,-4(a6) 
+                move.b  #0,var_1(a6)
+                move.b  d7,var_2(a6)
+                move.b  d6,var_3(a6)
+                move.b  #$2F,var_4(a6) 
 loc_1AC74E:
                 
                 cmpi.b  #1,d1
                 bne.s   loc_1AC768
-                move.b  #0,-1(a6)
-                move.b  d7,-2(a6)
-                move.b  #0,-3(a6)
-                move.b  d6,-4(a6)
+                move.b  #0,var_1(a6)
+                move.b  d7,var_2(a6)
+                move.b  #0,var_3(a6)
+                move.b  d6,var_4(a6)
 loc_1AC768:
                 
                 cmpi.b  #2,d1
                 bne.s   loc_1AC782
-                move.b  d7,-1(a6)
-                move.b  #$2F,-2(a6) 
-                move.b  #0,-3(a6)
-                move.b  d6,-4(a6)
+                move.b  d7,var_1(a6)
+                move.b  #$2F,var_2(a6) 
+                move.b  #0,var_3(a6)
+                move.b  d6,var_4(a6)
 loc_1AC782:
                 
                 cmpi.b  #3,d1
                 bne.s   loc_1AC79C
-                move.b  d7,-1(a6)
-                move.b  #$2F,-2(a6) 
-                move.b  d6,-3(a6)
-                move.b  #$2F,-4(a6) 
+                move.b  d7,var_1(a6)
+                move.b  #$2F,var_2(a6) 
+                move.b  d6,var_3(a6)
+                move.b  #$2F,var_4(a6) 
 loc_1AC79C:
                 
                 clr.w   d4
-                move.b  -2(a6),d4
-                sub.b   -1(a6),d4
+                move.b  var_2(a6),d4
+                sub.b   var_1(a6),d4
                 ext.w   d4
                 lea     (BATTLE_TERRAIN).l,a0
-                move.b  -1(a6),d2
+                move.b  var_1(a6),d2
                 ext.w   d2
 loc_1AC7B4:
                 
-                move.b  -3(a6),d1
+                move.b  var_3(a6),d1
                 ext.w   d1
-                move.b  -4(a6),d3
-                sub.b   -3(a6),d3
+                move.b  var_4(a6),d3
+                sub.b   var_3(a6),d3
                 ext.w   d3
 loc_1AC7C4:
                 
@@ -604,6 +616,7 @@ loc_1AC7E6:
 ; =============== S U B R O U T I N E =======================================
 
 ; AI-related
+
 
 sub_1AC7FE:
                 
@@ -729,6 +742,7 @@ byte_1AC87E:    dc.b $10                ; AI-related data
 
 ; AI-related
 
+
 sub_1AC8A0:
                 
                 movem.l d0-a6,-(sp)
@@ -797,7 +811,7 @@ loc_1AC932:
                 addi.w  #1,d2
 loc_1AC93C:
                 
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d3
 loc_1AC942:
                 
@@ -847,7 +861,7 @@ loc_1AC9AA:
                 bra.s   loc_1AC942
 loc_1AC9AC:
                 
-                lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
+                lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  d3,(a0)
                 movem.l (sp)+,d0-a6
                 rts
@@ -917,6 +931,7 @@ byte_1AC9F0:    dc.b $FF                ; Secret Bonus Battle
 
 ; AI-related
 
+
 sub_1AC9FC:
                 
                 movem.l d0/d2-a6,-(sp)
@@ -972,6 +987,7 @@ loc_1ACA6A:
 ; =============== S U B R O U T I N E =======================================
 
 ; AI-related
+
 
 sub_1ACA72:
                 
@@ -1030,46 +1046,56 @@ loc_1ACAD0:
 
 ; AI-related
 
+var_9 = -9
+var_8 = -8
+var_7 = -7
+var_6 = -6
+var_5 = -5
+var_4 = -4
+var_3 = -3
+var_2 = -2
+var_1 = -1
+
 sub_1ACAD6:
                 
                 movem.l d0-d5/d7-a6,-(sp)
-                link    a6,#-$A
+                link    a6,#-10
                 move.w  d2,d0
                 andi.w  #$FF,d0
-                move.b  d0,-2(a6)
+                move.b  d0,var_2(a6)
                 move.w  d2,d0
                 lsr.w   #8,d0
-                move.b  d0,-1(a6)
+                move.b  d0,var_1(a6)
                 move.w  d3,d0
                 andi.w  #$FF,d0
-                move.b  d0,-4(a6)
+                move.b  d0,var_4(a6)
                 move.w  d3,d0
                 lsr.w   #8,d0
-                move.b  d0,-3(a6)
+                move.b  d0,var_3(a6)
                 move.w  d4,d0
                 andi.w  #$FF,d0
-                move.b  d0,-6(a6)
+                move.b  d0,var_6(a6)
                 move.w  d4,d0
                 lsr.w   #8,d0
-                move.b  d0,-5(a6)
+                move.b  d0,var_5(a6)
                 move.w  d5,d0
                 andi.w  #$FF,d0
-                move.b  d0,-8(a6)
+                move.b  d0,var_8(a6)
                 move.w  d5,d0
                 lsr.w   #8,d0
-                move.b  d0,-7(a6)
+                move.b  d0,var_7(a6)
                 clr.w   d1
                 clr.w   d2
                 clr.w   d3
                 clr.w   d4
                 clr.w   d5
                 clr.w   d6
-                move.b  -1(a6),d1
-                move.b  -2(a6),d2
-                move.b  -3(a6),d3
-                move.b  -4(a6),d4
-                move.b  -7(a6),d5
-                move.b  -8(a6),d6
+                move.b  var_1(a6),d1
+                move.b  var_2(a6),d2
+                move.b  var_3(a6),d3
+                move.b  var_4(a6),d4
+                move.b  var_7(a6),d5
+                move.b  var_8(a6),d6
                 bsr.w   sub_1ACC26
                 cmpi.b  #1,d0
                 bne.s   loc_1ACB58
@@ -1081,21 +1107,21 @@ loc_1ACB58:
                 bra.w   loc_1ACB7C
 loc_1ACB62:
                 
-                move.b  d0,-9(a6)
-                move.b  -5(a6),d5
-                move.b  -6(a6),d6
+                move.b  d0,var_9(a6)
+                move.b  var_5(a6),d5
+                move.b  var_6(a6),d6
                 bsr.w   sub_1ACC26
-                cmp.b   -9(a6),d0
+                cmp.b   var_9(a6),d0
                 beq.s   loc_1ACB7C
                 bra.w   loc_1ACC1A
 loc_1ACB7C:
                 
-                move.b  -5(a6),d1
-                move.b  -6(a6),d2
-                move.b  -1(a6),d3
-                move.b  -2(a6),d4
-                move.b  -7(a6),d5
-                move.b  -8(a6),d6
+                move.b  var_5(a6),d1
+                move.b  var_6(a6),d2
+                move.b  var_1(a6),d3
+                move.b  var_2(a6),d4
+                move.b  var_7(a6),d5
+                move.b  var_8(a6),d6
                 bsr.w   sub_1ACC26
                 cmpi.b  #1,d0
                 bne.s   loc_1ACBA2
@@ -1107,21 +1133,21 @@ loc_1ACBA2:
                 bra.w   loc_1ACBC6
 loc_1ACBAC:
                 
-                move.b  d0,-9(a6)
-                move.b  -3(a6),d5
-                move.b  -4(a6),d6
+                move.b  d0,var_9(a6)
+                move.b  var_3(a6),d5
+                move.b  var_4(a6),d6
                 bsr.w   sub_1ACC26
-                cmp.b   -9(a6),d0
+                cmp.b   var_9(a6),d0
                 beq.s   loc_1ACBC6
                 bra.w   loc_1ACC1A
 loc_1ACBC6:
                 
-                move.b  -5(a6),d1
-                move.b  -6(a6),d2
-                move.b  -3(a6),d3
-                move.b  -4(a6),d4
-                move.b  -7(a6),d5
-                move.b  -8(a6),d6
+                move.b  var_5(a6),d1
+                move.b  var_6(a6),d2
+                move.b  var_3(a6),d3
+                move.b  var_4(a6),d4
+                move.b  var_7(a6),d5
+                move.b  var_8(a6),d6
                 bsr.w   sub_1ACC26
                 cmpi.b  #1,d0
                 bne.s   loc_1ACBEC
@@ -1133,11 +1159,11 @@ loc_1ACBEC:
                 bra.w   loc_1ACC1A
 loc_1ACBF6:
                 
-                move.b  d0,-9(a6)
-                move.b  -1(a6),d5
-                move.b  -2(a6),d6
+                move.b  d0,var_9(a6)
+                move.b  var_1(a6),d5
+                move.b  var_2(a6),d6
                 bsr.w   sub_1ACC26
-                cmp.b   -9(a6),d0
+                cmp.b   var_9(a6),d0
                 beq.s   loc_1ACC10
                 bra.w   loc_1ACC1A
 loc_1ACC10:
@@ -1158,18 +1184,25 @@ loc_1ACC1A:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_6 = -6
+var_5 = -5
+var_4 = -4
+var_3 = -3
+var_2 = -2
+var_1 = -1
+
 sub_1ACC26:
                 
                 movem.l d1-a6,-(sp)
                 link    a6,#-6
-                move.b  d1,-1(a6)
-                move.b  d2,-2(a6)
-                move.b  d3,-3(a6)
-                move.b  d4,-4(a6)
-                move.b  d5,-5(a6)
-                move.b  d6,-6(a6)
-                move.b  -2(a6),d1
-                move.b  -4(a6),d0
+                move.b  d1,var_1(a6)
+                move.b  d2,var_2(a6)
+                move.b  d3,var_3(a6)
+                move.b  d4,var_4(a6)
+                move.b  d5,var_5(a6)
+                move.b  d6,var_6(a6)
+                move.b  var_2(a6),d1
+                move.b  var_4(a6),d0
                 ext.w   d0
                 ext.w   d1
                 sub.w   d1,d0
@@ -1177,8 +1210,8 @@ sub_1ACC26:
                 neg.w   d0
 loc_1ACC58:
                 
-                move.b  -1(a6),d2
-                move.b  -3(a6),d1
+                move.b  var_1(a6),d2
+                move.b  var_3(a6),d1
                 ext.w   d1
                 ext.w   d2
                 sub.w   d2,d1
@@ -1191,22 +1224,22 @@ loc_1ACC6A:
                 bra.w   loc_1ACD60
 loc_1ACC72:
                 
-                move.b  -4(a6),d0
-                move.b  -2(a6),d1
+                move.b  var_4(a6),d0
+                move.b  var_2(a6),d1
                 ext.w   d0
                 ext.w   d1
                 sub.w   d1,d0
                 move.w  d0,d6
-                move.b  -3(a6),d1
-                move.b  -5(a6),d0
+                move.b  var_3(a6),d1
+                move.b  var_5(a6),d0
                 ext.w   d0
                 ext.w   d1
                 sub.w   d1,d0
                 ext.l   d0
                 ext.l   d6
                 muls.w  d0,d6
-                move.b  -3(a6),d0
-                move.b  -1(a6),d1
+                move.b  var_3(a6),d0
+                move.b  var_1(a6),d1
                 ext.w   d0
                 ext.w   d1
                 sub.w   d1,d0
@@ -1217,22 +1250,22 @@ loc_1ACCAA:
                 ext.l   d0
                 ext.l   d6
                 divs.w  d0,d6
-                move.b  -4(a6),d0
+                move.b  var_4(a6),d0
                 ext.w   d0
                 add.w   d6,d0
                 bpl.s   loc_1ACCBE
                 bra.w   loc_1ACE22
 loc_1ACCBE:
                 
-                move.b  -6(a6),d1
+                move.b  var_6(a6),d1
                 ext.w   d1
                 sub.w   d1,d0
                 beq.s   loc_1ACCCC
                 bra.w   loc_1ACD32
 loc_1ACCCC:
                 
-                move.b  -1(a6),d0
-                move.b  -3(a6),d1
+                move.b  var_1(a6),d0
+                move.b  var_3(a6),d1
                 ext.w   d0
                 ext.w   d1
                 cmp.w   d1,d0
@@ -1240,15 +1273,15 @@ loc_1ACCCC:
                 bra.w   loc_1ACD08
 loc_1ACCE0:
                 
-                move.b  -5(a6),d1
+                move.b  var_5(a6),d1
                 ext.w   d1
                 cmp.w   d1,d0
                 bcc.s   loc_1ACCEE
                 bra.w   loc_1ACD5A
 loc_1ACCEE:
                 
-                move.b  -5(a6),d0
-                move.b  -3(a6),d1
+                move.b  var_5(a6),d0
+                move.b  var_3(a6),d1
                 ext.w   d0
                 ext.w   d1
                 cmp.w   d1,d0
@@ -1260,8 +1293,8 @@ loc_1ACD02:
                 bra.w   loc_1ACD32
 loc_1ACD08:
                 
-                move.b  -3(a6),d0
-                move.b  -5(a6),d1
+                move.b  var_3(a6),d0
+                move.b  var_5(a6),d1
                 ext.w   d0
                 ext.w   d1
                 cmp.w   d1,d0
@@ -1269,8 +1302,8 @@ loc_1ACD08:
                 bra.w   loc_1ACD5A
 loc_1ACD1C:
                 
-                move.b  -5(a6),d0
-                move.b  -1(a6),d1
+                move.b  var_5(a6),d0
+                move.b  var_1(a6),d1
                 ext.w   d0
                 ext.w   d1
                 cmp.w   d1,d0
@@ -1307,22 +1340,22 @@ loc_1ACD5A:
                 bra.s   loc_1ACD32
 loc_1ACD60:
                 
-                move.b  -3(a6),d0
-                move.b  -1(a6),d1
+                move.b  var_3(a6),d0
+                move.b  var_1(a6),d1
                 ext.w   d0
                 ext.w   d1
                 sub.w   d1,d0
                 move.w  d0,d6
-                move.b  -6(a6),d0
-                move.b  -4(a6),d1
+                move.b  var_6(a6),d0
+                move.b  var_4(a6),d1
                 ext.w   d0
                 ext.w   d1
                 sub.w   d1,d0
                 ext.l   d0
                 ext.l   d6
                 muls.w  d0,d6
-                move.b  -4(a6),d0
-                move.b  -2(a6),d1
+                move.b  var_4(a6),d0
+                move.b  var_2(a6),d1
                 ext.w   d0
                 ext.w   d1
                 sub.w   d1,d0
@@ -1333,22 +1366,22 @@ loc_1ACD98:
                 ext.l   d0
                 ext.l   d6
                 divs.w  d0,d6
-                move.b  -3(a6),d0
+                move.b  var_3(a6),d0
                 ext.w   d0
                 add.w   d6,d0
                 bpl.s   loc_1ACDAC
                 bra.w   loc_1ACE22
 loc_1ACDAC:
                 
-                move.b  -5(a6),d1
+                move.b  var_5(a6),d1
                 ext.w   d1
                 sub.w   d1,d0
                 beq.s   loc_1ACDBA
                 bra.w   loc_1ACD32
 loc_1ACDBA:
                 
-                move.b  -2(a6),d0
-                move.b  -4(a6),d1
+                move.b  var_2(a6),d0
+                move.b  var_4(a6),d1
                 ext.w   d0
                 ext.w   d1
                 cmp.w   d1,d0
@@ -1356,15 +1389,15 @@ loc_1ACDBA:
                 bra.w   loc_1ACDF4
 loc_1ACDCE:
                 
-                move.b  -6(a6),d1
+                move.b  var_6(a6),d1
                 ext.w   d1
                 cmp.w   d1,d0
                 bcc.s   loc_1ACDDA
                 bra.s   loc_1ACD5A
 loc_1ACDDA:
                 
-                move.b  -6(a6),d0
-                move.b  -4(a6),d1
+                move.b  var_6(a6),d0
+                move.b  var_4(a6),d1
                 ext.w   d0
                 ext.w   d1
                 cmp.w   d1,d0
@@ -1376,8 +1409,8 @@ loc_1ACDEE:
                 bra.w   loc_1ACD32
 loc_1ACDF4:
                 
-                move.b  -4(a6),d0
-                move.b  -6(a6),d1
+                move.b  var_4(a6),d0
+                move.b  var_6(a6),d1
                 ext.w   d0
                 ext.w   d1
                 cmp.w   d1,d0
@@ -1385,8 +1418,8 @@ loc_1ACDF4:
                 bra.w   loc_1ACD5A
 loc_1ACE08:
                 
-                move.b  -6(a6),d0
-                move.b  -2(a6),d1
+                move.b  var_6(a6),d0
+                move.b  var_2(a6),d1
                 ext.w   d0
                 ext.w   d1
                 cmp.w   d1,d0
@@ -1412,6 +1445,7 @@ loc_1ACE2A:
 
 ; In: D1 = region #
 
+
 CheckTriggerRegionFlag:
                 
                 movem.l d0-a6,-(sp)
@@ -1426,6 +1460,7 @@ CheckTriggerRegionFlag:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateTriggeredRegionsAndAI:
                 
@@ -1527,13 +1562,14 @@ loc_1ACF2A:
 
 ; adds respawning enemy #s to target list in RAM
 
+
 GetListOfSpawningEnemies:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #$20,d7 
                 move.w  #$80,d4 
                 move.w  d4,d0
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d5
 loc_1ACF44:
                 
@@ -1603,7 +1639,7 @@ loc_1ACFEA:
                 move.w  d4,d0
                 subq.w  #1,d7
                 bne.w   loc_1ACF44
-                lea     ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,a0
+                lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  d5,(a0)
                 movem.l (sp)+,d0-a6
                 rts
@@ -1617,6 +1653,7 @@ loc_1ACFEA:
 ;     D4 = character index (same as D0)
 ; 
 ; Out: D0 = 0000 if activated and dead, $FFFF if not
+
 
 UpdateEnemyActivationIfDead:
                 
@@ -1672,6 +1709,7 @@ loc_1AD088:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetRandomValueSigned:
                 
                 movem.l d0-d5/a0-a6,-(sp)
@@ -1690,6 +1728,7 @@ GetRandomValueSigned:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 RandomUnderD6:
                 
@@ -1724,7 +1763,6 @@ loc_1AD0D4:
 
 ; =============== S U B R O U T I N E =======================================
 
-; loads terrain data for current battle
 
 LoadBattleTerrainData:
                 

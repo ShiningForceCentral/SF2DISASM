@@ -6,6 +6,7 @@
 
 ; D0 = Number of sprites to initialize
 
+
 InitSprites:
                 
                 movem.l d0-d1/a0,-(sp)
@@ -31,6 +32,7 @@ InitSprites:
 ; =============== S U B R O U T I N E =======================================
 
 ; related to spell animations
+
 
 sub_179C:
                 
@@ -77,6 +79,7 @@ loc_17E6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_17EC:
                 
                 movem.l d1/d3,-(sp)
@@ -101,6 +104,7 @@ sub_17EC:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1812:
                 
@@ -198,6 +202,7 @@ word_1840:      dc.w 0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_18C2:
                 
                 movem.l d0-d2,-(sp)
@@ -231,6 +236,7 @@ loc_18E8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_18EE:
                 
@@ -282,7 +288,8 @@ loc_193C:
 
 ; =============== S U B R O U T I N E =======================================
 
-; something with clearing/resetting sprite info when transitioning to battle scene?
+; something with clearing/resetting sprite info when transitioning to battlescene?
+
 
 sub_1942:
                 
@@ -304,6 +311,7 @@ sub_1942:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_196C:
                 
@@ -329,6 +337,7 @@ loc_1982:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_198C:
                 
                 lea     (byte_FFAFA1).l,a0
@@ -353,6 +362,7 @@ loc_19A8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_19B0:
                 
                 movem.l d0/a0,-(sp)
@@ -372,6 +382,7 @@ loc_19BC:
 
 ; Palette copies to figure out
 
+
 sub_19C8:
                 
                 movem.l d7-a1,-(sp)
@@ -382,7 +393,7 @@ sub_19C8:
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a1
                 move.w  #$80,d7 
                 jsr     CopyBytes(pc)   
-                move.b  #$20,((FADING_TIMER-$1000000)).w 
+                move.b  #$20,((FADING_TIMER_WORD-$1000000)).w 
                 movem.l (sp)+,d7-a1
                 rts
 
@@ -393,10 +404,11 @@ sub_19C8:
 
 ; related to palette updating, maybe unused
 
+
 sub_19F8:
                 
                 clr.w   d6
-                move.b  ((FADING_TIMER-$1000000)).w,d6
+                move.b  ((FADING_TIMER_WORD-$1000000)).w,d6
                 bne.s   loc_1A02
                 rts
 loc_1A02:
@@ -406,7 +418,7 @@ loc_1A02:
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a2
                 moveq   #$3F,d7 
                 subq.w  #1,d6
-                move.b  d6,((FADING_TIMER-$1000000)).w
+                move.b  d6,((FADING_TIMER_WORD-$1000000)).w
                 lsr.w   #2,d6
 loc_1A1C:
                 
@@ -446,10 +458,10 @@ loc_1A1C:
                 move.w  (sp)+,d7
                 dbf     d7,loc_1A1C
                 jsr     ApplyVIntCramDma(pc)
-                tst.b   ((FADING_TIMER-$1000000)).w
+                tst.b   ((FADING_TIMER_WORD-$1000000)).w
                 bne.s   return_1A7E
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
-                tst.b   ((FADING_TIMER+1-$1000000)).w
+                tst.b   ((FADING_TIMER_BYTE-$1000000)).w
                 bne.w   sub_19C8        
 return_1A7E:
                 
@@ -460,6 +472,7 @@ return_1A7E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 nullsub_1A80:
                 
                 rts
@@ -468,6 +481,7 @@ nullsub_1A80:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 nullsub_1A82:
                 
@@ -479,6 +493,8 @@ nullsub_1A82:
 ; =============== S U B R O U T I N E =======================================
 
 ; Basic tile decompression : A0=Source, A1=Destination
+
+var_32 = -32
 
 LoadSpriteData:
                 
@@ -625,8 +641,8 @@ loc_1B88:
                 move.l  d1,(a1)+
                 bra.w   loc_1AA2
                 movem.l d0-a2/a5,-(sp)
-                link    a6,#-$20
-                lea     -$20(a6),a5
+                link    a6,#-32
+                lea     var_32(a6),a5
                 moveq   #1,d3
                 move.l  d3,(a5)+
                 move.l  #$20003,(a5)+
@@ -636,7 +652,7 @@ loc_1B88:
                 move.l  #$A000B,(a5)+
                 move.l  #$C000D,(a5)+
                 move.l  #$E000F,(a5)+
-                lea     -$20(a6),a5
+                lea     var_32(a6),a5
                 clr.w   d3
 loc_1BEC:
                 
@@ -975,11 +991,13 @@ loc_1E3E:
 
 ; Stack decompression : A0=Source, A1=Destination
 
+history = -32
+
 LoadCompressedData:
                 
                 movem.l d1-a5,-(sp)
-                link    a6,#-$20        ; push d1-a6 to stack
-                lea     -$20(a6),a5     ; allocates $20 bytes of value history stack
+                link    a6,#-32         ; push d1-a6 to stack
+                lea     history(a6),a5  ; allocates $20 bytes of value history stack
                 moveq   #3,d6
                 movea.l d6,a4           ; a4 = 00000003
                 subq.w  #1,d6
@@ -995,7 +1013,7 @@ LoadCompressedData:
                                         ; 00 04 00 05 00 06 00 07 00 08 00 09
                                         ; 00 0A 00 0B 00 0C 00 0D 00 0E 00 0F
                                         ; initial value history stack
-                lea     -$20(a6),a5
+                lea     history(a6),a5
                 move.w  #$8000,d0       ; init data word with only first bit set
                                         ; to get next data word and addx 1
 loc_1E8C:

@@ -3,9 +3,15 @@
 ; 0x1EE7D0..0x1EE890 : Ally start definitions
 tbl_AllyStartDefs:
                 
-; Syntax        startClass [CLASS_]index
+; Syntax        startClass [CLASS_]enum
 ;               startLevel 1-255
-;               startItems [ITEM_]index[|EQUIPPED],..[ITEM_]index[|EQUIPPED]
+;               startItems &
+;                   [ITEM_]enum[|EQUIPPED], &
+;                   [ITEM_]enum[|EQUIPPED], &
+;                   [ITEM_]enum[|EQUIPPED], &
+;                   [ITEM_]enum[|EQUIPPED]
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 startClass SDMN         ; BOWIE
                 startLevel 1

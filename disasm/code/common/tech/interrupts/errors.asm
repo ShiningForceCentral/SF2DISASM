@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Int_AddressError:
                 
                 move.l  #'ADDR',(ERRCODE_BYTE0).l
@@ -15,6 +16,7 @@ Int_AddressError:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Int_IllegalInstruction:
                 
@@ -28,6 +30,7 @@ Int_IllegalInstruction:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Int_ZeroDivide:
                 
                 move.l  #'ZERO',(ERRCODE_BYTE0).l
@@ -40,6 +43,7 @@ Int_ZeroDivide:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Int_OtherError:
                 
                 move.l  #'OTHR',(ERRCODE_BYTE0).l
@@ -51,6 +55,7 @@ Int_OtherError:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SaveErrorCode:
                 
@@ -79,6 +84,7 @@ Int_ExternalInterrupt:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 IntLvl7:
                 

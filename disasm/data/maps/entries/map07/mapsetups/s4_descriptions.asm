@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map7_AreaDescriptions:
                 
                 move.w  #$1001,d3       ; "A book...{N}DARK SOL{W1}"

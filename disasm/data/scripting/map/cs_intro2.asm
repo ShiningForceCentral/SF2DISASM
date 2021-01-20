@@ -1,7 +1,7 @@
 
 ; ASM FILE data\scripting\map\cs_intro2.asm :
 ; 0x48380..0x48540 : Intro cutscene 2
-IntroCutscene2: textCursor $106A
+IntroCutscene2: textCursor 4202
                 mapLoad MAP_GRANSEAL_CASTLE,7,2
                 loadMapEntities ce_48510
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -88,10 +88,10 @@ IntroCutscene2: textCursor $106A
                 animEntityFX 131,6
                 tintMap
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 30
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 playSound SFX_DEMON_BREATH
                 csWait 30
                 executeSubroutine ApplyStormEffect
@@ -101,10 +101,10 @@ IntroCutscene2: textCursor $106A
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 30
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 70
                 fadeOutToBlackHalf
                 csWait 30

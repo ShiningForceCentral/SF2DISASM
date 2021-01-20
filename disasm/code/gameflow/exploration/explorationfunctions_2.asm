@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ExplorationLoop:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
@@ -12,7 +13,7 @@ ExplorationLoop:
                 clr.w   ((word_FFB196-$1000000)).w
 loc_257D0:
                 
-                jsr     HealAliveCharactersAndImmortals
+                jsr     HealLivingAndImmortalAllies
                 jsr     FadeOutToBlackAll(pc)
                 nop
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
@@ -33,7 +34,7 @@ loc_257D0:
                 jsr     j_InitMapEntities
                 jsr     (LoadMapEntitySprites).w
                 bsr.w   ClearMapTempFlags
-                setFlg  $50             ; Set @ loc_257D0, also set during exploration loop at 0x25824
+                setFlg  80              ; Set @ loc_257D0, also set during exploration loop at 0x25824
                 bra.s   loc_25836
 loc_25828:
                 
@@ -78,6 +79,7 @@ loc_25888:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ClearMapTempFlags:
                 
                 movem.w d1/d7,-(sp)
@@ -97,6 +99,7 @@ loc_25896:
 ; =============== S U B R O U T I N E =======================================
 
 ; update main entity properties
+
 
 sub_258A8:
                 
@@ -131,10 +134,11 @@ loc_258CE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FadeOutToBlackAll:
                 
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -147,6 +151,7 @@ FadeOutToBlackAll:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WaitForFadeToFinish:
                 
@@ -164,6 +169,7 @@ return_2591A:
 ; =============== S U B R O U T I N E =======================================
 
 ; Wait for event OR player action (A/C button)
+
 
 WaitForEvent:
                 
@@ -194,6 +200,7 @@ loc_25948:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ProcessMapEvent:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
@@ -216,6 +223,7 @@ ProcessMapEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ProcessMapEventType1_Warp:
                 
@@ -256,7 +264,7 @@ loc_259CC:
                 move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
                 cmpi.b  #MAP_OVERWORLD_AROUND_PACALON,d0
                 bne.s   loc_259E8       ; HARDCODED check if map is overworld pacalon, switch if water not restored
-                chkFlg  $212            ; Battle 30 completed
+                chkFlg  530             ; Battle 30 completed - BATTLE_VERSUS_ZALBARD              
                 beq.s   loc_259E8
                 move.w  #MAP_OVERWORLD_PACALON_2,d0
 loc_259E8:
@@ -291,6 +299,7 @@ loc_25A18:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 UpdatePlayerPosFromMapEvent:
                 
                 move.l  a0,-(sp)
@@ -302,7 +311,7 @@ UpdatePlayerPosFromMapEvent:
                 ext.l   d2
                 divs.w  #$180,d2
                 clr.w   d3
-                move.b  ENTITYDEF_OFFSET_FACING(a0),d3 ; Facing
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d3
                 movea.l (sp)+,a0
                 rts
 
@@ -310,6 +319,7 @@ UpdatePlayerPosFromMapEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ProcessMapEventType2_GetIntoCaravan:
                 
@@ -321,6 +331,7 @@ ProcessMapEventType2_GetIntoCaravan:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ProcessMapEventType3_GetIntoRaft:
                 
                 jsr     j_MapEventType3
@@ -330,6 +341,7 @@ ProcessMapEventType3_GetIntoRaft:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ProcessMapEventType4_GetOutOfCaravan:
                 
@@ -341,6 +353,7 @@ ProcessMapEventType4_GetOutOfCaravan:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ProcessMapEventType5_GetOutOfRaft:
                 
                 jsr     j_MapEventType5
@@ -350,6 +363,7 @@ ProcessMapEventType5_GetOutOfRaft:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_j_ShrinkInBowieAndFollowers:
                 
@@ -361,6 +375,7 @@ j_j_ShrinkInBowieAndFollowers:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_j_GrowOutBowieAndFollowers:
                 
                 jsr     j_GrowOutBowieAndFollowers
@@ -370,6 +385,7 @@ j_j_GrowOutBowieAndFollowers:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ProcessMapEventType6_ZoneEvent:
                 

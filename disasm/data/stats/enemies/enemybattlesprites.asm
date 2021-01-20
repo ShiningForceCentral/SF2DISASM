@@ -3,7 +3,10 @@
 ; 0x1F914..0x1F9E2 : Enemy battle sprites table
 tbl_EnemyBattleSprites:
                 
-; Syntax        enemyBattleSprAndPlt [ENEMYBATTLESPRITE_]index, palette
+; Syntax        enemyBattleSprAndPlt [ENEMYBATTLESPRITE_]enum, palette
+;
+; Notes: Palette range varies depending on the sprite.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 enemyBattleSprAndPlt OOZE, 1 ; 0: OOZE
                 enemyBattleSprAndPlt RAT, 0 ; 1: HUGE RAT

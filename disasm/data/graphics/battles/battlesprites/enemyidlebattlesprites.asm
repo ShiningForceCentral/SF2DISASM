@@ -3,9 +3,9 @@
 ; 0x1FADD..0x1FAEA : Enemy Idle Battle Sprites
 tbl_EnemyBattleSpriteIdleAnimate:
                 
-; Indexes of enemy battle sprites which do not animate while idle
+; Enemy battle sprites which do not animate while idle.
                 
-; Syntax        enemyBattleSprite [ENEMYBATTLESPRITE_]index
+; Syntax        enemyBattleSprite [ENEMYBATTLESPRITE_]enum (or index)
                 
                 enemyBattleSprite BURST_ROCK
                 enemyBattleSprite HYDRA

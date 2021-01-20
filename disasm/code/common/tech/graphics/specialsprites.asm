@@ -15,6 +15,7 @@ pt_SpecialSprites:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadSpecialSprite:
                 
                 movem.l d0-a1,-(sp)
@@ -51,6 +52,7 @@ rjt_25C5A:      dc.w LoadBattleSpecialSprite-rjt_25C5A
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadBattleSpecialSprite:
                 
                 lea     (FF8002_LOADING_SPACE).l,a1
@@ -67,6 +69,7 @@ LoadBattleSpecialSprite:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadExplorationSpecialSprite:
                 
@@ -88,6 +91,7 @@ loc_25CB0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_25CB6:
                 
@@ -120,6 +124,7 @@ loc_25CD2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateSpecialSprites:
                 
@@ -157,6 +162,7 @@ rjt_SpecialSpriteUpdate:
                 dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateBattleSpecialSprite:
                 
@@ -207,6 +213,7 @@ loc_25D7E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateExplorationSpecialSprite:
                 

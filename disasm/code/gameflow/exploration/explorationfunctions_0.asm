@@ -8,6 +8,7 @@
 ;      D1 = activated entity's facing
 ;      D2 = player entity's facing
 
+
 GetActivatedEntity:
                 
                 move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d0
@@ -96,6 +97,7 @@ loc_23840:
 ; In: D0 = entity index
 ; Out: Z = entity is NOT follower
 
+
 CheckIfEntityIsFollower:
                 
                 movem.l d0/a0,-(sp)
@@ -118,6 +120,7 @@ loc_2385C:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get item or area description
+
 
 CheckArea:
                 
@@ -159,60 +162,60 @@ loc_2386C:
                 bne.s   loc_238E8
                 ; block has chest flag set
                 jsr     (OpenChest).w
-                txt     $193            ; "{NAME} opened the chest.{W2}{CLEAR}"
+                txt     403             ; "{NAME} opened the chest.{W2}{CLEAR}"
                 move.w  d2,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.b  #ITEM_NOTHING,d0
                 bne.w   loc_239C8
-                txt     $198            ; "But, it was empty.{W1}"
+                txt     408             ; "But, it was empty.{W1}"
                 bra.w   byte_23994
 loc_238E8:
                 
                 cmpi.w  #$2C00,d3
                 bne.s   loc_2390C
                 jsr     (CheckNonChestItem).w
-                txt     $194            ; "{NAME} investigated{N}the vase.{W2}{CLEAR}"
+                txt     404             ; "{NAME} investigated{N}the vase.{W2}{CLEAR}"
                 move.w  d2,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.b  #ITEM_NOTHING,d0
                 bne.w   loc_239C8
-                txt     $199            ; "It was dark inside.{W1}"
+                txt     409             ; "It was dark inside.{W1}"
                 bra.w   byte_23994
 loc_2390C:
                 
                 cmpi.w  #$3000,d3
                 bne.s   loc_23930
                 jsr     (CheckNonChestItem).w
-                txt     $195            ; "{NAME} looked in{N}the barrel.{W2}{CLEAR}"
+                txt     405             ; "{NAME} looked in{N}the barrel.{W2}{CLEAR}"
                 move.w  d2,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.b  #ITEM_NOTHING,d0
                 bne.w   loc_239C8
-                txt     $19A            ; "It was empty.{W1}"
+                txt     410             ; "It was empty.{W1}"
                 bra.w   byte_23994
 loc_23930:
                 
                 cmpi.w  #$3400,d3
                 bne.s   loc_23954
                 jsr     (CheckNonChestItem).w
-                txt     $1AB            ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
+                txt     427             ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                 move.w  d2,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.b  #ITEM_NOTHING,d0
                 bne.w   loc_239C8
-                txt     $19C            ; "Nothing was there.{W1}"
+                txt     412             ; "Nothing was there.{W1}"
                 bra.w   byte_23994
 loc_23954:
                 
                 cmpi.w  #$1C00,d3
                 bne.s   loc_23978
                 jsr     (CheckNonChestItem).w
-                txt     $1A7            ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+                txt     423             ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
                 move.w  d2,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.b  #ITEM_NOTHING,d0
                 bne.w   loc_239C8
-                txt     $19C            ; "Nothing was there.{W1}"
+                txt     412             ; "Nothing was there.{W1}"
                 bra.w   byte_23994
 loc_23978:
                 
@@ -224,8 +227,8 @@ loc_23978:
                 bra.w   return_2399A
 byte_2398C:
                 
-                txt     $1A7            ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
-                txt     $19C            ; "Nothing was there.{W1}"
+                txt     423             ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
+                txt     412             ; "Nothing was there.{W1}"
 byte_23994:
                 
                 ; finish up by closing windows
@@ -241,6 +244,7 @@ return_2399A:
 ; =============== S U B R O U T I N E =======================================
 
 ; get amount of gold (D2 - 0x80) as an offset from the gold table (see constants)
+
 
 GetChestGoldAmount:
                 

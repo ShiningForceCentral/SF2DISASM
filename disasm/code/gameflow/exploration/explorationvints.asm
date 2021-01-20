@@ -6,6 +6,7 @@
 
 ; Manage debug actions, entity events, item finds, area descriptions, caravan or main menu
 
+
 ProcessPlayerAction:
                 
                 move.b  ((P1_INPUT-$1000000)).w,d7

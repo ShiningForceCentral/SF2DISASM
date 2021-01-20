@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SuspendGame:
                 
                 moveq   #$3C,d0 
@@ -23,7 +24,7 @@ SuspendGame:
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w

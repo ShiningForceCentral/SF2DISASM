@@ -4,10 +4,21 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+var_32 = -32
+var_30 = -30
+var_20 = -20
+var_18 = -18
+var_14 = -14
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_2 = -2
+
 sub_1288E:
                 
-                link    a6,#-$20
-                move.l  ((byte_FFAEE2-$1000000)).w,-$20(a6)
+                link    a6,#-32
+                move.l  ((byte_FFAEE2-$1000000)).w,var_32(a6)
                 move.l  #$70007000,((byte_FFAEE2-$1000000)).w
                 move.l  #$70007000,((byte_FFAEEE-$1000000)).w
                 movem.l d0,-(sp)
@@ -42,38 +53,38 @@ loc_1291E:
                 jsr     (WaitForVInt).w
                 tst.b   ((FADING_SETTING-$1000000)).w
                 bne.s   loc_1291E
-                move.w  -$E(a6),d0
+                move.w  var_14(a6),d0
                 lsl.w   #8,d0
-                or.w    -$C(a6),d0
+                or.w    var_12(a6),d0
                 moveq   #$1C,d1
-                sub.w   -$C(a6),d1
+                sub.w   var_12(a6),d1
                 lsr.w   #1,d1
                 ori.w   #$2000,d1
                 jsr     (CreateWindow).w
-                move.w  d0,-2(a6)
-                move.l  a1,-6(a6)
+                move.w  d0,var_2(a6)
+                move.l  a1,var_6(a6)
                 bsr.w   sub_12C46
                 moveq   #$20,d0 
-                sub.w   -$E(a6),d0
+                sub.w   var_14(a6),d0
                 lsr.w   #1,d0
                 lsl.w   #8,d0
                 moveq   #$1C,d1
-                sub.w   -$C(a6),d1
+                sub.w   var_12(a6),d1
                 lsr.w   #1,d1
                 or.w    d0,d1
-                move.w  -2(a6),d0
+                move.w  var_2(a6),d0
                 move.w  #6,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
                 bsr.w   sub_12CB0
-                move.w  -$E(a6),d0
+                move.w  var_14(a6),d0
                 neg.w   d0
                 lsl.w   #8,d0
                 moveq   #$1C,d1
-                sub.w   -$C(a6),d1
+                sub.w   var_12(a6),d1
                 lsr.w   #1,d1
                 or.w    d0,d1
-                move.w  -2(a6),d0
+                move.w  var_2(a6),d0
                 move.w  #6,d2
                 jsr     (MoveWindowWithSfx).w
                 move.b  #FLICKER_ONCE,((FADING_SETTING-$1000000)).w
@@ -81,12 +92,12 @@ loc_1291E:
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #5,((FADING_PALETTE_BITMAP-$1000000)).w
                 jsr     (WaitForWindowMovementEnd).w
-                move.w  d0,-2(a6)
+                move.w  d0,var_2(a6)
                 jsr     (ClearWindowAndUpdateEndPointer).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                move.l  -$20(a6),((byte_FFAEE2-$1000000)).w
-                move.l  -$20(a6),((byte_FFAEEE-$1000000)).w
+                move.l  var_32(a6),((byte_FFAEE2-$1000000)).w
+                move.l  var_32(a6),((byte_FFAEEE-$1000000)).w
                 lea     (PALETTE_1_BASE).l,a0
                 lea     (PALETTE_1_CURRENT).l,a1
                 move.w  #$80,d7 
@@ -100,18 +111,29 @@ loc_1291E:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_32 = -32
+var_30 = -30
+var_20 = -20
+var_18 = -18
+var_14 = -14
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_2 = -2
+
 sub_129E8:
                 
                 move.w  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
                 lsr.w   #7,d0
                 ext.l   d0
                 divs.w  #3,d0
-                move.w  d0,-$14(a6)
+                move.w  d0,var_20(a6)
                 move.w  ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d0
                 lsr.w   #7,d0
                 ext.l   d0
                 divs.w  #3,d0
-                move.w  d0,-$12(a6)
+                move.w  d0,var_18(a6)
                 move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d0
                 sub.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
                 lsr.w   #7,d0
@@ -122,7 +144,7 @@ sub_129E8:
                 moveq   #$2F,d0 
 loc_12A20:
                 
-                move.w  d0,-$A(a6)
+                move.w  d0,var_10(a6)
                 move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d1
                 sub.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
                 lsr.w   #7,d1
@@ -145,33 +167,33 @@ loc_12A3C:
                 andi.w  #$7FFC,d1
 loc_12A56:
                 
-                move.w  d1,-8(a6)
-                move.w  -$A(a6),d0
+                move.w  d1,var_8(a6)
+                move.w  var_10(a6),d0
                 lsr.w   #1,d0
                 addq.w  #3,d0
-                move.w  d0,-$E(a6)
-                move.w  -8(a6),d0
+                move.w  d0,var_14(a6)
+                move.w  var_8(a6),d0
                 lsr.w   #1,d0
                 addq.w  #3,d0
-                move.w  d0,-$C(a6)
+                move.w  d0,var_12(a6)
                 lea     (FF0000_RAM_START).l,a0
                 lea     (FF2000_LOADING_SPACE).l,a2
                 lea     (FF6802_LOADING_SPACE).l,a1
-                move.w  -$A(a6),d5
+                move.w  var_10(a6),d5
                 move.w  d5,d6
                 add.w   d5,d5
                 add.w   d6,d5
                 add.w   d5,d5
                 moveq   #2,d4
-                move.w  -8(a6),d6
+                move.w  var_8(a6),d6
 loc_12A96:
                 
-                move.w  -$A(a6),d7
+                move.w  var_10(a6),d7
 loc_12A9A:
                 
-                move.w  -8(a6),d3
+                move.w  var_8(a6),d3
                 sub.w   d6,d3
-                move.w  -$A(a6),d2
+                move.w  var_10(a6),d2
                 sub.w   d7,d2
                 jsr     (DisableInterrupts).w
                 bsr.w   sub_12BA4
@@ -224,11 +246,22 @@ loc_12A9A:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_32 = -32
+var_30 = -30
+var_20 = -20
+var_18 = -18
+var_14 = -14
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_2 = -2
+
 sub_12BA4:
                 
                 movem.w d2-d3,-(sp)
-                add.w   -$14(a6),d2
-                add.w   -$12(a6),d3
+                add.w   var_20(a6),d2
+                add.w   var_18(a6),d3
                 lsl.w   #6,d3
                 add.w   d3,d2
                 add.w   d2,d2
@@ -285,11 +318,22 @@ loc_12BF4:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_32 = -32
+var_30 = -30
+var_20 = -20
+var_18 = -18
+var_14 = -14
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_2 = -2
+
 sub_12C46:
                 
-                movea.l -6(a6),a0
+                movea.l var_6(a6),a0
                 move.w  #$A5C0,d5
-                move.w  -$A(a6),d7
+                move.w  var_10(a6),d7
                 lsr.w   #1,d7
                 move.w  #$E0F9,(a0)+
 loc_12C58:
@@ -297,11 +341,11 @@ loc_12C58:
                 move.w  #$E0FA,(a0)+
                 dbf     d7,loc_12C58
                 move.w  #$E8F9,(a0)+
-                move.w  -8(a6),d6
+                move.w  var_8(a6),d6
                 lsr.w   #1,d6
 loc_12C6A:
                 
-                move.w  -$A(a6),d7
+                move.w  var_10(a6),d7
                 lsr.w   #1,d7
                 move.w  #$E0FB,(a0)+
 loc_12C74:
@@ -321,7 +365,7 @@ loc_12C8C:
                 dbf     d7,loc_12C74
                 move.w  #$E8FB,(a0)+
                 dbf     d6,loc_12C6A
-                move.w  -$A(a6),d7
+                move.w  var_10(a6),d7
                 lsr.w   #1,d7
                 move.w  #$F0F9,(a0)+
 loc_12CA2:
@@ -336,6 +380,17 @@ loc_12CA2:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_32 = -32
+var_30 = -30
+var_20 = -20
+var_18 = -18
+var_14 = -14
+var_12 = -12
+var_10 = -10
+var_8 = -8
+var_6 = -6
+var_2 = -2
+
 sub_12CB0:
                 
                 moveq   #$14,d6
@@ -349,12 +404,12 @@ loc_12CB2:
                 adda.w  d0,a0
                 lea     (SPRITE_16).l,a1
                 moveq   #$2F,d7 
-                move.w  -$A(a6),d4
+                move.w  var_10(a6),d4
                 lsr.w   #2,d4
                 lsl.w   #3,d4
                 move.w  #$F8,d2 
                 sub.w   d4,d2
-                move.w  -8(a6),d4
+                move.w  var_8(a6),d4
                 lsr.w   #2,d4
                 lsl.w   #3,d4
                 move.w  #$E7,d3 
@@ -377,10 +432,10 @@ loc_12D04:
                 blt.w   loc_12D6E
                 cmpa.w  #$AEE2,a0
                 bne.s   loc_12D26
-                move.w  -$20(a6),d0
+                move.w  var_32(a6),d0
                 cmpi.w  #$7000,d0
                 beq.w   loc_12D6E
-                move.w  -$1E(a6),d1
+                move.w  var_30(a6),d1
                 bra.w   loc_12D34
 loc_12D26:
                 
@@ -477,6 +532,7 @@ loc_12DDE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 PlayEndKiss:
                 
                 move.b  #$FF,(DEACTIVATE_WINDOW_HIDING).l
@@ -567,18 +623,20 @@ loc_12EB4:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_12F12:
+goldWindowTilesEnd = -18
+
+CreateGoldWindow:
                 
                 tst.w   ((word_FFB086-$1000000)).w
                 bne.w   return_12F5C
                 movem.l d0-a1,-(sp)
-                link    a6,#-$20
+                link    a6,#65504
                 move.w  #$904,d0
                 move.w  #$2017,d1
                 jsr     (CreateWindow).l
                 addq.w  #1,d0
                 move.w  d0,((word_FFB086-$1000000)).w
-                move.l  a1,-$12(a6)
+                move.l  a1,goldWindowTilesEnd(a6)
                 bsr.w   sub_14B28       
                 move.w  ((word_FFB086-$1000000)).w,d0
                 subq.w  #1,d0
@@ -592,22 +650,24 @@ return_12F5C:
                 
                 rts
 
-    ; End of function sub_12F12
+    ; End of function CreateGoldWindow
 
 
 ; =============== S U B R O U T I N E =======================================
+
+goldWindowTilesEnd = -18
 
 sub_12F5E:
                 
                 tst.w   ((word_FFB086-$1000000)).w
                 beq.s   return_12F5C
                 movem.l d0-a1,-(sp)
-                link    a6,#-$20
+                link    a6,#65504
                 move.w  ((word_FFB086-$1000000)).w,d0
                 subq.w  #1,d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
-                move.l  a1,-$12(a6)
+                move.l  a1,goldWindowTilesEnd(a6)
                 bsr.w   sub_14B28       
                 move.w  ((word_FFB086-$1000000)).w,d0
                 subq.w  #1,d0
@@ -622,7 +682,8 @@ sub_12F5E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_12F9A:
+
+HideGoldWindow:
                 
                 tst.w   ((word_FFB086-$1000000)).w
                 beq.s   return_12F5C
@@ -633,12 +694,12 @@ sub_12F9A:
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
-                beq.s   loc_12FCA
+                beq.s   @Skip
                 subq.w  #1,d0
                 move.w  #$8080,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
-loc_12FCA:
+@Skip:
                 
                 jsr     (WaitForWindowMovementEnd).l
                 move.w  ((word_FFB086-$1000000)).w,d0
@@ -648,31 +709,33 @@ loc_12FCA:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function sub_12F9A
+    ; End of function HideGoldWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_12FE6:
+
+InitMemberListScreen:
                 
                 clr.b   ((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                clr.b   ((CURRENT_MINISTATUS_PAGE-$1000000)).w
+                clr.b   ((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_NEWATTANDDEF,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
-                bne.s   loc_13000
+                bne.s   @Continue
                 clr.b   ((CURRENT_MEMBERLIST_PAGE-$1000000)).w
-loc_13000:
+@Continue:
                 
                 bra.w   BuildMemberListScreen
 
-    ; End of function sub_12FE6
+    ; End of function InitMemberListScreen
 
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_13004:
                 
-                move.b  #WINDOW_MINISTATUS_PAGE_ITEMS,((CURRENT_MINISTATUS_PAGE-$1000000)).w
+                move.b  #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
                 jsr     j_GetEquipmentType
                 tst.w   d2
@@ -693,11 +756,12 @@ loc_1302C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_13030:
                 
                 clr.b   ((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                move.b  #WINDOW_MINISTATUS_PAGE_MAGIC,((CURRENT_MINISTATUS_PAGE-$1000000)).w
+                move.b  #WINDOW_MEMBERSUMMARY_PAGE_MAGIC,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_NEWATTANDDEF,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.s   BuildMemberListScreen
                 clr.b   ((CURRENT_MEMBERLIST_PAGE-$1000000)).w
@@ -707,42 +771,48 @@ sub_13030:
 
 ; =============== S U B R O U T I N E =======================================
 
+statusEffects = -10
+memberSummaryWindow = -8
+portraitWindow = -6
+memberListWindow = -4
+selectedMember = -2
+
 BuildMemberListScreen:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 move.w  ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w,d0
                 add.w   ((DISPLAYED_MEMBERLIST_SELECTED_ENTRY-$1000000)).w,d0
-                cmp.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w,d0
+                cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d0
                 blt.s   loc_13066
                 clr.w   ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w
                 clr.w   ((DISPLAYED_MEMBERLIST_SELECTED_ENTRY-$1000000)).w
 loc_13066:
                 
-                link    a6,#-$10
+                link    a6,#-16
                 bsr.w   GetSelectedMember
-                move.w  d0,-2(a6)
+                move.w  d0,selectedMember(a6)
                 bsr.w   LoadCombatantPortrait
                 move.w  #WINDOW_MEMBERLIST_SIZE,d0
                 move.w  #WINDOW_MEMBERLIST_DEST,d1
                 jsr     (CreateWindow).l
-                move.w  d0,-4(a6)
+                move.w  d0,memberListWindow(a6)
                 move.w  #$80A,d0
                 move.w  #$F8F6,d1
                 jsr     (CreateWindow).l
-                move.w  d0,-6(a6)
-                move.w  #WINDOW_MINISTATUS_SIZE,d0
-                move.w  #WINDOW_MINISTATUS_DEST,d1
+                move.w  d0,portraitWindow(a6)
+                move.w  #WINDOW_MEMBERSUMMARY_SIZE,d0
+                move.w  #WINDOW_MEMBERSUMMARY_DEST,d1
                 jsr     (CreateWindow).l
-                move.w  d0,-8(a6)
+                move.w  d0,memberSummaryWindow(a6)
                 bsr.w   sub_1354C
-                move.w  -4(a6),d0
+                move.w  memberListWindow(a6),d0
                 move.w  #$20E,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
-                move.w  -6(a6),d0
+                move.w  portraitWindow(a6),d0
                 move.w  #$201,d1
                 jsr     (MoveWindowWithSfx).l
-                move.w  -8(a6),d0
+                move.w  memberSummaryWindow(a6),d0
                 move.w  #$A01,d1
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForVInt).w
@@ -828,7 +898,7 @@ loc_1319A:
                 bgt.s   loc_131CE
                 move.w  d0,d2
                 add.w   ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w,d2
-                cmp.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w,d2
+                cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d2
                 bge.s   loc_131CC
                 clr.w   d1
                 bsr.w   sub_133A0
@@ -844,7 +914,7 @@ loc_131CE:
                 addq.w  #1,d0
                 move.w  d0,d2
                 add.w   ((DISPLAYED_MEMBERLIST_SELECTED_ENTRY-$1000000)).w,d2
-                cmp.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w,d2
+                cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d2
                 bge.s   loc_131F6
                 clr.w   d1
                 bsr.w   sub_133A0
@@ -869,7 +939,7 @@ loc_13220:
                 
                 move.w  ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w,d0
                 add.w   ((DISPLAYED_MEMBERLIST_SELECTED_ENTRY-$1000000)).w,d0
-                lea     ((INDEX_LIST-$1000000)).w,a0
+                lea     ((GENERIC_LIST-$1000000)).w,a0
                 move.b  (a0,d0.w),d0
                 bsr.w   sub_132BC
                 beq.s   loc_1323E
@@ -895,22 +965,22 @@ loc_13256:
                 movem.w d0-d2,-(sp)
                 clr.w   d1
                 bsr.w   sub_133A0
-                move.w  -4(a6),d0
+                move.w  memberListWindow(a6),d0
                 move.w  #$220,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
-                move.w  -6(a6),d0
+                move.w  portraitWindow(a6),d0
                 move.w  #$F8F6,d1
                 jsr     (MoveWindowWithSfx).l
-                move.w  -8(a6),d0
+                move.w  memberSummaryWindow(a6),d0
                 move.w  #$20F3,d1
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
-                move.w  -4(a6),d0
+                move.w  memberListWindow(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).l
-                move.w  -6(a6),d0
+                move.w  portraitWindow(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).l
-                move.w  -8(a6),d0
+                move.w  memberSummaryWindow(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).l
                 movem.w (sp)+,d0-d2
                 unlk    a6
@@ -922,22 +992,23 @@ loc_13256:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_132BC:
                 
-                tst.b   ((CURRENT_MINISTATUS_PAGE-$1000000)).w
+                tst.b   ((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 bne.s   loc_132C6
                 clr.w   d1
                 rts
 loc_132C6:
                 
-                cmpi.b  #WINDOW_MINISTATUS_PAGE_ITEMS,((CURRENT_MINISTATUS_PAGE-$1000000)).w
+                cmpi.b  #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 bne.w   loc_13314
                 btst    #0,((byte_FFB13C-$1000000)).w
                 beq.s   return_13312
                 cmpi.b  #1,((byte_FFB13C-$1000000)).w
                 bne.s   loc_132F6
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 tst.w   d2
                 bne.s   loc_132F0
                 moveq   #$FFFFFFFF,d1
@@ -988,11 +1059,12 @@ return_13326:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_13328:
                 
-                tst.b   ((CURRENT_MINISTATUS_PAGE-$1000000)).w
+                tst.b   ((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 beq.w   return_13386
-                cmpi.b  #WINDOW_MINISTATUS_PAGE_ITEMS,((CURRENT_MINISTATUS_PAGE-$1000000)).w
+                cmpi.b  #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 bne.w   loc_13388
                 tst.b   ((byte_FFB13C-$1000000)).w
                 beq.w   return_13386
@@ -1007,7 +1079,7 @@ loc_13358:
                 cmpi.b  #2,((byte_FFB13C-$1000000)).w
                 bne.s   loc_1337C
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 cmpi.w  #4,d2
                 bne.s   loc_13378
                 moveq   #$A,d1
@@ -1020,7 +1092,7 @@ loc_1337C:
                 
                 moveq   #$A,d1
                 bsr.w   sub_133A0
-                bsr.w   sub_14108
+                bsr.w   sub_14108       
 return_13386:
                 
                 rts
@@ -1038,9 +1110,15 @@ loc_13388:
 
 ; In: D0 = combatant index
 
+statusEffects = -10
+memberSummaryWindow = -8
+portraitWindow = -6
+memberListWindow = -4
+selectedMember = -2
+
 LoadCombatantPortrait:
                 
-                move.w  -2(a6),d0
+                move.w  selectedMember(a6),d0
                 bsr.w   GetCombatantPortrait
                 bra.w   LoadPortrait    
 
@@ -1048,6 +1126,7 @@ LoadCombatantPortrait:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_133A0:
                 
@@ -1093,13 +1172,13 @@ loc_133CC:
 loc_13404:
                 
                 move.w  #WINDOW_MEMBERLIST_SPRITELINK_DOWNARROW,VDPSPRITE_OFFSET_SIZE(a0)
-                move.w  #VDPTILE_V_ARROW|VDPTILE_FLIP|VDPTILE_PLT3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #VDPTILE_V_ARROW|VDPTILE_FLIP|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
                 addq.l  #8,a0
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 move.w  ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w,d0
                 addq.w  #5,d0
-                cmp.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w,d0
+                cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d0
                 bge.s   loc_13438
                 cmpi.w  #7,d1
                 blt.s   loc_13438
@@ -1108,7 +1187,7 @@ loc_13404:
 loc_13438:
                 
                 move.w  #WINDOW_MEMBERLIST_SPRITELINK_UPARROW,VDPSPRITE_OFFSET_SIZE(a0)
-                move.w  #VDPTILE_V_ARROW|VDPTILE_PLT3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #VDPTILE_V_ARROW|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
                 subq.w  #1,d1
                 bne.s   loc_1344A
                 moveq   #$14,d1
@@ -1124,13 +1203,13 @@ spr_MemberListTextHighlight:
                 
 ; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
                 
-                vdpSprite 260, V2|H4|9, 1472|PLT3|PRIORITY, 156
+                vdpSprite 260, V2|H4|9, 1472|PALETTE3|PRIORITY, 156
                 
                 if (EIGHT_CHARACTERS_MEMBER_NAMES=0)
-                vdpSprite 260, V2|H4|10, 1472|MIRROR|PLT3|PRIORITY, 188
+                vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
                 else
-                vdpSprite 260, V2|H1|10, 1474|PLT3|PRIORITY, 188
-                vdpSprite 260, V2|H4|11, 1472|MIRROR|PLT3|PRIORITY, 196
+                vdpSprite 260, V2|H1|10, 1474|PALETTE3|PRIORITY, 188
+                vdpSprite 260, V2|H4|11, 1472|MIRROR|PALETTE3|PRIORITY, 196
                 endif
 
 ; =============== S U B R O U T I N E =======================================
@@ -1138,11 +1217,12 @@ spr_MemberListTextHighlight:
 ;     Get index of currently selected force member (in menus).
 ;     Out: D0 = selected index (capped to 255)
 
+
 GetSelectedMember:
                 
                 move.w  ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w,d0
                 add.w   ((DISPLAYED_MEMBERLIST_SELECTED_ENTRY-$1000000)).w,d0
-                lea     ((INDEX_LIST-$1000000)).w,a0
+                lea     ((GENERIC_LIST-$1000000)).w,a0
                 move.b  (a0,d0.w),d0
                 andi.w  #$FF,d0
                 rts
@@ -1152,13 +1232,19 @@ GetSelectedMember:
 
 ; =============== S U B R O U T I N E =======================================
 
+statusEffects = -10
+memberSummaryWindow = -8
+portraitWindow = -6
+memberListWindow = -4
+selectedMember = -2
+
 sub_13478:
                 
                 bsr.w   sub_1354C
-                move.w  -4(a6),d0
+                move.w  memberListWindow(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
-                move.w  -8(a6),d0
+                move.w  memberSummaryWindow(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
                 bsr.w   LoadCombatantPortrait
@@ -1169,6 +1255,7 @@ sub_13478:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CopyWords:
                 
@@ -1181,10 +1268,16 @@ CopyWords:
 
 ; =============== S U B R O U T I N E =======================================
 
+statusEffects = -10
+memberSummaryWindow = -8
+portraitWindow = -6
+memberListWindow = -4
+selectedMember = -2
+
 sub_134A8:
                 
                 move.w  d0,-(sp)
-                move.w  -4(a6),d0
+                move.w  memberListWindow(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
                 movea.l a1,a0
@@ -1215,15 +1308,15 @@ loc_134E0:
                 jsr     (CopyBytes).w   
 loc_13510:
                 
-                move.w  -4(a6),d0
+                move.w  memberListWindow(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
                 jsr     (WaitForVInt).w
                 bsr.w   sub_1354C
-                move.w  -4(a6),d0
+                move.w  memberListWindow(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
-                move.w  -8(a6),d0
+                move.w  memberSummaryWindow(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
                 move.w  (sp)+,d0
@@ -1236,25 +1329,31 @@ loc_13510:
 
 ; =============== S U B R O U T I N E =======================================
 
+statusEffects = -10
+memberSummaryWindow = -8
+portraitWindow = -6
+memberListWindow = -4
+selectedMember = -2
+
 sub_1354C:
                 
                 move.w  ((DISPLAYED_MEMBERLIST_SELECTED_ENTRY-$1000000)).w,d0
                 add.w   ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w,d0
-                lea     ((INDEX_LIST-$1000000)).w,a0
+                lea     ((GENERIC_LIST-$1000000)).w,a0
                 move.b  (a0,d0.w),d0
                 andi.w  #ALLY_MASK_INDEX,d0
-                move.w  d0,-2(a6)
-                move.w  -4(a6),d0
+                move.w  d0,selectedMember(a6)
+                move.w  memberListWindow(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
-                move.w  -2(a6),d0
+                move.w  selectedMember(a6),d0
                 bsr.w   WriteMemberListText
-                move.w  -8(a6),d0
+                move.w  memberSummaryWindow(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
-                move.w  -2(a6),d0
-                bsr.w   BuildMiniStatusWindow
-                move.w  -6(a6),d0
+                move.w  selectedMember(a6),d0
+                bsr.w   BuildMemberSummaryWindow
+                move.w  portraitWindow(a6),d0
                 lea     WindowBorderTiles(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l

@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ExecuteAfterBattleCutscene:
                 
                 movem.l d0-d1,-(sp)

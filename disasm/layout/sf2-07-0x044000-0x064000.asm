@@ -50,20 +50,20 @@ j_ExecuteBattleRegionCutscene:
                 jmp     ExecuteBattleRegionCutscene(pc)
 j_LaunchFading:                
                 jmp     LaunchFading(pc)
-sub_4405C:                
-                jmp     sub_45858(pc)
-sub_44060:                
-                jmp     sub_45858(pc)
-sub_44064:                
-                jmp     sub_45974(pc)
-sub_44068:                
-                jmp     sub_45BBE(pc)
-sub_4406C:                
-                jmp     sub_45C94(pc)
-sub_44070:                
-                jmp     sub_45C82(pc)
-sub_44074:                
-                jmp     sub_45B84(pc)
+j_OrientSpriteLeft_bis:                
+                jmp     OrientSpriteLeft(pc)
+j_OrientSpriteLeft:                
+                jmp     OrientSpriteLeft(pc)
+j_OrientSpriteRight:                
+                jmp     OrientSpriteRight(pc)
+j_ResizeSprite:                
+                jmp     ResizeSprite(pc)
+j_ApplyMinorSpriteCropEffect:                
+                jmp     ApplyMinorSpriteCropEffect(pc)
+j_ApplySpriteImmersedEffect:                
+                jmp     ApplySpriteImmersedEffect(pc)
+j_ApplySpriteGhostEffect:                
+                jmp     ApplySpriteGhostEffect(pc)
 sub_44078:                
                 jmp     sub_474EE(pc)
 j_RunMapSetupEntityEvent:                
@@ -104,8 +104,8 @@ j_PlayIntroOrEndCutscene:
                 jmp     PlayIntroOrEndCutscene(pc)
 j_ExecuteFlashScreenScript:                
                 jmp     ExecuteFlashScreenScript(pc)
-j_GetEntityPortaitAndSpeechSound:                
-                jmp     GetEntityPortaitAndSpeechSound(pc)
+j_GetEntityPortaitAndSpeechSfx:                
+                jmp     GetEntityPortaitAndSpeechSfx(pc)
 j_ClearEntities:                
                 jmp     ClearEntities(pc)
                 include "code\common\scripting\map\mapfunctions.asm"    ; Map functions
@@ -163,6 +163,7 @@ j_ClearEntities:
                 include "data\scripting\map\cs_intro4.asm"    ; Intro cutscene 4
                 include "data\scripting\map\cs_intro_stormeffect.asm"    ; Storm Effect
                 include "data\scripting\map\cs_end.asm"    ; End cutscene
+                include "data\scripting\map\debugscripts.asm"    ; Debugging scripts
                 include data\battles\entries\battlecutscenesstorage.asm
                 include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
                 include "data\maps\mapsetups.asm"    ; Map setups table
