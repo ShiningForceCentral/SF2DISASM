@@ -6,6 +6,7 @@
 
 ; Out: Z = is scrolling
 
+
 IsMapScrollingToViewTarget:
                 
                 move.b  ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w,d7
@@ -26,6 +27,7 @@ loc_4740:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 VInt_UpdateMapPlanes:
                 
@@ -50,6 +52,7 @@ return_4770:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 VInt_UpdateMapAnimations:
                 

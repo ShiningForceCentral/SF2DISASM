@@ -15,6 +15,7 @@ ms_map1_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map1_DefaultEntityEvent:
                 
                 rts
@@ -23,6 +24,7 @@ Map1_DefaultEntityEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map1_EntityEvent0:
                 
@@ -36,6 +38,7 @@ Map1_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map1_EntityEvent1:
                 
                  
@@ -47,6 +50,7 @@ Map1_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map1_EntityEvent2:
                 
@@ -60,6 +64,7 @@ Map1_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map1_EntityEvent3:
                 
                  
@@ -71,6 +76,7 @@ Map1_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map1_EntityEvent4:
                 
@@ -84,6 +90,7 @@ Map1_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map1_EntityEvent5:
                 
                  
@@ -95,6 +102,7 @@ Map1_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map1_EntityEvent6:
                 
@@ -108,6 +116,7 @@ Map1_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map1_EntityEvent7:
                 
                  
@@ -119,6 +128,7 @@ Map1_EntityEvent7:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map1_EntityEvent8:
                 

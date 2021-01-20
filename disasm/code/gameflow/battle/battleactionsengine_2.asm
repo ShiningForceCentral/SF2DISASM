@@ -1,552 +1,295 @@
 
 ; ASM FILE code\gameflow\battle\battleactionsengine_2.asm :
-; 0xA872..0xACCA : Battle actions engine
+; 0x9F28..0xA200 : Battle actions engine
 
 ; =============== S U B R O U T I N E =======================================
 
-CalculateHealingEXP:
+; In: A2 = battlescene script stack frame
+;     A3 = address in RAM of scene action type
+;     A4 = address in RAM of actor index
+;     A5 = address in RAM of target index
+
+allCombatantsCurrentHpTable = -24
+debugDodge = -23
+debugCritical = -22
+debugDouble = -21
+debugCounter = -20
+explodingActor = -17
+explode = -16
+specialCritical = -15
+ineffectiveAttack = -14
+doubleAttack = -13
+counterAttack = -12
+silencedActor = -11
+stunInaction = -10
+curseInaction = -9
+muddledActor = -8
+targetIsOnSameSide = -7
+rangedAttack = -6
+dodge = -5
+targetDies = -4
+criticalHit = -3
+inflictAilment = -2
+cutoff = -1
+
+InitBattlesceneProperties:
                 
                 movem.l d0-d3/a0,-(sp)
-                move.b  (a4),d0
-                btst    #COMBATANT_BIT_ENEMY,d0
-                bne.w   @Skip           ; skip if enemy
+                lea     allCombatantsCurrentHpTable(a2),a0
+                move.w  #COMBATANT_ALLIES_START,d0
+                bra.s   @CreateListOfAlliesCurrentHP
+@CreateListOfAlliesCurrentHP_Loop:
                 
-                ; Check if healer class
-                jsr     GetClass        
-                cmpi.b  #CLASS_PRST,d1  ; HARDCODED healer class indexes
-                beq.w   @Continue
-                cmpi.b  #CLASS_VICR,d1
-                beq.w   @Continue
-                cmpi.b  #CLASS_MMNK,d1
-                beq.w   @Continue
-                bra.w   @Skip           ; skip if not a healer class
-@Continue:
-                
-                move.b  (a5),d0
-                jsr     GetMaxHP
-                tst.w   d1
-                beq.w   @Skip           ; safety measure to prevent division by 0
-                move.w  #25,d5
-                mulu.w  d6,d5
-                divu.w  d1,d5
-                cmpi.w  #10,d5
-                bcc.s   @GiveEXP
-                moveq   #10,d5
-@GiveEXP:
-                
-                bsr.w   GiveEXPandHealingCap
-@Skip:
-                
-                movem.l (sp)+,d0-d3/a0
-                rts
-
-    ; End of function CalculateHealingEXP
-
-
-; =============== S U B R O U T I N E =======================================
-
-CalculateDamageEXP:
-                
-                movem.l d0-d3/a0,-(sp)
-                btst    #COMBATANT_BIT_ENEMY,(a4)
-                bne.w   @Skip           ; skip function if actor is an enemy
-                move.b  (a5),d0
-                jsr     GetMaxHP
-                tst.w   d1
-                beq.w   @Skip           ; skip function to prevent division by zero error
-                bsr.w   GetAmountOfEXPforEncounter
-                mulu.w  d6,d5
-                divu.w  d1,d5
-                bsr.w   GiveEXPandCap
-@Skip:
-                
-                movem.l (sp)+,d0-d3/a0
-                rts
-
-    ; End of function CalculateDamageEXP
-
-
-; =============== S U B R O U T I N E =======================================
-
-GiveStatusEffectSpellsEXP:
-                
-                movem.l d0-d3/a0,-(sp)
-                btst    #COMBATANT_BIT_ENEMY,(a4)
-                bne.w   @Done
-                moveq   #STATUSEFFECT_SPELLS_EXP,d5
-                bsr.w   GiveEXPandCap
-@Done:
-                
-                movem.l (sp)+,d0-d3/a0
-                rts
-
-    ; End of function GiveStatusEffectSpellsEXP
-
-
-; =============== S U B R O U T I N E =======================================
-
-GiveEXPandGoldForKill:
-                
-                movem.l d0-d3/a0,-(sp)
-                btst    #COMBATANT_BIT_ENEMY,(a4)
-                bne.w   @Skip           ; skip if actor is an enemy
-                bsr.w   GetAmountOfEXPforEncounter
-                bsr.w   GiveEXPandCap
-                move.b  (a5),d0
-                bpl.s   @Skip
-                jsr     GetEnemyIndex   
-                add.w   d1,d1
-                lea     tbl_EnemyGold(pc), a0
-                adda.w  d1,a0
-                move.w  (a0),d0
-                add.w   d0,((BATTLESCENE_GOLD-$1000000)).w
-@Skip:
-                
-                movem.l (sp)+,d0-d3/a0
-                rts
-
-    ; End of function GiveEXPandGoldForKill
-
-
-; =============== S U B R O U T I N E =======================================
-
-GiveEXPandCap:
-                
-                add.w   d5,((BATTLESCENE_EXP-$1000000)).w
-                cmpi.w  #49,((BATTLESCENE_EXP-$1000000)).w
-                ble.s   @Return
-                move.w  #49,((BATTLESCENE_EXP-$1000000)).w
-@Return:
-                
-                rts
-
-    ; End of function GiveEXPandCap
-
-
-; =============== S U B R O U T I N E =======================================
-
-GiveEXPandHealingCap:
-                
-                add.w   d5,((BATTLESCENE_EXP-$1000000)).w
-                cmpi.w  #HEALING_EXP_CAP,((BATTLESCENE_EXP-$1000000)).w
-                ble.s   @Return
-                move.w  #HEALING_EXP_CAP,((BATTLESCENE_EXP-$1000000)).w
-@Return:
-                
-                rts
-
-    ; End of function GiveEXPandHealingCap
-
-
-; =============== S U B R O U T I N E =======================================
-
-; Get amount of EXP gained from encounter based on attacker level and target level
-; 
-; In: A4 = address of attacker byte in RAM
-;     A5 = address of target byte in RAM
-; 
-; Out: D5 = amount of EXP
-
-GetAmountOfEXPforEncounter:
-                
-                movem.l d0-d3/a0,-(sp)
-                move.b  (a5),d0
-                jsr     GetCurrentLevel 
-                move.w  d1,d2
-                move.b  (a4),d0
-                jsr     GetClass        
-                move.w  d1,d3
-                jsr     GetCurrentLevel 
-                cmpi.b  #CHAR_CLASS_FIRSTPROMOTED,d3
-                bcs.s   @Continue
-                addi.w  #CHAR_CLASS_EXTRALEVEL,d1
-@Continue:
-                
-                sub.w   d2,d1
-                moveq   #50,d5          ; HARDCODED EXP amounts
-                cmpi.b  #3,d1
-                bmi.w   @Done
-                moveq   #40,d5
-                cmpi.b  #3,d1
-                beq.w   @Done
-                moveq   #30,d5
-                cmpi.b  #4,d1
-                beq.w   @Done
-                moveq   #20,d5
-                cmpi.b  #5,d1
-                beq.w   @Done
-                moveq   #10,d5
-                cmpi.b  #6,d1
-                beq.w   @Done
-                moveq   #0,d5
-@Done:
-                
-                movem.l (sp)+,d0-d3/a0
-                rts
-
-    ; End of function GetAmountOfEXPforEncounter
-
-
-; =============== S U B R O U T I N E =======================================
-
-SortTargets:
-                
-                movem.l d0-d2/d6-a0,-(sp)
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
-                subq.w  #1,d7
-                bls.w   loc_AA92
-loc_A9DE:
-                
-                move.b  (a0,d7.w),d0
-                bpl.s   loc_A9F8
-                jsr     GetEnemyIndex   
-                cmpi.w  #ENEMY_BURST_ROCK,d1
-                bne.s   loc_A9F8
-                ori.b   #COMBATANT_MASK_SORT_BIT,d0
-                move.b  d0,(a0,d7.w)
-loc_A9F8:
-                
-                dbf     d7,loc_A9DE
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                moveq   #0,d0
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
-                subq.w  #1,d7
-                subq.w  #1,d7
-loc_AA0A:
-                
-                move.w  d0,d1
-                addq.w  #1,d1
-loc_AA0E:
-                
-                move.b  (a0,d0.w),d2
-                cmp.b   (a0,d1.w),d2
-                bcs.s   loc_AA22
-                move.b  (a0,d1.w),(a0,d0.w)
-                move.b  d2,(a0,d1.w)
-loc_AA22:
-                
-                addq.w  #1,d1
-                cmp.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d1
-                bcs.w   loc_AA0E
                 addq.w  #1,d0
-                dbf     d7,loc_AA0A
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
-                subq.w  #1,d7
-                subq.w  #1,d7
-                moveq   #0,d6
-loc_AA40:
+@CreateListOfAlliesCurrentHP:
                 
-                btst    #COMBATANT_BIT_SORT,(a0,d6.w)
-                beq.s   loc_AA78
-                move.b  (a0,d6.w),d0
-                andi.b  #COMBATANT_MASK_INDEX_AND_ENEMY_BIT,d0
+                cmpi.w  #COMBATANT_ALLIES_END,d0
+                bgt.s   @Break1
                 jsr     GetCurrentHP
-                move.w  d1,d2
-                move.b  1(a0,d6.w),d0
-                andi.b  #COMBATANT_MASK_INDEX_AND_ENEMY_BIT,d0
+                move.w  d1,-(a0)
+                bra.s   @CreateListOfAlliesCurrentHP_Loop
+@Break1:
+                
+                move.w  #COMBATANT_ENEMIES_START,d0
+                bra.s   @CreateListOfEnemiesCurrentHP
+@CreateListOfEnemiesCurrentHP_Loop:
+                
+                addq.w  #1,d0
+@CreateListOfEnemiesCurrentHP:
+                
+                cmpi.w  #COMBATANT_ENEMIES_END,d0
+                bgt.s   @Break2
                 jsr     GetCurrentHP
-                cmp.w   d1,d2
-                bcc.s   loc_AA78
-                move.b  (a0,d6.w),d0
-                move.b  1(a0,d6.w),(a0,d6.w)
-                move.b  d0,1(a0,d6.w)
-loc_AA78:
+                move.w  d1,-(a0)
+                bra.s   @CreateListOfEnemiesCurrentHP_Loop
+@Break2:
                 
-                addq.w  #1,d6
-                dbf     d7,loc_AA40
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
-                subq.w  #1,d7
-loc_AA88:
-                
-                andi.b  #COMBATANT_MASK_INDEX_AND_ENEMY_BIT,(a0,d7.w)
-loc_AA8E:
-                
-                dbf     d7,loc_AA88
-loc_AA92:
-                
-                movem.l (sp)+,d0-d2/d6-a0
-                rts
-
-    ; End of function SortTargets
-
-
-; =============== S U B R O U T I N E =======================================
-
-OneSecondSleep:
-                
-                move.l  d0,-(sp)
-                moveq   #60,d0
-                jsr     (Sleep).w       
-                move.l  (sp)+,d0
-                rts
-
-    ; End of function OneSecondSleep
-
-
-; =============== S U B R O U T I N E =======================================
-
-NopOnce:
-                
-                nop
-                rts
-
-    ; End of function NopOnce
-
-
-; =============== S U B R O U T I N E =======================================
-
-NopTwice:
-                
-                nop
-                nop
-                rts
-
-    ; End of function NopTwice
-
-
-; =============== S U B R O U T I N E =======================================
-
-NopThrice:
-                
-                nop
-                nop
-                nop
-                rts
-
-    ; End of function NopThrice
-
-
-; =============== S U B R O U T I N E =======================================
-
-WriteBattlesceneScript_Attack:
-                
-                bsr.w   WriteBattlesceneScript_DodgeAttack
-                tst.b   -BCSTACK_OFFSET_DODGE(a2)
-                bne.w   loc_AAF6
-                bsr.w   CalculateDamage 
-                bsr.w   CalculateCriticalHit
-                bsr.w   WriteBattlesceneScript_InflictDamage
-                tst.b   -BCSTACK_OFFSET_TARGETDIES(a2)
-                beq.s   loc_AADC
-                bsr.w   WriteBattlesceneScript_DeathMessage
-                bra.w   return_AAFA
-loc_AADC:
-                
-                bsr.w   WriteBattlesceneScript_InflictAilment
-                bsr.w   WriteBattlesceneScript_InflictCurseDamage
-                tst.b   -BCSTACK_OFFSET_TARGETDIES(a2)
-                beq.s   loc_AAF6
-                exg     a4,a5
-                bsr.w   WriteBattlesceneScript_DeathMessage
-                exg     a4,a5
-                bra.w   return_AAFA
-loc_AAF6:
-                
-                bsr.w   DetermineDoubleAndCounter
-return_AAFA:
-                
-                rts
-
-    ; End of function WriteBattlesceneScript_Attack
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: A4 = pointer to actor index in RAM
-;     A5 = pointer to target index in RAM
-
-WriteBattlesceneScript_DodgeAttack:
-                
-                move.b  (a5),d0
-                jsr     j_GetStatusEffects
-                andi.w  #STATUSEFFECT_SLEEP,d1
-                bne.w   @Return
-                jsr     j_GetStatusEffects
-                andi.w  #STATUSEFFECT_STUN,d1
-                bne.w   @Return
-                moveq   #CHANCE_TO_DODGE_MUDDLED_ATTACKER,d2 ; 1/2 chance to dodge if attacker is muddled
+                cmpi.w  #BATTLEACTION_BURST_ROCK,(a3)
+                beq.w   @CheckAttack
+                cmpi.w  #BATTLEACTION_PRISM_LASER,(a3)
+                beq.w   @CheckAttack
                 move.b  (a4),d0
                 jsr     GetStatusEffects
-                andi.w  #STATUSEFFECT_MUDDLE,d1
-                bne.w   @CheckDebugDodge
-                moveq   #CHANCE_TO_DODGE_DEFAULT,d2 ; 1/32 chance to miss otherwise ?
-                move.b  (a5),d0
-                jsr     GetUpperMoveType
-                cmpi.w  #MOVETYPE_LOWER_FLYING,d1 ; check if target is either flying or hovering
-                beq.w   @CheckIfAttackerIsAnArcher
-                cmpi.w  #MOVETYPE_LOWER_HOVERING,d1
-                beq.w   @CheckIfAttackerIsAnArcher
-                bra.w   @CheckDebugDodge
-@CheckIfAttackerIsAnArcher:
+                andi.w  #STATUSEFFECT_MUDDLE2,d1
+                beq.s   @CheckSameSide
+                move.b  #$FF,muddledActor(a2)
+                bra.s   @CheckAttack
+@CheckSameSide:
+                
+                move.b  (a5),d1
+                eor.b   d1,d0
+                spl     targetIsOnSameSide(a2)
+@CheckAttack:
+                
+                cmpi.w  #BATTLEACTION_ATTACK,(a3)
+                bne.s   @CheckCastSpell
+                move.b  (a4),d0
+                move.b  (a5),d1
+                jsr     GetDistanceBetweenEntities
+                cmpi.w  #2,d2           ; check if block distance between actor and target is >= 2
+                bcs.s   @CheckInactionCurse
+                tst.b   muddledActor(a2)
+                bne.s   @CheckInactionCurse
+                move.b  #$FF,rangedAttack(a2)
+@CheckInactionCurse:
                 
                 move.b  (a4),d0
-                jsr     GetUpperMoveType
-                cmpi.w  #MOVETYPE_LOWER_BRASS_GUNNER,d1
-                beq.w   @CheckDebugDodge
-                cmpi.w  #MOVETYPE_LOWER_ARCHER,d1
-                beq.w   @CheckDebugDodge
-                cmpi.w  #MOVETYPE_LOWER_CENTAUR_ARCHER,d1
-                beq.w   @CheckDebugDodge
-                cmpi.w  #MOVETYPE_LOWER_STEALTH_ARCHER,d1
-                beq.w   @CheckDebugDodge
-                moveq   #CHANCE_TO_DODGE_FOR_AIRBORNE_TARGET,d2 ; 1/8 chance to dodge if target is flying or hovering, and if attacker is not an archer
-@CheckDebugDodge:
-                
-                tst.b   -BCSTACK_OFFSET_DEBUGDODGE(a2)
-                beq.s   @DetermineDodge
-                moveq   #0,d2
-@DetermineDodge:
-                
-                move.w  d2,d0
+                jsr     GetStatusEffects
+                andi.w  #STATUSEFFECT_CURSE,d1
+                beq.s   @CheckInactionStun
+                moveq   #INACTION_CHANCE_CURSE,d0
                 jsr     (GetRandomOrDebugValue).w
                 tst.w   d0
-                bne.w   @Return
-                move.w  #$FFFF,d4
-                move.w  #1,d5
-                exg     a4,a5
-                bsr.w   WriteBattlesceneScript_AnimateAction
-                displayMessage #MESSAGE_BATTLE_DODGE,(a4),#0,#0 ; Message, Combatant, Item or Spell, Number
-                bsr.w   WriteBattlesceneScript_IdleSprite
-                exg     a4,a5
-                move.b  #$FF,-BCSTACK_OFFSET_DODGE(a2)
-@Return:
+                seq     curseInaction(a2)
+@CheckInactionStun:
                 
+                move.b  (a4),d0
+                jsr     GetStatusEffects
+                andi.w  #STATUSEFFECT_STUN,d1
+                beq.s   @Skip1
+                moveq   #INACTION_CHANCE_STUN,d0
+                jsr     (GetRandomOrDebugValue).w
+                tst.w   d0
+                seq     stunInaction(a2)
+@Skip1:
+                
+                bra.s   @Done
+@CheckCastSpell:
+                
+                cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
+                bne.s   @CheckUseItem
+                move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d0
+                andi.w  #SPELLENTRY_MASK_INDEX,d0
+                move.w  d0,((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w
+                move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d0
+                lsr.b   #SPELLENTRY_OFFSET_LV,d0
+                andi.w  #SPELLENTRY_LOWERMASK_LV,d0
+                move.w  d0,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
+                move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d1
+                jsr     j_FindSpellDefAddress
+                btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
+                beq.s   @Skip2
+                move.b  (a4),d0
+                jsr     GetStatusEffects
+                andi.w  #STATUSEFFECT_SILENCE,d1
+                sne     silencedActor(a2)
+@Skip2:
+                
+                bra.s   @Done
+@CheckUseItem:
+                
+                cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
+                bne.s   @CheckBurstRock
+                move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),((CURRENT_BATTLE_ITEM-$1000000)).w
+                bra.w   @Done
+@CheckBurstRock:
+                
+                cmpi.w  #BATTLEACTION_BURST_ROCK,(a3)
+                bne.s   @CheckNoAction
+                bra.w   @Done
+@CheckNoAction:
+                
+                cmpi.w  #BATTLEACTION_NOTHING,(a3)
+                bne.s   @CheckPrismLaser
+                bra.w   @Done
+@CheckPrismLaser:
+                
+                cmpi.w  #BATTLEACTION_PRISM_LASER,(a3)
+                bne.w   *+4
+@Done:
+                
+                movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function WriteBattlesceneScript_DodgeAttack
+    ; End of function InitBattlesceneProperties
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A4 = attacker index in RAM
-;     A5 = defender index in RAM
+; Load proper battlescene message script depending on action
 ; 
-; Out: D6 = damage
+; In: A3 = action type index in RAM
+;     A4 = actor index in RAM
+; 
+; <HARDCODED> enemy and message indexes
 
-CalculateDamage:
+
+CreateBattlesceneMessage:
                 
+                movem.l d0-d3/a0,-(sp)
                 move.b  (a4),d0
-                jsr     GetCurrentATT
-                move.w  d1,d2
-                move.b  (a5),d0
-                jsr     GetCurrentDEF
-                sub.w   d1,d2
-                bhi.s   @BaseDamage     
-                moveq   #1,d2           ; minimum base damage = 1
-@BaseDamage:
+                cmpi.w  #BATTLEACTION_ATTACK,(a3)
+                bne.s   @CheckSpellcast ; HARDCODED attack lines
+                move.w  ((BATTLESCENE_ATTACK_TYPE-$1000000)).w,d2
+                move.w  #MESSAGE_BATTLE_ATTACK,d1 ; {NAME}'s attack!
+                tst.w   d2
+                beq.w   @Message_Attack 
+                move.w  #MESSAGE_BATTLE_SECOND_ATTACK,d1 ; {NAME}'s second{N}attack!
+                cmpi.w  #BATTLEACTION_ATTACKTYPE_SECOND,d2
+                beq.w   @Message_Attack 
+                move.w  #MESSAGE_BATTLE_COUNTER_ATTACK,d1 ; {NAME}'s counter{N}attack!
+@Message_Attack:
                 
-                move.w  d2,d6           ; D6 = base damage
+                displayMessage d1,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
+                bra.w   @Done
+@CheckSpellcast:
                 
-                ; Evaluate land effect's damage reduction
-                move.b  (a5),d0
-                jsr     GetLandEffectSetting
-                move.w  #256,d3         ; if land effect displays "0%", do not reduce damage
-                tst.b   d1
-                beq.w   @ApplyLandEffectToDamage
-                move.w  #230,d3         ; else if land effect displays "15%", reduce damage to 230/256
-                cmpi.b  #1,d1
-                beq.w   @ApplyLandEffectToDamage
-                move.w  #205,d3         ; otherwise, reduce damage to 205/256
-@ApplyLandEffectToDamage:
+                cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
+                bne.w   @CheckUseItem
                 
-                mulu.w  d3,d6
-                lsr.w   #8,d6
+                ; HARDCODED spell text indexes !
+                move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
+                move.w  #MESSAGE_SPELLCAST_PUT_ON_A_DEMON_SMILE,d1 ; {NAME} put on{N}a demon's smile.
+                cmpi.w  #SPELL_SPOIT,d2
+                beq.w   @SpellcastMessage
+                move.w  #MESSAGE_SPELLCAST_BELCHED_OUT_FLAMES,d1 ; {NAME} belched{N}out flames!
+                cmpi.w  #SPELL_FLAME,d2
+                beq.w   @SpellcastMessage
+                cmpi.w  #SPELL_KIWI,d2
+                beq.w   @SpellcastMessage
+                move.w  #MESSAGE_SPELLCAST_BLEW_OUT_A_SNOWSTORM,d1 ; {NAME} blew out{N}a snowstorm!
+                cmpi.w  #SPELL_SNOW,d2
+                beq.w   @SpellcastMessage
+                move.w  #MESSAGE_SPELLCAST_CAST_DEMON_BREATH,d1 ; {NAME} cast{N}demon breath!
+                cmpi.w  #SPELL_DEMON,d2
+                beq.w   @SpellcastMessage
+                move.w  #MESSAGE_SPELLCAST_ODD_EYE_BEAM,d1 ; Odd-eye beam!
+                cmpi.w  #SPELL_ODDEYE,d2
+                beq.w   @SpellcastMessage
+                move.w  #MESSAGE_SPELLCAST_SUMMONED,d1 ; {NAME} summoned{N}{SPELL}!{D1}
+                cmpi.w  #SPELL_DAO,d2
+                beq.w   @SpellcastMessage
+                cmpi.w  #SPELL_APOLLO,d2
+                beq.w   @SpellcastMessage
+                cmpi.w  #SPELL_NEPTUN,d2
+                beq.w   @SpellcastMessage
+                cmpi.w  #SPELL_ATLAS,d2
+                beq.w   @SpellcastMessage
+                move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d2
+                move.w  #MESSAGE_SPELLCAST_BLEW_OUT_AQUA_BREATH,d1 ; {NAME} blew out{N}aqua-breath!
+                cmpi.w  #SPELL_AQUA,d2
+                beq.w   @SpellcastMessage
+                move.w  #MESSAGE_SPELLCAST_BLEW_OUT_BUBBLE_BREATH,d1 
+                                                        ; {NAME} blew out{N}bubble-breath!
+                cmpi.w  #SPELL_AQUA|SPELL_LV2,d2
+                beq.w   @SpellcastMessage
+                move.w  #MESSAGE_SPELLCAST_DEFAULT,d1 ; {NAME} cast{N}{SPELL} level {#}!
+@SpellcastMessage:
                 
-                ; Check if defender is flying or hovering
-                move.b  (a5),d0
-                jsr     GetUpperMoveType
-                cmpi.w  #MOVETYPE_LOWER_FLYING,d1
-                beq.w   @CheckIfAttackerIsAnArcher
-                cmpi.w  #MOVETYPE_LOWER_HOVERING,d1
-                beq.w   @CheckIfAttackerIsAnArcher
-                bra.w   @Return
-@CheckIfAttackerIsAnArcher:
+                move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
+                move.w  ((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w,d3
+                addq.w  #1,d3
+                displayMessage d1,d0,d2,d3 ; Message, Combatant, Item or Spell, Number
+                bra.w   @Done
+@CheckUseItem:
                 
-                move.b  (a4),d0
-                jsr     GetUpperMoveType
-                cmpi.w  #MOVETYPE_LOWER_BRASS_GUNNER,d1
-                beq.w   @ApplyArcherDamageBonus
-                cmpi.w  #MOVETYPE_LOWER_ARCHER,d1
-                beq.w   @ApplyArcherDamageBonus
-                cmpi.w  #MOVETYPE_LOWER_CENTAUR_ARCHER,d1
-                beq.w   @ApplyArcherDamageBonus
-                cmpi.w  #MOVETYPE_LOWER_STEALTH_ARCHER,d1
-                beq.w   @ApplyArcherDamageBonus
-                bra.w   @Return
-@ApplyArcherDamageBonus:
+                cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
+                bne.w   @CheckBurstRock
+                move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d2
+                displayMessage #MESSAGE_BATTLE_USED_ITEM,d0,d2,#0 ; Message, Combatant, Item or Spell, Number
+                bra.w   @Done
+@CheckBurstRock:
                 
-                move.w  d6,d0
-                lsr.w   #2,d0
-                add.w   d0,d6           ; inflict an additional 25% of damage if an archer is attacking a flying or hovering combatant
-@Return:
+                cmpi.w  #BATTLEACTION_BURST_ROCK,(a3)
+                bne.w   @CheckMuddled
+                displayMessage #MESSAGE_BATTLE_EXPLODED,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
+                bra.s   @Done
+@CheckMuddled:
                 
-                rts
-
-    ; End of function CalculateDamage
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D6 = damage
-
-CalculateCriticalHit:
-                
-                move.b  (a4),d0
-                jsr     GetCurrentProwess
-                andi.w  #PROWESS_MASK_CRITICAL,d1
-                move.w  d1,d2
-                lsl.w   #1,d2
-                lea     tbl_CriticalHitSettings(pc,d2.w),a0 ; values regarding critical hit chance and damage
-                clr.w   d0
-                move.b  (a0),d0
-                beq.s   @Return         ; skip function if 0 crit chance
-                tst.b   -BCSTACK_OFFSET_FORCEDCRIT(a2)
-                beq.s   @CheckDebugCritical
-                moveq   #1,d0
-@CheckDebugCritical:
-                
-                tst.b   -BCSTACK_OFFSET_DEBUGCRIT(a2)
-                beq.s   @DetermineSuccess
-                moveq   #0,d0
-@DetermineSuccess:
-                
+                cmpi.w  #BATTLEACTION_NOTHING,(a3)
+                bne.w   @CheckPrismLaser
+                move.w  d0,d2           ; random MUDDLE lines
+                move.w  #MESSAGE_BATTLE_MUDDLED_ACTIONS_START,d1 ; HARDCODED Muddle line start index
+                moveq   #$10,d0
                 jsr     (GetRandomOrDebugValue).w
-                tst.w   d0
-                bne.s   @Return
-                move.b  CRITICALHITSETTING_OFFSET_DAMAGE_MODIFIER(a0),d0 
-                                                        ; success !
-                beq.s   @CheckInflictAilment
-                move.w  d6,d2
-                lsr.w   d0,d2
-                add.w   d2,d6
-@CheckInflictAilment:
+                cmpi.w  #9,d0           ; HARDCODED number of available Muddle lines
+                bls.s   @Message_Muddled
+                clr.w   d0
+@Message_Muddled:
                 
-                cmpi.w  #PROWESS_INFLICT_AILMENTS_START,d1
-                bcc.s   @SetInflictAilment
-                move.b  #$FF,-BCSTACK_OFFSET_CRIT(a2)
-                move.b  (a4),d0
-                jsr     GetEquippedWeapon
-                cmpi.w  #ITEM_GISARME,d1
-                bne.s   @Skip
-                move.b  (a5),d0
-                move.w  #SPELL_DESOUL,d1
-                bsr.w   GetResistanceToSpell
-                cmpi.w  #RESISTANCESETTING_STATUSEFFECT_IMMUNITY,d2
-                beq.s   @Skip           ; skip if target is immune to desoul
-                move.b  #$FF,-BCSTACK_OFFSET_CUTOFF(a2)
-                clr.b   -BCSTACK_OFFSET_CRIT(a2)
-@Skip:
+                add.w   d0,d1
+                move.w  d2,d0
+                displayMessage d1,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
+                bra.s   @Done
+@CheckPrismLaser:
                 
-                bra.s   @Return
-@SetInflictAilment:
+                cmpi.w  #BATTLEACTION_PRISM_LASER,(a3)
+                bne.s   @Done
+                jsr     GetEnemyIndex   
+                cmpi.w  #ENEMY_ZEON_GUARD,d1
+                bne.s   @PrismFlower    
+                move.w  #MESSAGE_BATTLE_DEMON_LASER,d1 ; 0141=Demon laser!
+                bra.s   @BattleMessage_PrismLaser
+@PrismFlower:
                 
-                move.b  #$FF,-BCSTACK_OFFSET_INFLICTAILMENT(a2)
-@Return:
+                move.w  #MESSAGE_BATTLE_PRISM_LASER,d1 ; 013F=Prism laser!
+@BattleMessage_PrismLaser:
                 
+                displayMessage d1,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
+@Done:
+                
+                movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function CalculateCriticalHit
+    ; End of function CreateBattlesceneMessage
 

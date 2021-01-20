@@ -7,6 +7,7 @@ ms_map77_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map77_DefaultItemEvent1:
                 
                 rts
@@ -15,6 +16,7 @@ Map77_DefaultItemEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map77_ItemEvent0:
                 

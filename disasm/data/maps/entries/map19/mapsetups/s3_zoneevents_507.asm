@@ -9,6 +9,7 @@ ms_map19_flag507_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_DefaultZoneEvent:
                 
                 rts
@@ -17,6 +18,7 @@ Map19_DefaultZoneEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_1FA_ZoneEvent0:
                 
@@ -33,6 +35,7 @@ return_52DC6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_1FA_ZoneEvent1:
                 
@@ -51,6 +54,7 @@ return_52DDC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_1FB_ZoneEvent0:
                 
                  
@@ -66,6 +70,7 @@ return_52DEE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_1FB_ZoneEvent1:
                 

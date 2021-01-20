@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map41_AreaDescriptions:
                 
                 move.w  #$DB7,d3        ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
@@ -18,6 +19,7 @@ byte_5F41E:     msDescFunctionD6 6, 7, $FF, Map41_DescFunc0-byte_5F41E
                 msDescEnd
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map41_DescFunc0:
                 
@@ -48,6 +50,7 @@ return_5F454:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map41_DescFunc1:
                 

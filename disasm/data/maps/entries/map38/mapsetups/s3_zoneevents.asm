@@ -8,6 +8,7 @@ ms_map38_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_DefaultZoneEvent:
                 
                 rts
@@ -16,6 +17,7 @@ Map38_DefaultZoneEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map38_ZoneEvent0:
                 
@@ -32,6 +34,7 @@ return_5DCEE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map38_ZoneEvent1:
                 

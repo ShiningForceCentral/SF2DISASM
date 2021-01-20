@@ -12,6 +12,7 @@ ms_map51_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map51_ZoneEvent0:
                 
                  
@@ -27,6 +28,7 @@ return_5C302:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map51_ZoneEvent4:
                 
@@ -68,7 +70,7 @@ cs_5C312:       textCursor 2555
                 nextSingleText $C0,128  ; "Did you guys bring the{N}ketchup? No? Oh, well.{W1}"
                 setActscript 129,eas_Jump
                 setActscriptWait 130,eas_Jump
-                setStoryFlag 20         ; Battle 20 unlocked
+                setStoryFlag 20         ; Battle 20 unlocked - BATTLE_HARPIES_POND              
                 warp MAP_HARPY_POOL,0,0,RIGHT
                 csc_end
 cs_5C3AA:       textCursor 2565

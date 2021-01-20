@@ -3,7 +3,9 @@
 ; 0x21F62..0x21F92 : Mithril weapon class lists
 tbl_MithrilWeaponClasses:
                 
-; Syntax        mithrilWeaponClass [CLASS_]index,..[CLASS_]index
+; Syntax        mithrilWeaponClass [CLASS_]enum,..[CLASS_]enum
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 mithrilWeaponClass HERO, BDBT
                 mithrilWeaponClass PLDN, PGNT

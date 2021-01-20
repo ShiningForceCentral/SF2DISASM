@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map12_InitFunction:
                 
                  
@@ -12,7 +13,7 @@ ms_map12_InitFunction:
                 script  cs_57D22
 byte_57D10:
                 
-                chkFlg  518             ; Battle 18 completed
+                chkFlg  518             ; Battle 18 completed - BATTLE_VERSUS_TAROS                
                 beq.s   return_57D20
                 move.w  #$80,d0 
                 jsr     MoveEntityOutOfMap

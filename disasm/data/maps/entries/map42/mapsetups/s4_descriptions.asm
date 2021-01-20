@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map42_AreaDescriptions:
                 
                 move.w  #$1B2,d3        ; "Nothing special there.{W1}"
@@ -18,6 +19,7 @@ byte_5FE34:     msDescFunctionD6 39, 2, $FF, Map42_DescFunc0-byte_5FE34
                 msDescEnd
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map42_DescFunc1:
                 
@@ -42,6 +44,7 @@ return_5FE66:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map42_DescFunc0:
                 

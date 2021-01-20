@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 RunMapSetupInitFunction:
                 
                 movem.l d0-a1,-(sp)
@@ -24,6 +25,7 @@ loc_47514:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 RunMapSetupZoneEvent:
                 
@@ -75,6 +77,7 @@ loc_47576:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 RunMapSetupItemEvent:
                 
@@ -143,6 +146,7 @@ loc_4760A:
 
 ; In: D0 = entity event index
 
+
 RunMapSetupEntityEvent:
                 
                 movem.l d0-a1,-(sp)
@@ -175,7 +179,7 @@ loc_4765A:
                 bra.s   loc_47638
 loc_4765E:
                 
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 blt.s   loc_47670
@@ -232,6 +236,7 @@ loc_476D6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_476DC:
                 
                 trap    #VINT_FUNCTIONS
@@ -245,6 +250,7 @@ sub_476DC:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get index of current portrait for dialogue window and load it
+
 
 LoadAndDisplayCurrentPortrait:
                 
@@ -263,6 +269,7 @@ loc_476FC:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 RunMapSetupAreaDescription:
                 
@@ -283,6 +290,7 @@ loc_4771A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DisplayAreaDescription:
                 
@@ -344,6 +352,7 @@ loc_4778C:
 
 ; returns entity list of map setup in a0
 
+
 GetMapSetupEntityList:
                 
                 bsr.w   GetCurrentMapSetup
@@ -360,6 +369,7 @@ return_4779C:
 ; =============== S U B R O U T I N E =======================================
 
 ; returns map setup address in a0
+
 
 GetCurrentMapSetup:
                 
@@ -406,6 +416,7 @@ ms_Void:        dc.w $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
+
 MoveEntityOutOfMap:
                 
                 movem.l d0-d3,-(sp)
@@ -421,6 +432,7 @@ MoveEntityOutOfMap:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 MakeEntityWalk:
                 
                 move.l  d0,-(sp)
@@ -435,6 +447,7 @@ MakeEntityWalk:
 ; =============== S U B R O U T I N E =======================================
 
 ; reset entity flags and sprite
+
 
 sub_4781A:
                 
@@ -453,6 +466,7 @@ sub_4781A:
 
 ; reset entity flags and sprite and facing ?
 
+
 sub_47832:
                 
                 movem.l d0-d3,-(sp)
@@ -470,6 +484,7 @@ sub_47832:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CheckRandomBattle:
                 

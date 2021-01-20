@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map43_AreaDescriptions:
                 
                 move.w  #$FE1,d3        ; "A book...{N}DIARY{W1}"

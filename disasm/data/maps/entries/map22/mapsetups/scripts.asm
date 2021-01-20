@@ -6,7 +6,7 @@ cs_5994E:       textCursor 1792
                 setCamDest 10,0
                 nextText $0,134         ; "Are you ready?{W2}"
                 nextSingleText $0,134   ; "Now, start the battle!{N}Do your best!{W1}"
-                setStoryFlag 22         ; Battle 22 unlocked
+                setStoryFlag 22         ; Battle 22 unlocked - BATTLE_CHESSBOARD                
                 warp MAP_CREED_DESKTOP_WORLD,0,0,RIGHT
                 csc_end
 cs_5996E:       textCursor 1794

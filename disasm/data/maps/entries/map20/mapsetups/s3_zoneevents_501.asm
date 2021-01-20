@@ -7,6 +7,7 @@ ms_map20_flag501_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_1F5_ZoneEvent0:
                 
                 moveq   #1,d0
@@ -26,6 +27,7 @@ Map20_1F5_ZoneEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map20_DefaultZoneEvent:
                 

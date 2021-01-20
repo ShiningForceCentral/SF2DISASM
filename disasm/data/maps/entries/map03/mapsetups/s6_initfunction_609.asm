@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map3_flag609_InitFunction:
                 
                  
@@ -20,6 +21,7 @@ cs_513CE:       hide ALLY_JAHA
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
+
 
 nullsub_513D4:
                 

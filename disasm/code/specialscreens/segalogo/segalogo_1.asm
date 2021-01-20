@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 VInt_CheckDebugModeCheat:
                 
                 movea.l ((ENTITY_WALKING_PARAMS-$1000000)).w,a0
@@ -15,6 +16,7 @@ VInt_CheckDebugModeCheat:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 VInt_ActivateDebugModeCheat:
                 
                 move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
@@ -25,6 +27,7 @@ VInt_ActivateDebugModeCheat:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CheckDebugModeInputSequence:
                 

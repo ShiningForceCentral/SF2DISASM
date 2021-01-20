@@ -8,6 +8,7 @@ ms_map8_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_ItemEvent0:
                 
                  

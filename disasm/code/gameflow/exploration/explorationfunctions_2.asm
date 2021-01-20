@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ExplorationLoop:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
@@ -12,7 +13,7 @@ ExplorationLoop:
                 clr.w   ((word_FFB196-$1000000)).w
 loc_257D0:
                 
-                jsr     HealAliveCharactersAndImmortals
+                jsr     HealLivingAndImmortalAllies
                 jsr     FadeOutToBlackAll(pc)
                 nop
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
@@ -78,6 +79,7 @@ loc_25888:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ClearMapTempFlags:
                 
                 movem.w d1/d7,-(sp)
@@ -97,6 +99,7 @@ loc_25896:
 ; =============== S U B R O U T I N E =======================================
 
 ; update main entity properties
+
 
 sub_258A8:
                 
@@ -131,6 +134,7 @@ loc_258CE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FadeOutToBlackAll:
                 
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
@@ -148,6 +152,7 @@ FadeOutToBlackAll:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WaitForFadeToFinish:
                 
                 tst.b   ((FADING_SETTING-$1000000)).w
@@ -164,6 +169,7 @@ return_2591A:
 ; =============== S U B R O U T I N E =======================================
 
 ; Wait for event OR player action (A/C button)
+
 
 WaitForEvent:
                 
@@ -194,6 +200,7 @@ loc_25948:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ProcessMapEvent:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
@@ -216,6 +223,7 @@ ProcessMapEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ProcessMapEventType1_Warp:
                 
@@ -256,7 +264,7 @@ loc_259CC:
                 move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
                 cmpi.b  #MAP_OVERWORLD_AROUND_PACALON,d0
                 bne.s   loc_259E8       ; HARDCODED check if map is overworld pacalon, switch if water not restored
-                chkFlg  530             ; Battle 30 completed
+                chkFlg  530             ; Battle 30 completed - BATTLE_VERSUS_ZALBARD              
                 beq.s   loc_259E8
                 move.w  #MAP_OVERWORLD_PACALON_2,d0
 loc_259E8:
@@ -291,6 +299,7 @@ loc_25A18:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 UpdatePlayerPosFromMapEvent:
                 
                 move.l  a0,-(sp)
@@ -311,6 +320,7 @@ UpdatePlayerPosFromMapEvent:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ProcessMapEventType2_GetIntoCaravan:
                 
                 jsr     j_MapEventType2 
@@ -320,6 +330,7 @@ ProcessMapEventType2_GetIntoCaravan:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ProcessMapEventType3_GetIntoRaft:
                 
@@ -331,6 +342,7 @@ ProcessMapEventType3_GetIntoRaft:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ProcessMapEventType4_GetOutOfCaravan:
                 
                 jsr     j_MapEventType4
@@ -340,6 +352,7 @@ ProcessMapEventType4_GetOutOfCaravan:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ProcessMapEventType5_GetOutOfRaft:
                 
@@ -351,6 +364,7 @@ ProcessMapEventType5_GetOutOfRaft:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_j_ShrinkInBowieAndFollowers:
                 
                 jsr     j_ShrinkInBowieAndFollowers
@@ -361,6 +375,7 @@ j_j_ShrinkInBowieAndFollowers:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_j_GrowOutBowieAndFollowers:
                 
                 jsr     j_GrowOutBowieAndFollowers
@@ -370,6 +385,7 @@ j_j_GrowOutBowieAndFollowers:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ProcessMapEventType6_ZoneEvent:
                 

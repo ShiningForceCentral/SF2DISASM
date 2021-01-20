@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CreateLandEffectWindow:
                 
                 movem.l d0-a2,-(sp)
@@ -17,7 +18,7 @@ CreateLandEffectWindow:
                 subq.w  #1,d0
                 move.w  #$201,d1
                 move.w  #4,d2
-                cmpi.w  #WINDOW_FIGHTERMINISTATUS_MAX_WIDTH,((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w
+                cmpi.w  #WINDOW_MINISTATUS_MAX_WIDTH,((MINISTATUS_WINDOW_WIDTH-$1000000)).w
                 blt.s   loc_157A6
                 move.w  #$101,d1
 loc_157A6:
@@ -32,10 +33,11 @@ loc_157A6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 HideLandEffectWindow:
                 
                 tst.w   ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w
-                beq.w   return_157E6
+                beq.w   @Return
                 movem.l d0-a2,-(sp)
                 move.w  ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -48,7 +50,7 @@ HideLandEffectWindow:
                 jsr     (ClearWindowAndUpdateEndPointer).w
                 clr.w   ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w
                 movem.l (sp)+,d0-a2
-return_157E6:
+@Return:
                 
                 rts
 
@@ -57,22 +59,23 @@ return_157E6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_157E8:
                 
                 tst.w   ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w
-                beq.w   return_15810
+                beq.w   @Return
                 movem.l d0-a2,-(sp)
                 bsr.w   DrawLandEffectWindow
                 tst.b   ((HIDE_WINDOWS-$1000000)).w
-                bne.s   loc_1580C
+                bne.s   @Done
                 move.w  ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
-loc_1580C:
+@Done:
                 
                 movem.l (sp)+,d0-a2
-return_15810:
+@Return:
                 
                 rts
 
@@ -80,6 +83,7 @@ return_15810:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DrawLandEffectWindow:
                 
@@ -93,14 +97,14 @@ DrawLandEffectWindow:
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 jsr     j_GetLandEffectSetting
                 move.w  d1,d0
-                mulu.w  #$F,d0
-                moveq   #$FFFFFFF0,d1
+                mulu.w  #15,d0
+                moveq   #-16,d1
                 moveq   #2,d7
                 movea.l d3,a1
                 adda.w  #WINDOW_LANDEFFECT_TEXT_VALUE_OFFSET,a1
                 bsr.w   WriteTilesFromNumber
-                move.b  #$25,1(a1) 
-                moveq   #$FFFFFFF0,d1
+                move.b  #VDPTILE_PERCENT_SIGN,1(a1)
+                moveq   #-16,d1
                 moveq   #WINDOW_LANDEFFECT_TEXT_HEADER_LENGTH,d7
                 movea.l d3,a1
                 adda.w  #WINDOW_LANDEFFECT_TEXT_HEADER_OFFSET,a1
@@ -117,20 +121,25 @@ aLandEffect:    dc.b 'LAND',$B,'EFFECT',0
 
 ; related to battlefield options
 
+displayBattleMessage = -10
+messageSpeed = -8
+windowSlot = -6
+windowTilesEnd = -4
+
 sub_1586E:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a1,-(sp)
-                link    a6,#-$10
-                move.b  ((MESSAGE_SPEED-$1000000)).w,-$A(a6)
-                move.b  ((DISPLAY_BATTLE_MESSAGES-$1000000)).w,-8(a6)
+                link    a6,#-16
+                move.b  ((MESSAGE_SPEED-$1000000)).w,displayBattleMessage(a6)
+                move.b  ((DISPLAY_BATTLE_MESSAGES-$1000000)).w,messageSpeed(a6)
                 move.w  #$1309,d0
                 move.w  #$71C,d1
                 jsr     (CreateWindow).l
-                move.w  d0,-6(a6)
-                move.l  a1,-4(a6)
+                move.w  d0,windowSlot(a6)
+                move.l  a1,windowTilesEnd(a6)
                 bsr.w   CopyBattlefieldOptionsMenuLayout
-                move.w  -6(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$712,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
@@ -186,17 +195,17 @@ loc_1593E:
                 bra.s   loc_158D6
 loc_15940:
                 
-                move.b  -$A(a6),((MESSAGE_SPEED-$1000000)).w
-                move.b  -8(a6),((DISPLAY_BATTLE_MESSAGES-$1000000)).w
+                move.b  displayBattleMessage(a6),((MESSAGE_SPEED-$1000000)).w
+                move.b  messageSpeed(a6),((DISPLAY_BATTLE_MESSAGES-$1000000)).w
 loc_1594C:
                 
-                move.w  -6(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$71E,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 bsr.w   sub_1598C
                 jsr     (WaitForWindowMovementEnd).l
-                move.w  -6(a6),d0
+                move.w  windowSlot(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).l
                 unlk    a6
                 movem.l (sp)+,d0-a1
@@ -208,10 +217,15 @@ loc_1594C:
 
 ; =============== S U B R O U T I N E =======================================
 
+displayBattleMessage = -10
+messageSpeed = -8
+windowSlot = -6
+windowTilesEnd = -4
+
 CopyBattlefieldOptionsMenuLayout:
                 
                 lea     BattleConfigWindowLayout(pc), a0
-                movea.l -4(a6),a1
+                movea.l windowTilesEnd(a6),a1
                 move.w  #$156,d7
                 jmp     (CopyBytes).w   
 
@@ -219,6 +233,7 @@ CopyBattlefieldOptionsMenuLayout:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1598C:
                 
@@ -235,6 +250,7 @@ loc_15994:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_159A0:
                 
@@ -286,12 +302,13 @@ spr_BattleConfig:
                 
 ; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
                 
-                vdpSprite 292, V2|H2|9, 1480|PLT3|PRIORITY, 228
-                vdpSprite 324, V2|H3|10, 1472|PLT3|PRIORITY, 196
-                vdpSprite 324, V2|H2|11, 1474|PLT3|PRIORITY, 220
-                vdpSprite 324, V2|H3|16, 1474|PLT3|PRIORITY, 236
+                vdpSprite 292, V2|H2|9, 1480|PALETTE3|PRIORITY, 228
+                vdpSprite 324, V2|H3|10, 1472|PALETTE3|PRIORITY, 196
+                vdpSprite 324, V2|H2|11, 1474|PALETTE3|PRIORITY, 220
+                vdpSprite 324, V2|H3|16, 1474|PALETTE3|PRIORITY, 236
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_15A20:
                 
@@ -314,6 +331,7 @@ byte_15A38:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_15A3E:
                 

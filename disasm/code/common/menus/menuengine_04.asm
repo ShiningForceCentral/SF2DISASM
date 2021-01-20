@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitPortraitWindow:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
@@ -65,6 +66,7 @@ return_11BE0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 HidePortraitWindow:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
@@ -97,64 +99,71 @@ loc_11C08:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Create and display member stats screen
+; Create and display member screen
 ; 
-;       In: D0 = character index
+;       In: D0 = member index
 
-BuildMemberStatsScreen:
+portraitIndex = -12
+goldWindowSlot = -10
+kdWindowSlot = -8
+portraitWindowSlot = -6
+statusWindowSlot = -4
+member = -2
+
+BuildMemberScreen:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a2,-(sp)
-                link    a6,#-$10
-                move.w  d0,-2(a6)
+                link    a6,#-16
+                move.w  d0,member(a6)
                 clr.b   ((PORTRAIT_IS_FLIPPED-$1000000)).w
                 clr.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
-                move.w  #WINDOW_MEMBERSTATS_SIZE,d0
-                move.w  #WINDOW_MEMBERSTATS_DEST,d1
+                move.w  #WINDOW_MEMBERSTATUS_SIZE,d0
+                move.w  #WINDOW_MEMBERSTATUS_DEST,d1
                 jsr     (CreateWindow).w ; stats window, on the right
-                move.w  d0,-4(a6)
+                move.w  d0,statusWindowSlot(a6)
                 move.w  #WINDOW_MEMBER_PORTRAIT_SIZE,d0
                 move.w  #WINDOW_MEMBER_PORTRAIT_DEST,d1
                 jsr     (CreateWindow).w ; portrait, upper left
-                move.w  d0,-6(a6)
+                move.w  d0,portraitWindowSlot(a6)
                 addq.w  #1,d0
                 move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 move.w  #WINDOW_MEMBER_KD_SIZE,d0
                 move.w  #WINDOW_MEMBER_KD_DEST,d1
                 jsr     (CreateWindow).w ; kills/defeat, middle left
-                move.w  d0,-8(a6)
+                move.w  d0,kdWindowSlot(a6)
                 move.w  #WINDOW_MEMBER_GOLD_SIZE,d0
                 move.w  #WINDOW_MEMBER_GOLD_DEST,d1
                 jsr     (CreateWindow).w ; gold, bottom left
-                move.w  d0,-$A(a6)
-                move.w  -2(a6),d0
+                move.w  d0,goldWindowSlot(a6)
+                move.w  member(a6),d0
                 bsr.w   GetCombatantPortrait
-                move.w  d0,-$C(a6)
+                move.w  d0,portraitIndex(a6)
                 bsr.w   LoadTileDataForMemberScreen
-                move.w  -$C(a6),d0
+                move.w  portraitIndex(a6),d0
                 blt.s   loc_11CA6
                 bsr.w   GetAllyPortrait 
                 bsr.w   LoadPortrait    
 loc_11CA6:
                 
-                move.w  -4(a6),d0
-                move.w  #WINDOW_MEMBERSTATS_POSITION,d1
+                move.w  statusWindowSlot(a6),d0
+                move.w  #WINDOW_MEMBERSTATUS_POSITION,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
-                move.w  -8(a6),d0
+                move.w  kdWindowSlot(a6),d0
                 move.w  #WINDOW_MEMBER_KD_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
-                move.w  -$C(a6),d0
+                move.w  portraitIndex(a6),d0
                 blt.s   loc_11CD2
-                move.w  -6(a6),d0
+                move.w  portraitWindowSlot(a6),d0
                 move.w  #WINDOW_MEMBER_PORTRAIT_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
 loc_11CD2:
                 
-                move.w  -2(a6),d0
+                move.w  member(a6),d0
                 tst.b   d0
                 blt.s   loc_11CE6
-                move.w  -$A(a6),d0
+                move.w  goldWindowSlot(a6),d0
                 move.w  #WINDOW_MEMBER_GOLD_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
 loc_11CE6:
@@ -174,7 +183,7 @@ loc_11CE6:
                 bra.s   loc_11D32
 loc_11D1A:
                 
-                move.w  -2(a6),d0
+                move.w  member(a6),d0
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   loc_11D2C
@@ -222,7 +231,7 @@ loc_11D6C:
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_11DBC
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  member(a6),d0
                 jsr     j_GetAllyMapSprite
                 clr.w   d0
                 moveq   #3,d1
@@ -232,7 +241,7 @@ loc_11D6C:
                 bra.s   loc_11DDC
 loc_11DBC:
                 
-                move.w  -2(a6),d0
+                move.w  member(a6),d0
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   loc_11DDC
@@ -263,24 +272,24 @@ loc_11DDC:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
                 dc.l VInt_HandlePortraitBlinking
-                move.w  -4(a6),d0
+                move.w  statusWindowSlot(a6),d0
                 move.w  #$2001,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
-                move.w  -8(a6),d0
+                move.w  kdWindowSlot(a6),d0
                 move.w  #$F80B,d1
                 jsr     (MoveWindowWithSfx).w
-                move.w  -$C(a6),d0
+                move.w  portraitIndex(a6),d0
                 blt.s   loc_11E40
-                move.w  -6(a6),d0
+                move.w  portraitWindowSlot(a6),d0
                 move.w  #$F8F6,d1
                 jsr     (MoveWindowWithSfx).w
 loc_11E40:
                 
-                move.w  -2(a6),d0
+                move.w  member(a6),d0
                 tst.b   d0
                 blt.s   loc_11E54
-                move.w  -$A(a6),d0
+                move.w  goldWindowSlot(a6),d0
                 move.w  #$F81C,d1
                 jsr     (MoveWindowWithSfx).w
 loc_11E54:
@@ -314,7 +323,7 @@ loc_11E82:
                 bra.s   loc_11EBA
 loc_11E94:
                 
-                move.w  -2(a6),d0
+                move.w  member(a6),d0
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   loc_11EBA
@@ -329,33 +338,36 @@ loc_11E94:
 loc_11EBA:
                 
                 jsr     (WaitForWindowMovementEnd).w
-                move.w  -$A(a6),d0
+                move.w  goldWindowSlot(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
-                move.w  -8(a6),d0
+                move.w  kdWindowSlot(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
-                move.w  -6(a6),d0
+                move.w  portraitWindowSlot(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
-                move.w  -4(a6),d0
+                move.w  statusWindowSlot(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
                 unlk    a6
                 movem.l (sp)+,d0-a2
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function BuildMemberStatsScreen
+    ; End of function BuildMemberScreen
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; In: A1 = address of VDP tile order in RAM
 
+windowTilesAddress = -6
+member = -2
+
 AddStatusEffectTileIndexesToVdpTileOrder:
                 
                 move.l  d0,(a1)
                 subq.l  #4,a1
-                cmpi.w  #VDPTILE_SPACE|VDPTILE_PLT3|VDPTILE_PRIORITY,(a1)
+                cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 beq.s   @Return
-                movea.l -6(a6),a1
+                movea.l windowTilesAddress(a6),a1
                 adda.w  #$78,a1 
 @Return:
                 
@@ -366,21 +378,28 @@ AddStatusEffectTileIndexesToVdpTileOrder:
 
 ; =============== S U B R O U T I N E =======================================
 
+portraitIndex = -12
+goldWindowSlot = -10
+kdWindowSlot = -8
+portraitWindowSlot = -6
+statusWindowSlot = -4
+member = -2
+
 LoadTileDataForMemberScreen:
                 
-                move.w  -4(a6),d0
+                move.w  statusWindowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  -2(a6),d0
-                bsr.w   BuildMemberStatsWindow
-                move.w  -8(a6),d0
+                move.w  member(a6),d0
+                bsr.w   BuildMemberStatusWindow
+                move.w  kdWindowSlot(a6),d0
                 lea     AllyKillDefeatWindowLayout(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #WINDOW_MEMBER_KD_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
-                move.w  -2(a6),d0
+                move.w  member(a6),d0
                 tst.b   d0
                 blt.s   @CheckDebugMode ; character index is negative (an enemy), so do not display kills
                 
@@ -391,7 +410,7 @@ LoadTileDataForMemberScreen:
                 moveq   #WINDOW_MEMBER_KD_TEXT_KILLS_LENGTH,d7
                 bsr.w   WriteTilesFromNumber
                 adda.w  #WINDOW_MEMBER_KD_TEXT_DEFEATS_OFFSET,a1
-                move.w  -2(a6),d0
+                move.w  member(a6),d0
                 jsr     j_GetDefeats
                 move.w  d1,d0
                 ext.l   d0
@@ -403,11 +422,11 @@ LoadTileDataForMemberScreen:
                 beq.s   @CheckPortrait
                 
                 ; Write combatant index inside kills/defeat window in debug mode
-                move.w  -8(a6),d0
+                move.w  kdWindowSlot(a6),d0
                 lea     AllyKillDefeatWindowLayout(pc), a0
                 move.w  #$101,d1
                 jsr     (GetWindowTileAddress).w
-                move.w  -2(a6),d0       ; get character index from stack
+                move.w  member(a6),d0   ; get character index from stack
                 lsr.w   #4,d0
                 andi.w  #$F,d0
                 cmpi.w  #10,d0
@@ -420,7 +439,7 @@ LoadTileDataForMemberScreen:
 @WriteIndexFirstDigit:
                 
                 move.w  d0,(a1)+
-                move.w  -2(a6),d0
+                move.w  member(a6),d0
                 andi.w  #$F,d0
                 cmpi.w  #10,d0
                 blt.s   @Continue2
@@ -434,17 +453,17 @@ LoadTileDataForMemberScreen:
                 move.w  d0,(a1)+
 @CheckPortrait:
                 
-                move.w  -$C(a6),d0
+                move.w  portraitIndex(a6),d0
                 blt.s   @Return         ; return if no portrait to display (and assume that it's an enemy, so skip drawing gold window as well)
                 
-                move.w  -6(a6),d0
+                move.w  portraitWindowSlot(a6),d0
                 lea     WindowBorderTiles(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #$A0,d7 
                 jsr     (CopyBytes).w   
                 lea     GoldWindowLayout(pc), a0
-                move.w  -$A(a6),d0
+                move.w  goldWindowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #$40,d7 

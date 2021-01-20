@@ -39,6 +39,6 @@ cs_59FB8:       textCursor 1733
                 nextSingleText $C0,129  ; "It's dinner time!{W1}"
                 setActscript 128,eas_Jump
                 setActscriptWait 130,eas_Jump
-                setStoryFlag 23         ; Battle 23 unlocked
+                setStoryFlag 23         ; Battle 23 unlocked - BATTLE_VERSUS_WILLARD            
                 warp MAP_CREED_WILLARD_CAVE,0,0,RIGHT
                 csc_end

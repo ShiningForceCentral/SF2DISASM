@@ -7,6 +7,7 @@ ms_map45_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map45_DefaultZoneEvent:
                 
                 rts
@@ -15,6 +16,7 @@ Map45_DefaultZoneEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map45_ZoneEvent0:
                 

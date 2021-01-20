@@ -6,6 +6,7 @@
 
 ; Out: D2 = 0 if true, $FFFFFFFF if false
 
+
 FindUsableOutsideBattleItem:
                 
                 moveq   #0,d2

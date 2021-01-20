@@ -13,19 +13,26 @@ tbl_EnemyDefs:
 ;               baseMov        0-255 (game slows down at around 15)
 ;               baseResistance [RESISTANCE_]bitfield
 ;               baseProwess    [PROWESS_]bitfield
-;               items          &
-;                   [ITEM_]index[|EQUIPPED], &
-;                   [ITEM_]index[|EQUIPPED], &
-;                   [ITEM_]index[|EQUIPPED], &
-;                   [ITEM_]index[|EQUIPPED]
-;               spells         &
-;                   [SPELL_]index[|level], &
-;                   [SPELL_]index[|level], &
-;                   [SPELL_]index[|level], &
-;                   [SPELL_]index[|level]
+;               items &
+;                   [ITEM_]enum[|EQUIPPED], &
+;                   [ITEM_]enum[|EQUIPPED], &
+;                   [ITEM_]enum[|EQUIPPED], &
+;                   [ITEM_]enum[|EQUIPPED]
+;               spells &
+;                   [SPELL_]enum[|level], &
+;                   [SPELL_]enum[|level], &
+;                   [SPELL_]enum[|level], &
+;                   [SPELL_]enum[|level]
 ;               initialStatus  [STATUSEFFECT_]bitfield
-;               moveType       [MOVETYPE_UPPER]index
+;               moveType       [MOVETYPE_UPPER]enum
 ;               unknownWord    ?
+;
+;        level: LV1 = 0 (default when omitted)
+;               LV2 = 64
+;               LV3 = 128
+;               LV4 = 192
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 unknownByte 0           ; 0: OOZE
                 spellPower REGULAR

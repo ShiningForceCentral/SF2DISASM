@@ -16,6 +16,7 @@ pt_eas_WorldmapFollowers:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitializeFollowerActscripts:
                 
                 movem.l a6,-(sp)
@@ -55,6 +56,7 @@ loc_443FE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_44404:
                 
@@ -97,6 +99,7 @@ return_4446A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_4446C:
                 

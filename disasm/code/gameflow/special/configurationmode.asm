@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CheatModeConfiguration:
                 
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w

@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ExecuteBattleCutscene_Defeated:
                 
                 movem.l d0-d1/d7-a0,-(sp)

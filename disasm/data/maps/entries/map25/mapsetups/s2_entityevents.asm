@@ -14,6 +14,7 @@ ms_map25_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map25_EntityEvent0:
                 
                  
@@ -24,6 +25,7 @@ Map25_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map25_EntityEvent1:
                 
@@ -38,6 +40,7 @@ Map25_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map25_EntityEvent2:
                 
                  
@@ -51,6 +54,7 @@ Map25_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map25_EntityEvent3:
                 
                  
@@ -63,6 +67,7 @@ Map25_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map25_EntityEvent4:
                 
                  
@@ -73,6 +78,7 @@ Map25_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map25_EntityEvent5:
                 
@@ -107,6 +113,7 @@ return_5D2D0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map25_EntityEvent6:
                 
                  
@@ -124,6 +131,7 @@ loc_5D2E0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 nullsub_5D2E8:
                 
                 rts
@@ -132,6 +140,7 @@ nullsub_5D2E8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map25_EntityEvent7:
                 
@@ -175,6 +184,7 @@ return_5D336:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map25_DefaultEntityEvent:
                 

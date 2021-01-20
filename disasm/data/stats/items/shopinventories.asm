@@ -1,17 +1,20 @@
 
-; ASM FILE data\stats\items\shopdefs.asm :
-; 0x20878..0x20A02 : Shop definitions
-tbl_ShopDefs:   
-; Syntax        shopDef [ITEM_]index,..[ITEM_]index
+; ASM FILE data\stats\items\shopinventories.asm :
+; 0x20878..0x20A02 : Shop inventories
+tbl_ShopInventories:
                 
-                shopDef &               ; Weapon shop 1
+; Syntax        shopInventory [ITEM_]enum,..[ITEM_]enum
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+                
+                shopInventory &         ; Weapon shop 1
                     SHORT_SWORD, &
                     SHORT_SPEAR, &
                     SHORT_AXE, &
                     WOODEN_ROD, &
                     SHORT_KNIFE
                     
-                shopDef &               ; Weapon shop 2
+                shopInventory &         ; Weapon shop 2
                     SHORT_SWORD, &
                     SHORT_SPEAR, &
                     BRONZE_LANCE, &
@@ -20,7 +23,7 @@ tbl_ShopDefs:
                     SHORT_ROD, &
                     SHORT_KNIFE
                     
-                shopDef &               ; Weapon shop 3
+                shopInventory &         ; Weapon shop 3
                     SHORT_SWORD, &
                     MIDDLE_SWORD, &
                     BRONZE_LANCE, &
@@ -31,7 +34,7 @@ tbl_ShopDefs:
                     SHORT_ROD, &
                     SHORT_KNIFE
                     
-                shopDef &               ; Weapon shop 4
+                shopInventory &         ; Weapon shop 4
                     SHORT_SWORD, &
                     MIDDLE_SWORD, &
                     BRONZE_LANCE, &
@@ -44,7 +47,7 @@ tbl_ShopDefs:
                     DAGGER, &
                     WOODEN_ARROW
                     
-                shopDef &               ; Weapon shop 5
+                shopInventory &         ; Weapon shop 5
                     MIDDLE_SWORD, &
                     LONG_SWORD, &
                     BRONZE_LANCE, &
@@ -57,7 +60,7 @@ tbl_ShopDefs:
                     DAGGER, &
                     WOODEN_ARROW
                     
-                shopDef &               ; Weapon shop 6
+                shopInventory &         ; Weapon shop 6
                     MIDDLE_SWORD, &
                     LONG_SWORD, &
                     SPEAR, &
@@ -71,7 +74,7 @@ tbl_ShopDefs:
                     WOODEN_ARROW, &
                     IRON_ARROW
                     
-                shopDef &               ; Weapon shop 7
+                shopInventory &         ; Weapon shop 7
                     LONG_SWORD, &
                     STEEL_SWORD, &
                     SPEAR, &
@@ -85,7 +88,7 @@ tbl_ShopDefs:
                     IRON_ARROW, &
                     STEEL_ARROW
                     
-                shopDef &               ; Weapon shop 8
+                shopInventory &         ; Weapon shop 8
                     BROAD_SWORD, &
                     BATTLE_AXE, &
                     POWER_SPEAR, &
@@ -93,7 +96,7 @@ tbl_ShopDefs:
                     FLAIL, &
                     LEATHER_GLOVE
                     
-                shopDef &               ; Weapon shop 9
+                shopInventory &         ; Weapon shop 9
                     BROAD_SWORD, &
                     BUSTER_SWORD, &
                     HEAVY_LANCE, &
@@ -105,7 +108,7 @@ tbl_ShopDefs:
                     LEATHER_GLOVE, &
                     POWER_GLOVE
                     
-                shopDef &               ; Weapon shop 10
+                shopInventory &         ; Weapon shop 10
                     BROAD_SWORD, &
                     BUSTER_SWORD, &
                     HEAVY_LANCE, &
@@ -117,7 +120,7 @@ tbl_ShopDefs:
                     INDRA_STAFF, &
                     POWER_GLOVE
                     
-                shopDef &               ; Weapon shop 11
+                shopInventory &         ; Weapon shop 11
                     BUSTER_SWORD, &
                     GREAT_SWORD, &
                     HEAVY_LANCE, &
@@ -129,7 +132,7 @@ tbl_ShopDefs:
                     INDRA_STAFF, &
                     POWER_GLOVE
                     
-                shopDef &               ; Weapon shop 12
+                shopInventory &         ; Weapon shop 12
                     BUSTER_SWORD, &
                     GREAT_SWORD, &
                     JAVELIN, &
@@ -143,7 +146,7 @@ tbl_ShopDefs:
                     POWER_GLOVE, &
                     BRASS_KNUCKLES
                     
-                shopDef &               ; Weapon shop 13
+                shopInventory &         ; Weapon shop 13
                     BUSTER_SWORD, &
                     GREAT_SWORD, &
                     JAVELIN, &
@@ -157,7 +160,7 @@ tbl_ShopDefs:
                     BRASS_KNUCKLES, &
                     IRON_KNUCKLES
                     
-                shopDef &               ; Weapon shop 14
+                shopInventory &         ; Weapon shop 14
                     BUSTER_SWORD, &
                     GREAT_SWORD, &
                     JAVELIN, &
@@ -171,7 +174,7 @@ tbl_ShopDefs:
                     BRASS_KNUCKLES, &
                     IRON_KNUCKLES
                     
-                shopDef &               ; Weapon shop 15
+                shopInventory &         ; Weapon shop 15
                     BUSTER_SWORD, &
                     GREAT_SWORD, &
                     JAVELIN, &
@@ -185,33 +188,25 @@ tbl_ShopDefs:
                     BRASS_KNUCKLES, &
                     IRON_KNUCKLES
                     
-                shopDef &               ; Item shop 1
+                shopInventory &         ; Item shop 1
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     ANTIDOTE, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 2
+                shopInventory &         ; Item shop 2
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     ANTIDOTE, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 3
+                shopInventory &         ; Item shop 3
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     ANTIDOTE, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 4
-                    MEDICAL_HERB, &
-                    HEALING_SEED, &
-                    HEALING_DROP, &
-                    ANTIDOTE, &
-                    FAIRY_POWDER, &
-                    ANGEL_WING
-                    
-                shopDef &               ; Item shop 5
+                shopInventory &         ; Item shop 4
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &
@@ -219,7 +214,7 @@ tbl_ShopDefs:
                     FAIRY_POWDER, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 6
+                shopInventory &         ; Item shop 5
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &
@@ -227,7 +222,7 @@ tbl_ShopDefs:
                     FAIRY_POWDER, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 7
+                shopInventory &         ; Item shop 6
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &
@@ -235,7 +230,7 @@ tbl_ShopDefs:
                     FAIRY_POWDER, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 8
+                shopInventory &         ; Item shop 7
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &
@@ -243,7 +238,7 @@ tbl_ShopDefs:
                     FAIRY_POWDER, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 9
+                shopInventory &         ; Item shop 8
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &
@@ -251,7 +246,7 @@ tbl_ShopDefs:
                     FAIRY_POWDER, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 10
+                shopInventory &         ; Item shop 9
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &
@@ -259,7 +254,7 @@ tbl_ShopDefs:
                     FAIRY_POWDER, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 11
+                shopInventory &         ; Item shop 10
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &
@@ -267,7 +262,7 @@ tbl_ShopDefs:
                     FAIRY_POWDER, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 12
+                shopInventory &         ; Item shop 11
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &
@@ -275,7 +270,7 @@ tbl_ShopDefs:
                     FAIRY_POWDER, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 13
+                shopInventory &         ; Item shop 12
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &
@@ -283,7 +278,7 @@ tbl_ShopDefs:
                     FAIRY_POWDER, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 14
+                shopInventory &         ; Item shop 13
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &
@@ -291,7 +286,15 @@ tbl_ShopDefs:
                     FAIRY_POWDER, &
                     ANGEL_WING
                     
-                shopDef &               ; Item shop 15
+                shopInventory &         ; Item shop 14
+                    MEDICAL_HERB, &
+                    HEALING_SEED, &
+                    HEALING_DROP, &
+                    ANTIDOTE, &
+                    FAIRY_POWDER, &
+                    ANGEL_WING
+                    
+                shopInventory &         ; Item shop 15
                     MEDICAL_HERB, &
                     HEALING_SEED, &
                     HEALING_DROP, &

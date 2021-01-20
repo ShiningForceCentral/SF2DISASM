@@ -8,6 +8,7 @@
 ; - clear Huffman (script) data
 ; - set starting tree
 
+
 InitDecoder:
                 
                 move.b  #$FE,(DECODED_TEXT_SYMBOL).l
@@ -19,6 +20,7 @@ InitDecoder:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 HuffmanDecode:
                 

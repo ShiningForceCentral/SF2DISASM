@@ -7,6 +7,7 @@ ms_map14_flag458_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map14_1CA_EntityEvent0:
                 
                 jsr     (MapTileset050+$3D6-ms_map14_flag458_EntityEvents)

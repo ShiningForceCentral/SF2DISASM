@@ -21,6 +21,7 @@ ms_map19_flag543_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_21F_DefaultEntityEvent:
                 
                 rts
@@ -29,6 +30,7 @@ Map19_21F_DefaultEntityEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_21F_EntityEvent9:
                 
@@ -41,6 +43,7 @@ Map19_21F_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_21F_EntityEvent0:
                 
@@ -55,6 +58,7 @@ Map19_21F_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_21F_EntityEvent1:
                 
                  
@@ -66,6 +70,7 @@ Map19_21F_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_21F_EntityEvent2:
                 
@@ -79,6 +84,7 @@ Map19_21F_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_21F_EntityEvent3:
                 
                  
@@ -90,6 +96,7 @@ Map19_21F_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_21F_EntityEvent4:
                 
@@ -103,6 +110,7 @@ Map19_21F_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_21F_EntityEvent5:
                 
                  
@@ -115,6 +123,7 @@ Map19_21F_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_21F_EntityEvent6:
                 
                  
@@ -126,6 +135,7 @@ Map19_21F_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_21F_EntityEvent7:
                 
@@ -140,6 +150,7 @@ Map19_21F_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_21F_EntityEvent8:
                 
                  
@@ -152,6 +163,7 @@ Map19_21F_EntityEvent8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_21F_EntityEvent10:
                 
                  
@@ -162,6 +174,7 @@ Map19_21F_EntityEvent10:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_21F_EntityEvent11:
                 
@@ -174,6 +187,7 @@ Map19_21F_EntityEvent11:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_21F_EntityEvent12:
                 
                  
@@ -185,6 +199,7 @@ Map19_21F_EntityEvent12:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_21F_EntityEvent13:
                 
                  
@@ -195,6 +210,7 @@ Map19_21F_EntityEvent13:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_21F_EntityEvent14:
                 

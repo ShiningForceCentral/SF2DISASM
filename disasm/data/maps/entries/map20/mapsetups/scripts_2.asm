@@ -33,5 +33,5 @@ cs_EndKiss:     hideText
                 csWait 16
                 setActscriptWait ALLY_BOWIE,eas_StopMoving
                 csWait 120
-                executeSubroutine j_EndKiss
+                executeSubroutine j_PlayEndKiss
                 csc_end

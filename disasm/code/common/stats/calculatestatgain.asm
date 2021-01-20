@@ -12,6 +12,7 @@
 ; 
 ; Out: D1 = stat gain value
 
+
 CalculateStatGain:
                 
                 tst.b   d2
@@ -21,7 +22,7 @@ CalculateStatGain:
 @EvaluateLevel:
                 
                 movem.l d0/d2-a0,-(sp)
-                movem.w d1-d5,-(sp)     ; -> backup function arguments
+                movem.w d1-d5,-(sp)     ; -> push function arguments
                 cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d5 ; If current level within projection
                 blt.s   @Continue       ;  ...keep going.
                 move.w  #$100,d0
@@ -52,14 +53,14 @@ CalculateStatGain:
                 addi.w  #$80,d4 
                 lsr.w   #8,d4
                 move.w  d4,d6           ; D6 = randomized stat gain
-                movem.w (sp)+,d1-d5     ; <- restore function arguments
+                movem.w (sp)+,d1-d5     ; D1-D5 <- pull function arguments
                 sub.w   d3,d4           ; D4 = projected growth
                 mulu.w  d4,d0
                 addi.w  #$80,d0 
                 lsr.w   #8,d0
                 add.w   d3,d0           ; D0 = expected minimum stat for current level
                 add.w   d6,d1
-                cmp.w   d0,d1           ; If new value greater than expected minimum
+                cmp.w   d0,d1           ; If new value greater than or equal to expected minimum
                 bge.s   @Done           ;  ...we're done.
                 addq.w  #1,d6           ;  Otherwise, lovingly apply "loser pity bonus."
 @Done:

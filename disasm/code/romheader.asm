@@ -10,7 +10,7 @@ p_Start:        dc.l Start              ; Start Address
                 dc.l Int_AddressError   ; Address Error
                 dc.l Int_IllegalInstruction ; Illegal instruction
                 dc.l Int_ZeroDivide     ; Zero Divide
-off_18:         dc.l Int_OtherError     ; CHK instruction
+                dc.l Int_OtherError     ; CHK instruction
                 dc.l Int_OtherError     ; TRAPV instruction
                 dc.l Int_OtherError     ; Privilege Violation
                 dc.l Int_OtherError     ; Trace
@@ -19,7 +19,7 @@ off_18:         dc.l Int_OtherError     ; CHK instruction
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
-                dc.l Int_OtherError     ; Unitialized Interrrupt
+                dc.l Int_OtherError     ; Uninitialized Interrupt
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved

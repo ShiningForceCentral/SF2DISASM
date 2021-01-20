@@ -104,8 +104,8 @@ j_PlayIntroOrEndCutscene:
                 jmp     PlayIntroOrEndCutscene(pc)
 j_ExecuteFlashScreenScript:                
                 jmp     ExecuteFlashScreenScript(pc)
-j_GetEntityPortaitAndSpeechSound:                
-                jmp     GetEntityPortaitAndSpeechSound(pc)
+j_GetEntityPortaitAndSpeechSfx:                
+                jmp     GetEntityPortaitAndSpeechSfx(pc)
 j_ClearEntities:                
                 jmp     ClearEntities(pc)
                 include "code\common\scripting\map\mapfunctions.asm"    ; Map functions
@@ -163,6 +163,7 @@ j_ClearEntities:
                 include "data\scripting\map\cs_intro4.asm"    ; Intro cutscene 4
                 include "data\scripting\map\cs_intro_stormeffect.asm"    ; Storm Effect
                 include "data\scripting\map\cs_end.asm"    ; End cutscene
+                include "data\scripting\map\debugscripts.asm"    ; Debugging scripts
                 include data\battles\entries\battlecutscenesstorage.asm
                 include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
                 include "data\maps\mapsetups.asm"    ; Map setups table

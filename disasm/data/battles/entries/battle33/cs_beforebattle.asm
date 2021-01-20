@@ -93,6 +93,7 @@ ce_4D048:       mainEntity 26,37,LEFT
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_4D078:
                 
                 cmpi.w  #$FFFF,(TEXT_NAME_INDEX_1).l

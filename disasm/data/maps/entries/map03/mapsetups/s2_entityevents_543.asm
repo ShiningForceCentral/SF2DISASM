@@ -21,6 +21,7 @@ ms_map3_flag543_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_21F_DefaultEntityEvent:
                 
                 rts
@@ -29,6 +30,7 @@ Map3_21F_DefaultEntityEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_21F_EntityEvent0:
                 
@@ -42,6 +44,7 @@ Map3_21F_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_21F_EntityEvent1:
                 
                  
@@ -54,6 +57,7 @@ Map3_21F_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_21F_EntityEvent2:
                 
                  
@@ -65,6 +69,7 @@ Map3_21F_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_21F_EntityEvent3:
                 
                  
@@ -75,6 +80,7 @@ Map3_21F_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_21F_EntityEvent4:
                 
@@ -88,6 +94,7 @@ Map3_21F_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_21F_EntityEvent5:
                 
                  
@@ -98,6 +105,7 @@ Map3_21F_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_21F_EntityEvent6:
                 
@@ -111,6 +119,7 @@ Map3_21F_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_21F_EntityEvent7:
                 
                  
@@ -121,6 +130,7 @@ Map3_21F_EntityEvent7:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_21F_EntityEvent8:
                 
@@ -134,6 +144,7 @@ Map3_21F_EntityEvent8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_21F_EntityEvent9:
                 
                  
@@ -145,6 +156,7 @@ Map3_21F_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_21F_EntityEvent10:
                 
@@ -170,6 +182,7 @@ return_627F6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_21F_EntityEvent11:
                 
                  
@@ -181,6 +194,7 @@ Map3_21F_EntityEvent11:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_21F_EntityEvent12:
                 
@@ -194,6 +208,7 @@ Map3_21F_EntityEvent12:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_21F_EntityEvent13:
                 
                  
@@ -205,6 +220,7 @@ Map3_21F_EntityEvent13:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_21F_EntityEvent14:
                 

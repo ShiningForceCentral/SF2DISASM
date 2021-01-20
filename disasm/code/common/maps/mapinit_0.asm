@@ -10,6 +10,7 @@
 ; 
 ;       Out: D0 = new map index
 
+
 CheckMapSwitch:
                 
                 movem.l d1-d2/a0,-(sp)

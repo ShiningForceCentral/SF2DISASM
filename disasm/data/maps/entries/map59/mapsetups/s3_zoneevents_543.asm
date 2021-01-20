@@ -7,6 +7,7 @@ ms_map59_flag543_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map59_21F_DefaultZoneEvent:
                 
                 rts
@@ -16,10 +17,11 @@ Map59_21F_DefaultZoneEvent:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map59_21F_ZoneEvent0:
                 
                  
-                chkFlg  543             ; Battle 43 completed
+                chkFlg  543             ; Battle 43 completed - BATTLE_VERSUS_ZEON                 
                 beq.s   return_615CC
                 script  cs_62658
 return_615CC:

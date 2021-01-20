@@ -6,6 +6,7 @@ ms_map17_flag530_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_212_DefaultItemEvent0:
                 
                 rts

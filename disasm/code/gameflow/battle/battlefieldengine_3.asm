@@ -306,10 +306,13 @@ byte_DA62:      dc.b 3
 
 ; =============== S U B R O U T I N E =======================================
 
+var_64 = -64
+var_63 = -63
+
 MakeRangeLists:
                 
                 movem.l d0-a5,-(sp)
-                link    a6,#-$40
+                link    a6,#-64
                 lea     (a6),a1
                 move.w  #$F,d5
                 move.l  #$40004000,d1
@@ -380,11 +383,11 @@ loc_DB18:
                 move.w  d0,d1
                 andi.w  #$1F,d1
                 add.w   d1,d1
-                move.w  -$40(a6,d1.w),d5
+                move.w  var_64(a6,d1.w),d5
                 btst    #$E,d5
                 bne.s   loc_DB38
-                move.b  (a3,d5.w),-$40(a6,d1.w)
-                move.b  (a2,d5.w),-$3F(a6,d1.w)
+                move.b  (a3,d5.w),var_64(a6,d1.w)
+                move.b  (a2,d5.w),var_63(a6,d1.w)
                 bra.s   loc_DAD4
 loc_DB38:
                 
@@ -402,6 +405,9 @@ loc_DB40:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+var_64 = -64
+var_63 = -63
 
 sub_DB48:
                 
@@ -429,9 +435,9 @@ loc_DB6C:
                 sub.w   d2,d1
                 andi.w  #$1F,d1
                 add.w   d1,d1
-                move.b  -$40(a6,d1.w),(a3,d5.w)
-                move.b  -$3F(a6,d1.w),(a2,d5.w)
-                move.w  d5,-$40(a6,d1.w)
+                move.b  var_64(a6,d1.w),(a3,d5.w)
+                move.b  var_63(a6,d1.w),(a2,d5.w)
+                move.w  d5,var_64(a6,d1.w)
                 rts
 loc_DB8A:
                 
@@ -447,6 +453,7 @@ loc_DB8A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 MakeBattleEntityCancelMoveString_0:
                 
                 movem.l d0-d6/a0-a5,-(sp)
@@ -458,6 +465,7 @@ MakeBattleEntityCancelMoveString_0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_DBA8:
                 
@@ -665,6 +673,7 @@ loc_DD0A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_DD10:
                 
                 movem.l d0-d6/a0-a5,-(sp)
@@ -713,6 +722,7 @@ loc_DD5A:
 
 ; unused
 
+
 AddAllToStack:
                 
                 movem.l d0-a5,-(sp)
@@ -723,6 +733,7 @@ AddAllToStack:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_makeEnemyMoveOrder:
                 
@@ -737,6 +748,7 @@ j_makeEnemyMoveOrder:
 ; =============== S U B R O U T I N E =======================================
 
 ; create enemy move order from movecost lists
+
 
 MakeEnemyMoveOrder:
                 

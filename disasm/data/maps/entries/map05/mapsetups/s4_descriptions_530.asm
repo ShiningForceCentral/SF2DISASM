@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map5_flag530_AreaDescriptions:
                 
                 move.w  #$D9C,d3        ; "A poster...{N}PULL IT!  PUSH IT!{W1}"
@@ -31,6 +32,7 @@ byte_60558:     msDesc 9, 15, 6, 0      ; "{NAME} looked at{N}the paper.{W2}{CLE
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_212_DescFunc0:
                 
                  
@@ -46,6 +48,7 @@ return_6058E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_212_DescFunc1:
                 
                  
@@ -54,7 +57,7 @@ Map5_212_DescFunc1:
                 script  cs_6060E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$1C,d0
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
@@ -67,7 +70,7 @@ byte_605C4:
                 bne.s   loc_605EE
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$1C,d0
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait

@@ -6,6 +6,7 @@
 
 ; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
 
+
 ApplyPositionsAfterEnemyLeaderDies:
                 
                 movem.l d0-d1/d7-a0,-(sp)

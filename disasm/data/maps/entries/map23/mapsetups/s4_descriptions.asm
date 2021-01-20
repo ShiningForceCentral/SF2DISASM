@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map23_AreaDescriptions:
                 
                 move.w  #$1015,d3       ; "A book...{N}AN APPLE A DAY{W1}"

@@ -3,7 +3,7 @@
 ; 0x229E2..0x229EC : Usable outside battle items
 tbl_UsableOutsideBattleItems:
                 
-; Syntax        itemIndex [ITEM_]index
+; Syntax        itemIndex [ITEM_]enum (or index)
                 
                 itemIndex ANTIDOTE
                 itemIndex FAIRY_POWDER

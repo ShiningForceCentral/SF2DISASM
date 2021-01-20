@@ -3,9 +3,11 @@
 ; 0x1B6DB0..0x1B6DDA : Random battles list, and data related to UpgradeEnemyIndex function
 RandomBattlesList:
                 
-; List of battle indexes prefixed with length
+; List of battles prefixed with length.
 ;
-; Syntax        randomBattles [BATTLE_]index,..[BATTLE_]index
+; Syntax        randomBattles [BATTLE_]enum,..[BATTLE_]enum
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 randomBattles &
                     TO_HAWEL_HOUSE, &
@@ -27,8 +29,10 @@ tbl_EnemyUpgradeDef_Melee:
 ;       2:  last upgradable enemy
 ;       3+: list of excluded enemies
 ;               
-; Syntax        upgradeRange    range, [ENEMY_]index, [ENEMY_]index
-;               excludedEnemies [ENEMY_]index,..[ENEMY_]index
+; Syntax        upgradeRange    parameter, [ENEMY_]enum, [ENEMY_]enum
+;               excludedEnemies [ENEMY_]enum,..[ENEMY_]enum
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 upgradeRange    5, OOZE, REAPER ; Regular, Centaur, Stealth, and Gunner movetypes
                 excludedEnemies KRAKEN_LEG, PAWN, KNIGHT, RAT, BURST_ROCK, ZEON_GUARD

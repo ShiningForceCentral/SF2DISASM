@@ -6,6 +6,7 @@ ms_map31_flag830_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map31_DefaultItemEvent0:
                 
                 rts

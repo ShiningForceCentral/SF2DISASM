@@ -11,10 +11,11 @@ ms_map67_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map67_ZoneEvent1:
                 
                  
-                chkFlg  520             ; Battle 20 completed
+                chkFlg  520             ; Battle 20 completed - BATTLE_HARPIES_POND                
                 bne.s   return_4FB30
                 script  cs_4FB64
 return_4FB30:
@@ -25,6 +26,7 @@ return_4FB30:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map67_ZoneEvent0:
                 
@@ -47,6 +49,7 @@ return_4FB56:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map67_DefaultZoneEvent:
                 

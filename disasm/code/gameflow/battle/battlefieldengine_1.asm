@@ -10,6 +10,7 @@
 ;         D2 = Y coord
 ;     Out: A0 = start of grid + offset
 
+
 ConvertCoordToOffset:
                 
                 move.l  d2,-(sp)
@@ -25,6 +26,7 @@ ConvertCoordToOffset:
 ; =============== S U B R O U T I N E =======================================
 
 ;     Clear valid target index grid at RAM:5600.
+
 
 ClearTargetGrid:
                 
@@ -46,6 +48,7 @@ loc_C0B8:
 ; =============== S U B R O U T I N E =======================================
 
 ;     Clear moveable tile data at RAM:4400 and RAM:4d00.
+
 
 ClearMovableGrid:
                 
@@ -73,6 +76,7 @@ loc_C0DA:
 ;         D2 = Y coord
 ;     Out: D0 = terrain at offset
 
+
 GetTargetAtCoordOffset:
                 
                 movem.l d1-a6,-(sp)
@@ -88,6 +92,7 @@ GetTargetAtCoordOffset:
 ; =============== S U B R O U T I N E =======================================
 
 ; get distance from current unit to entity D0 -> D0
+
 
 GetMoveCostToEntity:
                 
@@ -105,6 +110,7 @@ GetMoveCostToEntity:
 ; =============== S U B R O U T I N E =======================================
 
 ; get movecost to get to tile D1,D2 -> D0
+
 
 GetDestinationMoveCost:
                 
@@ -128,6 +134,7 @@ GetDestinationMoveCost:
 
 ; get terrain type of tile under entity D0 -> D0
 
+
 GetCurrentTerrainType:
                 
                 movem.l d1-a6,-(sp)
@@ -148,6 +155,7 @@ GetCurrentTerrainType:
 ;         D2 = Y coord
 ;     Out: D0 = target at offset
 
+
 GetTerrain:
                 
                 movem.l d1-a6,-(sp)
@@ -162,6 +170,7 @@ GetTerrain:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetTerrain:
                 
                 movem.l d1-a6,-(sp)
@@ -175,6 +184,7 @@ SetTerrain:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 MemorizePath:
                 
@@ -204,6 +214,7 @@ loc_C1B2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_C1BE:
                 
                 movem.l d0/d2-a6,-(sp)
@@ -224,6 +235,7 @@ sub_C1BE:
 ; In: D0 = combatant index
 ; 
 ; Out: D1 = land effect setting (0=0%, 1=15%, 2=30%)
+
 
 GetLandEffectSetting:
                 
@@ -251,6 +263,7 @@ GetLandEffectSetting:
 ;       In: D1 = X coord
 ;           D2 = Y coord
 
+
 SetMovableAtCoord:
                 
                 movem.l d0-a6,-(sp)
@@ -269,6 +282,7 @@ SetMovableAtCoord:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get combatant D0's resistance setting to spell D1 -> D2
+
 
 GetResistanceToSpell:
                 

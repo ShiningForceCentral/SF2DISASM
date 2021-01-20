@@ -8,6 +8,7 @@ ms_map5_flag530_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_212_DefaultZoneEvent:
                 
                 rts
@@ -16,6 +17,7 @@ Map5_212_DefaultZoneEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_212_ZoneEvent0:
                 
@@ -44,6 +46,7 @@ return_60500:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_212_ZoneEvent1:
                 
                  
@@ -64,6 +67,7 @@ return_6051C:
 ; =============== S U B R O U T I N E =======================================
 
 ; unused descriptions which look similar to the default ones for map 5
+
 
 sub_6051E:
                 

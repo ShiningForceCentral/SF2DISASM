@@ -6,6 +6,7 @@
 
 ; cutscene before the battle begins
 
+
 j_ExecuteBattleCutscene_Intro_0:
                 
                 movem.l d1,-(sp)

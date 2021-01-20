@@ -10,6 +10,7 @@ ms_map18_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map18_EntityEvent0:
                 
                  
@@ -30,6 +31,7 @@ Map18_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map18_EntityEvent1:
                 
                  
@@ -41,6 +43,7 @@ Map18_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map18_EntityEvent2:
                 
@@ -54,6 +57,7 @@ Map18_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map18_EntityEvent3:
                 
                  
@@ -65,6 +69,7 @@ Map18_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map18_DefaultEntityEvent:
                 

@@ -13,6 +13,7 @@ ms_map33_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map33_DefaultEntityEvent:
                 
                 rts
@@ -21,6 +22,7 @@ Map33_DefaultEntityEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map33_EntityEvent0:
                 
@@ -64,6 +66,7 @@ return_5A7D0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map33_EntityEvent1:
                 
                  
@@ -85,6 +88,7 @@ return_5A7EE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map33_EntityEvent2:
                 
@@ -124,6 +128,7 @@ cs_5A828:       setBlocks 17,13,1,1,9,5
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map33_EntityEvent3:
                 
                  
@@ -149,6 +154,7 @@ return_5A862:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map33_EntityEvent4:
                 
                  
@@ -173,6 +179,7 @@ return_5A884:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map33_EntityEvent5:
                 
@@ -200,6 +207,7 @@ return_5A8A6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map33_EntityEvent6:
                 

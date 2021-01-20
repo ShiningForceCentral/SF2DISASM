@@ -7,6 +7,7 @@
 ; In: D0 = map index
 ;     D1 = battle index
 
+
 BattleLoop:
                 
                 clr.b   ((PLAYER_TYPE-$1000000)).w
@@ -39,7 +40,7 @@ BattleLoop:
                 cmpi.w  #$69,d1 
                 ble.s   @ClearBattleRegionFlags
                 
-                bsr.w   HealAliveCharactersAndImmortals
+                bsr.w   HealLivingAndImmortalAllies
                 jsr     j_InitAllAlliesBattlePositions
                 jsr     j_InitAllEnemiesBattlePositions
                 jsr     j_ClearEnemyMoveInfo
@@ -56,10 +57,10 @@ BattleLoop:
 @SpawnEnemies:
                 
                 jsr     j_GetListOfSpawningEnemies
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 beq.s   @DetermineTurnOrder
                 subq.w  #1,d7
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                lea     ((TARGETS_LIST-$1000000)).w,a0
 @SpawnEnemies_Loop:
                 
                 clr.w   d0
@@ -77,7 +78,7 @@ BattleLoop:
                 move.b  (a0,d0.w),d0
                 cmpi.b  #CODE_TERMINATOR_BYTE,d0
                 beq.s   @Start          
-                bsr.w   sub_23EB0       
+                bsr.w   ExecuteIndividualTurn
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.s   @Continue2
                 cmpi.b  #INPUT_UP|INPUT_B|INPUT_C|INPUT_A,((P1_INPUT-$1000000)).w
@@ -113,6 +114,7 @@ BattleLoop:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 KillRemainingEnemies:
                 
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
@@ -145,7 +147,8 @@ KillRemainingEnemies:
 
 ; =============== S U B R O U T I N E =======================================
 
-HealAliveCharactersAndImmortals:
+
+HealLivingAndImmortalAllies:
                 
                 movem.l d0-d7,-(sp)
                 clr.w   d0
@@ -158,7 +161,7 @@ HealAliveCharactersAndImmortals:
                 beq.w   @Immortal       ; always heal if character is immortal
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                beq.s   @Dead           ; skip healing if character is not alive
+                beq.s   @Dead           ; skip healing if character is dead
 @Immortal:
                 
                 jsr     j_GetMaxHP
@@ -174,15 +177,17 @@ HealAliveCharactersAndImmortals:
                 
                 addq.w  #1,d0
                 dbf     d7,@Loop        
+                
                 movem.l (sp)+,d0-d7
                 rts
 
-    ; End of function HealAliveCharactersAndImmortals
+    ; End of function HealLivingAndImmortalAllies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Get number of allies living, number of enemies living -> D2, D3
+
 
 GetRemainingCombatants:
                 
@@ -234,9 +239,10 @@ GetRemainingCombatants:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 BattleLoop_Victory:
                 
-                bsr.w   HealAliveCharactersAndImmortals
+                bsr.w   HealLivingAndImmortalAllies
                 cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
                                                         ; HARDCODED Battle check for fairy woods
                 bne.s   @Continue
@@ -279,9 +285,10 @@ BattleLoop_Victory:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 BattleLoop_Defeat:
                 
-                bsr.w   sub_23E1A
+                bsr.w   UpdateBattleUnlockedFlag
                 clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_SAD_THEME_2
                 txt     363             ; "{LEADER} is exhausted.{W1}"
@@ -295,11 +302,13 @@ BattleLoop_Defeat:
                 jsr     GetEgressPositionForBattle(pc)
                 nop
                 moveq   #$FFFFFFFF,d4
+                
+                ; Losable battles
                 cmpi.b  #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS,((CURRENT_BATTLE-$1000000)).w 
                                                         ; HARDCODED battle 4 upgrade
                 bne.s   @Return
-                clrFlg  404             ; Battle 4 unlocked
-                setFlg  504             ; Battle 4 completed
+                clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
+                setFlg  504             ; Battle 4 completed - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS   
                 jsr     j_UpgradeBattle
                 moveq   #$11,d0
                 clr.w   d4
@@ -312,27 +321,37 @@ BattleLoop_Defeat:
 
 ; =============== S U B R O U T I N E =======================================
 
-; battlefield spell/item use
+itemOrSpellIndex = -4
+combatant = -2
 
-sub_23D98:
+BattleAction_UseAngelWing:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 move.w  ((BATTLESCENE_ACTION_ITEMSLOT-$1000000)).w,d1
                 jsr     j_RemoveItemBySlot
                 bsr.w   HideBattlefieldWindows
-                move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
                 andi.w  #ITEMENTRY_MASK_INDEX,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     275             ; "{NAME} used{N}{ITEM}!"
                 bra.w   byte_23DFA
-loc_23DC4:
+
+    ; End of function BattleAction_UseAngelWing
+
+
+; =============== S U B R O U T I N E =======================================
+
+itemOrSpellIndex = -4
+combatant = -2
+
+BattleAction_CastEgress:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 jsr     j_GetSpellCost
                 jsr     j_DecreaseCurrentMP
                 bsr.w   HideBattlefieldWindows
-                move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
                 andi.w  #SPELLENTRY_MASK_INDEX,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.l  #1,((TEXT_NUMBER-$1000000)).w
@@ -342,42 +361,44 @@ byte_23DFA:
                 sndCom  SFX_SPELL_CAST
                 jsr     j_ExecuteFlashScreenScript
                 clsTxt
-                bsr.w   sub_23E1A
+                bsr.w   UpdateBattleUnlockedFlag
                 unlk    a6
                 movem.l (sp)+,d0
                 bsr.w   GetEgressPositionForBattle
                 clr.w   d4
                 rts
 
-    ; End of function sub_23D98
+    ; End of function BattleAction_CastEgress
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_23E1A:
+
+UpdateBattleUnlockedFlag:
                 
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
                 addi.w  #$1F4,d1
-                jsr     j_CheckFlag
+                jsr     j_CheckFlag     ; Check whether current battle is marked as completed
                 beq.s   @Return
                 subi.w  #$64,d1 
-                jsr     j_ClearFlag
+                jsr     j_ClearFlag     ; ...and if so, mark it as "locked".
 @Return:
                 
                 rts
 
-    ; End of function sub_23E1A
+    ; End of function UpdateBattleUnlockedFlag
 
 
 ; =============== S U B R O U T I N E =======================================
 
+
 HideBattlefieldWindows:
                 
                 jsr     j_HideLandEffectWindow
-                jsr     j_HideFighterMiniStatusWindow
-                clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
-                jsr     j_HideFighterMiniStatusWindow
+                jsr     j_HideMiniStatusWindow
+                clr.b   ((IS_TARGETING-$1000000)).w
+                jsr     j_HideMiniStatusWindow
                 rts
 
     ; End of function HideBattlefieldWindows
@@ -387,18 +408,19 @@ HideBattlefieldWindows:
 
 ; HARDCODED special cases
 
+
 GetEgressPositionForBattle:
                 
                 clr.b   d7
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d7
                 cmpi.b  #BATTLE_VERSUS_GESHP,d7
                 bne.s   loc_23E60
-                clrFlg  438             ; Battle 38 unlocked
+                clrFlg  438             ; Battle 38 unlocked - BATTLE_VERSUS_GESHP              
 loc_23E60:
                 
                 cmpi.b  #BATTLE_TO_ANCIENT_SHRINE,d7
                 bne.s   loc_23E6A
-                clrFlg  439             ; Battle 39 unlocked
+                clrFlg  439             ; Battle 39 unlocked - BATTLE_TO_ANCIENT_SHRINE         
 loc_23E6A:
                 
                 cmpi.b  #BATTLE_VERSUS_KRAKEN,d7
@@ -444,20 +466,23 @@ loc_23EAA:
 
 ; In: D0 = combatant index
 
-sub_23EB0:
+itemOrSpellIndex = -4
+combatant = -2
+
+ExecuteIndividualTurn:
                 
                 jsr     (sub_4ED8).w
                 clr.w   ((SPEECH_SFX-$1000000)).w
-                link    a6,#-$10
-                andi.w  #$FF,d0
-                move.w  d0,-2(a6)
+                link    a6,#-16
+                andi.w  #COMBATANT_MASK_ALL,d0
+                move.w  d0,combatant(a6)
 @Start:
                 
                 bsr.w   ClearDeadCombatantsListLength
                 cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w 
                                                         ; HARDCODED battle index
                 bne.s   @Continue1
-                tst.w   -2(a6)
+                tst.w   combatant(a6)
                 bne.s   @Continue1
                 clrFlg  112             ; Currently attacking Taros with Achilles Sword
 @Continue1:
@@ -465,7 +490,7 @@ sub_23EB0:
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.w   @Done
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetXPos
                 move.w  d1,((word_FFB08E-$1000000)).w
                 move.w  d1,((word_FFB094-$1000000)).w
@@ -473,12 +498,12 @@ sub_23EB0:
                 move.w  d1,((word_FFB090-$1000000)).w
                 move.w  d1,((word_FFB092-$1000000)).w
                 clr.b   ((word_FFAF8E-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   SetUnitCursorDestinationToNextCombatant
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_MUDDLE,d1
                 bne.w   @AutoControl1   
@@ -504,23 +529,23 @@ sub_23EB0:
                 
                 bsr.w   WaitForUnitCursor ; player controlled unit (normal force member, enemy with control opponent cheat)
                 jsr     (WaitForViewScrollEnd).w
-                clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
-                move.w  -2(a6),d0
+                clr.b   ((IS_TARGETING-$1000000)).w
+                move.w  combatant(a6),d0
                 move.w  d0,((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w
-                jsr     j_CreateFighterMiniStatusWindow
+                jsr     j_CreateBattlefieldMiniStatusWindow
                 jsr     j_CreateLandEffectWindow
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GenerateTargetRangeLists
                 bsr.w   CreateMoveableRangeForUnit
                 bsr.w   HideUnitCursor
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_SLEEP,d1
                 bne.w   @NoAction
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_STUN,d1
                 bne.w   @NoAction
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_MUDDLE,d1
                 bne.w   @AutoControl2
@@ -540,43 +565,43 @@ sub_23EB0:
                 
                 bsr.w   sub_24662
                 cmpi.w  #$FFFF,d0
-                bne.w   @CheckCastSpell
+                bne.w   @CheckBattleAction_CastEgress
                 jsr     (WaitForViewScrollEnd).w
-                move.w  -2(a6),d0
-                clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
+                move.w  combatant(a6),d0
+                clr.b   ((IS_TARGETING-$1000000)).w
                 jsr     j_HideLandEffectWindow
-                jsr     j_HideFighterMiniStatusWindow
-                move.w  -2(a6),d0
+                jsr     j_HideMiniStatusWindow
+                move.w  combatant(a6),d0
                 bsr.w   SetEntityBlinkingFlag
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
                 moveq   #3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).l
                 bsr.w   BattlefieldMenuActions
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   ClearEntityBlinkingFlag
                 bra.w   @Start
 @AutoControl2:
                 
                 bsr.w   sub_252FA       
-@CheckCastSpell:
+@CheckBattleAction_CastEgress:
                 
                 cmpi.w  #BATTLEACTION_CAST_SPELL,((BATTLESCENE_ACTION_TYPE-$1000000)).w
-                bne.s   @CheckUseItem
+                bne.s   @CheckBattleAction_UseAngelWing
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 cmpi.w  #SPELL_EGRESS,d0
-                beq.w   loc_23DC4
-@CheckUseItem:
+                beq.w   BattleAction_CastEgress
+@CheckBattleAction_UseAngelWing:
                 
                 cmpi.w  #BATTLEACTION_USE_ITEM,((BATTLESCENE_ACTION_TYPE-$1000000)).w
                 bne.s   @CheckBattleAction3
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.w  #ITEM_ANGEL_WING,d0
-                beq.w   sub_23D98       
+                beq.w   BattleAction_UseAngelWing
 @CheckBattleAction3:
                 
                 cmpi.w  #BATTLEACTION_3,((BATTLESCENE_ACTION_TYPE-$1000000)).w
@@ -585,11 +610,11 @@ sub_23EB0:
                 bne.w   @KiwiFlameBreath
                 clr.w   ((BATTLESCENE_ACTION_TYPE-$1000000)).w
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d0
-                move.w  -2(a6),((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w
-                move.w  d0,-2(a6)
+                move.w  combatant(a6),((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w
+                move.w  d0,combatant(a6)
 @KiwiFlameBreath:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetClass
                 cmpi.w  #CLASS_MNST,d1  ; HARDCODED class test : MNST (Monster, for Kiwi)
                 bne.s   @CheckFairyWoodsBattle
@@ -631,11 +656,11 @@ sub_23EB0:
                 
                 jsr     (WaitForVInt).w
                 jsr     (WaitForVInt).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_WriteBattlesceneScript
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 
-                ; Get battle scene music index
+                ; Get battlescene music index
                 tst.b   d0
                 blt.s   @EnemyMusic     
                 jsr     j_GetClass
@@ -709,14 +734,14 @@ sub_23EB0:
                 move.b  ((BATTLESCENE_FIRST_ENEMY-$1000000)).w,d0
                 cmpi.b  #$FF,d0
                 bne.s   @GetFirstBattlesceneAlly
-                move.w  #$FFFF,d0       ; D0 = battle scene enemy
+                move.w  #$FFFF,d0       ; D0 = battlescene enemy
 @GetFirstBattlesceneAlly:
                 
                 clr.w   d1
                 move.b  ((BATTLESCENE_FIRST_ALLY-$1000000)).w,d1
                 cmpi.b  #$FF,d1
                 bne.s   @InitBattlescene
-                move.w  #$FFFF,d1       ; D1 = battle scene ally
+                move.w  #$FFFF,d1       ; D1 = battlescene ally
 @InitBattlescene:
                 
                 movem.l a6,-(sp)
@@ -728,7 +753,7 @@ sub_23EB0:
                 movem.l (sp)+,a6
                 movem.l a6,-(sp)
                 clr.w   d0
-                move.w  -4(a6),d0
+                move.w  itemOrSpellIndex(a6),d0
                 jsr     LoadBattle(pc)  
                 nop
                 jsr     (WaitForVInt).w
@@ -740,36 +765,40 @@ sub_23EB0:
                 
                 jsr     (WaitForViewScrollEnd).w
                 jsr     (WaitForVInt).w
-                clr.b   ((FIGHTER_IS_TARGETTING-$1000000)).w
-                move.w  -2(a6),d0
+                clr.b   ((IS_TARGETING-$1000000)).w
+                move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
                 moveq   #3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).l
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_HideLandEffectWindow
-                jsr     j_HideFighterMiniStatusWindow
+                jsr     j_HideMiniStatusWindow
 @Done:
                 
                 unlk    a6
                 rts
 
-    ; End of function sub_23EB0
+    ; End of function ExecuteIndividualTurn
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Handle after-turn effects (status effects, HP/MP regen/degen, etc)
+; 
+;       In: D0 = combatant index
+
+combatant = -2
 
 HandleAfterTurnEffects:
                 
                 bsr.w   ClearDeadCombatantsListLength
-                link    a6,#-$10
-                move.w  d0,-2(a6)
+                link    a6,#-16
+                move.w  d0,combatant(a6)
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                beq.w   @Skip           ; skip all this if character died
+                beq.w   @Skip           ; skip everything if combatant died
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 jsr     j_GetStatusEffects
                 move.w  d1,d2
@@ -979,6 +1008,8 @@ HandleAfterTurnEffects:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_2 = -2
+
 SpawnEnemySkipCamera:
                 
                 moveq   #1,d1
@@ -989,18 +1020,18 @@ SpawnEnemy:
 loc_24492:
                 
                 movem.l d7-a0,-(sp)
-                link    a6,#-$10
+                link    a6,#-16
                 move.w  d1,-(sp)
-                move.w  d0,-2(a6)
-                move.w  -2(a6),d0
+                move.w  d0,var_2(a6)
+                move.w  var_2(a6),d0
                 jsr     sub_440B8
                 move.w  (sp)+,d1
                 bne.s   loc_244D2
                 clr.b   ((word_FFAF8E-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  var_2(a6),d0
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  var_2(a6),d0
                 bsr.w   SetUnitCursorDestinationToNextCombatant
                 bsr.w   WaitForUnitCursor
                 jsr     (WaitForViewScrollEnd).w
@@ -1010,7 +1041,7 @@ loc_244D2:
                 moveq   #$B,d7
 loc_244D4:
                 
-                move.w  -2(a6),d0
+                move.w  var_2(a6),d0
                 bsr.w   GetEntityIndexForCombatant
                 move.w  d7,d1
                 addq.w  #3,d1
@@ -1022,7 +1053,7 @@ loc_244D4:
                 jsr     (Sleep).w       
                 dbf     d7,loc_244D4
                 sndCom  SFX_SPAWN
-                move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     397             ; "{CLEAR}{NAME} appeared!{D3}"
                 clsTxt
                 unlk    a6
@@ -1034,6 +1065,7 @@ loc_244D4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ClearDeadCombatantsListLength:
                 
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
@@ -1043,6 +1075,7 @@ ClearDeadCombatantsListLength:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 HandleKilledCombatants:
                 
@@ -1156,19 +1189,22 @@ return_24640:
 
 ; In: D0 = combatant index
 
+itemOrSpellIndex = -4
+combatant = -2
+
 UpdateTargetListForCombatant:
                 
                 movem.w d0,-(sp)
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 tst.b   d0
                 movem.w (sp)+,d0
-                blt.s   loc_2465A
+                blt.s   @Enemy
                 jsr     j_UpdateTargetListEnemies
-                bra.s   return_24660
-loc_2465A:
+                bra.s   @Return
+@Enemy:
                 
                 jsr     j_UpdateTargetListAllies
-return_24660:
+@Return:
                 
                 rts
 
@@ -1177,17 +1213,20 @@ return_24660:
 
 ; =============== S U B R O U T I N E =======================================
 
+itemOrSpellIndex = -4
+combatant = -2
+
 sub_24662:
                 
                 movem.l d1-a6,-(sp)
-                move.w  -2(a6),((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w
+                move.w  combatant(a6),((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w
 loc_2466C:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   ClearEntityBlinkingFlag
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   SetMoveSfx
                 bsr.w   ControlBattleUnit
                 jsr     (WaitForViewScrollEnd).w
@@ -1208,7 +1247,7 @@ loc_2466C:
                 jsr     UpdateTargetListForCombatant(pc)
                 movem.w (sp)+,d0-d1
                 jsr     MakeBattleEntityCancelMoveString
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 lea     (BATTLE_ENTITY_MOVE_STRING).l,a0
                 bsr.w   MoveBattleEntityByMoveString
                 move.w  #$FFFF,((BATTLESCENE_ACTION_TYPE-$1000000)).w
@@ -1220,7 +1259,7 @@ loc_246EC:
                 moveq   #COMBATANTS_ALL_COUNTER,d7
 loc_246F0:
                 
-                cmp.w   -2(a6),d0       ; check if chosen position is inhabited already (for debug mode B-button trick)
+                cmp.w   combatant(a6),d0 ; check if chosen position is inhabited already (for debug mode B-button trick)
                 beq.w   loc_24718
                 jsr     j_GetXPos
                 cmp.w   d1,d2
@@ -1239,9 +1278,9 @@ loc_24718:
 loc_24724:
                 
                 dbf     d7,loc_246F0    
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   SetEntityBlinkingFlag
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 move.w  d2,d1
                 jsr     j_SetXPos
                 move.w  d3,d1
@@ -1252,22 +1291,22 @@ loc_24746:
                 move.w  d1,-(sp)
                 jsr     ClearFadingBlockRange
                 jsr     (WaitForVInt).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 jsr     (CheckChestItem).w
                 move.w  d2,((byte_FFB180-$1000000)).w
                 cmpi.w  #$FFFF,d2
                 bne.s   loc_2476C       ; if d2 != FFFF, then there is an item
-                moveq   #1,d2           ; Battle menu with STAY option
+                moveq   #MENU_BATTLE_WITH_STAY,d2 ; Battle menu with STAY option
                 bra.s   loc_2476E
 loc_2476C:
                 
-                moveq   #2,d2           ; Battle menu with SEARCH option
+                moveq   #MENU_BATTLE_WITH_SEARCH,d2 ; Battle menu with SEARCH option
 loc_2476E:
                 
-                move.w  -2(a6),d0
-                jsr     j_sub_C404
-                tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                move.w  combatant(a6),d0
+                jsr     sub_8210
+                tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.s   loc_24782
                 moveq   #3,d0
                 bra.s   loc_24784
@@ -1282,12 +1321,12 @@ loc_24784:
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_247C6
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 move.w  ((word_FFB08E-$1000000)).w,d1
                 jsr     j_SetXPos
                 move.w  ((word_FFB090-$1000000)).w,d1
                 jsr     j_SetYPos
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GenerateTargetRangeLists
                 bsr.w   CreateMoveableRangeForUnit
                 bra.w   loc_2466C
@@ -1295,10 +1334,10 @@ loc_247C6:
                 
                 tst.w   d0
                 bne.w   loc_2483C
-                move.w  -2(a6),d0
-                jsr     j_sub_C404
+                move.w  combatant(a6),d0
+                jsr     sub_8210
                 bsr.w   CreateMoveableRangeForUnit
-                tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.w   loc_247F0
                 txt     435             ; "No opponent there.{W1}"
                 clsTxt
@@ -1307,24 +1346,24 @@ loc_247C6:
 loc_247F0:
                 
                 clr.b   ((word_FFAF8E-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_2482A
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetXPos
                 move.w  d1,d2
                 jsr     j_GetYPos
                 move.w  d1,d3
                 clr.b   ((word_FFAF8E-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
                 bra.w   loc_24746
 loc_2482A:
                 
                 move.w  d0,((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w
-                move.w  d0,-4(a6)
+                move.w  d0,itemOrSpellIndex(a6)
                 clr.w   ((BATTLESCENE_ACTION_TYPE-$1000000)).w
                 clr.w   d0
                 bra.w   loc_25188
@@ -1332,7 +1371,7 @@ loc_2483C:
                 
                 cmpi.w  #1,d0
                 bne.w   loc_24982
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 clr.w   d1
                 jsr     j_GetSpellAndNumberOfSpells
                 tst.w   d2
@@ -1346,7 +1385,7 @@ loc_24864:
                 clr.w   d1
 loc_24866:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   HideUnitCursor
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
@@ -1366,7 +1405,7 @@ loc_24866:
                 clr.w   d0
                 lea     sub_24966(pc), a0
                 nop
-                jsr     sub_10010
+                jsr     j_ExecuteMagicMenu
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_248BA
                 moveq   #$FFFFFFFF,d1
@@ -1375,7 +1414,7 @@ loc_248BA:
                 
                 move.w  d0,((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w
                 move.w  d0,d4
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetCurrentMP
                 move.w  d1,d3
                 move.w  d4,d1
@@ -1389,10 +1428,10 @@ loc_248BA:
 loc_248E6:
                 
                 move.w  d4,d1
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_CreateSpellRangeGrid
                 bsr.w   CreateMoveableRangeForUnit
-                tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.w   loc_2490C
                 txt     435             ; "No opponent there.{W1}"
                 clsTxt
@@ -1406,20 +1445,20 @@ loc_2490C:
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24952
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetXPos
                 move.w  d1,((word_FFB094-$1000000)).w
                 jsr     j_GetYPos
                 move.w  d1,((word_FFB092-$1000000)).w
                 clr.b   ((word_FFAF8E-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
                 bra.w   loc_24866
 loc_24952:
                 
                 move.w  d0,((word_FFB632-$1000000)).w
-                move.w  d0,-4(a6)
+                move.w  d0,itemOrSpellIndex(a6)
                 move.w  #1,((BATTLESCENE_ACTION_TYPE-$1000000)).w
                 clr.w   d0
                 bra.w   loc_25188
@@ -1430,6 +1469,7 @@ loc_24952:
 ; =============== S U B R O U T I N E =======================================
 
 ;     createSpellRangeGridMaster ?
+
 
 sub_24966:
                 
@@ -1450,9 +1490,9 @@ loc_24982:
                 
                 cmpi.w  #2,d0
                 bne.w   loc_25072
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 tst.w   d2
                 bne.w   loc_249A8
                 txt     438             ; "You have no item.{W1}"
@@ -1478,28 +1518,28 @@ loc_249C6:
                 clr.w   d1
 loc_249CE:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   HideUnitCursor
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 clr.w   d0
                 clr.w   d1
                 lea     loc_24ADC(pc), a0
                 nop
-                jsr     sub_10004
+                jsr     j_ExecuteItemMenu
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24A24
                 bsr.w   ClearFadingBlockRange
@@ -1509,7 +1549,7 @@ loc_24A24:
                 move.w  d0,((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w
                 move.w  d1,((BATTLESCENE_ACTION_ITEMSLOT-$1000000)).w
                 move.w  d0,d1
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_IsItemUsableWeaponInBattle
                 bcs.w   loc_24A4A
                 txt     439             ; "It has no effect.{W1}"
@@ -1519,10 +1559,10 @@ loc_24A24:
 loc_24A4A:
                 
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_CreateItemRangeGrid
                 bsr.w   CreateMoveableRangeForUnit
-                tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.w   loc_24A72
                 txt     439             ; "It has no effect.{W1}"
                 clsTxt
@@ -1539,13 +1579,13 @@ loc_24A72:
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24AC8
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetXPos
                 move.w  d1,((word_FFB094-$1000000)).w
                 jsr     j_GetYPos
                 move.w  d1,((word_FFB092-$1000000)).w
                 clr.b   ((word_FFAF8E-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
                 bra.w   loc_24746
@@ -1553,7 +1593,7 @@ loc_24A72:
 loc_24AC8:
                 
                 move.w  d0,((word_FFB632-$1000000)).w
-                move.w  d0,-4(a6)
+                move.w  d0,itemOrSpellIndex(a6)
                 move.w  #BATTLEACTION_USE_ITEM,((BATTLESCENE_ACTION_TYPE-$1000000)).w
                 clr.w   d0
                 bra.w   loc_25188
@@ -1578,7 +1618,7 @@ loc_24B06:
                 
                 cmpi.w  #2,d0
                 bne.w   loc_24D64
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetEquippableWeapons
                 move.w  d1,d2
                 jsr     j_GetEquippableRings
@@ -1591,15 +1631,15 @@ loc_24B06:
 loc_24B34:
                 
                 bsr.w   HideUnitCursor
-                jsr     sub_1005C
+                jsr     j_CreateBattleEquipWindow
                 clr.w   d6
 loc_24B40:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetEquippableWeapons
                 tst.w   d1
                 beq.w   loc_24BBE
-                movea.l a0,a2
+                movea.l a0,a2           ; A0, A2 = pointer to equippable items list
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a1
                 move.w  (a0),(a1)+
                 move.w  4(a0),(a1)+
@@ -1608,7 +1648,7 @@ loc_24B40:
                 move.w  d1,d3
                 jsr     j_GetEquippedWeapon
                 move.w  d2,-(sp)
-                bsr.w   sub_24C4E
+                bsr.w   sub_24C4E       
                 jsr     j_GetEquippedWeapon
                 move.w  d2,d1
                 jsr     j_UnequipItemBySlot
@@ -1632,7 +1672,7 @@ loc_24BA0:
                 move.w  d2,d5
                 move.w  d1,d4
                 jsr     j_GetEquippedWeapon
-                bsr.w   loc_24C94
+                bsr.w   EquipNewItemInBattle
                 clr.w   d6
 loc_24BBE:
                 
@@ -1648,7 +1688,7 @@ loc_24BBE:
                 move.w  d1,d3
                 jsr     j_GetEquippedRing
                 move.w  d2,-(sp)
-                bsr.w   sub_24C4E
+                bsr.w   sub_24C4E       
                 jsr     j_GetEquippedRing
                 move.w  d2,d1
                 jsr     j_UnequipItemBySlot
@@ -1678,11 +1718,11 @@ loc_24C26:
                 move.w  d2,d5
                 move.w  d1,d4
                 jsr     j_GetEquippedRing
-                bsr.w   loc_24C94
+                bsr.w   EquipNewItemInBattle
                 clr.w   d1
 loc_24C44:
                 
-                jsr     sub_10064
+                jsr     j_HideBattleEquipWindow
                 bra.w   loc_24746
 
 ; END OF FUNCTION CHUNK FOR sub_24662
@@ -1690,79 +1730,104 @@ loc_24C44:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: A0 = pointer to equippable items list
+;     D1 = old item index
+;     D2 = old item slot
+;     D3 = equippable items count
+
+
 sub_24C4E:
                 
                 move.w  d0,-(sp)
                 tst.w   d1
-                bpl.s   loc_24C68
-                cmpi.w  #4,d3
-                bne.s   loc_24C64
+                bpl.s   @GetMenuInitialChoice ; branch if something equipped
+                cmpi.w  #COMBATANT_ITEMSLOTS,d3
+                bne.s   @DefaultToUnarmed
+                
+                ; Equip first item if inventory is full with equippable items
                 clr.w   d1
                 jsr     j_EquipItemBySlot
-                bra.s   loc_24C66
-loc_24C64:
+                bra.s   @GoToExecuteMenu
+@DefaultToUnarmed:
                 
-                moveq   #3,d1
-loc_24C66:
+                moveq   #3,d1           ; set menu initial choice to down slot
+@GoToExecuteMenu:
                 
-                bra.s   loc_24C7C
-loc_24C68:
+                bra.s   @ExecuteMenu
+@GetMenuInitialChoice:
                 
                 move.l  a0,-(sp)
-                moveq   #3,d7
+                moveq   #COMBATANT_ITEMSLOTS_COUNTER,d7
                 moveq   #$FFFFFFFF,d1
-loc_24C6E:
+@Loop:
                 
                 addq.w  #1,d1
                 addq.l  #2,a0
                 move.w  (a0)+,d4
                 cmp.w   d2,d4
-                dbeq    d7,loc_24C6E
+                dbeq    d7,@Loop
                 movea.l (sp)+,a0
-loc_24C7C:
+@ExecuteMenu:
                 
                 move.b  d1,d0
-                lea     loc_24CF6(pc), a0
+                lea     sub_24CF6(pc), a0
                 nop
                 move.w  d6,d1
                 move.w  d1,-(sp)
-                jsr     sub_10004
+                jsr     j_ExecuteItemMenu
                 move.w  (sp)+,d1
                 move.w  (sp)+,d0
                 rts
-loc_24C94:
+
+    ; End of function sub_24C4E
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: D2 = old item slot
+;     D4 = new item slot
+
+
+EquipNewItemInBattle:
                 
                 cmpi.w  #4,d2
-                beq.w   loc_24CC4
+                beq.w   @Equip
                 move.w  d2,d1
                 jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
-                bne.w   loc_24CC4
+                bne.w   @Equip          ; equip new item if not cursed
                 cmp.w   d4,d1
-                beq.w   return_24CF4
-                jsr     sub_10064
+                beq.w   @Return         ; return if selecting old item slot
+                jsr     j_HideBattleEquipWindow
                 sndCom  MUSIC_CURSED_ITEM
                 txt     43              ; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
-                bra.w   loc_24CE6
-loc_24CC4:
+                bra.w   @Continue
+@Equip:
                 
                 move.w  d4,d1
                 jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
-                bne.w   return_24CF4
-                jsr     sub_10064
+                bne.w   @Return         ; return if not cursed
+                jsr     j_HideBattleEquipWindow
                 sndCom  MUSIC_CURSED_ITEM
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     34              ; "Gosh!  {NAME} is{N}cursed!{W2}"
-loc_24CE6:
+@Continue:
                 
                 bsr.w   FadeOut_WaitForP1Input
                 clsTxt
-                jsr     sub_1005C
-return_24CF4:
+                jsr     j_CreateBattleEquipWindow
+@Return:
                 
                 rts
-loc_24CF6:
+
+    ; End of function EquipNewItemInBattle
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+sub_24CF6:
                 
                 movem.l d0-a6,-(sp)
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
@@ -1786,13 +1851,13 @@ loc_24D2E:
 loc_24D34:
                 
                 move.w  d6,d1
-                cmpi.w  #4,d1
+                cmpi.w  #COMBATANT_ITEMSLOTS,d1
                 bge.s   loc_24D42
                 jsr     j_EquipItemBySlot
 loc_24D42:
                 
                 jsr     sub_10060
-                jsr     j_sub_C404
+                jsr     sub_8210
                 bsr.w   CreateMoveableRangeForUnit
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 move.w  (sp)+,d1
@@ -1800,7 +1865,7 @@ loc_24D42:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_24C4E
+    ; End of function sub_24CF6
 
 
 ; START OF FUNCTION CHUNK FOR sub_24662
@@ -1811,27 +1876,27 @@ loc_24D64:
                 bne.w   loc_24F6E
 loc_24D6C:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   HideUnitCursor
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
-                move.w  -2(a6),d0
-                jsr     j_sub_C4E8
+                move.w  combatant(a6),d0
+                jsr     sub_821C
                 bsr.w   CreateMoveableRangeForUnit
-                tst.w   ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w
+                tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.w   loc_24DCC
                 txt     435             ; "No opponent there.{W1}"
                 clsTxt
@@ -1844,7 +1909,7 @@ loc_24DCC:
                 jsr     (WaitForVInt).w
                 clr.w   d0
                 lea     (InitStack).w,a0
-                jsr     sub_10004
+                jsr     j_ExecuteItemMenu
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24DF0
                 bsr.w   ClearFadingBlockRange
@@ -1868,54 +1933,54 @@ loc_24DF0:
 loc_24E26:
                 
                 clr.b   ((word_FFAF8E-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24E4C
                 clr.b   ((word_FFAF8E-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
                 bra.w   loc_24D6C
 loc_24E4C:
                 
-                move.w  d0,-4(a6)
-                jsr     j_HideFighterMiniStatusWindow
+                move.w  d0,itemOrSpellIndex(a6)
+                jsr     j_HideMiniStatusWindow
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 cmpi.w  #4,d2
                 beq.w   loc_24E8E
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 andi.w  #7,d1
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_RemoveItemBySlot
-                move.w  -4(a6),d0
+                move.w  itemOrSpellIndex(a6),d0
                 move.w  ((BATTLESCENE_ACTION_ITEMSLOT-$1000000)).w,d1
                 bclr    #7,d1
                 jsr     j_AddItem
                 bra.w   loc_24F62
 loc_24E8E:
                 
-                move.w  -4(a6),d0
+                move.w  itemOrSpellIndex(a6),d0
                 bsr.w   HideUnitCursor
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 clr.w   d0
                 lea     (InitStack).w,a0
-                jsr     sub_10004
+                jsr     j_ExecuteItemMenu
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24EDE
                 bra.w   loc_24E26
@@ -1939,21 +2004,21 @@ loc_24F16:
                 
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 andi.w  #3,d1
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_RemoveItemBySlot
                 move.w  ((BATTLESCENE_ACTION_ITEMSLOT-$1000000)).w,d1
                 move.w  d1,-(sp)
                 move.w  ((BATTLESCENE_ACTION_TYPE-$1000000)).w,d1
                 andi.w  #3,d1
-                move.w  -4(a6),d0
+                move.w  itemOrSpellIndex(a6),d0
                 jsr     j_RemoveItemBySlot
                 move.w  ((word_FFB632-$1000000)).w,d1
-                bclr    #7,d1
-                move.w  -2(a6),d0
+                bclr    #ITEMENTRY_BIT_EQUIPPED,d1
+                move.w  combatant(a6),d0
                 jsr     j_AddItem
                 move.w  (sp)+,d1
                 bclr    #7,d1
-                move.w  -4(a6),d0
+                move.w  itemOrSpellIndex(a6),d0
                 jsr     j_AddItem
 loc_24F62:
                 
@@ -1962,27 +2027,27 @@ loc_24F62:
                 bra.w   loc_25188
 loc_24F6E:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   HideUnitCursor
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 clr.w   d0
                 clr.w   d1
                 lea     (InitStack).w,a0
-                jsr     sub_10004
+                jsr     j_ExecuteItemMenu
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24FC2
                 moveq   #$FFFFFFFF,d1
@@ -2009,7 +2074,7 @@ loc_24FFA:
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   loc_25022
-                move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     443             ; "Are you sure?"
                 clsTxt
                 clr.w   d1
@@ -2023,7 +2088,7 @@ loc_25022:
                 tst.w   d0
                 bne.w   loc_24746
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_RemoveItemBySlot
                 move.w  ((BATTLESCENE_ACTION_ITEMSLOT-$1000000)).w,d1
                 jsr     j_GetItemDefAddress
@@ -2045,7 +2110,7 @@ loc_25072:
                 bra.w   loc_25188
 loc_25088:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 bsr.w   sub_256E6
@@ -2064,7 +2129,7 @@ loc_250B0:
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.w   byte_25178      
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 move.w  d1,d2
                 move.w  d0,d1
@@ -2073,7 +2138,7 @@ loc_250B0:
                 beq.w   loc_250FC
                 move.w  #$80,((BATTLESCENE_ACTION_TYPE-$1000000)).w 
                 move.w  d0,((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w
-                move.w  d0,-4(a6)
+                move.w  d0,itemOrSpellIndex(a6)
                 sndCom  MUSIC_CORRUPTED_SAVE
                 bsr.w   SpawnEnemySkipCamera
                 bra.w   loc_25188
@@ -2093,12 +2158,12 @@ loc_25124:
                 
                 move.w  ((byte_FFB180-$1000000)).w,d1
                 move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 jsr     j_AddItem
                 tst.w   d2
                 bne.w   byte_2515A      
-                move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
                 sndCom  MUSIC_ITEM
                 txt     415             ; "{NAME} recieved{N}{ITEM}."
@@ -2109,7 +2174,7 @@ byte_2515A:
                 txt     413             ; "{NAME} found{N}{ITEM}.{W2}{CLEAR}"
                 txt     419             ; "{NAME} hands are full.{W1}"
                 clsTxt
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 jsr     (CloseChest).w
                 clr.w   d1
@@ -2125,7 +2190,7 @@ byte_2517C:
 loc_25188:
                 
                 move.w  d0,-(sp)
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   ClearEntityBlinkingFlag
                 move.w  (sp)+,d0
                 bsr.w   ClearFadingBlockRange
@@ -2137,6 +2202,9 @@ loc_25188:
 
 ; =============== S U B R O U T I N E =======================================
 
+itemOrSpellIndex = -4
+combatant = -2
+
 BattlefieldMenuActions:
                 
                 clr.b   ((word_FFAF8E-$1000000)).w
@@ -2144,7 +2212,7 @@ BattlefieldMenuActions:
                 bsr.w   ControlUnitCursor
                 btst    #INPUT_BIT_B,((P1_INPUT-$1000000)).w
                 beq.s   loc_251B8
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 rts
 loc_251B8:
                 
@@ -2164,24 +2232,24 @@ loc_251BC:
                 jsr     (WaitForViewScrollEnd).w
                 btst    #INPUT_BIT_A,((P1_INPUT-$1000000)).w
                 beq.s   loc_251F4
-                jsr     j_BuildMemberStatsScreen
+                jsr     j_BuildMemberScreen
                 bra.s   loc_2521C
 loc_251F4:
                 
-                cmp.w   -2(a6),d0
+                cmp.w   combatant(a6),d0
                 bne.s   loc_251FC
                 rts
 loc_251FC:
                 
                 move.w  d0,((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w
-                jsr     j_CreateFighterMiniStatusWindow
+                jsr     j_CreateBattlefieldMiniStatusWindow
                 jsr     j_CreateLandEffectWindow
                 jsr     (WaitForPlayerInput).w
                 jsr     j_HideLandEffectWindow
-                jsr     j_HideFighterMiniStatusWindow
+                jsr     j_HideMiniStatusWindow
 loc_2521C:
                 
-                cmp.w   -2(a6),d0
+                cmp.w   combatant(a6),d0
                 bne.w   BattlefieldMenuActions
                 rts
 loc_25226:
@@ -2198,7 +2266,7 @@ loc_25236:
                 lea     (InitStack).w,a0
                 moveq   #0,d0
                 moveq   #0,d1
-                moveq   #4,d2
+                moveq   #MENU_BATTLEFIELD,d2
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
                 beq.w   BattlefieldMenuActions
@@ -2208,16 +2276,16 @@ loc_25236:
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
                 beq.s   loc_25236
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-                move.w  d7,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
-                lea     ((INDEX_LIST-$1000000)).w,a1
+                lea     ((GENERIC_LIST-$1000000)).w,a1
                 jsr     (CopyBytes).w   
 loc_25274:
                 
-                jsr     sub_10040
+                jsr     j_InitMemberListScreen
                 tst.b   d0
                 bmi.s   loc_25236
-                jsr     j_BuildMemberStatsScreen
+                jsr     j_BuildMemberScreen
                 bra.s   loc_25274
 loc_25286:
                 
@@ -2242,7 +2310,7 @@ loc_252A6:
                 bmi.w   loc_25236
                 move.l  ((SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER_FROM_SRAM-$1000000)).w
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
+                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
                 enableSram
                 jsr     (SaveGame).l
                 disableSram
@@ -2267,37 +2335,40 @@ byte_252F2:
 
 ; related to AI controlled unit (enemy, auto-control cheat, MUDDLEd force member)
 
+itemOrSpellIndex = -4
+combatant = -2
+
 sub_252FA:
                 
                 movem.l d0-a6,-(sp)
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GenerateTargetRangeLists
                 bsr.w   CreateMoveableRangeForUnit
-                move.w  -2(a6),d0
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   SetMoveSfx
                 lea     (BATTLE_ENTITY_MOVE_STRING).l,a0
                 jsr     MoveBattleEntityByMoveString
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 move.w  d2,d1
                 jsr     j_SetXPos
                 move.w  d3,d1
                 jsr     j_SetYPos
                 bsr.w   ClearFadingBlockRange
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   SetEntityBlinkingFlag
                 move.w  ((BATTLESCENE_ACTION_TYPE-$1000000)).w,d0
                 cmpi.w  #3,d0
                 beq.w   loc_25480
                 tst.w   d0
                 bne.w   loc_2537E
-                move.w  -2(a6),d0
-                jsr     j_sub_C404
+                move.w  combatant(a6),d0
+                jsr     sub_8210
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
                 clr.b   ((word_FFAF8E-$1000000)).w
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d0
-                move.w  d0,-4(a6)
+                move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
                 clr.w   d0
                 bra.w   loc_2547A
@@ -2306,7 +2377,7 @@ loc_2537E:
                 cmpi.w  #1,d0
                 bne.w   loc_253BE
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_CreateSpellRangeGrid
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
@@ -2314,7 +2385,7 @@ loc_2537E:
                 jsr     j_FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((word_FFAF8E-$1000000)).w
                 move.w  ((word_FFB632-$1000000)).w,d0
-                move.w  d0,-4(a6)
+                move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
                 clr.w   d0
                 bra.w   loc_2547A
@@ -2323,7 +2394,7 @@ loc_253BE:
                 cmpi.w  #2,d0
                 bne.w   loc_2540A
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_CreateItemRangeGrid
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
@@ -2334,7 +2405,7 @@ loc_253BE:
                 jsr     j_FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((word_FFAF8E-$1000000)).w
                 move.w  ((word_FFB632-$1000000)).w,d0
-                move.w  d0,-4(a6)
+                move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
                 clr.w   d0
                 bra.w   loc_2547A
@@ -2343,7 +2414,7 @@ loc_2540A:
                 cmpi.w  #4,d0
                 bne.w   loc_2544A
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_CreateSpellRangeGrid
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
@@ -2351,7 +2422,7 @@ loc_2540A:
                 jsr     j_FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((word_FFAF8E-$1000000)).w
                 move.w  ((word_FFB632-$1000000)).w,d0
-                move.w  d0,-4(a6)
+                move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
                 clr.w   d0
                 bra.w   loc_2547A
@@ -2359,13 +2430,13 @@ loc_2544A:
                 
                 cmpi.w  #6,d0
                 bne.w   loc_2547A
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     sub_1AC05C      
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
                 clr.b   ((word_FFAF8E-$1000000)).w
                 move.w  ((BATTLESCENE_ACTION_ITEM_OR_SPELL-$1000000)).w,d0
-                move.w  d0,-4(a6)
+                move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
                 clr.w   d0
                 bra.w   *+4
@@ -2374,7 +2445,7 @@ loc_2547A:
                 jsr     ClearFadingBlockRange
 loc_25480:
                 
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 bsr.w   ClearEntityBlinkingFlag
                 movem.l (sp)+,d0-a6
                 rts
@@ -2384,15 +2455,18 @@ loc_25480:
 
 ; =============== S U B R O U T I N E =======================================
 
+itemOrSpellIndex = -4
+combatant = -2
+
 sub_2548E:
                 
-                move.w  d0,-4(a6)
-                move.w  -4(a6),d0
+                move.w  d0,itemOrSpellIndex(a6)
+                move.w  itemOrSpellIndex(a6),d0
                 jsr     j_GetXPos
                 move.w  d1,d2
                 jsr     j_GetYPos
                 move.w  d1,d3
-                move.w  -2(a6),d0
+                move.w  combatant(a6),d0
                 jsr     j_GetXPos
                 sub.w   d1,d2
                 blt.s   loc_254B8
@@ -2425,12 +2499,12 @@ loc_254D4:
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).l
-                move.w  -4(a6),d0
+                move.w  itemOrSpellIndex(a6),d0
                 bsr.w   sub_2322C
                 bsr.w   WaitForUnitCursor
                 jsr     (WaitForViewScrollEnd).w
-                move.b  #1,((FIGHTER_IS_TARGETTING-$1000000)).w
-                jsr     j_CreateFighterMiniStatusWindow
+                move.b  #1,((IS_TARGETING-$1000000)).w
+                jsr     j_CreateBattlefieldMiniStatusWindow
                 moveq   #$F,d0
                 jsr     (Sleep).w       
                 sndCom  SFX_VALIDATION
@@ -2450,6 +2524,7 @@ loc_254D4:
 ; 
 ; End function with a RTS intruction to fix
 
+
 UpdateAllEnemiesAI:
                 
                 move.w  #COMBATANT_ENEMIES_START,d0
@@ -2466,6 +2541,7 @@ UpdateAllEnemiesAI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateEnemyAI:
                 
@@ -2486,6 +2562,7 @@ UpdateEnemyAI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CreateRandomizedTurnOrder:
                 
@@ -2545,6 +2622,7 @@ loc_25594:
 ; In: A0 = turn order in RAM
 ;     D0 = combatant index
 
+
 AddRandomizedAGItoTurnOrder:
                 
                 jsr     j_GetXPos
@@ -2594,6 +2672,7 @@ AddRandomizedAGItoTurnOrder:
 ; =============== S U B R O U T I N E =======================================
 
 ; load all battle properties
+
 
 LoadBattle:
                 
@@ -2664,13 +2743,14 @@ tbl_RelativeTileMoveY:
 ; Out: D0 = new X
 ;      D1 = new Y
 
+
 GetEntityPositionAfterApplyingFacing:
                 
                 movem.l d2-d3/a0,-(sp)
                 jsr     j_GetXPos
                 move.w  d1,d2
                 jsr     j_GetYPos
-                bsr.w   GetEntityCombatantNumber
+                bsr.w   GetEntityIndexForCombatant_0
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 clr.w   d3
@@ -2686,6 +2766,7 @@ GetEntityPositionAfterApplyingFacing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_256E6:
                 
@@ -2724,6 +2805,7 @@ loc_25724:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 PrintAllActivatedDefCons:
                 
                 moveq   #$5A,d1 
@@ -2753,6 +2835,7 @@ PrintAllActivatedDefCons:
 
 ; if flag D1 is set, display def-con textbox
 
+
 PrintActivatedDefCon:
                 
                 move.w  d1,-(sp)
@@ -2772,6 +2855,7 @@ loc_2578A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetMoveSfx:
                 
