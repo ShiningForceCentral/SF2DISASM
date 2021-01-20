@@ -3,9 +3,10 @@
 ; 0xBCF0..0xBD24 : Item break messages
 tbl_ItemBreakMessages:
                 
-; Syntax        itemBreakMessage [ITEM_]index, message_offset
+; Syntax        itemBreakMessage [ITEM_]enum, messageOffset
 ;
-; Note: offset is added to base message index, refer to GetItemBreakMessage for implementation details
+; Notes: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+;        messageOffset is added to base message index, refer to GetItemBreakMessage for implementation details.
                 
                 itemBreakMessage POWER_RING, 1
                 itemBreakMessage PROTECT_RING, 1

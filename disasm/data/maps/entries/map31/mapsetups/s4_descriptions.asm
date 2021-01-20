@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map31_AreaDescriptions:
                 
                 move.w  #$1045,d3       ; "A book...{N}MYSTERY OF NAZCA{W1}"
@@ -29,6 +30,7 @@ byte_5D584:     msDesc 8, 26, 4, 0      ; "{NAME} investigated{N}the book shelve
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map31_DescFunc0:
                 
                  
@@ -43,6 +45,7 @@ return_5D5BC:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map31_DescFunc1:
                 

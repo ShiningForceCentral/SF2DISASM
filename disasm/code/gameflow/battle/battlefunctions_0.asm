@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LevelUpCutscene:
                 
                 moveq   #0,d1
@@ -79,6 +80,7 @@ byte_22C5A:
 
 ; get first entity's X, Y and facing
 
+
 GetCurrentPosition:
                 
                 move.w  (ENTITY_DATA).l,d1
@@ -95,6 +97,7 @@ GetCurrentPosition:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CreateMoveableRangeForUnit:
                 
@@ -161,6 +164,7 @@ GetBattleMapProperties:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ClearFadingBlockRange:
                 
                 movem.l d6-a1,-(sp)
@@ -199,6 +203,7 @@ return_22D70:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 HideUnitCursor:
                 
                 movem.l d0/a0,-(sp)
@@ -214,6 +219,7 @@ HideUnitCursor:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ControlUnitCursor:
                 
@@ -266,13 +272,15 @@ loc_22DD2:
 ;      D3 = chosen Y
 ;      D4 = copied P1 input state bitfield
 
+battleEntity = -2
+
 ControlBattleUnit:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 link    a6,#-2
                 lea     ((ENTITY_DATA-$1000000)).w,a1
-                bsr.w   GetEntityCombatantNumber
-                move.w  d0,-2(a6)
+                bsr.w   GetEntityIndexForCombatant_0
+                move.w  d0,battleEntity(a6)
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a1
                 move.b  $12(a1),d0
@@ -283,7 +291,7 @@ ControlBattleUnit:
                 jsr     (WaitForVInt).w
                 move.b  #$21,$12(a1) 
                 bsr.w   sub_234C8
-                move.w  -2(a6),d0
+                move.w  battleEntity(a6),d0
                 jsr     j_SetControlledEntityActScript
                 addi.w  #$10,d0
                 lea     ((byte_FFAFA0-$1000000)).w,a0
@@ -311,7 +319,7 @@ loc_22E68:
                 divs.w  #$180,d3
                 move.b  d2,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
                 move.b  d3,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  battleEntity(a6),d0
                 jsr     j_SetEntityMovescriptToIdle
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 unlk    a6
@@ -322,6 +330,7 @@ loc_22E68:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateControlledUnitPos:
                 
@@ -356,17 +365,21 @@ UpdateControlledUnitPos:
 
 ; =============== S U B R O U T I N E =======================================
 
-GetEntityCombatantNumber:
+; Pointless wrapper (should instead directly branch to subroutine below)
+
+
+GetEntityIndexForCombatant_0:
                 
                 bsr.w   GetEntityIndexForCombatant
                 rts
 
-    ; End of function GetEntityCombatantNumber
+    ; End of function GetEntityIndexForCombatant_0
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Get entity index for combatant D0 -> D0
+
 
 GetEntityIndexForCombatant:
                 
@@ -389,6 +402,7 @@ GetEntityIndexForCombatant:
 
 ; In: D0 = entity index
 ; Out: D0 = entity event index
+
 
 GetEntityEventIndex:
                 
@@ -427,6 +441,8 @@ word_22F76:     dc.w $180
 
 ; =============== S U B R O U T I N E =======================================
 
+var_2 = -2
+
 MoveBattleEntityByMoveString:
                 
                 movem.l d1/a0,-(sp)
@@ -435,8 +451,8 @@ MoveBattleEntityByMoveString:
                 movem.l d1/a0,-(sp)
                 move.b  #$FF,-1(a0)
                 lea     ((ENTITY_DATA-$1000000)).w,a1
-                bsr.s   GetEntityCombatantNumber
-                move.w  d0,-2(a6)
+                bsr.s   GetEntityIndexForCombatant_0
+                move.w  d0,var_2(a6)
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 lsl.w   #5,d0
                 adda.w  d0,a1
@@ -448,7 +464,7 @@ MoveBattleEntityByMoveString:
                 jsr     (WaitForVInt).w
                 move.b  #$21,$12(a1) 
                 bsr.w   sub_234C8
-                move.w  -2(a6),d0
+                move.w  var_2(a6),d0
                 jsr     sub_44030
                 move.l  a0,-(sp)
                 addi.w  #$10,d0
@@ -516,7 +532,7 @@ loc_23074:
                 move.w  ((MOVE_SFX-$1000000)).w,d0
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
                 bsr.w   UpdateControlledUnitPos
-                move.w  -2(a6),d0
+                move.w  var_2(a6),d0
                 jsr     j_WaitForEntityToStopMoving
                 bra.w   loc_22FE8
 loc_2308E:
@@ -536,7 +552,7 @@ loc_2308E:
                 divs.w  #$180,d3
                 move.b  d2,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
                 move.b  d3,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
-                move.w  -2(a6),d0
+                move.w  var_2(a6),d0
                 addi.w  #$10,d0
                 lea     ((byte_FFAFA0-$1000000)).w,a0
                 clr.b   (a0,d0.w)
@@ -551,10 +567,11 @@ loc_2308E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_230E2:
                 
                 movem.l d1-a0,-(sp)
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 bne.s   loc_230F2
                 moveq   #$FFFFFFFF,d0
                 bra.w   byte_2321E
@@ -562,14 +579,14 @@ loc_230F2:
                 
                 jsr     (WaitForVInt).w
                 move.w  d0,d6
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d1
                 bra.w   loc_23110
 loc_23102:
                 
                 jsr     (WaitForVInt).w
                 jsr     (WaitForViewScrollEnd).w
-                jsr     j_HideFighterMiniStatusWindow
+                jsr     j_HideMiniStatusWindow
 loc_23110:
                 
                 clr.w   d0
@@ -617,9 +634,9 @@ loc_2315E:
                 jsr     (UpdateEntityProperties).w
                 move.w  (sp)+,d0
                 bsr.w   sub_2322C
-                move.b  #1,((FIGHTER_IS_TARGETTING-$1000000)).w
+                move.b  #1,((IS_TARGETING-$1000000)).w
                 jsr     (WaitForViewScrollEnd).w
-                jsr     j_CreateFighterMiniStatusWindow
+                jsr     j_CreateBattlefieldMiniStatusWindow
                 movem.l (sp)+,d1-a0
 loc_23186:
                 
@@ -672,7 +689,7 @@ loc_231E0:
                 
                 btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_231F6
-                jsr     j_HideFighterMiniStatusWindow
+                jsr     j_HideMiniStatusWindow
                 move.w  #$FFFF,d0
                 bra.w   byte_2321E
 loc_231F6:
@@ -704,6 +721,7 @@ byte_2321E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_2322C:
                 
                 movem.l d0-a0,-(sp)
@@ -722,6 +740,7 @@ sub_2322C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_23256:
                 
@@ -759,6 +778,7 @@ sub_23256:
 ; Out: D2 = entity X
 ;      D3 = entity Y
 
+
 SetUnitCursorDestinationToNextCombatant:
                 
                 jsr     j_GetXPos
@@ -770,6 +790,7 @@ SetUnitCursorDestinationToNextCombatant:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetUnitCursorDestinationToNextBattleEntity:
                 
@@ -908,6 +929,7 @@ loc_2340A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_23414:
                 
                 clr.w   d4
@@ -949,6 +971,7 @@ loc_23448:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetEntityBlinkingFlag:
                 
                 movem.l d0/a0,-(sp)
@@ -963,6 +986,7 @@ SetEntityBlinkingFlag:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ClearEntityBlinkingFlag:
                 
@@ -979,6 +1003,7 @@ ClearEntityBlinkingFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetCameraDestInTiles:
                 
                 mulu.w  #$180,d2
@@ -992,6 +1017,7 @@ SetCameraDestInTiles:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadUnitCursorTileData:
                 
@@ -1009,6 +1035,7 @@ LoadUnitCursorTileData:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_234C8:
                 
@@ -1070,6 +1097,7 @@ byte_2353E:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WaitForUnitCursor:
                 
                 move.l  d0,-(sp)
@@ -1082,6 +1110,7 @@ WaitForUnitCursor:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_23554:
                 
@@ -1114,32 +1143,33 @@ spr_2358C:      ; unknown sprite definitions
                 
 ; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
                 
-                vdpSprite 116, V4|H4|16, 1664|PLT3, 124
-                vdpSprite 1, V4|H4|10, 1664|PLT3, 1
-                vdpSprite 1, V4|H4|11, 1664|PLT3, 1
-                vdpSprite 1, V4|H4|12, 1664|PLT3, 1
-                vdpSprite 1, V4|H4|13, 1664|PLT3, 1
-                vdpSprite 1, V4|H4|14, 1664|PLT3, 1
-                vdpSprite 1, V4|H4|15, 1664|PLT3, 1
-                vdpSprite 1, V4|H4|16, 1664|PLT3, 1
-                vdpSprite 86, V4|H4|9, 1680|PLT3, 124
-                vdpSprite 116, V4|H4|10, 1696|PLT3, 100
-                vdpSprite 146, V4|H4|11, 1680|FLIP|PLT3, 124
-                vdpSprite 116, V4|H4|16, 1696|MIRROR|PLT3, 148
-                vdpSprite 1, V4|H4|13, 1664|PLT3, 1
-                vdpSprite 1, V4|H4|14, 1664|PLT3, 1
-                vdpSprite 1, V4|H4|15, 1664|PLT3, 1
-                vdpSprite 1, V4|H4|16, 1664|PLT3, 1
-                vdpSprite 62, V4|H4|9, 1680|PLT3, 124
-                vdpSprite 116, V4|H4|10, 1696|PLT3, 76
-                vdpSprite 170, V4|H4|11, 1680|FLIP|PLT3, 124
-                vdpSprite 116, V4|H4|12, 1696|MIRROR|PLT3, 172
-                vdpSprite 86, V4|H4|13, 1712|PLT3, 95
-                vdpSprite 86, V4|H4|14, 1712|MIRROR|PLT3, 153
-                vdpSprite 146, V4|H4|15, 1712|FLIP|PLT3, 95
-                vdpSprite 146, V4|H4|16, 1712|MIRROR|FLIP|PLT3, 153
+                vdpSprite 116, V4|H4|16, 1664|PALETTE3, 124
+                vdpSprite 1, V4|H4|10, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|11, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|12, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|13, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|14, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|15, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|16, 1664|PALETTE3, 1
+                vdpSprite 86, V4|H4|9, 1680|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 100
+                vdpSprite 146, V4|H4|11, 1680|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|16, 1696|MIRROR|PALETTE3, 148
+                vdpSprite 1, V4|H4|13, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|14, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|15, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|16, 1664|PALETTE3, 1
+                vdpSprite 62, V4|H4|9, 1680|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 76
+                vdpSprite 170, V4|H4|11, 1680|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 172
+                vdpSprite 86, V4|H4|13, 1712|PALETTE3, 95
+                vdpSprite 86, V4|H4|14, 1712|MIRROR|PALETTE3, 153
+                vdpSprite 146, V4|H4|15, 1712|FLIP|PALETTE3, 95
+                vdpSprite 146, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 153
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_2364C:
                 
@@ -1151,6 +1181,7 @@ sub_2364C:
 UnitCursorTiles:incbin "data/graphics/tech/unitcursortiles.bin"
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FadeOut_WaitForP1Input:
                 
@@ -1169,6 +1200,7 @@ FadeOut_WaitForP1Input:
 ; In: D0 = entity index
 ;     D1 = x pos
 ;     D2 = y pos
+
 
 SetEntityPosition:
                 

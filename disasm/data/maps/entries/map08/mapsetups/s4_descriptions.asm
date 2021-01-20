@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map8_AreaDescriptions:
                 
                 move.w  #$546,d3        ; "It reads...{N}NO STRANGERS!{N}-Shopkeeper{W1}"
@@ -33,6 +34,7 @@ byte_561FC:     msDesc 5, 15, 2, 11     ; "{NAME} investigated{N}the sign.{W2}{C
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_DescFunc0:
                 
                  
@@ -56,6 +58,7 @@ return_5626A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map8_DescFunc2:
                 
@@ -83,6 +86,7 @@ return_56298:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_DescFunc5:
                 
                 move.w  #$54D,d0        ; Found Keseran's diary.{N}{LEADER} reads it.{W2}
@@ -100,6 +104,7 @@ Map8_DescFunc5:
 ; =============== S U B R O U T I N E =======================================
 
 ; set after you open the tree in Ribble with the wooden plank
+
 
 Map8_DescFunc6:
                 

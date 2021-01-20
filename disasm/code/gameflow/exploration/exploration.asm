@@ -10,6 +10,7 @@ MapOffsetHashTable:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_364E:
                 
                 movem.w d0-d1/d3-d4/d6,-(sp)
@@ -57,6 +58,7 @@ loc_3690:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetViewDest:
                 
                 movem.w d0-d7,-(sp)
@@ -66,6 +68,7 @@ SetViewDest:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_36B2:
                 
@@ -146,6 +149,7 @@ loc_3736:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_3758:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
@@ -183,6 +187,7 @@ return_37B0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_37B2:
                 
@@ -222,6 +227,7 @@ return_380A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_380C:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
@@ -260,6 +266,7 @@ return_3864:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_3866:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
@@ -297,6 +304,7 @@ return_38BE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_38C0:
                 
@@ -354,6 +362,8 @@ loc_392A:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_2 = -2
+
 VInt_UpdateScrollingData:
                 
                 link    a6,#-2
@@ -382,7 +392,7 @@ loc_3968:
                 move.w  ((word_FFA818-$1000000)).w,d1
                 move.w  ((word_FFA820-$1000000)).w,d2
                 sub.w   d1,d5
-                move.w  d5,-2(a6)
+                move.w  d5,var_2(a6)
                 bge.s   loc_3998
                 add.w   d2,d0
                 move.w  #$100,d6
@@ -413,7 +423,7 @@ loc_39A2:
                 movem.w (sp)+,d0-d1
 loc_39D4:
                 
-                move.w  -2(a6),d5
+                move.w  var_2(a6),d5
                 move.w  d0,d4
                 sub.w   d1,d4
                 bne.s   loc_39E6
@@ -454,7 +464,7 @@ loc_3A1A:
                 move.w  ((word_FFA81A-$1000000)).w,d1
                 move.w  ((word_FFA822-$1000000)).w,d2
                 sub.w   d1,d5
-                move.w  d5,-2(a6)
+                move.w  d5,var_2(a6)
                 bge.s   loc_3A4A
                 add.w   d2,d0
                 move.w  #$100,d6
@@ -485,7 +495,7 @@ loc_3A54:
                 movem.w (sp)+,d0-d1
 loc_3A82:
                 
-                move.w  -2(a6),d5
+                move.w  var_2(a6),d5
                 move.w  d0,d4
                 sub.w   d1,d4
                 bne.s   loc_3A94
@@ -534,7 +544,7 @@ loc_3AE0:
                 move.w  ((word_FFA81C-$1000000)).w,d1
                 move.w  ((word_FFA824-$1000000)).w,d2
                 sub.w   d1,d5
-                move.w  d5,-2(a6)
+                move.w  d5,var_2(a6)
                 bge.s   loc_3B10
                 add.w   d2,d0
                 move.w  #$100,d6
@@ -565,7 +575,7 @@ loc_3B1A:
                 movem.w (sp)+,d0-d1
 loc_3B4C:
                 
-                move.w  -2(a6),d5
+                move.w  var_2(a6),d5
                 move.w  d0,d4
                 sub.w   d1,d4
                 bne.s   loc_3B5E
@@ -606,7 +616,7 @@ loc_3B92:
                 move.w  ((word_FFA81E-$1000000)).w,d1
                 move.w  ((word_FFA826-$1000000)).w,d2
                 sub.w   d1,d5
-                move.w  d5,-2(a6)
+                move.w  d5,var_2(a6)
                 bge.s   loc_3BC2
                 add.w   d2,d0
                 move.w  #$100,d6
@@ -637,7 +647,7 @@ loc_3BCC:
                 movem.w (sp)+,d0-d1
 loc_3BFA:
                 
-                move.w  -2(a6),d5
+                move.w  var_2(a6),d5
                 move.w  d0,d4
                 sub.w   d1,d4
                 bne.s   loc_3C0C
@@ -786,6 +796,7 @@ loc_3D40:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FinalizeScrollDataUpdate:
                 
                 move.l  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,(VERTICAL_SCROLL_DATA).l
@@ -810,6 +821,7 @@ loc_3D7E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetRandomValue:
                 
                 bsr.w   GenerateRandomNumber
@@ -822,6 +834,7 @@ GetRandomValue:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_3D96:
                 
@@ -841,6 +854,7 @@ return_3DAE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CopyMapBlocks:
                 
@@ -885,6 +899,7 @@ loc_3DE2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ResetCurrentMap:
                 
                 lea     (FF0000_RAM_START).l,a2
@@ -909,6 +924,7 @@ loc_3E10:
 ; =============== S U B R O U T I N E =======================================
 
 ; uses door open SFX
+
 
 OpenDoor:
                 
@@ -1016,6 +1032,7 @@ loc_3F24:
 
 ; display (or don't) map roof depending on player's start location
 
+
 ToggleRoofOnMapLoad:
                 
                 movem.l d0-a1,-(sp)
@@ -1094,6 +1111,7 @@ loc_3FE4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 PerformMapBlockCopyScript:
                 
@@ -1201,6 +1219,7 @@ loc_40EA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csub_56632_0:
                 
                 movem.w d7,-(sp)
@@ -1239,6 +1258,7 @@ loc_4150:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 OpenChest:
                 
                 movem.l d0-d1/a2,-(sp)
@@ -1269,6 +1289,7 @@ loc_418E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CloseChest:
                 
                 movem.l d0-d1/a2,-(sp)
@@ -1293,6 +1314,7 @@ loc_41C0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CheckChestItem:
                 
@@ -1320,6 +1342,7 @@ loc_41F0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CheckNonChestItem:
                 
                 movem.l d0-d1/a2,-(sp)
@@ -1341,6 +1364,7 @@ loc_4214:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 RefillNonChestItem:
                 
@@ -1367,6 +1391,7 @@ loc_422C:
 ; - d2 : item index
 ; - a2 : map layout offset
 
+
 GetChestItem:
                 
                 clr.w   d2
@@ -1381,6 +1406,7 @@ GetChestItem:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetNonChestItem:
                 
@@ -1451,6 +1477,7 @@ loc_42D8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WarpIfSetAtPoint:
                 
                 movem.l d0-d1/d7,-(sp)
@@ -1500,6 +1527,7 @@ loc_4340:
 
 ; Updates plane A
 
+
 UpdateVdpPlaneA:
                 
                 movem.l a0-a1,-(sp)
@@ -1540,6 +1568,7 @@ loc_439A:
 
 ; Updates plane B
 
+
 UpdateVdpPlaneB:
                 
                 movem.l a0-a1,-(sp)
@@ -1572,6 +1601,7 @@ loc_43BE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateVdpPlane:
                 

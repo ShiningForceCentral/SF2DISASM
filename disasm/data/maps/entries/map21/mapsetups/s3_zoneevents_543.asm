@@ -6,6 +6,7 @@ ms_map21_flag543_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map21_21F_DefaultZoneEvent:
                 
                 rts

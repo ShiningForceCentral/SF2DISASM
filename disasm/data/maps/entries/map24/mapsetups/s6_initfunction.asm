@@ -4,13 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map24_InitFunction:
                 
                  
                 sndCom  MUSIC_HEADQUARTERS
                 jsr     (FadeInFromBlack).w
                 move.w  #$46,((SPEECH_SFX-$1000000)).w 
-                chkFlg  544             ; Battle 44 completed
+                chkFlg  544             ; Battle 44 completed - BATTLE_FAIRY_WOODS                 
                 bne.w   loc_59CB2
                 txt     467             ; "Welcome to the fairy woods{N}special stage!{W2}"
                 txt     468             ; "How quickly can you defeat{N}all the hidden monsters?{W2}"
@@ -41,7 +42,7 @@ return_59C9C:
                 rts
 cs_StartSpecialBattle:
                 
-                setStoryFlag 44         ; Battle 44 unlocked
+                setStoryFlag 44         ; Battle 44 unlocked - BATTLE_FAIRY_WOODS               
                 warp MAP_SECRET_MONK_FOREST_BATTLEFIELD,1,24,LEFT
                 csc_end
 cs_LeaveSpecialBattle:
@@ -76,7 +77,7 @@ byte_59CF4:
                 txt     479             ; "Come back again!{N}See ya!{W1}"
                 clsTxt
                 script  cs_LeaveSpecialBattle
-                clrFlg  544             ; Battle 44 completed
+                clrFlg  544             ; Battle 44 completed - BATTLE_FAIRY_WOODS                 
                 rts
 
     ; End of function ms_map24_InitFunction

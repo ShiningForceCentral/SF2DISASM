@@ -13,6 +13,7 @@ ms_map29_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map29_EntityEvent0:
                 
                 jmp     j_BlacksmithActions
@@ -22,6 +23,7 @@ Map29_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map29_EntityEvent1:
                 
                 jmp     j_ChurchMenuActions
@@ -30,6 +32,7 @@ Map29_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map29_EntityEvent2:
                 
@@ -41,6 +44,7 @@ Map29_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map29_EntityEvent3:
                 
                  
@@ -51,6 +55,7 @@ Map29_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map29_EntityEvent4:
                 
@@ -64,6 +69,7 @@ Map29_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map29_EntityEvent5:
                 
                  
@@ -76,6 +82,7 @@ Map29_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map29_EntityEvent6:
                 
                  
@@ -87,6 +94,7 @@ Map29_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map29_DefaultEntityEvent:
                 

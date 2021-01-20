@@ -320,6 +320,7 @@ cs_55BEE:       textCursor 1249
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csub_55EF4:
                 
                 lea     (PALETTE_1_CURRENT).l,a0
@@ -384,6 +385,7 @@ plt_55F6A:      dc.w $E0C
                 dc.w $A0A
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_55F82:
                 

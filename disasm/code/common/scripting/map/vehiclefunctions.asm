@@ -6,6 +6,7 @@
 
 ; Control Caravan
 
+
 MapEventType2:
                 
                 clr.w   d0
@@ -64,6 +65,7 @@ word_4531E:      ac_branch
 
 ; =============== S U B R O U T I N E =======================================
 
+
 MapEventType4:
                 
                 clr.w   d0
@@ -118,6 +120,7 @@ word_453C2:      ac_branch
 
 ; Control Raft
 
+
 MapEventType3:
                 
                 bsr.w   sub_454AC
@@ -143,6 +146,7 @@ cs_453F2:       setActscriptWait ALLY_BOWIE,eas_4540C
 
 ; =============== S U B R O U T I N E =======================================
 
+
 nullsub_4540A:
                 
                 rts
@@ -166,6 +170,7 @@ word_4543C:      ac_branch
                 dc.w (byte_45414-word_4543C) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
+
 
 MapEventType5:
                 
@@ -204,6 +209,7 @@ word_4549E:     dc.w 0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_454AC:
                 
                 movem.l d0-d1/a0,-(sp)
@@ -234,6 +240,7 @@ loc_454DC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_454E4:
                 
                 movem.l d0-d1/a0,-(sp)
@@ -254,6 +261,7 @@ sub_454E4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ShrinkIntoCaravanBowieAndFollowers:
                 
@@ -305,6 +313,7 @@ word_455A8:      ac_branch
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GrowOutBowieAndFollowers:
                 
                 clr.w   d0
@@ -350,6 +359,7 @@ word_45630:      ac_branch
                 dc.w (eas_Idle-word_45630) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_45634:
                 

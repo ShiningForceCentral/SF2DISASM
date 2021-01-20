@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map9_AreaDescriptions:
                 
                 move.w  #$1011,d3       ; "Monument of the landing{N}at Parmecia.{W1}"

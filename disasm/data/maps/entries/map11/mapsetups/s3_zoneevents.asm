@@ -7,6 +7,7 @@ ms_map11_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map11_DefaultZoneEvent:
                 
                 rts
@@ -15,6 +16,7 @@ Map11_DefaultZoneEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map11_ZoneEvent0:
                 

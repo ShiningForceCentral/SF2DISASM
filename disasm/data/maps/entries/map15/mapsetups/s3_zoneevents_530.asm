@@ -7,6 +7,7 @@ ms_map15_flag530_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map15_DefaultZoneEvent:
                 
                 rts
@@ -15,6 +16,7 @@ Map15_DefaultZoneEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map15_212_ZoneEvent0:
                 

@@ -10,6 +10,7 @@ byte_5F9D6:     msEntityEvent 128, UP, Map37_3E7_EntityEvent1-ms_map37_flag999_E
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map37_DefaultEntityEvent:
                 
                 moveq   #(byte_5F9D6-ms_map37_flag999_EntityEvents),d6
@@ -26,6 +27,7 @@ Map37_3E7_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map37_3E7_EntityEvent0:
                 
                  
@@ -36,6 +38,7 @@ Map37_3E7_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map37_3E7_EntityEvent1:
                 
@@ -52,6 +55,7 @@ return_5FA0E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map37_3E7_EntityEvent3:
                 

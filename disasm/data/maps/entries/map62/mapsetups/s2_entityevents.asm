@@ -8,6 +8,7 @@ ms_map62_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map62_EntityEvent0:
                 
                  
@@ -42,6 +43,7 @@ return_5C7F4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map62_EntityEvent1:
                 

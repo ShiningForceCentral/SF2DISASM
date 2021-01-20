@@ -19,6 +19,7 @@ ms_map13_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_EntityEvent1:
                 
                  
@@ -38,6 +39,7 @@ byte_58068:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_EntityEvent2:
                 
                  
@@ -48,6 +50,7 @@ Map13_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map13_EntityEvent3:
                 
@@ -69,6 +72,7 @@ return_5808E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_EntityEvent4:
                 
                 move.b  #4,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -80,6 +84,7 @@ Map13_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_EntityEvent5:
                 
                 move.b  #$13,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -90,6 +95,7 @@ Map13_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map13_EntityEvent6:
                 
@@ -112,6 +118,7 @@ return_580C4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_EntityEvent7:
                 
                 jsr     j_ChurchMenuActions
@@ -121,6 +128,7 @@ Map13_EntityEvent7:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map13_EntityEvent8:
                 
@@ -133,6 +141,7 @@ Map13_EntityEvent8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_EntityEvent9:
                 
                  
@@ -143,6 +152,7 @@ Map13_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map13_EntityEvent10:
                 
@@ -173,6 +183,7 @@ return_58100:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_EntityEvent11:
                 
                  
@@ -183,6 +194,7 @@ Map13_EntityEvent11:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map13_EntityEvent0:
                 
@@ -195,6 +207,7 @@ Map13_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_EntityEvent12:
                 
                  
@@ -205,6 +218,7 @@ Map13_EntityEvent12:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map13_DefaultEntityEvent:
                 

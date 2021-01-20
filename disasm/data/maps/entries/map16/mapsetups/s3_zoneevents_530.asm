@@ -6,6 +6,7 @@ ms_map16_flag530_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_212_DefaultZoneEvent:
                 
                 rts

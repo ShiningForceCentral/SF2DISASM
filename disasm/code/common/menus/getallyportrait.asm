@@ -8,6 +8,7 @@
 ; 
 ; Out: D0 = portrait index adjusted for class
 
+
 GetAllyPortrait:
                 
                 move.w  d1,-(sp)

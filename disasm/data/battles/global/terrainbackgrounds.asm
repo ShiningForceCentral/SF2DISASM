@@ -3,7 +3,7 @@
 ; 0x19E5E..0x19E6E : Terrain backgrounds table
 tbl_TerrainBackgrounds:
                 
-; Syntax        background [BATTLEBACKGROUND_]index
+; Syntax        background [BATTLEBACKGROUND_]enum (or index)
                 
                 background SKY          ; 0: Low Sky
                 background PLAINS       ; 1: Plains

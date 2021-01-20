@@ -3,9 +3,11 @@
 ; 0x1F806..0x1F914 : Ally battle sprites table
 tbl_AllyBattleSprites:
                 
-; 3 entries per ally, 3 bytes per entry :
+; Syntax        allyBattleSprAndPlt [CLASS_]enum, [ALLYBATTLESPRITE_]enum, palette
 ;
-; Syntax        allyBattleSprAndPlt [CLASS_]index, [ALLYBATTLESPRITE_]index, palette
+; Notes: 3 entries per ally, 3 bytes per entry.
+;        Palette range varies depending on the sprite.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
 ; 0: BOWIE
                 allyBattleSprAndPlt SDMN, SDMN, 0

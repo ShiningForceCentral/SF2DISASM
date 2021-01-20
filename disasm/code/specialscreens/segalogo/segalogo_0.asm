@@ -6,6 +6,7 @@
 
 ; Out: D0 = $FFFFFFFF if pressing start, 0 if not
 
+
 DisplaySegaLogo:
                 
                  
@@ -117,6 +118,7 @@ SegaLogoPalette:incbin "data/graphics/tech/segalogopalette.bin"
 SegaLogo:       incbin "data/graphics/tech/segalogo.bin"
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_28B12:
                 
@@ -1116,6 +1118,7 @@ byte_28F31:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadSegaLogoPalette:
                 
                 move.w  (a0)+,(a1)+
@@ -1127,6 +1130,7 @@ LoadSegaLogoPalette:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CalculateRomChecksum:
                 
@@ -1158,6 +1162,7 @@ return_28F96:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 VInt_CheckConfigurationModeCheat:
                 
                 movea.l ((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w,a0
@@ -1169,6 +1174,7 @@ VInt_CheckConfigurationModeCheat:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 VInt_ActivateConfigurationModeCheat:
                 
                 move.b  #$FF,((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
@@ -1179,6 +1185,7 @@ VInt_ActivateConfigurationModeCheat:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CheckConfigurationModeInputSequence:
                 

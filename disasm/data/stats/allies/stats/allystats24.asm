@@ -4,7 +4,7 @@
 AllyStats24:    forClass  GLDT
                 hpGrowth  35, 91, LINEAR
                 mpGrowth  0, 0, NONE
-                atkGrowth 31, 54, LINEAR
+                attGrowth 31, 54, LINEAR
                 defGrowth 32, 100, MIDDLE
                 agiGrowth 21, 52, EARLY
                 spellList 

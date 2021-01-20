@@ -4,36 +4,53 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+cannotPromoteFlag = -36
+promotionSectionLength = -34
+promotionIndex = -32
+promotionItem = -30
+newClass = -28
+currentClass = -26
+stunnedMembersCount = -24
+promotableMembersCount = -22
+itemsHeldNumber = -20
+cursedMembersCount = -18
+poisonedMembersCount = -16
+deadMembersCount = -14
+member = -12
+membersListLength = -10
+actionCost = -8
+currentGold = -4
+
 ChurchMenuActions:
                 
                 movem.l d0-a5,-(sp)
-                link    a6,#-$24
+                link    a6,#-36
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
-                blt.s   byte_20A18      
+                blt.s   @txt_6E         
                 jsr     j_InitPortraitWindow
-byte_20A18:
+@txt_6E:
                 
                 txt     110             ; "Welcome!{W2}{N}Your desire will be fulfilled!{W2}"
                 clsTxt
                 jsr     j_HidePortraitWindow
-loc_20A26:
+@StartMenu:
                 
-                moveq   #0,d0
-                moveq   #0,d1
-                moveq   #5,d2
+                moveq   #0,d0           ; initial choice : up
+                moveq   #0,d1           ; animate-in direction : bottom
+                moveq   #MENU_CHURCH,d2
                 lea     (InitStack).w,a0
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
-                beq.s   loc_20A40
-                bra.w   loc_20A64
-loc_20A40:
+                beq.s   @ExitMenu
+                bra.w   @CheckRaiseAction
+@ExitMenu:
                 
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
-                blt.s   byte_20A4E      
+                blt.s   @txt_71         
                 jsr     j_InitPortraitWindow
-byte_20A4E:
+@txt_71:
                 
                 txt     113             ; "{CLEAR}Be careful.  The light{N}is always on your side.{W1}"
                 clsTxt
@@ -41,429 +58,435 @@ byte_20A4E:
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
-loc_20A64:
+@CheckRaiseAction:
                 
                 cmpi.w  #0,d0
-                bne.w   loc_20B58
+                bne.w   @CheckCureAction
                 txt     118             ; "Let me investigate all{N}of you.{W2}"
                 bsr.w   Church_GetCurrentForceMemberInfo
-                clr.w   -$E(a6)
-loc_20A78:
+                clr.w   deadMembersCount(a6)
+@CountDeadMembers_Loop:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
-                move.w  d0,-$C(a6)
+                move.w  d0,member(a6)
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                bhi.w   loc_20B42
-                addi.w  #1,-$E(a6)
+                bhi.w   @RaiseNextMember
+                addi.w  #1,deadMembersCount(a6)
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     129             ; "Gosh!  {NAME} is{N}exhausted!{W2}"
                 jsr     j_GetCurrentLevel
-                mulu.w  #$A,d1
-                move.l  d1,-8(a6)
+                mulu.w  #CHURCHMENU_PER_LEVEL_RAISE_COST,d1
+                move.l  d1,actionCost(a6)
                 jsr     j_GetClass
-                move.w  #0,d2
-                bsr.w   sub_210D0
-                cmpi.w  #0,-$24(a6)
-                beq.w   loc_20AC8
-                addi.l  #$C8,-8(a6) 
-loc_20AC8:
+                move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
+                bsr.w   GetPromotionIndex
+                cmpi.w  #0,cannotPromoteFlag(a6)
+                beq.w   @ConfirmRaise
+                addi.l  #CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED,actionCost(a6)
+@ConfirmRaise:
                 
-                move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
+                move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
                 txt     130             ; "But I can recall the soul.{W2}{N}It will cost {#} gold{N}coins.  OK?"
-                jsr     sub_10050
+                jsr     j_CreateGoldWindow
                 jsr     j_YesNoChoiceBox
-                jsr     sub_10058
+                jsr     j_HideGoldWindow
                 cmpi.w  #0,d0
-                beq.w   loc_20AF4
+                beq.w   @CheckRaiseCost
                 txt     124             ; "You don't need my help?{W2}"
-                bra.w   loc_20B42
-loc_20AF4:
+                bra.w   @RaiseNextMember
+@CheckRaiseCost:
                 
                 jsr     j_GetGold
-                move.l  d1,-4(a6)
-                move.l  -8(a6),d0
+                move.l  d1,currentGold(a6)
+                move.l  actionCost(a6),d0
                 cmp.l   d0,d1
-                bcc.s   loc_20B0C
+                bcc.s   @DoRaise
                 txt     125             ; "You can't afford it?!{N}What a pity....{W2}"
-                bra.s   loc_20B42
-loc_20B0C:
+                bra.s   @RaiseNextMember
+@DoRaise:
                 
                 moveq   #0,d1
-                move.l  -8(a6),d1
+                move.l  actionCost(a6),d1
                 jsr     j_DecreaseGold
-                move.w  -$C(a6),d0
-                move.w  #$C8,d1 
+                move.w  member(a6),d0
+                move.w  #200,d1
                 jsr     j_IncreaseCurrentHP
                 sndCom  MUSIC_REVIVE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
-                move.w  -$C(a6),d0
-                bsr.w   sub_2124A
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),d0
+                bsr.w   UpdateAllyMapSprite
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     131             ; "{NAME} is revived!{W2}"
-loc_20B42:
+@RaiseNextMember:
                 
-                dbf     d7,loc_20A78
-                cmpi.w  #0,-$E(a6)
-                bne.w   byte_21028
+                dbf     d7,@CountDeadMembers_Loop
+                cmpi.w  #0,deadMembersCount(a6)
+                bne.w   @ExitSave
                 txt     128             ; "Nobody is dead.{W2}"
-                bra.w   byte_21028
-loc_20B58:
+                bra.w   @ExitSave
+@CheckCureAction:
                 
                 cmpi.w  #1,d0
-                bne.w   loc_20D3A
+                bne.w   @CheckPromoAction
                 txt     118             ; "Let me investigate all{N}of you.{W2}"
                 bsr.w   Church_GetCurrentForceMemberInfo
-                clr.w   -$10(a6)
-                clr.w   -$12(a6)
-                clr.w   -$18(a6)
-loc_20B74:
+                clr.w   poisonedMembersCount(a6)
+                clr.w   cursedMembersCount(a6)
+                clr.w   stunnedMembersCount(a6)
+@CountPoisonedMembers_Loop:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
                 movem.l a0,-(sp)
-                move.w  d0,-$C(a6)
+                move.w  d0,member(a6)
                 jsr     j_GetCombatantEntryAddress
-                lea     $2C(a0),a0
+                lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2
                 move.w  d2,d3
-                andi.w  #2,d3
-                beq.w   loc_20C24
-                addi.w  #1,-$10(a6)
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                andi.w  #STATUSEFFECT_POISON,d3
+                beq.w   @CureNextPoisonedMember
+                addi.w  #1,poisonedMembersCount(a6)
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     121             ; "Gosh!  {NAME} is{N}poisoned!{W2}"
-                move.l  #$A,-8(a6)
-                move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
+                move.l  #CHURCHMENU_CURE_POISON_COST,actionCost(a6)
+                move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
-                jsr     sub_10050
+                jsr     j_CreateGoldWindow
                 jsr     j_YesNoChoiceBox
-                jsr     sub_10058
+                jsr     j_HideGoldWindow
                 cmpi.w  #0,d0
-                beq.w   loc_20BDA
+                beq.w   @CheckCurePoisonCost
                 txt     124             ; "You don't need my help?{W2}"
-                bra.w   loc_20C24
-loc_20BDA:
+                bra.w   @CureNextPoisonedMember
+@CheckCurePoisonCost:
                 
                 jsr     j_GetGold
-                move.l  d1,-4(a6)
-                move.l  -8(a6),d0
+                move.l  d1,currentGold(a6)
+                move.l  actionCost(a6),d0
                 cmp.l   d0,d1
-                bcc.s   loc_20BF4
+                bcc.s   @DoCurePoison
                 txt     125             ; "You can't afford it?!{N}What a pity....{W2}"
                 clr.w   d7
-                bra.s   loc_20C24
-loc_20BF4:
+                bra.s   @CureNextPoisonedMember
+@DoCurePoison:
                 
                 moveq   #0,d1
-                move.l  -8(a6),d1
+                move.l  actionCost(a6),d1
                 jsr     j_DecreaseGold
-                move.w  -$C(a6),d0
+                move.w  member(a6),d0
                 move.w  d2,d1
-                andi.w  #$FFFD,d1
+                andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d1
                 jsr     j_SetStatusEffects
                 sndCom  MUSIC_CURE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     126             ; "{NAME} is no longer{N}poisoned.{W2}"
-loc_20C24:
+@CureNextPoisonedMember:
                 
                 movem.l (sp)+,a0
-                dbf     d7,loc_20B74
-                cmpi.w  #0,-$10(a6)
-                bne.w   loc_20C3A
+                dbf     d7,@CountPoisonedMembers_Loop
+                cmpi.w  #0,poisonedMembersCount(a6)
+                bne.w   @CureStun
                 txt     119             ; "Nobody is poisoned.{W2}"
-loc_20C3A:
+@CureStun:
                 
-                bsr.w   ChurchCure
+                bsr.w   Church_CureStun
                 bsr.w   Church_GetCurrentForceMemberInfo
-loc_20C42:
+@CountCursedMembers_Loop:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
                 movem.l a0,-(sp)
-                move.w  d0,-$C(a6)
+                move.w  d0,member(a6)
                 jsr     j_GetCombatantEntryAddress
-                lea     $2C(a0),a0
+                lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2
-                andi.w  #4,d2
-                beq.w   loc_20D20
-                addi.w  #1,-$12(a6)
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                andi.w  #STATUSEFFECT_CURSE,d2
+                beq.w   @CureNextCursedMember
+                addi.w  #1,cursedMembersCount(a6)
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     122             ; "Gosh!  {NAME} is{N}cursed!{W2}"
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
-                move.w  d2,-$14(a6)
-                move.w  -$14(a6),d6
+                jsr     j_GetItemAndNumberHeld
+                move.w  d2,itemsHeldNumber(a6)
+                move.w  itemsHeldNumber(a6),d6
                 subq.b  #1,d6
                 clr.l   d3
-loc_20C86:
+@CalculateCureCurseCost_Loop:
                 
                 move.w  d6,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 jsr     j_IsItemCursed
-                bcc.w   loc_20CA8
+                bcc.w   @IsNextItemCursed
                 jsr     j_GetItemDefAddress
                 clr.l   d4
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d4
-                lsr.w   #2,d4
+                lsr.w   #2,d4           ; cure curse cost = 25% of item price
                 add.l   d4,d3
-loc_20CA8:
+@IsNextItemCursed:
                 
-                dbf     d6,loc_20C86
-                move.l  d3,-8(a6)
-                move.l  -8(a6),((TEXT_NUMBER-$1000000)).w
+                dbf     d6,@CalculateCureCurseCost_Loop
+                move.l  d3,actionCost(a6)
+                move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
-                jsr     sub_10050
+                jsr     j_CreateGoldWindow
                 jsr     j_YesNoChoiceBox
-                jsr     sub_10058
+                jsr     j_HideGoldWindow
                 cmpi.w  #0,d0
-                beq.w   loc_20CDC
+                beq.w   @CheckCureCurseCost
                 txt     124             ; "You don't need my help?{W2}"
-                bra.w   loc_20D20
-loc_20CDC:
+                bra.w   @CureNextCursedMember
+@CheckCureCurseCost:
                 
                 jsr     j_GetGold
-                move.l  d1,-4(a6)
-                move.l  -8(a6),d0
+                move.l  d1,currentGold(a6)
+                move.l  actionCost(a6),d0
                 cmp.l   d0,d1
-                bcc.s   loc_20CF6
+                bcc.s   @DoCureCurse
                 txt     125             ; "You can't afford it?!{N}What a pity....{W2}"
                 clr.w   d7
-                bra.s   loc_20D20
-loc_20CF6:
+                bra.s   @CureNextCursedMember
+@DoCureCurse:
                 
                 moveq   #0,d1
-                move.l  -8(a6),d1
+                move.l  actionCost(a6),d1
                 jsr     j_DecreaseGold
-                move.w  -$C(a6),d0
+                move.w  member(a6),d0
                 jsr     j_UnequipAllItemsIfNotCursed
                 sndCom  MUSIC_CURE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     127             ; "{NAME} is no longer{N}cursed.{W2}"
-loc_20D20:
+@CureNextCursedMember:
                 
                 movem.l (sp)+,a0
-                dbf     d7,loc_20C42
-                cmpi.w  #0,-$12(a6)
-                bne.w   byte_21028
+                dbf     d7,@CountCursedMembers_Loop
+                cmpi.w  #0,cursedMembersCount(a6)
+                bne.w   @ExitSave
                 txt     120             ; "Nobody is cursed.{W2}"
-                bra.w   byte_21028
-loc_20D3A:
+                bra.w   @ExitSave
+@CheckPromoAction:
                 
                 cmpi.w  #2,d0
-                bne.w   byte_20FCC      
+                bne.w   @StartSave      
                 txt     118             ; "Let me investigate all{N}of you.{W2}"
-                bsr.w   sub_21072
-                cmpi.w  #0,-$16(a6)
-                bne.w   byte_20D5C      
+                bsr.w   CountPromotableMembers
+                cmpi.w  #0,promotableMembersCount(a6)
+                bne.w   @StartPromo     
                 txt     135             ; "{CLEAR}Well, nobody can be{N}promoted now.{W2}"
-                bra.w   byte_21028
-byte_20D5C:
+                bra.w   @ExitSave
+@StartPromo:
                 
+                ; @StartPromo
                 txt     136             ; "{CLEAR}Who do you want to{N}promote?{W2}"
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10040
+                jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
-                bne.w   loc_20D80
+                bne.w   @CheckPromotableClass
                 txt     137             ; "Oh, I'm wrong.{W2}"
-                bra.w   byte_21028
-loc_20D80:
+                bra.w   @ExitSave
+@CheckPromotableClass:
                 
-                move.w  d0,-$C(a6)
+                move.w  d0,member(a6)
                 jsr     j_GetClass
-                move.w  d1,-$1A(a6)
-                move.w  #0,d2
-                bsr.w   sub_210D0
-                cmpi.w  #0,-$24(a6)
-                beq.w   loc_20DAE
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d1,currentClass(a6)
+                move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
+                bsr.w   GetPromotionIndex
+                cmpi.w  #0,cannotPromoteFlag(a6)
+                beq.w   @CheckPromotableLevel
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     142             ; "Hmmm...{D1} {NAME} had{N}better remain the current{N}class.{W2}"
-                bra.w   loc_20FC8
-loc_20DAE:
+                bra.w   @RestartPromo
+@CheckPromotableLevel:
                 
                 jsr     j_GetCurrentLevel
-                cmpi.w  #$14,d1
-                bcc.w   loc_20DCA
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                cmpi.w  #CHURCHMENU_MIN_PROMOTABLE_LEVEL,d1
+                bcc.w   @ConfirmPromo
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     138             ; "Hmmm...{NAME} needs{N}more experience!{W2}"
-                bra.w   loc_20FC8
-loc_20DCA:
+                bra.w   @RestartPromo
+@ConfirmPromo:
                 
-                clr.w   -$1C(a6)
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                clr.w   newClass(a6)
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     139             ; "{NAME} wants to be{N}promoted to the a fighting{N}class, right?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                beq.w   loc_20DEE
+                beq.w   @CheckSpecialPromo
                 txt     137             ; "Oh, I'm wrong.{W2}"
-                bra.w   loc_20FC8
-loc_20DEE:
+                bra.w   @RestartPromo
+@CheckSpecialPromo:
                 
-                move.w  -$1A(a6),d1
-                move.w  #2,d2
-                bsr.w   sub_210D0
-                cmpi.w  #0,-$24(a6)
-                bne.w   loc_20EEA
-                clr.w   -$1E(a6)
-                move.w  -$20(a6),d7
+                move.w  currentClass(a6),d1
+                move.w  #PROMOTIONSECTION_SPECIAL_BASE,d2
+                bsr.w   GetPromotionIndex
+                cmpi.w  #0,cannotPromoteFlag(a6)
+                bne.w   @CheckRegularPromo
+                clr.w   promotionItem(a6)
+                move.w  promotionIndex(a6),d7
                 subq.b  #1,d7
-                move.w  #4,d2
+                move.w  #PROMOTIONSECTION_SPECIAL_ITEM,d2
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
-loc_20E18:
+@GetPromotionItemIndex_Loop:
                 
-                move.b  (a0)+,-$1E(a6)
-                dbf     d7,loc_20E18
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d6
+                move.b  (a0)+,promotionItem(a6)
+                dbf     d7,@GetPromotionItemIndex_Loop
+                
+                lea     ((TARGETS_LIST-$1000000)).w,a0
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d6
                 subq.w  #1,d6
-loc_20E2A:
+@ParseMemberItems_Loop:
                 
                 move.b  (a0)+,d0
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 cmpi.w  #0,d2
-                beq.w   loc_20E56
+                beq.w   @ParseNextMemberItems
                 move.w  d2,d7
                 subq.w  #1,d7
-loc_20E40:
+@FindPromotionItem_Loop:
                 
                 move.w  d7,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 move.b  d1,d2
-                cmp.b   -$1E(a6),d2
-                beq.w   loc_20E5E
-                dbf     d7,loc_20E40
-loc_20E56:
+                cmp.b   promotionItem(a6),d2
+                beq.w   @ConfirmSpecialPromo
+                dbf     d7,@FindPromotionItem_Loop
+@ParseNextMemberItems:
                 
-                dbf     d6,loc_20E2A
-                bra.w   loc_20EEA
-loc_20E5E:
+                dbf     d6,@ParseMemberItems_Loop
                 
-                move.w  d0,-$12(a6)
-                move.w  d7,-$14(a6)
-                move.w  d1,-$1E(a6)
-                move.w  #3,d2
+                bra.w   @CheckRegularPromo
+@ConfirmSpecialPromo:
+                
+                move.w  d0,cursedMembersCount(a6) ; temporary variable : index of member holding promotion item
+                move.w  d7,itemsHeldNumber(a6) ; temporary variable : item slot
+                move.w  d1,promotionItem(a6)
+                move.w  #PROMOTIONSECTION_SPECIAL_PROMO,d2
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
-                move.w  -$20(a6),d7
+                move.w  promotionIndex(a6),d7
                 subq.w  #1,d7
                 clr.w   d0
-loc_20E7C:
+@GetSpecialClass_Loop:
                 
                 move.b  (a0)+,d0
-                dbf     d7,loc_20E7C
-                move.w  d0,-$1C(a6)
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -$1E(a6),((TEXT_NAME_INDEX_3-$1000000)).w
-                move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                dbf     d7,@GetSpecialClass_Loop
+                
+                move.w  d0,newClass(a6)
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  promotionItem(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     143             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
                 txt     147             ; "OK?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                beq.w   loc_20EB6
+                beq.w   @CheckSORC
                 txt     144             ; "Then"
-                bra.w   loc_20EEA
-loc_20EB6:
+                bra.w   @CheckRegularPromo
+@CheckSORC:
                 
-                cmpi.w  #CLASS_SORC,-$1C(a6)
-                bne.w   loc_20ED8
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                cmpi.w  #CLASS_SORC,newClass(a6)
+                bne.w   @RemovePromotionItem
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     145             ; "{NAME} loses all spells{N}that were learned.{N}OK?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                bne.w   loc_20FC8
-loc_20ED8:
+                bne.w   @RestartPromo
+@RemovePromotionItem:
                 
-                move.w  -$12(a6),d0
-                move.w  -$14(a6),d1
+                move.w  cursedMembersCount(a6),d0 ; temporary variable : index of member holding promotion item
+                move.w  itemsHeldNumber(a6),d1 ; temporary variable : item slot
                 jsr     j_RemoveItemBySlot
-                bra.w   loc_20F30
-loc_20EEA:
+                bra.w   @DoPromo
+@CheckRegularPromo:
                 
-                move.w  #0,d2
-                move.w  -$1A(a6),d1
-                bsr.w   sub_210D0
-                move.w  -$20(a6),d7
+                move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
+                move.w  currentClass(a6),d1
+                bsr.w   GetPromotionIndex
+                move.w  promotionIndex(a6),d7
                 subq.w  #1,d7
                 move.w  #1,d2
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
                 clr.w   d0
-loc_20F08:
+@GetNewClass_Loop:
                 
                 move.b  (a0)+,d0
-                dbf     d7,loc_20F08
-                move.w  d0,-$1C(a6)
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                dbf     d7,@GetNewClass_Loop
+                
+                move.w  d0,newClass(a6)
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     146             ; "{NAME} can be promoted{N}to {CLASS}.{N}OK?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                bne.w   loc_20FC8
-loc_20F30:
+                bne.w   @RestartPromo
+@DoPromo:
                 
-                move.w  -$1A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -$C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  -$1C(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  currentClass(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  newClass(a6),((TEXT_NAME_INDEX_3-$1000000)).w
                 txt     140             ; "Now, let me conduct the{N}rite.{D1}  The light blesses...{N}{D1}{CLASS} {NAME}...{W2}{N}with a class of {CLASS}!{W2}"
-                move.w  -$C(a6),d0
-                move.w  -$1C(a6),d1
+                move.w  member(a6),d0
+                move.w  newClass(a6),d1
                 jsr     j_SetClass
                 jsr     j_Promote
-                cmpi.w  #CLASS_SORC,-$1C(a6)
-                bne.s   loc_20F66
+                cmpi.w  #CLASS_SORC,newClass(a6)
+                bne.s   @CheckNewWeaponTypeClasses
                 bsr.w   ReplaceSpellsWithSORCdefaults
-loc_20F66:
+@CheckNewWeaponTypeClasses:
                 
-                cmpi.w  #CLASS_MMNK,-$1C(a6)
-                beq.s   loc_20F7A       
-                cmpi.w  #CLASS_NINJ,-$1C(a6)
-                beq.s   loc_20F7A       
-                bra.w   byte_20F90
-loc_20F7A:
+                cmpi.w  #CLASS_MMNK,newClass(a6)
+                beq.s   @UnequipWeapon  
+                cmpi.w  #CLASS_NINJ,newClass(a6)
+                beq.s   @UnequipWeapon  
+                bra.w   @sndCom_PromotionMusic
+@UnequipWeapon:
                 
-                move.w  -$C(a6),d0      ; new class uses a different type of weapon, so unequip weapon
+                move.w  member(a6),d0   ; new class uses a different type of weapon, so unequip weapon
                 jsr     j_GetEquippedWeapon
                 cmpi.w  #$FFFF,d1
-                beq.s   byte_20F90
+                beq.s   @sndCom_PromotionMusic
                 jsr     j_UnequipWeapon
-byte_20F90:
+@sndCom_PromotionMusic:
                 
                 sndCom  MUSIC_PROMOTION
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
-                move.w  -$C(a6),d0
-                bsr.w   sub_2124A
-                move.w  -$C(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),d0
+                bsr.w   UpdateAllyMapSprite
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     141             ; "{NAME} was successfully{N}promoted to {CLASS}.{W2}"
-                move.w  -$C(a6),d0
+                move.w  member(a6),d0
                 move.b  #1,d1
                 jsr     j_SetLevel
                 clr.w   d1
                 jsr     j_SetCurrentEXP
-loc_20FC8:
+@RestartPromo:
                 
-                bra.w   byte_20D5C      
-byte_20FCC:
+                bra.w   @StartPromo     
+@StartSave:
                 
+                ; @StartSave
                 txt     114             ; "May I record your adventure{N}now?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                beq.w   loc_20FE6
+                beq.w   @DoSaveGame
                 txt     124             ; "You don't need my help?{W2}"
-                bra.w   byte_21028
-loc_20FE6:
+                bra.w   @ExitSave
+@DoSaveGame:
                 
                 move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP_INDEX-$1000000)).w
-                move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
+                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 enableSram
                 jsr     (SaveGame).w
@@ -475,20 +498,20 @@ loc_20FE6:
                 txt     116             ; "{CLEAR}Will you continue your{N}adventure?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                beq.w   loc_20A40
+                beq.w   @ExitMenu
                 txt     117             ; "{CLEAR}Then, take a rest before{N}you continue.{W1}"
                 jsr     (FadeOutToBlack).w
                 jmp     (WitchSuspend).w
                 bra.w   *+4
-byte_21028:
+@ExitSave:
                 
                 clsTxt
                 txt     112             ; "{CLEAR}Do you have another desire?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                bne.w   loc_20A40
+                bne.w   @ExitMenu
                 clsTxt
-                bra.w   loc_20A26
+                bra.w   @StartMenu      
 
     ; End of function ChurchMenuActions
 

@@ -6,6 +6,7 @@
 
 ; A0=Source, A1=Destination
 
+
 LoadMapLayoutData:
                 
                 movem.l d0-a6,-(sp)
@@ -241,6 +242,7 @@ loc_227A:
 ; In: D0 = barrel
 ; Out: D1 = block flag word
 
+
 ReadMapLayoutBarrelForBlockFlags:
                 
                 dbf     d3,loc_229E
@@ -304,6 +306,7 @@ loc_22E6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SaveBlockToUpperStackMap:
                 
                 lea     -$80(a1),a2     ; upper block value
@@ -324,6 +327,7 @@ loc_2308:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SaveBlockToLeftStackMap:
                 
@@ -388,6 +392,7 @@ return_2370:
 
 ; a0 : input ROM block data
 ; a1 : output RAM data
+
 
 LoadMapBlocks:
                 
@@ -660,6 +665,7 @@ loc_257A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ProcessMapTransition:
                 
                 clr.w   d1
@@ -736,6 +742,7 @@ loc_2632:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ApplyOverworldMapTransition:
                 
                 move.b  ((MAP_EVENT_PARAM_1-$1000000)).w,d0
@@ -753,6 +760,7 @@ rjt_OverworldMapTransition:
                 dc.w ApplyOverworldMapTransition_Down-rjt_OverworldMapTransition
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ApplyOverworldMapTransition_Right:
                 
@@ -818,6 +826,7 @@ loc_26E8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ApplyOverworldMapTransition_Left:
                 
@@ -886,6 +895,7 @@ loc_27AE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ApplyOverworldMapTransition_Up:
                 
                 move.w  #$5100,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
@@ -950,6 +960,7 @@ loc_2874:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ApplyOverworldMapTransition_Down:
                 
@@ -1016,6 +1027,7 @@ loc_293A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_29A2:
                 
                 movem.l d0-a0,-(sp)
@@ -1054,6 +1066,7 @@ loc_29D6:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: D1 = map index
+
 
 LoadMapTilesets:
                 
@@ -1123,6 +1136,7 @@ loc_2A86:
 ; =============== S U B R O U T I N E =======================================
 
 ; loads all map properties (map coords, entities, etc.)
+
 
 LoadMap:
                 
@@ -1408,6 +1422,7 @@ loc_2CF6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadMapBlocksAndLayout:
                 
                 movea.l (a5)+,a0
@@ -1470,6 +1485,7 @@ return_2DEA:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadMapArea:
                 
@@ -1544,6 +1560,7 @@ return_2EBE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_2EC0:
                 
                 move.w  #$20,d6 
@@ -1581,6 +1598,7 @@ loc_2F04:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_2F24:
                 

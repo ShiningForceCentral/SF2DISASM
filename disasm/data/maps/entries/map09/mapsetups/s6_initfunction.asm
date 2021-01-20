@@ -4,10 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map9_InitFunction:
                 
                  
-                chkFlg  518             ; Battle 18 completed
+                chkFlg  518             ; Battle 18 completed - BATTLE_VERSUS_TAROS                
                 bne.s   byte_568D4      
                 move.w  #$89,d0 
                 jsr     MoveEntityOutOfMap

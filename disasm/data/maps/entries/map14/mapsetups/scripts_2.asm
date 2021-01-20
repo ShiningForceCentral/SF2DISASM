@@ -211,7 +211,7 @@ cs_59142:       textCursor 2278
                 entityActionsWait ALLY_KIWI
                  moveDown 7
                 endActions
-                setStoryFlag 8          ; Battle 8 unlocked
+                setStoryFlag 8          ; Battle 8 unlocked - BATTLE_NORTH_CLIFF               
                 warp MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,1,1,DOWN
                 csc_end
 ce_59270:       mainEntity 13,11,DOWN

@@ -22,6 +22,7 @@ ms_map3_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_EntityEvent0:
                 
                  
@@ -63,6 +64,7 @@ return_50F96:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_EntityEvent1:
                 
                  
@@ -91,6 +93,7 @@ return_50FB8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_EntityEvent2:
                 
                  
@@ -110,6 +113,7 @@ return_50FCA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_EntityEvent3:
                 
                  
@@ -121,6 +125,7 @@ Map3_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_EntityEvent4:
                 
@@ -135,6 +140,7 @@ Map3_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_EntityEvent5:
                 
                  
@@ -146,6 +152,7 @@ Map3_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_EntityEvent6:
                 
                  
@@ -156,6 +163,7 @@ Map3_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_EntityEvent7:
                 
@@ -170,6 +178,7 @@ Map3_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_EntityEvent8:
                 
                  
@@ -180,6 +189,7 @@ Map3_EntityEvent8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_EntityEvent9:
                 
@@ -192,6 +202,7 @@ Map3_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_EntityEvent10:
                 
@@ -212,6 +223,7 @@ return_5101E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_EntityEvent11:
                 
                  
@@ -231,6 +243,7 @@ return_51030:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_EntityEvent12:
                 
                  
@@ -243,6 +256,7 @@ Map3_EntityEvent12:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_EntityEvent13:
                 
                 jsr     j_ChurchMenuActions
@@ -252,6 +266,7 @@ Map3_EntityEvent13:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_EntityEvent15:
                 

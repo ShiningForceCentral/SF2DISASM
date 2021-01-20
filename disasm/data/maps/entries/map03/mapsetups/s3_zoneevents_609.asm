@@ -8,13 +8,14 @@ ms_map3_flag609_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_261_ZoneEvent1:
                 
                  
                 chkFlg  3               ; Jaha joined
                 bne.s   Map3_261_ZoneEvent0
                 script  cs_516A8
-                setFlg  402             ; Battle 2 unlocked
+                setFlg  402             ; Battle 2 unlocked - BATTLE_TO_YEEL                   
                 clrFlg  66              ; Sarah + Chester are followers
 Map3_261_ZoneEvent0:
                 

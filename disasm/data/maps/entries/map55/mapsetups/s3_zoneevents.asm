@@ -7,10 +7,11 @@ ms_map55_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map55_ZoneEvent0:
                 
                  
-                chkFlg  534             ; Battle 34 completed
+                chkFlg  534             ; Battle 34 completed - BATTLE_VERSUS_CAMEELA              
                 beq.s   Map55_DefaultZoneEvent
                 script  cs_5E27C
 Map55_DefaultZoneEvent:

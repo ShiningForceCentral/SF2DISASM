@@ -7,6 +7,7 @@ ms_map27_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map27_ZoneEvent0:
                 
                  

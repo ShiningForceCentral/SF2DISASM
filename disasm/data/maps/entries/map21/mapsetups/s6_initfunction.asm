@@ -4,15 +4,16 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map21_InitFunction:
                 
                  
-                chkFlg  501             ; Battle 1 completed
+                chkFlg  501             ; Battle 1 completed - BATTLE_INSIDE_ANCIENT_TOWER         
                 beq.s   ms_map21_flag609_InitFunction
                 script  cs_53F2A
 ms_map21_flag609_InitFunction:
                 
-                chkFlg  507             ; Battle 7 completed
+                chkFlg  507             ; Battle 7 completed - BATTLE_VERSUS_DARK_SMOKES           
                 beq.s   return_53F28
                 script  cs_53FD8
 return_53F28:

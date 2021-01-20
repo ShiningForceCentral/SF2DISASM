@@ -4,7 +4,7 @@
 AllyStats05:    forClass  THIF
                 hpGrowth  8, 42, LATE
                 mpGrowth  0, 0, NONE
-                atkGrowth 5, 45, LATE
+                attGrowth 5, 45, LATE
                 defGrowth 6, 38, LATE
                 agiGrowth 6, 38, LATE
                 spellList 
@@ -12,7 +12,7 @@ AllyStats05:    forClass  THIF
                 forClass  NINJ
                 hpGrowth  28, 90, LATE
                 mpGrowth  0, 50, LINEAR
-                atkGrowth 29, 53, LATE
+                attGrowth 29, 53, LATE
                 defGrowth 25, 82, LATE
                 agiGrowth 25, 72, LATE
                 spellList &

@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map1_AreaDescriptions:
                 
                 move.w  #$1044,d3       ; "A statue of beautiful Mitula.{W1}"
@@ -21,6 +22,7 @@ byte_5E736:     msDesc 11, 3, 9, 0      ; "{NAME} investigated{N}the statue.{W2}
                 dc.b $75 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map1_DescFunc0:
                 

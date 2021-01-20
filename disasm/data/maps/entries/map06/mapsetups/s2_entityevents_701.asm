@@ -20,6 +20,7 @@ ms_map6_flag701_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map6_EntityEvent0:
                 
                  
@@ -62,6 +63,7 @@ return_54A0C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map6_EntityEvent1:
                 
                  
@@ -90,6 +92,7 @@ return_54A32:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map6_EntityEvent2:
                 
@@ -129,6 +132,7 @@ return_54A68:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map6_EntityEvent3:
                 
                  
@@ -165,6 +169,7 @@ return_54A9A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map6_EntityEvent4:
                 
@@ -206,6 +211,7 @@ return_54AD6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map6_EntityEvent5:
                 
@@ -258,6 +264,7 @@ return_54B34:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map6_EntityEvent6:
                 
                  
@@ -284,6 +291,7 @@ return_54B52:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map6_EntityEvent7:
                 
@@ -320,6 +328,7 @@ return_54B7C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map6_EntityEvent8:
                 
                  
@@ -348,6 +357,7 @@ return_54B9E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map6_EntityEvent9:
                 
                  
@@ -366,6 +376,7 @@ return_54BB0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map6_EntityEvent10:
                 
@@ -387,6 +398,7 @@ return_54BCA:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map6_EntityEvent11:
                 
@@ -425,6 +437,7 @@ return_54BFC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map6_EntityEvent12:
                 
                  
@@ -443,6 +456,7 @@ return_54C0E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map6_EntityEvent13:
                 
@@ -480,7 +494,7 @@ loc_54C4C:
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$1F,d0
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait

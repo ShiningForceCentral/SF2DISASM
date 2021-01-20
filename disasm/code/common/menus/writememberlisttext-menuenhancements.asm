@@ -55,7 +55,7 @@ selected_member = -2
                 move.w  ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w,d4
                 
 @CreateEntry_Loop:
-                lea     ((INDEX_LIST-$1000000)).w,a0
+                lea     ((GENERIC_LIST-$1000000)).w,a0
                 clr.w   d0
                 move.b  (a0,d4.w),d0
                 move.w  d0,current_character_index(a6)
@@ -64,7 +64,7 @@ selected_member = -2
                 move.w  d0,d1
                 jsr     IsInBattleParty
                 beq.s   @DetermineNameColor
-                move.w  #VDPTILE_SWORD_ICON|VDPTILE_PLT3|VDPTILE_PRIORITY,-2(a1) 
+                move.w  #VDPTILE_SWORD_ICON|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-2(a1) 
                                                         ; display sword icon to denote battle party members
 @DetermineNameColor:
                 move.l  a1,-(sp)
@@ -131,7 +131,7 @@ selected_member = -2
                 move.w  current_character_index(a6),d0
                 jsr     GetCurrentHP
                 bsr.w   WriteThreeDigitsStatValue_MemberList
-                move.w  #VDPTILE_SLASH|VDPTILE_PLT3|VDPTILE_PRIORITY,(a1)+
+                move.w  #VDPTILE_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 
                 ; Write max HP
                 move.w  current_character_index(a6),d0
@@ -143,7 +143,7 @@ selected_member = -2
                 move.w  current_character_index(a6),d0
                 jsr     GetCurrentMP
                 bsr.w   WriteThreeDigitsStatValue_MemberList
-                move.w  #VDPTILE_SLASH|VDPTILE_PLT3|VDPTILE_PRIORITY,(a1)+
+                move.w  #VDPTILE_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 
                 ; Write max MP
                 move.w  current_character_index(a6),d0
@@ -195,7 +195,7 @@ selected_member = -2
                 bra.s   @NextEntry
                 
 @WriteEntry_NewATTandDEF:
-                jsr     GetEquipmentNewATTandDEF  ; Get new ATT and DEF -> D2, D3
+                jsr     GetEquipNewATTandDEF  ; Get new ATT and DEF -> D2, D3
                 
                 if (THREE_DIGITS_STATS=0)
                 addq.w  #2,a1
@@ -205,7 +205,7 @@ selected_member = -2
                 move.w  current_character_index(a6),d0
                 jsr     GetCurrentATT
                 bsr.w   WriteThreeDigitsStatValue_MemberList
-                move.w  #VDPTILE_HORIZONTAL_ARROW|VDPTILE_PLT3|VDPTILE_PRIORITY,(a1)+
+                move.w  #VDPTILE_HORIZONTAL_ARROW|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  d2,d0
                 bsr.w   WriteThreeDigitsStatValue
                 addq.w  #WINDOW_MEMBERLIST_OFFSET_ENTRY_NEWDEFENSE,a1
@@ -214,7 +214,7 @@ selected_member = -2
                 move.w  current_character_index(a6),d0
                 jsr     GetCurrentDEF
                 bsr.w   WriteThreeDigitsStatValue_MemberList
-                move.w  #VDPTILE_HORIZONTAL_ARROW|VDPTILE_PLT3|VDPTILE_PRIORITY,(a1)+
+                move.w  #VDPTILE_HORIZONTAL_ARROW|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  d3,d0
                 bsr.w   WriteThreeDigitsStatValue
                 
@@ -222,7 +222,7 @@ selected_member = -2
                 movea.l (sp)+,a1        ; A1 <- pop current character's name offset
                 adda.w  #WINDOW_MEMBERLIST_OFFSET_NEXT_ENTRY,a1
                 addq.w  #1,d4
-                cmp.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w,d4
+                cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d4
                 dbeq    d5,@CreateEntry_Loop
                 
                 unlk    a6

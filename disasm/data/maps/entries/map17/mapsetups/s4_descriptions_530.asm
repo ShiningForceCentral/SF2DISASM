@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map17_flag530_AreaDescriptions:
                 
                 rts

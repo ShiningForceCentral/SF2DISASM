@@ -19,6 +19,7 @@ ms_map36_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map36_DefaultEntityEvent:
                 
                 rts
@@ -27,6 +28,7 @@ Map36_DefaultEntityEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map36_EntityEvent1:
                 
@@ -38,6 +40,7 @@ Map36_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map36_EntityEvent2:
                 
@@ -51,6 +54,7 @@ Map36_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map36_EntityEvent3:
                 
                  
@@ -62,6 +66,7 @@ Map36_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map36_EntityEvent4:
                 
@@ -82,6 +87,7 @@ byte_5D8B6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map36_EntityEvent5:
                 
                  
@@ -94,6 +100,7 @@ Map36_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map36_EntityEvent6:
                 
@@ -108,6 +115,7 @@ Map36_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map36_EntityEvent7:
                 
                  
@@ -119,6 +127,7 @@ Map36_EntityEvent7:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map36_EntityEvent8:
                 
@@ -133,6 +142,7 @@ Map36_EntityEvent8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map36_EntityEvent9:
                 
                  
@@ -144,6 +154,7 @@ Map36_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map36_EntityEvent0:
                 
@@ -157,6 +168,7 @@ Map36_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map36_EntityEvent10:
                 
                  
@@ -168,6 +180,7 @@ Map36_EntityEvent10:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map36_EntityEvent11:
                 
@@ -181,6 +194,7 @@ Map36_EntityEvent11:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map36_EntityEvent12:
                 

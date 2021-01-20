@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitializeFollowerEntities:
                 
                 cmpi.b  #MAP_NEW_GRANSEAL_HQ,((CURRENT_MAP-$1000000)).w 

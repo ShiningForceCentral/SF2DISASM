@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CheatModeConfiguration:
                 
                 if (EASY_CONFIGURATION_MODE=1)

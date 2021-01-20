@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc32_setCameraDestInTiles:
                 
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
@@ -18,6 +19,7 @@ csc32_setCameraDestInTiles:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc33_setQuakeAmount:
                 
@@ -60,6 +62,7 @@ return_46564:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc34_setBlocks:
                 
                 move.w  (a6)+,d0
@@ -77,6 +80,7 @@ csc34_setBlocks:
 
 ; similar to setBlocks
 
+
 csc35_setBlocksVar:
                 
                 move.w  (a6)+,d0
@@ -92,6 +96,7 @@ csc35_setBlocksVar:
 
 ; related to loading a map
 
+
 csc36_resetMap:
                 
                 move.l  a6,-(sp)
@@ -103,6 +108,7 @@ csc36_resetMap:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc37_loadMapAndFadeIn:
                 
@@ -116,6 +122,7 @@ csc37_loadMapAndFadeIn:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc48_loadMap:
                 
@@ -154,6 +161,7 @@ loc_465C4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc39_fadeInFromBlack:
                 
                 jsr     (FadeInFromBlack).w
@@ -164,6 +172,7 @@ csc39_fadeInFromBlack:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc3A_fadeOutToBlack:
                 
                 jsr     (FadeOutToBlack).w
@@ -173,6 +182,7 @@ csc3A_fadeOutToBlack:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc3B_slowFadeInFromBlack:
                 
@@ -187,6 +197,7 @@ csc3B_slowFadeInFromBlack:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc3C_slowFadeOutToBlack:
                 
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,d0
@@ -199,6 +210,7 @@ csc3C_slowFadeOutToBlack:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc3D_tintMap:
                 
@@ -214,6 +226,7 @@ csc3D_tintMap:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc3E_FlickerOnce:
                 
                 moveq   #1,d0
@@ -227,6 +240,7 @@ csc3E_FlickerOnce:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc3F_fadeMapOutToWhite:
                 
@@ -242,6 +256,7 @@ csc3F_fadeMapOutToWhite:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc40_fadeMapInFromWhite:
                 
                 moveq   #1,d0
@@ -255,6 +270,7 @@ csc40_fadeMapInFromWhite:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc41_flashScreenWhite:
                 
@@ -275,6 +291,7 @@ loc_4667A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc42_loadMapEntities:
                 
@@ -299,6 +316,7 @@ csc42_loadMapEntities:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc43_RoofEvent:
                 
                 move.w  (a6)+,d0
@@ -312,6 +330,7 @@ csc43_RoofEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc44_reloadEntities:
                 
@@ -340,6 +359,7 @@ csc44_reloadEntities:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc45_cameraSpeed:
                 
                 move.w  (a6)+,((VIEW_SCROLLING_SPEED-$1000000)).w
@@ -350,6 +370,7 @@ csc45_cameraSpeed:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc46_reloadMap:
                 
@@ -381,6 +402,7 @@ csc46_reloadMap:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc47_StepEvent:
                 
                 move.w  (a6)+,d0
@@ -394,6 +416,7 @@ csc47_StepEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc49_loadEntitiesFromMapSetup:
                 
@@ -418,6 +441,7 @@ csc49_loadEntitiesFromMapSetup:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc4A_fadeInFromBlackHalf:
                 
                 moveq   #$F,d0
@@ -432,6 +456,7 @@ csc4A_fadeInFromBlackHalf:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc4B_fadeOutToBlackHalf:
                 
                 moveq   #$F,d0
@@ -445,6 +470,7 @@ csc4B_fadeOutToBlackHalf:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LaunchFading:
                 
@@ -471,6 +497,7 @@ loc_467C6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc2D_entityActionSequence:
                 
@@ -517,6 +544,7 @@ rjt_EntityMoveCommands:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc2D_0_moveRight:
                 
                 move.w  #4,(a0)+
@@ -529,6 +557,7 @@ csc2D_0_moveRight:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc2D_1_moveUp:
                 
@@ -543,6 +572,7 @@ csc2D_1_moveUp:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc2D_2_moveLeft:
                 
                 move.w  #4,(a0)+
@@ -555,6 +585,7 @@ csc2D_2_moveLeft:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc2D_3_moveDown:
                 
@@ -569,6 +600,7 @@ csc2D_3_moveDown:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc2D_4_moveUpRight:
                 
                 move.w  #4,(a0)+
@@ -581,6 +613,7 @@ csc2D_4_moveUpRight:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc2D_5_moveUpLeft:
                 
@@ -595,6 +628,7 @@ csc2D_5_moveUpLeft:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc2D_6_moveDownLeft:
                 
                 move.w  #4,(a0)+
@@ -608,6 +642,7 @@ csc2D_6_moveDownLeft:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc2D_7_moveDownRight:
                 
                 move.w  #4,(a0)+
@@ -620,6 +655,7 @@ csc2D_7_moveDownRight:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc2D_8_faceRight:
                 
@@ -635,6 +671,7 @@ csc2D_8_faceRight:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc2D_9_faceUp:
                 
                 move.w  #$22,(a0)+ 
@@ -649,6 +686,7 @@ csc2D_9_faceUp:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc2D_A_faceLeft:
                 
                 move.w  #$22,(a0)+ 
@@ -662,6 +700,7 @@ csc2D_A_faceLeft:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc2D_B_faceDown:
                 
@@ -678,6 +717,7 @@ loc_468F2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc2D_D_jump:
                 
@@ -730,6 +770,7 @@ return_4694E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc14_setEntityActscriptManual:
                 
                 move.b  (a6)+,d0
@@ -756,6 +797,7 @@ loc_46970:
 
 ; x y zzzz : actscript read timer, wait for entity idle or not, actscript
 
+
 csc15_setEntityActscript:
                 
                 move.b  (a6)+,d0
@@ -780,6 +822,7 @@ return_46998:
 
 ; xxxx
 
+
 csc16_waitUntilEntityIdle:
                 
                 move.w  (a6)+,d0
@@ -796,6 +839,7 @@ loc_469A0:
 ; =============== S U B R O U T I N E =======================================
 
 ; make entity flash progressively faster, and set new pos-dest-facing
+
 
 csc17_setEntityPosAndFacingWithFlash:
                 
@@ -826,6 +870,7 @@ loc_469D0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc18_flashEntityWhite:
                 
                 move.w  (a6)+,d0
@@ -851,6 +896,7 @@ loc_469E8:
 ; =============== S U B R O U T I N E =======================================
 
 ; use xxxxxxxx if alive or yyyyyyyy if dead
+
 
 csc19_setEntityPosAndFacing:
                 
@@ -878,6 +924,7 @@ csc19_setEntityPosAndFacing:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc1A_setEntitySprite:
                 
                 move.w  (a6)+,d0
@@ -899,6 +946,7 @@ loc_46A5E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc1B_startEntityAnim:
                 
                 move.w  (a6),d0
@@ -914,6 +962,7 @@ csc1B_startEntityAnim:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc1C_stopEntityAnim:
                 
                 move.w  (a6),d0
@@ -928,6 +977,7 @@ csc1C_stopEntityAnim:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc1D_showPortrait:
                 
@@ -947,7 +997,7 @@ loc_46AAC:
 loc_46AB6:
                 
                 jsr     (WaitForViewScrollEnd).w
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 cmpi.w  #$FFFF,d1
                 beq.s   return_46AD0
                 move.w  d1,d0
@@ -963,6 +1013,7 @@ return_46AD0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc1E_hidePortrait:
                 
                 jsr     (WaitForViewScrollEnd).w
@@ -973,6 +1024,7 @@ csc1E_hidePortrait:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc1F_addDefeatedAlly:
                 
@@ -989,6 +1041,7 @@ csc1F_addDefeatedAlly:
 ; =============== S U B R O U T I N E =======================================
 
 ; if X Pos == -1, then dead
+
 
 csc20_updateDefeatedAllies:
                 
@@ -1015,6 +1068,7 @@ loc_46B0E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc21_reviveAlly:
                 
@@ -1047,6 +1101,7 @@ return_46B40:
 ; =============== S U B R O U T I N E =======================================
 
 ; 0/1 = scan down/up, 2/3 = wipe out/in, 4/5 = slide out/in, 6/7 = mosaic out/in
+
 
 csc22_animateEntityFadeInOrOut:
                 
@@ -1173,6 +1228,7 @@ loc_46C1A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc23_setEntityFacing:
                 
                 move.b  (a6),d0
@@ -1190,6 +1246,7 @@ csc23_setEntityFacing:
 ; =============== S U B R O U T I N E =======================================
 
 ; set playable entity 00xx or something like that
+
 
 csc24_setCameraTargetEntity:
                 
@@ -1214,6 +1271,7 @@ loc_46C52:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc25_cloneEntity:
                 
                 move.w  (a6)+,d0
@@ -1228,6 +1286,7 @@ csc25_cloneEntity:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc26_entityNodHead:
                 
@@ -1256,6 +1315,7 @@ loc_46C8A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc27_entityShakeHead:
                 
@@ -1288,6 +1348,7 @@ loc_46CC8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc28_moveEntityNextToPlayer:
                 
@@ -1353,6 +1414,7 @@ loc_46D76:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc29_setEntityDest:
                 
                 move.w  (a6)+,d0
@@ -1396,6 +1458,7 @@ return_46DEC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc2A_entityShiver:
                 
                 move.w  (a6)+,d0
@@ -1425,6 +1488,7 @@ loc_46E0A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc2B_initializeNewEntity:
                 
                 move.w  (a6)+,d0
@@ -1444,6 +1508,7 @@ csc2B_initializeNewEntity:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc2C_followEntity:
                 
@@ -1489,6 +1554,7 @@ FollowerPositions:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc2E_hideEntity:
                 
                 move.w  (a6)+,d0
@@ -1502,6 +1568,7 @@ csc2E_hideEntity:
 ; =============== S U B R O U T I N E =======================================
 
 ; specific entity behaviour for skreech join cutscene
+
 
 csc2F_fly:
                 
@@ -1523,6 +1590,7 @@ return_46EBE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc30_removeEntityShadow:
                 
                 move.w  (a6)+,d0
@@ -1538,6 +1606,7 @@ csc30_removeEntityShadow:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc50_setEntitySize:
                 
@@ -1555,6 +1624,7 @@ csc50_setEntitySize:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc51_joinBattleParty:
                 
@@ -1594,6 +1664,7 @@ return_46F56:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc52_faceEntity:
                 
@@ -1650,6 +1721,7 @@ loc_46FB4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc53_setPriority:
                 
                 move.w  (a6)+,d0
@@ -1671,6 +1743,7 @@ return_46FDA:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc54_joinForceAI:
                 
@@ -1694,6 +1767,7 @@ loc_46FF8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc55_resetCharacterBattleStats:
                 
                 jsr     ResetAlliesBattleStats
@@ -1703,6 +1777,7 @@ csc55_resetCharacterBattleStats:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc56_addFollower:
                 
@@ -1728,6 +1803,7 @@ loc_47020:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc31_moveEntityAboveEntity:
                 
                 move.w  (a6)+,d0
@@ -1748,6 +1824,7 @@ csc31_moveEntityAboveEntity:
 ;     Get address of entity information. Could be a force member or an opponent
 ;     In: D0 = playable character from FFB140
 ;     Out: A5 = entity info address in RAM
+
 
 GetEntityAddressFromCharacter:
                 
@@ -1771,6 +1848,7 @@ loc_4705A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 UpdateEntitySprite_0:
                 
                 movem.l d6/a0,-(sp)
@@ -1786,6 +1864,7 @@ UpdateEntitySprite_0:
 ; =============== S U B R O U T I N E =======================================
 
 ; move script pointer d7 forward if character dead
+
 
 AdjustScriptPointerByCharacterAliveStatus:
                 
@@ -1808,6 +1887,7 @@ AdjustScriptPointerByCharacterAliveStatus:
 ; =============== S U B R O U T I N E =======================================
 
 ; Launches DMA
+
 
 sub_4709E:
                 
@@ -1832,15 +1912,16 @@ sub_4709E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadMapsprite:
                 
                 movem.l d0-d1/d6/a1,-(sp)
                 movea.l a0,a1
                 clr.w   d6
                 move.b  ENTITYDEF_OFFSET_FACING(a5),d6
-                bne.s   loc_470DA
+                bne.s   @Continue
                 moveq   #2,d6
-loc_470DA:
+@Continue:
                 
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1

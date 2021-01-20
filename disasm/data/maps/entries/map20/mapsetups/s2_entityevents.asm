@@ -13,6 +13,7 @@ ms_map20_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_EntityEvent2:
                 
                  
@@ -30,6 +31,7 @@ byte_537DA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_EntityEvent1:
                 
                  
@@ -40,6 +42,7 @@ Map20_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map20_EntityEvent0:
                 
@@ -52,6 +55,7 @@ Map20_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_EntityEvent3:
                 
                  
@@ -62,6 +66,7 @@ Map20_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map20_EntityEvent4:
                 
@@ -74,6 +79,7 @@ Map20_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_EntityEvent5:
                 
                  
@@ -84,6 +90,7 @@ Map20_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map20_EntityEvent6:
                 

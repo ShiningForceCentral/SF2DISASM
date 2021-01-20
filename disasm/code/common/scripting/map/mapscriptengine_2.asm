@@ -6,6 +6,7 @@
 
 ; In: A0 = script address
 
+
 ExecuteMapScript:
                 
                 move.l  #FF9004_LOADING_SPACE,(dword_FFB1A4).l
@@ -149,6 +150,7 @@ loc_4723E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc_doNothing:
                 
                 rts
@@ -157,6 +159,7 @@ csc_doNothing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc00_displaySingleTextbox:
                 
@@ -168,7 +171,7 @@ csc00_displaySingleTextbox:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_47270
 loc_4726A:
@@ -198,6 +201,7 @@ return_4729C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc01_displaySingleTextboxWithVars:
                 
                 cmpi.w  #$FFFF,(a6)
@@ -206,7 +210,7 @@ csc01_displaySingleTextboxWithVars:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_472BE
 loc_472B8:
@@ -232,6 +236,7 @@ loc_472BE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc02_displayTextbox:
                 
                 tst.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
@@ -242,7 +247,7 @@ csc02_displayTextbox:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_47314
 loc_4730E:
@@ -268,6 +273,7 @@ return_47330:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc03_displayTextboxWithVars:
                 
                 cmpi.w  #$FFFF,(a6)
@@ -276,7 +282,7 @@ csc03_displayTextboxWithVars:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_47352
 loc_4734C:
@@ -298,6 +304,7 @@ loc_47352:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc04_setTextIndex:
                 
                 move.w  (a6)+,((CUTSCENE_DIALOG_INDEX-$1000000)).w
@@ -307,6 +314,7 @@ csc04_setTextIndex:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc05_playSound:
                 
@@ -319,6 +327,7 @@ csc05_playSound:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc06_doNothing:
                 
                 rts
@@ -327,6 +336,7 @@ csc06_doNothing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc07_warp:
                 
@@ -345,6 +355,7 @@ csc07_warp:
 ; =============== S U B R O U T I N E =======================================
 
 ; make 00xx character join force with bit F set for sad join music
+
 
 csc08_joinForce:
                 
@@ -388,6 +399,7 @@ loc_473EC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc09_hideTextBoxAndPortrait:
                 
                 jsr     j_HidePortraitWindow
@@ -398,6 +410,7 @@ csc09_hideTextBoxAndPortrait:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc0A_executeSubroutine:
                 
@@ -412,6 +425,7 @@ csc0A_executeSubroutine:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc0B_jump:
                 
                 movea.l (a6),a6
@@ -423,6 +437,7 @@ csc0B_jump:
 ; =============== S U B R O U T I N E =======================================
 
 ; xxxx yyyyyyyy
+
 
 csc0C_jumpIfFlagSet:
                 
@@ -445,6 +460,7 @@ return_4742A:
 
 ; xxxx yyyyyyyy
 
+
 csc0D_jumpIfFlagClear:
                 
                 move.w  (a6)+,d1
@@ -463,6 +479,7 @@ return_4743E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc0E_jumpIfForceMemberInList:
                 
@@ -492,6 +509,7 @@ return_47462:
 
 ; xxxx yyyyyyyy
 
+
 csc0F_jumpIfCharacterAlive:
                 
                 move.w  (a6)+,d0
@@ -514,6 +532,7 @@ return_47478:
 
 ; xxxx yyyy
 
+
 csc10_setOrClearFlag:
                 
                 move.w  (a6)+,d1
@@ -532,6 +551,7 @@ return_4748E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc11_promptYesNoForStoryFlow:
                 
@@ -556,6 +576,7 @@ loc_474AE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc12_executeContextMenu:
                 
@@ -586,6 +607,7 @@ loc_474DC:
 
 ; xxxx
 
+
 csc13_setStoryFlag:
                 
                 move.w  (a6)+,d1
@@ -597,6 +619,7 @@ csc13_setStoryFlag:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_474EE:
                 

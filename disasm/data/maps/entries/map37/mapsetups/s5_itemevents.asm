@@ -7,6 +7,7 @@ ms_map37_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map37_DefaultItemEvent1:
                 
                 rts
@@ -15,6 +16,7 @@ Map37_DefaultItemEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map37_ItemEvent0:
                 
@@ -28,7 +30,7 @@ Map37_ItemEvent0:
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$80,d0 
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait

@@ -33,6 +33,7 @@ ms_map10_flag722_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_2D2_EntityEvent19:
                 
                  
@@ -65,6 +66,7 @@ return_56F3E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_2D2_EntityEvent20:
                 
                  
@@ -78,6 +80,7 @@ Map10_2D2_EntityEvent20:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_2D2_EntityEvent22:
                 
                  
@@ -89,6 +92,7 @@ Map10_2D2_EntityEvent22:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_2D2_EntityEvent23:
                 
@@ -102,6 +106,7 @@ Map10_2D2_EntityEvent23:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_2D2_EntityEvent24:
                 
                  
@@ -112,6 +117,7 @@ Map10_2D2_EntityEvent24:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_2D2_EntityEvent25:
                 
@@ -132,6 +138,7 @@ return_56F7E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_2D2_EntityEvent26:
                 

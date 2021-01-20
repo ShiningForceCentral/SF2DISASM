@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EndKissPictureSequence:
                 
                 movea.l (p_endKissPicture).l,a0
@@ -41,6 +42,7 @@ loc_2C5CC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_2C5E4:
                 
                 movem.l d0-a3,-(sp)
@@ -76,6 +78,7 @@ loc_2C61C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DisplayEndingKissWithPixelFilling:
                 

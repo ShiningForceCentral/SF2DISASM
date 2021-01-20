@@ -7,6 +7,7 @@ ms_map16_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_297_EntityEvent0:
                 
                  
@@ -22,6 +23,7 @@ Map16_297_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_EntityEvent0:
                 
                 jsr     j_ChurchMenuActions
@@ -31,6 +33,7 @@ Map16_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_297_EntityEvent2:
                 
@@ -43,6 +46,7 @@ Map16_297_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_297_EntityEvent3:
                 
                 rts
@@ -51,6 +55,7 @@ Map16_297_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_297_EntityEvent4:
                 
@@ -65,6 +70,7 @@ Map16_297_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_297_EntityEvent5:
                 
                  
@@ -75,6 +81,7 @@ Map16_297_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_297_EntityEvent6:
                 
@@ -88,6 +95,7 @@ Map16_297_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_297_EntityEvent7:
                 
                 move.b  #1,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -98,6 +106,7 @@ Map16_297_EntityEvent7:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_297_EntityEvent8:
                 
@@ -110,6 +119,7 @@ Map16_297_EntityEvent8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_297_EntityEvent9:
                 
                  
@@ -121,6 +131,7 @@ Map16_297_EntityEvent9:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_297_EntityEvent10:
                 
                  
@@ -131,6 +142,7 @@ Map16_297_EntityEvent10:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_297_EntityEvent11:
                 
@@ -145,6 +157,7 @@ Map16_297_EntityEvent11:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_297_EntityEvent12:
                 
                  
@@ -155,6 +168,7 @@ Map16_297_EntityEvent12:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_297_EntityEvent13:
                 
@@ -167,6 +181,7 @@ Map16_297_EntityEvent13:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_297_EntityEvent14:
                 
@@ -182,6 +197,7 @@ Map16_297_EntityEvent14:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_297_EntityEvent15:
                 
                  
@@ -193,6 +209,7 @@ Map16_297_EntityEvent15:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_297_EntityEvent16:
                 
                 move.b  #$10,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -203,6 +220,7 @@ Map16_297_EntityEvent16:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_DefaultEntityEvent:
                 

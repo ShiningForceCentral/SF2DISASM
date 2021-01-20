@@ -3,7 +3,9 @@
 ; 0xD824..0xD8F4 : Land effect settings and move costs table
 tbl_LandEffectSettingsAndMoveCosts:
                 
-; Syntax        landEffectAndMoveCost [LANDEFFECTSETTING_]index|move_cost
+; Syntax        landEffectAndMoveCost [LANDEFFECTSETTING_]enum|moveCost
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
 ; 0: 
                 landEffectAndMoveCost LE0|2 ; 0: Low Sky

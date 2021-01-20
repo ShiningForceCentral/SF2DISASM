@@ -6,6 +6,7 @@ ms_map21_flag543_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map21_21F_DefaultItemEvent0:
                 
                 rts

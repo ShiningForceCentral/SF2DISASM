@@ -24,6 +24,7 @@ rbcs_battle32:  textCursor 2849
 
 ; Jaro joins the Force
 
+
 csub_4CD56:
                 
                 move.w  #$8F,d0 

@@ -4,7 +4,7 @@
 AllyStats11:    forClass  BRGN
                 hpGrowth  28, 79, EARLY
                 mpGrowth  0, 0, NONE
-                atkGrowth 29, 44, LATE
+                attGrowth 29, 44, LATE
                 defGrowth 28, 80, LINEAR
                 agiGrowth 19, 50, EARLY
                 spellList 

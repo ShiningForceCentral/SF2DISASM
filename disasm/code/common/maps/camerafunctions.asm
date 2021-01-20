@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 VInt_UpdateViewData:
                 
                 clr.w   d0
@@ -151,6 +152,7 @@ return_4706:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WaitForViewScrollEnd:
                 

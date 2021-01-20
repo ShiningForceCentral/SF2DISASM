@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WitchNew:
                 
                  
@@ -28,11 +29,13 @@ loc_7428:
                 tst.w   d0
                 bmi.s   byte_73C2       
                 subq.w  #1,d0
-                move.w  d0,((SAVE_SLOT_INDEX-$1000000)).w
+                move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
                 jsr     j_NewGame
+byte_743E:
+                
                 clsTxt
                 clr.w   d0
-                jsr     j_NameCharacter
+                jsr     j_NameAlly
                 btst    #7,(SAVE_FLAGS).l ; "Game completed" bit
                 beq.w   byte_7476       
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
@@ -41,7 +44,7 @@ loc_7428:
                 moveq   #$1B,d7
 loc_7464:
                 
-                jsr     j_NameCharacter
+                jsr     j_NameAlly
 loc_746A:
                 
                 addq.w  #1,d0
@@ -77,7 +80,7 @@ loc_74A8:
                 txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
 loc_74B4:
                 
-                move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
+                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
                 move.b  #3,((CURRENT_MAP-$1000000)).w
                 move.b  #3,((EGRESS_MAP_INDEX-$1000000)).w
                 bsr.w   SaveGame
@@ -96,6 +99,7 @@ loc_74DE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WitchLoad:
                 
@@ -118,7 +122,7 @@ loc_74FE:
                 tst.w   d0
                 bmi.w   byte_73C2       
                 subq.w  #1,d0
-                move.w  d0,((SAVE_SLOT_INDEX-$1000000)).w
+                move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
                 bsr.w   LoadGame
                 disableSram
                 txt     226             ; "{NAME;0}, yes!  I knew it!{W2}"
@@ -144,6 +148,7 @@ loc_753A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WitchCopy:
                 
                  
@@ -162,6 +167,7 @@ WitchCopy:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WitchDel:
                 
@@ -184,12 +190,12 @@ loc_7590:
                 tst.w   d0
                 bmi.w   byte_73C2       
                 subq.w  #1,d0
-                move.w  d0,((SAVE_SLOT_INDEX-$1000000)).w
+                move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
                 txt     230             ; "Delete?  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.w   byte_73C2       
-                move.w  ((SAVE_SLOT_INDEX-$1000000)).w,d0
+                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
                 bsr.w   ClearSaveSlotFlag
                 txt     231             ; "Hee, hee!  It's gone!{W2}"
                 bra.w   byte_73C2       

@@ -278,12 +278,16 @@ enemyEntity: macro
     dc.b \1+128
     endm
     
-itemDrop: macro
-    defineShorthand.b ITEM_,\1
+itemDrop: macro ; alias
+    itemIndex \1
     endm
     
-dropFlag: macro
+droppedFlag: macro
     dc.b \1
+    endm
+    
+dropFlag: macro ; alias
+    droppedFlag \1
     endm
     
 spellElement: macro
@@ -384,8 +388,12 @@ equipEffects: macro
     
 ; Spell definitions
     
-index: macro
+entry: macro
     defineBitfield.b SPELL_,\1
+    endm
+    
+index: macro ; alias
+    entry \1
     endm
     
 mpCost: macro
@@ -450,12 +458,16 @@ weaponGraphics: macro
     weaponPalette \2
     endm
     
-shopDef: macro
+shopInventory: macro
     dc.b narg
     rept narg
     itemIndex \1
     shift
     endr
+    endm
+    
+shopDef: macro ; alias
+    shopInventory \_
     endm
     
 promotionSection: macro
@@ -522,9 +534,13 @@ portrait: macro
     defineShorthand.b PORTRAIT_,\1
     endm
     
-speechSound: macro
+speechSfx: macro
     defineShorthand.b SFX_,\1
     dc.b 0
+    endm
+    
+speechSound: macro ; alias
+    speechSfx \1
     endm
     
 ; Enemy definitions
@@ -714,7 +730,7 @@ vdpTile: macro
     endm
     
 vdpBaseTile: macro
-    defineBitfieldWithParam.w VDPTILE_,\1,VDPTILE_PLT3|VDPTILE_PRIORITY
+    defineBitfieldWithParam.w VDPTILE_,\1,VDPTILE_PALETTE3|VDPTILE_PRIORITY
     endm
     
 ; VDP sprites

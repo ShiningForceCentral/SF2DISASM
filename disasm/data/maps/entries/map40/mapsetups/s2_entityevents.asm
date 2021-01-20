@@ -9,6 +9,7 @@ ms_map40_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map40_EntityEvent0:
                 
                  
@@ -19,6 +20,7 @@ Map40_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map40_EntityEvent1:
                 

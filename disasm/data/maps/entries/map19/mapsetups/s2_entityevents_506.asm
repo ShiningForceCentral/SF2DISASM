@@ -26,6 +26,7 @@ ms_map19_flag506_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_1FA_EntityEvent1:
                 
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
@@ -38,6 +39,7 @@ Map19_1FA_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_1FA_EntityEvent2:
                 
                  
@@ -48,6 +50,7 @@ Map19_1FA_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_1FA_EntityEvent3:
                 
@@ -62,6 +65,7 @@ Map19_1FA_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_1FA_EntityEvent6:
                 
                  
@@ -73,6 +77,7 @@ Map19_1FA_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_1FA_EntityEvent7:
                 
@@ -86,6 +91,7 @@ Map19_1FA_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_1FA_EntityEvent11:
                 
                  
@@ -97,6 +103,7 @@ Map19_1FA_EntityEvent11:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_1FA_EntityEvent14:
                 
                  
@@ -107,6 +114,7 @@ Map19_1FA_EntityEvent14:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_1FA_EntityEvent0:
                 

@@ -25,7 +25,7 @@ cs_5C6CA:       textCursor 3642
                 setQuake 0
                 setFacing FOLLOWER_A,DOWN
                 nextSingleText $0,FOLLOWER_A ; "OK, you go first!{W1}"
-                setStoryFlag 15         ; Battle 15 unlocked
+                setStoryFlag 15         ; Battle 15 unlocked - BATTLE_SHRINE_SOUTH_OF_RIBBLE    
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 followEntity FOLLOWER_A,FOLLOWER_B,2

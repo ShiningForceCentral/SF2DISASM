@@ -36,6 +36,7 @@ ms_map46_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent0:
                 
                 moveq   #1,d0
@@ -45,6 +46,7 @@ Map46_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent1:
                 
@@ -56,6 +58,7 @@ Map46_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent2:
                 
                 moveq   #3,d0
@@ -65,6 +68,7 @@ Map46_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent3:
                 
@@ -76,6 +80,7 @@ Map46_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent4:
                 
                 moveq   #5,d0
@@ -85,6 +90,7 @@ Map46_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent5:
                 
@@ -96,6 +102,7 @@ Map46_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent6:
                 
                 moveq   #7,d0
@@ -105,6 +112,7 @@ Map46_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent7:
                 
@@ -116,6 +124,7 @@ Map46_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent8:
                 
                 moveq   #9,d0
@@ -125,6 +134,7 @@ Map46_EntityEvent8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent9:
                 
@@ -136,6 +146,7 @@ Map46_EntityEvent9:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent10:
                 
                 moveq   #$B,d0
@@ -145,6 +156,7 @@ Map46_EntityEvent10:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent11:
                 
@@ -156,6 +168,7 @@ Map46_EntityEvent11:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent12:
                 
                 moveq   #$D,d0
@@ -165,6 +178,7 @@ Map46_EntityEvent12:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent13:
                 
@@ -176,6 +190,7 @@ Map46_EntityEvent13:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent14:
                 
                 moveq   #$F,d0
@@ -185,6 +200,7 @@ Map46_EntityEvent14:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent15:
                 
@@ -196,6 +212,7 @@ Map46_EntityEvent15:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent16:
                 
                 moveq   #$11,d0
@@ -205,6 +222,7 @@ Map46_EntityEvent16:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent17:
                 
@@ -216,6 +234,7 @@ Map46_EntityEvent17:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent18:
                 
                 moveq   #$13,d0
@@ -225,6 +244,7 @@ Map46_EntityEvent18:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent19:
                 
@@ -236,6 +256,7 @@ Map46_EntityEvent19:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent20:
                 
                 moveq   #$15,d0
@@ -245,6 +266,7 @@ Map46_EntityEvent20:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent21:
                 
@@ -256,6 +278,7 @@ Map46_EntityEvent21:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent22:
                 
                 moveq   #$17,d0
@@ -265,6 +288,7 @@ Map46_EntityEvent22:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent23:
                 
@@ -276,6 +300,7 @@ Map46_EntityEvent23:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent24:
                 
                 moveq   #$19,d0
@@ -285,6 +310,7 @@ Map46_EntityEvent24:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent25:
                 
@@ -296,6 +322,7 @@ Map46_EntityEvent25:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent26:
                 
                 moveq   #$1B,d0
@@ -305,6 +332,7 @@ Map46_EntityEvent26:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent27:
                 
@@ -316,6 +344,7 @@ Map46_EntityEvent27:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map46_EntityEvent28:
                 
                 moveq   #$1D,d0
@@ -325,6 +354,7 @@ Map46_EntityEvent28:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_EntityEvent29:
                 
@@ -336,6 +366,7 @@ Map46_EntityEvent29:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map46_DefaultEntityEvent:
                 

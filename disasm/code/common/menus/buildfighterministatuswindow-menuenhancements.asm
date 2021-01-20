@@ -7,7 +7,7 @@
 ; In: A1 = window tiles address
 ;     D0 = combatant index
 
-BuildFighterMiniStatusWindow:
+BuildMiniStatusWindow:
                 
 window_tiles_address = -8
 combatant_index = -2
@@ -17,7 +17,7 @@ combatant_index = -2
                 
                 ; Clear window tiles
                 move.w d7,-(sp)
-                move.w  #WINDOW_FIGHTERMINISTATUS_LONGWORD_COUNTER,d7
+                move.w  #WINDOW_MINISTATUS_LONGWORD_COUNTER,d7
                 
 @Clear_Loop:
                 clr.l   (a1)+
@@ -43,14 +43,14 @@ combatant_index = -2
                 move.w  d3,d6
                 
 @CapStatBarLength:
-                cmpi.w  #WINDOW_FIGHTERMINISTATUS_MAX_STATBAR_LENGTH,d6
+                cmpi.w  #WINDOW_MINISTATUS_MAX_STATBAR_LENGTH,d6
                 ble.s   @CalculateStatBarLinesWidth
-                moveq   #WINDOW_FIGHTERMINISTATUS_MAX_STATBAR_LENGTH,d6
+                moveq   #WINDOW_MINISTATUS_MAX_STATBAR_LENGTH,d6
                 
 @CalculateStatBarLinesWidth:
                 addq.w  #3,d6
                 lsr.w   #3,d6
-                addi.w  #WINDOW_FIGHTERMINISTATUS_MIN_WIDTH,d6
+                addi.w  #WINDOW_MINISTATUS_MIN_WIDTH,d6
                 
                 ; Calculate header line width (name, class, level) -> D4
                 movem.w d0-d1/d7,-(sp)
@@ -79,49 +79,49 @@ combatant_index = -2
                 move.w  d4,d6
                 
 @CopyTileColumns:
-                move.w  d6,((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w
-                lea     FighterMiniStatusWindowLayout(pc), a0
+                move.w  d6,((MINISTATUS_WINDOW_WIDTH-$1000000)).w
+                lea     MiniStatusWindowLayout(pc), a0
                 movea.l window_tiles_address(a6),a1
                 
                 ; Copy leftmost columns
-                bsr.w   CopyFighterMinistatusWindowTileColumn
-                bsr.w   CopyFighterMinistatusWindowTileColumn
-                bsr.w   CopyFighterMinistatusWindowTileColumn
-                move.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,d7
-                subi.w  #WINDOW_FIGHTERMINISTATUS_SIDECOLUMNS_NUMBER_PLUS_ONE,d7
+                bsr.w   CopyMinistatusWindowTileColumn
+                bsr.w   CopyMinistatusWindowTileColumn
+                bsr.w   CopyMinistatusWindowTileColumn
+                move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d7
+                subi.w  #WINDOW_MINISTATUS_SIDECOLUMNS_NUMBER_PLUS_ONE,d7
                 
 @CopyMiddleColumns_Loop:
-                lea     FighterMiniStatusWindowLayout_Body(pc), a0
-                bsr.w   CopyFighterMinistatusWindowTileColumn
+                lea     MiniStatusWindowLayout_Body(pc), a0
+                bsr.w   CopyMinistatusWindowTileColumn
                 dbf     d7,@CopyMiddleColumns_Loop
                 
                 ; Copy rightmost columns
-                bsr.w   CopyFighterMinistatusWindowTileColumn
-                bsr.w   CopyFighterMinistatusWindowTileColumn
-                bsr.w   CopyFighterMinistatusWindowTileColumn
+                bsr.w   CopyMinistatusWindowTileColumn
+                bsr.w   CopyMinistatusWindowTileColumn
+                bsr.w   CopyMinistatusWindowTileColumn
                 
                 if (THREE_DIGITS_STATS>=1)
                 suba.w  #10,a0
-                bsr.w   CopyFighterMinistatusWindowTileColumn
+                bsr.w   CopyMinistatusWindowTileColumn
                 endif
                 
-                bsr.w   CopyFighterMinistatusWindowTileColumn
-                bsr.w   CopyFighterMinistatusWindowTileColumn
+                bsr.w   CopyMinistatusWindowTileColumn
+                bsr.w   CopyMinistatusWindowTileColumn
                 
                 ; Write name, class, level
                 movem.w d0-d3,-(sp)
                 move.w  combatant_index(a6),d0
                 jsr     GetCombatantName
                 movea.l window_tiles_address(a6),a1
-                adda.w  #WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_LINE,a1
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
                 addq.l  #2,a1
-                moveq   #-WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MINISTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 addq.w  #2,a1
                 move.w  combatant_index(a6),d0
                 blt.s   @DrawStatBars   ; skip if enemy
                 jsr     GetClassAndName
-                moveq   #-WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MINISTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant_index(a6),d0
                 jsr     GetCurrentLevel
@@ -142,8 +142,8 @@ combatant_index = -2
                 movem.w d0-d3,-(sp)
                 movem.w d2-d3,-(sp)     ; -> stash current/max MP values
                 movea.l window_tiles_address(a6),a1
-                adda.w  #WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_TWO_LINES,a1
-                addq.w  #WINDOW_FIGHTERMINISTATUS_OFFSET_STATBARS_START,a1
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_TWO_LINES,a1
+                addq.w  #WINDOW_MINISTATUS_OFFSET_STATBARS_START,a1
                 move.l  a1,-(sp)        ; -> stash stat bars start address
                 lea     (FF8804_LOADING_SPACE).l,a0
                 moveq   #1,d2           ; HP bar VDP tile start index
@@ -151,7 +151,7 @@ combatant_index = -2
                 
                 ; Draw MP bar
                 movea.l (sp)+,a1        ; A1 <- pop stat bars start address
-                adda.w  #WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_LINE,a1
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
                 movem.w (sp)+,d0-d1     ; D0, D1 <- pop current/max MP values
                 tst.w   d1
                 beq.s   @WriteStatValues ; skip if 0 max MP
@@ -164,10 +164,10 @@ combatant_index = -2
                 
                 ; Write current HP
                 movea.l window_tiles_address(a6),a1
-                adda.w  #WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_TWO_LINES,a1
-                adda.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
-                adda.w  ((FIGHTER_MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
-                suba.w  #WINDOW_FIGHTERMINISTATUS_OFFSET_STAT_VALUES,a1
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_TWO_LINES,a1
+                adda.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
+                adda.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
+                suba.w  #WINDOW_MINISTATUS_OFFSET_STAT_VALUES,a1
                 move.l  a1,-(sp)
                 bsr.s   WriteThreeDigitsStatValue
                 
@@ -178,7 +178,7 @@ combatant_index = -2
                 
                 ; Write current MP
                 movea.l (sp)+,a1
-                adda.w  #WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_LINE,a1
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
                 move.w  d2,d0
                 bsr.s   WriteThreeDigitsStatValue
                 
@@ -190,7 +190,7 @@ combatant_index = -2
                 unlk    a6
                 rts
 
-    ; End of function BuildFighterMiniStatusWindow
+    ; End of function BuildMiniStatusWindow
 
 
 ; In: D0 = character index, D1 = stat value
@@ -199,7 +199,7 @@ WriteThreeDigitsStatValue_MemberStats:
                 if (FULL_CLASS_NAMES>=1)
                 tst.b   d0
                 bmi.s   WriteThreeDigitsStatValue_MemberList
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
                 endif
                 
 WriteThreeDigitsStatValue_MemberList:
@@ -236,15 +236,15 @@ aUnknownValue:  if (THREE_DIGITS_STATS=0)
 
 ; draw tiles from A0 into A1 (one column)
 
-CopyFighterMinistatusWindowTileColumn:
+CopyMinistatusWindowTileColumn:
                 
                 move.w  (a0)+,(a1)
-                move.w  (a0)+,WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_LINE(a1)
-                move.w  (a0)+,WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_LINE*2(a1)
-                move.w  (a0)+,WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_LINE*3(a1)
-                move.w  (a0)+,WINDOW_FIGHTERMINISTATUS_OFFSET_NEXT_LINE*4(a1)
+                move.w  (a0)+,WINDOW_MINISTATUS_OFFSET_NEXT_LINE(a1)
+                move.w  (a0)+,WINDOW_MINISTATUS_OFFSET_NEXT_LINE*2(a1)
+                move.w  (a0)+,WINDOW_MINISTATUS_OFFSET_NEXT_LINE*3(a1)
+                move.w  (a0)+,WINDOW_MINISTATUS_OFFSET_NEXT_LINE*4(a1)
                 addq.w  #2,a1
                 rts
 
-    ; End of function CopyFighterMinistatusWindowTileColumn
+    ; End of function CopyMinistatusWindowTileColumn
 

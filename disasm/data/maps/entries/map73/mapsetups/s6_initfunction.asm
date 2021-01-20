@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map73_InitFunction:
                 
                  
@@ -14,7 +15,7 @@ ms_map73_InitFunction:
                 rts
 byte_50354:
                 
-                chkFlg  508             ; Battle 8 completed
+                chkFlg  508             ; Battle 8 completed - BATTLE_NORTH_CLIFF                  
                 beq.s   return_5036C
                 chkFlg  705             ; Set after you automatically walk into New Granseal after it is built
                 bne.s   return_5036C
@@ -29,6 +30,7 @@ return_5036C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5036E:
                 
@@ -46,6 +48,7 @@ loc_50370:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_50380:
                 
                 move.w  #$1200,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
@@ -56,6 +59,7 @@ sub_50380:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5038E:
                 
@@ -71,6 +75,7 @@ loc_50390:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5039E:
                 

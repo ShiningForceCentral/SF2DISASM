@@ -8,6 +8,7 @@ ms_map8_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_EntityEvent0:
                 
                  
@@ -27,6 +28,7 @@ byte_560A6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_EntityEvent1:
                 
                  
@@ -37,6 +39,7 @@ Map8_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map8_2C4_EntityEvent2:
                 
@@ -49,6 +52,7 @@ Map8_2C4_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_2C4_EntityEvent3:
                 
                 jmp     j_ChurchMenuActions
@@ -57,6 +61,7 @@ Map8_2C4_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map8_2C4_EntityEvent4:
                 
@@ -70,6 +75,7 @@ Map8_2C4_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map8_2C4_EntityEvent5:
                 
@@ -91,6 +97,7 @@ return_560E0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_2C4_EntityEvent6:
                 
                 move.b  #3,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -100,6 +107,7 @@ Map8_2C4_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map8_2C4_EntityEvent7:
                 
@@ -111,6 +119,7 @@ Map8_2C4_EntityEvent7:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map8_2C4_EntityEvent8:
                 
@@ -126,6 +135,7 @@ Map8_2C4_EntityEvent8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_2C4_EntityEvent9:
                 
                  
@@ -137,6 +147,7 @@ Map8_2C4_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map8_2C4_EntityEvent10:
                 
@@ -150,6 +161,7 @@ Map8_2C4_EntityEvent10:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_2C4_EntityEvent11:
                 
                  
@@ -162,6 +174,7 @@ Map8_2C4_EntityEvent11:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_2C4_EntityEvent13:
                 
                 move.b  #3,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -172,6 +185,7 @@ Map8_2C4_EntityEvent13:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map8_2C4_EntityEvent12:
                 

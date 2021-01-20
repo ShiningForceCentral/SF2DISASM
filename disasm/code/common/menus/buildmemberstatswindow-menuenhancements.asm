@@ -7,7 +7,7 @@
 ; In: D0 = character index
 ;     A1 = window tile adress
 
-BuildMemberStatsWindow:
+BuildMemberStatusWindow:
                 
 window_tile_address = -6
 character_index     = -2
@@ -20,11 +20,11 @@ character_index     = -2
                 move.l  a1,window_tile_address(a6)
                 
                 ; Copy window layout
-                movea.l (p_MemberStatsWindowLayout).l,a0
+                movea.l (p_MemberStatusWindowLayout).l,a0
                 
                 
                 if (FULL_CLASS_NAMES=0)
-                move.w  #WINDOW_MEMBERSTATS_VDPTILEORDER_BYTESIZE,d7
+                move.w  #WINDOW_MEMBERSTATUS_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w
                 else
                 move.w  #126,d7     ; window layout head bytesize
@@ -33,7 +33,7 @@ character_index     = -2
                 adda.w  d7,a1
                 tst.b   d0
                 bmi.s   @CopyWindowLayoutBody
-                suba.w  #WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,a0
+                suba.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a0
                 
 @CopyWindowLayoutBody:
                 move.w  #336,d7     ; window layout body bytesize
@@ -42,7 +42,7 @@ character_index     = -2
                 adda.w  d7,a1
                 tst.b   d0
                 bmi.s   @CopyWindowLayoutTail
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,a0
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a0
                 
 @CopyWindowLayoutTail:
                 move.w  #630,d7     ; window layout tail bytesize
@@ -52,7 +52,7 @@ character_index     = -2
                 
                 ; Write character name
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_NAME,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NAME,a1
                 move.w  character_index(a6),d0
                 
                 
@@ -60,18 +60,18 @@ character_index     = -2
                 tst.b   d0
                 bmi.s   @WriteMemberName            ; skip class name if enemy
                 jsr     GetClassAndName                 ; write shortened class name (original behavior)
-                moveq   #-WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 addq.w  #2,a1
                 
 @WriteMemberName:
                 move.w  character_index(a6),d0
                 jsr     GetCombatantName
-                moveq   #-WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 else
                 jsr     GetCombatantName
-                moveq   #-WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  character_index(a6),d0
                 tst.b   d0
@@ -86,7 +86,7 @@ character_index     = -2
                 
 @AddStatusEffectTiles:
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_STATUSEFFECT_TILES,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_STATUSEFFECT_TILES,a1
                 move.l  a1,d3                   ; D3 = current window tile address
                 move.w  character_index(a6),d0
                 jsr     GetStatusEffects
@@ -159,28 +159,28 @@ character_index     = -2
                 ; Current HP
                 jsr     GetCurrentHP
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_CURRENT_HP,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_CURRENT_HP,a1
                 bsr.w   WriteThreeDigitsStatValue_MemberStats
                 
                 ; Max HP
                 move.w  character_index(a6),d0
                 jsr     GetMaxHP
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_MAX_HP,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_MAX_HP,a1
                 bsr.w   WriteThreeDigitsStatValue_MemberStats
                 
                 ; Current MP
                 move.w  character_index(a6),d0
                 jsr     GetCurrentMP
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_CURRENT_MP,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_CURRENT_MP,a1
                 bsr.w   WriteThreeDigitsStatValue_MemberStats
                 
                 ; Max MP
                 move.w  character_index(a6),d0
                 jsr     GetMaxMP
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_MAX_MP,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_MAX_MP,a1
                 bsr.w   WriteThreeDigitsStatValue_MemberStats
                 
                 ; LV
@@ -193,7 +193,7 @@ character_index     = -2
                 
                 jsr     GetCurrentLevel
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_LV,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_LV,a1
                 bsr.w   WriteTwoDigitsStatValue_MemberStats
                 
                 ; EXP
@@ -206,7 +206,7 @@ character_index     = -2
                 
                 jsr     GetCurrentEXP
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_EXP,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_EXP,a1
                 bsr.w   WriteTwoDigitsStatValue_MemberStats
                 
                 bra.s   @ATT
@@ -215,30 +215,30 @@ character_index     = -2
                 if (SHOW_ENEMY_LEVEL=0)
                 lea     aNA(pc), a0     
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_ENEMY_LV,a1
-                moveq   #WINDOW_MEMBERSTATS_NA_STRING_LENGTH,d7
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_LV,a1
+                moveq   #WINDOW_MEMBERSTATUS_NA_STRING_LENGTH,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 endif
                 
 @EnemyEXP:
                 lea     aNA(pc), a0     
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_ENEMY_EXP,a1
-                moveq   #WINDOW_MEMBERSTATS_NA_STRING_LENGTH,d7
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_EXP,a1
+                moveq   #WINDOW_MEMBERSTATUS_NA_STRING_LENGTH,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 
 @ATT:           ; ATT
                 move.w  character_index(a6),d0
                 jsr     GetCurrentATT
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_ATT,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ATT,a1
                 bsr.w   WriteThreeDigitsStatValue_MemberStats
                 
                 ; DEF
                 move.w  character_index(a6),d0
                 jsr     GetCurrentDEF
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_DEF,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_DEF,a1
                 bsr.w   WriteThreeDigitsStatValue_MemberStats
                 
                 ; AGI
@@ -246,14 +246,14 @@ character_index     = -2
                 jsr     GetCurrentAGI
                 andi.w  #DISPLAYED_AGI_VALUE_MASK,d1
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_AGI,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_AGI,a1
                 bsr.w   WriteThreeDigitsStatValue_MemberStats
                 
                 ; MOV
                 move.w  character_index(a6),d0
                 jsr     GetCurrentMOV
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_MOV,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_MOV,a1
                 bsr.w   WriteThreeDigitsStatValue_MemberStats
                 
                 ; Write MAGIC and ITEM sections
@@ -261,11 +261,11 @@ character_index     = -2
                 ;   D4 = current window tile address
                 ;   D5 = current item or spell index
                 ;   A2 = current loading space address
-                move.w  #VDPTILE_ICONS_START|VDPTILE_PLT3|VDPTILE_PRIORITY,d3
+                move.w  #VDPTILE_ICONS_START|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d3
                 lea     ((FF9004_LOADING_SPACE-$1000000)).w,a2
                 
                 move.l  window_tile_address(a6),d4
-                addi.w  #WINDOW_MEMBERSTATS_OFFSET_MAGIC_START,d4
+                addi.w  #WINDOW_MEMBERSTATUS_OFFSET_MAGIC_START,d4
                 move.l  d4,-(sp)                    ; -> stash start of MAGIC section address
                 moveq   #COMBATANT_SPELLSLOTS_COUNTER,d6
                 
@@ -293,7 +293,7 @@ character_index     = -2
                 jsr     FindSpellName
                 movea.l d4,a1
                 addq.w  #4,a1           ; offset to spell name relative from start
-                moveq   #-WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 
                 ; Copy spell level tiles to window layout
@@ -306,7 +306,7 @@ character_index     = -2
                 lsr.w   #4,d1
                 adda.w  d1,a0
                 movea.l d4,a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_SPELL_LV_TILES,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_SPELL_LV_TILES,a1
                 moveq   #12,d7          ; spell level VDP tiles bytes size
                 jsr     (CopyBytes).w   
                 
@@ -314,7 +314,7 @@ character_index     = -2
                 move.w  d5,d1
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
                 addi.w  #ICON_SPELLS_START,d1
-                movea.l (p_IconTiles).l,a0
+                movea.l (p_Icons).l,a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
@@ -326,7 +326,7 @@ character_index     = -2
                 bsr.w   CleanMemberStatsIconCorners
                 
                 adda.w  #ICONTILES_BYTESIZE,a2
-                addi.w  #WINDOW_MEMBERSTATS_OFFSET_NEXT_SPELL,d4
+                addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_SPELL,d4
                 
 @NextSpell:
                 dbf     d6,@WriteSpells_Loop
@@ -339,21 +339,21 @@ character_index     = -2
                 ; Write 'Nothing' string under MAGIC section
                 lea     aNothing_0(pc), a0
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_MAGIC_NOTHING_STRING,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_MAGIC_NOTHING_STRING,a1
                 moveq   #10,d7          ; string length
-                moveq   #-WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 
 @WriteItems:
                 move.l  window_tile_address(a6),d4
-                addi.w  #WINDOW_MEMBERSTATS_OFFSET_ITEM_START,d4
+                addi.w  #WINDOW_MEMBERSTATUS_OFFSET_ITEM_START,d4
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d6
                 
 @WriteItems_Loop:
                 move.w  character_index(a6),d0
                 move.w  #COMBATANT_ITEMSLOTS_COUNTER,d1
                 sub.w   d6,d1
-                jsr     GetItemAndNumberOfItems
+                jsr     GetItemAndNumberHeld
                 cmpi.b  #ITEM_NOTHING,d1
                 beq.w   @WriteItems_Break
                 
@@ -366,7 +366,7 @@ character_index     = -2
                 jsr     FindItemName
                 movea.l d4,a1
                 addq.w  #4,a1           ; offset to item name relative from start
-                moveq   #-WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  d5,d1
                 btst    #ITEMENTRY_BIT_EQUIPPED,d1
@@ -375,16 +375,16 @@ character_index     = -2
                 ; Write 'Equipped' string
                 lea     aEquipped_0(pc), a0
                 movea.l d4,a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_EQUIPPED_STRING,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_EQUIPPED_STRING,a1
                 moveq   #10,d7          ; string length
-                moveq   #-WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 
 @LoadItemIcon:
                 ; Load icon pixel data to temp space
                 move.w  d5,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_IconTiles).l,a0
+                movea.l (p_Icons).l,a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
                 adda.w  d1,a0
                 movea.l a2,a1
@@ -396,7 +396,7 @@ character_index     = -2
                 btst    #ITEMENTRY_BIT_BROKEN,d1
                 beq.s   @CleanIconCorners
                 
-                movea.l (p_IconTiles).l,a0
+                movea.l (p_Icons).l,a0
                 lea     ICONTILES_OFFSET_CRACKS(a0),a0
                 move.w  #ICONTILES_CRACKS_PIXELS_COUNTER,d0
                 
@@ -427,7 +427,7 @@ character_index     = -2
                 bsr.w   CleanMemberStatsIconCorners
                 
                 adda.w  #ICONTILES_BYTESIZE,a2
-                addi.w  #WINDOW_MEMBERSTATS_OFFSET_NEXT_ITEM,d4
+                addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_ITEM,d4
                 dbf     d6,@WriteItems_Loop
                 
 @WriteItems_Break:
@@ -437,9 +437,9 @@ character_index     = -2
                 ; Write 'Nothing' string under ITEM section
                 lea     aNothing_1(pc), a0
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_ITEM_NOTHING_STRING,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ITEM_NOTHING_STRING,a1
                 moveq   #10,d7          ; string length
-                moveq   #-WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 
 @WriteJewels:
@@ -451,14 +451,14 @@ character_index     = -2
                 
                 lea     aJewel(pc), a0  
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_JEWEL_STRING_START,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_START,a1
                 moveq   #8,d7           ; string length
-                moveq   #-WINDOW_MEMBERSTATS_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 
                 ; Copy icon tiles to window layout
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_JEWEL_OF_LIGHT,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_JEWEL_OF_LIGHT,a1
                 bsr.w   CopyMemberScreenIconsToVdpTileOrder
                 
                 ; Load Jewel of Light icon pixel data to temp space
@@ -480,12 +480,12 @@ character_index     = -2
                 
                 ; Copy icon tiles to window layout
                 movea.l window_tile_address(a6),a1
-                adda.w  #WINDOW_MEMBERSTATS_OFFSET_JEWEL_OF_EVIL,a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_JEWEL_OF_EVIL,a1
                 bsr.s   CopyMemberScreenIconsToVdpTileOrder
                 
                 ; Append 'S' character to 'JEWEL' string if we obtained both jewels
                 movea.l window_tile_address(a6),a1
-                move.w  #VDPTILE_UPPERCASE_S|VDPTILE_PLT3|VDPTILE_PRIORITY,WINDOW_MEMBERSTATS_OFFSET_JEWEL_STRING_END(a1)
+                move.w  #VDPTILE_UPPERCASE_S|VDPTILE_PALETTE3|VDPTILE_PRIORITY,WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_END(a1)
                 
                 ; Load Jewel of Evil icon pixel data to temp space
                 move.w  #ICON_JEWEL_OF_EVIL,d1

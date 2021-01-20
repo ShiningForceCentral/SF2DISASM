@@ -10,6 +10,7 @@ ms_map70_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map70_ZoneEvent0:
                 
                 move.w  #$E,d0
@@ -21,12 +22,13 @@ Map70_ZoneEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map70_DefaultZoneEvent:
                 
                  
-                chkFlg  510             ; Battle 10 completed
+                chkFlg  510             ; Battle 10 completed - BATTLE_TO_THE_EAST                 
                 bne.s   return_4FE30
-                setFlg  410             ; Battle 10 unlocked
+                setFlg  410             ; Battle 10 unlocked - BATTLE_TO_THE_EAST               
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FE30:
                 

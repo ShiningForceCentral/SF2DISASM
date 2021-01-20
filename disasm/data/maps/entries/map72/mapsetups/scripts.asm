@@ -137,7 +137,7 @@ cs_4FFDA:       textCursor 3341
                 followEntity FOLLOWER_A,ALLY_BOWIE,2
                 followEntity ALLY_PETER,FOLLOWER_A,1
                 followEntity FOLLOWER_B,FOLLOWER_A,3
-                setStoryFlag 25         ; Battle 25 unlocked
+                setStoryFlag 25         ; Battle 25 unlocked - BATTLE_NORTH_CAVE                
                 csc_end
 cs_5023E:       textCursor 3357
                 setActscriptWait ALLY_PETER,eas_Init

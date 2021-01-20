@@ -9,6 +9,7 @@ ms_map20_flag543_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_21F_DefaultZoneEvent:
                 
                 rts
@@ -17,6 +18,7 @@ Map20_21F_DefaultZoneEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map20_21F_ZoneEvent0:
                 
@@ -48,6 +50,7 @@ cs_632EA:       setActscriptWait ALLY_BOWIE,eas_Init
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_21F_ZoneEvent1:
                 
                  
@@ -57,7 +60,7 @@ Map20_21F_ZoneEvent1:
                 bne.s   return_6332E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$80,d0 
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 txt     4009            ; "Oh, {LEADER}!{N}I really respect you.{W2}"
@@ -73,6 +76,7 @@ return_6332E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_21F_ZoneEvent2:
                 
                  
@@ -81,7 +85,7 @@ Map20_21F_ZoneEvent2:
                 script  cs_6335E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$80,d0 
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 txt     4012            ; "{LEADER}, please kiss{N}her.{W1}"

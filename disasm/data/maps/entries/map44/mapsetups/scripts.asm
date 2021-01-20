@@ -112,6 +112,7 @@ Map21_DefaultZoneEvent:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csub_54714:
                 
                 moveq   #$F,d7

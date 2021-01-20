@@ -7,6 +7,7 @@ ms_map41_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map41_DefaultItemEvent1:
                 
                 rts
@@ -15,6 +16,7 @@ Map41_DefaultItemEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map41_ItemEvent0:
                 

@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_nullsub_18010:
                 
                 jmp     nullsub_18010(pc)
@@ -12,6 +13,7 @@ j_nullsub_18010:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_InitializeBattlescene:
                 
@@ -22,6 +24,7 @@ j_InitializeBattlescene:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_ExecuteBattlesceneScript:
                 
                 jmp     ExecuteBattlesceneScript(pc)
@@ -30,6 +33,7 @@ j_ExecuteBattlesceneScript:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_EndBattlescene:
                 
@@ -40,6 +44,7 @@ j_EndBattlescene:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 nullsub_18010:
                 
                 rts
@@ -48,6 +53,7 @@ nullsub_18010:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 InitializeBattlescene:
                 
@@ -60,6 +66,7 @@ loc_18026:
                 
                 clr.l   (a0)+
                 dbf     d2,loc_18026
+                
                 move.w  d1,-(sp)
                 move.w  d0,((BATTLESCENE_ENEMY-$1000000)).w
                 bsr.w   GetBattleSpriteAndPalette
@@ -261,7 +268,7 @@ loc_1828C:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateBattlesceneGraphics
-                jsr     sub_1001C
+                jsr     j_CreateBattlesceneMiniStatusWindows
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
@@ -323,6 +330,7 @@ loc_18390:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ExecuteBattlesceneScript:
                 
                 module
@@ -373,6 +381,7 @@ rjt_BattlesceneScriptCommands:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 bsc13_waitForPlayerInput:
                 
                 jmp     (WaitForPlayerInput).w
@@ -381,6 +390,7 @@ bsc13_waitForPlayerInput:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 bsc14_nullCommand:
                 
@@ -393,6 +403,7 @@ bsc14_nullCommand:
 
 ; xx      animation type index (0000 for attack, 0001 for dodge, 0002 for magic/item -- others (i.e. MMNK crit, RBT laser, BRGN flashing)
 ; yy      magic/item/projectile animation index, set $0080 to come from enemy
+
 
 bsc00_animateEnemyAction:
                 
@@ -468,6 +479,7 @@ loc_18496:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 AnimateSpell:
                 
                 move.w  2(a6),d0
@@ -489,6 +501,7 @@ EndBattlesceneAnimation:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_184B0:
                 
@@ -528,6 +541,7 @@ return_184E6:
 
 ; xx      animation type index (0000 for attack, 0001 for dodge, 0002 for magic/item -- others (i.e. MMNK crit, RBT laser, BRGN flashing)
 ; yy      magic/item/projectile animation index, set $0080 to come from enemy
+
 
 bsc01_animateAllyAction:
                 
@@ -623,6 +637,7 @@ loc_185C0:
 
 ; like previous bsc but for battlescene ally
 
+
 bsc03_moveAllyBattleSprite:
                 
                 cmpi.w  #$FFFF,((BATTLESCENE_ALLY-$1000000)).w
@@ -641,6 +656,7 @@ bsc03_moveAllyBattleSprite:
 
 ; set a long value at FFB3F6, related to battlescene enemy
 
+
 bsc02_moveEnemyBattleSprite:
                 
                 cmpi.w  #$FFFF,((BATTLESCENE_ENEMY-$1000000)).w
@@ -658,6 +674,7 @@ bsc02_moveEnemyBattleSprite:
 ; =============== S U B R O U T I N E =======================================
 
 ; related to battlescene ally
+
 
 bsc05_makeAllyIdle:
                 
@@ -724,6 +741,7 @@ return_18698:
 
 ; related to battlescene enemy
 
+
 bsc04_makeEnemyIdle:
                 
                 cmpi.w  #$FFFF,((BATTLESCENE_ENEMY-$1000000)).w
@@ -753,6 +771,7 @@ return_186D8:
 
 ; xx      Combatant index
 ; yy      0000 for right side, 0001 for left side
+
 
 bsc07_switchAllies:
                 
@@ -928,6 +947,7 @@ loc_188CC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_188D4:
                 
                 move.w  ((word_FFB3F2-$1000000)).w,d0
@@ -980,6 +1000,7 @@ return_18928:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1892A:
                 
                 lea     ((PALETTE_1_BASE-$1000000)).w,a0
@@ -998,6 +1019,7 @@ loc_18934:
 
 ; xx      Combatant index
 ; yy      0000 for right side, 0001 for left side
+
 
 bsc06_switchEnemies:
                 
@@ -1217,6 +1239,7 @@ loc_18BA0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_18BAA:
                 
                 cmpi.w  #3,d3
@@ -1266,6 +1289,7 @@ off_18BFE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_18C1E:
                 
                 subi.w  #$20,d6 
@@ -1306,6 +1330,7 @@ loc_18C5A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_18C94:
                 
@@ -1349,6 +1374,7 @@ loc_18CD0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_18D14:
                 
@@ -1395,6 +1421,7 @@ loc_18D56:
 
 ; xx enemy index
 
+
 bsc08_switchToEnemyAlone:
                 
                 move.w  (a6)+,((word_FFB3FE-$1000000)).w
@@ -1418,6 +1445,7 @@ bsc08_switchToEnemyAlone:
 
 ; xx ally index
 
+
 bsc09_switchToAllyAlone:
                 
                 move.w  (a6)+,((word_FFB3FE-$1000000)).w
@@ -1440,6 +1468,7 @@ bsc09_switchToAllyAlone:
 ; =============== S U B R O U T I N E =======================================
 
 ; same parameters as previous command
+
 
 bsc0B_executeAllyReaction:
                 
@@ -1547,7 +1576,7 @@ loc_18E6E:
                 clr.w   d1
                 bsr.w   sub_194FE
                 jsr     (sub_1942).w    
-                cmpi.b  #$10,((byte_FFB587-$1000000)).w
+                cmpi.b  #SPELLANIMATION_GUNNER_PROJECTILE,((CURRENT_SPELLANIMATION-$1000000)).w
                 beq.s   loc_18EF8
                 bsr.w   sub_1A092
 loc_18EF8:
@@ -1568,7 +1597,7 @@ return_18F24:
                 rts
 loc_18F26:
                 
-                cmpi.b  #3,((byte_FFB587-$1000000)).w
+                cmpi.b  #SPELLANIMATION_DESOUL,((CURRENT_SPELLANIMATION-$1000000)).w
                 bne.s   loc_18F38
                 addq.w  #1,((dword_FFB536-$1000000)).w
                 moveq   #$14,d0
@@ -1593,6 +1622,7 @@ byte_18F48:
 ; Byte 02-03      MP change, signed.
 ; Byte 04-05      Set status bytes.
 ; Byte 06-07      Flags - 0x0001 enemy flash/sound
+
 
 bsc0A_executeEnemyReaction:
                 
@@ -1680,7 +1710,7 @@ loc_19004:
                 bsr.w   sub_1F214
                 move.w  d5,d6
                 bsr.w   sub_1F254
-                cmpi.b  #$10,((byte_FFB587-$1000000)).w
+                cmpi.b  #SPELLANIMATION_GUNNER_PROJECTILE,((CURRENT_SPELLANIMATION-$1000000)).w
                 beq.s   loc_19048
                 bsr.w   sub_1A092
 loc_19048:
@@ -1701,7 +1731,7 @@ return_19074:
                 rts
 loc_19076:
                 
-                cmpi.b  #3,((byte_FFB587-$1000000)).w
+                cmpi.b  #SPELLANIMATION_DESOUL,((CURRENT_SPELLANIMATION-$1000000)).w
                 bne.s   loc_19088
                 addq.w  #1,((dword_FFB536-$1000000)).w
                 moveq   #$14,d0
@@ -1723,12 +1753,13 @@ byte_19098:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 bsc0C_makeActorIdleAndEndAnimation:
                 
                 bsr.w   MakeActorIdle   
                 move.b  #3,((byte_FFB585-$1000000)).w
                 jsr     (WaitForVInt).w
-                bsr.w   sub_1A24E
+                bsr.w   RestorePalettes
                 bsr.w   sub_1F2F6
                 jmp     (WaitForVInt).w
 
@@ -1737,6 +1768,7 @@ bsc0C_makeActorIdleAndEndAnimation:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 bsc0D_endAnimation:
                 
                 move.b  #2,((byte_FFB585-$1000000)).w
@@ -1744,7 +1776,7 @@ loc_190C4:
                 
                 tst.b   ((byte_FFB584-$1000000)).w ; wait for byte cleared
                 bne.s   loc_190C4       
-                bsr.w   sub_1A24E
+                bsr.w   RestorePalettes
                 bsr.w   sub_1F2F6
                 jmp     (WaitForVInt).w
 
@@ -1752,6 +1784,7 @@ loc_190C4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 bsc0E_sleep:
                 
@@ -1764,6 +1797,7 @@ bsc0E_sleep:
 ; =============== S U B R O U T I N E =======================================
 
 ; Byte 00-01      Amount of EXP.
+
 
 bsc0F_giveEXP:
                 
@@ -1870,6 +1904,7 @@ return_191DE:
 ;         Byte 04-05      Magic/item index.
 ;         Byte 06-09      Number.
 
+
 bsc10_displayMessage:
                 
                 move.w  (a6)+,d0
@@ -1909,6 +1944,7 @@ return_19228:
 
 ; same params as previous command
 
+
 bsc11_displayMessageWithNoWait:
                 
                 move.w  (a6)+,d0
@@ -1923,6 +1959,7 @@ bsc11_displayMessageWithNoWait:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 bsc12_hideTextBox:
                 
                 jmp     (HideTextBox).l
@@ -1931,6 +1968,7 @@ bsc12_hideTextBox:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 EndBattlescene:
                 
@@ -1968,6 +2006,7 @@ return_1928A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1928C:
                 
                 bsr.w   sub_192FE
@@ -1978,6 +2017,7 @@ sub_1928C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_19296:
                 
@@ -2032,6 +2072,7 @@ loc_192F8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_192FE:
                 
                 move.w  ((ALLY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w,((ALLY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
@@ -2085,6 +2126,7 @@ loc_19360:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_19366:
                 
                 move.w  d1,-(sp)
@@ -2109,6 +2151,7 @@ loc_19378:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1938C:
                 
                 move.w  d1,-(sp)
@@ -2124,6 +2167,7 @@ loc_1939C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1939E:
                 
@@ -2141,6 +2185,7 @@ sub_1939E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_193B2:
                 
                 movem.w d0-d1,-(sp)
@@ -2153,6 +2198,7 @@ sub_193B2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_193C4:
                 
@@ -2204,6 +2250,7 @@ return_1942A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1942C:
                 
                 move.w  d0,d1
@@ -2231,6 +2278,7 @@ return_19456:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_19458:
                 
                 tst.b   ((byte_FFB56D-$1000000)).w
@@ -2244,6 +2292,7 @@ return_19462:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_19464:
                 
@@ -2283,6 +2332,7 @@ return_194A8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_194AA:
                 
                 move.w  d0,-(sp)
@@ -2320,6 +2370,7 @@ return_194FC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_194FE:
                 
                 move.w  d1,d0
@@ -2330,6 +2381,7 @@ sub_194FE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_19504:
                 
@@ -2364,6 +2416,7 @@ return_19544:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_19546:
                 
                 move.w  d1,d0
@@ -2382,6 +2435,7 @@ sub_19546:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1955E:
                 
                 move.w  d1,d0
@@ -2392,6 +2446,7 @@ sub_1955E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_19564:
                 
@@ -2453,6 +2508,7 @@ return_195E0:
 
 ; make actor idle
 
+
 MakeActorIdle:
                 
                 move.b  ((ACTOR_TO_MAKE_IDLE-$1000000)).w,d0
@@ -2474,6 +2530,7 @@ loc_195F8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_195FE:
                 
@@ -2502,6 +2559,7 @@ return_19630:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_19632:
                 
@@ -2575,6 +2633,7 @@ word_196B4:     dc.w $FFF
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_196D4:
                 
                 cmpi.w  #$FFFF,((BATTLESCENE_ENEMY-$1000000)).w
@@ -2612,6 +2671,7 @@ return_1971A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_1971C:
                 
@@ -2663,6 +2723,7 @@ word_19764:     dc.w $FFF
 
 ; =============== S U B R O U T I N E =======================================
 
+
 AddAllyToDeadList:
                 
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
@@ -2684,6 +2745,7 @@ return_197A4:
 
 ; add enemy to dead combatant list
 
+
 AddEnemyToDeadList:
                 
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
@@ -2704,6 +2766,7 @@ return_197C6:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: D1 = animation type, Out: A0 = animation pointer
+
 
 GetAllyAnimation:
                 
@@ -2762,6 +2825,7 @@ GetAllyAnimation:
 
 ; In: D1 = animation type, Out: A0 = animation pointer
 
+
 GetEnemyAnimation:
                 
                 move.w  d1,-(sp)
@@ -2796,6 +2860,7 @@ GetEnemyAnimation:
 ; 
 ;       Out: D1 = 0 if animates, 1 if not
 
+
 GetAllyBattleSpriteIdleAnimate:
                 
                 move.l  a0,-(sp)
@@ -2812,6 +2877,7 @@ GetAllyBattleSpriteIdleAnimate:
 ;       In: D0 = enemy battle sprite index
 ; 
 ;       Out: D1 = 0 if animates, 1 if not
+
 
 GetEnemyBattleSpriteIdleAnimate:
                 
@@ -2839,6 +2905,7 @@ loc_19880:
 
 ; clears plt 1-2 and 1-2bis, sets plt 3bis
 
+
 InitializeBattlescenePalettes:
                 
                 lea     ((PALETTE_1_BASE-$1000000)).w,a0
@@ -2865,6 +2932,7 @@ plt_BattlesceneBasePalette:
                                                         ; Base palette for battlescene UI and ground
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_198C8:
                 
@@ -2920,6 +2988,7 @@ loc_1991C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_19926:
                 
                 lea     (FF8804_LOADING_SPACE).l,a0
@@ -2941,6 +3010,7 @@ loc_19932:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_19952:
                 
                 movem.l d0/a0,-(sp)
@@ -2959,6 +3029,7 @@ loc_1995C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_19970:
                 
@@ -2986,6 +3057,7 @@ loc_19996:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1999E:
                 
                 movea.l (p_pt_EnemyBattleSprites).l,a0
@@ -3003,6 +3075,7 @@ sub_1999E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_199BC:
                 
@@ -3024,6 +3097,7 @@ sub_199BC:
 ; =============== S U B R O U T I N E =======================================
 
 ; load palette D1 of battle sprite D0
+
 
 LoadPaletteForBattlescene:
                 
@@ -3054,6 +3128,7 @@ LoadPaletteForBattlescene:
 ; In: D0 = battle sprite index
 ;     D1 = frame index
 
+
 LoadAllyBattleSpriteFrame:
                 
                 movea.l (p_pt_AllyBattleSprites).l,a0
@@ -3075,6 +3150,7 @@ LoadAllyBattleSpriteFrame:
 ; In: D0 = battle sprite index
 ;     D1 = frame index
 
+
 VInt_LoadAllyBattleSpriteFrame:
                 
                 movea.l (p_pt_AllyBattleSprites).l,a0
@@ -3094,6 +3170,7 @@ VInt_LoadAllyBattleSpriteFrame:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadWeaponPalette:
                 
                 movea.l (p_plt_BattlesceneWeaponColors).l,a0
@@ -3107,6 +3184,7 @@ LoadWeaponPalette:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: D0 = weapon sprite index
+
 
 LoadWeaponSprite:
                 
@@ -3128,6 +3206,7 @@ loc_19A7C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadBattlesceneGround:
                 
                 movea.l (p_pt_BattlesceneGrounds).l,a0
@@ -3147,6 +3226,7 @@ LoadBattlesceneGround:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_19AB0:
                 
@@ -3172,6 +3252,7 @@ loc_19AD6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadNewAllyBattleSprite:
                 
@@ -3203,6 +3284,7 @@ LoadNewAllyBattleSprite:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadEnemyBattleSpriteFrame:
                 
                 movea.l (p_pt_EnemyBattleSprites).l,a0
@@ -3222,6 +3304,7 @@ LoadEnemyBattleSpriteFrame:
 ; =============== S U B R O U T I N E =======================================
 
 ; d0 : battle sprite index
+
 
 LoadEnemyBattleSprite:
                 
@@ -3250,6 +3333,7 @@ return_19B7E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadBattleBackground:
                 
@@ -3288,6 +3372,7 @@ return_19BCA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadGround:
                 
                 movea.l (p_pt_BattlesceneGrounds).l,a0
@@ -3305,6 +3390,7 @@ LoadGround:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadInvocationSprite:
                 
@@ -3376,6 +3462,7 @@ loc_19CA0:
 ;     Loads spell animation tiles.
 ;     In: D0 = spell animation tileset index
 
+
 LoadSpellGraphics:
                 
                 movea.l (p_pt_SpellGraphics).l,a0
@@ -3403,6 +3490,7 @@ LoadSpellGraphics:
 ; =============== S U B R O U T I N E =======================================
 
 ; loads spell graphics
+
 
 sub_19CE8:
                 
@@ -3434,6 +3522,7 @@ sub_19CE8:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get battle sprite and palette indexes for combatant D0 -> D1 (sprite), D2 (palette)
+
 
 GetBattleSpriteAndPalette:
                 
@@ -3496,6 +3585,7 @@ GetBattleSpriteAndPalette:
 
 ; Get battle sprite and palette indexes for combatant D0's equipped weapon -> D2 (sprite), D3 (palette)
 
+
 GetWeaponSpriteAndPalette:
                 
                 movem.l d1/a0,-(sp)
@@ -3503,12 +3593,12 @@ GetWeaponSpriteAndPalette:
                 bcc.w   @Skip
                 jsr     j_GetEquippedWeapon
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                cmpi.w  #ITEMINDEX_WEAPONS_START,d1 ; HARDCODED start index for weapon items with battle scene graphics
+                cmpi.w  #ITEMINDEX_WEAPONS_START,d1 ; HARDCODED start index for weapon items with battlescene graphics
                 bcs.w   @Skip
-                cmpi.w  #ITEMINDEX_WEAPONS_END,d1 ; HARDCODED end index for weapon items with battle scene graphics
+                cmpi.w  #ITEMINDEX_WEAPONS_END,d1 ; HARDCODED end index for weapon items with battlescene graphics
                 bhi.w   @Skip
                 lea     tbl_WeaponGraphics(pc), a0
-                subi.w  #ITEMINDEX_WEAPONS_START,d1 ; Same here : HARDCODED start index for weapon items with battle scene graphics
+                subi.w  #ITEMINDEX_WEAPONS_START,d1 ; Same here : HARDCODED start index for weapon items with battlescene graphics
                 add.w   d1,d1
                 move.b  (a0,d1.w),d2
                 ext.w   d2
@@ -3528,39 +3618,40 @@ GetWeaponSpriteAndPalette:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetBattleBackground:
                 
                 movem.l d0/a0,-(sp)
                 cmpi.w  #$FFFF,d0
-                beq.s   loc_19E20
+                beq.s   @CheckCustomBackground
                 cmpi.w  #$80,d0 
-                bcs.s   loc_19E20
+                bcs.s   @CheckCustomBackground
                 jsr     j_GetEnemyIndex
                 cmpi.w  #ENEMY_ZEON,d1  ; HARDCODED : if enemy is Zeon, get his own background
-                bne.s   loc_19E20
-                moveq   #$1B,d1
-                bra.w   loc_19E58
-loc_19E20:
+                bne.s   @CheckCustomBackground
+                moveq   #BATTLEBACKGROUND_VERSUS_ZEON,d1
+                bra.w   @Done
+@CheckCustomBackground:
                 
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
                 lea     tbl_CustomBackgrounds(pc), a0
                 move.b  (a0,d1.w),d1    ; get battle's own background if it has one
                 cmpi.b  #$FF,d1
-                bne.w   loc_19E58
+                bne.w   @Done
                 cmpi.w  #$FFFF,d0
-                bne.s   loc_19E48
+                bne.s   @GetTerrainBackground
                 move.w  ((word_FFB3FE-$1000000)).w,d0
                 cmpi.w  #$FFFF,d0
-                bne.s   loc_19E48
+                bne.s   @GetTerrainBackground
                 clr.w   d0
-loc_19E48:
+@GetTerrainBackground:
                 
                 jsr     j_GetCurrentTerrainType
                 andi.w  #$F,d0          ; get background according to terrain type
                 move.b  tbl_TerrainBackgrounds(pc,d0.w),d1
                 ext.w   d1
-loc_19E58:
+@Done:
                 
                 movem.l (sp)+,d0/a0
                 rts

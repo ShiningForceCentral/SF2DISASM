@@ -20,77 +20,90 @@ pt_SpellLevelTilesLayouts:
                 dc.l SpellLevelTilesLayout4
 SpellLevelTilesLayout1:
                 
-; Syntax        vdpBaseTile [VDPTILE_]index[|mirror|flip]
+; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
+;
+; Notes: PALETTE3 and PRIORITY bits are always set.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV2
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL2
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
+                
 SpellLevelTilesLayout2:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL3
+                vdpBaseTile SPELL_LEVEL1|MIRROR
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
+                
 SpellLevelTilesLayout3:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV2
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL3
+                vdpBaseTile SPELL_LEVEL1|MIRROR
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL2
                 vdpBaseTile SPACE
+                
 SpellLevelTilesLayout4:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL3
+                vdpBaseTile SPELL_LEVEL1|MIRROR
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL3
+                vdpBaseTile SPELL_LEVEL1|MIRROR
+                
 SpellLevelTilesLayout1in2:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV6
-                vdpBaseTile SPELL_LV5
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL6
+                vdpBaseTile SPELL_LEVEL5
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
+                
 SpellLevelTilesLayout2in3:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPELL_LV5|MIRROR
-                vdpBaseTile SPELL_LV8
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL3
+                vdpBaseTile SPELL_LEVEL1|MIRROR
+                vdpBaseTile SPELL_LEVEL5|MIRROR
+                vdpBaseTile SPELL_LEVEL8
                 vdpBaseTile SPACE
+                
 SpellLevelTilesLayout3in4:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV6
-                vdpBaseTile SPELL_LV5
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL3
+                vdpBaseTile SPELL_LEVEL1|MIRROR
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL6
+                vdpBaseTile SPELL_LEVEL5
+                
 SpellLevelTilesLayout1in3:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV6
-                vdpBaseTile SPELL_LV5
-                vdpBaseTile SPELL_LV5|MIRROR
-                vdpBaseTile SPELL_LV8
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL6
+                vdpBaseTile SPELL_LEVEL5
+                vdpBaseTile SPELL_LEVEL5|MIRROR
+                vdpBaseTile SPELL_LEVEL8
                 vdpBaseTile SPACE
+                
 SpellLevelTilesLayout2in4:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV3
-                vdpBaseTile SPELL_LV1|MIRROR
-                vdpBaseTile SPELL_LV5|MIRROR
-                vdpBaseTile SPELL_LV7
-                vdpBaseTile SPELL_LV5
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL3
+                vdpBaseTile SPELL_LEVEL1|MIRROR
+                vdpBaseTile SPELL_LEVEL5|MIRROR
+                vdpBaseTile SPELL_LEVEL7
+                vdpBaseTile SPELL_LEVEL5
+                
 SpellLevelTilesLayout1in4:
-                vdpBaseTile SPELL_LV1
-                vdpBaseTile SPELL_LV6
-                vdpBaseTile SPELL_LV5
-                vdpBaseTile SPELL_LV5|MIRROR
-                vdpBaseTile SPELL_LV7
-                vdpBaseTile SPELL_LV5
+                vdpBaseTile SPELL_LEVEL1
+                vdpBaseTile SPELL_LEVEL6
+                vdpBaseTile SPELL_LEVEL5
+                vdpBaseTile SPELL_LEVEL5|MIRROR
+                vdpBaseTile SPELL_LEVEL7
+                vdpBaseTile SPELL_LEVEL5
+                
 pt_MenuTiles:   dc.b $85                ; starting with references to uncompressed main menu tiles
                 dc.b 1
                 dc.b 2
@@ -398,18 +411,19 @@ byte_11396:     dc.b $22
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_113C6:
+
+CreateBattleEquipWindow:
                 
                 movem.l d0-a2,-(sp)
                 move.w  #$A09,d0
                 move.w  #$F612,d1
                 jsr     (CreateWindow).w
-                move.w  d0,((word_FFB18E-$1000000)).w
+                move.w  d0,((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w
                 lea     BattleEquipWindowLayout(pc), a0
                 move.w  #$B4,d7 
                 jsr     (CopyBytes).w   
                 bsr.w   DrawBattleEquipWindowStats
-                move.w  ((word_FFB18E-$1000000)).w,d0
+                move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
                 move.w  #$212,d1
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
@@ -417,16 +431,17 @@ sub_113C6:
                 movem.l (sp)+,d0-a2
                 rts
 
-    ; End of function sub_113C6
+    ; End of function CreateBattleEquipWindow
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_11404:
                 
                 movem.l d0-a2,-(sp)
                 bsr.w   DrawBattleEquipWindowStats
-                move.w  ((word_FFB18E-$1000000)).w,d0
+                move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
                 movem.l (sp)+,d0-a2
@@ -437,55 +452,58 @@ sub_11404:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_1141E:
+
+HideBattleEquipWindow:
                 
                 movem.l d0-a2,-(sp)
-                move.w  ((word_FFB18E-$1000000)).w,d0
+                move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
                 move.w  #$F612,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
-                move.w  ((word_FFB18E-$1000000)).w,d0
+                move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
                 movem.l (sp)+,d0-a2
                 rts
 
-    ; End of function sub_1141E
+    ; End of function HideBattleEquipWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
+windowTilesAddress = -4
+
 DrawBattleEquipWindowStats:
                 
                 link    a6,#-4
-                move.w  ((word_FFB18E-$1000000)).w,d0
+                move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
                 move.w  #WINDOW_BATTLEEQUIP_STATS_TILE_COORDS,d1
                 jsr     (GetWindowTileAddress).w
-                move.l  a1,-4(a6)
+                move.l  a1,windowTilesAddress(a6)
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 jsr     j_GetCurrentATT
                 move.w  d1,d0
-                movea.l -4(a6),a1
+                movea.l windowTilesAddress(a6),a1
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue  
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 jsr     j_GetCurrentDEF
                 move.w  d1,d0
-                movea.l -4(a6),a1
+                movea.l windowTilesAddress(a6),a1
                 adda.w  #$28,a1 
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue  
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 jsr     j_GetCurrentAGI
                 move.w  d1,d0
-                movea.l -4(a6),a1
+                movea.l windowTilesAddress(a6),a1
                 adda.w  #$50,a1 
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue  
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 jsr     j_GetCurrentMOV
                 move.w  d1,d0
-                movea.l -4(a6),a1
+                movea.l windowTilesAddress(a6),a1
                 adda.w  #$78,a1 
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue  

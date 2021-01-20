@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map16_flag530_AreaDescriptions:
                 
                 move.w  #$FEA,d3        ; "A book...{N}HISTORY OF GALAM{W1}"

@@ -12,6 +12,7 @@ ms_map20_flag543_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_21F_DefaultEntityEvent:
                 
                 rts
@@ -20,6 +21,7 @@ Map20_21F_DefaultEntityEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map20_21F_EntityEvent0:
                 
@@ -43,6 +45,7 @@ return_6326E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_21F_EntityEvent1:
                 
                 moveq   #1,d0
@@ -55,6 +58,7 @@ Map20_21F_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_21F_EntityEvent2:
                 
                  
@@ -65,6 +69,7 @@ Map20_21F_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map20_21F_EntityEvent3:
                 
@@ -77,6 +82,7 @@ Map20_21F_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map20_21F_EntityEvent4:
                 
                  
@@ -87,6 +93,7 @@ Map20_21F_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map20_21F_EntityEvent5:
                 

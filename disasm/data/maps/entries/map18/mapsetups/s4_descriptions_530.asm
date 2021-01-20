@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map18_flag530_AreaDescriptions:
                 
                 move.w  #$FF3,d3        ; "It reads...{N}RESPECT YOUR PARENTS{W1}"

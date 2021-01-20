@@ -4,10 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map59_flag543_InitFunction:
                 
                  
-                chkFlg  543             ; Battle 43 completed
+                chkFlg  543             ; Battle 43 completed - BATTLE_VERSUS_ZEON                 
                 beq.s   return_615E4
                 script  cs_615E6
 return_615E4:
@@ -1125,6 +1126,7 @@ cs_62658:       setQuake 5
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csub_6269C:
                 
