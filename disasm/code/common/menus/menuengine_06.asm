@@ -623,13 +623,14 @@ loc_12EB4:
 
 ; =============== S U B R O U T I N E =======================================
 
+goldWindowTilesEnd = -18
 
 CreateGoldWindow:
                 
                 tst.w   ((word_FFB086-$1000000)).w
                 bne.w   return_12F5C
                 movem.l d0-a1,-(sp)
-                link    a6,#65504
+                link    a6,#-32
                 move.w  #$904,d0
                 move.w  #$2017,d1
                 jsr     (CreateWindow).l
@@ -654,13 +655,14 @@ return_12F5C:
 
 ; =============== S U B R O U T I N E =======================================
 
+goldWindowTilesEnd = -18
 
 sub_12F5E:
                 
                 tst.w   ((word_FFB086-$1000000)).w
                 beq.s   return_12F5C
                 movem.l d0-a1,-(sp)
-                link    a6,#65504
+                link    a6,#-32
                 move.w  ((word_FFB086-$1000000)).w,d0
                 subq.w  #1,d0
                 clr.w   d1
