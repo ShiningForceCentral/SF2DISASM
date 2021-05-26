@@ -463,7 +463,7 @@ character_index     = -2
                 
                 ; Load Jewel of Light icon pixel data to temp space
                 move.w  #ICON_JEWEL_OF_LIGHT,d1
-                movea.l (p_IconTiles).l,a0
+                movea.l (p_Icons).l,a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
@@ -489,7 +489,7 @@ character_index     = -2
                 
                 ; Load Jewel of Evil icon pixel data to temp space
                 move.w  #ICON_JEWEL_OF_EVIL,d1
-                movea.l (p_IconTiles).l,a0
+                movea.l (p_Icons).l,a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
