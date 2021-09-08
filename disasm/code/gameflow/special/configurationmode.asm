@@ -8,14 +8,16 @@
 CheatModeConfiguration:
                 
                 if (EASY_CONFIGURATION_MODE=1)
-                bra.s   @CheckInput_Up
-                nop
-                nop
+                    nop
+                    nop
+                    nop
+                    nop
+                    nop
                 else
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                    btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                    beq.w   return_7EC4
                 endif
                 
-                beq.w   return_7EC4
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 beq.s   loc_7E58
                 btst    #7,(SAVE_FLAGS).l
