@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetCombatantName:
                 
                 jmp     GetCombatantName(pc)
@@ -12,6 +13,7 @@ j_GetCombatantName:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetClass:
                 
@@ -22,6 +24,7 @@ j_GetClass:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetYPos:
                 
                 jmp     GetYPos(pc)
@@ -30,6 +33,7 @@ j_GetYPos:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetMaxMP:
                 
@@ -40,6 +44,7 @@ j_GetMaxMP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetMaxHP:
                 
                 jmp     GetMaxHP(pc)
@@ -48,6 +53,7 @@ j_GetMaxHP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetXPos:
                 
@@ -58,6 +64,7 @@ j_GetXPos:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetUpperMoveType:
                 
                 jmp     GetUpperMoveType(pc)
@@ -67,32 +74,36 @@ j_GetUpperMoveType:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetStatus:
-                
-                jmp     GetStatus(pc)
 
-    ; End of function j_GetStatus
+j_GetStatusEffects:
+                
+                jmp     GetStatusEffects(pc)
+
+    ; End of function j_GetStatusEffects
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetCurrentSpecialAbility:
+
+j_GetCurrentProwess:
                 
                 jmp     GetCurrentProwess(pc)
 
-    ; End of function j_GetCurrentSpecialAbility
+    ; End of function j_GetCurrentProwess
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetBaseSpecialAbility:
+
+j_GetBaseProwess:
                 
                 jmp     GetBaseProwess(pc)
 
-    ; End of function j_GetBaseSpecialAbility
+    ; End of function j_GetBaseProwess
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetBaseMOV:
                 
@@ -103,6 +114,7 @@ j_GetBaseMOV:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetBaseDEF:
                 
                 jmp     GetBaseDEF(pc)
@@ -111,6 +123,7 @@ j_GetBaseDEF:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetBaseResistance:
                 
@@ -121,6 +134,7 @@ j_GetBaseResistance:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetBaseATT:
                 
                 jmp     GetBaseATT(pc)
@@ -129,6 +143,7 @@ j_GetBaseATT:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetBaseAGI:
                 
@@ -139,6 +154,7 @@ j_GetBaseAGI:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetCurrentMOV:
                 
                 jmp     GetCurrentMOV(pc)
@@ -147,6 +163,7 @@ j_GetCurrentMOV:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetCurrentMP:
                 
@@ -157,6 +174,7 @@ j_GetCurrentMP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetCurrentLevel:
                 
                 jmp     GetCurrentLevel(pc)
@@ -165,6 +183,7 @@ j_GetCurrentLevel:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetCurrentHP:
                 
@@ -175,6 +194,7 @@ j_GetCurrentHP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetCurrentEXP:
                 
                 jmp     GetCurrentEXP(pc)
@@ -183,6 +203,7 @@ j_GetCurrentEXP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetCurrentDEF:
                 
@@ -193,6 +214,7 @@ j_GetCurrentDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetCurrentResistance:
                 
                 jmp     GetCurrentResistance(pc)
@@ -201,6 +223,7 @@ j_GetCurrentResistance:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetCurrentATT:
                 
@@ -211,6 +234,7 @@ j_GetCurrentATT:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetEnemyAISetting3233:
                 
                 jmp     GetEnemyAISetting3233(pc)
@@ -219,6 +243,7 @@ j_GetEnemyAISetting3233:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetEnemyAISetting36:
                 
@@ -231,6 +256,7 @@ j_GetEnemyAISetting36:
 
 ; related to AI control on 0x0004 ?
 
+
 j_GetCharacterWord34:
                 
                 jmp     GetCharacterWord34(pc)
@@ -239,6 +265,7 @@ j_GetCharacterWord34:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetCurrentAGI:
                 
@@ -249,6 +276,7 @@ j_GetCurrentAGI:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetEnemyIndex:
                 
                 jmp     GetEnemyIndex(pc)
@@ -257,6 +285,7 @@ j_GetEnemyIndex:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetSomethingClassType:
                 
@@ -267,6 +296,7 @@ j_GetSomethingClassType:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetKills:
                 
                 jmp     GetKills(pc)
@@ -275,6 +305,7 @@ j_GetKills:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetDefeats:
                 
@@ -285,14 +316,16 @@ j_GetDefeats:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_CopyCharacterNameToRam:
-                
-                jmp     CopyCharacterNameToRam(pc)
 
-    ; End of function j_CopyCharacterNameToRam
+j_LoadAllyName:
+                
+                jmp     LoadAllyName(pc)
+
+    ; End of function j_LoadAllyName
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetYPos:
                 
@@ -303,6 +336,7 @@ j_SetYPos:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetMaxMP:
                 
                 jmp     SetMaxMP(pc)
@@ -311,6 +345,7 @@ j_SetMaxMP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetMaxHP:
                 
@@ -321,6 +356,7 @@ j_SetMaxHP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetXPos:
                 
                 jmp     SetXPos(pc)
@@ -329,6 +365,7 @@ j_SetXPos:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetMoveType:
                 
@@ -339,14 +376,16 @@ j_SetMoveType:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_SetStatus:
-                
-                jmp     SetStatus(pc)
 
-    ; End of function j_SetStatus
+j_SetStatusEffects:
+                
+                jmp     SetStatusEffects(pc)
+
+    ; End of function j_SetStatusEffects
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetCurrentProwess:
                 
@@ -357,6 +396,7 @@ j_SetCurrentProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetBaseProwess:
                 
                 jmp     SetBaseProwess(pc)
@@ -365,6 +405,7 @@ j_SetBaseProwess:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetBaseMOV:
                 
@@ -375,6 +416,7 @@ j_SetBaseMOV:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetBaseDEF:
                 
                 jmp     SetBaseDEF(pc)
@@ -383,6 +425,7 @@ j_SetBaseDEF:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetBaseResistance:
                 
@@ -393,6 +436,7 @@ j_SetBaseResistance:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetBaseATT:
                 
                 jmp     SetBaseATT(pc)
@@ -401,6 +445,7 @@ j_SetBaseATT:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetBaseAGI:
                 
@@ -411,6 +456,7 @@ j_SetBaseAGI:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetCurrentMOV:
                 
                 jmp     SetCurrentMOV(pc)
@@ -419,6 +465,7 @@ j_SetCurrentMOV:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetCurrentMP:
                 
@@ -429,6 +476,7 @@ j_SetCurrentMP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetLevel:
                 
                 jmp     SetLevel(pc)
@@ -437,6 +485,7 @@ j_SetLevel:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetCurrentHP:
                 
@@ -447,6 +496,7 @@ j_SetCurrentHP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetCurrentEXP:
                 
                 jmp     SetCurrentEXP(pc)
@@ -455,6 +505,7 @@ j_SetCurrentEXP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetCurrentDEF:
                 
@@ -465,6 +516,7 @@ j_SetCurrentDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetClass:
                 
                 jmp     SetClass(pc)
@@ -473,6 +525,7 @@ j_SetClass:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetCurrentResistance:
                 
@@ -483,6 +536,7 @@ j_SetCurrentResistance:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetCurrentATT:
                 
                 jmp     SetCurrentATT(pc)
@@ -491,6 +545,7 @@ j_SetCurrentATT:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetKills:
                 
@@ -501,6 +556,7 @@ j_SetKills:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetDefeats:
                 
                 jmp     SetDefeats(pc)  
@@ -509,6 +565,7 @@ j_SetDefeats:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetCharacterWord34:
                 
@@ -519,6 +576,7 @@ j_SetCharacterWord34:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetCurrentAGI:
                 
                 jmp     SetCurrentAGI(pc)
@@ -527,6 +585,7 @@ j_SetCurrentAGI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetEnemyIndex:
                 
@@ -537,6 +596,7 @@ j_SetEnemyIndex:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IncreaseMP:
                 
                 jmp     IncreaseMaxMP(pc)
@@ -545,6 +605,7 @@ j_IncreaseMP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_IncreaseMaxHP:
                 
@@ -555,6 +616,7 @@ j_IncreaseMaxHP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IncreaseBaseMOV:
                 
                 jmp     IncreaseBaseMOV(pc)
@@ -563,6 +625,7 @@ j_IncreaseBaseMOV:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_IncreaseBaseDEF:
                 
@@ -573,6 +636,7 @@ j_IncreaseBaseDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IncreaseBaseATT:
                 
                 jmp     IncreaseBaseATT(pc)
@@ -581,6 +645,7 @@ j_IncreaseBaseATT:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_IncreaseAGI:
                 
@@ -591,6 +656,7 @@ j_IncreaseAGI:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IncreaseCurrentMOV:
                 
                 jmp     IncreaseCurrentMOV(pc)
@@ -599,6 +665,7 @@ j_IncreaseCurrentMOV:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_IncreaseCurrentMP:
                 
@@ -609,6 +676,7 @@ j_IncreaseCurrentMP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IncreaseLevel:
                 
                 jmp     IncreaseLevel(pc)
@@ -617,6 +685,7 @@ j_IncreaseLevel:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_IncreaseCurrentHP:
                 
@@ -627,6 +696,7 @@ j_IncreaseCurrentHP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IncreaseEXP:
                 
                 jmp     IncreaseEXP(pc)
@@ -635,6 +705,7 @@ j_IncreaseEXP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_IncreaseCurrentDEF:
                 
@@ -645,6 +716,7 @@ j_IncreaseCurrentDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IncreaseCurrentATT:
                 
                 jmp     IncreaseCurrentATT(pc)
@@ -653,6 +725,7 @@ j_IncreaseCurrentATT:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_IncreaseCurrentAGI:
                 
@@ -663,6 +736,7 @@ j_IncreaseCurrentAGI:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IncreaseKills:
                 
                 jmp     IncreaseKills(pc)
@@ -671,6 +745,7 @@ j_IncreaseKills:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_IncreaseDefeats:
                 
@@ -681,6 +756,7 @@ j_IncreaseDefeats:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_DecreaseBaseMOV:
                 
                 jmp     DecreaseBaseMOV(pc)
@@ -689,6 +765,7 @@ j_DecreaseBaseMOV:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_DecreaseBaseDEF:
                 
@@ -699,6 +776,7 @@ j_DecreaseBaseDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_DecreaseBaseAGI:
                 
                 jmp     DecreaseBaseAGI(pc)
@@ -707,6 +785,7 @@ j_DecreaseBaseAGI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_DecreaseCurrentMOV:
                 
@@ -717,6 +796,7 @@ j_DecreaseCurrentMOV:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_DecreaseCurrentMP:
                 
                 jmp     DecreaseCurrentMP(pc)
@@ -725,6 +805,7 @@ j_DecreaseCurrentMP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_DecreaseCurrentHP:
                 
@@ -735,6 +816,7 @@ j_DecreaseCurrentHP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_DecreaseCurrentDEF:
                 
                 jmp     DecreaseCurrentDEF(pc)
@@ -743,6 +825,7 @@ j_DecreaseCurrentDEF:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_DecreaseCurrentATT:
                 
@@ -753,6 +836,7 @@ j_DecreaseCurrentATT:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_DecreaseCurrentAGI:
                 
                 jmp     DecreaseCurrentAGI(pc)
@@ -761,6 +845,7 @@ j_DecreaseCurrentAGI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetClassName:
                 
@@ -771,6 +856,7 @@ j_GetClassName:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetGold:
                 
                 jmp     SetGold(pc)
@@ -779,6 +865,7 @@ j_SetGold:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetGold:
                 
@@ -789,6 +876,7 @@ j_GetGold:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IncreaseGold:
                 
                 jmp     IncreaseGold(pc)
@@ -797,6 +885,7 @@ j_IncreaseGold:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_DecreaseGold:
                 
@@ -807,6 +896,7 @@ j_DecreaseGold:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_ApplyStatusEffectsAndItemsOnStats:
                 
                 jmp     ApplyStatusEffectsAndItemsOnStats(pc)
@@ -815,6 +905,7 @@ j_ApplyStatusEffectsAndItemsOnStats:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_ApplyItemOnStats:
                 
@@ -825,6 +916,7 @@ j_ApplyItemOnStats:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_FindItemName:
                 
                 jmp     FindItemName(pc)
@@ -833,6 +925,7 @@ j_FindItemName:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetItemDefAddress:
                 
@@ -843,23 +936,26 @@ j_GetItemDefAddress:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetItemAndNumberOfItems:
-                
-                jmp     GetItemAndNumberOfItems(pc)
 
-    ; End of function j_GetItemAndNumberOfItems
+j_GetItemAndNumberHeld:
+                
+                jmp     GetItemAndNumberHeld(pc)
+
+    ; End of function j_GetItemAndNumberHeld
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetItemType:
-                
-                jmp     GetItemType(pc) 
 
-    ; End of function j_GetItemType
+j_GetEquipmentType:
+                
+                jmp     GetEquipmentType(pc)
+
+    ; End of function j_GetEquipmentType
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetEquippedWeapon:
                 
@@ -870,6 +966,7 @@ j_GetEquippedWeapon:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetEquippedRing:
                 
                 jmp     GetEquippedRing(pc)
@@ -878,6 +975,7 @@ j_GetEquippedRing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_BreakItem:
                 
@@ -888,6 +986,7 @@ j_BreakItem:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_RepairItemBySlot:
                 
                 jmp     RepairItemBySlot(pc)
@@ -897,23 +996,26 @@ j_RepairItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_EquipItem:
+
+j_EquipItemBySlot:
                 
                 jmp     EquipItemBySlot(pc)
 
-    ; End of function j_EquipItem
+    ; End of function j_EquipItemBySlot
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_UnequipItemIfNotCursed:
+
+j_UnequipItemBySlotIfNotCursed:
                 
                 jmp     UnequipItemBySlotIfNotCursed(pc)
 
-    ; End of function j_UnequipItemIfNotCursed
+    ; End of function j_UnequipItemBySlotIfNotCursed
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_UnequipItemBySlot:
                 
@@ -924,6 +1026,7 @@ j_UnequipItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_AddItem:
                 
                 jmp     AddItem(pc)     
@@ -932,6 +1035,7 @@ j_AddItem:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_RemoveItemBySlot:
                 
@@ -942,6 +1046,7 @@ j_RemoveItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_DropItemBySlot:
                 
                 jmp     DropItemBySlot(pc)
@@ -950,6 +1055,7 @@ j_DropItemBySlot:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_UnequipWeapon:
                 
@@ -960,6 +1066,7 @@ j_UnequipWeapon:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_UnequipRing:
                 
                 jmp     UnequipRing(pc)
@@ -968,6 +1075,7 @@ j_UnequipRing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetEquippableWeapons:
                 
@@ -978,6 +1086,7 @@ j_GetEquippableWeapons:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetEquippableRings:
                 
                 jmp     GetEquippableRings(pc)
@@ -986,6 +1095,7 @@ j_GetEquippableRings:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_IsWeaponOrRingEquippable:
                 
@@ -996,14 +1106,16 @@ j_IsWeaponOrRingEquippable:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetEquipmentNewATTandDEF:
-                
-                jmp     GetEquipmentNewATTandDEF(pc)
 
-    ; End of function j_GetEquipmentNewATTandDEF
+j_GetEquipNewATTandDEF:
+                
+                jmp     GetEquipNewATTandDEF(pc)
+
+    ; End of function j_GetEquipNewATTandDEF
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_OrderItems:
                 
@@ -1014,6 +1126,7 @@ j_OrderItems:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IsItemCursed:
                 
                 jmp     IsItemCursed(pc)
@@ -1022,6 +1135,7 @@ j_IsItemCursed:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_IsItemUsableInBattle:
                 
@@ -1032,6 +1146,7 @@ j_IsItemUsableInBattle:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IsItemUsableWeaponInBattle:
                 
                 jmp     IsItemUsableWeaponInBattle(pc)
@@ -1040,6 +1155,7 @@ j_IsItemUsableWeaponInBattle:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_UnequipAllItemsIfNotCursed:
                 
@@ -1050,6 +1166,7 @@ j_UnequipAllItemsIfNotCursed:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetItemInventoryLocation:
                 
                 jmp     GetItemInventoryLocation(pc)
@@ -1058,6 +1175,7 @@ j_GetItemInventoryLocation:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetItemSlotContainingIndex:
                 
@@ -1068,6 +1186,7 @@ j_GetItemSlotContainingIndex:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_FindSpellName:
                 
                 jmp     FindSpellName(pc)
@@ -1077,14 +1196,16 @@ j_FindSpellName:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetSpellDefAddress:
-                
-                jmp     GetSpellDefAddress(pc)
 
-    ; End of function j_GetSpellDefAddress
+j_FindSpellDefAddress:
+                
+                jmp     FindSpellDefAddress(pc)
+
+    ; End of function j_FindSpellDefAddress
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetSpellAndNumberOfSpells:
                 
@@ -1095,6 +1216,7 @@ j_GetSpellAndNumberOfSpells:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetSpellCost:
                 
                 jmp     GetSpellCost(pc)
@@ -1103,6 +1225,7 @@ j_GetSpellCost:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_LearnSpell:
                 
@@ -1113,6 +1236,7 @@ j_LearnSpell:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetCombatantEntryAddress_0:
                 
                 jmp     GetCombatantEntryAddress(pc)
@@ -1121,6 +1245,7 @@ j_GetCombatantEntryAddress_0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetDistanceBetweenEntities:
                 
@@ -1131,6 +1256,7 @@ j_GetDistanceBetweenEntities:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_nullsub_9482:
                 
                 jmp     nullsub_9482(pc)
@@ -1139,6 +1265,7 @@ j_nullsub_9482:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetCombatantEntryAddress:
                 
@@ -1149,6 +1276,7 @@ j_GetCombatantEntryAddress:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_NewGame:
                 
                 jmp     NewGame(pc)
@@ -1158,14 +1286,16 @@ j_NewGame:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_LevelUp:
                 
-                jmp     LevelUp(pc)
+                jmp     LevelUp(pc)     
 
     ; End of function j_LevelUp
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_Promote:
                 
@@ -1176,6 +1306,7 @@ j_Promote:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_DebugModeActionSelect:
                 
                 jmp     DebugModeActionSelect(pc)
@@ -1185,23 +1316,26 @@ j_DebugModeActionSelect:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_WriteSkirmishScript:
-                
-                jmp     WriteSkirmishScript(pc)
 
-    ; End of function j_WriteSkirmishScript
+j_WriteBattlesceneScript:
+                
+                jmp     WriteBattlesceneScript(pc)
+
+    ; End of function j_WriteBattlesceneScript
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_sub_C404:
-                
-                jmp     j_sub_C404_0(pc)
 
-    ; End of function j_sub_C404
+sub_8210:
+                
+                jmp     sub_C404(pc)
+
+    ; End of function sub_8210
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_CreateSpellRangeGrid:
                 
@@ -1212,6 +1346,7 @@ j_CreateSpellRangeGrid:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_CreateItemRangeGrid:
                 
                 jmp     CreateItemRangeGrid(pc)
@@ -1221,14 +1356,16 @@ j_CreateItemRangeGrid:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_sub_C4E8:
-                
-                jmp     j_sub_C4E8_0(pc)
 
-    ; End of function j_sub_C4E8
+sub_821C:
+                
+                jmp     sub_C4E8(pc)
+
+    ; End of function sub_821C
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_CreateTargetGridFromUsedItem:
                 
@@ -1239,14 +1376,16 @@ j_CreateTargetGridFromUsedItem:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_sub_C5FA:
-                
-                jmp     j_sub_C5FA_0(pc)
 
-    ; End of function j_sub_C5FA
+sub_8224:
+                
+                jmp     sub_C5FA(pc)
+
+    ; End of function sub_8224
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_CreateTargetGridFromSpell:
                 
@@ -1257,6 +1396,7 @@ j_CreateTargetGridFromSpell:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_CreateTargetGrid:
                 
                 jmp     CreateTargetGrid(pc)
@@ -1265,6 +1405,7 @@ j_CreateTargetGrid:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_MakeTargetList:
                 
@@ -1275,6 +1416,7 @@ j_MakeTargetList:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_MakeTargetListAllies:
                 
                 jmp     MakeTargetListAllies(pc)
@@ -1283,6 +1425,7 @@ j_MakeTargetListAllies:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_MakeTargetListEnemies:
                 
@@ -1293,6 +1436,7 @@ j_MakeTargetListEnemies:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_MakeTargetListEverybody:
                 
                 jmp     MakeTargetListEverybody(pc)
@@ -1301,6 +1445,7 @@ j_MakeTargetListEverybody:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_UpdateTargetListAllies:
                 
@@ -1311,6 +1456,7 @@ j_UpdateTargetListAllies:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_UpdateTargetListEnemies:
                 
                 jmp     UpdateTargetListEnemies(pc)
@@ -1319,6 +1465,7 @@ j_UpdateTargetListEnemies:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_ConvertCoordToOffset:
                 
@@ -1329,6 +1476,7 @@ j_ConvertCoordToOffset:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_ClearMovableGrid:
                 
                 jmp     ClearMovableGrid(pc)
@@ -1337,6 +1485,7 @@ j_ClearMovableGrid:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_ClearTargetGrid:
                 
@@ -1347,6 +1496,7 @@ j_ClearTargetGrid:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetTargetAtCoordOffset:
                 
                 jmp     GetTargetAtCoordOffset(pc)
@@ -1355,6 +1505,7 @@ j_GetTargetAtCoordOffset:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetLandEffectSetting:
                 
@@ -1365,6 +1516,7 @@ j_GetLandEffectSetting:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetCurrentTerrainType:
                 
                 jmp     GetCurrentTerrainType(pc)
@@ -1373,6 +1525,7 @@ j_GetCurrentTerrainType:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetMovableAtCoord:
                 
@@ -1383,6 +1536,7 @@ j_SetMovableAtCoord:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_CheckFlag:
                 
                 jmp     CheckFlag(pc)
@@ -1391,6 +1545,7 @@ j_CheckFlag:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_SetFlag:
                 
@@ -1401,6 +1556,7 @@ j_SetFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_ClearFlag:
                 
                 jmp     ClearFlag(pc)
@@ -1409,6 +1565,7 @@ j_ClearFlag:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_UpdateForce:
                 
@@ -1419,6 +1576,7 @@ j_UpdateForce:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_JoinForce:
                 
                 jmp     JoinForce(pc)   
@@ -1427,6 +1585,7 @@ j_JoinForce:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_LeaveForce:
                 
@@ -1437,6 +1596,7 @@ j_LeaveForce:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_IsInBattleParty:
                 
                 jmp     IsInBattleParty(pc)
@@ -1445,6 +1605,7 @@ j_IsInBattleParty:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_JoinBattleParty:
                 
@@ -1455,6 +1616,7 @@ j_JoinBattleParty:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_LeaveBattleParty:
                 
                 jmp     LeaveBattleParty(pc)
@@ -1463,6 +1625,7 @@ j_LeaveBattleParty:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetDealsItemAmount:
                 
@@ -1473,6 +1636,7 @@ j_GetDealsItemAmount:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_AddItemToDeals:
                 
                 jmp     AddItemToDeals(pc)
@@ -1481,6 +1645,7 @@ j_AddItemToDeals:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_RemoveItemFromDeals:
                 
@@ -1491,6 +1656,7 @@ j_RemoveItemFromDeals:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_AddItemToCaravan:
                 
                 jmp     AddItemToCaravan(pc)
@@ -1499,6 +1665,7 @@ j_AddItemToCaravan:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_RemoveItemFromCaravan:
                 
@@ -1509,6 +1676,7 @@ j_RemoveItemFromCaravan:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_AddAllToStack:
                 
                 jmp     AddAllToStack(pc)
@@ -1518,14 +1686,16 @@ j_AddAllToStack:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_sub_DEFC:
-                
-                jmp     j_sub_DEFC_0(pc)
 
-    ; End of function j_sub_DEFC
+sub_82A0:
+                
+                jmp     sub_DEFC(pc)    
+
+    ; End of function sub_82A0
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_MakeRangeLists:
                 
@@ -1536,6 +1706,7 @@ j_MakeRangeLists:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GenerateTargetRangeLists:
                 
                 jmp     GenerateTargetRangeLists(pc)
@@ -1544,6 +1715,7 @@ j_GenerateTargetRangeLists:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 MakeBattleEntityCancelMoveString:
                 
@@ -1554,6 +1726,7 @@ MakeBattleEntityCancelMoveString:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetTerrain:
                 
                 jmp     GetTerrain(pc)  
@@ -1563,6 +1736,7 @@ j_GetTerrain:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_SetTerrain:
                 
                 jmp     SetTerrain(pc)
@@ -1571,6 +1745,7 @@ j_SetTerrain:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_ClearEnemyMoveInfo:
                 
@@ -1583,6 +1758,7 @@ j_ClearEnemyMoveInfo:
 
 ; entity D0's current MOV*2, X, Y -> D0, D3, D4
 
+
 j_GetMoveInfo:
                 
                 jmp     GetMoveInfo(pc) 
@@ -1592,15 +1768,18 @@ j_GetMoveInfo:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_GetDifficulty:
                 
                 jmp     GetDifficulty(pc)
 
     ; End of function j_GetDifficulty
 
-p_SpellNames:   dc.l SpellNames
-p_AllyNames:    dc.l AllyNames
-p_EnemyNames:   dc.l EnemyNames
+p_tbl_SpellNames:
+                dc.l tbl_SpellNames
+p_tbl_AllyNames:dc.l tbl_AllyNames
+p_tbl_EnemyNames:
+                dc.l tbl_EnemyNames
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1608,6 +1787,7 @@ p_EnemyNames:   dc.l EnemyNames
 ; 
 ; Out: A0 = address of name
 ;      D7 = length of name
+
 
 GetCombatantName:
                 
@@ -1630,7 +1810,7 @@ GetCombatantName:
                 
                 clr.w   d1
                 bsr.w   GetEnemyIndex   
-                movea.l (p_EnemyNames).l,a0
+                movea.l (p_tbl_EnemyNames).l,a0
                 bsr.w   FindName        
 @Done:
                 
@@ -1642,9 +1822,8 @@ GetCombatantName:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-; 
-; Out: D1 = class index
+; Get combatant D0's class index -> D1
+
 
 GetClass:
                 
@@ -1659,6 +1838,9 @@ GetClass:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Get combatant D0's current level -> D1
+
+
 GetCurrentLevel:
                 
                 movem.l d7-a0,-(sp)
@@ -1671,6 +1853,7 @@ GetCurrentLevel:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetMaxHP:
                 
@@ -1685,6 +1868,7 @@ GetMaxHP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetCurrentHP:
                 
                 movem.l d7-a0,-(sp)
@@ -1697,6 +1881,7 @@ GetCurrentHP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetMaxMP:
                 
@@ -1711,6 +1896,7 @@ GetMaxMP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetCurrentMP:
                 
                 movem.l d7-a0,-(sp)
@@ -1723,6 +1909,7 @@ GetCurrentMP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetBaseATT:
                 
@@ -1737,6 +1924,7 @@ GetBaseATT:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetCurrentATT:
                 
                 movem.l d7-a0,-(sp)
@@ -1749,6 +1937,7 @@ GetCurrentATT:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetBaseDEF:
                 
@@ -1763,6 +1952,7 @@ GetBaseDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetCurrentDEF:
                 
                 movem.l d7-a0,-(sp)
@@ -1775,6 +1965,7 @@ GetCurrentDEF:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetBaseAGI:
                 
@@ -1789,6 +1980,7 @@ GetBaseAGI:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetCurrentAGI:
                 
                 movem.l d7-a0,-(sp)
@@ -1801,6 +1993,7 @@ GetCurrentAGI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetBaseMOV:
                 
@@ -1815,6 +2008,7 @@ GetBaseMOV:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetCurrentMOV:
                 
                 movem.l d7-a0,-(sp)
@@ -1827,6 +2021,7 @@ GetCurrentMOV:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetBaseResistance:
                 
@@ -1845,6 +2040,7 @@ loc_83F0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetCurrentResistance:
                 
                 movem.l d7-a0,-(sp)
@@ -1857,6 +2053,7 @@ GetCurrentResistance:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetBaseProwess:
                 
@@ -1871,6 +2068,7 @@ GetBaseProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetCurrentProwess:
                 
                 movem.l d7-a0,-(sp)
@@ -1884,7 +2082,8 @@ GetCurrentProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
-GetStatus:
+
+GetStatusEffects:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_STATUSEFFECTS,d7
@@ -1892,17 +2091,16 @@ GetStatus:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetStatus
+    ; End of function GetStatusEffects
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetXPos:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_X,d7
-loc_843C:
-                
                 bsr.w   GetCombatantByte
                 ext.w   d1
                 movem.l (sp)+,d7-a0
@@ -1912,6 +2110,7 @@ loc_843C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetYPos:
                 
@@ -1926,6 +2125,7 @@ GetYPos:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetCurrentEXP:
                 
@@ -1942,6 +2142,7 @@ GetCurrentEXP:
 
 ; Get combatant D0's upper move type, shifted into lower nibble position -> D1
 
+
 GetUpperMoveType:
                 
                 movem.l d7-a0,-(sp)
@@ -1957,6 +2158,7 @@ GetUpperMoveType:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetLowerMoveType:
                 
                 movem.l d7-a0,-(sp)
@@ -1970,6 +2172,7 @@ GetLowerMoveType:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetEnemyAISetting3233:
                 
@@ -1993,6 +2196,7 @@ GetEnemyAISetting3233:
 ; Out: D1 = high 4 bits
 ;      D2 = low 4 bits
 
+
 GetEnemyAISetting36:
                 
                 movem.l d7-a0,-(sp)
@@ -2010,6 +2214,7 @@ GetEnemyAISetting36:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetCharacterWord34:
                 
                 movem.l d7-a0,-(sp)
@@ -2026,6 +2231,7 @@ GetCharacterWord34:
 ; In: D0 = combatant index
 ; 
 ; Out: D1 = enemy index ($FFFF if not an enemy)
+
 
 GetEnemyIndex:
                 
@@ -2047,6 +2253,7 @@ GetEnemyIndex:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetKills:
                 
                 movem.l d7-a0,-(sp)
@@ -2059,6 +2266,7 @@ GetKills:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetDefeats:
                 
@@ -2076,6 +2284,7 @@ GetDefeats:
 ; In: D0 = combatant index
 ; 
 ; Out: D1 = something class type ??
+
 
 GetSomethingClassType:
                 

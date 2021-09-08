@@ -6,6 +6,7 @@
 
 ; Control Caravan
 
+
 MapEventType2:
                 
                 clr.w   d0
@@ -24,13 +25,13 @@ cs_45284:       setActscriptWait FOLLOWER_A,eas_452A4
                 setPos FOLLOWER_A,64,64,DOWN
                 setActscriptWait ALLY_BOWIE,eas_45308
                 csc_end
-eas_452A4:       ac_0E $0,$0,$1
+eas_452A4:       ac_moveEntFacRelPos 0,0,1
                  ac_waitDest
 word_452AE:      ac_branch
                 dc.w (eas_Idle-word_452AE) & $FFFF
-eas_452B2:       ac_0E $1,$0,$0
+eas_452B2:       ac_moveEntFacRelPos 1,0,0
 eas_452BA:       ac_wait 6
-                 ac_set1Db3 $FFFF
+                 ac_resizable ON
                  ac_soundCommand SFX_WARP
                  ac_setSize 22
                  ac_updateSprite
@@ -54,15 +55,16 @@ eas_452BA:       ac_wait 6
 word_45304:      ac_branch
                 dc.w (eas_Idle-word_45304) & $FFFF
 eas_45308:       ac_setSprite MAPSPRITE_CARAVAN
-                 ac_set1Db3 $0
+                 ac_resizable OFF
                  ac_updateSprite
 word_45312:      ac_branch
                 dc.w (eas_Idle-word_45312) & $FFFF
-byte_45316:      ac_0E $0,$0,$0
+byte_45316:      ac_moveEntFacRelPos 0,0,0
 word_4531E:      ac_branch
                 dc.w (eas_452BA-word_4531E) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
+
 
 MapEventType4:
                 
@@ -86,8 +88,8 @@ eas_45360:       ac_clonePos $0
 word_45364:      ac_branch
                 dc.w (eas_Idle-word_45364) & $FFFF
 byte_45368:      ac_clonePos $1
-eas_4536C:       ac_09 $0,$1
-                 ac_set1Db3 $FFFF
+eas_4536C:       ac_moveFacRelPos 0,1
+                 ac_resizable ON
                  ac_soundCommand SFX_WARP
                  ac_setSize 12
                  ac_updateSprite
@@ -107,7 +109,7 @@ eas_4536C:       ac_09 $0,$1
                  ac_setSize 22
                  ac_updateSprite
                  ac_wait 1
-                 ac_set1Db3 $0
+                 ac_resizable OFF
                  ac_setSize 16
                  ac_updateSprite
                  ac_waitDest
@@ -117,6 +119,7 @@ word_453C2:      ac_branch
 ; =============== S U B R O U T I N E =======================================
 
 ; Control Raft
+
 
 MapEventType3:
                 
@@ -143,13 +146,14 @@ cs_453F2:       setActscriptWait ALLY_BOWIE,eas_4540C
 
 ; =============== S U B R O U T I N E =======================================
 
+
 nullsub_4540A:
                 
                 rts
 
     ; End of function nullsub_4540A
 
-eas_4540C:       ac_0E $1F,$0,$0
+eas_4540C:       ac_moveEntFacRelPos 31,0,0
 byte_45414:      ac_wait 6
                  ac_soundCommand SFX_WARP
                  ac_waitDest
@@ -157,15 +161,16 @@ byte_45414:      ac_wait 6
 word_45422:      ac_branch
                 dc.w (eas_Idle-word_45422) & $FFFF
 eas_45426:       ac_setSprite MAPSPRITE_RAFT
-                 ac_set1Db3 $0
+                 ac_resizable OFF
                  ac_updateSprite
 word_45430:      ac_branch
                 dc.w (eas_Idle-word_45430) & $FFFF
-byte_45434:      ac_0E $0,$0,$0
+byte_45434:      ac_moveEntFacRelPos 0,0,0
 word_4543C:      ac_branch
                 dc.w (byte_45414-word_4543C) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
+
 
 MapEventType5:
                 
@@ -188,7 +193,7 @@ cs_45470:       setActscriptWait 159,eas_45360
                 setActscriptWait ALLY_BOWIE,eas_4548C
                 csc_end
 byte_45488:      ac_clonePos $1F
-eas_4548C:       ac_09 $0,$1
+eas_4548C:       ac_moveFacRelPos 0,1
                  ac_soundCommand SFX_WARP
                  ac_waitDest
 word_45498:      ac_branch
@@ -203,6 +208,7 @@ word_4549E:     dc.w 0
                 dc.w $180
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_454AC:
                 
@@ -234,6 +240,7 @@ loc_454DC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_454E4:
                 
                 movem.l d0-d1/a0,-(sp)
@@ -254,6 +261,7 @@ sub_454E4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ShrinkIntoCaravanBowieAndFollowers:
                 
@@ -277,9 +285,9 @@ ms_BowieShrinkIn:
                 setActscriptWait ALLY_BOWIE,eas_ShrinkIn
                 setPos ALLY_BOWIE,64,64,DOWN
                 csc_end
-eas_ShrinkIn:    ac_0E $1,$0,$0
+eas_ShrinkIn:    ac_moveEntFacRelPos 1,0,0
                  ac_wait 6
-                 ac_set1Db3 $FFFF
+                 ac_resizable ON
                  ac_soundCommand SFX_WARP
                  ac_setSize 22
                  ac_updateSprite
@@ -305,6 +313,7 @@ word_455A8:      ac_branch
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GrowOutBowieAndFollowers:
                 
                 clr.w   d0
@@ -322,7 +331,7 @@ GrowOutBowieAndFollowers:
 ms_BowieGrowOut:setActscriptWait ALLY_BOWIE,eas_GrowOut
                 csc_end
 eas_GrowOut:     ac_clonePos $1
-                 ac_set1Db3 $FFFF
+                 ac_resizable ON
                  ac_soundCommand SFX_WARP
                  ac_setSize 12
                  ac_updateSprite
@@ -342,7 +351,7 @@ eas_GrowOut:     ac_clonePos $1
                  ac_setSize 22
                  ac_updateSprite
                  ac_wait 1
-                 ac_set1Db3 $0
+                 ac_resizable OFF
                  ac_setSize 16
                  ac_updateSprite
                  ac_waitDest
@@ -350,6 +359,7 @@ word_45630:      ac_branch
                 dc.w (eas_Idle-word_45630) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_45634:
                 

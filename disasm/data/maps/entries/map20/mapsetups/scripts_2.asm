@@ -14,13 +14,13 @@ cs_EndKiss:     hideText
                  moveUpRight 1
                 endActions
                 csWait 10
-                setActscriptWait ALLY_BOWIE,eas_461AA
+                setActscriptWait ALLY_BOWIE,eas_StopMoving
                 csWait 80
                 entityActions ALLY_BOWIE
                  moveRight 1
                 endActions
                 csWait 10
-                setActscriptWait ALLY_BOWIE,eas_461AA
+                setActscriptWait ALLY_BOWIE,eas_StopMoving
                 stopEntity ALLY_BOWIE
                 csWait 50
                 customActscriptWait ALLY_BOWIE
@@ -31,7 +31,7 @@ cs_EndKiss:     hideText
                  moveRight 1
                 endActions
                 csWait 16
-                setActscriptWait ALLY_BOWIE,eas_461AA
+                setActscriptWait ALLY_BOWIE,eas_StopMoving
                 csWait 120
-                executeSubroutine j_EndKiss
+                executeSubroutine j_PlayEndKiss
                 csc_end

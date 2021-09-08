@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map42_AreaDescriptions:
                 
                 move.w  #$1B2,d3        ; "Nothing special there.{W1}"
@@ -19,10 +20,11 @@ byte_5FE34:     msDescFunctionD6 39, 2, $FF, Map42_DescFunc0-byte_5FE34
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map42_DescFunc1:
                 
                  
-                chkFlg  $386            ; Set after you pull the Force Sword out
+                chkFlg  902             ; Set after you pull the Force Sword out
                 bne.s   loc_5FE52
                 move.w  #$D06,d0
                 jsr     (DisplayText).w 
@@ -43,13 +45,14 @@ return_5FE66:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map42_DescFunc0:
                 
                  
-                chkFlg  $386            ; Set after you pull the Force Sword out
+                chkFlg  902             ; Set after you pull the Force Sword out
                 bne.s   loc_5FE7A
                 script  cs_5FF06
-                setFlg  $386            ; Set after you pull the Force Sword out
+                setFlg  902             ; Set after you pull the Force Sword out
                 bra.s   return_5FE8E
 loc_5FE7A:
                 

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\enemies\enemygold.asm :
 ; 0xBECC..0xC024 : Enemy gold amounts
-EnemyGold:      dc.w 10                 ; OOZE
+tbl_EnemyGold:  dc.w 10                 ; OOZE
                 dc.w 20                 ; HUGE RAT
                 dc.w 50                 ; GALAM SOLDIER
                 dc.w 80                 ; GALAM KNIGHT

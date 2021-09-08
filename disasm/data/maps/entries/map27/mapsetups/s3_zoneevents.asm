@@ -7,13 +7,14 @@ ms_map27_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map27_ZoneEvent0:
                 
                  
-                chkFlg  $30D            ; Set after the scene where you're surprised by Willard inside the wall
+                chkFlg  781             ; Set after the scene where you're surprised by Willard inside the wall
                 bne.s   Map27_DefaultZoneEvent
                 script  cs_59FB8
-                setFlg  $30D            ; Set after the scene where you're surprised by Willard inside the wall
+                setFlg  781             ; Set after the scene where you're surprised by Willard inside the wall
 Map27_DefaultZoneEvent:
                 
                 rts

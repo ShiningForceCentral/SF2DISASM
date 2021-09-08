@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetEntityActscript:
                 
                 move.w  d0,-(sp)
@@ -18,6 +19,7 @@ SetEntityActscript:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetControlledEntityActScript:
                 
@@ -50,6 +52,7 @@ loc_44B8E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_44B94:
                 
                 move.w  d0,-(sp)
@@ -64,6 +67,7 @@ sub_44B94:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetUnitCursorActscript:
                 
@@ -80,6 +84,7 @@ SetUnitCursorActscript:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_44BC0:
                 
                 move.w  d0,-(sp)
@@ -94,6 +99,7 @@ sub_44BC0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_44BD6:
                 
@@ -110,6 +116,7 @@ sub_44BD6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 MakeEntityIdle:
                 
                 move.w  d0,-(sp)
@@ -124,6 +131,7 @@ MakeEntityIdle:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ApplyInitActscript:
                 
@@ -140,6 +148,7 @@ ApplyInitActscript:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetEntityMovescriptToIdle:
                 
                 move.w  d0,-(sp)
@@ -154,6 +163,7 @@ SetEntityMovescriptToIdle:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 AddFollower:
                 
@@ -188,6 +198,7 @@ loc_44C7E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 HideEntity:
                 
@@ -230,6 +241,7 @@ loc_44CCA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetWalkingActscript:
                 
                 move.w  d0,-(sp)
@@ -252,6 +264,7 @@ SetWalkingActscript:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_44D0E:
                 
@@ -314,6 +327,7 @@ loc_44D90:
 
 ; In: D0 = entity index
 
+
 WaitForEntityToStopMoving:
                 
                 movem.w d0-d7,-(sp)
@@ -346,6 +360,7 @@ loc_44DD0:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get RAM address of entity D0 -> A0
+
 
 GetEntityEntryAddress:
                 

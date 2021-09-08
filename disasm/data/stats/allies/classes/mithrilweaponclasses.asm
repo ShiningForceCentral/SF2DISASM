@@ -1,9 +1,12 @@
 
 ; ASM FILE data\stats\allies\classes\mithrilweaponclasses.asm :
 ; 0x21F62..0x21F92 : Mithril weapon class lists
-MithrilWeaponClassLists:
-                ; enum Classes : CLASS_*
-    
+tbl_MithrilWeaponClasses:
+                
+; Syntax        mithrilWeaponClass [CLASS_]enum,..[CLASS_]enum
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+                
                 mithrilWeaponClass HERO, BDBT
                 mithrilWeaponClass PLDN, PGNT
                 mithrilWeaponClass GLDT

@@ -39,7 +39,12 @@ j_EndKissPictureSequence:
                 jmp     EndKissPictureSequence(pc)
 j_LoadTitleScreenFont:                
                 jmp     LoadTitleScreenFont(pc)
-                include "code\specialscreens\segalogo\segalogo.asm"    ; SEGA logo functions
+                include "code\specialscreens\segalogo\segalogo_0.asm"    ; SEGA logo functions
+                include "data\tech\configurationmodeinputsequence.asm"    ; Configuration mode input sequence
+                wordAlign
+                include "code\specialscreens\segalogo\segalogo_1.asm"    ; SEGA logo functions
+                include "data\tech\debugmodeinputsequence.asm"    ; Debug mode input sequence
+                wordAlign
 VariableWidthFont:
                 incbin "data/graphics/tech/fonts/variablewidthfont.bin"
 MenuTiles_Uncompressed:
@@ -62,7 +67,7 @@ SpeechBalloonTiles:
                 include "code\specialscreens\endkiss\endkissfunctions_0.asm"    ; End kiss function
                 include "code\specialscreens\title\loadfont.asm"    ; Title screen font loading function
 UnusedCloudTiles:
-                incbin "data/graphics/tech/unusedcloudtiles.bin" ; no reference to that ? looks like compressed tiles but no idea of what they represent (32x8 tiles)
+                incbin "data/graphics/tech/unusedcloudtiles.bin" ; looks like compressed tiles but no idea of what they represent (32x8 tiles)
 StaticWidthFont:incbin "data/graphics/tech/fonts/staticwidthfont.bin" 
                                                         ; used for title screen
 TitleScreenPalettes:
@@ -72,16 +77,6 @@ TextBankTreeOffsets:
                 incbin "data/scripting/text/huffmantreeoffsets.bin"
 TextBankTreeData:
                 incbin "data/scripting/text/huffmantrees.bin"
-                includeIfVanillaRom "data\scripting\text\entries.asm"    ; Textbank entries
-                alignIfExpandedRom $30000
-                includeIfExpandedRom "data\graphics\battles\grounds\entries.asm"    ; Grounds
-                alignIfExpandedRom $38000
-                includeIfExpandedRom "data\graphics\battles\weapons\entries.asm"    ; Weapons
-                includeIfExpandedRom "data\graphics\battles\weapons\palettes\entries.asm"    ; WeaponPalettes
-                includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
-                alignIfExpandedRom $43800
-                includeIfExpandedRom "data\battles\global\battlemapcoords.asm"    ; Battle map coords
-                includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
-                includeIfExpandedRom "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
-                alignIfExpandedRom $43C00
+                include "data\scripting\text\entries.asm"    ; Textbank entries
+                include "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
                 align $44000

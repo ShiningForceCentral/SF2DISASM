@@ -50,20 +50,20 @@ j_ExecuteBattleRegionCutscene:
                 jmp     ExecuteBattleRegionCutscene(pc)
 j_LaunchFading:                
                 jmp     LaunchFading(pc)
-sub_4405C:                
-                jmp     sub_45858(pc)
-sub_44060:                
-                jmp     sub_45858(pc)
-sub_44064:                
-                jmp     sub_45974(pc)
-sub_44068:                
-                jmp     sub_45BBE(pc)
-sub_4406C:                
-                jmp     sub_45C94(pc)
-sub_44070:                
-                jmp     sub_45C82(pc)
-sub_44074:                
-                jmp     sub_45B84(pc)
+j_OrientSpriteLeft_bis:                
+                jmp     OrientSpriteLeft(pc)
+j_OrientSpriteLeft:                
+                jmp     OrientSpriteLeft(pc)
+j_OrientSpriteRight:                
+                jmp     OrientSpriteRight(pc)
+j_ResizeSprite:                
+                jmp     ResizeSprite(pc)
+j_ApplyMinorSpriteCropEffect:                
+                jmp     ApplyMinorSpriteCropEffect(pc)
+j_ApplySpriteImmersedEffect:                
+                jmp     ApplySpriteImmersedEffect(pc)
+j_ApplySpriteGhostEffect:                
+                jmp     ApplySpriteGhostEffect(pc)
 sub_44078:                
                 jmp     sub_474EE(pc)
 j_RunMapSetupEntityEvent:                
@@ -104,8 +104,8 @@ j_PlayIntroOrEndCutscene:
                 jmp     PlayIntroOrEndCutscene(pc)
 j_ExecuteFlashScreenScript:                
                 jmp     ExecuteFlashScreenScript(pc)
-j_GetEntityPortaitAndSpeechSound:                
-                jmp     GetEntityPortaitAndSpeechSound(pc)
+j_GetEntityPortaitAndSpeechSfx:                
+                jmp     GetEntityPortaitAndSpeechSfx(pc)
 j_ClearEntities:                
                 jmp     ClearEntities(pc)
                 include "code\common\scripting\map\mapfunctions.asm"    ; Map functions
@@ -116,31 +116,17 @@ j_ClearEntities:
                 include "code\common\scripting\entity\entityfunctions_1.asm"    ; Entity functions
                 include "data\battles\global\battleneutralentities.asm"    ; Battle entities which are not force members or enemies
                 include "data\scripting\entity\eas_battleneutralentities.asm"    ; Entity actscripts for battle entities which are not force members or enemies
-
-                if (FORCE_MEMBERS_EXPANSION=1)
-                include "code\common\scripting\entity\getcombatantmapsprite-expanded.asm"
-                include "data\stats\allies\allymapsprites-expanded.asm"
-                else
                 include "code\common\scripting\entity\getallymapsprite.asm"    ; Get ally map sprite index function
                 include "data\stats\allies\allymapsprites.asm"    ; Ally map sprite indexes table
                 include "code\common\scripting\entity\getcombatantmapsprite.asm"    ; Get combatant map sprite index function
-                endif
-
                 include "data\stats\enemies\enemymapsprites.asm"    ; Enemy map sprite indexes table
                 wordAlign
                 include "code\common\scripting\entity\entityfunctions_2.asm"    ; Entity functions
                 include "data\scripting\entity\eas_main.asm"    ; Main entity actscripts
                 include "code\common\scripting\entity\entityfunctions_3.asm"    ; Entity functions
                 include "code\common\scripting\map\vehiclefunctions.asm"    ; Mapscripts and functions for Caravan and Raft
-
-                if (FORCE_MEMBERS_EXPANSION=1)
-                include "code\common\scripting\entity\getentityportaitandspeechsound-expanded.asm"
-                include "data\spritedialogproperties-expanded.asm"
-                else
                 include "code\common\scripting\entity\getentityportaitandspeechsound.asm"    ; Get entity portrait and speech sfx indexes function
                 include "data\spritedialogproperties.asm"    ; Sprite dialog properties
-                endif
-
                 include "code\common\scripting\entity\entityfunctions_4.asm"    ; Entity functions
                 include "data\scripting\entity\eas_actions.asm"    ; Entity scripts for cutscene actions
                 include "code\common\scripting\map\mapscriptengine_1.asm"    ; Mapscript engine, part 1
@@ -177,9 +163,9 @@ j_ClearEntities:
                 include "data\scripting\map\cs_intro4.asm"    ; Intro cutscene 4
                 include "data\scripting\map\cs_intro_stormeffect.asm"    ; Storm Effect
                 include "data\scripting\map\cs_end.asm"    ; End cutscene
+                include "data\scripting\map\debugscripts.asm"    ; Debugging scripts
                 include data\battles\entries\battlecutscenesstorage.asm
                 include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
                 include "data\maps\mapsetups.asm"    ; Map setups table
-                ;includeIfVanillaRom data\maps\mapsetupsstorage.asm
                 include data\maps\mapsetupsstorage.asm
                 align $64000

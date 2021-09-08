@@ -4,9 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-; 
-; Out: D4 = map sprite index
+; Get combatant D0's map sprite index -> D4
+
 
 GetAllyMapSprite:
                 
@@ -30,13 +29,13 @@ GetAllyMapSprite:
                 
                 cmpi.b  #ALLY_ROHDE,d0  ; Rhode !
                 bne.s   @GetMapSpriteForClass
-                chkFlg  $B              ; Rohde joined
+                chkFlg  11              ; Rohde joined
                 bne.s   @GetMapSpriteForClass
                 move.w  #MAPSPRITE_NPC_ROHDE,d4
                 bra.w   @Done           ; Rhode hasn't joined yet, so use his NPC sprite
 @GetMapSpriteForClass:
                 
-                move.w  d0,d4           ; start handling sprite indexes based on class
+                move.w  d0,d4           ; start handling sprites based on class
                 andi.w  #ALLY_MASK_INDEX,d4
                 move.b  tbl_AllyMapSprites(pc,d4.w),d4
                 jsr     j_GetClass

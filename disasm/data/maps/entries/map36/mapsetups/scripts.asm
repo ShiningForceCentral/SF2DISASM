@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map36\mapsetups\scripts.asm :
 ; 0x5DA28..0x5DAE4 : 
-cs_5DA28:       textCursor $CFB
+cs_5DA28:       textCursor 3323
                 faceEntity ALLY_PETER,131
                 faceEntity FOLLOWER_B,131
                 nextText $0,ALLY_FRAYJA ; "You defeated Zalbard and{N}saved Mitula.{W2}"
@@ -16,9 +16,9 @@ cs_5DA28:       textCursor $CFB
                 nextSingleText $FF,255  ; "{LEADER} decides to take{N}{NAME;22} with him.{W1}"
                 nextSingleText $0,ALLY_FRAYJA ; "Thank you very much.{W1}"
                 followEntity ALLY_FRAYJA,FOLLOWER_B,2
-                setStoryFlag $1F        ; Battle 31 unlocked
-                setStoryFlag $21        ; Battle 33 unlocked
-                setStoryFlag $22        ; Battle 34 unlocked
+                setStoryFlag 31         ; Battle 31 unlocked - BATTLE_PACALON                   
+                setStoryFlag 33         ; Battle 33 unlocked - BATTLE_INSIDE_MOUN               
+                setStoryFlag 34         ; Battle 34 unlocked - BATTLE_VERSUS_CAMEELA            
                 csc_end
 cs_5DA7A:       setCameraEntity 131
                 setDest ALLY_BOWIE,4,23

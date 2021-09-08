@@ -1,9 +1,18 @@
 
 ; ASM FILE data\stats\allies\allystartdefs.asm :
 ; 0x1EE7D0..0x1EE890 : Ally start definitions
-AllyStartDefs:  ; startClass enum Classes : CLASS_*
-; startItems enum Items : ITEM_*
-    
+tbl_AllyStartDefs:
+                
+; Syntax        startClass [CLASS_]enum
+;               startLevel 1-255
+;               startItems &
+;                   [ITEM_]enum[|EQUIPPED], &
+;                   [ITEM_]enum[|EQUIPPED], &
+;                   [ITEM_]enum[|EQUIPPED], &
+;                   [ITEM_]enum[|EQUIPPED]
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+                
                 startClass SDMN         ; BOWIE
                 startLevel 1
                 startItems &

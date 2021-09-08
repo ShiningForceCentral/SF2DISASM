@@ -37,7 +37,7 @@ j_BattleLoop_Unused:
 j_GetEntityEventIndex:                
                 jmp     GetEntityEventIndex(pc)
 j_GetEntityIndex:                
-                jmp     GetEntityNumberOfCombatant(pc)
+                jmp     GetEntityIndexForCombatant(pc)
 j_FadeOut_WaitForP1Input:                
                 jmp     FadeOut_WaitForP1Input(pc)
 j_SetEntityPosition:                
@@ -55,7 +55,7 @@ j_EndGame:
 j_SuspendGame:                
                 jmp     SuspendGame(pc)
                 include "code\common\menus\shop\shopactions.asm"    ; Shop functions
-                include "data\stats\items\shopdefs.asm"    ; Shop definitions
+                include "data\stats\items\shopinventories.asm"    ; Shop inventories
                 wordAlign
                 include "code\common\menus\church\churchactions_1.asm"    ; Church functions
                 include "data\stats\allies\promotions.asm"    ; Promotions
@@ -80,7 +80,7 @@ j_SuspendGame:
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions
                 include "code\common\tech\graphics\specialsprites.asm"    ; Special Sprites functions
-                includeIfVanillaRom "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
+                include "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
                 include "code\common\tech\graphics\specialspritesanims.asm"    ; Special Sprites Animations
                 include "code\specialscreens\suspend\suspend.asm"    ; Suspend functions
                 include "code\specialscreens\witchend\witchend.asm"    ; Witch end functions

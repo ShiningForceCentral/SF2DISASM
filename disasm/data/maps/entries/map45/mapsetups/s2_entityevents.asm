@@ -10,11 +10,12 @@ ms_map45_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map45_EntityEvent0:
                 
                  
-                txt     $81D            ; "Monks are dedicated to{N}studying the powers of the{N}mind.{W2}"
-                txt     $81E            ; "We train very hard.{W1}"
+                txt     2077            ; "Monks are dedicated to{N}studying the powers of the{N}mind.{W2}"
+                txt     2078            ; "We train very hard.{W1}"
                 rts
 
     ; End of function Map45_EntityEvent0
@@ -22,10 +23,11 @@ Map45_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map45_EntityEvent1:
                 
                  
-                txt     $81F            ; "Don't approach my back!{N}You will die!{W1}"
+                txt     2079            ; "Don't approach my back!{N}You will die!{W1}"
                 rts
 
     ; End of function Map45_EntityEvent1
@@ -33,10 +35,11 @@ Map45_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map45_EntityEvent2:
                 
                  
-                txt     $820            ; "I'm always in control of my{N}mind.{W1}"
+                txt     2080            ; "I'm always in control of my{N}mind.{W1}"
                 rts
 
     ; End of function Map45_EntityEvent2
@@ -44,11 +47,12 @@ Map45_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map45_EntityEvent3:
                 
                  
-                txt     $821            ; "Where are you from?{N}I used to be a priest.{W2}"
-                txt     $822            ; "Do you need my help?{W1}"
+                txt     2081            ; "Where are you from?{N}I used to be a priest.{W2}"
+                txt     2082            ; "Do you need my help?{W1}"
                 jsr     j_ChurchMenuActions
                 rts
 
@@ -56,6 +60,7 @@ Map45_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map45_DefaultEntityEvent:
                 

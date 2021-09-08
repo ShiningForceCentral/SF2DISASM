@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle32\cs_afterbattle.asm :
 ; 0x4CDB4..0x4CF0C : Cutscene after battle 32
-abcs_battle32:  textCursor $B25
+abcs_battle32:  textCursor 2853
                 loadMapFadeIn MAP_OVERWORLD_MOUN_AND_MITULA,5,20
                 loadMapEntities ce_4CEEC
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -36,7 +36,7 @@ abcs_battle32:  textCursor $B25
                 setFacing ALLY_JARO,DOWN
                 nextSingleText $C0,ALLY_JARO ; "You need a professional{N}soldier like me.{W1}"
                 nextSingleText $0,FOLLOWER_B ; "Oh, we welcome you.{W1}"
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 entityActionsWait ALLY_PETER
                  moveRight 1
                 endActions
@@ -67,6 +67,7 @@ abcs_battle32:  textCursor $B25
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csub_4CEE4:
                 

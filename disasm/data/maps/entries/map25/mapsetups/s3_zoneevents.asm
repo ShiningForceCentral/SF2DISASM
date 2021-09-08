@@ -6,6 +6,7 @@ ms_map25_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map25_DefaultZoneEvent:
                 
                 rts

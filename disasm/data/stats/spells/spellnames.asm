@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\spells\spellnames.asm :
 ; 0xF9C4..0xFAD6 : Spell names
-SpellNames:     spellName "HEAL"
+tbl_SpellNames: spellName "HEAL"
                 spellName "AURA"
                 spellName "DETOX"
                 spellName "BOOST"

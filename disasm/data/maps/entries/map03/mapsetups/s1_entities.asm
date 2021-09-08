@@ -4,7 +4,7 @@
 ms_map3_Entities:
                 msFixedEntity 42, 8, DOWN, ALLY_SARAH, eas_Init
                 msFixedEntity 44, 10, UP, ALLY_CHESTER, eas_Init
-                msFixedEntity 5, 6, RIGHT, MAPSPRITE_WOMAN1, eas_Init2
+                msFixedEntity 5, 6, RIGHT, MAPSPRITE_WOMAN1, eas_InitSlow
                 msFixedEntity 13, 8, RIGHT, MAPSPRITE_WOMAN3, eas_Init
                 msWalkingEntity 20, 13, DOWN, MAPSPRITE_SAILOR, 20, 13, 3
                 msWalkingEntity 18, 10, DOWN, MAPSPRITE_WOMAN1, 18, 10, 1

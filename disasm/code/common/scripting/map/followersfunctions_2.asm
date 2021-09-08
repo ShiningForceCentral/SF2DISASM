@@ -16,12 +16,13 @@ pt_eas_WorldmapFollowers:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitializeFollowerActscripts:
                 
                 movem.l a6,-(sp)
                 lea     FollowersTable(pc), a4
                 lea     pt_eas_Followers(pc), a6
-                chkFlg  $41             ; Caravan is unlocked
+                chkFlg  65              ; Caravan is unlocked
                 beq.s   loc_443D2
                 bsr.w   IsOverworldMap
                 beq.s   loc_443D2
@@ -56,6 +57,7 @@ loc_443FE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_44404:
                 
                 cmpi.b  #2,((PLAYER_TYPE-$1000000)).w
@@ -67,7 +69,7 @@ sub_44404:
                 bra.w   loc_4443C
 byte_44420:
                 
-                chkFlg  $40             ; Raft is unlocked
+                chkFlg  64              ; Raft is unlocked
                 beq.w   return_4446A
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
                 cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0
@@ -97,6 +99,7 @@ return_4446A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_4446C:
                 

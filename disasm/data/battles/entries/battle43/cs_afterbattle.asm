@@ -63,8 +63,8 @@ abcs_battle43:  setCamDest 8,2
                 mapFadeInFromWhite
                 warp MAP_ZEON_ARENA,12,11,UP
                 setQuake 0
-                clearF $43              ; Peter is a follower
-                clearF $46              ; Astral is a follower
-                clearF $47              ; Lemon is a follower
-                clearF $4C              ; Zynk is a follower
+                clearF 67               ; Peter is a follower
+                clearF 70               ; Astral is a follower
+                clearF 71               ; Lemon is a follower
+                clearF 76               ; Zynk is a follower
                 csc_end

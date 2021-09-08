@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitWindowProperties:
                 
                 move.l  a0,-(sp)
@@ -35,6 +36,7 @@ loc_47F4:
 
 ; d0 = width height, d1 = X Y pos
 ; returns a1 = window tiles end, d0 = window slot
+
 
 CreateWindow:
                 
@@ -89,6 +91,7 @@ loc_485E:
 
 ; In DO=Windows index, D1=Value ($8080->X/Y), Out A0=Window properties
 
+
 SetWindowDestination:
                 
                 move.l  a0,-(sp)
@@ -118,6 +121,7 @@ loc_4898:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FixWindowsPositions:
                 
                 movem.w d0-d1/d7,-(sp)
@@ -138,6 +142,7 @@ loc_48B0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_48BE:
                 
                 move.l  a0,-(sp)
@@ -152,6 +157,7 @@ sub_48BE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CopyPlaneALayoutForWindows:
                 
@@ -174,6 +180,7 @@ CopyPlaneALayoutForWindows:
 ;     D1 = destination
 ;     D2 = animation length
 
+
 MoveWindowWithSfx:
                 
                  
@@ -187,6 +194,7 @@ MoveWindowWithSfx:
 ; In: D0 = window slot
 ;     D1 = destination
 ;     D2 = animation length
+
 
 MoveWindow:
                 
@@ -215,6 +223,7 @@ loc_4914:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ClearWindowAndUpdateEndPointer:
                 
@@ -259,6 +268,7 @@ loc_4972:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WaitForWindowMovementEnd:
                 
                 bsr.w   WaitForVInt
@@ -270,6 +280,7 @@ WaitForWindowMovementEnd:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 VInt_UpdateWindows:
                 
@@ -398,6 +409,7 @@ return_4AC6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_4AC8:
                 
                 movem.l a0-a1,-(sp)
@@ -469,6 +481,7 @@ loc_4B52:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_4B5C:
                 
                 movem.l a0-a1,-(sp)
@@ -532,6 +545,7 @@ loc_4BE0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_4BEA:
                 
                 move.w  d1,d6
@@ -572,6 +586,7 @@ return_4C36:
 
 ; In D0=Window index, Out A0=Address
 
+
 GetWindowInfo:
                 
                 lsl.w   #4,d0
@@ -585,6 +600,7 @@ GetWindowInfo:
 ; =============== S U B R O U T I N E =======================================
 
 ; In D0=Windows index, D1=Tile coords, Out A1=Address
+
 
 GetWindowTileAddress:
                 

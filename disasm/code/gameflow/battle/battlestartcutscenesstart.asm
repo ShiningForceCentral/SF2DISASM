@@ -8,6 +8,7 @@
 ; 
 ; only seems to happen in first "above Pacalon" battle
 
+
 ExecuteBattleCutscene_Start:
                 
                 movem.l d1,-(sp)
