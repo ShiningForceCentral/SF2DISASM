@@ -52,4 +52,7 @@
                 include "code\gameflow\start\regioncheck.asm"    ; Region check function
 nullsub_7FA4:                
                 rts
+                if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+                include "code\common\tech\extendedssfmapper.asm"    ; Extended SSF mapper functions
+                endif
                 align $8000

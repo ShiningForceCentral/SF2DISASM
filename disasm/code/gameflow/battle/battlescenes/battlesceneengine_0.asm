@@ -3033,7 +3033,7 @@ loc_1995C:
 
 sub_19970:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                getEnemyBattlespritePointer
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((ENEMY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -3050,6 +3050,8 @@ loc_19996:
                 
                 move.w  (a0)+,(a1)+
                 dbf     d0,loc_19996
+                
+                restoreRomBanks
                 rts
 
     ; End of function sub_19970
@@ -3060,7 +3062,7 @@ loc_19996:
 
 sub_1999E:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                getEnemyBattlespritePointer
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3069,7 +3071,7 @@ sub_1999E:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 move.w  #$C00,d0
-                jmp     (ApplyImmediateVramDmaOnCompressedTiles).w
+                dmaBattlespriteFrame
 
     ; End of function sub_1999E
 
@@ -3079,7 +3081,7 @@ sub_1999E:
 
 sub_199BC:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                getEnemyBattlespritePointer
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3089,7 +3091,7 @@ sub_199BC:
                 adda.w  d0,a0
                 move.w  #$C00,d0
                 jsr     (ApplyVIntVramDmaOnCompressedTiles).w
-                jmp     (WaitForDmaQueueProcessing).w
+                waitForBattlespriteDma
 
     ; End of function sub_199BC
 
@@ -3101,7 +3103,7 @@ sub_199BC:
 
 LoadPaletteForBattlescene:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                getAllyBattlespritePointer
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((ALLY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -3118,6 +3120,8 @@ LoadPaletteForBattlescene:
                 
                 move.w  (a0)+,(a1)+
                 dbf     d0,@Loop
+                
+                restoreRomBanks
                 rts
 
     ; End of function LoadPaletteForBattlescene
@@ -3131,7 +3135,7 @@ LoadPaletteForBattlescene:
 
 LoadAllyBattleSpriteFrame:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                getAllyBattlespritePointer
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3140,7 +3144,7 @@ LoadAllyBattleSpriteFrame:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 move.w  #$900,d0
-                jmp     (ApplyImmediateVramDmaOnCompressedTiles).w
+                dmaBattlespriteFrame
 
     ; End of function LoadAllyBattleSpriteFrame
 
@@ -3153,7 +3157,7 @@ LoadAllyBattleSpriteFrame:
 
 VInt_LoadAllyBattleSpriteFrame:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                getAllyBattlespritePointer
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3163,7 +3167,7 @@ VInt_LoadAllyBattleSpriteFrame:
                 adda.w  d0,a0
                 move.w  #$900,d0
                 jsr     (ApplyVIntVramDmaOnCompressedTiles).w
-                jmp     (WaitForDmaQueueProcessing).w
+                waitForBattlespriteDma
 
     ; End of function VInt_LoadAllyBattleSpriteFrame
 
@@ -3230,7 +3234,7 @@ LoadBattlesceneGround:
 
 sub_19AB0:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                getAllyBattlespritePointer
                 move.w  ((ALLY_BATTLE_SPRITE-$1000000)).w,d0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
@@ -3246,7 +3250,7 @@ loc_19AD6:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
-                jmp     (LoadCompressedData).w
+                loadBattlesprite
 
     ; End of function sub_19AB0
 
@@ -3258,7 +3262,7 @@ LoadNewAllyBattleSprite:
                 
                 move.w  d1,-(sp)
                 move.w  d0,-(sp)
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                getAllyBattlespritePointer
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3276,6 +3280,7 @@ LoadNewAllyBattleSprite:
                 adda.w  d0,a0
                 lea     (FF7A02_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
+                restoreRomBanks
                 move.w  (sp)+,d1
                 rts
 
@@ -3287,7 +3292,7 @@ LoadNewAllyBattleSprite:
 
 LoadEnemyBattleSpriteFrame:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                getEnemyBattlespritePointer
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3296,7 +3301,7 @@ LoadEnemyBattleSpriteFrame:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
-                jmp     (LoadCompressedData).w
+                loadBattlesprite
 
     ; End of function LoadEnemyBattleSpriteFrame
 
@@ -3310,7 +3315,8 @@ LoadEnemyBattleSprite:
                 
                 cmpi.w  #$FFFF,d0
                 beq.w   return_19B7E
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                
+                getEnemyBattlespritePointer
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3325,6 +3331,8 @@ loc_19B78:
                 
                 move.l  (a0)+,(a1)+
                 dbf     d0,loc_19B78
+                
+                restoreRomBanks
 return_19B7E:
                 
                 rts
