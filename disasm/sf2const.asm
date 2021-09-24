@@ -3,6 +3,7 @@
 ; START OF SEGMENT SRAM OFFSETS FROM SRAM:00200000 TO 0:00204000
 byte_200000: equ $200000
 SRAM_START: equ $200001
+SRAM_TEST_SPACE: equ $200061
 SAVED_ERRCODE_BYTE0: equ $200081
 SAVED_ERRCODE_BYTE1: equ $200083
 SAVED_ERRCODE_BYTE2: equ $200085
@@ -53,6 +54,19 @@ MemMode: equ $A11000
 Z80BusReq: equ $A11100
 Z80BusReset: equ $A11200
 ; END OF SEGMENT Control OFFSETS FROM Control:A11000 TO 0:00A11FFF
+
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+EXTENDED_SSF_IO_STATUS: equ $A130E4
+EXTENDED_SSF_CTRL0: equ $A130F0
+SEGA_MAPPER_CTRL0: equ $A130F1
+ROM_BANK1: equ $A130F3  ; bank for $080000-$0FFFFF
+ROM_BANK2: equ $A130F5  ; bank for $100000-$17FFFF
+ROM_BANK3: equ $A130F7  ; bank for $180000-$1FFFFF
+ROM_BANK4: equ $A130F9  ; bank for $200000-$27FFFF
+ROM_BANK5: equ $A130FB  ; bank for $280000-$2FFFFF
+ROM_BANK6: equ $A130FD  ; bank for $300000-$37FFFF
+ROM_BANK7: equ $A130FF  ; bank for $380000-$3FFFFF
+    endif
 
 ; START OF SEGMENT VDP OFFSETS FROM VDP:00C00000 TO 0:00C00012
 VDP_Data: equ $C00000
@@ -260,6 +274,13 @@ word_FFB094: equ $FFB094
 MINISTATUS_WINDOW_WIDTH: equ $FFB096
 MOVE_SFX: equ $FFB098
 CURRENT_SAVE_SLOT: equ $FFB09A
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+SRAM_CONTROL: equ $FFB09B   ; Tested working SRAM control type :
+    endif                   ;   0: SEGA Mapper
+                            ;   1: Partial Extended SSF (emulators)
+                            ;   2: Extended SSF (Mega EverDrive v2)
+                            ;   3: Extended SSF (Mega EverDrive Pro)
+                            ;  -1: saving not supported
 SPEECH_SFX: equ $FFB09C
 SPEECH_SFX_BACKUP: equ $FFB09E
 CURRENT_PORTRAIT: equ $FFB0A0
@@ -576,4 +597,3 @@ ERRCODE_BYTE5: equ $FFFFFD
 ERRCODE_BYTE6: equ $FFFFFE
 ERRCODE_BYTE7: equ $FFFFFF
 ; END OF SEGMENT RAM OFFSETS FROM RAM:FF0000 TO 0:01000000
-

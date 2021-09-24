@@ -2310,7 +2310,7 @@ loc_252A6:
                 bmi.w   loc_25236
                 move.l  ((SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER_FROM_SRAM-$1000000)).w
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                getCurrentSaveSlot
                 enableSram
                 jsr     (SaveGame).l
                 disableSram
@@ -2879,4 +2879,3 @@ loc_257BA:
                 rts
 
     ; End of function SetMoveSfx
-

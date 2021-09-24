@@ -486,7 +486,7 @@ ChurchMenuActions:
 @DoSaveGame:
                 
                 move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP_INDEX-$1000000)).w
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                getCurrentSaveSlot
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 enableSram
                 jsr     (SaveGame).w
@@ -514,4 +514,3 @@ ChurchMenuActions:
                 bra.w   @StartMenu      
 
     ; End of function ChurchMenuActions
-

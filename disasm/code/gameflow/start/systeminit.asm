@@ -8,6 +8,9 @@
 SystemInit:
                 
                 bsr.s   InitVdp
+                if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+                bsr.w   InitMapper
+                endif
                 bsr.w   InitZ80
                 bsr.s   InitVdpData
                 jmp     (InitGame).l

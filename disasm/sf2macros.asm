@@ -20,29 +20,123 @@ wordAlign: macro
     dcb.b *%2,$FF
     endm
 	
+declareSystemId: macro
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    dc.b 'SEGA SSF        '
+    else
+    dc.b 'SEGA GENESIS    '
+    endc
+    endm
+    
 declareRomEnd:	macro
-	if (EXPANDED_ROM=0)
+	if (EXPANDED_ROM=1)
+    dc.l $3FFFFF
+    else
 	dc.l $1FFFFF
-	else
-	dc.l $3FFFFF
 	endc
 	endm	
 
 enableSram:	macro
-	if (EXPANDED_ROM=1)
-	move.b #$03,($a130f1).l
+	if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    if (*<$8000)
+    bsr.w   EnableMapperSram
+    else
+    jsr     (EnableMapperSram).w
+    endc
+    elseif (EXPANDED_ROM=1)
+	move.b  #3,(SEGA_MAPPER_CTRL0).l
 	endc
 	endm
 	
 disableSram:	macro
-	if (EXPANDED_ROM=1)
-	move.b #$00,($a130f1).l
+	if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    if (*<$8000)
+    bsr.w   DisableMapperSram
+    else
+    jsr     (DisableMapperSram).w
+    endc
+    elseif (EXPANDED_ROM=1)
+	move.b  #0,(SEGA_MAPPER_CTRL0).l
 	endc
 	endm	
 
+getCurrentSaveSlot: macro
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    move.b  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+    else
+    move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+    endc
+    endm
+    
+setCurrentSaveSlot: macro
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    move.b  d0,((CURRENT_SAVE_SLOT-$1000000)).w
+    else
+    move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
+    endc
+    endm
+    
+getEnemyBattlespritePointer: macro
+    movea.l (p_pt_EnemyBattleSprites).l,a0
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    move.b  #8,(ROM_BANK6).l
+    move.b  #9,(ROM_BANK7).l
+    endc
+    endm
+    
+getAllyBattlespritePointer: macro
+    movea.l (p_pt_AllyBattleSprites).l,a0
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    move.b  #10,(ROM_BANK6).l
+    move.b  #11,(ROM_BANK7).l
+    endc
+    endm
+    
+restoreRomBanks: macro
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    move.b  #6,(ROM_BANK6).l
+    move.b  #7,(ROM_BANK7).l
+    endc
+    endm
+    
+dmaBattlespriteFrame: macro
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    jsr     (ApplyImmediateVramDmaOnCompressedTiles).w
+    move.b  #6,(ROM_BANK6).l
+    move.b  #7,(ROM_BANK7).l
+    rts
+    else
+    jmp     (ApplyImmediateVramDmaOnCompressedTiles).w
+    endc
+    endm
+    
+waitForBattlespriteDma: macro
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    jsr     (WaitForDmaQueueProcessing).w
+    move.b  #6,(ROM_BANK6).l
+    move.b  #7,(ROM_BANK7).l
+    rts
+    else
+    jmp     (WaitForDmaQueueProcessing).w
+    endc
+    endm
+    
+loadBattlesprite: macro
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    jsr     (LoadCompressedData).w
+    move.b  #6,(ROM_BANK6).l
+    move.b  #7,(ROM_BANK7).l
+    rts
+    else
+    jmp     (LoadCompressedData).w
+    endc
+    endm
+
 
 conditionalRomExpand:	macro
-	if (EXPANDED_ROM=1)
+	if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    include "layout\sf2-expanded-19-0x200000-0x600000.asm"
+    elseif (EXPANDED_ROM=1)
 	include "layout\sf2-expanded-19-0x200000-0x400000.asm"
 	endc
 	endm
