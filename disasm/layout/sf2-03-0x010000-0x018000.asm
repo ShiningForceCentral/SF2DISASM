@@ -35,8 +35,10 @@ WindowBorderTiles:
                 include "data\graphics\tech\windowlayouts\timerwindowlayout.asm"    ; Timer window layout
                 include "code\common\menus\menuengine_11.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout
-                include "data\stats\items\itemdefs.asm"    ; Item definitions
-                include "data\stats\spells\spelldefs.asm"    ; Spell definitions
-                include "data\stats\items\itemnames.asm"    ; Item names
+                if (ITEMS_AND_SPELLS_EXPANSION=0)
+                    include "data\stats\items\itemdefs.asm"    ; Item definitions
+                    include "data\stats\spells\spelldefs.asm"    ; Spell definitions
+                    include "data\stats\items\itemnames.asm"    ; Item names
+                endif
                 include "data\stats\allies\classes\classnames.asm"    ; Class names
                 align $18000

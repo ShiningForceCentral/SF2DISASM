@@ -36,7 +36,9 @@
                 include "code\gameflow\battle\battlefieldengine_3.asm"    ; Battlefield engine
                 include "code\gameflow\battle\aiengine.asm"    ; AI engine
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
-                include "data\stats\spells\spellnames.asm"    ; Spell names
+                if (ITEMS_AND_SPELLS_EXPANSION=0)
+                    include "data\stats\spells\spellnames.asm"    ; Spell names
+                endif
                 include "data\stats\allies\allynames.asm"    ; Ally names
                 include "data\stats\enemies\enemynames.asm"    ; Enemy names
 algn_FF87:      align $8000

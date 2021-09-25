@@ -455,7 +455,11 @@ LoadIcon:
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0           ; icon offset
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    adda.l  d1,a0
+                else
+                    adda.w  d1,a0           ; icon offset
+                endif
                 moveq   #$2F,d7 
 loc_13B8E:
                 
@@ -684,7 +688,7 @@ loc_13F88:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FA2
                 moveq   #1,d1
-                cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w 
                 beq.s   loc_13FA2
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_1401E
@@ -693,7 +697,7 @@ loc_13FA2:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FBC
                 moveq   #2,d1
-                cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w 
                 beq.s   loc_13FBC
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_1401E
@@ -709,7 +713,7 @@ loc_13FCE:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FE8
                 moveq   #3,d1
-                cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w 
                 beq.s   loc_13FE8
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_1401E
@@ -1295,7 +1299,7 @@ loc_144DE:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_144F8
                 moveq   #1,d1
-                cmpi.w  #$3F,((DISPLAYED_ICON_2-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_2-$1000000)).w 
                 beq.s   loc_144F8
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_14574
@@ -1304,7 +1308,7 @@ loc_144F8:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14512
                 moveq   #2,d1
-                cmpi.w  #$3F,((DISPLAYED_ICON_3-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_3-$1000000)).w 
                 beq.s   loc_14512
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_14574
@@ -1320,7 +1324,7 @@ loc_14524:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1453E
                 moveq   #3,d1
-                cmpi.w  #$3F,((DISPLAYED_ICON_4-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_4-$1000000)).w 
                 beq.s   loc_1453E
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_14574
@@ -1457,7 +1461,7 @@ loc_14654:
 loc_1466C:
                 
                 move.w  d2,d1
-                andi.w  #$3F,d1 
+                andi.w  #SPELLENTRY_MASK_INDEX,d1 
                 lsl.w   #6,d3
                 or.w    d3,d1
                 movem.l (sp)+,d0/d3-a1  ;     fixSelectionRectCorners
@@ -2144,7 +2148,11 @@ CopyIconPixels:
                 add.w   d0,d0
                 add.w   d1,d0
                 lsl.w   #6,d0
-                adda.w  d0,a1
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    adda.l  d0,a1
+                else
+                    adda.w  d0,a1
+                endif
                 moveq   #$2F,d7 
 @Loop:
                 

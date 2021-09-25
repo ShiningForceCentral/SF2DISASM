@@ -973,7 +973,7 @@ sub_C958:
                 move.l  (sp)+,d0
                 moveq   #0,d3
                 bsr.w   GetNextUsableAttackItem
-                cmpi.w  #$7F,d1 
+                cmpi.w  #ITEM_NOTHING,d1 
                 beq.w   loc_CA02
                 bsr.w   MakeTargetListEverybody
 loc_C992:
@@ -1114,7 +1114,7 @@ loc_CAC8:
                 
                 move.b  (a0,d7.w),d2
                 move.b  (a1,d7.w),d5
-                move.b  #$3F,d1 
+                move.b  #SPELL_NOTHING,d1 
                 bsr.w   sub_CAEA
                 move.b  d6,(a2,d7.w)
                 dbf     d7,loc_CAC8
@@ -1134,7 +1134,7 @@ sub_CAEA:
                 
                 movem.l d0-d5/d7-a6,-(sp)
                 moveq   #0,d6
-                cmpi.b  #$3F,d1 
+                cmpi.b  #SPELL_NOTHING,d1 
                 bne.s   loc_CAFE
                 move.b  d2,d1
                 bsr.w   sub_CB18

@@ -65,12 +65,12 @@ loc_212E0:
                 move.w  d0,var_4(a6)
                 move.w  d1,var_26(a6)
                 move.w  d1,var_28(a6)
-                andi.w  #$3F,var_28(a6) 
+                andi.w  #SPELLENTRY_MASK_INDEX,var_28(a6) 
                 clr.l   var_32(a6)
                 lsr.l   #6,d1
                 addq.l  #1,d1
                 move.l  d1,var_32(a6)
-                cmpi.w  #2,var_28(a6)
+                cmpi.w  #SPELL_DETOX,var_28(a6)
                 beq.w   byte_213A8      
                 move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  var_28(a6),((TEXT_NAME_INDEX_2-$1000000)).w

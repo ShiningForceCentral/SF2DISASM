@@ -872,7 +872,7 @@ loc_E654:
                 lea     ((byte_FF883E-$1000000)).w,a0
 loc_E660:
                 
-                cmpi.b  #$7F,var_2(a6) 
+                cmpi.b  #ITEM_NOTHING,var_2(a6) 
                 beq.s   loc_E66C
                 bra.w   loc_E6C0
 loc_E66C:
@@ -904,14 +904,14 @@ loc_E6B0:
                 
                 move.b  var_1(a6),d0
                 lsl.b   #6,d2
-                andi.b  #$3F,d0 
+                andi.b  #SPELLENTRY_MASK_INDEX,d0 
                 or.b    d2,d0
                 move.b  d0,var_1(a6)
 loc_E6C0:
                 
                 clr.w   d0
                 move.b  (a0,d6.w),d0
-                cmpi.b  #$7F,var_2(a6) 
+                cmpi.b  #ITEM_NOTHING,var_2(a6) 
                 beq.s   loc_E6DA
                 clr.w   d1
                 move.b  var_2(a6),d1
@@ -946,7 +946,7 @@ loc_E70A:
                 bsr.w   sub_DD10
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1
-                cmpi.b  #$7F,var_2(a6) 
+                cmpi.b  #ITEM_NOTHING,var_2(a6) 
                 bne.s   loc_E748
                 move.w  #BATTLEACTION_CAST_SPELL,(a1)
                 clr.w   d0
@@ -1399,7 +1399,7 @@ loc_EBE8:
                 move.w  d7,d0
                 clr.w   d3
                 bsr.w   GetNextStatusSpell
-                cmpi.w  #$3F,d1 
+                cmpi.w  #SPELL_NOTHING,d1 
                 bne.s   loc_EC0E
                 move.w  #$FFFF,d1
                 lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0

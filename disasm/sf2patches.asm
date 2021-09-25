@@ -1,0 +1,1 @@
+ITEMS_AND_SPELLS_EXPANSION: equ 0   ; 0 = OFF, 1 = ON. Requires 4MB expanded ROM layout!

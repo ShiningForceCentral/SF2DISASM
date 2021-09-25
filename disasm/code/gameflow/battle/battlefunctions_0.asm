@@ -56,7 +56,7 @@ loc_22C2E:
                 cmpi.b  #$FF,d1
                 beq.w   byte_22C5A      
                 move.l  d1,d2
-                andi.w  #$3F,d2 
+                andi.w  #SPELLENTRY_MASK_INDEX,d2 
                 lsr.w   #6,d1
                 bne.s   loc_22C4C
                 move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w

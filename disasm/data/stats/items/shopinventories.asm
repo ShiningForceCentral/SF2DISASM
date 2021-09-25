@@ -303,3 +303,7 @@ tbl_ShopInventories:
                     ANGEL_WING
                     
 DebugShop:      incbin "data/stats/items/debugshop.bin"
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    include "data\stats\items\debugshop-expanded.asm"
+                endif
+

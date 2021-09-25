@@ -1877,7 +1877,7 @@ loc_191AC:
                 cmpi.b  #$FF,d0
                 beq.s   return_191DE
                 move.l  d0,d1
-                andi.w  #$3F,d0 
+                andi.w  #SPELLENTRY_MASK_INDEX,d0 
                 lsr.w   #6,d1
                 bne.s   loc_191D0
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -3593,12 +3593,16 @@ GetWeaponSpriteAndPalette:
                 bcc.w   @Skip
                 jsr     j_GetEquippedWeapon
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                cmpi.w  #ITEMINDEX_WEAPONS_START,d1 ; HARDCODED start index for weapon items with battlescene graphics
-                bcs.w   @Skip
-                cmpi.w  #ITEMINDEX_WEAPONS_END,d1 ; HARDCODED end index for weapon items with battlescene graphics
-                bhi.w   @Skip
-                lea     tbl_WeaponGraphics(pc), a0
-                subi.w  #ITEMINDEX_WEAPONS_START,d1 ; Same here : HARDCODED start index for weapon items with battlescene graphics
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    lea     tbl_WeaponGraphics(pc), a0
+                else
+                    cmpi.w  #ITEMINDEX_WEAPONS_START,d1 ; HARDCODED start index for weapon items with battlescene graphics
+                    bcs.w   @Skip
+                    cmpi.w  #ITEMINDEX_WEAPONS_END,d1 ; HARDCODED end index for weapon items with battlescene graphics
+                    bhi.w   @Skip
+                    lea     tbl_WeaponGraphics(pc), a0
+                    subi.w  #ITEMINDEX_WEAPONS_START,d1 ; Same here : HARDCODED start index for weapon items with battlescene graphics
+                endif
                 add.w   d1,d1
                 move.b  (a0,d1.w),d2
                 ext.w   d2

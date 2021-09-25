@@ -5,5 +5,12 @@
 
 
 p_Icons:        dc.l Icon000
-                include "data\graphics\icons\entries.asm"    ; Icons
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    include "data\stats\items\itemdefs.asm"     ; Item definitions
+                    include "data\stats\spells\spelldefs.asm"   ; Spell definitions
+                    include "data\stats\items\itemnames.asm"    ; Item names
+                    include "data\stats\spells\spellnames.asm"  ; Spell names
+                else
+                    include "data\graphics\icons\entries.asm"    ; Icons
+                endif
                 align $8000

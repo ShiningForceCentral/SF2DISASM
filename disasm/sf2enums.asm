@@ -526,16 +526,29 @@ ENEMYAI_THRESHOLD_HEAL3: equ $1C
 ; enum IconTiles_Properties
 ICONTILES_CRACKS_PIXELS_COUNTER: equ $BF
 ICONTILES_BYTESIZE: equ $C0
+
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+ICONTILES_OFFSET_CRACKS: equ $F240
+                else
 ICONTILES_OFFSET_CRACKS: equ $6F00
+                endif
 
 ; ---------------------------------------------------------------------------
 
 ; enum Icons
-ICON_NOTHING: equ $7F
-ICON_UNARMED: equ $80
-ICON_SPELLS_START: equ $82
-ICON_JEWEL_OF_LIGHT: equ $92
-ICON_JEWEL_OF_EVIL: equ $93
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+ICON_NOTHING: equ 255
+ICON_UNARMED: equ 256
+ICON_SPELLS_START: equ 258
+ICON_JEWEL_OF_LIGHT: equ 321
+ICON_JEWEL_OF_EVIL: equ 322
+                else
+ICON_NOTHING: equ 127
+ICON_UNARMED: equ 128
+ICON_SPELLS_START: equ 130
+ICON_JEWEL_OF_LIGHT: equ 146
+ICON_JEWEL_OF_EVIL: equ 147
+                endif
 
 ; ---------------------------------------------------------------------------
 
@@ -791,9 +804,15 @@ ITEM_MITHRIL: equ $7B
 ITEM_LIFE_RING: equ $7C
 ITEM_COTTON_BALLOON: equ $7D
 ITEM_CHIRRUP_SANDALS: equ $7E
-ITEM_NOTHING: equ $7F
-ITEM_EQUIPPED: equ $80
 ITEM_BROKEN: equ $8000
+
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+ITEM_NOTHING: equ 255
+ITEM_EQUIPPED: equ $1000
+                else
+ITEM_NOTHING: equ 127
+ITEM_EQUIPPED: equ $80
+                endif
 
 ; ---------------------------------------------------------------------------
 
@@ -828,22 +847,35 @@ ITEMTYPE_BIT_BREAKABLE: equ $7
 ; enum ItemEntry
 ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT: equ $1
 ITEMENTRY_SIZE: equ $2
-ITEMENTRY_BIT_EQUIPPED: equ $7
 ITEMENTRY_UPPERBIT_BROKEN: equ $7
-ITEMENTRY_INDEX_BITSIZE: equ $7
 ITEMENTRY_BIT_ENEMYUSE: equ $D
 ITEMENTRY_BIT_14: equ $E
 ITEMENTRY_BIT_BROKEN: equ $F
+
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+ITEMENTRY_UPPERBIT_EQUIPPED: equ 4
+ITEMENTRY_BIT_EQUIPPED: equ 12
+ITEMENTRY_MASK_INDEX: equ $FF
+ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT: equ $80FF
+                else
+ITEMENTRY_BIT_EQUIPPED: equ 7
 ITEMENTRY_MASK_INDEX: equ $7F
 ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT: equ $807F
+                endif
 
 ; ---------------------------------------------------------------------------
 
 ; enum ItemIndex_Properties
 ITEMINDEX_WEAPONS_START: equ $1A
 ITEMINDEX_WEAPONS_END: equ $6D
-ITEMINDEX_MAX: equ $7F
-ITEMINDEX_GOLDCHESTS_START: equ $80
+
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+ITEMINDEX_MAX: equ 255
+ITEMINDEX_GOLDCHESTS_START: equ 256
+                else
+ITEMINDEX_MAX: equ 127
+ITEMINDEX_GOLDCHESTS_START: equ 128
+                endif
 
 ; ---------------------------------------------------------------------------
 
@@ -1034,7 +1066,11 @@ SPELLDEF_OFFSET_POWER: equ $7
 
 ; enum SpellDef_Properties
 SPELLDEF_ENTRY_SIZE: equ $8
-SPELLDEFS_COUNTER: equ $63
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+SPELLDEFS_COUNTER: equ 251
+                else
+SPELLDEFS_COUNTER: equ 99
+                endif
 
 ; ---------------------------------------------------------------------------
 
@@ -2896,7 +2932,11 @@ ALLYNAME_MAX_LENGTH: equ $A
 ; ---------------------------------------------------------------------------
 
 ; enum AllyStartDefinition_Properties
-ALLYSTARTDEF_ENTRY_SIZE: equ $6
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+ALLYSTARTDEF_ENTRY_SIZE: equ 10
+                else
+ALLYSTARTDEF_ENTRY_SIZE: equ 6
+                endif
 
 ; ---------------------------------------------------------------------------
 

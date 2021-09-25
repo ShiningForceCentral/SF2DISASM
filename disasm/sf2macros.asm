@@ -171,6 +171,46 @@ script: macro
     trap #MAPSCRIPT
     endm
     
+testEquippedBit: macro
+    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+    btst    #ITEMENTRY_UPPERBIT_EQUIPPED,\1
+    else
+    btst    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
+    endc
+    endm
+    
+setEquippedBit: macro
+    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+    bset    #ITEMENTRY_UPPERBIT_EQUIPPED,\1
+    else
+    bset    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
+    endc
+    endm
+    
+clearEquippedBit: macro
+    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+    bclr    #ITEMENTRY_UPPERBIT_EQUIPPED,\1
+    else
+    bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
+    endc
+    endm
+    
+readStartingItemEntry: macro
+    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+    move.w  (a0)+,d3
+    else
+    move.b  (a0)+,d3
+    endc
+    endm
+    
+addJewelIconOffset: macro
+    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+    adda.l  d1,a0
+    else
+    adda.w  d1,a0
+    endc
+    endm
+    
 ; ---------------------------------------------------------------------------
 ; Data definition macros
 ; ---------------------------------------------------------------------------
@@ -691,10 +731,17 @@ startLevel: macro
     endm
     
 startItems: macro
+    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+    defineBitfield.w ITEM_,\1
+    defineBitfield.w ITEM_,\2
+    defineBitfield.w ITEM_,\3
+    defineBitfield.w ITEM_,\4
+    else
     defineBitfield.b ITEM_,\1
     defineBitfield.b ITEM_,\2
     defineBitfield.b ITEM_,\3
     defineBitfield.b ITEM_,\4
+    endc
     endm
     
 ; Class definitions
