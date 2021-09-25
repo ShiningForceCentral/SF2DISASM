@@ -966,7 +966,7 @@ ApplyStatusEffectsAndItemsOnStats:
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Next
-                btst    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a1)
+                testEquippedBit (a1)
                 beq.s   @Next
                 bsr.w   ApplyItemOnStats
                 beq.s   @Next
@@ -1543,7 +1543,7 @@ EquipItemBySlot:
                 bsr.s   IsItemEquippableAndCursed
                 cmpi.w  #1,d2
                 beq.s   @Skip           ; skip if item is not equippable
-                bset    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
+                setEquippedBit (a0)
 @Skip:
                 
                 bra.s   @Done
@@ -1614,7 +1614,7 @@ UnequipItemBySlotIfNotCursed:
                 bsr.s   IsItemInSlotEquippedOrCursed
                 tst.w   d2
                 bne.s   @Skip           ; skip if anything but equipped and not cursed
-                bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
+                clearEquippedBit (a0)
 @Skip:
                 
                 movem.l (sp)+,d0-d1/a0
@@ -1643,7 +1643,7 @@ IsItemInSlotEquippedOrCursed:
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @EmptySlot      
-                btst    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
+                testEquippedBit (a0)
                 beq.s   @NotEquipped    
                 movem.l a0,-(sp)
                 bsr.w   GetItemDefAddress
@@ -1686,7 +1686,7 @@ UnequipItemBySlot:
                 
                 movem.l d0-d1/a0,-(sp)
                 bsr.s   IsItemInSlotEquippedOrCursed
-                bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
+                clearEquippedBit (a0)
                 movem.l (sp)+,d0-d1/a0
                 bra.w   ApplyStatusEffectsAndItemsOnStats
 
@@ -1719,7 +1719,7 @@ DropItemBySlot:
                 movem.l (sp)+,a0
                 beq.s   loc_8E52
                 move.w  #2,d2           ; item cursed
-                btst    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
+                testEquippedBit (a0)
                 bne.s   loc_8E54        ; item equipped and cursed, so can't drop it
 loc_8E52:
                 
@@ -1828,7 +1828,7 @@ UnequipItemByType:
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d1
                 and.b   d2,d1
                 beq.s   @Next
-                bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a1)
+                clearEquippedBit (a1)
 @Next:
                 
                 addq.w  #ITEMENTRY_SIZE,a1
@@ -1879,10 +1879,17 @@ GetEquippableItemsByType:
                 lsl.l   d0,d3           ; place class bit in long value
                 lea     COMBATANT_OFFSET_ITEM_0(a0),a1
                 lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a2
-                move.l  #$7F0004,(a2)   ; init list with default values
-                move.l  #$7F0004,4(a2)
-                move.l  #$7F0004,8(a2)
-                move.l  #$800004,$C(a2)
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    move.l  #$FF0004,(a2)
+                    move.l  #$FF0004,4(a2)
+                    move.l  #$FF0004,8(a2)
+                    move.l  #$1000004,$C(a2)
+                else
+                    move.l  #$7F0004,(a2)   ; init list with default values
+                    move.l  #$7F0004,4(a2)
+                    move.l  #$7F0004,8(a2)
+                    move.l  #$800004,$C(a2)
+                endif
                 clr.w   d0
                 moveq   #0,d4
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d5
@@ -2198,7 +2205,7 @@ UnequipAllItemsIfNotCursed:
                 bsr.w   GetItemDefAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Next
-                bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a1)
+                clearEquippedBit (a1)
 @Next:
                 
                 addq.w  #2,a1
@@ -2319,7 +2326,11 @@ FindSpellDefAddress:
                 
                 move.l  d0,-(sp)
                 movea.l (p_tbl_SpellDefs).l,a0
-                moveq   #SPELLDEFS_COUNTER,d0
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    move.w  #SPELLDEFS_COUNTER,d0
+                else
+                    moveq   #SPELLDEFS_COUNTER,d0
+                endif
 @Loop:
                 
                 cmp.b   (a0),d1

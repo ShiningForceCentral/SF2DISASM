@@ -319,7 +319,11 @@ character_index     = -2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    adda.l  d1,a0
+                else
+                    adda.w  d1,a0
+                endif
                 movea.l a2,a1
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
@@ -386,7 +390,11 @@ character_index     = -2
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 movea.l (p_Icons).l,a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
-                adda.w  d1,a0
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    adda.l  d1,a0
+                else
+                    adda.w  d1,a0
+                endif
                 movea.l a2,a1
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   

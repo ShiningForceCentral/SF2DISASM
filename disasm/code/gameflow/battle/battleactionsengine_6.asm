@@ -534,6 +534,27 @@ rjt_SpellEffects:
                 dc.w SpellEffect_FlameBreath-rjt_SpellEffects ; KIWI
                 dc.w SpellEffect_FairyTear-rjt_SpellEffects ; SHINE
                 dc.w SpellEffect_Bolt-rjt_SpellEffects ; ODDEYE
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell44
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell45
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell46
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell47
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell48
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell49
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell50
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell51
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell52
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell53
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell54
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell55
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell56
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell57
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell58
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell59
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell60
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell61
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell62
+                endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1276,7 +1297,7 @@ byte_B950:
                 cmpi.b  #$FF,d1
                 beq.s   @Return
                 move.w  d1,d2
-                andi.w  #$3F,d2 
+                andi.w  #SPELLENTRY_MASK_INDEX,d2 
                 lsr.w   #6,d1
                 bne.s   @SpellLevelIncreasedMessage
                 displayMessage #MESSAGE_BATTLE_LEARNED_THE_NEW_MAGIC_SPELL,d0,d2,#0 

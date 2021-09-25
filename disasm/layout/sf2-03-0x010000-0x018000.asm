@@ -81,8 +81,10 @@ WindowBorderTiles:
                 include "data\graphics\tech\windowlayouts\memberstatswindowlayout-menuenhancements.asm"
                 endif
                 
-                include "data\stats\items\itemdefs.asm"    ; Item definitions
-                include "data\stats\spells\spelldefs.asm"    ; Spell definitions
-                include "data\stats\items\itemnames.asm"    ; Item names
+                if (ITEMS_AND_SPELLS_EXPANSION=0)
+                    include "data\stats\items\itemdefs.asm"    ; Item definitions
+                    include "data\stats\spells\spelldefs.asm"    ; Spell definitions
+                    include "data\stats\items\itemnames.asm"    ; Item names
+                endif
                 include "data\stats\allies\classes\classnames.asm"    ; Class names
                 align $18000

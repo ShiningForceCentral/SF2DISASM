@@ -451,7 +451,11 @@ aJewel:
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    adda.l  d1,a0
+                else
+                    adda.w  d1,a0
+                endif
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)
@@ -479,7 +483,11 @@ aJewel:
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 movea.l (p_Icons).l,a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
-                adda.w  d1,a0
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    adda.l  d1,a0
+                else
+                    adda.w  d1,a0
+                endif
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
@@ -487,7 +495,11 @@ aJewel:
                 beq.s   @CleanIconCorners
                 movem.l d2-d3/a0-a1,-(sp)
                 movea.l (p_Icons).l,a0
-                lea     ICONTILES_OFFSET_CRACKS(a0),a0
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    adda.l  #ICONTILES_OFFSET_CRACKS,a0
+                else
+                    lea     ICONTILES_OFFSET_CRACKS(a0),a0
+                endif
                 move.w  #ICONTILES_CRACKS_PIXELS_COUNTER,d2
 @DrawCracks_Loop:
                 
@@ -528,7 +540,7 @@ aJewel:
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addJewelIconOffset
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)
@@ -542,7 +554,7 @@ aJewel:
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addJewelIconOffset
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)

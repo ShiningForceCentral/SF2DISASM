@@ -82,13 +82,13 @@ InitAllyCombatantEntry:
                 ext.w   d2
                 move.w  d2,-(sp)        ; -> push starting level
                 clr.w   d3
-                move.b  (a0)+,d3
+                readStartingItemEntry
                 move.w  d3,COMBATANT_OFFSET_ITEM_0(a1)
-                move.b  (a0)+,d3
+                readStartingItemEntry
                 move.w  d3,COMBATANT_OFFSET_ITEM_1(a1)
-                move.b  (a0)+,d3
+                readStartingItemEntry
                 move.w  d3,COMBATANT_OFFSET_ITEM_2(a1)
-                move.b  (a0)+,d3
+                readStartingItemEntry
                 move.w  d3,COMBATANT_OFFSET_ITEM_3(a1)
                 move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS_START(a1) 
                                                         ; spell entries default to nothing
@@ -165,7 +165,11 @@ loc_985C:
                 
                 move.l  d0,(a0)+
                 dbf     d7,loc_985C
-                move.l  #$7F7F7F7F,d0
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    move.l  #$FFFFFFFF,d0
+                else
+                    move.l  #$7F7F7F7F,d0
+                endif
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
                 moveq   #$F,d7
 loc_986E:

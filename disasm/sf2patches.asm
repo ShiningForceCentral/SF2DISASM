@@ -1,9 +1,9 @@
+PERCENT_POISON_DAMAGE: equ 0                    ; 0 = OFF, 1-100 = n% of max HP
+CAPITALIZED_CHARACTER_NAMES: equ 0              ; 0 = OFF, 1 = ON
+; Debugging facilitations
 EASY_BATTLE_TEST: equ 0                         ; 0 = OFF, 1 = ON
 EASY_CONFIGURATION_MODE: equ 0                  ; 0 = OFF, 1 = ON
 EASY_DEBUG_MODE: equ 0                          ; 0 = OFF, 1 = ON
-PERCENT_POISON_DAMAGE: equ 0                    ; 0 = OFF, 1-100 = n% of max HP
-CAPITALIZED_CHARACTER_NAMES: equ 0              ; 0 = OFF, 1 = ON
-FORCE_MEMBERS_EXPANSION: equ 0                  ; 0 = OFF, 1 = ON. Enable the use of 2 additional force members.
 ; Bugfixes
 BUGFIX_SEARCH_IN_BATTLE: equ 0                  ; 0 = OFF, 1 = ON
 BUGFIX_SKIPPED_TURNS: equ 0                     ; 0 = OFF, 1 = ON. Fixes cases where a combatant can miss a turn because of AGI getting higher than 127.
@@ -13,6 +13,9 @@ BUGFIX_GARBLED_HP_BAR: equ 0                    ; 0 = OFF, 1 = ON. Prevents draw
 BUGFIX_KIWI_SPELLS_LEARNING_LEVEL: equ 0        ; 0 = OFF, 1 = ON. Kiwi's base class is wrongfully treated as promoted for the purpose of learning spells.
 BUGFIX_HIGINS_SPELL: equ 0                      ; 0 = OFF, 1 = ON. Prevent unequipping from possibly corrupting characters spell entries.
 BUGFIX_MOVEMENT_GLITCH: equ 0                   ; 0 = OFF, 1 = ON.
+; Data expansions
+FORCE_MEMBERS_EXPANSION: equ 0                  ; 0 = OFF, 1 = ON. Enable the use of 2 additional force members.
+ITEMS_AND_SPELLS_EXPANSION: equ 0               ; 0 = OFF, 1 = ON. Requires 4MB expanded ROM layout!
 ; Menu enhancements
 THREE_DIGITS_STATS: equ 0                       ; 0 = OFF, 1 = ON
 EIGHT_CHARACTERS_MEMBER_NAMES: equ 0            ; 0 = OFF, 1 = ON

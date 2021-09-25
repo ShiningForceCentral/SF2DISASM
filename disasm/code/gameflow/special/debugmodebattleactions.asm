@@ -55,7 +55,11 @@ loc_9B06:
                 
                 moveq   #0,d0           ; use item
                 moveq   #0,d1
-                moveq   #ITEMINDEX_MAX,d2
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    move.w  #ITEMINDEX_MAX,d2
+                else
+                    moveq   #ITEMINDEX_MAX,d2
+                endif
                 jsr     j_NumberPrompt
                 move.w  d0,(a0)+
                 bsr.w   DebugModeSelectTargetEnemy

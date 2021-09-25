@@ -36,11 +36,12 @@
                 include "code\gameflow\battle\battlefieldengine_3.asm"    ; Battlefield engine
                 include "code\gameflow\battle\aiengine.asm"    ; AI engine
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
-                
-                if (EXTENDED_SPELL_NAMES=0)
-                include "data\stats\spells\spellnames.asm"    ; Spell names
-                else
-                include "data\stats\spells\extendedspellnames.asm"
+                if (ITEMS_AND_SPELLS_EXPANSION=0)
+                    if (EXTENDED_SPELL_NAMES=1)
+                        include "data\stats\spells\extendedspellnames.asm"
+                    else
+                        include "data\stats\spells\spellnames.asm"    ; Spell names
+                    endif
                 endif
                 
                 if (CAPITALIZED_CHARACTER_NAMES=1)
