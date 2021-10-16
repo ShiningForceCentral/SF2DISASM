@@ -3004,8 +3004,13 @@ CRAM_COLORS_COUNTER: equ $3F
 ; ---------------------------------------------------------------------------
 
 ; enum Sram
-SAVE_SLOT_SIZE: equ $FB0
+SAVE_SLOT_SIZE: equ 4016+EXPANDED_SAVE_SLOT_SIZE
+          
+    if (EXPANDED_SRAM=1)
+SRAM_COUNTER: equ $7FFF
+    else
 SRAM_COUNTER: equ $1FFF
+    endif
 
 ; ---------------------------------------------------------------------------
 
