@@ -24,3 +24,6 @@ ALTERNATE_JEWEL_ICONS_DISPLAY: equ 0            ; 0 = OFF, 1 = small icons, 2 = 
 EXTENDED_SPELL_NAMES: equ 0                     ; 0 = OFF, 1 = ON
 SHOW_ENEMY_LEVEL: equ 0                         ; 0 = OFF, 1 = ON
 SHOW_ALL_SPELLS_IN_MEMBER_SCREEN: equ 0         ; 0 = OFF, 1 = ON
+; Hardware modifications
+EXPANDED_SRAM: equ 0                            ; 0 = OFF, 1 = ON. Expands SRAM to 32KB.
+EXPANDED_SAVE_SLOT_SIZE: equ 0                  ; 0 = OFF, 1-1024 = Additional save slot bytes. 1024 is recommeneded as the max value. Requires EXPANDED_SRAM enabled.
