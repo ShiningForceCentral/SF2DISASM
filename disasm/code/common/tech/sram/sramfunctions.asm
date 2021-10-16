@@ -30,7 +30,11 @@ CheckSram:
 @ChecksumSlot2:
                 
                 lea     (SAVE2_DATA).l,a0
-                lea     (FF8804_LOADING_SPACE).l,a1
+                if (EXPANDED_SAVE_SLOT_SIZE=0)
+                    lea     (FF8804_LOADING_SPACE).l,a1
+                else
+                    lea     (COMBATANT_ENTRIES).l,a1
+                endif
                 move.w  #SAVE_SLOT_SIZE,d7
                 bsr.w   CopyBytesFromSram
                 cmp.b   (SAVE2_CHECKSUM).l,d0
@@ -50,7 +54,11 @@ CheckSram:
 @ChecksumSlot1:
                 
                 lea     (SAVE1_DATA).l,a0
-                lea     (FF8804_LOADING_SPACE).l,a1
+                if (EXPANDED_SAVE_SLOT_SIZE=0)
+                    lea     (FF8804_LOADING_SPACE).l,a1
+                else
+                    lea     (COMBATANT_ENTRIES).l,a1
+                endif
                 move.w  #SAVE_SLOT_SIZE,d7
                 bsr.w   CopyBytesFromSram
                 cmp.b   (SAVE1_CHECKSUM).l,d0
