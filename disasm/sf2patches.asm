@@ -15,7 +15,7 @@ BUGFIX_HIGINS_SPELL: equ 0                      ; 0 = OFF, 1 = ON. Prevent unequ
 BUGFIX_MOVEMENT_GLITCH: equ 0                   ; 0 = OFF, 1 = ON.
 ; Data expansions
 FORCE_MEMBERS_EXPANSION: equ 0                  ; 0 = OFF, 1 = ON. Enable the use of 2 additional force members.
-ITEMS_AND_SPELLS_EXPANSION: equ 0               ; 0 = OFF, 1 = ON. Requires 4MB expanded ROM layout!
+ITEMS_AND_SPELLS_EXPANSION: equ 0               ; 0 = OFF, 1 = ON. Requires 4MB expanded ROM layout! Also requires to increase save slot size by at least 64 bytes to accomodate doubled deals items list length.
 ; Menu enhancements
 THREE_DIGITS_STATS: equ 0                       ; 0 = OFF, 1 = ON
 EIGHT_CHARACTERS_MEMBER_NAMES: equ 0            ; 0 = OFF, 1 = ON

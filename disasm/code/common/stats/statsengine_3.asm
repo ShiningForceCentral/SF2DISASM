@@ -160,7 +160,7 @@ loc_9850:
                 move.l  d0,(a0)+
                 dbf     d7,loc_9850
                 lea     ((DEALS_ITEMS-$1000000)).w,a0
-                moveq   #$F,d7
+                moveq   #DEALS_ITEMS_LONGWORDS_COUNTER,d7
 loc_985C:
                 
                 move.l  d0,(a0)+
@@ -431,9 +431,9 @@ AddItemToDeals:
                 movem.l d0-d2/a0,-(sp)
                 bsr.w   GetDealsItemInfo
                 cmpi.b  #DEALS_MAX_NUMBER_PER_ITEM,d2
-                beq.s   loc_99FC
+                beq.s   @Skip
                 add.b   d0,(a0)
-loc_99FC:
+@Skip:
                 
                 movem.l (sp)+,d0-d2/a0
                 rts
@@ -473,6 +473,17 @@ loc_9A10:
 GetDealsItemInfo:
                 
                 andi.l  #ITEMENTRY_MASK_INDEX,d1
+                if (ITEMS_AND_SPELLS_EXPANSION=1)
+                    if (DEALS_ITEMS_EXPANSION_SIZE=0)   ; If items are expanded, but deals items list in RAM is not :
+                        cmpi.w  #128,d1                 ; Return zero when handling an expansion item.
+                        blo.s   @Continue
+                        clr.b   d2
+                        moveq   #0,d0
+                        rts
+                    endif
+                endif
+@Continue:
+                
                 lea     ((DEALS_ITEMS-$1000000)).w,a0
                 divu.w  #2,d1
                 adda.w  d1,a0
