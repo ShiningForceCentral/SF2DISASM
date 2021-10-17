@@ -90,4 +90,4 @@ RomEndAddress:  dc.l $1FFFFF            ; ROM End Adress
                 dc.b '            '     ; Modem data
                 dc.b '                    ' ; Memo
                 dc.b '                    '
-aU:             dc.b 'U               ' ; Countries codes
+aU:             declareRegionSupport    ; Countries codes

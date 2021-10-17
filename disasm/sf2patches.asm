@@ -1,0 +1,1 @@
+DISABLE_REGION_LOCK: equ 0      ; 0 = OFF, 1 = ON

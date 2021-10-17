@@ -49,7 +49,9 @@
                 include "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
                 include "code\specialscreens\witch\witchfunctions.asm"    ; Witch functions
                 include "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
-                include "code\gameflow\start\regioncheck.asm"    ; Region check function
+                if (DISABLE_REGION_LOCK=0)
+                    include "code\gameflow\start\regioncheck.asm"    ; Region check function
+                endif
 nullsub_7FA4:                
                 rts
                 align $8000
