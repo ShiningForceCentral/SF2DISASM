@@ -668,6 +668,20 @@ DEALS_MAX_NUMBER_PER_ITEM: equ $F
 DEALS_BIT_REMAINDER: equ $10
 DEALS_ADD_AMOUNT_ODD: equ $10
 
+size     = 0
+counter1 = 15
+counter2 = 127
+    if (EXPANDED_SRAM&ITEMS_AND_SPELLS_EXPANSION=1)
+        if (EXPANDED_SAVE_SLOT_SIZE>=64)
+size     = 64
+counter1 = 31
+counter2 = 255
+        endif
+    endif
+DEALS_ITEMS_EXPANSION_SIZE: equ size
+DEALS_ITEMS_LONGWORDS_COUNTER: equ counter1
+DEALS_ITEMS_COUNTER: equ counter2
+
 ; ---------------------------------------------------------------------------
 
 ; enum Caravan
@@ -895,11 +909,6 @@ EQUIPMENTTYPE_RING: equ $FFFF
 MITHRILWEAPONS_COUNTER: equ $3
 MITHRILWEAPONSLOTS_COUNTER: equ $3
 MITHRILWEAPONCLASSES_COUNTER: equ $7
-
-; ---------------------------------------------------------------------------
-
-; enum ShopProperties
-DEALS_ITEMS_COUNTER: equ $7F
 
 ; ---------------------------------------------------------------------------
 
