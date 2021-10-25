@@ -51,5 +51,7 @@
                 include "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
                 include "code\gameflow\start\regioncheck.asm"    ; Region check function
 nullsub_7FA4:                
-                rts
+                if (SOUND_TEST_RESTORATION=0)
+                    rts
+                endif
                 align $8000

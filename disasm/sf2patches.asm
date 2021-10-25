@@ -1,0 +1,1 @@
+SOUND_TEST_RESTORATION: equ 0   ; 0 = OFF, 1 = ON

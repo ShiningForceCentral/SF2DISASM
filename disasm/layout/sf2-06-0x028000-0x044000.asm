@@ -79,4 +79,8 @@ TextBankTreeData:
                 incbin "data/scripting/text/huffmantrees.bin"
                 include "data\scripting\text\entries.asm"    ; Textbank entries
                 include "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
+                wordAlign
+                if (SOUND_TEST_RESTORATION=1)
+                    include "code\specialscreens\witch\soundtest.asm"
+                endif
                 align $44000
