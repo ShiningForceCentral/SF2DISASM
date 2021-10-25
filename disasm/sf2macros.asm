@@ -233,6 +233,14 @@ declareSramEnd: macro
     endc
     endm
     
+declareRegionSupport: macro
+    if (DISABLE_REGION_LOCK=1)
+    dc.b 'JUE             '
+    else
+    dc.b 'U               '
+    endc
+    endm
+    
 sndCom: macro
     trap #SOUND_COMMAND
     dc.w \1

@@ -9,7 +9,9 @@ InitGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
-                bsr.w   CheckRegion
+                if (DISABLE_REGION_LOCK=0)
+                    bsr.w   CheckRegion
+                endif
                 jsr     j_NewGame
                 jsr     j_DisplaySegaLogo
                 bne.w   loc_71EC
