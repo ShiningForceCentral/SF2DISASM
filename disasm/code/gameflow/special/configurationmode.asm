@@ -22,7 +22,12 @@ CheatModeConfiguration:
                 beq.s   loc_7E58
                 enableSram
                 btst    #7,(SAVE_FLAGS).l
-                bne.w   nullsub_7FA4
+                if (SOUND_TEST_RESTORATION=1)
+                    beq.s   loc_7E58
+                    jmp     SoundTest
+                else
+                    bne.w   nullsub_7FA4
+                endif
 loc_7E58:
                 
                 tst.b   ((CONFIGURATION_MODE_ACTIVATED-$1000000)).w

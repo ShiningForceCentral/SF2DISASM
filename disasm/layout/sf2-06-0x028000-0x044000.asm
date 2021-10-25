@@ -90,5 +90,10 @@ TextBankTreeData:
                 includeIfExpandedRom "data\battles\global\battlemapcoords.asm"    ; Battle map coords
                 includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
                 includeIfExpandedRom "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
-                alignIfExpandedRom $43C00
+                if (SOUND_TEST_RESTORATION=1)
+                    wordAlign
+                    include "code\specialscreens\witch\soundtest.asm"
+                else
+                    alignIfExpandedRom $43C00
+                endif
                 align $44000

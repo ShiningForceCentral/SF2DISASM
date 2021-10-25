@@ -1,6 +1,7 @@
 PERCENT_POISON_DAMAGE: equ 0                    ; 0 = OFF, 1-100 = n% of max HP
 CAPITALIZED_CHARACTER_NAMES: equ 0              ; 0 = OFF, 1 = ON
 DISABLE_REGION_LOCK: equ 0                      ; 0 = OFF, 1 = ON
+SOUND_TEST_RESTORATION: equ 0                   ; 0 = OFF, 1 = ON
 ; Debugging facilitations
 EASY_BATTLE_TEST: equ 0                         ; 0 = OFF, 1 = ON
 EASY_CONFIGURATION_MODE: equ 0                  ; 0 = OFF, 1 = ON
