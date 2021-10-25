@@ -880,6 +880,7 @@
 #split	0x1E8000,0x1EB000,data/sound/pcmbank1.bin
 #split	0x1EB000,0x1EC000,data/sound/yminst.bin
 /*#split	0x1EC000,0x1EE000,data/sound/sounddriver.bin*/
+#split	0x1ED5BD,0x1EDF2A,data/sound/cubesfx.bin
 #split	0x1EE930,0x1EF102,data/graphics/specialscreens/endingjewels/endingjewelslayout.bin
 #split	0x1EF102,0x1EF142,data/graphics/specialscreens/endingjewels/endingjewelspalette.bin
 #split	0x1EF142,0x1EF4BA,data/graphics/specialscreens/endingjewels/endingjewelstiles.bin
