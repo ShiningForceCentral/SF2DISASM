@@ -7,7 +7,12 @@
                 incbin "data/sound/pcmbank0.bin"
                 incbin "data/sound/pcmbank1.bin"
                 incbin "data/sound/yminst.bin"
-SoundDriver:    incbin "data/sound/sounddriver.bin"
+SoundDriver:    
+                if (MUSIC_RESUMING=1)
+                    incbin "data/sound/cubewiz.bin"
+                else
+                    incbin "data/sound/sounddriver.bin"
+                endif
 p_tbl_StatGrowthCurves:
                 dc.l tbl_StatGrowthCurves
 p_pt_AllyStats: dc.l pt_AllyStats       

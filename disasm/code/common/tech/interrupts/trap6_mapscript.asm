@@ -10,10 +10,12 @@
 Trap6_TriggerAndExecuteMapScript:
                 
                 movem.l d0-a6,-(sp)
+                deactivateMusicResuming
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l VInt_UpdateEntities
                 jsr     j_ExecuteMapScript
+                activateMusicResuming
                 movem.l (sp)+,d0-a6
                 rte
 

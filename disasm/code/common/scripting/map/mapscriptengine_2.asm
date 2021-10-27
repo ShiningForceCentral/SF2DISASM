@@ -360,6 +360,7 @@ csc07_warp:
 csc08_joinForce:
                 
                 move.w  #0,((SPEECH_SFX-$1000000)).w
+                activateMusicResuming
                 jsr     (WaitForViewScrollEnd).w
                 move.w  (a6)+,d0
                 bclr    #$F,d0
@@ -391,6 +392,7 @@ loc_473EC:
                 jsr     j_FadeOut_WaitForP1Input
                 clsTxt
                 moveq   #$A,d0
+                deactivateMusicResuming
                 jsr     (Sleep).w       
                 rts
 

@@ -956,6 +956,10 @@ SOUND_COMMAND_WAIT_MUSIC_END: equ $F0
 SOUND_COMMAND_PLAY_PREVIOUS_MUSIC: equ $FB
 SOUND_COMMAND_FADE_OUT: equ $FD
 SOUND_COMMAND_GET_D0_PARAMETER: equ $FFFF
+    if (MUSIC_RESUMING=1)
+SOUND_COMMAND_DEACTIVATE_RESUMING: equ $F9
+SOUND_COMMAND_ACTIVATE_RESUMING: equ $FA
+    endif
 
 ; ---------------------------------------------------------------------------
 

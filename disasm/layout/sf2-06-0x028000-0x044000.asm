@@ -78,6 +78,10 @@ TextBankTreeOffsets:
 TextBankTreeData:
                 incbin "data/scripting/text/huffmantrees.bin"
                 includeIfVanillaRom "data\scripting\text\entries.asm"    ; Textbank entries
+                if (SOUND_TEST_RESTORATION=1)
+                    wordAlign
+                    include "code\specialscreens\witch\soundtest.asm"
+                endif
                 alignIfExpandedRom $30000
                 includeIfExpandedRom "data\graphics\battles\grounds\entries.asm"    ; Grounds
                 alignIfExpandedRom $38000
@@ -86,13 +90,15 @@ TextBankTreeData:
                     includeIfExpandedRom "data\graphics\battles\weapons\palettes\entries.asm"    ; WeaponPalettes
                 endif
                 includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
-                alignIfExpandedRom $43800
+                if (MUSIC_RESUMING=1)
+                    alignIfExpandedRom $43800
+                endif
                 includeIfExpandedRom "data\battles\global\battlemapcoords.asm"    ; Battle map coords
                 includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
                 includeIfExpandedRom "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
-                if (SOUND_TEST_RESTORATION=1)
-                    wordAlign
-                    include "code\specialscreens\witch\soundtest.asm"
+                if (MUSIC_RESUMING=1)
+                    align $43000
+                    incbin "data\sound\cubesfx.bin"
                 else
                     alignIfExpandedRom $43C00
                 endif

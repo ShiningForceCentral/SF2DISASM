@@ -15,16 +15,30 @@ set seconds=0%Second%
 set seconds=%seconds:~-2%
 echo -------------------------------------------------------------
 echo Start of assembly
-echo Assembling sound driver ...
+echo Checking sound binaries ...
 cd ../disasm/data/sound/
-..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\sounddriver.asm
-..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\sounddriver.p .\sounddriver.bin -k -r $0000-$1fff
+IF NOT EXIST "sounddriver.bin" (
+    echo Assembling sound driver ...
+    ..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\sounddriver.asm
+    ..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\sounddriver.p .\sounddriver.bin -k -r $0000-$1fff
+) ELSE echo sounddriver.bin already exists!
+IF NOT EXIST "cubewiz.bin" (
+    echo Assembling Cube/Wiz driver ...
+    ..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\cubewiz.asm
+    ..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\cubewiz.p .\cubewiz.bin -k -r $0000-$1fff
+) ELSE echo cubewiz.bin already exists!
 cd musicbank0/
-..\..\..\..\tools\asw\asw.exe -x -E errors.log .\musicbank0.asm
-..\..\..\..\tools\asw\p2bin.exe .\musicbank0.p ..\musicbank0build.bin -k -r $8000-$ffff
+IF NOT EXIST "..\musicbank0.bin" (
+    echo Assembling music bank 0 ...
+    ..\..\..\..\tools\asw\asw.exe -x -E errors.log .\musicbank0.asm
+    ..\..\..\..\tools\asw\p2bin.exe .\musicbank0.p ..\musicbank0.bin -k -r $8000-$ffff
+) ELSE echo musicbank0.bin already exists!
 cd ../musicbank1/
-..\..\..\..\tools\asw\asw.exe -x -E errors.log .\musicbank1.asm
-..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1build.bin -k -r $8000-$ffff
+IF NOT EXIST "..\musicbank1.bin" (
+    echo Assembling music bank 1 ...
+    ..\..\..\..\tools\asw\asw.exe -x -E errors.log .\musicbank1.asm
+    ..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1.bin -k -r $8000-$ffff
+) ELSE echo musicbank1.bin already exists!
 cd ../../../
 echo Assembling game ...
 SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%.bin"

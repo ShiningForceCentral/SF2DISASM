@@ -11,6 +11,7 @@
 BattleLoop:
                 
                 clr.b   ((PLAYER_TYPE-$1000000)).w
+                activateMusicResuming
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 chkFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 beq.s   @Continue1
