@@ -1,0 +1,1 @@
+MUSIC_RESUMING: equ 0   ; 0 = OFF, 1 = ON
