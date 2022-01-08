@@ -9,7 +9,11 @@
                 include "code\gameflow\battle\battlescenes\battlesceneengine_1.asm"    ; Battlescene engine
                 include "data\stats\allies\allybattlesprites.asm"    ; Ally battle sprites table
                 include "data\stats\enemies\enemybattlesprites.asm"    ; Enemy battle sprites table
-                include "data\stats\items\weapongraphics.asm"    ; Weapon graphics table
+                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                    include "data\stats\items\weapongraphics-itemsandspellsexpansion.asm"
+                else
+                    include "data\stats\items\weapongraphics.asm"    ; Weapon graphics table
+                endif
                 include "data\battles\global\custombackgrounds.asm"    ; Battle custom backgrounds table
                 
                 wordAlign

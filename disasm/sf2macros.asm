@@ -494,6 +494,10 @@ weaponPalette: macro
     endm
     
 weaponGraphics: macro
+    if (narg=3) ; declare item index when ITEMS_AND_SPELLS_EXPANSION patch is enabled
+    itemIndex \1
+    shift
+    endc
     weaponSprite \1
     weaponPalette \2
     endm
