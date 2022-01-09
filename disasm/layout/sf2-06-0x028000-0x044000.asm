@@ -91,15 +91,13 @@ TextBankTreeData:
                 endif
                 includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
                 if (MUSIC_RESUMING=1)
+                    align $43000
+                    incbin "data\sound\cubesfx.bin"
+                else
                     alignIfExpandedRom $43800
                 endif
                 includeIfExpandedRom "data\battles\global\battlemapcoords.asm"    ; Battle map coords
                 includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
                 includeIfExpandedRom "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
-                if (MUSIC_RESUMING=1)
-                    align $43000
-                    incbin "data\sound\cubesfx.bin"
-                else
-                    alignIfExpandedRom $43C00
-                endif
+                alignIfExpandedRom $43C00
                 align $44000
