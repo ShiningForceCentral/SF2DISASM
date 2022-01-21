@@ -88,6 +88,9 @@ CopyCaravanItems:
                 lea     ((GENERIC_LIST-$1000000)).w,a1
 loc_22940:
                 
+                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                    addq.w  #1,a0
+                endif
                 move.b  (a0)+,(a1)+
                 dbf     d7,loc_22940
 loc_22946:

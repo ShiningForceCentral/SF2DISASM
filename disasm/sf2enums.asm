@@ -691,8 +691,23 @@ DEALS_ITEMS_COUNTER: equ counter2
 ; ---------------------------------------------------------------------------
 
 ; enum Caravan
-CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE: equ $3F
-CARAVAN_MAX_ITEMS_NUMBER: equ $40
+caravanItemsExpansionSize = 0
+caravanMaxItemsNumber = 64
+    if (EXPANDED_SRAM&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+        if (EXPANDED_SAVE_SLOT_SIZE>=64)
+caravanItemsExpansionSize = 64
+        endif
+    endif
+    if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+        if (EXPANDED_SRAM=0)
+            if (EXPANDED_SAVE_SLOT_SIZE<64)
+caravanMaxItemsNumber = 32
+            endif
+        endif
+    endif
+CARAVAN_ITEMS_EXPANSION_SIZE: equ caravanItemsExpansionSize
+CARAVAN_MAX_ITEMS_NUMBER: equ caravanMaxItemsNumber
+CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE: equ CARAVAN_MAX_ITEMS_NUMBER-1
 
 ; ---------------------------------------------------------------------------
 
