@@ -86,7 +86,7 @@ RomEndAddress:  dc.l $1FFFFF            ; ROM End Adress
                 dc.l $FFFFFF            ; RAM End Adress
                 dc.l $5241F820          ; SRAM data
                 dc.l $200001            ; SRAM Start Address
-                dc.l $203FFF            ; SRAM End Address
+                declareSramEnd          ; SRAM End Address
                 dc.b '            '     ; Modem data
                 dc.b '                    ' ; Memo
                 dc.b '                    '

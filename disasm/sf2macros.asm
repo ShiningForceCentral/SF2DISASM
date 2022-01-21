@@ -20,6 +20,14 @@ wordAlign: macro
     dcb.b *%2,$FF
     endm
     
+declareSramEnd: macro
+    if (EXPANDED_SRAM=1)
+    dc.l $20FFFF
+    else
+    dc.l $203FFF
+    endc
+    endm
+    
 sndCom: macro
     trap #SOUND_COMMAND
     dc.w \1
