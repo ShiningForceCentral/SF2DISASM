@@ -17,6 +17,7 @@ BUGFIX_KIWI_SPELLS_LEARNING_LEVEL: equ 0        ; 0 = OFF, 1 = ON. Kiwi's base c
 BUGFIX_HIGINS_SPELL: equ 0                      ; 0 = OFF, 1 = ON. Prevent unequipping from possibly corrupting characters spell entries.
 BUGFIX_MOVEMENT_GLITCH: equ 0                   ; 0 = OFF, 1 = ON.
 FIX_CARAVAN_FREE_REPAIR_EXPLOIT: equ 0          ; 0 = OFF, 1 = ON.
+FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE: equ 0      ; 0 = OFF, 1 = ON. On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
 ; Data expansions
 FORCE_MEMBERS_EXPANSION: equ 0                  ; 0 = OFF, 1 = ON. Enable the use of 2 additional force members.
 ITEMS_AND_SPELLS_EXPANSION: equ 0               ; 0 = OFF, 1 = ON. Requires 4MB expanded ROM layout! Also requires to increase save slot size by at least 64 bytes to accomodate doubled deals items list length.
