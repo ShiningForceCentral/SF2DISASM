@@ -658,8 +658,12 @@ DEALS_ADD_AMOUNT_ODD: equ $10
 ; ---------------------------------------------------------------------------
 
 ; enum Caravan
-CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE: equ $3F
-CARAVAN_MAX_ITEMS_NUMBER: equ $40
+caravanMaxItemsNumber = 64
+    if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+caravanMaxItemsNumber = 32
+    endif
+CARAVAN_MAX_ITEMS_NUMBER: equ caravanMaxItemsNumber
+CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE: equ CARAVAN_MAX_ITEMS_NUMBER-1
 
 ; ---------------------------------------------------------------------------
 

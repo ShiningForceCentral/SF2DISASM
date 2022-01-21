@@ -502,8 +502,14 @@ AddItemToCaravan:
                 bcs.s   @Skip           ; skip adding item if no room
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
                 move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
-                andi.w  #ITEMENTRY_MASK_INDEX,d1
-                move.b  d1,(a0,d0.w)
+                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                    add.w   d0,d0
+                    andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
+                    move.w  d1,(a0,d0.w)
+                else
+                    andi.w  #ITEMENTRY_MASK_INDEX,d1
+                    move.b  d1,(a0,d0.w)
+                endif
                 addq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
 @Skip:
                 
@@ -515,10 +521,17 @@ AddItemToCaravan:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Out: D1 = item entry when FIX_CARAVAN_FREE_REPAIR_EXPLOIT is enabled
+
 
 RemoveItemFromCaravan:
                 
-                movem.l d0/d7-a1,-(sp)
+                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                    movem.l d0/d2/d7-a1,-(sp)
+                    move.w  #ITEM_NOTHING,d2
+                else
+                    movem.l d0/d7-a1,-(sp)
+                endif
                 moveq   #0,d0
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
                 movea.l a0,a1
@@ -529,12 +542,21 @@ loc_9A78:
                 
                 cmp.w   d0,d1
                 bne.s   loc_9A84
-                addq.l  #1,a1
+                
+                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                    move.w  (a1)+,d2
+                else
+                    addq.l  #1,a1
+                endif
                 subq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
                 bra.s   loc_9A86
 loc_9A84:
                 
-                move.b  (a1)+,(a0)+
+                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                    move.w  (a1)+,(a0)+
+                else
+                    move.b  (a1)+,(a0)+
+                endif
 loc_9A86:
                 
                 addq.w  #1,d0
@@ -544,7 +566,12 @@ loc_9A86:
                 move.b  #ITEM_NOTHING,(a0)
 loc_9A94:
                 
-                movem.l (sp)+,d0/d7-a1
+                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                    move.w  d2,d1
+                    movem.l (sp)+,d0/d2/d7-a1
+                else
+                    movem.l (sp)+,d0/d7-a1
+                endif
                 rts
 
     ; End of function RemoveItemFromCaravan
