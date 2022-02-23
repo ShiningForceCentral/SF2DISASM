@@ -1,0 +1,1 @@
+BOWIE_CAN_LEAVE_BATTLE_PARTY: equ 0     ; 0 = OFF, 1 = ON. Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
