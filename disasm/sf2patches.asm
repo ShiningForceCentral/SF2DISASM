@@ -1,4 +1,3 @@
-PERCENT_POISON_DAMAGE: equ 0                    ; 0 = OFF, 1-100 = n% of max HP
 CAPITALIZED_CHARACTER_NAMES: equ 0              ; 0 = OFF, 1 = ON
 DISABLE_REGION_LOCK: equ 0                      ; 0 = OFF, 1 = ON
 SOUND_TEST_RESTORATION: equ 0                   ; 0 = OFF, 1 = ON
@@ -21,6 +20,9 @@ FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE: equ 0      ; 0 = OFF, 1 = ON. On Map 77, wa
 ; Data expansions
 FORCE_MEMBERS_EXPANSION: equ 0                  ; 0 = OFF, 1 = ON. Enable the use of 2 additional force members.
 ITEMS_AND_SPELLS_EXPANSION: equ 0               ; 0 = OFF, 1 = ON. Requires 4MB expanded ROM layout! Also requires to increase save slot size by at least 64 bytes to accomodate doubled deals items list length.
+; Battle mechanics
+BOWIE_CAN_DIE: equ 0                            ; 0 = OFF, 1 = ON. Bowie's death does not cause defeat.
+PERCENT_POISON_DAMAGE: equ 0                    ; 0 = OFF, 1-100 = n% of max HP
 ; Menu enhancements
 THREE_DIGITS_STATS: equ 0                       ; 0 = OFF, 1 = ON
 EIGHT_CHARACTERS_MEMBER_NAMES: equ 0            ; 0 = OFF, 1 = ON
