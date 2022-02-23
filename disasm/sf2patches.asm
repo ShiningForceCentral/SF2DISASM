@@ -1,0 +1,1 @@
+BOWIE_CAN_DIE: equ 0    ; 0 = OFF, 1 = ON. Bowie's death does not cause defeat.
