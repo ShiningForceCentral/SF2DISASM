@@ -28,6 +28,7 @@ p_SuspendStringTiles:
 p_BaseTiles:    dc.l BaseTiles
                 include "data\stats\allies\growthcurves.asm"    ; Stat growth curves
                 include "data\stats\allies\stats\entries.asm"    ; Ally stats
+                wordAlign
                 include "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
                 include "data\stats\allies\classes\classdefs.asm"    ; Class definitions
                 include "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics

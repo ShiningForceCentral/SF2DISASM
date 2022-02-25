@@ -312,7 +312,7 @@ loc_168FC:
                 move.b  #$2D,9(a1) 
                 adda.w  #$38,a1 
                 lsl.w   #2,d3
-                lea     (byte_FF8808).l,a0
+                lea     (TARGETS_REACHABLE_BY_ITEM_NUMBER).l,a0
                 moveq   #4,d7
                 bsr.w   sub_1697C
 return_16940:

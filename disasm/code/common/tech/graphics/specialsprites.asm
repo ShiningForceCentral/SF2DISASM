@@ -139,7 +139,7 @@ loc_25D0C:
                 clr.w   d5
 loc_25D0E:
                 
-                cmpi.b  #$F0,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.w   loc_25DF0
                 move.b  #$FF,d6
                 sub.b   ENTITYDEF_OFFSET_MAPSPRITE(a0),d6

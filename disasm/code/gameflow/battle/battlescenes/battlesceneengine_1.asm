@@ -9,7 +9,7 @@ sub_19E6E:
                 
                 cmpi.w  #COMBATANT_ENEMIES_START,d0
                 bcc.w   @Skip
-                jsr     j_GetUpperMoveType
+                jsr     j_GetMoveType
                 cmpi.w  #MOVETYPE_LOWER_FLYING,d1
                 beq.w   @Skip
                 cmpi.w  #MOVETYPE_LOWER_HOVERING,d1
@@ -226,7 +226,7 @@ sub_1A00A:
                 moveq   #$19,d7
 loc_1A00E:
                 
-                lea     word_1A020(pc), a0
+                lea     byte_1A020(pc), a0
                 nop
                 bsr.w   sub_19F5E
                 dbf     d7,loc_1A00E
@@ -234,10 +234,14 @@ loc_1A00E:
 
     ; End of function sub_1A00A
 
-word_1A020:     dc.w 1
-                dc.w 1
-                dc.w 0
-                dc.w 0
+byte_1A020:     dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1990,10 +1994,8 @@ sa19_Buff2:
 loc_1ABAC:
                 
                 movem.w d0-d1,-(sp)
-
-; END OF FUNCTION CHUNK FOR sa08_Buff1
-
-                dc.b $4E, $40, 0, $4D
+                trap    #0
+                dc.w SFX_SPELL_CAST
                 move.w  #BUFF_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
@@ -2008,6 +2010,9 @@ loc_1ABAC:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB584-$1000000)).w
                 bra.w   sub_1A028
+
+; END OF FUNCTION CHUNK FOR sa08_Buff1
+
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -931,12 +931,12 @@ csc1A_setEntitySprite:
                 bsr.w   GetEntityAddressFromCharacter
                 move.w  (a6)+,d0
                 cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
-                bcc.s   loc_46A5E
+                bcc.s   @NotAlly
                 jsr     GetAllyMapSprite
                 move.w  d4,d0
-loc_46A5E:
+@NotAlly:
                 
-                move.b  d0,$13(a5)
+                move.b  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
                 jsr     (WaitForVInt).w
                 bsr.w   UpdateEntitySprite_0
                 rts
@@ -1748,7 +1748,7 @@ return_46FDA:
 csc54_joinForceAI:
                 
                 move.w  (a6)+,d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 move.w  (a6)+,d2
                 bne.s   loc_46FEE
                 andi.w  #$FFFB,d1
@@ -1759,7 +1759,7 @@ loc_46FEE:
                 jsr     j_JoinForce
 loc_46FF8:
                 
-                jsr     j_SetCharacterWord34
+                jsr     j_SetAiActivationFlag
                 rts
 
     ; End of function csc54_joinForceAI
@@ -1887,13 +1887,15 @@ AdjustScriptPointerByCharacterAliveStatus:
 ; =============== S U B R O U T I N E =======================================
 
 ; Launches DMA
+; 
+;     In: A5 = entity data pointer
 
 
 sub_4709E:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 clr.w   d1
-                move.b  $12(a5),d1
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a5),d1
                 move.w  d1,d0
                 lsl.w   #3,d1
                 add.w   d0,d1

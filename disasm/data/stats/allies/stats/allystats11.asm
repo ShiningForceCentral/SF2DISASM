@@ -8,4 +8,4 @@ AllyStats11:    forClass  BRGN
                 defGrowth 28, 80, LINEAR
                 agiGrowth 19, 50, EARLY
                 spellList 
-                    
+                

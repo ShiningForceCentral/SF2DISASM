@@ -481,7 +481,7 @@ WriteBattlesceneScript_DeathMessage:
 WriteBattlesceneScript_CastSpell:
                 
                 move.b  (a5),d0
-                move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d1
+                move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
                 bsr.w   GetResistanceToSpell
                 add.w   d1,d1
                 move.w  rjt_SpellEffects(pc,d1.w),d1
@@ -590,13 +590,14 @@ SpellEffect_Detox:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 clr.b   d2
-                tst.w   ((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
-                cmpi.w  #0,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w 
-                                                        ; useless compare instruction
-                beq.w   @CurePoison     ; if spell level 1, cure poison
-                                        ; else if spell level 2, cure poison and stun 
-                                        ; otherwise, cure poison, stun, and curse
-                cmpi.w  #1,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
+                tst.w   ((BATTLESCENE_SPELL_LEVEL-$1000000)).w
+                cmpi.w  #0,((BATTLESCENE_SPELL_LEVEL-$1000000)).w ; useless compare instruction
+                beq.w   @CurePoison     ; if spell level 1, cure Poison
+                                        ; else if spell level 2, cure Poison and Stun 
+                                        ; otherwise, cure Poison, Stun, and Curse
+                cmpi.w  #1,((BATTLESCENE_SPELL_LEVEL-$1000000)).w
+                
+                ; Cure Curse
                 beq.w   @CureStun
                 bclr    #STATUSEFFECT_BIT_CURSE,d1
                 beq.s   @CureStun
@@ -609,33 +610,35 @@ SpellEffect_Detox:
 @CurePoison:
                 
                 bclr    #STATUSEFFECT_BIT_POISON,d1
-                beq.s   @CheckIfAnyStatusCured
+                beq.s   @CheckIfAnyStatusEffectWasCured
                 ori.b   #1,d2           ; D2 = bit 0 set if poison was cured
-@CheckIfAnyStatusCured:
+@CheckIfAnyStatusEffectWasCured:
                 
                 tst.b   d2
                 beq.w   @Ineffective
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @WriteEnemyReactionCommand
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
-                bra.s   @CheckIfPoisonCured
+                bra.s   @GiveEXP
 @WriteEnemyReactionCommand:
                 
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
-@CheckIfPoisonCured:
+@GiveEXP:
                 
-                bsr.w   GiveStatusEffectSpellsEXP
+                bsr.w   GiveStatusEffectSpellEXP
+                
+                ; Check if Poison was cured
                 btst    #0,d2
-                beq.s   @CheckIfStunCured
+                beq.s   @CheckIfStunWasCured
                 displayMessage #MESSAGE_BATTLE_IS_NO_LONGER_POISONED,d0,#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
-@CheckIfStunCured:
+@CheckIfStunWasCured:
                 
                 btst    #1,d2
-                beq.s   @CheckIfCurseCured
+                beq.s   @CheckIfCurseWasCured
                 displayMessage #MESSAGE_BATTLE_IS_NO_LONGER_STUNNED,d0,#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
-@CheckIfCurseCured:
+@CheckIfCurseWasCured:
                 
                 btst    #2,d2
                 beq.s   @Skip
@@ -684,7 +687,7 @@ SpellEffect_Boost:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellsEXP
+                bsr.w   GiveStatusEffectSpellEXP
                 jsr     GetBaseAGI
                 mulu.w  #3,d1
                 lsr.l   #3,d1
@@ -730,7 +733,7 @@ SpellEffect_Slow:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @GiveEXP:
                 
-                bsr.w   GiveStatusEffectSpellsEXP
+                bsr.w   GiveStatusEffectSpellEXP
 
     ; End of function SpellEffect_Slow
 
@@ -772,7 +775,7 @@ SpellEffect_Attack:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellsEXP
+                bsr.w   GiveStatusEffectSpellEXP
                 jsr     GetBaseATT
                 mulu.w  #3,d1
                 lsr.l   #3,d1
@@ -816,7 +819,7 @@ SpellEffect_Dispel:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellsEXP
+                bsr.w   GiveStatusEffectSpellEXP
                 displayMessage #MESSAGE_BATTLE_HAS_BEEN_SILENCED,d0,#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
@@ -830,7 +833,7 @@ SpellEffect_Dispel:
 SpellEffect_Muddle:
                 
                 move.b  (a5),d0
-                tst.w   ((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
+                tst.w   ((BATTLESCENE_SPELL_LEVEL-$1000000)).w
                 beq.w   @Muddle1        
                 addq.w  #CHANCE_TO_INFLICT_MUDDLE2,d2 ; 3/8 base chance to inflict muddle 2
                 bsr.w   ApplyRandomEffectiveness
@@ -863,7 +866,7 @@ SpellEffect_Muddle:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellsEXP
+                bsr.w   GiveStatusEffectSpellEXP
                 displayMessage d2,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
@@ -946,7 +949,7 @@ SpellEffect_Sleep:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellsEXP
+                bsr.w   GiveStatusEffectSpellEXP
                 displayMessage #MESSAGE_BATTLE_FELL_ASLEEP,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
@@ -993,7 +996,7 @@ SpellEffect_DrainMP:
                 executeEnemyReaction #0,d2,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineMessage:
                 
-                bsr.w   GiveStatusEffectSpellsEXP
+                bsr.w   GiveStatusEffectSpellEXP
                 bscHideTextBox
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
@@ -1276,7 +1279,7 @@ byte_B950:
                 cmpi.b  #$FF,d1
                 beq.s   @Return
                 move.w  d1,d2
-                andi.w  #$3F,d2 
+                andi.w  #SPELLENTRY_MASK_INDEX,d2
                 lsr.w   #6,d1
                 bne.s   @SpellLevelIncreasedMessage
                 displayMessage #MESSAGE_BATTLE_LEARNED_THE_NEW_MAGIC_SPELL,d0,d2,#0 
@@ -1584,7 +1587,7 @@ AdjustSpellPower:
                 lsr.w   #2,d6           ; +25% spell power
 @CheckSummon:
                 
-                move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d1
+                move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
                 cmpi.w  #SPELL_DAO,d1   ; HARDCODED spell indexes
                 beq.w   @DivideSpellPower
                 cmpi.w  #SPELL_APOLLO,d1
@@ -1614,16 +1617,16 @@ AdjustSpellPower:
 
 WriteBattlesceneScript_UseItem:
                 
-                move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d1
+                move.w  ((BATTLESCENE_ITEM-$1000000)).w,d1
                 jsr     GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d0
                 move.w  d0,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3)
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
-                move.w  d0,((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w
+                move.w  d0,((BATTLESCENE_SPELL_INDEX-$1000000)).w
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d0
                 lsr.b   #SPELLENTRY_OFFSET_LV,d0
                 andi.w  #SPELLENTRY_LOWERMASK_LV,d0
-                move.w  d0,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
+                move.w  d0,((BATTLESCENE_SPELL_LEVEL-$1000000)).w
                 bra.w   WriteBattlesceneScript_CastSpell
 
     ; End of function WriteBattlesceneScript_UseItem
@@ -1647,7 +1650,7 @@ WriteBattlesceneScript_BreakUsedItem:
                 movem.l d0-d3/a0,-(sp)
                 cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
                 bne.w   @Done           ; skip if action type is not "use item"
-                move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d1
+                move.w  ((BATTLESCENE_ITEM-$1000000)).w,d1
                 jsr     GetEquipmentType
                 tst.w   d2
                 beq.w   @RemoveItem     ; remove item if neither weapon or ring
@@ -1656,7 +1659,7 @@ WriteBattlesceneScript_BreakUsedItem:
                 beq.w   @Done           ; skip if item has no chance to break
                 btst    #COMBATANT_BIT_ENEMY,(a4)
                 bne.w   @Done           ; skip if user is an enemy
-                move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d0
+                move.w  ((BATTLESCENE_ITEM-$1000000)).w,d0
                 btst    #ITEMENTRY_BIT_BROKEN,d0
                 bne.w   @DestroyItem    ; destroy item if already broken
                 moveq   #CHANCE_TO_BREAK_USED_ITEM,d0 ; 1/4 chance to break used item
@@ -1758,7 +1761,7 @@ loc_BCC0:
                                                         ; And the {ITEM}{N}burst into flames.
 loc_BCC4:
                 
-                move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d0
+                move.w  ((BATTLESCENE_ITEM-$1000000)).w,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 lea     tbl_ItemBreakMessages(pc), a0
 loc_BCD0:
