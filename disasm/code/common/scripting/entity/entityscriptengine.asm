@@ -100,7 +100,7 @@ loc_4D5C:
                 
                 move.w  d6,-(sp)
                 clr.w   d4
-                move.b  $12(a0),d4
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d4
                 move.w  d4,d6
                 lsl.w   #3,d4
                 add.w   d6,d4
@@ -114,25 +114,25 @@ loc_4D5C:
                 sub.w   d7,d6
                 addi.w  #VDPSPRITESIZE_V3|VDPSPRITESIZE_H3,d6
                 move.w  d6,VDPSPRITE_OFFSET_SIZE(a1)
-                ori.w   #VDPTILE_PALETTE3,d5
-                move.b  $1D(a0),d0
+                ori.w   #VDPTILE_CLEAR|VDPTILE_PALETTE3,d5
+                move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d0
                 andi.w  #3,d0
                 cmpi.w  #2,d0
                 bne.s   loc_4DA0
-                ori.w   #VDPTILE_FLIP,d5
+                ori.w   #VDPTILE_CLEAR|VDPTILE_FLIP,d5
 loc_4DA0:
                 
-                move.b  $10(a0),d0
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d0
                 ext.w   d0
                 move.b  byte_4E16(pc,d0.w),d0
                 bne.s   loc_4DB0
-                ori.w   #VDPTILE_MIRROR,d5
+                ori.w   #VDPTILE_CLEAR|VDPTILE_MIRROR,d5
 loc_4DB0:
                 
                 move.b  ((WINDOW_IS_PRESENT-$1000000)).w,d6
                 cmp.b   $11(a0),d6
                 bge.s   loc_4DBE
-                ori.w   #VDPTILE_PRIORITY,d5
+                ori.w   #VDPTILE_CLEAR|VDPTILE_PRIORITY,d5
 loc_4DBE:
                 
                 move.w  d5,VDPSPRITE_OFFSET_TILE(a1)
@@ -144,7 +144,7 @@ loc_4DC4:
                 dbf     d7,loc_4CDC
                 clr.b   -5(a1)
                 move.w  (a0),d0
-                move.w  2(a0),d1
+                move.w  ENTITYDEF_OFFSET_Y(a0),d1
                 sub.w   d2,d0
                 sub.w   d3,d1
                 asr.w   #4,d0
@@ -2677,7 +2677,7 @@ loc_60B6:
                 
                 movem.l a0-a1,-(sp)
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-                cmpi.b  #$F0,d1
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d1
                 bcc.w   loc_617C
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
@@ -2780,7 +2780,7 @@ DmaMapSprite:
                 move.w  d1,-(sp)
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-                cmpi.w  #MAPSPRITE_SPECIALS_START,d1 ; HARDCODED special mapsprites start index
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d1 ; HARDCODED special mapsprites start index
                 blt.s   @LoadRegularSprite
                 jsr     j_LoadSpecialSprite
                 move.w  (sp)+,d1

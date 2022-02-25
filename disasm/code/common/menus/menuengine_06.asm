@@ -442,7 +442,7 @@ loc_12D26:
                 move.w  (a0),d0
                 cmpi.w  #$7000,d0
                 beq.w   loc_12D6E
-                move.w  2(a0),d1
+                move.w  ENTITYDEF_OFFSET_Y(a0),d1
 loc_12D34:
                 
                 ext.l   d0
@@ -452,14 +452,14 @@ loc_12D34:
                 add.w   d2,d0
                 add.w   d3,d1
                 move.w  #$E0FE,d4
-                cmpi.b  #$40,$13(a0) 
+                cmpi.b  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.s   loc_12D5A
-                cmpi.b  #$AA,$13(a0)
+                cmpi.b  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bhi.s   loc_12D5A
                 subq.w  #1,d4
 loc_12D5A:
                 
-                cmpi.b  #$F0,$13(a0)
+                cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.s   loc_12D64
                 subq.w  #1,d4
 loc_12D64:
@@ -733,7 +733,7 @@ InitMemberListScreen:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_13004:
+BuildMemberListScreen_NewATTandDEF:
                 
                 move.b  #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
@@ -751,13 +751,13 @@ loc_1302C:
                 
                 bra.w   BuildMemberListScreen
 
-    ; End of function sub_13004
+    ; End of function BuildMemberListScreen_NewATTandDEF
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_13030:
+BuildMemberListScreen_MagicPage:
                 
                 clr.b   ((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
@@ -766,7 +766,7 @@ sub_13030:
                 bne.s   BuildMemberListScreen
                 clr.b   ((CURRENT_MEMBERLIST_PAGE-$1000000)).w
 
-    ; End of function sub_13030
+    ; End of function BuildMemberListScreen_MagicPage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1203,8 +1203,8 @@ spr_MemberListTextHighlight:
                 
 ; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
                 
-                vdpSprite 260, V2|H4|9, 1472|PALETTE3|PRIORITY, 156
-                vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
+                vdpSprite 260, V2|H4|9, 1472|CLEAR|PALETTE3|PRIORITY, 156
+                vdpSprite 260, V2|H4|10, 1472|CLEAR|MIRROR|PALETTE3|PRIORITY, 188
 
 ; =============== S U B R O U T I N E =======================================
 

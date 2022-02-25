@@ -120,12 +120,12 @@ InitBattlesceneProperties:
                 bne.s   @CheckUseItem
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d0
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
-                move.w  d0,((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w
+                move.w  d0,((BATTLESCENE_SPELL_INDEX-$1000000)).w
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d0
                 lsr.b   #SPELLENTRY_OFFSET_LV,d0
                 andi.w  #SPELLENTRY_LOWERMASK_LV,d0
-                move.w  d0,((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w
-                move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d1
+                move.w  d0,((BATTLESCENE_SPELL_LEVEL-$1000000)).w
+                move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
                 jsr     j_FindSpellDefAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 beq.s   @Skip2
@@ -140,7 +140,7 @@ InitBattlesceneProperties:
                 
                 cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
                 bne.s   @CheckBurstRock
-                move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),((CURRENT_BATTLE_ITEM-$1000000)).w
+                move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),((BATTLESCENE_ITEM-$1000000)).w
                 bra.w   @Done
 @CheckBurstRock:
                 
@@ -149,7 +149,7 @@ InitBattlesceneProperties:
                 bra.w   @Done
 @CheckNoAction:
                 
-                cmpi.w  #BATTLEACTION_NOTHING,(a3)
+                cmpi.w  #BATTLEACTION_MUDDLE,(a3)
                 bne.s   @CheckPrismLaser
                 bra.w   @Done
 @CheckPrismLaser:
@@ -198,7 +198,7 @@ CreateBattlesceneMessage:
                 bne.w   @CheckUseItem
                 
                 ; HARDCODED spell text indexes !
-                move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
+                move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d2
                 move.w  #MESSAGE_SPELLCAST_PUT_ON_A_DEMON_SMILE,d1 ; {NAME} put on{N}a demon's smile.
                 cmpi.w  #SPELL_SPOIT,d2
                 beq.w   @SpellcastMessage
@@ -236,8 +236,8 @@ CreateBattlesceneMessage:
                 move.w  #MESSAGE_SPELLCAST_DEFAULT,d1 ; {NAME} cast{N}{SPELL} level {#}!
 @SpellcastMessage:
                 
-                move.w  ((CURRENT_BATTLE_SPELL_INDEX-$1000000)).w,d2
-                move.w  ((CURRENT_BATTLE_SPELL_LEVEL-$1000000)).w,d3
+                move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d2
+                move.w  ((BATTLESCENE_SPELL_LEVEL-$1000000)).w,d3
                 addq.w  #1,d3
                 displayMessage d1,d0,d2,d3 ; Message, Combatant, Item or Spell, Number
                 bra.w   @Done
@@ -245,7 +245,7 @@ CreateBattlesceneMessage:
                 
                 cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
                 bne.w   @CheckBurstRock
-                move.w  ((CURRENT_BATTLE_ITEM-$1000000)).w,d2
+                move.w  ((BATTLESCENE_ITEM-$1000000)).w,d2
                 displayMessage #MESSAGE_BATTLE_USED_ITEM,d0,d2,#0 ; Message, Combatant, Item or Spell, Number
                 bra.w   @Done
 @CheckBurstRock:
@@ -256,7 +256,7 @@ CreateBattlesceneMessage:
                 bra.s   @Done
 @CheckMuddled:
                 
-                cmpi.w  #BATTLEACTION_NOTHING,(a3)
+                cmpi.w  #BATTLEACTION_MUDDLE,(a3)
                 bne.w   @CheckPrismLaser
                 move.w  d0,d2           ; random MUDDLE lines
                 move.w  #MESSAGE_BATTLE_MUDDLED_ACTIONS_START,d1 ; HARDCODED Muddle line start index

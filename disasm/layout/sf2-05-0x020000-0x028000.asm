@@ -56,6 +56,7 @@ j_SuspendGame:
                 jmp     SuspendGame(pc)
                 include "code\common\menus\shop\shopactions.asm"    ; Shop functions
                 include "data\stats\items\shopinventories.asm"    ; Shop inventories
+                include "data\stats\items\debugshop.asm"    ; Debug shop
                 wordAlign
                 include "code\common\menus\church\churchactions_1.asm"    ; Church functions
                 include "data\stats\allies\promotions.asm"    ; Promotions

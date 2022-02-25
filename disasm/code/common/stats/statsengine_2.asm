@@ -342,7 +342,7 @@ SetCurrentEXP:
 SetMoveType:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MOVETYPE,d7
+                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
                 bsr.w   SetCombatantByte
                 movem.l (sp)+,d7-a0
                 rts
@@ -352,54 +352,50 @@ SetMoveType:
 
 ; =============== S U B R O U T I N E =======================================
 
-; actually seems to only be used for enemy AI, not kills
 
-
-SetKills:
+SetAiSpecialMoveOrders:
                 
                 movem.l d1-d2/d7-a0,-(sp)
                 lsl.w   #8,d1
                 andi.w  #$FF,d2
                 or.w    d2,d1
-                moveq   #COMBATANT_OFFSET_KILLS,d7
+                moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
                 bsr.w   SetCombatantWord
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-    ; End of function SetKills
+    ; End of function SetAiSpecialMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; actually seems to only be used for enemy AI, not kills
 
-
-SetDefeats:
+SetAiRegion:
                 
                 movem.l d1-d2/d7-a0,-(sp)
                 lsl.b   #4,d1
                 andi.b  #$F,d2
                 or.b    d2,d1
-                moveq   #COMBATANT_OFFSET_DEFEATS,d7
+                moveq   #COMBATANT_OFFSET_AI_REGION,d7
                 bsr.w   SetCombatantByte
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-    ; End of function SetDefeats
+    ; End of function SetAiRegion
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetCharacterWord34:
+SetAiActivationFlag:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_34,d7
+                moveq   #COMBATANT_OFFSET_AI_ACTIVATION_FLAG,d7
                 bsr.w   SetCombatantWord
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetCharacterWord34
+    ; End of function SetAiActivationFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -408,7 +404,7 @@ SetCharacterWord34:
 SetEnemyIndex:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #ENEMYCOMBATANT_OFFSET_INDEX,d7
+                moveq   #COMBATANT_OFFSET_ENEMY_INDEX,d7
                 bsr.w   SetCombatantByte
                 movem.l (sp)+,d7-a0
                 rts
@@ -1252,7 +1248,7 @@ FindItemName:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get pointer to item D1's definition in ROM -> A0
+; Out: A0 = pointer to definition for item D1
 
 
 GetItemDefAddress:
@@ -1270,11 +1266,8 @@ GetItemDefAddress:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item slot
-; 
-; Out: D1 = item index
-;      D2 = number of items held
+; In: D0 = combatant index, D1 = item slot
+; Out: D1 = item entry, D2 = number of items held
 
 
 GetItemAndNumberHeld:
@@ -2109,18 +2102,14 @@ IsItemUsableInBattle:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
-loc_90D2:
-                
                 cmpi.b  #$FF,ITEMDEF_OFFSET_USE_SPELL(a0)
-                beq.s   loc_90E0
-loc_90DA:
-                
+                beq.s   @ClearCarry
                 ori     #1,ccr
-                bra.s   loc_90E2
-loc_90E0:
+                bra.s   @Done
+@ClearCarry:
                 
                 tst.b   d0
-loc_90E2:
+@Done:
                 
                 movea.l (sp)+,a0
                 rts

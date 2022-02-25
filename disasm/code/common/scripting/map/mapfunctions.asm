@@ -186,7 +186,7 @@ IsOverworldMap:
                 
                 movem.l d0-d1/a0,-(sp)
                 clr.w   d1
-                lea     OverworldMaps(pc), a0
+                lea     tbl_OverworldMaps(pc), a0
 loc_44272:
                 
                 move.b  (a0)+,d0

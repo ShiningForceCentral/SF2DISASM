@@ -16,7 +16,7 @@ DisplayHeadquartersQuote:
 loc_47924:
                 
                 move.w  d0,d1
-                addi.w  #$20,d1 ; "in active party" flags
+                addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 jsr     j_CheckFlag
                 beq.s   loc_47938       
                 addi.w  #$DC3,d0        ; 0DC3={W1}
@@ -92,8 +92,8 @@ loc_479A2:
 loc_479D0:
                 
                 move.w  d0,d1
-                addi.w  #$20,d1 
-                jsr     j_CheckFlag     ; in active party
+                addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
+                jsr     j_CheckFlag
                 beq.s   loc_47A28
                 clr.w   d2
                 move.b  (a2)+,d2

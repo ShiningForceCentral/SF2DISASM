@@ -56,7 +56,7 @@ loc_22C2E:
                 cmpi.b  #$FF,d1
                 beq.w   byte_22C5A      
                 move.l  d1,d2
-                andi.w  #$3F,d2 
+                andi.w  #SPELLENTRY_MASK_INDEX,d2
                 lsr.w   #6,d1
                 bne.s   loc_22C4C
                 move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
@@ -179,6 +179,7 @@ loc_22D2A:
                 movem.l (sp)+,d6/a1
                 lea     $80(a1),a1
                 dbf     d7,loc_22D26
+                
                 movem.l (sp)+,d6-a1
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 clr.b   ((FADING_SETTING-$1000000)).w
@@ -231,24 +232,25 @@ ControlUnitCursor:
                 mulu.w  #$180,d2
                 mulu.w  #$180,d3
                 moveq   #$30,d0 
-                jsr     sub_44024
+                jsr     j_SetUnitCursorSpeedx2
                 lsl.w   #5,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 move.w  d2,(a0)
-                move.w  d3,2(a0)
-                move.w  d2,$C(a0)
-                move.w  d3,$E(a0)
+                move.w  d3,ENTITYDEF_OFFSET_Y(a0)
+                move.w  d2,ENTITYDEF_OFFSET_XDEST(a0)
+                move.w  d3,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  #$FF,((CONTROLLING_UNIT_CURSOR-$1000000)).w
                 move.b  #$30,((VIEW_TARGET_ENTITY-$1000000)).w 
-loc_22DD2:
+@WaitForPlayerInput:
                 
                 jsr     (WaitForVInt).w
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
                 andi.w  #INPUT_B|INPUT_C|INPUT_A,d0
-                beq.s   loc_22DD2
-                move.w  $C(a0),d2
-                move.w  $E(a0),d3
+                beq.s   @WaitForPlayerInput
+                
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d2
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),d3
                 ext.l   d2
                 ext.l   d3
                 divs.w  #$180,d2
@@ -258,7 +260,7 @@ loc_22DD2:
                 moveq   #$30,d0 
                 jsr     j_SetEntityMovescriptToIdle
                 move.w  #$6F00,(a0)
-                move.w  #$6F00,$C(a0)
+                move.w  #$6F00,ENTITYDEF_OFFSET_XDEST(a0)
                 clr.b   ((CONTROLLING_UNIT_CURSOR-$1000000)).w
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 rts
@@ -283,14 +285,14 @@ ControlBattleUnit:
                 move.w  d0,battleEntity(a6)
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a1
-                move.b  $12(a1),d0
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d0
                 move.w  d0,-(sp)
                 move.b  $11(a1),d0
                 lsl.b   #4,d0
                 move.b  d0,$11(a1)
                 jsr     (WaitForVInt).w
-                move.b  #$21,$12(a1) 
-                bsr.w   sub_234C8
+                move.b  #$21,ENTITYDEF_OFFSET_ENTNUM(a1) 
+                bsr.w   sub_234C8       
                 move.w  battleEntity(a6),d0
                 jsr     j_SetControlledEntityActScript
                 addi.w  #$10,d0
@@ -308,8 +310,8 @@ loc_22E68:
                 lsr.b   #4,d0
                 move.b  d0,$11(a1)
                 move.w  (sp)+,d0
-                move.b  d0,$12(a1)
-                bsr.w   sub_234C8
+                move.b  d0,ENTITYDEF_OFFSET_ENTNUM(a1)
+                bsr.w   sub_234C8       
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  ENTITYDEF_OFFSET_XDEST(a1),d2
                 ext.l   d2
@@ -456,14 +458,14 @@ MoveBattleEntityByMoveString:
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 lsl.w   #5,d0
                 adda.w  d0,a1
-                move.b  $12(a1),d0
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d0
                 move.w  d0,-(sp)
                 move.b  $11(a1),d0
                 lsl.b   #4,d0
                 move.b  d0,$11(a1)
                 jsr     (WaitForVInt).w
-                move.b  #$21,$12(a1) 
-                bsr.w   sub_234C8
+                move.b  #$21,ENTITYDEF_OFFSET_ENTNUM(a1) 
+                bsr.w   sub_234C8       
                 move.w  var_2(a6),d0
                 jsr     sub_44030
                 move.l  a0,-(sp)
@@ -481,15 +483,15 @@ loc_22FE8:
                 move.l  a0,-(sp)
                 lea     word_22F76(pc), a0
                 move.w  (a0,d0.w),d1
-                add.w   d1,$C(a1)
+                add.w   d1,ENTITYDEF_OFFSET_XDEST(a1)
                 move.w  2(a0,d0.w),d1
-                add.w   d1,$E(a1)
+                add.w   d1,ENTITYDEF_OFFSET_YDEST(a1)
                 movea.l (sp)+,a0
                 clr.w   d4
                 clr.w   d5
-                move.b  $1A(a1),d4
-                move.b  $1B(a1),d5
-                move.w  $C(a1),d0
+                move.b  ENTITYDEF_OFFSET_XSPEED(a1),d4
+                move.b  ENTITYDEF_OFFSET_YSPEED(a1),d5
+                move.w  ENTITYDEF_OFFSET_XDEST(a1),d0
                 cmp.w   (a1),d0
                 bne.s   loc_23026
                 clr.w   d4
@@ -501,13 +503,13 @@ loc_23026:
                 neg.w   d4
 loc_2302E:
                 
-                move.w  $E(a1),d1
-                cmp.w   2(a1),d1
+                move.w  ENTITYDEF_OFFSET_YDEST(a1),d1
+                cmp.w   ENTITYDEF_OFFSET_Y(a1),d1
                 bne.s   loc_2303A
                 clr.w   d5
 loc_2303A:
                 
-                sub.w   2(a1),d1
+                sub.w   ENTITYDEF_OFFSET_Y(a1),d1
                 bpl.s   loc_23044
                 neg.w   d1
                 neg.w   d5
@@ -515,18 +517,18 @@ loc_23044:
                 
                 move.w  d0,8(a1)
                 move.w  d1,$A(a1)
-                andi.b  #$F0,$1C(a1)
+                andi.b  #$F0,ENTITYDEF_OFFSET_FLAGS_A(a1)
                 move.b  -1(a0),d0
                 cmp.b   -2(a0),d0
                 beq.s   loc_2306A
                 move.w  d4,4(a1)
                 move.w  d5,6(a1)
-                ori.b   #3,$1C(a1)
+                ori.b   #3,ENTITYDEF_OFFSET_FLAGS_A(a1)
 loc_2306A:
                 
                 cmp.b   (a0),d0
                 beq.s   loc_23074
-                ori.b   #$C,$1C(a1)
+                ori.b   #$C,ENTITYDEF_OFFSET_FLAGS_A(a1)
 loc_23074:
                 
                 move.w  ((MOVE_SFX-$1000000)).w,d0
@@ -541,13 +543,13 @@ loc_2308E:
                 lsr.b   #4,d0
                 move.b  d0,$11(a1)
                 move.w  (sp)+,d0
-                move.b  d0,$12(a1)
-                bsr.w   sub_234C8
+                move.b  d0,ENTITYDEF_OFFSET_ENTNUM(a1)
+                bsr.w   sub_234C8       
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  (a1),d2
                 ext.l   d2
                 divs.w  #$180,d2
-                move.w  2(a1),d3
+                move.w  ENTITYDEF_OFFSET_Y(a1),d3
                 ext.l   d3
                 divs.w  #$180,d3
                 move.b  d2,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
@@ -1036,6 +1038,8 @@ LoadUnitCursorTileData:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: A1 = entity data pointer
+
 
 sub_234C8:
                 
@@ -1049,9 +1053,9 @@ loc_234DA:
                 
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
-                cmpi.b  #$F0,d1
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d1
                 bcc.s   loc_23538
-                move.b  $12(a1),d1
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1
                 cmpi.b  #$20,d1 
                 beq.s   loc_23538
                 move.w  d1,-(sp)
@@ -1143,30 +1147,30 @@ spr_2358C:      ; unknown sprite definitions
                 
 ; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
                 
-                vdpSprite 116, V4|H4|16, 1664|PALETTE3, 124
-                vdpSprite 1, V4|H4|10, 1664|PALETTE3, 1
-                vdpSprite 1, V4|H4|11, 1664|PALETTE3, 1
-                vdpSprite 1, V4|H4|12, 1664|PALETTE3, 1
-                vdpSprite 1, V4|H4|13, 1664|PALETTE3, 1
-                vdpSprite 1, V4|H4|14, 1664|PALETTE3, 1
-                vdpSprite 1, V4|H4|15, 1664|PALETTE3, 1
-                vdpSprite 1, V4|H4|16, 1664|PALETTE3, 1
-                vdpSprite 86, V4|H4|9, 1680|PALETTE3, 124
-                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 100
-                vdpSprite 146, V4|H4|11, 1680|FLIP|PALETTE3, 124
-                vdpSprite 116, V4|H4|16, 1696|MIRROR|PALETTE3, 148
-                vdpSprite 1, V4|H4|13, 1664|PALETTE3, 1
-                vdpSprite 1, V4|H4|14, 1664|PALETTE3, 1
-                vdpSprite 1, V4|H4|15, 1664|PALETTE3, 1
-                vdpSprite 1, V4|H4|16, 1664|PALETTE3, 1
-                vdpSprite 62, V4|H4|9, 1680|PALETTE3, 124
-                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 76
-                vdpSprite 170, V4|H4|11, 1680|FLIP|PALETTE3, 124
-                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 172
-                vdpSprite 86, V4|H4|13, 1712|PALETTE3, 95
-                vdpSprite 86, V4|H4|14, 1712|MIRROR|PALETTE3, 153
-                vdpSprite 146, V4|H4|15, 1712|FLIP|PALETTE3, 95
-                vdpSprite 146, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 153
+                vdpSprite 116, V4|H4|16, 1664|CLEAR|PALETTE3, 124
+                vdpSprite 1, V4|H4|10, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 1, V4|H4|11, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 1, V4|H4|12, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 1, V4|H4|13, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 1, V4|H4|14, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 1, V4|H4|15, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 1, V4|H4|16, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 86, V4|H4|9, 1680|CLEAR|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|CLEAR|PALETTE3, 100
+                vdpSprite 146, V4|H4|11, 1680|CLEAR|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|16, 1696|CLEAR|MIRROR|PALETTE3, 148
+                vdpSprite 1, V4|H4|13, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 1, V4|H4|14, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 1, V4|H4|15, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 1, V4|H4|16, 1664|CLEAR|PALETTE3, 1
+                vdpSprite 62, V4|H4|9, 1680|CLEAR|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|CLEAR|PALETTE3, 76
+                vdpSprite 170, V4|H4|11, 1680|CLEAR|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|12, 1696|CLEAR|MIRROR|PALETTE3, 172
+                vdpSprite 86, V4|H4|13, 1712|CLEAR|PALETTE3, 95
+                vdpSprite 86, V4|H4|14, 1712|CLEAR|MIRROR|PALETTE3, 153
+                vdpSprite 146, V4|H4|15, 1712|CLEAR|FLIP|PALETTE3, 95
+                vdpSprite 146, V4|H4|16, 1712|CLEAR|MIRROR|FLIP|PALETTE3, 153
 
 ; =============== S U B R O U T I N E =======================================
 

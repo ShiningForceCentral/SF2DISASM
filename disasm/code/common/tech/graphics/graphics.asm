@@ -387,13 +387,13 @@ sub_19C8:
                 
                 movem.l d7-a1,-(sp)
                 lea     (PALETTE_1_BASE).l,a1
-                move.w  #$80,d7 
+                move.w  #CRAM_SIZE,d7
                 jsr     CopyBytes(pc)   
                 lea     (PALETTE_1_CURRENT).l,a0
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a1
-                move.w  #$80,d7 
+                move.w  #CRAM_SIZE,d7
                 jsr     CopyBytes(pc)   
-                move.b  #$20,((FADING_TIMER_WORD-$1000000)).w 
+                move.b  #32,((FADING_TIMER_WORD-$1000000)).w
                 movem.l (sp)+,d7-a1
                 rts
 
