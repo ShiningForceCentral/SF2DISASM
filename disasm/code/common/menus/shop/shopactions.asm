@@ -103,7 +103,7 @@ loc_2015E:
                 clsTxt
                 move.w  selectedItem(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_20118      
                 move.w  d0,member(a6)
@@ -225,7 +225,7 @@ loc_202F4:
                 clsTxt
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_207CC
                 clr.w   rareItemFlag(a6)
@@ -336,7 +336,7 @@ loc_2046C:
                 clsTxt
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_207CC
                 move.w  d0,member(a6)
@@ -478,7 +478,7 @@ loc_20652:
                 clsTxt
                 move.w  selectedItem(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_2060C      
                 move.w  d0,member(a6)

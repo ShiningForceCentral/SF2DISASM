@@ -456,10 +456,10 @@ LoadSpellIcon:
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
                 movea.l (p_Icons).l,a0
                 cmpi.w  #SPELL_NOTHING,d1
-                bne.s   loc_13B7E
+                bne.s   @Continue
                 move.w  #ICON_NOTHING,d1
                 bra.s   LoadIcon
-loc_13B7E:
+@Continue:
                 
                 addi.w  #ICON_SPELLS_START,d1
 
@@ -713,7 +713,7 @@ loc_13F88:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FA2
                 moveq   #1,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_13FA2
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_1401E
@@ -722,7 +722,7 @@ loc_13FA2:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FBC
                 moveq   #2,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_13FBC
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_1401E
@@ -738,7 +738,7 @@ loc_13FCE:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_13FE8
                 moveq   #3,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_13FE8
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_1401E
@@ -1330,7 +1330,7 @@ loc_144DE:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_144F8
                 moveq   #1,d1
-                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_2-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_144F8
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_14574
@@ -1339,7 +1339,7 @@ loc_144F8:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14512
                 moveq   #2,d1
-                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_3-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_14512
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_14574
@@ -1355,7 +1355,7 @@ loc_14524:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1453E
                 moveq   #3,d1
-                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_4-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_1453E
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_14574
@@ -1492,7 +1492,7 @@ loc_14654:
 loc_1466C:
                 
                 move.w  d2,d1
-                andi.w  #SPELLENTRY_MASK_INDEX,d1 
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
                 lsl.w   #6,d3
                 or.w    d3,d1
                 movem.l (sp)+,d0/d3-a1  ;     fixSelectionRectCorners
@@ -2575,11 +2575,11 @@ ShopInventoryWindowLayout:
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
-                vdpBaseTile 1518
+                vdpBaseTile MENU47
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
-                vdpBaseTile 1528
+                vdpBaseTile MENU57
                 vdpBaseTile SPACE
                 vdpBaseTile V_BORDER|MIRROR
                 
@@ -2604,11 +2604,11 @@ ShopInventoryWindowLayout:
                 vdpBaseTile SPACE
                 vdpBaseTile MENU41
                 vdpBaseTile MENU42
-                vdpBaseTile 1519
+                vdpBaseTile MENU48
                 vdpBaseTile SPACE
-                vdpBaseTile 1522
-                vdpBaseTile 1523
-                vdpBaseTile 1529
+                vdpBaseTile MENU51
+                vdpBaseTile MENU52
+                vdpBaseTile MENU58
                 vdpBaseTile SPACE
                 vdpBaseTile V_BORDER|MIRROR
                 
@@ -2631,13 +2631,13 @@ ShopInventoryWindowLayout:
                 vdpBaseTile MENU34
                 vdpBaseTile MENU39
                 vdpBaseTile SPACE
-                vdpBaseTile 1514
-                vdpBaseTile 1515
-                vdpBaseTile 1520
+                vdpBaseTile MENU43
+                vdpBaseTile MENU44
+                vdpBaseTile MENU49
                 vdpBaseTile SPACE
-                vdpBaseTile 1524
-                vdpBaseTile 1525
-                vdpBaseTile 1530
+                vdpBaseTile MENU53
+                vdpBaseTile MENU54
+                vdpBaseTile MENU59
                 vdpBaseTile SPACE
                 vdpBaseTile V_BORDER|MIRROR
                 
@@ -2660,13 +2660,13 @@ ShopInventoryWindowLayout:
                 vdpBaseTile MENU36
                 vdpBaseTile MENU40
                 vdpBaseTile SPACE
-                vdpBaseTile 1516
-                vdpBaseTile 1517
-                vdpBaseTile 1521
+                vdpBaseTile MENU45
+                vdpBaseTile MENU46
+                vdpBaseTile MENU50
                 vdpBaseTile SPACE
-                vdpBaseTile 1526
-                vdpBaseTile 1527
-                vdpBaseTile 1531
+                vdpBaseTile MENU55
+                vdpBaseTile MENU56
+                vdpBaseTile MENU60
                 vdpBaseTile SPACE
                 vdpBaseTile V_BORDER|MIRROR
                 
@@ -3022,12 +3022,12 @@ YesNoPromptMenuLayout:
                 vdpTile MENU1|PALETTE3|PRIORITY
                 vdpTile MENU2|PALETTE3|PRIORITY
                 vdpTile MENU3|PALETTE3|PRIORITY
-                vdpTile 0
-                vdpTile 0
+                vdpTile CLEAR
+                vdpTile CLEAR
                 vdpTile MENU10|PALETTE3|PRIORITY
                 vdpTile MENU11|PALETTE3|PRIORITY
                 vdpTile MENU12|PALETTE3|PRIORITY
-                vdpTile 0
+                vdpTile CLEAR
                 vdpTile CORNER|PALETTE3|PRIORITY
                 vdpTile H_BORDER|PALETTE3|PRIORITY
                 vdpTile H_BORDER|PALETTE3|PRIORITY
@@ -3038,12 +3038,12 @@ YesNoPromptMenuLayout:
                 vdpTile MENU4|PALETTE3|PRIORITY
                 vdpTile MENU5|PALETTE3|PRIORITY
                 vdpTile MENU6|PALETTE3|PRIORITY
-                vdpTile 0
-                vdpTile 0
+                vdpTile CLEAR
+                vdpTile CLEAR
                 vdpTile MENU13|PALETTE3|PRIORITY
                 vdpTile MENU14|PALETTE3|PRIORITY
                 vdpTile MENU15|PALETTE3|PRIORITY
-                vdpTile 0
+                vdpTile CLEAR
                 vdpTile V_BORDER|PALETTE3|PRIORITY
                 vdpTile SPACE|PALETTE3|PRIORITY
                 vdpTile SPACE|PALETTE3|PRIORITY
@@ -3054,12 +3054,12 @@ YesNoPromptMenuLayout:
                 vdpTile MENU7|PALETTE3|PRIORITY
                 vdpTile MENU8|PALETTE3|PRIORITY
                 vdpTile MENU9|PALETTE3|PRIORITY
-                vdpTile 0
-                vdpTile 0
+                vdpTile CLEAR
+                vdpTile CLEAR
                 vdpTile MENU16|PALETTE3|PRIORITY
                 vdpTile MENU17|PALETTE3|PRIORITY
                 vdpTile MENU18|PALETTE3|PRIORITY
-                vdpTile 0
+                vdpTile CLEAR
                 vdpTile CORNER|FLIP|PALETTE3|PRIORITY
                 vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY
                 vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY

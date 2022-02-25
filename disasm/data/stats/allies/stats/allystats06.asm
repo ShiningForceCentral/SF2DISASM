@@ -8,7 +8,7 @@ AllyStats06:    forClass  TORT
                 defGrowth 15, 55, LINEAR
                 agiGrowth 4, 28, LINEAR
                 spellList 
-                    
+                
                 forClass  MNST
                 hpGrowth  10, 40, LINEAR
                 mpGrowth  0, 0, NONE
@@ -16,4 +16,4 @@ AllyStats06:    forClass  TORT
                 defGrowth 41, 100, LINEAR
                 agiGrowth 20, 55, LINEAR
                 spellList 
-                    
+                

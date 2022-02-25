@@ -90,6 +90,7 @@ TextBankTreeData:
                     includeIfExpandedRom "data\graphics\battles\weapons\palettes\entries.asm"    ; WeaponPalettes
                 endif
                 includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
+                wordAlign
                 if (MUSIC_RESUMING=1)
                     align $43000
                     incbin "data\sound\cubesfx.bin"

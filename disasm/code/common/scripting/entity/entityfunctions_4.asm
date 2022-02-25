@@ -8,7 +8,7 @@
 OrientSpriteLeft:
                 
                 movem.l d0-d1/d5-a0,-(sp)
-                link    a6,#64960
+                link    a6,#-576
                 move.w  #1,d7
 loc_45864:
                 

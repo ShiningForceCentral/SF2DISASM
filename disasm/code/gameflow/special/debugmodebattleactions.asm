@@ -8,7 +8,7 @@
 DebugModeActionSelect:
                 
                 movem.l d0-d3/a0,-(sp)
-                lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a0
+                lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 moveq   #0,d0
                 moveq   #0,d1
                 moveq   #6,d2
@@ -17,25 +17,42 @@ DebugModeActionSelect:
                 beq.w   loc_9B3E
                 move.w  d0,(a0)+
                 add.w   d0,d0
-                move.w  rjt_DebugModeBattleActions(pc,d0.w),d0
-                jmp     rjt_DebugModeBattleActions(pc,d0.w)
-rjt_DebugModeBattleActions:
+                move.w  rjt_DebugModeBattleactions(pc,d0.w),d0
+                jmp     rjt_DebugModeBattleactions(pc,d0.w)
+
+    ; End of function DebugModeActionSelect
+
+rjt_DebugModeBattleactions:
+                dc.w sub_9AD0-rjt_DebugModeBattleactions
+                dc.w sub_9ADA-rjt_DebugModeBattleactions
+                dc.w sub_9B06-rjt_DebugModeBattleactions
+                dc.w sub_9B2C-rjt_DebugModeBattleactions
+                dc.w sub_9B30-rjt_DebugModeBattleactions
+                dc.w sub_9B34-rjt_DebugModeBattleactions
+                dc.w sub_9B38-rjt_DebugModeBattleactions
+
+; =============== S U B R O U T I N E =======================================
+
+; attack
+
+
+sub_9AD0:
                 
-                dc.w loc_9AD0-rjt_DebugModeBattleActions
-                dc.w loc_9ADA-rjt_DebugModeBattleActions
-                dc.w loc_9B06-rjt_DebugModeBattleActions
-                dc.w loc_9B2C-rjt_DebugModeBattleActions
-                dc.w loc_9B30-rjt_DebugModeBattleActions
-                dc.w loc_9B34-rjt_DebugModeBattleActions
-                dc.w loc_9B38-rjt_DebugModeBattleActions
-loc_9AD0:
-                
-                bsr.w   DebugModeSelectTargetEnemy ; attack
+                bsr.w   DebugModeSelectTargetEnemy
                 move.w  d0,(a0)+
                 bra.w   loc_9B3E
-loc_9ADA:
+
+    ; End of function sub_9AD0
+
+
+; =============== S U B R O U T I N E =======================================
+
+; use magic
+
+
+sub_9ADA:
                 
-                moveq   #1,d0           ; use magic
+                moveq   #1,d0
                 moveq   #1,d1
                 moveq   #SPELLENTRY_LEVELS_NUMBER,d2
                 jsr     j_NumberPrompt
@@ -51,9 +68,18 @@ loc_9ADA:
                 bsr.w   DebugModeSelectTargetEnemy
                 move.w  d0,(a0)+
                 bra.w   loc_9B3E
-loc_9B06:
+
+    ; End of function sub_9ADA
+
+
+; =============== S U B R O U T I N E =======================================
+
+; use item
+
+
+sub_9B06:
                 
-                moveq   #0,d0           ; use item
+                moveq   #0,d0
                 moveq   #0,d1
                 if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
                     move.w  #ITEMINDEX_MAX,d2
@@ -70,25 +96,60 @@ loc_9B06:
                 jsr     j_NumberPrompt
                 move.w  d0,(a0)+
                 bra.w   loc_9B3E
-loc_9B2C:
+
+    ; End of function sub_9B06
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+sub_9B2C:
                 
                 bra.w   loc_9B3E
-loc_9B30:
+
+    ; End of function sub_9B2C
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+sub_9B30:
                 
                 bra.w   loc_9B3E
-loc_9B34:
+
+    ; End of function sub_9B30
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+sub_9B34:
                 
                 bra.w   loc_9B3E
-loc_9B38:
+
+    ; End of function sub_9B34
+
+
+; =============== S U B R O U T I N E =======================================
+
+; use prism laser
+
+
+sub_9B38:
                 
-                move.b  #BATTLE_VERSUS_PRISM_FLOWERS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; use prism laser
+                move.b  #BATTLE_VERSUS_PRISM_FLOWERS,((CURRENT_BATTLE-$1000000)).w
+
+    ; End of function sub_9B38
+
+
+; START OF FUNCTION CHUNK FOR DebugModeActionSelect
+
 loc_9B3E:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function DebugModeActionSelect
+; END OF FUNCTION CHUNK FOR DebugModeActionSelect
 
 
 ; =============== S U B R O U T I N E =======================================

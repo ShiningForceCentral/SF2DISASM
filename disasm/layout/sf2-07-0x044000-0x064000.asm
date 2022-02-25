@@ -22,8 +22,8 @@ j_ApplyInitActscript:
                 jmp     ApplyInitActscript(pc)
 j_SetEntityMovescriptToIdle:                
                 jmp     SetEntityMovescriptToIdle(pc)
-sub_44024:                
-                jmp     sub_44B94(pc)
+j_SetUnitCursorSpeedx2:                
+                jmp     SetUnitCursorSpeedx2(pc)
 j_SetUnitCursorActscript:                
                 jmp     SetUnitCursorActscript(pc)
 sub_4402C:                
@@ -37,7 +37,7 @@ j_nullsub_4712A:
 j_ExecuteMapScript:                
                 jmp     ExecuteMapScript(pc)
 j_ExecuteBattleCutscene_Intro:                
-                jmp     j_ExecuteBattleCutscene_Intro_0(pc)
+                jmp     ExecuteBattleCutscene_Intro(pc)
 j_ExecuteBattleCutscene_Start:                
                 jmp     ExecuteBattleCutscene_Start(pc)
 j_ExecuteBattleCutscene_Defeated:                

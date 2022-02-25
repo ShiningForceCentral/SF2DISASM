@@ -18,7 +18,7 @@ ExecuteBattleCutscene_Defeated:
                 bne.w   loc_47C88
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
-                addi.w  #$1F4,d1
+                addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   loc_47C48
                 movem.l d0/a0,-(sp)

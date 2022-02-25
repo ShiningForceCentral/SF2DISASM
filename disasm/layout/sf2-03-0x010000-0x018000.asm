@@ -85,6 +85,7 @@ WindowBorderTiles:
                     include "data\stats\items\itemdefs.asm"    ; Item definitions
                     include "data\stats\spells\spelldefs.asm"    ; Spell definitions
                     include "data\stats\items\itemnames.asm"    ; Item names
+                    wordAlign
                 endif
                 include "data\stats\allies\classes\classnames.asm"    ; Class names
                 align $18000

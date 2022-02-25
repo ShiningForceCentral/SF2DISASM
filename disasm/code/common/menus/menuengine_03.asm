@@ -237,7 +237,7 @@ DrawColoredStatBar:
                 addi.w  #$A,d2          ; draw bar in bottom left window
 @InitVdpTileEntry:
                 
-                ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
+                ori.w   #VDPTILE_CLEAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
                 cmp.w   d0,d1
                 bge.s   @ClearLoadingSpace ; keep highest of current or max stat value
                 move.w  d0,d1

@@ -1877,7 +1877,7 @@ loc_191AC:
                 cmpi.b  #$FF,d0
                 beq.s   return_191DE
                 move.l  d0,d1
-                andi.w  #SPELLENTRY_MASK_INDEX,d0 
+                andi.w  #SPELLENTRY_MASK_INDEX,d0
                 lsr.w   #6,d1
                 bne.s   loc_191D0
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -3046,10 +3046,10 @@ sub_19970:
                 clr.w   (a1)+
                 addq.w  #2,a0
                 moveq   #$E,d0
-loc_19996:
+@Loop:
                 
                 move.w  (a0)+,(a1)+
-                dbf     d0,loc_19996
+                dbf     d0,@Loop
                 
                 restoreRomBanks
                 rts
@@ -3314,7 +3314,7 @@ LoadEnemyBattleSpriteFrame:
 LoadEnemyBattleSprite:
                 
                 cmpi.w  #$FFFF,d0
-                beq.w   return_19B7E
+                beq.w   @Return
                 
                 getEnemyBattlespritePointer
                 lsl.w   #2,d0
@@ -3327,13 +3327,13 @@ LoadEnemyBattleSprite:
                 lea     (ENEMY_BATTLESPRITE_UNCOMP_SPACE).l,a0
                 lea     (FF5000_LOADING_SPACE).l,a1
                 move.w  #$1FF,d0
-loc_19B78:
+@Loop:
                 
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_19B78
+                dbf     d0,@Loop
                 
                 restoreRomBanks
-return_19B7E:
+@Return:
                 
                 rts
 

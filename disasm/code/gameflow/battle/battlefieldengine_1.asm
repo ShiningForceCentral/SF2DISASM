@@ -53,7 +53,7 @@ loc_C0B8:
 ClearMovableGrid:
                 
                 movem.l d0-a6,-(sp)
-                lea     (byte_FF4400).l,a0
+                lea     (FF4400_LOADING_SPACE).l,a0
                 lea     (FF4D00_LOADING_SPACE).l,a1
                 move.w  #$240,d0
                 moveq   #$FFFFFFFF,d1
@@ -115,10 +115,10 @@ GetMoveCostToEntity:
 GetDestinationMoveCost:
                 
                 movem.l d1-a6,-(sp)
-                lea     (byte_FF4400).l,a0
+                lea     (FF4400_LOADING_SPACE).l,a0
                 lea     (FF4D00_LOADING_SPACE).l,a1
                 clr.w   d0
-                mulu.w  #$30,d2 
+                mulu.w  #48,d2
                 andi.w  #$FF,d1
                 add.w   d1,d2
                 move.b  (a1,d2.w),d0
@@ -185,27 +185,30 @@ SetTerrain:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Populate move costs list for currently moving entity
+
 
 MemorizePath:
                 
-                movem.l d0-a6,-(sp)     ; copy current moving unit's terrain list to memory
-                jsr     GetUpperMoveType
+                movem.l d0-a6,-(sp)
+                jsr     GetMoveType     
                 lsl.w   #4,d1
                 lea     tbl_LandEffectSettingsAndMoveCosts(pc), a0
                 adda.w  d1,a0
-                lea     ((MOVE_COST_LIST-$1000000)).w,a1
-                moveq   #$F,d7
-loc_C1A4:
+                lea     ((MOVE_COSTS_LIST-$1000000)).w,a1
+                moveq   #TERRAINS_COUNTER,d7
+@Loop:
                 
                 move.b  (a0)+,d1
-                andi.b  #$F,d1
-                cmpi.b  #$F,d1
-                bne.s   loc_C1B2
-                moveq   #$FFFFFFFF,d1
-loc_C1B2:
+                andi.b  #LANDEFFECT_AND_MOVECOST_MASK_LOWERNIBBLE,d1
+                cmpi.b  #MOVECOST_OBSTRUCTED,d1
+                bne.s   @Continue
+                moveq   #-1,d1
+@Continue:
                 
                 move.b  d1,(a1)+
-                dbf     d7,loc_C1A4
+                dbf     d7,@Loop
+                
                 movem.l (sp)+,d0-a6
                 rts
 
@@ -218,8 +221,8 @@ loc_C1B2:
 sub_C1BE:
                 
                 movem.l d0/d2-a6,-(sp)
-                bsr.s   MemorizePath
-                lea     ((MOVE_COST_LIST-$1000000)).w,a0
+                bsr.s   MemorizePath    
+                lea     ((MOVE_COSTS_LIST-$1000000)).w,a0
                 bsr.w   GetCurrentTerrainType
                 andi.w  #$F,d0
                 adda.w  d0,a0
@@ -240,16 +243,16 @@ sub_C1BE:
 GetLandEffectSetting:
                 
                 movem.l d0/d2-a6,-(sp)
-                jsr     GetUpperMoveType
-                lsl.w   #MOVETYPE_NIBBLE_SHIFTCOUNT,d1
+                jsr     GetMoveType     
+                lsl.w   #MOVETYPE_SHIFTCOUNT,d1
                 lea     tbl_LandEffectSettingsAndMoveCosts(pc), a0
                 adda.w  d1,a0
                 bsr.w   GetCurrentTerrainType
                 andi.w  #TERRAIN_MASK_TYPE,d0
                 adda.w  d0,a0
                 move.b  (a0),d1
-                lsr.b   #LANDEFFECT_NIBBLE_SHIFTCOUNT,d1 ; shift land effect setting into lower nibble position
-                andi.b  #LANDEFFECT_MASK_LOWERNIBBLE,d1
+                lsr.b   #LANDEFFECT_SHIFTCOUNT,d1 ; shift land effect setting into lower nibble position
+                andi.b  #LANDEFFECT_AND_MOVECOST_MASK_LOWERNIBBLE,d1
                 movem.l (sp)+,d0/d2-a6
                 rts
 
@@ -267,7 +270,7 @@ GetLandEffectSetting:
 SetMovableAtCoord:
                 
                 movem.l d0-a6,-(sp)
-                lea     (byte_FF4400).l,a0
+                lea     (FF4400_LOADING_SPACE).l,a0
                 bsr.w   ConvertCoordToOffset
                 move.b  #0,(a0)
                 lea     (FF4D00_LOADING_SPACE).l,a0

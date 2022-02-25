@@ -164,7 +164,7 @@ loc_A434:
                 bra.s   loc_A458
 loc_A436:
                 
-                cmpi.w  #BATTLEACTION_NOTHING,(a3)
+                cmpi.w  #BATTLEACTION_MUDDLE,(a3)
                 bne.w   loc_A440
                 bra.s   loc_A458
 loc_A440:

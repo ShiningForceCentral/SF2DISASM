@@ -81,8 +81,8 @@ loc_74A8:
 loc_74B4:
                 
                 getCurrentSaveSlot
-                move.b  #3,((CURRENT_MAP-$1000000)).w
-                move.b  #3,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  #MAP_GRANSEAL,((CURRENT_MAP-$1000000)).w
+                move.b  #MAP_GRANSEAL,((EGRESS_MAP_INDEX-$1000000)).w
                 bsr.w   SaveGame
                 disableSram
                 clsTxt
