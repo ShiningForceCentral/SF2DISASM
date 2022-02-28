@@ -1,0 +1,1 @@
+HEALER_AI_ENHANCEMENTS: equ 0   ; 0 = OFF, 1 = ON
