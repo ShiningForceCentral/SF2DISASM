@@ -24,6 +24,8 @@ ITEMS_AND_SPELLS_EXPANSION: equ 0               ; 0 = OFF, 1 = ON. Requires 4MB 
 BOWIE_CAN_DIE: equ 0                            ; 0 = OFF, 1 = ON. Bowie's death does not cause defeat.
 BOWIE_CAN_LEAVE_BATTLE_PARTY: equ 0             ; 0 = OFF, 1 = ON. Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
 PERCENT_POISON_DAMAGE: equ 0                    ; 0 = OFF, 1-100 = n% of max HP
+; AI enhancements
+HEALER_AI_ENHANCEMENTS: equ 0                   ; 0 = OFF, 1 = ON
 ; Menu enhancements
 THREE_DIGITS_STATS: equ 0                       ; 0 = OFF, 1 = ON
 EIGHT_CHARACTERS_MEMBER_NAMES: equ 0            ; 0 = OFF, 1 = ON

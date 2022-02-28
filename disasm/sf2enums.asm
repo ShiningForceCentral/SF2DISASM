@@ -3310,6 +3310,12 @@ AICOMMAND_SPECIAL_MOVE5: equ $13
 ; ---------------------------------------------------------------------------
 
 ; enum AiCommand_Params
-AICOMMAND_PARAM_HEAL: equ $0
-AICOMMAND_PARAM_HEAL2: equ $1
-AICOMMAND_PARAM_HEAL3: equ $2
+    if (HEALER_AI_ENHANCEMENTS=1)
+AICOMMAND_PARAM_HEAL: equ %10101010             ; %10 = only heal if the target is at 66% health or less (default SF2 healing threshold)
+AICOMMAND_PARAM_HEAL2: equ AICOMMAND_PARAM_HEAL
+AICOMMAND_PARAM_HEAL3: equ AICOMMAND_PARAM_HEAL
+    else
+AICOMMAND_PARAM_HEAL: equ 0
+AICOMMAND_PARAM_HEAL2: equ 1
+AICOMMAND_PARAM_HEAL3: equ 2
+    endif

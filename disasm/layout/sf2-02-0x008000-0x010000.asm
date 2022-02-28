@@ -32,9 +32,17 @@
                 include "data\stats\spells\spellelements.asm"    ; Spell elements table
                 wordAlign
                 include "code\gameflow\battle\battlefieldengine_2.asm"    ; Battlefield engine
-                include "code\gameflow\battle\determinehealingspelllevel.asm"    ; Determine healing spell level function
+                if (HEALER_AI_ENHANCEMENTS=1)
+                    include "code\gameflow\battle\determinehealingspelllevel-aienhancements.asm"
+                else
+                    include "code\gameflow\battle\determinehealingspelllevel.asm"    ; Determine healing spell level function
+                endif
                 include "code\gameflow\battle\battlefieldengine_3.asm"    ; Battlefield engine
-                include "code\gameflow\battle\doescombatantrequirehealing.asm"    ; Does combatant require healing function
+                if (HEALER_AI_ENHANCEMENTS=1)
+                    include "code\gameflow\battle\doescombatantrequirehealing-aienhancements.asm"
+                else
+                    include "code\gameflow\battle\doescombatantrequirehealing.asm"    ; Does combatant require healing function
+                endif
                 include "code\gameflow\battle\battlefieldengine_4.asm"    ; Battlefield engine
                 include "data\battles\global\landeffectsettingsandmovecosts.asm"    ; Land effect settings and move costs table
                 include "code\gameflow\battle\battlefieldengine_5.asm"    ; Battlefield engine
@@ -45,7 +53,11 @@
                 include "data\battles\swarmbattlesparams.asm"    ; Parameters for battles implementing swarm AI
                 wordAlign
                 include "code\gameflow\battle\aiengine_2.asm"    ; AI engine
-                include "code\gameflow\battle\executeaicommandheal.asm.asm"    ; Healing AI command
+                if (HEALER_AI_ENHANCEMENTS=1)
+                    include "code\gameflow\battle\executeaicommandheal-aienhancements.asm"
+                else
+                    include "code\gameflow\battle\executeaicommandheal.asm"    ; Healing AI command
+                endif
                 include "code\gameflow\battle\aiengine_3.asm"    ; AI engine
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
                 if (ITEMS_AND_SPELLS_EXPANSION=0)

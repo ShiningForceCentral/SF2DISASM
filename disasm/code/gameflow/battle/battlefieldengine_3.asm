@@ -550,7 +550,11 @@ GetNextUsableHealingItem:
                 jsr     IsItemUsableInBattle
                 bcc.s   @NextSlot
                 cmpi.b  #ITEM_HEALING_RAIN,d7
-                beq.s   @CheckSpellType ; Right now the logic requires the item to be Healing Rain to count as a healing item.
+                if (HEALER_AI_ENHANCEMENTS=1)
+                    bls.s   @CheckSpellType ; The first eight items all count as healing items.
+                else
+                    beq.s   @CheckSpellType ; Right now the logic requires the item to be Healing Rain to count as a healing item.
+                endif
                 btst    #ITEMENTRY_BIT_USABLE_BY_AI,d1
                 beq.w   @NextSlot
 @CheckSpellType:
