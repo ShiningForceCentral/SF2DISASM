@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; In: D0 = caster index
-;     D1 = command parameter (values of 0-2), unused
+;     D1 = command parameter (refer to enum AiCommand_Params)
 ;
 ; Out: D1 = $FFFF if command failed
 
@@ -424,7 +424,7 @@ ExecuteAiCommand_Heal:
 ; Returns $FF if the target is out of range.
 ;
 ; In:  d0 = combatant index of target
-;	   d1 = item or spell index
+;      d1 = item or spell index
 ; Out: d1 = chosen x pos
 ;      d2 = chosen y pos
 ;      ccr = zero bit set if no valid location found

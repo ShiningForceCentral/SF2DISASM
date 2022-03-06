@@ -6,8 +6,8 @@
 ; Determine if the target requires healing (as determined by an HP threshold).
 ;
 ; In:  d0 = target combatant index
-;	   d5 = caster combatant index
-;	   d6 = healing thresholds code
+;       d5 = caster combatant index
+;       d6 = healing thresholds code
 ; Out: carry and zero bits are cleared if the target hits the appropriate HP threshold
 
 
@@ -37,11 +37,11 @@ DoesCombatantRequireHealing:
                 move.w  d1,d2
                 add.w   d1,d2
                 add.w   d1,d2           ; d2 = current HP * 3
-                bsr.w   GetMaxHP	    ; d1 = max HP
-				mulu.w  d6,d1		    ; multiply max HP by whatever variable is dictated by the extra AI code
+                bsr.w   GetMaxHP        ; d1 = max HP
+                mulu.w  d6,d1           ; multiply max HP by whatever variable is dictated by the extra AI code
                 cmp.w   d2,d1
                 movem.l (sp)+,d1-d2/d5-d6
                 rts
-				
+                
     ; End of function DoesCombatantRequireHealing
 
