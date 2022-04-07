@@ -19,7 +19,7 @@ align: macro
 wordAlign: macro
     dcb.b *%2,$FF
     endm
-	
+    
 declareSystemId: macro
     if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
     dc.b 'SEGA SSF        '
@@ -28,37 +28,37 @@ declareSystemId: macro
     endc
     endm
     
-declareRomEnd:	macro
-	if (EXPANDED_ROM=1)
+declareRomEnd:    macro
+    if (EXPANDED_ROM=1)
     dc.l $3FFFFF
     else
-	dc.l $1FFFFF
-	endc
-	endm	
+    dc.l $1FFFFF
+    endc
+    endm    
 
-enableSram:	macro
-	if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+enableSram:    macro
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
     if (*<$8000)
     bsr.w   EnableMapperSram
     else
     jsr     (EnableMapperSram).w
     endc
     elseif (EXPANDED_ROM=1)
-	move.b  #3,(SEGA_MAPPER_CTRL0).l
-	endc
-	endm
-	
-disableSram:	macro
-	if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    move.b  #3,(SEGA_MAPPER_CTRL0).l
+    endc
+    endm
+    
+disableSram:    macro
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
     if (*<$8000)
     bsr.w   DisableMapperSram
     else
     jsr     (DisableMapperSram).w
     endc
     elseif (EXPANDED_ROM=1)
-	move.b  #0,(SEGA_MAPPER_CTRL0).l
-	endc
-	endm	
+    move.b  #0,(SEGA_MAPPER_CTRL0).l
+    endc
+    endm    
 
 getCurrentSaveSlot: macro
     if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
@@ -133,97 +133,97 @@ loadBattlesprite: macro
     endm
 
 
-conditionalRomExpand:	macro
-	if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+conditionalRomExpand: macro
+    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
     include "layout\sf2-expanded-19-0x200000-0x600000.asm"
     elseif (EXPANDED_ROM=1)
-	include "layout\sf2-expanded-19-0x200000-0x400000.asm"
-	endc
-	endm
-	
-conditionalPc:	macro
-	if (EXPANDED_ROM=0)
-	\1 \2(pc),\3
-	else
-	\1 \2,\3
-	endc
-	endm
-	
-conditionalBsr:	macro
-	if (EXPANDED_ROM=0)
-	bsr.w \1
-	else
-	jsr \1
-	endc
-	endm
-	
-conditionalWordAddr:	macro
-	if (EXPANDED_ROM=0)
-	\1 (\2).w,\3
-	else
-	\1 (\2).l,\3
-	endc
-	endm	
-	
-alignIfVanillaRom:	macro
-	if (EXPANDED_ROM=0)
-	align \1
-	endc
-	endm
-	
-alignIfExpandedRom:	macro
-	if (EXPANDED_ROM=1)
-	align \1
-	endc
-	endm
-	
-wordAlignIfExpandedRom:	macro
-	if (EXPANDED_ROM=1)
-	wordAlign
-	endc
-	endm
-	
-bsrIfVanillaRom:	macro
-	if (EXPANDED_ROM=0)
-	bsr.\0 \1
-	endc
-	endm
-	
-equIfVanillaRom:	macro
-	if (EXPANDED_ROM=0)
+    include "layout\sf2-expanded-19-0x200000-0x400000.asm"
+    endc
+    endm
+    
+conditionalPc: macro
+    if (EXPANDED_ROM=0)
+    \1 \2(pc),\3
+    else
+    \1 \2,\3
+    endc
+    endm
+    
+conditionalBsr: macro
+    if (EXPANDED_ROM=0)
+    bsr.w \1
+    else
+    jsr \1
+    endc
+    endm
+    
+conditionalWordAddr: macro
+    if (EXPANDED_ROM=0)
+    \1 (\2).w,\3
+    else
+    \1 (\2).l,\3
+    endc
+    endm    
+    
+alignIfVanillaRom: macro
+    if (EXPANDED_ROM=0)
+    align \1
+    endc
+    endm
+    
+alignIfExpandedRom: macro
+    if (EXPANDED_ROM=1)
+    align \1
+    endc
+    endm
+    
+wordAlignIfExpandedRom: macro
+    if (EXPANDED_ROM=1)
+    wordAlign
+    endc
+    endm
+    
+bsrIfVanillaRom: macro
+    if (EXPANDED_ROM=0)
+    bsr.\0 \1
+    endc
+    endm
+    
+equIfVanillaRom: macro
+    if (EXPANDED_ROM=0)
 \1: equ \2
-	endc
-	endm
-	
-equIfExpandedRom:	macro
-	if (EXPANDED_ROM=1)
+    endc
+    endm
+    
+equIfExpandedRom: macro
+    if (EXPANDED_ROM=1)
 \1: equ \2
-	endc
-	endm
-	
-includeIfVanillaRom:	macro
-	if (EXPANDED_ROM=0)
-	include \1
-	endc
-	endm
-	
-incbinIfVanillaRom:	macro
-	if (EXPANDED_ROM=0)
-	incbin \1
-	endc
-	endm
-	
-includeIfExpandedRom:	macro
-	if (EXPANDED_ROM=1)
-	include \1
-	endc
-	endm
-	
-incbinIfExpandedRom:	macro
-	if (EXPANDED_ROM=1)
-	incbin \1
-	endc
-	endm
+    endc
+    endm
+    
+includeIfVanillaRom: macro
+    if (EXPANDED_ROM=0)
+    include \1
+    endc
+    endm
+    
+incbinIfVanillaRom: macro
+    if (EXPANDED_ROM=0)
+    incbin \1
+    endc
+    endm
+    
+includeIfExpandedRom: macro
+    if (EXPANDED_ROM=1)
+    include \1
+    endc
+    endm
+    
+incbinIfExpandedRom: macro
+    if (EXPANDED_ROM=1)
+    incbin \1
+    endc
+    endm
     
 sndCom: macro
     trap #SOUND_COMMAND
