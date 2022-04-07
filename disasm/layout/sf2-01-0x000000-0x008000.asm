@@ -54,4 +54,4 @@
 nullsub_7FA4:                
                 rts
                 includeIfExtendedSsf "code\common\tech\extendedssfmapper.asm"   ; Extended SSF mapper functions
-                align $8000
+                alignIfOriginalRomLayout $8000

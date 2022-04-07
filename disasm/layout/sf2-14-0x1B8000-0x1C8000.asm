@@ -25,4 +25,4 @@ p_WitchEndTiles:dc.l WitchEndTiles
                 includeIfVanillaRom "data\graphics\battles\spells\entries.asm"    ; Spell Graphics
                 include "code\specialscreens\witch\graphics.asm"    ; Witch Screen
                 include "code\specialscreens\witchend\graphics.asm"    ; Witch End Screen
-                align $1C8000
+                alignIfOriginalRomLayout $1C8000

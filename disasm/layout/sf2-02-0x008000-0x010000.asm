@@ -51,4 +51,4 @@
                 include "data\stats\spells\spellnames.asm"    ; Spell names
                 include "data\stats\allies\allynames.asm"    ; Ally names
                 include "data\stats\enemies\enemynames.asm"    ; Enemy names
-algn_FF87:      align $8000
+                alignIfOriginalRomLayout $10000

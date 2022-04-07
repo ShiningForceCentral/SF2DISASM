@@ -26,13 +26,13 @@ p_SuspendStringTiles:
                 dc.l SuspendStringTiles
                 dc.l unused_BasePalettes
 p_BaseTiles:    dc.l BaseTiles
-                include "data\stats\allies\growthcurves.asm"    ; Stat growth curves
-                include "data\stats\allies\stats\entries.asm"    ; Ally stats
+                includeIfVanillaRom "data\stats\allies\growthcurves.asm"    ; Stat growth curves
+                includeIfVanillaRom "data\stats\allies\stats\entries.asm"   ; Ally stats
                 wordAlign
-                include "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
-                include "data\stats\allies\classes\classdefs.asm"    ; Class definitions
-                includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
-                includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
+                includeIfVanillaRom "data\stats\allies\allystartdefs.asm"           ; Ally start definitions
+                includeIfVanillaRom "data\stats\allies\classes\classdefs.asm"       ; Class definitions
+                includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"     ; Jewel End Graphics
+                includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"      ; Suspend String Graphics
 unused_BasePalettes:
                 incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
 BaseTiles:      incbin "data/graphics/tech/basetiles.bin"

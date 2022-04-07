@@ -158,6 +158,17 @@ conditionalWordAddr: macro
     endc
     endm    
     
+alignIfOriginalRomLayout: macro
+    if (STANDARD_BUILD=0)
+    align \1
+    mexit
+    endc
+    if (OPTIMIZED_ROM_LAYOUT=1)
+    align
+    else
+    align \1
+    endc
+    endm
     
 alignIfNotExtendedSsf: macro
     if (EXTENDED_SSF_MAPPER=0)

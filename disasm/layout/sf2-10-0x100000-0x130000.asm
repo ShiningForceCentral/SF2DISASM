@@ -13,4 +13,4 @@ p_pt_InvocationSprites:
                 includeIfVanillaRom "data\graphics\battles\backgrounds\entries.asm"    ; Backgrounds
                 includeIfExpandedRom "data\graphics\portraits\entries.asm"    ; Portraits
                 include "data\graphics\battles\spells\invocations\entries.asm"    ; Invocation sprites
-                align $130000
+                alignIfOriginalRomLayout $130000

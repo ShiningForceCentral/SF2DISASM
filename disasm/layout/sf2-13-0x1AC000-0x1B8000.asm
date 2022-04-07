@@ -13,4 +13,4 @@
                 includeIfVanillaRom "data\battles\spritesetentries.asm"    ; Battle sprite sets
                 include "data\battles\global\randombattles.asm"    ; Random battles table
                 includeIfVanillaRom "code\specialscreens\endkiss\graphics.asm"  ; End Kiss Graphics
-                align $1B8000
+                alignIfOriginalRomLayout $1B8000

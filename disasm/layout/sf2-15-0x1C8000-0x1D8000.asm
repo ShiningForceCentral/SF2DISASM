@@ -5,5 +5,6 @@
 
 
 p_pt_Portraits: dc.l pt_Portraits
-                includeIfVanillaRom "data\graphics\portraits\entries.asm"    ; Portraits
-                align $1D8000
+                includeIfVanillaRom "data\graphics\portraits\entries.asm"   ; Portraits
+                includeIfExpandedRom "data\graphics\icons\entries.asm"      ; Icons
+                alignIfOriginalRomLayout $1D8000

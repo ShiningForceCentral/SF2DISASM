@@ -5,5 +5,10 @@
 
 
 p_Icons:        dc.l Icon000
-                include "data\graphics\icons\entries.asm"    ; Icons
-                align $8000
+                includeIfVanillaRom "data\graphics\icons\entries.asm"       ; Icons
+                includeIfExpandedRom "data\stats\allies\growthcurves.asm"   ; Stat growth curves
+                includeIfExpandedRom "data\stats\allies\stats\entries.asm"  ; Ally stats
+                wordAlign
+                includeIfExpandedRom "data\stats\allies\allystartdefs.asm"      ; Ally start definitions
+                includeIfExpandedRom "data\stats\allies\classes\classdefs.asm"  ; Class definitions
+                align $1E0000

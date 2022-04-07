@@ -41,4 +41,4 @@ WindowBorderTiles:
                 wordAlign
                 
                 include "data\stats\allies\classes\classnames.asm"    ; Class names
-                align $18000
+                alignIfOriginalRomLayout $18000
