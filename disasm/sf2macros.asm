@@ -9,15 +9,18 @@
     include "sf2battlescenemacros.asm"
 
 align: macro
-    if (narg=1)
+    case narg
+=0  ; If no arguments given, align to word boundary.
+    dcb.b *%2,$FF
+=1  ; If given an address argument only, pad with $FF.
     dcb.b \1-(*%\1),$FF
-    else
+=?  ; If two arguments or more, pad with second argument.
     dcb.b \1-(*%\1),\2
-    endc
+    endcase
     endm
     
-wordAlign: macro
-    dcb.b *%2,$FF
+wordAlign: macro ;alias
+    align
     endm
     
 sndCom: macro
