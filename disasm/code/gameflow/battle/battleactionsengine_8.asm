@@ -56,10 +56,10 @@ loc_C06A:
 ; =============== S U B R O U T I N E =======================================
 
 
-ClearEnemyMoveInfo:
+ClearAiMoveInfo:
                 
                 movem.l d0-a6,-(sp)
-                lea     ((ENEMY_TARGETTING_COMMAND_LIST-$1000000)).w,a0
+                lea     ((AI_LAST_TARGET_TABLE-$1000000)).w,a0
                 lea     ((byte_FFB1DC-$1000000)).w,a1
                 clr.w   d0
                 move.w  #$30,d1 
@@ -73,5 +73,5 @@ loc_C082:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function ClearEnemyMoveInfo
+    ; End of function ClearAiMoveInfo
 

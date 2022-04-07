@@ -33,7 +33,7 @@ loc_257D0:
                 jsr     j_GetMapSetupEntities
                 jsr     j_InitMapEntities
                 jsr     (LoadMapEntitySprites).w
-                bsr.w   ClearMapTempFlags
+                bsr.w   ClearMapSetupTempFlags
                 setFlg  80              ; Set @ loc_257D0, also set during exploration loop at 0x25824
                 bra.s   loc_25836
 loc_25828:
@@ -80,20 +80,21 @@ loc_25888:
 ; =============== S U B R O U T I N E =======================================
 
 
-ClearMapTempFlags:
+ClearMapSetupTempFlags:
                 
                 movem.w d1/d7,-(sp)
-                move.w  #$100,d1        ; Map setup temp flag start index
-                move.w  #$7F,d7 ; Number of available temp flags
-loc_25896:
+                move.w  #MAPSETUP_TEMP_FLAGS_START,d1
+                move.w  #MAPSETUP_TEMP_FLAGS_COUNTER,d7
+@Loop:
                 
-                jsr     j_ClearFlag     ; Clear map setup temp flags
+                jsr     j_ClearFlag
                 addq.w  #1,d1
-                dbf     d7,loc_25896    
+                dbf     d7,@Loop
+                
                 movem.w (sp)+,d1/d7
                 rts
 
-    ; End of function ClearMapTempFlags
+    ; End of function ClearMapSetupTempFlags
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -1,721 +1,753 @@
 
 ; ASM FILE code\gameflow\battle\battlefieldengine_3.asm :
-; 0xD8F4..0xDEFC : Battlefield engine
-byte_D8F4:      dc.b $FF                ; related to move types
-                dc.b $C
-                dc.b $B
-                dc.b $A
-                dc.b 9
-                dc.b 8
-                dc.b 6
-                dc.b 5
-                dc.b 4
-                dc.b 3
-                dc.b 2
-                dc.b 1
-                dc.b 7
-byte_D901:      dc.b 0
-                dc.b $C
-                dc.b 3
-                dc.b $12
-                dc.b $11
-                dc.b 4
-                dc.b $13
-                dc.b $14
-                dc.b 6
-                dc.b 9
-                dc.b $17
-                dc.b $E
-                dc.b $1A
-                dc.b $A
-                dc.b $1B
-                dc.b 5
-                dc.b 8
-                dc.b $15
-                dc.b $19
-                dc.b $16
-                dc.b 7
-                dc.b $18
-                dc.b 1
-                dc.b $D
-                dc.b $1D
-                dc.b 2
-                dc.b $1F
-                dc.b $10
-                dc.b $F
-                dc.b $1E
-                dc.b $B
-                dc.b $1C
-byte_D921:      dc.b 0
-                dc.b $C
-                dc.b $B
-                dc.b $1C
-                dc.b $1E
-                dc.b 2
-                dc.b $F
-                dc.b $10
-                dc.b $1F
-                dc.b $1D
-                dc.b 1
-                dc.b $D
-                dc.b 7
-                dc.b $18
-                dc.b 8
-                dc.b 5
-                dc.b $16
-                dc.b $19
-                dc.b $15
-                dc.b $A
-                dc.b $1B
-                dc.b 3
-                dc.b $11
-                dc.b $12
-                dc.b 4
-                dc.b $14
-                dc.b $13
-                dc.b 9
-                dc.b 6
-                dc.b $1A
-                dc.b $E
-                dc.b $17
-byte_D941:      dc.b 6
-                dc.b 9
-                dc.b $17
-                dc.b $E
-                dc.b $1A
-                dc.b 3
-                dc.b $12
-                dc.b $11
-                dc.b 4
-                dc.b $13
-                dc.b $14
-                dc.b 0
-                dc.b $C
-                dc.b $A
-                dc.b $1B
-                dc.b 5
-                dc.b 8
-                dc.b $15
-                dc.b $19
-                dc.b $16
-                dc.b 7
-                dc.b $18
-                dc.b 1
-                dc.b $D
-                dc.b $1D
-                dc.b 2
-                dc.b $1F
-                dc.b $10
-                dc.b $F
-                dc.b $1E
-                dc.b $B
-                dc.b $1C
-byte_D961:      dc.b 0
-                dc.b $C
-                dc.b 3
-                dc.b $12
-                dc.b $11
-                dc.b 4
-                dc.b $13
-                dc.b $14
-                dc.b 2
-                dc.b $1F
-                dc.b $10
-                dc.b $F
-                dc.b $1E
-                dc.b 7
-                dc.b $18
-                dc.b 1
-                dc.b $D
-                dc.b $1D
-                dc.b $B
-                dc.b $1C
-                dc.b 6
-                dc.b 9
-                dc.b $17
-                dc.b $E
-                dc.b $1A
-                dc.b $A
-                dc.b $1B
-                dc.b 5
-                dc.b 8
-                dc.b $15
-                dc.b $19
-                dc.b $16
-                dc.b $FF
-off_D982:       dc.l byte_D901          ; related to move type
-                dc.l byte_D901
-                dc.l byte_D901
-                dc.l byte_D901
-                dc.l byte_D901
-                dc.l byte_D961
-                dc.l byte_D961
-                dc.l byte_D901
-off_D9A2:       dc.l byte_D941
-                dc.l byte_D941
-                dc.l byte_D921
-                dc.l byte_D921
-                dc.l byte_D901
-                dc.l byte_D901
-                dc.l byte_D901
-                dc.l byte_D901
-off_D9C2:       dc.l byte_DA02          ; Gives values from Upper Move Type and Class
-                dc.l byte_DA02
-                dc.l byte_DA02
-                dc.l byte_DA02
-                dc.l byte_DA02
-                dc.l byte_DA62
-                dc.l byte_DA62
-                dc.l byte_DA02
-                dc.l byte_DA42
-                dc.l byte_DA42
-                dc.l byte_DA22
-                dc.l byte_DA22
-                dc.l byte_DA02
-                dc.l byte_DA02
-off_D9FA:       dc.l byte_DA02
-                dc.l byte_DA02
-byte_DA02:      dc.b 4
-                dc.b 1
-                dc.b 0
-                dc.b 4
-                dc.b 4
-                dc.b 2
-                dc.b 2
-                dc.b 1
-                dc.b 2
-                dc.b 2
-                dc.b 2
-                dc.b 0
-                dc.b 4
-                dc.b 1
-                dc.b 2
-                dc.b 0
-                dc.b 0
-                dc.b 4
-                dc.b 4
-                dc.b 4
-                dc.b 4
-                dc.b 2
-                dc.b 2
-                dc.b 2
-                dc.b 1
-                dc.b 2
-                dc.b 2
-                dc.b 2
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-byte_DA22:      dc.b 3
-                dc.b 1
-                dc.b 3
-                dc.b 0
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 3
-                dc.b 3
-                dc.b 2
-                dc.b 0
-                dc.b 3
-                dc.b 3
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 1
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 3
-                dc.b 2
-                dc.b 3
-                dc.b 3
-byte_DA42:      dc.b 3
-                dc.b 1
-                dc.b 0
-                dc.b 3
-                dc.b 3
-                dc.b 2
-                dc.b 4
-                dc.b 2
-                dc.b 2
-                dc.b 4
-                dc.b 2
-                dc.b 0
-                dc.b 3
-                dc.b 1
-                dc.b 4
-                dc.b 0
-                dc.b 0
-                dc.b 3
-                dc.b 3
-                dc.b 3
-                dc.b 3
-                dc.b 2
-                dc.b 2
-                dc.b 4
-                dc.b 2
-                dc.b 2
-                dc.b 4
-                dc.b 2
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-byte_DA62:      dc.b 3
-                dc.b 2
-                dc.b 2
-                dc.b 3
-                dc.b 3
-                dc.b 0
-                dc.b 1
-                dc.b 2
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 3
-                dc.b 2
-                dc.b 1
-                dc.b 2
-                dc.b 2
-                dc.b 3
-                dc.b 3
-                dc.b 3
-                dc.b 3
-                dc.b 0
-                dc.b 0
-                dc.b 1
-                dc.b 2
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 2
-                dc.b 2
-                dc.b 2
+; 0xCDEA..0xD38A : Battlefield engine
 
 ; =============== S U B R O U T I N E =======================================
 
-var_64 = -64
-var_63 = -63
+; If the target for healing uses AI #14 or #15, then return the maximum
+;  priority of 13.
+; 
+; If not, then return a priority based upon the movetype for the enemy,
+;  which approximately goes highest to lowest priority of
+;  healer, mage, archer, flyer, melee, aquatic.
+; 
+; Specific decending priority for each move type is in tbl_MovetypesHealTargetPriority.
+; 
+; The first byte in that table is $FF to ensure there is never a movetype
+;  match and therefore nothing has a priority higher than AI #14 or AI #15.
+; 
+;       In: D0 = target index
+;       Out: D6 = target priority
 
-MakeRangeLists:
+
+CalculateHealTargetPriority:
                 
-                movem.l d0-a5,-(sp)
-                link    a6,#-64
-                lea     (a6),a1
-                move.w  #$F,d5
-                move.l  #$40004000,d1
-loc_DA96:
+                movem.l d0-d5/d7-a6,-(sp)
+                bsr.w   GetAiCommandset 
+                cmpi.w  #13,d1
+                bne.s   loc_CE00
+                move.w  #13,d6
+                bra.w   loc_CE30
+loc_CE00:
                 
-                move.l  d1,-(a1)
-                dbf     d5,loc_DA96
-                lea     (a3),a1
-                move.w  #$8F,d5 
-                moveq   #$FFFFFFFF,d1
-loc_DAA4:
+                cmpi.w  #14,d1
+                bne.s   loc_CE0E
+                move.w  #13,d6
+                bra.w   loc_CE30
+loc_CE0E:
                 
-                move.l  d1,(a1)+
-                move.l  d1,(a1)+
-                move.l  d1,(a1)+
-                move.l  d1,(a1)+
-                dbf     d5,loc_DAA4
-                lea     (a2),a1
-                move.w  #$8F,d5 
-                moveq   #$FFFFFFFF,d1
-loc_DAB8:
+                bsr.w   GetMoveType     
+                lea     (tbl_MovetypesHealTargetPriority).l,a0
+                move.w  #13,d6
+                clr.w   d0
+loc_CE1E:
                 
-                move.l  d1,(a1)+
-                move.l  d1,(a1)+
-                move.l  d1,(a1)+
-                move.l  d1,(a1)+
-                dbf     d5,loc_DAB8
-                clr.w   d6
-                moveq   #0,d5
-                move.b  d4,d5
-                mulu.w  #$30,d5 
-                andi.w  #$FF,d3
-                add.w   d3,d5
-loc_DAD4:
                 
-                move.b  d6,(a2,d5.w)
-                move.w  d6,d1
-                lsr.w   #8,d1
-                move.b  d1,(a3,d5.w)
-                tst.b   1(a3,d5.w)
-                bpl.s   loc_DAEC
-                addq.w  #1,d5
-                bsr.s   sub_DB48
-                subq.w  #1,d5
-loc_DAEC:
+                ; Cycle through each move type in decreasing priority until there is a match.
+                ; Priority order roughly follows highest to lowest priority of
+                ;  healer, mage, archer, flyer, melee, aquatic.
+                cmp.b   (a0,d0.w),d1
+                bne.s   loc_CE28
+                bra.w   loc_CE30        ; Match found! Return the value in d6.
+loc_CE28:
                 
-                tst.b   -1(a3,d5.w)
-                bpl.s   loc_DAF8
-                subq.w  #1,d5
-                bsr.s   sub_DB48
-                addq.w  #1,d5
-loc_DAF8:
+                addi.w  #1,d0
+                subq.w  #1,d6
+                bne.s   loc_CE1E        ; No match found, so decrement and check again.
+loc_CE30:
                 
-                tst.b   -$30(a3,d5.w)
-                bpl.s   loc_DB08
-                subi.w  #$30,d5 
-                bsr.s   sub_DB48
-                addi.w  #$30,d5 
-loc_DB08:
-                
-                tst.b   $30(a3,d5.w)
-                bpl.s   loc_DB18
-                addi.w  #$30,d5 
-                bsr.s   sub_DB48
-                subi.w  #$30,d5 
-loc_DB18:
-                
-                move.w  d0,d1
-                andi.w  #$1F,d1
-                add.w   d1,d1
-                move.w  var_64(a6,d1.w),d5
-                btst    #$E,d5
-                bne.s   loc_DB38
-                move.b  (a3,d5.w),var_64(a6,d1.w)
-                move.b  (a2,d5.w),var_63(a6,d1.w)
-                bra.s   loc_DAD4
-loc_DB38:
-                
-                addq.w  #1,d6
-                subq.w  #1,d0
-                bmi.s   loc_DB40
-                bne.s   loc_DB18
-loc_DB40:
-                
-                unlk    a6
-                movem.l (sp)+,d0-a5
+                movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-    ; End of function MakeRangeLists
+    ; End of function CalculateHealTargetPriority
 
 
 ; =============== S U B R O U T I N E =======================================
 
-var_64 = -64
-var_63 = -63
+; Extra adjustments on target priority if the attacker is an ally 
+;  (does not apply to enemies.)
+; 
+; In: D0 = defender index
+;     D1 = defenders remaining HP after taking theoretical max damage from an attack (prior routines)
+;     D4 = attacker index (the one attacking or casting the offensive spell)
+;     D7 = who the enemy targeted last
+; 
+; Out: D6 = priority of the action (basically the total max damage output of the action plus adjustments)
 
-sub_DB48:
+
+AdjustTargetPriorityForAlly:
                 
-                cmpi.w  #$900,d5
-                bcs.s   loc_DB50
-                rts
-loc_DB50:
+                movem.l d0-d5/d7-a6,-(sp)
+                clr.w   d5
+                move.b  d0,d5
+                move.w  d4,d0
+                btst    #COMBATANT_BIT_ENEMY,d0
+                beq.s   loc_CE4A
+                bra.w   loc_CE90
+loc_CE4A:
                 
-                move.b  (a4,d5.w),d1
-                btst    #7,d1
-                beq.s   loc_DB5C
-                rts
-loc_DB5C:
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                beq.s   loc_CE56        ; if attacker is not inflicted with Muddle2
+                bra.w   loc_CE90
+loc_CE56:
                 
-                andi.w  #$1F,d1
-                move.b  (a5,d1.w),d2
-                ext.w   d2
-                cmp.w   d2,d0
-                bcc.s   loc_DB6C
-                rts
-loc_DB6C:
+                cmpi.b  #1,d7
+                bne.s   loc_CE66
+                lea     (byte_DA22).l,a4
+                bra.w   loc_CE80
+loc_CE66:
                 
-                beq.s   loc_DB8A
-                move.w  d0,d1
-                sub.w   d2,d1
-                andi.w  #$1F,d1
-                add.w   d1,d1
-                move.b  var_64(a6,d1.w),(a3,d5.w)
-                move.b  var_63(a6,d1.w),(a2,d5.w)
-                move.w  d5,var_64(a6,d1.w)
-                rts
-loc_DB8A:
+                clr.l   d0
+                move.b  d4,d0           ; d0 = attacker index
+                jsr     GetMoveType     
+                clr.l   d3
+                move.b  d1,d3
+                lea     (off_D9C2).l,a4 
+                lsl.l   #2,d3
+                movea.l (a4,d3.l),a4
+loc_CE80:
                 
-                add.w   d6,d2
-                move.b  d2,(a2,d5.w)
-                move.w  d2,d1
-                lsr.w   #8,d1
-                move.b  d1,(a3,d5.w)
-                rts
-
-    ; End of function sub_DB48
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-MakeBattleEntityCancelMoveString_0:
-                
-                movem.l d0-d6/a0-a5,-(sp)
-                bsr.w   sub_DBA8
-                movem.l (sp)+,d0-d6/a0-a5
-                rts
-
-    ; End of function MakeBattleEntityCancelMoveString_0
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_DBA8:
-                
+                clr.w   d0
+                move.b  d5,d0           ; d0 = defender index
+                bsr.w   GetClass        
                 clr.w   d2
-                move.b  d1,d2
-                mulu.w  #$30,d2 
-                andi.w  #$FF,d0
-                add.w   d0,d2
-                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                clr.b   d3
-loc_DBBC:
+                move.b  (a4,d1.w),d2
+                add.w   d2,d6           ; d6 = priority of the action
+loc_CE90:
                 
-                move.b  (a3,d2.w),d4
-                lsl.w   #8,d4
-                move.b  (a2,d2.w),d4
-                tst.w   d4
-                bne.s   loc_DBCE
-                bra.w   loc_DD0A
-loc_DBCE:
-                
-                subq.w  #1,d4
-                clr.b   d5
-                clr.b   d0
-                addq.w  #1,d2
-                move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
-                move.b  (a2,d2.w),d0
-                tst.w   d0
-                bpl.s   loc_DBE8
-                bra.w   loc_DBFA
-loc_DBE8:
-                
-                cmp.w   d4,d0
-                bmi.s   loc_DBEE
-                bne.s   loc_DBFA
-loc_DBEE:
-                
-                cmpi.w  #$900,d2
-                bcc.s   loc_DBFA
-                bset    #0,d5
-                move.w  d0,d4
-loc_DBFA:
-                
-                subq.w  #1,d2
-                clr.b   d0
-                subq.w  #1,d2
-                move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
-                move.b  (a2,d2.w),d0
-                tst.w   d0
-                bpl.s   loc_DC12
-                bra.w   loc_DC2E
-loc_DC12:
-                
-                cmp.w   d4,d0
-                bmi.s   loc_DC18
-                bne.s   loc_DC2E
-loc_DC18:
-                
-                cmpi.w  #$900,d2
-                bcc.s   loc_DC2E
-                tst.b   d5
-                bne.s   loc_DC28
-                moveq   #4,d5
-                bra.w   loc_DC2C
-loc_DC28:
-                
-                bset    #2,d5
-loc_DC2C:
-                
-                move.w  d0,d4
-loc_DC2E:
-                
-                addq.w  #1,d2
-                clr.b   d0
-                subi.w  #$30,d2 
-                move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
-                move.b  (a2,d2.w),d0
-                tst.w   d0
-                bpl.s   loc_DC48
-                bra.w   loc_DC64
-loc_DC48:
-                
-                cmp.w   d4,d0
-                bmi.s   loc_DC4E
-                bne.s   loc_DC64
-loc_DC4E:
-                
-                cmpi.w  #$900,d2
-                bcc.s   loc_DC64
-                tst.b   d5
-                bne.s   loc_DC5E
-                moveq   #2,d5
-                bra.w   loc_DC62
-loc_DC5E:
-                
-                bset    #1,d5
-loc_DC62:
-                
-                move.w  d0,d4
-loc_DC64:
-                
-                addi.w  #$30,d2 
-                clr.b   d0
-                addi.w  #$30,d2 
-                move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
-                move.b  (a2,d2.w),d0
-                tst.w   d0
-                bpl.s   loc_DC80
-                bra.w   loc_DC9C
-loc_DC80:
-                
-                cmp.w   d4,d0
-                bmi.s   loc_DC86
-                bne.s   loc_DC9C
-loc_DC86:
-                
-                cmpi.w  #$900,d2
-                bcc.s   loc_DC9C
-                tst.b   d5
-                bne.s   loc_DC96
-                moveq   #8,d5
-                bra.w   loc_DC9A
-loc_DC96:
-                
-                bset    #3,d5
-loc_DC9A:
-                
-                move.w  d0,d4
-loc_DC9C:
-                
-                subi.w  #$30,d2 
-                move.b  d3,d1
-                and.b   d5,d1
-                bne.s   loc_DCAA
-                bra.w   loc_DCB4
-loc_DCAA:
-                
-                move.b  d5,d1
-                eor.b   d3,d1
-                beq.s   loc_DCB4
-                bra.w   loc_DCB6
-loc_DCB4:
-                
-                move.b  d5,d1
-loc_DCB6:
-                
-                ror.b   #1,d1
-                bcc.s   loc_DCBE
-                bra.w   loc_DCDA
-loc_DCBE:
-                
-                ror.b   #1,d1
-                bcc.s   loc_DCC6
-                bra.w   loc_DCE6
-loc_DCC6:
-                
-                ror.b   #1,d1
-                bcc.s   loc_DCCE
-                bra.w   loc_DCF2
-loc_DCCE:
-                
-                ror.b   #1,d1
-                bcc.s   loc_DCD6
-                bra.w   loc_DCFC
-loc_DCD6:
-                
-                bra.w   loc_DD0A
-loc_DCDA:
-                
-                moveq   #0,d5
-                moveq   #1,d3
-                addi.w  #1,d2
-                bra.w   loc_DD04
-loc_DCE6:
-                
-                moveq   #1,d5
-                moveq   #2,d3
-                subi.w  #$30,d2 
-                bra.w   loc_DD04
-loc_DCF2:
-                
-                moveq   #2,d5
-                moveq   #4,d3
-                subq.w  #1,d2
-                bra.w   loc_DD04
-loc_DCFC:
-                
-                moveq   #3,d5
-                moveq   #8,d3
-                addi.w  #$30,d2 
-loc_DD04:
-                
-                move.b  d5,(a0)+
-                bra.w   loc_DBBC
-loc_DD0A:
-                
-                move.b  #$FF,(a0)
+                movem.l (sp)+,d0-d5/d7-a6
                 rts
 
-    ; End of function sub_DBA8
+    ; End of function AdjustTargetPriorityForAlly
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_DD10:
+sub_CE96:
                 
-                movem.l d0-d6/a0-a5,-(sp)
-                bsr.w   sub_DBA8
-                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
-                move.w  a0,d0
-                move.w  a1,d1
-                sub.w   d1,d0
-                bne.s   loc_DD28
-                bra.w   loc_DD5A
-loc_DD28:
+                movem.l d0/d3-a6,-(sp)
+                jsr     GetYPos
+                move.w  d1,d2
+                jsr     GetXPos
+                bsr.w   MakeTargetsList_Everybody
+                moveq   #0,d3
+                moveq   #0,d4
+                move.w  d1,d5
+                move.w  d2,d6
+                bsr.w   GetClosestAttackPosition
+                cmpi.w  #$FFFF,d1
+                bne.w   loc_CECC
+                moveq   #1,d3
+                moveq   #1,d4
+                move.w  d5,d1
+                move.w  d6,d2
+                bsr.w   GetClosestAttackPosition
+loc_CECC:
                 
-                move.w  d0,d2
-                lsr.w   #1,d2
-                bcc.s   loc_DD30
-                addq.w  #1,d2
-loc_DD30:
-                
-                subq.w  #1,d2
-                suba.w  #1,a0
-loc_DD36:
-                
-                move.b  (a0),d0
-                move.b  (a1),d1
-                eori.b  #2,d1
-                move.b  d1,(a0)
-                cmpa.w  a0,a1
-                bne.s   loc_DD48
-                bra.w   loc_DD5A
-loc_DD48:
-                
-                eori.b  #2,d0
-                move.b  d0,(a1)
-                suba.w  #1,a0
-                adda.w  #1,a1
-                dbf     d2,loc_DD36
-loc_DD5A:
-                
-                movem.l (sp)+,d0-d6/a0-a5
+                movem.l (sp)+,d0/d3-a6
                 rts
 
-    ; End of function sub_DD10
+    ; End of function sub_CE96
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Get highest usable level of spell D1, considering current MP and highest known level
+; 
+;       In: D0 = combatant index
+;           D1 = spell index
+; 
+;       Out: D1 = spell index
+
+
+GetHighestUsableSpellLevel:
+                
+                movem.l d0/d2-a6,-(sp)
+                move.w  d1,d2
+                jsr     GetCurrentMP
+                move.w  d1,d3
+                move.w  d2,d1
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
+                lsr.w   #6,d2
+                andi.w  #3,d2
+loc_CEEC:
+                
+                moveq   #0,d1
+                add.w   d2,d1
+                lsl.w   #6,d1
+                add.w   d4,d1
+                jsr     FindSpellDefAddress
+                cmp.b   SPELLDEF_OFFSET_MP_COST(a0),d3
+                bcc.w   loc_CF08
+                dbf     d2,loc_CEEC
+                moveq   #SPELL_NOTHING,d1
+loc_CF08:
+                
+                movem.l (sp)+,d0/d2-a6
+                rts
+
+    ; End of function GetHighestUsableSpellLevel
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: D0 = combatant index
+;     D1 = spell index
+; 
+; Out: D1 = spell index
+;      D2 = slot
+
+
+GetSlotContainingSpell:
+                
+                movem.l d0/d3-a6,-(sp)
+                andi.b  #SPELLENTRY_MASK_INDEX,d1
+                move.b  d1,d4
+                moveq   #0,d3
+loc_CF1A:
+                
+                move.w  d3,d1
+                jsr     GetSpellAndNumberOfSpells
+                move.w  d1,d2
+                andi.b  #SPELLENTRY_MASK_INDEX,d2
+                cmp.b   d4,d2
+                beq.w   loc_CF38
+                addq.w  #1,d3
+                cmpi.w  #4,d3
+                bcs.s   loc_CF1A
+                moveq   #SPELL_NOTHING,d1
+loc_CF38:
+                
+                move.w  d3,d2
+                movem.l (sp)+,d0/d3-a6
+                rts
+
+    ; End of function GetSlotContainingSpell
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: D0 = combatant index
+;     D1 = item index
+; 
+; Out: D1 = item index
+;      D2 = slot
+
+
+GetSlotContainingItem:
+                
+                movem.l d0/d3-a6,-(sp)
+                andi.w  #ITEMENTRY_MASK_INDEX,d1
+                move.w  d1,d4
+                moveq   #0,d3
+loc_CF4C:
+                
+                move.w  d3,d1
+                jsr     GetItemAndNumberHeld
+                move.w  d1,d2
+                andi.w  #ITEMENTRY_MASK_INDEX,d2
+                cmp.w   d4,d2
+                beq.w   loc_CF6C
+                addq.w  #1,d3
+                cmpi.w  #4,d3
+                bcs.s   loc_CF4C
+                move.w  #ITEM_NOTHING,d1
+loc_CF6C:
+                
+                move.w  d3,d2
+                movem.l (sp)+,d0/d3-a6
+                rts
+
+    ; End of function GetSlotContainingItem
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+GetNextUsableAttackSpell:
+                
+                movem.l d0/d3-a6,-(sp)
+                bsr.w   CheckMuddled2   
+                move.w  d1,d7
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   loc_CF88
+                move.w  #1,d7
+loc_CF88:
+                
+                move.w  d3,d1
+                jsr     GetSpellAndNumberOfSpells
+                move.w  d1,d4
+                andi.w  #SPELLENTRY_MASK_INDEX,d4
+                cmpi.w  #SPELL_NOTHING,d4
+                bne.s   loc_CFA0
+                bra.w   loc_CFFC
+loc_CFA0:
+                
+                tst.b   d7
+                beq.s   loc_CFEA
+                move.w  d1,d5
+                andi.b  #SPELLENTRY_MASK_INDEX,d5
+                cmpi.b  #SPELL_BLAZE,d5 ; HARDCODED spell indexes
+                bne.s   loc_CFB4
+                bra.w   loc_CFEA
+loc_CFB4:
+                
+                cmpi.b  #SPELL_FREEZE,d5
+                bne.s   loc_CFBE
+                bra.w   loc_CFEA
+loc_CFBE:
+                
+                cmpi.b  #SPELL_BOLT,d5
+                bne.s   loc_CFC8
+                bra.w   loc_CFEA
+loc_CFC8:
+                
+                cmpi.b  #SPELL_BLAST,d5
+                bne.s   loc_CFD2
+                bra.w   loc_CFEA
+loc_CFD2:
+                
+                cmpi.b  #SPELL_KATON,d5
+                bne.s   loc_CFDC
+                bra.w   loc_CFEA
+loc_CFDC:
+                
+                cmpi.b  #SPELL_RAIJIN,d5
+                bne.s   loc_CFE6
+                bra.w   loc_CFEA
+loc_CFE6:
+                
+                bra.w   loc_CFFC
+loc_CFEA:
+                
+                jsr     FindSpellDefAddress
+                move.b  SPELLDEF_OFFSET_PROPS(a0),d2
+                andi.b  #SPELLPROPS_MASK_TYPE,d2
+                beq.w   loc_D00C
+loc_CFFC:
+                
+                addq.w  #1,d3
+                cmpi.w  #COMBATANT_SPELLSLOTS,d3
+                bcs.s   loc_CF88
+                move.w  #SPELL_NOTHING,d1
+                bra.w   loc_D012
+loc_D00C:
+                
+                bsr.w   GetHighestUsableSpellLevel
+                move.w  d3,d2
+loc_D012:
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
+
+    ; End of function GetNextUsableAttackSpell
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Get next healing spell known by the combatant.
+; 
+;       In: D0 = entity index, D3 = starting spell slot
+;       Out: D1 = spell index, D2 = spell slot
+
+
+GetNextHealingSpell:
+                
+                movem.l d0/d3-a6,-(sp)
+@Start:
+                
+                move.w  d3,d1
+                jsr     GetSpellAndNumberOfSpells
+                move.w  d1,d4
+                andi.w  #SPELLENTRY_MASK_INDEX,d4
+                cmpi.w  #SPELL_NOTHING,d4
+                bne.s   @Continue
+                bra.w   @NextSlot
+@Continue:
+                
+                jsr     FindSpellDefAddress
+                move.b  SPELLDEF_OFFSET_PROPS(a0),d2
+                andi.b  #SPELLPROPS_MASK_TYPE,d2
+                cmpi.b  #SPELLPROPS_TYPE_HEAL,d2
+                beq.w   @GetSpellSlot
+@NextSlot:
+                
+                addq.w  #1,d3
+                cmpi.w  #COMBATANT_SPELLSLOTS,d3
+                bcs.s   @Start
+                
+                move.w  #SPELL_NOTHING,d1
+                bra.w   @Done
+@GetSpellSlot:
+                
+                move.w  d3,d2
+@Done:
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
+
+    ; End of function GetNextHealingSpell
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+GetNextStatusSpell:
+                
+                movem.l d0/d3-a6,-(sp)
+loc_D066:
+                
+                move.w  d3,d1
+                jsr     GetSpellAndNumberOfSpells
+                move.w  d1,d4
+                andi.w  #SPELLENTRY_MASK_INDEX,d4
+                cmpi.w  #SPELL_NOTHING,d4
+                bne.s   loc_D07E
+                bra.w   loc_D094
+loc_D07E:
+                
+                jsr     FindSpellDefAddress
+                move.b  SPELLDEF_OFFSET_PROPS(a0),d2
+                andi.b  #SPELLPROPS_MASK_TYPE,d2
+                cmpi.b  #SPELLPROPS_TYPE_STATUS,d2
+                beq.w   loc_D0A4
+loc_D094:
+                
+                addq.w  #1,d3
+                cmpi.w  #COMBATANT_SPELLSLOTS,d3
+                bcs.s   loc_D066
+                move.w  #SPELL_NOTHING,d1
+                bra.w   loc_D0A6
+loc_D0A4:
+                
+                move.w  d3,d2
+loc_D0A6:
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
+
+    ; End of function GetNextStatusSpell
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Get the next item in combatant's inventory that can be used to cast
+; BLAZE/FREEZE/BOLT/BLAST (HARDCODED spell indexes)
+; 
+;       In: D0 = combatant index, D3 = starting item slot
+;       Out: D1 = item index, D2 = item slot
+
+
+GetNextUsableAttackItem:
+                
+                movem.l d0/d3-a6,-(sp)
+                bsr.w   CheckMuddled2   
+                move.w  d1,d6
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   loc_D0C0
+                move.w  #1,d6
+loc_D0C0:
+                
+                move.w  d3,d1
+                jsr     GetItemAndNumberHeld
+                cmpi.w  #ITEM_NOTHING,d1
+                bne.s   loc_D0D2
+                bra.w   loc_D0DC
+loc_D0D2:
+                
+                jsr     IsItemUsableInBattle
+                bcs.w   loc_D0E8
+loc_D0DC:
+                
+                addq.w  #1,d3
+                cmpi.w  #COMBATANT_ITEMSLOTS,d3
+                bcs.s   loc_D0C0
+                bra.w   loc_D156
+loc_D0E8:
+                
+                btst    #ITEMENTRY_BIT_EQUIPPED,d1
+                bne.w   loc_D0F8
+                btst    #ITEMENTRY_BIT_USABLE_BY_AI,d1
+                beq.w   loc_D156
+loc_D0F8:
+                
+                jsr     GetItemDefAddress
+                move.w  d1,d7
+                clr.w   d1
+                move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
+                tst.b   d6
+                beq.s   loc_D13C
+                move.w  d1,d5
+                andi.b  #SPELLENTRY_MASK_INDEX,d5
+                cmpi.b  #SPELL_BLAZE,d5 ; HARDCODED spell indexes
+                bne.s   loc_D11A
+                bra.w   loc_D13C
+loc_D11A:
+                
+                cmpi.b  #SPELL_FREEZE,d5
+                bne.s   loc_D124
+                bra.w   loc_D13C
+loc_D124:
+                
+                cmpi.b  #SPELL_BOLT,d5
+                bne.s   loc_D12E
+                bra.w   loc_D13C
+loc_D12E:
+                
+                cmpi.b  #SPELL_BLAST,d5
+                bne.s   loc_D138
+                bra.w   loc_D13C
+loc_D138:
+                
+                bra.w   loc_D156
+loc_D13C:
+                
+                jsr     FindSpellDefAddress
+                move.b  SPELLDEF_OFFSET_PROPS(a0),d2
+                andi.b  #SPELLPROPS_MASK_TYPE,d2
+                bne.w   loc_D156
+                move.w  d3,d2
+                move.w  d7,d1
+                bra.w   loc_D15A
+loc_D156:
+                
+                move.w  #ITEM_NOTHING,d1
+loc_D15A:
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
+
+    ; End of function GetNextUsableAttackItem
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Get the next item in combatant's inventory that can be used to cast
+; a healing spell. <HARDCODED>
+; 
+; This only looks for Healing Rain as a valid healing item,
+; but is easy enough to change to allow the AI to use healing items.
+; 
+;       In: D0 = combatant index, D3 = starting item slot
+;       Out: D1 = item entry, D2 = item slot
+
+
+GetNextUsableHealingItem:
+                
+                movem.l d0/d3-a6,-(sp)
+@Start:
+                
+                move.w  d3,d1
+                jsr     GetItemAndNumberHeld
+                cmpi.w  #ITEM_NOTHING,d1
+                bne.s   @Continue
+                bra.w   @NextSlot
+@Continue:
+                
+                move.w  d1,d7
+                jsr     IsItemUsableInBattle
+                bcc.s   @NextSlot
+                cmpi.b  #ITEM_HEALING_RAIN,d7
+                beq.s   @CheckSpellType ; Right now the logic requires the item to be Healing Rain to count as a healing item.
+                btst    #ITEMENTRY_BIT_USABLE_BY_AI,d1
+                beq.w   @NextSlot
+@CheckSpellType:
+                
+                jsr     GetItemDefAddress
+                move.w  d1,d7           ; D7 = copy of item entry
+                clr.w   d1
+                move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
+                jsr     FindSpellDefAddress
+                move.b  SPELLDEF_OFFSET_PROPS(a0),d2
+                andi.b  #SPELLPROPS_MASK_TYPE,d2
+                cmpi.b  #SPELLPROPS_TYPE_HEAL,d2
+                bne.w   @NextSlot
+                move.w  d3,d2
+                move.w  d7,d1
+                bra.w   @Done
+@NextSlot:
+                
+                addq.w  #1,d3
+                cmpi.w  #COMBATANT_ITEMSLOTS,d3
+                bcs.s   @Start
+                move.w  #ITEM_NOTHING,d1
+@Done:
+                
+                movem.l (sp)+,d0/d3-a6
+                rts
+
+    ; End of function GetNextUsableHealingItem
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+GetTargetsReachableByAttack:
+                
+                movem.l d0-d5/d7-a3,-(sp)
+                lea     ((FF8804_LOADING_SPACE-$1000000)).w,a1
+                lea     ((TARGETS_REACHABLE_BY_ATTACK_LIST-$1000000)).w,a2
+                lea     ((ATTACK_MOVEMENT_TO_REACHABLE_TARGETS-$1000000)).w,a3
+                bsr.w   GetAttackRange  
+                bra.w   MakeReachableTargetsList
+
+    ; End of function GetTargetsReachableByAttack
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+GetTargetsReachableByItem:
+                
+                movem.l d0-d5/d7-a3,-(sp)
+                lea     ((TARGETS_REACHABLE_BY_ITEM_NUMBER-$1000000)).w,a1
+                lea     ((TARGETS_REACHABLE_BY_ITEM_LIST-$1000000)).w,a2
+                lea     ((ITEM_MOVEMENT_TO_REACHABLE_TARGETS-$1000000)).w,a3
+                jsr     GetItemDefAddress
+                move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
+                jsr     FindSpellDefAddress
+                move.b  SPELLDEF_OFFSET_MAX_RANGE(a0),d3
+                move.b  SPELLDEF_OFFSET_MIN_RANGE(a0),d4
+                bra.w   MakeReachableTargetsList
+
+    ; End of function GetTargetsReachableByItem
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+GetTargetsReachableBySpell:
+                
+                movem.l d0-d5/d7-a3,-(sp)
+                lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a1
+                lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a2
+                lea     ((SPELL_MOVEMENT_TO_REACHABLE_TARGETS-$1000000)).w,a3
+                jsr     FindSpellDefAddress
+                move.b  SPELLDEF_OFFSET_MAX_RANGE(a0),d3
+                move.b  SPELLDEF_OFFSET_MIN_RANGE(a0),d4
+MakeReachableTargetsList:
+                
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                beq.s   loc_D23A
+                eori.b  #COMBATANT_MASK_ENEMY_BIT,d0 ; flip enemy bit, to get the opposite type when muddled
+loc_D23A:
+                
+                btst    #COMBATANT_BIT_ENEMY,d0
+                beq.s   loc_D248
+                moveq   #COMBATANT_ALLIES_START,d0
+                move.w  #COMBATANT_ALLIES_COUNTER,d7
+                bra.s   loc_D250
+loc_D248:
+                
+                move.b  #COMBATANT_ENEMIES_START,d0
+                move.w  #COMBATANT_ENEMIES_COUNTER,d7
+loc_D250:
+                
+                move.w  #0,(a1)
+loc_D254:
+                
+                jsr     GetCurrentHP
+                tst.w   d1
+                bne.s   loc_D262
+                bra.w   loc_D28A        ; combatant is dead, so skip
+loc_D262:
+                
+                jsr     GetYPos
+                move.b  d1,d2
+                jsr     GetXPos
+                bsr.w   GetClosestAttackPosition
+                cmpi.b  #$FF,d1
+                beq.w   loc_D28A
+                addq.w  #1,(a1)
+                move.b  d0,(a2)+
+                move.b  d0,d5
+                bsr.w   GetDestinationMoveCost
+                move.b  d0,(a3)+
+                move.b  d5,d0
+loc_D28A:
+                
+                addq.b  #1,d0
+                dbf     d7,loc_D254
+                
+                movem.l (sp)+,d0-d5/d7-a3
+                rts
+
+    ; End of function GetTargetsReachableBySpell
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: D0 = combatant index
+; Out: carry clear if true
+
+
+IsCombatantAtLessThanHalfHP:
+                
+                movem.l d1-d2,-(sp)
+                jsr     GetCurrentHP
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   @Continue
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   @Continue
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetCurrentHP
+@Continue:
+                
+                add.w   d2,d2
+                cmp.w   d2,d1
+                movem.l (sp)+,d1-d2
+                rts
+
+    ; End of function IsCombatantAtLessThanHalfHP
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+sub_D2D2:
+                
+                movem.l d1-d2,-(sp)
+                jsr     GetCurrentHP
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D304
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D304
+
+    ; End of function sub_D2D2
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: D0 = defender index
+;     D1 = defenders theoretical remaining HP after attack
+; 
+; Set the carry flag if less than 2/3rds of defenders remaining HP
+;  is expected to be taken by the attack.
+
+
+sub_D2F8:
+                
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetCurrentHP
+loc_D304:
+                
+                mulu.w  #3,d2
+                cmp.w   d2,d1           ; Compare defender's current HP to 3x their theoretical remaining HP after the attack
+                movem.l (sp)+,d1-d2
+                rts
+
+    ; End of function sub_D2F8
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -723,250 +755,92 @@ loc_DD5A:
 ; unused
 
 
-AddAllToStack:
+sub_D310:
                 
-                movem.l d0-a5,-(sp)
-                movem.l (sp)+,d0-a5
-                rts
+                movem.l d1-d2,-(sp)
+                jsr     GetCurrentHP
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D342
 
-    ; End of function AddAllToStack
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_makeEnemyMoveOrder:
-                
-                movem.l d0-d6/a0-a5,-(sp)
-                bsr.w   MakeEnemyMoveOrder
-                movem.l (sp)+,d0-d6/a0-a5
-                rts
-
-    ; End of function j_makeEnemyMoveOrder
+    ; End of function sub_D310
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; create enemy move order from movecost lists
+; unused
 
 
-MakeEnemyMoveOrder:
+sub_D326:
                 
-                clr.w   d2
-                move.b  d1,d2
-                mulu.w  #$30,d2 
-                andi.w  #$FF,d0
-                add.w   d0,d2
-                move.b  (a3,d2.w),d6
-                lsl.w   #8,d6
-                move.b  (a2,d2.w),d6
-                ext.w   d3
-                sub.w   d3,d6
-                tst.w   d6
-                bpl.s   loc_DD9A
-                clr.w   d6
-loc_DD9A:
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D342
+
+    ; End of function sub_D326
+
+
+; =============== S U B R O U T I N E =======================================
+
+; unused
+
+
+sub_D336:
                 
-                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                clr.b   d3
-loc_DDA0:
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetCurrentHP
+loc_D342:
                 
-                move.b  (a3,d2.w),d4
-                lsl.w   #8,d4
-                move.b  (a2,d2.w),d4
-                cmp.w   d4,d6
-                bcs.s   loc_DDB2
-                bra.w   loc_DEF6
-loc_DDB2:
-                
-                tst.w   d4
-                bne.s   loc_DDBA
-                bra.w   loc_DEF6
-loc_DDBA:
-                
-                subq.w  #1,d4
-                clr.b   d5
-                clr.b   d0
-                addq.w  #1,d2
-                move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
-                move.b  (a2,d2.w),d0
-                tst.w   d0
-                bpl.s   loc_DDD4
-                bra.w   loc_DDE6
-loc_DDD4:
-                
-                cmp.w   d4,d0
-                bmi.s   loc_DDDA
-                bne.s   loc_DDE6
-loc_DDDA:
-                
-                cmpi.w  #$900,d2
-                bcc.s   loc_DDE6
-                bset    #0,d5
-                move.w  d0,d4
-loc_DDE6:
-                
-                subq.w  #1,d2
-                clr.b   d0
-                subq.w  #1,d2
-                move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
-                move.b  (a2,d2.w),d0
-                tst.w   d0
-                bpl.s   loc_DDFE
-                bra.w   loc_DE1A
-loc_DDFE:
-                
-                cmp.w   d4,d0
-                bmi.s   loc_DE04
-                bne.s   loc_DE1A
-loc_DE04:
-                
-                cmpi.w  #$900,d2
-                bcc.s   loc_DE1A
-                tst.b   d5
-                bne.s   loc_DE14
-                moveq   #4,d5
-                bra.w   loc_DE18
-loc_DE14:
-                
-                bset    #2,d5
-loc_DE18:
-                
-                move.w  d0,d4
-loc_DE1A:
-                
-                addq.w  #1,d2
-                clr.b   d0
-                subi.w  #$30,d2 
-loc_DE22:
-                
-                move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
-                move.b  (a2,d2.w),d0
-                tst.w   d0
-                bpl.s   loc_DE34
-                bra.w   loc_DE50
-loc_DE34:
-                
-                cmp.w   d4,d0
-                bmi.s   loc_DE3A
-                bne.s   loc_DE50
-loc_DE3A:
-                
-                cmpi.w  #$900,d2
-                bcc.s   loc_DE50
-                tst.b   d5
-                bne.s   loc_DE4A
-                moveq   #2,d5
-                bra.w   loc_DE4E
-loc_DE4A:
-                
-                bset    #1,d5
-loc_DE4E:
-                
-                move.w  d0,d4
-loc_DE50:
-                
-                addi.w  #$30,d2 
-                clr.b   d0
-                addi.w  #$30,d2 
-                move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
-                move.b  (a2,d2.w),d0
-                tst.w   d0
-                bpl.s   loc_DE6C
-                bra.w   loc_DE88
-loc_DE6C:
-                
-                cmp.w   d4,d0
-                bmi.s   loc_DE72
-                bne.s   loc_DE88
-loc_DE72:
-                
-                cmpi.w  #$900,d2
-                bcc.s   loc_DE88
-                tst.b   d5
-                bne.s   loc_DE82
-                moveq   #8,d5
-                bra.w   loc_DE86
-loc_DE82:
-                
-                bset    #3,d5
-loc_DE86:
-                
-                move.w  d0,d4
-loc_DE88:
-                
-                subi.w  #$30,d2 
-                move.b  d3,d1
-                and.b   d5,d1
-                bne.s   loc_DE96
-                bra.w   loc_DEA0
-loc_DE96:
-                
-                move.b  d5,d1
-                eor.b   d3,d1
-                beq.s   loc_DEA0
-                bra.w   loc_DEA2
-loc_DEA0:
-                
-                move.b  d5,d1
-loc_DEA2:
-                
-                ror.b   #1,d1
-                bcc.s   loc_DEAA
-                bra.w   loc_DEC6
-loc_DEAA:
-                
-                ror.b   #1,d1
-                bcc.s   loc_DEB2
-                bra.w   loc_DED2
-loc_DEB2:
-                
-                ror.b   #1,d1
-                bcc.s   loc_DEBA
-                bra.w   loc_DEDE
-loc_DEBA:
-                
-                ror.b   #1,d1
-                bcc.s   loc_DEC2
-                bra.w   loc_DEE8
-loc_DEC2:
-                
-                bra.w   loc_DEF6
-loc_DEC6:
-                
-                moveq   #0,d5
-                moveq   #1,d3
-                addi.w  #1,d2
-                bra.w   loc_DEF0
-loc_DED2:
-                
-                moveq   #1,d5
-                moveq   #2,d3
-                subi.w  #$30,d2 
-                bra.w   loc_DEF0
-loc_DEDE:
-                
-                moveq   #2,d5
-                moveq   #4,d3
-                subq.w  #1,d2
-                bra.w   loc_DEF0
-loc_DEE8:
-                
-                moveq   #3,d5
-                moveq   #8,d3
-                addi.w  #$30,d2 
-loc_DEF0:
-                
-                move.b  d5,(a0)+
-                bra.w   loc_DDA0
-loc_DEF6:
-                
-                move.b  #$FF,(a0)
+                lsl.w   #2,d2
+                cmp.w   d2,d1
+                movem.l (sp)+,d1-d2
                 rts
 
-    ; End of function MakeEnemyMoveOrder
+    ; End of function sub_D336
+
+
+; =============== S U B R O U T I N E =======================================
+
+; unused
+
+
+sub_D34C:
+                
+                movem.l d1-d2,-(sp)
+                jsr     GetCurrentHP
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D37E
+
+    ; End of function sub_D34C
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: D0 = defender index
+;     D1 = defenders theoretical remaining HP after attack
+; 
+; Set the carry flag if the defender is expected to have more than 20%
+;  of max HP remain after attack.
+
+
+sub_D362:
+                
+                movem.l d1-d2,-(sp)
+                move.w  d1,d2
+                jsr     GetMaxHP
+                bra.w   loc_D37E
+                movem.l d1-d2,-(sp)     ; unreachable code
+                move.w  d1,d2
+                jsr     GetCurrentHP
+loc_D37E:
+                
+                mulu.w  #5,d2
+                cmp.w   d2,d1           ; Compare defender's max HP to 5x their theoretical remaining HP after the attack
+                movem.l (sp)+,d1-d2
+                rts
+
+    ; End of function sub_D362
 

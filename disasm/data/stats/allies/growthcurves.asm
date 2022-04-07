@@ -37,7 +37,7 @@ tbl_StatGrowthCurves:
                 dc.w 238, 9             ;  level 28
                 dc.w 247, 9             ;  level 29
                 dc.w 256, 9             ;  level 30
-                    
+                
                 ; Late
                 dc.w 6, 6               ;  level 2
                 dc.w 13, 7              ;  level 3
@@ -68,7 +68,7 @@ tbl_StatGrowthCurves:
                 dc.w 234, 11            ;  level 28
                 dc.w 244, 10            ;  level 29
                 dc.w 256, 12            ;  level 30
-                    
+                
                 ; Early
                 dc.w 11, 11             ;  level 2
                 dc.w 22, 11             ;  level 3
@@ -99,7 +99,7 @@ tbl_StatGrowthCurves:
                 dc.w 242, 7             ;  level 28
                 dc.w 250, 8             ;  level 29
                 dc.w 256, 6             ;  level 30
-                    
+                
                 ; Middle
                 dc.w 6, 6               ;  level 2
                 dc.w 13, 7              ;  level 3
@@ -130,7 +130,7 @@ tbl_StatGrowthCurves:
                 dc.w 242, 8             ;  level 28
                 dc.w 249, 7             ;  level 29
                 dc.w 256, 7             ;  level 30
-                    
+                
                 ; Early and late
                 dc.w 12, 12             ;  level 2
                 dc.w 24, 12             ;  level 3
@@ -161,4 +161,4 @@ tbl_StatGrowthCurves:
                 dc.w 231, 11            ;  level 28
                 dc.w 243, 12            ;  level 29
                 dc.w 256, 13            ;  level 30
-                    
+                

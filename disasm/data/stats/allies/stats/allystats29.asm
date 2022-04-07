@@ -8,4 +8,4 @@ AllyStats29:    forClass  GLM
                 defGrowth 35, 112, LINEAR
                 agiGrowth 22, 50, EARLY
                 spellList 
-                    
+                

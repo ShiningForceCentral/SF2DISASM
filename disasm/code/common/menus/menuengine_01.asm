@@ -175,21 +175,21 @@ j_InitMemberListScreen:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10044:
+j_BuildMemberListScreen_NewATTandDEF:
                 
-                jmp     sub_13004(pc)
+                jmp     BuildMemberListScreen_NewATTandDEF(pc)
 
-    ; End of function sub_10044
+    ; End of function j_BuildMemberListScreen_NewATTandDEF
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10048:
+j_BuildMemberListScreen_MagicPage:
                 
-                jmp     sub_13030(pc)
+                jmp     BuildMemberListScreen_MagicPage(pc)
 
-    ; End of function sub_10048
+    ; End of function j_BuildMemberListScreen_MagicPage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -334,7 +334,7 @@ sub_10080:
 p_tbl_ItemNames:dc.l tbl_ItemNames
 p_tbl_ClassNames:
                 dc.l tbl_ClassNames
-p_tbl_ItemDefs: dc.l tbl_ItemDefs       
+p_tbl_ItemDefs: dc.l tbl_ItemDefs
 p_tbl_SpellDefs:dc.l tbl_SpellDefs      
 
 ; =============== S U B R O U T I N E =======================================
@@ -519,7 +519,7 @@ loc_100F2:
                 clr.w   d0
                 move.b  (a0)+,d0
                 beq.w   loc_10186
-                ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
+                ori.w   #VDPTILE_CLEAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 cmpi.b  #TEXT_CODE_MOVEDOWN,d0
                 beq.s   loc_1016A
                 cmpi.b  #TEXT_CODE_TOGGLEFONTCOLOR,d0
@@ -1169,7 +1169,7 @@ loc_10616:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10630
                 moveq   #1,d1
-                cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_10630
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -1178,7 +1178,7 @@ loc_10630:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1064A
                 moveq   #2,d1
-                cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_1064A
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -1194,7 +1194,7 @@ loc_1065C:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10676
                 moveq   #3,d1
-                cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_10676
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -1664,7 +1664,7 @@ loc_10AD8:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10AF2
                 moveq   #1,d1
-                cmpi.w  #$3F,((DISPLAYED_ICON_2-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_10AF2
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10B76
@@ -1673,7 +1673,7 @@ loc_10AF2:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B0C
                 moveq   #2,d1
-                cmpi.w  #$3F,((DISPLAYED_ICON_3-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_10B0C
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10B76
@@ -1689,7 +1689,7 @@ loc_10B1E:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B38
                 moveq   #3,d1
-                cmpi.w  #$3F,((DISPLAYED_ICON_4-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_10B38
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10B76
@@ -1755,7 +1755,7 @@ loc_10BBC:
                 add.w   d0,d0
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 move.w  (a0,d0.w),d0
-                bsr.w   sub_10CC6
+                bsr.w   sub_10CC6       
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_10BEC
                 bsr.w   BuildMagicMenu
@@ -1866,6 +1866,8 @@ rjt_10CBE:      dc.w (sub_10800-rjt_10CBE) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: D0 = displayed spell icon
+
 
 sub_10CC6:
                 
@@ -1882,7 +1884,7 @@ sub_10CC6:
                 move.w  d0,d4
                 lsr.w   #6,d4
                 move.w  d4,d5
-                andi.w  #$3F,d0 
+                andi.w  #SPELLENTRY_MASK_INDEX,d0
                 jsr     (WaitForVInt).w
 loc_10CF4:
                 
@@ -1960,7 +1962,7 @@ sub_10D56:
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
                 lsl.w   #6,d5
-                andi.w  #$3F,d1 
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
                 or.w    d5,d1
                 move.w  d1,((word_FFB18C-$1000000)).w
                 jsr     j_GetSpellCost
@@ -1993,8 +1995,8 @@ loc_10DCE:
     ; End of function sub_10D56
 
 spr_SpellLevelHighlight:
-                vdpSprite 316, V2|H4|9, 1504|PALETTE3|PRIORITY, 292
-                vdpSprite 316, V2|H4|16, 1504|MIRROR|PALETTE3|PRIORITY, 316
+                vdpSprite 316, V2|H4|9, 1504|CLEAR|PALETTE3|PRIORITY, 292
+                vdpSprite 316, V2|H4|16, 1504|CLEAR|MIRROR|PALETTE3|PRIORITY, 316
 
 ; =============== S U B R O U T I N E =======================================
 

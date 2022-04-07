@@ -53,7 +53,7 @@ loc_44B8E:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_44B94:
+SetUnitCursorSpeedx2:
                 
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
@@ -63,7 +63,7 @@ sub_44B94:
                 move.w  (sp)+,d0
                 rts
 
-    ; End of function sub_44B94
+    ; End of function SetUnitCursorSpeedx2
 
 
 ; =============== S U B R O U T I N E =======================================

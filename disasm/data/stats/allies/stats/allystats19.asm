@@ -8,4 +8,4 @@ AllyStats19:    forClass  PLDN
                 defGrowth 24, 74, LATE
                 agiGrowth 23, 61, LINEAR
                 spellList 
-                    
+                

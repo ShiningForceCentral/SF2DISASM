@@ -121,8 +121,8 @@ aLandEffect:    dc.b 'LAND',$B,'EFFECT',0
 
 ; related to battlefield options
 
-displayBattleMessage = -10
-messageSpeed = -8
+messageSpeed = -10
+displayBattleMessage = -8
 windowSlot = -6
 windowTilesEnd = -4
 
@@ -131,8 +131,8 @@ sub_1586E:
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a1,-(sp)
                 link    a6,#-16
-                move.b  ((MESSAGE_SPEED-$1000000)).w,displayBattleMessage(a6)
-                move.b  ((DISPLAY_BATTLE_MESSAGES-$1000000)).w,messageSpeed(a6)
+                move.b  ((MESSAGE_SPEED-$1000000)).w,messageSpeed(a6)
+                move.b  ((DISPLAY_BATTLE_MESSAGES-$1000000)).w,displayBattleMessage(a6)
                 move.w  #$1309,d0
                 move.w  #$71C,d1
                 jsr     (CreateWindow).l
@@ -195,8 +195,8 @@ loc_1593E:
                 bra.s   loc_158D6
 loc_15940:
                 
-                move.b  displayBattleMessage(a6),((MESSAGE_SPEED-$1000000)).w
-                move.b  messageSpeed(a6),((DISPLAY_BATTLE_MESSAGES-$1000000)).w
+                move.b  messageSpeed(a6),((MESSAGE_SPEED-$1000000)).w
+                move.b  displayBattleMessage(a6),((DISPLAY_BATTLE_MESSAGES-$1000000)).w
 loc_1594C:
                 
                 move.w  windowSlot(a6),d0
@@ -217,8 +217,8 @@ loc_1594C:
 
 ; =============== S U B R O U T I N E =======================================
 
-displayBattleMessage = -10
-messageSpeed = -8
+messageSpeed = -10
+displayBattleMessage = -8
 windowSlot = -6
 windowTilesEnd = -4
 
@@ -302,10 +302,10 @@ spr_BattleConfig:
                 
 ; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
                 
-                vdpSprite 292, V2|H2|9, 1480|PALETTE3|PRIORITY, 228
-                vdpSprite 324, V2|H3|10, 1472|PALETTE3|PRIORITY, 196
-                vdpSprite 324, V2|H2|11, 1474|PALETTE3|PRIORITY, 220
-                vdpSprite 324, V2|H3|16, 1474|PALETTE3|PRIORITY, 236
+                vdpSprite 292, V2|H2|9, 1480|CLEAR|PALETTE3|PRIORITY, 228
+                vdpSprite 324, V2|H3|10, 1472|CLEAR|PALETTE3|PRIORITY, 196
+                vdpSprite 324, V2|H2|11, 1474|CLEAR|PALETTE3|PRIORITY, 220
+                vdpSprite 324, V2|H3|16, 1474|CLEAR|PALETTE3|PRIORITY, 236
 
 ; =============== S U B R O U T I N E =======================================
 

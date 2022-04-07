@@ -298,6 +298,22 @@ landEffectAndMoveCost: macro
     defineBitfield.b LANDEFFECTSETTING_,\1
     endm
     
+aiCommandset: macro
+    dc.b narg
+    rept narg
+    defineShorthand.b AICOMMAND_,\1
+    shift
+    endr
+    endm
+    
+battles: macro
+    dc.b narg
+    rept narg
+    battle \1
+    shift
+    endr
+    endm
+    
 background: macro
     defineShorthand.b BATTLEBACKGROUND_,\1
     endm
@@ -478,6 +494,14 @@ promotionItems: macro
     endr
     endm
     
+blacksmithClasses: macro
+    dc.w narg
+    rept narg
+    defineShorthand.w CLASS_,\1
+    shift
+    endr
+    endm
+    
 mithrilWeaponClass: macro
     dc.w narg
     rept narg
@@ -613,12 +637,8 @@ unknownWord: macro
     dcb.b 2,0
     endm
     
-randomBattles: macro
-    dc.b narg
-    rept narg
-    defineShorthand.b BATTLE_,\1
-    shift
-    endr
+randomBattles: macro ; alias
+    battles
     endm
     
 upgradeRange: macro

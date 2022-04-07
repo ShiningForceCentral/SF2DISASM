@@ -102,7 +102,7 @@ byte_77DE:
                 txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
-                move.w  #$31,d2 
+                move.w  #49,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0
@@ -116,7 +116,7 @@ byte_77DE:
                 movem.w (sp)+,d0-d2
                 beq.s   loc_7820
                 move.w  d0,d1
-                addi.w  #$1C2,d1
+                addi.w  #BATTLE_INTRO_CUTSCENE_FLAGS_START,d1
                 jsr     j_SetFlag
 loc_7820:
                 

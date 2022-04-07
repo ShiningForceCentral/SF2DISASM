@@ -21,4 +21,4 @@ AllyStats27:    forClass  WIZ
                     53, BOLT|LV4, &
                     56, BLAZE|LV3, &
                     60, BLAZE|LV4
-                    
+                
