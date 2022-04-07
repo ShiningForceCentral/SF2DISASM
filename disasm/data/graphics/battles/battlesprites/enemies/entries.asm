@@ -5,7 +5,7 @@ pt_EnemyBattleSprites:
                 dc.l EnemyBattleSprite00
                 dc.l EnemyBattleSprite01
                 dc.l EnemyBattleSprite02
-off_130010:     dc.l EnemyBattleSprite03
+                dc.l EnemyBattleSprite03
                 dc.l EnemyBattleSprite04
                 dc.l EnemyBattleSprite05
                 dc.l EnemyBattleSprite06

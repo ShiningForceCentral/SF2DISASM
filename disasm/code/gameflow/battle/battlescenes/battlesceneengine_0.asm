@@ -2948,7 +2948,7 @@ loc_198E0:
                 
                 move.w  #$40F8,(a0)+
                 dbf     d0,loc_198E0
-                lea     BackgroundLayout(pc), a1
+                conditionalPc lea,BackgroundLayout,a1
                 move.w  #$BF,d0 
 loc_198F0:
                 
@@ -3033,7 +3033,8 @@ loc_1995C:
 
 sub_19970:
                 
-                getEnemyBattlespritePointer
+                switchRomBanks
+                movea.l (p_pt_EnemyBattleSprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((ENEMY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -3062,7 +3063,8 @@ sub_19970:
 
 sub_1999E:
                 
-                getEnemyBattlespritePointer
+                switchRomBanks
+                movea.l (p_pt_EnemyBattleSprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3081,7 +3083,8 @@ sub_1999E:
 
 sub_199BC:
                 
-                getEnemyBattlespritePointer
+                switchRomBanks
+                movea.l (p_pt_EnemyBattleSprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3103,7 +3106,8 @@ sub_199BC:
 
 LoadPaletteForBattlescene:
                 
-                getAllyBattlespritePointer
+                switchRomBanks
+                movea.l (p_pt_AllyBattleSprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((ALLY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -3135,7 +3139,8 @@ LoadPaletteForBattlescene:
 
 LoadAllyBattleSpriteFrame:
                 
-                getAllyBattlespritePointer
+                switchRomBanks
+                movea.l (p_pt_AllyBattleSprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3157,7 +3162,8 @@ LoadAllyBattleSpriteFrame:
 
 VInt_LoadAllyBattleSpriteFrame:
                 
-                getAllyBattlespritePointer
+                switchRomBanks
+                movea.l (p_pt_AllyBattleSprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3177,9 +3183,11 @@ VInt_LoadAllyBattleSpriteFrame:
 
 LoadWeaponPalette:
                 
+                switchRomBanks
                 movea.l (p_plt_BattlesceneWeaponColors).l,a0
                 lsl.w   #2,d0
                 move.l  (a0,d0.w),((PALETTE_1_BASE_0E-$1000000)).w
+                restoreRomBanks
                 rts
 
     ; End of function LoadWeaponPalette
@@ -3192,6 +3200,7 @@ LoadWeaponPalette:
 
 LoadWeaponSprite:
                 
+                switchRomBanks
                 movea.l (p_pt_WeaponSprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
@@ -3203,6 +3212,8 @@ loc_19A7C:
                 
                 clr.l   (a0)+
                 dbf     d0,loc_19A7C
+                
+                restoreRomBanks
                 rts
 
     ; End of function LoadWeaponSprite
@@ -3234,7 +3245,8 @@ LoadBattlesceneGround:
 
 sub_19AB0:
                 
-                getAllyBattlespritePointer
+                switchRomBanks
+                movea.l (p_pt_AllyBattleSprites).l,a0
                 move.w  ((ALLY_BATTLE_SPRITE-$1000000)).w,d0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
@@ -3260,9 +3272,10 @@ loc_19AD6:
 
 LoadNewAllyBattleSprite:
                 
+                switchRomBanks
                 move.w  d1,-(sp)
                 move.w  d0,-(sp)
-                getAllyBattlespritePointer
+                movea.l (p_pt_AllyBattleSprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3280,8 +3293,8 @@ LoadNewAllyBattleSprite:
                 adda.w  d0,a0
                 lea     (FF7A02_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
-                restoreRomBanks
                 move.w  (sp)+,d1
+                restoreRomBanks
                 rts
 
     ; End of function LoadNewAllyBattleSprite
@@ -3292,7 +3305,8 @@ LoadNewAllyBattleSprite:
 
 LoadEnemyBattleSpriteFrame:
                 
-                getEnemyBattlespritePointer
+                switchRomBanks
+                movea.l (p_pt_EnemyBattleSprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -3316,7 +3330,8 @@ LoadEnemyBattleSprite:
                 cmpi.w  #$FFFF,d0
                 beq.w   @Return
                 
-                getEnemyBattlespritePointer
+                switchRomBanks
+                movea.l (p_pt_EnemyBattleSprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0

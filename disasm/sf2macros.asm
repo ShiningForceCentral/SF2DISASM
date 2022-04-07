@@ -20,48 +20,41 @@ wordAlign: macro
     dcb.b *%2,$FF
     endm
     
+    
 declareSystemId: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     dc.b 'SEGA SSF        '
     else
     dc.b 'SEGA GENESIS    '
     endc
     endm
     
-declareRomEnd:    macro
-    if (EXPANDED_ROM=1)
+declareRomEnd: macro
+    if (STANDARD_BUILD&expandedRom=1)
     dc.l $3FFFFF
     else
     dc.l $1FFFFF
     endc
-    endm    
+    endm
 
-enableSram:    macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    if (*<$8000)
-    bsr.w   EnableMapperSram
-    else
+enableSram: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     jsr     (EnableMapperSram).w
-    endc
-    elseif (EXPANDED_ROM=1)
+    elseif (STANDARD_BUILD&expandedRom=1)
     move.b  #3,(SEGA_MAPPER_CTRL0).l
     endc
     endm
     
-disableSram:    macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    if (*<$8000)
-    bsr.w   DisableMapperSram
-    else
+disableSram: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     jsr     (DisableMapperSram).w
-    endc
-    elseif (EXPANDED_ROM=1)
+    elseif (STANDARD_BUILD&expandedRom=1)
     move.b  #0,(SEGA_MAPPER_CTRL0).l
     endc
-    endm    
+    endm
 
 getCurrentSaveSlot: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     move.b  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
     else
     move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
@@ -69,41 +62,36 @@ getCurrentSaveSlot: macro
     endm
     
 setCurrentSaveSlot: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     move.b  d0,((CURRENT_SAVE_SLOT-$1000000)).w
     else
     move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
     endc
     endm
     
-getEnemyBattlespritePointer: macro
-    movea.l (p_pt_EnemyBattleSprites).l,a0
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    move.b  #8,(ROM_BANK6).l
-    move.b  #9,(ROM_BANK7).l
-    endc
-    endm
     
-getAllyBattlespritePointer: macro
-    movea.l (p_pt_AllyBattleSprites).l,a0
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+switchRomBanks: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    move.b  #8,(ROM_BANK4).l
+    move.b  #9,(ROM_BANK5).l
     move.b  #10,(ROM_BANK6).l
     move.b  #11,(ROM_BANK7).l
     endc
     endm
     
 restoreRomBanks: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    move.b  #4,(ROM_BANK4).l
+    move.b  #5,(ROM_BANK5).l
     move.b  #6,(ROM_BANK6).l
     move.b  #7,(ROM_BANK7).l
     endc
     endm
     
 dmaBattlespriteFrame: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     jsr     (ApplyImmediateVramDmaOnCompressedTiles).w
-    move.b  #6,(ROM_BANK6).l
-    move.b  #7,(ROM_BANK7).l
+    restoreRomBanks
     rts
     else
     jmp     (ApplyImmediateVramDmaOnCompressedTiles).w
@@ -111,10 +99,9 @@ dmaBattlespriteFrame: macro
     endm
     
 waitForBattlespriteDma: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     jsr     (WaitForDmaQueueProcessing).w
-    move.b  #6,(ROM_BANK6).l
-    move.b  #7,(ROM_BANK7).l
+    restoreRomBanks
     rts
     else
     jmp     (WaitForDmaQueueProcessing).w
@@ -122,10 +109,9 @@ waitForBattlespriteDma: macro
     endm
     
 loadBattlesprite: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     jsr     (LoadCompressedData).w
-    move.b  #6,(ROM_BANK6).l
-    move.b  #7,(ROM_BANK7).l
+    restoreRomBanks
     rts
     else
     jmp     (LoadCompressedData).w
@@ -133,97 +119,112 @@ loadBattlesprite: macro
     endm
 
 
+conditionalMapperInit: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    bsr.w   InitMapper
+    endc
+    endm
+    
 conditionalRomExpand: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    include "layout\sf2-expanded-19-0x200000-0x600000.asm"
-    elseif (EXPANDED_ROM=1)
-    include "layout\sf2-expanded-19-0x200000-0x400000.asm"
+    if (STANDARD_BUILD&expandedRom=1)
+    include "layout\sf2-expanded-19.asm"
     endc
     endm
     
 conditionalPc: macro
-    if (EXPANDED_ROM=0)
-    \1 \2(pc),\3
-    else
+    if (STANDARD_BUILD&expandedRom=1)
     \1 \2,\3
+    else
+    \1 \2(pc),\3
     endc
     endm
     
 conditionalBsr: macro
-    if (EXPANDED_ROM=0)
-    bsr.w \1
-    else
+    if (STANDARD_BUILD&expandedRom=1)
     jsr \1
+    else
+    bsr.w \1
     endc
     endm
     
 conditionalWordAddr: macro
-    if (EXPANDED_ROM=0)
-    \1 (\2).w,\3
-    else
+    if (STANDARD_BUILD&expandedRom=1)
     \1 (\2).l,\3
+    else
+    \1 (\2).w,\3
     endc
     endm    
     
-alignIfVanillaRom: macro
-    if (EXPANDED_ROM=0)
+    
+alignIfNotExtendedSsf: macro
+    if (EXTENDED_SSF_MAPPER=0)
     align \1
     endc
     endm
     
-alignIfExpandedRom: macro
-    if (EXPANDED_ROM=1)
+alignIfExtendedSsf: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     align \1
     endc
     endm
     
-wordAlignIfExpandedRom: macro
-    if (EXPANDED_ROM=1)
-    wordAlign
+objIfExtendedSsf: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    obj \1
     endc
     endm
     
-bsrIfVanillaRom: macro
-    if (EXPANDED_ROM=0)
-    bsr.\0 \1
+objendIfExtendedSsf: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    objend
     endc
     endm
     
-equIfVanillaRom: macro
-    if (EXPANDED_ROM=0)
-\1: equ \2
-    endc
-    endm
-    
-equIfExpandedRom: macro
-    if (EXPANDED_ROM=1)
-\1: equ \2
-    endc
-    endm
     
 includeIfVanillaRom: macro
-    if (EXPANDED_ROM=0)
+    if (STANDARD_BUILD=0)
+    include \1
+    mexit
+    endc
+    if (expandedRom=0)
     include \1
     endc
     endm
     
 incbinIfVanillaRom: macro
-    if (EXPANDED_ROM=0)
+    if (STANDARD_BUILD=0)
+    incbin \1
+    mexit
+    endc
+    if (expandedRom=0)
     incbin \1
     endc
     endm
     
 includeIfExpandedRom: macro
-    if (EXPANDED_ROM=1)
+    if (STANDARD_BUILD&expandedRom=1)
     include \1
     endc
     endm
     
 incbinIfExpandedRom: macro
-    if (EXPANDED_ROM=1)
+    if (STANDARD_BUILD&expandedRom=1)
     incbin \1
     endc
     endm
+    
+includeIfExtendedSsf: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    include \1
+    endc
+    endm
+    
+incbinIfExtendedSsf: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    incbin \1
+    endc
+    endm
+    
     
 sndCom: macro
     trap #SOUND_COMMAND

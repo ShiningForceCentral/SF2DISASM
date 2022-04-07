@@ -4,8 +4,7 @@
 ; FREE SPACE : 1315 bytes.
 
 
-                includeIfVanillaRom "data\graphics\mapsprites\entries.asm"    ; Map sprites
-                includeIfExpandedRom "data\graphics\battles\spells\entries.asm"    ; Spell Graphics
-                alignIfExpandedRom $E0000
-                includeIfExpandedRom "data\battles\terrainentries.asm"    ; Battle terrain data
+                includeIfVanillaRom "data\graphics\mapsprites\entries.asm"      ; Map sprites
+                includeIfExpandedRom "data\graphics\battles\spells\entries.asm" ; Spell Graphics
+                includeIfExpandedRom "data\battles\terrainentries.asm"          ; Battle terrain data
                 align $100000
