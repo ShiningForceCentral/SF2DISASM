@@ -16,4 +16,4 @@ AllyStats21:    forClass  SORC
                     45, ATLAS, &
                     49, NEPTUN|LV2, &
                     54, ATLAS|LV2
-                    
+                

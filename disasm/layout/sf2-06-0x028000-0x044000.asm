@@ -86,6 +86,7 @@ TextBankTreeData:
                     includeIfExpandedRom "data\graphics\battles\weapons\palettes\entries.asm"    ; WeaponPalettes
                 endif
                 includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
+                wordAlign
                 alignIfExpandedRom $43800
                 includeIfExpandedRom "data\battles\global\battlemapcoords.asm"    ; Battle map coords
                 includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"    ; Save point map coords

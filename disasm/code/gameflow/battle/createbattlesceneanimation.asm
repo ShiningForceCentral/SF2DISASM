@@ -53,7 +53,7 @@ CreateBattlesceneAnimation:
                 executeEnemyReaction #0,d2,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
 @CheckMuddled:
                 
-                cmpi.w  #BATTLEACTION_NOTHING,(a3)
+                cmpi.w  #BATTLEACTION_MUDDLE,(a3)
                 beq.w   @Skip           ; skip if action type is "muddled"
                 bscHideTextBox
                 bsr.w   GetSpellAnimation

@@ -47,6 +47,7 @@
                 includeIfVanillaRom "data\battles\global\battlemapcoords.asm"    ; Battle map coords
                 includeIfVanillaRom "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
                 includeIfVanillaRom "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
+                wordAlign
                 include "code\specialscreens\witch\witchfunctions.asm"    ; Witch functions
                 include "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
                 include "code\gameflow\start\regioncheck.asm"    ; Region check function
