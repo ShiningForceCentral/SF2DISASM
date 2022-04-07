@@ -7,6 +7,7 @@
 		include "code\specialscreens\suspend\graphics.asm"		; Suspend String Graphics
 		include "code\specialscreens\endkiss\graphics.asm"		; End Kiss Graphics
 		include "code\specialscreens\credits\gamestaff.asm"		; Game Staff		
+        wordAlign
 		include "code\specialscreens\jewelend\graphics.asm"		; Jewel End Graphics
 		align $220000
 		include "data\graphics\mapsprites\entries.asm"		; Map sprites
