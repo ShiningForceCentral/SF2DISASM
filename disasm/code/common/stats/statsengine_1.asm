@@ -65,11 +65,11 @@ j_GetXPos:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetUpperMoveType:
+j_GetMoveType:
                 
-                jmp     GetUpperMoveType(pc)
+                jmp     GetMoveType(pc) 
 
-    ; End of function j_GetUpperMoveType
+    ; End of function j_GetMoveType
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -235,33 +235,31 @@ j_GetCurrentATT:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetEnemyAISetting3233:
+j_GetAiSpecialMoveOrders:
                 
-                jmp     GetEnemyAISetting3233(pc)
+                jmp     GetAiSpecialMoveOrders(pc)
 
-    ; End of function j_GetEnemyAISetting3233
+    ; End of function j_GetAiSpecialMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetEnemyAISetting36:
+j_GetAiRegion:
                 
-                jmp     GetEnemyAISetting36(pc)
+                jmp     GetAiRegion(pc) 
 
-    ; End of function j_GetEnemyAISetting36
+    ; End of function j_GetAiRegion
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to AI control on 0x0004 ?
 
-
-j_GetCharacterWord34:
+j_GetAiActivationFlag:
                 
-                jmp     GetCharacterWord34(pc)
+                jmp     GetAiActivationFlag(pc)
 
-    ; End of function j_GetCharacterWord34
+    ; End of function j_GetAiActivationFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -547,31 +545,31 @@ j_SetCurrentATT:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetKills:
+j_SetAiSpecialMoveOrders:
                 
-                jmp     SetKills(pc)    
+                jmp     SetAiSpecialMoveOrders(pc)
 
-    ; End of function j_SetKills
+    ; End of function j_SetAiSpecialMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetDefeats:
+j_SetAiRegion:
                 
-                jmp     SetDefeats(pc)  
+                jmp     SetAiRegion(pc)
 
-    ; End of function j_SetDefeats
+    ; End of function j_SetAiRegion
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetCharacterWord34:
+j_SetAiActivationFlag:
                 
-                jmp     SetCharacterWord34(pc)
+                jmp     SetAiActivationFlag(pc)
 
-    ; End of function j_SetCharacterWord34
+    ; End of function j_SetAiActivationFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1407,61 +1405,61 @@ j_CreateTargetGrid:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MakeTargetList:
+j_MakeTargetsList:
                 
-                jmp     MakeTargetList(pc)
+                jmp     MakeTargetsList(pc)
 
-    ; End of function j_MakeTargetList
+    ; End of function j_MakeTargetsList
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MakeTargetListAllies:
+j_MakeTargetsList_Allies:
                 
-                jmp     MakeTargetListAllies(pc)
+                jmp     MakeTargetsList_Allies(pc)
 
-    ; End of function j_MakeTargetListAllies
+    ; End of function j_MakeTargetsList_Allies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MakeTargetListEnemies:
+j_MakeTargetsList_Enemies:
                 
-                jmp     MakeTargetListEnemies(pc)
+                jmp     MakeTargetsList_Enemies(pc)
 
-    ; End of function j_MakeTargetListEnemies
+    ; End of function j_MakeTargetsList_Enemies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MakeTargetListEverybody:
+j_MakeTargetsList_Everybody:
                 
-                jmp     MakeTargetListEverybody(pc)
+                jmp     MakeTargetsList_Everybody(pc)
 
-    ; End of function j_MakeTargetListEverybody
+    ; End of function j_MakeTargetsList_Everybody
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateTargetListAllies:
+j_UpdateTargetsList_Allies:
                 
-                jmp     UpdateTargetListAllies(pc)
+                jmp     UpdateTargetsList_Allies(pc)
 
-    ; End of function j_UpdateTargetListAllies
+    ; End of function j_UpdateTargetsList_Allies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateTargetListEnemies:
+j_UpdateTargetsList_Enemies:
                 
-                jmp     UpdateTargetListEnemies(pc)
+                jmp     UpdateTargetsList_Enemies(pc)
 
-    ; End of function j_UpdateTargetListEnemies
+    ; End of function j_UpdateTargetsList_Enemies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1687,11 +1685,11 @@ j_AddAllToStack:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_82A0:
+j_ExecuteAiControl:
                 
-                jmp     sub_DEFC(pc)    
+                jmp     ExecuteAiControl(pc)
 
-    ; End of function sub_82A0
+    ; End of function j_ExecuteAiControl
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1747,11 +1745,11 @@ j_SetTerrain:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ClearEnemyMoveInfo:
+j_ClearAiMoveInfo:
                 
-                jmp     ClearEnemyMoveInfo(pc)
+                jmp     ClearAiMoveInfo(pc)
 
-    ; End of function j_ClearEnemyMoveInfo
+    ; End of function j_ClearAiMoveInfo
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2027,11 +2025,7 @@ GetBaseResistance:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_RESIST_BASE1,d7
-loc_83EC:
-                
                 bsr.w   GetCombatantWord
-loc_83F0:
-                
                 movem.l (sp)+,d7-a0
                 rts
 
@@ -2140,44 +2134,49 @@ GetCurrentEXP:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's upper move type, shifted into lower nibble position -> D1
+; Get combatant D0's move type, shifted into lower nibble position -> D1
 
 
-GetUpperMoveType:
+GetMoveType:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MOVETYPE,d7
+                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
                 bsr.w   GetCombatantByte
-                lsr.w   #MOVETYPE_NIBBLE_SHIFTCOUNT,d1
-                andi.w  #MOVETYPE_MASK_LOWERNIBBLE,d1
+                lsr.w   #MOVETYPE_SHIFTCOUNT,d1
+                andi.w  #MOVETYPE_AND_AI_MASK_LOWERNIBBLE,d1
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetUpperMoveType
+    ; End of function GetMoveType
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Get combatant D0's AI commandset -> D1
 
-GetLowerMoveType:
+
+GetAiCommandset:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MOVETYPE,d7
+                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
                 bsr.w   GetCombatantByte
-                andi.w  #MOVETYPE_MASK_LOWERNIBBLE,d1
+                andi.w  #MOVETYPE_AND_AI_MASK_LOWERNIBBLE,d1
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetLowerMoveType
+    ; End of function GetAiCommandset
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Out: D1 = combatant index to follow
+;      D2 = second AI point
 
-GetEnemyAISetting3233:
+
+GetAiSpecialMoveOrders:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #$32,d7 
+                moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
                 bsr.w   GetCombatantWord
                 move.w  d1,d2
                 lsr.w   #8,d1
@@ -2186,44 +2185,44 @@ GetEnemyAISetting3233:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetEnemyAISetting3233
+    ; End of function GetAiSpecialMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; In: D0 = combatant index
 ; 
-; Out: D1 = high 4 bits
-;      D2 = low 4 bits
+; Out: D1 = AI region index
+;      D2 = unknown
 
 
-GetEnemyAISetting36:
+GetAiRegion:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #ENEMYCOMBATANT_OFFSET_AI_SETTINGS,d7
+                moveq   #COMBATANT_OFFSET_AI_REGION,d7
                 bsr.w   GetCombatantByte
                 move.w  d1,d2
-                lsr.w   #ENEMYCOMBATANT_AI_SETTINGS_SHIFTCOUNT,d1
-                andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d1
-                andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d2
+                lsr.w   #4,d1
+                andi.w  #$F,d1
+                andi.w  #$F,d2
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetEnemyAISetting36
+    ; End of function GetAiRegion
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCharacterWord34:
+GetAiActivationFlag:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_34,d7
+                moveq   #COMBATANT_OFFSET_AI_ACTIVATION_FLAG,d7
                 bsr.w   GetCombatantWord
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetCharacterWord34
+    ; End of function GetAiActivationFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2243,7 +2242,7 @@ GetEnemyIndex:
 @Continue:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #ENEMYCOMBATANT_OFFSET_INDEX,d7
+                moveq   #COMBATANT_OFFSET_ENEMY_INDEX,d7
                 bsr.w   GetCombatantByte
                 movem.l (sp)+,d7-a0
                 rts
@@ -2257,7 +2256,7 @@ GetEnemyIndex:
 GetKills:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_KILLS,d7
+                moveq   #COMBATANT_OFFSET_ALLY_KILLS,d7
                 bsr.w   GetCombatantWord
                 movem.l (sp)+,d7-a0
                 rts
@@ -2271,7 +2270,7 @@ GetKills:
 GetDefeats:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_DEFEATS,d7
+                moveq   #COMBATANT_OFFSET_ALLY_DEFEATS,d7
                 bsr.w   GetCombatantWord
                 movem.l (sp)+,d7-a0
                 rts

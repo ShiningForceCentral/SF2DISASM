@@ -4,15 +4,16 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-var_22 = -22
+characterClass = -24
+ordersNumber = -22
 var_20 = -20
 var_18 = -18
-var_16 = -16
+currentOrder = -16
 var_14 = -14
-var_12 = -12
-var_10 = -10
+itemSlot = -12
+currentItem = -10
 var_8 = -8
-var_6 = -6
+selectedMember = -6
 var_4 = -4
 
 BlacksmithActions:
@@ -29,7 +30,7 @@ byte_21A50:
                 jsr     j_HidePortraitWindow
                 clr.w   var_18(a6)
                 clr.w   var_14(a6)
-                clr.w   var_16(a6)
+                clr.w   currentOrder(a6)
                 clr.w   var_20(a6)
                 bsr.w   sub_21A92
                 moveq   #0,d1
@@ -50,15 +51,16 @@ byte_21A7C:
 
 ; =============== S U B R O U T I N E =======================================
 
-var_22 = -22
+characterClass = -24
+ordersNumber = -22
 var_20 = -20
 var_18 = -18
-var_16 = -16
+currentOrder = -16
 var_14 = -14
-var_12 = -12
-var_10 = -10
+itemSlot = -12
+currentItem = -10
 var_8 = -8
-var_6 = -6
+selectedMember = -6
 var_4 = -4
 
 sub_21A92:
@@ -69,24 +71,27 @@ sub_21A92:
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.b  #1,d7
-loc_21AAC:
+@CopyForceMembersList_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_21AAC
+                dbf     d7,@CopyForceMembersList_Loop
+                
                 bsr.w   sub_21E48
                 cmpi.w  #1,var_20(a6)
                 bne.w   loc_21AE8
-                move.w  #4,d7
+                
+                ; Check current mithril weapons list
+                move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
                 subq.w  #1,d7
                 lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
 loc_21ACA:
                 
-                move.w  (a0)+,var_10(a6)
-                cmpi.w  #0,var_10(a6)
+                move.w  (a0)+,currentItem(a6)
+                cmpi.w  #0,currentItem(a6)
                 beq.s   loc_21AE4
-                move.w  d7,var_22(a6)
-                addi.w  #1,var_22(a6)
-                bsr.w   sub_21B42
+                move.w  d7,ordersNumber(a6)
+                addi.w  #1,ordersNumber(a6)
+                bsr.w   BlacksmithAction_FulfillOrder
 loc_21AE4:
                 
                 dbf     d7,loc_21ACA
@@ -96,7 +101,7 @@ loc_21AE8:
                 beq.w   loc_21B0E
                 move.w  var_18(a6),d0
                 add.w   var_14(a6),d0
-                sub.w   var_16(a6),d0
+                sub.w   currentOrder(a6),d0
                 cmpi.w  #4,d0
                 beq.w   return_21B40
                 txt     196             ; "{CLEAR}Anything else?"
@@ -108,7 +113,7 @@ loc_21B0E:
                 txt     206             ; "Oops...{N}I needs some more time.{W1}"
                 move.w  var_18(a6),d0
                 add.w   var_14(a6),d0
-                sub.w   var_16(a6),d0
+                sub.w   currentOrder(a6),d0
                 cmpi.w  #4,d0
                 beq.w   return_21B40
                 txt     196             ; "{CLEAR}Anything else?"
@@ -118,7 +123,7 @@ byte_21B38:
                 txt     195             ; "We can create a great and{N}special weapon for you if you{N}have some special material.{W1}"
 loc_21B3C:
                 
-                bsr.w   loc_21CDA
+                bsr.w   BlacksmithAction_PlaceOrder
 return_21B40:
                 
                 rts
@@ -128,42 +133,43 @@ return_21B40:
 
 ; =============== S U B R O U T I N E =======================================
 
-var_22 = -22
+characterClass = -24
+ordersNumber = -22
 var_20 = -20
 var_18 = -18
-var_16 = -16
+currentOrder = -16
 var_14 = -14
-var_12 = -12
-var_10 = -10
+itemSlot = -12
+currentItem = -10
 var_8 = -8
-var_6 = -6
+selectedMember = -6
 var_4 = -4
 
-sub_21B42:
+BlacksmithAction_FulfillOrder:
                 
                 movem.l d0-a1,-(sp)
-                move.w  var_10(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  currentItem(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     207             ; "{CLEAR}I've been waiting!{N}This {ITEM} is for{N}you.  Isn't it great?!{W1}"
                 txt     166             ; "Who gets it?{W2}"
                 clsTxt
 byte_21B58:
                 
                 clsTxt
-                move.w  var_10(a6),((SELECTED_ITEM_INDEX-$1000000)).w
+                move.w  currentItem(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_21B7C
                 txt     197             ; "{CLEAR}What a pity!{W2}"
                 bra.w   loc_21CD4
 loc_21B7C:
                 
-                move.w  d0,var_6(a6)
+                move.w  d0,selectedMember(a6)
                 moveq   #0,d1
                 jsr     j_GetItemAndNumberHeld
-                cmpi.w  #4,d2
+                cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 bcs.s   loc_21BAC
-                move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  selectedMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     208             ; "{NAME}'s hands are are{N}full.  May I pass it to{N}somebody else?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
@@ -172,45 +178,45 @@ loc_21B7C:
                 bra.w   loc_21CD4
 loc_21BAC:
                 
-                move.w  var_10(a6),d1
+                move.w  currentItem(a6),d1
                 jsr     j_GetEquipmentType
-                cmpi.w  #0,d2
+                cmpi.w  #EQUIPMENTTYPE_NONE,d2
                 beq.s   loc_21BE4
-                move.w  var_10(a6),d1
-                move.w  var_6(a6),d0
+                move.w  currentItem(a6),d1
+                move.w  selectedMember(a6),d0
                 jsr     j_IsWeaponOrRingEquippable
                 bcs.s   loc_21BE4
-                move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  selectedMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
                 bne.w   byte_21B58
 loc_21BE4:
                 
-                move.w  var_6(a6),d0
-                move.w  var_10(a6),d1
+                move.w  selectedMember(a6),d0
+                move.w  currentItem(a6),d1
                 jsr     j_AddItem
-                move.w  #4,d6
-                sub.w   var_22(a6),d6
+                move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d6
+                sub.w   ordersNumber(a6),d6
                 lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a1
                 lsl.w   #1,d6
                 adda.w  d6,a1
                 move.w  (a1),d2
                 move.w  #0,(a1)
-                addi.w  #1,var_16(a6)
-                move.w  var_10(a6),d1
-                move.w  var_6(a6),d0
+                addi.w  #1,currentOrder(a6)
+                move.w  currentItem(a6),d1
+                move.w  selectedMember(a6),d0
                 jsr     j_IsWeaponOrRingEquippable
                 bcc.w   byte_21CD0      
                 txt     173             ; "{CLEAR}Equip it now?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
                 bne.w   byte_21CD0      
-                move.w  var_10(a6),d1
+                move.w  currentItem(a6),d1
                 jsr     j_GetEquipmentType
-                cmpi.w  #1,d2
+                cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
                 bne.s   loc_21C6E
-                move.w  var_6(a6),d0
+                move.w  selectedMember(a6),d0
                 jsr     j_GetEquippedWeapon
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_21C9A
@@ -218,12 +224,12 @@ loc_21BE4:
                 jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_21C9A
-                move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  selectedMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_21CD0      
 loc_21C6E:
                 
-                move.w  var_6(a6),d0
+                move.w  selectedMember(a6),d0
                 jsr     j_GetEquippedRing
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_21C9A
@@ -231,7 +237,7 @@ loc_21C6E:
                 jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_21C9A
-                move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  selectedMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_21CD0      
 loc_21C9A:
@@ -245,7 +251,7 @@ loc_21C9A:
                 bne.s   byte_21CC8      
                 sndCom  MUSIC_CURSED_ITEM
                 bsr.w   WaitForMusicResumeAndPlayerInput_Blacksmith
-                move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  selectedMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     175             ; "Gee, {NAME} gets{N}cursed.{W2}"
                 bra.w   loc_21CD4
 byte_21CC8:
@@ -259,7 +265,25 @@ loc_21CD4:
                 
                 movem.l (sp)+,d0-a1
                 rts
-loc_21CDA:
+
+    ; End of function BlacksmithAction_FulfillOrder
+
+
+; =============== S U B R O U T I N E =======================================
+
+characterClass = -24
+ordersNumber = -22
+var_20 = -20
+var_18 = -18
+currentOrder = -16
+var_14 = -14
+itemSlot = -12
+currentItem = -10
+var_8 = -8
+selectedMember = -6
+var_4 = -4
+
+BlacksmithAction_PlaceOrder:
                 
                 movem.l d0-d2,-(sp)
 byte_21CDE:
@@ -268,13 +292,13 @@ byte_21CDE:
                 clsTxt
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_21E30
-                move.w  d0,var_6(a6)
-                move.w  d1,var_12(a6)
-                move.w  d2,var_10(a6)
-                cmpi.w  #$7B,d2 
+                move.w  d0,selectedMember(a6)
+                move.w  d1,itemSlot(a6)
+                move.w  d2,currentItem(a6)
+                cmpi.w  #ITEM_MITHRIL,d2
                 beq.w   byte_21D1A      
                 txt     200             ; "Sorry, I've never worked{N}with that before....{W1}"
                 bra.s   byte_21CDE      
@@ -284,20 +308,20 @@ byte_21D1A:
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_21CDE      
                 move.w  d0,var_8(a6)
                 jsr     j_GetClass
-                move.w  d1,-$18(a6)
-                cmpi.w  #$C,d1
+                move.w  d1,characterClass(a6)
+                cmpi.w  #CHAR_CLASS_FIRSTPROMOTED,d1
                 bcc.w   loc_21D5C
                 move.w  var_8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     211             ; "{NAME} has to be promoted{N}first.{W1}"
                 bra.s   byte_21D1A      
 loc_21D5C:
                 
-                bsr.w   sub_21E8E
+                bsr.w   IsClassBlacksmithEligible
                 cmpi.w  #0,d0
                 beq.w   loc_21D74
                 move.w  var_8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -306,7 +330,7 @@ loc_21D5C:
 loc_21D74:
                 
                 move.w  var_8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.l  #$1388,((TEXT_NUMBER-$1000000)).w
+                move.l  #BLACKSMITH_ORDER_COST,((TEXT_NUMBER-$1000000)).w
                 txt     202             ; "For {NAME}!  It will cost{N}{#} gold coins.  OK?"
                 jsr     j_CreateGoldWindow
                 jsr     j_YesNoChoiceBox
@@ -319,26 +343,26 @@ loc_21DA6:
                 
                 jsr     j_GetGold
                 move.l  d1,var_4(a6)
-                cmpi.l  #$1388,d1
+                cmpi.l  #BLACKSMITH_ORDER_COST,d1
                 bcc.w   loc_21DC2
                 txt     203             ; "You have to bring more{N}money.{W2}"
                 bra.w   loc_21E30
 loc_21DC2:
                 
-                move.l  #$1388,d1
+                move.l  #BLACKSMITH_ORDER_COST,d1
                 jsr     j_DecreaseGold
                 addi.w  #1,var_14(a6)
-                move.w  var_6(a6),d0
-                move.w  var_12(a6),d1
+                move.w  selectedMember(a6),d0
+                move.w  itemSlot(a6),d1
                 jsr     j_DropItemBySlot
                 bsr.w   PickMithrilWeapon
-                move.w  #$50,d1 
+                move.w  #80,d1
                 jsr     j_ClearFlag
                 txt     204             ; "{CLEAR}Great!{W2}"
                 txt     205             ; "Please stop by shortly.{N}I'll surprise you!{W1}"
                 move.w  var_14(a6),d0
                 move.w  var_18(a6),d1
-                move.w  var_16(a6),d2
+                move.w  currentOrder(a6),d2
                 add.w   d1,d0
                 sub.w   d2,d0
                 cmpi.w  #4,d0
@@ -358,7 +382,7 @@ loc_21E30:
                 movem.l (sp)+,d0-d2
                 rts
 
-    ; End of function sub_21B42
+    ; End of function BlacksmithAction_PlaceOrder
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -378,20 +402,21 @@ WaitForMusicResumeAndPlayerInput_Blacksmith:
 
 ; =============== S U B R O U T I N E =======================================
 
-var_22 = -22
+characterClass = -24
+ordersNumber = -22
 var_20 = -20
 var_18 = -18
-var_16 = -16
+currentOrder = -16
 var_14 = -14
-var_12 = -12
-var_10 = -10
+itemSlot = -12
+currentItem = -10
 var_8 = -8
-var_6 = -6
+selectedMember = -6
 var_4 = -4
 
 sub_21E48:
                 
-                move.w  #$50,d1 
+                move.w  #80,d1
                 jsr     j_CheckFlag
                 beq.w   loc_21E5C
                 move.w  #1,var_20(a6)
@@ -422,48 +447,79 @@ loc_21E88:
 
 ; =============== S U B R O U T I N E =======================================
 
+characterClass = -24
+ordersNumber = -22
+var_20 = -20
+var_18 = -18
+currentOrder = -16
+var_14 = -14
+itemSlot = -12
+currentItem = -10
+var_8 = -8
+selectedMember = -6
+var_4 = -4
 
-sub_21E8E:
+IsClassBlacksmithEligible:
                 
                 movem.l d1-d2/d7-a0,-(sp)
                 clr.w   d0
-                lea     word_21EB6(pc), a0
+                lea     tbl_BlacksmithEligibleClassesList(pc), a0
                 move.w  (a0)+,d7
                 subq.w  #1,d7
 loc_21E9C:
                 
                 move.w  (a0)+,d1
-                move.w  -$18(a6),d2
+                move.w  characterClass(a6),d2
                 cmp.w   d1,d2
                 beq.w   loc_21EB0
                 dbf     d7,loc_21E9C
+                
                 move.w  #1,d0
 loc_21EB0:
                 
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-    ; End of function sub_21E8E
+    ; End of function IsClassBlacksmithEligible
 
-word_21EB6:     dc.w $F
-                dc.w $C
-                dc.w $D
-                dc.w $E
-                dc.w $F
-                dc.w $10
-                dc.w $11
-                dc.w $12
-                dc.w $13
-                dc.w $14
-                dc.w $15
-                dc.w $16
-                dc.w $17
-                dc.w $19
-                dc.w $1B
-                dc.w $1F
+tbl_BlacksmithEligibleClassesList:
+                
+; List of word-sized class indexes prefixed with length.
+;
+; Syntax        blacksmithClasses [CLASS_]enum,..[CLASS_]enum
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+                
+                blacksmithClasses HERO, &
+                    PLDN, &
+                    PGNT, &
+                    GLDT, &
+                    BRN, &
+                    WIZ, &
+                    SORC, &
+                    VICR, &
+                    MMNK, &
+                    SNIP, &
+                    BRGN, &
+                    BDBT, &
+                    BWNT, &
+                    NINJ, &
+                    RDBN
+                
 
 ; =============== S U B R O U T I N E =======================================
 
+characterClass = -24
+ordersNumber = -22
+var_20 = -20
+var_18 = -18
+currentOrder = -16
+var_14 = -14
+itemSlot = -12
+currentItem = -10
+var_8 = -8
+selectedMember = -6
+var_4 = -4
 
 PickMithrilWeapon:
                 
@@ -478,7 +534,7 @@ PickMithrilWeapon:
 @FindCharacterClass_Loop:
                 
                 move.w  (a0)+,d1        ; D1 = weapon class
-                move.w  -$18(a6),d2     ; D2 = character class
+                move.w  characterClass(a6),d2 ; D2 = character class
                 cmp.w   d1,d2
                 beq.w   @GetWeaponsEntryAddress ; found character class belonging to weapon class
                 dbf     d6,@FindCharacterClass_Loop

@@ -112,10 +112,13 @@ COMBATANT_OFFSET_STATUSEFFECTS: equ $2C
 COMBATANT_OFFSET_X: equ $2E
 COMBATANT_OFFSET_Y: equ $2F
 COMBATANT_OFFSET_EXP: equ $30
-COMBATANT_OFFSET_MOVETYPE: equ $31
-COMBATANT_OFFSET_KILLS: equ $32
-COMBATANT_OFFSET_34: equ $34
-COMBATANT_OFFSET_DEFEATS: equ $36
+COMBATANT_OFFSET_MOVETYPE_AND_AI: equ $31
+COMBATANT_OFFSET_ALLY_KILLS: equ $32
+COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS: equ $32
+COMBATANT_OFFSET_AI_ACTIVATION_FLAG: equ $34
+COMBATANT_OFFSET_ALLY_DEFEATS: equ $36
+COMBATANT_OFFSET_AI_REGION: equ $36
+COMBATANT_OFFSET_ENEMY_INDEX: equ $37
 
 ; ---------------------------------------------------------------------------
 
@@ -125,18 +128,6 @@ COMBATANT_SPELLSLOTS_COUNTER: equ $3
 COMBATANT_ITEMSLOTS: equ $4
 COMBATANT_SPELLSLOTS: equ $4
 COMBATANT_ENTRY_SIZE: equ $38
-
-; ---------------------------------------------------------------------------
-
-; enum EnemyCombatant_Offsets
-ENEMYCOMBATANT_OFFSET_AI_SETTINGS: equ $36
-ENEMYCOMBATANT_OFFSET_INDEX: equ $37
-
-; ---------------------------------------------------------------------------
-
-; enum EnemyCombatant_AI_Settings
-ENEMYCOMBATANT_AI_SETTINGS_SHIFTCOUNT: equ $4
-ENEMYCOMBATANT_AI_SETTINGS_MASK: equ $F
 
 ; ---------------------------------------------------------------------------
 
@@ -286,8 +277,8 @@ MOVETYPE_UPPER_HEALER: equ $C0
 ; ---------------------------------------------------------------------------
 
 ; enum MoveType_Properties
-MOVETYPE_NIBBLE_SHIFTCOUNT: equ $4
-MOVETYPE_MASK_LOWERNIBBLE: equ $F
+MOVETYPE_SHIFTCOUNT: equ $4
+MOVETYPE_AND_AI_MASK_LOWERNIBBLE: equ $F
 
 ; ---------------------------------------------------------------------------
 
@@ -650,14 +641,23 @@ EQUIPEFFECTS_MAX_INDEX: equ $11
 ; ---------------------------------------------------------------------------
 
 ; enum Deals
-DEALS_ADD_AMOUNT_EVEN: equ $1
+DEALS_ADD_AMOUNT_ODD: equ $1
 DEALS_MAX_NUMBER_PER_ITEM: equ $F
+DEALS_ITEMS_LONGWORDS_COUNTER: equ $F
 DEALS_BIT_REMAINDER: equ $10
-DEALS_ADD_AMOUNT_ODD: equ $10
+DEALS_ADD_AMOUNT_EVEN: equ $10
+DEALS_ITEMS_COUNTER: equ $7F
+
+; ---------------------------------------------------------------------------
+
+; enum Blacksmith
+BLACKSMITH_MAX_ORDERS_NUMBER: equ $4
+BLACKSMITH_ORDER_COST: equ $1388
 
 ; ---------------------------------------------------------------------------
 
 ; enum Caravan
+CARAVAN_ITEM_ENTRY_SIZE: equ $1
 CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE: equ $3F
 CARAVAN_MAX_ITEMS_NUMBER: equ $40
 
@@ -793,6 +793,7 @@ ITEM_COTTON_BALLOON: equ $7D
 ITEM_CHIRRUP_SANDALS: equ $7E
 ITEM_NOTHING: equ $7F
 ITEM_EQUIPPED: equ $80
+ITEM_USABLE_BY_AI: equ $2000
 ITEM_BROKEN: equ $8000
 
 ; ---------------------------------------------------------------------------
@@ -830,8 +831,7 @@ ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT: equ $1
 ITEMENTRY_SIZE: equ $2
 ITEMENTRY_BIT_EQUIPPED: equ $7
 ITEMENTRY_UPPERBIT_BROKEN: equ $7
-ITEMENTRY_INDEX_BITSIZE: equ $7
-ITEMENTRY_BIT_ENEMYUSE: equ $D
+ITEMENTRY_BIT_USABLE_BY_AI: equ $D
 ITEMENTRY_BIT_14: equ $E
 ITEMENTRY_BIT_BROKEN: equ $F
 ITEMENTRY_MASK_INDEX: equ $7F
@@ -854,6 +854,7 @@ ITEMSELLPRICE_MULTIPLIER: equ $3
 ; ---------------------------------------------------------------------------
 
 ; enum EquipmentTypes
+EQUIPMENTTYPE_NONE: equ $0
 EQUIPMENTTYPE_WEAPON: equ $1
 EQUIPMENTTYPE_RING: equ $FFFF
 
@@ -863,11 +864,6 @@ EQUIPMENTTYPE_RING: equ $FFFF
 MITHRILWEAPONS_COUNTER: equ $3
 MITHRILWEAPONSLOTS_COUNTER: equ $3
 MITHRILWEAPONCLASSES_COUNTER: equ $7
-
-; ---------------------------------------------------------------------------
-
-; enum ShopProperties
-DEALS_ITEMS_COUNTER: equ $7F
 
 ; ---------------------------------------------------------------------------
 
@@ -1224,11 +1220,6 @@ SPELLENTRY_MASK_INDEX_AND_LV: equ $FF
 
 ; ---------------------------------------------------------------------------
 
-; enum SpellIndex_Properties
-SPELLINDEX_MAX: equ $2A
-
-; ---------------------------------------------------------------------------
-
 ; enum SpellElements
 SPELLELEMENT_WIND: equ $0
 SPELLELEMENT_LIGHTNING: equ $2
@@ -1414,34 +1405,34 @@ BATTLE_MAX_INDEX: equ $2C
 
 ; ---------------------------------------------------------------------------
 
-; enum BattleActions
+; enum Battleactions
 BATTLEACTION_ATTACK: equ $0
 BATTLEACTION_CAST_SPELL: equ $1
 BATTLEACTION_USE_ITEM: equ $2
-BATTLEACTION_3: equ $3
+BATTLEACTION_STAY: equ $3
 BATTLEACTION_BURST_ROCK: equ $4
-BATTLEACTION_NOTHING: equ $5
+BATTLEACTION_MUDDLE: equ $5
 BATTLEACTION_PRISM_LASER: equ $6
-BATTLEACTION_80: equ $80
+BATTLEACTION_128: equ $80
 
 ; ---------------------------------------------------------------------------
 
-; enum BattleAction_Offsets
+; enum Battleaction_Offsets
 BATTLEACTION_OFFSET_TYPE: equ $0
 BATTLEACTION_OFFSET_ITEM_OR_SPELL: equ $2
 BATTLEACTION_OFFSET_3: equ $3
-BATTLEACTION_OFFSET_4: equ $4
+BATTLEACTION_OFFSET_TARGET: equ $4
 BATTLEACTION_OFFSET_ITEM_SLOT: equ $6
 
 ; ---------------------------------------------------------------------------
 
-; enum BattleAction_Properties
+; enum Battleaction_Properties
 BATTLEACTION_PRISM_LASER_POWER: equ $10
 BATTLEACTION_BURST_ROCK_POWER: equ $12
 
 ; ---------------------------------------------------------------------------
 
-; enum BattleAction_AttackTypes
+; enum Battleaction_AttackTypes
 BATTLEACTION_ATTACKTYPE_FIRST: equ $0
 BATTLEACTION_ATTACKTYPE_SECOND: equ $1
 BATTLEACTION_ATTACKTYPE_COUNTER: equ $2
@@ -1464,9 +1455,32 @@ FLAG_INDEX_RAFT: equ $40
 FLAG_INDEX_FOLLOWERS_ASTRAL: equ $46
 FLAG_INDEX_DIFFICULTY1: equ $4E
 FLAG_INDEX_DIFFICULTY2: equ $4F
+FLAG_INDEX_YES_NO_PROMPT: equ $59
 FLAG_INDEX_BATTLE_CUTSCENE_GIZMOS: equ $18F
 FLAG_INDEX_BATTLE0: equ $190
 FLAG_MASK: equ $3FF
+
+; ---------------------------------------------------------------------------
+
+; enum ForceMemberFlags
+FORCEMEMBER_JOINED_FLAGS_START: equ $0
+FORCEMEMBER_ACTIVE_FLAGS_START: equ $20
+
+; ---------------------------------------------------------------------------
+
+; enum MapSetupFlags
+MAPSETUP_TEMP_FLAGS_COUNTER: equ $7F
+MAPSETUP_TEMP_FLAGS_START: equ $100
+
+; ---------------------------------------------------------------------------
+
+; enum BattleFlags
+BATTLE_REGION_FLAGS_START: equ $5A
+BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET: equ $64
+BATTLE_REGION_FLAGS_END: equ $69
+BATTLE_UNLOCKED_FLAGS_START: equ $190
+BATTLE_INTRO_CUTSCENE_FLAGS_START: equ $1C2
+BATTLE_COMPLETED_FLAGS_START: equ $1F4
 
 ; ---------------------------------------------------------------------------
 
@@ -1828,6 +1842,7 @@ TEXT_CODE_TOGGLEFONTCOLOR: equ $5C
 ; ---------------------------------------------------------------------------
 
 ; enum VdpTiles (bitfield)
+VDPTILE_CLEAR: equ $0
 VDPTILE_SPACE: equ $20
 VDPTILE_EXCLAMATION_MARK: equ $21
 VDPTILE_QUOTATION_MARK: equ $22
@@ -2045,9 +2060,9 @@ VDPTILE_SPELL_LEVEL6: equ $F5
 VDPTILE_SPELL_LEVEL7: equ $F6
 VDPTILE_SPELL_LEVEL8: equ $F7
 VDPTILE_BLANK: equ $F8
-VDPTILE_PORTRAIT_CORNER: equ $F9
-VDPTILE_PORTRAIT_H_BORDER: equ $FA
-VDPTILE_PORTRAIT_V_BORDER: equ $FB
+VDPTILE_PORTRAITCORNER: equ $F9
+VDPTILE_H_PORTRAITBORDER: equ $FA
+VDPTILE_V_PORTRAITBORDER: equ $FB
 VDPTILE_SHOP_PRICE_TAG_STRING: equ $FC
 VDPTILE_RED_DOT: equ $FD
 VDPTILE_GREEN_DOT: equ $FE
@@ -2096,6 +2111,28 @@ VDPTILE_MENU39: equ $5E6
 VDPTILE_MENU40: equ $5E7
 VDPTILE_MENU41: equ $5E8
 VDPTILE_MENU42: equ $5E9
+VDPTILE_MENU43: equ $5EA
+VDPTILE_MENU44: equ $5EB
+VDPTILE_MENU45: equ $5EC
+VDPTILE_MENU46: equ $5ED
+VDPTILE_MENU47: equ $5EE
+VDPTILE_MENU48: equ $5EF
+VDPTILE_MENU49: equ $5F0
+VDPTILE_MENU50: equ $5F1
+VDPTILE_MENU51: equ $5F2
+VDPTILE_MENU52: equ $5F3
+VDPTILE_MENU53: equ $5F4
+VDPTILE_MENU54: equ $5F5
+VDPTILE_MENU55: equ $5F6
+VDPTILE_MENU56: equ $5F7
+VDPTILE_MENU57: equ $5F8
+VDPTILE_MENU58: equ $5F9
+VDPTILE_MENU59: equ $5FA
+VDPTILE_MENU60: equ $5FB
+VDPTILE_MENU61: equ $5FC
+VDPTILE_MENU62: equ $5FD
+VDPTILE_MENU63: equ $5FE
+VDPTILE_MENU64: equ $5FF
 VDPTILE_MESSAGE_START: equ $640
 VDPTILE_ICONS_START: equ $6D0
 VDPTILE_SCREEN_BLACK_BAR: equ $77C
@@ -2749,7 +2786,9 @@ MAPSPRITE_DEFAULT: equ $0
 ; ---------------------------------------------------------------------------
 
 ; enum Mapsprites_Properties
-MAPSPRITE_SPECIALS_START: equ $F0
+MAPSPRITES_ENEMIES_START: equ $40
+MAPSPRITES_NPCS_START: equ $AA
+MAPSPRITES_SPECIALS_START: equ $F0
 
 ; ---------------------------------------------------------------------------
 
@@ -2971,12 +3010,14 @@ ENEMYITEMDROP_RANDOM_CHANCE: equ $20
 
 ; enum Terrain
 TERRAIN_MASK_TYPE: equ $F
+TERRAINS_COUNTER: equ $F
 
 ; ---------------------------------------------------------------------------
 
-; enum LandEffect
-LANDEFFECT_NIBBLE_SHIFTCOUNT: equ $4
-LANDEFFECT_MASK_LOWERNIBBLE: equ $F
+; enum LandEffectAndMoveCost
+LANDEFFECT_SHIFTCOUNT: equ $4
+LANDEFFECT_AND_MOVECOST_MASK_LOWERNIBBLE: equ $F
+MOVECOST_OBSTRUCTED: equ $F
 
 ; ---------------------------------------------------------------------------
 
@@ -3000,6 +3041,7 @@ END_GAME_TIMER: equ $2A30
 ; enum Cram
 CRAM_LONGWORDS_COUNTER: equ $1F
 CRAM_COLORS_COUNTER: equ $3F
+CRAM_SIZE: equ $80
 
 ; ---------------------------------------------------------------------------
 
@@ -3053,3 +3095,34 @@ MAPEVENT_GETINTORAFT: equ $3
 MAPEVENT_GETOUTOFCARAVAN: equ $4
 MAPEVENT_GETOUTOFRAFT: equ $5
 MAPEVENT_ZONE_EVENT: equ $6
+
+; ---------------------------------------------------------------------------
+
+; enum AiCommands
+AICOMMAND_HEAL: equ $0
+AICOMMAND_HEAL2: equ $1
+AICOMMAND_HEAL3: equ $2
+AICOMMAND_ATTACK: equ $3
+AICOMMAND_ATTACK2: equ $4
+AICOMMAND_ATTACK3: equ $5
+AICOMMAND_ATTACK4: equ $6
+AICOMMAND_DEBUFF: equ $7
+AICOMMAND_UNUSED: equ $8
+AICOMMAND_UNUSED2: equ $9
+AICOMMAND_SPECIAL_MOVE: equ $A
+AICOMMAND_MOVE: equ $B
+AICOMMAND_MOVE2: equ $C
+AICOMMAND_MOVE3: equ $D
+AICOMMAND_STAY: equ $E
+AICOMMAND_UNUSED3: equ $F
+AICOMMAND_SPECIAL_MOVE2: equ $10
+AICOMMAND_SPECIAL_MOVE3: equ $11
+AICOMMAND_SPECIAL_MOVE4: equ $12
+AICOMMAND_SPECIAL_MOVE5: equ $13
+
+; ---------------------------------------------------------------------------
+
+; enum AiCommand_Params
+AICOMMAND_PARAM_HEAL: equ $0
+AICOMMAND_PARAM_HEAL2: equ $1
+AICOMMAND_PARAM_HEAL3: equ $2

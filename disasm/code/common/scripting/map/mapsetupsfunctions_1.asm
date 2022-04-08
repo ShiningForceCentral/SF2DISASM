@@ -489,7 +489,7 @@ sub_47832:
 CheckRandomBattle:
                 
                 movem.l d1/d6-d7,-(sp)
-                move.w  #$1F4,d1        ; Battle completed flags
+                move.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 add.w   d0,d1
                 jsr     j_CheckFlag
                 bne.s   loc_4786E
@@ -520,7 +520,7 @@ loc_47896:
                 
                 tst.w   d1
                 beq.s   loc_478C0
-                move.w  #$190,d1        ; Battle unlocked base flag index
+                move.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 add.w   d0,d1
                 jsr     j_SetFlag
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w

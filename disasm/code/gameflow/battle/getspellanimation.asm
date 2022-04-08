@@ -154,7 +154,7 @@ GetSpellAnimation:
                 bra.s   @CheckMirrored
 @CheckMuddled:
                 
-                cmpi.w  #BATTLEACTION_NOTHING,(a3)
+                cmpi.w  #BATTLEACTION_MUDDLE,(a3)
                 bne.w   @CheckPrismLaser
                 moveq   #SPELLANIMATION_NONE,d4
                 bra.s   @CheckMirrored

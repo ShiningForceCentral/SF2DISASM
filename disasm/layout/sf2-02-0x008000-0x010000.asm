@@ -24,7 +24,7 @@
                 include "data\stats\allies\classes\criticalhitsettings.asm"    ; Critical hit settings
                 include "code\gameflow\battle\battleactionsengine_6.asm"    ; Battle actions engine
                 include "data\stats\items\itembreakmessages.asm"    ; Item break messages
-                include "code\gameflow\battle\battleactionsengine_7.asm"    ; Battle actions engine
+                include "code\gameflow\battle\writebattlescenecommanddropenemyitem.asm"    ; Write Battlescene Command : Drop Enemy Item function
                 include "data\battles\global\enemyitemdrops.asm"    ; Enemy item drops
                 include "data\stats\enemies\enemygold.asm"    ; Enemy gold amounts
                 include "code\gameflow\battle\battleactionsengine_8.asm"    ; Battle actions engine
@@ -32,9 +32,21 @@
                 include "data\stats\spells\spellelements.asm"    ; Spell elements table
                 wordAlign
                 include "code\gameflow\battle\battlefieldengine_2.asm"    ; Battlefield engine
-                include "data\battles\global\landeffectsettingsandmovecosts.asm"    ; Land effect settings and move costs table
+                include "code\gameflow\battle\determinehealingspelllevel.asm"    ; Determine healing spell level function
                 include "code\gameflow\battle\battlefieldengine_3.asm"    ; Battlefield engine
-                include "code\gameflow\battle\aiengine.asm"    ; AI engine
+                include "code\gameflow\battle\doescombatantrequirehealing.asm"    ; Does combatant require healing function
+                include "code\gameflow\battle\battlefieldengine_4.asm"    ; Battlefield engine
+                include "data\battles\global\landeffectsettingsandmovecosts.asm"    ; Land effect settings and move costs table
+                include "code\gameflow\battle\battlefieldengine_5.asm"    ; Battlefield engine
+                include "code\gameflow\battle\aiengine_1.asm"    ; AI engine
+                include "data\battles\aicommandsets.asm"    ; AI commands data
+                include "data\battles\swarmbattleslist.asm"    ; List of battles implementing swarm AI
+                wordAlign
+                include "data\battles\swarmbattlesparams.asm"    ; Parameters for battles implementing swarm AI
+                wordAlign
+                include "code\gameflow\battle\aiengine_2.asm"    ; AI engine
+                include "code\gameflow\battle\executeaicommandheal.asm.asm"    ; Healing AI command
+                include "code\gameflow\battle\aiengine_3.asm"    ; AI engine
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
                 include "data\stats\spells\spellnames.asm"    ; Spell names
                 include "data\stats\allies\allynames.asm"    ; Ally names

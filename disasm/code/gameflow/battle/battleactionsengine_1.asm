@@ -33,7 +33,7 @@ WriteBattlesceneScript:
                 
                 movem.l d0-a6,-(sp)
                 link    a2,#-152
-                lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a3
+                lea     ((CURRENT_BATTLEACTION-$1000000)).w,a3
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
                 lea     ((TARGETS_LIST-$1000000)).w,a5
                 lea     (FF0000_RAM_START).l,a6 ; beginning of battlescene command list
@@ -206,7 +206,7 @@ DetermineTargetsByAction:
                 cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
                 bne.s   @CheckUseItem
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                move.w  BATTLEACTION_OFFSET_4(a3),d0
+                move.w  BATTLEACTION_OFFSET_TARGET(a3),d0
                 jsr     CreateTargetGridFromSpell
                 bra.s   @Done
 @CheckUseItem:
@@ -214,7 +214,7 @@ DetermineTargetsByAction:
                 cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
                 bne.w   @CheckBurstRock
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                move.w  BATTLEACTION_OFFSET_4(a3),d0
+                move.w  BATTLEACTION_OFFSET_TARGET(a3),d0
                 jsr     CreateTargetGridFromUsedItem
                 bra.s   @Done
 @CheckBurstRock:
@@ -227,7 +227,7 @@ DetermineTargetsByAction:
                 bra.s   @Done
 @CheckNoAction:
                 
-                cmpi.w  #BATTLEACTION_NOTHING,(a3)
+                cmpi.w  #BATTLEACTION_MUDDLE,(a3)
                 bne.w   @CheckPrismLaser
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 bra.s   @Done
@@ -235,7 +235,7 @@ DetermineTargetsByAction:
                 
                 cmpi.w  #BATTLEACTION_PRISM_LASER,(a3)
                 bne.w   @Done
-                jsr     MakeTargetListEverybody
+                jsr     MakeTargetsList_Everybody
                 move.b  #$FF,((TARGETS_LIST-$1000000)).w
                 move.b  (a4),d0
                 jsr     sub_1AC05C      

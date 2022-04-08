@@ -30,7 +30,7 @@ loc_79BA:
                 
                 cmp.b   (a0),d0
                 bne.s   loc_7A24
-                move.w  #$190,d1        ; "Battle unlocked" starting flag index
+                move.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 add.w   d7,d1
                 jsr     j_CheckFlag
                 beq.s   loc_7A24
@@ -50,10 +50,10 @@ loc_79F0:
                 move.b  2(a0),((BATTLE_AREA_Y-$1000000)).w
                 move.b  3(a0),((BATTLE_AREA_WIDTH-$1000000)).w
                 move.b  4(a0),((BATTLE_AREA_HEIGHT-$1000000)).w
-                addi.w  #$64,d1 ; "Battle completed" flags
+                addi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
                 jsr     j_CheckFlag
                 beq.s   loc_7A1E
-                subi.w  #$64,d1 
+                subi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
                 jsr     j_ClearFlag
 loc_7A1E:
                 

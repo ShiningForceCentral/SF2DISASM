@@ -9,15 +9,18 @@
     include "sf2battlescenemacros.asm"
 
 align: macro
-    if (narg=1)
+    case narg
+=0  ; If no arguments given, align to word boundary.
+    dcb.b *%2,$FF
+=1  ; If given an address argument only, pad with $FF.
     dcb.b \1-(*%\1),$FF
-    else
+=?  ; If two arguments or more, pad with second argument.
     dcb.b \1-(*%\1),\2
-    endc
+    endcase
     endm
     
-wordAlign: macro
-    dcb.b *%2,$FF
+wordAlign: macro ;alias
+    align
     endm
     
 declareSramEnd: macro
@@ -193,6 +196,22 @@ spellElement: macro
     
 landEffectAndMoveCost: macro
     defineBitfield.b LANDEFFECTSETTING_,\1
+    endm
+    
+aiCommandset: macro
+    dc.b narg
+    rept narg
+    defineShorthand.b AICOMMAND_,\1
+    shift
+    endr
+    endm
+    
+battles: macro
+    dc.b narg
+    rept narg
+    battle \1
+    shift
+    endr
     endm
     
 background: macro
@@ -375,6 +394,14 @@ promotionItems: macro
     endr
     endm
     
+blacksmithClasses: macro
+    dc.w narg
+    rept narg
+    defineShorthand.w CLASS_,\1
+    shift
+    endr
+    endm
+    
 mithrilWeaponClass: macro
     dc.w narg
     rept narg
@@ -510,12 +537,8 @@ unknownWord: macro
     dcb.b 2,0
     endm
     
-randomBattles: macro
-    dc.b narg
-    rept narg
-    defineShorthand.b BATTLE_,\1
-    shift
-    endr
+randomBattles: macro ; alias
+    battles
     endm
     
 upgradeRange: macro

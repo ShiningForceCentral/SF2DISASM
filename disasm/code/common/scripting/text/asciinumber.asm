@@ -8,7 +8,7 @@
 WriteAsciiNumber:
                 
                 movem.l d5-d7/a5-a6,-(sp)
-                lea     PowersOfTen(pc), a5
+                lea     tbl_PowersOfTen(pc), a5
                 lea     ((LOADED_NUMBER-$1000000)).w,a6
                 moveq   #9,d5
 loc_14B4:
@@ -22,6 +22,7 @@ loc_14B8:
                 move.b  d6,(a6)+
                 add.l   (a5)+,d0
                 dbf     d5,loc_14B4
+                
                 lea     ((LOADED_NUMBER-$1000000)).w,a6
                 moveq   #8,d6
 loc_14CC:
@@ -37,7 +38,7 @@ loc_14DC:
 
     ; End of function WriteAsciiNumber
 
-PowersOfTen:    dc.l 1000000000
+tbl_PowersOfTen:dc.l 1000000000
                 dc.l 100000000
                 dc.l 10000000
                 dc.l 1000000

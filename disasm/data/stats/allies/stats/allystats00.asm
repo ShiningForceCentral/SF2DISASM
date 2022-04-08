@@ -32,7 +32,7 @@ AllyStats00:
                     31, BOLT|LV2, &
                     42, BOLT|LV3, &
                     51, BOLT|LV4
-                    
+                
                 forClass  HERO
                 hpGrowth  42, 102, LINEAR
                 mpGrowth  14, 23, EARLY
@@ -40,4 +40,4 @@ AllyStats00:
                 defGrowth 25, 93, LINEAR
                 agiGrowth 24, 57, EARLYANDLATE
                 useFirstSpellList
-                    
+                
