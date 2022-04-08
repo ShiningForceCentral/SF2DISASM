@@ -5,7 +5,11 @@
 
 
 p_Icons:        dc.l Icon000
-                includeIfVanillaRom "data\graphics\icons\entries.asm"       ; Icons
+                includeIfVanillaRom "data\graphics\icons\entries.asm"   ; Icons
+                includeIfExpandedRom "data\stats\items\itemdefs.asm"        ; Item definitions
+                includeIfExpandedRom "data\stats\spells\spelldefs.asm"      ; Spell definitions
+                includeIfExpandedRom "data\stats\items\itemnames.asm"       ; Item names
+                includeIfExpandedRom "data\stats\spells\spellnames.asm"     ; Spell names
                 includeIfExpandedRom "data\stats\allies\growthcurves.asm"   ; Stat growth curves
                 includeIfExpandedRom "data\stats\allies\stats\entries.asm"  ; Ally stats
                 wordAlign

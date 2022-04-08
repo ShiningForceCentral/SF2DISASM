@@ -1,14 +1,13 @@
 EXPANDED_ROM: equ 1                         ; 0 = OFF, 1 = ON. Build a 4MB ROM and manage SRAM mapping.
 EXTENDED_SSF_MAPPER: equ 0                  ; 0 = OFF, 1 = ON. Build a 6MB ROM and manage ROM and SRAM mapping.
 OPTIMIZED_ROM_LAYOUT: equ 1                 ; 0 = OFF, 1 = ON. Word align ROM sections to consolidate free space.
-AUTOMATIC_EVEN: equ 1                       ; 0 = OFF, 1 = ON. Enable Automatic Even Mode.
 OPTIMIZED_PC_RELATIVE_ADDRESSING: equ 1     ; 0 = OFF, 1 = ON. Optimize to PC relative addressing.
 OPTIMIZED_SHORT_BRANCHES: equ 1             ; 0 = OFF, 1 = ON. Optimize short branches.
 OPTIMIZED_ABSOLUTE_LONG_ADDRESSING: equ 1   ; 0 = OFF, 1 = ON. Optimize absolute long addressing.
 OPTIMIZED_ZERO_DISPLACEMENTS: equ 1         ; 0 = OFF, 1 = ON. Optimize zero displacements.
 OPTIMIZED_ADDS_TO_QUICK_FORM: equ 1         ; 0 = OFF, 1 = ON. Optimize adds to quick form.
 OPTIMIZED_SUBS_TO_QUICK_FORM: equ 1         ; 0 = OFF, 1 = ON. Optimize subtract to quick form.
-OPTIMIZED_MOVE_TO_QUICK_FORM: equ 0         ; 0 = OFF, 1 = ON. Optimize move to quick form.
+OPTIMIZED_MOVE_TO_QUICK_FORM: equ 1         ; 0 = OFF, 1 = ON. Optimize move to quick form.
 
 
     ; If either EXPANDED_ROM or EXTENDED_SSF_MAPPER are enabled, build an expanded ROM.
@@ -19,9 +18,6 @@ expandedRom = 0
     endif
     
     ; Apply optional assembler optimizations.
-    if (STANDARD_BUILD&AUTOMATIC_EVEN=1)
-    opt ae+     ; When using the word and long word forms of DC, DCB, DS and RS, enabling this option forces the program counter to the following word boundary prior to execution.
-    endif
     if (STANDARD_BUILD&OPTIMIZED_PC_RELATIVE_ADDRESSING=1)
     opt op+     ; Switches to PC relative addressing from absolute long addressing if this is permissible in the current code context.
     endif
