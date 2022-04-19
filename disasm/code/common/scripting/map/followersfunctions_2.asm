@@ -60,7 +60,7 @@ loc_443FE:
 
 sub_44404:
                 
-                cmpi.b  #2,((PLAYER_TYPE-$1000000)).w
+                cmpi.b  #PLAYERTYPE_RAFT,((PLAYER_TYPE-$1000000)).w
                 bne.s   byte_44420      
                 move.b  #$3D,((ENTITY_MAPSPRITE-$1000000)).w 
                 bsr.w   sub_4446C
@@ -72,7 +72,7 @@ byte_44420:
                 chkFlg  64              ; Raft is unlocked
                 beq.w   return_4446A
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0
+                cmp.b   ((RAFT_MAP-$1000000)).w,d0
                 bne.w   return_4446A
                 move.b  ((RAFT_X-$1000000)).w,d1
                 move.b  ((RAFT_Y-$1000000)).w,d2

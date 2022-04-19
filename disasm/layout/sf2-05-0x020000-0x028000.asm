@@ -77,6 +77,8 @@ j_SuspendGame:
                 include "data\stats\items\chestgoldamounts.asm"    ; Chest gold amounts
                 include "code\gameflow\exploration\explorationfunctions_1.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlefunctions_1.asm"    ; Battle functions
+                include "code\gameflow\battle\battleturnorderfunctions.asm"    ; Battle turn order functions
+                include "code\gameflow\battle\battlefunctions_2.asm"    ; Battle functions
                 include "code\gameflow\exploration\explorationfunctions_2.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions

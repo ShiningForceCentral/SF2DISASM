@@ -156,10 +156,10 @@ loc_CECC:
 
 ; Get highest usable level of spell D1, considering current MP and highest known level
 ; 
-;       In: D0 = combatant index
-;           D1 = spell index
+;       In: D0 = caster index
+;           D1 = highest known level spell entry
 ; 
-;       Out: D1 = spell index
+;       Out: D1 = highest usuable level spell entry
 
 
 GetHighestUsableSpellLevel:
@@ -170,20 +170,21 @@ GetHighestUsableSpellLevel:
                 move.w  d1,d3
                 move.w  d2,d1
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
-                lsr.w   #6,d2
-                andi.w  #3,d2
-loc_CEEC:
+                lsr.w   #SPELLENTRY_OFFSET_LV,d2
+                andi.w  #SPELLENTRY_LOWERMASK_LV,d2
+@Loop:
                 
                 moveq   #0,d1
                 add.w   d2,d1
-                lsl.w   #6,d1
+                lsl.w   #SPELLENTRY_OFFSET_LV,d1
                 add.w   d4,d1
                 jsr     FindSpellDefAddress
                 cmp.b   SPELLDEF_OFFSET_MP_COST(a0),d3
-                bcc.w   loc_CF08
-                dbf     d2,loc_CEEC
+                bcc.w   @Break
+                dbf     d2,@Loop
+                
                 moveq   #SPELL_NOTHING,d1
-loc_CF08:
+@Break:
                 
                 movem.l (sp)+,d0/d2-a6
                 rts
@@ -265,79 +266,85 @@ loc_CF6C:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Get next attack spell usable by the caster.
+; 
+;       In: D0 = caster index, D3 = starting spell slot
+;       Out: D1 = spell index, D2 = spell slot
+
 
 GetNextUsableAttackSpell:
                 
                 movem.l d0/d3-a6,-(sp)
                 bsr.w   CheckMuddled2   
-                move.w  d1,d7
+                move.w  d1,d7           ; remember whether caster is muddled
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_CF88
-                move.w  #1,d7
-loc_CF88:
+                bne.s   @Start
+                move.w  #1,d7           ; treat ally caster as muddled
+@Start:
                 
                 move.w  d3,d1
                 jsr     GetSpellAndNumberOfSpells
                 move.w  d1,d4
                 andi.w  #SPELLENTRY_MASK_INDEX,d4
                 cmpi.w  #SPELL_NOTHING,d4
-                bne.s   loc_CFA0
-                bra.w   loc_CFFC
-loc_CFA0:
+                bne.s   @CheckMuddled
+                bra.w   @NextSlot
+@CheckMuddled:
                 
                 tst.b   d7
-                beq.s   loc_CFEA
+                beq.s   @CheckSpellType
                 move.w  d1,d5
                 andi.b  #SPELLENTRY_MASK_INDEX,d5
                 cmpi.b  #SPELL_BLAZE,d5 ; HARDCODED spell indexes
-                bne.s   loc_CFB4
-                bra.w   loc_CFEA
-loc_CFB4:
+                bne.s   @CheckFreeze
+                bra.w   @CheckSpellType
+@CheckFreeze:
                 
                 cmpi.b  #SPELL_FREEZE,d5
-                bne.s   loc_CFBE
-                bra.w   loc_CFEA
-loc_CFBE:
+                bne.s   @CheckBolt
+                bra.w   @CheckSpellType
+@CheckBolt:
                 
                 cmpi.b  #SPELL_BOLT,d5
-                bne.s   loc_CFC8
-                bra.w   loc_CFEA
-loc_CFC8:
+                bne.s   @CheckBlast
+                bra.w   @CheckSpellType
+@CheckBlast:
                 
                 cmpi.b  #SPELL_BLAST,d5
-                bne.s   loc_CFD2
-                bra.w   loc_CFEA
-loc_CFD2:
+                bne.s   @CheckKaton
+                bra.w   @CheckSpellType
+@CheckKaton:
                 
                 cmpi.b  #SPELL_KATON,d5
-                bne.s   loc_CFDC
-                bra.w   loc_CFEA
-loc_CFDC:
+                bne.s   @CheckRaijin
+                bra.w   @CheckSpellType
+@CheckRaijin:
                 
                 cmpi.b  #SPELL_RAIJIN,d5
-                bne.s   loc_CFE6
-                bra.w   loc_CFEA
-loc_CFE6:
+                bne.s   @Goto_NextSlot
+                bra.w   @CheckSpellType
+@Goto_NextSlot:
                 
-                bra.w   loc_CFFC
-loc_CFEA:
+                bra.w   @NextSlot
+@CheckSpellType:
                 
                 jsr     FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
-                beq.w   loc_D00C
-loc_CFFC:
+                beq.w   @Continue
+@NextSlot:
                 
                 addq.w  #1,d3
                 cmpi.w  #COMBATANT_SPELLSLOTS,d3
-                bcs.s   loc_CF88
-                move.w  #SPELL_NOTHING,d1
-                bra.w   loc_D012
-loc_D00C:
+                bcs.s   @Start
+                
+                move.w  #SPELL_NOTHING,d1 ; checked all slots with no valid spell found
+                bra.w   @Done
+@Continue:
                 
                 bsr.w   GetHighestUsableSpellLevel
                 move.w  d3,d2
-loc_D012:
+@Done:
                 
                 movem.l (sp)+,d0/d3-a6
                 rts
@@ -394,7 +401,7 @@ GetNextHealingSpell:
 ; =============== S U B R O U T I N E =======================================
 
 
-GetNextStatusSpell:
+GetNextSupportSpell:
                 
                 movem.l d0/d3-a6,-(sp)
 loc_D066:
@@ -428,7 +435,7 @@ loc_D0A6:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-    ; End of function GetNextStatusSpell
+    ; End of function GetNextSupportSpell
 
 
 ; =============== S U B R O U T I N E =======================================

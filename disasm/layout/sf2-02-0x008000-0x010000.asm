@@ -45,7 +45,7 @@
                 include "data\battles\swarmbattlesparams.asm"    ; Parameters for battles implementing swarm AI
                 wordAlign
                 include "code\gameflow\battle\aiengine_2.asm"    ; AI engine
-                include "code\gameflow\battle\executeaicommandheal.asm.asm"    ; Healing AI command
+                include "code\gameflow\battle\executeaicommandheal.asm"    ; Healing AI command
                 include "code\gameflow\battle\aiengine_3.asm"    ; AI engine
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
                 include "data\stats\spells\spellnames.asm"    ; Spell names

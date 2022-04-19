@@ -83,14 +83,14 @@ CopyCaravanItems:
                 move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
                 move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 subq.w  #1,d7
-                bcs.w   loc_22946
+                bcs.w   @Skip
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
                 lea     ((GENERIC_LIST-$1000000)).w,a1
-loc_22940:
+@Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_22940
-loc_22946:
+                dbf     d7,@Loop
+@Skip:
                 
                 movem.l (sp)+,d7-a1
                 rts

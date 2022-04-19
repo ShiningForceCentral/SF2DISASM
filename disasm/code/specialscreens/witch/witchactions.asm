@@ -82,7 +82,7 @@ loc_74B4:
                 
                 move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
                 move.b  #MAP_GRANSEAL,((CURRENT_MAP-$1000000)).w
-                move.b  #MAP_GRANSEAL,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  #MAP_GRANSEAL,((EGRESS_MAP-$1000000)).w
                 bsr.w   SaveGame
                 clsTxt
                 move.b  #MAP_GRANSEAL,d0 ; HARDCODED new game starting map

@@ -55,9 +55,9 @@ WriteBattlesceneScript_InflictDamage:
                 cmpi.w  #ENEMY_BURST_ROCK,d1
                 bne.s   @ApplyDamageVariance
                 tst.w   d6
-                bne.s   @GoTo_CheckCutoff
+                bne.s   @Goto_CheckCutoff
                 moveq   #1,d6
-@GoTo_CheckCutoff:
+@Goto_CheckCutoff:
                 
                 bra.w   @CheckCutoff
 @ApplyDamageVariance:
@@ -124,11 +124,11 @@ WriteBattlesceneScript_InflictDamage:
                 tst.b   criticalHit(a2)
                 beq.s   @RegularDamageMessageIfAllyAttacker
                 move.w  #MESSAGE_BATTLE_CRITICAL_HIT,d1 ; critical hit message when actor is ally
-                bra.s   @GoTo_CutoffMessage
+                bra.s   @Goto_CutoffMessage
 @RegularDamageMessageIfAllyAttacker:
                 
                 move.w  #MESSAGE_BATTLE_DAMAGE_ALLY,d1
-@GoTo_CutoffMessage:
+@Goto_CutoffMessage:
                 
                 bra.s   @CutoffMessage
 @EnemyAttacker:
@@ -1280,7 +1280,7 @@ byte_B950:
                 beq.s   @Return
                 move.w  d1,d2
                 andi.w  #SPELLENTRY_MASK_INDEX,d2
-                lsr.w   #6,d1
+                lsr.w   #SPELLENTRY_OFFSET_LV,d1
                 bne.s   @SpellLevelIncreasedMessage
                 displayMessage #MESSAGE_BATTLE_LEARNED_THE_NEW_MAGIC_SPELL,d0,d2,#0 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -1672,7 +1672,7 @@ WriteBattlesceneScript_BreakUsedItem:
                 displayMessage d3,d1,#0,#0 ; Message, Combatant, Item or Spell, Number
                 move.b  (a4),d0
                 move.w  6(a3),d1
-                jsr     BreakItem       
+                jsr     BreakItemBySlot 
 @Skip:
                 
                 bra.w   @Done

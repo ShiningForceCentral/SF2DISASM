@@ -161,12 +161,13 @@ ReplaceSpellsWithSORCdefaults:
                 
                 move.w  member(a6),d0
                 jsr     j_GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_SPELLS_START(a0),a0
+                lea     COMBATANT_OFFSET_SPELLS(a0),a0
                 move.w  #COMBATANT_SPELLSLOTS_COUNTER,d7
 @Loop:
                 
                 move.b  #SPELL_NOTHING,(a0)+
                 dbf     d7,@Loop
+                
                 move.w  member(a6),d0
                 move.w  #SPELL_DAO,d1
                 jsr     j_LearnSpell

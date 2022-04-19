@@ -240,7 +240,7 @@ loc_1822A:
                 bsr.w   LoadWeaponPalette
 loc_1828C:
                 
-                movea.l (p_statusAnimationTiles).l,a0
+                movea.l (p_StatusAnimationTiles).l,a0
                 lea     ($F600).l,a1
                 move.w  #$270,d0
                 moveq   #2,d1
@@ -1040,7 +1040,7 @@ bsc06_switchEnemies:
                 bsr.w   GetBattleSpriteAndPalette
                 move.w  d1,d0
                 bsr.w   LoadEnemyBattleSprite
-                movea.l (p_pt_battlesceneTransitionTiles).l,a2
+                movea.l (p_pt_BattlesceneTransitionTiles).l,a2
                 movea.l (a2)+,a0
                 move.l  a2,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a1
@@ -1878,7 +1878,7 @@ loc_191AC:
                 beq.s   return_191DE
                 move.l  d0,d1
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
-                lsr.w   #6,d1
+                lsr.w   #SPELLENTRY_OFFSET_LV,d1
                 bne.s   loc_191D0
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  d0,((TEXT_NAME_INDEX_2-$1000000)).w
@@ -3196,10 +3196,10 @@ LoadWeaponSprite:
                 jsr     (LoadCompressedData).w
                 lea     (byte_FF4000).l,a0
                 move.w  #$1FF,d0
-loc_19A7C:
+@Loop:
                 
                 clr.l   (a0)+
-                dbf     d0,loc_19A7C
+                dbf     d0,@Loop
                 rts
 
     ; End of function LoadWeaponSprite

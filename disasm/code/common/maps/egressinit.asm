@@ -56,7 +56,7 @@ loc_762A:
                 bne.s   loc_762A
 loc_7638:
                 
-                move.b  1(a0),((RAFT_MAP_INDEX-$1000000)).w
+                move.b  1(a0),((RAFT_MAP-$1000000)).w
                 move.b  2(a0),((RAFT_X-$1000000)).w
                 move.b  3(a0),((RAFT_Y-$1000000)).w
 loc_764A:

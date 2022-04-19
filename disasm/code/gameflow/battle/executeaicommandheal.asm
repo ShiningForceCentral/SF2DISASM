@@ -80,10 +80,10 @@ ExecuteAiCommand_Heal:
                 cmpi.w  #SPELL_HEAL,d2  ; HARDCODED spell index
                 bne.s   @CheckAura      
                 cmpi.w  #3,d1           ; HARDCODED required MP amount
-                bge.s   @GoToCastSpell  ; if at least 3 MP is available to cast Heal (any level)
+                bge.s   @Goto_CastSpell ; if at least 3 MP is available to cast Heal (any level)
                 bra.w   @CheckHealingItem ; if 3 MP is not available
                 bra.s   @CheckAura      
-@GoToCastSpell:
+@Goto_CastSpell:
                 
                 bra.w   @CastSpell
 @CheckAura:
@@ -91,10 +91,10 @@ ExecuteAiCommand_Heal:
                 cmpi.w  #SPELL_AURA,d2  ; HARDCODED spell index
                 bne.s   @CheckHealingItem
                 cmpi.w  #7,d1           ; HARDCODED required MP amount
-                bge.s   @GoToCastSpell_0 ; if at least 7 MP is available to cast Aura (any level)
+                bge.s   @Goto_CastSpell_0 ; if at least 7 MP is available to cast Aura (any level)
                 bra.w   @CheckHealingItem ; if 7 MP is not available
                 bra.s   @CheckHealingItem
-@GoToCastSpell_0:
+@Goto_CastSpell_0:
                 
                 bra.w   @CastSpell
                                         ; if no spell healing occurred, then check for healing items
@@ -381,7 +381,7 @@ ExecuteAiCommand_Heal:
                 clr.w   d0
                 move.b  (a0,d6.w),d0
                 move.w  d0,BATTLEACTION_OFFSET_TARGET(a1)
-                bra.s   @GoToDone
+                bra.s   @Goto_Done
 @LoadUseItemData:
                 
                 move.w  #BATTLEACTION_USE_ITEM,(a1)
@@ -396,7 +396,7 @@ ExecuteAiCommand_Heal:
                 move.b  itemSlot(a6),d1
                 bsr.w   GetItemAndNumberHeld
                 move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
-@GoToDone:
+@Goto_Done:
                 
                 bra.w   @Done
 @Skip:

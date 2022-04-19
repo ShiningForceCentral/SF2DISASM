@@ -90,8 +90,7 @@ InitAllyCombatantEntry:
                 move.w  d3,COMBATANT_OFFSET_ITEM_2(a1)
                 move.b  (a0)+,d3
                 move.w  d3,COMBATANT_OFFSET_ITEM_3(a1)
-                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS_START(a1) 
-                                                        ; spell entries default to nothing
+                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1) ; spell entries default to nothing
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
                 bsr.w   InitAllyStats   
@@ -119,8 +118,8 @@ LoadAllyClassData:
                 mulu.w  #CLASSDEF_ENTRY_SIZE,d1
                 adda.w  d1,a0
                 move.b  (a0)+,COMBATANT_OFFSET_MOV_BASE(a1)
-                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE1(a1)
-                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE2(a1)
+                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE(a1)
+                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_MOVETYPE_AND_AI(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_PROWESS_BASE(a1)
                 movem.l (sp)+,d0-d1/a0-a1
@@ -182,7 +181,7 @@ InitGameSettings:
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 move.b  d0,((CURRENT_BATTLE-$1000000)).w
                 move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
-                move.b  d0,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  d0,((EGRESS_MAP-$1000000)).w
                 move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 move.b  #2,((MESSAGE_SPEED-$1000000)).w
                 move.l  #$FFFFFFFF,((FOLLOWERS_LIST-$1000000)).w

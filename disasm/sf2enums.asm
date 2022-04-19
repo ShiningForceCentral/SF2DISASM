@@ -53,6 +53,7 @@ COMBATANT_ALLIES_SPACEEND_MINUS_ONE: equ $1F
 COMBATANT_ENEMIES_NUMBER: equ $20
 COMBATANT_ALLIES_SPACEEND: equ $20
 COMBATANTS_ALL_COUNTER: equ $3D
+COMBATANT_SLOTS_NUMBER: equ $40
 COMBATANT_ALLIES_SPACEEND_AND_ENEMIES_START_DIFFERENCE: equ $60
 COMBATANT_ENEMIES_START: equ $80
 COMBATANT_ENEMIES_END: equ $9F
@@ -98,16 +99,18 @@ COMBATANT_OFFSET_AGI_BASE: equ $16
 COMBATANT_OFFSET_AGI_CURRENT: equ $17
 COMBATANT_OFFSET_MOV_BASE: equ $18
 COMBATANT_OFFSET_MOV_CURRENT: equ $19
-COMBATANT_OFFSET_RESIST_BASE1: equ $1A
-COMBATANT_OFFSET_RESIST_BASE2: equ $1B
+COMBATANT_OFFSET_RESIST_BASE: equ $1A
+COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE: equ $1B
 COMBATANT_OFFSET_RESIST_CURRENT: equ $1C
 COMBATANT_OFFSET_PROWESS_BASE: equ $1E
 COMBATANT_OFFSET_PROWESS_CURRENT: equ $1F
+COMBATANT_OFFSET_ITEMS: equ $20
 COMBATANT_OFFSET_ITEM_0: equ $20
 COMBATANT_OFFSET_ITEM_1: equ $22
 COMBATANT_OFFSET_ITEM_2: equ $24
 COMBATANT_OFFSET_ITEM_3: equ $26
-COMBATANT_OFFSET_SPELLS_START: equ $28
+COMBATANT_OFFSET_SPELLS: equ $28
+COMBATANT_OFFSET_SPELLS_END: equ $2C
 COMBATANT_OFFSET_STATUSEFFECTS: equ $2C
 COMBATANT_OFFSET_X: equ $2E
 COMBATANT_OFFSET_Y: equ $2F
@@ -273,12 +276,6 @@ MOVETYPE_UPPER_CENTAUR_ARCHER: equ $90
 MOVETYPE_UPPER_STEALTH_ARCHER: equ $A0
 MOVETYPE_UPPER_MAGE: equ $B0
 MOVETYPE_UPPER_HEALER: equ $C0
-
-; ---------------------------------------------------------------------------
-
-; enum MoveType_Properties
-MOVETYPE_SHIFTCOUNT: equ $4
-MOVETYPE_AND_AI_MASK_LOWERNIBBLE: equ $F
 
 ; ---------------------------------------------------------------------------
 
@@ -860,10 +857,12 @@ EQUIPMENTTYPE_RING: equ $FFFF
 
 ; ---------------------------------------------------------------------------
 
-; enum MithrilWeapons_Properties
-MITHRILWEAPONS_COUNTER: equ $3
-MITHRILWEAPONSLOTS_COUNTER: equ $3
-MITHRILWEAPONCLASSES_COUNTER: equ $7
+; enum MithrilWeaponsProperties
+MITHRILWEAPON_SLOT_SIZE: equ $2
+MITHRILWEAPONS_PER_CLASS_COUNTER: equ $3
+MITHRILWEAPON_SLOTS_COUNTER: equ $3
+MITHRILWEAPON_SLOTS_NUMBER: equ $4
+MITHRILWEAPON_CLASSES_COUNTER: equ $7
 
 ; ---------------------------------------------------------------------------
 
@@ -1400,8 +1399,8 @@ NOT_CURRENTLY_IN_BATTLE: equ $FF
 
 ; ---------------------------------------------------------------------------
 
-; enum Battle_Properties
-BATTLE_MAX_INDEX: equ $2C
+; enum BattlesProperties
+BATTLES_NUMBER: equ $2C
 
 ; ---------------------------------------------------------------------------
 
@@ -2958,6 +2957,22 @@ LIFE_RING_HP_RECOVERY: equ $5
 
 ; ---------------------------------------------------------------------------
 
+; enum BattleMapCoordinatesOffsets
+BATTLEMAPCOORDINATES_OFFSET_MAP: equ $0
+BATTLEMAPCOORDINATES_OFFSET_X: equ $1
+BATTLEMAPCOORDINATES_OFFSET_Y: equ $2
+BATTLEMAPCOORDINATES_OFFSET_WIDTH: equ $3
+BATTLEMAPCOORDINATES_OFFSET_HEIGHT: equ $4
+BATTLEMAPCOORDINATES_OFFSET_TRIGGER_X: equ $5
+BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y: equ $6
+
+; ---------------------------------------------------------------------------
+
+; enum BattleMapCoordinatesProperties
+BATTLEMAPCOORDINATES_ENTRY_SIZE: equ $7
+
+; ---------------------------------------------------------------------------
+
 ; enum BattleSpriteSet_Offsets
 BATTLESPRITESET_OFFSET_ALLY_ENTRIES: equ $4
 
@@ -2976,7 +2991,13 @@ BATTLESPRITESET_SUBSECTION_AI_POINTS: equ $4
 BATTLESPRITESET_COMBATANT_OFFSET_INDEX: equ $0
 BATTLESPRITESET_COMBATANT_OFFSET_STARTING_X: equ $1
 BATTLESPRITESET_COMBATANT_OFFSET_STARTING_Y: equ $2
-BATTLESPRITESET_COMBATANT_OFFSET_TRIGGER_REGION: equ $7
+BATTLESPRITESET_COMBATANT_OFFSET_AI_COMMANDSET: equ $3
+BATTLESPRITESET_COMBATANT_OFFSET_ITEMS: equ $4
+BATTLESPRITESET_COMBATANT_OFFSET_COMBATANT_TO_FOLLOW: equ $6
+BATTLESPRITESET_COMBATANT_OFFSET_AI_TRIGGER_REGION: equ $7
+BATTLESPRITESET_COMBATANT_OFFSET_MOVE_TO_POSITION: equ $8
+BATTLESPRITESET_COMBATANT_OFFSET_9: equ $9
+BATTLESPRITESET_COMBATANT_OFFSET_AI_ACTIVATION_FLAG: equ $A
 BATTLESPRITESET_COMBATANT_OFFSET_NEXT_ENTRY: equ $C
 
 ; ---------------------------------------------------------------------------
@@ -3033,6 +3054,14 @@ LANDEFFECTSETTING_OBSTRUCTED: equ $FF
 
 ; ---------------------------------------------------------------------------
 
+; enum TurnOrderProperties
+TURN_ORDER_ENTRY_SIZE: equ $2
+TURN_ORDER_ENTRIES_MINUS_ONE_COUNTER: equ $3E
+TURN_ORDER_ENTRIES_COUNTER: equ $3F
+TURN_ORDER_ENTRIES_NUMBER: equ $40
+
+; ---------------------------------------------------------------------------
+
 ; enum SpecialScreens
 END_GAME_TIMER: equ $2A30
 
@@ -3053,6 +3082,13 @@ SRAM_COUNTER: equ $7FFF
     else
 SRAM_COUNTER: equ $1FFF
     endif
+
+SAVE_FLAGS_SIZE: equ $2
+SAVE_CHECKSUM_SIZE: equ $2
+SRAM_STRING_CHECK_COUNTER: equ $10
+SRAM_STRING_WRITE_COUNTER: equ $11
+SRAM_STRING_LENGTH: equ $24
+SAVE_SLOT_REAL_SIZE: equ $FB0
 
 ; ---------------------------------------------------------------------------
 
@@ -3095,6 +3131,13 @@ MAPEVENT_GETINTORAFT: equ $3
 MAPEVENT_GETOUTOFCARAVAN: equ $4
 MAPEVENT_GETOUTOFRAFT: equ $5
 MAPEVENT_ZONE_EVENT: equ $6
+
+; ---------------------------------------------------------------------------
+
+; enum PlayerTypes
+PLAYERTYPE_BOWIE: equ $0
+PLAYERTYPE_CARAVAN: equ $1
+PLAYERTYPE_RAFT: equ $2
 
 ; ---------------------------------------------------------------------------
 

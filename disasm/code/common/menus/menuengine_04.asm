@@ -305,7 +305,7 @@ loc_11E54:
                 bra.s   loc_11E82
 loc_11E74:
                 
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
+                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 bne.s   loc_11E80
                 moveq   #$3E,d4 
                 bra.s   loc_11E82
