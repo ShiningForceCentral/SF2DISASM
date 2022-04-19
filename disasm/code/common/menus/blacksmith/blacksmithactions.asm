@@ -83,11 +83,17 @@ sub_21A92:
                 ; Check current mithril weapons list
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
                 subq.w  #1,d7
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 loc_21ACA:
                 
-                move.w  (a0)+,currentItem(a6)
-                cmpi.w  #0,currentItem(a6)
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    movep.w 0(a0),d0
+                    addq.w  #4,a0
+                    move.w  d0,currentItem(a6)
+                else
+                    move.w  (a0)+,currentItem(a6)
+                    cmpi.w  #0,currentItem(a6)
+                endif
                 beq.s   loc_21AE4
                 move.w  d7,ordersNumber(a6)
                 addi.w  #1,ordersNumber(a6)
@@ -198,11 +204,20 @@ loc_21BE4:
                 jsr     j_AddItem
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d6
                 sub.w   ordersNumber(a6),d6
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a1
-                lsl.w   #1,d6
-                adda.w  d6,a1
-                move.w  (a1),d2
-                move.w  #0,(a1)
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a1
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    add.w   d6,d6
+                    add.w   d6,d6
+                    adda.w  d6,a1
+                    movep.w 0(a1),d2
+                    clr.w   d0
+                    movep.w d0,0(a1)
+                else
+                    lsl.w   #1,d6
+                    adda.w  d6,a1
+                    move.w  (a1),d2
+                    move.w  #0,(a1)
+                endif
                 addi.w  #1,currentOrder(a6)
                 move.w  currentItem(a6),d1
                 move.w  selectedMember(a6),d0
@@ -422,13 +437,22 @@ sub_21E48:
                 move.w  #1,var_20(a6)
 loc_21E5C:
                 
-                move.w  #MITHRILWEAPON_SLOTS_NUMBER,d7
-                subq.w  #1,d7
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    moveq   #MITHRILWEAPON_SLOTS_COUNTER,d7
+                else
+                    move.w  #MITHRILWEAPON_SLOTS_NUMBER,d7
+                    subq.w  #1,d7
+                endif
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 loc_21E66:
                 
-                move.w  (a0)+,d1
-                cmpi.w  #0,d1
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    addq.w  #MITHRILWEAPON_SLOT_SIZE,a0
+                    movep.w -MITHRILWEAPON_SLOT_SIZE(a0),d1
+                else
+                    move.w  (a0)+,d1
+                    cmpi.w  #0,d1
+                endif
                 beq.w   loc_21E88
                 cmpi.w  #1,var_20(a6)
                 bne.s   loc_21E82
@@ -568,14 +592,21 @@ PickMithrilWeapon:
                 dbf     d5,@PickWeapon_Loop
 @LoadIndex:
                 
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
                 move.w  #MITHRILWEAPON_SLOTS_COUNTER,d7
 @LoadIndex_Loop:
                 
-                cmpi.w  #0,(a0)
-                bne.w   @Next           ; check next weapon slot if current one is occupied
-                move.w  d1,(a0)
-                bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    movep.w 0(a0),d0
+                    bne.s   @Next
+                    movep.w d1,0(a0)
+                    bra.s   @Done
+                else
+                    cmpi.w  #0,(a0)
+                    bne.w   @Next           ; check next weapon slot if current one is occupied
+                    move.w  d1,(a0)
+                    bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
+                endif
 @Next:
                 
                 move.w  #2,d0

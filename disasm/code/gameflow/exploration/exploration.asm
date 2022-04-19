@@ -928,7 +928,7 @@ loc_3E10:
 
 OpenDoor:
                 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.w   return_3F22
                 movem.w d0-d7,-(sp)
                 lsr.w   #7,d0
@@ -941,7 +941,7 @@ OpenDoor:
                 move.b  (a2,d1.w),d1
                 andi.w  #$3F,d1 
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
+                getSavedByte CURRENT_MAP, d7
                 movea.l (p_pt_MapData).l,a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
@@ -1047,7 +1047,7 @@ loc_3F38:
                 move.w  2(a0,d4.w),d5
                 move.w  (a0,d4.w),d4
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
+                getSavedByte CURRENT_MAP, d1
                 movea.l (p_pt_MapData).l,a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
@@ -1129,7 +1129,7 @@ PerformMapBlockCopyScript:
                 move.b  (a3,d1.w),d1
                 andi.w  #$3F,d1 
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
+                getSavedByte CURRENT_MAP, d7
                 movea.l (p_pt_MapData).l,a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
@@ -1395,7 +1395,7 @@ loc_422C:
 GetChestItem:
                 
                 clr.w   d2
-                move.b  ((CURRENT_MAP-$1000000)).w,d2
+                getSavedByte CURRENT_MAP, d2
                 movea.l (p_pt_MapData).l,a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data
@@ -1411,7 +1411,7 @@ GetChestItem:
 GetNonChestItem:
                 
                 clr.w   d2
-                move.b  ((CURRENT_MAP-$1000000)).w,d2
+                getSavedByte CURRENT_MAP, d2
                 movea.l (p_pt_MapData).l,a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2
@@ -1428,7 +1428,7 @@ GetItem:
                 move.w  d0,d4           ; save d0 and d1
                 move.w  d1,d5
                 clr.w   d2
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d2
+                getSavedByte CURRENT_BATTLE, d2
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,d2
                 beq.w   loc_4290        ; if we are not in battle branch
                 movem.l a0,-(sp)
@@ -1486,7 +1486,7 @@ WarpIfSetAtPoint:
                 divs.w  #$180,d0
                 divs.w  #$180,d1
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
+                getSavedByte CURRENT_MAP, d7
                 movea.l (p_pt_MapData).l,a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2

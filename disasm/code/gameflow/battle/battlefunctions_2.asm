@@ -11,7 +11,7 @@ LoadBattle:
                 
                 move.w  d0,-(sp)
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
+                getSavedByte CURRENT_MAP, d1
                 bsr.w   FadeOutToBlackAll
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 jsr     (LoadMapTilesets).w
@@ -49,8 +49,7 @@ loc_25646:
                 jsr     j_LoadBattleTerrainData
                 jsr     (PlayMapMusic).w
                 jsr     (FadeInFromBlack).w
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; if battle 44, then special battle !
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; if battle 44, then special battle !
                 bne.s   return_256A0
                 jsr     j_SpecialBattle
 return_256A0:
@@ -192,7 +191,7 @@ loc_2578A:
 
 SetMoveSfx:
                 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_2579E
                 clr.w   ((MOVE_SFX-$1000000)).w
                 bra.s   loc_257A4

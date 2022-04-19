@@ -485,7 +485,7 @@ ChurchMenuActions:
                 bra.w   @ExitSave
 @DoSaveGame:
                 
-                move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP-$1000000)).w
+                copySavedByte CURRENT_MAP, EGRESS_MAP
                 move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 jsr     (SaveGame).w

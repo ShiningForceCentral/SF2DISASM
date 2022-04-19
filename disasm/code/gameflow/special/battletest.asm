@@ -131,10 +131,17 @@ loc_7820:
                 nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
-                move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    move.b  (a0)+,(BATTLE_AREA_X).l
+                    move.b  (a0)+,(BATTLE_AREA_Y).l
+                    move.b  (a0)+,(BATTLE_AREA_WIDTH).l
+                    move.b  (a0)+,(BATTLE_AREA_HEIGHT).l
+                else
+                    move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
+                    move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
+                    move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
+                    move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
+                endif
                 jsr     j_BattleLoop
                 jsr     j_ChurchMenuActions
                 txt     460             ; "Shop number?{D1}"

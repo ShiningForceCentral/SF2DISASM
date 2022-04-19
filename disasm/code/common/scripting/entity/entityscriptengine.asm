@@ -690,7 +690,7 @@ loc_5220:
                 andi.w  #$3C00,d3
                 cmpi.w  #$3800,d3
                 bne.s   loc_5256
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_5256
                 chkFlg  65              ; Caravan is unlocked
                 beq.s   loc_5256
@@ -701,7 +701,7 @@ loc_5256:
                 
                 cmpi.w  #$3C00,d3
                 bne.s   loc_5278
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_5278
                 chkFlg  64              ; Raft is unlocked
                 beq.s   loc_5278
@@ -2826,7 +2826,7 @@ DmaMapSprite:
 GetMapPixelCoordRamOffset:
                 
                 movem.w d0-d1,-(sp)
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_622E        
                 tst.b   $11(a0)         ; entity property
                 beq.s   loc_622E        

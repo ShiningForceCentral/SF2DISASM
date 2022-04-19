@@ -747,7 +747,7 @@ sub_1AC8A0:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 clr.w   d2
                 move.b  (a0),d2
                 lea     byte_1AC9B8(pc), a0
@@ -1769,7 +1769,7 @@ LoadBattleTerrainData:
                 movem.l d0-d6/a0-a5,-(sp)
                 lea     pt_BattleTerrainData(pc), a0
                 nop
-                lea     ((CURRENT_BATTLE-$1000000)).w,a1
+                loadSavedDataAddress CURRENT_BATTLE, a1
                 clr.l   d1
                 move.b  (a1),d1
                 lsl.l   #2,d1

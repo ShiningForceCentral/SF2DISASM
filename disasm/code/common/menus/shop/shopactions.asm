@@ -352,8 +352,14 @@ loc_2046C:
                 jsr     j_GetCombatantEntryAddress
                 move.w  itemSlot(a6),d1
                 add.w   d1,d1
-                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
-                move.w  (a0),d2
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    add.w   d1,d1
+                    adda.w  d1,a0
+                    movep.w COMBATANT_OFFSET_ITEMS(a0),d2
+                else
+                    lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
+                    move.w  (a0),d2
+                endif
                 btst    #ITEMENTRY_BIT_BROKEN,d2
                 bne.w   loc_204DC
                 txt     188             ; "It's not damaged.{W2}"

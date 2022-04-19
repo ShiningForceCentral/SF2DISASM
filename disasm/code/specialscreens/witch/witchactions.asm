@@ -81,8 +81,8 @@ loc_74A8:
 loc_74B4:
                 
                 move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
-                move.b  #MAP_GRANSEAL,((CURRENT_MAP-$1000000)).w
-                move.b  #MAP_GRANSEAL,((EGRESS_MAP-$1000000)).w
+                setSavedByte #MAP_GRANSEAL, CURRENT_MAP
+                setSavedByte #MAP_GRANSEAL, EGRESS_MAP
                 bsr.w   SaveGame
                 clsTxt
                 move.b  #MAP_GRANSEAL,d0 ; HARDCODED new game starting map
@@ -135,7 +135,7 @@ loc_74FE:
 loc_753A:
                 
                 clr.w   d0
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
                 jsr     GetSavePointForMap(pc)
                 nop
                 moveq   #$FFFFFFFF,d4

@@ -16,7 +16,7 @@ ms_map59_InitFunction:
                 script  cs_5EDB8
                 script  cs_5EF60
                 setFlg  999             ; Set after the Nazca ship shootdown scene
-                move.b  #MAP_DOJO,((EGRESS_MAP-$1000000)).w
+                setSavedByte #MAP_DOJO, EGRESS_MAP
                 setFlg  436             ; Battle 36 unlocked - BATTLE_VERSUS_PRISM_FLOWERS      
                 setFlg  440             ; Battle 40 unlocked - BATTLE_VERSUS_ODD_EYE            
                 setFlg  442             ; Battle 42 unlocked - BATTLE_VERSUS_GALAM              

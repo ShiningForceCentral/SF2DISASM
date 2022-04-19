@@ -26,9 +26,9 @@ SetControlledEntityActScript:
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                tst.b   ((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 beq.s   loc_44B86
-                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 bne.s   loc_44B7C
                 move.l  #eas_Raft,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 bra.s   loc_44B84

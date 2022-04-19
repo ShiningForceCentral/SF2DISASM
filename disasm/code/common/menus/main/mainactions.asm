@@ -88,7 +88,7 @@ byte_21348:
 loc_21354:
                 
                 clr.w   d0
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
                 cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.s   byte_21348      
                 cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
@@ -101,7 +101,7 @@ loc_21366:
                 move.w  var_4(a6),d0
                 jsr     j_DecreaseCurrentMP
                 jsr     j_ExecuteFlashScreenScript
-                move.b  ((EGRESS_MAP-$1000000)).w,d0
+                getSavedByte EGRESS_MAP, d0
                 jsr     (GetSavePointForMap).w
                 lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
                 move.w  #1,(a0)+
@@ -110,7 +110,7 @@ loc_21366:
                 move.b  d1,(a0)+
                 move.b  d2,(a0)+
                 move.b  d3,(a0)+
-                clr.b   ((PLAYER_TYPE-$1000000)).w
+                clearSavedByte PLAYER_TYPE
                 bra.w   loc_212A0
 byte_213A8:
                 
@@ -201,7 +201,7 @@ loc_214A4:
                 cmpi.w  #4,d2
                 bne.w   loc_2150E
                 clr.w   d0
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
                 cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.w   loc_2150E
                 cmpi.w  #MAP_OVERWORLD_PACALON_2,d0

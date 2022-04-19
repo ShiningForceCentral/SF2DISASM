@@ -19,7 +19,7 @@ loc_47D2:
                 move.w  (sp)+,d7
                 movea.l (sp)+,a0
                 clr.b   ((WINDOW_IS_PRESENT-$1000000)).w
-                cmpi.b  #$FF,((CURRENT_MAP-$1000000)).w
+                checkSavedByte #$FF, CURRENT_MAP
                 beq.s   loc_47F4
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_47F4:

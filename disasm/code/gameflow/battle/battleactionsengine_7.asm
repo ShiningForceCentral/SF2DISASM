@@ -41,7 +41,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 beq.w   @Done           ; skip function if target is an ally
                 tst.b   targetDies(a2)
                 beq.w   @Done           ; skip function if target was not defeated
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d3
+                getSavedByte CURRENT_BATTLE, d3
                 lea     tbl_EnemyItemDrops(pc), a0
 @FindEntry_Loop:
                 
@@ -93,8 +93,11 @@ WriteBattlesceneScript_EnemyDropItem:
                 
                 clr.w   d0
                 move.b  ENEMYITEMDROP_OFFSET_FLAG(a0),d0
-                lea     ((ENEMY_ITEM_DROPS-$1000000)).w,a0
+                loadSavedDataAddress ENEMY_ITEM_DROPPED_FLAGS, a0
                 divu.w  #8,d0
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    add.w   d0,d0
+                endif
                 adda.w  d0,a0
                 swap    d0
                 bset    d0,(a0)         ; set item dropped flag

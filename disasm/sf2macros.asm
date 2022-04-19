@@ -23,13 +23,298 @@ wordAlign: macro ;alias
     align
     endm
     
+; ---------------------------------------------------------------------------
+; Expanded SRAM
+; ---------------------------------------------------------------------------
+    
 declareSramEnd: macro
-    if (EXPANDED_SRAM=1)
+    if (STANDARD_BUILD&expandedSram=1)
     dc.l $20FFFF
     else
     dc.l $203FFF
     endc
     endm
+    
+; ---------------------------------------------------------------------------
+; Relocated saved data to SRAM
+; ---------------------------------------------------------------------------
+    
+loadSavedDataAddress: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    lea     (\1).l,\2
+    else
+    lea     ((\1-$1000000)).w,\2
+    endc
+    endm
+    
+checkSavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+dest: equs '(\2).l'
+    else
+dest: equs '((\2-$1000000)).w'
+    endc
+    if (instr('\1','#')=0)
+src: equs '\1'
+    else
+src: substr 2,,'\1'
+    endc
+    if (\src=0)
+    tst.b   \dest
+    else
+    cmpi.b  \1,\dest
+    endc
+    endm
+    
+clearSavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    clr.b   (\1).l
+    else
+    clr.b   ((\1-$1000000)).w
+    endc
+    endm
+    
+clearSavedByteWithPostIncrement: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    clr.b   (\1)
+    addq.w  #2,\1
+    else
+    clr.b   (\1)+
+    endc
+    endm
+    
+copySavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.b  (\1).l,(\2).l
+    else
+    move.b  ((\1-$1000000)).w,((\2-$1000000)).w
+    endc
+    endm
+    
+getSavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.b  (\1).l,\2
+    else
+    move.b  ((\1-$1000000)).w,\2
+    endc
+    endm
+    
+setSavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.b  \1,(\2).l
+    else
+    move.b  \1,((\2-$1000000)).w
+    endc
+    endm
+    
+setSavedByteWithPostIncrement: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.b  \1,(\2)
+    addq.w  #2,\2
+    else
+    move.b  \1,(\2)+
+    endc
+    endm
+    
+addToSavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    addq.b  \1,(\2).l
+    else
+    addq.b  \1,((\2-$1000000)).w
+    endc
+    endm
+    
+getSavedWord: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    if (narg>=3)
+disp: equs '\3'
+    else
+disp: equs '0'
+    endc
+    movep.w \disp\\1,\2
+    else
+    move.w  \3\\1,\2
+    endc
+    endm
+    
+getSavedWordWithPostIncrement: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    if (narg>=3)
+disp: equs '\3'
+    else
+disp: equs '0'
+    endc
+    movep.w \disp\(\1),\2
+    addq.w  #4,\1
+    else
+    move.w  (\1)+,\2
+    endc
+    endm
+    
+setSavedWord: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    if (narg>=3)
+disp: equs '\3'
+    else
+disp: equs '0'
+    endc
+    movep.w \1,\disp\\2
+    else
+    move.w  \1,\3\\2
+    endc
+    endm
+    
+setSavedWordWithPostIncrement: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    movep.w \1,0(\2)
+    addq.w  #4,\2
+    else
+    move.w  \1,(\2)+
+    endc
+    endm
+    
+setSavedLongWithPostIncrement: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    movep.l \1,0(\2)
+    addq.w  #8,\2
+    else
+    move.l  \1,(\2)+
+    endc
+    endm
+    
+getSavedCombatantByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.l  a0,-(sp)
+    bsr.w   GetCombatantEntryAddress
+    clr.w   d1
+    move.b  \1(a0),d1
+    movea.l (sp)+,a0
+    else
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   GetCombatantByte
+    movem.l (sp)+,d7-a0
+    endc
+    endm
+    
+getSavedCombatantWord: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.l  a0,-(sp)
+    bsr.w   GetCombatantEntryAddress
+    movep.w \1(a0),d1
+    tst.w   d1
+    movea.l (sp)+,a0
+    else
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   GetCombatantWord
+    movem.l (sp)+,d7-a0
+    endc
+    endm
+    
+getSavedCombatantPosition: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.l  a0,-(sp)
+    bsr.w   GetCombatantEntryAddress
+    move.b  \1(a0),d1
+    ext.w   d1
+    movea.l (sp)+,a0
+    else
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   GetCombatantByte
+    ext.w   d1
+    movem.l (sp)+,d7-a0
+    endc
+    endm
+    
+setSavedCombatantByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.l  a0,-(sp)
+    bsr.w   GetCombatantEntryAddress
+    move.b  d1,\1(a0)
+    movea.l (sp)+,a0
+    else
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   SetCombatantByte
+    movem.l (sp)+,d7-a0
+    endc
+    endm
+    
+setSavedCombatantWord: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.l  a0,-(sp)
+    bsr.w   GetCombatantEntryAddress
+    movep.w d1,\1(a0)
+    movea.l (sp)+,a0
+    else
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   SetCombatantWord
+    movem.l (sp)+,d7-a0
+    endc
+    endm
+    
+isItemEquipped: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    btst    #ITEMENTRY_BIT_EQUIPPED,COMBATANT_OFFSET_ITEMS+ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
+    else
+    btst    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
+    endc
+    endm
+    
+equipItem: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    bset    #ITEMENTRY_BIT_EQUIPPED,COMBATANT_OFFSET_ITEMS+ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
+    else
+    bset    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
+    endc
+    endm
+    
+unequipItem: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    bclr    #ITEMENTRY_BIT_EQUIPPED,COMBATANT_OFFSET_ITEMS+ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
+    else
+    bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
+    endc
+    endm
+    
+breakItem: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    bset    #ITEMENTRY_UPPERBIT_BROKEN,COMBATANT_OFFSET_ITEMS\1
+    else
+    bset    #ITEMENTRY_UPPERBIT_BROKEN,\1
+    endc
+    endm
+    
+repairItem: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    bclr    #ITEMENTRY_UPPERBIT_BROKEN,COMBATANT_OFFSET_ITEMS\1
+    else
+    bclr    #ITEMENTRY_UPPERBIT_BROKEN,\1
+    endc
+    endm
+    
+checkRaftMap: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    cmp.b   (RAFT_MAP).l,\1
+    else
+    cmp.b   ((RAFT_MAP-$1000000)).w,\1
+    endc
+    endm
+    
+getBattleTurnActor: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    lea     (BATTLE_TURN_ORDER).l,a0
+    move.b  CURRENT_BATTLE_TURN-BATTLE_TURN_ORDER(a0),\1
+    else
+    move.b  ((CURRENT_BATTLE_TURN-$1000000)).w,\1
+    lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
+    endc
+    move.b  (a0,\1.w),\1
+    endm
+    
+; ---------------------------------------------------------------------------
     
 sndCom: macro
     trap #SOUND_COMMAND

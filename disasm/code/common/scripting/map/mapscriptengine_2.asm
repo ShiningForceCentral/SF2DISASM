@@ -624,7 +624,7 @@ csc13_setStoryFlag:
 sub_474EE:
                 
                 moveq   #0,d0
-                move.b  #MAP_GALAM_CASTLE_INNER,((CURRENT_MAP-$1000000)).w
+                setSavedByte #MAP_GALAM_CASTLE_INNER, CURRENT_MAP
                 bsr.w   RunMapSetupEntityEvent
                 rts
 

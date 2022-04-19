@@ -9,7 +9,7 @@ bbcs_03:        executeSubroutine csub_49816
 
 csub_49816:
                 
-                move.b  #MAP_YEEL,((EGRESS_MAP-$1000000)).w
+                setSavedByte #MAP_YEEL, EGRESS_MAP
                 rts
 
     ; End of function csub_49816

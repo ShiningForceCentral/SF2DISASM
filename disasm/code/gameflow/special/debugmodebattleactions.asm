@@ -133,7 +133,7 @@ sub_9B34:
 
 sub_9B38:
                 
-                move.b  #BATTLE_VERSUS_PRISM_FLOWERS,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte #BATTLE_VERSUS_PRISM_FLOWERS, CURRENT_BATTLE
 
     ; End of function sub_9B38
 

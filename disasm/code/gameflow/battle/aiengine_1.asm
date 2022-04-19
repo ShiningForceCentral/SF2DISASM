@@ -33,7 +33,7 @@ ExecuteAiControl:
                 bra.w   @Attack         ; if AI #15 but not at full HP, then immediately activate and attack normally
 @FindSwarmBattle:
                 
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 clr.w   d6
                 move.b  (a0),d6
                 lea     tbl_SwarmBattlesList(pc), a0

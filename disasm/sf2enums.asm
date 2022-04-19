@@ -84,44 +84,120 @@ COMBATANT_TYPE_SIZE: equ $1
 ; ---------------------------------------------------------------------------
 
 ; enum Combatant_Offsets
-COMBATANT_OFFSET_NAME: equ $0
-COMBATANT_OFFSET_CLASS: equ $A
-COMBATANT_OFFSET_LEVEL: equ $B
-COMBATANT_OFFSET_HP_MAX: equ $C
-COMBATANT_OFFSET_HP_CURRENT: equ $E
-COMBATANT_OFFSET_MP_MAX: equ $10
-COMBATANT_OFFSET_MP_CURRENT: equ $11
-COMBATANT_OFFSET_ATT_BASE: equ $12
-COMBATANT_OFFSET_ATT_CURRENT: equ $13
-COMBATANT_OFFSET_DEF_BASE: equ $14
-COMBATANT_OFFSET_DEF_CURRENT: equ $15
-COMBATANT_OFFSET_AGI_BASE: equ $16
-COMBATANT_OFFSET_AGI_CURRENT: equ $17
-COMBATANT_OFFSET_MOV_BASE: equ $18
-COMBATANT_OFFSET_MOV_CURRENT: equ $19
-COMBATANT_OFFSET_RESIST_BASE: equ $1A
-COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE: equ $1B
-COMBATANT_OFFSET_RESIST_CURRENT: equ $1C
-COMBATANT_OFFSET_PROWESS_BASE: equ $1E
-COMBATANT_OFFSET_PROWESS_CURRENT: equ $1F
-COMBATANT_OFFSET_ITEMS: equ $20
-COMBATANT_OFFSET_ITEM_0: equ $20
-COMBATANT_OFFSET_ITEM_1: equ $22
-COMBATANT_OFFSET_ITEM_2: equ $24
-COMBATANT_OFFSET_ITEM_3: equ $26
-COMBATANT_OFFSET_SPELLS: equ $28
-COMBATANT_OFFSET_SPELLS_END: equ $2C
-COMBATANT_OFFSET_STATUSEFFECTS: equ $2C
-COMBATANT_OFFSET_X: equ $2E
-COMBATANT_OFFSET_Y: equ $2F
-COMBATANT_OFFSET_EXP: equ $30
-COMBATANT_OFFSET_MOVETYPE_AND_AI: equ $31
-COMBATANT_OFFSET_ALLY_KILLS: equ $32
-COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS: equ $32
-COMBATANT_OFFSET_AI_ACTIVATION_FLAG: equ $34
-COMBATANT_OFFSET_ALLY_DEFEATS: equ $36
-COMBATANT_OFFSET_AI_REGION: equ $36
-COMBATANT_OFFSET_ENEMY_INDEX: equ $37
+combatantNameSize                   = 10
+combatantClassSize                  = 1
+combatantLevelSize                  = 1
+combatantHpSize                     = 2
+combatantMpSize                     = 1
+combatantAttSize                    = 1
+combatantDefSize                    = 1
+combatantAgiSize                    = 1
+combatantMovSize                    = 1
+combatantResistSize                 = 2
+combatantResistByteSize             = 1
+combatantProwessSize                = 1
+combatantItemSize                   = 2
+combatantSpellsSize                 = 4
+combatantStatusEffectsSize          = 2
+combatantXsize                      = 1
+combatantYsize                      = 1
+combatantExpSize                    = 1
+combatantMovetypeAndAiSize          = 1
+combatantAiSpecialMoveOrdersSize    = 2
+combatantAiActivationFlagSize       = 2
+combatantAiRegionSize               = 1
+combatantEnemyIndexSize             = 1
+
+combatantEntryRealSize    = combatantNameSize+&
+                            combatantClassSize+&
+                            combatantLevelSize+&
+                            combatantHpSize*2+&
+                            combatantMpSize*2+&
+                            combatantAttSize*2+&
+                            combatantDefSize*2+&
+                            combatantAgiSize*2+&
+                            combatantMovSize*2+&
+                            combatantResistSize*2+&
+                            combatantProwessSize*2+&
+                            combatantItemSize*4+&
+                            combatantSpellsSize+&
+                            combatantStatusEffectsSize+&
+                            combatantXsize+&
+                            combatantYsize+&
+                            combatantExpSize+&
+                            combatantMovetypeAndAiSize+&
+                            combatantAiSpecialMoveOrdersSize+&
+                            combatantAiActivationFlagSize+&
+                            combatantAiRegionSize+&
+                            combatantEnemyIndexSize
+
+combatantEntrySize = combatantEntryRealSize
+
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+combatantNameSize                   = combatantNameSize*2
+combatantClassSize                  = combatantClassSize*2
+combatantLevelSize                  = combatantLevelSize*2
+combatantHpSize                     = combatantHpSize*2
+combatantMpSize                     = combatantMpSize*2
+combatantAttSize                    = combatantAttSize*2
+combatantDefSize                    = combatantDefSize*2
+combatantAgiSize                    = combatantAgiSize*2
+combatantMovSize                    = combatantMovSize*2
+combatantResistSize                 = combatantResistSize*2
+combatantResistByteSize             = combatantResistByteSize*2
+combatantProwessSize                = combatantProwessSize*2
+combatantItemSize                   = combatantItemSize*2
+combatantSpellsSize                 = combatantSpellsSize*2
+combatantStatusEffectsSize          = combatantStatusEffectsSize*2
+combatantXsize                      = combatantXsize*2
+combatantYsize                      = combatantYsize*2
+combatantExpSize                    = combatantExpSize*2
+combatantMovetypeAndAiSize          = combatantMovetypeAndAiSize*2
+combatantAiSpecialMoveOrdersSize    = combatantAiSpecialMoveOrdersSize*2
+combatantAiActivationFlagSize       = combatantAiActivationFlagSize*2
+combatantAiRegionSize               = combatantAiRegionSize*2
+combatantEnemyIndexSize             = combatantEnemyIndexSize*2
+combatantEntrySize                  = combatantEntrySize*2
+    endif
+
+COMBATANT_OFFSET_NAME:                      equ 0
+COMBATANT_OFFSET_CLASS:                     equ COMBATANT_OFFSET_NAME+combatantNameSize
+COMBATANT_OFFSET_LEVEL:                     equ COMBATANT_OFFSET_CLASS+combatantClassSize
+COMBATANT_OFFSET_HP_MAX:                    equ COMBATANT_OFFSET_LEVEL+combatantLevelSize
+COMBATANT_OFFSET_HP_CURRENT:                equ COMBATANT_OFFSET_HP_MAX+combatantHpSize
+COMBATANT_OFFSET_MP_MAX:                    equ COMBATANT_OFFSET_HP_CURRENT+combatantHpSize
+COMBATANT_OFFSET_MP_CURRENT:                equ COMBATANT_OFFSET_MP_MAX+combatantMpSize
+COMBATANT_OFFSET_ATT_BASE:                  equ COMBATANT_OFFSET_MP_CURRENT+combatantMpSize
+COMBATANT_OFFSET_ATT_CURRENT:               equ COMBATANT_OFFSET_ATT_BASE+combatantAttSize
+COMBATANT_OFFSET_DEF_BASE:                  equ COMBATANT_OFFSET_ATT_CURRENT+combatantAttSize
+COMBATANT_OFFSET_DEF_CURRENT:               equ COMBATANT_OFFSET_DEF_BASE+combatantDefSize
+COMBATANT_OFFSET_AGI_BASE:                  equ COMBATANT_OFFSET_DEF_CURRENT+combatantDefSize
+COMBATANT_OFFSET_AGI_CURRENT:               equ COMBATANT_OFFSET_AGI_BASE+combatantAgiSize
+COMBATANT_OFFSET_MOV_BASE:                  equ COMBATANT_OFFSET_AGI_CURRENT+combatantAgiSize
+COMBATANT_OFFSET_MOV_CURRENT:               equ COMBATANT_OFFSET_MOV_BASE+combatantMovSize
+COMBATANT_OFFSET_RESIST_BASE:               equ COMBATANT_OFFSET_MOV_CURRENT+combatantMovSize
+COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE:      equ COMBATANT_OFFSET_RESIST_BASE+combatantResistByteSize
+COMBATANT_OFFSET_RESIST_CURRENT:            equ COMBATANT_OFFSET_RESIST_BASE+combatantResistSize
+COMBATANT_OFFSET_PROWESS_BASE:              equ COMBATANT_OFFSET_RESIST_CURRENT+combatantResistSize
+COMBATANT_OFFSET_PROWESS_CURRENT:           equ COMBATANT_OFFSET_PROWESS_BASE+combatantProwessSize
+COMBATANT_OFFSET_ITEMS:                     equ COMBATANT_OFFSET_PROWESS_CURRENT+combatantProwessSize
+COMBATANT_OFFSET_ITEM_0:                    equ COMBATANT_OFFSET_ITEMS
+COMBATANT_OFFSET_ITEM_1:                    equ COMBATANT_OFFSET_ITEMS+combatantItemSize
+COMBATANT_OFFSET_ITEM_2:                    equ COMBATANT_OFFSET_ITEMS+(combatantItemSize*2)
+COMBATANT_OFFSET_ITEM_3:                    equ COMBATANT_OFFSET_ITEMS+(combatantItemSize*3)
+COMBATANT_OFFSET_SPELLS:                    equ COMBATANT_OFFSET_ITEMS+(combatantItemSize*4)
+COMBATANT_OFFSET_SPELLS_END:                equ COMBATANT_OFFSET_SPELLS+combatantSpellsSize
+COMBATANT_OFFSET_STATUSEFFECTS:             equ COMBATANT_OFFSET_SPELLS_END
+COMBATANT_OFFSET_X:                         equ COMBATANT_OFFSET_STATUSEFFECTS+combatantStatusEffectsSize
+COMBATANT_OFFSET_Y:                         equ COMBATANT_OFFSET_X+combatantXsize
+COMBATANT_OFFSET_EXP:                       equ COMBATANT_OFFSET_Y+combatantYsize
+COMBATANT_OFFSET_MOVETYPE_AND_AI:           equ COMBATANT_OFFSET_EXP+combatantExpSize
+COMBATANT_OFFSET_ALLY_KILLS:                equ COMBATANT_OFFSET_MOVETYPE_AND_AI+combatantMovetypeAndAiSize
+COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS:    equ COMBATANT_OFFSET_MOVETYPE_AND_AI+combatantMovetypeAndAiSize
+COMBATANT_OFFSET_AI_ACTIVATION_FLAG:        equ COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS+combatantAiSpecialMoveOrdersSize
+COMBATANT_OFFSET_ALLY_DEFEATS:              equ COMBATANT_OFFSET_AI_ACTIVATION_FLAG+combatantAiActivationFlagSize
+COMBATANT_OFFSET_AI_REGION:                 equ COMBATANT_OFFSET_AI_ACTIVATION_FLAG+combatantAiActivationFlagSize
+COMBATANT_OFFSET_ENEMY_INDEX:               equ COMBATANT_OFFSET_AI_REGION+combatantAiRegionSize
 
 ; ---------------------------------------------------------------------------
 
@@ -130,7 +206,8 @@ COMBATANT_ITEMSLOTS_COUNTER: equ $3
 COMBATANT_SPELLSLOTS_COUNTER: equ $3
 COMBATANT_ITEMSLOTS: equ $4
 COMBATANT_SPELLSLOTS: equ $4
-COMBATANT_ENTRY_SIZE: equ $38
+COMBATANT_ENTRY_REAL_SIZE: equ combatantEntryRealSize
+COMBATANT_ENTRY_SIZE: equ combatantEntrySize
 
 ; ---------------------------------------------------------------------------
 
@@ -654,8 +731,13 @@ BLACKSMITH_ORDER_COST: equ $1388
 ; ---------------------------------------------------------------------------
 
 ; enum Caravan
-CARAVAN_ITEM_ENTRY_SIZE: equ $1
-CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE: equ $3F
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+caravanItemEntrySize = 2
+    else
+caravanItemEntrySize = 1
+    endif
+CARAVAN_ITEM_ENTRY_SIZE: equ caravanItemEntrySize
+CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE: equ CARAVAN_MAX_ITEMS_NUMBER-1
 CARAVAN_MAX_ITEMS_NUMBER: equ $40
 
 ; ---------------------------------------------------------------------------
@@ -824,8 +906,15 @@ ITEMTYPE_BIT_BREAKABLE: equ $7
 ; ---------------------------------------------------------------------------
 
 ; enum ItemEntry
-ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT: equ $1
-ITEMENTRY_SIZE: equ $2
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+itemEntryIndexAndEquippedBitOffset = 2
+itemEntrySize = 4
+    else
+itemEntryIndexAndEquippedBitOffset = 1
+itemEntrySize = 2
+    endif
+ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT: equ itemEntryIndexAndEquippedBitOffset
+ITEMENTRY_SIZE: equ itemEntrySize
 ITEMENTRY_BIT_EQUIPPED: equ $7
 ITEMENTRY_UPPERBIT_BROKEN: equ $7
 ITEMENTRY_BIT_USABLE_BY_AI: equ $D
@@ -858,9 +947,14 @@ EQUIPMENTTYPE_RING: equ $FFFF
 ; ---------------------------------------------------------------------------
 
 ; enum MithrilWeaponsProperties
-MITHRILWEAPON_SLOT_SIZE: equ $2
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+mithrilWeaponSlotSize = 4
+    else
+mithrilWeaponSlotSize = 2
+    endif
+MITHRILWEAPON_SLOT_SIZE: equ mithrilWeaponSlotSize
 MITHRILWEAPONS_PER_CLASS_COUNTER: equ $3
-MITHRILWEAPON_SLOTS_COUNTER: equ $3
+MITHRILWEAPON_SLOTS_COUNTER: equ MITHRILWEAPON_SLOTS_NUMBER-1
 MITHRILWEAPON_SLOTS_NUMBER: equ $4
 MITHRILWEAPON_CLASSES_COUNTER: equ $7
 
@@ -3055,9 +3149,14 @@ LANDEFFECTSETTING_OBSTRUCTED: equ $FF
 ; ---------------------------------------------------------------------------
 
 ; enum TurnOrderProperties
-TURN_ORDER_ENTRY_SIZE: equ $2
-TURN_ORDER_ENTRIES_MINUS_ONE_COUNTER: equ $3E
-TURN_ORDER_ENTRIES_COUNTER: equ $3F
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+turnOrderEntrySize = 4
+    else
+turnOrderEntrySize = 2
+    endif
+TURN_ORDER_ENTRY_SIZE: equ turnOrderEntrySize
+TURN_ORDER_ENTRIES_MINUS_ONE_COUNTER: equ TURN_ORDER_ENTRIES_COUNTER-1
+TURN_ORDER_ENTRIES_COUNTER: equ TURN_ORDER_ENTRIES_NUMBER-1
 TURN_ORDER_ENTRIES_NUMBER: equ $40
 
 ; ---------------------------------------------------------------------------
@@ -3075,20 +3174,135 @@ CRAM_SIZE: equ $80
 ; ---------------------------------------------------------------------------
 
 ; enum Sram
-SAVE_SLOT_SIZE: equ 4016+EXPANDED_SAVE_SLOT_SIZE
-          
-    if (EXPANDED_SRAM=1)
-SRAM_COUNTER: equ $7FFF
-    else
-SRAM_COUNTER: equ $1FFF
+combatantEntriesSize        = COMBATANT_ENTRY_REAL_SIZE*COMBATANT_SLOTS_NUMBER
+currentGoldSize             = 4
+dealsItemsSize              = 64
+caravanItemsNumberSize      = 2
+caravanItemsSize            = 64
+gameFlagsSize               = 128
+battleAreaXsize             = 1
+battleAreaYsize             = 1
+battleAreaWidthSize         = 1
+battleAreaHeightSize        = 7
+playerTypeSize              = 1
+currentMapSize              = 1
+currentBattleSize           = 1
+raftMapSize                 = 1
+raftXsize                   = 1
+raftYsize                   = 2
+messageSpeedSize            = 1
+displayBattleMessageSize    = 1
+egressMapSize               = 1
+battleTurnOrderSize         = 128
+currentBattleTurnSize       = 2
+savedSecondsCounterSize     = 4
+specialBattleRecordSize     = 4
+enemyItemDroppedFlagsSize   = 4
+mithrilWeaponsOnOrderSize   = BLACKSMITH_MAX_ORDERS_NUMBER*2
+
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+combatantEntriesSize        = combatantEntriesSize*2
+currentGoldSize             = currentGoldSize*2
+dealsItemsSize              = dealsItemsSize*2
+caravanItemsNumberSize      = caravanItemsNumberSize*2
+caravanItemsSize            = caravanItemsSize*2
+gameFlagsSize               = gameFlagsSize*2
+battleAreaXsize             = battleAreaXsize*2
+battleAreaYsize             = battleAreaYsize*2
+battleAreaWidthSize         = battleAreaWidthSize*2
+battleAreaHeightSize        = battleAreaHeightSize*2
+playerTypeSize              = playerTypeSize*2
+currentMapSize              = currentMapSize*2
+currentBattleSize           = currentBattleSize*2
+raftMapSize                 = raftMapSize*2
+raftXsize                   = raftXsize*2
+raftYsize                   = raftYsize*2
+messageSpeedSize            = messageSpeedSize*2
+displayBattleMessageSize    = displayBattleMessageSize*2
+egressMapSize               = egressMapSize*2
+battleTurnOrderSize         = battleTurnOrderSize*2
+currentBattleTurnSize       = currentBattleTurnSize*2
+savedSecondsCounterSize     = savedSecondsCounterSize*2
+specialBattleRecordSize     = specialBattleRecordSize*2
+enemyItemDroppedFlagsSize   = enemyItemDroppedFlagsSize*2
+mithrilWeaponsOnOrderSize   = mithrilWeaponsOnOrderSize*2
     endif
 
-SAVE_FLAGS_SIZE: equ $2
-SAVE_CHECKSUM_SIZE: equ $2
-SRAM_STRING_CHECK_COUNTER: equ $10
-SRAM_STRING_WRITE_COUNTER: equ $11
-SRAM_STRING_LENGTH: equ $24
-SAVE_SLOT_REAL_SIZE: equ $FB0
+COMBATANT_ENTRIES_SIZE:         equ combatantEntriesSize
+CURRENT_GOLD_SIZE:              equ currentGoldSize
+DEALS_ITEMS_SIZE:               equ dealsItemsSize
+CARAVAN_ITEMS_NUMBER_SIZE:      equ caravanItemsNumberSize
+CARAVAN_ITEMS_SIZE:             equ caravanItemsSize
+GAME_FLAGS_SIZE:                equ gameFlagsSize
+BATTLE_AREA_X_SIZE:             equ battleAreaXsize
+BATTLE_AREA_Y_SIZE:             equ battleAreaYsize
+BATTLE_AREA_WIDTH_SIZE:         equ battleAreaWidthSize
+BATTLE_AREA_HEIGHT_SIZE:        equ battleAreaHeightSize
+PLAYER_TYPE_SIZE:               equ playerTypeSize
+CURRENT_MAP_SIZE:               equ currentMapSize
+CURRENT_BATTLE_SIZE:            equ currentBattleSize
+RAFT_MAP_SIZE:                  equ raftMapSize
+RAFT_X_SIZE:                    equ raftXsize
+RAFT_Y_SIZE:                    equ raftYsize
+MESSAGE_SPEED_SIZE:             equ messageSpeedSize
+DISPLAY_BATTLE_MESSAGES_SIZE:   equ displayBattleMessageSize
+EGRESS_MAP_SIZE:                equ egressMapSize
+BATTLE_TURN_ORDER_SIZE:         equ battleTurnOrderSize
+CURRENT_BATTLE_TURN_SIZE:       equ currentBattleTurnSize
+SAVED_SECONDS_COUNTER_SIZE:     equ savedSecondsCounterSize
+SPECIAL_BATTLE_RECORD_SIZE:     equ specialBattleRecordSize
+ENEMY_ITEM_DROPPED_FLAGS_SIZE:  equ enemyItemDroppedFlagsSize
+MITHRIL_WEAPONS_ON_ORDER_SIZE:  equ mithrilWeaponsOnOrderSize
+
+saveSlotSize  = COMBATANT_ENTRIES_SIZE+&
+                CURRENT_GOLD_SIZE+&
+                DEALS_ITEMS_SIZE+&
+                CARAVAN_ITEMS_NUMBER_SIZE+&
+                CARAVAN_ITEMS_SIZE+&
+                GAME_FLAGS_SIZE+&
+                BATTLE_AREA_X_SIZE+&
+                BATTLE_AREA_Y_SIZE+&
+                BATTLE_AREA_WIDTH_SIZE+&
+                BATTLE_AREA_HEIGHT_SIZE+&
+                PLAYER_TYPE_SIZE+&
+                CURRENT_MAP_SIZE+&
+                CURRENT_BATTLE_SIZE+&
+                RAFT_MAP_SIZE+&
+                RAFT_X_SIZE+&
+                RAFT_Y_SIZE+&
+                MESSAGE_SPEED_SIZE+&
+                DISPLAY_BATTLE_MESSAGES_SIZE+&
+                EGRESS_MAP_SIZE+&
+                BATTLE_TURN_ORDER_SIZE+&
+                CURRENT_BATTLE_TURN_SIZE+&
+                SAVED_SECONDS_COUNTER_SIZE+&
+                SPECIAL_BATTLE_RECORD_SIZE+&
+                ENEMY_ITEM_DROPPED_FLAGS_SIZE+&
+                MITHRIL_WEAPONS_ON_ORDER_SIZE
+                
+    if (STANDARD_BUILD&expandedSram=1)
+sramSize = $8000
+    else
+sramSize = $2000
+    endif
+
+    if (STANDARD_BUILD=1)
+sramCounter = (sramSize/2)-1
+    else
+sramCounter = sramSize-1
+    endif
+
+SAVE_FLAGS_SIZE:            equ $2
+SAVE_CHECKSUM_SIZE:         equ $2
+SRAM_STRING_CHECK_COUNTER:  equ $10
+SRAM_STRING_WRITE_COUNTER:  equ $11
+SRAM_STRING_SIZE:           equ $24
+SAVE_SLOT_WORDS_COUNTER:    equ (SAVE_SLOT_REAL_SIZE/2)-1
+SAVE_SLOT_BYTES_COUNTER:    equ SAVE_SLOT_REAL_SIZE-1
+SAVE_SLOT_REAL_SIZE:        equ saveSlotSize
+SAVE_SLOT_SIZE:             equ saveSlotSize*2
+SRAM_COUNTER:               equ sramCounter
+SRAM_SIZE:                  equ sramSize
 
 ; ---------------------------------------------------------------------------
 

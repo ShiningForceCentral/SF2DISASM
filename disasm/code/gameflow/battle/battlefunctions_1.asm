@@ -10,13 +10,23 @@
 
 BattleLoop:
                 
-                clr.b   ((PLAYER_TYPE-$1000000)).w
+                clearSavedByte PLAYER_TYPE
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 chkFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 beq.s   @Initialize
                 
                 ; Start here if game was suspended mid-battle
-                move.l  ((SAVED_SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    move.l  a0,-(sp)
+                    move.l  d0,-(sp)
+                    lea     (SAVED_SECONDS_COUNTER).l,a0
+                    movep.l 0(a0),d0
+                    move.l  d0,((SECONDS_COUNTER-$1000000)).w
+                    move.l  (sp)+,d0
+                    movea.l (sp)+,a0
+                else
+                    move.l  ((SAVED_SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
+                endif
                 clrFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 jsr     j_ClearAiMoveInfo
                 clr.b   ((VIEW_TARGET_ENTITY-$1000000)).w
@@ -28,14 +38,14 @@ BattleLoop:
                 clr.l   ((SECONDS_COUNTER-$1000000)).w
                 
                 movem.w d0-d1,-(sp)
-                move.b  d0,((CURRENT_MAP-$1000000)).w
-                move.b  d1,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte d0, CURRENT_MAP
+                setSavedByte d1, CURRENT_BATTLE
                 bsr.w   SetBaseVIntFunctions
                 jsr     j_ExecuteBattleCutscene_Intro
                 movem.w (sp)+,d0-d1
                 
-                move.b  d0,((CURRENT_MAP-$1000000)).w
-                move.b  d1,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte d0, CURRENT_MAP
+                setSavedByte d1, CURRENT_BATTLE
                 moveq   #BATTLE_REGION_FLAGS_START,d1
 @ClearBattleRegionFlags_Loop:
                 
@@ -79,9 +89,7 @@ BattleLoop:
 @ExecuteIndividualTurns_Loop:
                 
                 clr.w   d0              ; start of individual turn execution
-                move.b  ((CURRENT_BATTLE_TURN-$1000000)).w,d0
-                lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
-                move.b  (a0,d0.w),d0
+                getBattleTurnActor d0
                 cmpi.b  #CODE_TERMINATOR_BYTE,d0
                 beq.s   @Start          
                 bsr.w   ExecuteIndividualTurn
@@ -101,9 +109,7 @@ BattleLoop:
                 tst.w   d3
                 beq.w   BattleLoop_Victory
                 clr.w   d0
-                move.b  ((CURRENT_BATTLE_TURN-$1000000)).w,d0
-                lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
-                move.b  (a0,d0.w),d0
+                getBattleTurnActor d0
                 bsr.w   HandleAfterTurnEffects
                 jsr     HandleKilledCombatants(pc)
                 nop
@@ -112,7 +118,7 @@ BattleLoop:
                 beq.w   BattleLoop_Defeat
                 tst.w   d3
                 beq.w   BattleLoop_Victory
-                addq.b  #TURN_ORDER_ENTRY_SIZE,((CURRENT_BATTLE_TURN-$1000000)).w
+                addToSavedByte #TURN_ORDER_ENTRY_SIZE, CURRENT_BATTLE_TURN
                 bra.s   @ExecuteIndividualTurns_Loop
 
     ; End of function BattleLoop
@@ -249,19 +255,26 @@ GetRemainingCombatants:
 BattleLoop_Victory:
                 
                 bsr.w   HealLivingAndImmortalAllies
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED Battle check for fairy woods
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check for fairy woods
                 bne.s   @Continue
                 jsr     j_DisplayTimerWindow
 @Continue:
                 
-                move.b  ((CURRENT_MAP-$1000000)).w,((MAP_EVENT_PARAM_2-$1000000)).w
+                getSavedByte CURRENT_MAP, ((MAP_EVENT_PARAM_2-$1000000)).w
                 jsr     (UpdateForceAndGetFirstBattlePartyMemberIndex).w
-                jsr     j_GetXPos
-                add.b   ((BATTLE_AREA_X-$1000000)).w,d1
-                move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
-                jsr     j_GetYPos
-                add.b   ((BATTLE_AREA_Y-$1000000)).w,d1
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    jsr     GetXPos
+                    add.b   (BATTLE_AREA_X).l,d1
+                    move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
+                    jsr     GetYPos
+                    add.b   (BATTLE_AREA_Y).l,d1
+                else
+                    jsr     j_GetXPos
+                    add.b   ((BATTLE_AREA_X-$1000000)).w,d1
+                    move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
+                    jsr     j_GetYPos
+                    add.b   ((BATTLE_AREA_Y-$1000000)).w,d1
+                endif
                 move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
                 bsr.w   GetEntityIndexForCombatant
                 lsl.w   #5,d0
@@ -270,7 +283,7 @@ BattleLoop_Victory:
                 move.b  #0,((MAP_EVENT_PARAM_1-$1000000)).w
                 jsr     j_ExecuteAfterBattleCutscene
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
                 addi.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     j_ClearFlag
                 addi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
@@ -310,8 +323,7 @@ BattleLoop_Defeat:
                 moveq   #$FFFFFFFF,d4
                 
                 ; Losable battles
-                cmpi.b  #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED battle 4 upgrade
+                checkSavedByte #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS, CURRENT_BATTLE    ; HARDCODED battle 4 upgrade
                 bne.s   @Return
                 clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
                 setFlg  504             ; Battle 4 completed - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS   
@@ -383,7 +395,7 @@ byte_23DFA:
 UpdateBattleUnlockedFlag:
                 
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag     ; Check whether current battle is marked as completed
                 beq.s   @Return
@@ -418,7 +430,7 @@ HideBattlefieldWindows:
 GetEgressPositionForBattle:
                 
                 clr.b   d7
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d7
+                getSavedByte CURRENT_BATTLE, d7
                 cmpi.b  #BATTLE_VERSUS_GESHP,d7
                 bne.s   loc_23E60
                 clrFlg  438             ; Battle 38 unlocked - BATTLE_VERSUS_GESHP              
@@ -459,7 +471,7 @@ loc_23E9A:
                 bra.w   loc_23EAA
 loc_23EA6:
                 
-                move.b  ((EGRESS_MAP-$1000000)).w,d0
+                getSavedByte EGRESS_MAP, d0
 loc_23EAA:
                 
                 jsr     (GetSavePointForMap).w
@@ -487,8 +499,7 @@ ExecuteIndividualTurn:
                 bsr.w   ClearDeadCombatantsListLength
                 
                 ; Check if we're currently battling Taros, and Bowie is the actor
-                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED battle index
+                checkSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE  ; HARDCODED battle index
                 bne.s   @IsActorAlive
                 tst.w   combatant(a6)
                 bne.s   @IsActorAlive
@@ -658,8 +669,7 @@ ExecuteIndividualTurn:
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
 @CheckFairyWoodsBattle:
                 
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED Battle check : Fairy wood secret battle
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check : Fairy wood secret battle
                 bne.s   @WriteBattlesceneScript
                 jsr     j_DisplayTimerWindow
 @WriteBattlesceneScript:
@@ -2330,14 +2340,24 @@ loc_25296:
                 bra.s   loc_25236
 loc_252A6:
                 
-                tst.b   ((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #BATTLE_VERSUS_ALL_BOSSES, CURRENT_BATTLE
                 beq.s   loc_25236
                 txt     0               ; "The game will be suspended.{N}OK?"
                 jsr     j_YesNoChoiceBox
                 clsTxt
                 tst.w   d0
                 bmi.w   loc_25236
-                move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    move.l  a0,-(sp)
+                    move.l  d0,-(sp)
+                    lea     (SAVED_SECONDS_COUNTER).l,a0
+                    move.l  ((SECONDS_COUNTER-$1000000)).w,d0
+                    movep.l d0,0(a0)
+                    move.l  (sp)+,d0
+                    movea.l (sp)+,a0
+                else
+                    move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
+                endif
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
                 jsr     (SaveGame).l

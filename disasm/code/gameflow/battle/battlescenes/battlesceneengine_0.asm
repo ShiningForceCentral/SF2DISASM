@@ -1912,17 +1912,17 @@ bsc10_displayMessage:
                 move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.l  (a6)+,((TEXT_NUMBER-$1000000)).w
                 clr.w   (SPEECH_SFX).l
-                tst.b   ((DISPLAY_BATTLE_MESSAGES-$1000000)).w
+                checkSavedByte #0, DISPLAY_BATTLE_MESSAGES
                 bne.s   loc_1920C
                 jsr     (DisplayText).l 
-                tst.b   ((MESSAGE_SPEED-$1000000)).w
+                checkSavedByte #0, MESSAGE_SPEED
                 bne.s   loc_1920C
                 txt     362             ; "{DICT}{W2}"
                 rts
 loc_1920C:
                 
                 clr.w   d0
-                move.b  ((MESSAGE_SPEED-$1000000)).w,d0
+                getSavedByte MESSAGE_SPEED, d0
                 moveq   #8,d1
                 sub.w   d0,d1
                 clr.w   d0
@@ -1973,7 +1973,7 @@ bsc12_hideTextBox:
 EndBattlescene:
                 
                 clr.w   d0
-                move.b  ((MESSAGE_SPEED-$1000000)).w,d0
+                getSavedByte MESSAGE_SPEED, d0
                 moveq   #7,d1
                 sub.w   d0,d1
                 clr.w   d0
@@ -3636,7 +3636,7 @@ GetBattleBackground:
 @CheckCustomBackground:
                 
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
                 lea     tbl_CustomBackgrounds(pc), a0
                 move.b  (a0,d1.w),d1    ; get battle's own background if it has one
                 cmpi.b  #$FF,d1
