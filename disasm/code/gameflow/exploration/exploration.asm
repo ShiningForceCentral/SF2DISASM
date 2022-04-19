@@ -1395,7 +1395,7 @@ loc_422C:
 GetChestItem:
                 
                 clr.w   d2
-                move.b  ((CURRENT_MAP-$1000000)).w,d2 ; current map I guess
+                move.b  ((CURRENT_MAP-$1000000)).w,d2
                 movea.l (p_pt_MapData).l,a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data

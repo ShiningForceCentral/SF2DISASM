@@ -352,9 +352,9 @@ loc_2046C:
                 jsr     j_GetCombatantEntryAddress
                 move.w  itemSlot(a6),d1
                 add.w   d1,d1
-                lea     COMBATANT_OFFSET_ITEM_0(a0,d1.w),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d2
-                btst    #$F,d2
+                btst    #ITEMENTRY_BIT_BROKEN,d2
                 bne.w   loc_204DC
                 txt     188             ; "It's not damaged.{W2}"
                 bra.w   byte_205AC

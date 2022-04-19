@@ -341,7 +341,7 @@ WriteMemberMagicList:
                 move.w  #VDPTILE_LOWERCASE_E|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  #VDPTILE_LOWERCASE_L|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
-                lsr.w   #6,d1
+                lsr.w   #SPELLENTRY_OFFSET_LV,d1
                 addq.w  #1,d1
                 move.w  d1,d0
                 ext.l   d0
@@ -929,13 +929,13 @@ sub_14108:
                 bpl.s   @EquipRing      ; branch based on returned diamenu choice
                 jsr     j_GetEquippableWeapons
                 tst.w   d1
-                bne.s   @GoToWeapons
+                bne.s   @Goto_Weapons
                 moveq   #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,d7
                 bsr.w   RefreshMemberSummaryWindow
                 jsr     (WaitForWindowMovementEnd).w
                 moveq   #$FFFFFFFF,d1
                 bra.w   @Done
-@GoToWeapons:
+@Goto_Weapons:
                 
                 bra.w   @Weapons
 @EquipRing:
@@ -1390,7 +1390,7 @@ loc_145BC:
                 bsr.w   sub_14074       
                 move.w  (sp)+,d2
                 move.w  d2,d4
-                lsr.w   #6,d4
+                lsr.w   #SPELLENTRY_OFFSET_LV,d4
                 move.w  d4,d3
                 moveq   #$13,d1
                 bsr.w   LoadMiniStatusTextHighlightSprites

@@ -28,6 +28,7 @@
 #dir    data/graphics/maps/mappalettes
 #dir    data/graphics/icons
 #dir    data/graphics/tech
+#dir    data/graphics/tech/battlescenetransition
 #dir    data/graphics/tech/menus
 #dir    data/graphics/tech/fonts
 #dir    data/graphics/tech/windowlayouts
@@ -419,6 +420,8 @@
 #split	0x1A5B5E,0x1A76AE,data/graphics/battles/battlesprites/allies/allybattlesprite29.bin
 #split	0x1A76AE,0x1A8B60,data/graphics/battles/battlesprites/allies/allybattlesprite30.bin
 #split	0x1A8B60,0x1AA16E,data/graphics/battles/battlesprites/allies/allybattlesprite31.bin
+#split	0x1AA31E,0x1AA5FA,data/graphics/tech/battlescenetransition/battlescenetransitiontiles0.bin
+#split	0x1AA5FA,0x1AA8CA,data/graphics/tech/battlescenetransition/battlescenetransitiontiles1.bin
 #split	0x1AAD96,0x1AADBE,data/graphics/battles/battlesprites/allies/animations/allybattlespriteanimation000.bin
 #split	0x1AADBE,0x1AADDE,data/graphics/battles/battlesprites/allies/animations/allybattlespriteanimation001.bin
 #split	0x1AADDE,0x1AADFE,data/graphics/battles/battlesprites/allies/animations/allybattlespriteanimation002.bin
@@ -824,7 +827,6 @@
 #split	0x151D6,0x15268,data/graphics/tech/shopinventoryitemhighlighttiles.bin
 #split	0x1623A,0x16282,data/graphics/tech/alphabethighlighttiles.bin
 #split	0x198A8,0x198C8,data/graphics/battles/plt_battlescenebasepalette.bin
-#split	0x1FAEA,0x1FDEA,data/graphics/tech/backgroundlayout.bin
 #split	0x23658,0x23758,data/graphics/tech/unitcursortiles.bin
 #split	0x25DF6,0x261A6,data/graphics/specialsprites/taros.bin
 #split	0x261A6,0x26552,data/graphics/specialsprites/kraken.bin
@@ -863,8 +865,6 @@
 #split	0x12D9CA,0x12E988,data/graphics/battles/spells/invocations/neptun.bin
 #split	0x12E988,0x12FADE,data/graphics/battles/spells/invocations/apollo.bin
 #split	0x1AA16E,0x1AA316,data/graphics/tech/statusanimationtiles.bin
-#split	0x1AA31E,0x1AA5FA,data/graphics/tech/battlescenetransitiontilesa.bin
-#split	0x1AA5FA,0x1AA8CA,data/graphics/tech/battlescenetransitiontilesb.bin
 #split	0x1AA8CA,0x1AAA82,data/graphics/battles/spells/animations/boltanimdataa.bin
 #split	0x1AAA82,0x1AAC3A,data/graphics/battles/spells/animations/boltanimdatab.bin
 #split	0x1B6DDA,0x1B6DFA,data/graphics/specialscreens/endingkiss/endingkisspalette.bin

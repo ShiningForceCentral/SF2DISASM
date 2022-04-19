@@ -1882,7 +1882,7 @@ sub_10CC6:
                 jsr     (WaitForDmaQueueProcessing).w
                 move.w  (sp)+,d0
                 move.w  d0,d4
-                lsr.w   #6,d4
+                lsr.w   #SPELLENTRY_OFFSET_LV,d4
                 move.w  d4,d5
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 jsr     (WaitForVInt).w

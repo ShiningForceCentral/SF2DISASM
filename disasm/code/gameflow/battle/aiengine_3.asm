@@ -140,7 +140,7 @@ loc_E8F6:
                 bne.s   loc_E93C
                 clr.l   d3
                 clr.l   d4
-                jsr     GetSomethingClassType
+                jsr     GetCombatantType
                 cmpi.b  #ENEMY_KRAKEN_ARM,d1 ; BUGGED When getting Claude's class type, the previous routine 
                                         ;  returns a value in the byte area that happens to be the same
                                         ;  as the Kraken Arm's index, causing the former to perform 
@@ -398,18 +398,18 @@ loc_EB9C:
 
 ; Debuff spells AI (Muddle 2, Dispel 1)
 ; 
-;       In: D0 = character index
+;       In: D0 = caster index
 
 
 ExecuteAiCommand_Debuff:
                 
                 movem.l d0/d2-a6,-(sp)
-                move.w  d0,d7
+                move.w  d0,d7           ; save caster index
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Enemy
-                move.w  #$FFFF,d1
                 
                 ; If ally, do nothing
+                move.w  #$FFFF,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
@@ -419,7 +419,7 @@ ExecuteAiCommand_Debuff:
                 
                 bsr.w   CheckMuddled2   
                 tst.b   d1
-                beq.s   @NotMuddled
+                beq.s   @CheckSupportSpell ; Does caster know any support spell?
                 
                 ; If muddled, do nothing
                 move.w  #$FFFF,d1
@@ -428,11 +428,11 @@ ExecuteAiCommand_Debuff:
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   @Done
-@NotMuddled:
+@CheckSupportSpell:
                 
-                move.w  d7,d0
+                move.w  d7,d0           ; restore caster index
                 clr.w   d3
-                bsr.w   GetNextStatusSpell
+                bsr.w   GetNextSupportSpell
                 cmpi.w  #SPELL_NOTHING,d1
                 bne.s   @CheckMuddle    
                 
@@ -487,7 +487,7 @@ ExecuteAiCommand_Debuff:
                 btst    #SPELLPROPS_BIT_TARGETING,d5
                 move.w  #$FFFF,d3
                 bne.s   @TargetTeammates1
-                bsr.w   UpdateTargetsList_Enemies
+                bsr.w   UpdateTargetsList_Enemies ; made unreachable by the preceding move.w #$FFFF,d3 instruction
                 bra.s   @CheckTargetingGroup2
 @TargetTeammates1:
                 
@@ -505,7 +505,7 @@ ExecuteAiCommand_Debuff:
                 bra.s   @MakeTargetsList
 @TargetTeammates2:
                 
-                bsr.w   UpdateTargetsList_Allies
+                bsr.w   UpdateTargetsList_Allies ; made unreachable by the preceding clr.w d3 instruction
                 bsr.w   MakeTargetsList_Enemies
 @MakeTargetsList:
                 
@@ -513,27 +513,29 @@ ExecuteAiCommand_Debuff:
                 move.b  d6,d1
                 clr.w   d0
                 move.b  d7,d0
+                
+                ; ATTACK spell
                 cmpi.w  #SPELL_ATTACK,d1
                 bne.s   @CheckBoost
-                bsr.w   sub_D460        
+                bsr.w   MakeAttackSpellPrioritiesList
                 bra.w   @CheckReachableTargets
 @CheckBoost:
                 
                 cmpi.w  #SPELL_BOOST|SPELL_LV2,d1
                 bne.s   @CheckMuddle2
-                bsr.w   sub_D4E0        
+                bsr.w   MakeBoostSpellPrioritiesList
                 bra.w   @CheckReachableTargets
 @CheckMuddle2:
                 
                 cmpi.w  #SPELL_MUDDLE|SPELL_LV2,d1
                 bne.s   @CheckDispel2
-                bsr.w   sub_D62C        
+                bsr.w   MakeMuddleSpellPrioritiesList
                 bra.w   @CheckReachableTargets
 @CheckDispel2:
                 
                 cmpi.w  #SPELL_DISPEL,d1
                 bne.s   @DoNothing2
-                bsr.w   sub_D560        
+                bsr.w   MakeDispelSpellPrioritiesList
                 bra.w   @CheckReachableTargets
 @DoNothing2:
                 
@@ -580,9 +582,9 @@ ExecuteAiCommand_Debuff:
                 
                 cmpi.b  #$FF,d0
                 bne.s   @LoadBattleactionData
-                move.w  #$FFFF,d1
                 
                 ; If no reachable target, do nothing
+                move.w  #$FFFF,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0

@@ -93,7 +93,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 
                 clr.w   d0
                 move.b  ENEMYITEMDROP_OFFSET_FLAG(a0),d0
-                lea     ((ENEMY_ITEM_DROPS-$1000000)).w,a0
+                lea     ((ENEMY_ITEM_DROPPED_FLAGS-$1000000)).w,a0
                 divu.w  #8,d0
                 adda.w  d0,a0
                 swap    d0

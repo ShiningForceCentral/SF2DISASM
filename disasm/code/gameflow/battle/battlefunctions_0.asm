@@ -57,7 +57,7 @@ loc_22C2E:
                 beq.w   byte_22C5A      
                 move.l  d1,d2
                 andi.w  #SPELLENTRY_MASK_INDEX,d2
-                lsr.w   #6,d1
+                lsr.w   #SPELLENTRY_OFFSET_LV,d1
                 bne.s   loc_22C4C
                 move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     271             ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"

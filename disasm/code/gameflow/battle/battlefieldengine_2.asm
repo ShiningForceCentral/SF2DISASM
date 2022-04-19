@@ -60,7 +60,7 @@ DetermineMuddleBattleaction:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get entity D0's current MOV*2, X, Y -> D0, D3, D4
+; Get combatant D0's current MOV*2, X, Y -> D0, D3, D4
 
 
 GetMoveInfo:
@@ -999,11 +999,11 @@ PrioritizeReachableTargets:
                 tst.b   d1
                 bne.s   @MuddledAllyItemUser
                 bsr.w   MakeTargetsList_Enemies
-                bra.s   @GoTo_PopulateItemPrioritiesList
+                bra.s   @Goto_PopulateItemPrioritiesList
 @MuddledAllyItemUser:
                 
                 bsr.w   MakeTargetsList_Allies
-@GoTo_PopulateItemPrioritiesList:
+@Goto_PopulateItemPrioritiesList:
                 
                 bra.s   @PopulateItemPrioritiesList
 @EnemyItemUser:
@@ -1055,11 +1055,11 @@ PrioritizeReachableTargets:
                 tst.b   d1
                 bne.s   @MuddledAllySpellCaster
                 bsr.w   MakeTargetsList_Enemies
-                bra.s   @GoTo_PopulateSpellPrioritiesList
+                bra.s   @Goto_PopulateSpellPrioritiesList
 @MuddledAllySpellCaster:
                 
                 bsr.w   MakeTargetsList_Allies
-@GoTo_PopulateSpellPrioritiesList:
+@Goto_PopulateSpellPrioritiesList:
                 
                 bra.s   @PopulateSpellPrioritiesList
 @EnemySpellCaster:
@@ -1105,11 +1105,11 @@ PrioritizeReachableTargets:
                 tst.b   d1
                 bne.s   @MuddledAllyAttacker
                 bsr.w   MakeTargetsList_Enemies
-                bra.s   @GoTo_PopulateAttackPrioritiesList
+                bra.s   @Goto_PopulateAttackPrioritiesList
 @MuddledAllyAttacker:
                 
                 bsr.w   MakeTargetsList_Allies
-@GoTo_PopulateAttackPrioritiesList:
+@Goto_PopulateAttackPrioritiesList:
                 
                 bra.s   @PopulateAttackPrioritiesList
 @EnemyAttacker:

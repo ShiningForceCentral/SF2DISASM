@@ -7,4 +7,4 @@
 p_pt_EnemyBattleSprites:
                 dc.l pt_EnemyBattleSprites
                 include "data\graphics\battles\battlesprites\enemies\entries.asm"    ; Enemy battle sprites
-                align $180000
+                align $8000

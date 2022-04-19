@@ -285,11 +285,11 @@ j_GetEnemyIndex:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetSomethingClassType:
+j_GetCombatantType:
                 
-                jmp     GetSomethingClassType(pc)
+                jmp     GetCombatantType(pc)
 
-    ; End of function j_GetSomethingClassType
+    ; End of function j_GetCombatantType
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -975,11 +975,11 @@ j_GetEquippedRing:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_BreakItem:
+j_BreakItemBySlot:
                 
-                jmp     BreakItem(pc)   
+                jmp     BreakItemBySlot(pc)
 
-    ; End of function j_BreakItem
+    ; End of function j_BreakItemBySlot
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2024,7 +2024,7 @@ GetCurrentMOV:
 GetBaseResistance:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_RESIST_BASE1,d7
+                moveq   #COMBATANT_OFFSET_RESIST_BASE,d7
                 bsr.w   GetCombatantWord
                 movem.l (sp)+,d7-a0
                 rts
@@ -2142,8 +2142,8 @@ GetMoveType:
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
                 bsr.w   GetCombatantByte
-                lsr.w   #MOVETYPE_SHIFTCOUNT,d1
-                andi.w  #MOVETYPE_AND_AI_MASK_LOWERNIBBLE,d1
+                lsr.w   #4,d1
+                andi.w  #$F,d1
                 movem.l (sp)+,d7-a0
                 rts
 
@@ -2160,7 +2160,7 @@ GetAiCommandset:
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
                 bsr.w   GetCombatantByte
-                andi.w  #MOVETYPE_AND_AI_MASK_LOWERNIBBLE,d1
+                andi.w  #$F,d1
                 movem.l (sp)+,d7-a0
                 rts
 
@@ -2227,16 +2227,15 @@ GetAiActivationFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-; 
-; Out: D1 = enemy index ($FFFF if not an enemy)
+; In: d0.b = combatant index
+; Out: d1.w = enemy index, or -1 if not an enemy
 
 
 GetEnemyIndex:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Continue
-                move.w  #$FFFF,d1       ; skip function and return -1 if combatant is not an enemy
+                move.w  #-1,d1          ; return -1 if combatant is not an enemy
                 rts
                 bra.s   GetKills
 @Continue:
@@ -2280,21 +2279,25 @@ GetDefeats:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
+; Get combatant d0.w type -> d1.w
 ; 
-; Out: D1 = something class type ??
+; If combatant is an ally, type is equal to combatant index plus allies number
+;  times class type (0, 1, or 2 for base, promoted, and special, respectively),
+;  and the most significant bit is set. However, this feature is unused.
+; 
+; Otherwise, if an enemy, return the enemy index.
 
 
-GetSomethingClassType:
+GetCombatantType:
                 
-                btst    #COMBATANT_BIT_ENEMY,d0 ; check if combatant is an enemy
+                btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Enemy
                 moveq   #0,d1
                 bsr.w   GetClass        
                 move.b  tbl_ClassTypes(pc,d1.w),d1 ; 0,1,2 = base class, promoted class, special promoted class
                 mulu.w  #COMBATANT_ALLIES_NUMBER,d1
                 add.w   d0,d1
-                bset    #$F,d1
+                bset    #15,d1
                 bra.s   @Return
 @Enemy:
                 
@@ -2303,5 +2306,5 @@ GetSomethingClassType:
                 
                 rts
 
-    ; End of function GetSomethingClassType
+    ; End of function GetCombatantType
 

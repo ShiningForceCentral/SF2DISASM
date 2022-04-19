@@ -1443,7 +1443,7 @@ loc_1ACE2A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = region #
+; In: d0.b = region index
 
 
 CheckTriggerRegionFlag:

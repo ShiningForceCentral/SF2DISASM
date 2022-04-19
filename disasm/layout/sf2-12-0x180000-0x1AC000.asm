@@ -6,10 +6,10 @@
 
 p_pt_AllyBattleSprites:
                 dc.l pt_AllyBattleSprites
-p_statusAnimationTiles:
+p_StatusAnimationTiles:
                 dc.l StatusAnimationTiles
-p_pt_battlesceneTransitionTiles:
-                dc.l pt_battlesceneTransitionTiles
+p_pt_BattlesceneTransitionTiles:
+                dc.l pt_BattlesceneTransitionTiles
 p_BoltAnimData_A:
                 dc.l BoltAnimData_A
 p_BoltAnimData_B:
@@ -21,15 +21,9 @@ p_pt_EnemyAnimations:
                 include "data\graphics\battles\battlesprites\allies\entries.asm"    ; Ally battlesprites
 StatusAnimationTiles:
                 incbin "data/graphics/tech/statusanimationtiles.bin"
-pt_battlesceneTransitionTiles:
-                dc.l BattlesceneTransitionTilesA
-                dc.l BattlesceneTransitionTilesB
-BattlesceneTransitionTilesA:
-                incbin "data/graphics/tech/battlescenetransitiontilesa.bin"
-BattlesceneTransitionTilesB:
-                incbin "data/graphics/tech/battlescenetransitiontilesb.bin"
+                include "data\graphics\tech\battlescenetransition\entries.asm"    ; Battlescene transition tiles
 BoltAnimData_A: incbin "data/graphics/battles/spells/animations/boltanimdataa.bin"
 BoltAnimData_B: incbin "data/graphics/battles/spells/animations/boltanimdatab.bin"
                 include "data\graphics\battles\battlesprites\allies\animations\entries.asm"    ; Ally animations
                 include "data\graphics\battles\battlesprites\enemies\animations\entries.asm"    ; Enemy animations
-                align $1AC000
+                align $4000
