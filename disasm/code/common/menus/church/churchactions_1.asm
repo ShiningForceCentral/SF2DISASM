@@ -485,7 +485,7 @@ ChurchMenuActions:
                 bra.w   @ExitSave
 @DoSaveGame:
                 
-                move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP-$1000000)).w
                 getCurrentSaveSlot
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 enableSram

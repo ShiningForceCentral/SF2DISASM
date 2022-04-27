@@ -298,14 +298,23 @@ loc_159EA:
     ; End of function sub_159A0
 
 spr_BattleConfig:
-                ; Red boxes highlighting currently selected battle config options
+                ; Red boxes highlighting currently selected battle config options.
+;
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+;
+;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
-                
-                vdpSprite 292, V2|H2|9, 1480|CLEAR|PALETTE3|PRIORITY, 228
-                vdpSprite 324, V2|H3|10, 1472|CLEAR|PALETTE3|PRIORITY, 196
-                vdpSprite 324, V2|H2|11, 1474|CLEAR|PALETTE3|PRIORITY, 220
-                vdpSprite 324, V2|H3|16, 1474|CLEAR|PALETTE3|PRIORITY, 236
+                vdpSprite 292, V2|H2|9, 1480|PALETTE3|PRIORITY, 228
+                vdpSprite 324, V2|H3|10, 1472|PALETTE3|PRIORITY, 196
+                vdpSprite 324, V2|H2|11, 1474|PALETTE3|PRIORITY, 220
+                vdpSprite 324, V2|H3|16, 1474|PALETTE3|PRIORITY, 236
 
 ; =============== S U B R O U T I N E =======================================
 

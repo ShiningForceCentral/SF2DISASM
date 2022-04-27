@@ -341,7 +341,7 @@ WriteMemberMagicList:
                 move.w  #VDPTILE_LOWERCASE_E|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  #VDPTILE_LOWERCASE_L|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
-                lsr.w   #6,d1
+                lsr.w   #SPELLENTRY_OFFSET_LV,d1
                 addq.w  #1,d1
                 move.w  d1,d0
                 ext.l   d0
@@ -929,13 +929,13 @@ sub_14108:
                 bpl.s   @EquipRing      ; branch based on returned diamenu choice
                 jsr     j_GetEquippableWeapons
                 tst.w   d1
-                bne.s   @GoToWeapons
+                bne.s   @Goto_Weapons
                 moveq   #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,d7
                 bsr.w   RefreshMemberSummaryWindow
                 jsr     (WaitForWindowMovementEnd).w
                 moveq   #$FFFFFFFF,d1
                 bra.w   @Done
-@GoToWeapons:
+@Goto_Weapons:
                 
                 bra.w   @Weapons
 @EquipRing:
@@ -1390,7 +1390,7 @@ loc_145BC:
                 bsr.w   sub_14074       
                 move.w  (sp)+,d2
                 move.w  d2,d4
-                lsr.w   #6,d4
+                lsr.w   #SPELLENTRY_OFFSET_LV,d4
                 move.w  d4,d3
                 moveq   #$13,d1
                 bsr.w   LoadMiniStatusTextHighlightSprites
@@ -1550,15 +1550,23 @@ LoadMiniStatusTextHighlightSprites:
 
 spr_MiniStatusTextHighlight:
                 
-; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+;
+;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-                vdpSprite 260, V2|H4|9, 1472|CLEAR|PALETTE3|PRIORITY, 156 
-                                                        ; member name
-                vdpSprite 260, V2|H4|10, 1472|CLEAR|MIRROR|PALETTE3|PRIORITY, 188
-                vdpSprite 168, V2|H4|11, 1472|CLEAR|PALETTE3|PRIORITY, 300 
+                vdpSprite 260, V2|H4|9, 1472|PALETTE3|PRIORITY, 156 ; member name
+                vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
+                vdpSprite 168, V2|H4|11, 1472|PALETTE3|PRIORITY, 300 
                                                         ; item or spell
-                vdpSprite 168, V2|H2|12, 1474|CLEAR|PALETTE3|PRIORITY, 332
-                vdpSprite 168, V2|H4|16, 1472|CLEAR|MIRROR|PALETTE3|PRIORITY, 340
+                vdpSprite 168, V2|H2|12, 1474|PALETTE3|PRIORITY, 332
+                vdpSprite 168, V2|H4|16, 1472|MIRROR|PALETTE3|PRIORITY, 340
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2953,12 +2961,12 @@ YesNoPromptMenuLayout:
                 vdpTile MENU1|PALETTE3|PRIORITY
                 vdpTile MENU2|PALETTE3|PRIORITY
                 vdpTile MENU3|PALETTE3|PRIORITY
-                vdpTile CLEAR
-                vdpTile CLEAR
+                vdpTile 
+                vdpTile 
                 vdpTile MENU10|PALETTE3|PRIORITY
                 vdpTile MENU11|PALETTE3|PRIORITY
                 vdpTile MENU12|PALETTE3|PRIORITY
-                vdpTile CLEAR
+                vdpTile 
                 vdpTile CORNER|PALETTE3|PRIORITY
                 vdpTile H_BORDER|PALETTE3|PRIORITY
                 vdpTile H_BORDER|PALETTE3|PRIORITY
@@ -2969,12 +2977,12 @@ YesNoPromptMenuLayout:
                 vdpTile MENU4|PALETTE3|PRIORITY
                 vdpTile MENU5|PALETTE3|PRIORITY
                 vdpTile MENU6|PALETTE3|PRIORITY
-                vdpTile CLEAR
-                vdpTile CLEAR
+                vdpTile 
+                vdpTile 
                 vdpTile MENU13|PALETTE3|PRIORITY
                 vdpTile MENU14|PALETTE3|PRIORITY
                 vdpTile MENU15|PALETTE3|PRIORITY
-                vdpTile CLEAR
+                vdpTile 
                 vdpTile V_BORDER|PALETTE3|PRIORITY
                 vdpTile SPACE|PALETTE3|PRIORITY
                 vdpTile SPACE|PALETTE3|PRIORITY
@@ -2985,12 +2993,12 @@ YesNoPromptMenuLayout:
                 vdpTile MENU7|PALETTE3|PRIORITY
                 vdpTile MENU8|PALETTE3|PRIORITY
                 vdpTile MENU9|PALETTE3|PRIORITY
-                vdpTile CLEAR
-                vdpTile CLEAR
+                vdpTile 
+                vdpTile 
                 vdpTile MENU16|PALETTE3|PRIORITY
                 vdpTile MENU17|PALETTE3|PRIORITY
                 vdpTile MENU18|PALETTE3|PRIORITY
-                vdpTile CLEAR
+                vdpTile 
                 vdpTile CORNER|FLIP|PALETTE3|PRIORITY
                 vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY
                 vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY

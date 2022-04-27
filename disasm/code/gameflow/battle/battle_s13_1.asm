@@ -910,7 +910,8 @@ byte_1AC9E0:    dc.b $FF                ; Zeon Battle
                 dc.b $FF
                 dc.b $FF
                 dc.b $FF
-                dc.w $FFFF
+                dc.b $FF
+                dc.b $FF
                 dc.b $FF
                 dc.b $FF
                 dc.b $FF
@@ -930,6 +931,9 @@ byte_1AC9F0:    dc.b $FF                ; Secret Bonus Battle
 ; =============== S U B R O U T I N E =======================================
 
 ; AI-related
+; 
+; In: d0.b = 
+; Out: d1.w = 
 
 
 sub_1AC9FC:
@@ -943,7 +947,7 @@ loc_1ACA0C:
                 
                 move.w  d0,d7
                 move.b  #BATTLESPRITESET_SUBSECTION_AI_REGIONS,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 cmp.b   d1,d7
                 ble.s   loc_1ACA1E
                 bra.w   loc_1ACA6A
@@ -1443,7 +1447,7 @@ loc_1ACE2A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = region #
+; In: d0.b = region index
 
 
 CheckTriggerRegionFlag:
@@ -1467,7 +1471,7 @@ UpdateTriggeredRegionsAndAi:
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
                 move.w  #BATTLESPRITESET_SUBSECTION_AI_REGIONS,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 tst.w   d1
                 bne.s   loc_1ACE60
                 bra.w   loc_1ACF2A

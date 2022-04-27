@@ -9,18 +9,17 @@ tbl_RandomBattlesList:
 ;
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-                battles &
-                    TO_HAWEL_HOUSE, &
-                    NORTH_CLIFF, &
-                    TO_RIBBLE, &
-                    TO_THE_EAST, &
-                    SOUTHEAST_DESERT, &
-                    TO_TAROS_SHRINE, &
-                    OUTSIDE_ELVEN_VILLAGE, &
-                    DEVIL_TAIL, &
-                    TO_NORTH_PARMECIA, &
-                    OUTSIDE_KETTO, &
-                    TO_ROFT
+                battles TO_HAWEL_HOUSE, &
+                        NORTH_CLIFF, &
+                        TO_RIBBLE, &
+                        TO_THE_EAST, &
+                        SOUTHEAST_DESERT, &
+                        TO_TAROS_SHRINE, &
+                        OUTSIDE_ELVEN_VILLAGE, &
+                        DEVIL_TAIL, &
+                        TO_NORTH_PARMECIA, &
+                        OUTSIDE_KETTO, &
+                        TO_ROFT
 tbl_EnemyUpgradeDef_Melee:
                 
 ; 3 bytes per entry, followed by a length prefixed list :

@@ -1201,10 +1201,19 @@ loc_1344A:
 
 spr_MemberListTextHighlight:
                 
-; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+;
+;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-                vdpSprite 260, V2|H4|9, 1472|CLEAR|PALETTE3|PRIORITY, 156
-                vdpSprite 260, V2|H4|10, 1472|CLEAR|MIRROR|PALETTE3|PRIORITY, 188
+                vdpSprite 260, V2|H4|9, 1472|PALETTE3|PRIORITY, 156
+                vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
 
 ; =============== S U B R O U T I N E =======================================
 

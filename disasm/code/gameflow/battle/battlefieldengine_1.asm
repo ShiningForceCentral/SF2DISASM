@@ -235,16 +235,15 @@ sub_C1BE:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-; 
-; Out: D1 = land effect setting (0=0%, 1=15%, 2=30%)
+; In:  d0.b = combatant index
+; Out: d1.b = land effect setting (0 = 0%, 1 = 15%, 2 = 30%)
 
 
 GetLandEffectSetting:
                 
                 movem.l d0/d2-a6,-(sp)
                 jsr     GetMoveType     
-                lsl.w   #MOVETYPE_SHIFTCOUNT,d1
+                lsl.w   #4,d1
                 lea     tbl_LandEffectSettingsAndMoveCosts(pc), a0
                 adda.w  d1,a0
                 bsr.w   GetCurrentTerrainType

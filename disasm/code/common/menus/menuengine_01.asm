@@ -85,21 +85,21 @@ j_CreateBattlesceneMiniStatusWindows:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10020:
+j_ShowAllyBattlesceneWindow:
                 
-                jmp     sub_11638(pc)
+                jmp     ShowAllyBattlesceneWindow(pc)
 
-    ; End of function sub_10020
+    ; End of function j_ShowAllyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10024:
+j_ShowEnemyBattlesceneWindow:
                 
-                jmp     sub_116B8(pc)
+                jmp     ShowEnemyBattlesceneWindow(pc)
 
-    ; End of function sub_10024
+    ; End of function j_ShowEnemyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -519,7 +519,7 @@ loc_100F2:
                 clr.w   d0
                 move.b  (a0)+,d0
                 beq.w   loc_10186
-                ori.w   #VDPTILE_CLEAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
+                ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 cmpi.b  #TEXT_CODE_MOVEDOWN,d0
                 beq.s   loc_1016A
                 cmpi.b  #TEXT_CODE_TOGGLEFONTCOLOR,d0
@@ -1882,7 +1882,7 @@ sub_10CC6:
                 jsr     (WaitForDmaQueueProcessing).w
                 move.w  (sp)+,d0
                 move.w  d0,d4
-                lsr.w   #6,d4
+                lsr.w   #SPELLENTRY_OFFSET_LV,d4
                 move.w  d4,d5
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 jsr     (WaitForVInt).w
@@ -1995,8 +1995,20 @@ loc_10DCE:
     ; End of function sub_10D56
 
 spr_SpellLevelHighlight:
-                vdpSprite 316, V2|H4|9, 1504|CLEAR|PALETTE3|PRIORITY, 292
-                vdpSprite 316, V2|H4|16, 1504|CLEAR|MIRROR|PALETTE3|PRIORITY, 316
+                
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+;
+;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+                
+                vdpSprite 316, V2|H4|9, 1504|PALETTE3|PRIORITY, 292
+                vdpSprite 316, V2|H4|16, 1504|MIRROR|PALETTE3|PRIORITY, 316
 
 ; =============== S U B R O U T I N E =======================================
 

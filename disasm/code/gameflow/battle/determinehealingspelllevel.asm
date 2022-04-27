@@ -19,7 +19,7 @@ DetermineHealingSpellLevel:
                 movem.l d0-d1/d3-a6,-(sp)
                 clr.w   d5
                 move.b  d4,d5
-                lsr.w   #6,d5
+                lsr.w   #SPELLENTRY_OFFSET_LV,d5
                 andi.w  #SPELLENTRY_LOWERMASK_LV,d5
                 move.w  d1,d3
                 jsr     GetCurrentHP

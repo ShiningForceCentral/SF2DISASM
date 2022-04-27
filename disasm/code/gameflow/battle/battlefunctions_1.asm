@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlefunctions_1.asm :
-; 0x23A84..0x257C0 : Battle functions
+; 0x23A84..0x25544 : Battle functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -13,32 +13,36 @@ BattleLoop:
                 clr.b   ((PLAYER_TYPE-$1000000)).w
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 chkFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                beq.s   @Continue1
-                move.l  ((SECONDS_COUNTER_FROM_SRAM-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
+                beq.s   @Initialize
+                
+                ; Start here if game was suspended mid-battle
+                move.l  ((SAVED_SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
                 clrFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 jsr     j_ClearAiMoveInfo
                 clr.b   ((VIEW_TARGET_ENTITY-$1000000)).w
                 bsr.w   LoadBattle      
-                bra.w   @ExecuteTurns_Loop
-                bra.w   @Start          
-@Continue1:
+                bra.w   @ExecuteIndividualTurns_Loop
+                bra.w   @Start          ; unreachable
+@Initialize:
                 
                 clr.l   ((SECONDS_COUNTER-$1000000)).w
+                
                 movem.w d0-d1,-(sp)
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 move.b  d1,((CURRENT_BATTLE-$1000000)).w
                 bsr.w   SetBaseVIntFunctions
                 jsr     j_ExecuteBattleCutscene_Intro
                 movem.w (sp)+,d0-d1
+                
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 move.b  d1,((CURRENT_BATTLE-$1000000)).w
                 moveq   #BATTLE_REGION_FLAGS_START,d1
-@ClearBattleRegionFlags:
+@ClearBattleRegionFlags_Loop:
                 
                 jsr     j_ClearFlag     ; clear battle region flags
                 addq.w  #1,d1
                 cmpi.w  #BATTLE_REGION_FLAGS_END,d1
-                ble.s   @ClearBattleRegionFlags
+                ble.s   @ClearBattleRegionFlags_Loop
                 
                 bsr.w   HealLivingAndImmortalAllies
                 jsr     j_InitAllAlliesBattlePositions
@@ -53,12 +57,14 @@ BattleLoop:
                 jsr     j_ExecuteBattleRegionCutscene
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.s   @SpawnEnemies
+                
                 bsr.w   PrintAllActivatedDefCons
 @SpawnEnemies:
                 
                 jsr     j_GetListOfSpawningEnemies
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                beq.s   @DetermineTurnOrder
+                beq.s   @Call_GenerateBattleTurnOrder
+                
                 subq.w  #1,d7
                 lea     ((TARGETS_LIST-$1000000)).w,a0
 @SpawnEnemies_Loop:
@@ -67,24 +73,24 @@ BattleLoop:
                 move.b  (a0)+,d0
                 bsr.w   SpawnEnemy      
                 dbf     d7,@SpawnEnemies_Loop
-@DetermineTurnOrder:
+@Call_GenerateBattleTurnOrder:
                 
-                bsr.w   CreateRandomizedTurnOrder
-@ExecuteTurns_Loop:
+                bsr.w   GenerateBattleTurnOrder
+@ExecuteIndividualTurns_Loop:
                 
                 clr.w   d0              ; start of individual turn execution
-                move.b  ((BATTLE_CURRENT_TURN_OFFSET-$1000000)).w,d0
+                move.b  ((CURRENT_BATTLE_TURN-$1000000)).w,d0
                 lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
                 move.b  (a0,d0.w),d0
                 cmpi.b  #CODE_TERMINATOR_BYTE,d0
                 beq.s   @Start          
                 bsr.w   ExecuteIndividualTurn
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
-                beq.s   @Continue2
+                beq.s   @Continue
                 cmpi.b  #INPUT_UP|INPUT_B|INPUT_C|INPUT_A,((P1_INPUT-$1000000)).w
-                bne.s   @Continue2
+                bne.s   @Continue
                 bsr.w   KillRemainingEnemies
-@Continue2:
+@Continue:
                 
                 jsr     j_ExecuteBattleCutscene_Defeated
                 jsr     HandleKilledCombatants(pc)
@@ -95,7 +101,7 @@ BattleLoop:
                 tst.w   d3
                 beq.w   BattleLoop_Victory
                 clr.w   d0
-                move.b  ((BATTLE_CURRENT_TURN_OFFSET-$1000000)).w,d0
+                move.b  ((CURRENT_BATTLE_TURN-$1000000)).w,d0
                 lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
                 move.b  (a0,d0.w),d0
                 bsr.w   HandleAfterTurnEffects
@@ -106,8 +112,8 @@ BattleLoop:
                 beq.w   BattleLoop_Defeat
                 tst.w   d3
                 beq.w   BattleLoop_Victory
-                addq.b  #2,((BATTLE_CURRENT_TURN_OFFSET-$1000000)).w
-                bra.s   @ExecuteTurns_Loop
+                addq.b  #TURN_ORDER_ENTRY_SIZE,((CURRENT_BATTLE_TURN-$1000000)).w
+                bra.s   @ExecuteIndividualTurns_Loop
 
     ; End of function BattleLoop
 
@@ -453,7 +459,7 @@ loc_23E9A:
                 bra.w   loc_23EAA
 loc_23EA6:
                 
-                move.b  ((EGRESS_MAP_INDEX-$1000000)).w,d0
+                move.b  ((EGRESS_MAP-$1000000)).w,d0
 loc_23EAA:
                 
                 jsr     (GetSavePointForMap).w
@@ -518,12 +524,12 @@ ExecuteIndividualTurn:
                 bpl.s   @CheckAutoBattleCheat1 ; check if current combatant is ally or enemy
                 tst.b   ((CONTROL_OPPONENT_CHEAT-$1000000)).w
                 beq.w   @AiControl1     
-                bra.s   @GoTo_PlayerControl
+                bra.s   @Goto_PlayerControl
 @CheckAutoBattleCheat1:
                 
                 tst.b   ((AUTO_BATTLE_CHEAT-$1000000)).w
                 bne.w   @AiControl1     
-@GoTo_PlayerControl:
+@Goto_PlayerControl:
                 
                 bra.w   @PlayerControl  
 @AiControl1:
@@ -672,12 +678,12 @@ ExecuteIndividualTurn:
                 bge.s   @PromotedMusic  
                 move.b  #MUSIC_ATTACK,((BATTLESCENE_MUSIC_INDEX-$1000000)).w 
                                                         ; regular
-                bra.s   @GoTo_GetFirstBattlesceneEnemy
+                bra.s   @Goto_GetFirstBattlesceneEnemy
 @PromotedMusic:
                 
                 move.b  #MUSIC_PROMOTED_ATTACK,((BATTLESCENE_MUSIC_INDEX-$1000000)).w 
                                                         ; promoted
-@GoTo_GetFirstBattlesceneEnemy:
+@Goto_GetFirstBattlesceneEnemy:
                 
                 bra.w   @GetFirstBattlesceneEnemy
 @EnemyMusic:
@@ -1251,7 +1257,7 @@ loc_2466C:
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   SetMoveSfx
-                bsr.w   ControlBattleUnit
+                bsr.w   ControlBattleEntity
                 jsr     (WaitForViewScrollEnd).w
                 btst    #INPUT_BIT_B,d4
                 beq.w   loc_246EC
@@ -1770,11 +1776,11 @@ sub_24C4E:
                 ; Equip first item if inventory is full with equippable items
                 clr.w   d1
                 jsr     j_EquipItemBySlot
-                bra.s   @GoToExecuteMenu
+                bra.s   @Goto_ExecuteMenu
 @DefaultToUnarmed:
                 
                 moveq   #3,d1           ; set menu initial choice to down slot
-@GoToExecuteMenu:
+@Goto_ExecuteMenu:
                 
                 bra.s   @ExecuteMenu
 @GetMenuInitialChoice:
@@ -2331,7 +2337,7 @@ loc_252A6:
                 clsTxt
                 tst.w   d0
                 bmi.w   loc_25236
-                move.l  ((SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER_FROM_SRAM-$1000000)).w
+                move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 getCurrentSaveSlot
                 enableSram
@@ -2583,322 +2589,3 @@ UpdateEnemyAi:
 
     ; End of function UpdateEnemyAi
 
-
-; =============== S U B R O U T I N E =======================================
-
-
-CreateRandomizedTurnOrder:
-                
-                lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
-                move.l  a0,-(sp)
-                moveq   #$3F,d7 
-loc_2554C:
-                
-                move.w  #$FFFF,(a0)+
-                dbf     d7,loc_2554C
-                movea.l (sp)+,a0
-                clr.w   d0
-                moveq   #COMBATANT_ALLIES_COUNTER,d7
-loc_2555A:
-                
-                move.w  d7,-(sp)
-                bsr.w   AddRandomizedAGItoTurnOrder
-                move.w  (sp)+,d7
-                addq.w  #1,d0
-                dbf     d7,loc_2555A
-                move.w  #COMBATANT_ENEMIES_START,d0
-                moveq   #$1D,d7         ; that is technically a bug.
-                                        ;  As we're iterating enemy combatants, we should be moving value $1F instead
-loc_2556E:
-                
-                move.w  d7,-(sp)
-                bsr.w   AddRandomizedAGItoTurnOrder
-                move.w  (sp)+,d7
-                addq.w  #1,d0
-                dbf     d7,loc_2556E
-                moveq   #COMBATANTS_ALL_COUNTER,d6
-loc_2557E:
-                
-                moveq   #$3E,d7 
-                lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
-loc_25584:
-                
-                move.w  (a0),d0
-                move.w  2(a0),d1
-                cmp.b   d0,d1
-                ble.s   loc_25594
-                move.w  d1,(a0)
-                move.w  d0,2(a0)
-loc_25594:
-                
-                addq.l  #2,a0
-                dbf     d7,loc_25584
-                dbf     d6,loc_2557E
-                clr.b   ((BATTLE_CURRENT_TURN_OFFSET-$1000000)).w
-                rts
-
-    ; End of function CreateRandomizedTurnOrder
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: A0 = turn order in RAM
-;     D0 = combatant index
-
-
-AddRandomizedAGItoTurnOrder:
-                
-                jsr     j_GetXPos
-                tst.b   d1
-                bmi.w   @Return
-                jsr     j_GetCurrentHP
-                tst.w   d1
-                beq.w   @Return         ; skip if combatant is not alive
-                jsr     j_GetCurrentAGI
-                move.w  d1,d3
-                andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
-                move.w  d1,d6
-                lsr.w   #3,d6
-                jsr     (GenerateRandomNumber).w
-                add.w   d7,d1
-                jsr     (GenerateRandomNumber).w
-                sub.w   d7,d1
-                moveq   #3,d6
-                jsr     (GenerateRandomNumber).w
-                subq.w  #1,d7
-                add.w   d7,d1
-                move.b  d0,(a0)+
-                move.b  d1,(a0)+
-                cmpi.w  #128,d3
-                blt.s   @Return
-                
-                ; Add a second turn if AGI >= 128
-                move.w  d3,d1
-                andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
-                mulu.w  #5,d1
-                divu.w  #6,d1
-                move.w  d1,d6
-                lsr.w   #3,d6
-                jsr     (GenerateRandomNumber).w
-                add.w   d7,d1
-                jsr     (GenerateRandomNumber).w
-                sub.w   d7,d1
-                move.b  d0,(a0)+
-                move.b  d1,(a0)+
-@Return:
-                
-                rts
-
-    ; End of function AddRandomizedAGItoTurnOrder
-
-
-; =============== S U B R O U T I N E =======================================
-
-; load all battle properties
-
-
-LoadBattle:
-                
-                move.w  d0,-(sp)
-                clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
-                bsr.w   FadeOutToBlackAll
-                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
-                jsr     (LoadMapTilesets).w
-                bsr.w   WaitForFadeToFinish
-                trap    #VINT_FUNCTIONS
-                dc.w VINTS_CLEAR
-                jsr     (WaitForVInt).w
-                jsr     j_MoveEntitiesToBattlePositions
-                move.w  (sp)+,d0
-                bsr.w   GetEntityIndexForCombatant
-                move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
-                bpl.s   loc_25646
-                clr.w   d0
-loc_25646:
-                
-                andi.w  #$3F,d0 
-                lsl.w   #5,d0
-                lea     ((ENTITY_DATA-$1000000)).w,a0
-                adda.w  d0,a0
-                move.w  (a0)+,d0
-                ext.l   d0
-                divs.w  #$180,d0
-                move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
-                move.w  (a0)+,d0
-                ext.l   d0
-                divs.w  #$180,d0
-                move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
-                moveq   #$3F,d0 
-                jsr     (InitSprites).w 
-                move.w  #$FFFF,d0
-                jsr     (LoadMap).w     
-                jsr     (WaitForVInt).w
-                jsr     (LoadMapEntitySprites).w
-                bsr.w   SetBaseVIntFunctions
-                jsr     j_LoadBattleTerrainData
-                jsr     (PlayMapMusic).w
-                jsr     (FadeInFromBlack).w
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; if battle 44, then special battle !
-                bne.s   return_256A0
-                jsr     j_SpecialBattle
-return_256A0:
-                
-                rts
-
-    ; End of function LoadBattle
-
-tbl_RelativeTileMoveX:
-                dc.w 1
-tbl_RelativeTileMoveY:
-                dc.w 0
-                dc.w 0
-                dc.w $FFFF
-                dc.w $FFFF
-                dc.w 0
-                dc.w 0
-                dc.w 1
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D0 = combatant index
-; Out: D0 = new X
-;      D1 = new Y
-
-
-GetEntityPositionAfterApplyingFacing:
-                
-                movem.l d2-d3/a0,-(sp)
-                jsr     j_GetXPos
-                move.w  d1,d2
-                jsr     j_GetYPos
-                bsr.w   GetEntityIndexForCombatant_0
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
-                lea     ((ENTITY_DATA-$1000000)).w,a0
-                clr.w   d3
-                move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3
-                move.w  d2,d0
-                lsl.w   #2,d3
-                add.w   tbl_RelativeTileMoveX(pc,d3.w),d0
-                add.w   tbl_RelativeTileMoveY(pc,d3.w),d1
-                movem.l (sp)+,d2-d3/a0
-                rts
-
-    ; End of function GetEntityPositionAfterApplyingFacing
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_256E6:
-                
-                movem.l d0-d2/d7,-(sp)
-                move.w  d0,d2
-                move.w  d1,d3
-                clr.w   d0
-                move.w  #COMBATANTS_ALL_COUNTER,d7
-loc_256F4:
-                
-                jsr     j_GetXPos
-                cmp.w   d1,d2
-                bne.w   loc_25712
-                jsr     j_GetYPos
-                cmp.w   d1,d3
-                bne.w   loc_25712
-                move.w  d0,d3
-                bra.w   loc_25724
-loc_25712:
-                
-                addq.w  #1,d0
-                cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
-                bne.s   loc_2571E
-                move.w  #COMBATANT_ENEMIES_START,d0
-loc_2571E:
-                
-                dbf     d7,loc_256F4
-                moveq   #$FFFFFFFF,d3
-loc_25724:
-                
-                movem.l (sp)+,d0-d2/d7
-                rts
-
-    ; End of function sub_256E6
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-PrintAllActivatedDefCons:
-                
-                moveq   #$5A,d1 
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                bsr.w   PrintActivatedDefCon
-                clsTxt
-                rts
-
-    ; End of function PrintAllActivatedDefCons
-
-
-; =============== S U B R O U T I N E =======================================
-
-; if flag D1 is set, display def-con textbox
-
-
-PrintActivatedDefCon:
-                
-                move.w  d1,-(sp)
-                jsr     j_CheckFlag
-                beq.s   loc_2578A
-                subi.w  #BATTLE_REGION_FLAGS_START,d1
-                ext.l   d1
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     463             ; "DEF-CON No. {#} has been{N}implemented.{D3}"
-loc_2578A:
-                
-                move.w  (sp)+,d1
-                addq.w  #1,d1
-                rts
-
-    ; End of function PrintActivatedDefCon
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-SetMoveSfx:
-                
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
-                bne.s   loc_2579E
-                clr.w   ((MOVE_SFX-$1000000)).w
-                bra.s   loc_257A4
-loc_2579E:
-                
-                move.w  #SFX_WALKING,((MOVE_SFX-$1000000)).w
-loc_257A4:
-                
-                movem.w d0-d7,-(sp)
-                jsr     j_GetEquippedRing
-                cmpi.w  #ITEM_CHIRRUP_SANDALS,d1 ; HARDCODED chirrup sandals item index for specific sfx
-                bne.s   loc_257BA
-                move.w  #SFX_BLOAB,((MOVE_SFX-$1000000)).w
-loc_257BA:
-                
-                movem.w (sp)+,d0-d7
-                rts
-
-    ; End of function SetMoveSfx

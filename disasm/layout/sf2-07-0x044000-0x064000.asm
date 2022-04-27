@@ -164,8 +164,8 @@ j_ClearEntities:
                 include "data\scripting\map\cs_intro_stormeffect.asm"    ; Storm Effect
                 include "data\scripting\map\cs_end.asm"    ; End cutscene
                 include "data\scripting\map\debugscripts.asm"    ; Debugging scripts
-                include data\battles\entries\battlecutscenesstorage.asm
+                include "data\battles\entries\battlecutscenesstorage.asm"
                 include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
                 include "data\maps\mapsetups.asm"    ; Map setups table
-                include data\maps\mapsetupsstorage.asm
+                include "data\maps\mapsetupsstorage.asm"
                 alignIfOriginalRomLayout $64000

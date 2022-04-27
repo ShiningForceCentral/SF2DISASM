@@ -515,7 +515,7 @@ csc0F_jumpIfCharacterAlive:
                 move.w  (a6)+,d0
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                bne.w   loc_47476
+                bne.w   loc_47476       ; <-- Branch if character's current HP != 0, i.e., is alive.
                 movea.l (a6),a6
                 bra.s   return_47478
 loc_47476:

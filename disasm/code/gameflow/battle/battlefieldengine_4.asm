@@ -110,7 +110,7 @@ loc_D458:
 ; AI: cast ATTACK spell
 
 
-sub_D460:
+MakeAttackSpellPrioritiesList:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -119,19 +119,20 @@ sub_D460:
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  (a0),d0
                 tst.w   d0
-                bne.s   loc_D47C
-                bra.w   loc_D4DA
-loc_D47C:
+                bne.s   @Continue
+                bra.w   @Skip           ; skip if no reachable target
+@Continue:
                 
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  (a0),d5
                 subi.w  #1,d5
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a0
                 lea     ((TARGETS_REACHABLE_BY_ATTACK_LIST-$1000000)).w,a1
-loc_D48E:
+@CopyReachableTargetsList_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d5,loc_D48E
+                dbf     d5,@CopyReachableTargetsList_Loop
+                
                 lea     ((SPELL_TARGET_PRIORITIES_LIST-$1000000)).w,a0
                 lea     ((TARGETS_REACHABLE_BY_ATTACK_LIST-$1000000)).w,a1
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a4
@@ -140,31 +141,30 @@ loc_D48E:
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a3
                 move.w  (a3),d6
                 subi.w  #1,d6
-loc_D4AE:
+@GetTargetsPriority_Loop:
                 
                 clr.w   d0
                 move.b  (a1,d4.w),d0
-loc_D4B4:
-                
                 move.w  #SPELL_DISPEL|SPELL_LV2,d1
                 bsr.w   CreateTargetGrid
-                bsr.w   sub_D7AA
+                bsr.w   CalculateAttackSpellTargetPriority
                 tst.w   d1
-                beq.s   loc_D4D0
+                beq.s   @Next
                 move.b  d1,(a0,d5.w)
                 move.b  d0,(a4,d5.w)
                 addi.w  #1,d5
-loc_D4D0:
+@Next:
                 
                 addi.w  #1,d4
-                dbf     d6,loc_D4AE
+                dbf     d6,@GetTargetsPriority_Loop
+                
                 move.w  d5,(a3)
-loc_D4DA:
+@Skip:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_D460
+    ; End of function MakeAttackSpellPrioritiesList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -172,7 +172,7 @@ loc_D4DA:
 ; AI: cast BOOST 2 spell
 
 
-sub_D4E0:
+MakeBoostSpellPrioritiesList:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -208,7 +208,7 @@ loc_D52E:
                 move.b  (a1,d4.w),d0
                 move.w  #SPELL_DISPEL|SPELL_LV2,d1
                 bsr.w   CreateTargetGrid
-                bsr.w   sub_D742
+                bsr.w   CalculateBoostSpellTargetPriority
                 tst.w   d1
                 beq.s   loc_D550
                 move.b  d1,(a0,d5.w)
@@ -224,7 +224,7 @@ loc_D55A:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_D4E0
+    ; End of function MakeBoostSpellPrioritiesList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -232,7 +232,7 @@ loc_D55A:
 ; AI: cast DISPEL spell
 
 
-sub_D560:
+MakeDispelSpellPrioritiesList:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -241,9 +241,9 @@ sub_D560:
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  (a0),d0
                 tst.w   d0
-                bne.s   loc_D57C
-                bra.w   loc_D626
-loc_D57C:
+                bne.s   @Continue
+                bra.w   @Skip
+@Continue:
                 
                 move.w  d0,d5
                 subi.w  #1,d5
@@ -251,24 +251,26 @@ loc_D57C:
                 lea     ((SPELL_TARGET_PRIORITIES_LIST-$1000000)).w,a2
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a3
                 lea     ((TARGETS_LIST-$1000000)).w,a4
-loc_D592:
+@GetTargetsPriority_Loop:
                 
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  #SPELL_DISPEL,d1
                 bsr.w   CreateTargetGrid
-                bsr.w   sub_D6F2
+                bsr.w   CalculateDispelSpellTargetPriority
                 move.b  d1,(a2)+
-                dbf     d5,loc_D592
+                dbf     d5,@GetTargetsPriority_Loop
+                
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  (a0),d5
                 subi.w  #1,d5
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a0
                 lea     ((TARGETS_LIST-$1000000)).w,a1
-loc_D5BA:
+@CopyReachableTargetsList_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d5,loc_D5BA
+                dbf     d5,@CopyReachableTargetsList_Loop
+                
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  (a0),d5
                 subi.w  #1,d5
@@ -279,40 +281,41 @@ loc_D5BA:
                 lea     ((ATTACK_TARGET_PRIORITIES_LIST-$1000000)).w,a5
                 clr.w   d4
                 clr.w   d3
-loc_D5E2:
+@CheckTargetsNumber_Loop:
                 
                 clr.w   d0
                 move.b  (a2,d3.w),d0
                 cmpi.b  #2,d0
-                blt.s   loc_D5FE
+                blt.s   @Next
                 move.b  d0,(a5,d4.w)
                 move.b  (a4,d3.w),d0
                 move.b  d0,(a1,d4.w)
                 addi.w  #1,d4
-loc_D5FE:
+@Next:
                 
                 addi.w  #1,d3
-                dbf     d5,loc_D5E2
+                dbf     d5,@CheckTargetsNumber_Loop
+                
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  d4,(a0)
                 tst.w   d4
-                bne.s   loc_D614
-                bra.w   loc_D626
-loc_D614:
+                bne.s   @UpdatePrioritiesList
+                bra.w   @Skip
+@UpdatePrioritiesList:
                 
                 subi.w  #1,d4
                 lea     ((ATTACK_TARGET_PRIORITIES_LIST-$1000000)).w,a0
                 lea     ((SPELL_TARGET_PRIORITIES_LIST-$1000000)).w,a1
-loc_D620:
+@UpdatePrioritiesList_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d4,loc_D620
-loc_D626:
+                dbf     d4,@UpdatePrioritiesList_Loop
+@Skip:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_D560
+    ; End of function MakeDispelSpellPrioritiesList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -320,7 +323,7 @@ loc_D626:
 ; AI: cast MUDDLE 2 spell
 
 
-sub_D62C:
+MakeMuddleSpellPrioritiesList:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -329,33 +332,35 @@ sub_D62C:
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  (a0),d0
                 tst.w   d0
-                bne.s   loc_D648
-                bra.w   loc_D6EC
-loc_D648:
+                bne.s   @Continue
+                bra.w   @Skip
+@Continue:
                 
                 move.w  d0,d5
                 subi.w  #1,d5
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a1
                 lea     ((SPELL_TARGET_PRIORITIES_LIST-$1000000)).w,a2
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a3
-loc_D65A:
+@GetTargetsPriority_Loop:
                 
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  #SPELL_MUDDLE|SPELL_LV2,d1
                 bsr.w   CreateTargetGrid
-                move.w  (a3),d2
+                move.w  (a3),d2         ; d2.w = number of targets in area of effect
                 move.b  d2,(a2)+
-                dbf     d5,loc_D65A
+                dbf     d5,@GetTargetsPriority_Loop
+                
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  (a0),d5
                 subi.w  #1,d5
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a0
                 lea     ((TARGETS_LIST-$1000000)).w,a1
-loc_D680:
+@CopyReachableTargetsList_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d5,loc_D680
+                dbf     d5,@CopyReachableTargetsList_Loop
+                
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  (a0),d5
                 subi.w  #1,d5
@@ -366,48 +371,53 @@ loc_D680:
                 lea     ((ATTACK_TARGET_PRIORITIES_LIST-$1000000)).w,a5
                 clr.w   d4
                 clr.w   d3
-loc_D6A8:
+@CheckTargetsNumber_Loop:
                 
                 clr.w   d0
                 move.b  (a2,d3.w),d0
-                cmpi.b  #3,d0
-                blt.s   loc_D6C4
-                move.b  d0,(a5,d4.w)
+                cmpi.b  #3,d0           ; check number of targets in area of effect
+                blt.s   @Next
+                move.b  d0,(a5,d4.w)    ; add target if targeting at least 3 units
                 move.b  (a4,d3.w),d0
                 move.b  d0,(a1,d4.w)
                 addi.w  #1,d4
-loc_D6C4:
+@Next:
                 
                 addi.w  #1,d3
-                dbf     d5,loc_D6A8
-loc_D6CC:
+                dbf     d5,@CheckTargetsNumber_Loop
                 
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  d4,(a0)
                 tst.w   d4
-                bne.s   loc_D6DA
-                bra.w   loc_D6EC
-loc_D6DA:
+                bne.s   @UpdatePrioritiesList
+                bra.w   @Skip
+@UpdatePrioritiesList:
                 
                 subi.w  #1,d4
                 lea     ((ATTACK_TARGET_PRIORITIES_LIST-$1000000)).w,a0
                 lea     ((SPELL_TARGET_PRIORITIES_LIST-$1000000)).w,a1
-loc_D6E6:
+@UpdatePrioritiesList_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d4,loc_D6E6
-loc_D6EC:
+                dbf     d4,@UpdatePrioritiesList_Loop
+@Skip:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_D62C
+    ; End of function MakeMuddleSpellPrioritiesList
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Returns priority for the AI to cast DISPEL.
+; +1 point for each target within the area of effect that knows at least
+;  one attack or healing spell.
+; 
+; Out: d1.w = target priority
 
-sub_D6F2:
+
+CalculateDispelSpellTargetPriority:
                 
                 movem.l d0/d2-a6,-(sp)
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
@@ -416,38 +426,45 @@ sub_D6F2:
                 subi.w  #1,d7
                 clr.w   d6
                 clr.w   d5
-loc_D708:
+@Loop:
                 
                 clr.w   d0
                 move.b  (a1,d5.w),d0
+                
+                ; Check attack spell
                 clr.w   d3
                 bsr.w   GetNextUsableAttackSpell
                 cmpi.w  #SPELL_NOTHING,d1
-                beq.s   loc_D722
+                beq.s   @CheckHealingSpell
                 addi.w  #1,d6
-                bra.w   loc_D732
-loc_D722:
+                bra.w   @Next
+@CheckHealingSpell:
                 
                 clr.w   d3
                 bsr.w   GetNextHealingSpell
                 cmpi.w  #SPELL_NOTHING,d1
-                beq.s   loc_D732
+                beq.s   @Next
                 addi.w  #1,d6
-loc_D732:
+@Next:
                 
                 addi.w  #1,d5
-                dbf     d7,loc_D708
+                dbf     d7,@Loop
+                
                 move.w  d6,d1
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function sub_D6F2
+    ; End of function CalculateDispelSpellTargetPriority
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Returns priority for the AI to cast BOOST.
+; 
+; Out: d1.w = target priority
 
-sub_D742:
+
+CalculateBoostSpellTargetPriority:
                 
                 movem.l d0/d2-a6,-(sp)
                 lea     ((TARGETS_LIST-$1000000)).w,a0
@@ -457,48 +474,53 @@ sub_D742:
                 clr.w   d5
                 move.w  (a3),d6
                 tst.w   d6
-                bne.s   loc_D760
-                bra.w   loc_D7A2
-loc_D760:
+                bne.s   @Continue
+                bra.w   @Skip
+@Continue:
                 
                 subi.w  #1,d6
-loc_D764:
+@Loop:
                 
                 clr.w   d0
                 move.b  (a0,d4.w),d0
                 clr.w   d3
                 bsr.w   GetNextUsableAttackSpell
                 cmpi.b  #SPELL_NOTHING,d1
-                bne.s   loc_D792
+                bne.s   @Next
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
                 move.b  (a2,d0.w),d2
                 cmpi.b  #$FF,d2
-                beq.s   loc_D792
+                beq.s   @Next
                 move.w  d2,d0
                 bsr.w   GetCurrentHP
                 tst.w   d1
-                beq.s   loc_D792
+                beq.s   @Next
                 addi.w  #1,d5
-loc_D792:
+@Next:
                 
                 addi.w  #1,d4
-                dbf     d6,loc_D764
-                cmpi.w  #2,d5
-                bge.s   loc_D7A2
+                dbf     d6,@Loop
+                
+                cmpi.w  #2,d5           ; check if there are at least 2 valid targets in area of effect
+                bge.s   @Skip
                 clr.w   d5
-loc_D7A2:
+@Skip:
                 
                 move.w  d5,d1
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function sub_D742
+    ; End of function CalculateBoostSpellTargetPriority
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Returns priority for the AI to cast ATTACK.
+; 
+; Out: d1.w = target priority
 
-sub_D7AA:
+
+CalculateAttackSpellTargetPriority:
                 
                 movem.l d0/d2-a6,-(sp)
                 lea     ((TARGETS_LIST-$1000000)).w,a0
@@ -508,45 +530,53 @@ sub_D7AA:
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a3
                 move.w  (a3),d6
                 tst.w   d6
-                bne.s   loc_D7C8
-                bra.w   loc_D81C
-loc_D7C8:
+                bne.s   @Continue
+                bra.w   @Skip
+@Continue:
                 
                 subi.w  #1,d6
-loc_D7CC:
+@Loop:
                 
                 clr.w   d0
-                move.b  (a0,d4.w),d0
+                move.b  (a0,d4.w),d0    ; d0.b = target
+                
+                ; Check if target knows at least one attack spell
                 clr.w   d3
                 bsr.w   GetNextUsableAttackSpell
                 cmpi.b  #SPELL_NOTHING,d1
-                bne.s   loc_D814
+                bne.s   @Next
+                
+                ; Check if target has already targeted anyone
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
-                move.b  (a2,d0.w),d2
+                move.b  (a2,d0.w),d2    ; d2.b = target's last target
                 cmpi.b  #$FF,d2
-                beq.s   loc_D814
+                beq.s   @Next
+                
+                ; Check if target's last target is still alive
                 move.w  d2,d0
                 bsr.w   GetCurrentHP
                 tst.w   d1
-                beq.s   loc_D814
+                beq.s   @Next
+                
+                ; 
                 move.b  (a0,d4.w),d0
                 bsr.w   GetCurrentATT
-                move.w  #$FF,d0
+                move.w  #255,d0
                 sub.w   d1,d0
                 add.w   d0,d5
-                cmpi.w  #$FF,d5
+                cmpi.w  #255,d5         ; unnecessary
                 addi.w  #1,d5
-                ble.s   loc_D814
-                move.w  #$FF,d5
-loc_D814:
+                ble.s   @Next
+                move.w  #255,d5
+@Next:
                 
                 addi.w  #1,d4
-                dbf     d6,loc_D7CC
-loc_D81C:
+                dbf     d6,@Loop
+@Skip:
                 
                 move.w  d5,d1
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function sub_D7AA
+    ; End of function CalculateAttackSpellTargetPriority
 

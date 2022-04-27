@@ -83,7 +83,7 @@ sub_21A92:
                 ; Check current mithril weapons list
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
                 subq.w  #1,d7
-                lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
+                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
 loc_21ACA:
                 
                 move.w  (a0)+,currentItem(a6)
@@ -198,7 +198,7 @@ loc_21BE4:
                 jsr     j_AddItem
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d6
                 sub.w   ordersNumber(a6),d6
-                lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a1
+                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a1
                 lsl.w   #1,d6
                 adda.w  d6,a1
                 move.w  (a1),d2
@@ -422,9 +422,9 @@ sub_21E48:
                 move.w  #1,var_20(a6)
 loc_21E5C:
                 
-                move.w  #4,d7
+                move.w  #MITHRILWEAPON_SLOTS_NUMBER,d7
                 subq.w  #1,d7
-                lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
+                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
 loc_21E66:
                 
                 move.w  (a0)+,d1
@@ -526,7 +526,7 @@ PickMithrilWeapon:
                 movem.l d0-a0,-(sp)
                 clr.w   d0
                 lea     tbl_MithrilWeaponClasses(pc), a0
-                move.w  #MITHRILWEAPONCLASSES_COUNTER,d7
+                move.w  #MITHRILWEAPON_CLASSES_COUNTER,d7
 @FindWeaponClass_Loop:
                 
                 move.w  (a0)+,d6        ; D6 = number of character classes
@@ -554,7 +554,7 @@ PickMithrilWeapon:
                 lsl.w   #3,d0           ; D0 = weapon class index * 8 (weapons entry size)
                 lea     tbl_MithrilWeapons(pc), a0
                 adda.w  d0,a0
-                move.w  #MITHRILWEAPONS_COUNTER,d5
+                move.w  #MITHRILWEAPONS_PER_CLASS_COUNTER,d5
 @PickWeapon_Loop:
                 
                 clr.w   d0
@@ -568,8 +568,8 @@ PickMithrilWeapon:
                 dbf     d5,@PickWeapon_Loop
 @LoadIndex:
                 
-                lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
-                move.w  #MITHRILWEAPONSLOTS_COUNTER,d7
+                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
+                move.w  #MITHRILWEAPON_SLOTS_COUNTER,d7
 @LoadIndex_Loop:
                 
                 cmpi.w  #0,(a0)

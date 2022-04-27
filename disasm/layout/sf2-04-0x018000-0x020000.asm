@@ -15,5 +15,5 @@
                 include "data\battles\global\backgroundenemyswitch.asm"    ; Background enemy switch table
                 include "data\graphics\battles\battlesprites\allyidlebattlesprites.asm"    ; Ally Idle Battle Sprites
                 include "data\graphics\battles\battlesprites\enemyidlebattlesprites.asm"    ; Enemy Idle Battle Sprites
-                includeIfVanillaRom "data\graphics\tech\backgroundlayout.asm"    ; Battle Background Layout
+                includeIfVanillaRom "data\graphics\tech\backgroundlayout.asm"    ; Battlescene Background Layout
                 alignIfOriginalRomLayout $20000
