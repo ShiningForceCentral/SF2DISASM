@@ -1,6 +1,6 @@
 
 ; ASM FILE data\graphics\battles\weapons\palettes\entries.asm :
-; 0x1BEE38..0x1BEEE0 : WeaponPalettes
+; 0x1BEE38..0x1BEEE0 : Battlescene Weapon Palettes
 WeaponPalette00:incbin "data/graphics/battles/weapons/palettes/weaponpalette00.bin"
 WeaponPalette01:incbin "data/graphics/battles/weapons/palettes/weaponpalette01.bin"
 WeaponPalette02:incbin "data/graphics/battles/weapons/palettes/weaponpalette02.bin"

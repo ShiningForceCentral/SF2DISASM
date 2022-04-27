@@ -10,7 +10,7 @@
                 include "data\battles\terrainentries.asm"    ; Battle terrain data
                 include "code\gameflow\battle\battle_s13_2.asm"    ; Battle init, terrain, AI stuff to split more properly
                 include "data\stats\enemies\enemydefs.asm"    ; Enemy definitions
-                include "data\battles\spritesetentries.asm"    ; Battle sprite sets
+                include "data\battles\spritesetentries.asm"    ; Battle spritesets
                 include "data\battles\global\randombattles.asm"    ; Random battles list, and data related to UpgradeEnemyIndex function
                 include "code\specialscreens\endkiss\graphics.asm"    ; End Kiss Graphics
                 align $1B8000

@@ -366,12 +366,13 @@ loc_19A8:
 sub_19B0:
                 
                 movem.l d0/a0,-(sp)
-                moveq   #$3F,d0 
+                moveq   #63,d0
                 lea     (byte_FFAFA0).l,a0
-loc_19BC:
+@Loop:
                 
                 clr.b   (a0)+
-                dbf     d0,loc_19BC
+                dbf     d0,@Loop
+                
                 movem.l (sp)+,d0/a0
                 rts
 

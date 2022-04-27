@@ -1,6 +1,6 @@
 
 ; ASM FILE data\graphics\battles\weapons\entries.asm :
-; 0x1B9A9A..0x1BEE38 : Weapons
+; 0x1B9A9A..0x1BEE38 : Battlescene Weapons
 pt_WeaponSprites:
                 dc.l WeaponSprite00
                 dc.l WeaponSprite01

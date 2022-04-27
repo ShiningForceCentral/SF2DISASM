@@ -61,7 +61,7 @@ InitAllAlliesBattlePositions:
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d6
                 subq.w  #1,d6
                 moveq   #BATTLESPRITESET_SUBSECTION_SIZES,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 clr.w   d7
                 move.b  (a0),d7
                 subq.w  #1,d7
@@ -139,7 +139,7 @@ InitEnemyBattlePosition:
 loc_1B132E:
                 
                 moveq   #BATTLESPRITESET_SUBSECTION_ENEMIES,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 move.w  d1,d2
                 bset    #COMBATANT_BIT_ENEMY,d2
                 clr.w   d1
@@ -190,7 +190,7 @@ UpdateEnemyStatsForRespawn:
                 movem.l d0-a6,-(sp)
                 move.w  d1,d2
                 moveq   #BATTLESPRITESET_SUBSECTION_ENEMIES,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 bset    #7,d1
                 cmp.b   d1,d0
                 bcc.w   loc_1B13E8
@@ -304,7 +304,7 @@ loc_1B14E2:
                 clr.l   (a1)+
                 dbf     d1,loc_1B14E2
                 moveq   #BATTLESPRITESET_SUBSECTION_ENEMIES,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 subq.w  #1,d1
                 lea     ((ENEMY_LIST-$1000000)).w,a1
 loc_1B14F4:
@@ -460,7 +460,7 @@ GetEnemyAiTargetPosition:
 loc_1B1612:
                 
                 moveq   #BATTLESPRITESET_SUBSECTION_AI_POINTS,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 andi.w  #$F,d0
                 add.w   d0,d0
                 adda.w  d0,a0
@@ -478,15 +478,11 @@ loc_1B162A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get address and size of subsection D1 for current battle
-; 
-;       In: D1 = subsection index
-; 
-;       Out: A0 = subsection address
-;            D1 = subsection size
+; In: d1.w = subsection index
+; Out: a0 = subsection address, d1.w = subsection size
 
 
-GetBattleSpriteSetSubsection:
+GetBattleSpritesetSubsection:
                 
                 movem.l d0/d2/a1,-(sp)
                 move.b  d1,d2
@@ -494,7 +490,7 @@ GetBattleSpriteSetSubsection:
                 clr.w   d0
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d0
                 lsl.w   #2,d0
-                lea     pt_BattleSpriteSets(pc), a0
+                lea     pt_BattleSpritesets(pc), a0
                 nop
                 movea.l (a0,d0.w),a0
                 tst.b   d2
@@ -528,7 +524,7 @@ loc_1B1698:
                 movem.l (sp)+,d0/d2/a1
                 rts
 
-    ; End of function GetBattleSpriteSetSubsection
+    ; End of function GetBattleSpritesetSubsection
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -542,7 +538,7 @@ GetCombatantStartingPositions:
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Enemy
                 move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1
-                bsr.s   GetBattleSpriteSetSubsection
+                bsr.s   GetBattleSpritesetSubsection
                 cmp.b   d0,d1
                 bge.s   @GetAllyEntryAddress
                 move.w  #$FFFF,d1       ; reset positions
@@ -557,7 +553,7 @@ GetCombatantStartingPositions:
 @Enemy:
                 
                 move.w  #BATTLESPRITESET_SUBSECTION_ENEMIES,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 cmp.b   d0,d1
                 bge.s   @GetEnemyEntryAddress
                 move.w  #$FFFF,d1       ; reset positions
@@ -596,7 +592,7 @@ sub_1B16FE:
                 move.w  d2,d7
                 move.w  d1,d6
                 move.w  #BATTLESPRITESET_SUBSECTION_ENEMIES,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 move.w  d1,d5
                 subi.w  #1,d5
                 move.w  #COMBATANT_ENEMIES_START,d0

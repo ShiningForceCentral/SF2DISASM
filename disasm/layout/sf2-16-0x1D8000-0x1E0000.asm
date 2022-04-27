@@ -6,4 +6,4 @@
 
 p_Icons:        dc.l Icon000
                 include "data\graphics\icons\entries.asm"    ; Icons
-                align $8000
+                align $1E0000

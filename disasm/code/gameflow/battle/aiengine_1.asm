@@ -198,14 +198,14 @@ ExecuteAiControl:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Return defeated enemies count -> D1
+; Out: d1.w = defeated enemies count
 
 
 CountDefeatedEnemies:
                 
                 movem.l d0/d2-a6,-(sp)
                 move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1
-                jsr     j_GetBattleSpriteSetSubsection
+                jsr     j_GetBattleSpritesetSubsection
                 move.w  d1,d2
                 subi.w  #2,d2
                 clr.w   d0

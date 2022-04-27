@@ -1257,7 +1257,7 @@ loc_2466C:
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   SetMoveSfx
-                bsr.w   ControlBattleUnit
+                bsr.w   ControlBattleEntity
                 jsr     (WaitForViewScrollEnd).w
                 btst    #INPUT_BIT_B,d4
                 beq.w   loc_246EC

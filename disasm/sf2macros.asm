@@ -630,7 +630,11 @@ prowess: macro
 ; VDP tiles
     
 vdpTile: macro
+    if (narg=0)
+    dc.w 0
+    else
     defineBitfield.w VDPTILE_,\1
+    endc
     endm
     
 vdpBaseTile: macro
