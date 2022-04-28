@@ -9,7 +9,9 @@ p_Icons:        dc.l Icon000
                 includeIfExpandedRom "data\stats\items\itemdefs.asm"        ; Item definitions
                 includeIfExpandedRom "data\stats\spells\spelldefs.asm"      ; Spell definitions
                 includeIfExpandedRom "data\stats\items\itemnames.asm"       ; Item names
+                wordAlign
                 includeIfExpandedRom "data\stats\spells\spellnames.asm"     ; Spell names
+                wordAlign
                 includeIfExpandedRom "data\stats\allies\growthcurves.asm"   ; Stat growth curves
                 includeIfExpandedRom "data\stats\allies\stats\entries.asm"  ; Ally stats
                 wordAlign

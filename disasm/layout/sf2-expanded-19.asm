@@ -1,26 +1,27 @@
 
 ; GAME SECTION 19 : ROM EXPANSION.
 
-        include "data\battles\spritesetentries.asm"         ; Battle sprite sets
-        include "code\specialscreens\title\graphics.asm"    ; Title Screen Graphics
-        include "code\specialscreens\suspend\graphics.asm"  ; Suspend String Graphics
-        include "code\specialscreens\endkiss\graphics.asm"  ; End Kiss Graphics
-        include "code\specialscreens\credits\gamestaff.asm" ; Game Staff        
-        wordAlign
-        include "code\specialscreens\jewelend\graphics.asm"             ; Jewel End Graphics
-        include "data\graphics\mapsprites\entries.asm"                  ; Map sprites
-        include "code\common\tech\graphics\specialspritesentries.asm"   ; Special Sprites Entries
-        include "data\graphics\tech\backgroundlayout.asm"               ; Battle Background Layout
-        include "data\graphics\battles\backgrounds\entries.asm"         ; Backgrounds
-        include "data\maps\entries.asm"                                 ; Map entries table
+        include "data\graphics\maps\maptilesets\entries.asm"                ; Map Tilesets
+        align
+        include "data\graphics\battles\backgrounds\entries.asm"             ; Battlescene Backgrounds
+        align
+        include "data\graphics\battles\spells\invocations\entries.asm"      ; Invocation sprites
+        align
+        include "data\graphics\battles\tech\statusanimation\entries.asm"    ; Status effect animation tiles
+        align
+        include "data\graphics\battles\tech\battlescenetransition\entries.asm"  ; Battlescene transition tiles
+        align
+        include "data\graphics\battles\grounds\entries.asm"                     ; Battlescene Grounds
+        align
+        include "data\graphics\battles\spells\entries.asm"                      ; Spell Graphics
         alignIfExtendedSsf $400000
         objIfExtendedSsf $200000
         include "data\graphics\battles\battlesprites\enemies\entries.asm"   ; Enemy battlesprites
-        wordAlign
+        align
         include "data\graphics\battles\battlesprites\allies\entries.asm"    ; Ally battlesprites
-        wordAlign
-        include "data\graphics\battles\weapons\entries.asm"                 ; Weapons
-        include "data\graphics\battles\weapons\palettes\entries.asm"        ; Weapon Palettes
+        align
+        include "data\graphics\battles\weapons\entries.asm"                 ; Battlescene Weapons
+        align
+        include "data\graphics\battles\weapons\palettes\entries.asm"        ; Battlescene Weapon Palettes
         objendIfExtendedSsf
-        alignIfNotExtendedSsf $400000
-        alignIfExtendedSsf $600000
+        alignIfExtendedSsf $600000, $400000

@@ -43,8 +43,17 @@ echo End of assembly, produced %buildname%.bin
 echo -------------------------------------------------------------
 echo Checking build ...
 cd ../build/
-IF EXIST "%buildname%.bin" ..\tools\fixheader "%buildname%.bin"
-IF EXIST "%buildname%.bin" (echo "%buildname%.bin" exists in build directory. Success!) ELSE echo "%buildname%.bin" does not exist, probably due to an assembly error. Check output.log.
+SET expandedromsize=4194304
+IF EXIST "%buildname%.bin" (
+    FOR /F %%I IN ("%buildname%.bin") DO set buildsize=%%~zI
+    IF "%buildsize%" LEQ "%expandedromsize%" (
+        echo Fixing ROM header ...
+        @"../tools/fixheader" "../build/%buildname%.bin"
+    )
+    echo "%buildname%.bin" exists in build directory. Success!
+) ELSE (
+    echo "%buildname%.bin" does not exist, probably due to an assembly error. Check output.log.
+)
 
 
 pause

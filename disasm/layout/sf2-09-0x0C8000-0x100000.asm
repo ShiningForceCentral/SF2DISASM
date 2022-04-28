@@ -5,6 +5,6 @@
 
 
                 includeIfVanillaRom "data\graphics\mapsprites\entries.asm"      ; Map sprites
-                includeIfExpandedRom "data\graphics\battles\spells\entries.asm" ; Spell Graphics
                 includeIfExpandedRom "data\battles\terrainentries.asm"          ; Battle terrain data
+                includeIfExpandedRom "data\battles\spritesetentries.asm"        ; Battle spritesets
                 alignIfOriginalRomLayout $100000

@@ -2339,10 +2339,8 @@ loc_252A6:
                 bmi.w   loc_25236
                 move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                getCurrentSaveSlot
-                enableSram
+                getCurrentSaveSlot d0
                 jsr     (SaveGame).l
-                disableSram
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.w   byte_252E6
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w

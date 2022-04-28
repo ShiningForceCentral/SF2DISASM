@@ -490,8 +490,7 @@ GetBattleSpritesetSubsection:
                 clr.w   d0
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d0
                 lsl.w   #2,d0
-                conditionalPc lea,pt_BattleSpritesets,a0
-                nop
+                conditionalPc lea,pt_BattleSpriteSets,a0,nop
                 movea.l (a0,d0.w),a0
                 tst.b   d2
                 beq.w   loc_1B1698      ; 0 = Section sizes

@@ -24,4 +24,12 @@ p_WitchEndTiles:dc.l WitchEndTiles
                 includeIfVanillaRom "data\graphics\battles\spells\entries.asm"    ; Spell Graphics
                 include "code\specialscreens\witch\graphics.asm"    ; Witch Screen
                 include "code\specialscreens\witchend\graphics.asm"    ; Witch End Screen
+                includeIfExpandedRom "data\graphics\tech\backgroundlayout.asm"    ; Battlescene Background Layout
+                includeIfExpandedRom "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
+                wordAlign
+                includeIfExpandedRom "code\specialscreens\endkiss\graphics.asm"  ; End Kiss Graphics
+                wordAlign
+                includeIfExpandedRom "code\specialscreens\jewelend\graphics.asm"             ; Jewel End Graphics
+                wordAlign
+                includeIfExpandedRom "code\specialscreens\suspend\graphics.asm"  ; Suspend String Graphics
                 alignIfOriginalRomLayout $1C8000

@@ -11,7 +11,6 @@ CheatModeConfiguration:
                 beq.w   return_7EC4
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 beq.s   loc_7E58
-                enableSram
                 btst    #7,(SAVE_FLAGS).l
                 bne.w   nullsub_7FA4
 loc_7E58:

@@ -127,8 +127,7 @@ loc_7820:
                 clr.w   d1
                 move.b  d0,d1
                 mulu.w  #7,d0
-                conditionalPc lea,BattleMapCoordinates,a0
-                nop
+                conditionalPc lea,BattleMapCoordinates,a0,nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
                 move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w

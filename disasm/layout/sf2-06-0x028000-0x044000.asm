@@ -77,10 +77,9 @@ TextBankTreeOffsets:
                 incbin "data/scripting/text/huffmantreeoffsets.bin"
 TextBankTreeData:
                 incbin "data/scripting/text/huffmantrees.bin"
-                includeIfVanillaRom "data\scripting\text\entries.asm"           ; Textbank entries
-                includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm" ; Game Staff
+                includeIfVanillaRom "data\scripting\text\entries.asm"    ; Textbank entries
+                includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
                 wordAlign
-                includeIfExpandedRom "data\graphics\battles\grounds\entries.asm"    ; Grounds
                 includeIfExpandedRom "data\battles\global\battlemapcoords.asm"      ; Battle map coords
                 includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"      ; Save point map coords
                 includeIfExpandedRom "data\maps\global\raftresetmapcoords.asm"      ; Raft reset map coords

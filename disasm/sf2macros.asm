@@ -23,6 +23,9 @@ wordAlign: macro ;alias
     align
     endm
     
+; ---------------------------------------------------------------------------
+; Expanded ROM
+; ---------------------------------------------------------------------------
     
 declareSystemId: macro
     if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
@@ -33,95 +36,121 @@ declareSystemId: macro
     endm
     
 declareRomEnd: macro
-    if (STANDARD_BUILD&expandedRom=1)
+    if (expandedRom=1)
     dc.l $3FFFFF
     else
     dc.l $1FFFFF
     endc
     endm
-
-enableSram: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
-    jsr     (EnableMapperSram).w
-    elseif (STANDARD_BUILD&expandedRom=1)
-    move.b  #3,(SEGA_MAPPER_CTRL0).l
-    endc
-    endm
     
-disableSram: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
-    jsr     (DisableMapperSram).w
-    elseif (STANDARD_BUILD&expandedRom=1)
-    move.b  #0,(SEGA_MAPPER_CTRL0).l
-    endc
-    endm
-
 getCurrentSaveSlot: macro
     if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
-    move.b  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+    move.b  ((CURRENT_SAVE_SLOT-$1000000)).w,\1
     else
-    move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+    move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,\1
     endc
     endm
     
 setCurrentSaveSlot: macro
     if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
-    move.b  d0,((CURRENT_SAVE_SLOT-$1000000)).w
+    move.b  \1,((CURRENT_SAVE_SLOT-$1000000)).w
     else
-    move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
+    move.w  \1,((CURRENT_SAVE_SLOT-$1000000)).w
     endc
     endm
     
+enableSram: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jsr     (ControlMapper_EnableSram).w
+    elseif (expandedRom=1)
+    move.b  #1,(SEGA_MAPPER_CTRL0).l
+    endc
+    endm
+    
+enableSramAndReturn: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jmp     (ControlMapper_EnableSram).w
+    elseif (expandedRom=1)
+    move.b  #1,(SEGA_MAPPER_CTRL0).l
+    rts
+    else
+    rts
+    endc
+    endm
+    
+disableSram: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jsr     (ControlMapper_DisableSram).w
+    elseif (expandedRom=1)
+    move.b  #0,(SEGA_MAPPER_CTRL0).l
+    endc
+    endm
+    
+disableSramAndSwitchRomBanks: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jsr     (ControlMapper_DisableSramAndSwitchRomBanks).w
+    elseif (expandedRom=1)
+    move.b  #0,(SEGA_MAPPER_CTRL0).l
+    endc
+    endm
     
 switchRomBanks: macro
     if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
-    move.b  #8,(ROM_BANK4).l
-    move.b  #9,(ROM_BANK5).l
-    move.b  #10,(ROM_BANK6).l
-    move.b  #11,(ROM_BANK7).l
+    jsr     (ControlMapper_SwitchRomBanks).w
     endc
     endm
     
 restoreRomBanks: macro
     if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
-    move.b  #4,(ROM_BANK4).l
-    move.b  #5,(ROM_BANK5).l
-    move.b  #6,(ROM_BANK6).l
-    move.b  #7,(ROM_BANK7).l
+    jsr     (ControlMapper_RestoreRomBanks).w
     endc
     endm
     
-dmaBattlespriteFrame: macro
+restoreRomBanksAndEnableSram: macro
     if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
-    jsr     (ApplyImmediateVramDmaOnCompressedTiles).w
-    restoreRomBanks
+    jsr     (ControlMapper_RestoreRomBanksAndEnableSram).w
+    elseif (expandedRom=1)
+    move.b  #1,(SEGA_MAPPER_CTRL0).l
+    endc
+    endm
+    
+processDmaAndRestoreMemoryMap: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    pea     (\3).w
+    pea     (\2).w
+    jmp     (\1).w
+    elseif (expandedRom=1)
+    jsr     (\1).w
+    jsr     (\2).w
+    move.b  #1,(SEGA_MAPPER_CTRL0).l
     rts
     else
-    jmp     (ApplyImmediateVramDmaOnCompressedTiles).w
+    jsr     (\1).w
+    jmp     (\2).w
     endc
     endm
     
-waitForBattlespriteDma: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
-    jsr     (WaitForDmaQueueProcessing).w
-    restoreRomBanks
-    rts
-    else
-    jmp     (WaitForDmaQueueProcessing).w
-    endc
+processDmaAndEnableSram: macro
+    processDmaAndRestoreMemoryMap \1, WaitForDmaQueueProcessing, ControlMapper_EnableSram
     endm
     
-loadBattlesprite: macro
+processDmaRestoreRomBanksAndEnableSram: macro
+    processDmaAndRestoreMemoryMap \1, WaitForDmaQueueProcessing, ControlMapper_RestoreRomBanksAndEnableSram
+    endm
+    
+loadCompressedDataRestoreRomBanksAndEnableSram: macro
     if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    pea     (ControlMapper_RestoreRomBanksAndEnableSram).w
+    jmp     (LoadCompressedData).w
+    elseif (expandedRom=1)
     jsr     (LoadCompressedData).w
-    restoreRomBanks
+    move.b  #1,(SEGA_MAPPER_CTRL0).l
     rts
     else
     jmp     (LoadCompressedData).w
     endc
     endm
-
-
+    
 conditionalMapperInit: macro
     if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     bsr.w   InitMapper
@@ -129,34 +158,27 @@ conditionalMapperInit: macro
     endm
     
 conditionalRomExpand: macro
-    if (STANDARD_BUILD&expandedRom=1)
+    if (expandedRom=1)
     include "layout\sf2-expanded-19.asm"
     endc
     endm
     
 conditionalPc: macro
-    if (STANDARD_BUILD&expandedRom=1)
+    if (expandedRom=1)
     \1 \2,\3
     else
     \1 \2(pc),\3
-    endc
-    endm
-    
-conditionalBsr: macro
-    if (STANDARD_BUILD&expandedRom=1)
-    jsr \1
-    else
-    bsr.w \1
+    \4
     endc
     endm
     
 conditionalWordAddr: macro
-    if (STANDARD_BUILD&expandedRom=1)
+    if (expandedRom=1)
     \1 (\2).l,\3
     else
     \1 (\2).w,\3
     endc
-    endm    
+    endm
     
 alignIfOriginalRomLayout: macro
     if (STANDARD_BUILD=0)
@@ -170,15 +192,11 @@ alignIfOriginalRomLayout: macro
     endc
     endm
     
-alignIfNotExtendedSsf: macro
-    if (EXTENDED_SSF_MAPPER=0)
-    align \1
-    endc
-    endm
-    
 alignIfExtendedSsf: macro
     if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     align \1
+    else
+    align \2
     endc
     endm
     
@@ -193,7 +211,6 @@ objendIfExtendedSsf: macro
     objend
     endc
     endm
-    
     
 includeIfVanillaRom: macro
     if (STANDARD_BUILD=0)
@@ -216,13 +233,13 @@ incbinIfVanillaRom: macro
     endm
     
 includeIfExpandedRom: macro
-    if (STANDARD_BUILD&expandedRom=1)
+    if (expandedRom=1)
     include \1
     endc
     endm
     
 incbinIfExpandedRom: macro
-    if (STANDARD_BUILD&expandedRom=1)
+    if (expandedRom=1)
     incbin \1
     endc
     endm
@@ -239,6 +256,7 @@ incbinIfExtendedSsf: macro
     endc
     endm
     
+; ---------------------------------------------------------------------------
     
 sndCom: macro
     trap #SOUND_COMMAND

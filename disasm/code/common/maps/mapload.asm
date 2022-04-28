@@ -670,6 +670,8 @@ ProcessMapTransition:
                 
                 clr.w   d1
                 move.b  ((CURRENT_MAP-$1000000)).w,d1
+                
+                disableSram
                 movea.l (p_pt_MapData).l,a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
@@ -735,7 +737,7 @@ loc_2632:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l 0
-                rts
+                enableSramAndReturn
 
     ; End of function ProcessMapTransition
 
@@ -1074,6 +1076,7 @@ LoadMapTilesets:
                 ext.w   d1
                 blt.w   @Skip           ; skip if map index > 127
                 
+                disableSram
                 movea.l (p_pt_MapData).l,a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
@@ -1127,12 +1130,15 @@ LoadMapTilesets:
                 movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   @Skip
+                blt.s   @Done
                 
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF2000_LOADING_SPACE).l,a1
                 bsr.w   LoadCompressedData
+@Done:
+                
+                enableSram
 @Skip:
                 
                 movem.l (sp)+,d0-d1/a0-a1/a5
@@ -1551,6 +1557,8 @@ LoadMapArea:
                 
                 movea.l ((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w,a1
                 move.w  (a1)+,d0
+                
+                disableSram
                 movea.l (p_pt_MapTilesets).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
@@ -1558,6 +1566,8 @@ LoadMapArea:
                 lea     (FF6802_LOADING_SPACE).l,a1
                 bsr.w   LoadCompressedData
                 movea.l (sp)+,a1
+                
+                enableSram
                 move.w  (a1)+,d7
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     (byte_FF9B04).l,a1

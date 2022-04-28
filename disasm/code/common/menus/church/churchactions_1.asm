@@ -486,11 +486,9 @@ ChurchMenuActions:
 @DoSaveGame:
                 
                 move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP-$1000000)).w
-                getCurrentSaveSlot
+                getCurrentSaveSlot d0
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
-                enableSram
                 jsr     (SaveGame).w
-                disableSram
                 sndCom  MUSIC_SAVE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop

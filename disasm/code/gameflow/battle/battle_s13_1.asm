@@ -1771,8 +1771,7 @@ loc_1AD0D4:
 LoadBattleTerrainData:
                 
                 movem.l d0-d6/a0-a5,-(sp)
-                conditionalPc lea,pt_BattleTerrainData,a0
-                nop
+                conditionalPc lea,pt_BattleTerrainData,a0,nop
                 lea     ((CURRENT_BATTLE-$1000000)).w,a1
                 clr.l   d1
                 move.b  (a1),d1
