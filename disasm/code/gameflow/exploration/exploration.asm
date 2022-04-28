@@ -930,6 +930,7 @@ OpenDoor:
                 
                 checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.w   return_3F22
+                
                 movem.w d0-d7,-(sp)
                 lsr.w   #7,d0
                 lsr.w   #7,d1
@@ -987,10 +988,12 @@ loc_3ECC:
                 addq.w  #2,d0
                 addq.w  #2,d2
                 dbf     d6,loc_3ECC
+                
                 movem.w (sp)+,d0/d2/d6
                 addi.w  #$80,d0 
                 addi.w  #$80,d2 
                 dbf     d7,loc_3EC8
+                
                 bra.s   byte_3F06
 loc_3EEC:
                 
@@ -1000,6 +1003,7 @@ loc_3EF0:
                 clr.w   (a2,d2.w)
                 addq.w  #2,d2
                 dbf     d6,loc_3EF0
+                
                 movem.w (sp)+,d2/d6
                 addi.w  #$80,d2 
                 dbf     d7,loc_3EEC
@@ -1030,7 +1034,7 @@ loc_3F24:
 
 ; =============== S U B R O U T I N E =======================================
 
-; display (or don't) map roof depending on player's start location
+; Display (or don't) map roof depending on player's start location.
 
 
 ToggleRoofOnMapLoad:
@@ -1118,6 +1122,7 @@ PerformMapBlockCopyScript:
                 move.w  d7,-(sp)
                 tst.w   ((word_FFAF42-$1000000)).w
                 bne.w   loc_40E6
+                
                 lsr.w   #7,d0
                 lsr.w   #7,d1
                 moveq   #1,d2
@@ -1182,10 +1187,12 @@ loc_4096:
                 addq.w  #2,d0
                 addq.w  #2,d2
                 dbf     d6,loc_4096
+                
                 movem.w (sp)+,d0/d2-d6
                 addi.w  #$80,d0 
                 addi.w  #$80,d2 
                 dbf     d7,loc_4092
+                
                 bra.s   loc_40D8
 loc_40BA:
                 
@@ -1196,6 +1203,7 @@ loc_40BE:
                 clr.w   (a2,d2.w)
                 addq.w  #2,d2
                 dbf     d6,loc_40BE
+                
                 movem.w (sp)+,d2/d6
                 addi.w  #$80,d2 
                 dbf     d7,loc_40BA
@@ -1432,7 +1440,7 @@ GetItem:
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,d2
                 beq.w   loc_4290        ; if we are not in battle branch
                 movem.l a0,-(sp)
-                lea     (BattleMapCoordinates).w,a0
+                conditionalWordAddr lea,BattleMapCoordinates,a0
                 mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE,d2 ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
                 add.b   1(a0,d2.w),d0
                 add.b   2(a0,d2.w),d1   ; add x1 and y1 of battle camera bounds

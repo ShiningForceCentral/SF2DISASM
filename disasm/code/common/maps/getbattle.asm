@@ -25,8 +25,8 @@ CheckBattle:
                 getSavedByte CURRENT_MAP, d0
 @Continue:
                 
-                lea     BattleMapCoordinates(pc), a0
-                moveq   #BATTLES_NUMBER,d6 ; HARDCODED number of battles
+                conditionalPc lea,BattleMapCoordinates,a0
+                moveq   #BATTLES_NUMBER,d6          ; HARDCODED number of battles
                 clr.w   d7
 @Loop:
                 

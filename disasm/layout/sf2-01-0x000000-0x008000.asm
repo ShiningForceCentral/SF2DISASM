@@ -48,13 +48,14 @@
                 include "code\common\maps\mapinit_0.asm"    ; Map init functions
                 include "data\maps\global\flagswitchedmaps.asm"    ; Flag-switched maps
                 include "code\common\maps\getbattle.asm"    ; GetNextBattleOnMap function
-                include "data\battles\global\battlemapcoords.asm"    ; Battle map coords
-                include "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
-                include "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
+                includeIfVanillaRom "data\battles\global\battlemapcoords.asm"    ; Battle map coords
+                includeIfVanillaRom "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
+                includeIfVanillaRom "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
                 wordAlign
                 include "code\specialscreens\witch\witchfunctions.asm"    ; Witch functions
                 include "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
                 include "code\gameflow\start\regioncheck.asm"    ; Region check function
 nullsub_7FA4:                
                 rts
-                align $8000
+                includeIfExtendedSsf "code\common\tech\extendedssfmapper.asm"   ; Extended SSF mapper functions
+                alignIfOriginalRomLayout $8000

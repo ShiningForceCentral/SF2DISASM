@@ -114,25 +114,25 @@ loc_4D5C:
                 sub.w   d7,d6
                 addi.w  #VDPSPRITESIZE_V3|VDPSPRITESIZE_H3,d6
                 move.w  d6,VDPSPRITE_OFFSET_SIZE(a1)
-                ori.w   #VDPTILE_CLEAR|VDPTILE_PALETTE3,d5
+                ori.w   #VDPTILE_PALETTE3,d5
                 move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d0
                 andi.w  #3,d0
                 cmpi.w  #2,d0
                 bne.s   loc_4DA0
-                ori.w   #VDPTILE_CLEAR|VDPTILE_FLIP,d5
+                ori.w   #VDPTILE_FLIP,d5
 loc_4DA0:
                 
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d0
                 ext.w   d0
                 move.b  byte_4E16(pc,d0.w),d0
                 bne.s   loc_4DB0
-                ori.w   #VDPTILE_CLEAR|VDPTILE_MIRROR,d5
+                ori.w   #VDPTILE_MIRROR,d5
 loc_4DB0:
                 
                 move.b  ((WINDOW_IS_PRESENT-$1000000)).w,d6
                 cmp.b   $11(a0),d6
                 bge.s   loc_4DBE
-                ori.w   #VDPTILE_CLEAR|VDPTILE_PRIORITY,d5
+                ori.w   #VDPTILE_PRIORITY,d5
 loc_4DBE:
                 
                 move.w  d5,VDPSPRITE_OFFSET_TILE(a1)
@@ -2588,24 +2588,26 @@ LoadMapEntitySprites:
                 
                 bsr.w   DisableDisplayAndInterrupts
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                moveq   #$2F,d7 
-loc_602E:
+                moveq   #47,d7
+@Loop:
                 
                 cmpi.w  #$7000,(a0)
-                beq.s   loc_603C
+                beq.s   @Next
                 move.w  d7,-(sp)
                 bsr.w   DmaMapSprite
                 move.w  (sp)+,d7
-loc_603C:
+@Next:
                 
                 adda.w  #$20,a0 
-                dbf     d7,loc_602E
+                dbf     d7,@Loop
+                
                 bsr.w   EnableDisplayAndInterrupts
                 rts
 
     ; End of function LoadMapEntitySprites
 
-FacingValues_2: dc.b 0
+tbl_FacingValues_2:
+                dc.b 0
                 dc.b 1
                 dc.b 2
                 dc.b 3
@@ -2616,7 +2618,10 @@ FacingValues_2: dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-; In D0=Entity index
+; In: d0.b = entity index
+;     d1.w = new facing direction
+;     d2.b = new B flags (keep current if = $FF)
+;     d3.b = new map sprite index (keep current if = $FF)
 
 
 UpdateEntityProperties:
@@ -2626,16 +2631,16 @@ UpdateEntityProperties:
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 cmpi.b  #$FF,d2
-                beq.s   loc_6072
+                beq.s   @CheckMapSprite
                 andi.w  #$7F,d2 
                 andi.b  #$80,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 or.b    d2,ENTITYDEF_OFFSET_FLAGS_B(a0)
-loc_6072:
+@CheckMapSprite:
                 
                 cmpi.b  #$FF,d3
-                beq.s   loc_607C
+                beq.s   @ChangeDirection
                 move.b  d3,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-loc_607C:
+@ChangeDirection:
                 
                 move.w  d1,d6
                 andi.w  #3,d6
@@ -2663,14 +2668,15 @@ UpdateEntitySprite:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Entity address, D6=Facing
+; In: a0 = pointer to entity data
+;     d6.b = facing direction
 
 
 ChangeEntitySprite:
                 
                 move.b  d6,ENTITYDEF_OFFSET_FACING(a0)
                 ext.w   d6
-                move.b  FacingValues_2(pc,d6.w),d6
+                move.b  tbl_FacingValues_2(pc,d6.w),d6
                 bne.s   loc_60B6
                 addq.w  #2,d6
 loc_60B6:
@@ -2753,7 +2759,8 @@ return_6180:
 
     ; End of function ChangeEntitySprite
 
-FacingValues:   dc.b 0                  ; 8 bytes holding facing values for sprites (not sure what it's for)
+tbl_FacingValues:
+                dc.b 0                  ; 8 bytes holding facing values for sprites (not sure what it's for)
                 dc.b 1
                 dc.b 2
                 dc.b 3
@@ -2769,7 +2776,7 @@ DmaMapSprite:
                 
                 clr.w   d6
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d6
-                move.b  FacingValues(pc,d6.w),d6
+                move.b  tbl_FacingValues(pc,d6.w),d6
                 bne.s   @Continue
                 addq.w  #2,d6
 @Continue:

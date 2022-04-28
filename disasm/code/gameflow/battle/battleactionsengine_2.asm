@@ -176,6 +176,7 @@ InitBattlesceneProperties:
 
 CreateBattlesceneMessage:
                 
+                module
                 movem.l d0-d3/a0,-(sp)
                 move.b  (a4),d0
                 cmpi.w  #BATTLEACTION_ATTACK,(a3)
@@ -183,12 +184,12 @@ CreateBattlesceneMessage:
                 move.w  ((BATTLESCENE_ATTACK_TYPE-$1000000)).w,d2
                 move.w  #MESSAGE_BATTLE_ATTACK,d1 ; {NAME}'s attack!
                 tst.w   d2
-                beq.w   @Message_Attack 
+                beq.w   byte_A086       
                 move.w  #MESSAGE_BATTLE_SECOND_ATTACK,d1 ; {NAME}'s second{N}attack!
                 cmpi.w  #BATTLEACTION_ATTACKTYPE_SECOND,d2
-                beq.w   @Message_Attack 
+                beq.w   byte_A086       
                 move.w  #MESSAGE_BATTLE_COUNTER_ATTACK,d1 ; {NAME}'s counter{N}attack!
-@Message_Attack:
+byte_A086:
                 
                 displayMessage d1,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 bra.w   @Done
@@ -279,11 +280,11 @@ CreateBattlesceneMessage:
                 cmpi.w  #ENEMY_ZEON_GUARD,d1
                 bne.s   @PrismFlower    
                 move.w  #MESSAGE_BATTLE_DEMON_LASER,d1 ; 0141=Demon laser!
-                bra.s   @BattleMessage_PrismLaser
+                bra.s   byte_A1E6       
 @PrismFlower:
                 
                 move.w  #MESSAGE_BATTLE_PRISM_LASER,d1 ; 013F=Prism laser!
-@BattleMessage_PrismLaser:
+byte_A1E6:
                 
                 displayMessage d1,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
 @Done:
@@ -293,3 +294,4 @@ CreateBattlesceneMessage:
 
     ; End of function CreateBattlesceneMessage
 
+                modend

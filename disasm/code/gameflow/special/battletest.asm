@@ -127,8 +127,7 @@ loc_7820:
                 clr.w   d1
                 move.b  d0,d1
                 mulu.w  #7,d0
-                lea     BattleMapCoordinates(pc), a0
-                nop
+                conditionalPc lea,BattleMapCoordinates,a0,nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
                 if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)

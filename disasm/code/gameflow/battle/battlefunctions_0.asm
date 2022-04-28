@@ -270,13 +270,13 @@ ControlUnitCursor:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: D2 = chosen X
-;      D3 = chosen Y
-;      D4 = copied P1 input state bitfield
+; Out: d2.b = chosen X
+;      d3.b = chosen Y
+;      d4.w = copied P1 input state bitfield
 
 battleEntity = -2
 
-ControlBattleUnit:
+ControlBattleEntity:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 link    a6,#-2
@@ -292,26 +292,27 @@ ControlBattleUnit:
                 move.b  d0,$11(a1)
                 jsr     (WaitForVInt).w
                 move.b  #$21,ENTITYDEF_OFFSET_ENTNUM(a1) 
-                bsr.w   sub_234C8       
+                bsr.w   UpdateBattleEntitySprite
                 move.w  battleEntity(a6),d0
                 jsr     j_SetControlledEntityActScript
                 addi.w  #$10,d0
                 lea     ((byte_FFAFA0-$1000000)).w,a0
                 move.b  #1,(a0,d0.w)
-loc_22E68:
+@Loop:
                 
-                bsr.w   UpdateControlledUnitPos
+                bsr.w   UpdateBattleEntityPosition
                 jsr     (WaitForVInt).w
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d4
                 andi.w  #INPUT_B|INPUT_C|INPUT_A,d4
-                beq.s   loc_22E68
+                beq.s   @Loop
+                
                 clr.b   (a0,d0.w)
                 move.b  $11(a1),d0
                 lsr.b   #4,d0
                 move.b  d0,$11(a1)
                 move.w  (sp)+,d0
                 move.b  d0,ENTITYDEF_OFFSET_ENTNUM(a1)
-                bsr.w   sub_234C8       
+                bsr.w   UpdateBattleEntitySprite
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  ENTITYDEF_OFFSET_XDEST(a1),d2
                 ext.l   d2
@@ -328,13 +329,13 @@ loc_22E68:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-    ; End of function ControlBattleUnit
+    ; End of function ControlBattleEntity
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateControlledUnitPos:
+UpdateBattleEntityPosition:
                 
                 movem.w d0-d3,-(sp)
                 move.w  (a1),d2
@@ -362,7 +363,7 @@ UpdateControlledUnitPos:
                 movem.w (sp)+,d0-d3
                 rts
 
-    ; End of function UpdateControlledUnitPos
+    ; End of function UpdateBattleEntityPosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -465,7 +466,7 @@ MoveBattleEntityByMoveString:
                 move.b  d0,$11(a1)
                 jsr     (WaitForVInt).w
                 move.b  #$21,ENTITYDEF_OFFSET_ENTNUM(a1) 
-                bsr.w   sub_234C8       
+                bsr.w   UpdateBattleEntitySprite
                 move.w  var_2(a6),d0
                 jsr     sub_44030
                 move.l  a0,-(sp)
@@ -533,7 +534,7 @@ loc_23074:
                 
                 move.w  ((MOVE_SFX-$1000000)).w,d0
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
-                bsr.w   UpdateControlledUnitPos
+                bsr.w   UpdateBattleEntityPosition
                 move.w  var_2(a6),d0
                 jsr     j_WaitForEntityToStopMoving
                 bra.w   loc_22FE8
@@ -544,7 +545,7 @@ loc_2308E:
                 move.b  d0,$11(a1)
                 move.w  (sp)+,d0
                 move.b  d0,ENTITYDEF_OFFSET_ENTNUM(a1)
-                bsr.w   sub_234C8       
+                bsr.w   UpdateBattleEntitySprite
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  (a1),d2
                 ext.l   d2
@@ -1038,26 +1039,27 @@ LoadUnitCursorTileData:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A1 = entity data pointer
+; In: a1 = pointer to entity data
+;     d6.b = facing direction
 
 
-sub_234C8:
+UpdateBattleEntitySprite:
                 
                 movem.l d0-d2/a0-a1,-(sp)
                 move.b  ENTITYDEF_OFFSET_FACING(a1),d6
                 ext.w   d6
-                move.b  byte_2353E(pc,d6.w),d6
-                bne.s   loc_234DA
+                move.b  tbl_FacingValues_3(pc,d6.w),d6
+                bne.s   @Continue
                 addq.w  #2,d6
-loc_234DA:
+@Continue:
                 
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
-                bcc.s   loc_23538
+                bcc.s   @Done
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1
                 cmpi.b  #$20,d1 
-                beq.s   loc_23538
+                beq.s   @Done
                 move.w  d1,-(sp)
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
@@ -1083,14 +1085,15 @@ loc_234DA:
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
                 jsr     (EnableDmaQueueProcessing).w
-loc_23538:
+@Done:
                 
                 movem.l (sp)+,d0-d2/a0-a1
                 rts
 
-    ; End of function sub_234C8
+    ; End of function UpdateBattleEntitySprite
 
-byte_2353E:     dc.b 0
+tbl_FacingValues_3:
+                dc.b 0
                 dc.b 1
                 dc.b 2
                 dc.b 3
@@ -1143,41 +1146,50 @@ loc_23572:
 
     ; End of function sub_23554
 
-spr_2358C:      ; unknown sprite definitions
+spr_2358C:      ; unknown VDP sprite definitions
+;
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+;
+;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
-                
-                vdpSprite 116, V4|H4|16, 1664|CLEAR|PALETTE3, 124
-                vdpSprite 1, V4|H4|10, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 1, V4|H4|11, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 1, V4|H4|12, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 1, V4|H4|13, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 1, V4|H4|14, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 1, V4|H4|15, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 1, V4|H4|16, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 86, V4|H4|9, 1680|CLEAR|PALETTE3, 124
-                vdpSprite 116, V4|H4|10, 1696|CLEAR|PALETTE3, 100
-                vdpSprite 146, V4|H4|11, 1680|CLEAR|FLIP|PALETTE3, 124
-                vdpSprite 116, V4|H4|16, 1696|CLEAR|MIRROR|PALETTE3, 148
-                vdpSprite 1, V4|H4|13, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 1, V4|H4|14, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 1, V4|H4|15, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 1, V4|H4|16, 1664|CLEAR|PALETTE3, 1
-                vdpSprite 62, V4|H4|9, 1680|CLEAR|PALETTE3, 124
-                vdpSprite 116, V4|H4|10, 1696|CLEAR|PALETTE3, 76
-                vdpSprite 170, V4|H4|11, 1680|CLEAR|FLIP|PALETTE3, 124
-                vdpSprite 116, V4|H4|12, 1696|CLEAR|MIRROR|PALETTE3, 172
-                vdpSprite 86, V4|H4|13, 1712|CLEAR|PALETTE3, 95
-                vdpSprite 86, V4|H4|14, 1712|CLEAR|MIRROR|PALETTE3, 153
-                vdpSprite 146, V4|H4|15, 1712|CLEAR|FLIP|PALETTE3, 95
-                vdpSprite 146, V4|H4|16, 1712|CLEAR|MIRROR|FLIP|PALETTE3, 153
+                vdpSprite 116, V4|H4|16, 1664|PALETTE3, 124
+                vdpSprite 1, V4|H4|10, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|11, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|12, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|13, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|14, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|15, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|16, 1664|PALETTE3, 1
+                vdpSprite 86, V4|H4|9, 1680|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 100
+                vdpSprite 146, V4|H4|11, 1680|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|16, 1696|MIRROR|PALETTE3, 148
+                vdpSprite 1, V4|H4|13, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|14, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|15, 1664|PALETTE3, 1
+                vdpSprite 1, V4|H4|16, 1664|PALETTE3, 1
+                vdpSprite 62, V4|H4|9, 1680|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 76
+                vdpSprite 170, V4|H4|11, 1680|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 172
+                vdpSprite 86, V4|H4|13, 1712|PALETTE3, 95
+                vdpSprite 86, V4|H4|14, 1712|MIRROR|PALETTE3, 153
+                vdpSprite 146, V4|H4|15, 1712|FLIP|PALETTE3, 95
+                vdpSprite 146, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 153
 
 ; =============== S U B R O U T I N E =======================================
 
 
 sub_2364C:
                 
-                move.l  #$10F10,(SPRITE_08).l
+                move.l  #$10F10,(SPRITE_08).l ; y = 1, size and link = V4|H4|16
                 rts
 
     ; End of function sub_2364C

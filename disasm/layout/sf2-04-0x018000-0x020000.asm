@@ -11,10 +11,9 @@
                 include "data\stats\enemies\enemybattlesprites.asm"    ; Enemy battle sprites table
                 include "data\stats\items\weapongraphics.asm"    ; Weapon graphics table
                 include "data\battles\global\custombackgrounds.asm"    ; Battle custom backgrounds table
-                
                 wordAlign
                 include "data\battles\global\backgroundenemyswitch.asm"    ; Background enemy switch table
                 include "data\graphics\battles\battlesprites\allyidlebattlesprites.asm"    ; Ally Idle Battle Sprites
                 include "data\graphics\battles\battlesprites\enemyidlebattlesprites.asm"    ; Enemy Idle Battle Sprites
-                include "data\graphics\tech\backgroundlayout.asm"    ; Battle Background Layout
-                align $20000
+                includeIfVanillaRom "data\graphics\tech\backgroundlayout.asm"    ; Battlescene Background Layout
+                alignIfOriginalRomLayout $20000

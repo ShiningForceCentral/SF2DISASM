@@ -12,24 +12,24 @@ DiamondMenuLayout:
 ;
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-                vdpTile CLEAR           ; tile layout for diamond menus
-                vdpTile CLEAR
-                vdpTile CLEAR
+                vdpTile                 ; tile layout for diamond menus
+                vdpTile 
+                vdpTile 
                 vdpTile MENU1|PALETTE3|PRIORITY
                 vdpTile MENU2|PALETTE3|PRIORITY
                 vdpTile MENU3|PALETTE3|PRIORITY
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
                 vdpTile MENU10|PALETTE3|PRIORITY
                 vdpTile MENU11|PALETTE3|PRIORITY
                 vdpTile MENU12|PALETTE3|PRIORITY
@@ -39,15 +39,15 @@ DiamondMenuLayout:
                 vdpTile MENU22|PALETTE3|PRIORITY
                 vdpTile MENU23|PALETTE3|PRIORITY
                 vdpTile MENU24|PALETTE3|PRIORITY
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
                 vdpTile MENU13|PALETTE3|PRIORITY
                 vdpTile MENU14|PALETTE3|PRIORITY
                 vdpTile MENU15|PALETTE3|PRIORITY
@@ -57,15 +57,15 @@ DiamondMenuLayout:
                 vdpTile MENU25|PALETTE3|PRIORITY
                 vdpTile MENU26|PALETTE3|PRIORITY
                 vdpTile MENU27|PALETTE3|PRIORITY
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
                 vdpTile MENU16|PALETTE3|PRIORITY
                 vdpTile MENU17|PALETTE3|PRIORITY
                 vdpTile MENU18|PALETTE3|PRIORITY
@@ -75,7 +75,7 @@ DiamondMenuLayout:
                 vdpTile MENU28|PALETTE3|PRIORITY
                 vdpTile MENU29|PALETTE3|PRIORITY
                 vdpTile MENU30|PALETTE3|PRIORITY
-                vdpTile CLEAR
+                vdpTile 
                 vdpTile CORNER|PALETTE3|PRIORITY
                 vdpTile H_BORDER|PALETTE3|PRIORITY
                 vdpTile H_BORDER|PALETTE3|PRIORITY
@@ -93,7 +93,7 @@ DiamondMenuLayout:
                 vdpTile MENU31|PALETTE3|PRIORITY
                 vdpTile MENU32|PALETTE3|PRIORITY
                 vdpTile MENU33|PALETTE3|PRIORITY
-                vdpTile CLEAR
+                vdpTile 
                 vdpTile V_BORDER|PALETTE3|PRIORITY
                 vdpTile SPACE|PALETTE3|PRIORITY
                 vdpTile SPACE|PALETTE3|PRIORITY
@@ -102,16 +102,16 @@ DiamondMenuLayout:
                 vdpTile SPACE|PALETTE3|PRIORITY
                 vdpTile SPACE|PALETTE3|PRIORITY
                 vdpTile V_BORDER|MIRROR|PALETTE3|PRIORITY
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
+                vdpTile 
+                vdpTile 
+                vdpTile 
                 vdpTile MENU40|PALETTE3|PRIORITY
                 vdpTile MENU41|PALETTE3|PRIORITY
                 vdpTile MENU42|PALETTE3|PRIORITY
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
-                vdpTile CLEAR
+                vdpTile 
+                vdpTile 
+                vdpTile 
+                vdpTile 
                 vdpTile CORNER|FLIP|PALETTE3|PRIORITY
                 vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY
                 vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY

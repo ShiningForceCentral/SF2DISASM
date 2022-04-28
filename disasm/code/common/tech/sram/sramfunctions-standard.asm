@@ -317,6 +317,7 @@ ClearSaveSlotFlag:
 InitSavedData:
                 
                 if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    enableSram
                     lea     (combatantEntries).l,a0
                     move.w  #SAVE_SLOT_WORDS_COUNTER,d0
 @Loop:

@@ -486,7 +486,7 @@ ChurchMenuActions:
 @DoSaveGame:
                 
                 copySavedByte CURRENT_MAP, EGRESS_MAP
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                getCurrentSaveSlot d0
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 jsr     (SaveGame).w
                 sndCom  MUSIC_SAVE
@@ -512,4 +512,3 @@ ChurchMenuActions:
                 bra.w   @StartMenu      
 
     ; End of function ChurchMenuActions
-

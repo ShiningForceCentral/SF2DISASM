@@ -102,7 +102,7 @@ loc_729C:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_WitchBlink
-                bsr.w   CheckSram       
+                bsr.w   CheckSram
                 moveq   #$20,d7 
                 move.b  d7,(SAVED_ERRCODE_BYTE0).l
                 move.b  d7,(SAVED_ERRCODE_BYTE1).l

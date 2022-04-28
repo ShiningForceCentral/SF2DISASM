@@ -139,7 +139,7 @@ byte_213A8:
                 beq.w   loc_2144E
                 cmpi.l  #2,var_32(a6)
                 beq.w   loc_2143C
-                bclr    #2,d1
+                bclr    #STATUSEFFECT_BIT_CURSE,d1
                 beq.s   loc_2143C
                 move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     303             ; "{NAME} is no longer{N}cursed."
@@ -147,14 +147,14 @@ byte_213A8:
                 jsr     j_UnequipAllItemsIfNotCursed
 loc_2143C:
                 
-                bclr    #0,d1
+                bclr    #STATUSEFFECT_BIT_STUN,d1
                 beq.s   loc_2144E
                 move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     302             ; "{NAME} is no longer{N}stunned."
                 moveq   #$FFFFFFFF,d2
 loc_2144E:
                 
-                bclr    #1,d1
+                bclr    #STATUSEFFECT_BIT_POISON,d1
                 beq.s   loc_21460
                 move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     301             ; "{NAME} is no longer{N}poisoned."

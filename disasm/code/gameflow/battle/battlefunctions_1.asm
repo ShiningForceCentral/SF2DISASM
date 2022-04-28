@@ -1267,7 +1267,7 @@ loc_2466C:
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   SetMoveSfx
-                bsr.w   ControlBattleUnit
+                bsr.w   ControlBattleEntity
                 jsr     (WaitForViewScrollEnd).w
                 btst    #INPUT_BIT_B,d4
                 beq.w   loc_246EC
@@ -2359,7 +2359,7 @@ loc_252A6:
                     move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
                 endif
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                getCurrentSaveSlot d0
                 jsr     (SaveGame).l
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.w   byte_252E6
