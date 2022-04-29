@@ -1859,10 +1859,12 @@ GetEquippableItemsByType:
                 lsl.l   d0,d3           ; place class bit in long value
                 lea     COMBATANT_OFFSET_ITEMS(a0),a1
                 lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a2
-                move.l  #$7F0004,(a2)   ; init list with default values
+                
+                ; Init list with default values
+                move.l  #$7F0004,(a2)
                 move.l  #$7F0004,4(a2)
                 move.l  #$7F0004,8(a2)
-                move.l  #$800004,$C(a2)
+                move.l  #$800004,12(a2)
                 clr.w   d0
                 moveq   #0,d4
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d5

@@ -34,7 +34,10 @@
 #dir    data/graphics/tech/battlescenetransition
 #dir    data/graphics/tech/menus
 #dir    data/graphics/tech/fonts
+#dir    data/graphics/tech/windowborder
 #dir    data/graphics/tech/windowlayouts
+#dir    data/graphics/tech/unusedbasepalettes
+#dir    data/graphics/tech/basetiles
 #dir    data/maps/
 #dir    data/maps/global/
 #dir    data/maps/entries/
@@ -823,7 +826,7 @@
 #split	0x309E,0x30BE,data/graphics/tech/basepalette.bin
 #split	0x31CE,0x364E,data/maps/global/mapoffsethashtable.bin
 #split	0x1098A,0x10A4A,data/graphics/tech/iconhighlighttiles.bin
-#split	0x1264E,0x126EE,data/graphics/tech/windowbordertiles.bin
+#split	0x1264E,0x126EE,data/graphics/tech/windowborder/windowbordertiles.bin
 #split	0x13D9E,0x13EDE,data/graphics/tech/texthighlighttiles.bin
 #split	0x14EFC,0x14F7C,data/graphics/tech/shoppricetagtiles-blank.bin
 #split	0x14F7C,0x1505C,data/graphics/tech/shoppricetagtiles-numbers.bin
@@ -886,8 +889,8 @@
 #split	0x1EF142,0x1EF4BA,data/graphics/specialscreens/endingjewels/endingjewelstiles.bin
 #split	0x1EF4BA,0x1EF4DA,data/graphics/specialscreens/suspendscreen/suspendstringpalette.bin
 #split	0x1EF4DA,0x1EF5A6,data/graphics/specialscreens/suspendscreen/suspendstringtiles.bin
-#split	0x1EF5A6,0x1EF5E6,data/graphics/tech/unusedbasepalettes.bin
-#split	0x1EF5E6,0x1EFE33,data/graphics/tech/basetiles.bin
+#split	0x1EF5A6,0x1EF5E6,data/graphics/tech/unusedbasepalettes/unusedbasepalettes.bin
+#split	0x1EF5E6,0x1EFE33,data/graphics/tech/basetiles/basetiles.bin
 #split	0x1F0000,0x1F8000,data/sound/musicbank1.bin
 #split	0x1F8000,0x200000,data/sound/musicbank0.bin
 #split	0xC8B40,0xC8CB2,data/graphics/mapsprites/mapsprite000-0.bin

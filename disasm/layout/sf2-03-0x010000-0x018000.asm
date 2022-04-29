@@ -17,8 +17,7 @@
                 include "code\common\menus\buildmemberstatswindow.asm"    ; Build member stats window function
                 include "code\common\menus\menuengine_05.asm"    ; Menu engine
                 include "code\common\menus\getcombatantportrait.asm"    ; Get combatant portrait index function
-WindowBorderTiles:
-                incbin "data/graphics/tech/windowbordertiles.bin" ; compressed
+                include "data\graphics\tech\windowborder\entries.asm"    ; Windows border compressed tiles
                 include "data\graphics\tech\windowlayouts\portraitwindowlayout.asm"    ; Member screen portrait window layout
                 include "data\graphics\tech\windowlayouts\allykilldefeatwindowlayout.asm"    ; Member screen kills and defeat window layout
                 include "data\graphics\tech\windowlayouts\goldwindowlayout.asm"    ; Member screen gold window layout
@@ -38,7 +37,6 @@ WindowBorderTiles:
                 include "data\stats\items\itemdefs.asm"    ; Item definitions
                 include "data\stats\spells\spelldefs.asm"    ; Spell definitions
                 include "data\stats\items\itemnames.asm"    ; Item names
-                wordAlign
-                
+                align 2
                 include "data\stats\allies\classes\classnames.asm"    ; Class names
                 align $18000

@@ -168,7 +168,7 @@ InitGameSettings:
                 
                 move.l  #$7F7F7F7F,d0
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                moveq   #$F,d7
+                moveq   #CARAVAN_ITEMS_LONGWORD_COUNTER,d7
 @ClearCaravanItems_Loop:
                 
                 move.l  d0,(a0)+

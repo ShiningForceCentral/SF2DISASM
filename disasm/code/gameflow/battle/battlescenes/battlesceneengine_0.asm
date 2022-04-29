@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\battlesceneengine_0.asm :
-; 0x18000..0x19E5E : Battlescene engine
+; 0x18000..0x19DB0 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -3658,85 +3658,4 @@ GetBattleSpriteAndPalette:
                 rts
 
     ; End of function GetBattleSpriteAndPalette
-
-
-; =============== S U B R O U T I N E =======================================
-
-; Get battle sprite and palette indexes for combatant D0's equipped weapon -> D2 (sprite), D3 (palette)
-
-
-GetWeaponSpriteAndPalette:
-                
-                movem.l d1/a0,-(sp)
-                cmpi.w  #COMBATANT_ENEMIES_START,d0
-                bcc.w   @Skip
-                jsr     j_GetEquippedWeapon
-                andi.w  #ITEMENTRY_MASK_INDEX,d1
-                cmpi.w  #ITEMINDEX_WEAPONS_START,d1 ; HARDCODED start index for weapon items with battlescene graphics
-                bcs.w   @Skip
-                cmpi.w  #ITEMINDEX_WEAPONS_END,d1 ; HARDCODED end index for weapon items with battlescene graphics
-                bhi.w   @Skip
-                lea     tbl_WeaponGraphics(pc), a0
-                subi.w  #ITEMINDEX_WEAPONS_START,d1 ; Same here : HARDCODED start index for weapon items with battlescene graphics
-                add.w   d1,d1
-                move.b  (a0,d1.w),d2
-                ext.w   d2
-                move.b  1(a0,d1.w),d3
-                ext.w   d3
-                movem.l (sp)+,d1/a0
-                rts
-@Skip:
-                
-                move.w  #$FFFF,d2
-                move.w  d2,d3
-                movem.l (sp)+,d1/a0
-                rts
-
-    ; End of function GetWeaponSpriteAndPalette
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: d0.w = combatant index
-; Out: d1.w = battlescene background index
-
-
-GetBattlesceneBackground:
-                
-                movem.l d0/a0,-(sp)
-                cmpi.w  #$FFFF,d0
-                beq.s   @CheckCustomBackground
-                cmpi.w  #COMBATANT_ENEMIES_START,d0
-                bcs.s   @CheckCustomBackground
-                jsr     j_GetEnemyIndex
-                cmpi.w  #ENEMY_ZEON,d1  ; HARDCODED : if enemy is Zeon, get his own background
-                bne.s   @CheckCustomBackground
-                moveq   #BATTLEBACKGROUND_VERSUS_ZEON,d1
-                bra.w   @Done
-@CheckCustomBackground:
-                
-                clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
-                lea     tbl_CustomBackgrounds(pc), a0
-                move.b  (a0,d1.w),d1    ; get battle's own background if it has one
-                cmpi.b  #$FF,d1
-                bne.w   @Done
-                cmpi.w  #$FFFF,d0
-                bne.s   @GetTerrainBackground
-                move.w  ((word_FFB3FE-$1000000)).w,d0
-                cmpi.w  #$FFFF,d0
-                bne.s   @GetTerrainBackground
-                clr.w   d0
-@GetTerrainBackground:
-                
-                jsr     j_GetCurrentTerrainType
-                andi.w  #$F,d0          ; get background according to terrain type
-                move.b  tbl_TerrainBackgrounds(pc,d0.w),d1
-                ext.w   d1
-@Done:
-                
-                movem.l (sp)+,d0/a0
-                rts
-
-    ; End of function GetBattlesceneBackground
 

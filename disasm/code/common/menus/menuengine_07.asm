@@ -605,8 +605,6 @@ aMov:           dc.b 'MOV  ',0
 aAgi:           dc.b 'AGI  ',0
 aNothing_2:     dc.b '\Nothing',0
                 
-                wordAlign               ; make sure tiles data is word aligned in case patches are applied
-                
 TextHighlightTiles:
                 incbin "data/graphics/tech/texthighlighttiles.bin"
 word_13EDE:     
