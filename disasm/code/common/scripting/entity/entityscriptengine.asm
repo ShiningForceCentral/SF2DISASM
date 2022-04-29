@@ -100,7 +100,7 @@ loc_4D5C:
                 
                 move.w  d6,-(sp)
                 clr.w   d4
-                move.b  $12(a0),d4
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d4
                 move.w  d4,d6
                 lsl.w   #3,d4
                 add.w   d6,d4
@@ -115,14 +115,14 @@ loc_4D5C:
                 addi.w  #VDPSPRITESIZE_V3|VDPSPRITESIZE_H3,d6
                 move.w  d6,VDPSPRITE_OFFSET_SIZE(a1)
                 ori.w   #VDPTILE_PALETTE3,d5
-                move.b  $1D(a0),d0
+                move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d0
                 andi.w  #3,d0
                 cmpi.w  #2,d0
                 bne.s   loc_4DA0
                 ori.w   #VDPTILE_FLIP,d5
 loc_4DA0:
                 
-                move.b  $10(a0),d0
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d0
                 ext.w   d0
                 move.b  byte_4E16(pc,d0.w),d0
                 bne.s   loc_4DB0
@@ -144,7 +144,7 @@ loc_4DC4:
                 dbf     d7,loc_4CDC
                 clr.b   -5(a1)
                 move.w  (a0),d0
-                move.w  2(a0),d1
+                move.w  ENTITYDEF_OFFSET_Y(a0),d1
                 sub.w   d2,d0
                 sub.w   d3,d1
                 asr.w   #4,d0
@@ -690,7 +690,7 @@ loc_5220:
                 andi.w  #$3C00,d3
                 cmpi.w  #$3800,d3
                 bne.s   loc_5256
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_5256
                 chkFlg  65              ; Caravan is unlocked
                 beq.s   loc_5256
@@ -701,7 +701,7 @@ loc_5256:
                 
                 cmpi.w  #$3C00,d3
                 bne.s   loc_5278
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_5278
                 chkFlg  64              ; Raft is unlocked
                 beq.s   loc_5278
@@ -2588,24 +2588,26 @@ LoadMapEntitySprites:
                 
                 bsr.w   DisableDisplayAndInterrupts
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                moveq   #$2F,d7 
-loc_602E:
+                moveq   #47,d7
+@Loop:
                 
                 cmpi.w  #$7000,(a0)
-                beq.s   loc_603C
+                beq.s   @Next
                 move.w  d7,-(sp)
                 bsr.w   DmaMapSprite
                 move.w  (sp)+,d7
-loc_603C:
+@Next:
                 
                 adda.w  #$20,a0 
-                dbf     d7,loc_602E
+                dbf     d7,@Loop
+                
                 bsr.w   EnableDisplayAndInterrupts
                 rts
 
     ; End of function LoadMapEntitySprites
 
-FacingValues_2: dc.b 0
+tbl_FacingValues_2:
+                dc.b 0
                 dc.b 1
                 dc.b 2
                 dc.b 3
@@ -2616,7 +2618,10 @@ FacingValues_2: dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
-; In D0=Entity index
+; In: d0.b = entity index
+;     d1.w = new facing direction
+;     d2.b = new B flags (keep current if = $FF)
+;     d3.b = new map sprite index (keep current if = $FF)
 
 
 UpdateEntityProperties:
@@ -2626,16 +2631,16 @@ UpdateEntityProperties:
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 cmpi.b  #$FF,d2
-                beq.s   loc_6072
+                beq.s   @CheckMapSprite
                 andi.w  #$7F,d2 
                 andi.b  #$80,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 or.b    d2,ENTITYDEF_OFFSET_FLAGS_B(a0)
-loc_6072:
+@CheckMapSprite:
                 
                 cmpi.b  #$FF,d3
-                beq.s   loc_607C
+                beq.s   @ChangeDirection
                 move.b  d3,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-loc_607C:
+@ChangeDirection:
                 
                 move.w  d1,d6
                 andi.w  #3,d6
@@ -2663,21 +2668,22 @@ UpdateEntitySprite:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Entity address, D6=Facing
+; In: a0 = pointer to entity data
+;     d6.b = facing direction
 
 
 ChangeEntitySprite:
                 
                 move.b  d6,ENTITYDEF_OFFSET_FACING(a0)
                 ext.w   d6
-                move.b  FacingValues_2(pc,d6.w),d6
+                move.b  tbl_FacingValues_2(pc,d6.w),d6
                 bne.s   loc_60B6
                 addq.w  #2,d6
 loc_60B6:
                 
                 movem.l a0-a1,-(sp)
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-                cmpi.b  #$F0,d1
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d1
                 bcc.w   loc_617C
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
@@ -2753,7 +2759,8 @@ return_6180:
 
     ; End of function ChangeEntitySprite
 
-FacingValues:   dc.b 0                  ; 8 bytes holding facing values for sprites (not sure what it's for)
+tbl_FacingValues:
+                dc.b 0                  ; 8 bytes holding facing values for sprites (not sure what it's for)
                 dc.b 1
                 dc.b 2
                 dc.b 3
@@ -2769,7 +2776,7 @@ DmaMapSprite:
                 
                 clr.w   d6
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d6
-                move.b  FacingValues(pc,d6.w),d6
+                move.b  tbl_FacingValues(pc,d6.w),d6
                 bne.s   @Continue
                 addq.w  #2,d6
 @Continue:
@@ -2780,7 +2787,7 @@ DmaMapSprite:
                 move.w  d1,-(sp)
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-                cmpi.w  #MAPSPRITE_SPECIALS_START,d1 ; HARDCODED special mapsprites start index
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d1 ; HARDCODED special mapsprites start index
                 blt.s   @LoadRegularSprite
                 jsr     j_LoadSpecialSprite
                 move.w  (sp)+,d1
@@ -2826,7 +2833,7 @@ DmaMapSprite:
 GetMapPixelCoordRamOffset:
                 
                 movem.w d0-d1,-(sp)
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_622E        
                 tst.b   $11(a0)         ; entity property
                 beq.s   loc_622E        

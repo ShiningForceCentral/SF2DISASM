@@ -10,7 +10,7 @@ var_8 = -8
 var_6 = -6
 var_4 = -4
 
-WitchMainMenu:
+BookReaderMainMenu:
                 
                 movem.l d1-a1,-(sp)
                 link    a6,#-16
@@ -103,7 +103,7 @@ byte_1675A:
                 movem.l (sp)+,d1-a1
                 rts
 
-    ; End of function WitchMainMenu
+    ; End of function BookReaderMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -312,7 +312,7 @@ loc_168FC:
                 move.b  #$2D,9(a1) 
                 adda.w  #$38,a1 
                 lsl.w   #2,d3
-                lea     (byte_FF8808).l,a0
+                lea     (TARGETS_REACHABLE_BY_ITEM_NUMBER).l,a0
                 moveq   #4,d7
                 bsr.w   sub_1697C
 return_16940:

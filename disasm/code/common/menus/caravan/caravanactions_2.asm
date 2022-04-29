@@ -80,17 +80,30 @@ loc_22920:
 CopyCaravanItems:
                 
                 movem.l d7-a1,-(sp)
-                move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
-                move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
-                subq.w  #1,d7
-                bcs.w   loc_22946
-                lea     ((CARAVAN_ITEMS-$1000000)).w,a0
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    lea     (CARAVAN_ITEMS).l,a0
+                    movep.w CARAVAN_ITEMS_NUMBER-CARAVAN_ITEMS(a0),d7   ; d7.w = caravan items number
+                    move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
+                    subq.w  #1,d7
+                    bcs.s   @Skip
+                else
+                    move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
+                    move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
+                    subq.w  #1,d7
+                    bcs.w   @Skip
+                    lea     ((CARAVAN_ITEMS-$1000000)).w,a0
+                endif
                 lea     ((GENERIC_LIST-$1000000)).w,a1
-loc_22940:
+@Loop:
                 
-                move.b  (a0)+,(a1)+
-                dbf     d7,loc_22940
-loc_22946:
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    move.b  (a0),(a1)+
+                    addq.w  #2,a0
+                else
+                    move.b  (a0)+,(a1)+
+                endif
+                dbf     d7,@Loop
+@Skip:
                 
                 movem.l (sp)+,d7-a1
                 rts

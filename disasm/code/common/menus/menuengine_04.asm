@@ -177,7 +177,7 @@ loc_11CE6:
                 dc.l VInt_HandlePortraitBlinking
                 move.b  #$FF,((byte_FFB082-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11D1A
                 clr.w   d0
                 bra.s   loc_11D32
@@ -228,7 +228,7 @@ loc_11D6C:
                 move.w  d1,$E(a0)
                 move.b  #$40,$11(a0) 
                 andi.b  #$7F,$1D(a0) 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11DBC
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 move.w  member(a6),d0
@@ -296,16 +296,16 @@ loc_11E54:
                 
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 jsr     (WaitForVInt).w
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11E94
                 clr.w   d0
-                tst.b   ((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 bne.s   loc_11E74
                 jsr     j_GetAllyMapSprite
                 bra.s   loc_11E82
 loc_11E74:
                 
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 bne.s   loc_11E80
                 moveq   #$3E,d4 
                 bra.s   loc_11E82

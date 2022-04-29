@@ -55,21 +55,21 @@ j_InitEnemyList:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetEnemyAITargetPosition:
+j_GetEnemyAiTargetPosition:
                 
-                jmp     GetEnemyAITargetPosition(pc)
+                jmp     GetEnemyAiTargetPosition(pc)
 
-    ; End of function j_GetEnemyAITargetPosition
+    ; End of function j_GetEnemyAiTargetPosition
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetBattleSpriteSetSubsection:
+j_GetBattleSpritesetSubsection:
                 
-                jmp     GetBattleSpriteSetSubsection(pc)
+                jmp     GetBattleSpritesetSubsection(pc)
 
-    ; End of function j_GetBattleSpriteSetSubsection
+    ; End of function j_GetBattleSpritesetSubsection
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -163,11 +163,11 @@ sub_1AC038:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateTriggeredRegionsAndAI:
+j_UpdateTriggeredRegionsAndAi:
                 
-                jmp     UpdateTriggeredRegionsAndAI(pc)
+                jmp     UpdateTriggeredRegionsAndAi(pc)
 
-    ; End of function j_UpdateTriggeredRegionsAndAI
+    ; End of function j_UpdateTriggeredRegionsAndAi
 
 
 ; =============== S U B R O U T I N E =======================================

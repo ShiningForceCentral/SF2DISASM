@@ -78,15 +78,9 @@ TextBankTreeOffsets:
 TextBankTreeData:
                 incbin "data/scripting/text/huffmantrees.bin"
                 includeIfVanillaRom "data\scripting\text\entries.asm"    ; Textbank entries
-                alignIfExpandedRom $30000
-                includeIfExpandedRom "data\graphics\battles\grounds\entries.asm"    ; Grounds
-                alignIfExpandedRom $38000
-                includeIfExpandedRom "data\graphics\battles\weapons\entries.asm"    ; Weapons
-                includeIfExpandedRom "data\graphics\battles\weapons\palettes\entries.asm"    ; WeaponPalettes
                 includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
-                alignIfExpandedRom $43800
-                includeIfExpandedRom "data\battles\global\battlemapcoords.asm"    ; Battle map coords
-                includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
-                includeIfExpandedRom "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
-                alignIfExpandedRom $43C00
-                align $44000
+                wordAlign
+                includeIfExpandedRom "data\battles\global\battlemapcoords.asm"      ; Battle map coords
+                includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"      ; Save point map coords
+                includeIfExpandedRom "data\maps\global\raftresetmapcoords.asm"      ; Raft reset map coords
+                alignIfOriginalRomLayout $44000

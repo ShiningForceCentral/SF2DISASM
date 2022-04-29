@@ -669,12 +669,14 @@ loc_257A:
 ProcessMapTransition:
                 
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
+                getSavedByte CURRENT_MAP, d1
+                
+                disableSram
                 movea.l (p_pt_MapData).l,a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
                 addq.l  #1,a5
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_25E8
@@ -688,7 +690,7 @@ ProcessMapTransition:
 loc_25E8:
                 
                 addq.l  #1,a5
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_260E
@@ -701,7 +703,7 @@ loc_25E8:
                 bsr.w   WaitForDmaQueueProcessing
 loc_260E:
                 
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_2632
@@ -735,7 +737,7 @@ loc_2632:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l 0
-                rts
+                enableSramAndReturn
 
     ; End of function ProcessMapTransition
 
@@ -1065,67 +1067,79 @@ loc_29D6:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = map index
+; In: d1.b = map index
 
 
 LoadMapTilesets:
                 
                 movem.l d0-d1/a0-a1/a5,-(sp)
                 ext.w   d1
-                blt.w   loc_2A86
+                blt.w   @Skip           ; skip if map index > 127
+                
+                disableSram
                 movea.l (p_pt_MapData).l,a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
                 move.b  (a5)+,d0
-                movea.l (p_pt_MapTiles).l,a0
+                
+                ; Check tileset 1
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   loc_2A16
+                blt.s   @CheckTileset2
+                
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF3000_MAP_TILESET_1).l,a1
                 bsr.w   LoadCompressedData
-loc_2A16:
+@CheckTileset2:
                 
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   loc_2A32
+                blt.s   @CheckTileset3
+                
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 bsr.w   LoadCompressedData
-loc_2A32:
+@CheckTileset3:
                 
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   loc_2A4E
+                blt.s   @CheckTileset4
+                
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF0000_RAM_START).l,a1
                 bsr.w   LoadCompressedData
-loc_2A4E:
+@CheckTileset4:
                 
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   loc_2A6A
+                blt.s   @CheckTileset5
+                
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF1000_MAP_TILESET_4).l,a1
                 bsr.w   LoadCompressedData
-loc_2A6A:
+@CheckTileset5:
                 
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   loc_2A86
+                blt.s   @Done
+                
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF2000_LOADING_SPACE).l,a1
                 bsr.w   LoadCompressedData
-loc_2A86:
+@Done:
+                
+                enableSram
+@Skip:
                 
                 movem.l (sp)+,d0-d1/a0-a1/a5
                 rts
@@ -1135,7 +1149,9 @@ loc_2A86:
 
 ; =============== S U B R O U T I N E =======================================
 
-; loads all map properties (map coords, entities, etc.)
+; Load all map properties (map coords, entities, etc.)
+; 
+; In: d1.b = map index, or -1 to indicate current map
 
 
 LoadMap:
@@ -1151,8 +1167,10 @@ LoadMap:
                 move.w  (sp)+,d1
                 ext.w   d1
                 bpl.s   loc_2ACC        
+                
+                ; Reload current map
                 clr.w   d1              ; If D1<0, re-load current map
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
+                getSavedByte CURRENT_MAP, d1
                 movea.l (p_pt_MapData).l,a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
@@ -1161,9 +1179,7 @@ LoadMap:
 loc_2ACC:
                 
                 clr.w   ((word_FFAF42-$1000000)).w ; Load new map D1
-                move.b  d1,((CURRENT_MAP-$1000000)).w
-loc_2AD4:
-                
+                setSavedByte d1, CURRENT_MAP  
                 movea.l (p_pt_MapData).l,a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
@@ -1293,7 +1309,7 @@ loc_2C0C:
                 bra.w   loc_2B82
 loc_2C14:
                 
-                bsr.w   LoadMapArea
+                bsr.w   LoadMapArea     
                 move.w  (sp)+,d0
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_2C70
@@ -1471,10 +1487,18 @@ loc_2DD0:
                 bra.s   loc_2DA6
 loc_2DD4:
                 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 beq.s   return_2DEA
-                move.w  ((BATTLE_AREA_X-$1000000)).w,d0
-                move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d1
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    move.l  a0,-(sp)
+                    lea     (BATTLE_AREA_X).l,a0
+                    movep.w 0(a0),d0
+                    movep.w BATTLE_AREA_WIDTH-BATTLE_AREA_X(a0),d1
+                    movea.l (sp)+,a0
+                else
+                    move.w  ((BATTLE_AREA_X-$1000000)).w,d0
+                    move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d1
+                endif
                 clr.w   d2
                 bsr.w   CopyMapBlocks
 return_2DEA:
@@ -1486,19 +1510,29 @@ return_2DEA:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w, d1.w, d2.w, d3.w = start X, start Y, end X, end Y
+
 
 LoadMapArea:
                 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
-                bne.s   loc_2E06
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                bne.s   @Battle
+                
                 move.w  d0,((MAP_AREA_LAYER1_STARTX-$1000000)).w
                 move.w  d1,((MAP_AREA_LAYER1_STARTY-$1000000)).w
                 move.w  d2,((MAP_AREA_LAYER1_ENDX-$1000000)).w
                 move.w  d3,((MAP_AREA_LAYER1_ENDY-$1000000)).w
-                bra.s   loc_2E2C
-loc_2E06:
+                bra.s   @Continue
+@Battle:
                 
-                move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d0
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    move.l  a0,-(sp)
+                    lea     (BATTLE_AREA_WIDTH).l,a0
+                    movep.w 0(a0),d0
+                    movea.l (sp)+,a0
+                else
+                    move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d0
+                endif
                 clr.w   d1
                 move.b  d0,d1
                 subq.w  #1,d1
@@ -1510,7 +1544,7 @@ loc_2E06:
                 clr.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w
                 move.w  d0,((MAP_AREA_LAYER1_ENDX-$1000000)).w
                 move.w  d1,((MAP_AREA_LAYER1_ENDY-$1000000)).w
-loc_2E2C:
+@Continue:
                 
                 move.w  (a4)+,d0
                 mulu.w  #3,d0
@@ -1534,24 +1568,29 @@ loc_2E2C:
                 movea.l (a5),a4
                 move.w  #1,((TILE_ANIMATION_COUNTER-$1000000)).w
                 move.l  $18(a5),((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w
-                blt.s   return_2EBE
+                blt.s   @Return
+                
                 movea.l ((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w,a1
                 move.w  (a1)+,d0
-                movea.l (p_pt_MapTiles).l,a0
+                
+                disableSram
+                movea.l (p_pt_MapTilesets).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.l  a1,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a1
                 bsr.w   LoadCompressedData
                 movea.l (sp)+,a1
+                
+                enableSram
                 move.w  (a1)+,d7
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     (byte_FF9B04).l,a1
                 lsl.w   #5,d7
                 bsr.w   CopyBytes       
                 addq.l  #4,((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w
-                move.b  ((CURRENT_MAP-$1000000)).w,((TILE_ANIMATION_MAP_INDEX-$1000000)).w
-return_2EBE:
+                getSavedByte CURRENT_MAP, ((TILE_ANIMATION_MAP_INDEX-$1000000)).w
+@Return:
                 
                 rts
 

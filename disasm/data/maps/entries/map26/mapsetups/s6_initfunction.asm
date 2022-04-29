@@ -12,7 +12,7 @@ ms_map26_InitFunction:
                 bne.s   byte_59DF2      
                 script  cs_59E04
                 setFlg  779             ; Set after the Cotton Balloon pops and you land in Floor World
-                move.b  #$1A,((EGRESS_MAP_INDEX-$1000000)).w
+                setSavedByte #MAP_CREED_FLOOR_WORLD, EGRESS_MAP
 byte_59DF2:
                 
                 chkFlg  780             ; Set after the man tries to lift the giant ring in Floor World

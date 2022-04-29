@@ -8,6 +8,12 @@
 SystemInit:
                 
                 bsr.s   InitVdp
+                if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+                    bsr.w   InitMapper
+                endif
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    bsr.w   InitSavedData
+                endif
                 bsr.w   InitZ80
                 bsr.s   InitVdpData
                 jmp     (InitGame).l
@@ -26,6 +32,7 @@ InitVdp:
                 
                 clr.l   (a0)+           ; clear all RAM !
                 dbf     d0,@ClearRam_Loop
+                
                 move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
                 clr.b   ((FADING_SETTING-$1000000)).w
                 lea     vdp_init_params(pc), a0

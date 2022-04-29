@@ -30,7 +30,7 @@ loc_1AC2BC:
                 addq.l  #8,a1
                 dbf     d6,loc_1AC2BC
                 dbf     d7,loc_1AC2BA
-                lea     (byte_FF8808).l,a1
+                lea     (TARGETS_REACHABLE_BY_ITEM_NUMBER).l,a1
                 moveq   #$3F,d7 
 loc_1AC2E0:
                 
@@ -111,7 +111,7 @@ sub_1AC38E:
                 move.w  d1,d3
                 jsr     j_GetYPos
                 move.w  d1,d4
-                jsr     j_GetEnemyAISetting3233
+                jsr     j_GetAiSpecialMoveOrders
                 cmpi.b  #$FF,d1
                 bne.s   loc_1AC3C2
                 cmpi.b  #$FF,d2
@@ -139,7 +139,7 @@ loc_1AC3C4:
                 bra.w   loc_1AC434
 loc_1AC3DC:
                 
-                jsr     GetEnemyAITargetPosition
+                jsr     GetEnemyAiTargetPosition
                 clr.w   d5
                 cmp.w   d3,d1
                 bge.s   loc_1AC3EC
@@ -199,7 +199,7 @@ GetMoveListForEnemyTarget:
                 
                 movem.l d0-a6,-(sp)
                 move.b  d0,d7
-                jsr     j_GetEnemyAISetting3233
+                jsr     j_GetAiSpecialMoveOrders
                 cmpi.b  #$FF,d1
                 bne.s   loc_1AC454
                 bra.w   loc_1AC4EA
@@ -217,7 +217,7 @@ loc_1AC456:
                 bra.w   loc_1AC4EA
 loc_1AC46A:
                 
-                jsr     GetEnemyAITargetPosition
+                jsr     GetEnemyAiTargetPosition
                 clr.l   d5
                 clr.l   d6
                 move.w  d1,d5
@@ -282,7 +282,7 @@ sub_1AC4F0:
                 move.b  d0,d7
                 clr.w   d1
                 move.b  d0,d1
-                lea     (ENEMY_TARGETTING_COMMAND_LIST).l,a0
+                lea     (AI_LAST_TARGET_TABLE).l,a0
                 andi.b  #$7F,d1 
                 move.b  (a0,d1.w),d1
                 cmpi.b  #$FF,d1
@@ -292,7 +292,7 @@ sub_1AC4F0:
 loc_1AC516:
                 
                 move.w  d7,d0
-                jsr     j_GetEnemyAISetting3233
+                jsr     j_GetAiSpecialMoveOrders
                 cmpi.b  #$FF,d1
                 bne.s   loc_1AC52A
                 bra.w   loc_1AC5A4
@@ -310,7 +310,7 @@ loc_1AC52C:
                 bra.w   loc_1AC5A4
 loc_1AC540:
                 
-                jsr     GetEnemyAITargetPosition
+                jsr     GetEnemyAiTargetPosition
                 move.w  d1,d5
                 move.w  d2,d6
                 lea     (BATTLE_TERRAIN).l,a0
@@ -362,7 +362,7 @@ sub_1AC5AA:
                 
                 movem.l d0-a6,-(sp)
                 move.b  d0,d7
-                jsr     j_GetEnemyAISetting3233
+                jsr     j_GetAiSpecialMoveOrders
                 cmpi.b  #$FF,d1
                 bne.s   loc_1AC5C2
                 bra.w   loc_1AC64E
@@ -380,7 +380,7 @@ loc_1AC5C4:
                 bra.w   loc_1AC64E
 loc_1AC5D8:
                 
-                bsr.w   GetEnemyAITargetPosition
+                bsr.w   GetEnemyAiTargetPosition
                 move.w  d1,d5
                 move.w  d2,d6
                 move.w  #$2F,d4 
@@ -747,7 +747,7 @@ sub_1AC8A0:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 clr.w   d2
                 move.b  (a0),d2
                 lea     byte_1AC9B8(pc), a0
@@ -910,7 +910,8 @@ byte_1AC9E0:    dc.b $FF                ; Zeon Battle
                 dc.b $FF
                 dc.b $FF
                 dc.b $FF
-                dc.w $FFFF
+                dc.b $FF
+                dc.b $FF
                 dc.b $FF
                 dc.b $FF
                 dc.b $FF
@@ -930,6 +931,9 @@ byte_1AC9F0:    dc.b $FF                ; Secret Bonus Battle
 ; =============== S U B R O U T I N E =======================================
 
 ; AI-related
+; 
+; In: d0.b = 
+; Out: d1.w = 
 
 
 sub_1AC9FC:
@@ -943,7 +947,7 @@ loc_1ACA0C:
                 
                 move.w  d0,d7
                 move.b  #BATTLESPRITESET_SUBSECTION_AI_REGIONS,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 cmp.b   d1,d7
                 ble.s   loc_1ACA1E
                 bra.w   loc_1ACA6A
@@ -1443,7 +1447,7 @@ loc_1ACE2A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = region #
+; In: d0.b = region index
 
 
 CheckTriggerRegionFlag:
@@ -1451,7 +1455,7 @@ CheckTriggerRegionFlag:
                 movem.l d0-a6,-(sp)
                 clr.w   d1
                 move.b  d0,d1
-                addi.w  #$5A,d1 
+                addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
                 movem.l (sp)+,d0-a6
                 rts
@@ -1462,12 +1466,12 @@ CheckTriggerRegionFlag:
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateTriggeredRegionsAndAI:
+UpdateTriggeredRegionsAndAi:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
                 move.w  #BATTLESPRITESET_SUBSECTION_AI_REGIONS,d1
-                bsr.w   GetBattleSpriteSetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 tst.w   d1
                 bne.s   loc_1ACE60
                 bra.w   loc_1ACF2A
@@ -1487,7 +1491,7 @@ loc_1ACE68:
                 beq.s   loc_1ACE8A
                 clr.w   d1
                 move.b  d0,d1
-                addi.w  #$5A,d1 
+                addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_SetFlag
 loc_1ACE8A:
                 
@@ -1497,7 +1501,7 @@ loc_1ACE8A:
                 addi.w  #1,d0
                 dbf     d2,loc_1ACE68
                 move.w  d7,d0
-                jsr     j_GetEnemyAISetting36
+                jsr     j_GetAiRegion
                 cmpi.w  #$F,d1
                 bne.s   loc_1ACEB0
                 cmpi.w  #$F,d2
@@ -1515,7 +1519,7 @@ loc_1ACEC0:
                 
                 clr.w   d1
                 move.b  d5,d1
-                addi.w  #$5A,d1 
+                addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.s   loc_1ACED4
                 bra.w   loc_1ACEF0
@@ -1523,10 +1527,10 @@ loc_1ACED4:
                 
                 clr.w   d0
                 move.w  d7,d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 andi.w  #$FFFE,d1
                 bset    #0,d1
-                jsr     j_SetCharacterWord34
+                jsr     j_SetAiActivationFlag
                 bra.w   loc_1ACF2A
 loc_1ACEF0:
                 
@@ -1537,7 +1541,7 @@ loc_1ACEFA:
                 
                 clr.w   d1
                 move.b  d6,d1
-                addi.w  #$5A,d1 
+                addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.s   loc_1ACF0E
                 bra.w   loc_1ACF2A
@@ -1545,17 +1549,17 @@ loc_1ACF0E:
                 
                 clr.w   d0
                 move.w  d7,d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 andi.w  #$FFFC,d1
                 bset    #0,d1
                 bset    #1,d1
-                jsr     j_SetCharacterWord34
+                jsr     j_SetAiActivationFlag
 loc_1ACF2A:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function UpdateTriggeredRegionsAndAI
+    ; End of function UpdateTriggeredRegionsAndAi
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1573,7 +1577,7 @@ GetListOfSpawningEnemies:
                 clr.w   d5
 loc_1ACF44:
                 
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 andi.w  #$F00,d1
                 tst.w   d1
                 bne.s   loc_1ACF56      
@@ -1596,7 +1600,7 @@ loc_1ACF6A:
 loc_1ACF7A:
                 
                 move.w  d4,d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 bsr.w   UpdateEnemyStatsForRespawn
                 bcs.w   loc_1ACFEA
                 move.b  d4,(a0,d5.w)
@@ -1612,7 +1616,7 @@ loc_1ACF92:
 loc_1ACFA8:
                 
                 move.w  d4,d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 bsr.w   UpdateEnemyStatsForRespawn
                 bcs.w   loc_1ACFEA
                 move.b  d4,(a0,d5.w)
@@ -1628,7 +1632,7 @@ loc_1ACFC0:
 loc_1ACFD2:
                 
                 move.w  d4,d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 bsr.w   UpdateEnemyStatsForRespawn
                 bcs.w   loc_1ACFEA
                 move.b  d4,(a0,d5.w)
@@ -1664,34 +1668,34 @@ UpdateEnemyActivationIfDead:
                 bra.w   loc_1AD07E
 loc_1AD014:
                 
-                jsr     j_GetEnemyAISetting36
+                jsr     j_GetAiRegion
                 cmpi.b  #$F,d1
                 beq.s   loc_1AD044
                 move.w  d1,d6
-                addi.w  #$5A,d1 
+                addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
                 beq.s   loc_1AD044
                 move.w  d4,d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 bset    #0,d1
-                jsr     j_SetCharacterWord34
+                jsr     j_SetAiActivationFlag
                 bra.w   loc_1AD088
 loc_1AD044:
                 
                 move.w  d4,d0
-                jsr     j_GetEnemyAISetting36
+                jsr     j_GetAiRegion
                 cmpi.b  #$F,d2
                 beq.w   loc_1AD07E
                 move.w  d2,d6
                 move.w  d2,d1
-                addi.w  #$5A,d1 
+                addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
                 beq.s   loc_1AD07E
                 move.w  d4,d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 bset    #0,d1
                 bset    #1,d1
-                jsr     j_SetCharacterWord34
+                jsr     j_SetAiActivationFlag
                 bra.w   loc_1AD088
 loc_1AD07E:
                 
@@ -1767,9 +1771,8 @@ loc_1AD0D4:
 LoadBattleTerrainData:
                 
                 movem.l d0-d6/a0-a5,-(sp)
-                conditionalPc lea,pt_BattleTerrainData,a0
-                nop
-                lea     ((CURRENT_BATTLE-$1000000)).w,a1
+                conditionalPc lea,pt_BattleTerrainData,a0,nop
+                loadSavedDataAddress CURRENT_BATTLE, a1
                 clr.l   d1
                 move.b  (a1),d1
                 lsl.l   #2,d1

@@ -71,7 +71,7 @@ CalculateDamageEXP:
 ; =============== S U B R O U T I N E =======================================
 
 
-GiveStatusEffectSpellsEXP:
+GiveStatusEffectSpellEXP:
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
@@ -83,7 +83,7 @@ GiveStatusEffectSpellsEXP:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function GiveStatusEffectSpellsEXP
+    ; End of function GiveStatusEffectSpellEXP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -435,7 +435,7 @@ WriteBattlesceneScript_DodgeAttack:
                 bne.w   @CheckDebugDodge
                 moveq   #CHANCE_TO_DODGE_DEFAULT,d2 ; 1/32 chance to miss otherwise ?
                 move.b  (a5),d0
-                jsr     GetUpperMoveType
+                jsr     GetMoveType     
                 cmpi.w  #MOVETYPE_LOWER_FLYING,d1 ; check if target is either flying or hovering
                 beq.w   @CheckIfAttackerIsAnArcher
                 cmpi.w  #MOVETYPE_LOWER_HOVERING,d1
@@ -444,7 +444,7 @@ WriteBattlesceneScript_DodgeAttack:
 @CheckIfAttackerIsAnArcher:
                 
                 move.b  (a4),d0
-                jsr     GetUpperMoveType
+                jsr     GetMoveType     
                 cmpi.w  #MOVETYPE_LOWER_BRASS_GUNNER,d1
                 beq.w   @CheckDebugDodge
                 cmpi.w  #MOVETYPE_LOWER_ARCHER,d1
@@ -519,7 +519,7 @@ CalculateDamage:
                 
                 ; Check if defender is flying or hovering
                 move.b  (a5),d0
-                jsr     GetUpperMoveType
+                jsr     GetMoveType     
                 cmpi.w  #MOVETYPE_LOWER_FLYING,d1
                 beq.w   @CheckIfAttackerIsAnArcher
                 cmpi.w  #MOVETYPE_LOWER_HOVERING,d1
@@ -528,7 +528,7 @@ CalculateDamage:
 @CheckIfAttackerIsAnArcher:
                 
                 move.b  (a4),d0
-                jsr     GetUpperMoveType
+                jsr     GetMoveType     
                 cmpi.w  #MOVETYPE_LOWER_BRASS_GUNNER,d1
                 beq.w   @ApplyArcherDamageBonus
                 cmpi.w  #MOVETYPE_LOWER_ARCHER,d1

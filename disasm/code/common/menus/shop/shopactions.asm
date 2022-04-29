@@ -103,7 +103,7 @@ loc_2015E:
                 clsTxt
                 move.w  selectedItem(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_20118      
                 move.w  d0,member(a6)
@@ -225,7 +225,7 @@ loc_202F4:
                 clsTxt
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_207CC
                 clr.w   rareItemFlag(a6)
@@ -336,7 +336,7 @@ loc_2046C:
                 clsTxt
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_207CC
                 move.w  d0,member(a6)
@@ -352,9 +352,15 @@ loc_2046C:
                 jsr     j_GetCombatantEntryAddress
                 move.w  itemSlot(a6),d1
                 add.w   d1,d1
-                lea     COMBATANT_OFFSET_ITEM_0(a0,d1.w),a0
-                move.w  (a0),d2
-                btst    #$F,d2
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    add.w   d1,d1
+                    adda.w  d1,a0
+                    movep.w COMBATANT_OFFSET_ITEMS(a0),d2
+                else
+                    lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
+                    move.w  (a0),d2
+                endif
+                btst    #ITEMENTRY_BIT_BROKEN,d2
                 bne.w   loc_204DC
                 txt     188             ; "It's not damaged.{W2}"
                 bra.w   byte_205AC
@@ -478,7 +484,7 @@ loc_20652:
                 clsTxt
                 move.w  selectedItem(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_2060C      
                 move.w  d0,member(a6)

@@ -5,12 +5,16 @@
 
 
 p_Icons:        dc.l Icon000
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-                    include "data\stats\items\itemdefs.asm"     ; Item definitions
-                    include "data\stats\spells\spelldefs.asm"   ; Spell definitions
-                    include "data\stats\items\itemnames.asm"    ; Item names
-                    include "data\stats\spells\spellnames.asm"  ; Spell names
-                else
-                    include "data\graphics\icons\entries.asm"    ; Icons
-                endif
-                align $8000
+                includeIfVanillaRom "data\graphics\icons\entries.asm"   ; Icons
+                includeIfExpandedRom "data\stats\items\itemdefs.asm"        ; Item definitions
+                includeIfExpandedRom "data\stats\spells\spelldefs.asm"      ; Spell definitions
+                includeIfExpandedRom "data\stats\items\itemnames.asm"       ; Item names
+                wordAlign
+                includeIfExpandedRom "data\stats\spells\spellnames.asm"     ; Spell names
+                wordAlign
+                includeIfExpandedRom "data\stats\allies\growthcurves.asm"   ; Stat growth curves
+                includeIfExpandedRom "data\stats\allies\stats\entries.asm"  ; Ally stats
+                wordAlign
+                includeIfExpandedRom "data\stats\allies\allystartdefs.asm"      ; Ally start definitions
+                includeIfExpandedRom "data\stats\allies\classes\classdefs.asm"  ; Class definitions
+                align $1E0000

@@ -515,7 +515,7 @@ csc0F_jumpIfCharacterAlive:
                 move.w  (a6)+,d0
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                bne.w   loc_47476
+                bne.w   loc_47476       ; <-- Branch if character's current HP != 0, i.e., is alive.
                 movea.l (a6),a6
                 bra.s   return_47478
 loc_47476:
@@ -558,7 +558,7 @@ csc11_promptYesNoForStoryFlow:
                 move.l  a6,-(sp)
                 jsr     j_YesNoPrompt
                 movea.l (sp)+,a6
-                moveq   #$59,d1 ; flag index : last answer to story-related yes/no question
+                moveq   #FLAG_INDEX_YES_NO_PROMPT,d1
                 tst.w   d0
                 bne.s   loc_474A8
                 jsr     j_SetFlag
@@ -611,7 +611,7 @@ loc_474DC:
 csc13_setStoryFlag:
                 
                 move.w  (a6)+,d1
-                addi.w  #$190,d1
+                addi.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     j_SetFlag
                 rts
 
@@ -624,7 +624,7 @@ csc13_setStoryFlag:
 sub_474EE:
                 
                 moveq   #0,d0
-                move.b  #MAP_GALAM_CASTLE_INNER,((CURRENT_MAP-$1000000)).w
+                setSavedByte #MAP_GALAM_CASTLE_INNER, CURRENT_MAP
                 bsr.w   RunMapSetupEntityEvent
                 rts
 

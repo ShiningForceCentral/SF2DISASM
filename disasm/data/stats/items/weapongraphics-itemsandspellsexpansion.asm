@@ -1,6 +1,6 @@
 
 ; ASM FILE data\stats\items\weapongraphics-itemsandspellsexpansion.asm :
-; Newly formatted weapon graphics table, included when ITEMS_AND_SPELLS_EXPANSION patch is enabled.
+; Newly formatted weapon graphics table, included when EXPANDED_ITEMS_AND_SPELLS patch is enabled.
 tbl_WeaponGraphics:
                 
 ; Syntax        weaponGraphics [ITEM_]enum, [WEAPONSPRITE_]enum, [WEAPONPALETTE_]enum

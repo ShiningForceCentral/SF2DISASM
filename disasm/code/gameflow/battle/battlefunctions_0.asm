@@ -56,8 +56,8 @@ loc_22C2E:
                 cmpi.b  #$FF,d1
                 beq.w   byte_22C5A      
                 move.l  d1,d2
-                andi.w  #SPELLENTRY_MASK_INDEX,d2 
-                lsr.w   #6,d1
+                andi.w  #SPELLENTRY_MASK_INDEX,d2
+                lsr.w   #SPELLENTRY_OFFSET_LV,d1
                 bne.s   loc_22C4C
                 move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     271             ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
@@ -179,6 +179,7 @@ loc_22D2A:
                 movem.l (sp)+,d6/a1
                 lea     $80(a1),a1
                 dbf     d7,loc_22D26
+                
                 movem.l (sp)+,d6-a1
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 clr.b   ((FADING_SETTING-$1000000)).w
@@ -231,24 +232,25 @@ ControlUnitCursor:
                 mulu.w  #$180,d2
                 mulu.w  #$180,d3
                 moveq   #$30,d0 
-                jsr     sub_44024
+                jsr     j_SetUnitCursorSpeedx2
                 lsl.w   #5,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 move.w  d2,(a0)
-                move.w  d3,2(a0)
-                move.w  d2,$C(a0)
-                move.w  d3,$E(a0)
+                move.w  d3,ENTITYDEF_OFFSET_Y(a0)
+                move.w  d2,ENTITYDEF_OFFSET_XDEST(a0)
+                move.w  d3,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  #$FF,((CONTROLLING_UNIT_CURSOR-$1000000)).w
                 move.b  #$30,((VIEW_TARGET_ENTITY-$1000000)).w 
-loc_22DD2:
+@WaitForPlayerInput:
                 
                 jsr     (WaitForVInt).w
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
                 andi.w  #INPUT_B|INPUT_C|INPUT_A,d0
-                beq.s   loc_22DD2
-                move.w  $C(a0),d2
-                move.w  $E(a0),d3
+                beq.s   @WaitForPlayerInput
+                
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d2
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),d3
                 ext.l   d2
                 ext.l   d3
                 divs.w  #$180,d2
@@ -258,7 +260,7 @@ loc_22DD2:
                 moveq   #$30,d0 
                 jsr     j_SetEntityMovescriptToIdle
                 move.w  #$6F00,(a0)
-                move.w  #$6F00,$C(a0)
+                move.w  #$6F00,ENTITYDEF_OFFSET_XDEST(a0)
                 clr.b   ((CONTROLLING_UNIT_CURSOR-$1000000)).w
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 rts
@@ -268,13 +270,13 @@ loc_22DD2:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: D2 = chosen X
-;      D3 = chosen Y
-;      D4 = copied P1 input state bitfield
+; Out: d2.b = chosen X
+;      d3.b = chosen Y
+;      d4.w = copied P1 input state bitfield
 
 battleEntity = -2
 
-ControlBattleUnit:
+ControlBattleEntity:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 link    a6,#-2
@@ -283,33 +285,34 @@ ControlBattleUnit:
                 move.w  d0,battleEntity(a6)
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a1
-                move.b  $12(a1),d0
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d0
                 move.w  d0,-(sp)
                 move.b  $11(a1),d0
                 lsl.b   #4,d0
                 move.b  d0,$11(a1)
                 jsr     (WaitForVInt).w
-                move.b  #$21,$12(a1) 
-                bsr.w   sub_234C8
+                move.b  #$21,ENTITYDEF_OFFSET_ENTNUM(a1) 
+                bsr.w   UpdateBattleEntitySprite
                 move.w  battleEntity(a6),d0
                 jsr     j_SetControlledEntityActScript
                 addi.w  #$10,d0
                 lea     ((byte_FFAFA0-$1000000)).w,a0
                 move.b  #1,(a0,d0.w)
-loc_22E68:
+@Loop:
                 
-                bsr.w   UpdateControlledUnitPos
+                bsr.w   UpdateBattleEntityPosition
                 jsr     (WaitForVInt).w
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d4
                 andi.w  #INPUT_B|INPUT_C|INPUT_A,d4
-                beq.s   loc_22E68
+                beq.s   @Loop
+                
                 clr.b   (a0,d0.w)
                 move.b  $11(a1),d0
                 lsr.b   #4,d0
                 move.b  d0,$11(a1)
                 move.w  (sp)+,d0
-                move.b  d0,$12(a1)
-                bsr.w   sub_234C8
+                move.b  d0,ENTITYDEF_OFFSET_ENTNUM(a1)
+                bsr.w   UpdateBattleEntitySprite
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  ENTITYDEF_OFFSET_XDEST(a1),d2
                 ext.l   d2
@@ -326,13 +329,13 @@ loc_22E68:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-    ; End of function ControlBattleUnit
+    ; End of function ControlBattleEntity
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateControlledUnitPos:
+UpdateBattleEntityPosition:
                 
                 movem.w d0-d3,-(sp)
                 move.w  (a1),d2
@@ -360,7 +363,7 @@ UpdateControlledUnitPos:
                 movem.w (sp)+,d0-d3
                 rts
 
-    ; End of function UpdateControlledUnitPos
+    ; End of function UpdateBattleEntityPosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -456,14 +459,14 @@ MoveBattleEntityByMoveString:
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
                 lsl.w   #5,d0
                 adda.w  d0,a1
-                move.b  $12(a1),d0
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d0
                 move.w  d0,-(sp)
                 move.b  $11(a1),d0
                 lsl.b   #4,d0
                 move.b  d0,$11(a1)
                 jsr     (WaitForVInt).w
-                move.b  #$21,$12(a1) 
-                bsr.w   sub_234C8
+                move.b  #$21,ENTITYDEF_OFFSET_ENTNUM(a1) 
+                bsr.w   UpdateBattleEntitySprite
                 move.w  var_2(a6),d0
                 jsr     sub_44030
                 move.l  a0,-(sp)
@@ -481,15 +484,15 @@ loc_22FE8:
                 move.l  a0,-(sp)
                 lea     word_22F76(pc), a0
                 move.w  (a0,d0.w),d1
-                add.w   d1,$C(a1)
+                add.w   d1,ENTITYDEF_OFFSET_XDEST(a1)
                 move.w  2(a0,d0.w),d1
-                add.w   d1,$E(a1)
+                add.w   d1,ENTITYDEF_OFFSET_YDEST(a1)
                 movea.l (sp)+,a0
                 clr.w   d4
                 clr.w   d5
-                move.b  $1A(a1),d4
-                move.b  $1B(a1),d5
-                move.w  $C(a1),d0
+                move.b  ENTITYDEF_OFFSET_XSPEED(a1),d4
+                move.b  ENTITYDEF_OFFSET_YSPEED(a1),d5
+                move.w  ENTITYDEF_OFFSET_XDEST(a1),d0
                 cmp.w   (a1),d0
                 bne.s   loc_23026
                 clr.w   d4
@@ -501,13 +504,13 @@ loc_23026:
                 neg.w   d4
 loc_2302E:
                 
-                move.w  $E(a1),d1
-                cmp.w   2(a1),d1
+                move.w  ENTITYDEF_OFFSET_YDEST(a1),d1
+                cmp.w   ENTITYDEF_OFFSET_Y(a1),d1
                 bne.s   loc_2303A
                 clr.w   d5
 loc_2303A:
                 
-                sub.w   2(a1),d1
+                sub.w   ENTITYDEF_OFFSET_Y(a1),d1
                 bpl.s   loc_23044
                 neg.w   d1
                 neg.w   d5
@@ -515,23 +518,23 @@ loc_23044:
                 
                 move.w  d0,8(a1)
                 move.w  d1,$A(a1)
-                andi.b  #$F0,$1C(a1)
+                andi.b  #$F0,ENTITYDEF_OFFSET_FLAGS_A(a1)
                 move.b  -1(a0),d0
                 cmp.b   -2(a0),d0
                 beq.s   loc_2306A
                 move.w  d4,4(a1)
                 move.w  d5,6(a1)
-                ori.b   #3,$1C(a1)
+                ori.b   #3,ENTITYDEF_OFFSET_FLAGS_A(a1)
 loc_2306A:
                 
                 cmp.b   (a0),d0
                 beq.s   loc_23074
-                ori.b   #$C,$1C(a1)
+                ori.b   #$C,ENTITYDEF_OFFSET_FLAGS_A(a1)
 loc_23074:
                 
                 move.w  ((MOVE_SFX-$1000000)).w,d0
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
-                bsr.w   UpdateControlledUnitPos
+                bsr.w   UpdateBattleEntityPosition
                 move.w  var_2(a6),d0
                 jsr     j_WaitForEntityToStopMoving
                 bra.w   loc_22FE8
@@ -541,13 +544,13 @@ loc_2308E:
                 lsr.b   #4,d0
                 move.b  d0,$11(a1)
                 move.w  (sp)+,d0
-                move.b  d0,$12(a1)
-                bsr.w   sub_234C8
+                move.b  d0,ENTITYDEF_OFFSET_ENTNUM(a1)
+                bsr.w   UpdateBattleEntitySprite
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  (a1),d2
                 ext.l   d2
                 divs.w  #$180,d2
-                move.w  2(a1),d3
+                move.w  ENTITYDEF_OFFSET_Y(a1),d3
                 ext.l   d3
                 divs.w  #$180,d3
                 move.b  d2,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
@@ -1036,24 +1039,27 @@ LoadUnitCursorTileData:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: a1 = pointer to entity data
+;     d6.b = facing direction
 
-sub_234C8:
+
+UpdateBattleEntitySprite:
                 
                 movem.l d0-d2/a0-a1,-(sp)
                 move.b  ENTITYDEF_OFFSET_FACING(a1),d6
                 ext.w   d6
-                move.b  byte_2353E(pc,d6.w),d6
-                bne.s   loc_234DA
+                move.b  tbl_FacingValues_3(pc,d6.w),d6
+                bne.s   @Continue
                 addq.w  #2,d6
-loc_234DA:
+@Continue:
                 
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
-                cmpi.b  #$F0,d1
-                bcc.s   loc_23538
-                move.b  $12(a1),d1
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d1
+                bcc.s   @Done
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1
                 cmpi.b  #$20,d1 
-                beq.s   loc_23538
+                beq.s   @Done
                 move.w  d1,-(sp)
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
@@ -1079,14 +1085,15 @@ loc_234DA:
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
                 jsr     (EnableDmaQueueProcessing).w
-loc_23538:
+@Done:
                 
                 movem.l (sp)+,d0-d2/a0-a1
                 rts
 
-    ; End of function sub_234C8
+    ; End of function UpdateBattleEntitySprite
 
-byte_2353E:     dc.b 0
+tbl_FacingValues_3:
+                dc.b 0
                 dc.b 1
                 dc.b 2
                 dc.b 3
@@ -1139,9 +1146,18 @@ loc_23572:
 
     ; End of function sub_23554
 
-spr_2358C:      ; unknown sprite definitions
-                
-; Syntax        vdpSprite Y, [VDPSPRITESIZE_]bitfield, [VDPTILE_]bitfield, X
+spr_2358C:      ; unknown VDP sprite definitions
+;
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+;
+;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 vdpSprite 116, V4|H4|16, 1664|PALETTE3, 124
                 vdpSprite 1, V4|H4|10, 1664|PALETTE3, 1
@@ -1173,7 +1189,7 @@ spr_2358C:      ; unknown sprite definitions
 
 sub_2364C:
                 
-                move.l  #$10F10,(SPRITE_08).l
+                move.l  #$10F10,(SPRITE_08).l ; y = 1, size and link = V4|H4|16
                 rts
 
     ; End of function sub_2364C

@@ -1,6 +1,6 @@
 
 ; ASM FILE data\stats\items\itemnames.asm :
-; 0x1796E..0x17F3E : Item names
+; 0x1796E..0x17F3D : Item names
 tbl_ItemNames:  itemName "Medical", 13, "Herb"
                 itemName "Healing", 13, "Seed"
                 itemName "Healing", 13, "Drop"
@@ -128,7 +128,7 @@ tbl_ItemNames:  itemName "Medical", 13, "Herb"
                 itemName "Life", 13, "Ring"
                 itemName "Cotton", 13, "Balloon"
                 itemName "Chirrup", 13, "Sandals"
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                     itemName "item127"
                     itemName "item128"
                     itemName "item129"
@@ -259,6 +259,4 @@ tbl_ItemNames:  itemName "Medical", 13, "Herb"
                     itemName "item254"
                 endif
                 itemName "Empty"
-                
-                wordAlign
                 

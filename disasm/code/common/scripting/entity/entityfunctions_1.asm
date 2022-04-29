@@ -15,7 +15,7 @@ sub_444A2:
                 move.w  d1,d2
                 jsr     j_GetXPos
                 move.w  d1,-(sp)
-                jsr     j_GetUpperMoveType
+                jsr     j_GetMoveType
                 clr.w   d6
                 cmpi.b  #5,d1
                 bne.s   loc_444CE
@@ -250,7 +250,7 @@ battleEntity = -4
 MoveEntitiesToBattlePositions:
                 
                 movem.l d0-a1,-(sp)
-                link    a6,#65520
+                link    a6,#-16
                 bsr.s   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
@@ -273,7 +273,7 @@ loc_446B8:
                 bmi.w   loc_44732
                 movem.w d0-d1,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetUpperMoveType
+                jsr     j_GetMoveType
                 clr.w   d6
                 cmpi.b  #5,d1
                 bne.s   loc_446FA
@@ -313,7 +313,7 @@ loc_4474A:
                 
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 move.w  (sp)+,d0
                 andi.w  #8,d1
                 bne.w   loc_447F6
@@ -332,7 +332,7 @@ loc_4474A:
                 bmi.w   loc_447F6
                 movem.w d0-d1,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetUpperMoveType
+                jsr     j_GetMoveType
                 clr.w   d6
                 cmpi.b  #5,d1
                 bne.s   loc_447A2
@@ -353,7 +353,7 @@ loc_447AA:
                 moveq   #3,d3
                 move.l  #eas_Standing,d5
                 bsr.w   GetCombatantMapSprite
-                cmpi.b  #$F0,d4
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d4
                 bcs.s   loc_447E8
                 move.w  d0,-(sp)
                 move.w  #$2F,d0 
@@ -377,14 +377,14 @@ loc_447FA:
                 addq.w  #1,battleEntity(a6)
                 dbf     d7,loc_4474A
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
-                addi.w  #$1F4,d1
+                getSavedByte CURRENT_BATTLE, d1
+                addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   loc_448BC
                 lea     ((byte_FFB160-$1000000)).w,a1
                 lea     BattleNeutralEntities(pc), a0
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
 loc_44824:
                 
                 cmpi.w  #$FFFF,(a0)
@@ -409,9 +409,9 @@ loc_4483E:
                 jsr     j_SetMaxHP
                 jsr     j_SetCurrentHP
                 jsr     j_SetStatusEffects
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 ori.w   #8,d1
-                jsr     j_SetCharacterWord34
+                jsr     j_SetAiActivationFlag
                 clr.w   d1
                 move.b  (a0)+,d1
                 move.w  d1,d3

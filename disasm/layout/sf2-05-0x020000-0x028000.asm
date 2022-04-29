@@ -56,6 +56,7 @@ j_SuspendGame:
                 jmp     SuspendGame(pc)
                 include "code\common\menus\shop\shopactions.asm"    ; Shop functions
                 include "data\stats\items\shopinventories.asm"    ; Shop inventories
+                include "data\stats\items\debugshop.asm"    ; Debug shop
                 wordAlign
                 include "code\common\menus\church\churchactions_1.asm"    ; Church functions
                 include "data\stats\allies\promotions.asm"    ; Promotions
@@ -76,6 +77,12 @@ j_SuspendGame:
                 include "data\stats\items\chestgoldamounts.asm"    ; Chest gold amounts
                 include "code\gameflow\exploration\explorationfunctions_1.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlefunctions_1.asm"    ; Battle functions
+                if (STANDARD_BUILD=1)
+                    include "code\gameflow\battle\battleturnorderfunctions-standard.asm"
+                else
+                    include "code\gameflow\battle\battleturnorderfunctions.asm"    ; Battle turn order functions
+                endif
+                include "code\gameflow\battle\battlefunctions_2.asm"    ; Battle functions
                 include "code\gameflow\exploration\explorationfunctions_2.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions
@@ -84,4 +91,4 @@ j_SuspendGame:
                 include "code\common\tech\graphics\specialspritesanims.asm"    ; Special Sprites Animations
                 include "code\specialscreens\suspend\suspend.asm"    ; Suspend functions
                 include "code\specialscreens\witchend\witchend.asm"    ; Witch end functions
-                align $28000
+                alignIfOriginalRomLayout $28000

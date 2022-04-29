@@ -8,7 +8,7 @@ AllyStats08:    forClass  RNGR
                 defGrowth 4, 28, LINEAR
                 agiGrowth 5, 29, LINEAR
                 spellList 
-                    
+                
                 forClass  BWNT
                 hpGrowth  28, 70, LINEAR
                 mpGrowth  0, 0, NONE
@@ -16,4 +16,4 @@ AllyStats08:    forClass  RNGR
                 defGrowth 24, 62, LINEAR
                 agiGrowth 21, 60, LINEAR
                 spellList 
-                    
+                

@@ -102,7 +102,7 @@ byte_77DE:
                 txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
-                move.w  #$31,d2 
+                move.w  #49,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0
@@ -116,7 +116,7 @@ byte_77DE:
                 movem.w (sp)+,d0-d2
                 beq.s   loc_7820
                 move.w  d0,d1
-                addi.w  #$1C2,d1
+                addi.w  #BATTLE_INTRO_CUTSCENE_FLAGS_START,d1
                 jsr     j_SetFlag
 loc_7820:
                 
@@ -127,14 +127,20 @@ loc_7820:
                 clr.w   d1
                 move.b  d0,d1
                 mulu.w  #7,d0
-                conditionalPc lea,BattleMapCoordinates,a0
-                nop
+                conditionalPc lea,BattleMapCoordinates,a0,nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
-                move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    move.b  (a0)+,(BATTLE_AREA_X).l
+                    move.b  (a0)+,(BATTLE_AREA_Y).l
+                    move.b  (a0)+,(BATTLE_AREA_WIDTH).l
+                    move.b  (a0)+,(BATTLE_AREA_HEIGHT).l
+                else
+                    move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
+                    move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
+                    move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
+                    move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
+                endif
                 jsr     j_BattleLoop
                 jsr     j_ChurchMenuActions
                 txt     460             ; "Shop number?{D1}"

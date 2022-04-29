@@ -116,9 +116,9 @@ loc_44180:
 sub_441AA:
                 
                 movem.l d0-a1,-(sp)
-                cmpi.b  #2,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
                 beq.w   loc_44262
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 beq.w   byte_441F0      
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
@@ -140,11 +140,11 @@ byte_441F0:
                 
                 chkFlg  64              ; Raft is unlocked
                 beq.w   loc_44262
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
+                checkRaftMap d0
                 bne.s   loc_44248
-                move.b  ((RAFT_X-$1000000)).w,d1
-                move.b  ((RAFT_Y-$1000000)).w,d2
+                getSavedByte RAFT_X, d1
+                getSavedByte RAFT_Y, d2
                 move.w  #$1F,d0
                 andi.w  #$7F,d1 
                 muls.w  #$180,d1
@@ -186,18 +186,23 @@ IsOverworldMap:
                 
                 movem.l d0-d1/a0,-(sp)
                 clr.w   d1
-                lea     OverworldMaps(pc), a0
-loc_44272:
+                lea     tbl_OverworldMaps(pc), a0
+@Loop:
                 
                 move.b  (a0)+,d0
-                bmi.w   loc_44282
-                cmp.b   ((CURRENT_MAP-$1000000)).w,d0
-                bne.s   loc_44280
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    bmi.s   @Break
+                    cmp.b   (CURRENT_MAP).l,d0
+                else
+                    bmi.w   @Break
+                    cmp.b   ((CURRENT_MAP-$1000000)).w,d0
+                endif
+                bne.s   @Next
                 addq.w  #1,d1
-loc_44280:
+@Next:
                 
-                bra.s   loc_44272
-loc_44282:
+                bra.s   @Loop
+@Break:
                 
                 tst.w   d1
                 movem.l (sp)+,d0-d1/a0

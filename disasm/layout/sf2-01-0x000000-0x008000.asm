@@ -30,7 +30,11 @@
                 include "code\common\windows\windowengine.asm"    ; Window engine
                 include "code\common\scripting\entity\entityscriptengine.asm"    ; Entity script engine
                 include "code\common\scripting\text\textfunctions.asm"    ; Text functions
-                include "code\common\tech\sram\sramfunctions.asm"    ; SRAM functions
+                if (STANDARD_BUILD=1)
+                    include "code\common\tech\sram\sramfunctions-standard.asm"
+                else
+                    include "code\common\tech\sram\sramfunctions.asm"   ; SRAM functions
+                endif
                 include "code\specialscreens\suspend\witchsuspend.asm"    ; Witch suspend function
                 include "code\specialscreens\witchend\witchendinit.asm"    ; Witch end function
                 include "code\gameflow\start\gameinit.asm"    ; Game init
@@ -47,9 +51,11 @@
                 includeIfVanillaRom "data\battles\global\battlemapcoords.asm"    ; Battle map coords
                 includeIfVanillaRom "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
                 includeIfVanillaRom "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
+                wordAlign
                 include "code\specialscreens\witch\witchfunctions.asm"    ; Witch functions
                 include "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
                 include "code\gameflow\start\regioncheck.asm"    ; Region check function
 nullsub_7FA4:                
                 rts
-                align $8000
+                includeIfExtendedSsf "code\common\tech\extendedssfmapper.asm"   ; Extended SSF mapper functions
+                alignIfOriginalRomLayout $8000

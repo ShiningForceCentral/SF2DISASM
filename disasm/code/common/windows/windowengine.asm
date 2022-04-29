@@ -19,7 +19,7 @@ loc_47D2:
                 move.w  (sp)+,d7
                 movea.l (sp)+,a0
                 clr.b   ((WINDOW_IS_PRESENT-$1000000)).w
-                cmpi.b  #$FF,((CURRENT_MAP-$1000000)).w
+                checkSavedByte #$FF, CURRENT_MAP
                 beq.s   loc_47F4
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_47F4:
@@ -557,7 +557,7 @@ sub_4BEA:
                 asl.w   #5,d6
                 add.w   d1,d6
                 add.w   d6,d6
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   return_4C36
                 move.w  (VERTICAL_SCROLL_DATA).l,d1
                 addq.w  #4,d1

@@ -85,21 +85,21 @@ j_CreateBattlesceneMiniStatusWindows:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10020:
+j_ShowAllyBattlesceneWindow:
                 
-                jmp     sub_11638(pc)
+                jmp     ShowAllyBattlesceneWindow(pc)
 
-    ; End of function sub_10020
+    ; End of function j_ShowAllyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10024:
+j_ShowEnemyBattlesceneWindow:
                 
-                jmp     sub_116B8(pc)
+                jmp     ShowEnemyBattlesceneWindow(pc)
 
-    ; End of function sub_10024
+    ; End of function j_ShowEnemyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -175,21 +175,21 @@ j_InitMemberListScreen:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10044:
+j_BuildMemberListScreen_NewATTandDEF:
                 
-                jmp     sub_13004(pc)
+                jmp     BuildMemberListScreen_NewATTandDEF(pc)
 
-    ; End of function sub_10044
+    ; End of function j_BuildMemberListScreen_NewATTandDEF
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10048:
+j_BuildMemberListScreen_MagicPage:
                 
-                jmp     sub_13030(pc)
+                jmp     BuildMemberListScreen_MagicPage(pc)
 
-    ; End of function sub_10048
+    ; End of function j_BuildMemberListScreen_MagicPage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -334,7 +334,7 @@ sub_10080:
 p_tbl_ItemNames:dc.l tbl_ItemNames
 p_tbl_ClassNames:
                 dc.l tbl_ClassNames
-p_tbl_ItemDefs: dc.l tbl_ItemDefs       
+p_tbl_ItemDefs: dc.l tbl_ItemDefs
 p_tbl_SpellDefs:dc.l tbl_SpellDefs      
 
 ; =============== S U B R O U T I N E =======================================
@@ -390,11 +390,11 @@ j_VInt_UpdateTimerWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_WitchMainMenu:
+j_BookReaderMainMenu:
                 
-                jmp     WitchMainMenu(pc)
+                jmp     BookReaderMainMenu(pc)
 
-    ; End of function j_WitchMainMenu
+    ; End of function j_BookReaderMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1169,7 +1169,7 @@ loc_10616:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10630
                 moveq   #1,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_10630
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -1178,7 +1178,7 @@ loc_10630:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1064A
                 moveq   #2,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_1064A
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -1194,7 +1194,7 @@ loc_1065C:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10676
                 moveq   #3,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_10676
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -1332,7 +1332,7 @@ BuildItemMenu:
                 moveq   #-36,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  (sp)+,d1
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                     btst    #ITEMENTRY_BIT_EQUIPPED,d1
                     beq.s   @Return
                 else
@@ -1585,11 +1585,7 @@ LoadHighlightableIcon:
                 adda.w  #ICONTILES_BYTESIZE,a1
                 mulu.w  #ICONTILES_BYTESIZE,d0
                 movea.l (p_Icons).l,a0
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-                    adda.l  d0,a0 
-                else
-                    adda.w  d0,a0           ; icon offset
-                endif
+                addIconOffset d0, a0
                 move.w  #$2F,d1 
                 lea     IconHighlightTiles(pc), a2
 @Loop:
@@ -1673,7 +1669,7 @@ loc_10AD8:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10AF2
                 moveq   #1,d1
-                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_2-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_10AF2
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10B76
@@ -1682,7 +1678,7 @@ loc_10AF2:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B0C
                 moveq   #2,d1
-                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_3-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_10B0C
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10B76
@@ -1698,7 +1694,7 @@ loc_10B1E:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B38
                 moveq   #3,d1
-                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_4-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_10B38
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10B76
@@ -1764,7 +1760,7 @@ loc_10BBC:
                 add.w   d0,d0
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 move.w  (a0,d0.w),d0
-                bsr.w   sub_10CC6
+                bsr.w   sub_10CC6       
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_10BEC
                 bsr.w   BuildMagicMenu
@@ -1875,6 +1871,8 @@ rjt_10CBE:      dc.w (sub_10800-rjt_10CBE) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: D0 = displayed spell icon
+
 
 sub_10CC6:
                 
@@ -1889,9 +1887,9 @@ sub_10CC6:
                 jsr     (WaitForDmaQueueProcessing).w
                 move.w  (sp)+,d0
                 move.w  d0,d4
-                lsr.w   #6,d4
+                lsr.w   #SPELLENTRY_OFFSET_LV,d4
                 move.w  d4,d5
-                andi.w  #SPELLENTRY_MASK_INDEX,d0 
+                andi.w  #SPELLENTRY_MASK_INDEX,d0
                 jsr     (WaitForVInt).w
 loc_10CF4:
                 
@@ -1969,7 +1967,7 @@ sub_10D56:
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
                 lsl.w   #6,d5
-                andi.w  #SPELLENTRY_MASK_INDEX,d1 
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
                 or.w    d5,d1
                 move.w  d1,((word_FFB18C-$1000000)).w
                 jsr     j_GetSpellCost
@@ -2002,6 +2000,18 @@ loc_10DCE:
     ; End of function sub_10D56
 
 spr_SpellLevelHighlight:
+                
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+;
+;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+                
                 vdpSprite 316, V2|H4|9, 1504|PALETTE3|PRIORITY, 292
                 vdpSprite 316, V2|H4|16, 1504|MIRROR|PALETTE3|PRIORITY, 316
 

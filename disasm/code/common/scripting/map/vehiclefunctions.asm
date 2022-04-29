@@ -15,7 +15,7 @@ MapEventType2:
                 lea     byte_45316(pc), a1
                 bsr.s   ApplyActscriptToFollowers
                 bsr.s   WaitForFollowersStopped
-                move.b  #1,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 rts
 
     ; End of function MapEventType2
@@ -75,7 +75,7 @@ MapEventType4:
                 bsr.w   ApplyActscriptToFollowers
                 bsr.w   WaitForFollowersStopped
                 jsr     InitializeFollowerActscripts
-                move.b  #0,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 rts
 
     ; End of function MapEventType4
@@ -132,7 +132,7 @@ MapEventType3:
                 lea     byte_45434(pc), a1
                 bsr.w   ApplyActscriptToHeroAndFollowers
                 bsr.w   WaitForHeroAndFollowersStopped
-                move.b  #2,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
 return_453F0:
                 
                 rts
@@ -183,7 +183,7 @@ MapEventType5:
                 bsr.w   ApplyActscriptToHeroAndFollowers
                 bsr.w   WaitForHeroAndFollowersStopped
                 jsr     InitializeFollowerActscripts
-                move.b  #0,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 rts
 
     ; End of function MapEventType5
@@ -251,9 +251,9 @@ sub_454E4:
                 ext.l   d1
                 divs.w  #$180,d0
                 divs.w  #$180,d1
-                move.b  ((CURRENT_MAP-$1000000)).w,((RAFT_MAP_INDEX-$1000000)).w
-                move.b  d0,((RAFT_X-$1000000)).w
-                move.b  d1,((RAFT_Y-$1000000)).w
+                copySavedByte CURRENT_MAP, RAFT_MAP
+                setSavedByte d0, RAFT_X
+                setSavedByte d1, RAFT_Y
                 movem.l (sp)+,d0-d1/a0
                 rts
 
@@ -274,7 +274,7 @@ ShrinkIntoCaravanBowieAndFollowers:
                 lea     eas_ShrinkIn(pc), a1
                 bsr.w   ApplyActscriptToFollowers
                 bsr.w   WaitForFollowersStopped
-                move.b  #1,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 moveq   #3,d0
                 jsr     (Sleep).w       
                 rts
@@ -323,7 +323,7 @@ GrowOutBowieAndFollowers:
                 bsr.w   ApplyActscriptToFollowers
                 bsr.w   WaitForFollowersStopped
                 jsr     InitializeFollowerActscripts
-                move.b  #0,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 rts
 
     ; End of function GrowOutBowieAndFollowers

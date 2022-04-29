@@ -63,4 +63,3 @@ pt_AllyStats:   dc.l AllyStats00        ; BOWIE
                 include "data\stats\allies\stats\allystats27.asm"    ; Ally stats 27
                 include "data\stats\allies\stats\allystats28.asm"    ; Ally stats 28
                 include "data\stats\allies\stats\allystats29.asm"    ; Ally stats 29
-                wordAlign

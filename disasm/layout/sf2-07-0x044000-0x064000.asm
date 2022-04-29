@@ -22,8 +22,8 @@ j_ApplyInitActscript:
                 jmp     ApplyInitActscript(pc)
 j_SetEntityMovescriptToIdle:                
                 jmp     SetEntityMovescriptToIdle(pc)
-sub_44024:                
-                jmp     sub_44B94(pc)
+j_SetUnitCursorSpeedx2:                
+                jmp     SetUnitCursorSpeedx2(pc)
 j_SetUnitCursorActscript:                
                 jmp     SetUnitCursorActscript(pc)
 sub_4402C:                
@@ -37,7 +37,7 @@ j_nullsub_4712A:
 j_ExecuteMapScript:                
                 jmp     ExecuteMapScript(pc)
 j_ExecuteBattleCutscene_Intro:                
-                jmp     j_ExecuteBattleCutscene_Intro_0(pc)
+                jmp     ExecuteBattleCutscene_Intro(pc)
 j_ExecuteBattleCutscene_Start:                
                 jmp     ExecuteBattleCutscene_Start(pc)
 j_ExecuteBattleCutscene_Defeated:                
@@ -164,9 +164,8 @@ j_ClearEntities:
                 include "data\scripting\map\cs_intro_stormeffect.asm"    ; Storm Effect
                 include "data\scripting\map\cs_end.asm"    ; End cutscene
                 include "data\scripting\map\debugscripts.asm"    ; Debugging scripts
-                include data\battles\entries\battlecutscenesstorage.asm
+                include "data\battles\entries\battlecutscenesstorage.asm"
                 include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
                 include "data\maps\mapsetups.asm"    ; Map setups table
-                ;includeIfVanillaRom data\maps\mapsetupsstorage.asm
-                include data\maps\mapsetupsstorage.asm
-                align $64000
+                include "data\maps\mapsetupsstorage.asm"
+                alignIfOriginalRomLayout $64000
