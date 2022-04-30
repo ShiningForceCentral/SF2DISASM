@@ -5,10 +5,12 @@
 
 
                 include "code\gameflow\battle\battlescenes\battlesceneengine_0.asm"    ; Battlescene engine
-                include "code\gameflow\battle\battlescenes\getweaponspriteandpalette.asm"    ; Weapon sprite and palette getter function
+                include "code\gameflow\battle\battlescenes\getallyanimation.asm"    ; Get ally battlescene animation function
                 include "code\gameflow\battle\battlescenes\battlesceneengine_1.asm"    ; Battlescene engine
-                include "data\battles\global\terrainbackgrounds.asm"    ; Terrain backgrounds table
+                include "code\gameflow\battle\battlescenes\getweaponspriteandpalette.asm"    ; Weapon sprite and palette getter function
                 include "code\gameflow\battle\battlescenes\battlesceneengine_2.asm"    ; Battlescene engine
+                include "data\battles\global\terrainbackgrounds.asm"    ; Terrain backgrounds table
+                include "code\gameflow\battle\battlescenes\battlesceneengine_3.asm"    ; Battlescene engine
                 include "data\stats\allies\allybattlesprites.asm"    ; Ally battlesprites table
                 include "data\stats\enemies\enemybattlesprites.asm"    ; Enemy battlesprites table
                 include "data\stats\items\weapongraphics.asm"    ; Weapon graphics table
