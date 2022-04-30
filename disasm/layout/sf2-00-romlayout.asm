@@ -15,8 +15,8 @@
                 include "layout\sf2-08-0x064000-0x0C8000.asm"    ; 0x064000..0x0C8000 : Map Tiles, Map Palettes, Map Data
                 include "layout\sf2-09-0x0C8000-0x100000.asm"    ; 0x0C8000..0x100000 : Entity Sprites
                 include "layout\sf2-10-0x100000-0x130000.asm"    ; 0x100000..0x130000 : Backgrounds, invocation sprites, title screen
-                include "layout\sf2-11-0x130000-0x180000.asm"    ; 0x130000..0x180000 : Enemy battle sprites
-                include "layout\sf2-12-0x180000-0x1AC000.asm"    ; 0x180000..0x1AC000 : Ally battle sprites, status anim tiles, battlescene transition tiles, bolt graphics, ally and enemy animations
+                include "layout\sf2-11-0x130000-0x180000.asm"    ; 0x130000..0x180000 : Enemy battlesprites
+                include "layout\sf2-12-0x180000-0x1AC000.asm"    ; 0x180000..0x1AC000 : Ally battlesprites, status anim tiles, battlescene transition tiles, bolt graphics, ally and enemy animations
                 include "layout\sf2-13-0x1AC000-0x1B8000.asm"    ; 0x1AC000..0x1B8000 : Battle setup functions, battle terrains, battle entity setups, end kiss graphics
                 include "layout\sf2-14-0x1B8000-0x1C8000.asm"    ; 0x1B8000..0x1C8000 : Battlescene grounds, weapons, spell graphics, witch screens
                 include "layout\sf2-15-0x1C8000-0x1D8000.asm"    ; 0x1C8000..0x1D8000 : Portraits

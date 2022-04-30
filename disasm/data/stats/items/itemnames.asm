@@ -259,4 +259,3 @@ tbl_ItemNames:  itemName "Medical", 13, "Herb"
                     itemName "item254"
                 endif
                 itemName "Empty"
-                

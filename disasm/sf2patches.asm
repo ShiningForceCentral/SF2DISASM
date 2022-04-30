@@ -1,22 +1,21 @@
-off = 0
-on = 1
+; 0 = OFF, 1 = ON
 
 ; ROM expansions
-EXPANDED_ROM:                       equ on      ; Build a 4MB ROM and manage SRAM mapping.
-EXTENDED_SSF_MAPPER:                equ off     ; Build a 6MB ROM and manage ROM and SRAM mapping.
-EXPANDED_SRAM:                      equ on      ; Expand SRAM from 8KB to 32KB.
-RELOCATED_SAVED_DATA_TO_SRAM:       equ off     ; Relocate currently loaded saved data from system RAM to cartridge SRAM.
-EXPANDED_ITEMS_AND_SPELLS:          equ on      ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of 4MB ROM with 32KB SRAM.
-OPTIMIZED_ROM_LAYOUT:               equ on      ; Align ROM sections to next word boundary to consolidate free space.
+EXPANDED_ROM:                       equ 1       ; Build a 4MB ROM and manage SRAM mapping.
+EXTENDED_SSF_MAPPER:                equ 0       ; Build a 6MB ROM and manage ROM and SRAM mapping.
+EXPANDED_SRAM:                      equ 1       ; Expand SRAM from 8KB to 32KB.
+RELOCATED_SAVED_DATA_TO_SRAM:       equ 0       ; Relocate currently loaded saved data from system RAM to cartridge SRAM.
+EXPANDED_ITEMS_AND_SPELLS:          equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of 4MB ROM with 32KB SRAM.
+OPTIMIZED_ROM_LAYOUT:               equ 1       ; Align ROM sections to next word boundary to consolidate free space.
 
 ; Assembler optimizations
-OPTIMIZED_PC_RELATIVE_ADDRESSING:   equ on      ; Optimize to PC relative addressing.
-OPTIMIZED_SHORT_BRANCHES:           equ on      ; Optimize short branches.
-OPTIMIZED_ABSOLUTE_LONG_ADDRESSING: equ on      ; Optimize absolute long addressing.
-OPTIMIZED_ZERO_DISPLACEMENTS:       equ on      ; Optimize zero displacements.
-OPTIMIZED_ADDS_TO_QUICK_FORM:       equ on      ; Optimize adds to quick form.
-OPTIMIZED_SUBS_TO_QUICK_FORM:       equ on      ; Optimize subtract to quick form.
-OPTIMIZED_MOVE_TO_QUICK_FORM:       equ on      ; Optimize move to quick form.
+OPTIMIZED_PC_RELATIVE_ADDRESSING:   equ 1       ; Optimize to PC relative addressing.
+OPTIMIZED_SHORT_BRANCHES:           equ 1       ; Optimize short branches.
+OPTIMIZED_ABSOLUTE_LONG_ADDRESSING: equ 1       ; Optimize absolute long addressing.
+OPTIMIZED_ZERO_DISPLACEMENTS:       equ 1       ; Optimize zero displacements.
+OPTIMIZED_ADDS_TO_QUICK_FORM:       equ 1       ; Optimize adds to quick form.
+OPTIMIZED_SUBS_TO_QUICK_FORM:       equ 1       ; Optimize subtract to quick form.
+OPTIMIZED_MOVE_TO_QUICK_FORM:       equ 1       ; Optimize move to quick form.
 
 
     ; If standard build, and either EXPANDED_ROM, EXTENDED_SSF_MAPPER, or EXPANDED_ITEMS_AND_SPELLS

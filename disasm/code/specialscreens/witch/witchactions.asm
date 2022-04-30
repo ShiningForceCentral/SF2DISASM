@@ -25,7 +25,7 @@ loc_7426:
                 moveq   #1,d1
 loc_7428:
                 
-                jsr     j_BookReaderMainMenu
+                jsr     j_WitchMainMenu
                 tst.w   d0
                 bmi.s   byte_73C2       
                 subq.w  #1,d0
@@ -59,7 +59,7 @@ byte_7476:
                 clr.w   d0
                 moveq   #3,d1
                 moveq   #$F,d2
-                jsr     j_BookReaderMainMenu
+                jsr     j_WitchMainMenu
                 tst.w   d0
                 bpl.s   loc_7494
                 clr.w   d0
@@ -117,7 +117,7 @@ loc_74FC:
 loc_74FE:
                 
                 moveq   #2,d1
-                jsr     j_BookReaderMainMenu
+                jsr     j_WitchMainMenu
                 tst.w   d0
                 bmi.w   byte_73C2       
                 subq.w  #1,d0
@@ -184,7 +184,7 @@ loc_758E:
 loc_7590:
                 
                 moveq   #2,d1
-                jsr     j_BookReaderMainMenu
+                jsr     j_WitchMainMenu
                 tst.w   d0
                 bmi.w   byte_73C2       
                 subq.w  #1,d0

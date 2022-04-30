@@ -4,11 +4,7 @@
 ; FREE SPACE : 953 bytes.
 
 
-p_pt_MapTilesets:
-                dc.l pt_MapTilesets
-p_pt_MapPalettes:
-                dc.l pt_MapPalettes
-p_pt_MapData:   dc.l pt_MapData
+                include "code\common\tech\pointers\s08_pointers.asm"    ; Game Section 08 Pointers
                 includeIfVanillaRom "data\graphics\maps\maptilesets\entries.asm"    ; Map Tilesets
                 include "data\graphics\maps\mappalettes\entries.asm"    ; Map palettes
                 include "data\maps\entries.asm"             ; Map entries

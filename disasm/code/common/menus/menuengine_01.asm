@@ -390,11 +390,11 @@ j_VInt_UpdateTimerWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_BookReaderMainMenu:
+j_WitchMainMenu:
                 
-                jmp     BookReaderMainMenu(pc)
+                jmp     WitchMainMenu(pc)
 
-    ; End of function j_BookReaderMainMenu
+    ; End of function j_WitchMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1355,7 +1355,7 @@ BuildItemMenu:
 aEquipped:      dc.b '\Equipped',0
 aNothing:       dc.b '\Nothing',0
                 
-                wordAlign
+                align 2
 
 ; =============== S U B R O U T I N E =======================================
 

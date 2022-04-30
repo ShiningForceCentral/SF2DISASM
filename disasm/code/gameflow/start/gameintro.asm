@@ -179,7 +179,7 @@ loc_73E4:
 loc_73E8:
                 
                 clr.w   d1
-                jsr     j_BookReaderMainMenu
+                jsr     j_WitchMainMenu
                 tst.w   d0
                 bmi.s   byte_73C2       
                 add.w   d0,d0

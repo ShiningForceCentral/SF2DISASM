@@ -181,7 +181,7 @@ InitGameSettings:
                     move.l  #$7F7F7F7F,d0
                 endif
                 loadSavedDataAddress CARAVAN_ITEMS, a0
-                moveq   #$F,d7
+                moveq   #CARAVAN_ITEMS_LONGWORD_COUNTER,d7
 @ClearCaravanItems_Loop:
                 
                 setSavedLongWithPostIncrement d0, a0

@@ -1,23 +1,10 @@
 
 ; GAME SECTION 12 :
-; 0x180000..0x1AC000 : Ally battle sprites, status anim tiles, battlescene transition tiles, bolt graphics, ally and enemy animations
+; 0x180000..0x1AC000 : Ally battlesprites, status anim tiles, battlescene transition tiles, bolt graphics, ally and enemy animations
 ; FREE SPACE : 871 bytes.
 
 
-p_pt_AllyBattleSprites:
-                dc.l pt_AllyBattleSprites
-p_StatusAnimationTiles:
-                dc.l StatusAnimationTiles
-p_pt_BattlesceneTransitionTiles:
-                dc.l pt_BattlesceneTransitionTiles
-p_BoltAnimData_A:
-                dc.l BoltAnimData_A
-p_BoltAnimData_B:
-                dc.l BoltAnimData_B
-p_pt_AllyAnimations:
-                dc.l pt_AllyAnimations
-p_pt_EnemyAnimations:
-                dc.l pt_EnemyAnimations
+                include "code\common\tech\pointers\s12_pointers.asm"    ; Game Section 12 Pointers
                 includeIfExpandedRom "data\scripting\text\entries.asm"    ; Textbank entries
                 includeIfVanillaRom "data\graphics\battles\battlesprites\allies\entries.asm"    ; Ally battlesprites
                 includeIfVanillaRom "data\graphics\battles\tech\statusanimation\entries.asm"    ; Status effect animation tiles

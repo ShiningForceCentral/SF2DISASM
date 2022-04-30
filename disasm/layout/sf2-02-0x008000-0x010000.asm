@@ -30,7 +30,7 @@
                 include "code\gameflow\battle\battleactionsengine_8.asm"    ; Battle actions engine
                 include "code\gameflow\battle\battlefieldengine_1.asm"    ; Battlefield engine
                 include "data\stats\spells\spellelements.asm"    ; Spell elements table
-                wordAlign
+                align
                 include "code\gameflow\battle\battlefieldengine_2.asm"    ; Battlefield engine
                 include "code\gameflow\battle\determinehealingspelllevel.asm"    ; Determine healing spell level function
                 include "code\gameflow\battle\battlefieldengine_3.asm"    ; Battlefield engine
@@ -41,9 +41,9 @@
                 include "code\gameflow\battle\aiengine_1.asm"    ; AI engine
                 include "data\battles\aicommandsets.asm"    ; AI commands data
                 include "data\battles\swarmbattleslist.asm"    ; List of battles implementing swarm AI
-                wordAlign
+                align 2
                 include "data\battles\swarmbattlesparams.asm"    ; Parameters for battles implementing swarm AI
-                wordAlign
+                align 2
                 include "code\gameflow\battle\aiengine_2.asm"    ; AI engine
                 include "code\gameflow\battle\executeaicommandheal.asm"    ; Healing AI command
                 include "code\gameflow\battle\aiengine_3.asm"    ; AI engine
