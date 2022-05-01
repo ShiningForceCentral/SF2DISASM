@@ -1,6 +1,6 @@
 
-; ASM FILE data\stats\items\weapongraphics-itemsandspellsexpansion.asm :
-; Newly formatted weapon graphics table, included when EXPANDED_ITEMS_AND_SPELLS patch is enabled.
+; ASM FILE data\stats\items\weapongraphics-standard.asm :
+
 tbl_WeaponGraphics:
                 
 ; Syntax        weaponGraphics [ITEM_]enum, [WEAPONSPRITE_]enum, [WEAPONPALETTE_]enum
@@ -73,5 +73,11 @@ tbl_WeaponGraphics:
                 weaponGraphics KATANA, KATANA, KATANA                           ; 107: Katana
                 weaponGraphics NINJA_KATANA, KATANA, KATANA                     ; 108: Ninja Katana
                 weaponGraphics GISARME, KATANA, KATANA                          ; 109: Gisarme
+                
+                tableEnd.b
+                
+tbl_SpearWeaponSprites:
+                dc.b WEAPONSPRITE_SPEAR
+                dc.b WEAPONSPRITE_JAVELIN
                 
                 tableEnd.b
