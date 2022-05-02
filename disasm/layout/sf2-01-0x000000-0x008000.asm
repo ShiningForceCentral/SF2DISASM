@@ -57,4 +57,7 @@
                 include "code\gameflow\start\regioncheck.asm"    ; Region check function
                 include "code\specialscreens\witch\soundtest.asm"    ; Sound Test function missing in US version
                 includeIfExtendedSsf "code\common\tech\extendedssfmapper.asm"   ; Extended SSF mapper functions
+                if (STANDARD_BUILD=1)
+                    include "code\common\tech\findspecialproperties-standard.asm"
+                endif
                 alignIfOriginalRomLayout $8000

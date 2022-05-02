@@ -17,7 +17,13 @@
                 include "code\gameflow\battle\battleactionsengine_2.asm"    ; Battle actions engine
                 include "code\gameflow\battle\createbattlesceneanimation.asm"    ; Create battlescene animation function
                 include "code\gameflow\battle\battleactionsengine_3.asm"    ; Battle actions engine
-                include "code\gameflow\battle\getspellanimation.asm"    ; Get spell animation function
+                if (STANDARD_BUILD=1)
+                    include "code\gameflow\battle\getspellanimation-standard.asm"
+                    include "data\graphics\battles\attackspellanimations-standard.asm"
+                    align
+                else
+                    include "code\gameflow\battle\getspellanimation.asm"    ; Get spell animation function
+                endif
                 include "code\gameflow\battle\battleactionsengine_4.asm"    ; Battle actions engine
                 include "data\battles\global\halvedexpearnedbattles.asm"    ; Halved EXP earned battles table
                 include "code\gameflow\battle\battleactionsengine_5.asm"    ; Battle actions engine
