@@ -1,8 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_09.asm :
-; 0x1623A..0x16618 : Menu engine
-AlphabetHighlightTiles:
-                incbin "data/graphics/tech/alphabethighlighttiles.bin"
+; 0x16282..0x16618 : Menu engine
 
 ; =============== S U B R O U T I N E =======================================
 

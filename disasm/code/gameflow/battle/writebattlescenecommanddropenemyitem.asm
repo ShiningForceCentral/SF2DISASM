@@ -66,9 +66,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 move.w  d1,d3
                 andi.w  #ITEMENTRY_MASK_INDEX,d3
                 move.w  d2,d4
-                
-                ; HARDCODED special items with 1/32 drop chances
-                cmpi.w  #ITEM_TAROS_SWORD,d3
+                cmpi.w  #ITEM_TAROS_SWORD,d3 ; HARDCODED special items with 1/32 drop chances
                 beq.w   @DetermineRandomDrop
                 cmpi.w  #ITEM_IRON_BALL,d3
                 beq.w   @DetermineRandomDrop
@@ -82,7 +80,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 tst.w   d0
                 bne.w   @Done
                 bra.w   @DropItem
-                jsr     j_DoesBattleUpgrade
+                jsr     j_DoesBattleUpgrade ; unreachable code
                 tst.w   d1
                 beq.w   @DropItem       ; if battle index not in list
                 moveq   #3,d0           ; else

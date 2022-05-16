@@ -1325,11 +1325,11 @@ j_WriteBattlesceneScript:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_8210:
+j_CreateAttackRangeGrid:
                 
-                jmp     sub_C404(pc)
+                jmp     CreateAttackRangeGrid(pc)
 
-    ; End of function sub_8210
+    ; End of function j_CreateAttackRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2192,8 +2192,8 @@ GetAiSpecialMoveOrders:
 
 ; In: D0 = combatant index
 ; 
-; Out: D1 = AI region index
-;      D2 = unknown
+; Out: D1 = AI activation region index 1
+;      D2 = AI activation region index 2
 
 
 GetAiRegion:

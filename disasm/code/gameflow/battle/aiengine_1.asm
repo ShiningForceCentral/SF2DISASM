@@ -81,7 +81,7 @@ ExecuteAiControl:
                                         ; resume normal AI scripting (end of "swarm" AI)
 @Attack:
                 
-                lea     (byte_FFB20C).l,a0
+                lea     (BATTLE_REGION_FLAGS_TO_BE_TRIGGERED).l,a0
                 move.w  #0,(a0)
                 move.w  d7,d0
                 bsr.w   GetAiRegion     

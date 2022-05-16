@@ -78,7 +78,7 @@ loc_212E0:
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 sndCom  SFX_SPELL_CAST
                 clsTxt
-                cmpi.w  #$A,var_28(a6)
+                cmpi.w  #SPELL_EGRESS,var_28(a6)
                 beq.w   loc_21354
 byte_21348:
                 
@@ -198,7 +198,7 @@ loc_214A4:
                 move.w  d2,var_8(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_2158E
-                cmpi.w  #4,d2
+                cmpi.w  #ITEM_ANGEL_WING,d2
                 bne.w   loc_2150E
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0

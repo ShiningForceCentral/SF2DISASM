@@ -1,34 +1,6 @@
 
 ; ASM FILE code\common\menus\caravan\caravanactions_2.asm :
-; 0x228A8..0x229CA : Caravan functions
-
-; =============== S U B R O U T I N E =======================================
-
-
-ChooseCaravanPortrait:
-                
-                movem.l d0-d1,-(sp)
-                move.l  d1,-(sp)
-                chkFlg  70              ; Astral is a follower
-                bne.s   loc_228B8
-                moveq   #PORTRAIT_ROHDE,d0 ; HARDCODED portraits
-                bra.s   loc_228BA
-loc_228B8:
-                
-                moveq   #PORTRAIT_ASTRAL,d0
-loc_228BA:
-                
-                moveq   #0,d1
-                jsr     j_InitPortraitWindow
-                move.l  (sp)+,d0
-                jsr     (DisplayText).w 
-                clsTxt
-                jsr     j_HidePortraitWindow
-                movem.l (sp)+,d0-d1
-                rts
-
-    ; End of function ChooseCaravanPortrait
-
+; 0x228D8..0x229CA : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================
 

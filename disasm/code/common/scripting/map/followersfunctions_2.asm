@@ -20,13 +20,13 @@ pt_eas_WorldmapFollowers:
 InitializeFollowerActscripts:
                 
                 movem.l a6,-(sp)
-                lea     FollowersTable(pc), a4
+                lea     tbl_Followers(pc), a4
                 lea     pt_eas_Followers(pc), a6
                 chkFlg  65              ; Caravan is unlocked
                 beq.s   loc_443D2
-                bsr.w   IsOverworldMap
+                bsr.w   IsOverworldMap  
                 beq.s   loc_443D2
-                lea     OverworldFollowers(pc), a4
+                lea     tbl_OverworldFollowers(pc), a4
                 lea     pt_eas_WorldmapFollowers(pc), a6
 loc_443D2:
                 

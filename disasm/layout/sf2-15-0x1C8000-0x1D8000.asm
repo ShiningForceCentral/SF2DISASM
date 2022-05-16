@@ -6,4 +6,4 @@
 
                 include "code\common\tech\pointers\s15_portraitspointer.asm"    ; Game Section 15 Portraits Pointer
                 include "data\graphics\portraits\entries.asm"    ; Portraits
-                align $8000
+                align $1D8000

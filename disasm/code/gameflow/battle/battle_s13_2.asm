@@ -653,22 +653,22 @@ DoesBattleUpgrade:
                 nop
                 move.b  (a0)+,d6        ; put length of table in d6
                 tst.b   d6
-                bne.s   loc_1B17A0      ; if d6 not zero
-                bra.w   loc_1B17B6      ; else
-loc_1B17A0:
+                bne.s   @Continue       ; if d6 not zero
+                bra.w   @Done           ; else
+@Continue:
                 
                 subi.w  #1,d6           ; d6--
-loc_1B17A4:
+@Loop:
                 
                 move.b  (a0)+,d0        ; put next byte in d0
                 cmp.b   d7,d0
-                bne.s   loc_1B17B2      ; while d0 not battle index
+                bne.s   @Next           ; while d0 not battle index
                 move.w  #$FFFF,d1       ; else, battle index is in the list, put FFFF ind d1, for "true"
-                bra.w   loc_1B17B6
-loc_1B17B2:
+                bra.w   @Done
+@Next:
                 
-                dbf     d6,loc_1B17A4   
-loc_1B17B6:
+                dbf     d6,@Loop        
+@Done:
                 
                 movem.l (sp)+,d0/d2-a6
                 rts

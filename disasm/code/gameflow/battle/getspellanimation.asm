@@ -4,13 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
-;     A3 = battle action in RAM
-;     A4 = battlescene actor index in RAM
+; In: a2 = battlescene script stack frame
+;     a3 = pointer to battleaction in RAM
+;     a4 = pointer to battlescene actor index in RAM
 ; 
-; Out: D4 = spell animation index
+; Out: d4 = spell animation index
 ; 
-; <HARDCODED> class, enemy and weapon indexes
+;   HARDCODED class, enemy and weapon indexes
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -136,11 +136,11 @@ GetSpellAnimation:
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     GetEquipmentType
                 tst.b   d2
-                beq.w   @Continue2      ; move on to next step if used item is neither a weapon or a ring
+                beq.w   @Continue2
                 jsr     GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                cmpi.b  #$FF,d1
-                beq.w   @Continue2      ; move on to next step if used item has no use effect
+                cmpi.b  #$FF,d1         ; should be $3F = nothing
+                beq.w   @Continue2
                 jsr     FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_ANIMATION(a0),d4
 @Continue2:

@@ -2783,20 +2783,20 @@ return_197A4:
 
 ; =============== S U B R O U T I N E =======================================
 
-; add enemy to dead combatant list
+; Add enemy to dead combatants list.
 
 
 AddEnemyToDeadList:
                 
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 cmpi.w  #$FFFF,d0
-                beq.s   return_197C6
+                beq.s   @Return
                 move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d1
                 lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0
                 move.b  d0,(a0,d1.w)
                 move.b  #$FF,1(a0,d1.w)
                 addq.w  #1,((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
-return_197C6:
+@Return:
                 
                 rts
 

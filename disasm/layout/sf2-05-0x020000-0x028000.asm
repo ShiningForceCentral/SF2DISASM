@@ -36,7 +36,7 @@ j_BattleLoop_Unused:
                 jmp     BattleLoop(pc)  
 j_GetEntityEventIndex:                
                 jmp     GetEntityEventIndex(pc)
-j_GetEntityIndex:                
+j_GetEntityIndexForCombatant:                
                 jmp     GetEntityIndexForCombatant(pc)
 j_FadeOut_WaitForP1Input:                
                 jmp     FadeOut_WaitForP1Input(pc)
@@ -68,6 +68,7 @@ j_SuspendGame:
                 include "data\stats\items\mithrilweapons.asm"    ; Mithril weapon lists
                 include "code\common\menus\caravan\caravanactions_1.asm"    ; Caravan functions
                 include "data\stats\items\specialcaravandescriptions.asm"    ; Special Caravan descriptions
+                include "code\common\menus\caravan\choosecaravanportrait.asm"    ; Choose Caravan Portrait function
                 include "code\common\menus\caravan\caravanactions_2.asm"    ; Caravan functions
                 include "code\common\stats\items\itemactions_1.asm"    ; Item functions
                 include "data\stats\items\usableoutsidebattleitems.asm"    ; Usable outside battle items
@@ -77,8 +78,13 @@ j_SuspendGame:
                 include "data\stats\items\chestgoldamounts.asm"    ; Chest gold amounts
                 include "code\gameflow\exploration\explorationfunctions_1.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlefunctions_1.asm"    ; Battle functions
-                include "code\gameflow\battle\battleturnorderfunctions.asm"    ; Battle turn order functions
+                include "code\gameflow\battle\getegresspositionforbattle.asm"    ; Get Egress Position For Battle function
+                include "code\gameflow\battle\executeindividualturn.asm"    ; Execute Individual Turn function
+                include "code\gameflow\battle\handleafterturneffects.asm"    ; Handle After Turn Effects function
                 include "code\gameflow\battle\battlefunctions_2.asm"    ; Battle functions
+                include "code\gameflow\battle\updateenemyaifunctions.asm"    ; Update Enemy AI functions
+                include "code\gameflow\battle\battleturnorderfunctions.asm"    ; Battle turn order functions
+                include "code\gameflow\battle\battlefunctions_3.asm"    ; Battle functions
                 include "code\gameflow\exploration\explorationfunctions_2.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions

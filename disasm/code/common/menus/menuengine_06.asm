@@ -437,10 +437,10 @@ LoadSpellIcon:
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
                 movea.l (p_Icons).l,a0
                 cmpi.w  #SPELL_NOTHING,d1
-                bne.s   @Continue
+                bne.s   @Spell
                 move.w  #ICON_NOTHING,d1
                 bra.s   LoadIcon
-@Continue:
+@Spell:
                 
                 addi.w  #ICON_SPELLS_START,d1
 
@@ -456,15 +456,16 @@ LoadIcon:
                 add.w   d2,d1
                 lsl.w   #6,d1
                 adda.w  d1,a0           ; icon offset
-                moveq   #$2F,d7 
-loc_13B8E:
+                moveq   #47,d7
+@Loop:
                 
                 move.l  (a0)+,(a1)+
-                dbf     d7,loc_13B8E
+                dbf     d7,@Loop
+                
                 ori.w   #$F,-2(a1)
-                ori.w   #$F000,-$24(a1)
-                ori.w   #$F,-$9E(a1)
-                ori.w   #$F000,-$C0(a1)
+                ori.w   #$F000,-36(a1)
+                ori.w   #$F,-158(a1)
+                ori.w   #$F000,-192(a1)
                 rts
 
 ; END OF FUNCTION CHUNK FOR LoadItemIcon

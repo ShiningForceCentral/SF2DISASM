@@ -368,7 +368,7 @@ ProcessMapEventType5_GetOutOfRaft:
 
 j_j_ShrinkInBowieAndFollowers:
                 
-                jsr     j_ShrinkInBowieAndFollowers
+                jsr     j_ShrinkIntoCaravanBowieAndFollowers
                 rts
 
     ; End of function j_j_ShrinkInBowieAndFollowers

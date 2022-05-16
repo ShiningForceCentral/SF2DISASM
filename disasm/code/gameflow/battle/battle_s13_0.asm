@@ -67,7 +67,7 @@ j_GetEnemyAiTargetPosition:
 
 j_GetBattleSpritesetSubsection:
                 
-                jmp     GetBattleSpriteSetSubsection(pc)
+                jmp     GetBattleSpritesetSubsection(pc)
 
     ; End of function j_GetBattleSpritesetSubsection
 

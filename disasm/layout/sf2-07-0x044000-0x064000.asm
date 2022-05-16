@@ -86,7 +86,7 @@ j_MapEventType2:
                 jmp     MapEventType2(pc)
 j_MapEventType4:                
                 jmp     MapEventType4(pc)
-j_ShrinkInBowieAndFollowers:                
+j_ShrinkIntoCaravanBowieAndFollowers:                
                 jmp     ShrinkIntoCaravanBowieAndFollowers(pc)
 j_GrowOutBowieAndFollowers:                
                 jmp     GrowOutBowieAndFollowers(pc)

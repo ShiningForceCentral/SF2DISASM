@@ -11,7 +11,7 @@ SoundDriver:    incbin "data/sound/sounddriver.bin"
                 include "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
                 include "data\stats\allies\growthcurves.asm"    ; Stat growth curves
                 include "data\stats\allies\stats\entries.asm"    ; Ally stats
-                align 2
+                align
                 include "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
                 include "data\stats\allies\classes\classdefs.asm"    ; Class definitions
                 include "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
