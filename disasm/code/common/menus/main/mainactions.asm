@@ -87,12 +87,17 @@ byte_21348:
                 bra.w   loc_21478
 loc_21354:
                 
-                clr.w   d0
-                getSavedByte CURRENT_MAP, d0
-                cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
-                blt.s   byte_21348      
-                cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
-                bgt.s   byte_21348      
+                if (STANDARD_BUILD=1)
+                    jsr     IsOverworldMap
+                    beq.s   byte_21348      ; branch if false
+                else
+                    clr.w   d0
+                    getSavedByte CURRENT_MAP, d0
+                    cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
+                    blt.s   byte_21348      
+                    cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
+                    bgt.s   byte_21348      
+                endif
 loc_21366:
                 
                 move.b  var_26(a6),d1
@@ -200,12 +205,17 @@ loc_214A4:
                 beq.w   byte_2158E
                 cmpi.w  #4,d2
                 bne.w   loc_2150E
-                clr.w   d0
-                getSavedByte CURRENT_MAP, d0
-                cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
-                blt.w   loc_2150E
-                cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
-                bgt.w   loc_2150E
+                if (STANDARD_BUILD=1)
+                    jsr     IsOverworldMap
+                    beq.s   loc_2150E       ; branch if false
+                else
+                    clr.w   d0
+                    getSavedByte CURRENT_MAP, d0
+                    cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
+                    blt.w   loc_2150E
+                    cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
+                    bgt.w   loc_2150E
+                endif
                 move.w  var_4(a6),d0
                 move.w  var_12(a6),d1
                 jsr     j_RemoveItemBySlot

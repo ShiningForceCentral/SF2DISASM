@@ -6,7 +6,7 @@
 @Loop:          adda.w  d2,a0
                 
 FindSpecialPropertiesAddressForObject:
-                cmpi.b  #$FF,(a0)
+                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
                 beq.s   @NotFound
                 cmp.b   (a0)+,d1
                 bne.s   @Loop

@@ -1626,7 +1626,11 @@ CalculateDamage_Spell:
 
 AdjustSpellPower:
                 
-                movem.l d0-d1/a0,-(sp)
+                if (STANDARD_BUILD=1)
+                    movem.l d0-d2/a0,-(sp)
+                else
+                    movem.l d0-d1/a0,-(sp)
+                endif
                 cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
                 bne.w   @CheckSummon    ; go to next step if action is not a spell
                 move.b  (a4),d0
@@ -1637,16 +1641,24 @@ AdjustSpellPower:
                 lsr.w   #2,d6           ; +25% spell power
 @CheckSummon:
                 
-                move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
-                cmpi.w  #SPELL_DAO,d1   ; HARDCODED spell indexes
-                beq.w   @DivideSpellPower
-                cmpi.w  #SPELL_APOLLO,d1
-                beq.w   @DivideSpellPower
-                cmpi.w  #SPELL_NEPTUN,d1
-                beq.w   @DivideSpellPower
-                cmpi.w  #SPELL_ATLAS,d1
-                beq.w   @DivideSpellPower
-                bra.w   @Done
+                if (STANDARD_BUILD=1)
+                    lea     tbl_Invocations(pc),a0
+                    move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
+                    moveq   #0,d2
+                    jsr     (FindSpecialPropertiesAddressForObject).w
+                    bcs.s   @Done
+                else
+                    move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
+                    cmpi.w  #SPELL_DAO,d1   ; HARDCODED spell indexes
+                    beq.w   @DivideSpellPower
+                    cmpi.w  #SPELL_APOLLO,d1
+                    beq.w   @DivideSpellPower
+                    cmpi.w  #SPELL_NEPTUN,d1
+                    beq.w   @DivideSpellPower
+                    cmpi.w  #SPELL_ATLAS,d1
+                    beq.w   @DivideSpellPower
+                    bra.w   @Done
+                endif
 @DivideSpellPower:
                 
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d0
@@ -1656,7 +1668,11 @@ AdjustSpellPower:
                 andi.w  #$FFFF,d6
 @Done:
                 
-                movem.l (sp)+,d0-d1/a0
+                if (STANDARD_BUILD=1)
+                    movem.l (sp)+,d0-d2/a0
+                else
+                    movem.l (sp)+,d0-d1/a0
+                endif
                 rts
 
     ; End of function AdjustSpellPower

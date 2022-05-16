@@ -1573,6 +1573,11 @@ LoadHighlightableItemIcon:
                 cmpi.w  #ICON_UNARMED,d0
                 beq.s   LoadHighlightableIcon
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
+                if (STANDARD_BUILD=1)
+                    cmpi.w  #ITEM_NOTHING,d0
+                    bne.s   LoadHighlightableIcon
+                    move.w  #ICON_NOTHING,d0
+                endif
 
     ; End of function LoadHighlightableItemIcon
 

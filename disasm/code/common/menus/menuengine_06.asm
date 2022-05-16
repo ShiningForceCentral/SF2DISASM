@@ -422,9 +422,16 @@ return_13B46:
 
 LoadItemIcon:
                 
+                module  ; start of icon loading module
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 movea.l (p_Icons).l,a0
-                bra.w   LoadIcon
+                if (STANDARD_BUILD=1)
+                    cmpi.w  #ITEM_NOTHING,d1
+                    bne.s   LoadIcon
+                    bra.s   @Nothing
+                else
+                    bra.w   LoadIcon
+                endif
 
     ; End of function LoadItemIcon
 
@@ -438,7 +445,7 @@ LoadSpellIcon:
                 movea.l (p_Icons).l,a0
                 cmpi.w  #SPELL_NOTHING,d1
                 bne.s   @Continue
-                move.w  #ICON_NOTHING,d1
+@Nothing:       move.w  #ICON_NOTHING,d1
                 bra.s   LoadIcon
 @Continue:
                 
@@ -466,6 +473,7 @@ loc_13B8E:
                 ori.w   #$F,-$9E(a1)
                 ori.w   #$F000,-$C0(a1)
                 rts
+                modend  ; end of icon loading module
 
 ; END OF FUNCTION CHUNK FOR LoadItemIcon
 

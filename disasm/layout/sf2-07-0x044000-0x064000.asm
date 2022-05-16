@@ -111,6 +111,10 @@ j_ClearEntities:
                 include "code\common\scripting\map\mapfunctions.asm"    ; Map functions
                 include "data\maps\global\overworldmaps.asm"    ; Overworld maps
                 include "code\common\scripting\map\followersfunctions_1.asm"    ; Follower functions, part 1
+                if (STANDARD_BUILD=1)
+                    include "data\scripting\map\mapswithnofollowers-standard.asm"
+                    align
+                endif
                 include "data\scripting\entity\followers.asm"    ; Follower declarations
                 include "code\common\scripting\map\followersfunctions_2.asm"    ; Follower functions, part 2
                 include "code\common\scripting\entity\entityfunctions_1.asm"    ; Entity functions

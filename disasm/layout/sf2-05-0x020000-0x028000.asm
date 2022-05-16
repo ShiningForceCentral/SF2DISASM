@@ -83,6 +83,13 @@ j_SuspendGame:
                     include "code\gameflow\battle\battleturnorderfunctions.asm"    ; Battle turn order functions
                 endif
                 include "code\gameflow\battle\battlefunctions_2.asm"    ; Battle functions
+                if (STANDARD_BUILD=1)
+                    include "data\stats\allies\immortalallies-standard.asm"
+                    include "data\battles\global\displaytimerbattles-standard.asm"
+                    include "data\battles\global\losablebattles-standard.asm"
+                    include "data\stats\items\movesfxforequippedring-standard.asm"
+                    align
+                endif
                 include "code\gameflow\exploration\explorationfunctions_2.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions

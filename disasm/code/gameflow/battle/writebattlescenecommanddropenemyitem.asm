@@ -63,32 +63,47 @@ WriteBattlesceneScript_EnemyDropItem:
                 bra.w   @Done
 @EntryFound:
                 
-                move.w  d1,d3
-                andi.w  #ITEMENTRY_MASK_INDEX,d3
-                move.w  d2,d4
-                
-                ; HARDCODED special items with 1/32 drop chances
-                cmpi.w  #ITEM_TAROS_SWORD,d3
-                beq.w   @DetermineRandomDrop
-                cmpi.w  #ITEM_IRON_BALL,d3
-                beq.w   @DetermineRandomDrop
-                cmpi.w  #ITEM_COUNTER_SWORD,d3
-                beq.w   @DetermineRandomDrop
-                bra.w   @DropItem
+                if (STANDARD_BUILD=1)
+                    andi.w  #ITEMENTRY_MASK_INDEX,d1
+                    move.w  d1,d3
+                    move.w  d2,d4
+                    lea     tbl_RandomItemDrops(pc),a0
+                    moveq   #1,d2
+                    jsr     (FindSpecialPropertiesAddressForObject).w   ; a0 = pointer to drop chance in 256
+                    bcs.s   @DropItem
+                else
+                    move.w  d1,d3
+                    andi.w  #ITEMENTRY_MASK_INDEX,d3
+                    move.w  d2,d4
+                    cmpi.w  #ITEM_TAROS_SWORD,d3 ; HARDCODED special items with 1/32 drop chances
+                    beq.w   @DetermineRandomDrop
+                    cmpi.w  #ITEM_IRON_BALL,d3
+                    beq.w   @DetermineRandomDrop
+                    cmpi.w  #ITEM_COUNTER_SWORD,d3
+                    beq.w   @DetermineRandomDrop
+                    bra.w   @DropItem
+                endif
 @DetermineRandomDrop:
                 
-                moveq   #ENEMYITEMDROP_RANDOM_CHANCE,d0
-                jsr     (GetRandomOrDebugValue).w
-                tst.w   d0
-                bne.w   @Done
-                bra.w   @DropItem
-                jsr     j_DoesBattleUpgrade
-                tst.w   d1
-                beq.w   @DropItem       ; if battle index not in list
-                moveq   #3,d0           ; else
-                jsr     (GetRandomOrDebugValue).w
-                tst.w   d0
-                beq.w   @Done
+                if (STANDARD_BUILD=1)
+                    move.w  #256,d0
+                    jsr     (GetRandomOrDebugValue).w
+                    cmp.b   (a0),d0
+                    bhi.s   @Done
+                else
+                    moveq   #ENEMYITEMDROP_RANDOM_CHANCE,d0
+                    jsr     (GetRandomOrDebugValue).w
+                    tst.w   d0
+                    bne.w   @Done
+                    bra.w   @DropItem
+                    jsr     j_DoesBattleUpgrade ; unreachable code
+                    tst.w   d1
+                    beq.w   @DropItem       ; if battle index not in list
+                    moveq   #3,d0           ; else
+                    jsr     (GetRandomOrDebugValue).w
+                    tst.w   d0
+                    beq.w   @Done
+                endif
 @DropItem:
                 
                 clr.w   d0
