@@ -12,6 +12,7 @@ PlayMapMusic:
                 move.b  ((MAP_AREA_MUSIC_INDEX-$1000000)).w,d0
                 checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 beq.s   byte_4586
+                
                 cmpi.b  #MUSIC_NOTHING,d0
                 bne.s   loc_455E
                 move.w  #MUSIC_BATTLE_THEME_3,d0 ; HARDCODED exploration music -> battle music

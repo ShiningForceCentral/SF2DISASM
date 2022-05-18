@@ -296,7 +296,7 @@ UpdateForce:
                 moveq   #0,d3
                 moveq   #0,d4
                 moveq   #0,d0
-                moveq   #COMBATANT_ALLIES_COUNTER,d7 ; HARDCODED number of allies
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
 loc_991A:
                 
                 move.w  d0,d1

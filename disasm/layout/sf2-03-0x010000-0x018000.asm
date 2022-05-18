@@ -31,6 +31,8 @@
                 include "code\common\menus\menuengine_08.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\alphabetwindowlayout.asm"    ; Alphabet window layout
                 include "data\graphics\tech\windowlayouts\namecharacterentrywindowlayout.asm"    ; Name character entry window layout
+AlphabetHighlightTiles:
+                incbin "data/graphics/tech/alphabethighlighttiles.bin"
                 include "code\common\menus\menuengine_09.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\timerwindowlayout.asm"    ; Timer window layout
                 include "code\specialscreens\witch\witchmainmenu.asm"    ; Witch main menu
@@ -39,6 +41,6 @@
                 includeIfVanillaRom "data\stats\items\itemdefs.asm"     ; Item definitions
                 includeIfVanillaRom "data\stats\spells\spelldefs.asm"   ; Spell definitions
                 includeIfVanillaRom "data\stats\items\itemnames.asm"    ; Item names
-                align 2
+                align
                 include "data\stats\allies\classes\classnames.asm"    ; Class names
                 alignIfOriginalRomLayout $18000

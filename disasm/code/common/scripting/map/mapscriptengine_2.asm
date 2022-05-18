@@ -354,7 +354,7 @@ csc07_warp:
 
 ; =============== S U B R O U T I N E =======================================
 
-; make 00xx character join force with bit F set for sad join music
+; make 00xx character join force with bit 15 set for sad join music
 
 
 csc08_joinForce:
@@ -362,7 +362,7 @@ csc08_joinForce:
                 move.w  #0,((SPEECH_SFX-$1000000)).w
                 jsr     (WaitForViewScrollEnd).w
                 move.w  (a6)+,d0
-                bclr    #$F,d0
+                bclr    #15,d0
                 bne.s   byte_473B0
                 sndCom  MUSIC_JOIN
                 bra.s   loc_473B4       
@@ -371,11 +371,11 @@ byte_473B0:
                 sndCom  MUSIC_SAD_JOIN
 loc_473B4:
                 
-                cmpi.w  #$80,d0 ; HARDCODED use case
+                cmpi.w  #128,d0         ; HARDCODED use case
                 bne.s   loc_473D4
-                move.w  #1,d0           ; make sarah and chester join at the same time
+                move.w  #ALLY_SARAH,d0  ; make sarah and chester join at the same time
                 jsr     j_JoinForce
-                move.w  #2,d0
+                move.w  #ALLY_CHESTER,d0
                 jsr     j_JoinForce
                 txt     447             ; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
                 bra.s   loc_473EC
@@ -390,7 +390,7 @@ loc_473EC:
                 
                 jsr     j_FadeOut_WaitForP1Input
                 clsTxt
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 rts
 

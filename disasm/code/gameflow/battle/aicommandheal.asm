@@ -1,6 +1,6 @@
 
-; ASM FILE code\gameflow\battle\executeaicommandheal.asm :
-; 0xE3EE..0xE78C : Healing AI command
+; ASM FILE code\gameflow\battle\aicommandheal.asm :
+; 0xE3EE..0xE78C : AI command : Heal
 
 ; =============== S U B R O U T I N E =======================================
 

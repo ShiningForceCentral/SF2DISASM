@@ -191,7 +191,7 @@ loc_11D1A:
                 bra.s   loc_11D32
 loc_11D2C:
                 
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
 loc_11D32:
                 
                 move.l  a1,-(sp)

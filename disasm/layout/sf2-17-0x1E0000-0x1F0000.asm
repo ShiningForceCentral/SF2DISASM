@@ -11,7 +11,7 @@ SoundDriver:    incbin "data/sound/sounddriver.bin"
                 include "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
                 includeIfVanillaRom "data\stats\allies\growthcurves.asm"    ; Stat growth curves
                 includeIfVanillaRom "data\stats\allies\stats\entries.asm"    ; Ally stats
-                align 2
+                align
                 includeIfVanillaRom "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
                 includeIfVanillaRom "data\stats\allies\classes\classdefs.asm"    ; Class definitions
                 includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics

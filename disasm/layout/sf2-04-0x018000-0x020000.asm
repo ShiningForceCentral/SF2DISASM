@@ -20,8 +20,8 @@
                 include "code\gameflow\battle\battlescenes\getbattlescenebackground.asm"    ; Get battlescene background function
                 include "data\battles\global\terrainbackgrounds.asm"    ; Terrain backgrounds table
                 include "code\gameflow\battle\battlescenes\battlesceneengine_2.asm"    ; Battlescene engine
-                include "data\stats\allies\allybattlesprites.asm"    ; Ally battle sprites table
-                include "data\stats\enemies\enemybattlesprites.asm"    ; Enemy battle sprites table
+                include "data\stats\allies\allybattlesprites.asm"    ; Ally battlesprites table
+                include "data\stats\enemies\enemybattlesprites.asm"    ; Enemy battlesprites table
                 if (STANDARD_BUILD=1)
                     include "data\stats\items\weapongraphics-standard.asm"
                 else
@@ -29,9 +29,10 @@
                 endif
                 align
                 include "data\battles\global\custombackgrounds.asm"    ; Battle custom backgrounds table
-                align 2
+                align
                 include "data\battles\global\backgroundenemyswitch.asm"    ; Background enemy switch table
                 include "data\graphics\battles\battlesprites\allyidlebattlesprites.asm"    ; Ally Idle Battle Sprites
                 include "data\graphics\battles\battlesprites\enemyidlebattlesprites.asm"    ; Enemy Idle Battle Sprites
+                align
                 includeIfVanillaRom "data\graphics\tech\backgroundlayout.asm"    ; Battlescene Background Layout
                 alignIfOriginalRomLayout $20000

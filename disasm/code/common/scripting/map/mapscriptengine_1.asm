@@ -1870,9 +1870,10 @@ AdjustScriptPointerByCharacterAliveStatus:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Return
-                cmpi.b  #COMBATANT_ALLIES_NUMBER,d0 ; HARDCODED force member index limit
-                bge.s   @Return         ; it must be a force member
-                jsr     j_GetCurrentHP
+                cmpi.b  #COMBATANT_ALLIES_NUMBER,d0
+                bge.s   @Return
+                
+                jsr     j_GetCurrentHP  ; it must be a force member
                 tst.w   d1
                 bne.s   @Return
                 adda.w  d7,a6

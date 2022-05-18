@@ -331,7 +331,7 @@ loc_4776E:
                 
                 jsr     j_HidePortraitWindow
                 clsTxt
-                moveq   #$FFFFFFFF,d7
+                moveq   #-1,d7
                 rts
 loc_4777C:
                 
@@ -420,7 +420,7 @@ ms_Void:        dc.w $FFFF
 MoveEntityOutOfMap:
                 
                 movem.l d0-d3,-(sp)
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
                 move.w  #$7000,d1
                 move.w  #$7000,d2
                 jsr     j_SetEntityPosition
@@ -436,7 +436,7 @@ MoveEntityOutOfMap:
 MakeEntityWalk:
                 
                 move.l  d0,-(sp)
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
                 jsr     SetWalkingActscript
                 move.l  (sp)+,d0
                 rts
@@ -452,7 +452,7 @@ MakeEntityWalk:
 sub_4781A:
                 
                 movem.l d0-d3,-(sp)
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).w
@@ -470,7 +470,7 @@ sub_4781A:
 sub_47832:
                 
                 movem.l d0-d3,-(sp)
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
                 move.b  ((byte_FFB651-$1000000)).w,d1
                 addi.w  #2,d1
                 andi.w  #3,d1

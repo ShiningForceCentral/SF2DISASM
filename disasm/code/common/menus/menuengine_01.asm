@@ -1355,7 +1355,7 @@ BuildItemMenu:
 aEquipped:      dc.b '\Equipped',0
 aNothing:       dc.b '\Nothing',0
                 
-                align 2
+                wordAlign
 
 ; =============== S U B R O U T I N E =======================================
 

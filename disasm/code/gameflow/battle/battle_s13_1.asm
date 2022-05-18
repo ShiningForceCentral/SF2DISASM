@@ -1465,65 +1465,68 @@ CheckTriggerRegionFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = combatant index
+
 
 UpdateTriggeredRegionsAndAi:
                 
                 movem.l d0-a6,-(sp)
-                move.w  d0,d7
+                move.w  d0,d7           ; save combatant index
                 move.w  #BATTLESPRITESET_SUBSECTION_AI_REGIONS,d1
                 bsr.w   GetBattleSpritesetSubsection
                 tst.w   d1
-                bne.s   loc_1ACE60
-                bra.w   loc_1ACF2A
-loc_1ACE60:
+                bne.s   @Continue
+                bra.w   @Done
+@Continue:
                 
                 move.w  d1,d2
                 subi.w  #1,d2
                 clr.w   d0
-loc_1ACE68:
+@TriggerRegionFlags_Loop:
                 
-                lea     (byte_FFB20C).l,a0
+                lea     (BATTLE_REGION_FLAGS_TO_BE_TRIGGERED).l,a0
                 move.w  (a0),d1
                 btst    d0,d1
-                bne.s   loc_1ACE8A
+                bne.s   @Next
                 bsr.w   sub_1AC9FC      
                 tst.b   d1
-                beq.s   loc_1ACE8A
+                beq.s   @Next
                 clr.w   d1
                 move.b  d0,d1
                 addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_SetFlag
-loc_1ACE8A:
+@Next:
                 
                 move.w  (a0),d1
                 bset    d0,d1
                 move.w  d1,(a0)
                 addi.w  #1,d0
-                dbf     d2,loc_1ACE68
-                move.w  d7,d0
-                jsr     j_GetAiRegion
-                cmpi.w  #$F,d1
-                bne.s   loc_1ACEB0
-                cmpi.w  #$F,d2
-                bne.s   loc_1ACEB0
-                bra.w   loc_1ACF2A
-loc_1ACEB0:
+                dbf     d2,@TriggerRegionFlags_Loop
                 
-                move.b  d0,d7
-                move.b  d2,d6
-                move.b  d1,d5
-                cmpi.b  #$F,d5
-                bne.s   loc_1ACEC0
-                bra.w   loc_1ACEF0
-loc_1ACEC0:
+                move.w  d7,d0           ; restore combatant index
+                jsr     j_GetAiRegion
+                cmpi.w  #15,d1
+                bne.s   @CheckActivationRegion1
+                cmpi.w  #15,d2
+                bne.s   @CheckActivationRegion1
+                bra.w   @Done
+@CheckActivationRegion1:
+                
+                move.b  d0,d7           ; save combatant index
+                move.b  d2,d6           ; save AI activation region 2
+                move.b  d1,d5           ; save AI activation region 1
+                cmpi.b  #15,d5
+                bne.s   @IsActivationRegion1Triggered
+                bra.w   @CheckActivationRegion2
+@IsActivationRegion1Triggered:
                 
                 clr.w   d1
                 move.b  d5,d1
                 addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
-                bne.s   loc_1ACED4
-                bra.w   loc_1ACEF0
-loc_1ACED4:
+                bne.s   @ActivateAi1
+                bra.w   @CheckActivationRegion2
+@ActivateAi1:
                 
                 clr.w   d0
                 move.w  d7,d0
@@ -1531,21 +1534,21 @@ loc_1ACED4:
                 andi.w  #$FFFE,d1
                 bset    #0,d1
                 jsr     j_SetAiActivationFlag
-                bra.w   loc_1ACF2A
-loc_1ACEF0:
+                bra.w   @Done
+@CheckActivationRegion2:
                 
-                cmpi.b  #$F,d6
-                bne.s   loc_1ACEFA
-                bra.w   loc_1ACF2A
-loc_1ACEFA:
+                cmpi.b  #15,d6
+                bne.s   @IsActivationRegion2Triggered
+                bra.w   @Done
+@IsActivationRegion2Triggered:
                 
                 clr.w   d1
                 move.b  d6,d1
                 addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
-                bne.s   loc_1ACF0E
-                bra.w   loc_1ACF2A
-loc_1ACF0E:
+                bne.s   @ActivateAi2
+                bra.w   @Done
+@ActivateAi2:
                 
                 clr.w   d0
                 move.w  d7,d0
@@ -1554,7 +1557,7 @@ loc_1ACF0E:
                 bset    #0,d1
                 bset    #1,d1
                 jsr     j_SetAiActivationFlag
-loc_1ACF2A:
+@Done:
                 
                 movem.l (sp)+,d0-a6
                 rts

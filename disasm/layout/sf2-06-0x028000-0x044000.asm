@@ -19,10 +19,10 @@ j_LoadTitleScreenFont:
                 jmp     LoadTitleScreenFont(pc)
                 include "code\specialscreens\segalogo\segalogo_0.asm"    ; SEGA logo functions
                 include "data\tech\configurationmodeinputsequence.asm"    ; Configuration mode input sequence
-                align 2
+                align
                 include "code\specialscreens\segalogo\segalogo_1.asm"    ; SEGA logo functions
                 include "data\tech\debugmodeinputsequence.asm"    ; Debug mode input sequence
-                align 2
+                align
 VariableWidthFont:
                 incbin "data/graphics/tech/fonts/variablewidthfont.bin"
 MenuTiles_Uncompressed:

@@ -10011,7 +10011,7 @@ loc_1EEAA:
                 move.b  ((WEAPON_IDLE_FRAME2_Y-$1000000)).w,d4
 loc_1EEB6:
                 
-                lea     spr_BattlesceneAlly+4(pc), a0
+                lea     (spr_BattlesceneAlly+4)(pc), a0
                 btst    #0,((byte_FFB56F-$1000000)).w
                 beq.s   loc_1EEC6
                 lea     $48(a0),a0
