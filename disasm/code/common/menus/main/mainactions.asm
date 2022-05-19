@@ -78,7 +78,7 @@ loc_212E0:
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 sndCom  SFX_SPELL_CAST
                 clsTxt
-                cmpi.w  #$A,var_28(a6)
+                cmpi.w  #SPELL_EGRESS,var_28(a6)
                 beq.w   loc_21354
 byte_21348:
                 

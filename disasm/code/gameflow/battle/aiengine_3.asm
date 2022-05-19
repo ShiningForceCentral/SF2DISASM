@@ -16,34 +16,34 @@ ExecuteAiCommand_Attack:
                 bsr.w   PrioritizeReachableTargets
                 bsr.w   DetermineAiBattleaction
                 cmpi.b  #BATTLEACTION_STAY,d2
-                bne.s   loc_E7B6
+                bne.s   @TakeAction
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
-                bra.w   loc_E97C
-loc_E7B6:
+                bra.w   @EndTurn_Stay
+@TakeAction:
                 
                 movem.l d0-d3,-(sp)
                 move.w  d0,d1
                 move.w  d7,d0
                 bsr.w   DetermineMuddleBattleaction
                 tst.w   d3
-                beq.s   loc_E7DE
+                beq.s   @NotMuddleAction
                 movem.l (sp)+,d0-d3
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_MUDDLE,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
-                bra.w   loc_E984
-loc_E7DE:
+                bra.w   @EndTurn
+@NotMuddleAction:
                 
                 
                 
                 ; Battleaction : Use Item
                 movem.l (sp)+,d0-d3
                 cmpi.b  #BATTLEACTION_USE_ITEM,d2
-                bne.w   loc_E86C
+                bne.w   @Check_CastSpell
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_USE_ITEM,(a0)
                 lea     ((ATTACK_COMMAND_ITEM_SLOT-$1000000)).w,a1
@@ -56,11 +56,11 @@ loc_E7DE:
                 lea     ((AI_LAST_TARGET_TABLE-$1000000)).w,a2
                 move.w  d7,d1           ; d7 --> d1 = character index (aka attacker)
                 btst    #COMBATANT_BIT_ENEMY,d1
-                beq.s   loc_E81E        ; if not enemy
+                beq.s   @ValidTarget_Item        ; if not enemy
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
                 move.b  d0,(a2,d1.w)    ; Error. The idea is to record the most recent target selected by the monster, but because d0 was overwritten above this instead always places the monster itself as its target.
                                         ; This error only occurs with BATTLEACTION_USE_ITEM. The other actions do not have this error.
-loc_E81E:
+@ValidTarget_Item:
                 
                 lea     ((ATTACK_COMMAND_ITEM_SLOT-$1000000)).w,a1
                 move.w  (a1),d1
@@ -81,14 +81,14 @@ loc_E81E:
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   MakeAiMoveString
-                bra.w   loc_E984
-loc_E86C:
+                bra.w   @EndTurn
+@Check_CastSpell:
                 
                 
                 ; Battleaction : Cast Spell
                 
                 cmpi.b  #BATTLEACTION_CAST_SPELL,d2
-                bne.s   loc_E8D0
+                bne.s   @Check_Attack
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_CAST_SPELL,(a0)
                 lea     ((ATTACK_COMMAND_SPELL-$1000000)).w,a1
@@ -97,10 +97,10 @@ loc_E86C:
                 lea     ((AI_LAST_TARGET_TABLE-$1000000)).w,a2
                 move.w  d7,d1
                 btst    #COMBATANT_BIT_ENEMY,d1
-                beq.s   loc_E89A
+                beq.s   @ValidTarget_Spell
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
                 move.b  d0,(a2,d1.w)
-loc_E89A:
+@ValidTarget_Spell:
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0),d1
                 bsr.w   GetSpellRange   
@@ -114,30 +114,30 @@ loc_E89A:
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   MakeAiMoveString
-                bra.w   loc_E984
-loc_E8D0:
+                bra.w   @EndTurn
+@Check_Attack:
                 
                 
                 ; Battleaction : Attack
                 
                 tst.b   d2
-                bne.w   loc_E97C
+                bne.w   @EndTurn_Stay
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_ATTACK,(a0)
                 move.w  d0,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
                 lea     ((AI_LAST_TARGET_TABLE-$1000000)).w,a2
                 move.w  d7,d1
                 btst    #COMBATANT_BIT_ENEMY,d1
-                beq.s   loc_E8F6
+                beq.s   @ValidTarget_Attack
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
                 move.b  d0,(a2,d1.w)
-loc_E8F6:
+@ValidTarget_Attack:
                 
                 move.l  d0,-(sp)
                 move.w  d7,d0
                 jsr     GetEquippedWeapon
                 cmpi.w  #$FFFF,d1
-                bne.s   loc_E93C
+                bne.s   @GetWeaponAttackRange
                 clr.l   d3
                 clr.l   d4
                 jsr     GetSomethingClassType
@@ -147,31 +147,31 @@ loc_E8F6:
                                         ;  a ranged attack when controlled by the AI.
                                         ;                                                 
                                         ; That can be fixed by using a word-sized CMPI instruction
-                bne.s   loc_E922
+                bne.s   @CheckKrakenHead
                 move.w  #2,d3           ; max range 2
                 move.w  #1,d4           ; min range 1
-                bra.w   loc_E938
-loc_E922:
+                bra.w   @FinishUnequipRange
+@CheckKrakenHead:
                 
                 cmpi.b  #ENEMY_KRAKEN_HEAD,d1
-                bne.s   loc_E934        
+                bne.s   @BasicUnequipRange        
                 move.w  #3,d3           ; max range 3
                 move.w  #1,d4           ; min range 1
-                bra.w   loc_E938
-loc_E934:
+                bra.w   @FinishUnequipRange
+@BasicUnequipRange:
                 
                 moveq   #1,d3           ; max range 1
                 moveq   #0,d4           ; min range 0
-loc_E938:
+@FinishUnequipRange:
                 
-                bra.w   loc_E94C
-loc_E93C:
+                bra.w   @FindTarget
+@GetWeaponAttackRange:
                 
                 jsr     GetItemDefAddress
                 moveq   #0,d3
                 move.b  ITEMDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  ITEMDEF_OFFSET_MIN_RANGE(a0),d4
-loc_E94C:
+@FindTarget:
                 
                 move.l  (sp)+,d0
                 bsr.w   MakeTargetsList_Everybody
@@ -184,13 +184,13 @@ loc_E94C:
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   MakeAiMoveString
-                bra.w   loc_E984
-loc_E97C:
+                bra.w   @EndTurn
+@EndTurn_Stay:
                 
                 moveq   #$FFFFFFFF,d1
                 movem.l (sp)+,d0/d2-a6
                 rts
-loc_E984:
+@EndTurn:
                 
                 moveq   #0,d1
                 movem.l (sp)+,d0/d2-a6
@@ -227,14 +227,14 @@ loc_E9B2:
                 move.b  d2,var_4(a6)
                 bsr.w   GetCurrentMOV
                 tst.b   d1
-                bne.s   loc_E9DE
+                bne.s   @CanMove
                 move.b  #$FF,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   loc_EB7A
-loc_E9DE:
+@CanMove:
                 
                 bsr.w   GetAiSpecialMoveOrders
                 cmpi.b  #$FF,d1
@@ -515,25 +515,25 @@ ExecuteAiCommand_Debuff:
                 move.b  d7,d0
                 cmpi.w  #SPELL_ATTACK,d1
                 bne.s   @CheckBoost
-                bsr.w   sub_D460        
+                bsr.w   AI_Cast_Attack        
                 bra.w   @CheckReachableTargets
 @CheckBoost:
                 
                 cmpi.w  #SPELL_BOOST|SPELL_LV2,d1
                 bne.s   @CheckMuddle2
-                bsr.w   sub_D4E0        
+                bsr.w   AI_Cast_Boost2        
                 bra.w   @CheckReachableTargets
 @CheckMuddle2:
                 
                 cmpi.w  #SPELL_MUDDLE|SPELL_LV2,d1
                 bne.s   @CheckDispel2
-                bsr.w   sub_D62C        
+                bsr.w   AI_Cast_Muddle2        
                 bra.w   @CheckReachableTargets
 @CheckDispel2:
                 
                 cmpi.w  #SPELL_DISPEL,d1
                 bne.s   @DoNothing2
-                bsr.w   sub_D560        
+                bsr.w   AI_Cast_Dispel        
                 bra.w   @CheckReachableTargets
 @DoNothing2:
                 
@@ -659,30 +659,30 @@ DetermineAiBattleaction:
                 clr.w   d3
                 lea     ((FF8804_LOADING_SPACE-$1000000)).w,a0 ; # targets reachable by phsyical attack
                 tst.w   (a0)
-                beq.s   loc_EDFC
+                beq.s   @CheckSpellViability
                 bset    #0,d3
-loc_EDFC:
+@CheckSpellViability:
                 
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 tst.w   (a0)
-                beq.s   loc_EE08
+                beq.s   @CheckItemViability
                 bset    #1,d3
-loc_EE08:
+@CheckItemViability:
                 
                 lea     ((TARGETS_REACHABLE_BY_ITEM_NUMBER-$1000000)).w,a0
                 tst.w   (a0)
-                beq.s   loc_EE14
+                beq.s   @CheckResults
                 bset    #2,d3
-loc_EE14:
+@CheckResults:
                 
                 tst.b   d3
-                bne.s   loc_EE24        
+                bne.s   @TakeAction        
                                         ; If no targets
                 moveq   #BATTLEACTION_STAY,d2
                 move.w  #$FFFF,d0
                 moveq   #0,d1
                 bra.w   loc_F1CC
-loc_EE24:
+@TakeAction:
                 
                 
                 ; Check spell and item use
@@ -690,7 +690,7 @@ loc_EE24:
                 move.b  d3,d4           ; d3 = first three bits are set if targets are in range of a physical attack, spell, or item, respectively.
                 andi.b  #6,d4           ; #6 = 0110, so this ignores the physical and looks only at spell and item ranges
                 tst.b   d4
-                bne.s   loc_EE48
+                bne.s   @UseSpellorItem
                 lea     ((FF8804_LOADING_SPACE-$1000000)).w,a0 ; physical -- # targets reachable
                 lea     ((TARGETS_REACHABLE_BY_ATTACK_LIST-$1000000)).w,a1
                 lea     ((ATTACK_MOVEMENT_TO_REACHABLE_TARGETS-$1000000)).w,a2
@@ -699,7 +699,7 @@ loc_EE24:
                 bra.w   loc_EF2E
                                         ; Targets are in range of either the spell or item for the AI.
                                         ; Remember that if the AI lacks a spell or item, it is replaced with a physical attack.
-loc_EE48:
+@UseSpellorItem:
                 
                 move.w  d4,d1
                 andi.b  #6,d1
@@ -806,20 +806,20 @@ loc_EF2E:
                 move.w  (a0),d3
                 subi.w  #1,d3
                 clr.b   d4
-loc_EF36:
+@GetHighestPriority_Loop:
                 
                 cmp.b   (a3,d3.w),d4
-                bgt.s   loc_EF40        
+                bgt.s   @IsLowerPriority        
                 move.b  (a3,d3.w),d4
-loc_EF40:
+@IsLowerPriority:
                 
-                dbf     d3,loc_EF36     ; cycle through all targets and populate d4 with the highest priority.
+                dbf     d3,@GetHighestPriority_Loop     ; cycle through all targets and populate d4 with the highest priority.
                 
                 move.b  d4,priority(a6)
                 cmpi.b  #15,d4
-                bge.s   loc_EF52        ; if >= 15 priority (which usually means a target is going to die)
-                bra.w   loc_EF8E        ; if < 15 priority
-loc_EF52:
+                bge.s   @CriticalPriority        ; if >= 15 priority (which usually means a target is going to die)
+                bra.w   @NoncriticalPriority        ; if < 15 priority
+@CriticalPriority:
                 
                 move.b  #15,priority(a6) ; if priority > 15, only save 15 as the priority
                 lea     ((TARGETS_LIST-$1000000)).w,a4
@@ -828,24 +828,24 @@ loc_EF52:
                 clr.w   d5
                                         ; loop through all potential targets and identify all that equal the highest priority,
                                         ; storing that information in a4 and a6
-loc_EF64:
+@CriticalPriority_Loop:
                 
                 cmp.b   (a3,d3.w),d4    ; d4 = highest target priority
-                bgt.s   loc_EF80
+                bgt.s   @NotCriticalPriority
                 move.b  (a1,d3.w),(a4,d5.w)
                 move.l  a6,-(sp)
                 adda.w  d5,a6
                 move.b  (a2,d3.w),movementsList(a6) ; movement to each reachable target
                 movea.l (sp)+,a6
                 addi.w  #1,d5
-loc_EF80:
+@NotCriticalPriority:
                 
-                dbf     d3,loc_EF64     
+                dbf     d3,@CriticalPriority_Loop     
                 
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a4
                 move.w  d5,(a4)         ; # targets that have the maximum priority
-                bra.w   loc_EFC0        ; branch for < 15 target priority (no kills)
-loc_EF8E:
+                bra.w   @ChooseTarget        ; branch for < 15 target priority (no kills)
+@NoncriticalPriority:
                 
                 ; This is an exact duplicate of the "priority >= 15" script,
                 ; except this branch doesn't cap priority at 15.
@@ -853,33 +853,33 @@ loc_EF8E:
                 move.w  (a0),d3
                 subi.w  #1,d3
                 clr.w   d5
-loc_EF9A:
+@HighestPriority_Loop:
                 
                 cmp.b   (a3,d3.w),d4
-                bne.s   loc_EFB6
+                bne.s   @NotHighestPriority
                 move.b  (a1,d3.w),(a4,d5.w)
                 move.l  a6,-(sp)
                 adda.w  d5,a6
                 move.b  (a2,d3.w),movementsList(a6)
                 movea.l (sp)+,a6
                 addi.w  #1,d5
-loc_EFB6:
+@NotHighestPriority:
                 
-                dbf     d3,loc_EF9A
+                dbf     d3,@HighestPriority_Loop
                 
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a4
                 move.w  d5,(a4)
-loc_EFC0:
+@ChooseTarget:
                 
                 cmpi.b  #1,d5
-                bne.s   loc_EFD8        ; if more than one highest priority target
+                bne.s   @MultipleTargets        ; if more than one highest priority target
                                         ; else, select the single highest priority target as the target
                 lea     ((TARGETS_LIST-$1000000)).w,a4
                 move.b  (a4),d0         ; combatant index of the selected target
                 move.b  priority(a6),d1
                 move.b  battleaction(a6),d2
                 bra.w   loc_F1CC
-loc_EFD8:
+@MultipleTargets:
                 
                 
                 ; At this point, the address registers are as follows:
@@ -898,12 +898,12 @@ loc_EFD8:
                 move.w  d4,d6
                 lea     ((TARGETS_LIST-$1000000)).w,a5
                 clr.l   d5
-loc_EFFA:
+@CopyList_Loop:
                 
                 move.b  (a5)+,targetsList(a6,d5.w) ; copy targets list
                 addq.l  #1,d5
                 subq.w  #1,d4
-                bne.s   loc_EFFA        ; repeat through the full list
+                bne.s   @CopyList_Loop        ; repeat through the full list
                 bra.w   loc_F172
 loc_F008:
                 
@@ -931,12 +931,12 @@ loc_F034:
                 jsr     GetMoveType     ; D1 = value between 0-13 representing the move type (centaur, animal, aquatic, etc.)
                 clr.l   d3
                 move.b  d1,d3
-                lea     (off_D982).l,a4 
+                lea     (tbl_MoveType_Priority).l,a4 
                 lsl.l   #2,d3
                 movea.l (a4,d3.l),a4
                 cmpi.b  #BATTLEACTION_CAST_SPELL,battleaction(a6)
                 bne.s   loc_F05E
-                lea     (byte_D921).l,a4
+                lea     (tbl_AttackPriority_Mage).l,a4
 loc_F05E:
                 
                 clr.l   d4
@@ -963,9 +963,9 @@ loc_F088:
                 clr.l   d0
                 move.b  targetsList(a6,d4.w),d0
                 btst    #COMBATANT_BIT_ENEMY,d0
-                beq.s   loc_F098
+                beq.s   @ConsiderClass
                 bra.w   loc_F0D8
-loc_F098:
+@ConsiderClass:
                 
                 jsr     GetClass        
                 cmp.b   (a4,d5.w),d1
@@ -993,7 +993,7 @@ loc_F0A8:
 loc_F0D8:
                 
                 addq.b  #1,d4
-                cmpi.b  #$30,d4 
+                cmpi.b  #$30,d4  ; max num targets
                 blt.s   loc_F0EE
                 move.b  #$FF,d0
                 clr.w   d1
@@ -1007,7 +1007,7 @@ loc_F0EE:
 loc_F0F4:
                 
                 addq.b  #1,d5
-                cmpi.b  #$20,d5 
+                cmpi.b  #CLASS_NUMBER_TOTAL,d5 
                 bge.s   loc_F0FE
                 bra.s   loc_F086
 loc_F0FE:
@@ -1141,64 +1141,64 @@ loc_F1FE:
                 move.w  d7,d0
                 bsr.w   CheckMuddled2   
                 tst.b   d1
-                beq.s   loc_F22C
+                beq.s   @NotMuddled
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_F222
+                bne.s   @Enemy
                 clr.w   d6
-                bra.s   loc_F228
-loc_F222:
+                bra.s   @Ally
+@Enemy:
                 
                 clr.w   d6
                 move.w  #COMBATANT_ENEMIES_START,d6
-loc_F228:
+@Ally:
                 
                 bra.w   loc_F39E
-loc_F22C:
+@NotMuddled:
                 
                 move.w  d7,d0
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_F23E
+                bne.s   @TargetAllies
                 move.w  #COMBATANT_ENEMIES_START,d0
                 move.w  #COMBATANT_ENEMIES_COUNTER,d6
-                bra.s   loc_F244
-loc_F23E:
+                bra.s   @PrepareTargetList
+@TargetAllies:
                 
                 clr.w   d0
                 move.w  #COMBATANT_ALLIES_COUNTER,d6
-loc_F244:
+@PrepareTargetList:
                 
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d2
-loc_F24A:
+@TargetCombatant_Loop:
                 
                 bsr.w   GetCurrentHP    ; iterate through combatants
                 tst.w   d1
-                bne.s   loc_F256
-                bra.w   loc_F276
-loc_F256:
+                bne.s   @CheckOnMap_X
+                bra.w   @NextTarget
+@CheckOnMap_X:
                 
                 bsr.w   GetXPos
                 tst.b   d1
-                bpl.s   loc_F262
-                bra.w   loc_F276
-loc_F262:
+                bpl.s   @CheckOnMap_Y
+                bra.w   @NextTarget
+@CheckOnMap_Y:
                 
                 bsr.w   GetYPos
                 tst.b   d1
-                bpl.s   loc_F26E
-                bra.w   loc_F276
-loc_F26E:
+                bpl.s   @AddToTargetList
+                bra.w   @NextTarget
+@AddToTargetList:
                 
                 move.b  d0,(a0,d2.w)    ; add to targets if alive and on map
                 addi.w  #1,d2
-loc_F276:
+@NextTarget:
                 
                 addq.w  #1,d0
-                dbf     d6,loc_F24A
+                dbf     d6,@TargetCombatant_Loop
                 move.w  d2,((TARGETS_LIST_LENGTH-$1000000)).w
                 move.w  d2,d6
                 clr.w   d2
-loc_F284:
+@MoveCostToTarget_Loop:
                 
                 clr.w   d0
                 move.b  (a0,d2.w),d0
@@ -1206,7 +1206,7 @@ loc_F284:
                 move.b  d0,var_96(a6,d2.w)
                 addi.w  #1,d2
                 subq.w  #1,d6
-                bne.s   loc_F284
+                bne.s   @MoveCostToTarget_Loop
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d1
                 cmpi.w  #1,d1
                 bgt.s   loc_F2A8
@@ -1258,35 +1258,35 @@ loc_F300:
                 clr.w   d0
                 move.b  d7,d0
                 bsr.w   GetMoveType     
-                lea     (off_D982).l,a1 
+                lea     (tbl_MoveType_Priority).l,a1 
                 lsl.l   #2,d1
                 movea.l (a1,d1.l),a1
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d6
                 clr.w   d5
-loc_F31A:
+@CheckTargetClass_Loop:
                 
                 clr.w   d0
                 move.b  (a0,d5.w),d0
                 bsr.w   GetClass        
                 move.b  d1,d4
                 clr.w   d3
-                move.w  #$20,d2 
-loc_F32C:
+                move.w  #CLASS_NUMBER_TOTAL,d2 
+@CompareTargetClass_Loop:
                 
                 cmp.b   (a1,d3.w),d4
-                bne.s   loc_F33A
+                bne.s   @NextClass
                 move.b  d3,var_48(a6,d5.w)
-                bra.w   loc_F340
-loc_F33A:
+                bra.w   @NextTarget
+@NextClass:
                 
                 addq.b  #1,d3
                 subq.w  #1,d2
-                bne.s   loc_F32C
-loc_F340:
+                bne.s   @CompareTargetClass_Loop
+@NextTarget:
                 
                 addq.b  #1,d5
                 subq.w  #1,d6
-                bne.s   loc_F31A
+                bne.s   @CheckTargetClass_Loop
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d6
                 subi.w  #2,d6
                 clr.w   d5
@@ -1329,25 +1329,25 @@ loc_F39E:
                 clr.w   d0
                 move.b  d7,d0
                 btst    #COMBATANT_BIT_ENEMY,d0
-                beq.w   loc_F404
+                beq.w   @BasicMovement
                 bsr.w   GetEnemyIndex   
                 cmpi.b  #ENEMY_KRAKEN_LEG,d1 ; HARDCODED enemy indexes
-                bne.s   loc_F3B8
-                bra.w   loc_F3D0
-loc_F3B8:
+                bne.s   @CheckKrakenArm
+                bra.w   @SpecialMoveCosts
+@CheckKrakenArm:
                 
                 cmpi.b  #ENEMY_KRAKEN_ARM,d1
-                bne.s   loc_F3C2
-                bra.w   loc_F3D0
-loc_F3C2:
+                bne.s   @CheckKrakenHead
+                bra.w   @SpecialMoveCosts
+@CheckKrakenHead:
                 
                 cmpi.b  #ENEMY_KRAKEN_HEAD,d1
-                bne.s   loc_F3CC
-                bra.w   loc_F3D0
-loc_F3CC:
+                bne.s   @NoMoveTable
+                bra.w   @SpecialMoveCosts
+@NoMoveTable:
                 
-                bra.w   loc_F404
-loc_F3D0:
+                bra.w   @BasicMovement
+@SpecialMoveCosts:
                 
                 jsr     j_ClearTerrainListObstructions
                 move.b  d6,d0
@@ -1361,8 +1361,8 @@ loc_F3D0:
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     tbl_KrakenMoveCosts(pc), a5
                 nop
-                bra.w   loc_F43A
-loc_F404:
+                bra.w   @CommitMoveString
+@BasicMovement:
                 
                 jsr     j_ClearTerrainListObstructions
                 clr.w   d0
@@ -1378,7 +1378,7 @@ loc_F404:
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     ((MOVE_COSTS_LIST-$1000000)).w,a5
-loc_F43A:
+@CommitMoveString:
                 
                 bsr.w   MakeRangeLists
                 move.b  d7,d0

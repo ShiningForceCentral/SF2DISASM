@@ -11,7 +11,7 @@
 ;  which approximately goes highest to lowest priority of
 ;  healer, mage, archer, flyer, melee, aquatic.
 ; 
-; Specific decending priority for each move type is in tbl_MovetypesHealTargetPriority.
+; Specific decending priority for each move type is in tbl_HealPriority_MoveType.
 ; 
 ; The first byte in that table is $FF to ensure there is never a movetype
 ;  match and therefore nothing has a priority higher than AI #14 or AI #15.
@@ -24,37 +24,37 @@ CalculateHealTargetPriority:
                 
                 movem.l d0-d5/d7-a6,-(sp)
                 bsr.w   GetAiCommandset 
-                cmpi.w  #13,d1
-                bne.s   loc_CE00
+                cmpi.w  #AI_13,d1
+                bne.s   @CheckAI_Leader
                 move.w  #13,d6
-                bra.w   loc_CE30
-loc_CE00:
+                bra.w   @Done
+@CheckAI_Leader:
                 
                 cmpi.w  #14,d1
-                bne.s   loc_CE0E
+                bne.s   @PrioritizeByMoveType
                 move.w  #13,d6
-                bra.w   loc_CE30
-loc_CE0E:
+                bra.w   @Done
+@PrioritizeByMoveType:
                 
                 bsr.w   GetMoveType     
-                lea     (tbl_MovetypesHealTargetPriority).l,a0
+                lea     (tbl_HealPriority_MoveType).l,a0
                 move.w  #13,d6
                 clr.w   d0
-loc_CE1E:
+@FindHealPriority_Loop:
                 
                 
                 ; Cycle through each move type in decreasing priority until there is a match.
                 ; Priority order roughly follows highest to lowest priority of
                 ;  healer, mage, archer, flyer, melee, aquatic.
                 cmp.b   (a0,d0.w),d1
-                bne.s   loc_CE28
-                bra.w   loc_CE30        ; Match found! Return the value in d6.
-loc_CE28:
+                bne.s   @NextMoveType
+                bra.w   @Done        ; Match found! Return the value in d6.
+@NextMoveType:
                 
                 addi.w  #1,d0
                 subq.w  #1,d6
-                bne.s   loc_CE1E        ; No match found, so decrement and check again.
-loc_CE30:
+                bne.s   @FindHealPriority_Loop        ; No match found, so decrement and check again.
+@Done:
                 
                 movem.l (sp)+,d0-d5/d7-a6
                 rts

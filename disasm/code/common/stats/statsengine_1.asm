@@ -2202,9 +2202,9 @@ GetAiRegion:
                 moveq   #COMBATANT_OFFSET_AI_REGION,d7
                 bsr.w   GetCombatantByte
                 move.w  d1,d2
-                lsr.w   #4,d1
-                andi.w  #$F,d1
-                andi.w  #$F,d2
+                lsr.w   #ENEMYCOMBATANT_AI_SETTINGS_SHIFTCOUNT,d1
+                andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d1
+                andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d2
                 movem.l (sp)+,d7-a0
                 rts
 

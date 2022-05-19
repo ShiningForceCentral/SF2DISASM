@@ -90,13 +90,13 @@ sub_D430:
                 move.b  var_1(a6),d0
                 bsr.w   GetCurrentTerrainType
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_D454
+                bne.s   @Enemy
                 clr.w   d1
-                bra.s   loc_D458
-loc_D454:
+                bra.s   @Done
+@Enemy:
                 
                 move.b  #$FF,d1
-loc_D458:
+@Done:
                 
                 unlk    a6
                 movem.l (sp)+,d0/d2-a6
@@ -110,7 +110,7 @@ loc_D458:
 ; AI: cast ATTACK spell
 
 
-sub_D460:
+AI_Cast_Attack:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -164,7 +164,7 @@ loc_D4DA:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_D460
+    ; End of function AI_Cast_Attack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -172,7 +172,7 @@ loc_D4DA:
 ; AI: cast BOOST 2 spell
 
 
-sub_D4E0:
+AI_Cast_Boost2:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -224,7 +224,7 @@ loc_D55A:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_D4E0
+    ; End of function AI_Cast_Boost2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -232,7 +232,7 @@ loc_D55A:
 ; AI: cast DISPEL spell
 
 
-sub_D560:
+AI_Cast_Dispel:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -312,7 +312,7 @@ loc_D626:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_D560
+    ; End of function AI_Cast_Dispel
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -320,7 +320,7 @@ loc_D626:
 ; AI: cast MUDDLE 2 spell
 
 
-sub_D62C:
+AI_Cast_Muddle2:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -401,7 +401,7 @@ loc_D6EC:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_D62C
+    ; End of function AI_Cast_Muddle2
 
 
 ; =============== S U B R O U T I N E =======================================

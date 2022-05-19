@@ -247,11 +247,11 @@ j_CheckTriggerRegionFlag:
 ; AI-related
 
 
-sub_1AC05C:
+j_GetLaserFacing:
                 
-                jmp     sub_1AC8A0(pc)  
+                jmp     GetLaserFacing(pc)
 
-    ; End of function sub_1AC05C
+    ; End of function j_GetLaserFacing
 
 p_plt_endKiss:  dc.l plt_EndKiss
 p_endKissPicture:

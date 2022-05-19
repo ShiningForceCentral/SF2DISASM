@@ -324,7 +324,7 @@ WriteMemberMagicList:
                 sub.w   d6,d1
                 jsr     j_GetSpellAndNumberOfSpells
                 cmpi.b  #SPELL_NOTHING,d1
-                beq.w   return_13B46
+                beq.w   @Return
                 movem.l a0-a1,-(sp)
                 movem.w d0-d1/d6-d7,-(sp)
                 jsr     j_FindSpellName
@@ -385,7 +385,7 @@ WriteMemberItemsList:
                 sub.w   d6,d1
                 jsr     j_GetItemAndNumberHeld
                 cmpi.b  #ITEM_NOTHING,d1
-                beq.w   return_13B46
+                beq.w   @Return
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
                 jsr     j_FindItemName
@@ -400,7 +400,7 @@ WriteMemberItemsList:
                 
                 lea     WINDOW_MEMBERSUMMARY_OFFSET_NEXT_ITEM(a1),a1
                 dbf     d6,@Items_Loop
-return_13B46:
+@Return:
                 
                 rts
 @NoItems:
@@ -895,7 +895,7 @@ sub_14108:
                 move.w  $C(a0),(a1)+
                 move.w  d1,d3           ; D3 = equippable weapons count
                 jsr     j_GetEquippedWeapon
-                bsr.w   sub_141CE       
+                bsr.w   BuildEquippingWindow       
                 tst.w   d1
                 bpl.s   @EquipWeapon    ; branch based on returned diamenu choice
                 moveq   #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,d7
@@ -924,7 +924,7 @@ sub_14108:
                 move.w  $C(a0),(a1)+
                 move.w  d1,d3           ; D3 = equippable rings count
                 jsr     j_GetEquippedRing
-                bsr.w   sub_141CE       
+                bsr.w   BuildEquippingWindow       
                 tst.w   d1
                 bpl.s   @EquipRing      ; branch based on returned diamenu choice
                 jsr     j_GetEquippableWeapons
@@ -967,7 +967,7 @@ portraitWindow = -6
 memberListWindow = -4
 selectedMember = -2
 
-sub_141CE:
+BuildEquippingWindow:
                 
                 movem.l d0/d2-a2,-(sp)
                 tst.w   d1
@@ -1166,7 +1166,7 @@ loc_143C4:
                 move.b  #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 rts
 
-    ; End of function sub_141CE
+    ; End of function BuildEquippingWindow
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -14,7 +14,7 @@ DebugModeActionSelect:
                 moveq   #6,d2
                 jsr     j_NumberPrompt
                 cmpi.b  #$FF,d0
-                beq.w   loc_9B3E
+                beq.w   ActionSelected
                 move.w  d0,(a0)+
                 add.w   d0,d0
                 move.w  rjt_DebugModeBattleactions(pc,d0.w),d0
@@ -23,26 +23,26 @@ DebugModeActionSelect:
     ; End of function DebugModeActionSelect
 
 rjt_DebugModeBattleactions:
-                dc.w sub_9AD0-rjt_DebugModeBattleactions
-                dc.w sub_9ADA-rjt_DebugModeBattleactions
-                dc.w sub_9B06-rjt_DebugModeBattleactions
-                dc.w sub_9B2C-rjt_DebugModeBattleactions
-                dc.w sub_9B30-rjt_DebugModeBattleactions
+                dc.w Debug_Attack-rjt_DebugModeBattleactions
+                dc.w Debug_Magic-rjt_DebugModeBattleactions
+                dc.w Debug_Item-rjt_DebugModeBattleactions
+                dc.w Debug_End_Turn-rjt_DebugModeBattleactions
+                dc.w Debug_Burst_Rock-rjt_DebugModeBattleactions
                 dc.w sub_9B34-rjt_DebugModeBattleactions
-                dc.w sub_9B38-rjt_DebugModeBattleactions
+                dc.w Debug_Prism_Laser-rjt_DebugModeBattleactions
 
 ; =============== S U B R O U T I N E =======================================
 
 ; attack
 
 
-sub_9AD0:
+Debug_Attack:
                 
                 bsr.w   DebugModeSelectTargetEnemy
                 move.w  d0,(a0)+
-                bra.w   loc_9B3E
+                bra.w   ActionSelected
 
-    ; End of function sub_9AD0
+    ; End of function Debug_Attack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -50,7 +50,7 @@ sub_9AD0:
 ; use magic
 
 
-sub_9ADA:
+Debug_Magic:
                 
                 moveq   #1,d0
                 moveq   #1,d1
@@ -67,9 +67,9 @@ sub_9ADA:
                 move.w  d0,(a0)+
                 bsr.w   DebugModeSelectTargetEnemy
                 move.w  d0,(a0)+
-                bra.w   loc_9B3E
+                bra.w   ActionSelected
 
-    ; End of function sub_9ADA
+    ; End of function Debug_Magic
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,7 +77,7 @@ sub_9ADA:
 ; use item
 
 
-sub_9B06:
+Debug_Item:
                 
                 moveq   #0,d0
                 moveq   #0,d1
@@ -91,29 +91,29 @@ sub_9B06:
                 moveq   #3,d2
                 jsr     j_NumberPrompt
                 move.w  d0,(a0)+
-                bra.w   loc_9B3E
+                bra.w   ActionSelected
 
-    ; End of function sub_9B06
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_9B2C:
-                
-                bra.w   loc_9B3E
-
-    ; End of function sub_9B2C
+    ; End of function Debug_Item
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_9B30:
+Debug_End_Turn:
                 
-                bra.w   loc_9B3E
+                bra.w   ActionSelected
 
-    ; End of function sub_9B30
+    ; End of function Debug_End_Turn
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+Debug_Burst_Rock:
+                
+                bra.w   ActionSelected
+
+    ; End of function Debug_Burst_Rock
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -121,7 +121,7 @@ sub_9B30:
 
 sub_9B34:
                 
-                bra.w   loc_9B3E
+                bra.w   ActionSelected
 
     ; End of function sub_9B34
 
@@ -131,16 +131,16 @@ sub_9B34:
 ; use prism laser
 
 
-sub_9B38:
+Debug_Prism_Laser:
                 
                 move.b  #BATTLE_VERSUS_PRISM_FLOWERS,((CURRENT_BATTLE-$1000000)).w
 
-    ; End of function sub_9B38
+    ; End of function Debug_Prism_Laser
 
 
 ; START OF FUNCTION CHUNK FOR DebugModeActionSelect
 
-loc_9B3E:
+ActionSelected:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts

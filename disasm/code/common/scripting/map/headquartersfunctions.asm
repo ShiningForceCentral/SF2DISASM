@@ -19,14 +19,14 @@ loc_47924:
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 jsr     j_CheckFlag
                 beq.s   loc_47938       
-                addi.w  #$DC3,d0        ; 0DC3={W1}
-                bra.s   loc_4793C       ; start of headquarters quotes
+                addi.w  #$DC3,d0        ; start of headquarters 'in party' quotes
+                bra.s   loc_4793C
 loc_47938:
                 
-                addi.w  #$DE1,d0        ; 0DE1={W1}
+                addi.w  #$DE1,d0        ; start of headquarters 'outside of party' quotes
 loc_4793C:
                 
-                jsr     (DisplayText).w ; alternate quotes ?
+                jsr     (DisplayText).w
                 jsr     sub_100B0
                 rts
 
@@ -42,12 +42,12 @@ InitNazcaShipForceMembers:
                 moveq   #1,d0
                 moveq   #$1C,d7
                 lea     ((OTHER_ENTITIES-$1000000)).w,a0
-                lea     byte_47A38(pc), a2
-loc_47958:
+                lea     tbl_HeadquartersActiveForce(pc), a2
+@PlaceMemberNaska_Loop:
                 
                 move.w  d0,d1
                 jsr     j_CheckFlag
-                bne.s   loc_47982
+                bne.s   @NotInForce
                 move.w  #$5E80,d2
                 move.w  d2,(a0)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a0)
@@ -55,11 +55,11 @@ loc_47958:
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  #3,ENTITYDEF_OFFSET_FACING(a0)
                 move.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
-loc_47982:
+@NotInForce:
                 
                 addq.w  #1,d0
-                lea     $20(a0),a0
-                dbf     d7,loc_47958
+                lea     ENTITYDEF_NEXT_ENTITY(a0),a0
+                dbf     d7,@PlaceMemberNaska_Loop
                 movem.l (sp)+,d0-a2
                 rts
 
@@ -75,7 +75,7 @@ InitHeadquartersForceMembers:
                 moveq   #1,d0
                 moveq   #$1C,d7
                 lea     ((OTHER_ENTITIES-$1000000)).w,a0
-                lea     byte_47A38(pc), a2
+                lea     tbl_HeadquartersActiveForce(pc), a2
 loc_479A2:
                 
                 move.w  d0,d1
@@ -118,14 +118,15 @@ loc_479D0:
 loc_47A28:
                 
                 addq.w  #1,d0
-                lea     $20(a0),a0
+                lea     ENTITYDEF_NEXT_ENTITY(a0),a0
                 dbf     d7,loc_479A2
                 movem.l (sp)+,d0-a2
                 rts
 
     ; End of function InitHeadquartersForceMembers
 
-byte_47A38:     dc.b $11                ; related to headquarters
+tbl_HeadquartersActiveForce:
+				dc.b $11                ; positions for active Force
                 dc.b 7
                 dc.b $12
                 dc.b 7

@@ -648,7 +648,7 @@ IncreaseKills:
                 movem.l d5-a0,-(sp)
                 clr.w   d5
                 move.w  #$270F,d6
-                moveq   #$32,d7 
+                moveq   #COMBATANT_OFFSET_ALLY_KILLS,d7 
                 bsr.w   ClampWordIncreasing
                 movem.l (sp)+,d5-a0
 @Return:
@@ -668,7 +668,7 @@ IncreaseDefeats:
                 movem.l d5-a0,-(sp)
                 clr.w   d5
                 move.w  #$270F,d6
-                moveq   #$36,d7 
+                moveq   #COMBATANT_OFFSET_ALLY_DEFEATS,d7 
                 bsr.w   ClampWordIncreasing
                 movem.l (sp)+,d5-a0
 @Return:
@@ -1007,7 +1007,7 @@ ApplyStatusEffectsOnStats:
                 mulu.w  d2,d1
                 lsr.l   #3,d1
                 bsr.w   DecreaseCurrentAGI
-                btst    #0,d3
+                btst    #STATUSEFFECT_BIT_STUN,d3
                 beq.s   @Return
                 moveq   #1,d1
                 bsr.w   DecreaseCurrentMOV
@@ -2103,10 +2103,10 @@ IsItemUsableInBattle:
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
                 cmpi.b  #$FF,ITEMDEF_OFFSET_USE_SPELL(a0)
-                beq.s   @ClearCarry
+                beq.s   @HasNoUse
                 ori     #1,ccr
                 bra.s   @Done
-@ClearCarry:
+@HasNoUse:
                 
                 tst.b   d0
 @Done:

@@ -160,7 +160,7 @@ csc0F:	macro
 	dc.l \2
 	endm
 	
-jumpIfAlive:	macro ;alias
+jumpIfDead:	macro ;alias
 	csc0F \1,\2
 	endm	
 	
