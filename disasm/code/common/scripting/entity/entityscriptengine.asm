@@ -1115,6 +1115,7 @@ loc_55FC:
 
 CheckIfSameDestForOtherEntity:
                 
+                module
                 movem.w d4-d6,-(sp)
                 btst    #5,$1C(a0)      ; end if not obstructed by people
                 beq.w   loc_5660
@@ -1123,28 +1124,28 @@ CheckIfSameDestForOtherEntity:
 @LoopEntities:
                 
                 cmpi.w  #$7000,(a2)     ; test each entity
-                beq.w   @loc_5658
+                beq.w   loc_5658
                 cmp.w   d6,d7
-                beq.w   @loc_5658
+                beq.w   loc_5658
                 move.w  ENTITYDEF_OFFSET_XDEST(a2),d4       ; compare dests
                 move.w  ENTITYDEF_OFFSET_YDEST(a2),d5
                 sub.w   d0,d4
-                bpl.s   @loc_5640
+                bpl.s   loc_5640
                 neg.w   d4
-@loc_5640:
+loc_5640:
                 
                 sub.w   d1,d5
-                bpl.s   @loc_5646
+                bpl.s   loc_5646
                 neg.w   d5
-@loc_5646:
+loc_5646:
                 
                 add.w   d4,d5
                 cmpi.w  #$180,d5
-                bcc.w   @loc_5658
+                bcc.w   loc_5658
                 moveq   #$FFFFFFFF,d4
                 movem.w (sp)+,d4-d6
                 rts
-@loc_5658:
+loc_5658:
                 
                 adda.w  #ENTITYDEF_SIZE,a2 
                 dbf     d6,@LoopEntities
@@ -1156,6 +1157,7 @@ loc_5660:
 
     ; End of function CheckIfSameDestForOtherEntity
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
