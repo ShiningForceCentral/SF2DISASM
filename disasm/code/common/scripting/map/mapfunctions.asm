@@ -119,7 +119,7 @@ sub_441AA:
                 cmpi.b  #2,((PLAYER_TYPE-$1000000)).w
                 beq.w   @Done
                 cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
-                beq.w   @NoFollowers      
+                beq.w   byte_441F0      ; No followers
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a0
@@ -129,15 +129,16 @@ sub_441AA:
                 clr.w   d0
                 move.b  (a0)+,d0
                 cmpi.b  #$FF,d0
-                beq.s   @NoFollowers      
+                beq.s   byte_441F0      ; No followers
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 move.w  d1,(a1,d0.w)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a1,d0.w)
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a1,d0.w)
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a1,d0.w)
                 bra.s   @GetFollowerPosition_Loop
-@NoFollowers:
+byte_441F0:
                 
+                ; No followers
                 chkFlg  64              ; Raft is unlocked
                 beq.w   @Done
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
