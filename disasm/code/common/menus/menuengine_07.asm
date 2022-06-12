@@ -324,7 +324,7 @@ WriteMemberMagicList:
                 sub.w   d6,d1
                 jsr     j_GetSpellAndNumberOfSpells
                 cmpi.b  #SPELL_NOTHING,d1
-                beq.w   @Return
+                beq.w   return_13B46
                 movem.l a0-a1,-(sp)
                 movem.w d0-d1/d6-d7,-(sp)
                 jsr     j_FindSpellName
@@ -385,7 +385,7 @@ WriteMemberItemsList:
                 sub.w   d6,d1
                 jsr     j_GetItemAndNumberHeld
                 cmpi.b  #ITEM_NOTHING,d1
-                beq.w   @Return
+                beq.w   return_13B46
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
                 jsr     j_FindItemName
@@ -400,7 +400,7 @@ WriteMemberItemsList:
                 
                 lea     WINDOW_MEMBERSUMMARY_OFFSET_NEXT_ITEM(a1),a1
                 dbf     d6,@Items_Loop
-@Return:
+return_13B46:
                 
                 rts
 @NoItems:
