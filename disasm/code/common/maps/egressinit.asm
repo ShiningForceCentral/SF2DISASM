@@ -31,7 +31,7 @@ loc_75FC:
 @FindEgressEntry_Loop:
                 
                 cmpi.b  #$FF,(a0)
-                beq.w   @NoMatch       
+                beq.w   byte_7620       ; No match
                 cmp.b   (a0),d0
                 beq.s   @EgressEntryFound        
                 addq.l  #4,a0
@@ -42,8 +42,9 @@ loc_75FC:
                 move.b  (a0)+,d1        ; x
                 move.b  (a0)+,d2        ; y
                 move.b  (a0)+,d3        ; facing
-@NoMatch:
+byte_7620:
                 
+                ; No match
                 chkFlg  64              ; Raft is unlocked
                 beq.s   @Done
                 lea RaftResetMapCoordinates-4(pc),a0 ; Some egress locations imply to put the raft back in an initial place
