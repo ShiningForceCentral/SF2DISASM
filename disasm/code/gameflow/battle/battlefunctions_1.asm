@@ -1241,6 +1241,7 @@ combatant = -2
 
 sub_24662:
                 
+                module
                 movem.l d1-a6,-(sp)
                 move.w  combatant(a6),((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w
 loc_2466C:
@@ -1372,7 +1373,7 @@ loc_24784:
                 move.w  combatant(a6),d0
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
-                bne.w   @loc_2482A
+                bne.w   loc_2482A
                 move.w  combatant(a6),d0
                 jsr     j_GetXPos
                 move.w  d1,d2
@@ -1383,7 +1384,7 @@ loc_24784:
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
                 bra.w   loc_24746
-@loc_2482A:
+loc_2482A:
                 
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
                 move.w  d0,itemOrSpellIndex(a6)
@@ -1393,7 +1394,7 @@ loc_24784:
 @CheckChoice_Magic:
                 
                 cmpi.w  #1,d0
-                bne.w   CheckChoice_Item
+                bne.w   @CheckChoice_Item
                 move.w  combatant(a6),d0
                 clr.w   d1
                 jsr     j_GetSpellAndNumberOfSpells
@@ -1430,10 +1431,10 @@ loc_24784:
                 nop
                 jsr     j_ExecuteMagicMenu
                 cmpi.w  #$FFFF,d0
-                bne.w   @loc_248BA
+                bne.w   loc_248BA
                 moveq   #$FFFFFFFF,d1
                 bra.w   loc_24746
-@loc_248BA:
+loc_248BA:
                 
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
                 move.w  d0,d4
@@ -1467,7 +1468,7 @@ loc_24784:
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((word_FFAF8E-$1000000)).w
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
-                bne.w   @loc_24952
+                bne.w   loc_24952
                 move.w  combatant(a6),d0
                 jsr     j_GetXPos
                 move.w  d1,((word_FFB094-$1000000)).w
@@ -1478,7 +1479,7 @@ loc_24784:
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
                 bra.w   @ChooseSpell
-@loc_24952:
+loc_24952:
                 
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w
                 move.w  d0,itemOrSpellIndex(a6)
@@ -1509,10 +1510,10 @@ sub_24966:
 
 ; START OF FUNCTION CHUNK FOR sub_24662
 
-CheckChoice_Item:
+@CheckChoice_Item:
                 
                 cmpi.w  #2,d0
-                bne.w   CheckChoice_SearchStay
+                bne.w   @CheckChoice_SearchStay
                 move.w  combatant(a6),d0
                 clr.w   d1
                 jsr     j_GetItemAndNumberHeld
@@ -1524,17 +1525,17 @@ CheckChoice_Item:
 @HasItem:
                 
                 clr.w   d1
-ChooseItem:
+@ChooseItem:
                 
                 moveq   #3,d2
                 clr.w   d0
                 lea     (InitStack).w,a0
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
-                bne.w   @loc_249C6
+                bne.w   loc_249C6
                 moveq   #$FFFFFFFF,d1
                 bra.w   loc_24746
-@loc_249C6:
+loc_249C6:
                 
                 tst.w   d0
                 bne.w   loc_24B06
@@ -1564,10 +1565,10 @@ ChooseItem:
                 nop
                 jsr     j_ExecuteItemMenu
                 cmpi.w  #$FFFF,d0
-                bne.w   @loc_24A24
+                bne.w   loc_24A24
                 bsr.w   ClearFadingBlockRange
-                bra.s   ChooseItem
-@loc_24A24:
+                bra.s   @ChooseItem
+loc_24A24:
                 
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
                 move.w  d1,((BATTLEACTION_ITEM_SLOT-$1000000)).w
@@ -1650,7 +1651,7 @@ loc_24B06:
                 txt     444             ; "You have nothing to equip.{W1}"
                 clsTxt
                 clr.w   d1
-                bra.w   ChooseItem
+                bra.w   @ChooseItem
 loc_24B34:
                 
                 bsr.w   HideUnitCursor
@@ -1925,7 +1926,7 @@ loc_24D6C:
                 clsTxt
                 clr.w   d1
                 bsr.w   ClearFadingBlockRange
-                bra.w   ChooseItem
+                bra.w   @ChooseItem
 loc_24DCC:
                 
                 bsr.w   HideUnitCursor
@@ -1936,7 +1937,7 @@ loc_24DCC:
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24DF0
                 bsr.w   ClearFadingBlockRange
-                bra.w   ChooseItem
+                bra.w   @ChooseItem
 loc_24DF0:
                 
                 move.w  d0,((BATTLEACTION_ITEM_SLOT-$1000000)).w
@@ -2074,7 +2075,7 @@ loc_24F6E:
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24FC2
                 moveq   #$FFFFFFFF,d1
-                bra.w   ChooseItem
+                bra.w   @ChooseItem
 loc_24FC2:
                 
                 move.w  d0,((BATTLEACTION_ITEM_SLOT-$1000000)).w
@@ -2124,7 +2125,7 @@ byte_25066:
                 txt     42              ; "Discarded the {ITEM}.{W2}"
                 clsTxt
                 bra.w   loc_24746
-CheckChoice_SearchStay:
+@CheckChoice_SearchStay:
                 
                 cmpi.w  #$FFFF,((CHEST_CONTENTS-$1000000)).w
                 bne.w   loc_25088
@@ -2222,6 +2223,7 @@ loc_25188:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
