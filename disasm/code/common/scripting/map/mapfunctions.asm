@@ -115,6 +115,7 @@ loc_44180:
 
 sub_441AA:
                 
+                module
                 movem.l d0-a1,-(sp)
                 cmpi.b  #2,((PLAYER_TYPE-$1000000)).w
                 beq.w   @Done
@@ -179,6 +180,7 @@ byte_441F0:
 
     ; End of function sub_441AA
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
