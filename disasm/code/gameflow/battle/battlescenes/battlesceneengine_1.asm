@@ -3096,6 +3096,7 @@ byte_1B4F0:     dc.b $C
 
 sa18_CutOff:
                 
+		module
                 andi.w  #7,d1
                 subq.w  #1,d1
                 beq.w   loc_1B508
@@ -3133,9 +3134,9 @@ loc_1B53E:
 @Continue:
                 
                 btst    #2,((byte_FFB56F-$1000000)).w
-                beq.s   @loc_1B55A
+                beq.s   loc_1B55A
                 rts
-@loc_1B55A:
+loc_1B55A:
                 
                 bra.s   loc_1B570
 @NotMirrored_Anim:
@@ -3206,6 +3207,8 @@ loc_1B604:
                 bra.w   sub_1A00A
 
     ; End of function sa18_CutOff
+
+                modend
 
 word_1B608:     dc.w $138
                 dc.w $110
