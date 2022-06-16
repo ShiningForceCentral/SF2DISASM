@@ -10,16 +10,16 @@ InitWindowProperties:
                 move.l  a0,-(sp)
                 move.w  d7,-(sp)
                 lea     (WINDOW_ENTRIES).l,a0
-                moveq   #$1F,d7
-loc_47D2:
+                moveq   #LONGWORD_WINDOW_ENTRIES_COUNTER,d7
+@Clear_Loop:
                 
                 clr.l   (a0)+
-                dbf     d7,loc_47D2
+                dbf     d7,@Clear_Loop
                 move.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END-$1000000)).w
                 move.w  (sp)+,d7
                 movea.l (sp)+,a0
                 clr.b   ((WINDOW_IS_PRESENT-$1000000)).w
-                cmpi.b  #$FF,((CURRENT_MAP-$1000000)).w
+                cmpi.b  #MAP_NONE,((CURRENT_MAP-$1000000)).w
                 beq.s   loc_47F4
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_47F4:

@@ -258,9 +258,9 @@ BattleLoop_Victory:
                 add.b   ((BATTLE_AREA_Y-$1000000)).w,d1
                 move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
                 bsr.w   GetEntityIndexForCombatant
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.b  $10(a0,d0.w),((MAP_EVENT_PARAM_5-$1000000)).w
+                move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),((MAP_EVENT_PARAM_5-$1000000)).w
                 move.b  #0,((MAP_EVENT_PARAM_1-$1000000)).w
                 jsr     j_ExecuteAfterBattleCutscene
                 clr.w   d1
@@ -310,7 +310,7 @@ BattleLoop_Defeat:
                 clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
                 setFlg  504             ; Battle 4 completed - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS   
                 jsr     j_UpgradeBattle
-                moveq   #$11,d0
+                moveq   #MAP_GALAM_CASTLE_INNER,d0
                 clr.w   d4
 @Return:
                 
@@ -1103,16 +1103,16 @@ ClearDeadCombatantsListLength:
 HandleKilledCombatants:
                 
                 tst.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
-                beq.w   return_24640
+                beq.w   @NoneKilled
                 movem.l d0-a2/a6,-(sp)
                 moveq   #ANIM_SPRITE_DEATH_SPINS_NUMBER,d6
-loc_24526:
+@DeathSpin_Loop:
                 
                 lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0 ; loop point for sprite death spin animation
                 lea     ((ENTITY_ANIMATION_COUNTER-$1000000)).w,a1
                 move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-loc_24534:
+@GetDeadCombatant_Loop:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
@@ -1123,69 +1123,69 @@ loc_24534:
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).l
                 cmpi.b  #GFX_MAX_SPRITES_TO_LOAD,((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-                blt.s   loc_2455E
+                blt.s   @Continue
                 jsr     (WaitForVInt).w
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-loc_2455E:
+@Continue:
                 
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 move.b  #$FF,(a1,d0.w)
-                dbf     d7,loc_24534
+                dbf     d7,@GetDeadCombatant_Loop
                 moveq   #ANIM_SPRITE_DEATH_SPIN_DELAY,d0
                 jsr     (Sleep).w       
-                dbf     d6,loc_24526    
+                dbf     d6,@DeathSpin_Loop    
                 sndCom  SFX_BATTLEFIELD_DEATH
                 moveq   #2,d6
-loc_2457A:
+@DeathSound_Loop:
                 
                 lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0
                 move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-loc_24584:
+@UpdateDeadCombatant_Loop:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
                 jsr     GetEntityIndexForCombatant
-                cmpi.b  #$2F,d0 
-                bne.s   loc_245A4
-                move.l  #$60006000,((byte_FFAEE2-$1000000)).w
-                move.l  #$60006000,((byte_FFAEEE-$1000000)).w
-loc_245A4:
+                cmpi.b  #ENTITY_SPECIAL_SPRITE_INDEX,d0 
+                bne.s   @NormalEntity
+                move.l  #$60006000,((ENTITY_SPECIAL_SPRITE-$1000000)).w
+                move.l  #$60006000,((ENTITY_SPECIAL_SPRITE_DESTINATION-$1000000)).w
+@NormalEntity:
                 
                 move.w  #3,d1
                 sub.w   d6,d1
                 clr.w   d2
                 move.w  #MAPSPRITE_EFFECT1,d3
                 jsr     (UpdateEntityProperties).l
-                cmpi.b  #7,((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-                blt.s   loc_245C6
+                cmpi.b  #GFX_MAX_SPRITES_TO_LOAD,((SPRITES_TO_LOAD_NUMBER-$1000000)).w
+                blt.s   @NextDeadEntity
                 jsr     (WaitForVInt).w
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-loc_245C6:
+@NextDeadEntity:
                 
-                dbf     d7,loc_24584
+                dbf     d7,@UpdateDeadCombatant_Loop
                 moveq   #8,d0
                 jsr     (Sleep).w       
-                dbf     d6,loc_2457A
+                dbf     d6,@DeathSound_Loop
                 lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0
                 move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-loc_245DE:
+@CheckKillDefeat_Loop:
                 
                 moveq   #1,d1
                 clr.w   d0
                 move.b  (a0)+,d0
-                blt.s   loc_245EE
+                blt.s   @IncreaseKills
                 jsr     j_IncreaseDefeats
-                bra.s   loc_24602
-loc_245EE:
+                bra.s   @ClearDeadCombatant
+@IncreaseKills:
                 
                 movem.l d0,-(sp)
                 clr.w   d0
                 move.b  ((BATTLESCENE_FIRST_ALLY-$1000000)).w,d0
                 jsr     j_IncreaseKills
                 movem.l (sp)+,d0
-loc_24602:
+@ClearDeadCombatant:
                 
                 moveq   #$FFFFFFFF,d1
                 jsr     j_SetXPos
@@ -1197,11 +1197,11 @@ loc_24602:
                 move.w  #$7000,d1
                 move.w  #$7000,d2
                 jsr     SetEntityPosition
-                dbf     d7,loc_245DE
+                dbf     d7,@CheckKillDefeat_Loop
                 moveq   #$A,d0
                 jsr     (Sleep).w       
                 movem.l (sp)+,d0-a2/a6
-return_24640:
+@NoneKilled:
                 
                 rts
 
@@ -1241,6 +1241,7 @@ combatant = -2
 
 sub_24662:
                 
+                module
                 movem.l d1-a6,-(sp)
                 move.w  combatant(a6),((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w
 loc_2466C:
@@ -1317,7 +1318,7 @@ loc_24746:
                 move.w  combatant(a6),d0
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 jsr     (CheckChestItem).w
-                move.w  d2,((byte_FFB180-$1000000)).w
+                move.w  d2,((CHEST_CONTENTS-$1000000)).w
                 cmpi.w  #$FFFF,d2
                 bne.s   loc_2476C       ; if d2 != FFFF, then there is an item
                 moveq   #MENU_BATTLE_WITH_STAY,d2 ; Battle menu with STAY option
@@ -1343,7 +1344,7 @@ loc_24784:
                 lea     (InitStack).w,a0
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
-                bne.w   loc_247C6
+                bne.w   @CheckChoice_Attack
                 move.w  combatant(a6),d0
                 move.w  ((word_FFB08E-$1000000)).w,d1
                 jsr     j_SetXPos
@@ -1353,20 +1354,20 @@ loc_24784:
                 jsr     j_GenerateTargetRangeLists
                 bsr.w   CreateMoveableRangeForUnit
                 bra.w   loc_2466C
-loc_247C6:
+@CheckChoice_Attack:
                 
                 tst.w   d0
-                bne.w   loc_2483C
+                bne.w   @CheckChoice_Magic
                 move.w  combatant(a6),d0
                 jsr     sub_8210
                 bsr.w   CreateMoveableRangeForUnit
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
-                bne.w   loc_247F0
+                bne.w   @HaveTarget_Attack
                 txt     435             ; "No opponent there.{W1}"
                 clsTxt
                 clr.w   d1
                 bra.w   loc_24746
-loc_247F0:
+@HaveTarget_Attack:
                 
                 clr.b   ((word_FFAF8E-$1000000)).w
                 move.w  combatant(a6),d0
@@ -1390,23 +1391,23 @@ loc_2482A:
                 clr.w   ((CURRENT_BATTLEACTION-$1000000)).w
                 clr.w   d0
                 bra.w   loc_25188
-loc_2483C:
+@CheckChoice_Magic:
                 
                 cmpi.w  #1,d0
-                bne.w   loc_24982
+                bne.w   @CheckChoice_Item
                 move.w  combatant(a6),d0
                 clr.w   d1
                 jsr     j_GetSpellAndNumberOfSpells
                 tst.w   d2
-                bne.w   loc_24864
+                bne.w   @HasSpell
                 txt     436             ; "Learned no new magic spell.{W1}"
                 clsTxt
                 clr.w   d1
                 bra.w   loc_24746
-loc_24864:
+@HasSpell:
                 
                 clr.w   d1
-loc_24866:
+@ChooseSpell:
                 
                 move.w  combatant(a6),d0
                 bsr.w   HideUnitCursor
@@ -1443,24 +1444,24 @@ loc_248BA:
                 move.w  d4,d1
                 jsr     j_GetSpellCost
                 sub.w   d1,d3
-                bge.w   loc_248E6
+                bge.w   @MeetsMPRequirement
                 txt     437             ; "More MP needed.{W1}"
                 clsTxt
                 clr.w   d1
-                bra.s   loc_24866
-loc_248E6:
+                bra.s   @ChooseSpell
+@MeetsMPRequirement:
                 
                 move.w  d4,d1
                 move.w  combatant(a6),d0
                 jsr     j_CreateSpellRangeGrid
                 bsr.w   CreateMoveableRangeForUnit
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
-                bne.w   loc_2490C
+                bne.w   @HaveTarget_Spell
                 txt     435             ; "No opponent there.{W1}"
                 clsTxt
                 clr.w   d1
-                bra.w   loc_24866
-loc_2490C:
+                bra.w   @ChooseSpell
+@HaveTarget_Spell:
                 
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 jsr     j_FindSpellDefAddress
@@ -1477,7 +1478,7 @@ loc_2490C:
                 move.w  combatant(a6),d0
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
-                bra.w   loc_24866
+                bra.w   @ChooseSpell
 loc_24952:
                 
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w
@@ -1509,22 +1510,22 @@ sub_24966:
 
 ; START OF FUNCTION CHUNK FOR sub_24662
 
-loc_24982:
+@CheckChoice_Item:
                 
                 cmpi.w  #2,d0
-                bne.w   loc_25072
+                bne.w   @CheckChoice_SearchStay
                 move.w  combatant(a6),d0
                 clr.w   d1
                 jsr     j_GetItemAndNumberHeld
                 tst.w   d2
-                bne.w   loc_249A8
+                bne.w   @HasItem
                 txt     438             ; "You have no item.{W1}"
                 clsTxt
                 bra.w   loc_24746
-loc_249A8:
+@HasItem:
                 
                 clr.w   d1
-loc_249AA:
+@ChooseItem:
                 
                 moveq   #3,d2
                 clr.w   d0
@@ -1539,7 +1540,7 @@ loc_249C6:
                 tst.w   d0
                 bne.w   loc_24B06
                 clr.w   d1
-loc_249CE:
+@NoTargetInRange:
                 
                 move.w  combatant(a6),d0
                 bsr.w   HideUnitCursor
@@ -1566,7 +1567,7 @@ loc_249CE:
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24A24
                 bsr.w   ClearFadingBlockRange
-                bra.s   loc_249AA
+                bra.s   @ChooseItem
 loc_24A24:
                 
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
@@ -1574,24 +1575,24 @@ loc_24A24:
                 move.w  d0,d1
                 move.w  combatant(a6),d0
                 jsr     j_IsItemUsableWeaponInBattle
-                bcs.w   loc_24A4A
+                bcs.w   @ItemHasUse
                 txt     439             ; "It has no effect.{W1}"
                 clsTxt
                 clr.w   d1
                 bra.w   loc_24746
-loc_24A4A:
+@ItemHasUse:
                 
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 move.w  combatant(a6),d0
                 jsr     j_CreateItemRangeGrid
                 bsr.w   CreateMoveableRangeForUnit
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
-                bne.w   loc_24A72
+                bne.w   @TargetInRange_Item
                 txt     439             ; "It has no effect.{W1}"
                 clsTxt
                 clr.w   d1
-                bra.w   loc_249CE
-loc_24A72:
+                bra.w   @NoTargetInRange
+@TargetInRange_Item:
                 
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 jsr     j_GetItemDefAddress
@@ -1601,7 +1602,7 @@ loc_24A72:
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((word_FFAF8E-$1000000)).w
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
-                bne.w   loc_24AC8
+                bne.w   @ContinueWithTarget
                 move.w  combatant(a6),d0
                 jsr     j_GetXPos
                 move.w  d1,((word_FFB094-$1000000)).w
@@ -1612,8 +1613,8 @@ loc_24A72:
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
                 bra.w   loc_24746
-                bra.w   loc_249CE
-loc_24AC8:
+                bra.w   @NoTargetInRange
+@ContinueWithTarget:
                 
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w
                 move.w  d0,itemOrSpellIndex(a6)
@@ -1650,7 +1651,7 @@ loc_24B06:
                 txt     444             ; "You have nothing to equip.{W1}"
                 clsTxt
                 clr.w   d1
-                bra.w   loc_249AA
+                bra.w   @ChooseItem
 loc_24B34:
                 
                 bsr.w   HideUnitCursor
@@ -1925,7 +1926,7 @@ loc_24D6C:
                 clsTxt
                 clr.w   d1
                 bsr.w   ClearFadingBlockRange
-                bra.w   loc_249AA
+                bra.w   @ChooseItem
 loc_24DCC:
                 
                 bsr.w   HideUnitCursor
@@ -1936,12 +1937,12 @@ loc_24DCC:
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24DF0
                 bsr.w   ClearFadingBlockRange
-                bra.w   loc_249AA
+                bra.w   @ChooseItem
 loc_24DF0:
                 
                 move.w  d0,((BATTLEACTION_ITEM_SLOT-$1000000)).w
                 move.w  d1,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
-                btst    #7,d0
+                btst    #ITEMENTRY_BIT_EQUIPPED,d0
                 beq.w   loc_24E26
                 move.w  d0,d1
                 jsr     j_GetItemDefAddress
@@ -1979,7 +1980,7 @@ loc_24E4C:
                 jsr     j_RemoveItemBySlot
                 move.w  itemOrSpellIndex(a6),d0
                 move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,d1
-                bclr    #7,d1
+                bclr    #ITEMENTRY_BIT_EQUIPPED,d1
                 jsr     j_AddItem
                 bra.w   loc_24F62
 loc_24E8E:
@@ -2011,7 +2012,7 @@ loc_24EDE:
                 
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w
                 move.w  d1,((CURRENT_BATTLEACTION-$1000000)).w
-                btst    #7,d0
+                btst    #ITEMENTRY_BIT_EQUIPPED,d0
                 beq.w   loc_24F16
                 move.w  d0,d1
                 jsr     j_GetItemDefAddress
@@ -2074,12 +2075,12 @@ loc_24F6E:
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24FC2
                 moveq   #$FFFFFFFF,d1
-                bra.w   loc_249AA
+                bra.w   @ChooseItem
 loc_24FC2:
                 
                 move.w  d0,((BATTLEACTION_ITEM_SLOT-$1000000)).w
                 move.w  d1,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
-                btst    #7,d0
+                btst    #ITEMENTRY_BIT_EQUIPPED,d0
                 beq.w   loc_24FFA
                 move.w  d0,d1
                 jsr     j_GetItemDefAddress
@@ -2124,9 +2125,9 @@ byte_25066:
                 txt     42              ; "Discarded the {ITEM}.{W2}"
                 clsTxt
                 bra.w   loc_24746
-loc_25072:
+@CheckChoice_SearchStay:
                 
-                cmpi.w  #$FFFF,((byte_FFB180-$1000000)).w
+                cmpi.w  #$FFFF,((CHEST_CONTENTS-$1000000)).w
                 bne.w   loc_25088
                 move.w  #BATTLEACTION_STAY,((CURRENT_BATTLEACTION-$1000000)).w
                 clr.w   d0
@@ -2148,7 +2149,7 @@ loc_250B0:
                 
                 jsr     (OpenChest).w
                 txt     403             ; "{NAME} opened the chest.{W2}{CLEAR}"
-                move.w  ((byte_FFB180-$1000000)).w,d1
+                move.w  ((CHEST_CONTENTS-$1000000)).w,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.w   byte_25178      
@@ -2167,9 +2168,9 @@ loc_250B0:
                 bra.w   loc_25188
 loc_250FC:
                 
-                move.w  ((byte_FFB180-$1000000)).w,d2
+                move.w  ((CHEST_CONTENTS-$1000000)).w,d2
                 cmpi.w  #ITEMINDEX_GOLDCHESTS_START,d2
-                blt.s   loc_25124
+                blt.s   @ItemChest
                 bsr.w   GetChestGoldAmount
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 jsr     j_IncreaseGold
@@ -2177,9 +2178,9 @@ loc_250FC:
                 txt     414             ; "{NAME} found {#} gold{N}coins."
                 bsr.w   FadeOut_WaitForP1Input
                 bra.w   byte_2517C
-loc_25124:
+@ItemChest:
                 
-                move.w  ((byte_FFB180-$1000000)).w,d1
+                move.w  ((CHEST_CONTENTS-$1000000)).w,d1
                 move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  combatant(a6),d0
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -2222,6 +2223,7 @@ loc_25188:
 
 ; END OF FUNCTION CHUNK FOR sub_24662
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -2294,7 +2296,7 @@ loc_25236:
                 cmpi.w  #$FFFF,d0
                 beq.w   BattlefieldMenuActions
                 tst.w   d0
-                bne.w   loc_25286
+                bne.w   @CheckMiniMap
                 jsr     j_UpdateForce
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
                 beq.s   loc_25236
@@ -2303,26 +2305,26 @@ loc_25236:
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 jsr     (CopyBytes).w   
-loc_25274:
+@CreateMemberList_Loop:
                 
                 jsr     j_InitMemberListScreen
                 tst.b   d0
                 bmi.s   loc_25236
                 jsr     j_BuildMemberScreen
-                bra.s   loc_25274
-loc_25286:
+                bra.s   @CreateMemberList_Loop
+@CheckMiniMap:
                 
                 cmpi.w  #1,d0
-                bne.w   loc_25296
+                bne.w   @CheckOptions
                 jsr     sub_10034
                 bra.s   loc_25236
-loc_25296:
+@CheckOptions:
                 
                 cmpi.w  #2,d0
-                bne.w   loc_252A6
+                bne.w   @SuspendGame
                 jsr     sub_10080
                 bra.s   loc_25236
-loc_252A6:
+@SuspendGame:
                 
                 tst.b   ((CURRENT_BATTLE-$1000000)).w
                 beq.s   loc_25236
@@ -2336,15 +2338,15 @@ loc_252A6:
                 move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
                 jsr     (SaveGame).l
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
-                beq.w   byte_252E6
+                beq.w   @NotInDebugMode
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
-                bne.w   byte_252F2      
-byte_252E6:
+                bne.w   @FinishSuspend      
+@NotInDebugMode:
                 
                 sndCom  SOUND_COMMAND_FADE_OUT
                 jsr     (FadeOutToBlack).w
                 jmp     (WitchSuspend).w
-byte_252F2:
+@FinishSuspend:
                 
                 clrFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 bra.w   loc_25236
@@ -2379,10 +2381,11 @@ sub_252FA:
                 move.w  combatant(a6),d0
                 bsr.w   SetEntityBlinkingFlag
                 move.w  ((CURRENT_BATTLEACTION-$1000000)).w,d0
-                cmpi.w  #3,d0
-                beq.w   loc_25480
+                cmpi.w  #BATTLEACTION_STAY,d0
+                beq.w   @EndTurn
+@Check_Attack:
                 tst.w   d0
-                bne.w   loc_2537E
+                bne.w   @Check_CastSpell
                 move.w  combatant(a6),d0
                 jsr     sub_8210
                 jsr     (WaitForViewScrollEnd).w
@@ -2392,11 +2395,11 @@ sub_252FA:
                 move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
                 clr.w   d0
-                bra.w   loc_2547A
-loc_2537E:
+                bra.w   @ClearAction
+@Check_CastSpell:
                 
-                cmpi.w  #1,d0
-                bne.w   loc_253BE
+                cmpi.w  #BATTLEACTION_CAST_SPELL,d0
+                bne.w   @Check_UseItem
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 move.w  combatant(a6),d0
                 jsr     j_CreateSpellRangeGrid
@@ -2409,11 +2412,11 @@ loc_2537E:
                 move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
                 clr.w   d0
-                bra.w   loc_2547A
-loc_253BE:
+                bra.w   @ClearAction
+@Check_UseItem:
                 
-                cmpi.w  #2,d0
-                bne.w   loc_2540A
+                cmpi.w  #BATTLEACTION_USE_ITEM,d0
+                bne.w   @Check_Explosion
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 move.w  combatant(a6),d0
                 jsr     j_CreateItemRangeGrid
@@ -2429,11 +2432,11 @@ loc_253BE:
                 move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
                 clr.w   d0
-                bra.w   loc_2547A
-loc_2540A:
+                bra.w   @ClearAction
+@Check_Explosion:
                 
-                cmpi.w  #4,d0
-                bne.w   loc_2544A
+                cmpi.w  #BATTLEACTION_BURST_ROCK,d0
+                bne.w   @Check_Laser
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 move.w  combatant(a6),d0
                 jsr     j_CreateSpellRangeGrid
@@ -2446,13 +2449,13 @@ loc_2540A:
                 move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
                 clr.w   d0
-                bra.w   loc_2547A
-loc_2544A:
+                bra.w   @ClearAction
+@Check_Laser:
                 
-                cmpi.w  #6,d0
-                bne.w   loc_2547A
+                cmpi.w  #BATTLEACTION_PRISM_LASER,d0
+                bne.w   @ClearAction
                 move.w  combatant(a6),d0
-                jsr     sub_1AC05C      
+                jsr     j_GetLaserFacing      
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
                 clr.b   ((word_FFAF8E-$1000000)).w
@@ -2461,10 +2464,10 @@ loc_2544A:
                 bsr.w   sub_2548E
                 clr.w   d0
                 bra.w   *+4
-loc_2547A:
+@ClearAction:
                 
                 jsr     ClearFadingBlockRange
-loc_25480:
+@EndTurn:
                 
                 move.w  combatant(a6),d0
                 bsr.w   ClearEntityBlinkingFlag
@@ -2589,49 +2592,49 @@ CreateRandomizedTurnOrder:
                 
                 lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
                 move.l  a0,-(sp)
-                moveq   #$3F,d7 
-loc_2554C:
+                moveq   #ENTITY_TOTAL_COUNTER,d7 
+@ClearTurnOrder_Loop:
                 
                 move.w  #$FFFF,(a0)+
-                dbf     d7,loc_2554C
+                dbf     d7,@ClearTurnOrder_Loop
                 movea.l (sp)+,a0
                 clr.w   d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
-loc_2555A:
+@AllyTurnOrder_Loop:
                 
                 move.w  d7,-(sp)
                 bsr.w   AddRandomizedAGItoTurnOrder
                 move.w  (sp)+,d7
                 addq.w  #1,d0
-                dbf     d7,loc_2555A
+                dbf     d7,@AllyTurnOrder_Loop
                 move.w  #COMBATANT_ENEMIES_START,d0
-                moveq   #$1D,d7         ; that is technically a bug.
+                moveq   #ENTITY_ENEMY_COUNTER,d7         ; that is technically a bug.
                                         ;  As we're iterating enemy combatants, we should be moving value $1F instead
-loc_2556E:
+@EnemyTurnOrder_Loop:
                 
                 move.w  d7,-(sp)
                 bsr.w   AddRandomizedAGItoTurnOrder
                 move.w  (sp)+,d7
                 addq.w  #1,d0
-                dbf     d7,loc_2556E
+                dbf     d7,@EnemyTurnOrder_Loop
                 moveq   #COMBATANTS_ALL_COUNTER,d6
-loc_2557E:
+@LoopAllCombatants:
                 
-                moveq   #$3E,d7 
+                moveq   #TURNORDER_COUNTER,d7 
                 lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
-loc_25584:
+@LoopEachlCombatants:
                 
                 move.w  (a0),d0
-                move.w  2(a0),d1
+                move.w  TURNORDER_SIZE(a0),d1
                 cmp.b   d0,d1
-                ble.s   loc_25594
+                ble.s   @InOrder
                 move.w  d1,(a0)
-                move.w  d0,2(a0)
-loc_25594:
+                move.w  d0,TURNORDER_SIZE(a0)
+@InOrder:
                 
-                addq.l  #2,a0
-                dbf     d7,loc_25584
-                dbf     d6,loc_2557E
+                addq.l  #TURNORDER_SIZE,a0
+                dbf     d7,@LoopEachlCombatants
+                dbf     d6,@LoopAllCombatants
                 clr.b   ((BATTLE_CURRENT_TURN_OFFSET-$1000000)).w
                 rts
 
@@ -2654,7 +2657,7 @@ AddRandomizedAGItoTurnOrder:
                 beq.w   @Return         ; skip if combatant is not alive
                 jsr     j_GetCurrentAGI
                 move.w  d1,d3
-                andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
+                andi.w  #TURN_AGILITY_MASK,d1
                 move.w  d1,d6
                 lsr.w   #3,d6
                 jsr     (GenerateRandomNumber).w
@@ -2667,12 +2670,12 @@ AddRandomizedAGItoTurnOrder:
                 add.w   d7,d1
                 move.b  d0,(a0)+
                 move.b  d1,(a0)+
-                cmpi.w  #128,d3
+                cmpi.w  #TWO_TURN_THRESHOLD,d3
                 blt.s   @Return
                 
                 ; Add a second turn if AGI >= 128
                 move.w  d3,d1
-                andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
+                andi.w  #TURN_AGILITY_MASK,d1
                 mulu.w  #5,d1
                 divu.w  #6,d1
                 move.w  d1,d6
@@ -2711,19 +2714,19 @@ LoadBattle:
                 move.w  (sp)+,d0
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
-                bpl.s   loc_25646
+                bpl.s   @Ally
                 clr.w   d0
-loc_25646:
+@Ally:
                 
                 andi.w  #$3F,d0 
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                adda.w  d0,a0
-                move.w  (a0)+,d0
+                adda.w  d0,a0					; offset to appropriate entity
+                move.w  (a0)+,d0				; move x offset
                 ext.l   d0
                 divs.w  #$180,d0
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
-                move.w  (a0)+,d0
+                move.w  (a0)+,d0				; move y offset
                 ext.l   d0
                 divs.w  #$180,d0
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
@@ -2854,19 +2857,19 @@ PrintAllActivatedDefCons:
 
 ; =============== S U B R O U T I N E =======================================
 
-; if flag D1 is set, display def-con textbox
+; if flag D1 is set, AI region active, display def-con textbox
 
 
 PrintActivatedDefCon:
                 
                 move.w  d1,-(sp)
                 jsr     j_CheckFlag
-                beq.s   loc_2578A
+                beq.s   @RegionInactive
                 subi.w  #BATTLE_REGION_FLAGS_START,d1
                 ext.l   d1
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     463             ; "DEF-CON No. {#} has been{N}implemented.{D3}"
-loc_2578A:
+@RegionInactive:
                 
                 move.w  (sp)+,d1
                 addq.w  #1,d1

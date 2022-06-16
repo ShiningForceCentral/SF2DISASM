@@ -978,8 +978,8 @@ loc_D30:
                 sub.w   d6,d5
                 btst    d5,d1
                 bne.s   loc_D44
-                adda.w  #$20,a0 
-                adda.w  #$20,a1 
+                adda.w  #SIZE_PALETTE,a0 
+                adda.w  #SIZE_PALETTE,a1 
                 bra.w   loc_DA8
 loc_D44:
                 
@@ -1119,11 +1119,11 @@ ClearSpriteTable:
 ClearScrollTableData:
                 
                 movem.l d7/a6,-(sp)
-                move.w  #$C000,d0       ; clear scroll A table
+                move.w  #RAM_ADDRESS_PLANE_A,d0       ; clear scroll A table
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
-                move.w  #$E000,d0       ; clear scroll B table
+                move.w  #RAM_ADDRESS_PLANE_B,d0       ; clear scroll B table
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill

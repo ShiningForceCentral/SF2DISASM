@@ -895,7 +895,7 @@ sub_14108:
                 move.w  $C(a0),(a1)+
                 move.w  d1,d3           ; D3 = equippable weapons count
                 jsr     j_GetEquippedWeapon
-                bsr.w   sub_141CE       
+                bsr.w   BuildEquippingWindow       
                 tst.w   d1
                 bpl.s   @EquipWeapon    ; branch based on returned diamenu choice
                 moveq   #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,d7
@@ -924,7 +924,7 @@ sub_14108:
                 move.w  $C(a0),(a1)+
                 move.w  d1,d3           ; D3 = equippable rings count
                 jsr     j_GetEquippedRing
-                bsr.w   sub_141CE       
+                bsr.w   BuildEquippingWindow       
                 tst.w   d1
                 bpl.s   @EquipRing      ; branch based on returned diamenu choice
                 jsr     j_GetEquippableWeapons
@@ -967,7 +967,7 @@ portraitWindow = -6
 memberListWindow = -4
 selectedMember = -2
 
-sub_141CE:
+BuildEquippingWindow:
                 
                 movem.l d0/d2-a2,-(sp)
                 tst.w   d1
@@ -1166,7 +1166,7 @@ loc_143C4:
                 move.b  #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 rts
 
-    ; End of function sub_141CE
+    ; End of function BuildEquippingWindow
 
 
 ; =============== S U B R O U T I N E =======================================

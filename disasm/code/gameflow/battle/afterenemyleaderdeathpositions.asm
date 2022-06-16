@@ -80,14 +80,15 @@ loc_47E66:
     ; End of function ApplyPositionsAfterEnemyLeaderDies
 
 tbl_AfterBattlePositions:
-                dc.w 5                  ; battle 5
+                dc.w BATTLE_GALAM_CASTLE ; battle 5
                 dc.l abp_Battle5        
                 dc.w $FFFF
-abp_Battle5:    dc.b 0                  ; character 0 : Bowie
+				
+abp_Battle5:    dc.b ALLY_BOWIE         ; character 0 : Bowie
                 dc.b $10                ; X Pos
                 dc.b 4                  ; Y pos
                 dc.b $FF                ; ignored byte
-                dc.b 5                  ; Slade
+                dc.b ALLY_SLADE         ; Slade
                 dc.b $11
                 dc.b 4
                 dc.b $FF

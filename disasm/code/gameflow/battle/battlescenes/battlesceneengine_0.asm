@@ -195,7 +195,7 @@ loc_181B2:
                 move.w  ((ALLY_BATTLE_PALETTE-$1000000)).w,d1
                 bsr.w   LoadPaletteForBattlescene
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
-                bsr.w   sub_19E6E
+                bsr.w   GetAllyPlate
                 move.b  d1,((BATTLE_BACKGROUND-$1000000)).w
                 cmpi.w  #$FFFF,d1
                 beq.w   loc_1822A
@@ -684,7 +684,7 @@ bsc05_makeAllyIdle:
                 beq.w   return_18698
                 bclr    #1,((byte_FFB56E-$1000000)).w
                 move.l  ((WEAPON_IDLE_FRAME1_INDEX-$1000000)).w,((WEAPON_FRAME_INDEX-$1000000)).w
-                bsr.w   sub_192FE
+                bsr.w   ApplyStatusEffectsToAllyAnimation
                 btst    #0,((byte_FFB56E-$1000000)).w
                 beq.s   loc_18624
                 clr.w   d0
@@ -747,7 +747,7 @@ bsc04_makeEnemyIdle:
                 cmpi.w  #$FFFF,((BATTLESCENE_ENEMY-$1000000)).w
                 beq.s   return_186D8
                 bclr    #3,((byte_FFB56E-$1000000)).w
-                bsr.w   sub_19296
+                bsr.w   ApplyStatusEffectsToEnemyAnimation
                 clr.w   d0
                 clr.w   d1
                 bsr.w   sub_19464
@@ -791,7 +791,7 @@ bsc07_switchAllies:
                 move.w  d2,d1
                 bsr.w   LoadPaletteForBattlescene
                 move.w  d7,d0
-                bsr.w   sub_19E6E
+                bsr.w   GetAllyPlate
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_1871E
                 move.w  d1,d0
@@ -836,7 +836,7 @@ loc_18758:
                 bsr.w   GetWeaponSpriteAndPalette
                 move.w  d2,((ALLY_WEAPON_SPRITE-$1000000)).w
                 move.w  d3,((ALLY_WEAPON_PALETTE-$1000000)).w
-                clr.b   ((byte_FFB57E-$1000000)).w
+                clr.b   ((BATTLESCENE_ALLY_STATUS_ANIMATION-$1000000)).w
                 andi.b  #$FC,((byte_FFB56F-$1000000)).w
                 cmpi.w  #$FFFF,d7
                 beq.w   loc_19912
@@ -874,7 +874,7 @@ loc_187BC:
                 jsr     (ApplyVIntVramDma).w
                 jsr     (WaitForDmaQueueProcessing).w
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
-                bsr.w   sub_19E6E
+                bsr.w   GetAllyPlate
                 move.b  d1,((BATTLE_BACKGROUND-$1000000)).w
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_18818
@@ -930,7 +930,7 @@ loc_1888C:
                 move.b  ((byte_FFB56F-$1000000)).w,d1
                 andi.w  #2,d1
                 jsr     sub_10020
-                bsr.w   sub_192FE
+                bsr.w   ApplyStatusEffectsToAllyAnimation
                 jsr     (sub_1942).w    
                 move.w  (sp)+,d1
                 bsr.s   sub_188D4
@@ -1112,7 +1112,7 @@ loc_18A2E:
                 move.w  d2,((ENEMY_BATTLE_PALETTE-$1000000)).w
                 move.w  d3,((ENEMY_BATTLE_ANIMATION-$1000000)).w
                 move.w  (sp)+,d2
-                clr.b   ((byte_FFB57F-$1000000)).w
+                clr.b   ((BATTLESCENE_ENEMY_STATUS_ANIMATION-$1000000)).w
                 bclr    #2,((byte_FFB56F-$1000000)).w
                 clr.w   d1
                 move.w  #$F0,d6 
@@ -1156,7 +1156,7 @@ loc_18AB6:
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 cmpi.w  #$FFFF,d0
                 beq.s   loc_18ACE
-                bsr.w   sub_19296
+                bsr.w   ApplyStatusEffectsToEnemyAnimation
 loc_18ACE:
                 
                 movem.w (sp)+,d1-d2
@@ -1505,7 +1505,7 @@ loc_18DFC:
                 move.w  (a6)+,d1
                 jsr     j_SetStatusEffects
                 jsr     j_ApplyStatusEffectsAndItemsOnStats
-                bsr.w   sub_192FE
+                bsr.w   ApplyStatusEffectsToAllyAnimation
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 move.b  ((byte_FFB56F-$1000000)).w,d1
                 andi.w  #2,d1
@@ -1660,7 +1660,7 @@ loc_18F92:
                 move.w  (a6)+,d1
                 jsr     j_SetStatusEffects
                 jsr     j_ApplyStatusEffectsAndItemsOnStats
-                bsr.w   sub_19296
+                bsr.w   ApplyStatusEffectsToEnemyAnimation
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 move.b  ((byte_FFB56F-$1000000)).w,d1
                 andi.w  #4,d1
@@ -2009,8 +2009,8 @@ return_1928A:
 
 sub_1928C:
                 
-                bsr.w   sub_192FE
-                bsr.s   sub_19296
+                bsr.w	ApplyStatusEffectsToAllyAnimation
+                bsr.s   ApplyStatusEffectsToEnemyAnimation
                 bra.w   sub_1EFD8
 
     ; End of function sub_1928C
@@ -2019,7 +2019,7 @@ sub_1928C:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_19296:
+ApplyStatusEffectsToEnemyAnimation:
                 
                 move.w  ((ENEMY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w,((ENEMY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
@@ -2028,52 +2028,52 @@ sub_19296:
                 beq.s   loc_192F8
                 jsr     j_GetStatusEffects
                 move.w  d1,d0
-                andi.w  #$3000,d0
+                andi.w  #STATUSEFFECT_BOOST,d0
                 beq.s   loc_192BA
                 lsr     ((ENEMY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
 loc_192BA:
                 
                 move.w  d1,d0
-                andi.w  #$C00,d0
+                andi.w  #STATUSEFFECT_SLOW,d0
                 beq.s   loc_192C6
                 lsl     ((ENEMY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
 loc_192C6:
                 
                 move.w  d1,d0
-                andi.w  #$300,d0
+                andi.w  #STATUSEFFECT_SILENCE,d0
                 beq.s   loc_192D0
-                moveq   #1,d2
+                moveq   #STATUSANIMATION_SILENCE_CROSS,d2
 loc_192D0:
                 
                 move.w  d1,d0
-                andi.w  #8,d0
+                andi.w  #STATUSEFFECT_MUDDLE2,d0
                 beq.s   loc_192DA
-                moveq   #2,d2
+                moveq   #STATUSANIMATION_DIZZY_STARS,d2
 loc_192DA:
                 
                 move.w  d1,d0
-                andi.w  #$C0,d0 
+                andi.w  #STATUSEFFECT_SLEEP,d0 
                 beq.s   loc_192EA
-                moveq   #3,d2
+                moveq   #STATUSANIMATION_ZZZS,d2
                 move.w  #$FFFF,((ENEMY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
 loc_192EA:
                 
-                andi.w  #1,d1
+                andi.w  #STATUSEFFECT_STUN,d1
                 beq.s   loc_192F8
-                moveq   #4,d2
+                moveq   #STATUSANIMATION_STUN_LINES,d2
                 move.w  #$FFFF,((ENEMY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
 loc_192F8:
                 
-                move.b  d2,((byte_FFB57F-$1000000)).w
+                move.b  d2,((BATTLESCENE_ENEMY_STATUS_ANIMATION-$1000000)).w
                 rts
 
-    ; End of function sub_19296
+    ; End of function ApplyStatusEffectsToEnemyAnimation
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_192FE:
+ApplyStatusEffectsToAllyAnimation:
                 
                 move.w  ((ALLY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w,((ALLY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
@@ -2082,46 +2082,46 @@ sub_192FE:
                 beq.s   loc_19360
                 jsr     j_GetStatusEffects
                 move.w  d1,d0
-                andi.w  #$3000,d0
+                andi.w  #STATUSEFFECT_BOOST,d0
                 beq.s   loc_19322
                 lsr     ((ALLY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
 loc_19322:
                 
                 move.w  d1,d0
-                andi.w  #$C00,d0
+                andi.w  #STATUSEFFECT_SLOW,d0
                 beq.s   loc_1932E
                 lsl     ((ALLY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
 loc_1932E:
                 
                 move.w  d1,d0
-                andi.w  #$300,d0
+                andi.w  #STATUSEFFECT_SILENCE,d0
                 beq.s   loc_19338
-                moveq   #1,d2
+                moveq   #STATUSANIMATION_SILENCE_CROSS,d2
 loc_19338:
                 
                 move.w  d1,d0
-                andi.w  #$30,d0 
+                andi.w  #STATUSEFFECT_MUDDLE,d0 
                 beq.s   loc_19342
-                moveq   #2,d2
+                moveq   #STATUSANIMATION_DIZZY_STARS,d2
 loc_19342:
                 
                 move.w  d1,d0
-                andi.w  #$C0,d0 
+                andi.w  #STATUSEFFECT_SLEEP,d0 
                 beq.s   loc_19352
-                moveq   #3,d2
+                moveq   #STATUSANIMATION_ZZZS,d2
                 move.w  #$FFFF,((ALLY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
 loc_19352:
                 
-                andi.w  #1,d1
+                andi.w  #STATUSEFFECT_STUN,d1
                 beq.s   loc_19360
-                moveq   #4,d2
+                moveq   #STATUSANIMATION_STUN_LINES,d2
                 move.w  #$FFFF,((ALLY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
 loc_19360:
                 
-                move.b  d2,((byte_FFB57E-$1000000)).w
+                move.b  d2,((BATTLESCENE_ALLY_STATUS_ANIMATION-$1000000)).w
                 rts
 
-    ; End of function sub_192FE
+    ; End of function ApplyStatusEffectsToAllyAnimation
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2537,7 +2537,7 @@ sub_195FE:
                 cmpi.w  #$FFFF,((BATTLESCENE_ALLY-$1000000)).w
                 beq.s   return_19630
                 bclr    #1,((byte_FFB56E-$1000000)).w
-                clr.b   ((byte_FFB57E-$1000000)).w
+                clr.b   ((BATTLESCENE_ALLY_STATUS_ANIMATION-$1000000)).w
                 bsr.w   sub_19AB0
                 lea     word_196B4(pc), a1
                 moveq   #7,d7
@@ -2639,7 +2639,7 @@ sub_196D4:
                 cmpi.w  #$FFFF,((BATTLESCENE_ENEMY-$1000000)).w
                 beq.s   return_1971A
                 bclr    #3,((byte_FFB56E-$1000000)).w
-                clr.b   ((byte_FFB57F-$1000000)).w
+                clr.b   ((BATTLESCENE_ENEMY_STATUS_ANIMATION-$1000000)).w
                 move.w  ((ENEMY_BATTLE_SPRITE-$1000000)).w,d0
                 btst    #2,((byte_FFB56E-$1000000)).w
                 bne.s   loc_196F6

@@ -20,7 +20,7 @@ ExecuteAiControl:
 @Enemy:
                 
                 bsr.w   GetAiCommandset 
-                cmpi.b  #15,d1          ; check for AI #15, the "swarm" AI used in Kraken, Harpy, and Chess Battles
+                cmpi.b  #AI_SWARM,d1          ; check for AI #15, the "swarm" AI used in Kraken, Harpy, and Chess Battles
                 beq.s   @CheckFullHP
                 bra.w   @Attack
 @CheckFullHP:
@@ -238,7 +238,7 @@ HandleLineAttackerAi:
                 move.w  d0,d7
                 bsr.w   MakeTargetsList_Allies
                 move.w  d7,d0
-                jsr     sub_1AC05C      
+                jsr     j_GetLaserFacing      
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  (a0),d0
                 tst.w   d0

@@ -238,7 +238,7 @@ DetermineTargetsByAction:
                 jsr     MakeTargetsList_Everybody
                 move.b  #$FF,((TARGETS_LIST-$1000000)).w
                 move.b  (a4),d0
-                jsr     sub_1AC05C      
+                jsr     j_GetLaserFacing      
 @Done:
                 
                 bsr.w   SortTargets

@@ -20,12 +20,12 @@ loc_237A4:
                 ; get X/Y/facing/size of player entity
                 movem.l d3-a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
-                move.w  (a0,d0.w),d1    ; get X
-                move.w  2(a0,d0.w),d2   ; Y
-                move.b  $10(a0,d0.w),d3 ; facing
-                move.b  $11(a0,d0.w),d4 ; size ?
+                move.w  (a0,d0.w),d1
+                move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d2
+                move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3
+                move.b  ENTITYDEF_OFFSET_LAYER(a0,d0.w),d4
                 andi.w  #3,d3
                 move.w  d3,d5
                 lsl.w   #2,d5
@@ -58,7 +58,7 @@ loc_237FE:
                 bne.w   loc_2382A       ; skip this entity because it's a follower!
                 ; get distance from activated block
                 move.w  (a0),d5
-                move.w  2(a0),d6
+                move.w  ENTITYDEF_OFFSET_Y(a0),d6
                 sub.w   d1,d5
                 bge.s   loc_2381A
                 neg.w   d5
@@ -75,7 +75,7 @@ loc_23820:
 loc_2382A:
                 
                 addq.w  #1,d0
-                lea     $20(a0),a0
+                lea     ENTITYDEF_NEXT_ENTITY(a0),a0
                 dbf     d7,loc_237FE
                 moveq   #$FFFFFFFF,d0
                 bra.w   loc_23840
@@ -83,7 +83,7 @@ loc_2383A:
                 
                 ; distance is less than one block, 
                 move.w  d3,d2
-                move.b  $10(a0),d1
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d1
 loc_23840:
                 
                 movem.l (sp)+,d3-a0
@@ -133,7 +133,7 @@ loc_2386C:
                 clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
                 clr.w   ((SPEECH_SFX-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 move.w  (a0,d0.w),d2
                 move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d1

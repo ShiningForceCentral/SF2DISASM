@@ -59,7 +59,7 @@ rjt_cutsceneScriptCommands:
                 dc.w csc0C_jumpIfFlagSet-rjt_cutsceneScriptCommands
                 dc.w csc0D_jumpIfFlagClear-rjt_cutsceneScriptCommands
                 dc.w csc0E_jumpIfForceMemberInList-rjt_cutsceneScriptCommands
-                dc.w csc0F_jumpIfCharacterAlive-rjt_cutsceneScriptCommands
+                dc.w csc0F_jumpIfCharacterDead-rjt_cutsceneScriptCommands
                 dc.w csc10_setOrClearFlag-rjt_cutsceneScriptCommands
                 dc.w csc11_promptYesNoForStoryFlow-rjt_cutsceneScriptCommands
                 dc.w csc12_executeContextMenu-rjt_cutsceneScriptCommands
@@ -373,9 +373,9 @@ loc_473B4:
                 
                 cmpi.w  #$80,d0 ; HARDCODED use case
                 bne.s   loc_473D4
-                move.w  #1,d0           ; make sarah and chester join at the same time
+                move.w  #ALLY_SARAH,d0           ; make sarah and chester join at the same time
                 jsr     j_JoinForce
-                move.w  #2,d0
+                move.w  #ALLY_CHESTER,d0
                 jsr     j_JoinForce
                 txt     447             ; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
                 bra.s   loc_473EC
@@ -510,7 +510,7 @@ return_47462:
 ; xxxx yyyyyyyy
 
 
-csc0F_jumpIfCharacterAlive:
+csc0F_jumpIfCharacterDead:
                 
                 move.w  (a6)+,d0
                 jsr     j_GetCurrentHP
@@ -525,7 +525,7 @@ return_47478:
                 
                 rts
 
-    ; End of function csc0F_jumpIfCharacterAlive
+    ; End of function csc0F_jumpIfCharacterDead
 
 
 ; =============== S U B R O U T I N E =======================================

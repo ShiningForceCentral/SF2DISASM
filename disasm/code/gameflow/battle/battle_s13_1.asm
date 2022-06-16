@@ -743,47 +743,47 @@ byte_1AC87E:    dc.b $10                ; AI-related data
 ; AI-related
 
 
-sub_1AC8A0:
+GetLaserFacing:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
                 lea     ((CURRENT_BATTLE-$1000000)).w,a0
                 clr.w   d2
                 move.b  (a0),d2
-                lea     byte_1AC9B8(pc), a0
+                lea     tbl_BattlesWithLasers(pc), a0
                 nop
                 clr.w   d1
                 move.b  (a0)+,d1
                 subi.w  #1,d1
                 clr.w   d3
-loc_1AC8BE:
+@CheckBattle_Loop:
                 
                 move.b  (a0,d3.w),d0
                 cmp.b   d0,d2
-                bne.s   loc_1AC8CA
-                bra.w   loc_1AC8D8
-loc_1AC8CA:
+                bne.s   @NextBattle
+                bra.w   @BattleHasLaser
+@NextBattle:
                 
                 addi.w  #1,d3
-                dbf     d1,loc_1AC8BE
+                dbf     d1,@CheckBattle_Loop
                 clr.w   d3
-                bra.w   loc_1AC9AC
-loc_1AC8D8:
+                bra.w   @Done
+@BattleHasLaser:
                 
-                lea     off_1AC9BC(pc), a0
+                lea     tbl_EnemyFacing_Table(pc), a0
                 nop
-                lsl.w   #2,d3
+                lsl.w   #2,d3		; make into longword offset
                 movea.l (a0,d3.w),a0
                 clr.w   d0
                 move.b  d7,d0
                 andi.w  #$7F,d0 
                 clr.w   d6
-                move.b  (a0,d0.w),d6
+                move.b  (a0,d0.w),d6	; get entity facing
                 cmpi.b  #$FF,d6
-                bne.s   loc_1AC8FE
-                moveq   #0,d3
-                bra.w   loc_1AC9AC
-loc_1AC8FE:
+                bne.s   @ContinueToFacing
+                moveq   #0,d3			; does not laser attack, no targets
+                bra.w   @Done
+@ContinueToFacing:
                 
                 clr.w   d0
                 move.b  d7,d0
@@ -792,90 +792,94 @@ loc_1AC8FE:
                 jsr     j_GetXPos
                 jsr     j_ClearMovableGrid
                 tst.w   d6
-                bne.s   loc_1AC91E
+                bne.s   @CheckFace_Up
                 addi.w  #1,d1
-loc_1AC91E:
+@CheckFace_Up:
                 
                 cmpi.w  #1,d6
-                bne.s   loc_1AC928
+                bne.s   @CheckFace_Left
                 subi.w  #1,d2
-loc_1AC928:
+@CheckFace_Left:
                 
                 cmpi.w  #2,d6
-                bne.s   loc_1AC932
+                bne.s   @CheckFace_Down
                 subi.w  #1,d1
-loc_1AC932:
+@CheckFace_Down:
                 
                 cmpi.w  #3,d6
-                bne.s   loc_1AC93C
+                bne.s   @ContinueToTargets
                 addi.w  #1,d2
-loc_1AC93C:
+@ContinueToTargets:
                 
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d3
-loc_1AC942:
+@CheckTile_Loop:
                 
                 jsr     j_SetMovableAtCoord
                 jsr     j_GetTargetAtCoordOffset
                 cmpi.b  #$FF,d0
-                bne.s   loc_1AC958
-                bra.w   loc_1AC960
-loc_1AC958:
+                bne.s   @TargetOnTile
+                bra.w   @CheckIncrementTile_Right
+@TargetOnTile:
                 
                 move.b  d0,(a0,d3.w)
                 addi.w  #1,d3
-loc_1AC960:
+@CheckIncrementTile_Right:
                 
                 tst.w   d6
-                bne.s   loc_1AC972
+                bne.s   @CheckIncrementTile_Up
                 addi.w  #1,d1
                 cmpi.w  #$2F,d1 
-                ble.s   loc_1AC972
-                bra.w   loc_1AC9AC
-loc_1AC972:
+                ble.s   @CheckIncrementTile_Up
+                bra.w   @Done
+@CheckIncrementTile_Up:
                 
                 cmpi.w  #1,d6
-                bne.s   loc_1AC984
+                bne.s   @CheckIncrementTile_Left
                 subi.w  #1,d2
                 tst.w   d2
-                bpl.s   loc_1AC984
-                bra.w   loc_1AC9AC
-loc_1AC984:
+                bpl.s   @CheckIncrementTile_Left
+                bra.w   @Done
+@CheckIncrementTile_Left:
                 
                 cmpi.w  #2,d6
-                bne.s   loc_1AC996
+                bne.s   @CheckIncrementTile_Down
                 subi.w  #1,d1
                 tst.w   d1
-                bpl.s   loc_1AC996
-                bra.w   loc_1AC9AC
-loc_1AC996:
+                bpl.s   @CheckIncrementTile_Down
+                bra.w   @Done
+@CheckIncrementTile_Down:
                 
                 cmpi.w  #3,d6
-                bne.s   loc_1AC9AA
+                bne.s   @NextTile
                 addi.w  #1,d2
                 cmpi.w  #$2F,d2 
-                ble.s   loc_1AC9AA
-                bra.w   loc_1AC9AC
-loc_1AC9AA:
+                ble.s   @NextTile
+                bra.w   @Done
+@NextTile:
                 
-                bra.s   loc_1AC942
-loc_1AC9AC:
+                bra.s   @CheckTile_Loop
+@Done:
                 
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  d3,(a0)
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_1AC8A0
+    ; End of function GetLaserFacing
 
-byte_1AC9B8:    dc.b 3                  ; AI-related data, 3 entries, for battles 36, 43 and 0
+tbl_BattlesWithLasers:
+				dc.b 3                  ; AI-related data, 3 entries, for battles 36, 43 and 0
                 dc.b BATTLE_VERSUS_PRISM_FLOWERS
                 dc.b BATTLE_VERSUS_ZEON
                 dc.b BATTLE_VERSUS_ALL_BOSSES
-off_1AC9BC:     dc.l byte_1AC9C8        
-                dc.l byte_1AC9E0        
-                dc.l byte_1AC9F0        
-byte_1AC9C8:    dc.b $FF                ; Prism Flowers battle
+				
+tbl_EnemyFacing_Table:     
+				dc.l tbl_EnemyFacing_Battle_PrismFlowers        
+                dc.l tbl_EnemyFacing_Battle_VersusZeon        
+                dc.l tbl_EnemyFacing_Battle_VersusAllBosses        
+tbl_EnemyFacing_Battle_PrismFlowers:    
+				dc.b $FF                ; Prism Flowers battle
                 dc.b 3
                 dc.b 0
                 dc.b 0
@@ -899,7 +903,9 @@ byte_1AC9C8:    dc.b $FF                ; Prism Flowers battle
                 dc.b $FF
                 dc.b $FF
                 dc.b $FF
-byte_1AC9E0:    dc.b $FF                ; Zeon Battle
+				
+tbl_EnemyFacing_Battle_VersusZeon:    
+				dc.b $FF                ; Zeon Battle
                 dc.b $FF
                 dc.b $FF
                 dc.b $FF
@@ -914,7 +920,9 @@ byte_1AC9E0:    dc.b $FF                ; Zeon Battle
                 dc.b $FF
                 dc.b $FF
                 dc.b $FF
-byte_1AC9F0:    dc.b $FF                ; Secret Bonus Battle
+				
+tbl_EnemyFacing_Battle_VersusAllBosses:    
+				dc.b $FF                ; Secret Bonus Battle
                 dc.b $FF
                 dc.b $FF
                 dc.b $FF
@@ -992,7 +1000,7 @@ loc_1ACA6A:
 sub_1ACA72:
                 
                 movem.l d0-d5/d7-a6,-(sp)
-                move.w  #$1D,d7
+                move.w  #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
 loc_1ACA7C:
                 

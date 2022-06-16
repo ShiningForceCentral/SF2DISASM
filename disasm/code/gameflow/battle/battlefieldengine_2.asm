@@ -538,9 +538,9 @@ CreateTargetGrid:
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 jsr     FindSpellDefAddress
                 cmpi.b  #SPELL_AURA|SPELL_LV4,d1
-                beq.w   loc_C678
+                beq.w   @ChooseTargets
                 cmpi.b  #SPELL_SHINE,d1
-                beq.w   loc_C678
+                beq.w   @ChooseTargets
                 moveq   #0,d2
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),d2
                 addq.b  #1,d2
@@ -549,28 +549,28 @@ CreateTargetGrid:
                 lsl.w   #2,d4
                 adda.w  d4,a1
                 cmpi.b  #SPELL_B_ROCK,d1
-                bne.s   loc_C668
+                bne.s   @AvoidSelfTarget
                 subq.b  #1,d2
-loc_C668:
+@AvoidSelfTarget:
                 
                 moveq   #0,d5
-loc_C66A:
+@PopulateTargetCoordinates_Loop:
                 
                 movea.l -(a1),a0
                 bsr.w   ApplyRelativeCoordListToGrids
                 subq.w  #1,d2
-                bne.s   loc_C66A
-                bra.w   loc_C688
-loc_C678:
+                bne.s   @PopulateTargetCoordinates_Loop
+                bra.w   @Done
+@ChooseTargets:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_C684
-                bsr.w   sub_C68E
-                bra.s   loc_C688
-loc_C684:
+                bne.s   @TargetEnemies
+                bsr.w   MakeTargetAllies
+                bra.s   @Done
+@TargetEnemies:
                 
-                bsr.w   sub_C6D4
-loc_C688:
+                bsr.w   MakeTargetEnemies
+@Done:
                 
                 movem.l (sp)+,d0-a6
                 rts
@@ -581,7 +581,7 @@ loc_C688:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_C68E:
+MakeTargetAllies:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
@@ -612,13 +612,13 @@ loc_C6CE:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_C68E
+    ; End of function MakeTargetAllies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_C6D4:
+MakeTargetEnemies:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
@@ -649,7 +649,7 @@ loc_C714:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_C6D4
+    ; End of function MakeTargetEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1276,16 +1276,16 @@ AdjustSpellTargetPriorityForDifficulty:
                 move.w  d0,d4
                 move.b  d1,d3
                 btst    #COMBATANT_BIT_ENEMY,d0
-                beq.s   loc_CBC0
+                beq.s   @Ally
                 jsr     GetAiActivationFlag
                 move.w  d1,d2
                 rol.w   #4,d2
                 andi.w  #3,d2
-                bra.s   loc_CBC4
-loc_CBC0:
+                bra.s   @Continue
+@Ally:
                 
                 move.w  #2,d2
-loc_CBC4:
+@Continue:
                 
                 move.l  d1,-(sp)
                 bsr.w   GetDifficulty   

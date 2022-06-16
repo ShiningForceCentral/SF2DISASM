@@ -24,7 +24,7 @@ CheckBattle:
 loc_79B2:
                 
                 lea     BattleMapCoordinates(pc), a0
-                moveq   #44,d6          ; HARDCODED number of battles
+                moveq   #BATTLE_MAX_INDEX,d6          ; HARDCODED number of battles
                 clr.w   d7
 loc_79BA:
                 

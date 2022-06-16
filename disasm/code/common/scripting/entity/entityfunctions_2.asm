@@ -90,7 +90,7 @@ sub_44BC0:
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                move.l  #eas_44EF6,$14(a0)
+                move.l  #eas_44EF6,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
@@ -106,7 +106,7 @@ sub_44BD6:
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                move.l  #eas_44F16,$14(a0)
+                move.l  #eas_44F16,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
@@ -122,7 +122,7 @@ MakeEntityIdle:
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                move.l  #eas_Idle,$14(a0)
+                move.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
@@ -154,7 +154,7 @@ SetEntityMovescriptToIdle:
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                move.l  #eas_Standing,$14(a0)
+                move.l  #eas_Standing,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
@@ -171,7 +171,7 @@ AddFollower:
                 move.w  d0,-(sp)
                 bsr.w   GetEntityEntryAddress
                 movea.l (ENTITY_WALKING_PARAMS).l,a1
-                move.l  a1,$14(a0)
+                move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 lea     eas_Follower1(pc), a0
                 move.w  #$2A,d7 
                 jsr     (CopyBytes).w   
@@ -364,7 +364,7 @@ loc_44DD0:
 
 GetEntityEntryAddress:
                 
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0 ; start of entity information
                 adda.w  d0,a0
                 rts

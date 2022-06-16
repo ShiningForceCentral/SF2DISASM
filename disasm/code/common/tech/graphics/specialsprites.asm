@@ -35,20 +35,20 @@ LoadSpecialSprite:
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
                 add.w   d1,d1
-                move.w  rjt_25C5A(pc,d1.w),d1
-                jmp     rjt_25C5A(pc,d1.w)
+                move.w  tbl_SpriteType(pc,d1.w),d1
+                jmp     tbl_SpriteType(pc,d1.w)
 
     ; End of function LoadSpecialSprite
 
-rjt_25C5A:      dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadExplorationSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
+tbl_SpriteType:      dc.w LoadBattleSpecialSprite-tbl_SpriteType
+                dc.w LoadBattleSpecialSprite-tbl_SpriteType
+                dc.w LoadExplorationSpecialSprite-tbl_SpriteType
+                dc.w LoadBattleSpecialSprite-tbl_SpriteType
+                dc.w LoadBattleSpecialSprite-tbl_SpriteType
+                dc.w LoadBattleSpecialSprite-tbl_SpriteType
+                dc.w LoadBattleSpecialSprite-tbl_SpriteType
+                dc.w LoadBattleSpecialSprite-tbl_SpriteType
+                dc.w LoadBattleSpecialSprite-tbl_SpriteType
 
 ; =============== S U B R O U T I N E =======================================
 

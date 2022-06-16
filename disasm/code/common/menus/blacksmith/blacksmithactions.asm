@@ -422,7 +422,7 @@ sub_21E48:
                 move.w  #1,var_20(a6)
 loc_21E5C:
                 
-                move.w  #4,d7
+                move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
                 subq.w  #1,d7
                 lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
 loc_21E66:
@@ -490,7 +490,8 @@ tbl_BlacksmithEligibleClassesList:
 ;
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-                blacksmithClasses HERO, &
+                blacksmithClasses &
+					HERO, &
                     PLDN, &
                     PGNT, &
                     GLDT, &

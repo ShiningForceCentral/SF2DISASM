@@ -147,7 +147,7 @@ loc_1B132E:
                 andi.l  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
                 mulu.w  #BATTLESPRITESET_COMBATANT_ENTRY_SIZE,d1
                 adda.w  d1,a0
-                move.w  $A(a0),d1
+                move.w  BATTLESPRITESET_COMBATANT_OFFSET_SPAWN_CODE(a0),d1
                 andi.w  #$F,d1
                 cmpi.w  #2,d1
                 bge.w   loc_1B1368
@@ -194,7 +194,7 @@ UpdateEnemyStatsForRespawn:
                 bcc.w   loc_1B13E8
                 move.b  d0,d1
                 andi.l  #$7F,d1 
-                mulu.w  #$C,d1
+                mulu.w  #BATTLESPRITESET_COMBATANT_OFFSET_NEXT_ENTRY,d1
                 adda.w  d1,a0
                 clr.w   d3
                 clr.w   d4
@@ -234,7 +234,7 @@ InitEnemyStats:
                 move.b  (a0),d1
                 bsr.w   UpgradeEnemyIndex
                 move.w  d1,d6
-                mulu.w  #$38,d1 
+                mulu.w  #ENEMYDEF_ENTRY_SIZE,d1 
                 lea     tbl_EnemyDefs(pc), a1
                 adda.w  d1,a1
                 move.l  a0,-(sp)
@@ -306,7 +306,7 @@ loc_1B14E2:
 loc_1B14F4:
                 
                 move.b  (a0),(a1)+
-                adda.w  #$C,a0
+                adda.w  #BATTLESPRITESET_COMBATANT_OFFSET_NEXT_ENTRY,a0
                 dbf     d1,loc_1B14F4
                 movem.l (sp)+,d1/a0-a1
                 rts
@@ -494,32 +494,32 @@ GetBattleSpriteSetSubsection:
                 nop
                 movea.l (a0,d0.w),a0
                 tst.b   d2
-                beq.w   loc_1B1698      ; 0 = Section sizes
+                beq.w   @ReturnInfo      ; 0 = Section sizes
                 movea.l a0,a1
                 move.b  (a1),d1
                 lea     4(a0),a0
                 subq.b  #1,d2
-                beq.w   loc_1B1698      ; 1 = Allies
+                beq.w   @ReturnInfo      ; 1 = Allies
                 clr.l   d0
                 move.b  1(a1),d1
                 move.b  (a1),d0
-                mulu.w  #$C,d0
+                mulu.w  #BATTLESPRITESET_COMBATANT_OFFSET_NEXT_ENTRY,d0
                 adda.l  d0,a0
                 subq.b  #1,d2
-                beq.w   loc_1B1698      ; 2 = Enemies
+                beq.w   @ReturnInfo      ; 2 = Enemies
                 clr.l   d0
                 move.b  2(a1),d1
                 move.b  1(a1),d0
-                mulu.w  #$C,d0
+                mulu.w  #BATTLESPRITESET_COMBATANT_OFFSET_NEXT_ENTRY,d0
                 adda.l  d0,a0
                 subq.b  #1,d2
-                beq.w   loc_1B1698      ; 3 = AI-regions
+                beq.w   @ReturnInfo      ; 3 = AI-regions
                 clr.l   d0
                 move.b  3(a1),d1
                 move.b  2(a1),d0
                 mulu.w  #$C,d0
                 adda.l  d0,a0           ; 4 = AI-points
-loc_1B1698:
+@ReturnInfo:
                 
                 movem.l (sp)+,d0/d2/a1
                 rts
@@ -693,19 +693,19 @@ UpgradeBattle:
                 subi.w  #1,d2
                 adda.w  #1,a1
                 clr.w   d3
-loc_1B17DA:
+@ReadRandomBattleList_Loop:
                 
                 move.b  (a1,d3.w),d1
                 cmp.b   d1,d7
-                bne.s   loc_1B17F0
+                bne.s   @CheckNextBattle
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_SetFlag
-                bra.w   loc_1B17F8
-loc_1B17F0:
+                bra.w   @ExitLoop
+@CheckNextBattle:
                 
                 addi.w  #1,d3
-                dbf     d2,loc_1B17DA
-loc_1B17F8:
+                dbf     d2,@ReadRandomBattleList_Loop
+@ExitLoop:
                 
                 movem.l (sp)+,d0-a6
                 rts
