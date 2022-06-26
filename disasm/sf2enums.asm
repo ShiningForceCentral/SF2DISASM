@@ -59,15 +59,15 @@ COMBATANT_ENEMIES_START: equ $80
 COMBATANT_ENEMIES_END: equ $9F
 COMBATANT_ENEMIES_SPACEEND: equ $A0
 
-ENTITY_TOTAL: equ $40
-ENTITY_ALLY_COUNT: equ $20
+; ---------------------------------------------------------------------------
+
+; enum Battle_Entity
+ENTITY_ENEMY_COUNTER: equ $1D
 ENTITY_ALLY_COUNTER: equ $1F
 ENTITY_ENEMY_COUNT: equ $20
-ENTITY_ENEMY_COUNTER: equ $1D
+ENTITY_ALLY_COUNT: equ $20
 ENTITY_TOTAL_COUNTER: equ $3F
-
-TURNORDER_COUNTER: equ $3E
-TURNORDER_ENTRY_SIZE: equ $2
+ENTITY_TOTAL: equ $40
 
 ; ---------------------------------------------------------------------------
 
@@ -181,17 +181,17 @@ STATUSEFFECT_ATTACK: equ $C000
 
 ; ---------------------------------------------------------------------------
 
+; enum StatusEffect_None
+STATUSEFFECT_NONE: equ $0
+
+; ---------------------------------------------------------------------------
+
 ; enum StatusAnimations
 STATUSANIMATION_NONE: equ $0
 STATUSANIMATION_SILENCE_CROSS: equ $1
 STATUSANIMATION_DIZZY_STARS: equ $2
 STATUSANIMATION_ZZZS: equ $3
 STATUSANIMATION_STUN_LINES: equ $4
-
-; ---------------------------------------------------------------------------
-
-; enum StatusEffect_None
-STATUSEFFECT_NONE: equ $0
 
 ; ---------------------------------------------------------------------------
 
@@ -212,8 +212,12 @@ CHAR_STATCAP_DEF: equ $C8
 CHAR_STATCAP_MOV: equ $C8
 CHAR_STATCAP_EXP: equ $C8
 CHAR_STATCAP_AGI_DECREASING: equ $C8
-TWO_TURN_THRESHOLD: equ $80
+
+; ---------------------------------------------------------------------------
+
+; enum BattleTurnProperties
 TURN_AGILITY_MASK: equ $7F
+TWO_TURN_THRESHOLD: equ $80
 
 ; ---------------------------------------------------------------------------
 
@@ -532,7 +536,7 @@ SPELLPOWER_ENHANCED: equ $63
 
 ; ---------------------------------------------------------------------------
 
-; enum AI codes
+; enum AiCodes
 AI_0: equ $0
 AI_1: equ $1
 AI_2: equ $2
@@ -552,19 +556,18 @@ AI_SWARM: equ $F
 
 ; ---------------------------------------------------------------------------
 
-; enum EnemyAI
+; enum EnemyAi
 ENEMYAI_THRESHOLD_HEAL1: equ $2
+ENEMYAI_MIN_MP_HEAL1: equ $3
+ENEMYAI_MIN_MP_HEAL2: equ $5
+ENEMYAI_MIN_MP_AURA1: equ $7
+ENEMYAI_MIN_MP_HEAL3: equ $B
+ENEMYAI_MIN_MP_AURA2: equ $B
 ENEMYAI_THRESHOLD_HEAL2: equ $E
+ENEMYAI_MIN_MP_AURA3: equ $12
+ENEMYAI_MIN_MP_HEAL4: equ $14
 ENEMYAI_THRESHOLD_HEAL3: equ $1C
-
-MIN_MP_HEAL1: equ $3
-MIN_MP_HEAL2: equ $5
-MIN_MP_HEAL3: equ $B
-MIN_MP_HEAL4: equ $14
-MIN_MP_AURA1: equ $7
-MIN_MP_AURA2: equ $B
-MIN_MP_AURA3: equ $12
-MIN_MP_AURA4: equ $1E
+ENEMYAI_MIN_MP_AURA4: equ $1E
 
 ; ---------------------------------------------------------------------------
 
@@ -697,7 +700,6 @@ EQUIPEFFECTS_MAX_INDEX: equ $11
 ; enum Deals
 DEALS_ADD_AMOUNT_ODD: equ $1
 DEALS_MAX_NUMBER_PER_ITEM: equ $F
-DEALS_ITEMS_LONGWORDS_COUNTER: equ $F
 DEALS_BIT_REMAINDER: equ $10
 DEALS_ADD_AMOUNT_EVEN: equ $10
 DEALS_ITEMS_COUNTER: equ $7F
@@ -705,6 +707,7 @@ DEALS_ITEMS_COUNTER: equ $7F
 ; ---------------------------------------------------------------------------
 
 ; enum Blacksmith
+BLACKSMITH_ORDERS_COUNTER: equ $3
 BLACKSMITH_MAX_ORDERS_NUMBER: equ $4
 BLACKSMITH_ORDER_COST: equ $1388
 
@@ -712,7 +715,6 @@ BLACKSMITH_ORDER_COST: equ $1388
 
 ; enum Caravan
 CARAVAN_ITEM_ENTRY_SIZE: equ $1
-CARAVAN_ITEMS_LONGWORD_COUNTER: equ $F
 CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE: equ $3F
 CARAVAN_MAX_ITEMS_NUMBER: equ $40
 
@@ -918,8 +920,6 @@ EQUIPMENTTYPE_RING: equ $FFFF
 ; enum MithrilWeaponsProperties
 MITHRILWEAPON_SLOT_SIZE: equ $2
 MITHRILWEAPONS_PER_CLASS_COUNTER: equ $3
-MITHRILWEAPON_SLOTS_COUNTER: equ $3
-MITHRILWEAPON_SLOTS_NUMBER: equ $4
 MITHRILWEAPON_CLASSES_COUNTER: equ $7
 
 ; ---------------------------------------------------------------------------
@@ -937,6 +937,7 @@ MAP_NULLPOSITION: equ $FFFF
 ENTITYDEF_OFFSET_X: equ $0
 ENTITYDEF_OFFSET_Y: equ $2
 ENTITYDEF_OFFSET_XVELOCITY: equ $4
+ENTITYDEF_SIZE_BITS: equ $5
 ENTITYDEF_OFFSET_YVELOCITY: equ $6
 ENTITYDEF_OFFSET_XTRAVEL: equ $8
 ENTITYDEF_OFFSET_YTRAVEL: equ $A
@@ -955,23 +956,22 @@ ENTITYDEF_OFFSET_FLAGS_A: equ $1C
 ENTITYDEF_OFFSET_FLAGS_B: equ $1D
 ENTITYDEF_OFFSET_ANIMCOUNTER: equ $1E
 ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER: equ $1F
-ENTITYDEF_NEXT_ENTITY: equ $20
-
+ENTITYDEF_SIZE: equ $20
+NEXT_ENTITYDEF: equ $20
 ENTITYDEF_SECOND_ENTITY_XDEST: equ $2C
 ENTITYDEF_SECOND_ENTITY_YDEST: equ $2E
 ENTITYDEF_SECOND_ENTITY_MAPSPRITE: equ $33
 ENTITYDEF_ENTITY32_XDEST: equ $3EC
 ENTITYDEF_ENTITY32_YDEST: equ $3EE
 
-ENTITY_SPECIAL_SPRITE_INDEX: equ $2F
-ENTITY_UNITCURSOR_INDEX: equ $30
+; ---------------------------------------------------------------------------
 
-ENTITYDEF_SIZE_BITS: equ $5
-ENTITYDEF_SIZE: equ $20
+; enum Entities
+ENTITY_PLAYER_CHARACTER: equ $0
+ENTITY_SPECIAL_SPRITE: equ $2F
+ENTITY_UNIT_CURSOR: equ $30
+ENTITY_UNIT_CURSOR_ADDRESS: equ $AF02
 
-RAM_ADDRESS_PLANE_A: equ PLANE_A_MAP_LAYOUT-$FF0000
-RAM_ADDRESS_PLANE_B: equ PLANE_B_LAYOUT-$FF0000
-ENTITYADDRESS_UNIT_CURSOR: equ ENTITY_UNIT_CURSOR-$FF0000
 ; ---------------------------------------------------------------------------
 
 ; enum SoundCommands
@@ -1147,12 +1147,6 @@ SPELLANIMATION_VARIATION3: equ $40
 SPELLANIMATION_VARIATION4: equ $60
 SPELLANIMATION_MIRRORED: equ $80
 
-SUMMON_DAO: equ $0
-SUMMON_NEPTUNE: equ $2
-SUMMON_APOLLO: equ $3
-SUMMON_ATLAS: equ $1
-
-
 ; ---------------------------------------------------------------------------
 
 ; enum SpellAnimation_Variation1
@@ -1170,6 +1164,14 @@ SPELLANIMATION_BIT_MIRRORED: equ $7
 SPELLANIMATION_VARIANT_MASK: equ $3
 SPELLANIMATION_MASK_INDEX: equ $1F
 SPELLANIMATION_MASK_INDEX_AND_VARIATION: equ $7F
+
+; ---------------------------------------------------------------------------
+
+; enum Summons
+SUMMON_DAO: equ $0
+SUMMON_ATLAS: equ $1
+SUMMON_NEPTUNE: equ $2
+SUMMON_APOLLO: equ $3
 
 ; ---------------------------------------------------------------------------
 
@@ -1298,10 +1300,14 @@ SPELLENTRY_LOWERMASK_LV: equ $3
 SPELLENTRY_LEVELS_NUMBER: equ $4
 SPELLENTRY_OFFSET_LV: equ $6
 SPELLENTRY_INDEX_BITSIZE: equ $6
+SPELLENTRY_SPELLS_NUMBER: equ $2A
 SPELLENTRY_MASK_INDEX: equ $3F
 SPELLENTRY_MASK_LV: equ $C0
 SPELLENTRY_MASK_INDEX_AND_LV: equ $FF
 
+; ---------------------------------------------------------------------------
+
+; enum SpellEntryLevels
 SPELLENTRY_LV1: equ $0
 SPELLENTRY_LV2: equ $1
 SPELLENTRY_LV3: equ $2
@@ -1491,7 +1497,7 @@ NOT_CURRENTLY_IN_BATTLE: equ $FF
 ; ---------------------------------------------------------------------------
 
 ; enum BattlesProperties
-BATTLES_NUMBER: equ $2C
+BATTLES_MAX_NUMBER: equ $2C
 
 ; ---------------------------------------------------------------------------
 
@@ -1536,16 +1542,6 @@ BATTLESCENE_STACK_NEGSIZE: equ $FF68
 
 ; enum Def_Lengths
 BITS_HALFBYTE: equ $4
-
-LONGWORD_GAMEFLAGS_COUNTER: equ $1F
-LONGWORD_DEALS_COUNTER: equ $F
-LONGWORD_CARAVAN_COUNTER: equ $F
-
-LONGWORD_GAMEFLAGS_VALUE: equ $0
-LONGWORD_DEALS_VALUE: equ $0
-LONGWORD_CARAVAN_VALUE: equ $7F7F7F7F
-
-LONGWORD_WINDOW_ENTRIES_COUNTER: equ $1F
 
 ; ---------------------------------------------------------------------------
 
@@ -2352,8 +2348,6 @@ ANIM_COUNTER: equ $D
 
 ; ---------------------------------------------------------------------------
 
-SIZE_PALETTE: equ $20
-
 ; enum Fading
 IN_FROM_BLACK: equ $1
 OUT_TO_BLACK: equ $2
@@ -3101,12 +3095,12 @@ BATTLESPRITESET_COMBATANT_OFFSET_AI_TRIGGER_REGION: equ $7
 BATTLESPRITESET_COMBATANT_OFFSET_MOVE_TO_POSITION: equ $8
 BATTLESPRITESET_COMBATANT_OFFSET_9: equ $9
 BATTLESPRITESET_COMBATANT_OFFSET_AI_ACTIVATION_FLAG: equ $A
-BATTLESPRITESET_COMBATANT_OFFSET_NEXT_ENTRY: equ $C
 
 ; ---------------------------------------------------------------------------
 
 ; enum BattleSpriteSet_Combatant_Properties
 BATTLESPRITESET_COMBATANT_ENTRY_SIZE: equ $C
+NEXT_BATTLESPRITESET_COMBATANT: equ $C
 
 ; ---------------------------------------------------------------------------
 
@@ -3172,6 +3166,7 @@ END_GAME_TIMER: equ $2A30
 
 ; enum Cram
 CRAM_LONGWORDS_COUNTER: equ $1F
+CRAM_PALETTE_SIZE: equ $20
 CRAM_COLORS_COUNTER: equ $3F
 CRAM_SIZE: equ $80
 
@@ -3186,6 +3181,12 @@ SRAM_STRING_LENGTH: equ $24
 SAVE_SLOT_REAL_SIZE: equ $FB0
 SAVE_SLOT_SIZE: equ $1F60
 SRAM_COUNTER: equ $1FFF
+
+; ---------------------------------------------------------------------------
+
+; enum Vram
+VRAM_ADDRESS_PLANE_A: equ $C000
+VRAM_ADDRESS_PLANE_B: equ $E000
 
 ; ---------------------------------------------------------------------------
 
@@ -3266,3 +3267,14 @@ AICOMMAND_SPECIAL_MOVE5: equ $13
 AICOMMAND_PARAM_HEAL: equ $0
 AICOMMAND_PARAM_HEAL2: equ $1
 AICOMMAND_PARAM_HEAL3: equ $2
+
+; ---------------------------------------------------------------------------
+
+; enum GameSettings
+LONGWORD_GAMEFLAGS_INITVALUE: equ $0
+LONGWORD_DEALS_INITVALUE: equ $0
+LONGWORD_DEALS_COUNTER: equ $F
+LONGWORD_CARAVAN_COUNTER: equ $F
+LONGWORD_GAMEFLAGS_COUNTER: equ $1F
+LONGWORD_WINDOW_ENTRIES_COUNTER: equ $1F
+LONGWORD_CARAVAN_INITVALUE: equ $7F7F7F7F

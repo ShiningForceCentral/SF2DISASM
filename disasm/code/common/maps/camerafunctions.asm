@@ -99,7 +99,7 @@ loc_469C:
                 move.w  #$18,d7
 loc_46A0:
                 
-                cmpi.b  #$30,((VIEW_TARGET_ENTITY-$1000000)).w
+                cmpi.b  #ENTITY_UNIT_CURSOR,((VIEW_TARGET_ENTITY-$1000000)).w
                 bne.s   loc_46AA
                 moveq   #$40,d7 
 loc_46AA:

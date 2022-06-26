@@ -426,7 +426,7 @@ cs_5EF60:       textCursor 3739
 
 csub_5F14C:
                 
-                lea     tbl_NaskaShip_Spectrum(pc), a0
+                lea     plt_NazcaShip(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   
@@ -454,8 +454,7 @@ loc_5F16E:
 
     ; End of function sub_5F16C
 
-tbl_NaskaShip_Spectrum:
-				dc.w 0
+plt_NazcaShip:  dc.w 0
                 dc.w $C40
                 dc.w $E84
                 dc.w $26

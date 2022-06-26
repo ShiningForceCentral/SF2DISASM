@@ -226,7 +226,7 @@ loc_11D6C:
                 move.w  d1,ENTITYDEF_OFFSET_Y(a0)
                 move.w  d0,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
-                move.b  #$40,ENTITYDEF_OFFSET_LAYER(a0) 
+                move.b  #64,ENTITYDEF_OFFSET_LAYER(a0)
                 andi.b  #$7F,ENTITYDEF_OFFSET_FLAGS_B(a0) 
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_11DBC

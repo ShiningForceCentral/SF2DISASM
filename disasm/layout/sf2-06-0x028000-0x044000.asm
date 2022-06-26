@@ -5,18 +5,11 @@
 
 
                 include "code\common\tech\pointers\s06_textbankspointer.asm"    ; Game Section 06 Text Banks Pointer
-j_InitDecoder:                
-                jmp     InitDecoder(pc) 
-j_HuffmanDecode:                
-                jmp     HuffmanDecode(pc)
+                include "code\common\tech\jumpinterfaces\s06_jumpinterface_1.asm"    ; Game Section 06 Jump Interface, part 1
                 include "code\common\tech\pointers\s06_pointers.asm"    ; Game Section 06 Pointers
-j_DisplaySegaLogo:                
-                jmp     DisplaySegaLogo(pc)
+                include "code\common\tech\jumpinterfaces\s06_jumpinterface_2.asm"    ; Game Section 06 Jump Interface, part 2
                 include "code\common\tech\pointers\s06_gamestaffpointer.asm"    ; Game Section 06 Game Staff Pointer
-j_EndKissPictureSequence:                
-                jmp     EndKissPictureSequence(pc)
-j_LoadTitleScreenFont:                
-                jmp     LoadTitleScreenFont(pc)
+                include "code\common\tech\jumpinterfaces\s06_jumpinterface_3.asm"    ; Game Section 06 Jump Interface, part 3
                 include "code\specialscreens\segalogo\segalogo_0.asm"    ; SEGA logo functions
                 include "data\tech\configurationmodeinputsequence.asm"    ; Configuration mode input sequence
                 align

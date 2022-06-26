@@ -151,7 +151,7 @@ Promote:
 InitGameSettings:
                 
                 movem.l d0/d7-a0,-(sp)
-                moveq   #LONGWORD_GAMEFLAGS_VALUE,d0
+                moveq   #LONGWORD_GAMEFLAGS_INITVALUE,d0
                 lea     ((GAME_FLAGS-$1000000)).w,a0
                 moveq   #LONGWORD_GAMEFLAGS_COUNTER,d7
 @ClearGameFlags_Loop:
@@ -166,7 +166,7 @@ InitGameSettings:
                 move.l  d0,(a0)+
                 dbf     d7,@ClearDealsItems_Loop
                 
-                move.l  #LONGWORD_CARAVAN_VALUE,d0
+                move.l  #LONGWORD_CARAVAN_INITVALUE,d0
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
                 moveq   #LONGWORD_CARAVAN_COUNTER,d7
 @ClearCaravanItems_Loop:
@@ -256,7 +256,7 @@ GetFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
-; determine who is in the force or not based on flags and update RAM lists
+; Determine who is in the force or not based on flags and update RAM lists.
 
 
 UpdateForce:
@@ -293,6 +293,7 @@ UpdateForce:
                 
                 addq.b  #1,d0
                 dbf     d7,@MemberStatus_Loop
+                
                 move.w  d2,((TARGETS_LIST_LENGTH-$1000000)).w
                 move.w  d3,((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w
                 move.w  d4,((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w

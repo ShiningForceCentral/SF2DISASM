@@ -188,7 +188,7 @@ loc_5FD68:
 
 sub_5FD7C:
                 
-                bsr.w   sub_5FD92       
+                bsr.w   sub_5FD92
                 moveq   #$17,d7
 loc_5FD82:
                 

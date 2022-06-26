@@ -265,58 +265,60 @@ sub_1A028:
 
 TintScreen:
                 
+                module
                 clr.w   d0
                 move.b  ((CURRENT_SPELLANIMATION-$1000000)).w,d0
                 add.w   d0,d0
                 move.w  rjt_TintScreenFunctions(pc,d0.w),d0
                 jsr     rjt_TintScreenFunctions(pc,d0.w)
-                bra.w   loc_1A088
+                bra.w   @Continue
 
     ; End of function TintScreen
 
 rjt_TintScreenFunctions:
-				dc.w Tint_None-rjt_TintScreenFunctions 		; None
-                dc.w Tint_Red-rjt_TintScreenFunctions		; Blaze
-                dc.w Tint_Greyscale-rjt_TintScreenFunctions		; Freeze
-                dc.w Tint_Greyscale-rjt_TintScreenFunctions		; Desoul
-                dc.w Tint_None-rjt_TintScreenFunctions		; Healing Fairy
-                dc.w Tint_Dim-rjt_TintScreenFunctions		; Blast
-                dc.w Tint_None-rjt_TintScreenFunctions		; Detox
-                dc.w Tint_Dark-rjt_TintScreenFunctions		; Bolt
-                dc.w Tint_None-rjt_TintScreenFunctions		; Buff1
-                dc.w Tint_None-rjt_TintScreenFunctions		; Debuff1
-                dc.w Tint_None-rjt_TintScreenFunctions		; Magic Drain
-                dc.w Tint_Dim-rjt_TintScreenFunctions		; Demon Breath
-                dc.w Tint_Red-rjt_TintScreenFunctions		; Flame Breath
-                dc.w Tint_None-rjt_TintScreenFunctions		; Arrows and Spears
-                dc.w Tint_None-rjt_TintScreenFunctions		; Cannon Projectile
-                dc.w Tint_None-rjt_TintScreenFunctions		; Shot Projectile
-                dc.w Tint_None-rjt_TintScreenFunctions		; Gunner Projectile
-                dc.w Tint_None-rjt_TintScreenFunctions		; Dao
-                dc.w Tint_Apollo-rjt_TintScreenFunctions	; Apollo
-                dc.w Tint_None-rjt_TintScreenFunctions		; Neptun
-                dc.w Tint_None-rjt_TintScreenFunctions		; Atlas
-                dc.w Tint_Dark-rjt_TintScreenFunctions		; Prism Laser
-                dc.w Tint_None-rjt_TintScreenFunctions		; Bubble Breath
-                dc.w Tint_Greyscale-rjt_TintScreenFunctions		; Snowstorm
-                dc.w Tint_None-rjt_TintScreenFunctions		; Cutoff
-                dc.w Tint_None-rjt_TintScreenFunctions		; Buff2
-                dc.w Tint_None-rjt_TintScreenFunctions		; SFCD Attack
-                dc.w Tint_None-rjt_TintScreenFunctions		; Debuff2
-                dc.w Tint_None-rjt_TintScreenFunctions		; Debuff3
-                dc.w Tint_None-rjt_TintScreenFunctions		; PHNK Attack
-                dc.w Tint_None-rjt_TintScreenFunctions		; Burst Rock Explosion
-                dc.w Tint_None-rjt_TintScreenFunctions		; Odd Beam
+                dc.w Tint_None-rjt_TintScreenFunctions ; None
+                dc.w Tint_Red-rjt_TintScreenFunctions ; Blaze
+                dc.w Tint_Greyscale-rjt_TintScreenFunctions ; Freeze
+                dc.w Tint_Greyscale-rjt_TintScreenFunctions ; Desoul
+                dc.w Tint_None-rjt_TintScreenFunctions ; Healing Fairy
+                dc.w Tint_Dim-rjt_TintScreenFunctions ; Blast
+                dc.w Tint_None-rjt_TintScreenFunctions ; Detox
+                dc.w Tint_Dark-rjt_TintScreenFunctions ; Bolt
+                dc.w Tint_None-rjt_TintScreenFunctions ; Buff1
+                dc.w Tint_None-rjt_TintScreenFunctions ; Debuff1
+                dc.w Tint_None-rjt_TintScreenFunctions ; Magic Drain
+                dc.w Tint_Dim-rjt_TintScreenFunctions ; Demon Breath
+                dc.w Tint_Red-rjt_TintScreenFunctions ; Flame Breath
+                dc.w Tint_None-rjt_TintScreenFunctions ; Arrows and Spears
+                dc.w Tint_None-rjt_TintScreenFunctions ; Cannon Projectile
+                dc.w Tint_None-rjt_TintScreenFunctions ; Shot Projectile
+                dc.w Tint_None-rjt_TintScreenFunctions ; Gunner Projectile
+                dc.w Tint_None-rjt_TintScreenFunctions ; Dao
+                dc.w Tint_Apollo-rjt_TintScreenFunctions ; Apollo
+                dc.w Tint_None-rjt_TintScreenFunctions ; Neptun
+                dc.w Tint_None-rjt_TintScreenFunctions ; Atlas
+                dc.w Tint_Dark-rjt_TintScreenFunctions ; Prism Laser
+                dc.w Tint_None-rjt_TintScreenFunctions ; Bubble Breath
+                dc.w Tint_Greyscale-rjt_TintScreenFunctions ; Snowstorm
+                dc.w Tint_None-rjt_TintScreenFunctions ; Cutoff
+                dc.w Tint_None-rjt_TintScreenFunctions ; Buff2
+                dc.w Tint_None-rjt_TintScreenFunctions ; SFCD Attack
+                dc.w Tint_None-rjt_TintScreenFunctions ; Debuff2
+                dc.w Tint_None-rjt_TintScreenFunctions ; Debuff3
+                dc.w Tint_None-rjt_TintScreenFunctions ; PHNK Attack
+                dc.w Tint_None-rjt_TintScreenFunctions ; Burst Rock
+                dc.w Tint_None-rjt_TintScreenFunctions ; Odd Eye Beam
 
 ; START OF FUNCTION CHUNK FOR TintScreen
 
-loc_1A088:
+@Continue:
                 
                 jsr     (ApplyVIntCramDma).w
                 jmp     (EnableDmaQueueProcessing).w
 
 ; END OF FUNCTION CHUNK FOR TintScreen
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -563,12 +565,12 @@ sub_1A19E:
 ; =============== S U B R O U T I N E =======================================
 
 
-Tint_Blue:
+TintScreen_Blue:
                 
                 bsr.s   sub_1A19E       
                 bra.w   sub_1A0E2       
 
-    ; End of function Tint_Blue
+    ; End of function TintScreen_Blue
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -601,12 +603,12 @@ sub_1A1CA:
 ; =============== S U B R O U T I N E =======================================
 
 
-Tint_Green:
+TintScreen_Green:
                 
                 bsr.s   sub_1A1CA       
                 bra.w   sub_1A0E2       
 
-    ; End of function Tint_Green
+    ; End of function TintScreen_Green
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -710,11 +712,12 @@ sub_1A270:
                 lea     ((PALETTE_1_BASE-$1000000)).w,a1
                 move.w  $52(a0),-(sp)
                 move.l  $5A(a0),-(sp)
-                moveq   #$1F,d7
-loc_1A286:
+                moveq   #CRAM_LONGWORDS_COUNTER,d7
+@Loop:
                 
                 move.l  (a1)+,(a0)+
-                dbf     d7,loc_1A286
+                dbf     d7,@Loop
+                
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 move.l  (sp)+,$5A(a0)
                 move.w  (sp)+,$52(a0)
@@ -2001,8 +2004,7 @@ sa19_Buff2:
 loc_1ABAC:
                 
                 movem.w d0-d1,-(sp)
-                trap    #0
-                dc.w SFX_SPELL_CAST
+                sndCom  SFX_SPELL_CAST
                 move.w  #BUFF_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
                 bsr.w   ClearSpellAnimationProperties
@@ -3101,6 +3103,7 @@ byte_1B4F0:     dc.b $C
                 dc.b $9A
                 dc.b $B
                 dc.b $46
+                
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -3221,7 +3224,7 @@ loc_1B604:
     ; End of function sa18_CutOff
 
                 modend
-
+                
 word_1B608:     dc.w $138
                 dc.w $110
                 dc.w $520
@@ -3361,7 +3364,7 @@ loc_1B732:
                 bsr.w   sub_19F5E
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1B756
                 move.w  #$38,2(a0) 
                 bra.s   loc_1B75C
@@ -4931,7 +4934,7 @@ loc_1C3E6:
                 subi.w  #$80,d2 
                 move.w  (a4),d3
                 subi.w  #$70,d3 
-                bsr.w   sub_19FAA
+                bsr.w   sub_19FAA       
                 addi.w  #$30,VDPSPRITE_OFFSET_TILE(a4) 
                 addi.w  #$30,$C(a4) 
                 addi.w  #$30,$14(a4) 
@@ -5025,7 +5028,7 @@ sub_1C4D8:
                 move.w  d0,-(sp)
                 moveq   #$26,d0 
                 moveq   #4,d1
-                bsr.w   sub_19FAA
+                bsr.w   sub_19FAA       
                 lea     (byte_FFAFC6).l,a0
                 move.b  d4,(a0)+
                 move.b  d4,(a0)+
@@ -6201,7 +6204,7 @@ loc_1CEDA:
                 moveq   #8,d3
 loc_1CEDC:
                 
-                bsr.w   sub_19FAA
+                bsr.w   sub_19FAA       
                 addq.w  #1,2(a5)
                 move.w  #2,4(a5)
                 bra.w   loc_1CF84
@@ -6395,7 +6398,7 @@ loc_1D090:
                 jsr     (GenerateRandomNumber).w
                 add.w   2(a3),d7
                 move.w  d7,d3
-                jsr     sub_19FAA
+                jsr     sub_19FAA       
                 bra.w   loc_1D0D4
 loc_1D0C2:
                 
@@ -7373,7 +7376,7 @@ loc_1D8DC:
                 add.w   $A(a3),d7
                 move.w  d7,d3
                 moveq   #1,d1
-                bsr.w   sub_19FAA
+                bsr.w   sub_19FAA       
                 moveq   #4,d6
                 jsr     (GenerateRandomNumber).w
                 lsr.w   #1,d7
@@ -7700,7 +7703,7 @@ loc_1DBDE:
                 moveq   #$26,d0 
                 moveq   #$C,d1
                 lea     byte_1DC88(pc), a0
-                bsr.w   sub_19FAA
+                bsr.w   sub_19FAA       
                 moveq   #4,d0
                 moveq   #$B,d1
 loc_1DBEE:
@@ -9946,7 +9949,7 @@ VInt_UpdateBattlesceneGraphics:
                 clr.b   ((byte_FFB56D-$1000000)).w
                 bsr.w   UpdateEnemyBattleSprite
                 bsr.w   UpdateAllyBattleSprite
-                bsr.w   UpdateStatusEffectSprites
+                bsr.w   UpdateStatusEffectAnimations
                 bsr.w   sub_1F282
                 bsr.w   UpdateSpellAnimation
                 bsr.w   sub_1F148
@@ -10172,7 +10175,7 @@ return_1EFD6:
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateStatusEffectSprites:
+UpdateStatusEffectAnimations:
                 
                 clr.w   d7
                 move.b  ((byte_FFB580-$1000000)).w,d7
@@ -10250,7 +10253,7 @@ loc_1F082:
                 move.b  #2,(word_FFAFB2).l
                 rts
 
-    ; End of function UpdateStatusEffectSprites
+    ; End of function UpdateStatusEffectAnimations
 
 
 ; =============== S U B R O U T I N E =======================================

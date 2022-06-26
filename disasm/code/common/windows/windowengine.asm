@@ -15,6 +15,7 @@ InitWindowProperties:
                 
                 clr.l   (a0)+
                 dbf     d7,@Clear_Loop
+                
                 move.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END-$1000000)).w
                 move.w  (sp)+,d7
                 movea.l (sp)+,a0

@@ -4,6 +4,10 @@
 ; FREE SPACE : 38 bytes.
 
 
+                include "code\common\tech\jumpinterfaces\s03_jumpinterface_1.asm"    ; Game Section 03 Jump Interface, part 1
+                include "code\common\tech\pointers\s03_pointers.asm"    ; Game Section 03 Pointers
+                include "code\common\tech\jumpinterfaces\s03_jumpinterface_2.asm"    ; Game Section 03 Jump Interface, part 2
+                include "code\common\tech\pointers\s03_memberstatuswindowlayoutpointer.asm"    ; Game Section 03 Member Status Window Layout Pointer
                 include "code\common\menus\menuengine_01.asm"    ; Menu engine
                 include "data\graphics\tech\menus\diamondmenulayout.asm"    ; Diamond menu layout
                 include "data\graphics\tech\menus\magicmenulayout.asm"    ; Magic menu layout
@@ -31,8 +35,7 @@
                 include "code\common\menus\menuengine_08.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\alphabetwindowlayout.asm"    ; Alphabet window layout
                 include "data\graphics\tech\windowlayouts\namecharacterentrywindowlayout.asm"    ; Name character entry window layout
-AlphabetHighlightTiles:
-                incbin "data/graphics/tech/alphabethighlighttiles.bin"
+                include "data\graphics\tech\alphabethighlight\entries.asm"    ; Alphabet Highlight Tiles
                 include "code\common\menus\menuengine_09.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\timerwindowlayout.asm"    ; Timer window layout
                 include "code\specialscreens\witch\witchmainmenu.asm"    ; Witch main menu

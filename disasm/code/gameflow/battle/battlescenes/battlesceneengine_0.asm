@@ -1,46 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\battlesceneengine_0.asm :
-; 0x18000..0x197C8 : Battlescene engine
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_nullsub_18010:
-                
-                jmp     nullsub_18010(pc)
-
-    ; End of function j_nullsub_18010
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_InitializeBattlescene:
-                
-                jmp     InitializeBattlescene(pc)
-
-    ; End of function j_InitializeBattlescene
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_ExecuteBattlesceneScript:
-                
-                jmp     ExecuteBattlesceneScript(pc)
-
-    ; End of function j_ExecuteBattlesceneScript
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_EndBattlescene:
-                
-                jmp     EndBattlescene(pc)
-
-    ; End of function j_EndBattlescene
-
+; 0x18010..0x197C8 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -262,7 +222,7 @@ InitializeBattlescene:
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDmaOnCompressedTiles).w
                 
-                bsr.w   AdjustBattlespriteAnimationsForStatusEffects
+                bsr.w   ApplyStatusEffectsToAnimations
                 move.w  ((ALLY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w,d0
                 lsr.w   #1,d0
                 move.w  d0,((ALLY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
@@ -2038,13 +1998,13 @@ return_1928A:
 ; =============== S U B R O U T I N E =======================================
 
 
-AdjustBattlespriteAnimationsForStatusEffects:
+ApplyStatusEffectsToAnimations:
                 
-                bsr.w	ApplyStatusEffectsToAllyAnimation
+                bsr.w   ApplyStatusEffectsToAllyAnimation
                 bsr.s   ApplyStatusEffectsToEnemyAnimation
-                bra.w   UpdateStatusEffectSprites
+                bra.w   UpdateStatusEffectAnimations
 
-    ; End of function AdjustBattlespriteAnimationsForStatusEffects
+    ; End of function ApplyStatusEffectsToAnimations
 
 
 ; =============== S U B R O U T I N E =======================================

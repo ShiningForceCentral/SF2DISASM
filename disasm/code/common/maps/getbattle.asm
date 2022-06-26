@@ -26,7 +26,7 @@ CheckBattle:
 @Continue:
                 
                 lea     BattleMapCoordinates(pc), a0
-                moveq   #BATTLES_NUMBER,d6
+                moveq   #BATTLES_MAX_NUMBER,d6
                 clr.w   d7
 @Loop:
                 

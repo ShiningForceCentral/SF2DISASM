@@ -4,110 +4,7 @@
 ; FREE SPACE : 2931 bytes.
 
 
-sub_44000:                
-                jmp     sub_440D4(pc)
-j_InitMapEntities:                
-                jmp     InitMapEntities(pc)
-j_MoveEntitiesToBattlePositions:                
-                jmp     MoveEntitiesToBattlePositions(pc)
-sub_4400C:                
-                jmp     sub_45634(pc)
-j_WaitForEntityToStopMoving:                
-                jmp     WaitForEntityToStopMoving(pc)
-j_SetControlledEntityActScript:                
-                jmp     SetControlledEntityActScript(pc)
-j_MakeEntityIdle:                
-                jmp     MakeEntityIdle(pc)
-j_ApplyInitActscript:                
-                jmp     ApplyInitActscript(pc)
-j_SetEntityMovescriptToIdle:                
-                jmp     SetEntityMovescriptToIdle(pc)
-j_SetUnitCursorSpeedx2:                
-                jmp     SetUnitCursorSpeedx2(pc)
-j_SetUnitCursorActscript:                
-                jmp     SetUnitCursorActscript(pc)
-sub_4402C:                
-                jmp     sub_44BC0(pc)
-sub_44030:                
-                jmp     sub_44BD6(pc)
-j_DebugMapScript:                
-                jmp     DebugMapScript(pc)
-j_nullsub_4712A:                
-                jmp     nullsub_4712A(pc)
-j_ExecuteMapScript:                
-                jmp     ExecuteMapScript(pc)
-j_ExecuteBattleCutscene_Intro:                
-                jmp     ExecuteBattleCutscene_Intro(pc)
-j_ExecuteBattleCutscene_Start:                
-                jmp     ExecuteBattleCutscene_Start(pc)
-j_ExecuteBattleCutscene_Defeated:                
-                jmp     ExecuteBattleCutscene_Defeated(pc)
-j_ExecuteAfterBattleCutscene:                
-                jmp     ExecuteAfterBattleCutscene(pc)
-j_ApplyPositionsAfterEnemyLeaderDies:                
-                jmp     ApplyPositionsAfterEnemyLeaderDies(pc)
-j_ExecuteBattleRegionCutscene:                
-                jmp     ExecuteBattleRegionCutscene(pc)
-j_LaunchFading:                
-                jmp     LaunchFading(pc)
-j_OrientSpriteLeft_bis:                
-                jmp     OrientSpriteLeft(pc)
-j_OrientSpriteLeft:                
-                jmp     OrientSpriteLeft(pc)
-j_OrientSpriteRight:                
-                jmp     OrientSpriteRight(pc)
-j_ResizeSprite:                
-                jmp     ResizeSprite(pc)
-j_ApplyMinorSpriteCropEffect:                
-                jmp     ApplyMinorSpriteCropEffect(pc)
-j_ApplySpriteImmersedEffect:                
-                jmp     ApplySpriteImmersedEffect(pc)
-j_ApplySpriteGhostEffect:                
-                jmp     ApplySpriteGhostEffect(pc)
-sub_44078:                
-                jmp     sub_474EE(pc)
-j_RunMapSetupEntityEvent:                
-                jmp     RunMapSetupEntityEvent(pc)
-j_RunMapSetupZoneEvent:                
-                jmp     RunMapSetupZoneEvent(pc)
-j_RunMapSetupEntityEvent_0:                
-                jmp     RunMapSetupEntityEvent(pc)
-; triggers a map setup function according to up to 4 criterias in d1-d4
-j_RunMapSetupItemEvent:                
-                jmp     RunMapSetupItemEvent(pc)
-j_GetMapSetupEntities:                
-                jmp     GetMapSetupEntityList(pc)
-j_MapEventType3:                
-                jmp     MapEventType3(pc)
-j_MapEventType5:                
-                jmp     MapEventType5(pc)
-; related to followers maybe
-j_MapEventType2:                
-                jmp     MapEventType2(pc)
-j_MapEventType4:                
-                jmp     MapEventType4(pc)
-j_ShrinkIntoCaravanBowieAndFollowers:                
-                jmp     ShrinkIntoCaravanBowieAndFollowers(pc)
-j_GrowOutBowieAndFollowers:                
-                jmp     GrowOutBowieAndFollowers(pc)
-j_RunMapSetupInitFunction:                
-                jmp     RunMapSetupInitFunction(pc)
-sub_440AC:                
-                jmp     sub_441AA(pc)
-j_GetAllyMapSprite:                
-                jmp     GetAllyMapSprite(pc)
-j_RunMapSetupAreaDescription:                
-                jmp     RunMapSetupAreaDescription(pc)
-sub_440B8:                
-                jmp     sub_444A2(pc)
-j_PlayIntroOrEndCutscene:                
-                jmp     PlayIntroOrEndCutscene(pc)
-j_ExecuteFlashScreenScript:                
-                jmp     ExecuteFlashScreenScript(pc)
-j_GetEntityPortaitAndSpeechSfx:                
-                jmp     GetEntityPortaitAndSpeechSfx(pc)
-j_ClearEntities:                
-                jmp     ClearEntities(pc)
+                include "code\common\tech\jumpinterfaces\s07_jumpinterface.asm"    ; Game Section 07 Jump Interface
                 include "code\common\scripting\map\mapfunctions.asm"    ; Map functions
                 include "data\maps\global\overworldmaps.asm"    ; Overworld maps
                 include "code\common\scripting\map\followersfunctions_1.asm"    ; Follower functions, part 1
@@ -153,6 +50,7 @@ j_ClearEntities:
                 include "code\gameflow\battle\afterbattlecutscenesend.asm"    ; After battle cutscenes function end
                 include "data\battles\global\afterbattlejoins.asm"    ; After battle joins (unused)
                 include "code\gameflow\battle\afterenemyleaderdeathpositions.asm"    ; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
+                include "data\battles\afterbattlepositions.asm"    ; After battle positions
                 include "code\gameflow\battle\regionactivatedcutscenes.asm"    ; Region-activated cutscenes functions
                 include "data\battles\global\regionactivatedcutscenes.asm"    ; Region-activated cutscenes data
                 include "code\common\tech\graphics\flashwhite.asm"    ; Flash white function and script

@@ -6,7 +6,7 @@
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndex = -32
+promotionSectionOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -329,7 +329,7 @@ ChurchMenuActions:
                 cmpi.w  #0,cannotPromoteFlag(a6)
                 bne.w   @CheckRegularPromo
                 clr.w   promotionItem(a6)
-                move.w  promotionIndex(a6),d7
+                move.w  promotionSectionOffset(a6),d7
                 subq.b  #1,d7
                 move.w  #PROMOTIONSECTION_SPECIAL_ITEM,d2
                 bsr.w   FindPromotionSection
@@ -372,7 +372,7 @@ ChurchMenuActions:
                 move.w  #PROMOTIONSECTION_SPECIAL_PROMO,d2
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
-                move.w  promotionIndex(a6),d7
+                move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
                 clr.w   d0
 @GetSpecialClass_Loop:
@@ -411,7 +411,7 @@ ChurchMenuActions:
                 move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
                 move.w  currentClass(a6),d1
                 bsr.w   GetPromotionData
-                move.w  promotionIndex(a6),d7
+                move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
                 move.w  #1,d2
                 bsr.w   FindPromotionSection
@@ -421,7 +421,7 @@ ChurchMenuActions:
                 
                 move.b  (a0)+,d0
                 dbf     d7,@GetNewClass_Loop
-				
+                
                 move.w  d0,newClass(a6)
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w

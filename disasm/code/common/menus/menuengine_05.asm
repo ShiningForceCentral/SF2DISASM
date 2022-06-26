@@ -400,7 +400,7 @@ loc_12CB2:
                 move.b  ((FRAME_COUNTER-$1000000)).w,d0
                 andi.w  #1,d0
                 lsl.w   #4,d0
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 lea     (SPRITE_16).l,a1
                 moveq   #$2F,d7 
@@ -436,7 +436,7 @@ loc_12D04:
                 cmpi.w  #$7000,d0
                 beq.w   loc_12D6E
                 move.w  var_30(a6),d1
-                bra.w   loc_12D34
+                bra.w   loc_12D34       
 loc_12D26:
                 
                 move.w  (a0),d0
@@ -445,7 +445,7 @@ loc_12D26:
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
 loc_12D34:
                 
-                ext.l   d0
+                ext.l   d0              ; show combatants on minimap
                 ext.l   d1
                 divs.w  #$60,d0 
                 divs.w  #$60,d1 
@@ -471,9 +471,9 @@ loc_12D64:
                 move.w  d0,(a1)+
 loc_12D6E:
                 
-                lea     $20(a0),a0
+                lea     NEXT_ENTITYDEF(a0),a0
                 move.l  a0,d0
-                cmpi.w  #$AF02,d0
+                cmpi.w  #ENTITY_UNIT_CURSOR_ADDRESS,d0
                 bne.s   loc_12D7E
                 lea     ((ENTITY_DATA-$1000000)).w,a0
 loc_12D7E:

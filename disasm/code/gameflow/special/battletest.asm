@@ -219,6 +219,7 @@ LevelUpWholeForce:
                 bsr.w   j_LevelUp
                 addq.w  #1,d0
                 dbf     d7,@Loop
+                
                 rts
 
     ; End of function LevelUpWholeForce

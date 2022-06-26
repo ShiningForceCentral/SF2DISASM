@@ -10,7 +10,7 @@
 MapEventType2:
                 
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 script  cs_45284
                 lea     byte_45316(pc), a1
                 bsr.s   ApplyActscriptToFollowers
@@ -69,7 +69,7 @@ word_4531E:      ac_branch
 MapEventType4:
                 
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 script  cs_45348
                 lea     byte_45368(pc), a1
                 bsr.w   ApplyActscriptToFollowers
@@ -126,7 +126,7 @@ MapEventType3:
                 bsr.w   sub_454AC
                 bne.w   return_453F0
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 clr.b   ((byte_FFAFB0-$1000000)).w
                 script  cs_453F2
                 lea     byte_45434(pc), a1
@@ -176,7 +176,7 @@ MapEventType5:
                 
                 bsr.w   sub_454E4
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 move.b  #1,((byte_FFAFB0-$1000000)).w
                 script  cs_45470
                 lea     byte_45488(pc), a1
@@ -198,14 +198,14 @@ eas_4548C:       ac_moveFacRelPos 0,1
                  ac_waitDest
 word_45498:      ac_branch
                 dc.w (eas_Idle-word_45498) & $FFFF
-word_4549C:     dc.w $180
+word_4549C:     dc.w 384
 word_4549E:     dc.w 0
                 dc.w 0
-                dc.w $FE80
-                dc.w $FE80
+                dc.w -384
+                dc.w -384
                 dc.w 0
                 dc.w 0
-                dc.w $180
+                dc.w 384
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -245,8 +245,8 @@ sub_454E4:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.w  $C(a0),d0
-                move.w  $E(a0),d1
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
                 ext.l   d0
                 ext.l   d1
                 divs.w  #$180,d0
@@ -267,9 +267,9 @@ ShrinkIntoCaravanBowieAndFollowers:
                 
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 moveq   #1,d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 script  ms_BowieShrinkIn
                 lea     eas_ShrinkIn(pc), a1
                 bsr.w   ApplyActscriptToFollowers
@@ -317,7 +317,7 @@ word_455A8:      ac_branch
 GrowOutBowieAndFollowers:
                 
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 script  ms_BowieGrowOut
                 lea     eas_GrowOut(pc), a1
                 bsr.w   ApplyActscriptToFollowers

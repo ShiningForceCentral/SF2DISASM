@@ -386,7 +386,7 @@ promotionItems: macro
     endr
     endm
     
-blacksmithClasses: macro
+classes: macro
     dc.w narg
     rept narg
     defineShorthand.w CLASS_,\1
@@ -394,12 +394,12 @@ blacksmithClasses: macro
     endr
     endm
     
-mithrilWeaponClass: macro
-    dc.w narg
-    rept narg
-    defineShorthand.w CLASS_,\1
-    shift
-    endr
+blacksmithClasses: macro    ; alias
+    classes \1
+    endm
+    
+mithrilWeaponClass: macro   ; alias
+    classes \1
     endm
     
 mithrilWeapons: macro

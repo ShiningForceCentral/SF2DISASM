@@ -22,7 +22,7 @@ loc_237A4:
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
-                move.w  (a0,d0.w),d1
+                move.w  (a0,d0.w),d1    ; get X
                 move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d2
                 move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3
                 move.b  ENTITYDEF_OFFSET_LAYER(a0,d0.w),d4
@@ -75,7 +75,7 @@ loc_23820:
 loc_2382A:
                 
                 addq.w  #1,d0
-                lea     ENTITYDEF_NEXT_ENTITY(a0),a0
+                lea     NEXT_ENTITYDEF(a0),a0
                 dbf     d7,loc_237FE
                 moveq   #$FFFFFFFF,d0
                 bra.w   loc_23840
