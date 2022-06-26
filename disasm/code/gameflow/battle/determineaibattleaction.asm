@@ -33,30 +33,30 @@ DetermineAiBattleaction:
                 clr.w   d3
                 lea     ((FF8804_LOADING_SPACE-$1000000)).w,a0 ; # targets reachable by phsyical attack
                 tst.w   (a0)
-                beq.s   loc_EDFC
+                beq.s   @CheckSpellViability
                 bset    #0,d3
-loc_EDFC:
+@CheckSpellViability:
                 
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 tst.w   (a0)
-                beq.s   loc_EE08
+                beq.s   @CheckItemViability
                 bset    #1,d3
-loc_EE08:
+@CheckItemViability:
                 
                 lea     ((TARGETS_REACHABLE_BY_ITEM_NUMBER-$1000000)).w,a0
                 tst.w   (a0)
-                beq.s   loc_EE14
+                beq.s   @CheckResults
                 bset    #2,d3
-loc_EE14:
+@CheckResults:
                 
                 tst.b   d3
-                bne.s   loc_EE24        
+                bne.s   @TakeAction        
                                         ; If no targets
                 moveq   #BATTLEACTION_STAY,d2
                 move.w  #$FFFF,d0
                 moveq   #0,d1
                 bra.w   loc_F1CC
-loc_EE24:
+@TakeAction:
                 
                 
                 ; Check spell and item use
@@ -64,7 +64,7 @@ loc_EE24:
                 move.b  d3,d4           ; d3 = first three bits are set if targets are in range of a physical attack, spell, or item, respectively.
                 andi.b  #6,d4           ; #6 = 0110, so this ignores the physical and looks only at spell and item ranges
                 tst.b   d4
-                bne.s   loc_EE48
+                bne.s   @UseSpellorItem
                 lea     ((FF8804_LOADING_SPACE-$1000000)).w,a0 ; physical -- # targets reachable
                 lea     ((TARGETS_REACHABLE_BY_ATTACK_LIST-$1000000)).w,a1
                 lea     ((ATTACK_MOVEMENT_TO_REACHABLE_TARGETS-$1000000)).w,a2
@@ -73,7 +73,7 @@ loc_EE24:
                 bra.w   loc_EF2E
                                         ; Targets are in range of either the spell or item for the AI.
                                         ; Remember that if the AI lacks a spell or item, it is replaced with a physical attack.
-loc_EE48:
+@UseSpellorItem:
                 
                 move.w  d4,d1
                 andi.b  #6,d1
@@ -180,20 +180,20 @@ loc_EF2E:
                 move.w  (a0),d3
                 subi.w  #1,d3
                 clr.b   d4
-loc_EF36:
+@GetHighestPriority_Loop:
                 
                 cmp.b   (a3,d3.w),d4
-                bgt.s   loc_EF40        
+                bgt.s   @IsLowerPriority        
                 move.b  (a3,d3.w),d4
-loc_EF40:
+@IsLowerPriority:
                 
-                dbf     d3,loc_EF36     ; cycle through all targets and populate d4 with the highest priority.
+                dbf     d3,@GetHighestPriority_Loop     ; cycle through all targets and populate d4 with the highest priority.
                 
                 move.b  d4,priority(a6)
                 cmpi.b  #15,d4
-                bge.s   loc_EF52        ; if >= 15 priority (which usually means a target is going to die)
-                bra.w   loc_EF8E        ; if < 15 priority
-loc_EF52:
+                bge.s   @CriticalPriority        ; if >= 15 priority (which usually means a target is going to die)
+                bra.w   @NoncriticalPriority        ; if < 15 priority
+@CriticalPriority:
                 
                 move.b  #15,priority(a6) ; if priority > 15, only save 15 as the priority
                 lea     ((TARGETS_LIST-$1000000)).w,a4
@@ -202,24 +202,24 @@ loc_EF52:
                 clr.w   d5
                                         ; loop through all potential targets and identify all that equal the highest priority,
                                         ; storing that information in a4 and a6
-loc_EF64:
+@CriticalPriority_Loop:
                 
                 cmp.b   (a3,d3.w),d4    ; d4 = highest target priority
-                bgt.s   loc_EF80
+                bgt.s   @NotCriticalPriority
                 move.b  (a1,d3.w),(a4,d5.w)
                 move.l  a6,-(sp)
                 adda.w  d5,a6
                 move.b  (a2,d3.w),movementsList(a6) ; movement to each reachable target
                 movea.l (sp)+,a6
                 addi.w  #1,d5
-loc_EF80:
+@NotCriticalPriority:
                 
-                dbf     d3,loc_EF64     
+                dbf     d3,@CriticalPriority_Loop     
                 
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a4
                 move.w  d5,(a4)         ; # targets that have the maximum priority
-                bra.w   loc_EFC0        ; branch for < 15 target priority (no kills)
-loc_EF8E:
+                bra.w   @ChooseTarget        ; branch for < 15 target priority (no kills)
+@NoncriticalPriority:
                 
                 ; This is an exact duplicate of the "priority >= 15" script,
                 ; except this branch doesn't cap priority at 15.
@@ -227,33 +227,33 @@ loc_EF8E:
                 move.w  (a0),d3
                 subi.w  #1,d3
                 clr.w   d5
-loc_EF9A:
+@HighestPriority_Loop:
                 
                 cmp.b   (a3,d3.w),d4
-                bne.s   loc_EFB6
+                bne.s   @NotHighestPriority
                 move.b  (a1,d3.w),(a4,d5.w)
                 move.l  a6,-(sp)
                 adda.w  d5,a6
                 move.b  (a2,d3.w),movementsList(a6)
                 movea.l (sp)+,a6
                 addi.w  #1,d5
-loc_EFB6:
+@NotHighestPriority:
                 
-                dbf     d3,loc_EF9A
+                dbf     d3,@HighestPriority_Loop
                 
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a4
                 move.w  d5,(a4)
-loc_EFC0:
+@ChooseTarget:
                 
                 cmpi.b  #1,d5
-                bne.s   loc_EFD8        ; if more than one highest priority target
+                bne.s   @MultipleTargets        ; if more than one highest priority target
                                         ; else, select the single highest priority target as the target
                 lea     ((TARGETS_LIST-$1000000)).w,a4
                 move.b  (a4),d0         ; combatant index of the selected target
                 move.b  priority(a6),d1
                 move.b  battleaction(a6),d2
                 bra.w   loc_F1CC
-loc_EFD8:
+@MultipleTargets:
                 
                 
                 ; At this point, the address registers are as follows:
@@ -272,12 +272,12 @@ loc_EFD8:
                 move.w  d4,d6
                 lea     ((TARGETS_LIST-$1000000)).w,a5
                 clr.l   d5
-loc_EFFA:
+@CopyList_Loop:
                 
                 move.b  (a5)+,targetsList(a6,d5.w) ; copy targets list
                 addq.l  #1,d5
                 subq.w  #1,d4
-                bne.s   loc_EFFA        ; repeat through the full list
+                bne.s   @CopyList_Loop        ; repeat through the full list
                 bra.w   loc_F172
 loc_F008:
                 
@@ -305,12 +305,12 @@ loc_F034:
                 jsr     GetMoveType     ; D1 = value between 0-13 representing the move type (centaur, animal, aquatic, etc.)
                 clr.l   d3
                 move.b  d1,d3
-                lea     (off_D982).l,a4 
+                lea     (pt_AttackPriorityForMoveType).l,a4 
                 lsl.l   #2,d3
                 movea.l (a4,d3.l),a4
                 cmpi.b  #BATTLEACTION_CAST_SPELL,battleaction(a6)
                 bne.s   loc_F05E
-                lea     (byte_D921).l,a4
+                lea     (tbl_AttackPriority_Mage).l,a4
 loc_F05E:
                 
                 clr.l   d4
@@ -337,9 +337,9 @@ loc_F088:
                 clr.l   d0
                 move.b  targetsList(a6,d4.w),d0
                 btst    #COMBATANT_BIT_ENEMY,d0
-                beq.s   loc_F098
+                beq.s   @ConsiderClass
                 bra.w   loc_F0D8
-loc_F098:
+@ConsiderClass:
                 
                 jsr     GetClass        
                 cmp.b   (a4,d5.w),d1
@@ -367,7 +367,7 @@ loc_F0A8:
 loc_F0D8:
                 
                 addq.b  #1,d4
-                cmpi.b  #$30,d4 
+                cmpi.b  #$30,d4  ; max num targets
                 blt.s   loc_F0EE
                 move.b  #$FF,d0
                 clr.w   d1
@@ -381,7 +381,7 @@ loc_F0EE:
 loc_F0F4:
                 
                 addq.b  #1,d5
-                cmpi.b  #$20,d5 
+                cmpi.b  #CLASS_NUMBER_TOTAL,d5 
                 bge.s   loc_F0FE
                 bra.s   loc_F086
 loc_F0FE:
@@ -477,4 +477,3 @@ loc_F1CC:
                 rts
 
     ; End of function DetermineAiBattleaction
-

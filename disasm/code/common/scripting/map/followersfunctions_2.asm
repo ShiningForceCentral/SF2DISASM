@@ -41,8 +41,8 @@ loc_443D6:
                 jsr     j_CheckFlag
                 movem.w (sp)+,d1
                 beq.s   loc_443FA
-                move.l  (a6)+,$14(a0)
-                lea     $20(a0),a0
+                move.l  (a6)+,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
+                lea     ENTITYDEF_NEXT_ENTITY(a0),a0
 loc_443FA:
                 
                 addq.l  #4,a4
@@ -62,7 +62,7 @@ sub_44404:
                 
                 cmpi.b  #PLAYERTYPE_RAFT,((PLAYER_TYPE-$1000000)).w
                 bne.s   byte_44420      
-                move.b  #$3D,((ENTITY_MAPSPRITE-$1000000)).w 
+                move.b  #MAPSPRITE_RAFT,((ENTITY_MAPSPRITE-$1000000)).w 
                 bsr.w   sub_4446C
                 move.w  #$40,d1 
                 move.w  d1,d2

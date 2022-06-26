@@ -233,7 +233,7 @@ ControlUnitCursor:
                 mulu.w  #$180,d3
                 moveq   #$30,d0 
                 jsr     j_SetUnitCursorSpeedx2
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 move.w  d2,(a0)
@@ -287,9 +287,9 @@ ControlBattleEntity:
                 adda.w  d0,a1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d0
                 move.w  d0,-(sp)
-                move.b  $11(a1),d0
+                move.b  ENTITYDEF_OFFSET_LAYER(a1),d0
                 lsl.b   #4,d0
-                move.b  d0,$11(a1)
+                move.b  d0,ENTITYDEF_OFFSET_LAYER(a1)
                 jsr     (WaitForVInt).w
                 move.b  #$21,ENTITYDEF_OFFSET_ENTNUM(a1) 
                 bsr.w   UpdateBattleEntitySprite
@@ -307,9 +307,9 @@ ControlBattleEntity:
                 beq.s   @Loop
                 
                 clr.b   (a0,d0.w)
-                move.b  $11(a1),d0
+                move.b  ENTITYDEF_OFFSET_LAYER(a1),d0
                 lsr.b   #4,d0
-                move.b  d0,$11(a1)
+                move.b  d0,ENTITYDEF_OFFSET_LAYER(a1)
                 move.w  (sp)+,d0
                 move.b  d0,ENTITYDEF_OFFSET_ENTNUM(a1)
                 bsr.w   UpdateBattleEntitySprite
@@ -342,7 +342,7 @@ UpdateBattleEntityPosition:
                 addi.w  #$C0,d2 
                 ext.l   d2
                 divs.w  #$180,d2
-                move.w  2(a1),d3
+                move.w  ENTITYDEF_OFFSET_Y(a1),d3
                 addi.w  #$C0,d3 
                 ext.l   d3
                 divs.w  #$180,d3
@@ -410,23 +410,23 @@ GetEntityIndexForCombatant:
 GetEntityEventIndex:
                 
                 movem.l d1/d7-a0,-(sp)
-                moveq   #$40,d7 
+                moveq   #ENTITY_TOTAL,d7 
                 move.w  d0,d1
                 clr.w   d0
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
-loc_22F58:
+@GetIndex_Loop:
                 
                 cmp.b   (a0)+,d1
-                beq.w   loc_22F70
+                beq.w   @EntityHasEvent
                 addq.w  #1,d0
-                cmpi.w  #$20,d0 
-                bne.s   loc_22F6A
+                cmpi.w  #ENTITY_ALLY_COUNT,d0 
+                bne.s   @Ally
                 move.w  #$80,d0 
-loc_22F6A:
+@Ally:
                 
-                dbf     d7,loc_22F58
+                dbf     d7,@GetIndex_Loop
                 clr.w   d0
-loc_22F70:
+@EntityHasEvent:
                 
                 movem.l (sp)+,d1/d7-a0
                 rts
@@ -457,13 +457,13 @@ MoveBattleEntityByMoveString:
                 bsr.s   GetEntityIndexForCombatant_0
                 move.w  d0,var_2(a6)
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d0
                 move.w  d0,-(sp)
-                move.b  $11(a1),d0
+                move.b  ENTITYDEF_OFFSET_LAYER(a1),d0
                 lsl.b   #4,d0
-                move.b  d0,$11(a1)
+                move.b  d0,ENTITYDEF_OFFSET_LAYER(a1)
                 jsr     (WaitForVInt).w
                 move.b  #$21,ENTITYDEF_OFFSET_ENTNUM(a1) 
                 bsr.w   UpdateBattleEntitySprite
@@ -494,21 +494,21 @@ loc_22FE8:
                 move.b  ENTITYDEF_OFFSET_YSPEED(a1),d5
                 move.w  ENTITYDEF_OFFSET_XDEST(a1),d0
                 cmp.w   (a1),d0
-                bne.s   loc_23026
+                bne.s   @CalculateTravel_X
                 clr.w   d4
-loc_23026:
+@CalculateTravel_X:
                 
                 sub.w   (a1),d0
-                bpl.s   loc_2302E
+                bpl.s   @CheckTravel_Y
                 neg.w   d0
                 neg.w   d4
-loc_2302E:
+@CheckTravel_Y:
                 
                 move.w  ENTITYDEF_OFFSET_YDEST(a1),d1
                 cmp.w   ENTITYDEF_OFFSET_Y(a1),d1
-                bne.s   loc_2303A
+                bne.s   @CalculateTravel_Y
                 clr.w   d5
-loc_2303A:
+@CalculateTravel_Y:
                 
                 sub.w   ENTITYDEF_OFFSET_Y(a1),d1
                 bpl.s   loc_23044
@@ -516,14 +516,14 @@ loc_2303A:
                 neg.w   d5
 loc_23044:
                 
-                move.w  d0,8(a1)
-                move.w  d1,$A(a1)
+                move.w  d0,ENTITYDEF_OFFSET_XTRAVEL(a1)
+                move.w  d1,ENTITYDEF_OFFSET_YTRAVEL(a1)
                 andi.b  #$F0,ENTITYDEF_OFFSET_FLAGS_A(a1)
                 move.b  -1(a0),d0
                 cmp.b   -2(a0),d0
                 beq.s   loc_2306A
-                move.w  d4,4(a1)
-                move.w  d5,6(a1)
+                move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a1)
+                move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a1)
                 ori.b   #3,ENTITYDEF_OFFSET_FLAGS_A(a1)
 loc_2306A:
                 
@@ -540,9 +540,9 @@ loc_23074:
                 bra.w   loc_22FE8
 loc_2308E:
                 
-                move.b  $11(a1),d0
+                move.b  ENTITYDEF_OFFSET_LAYER(a1),d0
                 lsr.b   #4,d0
-                move.b  d0,$11(a1)
+                move.b  d0,ENTITYDEF_OFFSET_LAYER(a1)
                 move.w  (sp)+,d0
                 move.b  d0,ENTITYDEF_OFFSET_ENTNUM(a1)
                 bsr.w   UpdateBattleEntitySprite
@@ -758,15 +758,15 @@ sub_23256:
                 mulu.w  #$180,d3
                 mulu.w  #$180,d4
                 mulu.w  #$180,d5
-                moveq   #$30,d0 
+                moveq   #ENTITY_UNITCURSOR_INDEX,d0 
                 jsr     sub_4402C
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 move.w  d4,(a0)
-                move.w  d5,2(a0)
-                move.w  d2,$C(a0)
-                move.w  d3,$E(a0)
+                move.w  d5,ENTITYDEF_OFFSET_Y(a0)
+                move.w  d2,ENTITYDEF_OFFSET_XDEST(a0)
+                move.w  d3,ENTITYDEF_OFFSET_YDEST(a0)
                 bsr.w   sub_23414
                 bsr.w   WaitForUnitCursor
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
@@ -812,7 +812,7 @@ SetUnitCursorDestinationToNextBattleEntity:
                 moveq   #ENTITY_UNITCURSOR_INDEX,d0
                 jsr     j_SetUnitCursorActscript
                 jsr     (WaitForVInt).w
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 move.w  d4,(a0)
@@ -828,8 +828,8 @@ SetUnitCursorDestinationToNextBattleEntity:
 loc_23328:
                 
                 bsr.w   sub_23414
-                move.w  8(a0),d0
-                move.w  $A(a0),d1
+                move.w  ENTITYDEF_OFFSET_XTRAVEL(a0),d0
+                move.w  ENTITYDEF_OFFSET_YTRAVEL(a0),d1
                 lsr.w   #7,d0
                 lsr.w   #7,d1
                 addi.w  #$10,d0
@@ -937,9 +937,9 @@ sub_23414:
                 
                 clr.w   d4
                 clr.w   d5
-                move.b  $1A(a0),d4
-                move.b  $1B(a0),d5
-                move.w  $C(a0),d0
+                move.b  ENTITYDEF_OFFSET_XSPEED(a0),d4
+                move.b  ENTITYDEF_OFFSET_YSPEED(a0),d5
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
                 cmp.w   (a0),d0
                 bne.s   loc_2342A
                 clr.w   d4
@@ -951,22 +951,22 @@ loc_2342A:
                 neg.w   d4
 loc_23432:
                 
-                move.w  $E(a0),d1
-                cmp.w   2(a0),d1
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
+                cmp.w   ENTITYDEF_OFFSET_Y(a0),d1
                 bne.s   loc_2343E
                 clr.w   d5
 loc_2343E:
                 
-                sub.w   2(a0),d1
+                sub.w   ENTITYDEF_OFFSET_Y(a0),d1
                 bpl.s   loc_23448
                 neg.w   d1
                 neg.w   d5
 loc_23448:
                 
-                move.w  d0,8(a0)
-                move.w  d1,$A(a0)
-                move.w  d4,4(a0)
-                move.w  d5,6(a0)
+                move.w  d0,ENTITYDEF_OFFSET_XTRAVEL(a0)
+                move.w  d1,ENTITYDEF_OFFSET_YTRAVEL(a0)
+                move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
+                move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a0)
                 rts
 
     ; End of function sub_23414
@@ -979,9 +979,9 @@ SetEntityBlinkingFlag:
                 
                 movem.l d0/a0,-(sp)
                 bsr.w   GetEntityIndexForCombatant
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                bset    #7,$1D(a0,d0.w)
+                bset    #7,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
                 movem.l (sp)+,d0/a0
                 rts
 
@@ -995,9 +995,9 @@ ClearEntityBlinkingFlag:
                 
                 movem.l d0/a0,-(sp)
                 bsr.w   GetEntityIndexForCombatant
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                bclr    #7,$1D(a0,d0.w)
+                bclr    #7,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
                 movem.l (sp)+,d0/a0
                 rts
 
@@ -1222,7 +1222,7 @@ SetEntityPosition:
                 
                 movem.l d0/a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 move.w  d1,(a0)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a0)

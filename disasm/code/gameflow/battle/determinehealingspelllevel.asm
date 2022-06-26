@@ -32,14 +32,14 @@ DetermineHealingSpellLevel:
                 moveq   #0,d2
                 cmpi.w  #ENEMYAI_THRESHOLD_HEAL2,d1 ; 14
                 bls.w   loc_CDB8
-                cmpi.w  #2,d5           ; check if spell level > 2
+                cmpi.w  #SPELLENTRY_LV3,d5           ; check if spell level > 2
                 bcs.w   loc_CDB8
-                moveq   #2,d2
+                moveq   #SPELLENTRY_LV3,d2
                 cmpi.w  #ENEMYAI_THRESHOLD_HEAL3,d1 ; 28
                 bls.w   loc_CDB8
-                cmpi.w  #3,d5           ; check if spell level > 3
+                cmpi.w  #SPELLENTRY_LV4,d5           ; check if spell level > 3
                 bcs.w   loc_CDB8
-                moveq   #3,d2
+                moveq   #SPELLENTRY_LV4,d2
 loc_CDB8:
                 
                 move.w  d3,d0

@@ -28,15 +28,15 @@ loc_75FC:
                 moveq   #1,d2
                 moveq   #UP,d3
                 lea     SavepointMapCoordinates(pc), a0
-loc_7608:
+@FindEgressEntry_Loop:
                 
                 cmpi.b  #$FF,(a0)
-                beq.w   byte_7620       
+                beq.w   byte_7620       ; No match
                 cmp.b   (a0),d0
-                beq.s   loc_7618        
+                beq.s   @EgressEntryFound        
                 addq.l  #4,a0
-                bra.s   loc_7608
-loc_7618:
+                bra.s   @FindEgressEntry_Loop
+@EgressEntryFound:
                 
                 move.b  (a0)+,d0        ; map
                 move.b  (a0)+,d1        ; x
@@ -44,22 +44,23 @@ loc_7618:
                 move.b  (a0)+,d3        ; facing
 byte_7620:
                 
+                ; No match
                 chkFlg  64              ; Raft is unlocked
-                beq.s   loc_764A
+                beq.s   @Done
                 lea RaftResetMapCoordinates-4(pc),a0 ; Some egress locations imply to put the raft back in an initial place
-loc_762A:
+@FindRaftEntry_Loop:
                 
                 addq.l  #4,a0
                 cmpi.b  #$FF,(a0)
-                beq.w   loc_7638
+                beq.w   @RaftEntryNotFound
                 cmp.b   (a0),d0         ; If found egress map matches entry map, then move raft back to given location
-                bne.s   loc_762A
-loc_7638:
+                bne.s   @FindRaftEntry_Loop
+@RaftEntryNotFound:
                 
                 move.b  1(a0),((RAFT_MAP-$1000000)).w
                 move.b  2(a0),((RAFT_X-$1000000)).w
                 move.b  3(a0),((RAFT_Y-$1000000)).w
-loc_764A:
+@Done:
                 
                 movea.l (sp)+,a0
                 rts

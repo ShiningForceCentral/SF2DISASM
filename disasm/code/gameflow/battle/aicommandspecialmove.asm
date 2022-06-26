@@ -30,14 +30,14 @@ loc_E9B2:
                 move.b  d2,var_4(a6)
                 bsr.w   GetCurrentMOV
                 tst.b   d1
-                bne.s   loc_E9DE
+                bne.s   @CanMove
                 move.b  #$FF,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   loc_EB7A
-loc_E9DE:
+@CanMove:
                 
                 bsr.w   GetAiSpecialMoveOrders
                 cmpi.b  #$FF,d1
@@ -195,4 +195,3 @@ loc_EB9C:
                 rts
 
     ; End of function ExecuteAiCommand_SpecialMove
-

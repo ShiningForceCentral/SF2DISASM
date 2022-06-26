@@ -156,19 +156,19 @@ DeclareNewEntity:
                 move.l  a0,-(sp)
                 move.w  d0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 move.w  (sp)+,d0
                 move.w  d1,(a0)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a0)
-                clr.l   4(a0)
-                clr.l   8(a0)
+                clr.l   ENTITYDEF_OFFSET_XVELOCITY(a0)
+                clr.l   ENTITYDEF_OFFSET_XTRAVEL(a0)
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  d3,ENTITYDEF_OFFSET_FACING(a0)
                 move.b  d6,ENTITYDEF_OFFSET_ENTNUM(a0)
                 swap    d6
-                move.b  d6,$11(a0)
+                move.b  d6,ENTITYDEF_OFFSET_LAYER(a0)
                 swap    d6
                 move.b  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 tst.l   d5
@@ -199,7 +199,7 @@ loc_44634:
 loc_4463C:
                 
                 move.l  d5,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
-                clr.l   $18(a0)
+                clr.l   ENTITYDEF_OFFSET_XACCEL(a0)
                 move.w  #$E040,ENTITYDEF_OFFSET_FLAGS_A(a0)
                 move.b  d0,ENTITYDEF_OFFSET_ANIMCOUNTER(a0)
                 move.b  d0,ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER(a0)
@@ -220,14 +220,14 @@ ClearEntities:
                 move.w  #$30,d7 
 loc_44666:
                 
-                move.l  #$70007000,(a0)+
-                clr.l   (a0)+
-                clr.l   (a0)+
-                move.l  #$70007000,(a0)+
-                clr.l   (a0)+
-                clr.l   (a0)+
-                clr.l   (a0)+
-                clr.l   (a0)+
+                move.l  #$70007000,(a0)+	; set location off map
+                clr.l   (a0)+				; clear travel info
+                clr.l   (a0)+				; clear travel info
+                move.l  #$70007000,(a0)+	; set destination off map
+                clr.l   (a0)+				; 
+                clr.l   (a0)+				; clear actscriptaddr
+                clr.l   (a0)+				; clear accel/speed
+                clr.l   (a0)+				; 
                 dbf     d7,loc_44666
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 moveq   #$F,d7

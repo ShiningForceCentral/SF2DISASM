@@ -214,19 +214,19 @@ sub_454AC:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.w  $C(a0),d0
-                move.w  $E(a0),d1
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
                 clr.w   d3
-                move.b  $10(a0),d3
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d3
                 lsl.w   #2,d3
                 add.w   word_4549C(pc,d3.w),d0
                 add.w   word_4549E(pc,d3.w),d1
-                sub.w   $3EC(a0),d0
+                sub.w   ENTITYDEF_ENTITY32_XDEST(a0),d0
                 bpl.s   loc_454D4
                 neg.w   d0
 loc_454D4:
                 
-                sub.w   $3EE(a0),d1
+                sub.w   ENTITYDEF_ENTITY32_YDEST(a0),d1
                 bpl.s   loc_454DC
                 neg.w   d1
 loc_454DC:

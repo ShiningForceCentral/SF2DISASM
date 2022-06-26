@@ -79,8 +79,8 @@ ExecuteAiCommand_Heal:
                 bsr.w   GetCurrentMP    ; d1 = current MP
                 cmpi.w  #SPELL_HEAL,d2  ; HARDCODED spell index
                 bne.s   @CheckAura      
-                cmpi.w  #3,d1           ; HARDCODED required MP amount
-                bge.s   @Goto_CastSpell ; if at least 3 MP is available to cast Heal (any level)
+                cmpi.w  #MIN_MP_HEAL1,d1           ; HARDCODED required MP amount
+                bge.s   @Goto_CastSpell  ; if at least 3 MP is available to cast Heal (any level)
                 bra.w   @CheckHealingItem ; if 3 MP is not available
                 bra.s   @CheckAura      
 @Goto_CastSpell:
@@ -90,7 +90,7 @@ ExecuteAiCommand_Heal:
                 
                 cmpi.w  #SPELL_AURA,d2  ; HARDCODED spell index
                 bne.s   @CheckHealingItem
-                cmpi.w  #7,d1           ; HARDCODED required MP amount
+                cmpi.w  #MIN_MP_AURA1,d1           ; HARDCODED required MP amount
                 bge.s   @Goto_CastSpell_0 ; if at least 7 MP is available to cast Aura (any level)
                 bra.w   @CheckHealingItem ; if 7 MP is not available
                 bra.s   @CheckHealingItem
@@ -302,14 +302,14 @@ ExecuteAiCommand_Heal:
                 ; If is a lv 1 spell and the target is not the spell user, then do an additional MP check
                 move.b  caster(a6),d0
                 bsr.w   GetCurrentMP    ; d1 = current MP
-                cmpi.b  #11,d1
+                cmpi.b  #MIN_MP_HEAL3,d1
                 blt.s   @UpdateSpellEntry ; if less than 11 MP
                 move.b  spellEntry(a6),d0
                 lsr.b   #6,d0
                 andi.b  #SPELLENTRY_LOWERMASK_LV,d0
-                cmpi.b  #2,d0
+                cmpi.b  #SPELLENTRY_LV3,d0
                 blt.s   @UpdateSpellEntry ; if best spell available is lv 1 or lv 2
-                move.b  #1,d2           ; if more than 11 MP and a lv 3+ spell is available but lv 1 is selected to cast on someone other than the caster, then use the lv 2 version of the spell instead
+                move.b  #SPELLENTRY_LV2,d2           ; if more than 11 MP and a lv 3+ spell is available but lv 1 is selected to cast on someone other than the caster, then use the lv 2 version of the spell instead
 @UpdateSpellEntry:
                 
                 move.b  spellEntry(a6),d0

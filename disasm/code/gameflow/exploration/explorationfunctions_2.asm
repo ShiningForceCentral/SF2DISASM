@@ -264,11 +264,11 @@ loc_259CC:
                 jsr     j_MakeEntityIdle
                 move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
                 cmpi.b  #MAP_OVERWORLD_AROUND_PACALON,d0
-                bne.s   loc_259E8       ; HARDCODED check if map is overworld pacalon, switch if water not restored
+                bne.s   @Continue       ; HARDCODED check if map is overworld pacalon, switch if water not restored
                 chkFlg  530             ; Battle 30 completed - BATTLE_VERSUS_ZALBARD              
-                beq.s   loc_259E8
+                beq.s   @Continue
                 move.w  #MAP_OVERWORLD_PACALON_2,d0
-loc_259E8:
+@Continue:
                 
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 moveq   #$FFFFFFFF,d0

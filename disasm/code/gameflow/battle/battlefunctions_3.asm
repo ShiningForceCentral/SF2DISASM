@@ -23,19 +23,19 @@ LoadBattle:
                 move.w  (sp)+,d0
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
-                bpl.s   loc_25646
+                bpl.s   @Ally
                 clr.w   d0
-loc_25646:
+@Ally:
                 
                 andi.w  #$3F,d0 
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                adda.w  d0,a0
-                move.w  (a0)+,d0
+                adda.w  d0,a0					; offset to appropriate entity
+                move.w  (a0)+,d0				; move x offset
                 ext.l   d0
                 divs.w  #$180,d0
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
-                move.w  (a0)+,d0
+                move.w  (a0)+,d0				; move y offset
                 ext.l   d0
                 divs.w  #$180,d0
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
@@ -166,19 +166,19 @@ PrintAllActivatedDefCons:
 
 ; =============== S U B R O U T I N E =======================================
 
-; if flag D1 is set, display def-con textbox
+; if flag D1 is set, AI region active, display def-con textbox
 
 
 PrintActivatedDefCon:
                 
                 move.w  d1,-(sp)
                 jsr     j_CheckFlag
-                beq.s   loc_2578A
+                beq.s   @RegionInactive
                 subi.w  #BATTLE_REGION_FLAGS_START,d1
                 ext.l   d1
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     463             ; "DEF-CON No. {#} has been{N}implemented.{D3}"
-loc_2578A:
+@RegionInactive:
                 
                 move.w  (sp)+,d1
                 addq.w  #1,d1

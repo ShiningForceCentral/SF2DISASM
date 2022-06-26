@@ -264,9 +264,9 @@ BattleLoop_Victory:
                 add.b   ((BATTLE_AREA_Y-$1000000)).w,d1
                 move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
                 bsr.w   GetEntityIndexForCombatant
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.b  $10(a0,d0.w),((MAP_EVENT_PARAM_5-$1000000)).w
+                move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),((MAP_EVENT_PARAM_5-$1000000)).w
                 move.b  #0,((MAP_EVENT_PARAM_1-$1000000)).w
                 jsr     j_ExecuteAfterBattleCutscene
                 clr.w   d1
@@ -316,7 +316,7 @@ BattleLoop_Defeat:
                 clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
                 setFlg  504             ; Battle 4 completed - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS   
                 jsr     j_UpgradeBattle
-                moveq   #17,d0
+                moveq   #MAP_GALAM_CASTLE_INNER,d0
                 clr.w   d4
 @Return:
                 

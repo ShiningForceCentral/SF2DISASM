@@ -38,64 +38,64 @@ loc_F1FE:
                 move.w  d7,d0
                 bsr.w   CheckMuddled2   
                 tst.b   d1
-                beq.s   loc_F22C
+                beq.s   @NotMuddled
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_F222
+                bne.s   @Enemy
                 clr.w   d6
-                bra.s   loc_F228
-loc_F222:
+                bra.s   @Ally
+@Enemy:
                 
                 clr.w   d6
                 move.w  #COMBATANT_ENEMIES_START,d6
-loc_F228:
+@Ally:
                 
                 bra.w   loc_F39E
-loc_F22C:
+@NotMuddled:
                 
                 move.w  d7,d0
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_F23E
+                bne.s   @TargetAllies
                 move.w  #COMBATANT_ENEMIES_START,d0
                 move.w  #COMBATANT_ENEMIES_COUNTER,d6
-                bra.s   loc_F244
-loc_F23E:
+                bra.s   @PrepareTargetList
+@TargetAllies:
                 
                 clr.w   d0
                 move.w  #COMBATANT_ALLIES_COUNTER,d6
-loc_F244:
+@PrepareTargetList:
                 
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d2
-loc_F24A:
+@TargetCombatant_Loop:
                 
                 bsr.w   GetCurrentHP    ; iterate through combatants
                 tst.w   d1
-                bne.s   loc_F256
-                bra.w   loc_F276
-loc_F256:
+                bne.s   @CheckOnMap_X
+                bra.w   @NextTarget
+@CheckOnMap_X:
                 
                 bsr.w   GetXPos
                 tst.b   d1
-                bpl.s   loc_F262
-                bra.w   loc_F276
-loc_F262:
+                bpl.s   @CheckOnMap_Y
+                bra.w   @NextTarget
+@CheckOnMap_Y:
                 
                 bsr.w   GetYPos
                 tst.b   d1
-                bpl.s   loc_F26E
-                bra.w   loc_F276
-loc_F26E:
+                bpl.s   @AddToTargetList
+                bra.w   @NextTarget
+@AddToTargetList:
                 
                 move.b  d0,(a0,d2.w)    ; add to targets if alive and on map
                 addi.w  #1,d2
-loc_F276:
+@NextTarget:
                 
                 addq.w  #1,d0
-                dbf     d6,loc_F24A
+                dbf     d6,@TargetCombatant_Loop
                 move.w  d2,((TARGETS_LIST_LENGTH-$1000000)).w
                 move.w  d2,d6
                 clr.w   d2
-loc_F284:
+@MoveCostToTarget_Loop:
                 
                 clr.w   d0
                 move.b  (a0,d2.w),d0
@@ -103,7 +103,7 @@ loc_F284:
                 move.b  d0,var_96(a6,d2.w)
                 addi.w  #1,d2
                 subq.w  #1,d6
-                bne.s   loc_F284
+                bne.s   @MoveCostToTarget_Loop
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d1
                 cmpi.w  #1,d1
                 bgt.s   loc_F2A8
@@ -155,35 +155,35 @@ loc_F300:
                 clr.w   d0
                 move.b  d7,d0
                 bsr.w   GetMoveType     
-                lea     (off_D982).l,a1 
+                lea     (pt_AttackPriorityForMoveType).l,a1 
                 lsl.l   #2,d1
                 movea.l (a1,d1.l),a1
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d6
                 clr.w   d5
-loc_F31A:
+@CheckTargetClass_Loop:
                 
                 clr.w   d0
                 move.b  (a0,d5.w),d0
                 bsr.w   GetClass        
                 move.b  d1,d4
                 clr.w   d3
-                move.w  #$20,d2 
-loc_F32C:
+                move.w  #CLASS_NUMBER_TOTAL,d2 
+@CompareTargetClass_Loop:
                 
                 cmp.b   (a1,d3.w),d4
-                bne.s   loc_F33A
+                bne.s   @NextClass
                 move.b  d3,var_48(a6,d5.w)
-                bra.w   loc_F340
-loc_F33A:
+                bra.w   @NextTarget
+@NextClass:
                 
                 addq.b  #1,d3
                 subq.w  #1,d2
-                bne.s   loc_F32C
-loc_F340:
+                bne.s   @CompareTargetClass_Loop
+@NextTarget:
                 
                 addq.b  #1,d5
                 subq.w  #1,d6
-                bne.s   loc_F31A
+                bne.s   @CheckTargetClass_Loop
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d6
                 subi.w  #2,d6
                 clr.w   d5
@@ -226,25 +226,25 @@ loc_F39E:
                 clr.w   d0
                 move.b  d7,d0
                 btst    #COMBATANT_BIT_ENEMY,d0
-                beq.w   loc_F404
+                beq.w   @BasicMovement
                 bsr.w   GetEnemyIndex   
                 cmpi.b  #ENEMY_KRAKEN_LEG,d1 ; HARDCODED enemy indexes
-                bne.s   loc_F3B8
-                bra.w   loc_F3D0
-loc_F3B8:
+                bne.s   @CheckKrakenArm
+                bra.w   @SpecialMoveCosts
+@CheckKrakenArm:
                 
                 cmpi.b  #ENEMY_KRAKEN_ARM,d1
-                bne.s   loc_F3C2
-                bra.w   loc_F3D0
-loc_F3C2:
+                bne.s   @CheckKrakenHead
+                bra.w   @SpecialMoveCosts
+@CheckKrakenHead:
                 
                 cmpi.b  #ENEMY_KRAKEN_HEAD,d1
-                bne.s   loc_F3CC
-                bra.w   loc_F3D0
-loc_F3CC:
+                bne.s   @NoMoveTable
+                bra.w   @SpecialMoveCosts
+@NoMoveTable:
                 
-                bra.w   loc_F404
-loc_F3D0:
+                bra.w   @BasicMovement
+@SpecialMoveCosts:
                 
                 jsr     j_ClearTerrainListObstructions
                 move.b  d6,d0
@@ -258,8 +258,8 @@ loc_F3D0:
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     tbl_KrakenMoveCosts(pc), a5
                 nop
-                bra.w   loc_F43A
-loc_F404:
+                bra.w   @CommitMoveString
+@BasicMovement:
                 
                 jsr     j_ClearTerrainListObstructions
                 clr.w   d0
@@ -275,7 +275,7 @@ loc_F404:
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN).l,a4
                 lea     ((MOVE_COSTS_LIST-$1000000)).w,a5
-loc_F43A:
+@CommitMoveString:
                 
                 bsr.w   MakeRangeLists
                 move.b  d7,d0
@@ -356,4 +356,3 @@ loc_F512:
                 rts
 
     ; End of function ExecuteAiCommand_Move
-

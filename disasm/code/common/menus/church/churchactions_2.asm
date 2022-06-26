@@ -8,7 +8,7 @@
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndex = -32
+promotionIndexOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -39,7 +39,7 @@ CountPromotableMembers:
                 move.b  (a0),d0
                 jsr     j_GetClass
                 move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
-                bsr.w   GetPromotionIndex
+                bsr.w   GetPromotionData
                 cmpi.w  #0,cannotPromoteFlag(a6)
                 bne.w   @Next
                 jsr     j_GetCurrentLevel
@@ -60,13 +60,13 @@ CountPromotableMembers:
 
 ; Get promotion index for class D1, given section type D2
 ; 
-;       Out: -32(A6) = promotion index
+;       Out: -32(A6) = promotion index offset
 ;            -34(A6) = section length
 ;            -36(A6) = 1 if no matching promotion data found
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndex = -32
+promotionIndexOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -81,17 +81,17 @@ membersListLength = -10
 actionCost = -8
 currentGold = -4
 
-GetPromotionIndex:
+GetPromotionData:
                 
                 movem.l d7-a0,-(sp)
                 clr.w   promotionSectionLength(a6)
-                clr.w   promotionIndex(a6)
+                clr.w   promotionIndexOffset(a6)
                 clr.w   cannotPromoteFlag(a6)
                 bsr.w   FindPromotionSection
                 clr.w   d7
                 move.b  (a0)+,d7
                 move.w  d7,promotionSectionLength(a6)
-                move.w  d7,promotionIndex(a6)
+                move.w  d7,promotionIndexOffset(a6)
                 subq.b  #1,d7
 @FindClass_Loop:
                 
@@ -102,11 +102,11 @@ GetPromotionIndex:
                 move.w  #1,cannotPromoteFlag(a6)
 @Found:
                 
-                sub.w   d7,promotionIndex(a6)
+                sub.w   d7,promotionIndexOffset(a6)
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetPromotionIndex
+    ; End of function GetPromotionData
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -142,7 +142,7 @@ FindPromotionSection:
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndex = -32
+promotionIndexOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -158,7 +158,7 @@ actionCost = -8
 currentGold = -4
 
 ReplaceSpellsWithSORCdefaults:
-                
+			 
                 move.w  member(a6),d0
                 jsr     j_GetCombatantEntryAddress
                 lea     COMBATANT_OFFSET_SPELLS(a0),a0
@@ -182,7 +182,7 @@ ReplaceSpellsWithSORCdefaults:
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndex = -32
+promotionIndexOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -213,7 +213,7 @@ Church_GetCurrentForceMemberInfo:
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndex = -32
+promotionIndexOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26

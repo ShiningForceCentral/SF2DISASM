@@ -18,9 +18,9 @@ var_2 = -2
 sub_1288E:
                 
                 link    a6,#-32
-                move.l  ((byte_FFAEE2-$1000000)).w,var_32(a6)
-                move.l  #$70007000,((byte_FFAEE2-$1000000)).w
-                move.l  #$70007000,((byte_FFAEEE-$1000000)).w
+                move.l  ((ENTITY_SPECIAL_SPRITE_DATA-$1000000)).w,var_32(a6)
+                move.l  #$70007000,((ENTITY_SPECIAL_SPRITE_DATA-$1000000)).w
+                move.l  #$70007000,((ENTITY_SPECIAL_SPRITE_DESTINATION-$1000000)).w
                 movem.l d0,-(sp)
                 jsr     (WaitForVInt).w
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
@@ -96,8 +96,8 @@ loc_1291E:
                 jsr     (ClearWindowAndUpdateEndPointer).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                move.l  var_32(a6),((byte_FFAEE2-$1000000)).w
-                move.l  var_32(a6),((byte_FFAEEE-$1000000)).w
+                move.l  var_32(a6),((ENTITY_SPECIAL_SPRITE_DATA-$1000000)).w
+                move.l  var_32(a6),((ENTITY_SPECIAL_SPRITE_DESTINATION-$1000000)).w
                 lea     (PALETTE_1_BASE).l,a0
                 lea     (PALETTE_1_CURRENT).l,a1
                 move.w  #$80,d7 

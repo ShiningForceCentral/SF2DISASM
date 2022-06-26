@@ -59,6 +59,16 @@ COMBATANT_ENEMIES_START: equ $80
 COMBATANT_ENEMIES_END: equ $9F
 COMBATANT_ENEMIES_SPACEEND: equ $A0
 
+ENTITY_TOTAL: equ $40
+ENTITY_ALLY_COUNT: equ $20
+ENTITY_ALLY_COUNTER: equ $1F
+ENTITY_ENEMY_COUNT: equ $20
+ENTITY_ENEMY_COUNTER: equ $1D
+ENTITY_TOTAL_COUNTER: equ $3F
+
+TURNORDER_COUNTER: equ $3E
+TURNORDER_ENTRY_SIZE: equ $2
+
 ; ---------------------------------------------------------------------------
 
 ; enum Combatant_Bitmap
@@ -125,6 +135,12 @@ COMBATANT_OFFSET_ENEMY_INDEX: equ $37
 
 ; ---------------------------------------------------------------------------
 
+; enum EnemyCombatant_AI_Settings
+ENEMYCOMBATANT_AI_SETTINGS_SHIFTCOUNT: equ $4
+ENEMYCOMBATANT_AI_SETTINGS_MASK: equ $F
+
+; ---------------------------------------------------------------------------
+
 ; enum Combatant_Properties
 COMBATANT_ITEMSLOTS_COUNTER: equ $3
 COMBATANT_SPELLSLOTS_COUNTER: equ $3
@@ -165,6 +181,15 @@ STATUSEFFECT_ATTACK: equ $C000
 
 ; ---------------------------------------------------------------------------
 
+; enum StatusAnimations
+STATUSANIMATION_NONE: equ $0
+STATUSANIMATION_SILENCE_CROSS: equ $1
+STATUSANIMATION_DIZZY_STARS: equ $2
+STATUSANIMATION_ZZZS: equ $3
+STATUSANIMATION_STUN_LINES: equ $4
+
+; ---------------------------------------------------------------------------
+
 ; enum StatusEffect_None
 STATUSEFFECT_NONE: equ $0
 
@@ -187,6 +212,8 @@ CHAR_STATCAP_DEF: equ $C8
 CHAR_STATCAP_MOV: equ $C8
 CHAR_STATCAP_EXP: equ $C8
 CHAR_STATCAP_AGI_DECREASING: equ $C8
+TWO_TURN_THRESHOLD: equ $80
+TURN_AGILITY_MASK: equ $7F
 
 ; ---------------------------------------------------------------------------
 
@@ -367,6 +394,7 @@ CLASS_NONE: equ $FF
 
 ; enum ClassIndex
 CLASS_MASK_INDEX: equ $1F
+CLASS_NUMBER_TOTAL: equ $20
 
 ; ---------------------------------------------------------------------------
 
@@ -504,10 +532,39 @@ SPELLPOWER_ENHANCED: equ $63
 
 ; ---------------------------------------------------------------------------
 
+; enum AI codes
+AI_0: equ $0
+AI_1: equ $1
+AI_2: equ $2
+AI_3: equ $3
+AI_4: equ $4
+AI_5: equ $5
+AI_6: equ $6
+AI_7: equ $7
+AI_SENTRY: equ $8
+AI_9: equ $9
+AI_INACTIVE: equ $A
+AI_11: equ $B
+AI_12: equ $C
+AI_13: equ $D
+AI_LEADER: equ $E
+AI_SWARM: equ $F
+
+; ---------------------------------------------------------------------------
+
 ; enum EnemyAI
 ENEMYAI_THRESHOLD_HEAL1: equ $2
 ENEMYAI_THRESHOLD_HEAL2: equ $E
 ENEMYAI_THRESHOLD_HEAL3: equ $1C
+
+MIN_MP_HEAL1: equ $3
+MIN_MP_HEAL2: equ $5
+MIN_MP_HEAL3: equ $B
+MIN_MP_HEAL4: equ $14
+MIN_MP_AURA1: equ $7
+MIN_MP_AURA2: equ $B
+MIN_MP_AURA3: equ $12
+MIN_MP_AURA4: equ $1E
 
 ; ---------------------------------------------------------------------------
 
@@ -879,24 +936,42 @@ MAP_NULLPOSITION: equ $FFFF
 ; enum Map_Entity
 ENTITYDEF_OFFSET_X: equ $0
 ENTITYDEF_OFFSET_Y: equ $2
-ENTITYDEF_SIZE_BITS: equ $5
+ENTITYDEF_OFFSET_XVELOCITY: equ $4
+ENTITYDEF_OFFSET_YVELOCITY: equ $6
+ENTITYDEF_OFFSET_XTRAVEL: equ $8
+ENTITYDEF_OFFSET_YTRAVEL: equ $A
 ENTITYDEF_OFFSET_XDEST: equ $C
 ENTITYDEF_OFFSET_YDEST: equ $E
 ENTITYDEF_OFFSET_FACING: equ $10
+ENTITYDEF_OFFSET_LAYER: equ $11
 ENTITYDEF_OFFSET_ENTNUM: equ $12
 ENTITYDEF_OFFSET_MAPSPRITE: equ $13
 ENTITYDEF_OFFSET_ACTSCRIPTADDR: equ $14
-ENTITY_OFFSET_XACCEL: equ $18
-ENTITY_OFFSET_YACCEL: equ $19
+ENTITYDEF_OFFSET_XACCEL: equ $18
+ENTITYDEF_OFFSET_YACCEL: equ $19
 ENTITYDEF_OFFSET_XSPEED: equ $1A
 ENTITYDEF_OFFSET_YSPEED: equ $1B
 ENTITYDEF_OFFSET_FLAGS_A: equ $1C
 ENTITYDEF_OFFSET_FLAGS_B: equ $1D
 ENTITYDEF_OFFSET_ANIMCOUNTER: equ $1E
 ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER: equ $1F
-ENTITYDEF_SIZE: equ $20
+ENTITYDEF_NEXT_ENTITY: equ $20
+
+ENTITYDEF_SECOND_ENTITY_XDEST: equ $2C
+ENTITYDEF_SECOND_ENTITY_YDEST: equ $2E
+ENTITYDEF_SECOND_ENTITY_MAPSPRITE: equ $33
+ENTITYDEF_ENTITY32_XDEST: equ $3EC
+ENTITYDEF_ENTITY32_YDEST: equ $3EE
+
+ENTITY_SPECIAL_SPRITE_INDEX: equ $2F
 ENTITY_UNITCURSOR_INDEX: equ $30
 
+ENTITYDEF_SIZE_BITS: equ $5
+ENTITYDEF_SIZE: equ $20
+
+RAM_ADDRESS_PLANE_A: equ PLANE_A_MAP_LAYOUT-$FF0000
+RAM_ADDRESS_PLANE_B: equ PLANE_B_LAYOUT-$FF0000
+ENTITYADDRESS_UNIT_CURSOR: equ ENTITY_UNIT_CURSOR-$FF0000
 ; ---------------------------------------------------------------------------
 
 ; enum SoundCommands
@@ -1072,6 +1147,12 @@ SPELLANIMATION_VARIATION3: equ $40
 SPELLANIMATION_VARIATION4: equ $60
 SPELLANIMATION_MIRRORED: equ $80
 
+SUMMON_DAO: equ $0
+SUMMON_NEPTUNE: equ $2
+SUMMON_APOLLO: equ $3
+SUMMON_ATLAS: equ $1
+
+
 ; ---------------------------------------------------------------------------
 
 ; enum SpellAnimation_Variation1
@@ -1080,11 +1161,14 @@ SPELLANIMATION_VARIATION1: equ $0
 ; ---------------------------------------------------------------------------
 
 ; enum SpellAnimation_Bitmap
+SPELLANIMATION_BITS_VARIANT: equ $5
 SPELLANIMATION_BIT_MIRRORED: equ $7
 
 ; ---------------------------------------------------------------------------
 
 ; enum SpellAnimation_Masks
+SPELLANIMATION_VARIANT_MASK: equ $3
+SPELLANIMATION_MASK_INDEX: equ $1F
 SPELLANIMATION_MASK_INDEX_AND_VARIATION: equ $7F
 
 ; ---------------------------------------------------------------------------
@@ -1110,7 +1194,7 @@ CUTOFF_FLASH_COLOR: equ $EEE
 SPELLGRAPHICS_BUBBLE_BREATH: equ $0
 SPELLGRAPHICS_FLAME_BREATH: equ $1
 SPELLGRAPHICS_BLAZE: equ $2
-SPELLGRAPHICS_DA0: equ $3
+SPELLGRAPHICS_DAO: equ $3
 SPELLGRAPHICS_BOLT: equ $4
 SPELLGRAPHICS_ARROWS_AND_SPEARS: equ $5
 SPELLGRAPHICS_HEALING: equ $6
@@ -1217,6 +1301,11 @@ SPELLENTRY_INDEX_BITSIZE: equ $6
 SPELLENTRY_MASK_INDEX: equ $3F
 SPELLENTRY_MASK_LV: equ $C0
 SPELLENTRY_MASK_INDEX_AND_LV: equ $FF
+
+SPELLENTRY_LV1: equ $0
+SPELLENTRY_LV2: equ $1
+SPELLENTRY_LV3: equ $2
+SPELLENTRY_LV4: equ $3
 
 ; ---------------------------------------------------------------------------
 
@@ -1347,6 +1436,7 @@ MAP_OVERWORLD_GRANS_NORTH_SHORE: equ $4B
 MAP_OVERWORLD_GRANS_RETURN_PATH: equ $4C
 MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE: equ $4D
 MAP_OVERWORLD_PACALON_2: equ $4E
+MAP_NONE: equ $FF
 
 ; ---------------------------------------------------------------------------
 
@@ -1446,6 +1536,16 @@ BATTLESCENE_STACK_NEGSIZE: equ $FF68
 
 ; enum Def_Lengths
 BITS_HALFBYTE: equ $4
+
+LONGWORD_GAMEFLAGS_COUNTER: equ $1F
+LONGWORD_DEALS_COUNTER: equ $F
+LONGWORD_CARAVAN_COUNTER: equ $F
+
+LONGWORD_GAMEFLAGS_VALUE: equ $0
+LONGWORD_DEALS_VALUE: equ $0
+LONGWORD_CARAVAN_VALUE: equ $7F7F7F7F
+
+LONGWORD_WINDOW_ENTRIES_COUNTER: equ $1F
 
 ; ---------------------------------------------------------------------------
 
@@ -2252,6 +2352,8 @@ ANIM_COUNTER: equ $D
 
 ; ---------------------------------------------------------------------------
 
+SIZE_PALETTE: equ $20
+
 ; enum Fading
 IN_FROM_BLACK: equ $1
 OUT_TO_BLACK: equ $2
@@ -2923,6 +3025,7 @@ GROWTHCURVE_DEF_SIZE: equ $74
 
 ; enum BattleMapCoordinates_Properties
 BATTLEMAPCOORDS_ENTRY_SIZE: equ $5
+BATTLEMAPCOORDS_ENTRY_SIZE_FULL: equ $7
 
 ; ---------------------------------------------------------------------------
 

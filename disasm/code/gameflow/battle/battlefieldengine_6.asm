@@ -90,13 +90,13 @@ sub_D430:
                 move.b  var_1(a6),d0
                 bsr.w   GetCurrentTerrainType
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_D454
+                bne.s   @Enemy
                 clr.w   d1
-                bra.s   loc_D458
-loc_D454:
+                bra.s   @Done
+@Enemy:
                 
                 move.b  #$FF,d1
-loc_D458:
+@Done:
                 
                 unlk    a6
                 movem.l (sp)+,d0/d2-a6

@@ -1,7 +1,7 @@
 
 ; ASM FILE code\gameflow\battle\battlefieldengine_7.asm :
 ; 0xD8F4..0xDEFC : Battlefield engine
-tbl_MovetypesHealTargetPriority:
+tbl_HealPriorityMoveTypes:
                 dc.b $FF
                 dc.b MOVETYPE_LOWER_HEALER
                 dc.b MOVETYPE_LOWER_MAGE
@@ -15,7 +15,9 @@ tbl_MovetypesHealTargetPriority:
                 dc.b MOVETYPE_LOWER_CENTAUR
                 dc.b MOVETYPE_LOWER_REGULAR
                 dc.b MOVETYPE_LOWER_AQUATIC
-byte_D901:      dc.b CLASS_SDMN
+                
+tbl_AttackPriority_Regular:
+                dc.b CLASS_SDMN
                 dc.b CLASS_HERO
                 dc.b CLASS_MAGE
                 dc.b CLASS_SORC
@@ -47,7 +49,9 @@ byte_D901:      dc.b CLASS_SDMN
                 dc.b CLASS_GLM
                 dc.b CLASS_TORT
                 dc.b CLASS_MNST
-byte_D921:      dc.b CLASS_SDMN
+                
+tbl_AttackPriority_Mage:
+                dc.b CLASS_SDMN
                 dc.b CLASS_HERO
                 dc.b CLASS_TORT
                 dc.b CLASS_MNST
@@ -79,7 +83,9 @@ byte_D921:      dc.b CLASS_SDMN
                 dc.b CLASS_PHNX
                 dc.b CLASS_PGNT
                 dc.b CLASS_BDBT
-byte_D941:      dc.b CLASS_BDMN
+                
+tbl_AttackPriority_Archer:
+                dc.b CLASS_BDMN
                 dc.b CLASS_PHNK
                 dc.b CLASS_BDBT
                 dc.b CLASS_PGNT
@@ -111,7 +117,9 @@ byte_D941:      dc.b CLASS_BDMN
                 dc.b CLASS_GLM
                 dc.b CLASS_TORT
                 dc.b CLASS_MNST
-byte_D961:      dc.b CLASS_SDMN
+                
+tbl_AttackPriority_Flying:
+                dc.b CLASS_SDMN
                 dc.b CLASS_HERO
                 dc.b CLASS_MAGE
                 dc.b CLASS_SORC
@@ -144,38 +152,42 @@ byte_D961:      dc.b CLASS_SDMN
                 dc.b CLASS_BWNT
                 dc.b CLASS_BRGN
                 dc.b CLASS_NONE
-off_D982:       dc.l byte_D901          ; related to move type
-                dc.l byte_D901
-                dc.l byte_D901
-                dc.l byte_D901
-                dc.l byte_D901
-                dc.l byte_D961
-                dc.l byte_D961
-                dc.l byte_D901
-                dc.l byte_D941
-                dc.l byte_D941
-                dc.l byte_D921
-                dc.l byte_D921
-                dc.l byte_D901
-                dc.l byte_D901
-                dc.l byte_D901
-                dc.l byte_D901
-off_D9C2:       dc.l byte_DA02          ; Gives values from Move Type and Class
+                
+pt_AttackPriorityForMoveType:
+                dc.l tbl_AttackPriority_Regular ; moveType None
+                dc.l tbl_AttackPriority_Regular ; moveType Regular
+                dc.l tbl_AttackPriority_Regular ; moveType Centaur
+                dc.l tbl_AttackPriority_Regular ; moveType Stealth
+                dc.l tbl_AttackPriority_Regular ; moveType Brass Gunner
+                dc.l tbl_AttackPriority_Flying ; moveType Flying
+                dc.l tbl_AttackPriority_Flying ; moveType Hovering
+                dc.l tbl_AttackPriority_Regular ; moveType Aquatic
+                dc.l tbl_AttackPriority_Archer ; moveType Archer
+                dc.l tbl_AttackPriority_Archer ; moveType Centaur Archer
+                dc.l tbl_AttackPriority_Mage ; moveType Stealth Archer
+                dc.l tbl_AttackPriority_Mage ; moveType Mage
+                dc.l tbl_AttackPriority_Regular ; moveType Healer
+                dc.l tbl_AttackPriority_Regular
+                dc.l tbl_AttackPriority_Regular
+                dc.l tbl_AttackPriority_Regular
+                
+off_D9C2:       dc.l byte_DA02          ; moveType None
+                dc.l byte_DA02          ; moveType Regular
+                dc.l byte_DA02          ; moveType Centaur
+                dc.l byte_DA02          ; moveType Stealth
+                dc.l byte_DA02          ; moveType Brass Gunner
+                dc.l byte_DA62          ; moveType Flying
+                dc.l byte_DA62          ; moveType Hovering
+                dc.l byte_DA02          ; moveType Aquatic
+                dc.l byte_DA42          ; moveType Archer
+                dc.l byte_DA42          ; moveType Centaur Archer
+                dc.l byte_DA22          ; moveType Stealth Archer
+                dc.l byte_DA22          ; moveType Mage
+                dc.l byte_DA02          ; moveType Healer
                 dc.l byte_DA02
                 dc.l byte_DA02
                 dc.l byte_DA02
-                dc.l byte_DA02
-                dc.l byte_DA62
-                dc.l byte_DA62
-                dc.l byte_DA02
-                dc.l byte_DA42
-                dc.l byte_DA42
-                dc.l byte_DA22
-                dc.l byte_DA22
-                dc.l byte_DA02
-                dc.l byte_DA02
-                dc.l byte_DA02
-                dc.l byte_DA02
+                
 byte_DA02:      dc.b 4
                 dc.b 1
                 dc.b 0
@@ -208,6 +220,7 @@ byte_DA02:      dc.b 4
                 dc.b 1
                 dc.b 0
                 dc.b 0
+                
 byte_DA22:      dc.b 3
                 dc.b 1
                 dc.b 3
@@ -240,6 +253,7 @@ byte_DA22:      dc.b 3
                 dc.b 2
                 dc.b 3
                 dc.b 3
+                
 byte_DA42:      dc.b 3
                 dc.b 1
                 dc.b 0
@@ -272,6 +286,7 @@ byte_DA42:      dc.b 3
                 dc.b 1
                 dc.b 0
                 dc.b 0
+                
 byte_DA62:      dc.b 3
                 dc.b 2
                 dc.b 2

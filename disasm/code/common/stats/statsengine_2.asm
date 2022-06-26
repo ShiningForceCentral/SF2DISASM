@@ -1008,7 +1008,7 @@ ApplyStatusEffectsOnStats:
                 mulu.w  d2,d1
                 lsr.l   #3,d1
                 bsr.w   DecreaseCurrentAGI
-                btst    #0,d3
+                btst    #STATUSEFFECT_BIT_STUN,d3
                 beq.s   @Return
                 moveq   #1,d1
                 bsr.w   DecreaseCurrentMOV
@@ -2112,10 +2112,10 @@ IsItemUsableInBattle:
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
                 cmpi.b  #$FF,ITEMDEF_OFFSET_USE_SPELL(a0) ; BUG -- should compare to $3F for 'no spell'
-                beq.s   @ClearCarry
+                beq.s   @HasNoUse
                 ori     #1,ccr
                 bra.s   @Done
-@ClearCarry:
+@HasNoUse:
                 
                 tst.b   d0
 @Done:
