@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\scripting\entity\getentityportaitandspeechsound-expanded.asm :
-; Alternate GetEntityPortaitAndSpeechSound function -- included when patch Force_Members_Expansion is enabled
+; Alternate GetEntityPortaitAndSpeechSfx function -- included when patch Force_Members_Expansion is enabled
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -10,11 +10,11 @@
 
                 module
 
-GetEntityPortaitAndSpeechSound_Ally:
+GetEntityPortaitAndSpeechSfx_Ally:
                 movem.l d0/a0/a5,-(sp)
                 bra.s   @FindMapSprite
                 
-GetEntityPortaitAndSpeechSound:
+GetEntityPortaitAndSpeechSfx:
                 movem.l d0/a0/a5,-(sp)
                 clr.w   d2
                 bsr.w   GetEntityAddressFromCharacter
@@ -38,12 +38,12 @@ GetEntityPortaitAndSpeechSound:
 @MapSpriteFound:
                 move.b  SPRITEDIALOGDEF_OFFSET_PORTRAIT(a0),d1  ; return portrait and speech sfx indexes -> D1, D2
                 ext.w   d1
-                move.b  SPRITEDIALOGDEF_OFFSET_SPEECHSOUND(a0),d2
+                move.b  SPRITEDIALOGDEF_OFFSET_SPEECHSFX(a0),d2
                 
 @Done:
                 movem.l (sp)+,d0/a0/a5
                 rts
 
-	; End of function GetEntityPortaitAndSpeechSound
+	; End of function GetEntityPortaitAndSpeechSfx
 
                 modend

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle28\cs_afterbattle.asm :
 ; 0x4C07C..0x4C3DC : Cutscene after battle 28
-abcs_battle28:  textCursor $A6E
+abcs_battle28:  textCursor 2670
                 loadMapFadeIn MAP_PANGOAT_VALLEY_BRIDGE,7,25
                 loadMapEntities ce_4C3B4
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -44,7 +44,7 @@ abcs_battle28:  textCursor $A6E
                  moveUp 2
                 endActions
                 csWait 14
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 entityActionsWait ALLY_PETER
                  moveLeft 1
                  moveDown 1
@@ -127,7 +127,7 @@ abcs_battle28:  textCursor $A6E
                 entityFlashWhite FOLLOWER_B,$28
                 setActscriptWait 128,eas_Jump
                 nextSingleText $C0,128  ; "Ooops!{W1}"
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 128
                  moveLeft 1
                 endActions
@@ -136,7 +136,7 @@ abcs_battle28:  textCursor $A6E
                  ac_setSpeed 56,56      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 130,eas_46172
+                setActscriptWait 130,eas_DeactivateAutoFacing
                 customActscriptWait 128
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -186,7 +186,7 @@ abcs_battle28:  textCursor $A6E
                 setFacing 128,DOWN
                 nextSingleText $0,128   ; "Be careful of Geshp and{N}Zalbard!{W1}"
                 setActscriptWait 128,eas_JumpLeft
-                setActscriptWait 128,eas_463AE
+                setActscriptWait 128,eas_TwirlShrinkDisappear
                 setCamDest 8,26
                 setFacing FOLLOWER_B,DOWN
                 nextSingleText $0,FOLLOWER_B ; "Ah, she's gone....{N}OK, {LEADER}.{N}Let's go to Tristan.{W1}"

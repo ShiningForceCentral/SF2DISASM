@@ -6,6 +6,7 @@ ms_map76_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map76_DefaultEntityEvent:
                 
                 rts

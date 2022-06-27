@@ -9,15 +9,18 @@
     include "sf2battlescenemacros.asm"
 
 align: macro
-    if (narg=1)
+    case narg
+=0  ; If no arguments given, align to word boundary.
+    dcb.b *%2,$FF
+=1  ; If given an address argument only, pad with $FF.
     dcb.b \1-(*%\1),$FF
-    else
+=?  ; If two arguments or more, pad with second argument.
     dcb.b \1-(*%\1),\2
-    endc
+    endcase
     endm
     
-wordAlign: macro
-    dcb.b *%2,$FF
+wordAlign: macro ;alias
+    align
     endm
     
 sndCom: macro
@@ -167,12 +170,16 @@ enemyEntity: macro
     dc.b \1+128
     endm
     
-itemDrop: macro
-    defineShorthand.b ITEM_,\1
+itemDrop: macro ; alias
+    itemIndex \1
     endm
     
-dropFlag: macro
+droppedFlag: macro
     dc.b \1
+    endm
+    
+dropFlag: macro ; alias
+    droppedFlag \1
     endm
     
 spellElement: macro
@@ -181,6 +188,22 @@ spellElement: macro
     
 landEffectAndMoveCost: macro
     defineBitfield.b LANDEFFECTSETTING_,\1
+    endm
+    
+aiCommandset: macro
+    dc.b narg
+    rept narg
+    defineShorthand.b AICOMMAND_,\1
+    shift
+    endr
+    endm
+    
+battles: macro
+    dc.b narg
+    rept narg
+    battle \1
+    shift
+    endr
     endm
     
 background: macro
@@ -265,8 +288,12 @@ equipEffects: macro
     
 ; Spell definitions
     
-index: macro
+entry: macro
     defineBitfield.b SPELL_,\1
+    endm
+    
+index: macro ; alias
+    entry \1
     endm
     
 mpCost: macro
@@ -331,12 +358,16 @@ weaponGraphics: macro
     weaponPalette \2
     endm
     
-shopDef: macro
+shopInventory: macro
     dc.b narg
     rept narg
     itemIndex \1
     shift
     endr
+    endm
+    
+shopDef: macro ; alias
+    shopInventory \_
     endm
     
 promotionSection: macro
@@ -355,12 +386,20 @@ promotionItems: macro
     endr
     endm
     
-mithrilWeaponClass: macro
+classes: macro
     dc.w narg
     rept narg
     defineShorthand.w CLASS_,\1
     shift
     endr
+    endm
+    
+blacksmithClasses: macro    ; alias
+    classes \1
+    endm
+    
+mithrilWeaponClass: macro   ; alias
+    classes \1
     endm
     
 mithrilWeapons: macro
@@ -403,9 +442,13 @@ portrait: macro
     defineShorthand.b PORTRAIT_,\1
     endm
     
-speechSound: macro
+speechSfx: macro
     defineShorthand.b SFX_,\1
     dc.b 0
+    endm
+    
+speechSound: macro ; alias
+    speechSfx \1
     endm
     
 ; Enemy definitions
@@ -486,12 +529,8 @@ unknownWord: macro
     dcb.b 2,0
     endm
     
-randomBattles: macro
-    dc.b narg
-    rept narg
-    defineShorthand.b BATTLE_,\1
-    shift
-    endr
+randomBattles: macro ; alias
+    battles
     endm
     
 upgradeRange: macro
@@ -591,11 +630,15 @@ prowess: macro
 ; VDP tiles
     
 vdpTile: macro
+    if (narg=0)
+    dc.w 0
+    else
     defineBitfield.w VDPTILE_,\1
+    endc
     endm
     
 vdpBaseTile: macro
-    defineBitfieldWithParam.w VDPTILE_,\1,VDPTILE_PLT3|VDPTILE_PRIORITY
+    defineBitfieldWithParam.w VDPTILE_,\1,VDPTILE_PALETTE3|VDPTILE_PRIORITY
     endm
     
 ; VDP sprites

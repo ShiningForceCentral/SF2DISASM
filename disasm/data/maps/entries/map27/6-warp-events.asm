@@ -8,27 +8,27 @@
                   warpFacing DOWN
                 mWarp 11, 10
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   30, 8
                   warpFacing RIGHT
                 mWarp 30, 8
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   11, 10
                   warpFacing LEFT
                 mWarp 33, 13
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   12, 15
                   warpFacing LEFT
                 mWarp 12, 15
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   33, 13
                   warpFacing RIGHT
                 mWarp 54, 2
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   3, 3
                   warpFacing RIGHT
                 mWarp 255, 0

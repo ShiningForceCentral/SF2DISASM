@@ -3,7 +3,7 @@
 ; 0x44AA4..0x44B4A : Enemy map sprite indexes table
 tbl_EnemyMapSprites:
                 
-; Syntax        mapSprite [MAPSPRITE_]index
+; Syntax        mapSprite [MAPSPRITE_]enum (or index)
                 
                 mapSprite OOZE          ; 0: OOZE
                 mapSprite HUGE_RAT      ; 1: HUGE RAT

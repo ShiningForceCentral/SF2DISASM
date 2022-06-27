@@ -9,7 +9,7 @@
 GetCombatantPortrait:
                 tst.b   d0
                 bpl.s   GetAllyPortrait
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,d0
                 rts
 
@@ -24,7 +24,7 @@ GetAllyPortrait:
                 movem.l d1-d2/d4,-(sp)
                 jsr     GetAllyMapSprite_Regular            ; map sprite index -> D4
                 move.w  d4,d0
-                jsr     GetEntityPortaitAndSpeechSound_Ally ; portrait index -> D1
+                jsr     GetEntityPortaitAndSpeechSfx_Ally ; portrait index -> D1
                 move.w  d1,d0
                 movem.l (sp)+,d1-d2/d4
                 rts

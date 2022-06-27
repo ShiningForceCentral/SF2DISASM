@@ -6,6 +6,7 @@ ms_map42_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map42_DefaultEntityEvent:
                 
                 rts

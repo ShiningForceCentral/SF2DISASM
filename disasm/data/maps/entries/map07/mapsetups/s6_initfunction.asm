@@ -4,22 +4,23 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map7_InitFunction:
                 
                  
-                chkFlg  $2C3            ; Set after the "one year has passed" text, after New Granseal is built
+                chkFlg  707             ; Set after the "one year has passed" text, after New Granseal is built
                 bne.s   return_55830
-                move.b  #6,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  #MAP_NEW_GRANSEAL,((EGRESS_MAP-$1000000)).w
                 script  cs_55832
-                setFlg  $2C3            ; Set after the "one year has passed" text, after New Granseal is built
-                setFlg  $19B            ; Battle 11 unlocked
+                setFlg  707             ; Set after the "one year has passed" text, after New Granseal is built
+                setFlg  411             ; Battle 11 unlocked - BATTLE_CAVE_OF_DARKNESS          
 return_55830:
                 
                 rts
 
     ; End of function ms_map7_InitFunction
 
-cs_55832:       textCursor $50A
+cs_55832:       textCursor 1290
                 mapLoad MAP_NEW_GRANSEAL_CASTLE,6,2
                 loadMapEntities ce_559AE
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -27,7 +28,7 @@ cs_55832:       textCursor $50A
                 slowFadeInB
                 reloadMap 6,2
                 nextText $FF,255        ; "One year has passed.{W1}"
-                textCursor $470
+                textCursor 1136
                 stopEntity 129
                 loadMapFadeIn MAP_NEW_GRANSEAL_CASTLE,6,2
                 playSound MUSIC_CASTLE

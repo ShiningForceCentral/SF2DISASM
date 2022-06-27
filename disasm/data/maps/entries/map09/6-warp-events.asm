@@ -8,22 +8,22 @@
                   warpFacing DOWN
                 mWarp 6, 16
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   3, 57
                   warpFacing DOWN
                 mWarp 3, 57
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   6, 16
                   warpFacing RIGHT
                 mWarp 11, 26
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   14, 57
                   warpFacing DOWN
                 mWarp 14, 57
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   11, 26
                   warpFacing RIGHT
                 endWord

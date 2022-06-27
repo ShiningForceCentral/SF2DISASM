@@ -3,7 +3,10 @@
 ; 0x1278E..0x1284E : Member screen kills and defeat window layout
 AllyKillDefeatWindowLayout:
                 
-; Syntax        vdpBaseTile [VDPTILE_]index[|mirror|flip]
+; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
+;
+; Notes: PALETTE3 and PRIORITY bits are always set.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
 ; 1st line
                 vdpBaseTile CORNER

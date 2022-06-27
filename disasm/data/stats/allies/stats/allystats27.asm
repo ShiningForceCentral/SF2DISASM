@@ -4,7 +4,7 @@
 AllyStats27:    forClass  WIZ
                 hpGrowth  28, 83, LINEAR
                 mpGrowth  42, 88, LINEAR
-                atkGrowth 15, 29, LINEAR
+                attGrowth 15, 29, LINEAR
                 defGrowth 17, 61, MIDDLE
                 agiGrowth 27, 58, LINEAR
                 spellList &
@@ -21,4 +21,4 @@ AllyStats27:    forClass  WIZ
                     53, BOLT|LV4, &
                     56, BLAZE|LV3, &
                     60, BLAZE|LV4
-                    
+                

@@ -9,7 +9,7 @@ ms_map19_Entities:
                 msWalkingEntity 15, 20, DOWN, MAPSPRITE_SOLDIER1, 15, 20, 1
                 msFixedEntity 28, 17, DOWN, MAPSPRITE_SOLDIER2, eas_Init
                 msFixedEntity 30, 17, DOWN, MAPSPRITE_SOLDIER2, eas_Init
-                msFixedEntity 29, 8, DOWN, MAPSPRITE_MAN3, eas_46246
+                msFixedEntity 29, 8, DOWN, MAPSPRITE_MAN3, eas_LeftRightMoveLoop
                 msFixedEntity 24, 16, DOWN, MAPSPRITE_MAID, eas_Init
                 msWalkingEntity 20, 17, DOWN, MAPSPRITE_WOMAN1, 20, 17, 1
                 msFixedEntity 19, 5, DOWN, MAPSPRITE_SOLDIER1, eas_Init

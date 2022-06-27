@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map38\mapsetups\scripts.asm :
 ; 0x5DE2E..0x5DF84 : 
-cs_5DE2E:       textCursor $86A
+cs_5DE2E:       textCursor 2154
                 stopEntity 142
                 playSound $FD
                 setCamDest 8,0
@@ -19,7 +19,7 @@ cs_5DE2E:       textCursor $86A
                 nextSingleText $0,137   ; "Petro!  No!{W1}"
                 playSound $FB
                 csc_end
-cs_5DE76:       textCursor $879
+cs_5DE76:       textCursor 2169
                 setActscriptWait ALLY_PETER,eas_Init
                 setActscriptWait FOLLOWER_B,eas_Init
                 setCameraEntity ALLY_ZYNK
@@ -78,7 +78,7 @@ cs_5DE76:       textCursor $879
                 nextSingleText $0,ALLY_ZYNK ; "I have overridden my{N}restrictions on fighting.{W2}"
                 nextSingleText $0,ALLY_ZYNK ; "I am joining your force as{N}a soldier!{W1}"
                 join ALLY_ZYNK
-                clearF $4C              ; Zynk is a follower
+                clearF 76               ; Zynk is a follower
                 nextSingleText $0,ALLY_ZYNK ; "Let us go defeat the Devil{N}Army!{W1}"
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,ALLY_PETER,2

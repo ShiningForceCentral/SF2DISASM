@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle38\cs_afterbattle.asm :
 ; 0x4DE8C..0x4E3D2 : Cutscene after battle 38
-abcs_battle38:  textCursor $BC4
+abcs_battle38:  textCursor 3012
                 loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,3,22
                 loadMapEntities ce_4E372
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -13,22 +13,22 @@ abcs_battle38:  textCursor $BC4
                 setPos FOLLOWER_A,9,24,DOWN
                 stopEntity 136
                 customActscriptWait 136
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                jumpIfFlagClear $4C,cs_4DF00 ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4DF00 ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,63,62,DOWN
-cs_4DF00:       setActscriptWait 128,eas_46172
-                setActscriptWait 129,eas_46172
-                setActscriptWait 130,eas_46172
-                setActscriptWait 131,eas_46172
-                setActscriptWait 132,eas_46172
-                setActscriptWait 133,eas_46172
-                setActscriptWait 134,eas_46172
-                setActscriptWait 135,eas_46172
+cs_4DF00:       setActscriptWait 128,eas_DeactivateAutoFacing
+                setActscriptWait 129,eas_DeactivateAutoFacing
+                setActscriptWait 130,eas_DeactivateAutoFacing
+                setActscriptWait 131,eas_DeactivateAutoFacing
+                setActscriptWait 132,eas_DeactivateAutoFacing
+                setActscriptWait 133,eas_DeactivateAutoFacing
+                setActscriptWait 134,eas_DeactivateAutoFacing
+                setActscriptWait 135,eas_DeactivateAutoFacing
                 setPriority ALLY_BOWIE,$0
                 setPriority 136,$FFFF
                 fadeInB
@@ -37,8 +37,8 @@ cs_4DF00:       setActscriptWait 128,eas_46172
                 nextSingleText $0,136   ; "My traps...{W1}"
                 csWait 60
                 customActscriptWait 136
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $0          ;   
+                 ac_motion OFF          ;   
+                 ac_orientUp            ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -63,17 +63,17 @@ cs_4DF00:       setActscriptWait 128,eas_46172
                  moveUp 1
                 endActions
                 csWait 12
-                setActscriptWait 136,eas_461AA
+                setActscriptWait 136,eas_StopMoving
                 setQuake 1
                 stopEntity 136
                 setPos 136,8,24,LEFT
                 customActscriptWait 136
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 136,eas_46172
+                setActscriptWait 136,eas_DeactivateAutoFacing
                 customActscriptWait 136
                  ac_setSpeed 40,40      ;   
                  ac_jump eas_Idle       ;   
@@ -95,8 +95,8 @@ cs_4DF00:       setActscriptWait 128,eas_46172
                 shiver 136
                 csWait 60
                 customActscriptWait 136
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $0          ;   
+                 ac_motion OFF          ;   
+                 ac_orientUp            ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -106,7 +106,7 @@ cs_4DF00:       setActscriptWait 128,eas_46172
                 startEntity 136
                 csWait 10
                 setActscriptWait 136,eas_Jump
-                setActscriptWait 136,eas_46172
+                setActscriptWait 136,eas_DeactivateAutoFacing
                 nextSingleText $0,136   ; "Nooooooo!{W1}"
                 entityActionsWait 136
                  moveUp 2
@@ -160,7 +160,7 @@ cs_4DF00:       setActscriptWait 128,eas_46172
                 setQuake 3
                 csWait 50
                 csWait 5
-                setActscript 136,eas_461B6
+                setActscript 136,eas_2xRightLeft
                 csWait 80
                 setQuake 0
                 csWait 40
@@ -174,7 +174,7 @@ cs_4DF00:       setActscriptWait 128,eas_46172
                 setActscriptWait 136,eas_Jump
                 setActscriptWait 136,eas_Jump
                 csWait 30
-                setActscriptWait 136,eas_46172
+                setActscriptWait 136,eas_DeactivateAutoFacing
                 entityActionsWait 136
                  moveUp 1
                 endActions
@@ -188,7 +188,7 @@ cs_4DF00:       setActscriptWait 128,eas_46172
                 csWait 10
                 setPos 129,10,14,LEFT
                 csWait 5
-                setActscript 136,eas_461B6
+                setActscript 136,eas_2xRightLeft
                 csWait 10
                 setPos 130,11,16,RIGHT
                 csWait 10

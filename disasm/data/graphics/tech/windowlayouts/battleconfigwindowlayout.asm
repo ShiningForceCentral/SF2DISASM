@@ -3,7 +3,10 @@
 ; 0x15A5A..0x15BB0 : Battle config window layout
 BattleConfigWindowLayout:
                 
-; Syntax        vdpBaseTile [VDPTILE_]index[|mirror|flip]
+; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
+;
+; Notes: PALETTE3 and PRIORITY bits are always set.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
 ; 1st line
                 vdpBaseTile CORNER

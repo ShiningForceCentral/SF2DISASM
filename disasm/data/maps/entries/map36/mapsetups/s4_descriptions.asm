@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map36_AreaDescriptions:
                 
                 move.w  #$1038,d3       ; "A book...{N}PACALON KINGS{W1}"
