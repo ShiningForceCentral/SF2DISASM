@@ -39,21 +39,21 @@ LoadSpecialSprite:
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
                 add.w   d1,d1
-                move.w  rjt_SpecialSpriteLoad(pc,d1.w),d1
-                jmp     rjt_SpecialSpriteLoad(pc,d1.w)
+                move.w  rjt_SpecialSpriteLoadingFunctions(pc,d1.w),d1
+                jmp     rjt_SpecialSpriteLoadingFunctions(pc,d1.w)
 
     ; End of function LoadSpecialSprite
 
-rjt_SpecialSpriteLoad:
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoad
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoad
-                dc.w LoadExplorationSpecialSprite-rjt_SpecialSpriteLoad
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoad
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoad
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoad
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoad
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoad
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoad
+rjt_SpecialSpriteLoadingFunctions:
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadExplorationSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -68,7 +68,7 @@ LoadBattleSpecialSprite:
                 move.w  #$480,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
-                bra.w   @Done
+                bra.w   loc_25CB0
 
     ; End of function LoadBattleSpecialSprite
 
@@ -87,7 +87,7 @@ LoadExplorationSpecialSprite:
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
                 bra.w   *+4
-@Done:
+loc_25CB0:
                 
                 movem.l (sp)+,d0-a1
                 rts

@@ -33,7 +33,7 @@ sub_364E:
                 add.w   d3,d2
                 add.w   d2,d2
                 move.w  (a4,d0.w),d0
-                cmpi.w  #$C000,d0
+                cmpi.w  #VRAM_ADDRESS_PLANE_A,d0
                 bcs.s   loc_368C
                 clr.w   d6
                 bra.s   loc_3690
@@ -326,11 +326,11 @@ loc_38E4:
                 bra.s   loc_392A
 loc_38E6:
                 
-                lsl.w   #5,d2
+                lsl.w   #ENTITYDEF_SIZE_BITS,d2
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d2,a0
-                move.w  (a0)+,d2
-                move.w  (a0)+,d3
+                move.w  (a0)+,d2        ; x location
+                move.w  (a0)+,d3        ; y location
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_390A
                 sub.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
@@ -1046,9 +1046,9 @@ ToggleRoofOnMapLoad:
 loc_3F38:
                 
                 andi.w  #$3F,d4 
-                lsl.w   #5,d4
+                lsl.w   #ENTITYDEF_SIZE_BITS,d4
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.w  2(a0,d4.w),d5
+                move.w  ENTITYDEF_OFFSET_Y(a0,d4.w),d5
                 move.w  (a0,d4.w),d4
                 clr.w   d1
                 getSavedByte CURRENT_MAP, d1

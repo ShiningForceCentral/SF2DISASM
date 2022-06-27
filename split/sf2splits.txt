@@ -31,6 +31,7 @@
 #dir    data/graphics/maps/mappalettes
 #dir    data/graphics/icons
 #dir    data/graphics/tech
+#dir    data/graphics/tech/alphabethighlight
 #dir    data/graphics/tech/battlescenetransition
 #dir    data/graphics/tech/menus
 #dir    data/graphics/tech/fonts
@@ -831,7 +832,7 @@
 #split	0x14EFC,0x14F7C,data/graphics/tech/shoppricetagtiles-blank.bin
 #split	0x14F7C,0x1505C,data/graphics/tech/shoppricetagtiles-numbers.bin
 #split	0x151D6,0x15268,data/graphics/tech/shopinventoryitemhighlighttiles.bin
-#split	0x1623A,0x16282,data/graphics/tech/alphabethighlighttiles.bin
+#split	0x1623A,0x16282,data/graphics/tech/alphabethighlight/alphabethighlighttiles.bin
 #split	0x198A8,0x198C8,data/graphics/battles/plt_battlescenebasepalette.bin
 #split	0x23658,0x23758,data/graphics/tech/unitcursortiles.bin
 #split	0x25DF6,0x261A6,data/graphics/specialsprites/taros.bin

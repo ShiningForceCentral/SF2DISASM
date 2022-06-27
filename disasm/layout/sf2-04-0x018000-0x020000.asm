@@ -4,6 +4,7 @@
 ; FREE SPACE : 532 bytes.
 
 
+                include "code\common\tech\jumpinterfaces\s04_jumpinterface.asm"    ; Game Section 04 Jump Interface
                 include "code\gameflow\battle\battlescenes\battlesceneengine_0.asm"    ; Battlescene engine
                 if (STANDARD_BUILD=1)
                     include "code\gameflow\battle\battlescenes\getallyanimation-standard.asm"

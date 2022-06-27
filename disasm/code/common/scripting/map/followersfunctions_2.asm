@@ -30,7 +30,7 @@ InitializeFollowerActscripts:
                 lea     pt_eas_WorldmapFollowers(pc), a6
 loc_443D2:
                 
-                lea     ((OTHER_ENTITIES-$1000000)).w,a0
+                lea     ((OTHER_ENTITIES_DATA-$1000000)).w,a0
 loc_443D6:
                 
                 cmpi.w  #$FFFF,(a4)
@@ -41,8 +41,8 @@ loc_443D6:
                 jsr     j_CheckFlag
                 movem.w (sp)+,d1
                 beq.s   loc_443FA
-                move.l  (a6)+,$14(a0)
-                lea     $20(a0),a0
+                move.l  (a6)+,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
+                lea     NEXT_ENTITYDEF(a0),a0
 loc_443FA:
                 
                 addq.l  #4,a4
@@ -62,7 +62,7 @@ sub_44404:
                 
                 checkSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
                 bne.s   byte_44420      
-                move.b  #$3D,((ENTITY_MAPSPRITE-$1000000)).w 
+                move.b  #MAPSPRITE_RAFT,((ENTITY_MAPSPRITE-$1000000)).w
                 bsr.w   sub_4446C
                 move.w  #$40,d1 
                 move.w  d1,d2

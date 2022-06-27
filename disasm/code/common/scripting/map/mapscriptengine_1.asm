@@ -1529,7 +1529,7 @@ csc2C_followEntity:
                 move.b  (a0)+,d3
                 ext.w   d2
                 ext.w   d3
-                jsr     AddFollower
+                jsr     AddFollower     
                 rts
 
     ; End of function csc2C_followEntity
@@ -1559,7 +1559,7 @@ csc2E_hideEntity:
                 
                 move.w  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
-                jsr     HideEntity
+                jsr     HideEntity      
                 rts
 
     ; End of function csc2E_hideEntity
@@ -1795,7 +1795,7 @@ loc_47020:
                 
                 move.w  #$FFE8,d2
                 move.w  #0,d3
-                jsr     AddFollower
+                jsr     AddFollower     
                 rts
 
     ; End of function csc56_addFollower
@@ -1813,7 +1813,7 @@ csc31_moveEntityAboveEntity:
                 bsr.w   GetEntityAddressFromCharacter
                 moveq   #$FFFFFFE8,d2
                 moveq   #0,d3
-                jsr     AddFollower
+                jsr     AddFollower     
                 rts
 
     ; End of function csc31_moveEntityAboveEntity
