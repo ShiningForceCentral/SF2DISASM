@@ -1,139 +1,173 @@
 
-; ASM FILE data\stats\allies\allymapsprites-expanded.asm :
-; Expanded ally map sprite indexes table -- included when patch Force_Members_Expansion is enabled
+; ASM FILE data\stats\allies\allymapsprites-standard.asm :
 ;
-;       Works in tandem with class types table located in data\stats\allies\classes\classtypes.asm
+; Works in tandem with class types table located in data\stats\allies\classes\classtypes.asm
 
 tbl_AllyMapSprites:
 
 ; 3 bytes per ally, one for each class type (base, promo, special)
 ;
-; Syntax        mapSprite index (enum Mapsprites : MAPSPRITE_*)
-                    
-                mapSprite BOWIE_BASE        ; BOWIE
+; Syntax        mapSprite [MAPSPRITE_]enum (or index)
+                
+; 0: Bowie
+                mapSprite BOWIE_BASE
                 mapSprite BOWIE_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite SARAH_BASE        ; SARAH
+; 1: Sarah
+                mapSprite SARAH_BASE
                 mapSprite SARAH_PROMO
                 mapSprite SARAH_SPECIAL
                 
-                mapSprite CHESTER_BASE      ; CHESTER
+; 2: Chester
+                mapSprite CHESTER_BASE
                 mapSprite CHESTER_PROMO
                 mapSprite CHESTER_SPECIAL
                 
-                mapSprite JAHA_BASE         ; JAHA
+; 3: Jaha
+                mapSprite JAHA_BASE
                 mapSprite JAHA_PROMO
                 mapSprite JAHA_SPECIAL
                 
-                mapSprite KAZIN_BASE        ; KAZIN
+; 4: Kazin
+                mapSprite KAZIN_BASE
                 mapSprite KAZIN_PROMO
                 mapSprite KAZIN_SPECIAL
                 
-                mapSprite SLADE_BASE        ; SLADE
+; 5: Slade
+                mapSprite SLADE_BASE
                 mapSprite SLADE_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite KIWI_BASE         ; KIWI
+; 6: Kiwi
+                mapSprite KIWI_BASE
                 mapSprite KIWI_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite PETER_BASE        ; PETER
+; 7: Peter
+                mapSprite PETER_BASE
                 mapSprite PETER_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite MAY_BASE          ; MAY
+; 8: May
+                mapSprite MAY_BASE
                 mapSprite MAY_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite GERHALT_BASE      ; GERHALT
+; 9: Gerhalt
+                mapSprite GERHALT_BASE
                 mapSprite GERHALT_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite LUKE_BASE         ; LUKE
+; 10: Luke
+                mapSprite LUKE_BASE
                 mapSprite LUKE_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite DEFAULT           ; ROHDE
+; 11: Rohde
+                mapSprite DEFAULT
                 mapSprite DEFAULT
                 mapSprite ROHDE_SPECIAL
                 
-                mapSprite RICK_BASE         ; RICK
+; 12: Rick
+                mapSprite RICK_BASE
                 mapSprite RICK_PROMO
                 mapSprite RICK_SPECIAL
                 
-                mapSprite ELRIC_BASE        ; ELRIC
+; 13: Elric
+                mapSprite ELRIC_BASE
                 mapSprite ELRIC_PROMO
                 mapSprite ELRIC_SPECIAL
                 
-                mapSprite ERIC_BASE         ; ERIC
+; 14: Eric
+                mapSprite ERIC_BASE
                 mapSprite ERIC_PROMO
                 mapSprite ERIC_SPECIAL
                 
-                mapSprite KARNA_BASE        ; KARNA
+; 15: Karna
+                mapSprite KARNA_BASE
                 mapSprite KARNA_PROMO
                 mapSprite KARNA_SPECIAL
                 
-                mapSprite RANDOLF_BASE      ; RANDOLF
+; 16: Randolf
+                mapSprite RANDOLF_BASE
                 mapSprite RANDOLF_PROMO
                 mapSprite RANDOLF_SPECIAL
                 
-                mapSprite TYRIN_BASE        ; TYRIN
+; 17: Tyrin
+                mapSprite TYRIN_BASE
                 mapSprite TYRIN_PROMO
                 mapSprite TYRIN_SPECIAL
                 
-                mapSprite JANET_BASE        ; JANET
+; 18: Janet
+                mapSprite JANET_BASE
                 mapSprite JANET_PROMO
                 mapSprite JANET_SPECIAL
                 
-                mapSprite DEFAULT           ; HIGINS
+; 19: Higins
+                mapSprite DEFAULT
                 mapSprite HIGINS_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite DEFAULT           ; SKREECH
+; 20: Skreech
+                mapSprite DEFAULT
                 mapSprite SKREECH_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite DEFAULT           ; TAYA
+; 21: Taya
+                mapSprite DEFAULT
                 mapSprite DEFAULT
                 mapSprite TAYA_SPECIAL
                 
-                mapSprite DEFAULT           ; FRAYJA
+; 22: Frayja
+                mapSprite DEFAULT
                 mapSprite FRAYJA_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite DEFAULT           ; JARO
+; 23: Jaro
+                mapSprite DEFAULT
                 mapSprite DEFAULT
                 mapSprite JARO_SPECIAL
                 
-                mapSprite DEFAULT           ; GYAN
+; 24: Gyan
+                mapSprite DEFAULT
                 mapSprite GYAN_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite DEFAULT           ; SHEELA
+; 25: Sheela
+                mapSprite DEFAULT
                 mapSprite DEFAULT
                 mapSprite SHEELA_SPECIAL
                 
-                mapSprite DEFAULT           ; ZYNK
+; 26: Zynk
+                mapSprite DEFAULT
                 mapSprite ZYNK_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite DEFAULT           ; CHAZ
+; 27: Chaz
+                mapSprite DEFAULT
                 mapSprite CHAZ_PROMO
                 mapSprite DEFAULT
                 
-                mapSprite DEFAULT           ; LEMON
+; 28: Lemon
+                mapSprite DEFAULT
                 mapSprite DEFAULT
                 mapSprite LEMON_SPECIAL
                 
-                mapSprite DEFAULT           ; CLAUDE
+; 29: Claude
+                mapSprite DEFAULT
                 mapSprite CLAUDE_PROMO
                 mapSprite DEFAULT
                 
+                if (FORCE_MEMBERS_EXPANSION=1)
+; 30: 
                 mapSprite DEFAULT
                 mapSprite DEFAULT
                 mapSprite DEFAULT
                 
+; 31: 
                 mapSprite DEFAULT
                 mapSprite DEFAULT
                 mapSprite DEFAULT
+                
+                endif

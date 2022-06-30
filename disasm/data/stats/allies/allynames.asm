@@ -33,7 +33,7 @@ tbl_AllyNames:  allyName "BOWIE"
                 allyName "CLAUDE"
                 
                 ; Additional entries to be defined with force members expansion patch
-                if (FORCE_MEMBERS_EXPANSION=1)
+                if (STANDARD_BUILD&FORCE_MEMBERS_EXPANSION=1)
                 allyName "0"
                 allyName "0"
                 endif
