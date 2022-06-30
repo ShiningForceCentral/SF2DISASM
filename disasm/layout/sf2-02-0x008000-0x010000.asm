@@ -9,6 +9,9 @@
                 
                 ; Stats engine
                 include "code\common\stats\statsengine_1.asm"    ; Character stats engine
+                if (STANDARD_BUILD=1)
+                    include "code\common\stats\getclasstype-standard.asm"
+                endif
                 include "data\stats\allies\classes\classtypes.asm"    ; Class types table
                 include "code\common\stats\statsengine_2.asm"    ; Character stats engine
                 include "code\common\stats\levelup.asm"    ; Level Up functions

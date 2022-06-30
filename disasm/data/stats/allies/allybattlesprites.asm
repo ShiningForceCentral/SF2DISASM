@@ -158,3 +158,17 @@ tbl_AllyBattleSprites:
                 allyBattleSprAndPlt GLM, GLM, 0
                 allyBattleSprAndPlt NONE, NONE, 0
                 allyBattleSprAndPlt NONE, NONE, 0
+                
+                ; Additional entries to be defined with force members expansion patch
+                if (STANDARD_BUILD&FORCE_MEMBERS_EXPANSION=1)
+; 30: 
+                allyBattleSprAndPlt RDBN, SDMN, 0
+                allyBattleSprAndPlt NONE, NONE, 0
+                allyBattleSprAndPlt NONE, NONE, 0
+                
+; 31: 
+                allyBattleSprAndPlt RDBN, SDMN, 0
+                allyBattleSprAndPlt NONE, NONE, 0
+                allyBattleSprAndPlt NONE, NONE, 0
+                
+                endif

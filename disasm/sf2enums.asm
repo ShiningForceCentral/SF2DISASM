@@ -44,12 +44,17 @@ GFX_DIAMENU_ICON_PIXELS_NUMBER: equ $240
 ; ---------------------------------------------------------------------------
 
 ; enum Combatant
+    if (STANDARD_BUILD&FORCE_MEMBERS_EXPANSION=1)
+combatantAlliesNumber = 32
+    else
+combatantAlliesNumber = 30
+    endif
 COMBATANT_ALLIES_START: equ $0
-COMBATANT_ALLIES_COUNTER: equ $1D
-COMBATANT_ALLIES_END: equ $1D
-COMBATANT_ALLIES_NUMBER: equ $1E
-COMBATANT_ENEMIES_COUNTER: equ $1F
-COMBATANT_ALLIES_SPACEEND_MINUS_ONE: equ $1F
+COMBATANT_ALLIES_COUNTER: equ COMBATANT_ALLIES_NUMBER-1
+COMBATANT_ALLIES_END: equ COMBATANT_ALLIES_NUMBER-1
+COMBATANT_ALLIES_NUMBER: equ combatantAlliesNumber
+COMBATANT_ENEMIES_COUNTER: equ COMBATANT_ENEMIES_NUMBER-1
+COMBATANT_ALLIES_SPACEEND_MINUS_ONE: equ COMBATANT_ALLIES_SPACEEND-1
 COMBATANT_ENEMIES_NUMBER: equ $20
 COMBATANT_ALLIES_SPACEEND: equ $20
 COMBATANTS_ALL_COUNTER: equ $3D
@@ -3146,8 +3151,15 @@ ALLY_MASK_INDEX: equ $1F
 ; ---------------------------------------------------------------------------
 
 ; enum Followers
-FOLLOWER_A: equ $1E
-FOLLOWER_B: equ $1F
+    if (STANDARD_BUILD&FORCE_MEMBERS_EXPANSION=1)
+followerA = 156
+followerB = 157
+    else
+followerA = 30
+followerB = 31
+    endif
+FOLLOWER_A: equ followerA 
+FOLLOWER_B: equ followerB
 FOLLOWER_C: equ $9E
 FOLLOWER_D: equ $9F
 

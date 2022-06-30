@@ -39,7 +39,9 @@ loc_11B9E:
                 move.w  #$A0,d7 
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d0
-                bsr.w   GetAllyPortrait 
+                if (STANDARD_BUILD=0)
+                    bsr.w   GetAllyPortrait 
+                endif
                 bsr.w   LoadPortrait    
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -142,7 +144,9 @@ BuildMemberScreen:
                 bsr.w   LoadTileDataForMemberScreen
                 move.w  portraitIndex(a6),d0
                 blt.s   loc_11CA6
-                bsr.w   GetAllyPortrait 
+                if (STANDARD_BUILD=0)
+                    bsr.w   GetAllyPortrait 
+                endif
                 bsr.w   LoadPortrait    
 loc_11CA6:
                 

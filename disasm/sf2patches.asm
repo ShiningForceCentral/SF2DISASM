@@ -6,6 +6,7 @@ EXPANDED_ROM:                       equ 1       ; Build a 4MB ROM and manage SRA
 EXTENDED_SSF_MAPPER:                equ 0       ; Build a 6MB ROM and manage ROM and SRAM mapping.
 EXPANDED_SRAM:                      equ 1       ; Expand SRAM from 8KB to 32KB.
 RELOCATED_SAVED_DATA_TO_SRAM:       equ 0       ; Relocate currently loaded saved data from system RAM to cartridge SRAM.
+FORCE_MEMBERS_EXPANSION:            equ 0       ; Enable the use of 2 additional force members.
 EXPANDED_ITEMS_AND_SPELLS:          equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of 4MB ROM with 32KB SRAM.
 OPTIMIZED_ROM_LAYOUT:               equ 1       ; Align ROM sections to next word boundary to consolidate free space.
 

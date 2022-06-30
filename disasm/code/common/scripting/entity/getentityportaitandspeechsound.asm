@@ -18,7 +18,7 @@ GetEntityPortaitAndSpeechSfx:
                 clr.w   d2
                 bsr.w   GetEntityAddressFromCharacter
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0 ; entity's map sprite index -> D0
-                lea     SpriteDialogProperties(pc), a0
+                lea     tbl_SpriteDialogProperties(pc), a0
 @FindMapSprite_Loop:
                 
                 cmp.b   (a0),d0         ; loop until we find entry matching the given map sprite

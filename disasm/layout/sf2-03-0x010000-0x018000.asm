@@ -20,7 +20,11 @@
                 include "code\common\menus\menuengine_04.asm"    ; Menu engine
                 include "code\common\menus\buildmemberstatswindow.asm"    ; Build member stats window function
                 include "code\common\menus\unusedsub_12606.asm"    ; Unused function
-                include "code\common\menus\getcombatantportrait.asm"    ; Get combatant portrait index function
+                if (STANDARD_BUILD=1)
+                    include "code\common\menus\getcombatantportrait-standard.asm"
+                else
+                    include "code\common\menus\getcombatantportrait.asm"    ; Get combatant portrait index function
+                endif
                 include "data\graphics\tech\windowborder\entries.asm"    ; Windows border compressed tiles
                 include "data\graphics\tech\windowlayouts\portraitwindowlayout.asm"    ; Member screen portrait window layout
                 include "data\graphics\tech\windowlayouts\allykilldefeatwindowlayout.asm"    ; Member screen kills and defeat window layout
@@ -29,7 +33,9 @@
                 include "code\common\menus\writememberlisttext.asm"    ; Write member list text function
                 include "code\common\menus\menuengine_06.asm"    ; Menu engine
                 include "code\common\menus\unusedsub_156A8.asm"    ; Unused window functions
-                include "code\common\menus\getallyportrait.asm"    ; Get ally portrait index function
+                if (STANDARD_BUILD=0)
+                    include "code\common\menus\getallyportrait.asm"    ; Get ally portrait index function
+                endif
                 include "code\common\menus\menuengine_07.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\battleconfigwindowlayout.asm"    ; Battle config window layout
                 include "code\common\menus\menuengine_08.asm"    ; Menu engine
