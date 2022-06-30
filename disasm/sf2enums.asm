@@ -44,7 +44,7 @@ GFX_DIAMENU_ICON_PIXELS_NUMBER: equ $240
 ; ---------------------------------------------------------------------------
 
 ; enum Combatant
-    if (STANDARD_BUILD&FORCE_MEMBERS_EXPANSION=1)
+    if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
 combatantAlliesNumber = 32
     else
 combatantAlliesNumber = 30
@@ -3151,7 +3151,7 @@ ALLY_MASK_INDEX: equ $1F
 ; ---------------------------------------------------------------------------
 
 ; enum Followers
-    if (STANDARD_BUILD&FORCE_MEMBERS_EXPANSION=1)
+    if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
 followerA = 156
 followerB = 157
     else

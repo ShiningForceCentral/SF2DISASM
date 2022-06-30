@@ -159,7 +159,7 @@ tbl_AllyMapSprites:
                 mapSprite CLAUDE_PROMO
                 mapSprite DEFAULT
                 
-                if (FORCE_MEMBERS_EXPANSION=1)
+                if (EXPANDED_FORCE_MEMBERS=1)
 ; 30: 
                 mapSprite DEFAULT
                 mapSprite DEFAULT

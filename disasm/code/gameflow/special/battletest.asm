@@ -67,7 +67,7 @@ DebugModeBattleTest:
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
-                if (STANDARD_BUILD&FORCE_MEMBERS_EXPANSION=1)
+                if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
                     moveq   #30,d0
                     bsr.w   JoinForce
                     moveq   #31,d0

@@ -165,7 +165,7 @@ tbl_AllyDialogProperties:
                 allyPortraitAndSfx CLAUDE, DIALOG_BLEEP_7
                 allyPortraitAndSfx CLAUDE, DIALOG_BLEEP_7
                 
-                if (FORCE_MEMBERS_EXPANSION=1)
+                if (EXPANDED_FORCE_MEMBERS=1)
 ; 30: 
                 allyPortraitAndSfx BOWIE_BASE, DIALOG_BLEEP_5
                 allyPortraitAndSfx BOWIE_BASE, DIALOG_BLEEP_5

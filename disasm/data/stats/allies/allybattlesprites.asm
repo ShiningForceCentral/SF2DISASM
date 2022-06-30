@@ -160,7 +160,7 @@ tbl_AllyBattleSprites:
                 allyBattleSprAndPlt NONE, NONE, 0
                 
                 ; Additional entries to be defined with force members expansion patch
-                if (STANDARD_BUILD&FORCE_MEMBERS_EXPANSION=1)
+                if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
 ; 30: 
                 allyBattleSprAndPlt RDBN, SDMN, 0
                 allyBattleSprAndPlt NONE, NONE, 0
