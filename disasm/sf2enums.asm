@@ -655,7 +655,7 @@ ENEMYAI_MIN_MP_AURA4: equ $1E
 
 ; enum IconTiles_Properties
     if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-iconTilesOffsetCracks = $F240
+iconTilesOffsetCracks = $C0C0
     else
 iconTilesOffsetCracks = $6F00
     endif
