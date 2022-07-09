@@ -780,6 +780,10 @@ DecreaseCurrentMOV:
 ; =============== S U B R O U T I N E =======================================
 
 
+GetClassAndName:
+                if (STANDARD_BUILD=1)
+                    bsr.w   GetClass
+                endif
 GetClassName:
                 
                 movea.l (p_tbl_ClassNames).l,a0
@@ -2275,7 +2279,11 @@ IsItemUsableInBattle:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
-                cmpi.b  #$FF,ITEMDEF_OFFSET_USE_SPELL(a0) ; BUG -- should compare to $3F for 'no spell'
+                if (STANDARD_BUILD=1)
+                    cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
+                else
+                    cmpi.b  #$FF,ITEMDEF_OFFSET_USE_SPELL(a0) ; BUG -- should compare to $3F for 'no spell'
+                endif
                 beq.s   @HasNoUse
                 ori     #1,ccr
                 bra.s   @Done

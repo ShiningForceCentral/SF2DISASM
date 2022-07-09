@@ -1289,9 +1289,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                
-                ; 127: 
+                ; 127: Empty
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -1300,6 +1298,8 @@ tbl_ItemDefs:
                 equipEffects NONE, 0, &
                              NONE, 0, &
                              NONE, 0
+                
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                 
                 ; 128: 
                 equipFlags   NONE
@@ -2571,9 +2571,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                endif
-                
-                ; 127 or 255: Empty
+                ; 255: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -2583,3 +2581,4 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
+                endif

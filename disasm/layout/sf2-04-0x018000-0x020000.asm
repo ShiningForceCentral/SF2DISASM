@@ -9,6 +9,7 @@
                 if (STANDARD_BUILD=1)
                     include "code\gameflow\battle\battlescenes\getallyanimation-standard.asm"
                     include "data\graphics\battles\battlesprites\spearthrowanimations-standard.asm"
+                    align
                 else
                     include "code\gameflow\battle\battlescenes\getallyanimation.asm"    ; Get ally battlescene animation function
                 endif

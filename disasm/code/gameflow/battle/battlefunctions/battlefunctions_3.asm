@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlefunctions\battlefunctions_3.asm :
-; 0x25610..0x257C0 : Battle functions
+; 0x25610..0x25790 : Battle functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -51,7 +51,7 @@ LoadBattle:
                 jsr     (FadeInFromBlack).w
                 checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; if battle 44, then special battle !
                 bne.s   return_256A0
-                jsr     j_SpecialBattle
+                jsr     j_DisplayTimerWindow
 return_256A0:
                 
                 rts
@@ -184,46 +184,4 @@ PrintActivatedDefCon:
                 rts
 
     ; End of function PrintActivatedDefCon
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-SetMoveSfx:
-                
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
-                bne.s   @Continue
-                
-                clr.w   ((MOVE_SFX-$1000000)).w ; no move sfx outside battle
-                bra.s   @CheckEquipment
-@Continue:
-                
-                move.w  #SFX_WALKING,((MOVE_SFX-$1000000)).w
-@CheckEquipment:
-                
-                if (STANDARD_BUILD=1)
-                    movem.l d1-d2/a0,-(sp)
-                    lea     tbl_MoveSfxForEquippedRing(pc), a0
-                    jsr     GetEquippedRing
-                    moveq   #1,d2
-                    jsr     (FindSpecialPropertiesAddressForObject).w
-                    bcs.s   @Done
-                    move.b  (a0),((MOVE_SFX+1-$1000000)).w
-                else
-                    movem.w d0-d7,-(sp)
-                    jsr     j_GetEquippedRing
-                    cmpi.w  #ITEM_CHIRRUP_SANDALS,d1 ; HARDCODED chirrup sandals item index for specific sfx
-                    bne.s   @Done
-                    move.w  #SFX_BLOAB,((MOVE_SFX-$1000000)).w
-                endif
-@Done:
-                
-                if (STANDARD_BUILD=1)
-                    movem.l (sp)+,d1-d2/a0
-                else
-                    movem.w (sp)+,d0-d7
-                endif
-                rts
-
-    ; End of function SetMoveSfx
 

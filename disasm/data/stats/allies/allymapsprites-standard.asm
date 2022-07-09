@@ -171,3 +171,11 @@ tbl_AllyMapSprites:
                 mapSprite DEFAULT
                 
                 endif
+
+
+; Allies who use a different mapsprite before joining the Force.
+tbl_AllyMapSpritesIfNotJoined:
+                
+                dc.b ALLY_ROHDE, MAPSPRITE_NPC_ROHDE
+                
+                tableEnd.b

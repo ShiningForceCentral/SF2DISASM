@@ -668,20 +668,17 @@ ICONTILES_OFFSET_CRACKS: equ iconTilesOffsetCracks
 
 ; enum Icons
     if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-iconNothing         = 255
 iconUnarmed         = 256
 iconSpellsStart     = 258
 iconJewelOfLight    = 321
 iconJewelOfEvil     = 322
     else
-iconNothing         = 127
 iconUnarmed         = 128
 iconSpellsStart     = 130
 iconJewelOfLight    = 146
 iconJewelOfEvil     = 147
     endif
-
-ICON_NOTHING:           equ iconNothing
+ICON_NOTHING:           equ ITEM_NOTHING
 ICON_UNARMED:           equ iconUnarmed
 ICON_SPELLS_START:      equ iconSpellsStart
 ICON_JEWEL_OF_LIGHT:    equ iconJewelOfLight
@@ -960,17 +957,15 @@ ITEM_MITHRIL: equ $7B
 ITEM_LIFE_RING: equ $7C
 ITEM_COTTON_BALLOON: equ $7D
 ITEM_CHIRRUP_SANDALS: equ $7E
+ITEM_NOTHING: equ $7F
 ITEM_USABLE_BY_AI: equ $2000
 ITEM_BROKEN: equ $8000
 
     if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-itemNothing     = 255
 itemEquipped    = $1000
     else
-itemNothing     = 127
 itemEquipped    = $80
     endif
-ITEM_NOTHING:   equ itemNothing
 ITEM_EQUIPPED:  equ itemEquipped
 
 ; ---------------------------------------------------------------------------
@@ -1666,7 +1661,7 @@ BATTLEACTION_STAY: equ $3
 BATTLEACTION_BURST_ROCK: equ $4
 BATTLEACTION_MUDDLE: equ $5
 BATTLEACTION_PRISM_LASER: equ $6
-BATTLEACTION_128: equ $80
+BATTLEACTION_TRAPPED_CHEST: equ $80
 
 ; ---------------------------------------------------------------------------
 

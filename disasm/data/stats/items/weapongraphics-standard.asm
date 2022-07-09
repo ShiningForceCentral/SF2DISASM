@@ -1,6 +1,15 @@
 
 ; ASM FILE data\stats\items\weapongraphics-standard.asm :
 
+; Weapon sprites that cause an alternate attack animation to be used for knight classes.
+tbl_SpearWeaponSprites:
+                
+                dc.b WEAPONSPRITE_SPEAR
+                dc.b WEAPONSPRITE_JAVELIN
+                
+                tableEnd.b
+
+
 tbl_WeaponGraphics:
                 
 ; Syntax        weaponGraphics [ITEM_]enum, [WEAPONSPRITE_]enum, [WEAPONPALETTE_]enum
@@ -75,9 +84,4 @@ tbl_WeaponGraphics:
                 weaponGraphics GISARME, KATANA, KATANA                          ; 109: Gisarme
                 
                 tableEnd.b
-                
-tbl_SpearWeaponSprites:
-                dc.b WEAPONSPRITE_SPEAR
-                dc.b WEAPONSPRITE_JAVELIN
-                
-                tableEnd.b
+

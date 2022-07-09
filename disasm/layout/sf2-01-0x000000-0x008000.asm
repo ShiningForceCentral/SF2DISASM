@@ -23,7 +23,13 @@
                 include "code\common\maps\mapload.asm"    ; Map loading functions
                 include "code\common\tech\graphics\display.asm"    ; Display function
                 include "code\gameflow\exploration\exploration.asm"    ; Exploration functions
-                include "code\gameflow\battle\battlemusic.asm"    ; Battle music function
+                if (STANDARD_BUILD=1)
+                    include "code\gameflow\battle\battlemusic-standard.asm"
+                    include "data\battles\global\explorationtobattlemusics-standard.asm"
+                    align
+                else
+                    include "code\gameflow\battle\battlemusic.asm"    ; Battle music function
+                endif
                 include "code\common\scripting\map\bbcs_11_function.asm"    ; Specific to before battle 11 cutscene function
                 include "code\common\maps\camerafunctions.asm"    ; Camera function
                 include "code\common\maps\animations.asm"    ; Map animation function
@@ -56,8 +62,8 @@
                 include "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
                 include "code\gameflow\start\regioncheck.asm"    ; Region check function
                 include "code\specialscreens\witch\soundtest.asm"    ; Sound Test function missing in US version
-                includeIfExtendedSsf "code\common\tech\extendedssfmapper.asm"   ; Extended SSF mapper functions
                 if (STANDARD_BUILD=1)
                     include "code\common\tech\findspecialproperties-standard.asm"
                 endif
+                includeIfExtendedSsf "code\common\tech\extendedssfmapper.asm"   ; Extended SSF mapper functions
                 alignIfOriginalRomLayout $8000

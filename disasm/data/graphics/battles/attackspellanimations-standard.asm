@@ -1,4 +1,6 @@
 
+; ASM FILE data\stats\items\attackspellanimations-standard.asm :
+
                 module
 
 @arrow1: equ SPELLANIMATION_ARROWS_AND_SPEARS

@@ -17,7 +17,7 @@ CalculateHealingEXP:
                     lea     tbl_HealerClasses(pc),a0
                     bsr.w   GetClass
                     moveq   #0,d2
-                    jsr     (FindSpecialPropertiesAddressForObject).w
+                    jsr     (FindSpecialPropertyBytesAddressForObject).w
                     bcs.s   @Skip
                 else
                     jsr     GetClass        
@@ -622,8 +622,16 @@ DetermineCriticalHit:
                 move.b  #$FF,criticalHit(a2)
                 move.b  (a4),d0
                 jsr     GetEquippedWeapon
-                cmpi.w  #ITEM_GISARME,d1
-                bne.s   @Skip
+                if (STANDARD_BUILD=1)
+                    bmi.s   @Return
+                    lea     tbl_CutOffWeapons(pc), a0
+                    clr.w   d2
+                    jsr     (FindSpecialPropertyBytesAddressForObject).w
+                    bcs.s   @Return
+                else
+                    cmpi.w  #ITEM_GISARME,d1
+                    bne.s   @Skip
+                endif
                 move.b  (a5),d0
                 move.w  #SPELL_DESOUL,d1
                 bsr.w   GetResistanceToSpell

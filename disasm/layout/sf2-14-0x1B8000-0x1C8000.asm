@@ -13,10 +13,10 @@
                 include "code\specialscreens\witchend\graphics.asm"    ; Witch End Screen
                 includeIfExpandedRom "data\graphics\tech\backgroundlayout.asm"    ; Battlescene Background Layout
                 includeIfExpandedRom "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
-                wordAlign
+                align
                 includeIfExpandedRom "code\specialscreens\endkiss\graphics.asm"  ; End Kiss Graphics
-                wordAlign
+                align
                 includeIfExpandedRom "code\specialscreens\jewelend\graphics.asm"             ; Jewel End Graphics
-                wordAlign
+                align
                 includeIfExpandedRom "code\specialscreens\suspend\graphics.asm"  ; Suspend String Graphics
                 alignIfOriginalRomLayout $1C8000

@@ -69,7 +69,7 @@ WriteBattlesceneScript_EnemyDropItem:
                     move.w  d2,d4
                     lea     tbl_RandomItemDrops(pc),a0
                     moveq   #1,d2
-                    jsr     (FindSpecialPropertiesAddressForObject).w   ; a0 = pointer to drop chance in 256
+                    jsr     (FindSpecialPropertyBytesAddressForObject).w   ; a0 = pointer to drop chance in 256
                     bcs.s   @DropItem
                 else
                     move.w  d1,d3

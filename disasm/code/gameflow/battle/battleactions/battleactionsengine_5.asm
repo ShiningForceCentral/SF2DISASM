@@ -1645,7 +1645,7 @@ AdjustSpellPower:
                     lea     tbl_Invocations(pc),a0
                     move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
                     moveq   #0,d2
-                    jsr     (FindSpecialPropertiesAddressForObject).w
+                    jsr     (FindSpecialPropertyBytesAddressForObject).w
                     bcs.s   @Done
                 else
                     move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1

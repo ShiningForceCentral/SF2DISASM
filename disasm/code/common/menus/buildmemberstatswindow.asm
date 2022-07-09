@@ -472,11 +472,7 @@ aJewel:
                 beq.s   @CleanIconCorners
                 movem.l d2-d3/a0-a1,-(sp)
                 movea.l (p_Icons).l,a0
-                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                    adda.l  #ICONTILES_OFFSET_CRACKS,a0
-                else
-                    lea     ICONTILES_OFFSET_CRACKS(a0),a0
-                endif
+                lea     ICONTILES_OFFSET_CRACKS(a0),a0
                 move.w  #ICONTILES_CRACKS_PIXELS_COUNTER,d2
 @DrawCracks_Loop:
                 

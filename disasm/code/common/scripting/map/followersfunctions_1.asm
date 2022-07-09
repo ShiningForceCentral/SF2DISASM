@@ -12,7 +12,7 @@ InitializeFollowerEntities:
                     lea     tbl_MapsWithNoFollowers(pc), a0
                     getSavedByte CURRENT_MAP, d1
                     moveq   #0,d2
-                    jsr     (FindSpecialPropertiesAddressForObject).w
+                    jsr     (FindSpecialPropertyBytesAddressForObject).w
                     movem.l (sp)+,d1-d2/a0
                     bcc.w   return_44336
                 else

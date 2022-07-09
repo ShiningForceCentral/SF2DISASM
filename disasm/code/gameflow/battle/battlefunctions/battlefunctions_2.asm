@@ -73,11 +73,14 @@ loc_24492:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Unused in standard build
 
 ClearDeadCombatantsListLength:
                 
-                clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
-                rts
+                if (STANDARD_BUILD=0)
+                    clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
+                    rts
+                endif
 
     ; End of function ClearDeadCombatantsListLength
 
@@ -1150,7 +1153,7 @@ loc_250B0:
                 jsr     sub_1AC054      
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_250FC
-                move.w  #BATTLEACTION_128,((CURRENT_BATTLEACTION-$1000000)).w
+                move.w  #BATTLEACTION_TRAPPED_CHEST,((CURRENT_BATTLEACTION-$1000000)).w
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
                 move.w  d0,itemOrSpellIndex(a6)
                 sndCom  MUSIC_CORRUPTED_SAVE

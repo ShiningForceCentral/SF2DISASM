@@ -1,4 +1,6 @@
 
+; ASM FILE data\stats\items\invocations-standard.asm :
+
 ; Spells for which power is divided by the number of targets
 tbl_Invocations:
                 dc.b SPELL_DAO

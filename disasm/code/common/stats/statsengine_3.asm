@@ -175,11 +175,7 @@ InitGameSettings:
                 setSavedLongWithPostIncrement d0, a0
                 dbf     d7,@ClearDealsItems_Loop
                 
-                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                    moveq   #-1,d0
-                else
-                    move.l  #LONGWORD_CARAVAN_INITVALUE,d0
-                endif
+                move.l  #LONGWORD_CARAVAN_INITVALUE,d0
                 loadSavedDataAddress CARAVAN_ITEMS, a0
                 moveq   #LONGWORD_CARAVAN_COUNTER,d7
 @ClearCaravanItems_Loop:

@@ -12,8 +12,8 @@ GetAllyAnimation:
         
 @KNIGHT_BATTLESPRITES_NUMBER: equ tbl_SpearThrowAnimations-tbl_KnightBattleSprites
         
-        move.l  d1,-(sp)
-        move.w  d7,-(sp)
+        move.w  d1,-(sp)
+        move.l  d2,-(sp)
         
         ; Check if regular attack animation type
         tst.w   d1
@@ -22,28 +22,25 @@ GetAllyAnimation:
         ; Check if weapon sprite is a spear
         lea     tbl_SpearWeaponSprites(pc), a0
         move.w  ((ALLY_WEAPON_SPRITE-$1000000)).w,d1
-        
-@FindSpear_Loop:
-        cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
-        beq.s   @GetAnimationIndex          ; Actor is not a knight. Get regular animation.
-        cmp.b   (a0)+,d1
-        bne.s   @FindSpear_Loop
+        moveq   #0,d2
+        jsr     (FindSpecialPropertyBytesAddressForObject).w
+        bcs.s   @Default                    ; Weapon is not a spear; get regular attack animation
         
         ; Check if battle sprite is a knight
         lea     tbl_KnightBattleSprites(pc), a0
         move.w  ((ALLY_BATTLE_SPRITE-$1000000)).w,d1
-        move.w  #@KNIGHT_BATTLESPRITES_NUMBER-1,d7
+        move.w  #@KNIGHT_BATTLESPRITES_NUMBER-1,d2
         
 @FindKnight_Loop:
-        cmp.b   (a0,d7.w),d1
+        cmp.b   (a0,d2.w),d1
         beq.s   @GetSpearThrowAnimation
-        dbf     d7,@FindKnight_Loop
+        dbf     d2,@FindKnight_Loop
         
         bra.s   @GetAnimationPointer
         
 @GetSpearThrowAnimation:
         clr.w   d1
-        move.b  @KNIGHT_BATTLESPRITES_NUMBER(a0,d7.w),d1
+        move.b  @KNIGHT_BATTLESPRITES_NUMBER(a0,d2.w),d1
         bra.s   @GetAnimationPointer
         
 @CheckSpecialAnimation:
@@ -67,8 +64,8 @@ GetAllyAnimation:
         lsl.w   #2,d1
         movea.l (a0,d1.w),a0
         
-        move.w  (sp)+,d7
-        move.l  (sp)+,d1
+        move.l  (sp)+,d2
+        move.w  (sp)+,d1
         rts
         
     ; End of function GetAllyAnimation

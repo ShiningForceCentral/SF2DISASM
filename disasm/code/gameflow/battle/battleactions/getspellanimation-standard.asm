@@ -9,8 +9,6 @@
 ;     a4 = pointer to battlescene actor index in RAM
 ;
 ; Out: d4 = spell animation index
-;
-;   HARDCODED class, enemy and weapon indexes
 
 silencedActor = -11
 rangedAttack = -6
@@ -22,7 +20,6 @@ GetSpellAnimation:
                 
                 ; Jump to module for battleaction
                 move.w  (a3),d0
-                bmi.s   @Skip
                 add.w   d0,d0
                 jsr     @bt_Battleactions(pc,d0.w)
                 
@@ -32,7 +29,7 @@ GetSpellAnimation:
                 bset    #SPELLANIMATION_BIT_MIRRORED,d4
                 
 @Done:          movem.l (sp)+,d0-d3/a0
-                rts
+@Return:        rts
 
     ; End of function GetSpellAnimation
 
@@ -40,8 +37,9 @@ GetSpellAnimation:
                 bra.s   @Attack
                 bra.s   @CastSpell
                 bra.s   @UseItem
+                bra.s   @Return     ; Stay
                 bra.s   @BurstRock
-                bra.s   @Muddle
+                bra.s   @Return     ; Muddled
                 bra.s   @PrismLaser
 ; ---------------------------------------------------------------------------
 
@@ -61,14 +59,14 @@ GetSpellAnimation:
 @Enemy:         lea     tbl_AttackSpellAnimationsForEnemy(pc),a0
                 bsr.w   GetEnemyIndex       ; d1.w = enemy index
                 
-@Continue:      jsr     (FindSpecialPropertiesAddressForObject).w   ; -> a0
+@Continue:      jsr     (FindSpecialPropertyBytesAddressForObject).w   ; -> a0
                 bcc.s   @GetAnimation       ; if class or enemy found, get matching spell animation
                                             ; otherwise, check equipped weapon
                 
                 lea     tbl_AttackSpellAnimationsForWeapon(pc),a0
                 bsr.w   GetEquippedWeapon   ; d1.w = equipped weapon index
                 moveq   #1,d2
-                jsr     (FindSpecialPropertiesAddressForObject).w   ; -> a0
+                jsr     (FindSpecialPropertyBytesAddressForObject).w   ; -> a0
                 bcs.s   @Return             ; if weapon not found, use default
                 
 @GetAnimation:  move.b  (a0),d4
@@ -105,11 +103,6 @@ GetSpellAnimation:
                 
 @BurstRock:     module
                 moveq   #SPELLANIMATION_BURST_ROCK_EXPLOSION,d4
-                rts
-                modend
-; ---------------------------------------------------------------------------
-                
-@Muddle:        module
                 rts
                 modend
 ; ---------------------------------------------------------------------------
