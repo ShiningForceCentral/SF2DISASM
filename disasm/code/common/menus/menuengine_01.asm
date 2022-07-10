@@ -21,16 +21,15 @@ WriteTilesFromAsciiWithOrangeFont:
 WriteTwoDigitsStatValue_MemberStats:
                 
                     if (FULL_CLASS_NAMES>=1)
-                    tst.b   d0
-                    bmi.s   WriteTwoDigitsStatValue
-                    adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
+                        tst.b   d0
+                        bmi.s   WriteTwoDigitsStatValue
+                        adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
                     endif
-                
 WriteTwoDigitsStatValue:
 
-                moveq   #2,d7   ; two digits
-                move.w  d1,d0
-                ext.l   d0
+                    moveq   #2,d7   ; two digits
+                    move.w  d1,d0
+                    ext.l   d0
                 endif
 
 ; =============== S U B R O U T I N E =======================================
@@ -145,14 +144,12 @@ tbl_MainFontAlternateSymbols:
 
 ; START OF FUNCTION CHUNK FOR WriteTilesFromAsciiWithOrangeFont
 
-loc_1016A:
-                if (FULL_CLASS_NAMES>=1)
-                tst.w   d1
-                bne.s   @Continue
-                move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
-                bra.s   loc_10156
-@Continue:
-                endif
+loc_1016A:      if (FULL_CLASS_NAMES>=1)
+                    tst.w   d1
+                    bne.s   @Continue
+                    move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
+                    bra.s   loc_10156
+@Continue:      endif
                 
                 lea     2(a2),a1
                 suba.w  d1,a1

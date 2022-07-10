@@ -91,18 +91,14 @@ selected_member = -2
                 
                 ; Write class name
                 move.w  current_character_index(a6),d0
-                
                 if (FULL_CLASS_NAMES=0)
-                jsr     GetClassAndName
+                    jsr     GetClassAndName
                 else
-                jsr     GetClassAndFullName
-                cmpi.w  #10,d7
-                blt.s   @Continue
-                lea     -WINDOW_MEMBERLIST_OFFSET_NEXT_LINE(a1),a1
-                
-@Continue:
-                endif
-                
+                    jsr     GetClassAndFullName
+                    cmpi.w  #10,d7
+                    blt.s   @Continue
+                    lea     -WINDOW_MEMBERLIST_OFFSET_NEXT_LINE(a1),a1
+@Continue:      endif
                 moveq   #-WINDOW_MEMBERLIST_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movea.l (sp)+,a1
@@ -122,9 +118,8 @@ selected_member = -2
 @WriteEntry_HpMaxMpMax:
                 cmpi.b  #1,((CURRENT_MEMBERLIST_PAGE-$1000000)).w   ; 'HP/MAX MP/MAX' page index
                 bne.s   @WriteEntry_Stats
-                
                 if (THREE_DIGITS_STATS=0)
-                addq.w  #2,a1
+                    addq.w  #2,a1
                 endif
                 
                 ; Write current HP
@@ -196,9 +191,8 @@ selected_member = -2
                 
 @WriteEntry_NewATTandDEF:
                 jsr     GetEquipNewATTandDEF  ; Get new ATT and DEF -> D2, D3
-                
                 if (THREE_DIGITS_STATS=0)
-                addq.w  #2,a1
+                    addq.w  #2,a1
                 endif
                 
                 ; Write current -> new ATT

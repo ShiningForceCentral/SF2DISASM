@@ -367,15 +367,13 @@ AddStatusEffectTileIndexesToVdpTileOrder:
                 subq.l  #4,a1
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 beq.s   @Return
-                
                 if (THREE_DIGITS_STATS|FULL_CLASS_NAMES=0)
-                movea.l windowTilesAddress(a6),a1
-                adda.w  #$78,a1
+                    movea.l windowTilesAddress(a6),a1
+                    adda.w  #$78,a1
                 else
-                addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
-                movea.l d3,a1
+                    addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
+                    movea.l d3,a1
                 endif
-                
 @Return:
                 
                 rts
@@ -405,28 +403,21 @@ LoadTileDataForMemberScreen:
                 jsr     (GetWindowTileAddress).w
                 move.w  #WINDOW_MEMBER_KD_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w   
-                
                 if (ALTERNATE_JEWEL_ICONS_DISPLAY=1)
-                ; Display small jewel icons next to Bowie's mapsprite
-                tst.w   -2(a6)
-                bne.s   @SkipJewels         ; skip if anyone other than Bowie
-                move.l  a1,-(sp)
-                adda.w  #26,a1              ; offset into window layout
-                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
-                beq.s   @CheckJewelOfEvil
-                move.w  #VDPTILE_JEWEL_OF_LIGHT|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
-@CheckJewelOfEvil:
-                
-                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
-                beq.s   @SkipJewelOfEvil
-                adda.w  #2,a1
-                move.w  #VDPTILE_JEWEL_OF_EVIL|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
-@SkipJewelOfEvil:
-                
-                movea.l (sp)+,a1
-@SkipJewels:
-                endif
-                
+                    ; Display small jewel icons next to Bowie's mapsprite
+                    tst.w   -2(a6)
+                    bne.s   @SkipJewels         ; skip if anyone other than Bowie
+                    move.l  a1,-(sp)
+                    adda.w  #26,a1              ; offset into window layout
+                    chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                    beq.s   @CheckJewelOfEvil
+                    move.w  #VDPTILE_JEWEL_OF_LIGHT|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+@CheckJewelOfEvil:  chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
+                    beq.s   @SkipJewelOfEvil
+                    adda.w  #2,a1
+                    move.w  #VDPTILE_JEWEL_OF_EVIL|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+@SkipJewelOfEvil:   movea.l (sp)+,a1
+@SkipJewels:    endif
                 adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
                 move.w  member(a6),d0
                 tst.b   d0

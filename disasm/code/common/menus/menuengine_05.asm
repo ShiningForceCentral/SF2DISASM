@@ -1213,12 +1213,11 @@ spr_MemberListTextHighlight:
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 vdpSprite 260, V2|H4|9, 1472|PALETTE3|PRIORITY, 156
-                
                 if (EIGHT_CHARACTERS_MEMBER_NAMES=0)
-                vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
+                    vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
                 else
-                vdpSprite 260, V2|H1|10, 1474|PALETTE3|PRIORITY, 188
-                vdpSprite 260, V2|H4|11, 1472|MIRROR|PALETTE3|PRIORITY, 196
+                    vdpSprite 260, V2|H1|10, 1474|PALETTE3|PRIORITY, 188
+                    vdpSprite 260, V2|H4|11, 1472|MIRROR|PALETTE3|PRIORITY, 196
                 endif
 
 ; =============== S U B R O U T I N E =======================================

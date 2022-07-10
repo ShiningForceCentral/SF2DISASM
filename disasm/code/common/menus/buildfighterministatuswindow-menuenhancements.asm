@@ -99,12 +99,10 @@ combatant_index = -2
                 bsr.w   CopyMinistatusWindowTileColumn
                 bsr.w   CopyMinistatusWindowTileColumn
                 bsr.w   CopyMinistatusWindowTileColumn
-                
                 if (THREE_DIGITS_STATS>=1)
-                suba.w  #10,a0
-                bsr.w   CopyMinistatusWindowTileColumn
+                    suba.w  #10,a0
+                    bsr.w   CopyMinistatusWindowTileColumn
                 endif
-                
                 bsr.w   CopyMinistatusWindowTileColumn
                 bsr.w   CopyMinistatusWindowTileColumn
                 
@@ -197,11 +195,10 @@ combatant_index = -2
 WriteThreeDigitsStatValue_MemberStats:
                 
                 if (FULL_CLASS_NAMES>=1)
-                tst.b   d0
-                bmi.s   WriteThreeDigitsStatValue_MemberList
-                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
+                    tst.b   d0
+                    bmi.s   WriteThreeDigitsStatValue_MemberList
+                    adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
                 endif
-                
 WriteThreeDigitsStatValue_MemberList:
                 move.w  d1,d0
                 
@@ -227,9 +224,9 @@ WriteStatValue:
     ; End of function WriteStatValue
 
 aUnknownValue:  if (THREE_DIGITS_STATS=0)
-                dc.b '??'
+                    dc.b '??'
                 else
-                dc.b '???',0
+                    dc.b '???',0
                 endif
 
 ; =============== S U B R O U T I N E =======================================

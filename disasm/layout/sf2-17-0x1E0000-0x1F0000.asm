@@ -14,12 +14,10 @@ SoundDriver:    incbin "data/sound/sounddriver.bin"
                 align
                 include "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
                 include "data\stats\allies\classes\classdefs.asm"    ; Class definitions
-                
                 if (FULL_CLASS_NAMES=1)
-                include "data\stats\allies\classes\fullclassnames.asm"
-                wordAlign
+                    include "data\stats\allies\classes\fullclassnames.asm"
+                    wordAlign
                 endif
-                
                 include "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 include "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
                 include "data\graphics\tech\unusedbasepalettes\entries.asm"    ; Unused base palettes

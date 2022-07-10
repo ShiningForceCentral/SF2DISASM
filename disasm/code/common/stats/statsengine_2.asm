@@ -826,15 +826,13 @@ DecreaseCurrentMOV:
 
                 if (FULL_CLASS_NAMES>=1)
 GetClassAndFullName:
-                bsr.w   GetClass
+                    bsr.w   GetClass
 GetFullClassName:
-                lea     tbl_FullClassNames,a0
-                bra.s   FindName
+                    lea     tbl_FullClassNames,a0
+                    bra.s   FindName
                 endif
-                
                 if (THREE_DIGITS_STATS|FULL_CLASS_NAMES>=1)
-GetClassAndName:
-                bsr.w   GetClass
+GetClassAndName:    bsr.w   GetClass
                 endif
 
 ; =============== S U B R O U T I N E =======================================
