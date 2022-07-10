@@ -99,11 +99,16 @@ CreateBattlesceneMiniStatusWindows:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.b = ally index
+;     d1.w = ?
 
-sub_11638:
+
+ShowAllyBattlesceneWindow:
                 
+                module
                 cmpi.b  #$FF,d0
                 beq.w   return_11714
+                
                 movem.l d0-a1,-(sp)
                 move.w  d1,-(sp)
                 clr.b   ((IS_TARGETING-$1000000)).w
@@ -135,7 +140,7 @@ loc_11674:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function sub_11638
+    ; End of function ShowAllyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -145,6 +150,7 @@ RemoveAllyBattlesceneWindow:
                 
                 cmpi.b  #$FF,d0
                 beq.w   return_11714
+                
                 movem.l d0-a1,-(sp)
                 clr.b   ((IS_TARGETING-$1000000)).w
                 clr.w   d0
@@ -159,11 +165,15 @@ RemoveAllyBattlesceneWindow:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.b = enemy index
+;     d1.w = ?
 
-sub_116B8:
+
+ShowEnemyBattlesceneWindow:
                 
                 cmpi.b  #$FF,d0
                 beq.w   return_11714
+                
                 movem.l d0-a1,-(sp)
                 move.w  d1,-(sp)
                 move.b  #$FF,((IS_TARGETING-$1000000)).w
@@ -197,7 +207,7 @@ return_11714:
                 
                 rts
 
-    ; End of function sub_116B8
+    ; End of function ShowEnemyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -218,6 +228,7 @@ RemoveEnemyBattlesceneWindow:
 
     ; End of function RemoveEnemyBattlesceneWindow
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

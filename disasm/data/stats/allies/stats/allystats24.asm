@@ -8,4 +8,4 @@ AllyStats24:    forClass  GLDT
                 defGrowth 32, 100, MIDDLE
                 agiGrowth 21, 52, EARLY
                 spellList 
-                    
+                

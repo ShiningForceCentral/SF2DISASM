@@ -1,6 +1,6 @@
 
 ; ASM FILE data\stats\enemies\enemybattlesprites.asm :
-; 0x1F914..0x1F9E2 : Enemy battle sprites table
+; 0x1F914..0x1F9E2 : Enemy battlesprites table
 tbl_EnemyBattleSprites:
                 
 ; Syntax        enemyBattleSprAndPlt [ENEMYBATTLESPRITE_]enum, palette
