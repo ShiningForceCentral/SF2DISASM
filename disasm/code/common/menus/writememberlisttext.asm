@@ -83,12 +83,8 @@ WriteMemberListText:
                 
                 ; Write class name
                 move.w  currentMember(a6),d0
-                if (FULL_CLASS_NAMES=0)
-                    jsr     j_GetClass
-                    jsr     j_GetClassName
-                else
-                    jsr     GetClassAndFullName
-                endif
+                jsr     j_GetClass
+                jsr     j_GetClassName
                 moveq   #-58,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movea.l (sp)+,a1

@@ -10,26 +10,26 @@
                 include "code\common\tech\pointers\s03_memberstatuswindowlayoutpointer.asm"    ; Game Section 03 Member Status Window Layout Pointer
                 include "code\common\menus\menuengine_01.asm"    ; Menu engine
                 include "data\graphics\tech\menus\diamondmenulayout.asm"    ; Diamond menu layout
-                if (EXTENDED_SPELL_NAMES=0)
-                    include "data\graphics\tech\menus\magicmenulayout.asm"    ; Magic menu layout
+                if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+                    include "data\graphics\tech\menus\magicmenulayout-extendedspellnames.asm"
                 else
-                    include "data\graphics\tech\menus\magicmenulayout-menuenhancements.asm"
+                    include "data\graphics\tech\menus\magicmenulayout.asm"    ; Magic menu layout
                 endif
                 include "data\graphics\tech\menus\itemmenulayout.asm"    ; Item menu layout
                 include "code\common\menus\menuengine_02.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\battleequipwindowlayout.asm"    ; Battle equip window layout
                 include "code\common\menus\menuengine_03.asm"    ; Menu engine
-                if (THREE_DIGITS_STATS|FULL_CLASS_NAMES=0)
-                    include "code\common\menus\buildfighterministatuswindow.asm"    ; Build fighter mini status window function
+                if (STANDARD_BUILD=1)
+                    include "code\common\menus\buildfighterministatuswindow-standard.asm"
                 else
-                    include "code\common\menus\buildfighterministatuswindow-menuenhancements.asm"
+                    include "code\common\menus\buildfighterministatuswindow.asm"    ; Build fighter mini status window function
                 endif
                 include "data\graphics\tech\windowlayouts\fighterministatuswindowlayout.asm"    ; Fighter mini status window layout
                 include "code\common\menus\menuengine_04.asm"    ; Menu engine
-                if (THREE_DIGITS_STATS|FULL_CLASS_NAMES|ALTERNATE_JEWEL_ICONS_DISPLAY=0)
-                    include "code\common\menus\buildmemberstatswindow.asm"    ; Build member stats window function
+                if (STANDARD_BUILD=1)
+                    include "code\common\menus\buildmemberstatswindow-standard.asm"
                 else
-                    include "code\common\menus\buildmemberstatswindow-menuenhancements.asm"
+                    include "code\common\menus\buildmemberstatswindow.asm"    ; Build member stats window function
                 endif
                 include "code\common\menus\unusedsub_12606.asm"    ; Unused function
                 include "code\common\menus\getcombatantportrait.asm"    ; Get combatant portrait index function
@@ -38,10 +38,10 @@
                 include "data\graphics\tech\windowlayouts\allykilldefeatwindowlayout.asm"    ; Member screen kills and defeat window layout
                 include "data\graphics\tech\windowlayouts\goldwindowlayout.asm"    ; Member screen gold window layout
                 include "code\common\menus\menuengine_05.asm"    ; Menu engine
-                if (THREE_DIGITS_STATS=0)
-                    include "code\common\menus\writememberlisttext.asm"    ; Write member list text function
+                if (STANDARD_BUILD=1)
+                    include "code\common\menus\writememberlisttext-standard.asm"
                 else
-                    include "code\common\menus\writememberlisttext-menuenhancements.asm"
+                    include "code\common\menus\writememberlisttext.asm"    ; Write member list text function
                 endif
                 include "code\common\menus\menuengine_06.asm"    ; Menu engine
                 include "code\common\menus\unusedsub_156A8.asm"    ; Unused window functions
@@ -50,20 +50,20 @@
                 include "data\graphics\tech\windowlayouts\battleconfigwindowlayout.asm"    ; Battle config window layout
                 include "code\common\menus\menuengine_08.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\alphabetwindowlayout.asm"    ; Alphabet window layout
-                if (EIGHT_CHARACTERS_MEMBER_NAMES=0)
-                    include "data\graphics\tech\windowlayouts\namecharacterentrywindowlayout.asm"    ; Name character entry window layout
-                else
+                if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
                     include "data\graphics\tech\windowlayouts\namecharacterentrywindowlayout-menuenhancements.asm"
+                else
+                    include "data\graphics\tech\windowlayouts\namecharacterentrywindowlayout.asm"    ; Name character entry window layout
                 endif
                 include "data\graphics\tech\alphabethighlight\entries.asm"    ; Alphabet Highlight Tiles
                 include "code\common\menus\menuengine_09.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\timerwindowlayout.asm"    ; Timer window layout
                 include "code\specialscreens\witch\witchmainmenu.asm"    ; Witch main menu
                 include "code\common\menus\menuengine_10.asm"    ; Menu engine
-                if (THREE_DIGITS_STATS|FULL_CLASS_NAMES=0)
-                    include "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout
-                else
+                if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
                     include "data\graphics\tech\windowlayouts\memberstatswindowlayout-menuenhancements.asm"
+                else
+                    include "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout
                 endif
                 include "data\stats\items\itemdefs.asm"    ; Item definitions
                 include "data\stats\spells\spelldefs.asm"    ; Spell definitions

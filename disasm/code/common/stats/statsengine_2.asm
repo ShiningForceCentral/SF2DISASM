@@ -824,20 +824,20 @@ DecreaseCurrentMOV:
 
     ; End of function DecreaseCurrentMOV
 
-                if (FULL_CLASS_NAMES>=1)
-GetClassAndFullName:
-                    bsr.w   GetClass
-GetFullClassName:
-                    lea     tbl_FullClassNames,a0
-                    bra.s   FindName
-                endif
-                if (THREE_DIGITS_STATS|FULL_CLASS_NAMES>=1)
-GetClassAndName:    bsr.w   GetClass
-                endif
 
 ; =============== S U B R O U T I N E =======================================
 
 
+GetClassAndFullName:
+                if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
+                    bsr.w   GetClass
+GetFullClassName:   lea     tbl_FullClassNames,a0
+                    bra.s   FindName
+                endif
+GetClassAndName:
+                if (STANDARD_BUILD=1)
+                    bsr.w   GetClass
+                endif
 GetClassName:
                 
                 movea.l (p_tbl_ClassNames).l,a0

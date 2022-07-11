@@ -367,12 +367,12 @@ AddStatusEffectTileIndexesToVdpTileOrder:
                 subq.l  #4,a1
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 beq.s   @Return
-                if (THREE_DIGITS_STATS|FULL_CLASS_NAMES=0)
-                    movea.l windowTilesAddress(a6),a1
-                    adda.w  #$78,a1
-                else
+                if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
                     addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
                     movea.l d3,a1
+                else
+                    movea.l windowTilesAddress(a6),a1
+                    adda.w  #$78,a1
                 endif
 @Return:
                 
@@ -403,7 +403,7 @@ LoadTileDataForMemberScreen:
                 jsr     (GetWindowTileAddress).w
                 move.w  #WINDOW_MEMBER_KD_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w   
-                if (ALTERNATE_JEWEL_ICONS_DISPLAY=1)
+                if (STANDARD_BUILD&ALTERNATE_JEWEL_ICONS_DISPLAY=1)
                     ; Display small jewel icons next to Bowie's mapsprite
                     tst.w   -2(a6)
                     bne.s   @SkipJewels         ; skip if anyone other than Bowie

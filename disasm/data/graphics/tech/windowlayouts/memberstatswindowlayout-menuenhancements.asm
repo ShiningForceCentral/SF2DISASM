@@ -7,29 +7,29 @@ MemberStatusWindowLayout:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]index[|mirror|flip]
                 
-@spacerLine:    macro
-                vdpBaseTile V_BORDER
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile V_BORDER|MIRROR
-                endm
+@spacerLine: macro
+        vdpBaseTile V_BORDER
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile SPACE
+        vdpBaseTile V_BORDER|MIRROR
+    endm
 ; ---------------------------------------------------------------------------
 
 ; 1st line
@@ -60,30 +60,7 @@ MemberStatusWindowLayout:
                 
 MemberStatusWindowLayout_Body:
 ; 4th line
-                if (THREE_DIGITS_STATS=0)
-                    ; Original layout
-                    vdpBaseTile V_BORDER
-                    vdpBaseTile SPACE
-                    vdpBaseTile UPPERCASE_L
-                    vdpBaseTile UPPERCASE_V
-                    vdpBaseTile SPACE
-                    vdpBaseTile SPACE
-                    vdpBaseTile SPACE
-                    vdpBaseTile SPACE
-                    vdpBaseTile SPACE
-                    vdpBaseTile QUESTION_MARK
-                    vdpBaseTile SPACE
-                    vdpBaseTile SPACE
-                    vdpBaseTile UPPERCASE_A
-                    vdpBaseTile UPPERCASE_T
-                    vdpBaseTile UPPERCASE_T
-                    vdpBaseTile SPACE
-                    vdpBaseTile SPACE
-                    vdpBaseTile QUESTION_MARK
-                    vdpBaseTile QUESTION_MARK
-                    vdpBaseTile SPACE
-                    vdpBaseTile V_BORDER|MIRROR
-                else
+                if (THREE_DIGITS_STATS=1)
                     ; Three digits stats (HP and MP on single line)
                     vdpBaseTile V_BORDER
                     vdpBaseTile UPPERCASE_L
@@ -106,20 +83,44 @@ MemberStatusWindowLayout_Body:
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile V_BORDER|MIRROR
+                else
+                    ; Original layout
+                    vdpBaseTile V_BORDER
+                    vdpBaseTile SPACE
+                    vdpBaseTile UPPERCASE_L
+                    vdpBaseTile UPPERCASE_V
+                    vdpBaseTile SPACE
+                    vdpBaseTile SPACE
+                    vdpBaseTile SPACE
+                    vdpBaseTile SPACE
+                    vdpBaseTile SPACE
+                    vdpBaseTile QUESTION_MARK
+                    vdpBaseTile SPACE
+                    vdpBaseTile SPACE
+                    vdpBaseTile UPPERCASE_A
+                    vdpBaseTile UPPERCASE_T
+                    vdpBaseTile UPPERCASE_T
+                    vdpBaseTile SPACE
+                    vdpBaseTile SPACE
+                    vdpBaseTile QUESTION_MARK
+                    vdpBaseTile QUESTION_MARK
+                    vdpBaseTile SPACE
+                    vdpBaseTile V_BORDER|MIRROR  
                 endif
                 
                 @spacerLine ; 5th line
                 
 ; 6th line
-                if (THREE_DIGITS_STATS=0)
+                if (THREE_DIGITS_STATS=1)
                     vdpBaseTile V_BORDER
-                    vdpBaseTile SPACE
                     vdpBaseTile UPPERCASE_H
                     vdpBaseTile UPPERCASE_P
                     vdpBaseTile SPACE
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
+                    vdpBaseTile QUESTION_MARK
                     vdpBaseTile SLASH
+                    vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile SPACE
@@ -128,21 +129,19 @@ MemberStatusWindowLayout_Body:
                     vdpBaseTile UPPERCASE_E
                     vdpBaseTile UPPERCASE_F
                     vdpBaseTile SPACE
-                    vdpBaseTile SPACE
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
-                    vdpBaseTile SPACE
+                    vdpBaseTile QUESTION_MARK
                     vdpBaseTile V_BORDER|MIRROR
                 else
                     vdpBaseTile V_BORDER
+                    vdpBaseTile SPACE
                     vdpBaseTile UPPERCASE_H
                     vdpBaseTile UPPERCASE_P
                     vdpBaseTile SPACE
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
-                    vdpBaseTile QUESTION_MARK
                     vdpBaseTile SLASH
-                    vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile SPACE
@@ -151,24 +150,26 @@ MemberStatusWindowLayout_Body:
                     vdpBaseTile UPPERCASE_E
                     vdpBaseTile UPPERCASE_F
                     vdpBaseTile SPACE
+                    vdpBaseTile SPACE
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
-                    vdpBaseTile QUESTION_MARK
+                    vdpBaseTile SPACE
                     vdpBaseTile V_BORDER|MIRROR
                 endif
                 
                 @spacerLine ; 7th line
                 
 ; 8th line
-                if (THREE_DIGITS_STATS=0)
+                if (THREE_DIGITS_STATS=1)
                     vdpBaseTile V_BORDER
-                    vdpBaseTile SPACE
                     vdpBaseTile UPPERCASE_M
                     vdpBaseTile UPPERCASE_P
                     vdpBaseTile SPACE
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
+                    vdpBaseTile QUESTION_MARK
                     vdpBaseTile SLASH
+                    vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile SPACE
@@ -177,21 +178,19 @@ MemberStatusWindowLayout_Body:
                     vdpBaseTile UPPERCASE_G
                     vdpBaseTile UPPERCASE_I
                     vdpBaseTile SPACE
-                    vdpBaseTile SPACE
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
-                    vdpBaseTile SPACE
+                    vdpBaseTile QUESTION_MARK
                     vdpBaseTile V_BORDER|MIRROR
                 else
                     vdpBaseTile V_BORDER
+                    vdpBaseTile SPACE
                     vdpBaseTile UPPERCASE_M
                     vdpBaseTile UPPERCASE_P
                     vdpBaseTile SPACE
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
-                    vdpBaseTile QUESTION_MARK
                     vdpBaseTile SLASH
-                    vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile SPACE
@@ -200,21 +199,23 @@ MemberStatusWindowLayout_Body:
                     vdpBaseTile UPPERCASE_G
                     vdpBaseTile UPPERCASE_I
                     vdpBaseTile SPACE
+                    vdpBaseTile SPACE
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
-                    vdpBaseTile QUESTION_MARK
+                    vdpBaseTile SPACE
                     vdpBaseTile V_BORDER|MIRROR
                 endif
                 
                 @spacerLine ; 9th line
                 
 ; 10th line
-                if (THREE_DIGITS_STATS=0)
+                if (THREE_DIGITS_STATS=1)
                     vdpBaseTile V_BORDER
-                    vdpBaseTile SPACE
                     vdpBaseTile UPPERCASE_E
                     vdpBaseTile UPPERCASE_X
                     vdpBaseTile UPPERCASE_P
+                    vdpBaseTile SPACE
+                    vdpBaseTile SPACE
                     vdpBaseTile SPACE
                     vdpBaseTile SPACE
                     vdpBaseTile SPACE
@@ -229,15 +230,13 @@ MemberStatusWindowLayout_Body:
                     vdpBaseTile SPACE
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
-                    vdpBaseTile SPACE
                     vdpBaseTile V_BORDER|MIRROR
                 else
                     vdpBaseTile V_BORDER
+                    vdpBaseTile SPACE
                     vdpBaseTile UPPERCASE_E
                     vdpBaseTile UPPERCASE_X
                     vdpBaseTile UPPERCASE_P
-                    vdpBaseTile SPACE
-                    vdpBaseTile SPACE
                     vdpBaseTile SPACE
                     vdpBaseTile SPACE
                     vdpBaseTile SPACE
@@ -252,6 +251,7 @@ MemberStatusWindowLayout_Body:
                     vdpBaseTile SPACE
                     vdpBaseTile QUESTION_MARK
                     vdpBaseTile QUESTION_MARK
+                    vdpBaseTile SPACE
                     vdpBaseTile V_BORDER|MIRROR
                 endif
                 

@@ -160,10 +160,8 @@ BuildMemberStatusWindow:
 @WriteLVandEXP:
                 
                 move.w  member(a6),d0
-                if (SHOW_ENEMY_LEVEL=0)
-                    tst.b   d0
-                    blt.s   @WriteEnemyLVandEXP
-                endif
+                tst.b   d0
+                blt.s   @WriteEnemyLVandEXP
                 jsr     j_GetCurrentLevel
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_LV,a1
@@ -172,10 +170,6 @@ BuildMemberStatusWindow:
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
                 move.w  member(a6),d0
-                if (SHOW_ENEMY_LEVEL>=1)
-                    tst.b   d0
-                    blt.s   @WriteEnemyEXP
-                endif
                 jsr     j_GetCurrentEXP
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_EXP,a1
@@ -191,8 +185,6 @@ BuildMemberStatusWindow:
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_LV,a1
                 moveq   #WINDOW_MEMBERSTATUS_NA_STRING_LENGTH,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
-@WriteEnemyEXP:
-                
                 lea     aNA(pc), a0     
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_EXP,a1
@@ -265,13 +257,11 @@ BuildMemberStatusWindow:
                 jsr     j_GetSpellAndNumberOfSpells
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @Break          ; break out of loop if no spells learned
-                if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
-                    movem.l d1/a0,-(sp)
-                    jsr     j_FindSpellDefAddress
-                    btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
-                    movem.l (sp)+,d1/a0
-                    beq.w   @NextSpell
-                endif
+                movem.l d1/a0,-(sp)
+                jsr     j_FindSpellDefAddress
+                btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
+                movem.l (sp)+,d1/a0
+                beq.w   @NextSpell
                 
                 ; Copy icon tiles to window layout
                 bsr.w   CopyMemberScreenIconsToVdpTileOrder

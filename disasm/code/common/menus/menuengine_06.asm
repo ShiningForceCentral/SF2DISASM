@@ -61,7 +61,7 @@ BuildMemberSummaryWindow:
                 ; Draw status effect tiles
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSUMMARY_OFFSET_STATUSEFFECT_TILES,a1
-                if (THREE_DIGITS_STATS|FULL_CLASS_NAMES>=1)
+                if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
                     move.l  d3,-(sp)
                     move.l  a1,d3
                 endif
@@ -132,7 +132,7 @@ BuildMemberSummaryWindow:
                 bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
 @DetermineMiniStatusPage:
                 
-                if (THREE_DIGITS_STATS|FULL_CLASS_NAMES>=1)
+                if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
                     move.l  (sp)+,d3
                 endif
                 move.b  ((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w,d0
@@ -342,7 +342,8 @@ WriteMemberMagicList:
                 movem.w (sp)+,d0-d1/d6-d7
                 movem.w d6-d7,-(sp)
                 lea     WINDOW_MEMBERSUMMARY_OFFSET_SPELL_LEVEL(a1),a1
-                if (EXTENDED_SPELL_NAMES=0)
+                if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+                else
                     move.w  #VDPTILE_UPPERCASE_L|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                     move.w  #VDPTILE_LOWERCASE_E|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                     move.w  #VDPTILE_LOWERCASE_V|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
@@ -364,7 +365,7 @@ WriteMemberMagicList:
 @NoMagic:
                 
                 move.w  d7,-(sp)
-                if (EXTENDED_SPELL_NAMES>=1)
+                if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
                     addq.w  #2,a1
                 endif
                 lea     aNothing_0(pc), a0
@@ -600,18 +601,11 @@ loc_13CDE:
 
     ; End of function CopyWindowTilesToRam
 
-                if (THREE_DIGITS_STATS=0)
-                    if (EIGHT_CHARACTERS_MEMBER_NAMES=0)
-aNameClassLevExp:       dc.b 'NAME    CLASS     LEV EXP',0
-aNameHpMpAtDfAgMv:      dc.b 'NAME    HP MP AT DF AG MV',0
-aNameAttackDefense:     dc.b 'NAME    ATTACK   DEFENSE',0
-                    else
-aNameClassLevExp:       dc.b 'NAME     CLASS     LEV EXP'
-aNameHpMpAtDfAgMv:      dc.b 'NAME     HP MP AT DF AG MV'
-aNameAttackDefense:     dc.b 'NAME     ATTACK   DEFENSE',0
-                    endif
+                if (STANDARD_BUILD=0)
+aNameClassLevExp:   dc.b 'NAME    CLASS     LEV EXP',0
+aNameHpMpAtDfAgMv:  dc.b 'NAME    HP MP AT DF AG MV',0
+aNameAttackDefense: dc.b 'NAME    ATTACK   DEFENSE',0
                 endif
-                
 aMagicItem:     dc.b 'MAGIC     ITEM'
 aItem_3:        dc.b '- ITEM -',0
 aMagic_2:       dc.b '- MAGIC -',0
@@ -1146,10 +1140,10 @@ loc_14366:
                 bsr.w   sub_14074       
                 moveq   #$14,d1
                 bsr.w   LoadMiniStatusTextHighlightSprites
-                if (EIGHT_CHARACTERS_MEMBER_NAMES=0)
-                    move.b  #16,(SPRITE_09_LINK).l
-                else
+                if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
                     move.b  #16,(SPRITE_10_LINK).l
+                else
+                    move.b  #16,(SPRITE_09_LINK).l
                 endif
                 subq.w  #1,d6
                 bne.s   loc_14384
@@ -1547,9 +1541,7 @@ LoadMiniStatusTextHighlightSprites:
 @Continue2:
                 
                 clr.w   d0
-@OffsetY:
-                
-                if (EXTENDED_SPELL_NAMES>=1)
+@OffsetY:       if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
                     cmpi.b  #WINDOW_MEMBERSUMMARY_PAGE_MAGIC,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                     bne.s   @Items
                     lea     spr_MagicListTextHighlight(pc), a1
@@ -1590,27 +1582,26 @@ spr_MiniStatusTextHighlight:
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 vdpSprite 260, V2|H4|9, 1472|PALETTE3|PRIORITY, 156 ; member name
-                if (EIGHT_CHARACTERS_MEMBER_NAMES=0)
-                    vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
-                    vdpSprite 168, V2|H4|11, 1472|PALETTE3|PRIORITY, 300 ; item or spell
-                    vdpSprite 168, V2|H2|12, 1474|PALETTE3|PRIORITY, 332
-                else
+                if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
                     vdpSprite 260, V2|H1|10, 1474|PALETTE3|PRIORITY, 188
                     vdpSprite 260, V2|H4|11, 1472|MIRROR|PALETTE3|PRIORITY, 196
                     vdpSprite 168, V2|H4|12, 1472|PALETTE3|PRIORITY, 300
                     vdpSprite 168, V2|H2|13, 1474|PALETTE3|PRIORITY, 332
+                else
+                    vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
+                    vdpSprite 168, V2|H4|11, 1472|PALETTE3|PRIORITY, 300 ; item or spell
+                    vdpSprite 168, V2|H2|12, 1474|PALETTE3|PRIORITY, 332
                 endif
                 vdpSprite 168, V2|H4|16, 1472|MIRROR|PALETTE3|PRIORITY, 340
-                
 spr_MagicListTextHighlight:
                 
-                if (EXTENDED_SPELL_NAMES>=1)
-                    if (EIGHT_CHARACTERS_MEMBER_NAMES=0)
-                        vdpSprite 168, V2|H4|11, 1472|PALETTE3|PRIORITY, 292
-                        vdpSprite 168, V2|H3|12, 1474|PALETTE3|PRIORITY, 324
-                    else
+                if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+                    if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
                         vdpSprite 168, V2|H4|12, 1472|PALETTE3|PRIORITY, 292
                         vdpSprite 168, V2|H3|13, 1474|PALETTE3|PRIORITY, 324
+                    else
+                        vdpSprite 168, V2|H4|11, 1472|PALETTE3|PRIORITY, 292
+                        vdpSprite 168, V2|H3|12, 1474|PALETTE3|PRIORITY, 324
                     endif
                     vdpSprite 168, V2|H4|16, 1472|MIRROR|PALETTE3|PRIORITY, 340
                 endif
