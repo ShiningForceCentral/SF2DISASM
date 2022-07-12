@@ -1,0 +1,1633 @@
+----------------------------------------------
+AI Healing Fix
+by SirHedge
+----------------------------------------------
+
+Bug fixes:
+- Monsters with Heal 2 / Aura 2 will now cast Heal 2 / Aura 2.
+- Selecting the correct spell level to fully heal the target's HP is now based upon spell power rather than hard coded.
+- MP checks are now done properly. No more casting Heal 4 with 14 MP, or requiring 20 MP before casting Heal 3.
+- When using a Healing Rain, the monster no longer steps one space to the right while ignoring collision detection. The monster now remains stationary and uses the item.
+- Substantial cleanup overall in the code, which provided the code space for the other edits.
+
+
+New enhancements:
+- Monsters will check all available spell levels to reach their target rather than only one spell level. So monsters with Heal 4 (range of 1) will now use Heal 3 (range of 3) if the desired target cannot be reached with Heal 4 but can with Heal 3.
+- Monsters will select the lowest level that fully heals their target, in the case where multiple spell levels heal the same amount. So monsters will use Heal 1 over Heal 2 if both heal 15 HP, for example.
+- If a lower level spell heals more than a higher level spell (for whatever weird reason), use that lower level spell. (Only check a single level lower, not all available spells.)
+
+
+New AI scripts:
+- Aura 4 will now apply the same logic as Healing Rain (used when Enemy 0 is at less than 50% health).
+- Will now cast Detox if coded as a "heal", a valid target is inflicted with a negative status, and Detox is the first "heal" spell in the monster's spell list (at this point, a monster will not use both Heal and Detox). Set the "power" for all levels of Detox to zero for best results with the AI.
+- Will now cast any spell coded as a "heal" type if a valid target is missing HP. This means that Boost or Attack can now be cast by monsters, albeit in a very stupid fashion.
+- Monster AI now determines what % of HP must be remaining before casting heal, based upon the following logic:
+	AI #0 = 66% or less HP remaining (same as SF2 default)
+	AI #1 = 66% or less HP remaining (same as SF2 default)
+	AI #2 = 33% or less HP remaining
+	AI #3 = 66% or less HP remaining (same as SF2 default)
+	AI #4 = any missing HP will be healed
+	AI #5 = any missing HP will be healed for Enemy 0 or AI 14/15; all others only at 66% or less HP remaining
+	These scripts can be edited easily by the user. See below.
+
+
+Notes:
+- Monsters will continue to only consider either a healing spell or a healing item, not both. Healing spells take priority over healing items.
+- The exception is if the monster has a Healing Rain, in which case it will consider that after Aura 4 but before any other healing spells.
+- There is a small glitch that occurred once during testing with the Healing Rain where the monster will move. I have not been able to recreate the glitch.
+
+
+----------------------------------------------
+Healing AI Edits
+----------------------------------------------
+- Healing AI is split into the AI scripts and healing instructions. Each AI script can be assigned a healing instruction.
+
+- Healing instructions are found in the following locations:
+	Instruction 0 = 0000E2A1 has value of $55
+	Instruction 1 = 0000E2B3 has value of $AA
+	Instruction 2 = 0000E2C5 has value of $FF
+	Instruction 6 = 0000E30D has value of $FA
+
+- Healing instructions are composed of a single byte split into 4 parts (two bits each part).
+	Bits 1-2 = healing rule for targeting AI 14,15
+	Bits 3-4 = healing rule for targeting Monster Zero (the first monster on the map, i.e. the boss)
+	Bits 5-6 = healing rule for targeting self
+	Bits 7-8 = healing rule for all other targets
+
+- Healing rules are as follows:
+	00 = never heal the target
+	01 = only heal if the target is at 33% health or less
+	10 = only heal if the target is at 66% health or less (default SF2 healing instruction)
+	11 = heal if the target is missing any health
+
+- Example: Use the value 10110001, or $B1, to create the following instruction
+	Target AIs 14/15 if they're at 66% HP or less --> 10
+	Target boss if it is missing any HP           --> 11
+	Never target self                             --> 00
+	Target all others if they're at 33% HP or less--> 01
+
+- Standard Instruction Values:
+	$55 = 01010101 = 33% or less HP remaining
+	$AA = 10101010 = 66% or less HP remaining (same as SF2 default)
+	$FF = 11111111 = any missing HP will be healed
+	$FA = 11111010 = any missing HP will be healed for boss AIs or enemy zero; all others only at 66% or less HP remaining
+
+- The Windows calculator has a "Programmer" function which will convert binary into hex for you.
+
+- To assign a healing instruction to an AI script, insert the appropriate instruction number (0, 1, 2, or 6) into the appropriate location in the rom.
+	Healer AIs
+	AI 0 = 0000E1ED
+	AI 1 = 0000E1F4
+	AI 2 = 0000E1FA
+	AI 3 = 0000E201
+	AI 4 = 0000E208
+	AI 5 = 0000E20F
+
+	Attacking AIs
+	AI 6 = 0000E217
+	AI 7 = 0000E21E
+	AI 8 = 0000E224
+	AI 9 = 0000E22C
+
+	Debuff AIs
+	AI 12 = 0000E235
+
+	Boss AIs
+	AI 14 = 0000E23C
+	AI 15 = 0000E244
+
+- To replicate the orginal game, every script should use Instruction 1.
+
+
+----------------------------------------------
+Detox Edits
+----------------------------------------------
+- Monsters will always cast the highest level Detox they know, but only if it cures to the target.
+
+- The following locations determine the conditions deemed curable by their respective spell levels:
+	Detox 1	  = 0000E54D	
+	Detox 2   = 0000E551
+	Detox 3/4 = 0000E555
+
+- To determine which value to input into each location, sum all the conditions cured by that level of Detox using the table below:
+	Status	Hex	Dec
+	Stun	$1	1
+	Poison	$2	2
+	Curse	$4	4
+	Muddle2	$8	8	
+	Muddle1	$30	48	<-- Muddle2 also flags this
+	Sleep	$C0	192
+	Silence	$300	768
+	Slow	$C00	3072
+	Boost	$3000	12288
+	Attack	$C000	49152
+
+- Example: Detox level 3/4 usually cures Stun, Poison, and Curse, so...
+	1 + 2 + 4 = 7
+	Convert 7 into hex and insert the result into location 0000E5555.
+
+
+
+----------------------------------------------
+Code
+----------------------------------------------
+
+Location New Old
+0000CD6C: 34 42
+0000CD6D: 04 45
+0000CD6E: EC 1A
+0000CD6F: 4A 04
+0000CD70: 02 EC
+0000CD71: 42 4D
+0000CD72: 00 02
+0000CD73: 03 45
+0000CD74: 36 00
+0000CD75: 01 03
+0000CD76: 4E 36
+0000CD77: B9 01
+0000CD78: 00 4E
+0000CD79: 00 B9
+0000CD7A: 83 00
+0000CD7B: 36 00
+0000CD7C: 3A 83
+0000CD7D: 01 36
+0000CD7E: 4E 34
+0000CD7F: B9 01
+0000CD80: 00 4E
+0000CD81: 00 B9
+0000CD82: 83 00
+0000CD83: 26 00
+0000CD84: 92 83
+0000CD85: 45 26
+0000CD86: 3E 92
+0000CD87: 01 42
+0000CD88: 30 74
+0000CD89: 03 FF
+0000CD8A: 4E 0C
+0000CD8B: B9 41
+0000CD8D: 00 02
+0000CD8E: 83 63
+0000CD8F: 56 00
+0000CD90: 36 00
+0000CD91: 01 4C
+0000CD92: 32 74
+0000CD93: 04 00
+0000CD94: 61 0C
+0000CD95: 00 41
+0000CD96: B4 00
+0000CD97: 46 0E
+0000CD98: 42 63
+0000CD99: 46 00
+0000CD9A: 1C 00
+0000CD9B: 28 1E
+0000CD9C: 00 0C
+0000CD9D: 01 45
+0000CD9E: 1A 00
+0000CD9F: 28 02
+0000CDA0: 00 65
+0000CDA1: 07 00
+0000CDA2: 4A 00
+0000CDA3: 05 16
+0000CDA4: 67 74
+0000CDA5: 26 02
+0000CDA6: 4A 0C
+0000CDA7: 02 41
+0000CDA8: 67 00
+0000CDA9: 0A 1C
+0000CDAA: 04 63
+0000CDAB: 41 00
+0000CDAD: 40 0C
+0000CDAE: 4E 0C
+0000CDAF: B9 45
+0000CDB1: 00 03
+0000CDB2: 91 65
+0000CDB3: DA 00
+0000CDB4: B6 00
+0000CDB5: 06 04
+0000CDB6: 65 74
+0000CDB7: 10 03
+0000CDB8: 4A 30
+0000CDB9: 02 03
+0000CDBA: 67 4E
+0000CDBB: 10 B9
+0000CDBC: 1C 00
+0000CDBD: 28 00
+0000CDBE: 00 83
+0000CDBF: 07 56
+0000CDC0: BC 36
+0000CDC1: 45 01
+0000CDC2: 6C 72
+0000CDC3: 04 00
+0000CDC4: BE D2
+0000CDC5: 46 42
+0000CDC6: 62 EB
+0000CDC7: 04 49
+0000CDC8: 51 D2
+0000CDC9: CA 44
+0000CDCA: FF 4E
+0000CDCB: CE B9
+0000CDCC: 4C 00
+0000CDCD: DF 00
+0000CDCE: 7F 91
+0000CDCF: FB DA
+0000CDD0: 4E B6
+0000CDD1: 75 28
+0000CDD2: 48 00
+0000CDD3: E7 01
+0000CDD4: 9F 64
+0000CDD5: FE 00
+0000CDD6: 61 00
+0000CDD7: 00 06
+0000CDD8: B6 51
+0000CDD9: 70 CA
+0000CDDA: 34 FF
+0000CDDB: 01 E8
+0000CDDC: 61 0C
+0000CDDD: 00 02
+0000CDDE: B6 00
+0000CDDF: 58 01
+0000CDE0: 61 66
+0000CDE1: 00 02
+0000CDE2: F9 74
+0000CDE3: 38 00
+0000CDE7: F9 FB
+0000D184: 63 67
+0000D361: 12 1E
+0000D371: 02 0E
+0000D372: C4 48
+0000D373: FC E7
+0000D374: 00 60
+0000D375: 05 00
+0000D376: B2 34
+0000D377: 42 01
+0000D378: 4C 4E
+0000D379: DF B9
+0000D37B: 06 00
+0000D37C: 4E 83
+0000D37D: 75 36
+0000D37E: 48 C4
+0000D37F: E7 FC
+0000D380: 7E 00
+0000D381: 00 05
+0000D382: 61 B2
+0000D383: 00 42
+0000D384: B0 4C
+0000D385: FC DF
+0000D386: 0C 00
+0000D387: 41 06
+0000D388: 00 4E
+0000D389: 0E 75
+0000D38A: 6D 48
+0000D38B: 04 E7
+0000D38C: EC 60
+0000D38D: 4E 00
+0000D38E: 60 4E
+0000D38F: 10 B9
+0000D390: 0C 00
+0000D391: 40 00
+0000D392: 00 83
+0000D393: 80 36
+0000D394: 66 34
+0000D395: 04 01
+0000D396: E8 4E
+0000D397: 4E B9
+0000D398: 60 00
+0000D399: 06 00
+0000D39A: BA 83
+0000D39B: 40 26
+0000D39C: 66 60
+0000D39D: 02 00
+0000D39E: E4 00
+0000D39F: 4E 1E
+0000D3A0: 02 48
+0000D3A1: 46 E7
+0000D3A2: 00 60
+0000D3A3: 03 00
+0000D3A4: 4E 34
+0000D3A5: B9 01
+0000D3A6: 00 4E
+0000D3A7: 00 B9
+0000D3A8: 83 00
+0000D3A9: 36 00
+0000D3AA: 34 83
+0000D3AB: 01 26
+0000D3AC: 4E 60
+0000D3AD: B9 00
+0000D3AF: 00 0E
+0000D3B0: 83 48
+0000D3B1: 26 E7
+0000D3B2: C4 60
+0000D3B3: FC 00
+0000D3B4: 00 34
+0000D3B5: 03 01
+0000D3B6: C2 4E
+0000D3B7: C6 B9
+0000D3B8: B2 00
+0000D3B9: 42 00
+0000D3BA: 4C 83
+0000D3BB: DF 36
+0000D3BC: 00 C4
+0000D3BD: 7E FC
+0000D3BE: 4E 00
+0000D3BF: 75 03
+0000D3C0: 4E D2
+0000D3C1: 71 41
+0000D3C2: 4E B2
+0000D3C3: 71 42
+0000D3C4: 4E 4C
+0000D3C5: 71 DF
+0000D3C6: 4E 00
+0000D3C7: 71 06
+0000D3C9: 71 75
+0000E1ED: 01 00
+0000E1F4: 01 00
+0000E1FA: 00 01
+0000E20F: 06 02
+0000E217: 01 00
+0000E21E: 01 00
+0000E224: 01 00
+0000E23C: 01 02
+0000E2A1: 55 00
+0000E2B3: AA 01
+0000E2C5: FF 02
+0000E30D: FA 03
+0000E310: 00 04
+0000E311: DE 7C
+0000E404: 66 67
+0000E405: 00 04
+0000E406: 03 60
+0000E407: 76 00
+0000E408: 4E 03
+0000E409: 71 6E
+0000E40A: 4E 42
+0000E40B: 71 41
+0000E40C: 4E 12
+0000E40D: 71 2E
+0000E40E: 1D FF
+0000E40F: 7C FB
+0000E410: 00 1D
+0000E411: 7F 7C
+0000E412: FF 00
+0000E413: FE 7F
+0000E414: 1D FF
+0000E415: 7C FE
+0000E416: 00 1D
+0000E417: 3F 7C
+0000E418: FF 00
+0000E419: FF 3F
+0000E41A: 30 FF
+0000E41B: 3C FF
+0000E41C: 00 10
+0000E41D: 80 2E
+0000E41E: 61 FF
+0000E41F: 00 FC
+0000E420: EE 42
+0000E421: 76 43
+0000E422: 65 61
+0000E423: 66 00
+0000E424: 10 ED
+0000E425: 2E 3C
+0000E426: FF 0C
+0000E427: FC 41
+0000E428: 42 00
+0000E429: 43 7F
+0000E42A: 61 67
+0000E42B: 00 64
+0000E42C: EB 0C
+0000E42D: EC 01
+0000E42E: 0C 00
+0000E42F: 01 08
+0000E430: 00 66
+0000E431: C1 5E
+0000E432: 66 1D
+0000E433: 1A 41
+0000E434: 3E FF
+0000E435: 01 FE
+0000E436: 4E 1D
+0000E437: B9 42
+0000E438: 00 FF
+0000E439: 00 FD
+0000E43A: 92 61
+0000E43B: 7E 00
+0000E43C: 34 A7
+0000E43D: 01 A8
+0000E43E: 4E 1D
+0000E43F: B9 68
+0000E441: 00 09
+0000E442: 83 FF
+0000E443: 56 FF
+0000E444: B4 30
+0000E445: 41 3C
+0000E446: 6E 00
+0000E447: 06 80
+0000E448: 1D 61
+0000E449: 47 00
+0000E44A: FF EE
+0000E44B: FF 4C
+0000E44C: 60 64
+0000E44D: 1E 10
+0000E44E: 42 1D
+0000E44F: 43 7C
+0000E450: 61 00
+0000E451: 00 7F
+0000E452: ED FF
+0000E453: 0E FE
+0000E454: 0C 1D
+0000E455: 01 7C
+0000E457: 08 3F
+0000E458: 66 FF
+0000E459: 30 FF
+0000E45A: 1D 60
+0000E45B: 41 00
+0000E45C: FF 00
+0000E45D: FE 34
+0000E45E: 1D 43
+0000E45F: 42 F8
+0000E460: FF B6
+0000E461: FD 2E
+0000E462: 61 32
+0000E463: 00 BC
+0000E464: A7 00
+0000E465: 80 02
+0000E466: 1D 42
+0000E467: 68 40
+0000E468: 00 10
+0000E469: 09 2E
+0000E46B: FF FD
+0000E46C: 42 33
+0000E46E: 10 00
+0000E46F: 2E 06
+0000E470: FF 42
+0000E471: FC 40
+0000E472: 61 10
+0000E473: 00 2E
+0000E474: 9F FF
+0000E475: D4 FC
+0000E476: 34 33
+0000E477: 01 40
+0000E478: 61 00
+0000E479: 00 04
+0000E47A: 9F 42
+0000E47B: BC 41
+0000E47C: 41 12
+0000E47D: F8 2E
+0000E47E: 88 FF
+0000E47F: 3E FE
+0000E480: 10 33
+0000E481: 80 41
+0000E482: 3C 00
+0000E483: 3C 02
+0000E484: 00 43
+0000E485: 00 F8
+0000E486: 60 98
+0000E487: 00 04
+0000E488: 02 32
+0000E489: 96 BC
+0000E48A: 10 00
+0000E48B: 2E FF
+0000E48C: FF 60
+0000E48D: FC 00
+0000E48E: 42 02
+0000E48F: 43 F4
+0000E490: 61 10
+0000E491: 00 2E
+0000E492: EB FF
+0000E493: 86 FC
+0000E494: 0C 42
+0000E495: 41 43
+0000E496: 00 61
+0000E497: 3F 00
+0000E498: 67 EB
+0000E499: 10 80
+0000E49A: 1D 0C
+0000E49C: FF 00
+0000E49D: FF 3F
+0000E49E: 34 67
+0000E49F: 01 3A
+0000E4A0: 02 1D
+0000E4A1: 42 41
+0000E4A2: 00 FF
+0000E4A3: 3F FF
+0000E4A4: 61 34
+0000E4A5: 00 01
+0000E4A6: 9E 02
+0000E4A7: B0 42
+0000E4A8: 60 00
+0000E4A9: 26 3F
+0000E4AA: 10 61
+0000E4AB: 2E 00
+0000E4AC: FF 9E
+0000E4AD: FC AA
+0000E4AE: 42 0C
+0000E4AF: 43 42
+0000E4B0: 61 00
+0000E4B2: EC 66
+0000E4B3: AE 10
+0000E4B7: 7F 03
+0000E4B8: 66 6C
+0000E4B9: 04 06
+0000E4BC: 02 00
+0000E4BD: C0 1E
+0000E4BE: 1D 60
+0000E4BF: 41 04
+0000E4C0: FF 60
+0000E4C1: FE 00
+0000E4C2: 1D 00
+0000E4C3: 42 3E
+0000E4C4: FF 0C
+0000E4C5: FD 42
+0000E4C6: 61 00
+0000E4C7: 00 01
+0000E4C8: A7 66
+0000E4C9: 1C 10
+0000E4CA: 1D 0C
+0000E4CB: 68 41
+0000E4CD: 09 07
+0000E4CE: FF 6C
+0000E4CF: FF 06
+0000E4D0: 10 60
+0000E4D1: 2E 00
+0000E4D2: FF 00
+0000E4D3: FC 08
+0000E4D4: 08 60
+0000E4D5: 00 04
+0000E4D6: 00 60
+0000E4D7: 07 00
+0000E4D8: 67 00
+0000E4D9: 06 28
+0000E4DA: 61 10
+0000E4DB: 00 2E
+0000E4DC: E3 FF
+0000E4DD: 2E FC
+0000E4DE: 60 42
+0000E4DF: 04 43
+0000E4E2: E3 EC
+0000E4E3: 18 7E
+0000E4E4: 36 0C
+0000E4E5: 3C 41
+0000E4E6: FF 00
+0000E4E7: FF 7F
+0000E4E8: 61 66
+0000E4E9: 00 04
+0000E4EA: E3 60
+0000E4EB: 98 00
+0000E4EC: 10 02
+0000E4ED: 2E 8A
+0000E4EE: FF 1D
+0000E4EF: FC 41
+0000E4F0: 61 FF
+0000E4F1: 00 FE
+0000E4F2: DD 1D
+0000E4F3: D6 42
+0000E4F4: 61 FF
+0000E4F5: 00 FD
+0000E4F6: F5 61
+0000E4F7: 8C 00
+0000E4F8: 42 A6
+0000E4F9: 43 EC
+0000E4FA: 61 1D
+0000E4FB: 00 68
+0000E4FC: E3 00
+0000E4FD: 86 09
+0000E4FE: 41 FF
+0000E4FF: F8 FF
+0000E500: 88 10
+0000E501: 3E 2E
+0000E502: 42 FF
+0000E503: 43 FC
+0000E504: 10 08
+0000E505: 2E 00
+0000E506: FF 00
+0000E507: FC 07
+0000E508: 08 67
+0000E509: 00 06
+0000E50A: 00 61
+0000E50B: 07 00
+0000E50C: 66 E2
+0000E50D: 08 FE
+0000E50E: 42 60
+0000E50F: 40 04
+0000E510: 38 61
+0000E511: 3C 00
+0000E512: 00 E2
+0000E513: 1D E8
+0000E514: 60 36
+0000E515: 08 3C
+0000E516: 30 FF
+0000E517: 3C FF
+0000E518: 00 61
+0000E519: 80 00
+0000E51A: 38 E3
+0000E51B: 3C 68
+0000E51C: 00 10
+0000E51D: 1F 2E
+0000E51E: 61 FF
+0000E51F: 00 FC
+0000E520: 9E 61
+0000E521: 16 00
+0000E522: 4A DD
+0000E523: 41 A6
+0000E524: 66 61
+0000E525: 02 00
+0000E526: 60 F5
+0000E527: 50 5C
+0000E528: 61 42
+0000E529: 00 43
+0000E52A: 9E 61
+0000E52B: FC 00
+0000E52C: 42 E3
+0000E52D: 45 56
+0000E52E: 1A 41
+0000E52F: 2E F8
+0000E530: FF 88
+0000E531: FF 3E
+0000E532: 3C 42
+0000E533: 05 43
+0000E534: 02 10
+0000E535: 45 2E
+0000E536: 00 FF
+0000E537: 3F FC
+0000E538: 0C 08
+0000E539: 45 00
+0000E53B: 02 07
+0000E53D: 1E 08
+0000E53E: 0C 42
+0000E53F: 06 40
+0000E540: 00 38
+0000E541: 82 3C
+0000E542: 64 00
+0000E543: 0E 1D
+0000E544: 0C 60
+0000E545: 06 08
+0000E546: 00 30
+0000E547: 42 3C
+0000E548: 67 00
+0000E549: 04 80
+0000E54A: 02 38
+0000E54B: 41 3C
+0000E54D: 02 1F
+0000E54E: 02 61
+0000E54F: 41 00
+0000E550: 00 9D
+0000E551: 03 E6
+0000E552: 02 4A
+0000E554: 00 66
+0000E555: 07 04
+0000E556: 4A 60
+0000E557: 41 00
+0000E558: 66 00
+0000E559: 16 14
+0000E55A: 60 61
+0000E55B: 1C 00
+0000E55C: 42 EE
+0000E55D: 45 2E
+0000E55E: 1A 64
+0000E55F: 2E 04
+0000E560: FF 60
+0000E561: FC 00
+0000E562: 42 00
+0000E563: 46 0A
+0000E564: 1C 11
+0000E565: 2E 80
+0000E566: FF 30
+0000E567: FB 00
+0000E568: 61 06
+0000E569: 00 43
+0000E56A: EE 00
+0000E56B: 14 01
+0000E56C: 62 06
+0000E56D: 02 40
+0000E56E: 60 00
+0000E56F: 08 01
+0000E570: 11 51
+0000E571: 80 CC
+0000E572: 30 FF
+0000E573: 00 DC
+0000E574: 06 43
+0000E575: 43 F8
+0000E576: 00 88
+0000E577: 01 06
+0000E578: 06 32
+0000E579: 40 83
+0000E57A: 00 4A
+0000E57B: 01 03
+0000E57C: 51 66
+0000E57D: CC 04
+0000E57E: FF 60
+0000E57F: A0 00
+0000E580: 43 01
+0000E581: F8 F6
+0000E582: 88 43
+0000E583: 06 F8
+0000E584: 32 88
+0000E585: 83 0E
+0000E586: 4A 45
+0000E587: 03 F8
+0000E588: 67 89
+0000E589: 00 5E
+0000E58A: 01 47
+0000E58B: F2 F8
+0000E58C: 43 B6
+0000E58D: F8 52
+0000E58E: 88 42
+0000E58F: 0E 44
+0000E590: 45 49
+0000E592: 89 88
+0000E593: 5E 04
+0000E594: 47 38
+0000E595: F8 BC
+0000E596: B6 00
+0000E597: 52 00
+0000E599: 44 40
+0000E59A: 49 10
+0000E59B: F8 30
+0000E59C: 88 40
+0000E59D: 04 00
+0000E59E: 38 42
+0000E59F: BC 41
+0000E5A0: 00 12
+0000E5A1: 00 2E
+0000E5A2: 42 FF
+0000E5A3: 40 FF
+0000E5A4: 10 61
+0000E5A5: 30 00
+0000E5A6: 40 E0
+0000E5A7: 00 88
+0000E5A8: 42 3A
+0000E5A9: 41 38
+0000E5AA: 12 B6
+0000E5AB: 2E 3E
+0000E5AC: FF 4A
+0000E5AD: FF 45
+0000E5AE: 61 66
+0000E5AF: 00 04
+0000E5B0: E0 60
+0000E5B1: 7E 00
+0000E5B2: 3A 00
+0000E5B3: 38 30
+0000E5B4: B6 42
+0000E5B5: 3E 47
+0000E5B6: 4A 42
+0000E5B7: 45 42
+0000E5B8: 66 13
+0000E5B9: 02 BC
+0000E5BA: 60 00
+0000E5BB: 2E 00
+0000E5BC: 42 40
+0000E5BD: 47 00
+0000E5BE: 42 10
+0000E5BF: 42 33
+0000E5C0: 13 70
+0000E5C1: BC 00
+0000E5C2: 00 61
+0000E5C4: 40 E8
+0000E5C5: 00 26
+0000E5C6: 10 0C
+0000E5C7: 33 46
+0000E5C8: 70 00
+0000E5C9: 00 0D
+0000E5CA: 61 66
+0000E5CB: 00 08
+0000E5CC: E8 13
+0000E5CD: 1E BC
+0000E5CE: 0C 00
+0000E5CF: 46 01
+0000E5D0: 00 40
+0000E5D1: 0D 00
+0000E5D2: 66 52
+0000E5D3: 08 54
+0000E5D4: 13 D4
+0000E5D5: BC 46
+0000E5D6: 00 06
+0000E5D7: 01 42
+0000E5D8: 40 00
+0000E5D9: 00 04
+0000E5DA: 52 06
+0000E5DB: 54 47
+0000E5DC: D4 00
+0000E5DD: 46 01
+0000E5DE: 06 53
+0000E5DF: 42 45
+0000E5E0: 00 66
+0000E5E1: 04 DC
+0000E5E2: 06 15
+0000E5E3: 47 82
+0000E5E4: 00 40
+0000E5E5: 01 00
+0000E5E6: 53 06
+0000E5E7: 45 44
+0000E5E8: 66 00
+0000E5E9: DC 01
+0000E5EA: 15 53
+0000E5EB: 82 43
+0000E5EC: 40 66
+0000E5ED: 00 AA
+0000E5EE: 06 60
+0000E5EF: 44 00
+0000E5F1: 01 02
+0000E5F2: 53 32
+0000E5F3: 43 38
+0000E5F4: 66 88
+0000E5F5: AC 06
+0000E5F6: 60 0C
+0000E5F7: 00 41
+0000E5F9: 02 01
+0000E5FA: 32 6E
+0000E5FB: 38 04
+0000E5FC: 88 60
+0000E5FD: 06 00
+0000E5FE: 0C 00
+0000E5FF: 41 56
+0000E600: 00 55
+0000E601: 01 41
+0000E602: 6E 42
+0000E603: 02 42
+0000E604: 60 14
+0000E605: 52 3C
+0000E606: 55 00
+0000E607: 41 00
+0000E608: 42 41
+0000E609: 42 F8
+0000E60A: 14 88
+0000E60B: 3C 3E
+0000E60C: 00 43
+0000E60D: 00 F8
+0000E60E: 41 89
+0000E60F: F8 5E
+0000E610: 88 4A
+0000E611: 3E 02
+0000E612: 43 6A
+0000E613: F8 04
+0000E614: 89 60
+0000E615: 5E 00
+0000E616: 4A 00
+0000E617: 02 3E
+0000E618: 6A 14
+0000E619: 02 3C
+0000E61A: 60 00
+0000E61B: 3C FF
+0000E61C: 14 42
+0000E61D: 3C 43
+0000E61E: 00 18
+0000E61F: FF 31
+0000E620: 42 30
+0000E621: 43 01
+0000E622: 18 B8
+0000E625: 01 00
+0000E626: B8 6F
+0000E627: 31 1E
+0000E628: 30 18
+0000E629: 00 31
+0000E62A: 6F 30
+0000E62B: 1E 01
+0000E62C: 18 13
+0000E62D: 31 B1
+0000E62F: 01 00
+0000E630: 13 30
+0000E631: B1 01
+0000E632: 30 13
+0000E633: 00 84
+0000E635: 01 00
+0000E636: 13 18
+0000E637: 84 30
+0000E639: 00 01
+0000E63A: 18 11
+0000E63B: 30 B0
+0000E63D: 01 00
+0000E63E: 11 30
+0000E63F: B0 01
+0000E640: 30 11
+0000E641: 00 84
+0000E643: 01 00
+0000E644: 11 34
+0000E645: 84 03
+0000E646: 30 4A
+0000E647: 00 41
+0000E648: 34 67
+0000E649: 03 06
+0000E64A: 4A 52
+0000E64B: 41 43
+0000E64C: 67 53
+0000E64D: 06 41
+0000E64E: 52 60
+0000E64F: 43 CE
+0000E650: 53 32
+0000E651: 41 02
+0000E653: CE BC
+0000E654: 32 41
+0000E655: 02 F8
+0000E656: 60 88
+0000E657: BE 06
+0000E658: 41 3A
+0000E659: F8 10
+0000E65A: 88 42
+0000E65B: 06 46
+0000E65C: 3A 41
+0000E65D: 10 F8
+0000E65E: 42 88
+0000E65F: 46 3E
+0000E660: 41 0C
+0000E661: F8 2E
+0000E662: 88 00
+0000E663: 3E 7F
+0000E664: 0C FF
+0000E665: 2E FE
+0000E666: 00 67
+0000E667: 7F 04
+0000E668: FF 60
+0000E669: FE 00
+0000E66A: 67 00
+0000E66B: 1E 56
+0000E66C: 42 10
+0000E66D: 40 30
+0000E66E: 10 60
+0000E66F: 30 00
+0000E670: 60 12
+0000E671: 00 2E
+0000E672: 42 FF
+0000E673: 41 FC
+0000E674: 12 18
+0000E677: FE FF
+0000E67A: DD E6
+0000E67B: 1E EE
+0000E67C: 61 0C
+0000E67D: 00 02
+0000E67E: E7 00
+0000E67F: 54 FF
+0000E680: 0C 66
+0000E681: 01 04
+0000E682: 00 60
+0000E683: FF 00
+0000E684: 67 00
+0000E685: 6A 78
+0000E686: 60 4A
+0000E687: 00 02
+0000E688: 00 66
+0000E689: 96 26
+0000E68A: 10 B2
+0000E68B: 30 00
+0000E68C: 60 67
+0000E68D: 00 22
+0000E68E: 12 10
+0000E692: 18 61
+0000E693: 2E 00
+0000E694: FF 9C
+0000E695: FF C2
+0000E696: 61 0C
+0000E697: 00 01
+0000E698: E6 00
+0000E699: D0 0B
+0000E69A: 0C 6D
+0000E69B: 02 14
+0000E69C: 00 10
+0000E69D: FF 2E
+0000E69E: 66 FF
+0000E69F: 02 FF
+0000E6A0: 60 EC
+0000E6A1: 4E 08
+0000E6A2: 12 02
+0000E6A3: 2E 00
+0000E6A4: FF 00
+0000E6A5: FF 03
+0000E6A6: ED 0C
+0000E6A7: 0A 00
+0000E6A8: 02 00
+0000E6A9: 01 02
+0000E6AA: 00 6D
+0000E6AB: 3F 04
+0000E6AC: 82 14
+0000E6AD: 02 3C
+0000E6AE: 1D 00
+0000E6AF: 41 01
+0000E6B0: FF 10
+0000E6B1: FA 2E
+0000E6B2: 3E FF
+0000E6B3: 01 FF
+0000E6B4: 61 ED
+0000E6B5: 00 0A
+0000E6B6: DC 02
+0000E6B7: CA 00
+0000E6B8: 61 00
+0000E6B9: 00 3F
+0000E6BA: E7 80
+0000E6BB: 18 02
+0000E6BC: 0C 1D
+0000E6BD: 01 40
+0000E6BE: 00 FF
+0000E6C0: 66 42
+0000E6C1: 3C 40
+0000E6C2: BE 10
+0000E6C3: 2E 30
+0000E6C4: FF 60
+0000E6C5: FF 00
+0000E6C6: 67 0C
+0000E6C7: 08 2E
+0000E6C8: 06 00
+0000E6C9: 07 7F
+0000E6CA: 00 FF
+0000E6CB: 40 FE
+0000E6CC: 32 67
+0000E6CD: 07 0C
+0000E6CE: 60 42
+0000E6CF: E4 41
+0000E6D0: 1E 12
+0000E6D3: FA FE
+0000E6D4: 0C 61
+0000E6D5: 07 00
+0000E6D6: 00 DC
+0000E6D7: 40 C2
+0000E6D8: 65 60
+0000E6D9: 16 0A
+0000E6DA: 04 42
+0000E6DB: 07 41
+0000E6DC: 00 12
+0000E6DD: 40 2E
+0000E6DE: 12 FF
+0000E6DF: 07 FF
+0000E6E6: E6 9D
+0000E6E7: EC 62
+0000E6E8: 0C 34
+0000E6EA: 00 61
+0000E6EB: FF 00
+0000E6EC: 66 9D
+0000E6ED: 10 4A
+0000E6EE: 60 61
+0000E6EF: E4 00
+0000E6F0: 06 E0
+0000E6F1: 46 2A
+0000E6F2: 00 0C
+0000E6F4: 53 00
+0000E6F5: 45 FF
+0000E6F6: 66 67
+0000E6F7: 00 04
+0000E6F8: FF 60
+0000E6F9: 6C 00
+0000E6FA: 60 00
+0000E6FB: 00 10
+0000E6FC: 00 06
+0000E6FD: 80 46
+0000E6FE: 38 00
+0000E700: 10 53
+0000E701: 2E 45
+0000E702: FF 66
+0000E703: FC 00
+0000E704: 4E FF
+0000E705: B9 5C
+0000E706: 00 60
+0000E708: 83 00
+0000E709: 56 6E
+0000E70A: 30 10
+0000E70C: 32 12
+0000E70D: 07 02
+0000E70E: 4E 45
+0000E70F: B9 F9
+0000E711: 00 FF
+0000E712: 92 44
+0000E713: 7E 00
+0000E714: B2 47
+0000E715: 40 F9
+0000E716: 6E 00
+0000E717: D8 FF
+0000E718: 32 44
+0000E719: 04 00
+0000E71A: 1D 61
+0000E71B: 47 00
+0000E71C: FF F5
+0000E71D: FF F4
+0000E71E: 10 43
+0000E71F: 01 F8
+0000E720: 12 98
+0000E721: 02 04
+0000E722: 45 43
+0000E723: F9 F8
+0000E724: 00 B6
+0000E725: FF 2E
+0000E726: 44 0C
+0000E727: 00 2E
+0000E728: 47 00
+0000E729: F9 7F
+0000E72A: 00 FF
+0000E72B: FF FE
+0000E72C: 44 66
+0000E72D: 00 1A
+0000E72E: 61 32
+0000E72F: 00 BC
+0000E730: F5 00
+0000E731: E0 01
+0000E732: 43 42
+0000E733: F8 40
+0000E734: B6 10
+0000E736: 0C FF
+0000E737: 2E FF
+0000E738: 00 33
+0000E739: 7F 40
+0000E73A: FF 00
+0000E73B: FE 02
+0000E73C: 66 42
+0000E73D: 1A 40
+0000E73E: 32 10
+0000E73F: BC 30
+0000E740: 00 60
+0000E741: 01 00
+0000E742: 42 33
+0000E744: 10 00
+0000E745: 2E 04
+0000E746: FF 60
+0000E747: FF 2A
+0000E748: 33 32
+0000E749: 40 BC
+0000E74F: 30 2E
+0000E750: 60 FF
+0000E751: 00 FD
+0000E755: 04 06
+0000E756: 60 42
+0000E757: 22 40
+0000E758: 32 10
+0000E759: BC 30
+0000E75A: 00 60
+0000E75B: 02 00
+0000E75C: 42 33
+0000E75E: 10 00
+0000E75F: 2E 04
+0000E760: FF 42
+0000E761: FD 40
+0000E762: 33 10
+0000E763: 40 2E
+0000E764: 00 FF
+0000E765: 06 FC
+0000E766: 42 12
+0000E767: 40 2E
+0000E768: 10 FF
+0000E769: 30 FD
+0000E76A: 60 61
+0000E76C: 33 A4
+0000E76D: 40 8E
+0000E76E: 00 33
+0000E76F: 04 41
+0000E770: 42 00
+0000E771: 41 02
+0000E772: 12 60
+0000E773: 2E 00
+0000E774: FF 00
+0000E775: FE 0E
+0000E776: 33 32
+0000E777: 41 3C
+0000E778: 00 FF
+0000E779: 02 FF
+0000E77A: 60 4E
+0000E77B: 06 5E
+0000E77C: 32 4C
+0000E77D: 3C DF
+0000E77E: FF 7F
+0000E77F: FF FD
+0000E780: 60 4E
+0000E781: 02 75
+
+
+---------------------
+Disassembly - Altered
+---------------------
+
+; =============== from aiengine.asm =======================================
+
+
+
+
+
+; =============== from battlefieldengine_2.asm =======================================
+
+
+
+
+---------------------
+Disassembly - Original
+---------------------
+
+; =============== from aiengine.asm =======================================
+
+sub_E3EE:
+                
+                movem.l d0/d2-a6,-(sp)
+                link    a6,#-6
+                move.b  d0,-4(a6)
+                move.b  d1,-5(a6)
+                bsr.w   CheckMuddled2   
+                tst.b   d1
+                beq.s   loc_E40A
+                bra.w   loc_E776        ; skip this function if combatant is inflicted with muddle 2
+loc_E40A:
+                
+                clr.w   d1
+                move.b  -5(a6),d1
+                move.b  #$7F,-2(a6) 
+                move.b  #$3F,-1(a6) 
+                move.b  -4(a6),d0
+                clr.w   d3
+                bsr.w   GetNextUsableHealingItem
+                cmpi.w  #ITEM_NOTHING,d1
+                beq.s   loc_E490
+                cmpi.b  #ITEM_HEALING_RAIN,d1
+                bne.s   loc_E490
+                move.b  d1,-2(a6)       ; item is Healing Rain
+                move.b  d2,-3(a6)
+                bsr.w   GetItemDefAddress
+                move.b  ITEMDEF_OFFSET_USE_SPELL(a0),-1(a6)
+                move.w  #$80,d0 
+                bsr.w   IsCombatantAtLessThanHalfHP
+                bcc.s   loc_E45E        
+                move.b  #$7F,-2(a6) 
+                move.b  #$3F,-1(a6) 
+                bra.w   loc_E490
+loc_E45E:
+                
+                lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1 ; enemy 0 has less than half HP, and we have a healing rain, so use it
+                move.w  #BATTLEACTION_USE_ITEM,(a1)
+                clr.w   d0
+                move.b  -3(a6),d0
+                move.w  d0,BATTLEACTION_OFFSET_ITEM_SLOT(a1)
+                clr.w   d0
+                move.b  -4(a6),d0
+                move.w  d0,BATTLEACTION_OFFSET_4(a1)
+                clr.w   d1
+                move.b  -2(a6),d1
+                move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
+                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
+                move.w  #$FF,(a1)
+                bra.w   loc_E782
+loc_E490:
+                
+                move.b  -4(a6),d0
+                clr.w   d3
+                bsr.w   GetNextHealingSpell
+                cmpi.w  #$3F,d1 
+                beq.s   loc_E4DA
+                move.b  d1,-1(a6)
+                move.w  d1,d2
+                andi.w  #$3F,d2 
+                bsr.w   GetCurrentMP
+                cmpi.w  #0,d2
+                bne.s   loc_E4C4
+                cmpi.w  #3,d1
+                bge.s   loc_E4C0
+                bra.w   loc_E4DA
+                bra.s   loc_E4C4
+loc_E4C0:
+                
+                bra.w   loc_E500
+loc_E4C4:
+                
+                cmpi.w  #1,d2
+                bne.s   loc_E4DA
+                cmpi.w  #7,d1
+                bge.s   loc_E4D6
+                bra.w   loc_E4DA
+                bra.s   loc_E4DA
+loc_E4D6:
+                
+                bra.w   loc_E500
+loc_E4DA:
+                
+                move.b  -4(a6),d0
+                clr.w   d3
+                bsr.w   GetNextUsableHealingItem
+                cmpi.w  #$7F,d1 
+                bne.s   loc_E4EE
+                bra.w   loc_E776
+loc_E4EE:
+                
+                move.b  d1,-2(a6)
+                move.b  d2,-3(a6)
+                bsr.w   GetItemDefAddress
+                move.b  ITEMDEF_OFFSET_USE_SPELL(a0),-1(a6)
+loc_E500:
+                
+                move.b  -4(a6),d0
+                btst    #7,d0
+                beq.s   loc_E510
+                bsr.w   MakeTargetListEnemies
+                bra.s   loc_E514
+loc_E510:
+                
+                bsr.w   MakeTargetListAllies
+loc_E514:
+                
+                move.w  #$FFFF,d3
+                bsr.w   UpdateTargetListAllies
+                move.b  -4(a6),d0
+                bsr.w   GetMoveInfo     
+                bsr.w   MakeRangeLists
+                clr.w   d3
+                bsr.w   UpdateTargetListAllies
+                lea     ((byte_FF883E-$1000000)).w,a0
+                clr.w   d3
+                move.b  -4(a6),d0
+                btst    #7,d0
+                bne.s   loc_E546
+                clr.w   d0
+                move.w  #$1D,d4
+                bra.s   loc_E54E
+loc_E546:
+                
+                move.w  #$80,d0 
+                move.w  #$1F,d4
+loc_E54E:
+                
+                bsr.w   GetCurrentHP
+                tst.w   d1
+                bne.s   loc_E55A
+                bra.w   loc_E56C
+loc_E55A:
+                
+                bsr.w   sub_D38A
+                bcc.s   loc_E564
+                bra.w   loc_E56C
+loc_E564:
+                
+                move.b  d0,(a0,d3.w)
+                addi.w  #1,d3
+loc_E56C:
+                
+                addi.w  #1,d0
+                dbf     d4,loc_E54E
+                lea     ((word_FF8806-$1000000)).w,a1
+                move.w  d3,(a1)
+                tst.b   d3
+                bne.s   loc_E582
+                bra.w   loc_E776
+loc_E582:
+                
+                lea     ((byte_FF880E-$1000000)).w,a1
+                lea     ((byte_FF895E-$1000000)).w,a2
+                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a3
+                clr.w   d4
+                lea     ((FF8804_LOADING_SPACE-$1000000)).w,a4
+                move.w  #0,(a4)
+loc_E598:
+                
+                clr.w   d0
+                move.b  (a0,d4.w),d0
+                clr.w   d1
+                move.b  -1(a6),d1
+                bsr.w   CreateTargetGrid
+                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d5
+                tst.w   d5
+                bne.s   loc_E5B4
+                bra.w   loc_E5E2
+loc_E5B4:
+                
+                clr.w   d7
+                clr.w   d2
+                move.b  #0,(a1,d4.w)
+loc_E5BE:
+                
+                move.b  (a3,d7.w),d0
+                bsr.w   sub_CDEA
+                cmpi.w  #$D,d6
+                bne.s   loc_E5D4
+loc_E5CC:
+                
+                move.b  #1,(a1,d4.w)
+                addq.w  #1,(a4)
+loc_E5D4:
+                
+                add.w   d6,d2
+                addi.w  #4,d2
+                addi.w  #1,d7
+                subq.w  #1,d5
+                bne.s   loc_E5BE
+loc_E5E2:
+                
+                move.b  d2,(a2,d4.w)
+                addi.w  #1,d4
+                subq.w  #1,d3
+                bne.s   loc_E598
+                bra.w   *+4
+                move.w  ((word_FF8806-$1000000)).w,d1
+                cmpi.w  #1,d1
+                bgt.s   loc_E600
+                bra.w   loc_E654
+loc_E600:
+                
+                subq.w  #2,d1
+                clr.w   d2
+                move.b  #0,d2
+                lea     ((byte_FF883E-$1000000)).w,a0
+                lea     ((byte_FF895E-$1000000)).w,a1
+loc_E610:
+                
+                tst.b   d2
+                bpl.s   loc_E618
+                bra.w   loc_E654
+loc_E618:
+                
+                move.b  #$FF,d2
+                clr.w   d3
+loc_E61E:
+                
+                move.b  1(a1,d3.w),d4
+                cmp.b   (a1,d3.w),d4
+                ble.s   loc_E646
+                move.b  1(a1,d3.w),d4
+                move.b  (a1,d3.w),1(a1,d3.w)
+                move.b  d4,(a1,d3.w)
+                move.b  1(a0,d3.w),d4
+                move.b  (a0,d3.w),1(a0,d3.w)
+                move.b  d4,(a0,d3.w)
+                move.w  d3,d2
+loc_E646:
+                
+                tst.w   d1
+                beq.s   loc_E650
+                addq.w  #1,d3
+                subq.w  #1,d1
+                bra.s   loc_E61E
+loc_E650:
+                
+                move.w  d2,d1
+                bra.s   loc_E610
+loc_E654:
+                
+                lea     ((word_FF8806-$1000000)).w,a0
+                move.w  (a0),d5
+                clr.w   d6
+                lea     ((byte_FF883E-$1000000)).w,a0
+loc_E660:
+                
+                cmpi.b  #$7F,-2(a6) 
+                beq.s   loc_E66C
+                bra.w   loc_E6C0
+loc_E66C:
+                
+                move.b  (a0,d6.w),d0
+                move.b  -4(a6),d1
+                move.b  -1(a6),d4
+                bsr.w   sub_CD68        
+                cmpi.b  #$FF,d2
+                bne.s   loc_E686
+                bra.w   loc_E6FC
+loc_E686:
+                
+                tst.b   d2				;d2 = spell level
+                bne.s   loc_E6B0		;if not lv 1 spell
+                cmp.b   d0,d1			;d0 = combatant offset for the heal target, d1 = combatant offset for the spell user
+                beq.s   loc_E6B0		;if the target is the spell user
+										;if is a lv 1 spell and the target is not the spell user, then do an additional MP check
+                move.b  -4(a6),d0		;d0 = combatant offset for the spell user
+                bsr.w   GetCurrentMP	;d1 = current MP
+                cmpi.b  #$B,d1			
+                blt.s   loc_E6B0		;if less than 11 MP
+                move.b  -1(a6),d0		;d0 = spell index
+                lsr.b   #6,d0
+                andi.b  #3,d0			;d0 = spell level (max)
+                cmpi.b  #2,d0
+                blt.s   loc_E6B0		;if best spell available is lv 1 or lv 2
+                move.b  #1,d2			;if more than 11 MP and a lv 3+ spell is available but lv 1 is selected to cast on someone other than the caster, then use the lv 2 version of the spell instead
+loc_E6B0:								
+                
+                move.b  -1(a6),d0		;d0 = spell index
+                lsl.b   #6,d2
+                andi.b  #$3F,d0 		;SPELLENTRY_MASK_INDEX = #$3F
+                or.b    d2,d0			;combine d0 and d2 to create the spell selected by the caster with the appropriate spell level
+                move.b  d0,-1(a6)		;d0 = the spell to use by the caster
+loc_E6C0:
+                
+                clr.w   d0
+                move.b  (a0,d6.w),d0
+                cmpi.b  #$7F,-2(a6) 
+                beq.s   loc_E6DA
+                clr.w   d1
+                move.b  -2(a6),d1
+                bsr.w   GetItemRange
+                bra.s   loc_E6E4
+loc_E6DA:
+                
+                clr.w   d1
+                move.b  -1(a6),d1
+                bsr.w   GetSpellRange
+loc_E6E4:
+                
+                bsr.w   GetYPos
+                move.w  d1,d2
+                bsr.w   GetXPos
+                bsr.w   GetClosestAttackPosition
+                cmpi.b  #$FF,d1
+                beq.s   loc_E6FC
+                bra.w   loc_E70A
+loc_E6FC:
+                
+                addi.w  #1,d6
+                subq.w  #1,d5
+                bne.w   loc_E660
+                bra.w   loc_E776
+loc_E70A:
+                
+                move.b  d1,d0
+                move.b  d2,d1
+                lea     (byte_FF4400).l,a2
+                lea     (byte_FF4400).l,a3
+                bsr.w   sub_DD10
+                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
+                lea     ((BATTLESCENE_ACTION_TYPE-$1000000)).w,a1
+                cmpi.b  #$7F,-2(a6) 
+                bne.s   loc_E748
+                move.w  #BATTLEACTION_CAST_SPELL,(a1)
+                clr.w   d0
+                move.b  -1(a6),d0
+                move.w  d0,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
+                clr.w   d0
+                move.b  (a0,d6.w),d0
+                move.w  d0,BATTLEACTION_OFFSET_4(a1)
+                bra.s   loc_E772
+loc_E748:
+                
+                move.w  #BATTLEACTION_USE_ITEM,(a1)
+                clr.w   d0
+                move.b  -3(a6),d0
+                move.w  d0,BATTLEACTION_OFFSET_ITEM_SLOT(a1)
+                clr.w   d0
+                move.b  (a0,d6.w),d0
+                move.w  d0,BATTLEACTION_OFFSET_4(a1)
+                clr.w   d0
+                move.b  -4(a6),d0
+                move.b  -3(a6),d1
+                bsr.w   GetItemAndNumberOfItems
+                move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
+loc_E772:
+                
+                bra.w   loc_E782
+loc_E776:
+                
+                move.w  #$FFFF,d1
+                unlk    a6
+                movem.l (sp)+,d0/d2-a6
+                rts
+loc_E782:
+                
+                clr.w   d1
+                unlk    a6
+                movem.l (sp)+,d0/d2-a6
+                rts
+
+    ; End of function sub_E3EE
+
+
+
+; =============== from battlefieldengine_2.asm =======================================
+
+; In: D0 = heal target character index
+;     D4 = heal spell index
+
+sub_CD68:
+                
+                movem.l d0-d1/d3-a6,-(sp)
+                clr.w   d5
+                move.b  d4,d5
+                lsr.w   #6,d5
+                andi.w  #3,d5
+                move.w  d1,d3
+                jsr     GetCurrentHP
+                move.w  d1,d2
+                jsr     GetMaxHP
+                sub.w   d2,d1           ; d1 = max HP - current HP
+                moveq   #$FFFFFFFF,d2
+                cmpi.w  #ENEMYAI_THRESHOLD_HEAL1,d1
+                bls.w   loc_CDDC
+                moveq   #0,d2
+                cmpi.w  #ENEMYAI_THRESHOLD_HEAL2,d1
+                bls.w   loc_CDB8
+                cmpi.w  #2,d5
+                bcs.w   loc_CDB8
+                moveq   #2,d2
+                cmpi.w  #ENEMYAI_THRESHOLD_HEAL3,d1
+                bls.w   loc_CDB8
+                cmpi.w  #3,d5
+loc_CDB2:
+                
+                bcs.w   loc_CDB8
+                moveq   #3,d2
+loc_CDB8:
+                
+                move.w  d3,d0
+                jsr     GetCurrentMP
+                move.w  d1,d3
+loc_CDC2:
+                
+                moveq   #0,d1
+                add.w   d2,d1
+                lsl.w   #5,d1
+                add.w   d4,d1
+                jsr     FindSpellDefAddress
+                cmp.b   SPELLDEF_OFFSET_MP_COST(a0),d3 ; check if spell cost is more than current MP
+                bcc.w   loc_CDDC
+                dbf     d2,loc_CDC2
+loc_CDDC:
+                
+                cmpi.b  #1,d2
+                bne.s   loc_CDE4
+                moveq   #0,d2
+loc_CDE4:
+                
+                movem.l (sp)+,d0-d1/d3-a6
+                rts
+
+    ; End of function sub_CD68
