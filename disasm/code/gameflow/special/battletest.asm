@@ -102,7 +102,7 @@ byte_77DE:
                 txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
-                move.w  #$31,d2 
+                move.w  #49,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0
@@ -116,7 +116,7 @@ byte_77DE:
                 movem.w (sp)+,d0-d2
                 beq.s   loc_7820
                 move.w  d0,d1
-                addi.w  #$1C2,d1
+                addi.w  #BATTLE_INTRO_CUTSCENE_FLAGS_START,d1
                 jsr     j_SetFlag
 loc_7820:
                 
@@ -126,7 +126,7 @@ loc_7820:
                 movem.w (sp)+,d0-d4
                 clr.w   d1
                 move.b  d0,d1
-                mulu.w  #7,d0
+                mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
                 lea     BattleMapCoordinates(pc), a0
                 nop
                 adda.w  d0,a0
@@ -214,11 +214,12 @@ LevelUpWholeForce:
                 
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
-loc_7924:
+@Loop:
                 
                 bsr.w   j_LevelUp
                 addq.w  #1,d0
-                dbf     d7,loc_7924
+                dbf     d7,@Loop
+                
                 rts
 
     ; End of function LevelUpWholeForce

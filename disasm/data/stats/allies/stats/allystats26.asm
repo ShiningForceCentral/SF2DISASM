@@ -8,4 +8,4 @@ AllyStats26:    forClass  RBT
                 defGrowth 32, 85, LINEAR
                 agiGrowth 23, 60, LINEAR
                 spellList 
-                    
+                

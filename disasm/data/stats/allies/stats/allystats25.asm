@@ -20,4 +20,4 @@ AllyStats25:    forClass  MMNK
                     44, BOOST|LV2, &
                     47, BLAST|LV4, &
                     51, HEAL|LV4
-                    
+                

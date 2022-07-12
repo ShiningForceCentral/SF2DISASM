@@ -16,7 +16,7 @@ ms_map59_InitFunction:
                 script  cs_5EDB8
                 script  cs_5EF60
                 setFlg  999             ; Set after the Nazca ship shootdown scene
-                move.b  #$2D,((EGRESS_MAP_INDEX-$1000000)).w 
+                move.b  #MAP_DOJO,((EGRESS_MAP-$1000000)).w
                 setFlg  436             ; Battle 36 unlocked - BATTLE_VERSUS_PRISM_FLOWERS      
                 setFlg  440             ; Battle 40 unlocked - BATTLE_VERSUS_ODD_EYE            
                 setFlg  442             ; Battle 42 unlocked - BATTLE_VERSUS_GALAM              
@@ -426,7 +426,7 @@ cs_5EF60:       textCursor 3739
 
 csub_5F14C:
                 
-                lea     plt_5F17E(pc), a0
+                lea     plt_NazcaShip(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   
@@ -446,7 +446,7 @@ sub_5F16C:
                 moveq   #$17,d7
 loc_5F16E:
                 
-                subq.b  #1,((byte_FFAEEE+5-$1000000)).w
+                subq.b  #1,((ENTITY_SPECIAL_SPRITE_LAYER-$1000000)).w
                 moveq   #2,d0
                 jsr     (Sleep).w       
                 dbf     d7,loc_5F16E
@@ -454,7 +454,7 @@ loc_5F16E:
 
     ; End of function sub_5F16C
 
-plt_5F17E:      dc.w 0
+plt_NazcaShip:  dc.w 0
                 dc.w $C40
                 dc.w $E84
                 dc.w $26
@@ -534,7 +534,7 @@ sub_5F31E:
                 nop
 csub_5F326:
                 
-                move.b  #$18,((byte_FFAEEE+5-$1000000)).w
+                move.b  #$18,((ENTITY_SPECIAL_SPRITE_LAYER-$1000000)).w
                 rts
 
     ; End of function sub_5F31E

@@ -8,4 +8,4 @@ AllyStats23:    forClass  PGNT
                 defGrowth 23, 70, EARLY
                 agiGrowth 26, 70, LINEAR
                 spellList 
-                    
+                

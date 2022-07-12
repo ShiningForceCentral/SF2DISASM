@@ -1136,7 +1136,7 @@ CalculateRomChecksum:
                 
                 jsr     (WaitForVInt).w
                 btst    #INPUT_BIT_START,((P2_INPUT-$1000000)).w
-                beq.s   return_28F96    ; execute only if P2 START pressed
+                beq.s   @Return         ; execute only if P2 START pressed
                 lea     (RomEndAddress).w,a0
                 move.l  (a0),d1
                 addq.l  #1,d1           ; 0x200000
@@ -1147,13 +1147,14 @@ CalculateRomChecksum:
                 subq.w  #1,d2           ; FFF7F ?
                 swap    d1
                 moveq   #0,d0
-loc_28F88:
+@Loop:
                 
                 add.w   (a0)+,d0        ; sum stored in a RAM word
-                dbf     d2,loc_28F88    
-                dbf     d1,loc_28F88    
+                dbf     d2,@Loop        
+                dbf     d1,@Loop        
+                
                 move.w  d0,((ROM_CHECKSUM-$1000000)).w
-return_28F96:
+@Return:
                 
                 rts
 

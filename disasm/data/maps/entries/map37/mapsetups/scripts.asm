@@ -159,7 +159,7 @@ loc_5FD4E:
 
 sub_5FD5E:
                 
-                move.b  #$18,((byte_FFAEEE+5-$1000000)).w
+                move.b  #$18,((ENTITY_SPECIAL_SPRITE_LAYER-$1000000)).w
                 rts
 
     ; End of function sub_5FD5E
@@ -185,16 +185,14 @@ loc_5FD68:
 
 ; =============== S U B R O U T I N E =======================================
 
-; unused
-
 
 sub_5FD7C:
                 
-                bsr.w   sub_5FD92       
+                bsr.w   sub_5FD92
                 moveq   #$17,d7
 loc_5FD82:
                 
-                addq.b  #1,((byte_FFAEEE+5-$1000000)).w
+                addq.b  #1,((ENTITY_SPECIAL_SPRITE_LAYER-$1000000)).w
                 moveq   #4,d0
                 jsr     (Sleep).w       
                 dbf     d7,loc_5FD82
@@ -204,8 +202,6 @@ loc_5FD82:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; unused
 
 
 sub_5FD92:
