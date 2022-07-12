@@ -1,6 +1,9 @@
 
 ; 0 = OFF, 1 = ON
 
+; Battle mechanics
+PERCENT_POISON_DAMAGE:              equ 0       ; 1-100 = n% of max HP
+
 ; AI enhancements
 HEALER_AI_ENHANCEMENTS:             equ 1       ; See SF2_AI_Healing_Rewrite.txt for more details.
 
