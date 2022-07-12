@@ -1,6 +1,6 @@
 
 ; ASM FILE data\graphics\battles\grounds\entries.asm :
-; 0x1B8028..0x1B9A9A : Grounds
+; 0x1B8028..0x1B9A9A : Battlescene Grounds
 pt_Grounds:     dc.l Ground00
                 dc.l Ground01
                 dc.l Ground02

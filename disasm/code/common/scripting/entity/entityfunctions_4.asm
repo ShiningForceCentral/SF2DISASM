@@ -107,7 +107,7 @@ loc_45914:
 OrientSpriteRight:
                 
                 movem.l d0-d1/d5-a0,-(sp)
-                link    a6,#64960
+                link    a6,#-576
                 move.w  #1,d7
 loc_45980:
                 
@@ -206,7 +206,7 @@ loc_45A2C:
 sub_45A8C:
                 
                 movem.l d0-a0,-(sp)
-                link    a6,#64960
+                link    a6,#-576
                 move.w  #$8F,d7 
 loc_45A98:
                 

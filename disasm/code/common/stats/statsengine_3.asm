@@ -90,8 +90,7 @@ InitAllyCombatantEntry:
                 move.w  d3,COMBATANT_OFFSET_ITEM_2(a1)
                 move.b  (a0)+,d3
                 move.w  d3,COMBATANT_OFFSET_ITEM_3(a1)
-                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS_START(a1) 
-                                                        ; spell entries default to nothing
+                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1) ; spell entries default to nothing
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
                 bsr.w   InitAllyStats   
@@ -119,8 +118,8 @@ LoadAllyClassData:
                 mulu.w  #CLASSDEF_ENTRY_SIZE,d1
                 adda.w  d1,a0
                 move.b  (a0)+,COMBATANT_OFFSET_MOV_BASE(a1)
-                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE1(a1)
-                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE2(a1)
+                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE(a1)
+                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_MOVETYPE_AND_AI(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_PROWESS_BASE(a1)
                 movem.l (sp)+,d0-d1/a0-a1
@@ -152,24 +151,24 @@ Promote:
 InitGameSettings:
                 
                 movem.l d0/d7-a0,-(sp)
-                moveq   #0,d0
+                moveq   #LONGWORD_GAMEFLAGS_INITVALUE,d0
                 lea     ((GAME_FLAGS-$1000000)).w,a0
-                moveq   #$1F,d7
+                moveq   #LONGWORD_GAMEFLAGS_COUNTER,d7
 @ClearGameFlags_Loop:
                 
                 move.l  d0,(a0)+
                 dbf     d7,@ClearGameFlags_Loop
                 
                 lea     ((DEALS_ITEMS-$1000000)).w,a0
-                moveq   #DEALS_ITEMS_LONGWORDS_COUNTER,d7
+                moveq   #LONGWORD_DEALS_COUNTER,d7
 @ClearDealsItems_Loop:
                 
                 move.l  d0,(a0)+
                 dbf     d7,@ClearDealsItems_Loop
                 
-                move.l  #$7F7F7F7F,d0
+                move.l  #LONGWORD_CARAVAN_INITVALUE,d0
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                moveq   #$F,d7
+                moveq   #LONGWORD_CARAVAN_COUNTER,d7
 @ClearCaravanItems_Loop:
                 
                 move.l  d0,(a0)+
@@ -182,7 +181,7 @@ InitGameSettings:
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 move.b  d0,((CURRENT_BATTLE-$1000000)).w
                 move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
-                move.b  d0,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  d0,((EGRESS_MAP-$1000000)).w
                 move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 move.b  #2,((MESSAGE_SPEED-$1000000)).w
                 move.l  #$FFFFFFFF,((FOLLOWERS_LIST-$1000000)).w
@@ -257,7 +256,7 @@ GetFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
-; determine who is in the force or not based on flags and update RAM lists
+; Determine who is in the force or not based on flags and update RAM lists.
 
 
 UpdateForce:
@@ -270,30 +269,31 @@ UpdateForce:
                 moveq   #0,d3
                 moveq   #0,d4
                 moveq   #0,d0
-                moveq   #COMBATANT_ALLIES_COUNTER,d7 ; HARDCODED number of allies
-loc_991A:
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
+@MemberStatus_Loop:
                 
                 move.w  d0,d1
                 addi.w  #FORCEMEMBER_JOINED_FLAGS_START,d1
                 bsr.s   CheckFlag
-                beq.w   loc_993E
+                beq.w   @CheckNextMember
                 move.b  d0,(a2)+
                 addq.w  #1,d2
                 move.w  d0,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.s   CheckFlag
-                beq.s   loc_993A
+                beq.s   @InReserve
                 move.b  d0,(a3)+
                 addq.w  #1,d3
-                bra.s   loc_993E
-loc_993A:
+                bra.s   @CheckNextMember
+@InReserve:
                 
                 move.b  d0,(a4)+
                 addq.w  #1,d4
-loc_993E:
+@CheckNextMember:
                 
                 addq.b  #1,d0
-                dbf     d7,loc_991A
+                dbf     d7,@MemberStatus_Loop
+                
                 move.w  d2,((TARGETS_LIST_LENGTH-$1000000)).w
                 move.w  d3,((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w
                 move.w  d4,((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w
@@ -317,9 +317,9 @@ JoinForce:
                 bsr.w   SetFlag
                 bsr.s   UpdateForce     
                 cmpi.w  #FORCE_MAX_SIZE,((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w
-                bcc.s   loc_9972
+                bcc.s   @SkipActiveForce
                 bsr.w   JoinBattleParty 
-loc_9972:
+@SkipActiveForce:
                 
                 move.l  (sp)+,d1
                 rts
@@ -430,9 +430,9 @@ AddItemToDeals:
                 movem.l d0-d2/a0,-(sp)
                 bsr.w   GetDealsItemInfo
                 cmpi.b  #DEALS_MAX_NUMBER_PER_ITEM,d2
-                beq.s   @Skip
+                beq.s   @DumpItem
                 add.b   d0,(a0)
-@Skip:
+@DumpItem:
                 
                 movem.l (sp)+,d0-d2/a0
                 rts

@@ -978,8 +978,8 @@ loc_D30:
                 sub.w   d6,d5
                 btst    d5,d1
                 bne.s   loc_D44
-                adda.w  #$20,a0 
-                adda.w  #$20,a1 
+                adda.w  #CRAM_PALETTE_SIZE,a0
+                adda.w  #CRAM_PALETTE_SIZE,a1
                 bra.w   loc_DA8
 loc_D44:
                 
@@ -1119,26 +1119,29 @@ ClearSpriteTable:
 ClearScrollTableData:
                 
                 movem.l d7/a6,-(sp)
-                move.w  #$C000,d0       ; clear scroll A table
+                move.w  #VRAM_ADDRESS_PLANE_A,d0 ; clear scroll A table
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
-                move.w  #$E000,d0       ; clear scroll B table
+                move.w  #VRAM_ADDRESS_PLANE_B,d0 ; clear scroll B table
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
+                
                 move.w  #$1FF,d7
                 lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a6
 loc_E62:
                 
                 clr.l   (a6)+
                 dbf     d7,loc_E62
+                
                 move.w  #$1FF,d7
                 adda.w  #$1800,a6
 loc_E70:
                 
                 clr.l   (a6)+
                 dbf     d7,loc_E70
+                
                 movem.l (sp)+,d7/a6
                 rts
 

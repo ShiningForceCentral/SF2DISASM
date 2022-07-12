@@ -9,7 +9,7 @@ ResetAlliesBattleStats:
                 
                 movem.l d0-d7,-(sp)
                 clr.w   d0
-                moveq   #COMBATANT_ALLIES_COUNTER,d7 ; HARDCODED max number of allies
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
 @Loop:
                 
                 jsr     j_GetCurrentHP
@@ -23,6 +23,7 @@ ResetAlliesBattleStats:
                 jsr     j_ApplyStatusEffectsAndItemsOnStats
                 addq.w  #1,d0
                 dbf     d7,@Loop
+                
                 movem.l (sp)+,d0-d7
                 rts
 

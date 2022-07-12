@@ -14,6 +14,7 @@ itemPrice = -4
 
 ShopMenuActions:
                 
+                module  ; Start of shop menu module
                 movem.l d0-a5,-(sp)
                 link    a6,#-22
                 moveq   #0,d1
@@ -34,7 +35,7 @@ loc_20088:
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
                 beq.s   loc_200A2
-                bra.w   loc_200C6
+                bra.w   @CheckChoice_Buy
 loc_200A2:
                 
                 moveq   #0,d1
@@ -49,10 +50,10 @@ byte_200B0:
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
-loc_200C6:
+@CheckChoice_Buy:
                 
                 cmpi.w  #0,d0
-                bne.w   loc_202CA
+                bne.w   @CheckChoice_Sell
 byte_200CE:
                 
                 txt     162             ; "What do you want to buy?"
@@ -204,10 +205,10 @@ byte_202C2:
                 
                 clsTxt
                 bra.w   byte_200CE      
-loc_202CA:
+@CheckChoice_Sell:
                 
                 cmpi.w  #1,d0
-                bne.w   loc_20442
+                bne.w   @CheckChoice_Repair
 byte_202D2:
                 
                 txt     177             ; "Whose and which item do{N}you want to sell?{D3}"
@@ -315,10 +316,10 @@ byte_2043A:
                 
                 clsTxt
                 bra.w   byte_202D2      
-loc_20442:
+@CheckChoice_Repair:
                 
                 cmpi.w  #2,d0
-                bne.w   loc_205B4
+                bne.w   @CheckChoice_Deals
 byte_2044A:
                 
                 txt     186             ; "Whose and which item{N}should I repair?{D1}"
@@ -352,9 +353,9 @@ loc_2046C:
                 jsr     j_GetCombatantEntryAddress
                 move.w  itemSlot(a6),d1
                 add.w   d1,d1
-                lea     COMBATANT_OFFSET_ITEM_0(a0,d1.w),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d2
-                btst    #$F,d2
+                btst    #ITEMENTRY_BIT_BROKEN,d2
                 bne.w   loc_204DC
                 txt     188             ; "It's not damaged.{W2}"
                 bra.w   byte_205AC
@@ -382,7 +383,7 @@ loc_2051A:
                 
                 move.w  selectedItem(a6),d1
                 jsr     j_GetEquipmentType
-                cmpi.w  #1,d2
+                cmpi.w  #ITEMTYPE_BIT_WEAPON,d2
                 bne.s   loc_2055A
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
@@ -422,7 +423,7 @@ byte_205AC:
                 
                 clsTxt
                 bra.w   byte_2044A      
-loc_205B4:
+@CheckChoice_Deals:
                 
                 jsr     DetermineDealsItemsNotInCurrentShop(pc)
                 nop
@@ -527,7 +528,7 @@ loc_206D8:
                 bne.w   byte_207C0      
                 move.w  selectedItem(a6),d1
                 jsr     j_GetEquipmentType
-                cmpi.w  #1,d2
+                cmpi.w  #ITEMTYPE_BIT_WEAPON,d2
                 bne.s   loc_2075C
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
@@ -581,7 +582,7 @@ byte_207C0:
 byte_207C4:
                 
                 clsTxt
-                bra.w   loc_205B4
+                bra.w   @CheckChoice_Deals
 byte_207CC:
                 
                 clsTxt
@@ -589,6 +590,7 @@ byte_207CC:
 
     ; End of function ShopMenuActions
 
+                modend  ; End of shop menu module
 
 ; =============== S U B R O U T I N E =======================================
 
