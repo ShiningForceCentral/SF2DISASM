@@ -43,7 +43,7 @@
                 include "code\gameflow\battle\battlefield\battlefieldengine_2.asm"    ; Battlefield engine
                 include "code\gameflow\battle\battlefield\getattackrange.asm"    ; Get Attack Range function
                 include "code\gameflow\battle\battlefield\battlefieldengine_3.asm"    ; Battlefield engine
-                if (HEALER_AI_ENHANCEMENTS=1)
+                if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
                     include "code\gameflow\battle\battlefield\determinehealingspelllevel-aienhancements.asm"
                 else
                     include "code\gameflow\battle\battlefield\determinehealingspelllevel.asm"    ; Determine healing spell level function
@@ -51,7 +51,7 @@
                 include "code\gameflow\battle\battlefield\battlefieldengine_4.asm"    ; Battlefield engine
                 include "code\gameflow\battle\battlefield\useableaiactions.asm"    ; Usable AI actions getter functions
                 include "code\gameflow\battle\battlefield\battlefieldengine_5.asm"    ; Battlefield engine
-                if (HEALER_AI_ENHANCEMENTS=1)
+                if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
                     include "code\gameflow\battle\battlefield\doescombatantrequirehealing-aienhancements.asm"
                 else
                     include "code\gameflow\battle\battlefield\doescombatantrequirehealing.asm"    ; Does combatant require healing function
@@ -66,7 +66,7 @@
                 include "data\battles\global\aicommandsets.asm"    ; AI commands data
                 include "data\battles\global\swarmbattles.asm"    ; Parameters for battles implementing swarm AI
                 include "code\gameflow\battle\ai\handleaicommand.asm"    ; Handle AI Command function
-                if (HEALER_AI_ENHANCEMENTS=1)
+                if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
                     include "code\gameflow\battle\ai\aicommandheal-aienhancements.asm"
                 else
                     include "code\gameflow\battle\ai\aicommandheal.asm"    ; AI command : Heal

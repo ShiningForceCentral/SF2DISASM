@@ -3,12 +3,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Return the lowest level spell that still fully heals the target and that can be cast by the caster (or choose the maximum healing amount if no spell level can fully heal).
+; Return the lowest level spell that still fully heals the target and that can be cast by the caster
+;  (or choose the maximum healing amount if no spell level can fully heal.)
 ;
-; In:  D0 = target index
-;      D1 = caster index
-;      D4 = spell entry
-; Out: D2 = spell level to cast (if $FF, then no spell is cast)
+;   In: d0.b = target index
+;       d1.b = caster index
+;       d4.w = spell entry
+;
+;   Out: d2.w = spell level to cast (if -1, then no spell is cast)
 
 
 DetermineHealingSpellLevel:
@@ -34,7 +36,6 @@ DetermineHealingSpellLevel:
                 
                 bsr.w   GetCurrentMP
                 move.w  d1,d3               ; d3 = current MP of spell caster
-@Loop:
 
                 ; a0 = spell definition location
                 ; d7 = target's missing HP
@@ -43,7 +44,7 @@ DetermineHealingSpellLevel:
                 ; d3 = caster's current MP
                 ; d2 = spell level to use (output of this subroutine); begins at the maximum
                 ; d0 = caster index
-                move.b  SPELLDEF_OFFSET_MP_COST(a0),d6
+@Loop:          move.b  SPELLDEF_OFFSET_MP_COST(a0),d6
                 subi.b  #64,d4              ; reduce spell entry by one level (this will be used in the next loop or after the MP check, but is placed here for efficiency purposes)
                 move.w  d4,d1
                 bsr.w   FindSpellDefAddress ; Load spell definition for the new, lower level
@@ -57,12 +58,9 @@ DetermineHealingSpellLevel:
                 
                 cmp.w   d5,d7   ; check if the healing amount is sufficient
                 bgt.s   @Done   ; if d7 > d5, healing power of lower level is insufficient to heal the target, so end processing and use the currently selected level
-@Next:
+@Next:          dbf     d2,@Loop
 
-                dbeq    d2,@Loop
-@Done:
-                
-                movem.l (sp)+,d0-d1/d3-a0
+@Done:          movem.l (sp)+,d0-d1/d3-a0
                 rts
 
     ; End of function DetermineHealingSpellLevel
@@ -83,9 +81,7 @@ GetAdjustedHealingPower:
                 blo.s   @Return
                 mulu.w  #5,d5
                 lsr.w   #2,d5       ; +25% spell power
-@Return:
-
-                rts
+@Return:        rts
 
     ; End of function GetAdjustedHealingPower
 

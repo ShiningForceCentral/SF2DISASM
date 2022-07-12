@@ -3,12 +3,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Determine if the target requires healing (as determined by an HP threshold).
+; Determine if the target requires healing (as determined by an HP threshold.)
 ;
-; In:  d0 = target combatant index
-;       d5 = caster combatant index
-;       d6 = healing thresholds code
-; Out: carry and zero bits are cleared if the target hits the appropriate HP threshold
+;   In: d0.w = target combatant index
+;       d5.w = caster combatant index
+;       d6.w = healing thresholds code
+;
+;   Out: carry and zero bits are cleared if the target hits the appropriate HP threshold
 
 
 DoesCombatantRequireHealing:
@@ -18,21 +19,15 @@ DoesCombatantRequireHealing:
                 cmpi.w  #14,d1
                 blt.s   @CheckBoss
                 lsr.w   #6,d6
-                bra.s   @Calc
-@CheckBoss:
-
-                cmpi.w  #COMBATANT_ENEMIES_START,d0
+                bra.s   @Calculate
+@CheckBoss:     cmpi.w  #COMBATANT_ENEMIES_START,d0
                 bne.s   @CheckSelf
                 lsr.w   #4,d6
-                bra.s   @Calc
-@CheckSelf:
-
-                cmp.w   d0,d5
-                bne.s   @Calc
+                bra.s   @Calculate
+@CheckSelf:     cmp.w   d0,d5
+                bne.s   @Calculate
                 lsr.w   #2,d6
-@Calc:
-
-                andi.w  #3,d6           ; keep only the first two bits so it doesn't matter what lsr is used
+@Calculate:     andi.w  #3,d6           ; keep only the first two bits so it doesn't matter what lsr is used
                 bsr.w   GetCurrentHP
                 move.w  d1,d2
                 add.w   d1,d2

@@ -3279,15 +3279,19 @@ AICOMMAND_SPECIAL_MOVE5: equ $13
 ;   %10 = only heal if the target is at 66% health or less (default SF2 healing instruction)
 ;   %11 = heal if the target is missing any health
 
-    if (HEALER_AI_ENHANCEMENTS=1)
-AICOMMAND_PARAM_HEAL: equ %10101010             ; %10 = only heal if the target is at 66% health or less (default SF2 healing threshold)
-AICOMMAND_PARAM_HEAL2: equ AICOMMAND_PARAM_HEAL
-AICOMMAND_PARAM_HEAL3: equ AICOMMAND_PARAM_HEAL
-    else
-AICOMMAND_PARAM_HEAL: equ 0
-AICOMMAND_PARAM_HEAL2: equ 1
-AICOMMAND_PARAM_HEAL3: equ 2
+aiCommandParamHeal  = 0
+aiCommandParamHeal2 = 1
+aiCommandParamHeal3 = 2
+
+    if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
+aiCommandParamHeal  = %10101010                     ; %10 = only heal if the target is at 66% health or less
+aiCommandParamHeal2 = aiCommandParamHeal            ;   (default SF2 healing threshold)
+aiCommandParamHeal3 = aiCommandParamHeal
     endif
+
+AICOMMAND_PARAM_HEAL: equ aiCommandParamHeal
+AICOMMAND_PARAM_HEAL2: equ aiCommandParamHeal2
+AICOMMAND_PARAM_HEAL3: equ aiCommandParamHeal3
 
 ; ---------------------------------------------------------------------------
 

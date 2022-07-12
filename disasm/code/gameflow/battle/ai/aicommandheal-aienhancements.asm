@@ -4,10 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = caster index
-;     D1 = command parameter (refer to enum AiCommand_Params)
+; In: d0.b = caster index
+;     d1.w = command parameter (refer to enum AiCommand_Params)
 ;
-; Out: D1 = $FFFF if command failed
+; Out: d1.w = $FFFF if command failed
 
 optimalSpell = -6
 healingThresholds = -5
@@ -195,6 +195,7 @@ ExecuteAiCommand_Heal:
                 beq.w   @Skip   ; skip if no targets were found that needed healing
                 
                 ; Get targets priority
+                subq.w  #1,d3
                 lea     ((TARGETS_REACHABLE_BY_ATTACK_LIST-$1000000)).w,a1
                 lea     ((SPELL_TARGET_PRIORITIES_LIST-$1000000)).w,a2
                 lea     ((TARGETS_LIST-$1000000)).w,a3
@@ -209,6 +210,7 @@ ExecuteAiCommand_Heal:
                 move.b  spellEntry(a6),d1
                 bsr.w   CreateTargetGrid
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d5
+                subq.w  #1,d5
                 beq.s   @RecordTotalPriority    ; if no targets are found in AOE
                 
                 clr.w   d7
@@ -229,12 +231,12 @@ ExecuteAiCommand_Heal:
                 add.w   d6,d2
                 addq.w  #4,d2
                 addq.w  #1,d7
-                dbeq    d5,@CheckHighestPriority_Loop
+                dbf     d5,@CheckHighestPriority_Loop
 @RecordTotalPriority:
                 
                 move.b  d2,(a2,d4.w)
                 addq.w  #1,d4
-                dbeq    d3,@GetTargetsPriority_Loop
+                dbf     d3,@GetTargetsPriority_Loop
                 
                 move.w  ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,d1
                 cmpi.w  #1,d1
@@ -278,6 +280,7 @@ ExecuteAiCommand_Heal:
 @FindPositionForTargets:
                 
                 move.w  ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,d5
+                subq.w  #1,d5
                 clr.w   d6
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a0
 @FindPositionForTargets_Loop:
@@ -346,7 +349,7 @@ ExecuteAiCommand_Heal:
 @FindPositionForNextTarget:
                 
                 addq.w  #1,d6
-                dbeq    d5,@FindPositionForTargets_Loop
+                dbf     d5,@FindPositionForTargets_Loop
                 
                 bra.w   @Skip   ; if caster cannot move into position to reach any target, do not take action
 @FinalMpCheck:
