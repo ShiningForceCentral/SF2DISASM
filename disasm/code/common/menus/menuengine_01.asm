@@ -136,7 +136,13 @@ tbl_MainFontAlternateSymbols:
 
 ; START OF FUNCTION CHUNK FOR WriteTilesFromAsciiWithOrangeFont
 
-loc_1016A:
+loc_1016A:      
+                if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
+                    tst.w   d1
+                    bne.s   @Continue
+                    move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
+                    bra.s   loc_10156
+@Continue:      endif
                 
                 lea     2(a2),a1
                 suba.w  d1,a1

@@ -105,7 +105,11 @@
                 include "code\gameflow\battle\ai\aiengine_2.asm"    ; AI engine
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
                 
-                includeIfVanillaRom "data\stats\spells\spellnames.asm"  ; Spell names
+                if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+                    includeIfVanillaRom "data\stats\spells\extendedspellnames.asm"
+                else
+                    includeIfVanillaRom "data\stats\spells\spellnames.asm"    ; Spell names
+                endif
                 include "data\stats\allies\allynames.asm"    ; Ally names
                 include "data\stats\enemies\enemynames.asm"    ; Enemy names
                 alignIfOriginalRomLayout $10000

@@ -1,6 +1,15 @@
 
 ; 0 = OFF, 1 = ON
 
+; Menu enhancements
+THREE_DIGITS_STATS:                 equ 0       ; 
+FULL_CLASS_NAMES:                   equ 0       ; 
+EIGHT_CHARACTERS_MEMBER_NAMES:      equ 0       ; 
+EXTENDED_SPELL_NAMES:               equ 0       ; 
+ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 0       ; 1 = small icons, 2 = no display
+SHOW_ENEMY_LEVEL:                   equ 0       ; 
+SHOW_ALL_SPELLS_IN_MEMBER_SCREEN:   equ 0       ; 
+
 ; ROM expansions
 EXPANDED_ROM:                       equ 1       ; Build a 4MB ROM and manage SRAM mapping.
 EXTENDED_SSF_MAPPER:                equ 0       ; Build a 6MB ROM and manage ROM and SRAM mapping.
@@ -19,7 +28,15 @@ OPTIMIZED_ADDS_TO_QUICK_FORM:       equ 1       ; Optimize adds to quick form.
 OPTIMIZED_SUBS_TO_QUICK_FORM:       equ 1       ; Optimize subtract to quick form.
 OPTIMIZED_MOVE_TO_QUICK_FORM:       equ 1       ; Optimize move to quick form.
 
-
+    
+    ; If standard build, and either THREE_DIGITS_STATS or FULL_CLASS_NAMES
+    ; are enabled, implement a second member list stats page.
+    if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
+secondMemberListStatsPage = 1
+    else
+secondMemberListStatsPage = 0
+    endif
+    
     ; If standard build, and either EXPANDED_ROM, EXTENDED_SSF_MAPPER, or EXPANDED_ITEMS_AND_SPELLS
     ; are enabled, build an expanded ROM.
     if (STANDARD_BUILD&(EXPANDED_ROM!EXTENDED_SSF_MAPPER!EXPANDED_ITEMS_AND_SPELLS)=1)

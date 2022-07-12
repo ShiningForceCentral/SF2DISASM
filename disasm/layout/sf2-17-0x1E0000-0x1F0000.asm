@@ -14,8 +14,12 @@ SoundDriver:    incbin "data/sound/sounddriver.bin"
                 align
                 includeIfVanillaRom "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
                 includeIfVanillaRom "data\stats\allies\classes\classdefs.asm"    ; Class definitions
+                if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
+                    includeIfVanillaRom "data\stats\allies\classes\fullclassnames.asm"
+                    align
+                endif
                 includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
                 include "data\graphics\tech\unusedbasepalettes\entries.asm"    ; Unused base palettes
-                include "data\graphics\tech\basetiles\entries.asm"    ; Base tiles
+                include "data\graphics\tech\basetilesentry.asm"    ; Base tiles
                 align $1F0000

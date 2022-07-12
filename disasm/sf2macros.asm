@@ -793,7 +793,11 @@ defineName: macro
     endm
 
 spellName: macro
+    if (narg=3)
+    defineName \1,\2,\3
+    else
     defineName \1
+    endc
     endm
     
 allyName: macro
@@ -817,7 +821,11 @@ itemName: macro
     endm
     
 className: macro
+    if (narg=3)
+    defineName \1,\2,\3
+    else
     defineName \1
+    endc
     endm
     
 ; Item definitions

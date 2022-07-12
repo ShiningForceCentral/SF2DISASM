@@ -780,6 +780,12 @@ DecreaseCurrentMOV:
 ; =============== S U B R O U T I N E =======================================
 
 
+GetClassAndFullName:
+                if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
+                    bsr.w   GetClass
+GetFullClassName:   lea     tbl_FullClassNames,a0
+                    bra.s   FindName
+                endif
 GetClassAndName:
                 if (STANDARD_BUILD=1)
                     bsr.w   GetClass
