@@ -37,14 +37,23 @@ IF NOT EXIST "..\musicbank1.bin" (
 cd ../../../
 echo Assembling game ...
 SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%"
-@"../tools/asm68k" /e STANDARD_BUILD=0 /k /m /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%.bin", ../build/%buildname%.sym, ../build/%buildname%.lst > ../build/output.log
+@"../tools/asm68k" /e STANDARD_BUILD=1 /k /m /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%.bin", ../build/%buildname%.sym, ../build/%buildname%.lst > ../build/output.log
 echo End of assembly, produced %buildname%.bin
 
 echo -------------------------------------------------------------
-echo Checking build against reference ROM ...
+echo Checking build ...
 cd ../build/
-IF EXIST "%buildname%.bin" ..\tools\fixheader "%buildname%.bin"
-IF EXIST "%buildname%.bin" (IF EXIST ../rom/sf2.bin (fc /b "%buildname%.bin" ../rom/sf2.bin) ELSE echo sf2.bin does not exist in build directory) ELSE echo "%buildname%.bin" does not exist, probably due to an assembly error. Check output.log.
+SET expandedromsize=4194304
+IF EXIST "%buildname%.bin" (
+    FOR /F %%I IN ("%buildname%.bin") DO set buildsize=%%~zI
+    IF "%buildsize%" LEQ "%expandedromsize%" (
+        echo Fixing ROM header ...
+        @"../tools/fixheader" "../build/%buildname%.bin"
+    )
+    echo "%buildname%.bin" exists in build directory. Success!
+) ELSE (
+    echo "%buildname%.bin" does not exist, probably due to an assembly error. Check output.log.
+)
 
 
 pause

@@ -89,7 +89,8 @@ loc_22098:
                 jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_220DE      
-                if (BOWIE_CAN_LEAVE_BATTLE_PARTY=0)
+                if (STANDARD_BUILD&BOWIE_CAN_LEAVE_BATTLE_PARTY=1)
+                else
                     tst.w   d0
                     beq.s   loc_220D4
                 endif
@@ -100,15 +101,14 @@ loc_22098:
                 move.w  var_2(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  #$11,d1
                 bsr.w   ChooseCaravanPortrait
-                if (BOWIE_CAN_LEAVE_BATTLE_PARTY=0)
+                if (STANDARD_BUILD&BOWIE_CAN_LEAVE_BATTLE_PARTY=1)
+                else
                     bra.s   loc_220DC
-loc_220D4:
-                
-                    move.w  #$14,d1
+loc_220D4:          move.w  #$14,d1
                     bsr.w   ChooseCaravanPortrait
+                endif
 loc_220DC:
                 
-                endif
                 bra.s   loc_220E6
 byte_220DE:
                 
@@ -157,7 +157,7 @@ sub_22102:
                 jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_22144      
-                if (BOWIE_CAN_LEAVE_BATTLE_PARTY=1)
+                if (STANDARD_BUILD&BOWIE_CAN_LEAVE_BATTLE_PARTY=1)
                     cmpi.w  #1,((GENERIC_LIST_LENGTH-$1000000)).w
                     bls.s   loc_2213A
                 else
