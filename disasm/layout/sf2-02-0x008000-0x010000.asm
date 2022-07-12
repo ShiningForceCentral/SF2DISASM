@@ -75,7 +75,11 @@
                     include "code\gameflow\battle\battlefield\getattackrange.asm"    ; Get Attack Range function
                 endif
                 include "code\gameflow\battle\battlefield\battlefieldengine_3.asm"    ; Battlefield engine
-                include "code\gameflow\battle\battlefield\determinehealingspelllevel.asm"    ; Determine healing spell level function
+                if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
+                    include "code\gameflow\battle\battlefield\determinehealingspelllevel-aienhancements.asm"
+                else
+                    include "code\gameflow\battle\battlefield\determinehealingspelllevel.asm"    ; Determine healing spell level function
+                endif
                 include "code\gameflow\battle\battlefield\battlefieldengine_4.asm"    ; Battlefield engine
                 if (STANDARD_BUILD=1)
                     include "code\gameflow\battle\battlefield\useableaiactions-standard.asm"
@@ -85,7 +89,11 @@
                     include "code\gameflow\battle\battlefield\useableaiactions.asm"    ; Usable AI actions getter functions
                 endif
                 include "code\gameflow\battle\battlefield\battlefieldengine_5.asm"    ; Battlefield engine
-                include "code\gameflow\battle\battlefield\doescombatantrequirehealing.asm"    ; Does combatant require healing function
+                if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
+                    include "code\gameflow\battle\battlefield\doescombatantrequirehealing-aienhancements.asm"
+                else
+                    include "code\gameflow\battle\battlefield\doescombatantrequirehealing.asm"    ; Does combatant require healing function
+                endif
                 include "code\gameflow\battle\battlefield\battlefieldengine_6.asm"    ; Battlefield engine
                 include "data\battles\global\landeffectsettingsandmovecosts.asm"    ; Land effect settings and move costs table
                 include "data\battles\global\aipriority.asm"    ; AI priority data
@@ -96,7 +104,11 @@
                 include "data\battles\global\aicommandsets.asm"    ; AI commands data
                 include "data\battles\global\swarmbattles.asm"    ; Parameters for battles implementing swarm AI
                 include "code\gameflow\battle\ai\handleaicommand.asm"    ; Handle AI Command function
-                include "code\gameflow\battle\ai\aicommandheal.asm"    ; AI command : Heal
+                if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
+                    include "code\gameflow\battle\ai\aicommandheal-aienhancements.asm"
+                else
+                    include "code\gameflow\battle\ai\aicommandheal.asm"    ; AI command : Heal
+                endif
                 include "code\gameflow\battle\ai\aicommandattack.asm"    ; AI command : Attack
                 include "code\gameflow\battle\ai\aicommandspecialmove.asm"    ; AI command : Special Move
                 include "code\gameflow\battle\ai\aicommandsupport.asm"    ; AI command : Support

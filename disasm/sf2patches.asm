@@ -1,6 +1,9 @@
 
 ; 0 = OFF, 1 = ON
 
+; AI enhancements
+HEALER_AI_ENHANCEMENTS:             equ 1       ; See SF2_AI_Healing_Rewrite.txt for more details.
+
 ; Menu enhancements
 THREE_DIGITS_STATS:                 equ 0       ; 
 FULL_CLASS_NAMES:                   equ 0       ; 

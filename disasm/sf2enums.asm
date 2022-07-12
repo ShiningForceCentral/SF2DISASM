@@ -3678,9 +3678,34 @@ AICOMMAND_SPECIAL_MOVE5: equ $13
 ; ---------------------------------------------------------------------------
 
 ; enum AiCommand_Params
-AICOMMAND_PARAM_HEAL: equ $0
-AICOMMAND_PARAM_HEAL2: equ $1
-AICOMMAND_PARAM_HEAL3: equ $2
+
+; The following applies when patch HEALER_AI_ENHANCEMENTS is enabled.
+;
+; Healing instructions are composed of a single byte split into 4 parts (two bits each part).
+;   Bits 0-1 = healing rule for all other targets
+;   Bits 2-3 = healing rule for targeting self
+;   Bits 4-5 = healing rule for targeting Monster Zero (the first monster on the map, i.e. the boss)
+;   Bits 6-7 = healing rule for targeting AI 14,15
+;
+; Healing rules are as follows:
+;   %00 = never heal the target
+;   %01 = only heal if the target is at 33% health or less
+;   %10 = only heal if the target is at 66% health or less (default SF2 healing instruction)
+;   %11 = heal if the target is missing any health
+
+aiCommandParamHeal  = 0
+aiCommandParamHeal2 = 1
+aiCommandParamHeal3 = 2
+
+    if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
+aiCommandParamHeal  = %10101010                     ; %10 = only heal if the target is at 66% health or less
+aiCommandParamHeal2 = aiCommandParamHeal            ;   (default SF2 healing threshold)
+aiCommandParamHeal3 = aiCommandParamHeal
+    endif
+
+AICOMMAND_PARAM_HEAL: equ aiCommandParamHeal
+AICOMMAND_PARAM_HEAL2: equ aiCommandParamHeal2
+AICOMMAND_PARAM_HEAL3: equ aiCommandParamHeal3
 
 ; ---------------------------------------------------------------------------
 
