@@ -2,6 +2,7 @@
 ; 0 = OFF, 1 = ON
 
 ; Battle mechanics
+BOWIE_CAN_LEAVE_BATTLE_PARTY:       equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
 PERCENT_POISON_DAMAGE:              equ 0       ; 1-100 = n% of max HP
 
 ; AI enhancements
