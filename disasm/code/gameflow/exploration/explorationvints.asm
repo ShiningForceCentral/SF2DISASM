@@ -42,16 +42,16 @@ loc_25B22:
 loc_25B40:
                 
                 lea     ((ENTITY_DATA-$1000000)).w,a0 ; Not in debug mode
-                cmpi.b  #$3E,$33(a0) 
+                cmpi.b  #MAPSPRITE_CARAVAN,ENTITYDEF_SECOND_ENTITY_MAPSPRITE(a0)
                 bne.s   loc_25BAA
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
-                sub.w   $2C(a0),d0
+                sub.w   ENTITYDEF_SECOND_ENTITY_XDEST(a0),d0
                 bge.s   loc_25B58
                 neg.w   d0
 loc_25B58:
                 
                 move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
-                sub.w   $2E(a0),d1
+                sub.w   ENTITYDEF_SECOND_ENTITY_YDEST(a0),d1
                 bge.s   loc_25B64
                 neg.w   d1
 loc_25B64:

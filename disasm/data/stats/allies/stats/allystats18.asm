@@ -8,7 +8,7 @@ AllyStats18:    forClass  ACHR
                 defGrowth 4, 30, LINEAR
                 agiGrowth 6, 32, EARLY
                 spellList 
-                    
+                
                 forClass  SNIP
                 hpGrowth  31, 81, LINEAR
                 mpGrowth  0, 0, NONE
@@ -16,7 +16,7 @@ AllyStats18:    forClass  ACHR
                 defGrowth 21, 62, LINEAR
                 agiGrowth 24, 65, LINEAR
                 spellList 
-                    
+                
                 forClass  BRGN
                 hpGrowth  31, 81, LINEAR
                 mpGrowth  0, 0, NONE
@@ -24,4 +24,4 @@ AllyStats18:    forClass  ACHR
                 defGrowth 21, 80, LINEAR
                 agiGrowth 24, 57, LINEAR
                 spellList 
-                    
+                

@@ -1,6 +1,6 @@
 
 ; ASM FILE data\graphics\battles\backgrounds\entries.asm :
-; 0x101EE0..0x12A2F8 : Backgrounds
+; 0x101EE0..0x12A2F8 : Battlescene Backgrounds
 pt_Backgrounds: dc.l Background00
                 dc.l Background01
                 dc.l Background02
