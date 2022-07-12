@@ -37,7 +37,13 @@
                 include "code\gameflow\battle\battlefunctions\battlefunctions_1.asm"    ; Battle functions
                 include "code\gameflow\battle\battlefunctions\getegresspositionforbattle.asm"    ; Get Egress Position For Battle function
                 include "code\gameflow\battle\battlefunctions\executeindividualturn.asm"    ; Execute Individual Turn function
-                include "code\gameflow\battle\battlefunctions\handleafterturneffects.asm"    ; Handle After Turn Effects function
+                if (STANDARD_BUILD=1)
+                    include "code\gameflow\battle\battlefunctions\handleafterturneffects-standard.asm"
+                    include "data\stats\items\afterturnrecovery-standard.asm"
+                    align
+                else
+                    include "code\gameflow\battle\battlefunctions\handleafterturneffects.asm"    ; Handle After Turn Effects function
+                endif
                 include "code\gameflow\battle\battlefunctions\battlefunctions_2.asm"    ; Battle functions
                 include "code\gameflow\battle\battlefunctions\updateenemyaifunctions.asm"    ; Update Enemy AI functions
                 include "code\gameflow\battle\battlefunctions\turnorderfunctions.asm"    ; Battle turn order functions
