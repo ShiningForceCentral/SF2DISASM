@@ -253,11 +253,14 @@ GetRemainingCombatants:
                 addq.w  #1,d0
                 dbf     d7,@Enemies_Loop
                 
-                clr.w   d0
-                jsr     j_GetCurrentHP
-                tst.w   d1
-                bne.s   @Return
-                clr.w   d2
+                if (STANDARD_BUILD&BOWIE_CAN_DIE=1)
+                else
+                    clr.w   d0
+                    jsr     j_GetCurrentHP
+                    tst.w   d1
+                    bne.s   @Return
+                    clr.w   d2
+                endif
 @Return:
                 
                 rts
