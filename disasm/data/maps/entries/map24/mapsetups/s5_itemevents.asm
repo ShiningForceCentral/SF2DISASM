@@ -6,6 +6,7 @@ ms_map24_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map24_DefaultItemEvent0:
                 
                 rts

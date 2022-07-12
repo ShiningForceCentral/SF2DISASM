@@ -10,6 +10,7 @@
 
 ; if xxxx = $FFFF, then get d0.w
 
+
 Trap0_SoundCommand:
                 
                 movem.l d0-d1/a0,-(sp)

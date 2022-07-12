@@ -6,6 +6,7 @@ ms_map45_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map45_DefaultItemEvent0:
                 
                 rts

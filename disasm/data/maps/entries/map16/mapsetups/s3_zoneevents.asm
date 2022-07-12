@@ -8,13 +8,14 @@ ms_map16_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_ZoneEvent0:
                 
                  
-                chkFlg  $297            ; Set after Galam and Lemon leave with their army
+                chkFlg  663             ; Set after Galam and Lemon leave with their army
                 bne.s   return_51F00
                 script  cs_51F88
-                setFlg  $297            ; Set after Galam and Lemon leave with their army
+                setFlg  663             ; Set after Galam and Lemon leave with their army
 return_51F00:
                 
                 rts
@@ -24,16 +25,17 @@ return_51F00:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_ZoneEvent1:
                 
                  
-                chkFlg  $1F9            ; Battle 5 completed
+                chkFlg  505             ; Battle 5 completed - BATTLE_GALAM_CASTLE                 
                 bne.s   return_51F26
-                move.b  #$10,((EGRESS_MAP_INDEX-$1000000)).w
-                chkFlg  $298            ; Set after the Galam guards catch you sneaking around, but before battle
+                move.b  #MAP_GALAM_CASTLE,((EGRESS_MAP-$1000000)).w
+                chkFlg  664             ; Set after the Galam guards catch you sneaking around, but before battle
                 bne.s   byte_51F20
                 script  cs_521BA
-                setFlg  $298            ; Set after the Galam guards catch you sneaking around, but before battle
+                setFlg  664             ; Set after the Galam guards catch you sneaking around, but before battle
                 bra.s   return_51F26
 byte_51F20:
                 
@@ -46,6 +48,7 @@ return_51F26:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_DefaultZoneEvent:
                 

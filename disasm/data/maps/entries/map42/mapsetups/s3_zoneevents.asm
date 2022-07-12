@@ -7,15 +7,16 @@ ms_map42_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map42_ZoneEvent0:
                 
                  
-                chkFlg  $3E7            ; Set after the Nazca ship shootdown scene
+                chkFlg  999             ; Set after the Nazca ship shootdown scene
                 beq.s   Map42_DefaultZoneEvent
-                chkFlg  $385            ; Set after the you're pulled toward the Force Sword in the Jewel Cave
+                chkFlg  901             ; Set after the you're pulled toward the Force Sword in the Jewel Cave
                 bne.s   Map42_DefaultZoneEvent
                 script  cs_5FE9A
-                setFlg  $385            ; Set after the you're pulled toward the Force Sword in the Jewel Cave
+                setFlg  901             ; Set after the you're pulled toward the Force Sword in the Jewel Cave
 Map42_DefaultZoneEvent:
                 
                 rts

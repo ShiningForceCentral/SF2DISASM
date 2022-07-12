@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\allynames.asm :
 ; 0xFAD6..0xFB8A : Ally names
-AllyNames:      allyName "BOWIE"
+tbl_AllyNames:  allyName "BOWIE"
                 allyName "SARAH"
                 allyName "CHESTER"
                 allyName "JAHA"
@@ -31,10 +31,3 @@ AllyNames:      allyName "BOWIE"
                 allyName "CHAZ"
                 allyName "LEMON"
                 allyName "CLAUDE"
-                
-                ; Additional entries to be defined with force members expansion patch
-                if (FORCE_MEMBERS_EXPANSION=1)
-                allyName ""
-                allyName ""
-                endif
-                

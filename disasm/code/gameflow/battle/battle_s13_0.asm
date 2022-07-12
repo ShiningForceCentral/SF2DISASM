@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_LoadBattleTerrainData:
                 
                 jmp     LoadBattleTerrainData(pc)
@@ -12,6 +13,7 @@ j_LoadBattleTerrainData:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_InitAllAlliesBattlePositions:
                 
@@ -22,6 +24,7 @@ j_InitAllAlliesBattlePositions:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_InitAllEnemiesBattlePositions:
                 
                 jmp     InitAllEnemiesBattlePositions(pc)
@@ -30,6 +33,7 @@ j_InitAllEnemiesBattlePositions:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_RespawnEnemyIfOpen:
                 
@@ -40,6 +44,7 @@ j_RespawnEnemyIfOpen:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_InitEnemyList:
                 
                 jmp     InitEnemyList(pc)
@@ -49,23 +54,26 @@ j_InitEnemyList:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetEnemyAITargetPosition:
-                
-                jmp     GetEnemyAITargetPosition(pc)
 
-    ; End of function j_GetEnemyAITargetPosition
+j_GetEnemyAiTargetPosition:
+                
+                jmp     GetEnemyAiTargetPosition(pc)
+
+    ; End of function j_GetEnemyAiTargetPosition
 
 
 ; =============== S U B R O U T I N E =======================================
 
-j_GetBattleSpriteSetSubsection:
-                
-                jmp     GetBattleSpriteSetSubsection(pc)
 
-    ; End of function j_GetBattleSpriteSetSubsection
+j_GetBattleSpritesetSubsection:
+                
+                jmp     GetBattleSpritesetSubsection(pc)
+
+    ; End of function j_GetBattleSpritesetSubsection
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_BattleDebugFunction1B120A:
                 
@@ -75,6 +83,7 @@ j_BattleDebugFunction1B120A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetCombatantStartingPositions:
                 
@@ -87,6 +96,7 @@ j_GetCombatantStartingPositions:
 
 ; AI-related
 
+
 sub_1AC024:
                 
                 jmp     sub_1AC38E(pc)  
@@ -98,6 +108,7 @@ sub_1AC024:
 
 ; AI-related
 
+
 sub_1AC028:
                 
                 jmp     sub_1AC69A(pc)  
@@ -106,6 +117,7 @@ sub_1AC028:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetMoveListForEnemyTarget:
                 
@@ -118,6 +130,7 @@ j_GetMoveListForEnemyTarget:
 
 ; AI-related
 
+
 sub_1AC030:
                 
                 jmp     sub_1AC4F0(pc)  
@@ -126,6 +139,7 @@ sub_1AC030:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_ClearTerrainListObstructions:
                 
@@ -138,6 +152,7 @@ j_ClearTerrainListObstructions:
 
 ; AI-related
 
+
 sub_1AC038:
                 
                 jmp     sub_1AC9FC(pc)  
@@ -147,14 +162,16 @@ sub_1AC038:
 
 ; =============== S U B R O U T I N E =======================================
 
-j_UpdateTriggeredRegionsAndAI:
-                
-                jmp     UpdateTriggeredRegionsAndAI(pc)
 
-    ; End of function j_UpdateTriggeredRegionsAndAI
+j_UpdateTriggeredRegionsAndAi:
+                
+                jmp     UpdateTriggeredRegionsAndAi(pc)
+
+    ; End of function j_UpdateTriggeredRegionsAndAi
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_GetListOfSpawningEnemies:
                 
@@ -165,6 +182,7 @@ j_GetListOfSpawningEnemies:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_RandomUnderD6:
                 
                 jmp     RandomUnderD6(pc)
@@ -173,6 +191,7 @@ j_RandomUnderD6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_DoesBattleUpgrade:
                 
@@ -183,6 +202,7 @@ j_DoesBattleUpgrade:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 j_UpgradeBattle:
                 
                 jmp     UpgradeBattle(pc)
@@ -191,6 +211,7 @@ j_UpgradeBattle:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_ShouldBattleUpgrade:
                 
@@ -203,6 +224,7 @@ j_ShouldBattleUpgrade:
 
 ; Battle-related
 
+
 sub_1AC054:
                 
                 jmp     sub_1B16FE(pc)  
@@ -211,6 +233,7 @@ sub_1AC054:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 j_CheckTriggerRegionFlag:
                 
@@ -223,11 +246,12 @@ j_CheckTriggerRegionFlag:
 
 ; AI-related
 
-sub_1AC05C:
-                
-                jmp     sub_1AC8A0(pc)  
 
-    ; End of function sub_1AC05C
+j_GetLaserFacing:
+                
+                jmp     GetLaserFacing(pc)
+
+    ; End of function j_GetLaserFacing
 
 p_plt_endKiss:  dc.l plt_EndKiss
 p_endKissPicture:

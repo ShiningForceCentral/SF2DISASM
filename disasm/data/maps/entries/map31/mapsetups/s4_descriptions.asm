@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map31_AreaDescriptions:
                 
                 move.w  #$1045,d3       ; "A book...{N}MYSTERY OF NAZCA{W1}"
@@ -29,10 +30,11 @@ byte_5D584:     msDesc 8, 26, 4, 0      ; "{NAME} investigated{N}the book shelve
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map31_DescFunc0:
                 
                  
-                chkFlg  $340            ; Set after talking to the painter in Moun for the first time
+                chkFlg  832             ; Set after talking to the painter in Moun for the first time
                 beq.s   return_5D5BC
                 script  cs_5D732
 return_5D5BC:
@@ -44,15 +46,16 @@ return_5D5BC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map31_DescFunc1:
                 
                  
-                chkFlg  $342            ; Set after making the Arm of Golem appear in Moun
+                chkFlg  834             ; Set after making the Arm of Golem appear in Moun
                 beq.s   return_5D60C
-                chkFlg  $343            ; Set after picking up the Arm of Golem in Moun
+                chkFlg  835             ; Set after picking up the Arm of Golem in Moun
                 bne.s   return_5D60C
-                txt     $7E1            ; "{LEADER} found the Arm of{N}Golem.{W2}"
-                txt     $7E2            ; "Pick it up?"
+                txt     2017            ; "{LEADER} found the Arm of{N}Golem.{W2}"
+                txt     2018            ; "Pick it up?"
                 jsr     j_YesNoPrompt
                 tst.w   d0
                 bne.s   byte_5D608      
@@ -61,20 +64,20 @@ Map31_DescFunc1:
                 jsr     GetMandatoryItem
                 btst    #0,d0
                 bne.s   byte_5D5FE      
-                setFlg  $343            ; Set after picking up the Arm of Golem in Moun
+                setFlg  835             ; Set after picking up the Arm of Golem in Moun
                 move.w  #$89,d0 
                 jsr     MoveEntityOutOfMap
                 bra.s   loc_5D606
 byte_5D5FE:
                 
-                txt     $7E4            ; "But {LEADER}'s hands{N}are full.{W1}"
-                txt     $7E7            ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
+                txt     2020            ; "But {LEADER}'s hands{N}are full.{W1}"
+                txt     2023            ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 loc_5D606:
                 
                 bra.s   return_5D60C
 byte_5D608:
                 
-                txt     $7E7            ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
+                txt     2023            ; "{LEADER} looks at the{N}Arm of Golem.{W1}"
 return_5D60C:
                 
                 rts

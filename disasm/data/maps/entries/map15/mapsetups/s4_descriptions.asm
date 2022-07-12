@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map15_AreaDescriptions:
                 
                 move.w  #$1041,d3       ; "A statue of beautiful Mitula.{W1}"

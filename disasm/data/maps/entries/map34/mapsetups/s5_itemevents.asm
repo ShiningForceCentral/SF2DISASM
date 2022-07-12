@@ -6,6 +6,7 @@ ms_map34_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map34_DefaultItemEvent0:
                 
                 rts

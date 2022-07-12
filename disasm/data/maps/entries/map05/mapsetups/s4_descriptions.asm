@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map5_AreaDescriptions:
                 
                 move.w  #$FDD,d3        ; "A book...{N}MYCOLOGY{W1}"

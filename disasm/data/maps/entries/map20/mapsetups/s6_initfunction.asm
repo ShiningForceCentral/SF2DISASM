@@ -4,21 +4,22 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map20_InitFunction:
                 
                 cmpi.l  #$22803780,((ENTITY_DATA-$1000000)).w
-                bne.s   byte_53988      
-                chkFlg  $25D            ; Set after the scene in the King's bedroom
+                bne.s   ms_map20_flag501_InitFunction
+                chkFlg  605             ; Set after the scene in the King's bedroom
                 bne.s   byte_53982
                 script  cs_53996
-                setFlg  $25D            ; Set after the scene in the King's bedroom
-                bra.s   byte_53988      
+                setFlg  605             ; Set after the scene in the King's bedroom
+                bra.s   ms_map20_flag501_InitFunction
 byte_53982:
                 
                 script  cs_53B60
-byte_53988:
+ms_map20_flag501_InitFunction:
                 
-                chkFlg  $1FB            ; Battle 7 completed
+                chkFlg  507             ; Battle 7 completed - BATTLE_VERSUS_DARK_SMOKES           
                 beq.s   return_53994
                 script  cs_53FD8
 return_53994:
@@ -27,7 +28,7 @@ return_53994:
 
     ; End of function ms_map20_InitFunction
 
-cs_53996:       textCursor $880
+cs_53996:       textCursor 2176
                 setPos ALLY_BOWIE,23,39,DOWN
                 setPos ALLY_SARAH,23,38,DOWN
                 setPos ALLY_CHESTER,23,37,DOWN
@@ -101,7 +102,7 @@ cs_53996:       textCursor $880
                 setFacing 131,RIGHT
                 nextSingleText $0,131   ; "Sir Astral, who are they?{W1}"
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 nextSingleText $80,130  ; "Oh...{D1}well...{D1}(mumble)...{D1}{N}They're my pupils....{W1}"
                 entityActionsWait 131
                  moveRight 1

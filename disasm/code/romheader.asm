@@ -19,7 +19,7 @@ p_Start:        dc.l Start              ; Start Address
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
-                dc.l Int_OtherError     ; Unitialized Interrrupt
+off_3C:         dc.l Int_OtherError     ; Uninitialized Interrupt
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
@@ -80,14 +80,14 @@ aGmMk13150:     dc.b 'GM MK-1315 -0'    ; Serial Number
                 dc.b $30
                 dc.w $8921              ; checksum
 aJ:             dc.b 'J               '
-                dc.l 0                  ; Rom Start Adress
-RomEndAddress:  declareRomEnd           ; Rom End Adress
-                dc.l $FF0000            ; Ram Start Adress
-                dc.l $FFFFFF            ; Ram End Adress
-                dc.l $5241F820          ; SRam data
-                dc.l $200001            ; Sram Start Address
-                dc.l $203FFF            ; Sram End Address
+                dc.l 0                  ; ROM Start Address
+RomEndAddress:  dc.l $1FFFFF            ; ROM End Address
+                dc.l $FF0000            ; RAM Start Address
+                dc.l $FFFFFF            ; RAM End Address
+                dc.l $5241F820          ; SRAM data
+                dc.l $200001            ; SRAM Start Address
+                dc.l $203FFF            ; SRAM End Address
                 dc.b '            '     ; Modem data
                 dc.b '                    ' ; Memo
                 dc.b '                    '
-aU:             headerRegion            ; Countries codes
+aU:             dc.b 'U               ' ; Countries codes

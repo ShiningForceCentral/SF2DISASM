@@ -6,6 +6,7 @@
 
 ; d0 : music index, or previous music if value $FB
 
+
 PlayMusicAfterCurrentOne:
                 
                  
