@@ -22,7 +22,7 @@ AllyStats01:    forClass  PRST
                     36, BLAST|LV4, &
                     40, HEAL|LV4, &
                     45, DETOX|LV4
-                    
+                
                 forClass  VICR
                 hpGrowth  30, 84, LINEAR
                 mpGrowth  33, 66, LINEAR
@@ -30,7 +30,7 @@ AllyStats01:    forClass  PRST
                 defGrowth 18, 59, LINEAR
                 agiGrowth 22, 61, MIDDLE
                 useFirstSpellList
-                    
+                
                 forClass  MMNK
                 hpGrowth  30, 84, LINEAR
                 mpGrowth  23, 58, LINEAR
@@ -38,4 +38,4 @@ AllyStats01:    forClass  PRST
                 defGrowth 18, 69, LATE
                 agiGrowth 22, 61, MIDDLE
                 useFirstSpellList
-                    
+                

@@ -3,12 +3,12 @@
 ; 0xA3A0A..0xA3A2C : 
                 mWarp 2, 8
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   41, 55
                   warpFacing RIGHT
                 mWarp 41, 55
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   2, 8
                   warpFacing RIGHT
                 mWarp 255, 29

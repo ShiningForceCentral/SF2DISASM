@@ -10,16 +10,17 @@ InitWindowProperties:
                 move.l  a0,-(sp)
                 move.w  d7,-(sp)
                 lea     (WINDOW_ENTRIES).l,a0
-                moveq   #$1F,d7
-loc_47D2:
+                moveq   #LONGWORD_WINDOW_ENTRIES_COUNTER,d7
+@Clear_Loop:
                 
                 clr.l   (a0)+
-                dbf     d7,loc_47D2
+                dbf     d7,@Clear_Loop
+                
                 move.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END-$1000000)).w
                 move.w  (sp)+,d7
                 movea.l (sp)+,a0
                 clr.b   ((WINDOW_IS_PRESENT-$1000000)).w
-                cmpi.b  #$FF,((CURRENT_MAP-$1000000)).w
+                cmpi.b  #MAP_NONE,((CURRENT_MAP-$1000000)).w
                 beq.s   loc_47F4
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 loc_47F4:
@@ -557,7 +558,7 @@ sub_4BEA:
                 asl.w   #5,d6
                 add.w   d1,d6
                 add.w   d6,d6
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   return_4C36
                 move.w  (VERTICAL_SCROLL_DATA).l,d1
                 addq.w  #4,d1

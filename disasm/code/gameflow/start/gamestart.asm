@@ -165,6 +165,7 @@ loc_3DE:
                 move.w  (VDP_Control).l,d0
                 andi.w  #2,d0           ; wait for free DMA
                 bne.s   loc_3DE
+                
                 bra.w   SystemInit
 
     ; End of function Start

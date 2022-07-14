@@ -47,11 +47,11 @@
                 include "data\battles\global\battlemapcoords.asm"    ; Battle map coords
                 include "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
                 include "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
+                align
                 include "code\specialscreens\witch\witchfunctions.asm"    ; Witch functions
                 include "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
                 if (DISABLE_REGION_LOCK=0)
                     include "code\gameflow\start\regioncheck.asm"    ; Region check function
                 endif
-nullsub_7FA4:                
-                rts
+                include "code\specialscreens\witch\soundtest.asm"    ; Sound Test function missing in US version
                 align $8000
