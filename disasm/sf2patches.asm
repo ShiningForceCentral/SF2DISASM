@@ -18,6 +18,11 @@ ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 0       ; 1 = small icons, 2 = no displa
 SHOW_ENEMY_LEVEL:                   equ 0       ; 
 SHOW_ALL_SPELLS_IN_MEMBER_SCREEN:   equ 0       ; 
 
+; Music resuming
+MUSIC_RESUMING:                     equ 0       ; Replace the original sound driver with Wiz's custom driver.
+RESUME_BATTLEFIELD_MUSIC_ONLY:      equ 0       ; Do not resume battlescene music.
+RESUME_MUSIC_AFTER_JOIN_JINGLE:     equ 0       ; Resume background music after playing a "Joined the Force" jingle.
+
 ; ROM expansions
 EXPANDED_ROM:                       equ 1       ; Build a 4MB ROM and manage SRAM mapping.
 EXTENDED_SSF_MAPPER:                equ 0       ; Build a 6MB ROM and manage ROM and SRAM mapping.

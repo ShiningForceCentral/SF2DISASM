@@ -54,4 +54,8 @@ TextBankTreeData:
                 includeIfExpandedRom "data\battles\global\battlemapcoords.asm"      ; Battle map coords
                 includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"      ; Save point map coords
                 includeIfExpandedRom "data\maps\global\raftresetmapcoords.asm"      ; Raft reset map coords
+                if (STANDARD_BUILD&MUSIC_RESUMING=1)
+                    align $43000
+                    incbin "data\sound\cubesfx.bin"
+                endif
                 alignIfOriginalRomLayout $44000
