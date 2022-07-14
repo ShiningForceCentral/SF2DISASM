@@ -1,6 +1,9 @@
 
 ; 0 = OFF, 1 = ON
 
+; Misc. features
+SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
+
 ; Battle mechanics
 BOWIE_CAN_DIE:                      equ 0       ; Bowie's death does not cause defeat.
 BOWIE_CAN_LEAVE_BATTLE_PARTY:       equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
