@@ -15,9 +15,13 @@ pt_SpecialSprites:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d1.w = special map sprite index
+
 
 LoadSpecialSprite:
                 
+                
+                module                  ; Start of special sprite loading module
                 movem.l d0-a1,-(sp)
                 move.b  #$FF,d0
                 sub.b   d1,d0
@@ -35,20 +39,21 @@ LoadSpecialSprite:
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
                 add.w   d1,d1
-                move.w  rjt_25C5A(pc,d1.w),d1
-                jmp     rjt_25C5A(pc,d1.w)
+                move.w  rjt_SpecialSpriteLoadingFunctions(pc,d1.w),d1
+                jmp     rjt_SpecialSpriteLoadingFunctions(pc,d1.w)
 
     ; End of function LoadSpecialSprite
 
-rjt_25C5A:      dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadExplorationSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
-                dc.w LoadBattleSpecialSprite-rjt_25C5A
+rjt_SpecialSpriteLoadingFunctions:
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadExplorationSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -89,6 +94,7 @@ loc_25CB0:
 
     ; End of function LoadExplorationSpecialSprite
 
+                modend                  ; End of special sprite loading module
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -139,7 +145,7 @@ loc_25D0C:
                 clr.w   d5
 loc_25D0E:
                 
-                cmpi.b  #$F0,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.w   loc_25DF0
                 move.b  #$FF,d6
                 sub.b   ENTITYDEF_OFFSET_MAPSPRITE(a0),d6

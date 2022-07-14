@@ -21,7 +21,7 @@ AllyStats15:    forClass  PRST
                     41, AURA|LV2, &
                     55, AURA|LV3, &
                     60, AURA|LV4
-                    
+                
                 forClass  VICR
                 hpGrowth  33, 92, LATE
                 mpGrowth  38, 91, MIDDLE
@@ -29,7 +29,7 @@ AllyStats15:    forClass  PRST
                 defGrowth 20, 45, EARLYANDLATE
                 agiGrowth 21, 62, LINEAR
                 useFirstSpellList
-                    
+                
                 forClass  MMNK
                 hpGrowth  33, 92, LATE
                 mpGrowth  38, 71, MIDDLE
@@ -37,4 +37,4 @@ AllyStats15:    forClass  PRST
                 defGrowth 20, 55, LATE
                 agiGrowth 21, 62, LINEAR
                 useFirstSpellList
-                    
+                

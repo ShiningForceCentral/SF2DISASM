@@ -4,47 +4,18 @@
 ; FREE SPACE : 6681 bytes.
 
 
-p_pt_TextBanks: dc.l pt_TextBanks
-j_InitDecoder:                
-                jmp     InitDecoder(pc) 
-j_HuffmanDecode:                
-                jmp     HuffmanDecode(pc)
-p_VariableWidthFont:
-                dc.l VariableWidthFont
-p_MainMenuTiles:dc.l MenuTiles_Uncompressed
-p_MenuTiles_Item:
-                dc.l MenuTiles_Item
-p_MenuTiles_BattleField:
-                dc.l MenuTiles_BattleField
-p_Menutiles_Church:
-                dc.l MenuTiles_Church
-p_MenuTiles_Shop:
-                dc.l MenuTiles_Shop
-p_MenuTiles_Caravan:
-                dc.l MenuTiles_Caravan
-p_MenuTiles_Depot:
-                dc.l MenuTiles_Depot
-p_MenuTiles_YesNo:
-                dc.l MenuTiles_YesNo
-p_plt_WitchChoice:
-                dc.l plt_WitchChoice
-p_WitchBubbleAnimation:
-                dc.l WitchBubbleAnimation
-p_SpeechBalloonTiles:
-                dc.l SpeechBalloonTiles
-j_DisplaySegaLogo:                
-                jmp     DisplaySegaLogo(pc)
-p_GameStaff:    dc.l GameStaff
-j_EndKissPictureSequence:                
-                jmp     EndKissPictureSequence(pc)
-j_LoadTitleScreenFont:                
-                jmp     LoadTitleScreenFont(pc)
+                include "code\common\tech\pointers\s06_textbankspointer.asm"    ; Game Section 06 Text Banks Pointer
+                include "code\common\tech\jumpinterfaces\s06_jumpinterface_1.asm"    ; Game Section 06 Jump Interface, part 1
+                include "code\common\tech\pointers\s06_pointers.asm"    ; Game Section 06 Pointers
+                include "code\common\tech\jumpinterfaces\s06_jumpinterface_2.asm"    ; Game Section 06 Jump Interface, part 2
+                include "code\common\tech\pointers\s06_gamestaffpointer.asm"    ; Game Section 06 Game Staff Pointer
+                include "code\common\tech\jumpinterfaces\s06_jumpinterface_3.asm"    ; Game Section 06 Jump Interface, part 3
                 include "code\specialscreens\segalogo\segalogo_0.asm"    ; SEGA logo functions
                 include "data\tech\configurationmodeinputsequence.asm"    ; Configuration mode input sequence
-                wordAlign
+                align
                 include "code\specialscreens\segalogo\segalogo_1.asm"    ; SEGA logo functions
                 include "data\tech\debugmodeinputsequence.asm"    ; Debug mode input sequence
-                wordAlign
+                align
 VariableWidthFont:
                 incbin "data/graphics/tech/fonts/variablewidthfont.bin"
 MenuTiles_Uncompressed:
@@ -79,8 +50,8 @@ TextBankTreeData:
                 incbin "data/scripting/text/huffmantrees.bin"
                 include "data\scripting\text\entries.asm"    ; Textbank entries
                 include "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
-                wordAlign
+                align
                 if (SOUND_TEST_RESTORATION=1)
-                    include "code\specialscreens\witch\soundtest.asm"
+                    include "code\specialscreens\witch\soundtest-restored.asm"
                 endif
                 align $44000

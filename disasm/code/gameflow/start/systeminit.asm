@@ -26,6 +26,7 @@ InitVdp:
                 
                 clr.l   (a0)+           ; clear all RAM !
                 dbf     d0,@ClearRam_Loop
+                
                 move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
                 clr.b   ((FADING_SETTING-$1000000)).w
                 lea     vdp_init_params(pc), a0

@@ -16,7 +16,7 @@ CheatModeConfiguration:
                     beq.s   loc_7E58
                     jmp     SoundTest
                 else
-                    bne.w   nullsub_7FA4
+                    bne.w   SoundTest
                 endif
 loc_7E58:
                 

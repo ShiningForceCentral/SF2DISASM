@@ -21,7 +21,7 @@ AllyStats17:    forClass  MAGE
                     54, BOLT|LV3, &
                     56, BLAZE|LV4, &
                     60, BOLT|LV4
-                    
+                
                 forClass  WIZ
                 hpGrowth  21, 69, LINEAR
                 mpGrowth  40, 80, LINEAR
@@ -29,7 +29,7 @@ AllyStats17:    forClass  MAGE
                 defGrowth 19, 57, EARLY
                 agiGrowth 24, 66, LINEAR
                 useFirstSpellList
-                    
+                
                 forClass  SORC
                 hpGrowth  21, 69, LINEAR
                 mpGrowth  40, 87, LINEAR
@@ -45,4 +45,4 @@ AllyStats17:    forClass  MAGE
                     40, ATLAS, &
                     45, NEPTUN|LV2, &
                     49, ATLAS|LV2
-                    
+                
