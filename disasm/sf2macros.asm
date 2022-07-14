@@ -24,7 +24,7 @@ wordAlign: macro ;alias
     endm
     
 declareRegionSupport: macro
-    if (DISABLE_REGION_LOCK=1)
+    if (STANDARD_BUILD&DISABLE_REGION_LOCK=1)
     dc.b 'JUE             '
     else
     dc.b 'U               '

@@ -9,7 +9,8 @@ InitGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
-                if (DISABLE_REGION_LOCK=0)
+                if (STANDARD_BUILD&DISABLE_REGION_LOCK=1)
+                else
                     bsr.w   CheckRegion
                 endif
                 jsr     j_NewGame
