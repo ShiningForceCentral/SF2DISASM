@@ -68,13 +68,11 @@
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
                 
                 include "data\stats\spells\spellnames.asm"    ; Spell names
-
-                if (CAPITALIZED_CHARACTER_NAMES=1)
-                include "data\stats\allies\allynames-capitalized.asm"
-                include "data\stats\enemies\enemynames-capitalized.asm"
+                if (STANDARD_BUILD&CAPITALIZED_CHARACTER_NAMES=1)
+                    include "data\stats\allies\allynames-capitalized.asm"
+                    include "data\stats\enemies\enemynames-capitalized.asm"
                 else
-                include "data\stats\allies\allynames.asm"    ; Ally names
-                include "data\stats\enemies\enemynames.asm"    ; Enemy names
+                    include "data\stats\allies\allynames.asm"    ; Ally names
+                    include "data\stats\enemies\enemynames.asm"    ; Enemy names
                 endif
-
                 align $10000
