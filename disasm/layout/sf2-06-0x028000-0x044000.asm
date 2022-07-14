@@ -51,7 +51,7 @@ TextBankTreeData:
                 include "data\scripting\text\entries.asm"    ; Textbank entries
                 include "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
                 align
-                if (MUSIC_RESUMING=1)
+                if (STANDARD_BUILD&MUSIC_RESUMING=1)
                     align $43000
                     incbin "data\sound\cubesfx.bin"
                 endif

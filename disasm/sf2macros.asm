@@ -29,13 +29,13 @@ sndCom: macro
     endm
     
 deactivateMusicResuming: macro
-    if (MUSIC_RESUMING=1)
+    if (STANDARD_BUILD&MUSIC_RESUMING=1)
     sndCom SOUND_COMMAND_DEACTIVATE_RESUMING
     endc
     endm
 
 activateMusicResuming: macro
-    if (MUSIC_RESUMING=1)
+    if (STANDARD_BUILD&MUSIC_RESUMING=1)
     sndCom SOUND_COMMAND_ACTIVATE_RESUMING
     endc
     endm

@@ -8,7 +8,7 @@
                 incbin "data/sound/pcmbank1.bin"
                 incbin "data/sound/yminst.bin"
 SoundDriver:    
-                if (MUSIC_RESUMING=1)
+                if (STANDARD_BUILD&MUSIC_RESUMING=1)
                     incbin "data/sound/cubewiz.bin"
                 else
                     incbin "data/sound/sounddriver.bin"

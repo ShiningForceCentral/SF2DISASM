@@ -445,7 +445,7 @@ loc_906:
                 move.w  2(a0),(a0)+
                 move.w  2(a0),(a0)+
                 clr.w   (a0)
-                if (MUSIC_RESUMING=1)
+                if (STANDARD_BUILD&MUSIC_RESUMING=1)
                 
                     ; Resuming commands
                     cmpi.b  #SOUND_COMMAND_DEACTIVATE_RESUMING,d0
