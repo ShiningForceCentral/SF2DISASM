@@ -60,7 +60,10 @@
                 align
                 include "code\specialscreens\witch\witchfunctions.asm"    ; Witch functions
                 include "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
-                include "code\gameflow\start\regioncheck.asm"    ; Region check function
+                if (STANDARD_BUILD&DISABLE_REGION_LOCK=1)
+                else
+                    include "code\gameflow\start\regioncheck.asm"    ; Region check function
+                endif
                 if (STANDARD_BUILD&SOUND_TEST_RESTORATION=1)
                 else
                     include "code\specialscreens\witch\soundtest.asm"    ; Sound Test function missing in US version

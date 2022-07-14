@@ -9,8 +9,10 @@ InitGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
-                bsr.w   CheckRegion
-                
+                if (STANDARD_BUILD&DISABLE_REGION_LOCK=1)
+                else
+                    bsr.w   CheckRegion
+                endif
                 enableSram
                 jsr     j_NewGame
                 jsr     j_DisplaySegaLogo

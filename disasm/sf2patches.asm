@@ -2,6 +2,7 @@
 ; 0 = OFF, 1 = ON
 
 ; Misc. features
+DISABLE_REGION_LOCK:                equ 1       ; Skip checking system region, omit including related function, and update ROM header.
 SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
 
 ; Battle mechanics
