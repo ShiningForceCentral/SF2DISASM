@@ -51,7 +51,7 @@ TextBankTreeData:
                 include "data\scripting\text\entries.asm"    ; Textbank entries
                 include "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
                 align
-                if (SOUND_TEST_RESTORATION=1)
+                if (STANDARD_BUILD&SOUND_TEST_RESTORATION=1)
                     include "code\specialscreens\witch\soundtest-restored.asm"
                 endif
                 align $44000
