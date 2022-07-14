@@ -8,15 +8,17 @@
 ; 
 ; Out: D4 = map sprite index
 
+battleEntity = -4
+
 GetCombatantMapSprite:
                 
                 movem.w d0,-(sp)
-                move.w  -4(a6),d0
+                move.w  battleEntity(a6),d0
                 tst.b   d0
-                blt.s   @Enemy
+                blt.s   @GetEnemyMapSprite
                 bsr.w   GetAllyMapSprite
                 bra.s   @Done
-@Enemy:
+@GetEnemyMapSprite:
                 
                 move.w  d1,-(sp)
                 jsr     j_GetEnemyIndex

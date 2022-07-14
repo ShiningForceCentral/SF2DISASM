@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map19_AreaDescriptions:
                 
                 move.w  #$FD4,d3        ; "A book...{N}GRANSEAL KINGS{W1}"

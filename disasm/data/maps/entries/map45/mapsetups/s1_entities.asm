@@ -13,15 +13,15 @@ ms_map45_Entities:
                 msFixedEntity 63, 63, UP, MAPSPRITE_OBJECT3, eas_Init
                 msEntitiesEnd
 eas_5FFC4:       ac_wait 16
-eas_5FFC8:       ac_11 $0
+eas_5FFC8:       ac_accelFactors 0,0
                  ac_setSpeed 20,20
-                 ac_12 $0
-                 ac_13 $0
-                 ac_set1Cb7 $FFFF
-                 ac_setAnimCounter $0
+                 ac_acceleration OFF,OFF
+                 ac_deceleration OFF,OFF
+                 ac_entityObstructable ON
+                 ac_motion OFF
                  ac_setFacing DOWN
                  ac_updateSprite
-                 ac_moveRel 0,65535
+                 ac_moveRel 0,-1
                  ac_wait 8
                  ac_moveRel 0,0
                  ac_setFacing RIGHT

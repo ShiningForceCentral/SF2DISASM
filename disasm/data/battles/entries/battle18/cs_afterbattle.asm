@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle18\cs_afterbattle.asm :
 ; 0x4B2F2..0x4B6CE : Cutscene after battle 18
-abcs_battle18:  textCursor $9E0
+abcs_battle18:  textCursor 2528
                 loadMapFadeIn MAP_TAROS_SHRINE,7,5
                 loadMapEntities ce_4B6BE
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -91,7 +91,7 @@ abcs_battle18:  textCursor $9E0
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
                 entityActions ALLY_BOWIE
                  moveLeft 1
                 endActions
@@ -115,7 +115,7 @@ abcs_battle18:  textCursor $9E0
                 setFacing ALLY_PETER,DOWN
                 setFacing FOLLOWER_B,DOWN
                 csWait 150
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActions 128
                  moveUp 9
                 endActions
@@ -149,14 +149,14 @@ abcs_battle18:  textCursor $9E0
                 setFacing ALLY_PETER,LEFT
                 csWait 10
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 customActscriptWait ALLY_PETER
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -258,8 +258,8 @@ abcs_battle18:  textCursor $9E0
                 setFacing ALLY_PETER,DOWN
                 setFacing FOLLOWER_B,DOWN
                 csWait 180
-                setF $41                ; Caravan is unlocked
-                clearF $54              ; Rohde is a follower
+                setF 65                 ; Caravan is unlocked
+                clearF 84               ; Rohde is a follower
                 csc_end
 ce_4B6BE:       mainEntity 12,9,UP
                 entity 12,5,DOWN,MAPSPRITE_CARAVAN,eas_Init

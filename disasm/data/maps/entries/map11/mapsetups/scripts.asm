@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map11\mapsetups\scripts.asm :
 ; 0x57AAA..0x57CCC : 
-cs_57AAA:       textCursor $C4F
+cs_57AAA:       textCursor 3151
                 setActscriptWait ALLY_PETER,eas_Init
                 setDest ALLY_BOWIE,39,11
                 entityActionsWait ALLY_BOWIE
@@ -67,7 +67,7 @@ cs_57AAA:       textCursor $C4F
                 setQuake 0
                 setCamDest 34,6
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 setFacing ALLY_PETER,UP
                 nextSingleText $0,ALLY_PETER ; "Volcanon?{W1}"
@@ -102,7 +102,7 @@ cs_57AAA:       textCursor $C4F
                 setQuake 4
                 csWait 90
                 setQuake 0
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 entityActionsWait ALLY_PETER
                  moveDown 1
                 endActions

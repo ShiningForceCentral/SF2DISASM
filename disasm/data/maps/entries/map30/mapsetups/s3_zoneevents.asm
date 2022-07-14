@@ -7,17 +7,18 @@ ms_map30_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map30_ZoneEvent0:
                 
                  
-                chkFlg  $45             ; Fairy is a follower
+                chkFlg  69              ; Fairy is a follower
                 beq.s   Map30_DefaultZoneEvent
-                chkFlg  $2F8            ; Set after the fairy cures the sick dwarf in the mine
+                chkFlg  760             ; Set after the fairy cures the sick dwarf in the mine
                 bne.s   Map30_DefaultZoneEvent
                 script  cs_5A33A
                 bsr.s   sub_5A278
-                setFlg  $2F8            ; Set after the fairy cures the sick dwarf in the mine
-                clrFlg  $45             ; Fairy is a follower
+                setFlg  760             ; Set after the fairy cures the sick dwarf in the mine
+                clrFlg  69              ; Fairy is a follower
 Map30_DefaultZoneEvent:
                 
                 rts

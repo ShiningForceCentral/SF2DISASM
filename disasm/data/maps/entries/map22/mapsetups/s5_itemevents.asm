@@ -7,6 +7,7 @@ ms_map22_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_ItemEvent0:
                 
                 moveq   #$7D,d1 ; Wooden Panel

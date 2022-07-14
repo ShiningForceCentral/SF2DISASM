@@ -3,9 +3,9 @@
 ; 0x1FA8A..0x1FAB7 : Battle custom backgrounds table
 tbl_CustomBackgrounds:
                 
-; One byte per battle entry : same background index for all battlefield, or $FF for background depending on map block.
-                
-; Syntax        background [BATTLEBACKGROUND_]index
+; Syntax        background [BATTLEBACKGROUND_]enum (or index)
+;
+; Note: 1 byte per battle. (Custom background used for the entire battlefield, or $FF for background depending on map block.)
                 
                 background UNDERGROUND_SHRINE_0 ; 0: Versus all bosses
                 background TOWER_INTERIOR ; 1: Inside Ancient Tower
@@ -52,3 +52,4 @@ tbl_CustomBackgrounds:
                 background VERSUS_GALAM ; 42: Versus Galam
                 background VERSUS_GALAM ; 43: Versus Zeon
                 background FOREST       ; 44: Fairy Woods
+                

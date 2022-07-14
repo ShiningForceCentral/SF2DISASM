@@ -1,6 +1,6 @@
 
 ; ASM FILE data\tech\debugmodeinputsequence.asm :
-; 0x28FF0..0x29002 : Debug mode input sequence
+; 0x28FF0..0x29001 : Debug mode input sequence
 tbl_DebugModeInputSequence:
                 
 ; Syntax        input [INPUT_]bitfield
@@ -23,4 +23,3 @@ tbl_DebugModeInputSequence:
                 input LEFT
                 
                 tableEnd.b
-                wordAlign

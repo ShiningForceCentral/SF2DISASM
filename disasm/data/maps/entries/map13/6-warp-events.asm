@@ -3,12 +3,12 @@
 ; 0x9F254..0x9F276 : 
                 mWarp 9, 19
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   37, 8
                   warpFacing UP
                 mWarp 37, 9
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   9, 20
                   warpFacing DOWN
                 mWarp 255, 31

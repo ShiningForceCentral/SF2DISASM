@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map05\mapsetups\scripts_1.asm :
 ; 0x60708..0x60FAE : 
-cs_60708:       textCursor $DB9
+cs_60708:       textCursor 3513
                 setPos ALLY_LEMON,21,33,DOWN
                 setActscriptWait ALLY_LEMON,eas_Init
                 nextSingleText $80,ALLY_LEMON ; "Sir Astral!  {LEADER}!{W1}"
@@ -51,7 +51,7 @@ cs_60708:       textCursor $DB9
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 followEntity ALLY_LEMON,FOLLOWER_B,2
                 csc_end
-cs_607DE:       textCursor $D3C
+cs_607DE:       textCursor 3388
                 setPos 130,63,63,DOWN
                 setActscriptWait ALLY_PETER,eas_Init
                 setActscriptWait FOLLOWER_B,eas_Init
@@ -62,11 +62,11 @@ cs_607DE:       textCursor $D3C
                 fadeInB
                 nextSingleText $0,ALLY_LEMON ; "I'm guilty!{W1}"
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461E4
+                setActscript ALLY_PETER,eas_2xUpDown
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 80
                 entityActionsWait ALLY_PETER
                  moveUp 2
@@ -79,7 +79,7 @@ cs_607DE:       textCursor $D3C
                 setFacing ALLY_LEMON,DOWN
                 shiver ALLY_LEMON
                 nextSingleText $0,ALLY_LEMON ; "The guilt is too much to{N}handle.  I must die!{W1}"
-                setActscriptWait ALLY_LEMON,eas_46172
+                setActscriptWait ALLY_LEMON,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_LEMON
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
@@ -92,12 +92,12 @@ cs_607DE:       textCursor $D3C
                 endActions
                 setFacing ALLY_LEMON,DOWN
                 customActscriptWait ALLY_LEMON
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_LEMON,eas_46172
+                setActscriptWait ALLY_LEMON,eas_DeactivateAutoFacing
                 playSound SFX_FALLING
                 entityActionsWait ALLY_LEMON
                  moveDown 6
@@ -132,7 +132,7 @@ cs_607DE:       textCursor $D3C
                 setActscriptWait ALLY_LEMON,eas_Init
                 startEntity ALLY_LEMON
                 csc_end
-cs_6093A:       textCursor $D44
+cs_6093A:       textCursor 3396
                 setPriority ALLY_CHAZ,$0
                 setPriority 128,$FFFF
                 setCamDest 6,2
@@ -247,7 +247,7 @@ cs_6093A:       textCursor $D44
                 nextText $80,FOLLOWER_B ; "Yes, of course.{N}Nice to see you again.{W2}"
                 nextSingleText $80,FOLLOWER_B ; "What are you doing here?{W1}"
                 csc_end
-cs_60B10:       textCursor $D62
+cs_60B10:       textCursor 3426
                 nextSingleText $0,ALLY_CHAZ ; "I came back to Yeel to{N}continue my father's work.{W1}"
                 nextSingleText $80,FOLLOWER_B ; "{NAME;27}, maybe you can{N}answer some questions?{W1}"
                 nod ALLY_CHAZ
@@ -287,7 +287,7 @@ cs_60B10:       textCursor $D62
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 csc_end
-cs_60BA6:       textCursor $D6A
+cs_60BA6:       textCursor 3434
                 nextSingleText $0,ALLY_CHAZ ; "I heard you're going to{N}defeat the devils....{W1}"
                 nod FOLLOWER_B
                 nextSingleText $0,FOLLOWER_B ; "Yep.  {LEADER} just{N}solved the secret.  We{N}can now enter the tower.{W1}"
@@ -303,7 +303,7 @@ cs_60BA6:       textCursor $D6A
                 setFacing ALLY_CHAZ,DOWN
                 nextSingleText $0,128   ; "Let me help you.{W1}"
                 csWait 5
-                setActscript 128,eas_461E4
+                setActscript 128,eas_2xUpDown
                 csWait 120
                 nextSingleText $0,128   ; "I would like to give you{N}a hand.{W1}"
                 entityActionsWait FOLLOWER_B
@@ -330,7 +330,7 @@ cs_60BA6:       textCursor $D6A
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 followEntity ALLY_LEMON,FOLLOWER_B,2
                 csc_end
-cs_60C42:       textCursor $D72
+cs_60C42:       textCursor 3442
                 setActscriptWait ALLY_LEMON,eas_Init
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -349,7 +349,7 @@ cs_60C42:       textCursor $D72
                 nextText $0,ALLY_CHAZ   ; "But, from what I understand,{N}Zeon is reviving.{W2}"
                 nextSingleText $0,ALLY_CHAZ ; "And all these disasters were{N}caused by him?{W1}"
                 csc_end
-cs_60CA4:       textCursor $D76
+cs_60CA4:       textCursor 3446
                 nod FOLLOWER_B
                 nextSingleText $80,FOLLOWER_B ; "That's right.  We have to{N}find out where the Holy{N}Sword is.{W1}"
                 csWait 20
@@ -496,7 +496,7 @@ cs_60CA4:       textCursor $D76
                  faceDown 1
                 endActions
                 csc_end
-cs_60EB2:       textCursor $D8C
+cs_60EB2:       textCursor 3468
                 nod FOLLOWER_B
                 nextSingleText $80,FOLLOWER_B ; "Yes, that's the truth.{W1}"
                 csWait 40
@@ -523,7 +523,7 @@ cs_60EB2:       textCursor $D8C
                  faceDown 1
                 endActions
                 csc_end
-cs_60F18:       textCursor $D8F
+cs_60F18:       textCursor 3471
                 nextSingleText $0,ALLY_CHAZ ; "{LEADER}, would you mind{N}if I went with you?{W1}"
                 faceEntity FOLLOWER_B,ALLY_CHAZ
                 nextSingleText $80,FOLLOWER_B ; "No, {NAME;27}.  You have{N}to continue your work.{W1}"
@@ -541,11 +541,11 @@ cs_60F18:       textCursor $D8F
                 nextSingleText $80,ALLY_PETER ; "This is not a sight-seeing{N}tour, OK?!{N}Let's go {LEADER}!{W1}"
                 followEntity ALLY_CHAZ,ALLY_BOWIE,5
                 csc_end
-cs_60F64:       textCursor $D98
+cs_60F64:       textCursor 3480
                 nextText $FF,255        ; "It's a fine-looking piano.{N}Will you play it?{W1}"
                 yesNo
-                jumpIfFlagClear $59,cs_60FA4 ; YES/NO prompt answer
-                textCursor $D99
+                jumpIfFlagClear 89,cs_60FA4 ; YES/NO prompt answer
+                textCursor 3481
                 playSound MUSIC_PIANO_THEME
                 csWait 120
                 setQuake 1
@@ -555,8 +555,8 @@ cs_60F64:       textCursor $D98
                 csWait 30
                 nextSingleText $FF,255  ; "Something opened somewhere.{W1}"
                 setBlocks 32,45,1,1,11,4
-                setF $3AC               ; Set after playing the piano in Yeel (during the late game)
+                setF 940                ; Set after playing the piano in Yeel (during the late game)
                 csc_end
-cs_60FA4:       textCursor $D9A
+cs_60FA4:       textCursor 3482
                 nextSingleText $FF,255  ; "{LEADER}, can't you play?{W1}"
                 csc_end

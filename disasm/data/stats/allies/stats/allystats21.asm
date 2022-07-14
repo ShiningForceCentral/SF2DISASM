@@ -4,7 +4,7 @@
 AllyStats21:    forClass  SORC
                 hpGrowth  24, 72, LINEAR
                 mpGrowth  42, 85, LINEAR
-                atkGrowth 14, 26, LINEAR
+                attGrowth 14, 26, LINEAR
                 defGrowth 17, 53, LINEAR
                 agiGrowth 26, 68, LINEAR
                 spellList &
@@ -16,4 +16,4 @@ AllyStats21:    forClass  SORC
                     45, ATLAS, &
                     49, NEPTUN|LV2, &
                     54, ATLAS|LV2
-                    
+                

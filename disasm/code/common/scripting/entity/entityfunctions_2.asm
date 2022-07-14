@@ -4,6 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
+
 SetEntityActscript:
                 
                 move.w  d0,-(sp)
@@ -19,6 +22,9 @@ SetEntityActscript:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
+
 SetControlledEntityActScript:
                 
                 move.w  d0,-(sp)
@@ -26,7 +32,7 @@ SetControlledEntityActScript:
                 bsr.w   GetEntityEntryAddress
                 tst.b   ((PLAYER_TYPE-$1000000)).w
                 beq.s   loc_44B86
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
+                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 bne.s   loc_44B7C
                 move.l  #eas_Raft,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 bra.s   loc_44B84
@@ -50,7 +56,10 @@ loc_44B8E:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_44B94:
+; In: d0.w = entity index
+
+
+SetUnitCursorSpeedx2:
                 
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
@@ -60,10 +69,13 @@ sub_44B94:
                 move.w  (sp)+,d0
                 rts
 
-    ; End of function sub_44B94
+    ; End of function SetUnitCursorSpeedx2
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = entity index
+
 
 SetUnitCursorActscript:
                 
@@ -80,12 +92,15 @@ SetUnitCursorActscript:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
+
 sub_44BC0:
                 
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                move.l  #eas_44EF6,$14(a0)
+                move.l  #eas_44EF6,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
@@ -95,12 +110,15 @@ sub_44BC0:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
+
 sub_44BD6:
                 
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                move.l  #eas_44F16,$14(a0)
+                move.l  #eas_44F16,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
@@ -110,12 +128,15 @@ sub_44BD6:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
+
 MakeEntityIdle:
                 
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                move.l  #eas_Idle,$14(a0)
+                move.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
@@ -124,6 +145,9 @@ MakeEntityIdle:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = entity index
+
 
 ApplyInitActscript:
                 
@@ -140,12 +164,15 @@ ApplyInitActscript:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
+
 SetEntityMovescriptToIdle:
                 
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                move.l  #eas_Standing,$14(a0)
+                move.l  #eas_Standing,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
@@ -155,13 +182,16 @@ SetEntityMovescriptToIdle:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
+
 AddFollower:
                 
                 movem.l a0-a1,-(sp)
                 move.w  d0,-(sp)
                 bsr.w   GetEntityEntryAddress
                 movea.l (ENTITY_WALKING_PARAMS).l,a1
-                move.l  a1,$14(a0)
+                move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 lea     eas_Follower1(pc), a0
                 move.w  #$2A,d7 
                 jsr     (CopyBytes).w   
@@ -188,6 +218,9 @@ loc_44C7E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = entity index
+
 
 HideEntity:
                 
@@ -230,6 +263,9 @@ loc_44CCA:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
+
 SetWalkingActscript:
                 
                 move.w  d0,-(sp)
@@ -252,6 +288,9 @@ SetWalkingActscript:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = entity index
+
 
 sub_44D0E:
                 
@@ -312,7 +351,8 @@ loc_44D90:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = entity index
+; In: d0.w = entity index
+
 
 WaitForEntityToStopMoving:
                 
@@ -345,11 +385,12 @@ loc_44DD0:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get RAM address of entity D0 -> A0
+; Get RAM address of entity d0.w -> a0
+
 
 GetEntityEntryAddress:
                 
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0 ; start of entity information
                 adda.w  d0,a0
                 rts

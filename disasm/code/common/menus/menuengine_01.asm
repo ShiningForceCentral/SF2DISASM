@@ -1,429 +1,17 @@
 
 ; ASM FILE code\common\menus\menuengine_01.asm :
-; 0x10000..0x10E1C : Menu engine
-
-; =============== S U B R O U T I N E =======================================
-
-j_ExecuteMenu:
-                
-                jmp     ExecuteMenu(pc) 
-
-    ; End of function j_ExecuteMenu
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10004:
-                
-                jmp     sub_10586(pc)   
-
-    ; End of function sub_10004
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10008:
-                
-                jmp     sub_10586(pc)   
-
-    ; End of function sub_10008
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_1000C:
-                
-                jmp     sub_10586(pc)   
-
-    ; End of function sub_1000C
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10010:
-                
-                jmp     sub_10A4A(pc)   
-
-    ; End of function sub_10010
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_CreateFighterMiniStatusWindow:
-                
-                jmp     CreateFighterMiniStatusWindow(pc)
-
-    ; End of function j_CreateFighterMiniStatusWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_HideFighterMiniStatusWindow:
-                
-                jmp     HideFighterMiniStatusWindow(pc)
-
-    ; End of function j_HideFighterMiniStatusWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_1001C:
-                
-                jmp     sub_1161A(pc)
-
-    ; End of function sub_1001C
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10020:
-                
-                jmp     sub_11638(pc)
-
-    ; End of function sub_10020
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10024:
-                
-                jmp     sub_116B8(pc)
-
-    ; End of function sub_10024
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_RemoveAllyBattlesceneWindow:
-                
-                jmp     RemoveAllyBattlesceneWindow(pc)
-
-    ; End of function j_RemoveAllyBattlesceneWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_RemoveEnemyBattlesceneWindow:
-                
-                jmp     RemoveEnemyBattlesceneWindow(pc)
-
-    ; End of function j_RemoveEnemyBattlesceneWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_BuildMemberStatsScreen:
-                
-                jmp     BuildMemberStatsScreen(pc)
-
-    ; End of function j_BuildMemberStatsScreen
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10034:
-                
-                jmp     sub_1288E(pc)
-
-    ; End of function sub_10034
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_InitPortraitWindow:
-                
-                jmp     InitPortraitWindow(pc)
-
-    ; End of function j_InitPortraitWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_HidePortraitWindow:
-                
-                jmp     HidePortraitWindow(pc)
-
-    ; End of function j_HidePortraitWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10040:
-                
-                jmp     sub_12FE6(pc)
-
-    ; End of function sub_10040
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10044:
-                
-                jmp     sub_13004(pc)
-
-    ; End of function sub_10044
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10048:
-                
-                jmp     sub_13030(pc)
-
-    ; End of function sub_10048
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_1004C:
-                
-                jmp     sub_147FA(pc)
-
-    ; End of function sub_1004C
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10050:
-                
-                jmp     sub_12F12(pc)
-
-    ; End of function sub_10050
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10054:
-                
-                jmp     sub_12F5E(pc)
-
-    ; End of function sub_10054
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10058:
-                
-                jmp     sub_12F9A(pc)
-
-    ; End of function sub_10058
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_1005C:
-                
-                jmp     sub_113C6(pc)
-
-    ; End of function sub_1005C
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10060:
-                
-                jmp     sub_11404(pc)
-
-    ; End of function sub_10060
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10064:
-                
-                jmp     sub_1141E(pc)
-
-    ; End of function sub_10064
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_CreateLandEffectWindow:
-                
-                jmp     CreateLandEffectWindow(pc)
-
-    ; End of function j_CreateLandEffectWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_HideLandEffectWindow:
-                
-                jmp     HideLandEffectWindow(pc)
-
-    ; End of function j_HideLandEffectWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10070:
-                
-                jmp     sub_157E8(pc)
-
-    ; End of function sub_10070
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_YesNoChoiceBox:
-                
-                jmp     YesNoChoiceBox(pc)
-
-    ; End of function j_YesNoChoiceBox
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_YesNoPrompt:
-                
-                jmp     YesNoPrompt(pc)
-
-    ; End of function j_YesNoPrompt
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_NameCharacter:
-                
-                jmp     NameCharacter(pc)
-
-    ; End of function j_NameCharacter
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_10080:
-                
-                jmp     sub_1586E(pc)   
-
-    ; End of function sub_10080
-
-p_tbl_ItemNames:dc.l tbl_ItemNames
-p_tbl_ClassNames:
-                dc.l tbl_ClassNames
-p_tbl_ItemDefs: dc.l tbl_ItemDefs       
-p_tbl_SpellDefs:dc.l tbl_SpellDefs      
-
-; =============== S U B R O U T I N E =======================================
-
-j_NumberPrompt:
-                
-                jmp     NumberPrompt(pc)
-
-    ; End of function j_NumberPrompt
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DebugFlagSetter:
-                
-                jmp     DebugFlagSetter(pc)
-
-    ; End of function j_DebugFlagSetter
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_SpecialBattle:
-                
-                jmp     DisplayTimerWindow(pc)
-
-    ; End of function j_SpecialBattle
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_DisplayTimerWindow:
-                
-                jmp     RemoveTimerWindow(pc)
-
-    ; End of function j_DisplayTimerWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_VInt_UpdateTimerWindow:
-                
-                jmp     VInt_UpdateTimerWindow(pc)
-
-    ; End of function j_VInt_UpdateTimerWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_WitchMainMenu:
-                
-                jmp     WitchMainMenu(pc)
-
-    ; End of function j_WitchMainMenu
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_100AC:
-                
-                jmp     sub_169AE(pc)
-
-    ; End of function sub_100AC
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_100B0:
-                
-                jmp     sub_16A30(pc)
-
-    ; End of function sub_100B0
-
-
-; =============== S U B R O U T I N E =======================================
-
-; related to end kiss
-
-j_EndKiss:
-                
-                jmp     PlayEndKiss(pc)
-
-    ; End of function j_EndKiss
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_ClosePortraitEyes:
-                
-                jmp     ClosePortraitEyes(pc)
-
-    ; End of function j_ClosePortraitEyes
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_LoadPortrait:
-                
-                jmp     LoadPortrait(pc)
-
-    ; End of function j_LoadPortrait
-
-
-; =============== S U B R O U T I N E =======================================
-
-j_GetAllyPortrait:
-                
-                jmp     GetAllyPortrait(pc)
-
-    ; End of function j_GetAllyPortrait
-
-p_MemberStatsWindowLayout:
-                dc.l MemberStatsWindowLayout
+; 0x100C8..0x10E1C : Menu engine
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Write tiles from ASCII using the orange font
 
+useOrangeFont = -2
+
 WriteTilesFromAsciiWithOrangeFont:
                 
                 link    a6,#-2
-                move.w  #$FFFF,-2(a6)   ; set to use the orange font
+                move.w  #$FFFF,useOrangeFont(a6) ; set to use the orange font
                 bra.s   WriteTilesFromAscii
 
     ; End of function WriteTilesFromAsciiWithOrangeFont
@@ -432,6 +20,7 @@ WriteTilesFromAsciiWithOrangeFont:
 ; =============== S U B R O U T I N E =======================================
 
 ; write tiles from number in D0 into A1 D7 letters, window width D1
+
 
 WriteTilesFromNumber:
                 
@@ -449,10 +38,12 @@ WriteTilesFromNumber:
 ; Write tiles from ASCII from A0 into A1 D7 letters, window width D1
 ; 
 
+useOrangeFont = -2
+
 WriteTilesFromAsciiWithRegularFont:
                 
                 link    a6,#-2
-                clr.w   -2(a6)
+                clr.w   useOrangeFont(a6)
 
     ; End of function WriteTilesFromAsciiWithRegularFont
 
@@ -469,7 +60,7 @@ loc_100F2:
                 clr.w   d0
                 move.b  (a0)+,d0
                 beq.w   loc_10186
-                ori.w   #VDPTILE_PLT3|VDPTILE_PRIORITY,d0
+                ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 cmpi.b  #TEXT_CODE_MOVEDOWN,d0
                 beq.s   loc_1016A
                 cmpi.b  #TEXT_CODE_TOGGLEFONTCOLOR,d0
@@ -486,7 +77,7 @@ loc_10118:
                 addi.w  #$20,d0 
 loc_10122:
                 
-                tst.w   -2(a6)          ; test if we're using the orange font
+                tst.w   useOrangeFont(a6) ; test if we're using the orange font
                 beq.s   loc_10156
                 cmpi.b  #$30,d0 
                 bcc.s   loc_10140       ; branch if number
@@ -546,7 +137,7 @@ loc_1016A:
                 bra.s   loc_10182
 loc_10174:
                 
-                eori.w  #$FFFF,-2(a6)   ; 0x5C: toggle to/from orange font
+                eori.w  #$FFFF,useOrangeFont(a6) ; 0x5C: toggle to/from orange font
                 bra.s   loc_10182
 loc_1017C:
                 
@@ -568,6 +159,7 @@ loc_10186:
 ; =============== S U B R O U T I N E =======================================
 
 ; draw box tiles into A1, dimensions in D0, including borders (xxyy)
+
 
 sub_1018E:
                 
@@ -613,6 +205,7 @@ loc_101D4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_101E6:
                 
                 move.b  #8,(SPRITE_07_LINK).l
@@ -624,20 +217,23 @@ sub_101E6:
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to menus
-; 
 ; In: A0 = special subroutine address to handle menu, default handling if not supplied (unused functionality)
 ;     D0 = initial choice (00=up, 01=left, 02=right, 03=down)
 ;     D1 = animate-in direction (00=from bottom, other=from right)
 ;     D2 = menu index to use (just affects icons and text)
 
+windowSlot = -12
+animationDirection = -10
+subroutineAddress = -8
+menuIndex = -4
+
 ExecuteMenu:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                link    a6,#-$C
-                move.w  d2,-4(a6)
-                move.l  a0,-8(a6)
-                move.w  d1,-$A(a6)
+                link    a6,#-12
+                move.w  d2,menuIndex(a6)
+                move.l  a0,subroutineAddress(a6)
+                move.w  d1,animationDirection(a6)
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 move.w  #$1206,d0
                 tst.w   d1
@@ -650,9 +246,9 @@ loc_1021C:
 loc_10220:
                 
                 jsr     (CreateWindow).w
-                move.w  d0,-$C(a6)
+                move.w  d0,windowSlot(a6)
                 bsr.w   LoadDiamenuWindowVdpTileData
-                move.w  -4(a6),d0
+                move.w  menuIndex(a6),d0
                 lsl.w   #2,d0
                 lea     pt_MenuTiles(pc), a0
                 move.l  (a0,d0.w),d0
@@ -682,12 +278,12 @@ loc_1026E:
                 bsr.w   LoadVdpTileListForDiamenuIcon_Left
                 bsr.w   LoadVdpTileListForDiamenuIcon_Right
                 bsr.w   LoadVdpTileListForDiamenuIcon_Bottom
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$C15,d1
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
-                move.l  -8(a6),d0
+                move.l  subroutineAddress(a6),d0
                 beq.s   loc_102A2
                 movea.l d0,a0
                 jsr     (a0)
@@ -758,10 +354,10 @@ loc_10328:
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 bsr.w   LoadDiamenuWindowVdpTileData
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
-                move.l  -8(a6),d0
+                move.l  subroutineAddress(a6),d0
                 beq.s   loc_10356
                 movea.l d0,a0
                 jsr     (a0)
@@ -787,7 +383,7 @@ loc_10366:
 loc_10382:
                 
                 movem.w d0-d1,-(sp)
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 tst.w   d1
                 beq.s   loc_10394
                 move.w  #$C1D,d1
@@ -800,7 +396,7 @@ loc_10398:
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
                 movem.w (sp)+,d0-d1
                 unlk    a6
@@ -812,17 +408,22 @@ loc_10398:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: -$C(A6) = window slot index
+; In: -12(A6) = window slot index
+
+windowSlot = -12
+animationDirection = -10
+subroutineAddress = -8
+menuIndex = -4
 
 LoadDiamenuWindowVdpTileData:
                 
                 lea     DiamondMenuLayout(pc), a0
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #$D8,d7 
                 jsr     (CopyBytes).w   
-                move.w  -4(a6),d0
+                move.w  menuIndex(a6),d0
                 lsl.w   #2,d0
                 lea     pt_MenuOptions(pc), a0
                 movea.l (a0,d0.w),a0
@@ -830,17 +431,18 @@ LoadDiamenuWindowVdpTileData:
                 andi.w  #3,d0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$B04,d1
                 jsr     (GetWindowTileAddress).w
-                moveq   #$FFFFFFDC,d1
-                moveq   #$C,d7
+                moveq   #-36,d1
+                moveq   #12,d7
                 bra.w   WriteTilesFromAsciiWithRegularFont
 
     ; End of function LoadDiamenuWindowVdpTileData
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadVdpTileListForDiamenuIcon:
                 
@@ -857,6 +459,7 @@ rjt_DiamenuIconsLoadingFunctions:
                 dc.w LoadVdpTileListForDiamenuIcon_Bottom-rjt_DiamenuIconsLoadingFunctions
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadVdpTileListForDiamenuIcon_Top:
                 
@@ -875,6 +478,7 @@ loc_10420:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadVdpTileListForDiamenuIcon_Left:
                 
@@ -896,6 +500,7 @@ loc_10440:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadVdpTileListForDiamenuIcon_Right:
                 
                 lea     (byte_FF8C84).l,a0
@@ -915,6 +520,7 @@ loc_1046A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_10484:
                 
@@ -958,6 +564,7 @@ loc_104D0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_104E6:
                 
                 move.l  a1,-(sp)
@@ -1000,6 +607,7 @@ loc_10532:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadVdpTileListForDiamenuIcon_Bottom:
                 
                 lea     (byte_FF8EC4).l,a0
@@ -1017,6 +625,7 @@ loc_10558:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadMainMenuIcon:
                 
@@ -1038,19 +647,24 @@ loc_1057C:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = current diamenu choice
-;     D1 = 
-;     D2 = 
-;     A0 = 
+; In: A0 = special subroutine address to handle menu, default handling if not supplied
+;     D0 = initial choice (00=up, 01=left, 02=right, 03=down)
+;     D1 = animate-in direction (00=from bottom, other=from right)
+;     D2 = menu index to use (just affects icons and text)
 
-sub_10586:
+windowSlot = -12
+animationDirection = -10
+subroutineAddress = -8
+menuIndex = -4
+
+ExecuteItemMenu:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 move.w  d6,-(sp)
-                link    a6,#-$C
-                move.w  d2,-4(a6)
-                move.l  a0,-8(a6)
-                move.w  d1,-$A(a6)
+                link    a6,#-12
+                move.w  d2,menuIndex(a6)
+                move.l  a0,subroutineAddress(a6)
+                move.w  d1,animationDirection(a6)
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 move.w  #$1206,d0
                 tst.w   d1
@@ -1063,7 +677,7 @@ loc_105AE:
 loc_105B2:
                 
                 jsr     (CreateWindow).w
-                move.w  d0,-$C(a6)
+                move.w  d0,windowSlot(a6)
                 bsr.w   BuildItemMenu
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
@@ -1079,12 +693,12 @@ loc_105B2:
                 bsr.w   sub_10820
                 bsr.w   sub_1084A
                 bsr.w   sub_10920
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$C15,d1
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
-                move.l  -8(a6),d0
+                move.l  subroutineAddress(a6),d0
                 beq.s   loc_10614
                 movea.l d0,a0
                 jsr     (a0)
@@ -1096,7 +710,7 @@ loc_10616:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10630
                 moveq   #1,d1
-                cmpi.w  #$7F,((DISPLAYED_ICON_2-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_10630
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -1105,7 +719,7 @@ loc_10630:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1064A
                 moveq   #2,d1
-                cmpi.w  #$7F,((DISPLAYED_ICON_3-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_1064A
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -1121,7 +735,7 @@ loc_1065C:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10676
                 moveq   #3,d1
-                cmpi.w  #$7F,((DISPLAYED_ICON_4-$1000000)).w 
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_10676
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -1159,16 +773,16 @@ loc_106B4:
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 bsr.w   BuildItemMenu
-                move.l  -8(a6),d0
+                move.l  subroutineAddress(a6),d0
                 beq.s   loc_106D6
                 movea.l d0,a0
                 jsr     (a0)
 loc_106D6:
                 
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
-                move.l  -8(a6),d0
+                move.l  subroutineAddress(a6),d0
                 moveq   #$1D,d6
 loc_106E8:
                 
@@ -1192,7 +806,7 @@ loc_106FE:
 loc_10710:
                 
                 movem.w d0-d1,-(sp)
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 tst.w   d6
                 beq.s   loc_10722
                 move.w  #$C1D,d1
@@ -1205,7 +819,7 @@ loc_10726:
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
                 movem.w (sp)+,d0-d1
                 unlk    a6
@@ -1213,15 +827,20 @@ loc_10726:
                 move.w  (sp)+,d6
                 rts
 
-    ; End of function sub_10586
+    ; End of function ExecuteItemMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
+windowSlot = -12
+animationDirection = -10
+subroutineAddress = -8
+menuIndex = -4
+
 BuildItemMenu:
                 
                 lea     ItemMenuLayout(pc), a0
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #MENU_ITEM_LAYOUT_BYTESIZE,d7
@@ -1235,12 +854,12 @@ BuildItemMenu:
                 cmpi.w  #ICON_UNARMED,d1
                 bne.s   @WriteItemName
                 move.w  #ITEM_NOTHING,((word_FFB18C-$1000000)).w
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #MENU_ITEM_NOTHING_STRING_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 lea     aNothing(pc), a0
-                moveq   #$FFFFFFDC,d1
-                moveq   #$A,d7
+                moveq   #-36,d1
+                moveq   #10,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 bra.s   @Return
 @WriteItemName:
@@ -1248,20 +867,20 @@ BuildItemMenu:
                 move.w  d1,((word_FFB18C-$1000000)).w
                 move.w  d1,-(sp)
                 jsr     j_FindItemName
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #MENU_ITEM_NAME_COORDS,d1
                 jsr     (GetWindowTileAddress).w
-                moveq   #$FFFFFFDC,d1
+                moveq   #-36,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  (sp)+,d1
                 tst.b   d1
                 bpl.s   @Return
                 lea     aEquipped(pc), a0
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #MENU_ITEM_EQUIPPED_STRING_COORDS,d1
                 jsr     (GetWindowTileAddress).w
-                moveq   #$FFFFFFDC,d1
-                moveq   #$A,d7
+                moveq   #-36,d1
+                moveq   #10,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
 @Return:
                 
@@ -1278,6 +897,7 @@ aNothing:       dc.b '\Nothing',0
 
 ; related to menu choice
 
+
 sub_107EA:
                 
                 andi.w  #3,d0
@@ -1293,6 +913,7 @@ rjt_107F8:      dc.w sub_10800-rjt_107F8
                 dc.w sub_10920-rjt_107F8
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_10800:
                 
@@ -1311,6 +932,7 @@ loc_10810:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_10820:
                 
@@ -1332,6 +954,7 @@ loc_10830:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_1084A:
                 
                 lea     (byte_FF8B04).l,a0
@@ -1351,6 +974,7 @@ loc_1085A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_10874:
                 
@@ -1392,6 +1016,7 @@ loc_108BA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_108CA:
                 
                 move.l  a1,-(sp)
@@ -1432,6 +1057,7 @@ loc_10910:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_10920:
                 
                 lea     (byte_FF8C84).l,a0
@@ -1457,6 +1083,7 @@ loc_10930:
 ; 
 ;       Out: A1 = end of affected section after copy
 
+
 LoadHighlightableSpellIcon:
                 
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
@@ -1476,6 +1103,7 @@ LoadHighlightableSpellIcon:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadHighlightableItemIcon:
                 
                 cmpi.w  #ICON_UNARMED,d0
@@ -1487,11 +1115,12 @@ LoadHighlightableItemIcon:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadHighlightableIcon:
                 
                 adda.w  #ICONTILES_BYTESIZE,a1
                 mulu.w  #ICONTILES_BYTESIZE,d0
-                movea.l (p_IconTiles).l,a0
+                movea.l (p_Icons).l,a0
                 adda.w  d0,a0           ; icon offset
                 move.w  #$2F,d1 
                 lea     IconHighlightTiles(pc), a2
@@ -1512,17 +1141,23 @@ IconHighlightTiles:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = 
-;     D2 = 
-;     A0 = 
+; In: A0 = special subroutine address to handle menu, default handling if not supplied
+;     D0 = initial choice (00=up, 01=left, 02=right, 03=down)
+;     D1 = animate-in direction (00=from bottom, other=from right)
+;     D2 = menu index to use (just affects icons and text)
 
-sub_10A4A:
+windowSlot = -12
+animationDirection = -10
+subroutineAddress = -8
+menuIndex = -4
+
+ExecuteMagicMenu:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                link    a6,#-$C
-                move.w  d2,-4(a6)
-                move.l  a0,-8(a6)
-                move.w  d1,-$A(a6)
+                link    a6,#65524
+                move.w  d2,menuIndex(a6)
+                move.l  a0,subroutineAddress(a6)
+                move.w  d1,animationDirection(a6)
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 move.w  #$1206,d0
                 tst.w   d1
@@ -1535,7 +1170,7 @@ loc_10A70:
 loc_10A74:
                 
                 jsr     (CreateWindow).w
-                move.w  d0,-$C(a6)
+                move.w  d0,windowSlot(a6)
                 bsr.w   BuildMagicMenu
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
@@ -1551,14 +1186,14 @@ loc_10A74:
                 bsr.w   sub_10820
                 bsr.w   sub_1084A
                 bsr.w   sub_10920
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$C15,d1
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
 loc_10ACC:
                 
-                move.l  -8(a6),d0
+                move.l  subroutineAddress(a6),d0
                 beq.s   loc_10AD6
                 movea.l d0,a0
                 jsr     (a0)
@@ -1570,7 +1205,7 @@ loc_10AD8:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10AF2
                 moveq   #1,d1
-                cmpi.w  #$3F,((DISPLAYED_ICON_2-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_10AF2
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10B76
@@ -1579,7 +1214,7 @@ loc_10AF2:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B0C
                 moveq   #2,d1
-                cmpi.w  #$3F,((DISPLAYED_ICON_3-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_10B0C
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10B76
@@ -1595,7 +1230,7 @@ loc_10B1E:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10B38
                 moveq   #3,d1
-                cmpi.w  #$3F,((DISPLAYED_ICON_4-$1000000)).w 
+                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_10B38
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_10B76
@@ -1633,10 +1268,10 @@ loc_10B76:
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 bsr.w   BuildMagicMenu
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
-                move.l  -8(a6),d0
+                move.l  subroutineAddress(a6),d0
                 beq.s   loc_10BA4
                 movea.l d0,a0
                 jsr     (a0)
@@ -1661,18 +1296,18 @@ loc_10BBC:
                 add.w   d0,d0
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 move.w  (a0,d0.w),d0
-                bsr.w   sub_10CC6
+                bsr.w   sub_10CC6       
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_10BEC
                 bsr.w   BuildMagicMenu
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
                 bra.w   loc_10ACC
 loc_10BEC:
                 
                 movem.w d0-d1,-(sp)
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 tst.w   d1
                 beq.s   loc_10BFE
                 move.w  #$C1D,d1
@@ -1685,22 +1320,27 @@ loc_10C02:
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
                 movem.w (sp)+,d0-d1
                 unlk    a6
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function sub_10A4A
+    ; End of function ExecuteMagicMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
+windowSlot = -12
+animationDirection = -10
+subroutineAddress = -8
+menuIndex = -4
+
 BuildMagicMenu:
                 
                 lea     MagicMenuLayout(pc), a0
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #MENU_MAGIC_LAYOUT_BYTESIZE,d7
@@ -1714,12 +1354,12 @@ BuildMagicMenu:
                 move.w  d1,((word_FFB18C-$1000000)).w
                 move.w  d1,-(sp)
                 jsr     j_FindSpellName
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #MENU_MAGIC_SPELL_NAME_COORDS,d1
                 jsr     (GetWindowTileAddress).w
-                moveq   #$FFFFFFDC,d1
+                moveq   #-36,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #MENU_MAGIC_SPELL_LEVEL_TILES_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d1
@@ -1733,7 +1373,7 @@ BuildMagicMenu:
                 adda.w  d1,a0
                 moveq   #$C,d7
                 jsr     (CopyBytes).w   
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #MENU_MAGIC_MP_COST_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d1
@@ -1749,6 +1389,7 @@ BuildMagicMenu:
 ; =============== S U B R O U T I N E =======================================
 
 ; related to menu choice
+
 
 sub_10CB0:
                 
@@ -1766,6 +1407,9 @@ rjt_10CBE:      dc.w (sub_10800-rjt_10CBE) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: D0 = displayed spell icon
+
+
 sub_10CC6:
                 
                  
@@ -1779,9 +1423,9 @@ sub_10CC6:
                 jsr     (WaitForDmaQueueProcessing).w
                 move.w  (sp)+,d0
                 move.w  d0,d4
-                lsr.w   #6,d4
+                lsr.w   #SPELLENTRY_OFFSET_LV,d4
                 move.w  d4,d5
-                andi.w  #$3F,d0 
+                andi.w  #SPELLENTRY_MASK_INDEX,d0
                 jsr     (WaitForVInt).w
 loc_10CF4:
                 
@@ -1835,6 +1479,11 @@ byte_10D48:
 
 ; =============== S U B R O U T I N E =======================================
 
+windowSlot = -12
+animationDirection = -10
+subroutineAddress = -8
+menuIndex = -4
+
 sub_10D56:
                 
                  
@@ -1847,14 +1496,14 @@ sub_10D56:
                 nop
                 movea.l (a0,d4.w),a0
                 move.w  d0,-(sp)
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #MENU_MAGIC_SPELL_LEVEL_TILES_COORDS,d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #$C,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
                 lsl.w   #6,d5
-                andi.w  #$3F,d1 
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
                 or.w    d5,d1
                 move.w  d1,((word_FFB18C-$1000000)).w
                 jsr     j_GetSpellCost
@@ -1862,13 +1511,13 @@ sub_10D56:
                 moveq   #3,d7
                 adda.w  #MENU_MAGIC_OFFSET_MP_COST,a1
                 bsr.w   WriteTilesFromNumber
-                move.l  -8(a6),d0
+                move.l  subroutineAddress(a6),d0
                 beq.s   loc_10DAE
                 movea.l d0,a0
                 jsr     (a0)
 loc_10DAE:
                 
-                move.w  -$C(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
                 movem.w (sp)+,d0-d5
@@ -1887,10 +1536,23 @@ loc_10DCE:
     ; End of function sub_10D56
 
 spr_SpellLevelHighlight:
-                vdpSprite 316, V2|H4|9, 1504|PLT3|PRIORITY, 292
-                vdpSprite 316, V2|H4|16, 1504|MIRROR|PLT3|PRIORITY, 316
+                
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+;
+;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+                
+                vdpSprite 316, V2|H4|9, 1504|PALETTE3|PRIORITY, 292
+                vdpSprite 316, V2|H4|16, 1504|MIRROR|PALETTE3|PRIORITY, 316
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_10DE2:
                 

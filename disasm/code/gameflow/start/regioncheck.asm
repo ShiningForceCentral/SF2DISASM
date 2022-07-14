@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CheckRegion:
                 
                 move.b  (HW_Info).l,d0  
@@ -47,6 +48,7 @@ CheckRegion:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 LoadRegionCheckString:
                 

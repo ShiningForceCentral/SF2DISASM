@@ -1,15 +1,15 @@
 
 ; ASM FILE data\maps\entries\map22\mapsetups\scripts.asm :
 ; 0x5994E..0x59AC0 : 
-cs_5994E:       textCursor $700
+cs_5994E:       textCursor 1792
                 csWait 50
                 setCamDest 10,0
                 nextText $0,134         ; "Are you ready?{W2}"
                 nextSingleText $0,134   ; "Now, start the battle!{N}Do your best!{W1}"
-                setStoryFlag $16        ; Battle 22 unlocked
+                setStoryFlag 22         ; Battle 22 unlocked - BATTLE_CHESSBOARD                
                 warp MAP_CREED_DESKTOP_WORLD,0,0,RIGHT
                 csc_end
-cs_5996E:       textCursor $702
+cs_5996E:       textCursor 1794
                 setCameraEntity 65535
                 reloadMap 10,0
                 setPos ALLY_BOWIE,25,12,UP

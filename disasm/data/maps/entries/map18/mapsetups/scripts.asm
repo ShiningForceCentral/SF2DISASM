@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map18\mapsetups\scripts.asm :
 ; 0x6143C..0x61488 : 
-cs_6143C:       textCursor $36F
+cs_6143C:       textCursor 879
                 setActscriptWait ALLY_ZYNK,eas_Init
                 moveNextToPlayer ALLY_ZYNK,RIGHT
                 setFacing ALLY_BOWIE,RIGHT

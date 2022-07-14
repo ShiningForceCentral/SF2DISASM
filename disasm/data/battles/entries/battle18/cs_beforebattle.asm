@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle18\cs_beforebattle.asm :
 ; 0x4B1D8..0x4B2F2 : Cutscene before battle 18
-bbcs_18:        textCursor $9D8
+bbcs_18:        textCursor 2520
                 loadMapFadeIn MAP_TAROS_SHRINE,7,22
                 loadMapEntities ce_4B2DA
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -29,13 +29,13 @@ bbcs_18:        textCursor $9D8
                 endActions
                 nextSingleText $0,128   ; "Stop!{W1}"
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_ROHDE,eas_461E4
+                setActscript ALLY_ROHDE,eas_2xUpDown
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 30
                 entityActionsWait ALLY_PETER
                  moveUp 1
