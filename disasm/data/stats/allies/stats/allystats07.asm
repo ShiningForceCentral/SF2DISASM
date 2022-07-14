@@ -8,7 +8,7 @@ AllyStats07:    forClass  PHNK
                 defGrowth 8, 39, LINEAR
                 agiGrowth 4, 30, LINEAR
                 spellList 
-                    
+                
                 forClass  PHNX
                 hpGrowth  35, 107, LINEAR
                 mpGrowth  0, 0, NONE
@@ -16,4 +16,4 @@ AllyStats07:    forClass  PHNK
                 defGrowth 28, 90, LINEAR
                 agiGrowth 21, 57, LINEAR
                 spellList 
-                    
+                

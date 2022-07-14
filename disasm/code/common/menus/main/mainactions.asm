@@ -59,18 +59,18 @@ loc_212E0:
                 
                 bsr.w   sub_219EC       
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10048
+                jsr     j_BuildMemberListScreen_MagicPage
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_21478
                 move.w  d0,var_4(a6)
                 move.w  d1,var_26(a6)
                 move.w  d1,var_28(a6)
-                andi.w  #$3F,var_28(a6) 
+                andi.w  #SPELLENTRY_MASK_INDEX,var_28(a6)
                 clr.l   var_32(a6)
                 lsr.l   #6,d1
                 addq.l  #1,d1
                 move.l  d1,var_32(a6)
-                cmpi.w  #2,var_28(a6)
+                cmpi.w  #SPELL_DETOX,var_28(a6)
                 beq.w   byte_213A8      
                 move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  var_28(a6),((TEXT_NAME_INDEX_2-$1000000)).w
@@ -78,7 +78,7 @@ loc_212E0:
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 sndCom  SFX_SPELL_CAST
                 clsTxt
-                cmpi.w  #$A,var_28(a6)
+                cmpi.w  #SPELL_EGRESS,var_28(a6)
                 beq.w   loc_21354
 byte_21348:
                 
@@ -101,7 +101,7 @@ loc_21366:
                 move.w  var_4(a6),d0
                 jsr     j_DecreaseCurrentMP
                 jsr     j_ExecuteFlashScreenScript
-                move.b  ((EGRESS_MAP_INDEX-$1000000)).w,d0
+                move.b  ((EGRESS_MAP-$1000000)).w,d0
                 jsr     (GetSavePointForMap).w
                 lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
                 move.w  #1,(a0)+
@@ -118,7 +118,7 @@ byte_213A8:
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,var_6(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_212E0
@@ -139,7 +139,7 @@ byte_213A8:
                 beq.w   loc_2144E
                 cmpi.l  #2,var_32(a6)
                 beq.w   loc_2143C
-                bclr    #2,d1
+                bclr    #STATUSEFFECT_BIT_CURSE,d1
                 beq.s   loc_2143C
                 move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     303             ; "{NAME} is no longer{N}cursed."
@@ -147,14 +147,14 @@ byte_213A8:
                 jsr     j_UnequipAllItemsIfNotCursed
 loc_2143C:
                 
-                bclr    #0,d1
+                bclr    #STATUSEFFECT_BIT_STUN,d1
                 beq.s   loc_2144E
                 move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     302             ; "{NAME} is no longer{N}stunned."
                 moveq   #$FFFFFFFF,d2
 loc_2144E:
                 
-                bclr    #1,d1
+                bclr    #STATUSEFFECT_BIT_POISON,d1
                 beq.s   loc_21460
                 move.w  var_6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     301             ; "{NAME} is no longer{N}poisoned."
@@ -192,13 +192,13 @@ loc_214A4:
                 bsr.w   sub_219EC       
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,var_4(a6)
                 move.w  d1,var_12(a6)
                 move.w  d2,var_8(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_2158E
-                cmpi.w  #4,d2
+                cmpi.w  #ITEM_ANGEL_WING,d2
                 bne.w   loc_2150E
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
@@ -259,7 +259,7 @@ loc_2159E:
                 bsr.w   sub_219EC       
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_215C0
                 bra.w   byte_2184E
@@ -312,7 +312,7 @@ loc_21662:
                 clsTxt
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  var_8(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_2168E
                 bra.w   loc_2159E
@@ -450,7 +450,7 @@ loc_21856:
                 bsr.w   sub_219EC       
                 move.b  #3,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_21880
                 bra.w   loc_21894
@@ -468,7 +468,7 @@ loc_21898:
                 bsr.w   sub_219EC       
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_218BA
                 bra.w   byte_219D0

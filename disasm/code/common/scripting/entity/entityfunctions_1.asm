@@ -15,7 +15,7 @@ sub_444A2:
                 move.w  d1,d2
                 jsr     j_GetXPos
                 move.w  d1,-(sp)
-                jsr     j_GetUpperMoveType
+                jsr     j_GetMoveType
                 clr.w   d6
                 cmpi.b  #5,d1
                 bne.s   loc_444CE
@@ -156,19 +156,19 @@ DeclareNewEntity:
                 move.l  a0,-(sp)
                 move.w  d0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 move.w  (sp)+,d0
                 move.w  d1,(a0)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a0)
-                clr.l   4(a0)
-                clr.l   8(a0)
+                clr.l   ENTITYDEF_OFFSET_XVELOCITY(a0)
+                clr.l   ENTITYDEF_OFFSET_XTRAVEL(a0)
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  d3,ENTITYDEF_OFFSET_FACING(a0)
                 move.b  d6,ENTITYDEF_OFFSET_ENTNUM(a0)
                 swap    d6
-                move.b  d6,$11(a0)
+                move.b  d6,ENTITYDEF_OFFSET_LAYER(a0)
                 swap    d6
                 move.b  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 tst.l   d5
@@ -191,7 +191,7 @@ DeclareNewEntity:
                 bra.s   loc_44634
 loc_44630:
                 
-                bsr.w   sub_44D0E
+                bsr.w   sub_44D0E       
 loc_44634:
                 
                 movem.l (sp)+,d0-d4
@@ -199,7 +199,7 @@ loc_44634:
 loc_4463C:
                 
                 move.l  d5,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
-                clr.l   $18(a0)
+                clr.l   ENTITYDEF_OFFSET_XACCEL(a0)
                 move.w  #$E040,ENTITYDEF_OFFSET_FLAGS_A(a0)
                 move.b  d0,ENTITYDEF_OFFSET_ANIMCOUNTER(a0)
                 move.b  d0,ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER(a0)
@@ -220,21 +220,23 @@ ClearEntities:
                 move.w  #$30,d7 
 loc_44666:
                 
-                move.l  #$70007000,(a0)+
+                move.l  #$70007000,(a0)+ ; set location off map
+                clr.l   (a0)+           ; clear travel info
+                clr.l   (a0)+           ; clear travel info
+                move.l  #$70007000,(a0)+ ; set destination off map
                 clr.l   (a0)+
+                clr.l   (a0)+           ; clear actscriptaddr
+                clr.l   (a0)+           ; clear accel/speed
                 clr.l   (a0)+
-                move.l  #$70007000,(a0)+
-                clr.l   (a0)+
-                clr.l   (a0)+
-                clr.l   (a0)+
-                clr.l   (a0)+
-                dbf     d7,loc_44666
+                dbf     d7,loc_44666    
+                
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 moveq   #$F,d7
 loc_44688:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_44688
+                
                 move.l  #FF5600_LOADING_SPACE,(ENTITY_WALKING_PARAMS).l
                 jsr     (sub_19B0).w
                 movem.l (sp)+,d7-a0
@@ -250,7 +252,7 @@ battleEntity = -4
 MoveEntitiesToBattlePositions:
                 
                 movem.l d0-a1,-(sp)
-                link    a6,#65520
+                link    a6,#-16
                 bsr.s   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
@@ -273,7 +275,7 @@ loc_446B8:
                 bmi.w   loc_44732
                 movem.w d0-d1,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetUpperMoveType
+                jsr     j_GetMoveType
                 clr.w   d6
                 cmpi.b  #5,d1
                 bne.s   loc_446FA
@@ -313,7 +315,7 @@ loc_4474A:
                 
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 move.w  (sp)+,d0
                 andi.w  #8,d1
                 bne.w   loc_447F6
@@ -332,7 +334,7 @@ loc_4474A:
                 bmi.w   loc_447F6
                 movem.w d0-d1,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetUpperMoveType
+                jsr     j_GetMoveType
                 clr.w   d6
                 cmpi.b  #5,d1
                 bne.s   loc_447A2
@@ -353,7 +355,7 @@ loc_447AA:
                 moveq   #3,d3
                 move.l  #eas_Standing,d5
                 bsr.w   GetCombatantMapSprite
-                cmpi.b  #$F0,d4
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d4
                 bcs.s   loc_447E8
                 move.w  d0,-(sp)
                 move.w  #$2F,d0 
@@ -378,7 +380,7 @@ loc_447FA:
                 dbf     d7,loc_4474A
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
-                addi.w  #$1F4,d1
+                addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   loc_448BC
                 lea     ((byte_FFB160-$1000000)).w,a1
@@ -409,9 +411,9 @@ loc_4483E:
                 jsr     j_SetMaxHP
                 jsr     j_SetCurrentHP
                 jsr     j_SetStatusEffects
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 ori.w   #8,d1
-                jsr     j_SetCharacterWord34
+                jsr     j_SetAiActivationFlag
                 clr.w   d1
                 move.b  (a0)+,d1
                 move.w  d1,d3

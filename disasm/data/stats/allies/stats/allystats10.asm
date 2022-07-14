@@ -8,7 +8,7 @@ AllyStats10:    forClass  BDMN
                 defGrowth 6, 30, LINEAR
                 agiGrowth 7, 41, LINEAR
                 spellList 
-                    
+                
                 forClass  BDBT
                 hpGrowth  35, 89, LATE
                 mpGrowth  0, 0, NONE
@@ -16,4 +16,4 @@ AllyStats10:    forClass  BDMN
                 defGrowth 23, 68, LINEAR
                 agiGrowth 29, 70, LINEAR
                 spellList 
-                    
+                

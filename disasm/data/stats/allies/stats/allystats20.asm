@@ -8,4 +8,4 @@ AllyStats20:    forClass  BDBT
                 defGrowth 22, 67, LINEAR
                 agiGrowth 24, 64, LINEAR
                 spellList 
-                    
+                
