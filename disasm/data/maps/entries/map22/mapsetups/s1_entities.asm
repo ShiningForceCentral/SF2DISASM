@@ -29,7 +29,7 @@ ms_map22_Entities:
                 msFixedEntity 30, 6, DOWN, MAPSPRITE_PAWN, eas_Init
                 msFixedEntity 18, 6, DOWN, MAPSPRITE_PAWN, eas_Init
                 msFixedEntity 32, 6, DOWN, MAPSPRITE_PAWN, eas_Init
-                msFixedEntity 63, 63, DOWN, MAPSPRITE_ORB, eas_Init3
-                msFixedEntity 63, 63, DOWN, MAPSPRITE_ORB, eas_Init3
-                msFixedEntity 63, 63, DOWN, MAPSPRITE_ORB, eas_Init3
+                msFixedEntity 63, 63, DOWN, MAPSPRITE_ORB, eas_InitFixedSprite
+                msFixedEntity 63, 63, DOWN, MAPSPRITE_ORB, eas_InitFixedSprite
+                msFixedEntity 63, 63, DOWN, MAPSPRITE_ORB, eas_InitFixedSprite
                 msEntitiesEnd

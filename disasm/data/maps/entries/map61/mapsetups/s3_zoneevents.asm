@@ -9,15 +9,16 @@ ms_map61_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map61_ZoneEvent0:
                 
                  
-                chkFlg  $2DA            ; Set after the old man opens the door to the Woodel Panel shrine interior
+                chkFlg  730             ; Set after the old man opens the door to the Woodel Panel shrine interior
                 bne.s   Map61_DefaultZoneEvent
-                chkFlg  $4D             ; Old man is a follower
+                chkFlg  77              ; Old man is a follower
                 beq.s   Map61_DefaultZoneEvent
                 script  cs_5C6CA
-                setFlg  $2DA            ; Set after the old man opens the door to the Woodel Panel shrine interior
+                setFlg  730             ; Set after the old man opens the door to the Woodel Panel shrine interior
 Map61_DefaultZoneEvent:
                 
                 rts

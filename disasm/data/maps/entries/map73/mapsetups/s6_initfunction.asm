@@ -4,22 +4,23 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map73_InitFunction:
                 
                  
-                chkFlg  $2BC            ; Set after ship arrives in Parmecia and you regain control of Bowie
+                chkFlg  700             ; Set after ship arrives in Parmecia and you regain control of Bowie
                 bne.s   byte_50354      
                 script  cs_503A6
-                setFlg  $2BC            ; Set after ship arrives in Parmecia and you regain control of Bowie
+                setFlg  700             ; Set after ship arrives in Parmecia and you regain control of Bowie
                 rts
 byte_50354:
                 
-                chkFlg  $1FC            ; Battle 8 completed
+                chkFlg  508             ; Battle 8 completed - BATTLE_NORTH_CLIFF                  
                 beq.s   return_5036C
-                chkFlg  $2C1            ; Set after you automatically walk into New Granseal after it is built
+                chkFlg  705             ; Set after you automatically walk into New Granseal after it is built
                 bne.s   return_5036C
                 script  cs_50806
-                setFlg  $2C1            ; Set after you automatically walk into New Granseal after it is built
+                setFlg  705             ; Set after you automatically walk into New Granseal after it is built
                 rts
 return_5036C:
                 
@@ -29,6 +30,7 @@ return_5036C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5036E:
                 
@@ -46,6 +48,7 @@ loc_50370:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_50380:
                 
                 move.w  #$1200,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
@@ -56,6 +59,7 @@ sub_50380:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5038E:
                 
@@ -72,6 +76,7 @@ loc_50390:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_5039E:
                 
                 move.b  #0,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
@@ -79,7 +84,7 @@ sub_5039E:
 
     ; End of function sub_5039E
 
-cs_503A6:       textCursor $8BF
+cs_503A6:       textCursor 2239
                 resetForceBattleStats
                 reloadMap 0,0
                 setCameraEntity 65535
@@ -88,7 +93,7 @@ cs_503A6:       textCursor $8BF
                 setBlocks 0,10,22,10,42,10
                 playSound MUSIC_TOWN
                 fadeInB
-                textCursor $8A5
+                textCursor 2213
                 nextSingleText $0,128   ; "We were almost swallowed{N}by that chasm.{W1}"
                 nextSingleText $C0,ALLY_BOWIE ; "That was close!{W1}"
                 nextSingleText $C0,ALLY_SARAH ; "Sir Astral, where should{N}we go now?{W1}"
@@ -99,7 +104,7 @@ cs_503A6:       textCursor $8BF
                 nextSingleText $FF,255  ; "And so the ship heads east{N}for Parmecia.{W1}"
                 csWait 120
                 nextSingleText $0,ALLY_SARAH ; "I feel...sick...to my...{N}stomach...ohhh....{W1}"
-                jumpIfFlagClear $6,cs_50426 ; Kiwi joined
+                jumpIfFlagClear 6,cs_50426 ; Kiwi joined
                 nextSingleText $C0,ALLY_KIWI ; "{NAME;1}, look!{W1}"
                 nextSingleText $0,ALLY_SARAH ; "Sorry, {NAME;6}...I can't{N}do anything right now....{W1}"
                 nextSingleText $C0,ALLY_KIWI ; "That's not what...{W1}"
@@ -108,7 +113,7 @@ cs_503A6:       textCursor $8BF
                 nextSingleText $0,ALLY_SARAH ; "What?  Oh, it's true!{N}Sir Astral, we can see the {N}mainland!{W1}"
                 nextSingleText $0,128   ; "Finally we've arrived.{N}King Granseal, can you see{N}Parmecia?{W1}"
                 nextSingleText $0,130   ; "Oh, that's good...{W1}"
-cs_50426:       textCursor $8B5
+cs_50426:       textCursor 2229
                 nextSingleText $0,128   ; "Minister, we're approaching{N}Parmecia!{W1}"
                 nextSingleText $0,129   ; "Land the ship, captain.{W1}"
                 nextSingleText $C0,131  ; "Where?{W1}"
@@ -138,36 +143,36 @@ cs_50426:       textCursor $8B5
                 csWait 30
                 stopEntity 132
                 csWait 30
-                textCursor $8BF
+                textCursor 2239
                 nextSingleText $FF,255  ; "The people of Granseal have{N}arrived at their new home.{W1}"
                 loadMapFadeIn MAP_SHIP_DAMAGED,18,25
                 loadMapEntities ce_5072E
                 setActscriptWait ALLY_BOWIE,eas_Init
                 fadeInB
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 csWait 5
-                setActscript 131,eas_461B6
+                setActscript 131,eas_2xRightLeft
                 csWait 5
-                setActscript 132,eas_461B6
+                setActscript 132,eas_2xRightLeft
                 csWait 5
-                setActscript 133,eas_461B6
+                setActscript 133,eas_2xRightLeft
                 csWait 5
-                setActscript 134,eas_461B6
+                setActscript 134,eas_2xRightLeft
                 csWait 5
-                setActscript 135,eas_461B6
+                setActscript 135,eas_2xRightLeft
                 csWait 5
-                setActscript 136,eas_461B6
+                setActscript 136,eas_2xRightLeft
                 csWait 5
-                setActscript 137,eas_461B6
+                setActscript 137,eas_2xRightLeft
                 csWait 5
-                setActscript 138,eas_461B6
+                setActscript 138,eas_2xRightLeft
                 csWait 5
-                setActscript 139,eas_461B6
+                setActscript 139,eas_2xRightLeft
                 csWait 5
-                setActscript 140,eas_461B6
+                setActscript 140,eas_2xRightLeft
                 setFacing 128,LEFT
                 csWait 60
                 setFacing 128,RIGHT
@@ -213,7 +218,7 @@ cs_50426:       textCursor $8B5
                 stopEntity 131
                 stopEntity 132
                 stopEntity 133
-                jumpIfFlagSet $6,cs_50624 ; Kiwi joined
+                jumpIfFlagSet 6,cs_50624 ; Kiwi joined
                 hide ALLY_KIWI
 cs_50624:       fadeInB
                 entityActionsWait ALLY_JAHA
@@ -234,7 +239,7 @@ cs_50624:       fadeInB
                 csWait 60
                 nextText $0,ALLY_JAHA   ; "Ugh...ugghhh...{N}It's stuck!{W2}"
                 nextSingleText $0,ALLY_JAHA ; "Heave!  Heave!{N}Come oooooooooon!{W1}"
-                setActscriptWait ALLY_JAHA,eas_46172
+                setActscriptWait ALLY_JAHA,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_JAHA
                  ac_setSpeed 64,64      ;   
                  ac_jump eas_Idle       ;   
@@ -304,7 +309,7 @@ ce_5079E:       mainEntity 40,8,LEFT
                 entity 45,6,DOWN,MAPSPRITE_OBJECT2,eas_Init
                 entity 46,6,LEFT,MAPSPRITE_OBJECT2,eas_Init
                 dc.w $FFFF
-cs_50806:       textCursor $8F0
+cs_50806:       textCursor 2288
                 loadMapEntities ce_5094A
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait 128,eas_Init

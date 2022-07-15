@@ -6,6 +6,7 @@
 
 ; Vertical interrupt
 
+
 VInt:
                 
                 movem.l d0-a6,-(sp)
@@ -55,6 +56,7 @@ loc_620:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CallContextualFunctions:
                 
                 move.b  ((SECONDS_COUNTER_FRAMES-$1000000)).w,d0
@@ -89,6 +91,7 @@ loc_658:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DisableDisplay:
                 
                 andi.b  #$BF,(VDP_REG01_VALUE).l
@@ -100,6 +103,7 @@ DisableDisplay:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ProcessVdpQueues:
                 
                 bsr.s   ProcessVdpCommandQueue
@@ -110,6 +114,7 @@ ProcessVdpQueues:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ProcessVdpCommandQueue:
                 
@@ -146,8 +151,10 @@ loc_6DA:
                 
                 move.w  (a0)+,(VDP_Data).l
                 dbf     d0,loc_6DA
+                
                 subq.b  #1,(VDP_COMMAND_COUNTER).l
                 bne.s   loc_698
+                
                 move.w  #$8F02,(VDP_Control).l
                 move.l  #VDP_COMMAND_QUEUE,(VDP_COMMAND_QUEUE_POINTER).l
 return_6FE:
@@ -158,6 +165,7 @@ return_6FE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ProcessVramRead:
                 
@@ -186,6 +194,7 @@ ProcessVramRead:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ProcessDmaQueue:
                 
                 bclr    #DMA_REQUEST,(VINT_PARAMS).l ; Check if DMA requested
@@ -199,6 +208,7 @@ loc_75C:
                 
                 btst    #0,(Z80BusReq).l ; Check bus availability
                 bne.s   loc_75C         
+                
                 btst    #DEACTIVATE_DMA,(VINT_PARAMS).l ; Check if DMA deactivated
                 bne.s   return_7CC
                 bsr.w   UpdateVdpSpriteTable ; Update sprites
@@ -219,6 +229,7 @@ loc_794:
                 move.w  (DMA_ADDR_MSBYTE).l,(a6)
                 subq.b  #1,(DMA_QUEUE_SIZE).l
                 bne.s   loc_794         
+                
                 move.w  (VDP_REG01_STATUS).l,(a6)
                 move.w  #$8F02,(a6)
 loc_7BA:
@@ -233,6 +244,7 @@ return_7CC:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Trap9_ManageContextualFunctions:
                 
@@ -257,6 +269,7 @@ rjt_Trap9ActionsOfs:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Trap9_ClearPointers:
                 
                 moveq   #0,d0
@@ -276,6 +289,7 @@ Trap9_ClearPointers:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Trap9_SetFunctionAndTrigger:
                 
@@ -302,6 +316,7 @@ loc_832:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Trap9_ClearFunctionAndTrigger:
                 
                 move.l  (a6)+,d0
@@ -326,6 +341,7 @@ loc_85A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Trap9_ClearTrigger:
                 
@@ -355,6 +371,7 @@ loc_88E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Trap9_SetTrigger:
                 
@@ -402,6 +419,7 @@ loc_8D6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ApplyZ80BusUpdates:
                 
                 move.w  #$100,(Z80BusReq).l
@@ -424,16 +442,11 @@ loc_906:
                                         ; or fade in parameter when 7F < command < F0
                 move.b  1(a0),d0        ; stores first command in d1 and d0 and pushes the rest forward
                 move.w  2(a0),(a0)+
-loc_91E:
-                
                 move.w  2(a0),(a0)+
                 move.w  2(a0),(a0)+
                 clr.w   (a0)
-                cmpi.b  #$FB,d0
+                cmpi.b  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0
                 bne.s   loc_95A         ; if command FB, play back previous music
-                                        ; NOTE : for future cube save/resume feature,
-                                        ; send proper resume command instead of previous music index !
-                                        ; Cube should save current music at every new music index !
                 tst.b   ((MUSIC_STACK_LENGTH-$1000000)).w
                 beq.s   loc_94E
                 movem.l d7-a0,-(sp)
@@ -451,13 +464,13 @@ loc_94E:
                 bra.w   loc_9F6
 loc_95A:
                 
-                cmpi.b  #$FD,d0
+                cmpi.b  #SOUND_COMMAND_FADE_OUT,d0
                 bcs.s   loc_96A
                 move.b  d0,(Z80_SoundDriverCommand).l ; if command >= FD, then send it to Z80
                 bra.w   loc_9F6
 loc_96A:
                 
-                cmpi.b  #$F0,d0
+                cmpi.b  #SOUND_COMMAND_WAIT_MUSIC_END,d0
                 bne.s   loc_97A
                 move.b  #1,((WAIT_FOR_MUSIC_END-$1000000)).w ; if F0, then wait for current music to end before sending commands to Z80
                 bra.w   loc_9F6
@@ -472,8 +485,7 @@ loc_97A:
 loc_994:
                 
                 movem.l d0,-(sp)
-                andi.b  #$7F,d0 ; a music/sfx index mask that must be changed to allow indexes above $80
-                                        ; also change stuff at 9AA then !
+                andi.b  #$7F,d0 ; a music/sfx index mask, so max index value is $7F
                 cmp.b   ((MUSIC_STACK-$1000000)).w,d0 ; compare with last played music
                 movem.l (sp)+,d0
                 bne.s   loc_9AA
@@ -510,7 +522,7 @@ loc_9DC:
 loc_9F6:
                 
                 bsr.w   UpdatePlayerInputs
-                tst.b   ((byte_FFDE9D-$1000000)).w
+                tst.b   ((CONTROLLING_UNIT_CURSOR-$1000000)).w
                 bne.s   loc_A60
                 moveq   #2,d0
                 move.b  ((P1_INPUT-$1000000)).w,d1
@@ -593,6 +605,7 @@ loc_AAC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ApplyFadingEffect:
                 
                 move.b  ((FADING_SETTING-$1000000)).w,d0
@@ -639,6 +652,7 @@ FadingData:     incbin "data/graphics/tech/fadingdata.bin" ; 80 : end
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WaitDmaEnd:
                 
                 movem.w d0,-(sp)
@@ -657,6 +671,7 @@ WaitDmaEnd:
 
 ; VDP Reg Status -> D0
 
+
 GetVdpRegStatus:
                 
                 movem.l a0,-(sp)
@@ -670,6 +685,7 @@ GetVdpRegStatus:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetVdpReg:
                 
@@ -689,6 +705,7 @@ SetVdpReg:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ApplyLogicalOrOnVdpReg:
                 
                 bsr.s   WaitDmaEnd
@@ -702,6 +719,7 @@ ApplyLogicalOrOnVdpReg:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ApplyLogicalAndOnVdpReg:
                 
@@ -728,6 +746,7 @@ SendVdpCommand:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EnableDisplayOnVdp:
                 
                 move.w  #1,d0           ; get vdp reg 01
@@ -738,6 +757,7 @@ EnableDisplayOnVdp:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DisableDisplayOnVdp:
                 
@@ -750,6 +770,7 @@ DisableDisplayOnVdp:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EnableInterrupts:
                 
                 move.b  #$80,((VINT_ENABLED-$1000000)).w
@@ -760,6 +781,7 @@ EnableInterrupts:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DisableInterrupts:
                 
@@ -772,6 +794,7 @@ DisableInterrupts:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EnableDisplayAndInterrupts:
                 
                 bsr.s   EnableDisplayOnVdp
@@ -781,6 +804,7 @@ EnableDisplayAndInterrupts:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DisableDisplayAndInterrupts:
                 
@@ -792,6 +816,7 @@ DisableDisplayAndInterrupts:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ActivateVIntDmaQueueProcessing:
                 
                 bclr    #DEACTIVATE_DMA,(VINT_PARAMS).l
@@ -802,6 +827,7 @@ ActivateVIntDmaQueueProcessing:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DeactivateVIntDmaQueueProcessing:
                 
                 bset    #DEACTIVATE_DMA,(VINT_PARAMS).l
@@ -811,6 +837,7 @@ DeactivateVIntDmaQueueProcessing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DuplicatePalettes:
                 
@@ -830,6 +857,7 @@ DuplicatePalettes:
 ; =============== S U B R O U T I N E =======================================
 
 ; VDP CRAM
+
 
 ApplyVIntCramDma:
                 
@@ -858,6 +886,7 @@ ApplyVIntCramDma:
 
 ; Unused palette copy
 
+
 SetBasePalette1:
                 
                 lea     (PALETTE_1_BASE).l,a1
@@ -873,6 +902,7 @@ loc_CCE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FadeInFromBlack:
                 
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
@@ -882,6 +912,7 @@ FadeInFromBlack:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FadeOutToBlack:
                 
@@ -893,6 +924,7 @@ FadeOutToBlack:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FadeInFromWhite:
                 
                 move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
@@ -903,6 +935,7 @@ FadeInFromWhite:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FadeOutToWhite:
                 
                 move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
@@ -912,9 +945,10 @@ FadeOutToWhite:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ExecuteFading:
                 
-                clr.w   ((FADING_TIMER-$1000000)).w
+                clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
@@ -931,6 +965,7 @@ ExecuteFading:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ApplyCurrentColorFadingValue:
                 
                 movem.l d2-a2,-(sp)
@@ -943,8 +978,8 @@ loc_D30:
                 sub.w   d6,d5
                 btst    d5,d1
                 bne.s   loc_D44
-                adda.w  #$20,a0 
-                adda.w  #$20,a1 
+                adda.w  #CRAM_PALETTE_SIZE,a0
+                adda.w  #CRAM_PALETTE_SIZE,a1
                 bra.w   loc_DA8
 loc_D44:
                 
@@ -1013,6 +1048,7 @@ loc_DA8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ClearVsramAndSprites:
                 
                 move.w  #$100,(Z80BusReq).l
@@ -1030,6 +1066,7 @@ loc_DC2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateVdpSpriteTable:
                 
@@ -1054,6 +1091,7 @@ UpdateVdpSpriteTable:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ClearSpriteTable:
                 
                 movem.l d0-d1/a0,-(sp)
@@ -1067,6 +1105,7 @@ ClearSpriteTable:
                 addq.w  #8,a0
                 addq.b  #1,d0
                 dbf     d1,@Loop
+                
                 clr.b   -5(a0)
                 movem.l (sp)+,d0-d1/a0
                 rts
@@ -1076,29 +1115,33 @@ ClearSpriteTable:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ClearScrollTableData:
                 
                 movem.l d7/a6,-(sp)
-                move.w  #$C000,d0       ; clear scroll A table
+                move.w  #VRAM_ADDRESS_PLANE_A,d0 ; clear scroll A table
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
-                move.w  #$E000,d0       ; clear scroll B table
+                move.w  #VRAM_ADDRESS_PLANE_B,d0 ; clear scroll B table
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
+                
                 move.w  #$1FF,d7
                 lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a6
 loc_E62:
                 
                 clr.l   (a6)+
                 dbf     d7,loc_E62
+                
                 move.w  #$1FF,d7
                 adda.w  #$1800,a6
 loc_E70:
                 
                 clr.l   (a6)+
                 dbf     d7,loc_E70
+                
                 movem.l (sp)+,d7/a6
                 rts
 
@@ -1106,6 +1149,7 @@ loc_E70:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ClearCram:
                 
@@ -1120,11 +1164,12 @@ ClearCram:
                 move.w  #$C000,(VDP_Control).l
                 move.w  #$80,(VDP_Control).l  ; CRAM address 0x80
                 move.w  #0,(VDP_Data).l
-loc_EC8:
+@WaitForDmaFree:
                 
                 move.w  (VDP_Control).l,d0
-                andi.w  #2,d0           ; wait for DMA free
-                bne.s   loc_EC8
+                andi.w  #2,d0
+                bne.s   @WaitForDmaFree
+                
                 move.w  (VDP_REG01_STATUS).l,d3
                 move.w  d3,(VDP_Control).l
                 move.w  #$8F02,(VDP_Control).l ; auto increment : 2
@@ -1135,6 +1180,7 @@ loc_EC8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WaitForVInt:
                 
@@ -1152,6 +1198,7 @@ WaitForVInt:
 ; =============== S U B R O U T I N E =======================================
 
 ; Wait for D0 VInts/Frames
+
 
 Sleep:
                 
@@ -1172,6 +1219,7 @@ Sleep:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 RequestVdpCommandQueueProcessing:
                 
                 bset    #VDP_COMMAND_REQUEST,(VINT_PARAMS).l
@@ -1181,6 +1229,7 @@ RequestVdpCommandQueueProcessing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WaitForVdpCommandQueueProcessing:
                 
@@ -1192,6 +1241,7 @@ WaitForVdpCommandQueueProcessing:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EnableDmaQueueProcessing:
                 
                 bset    #DMA_REQUEST,(VINT_PARAMS).l
@@ -1201,6 +1251,7 @@ EnableDmaQueueProcessing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WaitForDmaQueueProcessing:
                 
@@ -1213,6 +1264,7 @@ WaitForDmaQueueProcessing:
 ; =============== S U B R O U T I N E =======================================
 
 ; unused
+
 
 sub_F3A:
                 
@@ -1244,6 +1296,7 @@ loc_F50:
 
 ; unused
 
+
 sub_F76:
                 
                 bsr.w   DisableInterrupts
@@ -1262,6 +1315,7 @@ sub_F76:
 ; =============== S U B R O U T I N E =======================================
 
 ; unused
+
 
 sub_F90:
                 
@@ -1309,6 +1363,7 @@ loc_FFE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SwapA6:
                 
                 movem.l d7,-(sp)
@@ -1324,6 +1379,7 @@ SwapA6:
 ; =============== S U B R O U T I N E =======================================
 
 ; unused
+
 
 sub_1014:
                 
@@ -1392,6 +1448,7 @@ loc_1088:
 ; =============== S U B R O U T I N E =======================================
 
 ; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
+
 
 ApplyImmediateVramDma:
                 
@@ -1469,6 +1526,7 @@ loc_1188:
 
 ; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
 
+
 ApplyVIntVramDma:
                 
                 move    sr,-(sp)
@@ -1530,6 +1588,7 @@ ApplyVIntVramDma:
 
 ; unused
 
+
 sub_1234:
                 
                 movem.w d7,-(sp)
@@ -1548,6 +1607,7 @@ sub_1234:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateVdpHScrollData:
                 
@@ -1585,6 +1645,7 @@ loc_1284:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 UpdateForegroundHScrollData:
                 
                 movem.l d7/a6,-(sp)
@@ -1605,6 +1666,7 @@ loc_12B8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 UpdateBackgroundHScrollData:
                 
                 movem.l d7/a6,-(sp)
@@ -1617,6 +1679,7 @@ UpdateBackgroundHScrollData:
 ; =============== S U B R O U T I N E =======================================
 
 ; VDP Vertical Scroll Data
+
 
 UpdateVdpVScrollData:
                 
@@ -1649,6 +1712,7 @@ loc_12FC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 UpdateForegroundVScrollData:
                 
                 movem.l d7/a6,-(sp)
@@ -1669,6 +1733,7 @@ loc_1330:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 UpdateBackgroundVScrollData:
                 
                 movem.l d7/a6,-(sp)
@@ -1681,6 +1746,7 @@ UpdateBackgroundVScrollData:
 ; =============== S U B R O U T I N E =======================================
 
 ; unused
+
 
 sub_134A:
                 
@@ -1696,6 +1762,7 @@ sub_134A:
 ; =============== S U B R O U T I N E =======================================
 
 ; unused
+
 
 sub_135A:
                 
@@ -1713,6 +1780,7 @@ sub_135A:
 
 ; unused
 
+
 sub_1372:
                 
                 movem.w d1,-(sp)
@@ -1728,6 +1796,7 @@ sub_1372:
 
 ; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
 
+
 ApplyImmediateVramDmaOnCompressedTiles:
                 
                 movem.w d1,-(sp)
@@ -1740,6 +1809,7 @@ ApplyImmediateVramDmaOnCompressedTiles:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DecompressTilesForVramDma:
                 
@@ -1756,6 +1826,7 @@ DecompressTilesForVramDma:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ApplyVIntVramDmaOnCompressedTiles:
                 
                 movem.w d1,-(sp)
@@ -1770,6 +1841,7 @@ ApplyVIntVramDmaOnCompressedTiles:
 ; =============== S U B R O U T I N E =======================================
 
 ; unused DMA code
+
 
 sub_13C0:
                 
@@ -1790,6 +1862,7 @@ sub_13C0:
 
 ; unused DMA code
 
+
 sub_13E4:
                 
                 movem.l d0-d1/a0-a1,-(sp)
@@ -1809,6 +1882,7 @@ sub_13E4:
 
 ; unused
 
+
 DmaAndWait:
                 
                 bsr.s   sub_13C0        
@@ -1820,6 +1894,7 @@ DmaAndWait:
 ; =============== S U B R O U T I N E =======================================
 
 ; D0=Destination, D1=Length, D2=Filler value
+
 
 ApplyVramDmaFill:
                 

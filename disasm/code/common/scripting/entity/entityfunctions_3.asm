@@ -6,6 +6,7 @@
 
 ; still to confirm
 
+
 WaitForFollowersStopped:
                 
                 lea     ((byte_FFAF23-$1000000)).w,a0
@@ -19,6 +20,7 @@ WaitForFollowersStopped:
 
 ; to confirm
 
+
 WaitForHeroAndFollowersStopped:
                 
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a0
@@ -31,6 +33,7 @@ WaitForHeroAndFollowersStopped:
 ; =============== S U B R O U T I N E =======================================
 
 ; to confirm
+
 
 WaitForPartyEntitiesIdle:
                 
@@ -62,6 +65,7 @@ return_4524A:
 
 ; might be related to followers
 
+
 ApplyActscriptToHeroAndFollowers:
                 
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a0
@@ -73,6 +77,7 @@ ApplyActscriptToHeroAndFollowers:
 ; =============== S U B R O U T I N E =======================================
 
 ; to confirm
+
 
 ApplyActscriptToFollowers:
                 

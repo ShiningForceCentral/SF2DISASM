@@ -4,20 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DebugModeBattleTest:
                 
                 move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
                 move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
-                
-                if (FORCE_MEMBERS_EXPANSION=1)
-                move.w  #COM_ALLIES_COUNTER-1,d1
-                moveq   #1,d0
-@JoinForce_Loop:
-                
-                bsr.w   JoinForce
-                addq.w  #1,d0
-                dbf     d1,@JoinForce_Loop
-                else
                 moveq   #ALLY_SARAH,d0
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CHESTER,d0
@@ -76,8 +67,6 @@ DebugModeBattleTest:
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
-                endif
-                
                 moveq   #0,d0
                 move.w  #$63,d1 
                 bsr.w   j_SetBaseAGI
@@ -97,8 +86,8 @@ DebugModeBattleTest:
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
                 bsr.w   InitWindowProperties
-                move.w  #COMBATANT_ALLIES_NUMBER,(INDEX_LIST_ENTRIES_NUMBER).l
-                lea     (INDEX_LIST).l,a0
+                move.w  #COMBATANT_ALLIES_NUMBER,(GENERIC_LIST_LENGTH).l
+                lea     (GENERIC_LIST).l,a0
                 move.l  #$10203,(a0)+
                 move.l  #$4050607,(a0)+
                 move.l  #$8090A0B,(a0)+
@@ -110,10 +99,10 @@ DebugModeBattleTest:
                 bsr.w   CheatModeConfiguration
 byte_77DE:
                 
-                txt     $1C8            ; "Battle number?{D1}"
+                txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
-                move.w  #$31,d2 
+                move.w  #49,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0
@@ -127,7 +116,7 @@ byte_77DE:
                 movem.w (sp)+,d0-d2
                 beq.s   loc_7820
                 move.w  d0,d1
-                addi.w  #$1C2,d1
+                addi.w  #BATTLE_INTRO_CUTSCENE_FLAGS_START,d1
                 jsr     j_SetFlag
 loc_7820:
                 
@@ -137,8 +126,8 @@ loc_7820:
                 movem.w (sp)+,d0-d4
                 clr.w   d1
                 move.b  d0,d1
-                mulu.w  #7,d0
-                conditionalPc lea,BattleMapCoordinates,a0
+                mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
+                lea     BattleMapCoordinates(pc), a0
                 nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
@@ -148,7 +137,7 @@ loc_7820:
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
                 jsr     j_BattleLoop
                 jsr     j_ChurchMenuActions
-                txt     $1CC            ; "Shop number?{D1}"
+                txt     460             ; "Shop number?{D1}"
                 move.w  #0,d0
                 move.w  #0,d1
                 move.w  #$64,d2 
@@ -162,7 +151,7 @@ loc_7820:
 loc_7894:
                 
                 bsr.w   sub_78BC
-                jsr     sub_10040
+                jsr     j_InitMemberListScreen
                 tst.b   d0
                 bne.w   byte_77DE       
                 bpl.s   loc_78B6
@@ -181,6 +170,7 @@ loc_78BA:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_78BC:
                 
@@ -219,21 +209,24 @@ loc_78C6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LevelUpWholeForce:
                 
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
-loc_7924:
+@Loop:
                 
                 bsr.w   j_LevelUp
                 addq.w  #1,d0
-                dbf     d7,loc_7924
+                dbf     d7,@Loop
+                
                 rts
 
     ; End of function LevelUpWholeForce
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_7930:
                 

@@ -1,35 +1,9 @@
 
 ; ASM FILE code\common\menus\caravan\caravanactions_2.asm :
-; 0x228A8..0x229CA : Caravan functions
+; 0x228D8..0x229CA : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================
 
-ChooseCaravanPortrait:
-                
-                movem.l d0-d1,-(sp)
-                move.l  d1,-(sp)
-                chkFlg  $46             ; Astral is a follower
-                bne.s   loc_228B8       
-                moveq   #PORTRAIT_ROHDE,d0 ; ROHDE portrait index
-                bra.s   loc_228BA
-loc_228B8:
-                
-                moveq   #PORTRAIT_ASTRAL,d0 ; Astral portrait index
-loc_228BA:
-                
-                moveq   #0,d1
-                jsr     j_InitPortraitWindow
-                move.l  (sp)+,d0
-                jsr     (DisplayText).w 
-                clsTxt
-                jsr     j_HidePortraitWindow
-                movem.l (sp)+,d0-d1
-                rts
-
-    ; End of function ChooseCaravanPortrait
-
-
-; =============== S U B R O U T I N E =======================================
 
 sub_228D8:
                 
@@ -37,8 +11,8 @@ sub_228D8:
                 jsr     j_UpdateForce
                 tst.w   d1
                 bne.s   loc_228F0
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                lea     ((TARGETS_LIST-$1000000)).w,a0
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 bra.s   loc_22908
 loc_228F0:
                 
@@ -53,9 +27,9 @@ loc_22900:
                 move.w  ((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
 loc_22908:
                 
-                lea     ((INDEX_LIST-$1000000)).w,a1
-                move.w  d7,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                lea     ((GENERIC_LIST-$1000000)).w,a1
+                move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
                 bcs.w   loc_22920
 loc_2291A:
@@ -74,20 +48,21 @@ loc_22920:
 
 ; Copy caravan item indexes to generic list space
 
+
 CopyCaravanItems:
                 
                 movem.l d7-a1,-(sp)
                 move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
-                move.w  d7,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 subq.w  #1,d7
-                bcs.w   loc_22946
+                bcs.w   @Skip
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                lea     ((INDEX_LIST-$1000000)).w,a1
-loc_22940:
+                lea     ((GENERIC_LIST-$1000000)).w,a1
+@Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_22940
-loc_22946:
+                dbf     d7,@Loop
+@Skip:
                 
                 movem.l (sp)+,d7-a1
                 rts
@@ -97,16 +72,17 @@ loc_22946:
 
 ; =============== S U B R O U T I N E =======================================
 
-; get whether character D0's item at slot D1 is cursed -> carry
+; Is character D0's item in slot D1 equipped and cursed ? CCR carry-bit set if true
 
-sub_2294C:
+
+IsItemInSlotEquippedAndCursed:
                 
                 movem.l d1,-(sp)
-                jsr     j_GetItemAndNumberOfItems
-                bclr    #7,d1
-                beq.s   loc_22988
+                jsr     j_GetItemAndNumberHeld
+                bclr    #ITEMENTRY_BIT_EQUIPPED,d1
+                beq.s   @WasNotEquipped
                 jsr     j_IsItemCursed
-                bcc.w   loc_22986
+                bcc.w   @NotCursed
                 sndCom  MUSIC_CURSED_ITEM
                 move.w  #$3C,d0 
                 jsr     (Sleep).w       
@@ -115,21 +91,22 @@ sub_2294C:
                 bsr.w   ChooseCaravanPortrait
                 bsr.w   PlayPreviousMusicAfterCurrentOne
                 ori     #1,ccr
-loc_22986:
+@NotCursed:
                 
-                bra.s   loc_2298A
-loc_22988:
+                bra.s   @Done
+@WasNotEquipped:
                 
                 tst.b   d0
-loc_2298A:
+@Done:
                 
                 movem.l (sp)+,d1
                 rts
 
-    ; End of function sub_2294C
+    ; End of function IsItemInSlotEquippedAndCursed
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 PlayPreviousMusicAfterCurrentOne:
                 
@@ -143,6 +120,7 @@ PlayPreviousMusicAfterCurrentOne:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_2299E:
                 

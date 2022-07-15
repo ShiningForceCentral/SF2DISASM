@@ -1,11 +1,12 @@
 
 ; ASM FILE data\stats\allies\growthcurves.asm :
 ; 0x1EE02C..0x1EE270 : Stat growth curves
-StatGrowthCurves:
-                ; 29 entries per curve (one per level), 2 bytes each :
-;  a : Total fraction of growth expected to have been gained by this level = a/256
-;  b : Fraction of growth to be gained this level = b/256
-    
+tbl_StatGrowthCurves:
+                
+; 29 entries per curve (one per level), 2 bytes each :
+;       a : Total fraction of growth expected to have been gained by this level = a/256
+;       b : Fraction of growth to be gained this level = b/256
+                
 ; Linear
                 dc.w 8, 8               ;  level 2
                 dc.w 17, 9              ;  level 3
@@ -36,7 +37,7 @@ StatGrowthCurves:
                 dc.w 238, 9             ;  level 28
                 dc.w 247, 9             ;  level 29
                 dc.w 256, 9             ;  level 30
-                    
+                
                 ; Late
                 dc.w 6, 6               ;  level 2
                 dc.w 13, 7              ;  level 3
@@ -67,7 +68,7 @@ StatGrowthCurves:
                 dc.w 234, 11            ;  level 28
                 dc.w 244, 10            ;  level 29
                 dc.w 256, 12            ;  level 30
-                    
+                
                 ; Early
                 dc.w 11, 11             ;  level 2
                 dc.w 22, 11             ;  level 3
@@ -98,7 +99,7 @@ StatGrowthCurves:
                 dc.w 242, 7             ;  level 28
                 dc.w 250, 8             ;  level 29
                 dc.w 256, 6             ;  level 30
-                    
+                
                 ; Middle
                 dc.w 6, 6               ;  level 2
                 dc.w 13, 7              ;  level 3
@@ -129,7 +130,7 @@ StatGrowthCurves:
                 dc.w 242, 8             ;  level 28
                 dc.w 249, 7             ;  level 29
                 dc.w 256, 7             ;  level 30
-                    
+                
                 ; Early and late
                 dc.w 12, 12             ;  level 2
                 dc.w 24, 12             ;  level 3
@@ -160,4 +161,4 @@ StatGrowthCurves:
                 dc.w 231, 11            ;  level 28
                 dc.w 243, 12            ;  level 29
                 dc.w 256, 13            ;  level 30
-                    
+                

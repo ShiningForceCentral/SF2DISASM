@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle07\cs_afterbattle.asm :
 ; 0x49F7E..0x4A952 : Cutscene after battle 7
-abcs_battle07:  textCursor $951
+abcs_battle07:  textCursor 2385
                 loadMapFadeIn MAP_ANCIENT_TOWER_UNDERGROUND_ROOM,8,16
                 loadMapEntities ce_4A912
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -11,19 +11,19 @@ abcs_battle07:  textCursor $951
                 stopEntity 130
                 stopEntity 131
                 customActscriptWait 130
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 customActscriptWait 131
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 128,eas_46172
-                setActscriptWait 129,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
+                setActscriptWait 129,eas_DeactivateAutoFacing
                 setActscript 128,eas_AnimSpeedx2
                 setActscript 129,eas_AnimSpeedx2
                 fadeInB
@@ -43,8 +43,8 @@ abcs_battle07:  textCursor $951
                  moveDown 1
                 endActions
                 customActscriptWait 130
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $0          ;   
+                 ac_motion OFF          ;   
+                 ac_orientUp            ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -64,7 +64,7 @@ abcs_battle07:  textCursor $951
                 setActscriptWait 132,eas_Jump
                 nextSingleText $0,132   ; "(Shriek!){W1}"
                 nextSingleText $C0,130  ; "No, Princess.{W1}"
-                setActscriptWait 132,eas_46172
+                setActscriptWait 132,eas_DeactivateAutoFacing
                 entityActionsWait 132
                  moveUp 1
                 endActions
@@ -126,8 +126,8 @@ abcs_battle07:  textCursor $951
                  moveDown 8
                 endActions
                 csWait 10
-                setActscriptWait 133,eas_46172
-                setActscriptWait 134,eas_46172
+                setActscriptWait 133,eas_DeactivateAutoFacing
+                setActscriptWait 134,eas_DeactivateAutoFacing
                 customActscriptWait 133
                  ac_setSpeed 56,56      ;   
                  ac_jump eas_Idle       ;   
@@ -145,14 +145,14 @@ abcs_battle07:  textCursor $951
                 stopEntity 133
                 stopEntity 134
                 customActscriptWait 133
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 customActscriptWait 134
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -168,8 +168,8 @@ abcs_battle07:  textCursor $951
                 setPos 129,63,63,DOWN
                 setCamDest 8,17
                 customActscriptWait 131
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $0          ;   
+                 ac_motion OFF          ;   
+                 ac_orientUp            ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -283,7 +283,7 @@ abcs_battle07:  textCursor $951
                 setCamDest 8,17
                 nextSingleText $0,131   ; "Save her.  Save her now!{W1}"
                 csWait 5
-                setActscript 131,eas_461B6
+                setActscript 131,eas_2xRightLeft
                 csWait 120
                 setFacing 131,DOWN
                 nextSingleText $0,131   ; "{LEADER}, you're good{N}at performing acrobatics!{W1}"
@@ -315,8 +315,8 @@ abcs_battle07:  textCursor $951
                 stopEntity ALLY_BOWIE
                 setFacing ALLY_BOWIE,DOWN
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -333,9 +333,9 @@ abcs_battle07:  textCursor $951
                  ac_setSpeed 40,40      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_BOWIE,eas_46172
-                setActscriptWait 131,eas_46172
-                setActscriptWait 134,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
+                setActscriptWait 131,eas_DeactivateAutoFacing
+                setActscriptWait 134,eas_DeactivateAutoFacing
                 entityActions 131
                  moveDown 3
                 endActions
@@ -394,8 +394,8 @@ abcs_battle07:  textCursor $951
                 ac_end
                 setQuake 4
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $0          ;   
+                 ac_motion OFF          ;   
+                 ac_orientUp            ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -456,11 +456,11 @@ abcs_battle07:  textCursor $951
                  ac_setSpeed 56,56      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
                 setSprite ALLY_BOWIE,ALLY_BOWIE
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -500,8 +500,8 @@ abcs_battle07:  textCursor $951
                 endActions
                 setSprite ALLY_BOWIE,MAPSPRITE_POSE4
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $0          ;   
+                 ac_motion OFF          ;   
+                 ac_orientUp            ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -514,17 +514,17 @@ abcs_battle07:  textCursor $951
                 setCameraEntity 65535
                 cameraSpeed $28
                 nextSingleText $FF,255  ; "The two jewels merge{N}together.{W1}"
-                setF $181               ; Set after Bowie obtains King Galam's jewel
+                setF 385                ; Set after Bowie obtains King Galam's jewel
                 setCamDest 8,3
                 waitIdle 130
                 setFacing 130,DOWN
                 setFacing 132,DOWN
                 animEntityFX 129,6
                 nextSingleText $C0,130  ; "I have to go back and get{N}my jewel....{N}Noooooooo!{W1}"
-                setActscript 130,eas_463AE
+                setActscript 130,eas_TwirlShrinkDisappear
                 animEntityFX 128,6
                 nextSingleText $0,132   ; "Father...{N}{LEADER}...help meeeeee!{W1}"
-                setActscriptWait 132,eas_463AE
+                setActscriptWait 132,eas_TwirlShrinkDisappear
                 setActscriptWait 131,eas_Init
                 customActscriptWait 131
                  ac_setSpeed 32,32      ;   
@@ -558,7 +558,7 @@ abcs_battle07:  textCursor $951
                 nextSingleText $0,131   ; "Indeed, perhaps...these{N}jewels are the key to{N}solving this....{W1}"
                 setQuake 2
                 csWait 5
-                setActscript 134,eas_461B6
+                setActscript 134,eas_2xRightLeft
                 playSound $FD
                 csWait 120
                 setQuake 0
@@ -595,7 +595,7 @@ abcs_battle07:  textCursor $951
                  moveDown 1
                  moveLeft 1
                 endActions
-                setActscriptWait 133,eas_46172
+                setActscriptWait 133,eas_DeactivateAutoFacing
                 setFacing 131,DOWN
                 stopEntity 133
                 csWait 50
@@ -639,8 +639,8 @@ abcs_battle07:  textCursor $951
                 followEntity 131,ALLY_BOWIE,2
                 followEntity 133,131,2
                 followEntity 134,133,2
-                setF $4A                ; Astral + King are followers
-                setF $280               ; Set after the end of battle 7's long sequence, cleared at docks?
+                setF 74                 ; Astral + King are followers
+                setF 640                ; Set after the end of battle 7's long sequence, cleared at docks?
                 csc_end
 ce_4A912:       mainEntity 13,23,UP
                 entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init

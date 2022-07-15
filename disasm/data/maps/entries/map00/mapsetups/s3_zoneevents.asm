@@ -8,20 +8,21 @@ ms_map0_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map0_ZoneEvent0:
                 
                  
-                chkFlg  $321            ; Set after Zalbard taunts you in the scene outside the Mitula Shrine
+                chkFlg  801             ; Set after Zalbard taunts you in the scene outside the Mitula Shrine
                 bne.s   Map0_DefaultZoneEvent
                 script  cs_5E3C2
-                setFlg  $321            ; Set after Zalbard taunts you in the scene outside the Mitula Shrine
+                setFlg  801             ; Set after Zalbard taunts you in the scene outside the Mitula Shrine
 Map0_DefaultZoneEvent:
                 
                 rts
 
     ; End of function Map0_ZoneEvent0
 
-cs_5E3C2:       textCursor $AAB
+cs_5E3C2:       textCursor 2731
                 setActscriptWait ALLY_PETER,eas_Init
                 setActscriptWait FOLLOWER_B,eas_Init
                 nextSingleText $0,128   ; "Welcome, Granseal force!{W1}"
@@ -31,7 +32,7 @@ cs_5E3C2:       textCursor $AAB
                 setFacing ALLY_PETER,DOWN
                 nextSingleText $0,ALLY_PETER ; "What?{W1}"
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 setFacing FOLLOWER_B,UP
                 nextSingleText $0,FOLLOWER_B ; "I heard a voice from the{N}other side of the door.{W1}"
@@ -42,9 +43,9 @@ cs_5E3C2:       textCursor $AAB
                 setFacing ALLY_PETER,UP
                 setCamDest 8,9
                 nextSingleText $0,128   ; "I'm Zalbard.  I'm one of{N}the greater devils.{W1}"
-                setActscriptWait FOLLOWER_B,eas_46172
-                setActscriptWait ALLY_BOWIE,eas_46172
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait FOLLOWER_B,eas_DeactivateAutoFacing
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 entityActions FOLLOWER_B
                  moveDown 2
                 endActions
@@ -92,8 +93,8 @@ cs_5E3C2:       textCursor $AAB
                 setFacing ALLY_PETER,UP
                 setCamDest 9,12
                 setFacing FOLLOWER_B,DOWN
-                setActscriptWait FOLLOWER_B,eas_46172
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait FOLLOWER_B,eas_DeactivateAutoFacing
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_PETER
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
@@ -106,7 +107,7 @@ cs_5E3C2:       textCursor $AAB
                  moveDown 2
                 endActions
                 waitIdle FOLLOWER_B
-                setActscriptWait ALLY_PETER,eas_461AA
+                setActscriptWait ALLY_PETER,eas_StopMoving
                 nextSingleText $0,ALLY_PETER ; "Sir Astral?{W1}"
                 nextSingleText $0,FOLLOWER_B ; "Hmmmm....{W1}"
                 entityActions FOLLOWER_B
@@ -116,14 +117,14 @@ cs_5E3C2:       textCursor $AAB
                  moveDown 2
                 endActions
                 waitIdle FOLLOWER_B
-                setActscriptWait ALLY_PETER,eas_461AA
+                setActscriptWait ALLY_PETER,eas_StopMoving
                 nextSingleText $0,ALLY_PETER ; "Sir Astral!!!{W1}"
                 customActscriptWait FOLLOWER_B
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 setActscriptWait FOLLOWER_B,eas_Jump
-                setActscriptWait FOLLOWER_B,eas_46172
+                setActscriptWait FOLLOWER_B,eas_DeactivateAutoFacing
                 entityActionsWait FOLLOWER_B
                  moveUp 4
                 endActions
@@ -159,5 +160,5 @@ cs_5E3C2:       textCursor $AAB
                 followEntity FOLLOWER_B,ALLY_BOWIE,2
                 followEntity ALLY_PETER,FOLLOWER_B,2
                 setBlocks 0,38,2,3,14,10
-                setF $348               ; Set after the door to the Mitula Shrine is opened
+                setF 840                ; Set after the door to the Mitula Shrine is opened
                 csc_end

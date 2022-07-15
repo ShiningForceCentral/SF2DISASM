@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle28\cs_beforebattle.asm :
 ; 0x4BE8C..0x4C07C : Cutscene before battle 28
-bbcs_28:        textCursor $A65
+bbcs_28:        textCursor 2661
                 loadMapFadeIn MAP_PANGOAT_VALLEY_BRIDGE,0,4
                 loadMapEntities ce_4C03C
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -56,9 +56,9 @@ bbcs_28:        textCursor $A65
                  moveDown 1
                 endActions
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461E4
+                setActscript ALLY_PETER,eas_2xUpDown
                 csWait 100
                 setActscriptWait FOLLOWER_B,eas_Jump
                 customActscriptWait FOLLOWER_B
@@ -81,8 +81,8 @@ bbcs_28:        textCursor $A65
                 endActions
                 setFacing ALLY_BOWIE,UP
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

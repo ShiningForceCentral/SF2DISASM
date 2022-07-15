@@ -7,13 +7,14 @@ ms_map26_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map26_ZoneEvent0:
                 
                  
-                chkFlg  $30C            ; Set after the man tries to lift the giant ring in Floor World
+                chkFlg  780             ; Set after the man tries to lift the giant ring in Floor World
                 bne.s   return_59DCE
                 script  cs_59F20
-                setFlg  $30C            ; Set after the man tries to lift the giant ring in Floor World
+                setFlg  780             ; Set after the man tries to lift the giant ring in Floor World
 return_59DCE:
                 
                 rts
@@ -22,6 +23,7 @@ return_59DCE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map26_DefaultZoneEvent:
                 

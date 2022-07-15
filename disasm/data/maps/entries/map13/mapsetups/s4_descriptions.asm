@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map13_AreaDescriptions:
                 
                 move.w  #$1003,d3       ; "A book...{N}VIVA, FRIENDSHIP!{W1}"

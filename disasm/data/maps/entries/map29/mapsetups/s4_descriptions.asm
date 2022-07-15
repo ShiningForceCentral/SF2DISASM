@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map29_AreaDescriptions:
                 
                 move.w  #$104F,d3       ; "A book...{N}LIFE IN A CAVE{W1}"
