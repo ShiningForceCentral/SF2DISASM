@@ -6,6 +6,7 @@
 
 ; Out: Z = is scrolling
 
+
 IsMapScrollingToViewTarget:
                 
                 move.b  ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w,d7
@@ -26,6 +27,7 @@ loc_4740:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 VInt_UpdateMapPlanes:
                 
@@ -51,12 +53,14 @@ return_4770:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 VInt_UpdateMapAnimations:
                 
                 move.l  ((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w,d0
                 ble.s   return_47C4
                 subq.w  #1,((TILE_ANIMATION_COUNTER-$1000000)).w
                 bne.s   return_47C4
+                
                 movea.l d0,a0
                 move.w  (a0)+,d1
                 bge.w   loc_47A2

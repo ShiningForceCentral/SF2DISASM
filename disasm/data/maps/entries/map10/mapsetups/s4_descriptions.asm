@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map10_AreaDescriptions:
                 
                 move.w  #$1007,d3       ; "ITEMS{W1}"

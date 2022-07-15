@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map62\mapsetups\scripts.asm :
 ; 0x5C876..0x5C950 : 
-cs_5C876:       textCursor $E1D
+cs_5C876:       textCursor 3613
                 setActscriptWait 128,eas_Jump
                 nextSingleText $0,128   ; "Who is it?  Petro?{W1}"
                 setFacing 128,DOWN
@@ -26,7 +26,7 @@ cs_5C876:       textCursor $E1D
                 setCamDest 1,10
                 nextSingleText $0,129   ; "Oh, you're not Petro.{N}Who...are you?{W1}"
                 csc_end
-cs_5C8D4:       textCursor $E23
+cs_5C8D4:       textCursor 3619
                 nextText $0,129         ; "Ancient stone?  Yes, my{N}family had it for a long{N}time.{W2}"
                 setFacing 129,RIGHT
                 nextSingleText $0,129   ; "But, it was stolen.{W1}"
@@ -38,14 +38,14 @@ cs_5C8D4:       textCursor $E23
                  moveUp 6
                 endActions
                 csc_end
-cs_5C8FE:       textCursor $E2B
+cs_5C8FE:       textCursor 3627
                 nextSingleText $0,129   ; "You need my help?{W1}"
                 nextSingleText $0,129   ; "Come in.  Talk to me.{W1}"
                 entityActionsWait ALLY_BOWIE
                  moveUp 1
                 endActions
                 csc_end
-cs_5C914:       textCursor $E2D
+cs_5C914:       textCursor 3629
                 nextText $0,129         ; "I came here looking for{N}ancient treasure, and found{N}the Sky Orb.{W2}"
                 nextText $0,129         ; "Also, I discovered how to{N}use the ancient tunnels.{W2}"
                 nextSingleText $0,129   ; "But, most of them are{N}useless, except for the{N}one to Grans.{W1}"
@@ -57,5 +57,5 @@ cs_5C914:       textCursor $E2D
                 nextSingleText $FF,255  ; "{LEADER} decides to go{N}with him.{W1}"
                 nextSingleText $0,129   ; "All I want is the Sky Orb.{N}Just help me get that, and{N}then you can leave.{W1}"
                 followEntity 129,FOLLOWER_B,2
-                setF $4D                ; Old man is a follower
+                setF 77                 ; Old man is a follower
                 csc_end

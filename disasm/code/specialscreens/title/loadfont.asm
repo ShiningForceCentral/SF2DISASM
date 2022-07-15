@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadTitleScreenFont:
                 
                 lea     StaticWidthFont(pc), a0

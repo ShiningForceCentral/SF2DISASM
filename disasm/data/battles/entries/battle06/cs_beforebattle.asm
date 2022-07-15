@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle06\cs_beforebattle.asm :
 ; 0x49BCA..0x49CE2 : Cutscene before battle 6
-bbcs_06:        textCursor $926
+bbcs_06:        textCursor 2342
                 loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,25,5
                 loadMapEntities ce_49CBA
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -44,7 +44,7 @@ bbcs_06:        textCursor $926
                 endActions
                 nextSingleText $0,128   ; "Hand it over.{N}I'll deliver it to...?{N}You!!!{W1}"
                 setCameraEntity 65535
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 128
                  moveDown 1
                 endActions
@@ -53,7 +53,7 @@ bbcs_06:        textCursor $926
                 setFacing 128,DOWN
                 nextSingleText $0,128   ; "Hey, these are the Granseal{N}spies!{W1}"
                 nextSingleText $C0,ALLY_SLADE ; "Oops!  That didn't work!{W1}"
-                setStoryFlag $7         ; Battle 7 unlocked
+                setStoryFlag 7          ; Battle 7 unlocked - BATTLE_VERSUS_DARK_SMOKES        
                 csc_end
 ce_49CBA:       mainEntity 30,9,DOWN
                 entity 29,8,DOWN,ALLY_SLADE,eas_Init

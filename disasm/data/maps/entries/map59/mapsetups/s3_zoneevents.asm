@@ -6,6 +6,7 @@ ms_map59_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map59_DefaultZoneEvent:
                 
                 rts

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle01\cs_beforebattle.asm :
 ; 0x494BC..0x496DC : Cutscene before battle 1
-bbcs_01:        textCursor $8F4
+bbcs_01:        textCursor 2292
                 loadMapFadeIn MAP_ANCIENT_TOWER_FIRST_ROOM,2,10
                 loadMapEntities ce_49694
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -19,7 +19,7 @@ bbcs_01:        textCursor $8F4
                  moveUp 1
                 endActions
                 csWait 5
-                setActscript 135,eas_461B6
+                setActscript 135,eas_2xRightLeft
                 csWait 60
                 nextSingleText $0,135   ; "Hmm, what a mysterious{N}tower.  I wonder who built{N}it?{W1}"
                 entityActionsWait 135
@@ -42,7 +42,7 @@ bbcs_01:        textCursor $8F4
                 csWait 30
                 mapFadeInFromWhite
                 csWait 5
-                setActscript 135,eas_461B6
+                setActscript 135,eas_2xRightLeft
                 csWait 30
                 mapFadeOutToWhite
                 csWait 30
@@ -50,7 +50,7 @@ bbcs_01:        textCursor $8F4
                 csWait 30
                 setCamDest 2,10
                 csWait 5
-                setActscript ALLY_CHESTER,eas_461B6
+                setActscript ALLY_CHESTER,eas_2xRightLeft
                 csWait 60
                 nextSingleText $0,ALLY_CHESTER ; "What's happening?{W1}"
                 entityActionsWait ALLY_SARAH
@@ -61,8 +61,8 @@ bbcs_01:        textCursor $8F4
                 setCamDest 2,1
                 setPos 128,7,4,DOWN
                 animEntityFX 128,7
-                setActscriptWait 128,eas_46172
-                setActscriptWait 135,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
+                setActscriptWait 135,eas_DeactivateAutoFacing
                 entityActionsWait 135
                  moveDown 1
                 endActions
@@ -92,12 +92,12 @@ bbcs_01:        textCursor $8F4
                 setPos 132,7,4,DOWN
                 setPos 133,7,4,DOWN
                 setPos 134,7,4,DOWN
-                setActscriptWait 129,eas_46172
-                setActscriptWait 130,eas_46172
-                setActscriptWait 131,eas_46172
-                setActscriptWait 132,eas_46172
-                setActscriptWait 133,eas_46172
-                setActscriptWait 134,eas_46172
+                setActscriptWait 129,eas_DeactivateAutoFacing
+                setActscriptWait 130,eas_DeactivateAutoFacing
+                setActscriptWait 131,eas_DeactivateAutoFacing
+                setActscriptWait 132,eas_DeactivateAutoFacing
+                setActscriptWait 133,eas_DeactivateAutoFacing
+                setActscriptWait 134,eas_DeactivateAutoFacing
                 entityActions 129
                  moveUp 1
                 endActions

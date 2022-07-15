@@ -1,18 +1,18 @@
 
 ; ASM FILE data\scripting\entity\eas_battleneutralentities.asm :
 ; 0x4497A..0x449C6 : Entity actscripts for battle entities which are not force members or enemies
-eas_LyingLeft:   ac_setFlip $1
+eas_LyingLeft:   ac_orientLeft
                  ac_updateSprite
-eas_Motionless:  ac_setAnimCounter $0
+eas_Motionless:  ac_motion OFF
 word_44984:      ac_branch
                 dc.w eas_Idle-word_44984
-eas_LyingRight:  ac_setFlip $3
+eas_LyingRight:  ac_orientRight
                  ac_updateSprite
 word_4498E:      ac_branch
                 dc.w (eas_Motionless-word_4498E) & $FFFF
 eas_WhirlsInWater:
-                 ac_inWater $FFFF
-                 ac_setAnimSpeedX2 $FFFF
+                 ac_immersed ON
+                 ac_animSpeedX2 ON
 byte_4499A:      ac_setFacing RIGHT
                  ac_updateSprite
                  ac_wait 10

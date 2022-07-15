@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\scripts.asm :
 ; 0x53176..0x53634 : 
 cs_53176:       setCameraEntity 65535
-                textCursor $2D1
+                textCursor 721
                 newEntity 144,29,9,UP,MAPSPRITE_SOLDIER2
                 newEntity 145,28,9,UP,MAPSPRITE_SOLDIER1
                 newEntity 146,28,10,UP,MAPSPRITE_WORKER
@@ -129,7 +129,7 @@ cs_53176:       setCameraEntity 65535
                 setFacing 138,RIGHT
                 nextSingleText $80,138  ; "Here I am.{W1}"
                 csWait 5
-                setActscript 140,eas_461E4
+                setActscript 140,eas_2xUpDown
                 csWait 120
                 setFacing 140,LEFT
                 nextSingleText $0,140   ; "Did our soldiers leave{N}for the subjugation?{W1}"
@@ -202,9 +202,9 @@ cs_53176:       setCameraEntity 65535
                 nextText $0,140         ; "Why don't you go to Yeel{N}and bring Hawel back here?{W2}"
                 nextText $0,140         ; "I don't think this is a{N}difficult job.{N}Will you go?{W1}"
 cs_53482:       yesNo
-                jumpIfFlagSet $59,cs_534AC ; YES/NO prompt answer
+                jumpIfFlagSet 89,cs_534AC ; YES/NO prompt answer
                 hideText
-                textCursor $2F5
+                textCursor 757
                 setActscriptWait 138,eas_Jump
                 setActscriptWait 138,eas_Jump
                 nextText $80,138        ; "You refuse the King's{N}wish?!{N}Answer again!{W1}"
@@ -213,12 +213,12 @@ cs_534AC:       entityActionsWait 140
                  moveDown 1
                 endActions
                 setFacing 140,LEFT
-                textCursor $2F6
+                textCursor 758
                 nextSingleText $0,140   ; "Thank you.{N}Depart to fetch Hawel{N}immediately.{W1}"
                 followEntity ALLY_SARAH,ALLY_BOWIE,2
                 followEntity ALLY_CHESTER,ALLY_SARAH,2
                 csc_end
-cs_534D2:       textCursor $2B6
+cs_534D2:       textCursor 694
                 nextSingleText $0,ALLY_LEMON ; "Stop, please stop!{N}Don't make me use my{N}sword any more!{W1}"
                 setCamDest 17,6
                 nextText $80,128        ; "Where is King Galam?{N}He went into the tower,{N}Ground Seal, right?{W2}"
@@ -304,7 +304,7 @@ cs_534D2:       textCursor $2B6
                 hide 132
                 hide 133
                 csc_end
-cs_535FA:       textCursor $2B2
+cs_535FA:       textCursor 690
                 nextText $0,129         ; "Oh, it's you, {LEADER}!{W2}"
                 nextSingleText $0,129   ; "King Galam took{N}Princess Elis to the{N}Ancient Tower!{W1}"
                 nextSingleText $0,130   ; "Elis is in the tower.{N}I shall go with you and{N}save my daughter.{W1}"
@@ -312,9 +312,9 @@ cs_535FA:       textCursor $2B2
                 followEntity 130,ALLY_BOWIE,2
                 followEntity 129,130,2
                 csc_end
-cs_53620:       textCursor $2C9
+cs_53620:       textCursor 713
                 nextSingleText $0,128   ; "Strange earthquake....{N}{LEADER}, you must{N}escape!{W1}"
                 csc_end
-cs_5362A:       textCursor $2CA
+cs_5362A:       textCursor 714
                 nextSingleText $0,128   ; "OK, everybody is safe.{W1}"
                 csc_end

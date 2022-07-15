@@ -76,12 +76,12 @@ Conditional command.
 $000D - jumpIfFlagClear - Jump if flag clear
 Same as above
 
-$000E - jumpIfDefeated - Jump if character defeated
+$000E - jumpIfDefeatedByLastAttack - Jump if character defeated by last attack
 2 params : 
 - word : character index
 - long : named target
 
-$000F - jumpIfAlive - Jump if character alive
+$000F - jumpIfDead - Jump if character dead
 Same as above
 
 $0010 - setF - Set flag

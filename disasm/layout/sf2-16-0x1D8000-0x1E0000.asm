@@ -4,6 +4,6 @@
 ; FREE SPACE : 126 bytes.
 
 
-p_IconTiles:    dc.l IconTiles
-IconTiles:      incbin "data/graphics/icons/icons.bin"
+                include "code\common\tech\pointers\s16_iconspointer.asm"    ; Game Section 16 Icons Pointer
+                include "data\graphics\icons\entries.asm"    ; Icons
                 align $1E0000

@@ -12,13 +12,14 @@ ms_map51_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map51_ZoneEvent0:
                 
                  
-                chkFlg  $1D6            ; Set after you approach the pond to rescue Elric at the Harpy Pond
+                chkFlg  470             ; Set after you approach the pond to rescue Elric at the Harpy Pond
                 bne.s   return_5C302
                 script  cs_5C312
-                setFlg  $1D6            ; Set after you approach the pond to rescue Elric at the Harpy Pond
+                setFlg  470             ; Set after you approach the pond to rescue Elric at the Harpy Pond
 return_5C302:
                 
                 rts
@@ -28,10 +29,11 @@ return_5C302:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map51_ZoneEvent4:
                 
                  
-                chkFlg  $1D6            ; Set after you approach the pond to rescue Elric at the Harpy Pond
+                chkFlg  470             ; Set after you approach the pond to rescue Elric at the Harpy Pond
                 bne.s   Map51_DefaultZoneEvent
                 script  cs_5C3AA
 Map51_DefaultZoneEvent:
@@ -40,7 +42,7 @@ Map51_DefaultZoneEvent:
 
     ; End of function Map51_ZoneEvent4
 
-cs_5C312:       textCursor $9FB
+cs_5C312:       textCursor 2555
                 setActscriptWait ALLY_PETER,eas_Init
                 setActscriptWait FOLLOWER_B,eas_Init
                 setPos 128,7,16,UP
@@ -52,7 +54,7 @@ cs_5C312:       textCursor $9FB
                 setActscript FOLLOWER_B,eas_Jump
                 setActscriptWait ALLY_PETER,eas_Jump
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 nextSingleText $0,ALLY_PETER ; "Who said that?{W1}"
                 setCamDest 3,12
@@ -68,10 +70,10 @@ cs_5C312:       textCursor $9FB
                 nextSingleText $C0,128  ; "Did you guys bring the{N}ketchup? No? Oh, well.{W1}"
                 setActscript 129,eas_Jump
                 setActscriptWait 130,eas_Jump
-                setStoryFlag $14        ; Battle 20 unlocked
+                setStoryFlag 20         ; Battle 20 unlocked - BATTLE_HARPIES_POND              
                 warp MAP_HARPY_POOL,0,0,RIGHT
                 csc_end
-cs_5C3AA:       textCursor $A05
+cs_5C3AA:       textCursor 2565
                 nextSingleText $0,ALLY_PETER ; "{LEADER}, we have to{N}save him!{W1}"
                 nod ALLY_BOWIE
                 entityActionsWait ALLY_BOWIE

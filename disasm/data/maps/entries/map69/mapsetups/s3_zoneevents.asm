@@ -9,6 +9,7 @@ ms_map69_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map69_ZoneEvent0:
                 
                 move.w  #$11,d0
@@ -20,12 +21,13 @@ Map69_ZoneEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map69_DefaultZoneEvent:
                 
                  
-                chkFlg  $1FD            ; Battle 9 completed
+                chkFlg  509             ; Battle 9 completed - BATTLE_TO_RIBBLE                    
                 bne.s   return_4FDD0
-                setFlg  $199            ; Battle 9 unlocked
+                setFlg  409             ; Battle 9 unlocked - BATTLE_TO_RIBBLE                 
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_4FDD0:
                 

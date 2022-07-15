@@ -4,10 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map45_InitFunction:
                 
                  
-                chkFlg  $19             ; Shiela joined
+                chkFlg  25              ; Shiela joined
                 beq.s   byte_600AA
                 move.w  #$19,d0
                 jsr     MoveEntityOutOfMap
@@ -21,8 +22,8 @@ return_600B0:
 
     ; End of function ms_map45_InitFunction
 
-cs_600B2:       setActscriptWait ALLY_SHEELA,eas_45F9C
+cs_600B2:       setActscriptWait ALLY_SHEELA,eas_Immersed
                 setSprite ALLY_SHEELA,MAPSPRITE_POSE7
-                setActscriptWait ALLY_SHEELA,eas_Init3
+                setActscriptWait ALLY_SHEELA,eas_InitFixedSprite
                 setFacing ALLY_SHEELA,UP
                 csc_end

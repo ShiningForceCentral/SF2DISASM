@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle36\cs_afterbattle.asm :
 ; 0x4D9A4..0x4DA66 : Cutscene after battle 36
-abcs_battle36:  textCursor $B89
+abcs_battle36:  textCursor 2953
                 loadMapFadeIn MAP_PRISM_FLOWERS_FIELD,6,17
                 loadMapEntities ce_4DA46
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -9,7 +9,7 @@ abcs_battle36:  textCursor $B89
                 setPos ALLY_PETER,10,19,DOWN
                 setActscriptWait FOLLOWER_B,eas_Init
                 setPos FOLLOWER_B,12,19,DOWN
-                jumpIfFlagClear $4C,cs_4D9F0 ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4D9F0 ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,63,62,DOWN
 cs_4D9F0:       animEntityFX 128,6
@@ -17,7 +17,7 @@ cs_4D9F0:       animEntityFX 128,6
                 animEntityFX 128,7
                 setActscriptWait 128,eas_Jump
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 120
                 setFacing 128,DOWN
                 nextText $0,128         ; "Prism Flowers?{W2}"

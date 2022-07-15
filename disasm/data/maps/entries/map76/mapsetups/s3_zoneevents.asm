@@ -6,12 +6,13 @@ ms_map76_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map76_DefaultZoneEvent:
                 
                  
-                chkFlg  $217            ; Battle 35 completed
+                chkFlg  535             ; Battle 35 completed - BATTLE_TO_ROFT                     
                 bne.s   return_50A3A
-                setFlg  $1B3            ; Battle 35 unlocked
+                setFlg  435             ; Battle 35 unlocked - BATTLE_TO_ROFT                   
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_50A3A:
                 
@@ -21,6 +22,7 @@ return_50A3A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 nullsub_50A3C:
                 

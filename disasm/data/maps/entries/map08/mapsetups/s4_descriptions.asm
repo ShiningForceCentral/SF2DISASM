@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map8_AreaDescriptions:
                 
                 move.w  #$546,d3        ; "It reads...{N}NO STRANGERS!{N}-Shopkeeper{W1}"
@@ -33,10 +34,11 @@ byte_561FC:     msDesc 5, 15, 2, 11     ; "{NAME} investigated{N}the sign.{W2}{C
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_DescFunc0:
                 
                  
-                chkFlg  $2C4            ; Set after the scene in Ribble where the mayor confronts Bowie
+                chkFlg  708             ; Set after the scene in Ribble where the mayor confronts Bowie
                 bne.s   loc_56256
                 move.w  #$546,d0        ; It reads...{N}NO STRANGERS!{N}-Shopkeeper{W1}
                 jsr     (DisplayText).w 
@@ -57,10 +59,11 @@ return_5626A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_DescFunc2:
                 
                  
-                chkFlg  $2C4            ; Set after the scene in Ribble where the mayor confronts Bowie
+                chkFlg  708             ; Set after the scene in Ribble where the mayor confronts Bowie
                 bne.s   loc_56284
                 move.w  #$547,d0        ; {LEADER} checks the door.{W2}
                 jsr     (DisplayText).w 
@@ -83,6 +86,7 @@ return_56298:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_DescFunc5:
                 
                 move.w  #$54D,d0        ; Found Keseran's diary.{N}{LEADER} reads it.{W2}
@@ -101,10 +105,11 @@ Map8_DescFunc5:
 
 ; set after you open the tree in Ribble with the wooden plank
 
+
 Map8_DescFunc6:
                 
                  
-                chkFlg  $2DB            ; Set after you open the tree in Ribble with the wooden plank
+                chkFlg  731             ; Set after you open the tree in Ribble with the wooden plank
                 bne.s   loc_562CA
                 move.w  #$54A,d0        ; There's a hollow to put{N}something into!{W1}
                 jmp     (DisplayText).w 

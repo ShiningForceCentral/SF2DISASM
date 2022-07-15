@@ -34,6 +34,7 @@ echo End of assembly, produced %buildname%
 echo -------------------------------------------------------------
 echo Checking build against reference ROM ...
 cd ../build/
+IF EXIST "%buildname%" ..\tools\fixheader "%buildname%"
 IF EXIST "%buildname%" (IF EXIST ../rom/sf2.bin (fc /b "%buildname%" ../rom/sf2.bin) ELSE echo sf2.bin does not exist in build directory) ELSE echo "%buildname%" does not exist, probably due to an assembly error. Check output.log.
 
 

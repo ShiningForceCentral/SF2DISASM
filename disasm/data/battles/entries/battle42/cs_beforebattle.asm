@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle42\cs_beforebattle.asm :
 ; 0x4ED8E..0x4EF04 : Cutscene before battle 42
-bbcs_42:        textCursor $C10
+bbcs_42:        textCursor 3088
                 loadMapFadeIn MAP_ZEON_ARENA,8,29
                 loadMapEntities ce_4EEDC
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -11,13 +11,13 @@ bbcs_42:        textCursor $C10
                 setPos FOLLOWER_B,14,36,UP
                 setActscriptWait ALLY_LEMON,eas_Init
                 setPos ALLY_LEMON,13,36,UP
-                jumpIfFlagClear $4C,cs_4EDE8 ; Zynk is a follower
+                jumpIfFlagClear 76,cs_4EDE8 ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,63,62,DOWN
 cs_4EDE8:       stopEntity 129
                 customActscriptWait 129
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
