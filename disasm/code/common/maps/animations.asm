@@ -60,6 +60,7 @@ VInt_UpdateMapAnimations:
                 ble.s   return_47C4
                 subq.w  #1,((TILE_ANIMATION_COUNTER-$1000000)).w
                 bne.s   return_47C4
+                
                 movea.l d0,a0
                 move.w  (a0)+,d1
                 bge.w   loc_47A2

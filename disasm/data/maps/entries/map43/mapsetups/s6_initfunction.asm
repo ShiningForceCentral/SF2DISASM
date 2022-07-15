@@ -12,7 +12,7 @@ ms_map43_InitFunction:
                 setFlg  612             ; Set after event at Hawel's house
                 setFlg  650             ; Set after event at Hawel's house
                 clrFlg  72              ; Kazin is a follower
-                move.b  #$2B,((EGRESS_MAP_INDEX-$1000000)).w 
+                move.b  #MAP_HAWEL_HOUSE,((EGRESS_MAP-$1000000)).w
 ms_map43_flag612_InitFunction:
                 
                 rts

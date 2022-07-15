@@ -931,12 +931,12 @@ csc1A_setEntitySprite:
                 bsr.w   GetEntityAddressFromCharacter
                 move.w  (a6)+,d0
                 cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
-                bcc.s   loc_46A5E
+                bcc.s   @NotAlly
                 jsr     GetAllyMapSprite
                 move.w  d4,d0
-loc_46A5E:
+@NotAlly:
                 
-                move.b  d0,$13(a5)
+                move.b  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
                 jsr     (WaitForVInt).w
                 bsr.w   UpdateEntitySprite_0
                 rts
@@ -1529,7 +1529,7 @@ csc2C_followEntity:
                 move.b  (a0)+,d3
                 ext.w   d2
                 ext.w   d3
-                jsr     AddFollower
+                jsr     AddFollower     
                 rts
 
     ; End of function csc2C_followEntity
@@ -1559,7 +1559,7 @@ csc2E_hideEntity:
                 
                 move.w  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
-                jsr     HideEntity
+                jsr     HideEntity      
                 rts
 
     ; End of function csc2E_hideEntity
@@ -1748,7 +1748,7 @@ return_46FDA:
 csc54_joinForceAI:
                 
                 move.w  (a6)+,d0
-                jsr     j_GetCharacterWord34
+                jsr     j_GetAiActivationFlag
                 move.w  (a6)+,d2
                 bne.s   loc_46FEE
                 andi.w  #$FFFB,d1
@@ -1759,7 +1759,7 @@ loc_46FEE:
                 jsr     j_JoinForce
 loc_46FF8:
                 
-                jsr     j_SetCharacterWord34
+                jsr     j_SetAiActivationFlag
                 rts
 
     ; End of function csc54_joinForceAI
@@ -1795,7 +1795,7 @@ loc_47020:
                 
                 move.w  #$FFE8,d2
                 move.w  #0,d3
-                jsr     AddFollower
+                jsr     AddFollower     
                 rts
 
     ; End of function csc56_addFollower
@@ -1813,7 +1813,7 @@ csc31_moveEntityAboveEntity:
                 bsr.w   GetEntityAddressFromCharacter
                 moveq   #$FFFFFFE8,d2
                 moveq   #0,d3
-                jsr     AddFollower
+                jsr     AddFollower     
                 rts
 
     ; End of function csc31_moveEntityAboveEntity
@@ -1870,9 +1870,10 @@ AdjustScriptPointerByCharacterAliveStatus:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Return
-                cmpi.b  #COMBATANT_ALLIES_NUMBER,d0 ; HARDCODED force member index limit
-                bge.s   @Return         ; it must be a force member
-                jsr     j_GetCurrentHP
+                cmpi.b  #COMBATANT_ALLIES_NUMBER,d0
+                bge.s   @Return
+                
+                jsr     j_GetCurrentHP  ; it must be a force member
                 tst.w   d1
                 bne.s   @Return
                 adda.w  d7,a6
@@ -1887,13 +1888,15 @@ AdjustScriptPointerByCharacterAliveStatus:
 ; =============== S U B R O U T I N E =======================================
 
 ; Launches DMA
+; 
+;     In: A5 = entity data pointer
 
 
 sub_4709E:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 clr.w   d1
-                move.b  $12(a5),d1
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a5),d1
                 move.w  d1,d0
                 lsl.w   #3,d1
                 add.w   d0,d1

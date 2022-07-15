@@ -21,4 +21,4 @@ AllyStats22:    forClass  VICR
                     52, AURA|LV4, &
                     56, HEAL|LV3, &
                     60, HEAL|LV4
-                    
+                
