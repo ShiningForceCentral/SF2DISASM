@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map03\mapsetups\scripts_2.asm :
 ; 0x628C8..0x6299A : 
-cs_628C8:       textCursor $F4B
+cs_628C8:       textCursor 3915
                 nextText $0,135         ; "I envy you.{N}I'm an old woman now.{W2}"
                 nextSingleText $0,135   ; "Nobody kisses me anymore.{W1}"
                 setDest ALLY_BOWIE,25,28

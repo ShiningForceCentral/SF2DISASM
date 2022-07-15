@@ -9,16 +9,17 @@ ms_map8_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_ZoneEvent0:
                 
                  
-                chkFlg  $2C4            ; Set after the scene in Ribble where the mayor confronts Bowie
+                chkFlg  708             ; Set after the scene in Ribble where the mayor confronts Bowie
                 bne.s   return_561D8
-                chkFlg  $102            ; TEMP FLAG #02
+                chkFlg  258             ; TEMP FLAG #02
                 bne.s   return_561D8
                 script  cs_563B2
-                setFlg  $2BF            ; Set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
-                setFlg  $102            ; TEMP FLAG #02
+                setFlg  703             ; Set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
+                setFlg  258             ; TEMP FLAG #02
 return_561D8:
                 
                 rts
@@ -28,13 +29,14 @@ return_561D8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map8_ZoneEvent2:
                 
                  
-                chkFlg  $2C4            ; Set after the scene in Ribble where the mayor confronts Bowie
+                chkFlg  708             ; Set after the scene in Ribble where the mayor confronts Bowie
                 bne.s   Map8_DefaultZoneEvent
                 script  cs_56422
-                setFlg  $2C4            ; Set after the scene in Ribble where the mayor confronts Bowie
+                setFlg  708             ; Set after the scene in Ribble where the mayor confronts Bowie
 Map8_DefaultZoneEvent:
                 
                 rts

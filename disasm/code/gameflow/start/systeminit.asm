@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SystemInit:
                 
                 bsr.s   InitVdp
@@ -16,6 +17,7 @@ SystemInit:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitVdp:
                 
                 move.w  #$3FFE,d0
@@ -24,6 +26,7 @@ InitVdp:
                 
                 clr.l   (a0)+           ; clear all RAM !
                 dbf     d0,@ClearRam_Loop
+                
                 move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
                 clr.b   ((FADING_SETTING-$1000000)).w
                 lea     vdp_init_params(pc), a0
@@ -43,6 +46,7 @@ InitVdp:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 InitVdpData:
                 

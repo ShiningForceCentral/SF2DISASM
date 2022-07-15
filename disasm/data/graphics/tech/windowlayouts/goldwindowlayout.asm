@@ -3,42 +3,47 @@
 ; 0x1284E..0x1288E : Member screen gold window layout
 GoldWindowLayout:
                 
-                ; 1st line
-                dc.w VDPTILE_WINDOW_CORNER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_CORNER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
+;
+; Notes: PALETTE3 and PRIORITY bits are always set.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-                ; 2nd line
-                dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_UPPERCASE_G|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_UPPERCASE_O|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_UPPERCASE_L|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_UPPERCASE_D|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+; 1st line
+                vdpBaseTile CORNER
+                vdpBaseTile H_BORDER
+                vdpBaseTile H_BORDER
+                vdpBaseTile H_BORDER
+                vdpBaseTile H_BORDER
+                vdpBaseTile H_BORDER
+                vdpBaseTile H_BORDER
+                vdpBaseTile CORNER|MIRROR
                 
-                ; 3rd line
-                dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_ASCII_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_VERTICAL_BORDER|VDPTILE_MIRRORED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+; 2nd line
+                vdpBaseTile V_BORDER
+                vdpBaseTile UPPERCASE_G
+                vdpBaseTile UPPERCASE_O
+                vdpBaseTile UPPERCASE_L
+                vdpBaseTile UPPERCASE_D
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile V_BORDER|MIRROR
                 
-                ; 4th line
-                dc.w VDPTILE_WINDOW_CORNER|VDPTILE_FLIPPED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_FLIPPED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_FLIPPED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_FLIPPED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_FLIPPED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_FLIPPED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_HORIZONTAL_BORDER|VDPTILE_FLIPPED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
-                dc.w VDPTILE_WINDOW_CORNER|VDPTILE_MIRRORED_BIT|VDPTILE_FLIPPED_BIT|VDPTILE_PALETTE3|VDPTILE_PRIORITY_BIT
+; 3rd line
+                vdpBaseTile V_BORDER
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile V_BORDER|MIRROR
+                
+; 4th line
+                vdpBaseTile CORNER|FLIP
+                vdpBaseTile H_BORDER|FLIP
+                vdpBaseTile H_BORDER|FLIP
+                vdpBaseTile H_BORDER|FLIP
+                vdpBaseTile H_BORDER|FLIP
+                vdpBaseTile H_BORDER|FLIP
+                vdpBaseTile H_BORDER|FLIP
+                vdpBaseTile CORNER|MIRROR|FLIP

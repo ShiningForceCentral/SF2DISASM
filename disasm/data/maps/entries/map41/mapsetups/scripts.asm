@@ -10,11 +10,11 @@ cs_5F4B8:       setActscriptWait ALLY_BOWIE,eas_Init
                 csWait 40
                 playSound SFX_BIG_DOOR_RUMBLE
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 5
-                setActscript FOLLOWER_B,eas_461B6
+                setActscript FOLLOWER_B,eas_2xRightLeft
                 playSound SFX_BIG_DOOR_RUMBLE
                 csWait 40
                 playSound SFX_BIG_DOOR_RUMBLE
@@ -47,7 +47,7 @@ cs_5F4B8:       setActscriptWait ALLY_BOWIE,eas_Init
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 csc_end
 cs_5F594:       newEntity ALLY_LEMON,6,15,UP,MAPSPRITE_TAROS
-                textCursor $DB9
+                textCursor 3513
                 nextSingleText $0,ALLY_LEMON ; "Sir Astral!  {LEADER}!{W1}"
                 setDest FOLLOWER_B,6,10
                 setFacing ALLY_BOWIE,DOWN

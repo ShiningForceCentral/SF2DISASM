@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Trap4_CheckFlag:
                 
                 movem.l d1/a0,-(sp)
@@ -19,6 +20,7 @@ Trap4_CheckFlag:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Trap2_SetFlag:
                 
@@ -36,6 +38,7 @@ Trap2_SetFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Trap1_CheckFlag:
                 
                 movem.l d1/a0,-(sp)
@@ -51,6 +54,7 @@ Trap1_CheckFlag:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Trap3_ClearFlag:
                 

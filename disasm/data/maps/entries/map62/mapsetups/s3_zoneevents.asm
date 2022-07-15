@@ -10,15 +10,16 @@ ms_map62_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map62_ZoneEvent0:
                 
                  
-                chkFlg  $2D9            ; ???
+                chkFlg  729             ; ???
                 bne.s   return_5C84A
-                chkFlg  $100            ; TEMP FLAG #00
+                chkFlg  256             ; TEMP FLAG #00
                 bne.s   return_5C84A
                 script  cs_5C876
-                setFlg  $100            ; TEMP FLAG #00
+                setFlg  256             ; TEMP FLAG #00
 return_5C84A:
                 
                 rts
@@ -28,17 +29,18 @@ return_5C84A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map62_ZoneEvent2:
                 
                  
-                chkFlg  $2D9            ; ???
+                chkFlg  729             ; ???
                 bne.s   Map62_DefaultZoneEvent
-                chkFlg  $100            ; TEMP FLAG #00
+                chkFlg  256             ; TEMP FLAG #00
                 beq.s   Map62_DefaultZoneEvent
-                chkFlg  $101            ; TEMP FLAG #01
+                chkFlg  257             ; TEMP FLAG #01
                 bne.s   Map62_DefaultZoneEvent
                 script  cs_5C8FE
-                setFlg  $101            ; TEMP FLAG #01
+                setFlg  257             ; TEMP FLAG #01
 Map62_DefaultZoneEvent:
                 
                 rts
