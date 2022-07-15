@@ -4,7 +4,7 @@
 AllyStats22:    forClass  VICR
                 hpGrowth  30, 81, LINEAR
                 mpGrowth  32, 74, LINEAR
-                atkGrowth 18, 42, LINEAR
+                attGrowth 18, 42, LINEAR
                 defGrowth 18, 59, LATE
                 agiGrowth 22, 58, LINEAR
                 spellList &
@@ -21,4 +21,4 @@ AllyStats22:    forClass  VICR
                     52, AURA|LV4, &
                     56, HEAL|LV3, &
                     60, HEAL|LV4
-                    
+                

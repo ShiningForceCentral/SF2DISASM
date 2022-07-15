@@ -12,11 +12,12 @@ ms_map23_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_EntityEvent0:
                 
                  
-                txt     $69A            ; "Welcome.  Travelers often{N}stop by here to rest.{W2}"
-                txt     $69B            ; "You may stay here as{N}long as you like.{W1}"
+                txt     1690            ; "Welcome.  Travelers often{N}stop by here to rest.{W2}"
+                txt     1691            ; "You may stay here as{N}long as you like.{W1}"
                 rts
 
     ; End of function Map23_EntityEvent0
@@ -24,10 +25,11 @@ Map23_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_EntityEvent1:
                 
                  
-                txt     $69C            ; "They say a fairy lives{N}around here.{N}Do you know her?{W1}"
+                txt     1692            ; "They say a fairy lives{N}around here.{N}Do you know her?{W1}"
                 rts
 
     ; End of function Map23_EntityEvent1
@@ -35,11 +37,12 @@ Map23_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_EntityEvent2:
                 
                  
-                txt     $69D            ; "Fairy?{W2}"
-                txt     $69E            ; "She has not returned{N}from Creed's mansion.{W1}"
+                txt     1693            ; "Fairy?{W2}"
+                txt     1694            ; "She has not returned{N}from Creed's mansion.{W1}"
                 rts
 
     ; End of function Map23_EntityEvent2
@@ -47,11 +50,12 @@ Map23_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_EntityEvent3:
                 
                  
-                txt     $69F            ; "To Creed Mansion?{N}Only the fairy knows how to{N}get there.{W2}"
-                txt     $6A0            ; "But, maybe {NAME;13} knows{N}because he is a friend of{N}the fairy.{W1}"
+                txt     1695            ; "To Creed Mansion?{N}Only the fairy knows how to{N}get there.{W2}"
+                txt     1696            ; "But, maybe {NAME;13} knows{N}because he is a friend of{N}the fairy.{W1}"
                 rts
 
     ; End of function Map23_EntityEvent3
@@ -59,18 +63,19 @@ Map23_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map23_EntityEvent4:
                 
                  
-                chkFlg  $D              ; Elric joined
+                chkFlg  13              ; Elric joined
                 bne.s   byte_59B94      
-                txt     $6A1            ; "{NAME;13} is out.{N}He went to find the fairy{N}to help a sick dwarf.{W2}"
-                txt     $6A2            ; "The forest to the west is{N}very dangerous.{W1}"
+                txt     1697            ; "{NAME;13} is out.{N}He went to find the fairy{N}to help a sick dwarf.{W2}"
+                txt     1698            ; "The forest to the west is{N}very dangerous.{W1}"
                 bra.s   return_59B9C
 byte_59B94:
                 
-                txt     $6A3            ; "A forest elf always returns{N}one's kindness.{W2}"
-                txt     $6A4            ; "{LEADER}, I think{N}{NAME;13} will help you.{W1}"
+                txt     1699            ; "A forest elf always returns{N}one's kindness.{W2}"
+                txt     1700            ; "{LEADER}, I think{N}{NAME;13} will help you.{W1}"
 return_59B9C:
                 
                 rts
@@ -79,6 +84,7 @@ return_59B9C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map23_EntityEvent5:
                 
@@ -89,6 +95,7 @@ Map23_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map23_DefaultEntityEvent:
                 

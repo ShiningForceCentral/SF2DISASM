@@ -4,8 +4,8 @@
 AllyStats29:    forClass  GLM
                 hpGrowth  21, 69, LINEAR
                 mpGrowth  0, 0, NONE
-                atkGrowth 49, 110, LINEAR
+                attGrowth 49, 110, LINEAR
                 defGrowth 35, 112, LINEAR
                 agiGrowth 22, 50, EARLY
                 spellList 
-                    
+                

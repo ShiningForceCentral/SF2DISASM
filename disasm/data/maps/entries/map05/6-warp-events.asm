@@ -3,12 +3,12 @@
 ; 0x99714..0x99746 : 
                 mWarp 11, 4
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   4, 57
                   warpFacing RIGHT
                 mWarp 4, 57
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   11, 4
                   warpFacing DOWN
                 mWarp 255, 43
@@ -23,12 +23,12 @@
                   warpFacing DOWN
                 mWarp 4, 64
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   22, 11
                   warpFacing UP
                 mWarp 22, 11
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   4, 64
                   warpFacing UP
                 endWord

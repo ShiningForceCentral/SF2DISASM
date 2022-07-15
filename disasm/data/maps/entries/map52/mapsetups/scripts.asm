@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map52\mapsetups\scripts.asm :
 ; 0x5C4EE..0x5C638 : 
-cs_5C4EE:       textCursor $575
+cs_5C4EE:       textCursor 1397
                 cameraSpeed $30
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -13,14 +13,14 @@ cs_5C4EE:       textCursor $575
                 nextSingleText $0,ALLY_PETER ; "Who are they?{W1}"
                 setCamDest 16,4
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 nextSingleText $0,ALLY_PETER ; "They're looking for something.{W1}"
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 5
-                setActscript 130,eas_461B6
+                setActscript 130,eas_2xRightLeft
                 entityActionsWait 131
                  moveUp 6
                 endActions
@@ -37,7 +37,7 @@ cs_5C4EE:       textCursor $575
                 nextText $0,128         ; "Could be...{W2}"
                 nextSingleText $0,128   ; "see those volcanic rocks?{W1}"
                 csWait 5
-                setActscript 129,eas_461E4
+                setActscript 129,eas_2xUpDown
                 csWait 60
                 nextText $0,128         ; "Nobody but Volcanon can do{N}that!{W2}"
                 setFacing 129,RIGHT
@@ -62,7 +62,7 @@ cs_5C4EE:       textCursor $575
                 csWait 50
                 setCamDest 16,7
                 setActscriptWait 131,eas_Init
-                setActscriptWait 131,eas_46172
+                setActscriptWait 131,eas_DeactivateAutoFacing
                 entityActionsWait 131
                  moveUp 1
                 endActions
@@ -76,11 +76,11 @@ cs_5C4EE:       textCursor $575
                 setFacing 128,UP
                 setFacing 131,UP
                 nextSingleText $0,128   ; "They shall never return{N}alive!{W1}"
-                setStoryFlag $C         ; Battle 12 unlocked
+                setStoryFlag 12         ; Battle 12 unlocked - BATTLE_MOUNT_VOLCANO             
                 warp MAP_PATH_TO_MOUNT_VOLCANON,0,0,RIGHT
                 csc_end
 cs_5C622:       setPos ALLY_PETER,22,8,RIGHT
-                textCursor $9BD
+                textCursor 2493
                 fadeInB
                 nextText $0,ALLY_PETER  ; "{LEADER}, did you hear{N}that?  He said, he had{N}been waiting for you.{W2}"
                 nextSingleText $0,ALLY_PETER ; "Why do the devils want you?{W1}"

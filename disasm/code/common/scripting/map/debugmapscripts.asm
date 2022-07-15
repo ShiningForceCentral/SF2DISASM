@@ -7,6 +7,7 @@ DebugMapScripts:dc.l dms_01
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DebugMapScript:
                 
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w

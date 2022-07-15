@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map1_AreaDescriptions:
                 
                 move.w  #$1044,d3       ; "A statue of beautiful Mitula.{W1}"
@@ -22,13 +23,14 @@ byte_5E736:     msDesc 11, 3, 9, 0      ; "{NAME} investigated{N}the statue.{W2}
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map1_DescFunc0:
                 
                  
-                chkFlg  $349            ; Set after the Taya join scene has played inside the Mitula Shrine
+                chkFlg  841             ; Set after the Taya join scene has played inside the Mitula Shrine
                 bne.s   return_5E756
                 script  cs_5E772
-                setFlg  $349            ; Set after the Taya join scene has played inside the Mitula Shrine
+                setFlg  841             ; Set after the Taya join scene has played inside the Mitula Shrine
 return_5E756:
                 
                 rts

@@ -1,9 +1,12 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\memberstatswindowlayout.asm :
 ; 0x16A62..0x16EA6 : Member stats window layout
-MemberStatsWindowLayout:
+MemberStatusWindowLayout:
                 
-; Syntax        vdpBaseTile [VDPTILE_]index[|mirror|flip]
+; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
+;
+; Notes: PALETTE3 and PRIORITY bits are always set.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
 ; 1st line
                 vdpBaseTile CORNER

@@ -3,7 +3,10 @@
 ; 0x1607C..0x16204 : Alphabet window layout
 AlphabetWindowLayout:
                 
-; Syntax        vdpBaseTile [VDPTILE_]index[|mirror|flip]
+; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
+;
+; Notes: PALETTE3 and PRIORITY bits are always set.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
 ; 1st line
                 vdpBaseTile CORNER

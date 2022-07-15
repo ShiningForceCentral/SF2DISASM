@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map2_AreaDescriptions:
                 
                 move.w  #$1030,d3       ; "Various weapons!{N}-inquire within{W1}"

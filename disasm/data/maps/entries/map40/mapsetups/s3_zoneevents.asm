@@ -6,6 +6,7 @@ ms_map40_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map40_DefaultZoneEvent:
                 
                 rts

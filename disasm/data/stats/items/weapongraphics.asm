@@ -3,7 +3,9 @@
 ; 0x1F9E2..0x1FA8A : Weapon graphics table
 tbl_WeaponGraphics:
                 
-; Syntax        weaponGraphics [WEAPONSPRITE_]index, [WEAPONPALETTE_]index
+; Syntax        weaponGraphics [WEAPONSPRITE_]enum, [WEAPONPALETTE_]enum
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 weaponGraphics NONE, SHORT_AXE ; 26: Leather Glove
                 weaponGraphics NONE, SHORT_AXE ; 27: Power Glove

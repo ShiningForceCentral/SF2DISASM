@@ -4,29 +4,30 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map43_InitFunction:
                 
                  
                 script  cs_540C0
-                setFlg  $264            ; Set after event at Hawel's house
-                setFlg  $28A            ; Set after event at Hawel's house
-                clrFlg  $48             ; Kazin is a follower
-                move.b  #$2B,((EGRESS_MAP_INDEX-$1000000)).w 
-return_540BE:
+                setFlg  612             ; Set after event at Hawel's house
+                setFlg  650             ; Set after event at Hawel's house
+                clrFlg  72              ; Kazin is a follower
+                move.b  #MAP_HAWEL_HOUSE,((EGRESS_MAP-$1000000)).w
+ms_map43_flag612_InitFunction:
                 
                 rts
 
     ; End of function ms_map43_InitFunction
 
-cs_540C0:       textCursor $32B
+cs_540C0:       textCursor 811
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_KAZIN,eas_Init
                 setPos 128,7,4,DOWN
                 setPos ALLY_BOWIE,6,11,UP
                 setPos ALLY_KAZIN,5,11,UP
                 customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -121,8 +122,8 @@ cs_540C0:       textCursor $32B
                 endActions
                 playSound SFX_BLO
                 customActscriptWait ALLY_KAZIN
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -192,6 +193,6 @@ cs_540C0:       textCursor $32B
                 join 32772
                 nextSingleText $0,ALLY_KAZIN ; "Now, let's go to the{N}Ancient Shrine!{W1}"
                 followEntity ALLY_KAZIN,ALLY_BOWIE,2
-                clearF $48              ; Kazin is a follower
-                setStoryFlag $4         ; Battle 4 unlocked
+                clearF 72               ; Kazin is a follower
+                setStoryFlag 4          ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
                 csc_end

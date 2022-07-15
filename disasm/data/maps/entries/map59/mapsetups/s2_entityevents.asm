@@ -6,6 +6,7 @@ ms_map59_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map59_DefaultEntityEvent:
                 
                 rts

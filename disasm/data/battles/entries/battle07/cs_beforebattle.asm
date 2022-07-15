@@ -1,8 +1,8 @@
 
 ; ASM FILE data\battles\entries\battle07\cs_beforebattle.asm :
 ; 0x49CE2..0x49F7E : Cutscene before battle 7
-bbcs_07:        textCursor $935
-                clearF $53              ; King + Minister are followers
+bbcs_07:        textCursor 2357
+                clearF 83               ; King + Minister are followers
                 loadMapFadeIn MAP_ANCIENT_TOWER_UNDERGROUND_ROOM,8,29
                 loadMapEntities ce_49F36
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -24,7 +24,7 @@ bbcs_07:        textCursor $935
                 csWait 20
                 setActscriptWait 130,eas_Jump
                 csWait 30
-                setActscriptWait 130,eas_46172
+                setActscriptWait 130,eas_DeactivateAutoFacing
                 entityActionsWait 130
                  moveUp 1
                 endActions
@@ -71,8 +71,8 @@ bbcs_07:        textCursor $935
                 setQuake 0
                 setActscript 128,eas_Jump
                 nod 129
-                setActscriptWait 128,eas_46172
-                setActscriptWait 129,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
+                setActscriptWait 129,eas_DeactivateAutoFacing
                 csWait 30
                 entityActions 128
                  moveUp 1
@@ -85,14 +85,14 @@ bbcs_07:        textCursor $935
                 stopEntity 128
                 stopEntity 129
                 customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
                 customActscriptWait 129
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
