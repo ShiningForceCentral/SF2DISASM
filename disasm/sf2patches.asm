@@ -1,6 +1,9 @@
 
 ; 0 = OFF, 1 = ON
 
+; Fixes
+FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE:    equ 1   ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
+
 ; Misc. features
 CAPITALIZED_CHARACTER_NAMES:        equ 0       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
 DISABLE_REGION_LOCK:                equ 1       ; Skip checking system region, omit including related function, and update ROM header.
