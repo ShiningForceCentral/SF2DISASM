@@ -17,5 +17,5 @@ SoundDriver:    incbin "data/sound/sounddriver.bin"
                 includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
                 include "data\graphics\tech\unusedbasepalettes\entries.asm"    ; Unused base palettes
-                include "data\graphics\tech\basetiles\entries.asm"    ; Base tiles
+                include "data\graphics\tech\basetilesentry.asm"    ; Base tiles
                 align $1F0000
