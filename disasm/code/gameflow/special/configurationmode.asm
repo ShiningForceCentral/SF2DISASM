@@ -7,7 +7,7 @@
 
 CheatModeConfiguration:
                 
-                if (EASY_CONFIGURATION_MODE=1)
+                if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
                     nop
                     nop
                     nop
