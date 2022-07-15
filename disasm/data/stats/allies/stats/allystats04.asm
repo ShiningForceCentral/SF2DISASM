@@ -17,7 +17,7 @@ AllyStats04:    forClass  MAGE
                     25, MUDDLE|LV2, &
                     29, DESOUL|LV2, &
                     35, BLAZE|LV4
-                    
+                
                 forClass  WIZ
                 hpGrowth  26, 77, LATE
                 mpGrowth  40, 83, LINEAR
@@ -25,7 +25,7 @@ AllyStats04:    forClass  MAGE
                 defGrowth 18, 57, LINEAR
                 agiGrowth 29, 83, EARLYANDLATE
                 useFirstSpellList
-                    
+                
                 forClass  SORC
                 hpGrowth  26, 77, LATE
                 mpGrowth  40, 90, LINEAR
@@ -41,4 +41,4 @@ AllyStats04:    forClass  MAGE
                     41, ATLAS, &
                     46, NEPTUN|LV2, &
                     52, ATLAS|LV2
-                    
+                

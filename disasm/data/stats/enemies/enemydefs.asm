@@ -58,7 +58,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 1           ; 1: HUGE RAT
                 spellPower REGULAR
                 level    0
@@ -68,7 +68,7 @@ tbl_EnemyDefs:
                 baseDef  8
                 baseAgi  7
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     NOTHING, &
@@ -83,7 +83,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH
                 unknownWord   8224
-                    
+                
                 unknownByte 2           ; 2: GALAM SOLDIER
                 spellPower REGULAR
                 level    2
@@ -93,7 +93,7 @@ tbl_EnemyDefs:
                 baseDef  10
                 baseAgi  8
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     SHORT_AXE|EQUIPPED, &
@@ -108,7 +108,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 3           ; 3: GALAM KNIGHT
                 spellPower REGULAR
                 level    3
@@ -118,7 +118,7 @@ tbl_EnemyDefs:
                 baseDef  11
                 baseAgi  12
                 baseMov  7
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     SHORT_SPEAR|EQUIPPED, &
@@ -133,7 +133,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      CENTAUR
                 unknownWord   8224
-                    
+                
                 unknownByte 4           ; 4: GOBLIN
                 spellPower REGULAR
                 level    6
@@ -143,7 +143,7 @@ tbl_EnemyDefs:
                 baseDef  13
                 baseAgi  13
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     SHORT_AXE|EQUIPPED, &
@@ -158,7 +158,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 5           ; 5: GREEN OOZE
                 spellPower REGULAR
                 level    5
@@ -183,7 +183,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 6           ; 6: DARK DWARF
                 spellPower REGULAR
                 level    7
@@ -193,7 +193,7 @@ tbl_EnemyDefs:
                 baseDef  17
                 baseAgi  18
                 baseMov  4
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     SHORT_AXE|EQUIPPED, &
@@ -208,7 +208,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 7           ; 7: HOBGOBLIN
                 spellPower REGULAR
                 level    9
@@ -218,7 +218,7 @@ tbl_EnemyDefs:
                 baseDef  19
                 baseAgi  19
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     MIDDLE_AXE|EQUIPPED, &
@@ -233,7 +233,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 8           ; 8: ZOMBIE
                 spellPower REGULAR
                 level    11
@@ -258,7 +258,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 9           ; 9: GOLEM
                 spellPower REGULAR
                 level    12
@@ -283,7 +283,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 10          ; 10: KRAKEN LEG
                 spellPower REGULAR
                 level    14
@@ -308,7 +308,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      AQUATIC
                 unknownWord   8224
-                    
+                
                 unknownByte 11          ; 11: SOULSOWER
                 spellPower REGULAR
                 level    16
@@ -333,7 +333,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 12          ; 12: ORC
                 spellPower REGULAR
                 level    17
@@ -343,7 +343,7 @@ tbl_EnemyDefs:
                 baseDef  37
                 baseAgi  27
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN8|DOUBLE_1IN32|COUNTER_1IN16
                 items &
                     STEEL_LANCE|EQUIPPED, &
@@ -358,7 +358,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 13          ; 13: PAWN
                 spellPower ENHANCED
                 level    19
@@ -383,7 +383,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 14          ; 14: KNIGHT
                 spellPower ENHANCED
                 level    20
@@ -408,7 +408,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 15          ; 15: RAT
                 spellPower REGULAR
                 level    22
@@ -418,7 +418,7 @@ tbl_EnemyDefs:
                 baseDef  32
                 baseAgi  30
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN16
                 items &
                     NOTHING, &
@@ -433,7 +433,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH
                 unknownWord   8224
-                    
+                
                 unknownByte 16          ; 16: BUBBLING OOZE
                 spellPower REGULAR
                 level    21
@@ -458,7 +458,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 17          ; 17: SKELETON
                 spellPower ENHANCED
                 level    21
@@ -483,7 +483,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 18          ; 18: DARK SOLDIER
                 spellPower ENHANCED
                 level    23
@@ -493,7 +493,7 @@ tbl_EnemyDefs:
                 baseDef  46
                 baseAgi  34
                 baseMov  4
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN16
                 items &
                     LARGE_AXE|EQUIPPED, &
@@ -508,7 +508,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8192
-                    
+                
                 unknownByte 19          ; 19: LIZARDMAN
                 spellPower ENHANCED
                 level    24
@@ -533,7 +533,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8192
-                    
+                
                 unknownByte 20          ; 20: WORM
                 spellPower ENHANCED
                 level    25
@@ -543,7 +543,7 @@ tbl_EnemyDefs:
                 baseDef  40
                 baseAgi  34
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL_POISON|DOUBLE_1IN32|COUNTER_1IN16
                 items &
                     NOTHING, &
@@ -558,7 +558,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH
                 unknownWord   8192
-                    
+                
                 unknownByte 21          ; 21: DARK KNIGHT
                 spellPower ENHANCED
                 level    27
@@ -568,7 +568,7 @@ tbl_EnemyDefs:
                 baseDef  48
                 baseAgi  40
                 baseMov  7
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN4|DOUBLE_1IN32|COUNTER_1IN16
                 items &
                     CHROME_LANCE|EQUIPPED, &
@@ -583,7 +583,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      CENTAUR
                 unknownWord   8192
-                    
+                
                 unknownByte 22          ; 22: ORC LORD
                 spellPower ENHANCED
                 level    27
@@ -593,7 +593,7 @@ tbl_EnemyDefs:
                 baseDef  44
                 baseAgi  37
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN8|DOUBLE_1IN32|COUNTER_1IN16
                 items &
                     HEAVY_LANCE|EQUIPPED, &
@@ -608,7 +608,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 23          ; 23: DEVIL SOLDIER
                 spellPower ENHANCED
                 level    29
@@ -633,7 +633,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 24          ; 24: CERBERUS
                 spellPower ENHANCED
                 level    30
@@ -658,7 +658,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH
                 unknownWord   8224
-                    
+                
                 unknownByte 25          ; 25: MUD MAN
                 spellPower ENHANCED
                 level    31
@@ -683,7 +683,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 26          ; 26: DRAGONEWT
                 spellPower ENHANCED
                 level    32
@@ -693,7 +693,7 @@ tbl_EnemyDefs:
                 baseDef  42
                 baseAgi  46
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN8|DOUBLE_1IN16|COUNTER_1IN16
                 items &
                     HEAT_AXE|EQUIPPED, &
@@ -708,7 +708,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 27          ; 27: PURPLE WORM
                 spellPower ENHANCED
                 level    32
@@ -718,7 +718,7 @@ tbl_EnemyDefs:
                 baseDef  46
                 baseAgi  43
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL_POISON|DOUBLE_1IN16|COUNTER_1IN16
                 items &
                     NOTHING, &
@@ -733,7 +733,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH
                 unknownWord   8224
-                    
+                
                 unknownByte 28          ; 28: EXECUTIONER
                 spellPower ENHANCED
                 level    33
@@ -758,7 +758,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8192
-                    
+                
                 unknownByte 29          ; 29: HELL HOUND
                 spellPower ENHANCED
                 level    35
@@ -783,7 +783,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH
                 unknownWord   8192
-                    
+                
                 unknownByte 30          ; 30: MINOTAUR
                 spellPower ENHANCED
                 level    35
@@ -793,7 +793,7 @@ tbl_EnemyDefs:
                 baseDef  51
                 baseAgi  44
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN8|DOUBLE_1IN16|COUNTER_1IN16
                 items &
                     ATLAS_AXE|EQUIPPED, &
@@ -808,7 +808,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8192
-                    
+                
                 unknownByte 31          ; 31: CYCLOPS
                 spellPower ENHANCED
                 level    36
@@ -818,7 +818,7 @@ tbl_EnemyDefs:
                 baseDef  51
                 baseAgi  46
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN4|DOUBLE_1IN16|COUNTER_1IN16
                 items &
                     NOTHING, &
@@ -833,7 +833,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8192
-                    
+                
                 unknownByte 32          ; 32: BURST ROCK
                 spellPower ENHANCED
                 level    38
@@ -843,7 +843,7 @@ tbl_EnemyDefs:
                 baseDef  60
                 baseAgi  43
                 baseMov  4
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     NOTHING, &
@@ -858,7 +858,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8224
-                    
+                
                 unknownByte 33          ; 33: HYDRA
                 spellPower ENHANCED
                 level    39
@@ -883,7 +883,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH
                 unknownWord   8224
-                    
+                
                 unknownByte 34          ; 34: CHAOS WARRIOR
                 spellPower ENHANCED
                 level    40
@@ -908,7 +908,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8192
-                    
+                
                 unknownByte 35          ; 35: REAPER
                 spellPower ENHANCED
                 level    41
@@ -933,7 +933,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8192
-                    
+                
                 unknownByte 36          ; 36: EVIL BEAST
                 spellPower ENHANCED
                 level    42
@@ -943,7 +943,7 @@ tbl_EnemyDefs:
                 baseDef  51
                 baseAgi  60
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL_SLEEP|DOUBLE_1IN16|COUNTER_1IN16
                 items &
                     NOTHING, &
@@ -958,7 +958,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8192
-                    
+                
                 unknownByte 37          ; 37: PYROHYDRA
                 spellPower ENHANCED
                 level    44
@@ -983,7 +983,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH
                 unknownWord   8192
-                    
+                
                 unknownByte 38          ; 38: ZEON GUARD
                 spellPower ENHANCED
                 level    45
@@ -1008,7 +1008,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   8192
-                    
+                
                 unknownByte 39          ; 39: GIZMO
                 spellPower REGULAR
                 level    0
@@ -1033,7 +1033,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HOVERING
                 unknownWord   8192
-                    
+                
                 unknownByte 40          ; 40: HUGE BAT
                 spellPower REGULAR
                 level    0
@@ -1058,7 +1058,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8192
-                    
+                
                 unknownByte 41          ; 41: VAMPIRE BAT
                 spellPower REGULAR
                 level    7
@@ -1068,7 +1068,7 @@ tbl_EnemyDefs:
                 baseDef  16
                 baseAgi  16
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL_POISON|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     NOTHING, &
@@ -1083,7 +1083,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8192
-                    
+                
                 unknownByte 42          ; 42: EVIL CLOUD
                 spellPower REGULAR
                 level    10
@@ -1108,7 +1108,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HOVERING
                 unknownWord   8192
-                    
+                
                 unknownByte 43          ; 43: GARGOYLE
                 spellPower REGULAR
                 level    15
@@ -1118,7 +1118,7 @@ tbl_EnemyDefs:
                 baseDef  23
                 baseAgi  21
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     NOTHING, &
@@ -1133,7 +1133,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8240
-                    
+                
                 unknownByte 44          ; 44: HARPY
                 spellPower REGULAR
                 level    17
@@ -1158,7 +1158,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8240
-                    
+                
                 unknownByte 45          ; 45: LESSER DEMON
                 spellPower ENHANCED
                 level    22
@@ -1183,7 +1183,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8240
-                    
+                
                 unknownByte 46          ; 46: WYVERN
                 spellPower ENHANCED
                 level    26
@@ -1208,7 +1208,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8240
-                    
+                
                 unknownByte 47          ; 47: HARPY QUEEN
                 spellPower ENHANCED
                 level    27
@@ -1233,7 +1233,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8208
-                    
+                
                 unknownByte 48          ; 48: PEGASUS KNIGHT
                 spellPower ENHANCED
                 level    30
@@ -1258,7 +1258,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8208
-                    
+                
                 unknownByte 49          ; 49: GRIFFIN
                 spellPower ENHANCED
                 level    32
@@ -1283,7 +1283,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8208
-                    
+                
                 unknownByte 50          ; 50: MIST DEMON
                 spellPower ENHANCED
                 level    36
@@ -1308,7 +1308,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HOVERING
                 unknownWord   8208
-                    
+                
                 unknownByte 51          ; 51: WHITE DRAGON
                 spellPower ENHANCED
                 level    38
@@ -1333,7 +1333,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8208
-                    
+                
                 unknownByte 52          ; 52: DEMON
                 spellPower ENHANCED
                 level    40
@@ -1358,7 +1358,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8208
-                    
+                
                 unknownByte 53          ; 53: CHAOS DRAGON
                 spellPower ENHANCED
                 level    41
@@ -1383,7 +1383,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8208
-                    
+                
                 unknownByte 54          ; 54: DEVIL GRIFFIN
                 spellPower ENHANCED
                 level    42
@@ -1408,7 +1408,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8208
-                    
+                
                 unknownByte 55          ; 55: ARCH DEMON
                 spellPower ENHANCED
                 level    44
@@ -1433,7 +1433,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8208
-                    
+                
                 unknownByte 56          ; 56: GALAM ARCHER
                 spellPower REGULAR
                 level    3
@@ -1443,7 +1443,7 @@ tbl_EnemyDefs:
                 baseDef  10
                 baseAgi  10
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     WOODEN_ARROW|EQUIPPED, &
@@ -1458,7 +1458,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      ARCHER
                 unknownWord   8208
-                    
+                
                 unknownByte 57          ; 57: HUNTER GOBLIN
                 spellPower REGULAR
                 level    7
@@ -1468,7 +1468,7 @@ tbl_EnemyDefs:
                 baseDef  12
                 baseAgi  14
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN16|COUNTER_1IN16
                 items &
                     IRON_ARROW|EQUIPPED, &
@@ -1483,7 +1483,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH_ARCHER
                 unknownWord   8208
-                    
+                
                 unknownByte 58          ; 58: DEATH ARCHER
                 spellPower REGULAR
                 level    10
@@ -1493,7 +1493,7 @@ tbl_EnemyDefs:
                 baseDef  19
                 baseAgi  20
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     IRON_ARROW|EQUIPPED, &
@@ -1508,7 +1508,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      ARCHER
                 unknownWord   8208
-                    
+                
                 unknownByte 59          ; 59: KRAKEN ARM
                 spellPower REGULAR
                 level    16
@@ -1518,7 +1518,7 @@ tbl_EnemyDefs:
                 baseDef  28
                 baseAgi  22
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN8|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     NOTHING, &
@@ -1533,7 +1533,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      AQUATIC
                 unknownWord   8208
-                    
+                
                 unknownByte 60          ; 60: ARROW LAUNCHER
                 spellPower REGULAR
                 level    17
@@ -1558,7 +1558,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      BRASS_GUNNER
                 unknownWord   8208
-                    
+                
                 unknownByte 61          ; 61: ROOK
                 spellPower REGULAR
                 level    19
@@ -1583,7 +1583,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      BRASS_GUNNER
                 unknownWord   8208
-                    
+                
                 unknownByte 62          ; 62: DARK SNIPER
                 spellPower ENHANCED
                 level    24
@@ -1593,7 +1593,7 @@ tbl_EnemyDefs:
                 baseDef  37
                 baseAgi  35
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN16|COUNTER_1IN16
                 items &
                     HYPER_CANNON|EQUIPPED, &
@@ -1608,7 +1608,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH_ARCHER
                 unknownWord   8208
-                    
+                
                 unknownByte 63          ; 63: BOW MASTER
                 spellPower ENHANCED
                 level    30
@@ -1618,7 +1618,7 @@ tbl_EnemyDefs:
                 baseDef  53
                 baseAgi  40
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     ASSAULT_SHELL|EQUIPPED, &
@@ -1633,7 +1633,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      ARCHER
                 unknownWord   8208
-                    
+                
                 unknownByte 64          ; 64: BOW RIDER
                 spellPower ENHANCED
                 level    33
@@ -1643,7 +1643,7 @@ tbl_EnemyDefs:
                 baseDef  55
                 baseAgi  44
                 baseMov  7
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN8|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     HYPER_CANNON|EQUIPPED, &
@@ -1658,7 +1658,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      CENTAUR_ARCHER
                 unknownWord   8208
-                    
+                
                 unknownByte 65          ; 65: DARK GUNNER
                 spellPower ENHANCED
                 level    38
@@ -1683,7 +1683,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      BRASS_GUNNER
                 unknownWord   8208
-                    
+                
                 unknownByte 66          ; 66: HORSEMAN
                 spellPower ENHANCED
                 level    41
@@ -1693,7 +1693,7 @@ tbl_EnemyDefs:
                 baseDef  57
                 baseAgi  55
                 baseMov  7
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN8|DOUBLE_1IN16|COUNTER_1IN32
                 items &
                     BUSTER_SHOT|EQUIPPED, &
@@ -1708,7 +1708,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      CENTAUR_ARCHER
                 unknownWord   8208
-                    
+                
                 unknownByte 67          ; 67: GALAM MAGE
                 spellPower REGULAR
                 level    3
@@ -1733,7 +1733,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8208
-                    
+                
                 unknownByte 68          ; 68: WITCH
                 spellPower REGULAR
                 level    7
@@ -1758,7 +1758,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8208
-                    
+                
                 unknownByte 69          ; 69: MASTER MAGE
                 spellPower REGULAR
                 level    14
@@ -1783,7 +1783,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8208
-                    
+                
                 unknownByte 70          ; 70: DARK MADAM
                 spellPower REGULAR
                 level    17
@@ -1808,7 +1808,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8208
-                    
+                
                 unknownByte 71          ; 71: QUEEN
                 spellPower ENHANCED
                 level    20
@@ -1833,7 +1833,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8208
-                    
+                
                 unknownByte 72          ; 72: WIZARD
                 spellPower ENHANCED
                 level    26
@@ -1858,7 +1858,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8208
-                    
+                
                 unknownByte 73          ; 73: NECROMANCER
                 spellPower ENHANCED
                 level    30
@@ -1883,7 +1883,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8208
-                    
+                
                 unknownByte 74          ; 74: CHAOS WIZARD
                 spellPower ENHANCED
                 level    36
@@ -1893,7 +1893,7 @@ tbl_EnemyDefs:
                 baseDef  48
                 baseAgi  59
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN16
                 items &
                     GREAT_ROD|EQUIPPED, &
@@ -1908,7 +1908,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8208
-                    
+                
                 unknownByte 75          ; 75: DEMON MASTER
                 spellPower ENHANCED
                 level    42
@@ -1933,7 +1933,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8192
-                    
+                
                 unknownByte 76          ; 76: DARK CLERIC
                 spellPower REGULAR
                 level    3
@@ -1943,7 +1943,7 @@ tbl_EnemyDefs:
                 baseDef  11
                 baseAgi  13
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN16
                 items &
                     SHORT_ROD|EQUIPPED, &
@@ -1958,7 +1958,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                
                 unknownByte 77          ; 77: DEATH MONK
                 spellPower REGULAR
                 level    8
@@ -1968,7 +1968,7 @@ tbl_EnemyDefs:
                 baseDef  14
                 baseAgi  18
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN4|DOUBLE_1IN16|COUNTER_1IN16
                 items &
                     NOTHING, &
@@ -1983,7 +1983,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                
                 unknownByte 78          ; 78: BLACK MONK
                 spellPower REGULAR
                 level    14
@@ -1993,7 +1993,7 @@ tbl_EnemyDefs:
                 baseDef  18
                 baseAgi  21
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN4|DOUBLE_1IN16|COUNTER_1IN16
                 items &
                     NOTHING, &
@@ -2008,7 +2008,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                
                 unknownByte 79          ; 79: HIGH PRIEST
                 spellPower REGULAR
                 level    17
@@ -2018,7 +2018,7 @@ tbl_EnemyDefs:
                 baseDef  31
                 baseAgi  23
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     POWER_STICK|EQUIPPED, &
@@ -2033,7 +2033,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                
                 unknownByte 80          ; 80: EVIL BISHOP
                 spellPower ENHANCED
                 level    19
@@ -2043,7 +2043,7 @@ tbl_EnemyDefs:
                 baseDef  37
                 baseAgi  25
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     POWER_STICK|EQUIPPED, &
@@ -2058,7 +2058,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                
                 unknownByte 81          ; 81: DARK BISHOP
                 spellPower ENHANCED
                 level    23
@@ -2068,7 +2068,7 @@ tbl_EnemyDefs:
                 baseDef  38
                 baseAgi  27
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     FLAIL|EQUIPPED, &
@@ -2083,7 +2083,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                
                 unknownByte 0           ; 82: MASTER MONK
                 spellPower ENHANCED
                 level    28
@@ -2093,7 +2093,7 @@ tbl_EnemyDefs:
                 baseDef  45
                 baseAgi  31
                 baseMov  6
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL125_1IN4|DOUBLE_1IN8|COUNTER_1IN16
                 items &
                     BRASS_KNUCKLES|EQUIPPED, &
@@ -2108,7 +2108,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                
                 unknownByte 0           ; 83: SHAMAN
                 spellPower ENHANCED
                 level    32
@@ -2118,7 +2118,7 @@ tbl_EnemyDefs:
                 baseDef  42
                 baseAgi  40
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL_MAGIC_DRAIN|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     WISH_STAFF|EQUIPPED, &
@@ -2133,7 +2133,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                
                 unknownByte 0           ; 84: EVIL BISHOP
                 spellPower ENHANCED
                 level    38
@@ -2143,7 +2143,7 @@ tbl_EnemyDefs:
                 baseDef  48
                 baseAgi  46
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL150_1IN32|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     GREAT_ROD|EQUIPPED, &
@@ -2158,7 +2158,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                
                 unknownByte 0           ; 85: BLUE SHAMAN
                 spellPower ENHANCED
                 level    42
@@ -2168,7 +2168,7 @@ tbl_EnemyDefs:
                 baseDef  54
                 baseAgi  51
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL_SILENCE|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     HOLY_STAFF|EQUIPPED, &
@@ -2183,7 +2183,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                
                 unknownByte 0           ; 86: DARK SMOKE
                 spellPower REGULAR
                 level    7
@@ -2208,7 +2208,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HOVERING
                 unknownWord   0
-                    
+                
                 unknownByte 0           ; 87: KRAKEN HEAD
                 spellPower REGULAR
                 level    18
@@ -2233,7 +2233,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      AQUATIC
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 88: TAROS
                 spellPower REGULAR
                 level    20
@@ -2258,7 +2258,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 89: KING
                 spellPower ENHANCED
                 level    24
@@ -2283,7 +2283,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 90: WILLARD
                 spellPower ENHANCED
                 level    25
@@ -2308,7 +2308,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      STEALTH
                 unknownWord   0
-                    
+                
                 unknownByte 0           ; 91: ZALBARD
                 spellPower ENHANCED
                 level    40
@@ -2333,7 +2333,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 92: CAMEELA
                 spellPower ENHANCED
                 level    50
@@ -2358,7 +2358,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 93: PRISM FLOWER
                 spellPower ENHANCED
                 level    40
@@ -2383,7 +2383,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 94: RED BARON
                 spellPower ENHANCED
                 level    60
@@ -2408,7 +2408,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 95: GESHP
                 spellPower ENHANCED
                 level    70
@@ -2433,7 +2433,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 96: ODD EYE
                 spellPower ENHANCED
                 level    80
@@ -2458,7 +2458,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 97: GALAM
                 spellPower ENHANCED
                 level    99
@@ -2483,7 +2483,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 98: ZEON
                 spellPower ENHANCED
                 level    99
@@ -2508,7 +2508,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      REGULAR
                 unknownWord   4096
-                    
+                
                 unknownByte 0           ; 99: JAR
                 spellPower ENHANCED
                 level    12
@@ -2533,7 +2533,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      FLYING
                 unknownWord   8192
-                    
+                
                 unknownByte 0           ; 100: MASTER MAGE
                 spellPower REGULAR
                 level    14
@@ -2558,7 +2558,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8192
-                    
+                
                 unknownByte 0           ; 101: NECROMANCER
                 spellPower ENHANCED
                 level    30
@@ -2583,7 +2583,7 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      MAGE
                 unknownWord   8192
-                    
+                
                 unknownByte 0           ; 102: BLUE SHAMAN
                 spellPower ENHANCED
                 level    42
@@ -2593,7 +2593,7 @@ tbl_EnemyDefs:
                 baseDef  54
                 baseAgi  51
                 baseMov  5
-                baseResistance NONE
+                baseResistance 0
                 baseProwess    CRITICAL_SILENCE|DOUBLE_1IN32|COUNTER_1IN32
                 items &
                     HOLY_STAFF|EQUIPPED, &
@@ -2608,4 +2608,4 @@ tbl_EnemyDefs:
                 initialStatus NONE
                 moveType      HEALER
                 unknownWord   12288
-                    
+                

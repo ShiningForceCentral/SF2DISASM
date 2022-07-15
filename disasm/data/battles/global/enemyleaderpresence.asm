@@ -1,6 +1,6 @@
 
 ; ASM FILE data\battles\global\enemyleaderpresence.asm :
-; 0x47C8E..0x47CBC : Enemy leader presence table
+; 0x47C8E..0x47CBB : Enemy leader presence table
 tbl_EnemyLeaderPresence:
                 
 ; 0 = no enemy leader
@@ -51,4 +51,3 @@ tbl_EnemyLeaderPresence:
                 dc.b 255                ; 43: Versus Zeon
                 dc.b 255                ; 44: Fairy Woods
                 
-                dc.b 255

@@ -30,7 +30,7 @@ loc_4F4A2:
                 txt     214             ; "Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}"
                 clsTxt
                 movem.w d4,-(sp)
-                bsr.w   DiscardItem
+                bsr.w   DiscardItem     
                 movem.w (sp)+,d1
                 move.w  d0,(TEXT_NAME_INDEX_1).l
                 move.w  d2,(TEXT_NAME_INDEX_2).l
@@ -88,10 +88,13 @@ loc_4F56A:
 
 ; =============== S U B R O U T I N E =======================================
 
-var_10 = -10
-var_6 = -6
-var_4 = -4
-var_2 = -2
+; In: D1 = item slot
+;     D2 = item index
+
+itemTypeFlags = -10
+itemSlot = -6
+itemEntry = -4
+character = -2
 
 DiscardItem:
                 
@@ -110,28 +113,28 @@ loc_4F596:
 loc_4F59C:
                 
                 move.b  #1,(byte_FFB13C).l
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_4F5B6
                 bra.w   loc_4F6CA
 loc_4F5B6:
                 
-                move.w  d0,var_2(a6)
-                move.w  d1,var_6(a6)
-                move.w  d2,var_4(a6)
-                move.w  var_4(a6),d1
+                move.w  d0,character(a6)
+                move.w  d1,itemSlot(a6)
+                move.w  d2,itemEntry(a6)
+                move.w  itemEntry(a6),d1
                 jsr     j_GetItemDefAddress
-                move.l  ITEMDEF_OFFSET_TYPE(a0),var_10(a6)
-                move.b  var_10(a6),d1
+                move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeFlags(a6)
+                move.b  itemTypeFlags(a6),d1
                 andi.b  #$10,d1
                 cmpi.b  #0,d1
                 beq.s   loc_4F5F0
-                move.w  var_4(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
                 txt     37              ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
                 bra.w   loc_4F6CA
 loc_4F5F0:
                 
-                move.w  var_4(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 clsTxt
@@ -140,20 +143,20 @@ loc_4F5F0:
                 bra.s   loc_4F59C
 loc_4F610:
                 
-                move.w  var_4(a6),d1
+                move.w  itemEntry(a6),d1
                 jsr     j_GetEquipmentType
                 cmpi.w  #1,d2
                 bne.s   loc_4F65C
-                move.w  var_2(a6),d0
+                move.w  character(a6),d0
                 jsr     j_GetEquippedWeapon
                 cmpi.w  #$FFFF,d1
                 beq.w   loc_4F69C
-                cmp.w   var_6(a6),d2
+                cmp.w   itemSlot(a6),d2
                 bne.w   loc_4F69C
-                move.w  var_4(a6),d1
+                move.w  itemEntry(a6),d1
                 jsr     j_IsItemCursed
                 bcc.w   loc_4F69C
-                move.w  var_4(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
                 clsTxt
                 bra.w   loc_4F6CA
@@ -161,38 +164,38 @@ loc_4F65C:
                 
                 cmpi.w  #0,d2
                 beq.w   loc_4F69C
-                move.w  var_2(a6),d0
+                move.w  character(a6),d0
                 jsr     j_GetEquippedRing
                 cmpi.w  #$FFFF,d1
                 beq.w   loc_4F69C
-                cmp.w   var_6(a6),d2
+                cmp.w   itemSlot(a6),d2
                 bne.w   loc_4F69C
-                move.w  var_4(a6),d1
+                move.w  itemEntry(a6),d1
                 jsr     j_IsItemCursed
                 bcc.w   loc_4F69C
-                move.w  var_4(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
                 bra.w   loc_4F6CA
 loc_4F69C:
                 
-                move.w  var_2(a6),d0
-                move.w  var_6(a6),d1
+                move.w  character(a6),d0
+                move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  var_4(a6),(TEXT_NAME_INDEX_1).l
-                move.b  var_10(a6),d1
+                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.b  itemTypeFlags(a6),d1
                 andi.b  #8,d1
                 cmpi.b  #0,d1
                 beq.s   loc_4F6CE
-                move.w  var_4(a6),d1
+                move.w  itemEntry(a6),d1
                 jsr     j_AddItemToDeals
 loc_4F6CA:
                 
                 bra.w   loc_4F59C
 loc_4F6CE:
                 
-                move.w  var_2(a6),d0
-                move.w  var_6(a6),d1
-                move.w  var_4(a6),d2
+                move.w  character(a6),d0
+                move.w  itemSlot(a6),d1
+                move.w  itemEntry(a6),d2
                 unlk    a6
                 movem.l (sp)+,d7-a1
                 rts
