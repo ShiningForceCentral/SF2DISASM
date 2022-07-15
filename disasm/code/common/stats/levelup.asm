@@ -108,7 +108,11 @@ LevelUp:
                 bsr.w   GetClass        
                 cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED -- TORT class is being wrongfully treated as promoted here
                                         ;  Should either compare to first promoted class, or change branch condition to "lower than or equal".
-                blt.s   @FindLearnableSpell
+                if (STANDARD_BUILD&FIX_KIWI_SPELLS_LEARNING_LEVEL=1)
+                    ble.s   @FindLearnableSpell
+                else
+                    blt.s   @FindLearnableSpell
+                endif
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5
 @FindLearnableSpell:
                 
@@ -199,7 +203,11 @@ InitAllyStats:
                 bsr.w   GetClass        
                 cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED -- TORT class is being wrongfully treated as promoted here
                                         ;  Should either compare to first promoted class, or change branch condition to "lower than or equal".
-                blt.s   @FindStatsBlockForClass
+                if (STANDARD_BUILD&FIX_KIWI_SPELLS_LEARNING_LEVEL=1)
+                    ble.s   @FindStatsBlockForClass
+                else
+                    blt.s   @FindStatsBlockForClass
+                endif
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5 ; add 20 to effective level if promoted
 @FindStatsBlockForClass:
                 
