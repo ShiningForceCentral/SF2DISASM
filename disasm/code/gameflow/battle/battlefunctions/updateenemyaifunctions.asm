@@ -26,7 +26,7 @@ UpdateAllEnemiesAi:
                 addq.w  #1,d0
                 dbf     d7,@Loop
                 
-                if (BUGFIX_GODDESS_STAFF_DEALS_ABUSE=1)
+                if (STANDARD_BUILD&FIX_GODDESS_STAFF_DEALS_ABUSE=1)
                     rts
                 endif
 
