@@ -819,7 +819,7 @@ EquipNewItemInBattle:
 @Equip:
                 
                 move.w  d4,d1
-                if (BUGFIX_HIGINS_SPELL>=1)
+                if (STANDARD_BUILD&FIX_HIGINS_SPELL=1)
                     cmpi.w  #COMBATANT_ITEMSLOTS,d1
                     bge.s   @Return
                 endif
