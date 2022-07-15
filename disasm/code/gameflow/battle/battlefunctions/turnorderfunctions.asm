@@ -90,7 +90,11 @@ AddCombatantAndRandomizedAGItoTurnOrder:
                 jsr     (GenerateRandomNumber).w
                 subq.w  #1,d7
                 add.w   d7,d1
-                move.b  d0,(a0)+
+                if (STANDARD_BUILD&FIX_SKIPPED_TURNS=1)
+                    bpl.s   @AddTurnData1
+                    moveq   #CHAR_STATCAP_AGI_CURRENT,d1 ; cap randomized AGI
+                endif
+@AddTurnData1:  move.b  d0,(a0)+
                 move.b  d1,(a0)+
                 cmpi.w  #TWO_TURN_THRESHOLD,d3
                 blt.s   @Return
@@ -106,7 +110,11 @@ AddCombatantAndRandomizedAGItoTurnOrder:
                 add.w   d7,d1
                 jsr     (GenerateRandomNumber).w
                 sub.w   d7,d1
-                move.b  d0,(a0)+
+                if (STANDARD_BUILD&FIX_SKIPPED_TURNS=1)
+                    bpl.s   @AddTurnData2
+                    moveq   #CHAR_STATCAP_AGI_CURRENT,d1 ; cap randomized AGI
+                endif
+@AddTurnData2:  move.b  d0,(a0)+
                 move.b  d1,(a0)+
 @Return:
                 

@@ -2,6 +2,7 @@
 ; 0 = OFF, 1 = ON
 
 ; Fixes
+FIX_SKIPPED_TURNS:                      equ 1   ; Fix cases where a character can miss getting a turn due to current AGI being higher than 127.
 FIX_INCREASE_DOUBLE_RESETS_COUNTER:     equ 1   ; Equipment that increases the chance to double attack also erroneously set the chance to counter attack to 1/32.
 FIX_GODDESS_STAFF_DEALS_ABUSE:          equ 1   ; If one of the following items is sitting in the Deals section after a DEF-CON switch is activated: Quick Ring, Protect Ring, White Ring, or Running Ring; a Goddess Staff will also be added to Deals.
 FIX_GARBLED_HP_BAR:                     equ 1   ; Prevent drawing garbage pixels when HP is greater then 600. (Keep drawing black bars instead.)
