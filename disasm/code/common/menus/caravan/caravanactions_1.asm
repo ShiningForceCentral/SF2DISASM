@@ -4,10 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CaravanMenuActions:
                 
                 movem.l d0-a5,-(sp)
-                link    a6,#-$C
+                link    a6,#-12
                 move.w  #2,d1
                 bsr.w   ChooseCaravanPortrait
                 moveq   #0,d1
@@ -18,7 +19,7 @@ loc_21FE8:
 loc_21FEA:
                 
                 moveq   #0,d0
-                moveq   #7,d2
+                moveq   #MENU_CARAVAN,d2
                 lea     (InitStack).w,a0
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
@@ -48,23 +49,24 @@ loc_22014:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_22028:
                 
                 moveq   #2,d1
                 bsr.w   sub_228D8
-                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                tst.w   ((GENERIC_LIST_LENGTH-$1000000)).w
                 beq.w   loc_220F4
                 move.w  #$F,d1
                 bsr.w   ChooseCaravanPortrait
-                jsr     sub_10040
-                move.w  d0,-2(a6)
+                jsr     j_InitMemberListScreen
+                move.w  d0,var_2(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_220E8      
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   loc_22070
-                move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $13             ; "{NAME} is dead.{N}Are you sure?"
+                move.w  var_2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     19              ; "{NAME} is dead.{N}Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.w   loc_220FE
@@ -72,11 +74,11 @@ loc_22070:
                 
                 moveq   #1,d1
                 bsr.w   sub_228D8
-                cmpi.w  #$C,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                cmpi.w  #FORCE_MAX_SIZE,((GENERIC_LIST_LENGTH-$1000000)).w
                 bcc.s   loc_22098
-                move.w  -2(a6),d0
+                move.w  var_2(a6),d0
                 jsr     j_JoinBattleParty
-                move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  #$15,d1
                 bsr.w   ChooseCaravanPortrait
                 bra.s   loc_220E6
@@ -84,16 +86,16 @@ loc_22098:
                 
                 move.w  #$17,d1
                 bsr.w   ChooseCaravanPortrait
-                jsr     sub_10040
+                jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_220DE      
                 tst.w   d0
                 beq.s   loc_220D4
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 jsr     j_LeaveBattleParty
-                move.w  -2(a6),d0
+                move.w  var_2(a6),d0
                 jsr     j_JoinBattleParty
-                move.w  -2(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  var_2(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  #$11,d1
                 bsr.w   ChooseCaravanPortrait
                 bra.s   loc_220DC
@@ -106,14 +108,14 @@ loc_220DC:
                 bra.s   loc_220E6
 byte_220DE:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
 loc_220E6:
                 
                 bra.s   loc_220F2
 byte_220E8:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -139,15 +141,16 @@ loc_220FE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_22102:
                 
                 moveq   #1,d1
                 bsr.w   sub_228D8
-                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                tst.w   ((GENERIC_LIST_LENGTH-$1000000)).w
                 beq.s   return_22150
                 move.w  #$10,d1
                 bsr.w   ChooseCaravanPortrait
-                jsr     sub_10040
+                jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_22144      
                 tst.w   d0
@@ -166,7 +169,7 @@ loc_22142:
                 bra.s   loc_2214E
 byte_22144:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -190,6 +193,7 @@ loc_22152:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CaravanDepotActions:
                 
                 moveq   #0,d1
@@ -200,7 +204,7 @@ loc_2215A:
 loc_2215C:
                 
                 moveq   #0,d0
-                moveq   #8,d2
+                moveq   #MENU_DEPOT,d2
                 lea     (InitStack).w,a0
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
@@ -209,40 +213,36 @@ loc_2215C:
                 move.w  rjt_CaravanItemActions(pc,d0.w),d0
                 jsr     rjt_CaravanItemActions(pc,d0.w)
                 bra.s   loc_2215A
-
-    ; End of function CaravanDepotActions
-
 rjt_CaravanItemActions:
+                
                 dc.w Caravan_DescribeItem-rjt_CaravanItemActions
                 dc.w Caravan_StoreItem-rjt_CaravanItemActions
                 dc.w Caravan_PassItem-rjt_CaravanItemActions
                 dc.w Caravan_DiscardItem-rjt_CaravanItemActions
-
-; START OF FUNCTION CHUNK FOR CaravanDepotActions
-
 return_22186:
                 
                 rts
 
-; END OF FUNCTION CHUNK FOR CaravanDepotActions
+    ; End of function CaravanDepotActions
 
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Caravan_DescribeItem:
                 
                 bsr.w   CopyCaravanItems
-                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                tst.w   ((GENERIC_LIST_LENGTH-$1000000)).w
                 beq.w   loc_222EC       
                 move.w  #MESSAGE_CARAVAN_APPRAISE_WHICH_ITEM,d1 ; "Appraise which item?{W2}"
                 bsr.w   ChooseCaravanPortrait
-                jsr     sub_1004C
+                jsr     j_CreateShopInventoryScreen
                 move.w  d0,d2
-                move.w  d1,-6(a6)
-                move.w  d2,-4(a6)
+                move.w  d1,var_6(a6)
+                move.w  d2,var_4(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_222E0      
-                chkFlg  $46             ; Astral is a follower
+                chkFlg  70              ; Astral is a follower
                 bne.s   loc_221BE
                 moveq   #PORTRAIT_ROHDE,d0
                 bra.s   loc_221C0
@@ -253,38 +253,38 @@ loc_221C0:
                 
                 moveq   #0,d1
                 jsr     j_InitPortraitWindow
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 bsr.w   DisplaySpecialCaravanDescription
                 bne.w   loc_222A8
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     j_GetEquipmentType
                 tst.w   d2
                 bne.s   loc_221E8
-                txt     $5C             ; "It's a tool.{W2}"
+                txt     92              ; "It's a tool.{W2}"
                 bra.s   loc_221F8
 loc_221E8:
                 
                 cmpi.w  #1,d2
                 bne.s   byte_221F4      
-                txt     $5A             ; "It's a weapon.{W2}"
+                txt     90              ; "It's a weapon.{W2}"
                 bra.s   loc_221F8
 byte_221F4:
                 
-                txt     $5B             ; "It's a ring.{W2}"
+                txt     91              ; "It's a ring.{W2}"
 loc_221F8:
                 
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     j_GetItemDefAddress
                 cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
                 beq.s   byte_22210      
-                txt     $5D             ; "It has a special effect when{N}used in battle.{W2}"
+                txt     93              ; "It has a special effect when{N}used in battle.{W2}"
                 bra.s   loc_22214
 byte_22210:
                 
-                txt     $5E             ; "It has no effect in battle.{W2}"
+                txt     94              ; "It has no effect in battle.{W2}"
 loc_22214:
                 
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     j_GetEquipmentType
                 tst.w   d2
                 beq.w   loc_222A8
@@ -296,14 +296,14 @@ loc_22214:
                 beq.w   byte_222A4      
                 cmpi.w  #ITEM_RUNNING_RING,d1
                 beq.w   byte_222A4      
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $60             ; "The {ITEM} is for{N}"
+                txt     96              ; "The {ITEM} is for{N}"
                 jsr     j_UpdateForce
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
                 bcs.w   loc_222A8
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
+                lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d6
 loc_22266:
                 
@@ -311,39 +311,39 @@ loc_22266:
                 jsr     j_IsWeaponOrRingEquippable
                 bcc.s   loc_2228E
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
-                txt     $62             ; "{DICT}{NAME},"
+                txt     98              ; "{DICT}{NAME},"
                 addq.w  #1,d6
                 cmpi.w  #1,d6
                 bne.s   loc_22284
-                txt     $63             ; "{N}"
+                txt     99              ; "{N}"
 loc_22284:
                 
                 cmpi.w  #4,d6
                 bne.s   loc_2228E
-                txt     $63             ; "{N}"
+                txt     99              ; "{N}"
 loc_2228E:
                 
                 dbf     d7,loc_22266
                 tst.w   d6
                 bne.s   byte_2229C      
-                txt     $61             ; "nobody so far.{W2}"
+                txt     97              ; "nobody so far.{W2}"
                 bra.s   loc_222A0
 byte_2229C:
                 
-                txt     $64             ; "to equip.{W2}"
+                txt     100             ; "to equip.{W2}"
 loc_222A0:
                 
                 bra.w   loc_222A8
 byte_222A4:
                 
-                txt     $5F             ; "Everybody can equip it.{W2}"
+                txt     95              ; "Everybody can equip it.{W2}"
 loc_222A8:
                 
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   loc_222C0
-                txt     $66             ; "You can't sell it at a shop.{W2}"
+                txt     102             ; "You can't sell it at a shop.{W2}"
                 bra.s   byte_222D4
 loc_222C0:
                 
@@ -352,7 +352,7 @@ loc_222C0:
                 mulu.w  #ITEMSELLPRICE_MULTIPLIER,d1
                 lsr.l   #ITEMSELLPRICE_BITSHIFTRIGHT,d1
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $65             ; "It brings {#} gold coins{N}at a shop.{W2}"
+                txt     101             ; "It brings {#} gold coins{N}at a shop.{W2}"
 byte_222D4:
                 
                 clsTxt
@@ -360,7 +360,7 @@ byte_222D4:
                 bra.s   loc_222EA
 byte_222E0:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -387,10 +387,11 @@ loc_222F6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Caravan_StoreItem:
                 
                 bsr.w   CopyCaravanItems
-                cmpi.w  #CARAVAN_MAX_ITEMS_NUMBER,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                cmpi.w  #CARAVAN_MAX_ITEMS_NUMBER,((GENERIC_LIST_LENGTH-$1000000)).w
                 bcc.s   loc_22376       
                 moveq   #0,d1
                 bsr.w   sub_228D8
@@ -398,27 +399,27 @@ Caravan_StoreItem:
                 bsr.w   ChooseCaravanPortrait
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
-                move.w  d0,-2(a6)
-                move.w  d1,-6(a6)
-                move.w  d2,-4(a6)
+                jsr     j_BuildMemberListScreen_NewATTandDEF
+                move.w  d0,var_2(a6)
+                move.w  d1,var_6(a6)
+                move.w  d2,var_4(a6)
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_2236A      
-                bsr.w   sub_2294C       
+                bsr.w   IsItemInSlotEquippedAndCursed
                 bcs.w   loc_22380
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     j_AddItemToCaravan
-                move.w  -6(a6),d1
+                move.w  var_6(a6),d1
                 jsr     j_DropItemBySlot
-                move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  var_2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_ITEM_IS_NOW_IN_THE_STOREHOUSE,d1 
                                                         ; "{NAME}'s {ITEM}{N}is now in the storehouse.{W2}"
                 bsr.w   ChooseCaravanPortrait
                 bra.s   loc_22374
 byte_2236A:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 loc_22374:
@@ -444,65 +445,66 @@ loc_22380:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Caravan_PassItem:
                 
                 bsr.w   CopyCaravanItems
-                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                tst.w   ((GENERIC_LIST_LENGTH-$1000000)).w
                 beq.w   loc_2248A       
                 move.w  #MESSAGE_CARAVAN_CHOOSE_WHICH_ITEM,d1 ; "Choose which item?{W2}"
                 bsr.w   ChooseCaravanPortrait
-                jsr     sub_1004C
+                jsr     j_CreateShopInventoryScreen
                 move.w  d0,d2
-                move.w  d1,-6(a6)
-                move.w  d2,-4(a6)
+                move.w  d1,var_6(a6)
+                move.w  d2,var_4(a6)
                 cmpi.w  #$FFFF,d2
                 beq.w   byte_2247E      
                 moveq   #0,d1
                 bsr.w   sub_228D8
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_PASS_THE_ITEM_TO_WHOM,d1 ; "Pass the {ITEM}{N}to whom?{W2}"
                 bsr.w   ChooseCaravanPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
-                move.w  -4(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
-                move.w  d0,-8(a6)
-                move.w  d1,-$C(a6)
-                move.w  d2,-$A(a6)
+                move.w  var_4(a6),((SELECTED_ITEM_INDEX-$1000000)).w
+                jsr     j_BuildMemberListScreen_NewATTandDEF
+                move.w  d0,var_8(a6)
+                move.w  d1,var_12(a6)
+                move.w  d2,var_10(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_2247C
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 cmpi.w  #4,d2
                 beq.s   loc_22422
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     j_AddItem
-                move.w  -6(a6),d1
+                move.w  var_6(a6),d1
                 jsr     j_RemoveItemFromCaravan
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  var_8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_CHARACTER_NOW_HAS_THE_ITEM,d1 
                                                         ; "{NAME} now has the{N}{ITEM}.{W2}"
                 bsr.w   ChooseCaravanPortrait
                 bra.s   loc_2247C
 loc_22422:
                 
-                move.w  -8(a6),d1
-                move.w  -$C(a6),d1
-                bsr.w   sub_2294C       
+                move.w  var_8(a6),d1
+                move.w  var_12(a6),d1
+                bsr.w   IsItemInSlotEquippedAndCursed
                 bcs.w   loc_22494
-                move.w  -8(a6),d0
-                move.w  -$C(a6),d1
+                move.w  var_8(a6),d0
+                move.w  var_12(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  -6(a6),d1
+                move.w  var_6(a6),d1
                 jsr     j_RemoveItemFromCaravan
-                move.w  -8(a6),d0
-                move.w  -4(a6),d1
+                move.w  var_8(a6),d0
+                move.w  var_4(a6),d1
                 jsr     j_AddItem
-                move.w  -$A(a6),d1
+                move.w  var_10(a6),d1
                 jsr     j_AddItemToCaravan
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  -$A(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  var_10(a6),((TEXT_NAME_INDEX_3-$1000000)).w
                 move.w  #MESSAGE_ITEMMENU_ITEM_IS_EXCHANGED_FOR,d1 ; "{ITEM} is exchanged{N}for {NAME}'s {ITEM}.{W2}"
                 bsr.w   ChooseCaravanPortrait
 loc_2247C:
@@ -510,7 +512,7 @@ loc_2247C:
                 bra.s   loc_22488
 byte_2247E:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -537,49 +539,50 @@ loc_22494:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Caravan_DiscardItem:
                 
                 bsr.w   CopyCaravanItems
-                tst.w   ((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                tst.w   ((GENERIC_LIST_LENGTH-$1000000)).w
                 beq.w   loc_2252A       
                 move.w  #MESSAGE_CARAVAN_DISCARD_WHICH_ITEM,d1 ; "Discard which item?{W2}"
                 bsr.w   ChooseCaravanPortrait
-                jsr     sub_1004C
+                jsr     j_CreateShopInventoryScreen
                 move.w  d0,d2
-                move.w  d1,-6(a6)
-                move.w  d2,-4(a6)
-                move.w  -4(a6),d1
+                move.w  d1,var_6(a6)
+                move.w  d2,var_4(a6)
+                move.w  var_4(a6),d1
                 jsr     sub_2299E
                 bcs.w   loc_22534
-                cmpi.w  #$FFFF,-4(a6)
+                cmpi.w  #$FFFF,var_4(a6)
                 beq.s   byte_2251E      
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $2C             ; "The {ITEM} will be{N}discarded.  Are you sure?"
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.s   byte_22518      
-                move.w  -6(a6),d1
+                move.w  var_6(a6),d1
                 jsr     j_RemoveItemFromCaravan
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   loc_22508
                 jsr     j_AddItemToDeals
 loc_22508:
                 
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  #MESSAGE_ITEMMENU_DISCARDED_THE_ITEM,d1 ; "Discarded the {ITEM}.{W2}"
                 bsr.w   ChooseCaravanPortrait
                 bra.s   loc_2251C
 byte_22518:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
 loc_2251C:
                 
                 bra.s   loc_22528
 byte_2251E:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -606,6 +609,7 @@ loc_22534:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CaravanItemMenuActions:
                 
                 moveq   #0,d1
@@ -616,7 +620,7 @@ loc_2253E:
 loc_22540:
                 
                 moveq   #0,d0
-                moveq   #3,d2
+                moveq   #MENU_ITEM,d2
                 lea     (InitStack).w,a0
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
@@ -625,25 +629,21 @@ loc_22540:
                 move.w  rjt_CaravanItemMenuActions(pc,d0.w),d0
                 jsr     rjt_CaravanItemMenuActions(pc,d0.w)
                 bra.s   loc_2253E
-
-    ; End of function CaravanItemMenuActions
-
 rjt_CaravanItemMenuActions:
+                
                 dc.w sub_2256C-rjt_CaravanItemMenuActions
                 dc.w sub_22610-rjt_CaravanItemMenuActions
                 dc.w sub_22776-rjt_CaravanItemMenuActions
                 dc.w sub_227B0-rjt_CaravanItemMenuActions
-
-; START OF FUNCTION CHUNK FOR CaravanItemMenuActions
-
 return_2256A:
                 
                 rts
 
-; END OF FUNCTION CHUNK FOR CaravanItemMenuActions
+    ; End of function CaravanItemMenuActions
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_2256C:
                 
@@ -655,38 +655,38 @@ loc_22574:
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
-                move.w  d0,-2(a6)
-                move.w  d1,-6(a6)
-                move.w  d2,-4(a6)
+                jsr     j_BuildMemberListScreen_NewATTandDEF
+                move.w  d0,var_2(a6)
+                move.w  d1,var_6(a6)
+                move.w  d2,var_4(a6)
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_225FA      
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     FindUsableOutsideBattleItem
                 tst.w   d2
                 bne.s   loc_225EA
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  #$19,d1
                 bsr.w   ChooseCaravanPortrait
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10040
+                jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_225E4      
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 bsr.w   UseFieldItem    
-                move.w  -2(a6),d0
-                move.w  -6(a6),d1
+                move.w  var_2(a6),d0
+                move.w  var_6(a6),d1
                 jsr     j_RemoveItemBySlot
                 bra.s   loc_225E8
 byte_225E4:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
 loc_225E8:
                 
                 bra.s   loc_225F8
 loc_225EA:
                 
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  #$1A,d1
                 bsr.w   ChooseCaravanPortrait
 loc_225F8:
@@ -694,7 +694,7 @@ loc_225F8:
                 bra.s   loc_22604
 byte_225FA:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -714,6 +714,7 @@ loc_22604:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_22610:
                 
                 move.w  #$1C,d1
@@ -724,75 +725,75 @@ loc_22618:
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
-                move.w  d0,-2(a6)
-                move.w  d1,-6(a6)
-                move.w  d2,-4(a6)
+                jsr     j_BuildMemberListScreen_NewATTandDEF
+                move.w  d0,var_2(a6)
+                move.w  d1,var_6(a6)
+                move.w  d2,var_4(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_22760      
-                bsr.w   sub_2294C       
+                bsr.w   IsItemInSlotEquippedAndCursed
                 bcs.w   loc_2276A
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  #$1D,d1
                 bsr.w   ChooseCaravanPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
-                move.w  -4(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
-                move.w  d0,-8(a6)
-                move.w  d1,-$C(a6)
-                move.w  d2,-$A(a6)
+                move.w  var_4(a6),((SELECTED_ITEM_INDEX-$1000000)).w
+                jsr     j_BuildMemberListScreen_NewATTandDEF
+                move.w  d0,var_8(a6)
+                move.w  d1,var_12(a6)
+                move.w  d2,var_10(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_2275A      
-                cmp.w   -2(a6),d0
+                cmp.w   var_2(a6),d0
                 bne.s   loc_226B6
-                move.w  -2(a6),d0
-                move.w  -6(a6),d1
+                move.w  var_2(a6),d0
+                move.w  var_6(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     j_AddItem
-                move.w  -2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  var_2(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  #$30,d1 
                 bsr.w   ChooseCaravanPortrait
                 bra.w   loc_22758
 loc_226B6:
                 
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 cmpi.w  #4,d2
                 beq.s   loc_226F6
-                move.w  -8(a6),d0
-                move.w  -4(a6),d1
+                move.w  var_8(a6),d0
+                move.w  var_4(a6),d1
                 jsr     j_AddItem
-                move.w  -2(a6),d0
-                move.w  -6(a6),d1
+                move.w  var_2(a6),d0
+                move.w  var_6(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  #$28,d1 
                 bsr.w   ChooseCaravanPortrait
                 bra.s   loc_22758
 loc_226F6:
                 
-                move.w  -8(a6),d1
-                move.w  -$C(a6),d1
-                bsr.w   sub_2294C       
+                move.w  var_8(a6),d1
+                move.w  var_12(a6),d1
+                bsr.w   IsItemInSlotEquippedAndCursed
                 bcs.w   loc_2276A
-                move.w  -8(a6),d0
-                move.w  -$C(a6),d1
+                move.w  var_8(a6),d0
+                move.w  var_12(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  -2(a6),d0
-                move.w  -6(a6),d1
+                move.w  var_2(a6),d0
+                move.w  var_6(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  -8(a6),d0
-                move.w  -4(a6),d1
+                move.w  var_8(a6),d0
+                move.w  var_4(a6),d1
                 jsr     j_AddItem
-                move.w  -2(a6),d0
-                move.w  -$A(a6),d1
+                move.w  var_2(a6),d0
+                move.w  var_10(a6),d1
                 jsr     j_AddItem
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  -$A(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  var_10(a6),((TEXT_NAME_INDEX_3-$1000000)).w
                 move.w  #$29,d1 
                 bsr.w   ChooseCaravanPortrait
 loc_22758:
@@ -800,13 +801,13 @@ loc_22758:
                 bra.s   loc_2275E
 byte_2275A:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
 loc_2275E:
                 
                 bra.s   loc_2276A
 byte_22760:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -826,6 +827,7 @@ loc_2276A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_22776:
                 
                 move.w  #$21,d1 
@@ -836,10 +838,10 @@ loc_2277E:
                 bsr.w   sub_228D8
                 move.b  #3,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_227A6
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -859,6 +861,7 @@ loc_227A6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_227B0:
                 
                 move.w  #$24,d1 
@@ -869,46 +872,46 @@ loc_227B8:
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
-                move.w  d0,-2(a6)
-                move.w  d1,-6(a6)
-                move.w  d2,-4(a6)
-                cmpi.w  #$FFFF,-2(a6)
+                jsr     j_BuildMemberListScreen_NewATTandDEF
+                move.w  d0,var_2(a6)
+                move.w  d1,var_6(a6)
+                move.w  d2,var_4(a6)
+                cmpi.w  #$FFFF,var_2(a6)
                 beq.s   byte_2284E      
-                bsr.w   sub_2294C       
+                bsr.w   IsItemInSlotEquippedAndCursed
                 bcs.w   loc_22858
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     sub_2299E
                 bcs.w   loc_22858
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $2C             ; "The {ITEM} will be{N}discarded.  Are you sure?"
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.s   byte_22844      
-                move.w  -2(a6),d0
-                move.w  -6(a6),d1
+                move.w  var_2(a6),d0
+                move.w  var_6(a6),d1
                 jsr     j_DropItemBySlot
-                move.w  -4(a6),d1
+                move.w  var_4(a6),d1
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   loc_22834
                 jsr     j_AddItemToDeals
 loc_22834:
                 
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  var_4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  #$2A,d1 
                 bsr.w   ChooseCaravanPortrait
                 bra.s   loc_2284C
 byte_22844:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
 loc_2284C:
                 
                 bra.s   loc_22858
 byte_2284E:
                 
-                txt     $4              ; "Did you change your mind?{W2}"
+                txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
 
@@ -929,6 +932,7 @@ loc_22858:
 ; =============== S U B R O U T I N E =======================================
 
 ; only used for chirrup sandals
+
 
 DisplaySpecialCaravanDescription:
                 

@@ -214,8 +214,8 @@
 00D5={NAME} received the{N}{ITEM}.
 00D6=Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}
 00D7={NAME} discarded{N}the {ITEM} and{N}picked up the {ITEM}.
-00d8={CLEAR}Hee, hee, hee...{N}You're finally here, {N}Romhacker {COLOR;7}Wiz{COLOR;1} !{W2}
-00d9={COLOR;7}SFC{COLOR;1}'s new {COLOR;7}SF2 Text Manager{COLOR;1}{N}with unlocked <{COLOR;17}color{COLOR;1}> symbol !{N}{COLOR;0}0{COLOR;1}1{COLOR;2}2{COLOR;3}3{COLOR;4}4{COLOR;5}5{COLOR;6}6{COLOR;7}7{COLOR;8}8{COLOR;9}9{COLOR;10}10{COLOR;11}11{COLOR;12}12{COLOR;13}13{COLOR;14}14{COLOR;15}15{COLOR;16}16{COLOR;17}17{W2}
+00D8={CLEAR}Hee, hee, hee...{N}You're finally here!{W2}
+00D9=Ah, you look so confused.{N}You don't know why you're{N}here?{W2}
 00DA=Yes, yes...I used a spell{N}on you.{W2}
 00DB=Ha, ha.  Where are you{N}going?  You can't escape{W2}
 00DC=from this mystery forest{N}unless you help me.{W2}

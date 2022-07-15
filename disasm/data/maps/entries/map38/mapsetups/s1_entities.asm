@@ -16,5 +16,5 @@ ms_map38_Entities:
                 msFixedEntity 22, 27, LEFT, MAPSPRITE_PRIEST, eas_Init
                 msFixedEntity 31, 14, DOWN, MAPSPRITE_SAILOR, eas_Init
                 msFixedEntity 35, 4, LEFT, MAPSPRITE_SAILOR, eas_Init
-                msFixedEntity 13, 3, DOWN, MAPSPRITE_MAN1, eas_Init3
+                msFixedEntity 13, 3, DOWN, MAPSPRITE_MAN1, eas_InitFixedSprite
                 msEntitiesEnd

@@ -1,18 +1,18 @@
 
 ; ASM FILE data\battles\entries\battle08\cs_beforebattle.asm :
 ; 0x4A952..0x4AA74 : Cutscene before battle 8
-bbcs_08:        textCursor $99D
+bbcs_08:        textCursor 2461
                 loadMapFadeIn MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,1,46
                 loadMapEntities ce_4AA14
                 setActscriptWait ALLY_BOWIE,eas_Init
                 stopEntity 129
                 customActscriptWait 129
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                jumpIfFlagSet $6,cs_4A994 ; Kiwi joined
+                jumpIfFlagSet 6,cs_4A994 ; Kiwi joined
                 setPos ALLY_KIWI,63,63,DOWN
 cs_4A994:       playSound MUSIC_MAIN_THEME
                 fadeInB

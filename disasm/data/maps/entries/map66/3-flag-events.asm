@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map66\3-flag-events.asm :
 ; 0xBBD68..0xBBD7A : 
-                fbcFlag 508             ; Battle 8 completed
+                fbcFlag 508             ; Battle 8 completed - BATTLE_NORTH_CLIFF                  
                   fbcSource 0, 49
                   fbcSize   10, 15
                   fbcDest   28, 23

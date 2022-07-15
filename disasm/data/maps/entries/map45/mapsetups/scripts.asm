@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map45\mapsetups\scripts.asm :
 ; 0x600CE..0x603AE : 
-cs_600CE:       textCursor $823
+cs_600CE:       textCursor 2083
                 setActscriptWait FOLLOWER_B,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
                 setActscriptWait ALLY_ZYNK,eas_Init
@@ -18,8 +18,8 @@ cs_600CE:       textCursor $823
                  moveDown 1
                 endActions
                 nextSingleText $80,FOLLOWER_B ; "She's too beautiful for you!{N}Back, back!{W1}"
-                setActscriptWait ALLY_BOWIE,eas_46172
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_BOWIE
                  ac_setSpeed 4,4        ;   
                  ac_jump eas_Idle       ;   
@@ -130,7 +130,7 @@ cs_600CE:       textCursor $823
                 setPos 134,6,8,UP
                 setCameraEntity ALLY_SHEELA
                 nextSingleText $0,ALLY_SHEELA ; "Close your eyes!{W1}"
-                setActscriptWait ALLY_SHEELA,eas_46172
+                setActscriptWait ALLY_SHEELA,eas_DeactivateAutoFacing
                 setFacing ALLY_SHEELA,LEFT
                 entityActionsWait ALLY_SHEELA
                  moveUp 2

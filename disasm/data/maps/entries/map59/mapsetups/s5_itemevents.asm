@@ -6,6 +6,7 @@ ms_map59_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map59_DefaultItemEvent0:
                 
                 rts

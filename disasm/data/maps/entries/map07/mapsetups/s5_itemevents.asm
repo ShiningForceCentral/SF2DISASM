@@ -6,6 +6,7 @@ ms_map7_Section5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map7_DefaultItemEvent0:
                 
                 rts

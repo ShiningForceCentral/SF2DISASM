@@ -11,5 +11,5 @@ ms_map1_Entities:
                 msFixedEntity 41, 15, UP, MAPSPRITE_BLANK, eas_Init
                 msFixedEntity 39, 13, RIGHT, MAPSPRITE_BLANK, eas_Init
                 msFixedEntity 39, 10, RIGHT, MAPSPRITE_BLANK, eas_Init
-                msFixedEntity 44, 26, DOWN, MAPSPRITE_OBJECT4, eas_Init3
+                msFixedEntity 44, 26, DOWN, MAPSPRITE_OBJECT4, eas_InitFixedSprite
                 msEntitiesEnd

@@ -7,9 +7,10 @@
 ; In: D0 = character index
 ; 
 ; Out: D1 = portrait index
-;      D2 = speech sound index
+;      D2 = speech sfx index
 
-GetEntityPortaitAndSpeechSound:
+
+GetEntityPortaitAndSpeechSfx:
                 
                 movem.l d0/a0/a5,-(sp)
                 andi.w  #COMBATANT_MASK_ALL,d0
@@ -26,7 +27,7 @@ GetEntityPortaitAndSpeechSound:
                 ; Found map sprite, so return portrait and speech sfx indexes -> D1, D2
                 move.b  SPRITEDIALOGDEF_OFFSET_PORTRAIT(a0),d1
                 ext.w   d1
-                move.b  SPRITEDIALOGDEF_OFFSET_SPEECHSOUND(a0),d2
+                move.b  SPRITEDIALOGDEF_OFFSET_SPEECHSFX(a0),d2
                 bra.w   @Done
 @NotFound:
                 
@@ -34,7 +35,7 @@ GetEntityPortaitAndSpeechSound:
                 cmpi.w  #CODE_TERMINATOR_WORD,(a0)
                 bne.s   @FindMapSprite_Loop ; keep searching as long as we haven't reached end of table
                 
-                ; Otherwise, return default portrait and sound
+                ; Otherwise, return default portrait and sfx
                 move.w  #PORTRAIT_DEFAULT,d1
                 move.w  #SFX_DIALOG_BLEEP_6,d2
 @Done:
@@ -42,5 +43,5 @@ GetEntityPortaitAndSpeechSound:
                 movem.l (sp)+,d0/a0/a5
                 rts
 
-    ; End of function GetEntityPortaitAndSpeechSound
+    ; End of function GetEntityPortaitAndSpeechSfx
 

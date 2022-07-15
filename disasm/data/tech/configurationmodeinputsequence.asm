@@ -1,6 +1,6 @@
 
 ; ASM FILE data\tech\configurationmodeinputsequence.asm :
-; 0x28FBC..0x28FCC : Configuration mode input sequence
+; 0x28FBC..0x28FCB : Configuration mode input sequence
 tbl_ConfigurationModeInputSequence:
                 
 ; Syntax        input [INPUT_]bitfield
@@ -21,4 +21,3 @@ tbl_ConfigurationModeInputSequence:
                 input B
                 
                 tableEnd.b
-                wordAlign

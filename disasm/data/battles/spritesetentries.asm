@@ -1,139 +1,139 @@
 
 ; ASM FILE data\battles\spritesetentries.asm :
-; 0x1B30EE..0x1B6DB0 : Battle sprite sets
-pt_BattleSpriteSets:
-                dc.l BattleSpriteSet00  ; battle entity data
-                dc.l BattleSpriteSet01
-                dc.l BattleSpriteSet02
-                dc.l BattleSpriteSet03
-                dc.l BattleSpriteSet04
-                dc.l BattleSpriteSet05
-                dc.l BattleSpriteSet06
-                dc.l BattleSpriteSet07
-                dc.l BattleSpriteSet08
-                dc.l BattleSpriteSet09
-                dc.l BattleSpriteSet10
-                dc.l BattleSpriteSet11
-                dc.l BattleSpriteSet12
-                dc.l BattleSpriteSet13
-                dc.l BattleSpriteSet14
-                dc.l BattleSpriteSet15
-                dc.l BattleSpriteSet16
-                dc.l BattleSpriteSet17
-                dc.l BattleSpriteSet18
-                dc.l BattleSpriteSet19
-                dc.l BattleSpriteSet20
-                dc.l BattleSpriteSet21
-                dc.l BattleSpriteSet22
-                dc.l BattleSpriteSet23
-                dc.l BattleSpriteSet24
-                dc.l BattleSpriteSet25
-                dc.l BattleSpriteSet26
-                dc.l BattleSpriteSet27
-                dc.l BattleSpriteSet28
-                dc.l BattleSpriteSet29
-                dc.l BattleSpriteSet30
-                dc.l BattleSpriteSet31
-                dc.l BattleSpriteSet32
-                dc.l BattleSpriteSet33
-                dc.l BattleSpriteSet34
-                dc.l BattleSpriteSet35
-                dc.l BattleSpriteSet36
-                dc.l BattleSpriteSet37
-                dc.l BattleSpriteSet38
-                dc.l BattleSpriteSet39
-                dc.l BattleSpriteSet40
-                dc.l BattleSpriteSet41
-                dc.l BattleSpriteSet42
-                dc.l BattleSpriteSet43
-                dc.l BattleSpriteSet44
-BattleSpriteSet00:
+; 0x1B30EE..0x1B6DB0 : Battle spritesets
+pt_BattleSpritesets:
+                dc.l BattleSpriteset00  ; battle entity data
+                dc.l BattleSpriteset01
+                dc.l BattleSpriteset02
+                dc.l BattleSpriteset03
+                dc.l BattleSpriteset04
+                dc.l BattleSpriteset05
+                dc.l BattleSpriteset06
+                dc.l BattleSpriteset07
+                dc.l BattleSpriteset08
+                dc.l BattleSpriteset09
+                dc.l BattleSpriteset10
+                dc.l BattleSpriteset11
+                dc.l BattleSpriteset12
+                dc.l BattleSpriteset13
+                dc.l BattleSpriteset14
+                dc.l BattleSpriteset15
+                dc.l BattleSpriteset16
+                dc.l BattleSpriteset17
+                dc.l BattleSpriteset18
+                dc.l BattleSpriteset19
+                dc.l BattleSpriteset20
+                dc.l BattleSpriteset21
+                dc.l BattleSpriteset22
+                dc.l BattleSpriteset23
+                dc.l BattleSpriteset24
+                dc.l BattleSpriteset25
+                dc.l BattleSpriteset26
+                dc.l BattleSpriteset27
+                dc.l BattleSpriteset28
+                dc.l BattleSpriteset29
+                dc.l BattleSpriteset30
+                dc.l BattleSpriteset31
+                dc.l BattleSpriteset32
+                dc.l BattleSpriteset33
+                dc.l BattleSpriteset34
+                dc.l BattleSpriteset35
+                dc.l BattleSpriteset36
+                dc.l BattleSpriteset37
+                dc.l BattleSpriteset38
+                dc.l BattleSpriteset39
+                dc.l BattleSpriteset40
+                dc.l BattleSpriteset41
+                dc.l BattleSpriteset42
+                dc.l BattleSpriteset43
+                dc.l BattleSpriteset44
+BattleSpriteset00:
                 incbin "data/battles/entries/battle00/spriteset.bin"
-BattleSpriteSet01:
+BattleSpriteset01:
                 incbin "data/battles/entries/battle01/spriteset.bin"
-BattleSpriteSet02:
+BattleSpriteset02:
                 incbin "data/battles/entries/battle02/spriteset.bin"
-BattleSpriteSet03:
+BattleSpriteset03:
                 incbin "data/battles/entries/battle03/spriteset.bin"
-BattleSpriteSet04:
+BattleSpriteset04:
                 incbin "data/battles/entries/battle04/spriteset.bin"
-BattleSpriteSet05:
+BattleSpriteset05:
                 incbin "data/battles/entries/battle05/spriteset.bin"
-BattleSpriteSet06:
+BattleSpriteset06:
                 incbin "data/battles/entries/battle06/spriteset.bin"
-BattleSpriteSet07:
+BattleSpriteset07:
                 incbin "data/battles/entries/battle07/spriteset.bin"
-BattleSpriteSet08:
+BattleSpriteset08:
                 incbin "data/battles/entries/battle08/spriteset.bin"
-BattleSpriteSet09:
+BattleSpriteset09:
                 incbin "data/battles/entries/battle09/spriteset.bin"
-BattleSpriteSet10:
+BattleSpriteset10:
                 incbin "data/battles/entries/battle10/spriteset.bin"
-BattleSpriteSet11:
+BattleSpriteset11:
                 incbin "data/battles/entries/battle11/spriteset.bin"
-BattleSpriteSet12:
+BattleSpriteset12:
                 incbin "data/battles/entries/battle12/spriteset.bin"
-BattleSpriteSet13:
+BattleSpriteset13:
                 incbin "data/battles/entries/battle13/spriteset.bin"
-BattleSpriteSet14:
+BattleSpriteset14:
                 incbin "data/battles/entries/battle14/spriteset.bin"
-BattleSpriteSet15:
+BattleSpriteset15:
                 incbin "data/battles/entries/battle15/spriteset.bin"
-BattleSpriteSet16:
+BattleSpriteset16:
                 incbin "data/battles/entries/battle16/spriteset.bin"
-BattleSpriteSet17:
+BattleSpriteset17:
                 incbin "data/battles/entries/battle17/spriteset.bin"
-BattleSpriteSet18:
+BattleSpriteset18:
                 incbin "data/battles/entries/battle18/spriteset.bin"
-BattleSpriteSet19:
+BattleSpriteset19:
                 incbin "data/battles/entries/battle19/spriteset.bin"
-BattleSpriteSet20:
+BattleSpriteset20:
                 incbin "data/battles/entries/battle20/spriteset.bin"
-BattleSpriteSet21:
+BattleSpriteset21:
                 incbin "data/battles/entries/battle21/spriteset.bin"
-BattleSpriteSet22:
+BattleSpriteset22:
                 incbin "data/battles/entries/battle22/spriteset.bin"
-BattleSpriteSet23:
+BattleSpriteset23:
                 incbin "data/battles/entries/battle23/spriteset.bin"
-BattleSpriteSet24:
+BattleSpriteset24:
                 incbin "data/battles/entries/battle24/spriteset.bin"
-BattleSpriteSet25:
+BattleSpriteset25:
                 incbin "data/battles/entries/battle25/spriteset.bin"
-BattleSpriteSet26:
+BattleSpriteset26:
                 incbin "data/battles/entries/battle26/spriteset.bin"
-BattleSpriteSet27:
+BattleSpriteset27:
                 incbin "data/battles/entries/battle27/spriteset.bin"
-BattleSpriteSet28:
+BattleSpriteset28:
                 incbin "data/battles/entries/battle28/spriteset.bin"
-BattleSpriteSet29:
+BattleSpriteset29:
                 incbin "data/battles/entries/battle29/spriteset.bin"
-BattleSpriteSet30:
+BattleSpriteset30:
                 incbin "data/battles/entries/battle30/spriteset.bin"
-BattleSpriteSet31:
+BattleSpriteset31:
                 incbin "data/battles/entries/battle31/spriteset.bin"
-BattleSpriteSet32:
+BattleSpriteset32:
                 incbin "data/battles/entries/battle32/spriteset.bin"
-BattleSpriteSet33:
+BattleSpriteset33:
                 incbin "data/battles/entries/battle33/spriteset.bin"
-BattleSpriteSet34:
+BattleSpriteset34:
                 incbin "data/battles/entries/battle34/spriteset.bin"
-BattleSpriteSet35:
+BattleSpriteset35:
                 incbin "data/battles/entries/battle35/spriteset.bin"
-BattleSpriteSet36:
+BattleSpriteset36:
                 incbin "data/battles/entries/battle36/spriteset.bin"
-BattleSpriteSet37:
+BattleSpriteset37:
                 incbin "data/battles/entries/battle37/spriteset.bin"
-BattleSpriteSet38:
+BattleSpriteset38:
                 incbin "data/battles/entries/battle38/spriteset.bin"
-BattleSpriteSet39:
+BattleSpriteset39:
                 incbin "data/battles/entries/battle39/spriteset.bin"
-BattleSpriteSet40:
+BattleSpriteset40:
                 incbin "data/battles/entries/battle40/spriteset.bin"
-BattleSpriteSet41:
+BattleSpriteset41:
                 incbin "data/battles/entries/battle41/spriteset.bin"
-BattleSpriteSet42:
+BattleSpriteset42:
                 incbin "data/battles/entries/battle42/spriteset.bin"
-BattleSpriteSet43:
+BattleSpriteset43:
                 incbin "data/battles/entries/battle43/spriteset.bin"
-BattleSpriteSet44:
+BattleSpriteset44:
                 incbin "data/battles/entries/battle44/spriteset.bin"

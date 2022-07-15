@@ -5,8 +5,8 @@ tbl_CriticalHitSettings:
                 
 ; Syntax        dc.b chance, modifier
 ;               
-;       chance to inflict critical hit = 1/chance
-;       additional damage = damage/2^modifier
+; Notes: Chance to inflict critical hit = 1/chance
+;        Additional damage = damage/2^modifier
                 
                 dc.b 32, 1              ; 1/32 chance to inflict +50% damage
                 dc.b 32, 2              ; 1/32 chance to inflict +25% damage

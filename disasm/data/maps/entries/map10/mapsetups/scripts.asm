@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map10\mapsetups\scripts.asm :
 ; 0x570B0..0x579CA : 
-cs_570B0:       textCursor $650
+cs_570B0:       textCursor 1616
                 reloadMap 6,19
                 setPos ALLY_BOWIE,11,25,UP
                 setPos ALLY_PETER,11,26,UP
@@ -53,7 +53,7 @@ cs_570B0:       textCursor $650
                 endActions
                 csWait 30
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 entityActionsWait ALLY_PETER
                  moveRight 2
@@ -111,8 +111,8 @@ cs_570B0:       textCursor $650
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 150,eas_46172
-                setActscriptWait 151,eas_46172
+                setActscriptWait 150,eas_DeactivateAutoFacing
+                setActscriptWait 151,eas_DeactivateAutoFacing
                 entityActions 150
                  moveUp 1
                 endActions
@@ -190,8 +190,8 @@ cs_570B0:       textCursor $650
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 150,eas_46172
-                setActscriptWait 151,eas_46172
+                setActscriptWait 150,eas_DeactivateAutoFacing
+                setActscriptWait 151,eas_DeactivateAutoFacing
                 entityActions 150
                  moveUp 1
                 endActions
@@ -222,7 +222,7 @@ cs_570B0:       textCursor $650
                 setPos 150,34,51,UP
                 setPos 151,35,51,UP
                 csc_end
-cs_573EC:       textCursor $669
+cs_573EC:       textCursor 1641
                 setCamDest 31,47
                 nextText $0,148         ; "Yes, the greater devil was{N}very strong.{W1}"
                 nextSingleText $0,148   ; "But, God Volcanon swept{N}away all the devils.{W1}"
@@ -284,7 +284,7 @@ cs_573EC:       textCursor $669
                  faceDown 1
                 endActions
                 csc_end
-cs_574A6:       textCursor $673
+cs_574A6:       textCursor 1651
                 setCamDest 34,47
                 entityActionsWait ALLY_LUKE
                  moveDown 1
@@ -412,7 +412,7 @@ cs_574A6:       textCursor $673
                 nextSingleText $0,ALLY_PETER ; "OK.{N}Anyway, let's go.{W1}"
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 csc_end
-cs_5766C:       textCursor $690
+cs_5766C:       textCursor 1680
                 setCameraEntity 153
                 nextText $0,153         ; "I had a dream last night.{N}I flew!{W2}"
                 nextSingleText $0,153   ; "Watch!  I can fly!{W1}"
@@ -423,7 +423,7 @@ cs_5766C:       textCursor $690
                  jumpRight 1
                 endActions
                 setSprite 153,MAPSPRITE_CHICK_FLYING
-                setActscriptWait 153,eas_46172
+                setActscriptWait 153,eas_DeactivateAutoFacing
                 customActscriptWait 153
                  ac_setSpeed 4,4        ;   
                  ac_jump eas_Idle       ;   
@@ -459,7 +459,7 @@ cs_5766C:       textCursor $690
                  jumpRight 1
                 endActions
                 setSprite 153,MAPSPRITE_CHICK_FLYING
-                setActscriptWait 153,eas_46172
+                setActscriptWait 153,eas_DeactivateAutoFacing
                 entityActionsWait 153
                  moveDown 1
                 endActions
@@ -478,11 +478,11 @@ cs_5766C:       textCursor $690
                 entityActionsWait 153
                  moveDown 8
                 endActions
-                setActscript 153,eas_464E2
+                setActscript 153,eas_CounterClockwiseMoveUpRight
                 startEntity 153
                 csWait 12
                 cameraSpeed $20
-                setActscriptWait 153,eas_Init2
+                setActscriptWait 153,eas_InitSlow
                 entityActionsWait 153
                  moveUp 2
                  moveRight 1
@@ -494,7 +494,7 @@ cs_5766C:       textCursor $690
                 setFacing ALLY_PETER,RIGHT
                 nextSingleText $0,153   ; "See.  I told you!{N}I can fly...sort of.{W1}"
                 csc_end
-cs_5779C:       textCursor $696
+cs_5779C:       textCursor 1686
                 setPos 153,6,10,DOWN
                 setFacing 152,UP
                 setCamDest 1,5
@@ -507,7 +507,7 @@ cs_5779C:       textCursor $696
                 endActions
                 setFacing ALLY_BOWIE,UP
                 setActscriptWait 153,eas_46198
-                setActscriptWait 153,eas_46172
+                setActscriptWait 153,eas_DeactivateAutoFacing
                 playSound SFX_JUMP
                 entityActionsWait 153
                  moveUp 2
@@ -541,7 +541,7 @@ cs_5779C:       textCursor $696
                 nextSingleText $0,152   ; "Oh my, {NAME;20}!{W1}"
                 setPriority ALLY_BOWIE,$0
                 setPriority 153,$FFFF
-                setActscriptWait 153,eas_46172
+                setActscriptWait 153,eas_DeactivateAutoFacing
                 customActscriptWait 153
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -566,8 +566,8 @@ cs_5779C:       textCursor $696
                 setQuake 3
                 setFacing ALLY_BOWIE,UP
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -612,7 +612,7 @@ cs_5779C:       textCursor $696
                 setPriority ALLY_BOWIE,$FFFF
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 csc_end
-cs_5797A:       textCursor $647
+cs_5797A:       textCursor 1607
                 faceEntity ALLY_PETER,147
                 nextText $0,147         ; "You're a man of honor!{N}Why don't you go see Creed?{W2}"
                 nextText $0,147         ; "He's an ex-greater devil.{N}He may give you some{N}information.{W2}"
