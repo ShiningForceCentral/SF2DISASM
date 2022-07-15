@@ -90,8 +90,7 @@ AddCombatantAndRandomizedAGItoTurnOrder:
                 jsr     (GenerateRandomNumber).w
                 subq.w  #1,d7
                 add.w   d7,d1
-                if (BUGFIX_SKIPPED_TURNS=1)
-                    tst.b   d1
+                if (STANDARD_BUILD&FIX_SKIPPED_TURNS=1)
                     bpl.s   @AddTurnData1
                     moveq   #CHAR_STATCAP_AGI_CURRENT,d1 ; cap randomized AGI
                 endif
@@ -111,8 +110,7 @@ AddCombatantAndRandomizedAGItoTurnOrder:
                 add.w   d7,d1
                 jsr     (GenerateRandomNumber).w
                 sub.w   d7,d1
-                if (BUGFIX_SKIPPED_TURNS=1)
-                    tst.b   d1
+                if (STANDARD_BUILD&FIX_SKIPPED_TURNS=1)
                     bpl.s   @AddTurnData2
                     moveq   #CHAR_STATCAP_AGI_CURRENT,d1 ; cap randomized AGI
                 endif

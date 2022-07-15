@@ -1,1 +1,4 @@
-BUGFIX_SKIPPED_TURNS: equ 0             ; 0 = OFF, 1 = ON. Fixes cases where a combatant can miss a turn because of AGI getting higher than 127.
+
+; 0 = OFF, 1 = ON
+
+FIX_SKIPPED_TURNS: equ 0             ; Fix cases where a character can miss getting a turn due to current AGI being higher than 127.
