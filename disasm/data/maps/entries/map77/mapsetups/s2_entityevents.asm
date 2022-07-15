@@ -6,6 +6,7 @@ ms_map77_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map77_DefaultEntityEvent:
                 
                 rts

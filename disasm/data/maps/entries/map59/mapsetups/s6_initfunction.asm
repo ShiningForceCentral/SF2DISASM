@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map59_InitFunction:
                 
                  
@@ -15,15 +16,15 @@ ms_map59_InitFunction:
                 script  cs_5EDB8
                 script  cs_5EF60
                 setFlg  999             ; Set after the Nazca ship shootdown scene
-                move.b  #$2D,((EGRESS_MAP_INDEX-$1000000)).w 
-                setFlg  436             ; Battle 36 unlocked
-                setFlg  440             ; Battle 40 unlocked
-                setFlg  442             ; Battle 42 unlocked
-                setFlg  443             ; Battle 43 unlocked
+                move.b  #MAP_DOJO,((EGRESS_MAP-$1000000)).w
+                setFlg  436             ; Battle 36 unlocked - BATTLE_VERSUS_PRISM_FLOWERS      
+                setFlg  440             ; Battle 40 unlocked - BATTLE_VERSUS_ODD_EYE            
+                setFlg  442             ; Battle 42 unlocked - BATTLE_VERSUS_GALAM              
+                setFlg  443             ; Battle 43 unlocked - BATTLE_VERSUS_ZEON               
                 rts
 byte_5EB18:
                 
-                chkFlg  443             ; Battle 43 unlocked
+                chkFlg  443             ; Battle 43 unlocked - BATTLE_VERSUS_ZEON               
                 beq.s   return_5EB24
                 script  cs_5EB26
 return_5EB24:
@@ -37,6 +38,7 @@ cs_5EB26:       executeSubroutine csub_5EB34
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csub_5EB34:
                 
@@ -421,9 +423,10 @@ cs_5EF60:       textCursor 3739
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csub_5F14C:
                 
-                lea     plt_5F17E(pc), a0
+                lea     plt_NazcaShip(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   
@@ -437,12 +440,13 @@ csub_5F14C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_5F16C:
                 
                 moveq   #$17,d7
 loc_5F16E:
                 
-                subq.b  #1,((byte_FFAEEE+5-$1000000)).w
+                subq.b  #1,((ENTITY_SPECIAL_SPRITE_LAYER-$1000000)).w
                 moveq   #2,d0
                 jsr     (Sleep).w       
                 dbf     d7,loc_5F16E
@@ -450,7 +454,7 @@ loc_5F16E:
 
     ; End of function sub_5F16C
 
-plt_5F17E:      dc.w 0
+plt_NazcaShip:  dc.w 0
                 dc.w $C40
                 dc.w $E84
                 dc.w $26
@@ -523,19 +527,21 @@ ce_5F28E:       mainEntity 0,0,UP
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_5F31E:
                 
                 move.b  #$F0,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
                 nop
 csub_5F326:
                 
-                move.b  #$18,((byte_FFAEEE+5-$1000000)).w
+                move.b  #$18,((ENTITY_SPECIAL_SPRITE_LAYER-$1000000)).w
                 rts
 
     ; End of function sub_5F31E
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5F32E:
                 
@@ -547,6 +553,7 @@ sub_5F32E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_5F338:
                 

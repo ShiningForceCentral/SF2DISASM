@@ -14,6 +14,7 @@ ms_map14_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map14_EntityEvent0:
                 
                  
@@ -27,6 +28,7 @@ Map14_DefaultEntityEvent:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map14_EntityEvent1:
                 
                  
@@ -37,6 +39,7 @@ Map14_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map14_EntityEvent2:
                 
@@ -49,6 +52,7 @@ Map14_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map14_EntityEvent3:
                 
                  
@@ -59,6 +63,7 @@ Map14_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map14_EntityEvent4:
                 
@@ -71,6 +76,7 @@ Map14_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map14_EntityEvent5:
                 
                  
@@ -82,6 +88,7 @@ Map14_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map14_EntityEvent6:
                 
                  
@@ -92,6 +99,7 @@ Map14_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map14_EntityEvent7:
                 

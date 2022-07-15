@@ -68,9 +68,10 @@ abcs_battle32:  textCursor 2853
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csub_4CEE4:
                 
-                moveq   #$17,d0
+                moveq   #ALLY_JARO,d0
                 jmp     j_LeaveBattleParty
 
     ; End of function csub_4CEE4

@@ -14,6 +14,7 @@ ms_map39_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map39_EntityEvent0:
                 
                  
@@ -31,6 +32,7 @@ return_5E070:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map39_EntityEvent1:
                 
                  
@@ -42,6 +44,7 @@ Map39_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map39_EntityEvent2:
                 
                  
@@ -52,6 +55,7 @@ Map39_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map39_EntityEvent3:
                 
@@ -65,6 +69,7 @@ Map39_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map39_EntityEvent4:
                 
                  
@@ -75,6 +80,7 @@ Map39_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map39_EntityEvent5:
                 
@@ -87,6 +93,7 @@ Map39_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map39_EntityEvent6:
                 
                  
@@ -97,6 +104,7 @@ Map39_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map39_EntityEvent7:
                 
@@ -117,6 +125,7 @@ return_5E0AE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map39_DefaultEntityEvent:
                 

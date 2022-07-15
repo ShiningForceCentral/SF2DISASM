@@ -6,12 +6,13 @@
 
 ; cutscene before the battle begins
 
-j_ExecuteBattleCutscene_Intro_0:
+
+ExecuteBattleCutscene_Intro:
                 
                 movem.l d1,-(sp)
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
-                addi.w  #$1C2,d1
+                addi.w  #450,d1
                 jsr     j_CheckFlag
                 bne.w   loc_47AE8
                 movem.l d0/a0,-(sp)

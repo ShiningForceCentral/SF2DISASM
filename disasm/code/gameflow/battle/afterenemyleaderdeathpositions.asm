@@ -1,10 +1,12 @@
 
 ; ASM FILE code\gameflow\battle\afterenemyleaderdeathpositions.asm :
-; 0x47D9E..0x47E82 : After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
+; 0x47D9E..0x47E6C : After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
 
 ; =============== S U B R O U T I N E =======================================
 
-; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
+; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies.
+; Only used in battle 5.
+
 
 ApplyPositionsAfterEnemyLeaderDies:
                 
@@ -17,7 +19,7 @@ ApplyPositionsAfterEnemyLeaderDies:
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.w   loc_47E66
-                lea     AfterBattlePositions(pc), a0 ; if Bowie alive and enemy leader dead
+                lea     tbl_AfterBattlePositions(pc), a0 ; if Bowie alive and enemy leader dead
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 loc_47DCA:
@@ -28,12 +30,12 @@ loc_47DCA:
                 beq.w   loc_47DEE       ; entry first word is battle index
                 adda.w  #6,a0
                 bra.s   loc_47DCA
-                move.w  #$80FF,(DEAD_COMBATANTS_LIST).l ; dead code ?
+                move.w  #$80FF,(DEAD_COMBATANTS_LIST).l ; unreachable code
                 move.w  #1,(DEAD_COMBATANTS_LIST_LENGTH).l
 loc_47DEE:
                 
                 moveq   #COMBATANT_ALLIES_START,d0
-                moveq   #COMBATANT_ALLIES_COUNTER,d7 ; HARDCODED $1D limit for number of allies ?
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
 loc_47DF2:
                 
                 move.w  #$FFFF,d1
@@ -78,20 +80,3 @@ loc_47E66:
 
     ; End of function ApplyPositionsAfterEnemyLeaderDies
 
-AfterBattlePositions:
-                dc.w 5                  ; battle 5
-                dc.l abp_Battle5        
-                dc.w $FFFF
-abp_Battle5:    dc.b 0                  ; character 0 : Bowie
-                dc.b $10                ; X Pos
-                dc.b 4                  ; Y pos
-                dc.b $FF                ; ignored byte
-                dc.b 5                  ; Slade
-                dc.b $11
-                dc.b 4
-                dc.b $FF
-                dc.b $80                ; enemy leader
-                dc.b $11
-                dc.b 2
-                dc.b $FF
-                dc.w $FFFF

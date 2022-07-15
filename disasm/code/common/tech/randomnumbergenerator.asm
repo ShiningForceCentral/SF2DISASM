@@ -6,6 +6,7 @@
 
 ; In: D6 = Value range, Out: D7 = Random value
 
+
 GenerateRandomNumber:
                 
                 move.w  (RANDOM_SEED).l,d7
@@ -25,6 +26,7 @@ GenerateRandomNumber:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WaitForRandomValueToMatch:
                 
@@ -59,6 +61,7 @@ loc_164A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetRandomValueUnsigned:
                 
                 movem.l d0-d5/a0-a6,-(sp)
@@ -80,6 +83,7 @@ GetRandomValueUnsigned:
 ; Get random value in range D0 -> D0
 ; 
 ; Debug mode allows values 0-3 depending on player direction
+
 
 GetRandomOrDebugValue:
                 

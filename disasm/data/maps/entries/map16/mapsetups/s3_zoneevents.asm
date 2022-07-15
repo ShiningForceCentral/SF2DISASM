@@ -8,6 +8,7 @@ ms_map16_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_ZoneEvent0:
                 
                  
@@ -24,12 +25,13 @@ return_51F00:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map16_ZoneEvent1:
                 
                  
-                chkFlg  505             ; Battle 5 completed
+                chkFlg  505             ; Battle 5 completed - BATTLE_GALAM_CASTLE                 
                 bne.s   return_51F26
-                move.b  #$10,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  #MAP_GALAM_CASTLE,((EGRESS_MAP-$1000000)).w
                 chkFlg  664             ; Set after the Galam guards catch you sneaking around, but before battle
                 bne.s   byte_51F20
                 script  cs_521BA
@@ -46,6 +48,7 @@ return_51F26:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map16_DefaultZoneEvent:
                 

@@ -3,104 +3,111 @@
 ; 0x126EE..0x1278E : Member screen portrait window layout
 PortraitWindowLayout:
                 
-; Syntax        vdpTile [VDPTILE_]bitfield
+; Syntax        vdpTile [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
 ; 1st line
-                vdpTile 249|PLT3|PRIORITY
-                vdpTile 250|PLT3|PRIORITY
-                vdpTile 250|PLT3|PRIORITY
-                vdpTile 250|PLT3|PRIORITY
-                vdpTile 250|PLT3|PRIORITY
-                vdpTile 250|PLT3|PRIORITY
-                vdpTile 250|PLT3|PRIORITY
-                vdpTile 249|MIRROR|PLT3|PRIORITY
+                vdpTile PORTRAITCORNER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAITCORNER|MIRROR|PALETTE3|PRIORITY
                 
 ; 2nd line
-                vdpTile 251|PLT3|PRIORITY
-                vdpTile 1989|MIRROR|PLT2|PRIORITY
-                vdpTile 1988|MIRROR|PLT2|PRIORITY
-                vdpTile 1987|MIRROR|PLT2|PRIORITY
-                vdpTile 1986|MIRROR|PLT2|PRIORITY
-                vdpTile 1985|MIRROR|PLT2|PRIORITY
-                vdpTile 1984|MIRROR|PLT2|PRIORITY
-                vdpTile 251|MIRROR|PLT3|PRIORITY
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAIT6|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT5|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT4|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT3|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT2|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT1|MIRROR|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
                 
 ; 3rd line
-                vdpTile 251|PLT3|PRIORITY
-                vdpTile 1997|MIRROR|PLT2|PRIORITY
-                vdpTile 1996|MIRROR|PLT2|PRIORITY
-                vdpTile 1995|MIRROR|PLT2|PRIORITY
-                vdpTile 1994|MIRROR|PLT2|PRIORITY
-                vdpTile 1993|MIRROR|PLT2|PRIORITY
-                vdpTile 1992|MIRROR|PLT2|PRIORITY
-                vdpTile 251|MIRROR|PLT3|PRIORITY
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAIT14|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT13|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT12|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT11|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT10|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT9|MIRROR|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
                 
 ; 4th line
-                vdpTile 251|PLT3|PRIORITY
-                vdpTile 2005|MIRROR|PLT2|PRIORITY
-                vdpTile 2004|MIRROR|PLT2|PRIORITY
-                vdpTile 2003|MIRROR|PLT2|PRIORITY
-                vdpTile 2002|MIRROR|PLT2|PRIORITY
-                vdpTile 2001|MIRROR|PLT2|PRIORITY
-                vdpTile 2000|MIRROR|PLT2|PRIORITY
-                vdpTile 251|MIRROR|PLT3|PRIORITY
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAIT22|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT21|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT20|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT19|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT18|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT17|MIRROR|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
                 
 ; 5th line
-                vdpTile 251|PLT3|PRIORITY
-                vdpTile 2013|MIRROR|PLT2|PRIORITY
-                vdpTile 2012|MIRROR|PLT2|PRIORITY
-                vdpTile 2011|MIRROR|PLT2|PRIORITY
-                vdpTile 2010|MIRROR|PLT2|PRIORITY
-                vdpTile 2009|MIRROR|PLT2|PRIORITY
-                vdpTile 2008|MIRROR|PLT2|PRIORITY
-                vdpTile 251|MIRROR|PLT3|PRIORITY
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAIT30|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT29|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT28|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT27|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT26|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT25|MIRROR|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
                 
 ; 6th line
-                vdpTile 251|PLT3|PRIORITY
-                vdpTile 2021|MIRROR|PLT2|PRIORITY
-                vdpTile 2020|MIRROR|PLT2|PRIORITY
-                vdpTile 2019|MIRROR|PLT2|PRIORITY
-                vdpTile 2018|MIRROR|PLT2|PRIORITY
-                vdpTile 2017|MIRROR|PLT2|PRIORITY
-                vdpTile 2016|MIRROR|PLT2|PRIORITY
-                vdpTile 251|MIRROR|PLT3|PRIORITY
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAIT38|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT37|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT36|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT35|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT34|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT33|MIRROR|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
                 
 ; 7th line
-                vdpTile 251|PLT3|PRIORITY
-                vdpTile 2029|MIRROR|PLT2|PRIORITY
-                vdpTile 2028|MIRROR|PLT2|PRIORITY
-                vdpTile 2027|MIRROR|PLT2|PRIORITY
-                vdpTile 2026|MIRROR|PLT2|PRIORITY
-                vdpTile 2025|MIRROR|PLT2|PRIORITY
-                vdpTile 2024|MIRROR|PLT2|PRIORITY
-                vdpTile 251|MIRROR|PLT3|PRIORITY
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAIT46|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT45|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT44|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT43|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT42|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT41|MIRROR|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
                 
 ; 8th line
-                vdpTile 251|PLT3|PRIORITY
-                vdpTile 2037|MIRROR|PLT2|PRIORITY
-                vdpTile 2036|MIRROR|PLT2|PRIORITY
-                vdpTile 2035|MIRROR|PLT2|PRIORITY
-                vdpTile 2034|MIRROR|PLT2|PRIORITY
-                vdpTile 2033|MIRROR|PLT2|PRIORITY
-                vdpTile 2032|MIRROR|PLT2|PRIORITY
-                vdpTile 251|MIRROR|PLT3|PRIORITY
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAIT54|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT53|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT52|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT51|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT50|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT49|MIRROR|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
                 
 ; 8th line
-                vdpTile 251|PLT3|PRIORITY
-                vdpTile 2045|MIRROR|PLT2|PRIORITY
-                vdpTile 2044|MIRROR|PLT2|PRIORITY
-                vdpTile 2043|MIRROR|PLT2|PRIORITY
-                vdpTile 2042|MIRROR|PLT2|PRIORITY
-                vdpTile 2041|MIRROR|PLT2|PRIORITY
-                vdpTile 2040|MIRROR|PLT2|PRIORITY
-                vdpTile 251|MIRROR|PLT3|PRIORITY
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAIT62|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT61|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT60|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT59|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT58|MIRROR|PALETTE2|PRIORITY
+                vdpTile PORTRAIT57|MIRROR|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
                 
 ; 9th line
-                vdpTile 249|FLIP|PLT3|PRIORITY
-                vdpTile 250|FLIP|PLT3|PRIORITY
-                vdpTile 250|FLIP|PLT3|PRIORITY
-                vdpTile 250|FLIP|PLT3|PRIORITY
-                vdpTile 250|FLIP|PLT3|PRIORITY
-                vdpTile 250|FLIP|PLT3|PRIORITY
-                vdpTile 250|FLIP|PLT3|PRIORITY
-                vdpTile 249|MIRROR|FLIP|PLT3|PRIORITY
+                vdpTile PORTRAITCORNER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile PORTRAITCORNER|MIRROR|FLIP|PALETTE3|PRIORITY

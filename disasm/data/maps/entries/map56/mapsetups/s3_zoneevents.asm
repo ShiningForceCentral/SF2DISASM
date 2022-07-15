@@ -7,6 +7,7 @@ ms_map56_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map56_ZoneEvent0:
                 
                  
@@ -18,7 +19,7 @@ Map56_ZoneEvent0:
                 setFlg  903             ; Set after the first time you talk to Creed on path up Ancient Tower
 byte_614F4:
                 
-                setFlg  441             ; Battle 41 unlocked
+                setFlg  441             ; Battle 41 unlocked - BATTLE_OUTSIDE_ANCIENT_TOWER     
                 setFlg  904             ; Will be set with the 0387, but only if the event isn't triggered by speaking
 Map56_DefaultZoneEvent:
                 

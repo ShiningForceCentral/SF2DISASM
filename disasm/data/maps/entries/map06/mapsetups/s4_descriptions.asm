@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map6_AreaDescriptions:
                 
                 move.w  #$FF4,d3        ; "A book...{N}GREAT VOYAGE{W1}"
@@ -37,6 +38,7 @@ byte_54D9A:     msDesc 5, 7, 4, 0       ; "{NAME} investigated{N}the book shelve
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map6_DescFunc0:
                 
                  
@@ -60,6 +62,7 @@ return_54E02:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map6_DescFunc1:
                 

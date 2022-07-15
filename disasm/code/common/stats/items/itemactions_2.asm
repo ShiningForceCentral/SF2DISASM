@@ -5,6 +5,9 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; Find specific item index + code offset to run when used in field
+; 
+;       In: D1 = item entry
+
 
 UseFieldItem:
                 
@@ -64,6 +67,7 @@ rjt_FieldItemEffects:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_CurePoison:
                 
                 jsr     j_GetStatusEffects
@@ -84,6 +88,7 @@ loc_22A68:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FieldItem_CurePoisonAndParalysis:
                 
@@ -117,6 +122,7 @@ loc_22AA0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_IncreaseATT:
                 
                 moveq   #3,d6
@@ -136,6 +142,7 @@ FieldItem_IncreaseATT:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FieldItem_IncreaseDEF:
                 
@@ -157,6 +164,7 @@ FieldItem_IncreaseDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_IncreaseAGI:
                 
                 moveq   #3,d6
@@ -176,6 +184,7 @@ FieldItem_IncreaseAGI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FieldItem_IncreaseMOV:
                 
@@ -204,6 +213,7 @@ loc_22B42:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_IncreaseHP:
                 
                 moveq   #3,d6
@@ -223,6 +233,7 @@ FieldItem_IncreaseHP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FieldItem_IncreaseMP:
                 

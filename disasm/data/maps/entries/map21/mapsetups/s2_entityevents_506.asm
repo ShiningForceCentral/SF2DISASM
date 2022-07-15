@@ -6,6 +6,7 @@ ms_map21_flag506_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map21_EntityEvent0:
                 
                  
@@ -35,6 +36,7 @@ return_53EDC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map21_1F5_EntityEvent0:
                 
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
@@ -46,6 +48,7 @@ Map21_1F5_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map21_261_EntityEvent0:
                 
@@ -61,5 +64,5 @@ cs_53EF4:       entityActionsWait 128
                  moveRight 1
                 endActions
                 setFacing 135,DOWN
-                setStoryFlag 1          ; Battle 1 unlocked
+                setStoryFlag 1          ; Battle 1 unlocked - BATTLE_INSIDE_ANCIENT_TOWER      
                 csc_end

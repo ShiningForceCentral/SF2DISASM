@@ -15,6 +15,7 @@ ms_map72_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map72_ZoneEvent0:
                 
                 move.w  #$1A,d0
@@ -25,6 +26,7 @@ Map72_ZoneEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map72_ZoneEvent3:
                 
@@ -74,10 +76,11 @@ return_4FF04:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map72_DefaultZoneEvent:
                 
                  
-                chkFlg  523             ; Battle 23 completed
+                chkFlg  523             ; Battle 23 completed - BATTLE_VERSUS_WILLARD              
                 bne.s   loc_4FF18
                 move.w  #8,d0
                 jsr     CheckRandomBattle

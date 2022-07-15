@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Start:
                 
                 tst.l   (CTRL1).l
@@ -164,6 +165,7 @@ loc_3DE:
                 move.w  (VDP_Control).l,d0
                 andi.w  #2,d0           ; wait for free DMA
                 bne.s   loc_3DE
+                
                 bra.w   SystemInit
 
     ; End of function Start
@@ -178,6 +180,7 @@ loc_3DE:
                 dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
+
 
 InitZ80:
                 
@@ -210,6 +213,7 @@ loc_42E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CopyWordToZ80:
                 
                 bsr.w   CopyByteToZ80
@@ -219,6 +223,7 @@ CopyWordToZ80:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CopyByteToZ80:
                 

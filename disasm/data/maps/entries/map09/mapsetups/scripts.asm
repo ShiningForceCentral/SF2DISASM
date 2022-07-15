@@ -120,7 +120,7 @@ cs_56A82:       textCursor 1394
                 setPriority ALLY_BOWIE,$FFFF
                 setF 725                ; Set after telling Rohde that you're going to get the Caravan
                 setF 84                 ; Rohde is a follower
-                setStoryFlag 18         ; Battle 18 unlocked
+                setStoryFlag 18         ; Battle 18 unlocked - BATTLE_VERSUS_TAROS              
                 followEntity ALLY_ROHDE,FOLLOWER_B,2
 cs_56AD4:       setActscriptWait ALLY_BOWIE,eas_Init
                 followEntity ALLY_PETER,ALLY_BOWIE,2

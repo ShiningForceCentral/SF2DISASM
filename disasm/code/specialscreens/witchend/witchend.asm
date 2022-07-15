@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EndGame:
                 
                 bset    #7,(SAVE_FLAGS).l
@@ -155,8 +156,8 @@ loc_27C2C:
                 clr.l   (a0)+
                 dbf     d7,loc_27C2C
                 jsr     j_ClearEntities
-                setFlg  400             ; Battle 0 unlocked
-                move.w  #$3F,d0 
+                setFlg  400             ; Battle 0 unlocked - BATTLE_VERSUS_ALL_BOSSES         
+                move.w  #MAP_MAGIC_TUNNEL_HUB,d0
                 jsr     (CheckBattle).w 
                 move.w  d7,d1
                 bsr.w   BattleLoop      
@@ -174,12 +175,13 @@ loc_27C2C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_27C64:
                 
                 move.w  d0,-(sp)
                 movea.l (p_JewelEndScreenLayout).l,a0
                 lea     $700(a0),a0
-                mulu.w  #$1E,d0
+                mulu.w  #30,d0
                 adda.w  d0,a0
                 lea     (byte_FFE31C).l,a1
                 move.w  #$503,d1
@@ -196,6 +198,7 @@ sub_27C64:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 VInt_FallingJewels:
                 
                 subq.w  #1,(VERTICAL_SCROLL_DATA).l
@@ -208,12 +211,14 @@ VInt_FallingJewels:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_2 = -2
+
 VInt_WitchEndBlink:
                 
                 link    a6,#-2
                 tst.b   ((byte_FFB082-$1000000)).w
                 beq.w   loc_27D6A
-                clr.w   -2(a6)
+                clr.w   var_2(a6)
                 lea     ((BLINK_COUNTER-$1000000)).w,a2
                 subq.w  #1,(a2)
                 cmpi.w  #3,(a2)
@@ -223,7 +228,7 @@ VInt_WitchEndBlink:
                 lea     (byte_FFE0DC).l,a1
                 move.w  #$403,d1
                 jsr     (UpdateWitchLayoutZone).w
-                addq.w  #1,-2(a6)
+                addq.w  #1,var_2(a6)
 loc_27CDC:
                 
                 tst.w   (a2)
@@ -233,7 +238,7 @@ loc_27CDC:
                 lea     (byte_FFE0DC).l,a1
                 move.w  #$403,d1
                 jsr     (UpdateWitchLayoutZone).w
-                addq.w  #1,-2(a6)
+                addq.w  #1,var_2(a6)
                 moveq   #$78,d6 
                 jsr     (GenerateRandomNumber).w
                 addi.w  #$1E,d7
@@ -256,7 +261,7 @@ loc_27D1A:
                 lea     (byte_FFE19C).l,a1
                 move.w  #$401,d1
                 jsr     (UpdateWitchLayoutZone).w
-                addq.w  #1,-2(a6)
+                addq.w  #1,var_2(a6)
 loc_27D3E:
                 
                 tst.w   (a2)
@@ -268,14 +273,14 @@ loc_27D42:
                 lea     (byte_FFE19C).l,a1
                 move.w  #$401,d1
                 jsr     (UpdateWitchLayoutZone).w
-                addq.w  #1,-2(a6)
+                addq.w  #1,var_2(a6)
                 moveq   #5,d6
                 jsr     (GenerateRandomNumber).w
                 addi.w  #$A,d7
                 move.w  d7,(a2)
 loc_27D6A:
                 
-                tst.w   -2(a6)
+                tst.w   var_2(a6)
                 beq.s   loc_27D8A
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1

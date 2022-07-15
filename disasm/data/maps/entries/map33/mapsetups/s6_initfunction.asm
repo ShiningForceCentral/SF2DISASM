@@ -4,16 +4,17 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map33_InitFunction:
                 
                  
-                chkFlg  523             ; Battle 23 completed
+                chkFlg  523             ; Battle 23 completed - BATTLE_VERSUS_WILLARD              
                 beq.s   byte_5AB98      
                 chkFlg  783             ; Set after the scene where Creed restores the Force and heads down the basement
                 bne.s   byte_5AB98      
                 script  cs_5B016
                 setFlg  783             ; Set after the scene where Creed restores the Force and heads down the basement
-                move.b  #9,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  #MAP_HASSAN,((EGRESS_MAP-$1000000)).w
 byte_5AB98:
                 
                 chkFlg  22              ; Frayja joined

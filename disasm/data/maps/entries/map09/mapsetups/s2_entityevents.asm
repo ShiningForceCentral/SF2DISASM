@@ -18,6 +18,7 @@ ms_map9_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map9_EntityEvent2:
                 
                  
@@ -28,6 +29,7 @@ Map9_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map9_EntityEvent3:
                 
@@ -40,6 +42,7 @@ Map9_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map9_EntityEvent4:
                 
                  
@@ -50,6 +53,7 @@ Map9_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map9_EntityEvent5:
                 
@@ -62,6 +66,7 @@ Map9_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map9_EntityEvent6:
                 
                 move.b  #$15,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -73,6 +78,7 @@ Map9_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map9_EntityEvent7:
                 
                 jsr     j_ChurchMenuActions
@@ -82,6 +88,7 @@ Map9_EntityEvent7:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map9_EntityEvent8:
                 
@@ -113,6 +120,7 @@ return_567C6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map9_EntityEvent9:
                 
                  
@@ -125,6 +133,7 @@ Map9_EntityEvent9:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map9_EntityEvent10:
                 
                  
@@ -136,6 +145,7 @@ Map9_EntityEvent10:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map9_EntityEvent11:
                 
                 move.b  #7,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -146,6 +156,7 @@ Map9_EntityEvent11:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map9_EntityEvent0:
                 
@@ -191,6 +202,7 @@ return_56840:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map9_EntityEvent1:
                 
                  
@@ -206,6 +218,7 @@ return_56852:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map9_DefaultEntityEvent:
                 

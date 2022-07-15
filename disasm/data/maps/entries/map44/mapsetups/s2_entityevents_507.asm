@@ -16,6 +16,7 @@ ms_map44_flag507_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_EntityEvent0:
                 
                  
@@ -26,6 +27,7 @@ Map44_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map44_EntityEvent1:
                 
@@ -38,6 +40,7 @@ Map44_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_261_EntityEvent0:
                 
                  
@@ -48,6 +51,7 @@ Map44_261_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map44_261_EntityEvent1:
                 
@@ -60,6 +64,7 @@ Map44_261_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_261_EntityEvent2:
                 
                  
@@ -70,6 +75,7 @@ Map44_261_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map44_261_EntityEvent3:
                 
@@ -82,6 +88,7 @@ Map44_261_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_261_EntityEvent4:
                 
                  
@@ -92,6 +99,7 @@ Map44_261_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map44_1FA_EntityEvent0:
                 
@@ -104,6 +112,7 @@ Map44_1FA_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_1FB_EntityEvent0:
                 
                  
@@ -114,6 +123,7 @@ Map44_1FB_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map44_1FB_EntityEvent1:
                 
@@ -126,6 +136,7 @@ Map44_1FB_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_1FB_EntityEvent2:
                 
                  
@@ -136,6 +147,7 @@ Map44_1FB_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map44_1FB_EntityEvent3:
                 
@@ -148,6 +160,7 @@ Map44_1FB_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_1FB_EntityEvent4:
                 
                  
@@ -158,6 +171,7 @@ Map44_1FB_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map44_1FB_EntityEvent5:
                 
@@ -170,6 +184,7 @@ Map44_1FB_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_1FB_EntityEvent6:
                 
                  
@@ -181,6 +196,7 @@ Map44_1FB_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_1FB_EntityEvent7:
                 
                  
@@ -188,7 +204,7 @@ Map44_1FB_EntityEvent7:
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$1F,d0
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
@@ -209,6 +225,7 @@ return_5454E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_1FB_EntityEvent8:
                 
                  
@@ -220,6 +237,7 @@ Map44_1FB_EntityEvent8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map44_1FB_EntityEvent9:
                 
                  
@@ -230,6 +248,7 @@ Map44_1FB_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map44_DefaultEntityEvent:
                 

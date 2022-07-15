@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map67_AreaDescriptions:
                 
                 move.w  #$1B2,d3        ; "Nothing special there.{W1}"
@@ -18,6 +19,7 @@ byte_4FCDE:     msDescFunction 57, 23, Map67_DescFunc0-byte_4FCDE
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map67_DescFunc0:
                 
                  
@@ -28,7 +30,7 @@ Map67_DescFunc0:
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #7,d0
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 chkFlg  13              ; Elric joined

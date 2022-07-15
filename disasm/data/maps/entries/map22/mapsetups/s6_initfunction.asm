@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map22_InitFunction:
                 
                  
@@ -13,7 +14,7 @@ ms_map22_InitFunction:
                 setFlg  776             ; Set after the scene where Goliath places you on the Desktop
 byte_5963E:
                 
-                chkFlg  522             ; Battle 22 completed
+                chkFlg  522             ; Battle 22 completed - BATTLE_CHESSBOARD                  
                 beq.s   return_59654
                 chkFlg  778             ; Set after the scene that plays after you win the chess battle
                 bne.s   return_59654

@@ -4,9 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EndKissPictureSequence:
                 
-                movea.l (p_endKissPicture).l,a0
+                movea.l (p_EndKissPicture).l,a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 lea     (FF6802_LOADING_SPACE).l,a0
@@ -40,6 +41,7 @@ loc_2C5CC:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_2C5E4:
                 
@@ -76,6 +78,7 @@ loc_2C61C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DisplayEndingKissWithPixelFilling:
                 

@@ -19,6 +19,7 @@ ms_map13_flag513_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_201_EntityEvent0:
                 
                  
@@ -29,6 +30,7 @@ Map13_201_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map13_201_EntityEvent1:
                 
@@ -41,6 +43,7 @@ Map13_201_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_201_EntityEvent5:
                 
                  
@@ -51,6 +54,7 @@ Map13_201_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map13_201_EntityEvent7:
                 
@@ -63,6 +67,7 @@ Map13_201_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_201_EntityEvent8:
                 
                  
@@ -73,6 +78,7 @@ Map13_201_EntityEvent8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map13_201_EntityEvent9:
                 
@@ -107,9 +113,9 @@ byte_581E4:
                 script  cs_58856
                 setFlg  716             ; Set after your raft-giving conversation with the mayor in Polca
                 setFlg  64              ; Raft is unlocked
-                move.b  #$48,((RAFT_MAP_INDEX-$1000000)).w 
-                move.b  #$2B,((RAFT_X-$1000000)).w 
-                move.b  #$30,((RAFT_Y-$1000000)).w 
+                move.b  #MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,((RAFT_MAP-$1000000)).w
+                move.b  #43,((RAFT_X-$1000000)).w
+                move.b  #48,((RAFT_Y-$1000000)).w
 loc_58204:
                 
                 bra.s   loc_5820A
@@ -137,6 +143,7 @@ return_58216:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_201_EntityEvent10:
                 
                  
@@ -148,6 +155,7 @@ Map13_201_EntityEvent10:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map13_201_EntityEvent11:
                 
                  
@@ -158,6 +166,7 @@ Map13_201_EntityEvent11:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map13_201_EntityEvent12:
                 

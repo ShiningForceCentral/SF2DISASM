@@ -11,6 +11,7 @@ ms_map5_flag530_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_212_EntityEvent0:
                 
                  
@@ -21,6 +22,7 @@ Map5_212_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_212_EntityEvent1:
                 
@@ -33,6 +35,7 @@ Map5_212_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_212_EntityEvent2:
                 
                 jsr     j_ChurchMenuActions
@@ -42,6 +45,7 @@ Map5_212_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_212_EntityEvent3:
                 
@@ -53,6 +57,7 @@ Map5_212_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_212_EntityEvent4:
                 
@@ -72,7 +77,7 @@ byte_60494:
                 script  cs_6060E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #$1C,d0
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait

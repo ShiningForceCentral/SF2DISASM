@@ -4,24 +4,25 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitializeFollowerEntities:
                 
                 cmpi.b  #MAP_NEW_GRANSEAL_HQ,((CURRENT_MAP-$1000000)).w 
-                                                        ; new granseal headquarters
-                beq.w   return_44336    ; HARDCODED maps with no followers
-                cmpi.b  #MAP_NAZCA_SHIP_INTERIOR,((CURRENT_MAP-$1000000)).w 
-                                                        ; nazca ship headquarters
+                                                        ; HARDCODED maps with no followers
                 beq.w   return_44336
+                cmpi.b  #MAP_NAZCA_SHIP_INTERIOR,((CURRENT_MAP-$1000000)).w
+                beq.w   return_44336
+                
                 movem.l a6,-(sp)
-                lea     FollowersTable(pc), a4
+                lea     tbl_Followers(pc), a4
                 lea     pt_eas_Followers(pc), a6
                 lea     ((byte_FFAFB0-$1000000)).w,a5
                 move.b  #1,(a5)
                 chkFlg  65              ; Caravan is unlocked
                 beq.s   loc_442D2
-                bsr.s   IsOverworldMap
+                bsr.s   IsOverworldMap  
                 beq.s   loc_442D2
-                lea     OverworldFollowers(pc), a4
+                lea     tbl_OverworldFollowers(pc), a4
                 lea     pt_eas_WorldmapFollowers(pc), a6
 loc_442D2:
                 
@@ -36,7 +37,7 @@ loc_442D2:
                 move.w  d0,-(sp)
                 clr.w   d0
                 move.b  1(a4),d0
-                cmpi.b  #COMBATANT_ALLIES_NUMBER,d0 ; HARDCODED max force member index
+                cmpi.b  #COMBATANT_ALLIES_NUMBER,d0
                 bcc.s   loc_44302
                 bsr.w   GetAllyMapSprite
                 bra.s   loc_44308

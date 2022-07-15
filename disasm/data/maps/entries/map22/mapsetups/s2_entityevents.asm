@@ -33,6 +33,7 @@ ms_map22_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_EntityEvent2:
                 
                 jsr     j_CaravanActions
@@ -42,6 +43,7 @@ Map22_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map22_EntityEvent3:
                 
@@ -55,6 +57,7 @@ Map22_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_EntityEvent4:
                 
                  
@@ -66,6 +69,7 @@ Map22_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map22_EntityEvent5:
                 
@@ -79,6 +83,7 @@ Map22_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_EntityEvent0:
                 
                  
@@ -90,6 +95,7 @@ Map22_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map22_EntityEvent1:
                 
@@ -104,6 +110,7 @@ Map22_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_EntityEvent6:
                 
                 jsr     j_ChurchMenuActions
@@ -114,10 +121,11 @@ Map22_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_EntityEvent7:
                 
                  
-                chkFlg  522             ; Battle 22 completed
+                chkFlg  522             ; Battle 22 completed - BATTLE_CHESSBOARD                  
                 bne.s   byte_59536      
                 txt     1777            ; "I'm sure King Ponpei will{N}help you.{W1}"
                 bra.s   return_59552
@@ -142,10 +150,11 @@ return_59552:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_EntityEvent8:
                 
                  
-                chkFlg  522             ; Battle 22 completed
+                chkFlg  522             ; Battle 22 completed - BATTLE_CHESSBOARD                  
                 bne.s   byte_59576      
                 chkFlg  777             ; Set after the Desktop King tells you to fight on the chessboard
                 bne.s   byte_5956C      
@@ -169,6 +178,7 @@ return_5957A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_EntityEvent9:
                 
                  
@@ -188,6 +198,7 @@ return_59590:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map22_EntityEvent10:
                 
@@ -212,6 +223,7 @@ return_595B2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_EntityEvent17:
                 
                  
@@ -222,6 +234,7 @@ Map22_EntityEvent17:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map22_EntityEvent21:
                 
@@ -234,6 +247,7 @@ Map22_EntityEvent21:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_EntityEvent15:
                 
                  
@@ -244,6 +258,7 @@ Map22_EntityEvent15:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map22_EntityEvent13:
                 
@@ -256,6 +271,7 @@ Map22_EntityEvent13:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_EntityEvent12:
                 
                  
@@ -266,6 +282,7 @@ Map22_EntityEvent12:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map22_EntityEvent11:
                 
@@ -278,6 +295,7 @@ Map22_EntityEvent11:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map22_DefaultEntityEvent:
                 

@@ -24,6 +24,7 @@ ms_map3_flag506_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_1FA_EntityEvent0:
                 
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
@@ -36,6 +37,7 @@ Map3_1FA_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_1FA_EntityEvent2:
                 
                  
@@ -46,6 +48,7 @@ Map3_1FA_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_1FA_EntityEvent3:
                 
@@ -58,6 +61,7 @@ Map3_1FA_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_1FA_EntityEvent4:
                 
                  
@@ -68,6 +72,7 @@ Map3_1FA_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_1FA_EntityEvent5:
                 
@@ -80,6 +85,7 @@ Map3_1FA_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_1FA_EntityEvent6:
                 
                  
@@ -90,6 +96,7 @@ Map3_1FA_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_1FA_EntityEvent7:
                 
@@ -102,6 +109,7 @@ Map3_1FA_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_1FA_EntityEvent8:
                 
                  
@@ -112,6 +120,7 @@ Map3_1FA_EntityEvent8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_1FA_EntityEvent12:
                 
@@ -124,6 +133,7 @@ Map3_1FA_EntityEvent12:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map3_1FA_EntityEvent13:
                 
                  
@@ -134,6 +144,7 @@ Map3_1FA_EntityEvent13:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map3_1FA_EntityEvent15:
                 
@@ -150,8 +161,8 @@ Map3_1FA_EntityEvent15:
                 clsTxt
                 tst.w   d0
                 bne.s   return_512B8
-                move.w  #6,d0
-                jsr     j_NameCharacter
+                move.w  #ALLY_KIWI,d0
+                jsr     j_NameAlly
                 txt     676             ; "{LEADER} named him{N}{NAME;6} and beckoned.{W1}"
                 clsTxt
                 move.w  ((SPEECH_SFX_BACKUP-$1000000)).w,((SPEECH_SFX-$1000000)).w

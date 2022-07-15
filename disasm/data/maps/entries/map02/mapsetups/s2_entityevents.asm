@@ -16,6 +16,7 @@ ms_map2_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_DefaultEntityEvent:
                 
                 rts
@@ -24,6 +25,7 @@ Map2_DefaultEntityEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map2_EntityEvent0:
                 
@@ -37,6 +39,7 @@ Map2_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_EntityEvent1:
                 
                  
@@ -48,6 +51,7 @@ Map2_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_EntityEvent2:
                 
                  
@@ -58,6 +62,7 @@ Map2_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map2_EntityEvent3:
                 
@@ -71,6 +76,7 @@ Map2_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_EntityEvent4:
                 
                  
@@ -81,6 +87,7 @@ Map2_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map2_EntityEvent5:
                 
@@ -95,6 +102,7 @@ Map2_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_EntityEvent6:
                 
                  
@@ -107,6 +115,7 @@ Map2_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_EntityEvent7:
                 
                 move.b  #$A,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -118,6 +127,7 @@ Map2_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map2_EntityEvent8:
                 
                 move.b  #$19,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -128,6 +138,7 @@ Map2_EntityEvent8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map2_EntityEvent9:
                 

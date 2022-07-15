@@ -1,24 +1,25 @@
 
 ; ASM FILE data\battles\global\randombattles.asm :
 ; 0x1B6DB0..0x1B6DDA : Random battles list, and data related to UpgradeEnemyIndex function
-RandomBattlesList:
+tbl_RandomBattlesList:
                 
-; List of battle indexes prefixed with length
+; List of battles prefixed with length.
 ;
-; Syntax        randomBattles [BATTLE_]index,..[BATTLE_]index
+; Syntax        randomBattles [BATTLE_]enum,..[BATTLE_]enum
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-                randomBattles &
-                    TO_HAWEL_HOUSE, &
-                    NORTH_CLIFF, &
-                    TO_RIBBLE, &
-                    TO_THE_EAST, &
-                    SOUTHEAST_DESERT, &
-                    TO_TAROS_SHRINE, &
-                    OUTSIDE_ELVEN_VILLAGE, &
-                    DEVIL_TAIL, &
-                    TO_NORTH_PARMECIA, &
-                    OUTSIDE_KETTO, &
-                    TO_ROFT
+                battles TO_HAWEL_HOUSE, &
+                        NORTH_CLIFF, &
+                        TO_RIBBLE, &
+                        TO_THE_EAST, &
+                        SOUTHEAST_DESERT, &
+                        TO_TAROS_SHRINE, &
+                        OUTSIDE_ELVEN_VILLAGE, &
+                        DEVIL_TAIL, &
+                        TO_NORTH_PARMECIA, &
+                        OUTSIDE_KETTO, &
+                        TO_ROFT
 tbl_EnemyUpgradeDef_Melee:
                 
 ; 3 bytes per entry, followed by a length prefixed list :
@@ -27,8 +28,10 @@ tbl_EnemyUpgradeDef_Melee:
 ;       2:  last upgradable enemy
 ;       3+: list of excluded enemies
 ;               
-; Syntax        upgradeRange    range, [ENEMY_]index, [ENEMY_]index
-;               excludedEnemies [ENEMY_]index,..[ENEMY_]index
+; Syntax        upgradeRange    parameter, [ENEMY_]enum, [ENEMY_]enum
+;               excludedEnemies [ENEMY_]enum,..[ENEMY_]enum
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 upgradeRange    5, OOZE, REAPER ; Regular, Centaur, Stealth, and Gunner movetypes
                 excludedEnemies KRAKEN_LEG, PAWN, KNIGHT, RAT, BURST_ROCK, ZEON_GUARD

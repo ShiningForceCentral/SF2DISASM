@@ -7,6 +7,7 @@ ms_map22_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_DefaultZoneEvent:
                 
                 rts
@@ -16,14 +17,15 @@ Map22_DefaultZoneEvent:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map22_ZoneEvent0:
                 
                  
                 chkFlg  777             ; Set after the Desktop King tells you to fight on the chessboard
                 beq.s   return_59600
-                chkFlg  522             ; Battle 22 completed
+                chkFlg  522             ; Battle 22 completed - BATTLE_CHESSBOARD                  
                 bne.s   return_59600
-                move.b  #$16,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  #MAP_CREED_DESKTOP_WORLD,((EGRESS_MAP-$1000000)).w
                 script  cs_5994E
 return_59600:
                 

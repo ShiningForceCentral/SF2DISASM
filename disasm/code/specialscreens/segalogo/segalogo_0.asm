@@ -6,6 +6,7 @@
 
 ; Out: D0 = $FFFFFFFF if pressing start, 0 if not
 
+
 DisplaySegaLogo:
                 
                  
@@ -117,6 +118,7 @@ SegaLogoPalette:incbin "data/graphics/tech/segalogopalette.bin"
 SegaLogo:       incbin "data/graphics/tech/segalogo.bin"
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_28B12:
                 
@@ -1116,6 +1118,7 @@ byte_28F31:     dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadSegaLogoPalette:
                 
                 move.w  (a0)+,(a1)+
@@ -1128,11 +1131,12 @@ LoadSegaLogoPalette:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CalculateRomChecksum:
                 
                 jsr     (WaitForVInt).w
                 btst    #INPUT_BIT_START,((P2_INPUT-$1000000)).w
-                beq.s   return_28F96    ; execute only if P2 START pressed
+                beq.s   @Return         ; execute only if P2 START pressed
                 lea     (RomEndAddress).w,a0
                 move.l  (a0),d1
                 addq.l  #1,d1           ; 0x200000
@@ -1143,13 +1147,14 @@ CalculateRomChecksum:
                 subq.w  #1,d2           ; FFF7F ?
                 swap    d1
                 moveq   #0,d0
-loc_28F88:
+@Loop:
                 
                 add.w   (a0)+,d0        ; sum stored in a RAM word
-                dbf     d2,loc_28F88    
-                dbf     d1,loc_28F88    
+                dbf     d2,@Loop        
+                dbf     d1,@Loop        
+                
                 move.w  d0,((ROM_CHECKSUM-$1000000)).w
-return_28F96:
+@Return:
                 
                 rts
 
@@ -1157,6 +1162,7 @@ return_28F96:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 VInt_CheckConfigurationModeCheat:
                 
@@ -1169,6 +1175,7 @@ VInt_CheckConfigurationModeCheat:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 VInt_ActivateConfigurationModeCheat:
                 
                 move.b  #$FF,((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
@@ -1179,6 +1186,7 @@ VInt_ActivateConfigurationModeCheat:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CheckConfigurationModeInputSequence:
                 

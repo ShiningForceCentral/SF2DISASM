@@ -6,6 +6,7 @@
 
 ; In: A0 = script address
 
+
 ExecuteMapScript:
                 
                 move.l  #FF9004_LOADING_SPACE,(dword_FFB1A4).l
@@ -58,7 +59,7 @@ rjt_cutsceneScriptCommands:
                 dc.w csc0C_jumpIfFlagSet-rjt_cutsceneScriptCommands
                 dc.w csc0D_jumpIfFlagClear-rjt_cutsceneScriptCommands
                 dc.w csc0E_jumpIfForceMemberInList-rjt_cutsceneScriptCommands
-                dc.w csc0F_jumpIfCharacterAlive-rjt_cutsceneScriptCommands
+                dc.w csc0F_jumpIfCharacterDead-rjt_cutsceneScriptCommands
                 dc.w csc10_setOrClearFlag-rjt_cutsceneScriptCommands
                 dc.w csc11_promptYesNoForStoryFlow-rjt_cutsceneScriptCommands
                 dc.w csc12_executeContextMenu-rjt_cutsceneScriptCommands
@@ -149,6 +150,7 @@ loc_4723E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc_doNothing:
                 
                 rts
@@ -157,6 +159,7 @@ csc_doNothing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc00_displaySingleTextbox:
                 
@@ -168,7 +171,7 @@ csc00_displaySingleTextbox:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_47270
 loc_4726A:
@@ -198,6 +201,7 @@ return_4729C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc01_displaySingleTextboxWithVars:
                 
                 cmpi.w  #$FFFF,(a6)
@@ -206,7 +210,7 @@ csc01_displaySingleTextboxWithVars:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_472BE
 loc_472B8:
@@ -232,6 +236,7 @@ loc_472BE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc02_displayTextbox:
                 
                 tst.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
@@ -242,7 +247,7 @@ csc02_displayTextbox:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_47314
 loc_4730E:
@@ -268,6 +273,7 @@ return_47330:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc03_displayTextboxWithVars:
                 
                 cmpi.w  #$FFFF,(a6)
@@ -276,7 +282,7 @@ csc03_displayTextboxWithVars:
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
                 move.w  (a6),d0
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 bra.s   loc_47352
 loc_4734C:
@@ -298,6 +304,7 @@ loc_47352:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc04_setTextIndex:
                 
                 move.w  (a6)+,((CUTSCENE_DIALOG_INDEX-$1000000)).w
@@ -307,6 +314,7 @@ csc04_setTextIndex:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc05_playSound:
                 
@@ -319,6 +327,7 @@ csc05_playSound:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc06_doNothing:
                 
                 rts
@@ -327,6 +336,7 @@ csc06_doNothing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc07_warp:
                 
@@ -344,14 +354,15 @@ csc07_warp:
 
 ; =============== S U B R O U T I N E =======================================
 
-; make 00xx character join force with bit F set for sad join music
+; make 00xx character join force with bit 15 set for sad join music
+
 
 csc08_joinForce:
                 
                 move.w  #0,((SPEECH_SFX-$1000000)).w
                 jsr     (WaitForViewScrollEnd).w
                 move.w  (a6)+,d0
-                bclr    #$F,d0
+                bclr    #15,d0
                 bne.s   byte_473B0
                 sndCom  MUSIC_JOIN
                 bra.s   loc_473B4       
@@ -360,11 +371,11 @@ byte_473B0:
                 sndCom  MUSIC_SAD_JOIN
 loc_473B4:
                 
-                cmpi.w  #$80,d0 ; HARDCODED use case
+                cmpi.w  #128,d0         ; HARDCODED use case
                 bne.s   loc_473D4
-                move.w  #1,d0           ; make sarah and chester join at the same time
+                move.w  #ALLY_SARAH,d0  ; make sarah and chester join at the same time
                 jsr     j_JoinForce
-                move.w  #2,d0
+                move.w  #ALLY_CHESTER,d0
                 jsr     j_JoinForce
                 txt     447             ; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
                 bra.s   loc_473EC
@@ -379,7 +390,7 @@ loc_473EC:
                 
                 jsr     j_FadeOut_WaitForP1Input
                 clsTxt
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 rts
 
@@ -387,6 +398,7 @@ loc_473EC:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc09_hideTextBoxAndPortrait:
                 
@@ -398,6 +410,7 @@ csc09_hideTextBoxAndPortrait:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc0A_executeSubroutine:
                 
@@ -412,6 +425,7 @@ csc0A_executeSubroutine:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc0B_jump:
                 
                 movea.l (a6),a6
@@ -423,6 +437,7 @@ csc0B_jump:
 ; =============== S U B R O U T I N E =======================================
 
 ; xxxx yyyyyyyy
+
 
 csc0C_jumpIfFlagSet:
                 
@@ -445,6 +460,7 @@ return_4742A:
 
 ; xxxx yyyyyyyy
 
+
 csc0D_jumpIfFlagClear:
                 
                 move.w  (a6)+,d1
@@ -463,6 +479,7 @@ return_4743E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc0E_jumpIfForceMemberInList:
                 
@@ -492,12 +509,13 @@ return_47462:
 
 ; xxxx yyyyyyyy
 
-csc0F_jumpIfCharacterAlive:
+
+csc0F_jumpIfCharacterDead:
                 
                 move.w  (a6)+,d0
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                bne.w   loc_47476
+                bne.w   loc_47476       ; <-- Branch if character's current HP != 0, i.e., is alive.
                 movea.l (a6),a6
                 bra.s   return_47478
 loc_47476:
@@ -507,12 +525,13 @@ return_47478:
                 
                 rts
 
-    ; End of function csc0F_jumpIfCharacterAlive
+    ; End of function csc0F_jumpIfCharacterDead
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; xxxx yyyy
+
 
 csc10_setOrClearFlag:
                 
@@ -533,12 +552,13 @@ return_4748E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 csc11_promptYesNoForStoryFlow:
                 
                 move.l  a6,-(sp)
                 jsr     j_YesNoPrompt
                 movea.l (sp)+,a6
-                moveq   #$59,d1 ; flag index : last answer to story-related yes/no question
+                moveq   #FLAG_INDEX_YES_NO_PROMPT,d1
                 tst.w   d0
                 bne.s   loc_474A8
                 jsr     j_SetFlag
@@ -556,6 +576,7 @@ loc_474AE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 csc12_executeContextMenu:
                 
@@ -586,10 +607,11 @@ loc_474DC:
 
 ; xxxx
 
+
 csc13_setStoryFlag:
                 
                 move.w  (a6)+,d1
-                addi.w  #$190,d1
+                addi.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     j_SetFlag
                 rts
 
@@ -597,6 +619,7 @@ csc13_setStoryFlag:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_474EE:
                 

@@ -21,6 +21,7 @@ ms_map38_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_EntityEvent0:
                 
                  
@@ -33,6 +34,7 @@ Map38_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_EntityEvent1:
                 
                  
@@ -43,6 +45,7 @@ Map38_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map38_EntityEvent2:
                 
@@ -55,6 +58,7 @@ Map38_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_EntityEvent3:
                 
                  
@@ -65,6 +69,7 @@ Map38_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map38_EntityEvent4:
                 
@@ -79,6 +84,7 @@ Map38_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_EntityEvent5:
                 
                  
@@ -90,6 +96,7 @@ Map38_EntityEvent5:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map38_EntityEvent6:
                 
@@ -104,6 +111,7 @@ Map38_EntityEvent6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_EntityEvent7:
                 
                  
@@ -116,6 +124,7 @@ Map38_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_EntityEvent8:
                 
                  
@@ -126,6 +135,7 @@ Map38_EntityEvent8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map38_EntityEvent9:
                 
@@ -170,6 +180,7 @@ return_5DC54:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_EntityEvent10:
                 
                  
@@ -213,6 +224,7 @@ return_5DCA2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_EntityEvent11:
                 
                 jsr     j_ChurchMenuActions
@@ -222,6 +234,7 @@ Map38_EntityEvent11:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map38_EntityEvent12:
                 
@@ -234,6 +247,7 @@ Map38_EntityEvent12:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_EntityEvent13:
                 
                 move.b  #$1C,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -245,6 +259,7 @@ Map38_EntityEvent13:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map38_EntityEvent14:
                 
                  
@@ -255,6 +270,7 @@ Map38_EntityEvent14:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map38_DefaultEntityEvent:
                 

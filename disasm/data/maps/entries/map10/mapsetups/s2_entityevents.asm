@@ -29,6 +29,7 @@ ms_map10_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent0:
                 
                  
@@ -39,6 +40,7 @@ Map10_EntityEvent0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_EntityEvent1:
                 
@@ -52,6 +54,7 @@ Map10_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent2:
                 
                 move.b  #$14,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -62,6 +65,7 @@ Map10_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_EntityEvent3:
                 
@@ -75,6 +79,7 @@ Map10_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent4:
                 
                  
@@ -86,6 +91,7 @@ Map10_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_EntityEvent5:
                 
@@ -99,6 +105,7 @@ Map10_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent6:
                 
                  
@@ -109,6 +116,7 @@ Map10_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_EntityEvent7:
                 
@@ -122,6 +130,7 @@ Map10_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent8:
                 
                  
@@ -134,6 +143,7 @@ Map10_EntityEvent8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent9:
                 
                 move.b  #5,((CURRENT_SHOP_INDEX-$1000000)).w
@@ -145,6 +155,7 @@ Map10_EntityEvent9:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent10:
                 
                 jsr     j_ChurchMenuActions
@@ -154,6 +165,7 @@ Map10_EntityEvent10:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_EntityEvent11:
                 
@@ -166,6 +178,7 @@ Map10_EntityEvent11:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent12:
                 
                  
@@ -176,6 +189,7 @@ Map10_EntityEvent12:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_EntityEvent13:
                 
@@ -188,6 +202,7 @@ Map10_EntityEvent13:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent14:
                 
                  
@@ -198,6 +213,7 @@ Map10_EntityEvent14:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_EntityEvent15:
                 
@@ -210,6 +226,7 @@ Map10_EntityEvent15:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent16:
                 
                  
@@ -220,6 +237,7 @@ Map10_EntityEvent16:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_EntityEvent17:
                 
@@ -233,6 +251,7 @@ Map10_EntityEvent17:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent18:
                 
                  
@@ -245,6 +264,7 @@ Map10_EntityEvent18:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent19:
                 
                  
@@ -255,6 +275,7 @@ Map10_EntityEvent19:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_EntityEvent20:
                 
@@ -267,6 +288,7 @@ Map10_EntityEvent20:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map10_EntityEvent21:
                 
                  
@@ -277,6 +299,7 @@ Map10_EntityEvent21:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map10_EntityEvent22:
                 

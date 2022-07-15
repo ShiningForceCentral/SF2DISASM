@@ -9,6 +9,7 @@ ms_map17_flag530_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_212_EntityEvent0:
                 
                  
@@ -21,6 +22,7 @@ Map17_212_EntityEvent0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_212_EntityEvent1:
                 
                  
@@ -32,6 +34,7 @@ Map17_212_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_212_EntityEvent2:
                 
                  
@@ -42,6 +45,7 @@ Map17_212_EntityEvent2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map17_212_DefaultEntityEvent:
                 

@@ -9,6 +9,7 @@ ms_map19_flag501_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_1F5_EntityEvent0:
                 
                  
@@ -26,6 +27,7 @@ byte_52F7E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map19_1F5_EntityEvent1:
                 
                  
@@ -36,6 +38,7 @@ Map19_1F5_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map19_1F5_EntityEvent2:
                 

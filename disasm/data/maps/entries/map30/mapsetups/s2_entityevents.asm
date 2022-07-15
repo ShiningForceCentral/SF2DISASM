@@ -11,6 +11,7 @@ ms_map30_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map30_EntityEvent0:
                 
                  
@@ -30,6 +31,7 @@ return_5A234:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map30_EntityEvent1:
                 
                  
@@ -41,6 +43,7 @@ Map30_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map30_EntityEvent2:
                 
@@ -57,6 +60,7 @@ cs_5A256:       shiver 130
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map30_EntityEvent3:
                 
@@ -78,6 +82,7 @@ return_5A270:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map30_EntityEvent4:
                 
                  
@@ -91,6 +96,7 @@ Map30_DefaultEntityEvent:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_5A278:
                 
                  
@@ -98,7 +104,7 @@ sub_5A278:
                 txt     1727            ; "We all thank you.{N}Take this gift.{W1}"
                 moveq   #0,d0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberOfItems
+                jsr     j_GetItemAndNumberHeld
                 cmpi.w  #4,d2
                 bne.s   loc_5A296
                 txt     1729            ; "Oh, your hands are full.{N}I'll give it to you later.{W1}"

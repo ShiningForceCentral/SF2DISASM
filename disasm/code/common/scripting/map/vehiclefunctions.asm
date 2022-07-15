@@ -6,15 +6,16 @@
 
 ; Control Caravan
 
+
 MapEventType2:
                 
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 script  cs_45284
                 lea     byte_45316(pc), a1
                 bsr.s   ApplyActscriptToFollowers
                 bsr.s   WaitForFollowersStopped
-                move.b  #1,((PLAYER_TYPE-$1000000)).w
+                move.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 rts
 
     ; End of function MapEventType2
@@ -64,16 +65,17 @@ word_4531E:      ac_branch
 
 ; =============== S U B R O U T I N E =======================================
 
+
 MapEventType4:
                 
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 script  cs_45348
                 lea     byte_45368(pc), a1
                 bsr.w   ApplyActscriptToFollowers
                 bsr.w   WaitForFollowersStopped
                 jsr     InitializeFollowerActscripts
-                move.b  #0,((PLAYER_TYPE-$1000000)).w
+                move.b  #PLAYERTYPE_BOWIE,((PLAYER_TYPE-$1000000)).w
                 rts
 
     ; End of function MapEventType4
@@ -118,18 +120,19 @@ word_453C2:      ac_branch
 
 ; Control Raft
 
+
 MapEventType3:
                 
                 bsr.w   sub_454AC
                 bne.w   return_453F0
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 clr.b   ((byte_FFAFB0-$1000000)).w
                 script  cs_453F2
                 lea     byte_45434(pc), a1
                 bsr.w   ApplyActscriptToHeroAndFollowers
                 bsr.w   WaitForHeroAndFollowersStopped
-                move.b  #2,((PLAYER_TYPE-$1000000)).w
+                move.b  #PLAYERTYPE_RAFT,((PLAYER_TYPE-$1000000)).w
 return_453F0:
                 
                 rts
@@ -142,6 +145,7 @@ cs_453F2:       setActscriptWait ALLY_BOWIE,eas_4540C
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
+
 
 nullsub_4540A:
                 
@@ -167,18 +171,19 @@ word_4543C:      ac_branch
 
 ; =============== S U B R O U T I N E =======================================
 
+
 MapEventType5:
                 
                 bsr.w   sub_454E4
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 move.b  #1,((byte_FFAFB0-$1000000)).w
                 script  cs_45470
                 lea     byte_45488(pc), a1
                 bsr.w   ApplyActscriptToHeroAndFollowers
                 bsr.w   WaitForHeroAndFollowersStopped
                 jsr     InitializeFollowerActscripts
-                move.b  #0,((PLAYER_TYPE-$1000000)).w
+                move.b  #PLAYERTYPE_BOWIE,((PLAYER_TYPE-$1000000)).w
                 rts
 
     ; End of function MapEventType5
@@ -193,34 +198,35 @@ eas_4548C:       ac_moveFacRelPos 0,1
                  ac_waitDest
 word_45498:      ac_branch
                 dc.w (eas_Idle-word_45498) & $FFFF
-word_4549C:     dc.w $180
+word_4549C:     dc.w 384
 word_4549E:     dc.w 0
                 dc.w 0
-                dc.w $FE80
-                dc.w $FE80
+                dc.w -384
+                dc.w -384
                 dc.w 0
                 dc.w 0
-                dc.w $180
+                dc.w 384
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_454AC:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.w  $C(a0),d0
-                move.w  $E(a0),d1
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
                 clr.w   d3
-                move.b  $10(a0),d3
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d3
                 lsl.w   #2,d3
                 add.w   word_4549C(pc,d3.w),d0
                 add.w   word_4549E(pc,d3.w),d1
-                sub.w   $3EC(a0),d0
+                sub.w   ENTITYDEF_ENTITY32_XDEST(a0),d0
                 bpl.s   loc_454D4
                 neg.w   d0
 loc_454D4:
                 
-                sub.w   $3EE(a0),d1
+                sub.w   ENTITYDEF_ENTITY32_YDEST(a0),d1
                 bpl.s   loc_454DC
                 neg.w   d1
 loc_454DC:
@@ -234,17 +240,18 @@ loc_454DC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_454E4:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.w  $C(a0),d0
-                move.w  $E(a0),d1
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
                 ext.l   d0
                 ext.l   d1
                 divs.w  #$180,d0
                 divs.w  #$180,d1
-                move.b  ((CURRENT_MAP-$1000000)).w,((RAFT_MAP_INDEX-$1000000)).w
+                move.b  ((CURRENT_MAP-$1000000)).w,((RAFT_MAP-$1000000)).w
                 move.b  d0,((RAFT_X-$1000000)).w
                 move.b  d1,((RAFT_Y-$1000000)).w
                 movem.l (sp)+,d0-d1/a0
@@ -255,18 +262,19 @@ sub_454E4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ShrinkIntoCaravanBowieAndFollowers:
                 
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 moveq   #1,d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 script  ms_BowieShrinkIn
                 lea     eas_ShrinkIn(pc), a1
                 bsr.w   ApplyActscriptToFollowers
                 bsr.w   WaitForFollowersStopped
-                move.b  #1,((PLAYER_TYPE-$1000000)).w
+                move.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 moveq   #3,d0
                 jsr     (Sleep).w       
                 rts
@@ -305,16 +313,17 @@ word_455A8:      ac_branch
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GrowOutBowieAndFollowers:
                 
                 clr.w   d0
-                bsr.w   MakeEntityIdle
+                bsr.w   MakeEntityIdle  
                 script  ms_BowieGrowOut
                 lea     eas_GrowOut(pc), a1
                 bsr.w   ApplyActscriptToFollowers
                 bsr.w   WaitForFollowersStopped
                 jsr     InitializeFollowerActscripts
-                move.b  #0,((PLAYER_TYPE-$1000000)).w
+                move.b  #PLAYERTYPE_BOWIE,((PLAYER_TYPE-$1000000)).w
                 rts
 
     ; End of function GrowOutBowieAndFollowers
@@ -350,6 +359,7 @@ word_45630:      ac_branch
                 dc.w (eas_Idle-word_45630) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_45634:
                 

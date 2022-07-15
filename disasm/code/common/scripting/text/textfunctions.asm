@@ -6,6 +6,7 @@
 
 ; d0 : string index
 
+
 DisplayText:
                 
                 movem.l d0-a6,-(sp)
@@ -72,6 +73,7 @@ loc_62FE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6308:
                 
                 cmpi.b  #$CC,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
@@ -79,7 +81,7 @@ sub_6308:
                 bsr.w   ClearNextLineOfDialoguePixels ; line end reached
                 move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 addi.b  #$10,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 beq.s   loc_6332
                 cmpi.b  #$20,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w 
                 bra.s   loc_6338
@@ -95,6 +97,7 @@ loc_6338:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_633A:
                 
                 movem.l d0,-(sp)
@@ -109,6 +112,7 @@ return_634C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetNextTextSymbol:
                 
@@ -138,6 +142,7 @@ return_6384:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ParseSpecialTextSymbol:
                 
@@ -193,7 +198,7 @@ loc_6434:
                 bsr.w   ClearNextLineOfDialoguePixels
                 move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 addi.b  #$10,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 beq.s   loc_6456
                 cmpi.b  #$20,((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w 
                 bra.s   loc_645C
@@ -237,6 +242,7 @@ loc_6472:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_64A8:
                 
                 tst.b   ((HIDE_WINDOWS-$1000000)).w
@@ -244,7 +250,7 @@ sub_64A8:
                 moveq   #1,d2
 loc_64B0:
                 
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_64C2
 loc_64BA:
                 
@@ -269,7 +275,7 @@ loc_64E0:
 loc_64E4:
                 
                 clr.b   2(a0)
-                move.w  #VDPTILE_V_ARROW|VDPTILE_PLT3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #VDPTILE_V_ARROW|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
                 subq.w  #1,d2
                 bne.s   return_64F4
                 moveq   #$14,d2
@@ -281,6 +287,7 @@ return_64F4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UpdateForceAndGetFirstBattlePartyMemberIndex:
                 
@@ -333,7 +340,7 @@ loc_6568:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
-                cmpi.b  #$20,d0 
+                cmpi.b  #32,d0
                 beq.s   loc_6574
                 move.b  d0,(a1)+
 loc_6574:
@@ -428,6 +435,7 @@ color:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6648:
                 
                 movea.l ((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w,a1
@@ -441,6 +449,7 @@ sub_6648:
 ; =============== S U B R O U T I N E =======================================
 
 ; Copy ASCII string of length D7 at A0 to RAM for dialogue textbox
+
 
 CopyAsciiBytesForDialogueString:
                 
@@ -719,6 +728,7 @@ byte_666E:      dc.b 1
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_676E:
                 
                 tst.w   ((TEXT_WINDOW_INDEX-$1000000)).w
@@ -728,7 +738,7 @@ sub_676E:
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
 loc_6784:
                 
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6794
                 move.w  #$1D08,d0
                 bra.s   loc_6798
@@ -742,7 +752,7 @@ loc_6798:
                 addq.w  #1,d0
                 move.w  d0,((TEXT_WINDOW_INDEX-$1000000)).w
                 bsr.w   sub_67E6
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_67CE
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -771,9 +781,10 @@ return_67E4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_67E6:
                 
-                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PLT3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l 
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l 
                                                         ; check if we are on the map or in battle (by checking for presence of black bar sprites)
                 bne.s   loc_67F6
                 move.w  #WINDOW_DIALOGUE_TILELINECOUNTER_EVENT,d6
@@ -783,14 +794,14 @@ loc_67F6:
                 move.w  #WINDOW_DIALOGUE_TILELINECOUNTER_BATTLE,d6
 loc_67FA:
                 
-                move.w  #VDPTILE_CORNER|VDPTILE_PLT3|VDPTILE_PRIORITY,d0
-                move.w  #VDPTILE_H_BORDER|VDPTILE_PLT3|VDPTILE_PRIORITY,d1
-                move.w  #VDPTILE_CORNER|VDPTILE_MIRROR|VDPTILE_PLT3|VDPTILE_PRIORITY,d2
+                move.w  #VDPTILE_CORNER|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
+                move.w  #VDPTILE_H_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d1
+                move.w  #VDPTILE_CORNER|VDPTILE_MIRROR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
                 clr.w   d3
                 bsr.w   CopyLineOfVdpTileOrderForDialogueWindowToRam
-                move.w  #VDPTILE_V_BORDER|VDPTILE_PLT3|VDPTILE_PRIORITY,d0
-                move.w  #VDPTILE_MESSAGE_WINDOW_START|VDPTILE_PLT3|VDPTILE_PRIORITY,d1
-                move.w  #VDPTILE_V_BORDER|VDPTILE_MIRROR|VDPTILE_PLT3|VDPTILE_PRIORITY,d2
+                move.w  #VDPTILE_V_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
+                move.w  #VDPTILE_MESSAGE_START|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d1
+                move.w  #VDPTILE_V_BORDER|VDPTILE_MIRROR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
                 move.w  ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w,d4
                 lsl.w   #5,d4
                 add.w   d4,d1
@@ -801,7 +812,7 @@ loc_6822:
                 bsr.w   CopyLineOfVdpTileOrderForDialogueWindowToRam
                 move.w  (sp)+,d1
                 addi.w  #$20,d1 
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6844
 loc_6838:
                 
@@ -835,6 +846,7 @@ loc_684E:
 ;     D2 = VDP tile index for right border of line
 ;     D3 = amount to add to D1 each time a tile is copied (0 for top and bottom border lines, 1 for inner box)
 
+
 CopyLineOfVdpTileOrderForDialogueWindowToRam:
                 
                 move.w  d0,(a1)+
@@ -853,6 +865,7 @@ loc_6866:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6872:
                 
@@ -874,6 +887,7 @@ loc_688C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 HandleDialogueTypewriting:
                 
@@ -955,7 +969,7 @@ loc_690C:
                 bsr.w   ApplyVIntVramDma
 loc_694C:
                 
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6976
                 lea     (byte_FF7802).l,a0
                 lea     ($D800).l,a1
@@ -972,12 +986,13 @@ loc_6976:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 HandleBlinkingDialogueCursor:
                 
                 move.w  ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w,d0
                 lsl.w   #3,d0
                 add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_699A
                 cmpi.b  #$30,d0 
                 blt.s   loc_6998
@@ -1035,6 +1050,7 @@ loc_6A0C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 HideTextBox:
                 
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
@@ -1043,7 +1059,7 @@ HideTextBox:
                 move.w  #$21D,d1
 loc_6A44:
                 
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6A56
                 moveq   #8,d2
                 bsr.w   MoveWindow      
@@ -1073,6 +1089,7 @@ return_6A7E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ClearNextLineOfDialoguePixels:
                 
                 move.w  d0,-(sp)
@@ -1087,7 +1104,7 @@ loc_6A90:
                 add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
 loc_6A96:
                 
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6AAC
                 cmpi.b  #$30,d0 
                 blt.s   loc_6AAA
@@ -1118,6 +1135,7 @@ loc_6AC4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6AD2:
                 
                 bsr.w   sub_6AE0
@@ -1130,12 +1148,13 @@ sub_6AD2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6AE0:
                 
                 move.w  ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w,d0
                 move.w  d0,-(sp)
                 addq.w  #1,d0
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6AF8
                 cmpi.w  #6,d0
                 bra.s   loc_6AFC
@@ -1164,7 +1183,7 @@ loc_6B18:
                 move.w  (sp)+,d0
                 lsl.w   #3,d0
                 add.b   ((DIALOGUE_TYPEWRITING_CURRENT_Y-$1000000)).w,d0
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6B42
                 cmpi.b  #$30,d0 
                 blt.s   loc_6B40
@@ -1195,6 +1214,7 @@ loc_6B4C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SymbolsToGraphics:
                 
                 movem.w d0-d2,-(sp)
@@ -1224,6 +1244,7 @@ loc_6BA0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DialogueGraphicsToRam:
                 
@@ -1259,6 +1280,7 @@ loc_6BD4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6BDE:
                 
                 move.b  d1,d2
@@ -1267,7 +1289,7 @@ sub_6BDE:
                 move.w  ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w,d3
                 lsl.w   #3,d3
                 add.b   d3,d0
-                cmpi.w  #$C77C,(SPRITE_00_TILE_FLAGS).l
+                cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_TILE_FLAGS).l
                 bne.s   loc_6C04
                 cmpi.b  #$30,d0 
                 blt.s   loc_6C02
@@ -1302,6 +1324,7 @@ loc_6C0E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6C3A:
                 
@@ -1349,6 +1372,7 @@ loc_6C80:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6C86:
                 
                 andi.b  #$F,(a2)
@@ -1359,6 +1383,7 @@ sub_6C86:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6C8E:
                 
@@ -1371,6 +1396,7 @@ sub_6C8E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6C96:
                 
                 andi.b  #$F,1(a2)
@@ -1381,6 +1407,7 @@ sub_6C96:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6CA2:
                 
@@ -1393,6 +1420,7 @@ sub_6CA2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6CAE:
                 
                 andi.b  #$F,2(a2)
@@ -1403,6 +1431,7 @@ sub_6CAE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6CBA:
                 
@@ -1415,6 +1444,7 @@ sub_6CBA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6CC6:
                 
                 andi.b  #$F,3(a2)
@@ -1425,6 +1455,7 @@ sub_6CC6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6CD2:
                 
@@ -1437,6 +1468,7 @@ sub_6CD2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6CDE:
                 
                 andi.b  #$F,$20(a2)
@@ -1447,6 +1479,7 @@ sub_6CDE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6CEA:
                 
@@ -1459,6 +1492,7 @@ sub_6CEA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6CF6:
                 
                 andi.b  #$F,$21(a2)
@@ -1469,6 +1503,7 @@ sub_6CF6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6D04:
                 
@@ -1483,6 +1518,7 @@ loc_6D0E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6D12:
                 
                 andi.b  #$F,$22(a2)
@@ -1493,6 +1529,7 @@ sub_6D12:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6D20:
                 
@@ -1505,6 +1542,7 @@ sub_6D20:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6D2E:
                 
                 andi.b  #$F,$23(a2)
@@ -1515,6 +1553,7 @@ sub_6D2E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6D3C:
                 
@@ -1527,6 +1566,7 @@ sub_6D3C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6D4A:
                 
                 andi.b  #$F,$40(a2)
@@ -1538,6 +1578,7 @@ sub_6D4A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_6D58:
                 
                 andi.b  #$F0,$40(a2)
@@ -1548,6 +1589,7 @@ sub_6D58:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_6D66:
                 

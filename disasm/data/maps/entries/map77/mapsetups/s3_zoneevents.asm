@@ -6,12 +6,13 @@ ms_map77_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map77_DefaultZoneEvent:
                 
                  
-                chkFlg  537             ; Battle 37 completed
+                chkFlg  537             ; Battle 37 completed - BATTLE_VERSUS_RED_BARON            
                 bne.s   return_50A80
-                setFlg  437             ; Battle 37 unlocked
+                setFlg  437             ; Battle 37 unlocked - BATTLE_VERSUS_RED_BARON          
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
 return_50A80:
                 
@@ -21,6 +22,7 @@ return_50A80:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 nullsub_50A82:
                 

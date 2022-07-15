@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map43_InitFunction:
                 
                  
@@ -11,7 +12,7 @@ ms_map43_InitFunction:
                 setFlg  612             ; Set after event at Hawel's house
                 setFlg  650             ; Set after event at Hawel's house
                 clrFlg  72              ; Kazin is a follower
-                move.b  #$2B,((EGRESS_MAP_INDEX-$1000000)).w 
+                move.b  #MAP_HAWEL_HOUSE,((EGRESS_MAP-$1000000)).w
 ms_map43_flag612_InitFunction:
                 
                 rts
@@ -193,5 +194,5 @@ cs_540C0:       textCursor 811
                 nextSingleText $0,ALLY_KAZIN ; "Now, let's go to the{N}Ancient Shrine!{W1}"
                 followEntity ALLY_KAZIN,ALLY_BOWIE,2
                 clearF 72               ; Kazin is a follower
-                setStoryFlag 4          ; Battle 4 unlocked
+                setStoryFlag 4          ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
                 csc_end

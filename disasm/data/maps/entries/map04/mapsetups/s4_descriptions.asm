@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map4_AreaDescriptions:
                 
                 move.w  #$1058,d3       ; "A book...{N}HEALING MAGIC{W1}"

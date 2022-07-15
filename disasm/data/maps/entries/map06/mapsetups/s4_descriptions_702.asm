@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map6_flag2BE_AreaDescriptions:
                 
                 move.w  #$FF4,d3        ; "A book...{N}GREAT VOYAGE{W1}"

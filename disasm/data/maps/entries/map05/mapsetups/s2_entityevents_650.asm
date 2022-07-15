@@ -21,6 +21,7 @@ ms_map5_flag650_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_EntityEvent0:
                 
                  
@@ -34,7 +35,7 @@ Map5_EntityEvent0:
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 move.w  #4,d0
-                jsr     GetEntityPortaitAndSpeechSound
+                jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
@@ -50,6 +51,7 @@ cs_51B14:       followEntity ALLY_KAZIN,ALLY_BOWIE,2
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_EntityEvent1:
                 
                  
@@ -60,6 +62,7 @@ Map5_EntityEvent1:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_EntityEvent2:
                 
@@ -73,6 +76,7 @@ Map5_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_EntityEvent3:
                 
                  
@@ -85,6 +89,7 @@ Map5_EntityEvent3:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_EntityEvent4:
                 
                  
@@ -96,6 +101,7 @@ Map5_EntityEvent4:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_EntityEvent5:
                 
@@ -110,6 +116,7 @@ Map5_EntityEvent5:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_EntityEvent6:
                 
                  
@@ -120,6 +127,7 @@ Map5_EntityEvent6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_EntityEvent7:
                 
@@ -132,6 +140,7 @@ Map5_EntityEvent7:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_EntityEvent8:
                 
                  
@@ -142,6 +151,7 @@ Map5_EntityEvent8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_EntityEvent9:
                 
@@ -154,6 +164,7 @@ Map5_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_EntityEvent10:
                 
@@ -168,6 +179,7 @@ Map5_EntityEvent10:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_EntityEvent11:
                 
                  
@@ -178,6 +190,7 @@ Map5_EntityEvent11:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_EntityEvent12:
                 
@@ -191,6 +204,7 @@ Map5_EntityEvent12:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_EntityEvent13:
                 
@@ -213,6 +227,7 @@ return_51BA6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_EntityEvent15:
                 
                  
@@ -224,6 +239,7 @@ Map5_EntityEvent15:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_EntityEvent14:
                 
                 jsr     j_ChurchMenuActions
@@ -234,6 +250,7 @@ Map5_EntityEvent14:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_DefaultEntityEvent:
                 
                 rts
@@ -242,6 +259,7 @@ Map5_DefaultEntityEvent:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_28A_EntityEvent1:
                 
@@ -255,6 +273,7 @@ Map5_28A_EntityEvent1:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_28A_EntityEvent2:
                 
                  
@@ -267,6 +286,7 @@ Map5_28A_EntityEvent2:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_28A_EntityEvent3:
                 
                  
@@ -277,6 +297,7 @@ Map5_28A_EntityEvent3:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_28A_EntityEvent4:
                 
@@ -290,6 +311,7 @@ Map5_28A_EntityEvent4:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_28A_EntityEvent7:
                 
                  
@@ -300,6 +322,7 @@ Map5_28A_EntityEvent7:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_28A_EntityEvent8:
                 
@@ -314,6 +337,7 @@ Map5_28A_EntityEvent8:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_28A_EntityEvent9:
                 
                  
@@ -325,6 +349,7 @@ Map5_28A_EntityEvent9:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_28A_EntityEvent10:
                 
@@ -338,6 +363,7 @@ Map5_28A_EntityEvent10:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map5_28A_EntityEvent11:
                 
                  
@@ -349,6 +375,7 @@ Map5_28A_EntityEvent11:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_28A_EntityEvent12:
                 
@@ -362,6 +389,7 @@ Map5_28A_EntityEvent12:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map5_28A_EntityEvent14:
                 

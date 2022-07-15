@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitMapEntities:
                 
                 movem.l d0-a5,-(sp)
@@ -14,10 +15,11 @@ InitMapEntities:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_440D4:
                 
                 movem.l d0-a5,-(sp)
-                lea     GetEntityPortaitAndSpeechSound(pc), a0
+                lea     GetEntityPortaitAndSpeechSfx(pc), a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
 
@@ -110,36 +112,39 @@ loc_44180:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_441AA:
                 
+                module
                 movem.l d0-a1,-(sp)
-                cmpi.b  #2,((PLAYER_TYPE-$1000000)).w
-                beq.w   loc_44262
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
-                beq.w   byte_441F0      
+                cmpi.b  #PLAYERTYPE_RAFT,((PLAYER_TYPE-$1000000)).w
+                beq.w   @Done
+                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
+                beq.w   byte_441F0      ; No followers
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a0
                 lea     ((ENTITY_DATA-$1000000)).w,a1
-loc_441D2:
+@GetFollowerPosition_Loop:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
                 cmpi.b  #$FF,d0
-                beq.s   byte_441F0      
-                lsl.w   #5,d0
+                beq.s   byte_441F0      ; No followers
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 move.w  d1,(a1,d0.w)
-                move.w  d2,2(a1,d0.w)
-                move.w  d1,$C(a1,d0.w)
-                move.w  d2,$E(a1,d0.w)
-                bra.s   loc_441D2
+                move.w  d2,ENTITYDEF_OFFSET_Y(a1,d0.w)
+                move.w  d1,ENTITYDEF_OFFSET_XDEST(a1,d0.w)
+                move.w  d2,ENTITYDEF_OFFSET_YDEST(a1,d0.w)
+                bra.s   @GetFollowerPosition_Loop
 byte_441F0:
                 
+                ; No followers
                 chkFlg  64              ; Raft is unlocked
-                beq.w   loc_44262
+                beq.w   @Done
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0
-                bne.s   loc_44248
+                cmp.b   ((RAFT_MAP-$1000000)).w,d0
+                bne.s   @RaftNotOnMap
                 move.b  ((RAFT_X-$1000000)).w,d1
                 move.b  ((RAFT_Y-$1000000)).w,d2
                 move.w  #$1F,d0
@@ -148,7 +153,7 @@ byte_441F0:
                 andi.w  #$7F,d2 
                 muls.w  #$180,d2
                 moveq   #2,d3
-                moveq   #$3D,d4 
+                moveq   #MAPSPRITE_RAFT,d4
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
@@ -160,40 +165,44 @@ byte_441F0:
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).w
-                bra.s   loc_44262
-loc_44248:
+                bra.s   @Done
+@RaftNotOnMap:
                 
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 clr.b   $3F(a0)
-                lea     ((byte_FFACE2-$1000000)).w,a0
+                lea     ((ENTITY_RAFT_DATA-$1000000)).w,a0
                 move.l  #$70007000,(a0)
-                move.l  #$70007000,$C(a0)
-loc_44262:
+                move.l  #$70007000,ENTITYDEF_OFFSET_XDEST(a0)
+@Done:
                 
                 movem.l (sp)+,d0-a1
                 rts
 
     ; End of function sub_441AA
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
+
+; Out: ccr zero-bit clear if true
+
 
 IsOverworldMap:
                 
                 movem.l d0-d1/a0,-(sp)
                 clr.w   d1
-                lea     OverworldMaps(pc), a0
-loc_44272:
+                lea     tbl_OverworldMaps(pc), a0
+@Loop:
                 
                 move.b  (a0)+,d0
-                bmi.w   loc_44282
+                bmi.w   @Break
                 cmp.b   ((CURRENT_MAP-$1000000)).w,d0
-                bne.s   loc_44280
+                bne.s   @Next
                 addq.w  #1,d1
-loc_44280:
+@Next:
                 
-                bra.s   loc_44272
-loc_44282:
+                bra.s   @Loop
+@Break:
                 
                 tst.w   d1
                 movem.l (sp)+,d0-d1/a0

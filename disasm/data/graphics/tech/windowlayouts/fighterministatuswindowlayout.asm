@@ -1,9 +1,12 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\fighterministatuswindowlayout.asm :
 ; 0x11AEC..0x11B46 : Fighter mini status window layout
-FighterMiniStatusWindowLayout:
+MiniStatusWindowLayout:
                 
-; Syntax        vdpBaseTile [VDPTILE_]index[|mirror|flip]
+; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
+;
+; Notes: PALETTE3 and PRIORITY bits are always set.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
 ; 1st column
                 vdpBaseTile CORNER
@@ -25,7 +28,7 @@ FighterMiniStatusWindowLayout:
                 vdpBaseTile UPPERCASE_P
                 vdpBaseTile UPPERCASE_P
                 vdpBaseTile H_BORDER|FLIP
-FighterMiniStatusWindowLayout_Body:
+MiniStatusWindowLayout_Body:
                 
 ; 4th column
                 vdpBaseTile H_BORDER
@@ -33,7 +36,7 @@ FighterMiniStatusWindowLayout_Body:
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile H_BORDER|FLIP
-FighterMiniStatusWindowLayout_Tail:
+MiniStatusWindowLayout_Tail:
                 
 ; 5th column
                 vdpBaseTile H_BORDER
