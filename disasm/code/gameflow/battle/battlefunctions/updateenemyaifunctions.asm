@@ -25,6 +25,10 @@ UpdateAllEnemiesAi:
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,@Loop
+                
+                if (STANDARD_BUILD&FIX_GODDESS_STAFF_DEALS_ABUSE=1)
+                    rts
+                endif
 
     ; End of function UpdateAllEnemiesAi
 
