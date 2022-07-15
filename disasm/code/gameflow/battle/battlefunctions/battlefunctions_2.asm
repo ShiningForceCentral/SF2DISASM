@@ -822,6 +822,10 @@ EquipNewItemInBattle:
 @Equip:
                 
                 move.w  d4,d1
+                if (STANDARD_BUILD&FIX_HIGINS_SPELL=1)
+                    cmpi.w  #COMBATANT_ITEMSLOTS,d1
+                    bge.s   @Return
+                endif
                 jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.w   @Return         ; return if not cursed

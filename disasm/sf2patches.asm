@@ -2,6 +2,7 @@
 ; 0 = OFF, 1 = ON
 
 ; Fixes
+FIX_HIGINS_SPELL:                       equ 1   ; Prevent unequipping from possibly corrupting characters spell entries.
 FIX_MOVEMENT_GLITCH:                    equ 1   ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
 FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE:    equ 1   ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
 
