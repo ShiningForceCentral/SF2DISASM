@@ -39,9 +39,15 @@ eas_ControlledCharacter:
                  ac_accelFactors 0,0
                  ac_acceleration -2,ON
                  ac_deceleration -2,ON
+                if (STANDARD_BUILD&FIX_MOVEMENT_GLITCH=1)
+byte_44E5A:      ac_waitDest
+                 ac_checkMapBlockCopy
+                 ac_controlCharacter
+                else
 byte_44E5A:      ac_checkMapBlockCopy
                  ac_controlCharacter
                  ac_waitDest
+                endif
 word_44E60:      ac_branch
                 dc.w (byte_44E5A-word_44E60) & $FFFF
 eas_Raft:        ac_entityObstructable ON
