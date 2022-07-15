@@ -13,7 +13,7 @@
 GetEntityPortaitAndSpeechSfx:
                 
                 movem.l d0/a0/a5,-(sp)
-                andi.w  #$FF,d0
+                andi.w  #COMBATANT_MASK_ALL,d0
                 clr.w   d1
                 clr.w   d2
                 bsr.w   GetEntityAddressFromCharacter

@@ -90,8 +90,7 @@ InitAllyCombatantEntry:
                 move.w  d3,COMBATANT_OFFSET_ITEM_2(a1)
                 move.b  (a0)+,d3
                 move.w  d3,COMBATANT_OFFSET_ITEM_3(a1)
-                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS_START(a1) 
-                                                        ; spell entries default to nothing
+                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1) ; spell entries default to nothing
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
                 bsr.w   InitAllyStats   
@@ -119,9 +118,9 @@ LoadAllyClassData:
                 mulu.w  #CLASSDEF_ENTRY_SIZE,d1
                 adda.w  d1,a0
                 move.b  (a0)+,COMBATANT_OFFSET_MOV_BASE(a1)
-                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE1(a1)
-                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE2(a1)
-                move.b  (a0)+,COMBATANT_OFFSET_MOVETYPE(a1)
+                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE(a1)
+                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE(a1)
+                move.b  (a0)+,COMBATANT_OFFSET_MOVETYPE_AND_AI(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_PROWESS_BASE(a1)
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
@@ -152,26 +151,29 @@ Promote:
 InitGameSettings:
                 
                 movem.l d0/d7-a0,-(sp)
-                moveq   #0,d0
+                moveq   #LONGWORD_GAMEFLAGS_INITVALUE,d0
                 lea     ((GAME_FLAGS-$1000000)).w,a0
-                moveq   #$1F,d7
-loc_9850:
+                moveq   #LONGWORD_GAMEFLAGS_COUNTER,d7
+@ClearGameFlags_Loop:
                 
                 move.l  d0,(a0)+
-                dbf     d7,loc_9850
+                dbf     d7,@ClearGameFlags_Loop
+                
                 lea     ((DEALS_ITEMS-$1000000)).w,a0
-                moveq   #$F,d7
-loc_985C:
+                moveq   #LONGWORD_DEALS_COUNTER,d7
+@ClearDealsItems_Loop:
                 
                 move.l  d0,(a0)+
-                dbf     d7,loc_985C
-                move.l  #$7F7F7F7F,d0
+                dbf     d7,@ClearDealsItems_Loop
+                
+                move.l  #LONGWORD_CARAVAN_INITVALUE,d0
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                moveq   #$F,d7
-loc_986E:
+                moveq   #LONGWORD_CARAVAN_COUNTER,d7
+@ClearCaravanItems_Loop:
                 
                 move.l  d0,(a0)+
-                dbf     d7,loc_986E
+                dbf     d7,@ClearCaravanItems_Loop
+                
                 moveq   #0,d0
                 move.w  d0,((CARAVAN_ITEMS_NUMBER-$1000000)).w
                 move.w  d0,((CURRENT_GOLD-$1000000)).w
@@ -179,7 +181,7 @@ loc_986E:
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 move.b  d0,((CURRENT_BATTLE-$1000000)).w
                 move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
-                move.b  d0,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  d0,((EGRESS_MAP-$1000000)).w
                 move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 move.b  #2,((MESSAGE_SPEED-$1000000)).w
                 move.l  #$FFFFFFFF,((FOLLOWERS_LIST-$1000000)).w
@@ -254,7 +256,7 @@ GetFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
-; determine who is in the force or not based on flags and update RAM lists
+; Determine who is in the force or not based on flags and update RAM lists.
 
 
 UpdateForce:
@@ -267,30 +269,31 @@ UpdateForce:
                 moveq   #0,d3
                 moveq   #0,d4
                 moveq   #0,d0
-                moveq   #COMBATANT_ALLIES_COUNTER,d7 ; HARDCODED number of allies
-loc_991A:
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
+@MemberStatus_Loop:
                 
                 move.w  d0,d1
-                addi.w  #0,d1
+                addi.w  #FORCEMEMBER_JOINED_FLAGS_START,d1
                 bsr.s   CheckFlag
-                beq.w   loc_993E
+                beq.w   @CheckNextMember
                 move.b  d0,(a2)+
                 addq.w  #1,d2
                 move.w  d0,d1
-                addi.w  #$20,d1 
+                addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.s   CheckFlag
-                beq.s   loc_993A
+                beq.s   @InReserve
                 move.b  d0,(a3)+
                 addq.w  #1,d3
-                bra.s   loc_993E
-loc_993A:
+                bra.s   @CheckNextMember
+@InReserve:
                 
                 move.b  d0,(a4)+
                 addq.w  #1,d4
-loc_993E:
+@CheckNextMember:
                 
                 addq.b  #1,d0
-                dbf     d7,loc_991A
+                dbf     d7,@MemberStatus_Loop
+                
                 move.w  d2,((TARGETS_LIST_LENGTH-$1000000)).w
                 move.w  d3,((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w
                 move.w  d4,((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w
@@ -310,13 +313,13 @@ JoinForce:
                 move.l  d1,-(sp)
                 clr.w   d1
                 move.b  d0,d1
-                addi.w  #0,d1
+                addi.w  #FORCEMEMBER_JOINED_FLAGS_START,d1
                 bsr.w   SetFlag
                 bsr.s   UpdateForce     
                 cmpi.w  #FORCE_MAX_SIZE,((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w
-                bcc.s   loc_9972
+                bcc.s   @SkipActiveForce
                 bsr.w   JoinBattleParty 
-loc_9972:
+@SkipActiveForce:
                 
                 move.l  (sp)+,d1
                 rts
@@ -334,7 +337,7 @@ LeaveForce:
                 move.l  d1,-(sp)
                 move.b  d0,d1
                 andi.b  #$FF,d1
-                addi.w  #0,d1
+                addi.w  #FORCEMEMBER_JOINED_FLAGS_START,d1
                 bsr.w   ClearFlag
                 move.w  #MAP_NULLPOSITION,d1
                 jsr     SetXPos
@@ -354,7 +357,7 @@ IsInBattleParty:
                 movem.l d1,-(sp)
                 move.b  d0,d1
                 andi.b  #$FF,d1
-                addi.w  #FLAG_COUNT_FORCEMEMBERS_JOINED,d1
+                addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.w   CheckFlag
                 movem.l (sp)+,d1
                 rts
@@ -372,7 +375,7 @@ JoinBattleParty:
                 move.l  d1,-(sp)
                 move.b  d0,d1
                 andi.b  #$FF,d1
-                addi.w  #FLAG_COUNT_FORCEMEMBERS_JOINED,d1
+                addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.w   SetFlag
                 move.l  (sp)+,d1
                 rts
@@ -390,7 +393,7 @@ LeaveBattleParty:
                 move.l  d1,-(sp)
                 move.b  d0,d1
                 andi.b  #$FF,d1
-                addi.w  #FLAG_COUNT_FORCEMEMBERS_JOINED,d1
+                addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.w   ClearFlag
                 move.w  #$FFFF,d1
                 jsr     SetXPos
@@ -427,9 +430,9 @@ AddItemToDeals:
                 movem.l d0-d2/a0,-(sp)
                 bsr.w   GetDealsItemInfo
                 cmpi.b  #DEALS_MAX_NUMBER_PER_ITEM,d2
-                beq.s   loc_99FC
+                beq.s   @DumpItem
                 add.b   d0,(a0)
-loc_99FC:
+@DumpItem:
                 
                 movem.l (sp)+,d0-d2/a0
                 rts
@@ -447,9 +450,9 @@ RemoveItemFromDeals:
                 movem.l d0-d2/a0,-(sp)
                 bsr.w   GetDealsItemInfo
                 tst.b   d2
-                beq.s   loc_9A10
+                beq.s   @Skip
                 sub.b   d0,(a0)
-loc_9A10:
+@Skip:
                 
                 movem.l (sp)+,d0-d2/a0
                 rts
@@ -473,16 +476,16 @@ GetDealsItemInfo:
                 divu.w  #2,d1
                 adda.w  d1,a0
                 move.b  (a0),d2
-                btst    #DEALS_BIT_REMAINDER,d1
-                bne.s   loc_9A34
+                btst    #DEALS_BIT_REMAINDER,d1 ; since deals are stacked 2 to a byte, this is the bit index that stores whether we are an even or odd item index
+                bne.s   @OddIndex
                 lsr.b   #BITS_HALFBYTE,d2
-                moveq   #DEALS_ADD_AMOUNT_ODD,d0
-                bra.s   return_9A3A
-loc_9A34:
+                moveq   #DEALS_ADD_AMOUNT_EVEN,d0
+                bra.s   @Return
+@OddIndex:
                 
                 andi.b  #DEALS_MAX_NUMBER_PER_ITEM,d2
-                moveq   #DEALS_ADD_AMOUNT_EVEN,d0
-return_9A3A:
+                moveq   #DEALS_ADD_AMOUNT_ODD,d0
+@Return:
                 
                 rts
 
@@ -521,7 +524,8 @@ AddItemToCaravan:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: D1 = item entry when FIX_CARAVAN_FREE_REPAIR_EXPLOIT is enabled
+; In: d1.w = inventory slot
+; Out: d1.w = item entry when FIX_CARAVAN_FREE_REPAIR_EXPLOIT is enabled
 
 
 RemoveItemFromCaravan:
@@ -537,34 +541,36 @@ RemoveItemFromCaravan:
                 movea.l a0,a1
                 move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
                 subq.w  #1,d7
-                bcs.w   loc_9A94
-loc_9A78:
+                bcs.w   @Done
+@Loop:
                 
                 cmp.w   d0,d1
-                bne.s   loc_9A84
+                bne.s   @Next
                 
+                ; Remove item
                 if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                     move.w  (a1)+,d2
                 else
-                    addq.l  #1,a1
+                    addq.l  #CARAVAN_ITEM_ENTRY_SIZE,a1
                 endif
                 subq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
-                bra.s   loc_9A86
-loc_9A84:
+                bra.s   @Continue
+@Next:
                 
                 if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                     move.w  (a1)+,(a0)+
                 else
                     move.b  (a1)+,(a0)+
                 endif
-loc_9A86:
+@Continue:
                 
                 addq.w  #1,d0
-                dbf     d7,loc_9A78
+                dbf     d7,@Loop
+                
                 cmpa.l  a1,a0
-                beq.s   loc_9A94
+                beq.s   @Done
                 move.b  #ITEM_NOTHING,(a0)
-loc_9A94:
+@Done:
                 
                 if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                     move.w  d2,d1

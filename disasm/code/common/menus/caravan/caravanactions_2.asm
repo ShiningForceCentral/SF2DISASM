@@ -1,34 +1,6 @@
 
 ; ASM FILE code\common\menus\caravan\caravanactions_2.asm :
-; 0x228A8..0x229CA : Caravan functions
-
-; =============== S U B R O U T I N E =======================================
-
-
-ChooseCaravanPortrait:
-                
-                movem.l d0-d1,-(sp)
-                move.l  d1,-(sp)
-                chkFlg  70              ; Astral is a follower
-                bne.s   loc_228B8
-                moveq   #PORTRAIT_ROHDE,d0 ; HARDCODED portraits
-                bra.s   loc_228BA
-loc_228B8:
-                
-                moveq   #PORTRAIT_ASTRAL,d0
-loc_228BA:
-                
-                moveq   #0,d1
-                jsr     j_InitPortraitWindow
-                move.l  (sp)+,d0
-                jsr     (DisplayText).w 
-                clsTxt
-                jsr     j_HidePortraitWindow
-                movem.l (sp)+,d0-d1
-                rts
-
-    ; End of function ChooseCaravanPortrait
-
+; 0x228D8..0x229CA : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -83,17 +55,17 @@ CopyCaravanItems:
                 move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
                 move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 subq.w  #1,d7
-                bcs.w   loc_22946
+                bcs.w   @Skip
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
                 lea     ((GENERIC_LIST-$1000000)).w,a1
-loc_22940:
+@Loop:
                 
                 if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                     addq.w  #1,a0
                 endif
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_22940
-loc_22946:
+                dbf     d7,@Loop
+@Skip:
                 
                 movem.l (sp)+,d7-a1
                 rts

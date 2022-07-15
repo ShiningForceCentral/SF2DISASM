@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\battles\battlesprites\allies\animations\entries.asm :
 ; 0x1AAC3A..0x1AB79E : Ally animations
-pt_AlliesAnimations:
+pt_AllyAnimations:
                 dc.l AllyAnimation000
                 dc.l AllyAnimation001
                 dc.l AllyAnimation002

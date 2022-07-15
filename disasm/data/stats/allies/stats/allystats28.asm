@@ -8,4 +8,4 @@ AllyStats28:    forClass  RDBN
                 defGrowth 31, 92, LINEAR
                 agiGrowth 22, 63, EARLY
                 spellList 
-                    
+                

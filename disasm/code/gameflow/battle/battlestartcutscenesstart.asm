@@ -14,7 +14,7 @@ ExecuteBattleCutscene_Start:
                 movem.l d1,-(sp)
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
-                addi.w  #$1C2,d1
+                addi.w  #BATTLE_INTRO_CUTSCENE_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   loc_47B8C
                 jsr     j_SetFlag

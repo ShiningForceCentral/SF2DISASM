@@ -191,7 +191,7 @@ loc_11D1A:
                 bra.s   loc_11D32
 loc_11D2C:
                 
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
 loc_11D32:
                 
                 move.l  a1,-(sp)
@@ -202,7 +202,7 @@ loc_11D32:
                 move.b  (a1),d1
                 move.w  d1,-(sp)
                 move.b  #1,(a1)
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 move.w  #$240,d0
                 move.w  #$740,d1
@@ -217,17 +217,17 @@ loc_11D64:
                 add.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
 loc_11D6C:
                 
-                move.b  $11(a0),d7
+                move.b  ENTITYDEF_OFFSET_LAYER(a0),d7
                 move.w  d7,-(sp)
-                move.w  $C(a0),-(sp)
-                move.w  $E(a0),-(sp)
-                move.w  $10(a0),-(sp)
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),-(sp)
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),-(sp)
+                move.w  ENTITYDEF_OFFSET_FACING(a0),-(sp)
                 move.w  d0,(a0)
-                move.w  d1,2(a0)
-                move.w  d0,$C(a0)
-                move.w  d1,$E(a0)
-                move.b  #$40,$11(a0) 
-                andi.b  #$7F,$1D(a0) 
+                move.w  d1,ENTITYDEF_OFFSET_Y(a0)
+                move.w  d0,ENTITYDEF_OFFSET_XDEST(a0)
+                move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
+                move.b  #64,ENTITYDEF_OFFSET_LAYER(a0)
+                andi.b  #$7F,ENTITYDEF_OFFSET_FLAGS_B(a0) 
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_11DBC
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
@@ -256,15 +256,15 @@ loc_11DDC:
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
                 andi.b  #INPUT_B|INPUT_C|INPUT_A,d0
                 beq.s   loc_11DDC
-                move.w  (sp)+,$10(a0)
+                move.w  (sp)+,ENTITYDEF_OFFSET_FACING(a0)
                 move.w  (sp)+,d1
                 move.w  (sp)+,d0
                 move.w  d0,(a0)
-                move.w  d1,2(a0)
-                move.w  d0,$C(a0)
-                move.w  d1,$E(a0)
+                move.w  d1,ENTITYDEF_OFFSET_Y(a0)
+                move.w  d0,ENTITYDEF_OFFSET_XDEST(a0)
+                move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
                 move.w  (sp)+,d7
-                move.b  d7,$11(a0)
+                move.b  d7,ENTITYDEF_OFFSET_LAYER(a0)
                 move.w  (sp)+,d0
                 move.b  d0,(a1)
                 movea.l (sp)+,a1
@@ -305,7 +305,7 @@ loc_11E54:
                 bra.s   loc_11E82
 loc_11E74:
                 
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
+                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 bne.s   loc_11E80
                 moveq   #$3E,d4 
                 bra.s   loc_11E82
@@ -316,7 +316,7 @@ loc_11E82:
                 
                 clr.w   d0
                 clr.w   d1
-                move.b  $10(a0),d1
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
@@ -331,7 +331,7 @@ loc_11E94:
                 jsr     j_GetAllyMapSprite
                 clr.w   d0
                 clr.w   d1
-                move.b  $10(a0),d1
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w

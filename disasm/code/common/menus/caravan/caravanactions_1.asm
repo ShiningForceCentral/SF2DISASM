@@ -74,7 +74,7 @@ loc_22070:
                 
                 moveq   #1,d1
                 bsr.w   sub_228D8
-                cmpi.w  #$C,((GENERIC_LIST_LENGTH-$1000000)).w
+                cmpi.w  #FORCE_MAX_SIZE,((GENERIC_LIST_LENGTH-$1000000)).w
                 bcc.s   loc_22098
                 move.w  var_2(a6),d0
                 jsr     j_JoinBattleParty
@@ -399,7 +399,7 @@ Caravan_StoreItem:
                 bsr.w   ChooseCaravanPortrait
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,var_2(a6)
                 move.w  d1,var_6(a6)
                 move.w  d2,var_4(a6)
@@ -466,7 +466,7 @@ Caravan_PassItem:
                 bsr.w   ChooseCaravanPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  var_4(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,var_8(a6)
                 move.w  d1,var_12(a6)
                 move.w  d2,var_10(a6)
@@ -663,7 +663,7 @@ loc_22574:
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,var_2(a6)
                 move.w  d1,var_6(a6)
                 move.w  d2,var_4(a6)
@@ -733,7 +733,7 @@ loc_22618:
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,var_2(a6)
                 move.w  d1,var_6(a6)
                 move.w  d2,var_4(a6)
@@ -746,7 +746,7 @@ loc_22618:
                 bsr.w   ChooseCaravanPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  var_4(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,var_8(a6)
                 move.w  d1,var_12(a6)
                 move.w  d2,var_10(a6)
@@ -846,7 +846,7 @@ loc_2277E:
                 bsr.w   sub_228D8
                 move.b  #3,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_227A6
                 txt     4               ; "Did you change your mind?{W2}"
@@ -880,7 +880,7 @@ loc_227B8:
                 bsr.w   sub_228D8
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     sub_10044
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,var_2(a6)
                 move.w  d1,var_6(a6)
                 move.w  d2,var_4(a6)

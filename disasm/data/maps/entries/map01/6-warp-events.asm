@@ -3,22 +3,22 @@
 ; 0x95F4C..0x95F7E : 
                 mWarp 2, 14
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   48, 30
                   warpFacing UP
                 mWarp 20, 14
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   27, 8
                   warpFacing UP
                 mWarp 48, 31
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   2, 15
                   warpFacing DOWN
                 mWarp 27, 9
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   20, 15
                   warpFacing DOWN
                 mWarp 10, 32

@@ -1,12 +1,11 @@
 
 ; ASM FILE code\common\tech\sram\sramfunctions.asm :
 ; 0x6E94..0x7034 : SRAM functions
-SramCheckString:dc.b 'Taguchi New Supra'
-                dc.b $FF
+SramCheckString:dc.b 'Taguchi New Supra',$FF
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: D0, D1 = -1 if slot 1, or slot 2 failed checksum
+; Out: d0.w, d1.w = -1 if slot 1 or slot 2 failed checksum, respectively.
 
 
 CheckSram:
@@ -14,12 +13,13 @@ CheckSram:
                 movem.l d7-a1,-(sp)
                 lea     SramCheckString(pc), a0
                 lea     (SRAM_STRING).l,a1
-                moveq   #$10,d7
+                moveq   #SRAM_STRING_CHECK_COUNTER,d7
 @CheckSramString_Loop:
                 
                 cmpm.b  (a0)+,(a1)+
                 lea     1(a1),a1
                 dbne    d7,@CheckSramString_Loop
+                
                 bne.w   @InitSram
                 
                 ; is slot 2 occupied ?
@@ -35,7 +35,7 @@ CheckSram:
                 else
                     lea     (COMBATANT_ENTRIES).l,a1
                 endif
-                move.w  #SAVE_SLOT_SIZE,d7
+                move.w  #SAVE_SLOT_REAL_SIZE,d7
                 bsr.w   CopyBytesFromSram
                 cmp.b   (SAVE2_CHECKSUM).l,d0
                 bne.s   @ClearSlot2
@@ -50,7 +50,7 @@ CheckSram:
                 btst    #0,(SAVE_FLAGS).l
                 bne.s   @ChecksumSlot1
                 clr.w   d0
-                bra.s   @Continue
+                bra.s   @Goto_Done
 @ChecksumSlot1:
                 
                 lea     (SAVE1_DATA).l,a0
@@ -59,17 +59,17 @@ CheckSram:
                 else
                     lea     (COMBATANT_ENTRIES).l,a1
                 endif
-                move.w  #SAVE_SLOT_SIZE,d7
+                move.w  #SAVE_SLOT_REAL_SIZE,d7
                 bsr.w   CopyBytesFromSram
                 cmp.b   (SAVE1_CHECKSUM).l,d0
                 bne.s   @ClearSlot1
                 moveq   #1,d0
-                bra.s   @Continue
+                bra.s   @Goto_Done
 @ClearSlot1:
                 
                 moveq   #$FFFFFFFF,d0
                 bclr    #0,(SAVE_FLAGS).l
-@Continue:
+@Goto_Done:
                 
                 bra.w   @Done
 @InitSram:
@@ -84,7 +84,7 @@ CheckSram:
                 
                 lea     SramCheckString(pc), a0
                 lea     (SRAM_STRING).l,a1
-                moveq   #$11,d7
+                moveq   #SRAM_STRING_WRITE_COUNTER,d7
                 bsr.w   CopyBytesToSram 
                 clr.b   (SAVE_FLAGS).l  
                 clr.w   d0
@@ -117,7 +117,7 @@ SaveGame:
                 moveq   #1,d1
 @Continue:
                 
-                move.w  #SAVE_SLOT_SIZE,d7
+                move.w  #SAVE_SLOT_REAL_SIZE,d7
                 bsr.w   CopyBytesToSram 
                 move.b  d0,(a2)         ; d0 = save checksum
                 bset    d1,(SAVE_FLAGS).l ; indicate busy save slot
@@ -145,7 +145,7 @@ LoadGame:
                 moveq   #1,d1
 @Continue:
                 
-                move.w  #SAVE_SLOT_SIZE,d7
+                move.w  #SAVE_SLOT_REAL_SIZE,d7
                 bsr.w   CopyBytesFromSram
                 movem.l (sp)+,d0-d1/d7-a2
                 rts
@@ -206,6 +206,7 @@ CopyBytesToSram:
                 add.b   (a0)+,d0
                 addq.l  #2,a1
                 dbf     d7,@Loop
+                
                 movem.l (sp)+,d7-a1
                 rts
 

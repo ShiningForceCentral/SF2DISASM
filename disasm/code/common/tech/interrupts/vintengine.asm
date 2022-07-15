@@ -151,8 +151,10 @@ loc_6DA:
                 
                 move.w  (a0)+,(VDP_Data).l
                 dbf     d0,loc_6DA
+                
                 subq.b  #1,(VDP_COMMAND_COUNTER).l
                 bne.s   loc_698
+                
                 move.w  #$8F02,(VDP_Control).l
                 move.l  #VDP_COMMAND_QUEUE,(VDP_COMMAND_QUEUE_POINTER).l
 return_6FE:
@@ -206,6 +208,7 @@ loc_75C:
                 
                 btst    #0,(Z80BusReq).l ; Check bus availability
                 bne.s   loc_75C         
+                
                 btst    #DEACTIVATE_DMA,(VINT_PARAMS).l ; Check if DMA deactivated
                 bne.s   return_7CC
                 bsr.w   UpdateVdpSpriteTable ; Update sprites
@@ -226,6 +229,7 @@ loc_794:
                 move.w  (DMA_ADDR_MSBYTE).l,(a6)
                 subq.b  #1,(DMA_QUEUE_SIZE).l
                 bne.s   loc_794         
+                
                 move.w  (VDP_REG01_STATUS).l,(a6)
                 move.w  #$8F02,(a6)
 loc_7BA:
@@ -438,12 +442,10 @@ loc_906:
                                         ; or fade in parameter when 7F < command < F0
                 move.b  1(a0),d0        ; stores first command in d1 and d0 and pushes the rest forward
                 move.w  2(a0),(a0)+
-loc_91E:
-                
                 move.w  2(a0),(a0)+
                 move.w  2(a0),(a0)+
                 clr.w   (a0)
-                cmpi.b  #$FB,d0
+                cmpi.b  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0
                 bne.s   loc_95A         ; if command FB, play back previous music
                 tst.b   ((MUSIC_STACK_LENGTH-$1000000)).w
                 beq.s   loc_94E
@@ -462,13 +464,13 @@ loc_94E:
                 bra.w   loc_9F6
 loc_95A:
                 
-                cmpi.b  #$FD,d0
+                cmpi.b  #SOUND_COMMAND_FADE_OUT,d0
                 bcs.s   loc_96A
                 move.b  d0,(Z80_SoundDriverCommand).l ; if command >= FD, then send it to Z80
                 bra.w   loc_9F6
 loc_96A:
                 
-                cmpi.b  #$F0,d0
+                cmpi.b  #SOUND_COMMAND_WAIT_MUSIC_END,d0
                 bne.s   loc_97A
                 move.b  #1,((WAIT_FOR_MUSIC_END-$1000000)).w ; if F0, then wait for current music to end before sending commands to Z80
                 bra.w   loc_9F6
@@ -976,8 +978,8 @@ loc_D30:
                 sub.w   d6,d5
                 btst    d5,d1
                 bne.s   loc_D44
-                adda.w  #$20,a0 
-                adda.w  #$20,a1 
+                adda.w  #CRAM_PALETTE_SIZE,a0
+                adda.w  #CRAM_PALETTE_SIZE,a1
                 bra.w   loc_DA8
 loc_D44:
                 
@@ -1117,26 +1119,29 @@ ClearSpriteTable:
 ClearScrollTableData:
                 
                 movem.l d7/a6,-(sp)
-                move.w  #$C000,d0       ; clear scroll A table
+                move.w  #VRAM_ADDRESS_PLANE_A,d0 ; clear scroll A table
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
-                move.w  #$E000,d0       ; clear scroll B table
+                move.w  #VRAM_ADDRESS_PLANE_B,d0 ; clear scroll B table
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
+                
                 move.w  #$1FF,d7
                 lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a6
 loc_E62:
                 
                 clr.l   (a6)+
                 dbf     d7,loc_E62
+                
                 move.w  #$1FF,d7
                 adda.w  #$1800,a6
 loc_E70:
                 
                 clr.l   (a6)+
                 dbf     d7,loc_E70
+                
                 movem.l (sp)+,d7/a6
                 rts
 
