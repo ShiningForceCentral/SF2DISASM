@@ -6,11 +6,12 @@
 
 ; Get portrait index for combatant D0 -> D0
 
+
 GetCombatantPortrait:
                 
                 tst.b   d0
                 bpl.s   @Ally
-                jsr     j_GetEntityPortaitAndSpeechSound
+                jsr     j_GetEntityPortaitAndSpeechSfx
                 move.w  d1,d0
                 bra.s   @Return
 @Ally:

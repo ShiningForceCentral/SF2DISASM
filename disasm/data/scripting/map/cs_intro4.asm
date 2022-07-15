@@ -1,7 +1,7 @@
 
 ; ASM FILE data\scripting\map\cs_intro4.asm :
 ; 0x48A78..0x48FE2 : Intro cutscene 4
-IntroCutscene4: textCursor $1089
+IntroCutscene4: textCursor 4233
                 mapLoad MAP_GRANSEAL_CASTLE,7,3
                 loadMapEntities ce_48FAA
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -14,7 +14,7 @@ IntroCutscene4: textCursor $1089
                 executeSubroutine ApplyStormEffect
                 executeSubroutine ApplyStormEffect
                 csWait 60
-                textCursor $1089
+                textCursor 4233
                 nextSingleText $0,129   ; "Somebody bring a light to{N}the King's chamber!{D2}"
                 csWait 20
                 playSound SFX_DEMON_BREATH
@@ -44,13 +44,13 @@ IntroCutscene4: textCursor $1089
                 endActions
                 nextSingleText $80,128  ; "What was that?{D2}"
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 80
                 entityActionsWait 129
                  moveUp 2
                 endActions
                 csWait 40
-                setActscriptWait 129,eas_46172
+                setActscriptWait 129,eas_DeactivateAutoFacing
                 customActscriptWait 129
                  ac_setSpeed 8,8        ;   
                  ac_jump eas_Idle       ;   
@@ -126,7 +126,7 @@ IntroCutscene4: textCursor $1089
                  faceUp 1
                 endActions
                 nextSingleText $0,130   ; "It's open!{D2}"
-                setActscriptWait 129,eas_46172
+                setActscriptWait 129,eas_DeactivateAutoFacing
                 customActscriptWait 129
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -217,7 +217,7 @@ IntroCutscene4: textCursor $1089
                 endActions
                 nextSingleText $80,128  ; "A sealed door that is open.{N}An unusual storm.{N}Everything is so strange.{D2}"
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 60
                 entityActionsWait 128
                  moveDown 1
@@ -248,7 +248,7 @@ IntroCutscene4: textCursor $1089
                 setFacing 128,DOWN
                 csWait 30
                 nextSingleText $80,128  ; "What was that?{N}Who's there?!{D2}"
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 128
                  moveUp 1
                 endActions
@@ -260,7 +260,7 @@ IntroCutscene4: textCursor $1089
                 csWait 60
                 nextSingleText $80,128  ; "It's not my imagination!{N}Somebody's in this room!{D2}"
                 csWait 5
-                setActscript 128,eas_461B6
+                setActscript 128,eas_2xRightLeft
                 csWait 80
                 playSound SFX_INTRO_LIGHTNING
                 setPos 132,9,11,UP
@@ -280,13 +280,13 @@ IntroCutscene4: textCursor $1089
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 128
                  moveDown 1
                 endActions
                 nextSingleText $80,128  ; "Stay away from me!{D2}"
-                setActscriptWait 131,eas_Init2
-                setActscriptWait 131,eas_46172
+                setActscriptWait 131,eas_InitSlow
+                setActscriptWait 131,eas_DeactivateAutoFacing
                 stopEntity 131
                 entityActionsWait 131
                  moveRight 1
@@ -309,7 +309,7 @@ IntroCutscene4: textCursor $1089
                  moveDown 1
                 endActions
                 csWait 5
-                setActscript 128,eas_461E4
+                setActscript 128,eas_2xUpDown
                 csWait 30
                 nextSingleText $80,128  ; "Somebody...HELP!{D2}"
                 setFacing 128,UP
@@ -339,12 +339,12 @@ IntroCutscene4: textCursor $1089
                 endActions
                 setFacing 128,UP
                 customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                nextSingleText $80,128  ; "(Sigh)....{D2}"
+                nextSingleText $80,128  ; "(Sigh)....{D2"
                 shiver 131
                 csWait 30
                 playSound SFX_INTRO_LIGHTNING

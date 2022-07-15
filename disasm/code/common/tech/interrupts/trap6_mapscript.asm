@@ -6,6 +6,7 @@
 
 ; execute map script at a0
 
+
 Trap6_TriggerAndExecuteMapScript:
                 
                 movem.l d0-a6,-(sp)

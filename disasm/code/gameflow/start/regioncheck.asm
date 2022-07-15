@@ -4,12 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CheckRegion:
                 
                 move.b  (HW_Info).l,d0  
                 andi.b  #$C0,d0
                 cmpi.b  #$80,d0
-                beq.w   return_7F40
+                beq.w   @Return
                 bsr.w   EnableDisplayAndInterrupts
                 lea     aDevelopedForUseOnlyWith(pc), a0
                 lea     (byte_FFC286).l,a1
@@ -36,10 +37,10 @@ CheckRegion:
                 clr.l   (a0)+
                 bsr.w   ApplyVIntCramDma
                 bsr.w   WaitForDmaQueueProcessing
-loc_7F3E:
+@InfiniteLoop:
                 
-                bra.s   loc_7F3E
-return_7F40:
+                bra.s   @InfiniteLoop
+@Return:
                 
                 rts
 
@@ -48,14 +49,15 @@ return_7F40:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadRegionCheckString:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
-                beq.s   return_7F4C
+                beq.s   @Return
                 move.w  d0,(a1)+
                 bra.s   LoadRegionCheckString
-return_7F4C:
+@Return:
                 
                 rts
 

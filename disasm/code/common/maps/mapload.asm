@@ -6,6 +6,7 @@
 
 ; A0=Source, A1=Destination
 
+
 LoadMapLayoutData:
                 
                 movem.l d0-a6,-(sp)
@@ -241,6 +242,7 @@ loc_227A:
 ; In: D0 = barrel
 ; Out: D1 = block flag word
 
+
 ReadMapLayoutBarrelForBlockFlags:
                 
                 dbf     d3,loc_229E
@@ -304,6 +306,7 @@ loc_22E6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SaveBlockToUpperStackMap:
                 
                 lea     -$80(a1),a2     ; upper block value
@@ -324,6 +327,7 @@ loc_2308:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SaveBlockToLeftStackMap:
                 
@@ -386,9 +390,9 @@ return_2370:
 
 ; =============== S U B R O U T I N E =======================================
 
-; decompress map blocks ?
 ; a0 : input ROM block data
 ; a1 : output RAM data
+
 
 LoadMapBlocks:
                 
@@ -661,6 +665,7 @@ loc_257A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ProcessMapTransition:
                 
                 clr.w   d1
@@ -669,7 +674,7 @@ ProcessMapTransition:
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
                 addq.l  #1,a5
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_25E8
@@ -683,7 +688,7 @@ ProcessMapTransition:
 loc_25E8:
                 
                 addq.l  #1,a5
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_260E
@@ -696,7 +701,7 @@ loc_25E8:
                 bsr.w   WaitForDmaQueueProcessing
 loc_260E:
                 
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_2632
@@ -737,6 +742,7 @@ loc_2632:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ApplyOverworldMapTransition:
                 
                 move.b  ((MAP_EVENT_PARAM_1-$1000000)).w,d0
@@ -754,6 +760,7 @@ rjt_OverworldMapTransition:
                 dc.w ApplyOverworldMapTransition_Down-rjt_OverworldMapTransition
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ApplyOverworldMapTransition_Right:
                 
@@ -819,6 +826,7 @@ loc_26E8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ApplyOverworldMapTransition_Left:
                 
@@ -887,6 +895,7 @@ loc_27AE:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ApplyOverworldMapTransition_Up:
                 
                 move.w  #$5100,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
@@ -951,6 +960,7 @@ loc_2874:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ApplyOverworldMapTransition_Down:
                 
@@ -1017,6 +1027,7 @@ loc_293A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_29A2:
                 
                 movem.l d0-a0,-(sp)
@@ -1034,14 +1045,14 @@ loc_29BC:
                 cmpi.w  #$1F,d7
                 bne.s   loc_29CA
                 add.w   d1,(a0)
-                add.w   d0,6(a0)
+                add.w   d0,VDPSPRITE_OFFSET_X(a0)
                 bra.s   loc_29D6
 loc_29CA:
                 
                 cmpi.w  #1,(a0)
                 beq.s   loc_29D6
                 add.w   d3,(a0)
-                add.w   d2,6(a0)
+                add.w   d2,VDPSPRITE_OFFSET_X(a0)
 loc_29D6:
                 
                 addq.l  #8,a0
@@ -1054,66 +1065,75 @@ loc_29D6:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = map index
+; In: d1.b = map index
+
 
 LoadMapTilesets:
                 
                 movem.l d0-d1/a0-a1/a5,-(sp)
                 ext.w   d1
-                blt.w   loc_2A86
+                blt.w   @Skip           ; skip if map index > 127
+                
                 movea.l (p_pt_MapData).l,a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
                 move.b  (a5)+,d0
-                movea.l (p_pt_MapTiles).l,a0
+                
+                ; Check tileset 1
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   loc_2A16
+                blt.s   @CheckTileset2
+                
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF3000_MAP_TILESET_1).l,a1
                 bsr.w   LoadCompressedData
-loc_2A16:
+@CheckTileset2:
                 
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   loc_2A32
+                blt.s   @CheckTileset3
+                
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 bsr.w   LoadCompressedData
-loc_2A32:
+@CheckTileset3:
                 
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   loc_2A4E
+                blt.s   @CheckTileset4
+                
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF0000_RAM_START).l,a1
                 bsr.w   LoadCompressedData
-loc_2A4E:
+@CheckTileset4:
                 
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   loc_2A6A
+                blt.s   @CheckTileset5
+                
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF1000_MAP_TILESET_4).l,a1
                 bsr.w   LoadCompressedData
-loc_2A6A:
+@CheckTileset5:
                 
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                blt.s   loc_2A86
+                blt.s   @Skip
+                
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF2000_LOADING_SPACE).l,a1
                 bsr.w   LoadCompressedData
-loc_2A86:
+@Skip:
                 
                 movem.l (sp)+,d0-d1/a0-a1/a5
                 rts
@@ -1123,7 +1143,10 @@ loc_2A86:
 
 ; =============== S U B R O U T I N E =======================================
 
-; loads all map properties (map coords, entities, etc.)
+; Load all map properties (map coords, entities, etc.)
+; 
+; In: d1.b = map index, or -1 to indicate current map
+
 
 LoadMap:
                 
@@ -1138,6 +1161,8 @@ LoadMap:
                 move.w  (sp)+,d1
                 ext.w   d1
                 bpl.s   loc_2ACC        
+                
+                ; Reload current map
                 clr.w   d1              ; If D1<0, re-load current map
                 move.b  ((CURRENT_MAP-$1000000)).w,d1
                 movea.l (p_pt_MapData).l,a5
@@ -1149,8 +1174,6 @@ loc_2ACC:
                 
                 clr.w   ((word_FFAF42-$1000000)).w ; Load new map D1
                 move.b  d1,((CURRENT_MAP-$1000000)).w
-loc_2AD4:
-                
                 movea.l (p_pt_MapData).l,a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
@@ -1280,7 +1303,7 @@ loc_2C0C:
                 bra.w   loc_2B82
 loc_2C14:
                 
-                bsr.w   LoadMapArea
+                bsr.w   LoadMapArea     
                 move.w  (sp)+,d0
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_2C70
@@ -1409,6 +1432,7 @@ loc_2CF6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 LoadMapBlocksAndLayout:
                 
                 movea.l (a5)+,a0
@@ -1472,16 +1496,20 @@ return_2DEA:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w, d1.w, d2.w, d3.w = start X, start Y, end X, end Y
+
+
 LoadMapArea:
                 
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
-                bne.s   loc_2E06
+                bne.s   @Battle
+                
                 move.w  d0,((MAP_AREA_LAYER1_STARTX-$1000000)).w
                 move.w  d1,((MAP_AREA_LAYER1_STARTY-$1000000)).w
                 move.w  d2,((MAP_AREA_LAYER1_ENDX-$1000000)).w
                 move.w  d3,((MAP_AREA_LAYER1_ENDY-$1000000)).w
-                bra.s   loc_2E2C
-loc_2E06:
+                bra.s   @Continue
+@Battle:
                 
                 move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d0
                 clr.w   d1
@@ -1495,7 +1523,7 @@ loc_2E06:
                 clr.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w
                 move.w  d0,((MAP_AREA_LAYER1_ENDX-$1000000)).w
                 move.w  d1,((MAP_AREA_LAYER1_ENDY-$1000000)).w
-loc_2E2C:
+@Continue:
                 
                 move.w  (a4)+,d0
                 mulu.w  #3,d0
@@ -1519,10 +1547,11 @@ loc_2E2C:
                 movea.l (a5),a4
                 move.w  #1,((TILE_ANIMATION_COUNTER-$1000000)).w
                 move.l  $18(a5),((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w
-                blt.s   return_2EBE
+                blt.s   @Return
+                
                 movea.l ((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w,a1
                 move.w  (a1)+,d0
-                movea.l (p_pt_MapTiles).l,a0
+                movea.l (p_pt_MapTilesets).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.l  a1,-(sp)
@@ -1536,7 +1565,7 @@ loc_2E2C:
                 bsr.w   CopyBytes       
                 addq.l  #4,((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w
                 move.b  ((CURRENT_MAP-$1000000)).w,((TILE_ANIMATION_MAP_INDEX-$1000000)).w
-return_2EBE:
+@Return:
                 
                 rts
 
@@ -1544,6 +1573,7 @@ return_2EBE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_2EC0:
                 
@@ -1582,6 +1612,7 @@ loc_2F04:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_2F24:
                 

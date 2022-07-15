@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle15\cs_afterbattle.asm :
 ; 0x4AE72..0x4AFBE : Cutscene after battle 15
-abcs_battle15:  textCursor $9CA
+abcs_battle15:  textCursor 2506
                 loadMapFadeIn MAP_ACHILLES_SHRINES,9,10
                 loadMapEntities ce_4AFB6
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -76,8 +76,8 @@ abcs_battle15:  textCursor $9CA
                  moveLeft 5
                 endActions
                 hide FOLLOWER_A
-                clearF $4D              ; Old man is a follower
-                setF $2DC               ; Set after the old man fails to open the way to Grans in the Wooden Panel shrine
+                clearF 77               ; Old man is a follower
+                setF 732                ; Set after the old man fails to open the way to Grans in the Wooden Panel shrine
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 warp MAP_ACHILLES_SHRINES,27,11,UP

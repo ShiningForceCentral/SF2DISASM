@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Trap5_TextBox:
                 
                 movem.l d0-a6,-(sp)
@@ -12,7 +13,7 @@ Trap5_TextBox:
                 move.w  (a6)+,d0
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_570
-                bsr.w   HideTextBox     
+                bsr.w   HideTextBox
                 bra.s   loc_574
 loc_570:
                 

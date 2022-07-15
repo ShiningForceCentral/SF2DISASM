@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map33_AreaDescriptions:
                 
                 move.w  #$1018,d3       ; "A book...{N}DEMON KINGS{W1}"

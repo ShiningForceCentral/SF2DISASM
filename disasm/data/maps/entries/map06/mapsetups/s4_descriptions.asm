@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map6_AreaDescriptions:
                 
                 move.w  #$FF4,d3        ; "A book...{N}GREAT VOYAGE{W1}"
@@ -37,10 +38,11 @@ byte_54D9A:     msDesc 5, 7, 4, 0       ; "{NAME} investigated{N}the book shelve
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map6_DescFunc0:
                 
                  
-                chkFlg  $2BE            ; Set after the scene with Peter at the Castle (ends with you leaving the Castle)
+                chkFlg  702             ; Set after the scene with Peter at the Castle (ends with you leaving the Castle)
                 bne.s   loc_54DEE
                 move.w  #$FFB,d0        ; It reads...{N}OUT TO LUNCH{W1}
                 jsr     (DisplayText).w 
@@ -61,6 +63,7 @@ return_54E02:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map6_DescFunc1:
                 
                 move.w  #$FFE,d0
@@ -72,7 +75,7 @@ Map6_DescFunc1:
                 sndCom  SFX_FALLING
                 moveq   #$32,d0 
                 jsr     (Sleep).w       
-                chkFlg  $322            ; Set after the event in the basement of Creed's Mansion
+                chkFlg  802             ; Set after the event in the basement of Creed's Mansion
                 bne.s   loc_54E38
                 sndCom  SFX_BLO
                 move.w  #$FFF,d0

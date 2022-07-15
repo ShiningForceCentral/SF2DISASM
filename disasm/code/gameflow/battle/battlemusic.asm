@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 PlayMapMusic:
                 
                 move.w  d0,-(sp)
@@ -11,9 +12,10 @@ PlayMapMusic:
                 move.b  ((MAP_AREA_MUSIC_INDEX-$1000000)).w,d0
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 beq.s   byte_4586
-                cmpi.b  #0,d0
+                
+                cmpi.b  #MUSIC_NOTHING,d0
                 bne.s   loc_455E
-                move.w  #MUSIC_BATTLE_THEME_3,d0 ; HARDCODED battle music indexes here
+                move.w  #MUSIC_BATTLE_THEME_3,d0 ; HARDCODED exploration music -> battle music
 loc_455E:
                 
                 cmpi.b  #MUSIC_TOWN,d0

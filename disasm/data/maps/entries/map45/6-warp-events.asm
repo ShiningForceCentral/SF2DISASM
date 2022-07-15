@@ -18,12 +18,12 @@
                   warpFacing DOWN
                 mWarp 22, 23
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   15, 52
                   warpFacing LEFT
                 mWarp 15, 52
                   warpNoScroll
-                  warpMap    255
+                  warpMap    MAP_NONE
                   warpDest   22, 23
                   warpFacing LEFT
                 endWord

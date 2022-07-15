@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitGame:
                 
                 move    #$2300,sr
@@ -16,14 +17,7 @@ InitGame:
                 beq.w   GameIntro
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   WaitForVInt
-                
-                if (EASY_BATTLE_TEST=1)
-                bra.w   DebugModeBattleTest
-                nop
-                else
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
-                endif
-                
                 beq.s   loc_7118
                 jsr     (EnableDisplayAndInterrupts).w
                 bsr.w   InitDisplay
@@ -44,7 +38,7 @@ loc_7118:
                 dc.l VInt_UpdateWindows
                 move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
                 bsr.w   InitWindowProperties
-                setFlg  $18F            ; Set after first battle's cutscene OR first save? Checked at witch screens
+                setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 moveq   #0,d0
                 moveq   #0,d1
                 moveq   #$38,d2 

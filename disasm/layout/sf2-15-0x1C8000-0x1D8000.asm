@@ -4,6 +4,6 @@
 ; FREE SPACE : 1467 bytes.
 
 
-p_pt_Portraits: dc.l pt_Portraits
-                includeIfVanillaRom "data\graphics\portraits\entries.asm"    ; Portraits
-                align $1D8000
+                include "code\common\tech\pointers\s15_portraitspointer.asm"    ; Game Section 15 Portraits Pointer
+                include "data\graphics\portraits\entries.asm"    ; Portraits
+                align $8000
