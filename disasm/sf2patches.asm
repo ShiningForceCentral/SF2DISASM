@@ -2,6 +2,7 @@
 ; 0 = OFF, 1 = ON
 
 ; Fixes
+FIX_GARBLED_HP_BAR:                     equ 1   ; Prevent drawing garbage pixels when HP is greater then 600. (Keep drawing black bars instead.)
 FIX_KIWI_SPELLS_LEARNING_LEVEL:         equ 1   ; Kiwi's base class is wrongfully treated as promoted for the purpose of learning spells.
 FIX_HIGINS_SPELL:                       equ 1   ; Prevent unequipping from possibly corrupting characters spell entries.
 FIX_MOVEMENT_GLITCH:                    equ 1   ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
