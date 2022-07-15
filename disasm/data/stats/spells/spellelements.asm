@@ -3,7 +3,7 @@
 ; 0xC24E..0xC27A : Spell elements table
 tbl_SpellElements:
                 
-; Syntax        spellElement [SPELLELEMENT_]index
+; Syntax        spellElement [SPELLELEMENT_]enum (or index)
                 
                 spellElement NEUTRAL    ; 0: HEAL
                 spellElement NEUTRAL    ; 1: AURA

@@ -4,13 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ms_map4_InitFunction:
                 
                  
-                chkFlg  $270            ; Set after the soldiers are swallowed up by the earthquake
+                chkFlg  624             ; Set after the soldiers are swallowed up by the earthquake
                 bne.s   byte_5173A
                 script  cs_51750
-                setFlg  $270            ; Set after the soldiers are swallowed up by the earthquake
+                setFlg  624             ; Set after the soldiers are swallowed up by the earthquake
                 bra.s   return_51740
 byte_5173A:
                 
@@ -24,7 +25,7 @@ return_51740:
 cs_51742:       setPos 128,0,0,RIGHT
                 setPos 129,0,0,RIGHT
                 csc_end
-cs_51750:       textCursor $2CB
+cs_51750:       textCursor 715
                 setPos ALLY_BOWIE,29,4,DOWN
                 setPos FOLLOWER_B,28,3,DOWN
                 setPos FOLLOWER_A,29,3,DOWN
@@ -66,9 +67,9 @@ cs_51750:       textCursor $2CB
                 csWait 10
                 setBlocks 51,32,11,7,24,3
                 csWait 10
-                setActscript 128,eas_51840
+                setActscript 128,eas_FallInEarthquakeCrack
                 csWait 5
-                setActscriptWait 129,eas_51840
+                setActscriptWait 129,eas_FallInEarthquakeCrack
                 playSound SFX_BIG_DOOR_RUMBLE
                 setBlocks 51,0,5,4,27,0
                 csWait 10

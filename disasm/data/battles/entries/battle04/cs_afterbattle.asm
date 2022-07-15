@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle04\cs_afterbattle.asm :
 ; 0x498EE..0x49AB2 : Cutscene after battle 4
-abcs_battle04:  textCursor $90F
+abcs_battle04:  textCursor 2319
                 loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,9,16
                 loadMapEntities ce_49A6A
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -13,9 +13,9 @@ abcs_battle04:  textCursor $90F
                 nod ALLY_BOWIE
                 nextSingleText $0,ALLY_LEMON ; "Your battle strategy was{N}wonderful!  I praise you.{W1}"
                 csWait 5
-                setActscript ALLY_JAHA,eas_461B6
+                setActscript ALLY_JAHA,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_KAZIN,eas_461B6
+                setActscript ALLY_KAZIN,eas_2xRightLeft
                 setActscript ALLY_SARAH,eas_Jump
                 setActscriptWait ALLY_CHESTER,eas_Jump
                 setActscript ALLY_SARAH,eas_Jump
@@ -39,7 +39,7 @@ abcs_battle04:  textCursor $90F
                 entityActionsWait ALLY_LEMON
                  moveLeft 4
                 endActions
-                setActscriptWait ALLY_BOWIE,eas_46172
+                setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_BOWIE
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -63,8 +63,8 @@ abcs_battle04:  textCursor $90F
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setFacing ALLY_BOWIE,DOWN
                 customActscriptWait ALLY_BOWIE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end

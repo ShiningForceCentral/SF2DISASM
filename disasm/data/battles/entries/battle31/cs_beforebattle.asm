@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle31\cs_beforebattle.asm :
 ; 0x4C994..0x4CBE2 : Cutscene before battle 31
-bbcs_31:        textCursor $AFB
+bbcs_31:        textCursor 2811
                 loadMapFadeIn MAP_PACALON,16,2
                 loadMapEntities ce_4CB92
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -48,7 +48,7 @@ bbcs_31:        textCursor $AFB
                 setPos 130,21,1,LEFT
                 csWait 30
                 setActscriptWait ALLY_FRAYJA,eas_Jump
-                setActscriptWait ALLY_FRAYJA,eas_46172
+                setActscriptWait ALLY_FRAYJA,eas_DeactivateAutoFacing
                 entityActionsWait ALLY_FRAYJA
                  moveDown 1
                 endActions
@@ -75,7 +75,7 @@ bbcs_31:        textCursor $AFB
                 ac_end
                 setActscriptWait 128,eas_Jump
                 setActscriptWait 128,eas_Jump
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 128
                  moveUp 1
                 endActions

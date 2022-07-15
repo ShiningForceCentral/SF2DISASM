@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle33\cs_afterbattle.asm :
 ; 0x4D09A..0x4D342 : Cutscene after battle 33
-abcs_battle33:  textCursor $B3C
+abcs_battle33:  textCursor 2876
                 loadMapFadeIn MAP_MOUN,8,6
                 loadMapEntities ce_4D322
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -11,26 +11,26 @@ abcs_battle33:  textCursor $B3C
                 setPos FOLLOWER_B,12,9,DOWN
                 setBlocks 3,39,1,1,16,8
                 stopEntity 128
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActions 128
                  moveDown 1
                 endActions
                 csWait 4
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 entityActions ALLY_ZYNK
                  moveDown 1
                 endActions
                 csWait 2
-                setActscriptWait ALLY_ZYNK,eas_461AA
-                setActscriptWait ALLY_ZYNK,eas_45F9C
+                setActscriptWait ALLY_ZYNK,eas_StopMoving
+                setActscriptWait ALLY_ZYNK,eas_Immersed
                 fadeInB
                 nextSingleText $0,FOLLOWER_B ; "There may be some survivors{N}somewhere.{W1}"
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
-                setActscript FOLLOWER_B,eas_461E4
+                setActscript FOLLOWER_B,eas_2xUpDown
                 csWait 5
-                setActscript ALLY_PETER,eas_461B6
+                setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 120
                 entityActions 128
                  moveUp 1
@@ -48,7 +48,7 @@ abcs_battle33:  textCursor $B3C
                  moveDown 1
                 endActions
                 csWait 3
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 setFacing ALLY_PETER,RIGHT
                 setActscriptWait ALLY_PETER,eas_Jump
                 csWait 40
@@ -66,7 +66,7 @@ abcs_battle33:  textCursor $B3C
                  moveUp 1
                 endActions
                 csWait 8
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 csWait 50
                 customActscriptWait 128
                  ac_setSpeed 48,48      ;   
@@ -77,7 +77,7 @@ abcs_battle33:  textCursor $B3C
                 endActions
                 csWait 4
                 setQuake 2
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 csWait 10
                 setQuake 0
                 csWait 40
@@ -86,7 +86,7 @@ abcs_battle33:  textCursor $B3C
                 endActions
                 nextSingleText $0,128   ; "Do not touch my rock!{W1}"
                 setActscriptWait ALLY_PETER,eas_Jump
-                setActscriptWait ALLY_PETER,eas_46172
+                setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_PETER
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -103,7 +103,7 @@ abcs_battle33:  textCursor $B3C
                  moveUp 1
                 endActions
                 csWait 8
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 nextText $0,128         ; "Did you defeat all those{N}devils?{W2}"
                 nextSingleText $0,128   ; "I was wondering why it became{N}quiet so suddenly.{W1}"
                 entityActions FOLLOWER_B
@@ -131,14 +131,14 @@ abcs_battle33:  textCursor $B3C
                  ac_setSpeed 56,56      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setActscriptWait 128,eas_46172
+                setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActions 128
                  moveDown 1
                 endActions
                 setPos ALLY_ZYNK,16,8,DOWN
                 setActscriptWait ALLY_ZYNK,eas_Init
                 csWait 3
-                setActscriptWait 128,eas_461AA
+                setActscriptWait 128,eas_StopMoving
                 setQuake 2
                 csWait 20
                 setQuake 0
@@ -159,7 +159,7 @@ abcs_battle33:  textCursor $B3C
                 nextSingleText $0,FOLLOWER_B ; "{NAME;26} knows where{N}they're hiding.{W1}"
                 followEntity FOLLOWER_B,ALLY_BOWIE,2
                 followEntity ALLY_PETER,FOLLOWER_B,2
-                setF $341               ; Set after the scene after you win the battle in Moun plays out
+                setF 833                ; Set after the scene after you win the battle in Moun plays out
                 csc_end
 ce_4D322:       mainEntity 11,11,UP
                 entity 13,11,UP,ALLY_PETER,eas_Init

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map01\mapsetups\scripts.asm :
 ; 0x5E772..0x5E86C : 
-cs_5E772:       textCursor $E41
+cs_5E772:       textCursor 3649
                 csWait 30
                 setFacing ALLY_BOWIE,UP
                 setDest ALLY_BOWIE,44,27

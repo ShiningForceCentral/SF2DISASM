@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map15\mapsetups\scripts.asm :
 ; 0x5D04E..0x5D1CA : 
-cs_5D04E:       textCursor $7D6
+cs_5D04E:       textCursor 2006
                 setFacing ALLY_BOWIE,RIGHT
                 setDest ALLY_PETER,24,17
                 setFacing ALLY_PETER,RIGHT

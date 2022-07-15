@@ -3,7 +3,7 @@
 ; 0x44A5E..0x44A7C : Ally map sprite indexes table
 tbl_AllyMapSprites:
                 
-; Syntax        mapSprite [MAPSPRITE_]index
+; Syntax        mapSprite [MAPSPRITE_]enum (or index)
                 
                 mapSprite BOWIE_PROMO   ; 0: BOWIE
                 mapSprite SARAH_SPECIAL ; 1: SARAH

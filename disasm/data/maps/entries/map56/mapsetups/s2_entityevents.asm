@@ -7,17 +7,18 @@ ms_map56_EntityEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map56_EntityEvent0:
                 
                  
-                chkFlg  $387            ; Set after the first time you talk to Creed on path up Ancient Tower
+                chkFlg  903             ; Set after the first time you talk to Creed on path up Ancient Tower
                 bne.s   byte_614C2      
                 script  cs_6150A
-                setFlg  $387            ; Set after the first time you talk to Creed on path up Ancient Tower
+                setFlg  903             ; Set after the first time you talk to Creed on path up Ancient Tower
 byte_614C2:
                 
-                txt     $E1B            ; "There is no church around{N}here.  Think of me as a{N}priest.{W1}"
-                txt     $E1C            ; "Now, what can I do for you?{W1}"
+                txt     3611            ; "There is no church around{N}here.  Think of me as a{N}priest.{W1}"
+                txt     3612            ; "Now, what can I do for you?{W1}"
                 clsTxt
                 jmp     j_ChurchMenuActions
 Map56_DefaultEntityEvent:

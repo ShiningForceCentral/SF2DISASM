@@ -5,6 +5,9 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; Find specific item index + code offset to run when used in field
+; 
+;       In: D1 = item entry
+
 
 UseFieldItem:
                 
@@ -64,17 +67,18 @@ rjt_FieldItemEffects:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_CurePoison:
                 
                 jsr     j_GetStatusEffects
                 bclr    #STATUSEFFECT_BIT_POISON,d1
                 beq.s   byte_22A64      
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $95             ; "{NAME} is no longer{N}poisoned.{W2}"
+                txt     149             ; "{NAME} is no longer{N}poisoned.{W2}"
                 bra.s   loc_22A68
 byte_22A64:
                 
-                txt     $94             ; "It has no use.{W2}"
+                txt     148             ; "It has no use.{W2}"
 loc_22A68:
                 
                 jsr     j_SetStatusEffects
@@ -85,6 +89,7 @@ loc_22A68:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_CurePoisonAndParalysis:
                 
                 jsr     j_GetStatusEffects
@@ -92,20 +97,20 @@ FieldItem_CurePoisonAndParalysis:
                 bclr    #STATUSEFFECT_BIT_POISON,d1
                 beq.s   loc_22A88
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $95             ; "{NAME} is no longer{N}poisoned.{W2}"
+                txt     149             ; "{NAME} is no longer{N}poisoned.{W2}"
                 moveq   #$FFFFFFFF,d2
 loc_22A88:
                 
                 bclr    #STATUSEFFECT_BIT_STUN,d1
                 beq.s   loc_22A98
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $9C             ; "{NAME} is no longer{N}paralyzed.{W2}"
+                txt     156             ; "{NAME} is no longer{N}paralyzed.{W2}"
                 moveq   #$FFFFFFFF,d2
 loc_22A98:
                 
                 tst.w   d2
                 bne.s   loc_22AA0
-                txt     $94             ; "It has no use.{W2}"
+                txt     148             ; "It has no use.{W2}"
 loc_22AA0:
                 
                 jsr     j_SetStatusEffects
@@ -117,6 +122,7 @@ loc_22AA0:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_IncreaseATT:
                 
                 moveq   #3,d6
@@ -126,7 +132,7 @@ FieldItem_IncreaseATT:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $96             ; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
+                txt     150             ; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
                 jsr     j_IncreaseBaseATT
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentATT
@@ -137,6 +143,7 @@ FieldItem_IncreaseATT:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_IncreaseDEF:
                 
                 moveq   #3,d6
@@ -146,7 +153,7 @@ FieldItem_IncreaseDEF:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $97             ; "{NAME}'s defensive{N}power is boosted by {#}.{W2}"
+                txt     151             ; "{NAME}'s defensive{N}power is boosted by {#}.{W2}"
                 jsr     j_IncreaseBaseDEF
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentDEF
@@ -157,6 +164,7 @@ FieldItem_IncreaseDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_IncreaseAGI:
                 
                 moveq   #3,d6
@@ -166,7 +174,7 @@ FieldItem_IncreaseAGI:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $98             ; "{NAME}'s agility{N}is boosted by {#}.{W2}"
+                txt     152             ; "{NAME}'s agility{N}is boosted by {#}.{W2}"
                 jsr     j_IncreaseAGI
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentAGI
@@ -176,6 +184,7 @@ FieldItem_IncreaseAGI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FieldItem_IncreaseMOV:
                 
@@ -193,7 +202,7 @@ loc_22B42:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $99             ; "{NAME}'s movement{N}range enlarged by {#}.{W2}"
+                txt     153             ; "{NAME}'s movement{N}range enlarged by {#}.{W2}"
                 jsr     j_IncreaseBaseMOV
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentMOV
@@ -204,6 +213,7 @@ loc_22B42:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_IncreaseHP:
                 
                 moveq   #3,d6
@@ -213,7 +223,7 @@ FieldItem_IncreaseHP:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $9A             ; "{NAME}'s max. HP{N}are raised by {#}.{W2}"
+                txt     154             ; "{NAME}'s max. HP{N}are raised by {#}.{W2}"
                 jsr     j_IncreaseMaxHP
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentHP
@@ -223,6 +233,7 @@ FieldItem_IncreaseHP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FieldItem_IncreaseMP:
                 
@@ -236,14 +247,14 @@ FieldItem_IncreaseMP:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $9B             ; "{NAME}'s max. MP{N}are raised by {#}.{W2}"
+                txt     155             ; "{NAME}'s max. MP{N}are raised by {#}.{W2}"
                 jsr     j_IncreaseMP
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentMP
                 bra.s   return_22BC0
 byte_22BBC:
                 
-                txt     $94             ; "It has no use.{W2}"
+                txt     148             ; "It has no use.{W2}"
 return_22BC0:
                 
                 rts

@@ -1,32 +1,36 @@
 
 ; ASM FILE code\common\stats\statsengine_2.asm :
-; 0x855A..0x96BA : Character stats engine
+; 0x855A..0x9484 : Character stats engine
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = temporary space used when naming characters
+; In: a0 = pointer to temporarily loaded name in RAM
 
-CopyCharacterNameToRam:
+
+LoadAllyName:
                 
                 tst.b   (a0)
                 beq.s   @Return         ; skip copying name if entered string is null (and keep default name)
+                
                 movem.l d0/a0-a1,-(sp)
                 lea     (a0),a1
                 bsr.w   GetCombatantEntryAddress
                 moveq   #ALLYNAME_CHARACTERS_COUNTER,d0
-@CopyName_Loop:
+@Loop:
                 
                 move.b  (a1)+,(a0)+
-                dbf     d0,@CopyName_Loop
+                dbf     d0,@Loop
+                
                 movem.l (sp)+,d0/a0-a1
 @Return:
                 
                 rts
 
-    ; End of function CopyCharacterNameToRam
+    ; End of function LoadAllyName
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetClass:
                 
@@ -41,6 +45,7 @@ SetClass:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetLevel:
                 
                 movem.l d7-a0,-(sp)
@@ -53,6 +58,7 @@ SetLevel:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetMaxHP:
                 
@@ -67,6 +73,7 @@ SetMaxHP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetCurrentHP:
                 
                 movem.l d7-a0,-(sp)
@@ -79,6 +86,7 @@ SetCurrentHP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetMaxMP:
                 
@@ -93,6 +101,7 @@ SetMaxMP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetCurrentMP:
                 
                 movem.l d7-a0,-(sp)
@@ -105,6 +114,7 @@ SetCurrentMP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetBaseATT:
                 
@@ -119,6 +129,7 @@ SetBaseATT:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetCurrentATT:
                 
                 movem.l d7-a0,-(sp)
@@ -131,6 +142,7 @@ SetCurrentATT:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetBaseDEF:
                 
@@ -145,6 +157,7 @@ SetBaseDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetCurrentDEF:
                 
                 movem.l d7-a0,-(sp)
@@ -157,6 +170,7 @@ SetCurrentDEF:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetBaseAGI:
                 
@@ -171,6 +185,7 @@ SetBaseAGI:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetCurrentAGI:
                 
                 movem.l d7-a0,-(sp)
@@ -183,6 +198,7 @@ SetCurrentAGI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetBaseMOV:
                 
@@ -197,6 +213,7 @@ SetBaseMOV:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetCurrentMOV:
                 
                 movem.l d7-a0,-(sp)
@@ -210,10 +227,11 @@ SetCurrentMOV:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetBaseResistance:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_RESIST_BASE1,d7
+                moveq   #COMBATANT_OFFSET_RESIST_BASE,d7
                 bsr.w   SetCombatantWord
                 movem.l (sp)+,d7-a0
                 rts
@@ -222,6 +240,7 @@ SetBaseResistance:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetCurrentResistance:
                 
@@ -236,6 +255,7 @@ SetCurrentResistance:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetBaseProwess:
                 
                 movem.l d7-a0,-(sp)
@@ -248,6 +268,7 @@ SetBaseProwess:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetCurrentProwess:
                 
@@ -262,6 +283,7 @@ SetCurrentProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetStatusEffects:
                 
                 movem.l d7-a0,-(sp)
@@ -274,6 +296,7 @@ SetStatusEffects:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetXPos:
                 
@@ -288,6 +311,7 @@ SetXPos:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetYPos:
                 
                 movem.l d7-a0,-(sp)
@@ -300,6 +324,7 @@ SetYPos:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetCurrentEXP:
                 
@@ -314,10 +339,11 @@ SetCurrentEXP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetMoveType:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MOVETYPE,d7
+                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
                 bsr.w   SetCombatantByte
                 movem.l (sp)+,d7-a0
                 rts
@@ -327,59 +353,59 @@ SetMoveType:
 
 ; =============== S U B R O U T I N E =======================================
 
-; actually seems to only be used for enemy AI, not kills
 
-SetKills:
+SetAiSpecialMoveOrders:
                 
                 movem.l d1-d2/d7-a0,-(sp)
                 lsl.w   #8,d1
                 andi.w  #$FF,d2
                 or.w    d2,d1
-                moveq   #COMBATANT_OFFSET_KILLS,d7
+                moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
                 bsr.w   SetCombatantWord
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-    ; End of function SetKills
+    ; End of function SetAiSpecialMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; actually seems to only be used for enemy AI, not kills
 
-SetDefeats:
+SetAiRegion:
                 
                 movem.l d1-d2/d7-a0,-(sp)
                 lsl.b   #4,d1
                 andi.b  #$F,d2
                 or.b    d2,d1
-                moveq   #COMBATANT_OFFSET_DEFEATS,d7
+                moveq   #COMBATANT_OFFSET_AI_REGION,d7
                 bsr.w   SetCombatantByte
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-    ; End of function SetDefeats
+    ; End of function SetAiRegion
 
 
 ; =============== S U B R O U T I N E =======================================
 
-SetCharacterWord34:
+
+SetAiActivationFlag:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_34,d7
+                moveq   #COMBATANT_OFFSET_AI_ACTIVATION_FLAG,d7
                 bsr.w   SetCombatantWord
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetCharacterWord34
+    ; End of function SetAiActivationFlag
 
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetEnemyIndex:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #ENEMYCOMBATANT_OFFSET_INDEX,d7
+                moveq   #COMBATANT_OFFSET_ENEMY_INDEX,d7
                 bsr.w   SetCombatantByte
                 movem.l (sp)+,d7-a0
                 rts
@@ -388,6 +414,7 @@ SetEnemyIndex:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 IncreaseLevel:
                 
@@ -404,13 +431,14 @@ IncreaseLevel:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 IncreaseMaxHP:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
                 move.w  #CHAR_STATCAP_HP,d6
                 moveq   #COMBATANT_OFFSET_HP_MAX,d7
-                bsr.w   ClampWordIncreasing
+                bsr.w   IncreaseAndClampWord
                 movem.l (sp)+,d5-a0
                 rts
 
@@ -419,6 +447,7 @@ IncreaseMaxHP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 IncreaseCurrentHP:
                 
                 movem.l d5-a0,-(sp)
@@ -426,7 +455,7 @@ IncreaseCurrentHP:
                 bsr.w   GetCombatantEntryAddress
                 move.w  COMBATANT_OFFSET_HP_MAX(a0),d6
                 moveq   #COMBATANT_OFFSET_HP_CURRENT,d7
-                bsr.w   ClampWordIncreasing
+                bsr.w   IncreaseAndClampWord
                 movem.l (sp)+,d5-a0
                 rts
 
@@ -434,6 +463,7 @@ IncreaseCurrentHP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 IncreaseMaxMP:
                 
@@ -449,6 +479,7 @@ IncreaseMaxMP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 IncreaseCurrentMP:
                 
@@ -466,6 +497,7 @@ IncreaseCurrentMP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 IncreaseBaseATT:
                 
                 movem.l d5-a0,-(sp)
@@ -480,6 +512,7 @@ IncreaseBaseATT:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 IncreaseCurrentATT:
                 
@@ -496,6 +529,7 @@ IncreaseCurrentATT:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 IncreaseBaseDEF:
                 
                 movem.l d5-a0,-(sp)
@@ -510,6 +544,7 @@ IncreaseBaseDEF:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 IncreaseCurrentDEF:
                 
@@ -526,6 +561,7 @@ IncreaseCurrentDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 IncreaseBaseAGI:
                 
                 movem.l d5-a0,-(sp)
@@ -540,6 +576,7 @@ IncreaseBaseAGI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 IncreaseCurrentAGI:
                 
@@ -556,6 +593,7 @@ IncreaseCurrentAGI:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 IncreaseBaseMOV:
                 
                 movem.l d5-a0,-(sp)
@@ -570,6 +608,7 @@ IncreaseBaseMOV:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 IncreaseCurrentMOV:
                 
@@ -586,6 +625,7 @@ IncreaseCurrentMOV:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 IncreaseEXP:
                 
                 movem.l d5-a0,-(sp)
@@ -601,15 +641,16 @@ IncreaseEXP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 IncreaseKills:
                 
                 tst.b   d0
                 blt.s   @Return
                 movem.l d5-a0,-(sp)
                 clr.w   d5
-                move.w  #$270F,d6
-                moveq   #$32,d7 
-                bsr.w   ClampWordIncreasing
+                move.w  #9999,d6
+                moveq   #COMBATANT_OFFSET_ALLY_KILLS,d7
+                bsr.w   IncreaseAndClampWord
                 movem.l (sp)+,d5-a0
 @Return:
                 
@@ -620,15 +661,16 @@ IncreaseKills:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 IncreaseDefeats:
                 
                 tst.b   d0
                 blt.s   @Return
                 movem.l d5-a0,-(sp)
                 clr.w   d5
-                move.w  #$270F,d6
-                moveq   #$36,d7 
-                bsr.w   ClampWordIncreasing
+                move.w  #9999,d6
+                moveq   #COMBATANT_OFFSET_ALLY_DEFEATS,d7
+                bsr.w   IncreaseAndClampWord
                 movem.l (sp)+,d5-a0
 @Return:
                 
@@ -639,6 +681,7 @@ IncreaseDefeats:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DecreaseCurrentHP:
                 
                 movem.l d5-a0,-(sp)
@@ -646,7 +689,7 @@ DecreaseCurrentHP:
                 bsr.w   GetCombatantEntryAddress
                 move.w  COMBATANT_OFFSET_HP_MAX(a0),d6
                 moveq   #COMBATANT_OFFSET_HP_CURRENT,d7
-                bsr.w   ClampWordDecreasing
+                bsr.w   DecreaseAndClampWord
                 movem.l (sp)+,d5-a0
                 rts
 
@@ -654,6 +697,7 @@ DecreaseCurrentHP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DecreaseCurrentMP:
                 
@@ -671,6 +715,7 @@ DecreaseCurrentMP:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DecreaseCurrentATT:
                 
                 movem.l d5-a0,-(sp)
@@ -685,6 +730,7 @@ DecreaseCurrentATT:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DecreaseBaseDEF:
                 
@@ -701,6 +747,7 @@ DecreaseBaseDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DecreaseCurrentDEF:
                 
                 movem.l d5-a0,-(sp)
@@ -715,6 +762,7 @@ DecreaseCurrentDEF:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DecreaseBaseAGI:
                 
@@ -731,6 +779,7 @@ DecreaseBaseAGI:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DecreaseCurrentAGI:
                 
                 movem.l d5-a0,-(sp)
@@ -745,6 +794,7 @@ DecreaseCurrentAGI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DecreaseBaseMOV:
                 
@@ -761,6 +811,7 @@ DecreaseBaseMOV:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 DecreaseCurrentMOV:
                 
                 movem.l d5-a0,-(sp)
@@ -776,6 +827,7 @@ DecreaseCurrentMOV:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetClassName:
                 
                 movea.l (p_tbl_ClassNames).l,a0
@@ -790,6 +842,7 @@ GetClassName:
 ; 
 ; Out: A0 = address of entry in names list
 ;      D7 = length of name
+
 
 FindName:
                 
@@ -814,6 +867,7 @@ FindName:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 SetGold:
                 
                 move.l  d1,((CURRENT_GOLD-$1000000)).w ; puts d1's value at F600 in RAM
@@ -823,6 +877,7 @@ SetGold:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 GetGold:
                 
@@ -834,16 +889,17 @@ GetGold:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 IncreaseGold:
                 
                 add.l   ((CURRENT_GOLD-$1000000)).w,d1
                 bcs.s   @CapGoldAmount
                 cmpi.l  #FORCE_MAX_GOLD,d1
-                bls.s   @Done
+                bls.s   @Continue
 @CapGoldAmount:
                 
                 move.l  #FORCE_MAX_GOLD,d1
-@Done:
+@Continue:
                 
                 move.l  d1,((CURRENT_GOLD-$1000000)).w
                 rts
@@ -852,6 +908,7 @@ IncreaseGold:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DecreaseGold:
                 
@@ -874,6 +931,7 @@ DecreaseGold:
 
 ; Update all current stats
 
+
 ApplyStatusEffectsAndItemsOnStats:
                 
                 movem.l d0-d3/a0-a2,-(sp)
@@ -883,7 +941,7 @@ ApplyStatusEffectsAndItemsOnStats:
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d3
                 bsr.w   InitCurrentStats
                 bsr.w   GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_ITEM_0(a0),a1
+                lea     COMBATANT_OFFSET_ITEMS(a0),a1
                 lea     COMBATANT_OFFSET_PROWESS_CURRENT(a0),a2
                 bsr.w   ApplyStatusEffectsOnStats
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d2
@@ -900,7 +958,7 @@ ApplyStatusEffectsAndItemsOnStats:
                 ori.w   #4,d3
 @Next:
                 
-                addq.w  #2,a1
+                addq.w  #ITEMENTRY_SIZE,a1
                 dbf     d2,@Loop
                 
                 move.w  (sp)+,d0
@@ -916,6 +974,7 @@ ApplyStatusEffectsAndItemsOnStats:
 
 ; In: D0 = combatant index
 ;     D3 = status effects bitfield
+
 
 ApplyStatusEffectsOnStats:
                 
@@ -949,7 +1008,7 @@ ApplyStatusEffectsOnStats:
                 mulu.w  d2,d1
                 lsr.l   #3,d1
                 bsr.w   DecreaseCurrentAGI
-                btst    #0,d3
+                btst    #STATUSEFFECT_BIT_STUN,d3
                 beq.s   @Return
                 moveq   #1,d1
                 bsr.w   DecreaseCurrentMOV
@@ -967,6 +1026,7 @@ ApplyStatusEffectsOnStats:
 ; In: A2 = address in RAM of combatant's prowess
 ;     D0 = combatant index
 ;     D1 = item index
+
 
 ApplyItemOnStats:
                 
@@ -1033,6 +1093,7 @@ pt_EquipEffectFunctions:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 nullsub_8B22:
                 
                 rts
@@ -1041,6 +1102,7 @@ nullsub_8B22:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 EquipEffect_IncreaseCriticalProwess:
                 
@@ -1063,11 +1125,12 @@ EquipEffect_IncreaseCriticalProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EquipEffect_IncreaseDoubleAttackProwess:
                 
                 move.b  (a2),d2
                 lsr.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2
-                andi.b  #PROWESS_MASK_LOWER_DOUBLE,d2
+                andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d2
                 add.b   d1,d2
                 cmpi.b  #4,d2
                 bcs.s   @Continue
@@ -1075,7 +1138,7 @@ EquipEffect_IncreaseDoubleAttackProwess:
 @Continue:
                 
                 lsl.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2
-                andi.b  #PROWESS_MASK_CRITICAL,(a2) ; <BUG> chance to counter attack is being set to 1/32
+                andi.b  #PROWESS_MASK_CRITICAL,(a2) ; BUGGED chance to counter attack is being set to 1/32
                                         ; setting should be masked as well
                 or.b    d2,(a2)
                 rts
@@ -1085,11 +1148,12 @@ EquipEffect_IncreaseDoubleAttackProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EquipEffect_IncreaseCounterAttackProwess:
                 
                 move.b  (a2),d2
                 lsr.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d2
-                andi.b  #PROWESS_MASK_LOWER_COUNTER,d2
+                andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d2
                 add.b   d1,d2
                 cmpi.b  #4,d2
                 bcs.s   @Continue
@@ -1106,6 +1170,7 @@ EquipEffect_IncreaseCounterAttackProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EquipEffect_SetCriticalProwess:
                 
                 andi.b  #PROWESS_MASK_CRITICAL,d1
@@ -1118,9 +1183,10 @@ EquipEffect_SetCriticalProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EquipEffect_SetDoubleAttackProwess:
                 
-                andi.b  #PROWESS_MASK_LOWER_DOUBLE,d1
+                andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d1
                 lsl.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d1
                 andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_COUNTER,(a2)
                 or.b    d1,(a2)
@@ -1131,9 +1197,10 @@ EquipEffect_SetDoubleAttackProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 EquipEffect_SetCounterAttackProwess:
                 
-                andi.b  #PROWESS_MASK_LOWER_COUNTER,d1
+                andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d1
                 lsl.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d1
                 andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_DOUBLE,(a2)
                 or.b    d1,(a2)
@@ -1144,6 +1211,7 @@ EquipEffect_SetCounterAttackProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitCurrentStats:
                 
                 move.l  a0,-(sp)
@@ -1152,7 +1220,7 @@ InitCurrentStats:
                 move.b  COMBATANT_OFFSET_DEF_BASE(a0),COMBATANT_OFFSET_DEF_CURRENT(a0)
                 move.b  COMBATANT_OFFSET_AGI_BASE(a0),COMBATANT_OFFSET_AGI_CURRENT(a0)
                 move.b  COMBATANT_OFFSET_MOV_BASE(a0),COMBATANT_OFFSET_MOV_CURRENT(a0)
-                move.w  COMBATANT_OFFSET_RESIST_BASE1(a0),COMBATANT_OFFSET_RESIST_CURRENT(a0)
+                move.w  COMBATANT_OFFSET_RESIST_BASE(a0),COMBATANT_OFFSET_RESIST_CURRENT(a0)
                 move.b  COMBATANT_OFFSET_PROWESS_BASE(a0),COMBATANT_OFFSET_PROWESS_CURRENT(a0)
                 movea.l (sp)+,a0
                 rts
@@ -1165,6 +1233,7 @@ InitCurrentStats:
 ; In: D1 = item entry
 ; Out: A0 = address of name
 ;      D7 = length of name
+
 
 FindItemName:
                 
@@ -1180,13 +1249,14 @@ FindItemName:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get pointer to item D1's definition in ROM -> A0
+; Out: A0 = pointer to definition for item D1
+
 
 GetItemDefAddress:
                 
                 move.l  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                mulu.w  #SIZE_ITEMDEF,d1
+                mulu.w  #ITEMDEF_SIZE,d1
                 movea.l (p_tbl_ItemDefs).l,a0
                 adda.w  d1,a0
                 move.l  (sp)+,d1
@@ -1197,17 +1267,15 @@ GetItemDefAddress:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item slot
-; 
-; Out: D1 = item index
-;      D2 = number of items held
+; In: D0 = combatant index, D1 = item slot
+; Out: D1 = item entry, D2 = number of items held
 
-GetItemAndNumberOfItems:
+
+GetItemAndNumberHeld:
                 
                 movem.l d0/d3/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_ITEM_0(a0),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0),a0
                 add.w   d1,d1
                 move.w  (a0,d1.w),d1    ; move item d1 word in d1
                 moveq   #0,d2
@@ -1222,10 +1290,11 @@ GetItemAndNumberOfItems:
 @Nothing:
                 
                 dbf     d3,@Loop
+                
                 movem.l (sp)+,d0/d3/a0
                 rts
 
-    ; End of function GetItemAndNumberOfItems
+    ; End of function GetItemAndNumberHeld
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1233,6 +1302,7 @@ GetItemAndNumberOfItems:
 ; In: D1 = item index
 ; 
 ; Out: D2 = equipment type (0 = item, 1 = weapon, $FFFF = ring)
+
 
 GetEquipmentType:
                 
@@ -1266,6 +1336,7 @@ GetEquipmentType:
 
 ; Get combatant D0's equipped weapon and slot indexes -> D1 and D2 ($FFFF if nothing equipped)
 
+
 GetEquippedWeapon:
                 
                 movem.l d3-d4/a0-a1,-(sp)
@@ -1279,6 +1350,7 @@ GetEquippedWeapon:
 
 ; Get combatant D0's equipped ring and slot indexes -> D1 and D2 ($FFFF if nothing equipped)
 
+
 GetEquippedRing:
                 
                 movem.l d3-d4/a0-a1,-(sp)
@@ -1287,12 +1359,12 @@ GetEquippedRing:
     ; End of function GetEquippedRing
 
 
-; =============== S U B R O U T I N E =======================================
+; START OF FUNCTION CHUNK FOR GetEquippedWeapon
 
 GetEquippedItemByType:
                 
                 bsr.w   GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_ITEM_0(a0),a1
+                lea     COMBATANT_OFFSET_ITEMS(a0),a1
                 clr.w   d2
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d3
 @Loop:
@@ -1309,7 +1381,7 @@ GetEquippedItemByType:
                 bne.s   @Break          ; found equipped item matching the given type, break out of loop
 @Next:
                 
-                addq.w  #1,d2           ; return item slot index in D2
+                addq.w  #1,d2           ; return item slot in D2
                 dbf     d3,@Loop
                 
                 move.w  #CODE_NOTHING_WORD,d1
@@ -1317,44 +1389,46 @@ GetEquippedItemByType:
                 bra.s   @Done
 @Break:
                 
-                move.w  -(a1),d1
+                move.w  -(a1),d1        ; get item from previous slot
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
 @Done:
                 
                 movem.l (sp)+,d3-d4/a0-a1
                 rts
 
-    ; End of function GetEquippedItemByType
+; END OF FUNCTION CHUNK FOR GetEquippedWeapon
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
+; In: D0 = combatant index
 ;     D1 = item index
 ; 
 ; Out: D2 = 0 if item successfully added, 1 if no empty slot available
+
 
 AddItem:
                 
                 movem.l d0/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_ITEM_0(a0),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0),a0
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d0
-loc_8CB0:
+@Loop:
                 
                 move.w  (a0)+,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d2
                 cmpi.w  #ITEM_NOTHING,d2
-                beq.s   loc_8CC6
-                dbf     d0,loc_8CB0     ; loop over all items to make sure there's a slot open
+                beq.s   @Break
+                dbf     d0,@Loop        ; loop over all items to make sure there's a slot open
+                
                 move.w  #1,d2           ; no empty slot available
-                bra.s   loc_8CCE
-loc_8CC6:
+                bra.s   @Done
+@Break:
                 
                 andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
                 move.w  d1,-(a0)        ; move item in empty slot
                 clr.w   d2
-loc_8CCE:
+@Done:
                 
                 movem.l (sp)+,d0/a0
                 rts
@@ -1364,59 +1438,63 @@ loc_8CCE:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
+; In: D0 = combatant index
 ;     D1 = item slot
+; 
+; Out: D2 = 3 if item slot is empty
 
-BreakItem:
+
+BreakItemBySlot:
                 
                 movem.l d1/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
                 add.w   d1,d1
-                lea     COMBATANT_OFFSET_ITEM_0(a0,d1.w),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
-                beq.s   loc_8CF6
+                beq.s   @Nothing        
                 bset    #ITEMENTRY_UPPERBIT_BROKEN,(a0)
                 clr.w   d2
-                bra.s   loc_8CFA
-loc_8CF6:
+                bra.s   @Done
+@Nothing:
                 
-                move.w  #3,d2
-loc_8CFA:
+                move.w  #3,d2           ; code 3: nothing
+@Done:
                 
                 movem.l (sp)+,d1/a0
                 rts
 
-    ; End of function BreakItem
+    ; End of function BreakItemBySlot
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 RepairItemBySlot:
                 
                 movem.l d1/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
                 add.w   d1,d1
-                lea     COMBATANT_OFFSET_ITEM_0(a0,d1.w),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
-                beq.s   loc_8D2A        
-                bclr    #7,(a0)
-                beq.s   loc_8D24
+                beq.s   @Nothing        
+                bclr    #ITEMENTRY_UPPERBIT_BROKEN,(a0)
+                beq.s   @NotBroken      
                 clr.w   d2
-                bra.s   loc_8D28
-loc_8D24:
+                bra.s   @Goto_Done
+@NotBroken:
                 
-                move.w  #1,d1
-loc_8D28:
+                move.w  #1,d1           ; clear zero-bit if item was not broken
+@Goto_Done:
                 
-                bra.s   loc_8D2E
-loc_8D2A:
+                bra.s   @Done
+@Nothing:
                 
                 move.w  #3,d2           ; code 3: nothing
-loc_8D2E:
+@Done:
                 
                 movem.l (sp)+,d1/a0
                 rts
@@ -1426,26 +1504,27 @@ loc_8D2E:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
-;     D1 = item slot index
+; In: D0 = combatant index
+;     D1 = item slot
 ; 
 ; Out: D2 = 0 if equipped, 1 if not, 2 if equipped and cursed, 3 if item is nothing
+
 
 EquipItemBySlot:
                 
                 movem.l d0-d1/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
                 add.w   d1,d1           ; item slot -> additional offset
-                lea     COMBATANT_OFFSET_ITEM_0(a0,d1.w),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1         ; get item entry
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1 ; test if item is "nothing"
                 beq.s   @Nothing        
                 bsr.s   IsItemEquippableAndCursed
                 cmpi.w  #1,d2
-                beq.s   @Skip           ; skip if item is not equippable
+                beq.s   @Goto_Done      ; skip if item is not equippable
                 bset    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
-@Skip:
+@Goto_Done:
                 
                 bra.s   @Done
 @Nothing:
@@ -1461,9 +1540,13 @@ EquipItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Is item D1 equippable by character D0's class, and is it cursed ?
+; Is item equippable, and is it cursed ?
 ; 
-; Out: D2 = 0 if equippable, 1 if not, 2 if equippable and cursed
+;       In: D0 = ally index
+;           D1 = item index
+; 
+;       Out: D2 = 0 if equippable, 1 if not, 2 if equippable and cursed
+
 
 IsItemEquippableAndCursed:
                 
@@ -1479,11 +1562,11 @@ IsItemEquippableAndCursed:
                                                         ; test cursed bit of itemdef's misc byte
                 bne.s   @EquippableAndCursed
                 clr.w   d2              ; code 0: equippable
-                bra.s   @Equippable
+                bra.s   @Goto_Done
 @EquippableAndCursed:
                 
                 move.w  #2,d2           ; code 2: equippable, but cursed
-@Equippable:
+@Goto_Done:
                 
                 bra.s   @Done
 @NotEquippable:
@@ -1499,13 +1582,16 @@ IsItemEquippableAndCursed:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
-;     D1 = item slot index
+; In: D0 = combatant index
+;     D1 = item slot
+; 
+; Out: D2 = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if nothing
+
 
 UnequipItemBySlotIfNotCursed:
                 
                 movem.l d0-d1/a0,-(sp)
-                bsr.s   IsItemInSlotEquippedAndCursed
+                bsr.s   IsItemInSlotEquippedOrCursed
                 tst.w   d2
                 bne.s   @Skip           ; skip if anything but equipped and not cursed
                 bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
@@ -1519,16 +1605,20 @@ UnequipItemBySlotIfNotCursed:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Is character D0's item in slot D1 equipped, and if so, is it cursed ?
+; Is item in slot equipped, and if so, is it cursed ?
 ; 
-; Out: A0 = pointer to character's item slot in RAM
-;      D2 = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if nothing
+;       In: D0 = ally index
+;           D1 = item slot
+; 
+;       Out: A0 = pointer to item entry
+;            D2 = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if neither
 
-IsItemInSlotEquippedAndCursed:
+
+IsItemInSlotEquippedOrCursed:
                 
                 bsr.w   GetCombatantEntryAddress
                 add.w   d1,d1
-                lea     COMBATANT_OFFSET_ITEM_0(a0,d1.w),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
@@ -1541,11 +1631,11 @@ IsItemInSlotEquippedAndCursed:
                 movem.l (sp)+,a0
                 bne.s   @Cursed         
                 clr.w   d2              ; not cursed
-                bra.s   @NotCursed
+                bra.s   @Goto_Done
 @Cursed:
                 
                 move.w  #2,d2           ; cursed
-@NotCursed:
+@Goto_Done:
                 
                 bra.s   @Done
 @NotEquipped:
@@ -1561,18 +1651,21 @@ IsItemInSlotEquippedAndCursed:
                 
                 rts
 
-    ; End of function IsItemInSlotEquippedAndCursed
+    ; End of function IsItemInSlotEquippedOrCursed
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
-;     D1 = item slot index
+; In: D0 = combatant index
+;     D1 = item slot
+; 
+; Out: D2 = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if nothing
+
 
 UnequipItemBySlot:
                 
                 movem.l d0-d1/a0,-(sp)
-                bsr.s   IsItemInSlotEquippedAndCursed
+                bsr.s   IsItemInSlotEquippedOrCursed
                 bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
                 movem.l (sp)+,d0-d1/a0
                 bra.w   ApplyStatusEffectsAndItemsOnStats
@@ -1582,10 +1675,11 @@ UnequipItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
+; In: D0 = combatant index
 ;     D1 = item slot
 ; 
 ; Out: D2 = 2 if not dropped, 3 if dropped or nothing
+
 
 DropItemBySlot:
                 
@@ -1593,24 +1687,24 @@ DropItemBySlot:
                 bsr.w   GetCombatantEntryAddress
                 move.w  d1,d0
                 add.w   d1,d1
-                lea     COMBATANT_OFFSET_ITEM_0(a0,d1.w),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1
                 move.w  #3,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
-                beq.s   loc_8E54
+                beq.s   @Done
                 movem.l a0,-(sp)
                 bsr.w   GetItemDefAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 movem.l (sp)+,a0
-                beq.s   loc_8E52
+                beq.s   @NotCursed
                 move.w  #2,d2           ; item cursed
                 btst    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
-                bne.s   loc_8E54        ; item equipped and cursed, so can't drop it
-loc_8E52:
+                bne.s   @Done           ; item equipped and cursed, so can't drop it
+@NotCursed:
                 
                 bsr.s   RemoveAndArrangeItems
-loc_8E54:
+@Done:
                 
                 movem.l (sp)+,d0/a0
                 bra.w   ApplyStatusEffectsAndItemsOnStats
@@ -1623,17 +1717,18 @@ loc_8E54:
 ; In: A0 = char entry address + offset to items
 ;     D0 = item slot
 
+
 RemoveAndArrangeItems:
                 
                 move.w  #2,d2
                 sub.w   d0,d2           ; subtract item slot from 2 to make loop counter
-                bmi.s   loc_8E6E        ; no items to rearrange, so skip to removal
-loc_8E64:
+                bmi.s   @Skip           ; no items to rearrange, so skip to removal
+@Loop:
                 
-                move.w  SIZE_ITEM(a0),(a0) ; shift item -1 slots
-                addq.w  #SIZE_ITEM,a0
-                dbf     d2,loc_8E64     
-loc_8E6E:
+                move.w  ITEMENTRY_SIZE(a0),(a0) ; shift item -1 slots
+                addq.w  #ITEMENTRY_SIZE,a0
+                dbf     d2,@Loop        
+@Skip:
                 
                 move.w  #ITEM_NOTHING,(a0) ; replace item with nothing
                 clr.w   d2
@@ -1644,8 +1739,9 @@ loc_8E6E:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
+; In: D0 = combatant index
 ;     D1 = item slot
+
 
 RemoveItemBySlot:
                 
@@ -1653,18 +1749,18 @@ RemoveItemBySlot:
                 bsr.w   GetCombatantEntryAddress
                 move.w  d1,d0
                 add.w   d1,d1
-                lea     COMBATANT_OFFSET_ITEM_0(a0,d1.w),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1
                 move.w  d1,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d2
                 cmpi.w  #ITEM_NOTHING,d2
-                beq.s   loc_8E9A
+                beq.s   @Nothing
                 bsr.s   RemoveAndArrangeItems
-                bra.w   loc_8E9E
-loc_8E9A:
+                bra.w   @Done
+@Nothing:
                 
                 move.w  #3,d2
-loc_8E9E:
+@Done:
                 
                 movem.l (sp)+,d0/a0
                 bra.w   ApplyStatusEffectsAndItemsOnStats
@@ -1673,6 +1769,7 @@ loc_8E9E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 UnequipWeapon:
                 
@@ -1685,83 +1782,114 @@ UnequipWeapon:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 UnequipRing:
                 
                 movem.l d0-d2/a0-a1,-(sp)
                 move.w  #ITEMTYPE_RING,d2 ; ring
-UnequipItemByType:
-                
-                bsr.w   GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_ITEM_0(a0),a1
-                moveq   #COMBATANT_ITEMSLOTS_COUNTER,d0
-loc_8EC2:
-                
-                move.w  (a1),d1
-                btst    #ITEMENTRY_BIT_EQUIPPED,d1
-                beq.s   loc_8EE0
-                andi.w  #ITEMENTRY_MASK_INDEX,d1
-                bsr.w   GetItemDefAddress
-                move.b  ITEMDEF_OFFSET_TYPE(a0),d1
-                and.b   d2,d1
-                beq.s   loc_8EE0
-                bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a1)
-loc_8EE0:
-                
-                addq.w  #SIZE_ITEM,a1
-                dbf     d0,loc_8EC2
-                movem.l (sp)+,d0-d2/a0-a1
-                bra.w   ApplyStatusEffectsAndItemsOnStats
 
     ; End of function UnequipRing
 
 
+; START OF FUNCTION CHUNK FOR UnequipWeapon
+
+UnequipItemByType:
+                
+                bsr.w   GetCombatantEntryAddress
+                lea     COMBATANT_OFFSET_ITEMS(a0),a1
+                moveq   #COMBATANT_ITEMSLOTS_COUNTER,d0
+@Loop:
+                
+                move.w  (a1),d1
+                btst    #ITEMENTRY_BIT_EQUIPPED,d1
+                beq.s   @Next
+                andi.w  #ITEMENTRY_MASK_INDEX,d1
+                bsr.w   GetItemDefAddress
+                move.b  ITEMDEF_OFFSET_TYPE(a0),d1
+                and.b   d2,d1
+                beq.s   @Next
+                bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a1)
+@Next:
+                
+                addq.w  #ITEMENTRY_SIZE,a1
+                dbf     d0,@Loop
+                
+                movem.l (sp)+,d0-d2/a0-a1
+                bra.w   ApplyStatusEffectsAndItemsOnStats
+
+; END OF FUNCTION CHUNK FOR UnequipWeapon
+
+
 ; =============== S U B R O U T I N E =======================================
+
+; Out: A0 = pointer to equippable items list
+;      D1 = equippable weapons count
+
 
 GetEquippableWeapons:
                 
                 movem.l d0/d2-d6/a1-a2,-(sp)
-                move.w  #2,d2
-                bra.s   loc_8F00
+                move.w  #ITEMTYPE_WEAPON,d2
+                bra.s   GetEquippableItemsByType
+
+    ; End of function GetEquippableWeapons
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Out: A0 = pointer to equippable items list
+;      D1 = equippable rings count
+
+
 GetEquippableRings:
                 
                 movem.l d0/d2-d6/a1-a2,-(sp)
-                move.w  #4,d2
-loc_8F00:
+                move.w  #ITEMTYPE_RING,d2
+
+    ; End of function GetEquippableRings
+
+
+; START OF FUNCTION CHUNK FOR GetEquippableWeapons
+
+GetEquippableItemsByType:
                 
                 bsr.w   GetCombatantEntryAddress
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
                 moveq   #1,d3
                 lsl.l   d0,d3           ; place class bit in long value
-                lea     COMBATANT_OFFSET_ITEM_0(a0),a1
+                lea     COMBATANT_OFFSET_ITEMS(a0),a1
                 lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a2
+                
+                ; Init list with default values
                 move.l  #$7F0004,(a2)
                 move.l  #$7F0004,4(a2)
                 move.l  #$7F0004,8(a2)
-                move.l  #$800004,$C(a2)
+                move.l  #$800004,12(a2)
                 clr.w   d0
                 moveq   #0,d4
-                moveq   #3,d5
-loc_8F38:
+                moveq   #COMBATANT_ITEMSLOTS_COUNTER,d5
+@Loop:
                 
                 move.w  (a1)+,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                cmpi.w  #ITEM_NOTHING,d1 ; skip if empty slot
-                beq.s   loc_8F4E
+                cmpi.w  #ITEM_NOTHING,d1
+                beq.s   @Next           ; next if empty slot
                 bsr.s   IsItemEquippable
-                bcc.s   loc_8F4E
-                move.w  d1,(a2)+
-                move.w  d4,(a2)+
+                bcc.s   @Next           ; branch if not equippable
+                move.w  d1,(a2)+        ; item index -> equippable items list
+                move.w  d4,(a2)+        ; item slot -> equippable items list
                 addq.w  #1,d0
-loc_8F4E:
+@Next:
                 
                 addq.w  #1,d4
-                dbf     d5,loc_8F38
+                dbf     d5,@Loop
+                
                 move.w  d0,d1
                 movem.l (sp)+,d0/d2-d6/a1-a2
                 lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a0
                 rts
 
-    ; End of function GetEquippableWeapons
+; END OF FUNCTION CHUNK FOR GetEquippableWeapons
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1770,18 +1898,19 @@ loc_8F4E:
 ;     D2 = item type bitmask (for ANDing the item type bitfield)
 ;     D3 = class equip bitmask (for ANDing the item equip bitfield)
 
+
 IsItemEquippable:
                 
                 movem.l a0,-(sp)
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d6
                 and.b   d2,d6
-                beq.s   loc_8F7A        ; skip if not a weapon/ring
+                beq.s   @Done           ; skip if not a weapon/ring
                 move.l  (a0),d6
                 and.l   d3,d6
-                beq.s   loc_8F7A
+                beq.s   @Done
                 ori     #1,ccr          ; set carry flag : Item is Equippable !
-loc_8F7A:
+@Done:
                 
                 movem.l (sp)+,a0
                 rts
@@ -1790,6 +1919,7 @@ loc_8F7A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 IsWeaponOrRingEquippable:
                 
@@ -1808,7 +1938,8 @@ IsWeaponOrRingEquippable:
 
 ; =============== S U B R O U T I N E =======================================
 
-GetEquipmentNewATTandDEF:
+
+GetEquipNewATTandDEF:
                 
                 movem.l d0/d4-d6/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
@@ -1831,89 +1962,95 @@ GetEquipmentNewATTandDEF:
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d2
                 movem.l (sp)+,d1/a0
                 andi.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2 ; get weapon/ring type
-                bsr.w   GetCurrentATTandDEFwithSpecificItem
+                bsr.w   GetNewATTandDEFwithItemEquipped
 @Skip:
                 
                 movem.l (sp)+,d0/d4-d6/a0
                 rts
 
-    ; End of function GetEquipmentNewATTandDEF
+    ; End of function GetEquipNewATTandDEF
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = character entry address
+; In: A0 = combatant entry address
 ;     D1 = item index
 ;     D2 = item type (weapon or ring)
 ; 
 ; Out: D2 = current ATT with item equipped
 ;      D3 = current DEF with item equipped
 
-GetCurrentATTandDEFwithSpecificItem:
+
+GetNewATTandDEFwithItemEquipped:
                 
                 movem.l d0-d1/d4-a0,-(sp)
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d7
                 clr.w   d4
-loc_8FF6:
+@FindEquippedItem_Loop:
                 
-                move.w  COMBATANT_OFFSET_ITEM_0(a0,d4.w),d5
+                move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
                 btst    #ITEMENTRY_BIT_EQUIPPED,d5
-                beq.s   loc_901C
+                beq.s   @Next
                 movem.l d0-d1/a0,-(sp)  ; it's equipped
                 move.w  d5,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d0
-                and.b   d2,d0           ; it's a weapon or a ring
+                and.b   d2,d0
                 movem.l (sp)+,d0-d1/a0
-                bne.w   loc_903A
-loc_901C:
+                bne.w   @GetNewATTandDEF ; is the item type we're looking for
+@Next:
                 
-                addq.w  #SIZE_ITEM,d4
-                dbf     d7,loc_8FF6
+                addq.w  #ITEMENTRY_SIZE,d4
+                dbf     d7,@FindEquippedItem_Loop
+                
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d7
                 clr.w   d4
-loc_9026:
+@FindFirstUnequippedItem_Loop:
                 
-                move.w  COMBATANT_OFFSET_ITEM_0(a0,d4.w),d5
+                move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
                 btst    #ITEMENTRY_BIT_EQUIPPED,d5
-                beq.w   loc_903A
-                addq.w  #2,d4
-                dbf     d7,loc_9026
-                clr.w   d4
-loc_903A:
+                beq.w   @GetNewATTandDEF
+                addq.w  #ITEMENTRY_SIZE,d4
+                dbf     d7,@FindFirstUnequippedItem_Loop
                 
-                move.w  COMBATANT_OFFSET_ITEM_0(a0,d4.w),d5
+                clr.w   d4              ; default to item 0
+@GetNewATTandDEF:
+                
+                move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
                 movem.l d4-d5/a0,-(sp)
                 bset    #ITEMENTRY_BIT_EQUIPPED,d1
-                move.w  d1,COMBATANT_OFFSET_ITEM_0(a0,d4.w) ; equip item
+                move.w  d1,COMBATANT_OFFSET_ITEMS(a0,d4.w) ; equip item
                 bsr.w   ApplyStatusEffectsAndItemsOnStats
                 clr.w   d2
                 move.b  COMBATANT_OFFSET_ATT_CURRENT(a0),d2
                 clr.w   d3
                 move.b  COMBATANT_OFFSET_DEF_CURRENT(a0),d3
                 movem.l (sp)+,d4-d5/a0
+                
                 movem.w d2-d3,-(sp)
-                move.w  d5,COMBATANT_OFFSET_ITEM_0(a0,d4.w) ; and unequip
+                move.w  d5,COMBATANT_OFFSET_ITEMS(a0,d4.w) ; and unequip
                 bsr.w   ApplyStatusEffectsAndItemsOnStats
                 movem.w (sp)+,d2-d3
+                
                 movem.l (sp)+,d0-d1/d4-a0
                 rts
 
-    ; End of function GetCurrentATTandDEFwithSpecificItem
+    ; End of function GetNewATTandDEFwithItemEquipped
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 OrderItems:
                 
                 movem.l d0-d3/a0-a1,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_ITEM_0(a0),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0),a0
                 moveq   #2,d1
 loc_9082:
                 
-                lea     SIZE_ITEM(a0),a1
+                lea     ITEMENTRY_SIZE(a0),a1
                 move.w  d1,d2
 loc_9088:
                 
@@ -1925,15 +2062,15 @@ loc_9088:
                 bcc.s   loc_90A0
                 move.w  (a0),d0         ; if d0 > d3 ?
                 move.w  (a1),d3
-                move.w  d0,(a3)         ; wtf a3 ?! unused bugged subroutine ?
+                move.w  d0,(a3)         ; why use a3 there ? unused bugged subroutine ?
                 move.w  d3,(a0)
 loc_90A0:
                 
-                addq.w  #SIZE_ITEM,a1
+                addq.w  #ITEMENTRY_SIZE,a1
 loc_90A2:
                 
                 dbf     d2,loc_9088
-                addq.w  #SIZE_ITEM,a0
+                addq.w  #ITEMENTRY_SIZE,a0
                 dbf     d1,loc_9082
                 movem.l (sp)+,d0-d3/a0-a1
                 rts
@@ -1943,18 +2080,21 @@ loc_90A2:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Is item D1 cursed ? CCR carry-bit set if true
+
+
 IsItemCursed:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
-                beq.s   loc_90C6        
+                beq.s   @NotCursed      
                 ori     #1,ccr          ; item is cursed
-                bra.s   loc_90C8
-loc_90C6:
+                bra.s   @Done
+@NotCursed:
                 
                 tst.b   d0              ; clear carry flag
-loc_90C8:
+@Done:
                 
                 movea.l (sp)+,a0
                 rts
@@ -1966,22 +2106,19 @@ loc_90C8:
 
 ; carry set : YES
 
+
 IsItemUsableInBattle:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
-loc_90D2:
-                
-                cmpi.b  #$FF,ITEMDEF_OFFSET_USE_SPELL(a0)
-                beq.s   loc_90E0
-loc_90DA:
-                
+                cmpi.b  #$FF,ITEMDEF_OFFSET_USE_SPELL(a0) ; BUG -- should compare to $3F for 'no spell'
+                beq.s   @HasNoUse
                 ori     #1,ccr
-                bra.s   loc_90E2
-loc_90E0:
+                bra.s   @Done
+@HasNoUse:
                 
                 tst.b   d0
-loc_90E2:
+@Done:
                 
                 movea.l (sp)+,a0
                 rts
@@ -1992,6 +2129,7 @@ loc_90E2:
 ; =============== S U B R O U T I N E =======================================
 
 ; carry set : NO
+
 
 IsItemUsableWeaponInBattle:
                 
@@ -2020,30 +2158,32 @@ loc_9102:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
+; In: D0 = combatant index
+
 
 UnequipAllItemsIfNotCursed:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_ITEM_0(a0),a1
+                lea     COMBATANT_OFFSET_ITEMS(a0),a1
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d0
-loc_9114:
+@Loop:
                 
                 move.w  (a1),d1
                 btst    #ITEMENTRY_BIT_EQUIPPED,d1
-                beq.s   loc_9138
+                beq.s   @Next
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
-                beq.s   loc_9138
+                beq.s   @Next
                 bsr.w   GetItemDefAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
-                beq.s   loc_9138
+                beq.s   @Next
                 bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a1)
-loc_9138:
+@Next:
                 
                 addq.w  #2,a1
-                dbf     d0,loc_9114
+                dbf     d0,@Loop
+                
                 movem.l (sp)+,d0-d1/a0-a1
                 bra.w   ApplyStatusEffectsAndItemsOnStats
 
@@ -2052,19 +2192,20 @@ loc_9138:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetItemInventoryLocation:
                 
                 movem.l d2-d3/d6-a0,-(sp)
                 move.w  d1,d3
                 bsr.w   UpdateForce     
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d6
+                lea     ((TARGETS_LIST-$1000000)).w,a0
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d6
                 subq.w  #1,d6
 loc_915A:
                 
                 move.b  (a0)+,d0
                 clr.w   d1
-                bsr.w   GetItemAndNumberOfItems
+                bsr.w   GetItemAndNumberHeld
                 tst.w   d2
                 beq.s   loc_9182
                 move.w  d2,d7           ; number of items
@@ -2072,7 +2213,7 @@ loc_915A:
 loc_916A:
                 
                 move.w  d7,d1
-                bsr.w   GetItemAndNumberOfItems
+                bsr.w   GetItemAndNumberHeld
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmp.w   d3,d1
                 bne.s   loc_917E
@@ -2101,6 +2242,7 @@ loc_918E:
 ; 
 ; Out: D2 = item slot ($FFFF if not held)
 
+
 GetItemSlotContainingIndex:
                 
                 movem.l d1/d3/d7,-(sp)
@@ -2112,7 +2254,7 @@ loc_91A2:
                 
                 move.w  d2,d1
                 move.l  d2,-(sp)
-                jsr     GetItemAndNumberOfItems(pc)
+                jsr     GetItemAndNumberHeld(pc)
                 move.l  (sp)+,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmp.b   d3,d1
@@ -2135,6 +2277,7 @@ loc_91C0:
 ; Out: A0 = address of name
 ;      D7 = length of name
 
+
 FindSpellName:
                 
                 move.w  d1,-(sp)
@@ -2150,6 +2293,7 @@ FindSpellName:
 ; =============== S U B R O U T I N E =======================================
 
 ; Find pointer to definition entry for spell D1 -> A0
+
 
 FindSpellDefAddress:
                 
@@ -2178,14 +2322,15 @@ FindSpellDefAddress:
 ; In: D0 = combatant index
 ;     D1 = spell slot
 ; 
-; Out: D1 = spell index
+; Out: D1 = first spell entry
 ;      D2 = number of spells learned
+
 
 GetSpellAndNumberOfSpells:
                 
                 movem.l d0/d3/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_SPELLS_START(a0),a0
+                lea     COMBATANT_OFFSET_SPELLS(a0),a0
                 move.b  (a0,d1.w),d1
                 moveq   #COMBATANT_SPELLSLOTS_COUNTER,d3
                 clr.w   d2
@@ -2207,54 +2352,57 @@ GetSpellAndNumberOfSpells:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
-;     D1 = spell index
+; In: D0 = ally index
+;     D1 = spell entry
 ; 
-; Out: D2 = result (0 = learned new spell, 1 = upgraded spell, 2 = no room)
+; Out: D2 = result (0 = success, 1 = failure : same or higher level known, 2 = failure : no room)
+
 
 LearnSpell:
                 
                 movem.l d0/d3-d5/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
+                lea     COMBATANT_OFFSET_SPELLS_END(a0),a0
                 move.w  d1,d4
                 move.w  d1,d5
-                move.w  #1,d2
+                move.w  #1,d2           ; 1 = failure : same or higher level known
                 moveq   #COMBATANT_SPELLSLOTS_COUNTER,d3
-                andi.w  #SPELLENTRY_MASK_INDEX,d4 ; get spell index ?
+                andi.w  #SPELLENTRY_MASK_INDEX,d4
                 lsr.w   #SPELLENTRY_OFFSET_LV,d5
-loc_9242:
+@FindKnownSpell_Loop:
                 
                 move.b  -(a0),d0        ; loop through spells to see if we already know a lower level
                 andi.b  #SPELLENTRY_MASK_INDEX,d0
                 cmp.b   d4,d0
-                bne.s   loc_9258
+                bne.s   @Next
                 move.b  (a0),d0
                 lsr.b   #SPELLENTRY_OFFSET_LV,d0
                 cmp.b   d0,d5
-                bls.s   loc_9278
+                bls.s   @Done
                 move.b  d1,(a0)         ; replace existing spell with new one (higher level)
-                bra.s   loc_9276
-loc_9258:
+                bra.s   @Success        
+@Next:
                 
-                dbf     d3,loc_9242     
+                dbf     d3,@FindKnownSpell_Loop
+                
                 moveq   #COMBATANT_SPELLSLOTS_COUNTER,d3
-loc_925E:
+@FindEmptySlot_Loop:
                 
                 move.b  (a0)+,d0        ; loop through spells to find the next empty slot
                 andi.b  #SPELLENTRY_MASK_INDEX,d0
                 cmpi.b  #SPELL_NOTHING,d0
-                beq.s   loc_9274
-                dbf     d3,loc_925E     
-                move.w  #2,d2
-                bra.s   loc_9278
-loc_9274:
+                beq.s   @LearnNewSpell
+                dbf     d3,@FindEmptySlot_Loop
+                
+                move.w  #2,d2           ; 2 = failure : no room
+                bra.s   @Done
+@LearnNewSpell:
                 
                 move.b  d1,-(a0)
-loc_9276:
+@Success:
                 
-                clr.w   d2
-loc_9278:
+                clr.w   d2              ; 0 = success
+@Done:
                 
                 movem.l (sp)+,d0/d3-d5/a0
                 rts
@@ -2265,6 +2413,7 @@ loc_9278:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get spell D1's MP cost -> D1
+
 
 GetSpellCost:
                 
@@ -2281,6 +2430,7 @@ GetSpellCost:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get pointer to combatant D0's entry in RAM -> A0
+
 
 GetCombatantEntryAddress:
                 
@@ -2327,6 +2477,7 @@ GetCombatantEntryAddress:
 ;     D1 = byte
 ;     D7 = offset
 
+
 SetCombatantByte:
                 
                 bsr.s   GetCombatantEntryAddress
@@ -2342,6 +2493,7 @@ SetCombatantByte:
 ;     D1 = word
 ;     D7 = offset
 
+
 SetCombatantWord:
                 
                 bsr.s   GetCombatantEntryAddress
@@ -2352,6 +2504,7 @@ SetCombatantWord:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 SetCombatantLong:
                 
@@ -2368,6 +2521,7 @@ SetCombatantLong:
 ;     D7 = combatant byte offset
 ; 
 ; Out: D1 = byte
+
 
 GetCombatantByte:
                 
@@ -2386,6 +2540,7 @@ GetCombatantByte:
 ; 
 ; Out: D1 = word
 
+
 GetCombatantWord:
                 
                 bsr.s   GetCombatantEntryAddress
@@ -2396,6 +2551,7 @@ GetCombatantWord:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 dup_GetCombatantWord:
                 
@@ -2409,6 +2565,7 @@ dup_GetCombatantWord:
 ; =============== S U B R O U T I N E =======================================
 
 ; clamp byte D7 of entity D0's information + D1 between D5 and D6
+
 
 IncreaseAndClampByte:
                 
@@ -2436,6 +2593,7 @@ loc_932A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Clamp7BitIncreasing:
                 
@@ -2473,6 +2631,7 @@ loc_935C:
 
 ; clamp byte D7 of entity D0's information - D1 between D5 and D6
 
+
 DecreaseAndClampByte:
                 
                 move.w  d4,-(sp)
@@ -2504,7 +2663,8 @@ loc_938A:
 
 ; =============== S U B R O U T I N E =======================================
 
-ClampWordIncreasing:
+
+IncreaseAndClampWord:
                 
                 bsr.w   GetCombatantEntryAddress
                 add.w   (a0,d7.w),d1
@@ -2525,12 +2685,13 @@ loc_93AE:
                 move.w  d1,(a0,d7.w)
                 rts
 
-    ; End of function ClampWordIncreasing
+    ; End of function IncreaseAndClampWord
 
 
 ; =============== S U B R O U T I N E =======================================
 
-ClampWordDecreasing:
+
+DecreaseAndClampWord:
                 
                 move.w  d4,-(sp)
                 bsr.w   GetCombatantEntryAddress
@@ -2555,12 +2716,13 @@ loc_93D2:
                 move.w  (sp)+,d4
                 rts
 
-    ; End of function ClampWordDecreasing
+    ; End of function DecreaseAndClampWord
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_93DA:
+
+IncreaseAndClampLong:
                 
                 bsr.w   GetCombatantEntryAddress
                 add.l   (a0,d7.w),d1
@@ -2581,12 +2743,13 @@ loc_93F2:
                 move.l  d1,(a0,d7.w)
                 rts
 
-    ; End of function sub_93DA
+    ; End of function IncreaseAndClampLong
 
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_93F8:
+
+DecreaseAndClampLong:
                 
                 move.l  d4,-(sp)
                 bsr.w   GetCombatantEntryAddress
@@ -2611,15 +2774,18 @@ loc_9416:
                 move.l  (sp)+,d4
                 rts
 
-    ; End of function sub_93F8
+    ; End of function DecreaseAndClampLong
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Gets distance between two entities (simple X and Y calculation, no obstructions)
-; In: D0 = from entity
-;     D1 = to entity
-; Out: D2 = distance
+; Get distance between two combatants (simple X and Y calculation, no obstructions)
+; 
+;       In: D0 = from combatant
+;           D1 = to combatant
+; 
+;       Out: D2 = distance
+
 
 GetDistanceBetweenEntities:
                 
@@ -2671,284 +2837,10 @@ loc_947C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 nullsub_9482:
                 
                 rts
 
     ; End of function nullsub_9482
-
-
-; =============== S U B R O U T I N E =======================================
-
-LevelUp:
-                
-                movem.l d0-a1,-(sp)
-                link    a6,#-$10
-                move.w  d0,-2(a6)
-                bsr.w   GetClass        
-                move.w  d1,d3
-                bsr.w   GetCurrentLevel 
-                moveq   #CHAR_LEVELCAP_PROMOTED,d2
-                cmpi.w  #CHAR_CLASS_FIRSTPROMOTED,d3
-                bge.s   @IsPromoted
-                moveq   #CHAR_LEVELCAP_BASE,d2
-@IsPromoted:
-                
-                lsl.w   #2,d0
-                movea.l (p_pt_AllyStats).l,a0
-                movea.l (a0,d0.w),a0
-@EvaluateClass:
-                
-                tst.b   (a0)            ; If this byte is negative, we haven't found a matching stat block for our class...
-                bmi.w   @Abort          ;  so the level up routine is aborted.
-                cmp.b   (a0)+,d3        ;  Else, if this stat block is matching our class...
-                beq.s   @EvaluateLevel  ;  move on to level evaluation.
-@FindEndOfSpellList_Loop:
-                
-                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,(a0)+ ; loop until we come across an "end of spell list" control code
-                bcs.s   @FindEndOfSpellList_Loop
-                bra.s   @EvaluateClass  
-@EvaluateLevel:
-                
-                cmp.w   d2,d1           ; if current level is below level cap...
-                blt.s   @EvaluateStatGains ;  move on to stat gains evaluation
-@Abort:
-                
-                lea     (LEVELUP_ARGUMENTS).l,a1
-                move.b  #$FF,(a1)+
-                clr.b   (a1)+
-                clr.b   (a1)+
-                clr.b   (a1)+
-                clr.b   (a1)+
-                clr.b   (a1)+
-                move.b  #$FF,(a1)
-                bra.w   @Done
-@EvaluateStatGains:
-                
-                lea     (LEVELUP_ARGUMENTS).l,a1
-                move.w  -2(a6),d0
-                bsr.w   GetCurrentLevel 
-                move.w  d1,d5
-                moveq   #0,d2
-                moveq   #0,d3
-                moveq   #0,d4
-                move.b  (a0)+,d2
-                move.b  (a0)+,d3
-                move.b  (a0)+,d4
-                bsr.w   GetMaxHP
-                bsr.w   CalculateStatGain
-                move.b  d1,1(a1)
-                bsr.w   IncreaseMaxHP
-                move.b  (a0)+,d2
-                move.b  (a0)+,d3
-                move.b  (a0)+,d4
-                bsr.w   GetMaxMP
-                bsr.w   CalculateStatGain
-                move.b  d1,2(a1)
-                bsr.w   IncreaseMaxMP
-                move.b  (a0)+,d2
-                move.b  (a0)+,d3
-                move.b  (a0)+,d4
-                bsr.w   GetBaseATT
-                bsr.w   CalculateStatGain
-                move.b  d1,3(a1)
-                bsr.w   IncreaseBaseATT
-                move.b  (a0)+,d2
-                move.b  (a0)+,d3
-                move.b  (a0)+,d4
-                bsr.w   GetBaseDEF
-                bsr.w   CalculateStatGain
-                move.b  d1,4(a1)
-                bsr.w   IncreaseBaseDEF
-                move.b  (a0)+,d2
-                move.b  (a0)+,d3
-                move.b  (a0)+,d4
-                bsr.w   GetBaseAGI
-                bsr.w   CalculateStatGain
-                move.b  d1,5(a1)
-                bsr.w   IncreaseBaseAGI
-                addq.w  #1,d5
-                move.w  d5,d1
-                bsr.w   SetLevel
-                move.b  d5,(a1)
-                bsr.w   GetClass        
-                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; <BUG> -- TORT class is being wrongfully treated as promoted here
-                                        ; Should either compare to first promoted class, or change branch condition to "lower than or equal".
-                
-                if (BUGFIX_KIWI_SPELLS_LEARNING_LEVEL=0)
-                blt.s   @NotPromoted
-                else
-                ble.s   @NotPromoted
-                endif
-                
-                addi.w  #CHAR_CLASS_EXTRALEVEL,d5
-@NotPromoted:
-                
-                move.b  #$FF,6(a1)
-@CheckUseFirstSpellList:
-                
-                move.b  (a0)+,d2
-                move.b  (a0)+,d1
-                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,d2
-                bne.s   @EvaluateSpellList
-                move.w  d0,d2
-                lsl.w   #2,d2
-                movea.l (p_pt_AllyStats).l,a0
-                movea.l (a0,d2.w),a0
-                lea     ALLYSTATS_OFFSET_SPELL_LIST(a0),a0
-                bra.s   @CheckUseFirstSpellList
-@EvaluateSpellList:
-                
-                cmpi.b  #CODE_TERMINATOR_BYTE,d2
-                beq.w   @SpellList_Done
-                cmp.b   d2,d5
-                bne.s   @CheckUseFirstSpellList
-                bsr.w   LearnSpell      
-                tst.w   d2
-                bne.s   @SpellList_Done
-                move.b  d1,6(a1)
-@SpellList_Done:
-                
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
-@Done:
-                
-                unlk    a6
-                movem.l (sp)+,d0-a1
-                rts
-
-    ; End of function LevelUp
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D0 = ally index
-;     D1 = starting level
-
-InitCharacterStats:
-                
-                movem.l d0-d2/a0,-(sp)
-                move.w  d1,-(sp)        ; -> backup starting level
-                
-                ; Get ally stats entry address -> A0
-                move.w  d0,d2
-                lsl.w   #2,d2
-                movea.l (p_pt_AllyStats).l,a0
-                movea.l (a0,d2.w),a0
-                
-                ; Set starting values
-                clr.w   d1
-                addq.l  #2,a0
-                move.b  (a0)+,d1
-                bsr.w   SetMaxHP
-                bsr.w   SetCurrentHP
-                clr.w   d1
-                addq.l  #2,a0
-                move.b  (a0)+,d1
-                bsr.w   SetMaxMP
-                bsr.w   SetCurrentMP
-                clr.w   d1
-                addq.l  #2,a0
-                move.b  (a0)+,d1
-                bsr.w   SetBaseATT
-                clr.w   d1
-                addq.l  #2,a0
-                move.b  (a0)+,d1
-                bsr.w   SetBaseDEF
-                clr.w   d1
-                addq.l  #2,a0
-                move.b  (a0)+,d1
-                bsr.w   SetBaseAGI
-                moveq   #1,d1
-                bsr.w   SetLevel
-                
-                ; Determine effective level
-                move.w  (sp)+,d4        ; <- restore starting level
-                move.w  d4,d5           ; D5 = effective level (takes additional levels into account if promoted for the purpose of spell learning)
-                bsr.w   GetClass        
-                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; <BUG> -- TORT class is being wrongfully treated as promoted here
-                                        ; Should either compare to first promoted class, or change branch condition to "lower than or equal".
-                
-                if (BUGFIX_KIWI_SPELLS_LEARNING_LEVEL=0)
-                blt.s   @GetAllyStatsEntryAddress
-                else
-                ble.s   @GetAllyStatsEntryAddress
-                endif
-                
-                addi.w  #CHAR_CLASS_EXTRALEVEL,d5 ; add 20 to effective level if promoted
-@GetAllyStatsEntryAddress:
-                
-                move.w  d0,d2
-                lsl.w   #2,d2
-                movea.l (p_pt_AllyStats).l,a0
-                movea.l (a0,d2.w),a0
-@FindStatsBlockForClass_Loop:
-                
-                tst.b   (a0)
-                bmi.w   @Done           ; abort function if "for class" entry is negative (this shouldn't happen)
-                cmp.b   (a0)+,d1
-                beq.s   @GetSpellListAddress ; break out of loop once we found a matching stats block for starting class
-@FindNextStatsBlock_Loop:
-                
-                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,(a0)+
-                bcs.s   @FindNextStatsBlock_Loop ; parse stats block bytes until we come across a spell list control code
-                bra.s   @FindStatsBlockForClass_Loop
-@GetSpellListAddress:
-                
-                lea     ALLYSTATS_OFFSET_SPELL_LIST_MINUS_ONE(a0),a0
-@LearnSpell_Loop:
-                
-                move.b  (a0)+,d2        ; D2 = level which spell is learned at
-                move.b  (a0)+,d1        ; D1 = spell index
-                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,d2
-                bne.s   @CheckForEndOfSpellList ; go to next step once we've got the applicable spell list address
-                
-                ; Get spell list address from first stats block -> A0
-                move.w  d0,d2
-                lsl.w   #2,d2
-                movea.l (p_pt_AllyStats).l,a0
-                movea.l (a0,d2.w),a0
-                lea     ALLYSTATS_OFFSET_SPELL_LIST(a0),a0
-                bra.s   @LearnSpell_Loop
-@CheckForEndOfSpellList:
-                
-                cmpi.b  #ALLYSTATS_CODE_END_OF_SPELL_LIST,d2
-                beq.w   @LevelUp        ; break out of loop upon reaching end of spell list
-                cmp.b   d2,d5
-                blt.s   @LearnSpell_Loop
-                cmpi.b  #SPELL_HEAL|SPELL_LV3,d1
-                bne.s   @LearnSpell
-                bsr.w   GetBaseProwess
-                move.w  d1,d2
-                andi.w  #PROWESS_MASK_CRITICAL,d1
-                lsr.w   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2 ; shift double and counter attack settings into lower nibble position
-                addq.w  #1,d2
-                cmpi.w  #8,d2
-                bne.s   @Continue
-                moveq   #7,d2
-@Continue:
-                
-                lsl.w   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2
-                or.w    d2,d1
-                bsr.w   SetBaseProwess
-                bra.s   @Next
-@LearnSpell:
-                
-                bsr.w   LearnSpell      
-@Next:
-                
-                bra.s   @LearnSpell_Loop
-@LevelUp:
-                
-                subq.w  #2,d4           ; level up loop counter = current level - 2
-                blt.w   @Done
-@LevelUp_Loop:
-                
-                bsr.w   LevelUp
-                dbf     d4,@LevelUp_Loop
-@Done:
-                
-                movem.l (sp)+,d0-d2/a0
-                rts
-
-    ; End of function InitCharacterStats
 

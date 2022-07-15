@@ -7,19 +7,19 @@ ms_map34_Entities:
                 msFixedEntity 63, 63, UP, MAPSPRITE_EVIL_SPIRIT, eas_Init
                 msFixedEntity 63, 63, UP, MAPSPRITE_BEASTMAN2, eas_Init
                 msFixedEntity 63, 63, UP, MAPSPRITE_BOY, eas_Init
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
-                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_Init3
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite
+                msFixedEntity 63, 63, UP, MAPSPRITE_EFFECT1, eas_InitFixedSprite

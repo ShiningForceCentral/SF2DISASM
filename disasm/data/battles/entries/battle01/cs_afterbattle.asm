@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle01\cs_afterbattle.asm :
 ; 0x496DC..0x4980E : Cutscene after battle 1
-abcs_battle01:  textCursor $901
+abcs_battle01:  textCursor 2305
                 resetForceBattleStats
                 loadMapFadeIn MAP_ANCIENT_TOWER_FIRST_ROOM,2,0
                 loadMapEntities ce_497F6
@@ -21,9 +21,9 @@ abcs_battle01:  textCursor $901
                 csWait 30
                 mapFadeInFromWhite
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 5
-                setActscript ALLY_BOWIE,eas_461B6
+                setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 30
                 mapFadeOutToWhite
                 csWait 30
@@ -41,7 +41,7 @@ abcs_battle01:  textCursor $901
                 endActions
                 nextSingleText $0,129   ; "Oh, it disappeared?!{W1}"
                 csWait 5
-                setActscript 129,eas_461B6
+                setActscript 129,eas_2xRightLeft
                 csWait 120
                 entityActionsWait 129
                  moveDown 1

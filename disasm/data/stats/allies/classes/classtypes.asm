@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\allies\classes\classtypes.asm :
 ; 0x853A..0x855A : Class types table
 tbl_ClassTypes: 
-; Syntax        classType [CLASSTYPE_]index
+; Syntax        classType [CLASSTYPE_]enum (or index)
                 
                 classType BASE          ; 0: SDMN
                 classType BASE          ; 1: KNTE
