@@ -3018,12 +3018,13 @@ GROWTHCURVE_DEF_SIZE: equ $74
 ; ---------------------------------------------------------------------------
 
 ; enum BattleMapCoordinates_Properties
-                if (BUGFIX_SEARCH_IN_BATTLE=1)
-BATTLEMAPCOORDS_ENTRY_SIZE: equ 7
-                else
-BATTLEMAPCOORDS_ENTRY_SIZE: equ 5
-                endif
+battleMapCoordsEntrySize = 5
 
+    if (STANDARD_BUILD&FIX_SEARCH_IN_BATTLE=1)
+battleMapCoordsEntrySize = 7
+    endif
+
+BATTLEMAPCOORDS_ENTRY_SIZE: equ battleMapCoordsEntrySize
 BATTLEMAPCOORDS_ENTRY_SIZE_FULL: equ $7
 
 ; ---------------------------------------------------------------------------
