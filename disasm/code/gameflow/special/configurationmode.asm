@@ -7,8 +7,17 @@
 
 CheatModeConfiguration:
                 
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
-                beq.w   return_7EC4
+                if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
+                    nop
+                    nop
+                    nop
+                    nop
+                    nop
+                else
+                    btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                    beq.w   return_7EC4
+                endif
+                
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 beq.s   loc_7E58
                 btst    #7,(SAVE_FLAGS).l

@@ -21,8 +21,14 @@ InitGame:
                 beq.w   GameIntro
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   WaitForVInt
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
-                beq.s   loc_7118
+                if (STANDARD_BUILD&EASY_BATTLE_TEST=1)
+                    bra.w   DebugModeBattleTest
+                    nop
+                    nop
+                else
+                    btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                    beq.s   loc_7118
+                endif
                 jsr     (EnableDisplayAndInterrupts).w
                 bsr.w   InitDisplay
                 jsr     (EnableDisplayAndInterrupts).w
