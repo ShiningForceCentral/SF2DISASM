@@ -1,1 +1,4 @@
-BUGFIX_KIWI_SPELLS_LEARNING_LEVEL: equ 0    ; 0 = OFF, 1 = ON. Kiwi's base class is wrongfully treated as promoted for the purpose of learning spells.
+
+; 0 = OFF, 1 = ON
+
+FIX_KIWI_SPELLS_LEARNING_LEVEL: equ 1    ; Kiwi's base class is wrongfully treated as promoted for the purpose of learning spells.

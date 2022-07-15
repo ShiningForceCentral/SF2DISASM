@@ -2,6 +2,10 @@
 # No rom files or game content on the repository
 *.bin
 
+# No symbols or listings files
+*.lst
+*.sym
+
 # No log files
 *.log
 
