@@ -5,9 +5,9 @@
 
 
                 include "code\common\tech\jumpinterfaces\s03_jumpinterface_1.asm"    ; Game Section 03 Jump Interface, part 1
-                include "code\common\tech\pointers\s03_pointers.asm"    ; Game Section 03 Pointers
+                includeIfVanillaLayout "code\common\tech\pointers\s03_pointers.asm"    ; Game Section 03 Pointers
                 include "code\common\tech\jumpinterfaces\s03_jumpinterface_2.asm"    ; Game Section 03 Jump Interface, part 2
-                include "code\common\tech\pointers\s03_memberstatuswindowlayoutpointer.asm"    ; Game Section 03 Member Status Window Layout Pointer
+                includeIfVanillaLayout "code\common\tech\pointers\s03_memberstatuswindowlayoutpointer.asm"    ; Game Section 03 Member Status Window Layout Pointer
                 include "code\common\menus\menuengine_01.asm"    ; Menu engine
                 include "data\graphics\tech\menus\diamondmenulayout.asm"    ; Diamond menu layout
                 include "data\graphics\tech\menus\magicmenulayout.asm"    ; Magic menu layout
@@ -68,4 +68,4 @@
                 includeIfVanillaRom "data\stats\items\itemnames.asm"    ; Item names
                 align
                 include "data\stats\allies\classes\classnames.asm"    ; Class names
-                alignIfOriginalRomLayout $18000
+                alignIfVanillaLayout $18000

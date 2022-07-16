@@ -89,7 +89,7 @@ WriteBattlesceneScript_EnemyDropItem:
                     move.w  #256,d0
                     jsr     (GetRandomOrDebugValue).w
                     cmp.b   (a0),d0
-                    bhi.s   @Done
+                    bhi.w   @Done
                 else
                     moveq   #ENEMYITEMDROP_RANDOM_CHANCE,d0
                     jsr     (GetRandomOrDebugValue).w

@@ -672,11 +672,11 @@ ProcessMapTransition:
                 getSavedByte CURRENT_MAP, d1
                 
                 disableSram
-                movea.l (p_pt_MapData).l,a5
+                conditionalLongAddr movea.l, p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
                 addq.l  #1,a5
-                movea.l (p_pt_MapTilesets).l,a0
+                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_25E8
@@ -690,7 +690,7 @@ ProcessMapTransition:
 loc_25E8:
                 
                 addq.l  #1,a5
-                movea.l (p_pt_MapTilesets).l,a0
+                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_260E
@@ -703,7 +703,7 @@ loc_25E8:
                 bsr.w   WaitForDmaQueueProcessing
 loc_260E:
                 
-                movea.l (p_pt_MapTilesets).l,a0
+                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_2632
@@ -1077,13 +1077,13 @@ LoadMapTilesets:
                 blt.w   @Skip           ; skip if map index > 127
                 
                 disableSram
-                movea.l (p_pt_MapData).l,a5
+                conditionalLongAddr movea.l, p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
                 move.b  (a5)+,d0
                 
                 ; Check tileset 1
-                movea.l (p_pt_MapTilesets).l,a0
+                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   @CheckTileset2
@@ -1094,7 +1094,7 @@ LoadMapTilesets:
                 bsr.w   LoadCompressedData
 @CheckTileset2:
                 
-                movea.l (p_pt_MapTilesets).l,a0
+                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   @CheckTileset3
@@ -1105,7 +1105,7 @@ LoadMapTilesets:
                 bsr.w   LoadCompressedData
 @CheckTileset3:
                 
-                movea.l (p_pt_MapTilesets).l,a0
+                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   @CheckTileset4
@@ -1116,7 +1116,7 @@ LoadMapTilesets:
                 bsr.w   LoadCompressedData
 @CheckTileset4:
                 
-                movea.l (p_pt_MapTilesets).l,a0
+                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   @CheckTileset5
@@ -1127,7 +1127,7 @@ LoadMapTilesets:
                 bsr.w   LoadCompressedData
 @CheckTileset5:
                 
-                movea.l (p_pt_MapTilesets).l,a0
+                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   @Done
@@ -1171,7 +1171,7 @@ LoadMap:
                 ; Reload current map
                 clr.w   d1              ; If D1<0, re-load current map
                 getSavedByte CURRENT_MAP, d1
-                movea.l (p_pt_MapData).l,a5
+                conditionalLongAddr movea.l, p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
                 lea     $E(a5),a5       ; get address 02 - map properties
@@ -1180,10 +1180,10 @@ loc_2ACC:
                 
                 clr.w   ((word_FFAF42-$1000000)).w ; Load new map D1
                 setSavedByte d1, CURRENT_MAP  
-                movea.l (p_pt_MapData).l,a5
+                conditionalLongAddr movea.l, p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
-                movea.l (p_pt_MapPalettes).l,a0
+                conditionalLongAddr movea.l, p_pt_MapPalettes, a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 lsl.w   #2,d0
@@ -1574,7 +1574,7 @@ LoadMapArea:
                 move.w  (a1)+,d0
                 
                 disableSram
-                movea.l (p_pt_MapTilesets).l,a0
+                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.l  a1,-(sp)

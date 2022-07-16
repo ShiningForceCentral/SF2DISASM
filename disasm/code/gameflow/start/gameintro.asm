@@ -86,7 +86,7 @@ loc_729C:
                 
                 move.b  #0,((byte_FFB082-$1000000)).w
                 jsr     j_ClearEntities
-                movea.l (p_SpeechBalloonTiles).l,a0
+                conditionalLongAddr movea.l, p_SpeechBalloonTiles, a0
                 lea     ($8000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1

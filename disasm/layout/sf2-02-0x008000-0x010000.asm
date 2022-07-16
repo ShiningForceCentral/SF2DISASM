@@ -5,7 +5,7 @@
 
 
                 include "code\common\tech\jumpinterfaces\s02_jumpinterface.asm"    ; Game Section 02 Jump Interface
-                include "code\common\tech\pointers\s02_pointers.asm"    ; Game Section 02 Pointers
+                includeIfVanillaLayout "code\common\tech\pointers\s02_pointers.asm"    ; Game Section 02 Pointers
                 
                 ; Stats engine
                 include "code\common\stats\statsengine_1.asm"    ; Character stats engine
@@ -108,4 +108,4 @@
                 includeIfVanillaRom "data\stats\spells\spellnames.asm"  ; Spell names
                 include "data\stats\allies\allynames.asm"    ; Ally names
                 include "data\stats\enemies\enemynames.asm"    ; Enemy names
-                alignIfOriginalRomLayout $10000
+                alignIfVanillaLayout $10000

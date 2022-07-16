@@ -638,7 +638,7 @@ LoadMainMenuIcon:
                 
                 move.l  d0,-(sp)
                 ext.w   d0
-                movea.l (p_MainMenuTiles).l,a0
+                conditionalLongAddr movea.l, p_MainMenuTiles, a0
                 mulu.w  #GFX_DIAMENU_ICON_PIXELS_NUMBER,d0
                 adda.w  d0,a0
                 move.w  #$8F,d0 
@@ -1137,7 +1137,7 @@ LoadHighlightableIcon:
                 
                 adda.w  #ICONTILES_BYTESIZE,a1
                 mulu.w  #ICONTILES_BYTESIZE,d0
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 addIconOffset d0, a0
                 move.w  #$2F,d1 
                 lea     IconHighlightTiles(pc), a2

@@ -432,7 +432,7 @@ LoadItemIcon:
                 
                 module  ; start of icon loading module
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 if (STANDARD_BUILD=1)
                     cmpi.w  #ITEM_NOTHING,d1
                     bne.s   LoadIcon
@@ -450,7 +450,7 @@ LoadItemIcon:
 LoadSpellIcon:
                 
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 cmpi.w  #SPELL_NOTHING,d1
                 bne.s   @Spell
 @Nothing:       move.w  #ICON_NOTHING,d1
@@ -2182,7 +2182,7 @@ CopyIconPixels:
                 
                 move.l  a1,-(sp)
                 move.w  d0,-(sp)
-                movea.l (p_Icons).l,a1
+                conditionalLongAddr movea.l, p_Icons, a1
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
@@ -2751,7 +2751,7 @@ loc_1528E:
                 jsr     (CreateWindow).w
                 move.w  d0,windowSlot(a6)
                 move.l  a1,windowTilesEnd(a6)
-                movea.l (p_MenuTiles_YesNo).l,a0
+                conditionalLongAddr movea.l, p_MenuTiles_YesNo, a0
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
@@ -3212,7 +3212,7 @@ loc_1560E:
 LoadPortrait:
                 
                 movem.l d0-a3,-(sp)
-                movea.l (p_pt_Portraits).l,a0
+                conditionalLongAddr movea.l, p_pt_Portraits, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0

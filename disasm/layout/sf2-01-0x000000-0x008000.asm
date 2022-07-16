@@ -23,11 +23,7 @@
                 include "code\common\maps\mapload.asm"    ; Map loading functions
                 include "code\common\tech\graphics\display.asm"    ; Display function
                 include "code\gameflow\exploration\exploration.asm"    ; Exploration functions
-                if (STANDARD_BUILD=1)
-                    include "code\gameflow\battle\battlemusic-standard.asm"
-                    include "data\battles\global\explorationtobattlemusics-standard.asm"
-                    align
-                else
+                if (STANDARD_BUILD=0)
                     include "code\gameflow\battle\battlemusic.asm"    ; Battle music function
                 endif
                 include "code\common\scripting\map\bbcs_11_function.asm"    ; Specific to before battle 11 cutscene function
@@ -65,5 +61,25 @@
                 if (STANDARD_BUILD=1)
                     include "code\common\tech\findspecialproperties-standard.asm"
                 endif
-                includeIfExtendedSsf "code\common\tech\extendedssfmapper.asm"   ; Extended SSF mapper functions
-                alignIfOriginalRomLayout $8000
+                if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+                    include "code\common\tech\extendedssfmapper.asm"   ; Extended SSF mapper functions
+                endif
+                
+                ; Relocated pointers
+                alignIfOptimizedLayout $7F10
+                includeIfOptimizedLayout "code\common\tech\pointers\s02_pointers.asm"                           ; Game Section 02 Pointers
+                includeIfOptimizedLayout "code\common\tech\pointers\s03_pointers.asm"                           ; Game Section 03 Pointers
+                includeIfOptimizedLayout "code\common\tech\pointers\s03_memberstatuswindowlayoutpointer.asm"    ; Game Section 03 Member Status Window Layout Pointer
+                includeIfOptimizedLayout "code\common\tech\pointers\s06_textbankspointer.asm"                   ; Game Section 06 Text Banks Pointer
+                includeIfOptimizedLayout "code\common\tech\pointers\s06_pointers.asm"                           ; Game Section 06 Pointers
+                includeIfOptimizedLayout "code\common\tech\pointers\s06_gamestaffpointer.asm"                   ; Game Section 06 Game Staff Pointer
+                includeIfOptimizedLayout "code\common\tech\pointers\s08_pointers.asm"                           ; Game Section 08 Pointers
+                includeIfOptimizedLayout "code\common\tech\pointers\s10_pointers.asm"                           ; Game Section 10 Pointers
+                includeIfOptimizedLayout "code\common\tech\pointers\s11_enemybattlespritespointer.asm"          ; Game Section 11 Enemy Battlesprites Pointer
+                includeIfOptimizedLayout "code\common\tech\pointers\s12_pointers.asm"                           ; Game Section 12 Pointers
+                includeIfOptimizedLayout "code\common\tech\pointers\s13_pointers.asm"                           ; Game Section 13 Pointers
+                includeIfOptimizedLayout "code\common\tech\pointers\s14_pointers.asm"                           ; Game Section 14 Pointers
+                includeIfOptimizedLayout "code\common\tech\pointers\s15_portraitspointer.asm"                   ; Game Section 15 Portraits Pointer
+                includeIfOptimizedLayout "code\common\tech\pointers\s16_iconspointer.asm"                       ; Game Section 16 Icons Pointer
+                includeIfOptimizedLayout "code\common\tech\pointers\s17_pointers.asm"                           ; Game Section 17 Pointers
+                alignIfVanillaLayout $8000

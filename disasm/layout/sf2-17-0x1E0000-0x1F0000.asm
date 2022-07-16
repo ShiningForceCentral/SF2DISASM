@@ -8,7 +8,7 @@
                 incbin "data/sound/pcmbank1.bin"
                 incbin "data/sound/yminst.bin"
 SoundDriver:    incbin "data/sound/sounddriver.bin"
-                include "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
+                includeIfVanillaLayout "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
                 includeIfVanillaRom "data\stats\allies\growthcurves.asm"    ; Stat growth curves
                 includeIfVanillaRom "data\stats\allies\stats\entries.asm"    ; Ally stats
                 align
@@ -16,6 +16,6 @@ SoundDriver:    incbin "data/sound/sounddriver.bin"
                 includeIfVanillaRom "data\stats\allies\classes\classdefs.asm"    ; Class definitions
                 includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
-                include "data\graphics\tech\unusedbasepalettes\entries.asm"    ; Unused base palettes
-                include "data\graphics\tech\basetilesentry.asm"    ; Base tiles
+                includeIfVanillaRom "data\graphics\tech\unusedbasepalettes\entries.asm"    ; Unused base palettes
+                includeIfVanillaRom "data\graphics\tech\basetilesentry.asm"    ; Base tiles
                 align $1F0000

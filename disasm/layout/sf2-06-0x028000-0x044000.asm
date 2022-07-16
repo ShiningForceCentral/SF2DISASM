@@ -4,11 +4,11 @@
 ; FREE SPACE : 6681 bytes.
 
 
-                include "code\common\tech\pointers\s06_textbankspointer.asm"    ; Game Section 06 Text Banks Pointer
+                includeIfVanillaLayout "code\common\tech\pointers\s06_textbankspointer.asm"    ; Game Section 06 Text Banks Pointer
                 include "code\common\tech\jumpinterfaces\s06_jumpinterface_1.asm"    ; Game Section 06 Jump Interface, part 1
-                include "code\common\tech\pointers\s06_pointers.asm"    ; Game Section 06 Pointers
+                includeIfVanillaLayout "code\common\tech\pointers\s06_pointers.asm"    ; Game Section 06 Pointers
                 include "code\common\tech\jumpinterfaces\s06_jumpinterface_2.asm"    ; Game Section 06 Jump Interface, part 2
-                include "code\common\tech\pointers\s06_gamestaffpointer.asm"    ; Game Section 06 Game Staff Pointer
+                includeIfVanillaLayout "code\common\tech\pointers\s06_gamestaffpointer.asm"    ; Game Section 06 Game Staff Pointer
                 include "code\common\tech\jumpinterfaces\s06_jumpinterface_3.asm"    ; Game Section 06 Jump Interface, part 3
                 include "code\specialscreens\segalogo\segalogo_0.asm"    ; SEGA logo functions
                 include "data\tech\configurationmodeinputsequence.asm"    ; Configuration mode input sequence
@@ -54,4 +54,4 @@ TextBankTreeData:
                 includeIfExpandedRom "data\battles\global\battlemapcoords.asm"      ; Battle map coords
                 includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"      ; Save point map coords
                 includeIfExpandedRom "data\maps\global\raftresetmapcoords.asm"      ; Raft reset map coords
-                alignIfOriginalRomLayout $44000
+                alignIfVanillaLayout $44000

@@ -17,7 +17,7 @@ member = -2
                 move.l  a1,windowTilesAddress(a6)
                 
                 ; Copy window layout
-                movea.l (p_MemberStatusWindowLayout).l,a0
+                conditionalLongAddr movea.l, p_MemberStatusWindowLayout, a0
                 move.w  #WINDOW_MEMBERSTATUS_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w
                 
@@ -253,7 +253,7 @@ member = -2
                 move.w  d5,d1
                 andi.l  #SPELLENTRY_MASK_INDEX,d1
                 addi.w  #ICON_SPELLS_START,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
@@ -320,7 +320,7 @@ member = -2
                 ; Load icon pixel data to temp space
                 move.w  d5,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
@@ -332,7 +332,7 @@ member = -2
                 btst    #ITEMENTRY_BIT_BROKEN,d1
                 beq.s   @CleanIconCorners
                 
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 if (EXPANDED_ITEMS_AND_SPELLS=1)
                     adda.l  #ICONTILES_OFFSET_CRACKS,a0
                 else
@@ -402,7 +402,7 @@ member = -2
                 
                 ; Load Jewel of Light icon pixel data to temp space
                 move.w  #ICON_JEWEL_OF_LIGHT,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
@@ -428,7 +428,7 @@ member = -2
                 
                 ; Load Jewel of Evil icon pixel data to temp space
                 move.w  #ICON_JEWEL_OF_EVIL,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1

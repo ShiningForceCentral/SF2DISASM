@@ -47,7 +47,7 @@ loc_1AC09E:
                 jsr     (UpdateBackgroundVScrollData).w
                 jsr     (EnableDmaQueueProcessing).w
                 jsr     (FadeInFromBlack).w
-                move.l  (p_GameStaff).l,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
+                conditionalLongAddr move.l, p_GameStaff, ((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_EndCredits

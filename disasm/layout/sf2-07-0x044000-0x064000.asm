@@ -81,4 +81,4 @@
                 include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
                 include "data\maps\mapsetups.asm"    ; Map setups table
                 include "data\maps\mapsetupsstorage.asm"
-                alignIfOriginalRomLayout $64000
+                alignIfVanillaLayout $64000
