@@ -56,7 +56,9 @@
                 align
                 include "code\specialscreens\witch\witchfunctions.asm"    ; Witch functions
                 include "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
-                include "code\gameflow\start\regioncheck.asm"    ; Region check function
+                if (regionFreeRom=0)
+                    include "code\gameflow\start\regioncheck.asm"    ; Region check function
+                endif
                 include "code\specialscreens\witch\soundtest.asm"    ; Sound Test function missing in US version
                 if (STANDARD_BUILD=1)
                     include "code\common\tech\findspecialproperties-standard.asm"

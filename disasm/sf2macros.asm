@@ -52,6 +52,14 @@ declareSramEnd: macro
     endc
     endm
     
+declareRegionSupport: macro
+    if (regionFreeRom=1)
+    dc.b 'JUE             '
+    else
+    dc.b 'U               '
+    endc
+    endm
+    
     
 ; ---------------------------------------------------------------------------
 ; Expanded ROM

@@ -9,7 +9,9 @@ InitGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
-                bsr.w   CheckRegion
+                if (regionFreeRom=0)
+                    bsr.w   CheckRegion
+                endif
                 
                 enableSram
                 jsr     j_NewGame

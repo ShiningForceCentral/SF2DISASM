@@ -9,6 +9,7 @@ RELOCATED_SAVED_DATA_TO_SRAM:       equ 0       ; Relocate currently loaded save
 EXPANDED_FORCE_MEMBERS:             equ 1       ; Enable all 32 force members supported by the engine instead of 30.
 EXPANDED_ITEMS_AND_SPELLS:          equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of 4MB ROM with 32KB SRAM.
 OPTIMIZED_ROM_LAYOUT:               equ 1       ; Align ROM sections to next word boundary to consolidate free space.
+REGION_FREE_ROM:                    equ 1       ; Skip checking system region, omit including related function, and update ROM header.
 
 ; Assembler optimizations
 OPTIMIZED_PC_RELATIVE_ADDRESSING:   equ 1       ; Optimize to PC relative addressing.
@@ -34,6 +35,14 @@ expandedRom = 0
 expandedSram = 1
     else
 expandedSram = 0
+    endif
+    
+    ; If standard build, and either OPTIMIZED_ROM_LAYOUT or REGION_FREE_ROM are enabled,
+    ; build a region free ROM to make space for relocated pointers in a non-expanded ROM.
+    if (STANDARD_BUILD&(OPTIMIZED_ROM_LAYOUT!REGION_FREE_ROM)=1)
+regionFreeRom = 1
+    else
+regionFreeRom = 0
     endif
     
     
