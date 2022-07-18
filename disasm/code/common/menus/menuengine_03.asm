@@ -4,6 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = combatant index
+
 
 CreateBattlefieldMiniStatusWindow:
                 

@@ -12,7 +12,7 @@ ExecuteBattleCutscene_Intro:
                 movem.l d1,-(sp)
                 clr.w   d1
                 getSavedByte CURRENT_BATTLE, d1
-                addi.w  #450,d1
+                addi.w  #BATTLE_INTRO_CUTSCENE_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   loc_47AE8
                 movem.l d0/a0,-(sp)

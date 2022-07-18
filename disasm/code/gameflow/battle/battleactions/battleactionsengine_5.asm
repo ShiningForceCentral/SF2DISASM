@@ -66,10 +66,10 @@ WriteBattlesceneScript_InflictDamage:
                 lsr.w   #3,d1
                 addq.w  #1,d1
                 move.w  d1,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 sub.w   d0,d6           ; randomly subtract 0..(damage/8)
                 move.w  d1,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 sub.w   d0,d6           ; do it again
                 bgt.s   @CheckCutoff
                 moveq   #1,d6           ; minimum damage = 1
@@ -331,7 +331,7 @@ WriteBattlesceneScript_InflictCurseDamage:
                 btst    #STATUSEFFECT_BIT_CURSE,d1
                 beq.w   @Return
                 moveq   #CHANCE_TO_INFLICT_CURSE_DAMAGE,d0 ; 1/2 chance to inflict curse damage
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 beq.w   @Return
                 exg     a4,a5
@@ -419,7 +419,7 @@ DetermineDoubleAndCounter:
                 moveq   #4,d0           ; 1/4 otherwise
 @DetermineDouble:
                 
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   @EvaluateChanceToCounter
                 move.b  #$FF,doubleAttack(a2)
@@ -440,7 +440,7 @@ DetermineDoubleAndCounter:
                 moveq   #4,d0
 @DetermineCounter:
                 
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   @Return
                 move.b  #$FF,counterAttack(a2)
@@ -1005,7 +1005,7 @@ SpellEffect_DrainMP:
                 move.b  (a5),d0
                 jsr     GetCurrentMP
                 moveq   #3,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 addq.w  #3,d0
                 cmp.b   d0,d1
                 bcc.s   @TargetReaction
@@ -1074,7 +1074,7 @@ byte_B6A2:
 @Continue:
                 
                 moveq   #3,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 addq.w  #2,d0
                 displayMessage #MESSAGE_BATTLE_ATTACK_POWER_IS_BOOSTED_BY,(a5),#0,d0 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -1106,7 +1106,7 @@ byte_B708:
 @BattleMessage:
                 
                 moveq   #3,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 addq.w  #2,d0
                 displayMessage #MESSAGE_BATTLE_DEFENSIVE_POWER_IS_BOOSTED_BY,(a5),#0,d0 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -1138,7 +1138,7 @@ byte_B76E:
 @BattleMessage:
                 
                 moveq   #3,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 addq.w  #2,d0
                 displayMessage #MESSAGE_BATTLE_AGILITY_IS_BOOSTED_BY,(a5),#0,d0 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -1208,7 +1208,7 @@ SpellEffect_CheerfulBread:
 @BattleMessage:
                 
                 moveq   #3,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 addq.w  #2,d0
                 displayMessage #MESSAGE_BATTLE_MAX_HP_ARE_RAISED_BY,(a5),#0,d0 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -1247,7 +1247,7 @@ byte_B8BA:
 @BattleMessage:
                 
                 moveq   #3,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 addq.w  #2,d0
                 displayMessage #MESSAGE_BATTLE_MAX_MP_ARE_RAISED_BY,(a5),#0,d0 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -1436,7 +1436,7 @@ ApplyRandomEffectiveness:
 @DetermineSuccess:
                 
                 moveq   #8,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 cmp.w   d2,d0
                 bcc.s   @Success
                 displayMessage #MESSAGE_BATTLE_THE_SPELL_HAS_NO_EFFECT,(a5),#0,#0 
@@ -1595,7 +1595,7 @@ CalculateDamage_Spell:
                 
                 move.w  d3,d0
                 beq.s   @Skip           ; skip if no chance to critical hit
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   @Skip
                 add.w   d1,d6           ; +25% damage if successful critical hit
@@ -1729,7 +1729,7 @@ WriteBattlesceneScript_BreakUsedItem:
                 btst    #ITEMENTRY_BIT_BROKEN,d0
                 bne.w   @DestroyItem    ; destroy item if already broken
                 moveq   #CHANCE_TO_BREAK_USED_ITEM,d0 ; 1/4 chance to break used item
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.b   d0
                 bne.s   @Skip           ; skip if item does not break
                 moveq   #0,d0

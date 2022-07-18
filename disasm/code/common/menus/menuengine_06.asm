@@ -621,7 +621,7 @@ aMov:           dc.b 'MOV  ',0
 aAgi:           dc.b 'AGI  ',0
 aNothing_2:     dc.b '\Nothing',0
                 
-                align                   ; make sure tiles data is word aligned in case patches are applied
+                align
                 
 TextHighlightTiles:
                 incbin "data/graphics/tech/texthighlighttiles.bin"
@@ -1291,7 +1291,7 @@ sub_1445A:
                     move.w  d1,(a0)+
                 else
                     jsr     j_GetSpellAndNumberOfSpells
-                    andi.w  #$7F,d1 ; BUG -- Should be using spell entry index mask $3F instead.
+                    andi.w  #$7F,d1         ; BUG -- Should be using spell entry index mask $3F instead.
                     move.w  d1,(a0)+
                     moveq   #1,d1
                     jsr     j_GetSpellAndNumberOfSpells

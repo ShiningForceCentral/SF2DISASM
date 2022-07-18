@@ -88,7 +88,7 @@ CreateBattlesceneMessage:
 @Muddle:        module
                 move.w  #MESSAGE_BATTLE_MUDDLED_ACTIONS_START,d1 ; HARDCODED Muddle line start index
                 moveq   #16,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 cmpi.w  #9,d0           ; HARDCODED number of available Muddle lines
                 bls.s   @Continue
                 clr.w   d0

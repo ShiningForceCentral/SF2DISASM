@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination
+; In: a0 = Source, a1 = Destination
 
 
 LoadMapLayoutData:
@@ -239,8 +239,7 @@ loc_227A:
 ; Reads next part of barrel to determine flags for next block
 ; barrel = 00
 ; 
-; In: D0 = barrel
-; Out: D1 = block flag word
+;   In: d0.w = Barrel, Out: d1.w = Block flag word
 
 
 ReadMapLayoutBarrelForBlockFlags:
@@ -1067,7 +1066,7 @@ loc_29D6:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d1.b = map index
+; In: d1.w = Map index
 
 
 LoadMapTilesets:
@@ -1151,7 +1150,7 @@ LoadMapTilesets:
 
 ; Load all map properties (map coords, entities, etc.)
 ; 
-; In: d1.b = map index, or -1 to indicate current map
+;   In: d1.b = Map index, or -1 to indicate current map
 
 
 LoadMap:
@@ -1429,8 +1428,8 @@ loc_2CF6:
                 bsr.w   InitWindowProperties
                 bsr.w   ToggleRoofOnMapLoad
                 bsr.w   WaitForVInt
-                bsr.w   UpdateVdpPlaneA 
-                bsr.w   UpdateVdpPlaneB 
+                bsr.w   UpdateVdpPlaneA
+                bsr.w   UpdateVdpPlaneB
                 rts
 
     ; End of function LoadMap

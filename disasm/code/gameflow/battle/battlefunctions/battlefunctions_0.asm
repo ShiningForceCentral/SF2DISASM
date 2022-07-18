@@ -778,9 +778,7 @@ sub_23256:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = entity index
-; Out: D2 = entity X
-;      D3 = entity Y
+; In: d0.w = combatant index
 
 
 SetUnitCursorDestinationToNextCombatant:
@@ -794,6 +792,8 @@ SetUnitCursorDestinationToNextCombatant:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d2.w, d3.w = entity X,Y coordinates
 
 
 SetUnitCursorDestinationToNextBattleEntity:

@@ -279,7 +279,7 @@ BattleLoop_Victory:
                     jsr     (FindSpecialPropertyBytesAddressForObject).w
                     movem.l (sp)+,d1-d2/a0
                     bcs.s   @Continue
-                    jsr     DisplayTimerWindow
+                    jsr     RemoveTimerWindow
                 else
                     checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check for fairy woods
                     bne.s   @Continue

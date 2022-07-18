@@ -4,8 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
-;     A1 = window tile adress
+; In: a1 = window tile adress, d0.w = combatant index
 
 windowTilesAddress = -6
 member = -2

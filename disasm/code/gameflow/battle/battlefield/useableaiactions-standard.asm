@@ -120,7 +120,7 @@ GetNextSupportSpell:
                 bsr.w   FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
-                cmpi.b  #SPELLPROPS_TYPE_STATUS,d2
+                cmpi.b  #SPELLPROPS_TYPE_SUPPORT,d2
                 beq.s   @Break
                 
 @Next:          addq.w  #1,d3

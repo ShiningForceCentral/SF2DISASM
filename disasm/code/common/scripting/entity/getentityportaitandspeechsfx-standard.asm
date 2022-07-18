@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\scripting\entity\getentityportaitandspeechsound-standard.asm :
+; ASM FILE code\common\scripting\entity\getentityportaitandspeechsfx-standard.asm :
 ; Standard reimplementation of entity portrait and speech sfx getter function.
 
 ; =============== S U B R O U T I N E =======================================

@@ -16,6 +16,11 @@
                 include "code\common\stats\statsengine_2.asm"    ; Character stats engine
                 include "code\common\stats\levelup.asm"    ; Level Up functions
                 include "code\common\stats\statsengine_3.asm"    ; Character stats engine
+                if (STANDARD_BUILD=1)
+                    include "code\common\stats\caravaninventoryfunctions-standard.asm"
+                else
+                    include "code\common\stats\caravaninventoryfunctions.asm"    ; Caravan inventory management functions
+                endif
                 
                 ; Battleactions engine
                 include "code\gameflow\special\debugmodebattleactions.asm"    ; Debug mode battle actions

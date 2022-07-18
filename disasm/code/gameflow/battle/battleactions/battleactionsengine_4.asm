@@ -470,7 +470,7 @@ WriteBattlesceneScript_DodgeAttack:
 @DetermineDodge:
                 
                 move.w  d2,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.w   @Return
                 move.w  #$FFFF,d4
@@ -607,7 +607,7 @@ DetermineCriticalHit:
                 moveq   #0,d0
 @DetermineSuccess:
                 
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   @Return
                 move.b  1(a0),d0        ; success !

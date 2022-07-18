@@ -1391,13 +1391,12 @@ loc_422C:
 
 ; =============== S U B R O U T I N E =======================================
 
-; IN : 
-; - d0d1 : candidate coordinates
-; OUT :
-; - d0 : layout block offset
-; - d1 : item flag
-; - d2 : item index
-; - a2 : map layout offset
+; In: d0.w, d1.w = Candidate coordinates
+; 
+; Out: a2 = Map layout offset
+;      d0.w = Layout block offset
+;      d1.w = Item flag
+;      d2.w = Item index
 
 
 GetChestItem:
@@ -1533,8 +1532,6 @@ loc_4340:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Updates plane A
-
 
 UpdateVdpPlaneA:
                 
@@ -1573,8 +1570,6 @@ loc_439A:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; Updates plane B
 
 
 UpdateVdpPlaneB:
