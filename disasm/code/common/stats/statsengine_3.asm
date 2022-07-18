@@ -37,9 +37,9 @@ InitAllyCombatantEntry:
                 movem.l d0-d3/a0-a1,-(sp)
                 move.w  d0,d1
                 mulu.w  #COMBATANT_ENTRY_SIZE,d1
-                lea     ((COMBATANT_ENTRIES-$1000000)).w,a1
+                loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d1,a1
-                movea.l (p_tbl_AllyNames).l,a0
+                conditionalLongAddr movea.l, p_tbl_AllyNames, a0
                 move.w  d0,d1
                 subq.w  #1,d1
                 blt.s   @GetNameCounter
@@ -58,7 +58,7 @@ InitAllyCombatantEntry:
                 blt.s   @GetRemainingNameBytesCounter
 @LoadName_Loop:
                 
-                move.b  (a0)+,(a1)+
+                setSavedByteWithPostIncrement (a0)+, a1
                 dbf     d2,@LoadName_Loop
 @GetRemainingNameBytesCounter:
                 
@@ -66,15 +66,19 @@ InitAllyCombatantEntry:
                 blt.s   @LoadAllyStartData
 @ClearRemainingNameBytes_Loop:
                 
-                clr.b   (a1)+
+                clearSavedByteWithPostIncrement a1
                 dbf     d3,@ClearRemainingNameBytes_Loop
 @LoadAllyStartData:
                 
                 move.w  d0,d1
                 mulu.w  #ALLYSTARTDEF_ENTRY_SIZE,d1
-                movea.l (p_tbl_AllyStartDefs).l,a0
+                conditionalLongAddr movea.l, p_tbl_AllyStartDefs, a0
                 adda.w  d1,a0
-                suba.w  #ALLYNAME_MAX_LENGTH,a1
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    suba.w  #ALLYNAME_MAX_LENGTH*2,a1
+                else
+                    suba.w  #ALLYNAME_MAX_LENGTH,a1
+                endif
                 move.b  (a0)+,d1
                 move.b  d1,COMBATANT_OFFSET_CLASS(a1)
                 move.b  (a0)+,d2
@@ -82,15 +86,20 @@ InitAllyCombatantEntry:
                 ext.w   d2
                 move.w  d2,-(sp)        ; -> push starting level
                 clr.w   d3
-                move.b  (a0)+,d3
-                move.w  d3,COMBATANT_OFFSET_ITEM_0(a1)
-                move.b  (a0)+,d3
-                move.w  d3,COMBATANT_OFFSET_ITEM_1(a1)
-                move.b  (a0)+,d3
-                move.w  d3,COMBATANT_OFFSET_ITEM_2(a1)
-                move.b  (a0)+,d3
-                move.w  d3,COMBATANT_OFFSET_ITEM_3(a1)
-                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1) ; spell entries default to nothing
+                getStartingItem (a0)+, d3
+                setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_0
+                getStartingItem (a0)+, d3
+                setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_1
+                getStartingItem (a0)+, d3
+                setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_2
+                getStartingItem (a0)+, d3
+                setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_3
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    move.l  #$3F3F3F3F,d3
+                    movep.l d3,COMBATANT_OFFSET_SPELLS(a1) 
+                else
+                    move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1)    ; spell entries default to nothing
+                endif
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
                 bsr.w   InitAllyStats   
@@ -111,9 +120,9 @@ LoadAllyClassData:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 mulu.w  #COMBATANT_ENTRY_SIZE,d0
-                lea     ((COMBATANT_ENTRIES-$1000000)).w,a1
+                loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d0,a1
-                movea.l (p_tbl_ClassDefs).l,a0
+                conditionalLongAddr movea.l, p_tbl_ClassDefs, a0
                 andi.w  #CLASS_MASK_INDEX,d1
                 mulu.w  #CLASSDEF_ENTRY_SIZE,d1
                 adda.w  d1,a0
@@ -152,38 +161,52 @@ InitGameSettings:
                 
                 movem.l d0/d7-a0,-(sp)
                 moveq   #LONGWORD_GAMEFLAGS_INITVALUE,d0
-                lea     ((GAME_FLAGS-$1000000)).w,a0
+                loadSavedDataAddress GAME_FLAGS, a0
                 moveq   #LONGWORD_GAMEFLAGS_COUNTER,d7
 @ClearGameFlags_Loop:
                 
-                move.l  d0,(a0)+
+                setSavedLongWithPostIncrement d0, a0
                 dbf     d7,@ClearGameFlags_Loop
                 
-                lea     ((DEALS_ITEMS-$1000000)).w,a0
+                loadSavedDataAddress DEALS_ITEMS, a0
                 moveq   #LONGWORD_DEALS_COUNTER,d7
 @ClearDealsItems_Loop:
                 
-                move.l  d0,(a0)+
+                setSavedLongWithPostIncrement d0, a0
                 dbf     d7,@ClearDealsItems_Loop
                 
                 move.l  #LONGWORD_CARAVAN_INITVALUE,d0
-                lea     ((CARAVAN_ITEMS-$1000000)).w,a0
+                loadSavedDataAddress CARAVAN_ITEMS, a0
                 moveq   #LONGWORD_CARAVAN_COUNTER,d7
 @ClearCaravanItems_Loop:
                 
-                move.l  d0,(a0)+
+                setSavedLongWithPostIncrement d0, a0
                 dbf     d7,@ClearCaravanItems_Loop
                 
                 moveq   #0,d0
-                move.w  d0,((CARAVAN_ITEMS_NUMBER-$1000000)).w
-                move.w  d0,((CURRENT_GOLD-$1000000)).w
-                move.b  d0,((PLAYER_TYPE-$1000000)).w
-                move.b  d0,((CURRENT_MAP-$1000000)).w
-                move.b  d0,((CURRENT_BATTLE-$1000000)).w
-                move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
-                move.b  d0,((EGRESS_MAP-$1000000)).w
-                move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
-                move.b  #2,((MESSAGE_SPEED-$1000000)).w
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    lea     (COMBATANT_ENTRIES).l,a0
+                    movep.w d0,CARAVAN_ITEMS_NUMBER_OFFSET(a0)
+                    movep.w d0,CURRENT_GOLD_OFFSET(a0)
+                    move.b  d0,PLAYER_TYPE_OFFSET(a0)
+                    move.b  d0,CURRENT_MAP_OFFSET(a0)
+                    move.b  d0,CURRENT_BATTLE_OFFSET(a0)
+                    move.b  d0,DISPLAY_BATTLE_MESSAGES_OFFSET(a0)
+                    move.b  d0,EGRESS_MAP_OFFSET(a0)
+                    move.l  #359999,d0
+                    movep.l d0,SPECIAL_BATTLE_RECORD_OFFSET(a0)
+                    move.b  #2,MESSAGE_SPEED_OFFSET(a0)
+                else
+                    move.w  d0,((CARAVAN_ITEMS_NUMBER-$1000000)).w ; number of items in caravan
+                    move.w  d0,((CURRENT_GOLD-$1000000)).w
+                    move.b  d0,((PLAYER_TYPE-$1000000)).w ; holds which player entity type we are (00=BOWIE, 01=caravan, 02=raft)
+                    move.b  d0,((CURRENT_MAP-$1000000)).w ; holds which map index we're currently using
+                    move.b  d0,((CURRENT_BATTLE-$1000000)).w ; holds which battle we're currently doing
+                    move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
+                    move.b  d0,((EGRESS_MAP-$1000000)).w ; holds which map index to teleport back to after we EGRESS or lose
+                    move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
+                    move.b  #2,((MESSAGE_SPEED-$1000000)).w
+                endif
                 move.l  #$FFFFFFFF,((FOLLOWERS_LIST-$1000000)).w
                 move.w  #$FFFF,((byte_FFAF26-$1000000)).w
                 movem.l (sp)+,d0/d7-a0
@@ -244,7 +267,7 @@ GetFlag:
                 
                 andi.l  #FLAG_MASK,d1
                 divu.w  #8,d1           ; get the byte in which the flag is stored
-                lea     ((GAME_FLAGS-$1000000)).w,a0 ; go to the flag location in RAM
+                loadSavedDataAddress GAME_FLAGS, a0
                 adda.w  d1,a0           ; go to the concerned byte
                 swap    d1
                 moveq   #$FFFFFF80,d0
@@ -472,8 +495,11 @@ RemoveItemFromDeals:
 GetDealsItemInfo:
                 
                 andi.l  #ITEMENTRY_MASK_INDEX,d1
-                lea     ((DEALS_ITEMS-$1000000)).w,a0
+                loadSavedDataAddress DEALS_ITEMS, a0
                 divu.w  #2,d1
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    add.w   d1,d1
+                endif
                 adda.w  d1,a0
                 move.b  (a0),d2
                 btst    #DEALS_BIT_REMAINDER,d1 ; since deals are stacked 2 to a byte, this is the bit index that stores whether we are an even or odd item index
@@ -496,24 +522,48 @@ GetDealsItemInfo:
 
 ; In: D1 = item index (only the actual index is used, the status bits are cut out)
 
+caravanItemsNumberByteAddress = CARAVAN_ITEMS_NUMBER+1
+
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+caravanItemsNumberByteAddress = CARAVAN_ITEMS_NUMBER+2
+    endif
 
 AddItemToCaravan:
                 
                 movem.l d0-d1/a0,-(sp)
-                moveq   #CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE,d0
-                cmp.w   ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
-                bcs.s   @Skip           ; skip adding item if no room
-                lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
-                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    lea     (CARAVAN_ITEMS).l,a0
+                    movep.w CARAVAN_ITEMS_NUMBER-CARAVAN_ITEMS(a0),d0   ; d0.w = caravan items number
+                    cmpi.w  #CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE,d0
+                    bhi.s   @Skip
                     add.w   d0,d0
-                    andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
-                    move.w  d1,(a0,d0.w)
+                    if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                        add.w   d0,d0
+                        adda.w  d0,a0
+                        andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
+                        movep.w d1,0(a0)
+                        addq.b  #1,(caravanItemsNumberByteAddress).l
+                    else
+                        andi.w  #ITEMENTRY_MASK_INDEX,d1
+                        move.b  d1,(a0,d0.w)                                ; store caravan item
+                        addq.b  #1,caravanItemsNumberByteAddress-CARAVAN_ITEMS(a0) ; increment caravan items number
+                    endif
                 else
-                    andi.w  #ITEMENTRY_MASK_INDEX,d1
-                    move.b  d1,(a0,d0.w)
+                    moveq   #CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE,d0
+                    cmp.w   ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
+                    blo.s   @Skip           ; skip adding item if no room
+                    lea     ((CARAVAN_ITEMS-$1000000)).w,a0
+                    move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
+                    if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                        add.w   d0,d0
+                        andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
+                        move.w  d1,(a0,d0.w)
+                    else
+                        andi.w  #ITEMENTRY_MASK_INDEX,d1
+                        move.b  d1,(a0,d0.w)
+                    endif
+                    addq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
                 endif
-                addq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
 @Skip:
                 
                 movem.l (sp)+,d0-d1/a0
@@ -530,16 +580,24 @@ AddItemToCaravan:
 
 RemoveItemFromCaravan:
                 
-                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
-                    movem.l d0/d2/d7-a1,-(sp)
+                if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                    if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+                        movem.l d0/d2-d3/d7-a1,-(sp)
+                    else
+                        movem.l d0/d2/d7-a1,-(sp)
+                    endif
                     move.w  #ITEM_NOTHING,d2
                 else
                     movem.l d0/d7-a1,-(sp)
                 endif
                 moveq   #0,d0
-                lea     ((CARAVAN_ITEMS-$1000000)).w,a0
+                loadSavedDataAddress CARAVAN_ITEMS, a0
                 movea.l a0,a1
-                move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    movep.w CARAVAN_ITEMS_NUMBER-CARAVAN_ITEMS(a0),d7   ; d7.w = caravan items number
+                else
+                    move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
+                endif
                 subq.w  #1,d7
                 bcs.w   @Done
 @Loop:
@@ -548,19 +606,41 @@ RemoveItemFromCaravan:
                 bne.s   @Next
                 
                 ; Remove item
-                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
-                    move.w  (a1)+,d2
+                if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                    if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+                        movep.w 0(a1),d2
+                        addq.w  #CARAVAN_ITEM_ENTRY_SIZE,a1
+                    else
+                        move.w  (a1)+,d2
+                    endif
                 else
                     addq.l  #CARAVAN_ITEM_ENTRY_SIZE,a1
                 endif
-                subq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
+                
+                ; Decrement items number
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    subq.b  #1,(caravanItemsNumberByteAddress).l
+                else
+                    subq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
+                endif
                 bra.s   @Continue
 @Next:
                 
-                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
-                    move.w  (a1)+,(a0)+
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                        movep.w 0(a1),d3
+                        movep.w d3,0(a0)
+                    else
+                        move.b  (a1),(a0)
+                    endif
+                    addq.w  #CARAVAN_ITEM_ENTRY_SIZE,a0
+                    addq.w  #CARAVAN_ITEM_ENTRY_SIZE,a1
                 else
-                    move.b  (a1)+,(a0)+
+                    if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                        move.w  (a1)+,(a0)+
+                    else
+                        move.b  (a1)+,(a0)+
+                    endif
                 endif
 @Continue:
                 
@@ -572,9 +652,13 @@ RemoveItemFromCaravan:
                 move.b  #ITEM_NOTHING,(a0)
 @Done:
                 
-                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                     move.w  d2,d1
-                    movem.l (sp)+,d0/d2/d7-a1
+                    if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+                        movem.l (sp)+,d0/d2-d3/d7-a1
+                    else
+                        movem.l (sp)+,d0/d2/d7-a1
+                    endif
                 else
                     movem.l (sp)+,d0/d7-a1
                 endif

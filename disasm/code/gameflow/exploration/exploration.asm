@@ -928,7 +928,7 @@ loc_3E10:
 
 OpenDoor:
                 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.w   return_3F22
                 
                 movem.w d0-d7,-(sp)
@@ -942,8 +942,8 @@ OpenDoor:
                 move.b  (a2,d1.w),d1
                 andi.w  #$3F,d1 
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d7
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $16(a2),a2      ; get map step events
@@ -1051,8 +1051,8 @@ loc_3F38:
                 move.w  ENTITYDEF_OFFSET_Y(a0,d4.w),d5
                 move.w  (a0,d4.w),d4
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
-                movea.l (p_pt_MapData).l,a0
+                getSavedByte CURRENT_MAP, d1
+                conditionalLongAddr movea.l, p_pt_MapData, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
                 movea.l $1A(a0),a0
@@ -1134,8 +1134,8 @@ PerformMapBlockCopyScript:
                 move.b  (a3,d1.w),d1
                 andi.w  #$3F,d1 
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d7
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $1A(a2),a2
@@ -1403,8 +1403,8 @@ loc_422C:
 GetChestItem:
                 
                 clr.w   d2
-                move.b  ((CURRENT_MAP-$1000000)).w,d2
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d2
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data
                 movea.l $22(a2),a2      ; get address of current map's chest item data
@@ -1419,8 +1419,8 @@ GetChestItem:
 GetNonChestItem:
                 
                 clr.w   d2
-                move.b  ((CURRENT_MAP-$1000000)).w,d2
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d2
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2
                 movea.l $26(a2),a2      ; get address of current map's non-chest item data
@@ -1436,11 +1436,11 @@ GetItem:
                 move.w  d0,d4           ; save d0 and d1
                 move.w  d1,d5
                 clr.w   d2
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d2
+                getSavedByte CURRENT_BATTLE, d2
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,d2
                 beq.w   loc_4290        ; if we are not in battle branch
                 movem.l a0,-(sp)
-                lea     (BattleMapCoordinates).w,a0
+                conditionalWordAddr lea,BattleMapCoordinates,a0
                 mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE,d2 ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
                 add.b   1(a0,d2.w),d0
                 add.b   2(a0,d2.w),d1   ; add x1 and y1 of battle camera bounds
@@ -1494,8 +1494,8 @@ WarpIfSetAtPoint:
                 divs.w  #$180,d0
                 divs.w  #$180,d1
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d7
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $1E(a2),a2

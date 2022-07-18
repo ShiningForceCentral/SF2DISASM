@@ -536,7 +536,27 @@ rjt_SpellEffects:
                 dc.w SpellEffect_FlameBreath-rjt_SpellEffects ; KIWI
                 dc.w SpellEffect_FairyTear-rjt_SpellEffects ; SHINE
                 dc.w SpellEffect_Bolt-rjt_SpellEffects ; ODDEYE
-                
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell44
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell45
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell46
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell47
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell48
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell49
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell50
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell51
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell52
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell53
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell54
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell55
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell56
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell57
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell58
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell59
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell60
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell61
+                    dc.w SpellEffect_None-rjt_SpellEffects       ; spell62
+                endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -998,10 +1018,10 @@ SpellEffect_DrainMP:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyTarget    
+                bne.s   byte_B612       
                 executeAllyReaction #0,d3,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @ActorReaction
-@EnemyTarget:
+byte_B612:
                 
                 executeEnemyReaction #0,d3,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @ActorReaction:
@@ -1606,7 +1626,11 @@ CalculateDamage_Spell:
 
 AdjustSpellPower:
                 
-                movem.l d0-d1/a0,-(sp)
+                if (STANDARD_BUILD=1)
+                    movem.l d0-d2/a0,-(sp)
+                else
+                    movem.l d0-d1/a0,-(sp)
+                endif
                 cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
                 bne.w   @CheckInvocation ; go to next step if action is not a spell
                 move.b  (a4),d0
@@ -1617,16 +1641,24 @@ AdjustSpellPower:
                 lsr.w   #2,d6           ; +25% spell power
 @CheckInvocation:
                 
-                move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
-                cmpi.w  #SPELL_DAO,d1   ; HARDCODED spell indexes
-                beq.w   @DivideSpellPower
-                cmpi.w  #SPELL_APOLLO,d1
-                beq.w   @DivideSpellPower
-                cmpi.w  #SPELL_NEPTUN,d1
-                beq.w   @DivideSpellPower
-                cmpi.w  #SPELL_ATLAS,d1
-                beq.w   @DivideSpellPower
-                bra.w   @Done
+                if (STANDARD_BUILD=1)
+                    lea     tbl_Invocations(pc),a0
+                    move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
+                    moveq   #0,d2
+                    jsr     (FindSpecialPropertyBytesAddressForObject).w
+                    bcs.s   @Done
+                else
+                    move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
+                    cmpi.w  #SPELL_DAO,d1   ; HARDCODED spell indexes
+                    beq.w   @DivideSpellPower
+                    cmpi.w  #SPELL_APOLLO,d1
+                    beq.w   @DivideSpellPower
+                    cmpi.w  #SPELL_NEPTUN,d1
+                    beq.w   @DivideSpellPower
+                    cmpi.w  #SPELL_ATLAS,d1
+                    beq.w   @DivideSpellPower
+                    bra.w   @Done
+                endif
 @DivideSpellPower:
                 
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d0
@@ -1636,7 +1668,11 @@ AdjustSpellPower:
                 andi.w  #$FFFF,d6
 @Done:
                 
-                movem.l (sp)+,d0-d1/a0
+                if (STANDARD_BUILD=1)
+                    movem.l (sp)+,d0-d2/a0
+                else
+                    movem.l (sp)+,d0-d1/a0
+                endif
                 rts
 
     ; End of function AdjustSpellPower

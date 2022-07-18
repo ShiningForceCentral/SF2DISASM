@@ -20,11 +20,11 @@ loc_257D0:
                 move.w  d0,-(sp)
                 cmpi.b  #$FF,d0         ; map index is $FF, not provided
                 beq.s   loc_25828
-                move.b  d0,((CURRENT_MAP-$1000000)).w
-                move.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte d0, CURRENT_MAP
+                setSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 movem.w d1-d3,-(sp)
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
+                getSavedByte CURRENT_MAP, d1
                 jsr     (LoadMapTilesets).w
                 movem.w (sp)+,d1-d3
                 bsr.w   WaitForFadeToFinish
@@ -53,7 +53,11 @@ loc_25836:
                 move.l  (PALETTE_1_BASE_02).l,d0
                 cmp.l   (PALETTE_1_CURRENT_02).l,d0
                 beq.s   loc_2586A       
-                jsr     (PlayMapMusic).w
+                if (STANDARD_BUILD=1)
+                    bsr.w   PlayMapMusic
+                else
+                    jsr     (PlayMapMusic).w
+                endif
                 jsr     (FadeInFromBlack).w
 loc_2586A:
                 
@@ -270,7 +274,7 @@ loc_259CC:
                 move.w  #MAP_OVERWORLD_PACALON_2,d0
 @Continue:
                 
-                move.b  d0,((CURRENT_MAP-$1000000)).w
+                setSavedByte d0, CURRENT_MAP
                 moveq   #$FFFFFFFF,d0
                 jsr     (ProcessMapTransition).w
                 move.b  ((MAP_EVENT_PARAM_3-$1000000)).w,d0

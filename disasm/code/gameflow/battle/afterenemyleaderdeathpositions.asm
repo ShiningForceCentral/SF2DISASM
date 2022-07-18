@@ -21,7 +21,7 @@ ApplyPositionsAfterEnemyLeaderDies:
                 bne.w   loc_47E66
                 lea     tbl_AfterBattlePositions(pc), a0 ; if Bowie alive and enemy leader dead
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
 loc_47DCA:
                 
                 cmpi.w  #$FFFF,(a0)

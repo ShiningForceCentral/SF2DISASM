@@ -49,3 +49,24 @@ tbl_SpellElements:
                 spellElement FIRE       ; 41: KIWI
                 spellElement NEUTRAL    ; 42: SHINE
                 spellElement LIGHTNING  ; 43: ODDEYE
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                    spellElement NEUTRAL    ; 44: 
+                    spellElement NEUTRAL    ; 45: 
+                    spellElement NEUTRAL    ; 46: 
+                    spellElement NEUTRAL    ; 47: 
+                    spellElement NEUTRAL    ; 48: 
+                    spellElement NEUTRAL    ; 49: 
+                    spellElement NEUTRAL    ; 50: 
+                    spellElement NEUTRAL    ; 51: 
+                    spellElement NEUTRAL    ; 52: 
+                    spellElement NEUTRAL    ; 53: 
+                    spellElement NEUTRAL    ; 54: 
+                    spellElement NEUTRAL    ; 55: 
+                    spellElement NEUTRAL    ; 56: 
+                    spellElement NEUTRAL    ; 57: 
+                    spellElement NEUTRAL    ; 58: 
+                    spellElement NEUTRAL    ; 59: 
+                    spellElement NEUTRAL    ; 60: 
+                    spellElement NEUTRAL    ; 61: 
+                    spellElement NEUTRAL    ; 62: 
+                endif

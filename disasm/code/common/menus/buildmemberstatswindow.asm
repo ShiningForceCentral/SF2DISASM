@@ -18,7 +18,7 @@ BuildMemberStatusWindow:
                 move.l  a1,windowTilesAddress(a6)
                 
                 ; Copy window layout
-                movea.l (p_MemberStatusWindowLayout).l,a0
+                conditionalLongAddr movea.l, p_MemberStatusWindowLayout, a0
                 move.w  #WINDOW_MEMBERSTATUS_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 
@@ -431,12 +431,12 @@ aJewel:
                 move.l  a0,-(sp)
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
                 addi.w  #ICON_SPELLS_START,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)
@@ -462,16 +462,16 @@ aJewel:
                 move.l  a0,-(sp)
                 move.w  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
                 btst    #ITEMENTRY_BIT_BROKEN,d1
                 beq.s   @CleanIconCorners
                 movem.l d2-d3/a0-a1,-(sp)
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 lea     ICONTILES_OFFSET_CRACKS(a0),a0
                 move.w  #ICONTILES_CRACKS_PIXELS_COUNTER,d2
 @DrawCracks_Loop:
@@ -508,12 +508,12 @@ aJewel:
 @LoadJewelIcons:
                 
                 move.w  #ICON_JEWEL_OF_LIGHT,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)
@@ -522,12 +522,12 @@ aJewel:
                 ori.b   #$F,$BF(a1)
                 adda.w  #ICONTILES_BYTESIZE,a1
                 move.w  #ICON_JEWEL_OF_EVIL,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)

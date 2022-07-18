@@ -63,14 +63,21 @@ PickMithrilWeapon:
                 dbf     d5,@PickWeapon_Loop
 @LoadIndex:
                 
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
                 move.w  #BLACKSMITH_ORDERS_COUNTER,d7
 @LoadIndex_Loop:
                 
-                cmpi.w  #0,(a0)
-                bne.w   @Next           ; check next weapon slot if current one is occupied
-                move.w  d1,(a0)
-                bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    movep.w 0(a0),d0
+                    bne.s   @Next
+                    movep.w d1,0(a0)
+                    bra.s   @Done
+                else
+                    cmpi.w  #0,(a0)
+                    bne.w   @Next           ; check next weapon slot if current one is occupied
+                    move.w  d1,(a0)
+                    bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
+                endif
 @Next:
                 
                 move.w  #2,d0

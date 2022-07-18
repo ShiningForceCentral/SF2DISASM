@@ -32,7 +32,7 @@ cutoff = -1
 DetermineIneffectiveAttack:
                 
                 movem.l d0-d1,-(sp)
-                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE
                 bne.w   @Skip
                 clrFlg  112             ; Currently attacking Taros with Achilles Sword
                 tst.b   (a4)

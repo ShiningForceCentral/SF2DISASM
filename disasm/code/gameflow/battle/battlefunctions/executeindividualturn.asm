@@ -21,8 +21,7 @@ ExecuteIndividualTurn:
                 bsr.w   ClearDeadCombatantsListLength
                 
                 ; Check if we're currently battling Taros, and Bowie is the actor
-                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED battle index
+                checkSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE  ; HARDCODED battle index
                 bne.s   @IsActorAlive
                 tst.w   combatant(a6)
                 bne.s   @IsActorAlive
@@ -150,7 +149,7 @@ ExecuteIndividualTurn:
                 
                 cmpi.w  #BATTLEACTION_STAY,((CURRENT_BATTLEACTION-$1000000)).w
                 beq.w   @NoAction
-                cmpi.w  #BATTLEACTION_128,((CURRENT_BATTLEACTION-$1000000)).w
+                cmpi.w  #BATTLEACTION_TRAPPED_CHEST,((CURRENT_BATTLEACTION-$1000000)).w
                 bne.w   @DetermineKiwiFlameBreath
                 clr.w   ((CURRENT_BATTLEACTION-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d0
@@ -192,10 +191,9 @@ ExecuteIndividualTurn:
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
 @CheckFairyWoodsBattle:
                 
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED Battle check : Fairy wood secret battle
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check : Fairy wood secret battle
                 bne.s   @WriteBattlesceneScript
-                jsr     j_DisplayTimerWindow
+                jsr     j_RemoveTimerWindow
 @WriteBattlesceneScript:
                 
                 jsr     (WaitForVInt).w

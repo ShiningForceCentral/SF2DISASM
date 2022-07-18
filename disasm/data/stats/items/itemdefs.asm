@@ -1299,3 +1299,1286 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                
+                ; 128: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 129: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 130: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 131: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 132: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 133: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 134: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 135: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 136: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 137: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 138: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 139: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 140: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 141: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 142: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 143: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 144: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 145: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 146: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 147: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 148: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 149: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 150: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 151: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 152: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 153: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 154: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 155: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 156: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 157: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 158: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 159: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 160: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 161: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 162: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 163: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 164: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 165: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 166: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 167: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 168: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 169: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 170: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 171: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 172: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 173: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 174: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 175: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 176: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 177: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 178: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 179: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 180: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 181: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 182: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 183: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 184: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 185: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 186: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 187: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 188: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 189: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 190: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 191:
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 192: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 193: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 194: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 195: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 196: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 197: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 198: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 199: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 200: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 201: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 202: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 203: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 204: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 205: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 206: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 207: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 208: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 209: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 210: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 211: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 212: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 213: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 214: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 215: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 216: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 217: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 218: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 219: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 220: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 221: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 222: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 223: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 224: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 225: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 226: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 227: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 228: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 229: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 230: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 231: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 232: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 233: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 234: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 235: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 236: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 237: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 238: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 239: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 240: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 241: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 242: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 243: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 244: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 245: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 246: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 247: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 248: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 249: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 250: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 251: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 252: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 253: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 254: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                ; 255: 
+                equipFlags   NONE
+                range        0, 0
+                price        0
+                itemType     NONE
+                useSpell     NOTHING
+                equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0
+                
+                endif

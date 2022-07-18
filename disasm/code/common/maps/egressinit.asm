@@ -28,7 +28,7 @@ loc_75FC:
                 moveq   #1,d1
                 moveq   #1,d2
                 moveq   #UP,d3
-                lea     SavepointMapCoordinates(pc), a0
+                conditionalPc lea,SavepointMapCoordinates,a0
 @FindEgressEntry_Loop:
                 
                 cmpi.b  #$FF,(a0)
@@ -48,7 +48,7 @@ byte_7620:
                 ; No match
                 chkFlg  64              ; Raft is unlocked
                 beq.s   @Done
-                lea RaftResetMapCoordinates-4(pc),a0 ; Some egress locations imply to put the raft back in an initial place
+                conditionalPc lea,RaftResetMapCoordinates-4,a0 ; Some egress locations imply to put the raft back in an initial place
 @FindRaftEntry_Loop:
                 
                 addq.l  #4,a0
@@ -58,9 +58,9 @@ byte_7620:
                 bne.s   @FindRaftEntry_Loop
 @RaftEntryNotFound:
                 
-                move.b  1(a0),((RAFT_MAP-$1000000)).w
-                move.b  2(a0),((RAFT_X-$1000000)).w
-                move.b  3(a0),((RAFT_Y-$1000000)).w
+                setSavedByte 1(a0), RAFT_MAP
+                setSavedByte 2(a0), RAFT_X
+                setSavedByte 3(a0), RAFT_Y
 @Done:
                 
                 movea.l (sp)+,a0

@@ -8,6 +8,12 @@
 SystemInit:
                 
                 bsr.s   InitVdp
+                if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+                    bsr.w   InitMapper
+                endif
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    bsr.w   InitSavedData
+                endif
                 bsr.w   InitZ80
                 bsr.s   InitVdpData
                 jmp     (InitGame).l

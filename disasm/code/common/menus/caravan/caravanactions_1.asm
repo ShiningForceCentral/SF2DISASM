@@ -477,13 +477,14 @@ Caravan_PassItem:
                 cmpi.w  #4,d2
                 beq.s   loc_22422
                 
-                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=0)
+                if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                else
                     move.w  var_4(a6),d1
                     jsr     j_AddItem
                 endif
                 move.w  var_6(a6),d1
                 jsr     j_RemoveItemFromCaravan
-                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                     jsr     AddItem
                 endif
                 move.w  var_8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -504,7 +505,8 @@ loc_22422:
                 move.w  var_6(a6),d1
                 jsr     j_RemoveItemFromCaravan
                 move.w  var_8(a6),d0
-                if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=0)
+                if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                else
                     move.w  var_4(a6),d1
                 endif
                 jsr     j_AddItem

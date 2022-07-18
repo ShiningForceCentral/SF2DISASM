@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlefunctions\battlefunctions_3.asm :
-; 0x25610..0x257C0 : Battle functions
+; 0x25610..0x25790 : Battle functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -11,7 +11,7 @@ LoadBattle:
                 
                 move.w  d0,-(sp)
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
+                getSavedByte CURRENT_MAP, d1
                 bsr.w   FadeOutToBlackAll
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 jsr     (LoadMapTilesets).w
@@ -47,12 +47,15 @@ LoadBattle:
                 jsr     (LoadMapEntitySprites).w
                 bsr.w   SetBaseVIntFunctions
                 jsr     j_LoadBattleTerrainData
-                jsr     (PlayMapMusic).w
+                if (STANDARD_BUILD=1)
+                    bsr.w   PlayMapMusic
+                else
+                    jsr     (PlayMapMusic).w
+                endif
                 jsr     (FadeInFromBlack).w
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; if battle 44, then special battle !
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; if battle 44, then special battle !
                 bne.s   return_256A0
-                jsr     j_SpecialBattle
+                jsr     j_DisplayTimerWindow
 return_256A0:
                 
                 rts
@@ -185,32 +188,4 @@ PrintActivatedDefCon:
                 rts
 
     ; End of function PrintActivatedDefCon
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-SetMoveSfx:
-                
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
-                bne.s   @Continue
-                
-                clr.w   ((MOVE_SFX-$1000000)).w ; no move sfx outside battle
-                bra.s   @CheckEquipment
-@Continue:
-                
-                move.w  #SFX_WALKING,((MOVE_SFX-$1000000)).w
-@CheckEquipment:
-                
-                movem.w d0-d7,-(sp)
-                jsr     j_GetEquippedRing
-                cmpi.w  #ITEM_CHIRRUP_SANDALS,d1 ; HARDCODED chirrup sandals item index for specific sfx
-                bne.s   @Done
-                move.w  #SFX_BLOAB,((MOVE_SFX-$1000000)).w
-@Done:
-                
-                movem.w (sp)+,d0-d7
-                rts
-
-    ; End of function SetMoveSfx
 

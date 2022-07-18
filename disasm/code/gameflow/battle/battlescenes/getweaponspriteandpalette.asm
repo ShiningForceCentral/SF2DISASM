@@ -15,14 +15,12 @@ GetWeaponSpriteAndPalette:
                 movem.l d1/a0,-(sp)
                 cmpi.w  #COMBATANT_ENEMIES_START,d0
                 bcc.w   @Skip
-                
                 jsr     j_GetEquippedWeapon
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEMINDEX_WEAPONS_START,d1 ; HARDCODED start index for weapon items with battlescene graphics
                 bcs.w   @Skip
                 cmpi.w  #ITEMINDEX_WEAPONS_END,d1 ; HARDCODED end index for weapon items with battlescene graphics
                 bhi.w   @Skip
-                
                 lea     tbl_WeaponGraphics(pc), a0
                 subi.w  #ITEMINDEX_WEAPONS_START,d1 ; Same here : HARDCODED start index for weapon items with battlescene graphics
                 add.w   d1,d1
@@ -36,6 +34,8 @@ GetWeaponSpriteAndPalette:
                 
                 move.w  #$FFFF,d2
                 move.w  d2,d3
+@Done:
+                
                 movem.l (sp)+,d1/a0
                 rts
 

@@ -73,11 +73,14 @@ loc_24492:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Unused in standard build
 
 ClearDeadCombatantsListLength:
                 
-                clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
-                rts
+                if (STANDARD_BUILD=0)
+                    clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
+                    rts
+                endif
 
     ; End of function ClearDeadCombatantsListLength
 
@@ -1150,7 +1153,7 @@ loc_250B0:
                 jsr     sub_1AC054      
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_250FC
-                move.w  #BATTLEACTION_128,((CURRENT_BATTLEACTION-$1000000)).w
+                move.w  #BATTLEACTION_TRAPPED_CHEST,((CURRENT_BATTLEACTION-$1000000)).w
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
                 move.w  d0,itemOrSpellIndex(a6)
                 sndCom  MUSIC_CORRUPTED_SAVE
@@ -1316,16 +1319,26 @@ loc_25236:
                 bra.s   loc_25236
 @SuspendGame:
                 
-                tst.b   ((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #BATTLE_VERSUS_ALL_BOSSES, CURRENT_BATTLE
                 beq.s   loc_25236
                 txt     0               ; "The game will be suspended.{N}OK?"
                 jsr     j_YesNoChoiceBox
                 clsTxt
                 tst.w   d0
                 bmi.w   loc_25236
-                move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    move.l  a0,-(sp)
+                    move.l  d0,-(sp)
+                    lea     (SAVED_SECONDS_COUNTER).l,a0
+                    move.l  ((SECONDS_COUNTER-$1000000)).w,d0
+                    movep.l d0,0(a0)
+                    move.l  (sp)+,d0
+                    movea.l (sp)+,a0
+                else
+                    move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
+                endif
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                getCurrentSaveSlot d0
                 jsr     (SaveGame).l
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.w   byte_252E6

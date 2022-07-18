@@ -7,7 +7,7 @@
 
 EndKissPictureSequence:
                 
-                movea.l (p_EndKissPicture).l,a0
+                conditionalLongAddr movea.l, p_EndKissPicture, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 lea     (FF6802_LOADING_SPACE).l,a0

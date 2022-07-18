@@ -34,7 +34,7 @@ PlayIntroOrEndCutscene:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateMapAnimations
-                move.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 jsr     (sub_4EC6).w    
                 move.w  (sp)+,d0
                 bne.s   byte_47F72

@@ -24,7 +24,7 @@ GetEnemyAnimation:
                 add.w   ((ENEMY_BATTLE_ANIMATION-$1000000)).w,d1
 @GetAnimationPointer:
                 
-                movea.l (p_pt_EnemyAnimations).l,a0
+                conditionalLongAddr movea.l, p_pt_EnemyAnimations, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
                 move.w  (sp)+,d1
@@ -131,8 +131,8 @@ loc_198E0:
                 
                 move.w  #VDPTILE_BLANK|VDPTILE_PALETTE3,(a0)+
                 dbf     d0,loc_198E0
-                lea     BackgroundLayout(pc), a1
-                move.w  #191,d0
+                conditionalPc lea,BackgroundLayout,a1
+                move.w  #191,d0 
 loc_198F0:
                 
                 move.l  (a1)+,(a0)+
@@ -220,7 +220,7 @@ loc_1995C:
 
 LoadEnemyBattleSpritePropertiesAndPalette:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_EnemyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((ENEMY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -251,7 +251,7 @@ LoadEnemyBattleSpritePropertiesAndPalette:
 
 LoadEnemyBattleSpriteFrameToVram:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_EnemyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -273,7 +273,8 @@ LoadEnemyBattleSpriteFrameToVram:
 
 LoadEnemyBattleSpriteFrameAndWaitForDma:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                disableSramAndSwitchRomBanks
+                conditionalLongAddr movea.l, p_pt_EnemyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -282,8 +283,7 @@ LoadEnemyBattleSpriteFrameAndWaitForDma:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 move.w  #$C00,d0
-                jsr     (ApplyVIntVramDmaOnCompressedTiles).w
-                jmp     (WaitForDmaQueueProcessing).w
+                processDmaRestoreRomBanksAndEnableSram ApplyVIntVramDmaOnCompressedTiles
 
     ; End of function LoadEnemyBattleSpriteFrameAndWaitForDma
 
@@ -296,7 +296,7 @@ LoadEnemyBattleSpriteFrameAndWaitForDma:
 
 LoadAllyBattleSpritePropertiesAndPalette:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((ALLY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -327,7 +327,7 @@ LoadAllyBattleSpritePropertiesAndPalette:
 
 LoadAllyBattleSpriteFrameToVram:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -349,7 +349,8 @@ LoadAllyBattleSpriteFrameToVram:
 
 LoadAllyBattleSpriteFrameAndWaitForDma:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                disableSramAndSwitchRomBanks
+                conditionalLongAddr movea.l, p_pt_AllyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -358,8 +359,7 @@ LoadAllyBattleSpriteFrameAndWaitForDma:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 move.w  #$900,d0
-                jsr     (ApplyVIntVramDmaOnCompressedTiles).w
-                jmp     (WaitForDmaQueueProcessing).w
+                processDmaRestoreRomBanksAndEnableSram ApplyVIntVramDmaOnCompressedTiles
 
     ; End of function LoadAllyBattleSpriteFrameAndWaitForDma
 
@@ -371,7 +371,7 @@ LoadAllyBattleSpriteFrameAndWaitForDma:
 
 LoadWeaponPalette:
                 
-                movea.l (p_plt_WeaponPalettes).l,a0
+                conditionalLongAddr movea.l, p_plt_WeaponPalettes, a0
                 lsl.w   #2,d0
                 move.l  (a0,d0.w),((PALETTE_1_BASE_0E-$1000000)).w
                 rts
@@ -386,7 +386,7 @@ LoadWeaponPalette:
 
 LoadWeaponSprite:
                 
-                movea.l (p_pt_WeaponSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_WeaponSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF2000_LOADING_SPACE).l,a1
@@ -408,7 +408,7 @@ LoadWeaponSprite:
 
 LoadBattlesceneGroundToVram:
                 
-                movea.l (p_pt_Grounds).l,a0
+                conditionalLongAddr movea.l, p_pt_Grounds, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
@@ -432,7 +432,8 @@ LoadBattlesceneGroundToVram:
 
 LoadAllyBattleSpriteFrame:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                disableSramAndSwitchRomBanks
+                conditionalLongAddr movea.l, p_pt_AllyBattleSprites, a0
                 move.w  ((ALLY_BATTLE_SPRITE-$1000000)).w,d0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
@@ -448,7 +449,7 @@ loc_19AD6:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
-                jmp     (LoadCompressedData).w
+                loadCompressedDataRestoreRomBanksAndEnableSram
 
     ; End of function LoadAllyBattleSpriteFrame
 
@@ -460,7 +461,7 @@ LoadNewAllyBattleSprite:
                 
                 move.w  d1,-(sp)
                 move.w  d0,-(sp)
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -492,7 +493,8 @@ LoadNewAllyBattleSprite:
 
 LoadEnemyBattleSpriteFrame:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                disableSramAndSwitchRomBanks
+                conditionalLongAddr movea.l, p_pt_EnemyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -501,7 +503,7 @@ LoadEnemyBattleSpriteFrame:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
-                jmp     (LoadCompressedData).w
+                loadCompressedDataRestoreRomBanksAndEnableSram
 
     ; End of function LoadEnemyBattleSpriteFrame
 
@@ -516,7 +518,7 @@ LoadNewEnemyBattleSprite:
                 cmpi.w  #$FFFF,d0
                 beq.w   @Return
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_EnemyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -548,7 +550,7 @@ LoadBattlesceneBackground:
                 tst.w   d0
                 bmi.s   @Return
                 
-                movea.l (p_pt_Backgrounds).l,a2
+                conditionalLongAddr movea.l, p_pt_Backgrounds, a2
                 lsl.w   #2,d0
                 movea.l (a2,d0.w),a2
                 move.w  (a2)+,d0        ; tileset 1 offset
@@ -590,7 +592,7 @@ LoadBattlesceneBackground:
 
 LoadBattlesceneGround:
                 
-                movea.l (p_pt_Grounds).l,a0
+                conditionalLongAddr movea.l, p_pt_Grounds, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
@@ -611,7 +613,8 @@ LoadBattlesceneGround:
 
 LoadInvocationSpellTilesToVram:
                 
-                movea.l (p_pt_InvocationSprites).l,a0
+                disableSram
+                conditionalLongAddr movea.l, p_pt_InvocationSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.l  a0,-(sp)
@@ -671,7 +674,7 @@ loc_19C58:
 loc_19CA0:
                 
                 movea.l (sp)+,a0
-                rts
+                enableSramAndReturn
 
     ; End of function LoadInvocationSpellTilesToVram
 
@@ -683,7 +686,8 @@ loc_19CA0:
 
 LoadSpellGraphics:
                 
-                movea.l (p_pt_SpellGraphics).l,a0
+                disableSram
+                conditionalLongAddr movea.l, p_pt_SpellGraphics, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0
@@ -699,8 +703,7 @@ LoadSpellGraphics:
                 lea     ($A400).l,a1
                 lsr.w   #1,d0
                 moveq   #2,d1
-                jsr     (ApplyVIntVramDmaOnCompressedTiles).w
-                jmp     (WaitForDmaQueueProcessing).w
+                processDmaAndEnableSram ApplyVIntVramDmaOnCompressedTiles
 
     ; End of function LoadSpellGraphics
 
@@ -714,7 +717,8 @@ LoadSpellGraphics:
 
 LoadSpellGraphicsForInvocation:
                 
-                movea.l (p_pt_SpellGraphics).l,a0
+                disableSram
+                conditionalLongAddr movea.l, p_pt_SpellGraphics, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0        ; load bytes 0-1
@@ -733,8 +737,7 @@ LoadSpellGraphicsForInvocation:
                 lea     ($F000).l,a1
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (ApplyVIntVramDma).w
-                jmp     (WaitForDmaQueueProcessing).w
+                processDmaAndEnableSram ApplyVIntVramDma
 
     ; End of function LoadSpellGraphicsForInvocation
 
