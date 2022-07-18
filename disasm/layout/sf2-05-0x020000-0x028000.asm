@@ -42,6 +42,7 @@
                 include "code\gameflow\battle\battlefunctions\updateenemyaifunctions.asm"    ; Update Enemy AI functions
                 include "code\gameflow\battle\battlefunctions\turnorderfunctions.asm"    ; Battle turn order functions
                 include "code\gameflow\battle\battlefunctions\battlefunctions_3.asm"    ; Battle functions
+                include "code\gameflow\battle\battlefunctions\setmovesfx.asm"    ; Set Move Sfx function
                 include "code\gameflow\exploration\explorationfunctions_2.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions

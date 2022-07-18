@@ -37,7 +37,6 @@
 #dir    data/graphics/tech/fonts
 #dir    data/graphics/tech/windowborder
 #dir    data/graphics/tech/windowlayouts
-#dir    data/graphics/tech/unusedbasepalettes
 #dir    data/maps/
 #dir    data/maps/global/
 #dir    data/maps/entries/
@@ -889,7 +888,7 @@
 #split	0x1EF142,0x1EF4BA,data/graphics/specialscreens/endingjewels/endingjewelstiles.bin
 #split	0x1EF4BA,0x1EF4DA,data/graphics/specialscreens/suspendscreen/suspendstringpalette.bin
 #split	0x1EF4DA,0x1EF5A6,data/graphics/specialscreens/suspendscreen/suspendstringtiles.bin
-#split	0x1EF5A6,0x1EF5E6,data/graphics/tech/unusedbasepalettes/unusedbasepalettes.bin
+#split	0x1EF5A6,0x1EF5E6,data/graphics/tech/unusedbasepalettes.bin
 #split	0x1EF5E6,0x1EFE33,data/graphics/tech/basetiles.bin
 #split	0x1F0000,0x1F8000,data/sound/musicbank1.bin
 #split	0x1F8000,0x200000,data/sound/musicbank0.bin

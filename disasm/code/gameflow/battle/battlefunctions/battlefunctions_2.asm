@@ -226,6 +226,8 @@ UpdateTargetsListForCombatant:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Handle player input when controlling battle entity.
+
 itemOrSpellIndex = -4
 combatant = -2
 
@@ -1150,7 +1152,7 @@ loc_250B0:
                 jsr     sub_1AC054      
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_250FC
-                move.w  #BATTLEACTION_128,((CURRENT_BATTLEACTION-$1000000)).w
+                move.w  #BATTLEACTION_TRAPPED_CHEST,((CURRENT_BATTLEACTION-$1000000)).w
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
                 move.w  d0,itemOrSpellIndex(a6)
                 sndCom  MUSIC_CORRUPTED_SAVE

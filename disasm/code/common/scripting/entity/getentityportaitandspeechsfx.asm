@@ -1,13 +1,10 @@
 
-; ASM FILE code\common\scripting\entity\getentityportaitandspeechsound.asm :
+; ASM FILE code\common\scripting\entity\getentityportaitandspeechsfx.asm :
 ; 0x45638..0x4567A : Get entity portrait and speech sfx indexes function
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
-; 
-; Out: D1 = portrait index
-;      D2 = speech sfx index
+; Get portrait and speech sfx for character d0.w -> d1.w, d2.w
 
 
 GetEntityPortaitAndSpeechSfx:
@@ -18,7 +15,7 @@ GetEntityPortaitAndSpeechSfx:
                 clr.w   d2
                 bsr.w   GetEntityAddressFromCharacter
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0 ; entity's map sprite index -> D0
-                lea     SpriteDialogProperties(pc), a0
+                lea     tbl_SpriteDialogProperties(pc), a0
 @FindMapSprite_Loop:
                 
                 cmp.b   (a0),d0         ; loop until we find entry matching the given map sprite

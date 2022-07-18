@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's max/min attack range -> D3, D4
+; Get max/min attack range for combatant d0.b -> d3.w, d4.w
 
 
 GetAttackRange:
@@ -13,6 +13,8 @@ GetAttackRange:
                 jsr     GetEquippedWeapon
                 cmpi.w  #$FFFF,d1
                 bne.s   @GetWeaponRange
+                
+                ; Get unarmed attack range
                 clr.l   d3
                 clr.l   d4
                 btst    #COMBATANT_BIT_ENEMY,d0

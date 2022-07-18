@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; converts data ports 1/2 information into P1/2 inputs State A/B
+; Convert data ports 1/2 information into P1/2 inputs State A/B.
 
 
 UpdatePlayerInputs:
