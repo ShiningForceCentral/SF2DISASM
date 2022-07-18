@@ -202,7 +202,7 @@ InitializeBattlescene:
                 switchRomBanks
                 bsr.w   LoadWeaponSprite
                 move.w  ((ALLY_BATTLE_ANIMATION-$1000000)).w,d0
-                movea.l (p_pt_AllyAnimations).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyAnimations, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #4,a0
@@ -226,7 +226,7 @@ InitializeBattlescene:
                 restoreRomBanks
 @StatusAnimationTilesToVram:
                 
-                movea.l (p_StatusAnimationTiles).l,a0
+                conditionalLongAddr movea.l, p_StatusAnimationTiles, a0
                 lea     ($F600).l,a1
                 move.w  #$270,d0
                 moveq   #2,d1
@@ -895,7 +895,7 @@ loc_18818:
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_1888C
                 move.w  ((ALLY_BATTLE_ANIMATION-$1000000)).w,d0
-                movea.l (p_pt_AllyAnimations).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyAnimations, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #4,a0
@@ -1051,7 +1051,7 @@ bsc06_switchEnemies:
                 bsr.w   LoadNewEnemyBattleSprite
                 
                 restoreRomBanks
-                movea.l (p_pt_BattlesceneTransitionTiles).l,a2
+                conditionalLongAddr movea.l, p_pt_BattlesceneTransitionTiles, a2
                 movea.l (a2)+,a0
                 move.l  a2,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a1

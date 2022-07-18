@@ -53,7 +53,7 @@ declareSramEnd: macro
     endm
     
 declareRegionSupport: macro
-    if (STANDARD_BUILD&DISABLE_REGION_LOCK=1)
+    if (regionFreeRom=1)
     dc.b 'JUE             '
     else
     dc.b 'U               '
@@ -202,7 +202,15 @@ conditionalWordAddr: macro
     endc
     endm
     
-alignIfOriginalRomLayout: macro
+conditionalLongAddr: macro
+    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
+    \1 (\2).w,\3
+    else
+    \1 (\2).l,\3
+    endc
+    endm
+    
+alignIfVanillaLayout: macro
     if (STANDARD_BUILD=0)
     align \1
     mexit
@@ -210,6 +218,12 @@ alignIfOriginalRomLayout: macro
     if (OPTIMIZED_ROM_LAYOUT=1)
     align
     else
+    align \1
+    endc
+    endm
+    
+alignIfOptimizedLayout: macro
+    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
     align \1
     endc
     endm
@@ -266,15 +280,19 @@ incbinIfExpandedRom: macro
     endc
     endm
     
-includeIfExtendedSsf: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+includeIfVanillaLayout: macro
+    if (STANDARD_BUILD=0)
+    include \1
+    mexit
+    endc
+    if (OPTIMIZED_ROM_LAYOUT=0)
     include \1
     endc
     endm
     
-incbinIfExtendedSsf: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
-    incbin \1
+includeIfOptimizedLayout: macro
+    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
+    include \1
     endc
     endm
     
@@ -502,7 +520,7 @@ setSavedCombatantWord: macro
 manipulateEquippedBit: macro
     if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
 equippedBit: equs "#ITEMENTRY_UPPERBIT_EQUIPPED"
-entryoffset: equs ""
+entryoffset: equs "0"
     else
 equippedBit: equs "#ITEMENTRY_BIT_EQUIPPED"
 entryoffset: equs "ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT"

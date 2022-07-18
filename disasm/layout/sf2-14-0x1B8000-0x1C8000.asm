@@ -4,7 +4,7 @@
 ; FREE SPACE : 474 bytes.
 
 
-                include "code\common\tech\pointers\s14_pointers.asm"    ; Game Section 14 Pointers
+                includeIfVanillaLayout "code\common\tech\pointers\s14_pointers.asm"    ; Game Section 14 Pointers
                 includeIfVanillaRom "data\graphics\battles\grounds\entries.asm"    ; Battlescene Grounds
                 includeIfVanillaRom "data\graphics\battles\weapons\entries.asm"    ; Battlescene Weapons
                 includeIfVanillaRom "data\graphics\battles\weapons\palettes\entries.asm"    ; Battlescene Weapon Palettes
@@ -19,4 +19,9 @@
                 includeIfExpandedRom "code\specialscreens\jewelend\graphics.asm"             ; Jewel End Graphics
                 align
                 includeIfExpandedRom "code\specialscreens\suspend\graphics.asm"  ; Suspend String Graphics
-                alignIfOriginalRomLayout $1C8000
+                align
+                if (STANDARD_BUILD&EXPANDED_ROM=1)
+unused_BasePalettes: incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
+BaseTiles:           incbin "data/graphics/tech/basetiles.bin"
+                endif
+                alignIfVanillaLayout $1C8000

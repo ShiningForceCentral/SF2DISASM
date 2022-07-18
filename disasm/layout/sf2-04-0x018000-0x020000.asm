@@ -37,4 +37,4 @@
                 include "data\graphics\battles\battlesprites\enemyidlebattlesprites.asm"    ; Enemy Idle Battle Sprites
                 align
                 includeIfVanillaRom "data\graphics\tech\backgroundlayout.asm"    ; Battlescene Background Layout
-                alignIfOriginalRomLayout $20000
+                alignIfVanillaLayout $20000

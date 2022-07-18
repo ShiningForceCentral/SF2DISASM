@@ -16,16 +16,14 @@ FIX_KIWI_SPELLS_LEARNING_LEVEL:         equ 1   ; Kiwi's base class is wrongfull
 FIX_HIGINS_SPELL:                       equ 1   ; Prevent unequipping from possibly corrupting characters spell entries.
 FIX_MOVEMENT_GLITCH:                    equ 1   ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
 FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE:    equ 1   ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
+FIX_CARAVAN_FREE_REPAIR_EXPLOIT:        equ 1   ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reducded to 32 items unless SRAM is expanded.)
 
 ; Misc. features
-CAPITALIZED_CHARACTER_NAMES:        equ 0       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
-DISABLE_REGION_LOCK:                equ 1       ; Skip checking system region, omit including related function, and update ROM header.
-SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
-
-; Battle mechanics
 BOWIE_CAN_DIE:                      equ 0       ; Bowie's death does not cause defeat.
 BOWIE_CAN_LEAVE_BATTLE_PARTY:       equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
+CAPITALIZED_CHARACTER_NAMES:        equ 0       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
 PERCENT_POISON_DAMAGE:              equ 0       ; 1-100 = n% of max HP
+SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
 
 ; AI enhancements
 HEALER_AI_ENHANCEMENTS:             equ 1       ; See SF2_AI_Healing_Rewrite.txt for more details.
@@ -52,6 +50,7 @@ RELOCATED_SAVED_DATA_TO_SRAM:       equ 0       ; Relocate currently loaded save
 EXPANDED_FORCE_MEMBERS:             equ 1       ; Enable all 32 force members supported by the engine instead of 30.
 EXPANDED_ITEMS_AND_SPELLS:          equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of 4MB ROM with 32KB SRAM.
 OPTIMIZED_ROM_LAYOUT:               equ 1       ; Align ROM sections to next word boundary to consolidate free space.
+REGION_FREE_ROM:                    equ 1       ; Skip checking system region, omit including related function, and update ROM header.
 
 ; Assembler optimizations
 OPTIMIZED_PC_RELATIVE_ADDRESSING:   equ 1       ; Optimize to PC relative addressing.
@@ -85,6 +84,14 @@ expandedRom = 0
 expandedSram = 1
     else
 expandedSram = 0
+    endif
+    
+    ; If standard build, and either OPTIMIZED_ROM_LAYOUT or REGION_FREE_ROM are enabled,
+    ; build a region free ROM to make space for relocated pointers in a non-expanded ROM.
+    if (STANDARD_BUILD&(OPTIMIZED_ROM_LAYOUT!REGION_FREE_ROM)=1)
+regionFreeRom = 1
+    else
+regionFreeRom = 0
     endif
     
     

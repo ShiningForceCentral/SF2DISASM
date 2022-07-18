@@ -21,7 +21,7 @@ LoadBaseTiles:
                 bsr.w   SetVdpReg
                 move.w  #$8D3B,d0       ; H Scroll table VRAM address : EC00
                 jsr     (SetVdpReg).w
-                movea.l (p_BaseTiles).l,a0
+                conditionalLongAddr movea.l, p_BaseTiles, a0
                 lea     (0).w,a1
                 move.w  #$1000,d0
                 moveq   #2,d1

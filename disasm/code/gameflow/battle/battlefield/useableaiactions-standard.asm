@@ -120,7 +120,7 @@ GetNextSupportSpell:
                 bsr.w   FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
-                cmpi.b  #SPELLPROPS_TYPE_STATUS,d2
+                cmpi.b  #SPELLPROPS_TYPE_SUPPORT,d2
                 beq.s   @Break
                 
 @Next:          addq.w  #1,d3
@@ -232,8 +232,12 @@ GetNextUsableHealingItem:
                 bcc.s   @Next
                 
                 ; Is AI allowed to use item?
-                cmpi.b  #ITEM_HEALING_RAIN,d1           ; if not Healing Rain, AI must be set to use the item in battle data
-                beq.s   @Continue
+                cmpi.b  #ITEM_HEALING_RAIN,d1 ; if not Healing Rain, AI must be set to use the item in battle data
+                if (HEALER_AI_ENHANCEMENTS=1)
+                    bls.s   @Continue         ; first eight items are allowed to be used
+                else
+                    beq.s   @Continue
+                endif
                 btst    #ITEMENTRY_BIT_USABLE_BY_AI,d1
                 beq.s   @Next
                 

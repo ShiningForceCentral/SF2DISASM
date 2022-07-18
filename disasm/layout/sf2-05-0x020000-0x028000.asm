@@ -60,10 +60,12 @@
                 include "code\gameflow\battle\battlefunctions\battlefunctions_3.asm"    ; Battle functions
                 if (STANDARD_BUILD=1)
                     include "code\gameflow\battle\battlefunctions\setmovesfx-standard.asm"
+                    include "code\gameflow\battle\battlemusic-standard.asm"
                     include "data\stats\allies\immortalallies-standard.asm"
                     include "data\battles\global\displaytimerbattles-standard.asm"
                     include "data\battles\global\losablebattles-standard.asm"
                     include "data\stats\items\movesfxforequippedring-standard.asm"
+                    include "data\battles\global\explorationtobattlemusics-standard.asm"
                     align
                 else
                     include "code\gameflow\battle\battlefunctions\setmovesfx.asm"    ; Set Move Sfx function
@@ -77,4 +79,4 @@
                 include "code\common\tech\graphics\specialspritesanims.asm"    ; Special Sprites Animations
                 include "code\specialscreens\suspend\suspend.asm"    ; Suspend functions
                 include "code\specialscreens\witchend\witchend.asm"    ; Witch end functions
-                alignIfOriginalRomLayout $28000
+                alignIfVanillaLayout $28000

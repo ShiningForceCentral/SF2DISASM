@@ -229,6 +229,8 @@ UpdateTargetsListForCombatant:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Handle player input when controlling battle entity.
+
 itemOrSpellIndex = -4
 combatant = -2
 

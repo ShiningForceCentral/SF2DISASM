@@ -17,7 +17,7 @@ DisplayText:
                 movem.w d0,-(sp)        ; save string #
                 lsr.w   #6,d0
                 andi.b  #$FC,d0         ; string # -> bank pointer offset
-                movea.l (p_pt_TextBanks).l,a0 ; load script bank pointer
+                conditionalLongAddr movea.l, p_pt_TextBanks, a0 ; load script bank pointer
                 movea.l (a0,d0.w),a0
                 movem.w (sp)+,d0        ; restore string #
                 andi.w  #$FF,d0         ; restrict to range 0-255
@@ -1258,7 +1258,7 @@ DialogueGraphicsToRam:
                 
                 subq.w  #1,d7
                 lsl.w   #5,d7
-                movea.l (p_VariableWidthFont).l,a0
+                conditionalLongAddr movea.l, p_VariableWidthFont, a0
                 adda.w  d7,a0
                 move.w  (a0)+,d4
                 andi.w  #$F,d4

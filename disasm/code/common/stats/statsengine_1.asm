@@ -49,7 +49,7 @@ GetCombatantName:
                 
                 clr.w   d1
                 bsr.w   GetEnemyIndex   
-                movea.l (p_tbl_EnemyNames).l,a0
+                conditionalLongAddr movea.l, p_tbl_EnemyNames, a0
                 bsr.w   FindName        
 @Done:
                 

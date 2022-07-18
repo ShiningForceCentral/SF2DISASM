@@ -37,7 +37,7 @@ member = -2
                 move.l  a1,windowTilesAddress(a6)
                 
                 ; Copy window layout
-                movea.l (p_MemberStatusWindowLayout).l,a0
+                conditionalLongAddr movea.l, p_MemberStatusWindowLayout, a0
                 if (FULL_CLASS_NAMES=1)
                     move.w  #126,d7     ; window layout head bytesize
                     jsr     (CopyBytes).w
@@ -330,7 +330,7 @@ WriteEnemyLvOrExp:
                 move.w  d5,d1
                 andi.l  #SPELLENTRY_MASK_INDEX,d1
                 addi.w  #ICON_SPELLS_START,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
@@ -392,7 +392,7 @@ WriteEnemyLvOrExp:
 @LoadItemIcon:  ; Load icon pixel data to temp space
                 move.w  d5,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
@@ -404,7 +404,7 @@ WriteEnemyLvOrExp:
                 btst    #ITEMENTRY_BIT_BROKEN,d1
                 beq.s   @CleanIconCorners
                 
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 if (EXPANDED_ITEMS_AND_SPELLS=1)
                     adda.l  #ICONTILES_OFFSET_CRACKS,a0
                 else
@@ -513,8 +513,7 @@ WriteJewelIcons:
                     add.w   d1,d1
                     add.w   d2,d1
                     lsl.w   #6,d1
-                    ;addIconOffset d1, a0
-                    adda.w  d1,a0
+                    addIconOffset d1, a0
                     movea.l a2,a1
                     move.w  #ICONTILES_BYTESIZE,d7
                     jsr     (CopyBytes).w   
@@ -540,8 +539,7 @@ WriteJewelIcons:
                     add.w   d1,d1
                     add.w   d2,d1
                     lsl.w   #6,d1
-                    ;addIconOffset d1, a0
-                    adda.w  d1,a0
+                    addIconOffset d1, a0
                     movea.l a2,a1
                     move.w  #ICONTILES_BYTESIZE,d7
                     jsr     (CopyBytes).w   

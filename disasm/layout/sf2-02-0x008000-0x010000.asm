@@ -5,7 +5,7 @@
 
 
                 include "code\common\tech\jumpinterfaces\s02_jumpinterface.asm"    ; Game Section 02 Jump Interface
-                include "code\common\tech\pointers\s02_pointers.asm"    ; Game Section 02 Pointers
+                includeIfVanillaLayout "code\common\tech\pointers\s02_pointers.asm"    ; Game Section 02 Pointers
                 
                 ; Stats engine
                 include "code\common\stats\statsengine_1.asm"    ; Character stats engine
@@ -16,6 +16,11 @@
                 include "code\common\stats\statsengine_2.asm"    ; Character stats engine
                 include "code\common\stats\levelup.asm"    ; Level Up functions
                 include "code\common\stats\statsengine_3.asm"    ; Character stats engine
+                if (STANDARD_BUILD=1)
+                    include "code\common\stats\caravaninventoryfunctions-standard.asm"
+                else
+                    include "code\common\stats\caravaninventoryfunctions.asm"    ; Caravan inventory management functions
+                endif
                 
                 ; Battleactions engine
                 include "code\gameflow\special\debugmodebattleactions.asm"    ; Debug mode battle actions
@@ -129,4 +134,4 @@
                     include "data\stats\allies\allynames.asm"    ; Ally names
                     include "data\stats\enemies\enemynames.asm"    ; Enemy names
                 endif
-                alignIfOriginalRomLayout $10000
+                alignIfVanillaLayout $10000

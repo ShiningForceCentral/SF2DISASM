@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\stats\statsengine_3.asm :
-; 0x9736..0x9A9A : Character stats engine
+; 0x9736..0x9A3C : Character stats engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -39,7 +39,7 @@ InitAllyCombatantEntry:
                 mulu.w  #COMBATANT_ENTRY_SIZE,d1
                 loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d1,a1
-                movea.l (p_tbl_AllyNames).l,a0
+                conditionalLongAddr movea.l, p_tbl_AllyNames, a0
                 move.w  d0,d1
                 subq.w  #1,d1
                 blt.s   @GetNameCounter
@@ -72,7 +72,7 @@ InitAllyCombatantEntry:
                 
                 move.w  d0,d1
                 mulu.w  #ALLYSTARTDEF_ENTRY_SIZE,d1
-                movea.l (p_tbl_AllyStartDefs).l,a0
+                conditionalLongAddr movea.l, p_tbl_AllyStartDefs, a0
                 adda.w  d1,a0
                 if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                     suba.w  #ALLYNAME_MAX_LENGTH*2,a1
@@ -122,7 +122,7 @@ LoadAllyClassData:
                 mulu.w  #COMBATANT_ENTRY_SIZE,d0
                 loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d0,a1
-                movea.l (p_tbl_ClassDefs).l,a0
+                conditionalLongAddr movea.l, p_tbl_ClassDefs, a0
                 andi.w  #CLASS_MASK_INDEX,d1
                 mulu.w  #CLASSDEF_ENTRY_SIZE,d1
                 adda.w  d1,a0
@@ -516,95 +516,4 @@ GetDealsItemInfo:
                 rts
 
     ; End of function GetDealsItemInfo
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D1 = item index (only the actual index is used, the status bits are cut out)
-
-
-AddItemToCaravan:
-                
-                movem.l d0-d1/a0,-(sp)
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    lea     (CARAVAN_ITEMS).l,a0
-                    movep.w CARAVAN_ITEMS_NUMBER-CARAVAN_ITEMS(a0),d0   ; d0.w = caravan items number
-                    cmpi.w  #CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE,d0
-                    bhi.s   @Skip
-                    andi.w  #ITEMENTRY_MASK_INDEX,d1
-                    add.w   d0,d0
-                    move.b  d1,(a0,d0.w)                                ; store caravan item
-                    addq.b  #1,CARAVAN_ITEMS_NUMBER-CARAVAN_ITEMS+2(a0) ; increment caravan items number
-                else
-                    moveq   #CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE,d0
-                    cmp.w   ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
-                    blo.s   @Skip           ; skip adding item if no room
-                    lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                    move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
-                    andi.w  #ITEMENTRY_MASK_INDEX,d1
-                    move.b  d1,(a0,d0.w)
-                    addq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
-                endif
-@Skip:
-                
-                movem.l (sp)+,d0-d1/a0
-                rts
-
-    ; End of function AddItemToCaravan
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D1 = inventory slot
-
-
-RemoveItemFromCaravan:
-                
-                movem.l d0/d7-a1,-(sp)
-                moveq   #0,d0
-                loadSavedDataAddress CARAVAN_ITEMS, a0
-                movea.l a0,a1
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    movep.w CARAVAN_ITEMS_NUMBER-CARAVAN_ITEMS(a0),d7   ; d7.w = caravan items number
-                else
-                    move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
-                endif
-                subq.w  #1,d7
-                bcs.w   @Done
-@Loop:
-                
-                cmp.w   d0,d1
-                bne.s   @Next
-                
-                ; Remove item
-                addq.l  #CARAVAN_ITEM_ENTRY_SIZE,a1
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    subq.b  #1,(CARAVAN_ITEMS_NUMBER+3).l
-                else
-                    subq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
-                endif
-                bra.s   @Continue
-@Next:
-                
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.b  (a1),(a0)
-                    addq.w  #CARAVAN_ITEM_ENTRY_SIZE,a0
-                    addq.w  #CARAVAN_ITEM_ENTRY_SIZE,a1
-                else
-                    move.b  (a1)+,(a0)+
-                endif
-@Continue:
-                
-                addq.w  #1,d0
-                dbf     d7,@Loop
-                
-                cmpa.l  a1,a0
-                beq.s   @Done
-                move.b  #ITEM_NOTHING,(a0)
-@Done:
-                
-                movem.l (sp)+,d0/d7-a1
-                rts
-
-    ; End of function RemoveItemFromCaravan
 

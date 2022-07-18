@@ -13,7 +13,7 @@ SoundDriver:
                 else
                     incbin "data/sound/sounddriver.bin"
                 endif
-                include "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
+                includeIfVanillaLayout "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
                 includeIfVanillaRom "data\stats\allies\growthcurves.asm"    ; Stat growth curves
                 includeIfVanillaRom "data\stats\allies\stats\entries.asm"    ; Ally stats
                 align
@@ -25,6 +25,9 @@ SoundDriver:
                 endif
                 includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
-                include "data\graphics\tech\unusedbasepalettes\entries.asm"    ; Unused base palettes
-                include "data\graphics\tech\basetilesentry.asm"    ; Base tiles
+                if (STANDARD_BUILD&EXPANDED_ROM=1)
+                else
+unused_BasePalettes: incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
+BaseTiles:           incbin "data/graphics/tech/basetiles.bin"
+                endif
                 align $1F0000

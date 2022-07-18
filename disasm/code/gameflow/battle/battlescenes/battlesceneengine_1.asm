@@ -24,7 +24,7 @@ GetEnemyAnimation:
                 add.w   ((ENEMY_BATTLE_ANIMATION-$1000000)).w,d1
 @GetAnimationPointer:
                 
-                movea.l (p_pt_EnemyAnimations).l,a0
+                conditionalLongAddr movea.l, p_pt_EnemyAnimations, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
                 move.w  (sp)+,d1
@@ -220,7 +220,7 @@ loc_1995C:
 
 LoadEnemyBattleSpritePropertiesAndPalette:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_EnemyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((ENEMY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -251,7 +251,7 @@ LoadEnemyBattleSpritePropertiesAndPalette:
 
 LoadEnemyBattleSpriteFrameToVram:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_EnemyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -274,7 +274,7 @@ LoadEnemyBattleSpriteFrameToVram:
 LoadEnemyBattleSpriteFrameAndWaitForDma:
                 
                 disableSramAndSwitchRomBanks
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_EnemyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -296,7 +296,7 @@ LoadEnemyBattleSpriteFrameAndWaitForDma:
 
 LoadAllyBattleSpritePropertiesAndPalette:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((ALLY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -327,7 +327,7 @@ LoadAllyBattleSpritePropertiesAndPalette:
 
 LoadAllyBattleSpriteFrameToVram:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -350,7 +350,7 @@ LoadAllyBattleSpriteFrameToVram:
 LoadAllyBattleSpriteFrameAndWaitForDma:
                 
                 disableSramAndSwitchRomBanks
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -371,7 +371,7 @@ LoadAllyBattleSpriteFrameAndWaitForDma:
 
 LoadWeaponPalette:
                 
-                movea.l (p_plt_WeaponPalettes).l,a0
+                conditionalLongAddr movea.l, p_plt_WeaponPalettes, a0
                 lsl.w   #2,d0
                 move.l  (a0,d0.w),((PALETTE_1_BASE_0E-$1000000)).w
                 rts
@@ -386,7 +386,7 @@ LoadWeaponPalette:
 
 LoadWeaponSprite:
                 
-                movea.l (p_pt_WeaponSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_WeaponSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF2000_LOADING_SPACE).l,a1
@@ -408,7 +408,7 @@ LoadWeaponSprite:
 
 LoadBattlesceneGroundToVram:
                 
-                movea.l (p_pt_Grounds).l,a0
+                conditionalLongAddr movea.l, p_pt_Grounds, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
@@ -433,7 +433,7 @@ LoadBattlesceneGroundToVram:
 LoadAllyBattleSpriteFrame:
                 
                 disableSramAndSwitchRomBanks
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyBattleSprites, a0
                 move.w  ((ALLY_BATTLE_SPRITE-$1000000)).w,d0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
@@ -461,7 +461,7 @@ LoadNewAllyBattleSprite:
                 
                 move.w  d1,-(sp)
                 move.w  d0,-(sp)
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -494,7 +494,7 @@ LoadNewAllyBattleSprite:
 LoadEnemyBattleSpriteFrame:
                 
                 disableSramAndSwitchRomBanks
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_EnemyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -518,7 +518,7 @@ LoadNewEnemyBattleSprite:
                 cmpi.w  #$FFFF,d0
                 beq.w   @Return
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_EnemyBattleSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -550,7 +550,7 @@ LoadBattlesceneBackground:
                 tst.w   d0
                 bmi.s   @Return
                 
-                movea.l (p_pt_Backgrounds).l,a2
+                conditionalLongAddr movea.l, p_pt_Backgrounds, a2
                 lsl.w   #2,d0
                 movea.l (a2,d0.w),a2
                 move.w  (a2)+,d0        ; tileset 1 offset
@@ -592,7 +592,7 @@ LoadBattlesceneBackground:
 
 LoadBattlesceneGround:
                 
-                movea.l (p_pt_Grounds).l,a0
+                conditionalLongAddr movea.l, p_pt_Grounds, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
@@ -614,7 +614,7 @@ LoadBattlesceneGround:
 LoadInvocationSpellTilesToVram:
                 
                 disableSram
-                movea.l (p_pt_InvocationSprites).l,a0
+                conditionalLongAddr movea.l, p_pt_InvocationSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.l  a0,-(sp)
@@ -687,7 +687,7 @@ loc_19CA0:
 LoadSpellGraphics:
                 
                 disableSram
-                movea.l (p_pt_SpellGraphics).l,a0
+                conditionalLongAddr movea.l, p_pt_SpellGraphics, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0
@@ -718,7 +718,7 @@ LoadSpellGraphics:
 LoadSpellGraphicsForInvocation:
                 
                 disableSram
-                movea.l (p_pt_SpellGraphics).l,a0
+                conditionalLongAddr movea.l, p_pt_SpellGraphics, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0        ; load bytes 0-1

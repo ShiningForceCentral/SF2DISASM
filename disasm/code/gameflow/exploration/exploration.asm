@@ -943,7 +943,7 @@ OpenDoor:
                 andi.w  #$3F,d1 
                 clr.w   d7
                 getSavedByte CURRENT_MAP, d7
-                movea.l (p_pt_MapData).l,a2
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $16(a2),a2      ; get map step events
@@ -1052,7 +1052,7 @@ loc_3F38:
                 move.w  (a0,d4.w),d4
                 clr.w   d1
                 getSavedByte CURRENT_MAP, d1
-                movea.l (p_pt_MapData).l,a0
+                conditionalLongAddr movea.l, p_pt_MapData, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
                 movea.l $1A(a0),a0
@@ -1135,7 +1135,7 @@ PerformMapBlockCopyScript:
                 andi.w  #$3F,d1 
                 clr.w   d7
                 getSavedByte CURRENT_MAP, d7
-                movea.l (p_pt_MapData).l,a2
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $1A(a2),a2
@@ -1391,20 +1391,19 @@ loc_422C:
 
 ; =============== S U B R O U T I N E =======================================
 
-; IN : 
-; - d0d1 : candidate coordinates
-; OUT :
-; - d0 : layout block offset
-; - d1 : item flag
-; - d2 : item index
-; - a2 : map layout offset
+; In: d0.w, d1.w = Candidate coordinates
+; 
+; Out: a2 = Map layout offset
+;      d0.w = Layout block offset
+;      d1.w = Item flag
+;      d2.w = Item index
 
 
 GetChestItem:
                 
                 clr.w   d2
                 getSavedByte CURRENT_MAP, d2
-                movea.l (p_pt_MapData).l,a2
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data
                 movea.l $22(a2),a2      ; get address of current map's chest item data
@@ -1420,7 +1419,7 @@ GetNonChestItem:
                 
                 clr.w   d2
                 getSavedByte CURRENT_MAP, d2
-                movea.l (p_pt_MapData).l,a2
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2
                 movea.l $26(a2),a2      ; get address of current map's non-chest item data
@@ -1495,7 +1494,7 @@ WarpIfSetAtPoint:
                 divs.w  #$180,d1
                 clr.w   d7
                 getSavedByte CURRENT_MAP, d7
-                movea.l (p_pt_MapData).l,a2
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $1E(a2),a2
@@ -1532,8 +1531,6 @@ loc_4340:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; Updates plane A
 
 
 UpdateVdpPlaneA:
@@ -1573,8 +1570,6 @@ loc_439A:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; Updates plane B
 
 
 UpdateVdpPlaneB:

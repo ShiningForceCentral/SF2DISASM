@@ -445,7 +445,7 @@ LoadItemIcon:
                 
                 module  ; start of icon loading module
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 if (STANDARD_BUILD=1)
                     cmpi.w  #ITEM_NOTHING,d1
                     bne.s   LoadIcon
@@ -463,7 +463,7 @@ LoadItemIcon:
 LoadSpellIcon:
                 
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 cmpi.w  #SPELL_NOTHING,d1
                 bne.s   @Spell
 @Nothing:       move.w  #ICON_NOTHING,d1
@@ -634,7 +634,7 @@ aMov:           dc.b 'MOV  ',0
 aAgi:           dc.b 'AGI  ',0
 aNothing_2:     dc.b '\Nothing',0
                 
-                align                   ; make sure tiles data is word aligned in case patches are applied
+                align
                 
 TextHighlightTiles:
                 incbin "data/graphics/tech/texthighlighttiles.bin"
@@ -1308,7 +1308,7 @@ sub_1445A:
                     move.w  d1,(a0)+
                 else
                     jsr     j_GetSpellAndNumberOfSpells
-                    andi.w  #$7F,d1 ; BUG -- Should be using spell entry index mask $3F instead.
+                    andi.w  #$7F,d1         ; BUG -- Should be using spell entry index mask $3F instead.
                     move.w  d1,(a0)+
                     moveq   #1,d1
                     jsr     j_GetSpellAndNumberOfSpells
@@ -2224,7 +2224,7 @@ CopyIconPixels:
                 
                 move.l  a1,-(sp)
                 move.w  d0,-(sp)
-                movea.l (p_Icons).l,a1
+                conditionalLongAddr movea.l, p_Icons, a1
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
@@ -2793,7 +2793,7 @@ loc_1528E:
                 jsr     (CreateWindow).w
                 move.w  d0,windowSlot(a6)
                 move.l  a1,windowTilesEnd(a6)
-                movea.l (p_MenuTiles_YesNo).l,a0
+                conditionalLongAddr movea.l, p_MenuTiles_YesNo, a0
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
@@ -3254,7 +3254,7 @@ loc_1560E:
 LoadPortrait:
                 
                 movem.l d0-a3,-(sp)
-                movea.l (p_pt_Portraits).l,a0
+                conditionalLongAddr movea.l, p_pt_Portraits, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0

@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = actor index
+; In: d0.w = actor index
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23

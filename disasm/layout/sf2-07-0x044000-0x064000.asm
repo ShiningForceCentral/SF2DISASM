@@ -32,11 +32,11 @@
                 include "code\common\scripting\entity\entityfunctions_3.asm"    ; Entity functions
                 include "code\common\scripting\map\vehiclefunctions.asm"    ; Mapscripts and functions for Caravan and Raft
                 if (STANDARD_BUILD=1)
-                    include "code\common\scripting\entity\getentityportaitandspeechsound-standard.asm"
+                    include "code\common\scripting\entity\getentityportaitandspeechsfx-standard.asm"
                     include "data\stats\allies\allydialogproperties-standard.asm"
                     include "data\spritedialogproperties-standard.asm"
                 else
-                    include "code\common\scripting\entity\getentityportaitandspeechsound.asm"    ; Get entity portrait and speech sfx indexes function
+                    include "code\common\scripting\entity\getentityportaitandspeechsfx.asm"    ; Get entity portrait and speech sfx indexes function
                     include "data\spritedialogproperties.asm"    ; Sprite dialog properties
                 endif
                 include "code\common\scripting\entity\entityfunctions_4.asm"    ; Entity functions
@@ -81,4 +81,4 @@
                 include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
                 include "data\maps\mapsetups.asm"    ; Map setups table
                 include "data\maps\mapsetupsstorage.asm"
-                alignIfOriginalRomLayout $64000
+                alignIfVanillaLayout $64000

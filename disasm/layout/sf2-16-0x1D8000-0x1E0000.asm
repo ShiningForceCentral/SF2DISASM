@@ -4,7 +4,7 @@
 ; FREE SPACE : 126 bytes.
 
 
-                include "code\common\tech\pointers\s16_iconspointer.asm"    ; Game Section 16 Icons Pointer
+                includeIfVanillaLayout "code\common\tech\pointers\s16_iconspointer.asm"    ; Game Section 16 Icons Pointer
                 includeIfVanillaRom "data\graphics\icons\entries.asm"   ; Icons
                 
                 includeIfExpandedRom "data\stats\items\itemdefs.asm"        ; Item definitions

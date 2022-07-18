@@ -96,7 +96,7 @@ CreateBattlesceneAnimation:
                 
                 ; Determine special critical hit
                 move.w  #256,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 cmp.b   (a0)+,d0
                 bls.s   @CheckUnarmed
                 move.b  (a0),d5

@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
+; In: d0.w = combatant index
 
 itemOrSpellIndex = -4
 combatant = -2
@@ -54,7 +54,7 @@ ExecuteIndividualTurn:
                 andi.w  #4,d1
                 bne.w   @AiControl1     
                 tst.b   d0
-                bpl.s   @CheckAutoBattleCheat1 ; check if current combatant is ally or enemy
+                bpl.s   @CheckAutoBattleCheat1 ; check auto battle if ally
                 tst.b   ((CONTROL_OPPONENT_CHEAT-$1000000)).w
                 beq.w   @AiControl1     
                 bra.s   @Goto_PlayerControl
@@ -106,9 +106,9 @@ ExecuteIndividualTurn:
                 bne.w   @AiControl2
 @Continue:
                 
-                bsr.w   sub_24662
+                bsr.w   sub_24662       
                 cmpi.w  #$FFFF,d0
-                bne.w   @CheckBattleAction_CastEgress
+                bne.w   @CheckBattleaction_CastEgress
                 jsr     (WaitForViewScrollEnd).w
                 move.w  combatant(a6),d0
                 clr.b   ((IS_TARGETING-$1000000)).w
@@ -129,23 +129,23 @@ ExecuteIndividualTurn:
 @AiControl2:
                 
                 bsr.w   sub_252FA       
-@CheckBattleAction_CastEgress:
+@CheckBattleaction_CastEgress:
                 
                 cmpi.w  #BATTLEACTION_CAST_SPELL,((CURRENT_BATTLEACTION-$1000000)).w
-                bne.s   @CheckBattleAction_UseAngelWing
+                bne.s   @CheckBattleaction_UseAngelWing
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 cmpi.w  #SPELL_EGRESS,d0
                 beq.w   ExecuteBattleaction_Egress
-@CheckBattleAction_UseAngelWing:
+@CheckBattleaction_UseAngelWing:
                 
                 cmpi.w  #BATTLEACTION_USE_ITEM,((CURRENT_BATTLEACTION-$1000000)).w
-                bne.s   @CheckBattleAction_Stay
+                bne.s   @CheckBattleaction_Stay
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.w  #ITEM_ANGEL_WING,d0
                 beq.w   ExecuteBattleaction_AngelWing
-@CheckBattleAction_Stay:
+@CheckBattleaction_Stay:
                 
                 cmpi.w  #BATTLEACTION_STAY,((CURRENT_BATTLEACTION-$1000000)).w
                 beq.w   @NoAction
@@ -164,7 +164,7 @@ ExecuteIndividualTurn:
                 tst.w   ((CURRENT_BATTLEACTION-$1000000)).w
                 bne.s   @CheckFairyWoodsBattle
                 moveq   #CHANCE_TO_PERFORM_KIWI_FLAME_BREATH,d6 ; 1/4 chance to perform Kiwi's Flame Breath
-                jsr     (GenerateRandomNumber).w ; Kiwi's special attack ?
+                jsr     (GenerateRandomNumber).w
                 tst.w   d7
                 bne.s   @CheckFairyWoodsBattle
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w

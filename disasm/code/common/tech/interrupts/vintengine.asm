@@ -683,7 +683,7 @@ WaitDmaEnd:
 
 ; =============== S U B R O U T I N E =======================================
 
-; VDP Reg Status -> D0
+; VDP Reg Status -> d0.w
 
 
 GetVdpRegStatus:
@@ -1211,7 +1211,7 @@ WaitForVInt:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Wait for D0 VInts/Frames
+; Wait for d0.w VInts/Frames.
 
 
 Sleep:
@@ -1461,7 +1461,7 @@ loc_1088:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
+; In: a0 = Source, a1 = Destination, d0.w = Length, d1.l = Auto-increment
 
 
 ApplyImmediateVramDma:
@@ -1538,7 +1538,7 @@ loc_1188:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
+; In: a0 = Source, a1 = Destination, d0.w = Length, d1.l = Auto-increment
 
 
 ApplyVIntVramDma:
@@ -1808,7 +1808,7 @@ sub_1372:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
+; In: a0 = Source, a1 = Destination, d0.w = Length, d1.l = Auto-increment
 
 
 ApplyImmediateVramDmaOnCompressedTiles:
@@ -1907,7 +1907,7 @@ DmaAndWait:
 
 ; =============== S U B R O U T I N E =======================================
 
-; D0=Destination, D1=Length, D2=Filler value
+; d0.w = Destination, d1.w = Length, d2.w = Filler value
 
 
 ApplyVramDmaFill:
