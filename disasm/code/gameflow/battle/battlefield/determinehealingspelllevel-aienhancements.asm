@@ -19,7 +19,6 @@ DetermineHealingSpellLevel:
                 move.w  d4,d2
                 lsr.w   #SPELLENTRY_OFFSET_LV,d2
                 andi.w  #SPELLENTRY_LOWERMASK_LV,d2 ; d2 = highest level of healing spell known by the caster
-                beq.s   @Done                       ; if already level 1, we're done
                 
                 move.w  d1,d3               ; save caster index
                 bsr.w   GetMaxHP

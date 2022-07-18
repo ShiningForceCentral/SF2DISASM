@@ -104,18 +104,9 @@ SpellLevelTilesLayout1in4:
                 vdpBaseTile SPELL_LEVEL7
                 vdpBaseTile SPELL_LEVEL5
                 
-pt_MenuTiles:   dc.b $85                ; starting with references to uncompressed main menu tiles
-                dc.b 1
-                dc.b 2
-                dc.b 4
-                dc.b $80
-                dc.b 1
-                dc.b 2
-                dc.b 3
-                dc.b $80
-                dc.b 1
-                dc.b 2
-                dc.b 4
+pt_MenuTiles:   dc.l $85010204          ; starting with references to uncompressed main menu tiles
+                dc.l $80010203
+                dc.l $80010204
                 dc.l p_MenuTiles_Item
                 dc.l p_MenuTiles_BattleField
                 dc.l p_Menutiles_Church

@@ -1844,7 +1844,7 @@ sa07_Bolt:
                 adda.w  d1,a1
                 move.l  (a1),((byte_FFB532-$1000000)).w
                 moveq   #$10,d0
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1AACC
                 addi.w  #$80,d0 
 loc_1AACC:
@@ -1868,7 +1868,7 @@ loc_1AAD4:
                 mulu.w  #5,d0
                 addi.w  #$26,d0 
                 lea     byte_1AB5E(pc), a0
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1AB0C
                 lea     $20(a0),a0
 loc_1AB0C:
@@ -2077,7 +2077,7 @@ loc_1AC08:
                 move.w  (a0),$1C(a2)
                 jsr     (ApplyVIntCramDma).w
                 lea     ((byte_FFB532-$1000000)).w,a0
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1AC5C
                 move.w  #$40,(a0)+ 
                 move.w  #$20,(a0) 
@@ -3270,7 +3270,7 @@ sa17_SnowBreath:
                 moveq   #SPELLGRAPHICS_SNOW_BREATH,d0
                 bsr.w   LoadSpellGraphics
                 lea     ((byte_FFB532-$1000000)).w,a1
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1B67C
                 move.w  #$50,(a1) 
                 bra.s   loc_1B680
@@ -3750,7 +3750,7 @@ loc_1BA00:
 loc_1BA30:
                 
                 bsr.w   sub_19F5E
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BA42
                 bset    #3,VDPSPRITE_OFFSET_TILE(a4)
 loc_1BA42:
@@ -3765,7 +3765,7 @@ loc_1BA42:
                 move.w  #$100,d6
                 jsr     (GenerateRandomNumber).w
                 addi.w  #$300,d7
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BA70
                 neg.w   d7
 loc_1BA70:
@@ -3848,7 +3848,7 @@ loc_1BB2A:
                 move.w  (a0),d1
                 addi.w  #-$4000,d1
                 move.w  d1,VDPSPRITE_OFFSET_TILE(a4)
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BB42
                 bset    #3,VDPSPRITE_OFFSET_TILE(a4)
 loc_1BB42:
@@ -4333,7 +4333,7 @@ loc_1BEC8:
                 move.w  #2,(a5)
                 tst.w   2(a5)
                 bne.w   loc_1BF1E
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BEEC
                 move.w  #$B8,d1 
                 move.w  #$C8,d2 
@@ -4406,7 +4406,7 @@ loc_1BF88:
                 lea     (byte_FFAFA0).l,a0
                 moveq   #$28,d6 
                 jsr     (GenerateRandomNumber).w
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1BFBC
                 addi.w  #$8C,d7 
                 move.b  #1,(a0,d0.w)
@@ -6195,7 +6195,7 @@ loc_1CEBE:
                 adda.w  d1,a0
                 moveq   #5,d1
                 move.w  6(a5),d2
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   loc_1CEDA
                 clr.w   d3
                 bra.s   loc_1CEDC
@@ -6684,7 +6684,7 @@ loc_1D2F6:
                 cmpi.w  #2,(a5)
                 bne.w   loc_1D348
                 lea     byte_1D4A0(pc), a0
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.w   loc_1D33C
                 addq.w  #8,a0
                 move.w  ((ENEMY_BATTLE_SPRITE-$1000000)).w,d2
@@ -7036,7 +7036,7 @@ loc_1D5D6:
                 move.w  2(a5),d1
                 bne.w   loc_1D612
                 lea     byte_1D776(pc), a0
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1D5F6
                 addq.w  #8,a0
 loc_1D5F6:
@@ -9189,7 +9189,7 @@ loc_1E7CC:
                 cmpi.w  #2,(a5)
                 bne.w   loc_1E806
                 lea     byte_1E8E2(pc), a0
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1E7EE
                 addq.w  #8,a0
 loc_1E7EE:
@@ -9443,7 +9443,7 @@ loc_1E994:
                 bra.w   loc_1CD70
 loc_1E9B4:
                 
-                btst    #7,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
+                btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1E9D0
                 btst    #2,((byte_FFB56F-$1000000)).w
                 bne.s   loc_1E9CA

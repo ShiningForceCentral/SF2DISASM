@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; D0 = Number of sprites to initialize
+; In: d0.w = Number of sprites to initialize
 
 
 InitSprites:
@@ -381,7 +381,7 @@ sub_19B0:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Palette copies to figure out
+; palette copies to figure out
 
 
 sub_19C8:
@@ -493,7 +493,7 @@ nullsub_1A82:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Basic tile decompression : A0=Source, A1=Destination
+; Basic tile decompression : a0 = Source, a1 = Destination
 
 var_32 = -32
 
@@ -990,7 +990,7 @@ loc_1E3E:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Stack decompression : A0=Source, A1=Destination
+; Stack decompression : a0 = Source, a1 = Destination
 
 history = -32
 

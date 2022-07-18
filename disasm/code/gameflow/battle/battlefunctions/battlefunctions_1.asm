@@ -252,7 +252,7 @@ BattleLoop_Victory:
                 cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
                                                         ; HARDCODED Battle check for fairy woods
                 bne.s   @Continue
-                jsr     j_DisplayTimerWindow
+                jsr     j_RemoveTimerWindow
 @Continue:
                 
                 move.b  ((CURRENT_MAP-$1000000)).w,((MAP_EVENT_PARAM_2-$1000000)).w

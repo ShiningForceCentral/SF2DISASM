@@ -7,11 +7,11 @@
 ; Decide which level of spell to use based upon the HP missing from target
 ;  and the MP available to the caster.
 ; 
-;       In: D0 = heal target character index
-;           D1 = combatant index of the spell caster
-;           D4 = spell entry
+;   In: d0.b = heal target character index
+;       d1.b = combatant index of the spell caster
+;       d4.b = spell entry
 ; 
-;       Out: D2 = spell level to cast (if $FF, then no spell is cast)
+;   Out: d2.w = spell level to cast (if -1, then no spell is cast)
 
 
 DetermineHealingSpellLevel:

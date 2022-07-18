@@ -606,6 +606,8 @@ aMov:           dc.b 'MOV  ',0
 aAgi:           dc.b 'AGI  ',0
 aNothing_2:     dc.b '\Nothing',0
                 
+                align
+                
 TextHighlightTiles:
                 incbin "data/graphics/tech/texthighlighttiles.bin"
 word_13EDE:     
@@ -1257,19 +1259,19 @@ sub_1445A:
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
                 jsr     j_GetSpellAndNumberOfSpells
-                andi.w  #$7F,d1 ; <BUG?> -- shouldn't we be ANDing $3F instead?
+                andi.w  #$7F,d1         ; BUG -- Should be using spell entry index mask $3F instead.
                 move.w  d1,(a0)+
                 moveq   #1,d1
                 jsr     j_GetSpellAndNumberOfSpells
-                andi.w  #$7F,d1 
+                andi.w  #$7F,d1
                 move.w  d1,(a0)+
                 moveq   #2,d1
                 jsr     j_GetSpellAndNumberOfSpells
-                andi.w  #$7F,d1 
+                andi.w  #$7F,d1
                 move.w  d1,(a0)+
                 moveq   #3,d1
                 jsr     j_GetSpellAndNumberOfSpells
-                andi.w  #$7F,d1 
+                andi.w  #$7F,d1
                 move.w  d1,(a0)+
                 clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 lea     (FF8804_LOADING_SPACE).l,a1

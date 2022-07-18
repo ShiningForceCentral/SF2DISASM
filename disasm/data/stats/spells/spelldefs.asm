@@ -121,7 +121,7 @@ tbl_SpellDefs:
                 entry      BOOST        ; BOOST 1
                 mpCost     2
                 animation  BUFF1
-                properties TYPE_STATUS|TARGET_TEAMMATES|AFFECTEDBYSILENCE
+                properties TYPE_SUPPORT|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range      0, 1
                 radius     1
                 power      15
@@ -129,7 +129,7 @@ tbl_SpellDefs:
                 entry      BOOST|LV2    ; BOOST 2
                 mpCost     5
                 animation  BUFF1|VARIATION2
-                properties TYPE_STATUS|TARGET_TEAMMATES|AFFECTEDBYSILENCE
+                properties TYPE_SUPPORT|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range      0, 2
                 radius     2
                 power      15
@@ -137,7 +137,7 @@ tbl_SpellDefs:
                 entry      SLOW         ; SLOW 1
                 mpCost     3
                 animation  DEBUFF1
-                properties TYPE_STATUS|AFFECTEDBYSILENCE
+                properties TYPE_SUPPORT|AFFECTEDBYSILENCE
                 range      1, 1
                 radius     1
                 power      15
@@ -145,7 +145,7 @@ tbl_SpellDefs:
                 entry      SLOW|LV2     ; SLOW 2
                 mpCost     6
                 animation  DEBUFF1|VARIATION2
-                properties TYPE_STATUS|AFFECTEDBYSILENCE
+                properties TYPE_SUPPORT|AFFECTEDBYSILENCE
                 range      1, 2
                 radius     2
                 power      15
@@ -153,7 +153,7 @@ tbl_SpellDefs:
                 entry      ATTACK       ; ATTACK 1
                 mpCost     7
                 animation  BUFF1
-                properties TYPE_STATUS|TARGET_TEAMMATES|AFFECTEDBYSILENCE
+                properties TYPE_SUPPORT|TARGET_TEAMMATES|AFFECTEDBYSILENCE
                 range      1, 3
                 radius     0
                 power      15
@@ -161,7 +161,7 @@ tbl_SpellDefs:
                 entry      DISPEL       ; DISPEL 1
                 mpCost     5
                 animation  DEBUFF1
-                properties TYPE_STATUS|AFFECTEDBYSILENCE
+                properties TYPE_SUPPORT|AFFECTEDBYSILENCE
                 range      1, 2
                 radius     1
                 power      0
@@ -169,7 +169,7 @@ tbl_SpellDefs:
                 entry      MUDDLE       ; MUDDLE 1
                 mpCost     6
                 animation  DEBUFF1
-                properties TYPE_STATUS|AFFECTEDBYSILENCE
+                properties TYPE_SUPPORT|AFFECTEDBYSILENCE
                 range      1, 2
                 radius     1
                 power      0
@@ -177,7 +177,7 @@ tbl_SpellDefs:
                 entry      MUDDLE|LV2   ; MUDDLE 2
                 mpCost     11
                 animation  DEBUFF1
-                properties TYPE_STATUS|AFFECTEDBYSILENCE
+                properties TYPE_SUPPORT|AFFECTEDBYSILENCE
                 range      1, 2
                 radius     2
                 power      0
@@ -201,7 +201,7 @@ tbl_SpellDefs:
                 entry      SLEEP        ; SLEEP 1
                 mpCost     4
                 animation  DEBUFF1
-                properties TYPE_STATUS|AFFECTEDBYSILENCE
+                properties TYPE_SUPPORT|AFFECTEDBYSILENCE
                 range      1, 2
                 radius     1
                 power      0

@@ -4,6 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: a1 = window tiles address, d0.w = selected member index
+
 currentMember = -16
 windowTilesAddress = -6
 selectedMember = -2

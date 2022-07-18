@@ -6,8 +6,8 @@
 
 ; Get next attack spell usable by the caster.
 ; 
-;       In: D0 = caster index, D3 = starting spell slot
-;       Out: D1 = spell index, D2 = spell slot
+;       In: d0.w = caster index, d3.w = starting spell slot
+;       Out: d1.w = spell index, d2.w = spell slot
 
 
 GetNextUsableAttackSpell:
@@ -16,9 +16,9 @@ GetNextUsableAttackSpell:
                 bsr.w   CheckMuddled2   
                 move.w  d1,d7           ; remember whether caster is muddled
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @Start
+                bne.s   @Loop
                 move.w  #1,d7           ; treat ally caster as muddled
-@Start:
+@Loop:
                 
                 move.w  d3,d1
                 jsr     GetSpellAndNumberOfSpells
@@ -26,7 +26,7 @@ GetNextUsableAttackSpell:
                 andi.w  #SPELLENTRY_MASK_INDEX,d4
                 cmpi.w  #SPELL_NOTHING,d4
                 bne.s   @CheckMuddled
-                bra.w   @NextSlot
+                bra.w   @Next
 @CheckMuddled:
                 
                 tst.b   d7
@@ -59,26 +59,26 @@ GetNextUsableAttackSpell:
 @CheckRaijin:
                 
                 cmpi.b  #SPELL_RAIJIN,d5
-                bne.s   @Goto_NextSlot
+                bne.s   @Goto_Next
                 bra.w   @CheckSpellType
-@Goto_NextSlot:
+@Goto_Next:
                 
-                bra.w   @NextSlot
+                bra.w   @Next
 @CheckSpellType:
                 
                 jsr     FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
-                beq.w   @Continue
-@NextSlot:
+                beq.w   @Break
+@Next:
                 
                 addq.w  #1,d3
                 cmpi.w  #COMBATANT_SPELLSLOTS,d3
-                bcs.s   @Start
+                bcs.s   @Loop
                 
                 move.w  #SPELL_NOTHING,d1 ; checked all slots with no valid spell found
                 bra.w   @Done
-@Continue:
+@Break:
                 
                 bsr.w   GetHighestUsableSpellLevel
                 move.w  d3,d2
@@ -94,14 +94,14 @@ GetNextUsableAttackSpell:
 
 ; Get next healing spell known by the combatant.
 ; 
-;       In: D0 = entity index, D3 = starting spell slot
-;       Out: D1 = spell index, D2 = spell slot
+;       In: d0.w = caster index, d3.w = starting spell slot
+;       Out: d1.w = spell index, d2.w = spell slot
 
 
 GetNextHealingSpell:
                 
                 movem.l d0/d3-a6,-(sp)
-@Start:
+@Loop:
                 
                 move.w  d3,d1
                 jsr     GetSpellAndNumberOfSpells
@@ -109,23 +109,23 @@ GetNextHealingSpell:
                 andi.w  #SPELLENTRY_MASK_INDEX,d4
                 cmpi.w  #SPELL_NOTHING,d4
                 bne.s   @Continue
-                bra.w   @NextSlot
+                bra.w   @Next
 @Continue:
                 
                 jsr     FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_HEAL,d2
-                beq.w   @GetSpellSlot
-@NextSlot:
+                beq.w   @Break
+@Next:
                 
                 addq.w  #1,d3
                 cmpi.w  #COMBATANT_SPELLSLOTS,d3
-                bcs.s   @Start
+                bcs.s   @Loop
                 
                 move.w  #SPELL_NOTHING,d1
                 bra.w   @Done
-@GetSpellSlot:
+@Break:
                 
                 move.w  d3,d2
 @Done:
@@ -138,37 +138,42 @@ GetNextHealingSpell:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Get next support spell known by the combatant.
+; 
+;       In: d0.w = caster index, d3.w = starting spell slot
+;       Out: d1.w = spell index, d2.w = spell slot
+
 
 GetNextSupportSpell:
                 
                 movem.l d0/d3-a6,-(sp)
-loc_D066:
+@Start:
                 
                 move.w  d3,d1
                 jsr     GetSpellAndNumberOfSpells
                 move.w  d1,d4
                 andi.w  #SPELLENTRY_MASK_INDEX,d4
                 cmpi.w  #SPELL_NOTHING,d4
-                bne.s   loc_D07E
-                bra.w   loc_D094
-loc_D07E:
+                bne.s   @Continue
+                bra.w   @NextSlot
+@Continue:
                 
                 jsr     FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
-                cmpi.b  #SPELLPROPS_TYPE_STATUS,d2
-                beq.w   loc_D0A4
-loc_D094:
+                cmpi.b  #SPELLPROPS_TYPE_SUPPORT,d2
+                beq.w   @GetSlot
+@NextSlot:
                 
                 addq.w  #1,d3
                 cmpi.w  #COMBATANT_SPELLSLOTS,d3
-                bcs.s   loc_D066
+                bcs.s   @Start
                 move.w  #SPELL_NOTHING,d1
-                bra.w   loc_D0A6
-loc_D0A4:
+                bra.w   @Done
+@GetSlot:
                 
                 move.w  d3,d2
-loc_D0A6:
+@Done:
                 
                 movem.l (sp)+,d0/d3-a6
                 rts
@@ -179,87 +184,91 @@ loc_D0A6:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get the next item in combatant's inventory that can be used to cast
-; BLAZE/FREEZE/BOLT/BLAST (HARDCODED spell indexes)
+;  BLAZE/FREEZE/BOLT/BLAST. <HARDCODED>
 ; 
-;       In: D0 = combatant index, D3 = starting item slot
-;       Out: D1 = item index, D2 = item slot
+;       In: d0.w = caster index, d3.w = starting spell slot
+;       Out: d1.w = spell index, d2.w = spell slot
 
 
 GetNextUsableAttackItem:
                 
                 movem.l d0/d3-a6,-(sp)
                 bsr.w   CheckMuddled2   
-                move.w  d1,d6
+                move.w  d1,d6           ; remember whether caster is muddled
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_D0C0
-                move.w  #1,d6
-loc_D0C0:
+                bne.s   @Loop
+                move.w  #1,d6           ; treat ally caster as muddled
+@Loop:
                 
                 move.w  d3,d1
                 jsr     GetItemAndNumberHeld
                 cmpi.w  #ITEM_NOTHING,d1
-                bne.s   loc_D0D2
-                bra.w   loc_D0DC
-loc_D0D2:
+                bne.s   @Continue
+                bra.w   @Next
+@Continue:
                 
                 jsr     IsItemUsableInBattle
-                bcs.w   loc_D0E8
-loc_D0DC:
+                bcs.w   @CheckAllowedToUse
+@Next:
                 
                 addq.w  #1,d3
                 cmpi.w  #COMBATANT_ITEMSLOTS,d3
-                bcs.s   loc_D0C0
-                bra.w   loc_D156
-loc_D0E8:
+                bcs.s   @Loop
+                bra.w   @Nothing
+@CheckAllowedToUse:
                 
-                btst    #ITEMENTRY_BIT_EQUIPPED,d1
-                bne.w   loc_D0F8
+                btst    #ITEMENTRY_BIT_EQUIPPED,d1 ; if not equipped, AI must be set to use the item in battle data
+                bne.w   @CheckSpellValidity
                 btst    #ITEMENTRY_BIT_USABLE_BY_AI,d1
-                beq.w   loc_D156
-loc_D0F8:
+                beq.w   @Nothing
+@CheckSpellValidity:
                 
                 jsr     GetItemDefAddress
-                move.w  d1,d7
+                move.w  d1,d7           ; save item entry
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
+                
+                ; Is caster muddled?
                 tst.b   d6
-                beq.s   loc_D13C
+                beq.s   @CheckSpellType
                 move.w  d1,d5
                 andi.b  #SPELLENTRY_MASK_INDEX,d5
+                
+                ; Check Blaze
                 cmpi.b  #SPELL_BLAZE,d5 ; HARDCODED spell indexes
-                bne.s   loc_D11A
-                bra.w   loc_D13C
-loc_D11A:
+                bne.s   @CheckFreeze
+                bra.w   @CheckSpellType
+@CheckFreeze:
                 
                 cmpi.b  #SPELL_FREEZE,d5
-                bne.s   loc_D124
-                bra.w   loc_D13C
-loc_D124:
+                bne.s   @CheckBolt
+                bra.w   @CheckSpellType
+@CheckBolt:
                 
                 cmpi.b  #SPELL_BOLT,d5
-                bne.s   loc_D12E
-                bra.w   loc_D13C
-loc_D12E:
+                bne.s   @CheckBlast
+                bra.w   @CheckSpellType
+@CheckBlast:
                 
                 cmpi.b  #SPELL_BLAST,d5
-                bne.s   loc_D138
-                bra.w   loc_D13C
-loc_D138:
+                bne.s   @Goto_Nothing
+                bra.w   @CheckSpellType
+@Goto_Nothing:
                 
-                bra.w   loc_D156
-loc_D13C:
+                bra.w   @Nothing
+@CheckSpellType:
                 
                 jsr     FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
-                bne.w   loc_D156
+                bne.w   @Nothing
                 move.w  d3,d2
-                move.w  d7,d1
-                bra.w   loc_D15A
-loc_D156:
+                move.w  d7,d1           ; restore item entry
+                bra.w   @Done
+@Nothing:
                 
                 move.w  #ITEM_NOTHING,d1
-loc_D15A:
+@Done:
                 
                 movem.l (sp)+,d0/d3-a6
                 rts
@@ -270,57 +279,55 @@ loc_D15A:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get the next item in combatant's inventory that can be used to cast
-; a healing spell. <HARDCODED>
+;  a healing spell. <HARDCODED>
 ; 
 ; This only looks for Healing Rain as a valid healing item,
-; but is easy enough to change to allow the AI to use healing items.
+;  unless the AI is set to use the item the in battle data.
 ; 
-;       In: D0 = combatant index, D3 = starting item slot
-;       Out: D1 = item entry, D2 = item slot
+;       In: d0.w = caster index, d3.w = starting spell slot
+;       Out: d1.w = spell index, d2.w = spell slot
 
 
 GetNextUsableHealingItem:
                 
                 movem.l d0/d3-a6,-(sp)
-@Start:
+@Loop:
                 
                 move.w  d3,d1
                 jsr     GetItemAndNumberHeld
                 cmpi.w  #ITEM_NOTHING,d1
                 bne.s   @Continue
-                bra.w   @NextSlot
+                bra.w   @Next
 @Continue:
                 
                 move.w  d1,d7
                 jsr     IsItemUsableInBattle
-                bcc.s   @NextSlot
-                cmpi.b  #ITEM_HEALING_RAIN,d7
-                if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
-                    bls.s   @CheckSpellType ; The first eight items all count as healing items.
-                else
-                    beq.s   @CheckSpellType ; Right now the logic requires the item to be Healing Rain to count as a healing item.
-                endif
+                bcc.s   @Next
+                
+                ; Is AI allowed to use item?
+                cmpi.b  #ITEM_HEALING_RAIN,d7 ; if not Healing Rain, AI must be set to use the item in battle data
+                beq.s   @CheckSpellType
                 btst    #ITEMENTRY_BIT_USABLE_BY_AI,d1
-                beq.w   @NextSlot
+                beq.w   @Next
 @CheckSpellType:
                 
                 jsr     GetItemDefAddress
-                move.w  d1,d7           ; D7 = copy of item entry
+                move.w  d1,d7           ; save item entry
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 jsr     FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_HEAL,d2
-                bne.w   @NextSlot
+                bne.w   @Next
                 move.w  d3,d2
-                move.w  d7,d1
+                move.w  d7,d1           ; restore item entry
                 bra.w   @Done
-@NextSlot:
+@Next:
                 
                 addq.w  #1,d3
                 cmpi.w  #COMBATANT_ITEMSLOTS,d3
-                bcs.s   @Start
+                bcs.s   @Loop
                 move.w  #ITEM_NOTHING,d1
 @Done:
                 
