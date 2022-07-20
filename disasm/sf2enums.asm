@@ -3460,15 +3460,24 @@ AICOMMAND_PARAM_HEAL3: equ $2
 ; ---------------------------------------------------------------------------
 
 ; enum GameSettings
-longworddealscounter = 15
+longwordDealsCounter = 15
+longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/4)-1
+longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING*256)|(ITEM_NOTHING*65536)|(ITEM_NOTHING*16777216)
 
     if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-longworddealscounter = 31
+longwordDealsCounter = 31
+    endif
+
+    if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT&expandedSram=1)
+      if (expandedSram=1)
+longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/2)-1
+      endif
+longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING*65536)
     endif
 
 LONGWORD_GAMEFLAGS_INITVALUE: equ $0
 LONGWORD_DEALS_INITVALUE: equ $0
-LONGWORD_DEALS_COUNTER: equ longworddealscounter
-LONGWORD_CARAVAN_COUNTER: equ (CARAVAN_MAX_ITEMS_NUMBER/4)-1    ; 15
+LONGWORD_DEALS_COUNTER: equ longwordDealsCounter
+LONGWORD_CARAVAN_COUNTER: equ longwordCaravanCounter
 LONGWORD_GAMEFLAGS_COUNTER: equ $1F
-LONGWORD_CARAVAN_INITVALUE: equ $7F7F7F7F
+LONGWORD_CARAVAN_INITVALUE: equ longwordCaravanInitValue

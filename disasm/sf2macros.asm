@@ -579,6 +579,13 @@ getBattleTurnActor: macro
     move.b  (a0,\1.w),\1
     endm
     
+addSavedByteOffset: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    add.w   \1,\1
+    endc
+    adda.w  \1,\2
+    endm
+    
     
 ; ---------------------------------------------------------------------------
 ; Items and spells expansion
