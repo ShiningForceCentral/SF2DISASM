@@ -128,8 +128,8 @@ tbl_ItemNames:  itemName "Medical", 13, "Herb"
                 itemName "Life", 13, "Ring"
                 itemName "Cotton", 13, "Balloon"
                 itemName "Chirrup", 13, "Sandals"
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-                    itemName "item127"
+                itemName "Empty"
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                     itemName "item128"
                     itemName "item129"
                     itemName "item130"
@@ -257,6 +257,5 @@ tbl_ItemNames:  itemName "Medical", 13, "Herb"
                     itemName "item252"
                     itemName "item253"
                     itemName "item254"
+                    itemName "item255"
                 endif
-                itemName "Empty"
-                

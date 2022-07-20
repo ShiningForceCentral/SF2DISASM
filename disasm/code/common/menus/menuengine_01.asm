@@ -1,465 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_01.asm :
-; 0x10000..0x10E1C : Menu engine
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_ExecuteMenu:
-                
-                jmp     ExecuteMenu(pc) 
-
-    ; End of function j_ExecuteMenu
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_ExecuteItemMenu:
-                
-                jmp     ExecuteItemMenu(pc)
-
-    ; End of function j_ExecuteItemMenu
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_ExecuteItemMenu_0:
-                
-                jmp     ExecuteItemMenu(pc)
-
-    ; End of function j_ExecuteItemMenu_0
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_ExecuteItemMenu_1:
-                
-                jmp     ExecuteItemMenu(pc)
-
-    ; End of function j_ExecuteItemMenu_1
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_ExecuteMagicMenu:
-                
-                jmp     ExecuteMagicMenu(pc)
-
-    ; End of function j_ExecuteMagicMenu
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_CreateBattlefieldMiniStatusWindow:
-                
-                jmp     CreateBattlefieldMiniStatusWindow(pc)
-
-    ; End of function j_CreateBattlefieldMiniStatusWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_HideMiniStatusWindow:
-                
-                jmp     HideMiniStatusWindow(pc)
-
-    ; End of function j_HideMiniStatusWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_CreateBattlesceneMiniStatusWindows:
-                
-                jmp     CreateBattlesceneMiniStatusWindows(pc)
-
-    ; End of function j_CreateBattlesceneMiniStatusWindows
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_10020:
-                
-                jmp     sub_11638(pc)
-
-    ; End of function sub_10020
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_10024:
-                
-                jmp     sub_116B8(pc)
-
-    ; End of function sub_10024
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_RemoveAllyBattlesceneWindow:
-                
-                jmp     RemoveAllyBattlesceneWindow(pc)
-
-    ; End of function j_RemoveAllyBattlesceneWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_RemoveEnemyBattlesceneWindow:
-                
-                jmp     RemoveEnemyBattlesceneWindow(pc)
-
-    ; End of function j_RemoveEnemyBattlesceneWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_BuildMemberScreen:
-                
-                jmp     BuildMemberScreen(pc)
-
-    ; End of function j_BuildMemberScreen
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_10034:
-                
-                jmp     sub_1288E(pc)
-
-    ; End of function sub_10034
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_InitPortraitWindow:
-                
-                jmp     InitPortraitWindow(pc)
-
-    ; End of function j_InitPortraitWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_HidePortraitWindow:
-                
-                jmp     HidePortraitWindow(pc)
-
-    ; End of function j_HidePortraitWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_InitMemberListScreen:
-                
-                jmp     InitMemberListScreen(pc)
-
-    ; End of function j_InitMemberListScreen
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_BuildMemberListScreen_NewATTandDEF:
-                
-                jmp     BuildMemberListScreen_NewATTandDEF(pc)
-
-    ; End of function j_BuildMemberListScreen_NewATTandDEF
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_BuildMemberListScreen_MagicPage:
-                
-                jmp     BuildMemberListScreen_MagicPage(pc)
-
-    ; End of function j_BuildMemberListScreen_MagicPage
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_CreateShopInventoryScreen:
-                
-                jmp     CreateShopInventoryScreen(pc)
-
-    ; End of function j_CreateShopInventoryScreen
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_CreateGoldWindow:
-                
-                jmp     CreateGoldWindow(pc)
-
-    ; End of function j_CreateGoldWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_10054:
-                
-                jmp     sub_12F5E(pc)
-
-    ; End of function sub_10054
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_HideGoldWindow:
-                
-                jmp     HideGoldWindow(pc)
-
-    ; End of function j_HideGoldWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_CreateBattleEquipWindow:
-                
-                jmp     CreateBattleEquipWindow(pc)
-
-    ; End of function j_CreateBattleEquipWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_10060:
-                
-                jmp     sub_11404(pc)
-
-    ; End of function sub_10060
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_HideBattleEquipWindow:
-                
-                jmp     HideBattleEquipWindow(pc)
-
-    ; End of function j_HideBattleEquipWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_CreateLandEffectWindow:
-                
-                jmp     CreateLandEffectWindow(pc)
-
-    ; End of function j_CreateLandEffectWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_HideLandEffectWindow:
-                
-                jmp     HideLandEffectWindow(pc)
-
-    ; End of function j_HideLandEffectWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_10070:
-                
-                jmp     sub_157E8(pc)
-
-    ; End of function sub_10070
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_YesNoChoiceBox:
-                
-                jmp     YesNoChoiceBox(pc)
-
-    ; End of function j_YesNoChoiceBox
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_YesNoPrompt:
-                
-                jmp     YesNoPrompt(pc)
-
-    ; End of function j_YesNoPrompt
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_NameAlly:
-                
-                jmp     NameAlly(pc)    
-
-    ; End of function j_NameAlly
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_10080:
-                
-                jmp     sub_1586E(pc)   
-
-    ; End of function sub_10080
-
-p_tbl_ItemNames:dc.l tbl_ItemNames
-p_tbl_ClassNames:
-                dc.l tbl_ClassNames
-p_tbl_ItemDefs: dc.l tbl_ItemDefs
-p_tbl_SpellDefs:dc.l tbl_SpellDefs      
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_NumberPrompt:
-                
-                jmp     NumberPrompt(pc)
-
-    ; End of function j_NumberPrompt
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_DebugFlagSetter:
-                
-                jmp     DebugFlagSetter(pc)
-
-    ; End of function j_DebugFlagSetter
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_SpecialBattle:
-                
-                jmp     DisplayTimerWindow(pc)
-
-    ; End of function j_SpecialBattle
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_DisplayTimerWindow:
-                
-                jmp     RemoveTimerWindow(pc)
-
-    ; End of function j_DisplayTimerWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_VInt_UpdateTimerWindow:
-                
-                jmp     VInt_UpdateTimerWindow(pc)
-
-    ; End of function j_VInt_UpdateTimerWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_WitchMainMenu:
-                
-                jmp     WitchMainMenu(pc)
-
-    ; End of function j_WitchMainMenu
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_100AC:
-                
-                jmp     sub_169AE(pc)
-
-    ; End of function sub_100AC
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_100B0:
-                
-                jmp     sub_16A30(pc)
-
-    ; End of function sub_100B0
-
-
-; =============== S U B R O U T I N E =======================================
-
-; related to end kiss
-
-
-j_PlayEndKiss:
-                
-                jmp     PlayEndKiss(pc)
-
-    ; End of function j_PlayEndKiss
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_ClosePortraitEyes:
-                
-                jmp     ClosePortraitEyes(pc)
-
-    ; End of function j_ClosePortraitEyes
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_LoadPortrait:
-                
-                jmp     LoadPortrait(pc)
-
-    ; End of function j_LoadPortrait
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-j_GetAllyPortrait:
-                
-                jmp     GetAllyPortrait(pc)
-
-    ; End of function j_GetAllyPortrait
-
-p_MemberStatusWindowLayout:
-                dc.l MemberStatusWindowLayout
+; 0x100C8..0x10E1C : Menu engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -475,28 +16,19 @@ WriteTilesFromAsciiWithOrangeFont:
 
     ; End of function WriteTilesFromAsciiWithOrangeFont
 
-                ; In: D0 = character index, D1 = number
-                if (THREE_DIGITS_STATS|FULL_CLASS_NAMES>=1)
-WriteTwoDigitsStatValue_MemberStats:
-                
-                    if (FULL_CLASS_NAMES>=1)
-                    tst.b   d0
-                    bmi.s   WriteTwoDigitsStatValue
-                    adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
-                    endif
-                
-WriteTwoDigitsStatValue:
-
-                moveq   #2,d7   ; two digits
-                move.w  d1,d0
-                ext.l   d0
-                endif
 
 ; =============== S U B R O U T I N E =======================================
 
 ; write tiles from number in D0 into A1 D7 letters, window width D1
 
 
+WriteLvOrExpValue:
+                
+                if (STANDARD_BUILD=1)
+                    moveq   #2,d7   ; two digits
+                    move.w  d1,d0
+                    ext.l   d0
+                endif
 WriteTilesFromNumber:
                 
                 jsr     (WriteAsciiNumber).w
@@ -535,7 +67,7 @@ loc_100F2:
                 clr.w   d0
                 move.b  (a0)+,d0
                 beq.w   loc_10186
-                ori.w   #VDPTILE_CLEAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
+                ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 cmpi.b  #TEXT_CODE_MOVEDOWN,d0
                 beq.s   loc_1016A
                 cmpi.b  #TEXT_CODE_TOGGLEFONTCOLOR,d0
@@ -604,14 +136,13 @@ tbl_MainFontAlternateSymbols:
 
 ; START OF FUNCTION CHUNK FOR WriteTilesFromAsciiWithOrangeFont
 
-loc_1016A:
-                if (FULL_CLASS_NAMES>=1)
-                tst.w   d1
-                bne.s   @Continue
-                move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
-                bra.s   loc_10156
-@Continue:
-                endif
+loc_1016A:      
+                if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
+                    tst.w   d1
+                    bne.s   @Continue
+                    move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
+                    bra.s   loc_10156
+@Continue:      endif
                 
                 lea     2(a2),a1
                 suba.w  d1,a1
@@ -1113,7 +644,7 @@ LoadMainMenuIcon:
                 
                 move.l  d0,-(sp)
                 ext.w   d0
-                movea.l (p_MainMenuTiles).l,a0
+                conditionalLongAddr movea.l, p_MainMenuTiles, a0
                 mulu.w  #GFX_DIAMENU_ICON_PIXELS_NUMBER,d0
                 adda.w  d0,a0
                 move.w  #$8F,d0 
@@ -1355,7 +886,7 @@ BuildItemMenu:
                 moveq   #-36,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  (sp)+,d1
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                     btst    #ITEMENTRY_BIT_EQUIPPED,d1
                     beq.s   @Return
                 else
@@ -1378,7 +909,7 @@ BuildItemMenu:
 aEquipped:      dc.b '\Equipped',0
 aNothing:       dc.b '\Nothing',0
                 
-                wordAlign
+                align
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1596,6 +1127,11 @@ LoadHighlightableItemIcon:
                 cmpi.w  #ICON_UNARMED,d0
                 beq.s   LoadHighlightableIcon
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
+                if (STANDARD_BUILD=1)
+                    cmpi.w  #ITEM_NOTHING,d0
+                    bne.s   LoadHighlightableIcon
+                    move.w  #ICON_NOTHING,d0
+                endif
 
     ; End of function LoadHighlightableItemIcon
 
@@ -1607,12 +1143,8 @@ LoadHighlightableIcon:
                 
                 adda.w  #ICONTILES_BYTESIZE,a1
                 mulu.w  #ICONTILES_BYTESIZE,d0
-                movea.l (p_Icons).l,a0
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-                    adda.l  d0,a0 
-                else
-                    adda.w  d0,a0           ; icon offset
-                endif
+                conditionalLongAddr movea.l, p_Icons, a0
+                addIconOffset d0, a0
                 move.w  #$2F,d1 
                 lea     IconHighlightTiles(pc), a2
 @Loop:
@@ -1914,7 +1446,7 @@ sub_10CC6:
                 jsr     (WaitForDmaQueueProcessing).w
                 move.w  (sp)+,d0
                 move.w  d0,d4
-                lsr.w   #6,d4
+                lsr.w   #SPELLENTRY_OFFSET_LV,d4
                 move.w  d4,d5
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 jsr     (WaitForVInt).w
@@ -2027,8 +1559,20 @@ loc_10DCE:
     ; End of function sub_10D56
 
 spr_SpellLevelHighlight:
-                vdpSprite 316, V2|H4|9, 1504|CLEAR|PALETTE3|PRIORITY, 292
-                vdpSprite 316, V2|H4|16, 1504|CLEAR|MIRROR|PALETTE3|PRIORITY, 316
+                
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+;
+;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
+;
+;      palette: PALETTE1 = 0 (default when omitted)
+;               PALETTE2 = $2000
+;               PALETTE3 = $4000
+;               PALETTE4 = $6000
+;
+; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+                
+                vdpSprite 316, V2|H4|9, 1504|PALETTE3|PRIORITY, 292
+                vdpSprite 316, V2|H4|16, 1504|MIRROR|PALETTE3|PRIORITY, 316
 
 ; =============== S U B R O U T I N E =======================================
 

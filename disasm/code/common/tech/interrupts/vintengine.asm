@@ -445,7 +445,7 @@ loc_906:
                 move.w  2(a0),(a0)+
                 move.w  2(a0),(a0)+
                 clr.w   (a0)
-                if (MUSIC_RESUMING=1)
+                if (STANDARD_BUILD&MUSIC_RESUMING=1)
                 
                     ; Resuming commands
                     cmpi.b  #SOUND_COMMAND_DEACTIVATE_RESUMING,d0
@@ -683,7 +683,7 @@ WaitDmaEnd:
 
 ; =============== S U B R O U T I N E =======================================
 
-; VDP Reg Status -> D0
+; VDP Reg Status -> d0.w
 
 
 GetVdpRegStatus:
@@ -992,8 +992,8 @@ loc_D30:
                 sub.w   d6,d5
                 btst    d5,d1
                 bne.s   loc_D44
-                adda.w  #$20,a0 
-                adda.w  #$20,a1 
+                adda.w  #CRAM_PALETTE_SIZE,a0
+                adda.w  #CRAM_PALETTE_SIZE,a1
                 bra.w   loc_DA8
 loc_D44:
                 
@@ -1133,26 +1133,29 @@ ClearSpriteTable:
 ClearScrollTableData:
                 
                 movem.l d7/a6,-(sp)
-                move.w  #$C000,d0       ; clear scroll A table
+                move.w  #VRAM_ADDRESS_PLANE_A,d0 ; clear scroll A table
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
-                move.w  #$E000,d0       ; clear scroll B table
+                move.w  #VRAM_ADDRESS_PLANE_B,d0 ; clear scroll B table
                 move.w  #$1000,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
+                
                 move.w  #$1FF,d7
                 lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a6
 loc_E62:
                 
                 clr.l   (a6)+
                 dbf     d7,loc_E62
+                
                 move.w  #$1FF,d7
                 adda.w  #$1800,a6
 loc_E70:
                 
                 clr.l   (a6)+
                 dbf     d7,loc_E70
+                
                 movem.l (sp)+,d7/a6
                 rts
 
@@ -1208,7 +1211,7 @@ WaitForVInt:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Wait for D0 VInts/Frames
+; Wait for d0.w VInts/Frames.
 
 
 Sleep:
@@ -1458,7 +1461,7 @@ loc_1088:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
+; In: a0 = Source, a1 = Destination, d0.w = Length, d1.l = Auto-increment
 
 
 ApplyImmediateVramDma:
@@ -1535,7 +1538,7 @@ loc_1188:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
+; In: a0 = Source, a1 = Destination, d0.w = Length, d1.l = Auto-increment
 
 
 ApplyVIntVramDma:
@@ -1805,7 +1808,7 @@ sub_1372:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
+; In: a0 = Source, a1 = Destination, d0.w = Length, d1.l = Auto-increment
 
 
 ApplyImmediateVramDmaOnCompressedTiles:
@@ -1904,7 +1907,7 @@ DmaAndWait:
 
 ; =============== S U B R O U T I N E =======================================
 
-; D0=Destination, D1=Length, D2=Filler value
+; d0.w = Destination, d1.w = Length, d2.w = Filler value
 
 
 ApplyVramDmaFill:

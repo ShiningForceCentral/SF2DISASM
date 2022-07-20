@@ -1289,10 +1289,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-                
-                ; 127: 
+                ; 127: Empty
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -1301,6 +1298,8 @@ tbl_ItemDefs:
                 equipEffects NONE, 0, &
                              NONE, 0, &
                              NONE, 0
+                
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                 
                 ; 128: 
                 equipFlags   NONE
@@ -1402,7 +1401,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 138:
+                ; 138: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -1432,7 +1431,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 141:
+                ; 141: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -1502,7 +1501,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 148:
+                ; 148: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -1672,7 +1671,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 165:
+                ; 165: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -1702,7 +1701,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 168:
+                ; 168: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -1722,7 +1721,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 170:
+                ; 170: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -1842,7 +1841,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 182:
+                ; 182: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -1932,7 +1931,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 191: 
+                ; 191:
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -1992,7 +1991,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 197:
+                ; 197: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -2082,7 +2081,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 206:
+                ; 206: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -2242,7 +2241,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 222:
+                ; 222: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -2272,7 +2271,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 225:
+                ; 225: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -2472,7 +2471,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 245:
+                ; 245: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -2542,7 +2541,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                ; 252:
+                ; 252: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -2572,10 +2571,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                endif
-                
-                
-                ; 127: Empty (255 when items are expanded)
+                ; 255: 
                 equipFlags   NONE
                 range        0, 0
                 price        0
@@ -2585,3 +2581,4 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
+                endif

@@ -4,8 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
-;     A1 = window tile adress
+; In: a1 = window tile adress, d0.w = combatant index
 
 windowTilesAddress = -6
 member = -2
@@ -18,7 +17,7 @@ BuildMemberStatusWindow:
                 move.l  a1,windowTilesAddress(a6)
                 
                 ; Copy window layout
-                movea.l (p_MemberStatusWindowLayout).l,a0
+                conditionalLongAddr movea.l, p_MemberStatusWindowLayout, a0
                 move.w  #WINDOW_MEMBERSTATUS_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 
@@ -160,12 +159,8 @@ BuildMemberStatusWindow:
 @WriteLVandEXP:
                 
                 move.w  member(a6),d0
-                
-                if (SHOW_ENEMY_LEVEL=0)
                 tst.b   d0
                 blt.s   @WriteEnemyLVandEXP
-                endif
-                
                 jsr     j_GetCurrentLevel
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_LV,a1
@@ -174,12 +169,6 @@ BuildMemberStatusWindow:
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
                 move.w  member(a6),d0
-                
-                if (SHOW_ENEMY_LEVEL>=1)
-                tst.b   d0
-                blt.s   @WriteEnemyEXP
-                endif
-                
                 jsr     j_GetCurrentEXP
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_EXP,a1
@@ -195,8 +184,6 @@ BuildMemberStatusWindow:
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_LV,a1
                 moveq   #WINDOW_MEMBERSTATUS_NA_STRING_LENGTH,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
-@WriteEnemyEXP:
-                
                 lea     aNA(pc), a0     
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_EXP,a1
@@ -269,14 +256,11 @@ BuildMemberStatusWindow:
                 jsr     j_GetSpellAndNumberOfSpells
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @Break          ; break out of loop if no spells learned
-                
-                if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
                 movem.l d1/a0,-(sp)
                 jsr     j_FindSpellDefAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 movem.l (sp)+,d1/a0
                 beq.w   @NextSpell
-                endif
                 
                 ; Copy icon tiles to window layout
                 bsr.w   CopyMemberScreenIconsToVdpTileOrder
@@ -446,16 +430,12 @@ aJewel:
                 move.l  a0,-(sp)
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
                 addi.w  #ICON_SPELLS_START,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-                    adda.l  d1,a0
-                else
-                    adda.w  d1,a0
-                endif
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)
@@ -481,25 +461,17 @@ aJewel:
                 move.l  a0,-(sp)
                 move.w  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-                    adda.l  d1,a0
-                else
-                    adda.w  d1,a0
-                endif
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
                 btst    #ITEMENTRY_BIT_BROKEN,d1
                 beq.s   @CleanIconCorners
                 movem.l d2-d3/a0-a1,-(sp)
-                movea.l (p_Icons).l,a0
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-                    adda.l  #ICONTILES_OFFSET_CRACKS,a0
-                else
-                    lea     ICONTILES_OFFSET_CRACKS(a0),a0
-                endif
+                conditionalLongAddr movea.l, p_Icons, a0
+                lea     ICONTILES_OFFSET_CRACKS(a0),a0
                 move.w  #ICONTILES_CRACKS_PIXELS_COUNTER,d2
 @DrawCracks_Loop:
                 
@@ -535,12 +507,12 @@ aJewel:
 @LoadJewelIcons:
                 
                 move.w  #ICON_JEWEL_OF_LIGHT,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                addJewelIconOffset
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)
@@ -549,12 +521,12 @@ aJewel:
                 ori.b   #$F,$BF(a1)
                 adda.w  #ICONTILES_BYTESIZE,a1
                 move.w  #ICON_JEWEL_OF_EVIL,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                addJewelIconOffset
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)

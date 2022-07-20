@@ -18,3 +18,13 @@ tbl_KrakenMoveCosts:
                 dc.b $FF
                 dc.b $FF
                 dc.b $FF
+
+
+tbl_KrakenMoveCostEnemies:
+                if (STANDARD_BUILD=1)
+                    dc.b ENEMY_KRAKEN_LEG
+                    dc.b ENEMY_KRAKEN_ARM
+                    dc.b ENEMY_KRAKEN_HEAD
+
+                    tableEnd.b
+                endif

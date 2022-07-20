@@ -39,7 +39,7 @@ eas_ControlledCharacter:
                  ac_accelFactors 0,0
                  ac_acceleration -2,ON
                  ac_deceleration -2,ON
-                if (BUGFIX_MOVEMENT_GLITCH=1)
+                if (STANDARD_BUILD&FIX_MOVEMENT_GLITCH=1)
 byte_44E5A:      ac_waitDest
                  ac_checkMapBlockCopy
                  ac_controlCharacter

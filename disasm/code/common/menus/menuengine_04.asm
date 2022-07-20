@@ -39,11 +39,9 @@ loc_11B9E:
                 move.w  #$A0,d7 
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d0
-                
-                if (FORCE_MEMBERS_EXPANSION=0)
-                bsr.w   GetAllyPortrait 
+                if (STANDARD_BUILD=0)
+                    bsr.w   GetAllyPortrait 
                 endif
-                
                 bsr.w   LoadPortrait    
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -146,11 +144,9 @@ BuildMemberScreen:
                 bsr.w   LoadTileDataForMemberScreen
                 move.w  portraitIndex(a6),d0
                 blt.s   loc_11CA6
-                
-                if (FORCE_MEMBERS_EXPANSION=0)
-                bsr.w   GetAllyPortrait 
+                if (STANDARD_BUILD=0)
+                    bsr.w   GetAllyPortrait 
                 endif
-                
                 bsr.w   LoadPortrait    
 loc_11CA6:
                 
@@ -185,7 +181,7 @@ loc_11CE6:
                 dc.l VInt_HandlePortraitBlinking
                 move.b  #$FF,((byte_FFB082-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11D1A
                 clr.w   d0
                 bra.s   loc_11D32
@@ -199,7 +195,7 @@ loc_11D1A:
                 bra.s   loc_11D32
 loc_11D2C:
                 
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
 loc_11D32:
                 
                 move.l  a1,-(sp)
@@ -210,7 +206,7 @@ loc_11D32:
                 move.b  (a1),d1
                 move.w  d1,-(sp)
                 move.b  #1,(a1)
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 move.w  #$240,d0
                 move.w  #$740,d1
@@ -225,18 +221,18 @@ loc_11D64:
                 add.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
 loc_11D6C:
                 
-                move.b  $11(a0),d7
+                move.b  ENTITYDEF_OFFSET_LAYER(a0),d7
                 move.w  d7,-(sp)
-                move.w  $C(a0),-(sp)
-                move.w  $E(a0),-(sp)
-                move.w  $10(a0),-(sp)
+                move.w  ENTITYDEF_OFFSET_XDEST(a0),-(sp)
+                move.w  ENTITYDEF_OFFSET_YDEST(a0),-(sp)
+                move.w  ENTITYDEF_OFFSET_FACING(a0),-(sp)
                 move.w  d0,(a0)
-                move.w  d1,2(a0)
-                move.w  d0,$C(a0)
-                move.w  d1,$E(a0)
-                move.b  #$40,$11(a0) 
-                andi.b  #$7F,$1D(a0) 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                move.w  d1,ENTITYDEF_OFFSET_Y(a0)
+                move.w  d0,ENTITYDEF_OFFSET_XDEST(a0)
+                move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
+                move.b  #64,ENTITYDEF_OFFSET_LAYER(a0)
+                andi.b  #$7F,ENTITYDEF_OFFSET_FLAGS_B(a0) 
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11DBC
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 move.w  member(a6),d0
@@ -264,15 +260,15 @@ loc_11DDC:
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
                 andi.b  #INPUT_B|INPUT_C|INPUT_A,d0
                 beq.s   loc_11DDC
-                move.w  (sp)+,$10(a0)
+                move.w  (sp)+,ENTITYDEF_OFFSET_FACING(a0)
                 move.w  (sp)+,d1
                 move.w  (sp)+,d0
                 move.w  d0,(a0)
-                move.w  d1,2(a0)
-                move.w  d0,$C(a0)
-                move.w  d1,$E(a0)
+                move.w  d1,ENTITYDEF_OFFSET_Y(a0)
+                move.w  d0,ENTITYDEF_OFFSET_XDEST(a0)
+                move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
                 move.w  (sp)+,d7
-                move.b  d7,$11(a0)
+                move.b  d7,ENTITYDEF_OFFSET_LAYER(a0)
                 move.w  (sp)+,d0
                 move.b  d0,(a1)
                 movea.l (sp)+,a1
@@ -304,16 +300,16 @@ loc_11E54:
                 
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 jsr     (WaitForVInt).w
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11E94
                 clr.w   d0
-                tst.b   ((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 bne.s   loc_11E74
                 jsr     j_GetAllyMapSprite
                 bra.s   loc_11E82
 loc_11E74:
                 
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 bne.s   loc_11E80
                 moveq   #$3E,d4 
                 bra.s   loc_11E82
@@ -324,7 +320,7 @@ loc_11E82:
                 
                 clr.w   d0
                 clr.w   d1
-                move.b  $10(a0),d1
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
@@ -339,7 +335,7 @@ loc_11E94:
                 jsr     j_GetAllyMapSprite
                 clr.w   d0
                 clr.w   d1
-                move.b  $10(a0),d1
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
@@ -375,15 +371,13 @@ AddStatusEffectTileIndexesToVdpTileOrder:
                 subq.l  #4,a1
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 beq.s   @Return
-                
-                if (THREE_DIGITS_STATS|FULL_CLASS_NAMES=0)
-                movea.l windowTilesAddress(a6),a1
-                adda.w  #$78,a1
+                if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
+                    addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
+                    movea.l d3,a1
                 else
-                addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
-                movea.l d3,a1
+                    movea.l windowTilesAddress(a6),a1
+                    adda.w  #$78,a1
                 endif
-                
 @Return:
                 
                 rts
@@ -413,28 +407,21 @@ LoadTileDataForMemberScreen:
                 jsr     (GetWindowTileAddress).w
                 move.w  #WINDOW_MEMBER_KD_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w   
-                
-                if (ALTERNATE_JEWEL_ICONS_DISPLAY=1)
-                ; Display small jewel icons next to Bowie's mapsprite
-                tst.w   -2(a6)
-                bne.s   @SkipJewels         ; skip if anyone other than Bowie
-                move.l  a1,-(sp)
-                adda.w  #26,a1              ; offset into window layout
-                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
-                beq.s   @CheckJewelOfEvil
-                move.w  #VDPTILE_JEWEL_OF_LIGHT|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
-@CheckJewelOfEvil:
-                
-                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
-                beq.s   @SkipJewelOfEvil
-                adda.w  #2,a1
-                move.w  #VDPTILE_JEWEL_OF_EVIL|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
-@SkipJewelOfEvil:
-                
-                movea.l (sp)+,a1
-@SkipJewels:
-                endif
-                
+                if (STANDARD_BUILD&ALTERNATE_JEWEL_ICONS_DISPLAY=1)
+                    ; Display small jewel icons next to Bowie's mapsprite
+                    tst.w   -2(a6)
+                    bne.s   @SkipJewels         ; skip if anyone other than Bowie
+                    move.l  a1,-(sp)
+                    adda.w  #26,a1              ; offset into window layout
+                    chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                    beq.s   @CheckJewelOfEvil
+                    move.w  #VDPTILE_JEWEL_OF_LIGHT|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+@CheckJewelOfEvil:  chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
+                    beq.s   @SkipJewelOfEvil
+                    adda.w  #2,a1
+                    move.w  #VDPTILE_JEWEL_OF_EVIL|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+@SkipJewelOfEvil:   movea.l (sp)+,a1
+@SkipJewels:    endif
                 adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
                 move.w  member(a6),d0
                 tst.b   d0

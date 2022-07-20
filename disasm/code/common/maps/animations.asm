@@ -33,7 +33,7 @@ VInt_UpdateMapPlanes:
                 
                 bclr    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 beq.s   loc_4764
-                bsr.w   UpdateVdpPlaneA 
+                bsr.w   UpdateVdpPlaneA
                 movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
                 beq.s   loc_4764
@@ -43,7 +43,7 @@ loc_4764:
                 
                 bclr    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 beq.s   return_4770
-                bsr.w   UpdateVdpPlaneB 
+                bsr.w   UpdateVdpPlaneB
 return_4770:
                 
                 rts
@@ -60,12 +60,13 @@ VInt_UpdateMapAnimations:
                 ble.s   return_47C4
                 subq.w  #1,((TILE_ANIMATION_COUNTER-$1000000)).w
                 bne.s   return_47C4
+                
                 movea.l d0,a0
                 move.w  (a0)+,d1
                 bge.w   loc_47A2
                 clr.w   d0
                 move.b  (TILE_ANIMATION_MAP_INDEX).l,d0
-                movea.l (p_pt_MapData).l,a0
+                conditionalLongAddr movea.l, p_pt_MapData, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 movea.l $2A(a0),a0

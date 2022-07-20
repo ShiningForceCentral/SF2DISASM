@@ -7,7 +7,7 @@
 
 CheatModeConfiguration:
                 
-                if (EASY_CONFIGURATION_MODE=1)
+                if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
                     nop
                     nop
                     nop
@@ -20,13 +20,12 @@ CheatModeConfiguration:
                 
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 beq.s   loc_7E58
-                enableSram
                 btst    #7,(SAVE_FLAGS).l
-                if (SOUND_TEST_RESTORATION=1)
+                if (STANDARD_BUILD&SOUND_TEST_RESTORATION=1)
                     beq.s   loc_7E58
                     jmp     SoundTest
                 else
-                    bne.w   nullsub_7FA4
+                    bne.w   SoundTest
                 endif
 loc_7E58:
                 

@@ -59,7 +59,7 @@ rjt_cutsceneScriptCommands:
                 dc.w csc0C_jumpIfFlagSet-rjt_cutsceneScriptCommands
                 dc.w csc0D_jumpIfFlagClear-rjt_cutsceneScriptCommands
                 dc.w csc0E_jumpIfForceMemberInList-rjt_cutsceneScriptCommands
-                dc.w csc0F_jumpIfCharacterAlive-rjt_cutsceneScriptCommands
+                dc.w csc0F_jumpIfCharacterDead-rjt_cutsceneScriptCommands
                 dc.w csc10_setOrClearFlag-rjt_cutsceneScriptCommands
                 dc.w csc11_promptYesNoForStoryFlow-rjt_cutsceneScriptCommands
                 dc.w csc12_executeContextMenu-rjt_cutsceneScriptCommands
@@ -354,16 +354,18 @@ csc07_warp:
 
 ; =============== S U B R O U T I N E =======================================
 
-; make 00xx character join force with bit F set for sad join music
+; make 00xx character join force with bit 15 set for sad join music
 
 
 csc08_joinForce:
                 
                 move.w  #0,((SPEECH_SFX-$1000000)).w
-                activateMusicResuming
+                if (RESUME_MUSIC_AFTER_JOIN_JINGLE=1)
+                    activateMusicResuming
+                endif
                 jsr     (WaitForViewScrollEnd).w
                 move.w  (a6)+,d0
-                bclr    #$F,d0
+                bclr    #15,d0
                 bne.s   byte_473B0
                 sndCom  MUSIC_JOIN
                 bra.s   loc_473B4       
@@ -372,11 +374,11 @@ byte_473B0:
                 sndCom  MUSIC_SAD_JOIN
 loc_473B4:
                 
-                cmpi.w  #$80,d0 ; HARDCODED use case
+                cmpi.w  #128,d0         ; HARDCODED use case
                 bne.s   loc_473D4
-                move.w  #1,d0           ; make sarah and chester join at the same time
+                move.w  #ALLY_SARAH,d0  ; make sarah and chester join at the same time
                 jsr     j_JoinForce
-                move.w  #2,d0
+                move.w  #ALLY_CHESTER,d0
                 jsr     j_JoinForce
                 txt     447             ; "{NAME;1} the PRST and{N}{NAME;2} the KNTE{N}have joined the force."
                 bra.s   loc_473EC
@@ -391,8 +393,10 @@ loc_473EC:
                 
                 jsr     j_FadeOut_WaitForP1Input
                 clsTxt
-                moveq   #$A,d0
-                deactivateMusicResuming
+                if (RESUME_MUSIC_AFTER_JOIN_JINGLE=1)
+                    deactivateMusicResuming
+                endif
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 rts
 
@@ -512,12 +516,12 @@ return_47462:
 ; xxxx yyyyyyyy
 
 
-csc0F_jumpIfCharacterAlive:
+csc0F_jumpIfCharacterDead:
                 
                 move.w  (a6)+,d0
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                bne.w   loc_47476
+                bne.w   loc_47476       ; <-- Branch if character's current HP != 0, i.e., is alive.
                 movea.l (a6),a6
                 bra.s   return_47478
 loc_47476:
@@ -527,7 +531,7 @@ return_47478:
                 
                 rts
 
-    ; End of function csc0F_jumpIfCharacterAlive
+    ; End of function csc0F_jumpIfCharacterDead
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -626,7 +630,7 @@ csc13_setStoryFlag:
 sub_474EE:
                 
                 moveq   #0,d0
-                move.b  #MAP_GALAM_CASTLE_INNER,((CURRENT_MAP-$1000000)).w
+                setSavedByte #MAP_GALAM_CASTLE_INNER, CURRENT_MAP
                 bsr.w   RunMapSetupEntityEvent
                 rts
 

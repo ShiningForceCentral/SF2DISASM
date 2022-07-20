@@ -7,31 +7,17 @@ aSegaEverDrive: dc.b 'SEGA EVERDRIVE  '
 
 ; =============== S U B R O U T I N E =======================================
 
-; Return "equal" when test completes successfully
-
-TestSram:
-                lea     aSegaEverDrive(pc), a0
-                movea.l #SRAM_TEST_SPACE,a1
-                moveq   #15,d1
-                
-@Loop:          
-                move.b  (a0),(a1)
-                cmpm.b  (a0)+,(a1)+
-                bne.s   @Break
-                clr.b   -1(a1)      ; clear test space as we parse it
-                lea     1(a1),a1
-                dbf     d1,@Loop
-                
-@Break:
-                rts
-
-    ; End of function TestSram
-
-
-; =============== S U B R O U T I N E =======================================
-
 
 InitMapper:
+                ; Init ROM banks
+                move.b  #1,(ROM_BANK1).l
+                move.b  #2,(ROM_BANK2).l
+                move.b  #3,(ROM_BANK3).l
+                move.b  #4,(ROM_BANK4).l
+                move.b  #5,(ROM_BANK5).l
+                move.b  #6,(ROM_BANK6).l
+                move.b  #7,(ROM_BANK7).l
+                
                 ; Determine SRAM control method
                 moveq   #0,d0
                 move.b  #1,(SEGA_MAPPER_CTRL0).l    ; test SRAM enable method 0 (SEGA mapper)
@@ -74,17 +60,6 @@ InitMapper:
 @Success:
                 ; Save first tested working SRAM control method
                 move.b  d0,((SRAM_CONTROL-$1000000)).w 
-                bsr.s   DisableMapperSram
-                
-                ; Init ROM banks
-                move.b  #1,(ROM_BANK1).l
-                move.b  #2,(ROM_BANK2).l
-                move.b  #3,(ROM_BANK3).l
-                move.b  #4,(ROM_BANK4).l
-                move.b  #5,(ROM_BANK5).l
-                move.b  #6,(ROM_BANK6).l
-                move.b  #7,(ROM_BANK7).l
-                
                 rts
 
     ; End of function InitMapper
@@ -92,8 +67,41 @@ InitMapper:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Return "equal" when test completes successfully
 
-DisableMapperSram:
+TestSram:
+                lea     aSegaEverDrive(pc), a0
+                movea.l #SRAM_TEST_SPACE,a1
+                moveq   #15,d1
+                
+@Loop:          
+                move.b  (a0),(a1)
+                cmpm.b  (a0)+,(a1)+
+                bne.s   @Break
+                clr.b   -1(a1)      ; clear test space as we parse it
+                lea     1(a1),a1
+                dbf     d1,@Loop
+                
+@Break:
+                rts
+
+    ; End of function TestSram
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+ControlMapper_DisableSramAndSwitchRomBanks:
+                bsr.s   ControlMapper_DisableSram
+                
+ControlMapper_SwitchRomBanks:
+                move.b  #8,(ROM_BANK4).l
+                move.b  #9,(ROM_BANK5).l
+                move.b  #10,(ROM_BANK6).l
+                move.b  #11,(ROM_BANK7).l
+                rts
+                
+ControlMapper_DisableSram:
                 move.w  d0,-(sp)
                 clr.w   d0
                 move.b  ((SRAM_CONTROL-$1000000)).w,d0
@@ -122,13 +130,23 @@ DisableMapperSram:
                 move.w  (sp)+,d0
                 rts
 
-    ; End of function DisableMapperSram
+    ; End of function ControlMapper_DisableSram
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-EnableMapperSram:
+ControlMapper_RestoreRomBanks:
+                move.b  #4,(ROM_BANK4).l
+                move.b  #5,(ROM_BANK5).l
+                move.b  #6,(ROM_BANK6).l
+                move.b  #7,(ROM_BANK7).l
+                rts
+                
+ControlMapper_RestoreRomBanksAndEnableSram:
+                bsr.s   ControlMapper_RestoreRomBanks
+                
+ControlMapper_EnableSram:
                 move.w  d0,-(sp)
                 clr.w   d0
                 move.b  ((SRAM_CONTROL-$1000000)).w,d0
@@ -161,4 +179,5 @@ EnableMapperSram:
                 move.w  (sp)+,d0
                 rts
 
-    ; End of function EnableMapperSram
+    ; End of function ControlMapper_EnableSram
+

@@ -45,7 +45,7 @@ tbl_SpellNames: spellName "HEAL"
                 spellName "KIWI"
                 spellName "SHINE"
                 spellName "ODDEYE"
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                     spellName "spell44"
                     spellName "spell45"
                     spellName "spell46"

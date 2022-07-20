@@ -7,6 +7,7 @@
 
 DebugModeActionSelect:
                 
+                module
                 movem.l d0-d3/a0,-(sp)
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 moveq   #0,d0
@@ -14,43 +15,26 @@ DebugModeActionSelect:
                 moveq   #6,d2
                 jsr     j_NumberPrompt
                 cmpi.b  #$FF,d0
-                beq.w   loc_9B3E
+                beq.w   @Done
                 move.w  d0,(a0)+
                 add.w   d0,d0
                 move.w  rjt_DebugModeBattleactions(pc,d0.w),d0
                 jmp     rjt_DebugModeBattleactions(pc,d0.w)
-
-    ; End of function DebugModeActionSelect
-
 rjt_DebugModeBattleactions:
-                dc.w sub_9AD0-rjt_DebugModeBattleactions
-                dc.w sub_9ADA-rjt_DebugModeBattleactions
-                dc.w sub_9B06-rjt_DebugModeBattleactions
-                dc.w sub_9B2C-rjt_DebugModeBattleactions
-                dc.w sub_9B30-rjt_DebugModeBattleactions
-                dc.w sub_9B34-rjt_DebugModeBattleactions
-                dc.w sub_9B38-rjt_DebugModeBattleactions
-
-; =============== S U B R O U T I N E =======================================
-
-; attack
-
-
-sub_9AD0:
+                
+                dc.w @Attack-rjt_DebugModeBattleactions
+                dc.w @Magic-rjt_DebugModeBattleactions
+                dc.w @Item-rjt_DebugModeBattleactions
+                dc.w @EndTurn-rjt_DebugModeBattleactions
+                dc.w @BurstRock-rjt_DebugModeBattleactions
+                dc.w @Muddle-rjt_DebugModeBattleactions
+                dc.w @PrismLaser-rjt_DebugModeBattleactions
+@Attack:
                 
                 bsr.w   DebugModeSelectTargetEnemy
                 move.w  d0,(a0)+
-                bra.w   loc_9B3E
-
-    ; End of function sub_9AD0
-
-
-; =============== S U B R O U T I N E =======================================
-
-; use magic
-
-
-sub_9ADA:
+                bra.w   @Done
+@Magic:
                 
                 moveq   #1,d0
                 moveq   #1,d1
@@ -61,27 +45,18 @@ sub_9ADA:
                 lsl.w   #6,d3
                 moveq   #0,d0
                 moveq   #0,d1
-                moveq   #$2A,d2 
+                moveq   #SPELLENTRY_SPELLS_NUMBER,d2
                 jsr     j_NumberPrompt
                 add.w   d3,d0
                 move.w  d0,(a0)+
                 bsr.w   DebugModeSelectTargetEnemy
                 move.w  d0,(a0)+
-                bra.w   loc_9B3E
-
-    ; End of function sub_9ADA
-
-
-; =============== S U B R O U T I N E =======================================
-
-; use item
-
-
-sub_9B06:
+                bra.w   @Done
+@Item:
                 
                 moveq   #0,d0
                 moveq   #0,d1
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                     move.w  #ITEMINDEX_MAX,d2
                 else
                     moveq   #ITEMINDEX_MAX,d2
@@ -95,62 +70,27 @@ sub_9B06:
                 moveq   #3,d2
                 jsr     j_NumberPrompt
                 move.w  d0,(a0)+
-                bra.w   loc_9B3E
-
-    ; End of function sub_9B06
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_9B2C:
+                bra.w   @Done
+@EndTurn:
                 
-                bra.w   loc_9B3E
-
-    ; End of function sub_9B2C
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_9B30:
+                bra.w   @Done
+@BurstRock:
                 
-                bra.w   loc_9B3E
-
-    ; End of function sub_9B30
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_9B34:
+                bra.w   @Done
+@Muddle:
                 
-                bra.w   loc_9B3E
-
-    ; End of function sub_9B34
-
-
-; =============== S U B R O U T I N E =======================================
-
-; use prism laser
-
-
-sub_9B38:
+                bra.w   @Done
+@PrismLaser:
                 
-                move.b  #BATTLE_VERSUS_PRISM_FLOWERS,((CURRENT_BATTLE-$1000000)).w
-
-    ; End of function sub_9B38
-
-
-; START OF FUNCTION CHUNK FOR DebugModeActionSelect
-
-loc_9B3E:
+                setSavedByte #BATTLE_VERSUS_PRISM_FLOWERS, CURRENT_BATTLE
+@Done:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-; END OF FUNCTION CHUNK FOR DebugModeActionSelect
+    ; End of function DebugModeActionSelect
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

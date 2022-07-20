@@ -4,6 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: a1 = window tiles address, d0.w = selected member index
+
 currentMember = -16
 windowTilesAddress = -6
 selectedMember = -2
@@ -83,14 +85,8 @@ WriteMemberListText:
                 
                 ; Write class name
                 move.w  currentMember(a6),d0
-                
-                if (FULL_CLASS_NAMES=0)
                 jsr     j_GetClass
                 jsr     j_GetClassName
-                else
-                jsr     GetClassAndFullName
-                endif
-                
                 moveq   #-58,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movea.l (sp)+,a1

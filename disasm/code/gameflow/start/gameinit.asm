@@ -9,9 +9,11 @@ InitGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
-                if (DISABLE_REGION_LOCK=0)
+                if (regionFreeRom=0)
                     bsr.w   CheckRegion
                 endif
+                
+                enableSram
                 jsr     j_NewGame
                 jsr     j_DisplaySegaLogo
                 bne.w   loc_71EC
@@ -19,8 +21,7 @@ InitGame:
                 beq.w   GameIntro
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   WaitForVInt
-                
-                if (EASY_BATTLE_TEST=1)
+                if (STANDARD_BUILD&EASY_BATTLE_TEST=1)
                     bra.w   DebugModeBattleTest
                     nop
                     nop
@@ -28,7 +29,6 @@ InitGame:
                     btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                     beq.s   loc_7118
                 endif
-                
                 jsr     (EnableDisplayAndInterrupts).w
                 bsr.w   InitDisplay
                 jsr     (EnableDisplayAndInterrupts).w

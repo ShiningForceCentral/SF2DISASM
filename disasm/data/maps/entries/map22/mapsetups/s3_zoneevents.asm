@@ -25,7 +25,7 @@ Map22_ZoneEvent0:
                 beq.s   return_59600
                 chkFlg  522             ; Battle 22 completed - BATTLE_CHESSBOARD                  
                 bne.s   return_59600
-                move.b  #$16,((EGRESS_MAP_INDEX-$1000000)).w
+                setSavedByte #MAP_CREED_DESKTOP_WORLD, EGRESS_MAP
                 script  cs_5994E
 return_59600:
                 

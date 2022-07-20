@@ -9,16 +9,6 @@ DebugModeBattleTest:
                 
                 move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
                 move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
-                
-                if (FORCE_MEMBERS_EXPANSION=1)
-                move.w  #COMBATANT_ALLIES_COUNTER-1,d1
-                moveq   #1,d0
-@JoinForce_Loop:
-                
-                bsr.w   JoinForce
-                addq.w  #1,d0
-                dbf     d1,@JoinForce_Loop
-                else
                 moveq   #ALLY_SARAH,d0
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CHESTER,d0
@@ -77,8 +67,12 @@ DebugModeBattleTest:
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
+                if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
+                    moveq   #30,d0
+                    bsr.w   JoinForce
+                    moveq   #31,d0
+                    bsr.w   JoinForce
                 endif
-                
                 moveq   #0,d0
                 move.w  #$63,d1 
                 bsr.w   j_SetBaseAGI
@@ -138,15 +132,21 @@ loc_7820:
                 movem.w (sp)+,d0-d4
                 clr.w   d1
                 move.b  d0,d1
-                mulu.w  #7,d0
-                conditionalPc lea,BattleMapCoordinates,a0
-                nop
+                mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
+                conditionalPc lea,BattleMapCoordinates,a0,nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
-                move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    move.b  (a0)+,(BATTLE_AREA_X).l
+                    move.b  (a0)+,(BATTLE_AREA_Y).l
+                    move.b  (a0)+,(BATTLE_AREA_WIDTH).l
+                    move.b  (a0)+,(BATTLE_AREA_HEIGHT).l
+                else
+                    move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
+                    move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
+                    move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
+                    move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
+                endif
                 jsr     j_BattleLoop
                 jsr     j_ChurchMenuActions
                 txt     460             ; "Shop number?{D1}"
@@ -226,11 +226,12 @@ LevelUpWholeForce:
                 
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
-loc_7924:
+@Loop:
                 
                 bsr.w   j_LevelUp
                 addq.w  #1,d0
-                dbf     d7,loc_7924
+                dbf     d7,@Loop
+                
                 rts
 
     ; End of function LevelUpWholeForce

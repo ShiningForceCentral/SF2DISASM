@@ -47,7 +47,7 @@ DisplaySegaLogo:
                 move.l  #tbl_ConfigurationModeInputSequence,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                if (EASY_CONFIGURATION_MODE=1)
+                if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
                     dc.l VInt_ActivateConfigurationModeCheat
                 else
                     dc.l VInt_CheckConfigurationModeCheat
@@ -56,7 +56,7 @@ DisplaySegaLogo:
                 move.l  #tbl_DebugModeInputSequence,((ENTITY_WALKING_PARAMS-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                if (EASY_DEBUG_MODE=1)
+                if (STANDARD_BUILD&EASY_DEBUG_MODE=1)
                     dc.l VInt_ActivateDebugModeCheat
                 else
                     dc.l VInt_CheckDebugModeCheat
@@ -103,7 +103,7 @@ DisplaySegaLogo:
                 subq.w  #1,d0
                 bne.s   @WaitForInput_Start
                 
-                if (EASY_CONFIGURATION_MODE=1)
+                if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
                     nop
                     nop
                     nop

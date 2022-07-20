@@ -29,10 +29,8 @@ loc_7428:
                 tst.w   d0
                 bmi.s   byte_73C2       
                 subq.w  #1,d0
-                setCurrentSaveSlot
+                setCurrentSaveSlot d0
                 jsr     j_NewGame
-byte_743E:
-                
                 clsTxt
                 clr.w   d0
                 jsr     j_NameAlly
@@ -80,14 +78,13 @@ loc_74A8:
                 txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
 loc_74B4:
                 
-                getCurrentSaveSlot
-                move.b  #MAP_GRANSEAL,((CURRENT_MAP-$1000000)).w
-                move.b  #MAP_GRANSEAL,((EGRESS_MAP_INDEX-$1000000)).w
+                getCurrentSaveSlot d0
+                setSavedByte #MAP_GRANSEAL, CURRENT_MAP
+                setSavedByte #MAP_GRANSEAL, EGRESS_MAP
                 bsr.w   SaveGame
-                disableSram
                 clsTxt
                 move.b  #MAP_GRANSEAL,d0 ; HARDCODED new game starting map
-                move.w  #$38,d1 ; HARDCODED main entity starting X
+                move.w  #56,d1          ; HARDCODED main entity starting X
                 move.w  #3,d2           ; HARDCODED main entity starting Y
                 move.w  #DOWN,d3        ; HARDCODED main entity starting facing
                 moveq   #1,d4
@@ -122,9 +119,8 @@ loc_74FE:
                 tst.w   d0
                 bmi.w   byte_73C2       
                 subq.w  #1,d0
-                setCurrentSaveSlot
+                setCurrentSaveSlot d0
                 bsr.w   LoadGame
-                disableSram
                 txt     226             ; "{NAME;0}, yes!  I knew it!{W2}"
                 bsr.w   CheatModeConfiguration
                 txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
@@ -137,7 +133,7 @@ loc_74FE:
 loc_753A:
                 
                 clr.w   d0
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
                 jsr     GetSavePointForMap(pc)
                 nop
                 moveq   #$FFFFFFFF,d4
@@ -190,12 +186,12 @@ loc_7590:
                 tst.w   d0
                 bmi.w   byte_73C2       
                 subq.w  #1,d0
-                setCurrentSaveSlot
+                setCurrentSaveSlot d0
                 txt     230             ; "Delete?  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.w   byte_73C2       
-                getCurrentSaveSlot
+                getCurrentSaveSlot d0
                 bsr.w   ClearSaveSlotFlag
                 txt     231             ; "Hee, hee!  It's gone!{W2}"
                 bra.w   byte_73C2       

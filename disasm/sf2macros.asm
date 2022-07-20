@@ -9,224 +9,43 @@
     include "sf2battlescenemacros.asm"
 
 align: macro
-    if (narg=1)
+    case narg
+=0  ; If no arguments given, align to word boundary.
+    dcb.b *%2,$FF
+=1  ; If given an address argument only, pad with $FF.
     dcb.b \1-(*%\1),$FF
-    else
+=?  ; If two arguments or more, pad with second argument.
     dcb.b \1-(*%\1),\2
-    endc
+    endcase
     endm
     
-wordAlign: macro
-    dcb.b *%2,$FF
+wordAlign: macro ;alias
+    align
     endm
-	
+    
+    
+; ---------------------------------------------------------------------------
+; ROM Header
+; ---------------------------------------------------------------------------
+    
 declareSystemId: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
     dc.b 'SEGA SSF        '
     else
     dc.b 'SEGA GENESIS    '
     endc
     endm
     
-declareRomEnd:	macro
-	if (EXPANDED_ROM=1)
+declareRomEnd: macro
+    if (expandedRom=1)
     dc.l $3FFFFF
     else
-	dc.l $1FFFFF
-	endc
-	endm	
-
-enableSram:	macro
-	if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    if (*<$8000)
-    bsr.w   EnableMapperSram
-    else
-    jsr     (EnableMapperSram).w
-    endc
-    elseif (EXPANDED_ROM=1)
-	move.b  #3,(SEGA_MAPPER_CTRL0).l
-	endc
-	endm
-	
-disableSram:	macro
-	if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    if (*<$8000)
-    bsr.w   DisableMapperSram
-    else
-    jsr     (DisableMapperSram).w
-    endc
-    elseif (EXPANDED_ROM=1)
-	move.b  #0,(SEGA_MAPPER_CTRL0).l
-	endc
-	endm
-
-getCurrentSaveSlot: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    move.b  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
-    else
-    move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
-    endc
-    endm
-    
-setCurrentSaveSlot: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    move.b  d0,((CURRENT_SAVE_SLOT-$1000000)).w
-    else
-    move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
-    endc
-    endm
-    
-getEnemyBattlespritePointer: macro
-    movea.l (p_pt_EnemyBattleSprites).l,a0
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    move.b  #8,(ROM_BANK6).l
-    move.b  #9,(ROM_BANK7).l
-    endc
-    endm
-    
-getAllyBattlespritePointer: macro
-    movea.l (p_pt_AllyBattleSprites).l,a0
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    move.b  #10,(ROM_BANK6).l
-    move.b  #11,(ROM_BANK7).l
-    endc
-    endm
-    
-restoreRomBanks: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    move.b  #6,(ROM_BANK6).l
-    move.b  #7,(ROM_BANK7).l
-    endc
-    endm
-    
-dmaBattlespriteFrame: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    jsr     (ApplyImmediateVramDmaOnCompressedTiles).w
-    move.b  #6,(ROM_BANK6).l
-    move.b  #7,(ROM_BANK7).l
-    rts
-    else
-    jmp     (ApplyImmediateVramDmaOnCompressedTiles).w
-    endc
-    endm
-    
-waitForBattlespriteDma: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    jsr     (WaitForDmaQueueProcessing).w
-    move.b  #6,(ROM_BANK6).l
-    move.b  #7,(ROM_BANK7).l
-    rts
-    else
-    jmp     (WaitForDmaQueueProcessing).w
-    endc
-    endm
-    
-loadBattlesprite: macro
-    if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    jsr     (LoadCompressedData).w
-    move.b  #6,(ROM_BANK6).l
-    move.b  #7,(ROM_BANK7).l
-    rts
-    else
-    jmp     (LoadCompressedData).w
-    endc
-    endm
-
-
-conditionalRomExpand:	macro
-	if (EXPANDED_ROM&EXTENDED_SSF_MAPPER=1)
-    include "layout\sf2-expanded-19-0x200000-0x600000.asm"
-    elseif (EXPANDED_ROM=1)
-	include "layout\sf2-expanded-19-0x200000-0x400000.asm"
-	endc
-	endm
-	
-conditionalPc:	macro
-	if (EXPANDED_ROM=0)
-	\1 \2(pc),\3
-	else
-	\1 \2,\3
-	endc
-	endm
-	
-conditionalBsr:	macro
-	if (EXPANDED_ROM=0)
-	bsr.w \1
-	else
-	jsr \1
-	endc
-	endm
-	
-conditionalWordAddr:	macro
-	if (EXPANDED_ROM=0)
-	\1 (\2).w,\3
-	else
-	\1 (\2).l,\3
-	endc
-	endm	
-	
-alignIfVanillaRom:	macro
-	if (EXPANDED_ROM=0)
-	align \1
-	endc
-	endm
-	
-alignIfExpandedRom:	macro
-	if (EXPANDED_ROM=1)
-	align \1
-	endc
-	endm
-	
-wordAlignIfExpandedRom:	macro
-	if (EXPANDED_ROM=1)
-	wordAlign
-	endc
-	endm
-	
-bsrIfVanillaRom:	macro
-	if (EXPANDED_ROM=0)
-	bsr.\0 \1
-	endc
-	endm
-	
-equIfVanillaRom:	macro
-	if (EXPANDED_ROM=0)
-\1: equ \2
-    endc
-    endm
-    
-equIfExpandedRom: macro
-    if (EXPANDED_ROM=1)
-\1: equ \2
-    endc
-    endm
-    
-includeIfVanillaRom: macro
-    if (EXPANDED_ROM=0)
-    include \1
-    endc
-    endm
-    
-incbinIfVanillaRom: macro
-    if (EXPANDED_ROM=0)
-    incbin \1
-    endc
-    endm
-    
-includeIfExpandedRom: macro
-    if (EXPANDED_ROM=1)
-    include \1
-    endc
-    endm
-    
-incbinIfExpandedRom: macro
-    if (EXPANDED_ROM=1)
-    incbin \1
+    dc.l $1FFFFF
     endc
     endm
     
 declareSramEnd: macro
-    if (EXPANDED_SRAM=1)
+    if (expandedSram=1)
     dc.l $20FFFF
     else
     dc.l $203FFF
@@ -234,12 +53,565 @@ declareSramEnd: macro
     endm
     
 declareRegionSupport: macro
-    if (DISABLE_REGION_LOCK=1)
+    if (regionFreeRom=1)
     dc.b 'JUE             '
     else
     dc.b 'U               '
     endc
     endm
+    
+    
+; ---------------------------------------------------------------------------
+; Expanded ROM
+; ---------------------------------------------------------------------------
+    
+getCurrentSaveSlot: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    move.b  ((CURRENT_SAVE_SLOT-$1000000)).w,\1
+    else
+    move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,\1
+    endc
+    endm
+    
+setCurrentSaveSlot: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    move.b  \1,((CURRENT_SAVE_SLOT-$1000000)).w
+    else
+    move.w  \1,((CURRENT_SAVE_SLOT-$1000000)).w
+    endc
+    endm
+    
+enableSram: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jsr     (ControlMapper_EnableSram).w
+    elseif (expandedRom=1)
+    move.b  #1,(SEGA_MAPPER_CTRL0).l
+    endc
+    endm
+    
+enableSramAndReturn: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jmp     (ControlMapper_EnableSram).w
+    elseif (expandedRom=1)
+    move.b  #1,(SEGA_MAPPER_CTRL0).l
+    rts
+    else
+    rts
+    endc
+    endm
+    
+disableSram: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jsr     (ControlMapper_DisableSram).w
+    elseif (expandedRom=1)
+    move.b  #0,(SEGA_MAPPER_CTRL0).l
+    endc
+    endm
+    
+disableSramAndSwitchRomBanks: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jsr     (ControlMapper_DisableSramAndSwitchRomBanks).w
+    elseif (expandedRom=1)
+    move.b  #0,(SEGA_MAPPER_CTRL0).l
+    endc
+    endm
+    
+switchRomBanks: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jsr     (ControlMapper_SwitchRomBanks).w
+    endc
+    endm
+    
+restoreRomBanks: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jsr     (ControlMapper_RestoreRomBanks).w
+    endc
+    endm
+    
+restoreRomBanksAndEnableSram: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    jsr     (ControlMapper_RestoreRomBanksAndEnableSram).w
+    elseif (expandedRom=1)
+    move.b  #1,(SEGA_MAPPER_CTRL0).l
+    endc
+    endm
+    
+processDmaAndRestoreMemoryMap: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    pea     (\3).w
+    pea     (\2).w
+    jmp     (\1).w
+    elseif (expandedRom=1)
+    jsr     (\1).w
+    jsr     (\2).w
+    move.b  #1,(SEGA_MAPPER_CTRL0).l
+    rts
+    else
+    jsr     (\1).w
+    jmp     (\2).w
+    endc
+    endm
+    
+processDmaAndEnableSram: macro
+    processDmaAndRestoreMemoryMap \1, WaitForDmaQueueProcessing, ControlMapper_EnableSram
+    endm
+    
+processDmaRestoreRomBanksAndEnableSram: macro
+    processDmaAndRestoreMemoryMap \1, WaitForDmaQueueProcessing, ControlMapper_RestoreRomBanksAndEnableSram
+    endm
+    
+loadCompressedDataRestoreRomBanksAndEnableSram: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    pea     (ControlMapper_RestoreRomBanksAndEnableSram).w
+    jmp     (LoadCompressedData).w
+    elseif (expandedRom=1)
+    jsr     (LoadCompressedData).w
+    move.b  #1,(SEGA_MAPPER_CTRL0).l
+    rts
+    else
+    jmp     (LoadCompressedData).w
+    endc
+    endm
+    
+conditionalMapperInit: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    bsr.w   InitMapper
+    endc
+    endm
+    
+conditionalRomExpand: macro
+    if (expandedRom=1)
+    include "layout\sf2-expanded-19.asm"
+    endc
+    endm
+    
+conditionalPc: macro
+    if (expandedRom=1)
+    \1 \2,\3
+    else
+    \1 \2(pc),\3
+    \4
+    endc
+    endm
+    
+conditionalWordAddr: macro
+    if (expandedRom=1)
+    \1 (\2).l,\3
+    else
+    \1 (\2).w,\3
+    endc
+    endm
+    
+conditionalLongAddr: macro
+    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
+    \1 (\2).w,\3
+    else
+    \1 (\2).l,\3
+    endc
+    endm
+    
+alignIfVanillaLayout: macro
+    if (STANDARD_BUILD=0)
+    align \1
+    mexit
+    endc
+    if (OPTIMIZED_ROM_LAYOUT=1)
+    align
+    else
+    align \1
+    endc
+    endm
+    
+alignIfOptimizedLayout: macro
+    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
+    align \1
+    endc
+    endm
+    
+alignIfExtendedSsf: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    align \1
+    else
+    align \2
+    endc
+    endm
+    
+objIfExtendedSsf: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    obj \1
+    endc
+    endm
+    
+objendIfExtendedSsf: macro
+    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    objend
+    endc
+    endm
+    
+includeIfVanillaRom: macro
+    if (STANDARD_BUILD=0)
+    include \1
+    mexit
+    endc
+    if (expandedRom=0)
+    include \1
+    endc
+    endm
+    
+incbinIfVanillaRom: macro
+    if (STANDARD_BUILD=0)
+    incbin \1
+    mexit
+    endc
+    if (expandedRom=0)
+    incbin \1
+    endc
+    endm
+    
+includeIfExpandedRom: macro
+    if (expandedRom=1)
+    include \1
+    endc
+    endm
+    
+incbinIfExpandedRom: macro
+    if (expandedRom=1)
+    incbin \1
+    endc
+    endm
+    
+includeIfVanillaLayout: macro
+    if (STANDARD_BUILD=0)
+    include \1
+    mexit
+    endc
+    if (OPTIMIZED_ROM_LAYOUT=0)
+    include \1
+    endc
+    endm
+    
+includeIfOptimizedLayout: macro
+    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
+    include \1
+    endc
+    endm
+    
+    
+; ---------------------------------------------------------------------------
+; Relocated saved data to SRAM
+; ---------------------------------------------------------------------------
+    
+loadSavedDataAddress: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    lea     (\1).l,\2
+    else
+    lea     ((\1-$1000000)).w,\2
+    endc
+    endm
+    
+checkSavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+dest: equs '(\2).l'
+    else
+dest: equs '((\2-$1000000)).w'
+    endc
+    if (instr('\1','#')=0)
+src: equs '\1'
+    else
+src: substr 2,,'\1'
+    endc
+    if (\src=0)
+    tst.b   \dest
+    else
+    cmpi.b  \1,\dest
+    endc
+    endm
+    
+clearSavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    clr.b   (\1).l
+    else
+    clr.b   ((\1-$1000000)).w
+    endc
+    endm
+    
+clearSavedByteWithPostIncrement: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    clr.b   (\1)
+    addq.w  #2,\1
+    else
+    clr.b   (\1)+
+    endc
+    endm
+    
+copySavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.b  (\1).l,(\2).l
+    else
+    move.b  ((\1-$1000000)).w,((\2-$1000000)).w
+    endc
+    endm
+    
+getSavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.b  (\1).l,\2
+    else
+    move.b  ((\1-$1000000)).w,\2
+    endc
+    endm
+    
+setSavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.b  \1,(\2).l
+    else
+    move.b  \1,((\2-$1000000)).w
+    endc
+    endm
+    
+setSavedByteWithPostIncrement: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.b  \1,(\2)
+    addq.w  #2,\2
+    else
+    move.b  \1,(\2)+
+    endc
+    endm
+    
+addToSavedByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    addq.b  \1,(\2).l
+    else
+    addq.b  \1,((\2-$1000000)).w
+    endc
+    endm
+    
+getSavedWord: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    if (narg>=3)
+disp: equs '\3'
+    else
+disp: equs '0'
+    endc
+    movep.w \disp\\1,\2
+    else
+    move.w  \3\\1,\2
+    endc
+    endm
+    
+getSavedWordWithPostIncrement: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    if (narg>=3)
+disp: equs '\3'
+    else
+disp: equs '0'
+    endc
+    movep.w \disp\(\1),\2
+    addq.w  #4,\1
+    else
+    move.w  (\1)+,\2
+    endc
+    endm
+    
+setSavedWord: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    if (narg>=3)
+disp: equs '\3'
+    else
+disp: equs '0'
+    endc
+    movep.w \1,\disp\\2
+    else
+    move.w  \1,\3\\2
+    endc
+    endm
+    
+setSavedWordWithPostIncrement: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    movep.w \1,0(\2)
+    addq.w  #4,\2
+    else
+    move.w  \1,(\2)+
+    endc
+    endm
+    
+setSavedLongWithPostIncrement: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    movep.l \1,0(\2)
+    addq.w  #8,\2
+    else
+    move.l  \1,(\2)+
+    endc
+    endm
+    
+getSavedCombatantByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.l  a0,-(sp)
+    bsr.w   GetCombatantEntryAddress
+    clr.w   d1
+    move.b  \1(a0),d1
+    movea.l (sp)+,a0
+    else
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   GetCombatantByte
+    movem.l (sp)+,d7-a0
+    endc
+    endm
+    
+getSavedCombatantWord: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.l  a0,-(sp)
+    bsr.w   GetCombatantEntryAddress
+    movep.w \1(a0),d1
+    tst.w   d1
+    movea.l (sp)+,a0
+    else
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   GetCombatantWord
+    movem.l (sp)+,d7-a0
+    endc
+    endm
+    
+getSavedCombatantPosition: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.l  a0,-(sp)
+    bsr.w   GetCombatantEntryAddress
+    move.b  \1(a0),d1
+    ext.w   d1
+    movea.l (sp)+,a0
+    else
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   GetCombatantByte
+    ext.w   d1
+    movem.l (sp)+,d7-a0
+    endc
+    endm
+    
+setSavedCombatantByte: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.l  a0,-(sp)
+    bsr.w   GetCombatantEntryAddress
+    move.b  d1,\1(a0)
+    movea.l (sp)+,a0
+    else
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   SetCombatantByte
+    movem.l (sp)+,d7-a0
+    endc
+    endm
+    
+setSavedCombatantWord: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    move.l  a0,-(sp)
+    bsr.w   GetCombatantEntryAddress
+    movep.w d1,\1(a0)
+    movea.l (sp)+,a0
+    else
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   SetCombatantWord
+    movem.l (sp)+,d7-a0
+    endc
+    endm
+    
+manipulateEquippedBit: macro
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+equippedBit: equs "#ITEMENTRY_UPPERBIT_EQUIPPED"
+entryoffset: equs "0"
+    else
+equippedBit: equs "#ITEMENTRY_BIT_EQUIPPED"
+entryoffset: equs "ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT"
+    endc
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    \1    \equippedBit,COMBATANT_OFFSET_ITEMS+\entryoffset\\2
+    else
+    \1    \equippedBit,\entryoffset\\2
+    endc
+    endm
+    
+isItemEquipped: macro
+    manipulateEquippedBit btst,\1
+    endm
+    
+equipItem: macro
+    manipulateEquippedBit bset,\1
+    endm
+    
+unequipItem: macro
+    manipulateEquippedBit bclr,\1
+    endm
+    
+breakItem: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    bset    #ITEMENTRY_UPPERBIT_BROKEN,COMBATANT_OFFSET_ITEMS\1
+    else
+    bset    #ITEMENTRY_UPPERBIT_BROKEN,\1
+    endc
+    endm
+    
+repairItem: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    bclr    #ITEMENTRY_UPPERBIT_BROKEN,COMBATANT_OFFSET_ITEMS\1
+    else
+    bclr    #ITEMENTRY_UPPERBIT_BROKEN,\1
+    endc
+    endm
+    
+checkRaftMap: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    cmp.b   (RAFT_MAP).l,\1
+    else
+    cmp.b   ((RAFT_MAP-$1000000)).w,\1
+    endc
+    endm
+    
+getBattleTurnActor: macro
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    lea     (BATTLE_TURN_ORDER).l,a0
+    move.b  CURRENT_BATTLE_TURN-BATTLE_TURN_ORDER(a0),\1
+    else
+    move.b  ((CURRENT_BATTLE_TURN-$1000000)).w,\1
+    lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
+    endc
+    move.b  (a0,\1.w),\1
+    endm
+    
+    
+; ---------------------------------------------------------------------------
+; Items and spells expansion
+; ---------------------------------------------------------------------------
+    
+getStartingItem: macro
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+    move.w  \1,\2
+    else
+    move.b  \1,\2
+    endc
+    endm
+    
+getSpellDefsCounter: macro
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+    move.w  #SPELLDEFS_COUNTER,\1
+    else
+    moveq   #SPELLDEFS_COUNTER,\1
+    endc
+    endm
+    
+addIconOffset: macro
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+    adda.l  \1,\2
+    else
+    adda.w  \1,\2
+    endc
+    endm
+    
+    
+; ---------------------------------------------------------------------------
+; Traps
+; ---------------------------------------------------------------------------
     
 sndCom: macro
     trap #SOUND_COMMAND
@@ -247,13 +619,13 @@ sndCom: macro
     endm
     
 deactivateMusicResuming: macro
-    if (MUSIC_RESUMING=1)
+    if (STANDARD_BUILD&MUSIC_RESUMING=1)
     sndCom SOUND_COMMAND_DEACTIVATE_RESUMING
     endc
     endm
 
 activateMusicResuming: macro
-    if (MUSIC_RESUMING=1)
+    if (STANDARD_BUILD&MUSIC_RESUMING=1)
     sndCom SOUND_COMMAND_ACTIVATE_RESUMING
     endc
     endm
@@ -293,45 +665,6 @@ script: macro
     trap #MAPSCRIPT
     endm
     
-testEquippedBit: macro
-    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-    btst    #ITEMENTRY_UPPERBIT_EQUIPPED,\1
-    else
-    btst    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
-    endc
-    endm
-    
-setEquippedBit: macro
-    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-    bset    #ITEMENTRY_UPPERBIT_EQUIPPED,\1
-    else
-    bset    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
-    endc
-    endm
-    
-clearEquippedBit: macro
-    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-    bclr    #ITEMENTRY_UPPERBIT_EQUIPPED,\1
-    else
-    bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT\1
-    endc
-    endm
-    
-readStartingItemEntry: macro
-    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-    move.w  (a0)+,d3
-    else
-    move.b  (a0)+,d3
-    endc
-    endm
-    
-addJewelIconOffset: macro
-    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-    adda.l  d1,a0
-    else
-    adda.w  d1,a0
-    endc
-    endm
     
 ; ---------------------------------------------------------------------------
 ; Data definition macros
@@ -632,7 +965,7 @@ weaponPalette: macro
     endm
     
 weaponGraphics: macro
-    if (narg=3) ; declare item index when ITEMS_AND_SPELLS_EXPANSION patch is enabled
+    if (narg=3) ; declare item index when EXPANDED_ITEMS_AND_SPELLS patch is enabled
     itemIndex \1
     shift
     endc
@@ -668,7 +1001,7 @@ promotionItems: macro
     endr
     endm
     
-blacksmithClasses: macro
+classes: macro
     dc.w narg
     rept narg
     defineShorthand.w CLASS_,\1
@@ -676,12 +1009,12 @@ blacksmithClasses: macro
     endr
     endm
     
-mithrilWeaponClass: macro
-    dc.w narg
-    rept narg
-    defineShorthand.w CLASS_,\1
-    shift
-    endr
+blacksmithClasses: macro    ; alias
+    classes \1
+    endm
+    
+mithrilWeaponClass: macro   ; alias
+    classes \1
     endm
     
 mithrilWeapons: macro
@@ -885,7 +1218,7 @@ startLevel: macro
     endm
     
 startItems: macro
-    if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
     defineBitfield.w ITEM_,\1
     defineBitfield.w ITEM_,\2
     defineBitfield.w ITEM_,\3
@@ -919,7 +1252,11 @@ prowess: macro
 ; VDP tiles
     
 vdpTile: macro
+    if (narg=0)
+    dc.w 0
+    else
     defineBitfield.w VDPTILE_,\1
+    endc
     endm
     
 vdpBaseTile: macro

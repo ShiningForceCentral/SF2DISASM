@@ -4,6 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = combatant index
+
 
 CreateBattlefieldMiniStatusWindow:
                 
@@ -99,11 +101,16 @@ CreateBattlesceneMiniStatusWindows:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.b = ally index
+;     d1.w = ?
 
-sub_11638:
+
+ShowAllyBattlesceneWindow:
                 
+                module
                 cmpi.b  #$FF,d0
                 beq.w   return_11714
+                
                 movem.l d0-a1,-(sp)
                 move.w  d1,-(sp)
                 clr.b   ((IS_TARGETING-$1000000)).w
@@ -135,7 +142,7 @@ loc_11674:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function sub_11638
+    ; End of function ShowAllyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -145,6 +152,7 @@ RemoveAllyBattlesceneWindow:
                 
                 cmpi.b  #$FF,d0
                 beq.w   return_11714
+                
                 movem.l d0-a1,-(sp)
                 clr.b   ((IS_TARGETING-$1000000)).w
                 clr.w   d0
@@ -159,11 +167,15 @@ RemoveAllyBattlesceneWindow:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.b = enemy index
+;     d1.w = ?
 
-sub_116B8:
+
+ShowEnemyBattlesceneWindow:
                 
                 cmpi.b  #$FF,d0
                 beq.w   return_11714
+                
                 movem.l d0-a1,-(sp)
                 move.w  d1,-(sp)
                 move.b  #$FF,((IS_TARGETING-$1000000)).w
@@ -197,7 +209,7 @@ return_11714:
                 
                 rts
 
-    ; End of function sub_116B8
+    ; End of function ShowEnemyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -218,6 +230,7 @@ RemoveEnemyBattlesceneWindow:
 
     ; End of function RemoveEnemyBattlesceneWindow
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -237,7 +250,7 @@ DrawColoredStatBar:
                 addi.w  #$A,d2          ; draw bar in bottom left window
 @InitVdpTileEntry:
                 
-                ori.w   #VDPTILE_CLEAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
+                ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
                 cmp.w   d0,d1
                 bge.s   @ClearLoadingSpace ; keep highest of current or max stat value
                 move.w  d0,d1
@@ -419,15 +432,12 @@ WriteStatBarColumn:
                 lsl.w   #2,d6
                 lsr.w   #3,d7
                 lsl.w   #5,d7
-                
-                if (BUGFIX_GARBLED_HP_BAR>=1)
-                cmpi.w  #(WriteStatBarColumn-tbl_StatBarColumns-4)/4,d4
-                ble.s   @Continue
-                moveq   #(WriteStatBarColumn-tbl_StatBarColumns-4)/4,d4
-@Continue:
+                if (STANDARD_BUILD&FIX_GARBLED_HP_BAR=1)
+                    cmpi.w  #(WriteStatBarColumn-tbl_StatBarColumns-4)/4,d4
+                    ble.s   @Continue
+                    moveq   #(WriteStatBarColumn-tbl_StatBarColumns-4)/4,d4
                 endif
-                
-                lsl.w   #2,d4
+@Continue:      lsl.w   #2,d4
                 move.l  tbl_StatBarColumns(pc,d4.w),d4
 @Loop:
                 

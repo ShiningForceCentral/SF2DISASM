@@ -9,7 +9,7 @@ SuspendGame:
                 
                 moveq   #$3C,d0 
                 jsr     (Sleep).w       
-                movea.l (p_SuspendStringTiles).l,a0
+                conditionalLongAddr movea.l, p_SuspendStringTiles, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
                 jsr     (LoadCompressedData).w
@@ -19,7 +19,7 @@ SuspendGame:
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
                 jsr     (WaitForDmaQueueProcessing).w
-                movea.l (p_plt_SuspendString).l,a0
+                conditionalLongAddr movea.l, p_plt_SuspendString, a0
                 lea     (PALLETE_2_BASE).l,a1
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   

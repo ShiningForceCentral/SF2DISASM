@@ -4,9 +4,7 @@
 ; FREE SPACE : 1467 bytes.
 
 
-p_pt_Portraits: dc.l pt_Portraits
-                includeIfVanillaRom "data\graphics\portraits\entries.asm"    ; Portraits
-                if (EXPANDED_ROM&ITEMS_AND_SPELLS_EXPANSION=1)
-                    include "data\graphics\icons\entries.asm"    ; Icons
-                endif
-                align $1D8000
+                includeIfVanillaLayout "code\common\tech\pointers\s15_portraitspointer.asm"    ; Game Section 15 Portraits Pointer
+                includeIfVanillaRom "data\graphics\portraits\entries.asm"   ; Portraits
+                includeIfExpandedRom "data\graphics\icons\entries.asm"      ; Icons
+                alignIfVanillaLayout $1D8000

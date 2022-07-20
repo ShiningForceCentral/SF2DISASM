@@ -240,3 +240,4 @@ tbl_LandEffectSettingsAndMoveCosts:
                 landEffectAndMoveCost OBSTRUCTED
                 landEffectAndMoveCost OBSTRUCTED
                 landEffectAndMoveCost OBSTRUCTED
+                

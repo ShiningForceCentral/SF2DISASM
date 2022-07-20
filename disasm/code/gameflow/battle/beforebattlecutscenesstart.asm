@@ -11,13 +11,13 @@ ExecuteBattleCutscene_Intro:
                 
                 movem.l d1,-(sp)
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
-                addi.w  #450,d1
+                getSavedByte CURRENT_BATTLE, d1
+                addi.w  #BATTLE_INTRO_CUTSCENE_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   loc_47AE8
                 movem.l d0/a0,-(sp)
                 clr.w   d0
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d0
+                getSavedByte CURRENT_BATTLE, d0
                 add.w   d0,d0
                 move.w  rpt_BeforeBattleCutscenes(pc,d0.w),d0
                 lea     rpt_BeforeBattleCutscenes(pc,d0.w),a0

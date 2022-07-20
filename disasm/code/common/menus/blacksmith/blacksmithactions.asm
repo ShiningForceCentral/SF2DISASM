@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\blacksmith\blacksmithactions.asm :
-; 0x21A3A..0x21F62 : Blacksmith functions
+; 0x21A3A..0x21EB6 : Blacksmith functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -83,11 +83,17 @@ sub_21A92:
                 ; Check current mithril weapons list
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
                 subq.w  #1,d7
-                lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 loc_21ACA:
                 
-                move.w  (a0)+,currentItem(a6)
-                cmpi.w  #0,currentItem(a6)
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    movep.w 0(a0),d0
+                    addq.w  #4,a0
+                    move.w  d0,currentItem(a6)
+                else
+                    move.w  (a0)+,currentItem(a6)
+                    cmpi.w  #0,currentItem(a6)
+                endif
                 beq.s   loc_21AE4
                 move.w  d7,ordersNumber(a6)
                 addi.w  #1,ordersNumber(a6)
@@ -198,11 +204,20 @@ loc_21BE4:
                 jsr     j_AddItem
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d6
                 sub.w   ordersNumber(a6),d6
-                lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a1
-                lsl.w   #1,d6
-                adda.w  d6,a1
-                move.w  (a1),d2
-                move.w  #0,(a1)
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a1
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    add.w   d6,d6
+                    add.w   d6,d6
+                    adda.w  d6,a1
+                    movep.w 0(a1),d2
+                    clr.w   d0
+                    movep.w d0,0(a1)
+                else
+                    lsl.w   #1,d6
+                    adda.w  d6,a1
+                    move.w  (a1),d2
+                    move.w  #0,(a1)
+                endif
                 addi.w  #1,currentOrder(a6)
                 move.w  currentItem(a6),d1
                 move.w  selectedMember(a6),d0
@@ -391,7 +406,7 @@ loc_21E30:
 WaitForMusicResumeAndPlayerInput_Blacksmith:
                 
                 move.w  d0,-(sp)
-                move.w  #$FB,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0
                 jsr     (PlayMusicAfterCurrentOne).w
                 jsr     (WaitForPlayerInput).w
                 move.w  (sp)+,d0
@@ -422,13 +437,22 @@ sub_21E48:
                 move.w  #1,var_20(a6)
 loc_21E5C:
                 
-                move.w  #4,d7
-                subq.w  #1,d7
-                lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    moveq   #BLACKSMITH_ORDERS_COUNTER,d7
+                else
+                    move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
+                    subq.w  #1,d7
+                endif
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 loc_21E66:
                 
-                move.w  (a0)+,d1
-                cmpi.w  #0,d1
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    addq.w  #MITHRILWEAPON_SLOT_SIZE,a0
+                    movep.w -MITHRILWEAPON_SLOT_SIZE(a0),d1
+                else
+                    move.w  (a0)+,d1
+                    cmpi.w  #0,d1
+                endif
                 beq.w   loc_21E88
                 cmpi.w  #1,var_20(a6)
                 bne.s   loc_21E82
@@ -481,110 +505,4 @@ loc_21EB0:
                 rts
 
     ; End of function IsClassBlacksmithEligible
-
-tbl_BlacksmithEligibleClassesList:
-                
-; List of word-sized class indexes prefixed with length.
-;
-; Syntax        blacksmithClasses [CLASS_]enum,..[CLASS_]enum
-;
-; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
-                
-                blacksmithClasses HERO, &
-                    PLDN, &
-                    PGNT, &
-                    GLDT, &
-                    BRN, &
-                    WIZ, &
-                    SORC, &
-                    VICR, &
-                    MMNK, &
-                    SNIP, &
-                    BRGN, &
-                    BDBT, &
-                    BWNT, &
-                    NINJ, &
-                    RDBN
-                
-
-; =============== S U B R O U T I N E =======================================
-
-characterClass = -24
-ordersNumber = -22
-var_20 = -20
-var_18 = -18
-currentOrder = -16
-var_14 = -14
-itemSlot = -12
-currentItem = -10
-var_8 = -8
-selectedMember = -6
-var_4 = -4
-
-PickMithrilWeapon:
-                
-                movem.l d0-a0,-(sp)
-                clr.w   d0
-                lea     tbl_MithrilWeaponClasses(pc), a0
-                move.w  #MITHRILWEAPONCLASSES_COUNTER,d7
-@FindWeaponClass_Loop:
-                
-                move.w  (a0)+,d6        ; D6 = number of character classes
-                subq.w  #1,d6
-@FindCharacterClass_Loop:
-                
-                move.w  (a0)+,d1        ; D1 = weapon class
-                move.w  characterClass(a6),d2 ; D2 = character class
-                cmp.w   d1,d2
-                beq.w   @GetWeaponsEntryAddress ; found character class belonging to weapon class
-                dbf     d6,@FindCharacterClass_Loop
-                
-                addi.w  #1,d0
-                dbf     d7,@FindWeaponClass_Loop
-                
-                ; Randomly determine weapon class for classes BRN and RDBN
-                clr.w   d0
-                move.w  #2,d6
-                jsr     (GenerateRandomNumber).w
-                cmpi.w  #0,d7
-                bne.w   @GetWeaponsEntryAddress
-                move.w  #2,d0
-@GetWeaponsEntryAddress:
-                
-                lsl.w   #3,d0           ; D0 = weapon class index * 8 (weapons entry size)
-                lea     tbl_MithrilWeapons(pc), a0
-                adda.w  d0,a0
-                move.w  #MITHRILWEAPONS_COUNTER,d5
-@PickWeapon_Loop:
-                
-                clr.w   d0
-                clr.w   d1
-                move.b  (a0)+,d0        ; D0 = parameter
-                move.b  (a0)+,d1        ; D1 = item index
-                move.w  d0,d6
-                jsr     (GenerateRandomNumber).w
-                cmpi.w  #0,d7
-                beq.w   @LoadIndex
-                dbf     d5,@PickWeapon_Loop
-@LoadIndex:
-                
-                lea     ((CURRENT_MITHRIL_WEAPON_INDEX-$1000000)).w,a0
-                move.w  #MITHRILWEAPONSLOTS_COUNTER,d7
-@LoadIndex_Loop:
-                
-                cmpi.w  #0,(a0)
-                bne.w   @Next           ; check next weapon slot if current one is occupied
-                move.w  d1,(a0)
-                bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
-@Next:
-                
-                move.w  #2,d0
-                adda.w  d0,a0
-                dbf     d7,@LoadIndex_Loop
-@Done:
-                
-                movem.l (sp)+,d0-a0
-                rts
-
-    ; End of function PickMithrilWeapon
 

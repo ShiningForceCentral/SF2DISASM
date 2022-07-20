@@ -22,11 +22,6 @@ IF NOT EXIST "sounddriver.bin" (
     ..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\sounddriver.asm
     ..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\sounddriver.p .\sounddriver.bin -k -r $0000-$1fff
 ) ELSE echo sounddriver.bin already exists!
-IF NOT EXIST "cubewiz.bin" (
-    echo Assembling Cube/Wiz driver ...
-    ..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\cubewiz.asm
-    ..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\cubewiz.p .\cubewiz.bin -k -r $0000-$1fff
-) ELSE echo cubewiz.bin already exists!
 cd musicbank0/
 IF NOT EXIST "..\musicbank0.bin" (
     echo Assembling music bank 0 ...
@@ -41,15 +36,15 @@ IF NOT EXIST "..\musicbank1.bin" (
 ) ELSE echo musicbank1.bin already exists!
 cd ../../../
 echo Assembling game ...
-SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%.bin"
-@"../tools/asm68k" /e EXPANDED_ROM=0 /e EXTENDED_SSF_MAPPER=0 /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%" > ../build/output.log
-echo End of assembly, produced %buildname%
+SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%"
+@"../tools/asm68k" /e STANDARD_BUILD=0 /k /m /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%.bin", ../build/%buildname%.sym, ../build/%buildname%.lst > ../build/output.log
+echo End of assembly, produced %buildname%.bin
 
 echo -------------------------------------------------------------
 echo Checking build against reference ROM ...
 cd ../build/
-IF EXIST "%buildname%" ..\tools\fixheader "%buildname%"
-IF EXIST "%buildname%" (IF EXIST ../rom/sf2.bin (fc /b "%buildname%" ../rom/sf2.bin) ELSE echo sf2.bin does not exist in build directory) ELSE echo "%buildname%" does not exist, probably due to an assembly error. Check output.log.
+IF EXIST "%buildname%.bin" ..\tools\fixheader "%buildname%.bin"
+IF EXIST "%buildname%.bin" (IF EXIST ../rom/sf2.bin (fc /b "%buildname%.bin" ../rom/sf2.bin) ELSE echo sf2.bin does not exist in build directory) ELSE echo "%buildname%.bin" does not exist, probably due to an assembly error. Check output.log.
 
 
 pause
