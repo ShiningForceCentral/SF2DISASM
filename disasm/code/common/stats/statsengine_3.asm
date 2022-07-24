@@ -268,7 +268,7 @@ GetFlag:
                 andi.l  #FLAG_MASK,d1
                 divu.w  #8,d1           ; get the byte in which the flag is stored
                 loadSavedDataAddress GAME_FLAGS, a0
-                adda.w  d1,a0           ; go to the concerned byte
+                addSavedByteOffset d1, a0           ; go to the concerned byte
                 swap    d1
                 moveq   #$FFFFFF80,d0
                 lsr.b   d1,d0
@@ -303,7 +303,11 @@ UpdateForce:
                 addq.w  #1,d2
                 move.w  d0,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
-                bsr.s   CheckFlag
+                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                    bsr.w   CheckFlag
+                else
+                    bsr.s   CheckFlag
+                endif
                 beq.s   @InReserve
                 move.b  d0,(a3)+
                 addq.w  #1,d3
@@ -497,10 +501,7 @@ GetDealsItemInfo:
                 andi.l  #ITEMENTRY_MASK_INDEX,d1
                 loadSavedDataAddress DEALS_ITEMS, a0
                 divu.w  #2,d1
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    add.w   d1,d1
-                endif
-                adda.w  d1,a0
+                addSavedByteOffset d1, a0
                 move.b  (a0),d2
                 btst    #DEALS_BIT_REMAINDER,d1 ; since deals are stacked 2 to a byte, this is the bit index that stores whether we are an even or odd item index
                 bne.s   @OddIndex
