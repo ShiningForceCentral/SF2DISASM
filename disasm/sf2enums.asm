@@ -3323,7 +3323,7 @@ SPECIAL_BATTLE_RECORD_SIZE:     equ 4*savedByteSize
 ENEMY_ITEM_DROPPED_FLAGS_SIZE:  equ 4*savedByteSize
 MITHRIL_WEAPONS_ON_ORDER_SIZE:  equ BLACKSMITH_MAX_ORDERS_NUMBER*2*savedByteSize
 
-saveSlotSize  = COMBATANT_ENTRIES_SIZE+&
+savedDataSize = COMBATANT_ENTRIES_SIZE+&
                 CURRENT_GOLD_SIZE+&
                 DEALS_ITEMS_SIZE+&
                 CARAVAN_ITEMS_NUMBER_SIZE+&
@@ -3349,14 +3349,14 @@ saveSlotSize  = COMBATANT_ENTRIES_SIZE+&
                 ENEMY_ITEM_DROPPED_FLAGS_SIZE+&
                 MITHRIL_WEAPONS_ON_ORDER_SIZE
 
+saveSlotCounter = savedDataSize-1
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+saveSlotCounter = (savedDataSize/2)-1
+    endif
+
 sramSize = $2000
     if (expandedSram=1)
 sramSize = $8000
-    endif
-
-sramCounter = sramSize-1
-    if (STANDARD_BUILD=1)
-sramCounter = (sramSize/2)-1
     endif
 
 SAVE_FLAGS_SIZE:            equ $2
@@ -3364,11 +3364,9 @@ SAVE_CHECKSUM_SIZE:         equ $2
 SRAM_STRING_CHECK_COUNTER:  equ $10
 SRAM_STRING_WRITE_COUNTER:  equ $11
 SRAM_STRING_SIZE:           equ $24
-SAVE_SLOT_WORDS_COUNTER:    equ (SAVE_SLOT_REAL_SIZE/2)-1
-SAVE_SLOT_BYTES_COUNTER:    equ SAVE_SLOT_REAL_SIZE-1
-SAVE_SLOT_REAL_SIZE:        equ saveSlotSize
-SAVE_SLOT_SIZE:             equ saveSlotSize*2
-SRAM_COUNTER:               equ sramCounter
+SAVE_SLOT_COUNTER:          equ saveSlotCounter
+SAVE_SLOT_REAL_SIZE:        equ savedDataSize
+SRAM_COUNTER:               equ sramSize-1
 SRAM_SIZE:                  equ sramSize
 
 ; ---------------------------------------------------------------------------
