@@ -4,7 +4,7 @@
 ; Out: a0 = pointer to properties for object, or ccr carry-bit set if object was not found
                 module
                 
-; In: a0 = pointer to properties table, d1.b = object index, d2.w = number of properties
+; In: a0 = pointer to properties table, d1.b = object index, d2.w = offset to next object (i.e., number of properties)
 @Loop1:         adda.w  d2,a0
                 
 FindSpecialPropertyBytesAddressForObject:
@@ -14,7 +14,7 @@ FindSpecialPropertyBytesAddressForObject:
                 bne.s   @Loop1
                 rts
                 
-; In: a0 = pointer to properties table, d1.w = object index, d2.w = number of properties
+; In: a0 = pointer to properties table, d1.w = object index, d2.w = offset to next object (i.e., number of properties * 2)
 @Loop2:         adda.w  d2,a0
                 
 FindSpecialPropertyWordsAddressForObject:

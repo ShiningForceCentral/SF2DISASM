@@ -1808,8 +1808,10 @@ DropItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = char entry address + offset to items
-;     D0 = item slot
+; In: a0 = combatant items address (or combatant entry address if RELOCATED_SAVED_DATA_TO_SRAM is enabled)
+;     d0.w = item slot
+;
+; Out: d2.w = 0
 
 
 RemoveAndArrangeItems:
@@ -1820,7 +1822,8 @@ RemoveAndArrangeItems:
 @Loop:
                 
                 if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  COMBATANT_OFFSET_ITEMS+ITEMENTRY_SIZE(a0),COMBATANT_OFFSET_ITEMS(a0)
+                    movep.w COMBATANT_OFFSET_ITEMS+ITEMENTRY_SIZE(a0),d0
+                    movep.w d0,COMBATANT_OFFSET_ITEMS(a0)
                 else
                     move.w  ITEMENTRY_SIZE(a0),(a0) ; shift item -1 slots
                 endif
@@ -1829,8 +1832,8 @@ RemoveAndArrangeItems:
 @Skip:
                 
                 if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.w  #ITEM_NOTHING,d2
-                    movep.w d2,COMBATANT_OFFSET_ITEMS(a0)
+                    move.w  #ITEM_NOTHING,d0
+                    movep.w d0,COMBATANT_OFFSET_ITEMS(a0)
                 else
                     move.w  #ITEM_NOTHING,(a0) ; replace item with nothing
                 endif
