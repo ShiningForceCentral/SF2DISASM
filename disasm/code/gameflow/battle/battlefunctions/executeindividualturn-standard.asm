@@ -159,6 +159,8 @@ ExecuteIndividualTurn:
                 jsr     RemoveTimerWindow
 @WriteBattlesceneScript:
                 
+                jsr     (WaitForVInt).w ; make sure that VDP planes are updated one last time (to clear flashing range blocks) before transitioning to the battlescene
+                jsr     (WaitForVInt).w
                 move.w  combatant(a6),d0
                 jsr     WriteBattlesceneScript
                 bsr.w   LoadBattlesceneMusicIndex
