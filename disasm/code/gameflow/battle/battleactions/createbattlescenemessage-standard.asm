@@ -51,7 +51,7 @@ CreateBattlesceneMessage:
                 
 @CastSpell:     module
                 move.w  #MESSAGE_SPELLCAST_DEFAULT,d3 ; {NAME} cast{N}{SPELL} level {#}!
-                moveq   #1,d2
+                moveq   #2,d2
                 
                 lea     tbl_SpellcastMessagesForIndexes(pc), a0
                 move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
