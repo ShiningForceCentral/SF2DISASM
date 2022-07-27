@@ -197,10 +197,10 @@ WriteStatValue:
                 move.w  d1,d0
 WriteStatValueD0:
                 
+                moveq   #STATS_DIGITS_NUMBER,d7
                 cmpi.w  #UNKNOWN_STAT_VALUE_THRESHOLD,d0
                 bge.s   @UnknownValueString
                 ext.l   d0
-                moveq   #STATS_DIGITS_NUMBER,d7
                 bra.w   WriteTilesFromNumber
                 
 @UnknownValueString:
@@ -209,7 +209,8 @@ WriteStatValueD0:
 
     ; End of function WriteStatValue
 
-aUnknownValue:  if (THREE_DIGITS_STATS=1)
+aUnknownValue:  
+                if (THREE_DIGITS_STATS=1)
                     dc.b '???',0
                 else
                     dc.b '??'
