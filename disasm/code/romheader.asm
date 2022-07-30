@@ -19,7 +19,7 @@ p_Start:        dc.l Start              ; Start Address
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
-off_3C:         dc.l Int_OtherError     ; Uninitialized Interrupt
+                dc.l Int_OtherError     ; Uninitialized Interrupt
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved

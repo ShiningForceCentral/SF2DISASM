@@ -1348,7 +1348,7 @@ CHANCE_TO_CRITICAL_BLAST: equ $20
 ; ---------------------------------------------------------------------------
 
 ; enum BattleActionEngine_Properties
-CHANCE_TO_DODGE_MUDDLED_ATTACKER: equ $2
+CHANCE_TO_DODGE_FOR_MUDDLED_ATTACKER: equ $2
 CHANCE_TO_INFLICT_CURSE_DAMAGE: equ $2
 CHANCE_TO_BREAK_USED_ITEM: equ $4
 CHANCE_TO_PERFORM_KIWI_FLAME_BREATH: equ $4

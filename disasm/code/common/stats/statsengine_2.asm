@@ -1714,8 +1714,10 @@ DropItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = char entry address + offset to items
-;     D0 = item slot
+; In: a0 = combatant items address
+;     d0.w = item slot
+; 
+; Out: d2.w = 0
 
 
 RemoveAndArrangeItems:

@@ -2075,7 +2075,7 @@ loc_14C0E:
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d0
                 movea.l (sp)+,a0
                 bsr.w   sub_14C56       
-                move.w  #$C0FC,(a2)
+                move.w  #VDPTILE_SHOP_PRICE_TAG_STRING|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a2)
                 addq.l  #8,a2
                 move.w  (sp)+,d7
                 dbf     d7,loc_14C0E
