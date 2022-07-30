@@ -345,6 +345,10 @@ BattleLoop_Defeat:
                 sndCom  MUSIC_SAD_THEME_2
                 txt     363             ; "{LEADER} is exhausted.{W1}"
                 clsTxt
+            if (STANDARD_BUILD&PLAYER_DEFEAT_IS_GAME_OVER=1)
+                jsr     (FadeOutToBlack).w
+                jmp     (WitchSuspend).w
+            else
                 clr.w   d0
                 jsr     j_GetMaxHP
                 jsr     j_SetCurrentHP
@@ -356,31 +360,30 @@ BattleLoop_Defeat:
                 moveq   #-1,d4
                 
                 ; Losable battles
-                if (STANDARD_BUILD=1)
-                    movem.l d1-d2/a0,-(sp)
-                    clr.w   d1
-                    lea     tbl_LosableBattles(pc), a0
-                    getSavedByte CURRENT_BATTLE, d1
-                    moveq   #0,d2
-                    jsr     (FindSpecialPropertyBytesAddressForObject).w
-                    bcs.s   @Return
-                    addi.w  #BATTLE_UNLOCKED_FLAGS_START,d1
-                    jsr     ClearFlag
-                    addi.w  #BATTLE_COMPLETED_FLAGS_START-BATTLE_UNLOCKED_FLAGS_START,d1
-                    jsr     SetFlag
-                    movem.l (sp)+,d1-d2/a0
-                else
-                    checkSavedByte #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS, CURRENT_BATTLE    ; HARDCODED battle 4 upgrade
-                    bne.s   @Return
-                    clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
-                    setFlg  504             ; Battle 4 completed - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS   
-                    jsr     j_UpgradeBattle
-                endif
+              if (STANDARD_BUILD=1)
+                movem.l d1-d2/a0,-(sp)
+                clr.w   d1
+                lea     tbl_LosableBattles(pc), a0
+                getSavedByte CURRENT_BATTLE, d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @Return
+                addi.w  #BATTLE_UNLOCKED_FLAGS_START,d1
+                jsr     ClearFlag
+                addi.w  #BATTLE_COMPLETED_FLAGS_START-BATTLE_UNLOCKED_FLAGS_START,d1
+                jsr     SetFlag
+                movem.l (sp)+,d1-d2/a0
+              else
+                checkSavedByte #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS, CURRENT_BATTLE    ; HARDCODED battle 4 upgrade
+                bne.s   @Return
+                clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
+                setFlg  504             ; Battle 4 completed - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS   
+                jsr     j_UpgradeBattle
+              endif
                 moveq   #MAP_GALAM_CASTLE_INNER,d0
                 clr.w   d4
-@Return:
-                
-                rts
+@Return:        rts
+            endif
 
     ; End of function BattleLoop_Defeat
 

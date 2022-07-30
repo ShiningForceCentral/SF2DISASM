@@ -7,22 +7,23 @@ EASY_BATTLE_TEST:                   equ 0       ; If Debug Mode is activated, go
 EASY_CONFIGURATION_MODE:            equ 0       ; Activate Configuration Mode automatically, and skip checking if the Start button is pressed.
 
 ; Fixes
-FIX_SEARCH_IN_BATTLE:                   equ 1   ; Restore the ability to search chests during battle.
-FIX_SKIPPED_TURNS:                      equ 1   ; Fix cases where a character can miss getting a turn due to current AGI being higher than 127.
-FIX_INCREASE_DOUBLE_RESETS_COUNTER:     equ 1   ; Equipment that increases the chance to double attack also erroneously set the chance to counter attack to 1/32.
-FIX_GODDESS_STAFF_DEALS_ABUSE:          equ 1   ; If one of the following items is sitting in the Deals section after a DEF-CON switch is activated: Quick Ring, Protect Ring, White Ring, or Running Ring; a Goddess Staff will also be added to Deals.
-FIX_GARBLED_HP_BAR:                     equ 1   ; Prevent drawing garbage pixels when HP is greater then 600. (Keep drawing black bars instead.)
-FIX_KIWI_SPELLS_LEARNING_LEVEL:         equ 1   ; Kiwi's base class is wrongfully treated as promoted for the purpose of learning spells.
-FIX_HIGINS_SPELL:                       equ 1   ; Prevent unequipping from possibly corrupting characters spell entries.
-FIX_MOVEMENT_GLITCH:                    equ 1   ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
-FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE:    equ 1   ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
-FIX_CARAVAN_FREE_REPAIR_EXPLOIT:        equ 1   ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reducded to 32 items unless SRAM is expanded.)
+FIX_SEARCH_IN_BATTLE:               equ 1       ; Restore the ability to search chests during battle.
+FIX_SKIPPED_TURNS:                  equ 1       ; Fix cases where a character can miss getting a turn due to current AGI being higher than 127.
+FIX_INCREASE_DOUBLE_RESETS_COUNTER: equ 1       ; Equipment that increases the chance to double attack also erroneously set the chance to counter attack to 1/32.
+FIX_GODDESS_STAFF_DEALS_ABUSE:      equ 1       ; If one of the following items is sitting in the Deals section after a DEF-CON switch is activated: Quick Ring, Protect Ring, White Ring, or Running Ring; a Goddess Staff will also be added to Deals.
+FIX_GARBLED_HP_BAR:                 equ 1       ; Prevent drawing garbage pixels when HP is greater then 600. (Keep drawing black bars instead.)
+FIX_KIWI_SPELLS_LEARNING_LEVEL:     equ 1       ; Kiwi's base class is wrongfully treated as promoted for the purpose of learning spells.
+FIX_HIGINS_SPELL:                   equ 1       ; Prevent unequipping from possibly corrupting characters spell entries.
+FIX_MOVEMENT_GLITCH:                equ 1       ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
+FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE:equ 1       ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
+FIX_CARAVAN_FREE_REPAIR_EXPLOIT:    equ 1       ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reducded to 32 items unless SRAM is expanded.)
 
 ; Misc. features
 BOWIE_CAN_DIE:                      equ 0       ; Bowie's death does not cause defeat.
 BOWIE_CAN_LEAVE_BATTLE_PARTY:       equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
 CAPITALIZED_CHARACTER_NAMES:        equ 0       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
 PERCENT_POISON_DAMAGE:              equ 0       ; 1-100 = n% of max HP
+PLAYER_DEFEAT_IS_GAME_OVER:         equ 0       ; On player defeat, rather than halve the gold and return to town, this calls the same function the priest does when you say not to continue the game, minus any save action.
 SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
 
 ; AI enhancements
