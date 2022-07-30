@@ -299,6 +299,10 @@ BattleLoop_Defeat:
                 sndCom  MUSIC_SAD_THEME_2
                 txt     363             ; "{LEADER} is exhausted.{W1}"
                 clsTxt
+            if (STANDARD_BUILD&PLAYER_DEFEAT_IS_GAME_OVER=1)
+                jsr     (FadeOutToBlack).w
+                jmp     (WitchSuspend).w
+            else
                 clr.w   d0
                 jsr     j_GetMaxHP
                 jsr     j_SetCurrentHP
@@ -310,17 +314,15 @@ BattleLoop_Defeat:
                 moveq   #-1,d4
                 
                 ; Losable battles
-                cmpi.b  #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED battle 4 upgrade
+                cmpi.b  #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS,((CURRENT_BATTLE-$1000000)).w ; HARDCODED battle 4 upgrade
                 bne.s   @Return
                 clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
                 setFlg  504             ; Battle 4 completed - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS   
                 jsr     j_UpgradeBattle
                 moveq   #MAP_GALAM_CASTLE_INNER,d0
                 clr.w   d4
-@Return:
-                
-                rts
+@Return:        rts
+            endif
 
     ; End of function BattleLoop_Defeat
 
