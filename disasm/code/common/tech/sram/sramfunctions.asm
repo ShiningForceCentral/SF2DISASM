@@ -182,9 +182,8 @@ ClearSaveSlotFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = source address
-;     A1 = destination address
-;     D7 = number of bytes to copy
+; In: a0 = source address, a1 = destination address, d7.w = number of bytes to copy
+; Out: d0.b = checksum
 
 
 CopyBytesToSram:

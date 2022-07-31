@@ -402,7 +402,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-DetermineDoubleAndCounter:
+WriteBattlesceneScript_DetermineDoubleAndCounter:
                 
                 move.b  (a4),d0         ; evaluate chance to double attack
                 jsr     GetCurrentProwess
@@ -448,7 +448,7 @@ DetermineDoubleAndCounter:
                 
                 rts
 
-    ; End of function DetermineDoubleAndCounter
+    ; End of function WriteBattlesceneScript_DetermineDoubleAndCounter
 
 
 ; =============== S U B R O U T I N E =======================================

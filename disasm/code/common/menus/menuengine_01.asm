@@ -79,7 +79,7 @@ loc_100F2:
                 subi.w  #$40,d0 
 loc_10118:
                 
-                cmpi.b  #$60,d0 
+                cmpi.b  #VDPTILE_CORNER,d0
                 blt.s   loc_10122       
                 addi.w  #$20,d0 
 loc_10122:

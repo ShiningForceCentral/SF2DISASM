@@ -52,6 +52,17 @@
                 include "data\battles\global\halvedexpearnedbattles.asm"    ; Halved EXP earned battles table
                 align
                 include "code\gameflow\battle\battleactions\battleactionsengine_4.asm"    ; Battleactions engine
+            if (STANDARD_BUILD=1)
+                include "code\gameflow\battle\battleactions\determinedodge-standard.asm"
+                include "code\gameflow\battle\battleactions\calculatedamage-standard.asm"
+                include "data\battles\global\landeffectdamagemultipliers-standard.asm"
+                include "data\stats\specialmovetypes-standard.asm"
+                align
+            else
+                include "code\gameflow\battle\battleactions\determinedodge.asm"    ; Determine dodge function
+                include "code\gameflow\battle\battleactions\calculatedamage.asm"    ; Calculate attack damage function
+            endif
+                include "code\gameflow\battle\battleactions\determinecriticalhit.asm"    ; Determine critical hit function
                 include "data\stats\allies\classes\criticalhitsettings.asm"    ; Critical hit settings
                 include "code\gameflow\battle\battleactions\battleactionsengine_5.asm"    ; Battleactions engine
                 include "data\stats\items\itembreakmessages.asm"    ; Item break messages
