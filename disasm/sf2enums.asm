@@ -1348,14 +1348,24 @@ CHANCE_TO_CRITICAL_BLAST: equ $20
 ; ---------------------------------------------------------------------------
 
 ; enum BattleActionEngine_Properties
-CHANCE_TO_DODGE_FOR_MUDDLED_ATTACKER: equ $2
+    if (STANDARD_BUILD=1)
+chanceToDodgeForMuddledAttacker = 128   ; n/256
+chanceToDodgeForAirborneTarget = 32     ; 
+chanceToDodgeDefault = 8                ; 
+    else
+chanceToDodgeForMuddledAttacker = 2     ; 1/2
+chanceToDodgeForAirborneTarget = 8      ; 1/8
+chanceToDodgeDefault = 32               ; 1/32
+    endif
+
+CHANCE_TO_DODGE_FOR_MUDDLED_ATTACKER: equ chanceToDodgeForMuddledAttacker
 CHANCE_TO_INFLICT_CURSE_DAMAGE: equ $2
 CHANCE_TO_BREAK_USED_ITEM: equ $4
 CHANCE_TO_PERFORM_KIWI_FLAME_BREATH: equ $4
 INACTION_CHANCE_CURSE: equ $4
 INACTION_CHANCE_STUN: equ $4
-CHANCE_TO_DODGE_FOR_AIRBORNE_TARGET: equ $8
-CHANCE_TO_DODGE_DEFAULT: equ $20
+CHANCE_TO_DODGE_FOR_AIRBORNE_TARGET: equ chanceToDodgeForAirborneTarget
+CHANCE_TO_DODGE_DEFAULT: equ chanceToDodgeDefault
 KIWI_FLAME_BREATH_UPGRADE_LEVEL1: equ $20
 KIWI_FLAME_BREATH_UPGRADE_LEVEL2: equ $28
 KIWI_FLAME_BREATH_UPGRADE_LEVEL3: equ $32
