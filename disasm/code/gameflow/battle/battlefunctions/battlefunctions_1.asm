@@ -346,8 +346,8 @@ BattleLoop_Defeat:
                 txt     363             ; "{LEADER} is exhausted.{W1}"
                 clsTxt
             if (STANDARD_BUILD&PLAYER_DEFEAT_IS_GAME_OVER=1)
-                jsr     (FadeOutToBlack).w
-                jmp     (WitchSuspend).w
+                jmp     (ResetGame).w
+                nop
             else
                 clr.w   d0
                 jsr     j_GetMaxHP
