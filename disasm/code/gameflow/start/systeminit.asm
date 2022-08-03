@@ -7,14 +7,14 @@
 
 SystemInit:
                 
-                bsr.s   InitVdp
+                bsr.s   InitVdp         ; and clear 68K RAM
             if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
                 bsr.w   InitMapper
             endif
             if (STANDARD_BUILD&(expandedRom|RELOCATED_SAVED_DATA_TO_SRAM)=1)
                 bsr.w   InitSavedData
             endif
-                bsr.w   InitZ80
+                bsr.w   InitZ80         ; and load sound driver to Z80 RAM
                 bsr.s   InitVdpData
                 jmp     (InitGame).l
 
