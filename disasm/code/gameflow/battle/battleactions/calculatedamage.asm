@@ -4,10 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A4 = attacker index in RAM
-;     A5 = defender index in RAM
-; 
-; Out: D6 = damage
+; In: a4 = pointer to attacker index in RAM
+;     a5 = pointer to target index in RAM
+; Out: d6.w = damage
 
 
 WriteBattlesceneScript_CalculateDamage:
@@ -18,13 +17,13 @@ WriteBattlesceneScript_CalculateDamage:
                 move.b  (a5),d0
                 jsr     GetCurrentDEF
                 sub.w   d1,d2
-                bhi.s   @BaseDamage     
+                bhi.s   @Continue       
                 moveq   #1,d2           ; minimum base damage = 1
-@BaseDamage:
+@Continue:
                 
                 move.w  d2,d6           ; D6 = base damage
                 
-                ; Evaluate land effect's damage reduction
+                ; Apply land effect damage reduction
                 move.b  (a5),d0
                 jsr     GetLandEffectSetting
                 move.w  #256,d3         ; if land effect displays "0%", do not reduce damage

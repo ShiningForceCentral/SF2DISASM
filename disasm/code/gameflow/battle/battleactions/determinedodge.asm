@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; In: a2 = battlescene script stack frame
-;     a4 = pointer to actor index in RAM
+;     a4 = pointer to attacker index in RAM
 ;     a5 = pointer to target index in RAM
 
 allCombatantsCurrentHpTable = -24
