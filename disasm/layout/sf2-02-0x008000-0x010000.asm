@@ -37,8 +37,12 @@
                 include "code\gameflow\battle\battleactions\castspell.asm"    ; Write Battlescene Script : Cast Spell
                 include "code\gameflow\battle\battleactions\calculatespelldamage.asm"    ; Calculate Spell Damage function
                 include "code\gameflow\battle\battleactions\useitem.asm"    ; Write Battlescene Script : Use Item
+            if (STANDARD_BUILD=1)
+                include "code\gameflow\battle\battleactions\breakuseditem-standard.asm"
+            else
                 include "code\gameflow\battle\battleactions\nullsub_BBE4.asm"    ; Unused nullsub
                 include "code\gameflow\battle\battleactions\breakuseditem.asm"    ; Write Battlescene Script : Break Used Item
+            endif
                 include "data\stats\items\itembreakmessages.asm"    ; Item break messages
                 include "code\gameflow\battle\battleactions\writebattlescenecommanddropenemyitem.asm"    ; Write Battlescene Command : Drop Enemy Item function
                 include "data\battles\global\enemyitemdrops.asm"    ; Enemy item drops
