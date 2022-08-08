@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\tech\extendedssfmapper.asm :
+; ASM FILE code\common\tech\mapperfunctions-standard.asm :
 ;
 
 ; Functions for communicating with the mapper present in the cartridge.

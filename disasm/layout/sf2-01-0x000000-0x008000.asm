@@ -64,7 +64,7 @@
                     include "code\common\tech\findspecialproperties-standard.asm"
                 endif
                 if (STANDARD_BUILD&MEMORY_MAPPER=1)
-                    include "code\common\tech\extendedssfmapper.asm"   ; Extended SSF mapper functions
+                    include "code\common\tech\mapperfunctions-standard.asm"   ; Memory mapper functions
                 endif
                 
                 ; Relocated pointers
