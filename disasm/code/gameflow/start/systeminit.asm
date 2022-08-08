@@ -8,10 +8,12 @@
 SystemInit:
                 
                 bsr.s   InitVdp
-            if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+            if (STANDARD_BUILD&MEMORY_MAPPER=1)
                 bsr.w   InitMapper
+            elseif (expandedRom=1)
+                enableSram              ; make sure that SRAM is enabled now, in case we need to init saved data
             endif
-            if (STANDARD_BUILD&(expandedRom|RELOCATED_SAVED_DATA_TO_SRAM)=1)
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 bsr.w   InitSavedData
             endif
                 bsr.w   InitZ80

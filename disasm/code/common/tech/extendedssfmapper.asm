@@ -1,125 +1,67 @@
 
 ; ASM FILE code\common\tech\extendedssfmapper.asm :
-; Functions for handling various Extended SSF mapper implementations,
-;  enabling simultaneous support for SRAM and ROM banks switching.
+;
 
-aSegaEverDrive: dc.b 'SEGA EVERDRIVE  '
+; Functions for communicating with the mapper present in the cartridge.
+;
+; Requires the playback device to emulate either the SEGA mapper,
+;  or the EverDrive Extended SSF mapper in such a way that both
+;  SRAM and ROM bank switching are supported.
+;
+; A short save test is performed during system initialization to determine
+;  which mapper is currently active, and the result is stored in a 68K RAM
+;  byte to inform the game on how to control SRAM mapping over the course of
+;  the play session.
+;
+; This byte is not saved, and the test is performed again every time the game
+;  is booted or reset, so that saved game data remain interchangeable between
+;  devices.
 
 ; =============== S U B R O U T I N E =======================================
 
 
-InitMapper:     ; Determine SRAM control method
+InitMapper:     ; Init ROM banks
+                bsr.s   ControlMapper_RestoreRomBanks ; make sure banks are restored now in case of soft reset
                 
-                ; Test SRAM enable method 0 (SEGA mapper)
-                moveq   #0,d0
-                move.b  #1,(SEGA_MAPPER_CTRL0).l
+                ; Test SEGA mapper control register
+                clr.b  ((SRAM_CONTROL-$1000000)).w
+                move.w  #$8000,(EXTENDED_SSF_CTRL0).l ; enable ROM write protection
+                bsr.s   ControlMapper_EnableSram
                 bsr.s   TestSram
-                beq.s   @Success
+                beq.s   @Return
                 
-                ; Test SRAM enable method 1 (PicoDrive)
-                moveq   #1,d0
-                move.w  #1,(EXTENDED_SSF_CTRL0).l
+                ; Test EverDrive Extended SSF SRAM bank
+                st      ((SRAM_CONTROL-$1000000)).w
+                move.w  #$A000,(EXTENDED_SSF_CTRL0).l ; disable ROM write protection
+                bsr.s   ControlMapper_EnableSram
                 bsr.s   TestSram
-                beq.s   @Success
+                beq.s   @Return
                 
-                ; Check if MEGAOS firmware is present in ROM bank 30
-                move.b  #30,(ROM_BANK4).l
-                lea     aSegaEverDrive(pc), a0
-                movea.l #$200100,a1                 ; MEGAOS header System ID string location
-                moveq   #15,d1
-                
-@Loop:          cmpm.b  (a0)+,(a1)+
-                dbne    d1,@Loop
-                
-                bne.s   @Method3
-                
-                ; Test SRAM enable method 2 (Extended SSF v1)
-                moveq   #2,d0
-                move.b  #28,(ROM_BANK4).l
-                bra.s   @Continue
-                
-@Method3:       ; Test SRAM enable method 3 (Extended SSF v2)
-                moveq   #3,d0
-                move.b  #31,(ROM_BANK4).l
-                
-@Continue:      ; Disable write protection
-                move.w  #$A000,(EXTENDED_SSF_CTRL0).l
-                bsr.s   TestSram
-                beq.s   @Success
-                
-                ; SRAM control -1 indicates that saving is not supported on this device
-                moveq   #-1,d0
-                
-@Success:       ; Save first tested working SRAM control method
-                move.b  d0,((SRAM_CONTROL-$1000000)).w
-                
-                ; Init ROM banks
-                bra.s   ControlMapper_RestoreRomBanks
+                ; Mapper error
+                neg.b   ((SRAM_CONTROL-$1000000)).w
+@Return:        rts
 
     ; End of function InitMapper
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Return "equal" when test completes successfully
+; Return "equal" when test completes successfully.
 
-TestSram:       lea     aSegaEverDrive(pc), a0
+TestSram:       lea     SramCheckString(pc), a0
                 movea.l #SRAM_TEST_SPACE,a1
-                moveq   #15,d1
+                moveq   #SRAM_STRING_CHECK_COUNTER,d0
                 
 @Loop:          move.b  (a0),(a1)
                 cmpm.b  (a0)+,(a1)+
                 bne.s   @Break
-                clr.b   -1(a1)      ; clear test space as we parse it
-                lea     1(a1),a1
-                dbf     d1,@Loop
+                clr.b   -1(a1)                  ; clear test space as we parse it
+                addq.w  #1,a1
+                dbf     d0,@Loop
                 
 @Break:         rts
 
     ; End of function TestSram
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-ControlMapper_DisableSramAndSwitchRomBanks:
-                bsr.s   ControlMapper_DisableSram
-                
-ControlMapper_SwitchRomBanks:
-                move.b  #8,(ROM_BANK4).l
-                move.b  #9,(ROM_BANK5).l
-                move.b  #10,(ROM_BANK6).l
-                move.b  #11,(ROM_BANK7).l
-                rts
-                
-ControlMapper_DisableSram:
-                move.w  d0,-(sp)
-                clr.w   d0
-                move.b  ((SRAM_CONTROL-$1000000)).w,d0
-                bmi.s   @SramDisableMethod2
-                add.w   d0,d0
-                jmp     @bt_SramDisableMethods(pc,d0.w)
-                
-@bt_SramDisableMethods:
-                bra.s   @SramDisableMethod0
-                bra.s   @SramDisableMethod1
-                bra.s   @SramDisableMethod2
-                bra.s   @SramDisableMethod2
-                
-@SramDisableMethod0:
-                move.b  #0,(SEGA_MAPPER_CTRL0).l
-                bra.s   @Done
-                
-@SramDisableMethod1:
-                move.w  #0,(EXTENDED_SSF_CTRL0).l
-                bra.s   @Done
-                
-@SramDisableMethod2:
-                move.b  #4,(ROM_BANK4).l
-@Done:          move.w  (sp)+,d0
-                rts
-
-    ; End of function ControlMapper_DisableSram
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -136,35 +78,42 @@ ControlMapper_RestoreRomBanksAndEnableSram:
                 bsr.s   ControlMapper_RestoreRomBanks
                 
 ControlMapper_EnableSram:
-                move.w  d0,-(sp)
-                clr.w   d0
-                move.b  ((SRAM_CONTROL-$1000000)).w,d0
-                bmi.s   @Done
-                add.w   d0,d0
-                jmp     @bt_SramEnableMethods(pc,d0.w)
+                tst.b   ((SRAM_CONTROL-$1000000)).w
+                bmi.s   @ExtendedSsf
                 
-@bt_SramEnableMethods:
-                bra.s   @SramEnableMethod0
-                bra.s   @SramEnableMethod1
-                bra.s   @SramEnableMethod2
-                bra.s   @SramEnableMethod3
-                
-@SramEnableMethod0:
+                ; SEGA mapper
                 move.b  #1,(SEGA_MAPPER_CTRL0).l
-                bra.s   @Done
+                rts
                 
-@SramEnableMethod1:
-                move.w  #1,(EXTENDED_SSF_CTRL0).l
-                bra.s   @Done
-                
-@SramEnableMethod2:
-                move.b  #28,(ROM_BANK4).l
-                bra.s   @Done
-                
-@SramEnableMethod3:
-                move.b  #31,(ROM_BANK4).l
-@Done:          move.w  (sp)+,d0
+@ExtendedSsf:   move.b  #28,(ROM_BANK4).l
                 rts
 
     ; End of function ControlMapper_EnableSram
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+ControlMapper_DisableSramAndSwitchRomBanks:
+                bsr.s   ControlMapper_DisableSram
+                
+ControlMapper_SwitchRomBanks:
+                move.b  #8,(ROM_BANK4).l
+                move.b  #9,(ROM_BANK5).l
+                move.b  #10,(ROM_BANK6).l
+                move.b  #11,(ROM_BANK7).l
+                rts
+                
+ControlMapper_DisableSram:
+                tst.b   ((SRAM_CONTROL-$1000000)).w
+                bmi.s   @ExtendedSsf
+                
+                ; SEGA mapper
+                move.b  #0,(SEGA_MAPPER_CTRL0).l
+                rts
+                
+@ExtendedSsf:   move.b  #4,(ROM_BANK4).l
+                rts
+
+    ; End of function ControlMapper_DisableSram
 

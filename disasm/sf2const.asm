@@ -286,13 +286,10 @@ word_FFB094: equ $FFB094
 MINISTATUS_WINDOW_WIDTH: equ $FFB096
 MOVE_SFX: equ $FFB098
 CURRENT_SAVE_SLOT: equ $FFB09A
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
-SRAM_CONTROL: equ $FFB09B   ; Tested working SRAM control type :
-    endif                   ;   0: SEGA Mapper
-                            ;   1: Partial Extended SSF (emulators)
-                            ;   2: Extended SSF (Mega EverDrive v2)
-                            ;   3: Extended SSF (Mega EverDrive Pro)
-                            ;  -1: saving not supported
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)     ; Tested working SRAM control type :
+SRAM_CONTROL: equ $FFB09B                   ;  -1: EverDrive Extended SSF mapper
+    endif                                   ;   0: SEGA mapper
+                                            ;   1: Memory mapping error
 SPEECH_SFX: equ $FFB09C
 SPEECH_SFX_BACKUP: equ $FFB09E
 CURRENT_PORTRAIT: equ $FFB0A0

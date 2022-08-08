@@ -63,7 +63,7 @@
                 if (STANDARD_BUILD=1)
                     include "code\common\tech\findspecialproperties-standard.asm"
                 endif
-                if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+                if (STANDARD_BUILD&MEMORY_MAPPER=1)
                     include "code\common\tech\extendedssfmapper.asm"   ; Extended SSF mapper functions
                 endif
                 

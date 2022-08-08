@@ -276,16 +276,13 @@ ClearSaveSlotFlag:
 
 InitSavedData:
                 
-            if (EXTENDED_SSF_MAPPER=0)
-                enableSram                      ; make sure that SRAM is enabled at this point, as it is the expected default state
-            endif
             if (RELOCATED_SAVED_DATA_TO_SRAM=1)
                 lea     (combatantEntries).l,a0
                 move.w  #SAVE_SLOT_COUNTER,d0
 @Loop:          clr.w   (a0)+
                 dbf     d0,@Loop
-            endif
                 rts
+            endif
 
     ; End of function ClearSavedData
 

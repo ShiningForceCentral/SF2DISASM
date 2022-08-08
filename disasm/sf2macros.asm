@@ -29,10 +29,18 @@ wordAlign: macro ;alias
 ; ---------------------------------------------------------------------------
     
 declareSystemId: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER&SSF_SYSTEM_ID=1)
     dc.b 'SEGA SSF        '
     else
     dc.b 'SEGA GENESIS    '
+    endc
+    endm
+    
+declareChecksum: macro
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
+    dc.w 0
+    else
+    dc.w $8921
     endc
     endm
     
@@ -66,7 +74,7 @@ declareRegionSupport: macro
 ; ---------------------------------------------------------------------------
     
 getCurrentSaveSlot: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     move.b  ((CURRENT_SAVE_SLOT-$1000000)).w,\1
     else
     move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,\1
@@ -74,7 +82,7 @@ getCurrentSaveSlot: macro
     endm
     
 setCurrentSaveSlot: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     move.b  \1,((CURRENT_SAVE_SLOT-$1000000)).w
     else
     move.w  \1,((CURRENT_SAVE_SLOT-$1000000)).w
@@ -82,7 +90,7 @@ setCurrentSaveSlot: macro
     endm
     
 enableSram: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     jsr     (ControlMapper_EnableSram).w
     elseif (expandedRom=1)
     move.b  #1,(SEGA_MAPPER_CTRL0).l
@@ -90,7 +98,7 @@ enableSram: macro
     endm
     
 enableSramAndReturn: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     jmp     (ControlMapper_EnableSram).w
     elseif (expandedRom=1)
     move.b  #1,(SEGA_MAPPER_CTRL0).l
@@ -101,7 +109,7 @@ enableSramAndReturn: macro
     endm
     
 disableSram: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     jsr     (ControlMapper_DisableSram).w
     elseif (expandedRom=1)
     move.b  #0,(SEGA_MAPPER_CTRL0).l
@@ -109,7 +117,7 @@ disableSram: macro
     endm
     
 disableSramAndSwitchRomBanks: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     jsr     (ControlMapper_DisableSramAndSwitchRomBanks).w
     elseif (expandedRom=1)
     move.b  #0,(SEGA_MAPPER_CTRL0).l
@@ -117,19 +125,19 @@ disableSramAndSwitchRomBanks: macro
     endm
     
 switchRomBanks: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     jsr     (ControlMapper_SwitchRomBanks).w
     endc
     endm
     
 restoreRomBanks: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     jsr     (ControlMapper_RestoreRomBanks).w
     endc
     endm
     
 restoreRomBanksAndEnableSram: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     jsr     (ControlMapper_RestoreRomBanksAndEnableSram).w
     elseif (expandedRom=1)
     move.b  #1,(SEGA_MAPPER_CTRL0).l
@@ -137,7 +145,7 @@ restoreRomBanksAndEnableSram: macro
     endm
     
 processDmaAndRestoreMemoryMap: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     pea     (\3).w
     pea     (\2).w
     jmp     (\1).w
@@ -161,7 +169,7 @@ processDmaRestoreRomBanksAndEnableSram: macro
     endm
     
 loadCompressedDataRestoreRomBanksAndEnableSram: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     pea     (ControlMapper_RestoreRomBanksAndEnableSram).w
     jmp     (LoadCompressedData).w
     elseif (expandedRom=1)
@@ -174,7 +182,7 @@ loadCompressedDataRestoreRomBanksAndEnableSram: macro
     endm
     
 conditionalMapperInit: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     bsr.w   InitMapper
     endc
     endm
@@ -229,7 +237,7 @@ alignIfOptimizedLayout: macro
     endm
     
 alignIfExtendedSsf: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     align \1
     else
     align \2
@@ -237,13 +245,13 @@ alignIfExtendedSsf: macro
     endm
     
 objIfExtendedSsf: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     obj \1
     endc
     endm
     
 objendIfExtendedSsf: macro
-    if (STANDARD_BUILD&EXTENDED_SSF_MAPPER=1)
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
     objend
     endc
     endm

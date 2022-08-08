@@ -51,6 +51,9 @@ TextBankTreeData:
                 includeIfVanillaRom "data\scripting\text\entries.asm"    ; Textbank entries
                 includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
                 align
+            if (STANDARD_BUILD&MEMORY_MAPPER=1)
+                include "code\common\tech\mappererrorhandling-standard.asm"
+            endif
                 includeIfExpandedRom "data\battles\global\battlemapcoords.asm"      ; Battle map coords
                 includeIfExpandedRom "data\maps\global\savepointmapcoords.asm"      ; Save point map coords
                 includeIfExpandedRom "data\maps\global\raftresetmapcoords.asm"      ; Raft reset map coords

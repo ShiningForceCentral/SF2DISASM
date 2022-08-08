@@ -9,12 +9,15 @@ InitGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
-                if (regionFreeRom=0)
-                    bsr.w   CheckRegion
-                endif
-                
-                enableSram
-                jsr     j_NewGame
+            if (regionFreeRom=0)
+                bsr.w   CheckRegion
+            endif
+            if (STANDARD_BUILD&MEMORY_MAPPER=1)
+                tst.b   ((SRAM_CONTROL-$1000000)).w
+                ble.s   @Continue
+                jmp     MapperErrorHandling
+            endif
+@Continue:      jsr     j_NewGame
                 jsr     j_DisplaySegaLogo
                 bne.w   loc_71EC
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
