@@ -508,7 +508,7 @@ sub_24966:
                 bne.w   @CheckChoice_SearchStay
                 move.w  combatant(a6),d0
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
                 bne.w   @HasItem
                 txt     438             ; "You have no item.{W1}"
@@ -539,16 +539,16 @@ loc_249C6:
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 clr.w   d0
@@ -566,7 +566,7 @@ loc_24A24:
                 move.w  d1,((BATTLEACTION_ITEM_SLOT-$1000000)).w
                 move.w  d0,d1
                 move.w  combatant(a6),d0
-                jsr     j_IsItemUsableWeaponInBattle
+                jsr     j_IsItemUsableByCombatant?
                 bcs.w   @ItemHasUse
                 txt     439             ; "It has no effect.{W1}"
                 clsTxt
@@ -618,7 +618,7 @@ loc_24ADC:
                 movem.l d0-a6,-(sp)
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 move.w  ((word_FFB18C-$1000000)).w,d1
-                jsr     j_IsItemUsableWeaponInBattle
+                jsr     j_IsItemUsableByCombatant?
                 bcc.s   loc_24AFC
                 jsr     j_CreateItemRangeGrid
                 bsr.w   CreateMoveableRangeForUnit
@@ -897,16 +897,16 @@ loc_24D6C:
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 move.w  combatant(a6),d0
@@ -963,7 +963,7 @@ loc_24E4C:
                 move.w  d0,itemOrSpellIndex(a6)
                 jsr     j_HideMiniStatusWindow
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #4,d2
                 beq.w   loc_24E8E
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
@@ -982,16 +982,16 @@ loc_24E8E:
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 clr.w   d0
@@ -1048,16 +1048,16 @@ loc_24F6E:
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 clr.w   d0

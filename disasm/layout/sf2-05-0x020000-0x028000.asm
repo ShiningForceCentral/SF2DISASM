@@ -19,8 +19,7 @@
                 include "code\common\menus\blacksmith\blacksmithactions.asm"    ; Blacksmith functions
                 include "data\stats\allies\classes\blacksmitheligibleclasses.asm"    ; Blacksmith eligible classes list
                 include "code\common\menus\blacksmith\pickmithrilweapon.asm"    ; Pick Mithril Weapon function
-                include "data\stats\allies\classes\mithrilweaponclasses.asm"    ; Mithril weapon class lists
-                include "data\stats\items\mithrilweapons.asm"    ; Mithril weapon lists
+                include "data\stats\items\mithrilweapons.asm"    ; Mithril weapons data
                 include "code\common\menus\caravan\caravanactions_1.asm"    ; Caravan functions
                 include "data\stats\items\specialcaravandescriptions.asm"    ; Special Caravan descriptions
                 include "code\common\menus\caravan\choosecaravanportrait.asm"    ; Choose Caravan Portrait function

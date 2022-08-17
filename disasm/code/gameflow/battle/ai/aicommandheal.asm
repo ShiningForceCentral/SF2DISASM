@@ -45,7 +45,7 @@ ExecuteAiCommand_Heal:
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),spellEntry(a6)
                 move.w  #COMBATANT_ENEMIES_START,d0
-                bsr.w   IsCombatantAtLessThanHalfHP
+                bsr.w   IsCombatantAtLessThanHalfHP?
                 bcc.s   @UseItem        ; first enemy has less than half HP, and we have a healing rain, so use it
                 move.b  #ITEM_NOTHING,itemEntry(a6)
                 move.b  #SPELL_NOTHING,spellEntry(a6)
@@ -157,7 +157,7 @@ ExecuteAiCommand_Heal:
                 bra.w   @NextTarget     ; if target is dead
 @TargetIsAlive:
                 
-                bsr.w   DoesCombatantRequireHealing
+                bsr.w   DoesCombatantRequireHealing?
                 bcc.s   @PopulateList   
                 bra.w   @NextTarget     
 @PopulateList:
@@ -394,7 +394,7 @@ ExecuteAiCommand_Heal:
                 clr.w   d0
                 move.b  caster(a6),d0
                 move.b  itemSlot(a6),d1
-                bsr.w   GetItemAndNumberHeld
+                bsr.w   GetItemBySlotAndHeldItemsNumber
                 move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
 @Goto_Done:
                 

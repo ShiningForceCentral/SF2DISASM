@@ -104,7 +104,7 @@ sub_5A278:
                 txt     1727            ; "We all thank you.{N}Take this gift.{W1}"
                 moveq   #0,d0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #4,d2
                 bne.s   loc_5A296
                 txt     1729            ; "Oh, your hands are full.{N}I'll give it to you later.{W1}"

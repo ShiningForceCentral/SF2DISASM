@@ -374,7 +374,7 @@ WriteMemberItemsList:
                 
                 move.w  combatant(a6),d0
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
                 beq.w   @NoItems
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d6
@@ -383,7 +383,7 @@ WriteMemberItemsList:
                 move.w  combatant(a6),d0
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d1
                 sub.w   d6,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.b  #ITEM_NOTHING,d1
                 beq.w   return_13B46
                 movem.w d0-d1/d6-d7,-(sp)
@@ -481,16 +481,16 @@ DrawMemberItemsIconsCross:
                 move.w  combatant(a6),d0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 bsr.s   LoadItemIcon
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 bsr.s   LoadItemIcon
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 bsr.s   LoadItemIcon
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 bsr.w   LoadItemIcon
                 bra.w   loc_13C20
 
@@ -653,16 +653,16 @@ sub_13F14:
                 sndCom  SFX_VALIDATION
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 lea     (FF8804_LOADING_SPACE).l,a1
@@ -2867,7 +2867,9 @@ loc_15408:
 
 ; =============== S U B R O U T I N E =======================================
 
-; d0 = FFAFE7, related to DMA
+; related to DMA
+; 
+; In: d0.b = current diamond menu choice
 
 
 sub_15422:

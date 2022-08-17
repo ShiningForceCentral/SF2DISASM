@@ -147,7 +147,7 @@ raftResetMapCoords: macro
     dc.b \4
     endm
     
-itemIndex: macro
+item: macro
     defineShorthand.b ITEM_,\1
     endm
     
@@ -171,7 +171,7 @@ enemyEntity: macro
     endm
     
 itemDrop: macro ; alias
-    itemIndex \1
+    item \1
     endm
     
 droppedFlag: macro
@@ -361,7 +361,7 @@ weaponGraphics: macro
 shopInventory: macro
     dc.b narg
     rept narg
-    itemIndex \1
+    item \1
     shift
     endr
     endm
@@ -381,7 +381,7 @@ promotionSection: macro
 promotionItems: macro
     dc.b narg
     rept narg
-    itemIndex \1
+    item \1
     shift
     endr
     endm
@@ -404,23 +404,23 @@ mithrilWeaponClass: macro   ; alias
     
 mithrilWeapons: macro
     dc.b \1
-    itemIndex \2
+    item \2
     dc.b \3
-    itemIndex \4
+    item \4
     dc.b \5
-    itemIndex \6
+    item \6
     dc.b \7
-    itemIndex \8
+    item \8
     endm
     
 specialCaravanDescription: macro
-    itemIndex \1
+    item \1
     dc.b \2
     defineShorthand.w MESSAGE_CARAVANDESC_,\3
     endm
     
 usableOutsideBattleItem: macro  ; alias
-    itemIndex \1
+    item \1
     endm
     
 input: macro

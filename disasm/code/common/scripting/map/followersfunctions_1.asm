@@ -20,7 +20,7 @@ InitializeFollowerEntities:
                 move.b  #1,(a5)
                 chkFlg  65              ; Caravan is unlocked
                 beq.s   loc_442D2
-                bsr.s   IsOverworldMap  
+                bsr.s   IsOverworldMap? 
                 beq.s   loc_442D2
                 lea     tbl_OverworldFollowers(pc), a4
                 lea     pt_eas_WorldmapFollowers(pc), a6

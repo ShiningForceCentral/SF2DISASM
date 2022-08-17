@@ -6,4 +6,4 @@
 
                 include "code\common\tech\pointers\s11_enemybattlespritespointer.asm"    ; Game Section 11 Enemy Battlesprites Pointer
                 include "data\graphics\battles\battlesprites\enemies\entries.asm"    ; Enemy battlesprites
-                align $8000
+                align $180000
