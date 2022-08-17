@@ -34,14 +34,41 @@
                 include "data\stats\items\chestgoldamounts.asm"    ; Chest gold amounts
                 include "code\gameflow\exploration\explorationfunctions_1.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlefunctions\battlefunctions_1.asm"    ; Battle functions
+            if (STANDARD_BUILD=1)
+                include "code\gameflow\battle\battlefunctions\getegresspositionforbattle-standard.asm"
+                include "code\gameflow\battle\battlefunctions\executeindividualturn-standard.asm"
+                include "code\gameflow\battle\battlefunctions\handleafterturneffects-standard.asm"
+                include "data\battles\global\egresspositionsforbattles-standard.asm"
+                include "data\stats\randomattackspells-standard.asm"
+                include "data\battles\global\enemybattlescenemusics-standard.asm"
+                include "data\stats\items\afterturnrecovery-standard.asm"
+                align
+            else
                 include "code\gameflow\battle\battlefunctions\getegresspositionforbattle.asm"    ; Get Egress Position For Battle function
                 include "code\gameflow\battle\battlefunctions\executeindividualturn.asm"    ; Execute Individual Turn function
                 include "code\gameflow\battle\battlefunctions\handleafterturneffects.asm"    ; Handle After Turn Effects function
+            endif
                 include "code\gameflow\battle\battlefunctions\battlefunctions_2.asm"    ; Battle functions
+            if (STANDARD_BUILD=1)
+                include "code\gameflow\battle\battlefunctions\updateenemyaifunctions-standard.asm"
+                include "code\gameflow\battle\battlefunctions\turnorderfunctions-standard.asm"
+            else
                 include "code\gameflow\battle\battlefunctions\updateenemyaifunctions.asm"    ; Update Enemy AI functions
                 include "code\gameflow\battle\battlefunctions\turnorderfunctions.asm"    ; Battle turn order functions
+            endif
                 include "code\gameflow\battle\battlefunctions\battlefunctions_3.asm"    ; Battle functions
+            if (STANDARD_BUILD=1)
+                include "code\gameflow\battle\battlefunctions\setmovesfx-standard.asm"
+                include "code\gameflow\battle\battlemusic-standard.asm"
+                include "data\stats\allies\immortalallies-standard.asm"
+                include "data\battles\global\displaytimerbattles-standard.asm"
+                include "data\battles\global\losablebattles-standard.asm"
+                include "data\stats\items\movesfxforequippedring-standard.asm"
+                include "data\battles\global\explorationtobattlemusics-standard.asm"
+                align
+            else
                 include "code\gameflow\battle\battlefunctions\setmovesfx.asm"    ; Set Move Sfx function
+            endif
                 include "code\gameflow\exploration\explorationfunctions_2.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions

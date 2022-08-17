@@ -828,6 +828,10 @@ DecreaseCurrentMOV:
 ; =============== S U B R O U T I N E =======================================
 
 
+GetClassAndName:
+            if (STANDARD_BUILD=1)
+                bsr.w   GetClass
+            endif
 GetClassName:
                 
                 movea.l (p_tbl_ClassNames).l,a0

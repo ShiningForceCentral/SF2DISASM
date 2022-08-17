@@ -21,7 +21,12 @@ WriteTilesFromAsciiWithOrangeFont:
 
 ; write tiles from number in D0 into A1 D7 letters, window width D1
 
-
+WriteLvOrExpValue:
+            if (STANDARD_BUILD=1)
+                moveq   #2,d7   ; two digits
+                move.w  d1,d0
+                ext.l   d0
+            endif
 WriteTilesFromNumber:
                 
                 jsr     (WriteAsciiNumber).w

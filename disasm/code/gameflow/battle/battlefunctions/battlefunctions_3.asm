@@ -47,7 +47,11 @@ LoadBattle:
                 jsr     (LoadMapEntitySprites).w
                 bsr.w   SetBaseVIntFunctions
                 jsr     j_LoadBattleTerrainData
+            if (STANDARD_BUILD=1)
+                bsr.w   PlayMapMusic
+            else
                 jsr     (PlayMapMusic).w
+            endif
                 jsr     (FadeInFromBlack).w
                 cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
                                                         ; if battle 44, then special battle !
