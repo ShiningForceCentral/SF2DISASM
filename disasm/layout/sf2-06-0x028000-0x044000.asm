@@ -51,10 +51,10 @@ TextBankTreeData:
                 include "data\scripting\text\entries.asm"    ; Textbank entries
                 include "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
                 align
-                if (CHAPTER_SCREEN=1)
+            if (STANDARD_BUILD&CHAPTER_SCREEN=1)
                 include code\specialscreens\chapter\chapter.asm
                 align
                 include code\specialscreens\chapter\graphics.asm
                 align
-                endif
+            endif
                 align $44000
