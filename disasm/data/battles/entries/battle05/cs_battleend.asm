@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle05\cs_battleend.asm :
 ; 0x49AB2..0x49B48 : Enemy defeated cutscene for battle 5
-edcs_battle5:   textCursor $913
+edcs_battle5:   textCursor 2323
                 stopEntity 128
                 setFacing ALLY_BOWIE,UP
                 setFacing ALLY_SLADE,UP

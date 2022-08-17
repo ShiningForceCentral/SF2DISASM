@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D6 = Value range, Out: D7 = Random value
+; In: d6.w = Value range, Out: d7.w = Random value
+
 
 GenerateRandomNumber:
                 
@@ -25,6 +26,7 @@ GenerateRandomNumber:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WaitForRandomValueToMatch:
                 
@@ -59,6 +61,7 @@ loc_164A:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 GetRandomValueUnsigned:
                 
                 movem.l d0-d5/a0-a6,-(sp)
@@ -77,13 +80,12 @@ GetRandomValueUnsigned:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = value range
+; Debug mode allows values 0-3 depending on player direction.
 ; 
-; Out: D0 = random value
-; 
-; Debug mode allows values 0-3 depending on player direction
+;   In: d0.w = Value range, Out: d0.w = Random or debug value
 
-GetRandomOrDebugValue:
+
+GenerateRandomOrDebugNumber:
                 
                 movem.l d6-d7,-(sp)
                 move.w  d0,d6
@@ -110,5 +112,5 @@ loc_16B8:
                 movem.l (sp)+,d6-d7
                 rts
 
-    ; End of function GetRandomOrDebugValue
+    ; End of function GenerateRandomOrDebugNumber
 

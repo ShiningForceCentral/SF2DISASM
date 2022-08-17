@@ -4,76 +4,84 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; check specific item index + code offset to run when used in field
+; Find specific item index + code offset to run when used in field.
+; 
+;       In: d1.w = item entry
 
-UseFieldItem:
+
+UseItemOnField:
                 
+                
+                module
                 movem.l d0-d1/d6-d7,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 movem.l d1/a0,-(sp)
                 lea     rjt_FieldItemEffects(pc), a0
-loc_229FC:
+@FindItem_Loop:
                 
                 cmpi.w  #CODE_TERMINATOR_WORD,(a0)
-                beq.w   loc_22A1A
+                beq.w   @Break
                 cmp.w   (a0)+,d1
-                bne.w   loc_22A14
+                bne.w   @Next
                 move.w  (a0)+,d1
                 jsr     rjt_FieldItemEffects(pc,d1.w)
-                bra.w   loc_22A1A
-loc_22A14:
+                bra.w   @Break
+@Next:
                 
                 adda.w  #2,a0
-                bra.s   loc_229FC
-loc_22A1A:
+                bra.s   @FindItem_Loop
+@Break:
                 
                 movem.l (sp)+,d1/a0
-                bra.w   loc_22A48
+                bra.w   @Done
 rjt_FieldItemEffects:
                 
-                dc.w 3
+                dc.w ITEM_ANTIDOTE
                 dc.w FieldItem_CurePoison-rjt_FieldItemEffects
-                dc.w 5
+                dc.w ITEM_FAIRY_POWDER
                 dc.w FieldItem_CurePoisonAndParalysis-rjt_FieldItemEffects
-                dc.w 9
+                dc.w ITEM_POWER_WATER
                 dc.w FieldItem_IncreaseATT-rjt_FieldItemEffects
-                dc.w $A
+                dc.w ITEM_PROTECT_MILK
                 dc.w FieldItem_IncreaseDEF-rjt_FieldItemEffects
-                dc.w $B
+                dc.w ITEM_QUICK_CHICKEN
                 dc.w FieldItem_IncreaseAGI-rjt_FieldItemEffects
-                dc.w $C
+                dc.w ITEM_RUNNING_PIMENTO
                 dc.w FieldItem_IncreaseMOV-rjt_FieldItemEffects
-                dc.w $D
+                dc.w ITEM_CHEERFUL_BREAD
                 dc.w FieldItem_IncreaseHP-rjt_FieldItemEffects
-                dc.w $E
+                dc.w ITEM_BRIGHT_HONEY
                 dc.w FieldItem_IncreaseMP-rjt_FieldItemEffects
-                dc.w $F
+                dc.w ITEM_BRAVE_APPLE
                 dc.w LevelUpCutscene-rjt_FieldItemEffects
-                dc.w $FFFF
-loc_22A48:
+                dc.w CODE_TERMINATOR_WORD
+@Done:
                 
                 movem.l (sp)+,d0-d1/d6-d7
                 rts
 
-    ; End of function UseFieldItem
+    ; End of function UseItemOnField
 
+                
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_CurePoison:
                 
-                jsr     j_GetStatus
-                bclr    #STATUSEFFECTS_BIT_POISON,d1
+                jsr     j_GetStatusEffects
+                bclr    #STATUSEFFECT_BIT_POISON,d1
                 beq.s   byte_22A64      
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $95             ; "{NAME} is no longer{N}poisoned.{W2}"
+                txt     149             ; "{NAME} is no longer{N}poisoned.{W2}"
                 bra.s   loc_22A68
 byte_22A64:
                 
-                txt     $94             ; "It has no use.{W2}"
+                txt     148             ; "It has no use.{W2}"
 loc_22A68:
                 
-                jsr     j_SetStatus
+                jsr     j_SetStatusEffects
                 rts
 
     ; End of function FieldItem_CurePoison
@@ -81,30 +89,31 @@ loc_22A68:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_CurePoisonAndParalysis:
                 
-                jsr     j_GetStatus
+                jsr     j_GetStatusEffects
                 moveq   #0,d2
-                bclr    #STATUSEFFECTS_BIT_POISON,d1
+                bclr    #STATUSEFFECT_BIT_POISON,d1
                 beq.s   loc_22A88
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $95             ; "{NAME} is no longer{N}poisoned.{W2}"
+                txt     149             ; "{NAME} is no longer{N}poisoned.{W2}"
                 moveq   #$FFFFFFFF,d2
 loc_22A88:
                 
-                bclr    #STATUSEFFECTS_BIT_STUN,d1
+                bclr    #STATUSEFFECT_BIT_STUN,d1
                 beq.s   loc_22A98
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $9C             ; "{NAME} is no longer{N}paralyzed.{W2}"
+                txt     156             ; "{NAME} is no longer{N}paralyzed.{W2}"
                 moveq   #$FFFFFFFF,d2
 loc_22A98:
                 
                 tst.w   d2
                 bne.s   loc_22AA0
-                txt     $94             ; "It has no use.{W2}"
+                txt     148             ; "It has no use.{W2}"
 loc_22AA0:
                 
-                jsr     j_SetStatus
+                jsr     j_SetStatusEffects
                 jsr     j_ApplyStatusEffectsAndItemsOnStats
                 rts
 
@@ -112,6 +121,7 @@ loc_22AA0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FieldItem_IncreaseATT:
                 
@@ -122,7 +132,7 @@ FieldItem_IncreaseATT:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $96             ; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
+                txt     150             ; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
                 jsr     j_IncreaseBaseATT
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentATT
@@ -133,6 +143,7 @@ FieldItem_IncreaseATT:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_IncreaseDEF:
                 
                 moveq   #3,d6
@@ -142,7 +153,7 @@ FieldItem_IncreaseDEF:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $97             ; "{NAME}'s defensive{N}power is boosted by {#}.{W2}"
+                txt     151             ; "{NAME}'s defensive{N}power is boosted by {#}.{W2}"
                 jsr     j_IncreaseBaseDEF
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentDEF
@@ -153,6 +164,7 @@ FieldItem_IncreaseDEF:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_IncreaseAGI:
                 
                 moveq   #3,d6
@@ -162,7 +174,7 @@ FieldItem_IncreaseAGI:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $98             ; "{NAME}'s agility{N}is boosted by {#}.{W2}"
+                txt     152             ; "{NAME}'s agility{N}is boosted by {#}.{W2}"
                 jsr     j_IncreaseAGI
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentAGI
@@ -172,6 +184,7 @@ FieldItem_IncreaseAGI:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FieldItem_IncreaseMOV:
                 
@@ -189,7 +202,7 @@ loc_22B42:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $99             ; "{NAME}'s movement{N}range enlarged by {#}.{W2}"
+                txt     153             ; "{NAME}'s movement{N}range enlarged by {#}.{W2}"
                 jsr     j_IncreaseBaseMOV
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentMOV
@@ -200,6 +213,7 @@ loc_22B42:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 FieldItem_IncreaseHP:
                 
                 moveq   #3,d6
@@ -209,7 +223,7 @@ FieldItem_IncreaseHP:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $9A             ; "{NAME}'s max. HP{N}are raised by {#}.{W2}"
+                txt     154             ; "{NAME}'s max. HP{N}are raised by {#}.{W2}"
                 jsr     j_IncreaseMaxHP
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentHP
@@ -219,6 +233,7 @@ FieldItem_IncreaseHP:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 FieldItem_IncreaseMP:
                 
@@ -232,14 +247,14 @@ FieldItem_IncreaseMP:
                 move.w  d7,d1
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                txt     $9B             ; "{NAME}'s max. MP{N}are raised by {#}.{W2}"
+                txt     155             ; "{NAME}'s max. MP{N}are raised by {#}.{W2}"
                 jsr     j_IncreaseMP
                 move.w  d7,d1
                 jsr     j_IncreaseCurrentMP
                 bra.s   return_22BC0
 byte_22BBC:
                 
-                txt     $94             ; "It has no use.{W2}"
+                txt     148             ; "It has no use.{W2}"
 return_22BC0:
                 
                 rts

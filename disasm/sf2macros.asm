@@ -9,15 +9,18 @@
     include "sf2battlescenemacros.asm"
 
 align: macro
-    if (narg=1)
+    case narg
+=0  ; If no arguments given, align to word boundary.
+    dcb.b *%2,$FF
+=1  ; If given an address argument only, pad with $FF.
     dcb.b \1-(*%\1),$FF
-    else
+=?  ; If two arguments or more, pad with second argument.
     dcb.b \1-(*%\1),\2
-    endc
+    endcase
     endm
     
-wordAlign: macro
-    dcb.b *%2,$FF
+wordAlign: macro ;alias
+    align
     endm
     
 sndCom: macro
@@ -144,6 +147,10 @@ raftResetMapCoords: macro
     dc.b \4
     endm
     
+item: macro
+    defineShorthand.b ITEM_,\1
+    endm
+    
 classType: macro
     defineShorthand.b CLASSTYPE_,\1
     endm
@@ -163,12 +170,16 @@ enemyEntity: macro
     dc.b \1+128
     endm
     
-itemDrop: macro
-    defineShorthand.b ITEM_,\1
+itemDrop: macro ; alias
+    item \1
     endm
     
-dropFlag: macro
+droppedFlag: macro
     dc.b \1
+    endm
+    
+dropFlag: macro ; alias
+    droppedFlag \1
     endm
     
 spellElement: macro
@@ -177,6 +188,22 @@ spellElement: macro
     
 landEffectAndMoveCost: macro
     defineBitfield.b LANDEFFECTSETTING_,\1
+    endm
+    
+aiCommandset: macro
+    dc.b narg
+    rept narg
+    defineShorthand.b AICOMMAND_,\1
+    shift
+    endr
+    endm
+    
+battles: macro
+    dc.b narg
+    rept narg
+    battle \1
+    shift
+    endr
     endm
     
 background: macro
@@ -261,8 +288,12 @@ equipEffects: macro
     
 ; Spell definitions
     
-index: macro
+entry: macro
     defineBitfield.b SPELL_,\1
+    endm
+    
+index: macro ; alias
+    entry \1
     endm
     
 mpCost: macro
@@ -285,18 +316,33 @@ power: macro
     dc.b \1
     endm
     
+forClass: macro
+    defineShorthand.b CLASS_,\1
+    endm
+    
 allyBattleSprite: macro
     defineShorthand.b ALLYBATTLESPRITE_,\1
-    if (narg=2)
+    if (narg=2) ; legacy support for old ally battle sprite and palette
     dc.b \2
     endc
     endm
     
+allyBattleSprAndPlt: macro
+    forClass \1
+    allyBattleSprite \2
+    dc.b \3
+    endm
+    
 enemyBattleSprite: macro
     defineShorthand.b ENEMYBATTLESPRITE_,\1
-    if (narg=2)
+    if (narg=2) ; legacy support for old enemy battle sprite and palette
     dc.b \2
     endc
+    endm
+    
+enemyBattleSprAndPlt: macro
+    enemyBattleSprite \1
+    dc.b \2
     endm
     
 weaponSprite: macro
@@ -307,12 +353,21 @@ weaponPalette: macro
     defineShorthand.b WEAPONPALETTE_,\1
     endm
     
-shopDef: macro
+weaponGraphics: macro
+    weaponSprite \1
+    weaponPalette \2
+    endm
+    
+shopInventory: macro
     dc.b narg
     rept narg
-    defineShorthand.b ITEM_,\1
+    item \1
     shift
     endr
+    endm
+    
+shopDef: macro ; alias
+    shopInventory \_
     endm
     
 promotionSection: macro
@@ -326,12 +381,12 @@ promotionSection: macro
 promotionItems: macro
     dc.b narg
     rept narg
-    defineShorthand.b ITEM_,\1
+    item \1
     shift
     endr
     endm
     
-mithrilWeaponClass: macro
+classes: macro
     dc.w narg
     rept narg
     defineShorthand.w CLASS_,\1
@@ -339,25 +394,33 @@ mithrilWeaponClass: macro
     endr
     endm
     
+blacksmithClasses: macro    ; alias
+    classes \1
+    endm
+    
+mithrilWeaponClass: macro   ; alias
+    classes \1
+    endm
+    
 mithrilWeapons: macro
     dc.b \1
-    defineShorthand.b ITEM_,\2
+    item \2
     dc.b \3
-    defineShorthand.b ITEM_,\4
+    item \4
     dc.b \5
-    defineShorthand.b ITEM_,\6
+    item \6
     dc.b \7
-    defineShorthand.b ITEM_,\8
+    item \8
     endm
     
 specialCaravanDescription: macro
-    defineShorthand.b ITEM_,\1
+    item \1
     dc.b \2
     defineShorthand.w MESSAGE_CARAVANDESC_,\3
     endm
     
-usableOutsideBattleItem: macro
-    defineShorthand.b ITEM_,\1
+usableOutsideBattleItem: macro  ; alias
+    item \1
     endm
     
 input: macro
@@ -379,9 +442,13 @@ portrait: macro
     defineShorthand.b PORTRAIT_,\1
     endm
     
-speechSound: macro
+speechSfx: macro
     defineShorthand.b SFX_,\1
     dc.b 0
+    endm
+    
+speechSound: macro ; alias
+    speechSfx \1
     endm
     
 ; Enemy definitions
@@ -407,8 +474,12 @@ maxMp: macro
     dc.b \1,0
     endm
     
-baseAtk: macro
+baseAtt: macro
     dc.b \1,0
+    endm
+    
+baseAtk: macro ; alias
+    baseAtt \1
     endm
     
 baseDef: macro
@@ -448,7 +519,7 @@ spells: macro
     endm
     
 initialStatus: macro
-    defineBitfield.w STATUSEFFECTS_MASK_,\1
+    defineBitfield.w STATUSEFFECT_,\1
     dcb.b 3,0
     endm
     
@@ -458,19 +529,25 @@ unknownWord: macro
     dcb.b 2,0
     endm
     
-randomBattles: macro
+randomBattles: macro ; alias
+    battles
+    endm
+    
+upgradeRange: macro
+    dc.b \1
+    defineShorthand.b ENEMY_,\2
+    defineShorthand.b ENEMY_,\3
+    endm
+    
+excludedEnemies: macro
     dc.b narg
     rept narg
-    defineShorthand.b BATTLE_,\1
+    defineShorthand.b ENEMY_,\1
     shift
     endr
     endm
     
 ; Ally stats
-    
-forClass: macro
-    defineShorthand.b CLASS_,\1
-    endm
     
 defineStatGrowth: macro Start,Proj,Curve
     defineShorthand.b GROWTHCURVE_,\Curve
@@ -485,8 +562,12 @@ mpGrowth: macro
     defineStatGrowth \1,\2,\3
     endm
     
-atkGrowth: macro
+attGrowth: macro
     defineStatGrowth \1,\2,\3
+    endm
+    
+atkGrowth: macro ; alias
+    attGrowth \1,\2,\3
     endm
     
 defGrowth: macro
@@ -539,7 +620,7 @@ resistance: macro
     endm
     
 moveType: macro
-    defineBitfield.b MOVETYPE_,\1
+    defineBitfield.b MOVETYPE_UPPER_,\1
     endm
     
 prowess: macro
@@ -548,11 +629,24 @@ prowess: macro
     
 ; VDP tiles
     
-vdpTile: macro vdp_tile
-    defineBitfieldWithParam.w VDPTILE_, \vdp_tile, VDPTILE_PALETTE3|VDPTILE_PRIORITY
+vdpTile: macro
+    if (narg=0)
+    dc.w 0
+    else
+    defineBitfield.w VDPTILE_,\1
+    endc
     endm
     
-vdpTilePortraitWindow: macro vdp_tile
-    defineBitfieldWithParam.w VDPTILE_PORTRAITWINDOW_, \vdp_tile, VDPTILE_PRIORITY
+vdpBaseTile: macro
+    defineBitfieldWithParam.w VDPTILE_,\1,VDPTILE_PALETTE3|VDPTILE_PRIORITY
+    endm
+    
+; VDP sprites
+
+vdpSprite: macro
+    dc.w \1
+    defineBitfield.w VDPSPRITESIZE_,\2
+    vdpTile \3
+    dc.w \4
     endm
     

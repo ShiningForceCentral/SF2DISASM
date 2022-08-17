@@ -20,6 +20,7 @@ MaskSprites:    dc.l $800301
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitDisplay:
                 
                 trap    #VINT_FUNCTIONS
@@ -61,6 +62,7 @@ plt_BasePalette:incbin "data/graphics/tech/basepalette.bin" ; Palette for UI/Spr
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_30BE:
                 
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
@@ -79,6 +81,7 @@ sub_30BE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_30EE:
                 
@@ -124,6 +127,7 @@ loc_312C:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 sub_3158:
                 

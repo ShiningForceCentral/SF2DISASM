@@ -4,93 +4,114 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+spellLevel = -32
+spellIndex = -28
+spellEntry = -26
+itemTypeBitfield = -20
+targetItemSlot = -14
+itemSlot = -12
+exchangedItemEntry = -10
+itemIndex = -8
+targetMember = -6
+member = -4
+
 MainMenuActions:
                 
+                module
                 movem.l d0-a5,-(sp)
-                link    a6,#-$20
-loc_21286:
+                link    a6,#-32
+@StartMain:
                 
-                moveq   #0,d0
-                moveq   #0,d1
-                moveq   #0,d2
+                moveq   #0,d0           ; initial choice : up
+                moveq   #0,d1           ; animate-in from bottom
+                moveq   #MENU_MAIN,d2
                 lea     (InitStack).w,a0
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
-                beq.s   loc_212A0
-                bra.w   loc_212A8
-loc_212A0:
+                beq.s   @ExitMain
+                bra.w   @IsMemberAction?
+@ExitMain:
                 
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
-loc_212A8:
+@IsMemberAction?:
                 
                 cmpi.w  #0,d0
-                bne.w   loc_212D8
-                bsr.w   sub_219EC       
+                bne.w   @IsMagicAction?
+                
+                ; MEMBER action
+                bsr.w   PopulateGenericListWithCurrentForceMembers
                 clsTxt
-loc_212B8:
+@StartMember:
                 
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10040
+                jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
-                beq.w   loc_212D4
-                jsr     j_BuildMemberStatsScreen
-                bra.s   loc_212B8
-loc_212D4:
+                beq.w   @ExitMember
+                jsr     j_BuildMemberScreen
+                bra.s   @StartMember
+@ExitMember:
                 
-                bra.w   loc_219E8
-loc_212D8:
+                bra.w   @Goto_StartMain
+@IsMagicAction?:
                 
                 cmpi.w  #1,d0
-                bne.w   loc_2147C
-loc_212E0:
+                bne.w   @IsItemAction?
+@StartMagic:
                 
-                bsr.w   sub_219EC       
+                
+                ; MAGIC action
+                bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10048
+                jsr     j_BuildMemberListScreen_MagicPage
                 cmpi.w  #$FFFF,d0
-                beq.w   loc_21478
-                move.w  d0,-4(a6)
-                move.w  d1,-$1A(a6)
-                move.w  d1,-$1C(a6)
-                andi.w  #$3F,-$1C(a6) 
-                clr.l   -$20(a6)
-                lsr.l   #6,d1
+                beq.w   @ExitMagic
+                move.w  d0,member(a6)
+                move.w  d1,spellEntry(a6)
+                move.w  d1,spellIndex(a6)
+                andi.w  #SPELLENTRY_MASK_INDEX,spellIndex(a6)
+                clr.l   spellLevel(a6)
+                lsr.l   #SPELLENTRY_OFFSET_LV,d1
                 addq.l  #1,d1
-                move.l  d1,-$20(a6)
-                cmpi.w  #2,-$1C(a6)
-                beq.w   byte_213A8      
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.l  -$20(a6),((TEXT_NUMBER-$1000000)).w
-                txt     $F3             ; "{NAME} cast{N}{SPELL} level {#}!"
+                move.l  d1,spellLevel(a6)
+                cmpi.w  #SPELL_DETOX,spellIndex(a6)
+                beq.w   byte_213A8      ; Cast Detox
+                
+                ; Cast a spell other than Detox
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  spellIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.l  spellLevel(a6),((TEXT_NUMBER-$1000000)).w
+                txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 sndCom  SFX_SPELL_CAST
                 clsTxt
-                cmpi.w  #$A,-$1C(a6)
-                beq.w   loc_21354
+                cmpi.w  #SPELL_EGRESS,spellIndex(a6)
+                beq.w   @CurrentlyOnOverworldMap?
 byte_21348:
                 
-                txt     $138            ; "But nothing happened."
+                
+                ; Nothing happens when casting spells other than Detox and Egress,
+                ; or when casting Egress on non-overworld maps.
+                txt     312             ; "But nothing happened."
                 clsTxt
-                bra.w   loc_21478
-loc_21354:
+                bra.w   @ExitMagic
+@CurrentlyOnOverworldMap?:
                 
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
                 cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.s   byte_21348      
                 cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
-                bgt.s   byte_21348      
-loc_21366:
+                bgt.s   byte_21348      ; nothing happens if not an overworld map
+@Egress:
                 
-                move.b  -$1A(a6),d1
-                jsr     j_GetSpellDefAddress
+                move.b  spellEntry(a6),d1
+                jsr     j_FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
-                move.w  -4(a6),d0
+                move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMP
                 jsr     j_ExecuteFlashScreenScript
-                move.b  ((EGRESS_MAP_INDEX-$1000000)).w,d0
+                move.b  ((EGRESS_MAP-$1000000)).w,d0
                 jsr     (GetSavePointForMap).w
                 lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
                 move.w  #1,(a0)+
@@ -100,481 +121,538 @@ loc_21366:
                 move.b  d2,(a0)+
                 move.b  d3,(a0)+
                 clr.b   ((PLAYER_TYPE-$1000000)).w
-                bra.w   loc_212A0
+                bra.w   @ExitMain
 byte_213A8:
                 
-                txt     $6C             ; "Use magic on whom?{D1}"
+                
+                ; Cast Detox
+                txt     108             ; "Use magic on whom?{D1}"
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                move.w  #$7F,((word_FFB13A-$1000000)).w 
-                jsr     sub_10044
-                move.w  d0,-6(a6)
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
+                jsr     j_BuildMemberListScreen_NewATTandDEF
+                move.w  d0,targetMember(a6)
                 cmpi.w  #$FFFF,d0
-                beq.w   loc_212E0
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -$1C(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.l  -$20(a6),((TEXT_NUMBER-$1000000)).w
-                txt     $F3             ; "{NAME} cast{N}{SPELL} level {#}!"
+                beq.w   @StartMagic
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  spellIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.l  spellLevel(a6),((TEXT_NUMBER-$1000000)).w
+                txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 clsTxt
-                move.b  -$1A(a6),d1
-                jsr     j_GetSpellDefAddress
+                move.b  spellEntry(a6),d1
+                jsr     j_FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
-                move.w  -4(a6),d0
+                move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMP
-                move.w  -6(a6),d0
-                jsr     j_GetStatus
-                moveq   #0,d2
-                cmpi.l  #1,-$20(a6)
-                beq.w   loc_2144E
-                cmpi.l  #2,-$20(a6)
-                beq.w   loc_2143C
-                bclr    #2,d1
-                beq.s   loc_2143C
-                move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $12F            ; "{NAME} is no longer{N}cursed."
-                moveq   #$FFFFFFFF,d2
+                move.w  targetMember(a6),d0
+                jsr     j_GetStatusEffects
+                moveq   #0,d2           ; d2.w = Detox effectivity (0 = nothing happened, -1 = cured something)
+                cmpi.l  #1,spellLevel(a6)
+                beq.w   @CurePoison
+                cmpi.l  #2,spellLevel(a6)
+                beq.w   @CureStun
+                bclr    #STATUSEFFECT_BIT_CURSE,d1
+                beq.s   @CureStun
+                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     303             ; "{NAME} is no longer{N}cursed."
+                moveq   #-1,d2
                 jsr     j_UnequipAllItemsIfNotCursed
-loc_2143C:
+@CureStun:
                 
-                bclr    #0,d1
-                beq.s   loc_2144E
-                move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $12E            ; "{NAME} is no longer{N}stunned."
-                moveq   #$FFFFFFFF,d2
-loc_2144E:
+                bclr    #STATUSEFFECT_BIT_STUN,d1
+                beq.s   @CurePoison
+                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     302             ; "{NAME} is no longer{N}stunned."
+                moveq   #-1,d2
+@CurePoison:
                 
-                bclr    #1,d1
-                beq.s   loc_21460
-                move.w  -6(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $12D            ; "{NAME} is no longer{N}poisoned."
-                moveq   #$FFFFFFFF,d2
-loc_21460:
+                bclr    #STATUSEFFECT_BIT_POISON,d1
+                beq.s   @WasDetoxEffective?
+                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     301             ; "{NAME} is no longer{N}poisoned."
+                moveq   #-1,d2
+@WasDetoxEffective?:
                 
                 tst.w   d2
                 bne.s   byte_21468
-                txt     $1A6            ; "But nothing happened.{D1}"
+                txt     422             ; "But nothing happened.{D1}"
 byte_21468:
                 
                 clsTxt
-                jsr     j_SetStatus
+                jsr     j_SetStatusEffects
                 jsr     j_ApplyStatusEffectsAndItemsOnStats
-loc_21478:
+@ExitMagic:
                 
-                bra.w   loc_219E8
-loc_2147C:
+                bra.w   @Goto_StartMain
+@IsItemAction?:
                 
                 cmpi.w  #2,d0
-                bne.w   loc_219DC
-loc_21484:
+                bne.w   @SearchAction
+@StartItemSubmenu:
                 
-                moveq   #0,d0
-                moveq   #0,d1
-                moveq   #3,d2
+                
+                ; ITEM action
+                moveq   #0,d0           ; initial choice: up
+                moveq   #0,d1           ; animate-in from bottom
+                moveq   #MENU_ITEM,d2
                 lea     (InitStack).w,a0
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
-                beq.w   loc_21286
-                cmpi.w  #0,d0
-                bne.w   loc_21596
-loc_214A4:
+                beq.w   @StartMain      
                 
-                bsr.w   sub_219EC       
+                ; Is Item submenu Use action?
+                cmpi.w  #0,d0
+                bne.w   @IsItemGiveAction?
+@StartItemUse:
+                
+                
+                ; ITEM > USE action
+                bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #$7F,((word_FFB13A-$1000000)).w 
-                jsr     sub_10044
-                move.w  d0,-4(a6)
-                move.w  d1,-$C(a6)
-                move.w  d2,-8(a6)
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
+                jsr     j_BuildMemberListScreen_NewATTandDEF
+                move.w  d0,member(a6)
+                move.w  d1,itemSlot(a6)
+                move.w  d2,itemIndex(a6)
                 cmpi.w  #$FFFF,d0
-                beq.w   byte_2158E
-                cmpi.w  #4,d2
-                bne.w   loc_2150E
+                beq.w   byte_2158E      ; Exit Item Use
+                
+                ; Using Angel Wing?
+                cmpi.w  #ITEM_ANGEL_WING,d2
+                bne.w   @HandleNonAngelWingItems
+                
+                ; Currently on overworld map?
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmpi.w  #$42,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
-                blt.w   loc_2150E
-                cmpi.w  #$4E,d0 
-                bgt.w   loc_2150E
-                move.w  -4(a6),d0
-                move.w  -$C(a6),d1
-                jsr     j_RemoveItemBySlot
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     $49             ; "{NAME} used the{N}{ITEM}.{W2}"
-                bra.w   loc_21366
-loc_2150E:
+                cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
+                blt.w   @HandleNonAngelWingItems
+                cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
+                bgt.w   @HandleNonAngelWingItems
                 
-                move.w  -8(a6),d1
-                jsr     sub_229CA
+                ; Use Angel Wing
+                move.w  member(a6),d0
+                move.w  itemSlot(a6),d1
+                jsr     j_RemoveItemBySlot
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                txt     73              ; "{NAME} used the{N}{ITEM}.{W2}"
+                bra.w   @Egress
+@HandleNonAngelWingItems:
+                
+                move.w  itemIndex(a6),d1
+                jsr     IsItemUsableOnField?
                 tst.w   d2
-                beq.w   loc_21558
-                bsr.w   sub_22C60       
-                move.w  -8(a6),d4
-                move.w  -$C(a6),d5
+                beq.w   @PickTarget     
+                
+                ; Check map events
+                bsr.w   GetPlayerEntityPosition ; Get first entity's X, Y and facing -> d1.l, d2.l, d3.w
+                move.w  itemIndex(a6),d4
+                move.w  itemSlot(a6),d5
                 jsr     j_RunMapSetupItemEvent
                 tst.w   d6
-                bne.w   loc_212A0
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     $49             ; "{NAME} used the{N}{ITEM}.{W2}"
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $1A6            ; "But nothing happened.{D1}"
-                clsTxt
-                bra.w   byte_2158E
-loc_21558:
+                bne.w   @ExitMain
                 
-                move.w  -8(a6),d1
-                move.w  #$32,d1 
+                ; Nothing happened
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                txt     73              ; "{NAME} used the{N}{ITEM}.{W2}"
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     422             ; "But nothing happened.{D1}"
+                clsTxt
+                bra.w   byte_2158E      ; Exit Item Use
+@PickTarget:
+                
+                move.w  itemIndex(a6),d1 ; superfluous intructions
+                move.w  #50,d1
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     sub_10040
+                jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
-                beq.w   loc_214A4
-                move.w  -8(a6),d1
-                bsr.w   UseFieldItem    
-                move.w  -4(a6),d0
-                move.w  -$C(a6),d1
+                beq.w   @StartItemUse
+                
+                ; Use item
+                move.w  itemIndex(a6),d1
+                bsr.w   UseItemOnField  
+                move.w  member(a6),d0
+                move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
 byte_2158E:
                 
+                
+                ; Exit Item Use
                 clsTxt
-                bra.w   loc_219D8
-loc_21596:
+                bra.w   @Goto_StartItemSubmenu
+@IsItemGiveAction?:
                 
                 cmpi.w  #1,d0
-                bne.w   loc_21856
-loc_2159E:
+                bne.w   @IsItemEquipAction?
+@StartItemGive:
                 
-                bsr.w   sub_219EC       
+                
+                ; ITEM > GIVE action
+                bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #$7F,((word_FFB13A-$1000000)).w 
-                jsr     sub_10044
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
-                bne.w   loc_215C0
-                bra.w   byte_2184E
-loc_215C0:
+                bne.w   @GivingWeapon?
+                bra.w   byte_2184E      ; Close textbox and restart item submenu
+@GivingWeapon?:
                 
-                move.w  d0,-4(a6)
-                move.w  d1,-$C(a6)
-                move.w  d2,-8(a6)
-                move.w  -8(a6),d1
-                jsr     j_GetItemType
-                cmpi.w  #1,d2
-                bne.s   loc_21618
-                move.w  -4(a6),d0
+                move.w  d0,member(a6)
+                move.w  d1,itemSlot(a6)
+                move.w  d2,itemIndex(a6)
+                move.w  itemIndex(a6),d1
+                jsr     j_GetEquipmentType
+                cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
+                bne.s   @GivingUnequippableItem?
+                
+                ; Give weapon
+                move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
                 cmpi.w  #$FFFF,d1
-                beq.w   loc_21662
-                cmp.w   -$C(a6),d2
-                bne.w   loc_21662
-                move.w  -8(a6),d1
-                jsr     j_IsItemCursed
-                bcc.w   loc_21662
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                beq.w   @PickRecipient
+                cmp.w   itemSlot(a6),d2
+                bne.w   @PickRecipient
+                move.w  itemIndex(a6),d1
+                jsr     j_IsItemCursed?
+                bcc.w   @PickRecipient
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
-                txt     $37             ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+                txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput
-                bra.s   loc_2159E
-loc_21618:
+                bra.s   @StartItemGive
+@GivingUnequippableItem?:
                 
-                cmpi.w  #0,d2
-                beq.w   loc_21662
-                move.w  -4(a6),d0
+                cmpi.w  #EQUIPMENTTYPE_TOOL,d2
+                beq.w   @PickRecipient
+                
+                ; Give ring
+                move.w  member(a6),d0
                 jsr     j_GetEquippedRing
                 cmpi.w  #$FFFF,d1
-                beq.w   loc_21662
-                cmp.w   -$C(a6),d2
-                bne.w   loc_21662
-                move.w  -8(a6),d1
-                jsr     j_IsItemCursed
-                bcc.w   loc_21662
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                beq.w   @PickRecipient
+                cmp.w   itemSlot(a6),d2
+                bne.w   @PickRecipient
+                move.w  itemIndex(a6),d1
+                jsr     j_IsItemCursed?
+                bcc.w   @PickRecipient
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
-                txt     $37             ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+                txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput
                 clsTxt
-                bra.w   loc_2159E
-loc_21662:
+                bra.w   @StartItemGive
+@PickRecipient:
                 
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $36             ; "Pass the {ITEM}{N}to whom?{D1}"
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     54              ; "Pass the {ITEM}{N}to whom?{D1}"
                 clsTxt
                 move.b  #2,((byte_FFB13C-$1000000)).w
-                move.w  -8(a6),((word_FFB13A-$1000000)).w
-                jsr     sub_10044
+                move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
-                bne.w   loc_2168E
-                bra.w   loc_2159E
-loc_2168E:
+                bne.w   @GiveItem
+                bra.w   @StartItemGive
+@GiveItem:
                 
-                move.w  d0,-6(a6)
-                move.w  d1,-$E(a6)
+                move.w  d0,targetMember(a6)
+                move.w  d1,targetItemSlot(a6)
                 clr.w   d1
-                jsr     j_GetItemAndNumberOfItems
-                cmpi.w  #4,d2
-                beq.w   loc_216F8
-                move.w  -4(a6),d0
-                move.w  -$C(a6),d1
+                jsr     j_GetItemBySlotAndHeldItemsNumber
+                cmpi.w  #COMBATANT_ITEMSLOTS,d2
+                beq.w   @ExchangeItems  ; exchange items if recipient's inventory is full
+                move.w  member(a6),d0
+                move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  -6(a6),d0
-                move.w  -8(a6),d1
+                move.w  targetMember(a6),d0
+                move.w  itemIndex(a6),d1
                 andi.b  #ITEMENTRY_MASK_INDEX,d1
                 jsr     j_AddItem
-                move.w  -4(a6),d0
-                move.w  -6(a6),d1
+                move.w  member(a6),d0
+                move.w  targetMember(a6),d1
                 cmp.w   d0,d1
-                bne.s   loc_216E4
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     $4A             ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
-                bra.s   loc_216F4
-loc_216E4:
+                bne.s   @GiveToRecipient
                 
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -6(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     $41             ; "The {ITEM} now{N}belongs to {NAME}.{W2}"
-loc_216F4:
+                ; Give to self
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                txt     74              ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
+                bra.s   @ExitItemGive   
+@GiveToRecipient:
                 
-                bra.w   byte_2184E
-loc_216F8:
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                txt     65              ; "The {ITEM} now{N}belongs to {NAME}.{W2}"
+@ExitItemGive:
                 
-                move.w  -6(a6),d0
-                move.w  -$E(a6),d1
-                jsr     j_GetItemAndNumberOfItems
-                move.w  d1,-$A(a6)
-                jsr     j_GetItemType
-                cmpi.w  #1,d2
-                bne.s   loc_21758
-                move.w  -6(a6),d0
+                bra.w   byte_2184E      ; Close textbox and restart item submenu
+@ExchangeItems:
+                
+                move.w  targetMember(a6),d0
+                move.w  targetItemSlot(a6),d1
+                jsr     j_GetItemBySlotAndHeldItemsNumber
+                move.w  d1,exchangedItemEntry(a6)
+                jsr     j_GetEquipmentType
+                cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
+                bne.s   @ExchangingUnequippableItem?
+                
+                ; Exchange weapon
+                move.w  targetMember(a6),d0
                 jsr     j_GetEquippedWeapon
                 cmpi.w  #$FFFF,d1
-                beq.w   loc_2179E
-                cmp.w   -$E(a6),d2
-                bne.w   loc_2179E
-                move.w  -$A(a6),d1
-                jsr     j_IsItemCursed
-                bcc.w   loc_2179E
-                move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                beq.w   @StartExchange
+                cmp.w   targetItemSlot(a6),d2
+                bne.w   @StartExchange
+                move.w  exchangedItemEntry(a6),d1
+                jsr     j_IsItemCursed?
+                bcc.w   @StartExchange
+                move.w  exchangedItemEntry(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
-                txt     $37             ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+                txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput
                 clsTxt
-                bra.w   loc_21662
-loc_21758:
+                bra.w   @PickRecipient
+@ExchangingUnequippableItem?:
                 
-                cmpi.w  #0,d2
-                beq.w   loc_2179E
-                move.w  -6(a6),d0
+                cmpi.w  #EQUIPMENTTYPE_TOOL,d2
+                beq.w   @StartExchange
+                
+                ; Exchange ring
+                move.w  targetMember(a6),d0
                 jsr     j_GetEquippedRing
                 cmpi.w  #$FFFF,d1
-                beq.w   loc_2179E
-                cmp.w   -$E(a6),d2
-                bne.w   loc_2179E
-                move.w  -$A(a6),d1
-                jsr     j_IsItemCursed
-                bcc.w   loc_2179E
-                move.w  -$A(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                beq.w   @StartExchange
+                cmp.w   targetItemSlot(a6),d2
+                bne.w   @StartExchange
+                move.w  exchangedItemEntry(a6),d1
+                jsr     j_IsItemCursed?
+                bcc.w   @StartExchange
+                move.w  exchangedItemEntry(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
-                txt     $37             ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+                txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput
-                bra.w   loc_21662
-loc_2179E:
+                bra.w   @PickRecipient
+@StartExchange:
                 
-                move.w  -4(a6),d0
-                move.w  -$C(a6),d1
-                jsr     j_UnequipItemIfNotCursed
-                move.w  -6(a6),d2
-                cmp.w   -4(a6),d2
-                bne.w   loc_217C4
-                move.w  -$E(a6),d3
-                cmp.w   -$C(a6),d3
-                beq.w   loc_2181A
-loc_217C4:
+                move.w  member(a6),d0
+                move.w  itemSlot(a6),d1
+                jsr     j_UnequipItemBySlotIfNotCursed
                 
-                move.w  -4(a6),d0
-                move.w  -$C(a6),d1
+                ; Are giver and recipient the same?
+                move.w  targetMember(a6),d2
+                cmp.w   member(a6),d2
+                bne.w   @ExchangeToRecipient
+                
+                ; And if so, are items being exchanged also the same?
+                move.w  targetItemSlot(a6),d3
+                cmp.w   itemSlot(a6),d3
+                beq.w   @SkipExchange
+@ExchangeToRecipient:
+                
+                move.w  member(a6),d0
+                move.w  itemSlot(a6),d1
                 jsr     j_DropItemBySlot
-                move.w  -$A(a6),d1
+                move.w  exchangedItemEntry(a6),d1
                 andi.b  #ITEMENTRY_MASK_INDEX,d1
                 jsr     j_AddItem
-                move.w  -6(a6),d2
-                cmp.w   -4(a6),d2
-                bne.w   loc_217FE
-                move.w  -$E(a6),d3
-                cmp.w   -$C(a6),d3
-                bcs.w   loc_217FE
-                subi.w  #1,-$E(a6)
-loc_217FE:
+                move.w  targetMember(a6),d2
+                cmp.w   member(a6),d2
+                bne.w   @ExchangeFromRecipient
                 
-                move.w  -6(a6),d0
-                move.w  -$E(a6),d1
+                ; Exchange with self
+                move.w  targetItemSlot(a6),d3
+                cmp.w   itemSlot(a6),d3
+                bcs.w   @ExchangeFromRecipient
+                subi.w  #1,targetItemSlot(a6)
+@ExchangeFromRecipient:
+                
+                move.w  targetMember(a6),d0
+                move.w  targetItemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  -8(a6),d1
+                move.w  itemIndex(a6),d1
                 andi.b  #ITEMENTRY_MASK_INDEX,d1
                 jsr     j_AddItem
-loc_2181A:
+@SkipExchange:
                 
-                move.w  -4(a6),d0
-                move.w  -6(a6),d1
+                move.w  member(a6),d0
+                move.w  targetMember(a6),d1
                 cmp.w   d0,d1
-                bne.s   loc_21838
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     $4A             ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
-                bra.s   byte_2184E
-loc_21838:
+                bne.s   @ExchangedMessage
                 
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -6(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  -$A(a6),((TEXT_NAME_INDEX_3-$1000000)).w
-                txt     $42             ; "The {ITEM} was{N}exchanged for {NAME}'s{N}{ITEM}.{W2}"
+                ; "Changed hands" message
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                txt     74              ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
+                bra.s   byte_2184E      ; Close textbox and restart item submenu
+@ExchangedMessage:
+                
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  exchangedItemEntry(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                txt     66              ; "The {ITEM} was{N}exchanged for {NAME}'s{N}{ITEM}.{W2}"
 byte_2184E:
                 
+                
+                ; Close textbox and restart item submenu
                 clsTxt
-                bra.w   loc_219D8
-loc_21856:
+                bra.w   @Goto_StartItemSubmenu
+@IsItemEquipAction?:
                 
                 cmpi.w  #2,d0
-                bne.w   loc_21898
-                bsr.w   sub_219EC       
+                bne.w   @ItemDropAction
+                
+                ; ITEM > EQUIP action
+                bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #3,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
-                jsr     sub_10044
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
-                beq.w   loc_21880
-                bra.w   loc_21894
-loc_21880:
+                beq.w   @Goto_ExitItemEquip
+                bra.w   @ExitItemEquip
+@Goto_ExitItemEquip:
                 
-                bra.w   loc_21894
-                move.w  -4(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  -8(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     $46             ; "{NAME} is already{N}equipped with the{N}{ITEM}.{W2}"
-loc_21894:
+                bra.w   @ExitItemEquip
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w ; unreachable code
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                txt     70              ; "{NAME} is already{N}equipped with the{N}{ITEM}.{W2}"
+@ExitItemEquip:
                 
-                bra.w   loc_219D8
-loc_21898:
+                bra.w   @Goto_StartItemSubmenu
+@ItemDropAction:
                 
-                bsr.w   sub_219EC       
+                
+                ; ITEM > DROP action
+                bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #1,((byte_FFB13C-$1000000)).w
-                move.w  #ITEM_NOTHING,((word_FFB13A-$1000000)).w
-                jsr     sub_10044
+                move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
-                bne.w   loc_218BA
-                bra.w   byte_219D0
-loc_218BA:
+                bne.w   @IsItemUnsellable?
+                bra.w   byte_219D0      ; Close textbox and restart item submenu
+@IsItemUnsellable?:
                 
-                move.w  d0,-4(a6)
-                move.w  d1,-$C(a6)
-                move.w  d2,-8(a6)
-                move.w  -8(a6),d1
+                move.w  d0,member(a6)
+                move.w  d1,itemSlot(a6)
+                move.w  d2,itemIndex(a6)
+                move.w  itemIndex(a6),d1
                 jsr     j_GetItemDefAddress
-                move.l  ITEMDEF_OFFSET_TYPE(a0),-$14(a6)
-                move.b  -$14(a6),d1
-                andi.b  #$10,d1
+                move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
+                move.b  itemTypeBitfield(a6),d1
+                andi.b  #ITEMTYPE_UNSELLABLE,d1
                 cmpi.b  #0,d1
-                beq.s   loc_218F2
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $3E             ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
-                bra.w   byte_219D0
-loc_218F2:
+                beq.s   @ConfirmDrop
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     62              ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
+                bra.w   byte_219D0      ; Close textbox and restart item submenu
+@ConfirmDrop:
                 
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $45             ; "The {ITEM} will be{N}discarded.  OK?"
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     69              ; "The {ITEM} will be{N}discarded.  OK?"
                 jsr     j_YesNoChoiceBox
                 clsTxt
                 cmpi.w  #0,d0
-                beq.w   loc_21910
-                bra.s   loc_21898
-loc_21910:
+                beq.w   @DroppingWeapon?
+                bra.s   @ItemDropAction
+@DroppingWeapon?:
                 
-                move.w  -8(a6),d1
-                jsr     j_GetItemType
-                cmpi.w  #1,d2
-                bne.s   loc_21962
-                move.w  -4(a6),d0
+                move.w  itemIndex(a6),d1
+                jsr     j_GetEquipmentType
+                cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
+                bne.s   @DroppingUnequippableItem?
+                
+                ; Drop weapon
+                move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
                 cmpi.w  #$FFFF,d1
-                beq.w   loc_219A0
-                cmp.w   -$C(a6),d2
-                bne.w   loc_219A0
-                move.w  -8(a6),d1
-                jsr     j_IsItemCursed
-                bcc.w   loc_219A0
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                beq.w   @DropItem
+                cmp.w   itemSlot(a6),d2
+                bne.w   @DropItem
+                move.w  itemIndex(a6),d1
+                jsr     j_IsItemCursed?
+                bcc.w   @DropItem
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
-                txt     $37             ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+                txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput
                 clsTxt
-                bra.w   byte_219D0
-loc_21962:
+                bra.w   byte_219D0      ; Close textbox and restart item submenu
+@DroppingUnequippableItem?:
                 
-                cmpi.w  #0,d2
-                beq.w   loc_219A0
-                move.w  -4(a6),d0
+                cmpi.w  #EQUIPMENTTYPE_TOOL,d2
+                beq.w   @DropItem
+                
+                ; Drop ring
+                move.w  member(a6),d0
                 jsr     j_GetEquippedRing
                 cmpi.w  #$FFFF,d1
-                beq.w   loc_219A0
-                cmp.w   -$C(a6),d2
-                bne.w   loc_219A0
-                move.w  -8(a6),d1
-                jsr     j_IsItemCursed
-                bcc.w   loc_219A0
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $37             ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
-                bra.w   byte_219D0
-loc_219A0:
+                beq.w   @DropItem
+                cmp.w   itemSlot(a6),d2
+                bne.w   @DropItem
+                move.w  itemIndex(a6),d1
+                jsr     j_IsItemCursed?
+                bcc.w   @DropItem
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
+                bra.w   byte_219D0      ; Close textbox and restart item submenu
+@DropItem:
                 
-                move.w  -4(a6),d0
-                move.w  -$C(a6),d1
+                move.w  member(a6),d0
+                move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  -8(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                txt     $43             ; "The {ITEM} is discarded.{W2}"
-                move.b  -$14(a6),d1
-                andi.b  #8,d1
+                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     67              ; "The {ITEM} is discarded.{W2}"
+                move.b  itemTypeBitfield(a6),d1
+                andi.b  #ITEMTYPE_RARE,d1
                 cmpi.b  #0,d1
-                beq.s   byte_219D0
-                move.w  -8(a6),d1
+                beq.s   byte_219D0      ; Close textbox and restart item submenu
+                move.w  itemIndex(a6),d1
                 jsr     j_AddItemToDeals
 byte_219D0:
                 
+                
+                ; Close textbox and restart item submenu
                 clsTxt
                 bra.w   *+4
-loc_219D8:
+@Goto_StartItemSubmenu:
                 
-                bra.w   loc_21484
-loc_219DC:
+                bra.w   @StartItemSubmenu
+@SearchAction:
                 
+                
+                ; SEARCH action
                 clr.w   d6
                 jsr     j_CheckArea
-                bra.w   loc_212A0
-loc_219E8:
+                bra.w   @ExitMain
+@Goto_StartMain:
                 
-                bra.w   loc_21286
+                bra.w   @StartMain      
 
     ; End of function MainMenuActions
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
-; copy available targets list ?
 
-sub_219EC:
+PopulateGenericListWithCurrentForceMembers:
                 
                 movem.l d7-a1,-(sp)
                 jsr     j_UpdateForce
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                lea     ((INDEX_LIST-$1000000)).w,a1
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                lea     ((TARGETS_LIST-$1000000)).w,a0
+                lea     ((GENERIC_LIST-$1000000)).w,a1
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,((GENERIC_LIST_LENGTH-$1000000)).w
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-loc_21A0A:
+@Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_21A0A
+                dbf     d7,@Loop
+                
                 movem.l (sp)+,d7-a1
                 rts
 
-    ; End of function sub_219EC
+    ; End of function PopulateGenericListWithCurrentForceMembers
 
 byte_21A16:     dc.b 0
                 dc.b 2
@@ -584,6 +662,9 @@ byte_21A16:     dc.b 0
                 dc.b $A
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
+
 
 sub_21A1C:
                 

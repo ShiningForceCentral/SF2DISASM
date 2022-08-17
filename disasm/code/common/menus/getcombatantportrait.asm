@@ -4,13 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get portrait index for combatant D0 -> D0
+; Get portrait index for combatant d0.w -> d0.w
+
 
 GetCombatantPortrait:
                 
                 tst.b   d0
                 bpl.s   @Ally
-                jsr     j_GetEntityPortaitAndSpeechSound
+                jsr     j_GetEntityPortaitAndSpeechSfx
                 move.w  d1,d0
                 bra.s   @Return
 @Ally:

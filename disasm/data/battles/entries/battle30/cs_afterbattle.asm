@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle30\cs_afterbattle.asm :
 ; 0x4C6A8..0x4C994 : Cutscene after battle 30
-abcs_battle30:  textCursor $ACD
+abcs_battle30:  textCursor 2765
                 loadMapFadeIn MAP_INSIDE_MITULA,5,8
                 loadMapEntities ce_4C96C
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -10,7 +10,7 @@ abcs_battle30:  textCursor $ACD
                 setActscriptWait FOLLOWER_B,eas_Init
                 setPos FOLLOWER_B,11,13,UP
                 stopEntity 128
-                setActscriptWait 130,eas_46172
+                setActscriptWait 130,eas_DeactivateAutoFacing
                 stopEntity 130
                 setPriority ALLY_PETER,$0
                 setPriority FOLLOWER_B,$FFFF
@@ -26,8 +26,8 @@ abcs_battle30:  textCursor $ACD
                 csWait 40
                 setFacing 128,UP
                 customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $1          ;   
+                 ac_motion OFF          ;   
+                 ac_orientLeft          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -49,8 +49,8 @@ abcs_battle30:  textCursor $ACD
                 shiver 128
                 nextSingleText $0,128   ; "I can't endure the light....{N}Ohhh....{W1}"
                 customActscriptWait 128
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $0          ;   
+                 ac_motion OFF          ;   
+                 ac_orientUp            ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -145,7 +145,7 @@ abcs_battle30:  textCursor $ACD
                  moveUp 1
                 endActions
                 csWait 5
-                setActscript FOLLOWER_B,eas_461E4
+                setActscript FOLLOWER_B,eas_2xUpDown
                 csWait 120
                 nextSingleText $0,FOLLOWER_B ; "Mitula, Mitula!!{W1}"
                 entityActionsWait ALLY_PETER

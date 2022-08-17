@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; converts data ports 1/2 information into P1/2 inputs State A/B
+; Convert data ports 1/2 information into P1/2 inputs State A/B.
+
 
 UpdatePlayerInputs:
                 
@@ -53,6 +54,7 @@ loc_151C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WaitForPlayerInput:
                 
                 andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -67,6 +69,7 @@ WaitForPlayerInput:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WaitForPlayer1NewInput:
                 
@@ -90,6 +93,7 @@ WaitForPlayer1NewInput:
 ; =============== S U B R O U T I N E =======================================
 
 ; unused
+
 
 sub_15A4:
                 
@@ -116,6 +120,7 @@ loc_15CA:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WaitForInputFor1Second:
                 
                 movem.l d5,-(sp)
@@ -135,6 +140,7 @@ WaitForInput_Loop:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 WaitForInputFor3Seconds:
                 

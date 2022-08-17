@@ -1,12 +1,16 @@
 
 ; ASM FILE data\stats\items\specialcaravandescriptions.asm :
 ; 0x228A2..0x228A8 : Special Caravan descriptions
-SpecialCaravanDescriptions:
+tbl_SpecialCaravanDescriptions:
                 
-; Syntax        specialCaravanDescription item_index, lines_to_display_number, message_index
-;               ...
-;               tableEnd
+; Syntax        specialCaravanDescription [ITEM_]enum, parameter, [MESSAGE_CARAVANDESC_]enum
+;
+; Notes: 4 bytes per entry.
+;        parameter = Number of lines to display.
+;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-                specialCaravanDescription CHIRRUP_SANDALS, 2, 103
+                specialCaravanDescription CHIRRUP_SANDALS, 2, CHIRRUP_SANDALS 
+                                                        ; "Chirrup sandals.{W2}"
+                                        ; "They make you happy when{N}you wear them.{W1}"
                 
-                    tableEnd
+                tableEnd

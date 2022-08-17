@@ -6,7 +6,8 @@
 
 ; Out: Z = is scrolling
 
-IsMapScrollingToViewTarget:
+
+IsMapScrollingToViewTarget?:
                 
                 move.b  ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w,d7
                 tst.w   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
@@ -22,16 +23,17 @@ loc_4740:
                 tst.b   d7
                 rts
 
-    ; End of function IsMapScrollingToViewTarget
+    ; End of function IsMapScrollingToViewTarget?
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 VInt_UpdateMapPlanes:
                 
                 bclr    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 beq.s   loc_4764
-                bsr.w   UpdateVdpPlaneA 
+                bsr.w   UpdateVdpPlaneA
                 movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
                 beq.s   loc_4764
@@ -41,7 +43,7 @@ loc_4764:
                 
                 bclr    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 beq.s   return_4770
-                bsr.w   UpdateVdpPlaneB 
+                bsr.w   UpdateVdpPlaneB
 return_4770:
                 
                 rts
@@ -51,12 +53,14 @@ return_4770:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 VInt_UpdateMapAnimations:
                 
                 move.l  ((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w,d0
                 ble.s   return_47C4
                 subq.w  #1,((TILE_ANIMATION_COUNTER-$1000000)).w
                 bne.s   return_47C4
+                
                 movea.l d0,a0
                 move.w  (a0)+,d1
                 bge.w   loc_47A2

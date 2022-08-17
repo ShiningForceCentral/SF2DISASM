@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\entries\battle27\cs_battlestart.asm :
 ; 0x4BE6A..0x4BE8C : Start cutscene for battle 27
-bscs_battle27:  textCursor $A62
+bscs_battle27:  textCursor 2658
                 cameraSpeed $30
                 setCameraEntity 133
                 nextSingleText $0,133   ; "Where did you come from?{N}What are you doing here?{W1}"

@@ -4,12 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 VInt_UpdateViewData:
                 
                 clr.w   d0
                 move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d0
                 bmi.w   loc_468C        
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 move.w  (a0)+,d4        ; Entity X
@@ -26,7 +27,7 @@ loc_45E8:
 loc_45F0:
                 
                 clr.w   d6
-                bsr.w   IsMapScrollingToViewTarget
+                bsr.w   IsMapScrollingToViewTarget?
                 bne.w   return_4706
                 move.w  d2,d7
                 addi.w  #$600,d7
@@ -98,7 +99,7 @@ loc_469C:
                 move.w  #$18,d7
 loc_46A0:
                 
-                cmpi.b  #$30,((VIEW_TARGET_ENTITY-$1000000)).w
+                cmpi.b  #ENTITY_UNIT_CURSOR,((VIEW_TARGET_ENTITY-$1000000)).w
                 bne.s   loc_46AA
                 moveq   #$40,d7 
 loc_46AA:
@@ -152,19 +153,20 @@ return_4706:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 WaitForViewScrollEnd:
                 
                 move.w  d7,-(sp)
 loc_470A:
                 
-                bsr.w   IsMapScrollingToViewTarget
+                bsr.w   IsMapScrollingToViewTarget?
                 beq.s   loc_4716
                 bsr.w   WaitForVInt
                 bra.s   loc_470A
 loc_4716:
                 
                 bsr.w   WaitForVInt
-                bsr.w   IsMapScrollingToViewTarget
+                bsr.w   IsMapScrollingToViewTarget?
                 bne.s   loc_470A
                 bsr.w   WaitForVInt
                 move.w  (sp)+,d7

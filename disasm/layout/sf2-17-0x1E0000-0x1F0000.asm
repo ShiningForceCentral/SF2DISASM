@@ -8,25 +8,10 @@
                 incbin "data/sound/pcmbank1.bin"
                 incbin "data/sound/yminst.bin"
 SoundDriver:    incbin "data/sound/sounddriver.bin"
-p_StatGrowthCurves:
-                dc.l StatGrowthCurves   
-p_pt_AllyStats: dc.l pt_AllyStats       
-p_AllyStartDefs:dc.l AllyStartDefs      
-p_ClassDefs:    dc.l ClassDefs          
-p_JewelEndScreenTiles:
-                dc.l JewelsEndScreenTiles
-p_JewelEndScreenLayout:
-                dc.l JewelsEndScreenLayout
-p_plt_JewelsEndScreen:
-                dc.l plt_JewelsEndScreen
-p_plt_SuspendString:
-                dc.l plt_SuspendString
-p_SuspendStringTiles:
-                dc.l SuspendStringTiles
-                dc.l unused_BasePalettes
-p_BaseTiles:    dc.l BaseTiles
+                include "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
                 include "data\stats\allies\growthcurves.asm"    ; Stat growth curves
                 include "data\stats\allies\stats\entries.asm"    ; Ally stats
+                align
                 include "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
                 include "data\stats\allies\classes\classdefs.asm"    ; Class definitions
                 include "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics

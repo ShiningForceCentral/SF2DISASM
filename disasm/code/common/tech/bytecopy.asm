@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination, D7=Length
+; In: a0 = Source, a1 = Destination, d7.w = Length
+
 
 CopyBytes:
                 

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map40\mapsetups\scripts.asm :
 ; 0x53FE0..0x53FFE : 
-cs_53FE0:       textCursor $3E5
+cs_53FE0:       textCursor 997
                 shiver ALLY_LEMON
                 nextText $0,ALLY_LEMON  ; "Oh....{N}Go and save her....{W2}"
                 nextText $0,ALLY_LEMON  ; "Sir Astral was right....{N}That's not my King.{N}That's a devil!{W2}"

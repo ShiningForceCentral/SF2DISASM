@@ -6,20 +6,20 @@ cs_513D6:       entityActionsWait ALLY_SARAH
                  moveUp 1
                 endActions
                 csc_end
-cs_513E2:       textCursor $216
+cs_513E2:       textCursor 534
                 nextText $0,ALLY_SARAH  ; "{LEADER}, so you decided{N}to go?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_51406 ; YES/NO prompt answer
-                textCursor $214
+                jumpIfFlagSet 89,cs_51406 ; YES/NO prompt answer
+                textCursor 532
                 nextText $0,ALLY_SARAH  ; "No?  Really?{N}Then I'm not going either!{W2}"
                 nextSingleText $0,ALLY_SARAH ; "But, if you change your{N}mind, let me know right{N}away!{W1}"
                 jump cs_51650
-cs_51406:       textCursor $217
+cs_51406:       textCursor 535
                 nextSingleText $0,ALLY_SARAH ; "Great!{N}Let's go right now!{N}Hurry!{W1}"
                 setFacing ALLY_CHESTER,LEFT
                 nextSingleText $0,ALLY_CHESTER ; "What?  {LEADER}, are you{N}going?  I'm going too!{W1}"
-                setF $258               ; Set after agreeing to try getting into the castle
-                setF $42                ; Sarah + Chester are followers
+                setF 600                ; Set after agreeing to try getting into the castle
+                setF 66                 ; Sarah + Chester are followers
                 join 128
                 followEntity ALLY_SARAH,ALLY_BOWIE,2
                 followEntity ALLY_CHESTER,ALLY_SARAH,2
@@ -37,17 +37,17 @@ cs_5145C:       setActscriptWait 128,eas_Init
                  moveUp 2
                  faceLeft 20
                 endActions
-                textCursor $1FE
+                textCursor 510
                 nextText $0,128         ; "Good morning {LEADER}!{N}You woke up late this{N}morning.{W2}"
                 nextText $0,128         ; "Did the storm wake you up?{W2}"
-                textCursor $1E3
+                textCursor 483
                 nextSingleText $0,128   ; "Hurry to school!{N}Sir Astral and {NAME;1} must{N}be waiting.{W1}"
                 setActscriptWait 128,eas_Init
                 csc_end
 cs_5148C:       setPos ALLY_SARAH,41,10,UP
                 setPos 128,6,4,UP
                 csc_end
-cs_5149A:       textCursor $205
+cs_5149A:       textCursor 517
                 csWait 20
                 setFacing ALLY_BOWIE,UP
                 csWait 60
@@ -150,7 +150,7 @@ cs_5149A:       textCursor $205
                 setFacing ALLY_SARAH,UP
                 nextText $C0,ALLY_SARAH ; "{LEADER}, maybe we can{N}meet the Princess!{N}Are you going with us?{W1}"
                 yesNo
-                jumpIfFlagSet $59,cs_51614 ; YES/NO prompt answer
+                jumpIfFlagSet 89,cs_51614 ; YES/NO prompt answer
                 nextText $0,ALLY_SARAH  ; "No?  Really?{N}Then I'm not going either!{W2}"
                 nextSingleText $0,ALLY_SARAH ; "But, if you change your{N}mind, let me know right{N}away!{W1}"
                 entityActionsWait ALLY_SARAH
@@ -159,19 +159,19 @@ cs_5149A:       textCursor $205
                 endActions
                 setFacing ALLY_CHESTER,UP
                 jump cs_51650
-cs_51614:       textCursor $217
+cs_51614:       textCursor 535
                 nextSingleText $0,ALLY_SARAH ; "Great!{N}Let's go right now!{N}Hurry!{W1}"
                 setFacing ALLY_CHESTER,LEFT
                 nextSingleText $0,ALLY_CHESTER ; "What?  {LEADER}, are you{N}going?  I'm going too!{W1}"
-                setF $258               ; Set after agreeing to try getting into the castle
-                setF $42                ; Sarah + Chester are followers
+                setF 600                ; Set after agreeing to try getting into the castle
+                setF 66                 ; Sarah + Chester are followers
                 join 128
                 followEntity ALLY_SARAH,ALLY_BOWIE,2
                 followEntity ALLY_CHESTER,ALLY_SARAH,2
                 setPos 138,27,3,DOWN
                 setPos 139,31,3,DOWN
 cs_51650:       csc_end
-cs_51652:       textCursor $219
+cs_51652:       textCursor 537
                 entityActions 138
                  moveRight 1
                 endActions
@@ -197,7 +197,7 @@ cs_51652:       textCursor $219
                 setFacing 138,DOWN
                 setFacing 139,DOWN
                 csc_end
-cs_516A8:       textCursor $296
+cs_516A8:       textCursor 662
                 nextSingleText $0,ALLY_JAHA ; "Here you are!{N}I've been waiting.{W1}"
                 moveNextToPlayer ALLY_JAHA,LEFT
                 nextSingleText $0,ALLY_JAHA ; "A soldier said you went{N}into the castle.{N}Is that true?{W2}{N}Oooww!  I missed it!{N}I would've woken up early{N}if I knew that...!{W1}{N}So I came to meet you{N}here, {LEADER}.{N}You're going to Yeel, right?{W2}{N}Under the King's orders!{N}Cool!  Of course, I'm{N}going too!{W1}"

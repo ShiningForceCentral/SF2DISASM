@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Start:
                 
                 tst.l   (CTRL1).l
@@ -111,32 +112,32 @@ StartParams:
                 dc.b 0                  ; vdp reg 22 : DMA source address mid
                 dc.b $80                ; vdp reg 23 : DMA source address high, VRAM fill
                 dc.l $40000080          ; ?
-                dc.b $AF                ; Z80 start code ... what's the use O_o ?
-                dc.b 1
-                dc.b $D9
-                dc.b $1F
-                dc.b $11
-                dc.b $27
-                dc.b 0
-                dc.b $21
-                dc.b $26
-                dc.b 0
-                dc.b $F9
-                dc.b $77
-                dc.b $ED
-                dc.b $B0
-                dc.b $DD
-                dc.b $E1
-                dc.b $FD
-                dc.b $E1
-                dc.b $ED
-                dc.b $47
-                dc.b $ED
-                dc.b $4F
-                dc.b $D1
-                dc.b $E1
-                dc.b $F1
-                dc.b 8
+                dc.b $AF                ; Z80 start code
+                dc.b 1                  ; xor     a
+                dc.b $D9                ; ld      bc, 1FD9h
+                dc.b $1F                ; ld      de, 27h
+                dc.b $11                ; ld      hl, 26h
+                dc.b $27                ; ld      sp, hl
+                dc.b 0                  ; ld      (hl), a
+                dc.b $21                ; ldir
+                dc.b $26                ; pop     ix
+                dc.b 0                  ; pop     iy
+                dc.b $F9                ; ld      i, a
+                dc.b $77                ; ld      r, a
+                dc.b $ED                ; pop     de
+                dc.b $B0                ; pop     hl
+                dc.b $DD                ; pop     af
+                dc.b $E1                ; ex      af, af'
+                dc.b $FD                ; exx
+                dc.b $E1                ; pop     bc
+                dc.b $ED                ; pop     de
+                dc.b $47                ; pop     hl
+                dc.b $ED                ; pop     af
+                dc.b $4F                ; ld      sp, hl
+                dc.b $D1                ; di
+                dc.b $E1                ; im      1
+                dc.b $F1                ; ld      (hl), 0E9h
+                dc.b 8                  ; jp      (hl)
                 dc.b $D9
                 dc.b $C1
                 dc.b $D1
@@ -164,20 +165,22 @@ loc_3DE:
                 move.w  (VDP_Control).l,d0
                 andi.w  #2,d0           ; wait for free DMA
                 bne.s   loc_3DE
+                
                 bra.w   SystemInit
 
     ; End of function Start
 
-                dc.b $F3                ; some unused Z80 code, strange !
-                dc.b $31                ; loc_0:         di
-                dc.b $F0                ;                ld      sp, 1FF0h
-                dc.b $1F                ;                jp      loc_0
+                dc.b $F3                ; Unused Z80 code
+                dc.b $31                ; di
+                dc.b $F0                ; ld      sp, 1FF0h
+                dc.b $1F                ; jp      loc_0
                 dc.b $C3
                 dc.b 0
                 dc.b 0
                 dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
+
 
 InitZ80:
                 
@@ -210,6 +213,7 @@ loc_42E:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CopyWordToZ80:
                 
                 bsr.w   CopyByteToZ80
@@ -219,6 +223,7 @@ CopyWordToZ80:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 CopyByteToZ80:
                 

@@ -1,44 +1,18 @@
 
 ; ASM FILE code\common\menus\caravan\caravanactions_2.asm :
-; 0x228A8..0x229CA : Caravan functions
+; 0x228D8..0x229CA : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================
 
-ChooseCaravanPortrait:
-                
-                movem.l d0-d1,-(sp)
-                move.l  d1,-(sp)
-                chkFlg  $46             ; Astral is a follower
-                bne.s   loc_228B8       
-                moveq   #PORTRAIT_ROHDE,d0 ; ROHDE portrait index
-                bra.s   loc_228BA
-loc_228B8:
-                
-                moveq   #PORTRAIT_ASTRAL,d0 ; Astral portrait index
-loc_228BA:
-                
-                moveq   #0,d1
-                jsr     j_InitPortraitWindow
-                move.l  (sp)+,d0
-                jsr     (DisplayText).w 
-                clsTxt
-                jsr     j_HidePortraitWindow
-                movem.l (sp)+,d0-d1
-                rts
 
-    ; End of function ChooseCaravanPortrait
-
-
-; =============== S U B R O U T I N E =======================================
-
-sub_228D8:
+PopulateGenericListWithMembersList:
                 
                 movem.l d7-a1,-(sp)
                 jsr     j_UpdateForce
                 tst.w   d1
                 bne.s   loc_228F0
-                lea     ((TARGET_CHARACTERS_INDEX_LIST-$1000000)).w,a0
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                lea     ((TARGETS_LIST-$1000000)).w,a0
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 bra.s   loc_22908
 loc_228F0:
                 
@@ -53,9 +27,9 @@ loc_22900:
                 move.w  ((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
 loc_22908:
                 
-                lea     ((INDEX_LIST-$1000000)).w,a1
-                move.w  d7,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
-                move.w  ((TARGET_CHARACTERS_INDEX_LIST_SIZE-$1000000)).w,d7
+                lea     ((GENERIC_LIST-$1000000)).w,a1
+                move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
+                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
                 bcs.w   loc_22920
 loc_2291A:
@@ -67,27 +41,28 @@ loc_22920:
                 movem.l (sp)+,d7-a1
                 rts
 
-    ; End of function sub_228D8
+    ; End of function PopulateGenericListWithMembersList
 
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Copy caravan item indexes to generic list space
 
+
 CopyCaravanItems:
                 
                 movem.l d7-a1,-(sp)
                 move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
-                move.w  d7,((INDEX_LIST_ENTRIES_NUMBER-$1000000)).w
+                move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 subq.w  #1,d7
-                bcs.w   loc_22946
+                bcs.w   @Skip
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                lea     ((INDEX_LIST-$1000000)).w,a1
-loc_22940:
+                lea     ((GENERIC_LIST-$1000000)).w,a1
+@Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_22940
-loc_22946:
+                dbf     d7,@Loop
+@Skip:
                 
                 movem.l (sp)+,d7-a1
                 rts
@@ -97,39 +72,42 @@ loc_22946:
 
 ; =============== S U B R O U T I N E =======================================
 
-; get whether character D0's item at slot D1 is cursed -> carry
+; Is item in slot d1.w cursed and equipped by combatant d0.b?
+; Return CCR carry-bit set if true.
 
-sub_2294C:
+
+IsItemInSlotEquippedAndCursed?:
                 
                 movem.l d1,-(sp)
-                jsr     j_GetItemAndNumberOfItems
-                bclr    #7,d1
-                beq.s   loc_22988
-                jsr     j_IsItemCursed
-                bcc.w   loc_22986
+                jsr     j_GetItemBySlotAndHeldItemsNumber
+                bclr    #ITEMENTRY_BIT_EQUIPPED,d1
+                beq.s   @NotEquipped
+                jsr     j_IsItemCursed?
+                bcc.w   @NotCursed
                 sndCom  MUSIC_CURSED_ITEM
-                move.w  #$3C,d0 
+                move.w  #60,d0
                 jsr     (Sleep).w       
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  #$1E,d1
-                bsr.w   ChooseCaravanPortrait
+                move.w  #30,d1          ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
+                bsr.w   DisplayCaravanMessageWithPortrait
                 bsr.w   PlayPreviousMusicAfterCurrentOne
                 ori     #1,ccr
-loc_22986:
+@NotCursed:
                 
-                bra.s   loc_2298A
-loc_22988:
+                bra.s   @Done
+@NotEquipped:
                 
                 tst.b   d0
-loc_2298A:
+@Done:
                 
                 movem.l (sp)+,d1
                 rts
 
-    ; End of function sub_2294C
+    ; End of function IsItemInSlotEquippedAndCursed?
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 PlayPreviousMusicAfterCurrentOne:
                 
@@ -144,24 +122,27 @@ PlayPreviousMusicAfterCurrentOne:
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_2299E:
+; Is item d1.w unsellable? Return CCR carry-bit set if true.
+
+
+IsItemUnsellable?:
                 
                 movem.l d1/a0,-(sp)
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
-                beq.s   loc_229C2
+                beq.s   @NotUnsellable
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  #$25,d1 
-                bsr.w   ChooseCaravanPortrait
+                move.w  #37,d1          ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
+                bsr.w   DisplayCaravanMessageWithPortrait
                 ori     #1,ccr
-                bra.s   loc_229C4
-loc_229C2:
+                bra.s   @Done
+@NotUnsellable:
                 
                 tst.b   d0
-loc_229C4:
+@Done:
                 
                 movem.l (sp)+,d1/a0
                 rts
 
-    ; End of function sub_2299E
+    ; End of function IsItemUnsellable?
 

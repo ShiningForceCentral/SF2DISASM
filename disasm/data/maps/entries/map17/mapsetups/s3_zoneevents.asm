@@ -9,13 +9,14 @@ ms_map17_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_ZoneEvent0:
                 
                  
-                chkFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
+                chkFlg  661             ; Set after prison scene, ending in Slade unlocking/Sarah accusing
                 bne.s   return_52404
                 script  cs_52530
-                setFlg  $295            ; Set after prison scene, ending in Slade unlocking/Sarah accusing
+                setFlg  661             ; Set after prison scene, ending in Slade unlocking/Sarah accusing
 return_52404:
                 
                 rts
@@ -25,19 +26,20 @@ return_52404:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_ZoneEvent1:
                 
                  
-                chkFlg  $296            ; Set after you try to go upstairs, and Slade opens the secret tunnel
+                chkFlg  662             ; Set after you try to go upstairs, and Slade opens the secret tunnel
                 bne.s   byte_5241E      
                 script  cs_528D4
                 script  cs_528CA
-                setFlg  $296            ; Set after you try to go upstairs, and Slade opens the secret tunnel
+                setFlg  662             ; Set after you try to go upstairs, and Slade opens the secret tunnel
                 bra.s   return_5242C
 byte_5241E:
                 
-                txt     $3B4            ; "You'll be captured if you go{N}that way.{W2}"
-                txt     $3B7            ; "Now, go out through this{N}short cut!{W1}"
+                txt     948             ; "You'll be captured if you go{N}that way.{W2}"
+                txt     951             ; "Now, go out through this{N}short cut!{W1}"
                 script  cs_528CA
 return_5242C:
                 
@@ -48,13 +50,14 @@ return_5242C:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map17_ZoneEvent2:
                 
                  
-                chkFlg  $296            ; Set after you try to go upstairs, and Slade opens the secret tunnel
+                chkFlg  662             ; Set after you try to go upstairs, and Slade opens the secret tunnel
                 beq.s   return_5243E
                 script  cs_52938
-                setFlg  $49             ; Slade is a follower
+                setFlg  73              ; Slade is a follower
 return_5243E:
                 
                 rts
@@ -63,6 +66,7 @@ return_5243E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map17_DefaultZoneEvent:
                 

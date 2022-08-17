@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; d0 : music index, or previous music if value $FB
+; In: d0.w = music index, or previous music if value $FB
+
 
 PlayMusicAfterCurrentOne:
                 

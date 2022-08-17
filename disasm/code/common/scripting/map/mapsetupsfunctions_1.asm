@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 RunMapSetupInitFunction:
                 
                 movem.l d0-a1,-(sp)
@@ -24,6 +25,7 @@ loc_47514:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 RunMapSetupZoneEvent:
                 
@@ -75,6 +77,12 @@ loc_47576:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Trigger a map setup function according to up to 4 criterias in d1-d4.
+; 
+;  In: d1.w, d2.w, d3.w = first entity's X, Y and facing
+;      d4.w, d5.w = item index, item slot
+
 
 RunMapSetupItemEvent:
                 
@@ -143,6 +151,7 @@ loc_4760A:
 
 ; In: D0 = entity event index
 
+
 RunMapSetupEntityEvent:
                 
                 movem.l d0-a1,-(sp)
@@ -175,7 +184,7 @@ loc_4765A:
                 bra.s   loc_47638
 loc_4765E:
                 
-                bsr.w   GetEntityPortaitAndSpeechSound
+                bsr.w   GetEntityPortaitAndSpeechSfx
                 move.w  d2,((SPEECH_SFX-$1000000)).w
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 blt.s   loc_47670
@@ -232,6 +241,7 @@ loc_476D6:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_476DC:
                 
                 trap    #VINT_FUNCTIONS
@@ -245,6 +255,7 @@ sub_476DC:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get index of current portrait for dialogue window and load it
+
 
 LoadAndDisplayCurrentPortrait:
                 
@@ -263,6 +274,7 @@ loc_476FC:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 RunMapSetupAreaDescription:
                 
@@ -283,6 +295,7 @@ loc_4771A:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DisplayAreaDescription:
                 
@@ -323,7 +336,7 @@ loc_4776E:
                 
                 jsr     j_HidePortraitWindow
                 clsTxt
-                moveq   #$FFFFFFFF,d7
+                moveq   #-1,d7
                 rts
 loc_4777C:
                 
@@ -344,6 +357,7 @@ loc_4778C:
 
 ; returns entity list of map setup in a0
 
+
 GetMapSetupEntityList:
                 
                 bsr.w   GetCurrentMapSetup
@@ -360,6 +374,7 @@ return_4779C:
 ; =============== S U B R O U T I N E =======================================
 
 ; returns map setup address in a0
+
 
 GetCurrentMapSetup:
                 
@@ -406,10 +421,11 @@ ms_Void:        dc.w $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
+
 MoveEntityOutOfMap:
                 
                 movem.l d0-d3,-(sp)
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
                 move.w  #$7000,d1
                 move.w  #$7000,d2
                 jsr     j_SetEntityPosition
@@ -421,10 +437,11 @@ MoveEntityOutOfMap:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 MakeEntityWalk:
                 
                 move.l  d0,-(sp)
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
                 jsr     SetWalkingActscript
                 move.l  (sp)+,d0
                 rts
@@ -436,10 +453,11 @@ MakeEntityWalk:
 
 ; reset entity flags and sprite
 
+
 sub_4781A:
                 
                 movem.l d0-d3,-(sp)
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).w
@@ -453,10 +471,11 @@ sub_4781A:
 
 ; reset entity flags and sprite and facing ?
 
+
 sub_47832:
                 
                 movem.l d0-d3,-(sp)
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
                 move.b  ((byte_FFB651-$1000000)).w,d1
                 addi.w  #2,d1
                 andi.w  #3,d1
@@ -471,10 +490,11 @@ sub_47832:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 CheckRandomBattle:
                 
                 movem.l d1/d6-d7,-(sp)
-                move.w  #$1F4,d1        ; Battle completed flags
+                move.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 add.w   d0,d1
                 jsr     j_CheckFlag
                 bne.s   loc_4786E
@@ -505,7 +525,7 @@ loc_47896:
                 
                 tst.w   d1
                 beq.s   loc_478C0
-                move.w  #$190,d1        ; Battle unlocked base flag index
+                move.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 add.w   d0,d1
                 jsr     j_SetFlag
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w

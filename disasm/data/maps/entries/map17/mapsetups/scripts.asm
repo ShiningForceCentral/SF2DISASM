@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map17\mapsetups\scripts.asm :
 ; 0x52530..0x52A80 : 
-cs_52530:       textCursor $385
+cs_52530:       textCursor 901
                 setCamDest 48,0
                 setFacing ALLY_BOWIE,DOWN
                 nextSingleText $C0,132  ; "What's wrong with the seal?{W1}"
@@ -28,7 +28,7 @@ cs_52530:       textCursor $385
                  moveRight 1
                 endActions
                 csWait 5
-                setActscript ALLY_SLADE,eas_461B6
+                setActscript ALLY_SLADE,eas_2xRightLeft
                 csWait 30
                 nextSingleText $0,ALLY_SLADE ; "Where...?{N}...I...why am I...?{W1}"
                 setFacing ALLY_SLADE,DOWN
@@ -54,8 +54,8 @@ cs_52530:       textCursor $385
                 endActions
                 setFacing ALLY_SLADE,UP
                 customActscriptWait ALLY_SLADE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $2          ;   
+                 ac_motion OFF          ;   
+                 ac_orientDown          ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -83,8 +83,8 @@ cs_52530:       textCursor $385
                 nextSingleText $0,ALLY_SARAH ; "Is it related to the opened{N}door?{W1}"
                 nextSingleText $0,ALLY_SLADE ; "Hey!{W1}"
                 customActscriptWait ALLY_SLADE
-                 ac_setAnimCounter $0   ;   
-                 ac_setFlip $0          ;   
+                 ac_motion OFF          ;   
+                 ac_orientUp            ;   
                  ac_updateSprite        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
@@ -136,7 +136,7 @@ cs_52530:       textCursor $385
                 playSound SFX_SECRET_PATH_ROCK
                 setBlocks 48,7,1,1,48,8
                 setBlocks 62,20,1,2,48,20
-                textCursor $3A3
+                textCursor 931
                 entityActionsWait ALLY_SLADE
                  moveDown 2
                  moveRight 9
@@ -168,11 +168,11 @@ cs_52530:       textCursor $385
                 nextSingleText $0,ALLY_SARAH ; "Why are you being so nice{N}to us?  You don't know us.{W1}"
                 shiver ALLY_SLADE
                 csWait 5
-                setActscript ALLY_SLADE,eas_461B6
+                setActscript ALLY_SLADE,eas_2xRightLeft
                 nextSingleText $C0,ALLY_SLADE ; "Ah, that's because...{N}well...{W1}"
                 csWait 20
                 setFacing ALLY_SLADE,UP
-                setActscriptWait ALLY_SLADE,eas_46172
+                setActscriptWait ALLY_SLADE,eas_DeactivateAutoFacing
                 customActscriptWait ALLY_SLADE
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -246,7 +246,7 @@ cs_528CA:       entityActionsWait ALLY_BOWIE
                  moveRight 1
                 endActions
                 csc_end
-cs_528D4:       textCursor $3B3
+cs_528D4:       textCursor 947
                 nextSingleText $0,ALLY_SLADE ; "Wait!{W1}"
                 setCamDest 50,3
                 csWait 30
@@ -274,7 +274,7 @@ cs_528D4:       textCursor $3B3
                 setFacing ALLY_SLADE,DOWN
                 nextSingleText $0,ALLY_SLADE ; "Now, go out through this{N}short cut!{W1}"
                 csc_end
-cs_52938:       textCursor $3B8
+cs_52938:       textCursor 952
                 entityActionsWait ALLY_SLADE
                  moveDown 1
                 endActions
@@ -329,7 +329,7 @@ cs_52938:       textCursor $3B8
                 csc_end
 cs_52A3C:       setActscriptWait ALLY_BOWIE,eas_Init
                 setFacing 131,LEFT
-                textCursor $3BE
+                textCursor 958
                 nextText $0,131         ; "Hey, it's noisy next door.{W2}"
                 nextSingleText $0,131   ; "It sounds like...{N}Mr. {NAME;28} and the King{N}are arguing.{W1}"
                 csWait 20

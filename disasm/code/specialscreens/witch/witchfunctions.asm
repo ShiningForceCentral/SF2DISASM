@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 InitWitchSuspendVIntFunctions:
                 
                 move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
@@ -21,7 +22,7 @@ InitWitchSuspendVIntFunctions:
                 bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndInterrupts
                 clr.b   ((byte_FFB198-$1000000)).w
-                move.w  #$48,((SPEECH_SFX-$1000000)).w 
+                move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w
                 bsr.w   DisplayWitchScreen
                 bsr.w   EnableDisplayAndInterrupts
                 movea.l (p_WitchLayout).l,a0
@@ -45,6 +46,7 @@ InitWitchSuspendVIntFunctions:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 DisplayWitchScreen:
                 
@@ -84,6 +86,7 @@ DisplayWitchScreen:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 sub_7CDC:
                 
                 movea.l (p_WitchLayout).l,a0
@@ -97,6 +100,7 @@ sub_7CDC:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 UpdateWitchHead:
                 
                 movea.l (p_WitchLayout).l,a0
@@ -109,6 +113,7 @@ UpdateWitchHead:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 QueueDmaForWitchLayout:
                 
@@ -126,6 +131,7 @@ QueueDmaForWitchLayout:
 ; =============== S U B R O U T I N E =======================================
 
 ; D1=Width/Height
+
 
 UpdateWitchLayoutZone:
                 
@@ -154,12 +160,14 @@ loc_7D3C:
 
 ; =============== S U B R O U T I N E =======================================
 
+var_2 = -2
+
 VInt_WitchBlink:
                 
                 link    a6,#-2
                 tst.b   ((byte_FFB082-$1000000)).w
                 beq.w   loc_7E16
-                clr.w   -2(a6)
+                clr.w   var_2(a6)
                 lea     ((BLINK_COUNTER-$1000000)).w,a2
                 subq.w  #1,(a2)
                 cmpi.w  #3,(a2)
@@ -169,7 +177,7 @@ VInt_WitchBlink:
                 lea     (byte_FFE21E).l,a1
                 move.w  #$302,d1
                 bsr.s   UpdateWitchLayoutZone
-                addq.w  #1,-2(a6)
+                addq.w  #1,var_2(a6)
 loc_7D8A:
                 
                 tst.w   (a2)
@@ -179,7 +187,7 @@ loc_7D8A:
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$705,d1
                 bsr.s   UpdateWitchLayoutZone
-                addq.w  #1,-2(a6)
+                addq.w  #1,var_2(a6)
                 moveq   #$78,d6 
                 jsr     (GenerateRandomNumber).w
                 addi.w  #$1E,d7         ; minimum frames between two blinks
@@ -202,7 +210,7 @@ loc_7DC6:
                 lea     (byte_FFE29E).l,a1
                 move.w  #$301,d1
                 bsr.w   UpdateWitchLayoutZone
-                addq.w  #1,-2(a6)
+                addq.w  #1,var_2(a6)
 loc_7DEA:
                 
                 tst.w   (a2)
@@ -214,14 +222,14 @@ loc_7DEE:
                 lea     (byte_FFE29E).l,a1
                 move.w  #$301,d1
                 bsr.w   UpdateWitchLayoutZone
-                addq.w  #1,-2(a6)
+                addq.w  #1,var_2(a6)
                 moveq   #5,d6
                 jsr     (GenerateRandomNumber).w
                 addi.w  #$A,d7
                 move.w  d7,(a2)
 loc_7E16:
                 
-                tst.w   -2(a6)
+                tst.w   var_2(a6)
                 beq.s   loc_7E36
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1

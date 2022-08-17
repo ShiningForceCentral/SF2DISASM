@@ -4,21 +4,26 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-sub_229CA:
+; In: d1.b = item index
+; Out: d2.l = 0 if true, -1 if false
+
+
+IsItemUsableOnField?:
                 
                 moveq   #0,d2
-                lea     UsableOutsideBattleItems(pc), a0
+                lea     tbl_UsableOnFieldItems(pc), a0
                 nop
-loc_229D2:
+@Loop:
                 
                 cmp.b   (a0)+,d1
-                beq.w   return_229E0
+                beq.w   @Return
                 cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
-                bne.s   loc_229D2
-                moveq   #$FFFFFFFF,d2
-return_229E0:
+                bne.s   @Loop
+                
+                moveq   #-1,d2
+@Return:
                 
                 rts
 
-    ; End of function sub_229CA
+    ; End of function IsItemUsableOnField?
 

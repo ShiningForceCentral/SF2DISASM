@@ -9,13 +9,14 @@ ms_map9_ZoneEvents:
 
 ; =============== S U B R O U T I N E =======================================
 
+
 Map9_ZoneEvent0:
                 
                  
-                chkFlg  $2D6            ; Set after talking to the priest in upstairs Hassan
+                chkFlg  726             ; Set after talking to the priest in upstairs Hassan
                 bne.s   return_56876
                 script  cs_568F6
-                setFlg  $2D6            ; Set after talking to the priest in upstairs Hassan
+                setFlg  726             ; Set after talking to the priest in upstairs Hassan
 return_56876:
                 
                 rts
@@ -24,6 +25,7 @@ return_56876:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 
 Map9_DefaultZoneEvent:
                 

@@ -4,6 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+
 ApplyStormEffect:
                 
                 movem.l d0/a0-a1,-(sp)

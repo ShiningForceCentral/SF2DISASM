@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map26\mapsetups\scripts.asm :
 ; 0x59F20..0x59F42 : 
-cs_59F20:       textCursor $6CC
+cs_59F20:       textCursor 1740
                 setCamDest 0,20
                 nextSingleText $0,129   ; "Ungh!{W2}"
                 csWait 50
