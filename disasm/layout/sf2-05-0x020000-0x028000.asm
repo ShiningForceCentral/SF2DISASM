@@ -15,7 +15,11 @@
                 include "data\stats\allies\promotions.asm"    ; Promotions
                 align
                 include "code\common\menus\church\churchactions_2.asm"    ; Church functions
+            if (STANDARD_BUILD=1)
+                include "code\common\menus\main\mainactions-standard.asm"
+            else
                 include "code\common\menus\main\mainactions.asm"    ; Main menu functions
+            endif
                 include "code\common\menus\blacksmith\blacksmithactions.asm"    ; Blacksmith functions
                 include "data\stats\allies\classes\blacksmitheligibleclasses.asm"    ; Blacksmith eligible classes list
                 include "code\common\menus\blacksmith\pickmithrilweapon.asm"    ; Pick Mithril Weapon function
