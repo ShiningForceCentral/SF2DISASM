@@ -156,6 +156,32 @@ KillRemainingEnemies:
 
 HealLivingAndImmortalAllies:
                 
+            if (STANDARD_BUILD=1)
+                movem.l d0-d2/d7-a0,-(sp)
+                clr.w   d0
+                moveq   #0,d2
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
+                
+@Loop:          lea     tbl_ImmortalAllies(pc), a0
+                move.w  d0,d1
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcc.s   @Immortal
+                jsr     GetCurrentHP
+                beq.s   @Dead           ; skip healing if character is dead
+@Immortal:      jsr     GetMaxHP
+                jsr     SetCurrentHP
+                jsr     GetMaxMP
+                jsr     SetCurrentMP
+                jsr     GetStatusEffects
+                andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE,d1 ; cure all but lasting status effects
+                jsr     SetStatusEffects
+                jsr     ApplyStatusEffectsAndItemsOnStats
+@Dead:          addq.w  #1,d0
+                dbf     d7,@Loop
+                
+                movem.l (sp)+,d0-d2/d7-a0
+                rts
+            else
                 movem.l d0-d7,-(sp)
                 clr.w   d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
@@ -186,6 +212,7 @@ HealLivingAndImmortalAllies:
                 
                 movem.l (sp)+,d0-d7
                 rts
+            endif
 
     ; End of function HealLivingAndImmortalAllies
 
@@ -249,10 +276,20 @@ GetRemainingCombatants:
 BattleLoop_Victory:
                 
                 bsr.w   HealLivingAndImmortalAllies
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED Battle check for fairy woods
+            if (STANDARD_BUILD=1)
+                movem.l d1-d2/a0,-(sp)
+                lea     tbl_DisplayTimerBattles(pc), a0
+                getSavedByte CURRENT_BATTLE, d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                movem.l (sp)+,d1-d2/a0
+                bcs.s   @Continue
+                jsr     RemoveTimerWindow
+            else
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check for fairy woods
                 bne.s   @Continue
                 jsr     j_RemoveTimerWindow
+            endif
 @Continue:
                 
                 move.b  ((CURRENT_MAP-$1000000)).w,((MAP_EVENT_PARAM_2-$1000000)).w
@@ -310,12 +347,26 @@ BattleLoop_Defeat:
                 moveq   #-1,d4
                 
                 ; Losable battles
-                cmpi.b  #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED battle 4 upgrade
+            if (STANDARD_BUILD=1)
+                movem.l d1-d2/a0,-(sp)
+                clr.w   d1
+                lea     tbl_LosableBattles(pc), a0
+                getSavedByte CURRENT_BATTLE, d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @Return
+                addi.w  #BATTLE_UNLOCKED_FLAGS_START,d1
+                jsr     ClearFlag
+                addi.w  #BATTLE_COMPLETED_FLAGS_START-BATTLE_UNLOCKED_FLAGS_START,d1
+                jsr     SetFlag
+                movem.l (sp)+,d1-d2/a0
+            else
+                checkSavedByte #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS, CURRENT_BATTLE    ; HARDCODED battle 4 upgrade
                 bne.s   @Return
                 clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
                 setFlg  504             ; Battle 4 completed - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS   
                 jsr     j_UpgradeBattle
+            endif
                 moveq   #MAP_GALAM_CASTLE_INNER,d0
                 clr.w   d4
 @Return:

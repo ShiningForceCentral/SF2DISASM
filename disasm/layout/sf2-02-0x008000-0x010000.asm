@@ -66,7 +66,11 @@
                 include "data\stats\allies\classes\criticalhitsettings.asm"    ; Critical hit settings
                 include "code\gameflow\battle\battleactions\battleactionsengine_5.asm"    ; Battleactions engine
                 include "code\gameflow\battle\battleactions\castspell.asm"    ; Write Battlescene Script : Cast Spell
+            if (STANDARD_BUILD=1)
+                include "code\gameflow\battle\battleactions\calculatespelldamage-standard.asm"
+            else
                 include "code\gameflow\battle\battleactions\calculatespelldamage.asm"    ; Calculate Spell Damage function
+            endif
                 include "code\gameflow\battle\battleactions\useitem.asm"    ; Write Battlescene Script : Use Item
             if (STANDARD_BUILD=1)
                 include "code\gameflow\battle\battleactions\breakuseditem-standard.asm"
@@ -75,7 +79,11 @@
                 include "code\gameflow\battle\battleactions\breakuseditem.asm"    ; Write Battlescene Script : Break Used Item
             endif
                 include "data\stats\items\itembreakmessages.asm"    ; Item break messages
+            if (STANDARD_BUILD=1)
+                include "code\gameflow\battle\battleactions\dropenemyitem-standard.asm"
+            else
                 include "code\gameflow\battle\battleactions\writebattlescenecommanddropenemyitem.asm"    ; Write Battlescene Command : Drop Enemy Item function
+            endif
                 include "data\battles\global\enemyitemdrops.asm"    ; Enemy item drops
                 include "data\stats\enemies\enemygold.asm"    ; Enemy gold amounts
                 include "code\gameflow\battle\battleactions\battleactionsengine_6.asm"    ; Battleactions engine
