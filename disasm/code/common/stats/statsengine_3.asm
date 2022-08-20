@@ -74,11 +74,11 @@ InitAllyCombatantEntry:
                 mulu.w  #ALLYSTARTDEF_ENTRY_SIZE,d1
                 conditionalLongAddr movea.l, p_tbl_AllyStartDefs, a0
                 adda.w  d1,a0
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    suba.w  #ALLYNAME_MAX_LENGTH*2,a1
-                else
-                    suba.w  #ALLYNAME_MAX_LENGTH,a1
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                suba.w  #ALLYNAME_MAX_LENGTH*2,a1
+            else
+                suba.w  #ALLYNAME_MAX_LENGTH,a1
+            endif
                 move.b  (a0)+,d1
                 move.b  d1,COMBATANT_OFFSET_CLASS(a1)
                 move.b  (a0)+,d2
@@ -94,12 +94,12 @@ InitAllyCombatantEntry:
                 setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_2
                 getStartingItem (a0)+, d3
                 setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_3
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  #$3F3F3F3F,d3
-                    movep.l d3,COMBATANT_OFFSET_SPELLS(a1) 
-                else
-                    move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1)    ; spell entries default to nothing
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  #$3F3F3F3F,d3
+                movep.l d3,COMBATANT_OFFSET_SPELLS(a1) 
+            else
+                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1)    ; spell entries default to nothing
+            endif
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
                 bsr.w   InitAllyStats   
@@ -184,29 +184,29 @@ InitGameSettings:
                 dbf     d7,@ClearCaravanItems_Loop
                 
                 moveq   #0,d0
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    lea     (COMBATANT_ENTRIES).l,a0
-                    movep.w d0,CARAVAN_ITEMS_NUMBER_OFFSET(a0)
-                    movep.w d0,CURRENT_GOLD_OFFSET(a0)
-                    move.b  d0,PLAYER_TYPE_OFFSET(a0)
-                    move.b  d0,CURRENT_MAP_OFFSET(a0)
-                    move.b  d0,CURRENT_BATTLE_OFFSET(a0)
-                    move.b  d0,DISPLAY_BATTLE_MESSAGES_OFFSET(a0)
-                    move.b  d0,EGRESS_MAP_OFFSET(a0)
-                    move.l  #359999,d0
-                    movep.l d0,SPECIAL_BATTLE_RECORD_OFFSET(a0)
-                    move.b  #2,MESSAGE_SPEED_OFFSET(a0)
-                else
-                    move.w  d0,((CARAVAN_ITEMS_NUMBER-$1000000)).w ; number of items in caravan
-                    move.w  d0,((CURRENT_GOLD-$1000000)).w
-                    move.b  d0,((PLAYER_TYPE-$1000000)).w ; holds which player entity type we are (00=BOWIE, 01=caravan, 02=raft)
-                    move.b  d0,((CURRENT_MAP-$1000000)).w ; holds which map index we're currently using
-                    move.b  d0,((CURRENT_BATTLE-$1000000)).w ; holds which battle we're currently doing
-                    move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
-                    move.b  d0,((EGRESS_MAP-$1000000)).w ; holds which map index to teleport back to after we EGRESS or lose
-                    move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
-                    move.b  #2,((MESSAGE_SPEED-$1000000)).w
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                lea     (COMBATANT_ENTRIES).l,a0
+                movep.w d0,CARAVAN_ITEMS_NUMBER_OFFSET(a0)
+                movep.w d0,CURRENT_GOLD_OFFSET(a0)
+                move.b  d0,PLAYER_TYPE_OFFSET(a0)
+                move.b  d0,CURRENT_MAP_OFFSET(a0)
+                move.b  d0,CURRENT_BATTLE_OFFSET(a0)
+                move.b  d0,DISPLAY_BATTLE_MESSAGES_OFFSET(a0)
+                move.b  d0,EGRESS_MAP_OFFSET(a0)
+                move.l  #359999,d0
+                movep.l d0,SPECIAL_BATTLE_RECORD_OFFSET(a0)
+                move.b  #2,MESSAGE_SPEED_OFFSET(a0)
+            else
+                move.w  d0,((CARAVAN_ITEMS_NUMBER-$1000000)).w ; number of items in caravan
+                move.w  d0,((CURRENT_GOLD-$1000000)).w
+                move.b  d0,((PLAYER_TYPE-$1000000)).w ; holds which player entity type we are (00=BOWIE, 01=caravan, 02=raft)
+                move.b  d0,((CURRENT_MAP-$1000000)).w ; holds which map index we're currently using
+                move.b  d0,((CURRENT_BATTLE-$1000000)).w ; holds which battle we're currently doing
+                move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
+                move.b  d0,((EGRESS_MAP-$1000000)).w ; holds which map index to teleport back to after we EGRESS or lose
+                move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
+                move.b  #2,((MESSAGE_SPEED-$1000000)).w
+            endif
                 move.l  #$FFFFFFFF,((FOLLOWERS_LIST-$1000000)).w
                 move.w  #$FFFF,((byte_FFAF26-$1000000)).w
                 movem.l (sp)+,d0/d7-a0
@@ -303,11 +303,11 @@ UpdateForce:
                 addq.w  #1,d2
                 move.w  d0,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    bsr.w   CheckFlag
-                else
-                    bsr.s   CheckFlag
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                bsr.w   CheckFlag
+            else
+                bsr.s   CheckFlag
+            endif
                 beq.s   @InReserve
                 move.b  d0,(a3)+
                 addq.w  #1,d3

@@ -163,10 +163,10 @@ tbl_EnemyItemDrops:
 
 ; Items that have a random chance to drop (x/256)
 tbl_RandomItemDrops:
-                if (STANDARD_BUILD=1)
-                    dc.b ITEM_TAROS_SWORD,8
-                    dc.b ITEM_IRON_BALL,8
-                    dc.b ITEM_COUNTER_SWORD,8
+            if (STANDARD_BUILD=1)
+                dc.b ITEM_TAROS_SWORD,8
+                dc.b ITEM_IRON_BALL,8
+                dc.b ITEM_COUNTER_SWORD,8
                     
-                    tableEnd.b
-                endif
+                tableEnd.b
+            endif

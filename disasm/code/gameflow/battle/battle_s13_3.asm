@@ -245,13 +245,13 @@ InitEnemyStats:
                 moveq   #13,d7
 @Loop:
                 
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  (a1)+,d1
-                    movep.l d1,0(a0)
-                    addq.w  #8,a0
-                else
-                    move.l  (a1)+,(a0)+
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  (a1)+,d1
+                movep.l d1,0(a0)
+                addq.w  #8,a0
+            else
+                move.l  (a1)+,(a0)+
+            endif
                 dbf     d7,@Loop
                 
                 movea.l (sp)+,a0

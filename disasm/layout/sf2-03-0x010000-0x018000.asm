@@ -55,11 +55,11 @@
                 include "data\graphics\tech\windowlayouts\timerwindowlayout.asm"    ; Timer window layout
                 include "code\specialscreens\witch\witchmainmenu.asm"    ; Witch main menu
                 include "code\common\menus\menuengine_10.asm"    ; Menu engine
-                if (STANDARD_BUILD=1)
-                    include "data\graphics\tech\windowlayouts\memberstatswindowlayout-standard.asm"
-                else
-                    include "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout
-                endif
+            if (STANDARD_BUILD=1)
+                include "data\graphics\tech\windowlayouts\memberstatswindowlayout-standard.asm"
+            else
+                include "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout
+            endif
                 includeIfVanillaRom "data\stats\items\itemdefs.asm"     ; Item definitions
                 includeIfVanillaRom "data\stats\spells\spelldefs.asm"   ; Spell definitions
                 includeIfVanillaRom "data\stats\items\itemnames.asm"    ; Item names

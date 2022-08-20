@@ -904,11 +904,11 @@ loc_68A8:
                 move.w  (sp)+,d1
                 clr.w   d0
                 moveq   #3,d2
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    sub.b   (MESSAGE_SPEED).l,d2
-                else
-                    sub.b   ((MESSAGE_SPEED-$1000000)).w,d2
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                sub.b   (MESSAGE_SPEED).l,d2
+            else
+                sub.b   ((MESSAGE_SPEED-$1000000)).w,d2
+            endif
                 beq.s   loc_68C2
                 subq.w  #1,d2
                 bset    d2,d0

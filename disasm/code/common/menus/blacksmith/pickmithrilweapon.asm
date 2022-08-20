@@ -67,17 +67,17 @@ PickMithrilWeapon:
                 move.w  #BLACKSMITH_ORDERS_COUNTER,d7
 @LoadIndex_Loop:
                 
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    movep.w 0(a0),d0
-                    bne.s   @Next
-                    movep.w d1,0(a0)
-                    bra.s   @Done
-                else
-                    cmpi.w  #0,(a0)
-                    bne.w   @Next           ; check next weapon slot if current one is occupied
-                    move.w  d1,(a0)
-                    bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                movep.w 0(a0),d0
+                bne.s   @Next
+                movep.w d1,0(a0)
+                bra.s   @Done
+            else
+                cmpi.w  #0,(a0)
+                bne.w   @Next           ; check next weapon slot if current one is occupied
+                move.w  d1,(a0)
+                bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
+            endif
 @Next:
                 
                 move.w  #2,d0

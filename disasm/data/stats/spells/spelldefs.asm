@@ -734,7 +734,7 @@ tbl_SpellDefs:
                 radius     1
                 power      20
                 
-                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                 
                 entry      44
                 mpCost     0
@@ -891,4 +891,4 @@ tbl_SpellDefs:
                 
                 ; Fill out table with dummy entries
                 dcb.b (SPELLDEF_ENTRY_SIZE*252)-(*-tbl_SpellDefs),0
-                endif
+            endif

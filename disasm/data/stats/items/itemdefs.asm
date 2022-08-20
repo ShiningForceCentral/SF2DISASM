@@ -1299,7 +1299,7 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                 
                 ; 128: 
                 equipFlags   NONE
@@ -2581,4 +2581,4 @@ tbl_ItemDefs:
                              NONE, 0, &
                              NONE, 0
                 
-                endif
+            endif

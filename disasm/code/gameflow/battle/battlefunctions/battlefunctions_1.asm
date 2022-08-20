@@ -16,17 +16,17 @@ BattleLoop:
                 beq.s   @Initialize
                 
                 ; Start here if game was suspended mid-battle
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  a0,-(sp)
-                    move.l  d0,-(sp)
-                    lea     (SAVED_SECONDS_COUNTER).l,a0
-                    movep.l 0(a0),d0
-                    move.l  d0,((SECONDS_COUNTER-$1000000)).w
-                    move.l  (sp)+,d0
-                    movea.l (sp)+,a0
-                else
-                    move.l  ((SAVED_SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                move.l  d0,-(sp)
+                lea     (SAVED_SECONDS_COUNTER).l,a0
+                movep.l 0(a0),d0
+                move.l  d0,((SECONDS_COUNTER-$1000000)).w
+                move.l  (sp)+,d0
+                movea.l (sp)+,a0
+            else
+                move.l  ((SAVED_SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
+            endif
                 clrFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 jsr     j_ClearAiMoveInfo
                 clr.b   ((VIEW_TARGET_ENTITY-$1000000)).w
@@ -300,19 +300,19 @@ BattleLoop_Victory:
                 
                 getSavedByte CURRENT_MAP, ((MAP_EVENT_PARAM_2-$1000000)).w
                 jsr     (UpdateForceAndGetFirstBattlePartyMemberIndex).w
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    jsr     GetXPos
-                    add.b   (BATTLE_AREA_X).l,d1
-                    move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
-                    jsr     GetYPos
-                    add.b   (BATTLE_AREA_Y).l,d1
-                else
-                    jsr     j_GetXPos
-                    add.b   ((BATTLE_AREA_X-$1000000)).w,d1
-                    move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
-                    jsr     j_GetYPos
-                    add.b   ((BATTLE_AREA_Y-$1000000)).w,d1
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                jsr     GetXPos
+                add.b   (BATTLE_AREA_X).l,d1
+                move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
+                jsr     GetYPos
+                add.b   (BATTLE_AREA_Y).l,d1
+            else
+                jsr     j_GetXPos
+                add.b   ((BATTLE_AREA_X-$1000000)).w,d1
+                move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
+                jsr     j_GetYPos
+                add.b   ((BATTLE_AREA_Y-$1000000)).w,d1
+            endif
                 move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
                 bsr.w   GetEntityIndexForCombatant
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0

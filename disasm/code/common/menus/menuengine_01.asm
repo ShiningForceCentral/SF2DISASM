@@ -878,13 +878,13 @@ BuildItemMenu:
                 moveq   #-36,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  (sp)+,d1
-                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                    btst    #ITEMENTRY_BIT_EQUIPPED,d1
-                    beq.s   @Return
-                else
-                    tst.b   d1
-                    bpl.s   @Return
-                endif
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                btst    #ITEMENTRY_BIT_EQUIPPED,d1
+                beq.s   @Return
+            else
+                tst.b   d1
+                bpl.s   @Return
+            endif
                 lea     aEquipped(pc), a0
                 move.w  windowSlot(a6),d0
                 move.w  #MENU_ITEM_EQUIPPED_STRING_COORDS,d1
@@ -1119,11 +1119,11 @@ LoadHighlightableItemIcon:
                 cmpi.w  #ICON_UNARMED,d0
                 beq.s   LoadHighlightableIcon
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
-                if (STANDARD_BUILD=1)
-                    cmpi.w  #ITEM_NOTHING,d0
-                    bne.s   LoadHighlightableIcon
-                    move.w  #ICON_NOTHING,d0
-                endif
+            if (STANDARD_BUILD=1)
+                cmpi.w  #ITEM_NOTHING,d0
+                bne.s   LoadHighlightableIcon
+                move.w  #ICON_NOTHING,d0
+            endif
 
     ; End of function LoadHighlightableItemIcon
 

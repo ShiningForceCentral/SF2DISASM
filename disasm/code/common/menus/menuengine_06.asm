@@ -257,11 +257,11 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentATT
-                if (STANDARD_BUILD=0)
-                    move.w  d1,d0
-                    ext.l   d0
-                    moveq   #STATS_DIGITS_NUMBER,d7
-                endif
+            if (STANDARD_BUILD=0)
+                move.w  d1,d0
+                ext.l   d0
+                moveq   #STATS_DIGITS_NUMBER,d7
+            endif
                 bsr.w   WriteStatValue  
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_DEF_STRING,a1
@@ -271,11 +271,11 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentDEF
-                if (STANDARD_BUILD=0)
-                    move.w  d1,d0
-                    ext.l   d0
-                    moveq   #STATS_DIGITS_NUMBER,d7
-                endif
+            if (STANDARD_BUILD=0)
+                move.w  d1,d0
+                ext.l   d0
+                moveq   #STATS_DIGITS_NUMBER,d7
+            endif
                 bsr.w   WriteStatValue  
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_AGI_STRING,a1
@@ -285,11 +285,11 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentAGI
-                if (STANDARD_BUILD=0)
-                    move.w  d1,d0
-                    ext.l   d0
-                    moveq   #STATS_DIGITS_NUMBER,d7
-                endif
+            if (STANDARD_BUILD=0)
+                move.w  d1,d0
+                ext.l   d0
+                moveq   #STATS_DIGITS_NUMBER,d7
+            endif
                 bsr.w   WriteStatValue  
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_MOV_STRING,a1
@@ -299,11 +299,11 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentMOV
-                if (STANDARD_BUILD=0)
-                    move.w  d1,d0
-                    ext.l   d0
-                    moveq   #STATS_DIGITS_NUMBER,d7
-                endif
+            if (STANDARD_BUILD=0)
+                move.w  d1,d0
+                ext.l   d0
+                moveq   #STATS_DIGITS_NUMBER,d7
+            endif
                 bsr.w   WriteStatValue  
                 bra.w   loc_13C36
                 rts                     ; unreachable
@@ -433,13 +433,13 @@ LoadItemIcon:
                 module  ; start of icon loading module
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 conditionalLongAddr movea.l, p_Icons, a0
-                if (STANDARD_BUILD=1)
-                    cmpi.w  #ITEM_NOTHING,d1
-                    bne.s   LoadIcon
-                    bra.s   @Nothing
-                else
-                    bra.w   LoadIcon
-                endif
+            if (STANDARD_BUILD=1)
+                cmpi.w  #ITEM_NOTHING,d1
+                bne.s   LoadIcon
+                bra.s   @Nothing
+            else
+                bra.w   LoadIcon
+            endif
 
     ; End of function LoadItemIcon
 
@@ -604,11 +604,11 @@ loc_13CDE:
 
     ; End of function CopyWindowTilesToRam
 
-                if (STANDARD_BUILD=0)
+            if (STANDARD_BUILD=0)
 aNameClassLevExp:   dc.b 'NAME    CLASS     LEV EXP',0
 aNameHpMpAtDfAgMv:  dc.b 'NAME    HP MP AT DF AG MV',0
 aNameAttackDefense: dc.b 'NAME    ATTACK   DEFENSE',0
-                endif
+            endif
 aMagicItem:     dc.b 'MAGIC     ITEM'
 aItem_3:        dc.b '- ITEM -',0
 aMagic_2:       dc.b '- MAGIC -',0
@@ -1273,39 +1273,39 @@ sub_1445A:
                 sndCom  SFX_VALIDATION
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                if (STANDARD_BUILD=1)
-                    jsr     GetSpellAndNumberOfSpells
-                    andi.w  #SPELLENTRY_MASK_INDEX,d1
-                    move.w  d1,(a0)+
-                    moveq   #1,d1
-                    jsr     GetSpellAndNumberOfSpells
-                    andi.w  #SPELLENTRY_MASK_INDEX,d1 
-                    move.w  d1,(a0)+
-                    moveq   #2,d1
-                    jsr     GetSpellAndNumberOfSpells
-                    andi.w  #SPELLENTRY_MASK_INDEX,d1 
-                    move.w  d1,(a0)+
-                    moveq   #3,d1
-                    jsr     GetSpellAndNumberOfSpells
-                    andi.w  #SPELLENTRY_MASK_INDEX,d1 
-                    move.w  d1,(a0)+
-                else
-                    jsr     j_GetSpellAndNumberOfSpells
-                    andi.w  #$7F,d1         ; BUG -- Should be using spell entry index mask $3F instead.
-                    move.w  d1,(a0)+
-                    moveq   #1,d1
-                    jsr     j_GetSpellAndNumberOfSpells
-                    andi.w  #$7F,d1 
-                    move.w  d1,(a0)+
-                    moveq   #2,d1
-                    jsr     j_GetSpellAndNumberOfSpells
-                    andi.w  #$7F,d1 
-                    move.w  d1,(a0)+
-                    moveq   #3,d1
-                    jsr     j_GetSpellAndNumberOfSpells
-                    andi.w  #$7F,d1 
-                    move.w  d1,(a0)+
-                endif
+            if (STANDARD_BUILD=1)
+                jsr     GetSpellAndNumberOfSpells
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
+                move.w  d1,(a0)+
+                moveq   #1,d1
+                jsr     GetSpellAndNumberOfSpells
+                andi.w  #SPELLENTRY_MASK_INDEX,d1 
+                move.w  d1,(a0)+
+                moveq   #2,d1
+                jsr     GetSpellAndNumberOfSpells
+                andi.w  #SPELLENTRY_MASK_INDEX,d1 
+                move.w  d1,(a0)+
+                moveq   #3,d1
+                jsr     GetSpellAndNumberOfSpells
+                andi.w  #SPELLENTRY_MASK_INDEX,d1 
+                move.w  d1,(a0)+
+            else
+                jsr     j_GetSpellAndNumberOfSpells
+                andi.w  #$7F,d1         ; BUG -- Should be using spell entry index mask $3F instead.
+                move.w  d1,(a0)+
+                moveq   #1,d1
+                jsr     j_GetSpellAndNumberOfSpells
+                andi.w  #$7F,d1 
+                move.w  d1,(a0)+
+                moveq   #2,d1
+                jsr     j_GetSpellAndNumberOfSpells
+                andi.w  #$7F,d1 
+                move.w  d1,(a0)+
+                moveq   #3,d1
+                jsr     j_GetSpellAndNumberOfSpells
+                andi.w  #$7F,d1 
+                move.w  d1,(a0)+
+            endif
                 clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0

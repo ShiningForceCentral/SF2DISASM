@@ -56,11 +56,11 @@ rjt_DebugModeBattleactions:
                 
                 moveq   #0,d0
                 moveq   #0,d1
-                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                    move.w  #ITEMINDEX_MAX,d2
-                else
-                    moveq   #ITEMINDEX_MAX,d2
-                endif
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                move.w  #ITEMINDEX_MAX,d2
+            else
+                moveq   #ITEMINDEX_MAX,d2
+            endif
                 jsr     j_NumberPrompt
                 move.w  d0,(a0)+
                 bsr.w   DebugModeSelectTargetEnemy
