@@ -51,7 +51,7 @@ ExecuteAiCommand_Attack:
                 move.w  d0,BATTLEACTION_OFFSET_TARGET(a0)
                 move.w  d7,d0           ; d7 --> d0 = character index (aka attacker)
                 move.w  (a1),d1         ; d1 = item slot of the attack item
-                bsr.w   GetItemAndNumberHeld
+                bsr.w   GetItemBySlotAndHeldItemsNumber
                 move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
                 lea     ((AI_LAST_TARGET_TABLE-$1000000)).w,a2
                 move.w  d7,d1           ; d7 --> d1 = character index (aka attacker)
@@ -65,7 +65,7 @@ ExecuteAiCommand_Attack:
                 lea     ((ATTACK_COMMAND_ITEM_SLOT-$1000000)).w,a1
                 move.w  (a1),d1
                 move.w  d7,d0           ; d7 --> d0 = character index (aka attacker)
-                bsr.w   GetItemAndNumberHeld
+                bsr.w   GetItemBySlotAndHeldItemsNumber
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 bsr.w   GetSpellRange   

@@ -19,17 +19,17 @@ BattleLoop:
                 beq.s   @Initialize
                 
                 ; Start here if game was suspended mid-battle
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  a0,-(sp)
-                    move.l  d0,-(sp)
-                    lea     (SAVED_SECONDS_COUNTER).l,a0
-                    movep.l 0(a0),d0
-                    move.l  d0,((SECONDS_COUNTER-$1000000)).w
-                    move.l  (sp)+,d0
-                    movea.l (sp)+,a0
-                else
-                    move.l  ((SAVED_SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                move.l  d0,-(sp)
+                lea     (SAVED_SECONDS_COUNTER).l,a0
+                movep.l 0(a0),d0
+                move.l  d0,((SECONDS_COUNTER-$1000000)).w
+                move.l  (sp)+,d0
+                movea.l (sp)+,a0
+            else
+                move.l  ((SAVED_SECONDS_COUNTER-$1000000)).w,((SECONDS_COUNTER-$1000000)).w
+            endif
                 clrFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 jsr     j_ClearAiMoveInfo
                 clr.b   ((VIEW_TARGET_ENTITY-$1000000)).w
@@ -165,27 +165,41 @@ KillRemainingEnemies:
 
 HealLivingAndImmortalAllies:
                 
-                if (STANDARD_BUILD=1)
-                    movem.l d0-d2/d7/a0,-(sp)
-                    moveq   #0,d2
-                else
-                    movem.l d0-d7,-(sp)
-                endif
+            if (STANDARD_BUILD=1)
+                movem.l d0-d2/d7-a0,-(sp)
+                clr.w   d0
+                moveq   #0,d2
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
+                
+@Loop:          lea     tbl_ImmortalAllies(pc), a0
+                move.w  d0,d1
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcc.s   @Immortal
+                jsr     GetCurrentHP
+                beq.s   @Dead           ; skip healing if character is dead
+@Immortal:      jsr     GetMaxHP
+                jsr     SetCurrentHP
+                jsr     GetMaxMP
+                jsr     SetCurrentMP
+                jsr     GetStatusEffects
+                andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE,d1 ; cure all but lasting status effects
+                jsr     SetStatusEffects
+                jsr     ApplyStatusEffectsAndItemsOnStats
+@Dead:          addq.w  #1,d0
+                dbf     d7,@Loop
+                
+                movem.l (sp)+,d0-d2/d7-a0
+                rts
+            else
+                movem.l d0-d7,-(sp)
                 clr.w   d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
 @Loop:
                 
-                if (STANDARD_BUILD=1)
-                    lea     tbl_ImmortalAllies(pc), a0
-                    move.w  d0,d1
-                    jsr     (FindSpecialPropertyBytesAddressForObject).w
-                    bcc.s   @Immortal
-                else
-                    cmpi.b  #ALLY_PETER,d0  ; HARDCODED ally indexes
-                    beq.w   @Immortal
-                    cmpi.b  #ALLY_LEMON,d0
-                    beq.w   @Immortal       ; always heal if character is immortal
-                endif
+                cmpi.b  #ALLY_PETER,d0  ; HARDCODED ally indexes
+                beq.w   @Immortal
+                cmpi.b  #ALLY_LEMON,d0
+                beq.w   @Immortal       ; always heal if character is immortal
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.s   @Dead           ; skip healing if character is dead
@@ -205,12 +219,9 @@ HealLivingAndImmortalAllies:
                 addq.w  #1,d0
                 dbf     d7,@Loop        
                 
-                if (STANDARD_BUILD=1)
-                    movem.l (sp)+,d0-d2/d7/a0
-                else
-                    movem.l (sp)+,d0-d7
-                endif
+                movem.l (sp)+,d0-d7
                 rts
+            endif
 
     ; End of function HealLivingAndImmortalAllies
 
@@ -277,37 +288,37 @@ GetRemainingCombatants:
 BattleLoop_Victory:
                 
                 bsr.w   HealLivingAndImmortalAllies
-                if (STANDARD_BUILD=1)
-                    movem.l d1-d2/a0,-(sp)
-                    lea     tbl_DisplayTimerBattles(pc), a0
-                    getSavedByte CURRENT_BATTLE, d1
-                    moveq   #0,d2
-                    jsr     (FindSpecialPropertyBytesAddressForObject).w
-                    movem.l (sp)+,d1-d2/a0
-                    bcs.s   @Continue
-                    jsr     RemoveTimerWindow
-                else
-                    checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check for fairy woods
-                    bne.s   @Continue
-                    jsr     j_RemoveTimerWindow
-                endif
+            if (STANDARD_BUILD=1)
+                movem.l d1-d2/a0,-(sp)
+                lea     tbl_DisplayTimerBattles(pc), a0
+                getSavedByte CURRENT_BATTLE, d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                movem.l (sp)+,d1-d2/a0
+                bcs.s   @Continue
+                jsr     RemoveTimerWindow
+            else
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check for fairy woods
+                bne.s   @Continue
+                jsr     j_RemoveTimerWindow
+            endif
 @Continue:
                 
                 getSavedByte CURRENT_MAP, ((MAP_EVENT_PARAM_2-$1000000)).w
                 jsr     (UpdateForceAndGetFirstBattlePartyMemberIndex).w
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    jsr     GetXPos
-                    add.b   (BATTLE_AREA_X).l,d1
-                    move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
-                    jsr     GetYPos
-                    add.b   (BATTLE_AREA_Y).l,d1
-                else
-                    jsr     j_GetXPos
-                    add.b   ((BATTLE_AREA_X-$1000000)).w,d1
-                    move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
-                    jsr     j_GetYPos
-                    add.b   ((BATTLE_AREA_Y-$1000000)).w,d1
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                jsr     GetXPos
+                add.b   (BATTLE_AREA_X).l,d1
+                move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
+                jsr     GetYPos
+                add.b   (BATTLE_AREA_Y).l,d1
+            else
+                jsr     j_GetXPos
+                add.b   ((BATTLE_AREA_X-$1000000)).w,d1
+                move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
+                jsr     j_GetYPos
+                add.b   ((BATTLE_AREA_Y-$1000000)).w,d1
+            endif
                 move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
                 bsr.w   GetEntityIndexForCombatant
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0

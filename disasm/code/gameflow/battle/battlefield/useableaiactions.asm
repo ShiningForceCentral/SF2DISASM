@@ -201,13 +201,13 @@ GetNextUsableAttackItem:
 @Loop:
                 
                 move.w  d3,d1
-                jsr     GetItemAndNumberHeld
+                jsr     GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #ITEM_NOTHING,d1
                 bne.s   @Continue
                 bra.w   @Next
 @Continue:
                 
-                jsr     IsItemUsableInBattle
+                jsr     IsItemUsableInBattle?
                 bcs.w   @CheckAllowedToUse
 @Next:
                 
@@ -294,14 +294,14 @@ GetNextUsableHealingItem:
 @Loop:
                 
                 move.w  d3,d1
-                jsr     GetItemAndNumberHeld
+                jsr     GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #ITEM_NOTHING,d1
                 bne.s   @Continue
                 bra.w   @Next
 @Continue:
                 
                 move.w  d1,d7
-                jsr     IsItemUsableInBattle
+                jsr     IsItemUsableInBattle?
                 bcc.s   @Next
                 
                 ; Is AI allowed to use item?

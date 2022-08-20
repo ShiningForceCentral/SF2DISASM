@@ -76,9 +76,8 @@ aShiningForce2: dc.b 'SHINING FORCE 2 '
 aShiningForce_0:dc.b 'SHINING FORCE 2 '
                 dc.b '                '
                 dc.b '                '
-aGmMk13150:     dc.b 'GM MK-1315 -0'    ; Serial Number
-                dc.b $30
-                dc.w $8921              ; checksum
+aGmMk13150:     dc.b 'GM MK-1315 -00'   ; Serial Number
+                declareChecksum         ; checksum
 aJ:             dc.b 'J               '
                 dc.l 0                  ; ROM Start Address
 RomEndAddress:  declareRomEnd           ; ROM End Address

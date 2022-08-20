@@ -1631,7 +1631,7 @@ csc51_joinBattleParty:
                 move.w  #$FFFF,((TEXT_NAME_INDEX_1-$1000000)).w
                 nop
                 move.w  (a6)+,d0
-                jsr     j_IsInBattleParty
+                jsr     j_IsInBattleParty?
                 bne.w   return_46F56
                 move.w  d0,d6
                 jsr     j_UpdateForce

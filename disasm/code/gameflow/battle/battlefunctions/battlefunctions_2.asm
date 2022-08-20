@@ -77,10 +77,10 @@ loc_24492:
 
 ClearDeadCombatantsListLength:
                 
-                if (STANDARD_BUILD=0)
-                    clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
-                    rts
-                endif
+            if (STANDARD_BUILD=0)
+                clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
+                rts
+            endif
 
     ; End of function ClearDeadCombatantsListLength
 
@@ -511,7 +511,7 @@ sub_24966:
                 bne.w   @CheckChoice_SearchStay
                 move.w  combatant(a6),d0
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
                 bne.w   @HasItem
                 txt     438             ; "You have no item.{W1}"
@@ -542,16 +542,16 @@ loc_249C6:
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 clr.w   d0
@@ -569,7 +569,7 @@ loc_24A24:
                 move.w  d1,((BATTLEACTION_ITEM_SLOT-$1000000)).w
                 move.w  d0,d1
                 move.w  combatant(a6),d0
-                jsr     j_IsItemUsableWeaponInBattle
+                jsr     j_IsItemUsableByCombatant?
                 bcs.w   @ItemHasUse
                 txt     439             ; "It has no effect.{W1}"
                 clsTxt
@@ -621,7 +621,7 @@ loc_24ADC:
                 movem.l d0-a6,-(sp)
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 move.w  ((word_FFB18C-$1000000)).w,d1
-                jsr     j_IsItemUsableWeaponInBattle
+                jsr     j_IsItemUsableByCombatant?
                 bcc.s   loc_24AFC
                 jsr     j_CreateItemRangeGrid
                 bsr.w   CreateMoveableRangeForUnit
@@ -904,16 +904,16 @@ loc_24D6C:
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 move.w  combatant(a6),d0
@@ -970,7 +970,7 @@ loc_24E4C:
                 move.w  d0,itemOrSpellIndex(a6)
                 jsr     j_HideMiniStatusWindow
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #4,d2
                 beq.w   loc_24E8E
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
@@ -989,16 +989,16 @@ loc_24E8E:
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 clr.w   d0
@@ -1055,16 +1055,16 @@ loc_24F6E:
                 move.w  d1,-(sp)
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #1,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #2,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 moveq   #3,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 clr.w   d0
@@ -1332,17 +1332,17 @@ loc_25236:
                 clsTxt
                 tst.w   d0
                 bmi.w   loc_25236
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  a0,-(sp)
-                    move.l  d0,-(sp)
-                    lea     (SAVED_SECONDS_COUNTER).l,a0
-                    move.l  ((SECONDS_COUNTER-$1000000)).w,d0
-                    movep.l d0,0(a0)
-                    move.l  (sp)+,d0
-                    movea.l (sp)+,a0
-                else
-                    move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                move.l  d0,-(sp)
+                lea     (SAVED_SECONDS_COUNTER).l,a0
+                move.l  ((SECONDS_COUNTER-$1000000)).w,d0
+                movep.l d0,0(a0)
+                move.l  (sp)+,d0
+                movea.l (sp)+,a0
+            else
+                move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
+            endif
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 getCurrentSaveSlot d0
                 jsr     (SaveGame).l

@@ -13,37 +13,37 @@
 GetCombatantName:
                 
                 movem.l d0-d1,-(sp)
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    tst.b   d0
-                    bmi.s   @Enemy
-                    move.l  a1,-(sp)
-                    bsr.w   GetCombatantEntryAddress
-                    movea.l a0,a1
-                    lea     ((ALLY_NAME_LOADING_SPACE-$1000000)).w,a0
-                else
-                    btst    #COMBATANT_BIT_ENEMY,d0
-                    bne.s   @Enemy
-                    bsr.w   GetCombatantEntryAddress
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                tst.b   d0
+                bmi.s   @Enemy
+                move.l  a1,-(sp)
+                bsr.w   GetCombatantEntryAddress
+                movea.l a0,a1
+                lea     ((ALLY_NAME_LOADING_SPACE-$1000000)).w,a0
+            else
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @Enemy
+                bsr.w   GetCombatantEntryAddress
+            endif
                 moveq   #ALLYNAME_CHARACTERS_COUNTER,d0
                 clr.w   d7
 @CountNameLength_Loop:
                 
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.w  d7,d1
-                    add.w   d1,d1
-                    move.b  (a1,d1.w),(a0,d7.w)     ; load ally name into temp space
-                else
-                    tst.b   (a0,d7.w)
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.w  d7,d1
+                add.w   d1,d1
+                move.b  (a1,d1.w),(a0,d7.w)     ; load ally name into temp space
+            else
+                tst.b   (a0,d7.w)
+            endif
                 beq.s   @Break          ; break out of loop upon reaching end of name
                 addq.w  #1,d7
                 dbf     d0,@CountNameLength_Loop
 @Break:
                 
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    movea.l (sp)+,a1  
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                movea.l (sp)+,a1  
+            endif
                 bra.s   @Done
 @Enemy:
                 
@@ -312,21 +312,21 @@ GetCurrentEXP:
 
 GetMoveType:
                 
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  a0,-(sp)
-                    bsr.w   GetCombatantEntryAddress
-                    move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a0),d1
-                    lsr.b   #4,d1
-                    andi.w  #$F,d1
-                    movea.l (sp)+,a0
-                else
-                    movem.l d7-a0,-(sp)
-                    moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
-                    bsr.w   GetCombatantByte
-                    lsr.w   #4,d1
-                    andi.w  #$F,d1
-                    movem.l (sp)+,d7-a0
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                bsr.w   GetCombatantEntryAddress
+                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a0),d1
+                lsr.b   #4,d1
+                andi.w  #$F,d1
+                movea.l (sp)+,a0
+            else
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
+                bsr.w   GetCombatantByte
+                lsr.w   #4,d1
+                andi.w  #$F,d1
+                movem.l (sp)+,d7-a0
+            endif
                 rts
 
     ; End of function GetMoveType
@@ -339,19 +339,19 @@ GetMoveType:
 
 GetAiCommandset:
                 
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  a0,-(sp)
-                    bsr.w   GetCombatantEntryAddress
-                    move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a0),d1
-                    andi.w  #$F,d1
-                    movea.l (sp)+,a0
-                else
-                    movem.l d7-a0,-(sp)
-                    moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
-                    bsr.w   GetCombatantByte
-                    andi.w  #$F,d1
-                    movem.l (sp)+,d7-a0
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                bsr.w   GetCombatantEntryAddress
+                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a0),d1
+                andi.w  #$F,d1
+                movea.l (sp)+,a0
+            else
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
+                bsr.w   GetCombatantByte
+                andi.w  #$F,d1
+                movem.l (sp)+,d7-a0
+            endif
                 rts
 
     ; End of function GetAiCommandset
@@ -365,25 +365,25 @@ GetAiCommandset:
 
 GetAiSpecialMoveOrders:
                 
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  a0,-(sp)
-                    bsr.w   GetCombatantEntryAddress
-                    movep.w COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS(a0),d1
-                    move.w  d1,d2
-                    lsr.w   #8,d1
-                    andi.w  #$FF,d1
-                    andi.w  #$FF,d2
-                    movea.l (sp)+,a0
-                else
-                    movem.l d7-a0,-(sp)
-                    moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
-                    bsr.w   GetCombatantWord
-                    move.w  d1,d2
-                    lsr.w   #8,d1
-                    andi.w  #$FF,d1
-                    andi.w  #$FF,d2
-                    movem.l (sp)+,d7-a0
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                bsr.w   GetCombatantEntryAddress
+                movep.w COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS(a0),d1
+                move.w  d1,d2
+                lsr.w   #8,d1
+                andi.w  #$FF,d1
+                andi.w  #$FF,d2
+                movea.l (sp)+,a0
+            else
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
+                bsr.w   GetCombatantWord
+                move.w  d1,d2
+                lsr.w   #8,d1
+                andi.w  #$FF,d1
+                andi.w  #$FF,d2
+                movem.l (sp)+,d7-a0
+            endif
                 rts
 
     ; End of function GetAiSpecialMoveOrders
@@ -399,25 +399,25 @@ GetAiSpecialMoveOrders:
 
 GetAiRegion:
                 
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  a0,-(sp)
-                    bsr.w   GetCombatantEntryAddress
-                    move.b  COMBATANT_OFFSET_AI_REGION(a0),d1
-                    move.b  d1,d2
-                    lsr.b   #ENEMYCOMBATANT_AI_SETTINGS_SHIFTCOUNT,d1
-                    andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d1
-                    andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d2
-                    movea.l (sp)+,a0
-                else
-                    movem.l d7-a0,-(sp)
-                    moveq   #COMBATANT_OFFSET_AI_REGION,d7
-                    bsr.w   GetCombatantByte
-                    move.w  d1,d2
-                    lsr.w   #ENEMYCOMBATANT_AI_SETTINGS_SHIFTCOUNT,d1
-                    andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d1
-                    andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d2
-                    movem.l (sp)+,d7-a0
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                bsr.w   GetCombatantEntryAddress
+                move.b  COMBATANT_OFFSET_AI_REGION(a0),d1
+                move.b  d1,d2
+                lsr.b   #ENEMYCOMBATANT_AI_SETTINGS_SHIFTCOUNT,d1
+                andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d1
+                andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d2
+                movea.l (sp)+,a0
+            else
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_AI_REGION,d7
+                bsr.w   GetCombatantByte
+                move.w  d1,d2
+                lsr.w   #ENEMYCOMBATANT_AI_SETTINGS_SHIFTCOUNT,d1
+                andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d1
+                andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d2
+                movem.l (sp)+,d7-a0
+            endif
                 rts
 
     ; End of function GetAiRegion
@@ -441,18 +441,18 @@ GetAiActivationFlag:
 
 
 GetEnemyIndex:
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    tst.b   d0
-                    bmi.s   @Continue
-                    move.w  #-1,d1
-                    rts
-                else
-                    btst    #COMBATANT_BIT_ENEMY,d0
-                    bne.s   @Continue
-                    move.w  #-1,d1          ; return -1 if combatant is not an enemy
-                    rts
-                    bra.s   GetKills
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                tst.b   d0
+                bmi.s   @Continue
+                move.w  #-1,d1
+                rts
+            else
+                btst    #COMBATANT_BIT_ENEMY,d0
+                bne.s   @Continue
+                move.w  #-1,d1          ; return -1 if combatant is not an enemy
+                rts
+                bra.s   GetKills
+            endif
 @Continue:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_ENEMY_INDEX

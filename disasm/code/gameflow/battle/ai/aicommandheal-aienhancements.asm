@@ -31,7 +31,7 @@ ExecuteAiCommand_Heal:
                 
                 ; Check if the first enemy is at less than 50% HP
                 move.w  #COMBATANT_ENEMIES_START,d0
-                bsr.w   IsCombatantAtLessThanHalfHP
+                bsr.w   IsCombatantAtLessThanHalfHP?
                 blo.s   @CheckHealingSpell  ; if the first monster is at 50% or more HP then skip this section
                 
                 ; Aura 4 check --> If the first monster is at less than 50% HP and the caster has Aura 4, cast it

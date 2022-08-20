@@ -48,7 +48,8 @@ RESUME_MUSIC_AFTER_JOIN_JINGLE:     equ 0       ; Resume background music after 
 
 ; ROM expansions
 EXPANDED_ROM:                       equ 1       ; Build a 4MB ROM and manage SRAM mapping.
-EXTENDED_SSF_MAPPER:                equ 0       ; Build a 6MB ROM and manage ROM and SRAM mapping.
+MEMORY_MAPPER:                      equ 0       ; Build a 6MB ROM and manage both ROM and SRAM mapping, supporting both SEGA and Extended SSF mappers.
+SSF_SYSTEM_ID:                      equ 0       ; Put "SEGA SSF" string in ROM header to activate memory mapper on Mega EverDrive cartridges.
 EXPANDED_SRAM:                      equ 1       ; Expand SRAM from 8KB to 32KB.
 RELOCATED_SAVED_DATA_TO_SRAM:       equ 0       ; Relocate currently loaded saved data from system RAM to cartridge SRAM.
 EXPANDED_FORCE_MEMBERS:             equ 1       ; Enable all 32 force members supported by the engine instead of 30.
@@ -76,7 +77,7 @@ secondMemberListStatsPage = 0
     
     ; If standard build, and either EXPANDED_ROM, EXTENDED_SSF_MAPPER, or EXPANDED_ITEMS_AND_SPELLS
     ; are enabled, build an expanded ROM.
-    if (STANDARD_BUILD&(EXPANDED_ROM!EXTENDED_SSF_MAPPER!EXPANDED_ITEMS_AND_SPELLS)=1)
+    if (STANDARD_BUILD&(EXPANDED_ROM!MEMORY_MAPPER!EXPANDED_ITEMS_AND_SPELLS)=1)
 expandedRom = 1
     else
 expandedRom = 0

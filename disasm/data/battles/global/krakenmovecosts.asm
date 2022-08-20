@@ -21,10 +21,10 @@ tbl_KrakenMoveCosts:
 
 
 tbl_KrakenMoveCostEnemies:
-                if (STANDARD_BUILD=1)
-                    dc.b ENEMY_KRAKEN_LEG
-                    dc.b ENEMY_KRAKEN_ARM
-                    dc.b ENEMY_KRAKEN_HEAD
+            if (STANDARD_BUILD=1)
+                dc.b ENEMY_KRAKEN_LEG
+                dc.b ENEMY_KRAKEN_ARM
+                dc.b ENEMY_KRAKEN_HEAD
 
-                    tableEnd.b
-                endif
+                tableEnd.b
+            endif

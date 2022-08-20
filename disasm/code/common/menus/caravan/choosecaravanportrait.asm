@@ -4,8 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d1.w = message index
 
-ChooseCaravanPortrait:
+
+DisplayCaravanMessageWithPortrait:
                 
                 movem.l d0-d1,-(sp)
                 move.l  d1,-(sp)
@@ -27,5 +29,5 @@ loc_228BA:
                 movem.l (sp)+,d0-d1
                 rts
 
-    ; End of function ChooseCaravanPortrait
+    ; End of function DisplayCaravanMessageWithPortrait
 

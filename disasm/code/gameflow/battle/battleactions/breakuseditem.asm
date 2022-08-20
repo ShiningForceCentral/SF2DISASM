@@ -25,15 +25,15 @@ WriteBattlesceneScript_BreakUsedItem:
                 moveq   #CHANCE_TO_BREAK_USED_ITEM,d0 ; 1/4 chance to break used item
                 jsr     (GenerateRandomOrDebugNumber).w
                 tst.b   d0
-                bne.s   @Skip           ; skip if item does not break
+                bne.s   @Goto_Done      ; skip if item does not break
                 moveq   #0,d0
                 jsr     GetItemBreakMessage(pc)
                 nop
                 displayMessage d3,d1,#0,#0 ; Message, Combatant, Item or Spell, Number
                 move.b  (a4),d0
-                move.w  6(a3),d1
+                move.w  BATTLEACTION_OFFSET_ITEM_SLOT(a3),d1
                 jsr     BreakItemBySlot 
-@Skip:
+@Goto_Done:
                 
                 bra.w   @Done
 @DestroyItem:
@@ -43,13 +43,13 @@ WriteBattlesceneScript_BreakUsedItem:
                 nop
                 displayMessage d3,d1,#0,#0 ; Message, Combatant, Item or Spell, Number
                 move.b  (a4),d0
-                move.w  6(a3),d1
+                move.w  BATTLEACTION_OFFSET_ITEM_SLOT(a3),d1
                 jsr     RemoveItemBySlot
                 bra.w   @Done
 @RemoveItem:
                 
                 move.b  (a4),d0
-                move.w  6(a3),d1
+                move.w  BATTLEACTION_OFFSET_ITEM_SLOT(a3),d1
                 jsr     RemoveItemBySlot
 @Done:
                 
@@ -61,10 +61,10 @@ WriteBattlesceneScript_BreakUsedItem:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
-;     D0 = whether item is already damaged (0=no, 1=yes)
+; In: a2 = battlescene script stack frame
+;     d0.b = whether item is already damaged (0=no, 1=yes)
 ; 
-; Out: D3 = message index
+; Out: d3.w = message index
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -93,51 +93,49 @@ GetItemBreakMessage:
                 
                 movem.l d0/a0,-(sp)
                 tst.b   d0
-                bne.s   loc_BCB4
+                bne.s   @Destroy
                 tst.b   dodge(a2)
-                bne.s   loc_BCAE        
-loc_BCA8:
-                
+                bne.s   @BreakAndMiss   
                 move.w  #MESSAGE_BATTLE_USED_ITEM_HIT_AND_BROKEN_START,d3 
                                                         ; But smoke rose from{N}the {ITEM}.{D1}
-                bra.s   loc_BCB2
-loc_BCAE:
+                bra.s   @Goto_FindItem
+@BreakAndMiss:
                 
                 move.w  #MESSAGE_BATTLE_USED_ITEM_MISS_AND_BROKEN_START,d3 
                                                         ; And smoke emerged from{N}the {ITEM}.{D1}
-loc_BCB2:
+@Goto_FindItem:
                 
-                bra.s   loc_BCC4
-loc_BCB4:
+                bra.s   @FindItem
+@Destroy:
                 
                 tst.b   dodge(a2)
-                bne.s   loc_BCC0        
+                bne.s   @DestroyAndMiss 
                 move.w  #MESSAGE_BATTLE_USED_ITEM_HIT_AND_DESTROYED_START,d3 
                                                         ; But, the {ITEM}{N}burst into flames.
-                bra.s   loc_BCC4
-loc_BCC0:
+                bra.s   @FindItem
+@DestroyAndMiss:
                 
                 move.w  #MESSAGE_BATTLE_USED_ITEM_MISS_AND_DESTROYED_START,d3 
                                                         ; And the {ITEM}{N}burst into flames.
-loc_BCC4:
+@FindItem:
                 
                 move.w  ((BATTLESCENE_ITEM-$1000000)).w,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 lea     tbl_ItemBreakMessages(pc), a0
-loc_BCD0:
+@FindItem_Loop:
                 
                 cmpi.w  #CODE_TERMINATOR_WORD,(a0)
-                beq.w   loc_BCEA
+                beq.w   @Done
                 cmp.b   (a0),d0
-                beq.w   loc_BCE2
+                beq.w   @Found
                 addq.l  #2,a0
-                bra.s   loc_BCD0
-loc_BCE2:
+                bra.s   @FindItem_Loop
+@Found:
                 
                 moveq   #0,d0
                 move.b  1(a0),d0
                 add.w   d0,d3
-loc_BCEA:
+@Done:
                 
                 movem.l (sp)+,d0/a0
                 rts

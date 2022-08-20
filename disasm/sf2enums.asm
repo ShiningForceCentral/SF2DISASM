@@ -1000,7 +1000,7 @@ ITEMSELLPRICE_MULTIPLIER: equ $3
 ; ---------------------------------------------------------------------------
 
 ; enum EquipmentTypes
-EQUIPMENTTYPE_NONE: equ $0
+EQUIPMENTTYPE_TOOL: equ $0
 EQUIPMENTTYPE_WEAPON: equ $1
 EQUIPMENTTYPE_RING: equ $FFFF
 

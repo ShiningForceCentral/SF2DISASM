@@ -300,7 +300,7 @@ Church_CureStun:
 WaitForMusicResumeAndPlayerInput:
                 
                 move.w  d0,-(sp)
-                move.w  #$FB,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0
                 jsr     (PlayMusicAfterCurrentOne).w
                 jsr     (WaitForPlayerInput).w
                 move.w  (sp)+,d0

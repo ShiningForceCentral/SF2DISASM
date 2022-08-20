@@ -5,16 +5,16 @@
 ; =============== S U B R O U T I N E =======================================
 
 characterClass = -24
-ordersNumber = -22
-var_20 = -20
-var_18 = -18
-currentOrder = -16
-var_14 = -14
+ordersCounter = -22
+fulfillOrdersFlag = -20
+readyToFulfillOrdersNumber = -18
+fulfilledOrdersNumber = -16
+pendingOrdersNumber = -14
 itemSlot = -12
-currentItem = -10
-var_8 = -8
-selectedMember = -6
-var_4 = -4
+itemIndex = -10
+targetMember = -8
+member = -6
+currentGold = -4
 
 PickMithrilWeapon:
                 
@@ -67,17 +67,17 @@ PickMithrilWeapon:
                 move.w  #BLACKSMITH_ORDERS_COUNTER,d7
 @LoadIndex_Loop:
                 
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    movep.w 0(a0),d0
-                    bne.s   @Next
-                    movep.w d1,0(a0)
-                    bra.s   @Done
-                else
-                    cmpi.w  #0,(a0)
-                    bne.w   @Next           ; check next weapon slot if current one is occupied
-                    move.w  d1,(a0)
-                    bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                movep.w 0(a0),d0
+                bne.s   @Next
+                movep.w d1,0(a0)
+                bra.s   @Done
+            else
+                cmpi.w  #0,(a0)
+                bne.w   @Next           ; check next weapon slot if current one is occupied
+                move.w  d1,(a0)
+                bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
+            endif
 @Next:
                 
                 move.w  #2,d0

@@ -202,7 +202,7 @@ UpdateEnemyStatsForRespawn:
                 clr.w   d4
                 move.b  BATTLESPRITESET_COMBATANT_OFFSET_STARTING_X(a0),d3
                 move.b  BATTLESPRITESET_COMBATANT_OFFSET_STARTING_Y(a0),d4
-                bsr.w   IsEnemyStartingPositionOccupied
+                bsr.w   IsEnemyStartingPositionOccupied?
                 bcs.w   loc_1B13E8
                 bsr.w   InitEnemyStats  
                 move.w  d2,d1
@@ -245,13 +245,13 @@ InitEnemyStats:
                 moveq   #13,d7
 @Loop:
                 
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.l  (a1)+,d1
-                    movep.l d1,0(a0)
-                    addq.w  #8,a0
-                else
-                    move.l  (a1)+,(a0)+
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  (a1)+,d1
+                movep.l d1,0(a0)
+                addq.w  #8,a0
+            else
+                move.l  (a1)+,(a0)+
+            endif
                 dbf     d7,@Loop
                 
                 movea.l (sp)+,a0
@@ -337,14 +337,14 @@ InitEnemyItems:
                 beq.s   loc_1B154E
                 move.w  d1,d3
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 subi.w  #1,d2
                 move.w  d2,d4
                 clr.w   d5
 loc_1B152E:
                 
                 move.w  d5,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmp.b   d1,d3
                 bne.s   loc_1B1546
                 move.w  d5,d1
@@ -364,13 +364,11 @@ loc_1B154E:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d3.w = enemy starting tile x (from battle def)
-;     d4.w = enemy starting tile y (from battle def)
-; 
-; Out: CCR carry-bit set if true
+; Is enemy starting position d3.w,d4.w curently occupied?
+; Return CCR carry-bit set if true.
 
 
-IsEnemyStartingPositionOccupied:
+IsEnemyStartingPositionOccupied?:
                 
                 movem.l d0-d2/d7,-(sp)
                 moveq   #COMBATANT_ALLIES_START,d0
@@ -411,7 +409,7 @@ loc_1B15A4:
                 movem.l (sp)+,d0-d2/d7
                 rts
 
-    ; End of function IsEnemyStartingPositionOccupied
+    ; End of function IsEnemyStartingPositionOccupied?
 
 
 ; =============== S U B R O U T I N E =======================================

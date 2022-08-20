@@ -25,9 +25,9 @@ SoundDriver:
                 endif
                 includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
-                if (STANDARD_BUILD&EXPANDED_ROM=1)
-                else
+            if (STANDARD_BUILD&EXPANDED_ROM=1)
+            else
 unused_BasePalettes: incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
 BaseTiles:           incbin "data/graphics/tech/basetiles.bin"
-                endif
+            endif
                 align $1F0000

@@ -78,6 +78,11 @@ loc_47576:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Trigger a map setup function according to up to 4 criterias in d1-d4.
+; 
+;  In: d1.w, d2.w, d3.w = first entity's X, Y and facing
+;      d4.w, d5.w = item index, item slot
+
 
 RunMapSetupItemEvent:
                 

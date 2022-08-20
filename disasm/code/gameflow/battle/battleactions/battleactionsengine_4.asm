@@ -13,22 +13,22 @@ CalculateHealingEXP:
                 bne.w   @Skip           ; skip if enemy
                 
                 ; Check if healer class
-                if (STANDARD_BUILD=1)
-                    lea     tbl_HealerClasses(pc),a0
-                    bsr.w   GetClass
-                    moveq   #0,d2
-                    jsr     (FindSpecialPropertyBytesAddressForObject).w
-                    bcs.s   @Skip
-                else
-                    jsr     GetClass        
-                    cmpi.b  #CLASS_PRST,d1  ; HARDCODED healer class indexes
-                    beq.w   @Continue
-                    cmpi.b  #CLASS_VICR,d1
-                    beq.w   @Continue
-                    cmpi.b  #CLASS_MMNK,d1
-                    beq.w   @Continue
-                    bra.w   @Skip           ; skip if not a healer class
-                endif
+            if (STANDARD_BUILD=1)
+                lea     tbl_HealerClasses(pc),a0
+                bsr.w   GetClass
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @Skip
+            else
+                jsr     GetClass        
+                cmpi.b  #CLASS_PRST,d1  ; HARDCODED healer class indexes
+                beq.w   @Continue
+                cmpi.b  #CLASS_VICR,d1
+                beq.w   @Continue
+                cmpi.b  #CLASS_MMNK,d1
+                beq.w   @Continue
+                bra.w   @Skip           ; skip if not a healer class
+            endif
 @Continue:
                 
                 move.b  (a5),d0

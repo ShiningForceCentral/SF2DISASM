@@ -20,8 +20,8 @@
                 align
                 includeIfExpandedRom "code\specialscreens\suspend\graphics.asm"  ; Suspend String Graphics
                 align
-                if (STANDARD_BUILD&EXPANDED_ROM=1)
+            if (STANDARD_BUILD&EXPANDED_ROM=1)
 unused_BasePalettes: incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
 BaseTiles:           incbin "data/graphics/tech/basetiles.bin"
-                endif
+            endif
                 alignIfVanillaLayout $1C8000

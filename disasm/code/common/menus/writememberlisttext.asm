@@ -55,7 +55,7 @@ WriteMemberListText:
                 
                 move.l  a1,-(sp)        ; -> push current character's name offset
                 move.w  d0,d1
-                jsr     j_IsInBattleParty
+                jsr     j_IsInBattleParty?
                 beq.s   @DetermineNameColor
                 move.w  #VDPTILE_SWORD_ICON|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-2(a1) 
                                                         ; display sword icon to denote battle party members
@@ -173,7 +173,7 @@ WriteMemberListText:
                 
                 move.w  currentMember(a6),d0
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 bcs.s   @WriteEntry_NewATTandDEF
                 
                 lea     aUnequippable(pc), a0

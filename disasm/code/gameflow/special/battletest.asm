@@ -67,12 +67,12 @@ DebugModeBattleTest:
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
-                if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
-                    moveq   #30,d0
-                    bsr.w   JoinForce
-                    moveq   #31,d0
-                    bsr.w   JoinForce
-                endif
+            if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
+                moveq   #30,d0
+                bsr.w   JoinForce
+                moveq   #31,d0
+                bsr.w   JoinForce
+            endif
                 moveq   #0,d0
                 move.w  #$63,d1 
                 bsr.w   j_SetBaseAGI
@@ -136,17 +136,17 @@ loc_7820:
                 conditionalPc lea,BattleMapCoordinates,a0,nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.b  (a0)+,(BATTLE_AREA_X).l
-                    move.b  (a0)+,(BATTLE_AREA_Y).l
-                    move.b  (a0)+,(BATTLE_AREA_WIDTH).l
-                    move.b  (a0)+,(BATTLE_AREA_HEIGHT).l
-                else
-                    move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
-                    move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
-                    move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
-                    move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.b  (a0)+,(BATTLE_AREA_X).l
+                move.b  (a0)+,(BATTLE_AREA_Y).l
+                move.b  (a0)+,(BATTLE_AREA_WIDTH).l
+                move.b  (a0)+,(BATTLE_AREA_HEIGHT).l
+            else
+                move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
+                move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
+                move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
+                move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
+            endif
                 jsr     j_BattleLoop
                 jsr     j_ChurchMenuActions
                 txt     460             ; "Shop number?{D1}"

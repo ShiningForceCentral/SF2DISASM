@@ -109,7 +109,7 @@ loc_2015E:
                 beq.s   byte_20118      
                 move.w  d0,member(a6)
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #4,d2
                 bcs.s   loc_201AC
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -126,7 +126,7 @@ loc_201AC:
                 bne.s   loc_201E4
                 move.w  selectedItem(a6),d1
                 move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 bcs.s   loc_201E4
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
@@ -143,7 +143,7 @@ loc_201E4:
                 jsr     j_AddItem
                 move.w  selectedItem(a6),d1
                 move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 bcc.w   byte_202BE      
                 txt     173             ; "{CLEAR}Equip it now?"
                 jsr     j_YesNoChoiceBox
@@ -180,7 +180,7 @@ loc_2025E:
 loc_2028A:
                 
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d2,d1
                 subq.w  #1,d1
                 jsr     j_EquipItemBySlot
@@ -281,7 +281,7 @@ loc_2039C:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_2040C
                 move.w  selectedItem(a6),d1
-                jsr     j_IsItemCursed
+                jsr     j_IsItemCursed?
                 bcc.w   loc_2040C
                 txt     184             ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
                 bra.w   byte_2043A
@@ -294,7 +294,7 @@ loc_203DC:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_2040C
                 move.w  selectedItem(a6),d1
-                jsr     j_IsItemCursed
+                jsr     j_IsItemCursed?
                 bcc.w   loc_2040C
                 txt     184             ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
                 bra.w   byte_2043A
@@ -353,14 +353,14 @@ loc_2046C:
                 jsr     j_GetCombatantEntryAddress
                 move.w  itemSlot(a6),d1
                 add.w   d1,d1
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    add.w   d1,d1
-                    adda.w  d1,a0
-                    movep.w COMBATANT_OFFSET_ITEMS(a0),d2
-                else
-                    lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
-                    move.w  (a0),d2
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                add.w   d1,d1
+                adda.w  d1,a0
+                movep.w COMBATANT_OFFSET_ITEMS(a0),d2
+            else
+                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
+                move.w  (a0),d2
+            endif
                 btst    #ITEMENTRY_BIT_BROKEN,d2
                 bne.w   loc_204DC
                 txt     188             ; "It's not damaged.{W2}"
@@ -398,7 +398,7 @@ loc_2051A:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_2058A
                 move.w  selectedItem(a6),d1
-                jsr     j_IsItemCursed
+                jsr     j_IsItemCursed?
                 bcc.w   loc_2058A
                 txt     190             ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
                 bra.w   byte_205AC
@@ -411,7 +411,7 @@ loc_2055A:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_2058A
                 move.w  selectedItem(a6),d1
-                jsr     j_IsItemCursed
+                jsr     j_IsItemCursed?
                 bcc.w   loc_2058A
                 txt     190             ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
                 bra.w   byte_205AC
@@ -490,7 +490,7 @@ loc_20652:
                 beq.s   byte_2060C      
                 move.w  d0,member(a6)
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #4,d2
                 bcs.s   loc_206A0
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -507,7 +507,7 @@ loc_206A0:
                 bne.s   loc_206D8
                 move.w  selectedItem(a6),d1
                 move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 bcs.s   loc_206D8
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
@@ -526,7 +526,7 @@ loc_206D8:
                 jsr     j_RemoveItemFromDeals
                 move.w  selectedItem(a6),d1
                 move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 bcc.w   byte_207C0      
                 txt     173             ; "{CLEAR}Equip it now?"
                 jsr     j_YesNoChoiceBox
@@ -563,7 +563,7 @@ loc_2075C:
 loc_20788:
                 
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d2,d1
                 subq.w  #1,d1
                 jsr     j_EquipItemBySlot
@@ -644,11 +644,11 @@ DetermineDealsItemsNotInCurrentShop:
                 lea     ((GENERIC_LIST-$1000000)).w,a0
                 clr.w   ((GENERIC_LIST_LENGTH-$1000000)).w
                 clr.w   d1
-                if (DEALS_ITEMS_COUNTER>127)
-                    move.w  #DEALS_ITEMS_COUNTER,d7
-                else
-                    moveq   #DEALS_ITEMS_COUNTER,d7
-                endif
+            if (DEALS_ITEMS_COUNTER>127)
+                move.w  #DEALS_ITEMS_COUNTER,d7
+            else
+                moveq   #DEALS_ITEMS_COUNTER,d7
+            endif
 @Loop:
                 
                 jsr     j_GetDealsItemAmount

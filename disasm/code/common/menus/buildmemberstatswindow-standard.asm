@@ -5,20 +5,20 @@
                 module
                 
 @writeMemberStatValue: macro
-        if (FULL_CLASS_NAMES=1)
-            bsr.s   WriteMemberStatValue
-        else
-            bsr.w   WriteStatValue
-        endif
-    endm
+              if (FULL_CLASS_NAMES=1)
+                bsr.s   WriteMemberStatValue
+              else
+                bsr.w   WriteStatValue
+              endif
+            endm
 
 @writeMemberLvOrExpValue: macro
-        if (FULL_CLASS_NAMES=1)
-            bsr.s   WriteMemberLvOrExpValue
-        else
-            bsr.w   WriteLvOrExpValue
-        endif
-    endm
+              if (FULL_CLASS_NAMES=1)
+                bsr.s   WriteMemberLvOrExpValue
+              else
+                bsr.w   WriteLvOrExpValue
+              endif
+            endm
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -102,6 +102,7 @@ member = -2
                 beq.s   @Poison
                 move.l  #VDPTILES_STATUSEFFECT_CURSE,d0
                 bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                
 @Poison:        ; Poison
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_POISON,d2
@@ -190,10 +191,10 @@ member = -2
                 
                 ; LV
                 move.w  member(a6),d0
-                if (SHOW_ENEMY_LEVEL=0)
-                    tst.b   d0
-                    bmi.s   @EnemyLv
-                endif
+            if (SHOW_ENEMY_LEVEL=0)
+                tst.b   d0
+                bmi.s   @EnemyLv
+            endif
                 jsr     GetCurrentLevel
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_LV,a1
@@ -201,10 +202,10 @@ member = -2
                 
                 ; EXP
                 move.w  member(a6),d0
-                if (SHOW_ENEMY_LEVEL=1)
-                    tst.b   d0
-                    bmi.s   @EnemyExp
-                endif
+            if (SHOW_ENEMY_LEVEL=1)
+                tst.b   d0
+                bmi.s   @EnemyExp
+            endif
                 jsr     GetCurrentEXP
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_EXP,a1
@@ -213,19 +214,19 @@ member = -2
 ; ---------------------------------------------------------------------------
 
 WriteMemberLvOrExpValue:     
-                if (FULL_CLASS_NAMES=1)
-                    pea     WriteLvOrExpValue(pc)
-                    bra.s   @CheckAlly
-                endif
+            if (FULL_CLASS_NAMES=1)
+                pea     WriteLvOrExpValue(pc)
+                bra.s   @CheckAlly
+            endif
                 
 WriteMemberStatValue:     
-                if (FULL_CLASS_NAMES=1)
-                    pea     WriteStatValue(pc)
-@CheckAlly:         tst.b   d0
-                    bmi.s   @WriteValue
-                    adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
-@WriteValue:        rts
-                endif
+            if (FULL_CLASS_NAMES=1)
+                pea     WriteStatValue(pc)
+@CheckAlly:     tst.b   d0
+                bmi.s   @WriteValue
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
+@WriteValue:    rts
+            endif
                 
 WriteEnemyLvOrExp:
                 lea     aNA(pc), a0     
@@ -234,11 +235,11 @@ WriteEnemyLvOrExp:
 ; ---------------------------------------------------------------------------
 
 @EnemyLv:       
-                if (SHOW_ENEMY_LEVEL=0)  
-                    movea.l windowTilesAddress(a6),a1
-                    adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_LV,a1
-                    bsr.s   WriteEnemyLvOrExp
-                endif
+            if (SHOW_ENEMY_LEVEL=0)  
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_LV,a1
+                bsr.s   WriteEnemyLvOrExp
+            endif
 @EnemyExp:      movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_EXP,a1
                 bsr.s   WriteEnemyLvOrExp
@@ -362,7 +363,7 @@ WriteEnemyLvOrExp:
                 move.w  member(a6),d0
                 move.w  #COMBATANT_ITEMSLOTS_COUNTER,d1
                 sub.w   d6,d1
-                jsr     GetItemAndNumberHeld
+                jsr     GetItemBySlotAndHeldItemsNumber
                 cmpi.b  #ITEM_NOTHING,d1
                 beq.w   @WriteItems_Break
                 
@@ -405,11 +406,11 @@ WriteEnemyLvOrExp:
                 beq.s   @CleanIconCorners
                 
                 conditionalLongAddr movea.l, p_Icons, a0
-                if (EXPANDED_ITEMS_AND_SPELLS=1)
-                    adda.l  #ICONTILES_OFFSET_CRACKS,a0
-                else
-                    lea     ICONTILES_OFFSET_CRACKS(a0),a0
-                endif
+            if (EXPANDED_ITEMS_AND_SPELLS=1)
+                adda.l  #ICONTILES_OFFSET_CRACKS,a0
+            else
+                lea     ICONTILES_OFFSET_CRACKS(a0),a0
+            endif
                 move.w  #ICONTILES_CRACKS_PIXELS_COUNTER,d0
                 
 @DrawCracks_Loop:
@@ -447,13 +448,14 @@ WriteEnemyLvOrExp:
                 moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 
-@WriteJewels:   if (ALTERNATE_JEWEL_ICONS_DISPLAY=0)
-                    tst.w   member(a6)
-                    bne.s   @DmaIcons       ; skip if anyone other than Bowie
-                    chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
-                    beq.s   @DmaIcons       ; skip if we haven't obtained Jewel of Light
-                    bsr.s   WriteJewelIcons
-                endif
+@WriteJewels:   
+            if (ALTERNATE_JEWEL_ICONS_DISPLAY=0)
+                tst.w   member(a6)
+                bne.s   @DmaIcons       ; skip if anyone other than Bowie
+                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                beq.s   @DmaIcons       ; skip if we haven't obtained Jewel of Light
+                bsr.s   WriteJewelIcons
+            endif
                 
 @DmaIcons:      ; DMA icons pixel data
                 lea     (FF9004_LOADING_SPACE).l,a0
@@ -493,57 +495,57 @@ CopyMemberScreenIconsToVdpTileOrder:
 ; =============== S U B R O U T I N E =======================================
 
 WriteJewelIcons:
-                if (ALTERNATE_JEWEL_ICONS_DISPLAY=0)
-                    lea     aJewel(pc), a0  
-                    movea.l windowTilesAddress(a6),a1
-                    adda.w  #WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_START,a1
-                    moveq   #8,d7           ; string length
-                    moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
-                    bsr.w   WriteTilesFromAsciiWithRegularFont
+            if (ALTERNATE_JEWEL_ICONS_DISPLAY=0)
+                lea     aJewel(pc), a0  
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_START,a1
+                moveq   #8,d7           ; string length
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
+                bsr.w   WriteTilesFromAsciiWithRegularFont
                 
-                    ; Copy icon tiles to window layout
-                    movea.l windowTilesAddress(a6),a1
-                    adda.w  #WINDOW_MEMBERSTATUS_OFFSET_JEWEL_OF_LIGHT,a1
-                    bsr.s   CopyMemberScreenIconsToVdpTileOrder
+                ; Copy icon tiles to window layout
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_JEWEL_OF_LIGHT,a1
+                bsr.s   CopyMemberScreenIconsToVdpTileOrder
                 
-                    ; Load Jewel of Light icon pixel data to temp space
-                    move.w  #ICON_JEWEL_OF_LIGHT,d1
-                    movea.l (p_Icons).l,a0
-                    move.w  d1,d2
-                    add.w   d1,d1
-                    add.w   d2,d1
-                    lsl.w   #6,d1
-                    addIconOffset d1, a0
-                    movea.l a2,a1
-                    move.w  #ICONTILES_BYTESIZE,d7
-                    jsr     (CopyBytes).w   
-                    bsr.s   CleanMemberStatsIconCorners
-                    adda.w  #ICONTILES_BYTESIZE,a2
+                ; Load Jewel of Light icon pixel data to temp space
+                move.w  #ICON_JEWEL_OF_LIGHT,d1
+                movea.l (p_Icons).l,a0
+                move.w  d1,d2
+                add.w   d1,d1
+                add.w   d2,d1
+                lsl.w   #6,d1
+                addIconOffset d1, a0
+                movea.l a2,a1
+                move.w  #ICONTILES_BYTESIZE,d7
+                jsr     (CopyBytes).w   
+                bsr.s   CleanMemberStatsIconCorners
+                adda.w  #ICONTILES_BYTESIZE,a2
                 
-                    chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
-                    beq.s   @Return         ; skip if we haven't obtained Jewel of Evil
+                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
+                beq.s   @Return         ; skip if we haven't obtained Jewel of Evil
                 
-                    ; Copy icon tiles to window layout
-                    movea.l windowTilesAddress(a6),a1
-                    adda.w  #WINDOW_MEMBERSTATUS_OFFSET_JEWEL_OF_EVIL,a1
-                    bsr.s   CopyMemberScreenIconsToVdpTileOrder
+                ; Copy icon tiles to window layout
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_JEWEL_OF_EVIL,a1
+                bsr.s   CopyMemberScreenIconsToVdpTileOrder
                 
-                    ; Append 'S' character to 'JEWEL' string if we obtained both jewels
-                    movea.l windowTilesAddress(a6),a1
-                    move.w  #VDPTILE_UPPERCASE_S|VDPTILE_PALETTE3|VDPTILE_PRIORITY,WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_END(a1)
+                ; Append 'S' character to 'JEWEL' string if we obtained both jewels
+                movea.l windowTilesAddress(a6),a1
+                move.w  #VDPTILE_UPPERCASE_S|VDPTILE_PALETTE3|VDPTILE_PRIORITY,WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_END(a1)
                 
-                    ; Load Jewel of Evil icon pixel data to temp space
-                    move.w  #ICON_JEWEL_OF_EVIL,d1
-                    movea.l (p_Icons).l,a0
-                    move.w  d1,d2
-                    add.w   d1,d1
-                    add.w   d2,d1
-                    lsl.w   #6,d1
-                    addIconOffset d1, a0
-                    movea.l a2,a1
-                    move.w  #ICONTILES_BYTESIZE,d7
-                    jsr     (CopyBytes).w   
-                endif
+                ; Load Jewel of Evil icon pixel data to temp space
+                move.w  #ICON_JEWEL_OF_EVIL,d1
+                movea.l (p_Icons).l,a0
+                move.w  d1,d2
+                add.w   d1,d1
+                add.w   d2,d1
+                lsl.w   #6,d1
+                addIconOffset d1, a0
+                movea.l a2,a1
+                move.w  #ICONTILES_BYTESIZE,d7
+                jsr     (CopyBytes).w
+            endif
 
     ; End of function WriteJewelIcons
 

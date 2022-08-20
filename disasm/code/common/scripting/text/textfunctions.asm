@@ -146,44 +146,45 @@ return_6384:
 
 ParseSpecialTextSymbol:
                 
+                module
                 cmpi.b  #$EE,d0         ; regular tile
-                beq.w   loc_640A
+                beq.w   @regularTile
                 cmpi.b  #$F3,d0         ; leader
-                beq.w   leader
+                beq.w   symbol_leader
                 cmpi.b  #$F0,d0         ; delay 2
-                beq.w   loc_6414
+                beq.w   @delay2
                 cmpi.b  #$EF,d0         ; line
-                beq.w   loc_6434
+                beq.w   @line
                 cmpi.b  #$F7,d0         ; wait 2
-                beq.w   loc_6466
+                beq.w   @wait2
                 cmpi.b  #$F2,d0         ; name
-                beq.w   name
+                beq.w   symbol_name
                 cmpi.b  #$F4,d0         ; item
-                beq.w   item
+                beq.w   symbol_item
                 cmpi.b  #$F1,d0         ; number
-                beq.w   number
+                beq.w   symbol_number
                 cmpi.b  #$F6,d0         ; class
-                beq.w   class
+                beq.w   symbol_class
                 cmpi.b  #$FA,d0         ; wait 1
-                beq.w   wait
+                beq.w   symbol_wait1
                 cmpi.b  #$F8,d0         ; delay 1
-                beq.w   delay1
+                beq.w   symbol_delay1
                 cmpi.b  #$F9,d0         ; delay 3
-                beq.w   delay3
+                beq.w   symbol_delay3
                 cmpi.b  #$F5,d0         ; spell
-                beq.w   spell
+                beq.w   symbol_spell
                 cmpi.b  #$FB,d0         ; clear
-                beq.w   clear
+                beq.w   symbol_clear
                 cmpi.b  #$FD,d0         ; color #
-                beq.w   color
+                beq.w   symbol_color
                 cmpi.b  #$FC,d0         ; name #
-                beq.w   player
+                beq.w   symbol_player
                 bra.w   loc_62CA
-loc_640A:
+@regularTile:
                 
                 move.b  #1,((byte_FFB6D8-$1000000)).w
                 bra.w   loc_62CA
-loc_6414:
+@delay2:
                 
                 move.w  #$77,d0 
                 move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
@@ -193,7 +194,7 @@ loc_6414:
                 movem.w (sp)+,d0
                 move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
                 bra.w   loc_62CA
-loc_6434:
+@line:
                 
                 bsr.w   ClearNextLineOfDialoguePixels
                 move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
@@ -212,7 +213,7 @@ loc_645C:
 loc_6462:
                 
                 bra.w   loc_62CA
-loc_6466:
+@wait2:
                 
                 move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
                 move.w  d2,-(sp)
@@ -239,6 +240,7 @@ loc_6472:
 
     ; End of function ParseSpecialTextSymbol
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -301,34 +303,34 @@ UpdateForceAndGetFirstBattlePartyMemberIndex:
 
 ; START OF FUNCTION CHUNK FOR ParseSpecialTextSymbol
 
-leader:
+symbol_leader:
                 
                 bsr.s   UpdateForceAndGetFirstBattlePartyMemberIndex
                 jsr     j_GetCombatantName
                 moveq   #ALLYNAME_MAX_LENGTH,d7
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
-player:
+symbol_player:
                 
                 bsr.w   GetNextTextSymbol
                 jsr     j_GetCombatantName
                 moveq   #ALLYNAME_MAX_LENGTH,d7
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
-name:
+symbol_name:
                 
                 bsr.w   sub_6648
                 move.w  d1,d0
                 jsr     j_GetCombatantName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
-item:
+symbol_item:
                 
                 bsr.w   sub_6648
                 jsr     j_FindItemName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
-number:
+symbol_number:
                 
                 move.l  ((TEXT_NUMBER-$1000000)).w,d0
                 jsr     (WriteAsciiNumber).w
@@ -348,7 +350,7 @@ loc_6574:
                 dbf     d1,loc_6568
                 clr.b   (a1)
                 bra.w   loc_62CA
-class:
+symbol_class:
                 
                 bsr.w   sub_6648
                 if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
@@ -358,7 +360,7 @@ class:
                 endif
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
-wait:
+symbol_wait1:
                 
                 move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
                 move.w  d2,-(sp)
@@ -380,7 +382,7 @@ loc_65B4:
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
                 bra.w   loc_62CA
-delay1:
+symbol_delay1:
                 
                 move.w  #$15,d0
 loc_65CC:
@@ -404,17 +406,17 @@ loc_65F0:
                 movem.w (sp)+,d0
                 move.b  d0,((CURRENTLY_TYPEWRITING-$1000000)).w
                 bra.w   loc_62CA
-delay3:
+symbol_delay3:
                 
                 move.w  #$77,d0 
                 bra.s   loc_65CC
-spell:
+symbol_spell:
                 
                 bsr.w   sub_6648
                 jsr     j_FindSpellName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
-clear:
+symbol_clear:
                 
                 bsr.w   sub_6872
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
@@ -428,7 +430,7 @@ clear:
                 bsr.w   SetWindowDestination
                 bsr.w   WaitForVInt
                 bra.w   loc_62CA
-color:
+symbol_color:
                 
                 bsr.w   GetNextTextSymbol
                 move.b  d0,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
@@ -906,11 +908,11 @@ loc_68A8:
                 move.w  (sp)+,d1
                 clr.w   d0
                 moveq   #3,d2
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    sub.b   (MESSAGE_SPEED).l,d2
-                else
-                    sub.b   ((MESSAGE_SPEED-$1000000)).w,d2
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                sub.b   (MESSAGE_SPEED).l,d2
+            else
+                sub.b   ((MESSAGE_SPEED-$1000000)).w,d2
+            endif
                 beq.s   loc_68C2
                 subq.w  #1,d2
                 bset    d2,d0

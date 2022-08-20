@@ -5,17 +5,15 @@
                 module
                 
 @addTurnOrderEntry: macro
-                
-                if (RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    move.b  d0,(a0)
-                    move.b  d1,2(a0)
-                    addq.w  #TURN_ORDER_ENTRY_SIZE,a0
-                else
-                    move.b  d0,(a0)+
-                    move.b  d1,(a0)+
-                endif
-                
-                endm
+              if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.b  d0,(a0)
+                move.b  d1,2(a0)
+                addq.w  #TURN_ORDER_ENTRY_SIZE,a0
+              else
+                move.b  d0,(a0)+
+                move.b  d1,(a0)+
+              endif
+            endm
                 
 ; =============== S U B R O U T I N E =======================================
 

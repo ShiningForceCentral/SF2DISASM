@@ -187,7 +187,7 @@ byte_441F0:
 ; Out: ccr zero-bit clear if true
 
 
-IsOverworldMap:
+IsOverworldMap?:
                 
                 movem.l d0-d1/a0,-(sp)
                 clr.w   d1
@@ -195,13 +195,13 @@ IsOverworldMap:
 @Loop:
                 
                 move.b  (a0)+,d0
-                if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                    bmi.s   @Break
-                    cmp.b   (CURRENT_MAP).l,d0
-                else
-                    bmi.w   @Break
-                    cmp.b   ((CURRENT_MAP-$1000000)).w,d0
-                endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                bmi.s   @Break
+                cmp.b   (CURRENT_MAP).l,d0
+            else
+                bmi.w   @Break
+                cmp.b   ((CURRENT_MAP-$1000000)).w,d0
+           endif
                 bne.s   @Next
                 addq.w  #1,d1
 @Next:
@@ -213,5 +213,5 @@ IsOverworldMap:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function IsOverworldMap
+    ; End of function IsOverworldMap?
 

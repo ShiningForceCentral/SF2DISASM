@@ -155,12 +155,12 @@ GetNextUsableAttackItem:
                 move.w  #1,d5           ; treat ally caster as muddled
                 
 @Loop:          move.w  d3,d1
-                bsr.w   GetItemAndNumberHeld
+                bsr.w   GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Next
                 
                 ; Is item usable?
-                bsr.w   IsItemUsableInBattle
+                bsr.w   IsItemUsableInBattle?
                 bcc.s   @Next
                 
                 ; Is AI allowed to use item?
@@ -223,21 +223,20 @@ GetNextUsableHealingItem:
                 movem.l d3-d4/a0,-(sp)
                 
 @Loop:          move.w  d3,d1
-                bsr.w   GetItemAndNumberHeld
+                bsr.w   GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Next
                 
-                ; Is item usable in battle?
-                bsr.w   IsItemUsableInBattle
+                bsr.w   IsItemUsableInBattle?
                 bcc.s   @Next
                 
                 ; Is AI allowed to use item?
                 cmpi.b  #ITEM_HEALING_RAIN,d1 ; if not Healing Rain, AI must be set to use the item in battle data
-                if (HEALER_AI_ENHANCEMENTS=1)
-                    bls.s   @Continue         ; first eight items are allowed to be used
-                else
-                    beq.s   @Continue
-                endif
+            if (HEALER_AI_ENHANCEMENTS=1)
+                bls.s   @Continue         ; first eight items are allowed to be used
+            else
+                beq.s   @Continue
+            endif
                 btst    #ITEMENTRY_BIT_USABLE_BY_AI,d1
                 beq.s   @Next
                 

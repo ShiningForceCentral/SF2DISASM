@@ -4,15 +4,15 @@
 
                 module
                 
-                if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
 combatantEntries = COMBATANT_ENTRIES-1
 saveData1 = SAVE1_DATA-1
 saveData2 = SAVE2_DATA-1
-                else
+            else
 combatantEntries = COMBATANT_ENTRIES
 saveData1 = SAVE1_DATA
 saveData2 = SAVE2_DATA
-                endif
+            endif
                 
 calculateSaveChecksum: macro
               if (RELOCATED_SAVED_DATA_TO_SRAM=1)
@@ -276,16 +276,13 @@ ClearSaveSlotFlag:
 
 InitSavedData:
                 
-            if (EXTENDED_SSF_MAPPER=0)
-                enableSram                      ; make sure that SRAM is enabled at this point, as it is the expected default state
-            endif
             if (RELOCATED_SAVED_DATA_TO_SRAM=1)
                 lea     (combatantEntries).l,a0
                 move.w  #SAVE_SLOT_COUNTER,d0
 @Loop:          clr.w   (a0)+
                 dbf     d0,@Loop
-            endif
                 rts
+            endif
 
     ; End of function ClearSavedData
 
