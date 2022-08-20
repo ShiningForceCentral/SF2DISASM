@@ -151,6 +151,8 @@ member = -2
                 
                 ; LV
                 move.w  member(a6),d0
+                tst.b   d0
+                bmi.s   @EnemyLv
                 jsr     GetCurrentLevel
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_LV,a1

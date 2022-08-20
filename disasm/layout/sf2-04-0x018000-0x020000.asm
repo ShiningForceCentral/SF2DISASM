@@ -26,6 +26,7 @@
                 include "data\stats\enemies\enemybattlesprites.asm"    ; Enemy battlesprites table
             if (STANDARD_BUILD=1)
                 include "data\stats\items\weapongraphics-standard.asm"
+                align
             else
                 include "data\stats\items\weapongraphics.asm"    ; Weapon graphics table
             endif
