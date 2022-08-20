@@ -27,7 +27,7 @@ loc_45E8:
 loc_45F0:
                 
                 clr.w   d6
-                bsr.w   IsMapScrollingToViewTarget
+                bsr.w   IsMapScrollingToViewTarget?
                 bne.w   return_4706
                 move.w  d2,d7
                 addi.w  #$600,d7
@@ -159,14 +159,14 @@ WaitForViewScrollEnd:
                 move.w  d7,-(sp)
 loc_470A:
                 
-                bsr.w   IsMapScrollingToViewTarget
+                bsr.w   IsMapScrollingToViewTarget?
                 beq.s   loc_4716
                 bsr.w   WaitForVInt
                 bra.s   loc_470A
 loc_4716:
                 
                 bsr.w   WaitForVInt
-                bsr.w   IsMapScrollingToViewTarget
+                bsr.w   IsMapScrollingToViewTarget?
                 bne.s   loc_470A
                 bsr.w   WaitForVInt
                 move.w  (sp)+,d7

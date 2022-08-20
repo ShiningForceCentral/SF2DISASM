@@ -78,22 +78,22 @@ byte_22C5A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; get first entity's X, Y and facing
+; Get first entity's X, Y and facing -> d1.l, d2.l, d3.w
 
 
-GetCurrentPosition:
+GetPlayerEntityPosition:
                 
                 move.w  (ENTITY_DATA).l,d1
                 move.w  (ENTITY_Y).l,d2
                 move.b  (ENTITY_FACING).l,d3
                 ext.l   d1
-                divu.w  #$180,d1
+                divu.w  #384,d1
                 ext.l   d2
-                divu.w  #$180,d2
+                divu.w  #384,d2
                 andi.w  #3,d3
                 rts
 
-    ; End of function GetCurrentPosition
+    ; End of function GetPlayerEntityPosition
 
 
 ; =============== S U B R O U T I N E =======================================

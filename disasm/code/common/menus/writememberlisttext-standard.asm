@@ -12,6 +12,8 @@ WriteMemberListText:
 currentMember = -8
 windowTilesAddress = -6
 selectedMember = -2
+headerStringOffset = 8
+headerLength = 17
                 
                 link    a6,#-8
                 move.w  d0,selectedMember(a6)
@@ -24,23 +26,19 @@ selectedMember = -2
                 moveq   #4,d7   ; 'NAME' length
                 lea     aName(pc), a0
                 bsr.w   WriteTilesFromAsciiWithRegularFont
-                adda.w  #8,a1   ; header string offset
-                moveq   #17,d7
+                adda.w  #headerStringOffset,a1
+                moveq   #headerLength,d7
                 
                 ; Determine header string
                 move.b  ((CURRENT_MEMBERLIST_PAGE-$1000000)).w,d0
-                bne.s   @Stats
-                lea     aClassLvExp(pc), a0
+                bne.s   @CheckStatsPage
+                lea     aClassLevExp(pc), a0
                 bra.s   @WriteHeaderString
-                
-@Stats:
-                cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,d0
+@CheckStatsPage:cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,d0
                 bne.s   @Default
                 lea     aHpMpAtDfAgMv(pc), a0
                 bra.s   @WriteHeaderString
-                
-@Default:
-                lea     aAttackDefense(pc), a0 ; default to "new attack and defense"
+@Default:       lea     aAttackDefense(pc), a0 ; default to "new attack and defense"
                 
 @WriteHeaderString:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
@@ -59,7 +57,7 @@ selectedMember = -2
                 
                 move.l  a1,-(sp)        ; -> stash current character's name offset
                 move.w  d0,d1
-                jsr     IsInBattleParty
+                jsr     IsInBattleParty?
                 beq.s   @DetermineNameColor
                 move.w  #VDPTILE_SWORD_ICON|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-2(a1) 
                                                         ; display sword icon to denote battle party members
@@ -89,7 +87,7 @@ selectedMember = -2
                 ; Write class name
                 move.w  currentMember(a6),d0
                 jsr     GetClassAndName
-                moveq   #-WINDOW_MEMBERLIST_OFFSET_NEXT_LINE,d1
+@Continue:      moveq   #-WINDOW_MEMBERLIST_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movea.l (sp)+,a1
                 lea     WINDOW_MEMBERLIST_OFFSET_ENTRY_LEVEL(a1),a1
@@ -106,17 +104,14 @@ selectedMember = -2
                 bsr.w   WriteLvOrExpValue
                 
 @WriteEntry_Stats:
+@WriteEntry_Stats2:
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.w   @WriteEntry_Unequippable
-                
-                ; Write current HP
-                move.w  currentMember(a6),d0
+                move.w  currentMember(a6),d0    ; Write current HP
                 jsr     GetCurrentHP
                 bsr.w   WriteStatValue
                 addq.w  #2,a1
-                
-                ; Write current MP
-                move.w  currentMember(a6),d0
+                move.w  currentMember(a6),d0    ; Write current MP
                 jsr     GetCurrentMP
                 bsr.w   WriteStatValue
                 addq.w  #2,a1
@@ -150,7 +145,7 @@ selectedMember = -2
                 
                 move.w  currentMember(a6),d0
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
-                jsr     IsWeaponOrRingEquippable
+                jsr     IsWeaponOrRingEquippable?
                 bcs.s   @WriteEntry_NewATTandDEF
                 
                 lea     aUnequippable(pc), a0
@@ -181,8 +176,7 @@ selectedMember = -2
                 move.w  d3,d0
                 bsr.w   WriteStatValueD0
                 
-@NextEntry:
-                movea.l (sp)+,a1        ; A1 <- pop current character's name offset
+@NextEntry:     movea.l (sp)+,a1        ; A1 <- pop current character's name offset
                 adda.w  #WINDOW_MEMBERLIST_OFFSET_NEXT_ENTRY,a1
                 addq.w  #1,d4
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d4
@@ -194,7 +188,7 @@ selectedMember = -2
     ; End of function WriteMemberListText
 
 aName:          dc.b 'NAME'
-aClassLvExp:    dc.b 'CLASS     LEV EXP'
+aClassLevExp:   dc.b 'CLASS     LEV EXP'
 aHpMpAtDfAgMv:  dc.b 'HP MP AT DF AG MV'
 aAttackDefense: dc.b 'ATTACK   DEFENSE',0
 

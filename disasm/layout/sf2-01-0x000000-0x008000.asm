@@ -23,20 +23,20 @@
                 include "code\common\maps\mapload.asm"    ; Map loading functions
                 include "code\common\tech\graphics\display.asm"    ; Display function
                 include "code\gameflow\exploration\exploration.asm"    ; Exploration functions
-                if (STANDARD_BUILD=0)
-                    include "code\gameflow\battle\battlemusic.asm"    ; Battle music function
-                endif
+            if (STANDARD_BUILD=0)
+                include "code\gameflow\battle\battlemusic.asm"    ; Battle music function
+            endif
                 include "code\common\scripting\map\bbcs_11_function.asm"    ; Specific to before battle 11 cutscene function
                 include "code\common\maps\camerafunctions.asm"    ; Camera function
                 include "code\common\maps\animations.asm"    ; Map animation function
                 include "code\common\windows\windowengine.asm"    ; Window engine
                 include "code\common\scripting\entity\entityscriptengine.asm"    ; Entity script engine
                 include "code\common\scripting\text\textfunctions.asm"    ; Text functions
-                if (STANDARD_BUILD=1)
-                    include "code\common\tech\sram\sramfunctions-standard.asm"
-                else
-                    include "code\common\tech\sram\sramfunctions.asm"   ; SRAM functions
-                endif
+            if (STANDARD_BUILD=1)
+                include "code\common\tech\sram\sramfunctions-standard.asm"
+            else
+                include "code\common\tech\sram\sramfunctions.asm"   ; SRAM functions
+            endif
                 include "code\specialscreens\suspend\witchsuspend.asm"    ; Witch suspend function
                 include "code\specialscreens\witchend\witchendinit.asm"    ; Witch end function
                 include "code\gameflow\start\gameinit.asm"    ; Game init
@@ -60,12 +60,12 @@
                     include "code\gameflow\start\regioncheck.asm"    ; Region check function
                 endif
                 include "code\specialscreens\witch\soundtest.asm"    ; Sound Test function missing in US version
-                if (STANDARD_BUILD=1)
-                    include "code\common\tech\findspecialproperties-standard.asm"
-                endif
-                if (STANDARD_BUILD&MEMORY_MAPPER=1)
-                    include "code\common\tech\mapperfunctions-standard.asm"   ; Memory mapper functions
-                endif
+            if (STANDARD_BUILD=1)
+                include "code\common\tech\findspecialproperties-standard.asm"
+            endif
+            if (STANDARD_BUILD&MEMORY_MAPPER=1)
+                include "code\common\tech\mapperfunctions-standard.asm"   ; Memory mapper functions
+            endif
                 
                 ; Relocated pointers
                 alignIfOptimizedLayout $7F10

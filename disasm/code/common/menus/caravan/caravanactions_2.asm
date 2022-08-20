@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_228D8:
+PopulateGenericListWithMembersList:
                 
                 movem.l d7-a1,-(sp)
                 jsr     j_UpdateForce
@@ -41,7 +41,7 @@ loc_22920:
                 movem.l (sp)+,d7-a1
                 rts
 
-    ; End of function sub_228D8
+    ; End of function PopulateGenericListWithMembersList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -93,29 +93,30 @@ CopyCaravanItems:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Is character D0's item in slot D1 equipped and cursed ? CCR carry-bit set if true
+; Is item in slot d1.w cursed and equipped by combatant d0.b?
+; Return CCR carry-bit set if true.
 
 
-IsItemInSlotEquippedAndCursed:
+IsItemInSlotEquippedAndCursed?:
                 
                 movem.l d1,-(sp)
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 bclr    #ITEMENTRY_BIT_EQUIPPED,d1
-                beq.s   @WasNotEquipped
-                jsr     j_IsItemCursed
+                beq.s   @NotEquipped
+                jsr     j_IsItemCursed?
                 bcc.w   @NotCursed
                 sndCom  MUSIC_CURSED_ITEM
-                move.w  #$3C,d0 
+                move.w  #60,d0
                 jsr     (Sleep).w       
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  #$1E,d1
-                bsr.w   ChooseCaravanPortrait
+                move.w  #30,d1          ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
+                bsr.w   DisplayCaravanMessageWithPortrait
                 bsr.w   PlayPreviousMusicAfterCurrentOne
                 ori     #1,ccr
 @NotCursed:
                 
                 bra.s   @Done
-@WasNotEquipped:
+@NotEquipped:
                 
                 tst.b   d0
 @Done:
@@ -123,7 +124,7 @@ IsItemInSlotEquippedAndCursed:
                 movem.l (sp)+,d1
                 rts
 
-    ; End of function IsItemInSlotEquippedAndCursed
+    ; End of function IsItemInSlotEquippedAndCursed?
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -142,25 +143,27 @@ PlayPreviousMusicAfterCurrentOne:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Is item d1.w unsellable? Return CCR carry-bit set if true.
 
-sub_2299E:
+
+IsItemUnsellable?:
                 
                 movem.l d1/a0,-(sp)
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
-                beq.s   loc_229C2
+                beq.s   @NotUnsellable
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  #$25,d1 
-                bsr.w   ChooseCaravanPortrait
+                move.w  #37,d1          ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
+                bsr.w   DisplayCaravanMessageWithPortrait
                 ori     #1,ccr
-                bra.s   loc_229C4
-loc_229C2:
+                bra.s   @Done
+@NotUnsellable:
                 
                 tst.b   d0
-loc_229C4:
+@Done:
                 
                 movem.l (sp)+,d1/a0
                 rts
 
-    ; End of function sub_2299E
+    ; End of function IsItemUnsellable?
 

@@ -30,7 +30,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-IsAbleToCounterAttack:
+FinalCounterAttackCheck:
                 
                 movem.l d0-d3/a0,-(sp)
                 tst.b   counterAttack(a2)
@@ -93,5 +93,5 @@ IsAbleToCounterAttack:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function IsAbleToCounterAttack
+    ; End of function FinalCounterAttackCheck
 

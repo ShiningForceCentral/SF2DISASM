@@ -376,10 +376,10 @@ LeaveForce:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = ally index
+; Is ally d0.b currently in battle party? Return CCR zero-bit set if true.
 
 
-IsInBattleParty:
+IsInBattleParty?:
                 
                 movem.l d1,-(sp)
                 move.b  d0,d1
@@ -389,7 +389,7 @@ IsInBattleParty:
                 movem.l (sp)+,d1
                 rts
 
-    ; End of function IsInBattleParty
+    ; End of function IsInBattleParty?
 
 
 ; =============== S U B R O U T I N E =======================================

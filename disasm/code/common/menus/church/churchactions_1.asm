@@ -111,7 +111,7 @@ ChurchMenuActions:
                 move.l  actionCost(a6),d1
                 jsr     j_DecreaseGold
                 move.w  member(a6),d0
-                move.w  #200,d1
+                move.w  #CHAR_STATCAP_HP,d1
                 jsr     j_IncreaseCurrentHP
                 sndCom  MUSIC_REVIVE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
@@ -211,7 +211,7 @@ ChurchMenuActions:
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     122             ; "Gosh!  {NAME} is{N}cursed!{W2}"
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d2,itemsHeldNumber(a6)
                 move.w  itemsHeldNumber(a6),d6
                 subq.b  #1,d6
@@ -219,8 +219,8 @@ ChurchMenuActions:
 @CalculateCureCurseCost_Loop:
                 
                 move.w  d6,d1
-                jsr     j_GetItemAndNumberHeld
-                jsr     j_IsItemCursed
+                jsr     j_GetItemBySlotAndHeldItemsNumber
+                jsr     j_IsItemCursed?
                 bcc.w   @IsNextItemCursed
                 jsr     j_GetItemDefAddress
                 clr.l   d4
@@ -346,7 +346,7 @@ ChurchMenuActions:
                 
                 move.b  (a0)+,d0
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #0,d2
                 beq.w   @ParseNextMemberItems
                 move.w  d2,d7
@@ -354,7 +354,7 @@ ChurchMenuActions:
 @FindPromotionItem_Loop:
                 
                 move.w  d7,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.b  d1,d2
                 cmp.b   promotionItem(a6),d2
                 beq.w   @ConfirmSpecialPromo
@@ -500,7 +500,7 @@ ChurchMenuActions:
                 txt     117             ; "{CLEAR}Then, take a rest before{N}you continue.{W1}"
                 jsr     (FadeOutToBlack).w
                 jmp     (WitchSuspend).w
-                bra.w   *+4
+                bra.w   *+4             ; unreachable code
 @ExitSave:
                 
                 clsTxt

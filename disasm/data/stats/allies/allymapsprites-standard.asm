@@ -159,7 +159,7 @@ tbl_AllyMapSprites:
                 mapSprite CLAUDE_PROMO
                 mapSprite DEFAULT
                 
-                if (EXPANDED_FORCE_MEMBERS=1)
+            if (EXPANDED_FORCE_MEMBERS=1)
 ; 30: 
                 mapSprite DEFAULT
                 mapSprite DEFAULT
@@ -170,7 +170,7 @@ tbl_AllyMapSprites:
                 mapSprite DEFAULT
                 mapSprite DEFAULT
                 
-                endif
+            endif
 
 
 ; Allies who use a different mapsprite before joining the Force.

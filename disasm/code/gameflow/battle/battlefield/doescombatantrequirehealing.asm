@@ -4,10 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Is combatant d0 at 2/3 or less of max HP? Return carry clear if true.
+; Is combatant d0.w at 2/3 or less of max HP? Return CCR carry-bit clear if true.
 
 
-DoesCombatantRequireHealing:
+DoesCombatantRequireHealing?:
                 
                 movem.l d1-d2,-(sp)
                 jsr     GetCurrentHP
@@ -29,5 +29,5 @@ DoesCombatantRequireHealing:
                 movem.l (sp)+,d1-d2
                 rts
 
-    ; End of function DoesCombatantRequireHealing
+    ; End of function DoesCombatantRequireHealing?
 

@@ -246,7 +246,7 @@ GetSlotContainingItem:
 loc_CF4C:
                 
                 move.w  d3,d1
-                jsr     GetItemAndNumberHeld
+                jsr     GetItemBySlotAndHeldItemsNumber
                 move.w  d1,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d2
                 cmp.w   d4,d2

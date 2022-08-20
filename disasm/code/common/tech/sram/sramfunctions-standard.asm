@@ -4,15 +4,15 @@
 
                 module
                 
-                if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
 combatantEntries = COMBATANT_ENTRIES-1
 saveData1 = SAVE1_DATA-1
 saveData2 = SAVE2_DATA-1
-                else
+            else
 combatantEntries = COMBATANT_ENTRIES
 saveData1 = SAVE1_DATA
 saveData2 = SAVE2_DATA
-                endif
+            endif
                 
 calculateSaveChecksum: macro
               if (RELOCATED_SAVED_DATA_TO_SRAM=1)

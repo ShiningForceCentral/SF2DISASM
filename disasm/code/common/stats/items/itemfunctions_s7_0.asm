@@ -19,7 +19,7 @@ loc_4F4A2:
                 clr.w   d0
                 move.b  (a0)+,d0
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #4,d2
                 bcs.w   loc_4F510
                 dbf     d3,loc_4F4A2
@@ -91,7 +91,7 @@ loc_4F56A:
 ; In: D1 = item slot
 ;     D2 = item index
 
-itemTypeFlags = -10
+itemTypeBitfield = -10
 itemSlot = -6
 itemEntry = -4
 character = -2
@@ -124,9 +124,9 @@ loc_4F5B6:
                 move.w  d2,itemEntry(a6)
                 move.w  itemEntry(a6),d1
                 jsr     j_GetItemDefAddress
-                move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeFlags(a6)
-                move.b  itemTypeFlags(a6),d1
-                andi.b  #$10,d1
+                move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
+                move.b  itemTypeBitfield(a6),d1
+                andi.b  #ITEMTYPE_UNSELLABLE,d1
                 cmpi.b  #0,d1
                 beq.s   loc_4F5F0
                 move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
@@ -154,7 +154,7 @@ loc_4F610:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_4F69C
                 move.w  itemEntry(a6),d1
-                jsr     j_IsItemCursed
+                jsr     j_IsItemCursed?
                 bcc.w   loc_4F69C
                 move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
@@ -171,7 +171,7 @@ loc_4F65C:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_4F69C
                 move.w  itemEntry(a6),d1
-                jsr     j_IsItemCursed
+                jsr     j_IsItemCursed?
                 bcc.w   loc_4F69C
                 move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
@@ -182,8 +182,8 @@ loc_4F69C:
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
                 move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
-                move.b  itemTypeFlags(a6),d1
-                andi.b  #8,d1
+                move.b  itemTypeBitfield(a6),d1
+                andi.b  #ITEMTYPE_RARE,d1
                 cmpi.b  #0,d1
                 beq.s   loc_4F6CE
                 move.w  itemEntry(a6),d1

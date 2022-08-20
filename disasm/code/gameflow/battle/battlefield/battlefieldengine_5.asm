@@ -101,11 +101,10 @@ loc_D28A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-; Out: carry clear if true
+; Is combatant d0.w at less than half HP? Return CCR carry-bit clear if true.
 
 
-IsCombatantAtLessThanHalfHP:
+IsCombatantAtLessThanHalfHP?:
                 
                 movem.l d1-d2,-(sp)
                 jsr     GetCurrentHP
@@ -126,7 +125,7 @@ IsCombatantAtLessThanHalfHP:
                 movem.l (sp)+,d1-d2
                 rts
 
-    ; End of function IsCombatantAtLessThanHalfHP
+    ; End of function IsCombatantAtLessThanHalfHP?
 
 
 ; =============== S U B R O U T I N E =======================================

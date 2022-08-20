@@ -187,7 +187,7 @@ byte_441F0:
 ; Out: ccr zero-bit clear if true
 
 
-IsOverworldMap:
+IsOverworldMap?:
                 
                 movem.l d0-d1/a0,-(sp)
                 clr.w   d1
@@ -213,5 +213,5 @@ IsOverworldMap:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function IsOverworldMap
+    ; End of function IsOverworldMap?
 
