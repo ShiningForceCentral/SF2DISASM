@@ -4,10 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = caster index
-;     D1 = command parameter (values of 0-2), unused
+; In: d0.b = caster index
+;     d1.w = command parameter (values of 0-2), unused
 ; 
-; Out: D1 = $FFFF if command failed
+; Out: d1.w = $FFFF if command failed
 
 option = -5
 caster = -4
@@ -45,7 +45,7 @@ ExecuteAiCommand_Heal:
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),spellEntry(a6)
                 move.w  #COMBATANT_ENEMIES_START,d0
-                bsr.w   IsCombatantAtLessThanHalfHP
+                bsr.w   IsCombatantAtLessThanHalfHP?
                 bcc.s   @UseItem        ; first enemy has less than half HP, and we have a healing rain, so use it
                 move.b  #ITEM_NOTHING,itemEntry(a6)
                 move.b  #SPELL_NOTHING,spellEntry(a6)
@@ -157,7 +157,7 @@ ExecuteAiCommand_Heal:
                 bra.w   @NextTarget     ; if target is dead
 @TargetIsAlive:
                 
-                bsr.w   DoesCombatantRequireHealing
+                bsr.w   DoesCombatantRequireHealing?
                 bcc.s   @PopulateList   
                 bra.w   @NextTarget     
 @PopulateList:
@@ -289,7 +289,7 @@ ExecuteAiCommand_Heal:
                 move.b  caster(a6),d1
                 move.b  spellEntry(a6),d4
                 bsr.w   DetermineHealingSpellLevel
-                cmpi.b  #$FF,d2
+                cmpi.b  #-1,d2
                 bne.s   @AdjustSpellLevel
                 bra.w   @FindPositionForNextTarget ; if no healing needed
 @AdjustSpellLevel:
@@ -394,7 +394,7 @@ ExecuteAiCommand_Heal:
                 clr.w   d0
                 move.b  caster(a6),d0
                 move.b  itemSlot(a6),d1
-                bsr.w   GetItemAndNumberHeld
+                bsr.w   GetItemBySlotAndHeldItemsNumber
                 move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
 @Goto_Done:
                 

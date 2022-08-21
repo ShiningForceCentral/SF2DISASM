@@ -5,16 +5,16 @@
 ; =============== S U B R O U T I N E =======================================
 
 characterClass = -24
-ordersNumber = -22
-var_20 = -20
-var_18 = -18
-currentOrder = -16
-var_14 = -14
+ordersCounter = -22
+fulfillOrdersFlag = -20
+readyToFulfillOrdersNumber = -18
+fulfilledOrdersNumber = -16
+pendingOrdersNumber = -14
 itemSlot = -12
-currentItem = -10
-var_8 = -8
-selectedMember = -6
-var_4 = -4
+itemIndex = -10
+targetMember = -8
+member = -6
+currentGold = -4
 
 PickMithrilWeapon:
                 

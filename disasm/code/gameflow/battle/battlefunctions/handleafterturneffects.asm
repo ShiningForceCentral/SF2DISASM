@@ -6,7 +6,7 @@
 
 ; Handle after-turn effects (status effects, HP/MP regen/degen, etc.)
 ; 
-;       In: D0 = combatant index
+;       In: d0.w = combatant index
 
 combatant = -2
 
@@ -83,7 +83,7 @@ HandleAfterTurnEffects:
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     355             ; "{CLEAR}{NAME} is fine.{D3}"
                 clr.w   d1
-                andi.w  #$FFF7,d2
+                andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d2
                 bra.s   @UpdateMuddle
 @Muddled:
                 

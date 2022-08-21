@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get portrait index for combatant D0 -> D0
+; Get portrait index for combatant d0.w -> d0.w
 
 
 GetCombatantPortrait:

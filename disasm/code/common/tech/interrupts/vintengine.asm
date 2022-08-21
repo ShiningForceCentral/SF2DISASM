@@ -61,29 +61,30 @@ CallContextualFunctions:
                 
                 move.b  ((SECONDS_COUNTER_FRAMES-$1000000)).w,d0
                 addq.b  #1,d0           ; increment frame and second counters
-                cmpi.b  #$3C,d0 
-                bne.s   loc_638
+                cmpi.b  #60,d0
+                bne.s   @Continue
                 clr.b   d0
                 addq.l  #1,((SECONDS_COUNTER-$1000000)).w
-loc_638:
+@Continue:
                 
                 move.b  d0,((SECONDS_COUNTER_FRAMES-$1000000)).w
                 lea     ((VINT_FUNC_ADDRS-$1000000)).w,a0
                 moveq   #7,d7
                 clr.w   d6              ; loop 8 times, for each contextual function pointer available
-loc_644:
+@Loop:
                 
                 move.l  (a0)+,d0
                 btst    d6,((VINT_FUNCS_ENABLED_BITFIELD-$1000000)).w
-                beq.s   loc_658
+                beq.s   @Next
                 movem.l d0-a6,-(sp)
                 movea.l d0,a0
                 jsr     (a0)            ; for each trigger set, execute corresponding contextual function
                 movem.l (sp)+,d0-a6
-loc_658:
+@Next:
                 
                 addq.w  #1,d6
-                dbf     d7,loc_644
+                dbf     d7,@Loop
+                
                 rts
 
     ; End of function CallContextualFunctions
@@ -683,7 +684,7 @@ WaitDmaEnd:
 
 ; =============== S U B R O U T I N E =======================================
 
-; VDP Reg Status -> D0
+; VDP Reg Status -> d0.w
 
 
 GetVdpRegStatus:
@@ -1211,7 +1212,7 @@ WaitForVInt:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Wait for D0 VInts/Frames
+; Wait for d0.w VInts/Frames.
 
 
 Sleep:
@@ -1461,7 +1462,7 @@ loc_1088:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
+; In: a0 = Source, a1 = Destination, d0.w = Length, d1.l = Auto-increment
 
 
 ApplyImmediateVramDma:
@@ -1538,7 +1539,7 @@ loc_1188:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
+; In: a0 = Source, a1 = Destination, d0.w = Length, d1.l = Auto-increment
 
 
 ApplyVIntVramDma:
@@ -1808,7 +1809,7 @@ sub_1372:
 
 ; =============== S U B R O U T I N E =======================================
 
-; A0=Source, A1=Destination, D0=Length, D1=Auto-increment
+; In: a0 = Source, a1 = Destination, d0.w = Length, d1.l = Auto-increment
 
 
 ApplyImmediateVramDmaOnCompressedTiles:
@@ -1907,7 +1908,7 @@ DmaAndWait:
 
 ; =============== S U B R O U T I N E =======================================
 
-; D0=Destination, D1=Length, D2=Filler value
+; d0.w = Destination, d1.w = Length, d2.w = Filler value
 
 
 ApplyVramDmaFill:

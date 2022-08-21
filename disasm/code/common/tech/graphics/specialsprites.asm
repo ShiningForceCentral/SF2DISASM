@@ -15,7 +15,7 @@ pt_SpecialSprites:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d1.w = special map sprite index
+; In: d1.w = special mapsprite index
 
 
 LoadSpecialSprite:
@@ -39,26 +39,25 @@ LoadSpecialSprite:
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
                 add.w   d1,d1
-                move.w  rjt_SpecialSpriteLoadingFunctions(pc,d1.w),d1
-                jmp     rjt_SpecialSpriteLoadingFunctions(pc,d1.w)
+                move.w  rjt_SpecialSpriteFunctions(pc,d1.w),d1
+                jmp     rjt_SpecialSpriteFunctions(pc,d1.w)
 
     ; End of function LoadSpecialSprite
 
-rjt_SpecialSpriteLoadingFunctions:
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
-                dc.w LoadExplorationSpecialSprite-rjt_SpecialSpriteLoadingFunctions
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
-                dc.w LoadBattleSpecialSprite-rjt_SpecialSpriteLoadingFunctions
+rjt_SpecialSpriteFunctions:
+                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w LoadSpecialSprite_Exploration-rjt_SpecialSpriteFunctions
+                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
 
-; =============== S U B R O U T I N E =======================================
+; START OF FUNCTION CHUNK FOR LoadSpecialSprite
 
-
-LoadBattleSpecialSprite:
+LoadSpecialSprite_Battle:
                 
                 lea     (FF8002_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
@@ -68,15 +67,8 @@ LoadBattleSpecialSprite:
                 move.w  #$480,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
-                bra.w   loc_25CB0
-
-    ; End of function LoadBattleSpecialSprite
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-LoadExplorationSpecialSprite:
+                bra.w   @Done
+LoadSpecialSprite_Exploration:
                 
                 lea     (FF4D00_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
@@ -87,12 +79,12 @@ LoadExplorationSpecialSprite:
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
                 bra.w   *+4
-loc_25CB0:
+@Done:
                 
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function LoadExplorationSpecialSprite
+; END OF FUNCTION CHUNK FOR LoadSpecialSprite
 
                 modend                  ; End of special sprite loading module
 

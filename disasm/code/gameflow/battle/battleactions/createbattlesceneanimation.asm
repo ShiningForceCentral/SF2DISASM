@@ -4,11 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Load proper battlescene sprite/magic animation properties
+; Load proper battlescene sprite/magic animation properties.
 ; 
-;       In: A2 = battlescene script stack frame
-;           A3 = pointer to action data in RAM
-;           A4 = battlescene actor index in RAM
+;       In: a2 = battlescene script stack frame
+;           a3 = pointer to action data in RAM
+;           a4 = battlescene actor index in RAM
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -39,6 +39,8 @@ CreateBattlesceneAnimation:
                 move.b  (a4),d0
                 cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
                 bne.s   @CheckMuddled
+                
+                ; Decrease caster's MP
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     GetSpellCost    
                 move.w  d1,d2
@@ -86,7 +88,7 @@ CreateBattlesceneAnimation:
 @DetermineSpecialCritical:
                 
                 moveq   #CHANCE_TO_PERFORM_SPECIAL_ATTACK,d0 ; 1/16 chance to perform special MMNK or RBT attack animation (which also forces a critical hit)
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   @RegularAttackAnimation_0
                 move.b  #$FF,specialCritical(a2)

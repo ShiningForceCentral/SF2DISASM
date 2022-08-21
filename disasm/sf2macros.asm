@@ -23,6 +23,305 @@ wordAlign: macro ;alias
     align
     endm
     
+    
+; ---------------------------------------------------------------------------
+; ROM Header
+; ---------------------------------------------------------------------------
+    
+declareSystemId: macro
+    dc.b 'SEGA GENESIS    '
+    endm
+    
+declareRomEnd: macro
+    dc.l $1FFFFF
+    endm
+    
+declareSramEnd: macro
+    dc.l $203FFF
+    endm
+    
+declareRegionSupport: macro
+    dc.b 'U               '
+    endm
+    
+    
+; ---------------------------------------------------------------------------
+; Expanded ROM
+; ---------------------------------------------------------------------------
+    
+getCurrentSaveSlot: macro
+    move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,\1
+    endm
+    
+setCurrentSaveSlot: macro
+    move.w  \1,((CURRENT_SAVE_SLOT-$1000000)).w
+    endm
+    
+enableSram: macro
+    endm
+    
+enableSramAndReturn: macro
+    rts
+    endm
+    
+disableSram: macro
+    endm
+    
+disableSramAndSwitchRomBanks: macro
+    endm
+    
+switchRomBanks: macro
+    endm
+    
+restoreRomBanks: macro
+    endm
+    
+restoreRomBanksAndEnableSram: macro
+    endm
+    
+processDmaAndRestoreMemoryMap: macro
+    jsr     (\1).w
+    jmp     (\2).w
+    endm
+    
+processDmaAndEnableSram: macro
+    processDmaAndRestoreMemoryMap \1, WaitForDmaQueueProcessing, ControlMapper_EnableSram
+    endm
+    
+processDmaRestoreRomBanksAndEnableSram: macro
+    processDmaAndRestoreMemoryMap \1, WaitForDmaQueueProcessing, ControlMapper_RestoreRomBanksAndEnableSram
+    endm
+    
+loadCompressedDataRestoreRomBanksAndEnableSram: macro
+    jmp     (LoadCompressedData).w
+    endm
+    
+conditionalMapperInit: macro
+    endm
+    
+conditionalRomExpand: macro
+    endm
+    
+conditionalPc: macro
+    \1 \2(pc),\3
+    \4
+    endm
+    
+conditionalWordAddr: macro
+    \1 (\2).w,\3
+    endm
+    
+conditionalLongAddr: macro
+    \1 (\2).l,\3
+    endm
+    
+alignIfVanillaLayout: macro
+    align \1
+    endm
+    
+alignIfOptimizedLayout: macro
+    endm
+    
+alignIfExtendedSsf: macro
+    align \2
+    endm
+    
+objIfExtendedSsf: macro
+    endm
+    
+objendIfExtendedSsf: macro
+    endm
+    
+includeIfVanillaRom: macro
+    include \1
+    endm
+    
+incbinIfVanillaRom: macro
+    incbin \1
+    endm
+    
+includeIfExpandedRom: macro
+    endm
+    
+incbinIfExpandedRom: macro
+    endm
+    
+includeIfVanillaLayout: macro
+    include \1
+    endm
+    
+includeIfOptimizedLayout: macro
+    endm
+    
+    
+; ---------------------------------------------------------------------------
+; Relocated saved data to SRAM
+; ---------------------------------------------------------------------------
+    
+loadSavedDataAddress: macro
+    lea     ((\1-$1000000)).w,\2
+    endm
+    
+checkSavedByte: macro
+dest: equs '((\2-$1000000)).w'
+    if (instr('\1','#')=0)
+src: equs '\1'
+    else
+src: substr 2,,'\1'
+    endc
+    if (\src=0)
+    tst.b   \dest
+    else
+    cmpi.b  \1,\dest
+    endc
+    endm
+    
+clearSavedByte: macro
+    clr.b   ((\1-$1000000)).w
+    endm
+    
+clearSavedByteWithPostIncrement: macro
+    clr.b   (\1)+
+    endm
+    
+copySavedByte: macro
+    move.b  ((\1-$1000000)).w,((\2-$1000000)).w
+    endm
+    
+getSavedByte: macro
+    move.b  ((\1-$1000000)).w,\2
+    endm
+    
+setSavedByte: macro
+    move.b  \1,((\2-$1000000)).w
+    endm
+    
+setSavedByteWithPostIncrement: macro
+    move.b  \1,(\2)+
+    endm
+    
+addToSavedByte: macro
+    addq.b  \1,((\2-$1000000)).w
+    endm
+    
+getSavedWord: macro
+    move.w  \3\\1,\2
+    endm
+    
+getSavedWordWithPostIncrement: macro
+    move.w  (\1)+,\2
+    endm
+    
+setSavedWord: macro
+    move.w  \1,\3\\2
+    endm
+    
+setSavedWordWithPostIncrement: macro
+    move.w  \1,(\2)+
+    endm
+    
+setSavedLongWithPostIncrement: macro
+    move.l  \1,(\2)+
+    endm
+    
+getSavedCombatantByte: macro
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   GetCombatantByte
+    movem.l (sp)+,d7-a0
+    endm
+    
+getSavedCombatantWord: macro
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   GetCombatantWord
+    movem.l (sp)+,d7-a0
+    endm
+    
+getSavedCombatantPosition: macro
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   GetCombatantByte
+    ext.w   d1
+    movem.l (sp)+,d7-a0
+    endm
+    
+setSavedCombatantByte: macro
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   SetCombatantByte
+    movem.l (sp)+,d7-a0
+    endm
+    
+setSavedCombatantWord: macro
+    movem.l d7-a0,-(sp)
+    moveq   #\1,d7
+    bsr.w   SetCombatantWord
+    movem.l (sp)+,d7-a0
+    endm
+    
+manipulateEquippedBit: macro
+equippedBit: equs "#ITEMENTRY_BIT_EQUIPPED"
+entryoffset: equs "ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT"
+    \1    \equippedBit,\entryoffset\\2
+    endm
+    
+isItemEquipped: macro
+    manipulateEquippedBit btst,\1
+    endm
+    
+equipItem: macro
+    manipulateEquippedBit bset,\1
+    endm
+    
+unequipItem: macro
+    manipulateEquippedBit bclr,\1
+    endm
+    
+breakItem: macro
+    bset    #ITEMENTRY_UPPERBIT_BROKEN,\1
+    endm
+    
+repairItem: macro
+    bclr    #ITEMENTRY_UPPERBIT_BROKEN,\1
+    endm
+    
+checkRaftMap: macro
+    cmp.b   ((RAFT_MAP-$1000000)).w,\1
+    endm
+    
+getBattleTurnActor: macro
+    move.b  ((CURRENT_BATTLE_TURN-$1000000)).w,\1
+    lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
+    move.b  (a0,\1.w),\1
+    endm
+    
+addSavedByteOffset: macro
+    adda.w  \1,\2
+    endm
+    
+    
+; ---------------------------------------------------------------------------
+; Items and spells expansion
+; ---------------------------------------------------------------------------
+    
+getStartingItem: macro
+    move.b  \1,\2
+    endm
+    
+getSpellDefsCounter: macro
+    moveq   #SPELLDEFS_COUNTER,\1
+    endm
+    
+addIconOffset: macro
+    adda.w  \1,\2
+    endm
+    
+    
+; ---------------------------------------------------------------------------
+; Traps
+; ---------------------------------------------------------------------------
+    
 sndCom: macro
     trap #SOUND_COMMAND
     dc.w \1
@@ -74,6 +373,7 @@ script: macro
     lea \1(pc), a0
     trap #MAPSCRIPT
     endm
+    
     
 ; ---------------------------------------------------------------------------
 ; Data definition macros
@@ -159,7 +459,7 @@ raftResetMapCoords: macro
     dc.b \4
     endm
     
-itemIndex: macro
+item: macro
     defineShorthand.b ITEM_,\1
     endm
     
@@ -183,7 +483,7 @@ enemyEntity: macro
     endm
     
 itemDrop: macro ; alias
-    itemIndex \1
+    item \1
     endm
     
 droppedFlag: macro
@@ -240,7 +540,11 @@ defineName: macro
     endm
 
 spellName: macro
+    if (narg=3)
+    defineName \1,\2,\3
+    else
     defineName \1
+    endc
     endm
     
 allyName: macro
@@ -264,7 +568,11 @@ itemName: macro
     endm
     
 className: macro
+    if (narg=3)
+    defineName \1,\2,\3
+    else
     defineName \1
+    endc
     endm
     
 ; Item definitions
@@ -366,6 +674,10 @@ weaponPalette: macro
     endm
     
 weaponGraphics: macro
+    if (narg=3) ; declare item index when EXPANDED_ITEMS_AND_SPELLS patch is enabled
+    item \1
+    shift
+    endc
     weaponSprite \1
     weaponPalette \2
     endm
@@ -373,7 +685,7 @@ weaponGraphics: macro
 shopInventory: macro
     dc.b narg
     rept narg
-    itemIndex \1
+    item \1
     shift
     endr
     endm
@@ -393,7 +705,7 @@ promotionSection: macro
 promotionItems: macro
     dc.b narg
     rept narg
-    itemIndex \1
+    item \1
     shift
     endr
     endm
@@ -416,23 +728,23 @@ mithrilWeaponClass: macro   ; alias
     
 mithrilWeapons: macro
     dc.b \1
-    itemIndex \2
+    item \2
     dc.b \3
-    itemIndex \4
+    item \4
     dc.b \5
-    itemIndex \6
+    item \6
     dc.b \7
-    itemIndex \8
+    item \8
     endm
     
 specialCaravanDescription: macro
-    itemIndex \1
+    item \1
     dc.b \2
     defineShorthand.w MESSAGE_CARAVANDESC_,\3
     endm
     
 usableOutsideBattleItem: macro  ; alias
-    itemIndex \1
+    item \1
     endm
     
 input: macro
@@ -661,4 +973,3 @@ vdpSprite: macro
     vdpTile \3
     dc.w \4
     endm
-    

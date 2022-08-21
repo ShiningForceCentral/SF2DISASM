@@ -4,10 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Load proper battlescene message script depending on action
+; Load proper battlescene message script depending on action.
 ; 
-; In: A3 = action type index in RAM
-;     A4 = actor index in RAM
+;       In: a3 = action type index in RAM
+;           a4 = actor index in RAM
 ; 
 ; <HARDCODED> enemy and message indexes
 
@@ -99,8 +99,8 @@ CreateBattlesceneMessage:
                 bne.w   @CheckPrismLaser
                 move.w  d0,d2           ; random MUDDLE lines
                 move.w  #MESSAGE_BATTLE_MUDDLED_ACTIONS_START,d1 ; HARDCODED Muddle line start index
-                moveq   #$10,d0
-                jsr     (GetRandomOrDebugValue).w
+                moveq   #16,d0
+                jsr     (GenerateRandomOrDebugNumber).w
                 cmpi.w  #9,d0           ; HARDCODED number of available Muddle lines
                 bls.s   @Message_Muddled
                 clr.w   d0

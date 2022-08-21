@@ -10,7 +10,7 @@ PlayMapMusic:
                 movem.l d0-d2/a0,-(sp)
                 clr.w   d0
                 move.b  ((MAP_AREA_MUSIC_INDEX-$1000000)).w,d0
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 beq.s   @Continue
                 
                 lea     tbl_ExplorationToBattleMusics(pc), a0
@@ -21,13 +21,13 @@ PlayMapMusic:
                 move.b  (a0),d0
                 
 @Continue:      
-                if (RESUME_BATTLEFIELD_MUSIC_ONLY=1)
-                    activateMusicResuming
-                    sndCom  SOUND_COMMAND_GET_D0_PARAMETER
-                    deactivateMusicResuming
-                else
-                    sndCom  SOUND_COMMAND_GET_D0_PARAMETER
-                endif
+            if (RESUME_BATTLEFIELD_MUSIC_ONLY=1)
+                activateMusicResuming
+                sndCom  SOUND_COMMAND_GET_D0_PARAMETER
+                deactivateMusicResuming
+            else
+                sndCom  SOUND_COMMAND_GET_D0_PARAMETER
+            endif
                 movem.l (sp)+,d0-d2/a0
                 rts
 

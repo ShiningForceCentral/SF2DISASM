@@ -18,7 +18,7 @@ TextBank13:     incbin "data/scripting/text/textbank13.bin"
 TextBank14:     incbin "data/scripting/text/textbank14.bin"
 TextBank15:     incbin "data/scripting/text/textbank15.bin"
 TextBank16:     incbin "data/scripting/text/textbank16.bin"
-                align 2                 ; added align $2 to make sure we're on an even address
+                align                   ; align to make sure we're on an even address
 pt_TextBanks:   dc.l TextBank00
                 dc.l TextBank01
                 dc.l TextBank02

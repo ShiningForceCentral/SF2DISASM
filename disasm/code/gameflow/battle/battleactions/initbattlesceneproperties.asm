@@ -98,7 +98,7 @@ InitBattlesceneProperties:
                 andi.w  #STATUSEFFECT_CURSE,d1
                 beq.s   @CheckInactionStun
                 moveq   #INACTION_CHANCE_CURSE,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 seq     curseInaction(a2)
 @CheckInactionStun:
@@ -108,7 +108,7 @@ InitBattlesceneProperties:
                 andi.w  #STATUSEFFECT_STUN,d1
                 beq.s   @Skip1
                 moveq   #INACTION_CHANCE_STUN,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 seq     stunInaction(a2)
 @Skip1:

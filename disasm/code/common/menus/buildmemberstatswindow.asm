@@ -4,8 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
-;     A1 = window tile adress
+; In: a1 = window tile adress, d0.w = combatant index
 
 windowTilesAddress = -6
 member = -2
@@ -314,7 +313,7 @@ BuildMemberStatusWindow:
                 
                 move.w  member(a6),d0
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
                 beq.w   @WriteItemNothingString
                 movea.l windowTilesAddress(a6),a1
@@ -325,7 +324,7 @@ BuildMemberStatusWindow:
                 move.w  member(a6),d0
                 move.w  #COMBATANT_ITEMSLOTS_COUNTER,d1
                 sub.w   d6,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.b  #ITEM_NOTHING,d1
                 beq.w   @WriteJewelString
                 
@@ -456,7 +455,7 @@ aJewel:
                 moveq   #3,d1
                 sub.w   d6,d1
                 move.w  member(a6),d0
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.b  #ITEM_NOTHING,d1
                 beq.w   @LoadJewelIcons
                 move.l  a0,-(sp)

@@ -54,7 +54,11 @@ loc_25836:
                 move.l  (PALETTE_1_BASE_02).l,d0
                 cmp.l   (PALETTE_1_CURRENT_02).l,d0
                 beq.s   loc_2586A       
+            if (STANDARD_BUILD=1)
+                bsr.w   PlayMapMusic
+            else
                 jsr     (PlayMapMusic).w
+            endif
                 jsr     (FadeInFromBlack).w
 loc_2586A:
                 
