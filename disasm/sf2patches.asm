@@ -46,6 +46,9 @@ MUSIC_RESUMING:                     equ 0       ; Replace the original sound dri
 RESUME_BATTLEFIELD_MUSIC_ONLY:      equ 0       ; Do not resume battlescene music.
 RESUME_MUSIC_AFTER_JOIN_JINGLE:     equ 0       ; Resume background music after playing a "Joined the Force" jingle.
 
+; New special screens
+CHAPTER_SCREEN:                     equ 0       ; Patch implementation with template SFCD screen as applicable example.
+
 ; ROM expansions
 EXPANDED_ROM:                       equ 1       ; Build a 4MB ROM and manage SRAM mapping.
 MEMORY_MAPPER:                      equ 0       ; Build a 6MB ROM and manage both ROM and SRAM mapping, supporting both SEGA and Extended SSF mappers.

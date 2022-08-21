@@ -51,6 +51,12 @@ TextBankTreeData:
                 includeIfVanillaRom "data\scripting\text\entries.asm"    ; Textbank entries
                 includeIfVanillaRom "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
                 align
+            if (STANDARD_BUILD&CHAPTER_SCREEN=1)
+                include code\specialscreens\chapter\chapter.asm
+                align
+                include code\specialscreens\chapter\graphics.asm
+                align
+            endif
             if (STANDARD_BUILD&SOUND_TEST_RESTORATION=1)
                 include "code\specialscreens\witch\soundtest-restored.asm"
                 align
