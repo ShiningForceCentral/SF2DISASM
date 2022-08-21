@@ -85,6 +85,7 @@
                 include "code\gameflow\battle\battleactions\writebattlescenecommanddropenemyitem.asm"    ; Write Battlescene Command : Drop Enemy Item function
             endif
                 include "data\battles\global\enemyitemdrops.asm"    ; Enemy item drops
+                align
                 include "data\stats\enemies\enemygold.asm"    ; Enemy gold amounts
                 include "code\gameflow\battle\battleactions\battleactionsengine_6.asm"    ; Battleactions engine
             if (STANDARD_BUILD=1)
