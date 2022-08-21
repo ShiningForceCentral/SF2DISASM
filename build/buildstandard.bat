@@ -22,6 +22,11 @@ IF NOT EXIST "sounddriver.bin" (
     ..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\sounddriver.asm
     ..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\sounddriver.p .\sounddriver.bin -k -r $0000-$1fff
 ) ELSE echo sounddriver.bin already exists!
+IF NOT EXIST "cubewiz.bin" (
+    echo Assembling Cube/Wiz driver ...
+    ..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\cubewiz.asm
+    ..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\cubewiz.p .\cubewiz.bin -k -r $0000-$1fff
+) ELSE echo cubewiz.bin already exists!
 cd musicbank0/
 IF NOT EXIST "..\musicbank0.bin" (
     echo Assembling music bank 0 ...

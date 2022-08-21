@@ -7,11 +7,21 @@
 
 InitializeFollowerEntities:
                 
+            if (STANDARD_BUILD=1)
+                movem.l d1-d2/a0,-(sp)
+                lea     tbl_MapsWithNoFollowers(pc), a0
+                getSavedByte CURRENT_MAP, d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                movem.l (sp)+,d1-d2/a0
+                bcc.w   return_44336
+            else
                 cmpi.b  #MAP_NEW_GRANSEAL_HQ,((CURRENT_MAP-$1000000)).w 
                                                         ; HARDCODED maps with no followers
                 beq.w   return_44336
                 cmpi.b  #MAP_NAZCA_SHIP_INTERIOR,((CURRENT_MAP-$1000000)).w
                 beq.w   return_44336
+            endif
                 
                 movem.l a6,-(sp)
                 lea     tbl_Followers(pc), a4
