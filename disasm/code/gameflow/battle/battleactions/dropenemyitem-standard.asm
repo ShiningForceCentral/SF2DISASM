@@ -100,6 +100,11 @@ WriteBattlesceneScript_EnemyDropItem:
 @AddRareItemToDeals:
                 
                 move.w  d3,d1
+            if (SEND_DROPPED_ITEMS_TO_CARAVAN=1)
+                ; Try adding item to the Caravan first, and continue adding to deals if there is no room
+                bsr.w   AddItemToCaravan
+                bcc.s   @Done
+            endif
                 bsr.w   GetItemDefAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Done
