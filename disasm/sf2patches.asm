@@ -20,6 +20,7 @@ FIX_DWARVEN_MINER_VOICE:            equ 1       ; A cutscene has a fairy NPC con
 FIX_CARAVAN_FREE_REPAIR_EXPLOIT:    equ 1       ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reducded to 32 items unless SRAM is expanded.)
 
 ; Misc. features
+ACCURATE_LAND_EFFECT_DISPLAY:       equ 0       ; Read values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
 AGILITY_AFFECTS_CHANCE_TO_DODGE:    equ 0       ; Adjust chance to dodge proportionally to the difference between the attacker's and the target's current AGI.
 BOWIE_CAN_DIE:                      equ 0       ; Bowie's death does not cause defeat.
 BOWIE_CAN_LEAVE_BATTLE_PARTY:       equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
