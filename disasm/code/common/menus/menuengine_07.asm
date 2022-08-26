@@ -95,9 +95,14 @@ DrawLandEffectWindow:
                 move.w  #WINDOW_LANDEFFECT_SIZE,d0
                 bsr.w   CopyWindowTilesToRam
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
+            if (STANDARD_BUILD&ACCURATE_LAND_EFFECT_DISPLAY=1)
+                jsr     GetLandEffectSetting
+                move.b  tbl_LandEffectDisplayValues(pc,d1.w),d0
+            else
                 jsr     j_GetLandEffectSetting
                 move.w  d1,d0
                 mulu.w  #15,d0
+            endif
                 moveq   #-16,d1
                 moveq   #2,d7
                 movea.l d3,a1
@@ -115,6 +120,42 @@ DrawLandEffectWindow:
 
     ; End of function DrawLandEffectWindow
 
+landEffectDisplayValue: macro
+                ; Exit macro if parameter is a terminator word
+            if (\1=CODE_TERMINATOR_WORD)
+                mexit
+            endif
+                ; Otherwise, convert damage multiplier to reduction percent value, rounded to the nearest whole number
+value:          set (256-\1)*100/256
+remainder:      set (256-\1)*100%256
+            if (remainder>127)
+value:          set value+1
+            endif
+                dc.b value
+        endm
+
+tbl_LandEffectDisplayValues:
+                
+            if (STANDARD_BUILD&ACCURATE_LAND_EFFECT_DISPLAY=1)
+                landEffectDisplayValue LE_DMG_MULT_0
+                landEffectDisplayValue LE_DMG_MULT_1
+                landEffectDisplayValue LE_DMG_MULT_2
+                landEffectDisplayValue LE_DMG_MULT_3
+                landEffectDisplayValue LE_DMG_MULT_4
+                landEffectDisplayValue LE_DMG_MULT_5
+                landEffectDisplayValue LE_DMG_MULT_6
+                landEffectDisplayValue LE_DMG_MULT_7
+                landEffectDisplayValue LE_DMG_MULT_8
+                landEffectDisplayValue LE_DMG_MULT_9
+                landEffectDisplayValue LE_DMG_MULT_10
+                landEffectDisplayValue LE_DMG_MULT_11
+                landEffectDisplayValue LE_DMG_MULT_12
+                landEffectDisplayValue LE_DMG_MULT_13
+                landEffectDisplayValue LE_DMG_MULT_14
+                landEffectDisplayValue LE_DMG_MULT_15
+                align
+            endif
+            
 aLandEffect:    dc.b 'LAND',$B,'EFFECT',0
 
 ; =============== S U B R O U T I N E =======================================
