@@ -18,55 +18,61 @@ CheckBattle:
                 move.w  d2,d5
                 move.w  d0,-(sp)
                 cmpi.b  #$FF,d0
-                bne.s   loc_79B2
+                bne.s   @Continue
+                
+                ; Get current map
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-loc_79B2:
+@Continue:
                 
                 lea     BattleMapCoordinates(pc), a0
-                moveq   #BATTLE_MAX_INDEX,d6          ; HARDCODED number of battles
+                moveq   #BATTLES_MAX_NUMBER,d6
                 clr.w   d7
-loc_79BA:
+@Loop:
                 
                 cmp.b   (a0),d0
-                bne.s   loc_7A24
+                bne.s   @Next
                 move.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 add.w   d7,d1
                 jsr     j_CheckFlag
-                beq.s   loc_7A24
-                cmpi.b  #$FF,5(a0)
-                beq.w   loc_79DE
-                cmp.b   5(a0),d4
-                bne.w   loc_7A24
-loc_79DE:
+                beq.s   @Next
+                cmpi.b  #$FF,BATTLEMAPCOORDINATES_OFFSET_TRIGGER_X(a0)
                 
-                cmpi.b  #$FF,6(a0)
-                beq.w   loc_79F0
-                cmp.b   6(a0),d5        ; if player is not on specified coords (bytes 5/6), then don't return battle index.
-                bne.w   loc_7A24
-loc_79F0:
+                ; Check Trigger X
+                beq.w   @CheckTriggerY
+                cmp.b   BATTLEMAPCOORDINATES_OFFSET_TRIGGER_X(a0),d4
+                bne.w   @Next
+@CheckTriggerY:
                 
-                move.b  1(a0),((BATTLE_AREA_X-$1000000)).w
-                move.b  2(a0),((BATTLE_AREA_Y-$1000000)).w
-                move.b  3(a0),((BATTLE_AREA_WIDTH-$1000000)).w
-                move.b  4(a0),((BATTLE_AREA_HEIGHT-$1000000)).w
+                cmpi.b  #$FF,BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y(a0)
+                beq.w   @SetCurrentCoordinates
+                cmp.b   BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y(a0),d5 
+                                                        ; if player is not on specified coords (bytes 5/6), then don't return battle index.
+                bne.w   @Next
+@SetCurrentCoordinates:
+                
+                move.b  BATTLEMAPCOORDINATES_OFFSET_X(a0),((BATTLE_AREA_X-$1000000)).w
+                move.b  BATTLEMAPCOORDINATES_OFFSET_Y(a0),((BATTLE_AREA_Y-$1000000)).w
+                move.b  BATTLEMAPCOORDINATES_OFFSET_WIDTH(a0),((BATTLE_AREA_WIDTH-$1000000)).w
+                move.b  BATTLEMAPCOORDINATES_OFFSET_HEIGHT(a0),((BATTLE_AREA_HEIGHT-$1000000)).w
                 addi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
                 jsr     j_CheckFlag
-                beq.s   loc_7A1E
+                beq.s   @TriggerBattle
                 subi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
                 jsr     j_ClearFlag
-loc_7A1E:
+@TriggerBattle:
                 
                 move.w  (sp)+,d1
-                bra.w   loc_7A30
-loc_7A24:
+                bra.w   @Done
+@Next:
                 
-                addq.l  #7,a0
+                addq.l  #BATTLEMAPCOORDINATES_ENTRY_SIZE,a0
                 addq.w  #1,d7
-                dbf     d6,loc_79BA
+                dbf     d6,@Loop
+                
                 moveq   #$FFFFFFFF,d7
                 move.w  (sp)+,d0
-loc_7A30:
+@Done:
                 
                 movem.l (sp)+,d1-d6/a0
                 rts

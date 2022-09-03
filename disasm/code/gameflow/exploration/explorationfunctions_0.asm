@@ -22,7 +22,7 @@ loc_237A4:
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
-                move.w  (a0,d0.w),d1
+                move.w  (a0,d0.w),d1    ; get X
                 move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d2
                 move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3
                 move.b  ENTITYDEF_OFFSET_LAYER(a0,d0.w),d4
@@ -54,7 +54,7 @@ loc_237FE:
                 
                 cmp.b   ((VIEW_TARGET_ENTITY-$1000000)).w,d0
                 beq.w   loc_2382A       ; skip this entity because it's the player!
-                bsr.w   CheckIfEntityIsFollower
+                bsr.w   IsFollowerEntity?
                 bne.w   loc_2382A       ; skip this entity because it's a follower!
                 ; get distance from activated block
                 move.w  (a0),d5
@@ -75,7 +75,7 @@ loc_23820:
 loc_2382A:
                 
                 addq.w  #1,d0
-                lea     ENTITYDEF_NEXT_ENTITY(a0),a0
+                lea     NEXT_ENTITYDEF(a0),a0
                 dbf     d7,loc_237FE
                 moveq   #$FFFFFFFF,d0
                 bra.w   loc_23840
@@ -94,27 +94,27 @@ loc_23840:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = entity index
-; Out: Z = entity is NOT follower
+; Is entity d0.b a follower? Return CCR zero-bit set if true.
 
 
-CheckIfEntityIsFollower:
+IsFollowerEntity?:
                 
                 movem.l d0/a0,-(sp)
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a0
-loc_2384E:
+@FindEntity_Loop:
                 
-                cmpi.b  #$FF,(a0)
-                beq.w   loc_2385C
+                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
+                beq.w   @Done
                 cmp.b   (a0)+,d0
-                bne.s   loc_2384E
+                bne.s   @FindEntity_Loop
+                
                 moveq   #1,d0
-loc_2385C:
+@Done:
                 
                 movem.l (sp)+,d0/a0
                 rts
 
-    ; End of function CheckIfEntityIsFollower
+    ; End of function IsFollowerEntity?
 
 
 ; =============== S U B R O U T I N E =======================================

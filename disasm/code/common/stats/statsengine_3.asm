@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\stats\statsengine_3.asm :
-; 0x9736..0x9A9A : Character stats engine
+; 0x9736..0x9A3C : Character stats engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -90,8 +90,7 @@ InitAllyCombatantEntry:
                 move.w  d3,COMBATANT_OFFSET_ITEM_2(a1)
                 move.b  (a0)+,d3
                 move.w  d3,COMBATANT_OFFSET_ITEM_3(a1)
-                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS_START(a1) 
-                                                        ; spell entries default to nothing
+                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1) ; spell entries default to nothing
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
                 bsr.w   InitAllyStats   
@@ -119,8 +118,8 @@ LoadAllyClassData:
                 mulu.w  #CLASSDEF_ENTRY_SIZE,d1
                 adda.w  d1,a0
                 move.b  (a0)+,COMBATANT_OFFSET_MOV_BASE(a1)
-                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE1(a1)
-                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE2(a1)
+                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE(a1)
+                move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_MOVETYPE_AND_AI(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_PROWESS_BASE(a1)
                 movem.l (sp)+,d0-d1/a0-a1
@@ -152,7 +151,7 @@ Promote:
 InitGameSettings:
                 
                 movem.l d0/d7-a0,-(sp)
-                moveq   #LONGWORD_GAMEFLAGS_VALUE,d0
+                moveq   #LONGWORD_GAMEFLAGS_INITVALUE,d0
                 lea     ((GAME_FLAGS-$1000000)).w,a0
                 moveq   #LONGWORD_GAMEFLAGS_COUNTER,d7
 @ClearGameFlags_Loop:
@@ -167,7 +166,7 @@ InitGameSettings:
                 move.l  d0,(a0)+
                 dbf     d7,@ClearDealsItems_Loop
                 
-                move.l  #LONGWORD_CARAVAN_VALUE,d0
+                move.l  #LONGWORD_CARAVAN_INITVALUE,d0
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
                 moveq   #LONGWORD_CARAVAN_COUNTER,d7
 @ClearCaravanItems_Loop:
@@ -182,7 +181,7 @@ InitGameSettings:
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 move.b  d0,((CURRENT_BATTLE-$1000000)).w
                 move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
-                move.b  d0,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  d0,((EGRESS_MAP-$1000000)).w
                 move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 move.b  #2,((MESSAGE_SPEED-$1000000)).w
                 move.l  #$FFFFFFFF,((FOLLOWERS_LIST-$1000000)).w
@@ -257,7 +256,7 @@ GetFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
-; determine who is in the force or not based on flags and update RAM lists
+; Determine who is in the force or not based on flags and update RAM lists.
 
 
 UpdateForce:
@@ -270,7 +269,7 @@ UpdateForce:
                 moveq   #0,d3
                 moveq   #0,d4
                 moveq   #0,d0
-                moveq   #COMBATANT_ALLIES_COUNTER,d7 ; HARDCODED number of allies
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
 @MemberStatus_Loop:
                 
                 move.w  d0,d1
@@ -294,6 +293,7 @@ UpdateForce:
                 
                 addq.b  #1,d0
                 dbf     d7,@MemberStatus_Loop
+                
                 move.w  d2,((TARGETS_LIST_LENGTH-$1000000)).w
                 move.w  d3,((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w
                 move.w  d4,((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w
@@ -349,10 +349,10 @@ LeaveForce:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = ally index
+; Is ally d0.b currently in battle party? Return CCR zero-bit set if true.
 
 
-IsInBattleParty:
+IsInBattleParty?:
                 
                 movem.l d1,-(sp)
                 move.b  d0,d1
@@ -362,7 +362,7 @@ IsInBattleParty:
                 movem.l (sp)+,d1
                 rts
 
-    ; End of function IsInBattleParty
+    ; End of function IsInBattleParty?
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -490,70 +490,4 @@ GetDealsItemInfo:
                 rts
 
     ; End of function GetDealsItemInfo
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D1 = item index (only the actual index is used, the status bits are cut out)
-
-
-AddItemToCaravan:
-                
-                movem.l d0-d1/a0,-(sp)
-                moveq   #CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE,d0
-                cmp.w   ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
-                bcs.s   @Skip           ; skip adding item if no room
-                lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
-                andi.w  #ITEMENTRY_MASK_INDEX,d1
-                move.b  d1,(a0,d0.w)
-                addq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
-@Skip:
-                
-                movem.l (sp)+,d0-d1/a0
-                rts
-
-    ; End of function AddItemToCaravan
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D1 = inventory slot
-
-
-RemoveItemFromCaravan:
-                
-                movem.l d0/d7-a1,-(sp)
-                moveq   #0,d0
-                lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                movea.l a0,a1
-                move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
-                subq.w  #1,d7
-                bcs.w   @Done
-@Loop:
-                
-                cmp.w   d0,d1
-                bne.s   @Next
-                
-                ; Remove item
-                addq.l  #CARAVAN_ITEM_ENTRY_SIZE,a1
-                subq.w  #1,((CARAVAN_ITEMS_NUMBER-$1000000)).w
-                bra.s   @Continue
-@Next:
-                
-                move.b  (a1)+,(a0)+
-@Continue:
-                
-                addq.w  #1,d0
-                dbf     d7,@Loop
-                
-                cmpa.l  a1,a0
-                beq.s   @Done
-                move.b  #ITEM_NOTHING,(a0)
-@Done:
-                
-                movem.l (sp)+,d0/d7-a1
-                rts
-
-    ; End of function RemoveItemFromCaravan
 

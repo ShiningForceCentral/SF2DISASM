@@ -14,26 +14,27 @@
 GetSavePointForMap:
                 
                  
+                module
                 chkFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 bne.s   loc_75FC        ; egress always goes back to Bowie's room if you haven't triggered the gizmos cutscene
                 moveq   #MAP_GRANSEAL,d0 ; HARDCODED initial egress position : map, x, y, facing
-                moveq   #$38,d1 
+                moveq   #56,d1
                 moveq   #3,d2
-                moveq   #3,d3
+                moveq   #DOWN,d3
                 rts
 loc_75FC:
                 
                 move.l  a0,-(sp)
                 moveq   #1,d1
                 moveq   #1,d2
-                moveq   #1,d3
+                moveq   #UP,d3
                 lea     SavepointMapCoordinates(pc), a0
 @FindEgressEntry_Loop:
                 
                 cmpi.b  #$FF,(a0)
                 beq.w   byte_7620       ; No match
                 cmp.b   (a0),d0
-                beq.s   @EgressEntryFound        
+                beq.s   @EgressEntryFound
                 addq.l  #4,a0
                 bra.s   @FindEgressEntry_Loop
 @EgressEntryFound:
@@ -57,7 +58,7 @@ byte_7620:
                 bne.s   @FindRaftEntry_Loop
 @RaftEntryNotFound:
                 
-                move.b  1(a0),((RAFT_MAP_INDEX-$1000000)).w
+                move.b  1(a0),((RAFT_MAP-$1000000)).w
                 move.b  2(a0),((RAFT_X-$1000000)).w
                 move.b  3(a0),((RAFT_Y-$1000000)).w
 @Done:
@@ -67,3 +68,4 @@ byte_7620:
 
     ; End of function GetSavePointForMap
 
+                modend

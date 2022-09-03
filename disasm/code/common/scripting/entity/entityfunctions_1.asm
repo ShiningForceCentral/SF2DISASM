@@ -191,7 +191,7 @@ DeclareNewEntity:
                 bra.s   loc_44634
 loc_44630:
                 
-                bsr.w   sub_44D0E
+                bsr.w   sub_44D0E       
 loc_44634:
                 
                 movem.l (sp)+,d0-d4
@@ -220,21 +220,23 @@ ClearEntities:
                 move.w  #$30,d7 
 loc_44666:
                 
-                move.l  #$70007000,(a0)+	; set location off map
-                clr.l   (a0)+				; clear travel info
-                clr.l   (a0)+				; clear travel info
-                move.l  #$70007000,(a0)+	; set destination off map
-                clr.l   (a0)+				; 
-                clr.l   (a0)+				; clear actscriptaddr
-                clr.l   (a0)+				; clear accel/speed
-                clr.l   (a0)+				; 
-                dbf     d7,loc_44666
+                move.l  #$70007000,(a0)+ ; set location off map
+                clr.l   (a0)+           ; clear travel info
+                clr.l   (a0)+           ; clear travel info
+                move.l  #$70007000,(a0)+ ; set destination off map
+                clr.l   (a0)+
+                clr.l   (a0)+           ; clear actscriptaddr
+                clr.l   (a0)+           ; clear accel/speed
+                clr.l   (a0)+
+                dbf     d7,loc_44666    
+                
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 moveq   #$F,d7
 loc_44688:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_44688
+                
                 move.l  #FF5600_LOADING_SPACE,(ENTITY_WALKING_PARAMS).l
                 jsr     (sub_19B0).w
                 movem.l (sp)+,d7-a0

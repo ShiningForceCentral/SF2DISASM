@@ -6,7 +6,7 @@
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndex = -32
+promotionSectionOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -111,7 +111,7 @@ ChurchMenuActions:
                 move.l  actionCost(a6),d1
                 jsr     j_DecreaseGold
                 move.w  member(a6),d0
-                move.w  #200,d1
+                move.w  #CHAR_STATCAP_HP,d1
                 jsr     j_IncreaseCurrentHP
                 sndCom  MUSIC_REVIVE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
@@ -211,7 +211,7 @@ ChurchMenuActions:
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     122             ; "Gosh!  {NAME} is{N}cursed!{W2}"
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d2,itemsHeldNumber(a6)
                 move.w  itemsHeldNumber(a6),d6
                 subq.b  #1,d6
@@ -219,8 +219,8 @@ ChurchMenuActions:
 @CalculateCureCurseCost_Loop:
                 
                 move.w  d6,d1
-                jsr     j_GetItemAndNumberHeld
-                jsr     j_IsItemCursed
+                jsr     j_GetItemBySlotAndHeldItemsNumber
+                jsr     j_IsItemCursed?
                 bcc.w   @IsNextItemCursed
                 jsr     j_GetItemDefAddress
                 clr.l   d4
@@ -329,7 +329,7 @@ ChurchMenuActions:
                 cmpi.w  #0,cannotPromoteFlag(a6)
                 bne.w   @CheckRegularPromo
                 clr.w   promotionItem(a6)
-                move.w  promotionIndex(a6),d7
+                move.w  promotionSectionOffset(a6),d7
                 subq.b  #1,d7
                 move.w  #PROMOTIONSECTION_SPECIAL_ITEM,d2
                 bsr.w   FindPromotionSection
@@ -346,7 +346,7 @@ ChurchMenuActions:
                 
                 move.b  (a0)+,d0
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #0,d2
                 beq.w   @ParseNextMemberItems
                 move.w  d2,d7
@@ -354,7 +354,7 @@ ChurchMenuActions:
 @FindPromotionItem_Loop:
                 
                 move.w  d7,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.b  d1,d2
                 cmp.b   promotionItem(a6),d2
                 beq.w   @ConfirmSpecialPromo
@@ -372,7 +372,7 @@ ChurchMenuActions:
                 move.w  #PROMOTIONSECTION_SPECIAL_PROMO,d2
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
-                move.w  promotionIndex(a6),d7
+                move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
                 clr.w   d0
 @GetSpecialClass_Loop:
@@ -411,7 +411,7 @@ ChurchMenuActions:
                 move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
                 move.w  currentClass(a6),d1
                 bsr.w   GetPromotionData
-                move.w  promotionIndex(a6),d7
+                move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
                 move.w  #1,d2
                 bsr.w   FindPromotionSection
@@ -421,7 +421,7 @@ ChurchMenuActions:
                 
                 move.b  (a0)+,d0
                 dbf     d7,@GetNewClass_Loop
-				
+                
                 move.w  d0,newClass(a6)
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
@@ -485,7 +485,7 @@ ChurchMenuActions:
                 bra.w   @ExitSave
 @DoSaveGame:
                 
-                move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP-$1000000)).w
                 move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 jsr     (SaveGame).w
@@ -500,7 +500,7 @@ ChurchMenuActions:
                 txt     117             ; "{CLEAR}Then, take a rest before{N}you continue.{W1}"
                 jsr     (FadeOutToBlack).w
                 jmp     (WitchSuspend).w
-                bra.w   *+4
+                bra.w   *+4             ; unreachable code
 @ExitSave:
                 
                 clsTxt

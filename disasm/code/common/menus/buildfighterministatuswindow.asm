@@ -4,8 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A1 = window tiles address
-;     D0 = combatant index
+; In: a1 = window tiles address, d0.w = combatant index
 
 windowTilesAddress = -8
 combatant = -2
@@ -216,7 +215,7 @@ BuildMiniStatusWindow:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Write stat value D0 or '??' if above 99
+; Write stat value d0.w or '??' if above 99
 
 
 WriteStatValue:
@@ -237,7 +236,7 @@ aUnknownValue:  dc.b '??'
 
 ; =============== S U B R O U T I N E =======================================
 
-; Draw tiles from A0 into A1 (one column)
+; Draw tiles from a0 into a1 (one column)
 
 
 CopyMiniStatusWindowTileColumn:

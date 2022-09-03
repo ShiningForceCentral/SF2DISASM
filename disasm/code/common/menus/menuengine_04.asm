@@ -191,7 +191,7 @@ loc_11D1A:
                 bra.s   loc_11D32
 loc_11D2C:
                 
-                jsr     j_GetEntityIndex
+                jsr     j_GetEntityIndexForCombatant
 loc_11D32:
                 
                 move.l  a1,-(sp)
@@ -226,7 +226,7 @@ loc_11D6C:
                 move.w  d1,ENTITYDEF_OFFSET_Y(a0)
                 move.w  d0,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
-                move.b  #$40,ENTITYDEF_OFFSET_LAYER(a0) 
+                move.b  #64,ENTITYDEF_OFFSET_LAYER(a0)
                 andi.b  #$7F,ENTITYDEF_OFFSET_FLAGS_B(a0) 
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_11DBC
@@ -305,7 +305,7 @@ loc_11E54:
                 bra.s   loc_11E82
 loc_11E74:
                 
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
+                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 bne.s   loc_11E80
                 moveq   #$3E,d4 
                 bra.s   loc_11E82

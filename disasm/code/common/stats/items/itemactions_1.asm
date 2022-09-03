@@ -4,13 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: D2 = 0 if true, $FFFFFFFF if false
+; In: d1.b = item index
+; Out: d2.l = 0 if true, -1 if false
 
 
-FindUsableOutsideBattleItem:
+IsItemUsableOnField?:
                 
                 moveq   #0,d2
-                lea     tbl_UsableOutsideBattleItems(pc), a0
+                lea     tbl_UsableOnFieldItems(pc), a0
                 nop
 @Loop:
                 
@@ -18,10 +19,11 @@ FindUsableOutsideBattleItem:
                 beq.w   @Return
                 cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
                 bne.s   @Loop
-                moveq   #$FFFFFFFF,d2
+                
+                moveq   #-1,d2
 @Return:
                 
                 rts
 
-    ; End of function FindUsableOutsideBattleItem
+    ; End of function IsItemUsableOnField?
 

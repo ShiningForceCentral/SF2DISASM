@@ -12,7 +12,7 @@ ExecuteBattleCutscene_Defeated:
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.w   loc_47C88
-                move.w  #COMBATANT_ENEMIES_START,d0 
+                move.w  #COMBATANT_ENEMIES_START,d0
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.w   loc_47C88

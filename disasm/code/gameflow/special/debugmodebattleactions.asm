@@ -7,6 +7,7 @@
 
 DebugModeActionSelect:
                 
+                module
                 movem.l d0-d3/a0,-(sp)
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 moveq   #0,d0
@@ -14,43 +15,26 @@ DebugModeActionSelect:
                 moveq   #6,d2
                 jsr     j_NumberPrompt
                 cmpi.b  #$FF,d0
-                beq.w   ActionSelected
+                beq.w   @Done
                 move.w  d0,(a0)+
                 add.w   d0,d0
                 move.w  rjt_DebugModeBattleactions(pc,d0.w),d0
                 jmp     rjt_DebugModeBattleactions(pc,d0.w)
-
-    ; End of function DebugModeActionSelect
-
 rjt_DebugModeBattleactions:
-                dc.w Debug_Attack-rjt_DebugModeBattleactions
-                dc.w Debug_Magic-rjt_DebugModeBattleactions
-                dc.w Debug_Item-rjt_DebugModeBattleactions
-                dc.w Debug_End_Turn-rjt_DebugModeBattleactions
-                dc.w Debug_Burst_Rock-rjt_DebugModeBattleactions
-                dc.w sub_9B34-rjt_DebugModeBattleactions
-                dc.w Debug_Prism_Laser-rjt_DebugModeBattleactions
-
-; =============== S U B R O U T I N E =======================================
-
-; attack
-
-
-Debug_Attack:
+                
+                dc.w @Attack-rjt_DebugModeBattleactions
+                dc.w @Magic-rjt_DebugModeBattleactions
+                dc.w @Item-rjt_DebugModeBattleactions
+                dc.w @EndTurn-rjt_DebugModeBattleactions
+                dc.w @BurstRock-rjt_DebugModeBattleactions
+                dc.w @Muddle-rjt_DebugModeBattleactions
+                dc.w @PrismLaser-rjt_DebugModeBattleactions
+@Attack:
                 
                 bsr.w   DebugModeSelectTargetEnemy
                 move.w  d0,(a0)+
-                bra.w   ActionSelected
-
-    ; End of function Debug_Attack
-
-
-; =============== S U B R O U T I N E =======================================
-
-; use magic
-
-
-Debug_Magic:
+                bra.w   @Done
+@Magic:
                 
                 moveq   #1,d0
                 moveq   #1,d1
@@ -61,23 +45,14 @@ Debug_Magic:
                 lsl.w   #6,d3
                 moveq   #0,d0
                 moveq   #0,d1
-                moveq   #$2A,d2 
+                moveq   #SPELLENTRY_SPELLS_NUMBER,d2
                 jsr     j_NumberPrompt
                 add.w   d3,d0
                 move.w  d0,(a0)+
                 bsr.w   DebugModeSelectTargetEnemy
                 move.w  d0,(a0)+
-                bra.w   ActionSelected
-
-    ; End of function Debug_Magic
-
-
-; =============== S U B R O U T I N E =======================================
-
-; use item
-
-
-Debug_Item:
+                bra.w   @Done
+@Item:
                 
                 moveq   #0,d0
                 moveq   #0,d1
@@ -91,62 +66,27 @@ Debug_Item:
                 moveq   #3,d2
                 jsr     j_NumberPrompt
                 move.w  d0,(a0)+
-                bra.w   ActionSelected
-
-    ; End of function Debug_Item
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-Debug_End_Turn:
+                bra.w   @Done
+@EndTurn:
                 
-                bra.w   ActionSelected
-
-    ; End of function Debug_End_Turn
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-Debug_Burst_Rock:
+                bra.w   @Done
+@BurstRock:
                 
-                bra.w   ActionSelected
-
-    ; End of function Debug_Burst_Rock
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_9B34:
+                bra.w   @Done
+@Muddle:
                 
-                bra.w   ActionSelected
-
-    ; End of function sub_9B34
-
-
-; =============== S U B R O U T I N E =======================================
-
-; use prism laser
-
-
-Debug_Prism_Laser:
+                bra.w   @Done
+@PrismLaser:
                 
                 move.b  #BATTLE_VERSUS_PRISM_FLOWERS,((CURRENT_BATTLE-$1000000)).w
-
-    ; End of function Debug_Prism_Laser
-
-
-; START OF FUNCTION CHUNK FOR DebugModeActionSelect
-
-ActionSelected:
+@Done:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-; END OF FUNCTION CHUNK FOR DebugModeActionSelect
+    ; End of function DebugModeActionSelect
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

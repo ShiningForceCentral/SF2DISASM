@@ -113,9 +113,9 @@ byte_581E4:
                 script  cs_58856
                 setFlg  716             ; Set after your raft-giving conversation with the mayor in Polca
                 setFlg  64              ; Raft is unlocked
-                move.b  #$48,((RAFT_MAP_INDEX-$1000000)).w 
-                move.b  #$2B,((RAFT_X-$1000000)).w 
-                move.b  #$30,((RAFT_Y-$1000000)).w 
+                move.b  #MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,((RAFT_MAP-$1000000)).w
+                move.b  #43,((RAFT_X-$1000000)).w
+                move.b  #48,((RAFT_Y-$1000000)).w
 loc_58204:
                 
                 bra.s   loc_5820A

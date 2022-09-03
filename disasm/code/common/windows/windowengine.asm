@@ -10,19 +10,20 @@ InitWindowProperties:
                 move.l  a0,-(sp)
                 move.w  d7,-(sp)
                 lea     (WINDOW_ENTRIES).l,a0
-                moveq   #LONGWORD_WINDOW_ENTRIES_COUNTER,d7
+                moveq   #WINDOW_ENTRIES_LONGWORD_COUNTER,d7
 @Clear_Loop:
                 
                 clr.l   (a0)+
                 dbf     d7,@Clear_Loop
+                
                 move.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END-$1000000)).w
                 move.w  (sp)+,d7
                 movea.l (sp)+,a0
                 clr.b   ((WINDOW_IS_PRESENT-$1000000)).w
                 cmpi.b  #MAP_NONE,((CURRENT_MAP-$1000000)).w
-                beq.s   loc_47F4
+                beq.s   @Continue
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-loc_47F4:
+@Continue:
                 
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 clr.w   ((TEXT_WINDOW_INDEX-$1000000)).w
@@ -34,8 +35,8 @@ loc_47F4:
 
 ; =============== S U B R O U T I N E =======================================
 
-; d0 = width height, d1 = X Y pos
-; returns a1 = window tiles end, d0 = window slot
+; In: d0.w = width/height, d1.w = X/Y position
+; Out: a1 = window tiles end, d0.w = window slot (-1 if no free slot available)
 
 
 CreateWindow:
@@ -44,23 +45,24 @@ CreateWindow:
                 movem.w d6-d7,-(sp)
                 lea     (WINDOW_ENTRIES).l,a0
                 clr.w   d6
-                moveq   #7,d7
-loc_4812:
+                moveq   #WINDOW_ENTRIES_COUNTER,d7
+FindFreeWindowSlot_Loop:
                 
                 tst.w   (a0)            ; get free window slot
-                beq.s   loc_4826
+                beq.s   @Found
                 addq.w  #1,d6
-                adda.w  #$10,a0
-                dbf     d7,loc_4812     
-                moveq   #$FFFFFFFF,d0   ; no window slot available
-                bra.w   loc_485E
-loc_4826:
+                adda.w  #WINDOW_ENTRY_SIZE,a0
+                dbf     d7,FindFreeWindowSlot_Loop
+                
+                moveq   #-1,d0          ; no window slot available
+                bra.w   @Done
+@Found:
                 
                 movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
-                bne.s   loc_4836        
+                bne.s   @Continue       
                 bsr.w   CopyPlaneALayoutForWindows
-loc_4836:
+@Continue:
                 
                 move.l  a1,(a0)+        ; window tiles end
                 move.w  d0,(a0)+        ; width height
@@ -77,8 +79,8 @@ loc_4836:
                 adda.w  d0,a1
                 move.l  a1,((WINDOW_LAYOUTS_END-$1000000)).w
                 move.w  d6,d0
-                movea.l -$10(a0),a1
-loc_485E:
+                movea.l -WINDOW_ENTRY_SIZE(a0),a1
+@Done:
                 
                 movem.w (sp)+,d6-d7
                 movea.l (sp)+,a0

@@ -117,9 +117,9 @@ sub_441AA:
                 
                 module
                 movem.l d0-a1,-(sp)
-                cmpi.b  #2,((PLAYER_TYPE-$1000000)).w
+                cmpi.b  #PLAYERTYPE_RAFT,((PLAYER_TYPE-$1000000)).w
                 beq.w   @Done
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
+                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 beq.w   byte_441F0      ; No followers
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
@@ -143,7 +143,7 @@ byte_441F0:
                 chkFlg  64              ; Raft is unlocked
                 beq.w   @Done
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmp.b   ((RAFT_MAP_INDEX-$1000000)).w,d0
+                cmp.b   ((RAFT_MAP-$1000000)).w,d0
                 bne.s   @RaftNotOnMap
                 move.b  ((RAFT_X-$1000000)).w,d1
                 move.b  ((RAFT_Y-$1000000)).w,d2
@@ -153,7 +153,7 @@ byte_441F0:
                 andi.w  #$7F,d2 
                 muls.w  #$180,d2
                 moveq   #2,d3
-                moveq   #MAPSPRITE_RAFT,d4 
+                moveq   #MAPSPRITE_RAFT,d4
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
@@ -170,7 +170,7 @@ byte_441F0:
                 
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 clr.b   $3F(a0)
-                lea     ((ENTITY_RAFT-$1000000)).w,a0
+                lea     ((ENTITY_RAFT_DATA-$1000000)).w,a0
                 move.l  #$70007000,(a0)
                 move.l  #$70007000,ENTITYDEF_OFFSET_XDEST(a0)
 @Done:
@@ -184,27 +184,29 @@ byte_441F0:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Out: ccr zero-bit clear if true
 
-IsOverworldMap:
+
+IsOverworldMap?:
                 
                 movem.l d0-d1/a0,-(sp)
                 clr.w   d1
                 lea     tbl_OverworldMaps(pc), a0
-loc_44272:
+@Loop:
                 
                 move.b  (a0)+,d0
-                bmi.w   loc_44282
+                bmi.w   @Break
                 cmp.b   ((CURRENT_MAP-$1000000)).w,d0
-                bne.s   loc_44280
+                bne.s   @Next
                 addq.w  #1,d1
-loc_44280:
+@Next:
                 
-                bra.s   loc_44272
-loc_44282:
+                bra.s   @Loop
+@Break:
                 
                 tst.w   d1
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function IsOverworldMap
+    ; End of function IsOverworldMap?
 

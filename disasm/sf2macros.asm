@@ -9,15 +9,18 @@
     include "sf2battlescenemacros.asm"
 
 align: macro
-    if (narg=1)
+    case narg
+=0  ; If no arguments given, align to word boundary.
+    dcb.b *%2,$FF
+=1  ; If given an address argument only, pad with $FF.
     dcb.b \1-(*%\1),$FF
-    else
+=?  ; If two arguments or more, pad with second argument.
     dcb.b \1-(*%\1),\2
-    endc
+    endcase
     endm
     
-wordAlign: macro
-    dcb.b *%2,$FF
+wordAlign: macro ;alias
+    align
     endm
     
 sndCom: macro
@@ -144,7 +147,7 @@ raftResetMapCoords: macro
     dc.b \4
     endm
     
-itemIndex: macro
+item: macro
     defineShorthand.b ITEM_,\1
     endm
     
@@ -168,7 +171,7 @@ enemyEntity: macro
     endm
     
 itemDrop: macro ; alias
-    itemIndex \1
+    item \1
     endm
     
 droppedFlag: macro
@@ -358,7 +361,7 @@ weaponGraphics: macro
 shopInventory: macro
     dc.b narg
     rept narg
-    itemIndex \1
+    item \1
     shift
     endr
     endm
@@ -378,12 +381,12 @@ promotionSection: macro
 promotionItems: macro
     dc.b narg
     rept narg
-    itemIndex \1
+    item \1
     shift
     endr
     endm
     
-blacksmithClasses: macro
+classes: macro
     dc.w narg
     rept narg
     defineShorthand.w CLASS_,\1
@@ -391,33 +394,33 @@ blacksmithClasses: macro
     endr
     endm
     
-mithrilWeaponClass: macro
-    dc.w narg
-    rept narg
-    defineShorthand.w CLASS_,\1
-    shift
-    endr
+blacksmithClasses: macro    ; alias
+    classes \1
+    endm
+    
+mithrilWeaponClass: macro   ; alias
+    classes \1
     endm
     
 mithrilWeapons: macro
     dc.b \1
-    itemIndex \2
+    item \2
     dc.b \3
-    itemIndex \4
+    item \4
     dc.b \5
-    itemIndex \6
+    item \6
     dc.b \7
-    itemIndex \8
+    item \8
     endm
     
 specialCaravanDescription: macro
-    itemIndex \1
+    item \1
     dc.b \2
     defineShorthand.w MESSAGE_CARAVANDESC_,\3
     endm
     
 usableOutsideBattleItem: macro  ; alias
-    itemIndex \1
+    item \1
     endm
     
 input: macro
@@ -627,7 +630,11 @@ prowess: macro
 ; VDP tiles
     
 vdpTile: macro
+    if (narg=0)
+    dc.w 0
+    else
     defineBitfield.w VDPTILE_,\1
+    endc
     endm
     
 vdpBaseTile: macro

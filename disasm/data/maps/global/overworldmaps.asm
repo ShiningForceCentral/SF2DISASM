@@ -15,4 +15,5 @@ tbl_OverworldMaps:
                 dc.b MAP_OVERWORLD_GRANS_RETURN_PATH
                 dc.b MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE
                 dc.b MAP_OVERWORLD_PACALON_2
-                dc.b $FF
+                
+                tableEnd.b

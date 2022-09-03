@@ -1,18 +1,18 @@
 
 ; ASM FILE data\stats\items\usableoutsidebattleitems.asm :
 ; 0x229E2..0x229EC : Usable outside battle items
-tbl_UsableOutsideBattleItems:
+tbl_UsableOnFieldItems:
                 
-; Syntax        itemIndex [ITEM_]enum (or index)
+; Syntax        item [ITEM_]enum (or index)
                 
-                itemIndex ANTIDOTE
-                itemIndex FAIRY_POWDER
-                itemIndex POWER_WATER
-                itemIndex PROTECT_MILK
-                itemIndex QUICK_CHICKEN
-                itemIndex RUNNING_PIMENTO
-                itemIndex CHEERFUL_BREAD
-                itemIndex BRIGHT_HONEY
-                itemIndex BRAVE_APPLE
+                item ANTIDOTE
+                item FAIRY_POWDER
+                item POWER_WATER
+                item PROTECT_MILK
+                item QUICK_CHICKEN
+                item RUNNING_PIMENTO
+                item CHEERFUL_BREAD
+                item BRIGHT_HONEY
+                item BRAVE_APPLE
                 
                 tableEnd.b

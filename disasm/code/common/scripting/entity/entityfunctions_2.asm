@@ -4,6 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
 
 SetEntityActscript:
                 
@@ -20,6 +22,8 @@ SetEntityActscript:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
 
 SetControlledEntityActScript:
                 
@@ -28,7 +32,7 @@ SetControlledEntityActScript:
                 bsr.w   GetEntityEntryAddress
                 tst.b   ((PLAYER_TYPE-$1000000)).w
                 beq.s   loc_44B86
-                cmpi.b  #1,((PLAYER_TYPE-$1000000)).w
+                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 bne.s   loc_44B7C
                 move.l  #eas_Raft,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 bra.s   loc_44B84
@@ -52,6 +56,8 @@ loc_44B8E:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
 
 SetUnitCursorSpeedx2:
                 
@@ -67,6 +73,8 @@ SetUnitCursorSpeedx2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = entity index
 
 
 SetUnitCursorActscript:
@@ -84,6 +92,8 @@ SetUnitCursorActscript:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
 
 sub_44BC0:
                 
@@ -99,6 +109,8 @@ sub_44BC0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = entity index
 
 
 sub_44BD6:
@@ -116,6 +128,8 @@ sub_44BD6:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
 
 MakeEntityIdle:
                 
@@ -131,6 +145,8 @@ MakeEntityIdle:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = entity index
 
 
 ApplyInitActscript:
@@ -148,6 +164,8 @@ ApplyInitActscript:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
 
 SetEntityMovescriptToIdle:
                 
@@ -163,6 +181,8 @@ SetEntityMovescriptToIdle:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = entity index
 
 
 AddFollower:
@@ -198,6 +218,8 @@ loc_44C7E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = entity index
 
 
 HideEntity:
@@ -241,6 +263,8 @@ loc_44CCA:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = entity index
+
 
 SetWalkingActscript:
                 
@@ -264,6 +288,8 @@ SetWalkingActscript:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = entity index
 
 
 sub_44D0E:
@@ -325,7 +351,7 @@ loc_44D90:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = entity index
+; In: d0.w = entity index
 
 
 WaitForEntityToStopMoving:
@@ -359,7 +385,7 @@ loc_44DD0:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get RAM address of entity D0 -> A0
+; Get RAM address of entity d0.w -> a0
 
 
 GetEntityEntryAddress:

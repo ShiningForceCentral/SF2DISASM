@@ -117,7 +117,7 @@ AiCommandset15:
                              STAY
 byte_E249:      
 ; These seem to correspond to the secondary characteristics of each AI script
-;  for Heal, Attack, and Special Move, but not for Debuff or normal Move
+;  for Heal, Attack, and Special Move, but not for Support or normal Move
 ;  with one byte per AI...
                 
                 dc.b 0

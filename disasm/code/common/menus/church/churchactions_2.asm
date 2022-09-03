@@ -4,11 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Return in -22(A6)
-
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndexOffset = -32
+promotionSectionOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -50,6 +48,7 @@ CountPromotableMembers:
                 
                 move.b  (a0)+,(a1)+
                 dbf     d7,@Loop
+                
                 movem.l (sp)+,d7-a1
                 rts
 
@@ -58,15 +57,15 @@ CountPromotableMembers:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get promotion index for class D1, given section type D2
+; Get promotion data for class d1.b, given section type d2.w
 ; 
-;       Out: -32(A6) = promotion index offset
-;            -34(A6) = section length
-;            -36(A6) = 1 if no matching promotion data found
+;       Out: -32(a6) = promotion section offset
+;            -34(a6) = promotion section length
+;            -36(a6) = cannot promote flag (1 if no matching promotion data found)
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndexOffset = -32
+promotionSectionOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -85,13 +84,13 @@ GetPromotionData:
                 
                 movem.l d7-a0,-(sp)
                 clr.w   promotionSectionLength(a6)
-                clr.w   promotionIndexOffset(a6)
+                clr.w   promotionSectionOffset(a6)
                 clr.w   cannotPromoteFlag(a6)
                 bsr.w   FindPromotionSection
                 clr.w   d7
                 move.b  (a0)+,d7
                 move.w  d7,promotionSectionLength(a6)
-                move.w  d7,promotionIndexOffset(a6)
+                move.w  d7,promotionSectionOffset(a6)
                 subq.b  #1,d7
 @FindClass_Loop:
                 
@@ -102,7 +101,7 @@ GetPromotionData:
                 move.w  #1,cannotPromoteFlag(a6)
 @Found:
                 
-                sub.w   d7,promotionIndexOffset(a6)
+                sub.w   d7,promotionSectionOffset(a6)
                 movem.l (sp)+,d7-a0
                 rts
 
@@ -142,7 +141,7 @@ FindPromotionSection:
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndexOffset = -32
+promotionSectionOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -158,15 +157,16 @@ actionCost = -8
 currentGold = -4
 
 ReplaceSpellsWithSORCdefaults:
-			 
+                
                 move.w  member(a6),d0
                 jsr     j_GetCombatantEntryAddress
-                lea     COMBATANT_OFFSET_SPELLS_START(a0),a0
+                lea     COMBATANT_OFFSET_SPELLS(a0),a0
                 move.w  #COMBATANT_SPELLSLOTS_COUNTER,d7
 @Loop:
                 
                 move.b  #SPELL_NOTHING,(a0)+
                 dbf     d7,@Loop
+                
                 move.w  member(a6),d0
                 move.w  #SPELL_DAO,d1
                 jsr     j_LearnSpell
@@ -181,7 +181,7 @@ ReplaceSpellsWithSORCdefaults:
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndexOffset = -32
+promotionSectionOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -212,7 +212,7 @@ Church_GetCurrentForceMemberInfo:
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
-promotionIndexOffset = -32
+promotionSectionOffset = -32
 promotionItem = -30
 newClass = -28
 currentClass = -26
@@ -300,7 +300,7 @@ Church_CureStun:
 WaitForMusicResumeAndPlayerInput:
                 
                 move.w  d0,-(sp)
-                move.w  #$FB,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0
                 jsr     (PlayMusicAfterCurrentOne).w
                 jsr     (WaitForPlayerInput).w
                 move.w  (sp)+,d0
