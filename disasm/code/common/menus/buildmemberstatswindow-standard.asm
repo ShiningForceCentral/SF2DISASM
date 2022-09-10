@@ -5,20 +5,20 @@
                 module
                 
 @writeMemberStatValue: macro
-              if (FULL_CLASS_NAMES=1)
+            if (FULL_CLASS_NAMES=1)
                 bsr.s   WriteMemberStatValue
-              else
+            else
                 bsr.w   WriteStatValue
-              endif
-            endm
+            endif
+        endm
 
 @writeMemberLvOrExpValue: macro
-              if (FULL_CLASS_NAMES=1)
+            if (FULL_CLASS_NAMES=1)
                 bsr.s   WriteMemberLvOrExpValue
-              else
+            else
                 bsr.w   WriteLvOrExpValue
-              endif
-            endm
+            endif
+        endm
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -38,56 +38,58 @@ member = -2
                 
                 ; Copy window layout
                 conditionalLongAddr movea.l, p_MemberStatusWindowLayout, a0
-                if (FULL_CLASS_NAMES=1)
-                    move.w  #126,d7     ; window layout head bytesize
-                    jsr     (CopyBytes).w
-                    adda.w  d7,a0
-                    adda.w  d7,a1
-                    tst.b   d0
-                    bmi.s   @CopyLayoutBody
-                    suba.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a0
-@CopyLayoutBody:    move.w  #336,d7     ; window layout body bytesize
-                    jsr     (CopyBytes).w
-                    adda.w  d7,a0
-                    adda.w  d7,a1
-                    tst.b   d0
-                    bmi.s   @CopyLayoutTail
-                    adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a0
-@CopyLayoutTail:    move.w  #630,d7     ; window layout tail bytesize
-                    jsr     (CopyBytes).w
-                else
-                    move.w  #WINDOW_MEMBERSTATUS_VDPTILEORDER_BYTESIZE,d7
-                    jsr     (CopyBytes).w
-                endif
+            if (FULL_CLASS_NAMES=1)
+                move.w  #126,d7     ; window layout head bytesize
+                jsr     (CopyBytes).w
+                adda.w  d7,a0
+                adda.w  d7,a1
+                tst.b   d0
+                bmi.s   @CopyLayoutBody
+                suba.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a0
+@CopyLayoutBody:move.w  #336,d7     ; window layout body bytesize
+                jsr     (CopyBytes).w
+                adda.w  d7,a0
+                adda.w  d7,a1
+                tst.b   d0
+                bmi.s   @CopyLayoutTail
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a0
+@CopyLayoutTail:move.w  #630,d7     ; window layout tail bytesize
+                jsr     (CopyBytes).w
+            else
+                move.w  #WINDOW_MEMBERSTATUS_VDPTILEORDER_BYTESIZE,d7
+                jsr     (CopyBytes).w
+            endif
                 
                 ; Write character name
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NAME,a1
                 move.w  member(a6),d0
-                if (FULL_CLASS_NAMES=1)
-                    jsr     GetCombatantName
-                    moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
-                    bsr.w   WriteTilesFromAsciiWithRegularFont
-                    move.w  member(a6),d0
-                    tst.b   d0
-                    bmi.s   @AddStatusEffectTiles       ; skip class name if enemy
-                    movea.l windowTilesAddress(a6),a1
-                    adda.w  #@OFFSET_FULLCLASSNAME,a1   ; full class name offset
-                    jsr     GetClassAndFullName             ; write full class name on single line
-                    moveq   #0,d1
-                    bsr.w   WriteTilesFromAsciiWithRegularFont
-                else
-                    tst.b   d0
-                    bmi.s   @WriteMemberName            ; skip class name if enemy
-                    jsr     GetClassAndName                 ; write shortened class name (original behavior)
-                    moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
-                    bsr.w   WriteTilesFromAsciiWithRegularFont
-                    addq.w  #2,a1
-@WriteMemberName:   move.w  member(a6),d0
-                    jsr     GetCombatantName
-                    moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
-                    bsr.w   WriteTilesFromAsciiWithRegularFont
-                endif
+            if (FULL_CLASS_NAMES=1)
+                jsr     GetCombatantName
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
+                bsr.w   WriteTilesFromAsciiWithRegularFont
+                move.w  member(a6),d0
+                tst.b   d0
+                bmi.s   @AddStatusEffectTiles       ; skip class name if enemy
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #@OFFSET_FULLCLASSNAME,a1   ; full class name offset
+                jsr     GetClassAndFullName             ; write full class name on single line
+                moveq   #0,d1
+                bsr.w   WriteTilesFromAsciiWithRegularFont
+            else
+                tst.b   d0
+                bmi.s   @WriteMemberName            ; skip class name if enemy
+                jsr     GetClassAndName                 ; write shortened class name (original behavior)
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
+                bsr.w   WriteTilesFromAsciiWithRegularFont
+                addq.w  #2,a1
+@WriteMemberName:
+                
+                move.w  member(a6),d0
+                jsr     GetCombatantName
+                moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
+                bsr.w   WriteTilesFromAsciiWithRegularFont
+            endif
                 
 @AddStatusEffectTiles:
                 movea.l windowTilesAddress(a6),a1
@@ -293,13 +295,12 @@ WriteEnemyLvOrExp:
                 jsr     GetSpellAndNumberOfSpells
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @WriteSpells_Break          ; break out of loop if no spells learned
-                
-                if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
-                    ; Do not display spell that is not affected by silence
-                    jsr     FindSpellDefAddress
-                    btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
-                    beq.w   @NextSpell      ; skip if spell is not affected by silence
-                endif
+            if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
+                ; Do not display spell that is not affected by silence
+                jsr     FindSpellDefAddress
+                btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
+                beq.w   @NextSpell      ; skip if spell is not affected by silence
+            endif
                 
                 ; Copy icon tiles to window layout
                 movea.l d4,a1
@@ -452,7 +453,7 @@ WriteEnemyLvOrExp:
             if (ALTERNATE_JEWEL_ICONS_DISPLAY=0)
                 tst.w   member(a6)
                 bne.s   @DmaIcons       ; skip if anyone other than Bowie
-                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                chkFlg  384             ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 beq.s   @DmaIcons       ; skip if we haven't obtained Jewel of Light
                 bsr.s   WriteJewelIcons
             endif
@@ -510,19 +511,10 @@ WriteJewelIcons:
                 
                 ; Load Jewel of Light icon pixel data to temp space
                 move.w  #ICON_JEWEL_OF_LIGHT,d1
-                movea.l (p_Icons).l,a0
-                move.w  d1,d2
-                add.w   d1,d1
-                add.w   d2,d1
-                lsl.w   #6,d1
-                addIconOffset d1, a0
-                movea.l a2,a1
-                move.w  #ICONTILES_BYTESIZE,d7
-                jsr     (CopyBytes).w   
-                bsr.s   CleanMemberStatsIconCorners
+                bsr.s   LoadJewelIconPixels
                 adda.w  #ICONTILES_BYTESIZE,a2
                 
-                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
+                chkFlg  385             ; Set after Bowie obtains King Galam's jewel
                 beq.s   @Return         ; skip if we haven't obtained Jewel of Evil
                 
                 ; Copy icon tiles to window layout
@@ -536,7 +528,16 @@ WriteJewelIcons:
                 
                 ; Load Jewel of Evil icon pixel data to temp space
                 move.w  #ICON_JEWEL_OF_EVIL,d1
-                movea.l (p_Icons).l,a0
+            endif
+
+    ; End of function WriteJewelIcons
+
+
+; =============== S U B R O U T I N E =======================================
+
+LoadJewelIconPixels:
+            if (ALTERNATE_JEWEL_ICONS_DISPLAY=0)
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
@@ -546,12 +547,7 @@ WriteJewelIcons:
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w
             endif
-
-    ; End of function WriteJewelIcons
-
-
-; =============== S U B R O U T I N E =======================================
-
+                
 CleanMemberStatsIconCorners:
                 ori.b   #$F0,(a1)
                 ori.b   #$F,$23(a1)

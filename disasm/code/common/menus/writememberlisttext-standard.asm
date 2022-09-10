@@ -12,14 +12,14 @@ WriteMemberListText:
 currentMember = -8
 windowTilesAddress = -6
 selectedMember = -2
-headerStringOffset = 8
-headerLength = 17
                 
 headerStringOffset = 8
 headerLength = 17
     if (secondMemberListStatsPage=1)
-headerStringOffset = headerStringOffset+2
 headerLength = headerLength-1
+    endif
+    if (secondMemberListStatsPage|(STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES)=1)
+headerStringOffset = headerStringOffset+2
     endif
                 
                 link    a6,#-8
@@ -42,14 +42,12 @@ headerLength = headerLength-1
                 bne.s   @CheckStatsPage
                 lea     aClassLvExp(pc), a0
                 bra.s   @WriteHeaderString
-                
-@CheckStatsPage:    
-                cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMP,d0
-            	bne.s   @CheckStatsPage2
+@CheckStatsPage:cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMP,d0
+                bne.s   @CheckStatsPage2
                 lea     aHpMaxMpMax(pc), a0
                 bra.s   @WriteHeaderString
+@CheckStatsPage2:
                 
-@CheckStatsPage2:   
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,d0
                 bne.s   @Default
                 lea     aAttDefAgiMov(pc), a0
@@ -212,9 +210,9 @@ headerLength = headerLength-1
                 
 @WriteEntry_NewATTandDEF:
                 jsr     GetEquipNewATTandDEF  ; Get new ATT and DEF -> D2, D3
-                if (THREE_DIGITS_STATS=0)
-                    addq.w  #2,a1
-                endif
+            if (THREE_DIGITS_STATS=0)
+                addq.w  #2,a1
+            endif
                 
                 ; Write current -> new ATT
                 move.w  currentMember(a6),d0
