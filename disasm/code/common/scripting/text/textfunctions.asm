@@ -353,11 +353,11 @@ loc_6574:
 symbol_class:
                 
                 bsr.w   sub_6648
-                if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
-                    bsr.w   GetFullClassName
-                else
-                    jsr     j_GetClassName
-                endif
+            if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
+                bsr.w   GetFullClassName
+            else
+                jsr     j_GetClassName
+            endif
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_wait1:

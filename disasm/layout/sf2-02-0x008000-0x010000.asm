@@ -137,11 +137,11 @@
                 include "code\gameflow\battle\ai\aicommandmove.asm"    ; AI command : Move
                 include "code\gameflow\battle\ai\aiengine_2.asm"    ; AI engine
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
-                if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
-                    include "data\stats\spells\extendedspellnames.asm"
-                else
-                    include "data\stats\spells\spellnames.asm"    ; Spell names
-                endif
+            if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+                include "data\stats\spells\extendedspellnames.asm"
+            else
+                include "data\stats\spells\spellnames.asm"    ; Spell names
+            endif
                 include "data\stats\allies\allynames.asm"    ; Ally names
                 include "data\stats\enemies\enemynames.asm"    ; Enemy names
                 align $10000

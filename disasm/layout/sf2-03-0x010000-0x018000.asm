@@ -10,11 +10,11 @@
                 include "code\common\tech\pointers\s03_memberstatuswindowlayoutpointer.asm"    ; Game Section 03 Member Status Window Layout Pointer
                 include "code\common\menus\menuengine_01.asm"    ; Menu engine
                 include "data\graphics\tech\menus\diamondmenulayout.asm"    ; Diamond menu layout
-                if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
-                    include "data\graphics\tech\menus\magicmenulayout-extendedspellnames.asm"
-                else
-                    include "data\graphics\tech\menus\magicmenulayout.asm"    ; Magic menu layout
-                endif
+            if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+                include "data\graphics\tech\menus\magicmenulayout-extendedspellnames.asm"
+            else
+                include "data\graphics\tech\menus\magicmenulayout.asm"    ; Magic menu layout
+            endif
                 include "data\graphics\tech\menus\itemmenulayout.asm"    ; Item menu layout
                 include "code\common\menus\menuengine_02.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\battleequipwindowlayout.asm"    ; Battle equip window layout
@@ -53,21 +53,21 @@
                 include "data\graphics\tech\windowlayouts\battleconfigwindowlayout.asm"    ; Battle config window layout
                 include "code\common\menus\menuengine_08.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\alphabetwindowlayout.asm"    ; Alphabet window layout
-                if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                    include "data\graphics\tech\windowlayouts\namecharacterentrywindowlayout-menuenhancements.asm"
-                else
-                    include "data\graphics\tech\windowlayouts\namecharacterentrywindowlayout.asm"    ; Name character entry window layout
-                endif
+            if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                include "data\graphics\tech\windowlayouts\namecharacterentrywindowlayout-menuenhancements.asm"
+            else
+                include "data\graphics\tech\windowlayouts\namecharacterentrywindowlayout.asm"    ; Name character entry window layout
+            endif
                 include "data\graphics\tech\alphabethighlight\entries.asm"    ; Alphabet Highlight Tiles
                 include "code\common\menus\menuengine_09.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\timerwindowlayout.asm"    ; Timer window layout
                 include "code\specialscreens\witch\witchmainmenu.asm"    ; Witch main menu
                 include "code\common\menus\menuengine_10.asm"    ; Menu engine
-                if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
-                    include "data\graphics\tech\windowlayouts\memberstatswindowlayout-menuenhancements.asm"
-                else
-                    include "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout
-                endif
+            if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
+                include "data\graphics\tech\windowlayouts\memberstatswindowlayout-menuenhancements.asm"
+            else
+                include "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout
+            endif
                 include "data\stats\items\itemdefs.asm"    ; Item definitions
                 include "data\stats\spells\spelldefs.asm"    ; Spell definitions
                 include "data\stats\items\itemnames.asm"    ; Item names
