@@ -1905,6 +1905,7 @@ WINDOW_MEMBERSTATUS_DEST: equ $2001
 
 ; enum Window_MemberList
 highlightSpritesCounter = 1
+memberlistDownArrow     = 11
 hpMpPage                = 255
 statsPage               = 1
 newAttAndDefPage        = 2
@@ -1914,6 +1915,7 @@ levelEntryOffset        = 22
 
     if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
 highlightSpritesCounter = highlightSpritesCounter+1
+memberlistDownArrow     = memberlistDownArrow+1
     endif
 
     if (secondMemberListStatsPage=1)
@@ -1933,7 +1935,7 @@ WINDOW_MEMBERLIST_ENTRIES_COUNTER: equ $4
 WINDOW_MEMBERLIST_OFFSET_ENTRY_EXP: equ $4
 WINDOW_MEMBERLIST_OFFSET_ENTRY_UNEQUIPPABLE: equ $4
 WINDOW_MEMBERLIST_OFFSET_ENTRY_NEWDEFENSE: equ newAttAndDefEntryOffset
-WINDOW_MEMBERLIST_SPRITELINK_DOWNARROW: equ $B
+WINDOW_MEMBERLIST_SPRITELINK_DOWNARROW: equ memberlistDownArrow
 WINDOW_MEMBERLIST_ENTRY_UNEQUIPPABLE_LENGTH: equ $10
 WINDOW_MEMBERLIST_OFFSET_ENTRY_START: equ entryStartOffset
 WINDOW_MEMBERLIST_SPRITELINK_UPARROW: equ $10
