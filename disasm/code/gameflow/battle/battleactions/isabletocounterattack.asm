@@ -4,9 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
-; 
-; Out: -12(A2) = 0 if false, otherwise true
+; In: a2 = battlescene script stack frame
+; Out: -12(a2) = 0 if false, otherwise true
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -31,7 +30,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-IsAbleToCounterAttack:
+FinalCounterAttackCheck:
                 
                 movem.l d0-d3/a0,-(sp)
                 tst.b   counterAttack(a2)
@@ -42,6 +41,8 @@ IsAbleToCounterAttack:
                 bne.w   @ClearCounter
                 tst.b   targetIsOnSameSide(a2)
                 bne.w   @ClearCounter
+                
+                ; Check status effects
                 move.b  (a4),d0
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_SLEEP,d1
@@ -67,6 +68,8 @@ IsAbleToCounterAttack:
                 beq.w   @ClearCounter
                 cmpi.w  #ENEMY_ZEON_GUARD,d1
                 beq.w   @ClearCounter
+                
+                ; Check if target is in range
                 move.b  (a4),d0
                 move.b  (a5),d1
                 jsr     GetDistanceBetweenEntities
@@ -90,5 +93,5 @@ IsAbleToCounterAttack:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function IsAbleToCounterAttack
+    ; End of function FinalCounterAttackCheck
 

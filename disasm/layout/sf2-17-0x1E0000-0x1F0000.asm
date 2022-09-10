@@ -20,6 +20,7 @@ SoundDriver:    incbin "data/sound/sounddriver.bin"
                 endif
                 include "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 include "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
-                include "data\graphics\tech\unusedbasepalettes\entries.asm"    ; Unused base palettes
-                include "data\graphics\tech\basetilesentry.asm"    ; Base tiles
+unused_BasePalettes:
+                incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
+BaseTiles:      incbin "data/graphics/tech/basetiles.bin"
                 align $1F0000

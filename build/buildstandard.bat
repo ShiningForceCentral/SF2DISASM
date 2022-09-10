@@ -22,6 +22,11 @@ IF NOT EXIST "sounddriver.bin" (
     ..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\sounddriver.asm
     ..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\sounddriver.p .\sounddriver.bin -k -r $0000-$1fff
 ) ELSE echo sounddriver.bin already exists!
+IF NOT EXIST "cubewiz.bin" (
+    echo Assembling Cube/Wiz driver ...
+    ..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\cubewiz.asm
+    ..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\cubewiz.p .\cubewiz.bin -k -r $0000-$1fff
+) ELSE echo cubewiz.bin already exists!
 cd musicbank0/
 IF NOT EXIST "..\musicbank0.bin" (
     echo Assembling music bank 0 ...
@@ -45,12 +50,13 @@ echo Checking build ...
 cd ../build/
 SET expandedromsize=4194304
 IF EXIST "%buildname%.bin" (
-    FOR /F %%I IN ("%buildname%.bin") DO set buildsize=%%~zI
-    IF "%buildsize%" LEQ "%expandedromsize%" (
-        echo Fixing ROM header ...
-        @"../tools/fixheader" "../build/%buildname%.bin"
+    FOR /F %%I IN ("%buildname%.bin") DO (
+        IF "%%~zI" LEQ "%expandedromsize%" (
+            echo Fixing ROM header ...
+            @"../tools/fixheader" "../build/%buildname%.bin"
+        )
+        echo "%buildname%.bin" exists in build directory. Success!
     )
-    echo "%buildname%.bin" exists in build directory. Success!
 ) ELSE (
     echo "%buildname%.bin" does not exist, probably due to an assembly error. Check output.log.
 )

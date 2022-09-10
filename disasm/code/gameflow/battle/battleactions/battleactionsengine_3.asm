@@ -197,14 +197,14 @@ loc_A810:
 loc_A81E:
                 
                 move.w  #$10,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   loc_A82C
                 addq.w  #1,d1
 loc_A82C:
                 
                 move.w  #$10,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   loc_A83A
                 subq.w  #1,d1

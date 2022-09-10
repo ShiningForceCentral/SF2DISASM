@@ -577,7 +577,7 @@ loc_12E3A:
                 lea     (PALETTE_3_BASE).l,a1
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   
-                movea.l (p_plt_endKiss).l,a0
+                movea.l (p_plt_EndKiss).l,a0
                 lea     (PALETTE_2_CURRENT).l,a1
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   
@@ -1008,7 +1008,7 @@ loc_132C6:
                 cmpi.b  #1,((byte_FFB13C-$1000000)).w
                 bne.s   loc_132F6
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
                 bne.s   loc_132F0
                 moveq   #$FFFFFFFF,d1
@@ -1079,7 +1079,7 @@ loc_13358:
                 cmpi.b  #2,((byte_FFB13C-$1000000)).w
                 bne.s   loc_1337C
                 clr.w   d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #4,d2
                 bne.s   loc_13378
                 moveq   #$A,d1

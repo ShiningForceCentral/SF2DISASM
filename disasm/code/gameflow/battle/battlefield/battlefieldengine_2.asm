@@ -34,7 +34,7 @@ DetermineMuddleBattleaction:
                 cmp.b   d0,d1
                 bne.w   @Done           ; return d3=0 if the attacker and defender are different
                 moveq   #2,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 beq.w   @Done           ; random value with 50/50 chance of returning d3=0 or d3=1
                 moveq   #1,d3
                 bra.s   @Done
@@ -47,7 +47,7 @@ DetermineMuddleBattleaction:
                 cmp.b   d0,d1
                 bne.w   @Done
                 moveq   #2,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 beq.w   @Done
                 moveq   #1,d3
 @Done:

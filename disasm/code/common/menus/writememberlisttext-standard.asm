@@ -36,25 +36,27 @@ headerLength = headerLength-1
                 
                 ; Determine header string
                 move.b  ((CURRENT_MEMBERLIST_PAGE-$1000000)).w,d0
-                if (secondMemberListStatsPage=1)
-                    bne.s   @CheckStatsPage
-                    lea     aClassLvExp(pc), a0
-                    bra.s   @WriteHeaderString
-@CheckStatsPage:    cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMP,d0
-                	bne.s   @CheckStatsPage2
-                    lea     aHpMaxMpMax(pc), a0
-                    bra.s   @WriteHeaderString
-@CheckStatsPage2:   cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,d0
-                    bne.s   @Default
-                    lea     aAttDefAgiMov(pc), a0
-                else
-                    bne.s   @CheckStatsPage
-                    lea     aClassLevExp(pc), a0
-                    bra.s   @WriteHeaderString
-@CheckStatsPage:    cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,d0
-                    bne.s   @Default
-                    lea     aHpMpAtDfAgMv(pc), a0
-                endif
+            if (secondMemberListStatsPage=1)
+                bne.s   @CheckStatsPage
+                lea     aClassLvExp(pc), a0
+                bra.s   @WriteHeaderString
+@CheckStatsPage:cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMP,d0
+                bne.s   @CheckStatsPage2
+                lea     aHpMaxMpMax(pc), a0
+                bra.s   @WriteHeaderString
+@CheckStatsPage2:
+                
+                cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,d0
+                bne.s   @Default
+                lea     aAttDefAgiMov(pc), a0
+            else
+                bne.s   @CheckStatsPage
+                lea     aClassLevExp(pc), a0
+                bra.s   @WriteHeaderString
+@CheckStatsPage:cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,d0
+                bne.s   @Default
+                lea     aHpMpAtDfAgMv(pc), a0
+            endif
                 bra.s   @WriteHeaderString
 @Default:       lea     aAttackDefense(pc), a0 ; default to "new attack and defense"
                 
@@ -75,7 +77,7 @@ headerLength = headerLength-1
                 
                 move.l  a1,-(sp)        ; -> stash current character's name offset
                 move.w  d0,d1
-                jsr     IsInBattleParty
+                jsr     IsInBattleParty?
                 beq.s   @DetermineNameColor
                 move.w  #VDPTILE_SWORD_ICON|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-2(a1) 
                                                         ; display sword icon to denote battle party members
@@ -104,14 +106,14 @@ headerLength = headerLength-1
                 
                 ; Write class name
                 move.w  currentMember(a6),d0
-                if (FULL_CLASS_NAMES=1)
-                    jsr     GetClassAndFullName
-                    cmpi.w  #10,d7
-                    blt.s   @Continue
-                    lea     -WINDOW_MEMBERLIST_OFFSET_NEXT_LINE(a1),a1
-                else
-                    jsr     GetClassAndName
-                endif
+            if (FULL_CLASS_NAMES=1)
+                jsr     GetClassAndFullName
+                cmpi.w  #10,d7
+                blt.s   @Continue
+                lea     -WINDOW_MEMBERLIST_OFFSET_NEXT_LINE(a1),a1
+            else
+                jsr     GetClassAndName
+            endif
 @Continue:      moveq   #-WINDOW_MEMBERLIST_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movea.l (sp)+,a1
@@ -129,38 +131,38 @@ headerLength = headerLength-1
                 bsr.w   WriteLvOrExpValue
                 
 @WriteEntry_Stats:
-                if (secondMemberListStatsPage=1)
-                    cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMP,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
-                    bne.s   @WriteEntry_Stats2
-                    move.w  currentMember(a6),d0              ; Write current HP
-                    jsr     GetCurrentHP
-                    bsr.w   WriteStatValue
-                    move.w  #VDPTILE_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
-                    move.w  currentMember(a6),d0              ; Write max HP
-                    jsr     GetMaxHP
-                    bsr.w   WriteStatValue
-                    addq.w  #4,a1
-                    move.w  currentMember(a6),d0              ; Write current MP
-                    jsr     GetCurrentMP
-                    bsr.w   WriteStatValue
-                    move.w  #VDPTILE_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
-                    move.w  currentMember(a6),d0              ; Write max MP
-                    jsr     GetMaxMP
-                    bsr.w   WriteStatValue
-                endif
+            if (secondMemberListStatsPage=1)
+                cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMP,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
+                bne.s   @WriteEntry_Stats2
+                move.w  currentMember(a6),d0              ; Write current HP
+                jsr     GetCurrentHP
+                bsr.w   WriteStatValue
+                move.w  #VDPTILE_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
+                move.w  currentMember(a6),d0              ; Write max HP
+                jsr     GetMaxHP
+                bsr.w   WriteStatValue
+                addq.w  #4,a1
+                move.w  currentMember(a6),d0              ; Write current MP
+                jsr     GetCurrentMP
+                bsr.w   WriteStatValue
+                move.w  #VDPTILE_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
+                move.w  currentMember(a6),d0              ; Write max MP
+                jsr     GetMaxMP
+                bsr.w   WriteStatValue
+            endif
                 
 @WriteEntry_Stats2:
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.w   @WriteEntry_Unequippable
-                if (secondMemberListStatsPage=0)
-                    move.w  currentMember(a6),d0    ; Write current HP
-                    jsr     GetCurrentHP
-                    bsr.w   WriteStatValue
-                    addq.w  #2,a1
-                    move.w  currentMember(a6),d0    ; Write current MP
-                    jsr     GetCurrentMP
-                    bsr.w   WriteStatValue
-                endif
+            if (secondMemberListStatsPage=0)
+                move.w  currentMember(a6),d0    ; Write current HP
+                jsr     GetCurrentHP
+                bsr.w   WriteStatValue
+                addq.w  #2,a1
+                move.w  currentMember(a6),d0    ; Write current MP
+                jsr     GetCurrentMP
+                bsr.w   WriteStatValue
+            endif
                 addq.w  #2,a1
                 
                 ; Write ATT
@@ -192,7 +194,7 @@ headerLength = headerLength-1
                 
                 move.w  currentMember(a6),d0
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
-                jsr     IsWeaponOrRingEquippable
+                jsr     IsWeaponOrRingEquippable?
                 bcs.s   @WriteEntry_NewATTandDEF
                 
                 lea     aUnequippable(pc), a0
@@ -204,9 +206,9 @@ headerLength = headerLength-1
                 
 @WriteEntry_NewATTandDEF:
                 jsr     GetEquipNewATTandDEF  ; Get new ATT and DEF -> D2, D3
-                if (THREE_DIGITS_STATS=0)
-                    addq.w  #2,a1
-                endif
+            if (THREE_DIGITS_STATS=0)
+                addq.w  #2,a1
+            endif
                 
                 ; Write current -> new ATT
                 move.w  currentMember(a6),d0
@@ -237,15 +239,15 @@ headerLength = headerLength-1
     ; End of function WriteMemberListText
 
 aName:          dc.b 'NAME'
-                if (secondMemberListStatsPage=1)
-aClassLvExp:        dc.b 'CLASS     LV EXP'
-aHpMaxMpMax:        dc.b ' HP/MAX   MP/MAX'
-aAttDefAgiMov:      dc.b ' ATT DEF AGI MOV'
-aAttackDefense:     dc.b 'ATTACK   DEFENSE'
-                else
-aClassLevExp:       dc.b 'CLASS     LEV EXP'
-aHpMpAtDfAgMv:      dc.b 'HP MP AT DF AG MV'
-aAttackDefense:     dc.b 'ATTACK   DEFENSE',0
-                endif
+            if (secondMemberListStatsPage=1)
+aClassLvExp:    dc.b 'CLASS     LV EXP'
+aHpMaxMpMax:    dc.b ' HP/MAX   MP/MAX'
+aAttDefAgiMov:  dc.b ' ATT DEF AGI MOV'
+aAttackDefense: dc.b 'ATTACK   DEFENSE'
+            else
+aClassLevExp:   dc.b 'CLASS     LEV EXP'
+aHpMpAtDfAgMv:  dc.b 'HP MP AT DF AG MV'
+aAttackDefense: dc.b 'ATTACK   DEFENSE',0
+            endif
 
                 align

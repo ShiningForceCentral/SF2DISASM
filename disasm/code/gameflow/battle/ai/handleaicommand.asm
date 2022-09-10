@@ -4,8 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = command code (like Heal, Attack, etc.)
+; In: d0.b = combatant index
+;     d1.b = command code (like Heal, Attack, etc.)
 
 
 HandleAiCommand:

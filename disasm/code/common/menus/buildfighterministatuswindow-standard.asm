@@ -96,10 +96,10 @@ combatant = -2
                 bsr.w   CopyMinistatusWindowTileColumn
                 bsr.w   CopyMinistatusWindowTileColumn
                 bsr.w   CopyMinistatusWindowTileColumn
-                if (THREE_DIGITS_STATS=1)
-                    suba.w  #10,a0
-                    bsr.w   CopyMinistatusWindowTileColumn
-                endif
+            if (THREE_DIGITS_STATS=1)
+                suba.w  #10,a0
+                bsr.w   CopyMinistatusWindowTileColumn
+            endif
                 bsr.w   CopyMinistatusWindowTileColumn
                 bsr.w   CopyMinistatusWindowTileColumn
                 
@@ -210,11 +210,11 @@ WriteStatValueD0:
     ; End of function WriteStatValue
 
 aUnknownValue:  
-                if (THREE_DIGITS_STATS=1)
-                    dc.b '???',0
-                else
-                    dc.b '??'
-                endif
+            if (THREE_DIGITS_STATS=1)
+                dc.b '???',0
+            else
+                dc.b '??'
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -935,11 +935,11 @@ j_GetItemDefAddress:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetItemAndNumberHeld:
+j_GetItemBySlotAndHeldItemsNumber:
                 
-                jmp     GetItemAndNumberHeld(pc)
+                jmp     GetItemBySlotAndHeldItemsNumber(pc)
 
-    ; End of function j_GetItemAndNumberHeld
+    ; End of function j_GetItemBySlotAndHeldItemsNumber
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1095,11 +1095,11 @@ j_GetEquippableRings:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IsWeaponOrRingEquippable:
+j_IsWeaponOrRingEquippable?:
                 
-                jmp     IsWeaponOrRingEquippable(pc)
+                jmp     IsWeaponOrRingEquippable?(pc)
 
-    ; End of function j_IsWeaponOrRingEquippable
+    ; End of function j_IsWeaponOrRingEquippable?
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1125,31 +1125,31 @@ j_OrderItems:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IsItemCursed:
+j_IsItemCursed?:
                 
-                jmp     IsItemCursed(pc)
+                jmp     IsItemCursed?(pc)
 
-    ; End of function j_IsItemCursed
+    ; End of function j_IsItemCursed?
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IsItemUsableInBattle:
+j_IsItemUsableInBattle?:
                 
-                jmp     IsItemUsableInBattle(pc)
+                jmp     IsItemUsableInBattle?(pc)
 
-    ; End of function j_IsItemUsableInBattle
+    ; End of function j_IsItemUsableInBattle?
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IsItemUsableWeaponInBattle:
+j_IsItemUsableByCombatant?:
                 
-                jmp     IsItemUsableWeaponInBattle(pc)
+                jmp     IsItemUsableByCombatant?(pc)
 
-    ; End of function j_IsItemUsableWeaponInBattle
+    ; End of function j_IsItemUsableByCombatant?
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1595,11 +1595,11 @@ j_LeaveForce:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IsInBattleParty:
+j_IsInBattleParty?:
                 
-                jmp     IsInBattleParty(pc)
+                jmp     IsInBattleParty?(pc)
 
-    ; End of function j_IsInBattleParty
+    ; End of function j_IsInBattleParty?
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -4,12 +4,12 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Find specific item index + code offset to run when used in field
+; Find specific item index + code offset to run when used in field.
 ; 
-;       In: D1 = item entry
+;       In: d1.w = item entry
 
 
-UseFieldItem:
+UseItemOnField:
                 
                 
                 module
@@ -36,31 +36,31 @@ UseFieldItem:
                 bra.w   @Done
 rjt_FieldItemEffects:
                 
-                dc.w 3
+                dc.w ITEM_ANTIDOTE
                 dc.w FieldItem_CurePoison-rjt_FieldItemEffects
-                dc.w 5
+                dc.w ITEM_FAIRY_POWDER
                 dc.w FieldItem_CurePoisonAndParalysis-rjt_FieldItemEffects
-                dc.w 9
+                dc.w ITEM_POWER_WATER
                 dc.w FieldItem_IncreaseATT-rjt_FieldItemEffects
-                dc.w $A
+                dc.w ITEM_PROTECT_MILK
                 dc.w FieldItem_IncreaseDEF-rjt_FieldItemEffects
-                dc.w $B
+                dc.w ITEM_QUICK_CHICKEN
                 dc.w FieldItem_IncreaseAGI-rjt_FieldItemEffects
-                dc.w $C
+                dc.w ITEM_RUNNING_PIMENTO
                 dc.w FieldItem_IncreaseMOV-rjt_FieldItemEffects
-                dc.w $D
+                dc.w ITEM_CHEERFUL_BREAD
                 dc.w FieldItem_IncreaseHP-rjt_FieldItemEffects
-                dc.w $E
+                dc.w ITEM_BRIGHT_HONEY
                 dc.w FieldItem_IncreaseMP-rjt_FieldItemEffects
-                dc.w $F
+                dc.w ITEM_BRAVE_APPLE
                 dc.w LevelUpCutscene-rjt_FieldItemEffects
-                dc.w $FFFF
+                dc.w CODE_TERMINATOR_WORD
 @Done:
                 
                 movem.l (sp)+,d0-d1/d6-d7
                 rts
 
-    ; End of function UseFieldItem
+    ; End of function UseItemOnField
 
                 
                 modend

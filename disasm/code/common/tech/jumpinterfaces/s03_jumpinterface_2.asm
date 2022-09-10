@@ -25,21 +25,21 @@ j_DebugFlagSetter:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SpecialBattle:
+j_DisplayTimerWindow:
                 
                 jmp     DisplayTimerWindow(pc)
 
-    ; End of function j_SpecialBattle
+    ; End of function j_DisplayTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DisplayTimerWindow:
+j_RemoveTimerWindow:
                 
                 jmp     RemoveTimerWindow(pc)
 
-    ; End of function j_DisplayTimerWindow
+    ; End of function j_RemoveTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================

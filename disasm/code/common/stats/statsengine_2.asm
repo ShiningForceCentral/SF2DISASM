@@ -829,15 +829,17 @@ DecreaseCurrentMOV:
 
 
 GetClassAndFullName:
-                if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
-                    bsr.w   GetClass
-GetFullClassName:   lea     tbl_FullClassNames,a0
-                    bra.s   FindName
-                endif
+            if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
+                bsr.w   GetClass
+GetFullClassName:
+                
+                lea     tbl_FullClassNames,a0
+                bra.s   FindName
+            endif
 GetClassAndName:
-                if (STANDARD_BUILD=1)
-                    bsr.w   GetClass
-                endif
+            if (STANDARD_BUILD=1)
+                bsr.w   GetClass
+            endif
 GetClassName:
                 
                 movea.l (p_tbl_ClassNames).l,a0
@@ -1277,11 +1279,11 @@ GetItemDefAddress:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index, D1 = item slot
-; Out: D1 = item entry, D2 = number of items held
+; In: d0.b = combatant index, d1.w = item slot
+; Out: d1.w = item entry, d2.l = number of items held
 
 
-GetItemAndNumberHeld:
+GetItemBySlotAndHeldItemsNumber:
                 
                 movem.l d0/d3/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
@@ -1304,14 +1306,12 @@ GetItemAndNumberHeld:
                 movem.l (sp)+,d0/d3/a0
                 rts
 
-    ; End of function GetItemAndNumberHeld
+    ; End of function GetItemBySlotAndHeldItemsNumber
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = item index
-; 
-; Out: D2 = equipment type (0 = item, 1 = weapon, $FFFF = ring)
+; Get equipment type for item d1.w -> d2.w (0 = none, 1 = weapon, -1 = ring)
 
 
 GetEquipmentType:
@@ -1411,10 +1411,8 @@ GetEquippedItemByType:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item index
-; 
-; Out: D2 = 0 if item successfully added, 1 if no empty slot available
+; In: d0.b = combatant index, d1.w = item entry
+; Out: d2.w = 0 if item successfully added, 1 if no empty slot available
 
 
 AddItem:
@@ -1514,10 +1512,8 @@ RepairItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item slot
-; 
-; Out: D2 = 0 if equipped, 1 if not, 2 if equipped and cursed, 3 if item is nothing
+; In: d0.b = combatant index, d1.w = item slot
+; Out: d2.w = 0 if equipped, 1 if not, 2 if equipped and cursed, 3 if item is nothing
 
 
 EquipItemBySlot:
@@ -1530,7 +1526,7 @@ EquipItemBySlot:
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1 ; test if item is "nothing"
                 beq.s   @Nothing        
-                bsr.s   IsItemEquippableAndCursed
+                bsr.s   IsItemEquippableAndCursed?
                 cmpi.w  #1,d2
                 beq.s   @Goto_Done      ; skip if item is not equippable
                 bset    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
@@ -1550,15 +1546,12 @@ EquipItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Is item equippable, and is it cursed ?
+; Is item d1.w equippable by ally d0.b and if so, is it cursed?
 ; 
-;       In: D0 = ally index
-;           D1 = item index
-; 
-;       Out: D2 = 0 if equippable, 1 if not, 2 if equippable and cursed
+;   Out: d2.w = 0 if equippable, 1 if not, 2 if equippable and cursed
 
 
-IsItemEquippableAndCursed:
+IsItemEquippableAndCursed?:
                 
                 movem.l d0-d1/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
@@ -1587,21 +1580,19 @@ IsItemEquippableAndCursed:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function IsItemEquippableAndCursed
+    ; End of function IsItemEquippableAndCursed?
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item slot
-; 
-; Out: D2 = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if nothing
+; In: d0.b = combatant index, d1.w = item slot
+; Out: d2.w = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if nothing
 
 
 UnequipItemBySlotIfNotCursed:
                 
                 movem.l d0-d1/a0,-(sp)
-                bsr.s   IsItemInSlotEquippedOrCursed
+                bsr.s   IsItemInSlotEquippedOrCursed?
                 tst.w   d2
                 bne.s   @Skip           ; skip if anything but equipped and not cursed
                 bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
@@ -1615,16 +1606,15 @@ UnequipItemBySlotIfNotCursed:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Is item in slot equipped, and if so, is it cursed ?
+; Is item in slot d1.w equipped by combatant d0.b, and if so, is it cursed?
 ; 
-;       In: D0 = ally index
-;           D1 = item slot
+;   In: d0.b = combatant index, d1.w = item slot
 ; 
-;       Out: A0 = pointer to item entry
-;            D2 = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if neither
+;   Out: a0 = pointer to item entry
+;        d2.w = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if neither
 
 
-IsItemInSlotEquippedOrCursed:
+IsItemInSlotEquippedOrCursed?:
                 
                 bsr.w   GetCombatantEntryAddress
                 add.w   d1,d1
@@ -1661,7 +1651,7 @@ IsItemInSlotEquippedOrCursed:
                 
                 rts
 
-    ; End of function IsItemInSlotEquippedOrCursed
+    ; End of function IsItemInSlotEquippedOrCursed?
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1675,7 +1665,7 @@ IsItemInSlotEquippedOrCursed:
 UnequipItemBySlot:
                 
                 movem.l d0-d1/a0,-(sp)
-                bsr.s   IsItemInSlotEquippedOrCursed
+                bsr.s   IsItemInSlotEquippedOrCursed?
                 bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
                 movem.l (sp)+,d0-d1/a0
                 bra.w   ApplyStatusEffectsAndItemsOnStats
@@ -1724,8 +1714,10 @@ DropItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = char entry address + offset to items
-;     D0 = item slot
+; In: a0 = combatant items address
+;     d0.w = item slot
+; 
+; Out: d2.w = 0
 
 
 RemoveAndArrangeItems:
@@ -1749,8 +1741,8 @@ RemoveAndArrangeItems:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item slot
+; In: d0.b = combatant index, d1.w = item slot
+; Out: d2.w = 3 if nothing to remove, 0 otherwise
 
 
 RemoveItemBySlot:
@@ -1884,7 +1876,7 @@ GetEquippableItemsByType:
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Next           ; next if empty slot
-                bsr.s   IsItemEquippable
+                bsr.s   IsItemEquippable?
                 bcc.s   @Next           ; branch if not equippable
                 move.w  d1,(a2)+        ; item index -> equippable items list
                 move.w  d4,(a2)+        ; item slot -> equippable items list
@@ -1904,12 +1896,14 @@ GetEquippableItemsByType:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = item index
-;     D2 = item type bitmask (for ANDing the item type bitfield)
-;     D3 = class equip bitmask (for ANDing the item equip bitfield)
+; In: d1.w = item index
+;     d2.w = item type bitmask (for ANDing the item type bitfield)
+;     d3.l = class equip bitmask (for ANDing the item equip bitfield)
+; 
+; Out: CCR carry-bit set if true
 
 
-IsItemEquippable:
+IsItemEquippable?:
                 
                 movem.l a0,-(sp)
                 bsr.w   GetItemDefAddress
@@ -1925,13 +1919,16 @@ IsItemEquippable:
                 movem.l (sp)+,a0
                 rts
 
-    ; End of function IsItemEquippable
+    ; End of function IsItemEquippable?
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Is weapon or ring d1.w equippable by combatant d0.w?
+; Return CCR carry-bit set if true.
 
-IsWeaponOrRingEquippable:
+
+IsWeaponOrRingEquippable?:
                 
                 movem.l d0/d2-d6/a0,-(sp)
                 move.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2
@@ -1939,11 +1936,11 @@ IsWeaponOrRingEquippable:
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
                 moveq   #1,d3
                 lsl.l   d0,d3
-                bsr.s   IsItemEquippable
+                bsr.s   IsItemEquippable?
                 movem.l (sp)+,d0/d2-d6/a0
                 rts
 
-    ; End of function IsWeaponOrRingEquippable
+    ; End of function IsWeaponOrRingEquippable?
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1963,7 +1960,7 @@ GetEquipNewATTandDEF:
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
                 moveq   #1,d3
                 lsl.l   d0,d3
-                bsr.s   IsItemEquippable
+                bsr.s   IsItemEquippable?
                 movem.w (sp)+,d0/d2-d3
                 bcc.w   @Skip           ; skip if item is not equippable
                 movem.l d1/a0,-(sp)
@@ -2090,10 +2087,10 @@ loc_90A2:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Is item D1 cursed ? CCR carry-bit set if true
+; Is item d1.w cursed? Return CCR carry-bit set if true.
 
 
-IsItemCursed:
+IsItemCursed?:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
@@ -2109,15 +2106,15 @@ IsItemCursed:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function IsItemCursed
+    ; End of function IsItemCursed?
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; carry set : YES
+; Is item d1.w usable in battle? Return CCR carry-bit set if true.
 
 
-IsItemUsableInBattle:
+IsItemUsableInBattle?:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
@@ -2133,37 +2130,38 @@ IsItemUsableInBattle:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function IsItemUsableInBattle
+    ; End of function IsItemUsableInBattle?
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; carry set : NO
+; Is item d1.w allowed to be used in battle by combatant d0.w?
+; Return CCR carry-bit set if true.
 
 
-IsItemUsableWeaponInBattle:
+IsItemUsableByCombatant?:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetEquipmentType
                 tst.w   d2
-                beq.s   loc_90FA
-                bsr.w   IsWeaponOrRingEquippable
-                bcc.s   loc_9100
-                bsr.s   IsItemUsableInBattle
-                bcc.s   loc_9100
-loc_90FA:
+                beq.s   @Usable         ; allow usage if item is not a type of equipment
+                bsr.w   IsWeaponOrRingEquippable?
+                bcc.s   @NotUsable      ; if weapon or ring is not equippable, disallow usage
+                bsr.s   IsItemUsableInBattle?
+                bcc.s   @NotUsable      ; if item has no use spell, disallow usage
+@Usable:
                 
                 ori     #1,ccr
-                bra.s   loc_9102
-loc_9100:
+                bra.s   @Done
+@NotUsable:
                 
                 tst.b   d0
-loc_9102:
+@Done:
                 
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function IsItemUsableWeaponInBattle
+    ; End of function IsItemUsableByCombatant?
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2215,7 +2213,7 @@ loc_915A:
                 
                 move.b  (a0)+,d0
                 clr.w   d1
-                bsr.w   GetItemAndNumberHeld
+                bsr.w   GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
                 beq.s   loc_9182
                 move.w  d2,d7           ; number of items
@@ -2223,7 +2221,7 @@ loc_915A:
 loc_916A:
                 
                 move.w  d7,d1
-                bsr.w   GetItemAndNumberHeld
+                bsr.w   GetItemBySlotAndHeldItemsNumber
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmp.w   d3,d1
                 bne.s   loc_917E
@@ -2247,10 +2245,8 @@ loc_918E:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = entity index
-;     D1 = item index
-; 
-; Out: D2 = item slot ($FFFF if not held)
+; In: d0.b = combatant index, d1.w = item index
+; Out: d2.w = item slot (-1 if not found)
 
 
 GetItemSlotContainingIndex:
@@ -2260,19 +2256,20 @@ GetItemSlotContainingIndex:
                 andi.w  #ITEMENTRY_MASK_INDEX,d3
                 moveq   #0,d2
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d7
-loc_91A2:
+@Loop:
                 
                 move.w  d2,d1
                 move.l  d2,-(sp)
-                jsr     GetItemAndNumberHeld(pc)
+                jsr     GetItemBySlotAndHeldItemsNumber(pc)
                 move.l  (sp)+,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmp.b   d3,d1
-                beq.w   loc_91C0
+                beq.w   @Done
                 addq.w  #1,d2
-                dbf     d7,loc_91A2
-                move.w  #$FFFF,d2
-loc_91C0:
+                dbf     d7,@Loop
+                
+                move.w  #-1,d2
+@Done:
                 
                 movem.l (sp)+,d1/d3/d7
                 rts

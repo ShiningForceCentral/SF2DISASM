@@ -4,12 +4,12 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's map sprite index -> D4
+; Get mapsprite index for combatant d0.w -> d4.w
 
 
 GetAllyMapSprite:
                 
-                cmpi.w  #COMBATANT_ALLIES_NUMBER,d0 ; HARDCODED number of allies
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
                 blt.s   @CheckCurrentlyInBattle
                 move.w  d0,d4
                 bra.w   @Return         ; return if combatant is not an ally

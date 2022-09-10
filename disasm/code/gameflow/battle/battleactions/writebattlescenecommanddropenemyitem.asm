@@ -76,7 +76,7 @@ WriteBattlesceneScript_EnemyDropItem:
 @DetermineRandomDrop:
                 
                 moveq   #ENEMYITEMDROP_RANDOM_CHANCE,d0
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.w   @Done
                 bra.w   @DropItem
@@ -84,7 +84,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 tst.w   d1
                 beq.w   @DropItem       ; if battle index not in list
                 moveq   #3,d0           ; else
-                jsr     (GetRandomOrDebugValue).w
+                jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 beq.w   @Done
 @DropItem:
