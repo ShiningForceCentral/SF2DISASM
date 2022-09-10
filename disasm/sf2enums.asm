@@ -1923,8 +1923,11 @@ hpMpPage                = 1
 statsPage               = 2
 newAttAndDefPage        = 3
 newAttAndDefEntryOffset = newAttAndDefEntryOffset-4
-entryStartOffset        = entryStartOffset+2
 levelEntryOffset        = levelEntryOffset-2
+    endif
+
+    if (secondMemberListStatsPage|(STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES)=1)
+entryStartOffset        = entryStartOffset+2
     endif
 
 WINDOW_MEMBERLIST_HIGHLIGHTSPRITES_COUNTER: equ highlightSpritesCounter

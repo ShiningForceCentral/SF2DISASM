@@ -16,8 +16,10 @@ selectedMember = -2
 headerStringOffset = 8
 headerLength = 17
     if (secondMemberListStatsPage=1)
-headerStringOffset = headerStringOffset+2
 headerLength = headerLength-1
+    endif
+    if (secondMemberListStatsPage|(STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES)=1)
+headerStringOffset = headerStringOffset+2
     endif
                 
                 link    a6,#-8
