@@ -33,14 +33,16 @@ cutoff = -1
 
 WriteBattlesceneScript_DetermineDodge:
                 
+                tst.b   debugDodge(a2)
+                bne.s   @Success    ; always dodge if dodge debug flag is set
+                
+                ; Is target stunned or asleep?
                 move.b  (a5),d0
                 bsr.w   GetStatusEffects
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_SLEEP,d1
-                bne.w   @Return
-                tst.b   debugDodge(a2)
-                bne.s   @Success
+                bne.s   @Return     ; never dodge if true
                 
-                ; Check if attacker is muddled
+                ; Is attacker muddled?
                 move.w  #CHANCE_TO_DODGE_FOR_MUDDLED_ATTACKER,d2    ; 1/2 chance to dodge if attacker is muddled
                 move.b  (a4),d0
                 bsr.w   GetStatusEffects
@@ -50,24 +52,24 @@ WriteBattlesceneScript_DetermineDodge:
                 move.l  a0,-(sp)
                 moveq   #0,d2       ; zero property bytes
                 
-                ; Check if target is either flying or hovering
+                ; Is target airborne? (i.e., either flying or hovering)
                 lea     tbl_AirborneMovetypes(pc), a0
                 move.b  (a5),d0
                 bsr.w   GetMoveType
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcs.s   @Default
+                bcs.s   @DefaultChance
                 
-                ; Check if attacker is an archer
+                ; Is attacker an archer?
                 lea     tbl_ArcherMovetypes(pc), a0
                 move.b  (a4),d0
                 bsr.w   GetMoveType
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcc.s   @Default
+                bcc.s   @DefaultChance
                 
-                moveq   #CHANCE_TO_DODGE_FOR_AIRBORNE_TARGET,d2 ; 1/8 chance to dodge if target is airborne, and if attacker is not an archer
+                moveq   #CHANCE_TO_DODGE_FOR_AIRBORNE_TARGET,d2 ; 1/8 chance to dodge if target is airborne and attacker is not an archer
                 bra.s   @Done
                 
-@Default:       moveq   #CHANCE_TO_DODGE_DEFAULT,d2             ; 1/32 chance to dodge otherwise
+@DefaultChance: moveq   #CHANCE_TO_DODGE_DEFAULT,d2             ; 1/32 chance to dodge otherwise
 @Done:          movea.l (sp)+,a0
 
 @DetermineDodge:
@@ -89,7 +91,7 @@ WriteBattlesceneScript_DetermineDodge:
                 ; Determine dodge
                 move.w  #256,d0
                 jsr     (GenerateRandomOrDebugNumber).w
-                cmp.w   d0,d2
+                cmp.w   d2,d0
                 bhs.s   @Return
                 
                 ; Successfully dodge
