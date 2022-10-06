@@ -920,7 +920,7 @@ sub_10800:
                 lea     (FF8804_LOADING_SPACE).l,a0
                 cmpi.w  #$F,d6
                 blt.s   loc_10810
-                adda.w  #$C0,a0 
+                adda.w  #ICONTILES_BYTESIZE,a0 
 loc_10810:
                 
                 lea     ($B800).l,a1
@@ -939,7 +939,7 @@ sub_10820:
                 lea     (byte_FF8984).l,a0
                 cmpi.w  #$F,d6
                 blt.s   loc_10830
-                adda.w  #$C0,a0 
+                adda.w  #ICONTILES_BYTESIZE,a0 
 loc_10830:
                 
                 lea     (byte_FF8E04).l,a1
@@ -960,7 +960,7 @@ sub_1084A:
                 lea     (byte_FF8B04).l,a0
                 cmpi.w  #$F,d6
                 blt.s   loc_1085A
-                adda.w  #$C0,a0 
+                adda.w  #ICONTILES_BYTESIZE,a0 
 loc_1085A:
                 
                 lea     (byte_FF8F04).l,a1
@@ -1063,7 +1063,7 @@ sub_10920:
                 lea     (byte_FF8C84).l,a0
                 cmpi.w  #$F,d6
                 blt.s   loc_10930
-                adda.w  #$C0,a0 
+                adda.w  #ICONTILES_BYTESIZE,a0 
 loc_10930:
                 
                 lea     ($B9C0).l,a1
@@ -1556,7 +1556,7 @@ spr_SpellLevelHighlight:
 
 sub_10DE2:
                 
-                lea     (SPRITE_08).l,a1
+                lea     (SPRITE_CURSOR_DATA).l,a1
                 lea     spr_SpellLevelHighlight(pc), a0
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+

@@ -28,7 +28,7 @@ loc_1ACA0C:
 loc_1ACA1E:
                 
                 move.w  d7,d0
-                mulu.w  #$C,d0
+                mulu.w  #BATTLESPRITESET_COMBATANT_ENTRY_SIZE,d0
                 adda.w  d0,a0
                 move.b  (a0),d0
                 cmpi.b  #3,d0

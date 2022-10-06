@@ -109,9 +109,9 @@ ExecuteAiControl:
                 beq.s   @CheckSpecialMoveOrders ; skip if ally
                 
                 ; If enemy, handle special attackers
-                bsr.w   GetEnemyIndex   
+                bsr.w   GetEnemyIndex
                 
-                ; Check if Prism Flower
+                ; Check if laser attacker
                 cmpi.w  #ENEMY_PRISM_FLOWER,d1
                 bne.s   @CheckZeonGuard
                 bsr.w   HandleLineAttackerAi
@@ -123,7 +123,8 @@ ExecuteAiControl:
                 bsr.w   HandleLineAttackerAi
                 bra.w   @Done
 @CheckBurstRock:
-                
+
+                ; Check if exploding attacker
                 cmpi.w  #ENEMY_BURST_ROCK,d1
                 bne.s   @CheckSpecialMoveOrders
                 bsr.w   HandleExploderAi

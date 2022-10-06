@@ -100,7 +100,7 @@ loc_1291E:
                 move.l  var_32(a6),((ENTITY_SPECIAL_SPRITE_DESTINATION-$1000000)).w
                 lea     (PALETTE_1_BASE).l,a0
                 lea     (PALETTE_1_CURRENT).l,a1
-                move.w  #$80,d7 
+                move.w  #CRAM_SIZE,d7 
                 jsr     (CopyBytes).w   
                 jsr     (ApplyVIntCramDma).w
                 unlk    a6
@@ -637,7 +637,7 @@ CreateGoldWindow:
                 addq.w  #1,d0
                 move.w  d0,((word_FFB086-$1000000)).w
                 move.l  a1,goldWindowTilesEnd(a6)
-                bsr.w   sub_14B28       
+                bsr.w   WriteGoldInfo       
                 move.w  ((word_FFB086-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$1617,d1
@@ -668,7 +668,7 @@ sub_12F5E:
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
                 move.l  a1,goldWindowTilesEnd(a6)
-                bsr.w   sub_14B28       
+                bsr.w   WriteGoldInfo       
                 move.w  ((word_FFB086-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -1061,39 +1061,42 @@ return_13326:
 
 
 sub_13328:
-                
+                module
                 tst.b   ((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
-                beq.w   return_13386
+                beq.w   @Return
                 cmpi.b  #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 bne.w   loc_13388
+				
                 tst.b   ((byte_FFB13C-$1000000)).w
-                beq.w   return_13386
+                beq.w   @Return
                 cmpi.b  #1,((byte_FFB13C-$1000000)).w
                 bne.s   loc_13358
+				
                 moveq   #$A,d1
                 bsr.w   sub_133A0
                 bsr.w   sub_13F14
-                bra.w   return_13386
+                bra.w   @Return
 loc_13358:
                 
                 cmpi.b  #2,((byte_FFB13C-$1000000)).w
                 bne.s   loc_1337C
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
-                cmpi.w  #4,d2
+                cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 bne.s   loc_13378
+				
                 moveq   #$A,d1
                 bsr.w   sub_133A0
                 bsr.w   sub_13F14
 loc_13378:
                 
-                bra.w   return_13386
+                bra.w   @Return
 loc_1337C:
                 
                 moveq   #$A,d1
                 bsr.w   sub_133A0
                 bsr.w   sub_14108       
-return_13386:
+@Return:
                 
                 rts
 loc_13388:
@@ -1103,6 +1106,7 @@ loc_13388:
                 bsr.w   sub_1445A       
                 rts
 
+                modend
     ; End of function sub_13328
 
 
@@ -1136,7 +1140,7 @@ sub_133A0:
 loc_133A8:
                 
                 move.w  d0,-(sp)
-                lea     (SPRITE_08).l,a0
+                lea     (SPRITE_CURSOR_DATA).l,a0
                 lea     spr_MemberListTextHighlight(pc), a1
                 cmpi.w  #7,d1
                 bge.s   loc_133C0
@@ -1159,12 +1163,14 @@ loc_133CC:
                 move.w  d2,VDPSPRITE_OFFSET_SIZE(a0)
                 move.w  (a1)+,VDPSPRITE_OFFSET_TILE(a0)
                 move.w  (a1)+,VDPSPRITE_OFFSET_X(a0)
-                addq.l  #8,a0
+                addq.l  #VDP_SPRITE_SIZE,a0
                 dbf     d7,loc_133CC
+				
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 tst.w   ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w
                 beq.s   loc_13404
+				
                 cmpi.w  #7,d1
                 blt.s   loc_13404
                 move.w  #$97,VDPSPRITE_OFFSET_X(a0) 
@@ -1173,13 +1179,14 @@ loc_13404:
                 
                 move.w  #WINDOW_MEMBERLIST_SPRITELINK_DOWNARROW,VDPSPRITE_OFFSET_SIZE(a0)
                 move.w  #VDPTILE_V_ARROW|VDPTILE_FLIP|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
-                addq.l  #8,a0
+                addq.l  #VDP_SPRITE_SIZE,a0
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 move.w  ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w,d0
                 addq.w  #5,d0
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d0
                 bge.s   loc_13438
+				
                 cmpi.w  #7,d1
                 blt.s   loc_13438
                 move.w  #$97,VDPSPRITE_OFFSET_X(a0) 

@@ -27,7 +27,7 @@ GenerateRandomNumber:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 WaitForRandomValueToMatch:
                 
                 movem.l d0-d5/a0-a6,-(sp)
@@ -61,7 +61,7 @@ loc_164A:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 GetRandomValueUnsigned:
                 
                 movem.l d0-d5/a0-a6,-(sp)

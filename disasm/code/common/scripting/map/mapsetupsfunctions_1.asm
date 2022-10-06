@@ -241,7 +241,7 @@ loc_476D6:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 sub_476DC:
                 
                 trap    #VINT_FUNCTIONS

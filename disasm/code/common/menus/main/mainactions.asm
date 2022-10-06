@@ -654,6 +654,8 @@ PopulateGenericListWithCurrentForceMembers:
 
     ; End of function PopulateGenericListWithCurrentForceMembers
 
+;unused
+
 byte_21A16:     dc.b 0
                 dc.b 2
                 dc.b 0

@@ -20,9 +20,9 @@ nullsub_18010:
 
 InitializeBattlescene:
                 
-                lea     ((dword_FFB3C0-$1000000)).w,a0
+                lea     ((BATTLESCENE_BACKGROUND_MODIFICATION-$1000000)).w,a0
                 move.l  #byte_FFB59A,d2 
-                subi.l  #dword_FFB3C0,d2
+                subi.l  #BATTLESCENE_BACKGROUND_MODIFICATION,d2
                 lsr.l   #2,d2
                 subq.w  #1,d2
 @InitializeBattlesceneData_Loop:
@@ -76,7 +76,7 @@ InitializeBattlescene:
                 bsr.w   InitializeBattlescenePalettes
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     (PLANE_B_LAYOUT).l,a1
-                move.w  #511,d0
+                move.w  #LONGWORD_VIEWPLANE_COUNTER,d0
 @ClearPlanes_Loop:
                 
                 clr.l   (a0)+
@@ -174,7 +174,7 @@ InitializeBattlescene:
                 
                 ; Load ground VDP sprite
                 lea     spr_BattlesceneGround(pc), a0
-                lea     ((SPRITE_14-$1000000)).w,a1
+                lea     ((SPRITE_GROUND_DATA-$1000000)).w,a1
                 lea     (word_FFAFAE).l,a2
                 moveq   #2,d0
 @LoadGroundVdpSprite_Loop:
@@ -268,9 +268,9 @@ InitializeBattlescene:
                 move.w  #$16,d0
                 clr.w   d1
                 movem.w d0-d1,-(sp)
-                bsr.w   sub_193B2       
+                bsr.w   sub_193B2
                 movem.w (sp)+,d0-d1
-                bsr.w   sub_19504       
+                bsr.w   sub_19504
 @StartFadeInAndPlayMusic:
                 
                 jsr     (WaitForVInt).w
@@ -289,7 +289,7 @@ InitializeBattlescene:
                 cmpi.b  #$FF,((BATTLESCENE_BACKGROUND-$1000000)).w
                 beq.s   @WaitForNextFrame
                 
-                lea     ((SPRITE_14_Y-$1000000)).w,a0
+                lea     ((SPRITE_GROUND_Y-$1000000)).w,a0
                 moveq   #2,d1
 @MoveGroundToPosition_Loop:
                 
@@ -907,10 +907,10 @@ loc_1888C:
                 bsr.w   sub_1892A
                 move.w  (sp)+,d0
                 clr.w   d1
-                bsr.w   sub_193B2       
+                bsr.w   sub_193B2
                 move.w  (sp)+,d0
                 clr.w   d1
-                bsr.w   sub_19504       
+                bsr.w   sub_19504
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 move.b  ((byte_FFB56F-$1000000)).w,d1
                 andi.w  #2,d1
@@ -965,7 +965,7 @@ loc_18908:
                 move.w  d0,((word_FFB3FA-$1000000)).w
                 cmpi.b  #$FF,((BATTLESCENE_BACKGROUND-$1000000)).w
                 beq.s   loc_18922
-                lea     ((SPRITE_14_Y-$1000000)).w,a0
+                lea     ((SPRITE_GROUND_Y-$1000000)).w,a0
                 moveq   #2,d2
 loc_1891A:
                 
@@ -1018,7 +1018,7 @@ bsc06_switchEnemies:
                 bsr.w   sub_1F1CC
                 clr.w   d6
                 bsr.w   sub_1F1F0
-                lea     ((SPRITE_14_TILE_FLAGS-$1000000)).w,a0
+                lea     ((SPRITE_GROUND_TILE_FLAGS-$1000000)).w,a0
                 bset    #7,(a0)
                 bset    #7,8(a0)
                 bset    #7,$10(a0)
@@ -1052,7 +1052,7 @@ loc_189AE:
                 move.w  (sp)+,d0
                 
                 move.w  2(a6),d1
-                bsr.w   sub_19E96       
+                bsr.w   sub_19E96
                 bcc.s   loc_189DC
                 moveq   #4,d1
 loc_189DC:
@@ -1192,7 +1192,7 @@ loc_18B30:
                 jsr     (WaitForVInt).w
                 tst.w   d0
                 bne.s   loc_18B30
-                lea     ((SPRITE_14_TILE_FLAGS-$1000000)).w,a0
+                lea     ((SPRITE_GROUND_TILE_FLAGS-$1000000)).w,a0
                 bclr    #7,(a0)
                 bclr    #7,8(a0)
                 bclr    #7,$10(a0)
@@ -1548,9 +1548,9 @@ loc_18E6E:
                 bsr.w   sub_1F254
                 move.w  (sp)+,d0
                 movem.w d0-d1,-(sp)
-                bsr.w   sub_193B2       
+                bsr.w   sub_193B2
                 movem.w (sp)+,d0-d1
-                bsr.w   sub_19504       
+                bsr.w   sub_19504
                 jsr     (sub_1942).w    
                 jsr     (WaitForVInt).w
                 movem.w (sp)+,d0/d4-d5
@@ -2132,7 +2132,7 @@ loc_19378:
                 move.w  d1,d0
                 asr.w   #8,d0
                 ext.w   d1
-                bsr.s   sub_193C4       
+                bsr.s   sub_193C4
                 move.w  (sp)+,d1
                 bsr.w   sub_19546
                 jmp     (sub_1942).w    
@@ -2166,7 +2166,7 @@ sub_1939E:
                 move.w  d1,d0
                 asr.w   #8,d0
                 ext.w   d1
-                bsr.s   sub_193C4       
+                bsr.s   sub_193C4
                 move.w  (sp)+,d1
                 bsr.w   sub_1955E
                 jmp     (sub_1942).w    
@@ -2182,9 +2182,9 @@ sub_1939E:
 sub_193B2:
                 
                 movem.w d0-d1,-(sp)
-                bsr.s   sub_193C4       
+                bsr.s   sub_193C4
                 movem.w (sp)+,d0-d1
-                bsr.w   sub_19564       
+                bsr.w   sub_19564
                 jmp     (sub_1942).w    
 
     ; End of function sub_193B2
@@ -2391,7 +2391,7 @@ sub_19504:
                 subi.w  #$70,d0 
 loc_19520:
                 
-                lea     ((SPRITE_14-$1000000)).w,a1
+                lea     ((SPRITE_GROUND_DATA-$1000000)).w,a1
                 moveq   #2,d7
 loc_19526:
                 
@@ -2481,7 +2481,7 @@ loc_195AC:
                 andi.w  #$30,d7 
                 add.w   d7,d7
                 adda.w  d7,a0
-                lea     ((SPRITE_10-$1000000)).w,a1
+                lea     ((SPRITE_WEAPON_DATA-$1000000)).w,a1
                 moveq   #3,d7
 loc_195BE:
                 

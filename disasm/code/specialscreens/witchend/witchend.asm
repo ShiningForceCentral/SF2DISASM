@@ -45,7 +45,7 @@ EndGame:
                 jsr     (Sleep).w       
                 jsr     (FadeInFromWhite).w
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_WitchEndBlink
@@ -61,7 +61,7 @@ EndGame:
                 move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
                 moveq   #$3C,d0 
                 jsr     (Sleep).w       
-                clr.b   ((byte_FFB082-$1000000)).w
+                clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
                 dc.l VInt_WitchEndBlink
@@ -156,7 +156,7 @@ loc_27C2C:
                 clr.l   (a0)+
                 dbf     d7,loc_27C2C
                 jsr     j_ClearEntities
-                setFlg  400             ; Battle 0 unlocked - BATTLE_VERSUS_ALL_BOSSES         
+                setFlg  FLAG_INDEX_BATTLE0             ; Battle 0 unlocked - BATTLE_VERSUS_ALL_BOSSES         
                 move.w  #MAP_MAGIC_TUNNEL_HUB,d0
                 jsr     (CheckBattle).w 
                 move.w  d7,d1
@@ -216,7 +216,7 @@ var_2 = -2
 VInt_WitchEndBlink:
                 
                 link    a6,#-2
-                tst.b   ((byte_FFB082-$1000000)).w
+                tst.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 beq.w   loc_27D6A
                 clr.w   var_2(a6)
                 lea     ((BLINK_COUNTER-$1000000)).w,a2

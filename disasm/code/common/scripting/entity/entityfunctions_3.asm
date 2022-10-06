@@ -9,7 +9,7 @@
 
 WaitForFollowersStopped:
                 
-                lea     ((byte_FFAF23-$1000000)).w,a0
+                lea     ((FOLLOWERS_LIST-$1000000)).w,a0
                 bsr.w   WaitForPartyEntitiesIdle
                 rts
 
@@ -23,7 +23,7 @@ WaitForFollowersStopped:
 
 WaitForHeroAndFollowersStopped:
                 
-                lea     ((FOLLOWERS_LIST-$1000000)).w,a0
+                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
                 bsr.w   WaitForPartyEntitiesIdle
                 rts
 
@@ -68,7 +68,7 @@ return_4524A:
 
 ApplyActscriptToHeroAndFollowers:
                 
-                lea     ((FOLLOWERS_LIST-$1000000)).w,a0
+                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
                 bra.w   ApplyActscriptToPartyEntities
 
     ; End of function ApplyActscriptToHeroAndFollowers
@@ -81,7 +81,7 @@ ApplyActscriptToHeroAndFollowers:
 
 ApplyActscriptToFollowers:
                 
-                lea     ((byte_FFAF23-$1000000)).w,a0
+                lea     ((FOLLOWERS_LIST-$1000000)).w,a0
 
     ; End of function ApplyActscriptToFollowers
 
@@ -92,10 +92,10 @@ ApplyActscriptToPartyEntities:
                 
                 move.b  (a0)+,d0
                 cmpi.b  #$FF,d0
-                beq.s   return_45266
+                beq.s   @Return
                 bsr.w   SetEntityActscript
                 bra.s   ApplyActscriptToPartyEntities
-return_45266:
+@Return:
                 
                 rts
 

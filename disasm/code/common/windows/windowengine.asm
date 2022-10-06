@@ -60,7 +60,7 @@ FindFreeWindowSlot_Loop:
                 
                 movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
-                bne.s   @Continue       
+                bne.s   @Continue
                 bsr.w   CopyPlaneALayoutForWindows
 @Continue:
                 
@@ -101,17 +101,17 @@ SetWindowDestination:
                 bsr.w   GetWindowInfo   
                 tst.l   (a0)
                 beq.w   loc_4898
-                move.w  X(a0),d0
-                cmp.w   ANIM_DEST_X(a0),d0
+                move.w  WINDOWDEF_X(a0),d0
+                cmp.w   WINDOWDEF_ANIM_DEST_X(a0),d0
                 bne.w   loc_4898
                 cmpi.w  #$8080,d1
                 bne.s   loc_488A
                 move.w  d0,d1
 loc_488A:
                 
-                move.w  d1,ANIM_ORIG_X(a0)
-                move.w  d1,ANIM_DEST_X(a0)
-                move.w  #$100,ANIM_LENGTH(a0)
+                move.w  d1,WINDOWDEF_ANIM_ORIG_X(a0)
+                move.w  d1,WINDOWDEF_ANIM_DEST_X(a0)
+                move.w  #$100,WINDOWDEF_ANIM_LENGTH(a0)
 loc_4898:
                 
                 movem.w (sp)+,d0-d1
@@ -210,13 +210,13 @@ loc_4900:
                 bsr.w   GetWindowInfo   
                 cmpi.w  #$8080,d1
                 bne.s   loc_4914
-                move.w  X(a0),d1
+                move.w  WINDOWDEF_X(a0),d1
 loc_4914:
                 
-                move.w  X(a0),ANIM_ORIG_X(a0)
-                move.w  d1,ANIM_DEST_X(a0)
-                move.b  d2,ANIM_LENGTH(a0)
-                clr.b   ANIM_COUNTER(a0)
+                move.w  WINDOWDEF_X(a0),WINDOWDEF_ANIM_ORIG_X(a0)
+                move.w  d1,WINDOWDEF_ANIM_DEST_X(a0)
+                move.b  d2,WINDOWDEF_ANIM_LENGTH(a0)
+                clr.b   WINDOWDEF_ANIM_COUNTER(a0)
                 movem.w (sp)+,d0-d1
                 movea.l (sp)+,a0
                 rts
@@ -234,7 +234,7 @@ ClearWindowAndUpdateEndPointer:
                 clr.l   (a0)
                 clr.l   d1
                 lea     (WINDOW_ENTRIES).l,a0
-                moveq   #7,d0
+                moveq   #WINDOW_ENTRIES_COUNTER,d0
                 clr.w   d3
                 clr.w   d4
 loc_4946:
@@ -243,12 +243,13 @@ loc_4946:
                 cmp.l   d1,d2
                 bls.s   loc_4956
                 move.l  d2,d1
-                move.b  WIDTH(a0),d3
-                move.b  HEIGHT(a0),d4
+                move.b  WINDOWDEF_WIDTH(a0),d3
+                move.b  WINDOWDEF_HEIGHT(a0),d4
 loc_4956:
                 
-                lea     $10(a0),a0
+                lea     NEXT_WINDOWDEF(a0),a0
                 dbf     d0,loc_4946
+				
                 tst.l   d1
                 bne.s   loc_496A
                 move.l  #WINDOW_TILE_LAYOUTS,d1
@@ -292,48 +293,49 @@ VInt_UpdateWindows:
 loc_4994:
                 
                 clr.b   ((MOVING_WINDOWS_BITMAP-$1000000)).w
-                moveq   #7,d7
+                moveq   #WINDOW_ENTRIES_COUNTER,d7
                 lea     (WINDOW_ENTRIES).l,a2
 loc_49A0:
                 
                 tst.l   (a2)
-                beq.w   loc_49C8
-                move.b  $C(a2),d0
-                cmp.b   $D(a2),d0
-                beq.w   loc_49C8
+                beq.w   @NextWindow
+                move.b  WINDOWDEF_ANIM_LENGTH(a2),d0
+                cmp.b   WINDOWDEF_ANIM_COUNTER(a2),d0
+                beq.w   @NextWindow
                 moveq   #7,d0
                 sub.w   d7,d0
                 bset    d0,((MOVING_WINDOWS_BITMAP-$1000000)).w
                 movea.l (a2),a0
-                move.w  4(a2),d0
-                move.w  6(a2),d1
+                move.w  WINDOWDEF_WIDTH(a2),d0
+                move.w  WINDOWDEF_X(a2),d1
                 bsr.w   sub_4B5C
-loc_49C8:
+@NextWindow:
                 
-                lea     $10(a2),a2
+                lea     NEXT_WINDOWDEF(a2),a2
                 dbf     d7,loc_49A0
-                moveq   #7,d7
+				
+                moveq   #WINDOW_ENTRIES_COUNTER,d7
                 lea     (WINDOW_ENTRIES).l,a2
 loc_49D8:
                 
                 tst.l   (a2)
                 beq.w   loc_4A72
-                move.b  $C(a2),d0
-                cmp.b   $D(a2),d0
+                move.b  WINDOWDEF_ANIM_LENGTH(a2),d0
+                cmp.b   WINDOWDEF_ANIM_COUNTER(a2),d0
                 beq.w   loc_4A40
                 movea.l (a2),a0
-                move.w  4(a2),d0
-                move.w  6(a2),d1
-                addq.b  #1,$D(a2)
+                move.w  WINDOWDEF_WIDTH(a2),d0
+                move.w  WINDOWDEF_X(a2),d1
+                addq.b  #1,WINDOWDEF_ANIM_COUNTER(a2)
                 clr.w   d6
-                move.b  $C(a2),d6
+                move.b  WINDOWDEF_ANIM_LENGTH(a2),d6
                 clr.w   d5
-                move.b  $D(a2),d5
-                move.w  8(a2),d3
+                move.b  WINDOWDEF_ANIM_COUNTER(a2),d5
+                move.w  WINDOWDEF_ANIM_ORIG_X(a2),d3
                 move.w  d3,d4
                 asr.w   #8,d3
                 ext.w   d4
-                move.w  $A(a2),d1
+                move.w  WINDOWDEF_ANIM_DEST_X(a2),d1
                 move.w  d1,d2
                 asr.w   #8,d1
                 ext.w   d2
@@ -348,7 +350,7 @@ loc_49D8:
                 lsl.w   #8,d1
                 andi.w  #$FF,d2
                 or.w    d2,d1
-                move.w  d1,6(a2)
+                move.w  d1,WINDOWDEF_X(a2)
                 tst.b   ((HIDE_WINDOWS-$1000000)).w
                 bne.s   loc_4A40
                 bsr.w   sub_4AC8
@@ -359,8 +361,8 @@ loc_4A40:
                 beq.s   loc_4A5A
                 clr.b   $E(a2)
                 movea.l (a2),a0
-                move.w  4(a2),d0
-                move.w  6(a2),d1
+                move.w  WINDOWDEF_WIDTH(a2),d0
+                move.w  WINDOWDEF_X(a2),d1
                 bsr.w   sub_4AC8
                 bra.s   loc_4A72
 loc_4A5A:
@@ -369,13 +371,14 @@ loc_4A5A:
                 beq.s   loc_4A72
                 clr.b   $F(a2)
                 movea.l (a2),a0
-                move.w  4(a2),d0
-                move.w  6(a2),d1
+                move.w  WINDOWDEF_WIDTH(a2),d0
+                move.w  WINDOWDEF_X(a2),d1
                 bsr.w   sub_4B5C
 loc_4A72:
                 
-                lea     $10(a2),a2
+                lea     NEXT_WINDOWDEF(a2),a2
                 dbf     d7,loc_49D8
+				
                 tst.b   ((HIDE_WINDOWS-$1000000)).w
                 beq.s   loc_4A92
                 tst.b   ((byte_FFA8FE-$1000000)).w

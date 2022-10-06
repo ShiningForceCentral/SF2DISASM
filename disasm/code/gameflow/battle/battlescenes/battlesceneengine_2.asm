@@ -215,6 +215,7 @@ loc_19FC8:
                 move.b  d0,(a2)+
                 addq.w  #8,a0
                 dbf     d1,loc_19FC8
+				
                 movem.l (sp)+,d0-d3/a1-a2
                 add.w   d1,d0
                 rts
@@ -235,6 +236,7 @@ loc_1A00E:
                 nop
                 bsr.w   sub_19F5E
                 dbf     d7,loc_1A00E
+				
                 jmp     (sub_1942).w    
 
     ; End of function sub_1A00A
@@ -373,6 +375,8 @@ CopyPalettes:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 sub_1A0C4:
                 
@@ -434,8 +438,8 @@ sub_1A100:
 
 Tint_Dark:
                 
-                bsr.s   sub_1A100       
-                bra.s   sub_1A0E2       
+                bsr.s   sub_1A100
+                bra.s   sub_1A0E2
 
     ; End of function Tint_Dark
 
@@ -472,8 +476,8 @@ sub_1A122:
 
 Tint_Dim:
                 
-                bsr.s   sub_1A122       
-                bra.s   sub_1A0E2       
+                bsr.s   sub_1A122
+                bra.s   sub_1A0E2
 
     ; End of function Tint_Dim
 
@@ -529,8 +533,8 @@ sub_1A14A:
 
 Tint_Greyscale:
                 
-                bsr.s   sub_1A14A       
-                bra.w   sub_1A0E2       
+                bsr.s   sub_1A14A
+                bra.w   sub_1A0E2
 
     ; End of function Tint_Greyscale
 
@@ -567,8 +571,8 @@ sub_1A19E:
 
 TintScreen_Blue:
                 
-                bsr.s   sub_1A19E       
-                bra.w   sub_1A0E2       
+                bsr.s   sub_1A19E
+                bra.w   sub_1A0E2
 
     ; End of function TintScreen_Blue
 
@@ -605,8 +609,8 @@ sub_1A1CA:
 
 TintScreen_Green:
                 
-                bsr.s   sub_1A1CA       
-                bra.w   sub_1A0E2       
+                bsr.s   sub_1A1CA
+                bra.w   sub_1A0E2
 
     ; End of function TintScreen_Green
 
@@ -643,8 +647,8 @@ sub_1A1F6:
 
 Tint_Red:
                 
-                bsr.s   sub_1A1F6       
-                bra.w   sub_1A0E2       
+                bsr.s   sub_1A1F6
+                bra.w   sub_1A0E2
 
     ; End of function Tint_Red
 
@@ -1031,7 +1035,7 @@ sa01_Blaze:
                 adda.w  d0,a0
                 moveq   #$26,d0 
                 moveq   #2,d1
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 clr.w   d1
                 move.b  5(a1),d1
                 beq.s   loc_1A52A
@@ -1073,7 +1077,7 @@ loc_1A552:
                 moveq   #$2C,d0 
                 moveq   #8,d1
                 lea     byte_1A614(pc), a0
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
 loc_1A56E:
                 
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -1487,7 +1491,7 @@ loc_1A786:
                 addq.w  #2,d2
 loc_1A7E2:
                 
-                move.l  #byte_1A820,((dword_FFB3C0-$1000000)).w
+                move.l  #byte_1A820,((BATTLESCENE_BACKGROUND_MODIFICATION-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.b  #5,((byte_FFB583-$1000000)).w
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -1602,7 +1606,7 @@ loc_1A898:
                 moveq   #$20,d6 
                 jsr     (GenerateRandomNumber).w
                 move.w  d7,d3
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  d4,2(a0)
@@ -1752,7 +1756,7 @@ loc_1A99E:
                 moveq   #$2F,d0 
                 moveq   #3,d1
                 lea     byte_1AA28(pc), a0
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
 loc_1AA06:
                 
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -2262,7 +2266,7 @@ loc_1ADDA:
                 addq.w  #1,d1
                 clr.w   d2
                 clr.w   d3
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #$72,((byte_FFB404-$1000000)).w 
@@ -2666,9 +2670,9 @@ loc_1B076:
                 clr.l   (a0)+
                 dbf     d0,loc_1B076
                 
-                move.l  #byte_1B0CC,((dword_FFB3C0-$1000000)).w
+                move.l  #byte_1B0CC,((BATTLESCENE_BACKGROUND_MODIFICATION-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
-                move.l  #byte_1B0CE,((dword_FFB3C6-$1000000)).w
+                move.l  #byte_1B0CE,((BATTLESCENE_BATTLESPRITE_MODIFICATION-$1000000)).w
                 move.w  #$A,((word_FFB3CA-$1000000)).w
                 move.b  #$F,((byte_FFB583-$1000000)).w
                 move.b  #1,((byte_FFB56B-$1000000)).w
@@ -2767,7 +2771,7 @@ loc_1B1A4:
                 move.w  #2,4(a0)
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
-                move.l  #byte_1B202,((dword_FFB3C0-$1000000)).w
+                move.l  #byte_1B202,((BATTLESCENE_BACKGROUND_MODIFICATION-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.b  #5,((byte_FFB583-$1000000)).w
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -2912,7 +2916,7 @@ loc_1B314:
                 dbf     d0,loc_1B314
                 moveq   #$14,d0
                 jsr     (Sleep).w       
-                move.l  #byte_1B36C,((dword_FFB3C0-$1000000)).w
+                move.l  #byte_1B36C,((BATTLESCENE_BACKGROUND_MODIFICATION-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.b  #5,((byte_FFB583-$1000000)).w
                 move.w  #$FFFF,((byte_FFB404-$1000000)).w
@@ -3122,14 +3126,14 @@ loc_1B508:
                 bclr    #3,((byte_FFB56E-$1000000)).w
                 move.w  #CUTOFF_FLASH_COLOR,d0
                 bsr.w   ExecSpellAnimationFlash
-                move.l  #byte_1B53A,((dword_FFB3C6-$1000000)).w
+                move.l  #byte_1B53A,((BATTLESCENE_BATTLESPRITE_MODIFICATION-$1000000)).w
                 move.w  #1,((word_FFB3CA-$1000000)).w
                 move.b  #$A,((byte_FFB583-$1000000)).w
 loc_1B52A:
                 
                 tst.w   ((word_FFB3CA-$1000000)).w
                 bne.s   loc_1B52A
-                clr.l   ((dword_FFB3C6-$1000000)).w
+                clr.l   ((BATTLESCENE_BATTLESPRITE_MODIFICATION-$1000000)).w
                 clr.b   ((byte_FFB583-$1000000)).w
                 rts
 byte_1B53A:
@@ -3403,7 +3407,8 @@ byte_1B794:     dc.b 1
                 dc.b $20
                 dc.b 5
                 dc.b $21
-                dc.b 0
+				
+                dc.b 0		; mirror
                 dc.b $D2
                 dc.b 0
                 dc.b $CC
@@ -3680,9 +3685,9 @@ loc_1B95A:
                 move.w  d1,(a4)
                 clr.l   VDPSPRITE_OFFSET_SIZE(a4) ; clear size, link, and tile
                 move.w  d1,VDPSPRITE_OFFSET_X(a4)
-                move.w  d1,8(a4)
-                clr.l   $A(a4)
-                move.w  d1,$E(a4)
+                move.w  d1,NEXTVDPSPRITE_OFFSET_Y(a4)
+                clr.l   NEXTVDPSPRITE_OFFSET_SIZE(a4)
+                move.w  d1,NEXTVDPSPRITE_OFFSET_X(a4)
                 clr.w   (a5)
                 subq.b  #1,((byte_FFB584-$1000000)).w
                 bra.w   loc_1B9EA
@@ -3705,13 +3710,13 @@ loc_1B99E:
                 move.w  d2,VDPSPRITE_OFFSET_TILE(a4)
                 move.w  2(a0,d1.w),d2
                 addi.w  #-$3AE0,d2
-                move.w  d2,$C(a4)
+                move.w  d2,NEXTVDPSPRITE_OFFSET_TILE(a4)
 loc_1B9BC:
                 
                 btst    #0,1(a5)
                 bne.s   loc_1B9D0
                 move.w  #1,(a4)
-                move.w  #1,8(a4)
+                move.w  #1,NEXTVDPSPRITE_OFFSET_Y(a4)
                 bra.s   loc_1B9EA
 loc_1B9D0:
                 
@@ -3722,7 +3727,7 @@ loc_1B9D0:
                 clr.w   d1
                 move.b  3(a3),d1
                 addi.w  #$80,d1 
-                move.w  d1,8(a4)
+                move.w  d1,NEXTVDPSPRITE_OFFSET_Y(a4)
 loc_1B9EA:
                 
                 lea     ((byte_FFB41E-$1000000)).w,a5
@@ -3926,7 +3931,7 @@ loc_1BBFA:
                 
                 movem.w (sp)+,d0-d1
                 addq.w  #1,d0
-                addq.w  #8,a4
+                addq.w  #VDP_SPRITE_SIZE,a4
                 lea     $C(a5),a5
                 dbf     d1,loc_1BA00
 loc_1BC0A:
@@ -5028,7 +5033,7 @@ sub_1C4D8:
                 move.w  d0,-(sp)
                 moveq   #$26,d0 
                 moveq   #4,d1
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 lea     (byte_FFAFC6).l,a0
                 move.b  d4,(a0)+
                 move.b  d4,(a0)+
@@ -7376,7 +7381,7 @@ loc_1D8DC:
                 add.w   $A(a3),d7
                 move.w  d7,d3
                 moveq   #1,d1
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 moveq   #4,d6
                 jsr     (GenerateRandomNumber).w
                 lsr.w   #1,d7
@@ -7703,7 +7708,7 @@ loc_1DBDE:
                 moveq   #$26,d0 
                 moveq   #$C,d1
                 lea     byte_1DC88(pc), a0
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 moveq   #4,d0
                 moveq   #$B,d1
 loc_1DBEE:
@@ -9563,7 +9568,7 @@ loc_1EAD4:
                 clr.w   d2
                 clr.w   d3
                 lea     byte_1EBAA(pc), a0
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 sndCom  SFX_DESOUL_HOVERING
                 addq.w  #1,2(a5)
                 bra.w   loc_1EB7E
@@ -10046,7 +10051,7 @@ loc_1EEF6:
                 andi.w  #$30,d7 
                 add.w   d7,d7
                 adda.w  d7,a0
-                lea     ((SPRITE_10-$1000000)).w,a1
+                lea     ((SPRITE_WEAPON_DATA-$1000000)).w,a1
                 moveq   #3,d7
 loc_1EF08:
                 
@@ -10379,7 +10384,7 @@ loc_1F19E:
                 dbf     d2,loc_1F19E
                 cmpi.w  #$FFFF,((ALLY_WEAPON_SPRITE-$1000000)).w
                 beq.s   loc_1F1C2
-                lea     ((SPRITE_10-$1000000)).w,a0
+                lea     ((SPRITE_WEAPON_DATA-$1000000)).w,a0
                 moveq   #3,d2
 loc_1F1B6:
                 
@@ -10485,7 +10490,7 @@ sub_1F254:
                 
                 movem.l d0/a0,-(sp)
                 move.w  d6,((word_FFB3F0-$1000000)).w
-                cmpi.w  #$35,((ENEMY_BATTLE_SPRITE-$1000000)).w 
+                cmpi.w  #ENEMYBATTLESPRITE_ZEON,((ENEMY_BATTLE_SPRITE-$1000000)).w 
                 bne.s   loc_1F266
                 subq.w  #8,d6
 loc_1F266:
@@ -10520,7 +10525,7 @@ sub_1F282:
                 beq.s   return_1F2F4
                 lea     ((HORIZONTAL_SCROLL_DATA-$1000000)).w,a3
                 lea     ((VERTICAL_SCROLL_DATA-$1000000)).w,a4
-                lea     ((dword_FFB3C0-$1000000)).w,a5
+                lea     ((BATTLESCENE_BACKGROUND_MODIFICATION-$1000000)).w,a5
                 bra.s   loc_1F2D0
 loc_1F2AE:
                 
@@ -10532,7 +10537,7 @@ loc_1F2AE:
                 beq.s   return_1F2F4
                 lea     ((HORIZONTAL_SCROLL_DATA+2-$1000000)).w,a3
                 lea     ((VERTICAL_SCROLL_DATA+2-$1000000)).w,a4
-                lea     ((dword_FFB3C6-$1000000)).w,a5
+                lea     ((BATTLESCENE_BATTLESPRITE_MODIFICATION-$1000000)).w,a5
 loc_1F2D0:
                 
                 addq.w  #1,4(a5)
@@ -10565,8 +10570,8 @@ sub_1F2F6:
                 clr.b   ((byte_FFB56B-$1000000)).w
                 clr.w   ((word_FFB3C4-$1000000)).w
                 clr.w   ((word_FFB3CA-$1000000)).w
-                clr.l   ((dword_FFB3C0-$1000000)).w
-                clr.l   ((dword_FFB3C6-$1000000)).w
+                clr.l   ((BATTLESCENE_BACKGROUND_MODIFICATION-$1000000)).w
+                clr.l   ((BATTLESCENE_BATTLESPRITE_MODIFICATION-$1000000)).w
                 clr.w   d6
                 bsr.w   sub_1F1CC
                 bsr.w   sub_1F1F0
@@ -10890,7 +10895,7 @@ loc_1F55A:
                 
                 clr.l   (a0)+
                 dbf     d0,loc_1F55A
-                movea.l ((dword_FFB3C6-$1000000)).w,a0
+                movea.l ((BATTLESCENE_BATTLESPRITE_MODIFICATION-$1000000)).w,a0
                 clr.w   d0
                 move.b  1(a0),d0
                 lsr.w   #1,d0
@@ -10924,6 +10929,8 @@ spr_BattlesceneAlly:
                 vdpSprite 192, V4|H4|0, 352|PRIORITY, 328
                 vdpSprite 224, V4|H4|0, 368|PRIORITY, 328
                 vdpSprite 256, V4|H4|0, 384|PRIORITY, 328
+				
+				; Mirrored Battlesprite
                 vdpSprite 192, V4|H4|0, 256|MIRROR|PRIORITY, 328
                 vdpSprite 224, V4|H4|0, 272|MIRROR|PRIORITY, 328
                 vdpSprite 256, V4|H4|0, 288|MIRROR|PRIORITY, 328
@@ -10935,18 +10942,25 @@ spr_BattlesceneAlly:
                 vdpSprite 256, V4|H4|0, 384|MIRROR|PRIORITY, 264
                 
 spr_BattlesceneWeapon:
+				; Weapon frame 0
                 vdpSprite 192, V4|H4|0, 1728|PRIORITY, 264
                 vdpSprite 224, V4|H4|0, 1744|PRIORITY, 264
                 vdpSprite 192, V4|H4|0, 1760|PRIORITY, 296
                 vdpSprite 224, V4|H4|0, 1776|PRIORITY, 296
+				
+				; Weapon frame 1
                 vdpSprite 192, V4|H4|0, 1728|MIRROR|PRIORITY, 296
                 vdpSprite 224, V4|H4|0, 1744|MIRROR|PRIORITY, 296
                 vdpSprite 192, V4|H4|0, 1760|MIRROR|PRIORITY, 264
                 vdpSprite 224, V4|H4|0, 1776|MIRROR|PRIORITY, 264
+				
+				; Weapon frame 2
                 vdpSprite 224, V4|H4|0, 1728|FLIP|PRIORITY, 264
                 vdpSprite 192, V4|H4|0, 1744|FLIP|PRIORITY, 264
                 vdpSprite 224, V4|H4|0, 1760|FLIP|PRIORITY, 296
                 vdpSprite 192, V4|H4|0, 1776|FLIP|PRIORITY, 296
+				
+				; Weapon frame 3
                 vdpSprite 224, V4|H4|0, 1728|MIRROR|FLIP|PRIORITY, 296
                 vdpSprite 192, V4|H4|0, 1744|MIRROR|FLIP|PRIORITY, 296
                 vdpSprite 224, V4|H4|0, 1760|MIRROR|FLIP|PRIORITY, 264
@@ -10956,6 +10970,8 @@ spr_BattlesceneGround:
                 vdpSprite 268, V4|H4|0, 1920|PALETTE3, 264
                 vdpSprite 268, V4|H4|0, 1936|PALETTE3, 296
                 vdpSprite 268, V4|H4|0, 1952|PALETTE3, 328
+				
+				; Mirrored ground plate
                 vdpSprite 268, V4|H4|0, 1920|MIRROR|PALETTE3, 328
                 vdpSprite 268, V4|H4|0, 1936|MIRROR|PALETTE3, 296
                 vdpSprite 268, V4|H4|0, 1952|MIRROR|PALETTE3, 264

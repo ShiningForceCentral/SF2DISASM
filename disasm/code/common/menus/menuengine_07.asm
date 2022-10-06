@@ -159,13 +159,13 @@ loc_158D6:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_158E8
                 addq.w  #1,d3
-                bsr.w   sub_15A3E
+                bsr.w   SetBattlefieldSettings
 loc_158E8:
                 
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_158F6
                 subq.w  #1,d3
-                bsr.w   sub_15A3E
+                bsr.w   SetBattlefieldSettings
 loc_158F6:
                 
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -237,13 +237,13 @@ CopyBattlefieldOptionsMenuLayout:
 
 sub_1598C:
                 
-                lea     (SPRITE_08).l,a0
+                lea     (SPRITE_CURSOR_DATA).l,a0
                 moveq   #3,d7
-loc_15994:
+@Loop:
                 
                 move.w  #1,(a0)
-                addq.l  #8,a0
-                dbf     d7,loc_15994
+                addq.l  #VDP_SPRITE_SIZE,a0
+                dbf     d7,@Loop
                 rts
 
     ; End of function sub_1598C
@@ -257,7 +257,7 @@ sub_159A0:
                 tst.w   ((HIDE_WINDOWS-$1000000)).w
                 bne.s   sub_1598C
                 movem.w d3-d4/d7,-(sp)
-                lea     (SPRITE_08).l,a0
+                lea     (SPRITE_CURSOR_DATA).l,a0
                 lea     spr_BattleConfig(pc), a1
                 clr.w   d3
                 move.b  ((MESSAGE_SPEED-$1000000)).w,d3
@@ -342,14 +342,14 @@ byte_15A38:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_15A3E:
+SetBattlefieldSettings:
                 
                 tst.w   d4
-                bne.s   loc_15A4C
+                bne.s   @ToggleBattleMessages
                 andi.w  #3,d3
                 move.b  d3,((MESSAGE_SPEED-$1000000)).w
                 bra.s   byte_15A54
-loc_15A4C:
+@ToggleBattleMessages:
                 
                 andi.w  #1,d3
                 move.b  d3,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
@@ -358,5 +358,5 @@ byte_15A54:
                 sndCom  SFX_MENU_SELECTION
                 rts
 
-    ; End of function sub_15A3E
+    ; End of function SetBattlefieldSettings
 

@@ -149,20 +149,20 @@ loc_25D0E:
     ; End of function UpdateSpecialSprites
 
 rjt_SpecialSpriteUpdate:
-                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
-                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
-                dc.w UpdateExplorationSpecialSprite-rjt_SpecialSpriteUpdate
-                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
-                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
-                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
-                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
-                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
-                dc.w UpdateBattleSpecialSprite-rjt_SpecialSpriteUpdate
+                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
+                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
+                dc.w UpdateSpecialSprite_Exploration-rjt_SpecialSpriteUpdate
+                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
+                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
+                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
+                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
+                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
+                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateBattleSpecialSprite:
+UpdateSpecialSprite_Battle:
                 
                 lea     (SPRITE_60).l,a1
                 move.b  ENTITYDEF_OFFSET_ANIMCOUNTER(a0),d2
@@ -207,16 +207,16 @@ loc_25D7E:
                 dbf     d7,loc_25D7E
                 bra.w   loc_25DF0
 
-    ; End of function UpdateBattleSpecialSprite
+    ; End of function UpdateSpecialSprite_Battle
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateExplorationSpecialSprite:
+UpdateSpecialSprite_Exploration:
                 
                 clr.w   d6
-                move.b  $11(a0),d6
+                move.b  ENTITYDEF_OFFSET_LAYER(a0),d6
                 lea     (SPRITE_46).l,a1
                 lea     SpecialSpriteData_NazcaShip(pc), a0
                 movem.l d0-d1,-(sp)
@@ -233,6 +233,7 @@ loc_25DB0:
                 add.w   d0,d2
                 move.w  d2,(a1)+
                 dbf     d7,loc_25DB0
+				
                 movem.l (sp)+,d0-d1
                 sub.w   d6,d0
                 btst    #0,((FRAME_COUNTER-$1000000)).w
@@ -252,11 +253,12 @@ loc_25DD8:
                 add.w   d0,d2
                 move.w  d2,(a1)+
                 dbf     d7,loc_25DD8
+				
                 bra.w   *+4
 loc_25DF0:
                 
                 movem.l (sp)+,d0-d2/d7-a2
                 rts
 
-    ; End of function UpdateExplorationSpecialSprite
+    ; End of function UpdateSpecialSprite_Exploration
 

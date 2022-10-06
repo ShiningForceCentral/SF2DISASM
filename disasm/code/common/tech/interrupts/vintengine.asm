@@ -305,6 +305,7 @@ loc_822:
                 beq.w   loc_832
                 addq.w  #1,d1
                 dbf     d7,loc_822
+				
                 bra.w   loc_8D6
 loc_832:
                 
@@ -331,6 +332,7 @@ loc_84A:
                 beq.w   loc_85A
                 addq.w  #1,d1
                 dbf     d7,loc_84A
+				
                 bra.w   loc_8D6
 loc_85A:
                 
@@ -358,6 +360,7 @@ loc_876:
                 beq.w   loc_886
                 addq.w  #1,d1
                 dbf     d7,loc_876
+				
                 bra.w   loc_8D6
 loc_886:
                 
@@ -388,6 +391,7 @@ loc_8A8:
                 beq.w   loc_8B8         
                 addq.w  #1,d1
                 dbf     d7,loc_8A8
+				
                 bra.w   loc_8D6
 loc_8B8:
                 
@@ -408,6 +412,7 @@ loc_8CC:
                 
                 addq.w  #1,d1
                 dbf     d7,loc_8C6
+				
                 move.b  d0,((VINT_FUNCS_ENABLED_BITFIELD-$1000000)).w
 loc_8D6:
                 
@@ -828,6 +833,8 @@ ActivateVIntDmaQueueProcessing:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 DeactivateVIntDmaQueueProcessing:
                 
@@ -1102,8 +1109,8 @@ ClearSpriteTable:
 @Loop:
                 
                 move.l  d0,(a0)
-                clr.l   4(a0)
-                addq.w  #8,a0
+                clr.l   VDPSPRITE_OFFSET_TILE(a0)
+                addq.w  #VDP_SPRITE_SIZE,a0
                 addq.b  #1,d0
                 dbf     d1,@Loop
                 
@@ -1129,19 +1136,19 @@ ClearScrollTableData:
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
                 
-                move.w  #$1FF,d7
+                move.w  #LONGWORD_VIEWPLANE_COUNTER,d7
                 lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a6
-loc_E62:
+@ClearPlane_A:
                 
                 clr.l   (a6)+
-                dbf     d7,loc_E62
+                dbf     d7,@ClearPlane_A
                 
-                move.w  #$1FF,d7
-                adda.w  #$1800,a6
-loc_E70:
+                move.w  #LONGWORD_VIEWPLANE_COUNTER,d7
+                adda.w  #VIEWPLANE_ADDRESS_DIFFERENCE,a6
+@ClearPlane_B:
                 
                 clr.l   (a6)+
-                dbf     d7,loc_E70
+                dbf     d7,@ClearPlane_B
                 
                 movem.l (sp)+,d7/a6
                 rts
@@ -1150,6 +1157,8 @@ loc_E70:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused code
 
 
 ClearCram:
@@ -1220,6 +1229,8 @@ Sleep:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused code
+
 
 RequestVdpCommandQueueProcessing:
                 
@@ -1230,6 +1241,8 @@ RequestVdpCommandQueueProcessing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused code
 
 
 WaitForVdpCommandQueueProcessing:
@@ -1363,6 +1376,8 @@ loc_FFE:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused code
 
 
 SwapA6:
@@ -1726,6 +1741,7 @@ loc_1330:
                 move.w  d6,(a6)+
                 addq.l  #2,a6
                 dbf     d7,loc_1330
+				
                 movem.l (sp)+,d7/a6
                 bra.s   UpdateVdpVScrollData
 

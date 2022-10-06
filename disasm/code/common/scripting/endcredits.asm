@@ -29,9 +29,11 @@ loc_1AC09E:
                 move.w  d1,(a1)+
                 addq.w  #1,d1
                 dbf     d6,loc_1AC09E
+				
                 addq.w  #2,d1
                 lea     $34(a1),a1
                 dbf     d7,loc_1AC09C
+				
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
@@ -187,6 +189,7 @@ loc_1AC250:
                 
                 clr.l   (a1)+
                 dbf     d7,loc_1AC250
+				
                 movem.l (sp)+,d7/a1
                 tst.b   d1
                 beq.s   loc_1AC280

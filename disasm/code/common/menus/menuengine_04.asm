@@ -55,7 +55,7 @@ loc_11BC4:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_HandlePortraitBlinking
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 movem.l (sp)+,d0-a1
 return_11BE0:
                 
@@ -175,7 +175,7 @@ loc_11CE6:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_HandlePortraitBlinking
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_11D1A
@@ -268,7 +268,7 @@ loc_11DDC:
                 move.w  (sp)+,d0
                 move.b  d0,(a1)
                 movea.l (sp)+,a1
-                clr.b   ((byte_FFB082-$1000000)).w
+                clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
                 dc.l VInt_HandlePortraitBlinking
@@ -307,11 +307,11 @@ loc_11E74:
                 
                 cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 bne.s   loc_11E80
-                moveq   #$3E,d4 
+                moveq   #MAPSPRITE_CARAVAN,d4 
                 bra.s   loc_11E82
 loc_11E80:
                 
-                moveq   #$3D,d4 
+                moveq   #MAPSPRITE_RAFT,d4 
 loc_11E82:
                 
                 clr.w   d0
@@ -397,7 +397,7 @@ LoadTileDataForMemberScreen:
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #WINDOW_MEMBER_KD_VDPTILEORDER_BYTESIZE,d7
-                jsr     (CopyBytes).w   
+                jsr     (CopyBytes).w  
                 adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
                 move.w  member(a6),d0
                 tst.b   d0

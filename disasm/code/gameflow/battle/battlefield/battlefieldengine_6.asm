@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 sub_D3CA:
                 
                 movem.l d1-d2,-(sp)
@@ -18,7 +18,7 @@ sub_D3CA:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 sub_D3E0:
                 
                 movem.l d1-d2,-(sp)
@@ -31,7 +31,7 @@ sub_D3E0:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 sub_D3F0:
                 
                 movem.l d1-d2,-(sp)
@@ -194,6 +194,7 @@ loc_D50E:
                 
                 move.b  (a0)+,(a1)+
                 dbf     d5,loc_D50E
+				
                 lea     ((SPELL_TARGET_PRIORITIES_LIST-$1000000)).w,a0
                 lea     ((TARGETS_REACHABLE_BY_ATTACK_LIST-$1000000)).w,a1
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a4
@@ -218,6 +219,7 @@ loc_D550:
                 
                 addi.w  #1,d4
                 dbf     d6,loc_D52E
+				
                 move.w  d5,(a3)
 loc_D55A:
                 

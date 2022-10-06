@@ -640,7 +640,7 @@ CaravanDepotSubmenu_Drop:
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
-                bne.s   byte_22518      
+                bne.s   @CancelDiscard      
                 
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemFromCaravan
@@ -655,7 +655,7 @@ CaravanDepotSubmenu_Drop:
                 move.w  #MESSAGE_ITEMMENU_DISCARDED_THE_ITEM,d1 ; "Discarded the {ITEM}.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @Goto_Restart
-byte_22518:
+@CancelDiscard:
                 
                 txt     4               ; "Did you change your mind?{W2}"
 @Goto_Restart:
@@ -766,7 +766,7 @@ CaravanItemSubmenu_Use:
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
-                beq.s   byte_225E4      
+                beq.s   @CancelChoice      
                 
                 ; Use item
                 move.w  itemIndex(a6),d1
@@ -775,7 +775,7 @@ CaravanItemSubmenu_Use:
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
                 bra.s   @Goto_Restart
-byte_225E4:
+@CancelChoice:
                 
                 txt     4               ; "Did you change your mind?{W2}"
 @Goto_Restart:
@@ -1021,7 +1021,7 @@ CaravanItemSubmenu_Drop:
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
-                bne.s   byte_22844      
+                bne.s   @CancelDiscard      
                 
                 ; Discard item
                 move.w  member(a6),d0
@@ -1038,7 +1038,7 @@ CaravanItemSubmenu_Drop:
                 move.w  #42,d1          ; "Discarded the {ITEM}.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @Goto_Restart
-byte_22844:
+@CancelDiscard:
                 
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt

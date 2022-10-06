@@ -283,7 +283,7 @@ loc_AA92:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 OneSecondSleep:
                 
                 move.l  d0,-(sp)
@@ -297,7 +297,7 @@ OneSecondSleep:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 NopOnce:
                 
                 nop
@@ -308,7 +308,7 @@ NopOnce:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 NopTwice:
                 
                 nop
@@ -320,7 +320,7 @@ NopTwice:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 NopThrice:
                 
                 nop

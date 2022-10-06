@@ -15,7 +15,7 @@ InitMapEntities:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 sub_440D4:
                 
                 movem.l d0-a5,-(sp)
@@ -35,7 +35,7 @@ loc_440E2:
                 bsr.w   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
                 lea     $20(a1),a2
-                lea     ((FOLLOWERS_LIST-$1000000)).w,a3
+                lea     ((EXPLORATION_UNITS-$1000000)).w,a3
                 movem.w d1-d3,-(sp)
                 moveq   #1,d0
                 bsr.w   InitializeFollowerEntities
@@ -45,13 +45,13 @@ loc_44104:
                 cmpi.b  #$FF,d1
                 beq.w   loc_44180
                 andi.w  #$3F,d1 
-                muls.w  #$180,d1
+                muls.w  #MAP_TILE_SIZE,d1
                 move.b  (a0)+,d2
                 andi.w  #$3F,d2 
-                muls.w  #$180,d2
+                muls.w  #MAP_TILE_SIZE,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                cmpi.b  #$F0,d4
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d4
                 bcs.s   loc_44146
                 movem.w d0,-(sp)
                 move.w  #$2F,d0 
@@ -123,7 +123,7 @@ sub_441AA:
                 beq.w   byte_441F0      ; No followers
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
-                lea     ((FOLLOWERS_LIST-$1000000)).w,a0
+                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
                 lea     ((ENTITY_DATA-$1000000)).w,a1
 @GetFollowerPosition_Loop:
                 

@@ -33,7 +33,7 @@ byte_62CCE:
                 bne.s   byte_62CF2
                 script  cs_62D0E
                 setFlg  982
-                move.b  #$FF,((FOLLOWERS_LIST-$1000000)).w
+                move.b  #$FF,((EXPLORATION_UNITS-$1000000)).w
                 bra.s   loc_62CFA
 byte_62CF2:
                 

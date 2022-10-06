@@ -17,12 +17,12 @@ sub_444A2:
                 move.w  d1,-(sp)
                 jsr     j_GetMoveType
                 clr.w   d6
-                cmpi.b  #5,d1
+                cmpi.b  #MOVETYPE_LOWER_FLYING,d1
                 bne.s   loc_444CE
                 addq.w  #1,d6
 loc_444CE:
                 
-                cmpi.b  #6,d1
+                cmpi.b  #MOVETYPE_LOWER_HOVERING,d1
                 bne.s   loc_444D6
                 addq.w  #1,d6
 loc_444D6:
@@ -45,6 +45,7 @@ loc_4450A:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_4450A
+				
                 movea.l (sp)+,a0
                 lea     ($7000).w,a1
                 mulu.w  #$240,d6
@@ -70,16 +71,17 @@ sub_44536:
                 move.w  d0,-(sp)
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 clr.w   d0
-                moveq   #$3F,d7 
-loc_44544:
+                moveq   #ENTITY_TOTAL_COUNTER,d7 
+@CheckEntityEvent_Loop:
                 
                 cmp.b   (a0),d0
-                bge.s   loc_4454A
+                bge.s   @Skip
                 move.b  (a0),d0
-loc_4454A:
+@Skip:
                 
                 addq.l  #1,a0
-                dbf     d7,loc_44544
+                dbf     d7,@CheckEntityEvent_Loop
+				
                 addq.w  #1,d0
                 move.w  (sp)+,d7
                 tst.b   d7
@@ -121,6 +123,7 @@ loc_4458C:
                 
                 addq.l  #1,a0
                 dbf     d7,loc_44586
+				
                 addq.w  #1,d0
                 move.w  (sp)+,d7
                 move.w  d7,-(sp)
@@ -308,7 +311,7 @@ loc_44736:
                 
                 addq.w  #1,battleEntity(a6)
                 dbf     d7,loc_446B8
-                lea     ((byte_FFB160-$1000000)).w,a1
+                lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
                 move.w  #COMBATANT_ENEMIES_START,battleEntity(a6)
 loc_4474A:
@@ -358,7 +361,7 @@ loc_447AA:
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d4
                 bcs.s   loc_447E8
                 move.w  d0,-(sp)
-                move.w  #$2F,d0 
+                move.w  #ENTITY_SPECIAL_SPRITE,d0 
                 move.w  #$20,d6 
                 bsr.w   DeclareNewEntity
                 move.b  d0,(a1)+
@@ -383,7 +386,7 @@ loc_447FA:
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   loc_448BC
-                lea     ((byte_FFB160-$1000000)).w,a1
+                lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
                 lea     BattleNeutralEntities(pc), a0
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1

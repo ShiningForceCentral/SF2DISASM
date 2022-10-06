@@ -451,10 +451,10 @@ LoadSpellIcon:
 
 LoadIcon:
                 
-                move.w  d1,d2
-                add.w   d1,d1
-                add.w   d2,d1
-                lsl.w   #6,d1
+                move.w  d1,d2		; multiply
+                add.w   d1,d1		; by
+                add.w   d2,d1		; icon size (192)
+                lsl.w   #6,d1		;
                 adda.w  d1,a0           ; icon offset
                 moveq   #47,d7
 @Loop:
@@ -807,7 +807,7 @@ DmaIcon1:
                 lea     (FF8804_LOADING_SPACE).l,a0
                 cmpi.w  #$F,d6
                 blt.s   loc_14098
-                adda.w  #$C0,a0 
+                adda.w  #ICONTILES_BYTESIZE,a0 
 loc_14098:
                 
                 lea     ($BC00).l,a1
@@ -826,7 +826,7 @@ DmaIcon2:
                 lea     (byte_FF8984).l,a0
                 cmpi.w  #$F,d6
                 blt.s   loc_140B8
-                adda.w  #$C0,a0 
+                adda.w  #ICONTILES_BYTESIZE,a0 
 loc_140B8:
                 
                 lea     ($BCC0).l,a1
@@ -845,7 +845,7 @@ DmaIcon3:
                 lea     (byte_FF8B04).l,a0
                 cmpi.w  #$F,d6
                 blt.s   loc_140D8
-                adda.w  #$C0,a0 
+                adda.w  #ICONTILES_BYTESIZE,a0 
 loc_140D8:
                 
                 lea     ($BD80).l,a1
@@ -864,7 +864,7 @@ DmaIcon4:
                 lea     (byte_FF8C84).l,a0
                 cmpi.w  #$F,d6
                 blt.s   loc_140F8
-                adda.w  #$C0,a0 
+                adda.w  #ICONTILES_BYTESIZE,a0 
 loc_140F8:
                 
                 lea     ($BE40).l,a1
@@ -1128,7 +1128,7 @@ loc_14366:
                 bsr.w   sub_14074       
                 moveq   #$14,d1
                 bsr.w   LoadMiniStatusTextHighlightSprites
-                move.b  #16,(SPRITE_09_LINK).l
+                move.b  #16,(SPRITE_NAME_HILIGHT_END).l
                 subq.w  #1,d6
                 bne.s   loc_14384
                 moveq   #$1E,d6
@@ -1495,7 +1495,7 @@ CleanIconCorners:
 LoadMiniStatusTextHighlightSprites:
                 
                 movem.w d0/d2,-(sp)
-                lea     (SPRITE_08).l,a0
+                lea     (SPRITE_CURSOR_DATA).l,a0
                 lea     spr_MiniStatusTextHighlight(pc), a1
                 move.w  ((DISPLAYED_MEMBERLIST_SELECTED_ENTRY-$1000000)).w,d0
                 lsl.w   #4,d0
@@ -1652,7 +1652,7 @@ EquipNewItem:
 WaitForMusicResumeAndPlayerInput_0:
                 
                 move.w  d0,-(sp)
-                move.w  #$FB,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0 
                 jsr     (PlayMusicAfterCurrentOne).w
                 jsr     (WaitForPlayerInput).w
                 move.w  (sp)+,d0
@@ -1700,7 +1700,7 @@ loc_14814:
                 jsr     (CreateWindow).l
                 move.w  d0,goldWindowSlot(a6)
                 move.l  a1,goldWindowTilesEnd(a6)
-                bsr.w   sub_14B28       
+                bsr.w   WriteGoldInfo       
                 move.w  inventoryWindowSlot(a6),d0
                 move.w  #$201,d1
                 moveq   #4,d2
@@ -1729,7 +1729,7 @@ loc_148BC:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14906
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d2
-                mulu.w  #6,d2
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d2
                 add.w   d0,d2
                 addq.w  #1,d2
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d2
@@ -1754,7 +1754,7 @@ loc_14906:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1494A
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d2
-                mulu.w  #6,d2
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d2
                 add.w   d0,d2
                 ble.s   loc_1494A
                 subq.w  #1,d0
@@ -1786,22 +1786,22 @@ loc_1496A:
                 beq.s   loc_149C2
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d2
                 addq.w  #1,d2
-                mulu.w  #6,d2
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d2
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d2
                 bge.s   loc_149C2
                 addq.w  #1,((CURRENT_ITEMLIST_PAGE-$1000000)).w
                 sndCom  SFX_MENU_SELECTION
                 move.w  ((CURRENT_ITEMLIST_SELECTION-$1000000)).w,d0
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d2
-                move.w  d2,d1
-                add.w   d2,d2
-                add.w   d1,d2
-                add.w   d2,d2
+                move.w  d2,d1	; 
+                add.w   d2,d2	; multiply
+                add.w   d1,d2	; page by 6
+                add.w   d2,d2	;
                 move.w  ((GENERIC_LIST_LENGTH-$1000000)).w,d1
                 sub.w   d2,d1
-                cmpi.w  #6,d1
+                cmpi.w  #ITEMS_PER_SHOP_PAGE,d1
                 ble.s   loc_149A8
-                moveq   #6,d1
+                moveq   #ITEMS_PER_SHOP_PAGE,d1
 loc_149A8:
                 
                 move.w  d1,((word_FFB134-$1000000)).w
@@ -1836,7 +1836,7 @@ loc_149EC:
 loc_149F2:
                 
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d1
-                mulu.w  #6,d1
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d1
                 add.w   ((CURRENT_ITEMLIST_SELECTION-$1000000)).w,d1
                 lea     ((GENERIC_LIST-$1000000)).w,a0
                 move.b  (a0,d1.w),d0
@@ -1885,7 +1885,7 @@ loc_14A26:
 
 sub_14A82:
                 
-                lea     (SPRITE_08).l,a0
+                lea     (SPRITE_CURSOR_DATA).l,a0
                 cmpi.w  #7,d1
                 bge.s   loc_14A9A
                 move.w  #1,(a0)
@@ -1902,7 +1902,7 @@ loc_14AAC:
                 
                 move.w  #$F09,VDPSPRITE_OFFSET_SIZE(a0)
                 move.w  #$C7F0,VDPSPRITE_OFFSET_TILE(a0)
-                addq.l  #8,a0
+                addq.l  #VDP_SPRITE_SIZE,a0
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 tst.w   ((CURRENT_ITEMLIST_PAGE-$1000000)).w
@@ -1917,12 +1917,12 @@ loc_14ADA:
                 move.w  #$D064,VDPSPRITE_OFFSET_TILE(a0)
 loc_14AE6:
                 
-                addq.l  #8,a0
+                addq.l  #VDP_SPRITE_SIZE,a0
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d0
                 addq.w  #1,d0
-                mulu.w  #6,d0
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d0
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d0
                 bge.s   loc_14B1E
                 cmpi.w  #7,d1
@@ -1957,7 +1957,7 @@ itemNameAndPriceWindowSlot = -8
 inventoryWindowTilesEnd = -6
 inventoryWindowSlot = -2
 
-sub_14B28:
+WriteGoldInfo:
                 
                 move.w  #$904,d0
                 movea.l goldWindowTilesEnd(a6),a1
@@ -1976,7 +1976,7 @@ sub_14B28:
                 jsr     WriteTilesFromNumber
                 rts
 
-    ; End of function sub_14B28
+    ; End of function WriteGoldInfo
 
 aGold:          dc.b 'GOLD',0
                 dc.b 0
@@ -2044,16 +2044,16 @@ loc_14BCE:
                 dbf     d7,loc_14BCE
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d0
-                move.w  d0,d1
-                add.w   d0,d0
-                add.w   d1,d0
-                add.w   d0,d0
+                move.w  d0,d1	; 
+                add.w   d0,d0	; multiply
+                add.w   d1,d0	; page by 6
+                add.w   d0,d0	;
                 adda.w  d0,a1
                 move.w  ((GENERIC_LIST_LENGTH-$1000000)).w,d1
                 sub.w   d0,d1
-                cmpi.w  #6,d1
+                cmpi.w  #ITEMS_PER_SHOP_PAGE,d1
                 ble.s   loc_14BF8
-                moveq   #6,d1
+                moveq   #ITEMS_PER_SHOP_PAGE,d1
 loc_14BF8:
                 
                 move.w  d1,((word_FFB134-$1000000)).w
@@ -2076,7 +2076,7 @@ loc_14C0E:
                 movea.l (sp)+,a0
                 bsr.w   sub_14C56       
                 move.w  #VDPTILE_SHOP_PRICE_TAG_STRING|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a2)
-                addq.l  #8,a2
+                addq.l  #VDP_SPRITE_SIZE,a2
                 move.w  (sp)+,d7
                 dbf     d7,loc_14C0E
                 lea     (FF6802_LOADING_SPACE).l,a0
@@ -2499,114 +2499,114 @@ ShopInventoryWindowLayout:
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile DOLLAR_SIGN
-                vdpBaseTile MENU7
+                vdpBaseTile MENUTILE7
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
-                vdpBaseTile MENU17
+                vdpBaseTile MENUTILE17
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
-                vdpBaseTile MENU27
+                vdpBaseTile MENUTILE27
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
-                vdpBaseTile MENU37
+                vdpBaseTile MENUTILE37
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
-                vdpBaseTile MENU47
+                vdpBaseTile MENUTILE47
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
-                vdpBaseTile MENU57
+                vdpBaseTile MENUTILE57
                 vdpBaseTile SPACE
                 vdpBaseTile V_BORDER|MIRROR
                 
 ; 3rd line
                 vdpBaseTile V_BORDER
                 vdpBaseTile SPACE
-                vdpBaseTile MENU1
-                vdpBaseTile MENU2
-                vdpBaseTile MENU8
+                vdpBaseTile MENUTILE1
+                vdpBaseTile MENUTILE2
+                vdpBaseTile MENUTILE8
                 vdpBaseTile SPACE
-                vdpBaseTile MENU11
-                vdpBaseTile MENU12
-                vdpBaseTile MENU18
+                vdpBaseTile MENUTILE11
+                vdpBaseTile MENUTILE12
+                vdpBaseTile MENUTILE18
                 vdpBaseTile SPACE
-                vdpBaseTile MENU21
-                vdpBaseTile MENU22
-                vdpBaseTile MENU28
+                vdpBaseTile MENUTILE21
+                vdpBaseTile MENUTILE22
+                vdpBaseTile MENUTILE28
                 vdpBaseTile SPACE
-                vdpBaseTile MENU31
-                vdpBaseTile MENU32
-                vdpBaseTile MENU38
+                vdpBaseTile MENUTILE31
+                vdpBaseTile MENUTILE32
+                vdpBaseTile MENUTILE38
                 vdpBaseTile SPACE
-                vdpBaseTile MENU41
-                vdpBaseTile MENU42
-                vdpBaseTile MENU48
+                vdpBaseTile MENUTILE41
+                vdpBaseTile MENUTILE42
+                vdpBaseTile MENUTILE48
                 vdpBaseTile SPACE
-                vdpBaseTile MENU51
-                vdpBaseTile MENU52
-                vdpBaseTile MENU58
+                vdpBaseTile MENUTILE51
+                vdpBaseTile MENUTILE52
+                vdpBaseTile MENUTILE58
                 vdpBaseTile SPACE
                 vdpBaseTile V_BORDER|MIRROR
                 
 ; 4th line
                 vdpBaseTile V_BORDER
                 vdpBaseTile SPACE
-                vdpBaseTile MENU3
-                vdpBaseTile MENU4
-                vdpBaseTile MENU9
+                vdpBaseTile MENUTILE3
+                vdpBaseTile MENUTILE4
+                vdpBaseTile MENUTILE9
                 vdpBaseTile SPACE
-                vdpBaseTile MENU13
-                vdpBaseTile MENU14
-                vdpBaseTile MENU19
+                vdpBaseTile MENUTILE13
+                vdpBaseTile MENUTILE14
+                vdpBaseTile MENUTILE19
                 vdpBaseTile SPACE
-                vdpBaseTile MENU23
-                vdpBaseTile MENU24
-                vdpBaseTile MENU29
+                vdpBaseTile MENUTILE23
+                vdpBaseTile MENUTILE24
+                vdpBaseTile MENUTILE29
                 vdpBaseTile SPACE
-                vdpBaseTile MENU33
-                vdpBaseTile MENU34
-                vdpBaseTile MENU39
+                vdpBaseTile MENUTILE33
+                vdpBaseTile MENUTILE34
+                vdpBaseTile MENUTILE39
                 vdpBaseTile SPACE
-                vdpBaseTile MENU43
-                vdpBaseTile MENU44
-                vdpBaseTile MENU49
+                vdpBaseTile MENUTILE43
+                vdpBaseTile MENUTILE44
+                vdpBaseTile MENUTILE49
                 vdpBaseTile SPACE
-                vdpBaseTile MENU53
-                vdpBaseTile MENU54
-                vdpBaseTile MENU59
+                vdpBaseTile MENUTILE53
+                vdpBaseTile MENUTILE54
+                vdpBaseTile MENUTILE59
                 vdpBaseTile SPACE
                 vdpBaseTile V_BORDER|MIRROR
                 
 ; 5th line
                 vdpBaseTile V_BORDER
                 vdpBaseTile SPACE
-                vdpBaseTile MENU5
-                vdpBaseTile MENU6
-                vdpBaseTile MENU10
+                vdpBaseTile MENUTILE5
+                vdpBaseTile MENUTILE6
+                vdpBaseTile MENUTILE10
                 vdpBaseTile SPACE
-                vdpBaseTile MENU15
-                vdpBaseTile MENU16
-                vdpBaseTile MENU20
+                vdpBaseTile MENUTILE15
+                vdpBaseTile MENUTILE16
+                vdpBaseTile MENUTILE20
                 vdpBaseTile SPACE
-                vdpBaseTile MENU25
-                vdpBaseTile MENU26
-                vdpBaseTile MENU30
+                vdpBaseTile MENUTILE25
+                vdpBaseTile MENUTILE26
+                vdpBaseTile MENUTILE30
                 vdpBaseTile SPACE
-                vdpBaseTile MENU35
-                vdpBaseTile MENU36
-                vdpBaseTile MENU40
+                vdpBaseTile MENUTILE35
+                vdpBaseTile MENUTILE36
+                vdpBaseTile MENUTILE40
                 vdpBaseTile SPACE
-                vdpBaseTile MENU45
-                vdpBaseTile MENU46
-                vdpBaseTile MENU50
+                vdpBaseTile MENUTILE45
+                vdpBaseTile MENUTILE46
+                vdpBaseTile MENUTILE50
                 vdpBaseTile SPACE
-                vdpBaseTile MENU55
-                vdpBaseTile MENU56
-                vdpBaseTile MENU60
+                vdpBaseTile MENUTILE55
+                vdpBaseTile MENUTILE56
+                vdpBaseTile MENUTILE60
                 vdpBaseTile SPACE
                 vdpBaseTile V_BORDER|MIRROR
                 
@@ -2673,6 +2673,7 @@ ShopInventoryItemHighlightTiles:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused code
 
 sub_15268:
                 
@@ -2961,14 +2962,14 @@ YesNoPromptMenuLayout:
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
 ; 1st line
-                vdpTile MENU1|PALETTE3|PRIORITY
-                vdpTile MENU2|PALETTE3|PRIORITY
-                vdpTile MENU3|PALETTE3|PRIORITY
+                vdpTile MENUTILE1|PALETTE3|PRIORITY
+                vdpTile MENUTILE2|PALETTE3|PRIORITY
+                vdpTile MENUTILE3|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile 
-                vdpTile MENU10|PALETTE3|PRIORITY
-                vdpTile MENU11|PALETTE3|PRIORITY
-                vdpTile MENU12|PALETTE3|PRIORITY
+                vdpTile MENUTILE10|PALETTE3|PRIORITY
+                vdpTile MENUTILE11|PALETTE3|PRIORITY
+                vdpTile MENUTILE12|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile CORNER|PALETTE3|PRIORITY
                 vdpTile H_BORDER|PALETTE3|PRIORITY
@@ -2977,14 +2978,14 @@ YesNoPromptMenuLayout:
                 vdpTile CORNER|MIRROR|PALETTE3|PRIORITY
                 
 ; 2nd line
-                vdpTile MENU4|PALETTE3|PRIORITY
-                vdpTile MENU5|PALETTE3|PRIORITY
-                vdpTile MENU6|PALETTE3|PRIORITY
+                vdpTile MENUTILE4|PALETTE3|PRIORITY
+                vdpTile MENUTILE5|PALETTE3|PRIORITY
+                vdpTile MENUTILE6|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile 
-                vdpTile MENU13|PALETTE3|PRIORITY
-                vdpTile MENU14|PALETTE3|PRIORITY
-                vdpTile MENU15|PALETTE3|PRIORITY
+                vdpTile MENUTILE13|PALETTE3|PRIORITY
+                vdpTile MENUTILE14|PALETTE3|PRIORITY
+                vdpTile MENUTILE15|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile V_BORDER|PALETTE3|PRIORITY
                 vdpTile SPACE|PALETTE3|PRIORITY
@@ -2993,14 +2994,14 @@ YesNoPromptMenuLayout:
                 vdpTile V_BORDER|MIRROR|PALETTE3|PRIORITY
                 
 ; 3rd line
-                vdpTile MENU7|PALETTE3|PRIORITY
-                vdpTile MENU8|PALETTE3|PRIORITY
-                vdpTile MENU9|PALETTE3|PRIORITY
+                vdpTile MENUTILE7|PALETTE3|PRIORITY
+                vdpTile MENUTILE8|PALETTE3|PRIORITY
+                vdpTile MENUTILE9|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile 
-                vdpTile MENU16|PALETTE3|PRIORITY
-                vdpTile MENU17|PALETTE3|PRIORITY
-                vdpTile MENU18|PALETTE3|PRIORITY
+                vdpTile MENUTILE16|PALETTE3|PRIORITY
+                vdpTile MENUTILE17|PALETTE3|PRIORITY
+                vdpTile MENUTILE18|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile CORNER|FLIP|PALETTE3|PRIORITY
                 vdpTile H_BORDER|FLIP|PALETTE3|PRIORITY
@@ -3015,7 +3016,7 @@ YesNoPromptMenuLayout:
 
 ClosePortraitEyes:
                 
-                clr.b   ((byte_FFB082-$1000000)).w
+                clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 jsr     (WaitForVInt).w
                 move.w  d0,-(sp)
                 btst    #0,d0
@@ -3055,7 +3056,7 @@ VInt_HandlePortraitBlinking:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 beq.w   return_155C2
-                tst.b   ((byte_FFB082-$1000000)).w
+                tst.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 beq.w   return_155C2
                 lea     ((BLINK_COUNTER-$1000000)).w,a0
                 subq.w  #1,(a0)

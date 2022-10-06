@@ -768,7 +768,7 @@ DecreaseBaseAGI:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
-                move.w  #$C8,d6
+                move.w  #CHAR_STATCAP_AGI_DECREASING,d6
                 moveq   #COMBATANT_OFFSET_AGI_BASE,d7
                 bsr.w   DecreaseAndClampByte
                 movem.l (sp)+,d5-a0
@@ -784,7 +784,7 @@ DecreaseCurrentAGI:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
-                move.w  #$C8,d6
+                move.w  #CHAR_STATCAP_AGI_DECREASING,d6
                 moveq   #COMBATANT_OFFSET_AGI_CURRENT,d7
                 bsr.w   DecreaseAndClampByte
                 movem.l (sp)+,d5-a0
@@ -1478,7 +1478,7 @@ RepairItemBySlot:
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Nothing        
                 bclr    #ITEMENTRY_UPPERBIT_BROKEN,(a0)
-                beq.s   @NotBroken      
+                beq.s   @NotBroken
                 clr.w   d2
                 bra.s   @Goto_Done
 @NotBroken:
@@ -1764,7 +1764,7 @@ RemoveItemBySlot:
 UnequipWeapon:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                move.w  #ITEMTYPE_WEAPON,d2 ; weapon
+                move.w  #ITEMTYPE_WEAPON,d2
                 bra.s   UnequipItemByType
 
     ; End of function UnequipWeapon
@@ -1776,7 +1776,7 @@ UnequipWeapon:
 UnequipRing:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                move.w  #ITEMTYPE_RING,d2 ; ring
+                move.w  #ITEMTYPE_RING,d2
 
     ; End of function UnequipRing
 
@@ -2083,7 +2083,7 @@ IsItemCursed?:
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
-                beq.s   @NotCursed      
+                beq.s   @NotCursed
                 ori     #1,ccr          ; item is cursed
                 bra.s   @Done
 @NotCursed:
@@ -2177,7 +2177,7 @@ UnequipAllItemsIfNotCursed:
                 bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a1)
 @Next:
                 
-                addq.w  #2,a1
+                addq.w  #ITEMENTRY_SIZE,a1
                 dbf     d0,@Loop
                 
                 movem.l (sp)+,d0-d1/a0-a1
@@ -2443,10 +2443,10 @@ GetCombatantEntryAddress:
 @GetAddress:
                 
                 andi.w  #$FF,d0
-                lsl.w   #3,d0
-                move.w  d0,d1
-                lsl.w   #3,d0
-                sub.w   d1,d0
+                lsl.w   #3,d0	;
+                move.w  d0,d1	; multiply by
+                lsl.w   #3,d0	; combatant entry size
+                sub.w   d1,d0	;
                 lea     ((COMBATANT_ENTRIES-$1000000)).w,a0
                 adda.w  d0,a0
                 movem.w (sp)+,d0-d1
@@ -2566,19 +2566,19 @@ IncreaseAndClampByte:
                 
                 bsr.w   GetCombatantEntryAddress
                 add.b   (a0,d7.w),d1
-                bcs.s   loc_9320
+                bcs.s   @MakeMaxValue  ; check if overflow to negative
                 cmp.b   d6,d1
-                bcs.s   loc_9324
-loc_9320:
+                bcs.s   @Continue      ; check if less than max
+@MakeMaxValue:
                 
                 move.b  d6,d1
-                bra.s   loc_932A
-loc_9324:
+                bra.s   @Done
+@Continue:
                 
                 cmp.b   d5,d1
-                bcc.s   loc_932A
-                move.b  d5,d1
-loc_932A:
+                bcc.s   @Done
+                move.b  d5,d1          ;  if below min, set to min
+@Done:
                 
                 move.b  d1,(a0,d7.w)
                 andi.w  #$FF,d1
@@ -2633,20 +2633,20 @@ DecreaseAndClampByte:
                 bsr.w   GetCombatantEntryAddress
                 move.b  d1,d4
                 move.b  (a0,d7.w),d1
-                sub.b   d4,d1
-                bcs.s   loc_9380
-                cmp.b   d5,d1
-                bcc.s   loc_9384
-loc_9380:
+                sub.b   d4,d1       ; check if less than value
+                bcs.s   @MakeMinValue
+                cmp.b   d5,d1       ; compare to min
+                bcc.s   @CheckForMaxValue
+@MakeMinValue:
                 
-                move.b  d5,d1
-                bra.s   loc_938A
-loc_9384:
+                move.b  d5,d1       ; set to min
+                bra.s   @Continue
+@CheckForMaxValue:
                 
                 cmp.b   d6,d1
-                bcs.s   loc_938A
-                move.b  d6,d1
-loc_938A:
+                bcs.s   @Continue
+                move.b  d6,d1        ; if above max, set to max
+@Continue:
                 
                 move.b  d1,(a0,d7.w)
                 move.w  (sp)+,d4
@@ -2663,19 +2663,19 @@ IncreaseAndClampWord:
                 
                 bsr.w   GetCombatantEntryAddress
                 add.w   (a0,d7.w),d1
-                bmi.s   loc_93A4
+                bmi.s   @MakeMaxValue  ; check if overflow to negative
                 cmp.w   d6,d1
-                bcs.s   loc_93A8
-loc_93A4:
+                bcs.s   @Continue      ; check if less than max
+@MakeMaxValue:
                 
                 move.w  d6,d1
-                bra.s   loc_93AE
-loc_93A8:
+                bra.s   @Done
+@Continue:
                 
                 cmp.w   d5,d1
-                bcc.s   loc_93AE
-                move.w  d5,d1
-loc_93AE:
+                bcc.s   @Done
+                move.w  d5,d1          ;  if below min, set to min
+@Done:
                 
                 move.w  d1,(a0,d7.w)
                 rts
@@ -2692,20 +2692,20 @@ DecreaseAndClampWord:
                 bsr.w   GetCombatantEntryAddress
                 move.w  d1,d4
                 move.w  (a0,d7.w),d1
-                sub.w   d4,d1
-                bmi.s   loc_93C8
-                cmp.w   d5,d1
-                bhi.s   loc_93CC
-loc_93C8:
+                sub.w   d4,d1       ; check if less than value
+                bmi.s   @MakeMinValue
+                cmp.w   d5,d1       ; compare to min
+                bhi.s   @CheckForMaxValue
+@MakeMinValue:
                 
-                move.w  d5,d1
-                bra.s   loc_93D2
-loc_93CC:
+                move.w  d5,d1       ; set to min
+                bra.s   @Continue
+@CheckForMaxValue:
                 
                 cmp.w   d6,d1
-                bls.s   loc_93D2
-                move.w  d6,d1
-loc_93D2:
+                bls.s   @Continue
+                move.w  d6,d1        ; if above max, set to max
+@Continue:
                 
                 move.w  d1,(a0,d7.w)
                 move.w  (sp)+,d4
@@ -2715,6 +2715,8 @@ loc_93D2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused subroutine
 
 
 IncreaseAndClampLong:
@@ -2742,6 +2744,8 @@ loc_93F2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused subroutine
 
 
 DecreaseAndClampLong:

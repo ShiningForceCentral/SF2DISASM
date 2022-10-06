@@ -9,6 +9,7 @@ DebugModeBattleTest:
                 
                 move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
                 move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
+				
                 moveq   #ALLY_SARAH,d0
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CHESTER,d0
@@ -67,6 +68,7 @@ DebugModeBattleTest:
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
+				
                 moveq   #0,d0
                 move.w  #$63,d1 
                 bsr.w   j_SetBaseAGI
@@ -150,7 +152,7 @@ loc_7820:
                 bra.w   byte_77DE       
 loc_7894:
                 
-                bsr.w   sub_78BC
+                bsr.w   AssignStats_BattleTest
                 jsr     j_InitMemberListScreen
                 tst.b   d0
                 bne.w   byte_77DE       
@@ -172,39 +174,39 @@ loc_78BA:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_78BC:
+AssignStats_BattleTest:
                 
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
                 lea     (FF0000_RAM_START).l,a0
-loc_78C6:
+AssignStats_Loop:
                 
                 bsr.w   j_GetCurrentLevel
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,(a0)
                 bsr.w   j_GetMaxHP
                 bsr.w   j_SetCurrentHP
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,2(a0)
                 bsr.w   j_GetMaxMP
                 bsr.w   j_SetCurrentMP
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,4(a0)
                 bsr.w   j_GetBaseATT
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,6(a0)
                 bsr.w   j_GetBaseDEF
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,8(a0)
                 bsr.w   j_GetBaseAGI
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,$A(a0)
                 adda.w  #$10,a0
                 addq.w  #1,d0
-                dbf     d7,loc_78C6
+                dbf     d7,AssignStats_Loop
                 rts
 
-    ; End of function sub_78BC
+    ; End of function AssignStats_BattleTest
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -228,17 +230,17 @@ LevelUpWholeForce:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_7930:
+GetDecimalDigits:
                 
                 move.w  d1,d2
                 ext.l   d2
-                divs.w  #$64,d2 
+                divs.w  #100,d2 
                 move.w  d2,d3
                 mulu.w  #$100,d3
                 move.w  d3,d1
                 swap    d2
                 ext.l   d2
-                divs.w  #$A,d2
+                divs.w  #10,d2
                 move.w  d2,d3
                 mulu.w  #$10,d3
                 add.w   d3,d1
@@ -246,5 +248,5 @@ sub_7930:
                 add.w   d2,d1
                 rts
 
-    ; End of function sub_7930
+    ; End of function GetDecimalDigits
 

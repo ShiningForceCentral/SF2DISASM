@@ -70,7 +70,7 @@ WaitForPlayerInput:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 WaitForPlayer1NewInput:
                 
                 andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((P1_INPUT-$1000000)).w
@@ -120,7 +120,7 @@ loc_15CA:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 WaitForInputFor1Second:
                 
                 movem.l d5,-(sp)
@@ -141,7 +141,7 @@ WaitForInput_Loop:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 WaitForInputFor3Seconds:
                 
                 movem.l d5,-(sp)

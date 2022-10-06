@@ -388,7 +388,7 @@ loc_65CC:
                 clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
 loc_65D8:
                 
-                tst.b   ((byte_FFB198-$1000000)).w
+                tst.b   ((MOUTH_CONTROL_TOGGLE-$1000000)).w
                 bne.s   loc_65EC
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d1
                 andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A,d1
@@ -832,6 +832,7 @@ loc_6844:
 loc_684E:
                 
                 dbf     d6,loc_6822
+				
                 move.w  #$D060,d0
                 move.w  #$D061,d1
                 move.w  #$D860,d2
@@ -882,6 +883,7 @@ loc_688C:
                 
                 move.l  #$FFFFFFFF,(a0)+
                 dbf     d7,loc_688C
+				
                 clr.w   d0
                 bra.w   loc_68FC
 
@@ -896,9 +898,8 @@ HandleDialogueTypewriting:
                 cmpi.b  #$7C,d0 
                 beq.w   return_68FA
                 cmpi.b  #$7D,d0 
-loc_68A8:
-                
                 beq.w   return_68FA
+				
                 move.w  d0,-(sp)
                 bsr.w   HandleBlinkingDialogueCursor
                 move.w  (sp)+,d1
@@ -930,7 +931,7 @@ loc_68E2:
                 blt.s   return_68FA
 loc_68E6:
                 
-                tst.b   ((byte_FFB198-$1000000)).w
+                tst.b   ((MOUTH_CONTROL_TOGGLE-$1000000)).w
                 bne.s   loc_68F2
                 tst.b   ((P1_INPUT-$1000000)).w
                 bne.s   return_68FA
@@ -1274,6 +1275,7 @@ loc_6BC0:
 loc_6BD4:
                 
                 dbf     d7,loc_6BC0
+				
                 add.b   d4,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 rts
 

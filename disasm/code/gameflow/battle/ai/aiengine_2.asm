@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 var_4 = -4
-var_3 = -3
+attacker = -3
 var_2 = -2
 var_1 = -1
 
@@ -13,7 +13,7 @@ sub_F522:
                 
                 movem.l d0-a6,-(sp)
                 link    a6,#-4
-                move.b  d0,var_3(a6)
+                move.b  d0,attacker(a6)
                 move.w  #8,d6
                 jsr     j_RandomUnderD6
                 cmpi.b  #2,d7
@@ -56,7 +56,7 @@ loc_F5AA:
                 tst.b   d2
                 bne.s   loc_F5C4
                 clr.w   d0
-                move.b  var_3(a6),d0
+                move.b  attacker(a6),d0
                 jsr     j_GetCombatantStartingPositions
                 move.b  d1,var_1(a6)
                 move.b  d2,var_2(a6)
@@ -64,7 +64,7 @@ loc_F5AA:
 loc_F5C4:
                 
                 clr.w   d0
-                move.b  var_3(a6),d0
+                move.b  attacker(a6),d0
                 bsr.w   GetAiSpecialMoveOrders
                 move.w  d1,d0
                 jsr     j_GetEnemyAiTargetPosition
@@ -72,13 +72,13 @@ loc_F5C4:
                 move.b  d1,var_2(a6)
 loc_F5DE:
                 
-                move.b  var_3(a6),d0
+                move.b  attacker(a6),d0
                 bsr.w   GetMoveInfo     
                 bsr.w   MakeRangeLists
                 bsr.w   MakeTargetsList_Everybody
                 lea     (byte_FFB1DC).l,a0
                 clr.w   d0
-                move.b  var_3(a6),d0
+                move.b  attacker(a6),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
                 adda.w  d0,a0
                 clr.w   d1
@@ -167,7 +167,7 @@ loc_F6AC:
                 bne.s   loc_F6EA
                 lea     (byte_FFB1DC).l,a0
                 clr.w   d0
-                move.b  var_3(a6),d0
+                move.b  attacker(a6),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
                 adda.w  d0,a0
                 move.b  #0,(a0)
@@ -215,7 +215,7 @@ loc_F72E:
                 
                 lea     (byte_FFB1DC).l,a0
                 clr.w   d0
-                move.b  var_3(a6),d0
+                move.b  attacker(a6),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
                 adda.w  d0,a0
                 move.b  (a0),d0

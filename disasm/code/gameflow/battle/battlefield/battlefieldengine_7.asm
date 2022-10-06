@@ -437,6 +437,7 @@ AddAllToStack:
 
 ; =============== S U B R O U T I N E =======================================
 
+; should be combined with following subroutine
 
 j_makeEnemyMoveOrder:
                 

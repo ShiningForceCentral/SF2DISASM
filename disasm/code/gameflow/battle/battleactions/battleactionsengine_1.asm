@@ -114,6 +114,7 @@ loc_9CB6:
                 addq.w  #1,a5
                 moveq   #2,d6
                 dbf     d7,loc_9CB6
+				
                 bsr.w   WriteBattlesceneScript_IdleSprite
                 bsr.w   WriteBattlesceneScript_BreakUsedItem
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4

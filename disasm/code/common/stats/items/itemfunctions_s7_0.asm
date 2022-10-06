@@ -23,6 +23,7 @@ loc_4F4A2:
                 cmpi.w  #4,d2
                 bcs.w   loc_4F510
                 dbf     d3,loc_4F4A2
+				
                 moveq   #1,d0
                 tst.w   d5
                 beq.w   loc_4F53C

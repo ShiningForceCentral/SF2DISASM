@@ -5,11 +5,11 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_169AE:
+ShowPortraitName:
                 
                 movem.l d0-a1,-(sp)
                 tst.w   (word_FFB08C).l
-                bne.s   loc_16A2A
+                bne.s   @Done
                 movem.w d0,-(sp)
                 move.w  #$A03,d0
                 move.w  #$F60B,d1
@@ -31,13 +31,13 @@ sub_169AE:
                 moveq   #-16,d1
                 moveq   #10,d7
                 tst.w   d2
-                bne.s   loc_16A0C
-                bsr.w   WriteTilesFromAsciiWithOrangeFont
-                bra.s   loc_16A10
-loc_16A0C:
+                bne.s   @LivingMember
+                bsr.w   WriteTilesFromAsciiWithOrangeFont ; dead member
+                bra.s   @DisplayName
+@LivingMember:
                 
-                bsr.w   WriteTilesFromAsciiWithRegularFont
-loc_16A10:
+                bsr.w   WriteTilesFromAsciiWithRegularFont ; living member
+@DisplayName:
                 
                 move.w  (word_FFB08C).l,d0
                 subq.w  #1,d0
@@ -45,22 +45,22 @@ loc_16A10:
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
-loc_16A2A:
+@Done:
                 
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function sub_169AE
+    ; End of function ShowPortraitName
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_16A30:
+HidePortraitName:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 move.w  (word_FFB08C).l,d0
-                beq.s   loc_16A5C
+                beq.s   @Skip
                 subq.w  #1,d0
                 move.w  #$F60B,d1
                 moveq   #4,d2
@@ -68,10 +68,10 @@ sub_16A30:
                 jsr     (WaitForWindowMovementEnd).l
                 jsr     (ClearWindowAndUpdateEndPointer).l
                 clr.w   (word_FFB08C).l
-loc_16A5C:
+@Skip:
                 
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-    ; End of function sub_16A30
+    ; End of function HidePortraitName
 

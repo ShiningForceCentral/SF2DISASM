@@ -62,7 +62,7 @@ NameAlly:
                 move.w  #WINDOW_NAMEALLY_PORTRAIT_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
-                jsr     sub_15CC4(pc)
+                jsr     NavigateAlphabetWindow(pc)
                 nop
                 move.w  ally(a6),d0
                 lea     (TEMP_NAME_ENTRY_SPACE).l,a0
@@ -110,7 +110,7 @@ alphabetWindowTilesEnd = -12
 entryWindowTilesEnd = -8
 portraitWindowTilesEnd = -4
 
-sub_15CC4:
+NavigateAlphabetWindow:
                 
                 lea     (FF8804_LOADING_SPACE).l,a0
                 clr.l   (a0)+
@@ -228,7 +228,7 @@ loc_15DFE:
                 addq.b  #1,d0
                 cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 bge.s   loc_15E16
-                cmpi.b  #$1A,d0         ; HARDCODED stuff ?
+                cmpi.b  #$1A,d0
                 bne.s   loc_15E14
                 moveq   #0,d0
 loc_15E14:
@@ -306,7 +306,7 @@ loc_15E94:
 loc_15EAC:
                 
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
-                bsr.s   sub_15EE0
+                bsr.s   BottomToTopWrapCursorLocation
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_15D22
 loc_15EBA:
@@ -322,21 +322,21 @@ loc_15ED2:
                 
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 sndCom  SFX_MENU_SELECTION
-                bsr.s   sub_15EE0
+                bsr.s   BottomToTopWrapCursorLocation
                 bra.w   loc_15D22
 
-    ; End of function sub_15CC4
+    ; End of function NavigateAlphabetWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_15EE0:
+BottomToTopWrapCursorLocation:
                 
                 cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 bne.s   return_15F20
                 move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d0
-                cmpi.b  #$12,d0         ; HARDCODED stuff ?
+                cmpi.b  #$12,d0
                 bne.s   loc_15EF4
                 moveq   #$13,d0
 loc_15EF4:
@@ -371,16 +371,16 @@ return_15F20:
                 
                 rts
 
-    ; End of function sub_15EE0
+    ; End of function BottomToTopWrapCursorLocation
 
 
-; START OF FUNCTION CHUNK FOR sub_15CC4
+; START OF FUNCTION CHUNK FOR NavigateAlphabetWindow
 
 loc_15F22:
                 
                 clr.w   d1
 
-; END OF FUNCTION CHUNK FOR sub_15CC4
+; END OF FUNCTION CHUNK FOR NavigateAlphabetWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -403,13 +403,13 @@ sub_15F24:
                 moveq   #1,d1
 loc_15F2C:
                 
-                lea     (SPRITE_08).l,a0
+                lea     (SPRITE_CURSOR_DATA).l,a0
                 cmpi.w  #7,d1
                 bge.s   loc_15F50
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
-                move.w  #1,8(a0)
-                move.w  #1,$E(a0)
+                move.w  #1,NEXTVDPSPRITE_OFFSET_Y(a0)
+                move.w  #1,NEXTVDPSPRITE_OFFSET_X(a0)
                 bra.s   loc_15F90
 loc_15F50:
                 
@@ -417,7 +417,7 @@ loc_15F50:
                 move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d0
                 lsl.w   #3,d0
                 addi.w  #$94,d0 
-                move.w  d0,6(a0)
+                move.w  d0,VDPSPRITE_OFFSET_X(a0)
                 clr.w   d0
                 move.b  ((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w,d0
                 lsl.w   #3,d0
@@ -428,35 +428,35 @@ loc_15F50:
                 bge.s   loc_15F84
                 lsl.w   #3,d0
                 addi.w  #$D8,d0 
-                move.w  d0,$E(a0)
+                move.w  d0,NEXTVDPSPRITE_OFFSET_X(a0)
                 bra.s   loc_15F8A
 loc_15F84:
                 
-                move.w  #1,$E(a0)
+                move.w  #1,NEXTVDPSPRITE_OFFSET_X(a0)
 loc_15F8A:
                 
-                move.w  #$C9,8(a0) 
+                move.w  #$C9,NEXTVDPSPRITE_OFFSET_Y(a0) 
 loc_15F90:
                 
-                move.b  #5,2(a0)
-                move.w  #$C5C8,4(a0)
+                move.b  #5,VDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #$C5C8,VDPSPRITE_OFFSET_TILE(a0)
                 cmpi.b  #$13,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
                 blt.s   loc_15FB8
                 cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 bne.s   loc_15FB8
-                move.b  #$D,2(a0)
-                move.w  #$C5C0,4(a0)
+                move.b  #$D,VDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #$C5C0,VDPSPRITE_OFFSET_TILE(a0)
 loc_15FB8:
                 
-                clr.b   $A(a0)
-                move.w  #$C5C3,$C(a0)
+                clr.b   NEXTVDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #$C5C3,NEXTVDPSPRITE_OFFSET_TILE(a0)
                 subq.w  #1,d1
                 bne.s   loc_15FC8
                 moveq   #$14,d1
 loc_15FC8:
                 
-                move.b  #9,3(a0)
-                move.b  #$10,$B(a0)
+                move.b  #9,VDPSPRITE_OFFSET_LINK(a0)
+                move.b  #$10,NEXTVDPSPRITE_OFFSET_LINK(a0)
                 bra.w   sub_101E6
 
     ; End of function sub_15F24

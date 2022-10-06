@@ -60,7 +60,7 @@ rjt_cutsceneScriptCommands:
                 dc.w csc0D_jumpIfFlagClear-rjt_cutsceneScriptCommands
                 dc.w csc0E_jumpIfForceMemberInList-rjt_cutsceneScriptCommands
                 dc.w csc0F_jumpIfCharacterDead-rjt_cutsceneScriptCommands
-                dc.w csc10_setOrClearFlag-rjt_cutsceneScriptCommands
+                dc.w csc10_ToggleFlag-rjt_cutsceneScriptCommands
                 dc.w csc11_promptYesNoForStoryFlow-rjt_cutsceneScriptCommands
                 dc.w csc12_executeContextMenu-rjt_cutsceneScriptCommands
                 dc.w csc13_setStoryFlag-rjt_cutsceneScriptCommands
@@ -533,7 +533,7 @@ return_47478:
 ; xxxx yyyy
 
 
-csc10_setOrClearFlag:
+csc10_ToggleFlag:
                 
                 move.w  (a6)+,d1
                 move.w  (a6)+,d0
@@ -547,7 +547,7 @@ return_4748E:
                 
                 rts
 
-    ; End of function csc10_setOrClearFlag
+    ; End of function csc10_ToggleFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -620,7 +620,7 @@ csc13_setStoryFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 sub_474EE:
                 
                 moveq   #0,d0

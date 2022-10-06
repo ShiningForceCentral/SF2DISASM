@@ -21,7 +21,7 @@ InitWitchSuspendVIntFunctions:
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndInterrupts
-                clr.b   ((byte_FFB198-$1000000)).w
+                clr.b   ((MOUTH_CONTROL_TOGGLE-$1000000)).w
                 move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w
                 bsr.w   DisplayWitchScreen
                 bsr.w   EnableDisplayAndInterrupts
@@ -165,7 +165,7 @@ var_2 = -2
 VInt_WitchBlink:
                 
                 link    a6,#-2
-                tst.b   ((byte_FFB082-$1000000)).w
+                tst.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 beq.w   loc_7E16
                 clr.w   var_2(a6)
                 lea     ((BLINK_COUNTER-$1000000)).w,a2

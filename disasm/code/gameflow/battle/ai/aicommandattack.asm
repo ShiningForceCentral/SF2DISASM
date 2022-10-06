@@ -103,7 +103,7 @@ ExecuteAiCommand_Attack:
 @ValidTarget_Spell:
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0),d1
-                bsr.w   GetSpellRange   
+                bsr.w   GetSpellRange
                 bsr.w   MakeTargetsList_Everybody
                 jsr     GetYPos
                 move.w  d1,d2

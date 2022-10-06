@@ -228,18 +228,26 @@ loc_16846:
                 dbf     d7,loc_16844
                 movem.l (sp)+,a1
                 cmpi.w  #2,d3
-                blt.s   loc_16864
+                blt.s   WitchPage0_FileOptions
                 addq.l  #2,a1
-loc_16864:
+
+; =============== S U B R O U T I N E =======================================
+
+; In: D3 = bubble number
+
+WitchPage0_FileOptions:
                 
                 move.w  var_10(a6),d1
-                bne.w   loc_168A4
+                bne.w   WitchPage1_NewFileNames
                 adda.w  #$72,a1 
                 lsl.w   #2,d3
                 movea.l pt_s_WitchMenu(pc,d3.w),a0
                 moveq   #5,d7
-                bsr.w   sub_1697C
+                bsr.w   WriteBubbleText
                 rts
+
+    ; End of function DrawWitchMenuBubble
+	
 pt_s_WitchMenu:
                 
                 dc.l aStart             
@@ -258,18 +266,23 @@ aDel_:
 aCopy:
                 
                 dc.b 'COPY',0
-loc_168A4:
+
+; =============== S U B R O U T I N E =======================================
+
+; In: D3 = bubble number
+
+WitchPage1_NewFileNames:
                 
                 subq.w  #1,d1
-                bne.w   sub_168D8
+                bne.w   WitchPage2_LoadedFileNames
                 adda.w  #$72,a1 
                 lsl.w   #2,d3
                 movea.l pt_s_DataMenu(pc,d3.w),a0
                 moveq   #5,d7
-                bsr.w   sub_1697C
+                bsr.w   WriteBubbleText
                 rts
 
-    ; End of function DrawWitchMenuBubble
+    ; End of function WitchPage1_NewFileNames
 
 pt_s_DataMenu:  dc.l aData1             
                 dc.l aData1             
@@ -280,11 +293,12 @@ aData2:         dc.b 'DATA2',0
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: D3 = bubble number
 
-sub_168D8:
+WitchPage2_LoadedFileNames:
                 
                 subq.w  #1,d1
-                bne.w   sub_16942
+                bne.w   WitchPage3_Difficulties
                 movem.l d7-a1,-(sp)
                 lea     (SAVE1_DATA).l,a0
                 cmpi.w  #2,d3
@@ -294,18 +308,18 @@ loc_168F4:
                 
                 lea     (FF8804_LOADING_SPACE).l,a1
                 moveq   #9,d7
-loc_168FC:
+@CopyName_Loop:
                 
                 move.b  (a0),(a1)+
                 addq.l  #2,a0
-                dbf     d7,loc_168FC
+                dbf     d7,@CopyName_Loop
                 movem.l (sp)+,d7-a1
                 adda.w  #$72,a1 
                 move.l  a1,-(sp)
                 lsl.w   #2,d3
                 lea     (FF8804_LOADING_SPACE).l,a0
                 moveq   #5,d7
-                bsr.w   sub_1697C
+                bsr.w   WriteBubbleText
                 movea.l (sp)+,a1
                 cmpi.b  #0,(byte_FF8809).l
                 beq.s   return_16940
@@ -314,27 +328,28 @@ loc_168FC:
                 lsl.w   #2,d3
                 lea     (TARGETS_REACHABLE_BY_ITEM_NUMBER).l,a0
                 moveq   #4,d7
-                bsr.w   sub_1697C
+                bsr.w   WriteBubbleText
 return_16940:
                 
                 rts
 
-    ; End of function sub_168D8
+    ; End of function WitchPage2_LoadedFileNames
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: D3 = bubble number
 
-sub_16942:
+WitchPage3_Difficulties:
                 
                 adda.w  #$72,a1 
                 lsl.w   #2,d3
                 movea.l pt_s_DifficultyMenu(pc,d3.w),a0
                 moveq   #5,d7
-                bsr.w   sub_1697C
+                bsr.w   WriteBubbleText
                 rts
 
-    ; End of function sub_16942
+    ; End of function WitchPage3_Difficulties
 
 pt_s_DifficultyMenu:
                 dc.l aNorm_             
@@ -350,7 +365,7 @@ aOuch:          dc.b 'OUCH!',0
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1697C:
+WriteBubbleText:
                 
                 movem.w d0,-(sp)
                 movem.l d7/a1,-(sp)
@@ -368,5 +383,5 @@ loc_16990:
                 movem.w (sp)+,d0
                 rts
 
-    ; End of function sub_1697C
+    ; End of function WriteBubbleText
 

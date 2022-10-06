@@ -111,10 +111,10 @@ WriteBattlesceneScript_InflictDamage:
                 
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction  
+                bne.s   @Reaction_Enemy  
                 executeAllyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineBattleMessage
-@EnemyReaction:
+@Reaction_Enemy:
                 
                 executeEnemyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineBattleMessage:
@@ -198,10 +198,10 @@ WriteBattlesceneScript_InflictAilment:
                 movea.l pt_InflictAilmentFunctions(pc,d2.w),a1
                 jsr     (a1)
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_AE76       
+                bne.s   @Reaction_Enemy
                 executeAllyReaction #0,#0,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @Return
-byte_AE76:
+@Reaction_Enemy:
                 
                 executeEnemyReaction #0,#0,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
 @Return:
@@ -355,10 +355,10 @@ WriteBattlesceneScript_InflictCurseDamage:
                 move.b  (a4),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @Enemy          
+                bne.s   @Reaction_Enemy          
                 executeAllyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @Message
-@Enemy:
+@Reaction_Enemy:
                 
                 executeEnemyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @Message:

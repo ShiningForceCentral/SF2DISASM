@@ -184,7 +184,7 @@ InitGameSettings:
                 move.b  d0,((EGRESS_MAP-$1000000)).w
                 move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 move.b  #2,((MESSAGE_SPEED-$1000000)).w
-                move.l  #$FFFFFFFF,((FOLLOWERS_LIST-$1000000)).w
+                move.l  #$FFFFFFFF,((EXPLORATION_UNITS-$1000000)).w
                 move.w  #$FFFF,((byte_FFAF26-$1000000)).w
                 movem.l (sp)+,d0/d7-a0
                 rts

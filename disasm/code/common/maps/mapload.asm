@@ -388,7 +388,6 @@ return_2370:
 
 
 ; =============== S U B R O U T I N E =======================================
-
 ; a0 : input ROM block data
 ; a1 : output RAM data
 
@@ -765,8 +764,8 @@ ApplyOverworldMapTransition_Right:
                 
                 move.w  #0,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
                 move.w  #0,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
-                move.w  #0,((word_FFA818-$1000000)).w
-                move.w  #0,((word_FFA81C-$1000000)).w
+                move.w  #0,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
+                move.w  #0,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1D,d7
@@ -831,8 +830,8 @@ ApplyOverworldMapTransition_Left:
                 
                 move.w  #$4F80,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
                 move.w  #$4F80,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
-                move.w  #$4F80,((word_FFA818-$1000000)).w
-                move.w  #$4F80,((word_FFA81C-$1000000)).w
+                move.w  #$4F80,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
+                move.w  #$4F80,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1D,d7
@@ -899,8 +898,8 @@ ApplyOverworldMapTransition_Up:
                 
                 move.w  #$5100,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
                 move.w  #$5100,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
-                move.w  #$5100,((word_FFA81A-$1000000)).w
-                move.w  #$5100,((word_FFA81E-$1000000)).w
+                move.w  #$5100,((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w
+                move.w  #$5100,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1A,d7
@@ -965,8 +964,8 @@ ApplyOverworldMapTransition_Down:
                 
                 move.w  #0,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
                 move.w  #0,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
-                move.w  #0,((word_FFA81A-$1000000)).w
-                move.w  #0,((word_FFA81E-$1000000)).w
+                move.w  #0,((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w
+                move.w  #0,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1A,d7
@@ -1149,10 +1148,10 @@ LoadMapTilesets:
 
 LoadMap:
                 
-                move.l  ((word_FFA818-$1000000)).w,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
-                move.l  ((word_FFA81C-$1000000)).w,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
-                clr.l   ((word_FFA820-$1000000)).w
-                clr.l   ((word_FFA824-$1000000)).w
+                move.l  ((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
+                move.l  ((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
+                clr.l   ((PLANE_A_SCROLL_SPEED_X-$1000000)).w
+                clr.l   ((PLANE_B_SCROLL_SPEED_X-$1000000)).w
                 clr.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 move.w  d0,-(sp)
                 move.w  d1,-(sp)
@@ -1302,7 +1301,7 @@ loc_2C0C:
                 bra.w   loc_2B82
 loc_2C14:
                 
-                bsr.w   LoadMapArea     
+                bsr.w   LoadMapArea
                 move.w  (sp)+,d0
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_2C70
@@ -1573,7 +1572,7 @@ LoadMapArea:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+; unused code
 sub_2EC0:
                 
                 move.w  #$20,d6 
@@ -1612,36 +1611,36 @@ loc_2F04:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+; unused code
 sub_2F24:
                 
                 move.w  d0,-(sp)
-                move.w  ((word_FFA820-$1000000)).w,d0
+                move.w  ((PLANE_A_SCROLL_SPEED_X-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F36
-                move.w  d0,((word_FFA820-$1000000)).w
+                move.w  d0,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
 loc_2F36:
                 
-                move.w  ((word_FFA822-$1000000)).w,d0
+                move.w  ((PLANE_A_SCROLL_SPEED_Y-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F46
-                move.w  d0,((word_FFA822-$1000000)).w
+                move.w  d0,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
 loc_2F46:
                 
-                move.w  ((word_FFA824-$1000000)).w,d0
+                move.w  ((PLANE_B_SCROLL_SPEED_X-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F56
-                move.w  d0,((word_FFA824-$1000000)).w
+                move.w  d0,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
 loc_2F56:
                 
-                move.w  ((word_FFA826-$1000000)).w,d0
+                move.w  ((PLANE_B_SCROLL_SPEED_Y-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F66
-                move.w  d0,((word_FFA826-$1000000)).w
+                move.w  d0,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
 loc_2F66:
                 
                 move.w  (sp)+,d0

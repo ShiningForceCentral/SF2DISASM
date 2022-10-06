@@ -511,14 +511,14 @@ GetBattleSpritesetSubsection:
                 clr.l   d0
                 move.b  2(a1),d1
                 move.b  1(a1),d0
-                mulu.w  #$C,d0
+                mulu.w  #BATTLESPRITESET_COMBATANT_ENTRY_SIZE,d0
                 adda.l  d0,a0
                 subq.b  #1,d2
                 beq.w   @ReturnInfo     ; 3 = AI-regions
                 clr.l   d0
                 move.b  3(a1),d1
                 move.b  2(a1),d0
-                mulu.w  #$C,d0
+                mulu.w  #BATTLESPRITESET_REGION_ENTRY_SIZE,d0
                 adda.l  d0,a0           ; 4 = AI-points
 @ReturnInfo:
                 
@@ -668,7 +668,7 @@ DoesBattleUpgrade:
                 bra.w   @Done
 @Next:
                 
-                dbf     d6,@Loop        
+                dbf     d6,@Loop
 @Done:
                 
                 movem.l (sp)+,d0/d2-a6

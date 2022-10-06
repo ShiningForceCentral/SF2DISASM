@@ -28,8 +28,8 @@ byte_2007A:
                 jsr     j_HidePortraitWindow
 loc_20088:
                 
-                moveq   #0,d0
-                moveq   #0,d1
+                moveq   #0,d0           ; initial choice : up
+                moveq   #0,d1           ; animate-in direction : bottom
                 moveq   #MENU_SHOP,d2
                 lea     (InitStack).w,a0
                 jsr     j_ExecuteMenu
@@ -347,7 +347,7 @@ loc_2046C:
                 jsr     j_GetItemDefAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.w  itemPrice(a6),d0
-                lsr.w   #2,d0
+                lsr.w   #2,d0		; repair is 25% item price
                 move.w  d0,itemPrice(a6)
                 move.w  member(a6),d0
                 jsr     j_GetCombatantEntryAddress

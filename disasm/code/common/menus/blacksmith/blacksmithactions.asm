@@ -112,7 +112,7 @@ ProcessBlacksmithOrders:
 @AnyPendingOrders?:
                 
                 cmpi.w  #0,pendingOrdersNumber(a6)
-                beq.w   byte_21B38      
+                beq.w   @StartOrder      
                 
                 txt     206             ; "Oops...{N}I needs some more time.{W1}"
                 move.w  readyToFulfillOrdersNumber(a6),d0
@@ -122,7 +122,7 @@ ProcessBlacksmithOrders:
                 beq.w   @Return
                 txt     196             ; "{CLEAR}Anything else?"
                 bra.w   @Call_PlaceOrder
-byte_21B38:
+@StartOrder:
                 
                 txt     195             ; "We can create a great and{N}special weapon for you if you{N}have some special material.{W1}"
 @Call_PlaceOrder:
@@ -219,11 +219,11 @@ byte_21B58:
                 move.w  itemIndex(a6),d1
                 move.w  member(a6),d0
                 jsr     j_IsWeaponOrRingEquippable?
-                bcc.w   byte_21CD0      
+                bcc.w   @DoNotEquipNewItem      
                 txt     173             ; "{CLEAR}Equip it now?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                bne.w   byte_21CD0      
+                bne.w   @DoNotEquipNewItem      
                 
                 ; Is weapon?
                 move.w  itemIndex(a6),d1
@@ -246,7 +246,7 @@ byte_21B58:
                 ; Currently equipped weapon is cursed
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
-                bra.s   byte_21CD0      
+                bra.s   @DoNotEquipNewItem      
 @HasRingEquipped?:
                 
                 move.w  member(a6),d0
@@ -263,7 +263,7 @@ byte_21B58:
                 ; Currently equipped ring is cursed
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
-                bra.s   byte_21CD0      
+                bra.s   @DoNotEquipNewItem      
 @EquipNewItem:
                 
                 moveq   #0,d1
@@ -272,7 +272,7 @@ byte_21B58:
                 subq.w  #1,d1
                 jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
-                bne.s   byte_21CC8      
+                bne.s   @NotCursed      
                 
                 ; Newly equipped item is cursed
                 sndCom  MUSIC_CURSED_ITEM
@@ -280,11 +280,11 @@ byte_21B58:
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     175             ; "Gee, {NAME} gets{N}cursed.{W2}"
                 bra.w   @Done
-byte_21CC8:
+@NotCursed:
                 
                 txt     174             ; "Ah, it suits you!{W2}"
                 bra.w   @Done
-byte_21CD0:
+@DoNotEquipNewItem:
                 
                 txt     209             ; "{CLEAR}Here you go!{N}It's a great weapon!{W2}"
 @Done:
@@ -314,7 +314,7 @@ BlacksmithAction_PlaceOrder:
                 
                 module
                 movem.l d0-d2,-(sp)
-byte_21CDE:
+@StartNewOrder:
                 
                 txt     199             ; "What kind of material do you{N}have?{D1}"
                 clsTxt
@@ -328,10 +328,10 @@ byte_21CDE:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 cmpi.w  #ITEM_MITHRIL,d2
-                beq.w   byte_21D1A      
+                beq.w   @ProcessOrder      
                 txt     200             ; "Sorry, I've never worked{N}with that before....{W1}"
-                bra.s   byte_21CDE      
-byte_21D1A:
+                bra.s   @StartNewOrder      
+@ProcessOrder:
                 
                 
                 ; Pick customer
@@ -341,7 +341,7 @@ byte_21D1A:
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
-                beq.s   byte_21CDE      
+                beq.s   @StartNewOrder      
                 
                 ; Is customer promoted?
                 move.w  d0,targetMember(a6)
@@ -353,7 +353,7 @@ byte_21D1A:
                 ; Not promoted
                 move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     211             ; "{NAME} has to be promoted{N}first.{W1}"
-                bra.s   byte_21D1A      
+                bra.s   @ProcessOrder      
 @IsCustomerClassEligible?:
                 
                 bsr.w   IsClassBlacksmithEligible?
@@ -363,7 +363,7 @@ byte_21D1A:
                 ; Not eligible
                 move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     212             ; "Sorry, I can't create a{N}weapon for {NAME}.{W1}"
-                bra.s   byte_21D1A      
+                bra.s   @ProcessOrder      
 @ConfirmOrder:
                 
                 move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -377,7 +377,7 @@ byte_21D1A:
                 
                 ; Canceling order
                 txt     197             ; "{CLEAR}What a pity!{W2}"
-                bra.w   byte_21D1A      
+                bra.w   @ProcessOrder      
 @CheckGold:
                 
                 jsr     j_GetGold
@@ -415,7 +415,7 @@ byte_21E16:
                 txt     196             ; "{CLEAR}Anything else?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                beq.w   byte_21CDE      
+                beq.w   @StartNewOrder      
                 txt     197             ; "{CLEAR}What a pity!{W2}"
                 clsTxt
 @Done:

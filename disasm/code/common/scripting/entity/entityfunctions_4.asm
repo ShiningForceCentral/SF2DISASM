@@ -68,9 +68,11 @@ loc_4586C:
                 move.l  d0,-(a6)
                 subq.l  #1,a0
                 dbf     d5,loc_4586C
+				
                 adda.l  #$24,a0 
                 dbf     d6,loc_45868
                 dbf     d7,loc_45864
+				
                 move.w  #1,d7
 loc_45914:
                 
@@ -94,6 +96,7 @@ loc_45914:
                 bsr.w   sub_45B0E
                 adda.l  #$120,a6
                 dbf     d7,loc_45914
+				
                 unlk    a6
                 movem.l (sp)+,d0-d1/d5-a0
                 rts
@@ -167,9 +170,11 @@ loc_45988:
                 move.l  d0,-(a6)
                 addq.l  #1,a0
                 dbf     d5,loc_45988
+				
                 adda.l  #$1C,a0
                 dbf     d6,loc_45984
                 dbf     d7,loc_45980
+				
                 move.w  #1,d7
 loc_45A2C:
                 
@@ -193,6 +198,7 @@ loc_45A2C:
                 bsr.w   sub_45B0E
                 adda.l  #$120,a6
                 dbf     d7,loc_45A2C
+				
                 unlk    a6
                 movem.l (sp)+,d0-d1/d5-a0
                 rts
@@ -212,6 +218,7 @@ loc_45A98:
                 
                 move.l  (a0)+,-(a6)
                 dbf     d7,loc_45A98
+				
                 move.w  #1,d7
 loc_45AA2:
                 
@@ -238,6 +245,7 @@ loc_45AA2:
                 bsr.w   sub_45B0E
                 adda.l  #$120,a6
                 dbf     d7,loc_45AA2
+				
                 unlk    a6
                 movem.l (sp)+,d0-a0
                 rts
@@ -323,7 +331,7 @@ loc_45B78:
 ApplySpriteGhostEffect:
                 
                 movem.l d0-d1/d7-a0,-(sp)
-                move.w  #$23F,d7
+                move.w  #GFX_MAPSPRITE_PIXEL_COUNTER,d7
 loc_45B8C:
                 
                 move.b  (a0),d0
@@ -371,6 +379,7 @@ loc_45BCE:
                 
                 move.l  d1,-(a1)
                 dbf     d7,loc_45BCE
+				
                 movea.l a0,a4
                 movea.l a1,a5
                 tst.w   d0
@@ -439,6 +448,7 @@ loc_45C5C:
                 
                 move.l  -(a5),-(a4)
                 dbf     d7,loc_45C5C
+				
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
@@ -526,6 +536,7 @@ loc_45CBE:
                 suba.l  #4,a0
                 suba.l  #4,a1
                 dbf     d7,loc_45CBE
+				
                 move.w  d0,d7
                 subq.w  #1,d7
                 bcs.w   loc_45D16
@@ -567,9 +578,11 @@ loc_45D2C:
                 addq.w  #1,d1
                 addq.w  #1,d3
                 dbf     d6,loc_45D2C
+				
                 addq.w  #1,d2
                 addq.w  #1,d4
                 dbf     d7,loc_45D26
+				
                 movem.l (sp)+,d1-d7
                 rts
 
@@ -596,9 +609,11 @@ loc_45D56:
                 subq.w  #1,d1
                 subq.w  #1,d3
                 dbf     d6,loc_45D56
+				
                 addq.w  #1,d2
                 addq.w  #1,d4
                 dbf     d7,loc_45D50
+				
                 movem.l (sp)+,d1-d7
                 rts
 
@@ -625,9 +640,11 @@ loc_45D80:
                 addq.w  #1,d1
                 addq.w  #1,d3
                 dbf     d6,loc_45D80
+				
                 subq.w  #1,d2
                 subq.w  #1,d4
                 dbf     d7,loc_45D7A
+				
                 clr.l   (a0)
                 clr.l   $60(a0)
                 clr.l   $C0(a0)
@@ -720,6 +737,7 @@ loc_45E36:
                 and.l   d1,(a0)+
                 and.l   d2,(a0)+
                 dbf     d7,loc_45E36
+				
                 movem.l (sp)+,d0-d3/d7-a0
                 rts
 

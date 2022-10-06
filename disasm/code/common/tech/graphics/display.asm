@@ -62,7 +62,7 @@ plt_BasePalette:incbin "data/graphics/tech/basepalette.bin" ; Palette for UI/Spr
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 sub_30BE:
                 
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
@@ -114,6 +114,7 @@ loc_312C:
                 bclr    #6,d3
                 addq.w  #1,d0
                 dbf     d7,loc_312C
+				
                 movea.l a1,a0
                 moveq   #$20,d0 
                 moveq   #2,d1
@@ -163,6 +164,7 @@ loc_3196:
                 bclr    #6,d5
                 addq.w  #1,d1
                 dbf     d7,loc_3196
+				
                 movea.l a2,a0
                 moveq   #$20,d0 
                 moveq   #$40,d1 

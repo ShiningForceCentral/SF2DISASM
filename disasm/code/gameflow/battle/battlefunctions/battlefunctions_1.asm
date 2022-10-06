@@ -71,7 +71,7 @@ BattleLoop:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
-                bsr.w   SpawnEnemy      
+                bsr.w   SpawnEnemy
                 dbf     d7,@SpawnEnemies_Loop
 @Call_GenerateBattleTurnOrder:
                 

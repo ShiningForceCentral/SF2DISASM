@@ -1357,7 +1357,7 @@ j_CreateItemRangeGrid:
 
 sub_821C:
                 
-                jmp     sub_C4E8(pc)
+                jmp     AdjacentRange(pc)
 
     ; End of function sub_821C
 

@@ -67,7 +67,7 @@ j_WitchMainMenu:
 
 sub_100AC:
                 
-                jmp     sub_169AE(pc)
+                jmp     ShowPortraitName(pc)
 
     ; End of function sub_100AC
 
@@ -77,7 +77,7 @@ sub_100AC:
 
 sub_100B0:
                 
-                jmp     sub_16A30(pc)
+                jmp     HidePortraitName(pc)
 
     ; End of function sub_100B0
 

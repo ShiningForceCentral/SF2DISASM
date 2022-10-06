@@ -365,8 +365,8 @@ GetMoveType:
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
                 bsr.w   GetCombatantByte
-                lsr.w   #4,d1
-                andi.w  #$F,d1
+                lsr.w   #MOVETYPE_NIBBLE_SHIFTCOUNT,d1
+                andi.w  #MOVETYPE_MASK_LOWERNIBBLE,d1
                 movem.l (sp)+,d7-a0
                 rts
 
@@ -383,7 +383,7 @@ GetAiCommandset:
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
                 bsr.w   GetCombatantByte
-                andi.w  #$F,d1
+                andi.w  #MOVETYPE_MASK_LOWERNIBBLE,d1
                 movem.l (sp)+,d7-a0
                 rts
 

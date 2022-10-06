@@ -220,7 +220,7 @@ loc_C4D8:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_C4E8:
+AdjacentRange:
                 
                 movem.l d0-a6,-(sp)
                 bsr.w   ClearTargetGrid 
@@ -234,7 +234,7 @@ sub_C4E8:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_C4E8
+    ; End of function AdjacentRange
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -356,7 +356,7 @@ CreateTargetGridFromUsedItem:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+;unused
 sub_C5FA:
                 
                 movem.l d0-a6,-(sp)
@@ -771,6 +771,7 @@ loc_C8F4:
                 
                 addq.b  #1,d0
                 dbf     d7,UpdateTargetsList_Loop
+				
                 movem.l (sp)+,d0-a0
                 rts
 
@@ -810,6 +811,7 @@ loc_C94C:
                 
                 addq.b  #1,d0
                 dbf     d7,loc_C90A
+				
                 movem.l (sp)+,d0-a0
                 rts
 
@@ -1026,7 +1028,7 @@ CalculateAttackTargetPriority:
                 movem.l d0-d5/d7-a6,-(sp)
                 moveq   #0,d6           ; d6 = that weird extra AI value, so this just clears it
                 cmpi.b  #SPELL_NOTHING,d1
-                bne.s   @Spell          
+                bne.s   @Spell
                 
                 ; Regular attack
                 move.b  d2,d1           ; d1 = target
@@ -1332,12 +1334,12 @@ TargetPriorityScript2:
                 addi.w  #15,d6          ; if the defender is expected to die from the attack, +15 priority
 loc_CCE2:
                 
-                bsr.w   sub_D2F8        
+                bsr.w   sub_D2F8
                 bcs.s   loc_CCEA
                 addq.w  #1,d6           ; +1 target priority if the attack does more than 2/3rds of defenders remaining health
 loc_CCEA:
                 
-                bsr.w   sub_D362        
+                bsr.w   sub_D362
                 bcs.s   loc_CCF2
                 addq.w  #1,d6           ; +1 target priority if defender is expected to be left with less than 20% of max health.
 loc_CCF2:
@@ -1414,7 +1416,7 @@ TargetPriorityScript4:
                 addi.w  #15,d6          ; if the defender is expected to die from the attack, +15 priority
 loc_CD5A:
                 
-                bsr.w   sub_D362        
+                bsr.w   sub_D362
                 bcs.s   loc_CD62
                 addq.w  #1,d6           ; +1 target priority if defender is expected to be left with less than 20% of max health
 loc_CD62:

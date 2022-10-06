@@ -128,7 +128,7 @@ GetItemBreakMessage:
                 beq.w   @Done
                 cmp.b   (a0),d0
                 beq.w   @Found
-                addq.l  #2,a0
+                addq.l  #ITEMENTRY_SIZE,a0
                 bra.s   @FindItem_Loop
 @Found:
                 

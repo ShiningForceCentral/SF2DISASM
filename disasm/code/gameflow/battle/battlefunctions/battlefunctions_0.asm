@@ -87,10 +87,10 @@ GetPlayerEntityPosition:
                 move.w  (ENTITY_Y).l,d2
                 move.b  (ENTITY_FACING).l,d3
                 ext.l   d1
-                divu.w  #384,d1
+                divu.w  #MAP_TILE_SIZE,d1
                 ext.l   d2
-                divu.w  #384,d2
-                andi.w  #3,d3
+                divu.w  #MAP_TILE_SIZE,d2
+                andi.w  #FACING_MASK,d3
                 rts
 
     ; End of function GetPlayerEntityPosition
@@ -118,10 +118,12 @@ loc_22C9A:
 loc_22C9E:
                 
                 dbf     d6,loc_22C90
+				
                 movem.l (sp)+,d6/a0-a1
                 lea     $30(a0),a0
                 lea     $80(a1),a1
                 dbf     d7,loc_22C8C
+				
                 movem.l (sp)+,d6-a1
                 movem.l d0/a0,-(sp)
                 lea     (PALLETE_2_BASE).l,a0
@@ -130,6 +132,7 @@ loc_22CC2:
                 
                 move.l  -$20(a0),(a0)+
                 dbf     d0,loc_22CC2
+				
                 movem.l (sp)+,d0/a0
                 move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
                 move.b  #PULSATING_1,((FADING_SETTING-$1000000)).w
@@ -152,11 +155,11 @@ GetBattleMapProperties:
                 move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d6
                 sub.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d6
                 ext.l   d6
-                divs.w  #$180,d6
+                divs.w  #MAP_TILE_SIZE,d6
                 move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d7
                 sub.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d7
                 ext.l   d7
-                divs.w  #$180,d7
+                divs.w  #MAP_TILE_SIZE,d7
                 rts
 
     ; End of function CreateMoveableRangeForUnit
@@ -866,7 +869,7 @@ loc_23376:
                 move.w  d0,d7
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d7
                 lsr.w   #8,d7
-                move.w  d7,((word_FFA820-$1000000)).w
+                move.w  d7,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
 loc_23388:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
@@ -874,7 +877,7 @@ loc_23388:
                 move.w  d1,d7
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d7
                 lsr.w   #8,d7
-                move.w  d7,((word_FFA822-$1000000)).w
+                move.w  d7,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
 loc_2339A:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
@@ -882,7 +885,7 @@ loc_2339A:
                 move.w  d0,d7
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d7
                 lsr.w   #8,d7
-                move.w  d7,((word_FFA824-$1000000)).w
+                move.w  d7,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
 loc_233AC:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
@@ -890,7 +893,7 @@ loc_233AC:
                 move.w  d1,d7
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d7
                 lsr.w   #8,d7
-                move.w  d7,((word_FFA826-$1000000)).w
+                move.w  d7,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
 loc_233BE:
                 
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
@@ -1123,13 +1126,13 @@ WaitForUnitCursor:
 sub_23554:
                 
                 movem.l d0-d2/d7-a1,-(sp)
-                lea     spr_2358C(pc), a0
+                lea     tbl_AoE_Border(pc), a0
                 clr.w   d2
-                move.b  ((word_FFAF8E-$1000000)).w,d2
+                move.b  ((AOE_RADIUS-$1000000)).w,d2
                 andi.w  #$F,d2
                 lsl.w   #6,d2
                 adda.w  d2,a0
-                lea     (SPRITE_08).l,a1
+                lea     (SPRITE_CURSOR_DATA).l,a1
                 moveq   #7,d7
 loc_23572:
                 
@@ -1147,7 +1150,7 @@ loc_23572:
 
     ; End of function sub_23554
 
-spr_2358C:      ; unknown VDP sprite definitions
+tbl_AoE_Border:
 ;
 ; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
 ;
@@ -1190,7 +1193,7 @@ spr_2358C:      ; unknown VDP sprite definitions
 
 sub_2364C:
                 
-                move.l  #$10F10,(SPRITE_08).l ; y = 1, size and link = V4|H4|16
+                move.l  #$10F10,(SPRITE_CURSOR_DATA).l ; y = 1, size and link = V4|H4|16
                 rts
 
     ; End of function sub_2364C
@@ -1203,7 +1206,7 @@ UnitCursorTiles:incbin "data/graphics/tech/unitcursortiles.bin"
 FadeOut_WaitForP1Input:
                 
                 move.w  d0,-(sp)
-                move.w  #$FB,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0 
                 jsr     (PlayMusicAfterCurrentOne).w
                 jsr     (WaitForPlayerInput).w
                 move.w  (sp)+,d0
@@ -1235,12 +1238,12 @@ SetEntityPosition:
     ; End of function SetEntityPosition
 
 tbl_PixelOffsets_X:
-                dc.w 384
+                dc.w MAP_TILE_PLUS
 tbl_PixelOffsets_Y:
                 dc.w 0
                 dc.w 0
-                dc.w -384
-                dc.w -384
+                dc.w MAP_TILE_MINUS
+                dc.w MAP_TILE_MINUS
                 dc.w 0
                 dc.w 0
-                dc.w 384
+                dc.w MAP_TILE_PLUS

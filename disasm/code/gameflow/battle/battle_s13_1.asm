@@ -61,11 +61,13 @@ loc_1AC31E:
                 
                 move.b  d0,(a1)+
                 dbf     d5,loc_1AC2E4
+				
                 addq.l  #4,a1
                 dbf     d6,loc_1AC2E2
                 clr.l   (a1)+
                 addq.l  #4,a1
                 dbf     d7,loc_1AC2E0
+				
                 lea     (FF8804_LOADING_SPACE).l,a0
                 lea     (BATTLE_ENTITY_MOVE_STRING).l,a1
                 clr.l   (a1)+
@@ -77,6 +79,7 @@ loc_1AC344:
                 mulu.w  #2,d0
                 move.l  d0,(a1)+
                 dbf     d7,loc_1AC344
+				
                 lea     (FF8804_LOADING_SPACE).l,a0
                 lea     (BATTLE_ENTITY_MOVE_STRING).l,a1
                 move.w  #$3FE,d7
@@ -89,6 +92,7 @@ loc_1AC362:
                 and.l   (a1)+,d0
                 or.l    d0,(a0)+
                 dbf     d7,loc_1AC362
+				
                 lea     (FF8804_LOADING_SPACE).l,a0
                 lea     ($2000).w,a1    ; ?
                 move.w  #$800,d0

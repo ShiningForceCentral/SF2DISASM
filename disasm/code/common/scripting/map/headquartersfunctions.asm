@@ -10,23 +10,23 @@ DisplayHeadquartersQuote:
                 jsr     sub_100AC
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                bne.s   loc_47924
-                move.w  #1,d0
-                bra.s   loc_4793C       
-loc_47924:
+                bne.s   @LivingMember
+                move.w  #1,d0 ; Empty quote
+                bra.s   @DisplayQuote       
+@LivingMember:
                 
                 move.w  d0,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 jsr     j_CheckFlag
-                beq.s   loc_47938       
-                addi.w  #$DC3,d0        ; 0DC3={W1}
-                bra.s   loc_4793C       ; start of headquarters 'in party' quotes
-loc_47938:
+                beq.s   @InReserve
+                addi.w  #$DC3,d0        ; 0DC3={W1}  start of headquarters 'in party' quotes
+                bra.s   @DisplayQuote
+@InReserve:
                 
-                addi.w  #$DE1,d0        ; 0DE1={W1}
-loc_4793C:
+                addi.w  #$DE1,d0        ; 0DE1={W1}  start of headquarters 'outside of party' quotes
+@DisplayQuote:
                 
-                jsr     (DisplayText).w ; start of headquarters 'outside of party' quotes
+                jsr     (DisplayText).w
                 jsr     sub_100B0
                 rts
 
@@ -40,7 +40,7 @@ InitNazcaShipForceMembers:
                 
                 movem.l d0-a2,-(sp)
                 moveq   #1,d0
-                moveq   #$1C,d7
+                moveq   #COMBATANT_ALLIES_COUNTER_MINUS_ONE,d7
                 lea     ((OTHER_ENTITIES_DATA-$1000000)).w,a0
                 lea     tbl_HeadquartersActiveForcePositions(pc), a2
 @PlaceMemberNazca_Loop:
@@ -74,7 +74,7 @@ InitHeadquartersForceMembers:
                 
                 movem.l d0-a2,-(sp)
                 moveq   #1,d0
-                moveq   #$1C,d7
+                moveq   #COMBATANT_ALLIES_COUNTER_MINUS_ONE,d7
                 lea     ((OTHER_ENTITIES_DATA-$1000000)).w,a0
                 lea     tbl_HeadquartersActiveForcePositions(pc), a2
 loc_479A2:
@@ -98,15 +98,15 @@ loc_479D0:
                 beq.s   loc_47A28
                 clr.w   d2
                 move.b  (a2)+,d2
-                mulu.w  #$180,d2
+                mulu.w  #MAP_TILE_SIZE,d2
                 clr.w   d3
                 move.b  (a2)+,d3
-                mulu.w  #$180,d3
+                mulu.w  #MAP_TILE_SIZE,d3
                 move.w  d2,(a0)
                 move.w  d3,ENTITYDEF_OFFSET_Y(a0)
                 move.w  d2,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d3,ENTITYDEF_OFFSET_YDEST(a0)
-                move.b  #3,ENTITYDEF_OFFSET_FACING(a0)
+                move.b  #DOWN,ENTITYDEF_OFFSET_FACING(a0)
                 move.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movem.w d0-d4,-(sp)
                 jsr     j_GetAllyMapSprite
