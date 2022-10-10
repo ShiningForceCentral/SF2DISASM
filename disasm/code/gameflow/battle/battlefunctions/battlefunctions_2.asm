@@ -314,7 +314,13 @@ loc_24746:
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 jsr     (CheckChestItem).w
                 move.w  d2,((CHEST_CONTENTS-$1000000)).w
+				if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+				move.w  #$FFFF,d0
+				andi.b  #ITEM_NOTHING,d0
+				cmp.w   d0,d2
+				else
                 cmpi.w  #$FFFF,d2
+				endif
                 bne.s   loc_2476C       ; if d2 != FFFF, then there is an item
                 moveq   #MENU_BATTLE_WITH_STAY,d2 ; Battle menu with STAY option
                 bra.s   loc_2476E
@@ -1125,8 +1131,13 @@ byte_25066:
                 clsTxt
                 bra.w   loc_24746
 @CheckChoice_SearchStay:
-                
+                if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+				move.w  #$FFFF,d0
+				andi.b  #ITEM_NOTHING,d0
+				cmp.w   ((CHEST_CONTENTS-$1000000)).w,d0
+				else
                 cmpi.w  #$FFFF,((CHEST_CONTENTS-$1000000)).w
+				endif
                 bne.w   loc_25088
                 move.w  #BATTLEACTION_STAY,((CURRENT_BATTLEACTION-$1000000)).w
                 clr.w   d0

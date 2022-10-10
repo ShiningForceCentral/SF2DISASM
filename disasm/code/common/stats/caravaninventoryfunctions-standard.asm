@@ -38,7 +38,9 @@ AddItemToCaravan:
             if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                 add.w   d0,d0
             endif
+            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
                 add.w   d0,d0
+            endif
                 adda.w  d0,a0
                 andi.w  #itemEntryMask,d1
             if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)

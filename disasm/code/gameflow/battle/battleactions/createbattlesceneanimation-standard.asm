@@ -47,6 +47,7 @@ CreateBattlesceneAnimation:
                 
                 bscHideTextBox
                 move.b  (a4),d0
+                bsr.w   GetSpellAnimation
                 add.w   d1,d1
                 add.w   d1,d1
                 jsr     @bt_Battleactions(pc,d1.w)
@@ -78,7 +79,6 @@ CreateBattlesceneAnimation:
 ; ---------------------------------------------------------------------------
 
 @Attack:        module
-                bsr.w   GetSpellAnimation
                 moveq   #4,d2
                 
                 ; Check special critical hits
