@@ -383,10 +383,10 @@ BattleLoop_Defeat:
                 jsr     ClearFlag
                 addi.w  #BATTLE_COMPLETED_FLAGS_START-BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     SetFlag
-				cmp.b   #MAP_NONE,1(a0)
-				beq.s   @Done
-				move.b  1(a0),d0
-				clr.w   d4
+                cmp.b   #MAP_NONE,1(a0)
+                beq.s   @Done
+                move.b  1(a0),d0
+                clr.w   d4
 @Done:
                 movem.l (sp)+,d1-d2/a0
               else
