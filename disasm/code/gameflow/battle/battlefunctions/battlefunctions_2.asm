@@ -314,13 +314,13 @@ loc_24746:
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 jsr     (CheckChestItem).w
                 move.w  d2,((CHEST_CONTENTS-$1000000)).w
-				if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-				move.w  #$FFFF,d0
-				andi.b  #ITEM_NOTHING,d0
-				cmp.w   d0,d2
-				else
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                move.w  #$FFFF,d0
+                andi.b  #ITEM_NOTHING,d0
+                cmp.w   d0,d2
+            else
                 cmpi.w  #$FFFF,d2
-				endif
+            endif
                 bne.s   loc_2476C       ; if d2 != FFFF, then there is an item
                 moveq   #MENU_BATTLE_WITH_STAY,d2 ; Battle menu with STAY option
                 bra.s   loc_2476E
