@@ -74,7 +74,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 move.w  #256,d0
                 jsr     (GenerateRandomOrDebugNumber).w
                 cmp.b   (a0),d0
-				move.l	(sp)+,a0
+                move.l	(sp)+,a0
                 bhi.s   @Done
                 
 @DropItem:      clr.w   d0
