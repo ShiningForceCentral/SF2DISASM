@@ -2382,7 +2382,7 @@ laserUp    = 1
 laserLeft  = 2
 laserDown  = 3
 
-    if (DIAGONAL_LASERS=1) ; change to bitfield
+    if (STANDARD_BUILD&DIAGONAL_LASERS=1) ; change to bitfield
 laserRight = 1
 laserUp    = 2
 laserLeft  = 4

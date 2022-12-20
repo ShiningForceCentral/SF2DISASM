@@ -792,7 +792,7 @@ GetLaserFacing:
                 move.w  d1,d2
                 jsr     j_GetXPos
                 jsr     j_ClearMovableGrid
-			if (DIAGONAL_LASERS=1)
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
                 btst   	#0,d6
                 beq.s   @CheckFace_Up
 			else
@@ -802,7 +802,7 @@ GetLaserFacing:
                 addi.w  #1,d1
 @CheckFace_Up:
                 
-			if (DIAGONAL_LASERS=1)
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
                 btst   	#1,d6
                 beq.s   @CheckFace_Left
 			else
@@ -812,7 +812,7 @@ GetLaserFacing:
                 subi.w  #1,d2
 @CheckFace_Left:
                 
-			if (DIAGONAL_LASERS=1)
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
                 btst   	#2,d6
                 beq.s   @CheckFace_Down
 			else
@@ -822,7 +822,7 @@ GetLaserFacing:
                 subi.w  #1,d1
 @CheckFace_Down:
                 
-			if (DIAGONAL_LASERS=1)
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
                 btst   	#3,d6
                 beq.s   @ContinueToTargets
 			else
@@ -847,7 +847,7 @@ GetLaserFacing:
                 addi.w  #1,d3
 @CheckIncrementTile_Right:
                 
-			if (DIAGONAL_LASERS=1)
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
                 btst   	#0,d6
                 beq.s   @CheckIncrementTile_Up
 			else
@@ -860,7 +860,7 @@ GetLaserFacing:
                 bra.w   @Done
 @CheckIncrementTile_Up:
                 
-			if (DIAGONAL_LASERS=1)
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
                 btst   	#1,d6
                 beq.s   @CheckIncrementTile_Left
 			else
@@ -873,7 +873,7 @@ GetLaserFacing:
                 bra.w   @Done
 @CheckIncrementTile_Left:
                 
-			if (DIAGONAL_LASERS=1)
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
                 btst   	#2,d6
                 beq.s   @CheckIncrementTile_Down
 			else
@@ -886,7 +886,7 @@ GetLaserFacing:
                 bra.w   @Done
 @CheckIncrementTile_Down:
                 
-			if (DIAGONAL_LASERS=1)
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
                 btst   	#3,d6
                 beq.s   @NextTile
 			else
