@@ -34,13 +34,13 @@ cutoff = -1
 
 WriteBattlesceneScript_EnemyDropItem:
                 
+                ; all 3 conditions must be met for drop
                 tst.b   (a4)
-                bpl.s   @Continue       ; continue function if actor is an enemy
+                bmi.w   @Return       ; continue function if actor is an enemy
                 tst.b   (a5)
-                bmi.s   @Continue       ; continue function if target is an ally
+                bpl.w   @Return       ; continue function if target is an ally
                 tst.b   targetDies(a2)
-                bne.s   @Continue       ; continue function if target was not defeated
-                rts
+                beq.w   @Return       ; continue function if target was not defeated
                 
 @Continue:      movem.l d0-d3/a0,-(sp)
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d3
@@ -64,6 +64,7 @@ WriteBattlesceneScript_EnemyDropItem:
 @EntryFound:    andi.w  #ITEMENTRY_MASK_INDEX,d1
                 move.w  d1,d3
                 move.w  d2,d4
+                move.l	a0,-(sp)   ; store address for drop flag
                 lea     tbl_RandomItemDrops(pc),a0
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w   ; a0 = pointer to drop chance in 256
@@ -73,9 +74,11 @@ WriteBattlesceneScript_EnemyDropItem:
                 move.w  #256,d0
                 jsr     (GenerateRandomOrDebugNumber).w
                 cmp.b   (a0),d0
+                move.l	(sp)+,a0
                 bhi.s   @Done
                 
 @DropItem:      clr.w   d0
+                move.l	(sp)+,a0
                 move.b  ENEMYITEMDROP_OFFSET_FLAG(a0),d0
                 lea     ((ENEMY_ITEM_DROPPED_FLAGS-$1000000)).w,a0
                 divu.w  #8,d0

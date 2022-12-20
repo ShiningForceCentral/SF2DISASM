@@ -1469,6 +1469,9 @@ loc_42C6:
                 moveq   #$FFFFFFFF,d0
                 move.w  d0,d1
                 move.w  d0,d2
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                andi.b  #ITEM_NOTHING,d2
+            endif
 loc_42CC:
                 
                 lea     (FF0000_RAM_START).l,a2
