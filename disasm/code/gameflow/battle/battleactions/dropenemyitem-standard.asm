@@ -36,12 +36,11 @@ WriteBattlesceneScript_EnemyDropItem:
                 
                 ; all 3 conditions must be met for drop
                 tst.b   (a4)
-                bpl.s   @Continue       ; continue function if actor is an enemy
+                bmi.w   @Return       ; continue function if actor is an enemy
                 tst.b   (a5)
-                bmi.s   @Continue       ; continue function if target is an ally
+                bpl.w   @Return       ; continue function if target is an ally
                 tst.b   targetDies(a2)
-                bne.s   @Continue       ; continue function if target was not defeated
-                rts
+                beq.w   @Return       ; continue function if target was not defeated
                 
 @Continue:      movem.l d0-d3/a0-a1,-(sp)
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d3
