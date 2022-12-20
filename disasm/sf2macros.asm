@@ -827,6 +827,10 @@ battles: macro
 background: macro
     defineShorthand.b BATTLEBACKGROUND_,\1
     endm
+	
+enemyFacing: macro
+    defineShorthand.b LASER_,\1
+    endm
     
 ; Names
     

@@ -792,23 +792,43 @@ GetLaserFacing:
                 move.w  d1,d2
                 jsr     j_GetXPos
                 jsr     j_ClearMovableGrid
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst   	#0,d6
+                beq.s   @CheckFace_Up
+			else
                 tst.w   d6
                 bne.s   @CheckFace_Up
+			endif
                 addi.w  #1,d1
 @CheckFace_Up:
                 
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst   	#1,d6
+                beq.s   @CheckFace_Left
+			else
                 cmpi.w  #1,d6
                 bne.s   @CheckFace_Left
+			endif
                 subi.w  #1,d2
 @CheckFace_Left:
                 
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst   	#2,d6
+                beq.s   @CheckFace_Down
+			else
                 cmpi.w  #2,d6
                 bne.s   @CheckFace_Down
+			endif
                 subi.w  #1,d1
 @CheckFace_Down:
                 
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst   	#3,d6
+                beq.s   @ContinueToTargets
+			else
                 cmpi.w  #3,d6
                 bne.s   @ContinueToTargets
+			endif
                 addi.w  #1,d2
 @ContinueToTargets:
                 
@@ -827,32 +847,52 @@ GetLaserFacing:
                 addi.w  #1,d3
 @CheckIncrementTile_Right:
                 
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst   	#0,d6
+                beq.s   @CheckIncrementTile_Up
+			else
                 tst.w   d6
                 bne.s   @CheckIncrementTile_Up
+			endif
                 addi.w  #1,d1
                 cmpi.w  #$2F,d1 
                 ble.s   @CheckIncrementTile_Up
                 bra.w   @Done
 @CheckIncrementTile_Up:
                 
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst   	#1,d6
+                beq.s   @CheckIncrementTile_Left
+			else
                 cmpi.w  #1,d6
                 bne.s   @CheckIncrementTile_Left
+			endif
                 subi.w  #1,d2
                 tst.w   d2
                 bpl.s   @CheckIncrementTile_Left
                 bra.w   @Done
 @CheckIncrementTile_Left:
                 
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst   	#2,d6
+                beq.s   @CheckIncrementTile_Down
+			else
                 cmpi.w  #2,d6
                 bne.s   @CheckIncrementTile_Down
+			endif
                 subi.w  #1,d1
                 tst.w   d1
                 bpl.s   @CheckIncrementTile_Down
                 bra.w   @Done
 @CheckIncrementTile_Down:
                 
+			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst   	#3,d6
+                beq.s   @NextTile
+			else
                 cmpi.w  #3,d6
                 bne.s   @NextTile
+			endif
                 addi.w  #1,d2
                 cmpi.w  #$2F,d2 
                 ble.s   @NextTile
