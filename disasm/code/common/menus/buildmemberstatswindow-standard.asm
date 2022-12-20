@@ -385,7 +385,7 @@ WriteEnemyLvOrExp:
 @WriteJewels:
                 tst.w   member(a6)
                 bne.s   @DmaIcons       ; skip if anyone other than Bowie
-                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                chkFlg  384             ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 beq.s   @DmaIcons       ; skip if we haven't obtained Jewel of Light
                 bsr.s   WriteJewelIcons
                 
@@ -441,19 +441,10 @@ WriteJewelIcons:
                 
                 ; Load Jewel of Light icon pixel data to temp space
                 move.w  #ICON_JEWEL_OF_LIGHT,d1
-                movea.l (p_Icons).l,a0
-                move.w  d1,d2
-                add.w   d1,d1
-                add.w   d2,d1
-                lsl.w   #6,d1
-                addIconOffset d1, a0
-                movea.l a2,a1
-                move.w  #ICONTILES_BYTESIZE,d7
-                jsr     (CopyBytes).w   
-                bsr.s   CleanMemberStatsIconCorners
+                bsr.s   LoadJewelIconPixels
                 adda.w  #ICONTILES_BYTESIZE,a2
                 
-                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
+                chkFlg  385             ; Set after Bowie obtains King Galam's jewel
                 beq.s   @Return         ; skip if we haven't obtained Jewel of Evil
                 
                 ; Copy icon tiles to window layout
@@ -467,7 +458,14 @@ WriteJewelIcons:
                 
                 ; Load Jewel of Evil icon pixel data to temp space
                 move.w  #ICON_JEWEL_OF_EVIL,d1
-                movea.l (p_Icons).l,a0
+
+    ; End of function WriteJewelIcons
+
+
+; =============== S U B R O U T I N E =======================================
+
+LoadJewelIconPixels:
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
@@ -476,12 +474,7 @@ WriteJewelIcons:
                 movea.l a2,a1
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w
-
-    ; End of function WriteJewelIcons
-
-
-; =============== S U B R O U T I N E =======================================
-
+                
 CleanMemberStatsIconCorners:
                 ori.b   #$F0,(a1)
                 ori.b   #$F,$23(a1)

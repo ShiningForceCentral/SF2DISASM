@@ -366,23 +366,27 @@ BattleLoop_Defeat:
                 clr.w   d1
                 lea     tbl_LosableBattles(pc), a0
                 getSavedByte CURRENT_BATTLE, d1
-                moveq   #0,d2
+                moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcs.s   @Return
+                bcs.s   @Done
                 addi.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     ClearFlag
                 addi.w  #BATTLE_COMPLETED_FLAGS_START-BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     SetFlag
-                movem.l (sp)+,d1-d2/a0
+                cmpi.b  #MAP_NONE,(a0)
+                beq.s   @Done
+                move.b  (a0),d0
+                clr.w   d4
+@Done:          movem.l (sp)+,d1-d2/a0
             else
                 checkSavedByte #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS, CURRENT_BATTLE    ; HARDCODED battle 4 upgrade
                 bne.s   @Return
                 clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
                 setFlg  504             ; Battle 4 completed - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS   
                 jsr     j_UpgradeBattle
-            endif
                 moveq   #MAP_GALAM_CASTLE_INNER,d0
                 clr.w   d4
+            endif
 @Return:
                 
                 rts
