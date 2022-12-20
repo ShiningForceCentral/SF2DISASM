@@ -19,7 +19,7 @@ p_Start:        dc.l Start              ; Start Address
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
-off_3C:         dc.l Int_OtherError     ; Uninitialized Interrupt
+                dc.l Int_OtherError     ; Uninitialized Interrupt
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
@@ -76,8 +76,7 @@ aShiningForce2: dc.b 'SHINING FORCE 2 '
 aShiningForce_0:dc.b 'SHINING FORCE 2 '
                 dc.b '                '
                 dc.b '                '
-aGmMk13150:     dc.b 'GM MK-1315 -0'    ; Serial Number
-                dc.b $30
+aGmMk13150:     dc.b 'GM MK-1315 -00'   ; Serial Number
                 dc.w $8921              ; checksum
 aJ:             dc.b 'J               '
                 dc.l 0                  ; ROM Start Address

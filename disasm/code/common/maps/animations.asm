@@ -7,7 +7,7 @@
 ; Out: Z = is scrolling
 
 
-IsMapScrollingToViewTarget:
+IsMapScrollingToViewTarget?:
                 
                 move.b  ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w,d7
                 tst.w   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
@@ -23,7 +23,7 @@ loc_4740:
                 tst.b   d7
                 rts
 
-    ; End of function IsMapScrollingToViewTarget
+    ; End of function IsMapScrollingToViewTarget?
 
 
 ; =============== S U B R O U T I N E =======================================

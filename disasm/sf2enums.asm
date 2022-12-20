@@ -911,7 +911,7 @@ ITEMSELLPRICE_MULTIPLIER: equ $3
 ; ---------------------------------------------------------------------------
 
 ; enum EquipmentTypes
-EQUIPMENTTYPE_NONE: equ $0
+EQUIPMENTTYPE_TOOL: equ $0
 EQUIPMENTTYPE_WEAPON: equ $1
 EQUIPMENTTYPE_RING: equ $FFFF
 
@@ -1348,7 +1348,7 @@ CHANCE_TO_CRITICAL_BLAST: equ $20
 ; ---------------------------------------------------------------------------
 
 ; enum BattleActionEngine_Properties
-CHANCE_TO_DODGE_MUDDLED_ATTACKER: equ $2
+CHANCE_TO_DODGE_FOR_MUDDLED_ATTACKER: equ $2
 CHANCE_TO_INFLICT_CURSE_DAMAGE: equ $2
 CHANCE_TO_BREAK_USED_ITEM: equ $4
 CHANCE_TO_PERFORM_KIWI_FLAME_BREATH: equ $4
@@ -3181,6 +3181,7 @@ SAVE_CHECKSUM_SIZE: equ $2
 SRAM_STRING_CHECK_COUNTER: equ $10
 SRAM_STRING_WRITE_COUNTER: equ $11
 SRAM_STRING_LENGTH: equ $24
+SAVE_SLOT_COUNTER: equ SAVE_SLOT_REAL_SIZE-1
 SAVE_SLOT_REAL_SIZE: equ $FB0
 SAVE_SLOT_SIZE: equ $1F60
 SRAM_COUNTER: equ $1FFF

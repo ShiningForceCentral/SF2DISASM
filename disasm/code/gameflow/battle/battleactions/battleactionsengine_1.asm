@@ -143,9 +143,11 @@ loc_9D3E:
                 
                 lea     ((TARGETS_LIST-$1000000)).w,a4
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
-                bsr.w   IsAbleToCounterAttack
+                bsr.w   FinalCounterAttackCheck
                 tst.b   counterAttack(a2)
                 beq.s   loc_9D9C
+                
+                ; Perform counter attack
                 move.w  #BATTLEACTION_ATTACKTYPE_COUNTER,((BATTLESCENE_ATTACK_TYPE-$1000000)).w
                 moveq   #0,d1
                 move.b  d1,dodge(a2)

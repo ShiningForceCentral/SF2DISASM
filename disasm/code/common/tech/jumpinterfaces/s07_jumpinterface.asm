@@ -344,8 +344,6 @@ j_RunMapSetupEntityEvent_0:
 
 ; =============== S U B R O U T I N E =======================================
 
-; triggers a map setup function according to up to 4 criterias in d1-d4
-
 
 j_RunMapSetupItemEvent:
                 

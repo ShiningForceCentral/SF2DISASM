@@ -11,4 +11,4 @@
                 include "data\graphics\battles\spells\animations\boltanimdata.asm"    ; Bolt spell animation data
                 include "data\graphics\battles\battlesprites\allies\animations\entries.asm"    ; Ally animations
                 include "data\graphics\battles\battlesprites\enemies\animations\entries.asm"    ; Enemy animations
-                align $4000
+                align $1AC000

@@ -18,15 +18,14 @@ WitchSuspend:
                 clr.b   ((byte_FFB082-$1000000)).w
                 bsr.w   sub_7CDC
                 jsr     j_SuspendGame
-                move.w  #$258,d0
-loc_7068:
+                move.w  #600,d0         ; wait for 10 seconds, or until player presses Start before restarting the game
+@WaitForStartInput:
                 
                 bsr.w   WaitForVInt
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
-                dbne    d0,loc_7068
-ResetGame:
+                dbne    d0,@WaitForStartInput
                 
-                sndCom  SOUND_COMMAND_FADE_OUT
+ResetGame:      sndCom  SOUND_COMMAND_FADE_OUT
                 bsr.w   FadeOutToBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
