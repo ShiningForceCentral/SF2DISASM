@@ -356,10 +356,10 @@ BattleLoop_Defeat:
                 sndCom  MUSIC_SAD_THEME_2
                 txt     363             ; "{LEADER} is exhausted.{W1}"
                 clsTxt
-            if (STANDARD_BUILD&PLAYER_DEFEAT_IS_GAME_OVER=1)
+          if (STANDARD_BUILD&PLAYER_DEFEAT_IS_GAME_OVER=1)
                 jmp     (ResetGame).w
                 nop
-            else
+          else
                 clr.w   d0
                 jsr     j_GetMaxHP
                 jsr     j_SetCurrentHP
@@ -371,7 +371,7 @@ BattleLoop_Defeat:
                 moveq   #-1,d4
                 
                 ; Losable battles
-              if (STANDARD_BUILD=1)
+            if (STANDARD_BUILD=1)
                 movem.l d1-d2/a0,-(sp)
                 clr.w   d1
                 lea     tbl_LosableBattles(pc), a0
@@ -396,9 +396,9 @@ BattleLoop_Defeat:
                 jsr     j_UpgradeBattle
                 moveq   #MAP_GALAM_CASTLE_INNER,d0
                 clr.w   d4
-              endif
-@Return:        rts
             endif
+@Return:        rts
+          endif
 
     ; End of function BattleLoop_Defeat
 

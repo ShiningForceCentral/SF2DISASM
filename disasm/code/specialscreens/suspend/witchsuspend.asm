@@ -24,9 +24,8 @@ WitchSuspend:
                 bsr.w   WaitForVInt
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 dbne    d0,@WaitForStartInput
-ResetGame:
                 
-                sndCom  SOUND_COMMAND_FADE_OUT
+ResetGame:      sndCom  SOUND_COMMAND_FADE_OUT
                 bsr.w   FadeOutToBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
