@@ -34,6 +34,7 @@ cutoff = -1
 
 WriteBattlesceneScript_EnemyDropItem:
                 
+                ; all 3 conditions must be met for drop
                 tst.b   (a4)
                 bpl.s   @Continue       ; continue function if actor is an enemy
                 tst.b   (a5)
@@ -42,23 +43,23 @@ WriteBattlesceneScript_EnemyDropItem:
                 bne.s   @Continue       ; continue function if target was not defeated
                 rts
                 
-@Continue:      movem.l d0-d3/a0,-(sp)
+@Continue:      movem.l d0-d3/a0-a1,-(sp)
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d3
-                lea     tbl_EnemyItemDrops(pc), a0
+                lea     tbl_EnemyItemDrops(pc), a1
                 
-@FindEntry_Loop:cmpi.w  #CODE_TERMINATOR_WORD,(a0)
+@FindEntry_Loop:cmpi.w  #CODE_TERMINATOR_WORD,(a1)
                 beq.w   @Done
-                cmp.b   (a0),d3
+                cmp.b   (a1),d3
                 bne.s   @Next           ; move on to next entry if current battle doesn't match
                 move.b  (a5),d0
-                cmp.b   ENEMYITEMDROP_OFFSET_ENTITY(a0),d0
+                cmp.b   ENEMYITEMDROP_OFFSET_ENTITY(a1),d0
                 bne.s   @Next
                 clr.w   d1
-                move.b  ENEMYITEMDROP_OFFSET_ITEM(a0),d1
+                move.b  ENEMYITEMDROP_OFFSET_ITEM(a1),d1
                 bsr.w   GetItemSlotContainingIndex
                 tst.w   d2
                 bpl.s   @EntryFound
-@Next:          adda.w  #ENEMYITEMDROP_ENTRY_SIZE,a0
+@Next:          adda.w  #ENEMYITEMDROP_ENTRY_SIZE,a1
                 bra.s   @FindEntry_Loop
                 
 @EntryFound:    andi.w  #ITEMENTRY_MASK_INDEX,d1
@@ -76,7 +77,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 bhi.s   @Done
                 
 @DropItem:      clr.w   d0
-                move.b  ENEMYITEMDROP_OFFSET_FLAG(a0),d0
+                move.b  ENEMYITEMDROP_OFFSET_FLAG(a1),d0
                 lea     ((ENEMY_ITEM_DROPPED_FLAGS-$1000000)).w,a0
                 divu.w  #8,d0
                 adda.w  d0,a0
@@ -110,7 +111,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 beq.s   @Done
                 bsr.w   AddItemToDeals
                 
-@Done:          movem.l (sp)+,d0-d3/a0
+@Done:          movem.l (sp)+,d0-d3/a0-a1
 @Return:        rts
 
     ; End of function WriteBattlesceneScript_EnemyDropItem
