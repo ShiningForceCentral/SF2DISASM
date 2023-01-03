@@ -31,8 +31,6 @@ loc_7428:
                 subq.w  #1,d0
                 move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
                 jsr     j_NewGame
-byte_743E:
-                
                 clsTxt
                 clr.w   d0
                 jsr     j_NameAlly
@@ -82,12 +80,12 @@ loc_74B4:
                 
                 move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
                 move.b  #MAP_GRANSEAL,((CURRENT_MAP-$1000000)).w
-                move.b  #MAP_GRANSEAL,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  #MAP_GRANSEAL,((EGRESS_MAP-$1000000)).w
                 bsr.w   SaveGame
                 disableSram
                 clsTxt
                 move.b  #MAP_GRANSEAL,d0 ; HARDCODED new game starting map
-                move.w  #$38,d1 ; HARDCODED main entity starting X
+                move.w  #56,d1          ; HARDCODED main entity starting X
                 move.w  #3,d2           ; HARDCODED main entity starting Y
                 move.w  #DOWN,d3        ; HARDCODED main entity starting facing
                 moveq   #1,d4

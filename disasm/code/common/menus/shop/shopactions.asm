@@ -14,6 +14,7 @@ itemPrice = -4
 
 ShopMenuActions:
                 
+                module  ; Start of shop menu module
                 movem.l d0-a5,-(sp)
                 link    a6,#-22
                 moveq   #0,d1
@@ -34,7 +35,7 @@ loc_20088:
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
                 beq.s   loc_200A2
-                bra.w   loc_200C6
+                bra.w   @CheckChoice_Buy
 loc_200A2:
                 
                 moveq   #0,d1
@@ -49,10 +50,10 @@ byte_200B0:
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
-loc_200C6:
+@CheckChoice_Buy:
                 
                 cmpi.w  #0,d0
-                bne.w   loc_202CA
+                bne.w   @CheckChoice_Sell
 byte_200CE:
                 
                 txt     162             ; "What do you want to buy?"
@@ -108,7 +109,7 @@ loc_2015E:
                 beq.s   byte_20118      
                 move.w  d0,member(a6)
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #4,d2
                 bcs.s   loc_201AC
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -125,7 +126,7 @@ loc_201AC:
                 bne.s   loc_201E4
                 move.w  selectedItem(a6),d1
                 move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 bcs.s   loc_201E4
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
@@ -142,7 +143,7 @@ loc_201E4:
                 jsr     j_AddItem
                 move.w  selectedItem(a6),d1
                 move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 bcc.w   byte_202BE      
                 txt     173             ; "{CLEAR}Equip it now?"
                 jsr     j_YesNoChoiceBox
@@ -179,7 +180,7 @@ loc_2025E:
 loc_2028A:
                 
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d2,d1
                 subq.w  #1,d1
                 jsr     j_EquipItemBySlot
@@ -204,10 +205,10 @@ byte_202C2:
                 
                 clsTxt
                 bra.w   byte_200CE      
-loc_202CA:
+@CheckChoice_Sell:
                 
                 cmpi.w  #1,d0
-                bne.w   loc_20442
+                bne.w   @CheckChoice_Repair
 byte_202D2:
                 
                 txt     177             ; "Whose and which item do{N}you want to sell?{D3}"
@@ -280,7 +281,7 @@ loc_2039C:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_2040C
                 move.w  selectedItem(a6),d1
-                jsr     j_IsItemCursed
+                jsr     j_IsItemCursed?
                 bcc.w   loc_2040C
                 txt     184             ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
                 bra.w   byte_2043A
@@ -293,7 +294,7 @@ loc_203DC:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_2040C
                 move.w  selectedItem(a6),d1
-                jsr     j_IsItemCursed
+                jsr     j_IsItemCursed?
                 bcc.w   loc_2040C
                 txt     184             ; "OK, pass it to me...{D1}{N}{D1}Hey, it's cursed, isn't it?{W2}{N}I'm not such an easy mark!{W2}"
                 bra.w   byte_2043A
@@ -315,10 +316,10 @@ byte_2043A:
                 
                 clsTxt
                 bra.w   byte_202D2      
-loc_20442:
+@CheckChoice_Repair:
                 
                 cmpi.w  #2,d0
-                bne.w   loc_205B4
+                bne.w   @CheckChoice_Deals
 byte_2044A:
                 
                 txt     186             ; "Whose and which item{N}should I repair?{D1}"
@@ -352,9 +353,9 @@ loc_2046C:
                 jsr     j_GetCombatantEntryAddress
                 move.w  itemSlot(a6),d1
                 add.w   d1,d1
-                lea     COMBATANT_OFFSET_ITEM_0(a0,d1.w),a0
+                lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d2
-                btst    #$F,d2
+                btst    #ITEMENTRY_BIT_BROKEN,d2
                 bne.w   loc_204DC
                 txt     188             ; "It's not damaged.{W2}"
                 bra.w   byte_205AC
@@ -382,7 +383,7 @@ loc_2051A:
                 
                 move.w  selectedItem(a6),d1
                 jsr     j_GetEquipmentType
-                cmpi.w  #1,d2
+                cmpi.w  #ITEMTYPE_BIT_WEAPON,d2
                 bne.s   loc_2055A
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
@@ -391,7 +392,7 @@ loc_2051A:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_2058A
                 move.w  selectedItem(a6),d1
-                jsr     j_IsItemCursed
+                jsr     j_IsItemCursed?
                 bcc.w   loc_2058A
                 txt     190             ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
                 bra.w   byte_205AC
@@ -404,7 +405,7 @@ loc_2055A:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_2058A
                 move.w  selectedItem(a6),d1
-                jsr     j_IsItemCursed
+                jsr     j_IsItemCursed?
                 bcc.w   loc_2058A
                 txt     190             ; "Sorry, I don't repair cursed{N}items.{N}Let sleeping devils lie.{W2}"
                 bra.w   byte_205AC
@@ -422,7 +423,7 @@ byte_205AC:
                 
                 clsTxt
                 bra.w   byte_2044A      
-loc_205B4:
+@CheckChoice_Deals:
                 
                 jsr     DetermineDealsItemsNotInCurrentShop(pc)
                 nop
@@ -483,7 +484,7 @@ loc_20652:
                 beq.s   byte_2060C      
                 move.w  d0,member(a6)
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #4,d2
                 bcs.s   loc_206A0
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
@@ -500,7 +501,7 @@ loc_206A0:
                 bne.s   loc_206D8
                 move.w  selectedItem(a6),d1
                 move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 bcs.s   loc_206D8
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
@@ -519,7 +520,7 @@ loc_206D8:
                 jsr     j_RemoveItemFromDeals
                 move.w  selectedItem(a6),d1
                 move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 bcc.w   byte_207C0      
                 txt     173             ; "{CLEAR}Equip it now?"
                 jsr     j_YesNoChoiceBox
@@ -527,7 +528,7 @@ loc_206D8:
                 bne.w   byte_207C0      
                 move.w  selectedItem(a6),d1
                 jsr     j_GetEquipmentType
-                cmpi.w  #1,d2
+                cmpi.w  #ITEMTYPE_BIT_WEAPON,d2
                 bne.s   loc_2075C
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
@@ -556,7 +557,7 @@ loc_2075C:
 loc_20788:
                 
                 moveq   #0,d1
-                jsr     j_GetItemAndNumberHeld
+                jsr     j_GetItemBySlotAndHeldItemsNumber
                 move.w  d2,d1
                 subq.w  #1,d1
                 jsr     j_EquipItemBySlot
@@ -581,7 +582,7 @@ byte_207C0:
 byte_207C4:
                 
                 clsTxt
-                bra.w   loc_205B4
+                bra.w   @CheckChoice_Deals
 byte_207CC:
                 
                 clsTxt
@@ -589,6 +590,7 @@ byte_207CC:
 
     ; End of function ShopMenuActions
 
+                modend  ; End of shop menu module
 
 ; =============== S U B R O U T I N E =======================================
 

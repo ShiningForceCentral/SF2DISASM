@@ -9,7 +9,7 @@ bbcs_03:        executeSubroutine csub_49816
 
 csub_49816:
                 
-                move.b  #5,((EGRESS_MAP_INDEX-$1000000)).w
+                move.b  #MAP_YEEL,((EGRESS_MAP-$1000000)).w
                 rts
 
     ; End of function csub_49816

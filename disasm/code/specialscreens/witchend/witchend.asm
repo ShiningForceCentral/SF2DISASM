@@ -51,7 +51,7 @@ EndGame:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_WitchEndBlink
-                move.w  #$46,((SPEECH_SFX-$1000000)).w 
+                move.w  #SFX_DIALOG_BLEEP_2,((SPEECH_SFX-$1000000)).w
                 txt     239             ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
                 clsTxt
                 move.w  #$5A,d0 
@@ -159,7 +159,7 @@ loc_27C2C:
                 dbf     d7,loc_27C2C
                 jsr     j_ClearEntities
                 setFlg  400             ; Battle 0 unlocked - BATTLE_VERSUS_ALL_BOSSES         
-                move.w  #$3F,d0 
+                move.w  #MAP_MAGIC_TUNNEL_HUB,d0
                 jsr     (CheckBattle).w 
                 move.w  d7,d1
                 bsr.w   BattleLoop      
@@ -183,7 +183,7 @@ sub_27C64:
                 move.w  d0,-(sp)
                 movea.l (p_JewelEndScreenLayout).l,a0
                 lea     $700(a0),a0
-                mulu.w  #$1E,d0
+                mulu.w  #30,d0
                 adda.w  d0,a0
                 lea     (byte_FFE31C).l,a1
                 move.w  #$503,d1
