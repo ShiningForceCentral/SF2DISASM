@@ -39,10 +39,10 @@ GenerateBattleTurnOrder:
                 bsr.s   AddTurnOrderEntries_Loop
                 
                 ; Sort entries by randomized AGI
-                moveq   #TURN_ORDER_ENTRIES_COUNTER-1,d6
+                moveq   #TURN_ORDER_ENTRIES_COUNTER,d6
 @SortEntries_OuterLoop:
                 
-                moveq   #TURN_ORDER_ENTRIES_COUNTER,d7
+                moveq   #TURN_ORDER_ENTRIES_COUNTER-1,d7
                 loadSavedDataAddress BATTLE_TURN_ORDER, a0
 @SortEntries_InnerLoop:
                 
