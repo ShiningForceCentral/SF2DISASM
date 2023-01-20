@@ -304,13 +304,23 @@ pt_SpellRanges: dc.l SpellRange0
                 dc.l SpellRange1
                 dc.l SpellRange2
                 dc.l SpellRange3
+                
+            if (STANDARD_BUILD&EXPANDED_RANGES=1)
+                dc.l SpellRange4
+                dc.l SpellRange5
+                dc.l SpellRange6
+                dc.l SpellRange7
+            endif
+            
 SpellRange0:    dc.b 1
                 dc.b 0, 0
+                
 SpellRange1:    dc.b 4
                 dc.b 0, 1
                 dc.b 1, 0
                 dc.b 0, -1
                 dc.b -1, 0
+                
 SpellRange2:    dc.b 8
                 dc.b 0, -2
                 dc.b -1, -1
@@ -320,6 +330,7 @@ SpellRange2:    dc.b 8
                 dc.b 1, 1
                 dc.b 2, 0
                 dc.b 1, -1
+                
 SpellRange3:    dc.b 12
                 dc.b 0, 3
                 dc.b 1, 2
@@ -333,6 +344,105 @@ SpellRange3:    dc.b 12
                 dc.b -3, 0
                 dc.b -2, 1
                 dc.b -1, 2
+                
+            if (STANDARD_BUILD&EXPANDED_RANGES=1)
+SpellRange4:    dc.b $10
+                dc.b   0, $FC
+                dc.b $FF, $FD
+                dc.b $FE, $FE
+                dc.b $FD, $FF
+                dc.b $FC,   0
+                dc.b $FD,   1
+                dc.b $FE,   2
+                dc.b $FF,   3
+                dc.b   0,   4
+                dc.b   1,   3
+                dc.b   2,   2
+                dc.b   3,   1
+                dc.b   4,   0
+                dc.b   3, $FF
+                dc.b   2, $FE
+                dc.b   1, $FD
+
+SpellRange5:    dc.b $14
+                dc.b   0, $FB
+                dc.b $FF, $FC
+                dc.b $FE, $FD
+                dc.b $FD, $FE
+                dc.b $FC, $FF
+                dc.b $FB,   0
+                dc.b $FC,   1
+                dc.b $FD,   2
+                dc.b $FE,   3
+                dc.b $FF,   4
+                dc.b   0,   5
+                dc.b   1,   4
+                dc.b   2,   3
+                dc.b   3,   2
+                dc.b   4,   1
+                dc.b   5,   0
+                dc.b   4, $FF
+                dc.b   3, $FE
+                dc.b   2, $FD
+                dc.b   1, $FC
+
+SpellRange6:    dc.b $18
+                dc.b   0, $FA
+                dc.b $FF, $FB
+                dc.b $FE, $FC
+                dc.b $FD, $FD
+                dc.b $FC, $FE
+                dc.b $FB, $FF
+                dc.b $FA,   0
+                dc.b $FB,   1
+                dc.b $FC,   2
+                dc.b $FD,   3
+                dc.b $FE,   4
+                dc.b $FF,   5
+                dc.b   0,   6
+                dc.b   1,   5
+                dc.b   2,   4
+                dc.b   3,   3
+                dc.b   4,   2
+                dc.b   5,   1
+                dc.b   6,   0
+                dc.b   5, $FF
+                dc.b   4, $FE
+                dc.b   3, $FD
+                dc.b   2, $FC
+                dc.b   1, $FB
+
+SpellRange7:    dc.b $1C
+                dc.b   0, $F9
+                dc.b $FF, $FA
+                dc.b $FE, $FB
+                dc.b $FD, $FC
+                dc.b $FC, $FD
+                dc.b $FB, $FE
+                dc.b $FA, $FF
+                dc.b $F9,   0
+                dc.b $FA,   1
+                dc.b $FB,   2
+                dc.b $FC,   3
+                dc.b $FD,   4
+                dc.b $FE,   5
+                dc.b $FF,   6
+                dc.b   0,   7
+                dc.b   1,   6
+                dc.b   2,   5
+                dc.b   3,   4
+                dc.b   4,   3
+                dc.b   5,   2
+                dc.b   6,   1
+                dc.b   7,   0
+                dc.b   6, $FF
+                dc.b   5, $FE
+                dc.b   4, $FD
+                dc.b   3, $FC
+                dc.b   2, $FB
+                dc.b   1, $FA
+            endif
+            
 
 ; =============== S U B R O U T I N E =======================================
 

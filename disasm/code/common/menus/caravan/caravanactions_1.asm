@@ -352,13 +352,13 @@ byte_22210:
                 beq.w   @IsUnsellable?
                 
                 cmpi.w  #ITEM_POWER_RING,d1 ; HARDCODED item indexes with special message
-                beq.w   byte_222A4      
+                beq.w   @AnyoneCanEquip      
                 cmpi.w  #ITEM_PROTECT_RING,d1
-                beq.w   byte_222A4      
+                beq.w   @AnyoneCanEquip      
                 cmpi.w  #ITEM_QUICK_RING,d1
-                beq.w   byte_222A4      
+                beq.w   @AnyoneCanEquip      
                 cmpi.w  #ITEM_RUNNING_RING,d1
-                beq.w   byte_222A4      
+                beq.w   @AnyoneCanEquip      
                 move.w  itemIndex(a6),d1
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     96              ; "The {ITEM} is for{N}"
@@ -367,38 +367,62 @@ byte_22210:
                 subq.w  #1,d7
                 bcs.w   @IsUnsellable?
                 lea     ((TARGETS_LIST-$1000000)).w,a0
+                
+            if (STANDARD_BUILD&FIX_CARAVAN_DESCRIPTIONS=1)
+                clr.w    d3
+@ClearCount:
+                clr.w   d6
+@EquippableMessage_Loop:
+                cmpi.w  #4,d6
+                beq.s   @ClearCount
+                move.b  (a0)+,d0
+                jsr     IsWeaponOrRingEquippable?
+                bcc.s   @NextMember
+                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
+                txt     $62             ; "{DICT}{NAME}, {W1}"
+                addq.w  #1,d6
+                moveq   #2,d3
+                cmpi.w  #4,d6
+                bne.s   @NextMember
+                txt     $63             ; "{N}"
+@NextMember:
+                
+                dbf     d7,@EquippableMessage_Loop
+                tst.w   d3
+            else
                 clr.w   d6
 @EquippableMessage_Loop:
                 
                 move.b  (a0)+,d0
                 jsr     j_IsWeaponOrRingEquippable?
-                bcc.s   loc_2228E
+                bcc.s   @NextMember
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     98              ; "{DICT}{NAME},"
                 addq.w  #1,d6
                 cmpi.w  #1,d6
-                bne.s   loc_22284
+                bne.s   @Skip
                 txt     99              ; "{N}"
-loc_22284:
+@Skip:
                 
                 cmpi.w  #4,d6
-                bne.s   loc_2228E
+                bne.s   @NextMember
                 txt     99              ; "{N}"
-loc_2228E:
+@NextMember:
                 
                 dbf     d7,@EquippableMessage_Loop
                 
                 tst.w   d6
-                bne.s   byte_2229C      
+            endif
+                bne.s   @FinishEquipList      
                 txt     97              ; "nobody so far.{W2}"
                 bra.s   @Goto_IsUnsellable?
-byte_2229C:
+@FinishEquipList:
                 
                 txt     100             ; "to equip.{W2}"
 @Goto_IsUnsellable?:
                 
                 bra.w   @IsUnsellable?
-byte_222A4:
+@AnyoneCanEquip:
                 
                 txt     95              ; "Everybody can equip it.{W2}"
 @IsUnsellable?:

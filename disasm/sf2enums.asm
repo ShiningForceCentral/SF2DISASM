@@ -326,6 +326,8 @@ MOVETYPE_UPPER_STEALTH_ARCHER: equ $A0
 MOVETYPE_UPPER_MAGE: equ $B0
 MOVETYPE_UPPER_HEALER: equ $C0
 
+MOVETYPE_TOTAL: equ $D
+
 ; ---------------------------------------------------------------------------
 
 ; enum Prowess (bitfield)
@@ -377,6 +379,20 @@ CRITICALHITSETTING_OFFSET_DAMAGE_MODIFIER: equ $1
 
 ; ---------------------------------------------------------------------------
 
+; enum CriticalHit_BonusFactor (damage = 2^-factor)
+factor1 = 1
+factor2 = 2
+
+    if (STANDARD_BUILD&FIX_CRIT_TABLE=1)
+factor1 = 2
+factor2 = 1
+    endif
+
+CRITFACTOR_1: equ factor1
+CRITFACTOR_2: equ factor2
+
+; ---------------------------------------------------------------------------
+
 ; enum Classes
 CLASS_SDMN: equ $0
 CLASS_KNTE: equ $1
@@ -410,13 +426,54 @@ CLASS_MNST: equ $1C
 CLASS_RBT: equ $1D
 CLASS_GLM: equ $1E
 CLASS_RDBN: equ $1F
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+CLASS_32: equ $20
+CLASS_33: equ $21
+CLASS_34: equ $22
+CLASS_35: equ $23
+CLASS_36: equ $24
+CLASS_37: equ $25
+CLASS_38: equ $26
+CLASS_39: equ $27
+CLASS_40: equ $28
+CLASS_41: equ $29
+CLASS_42: equ $2A
+CLASS_43: equ $2B
+CLASS_44: equ $2C
+CLASS_45: equ $2D
+CLASS_46: equ $2E
+CLASS_47: equ $2F
+CLASS_48: equ $30
+CLASS_49: equ $31
+CLASS_50: equ $32
+CLASS_51: equ $33
+CLASS_52: equ $34
+CLASS_53: equ $35
+CLASS_54: equ $36
+CLASS_55: equ $37
+CLASS_56: equ $38
+CLASS_57: equ $39
+CLASS_58: equ $3A
+CLASS_59: equ $3B
+CLASS_60: equ $3C
+CLASS_61: equ $3D
+CLASS_62: equ $3E
+CLASS_63: equ $3F
+    endif
 CLASS_NONE: equ $FF
 
 ; ---------------------------------------------------------------------------
 
 ; enum ClassIndex
-CLASS_MASK_INDEX: equ $1F
-CLASS_NUMBER_TOTAL: equ $20
+classTotal = 32
+classMask = $1F
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+classTotal = 64
+classMask = $3F
+    endif
+	
+CLASS_MASK_INDEX: equ classMask
+CLASS_NUMBER_TOTAL: equ classTotal
 
 ; ---------------------------------------------------------------------------
 
@@ -555,22 +612,31 @@ SPELLPOWER_ENHANCED: equ $63
 ; ---------------------------------------------------------------------------
 
 ; enum AiCodes
-AI_0: equ $0
-AI_1: equ $1
-AI_2: equ $2
-AI_3: equ $3
-AI_4: equ $4
-AI_5: equ $5
-AI_6: equ $6
-AI_7: equ $7
+AI_HEALER1: equ $0
+AI_HEALER2: equ $1
+AI_HEALER3: equ $2
+AI_HEALER4: equ $3
+AI_HEALER5: equ $4
+AI_HEALER6: equ $5
+AI_ATTACKER1: equ $6
+AI_ATTACKER2: equ $7
 AI_SENTRY: equ $8
-AI_9: equ $9
+AI_ATTACKER3: equ $9
 AI_INACTIVE: equ $A
 AI_11: equ $B
-AI_12: equ $C
-AI_13: equ $D
+AI_DEBUFF: equ $C
+AI_CRITICAL: equ $D
 AI_LEADER: equ $E
 AI_SWARM: equ $F
+
+ORDER_NONE: equ $FF
+ORDER_FOLLOW_TARGET: equ $0
+ORDER_MOVE_TO: equ $40
+ORDER_FOLLOW_DEVIL: equ $80
+
+SPAWN_STARTING: equ $0
+SPAWN_RESPAWN: equ $1
+SPAWN_HIDDEN: equ $2
 
 ; ---------------------------------------------------------------------------
 
@@ -648,18 +714,39 @@ INPUT_BIT_START: equ $7
 ; ---------------------------------------------------------------------------
 
 ; enum ItemDef_Offsets
+maxRange = 4
+minRange = 5
+itemPrice = 6
+itemTypeOffset = 8
+useSpellOffset = 9
+equipEffectsOffset = 10
+
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+maxRange = 8
+minRange = 9
+itemPrice = 10
+itemTypeOffset = 12
+useSpellOffset = 13
+equipEffectsOffset = 14
+    endif
+	
 ITEMDEF_OFFSET_EQUIPFLAGS: equ $0
-ITEMDEF_OFFSET_MAX_RANGE: equ $4
-ITEMDEF_OFFSET_MIN_RANGE: equ $5
-ITEMDEF_OFFSET_PRICE: equ $6
-ITEMDEF_OFFSET_TYPE: equ $8
-ITEMDEF_OFFSET_USE_SPELL: equ $9
-ITEMDEF_OFFSET_EQUIPEFFECTS: equ $A
+ITEMDEF_OFFSET_MAX_RANGE: equ maxRange
+ITEMDEF_OFFSET_MIN_RANGE: equ minRange
+ITEMDEF_OFFSET_PRICE: equ itemPrice
+ITEMDEF_OFFSET_TYPE: equ itemTypeOffset
+ITEMDEF_OFFSET_USE_SPELL: equ useSpellOffset
+ITEMDEF_OFFSET_EQUIPEFFECTS: equ equipEffectsOffset
 
 ; ---------------------------------------------------------------------------
 
 ; enum ItemDef_Properties
-ITEMDEF_SIZE: equ $10
+itemDefSize = 16
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+itemDefSize = 20
+    endif
+	
+ITEMDEF_SIZE: equ itemDefSize
 
 ; ---------------------------------------------------------------------------
 
@@ -696,12 +783,50 @@ EQUIPFLAG_MNST: equ $10000000
 EQUIPFLAG_RBT: equ $20000000
 EQUIPFLAG_GLM: equ $40000000
 EQUIPFLAG_RDBN: equ $80000000
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+EQUIPFLAG2_32: equ $1
+EQUIPFLAG2_33: equ $2
+EQUIPFLAG2_34: equ $4
+EQUIPFLAG2_35: equ $8
+EQUIPFLAG2_36: equ $10
+EQUIPFLAG2_37: equ $20
+EQUIPFLAG2_38: equ $40
+EQUIPFLAG2_39: equ $80
+EQUIPFLAG2_40: equ $100
+EQUIPFLAG2_41: equ $200
+EQUIPFLAG2_42: equ $400
+EQUIPFLAG2_43: equ $800
+EQUIPFLAG2_44: equ $1000
+EQUIPFLAG2_45: equ $2000
+EQUIPFLAG2_46: equ $4000
+EQUIPFLAG2_47: equ $8000
+EQUIPFLAG2_48: equ $10000
+EQUIPFLAG2_49: equ $20000
+EQUIPFLAG2_50: equ $40000
+EQUIPFLAG2_51: equ $80000
+EQUIPFLAG2_52: equ $100000
+EQUIPFLAG2_53: equ $200000
+EQUIPFLAG2_54: equ $400000
+EQUIPFLAG2_55: equ $800000
+EQUIPFLAG2_56: equ $1000000
+EQUIPFLAG2_57: equ $2000000
+EQUIPFLAG2_58: equ $4000000
+EQUIPFLAG2_59: equ $8000000
+EQUIPFLAG2_60: equ $10000000
+EQUIPFLAG2_61: equ $20000000
+EQUIPFLAG2_62: equ $40000000
+EQUIPFLAG2_63: equ $80000000
+    endif
 
 ; ---------------------------------------------------------------------------
 
 ; enum EquipFlags_Other
 EQUIPFLAG_NONE: equ $0
 EQUIPFLAG_ALL: equ $FFFFFFFF
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+EQUIPFLAG2_NONE: equ $0
+EQUIPFLAG2_ALL: equ $FFFFFFFF
+    endif
 
 ; ---------------------------------------------------------------------------
 
@@ -1753,7 +1878,14 @@ CHURCHMENU_PER_LEVEL_RAISE_COST: equ $A
 CHURCHMENU_CURE_POISON_COST: equ $A
 CHURCHMENU_MIN_PROMOTABLE_LEVEL: equ $14
 CHURCHMENU_CURE_STUN_COST: equ $14
-CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED: equ $C8
+CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED: equ CHURCHMENU_PER_LEVEL_RAISE_COST * CHAR_CLASS_EXTRALEVEL
+
+    if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+CHURCHMENU_PER_LEVEL_POISON_COST: equ $3
+CHURCHMENU_POISON_COST_EXTRA_WHEN_PROMOTED: equ CHURCHMENU_PER_LEVEL_POISON_COST * CHAR_CLASS_EXTRALEVEL
+CHURCHMENU_PER_LEVEL_PARALYSIS_COST: equ $5
+CHURCHMENU_PARALYSIS_COST_EXTRA_WHEN_PROMOTED: equ CHURCHMENU_PER_LEVEL_PARALYSIS_COST * CHAR_CLASS_EXTRALEVEL
+	endif
 
 ; ---------------------------------------------------------------------------
 
@@ -1763,6 +1895,18 @@ PROMOTIONSECTION_REGULAR_PROMO: equ $1
 PROMOTIONSECTION_SPECIAL_BASE: equ $2
 PROMOTIONSECTION_SPECIAL_PROMO: equ $3
 PROMOTIONSECTION_SPECIAL_ITEM: equ $4
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+PROMOTIONSECTION_VIGOR_BASE: equ $2
+PROMOTIONSECTION_VIGOR_PROMO: equ $3
+PROMOTIONSECTION_WING_BASE: equ $4
+PROMOTIONSECTION_WING_PROMO: equ $5
+PROMOTIONSECTION_PRIDE_BASE: equ $6
+PROMOTIONSECTION_PRIDE_PROMO: equ $7
+PROMOTIONSECTION_TOME_BASE: equ $8
+PROMOTIONSECTION_TOME_PROMO: equ $9
+PROMOTIONSECTION_TANK_BASE: equ $A
+PROMOTIONSECTION_TANK_PROMO: equ $B
+    endif
 
 ; ---------------------------------------------------------------------------
 
@@ -2566,6 +2710,7 @@ VDPTILE_PALETTES_MASK: equ $6000
 
 ; enum Gold
 GOLD_STARTING_AMOUNT: equ $3C
+GOLD_GIFT: equ $64
 
 ; ---------------------------------------------------------------------------
 
@@ -3390,6 +3535,19 @@ DIFFICULTY_NORMAL: equ $0
 DIFFICULTY_HARD: equ $1
 DIFFICULTY_SUPER: equ $2
 DIFFICULTY_OUCH: equ $3
+
+; ---------------------------------------------------------------------------
+
+; enum Difficulty Modifiers (modifier * 25%)
+NORMAL_TO_HARD_ATK: equ $5
+NORMAL_TO_HARD_DEF: equ $4
+NORMAL_TO_HARD_AGI: equ $4
+HARD_TO_SUPER_ATK: equ $5
+HARD_TO_SUPER_DEF: equ $4
+HARD_TO_SUPER_AGI: equ $4
+SUPER_TO_OUCH_ATK: equ $4
+SUPER_TO_OUCH_DEF: equ $4
+SUPER_TO_OUCH_AGI: equ $4
 
 ; ---------------------------------------------------------------------------
 

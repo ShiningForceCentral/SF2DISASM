@@ -167,3 +167,167 @@ tbl_ClassDefs:
                 moveType   REGULAR
                 prowess    CRITICAL150_1IN8|DOUBLE_1IN32|COUNTER_1IN8
                 
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                    
+                mov 6                   ; 32: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 33: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 34: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 35: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 36: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 37: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 38: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 39: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 40: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 41: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 42: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 43: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 44: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 45: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 46: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 47: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 48: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 49: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 50: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 51: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 52: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 53: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 54: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 55: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 56: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 57: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 58: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 59: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 60: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 61: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 62: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 63: 
+                resistance NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                
+            endif
+                

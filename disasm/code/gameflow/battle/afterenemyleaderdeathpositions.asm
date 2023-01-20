@@ -60,7 +60,11 @@ loc_47E30:
                 move.b  (a0),d0
                 jsr     j_GetCurrentHP
                 tst.w   d1
-                bne.s   loc_47E4C       
+            if (STANDARD_BUILD&CUTSCENE_PROTECTION=1)
+                bra.s   loc_47E4C
+            else
+                bne.s   loc_47E4C
+            endif
                 cmpi.b  #$80,d0
                 bne.w   loc_47E60
 loc_47E4C:

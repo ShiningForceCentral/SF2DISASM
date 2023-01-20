@@ -383,7 +383,11 @@ loc_447FA:
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   loc_448BC
+            if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
+                lea     ((byte_FFB17F-$1000000)).w,a1
+            else
                 lea     ((byte_FFB160-$1000000)).w,a1
+            endif
                 lea     BattleNeutralEntities(pc), a0
                 clr.w   d1
                 getSavedByte CURRENT_BATTLE, d1

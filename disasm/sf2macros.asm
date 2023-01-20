@@ -827,9 +827,59 @@ battles: macro
 background: macro
     defineShorthand.b BATTLEBACKGROUND_,\1
     endm
-	
+    
 enemyFacing: macro
     defineShorthand.b LASER_,\1
+    endm
+    
+; Battle spriteset definitions
+    
+allyCombatant: macro
+    dc.b \1
+    dc.b \2
+    dc.b \3
+    endm
+    
+allyFillA: macro
+    dc.b AI_HEALER1
+    dc.w ITEM_NOTHING
+    dc.b ORDER_NONE
+    dc.b $F
+    dc.b ORDER_NONE
+    dc.b $F
+    dc.b $0
+    dc.b SPAWN_STARTING
+    endm
+    
+allyFillB: macro
+    dc.b AI_HEALER1
+    dc.w ITEM_NOTHING
+    dc.b ORDER_NONE
+    dc.b $0
+    dc.b ORDER_NONE
+    dc.b $0
+    dc.b $0
+    dc.b SPAWN_STARTING
+    endm
+    
+enemyCombatant: macro
+    defineShorthand.b ENEMY_,\1
+    dc.b \2
+    dc.b \3
+    endm
+    
+enemyAIandItem: macro
+    defineShorthand.b AI_,\1
+    defineBitfield.w ITEM_,\2
+    endm
+    
+enemyBehavior: macro
+    defineBitfield.b ORDER_,\1
+    dc.b \2
+    defineBitfield.b ORDER_,\3
+    dc.b \4
+    dc.b \5
+    defineBitfield.b SPAWN_,\6
     endm
     
 ; Names
@@ -889,6 +939,10 @@ className: macro
     
 equipFlags: macro
     defineBitfield.l EQUIPFLAG_,\1
+    endm
+    
+equipFlags2: macro
+    defineBitfield.l EQUIPFLAG2_,\1
     endm
     
 range: macro Min,Max
@@ -1179,6 +1233,13 @@ excludedEnemies: macro
     defineShorthand.b ENEMY_,\1
     shift
     endr
+    endm
+    
+capEnemyStat: macro
+    cmpi.w #$FF,d1
+    ble.s  *+6
+    move.w #$FF,d1
+    
     endm
     
 ; Ally stats
