@@ -8,9 +8,9 @@ tbl_ItemDefs:
 ;               price        0-65535
 ;               itemType     [ITEMTYPE_]bitfield
 ;               useSpell     [SPELL_]enum[|level]
-;               equipEffects [EQUIPEFFECT_]enum, parameter, &
-;                            [EQUIPEFFECT_]enum, parameter, &
-;                            [EQUIPEFFECT_]enum, parameter
+;               equipEffects [EQUIPEFFECT_]enum, parameter, &      (parameters for INCREASE/DECREASE_RES_ can be a combination ie. MODIFY_FIRE1|MODIFY_WIND3)
+;                            [EQUIPEFFECT_]enum, parameter, &      (parameter for SET_RES_ should be every resistance for the byte ie. RESISTANCE_WIND_NONE|RESISTANCE_LIGHTNING_MAJOR|RESISTANCE_ICE_WEAKNESS|RESISTANCE_FIRE_NONE)
+;                            [EQUIPEFFECT_]enum, parameter         (parameter for SET_STATUS should be single effect ie. STATUS_POISON, STATUS_SILENCE, etc)
 ;
 ;        level: LV1 = 0 (default when omitted)
 ;               LV2 = $40

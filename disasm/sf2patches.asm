@@ -8,9 +8,7 @@ EASY_CONFIGURATION_MODE:            equ 0       ; Activate Configuration Mode au
 
 ; Fixes
 FIX_SEARCH_IN_BATTLE:               equ 1       ; Restore the ability to search chests during battle.
-FIX_SKIPPED_TURNS:                  equ 1       ; Fix cases where a character can miss getting a turn due to current AGI being higher than 127.
 FIX_INCREASE_DOUBLE_RESETS_COUNTER: equ 1       ; Equipment that increases the chance to double attack also erroneously set the chance to counter attack to 1/32.
-FIX_GODDESS_STAFF_DEALS_ABUSE:      equ 1       ; If one of the following items is sitting in the Deals section after a DEF-CON switch is activated: Quick Ring, Protect Ring, White Ring, or Running Ring; a Goddess Staff will also be added to Deals.
 FIX_GARBLED_HP_BAR:                 equ 1       ; Prevent drawing garbage pixels when HP is greater then 600. (Keep drawing black bars instead.)
 FIX_KIWI_SPELLS_LEARNING_LEVEL:     equ 1       ; Kiwi's base class is wrongfully treated as promoted for the purpose of learning spells.
 FIX_HIGINS_SPELL:                   equ 1       ; Prevent unequipping from possibly corrupting characters spell entries.
@@ -24,6 +22,8 @@ FIX_GOLD_GIFT:                      equ 1       ; Gold increases when Minister g
 FIX_CARAVAN_DESCRIPTIONS:           equ 1       ; Breaks up character list into chuncks of 4
 FIX_SHIP_PRIEST:                    equ 1       ; Ensure priest onboard broken-up ship is usable for church action during battle 08
 FIX_LABYRINTH_DELETION:             equ 1       ; Prevent a section of the labyrinth from being deleted due to AI region activation
+FIX_ENEMY_BATTLE_EQUIP:             equ 1       ; Enemies will equip battle items as designated in spriteset
+FIX_MISSING_RANDOM_BATTLES:         equ 1       ; Adds zone events for random battles without
 
 ; Quality of life features
 ACCURATE_LAND_EFFECT_DISPLAY:       equ 0       ; Read values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
@@ -36,6 +36,7 @@ SPELLS_REFRESH_STATUS_COUNTERS:     equ 0       ; Boost, Slow, and Attack spells
 TRADEABLE_ITEMS                     equ 0       ; Allows trading items in battle without full inventory
 CUTSCENE_PROTECTION:                equ 1       ; Prevents game from freezing if dead character is needed for scene after leader death (as Slade for battle 5)
 CARAVAN_IN_TOWER:                   equ 0       ; Adds access to Caravan before tower climb battle
+MINIATURES_SHOP:                    equ 0       ; Places a shopworker on the desktop and floor of the Miniatures Room
 
 ; Misc. features
 AGILITY_AFFECTS_CHANCE_TO_DODGE:    equ 0       ; Adjust chance to dodge proportionally to the difference between the attacker's and the target's current AGI.
@@ -52,6 +53,7 @@ TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock dama
 DIFFICULTY_FACTORS:                 equ 1       ; Allow 4 distinct difficulties
 LEARN_SPELL_AT_PROMOTION:           equ 0       ; Allows learning 1 spell immeadiately upon promotion
 PER_LEVEL_CHURCH_COST:              equ 0       ; Raise/Cure cost based on ally level (double cost per promo level)
+ADDITIONAL_EQUIPEFFECTS:            equ 0       ; Add new equipeffects to offer more options (Set ATK, Increase Resistance, Decrease Double...)
 
 ; AI enhancements
 HEALER_AI_ENHANCEMENTS:             equ 1       ; See SF2_AI_Healing_Rewrite.txt for more details.

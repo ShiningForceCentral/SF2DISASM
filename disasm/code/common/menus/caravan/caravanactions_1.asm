@@ -368,15 +368,22 @@ byte_22210:
                 bcs.w   @IsUnsellable?
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 
-            if (STANDARD_BUILD&FIX_CARAVAN_DESCRIPTIONS=1)
-                clr.w    d3
+        if (STANDARD_BUILD&FIX_CARAVAN_DESCRIPTIONS=1)
+                clr.w   d3
 @ClearCount:
                 clr.w   d6
 @EquippableMessage_Loop:
                 cmpi.w  #4,d6
                 beq.s   @ClearCount
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                movem.l d7,-(sp)
                 move.b  (a0)+,d0
                 jsr     IsWeaponOrRingEquippable?
+                movem.l (sp)+,d7
+            else
+                move.b  (a0)+,d0
+                jsr     IsWeaponOrRingEquippable?
+            endif
                 bcc.s   @NextMember
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     $62             ; "{DICT}{NAME}, {W1}"
@@ -389,12 +396,19 @@ byte_22210:
                 
                 dbf     d7,@EquippableMessage_Loop
                 tst.w   d3
-            else
+        else
                 clr.w   d6
 @EquippableMessage_Loop:
                 
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                movem.l d7/a0,-(sp)
                 move.b  (a0)+,d0
                 jsr     j_IsWeaponOrRingEquippable?
+                movem.l (sp)+,d7
+            else
+                move.b  (a0)+,d0
+                jsr     j_IsWeaponOrRingEquippable?
+            endif
                 bcc.s   @NextMember
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     98              ; "{DICT}{NAME},"
@@ -412,7 +426,7 @@ byte_22210:
                 dbf     d7,@EquippableMessage_Loop
                 
                 tst.w   d6
-            endif
+        endif
                 bne.s   @FinishEquipList      
                 txt     97              ; "nobody so far.{W2}"
                 bra.s   @Goto_IsUnsellable?

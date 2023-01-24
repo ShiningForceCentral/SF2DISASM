@@ -445,6 +445,7 @@ AlterEnemyStats:
                 lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
                 capEnemyStat
                 jsr     SetBaseAGI
+                jsr     j_GetDifficulty
                 cmpi.w  #DIFFICULTY_HARD,d1
                 beq.w   @Done
                 
@@ -467,6 +468,7 @@ AlterEnemyStats:
                 lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
                 capEnemyStat
                 jsr     SetBaseAGI
+                jsr     j_GetDifficulty
                 cmpi.w  #DIFFICULTY_SUPER,d1
                 beq.w   @Done
 

@@ -16,4 +16,7 @@ ms_map22_flag522_Entities:
                 msFixedEntity 63, 63, UP, MAPSPRITE_OBJECT1, eas_InitFixedSprite
                 msFixedEntity 63, 63, UP, MAPSPRITE_OBJECT1, eas_InitFixedSprite
                 msFixedEntity 63, 63, UP, MAPSPRITE_OBJECT1, eas_InitFixedSprite
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                msFixedEntity 10, 11, DOWN, MAPSPRITE_SAILOR, eas_Init
+            endif
                 msEntitiesEnd
