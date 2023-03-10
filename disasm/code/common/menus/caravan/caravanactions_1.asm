@@ -355,28 +355,48 @@ byte_22210:
                 subq.w  #1,d7
                 bcs.w   @IsUnsellable?
                 lea     ((TARGETS_LIST-$1000000)).w,a0
+                
+            if (STANDARD_BUILD&FIX_CARAVAN_DESCRIPTIONS=1)
+                clr.w   d3
+@ClearCount:    clr.w   d6
+@EquippableMessage_Loop:
+                
+                cmpi.w  #4,d6
+                beq.s   @ClearCount
+                move.b  (a0)+,d0
+                jsr     IsWeaponOrRingEquippable?
+                bcc.s   @NextMember
+                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
+                txt     98              ; "{DICT}{NAME},"
+                addq.w  #1,d6
+                moveq   #2,d3
+                cmpi.w  #4,d6
+                bne.s   @NextMember
+                txt     99              ; "{N}"
+@NextMember:    dbf     d7,@EquippableMessage_Loop
+                
+                tst.w   d3
+            else
                 clr.w   d6
 @EquippableMessage_Loop:
                 
                 move.b  (a0)+,d0
                 jsr     j_IsWeaponOrRingEquippable?
-                bcc.s   loc_2228E
+                bcc.s   @NextMember
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     98              ; "{DICT}{NAME},"
                 addq.w  #1,d6
                 cmpi.w  #1,d6
-                bne.s   loc_22284
+                bne.s   @Skip
                 txt     99              ; "{N}"
-loc_22284:
-                
-                cmpi.w  #4,d6
-                bne.s   loc_2228E
+@Skip:          cmpi.w  #4,d6
+                bne.s   @NextMember
                 txt     99              ; "{N}"
-loc_2228E:
-                
-                dbf     d7,@EquippableMessage_Loop
-                
+@NextMember:    dbf     d7,@EquippableMessage_Loop
+
                 tst.w   d6
+            endif
+                
                 bne.s   byte_2229C      
                 txt     97              ; "nobody so far.{W2}"
                 bra.s   @Goto_IsUnsellable?
