@@ -638,7 +638,11 @@ DetermineDealsItemsNotInCurrentShop:
                 lea     ((GENERIC_LIST-$1000000)).w,a0
                 clr.w   ((GENERIC_LIST_LENGTH-$1000000)).w
                 clr.w   d1
+            if (DEALS_ITEMS_COUNTER>127)
+                move.w  #DEALS_ITEMS_COUNTER,d7
+            else
                 moveq   #DEALS_ITEMS_COUNTER,d7
+            endif
 @Loop:
                 
                 jsr     j_GetDealsItemAmount

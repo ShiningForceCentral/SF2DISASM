@@ -11,7 +11,7 @@
 
 LoadEndCreditsFont:
                 
-                movea.l (p_BaseTiles).l,a0
+                conditionalLongAddr movea.l, p_BaseTiles, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 lea     (byte_FF6C02).l,a0
@@ -747,7 +747,7 @@ GetLaserFacing:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 clr.w   d2
                 move.b  (a0),d2
                 lea     tbl_BattlesWithLasers(pc), a0

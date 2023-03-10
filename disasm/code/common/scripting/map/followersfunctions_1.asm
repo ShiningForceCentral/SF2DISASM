@@ -16,10 +16,9 @@ InitializeFollowerEntities:
                 movem.l (sp)+,d1-d2/a0
                 bcc.w   return_44336
             else
-                cmpi.b  #MAP_NEW_GRANSEAL_HQ,((CURRENT_MAP-$1000000)).w 
-                                                        ; HARDCODED maps with no followers
+                checkSavedByte #MAP_NEW_GRANSEAL_HQ, CURRENT_MAP    ; HARDCODED maps with no followers
                 beq.w   return_44336
-                cmpi.b  #MAP_NAZCA_SHIP_INTERIOR,((CURRENT_MAP-$1000000)).w
+                checkSavedByte #MAP_NAZCA_SHIP_INTERIOR, CURRENT_MAP
                 beq.w   return_44336
             endif
                 

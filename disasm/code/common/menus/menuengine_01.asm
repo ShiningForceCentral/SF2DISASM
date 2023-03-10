@@ -636,7 +636,7 @@ LoadMainMenuIcon:
                 
                 move.l  d0,-(sp)
                 ext.w   d0
-                movea.l (p_MainMenuTiles).l,a0
+                conditionalLongAddr movea.l, p_MainMenuTiles, a0
                 mulu.w  #GFX_DIAMENU_ICON_PIXELS_NUMBER,d0
                 adda.w  d0,a0
                 move.w  #$8F,d0 
@@ -1114,6 +1114,11 @@ LoadHighlightableItemIcon:
                 cmpi.w  #ICON_UNARMED,d0
                 beq.s   LoadHighlightableIcon
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
+            if (STANDARD_BUILD=1)
+                cmpi.w  #ITEM_NOTHING,d0
+                bne.s   LoadHighlightableIcon
+                move.w  #ICON_NOTHING,d0
+            endif
 
     ; End of function LoadHighlightableItemIcon
 
@@ -1125,8 +1130,8 @@ LoadHighlightableIcon:
                 
                 adda.w  #ICONTILES_BYTESIZE,a1
                 mulu.w  #ICONTILES_BYTESIZE,d0
-                movea.l (p_Icons).l,a0
-                adda.w  d0,a0           ; icon offset
+                conditionalLongAddr movea.l, p_Icons, a0
+                addIconOffset d0, a0
                 move.w  #$2F,d1 
                 lea     IconHighlightTiles(pc), a2
 @Loop:

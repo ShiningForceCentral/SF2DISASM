@@ -210,7 +210,7 @@ byte_21B58:
                 jsr     j_AddItem
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d6
                 sub.w   ordersCounter(a6),d6
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a1
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a1
                 lsl.w   #1,d6
                 adda.w  d6,a1
                 move.w  (a1),d2
@@ -469,7 +469,7 @@ CountPendingAndReadyToFulfillOrders:
                 
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
                 subq.w  #1,d7
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 @Loop:
                 
                 move.w  (a0)+,d1

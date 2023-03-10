@@ -23,7 +23,7 @@ GetBattlesceneBackground:
 @CheckCustomBackground:
                 
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
                 lea     tbl_CustomBackgrounds(pc), a0
                 move.b  (a0,d1.w),d1    ; get battle's own background if it has one
                 cmpi.b  #$FF,d1

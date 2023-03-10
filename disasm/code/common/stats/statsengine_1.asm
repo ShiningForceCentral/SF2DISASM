@@ -31,7 +31,7 @@ GetCombatantName:
                 
                 clr.w   d1
                 bsr.w   GetEnemyIndex   
-                movea.l (p_tbl_EnemyNames).l,a0
+                conditionalLongAddr movea.l, p_tbl_EnemyNames, a0
                 bsr.w   FindName        
 @Done:
                 
@@ -48,10 +48,7 @@ GetCombatantName:
 
 GetClass:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_CLASS,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_CLASS
                 rts
 
     ; End of function GetClass
@@ -64,10 +61,7 @@ GetClass:
 
 GetCurrentLevel:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_LEVEL,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_LEVEL
                 rts
 
     ; End of function GetCurrentLevel
@@ -78,10 +72,7 @@ GetCurrentLevel:
 
 GetMaxHP:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_HP_MAX,d7
-                bsr.w   GetCombatantWord
-                movem.l (sp)+,d7-a0
+                getSavedCombatantWord COMBATANT_OFFSET_HP_MAX
                 rts
 
     ; End of function GetMaxHP
@@ -92,10 +83,7 @@ GetMaxHP:
 
 GetCurrentHP:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_HP_CURRENT,d7
-                bsr.w   GetCombatantWord
-                movem.l (sp)+,d7-a0
+                getSavedCombatantWord COMBATANT_OFFSET_HP_CURRENT
                 rts
 
     ; End of function GetCurrentHP
@@ -106,10 +94,7 @@ GetCurrentHP:
 
 GetMaxMP:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MP_MAX,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_MP_MAX
                 rts
 
     ; End of function GetMaxMP
@@ -120,10 +105,7 @@ GetMaxMP:
 
 GetCurrentMP:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MP_CURRENT,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_MP_CURRENT
                 rts
 
     ; End of function GetCurrentMP
@@ -134,10 +116,7 @@ GetCurrentMP:
 
 GetBaseATT:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_ATT_BASE,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_ATT_BASE
                 rts
 
     ; End of function GetBaseATT
@@ -148,10 +127,7 @@ GetBaseATT:
 
 GetCurrentATT:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_ATT_CURRENT,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_ATT_CURRENT
                 rts
 
     ; End of function GetCurrentATT
@@ -162,10 +138,7 @@ GetCurrentATT:
 
 GetBaseDEF:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_DEF_BASE,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_DEF_BASE
                 rts
 
     ; End of function GetBaseDEF
@@ -176,10 +149,7 @@ GetBaseDEF:
 
 GetCurrentDEF:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_DEF_CURRENT,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_DEF_CURRENT
                 rts
 
     ; End of function GetCurrentDEF
@@ -190,10 +160,7 @@ GetCurrentDEF:
 
 GetBaseAGI:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_AGI_BASE,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_AGI_BASE
                 rts
 
     ; End of function GetBaseAGI
@@ -204,10 +171,7 @@ GetBaseAGI:
 
 GetCurrentAGI:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_AGI_CURRENT,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_AGI_CURRENT
                 rts
 
     ; End of function GetCurrentAGI
@@ -218,10 +182,7 @@ GetCurrentAGI:
 
 GetBaseMOV:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MOV_BASE,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_MOV_BASE
                 rts
 
     ; End of function GetBaseMOV
@@ -232,10 +193,7 @@ GetBaseMOV:
 
 GetCurrentMOV:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MOV_CURRENT,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_MOV_CURRENT
                 rts
 
     ; End of function GetCurrentMOV
@@ -246,10 +204,7 @@ GetCurrentMOV:
 
 GetBaseResistance:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_RESIST_BASE,d7
-                bsr.w   GetCombatantWord
-                movem.l (sp)+,d7-a0
+                getSavedCombatantWord COMBATANT_OFFSET_RESIST_BASE
                 rts
 
     ; End of function GetBaseResistance
@@ -260,10 +215,7 @@ GetBaseResistance:
 
 GetCurrentResistance:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_RESIST_CURRENT,d7
-                bsr.w   GetCombatantWord
-                movem.l (sp)+,d7-a0
+                getSavedCombatantWord COMBATANT_OFFSET_RESIST_CURRENT
                 rts
 
     ; End of function GetCurrentResistance
@@ -274,10 +226,7 @@ GetCurrentResistance:
 
 GetBaseProwess:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_PROWESS_BASE,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_PROWESS_BASE
                 rts
 
     ; End of function GetBaseProwess
@@ -288,10 +237,7 @@ GetBaseProwess:
 
 GetCurrentProwess:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_PROWESS_CURRENT,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_PROWESS_CURRENT
                 rts
 
     ; End of function GetCurrentProwess
@@ -302,10 +248,7 @@ GetCurrentProwess:
 
 GetStatusEffects:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_STATUSEFFECTS,d7
-                bsr.w   GetCombatantWord
-                movem.l (sp)+,d7-a0
+                getSavedCombatantWord COMBATANT_OFFSET_STATUSEFFECTS
                 rts
 
     ; End of function GetStatusEffects
@@ -316,11 +259,7 @@ GetStatusEffects:
 
 GetXPos:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_X,d7
-                bsr.w   GetCombatantByte
-                ext.w   d1
-                movem.l (sp)+,d7-a0
+                getSavedCombatantPosition COMBATANT_OFFSET_X
                 rts
 
     ; End of function GetXPos
@@ -331,11 +270,7 @@ GetXPos:
 
 GetYPos:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_Y,d7
-                bsr.w   GetCombatantByte
-                ext.w   d1
-                movem.l (sp)+,d7-a0
+                getSavedCombatantPosition COMBATANT_OFFSET_Y
                 rts
 
     ; End of function GetYPos
@@ -346,10 +281,7 @@ GetYPos:
 
 GetCurrentEXP:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_EXP,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_EXP
                 rts
 
     ; End of function GetCurrentEXP
@@ -439,10 +371,7 @@ GetAiRegion:
 
 GetAiActivationFlag:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_AI_ACTIVATION_FLAG,d7
-                bsr.w   GetCombatantWord
-                movem.l (sp)+,d7-a0
+                getSavedCombatantWord COMBATANT_OFFSET_AI_ACTIVATION_FLAG
                 rts
 
     ; End of function GetAiActivationFlag
@@ -463,10 +392,7 @@ GetEnemyIndex:
                 bra.s   GetKills
 @Continue:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_ENEMY_INDEX,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                getSavedCombatantByte COMBATANT_OFFSET_ENEMY_INDEX
                 rts
 
     ; End of function GetEnemyIndex
@@ -477,10 +403,7 @@ GetEnemyIndex:
 
 GetKills:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_ALLY_KILLS,d7
-                bsr.w   GetCombatantWord
-                movem.l (sp)+,d7-a0
+                getSavedCombatantWord COMBATANT_OFFSET_ALLY_KILLS
                 rts
 
     ; End of function GetKills
@@ -491,10 +414,7 @@ GetKills:
 
 GetDefeats:
                 
-                movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_ALLY_DEFEATS,d7
-                bsr.w   GetCombatantWord
-                movem.l (sp)+,d7-a0
+                getSavedCombatantWord COMBATANT_OFFSET_ALLY_DEFEATS
                 rts
 
     ; End of function GetDefeats

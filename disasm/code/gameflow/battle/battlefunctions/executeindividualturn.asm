@@ -17,12 +17,14 @@ ExecuteIndividualTurn:
                 andi.w  #COMBATANT_MASK_ALL,d0
                 move.w  d0,combatant(a6)
 @Start:
-                
+            if (STANDARD_BUILD=1)
+                clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
+            else
                 bsr.w   ClearDeadCombatantsListLength
+            endif
                 
                 ; Check if we're currently battling Taros, and Bowie is the actor
-                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED battle index
+                checkSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE  ; HARDCODED battle index
                 bne.s   @IsActorAlive
                 tst.w   combatant(a6)
                 bne.s   @IsActorAlive
@@ -192,8 +194,7 @@ ExecuteIndividualTurn:
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
 @CheckFairyWoodsBattle:
                 
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED Battle check : Fairy wood secret battle
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check : Fairy wood secret battle
                 bne.s   @WriteBattlesceneScript
                 jsr     j_RemoveTimerWindow
 @WriteBattlesceneScript:

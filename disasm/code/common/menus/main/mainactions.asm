@@ -97,12 +97,17 @@ byte_21348:
                 bra.w   @ExitMagic
 @CurrentlyOnOverworldMap?:
                 
+            if (STANDARD_BUILD=1)
+                jsr     IsOverworldMap?
+                beq.s   byte_21348      ; branch if false
+            else
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
                 cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.s   byte_21348      
                 cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
                 bgt.s   byte_21348      ; nothing happens if not an overworld map
+            endif
 @Egress:
                 
                 move.b  spellEntry(a6),d1
@@ -111,7 +116,7 @@ byte_21348:
                 move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMP
                 jsr     j_ExecuteFlashScreenScript
-                move.b  ((EGRESS_MAP-$1000000)).w,d0
+                getSavedByte EGRESS_MAP, d0
                 jsr     (GetSavePointForMap).w
                 lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
                 move.w  #1,(a0)+
@@ -120,7 +125,7 @@ byte_21348:
                 move.b  d1,(a0)+
                 move.b  d2,(a0)+
                 move.b  d3,(a0)+
-                clr.b   ((PLAYER_TYPE-$1000000)).w
+                clearSavedByte PLAYER_TYPE
                 bra.w   @ExitMain
 byte_213A8:
                 
@@ -222,12 +227,17 @@ byte_21468:
                 bne.w   @HandleNonAngelWingItems
                 
                 ; Currently on overworld map?
+            if (STANDARD_BUILD=1)
+                jsr     IsOverworldMap?
+                beq.s   @HandleNonAngelWingItems    ; branch if false
+            else
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
                 cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.w   @HandleNonAngelWingItems
                 cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
                 bgt.w   @HandleNonAngelWingItems
+            endif
                 
                 ; Use Angel Wing
                 move.w  member(a6),d0

@@ -185,7 +185,7 @@ WriteBattlesceneScript_EXPandGold:
                 move.w  ((BATTLESCENE_EXP-$1000000)).w,d1
                 tst.b   targetIsOnSameSide(a2)
                 bne.w   loc_A81E
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d0
+                getSavedByte CURRENT_BATTLE, d0
                 lea     tbl_HalvedEXPearnedBattles(pc), a0
 loc_A810:
                 

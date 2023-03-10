@@ -63,7 +63,7 @@ PickMithrilWeapon:
                 dbf     d5,@PickWeapon_Loop
 @LoadIndex:
                 
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
                 move.w  #BLACKSMITH_ORDERS_COUNTER,d7
 @LoadIndex_Loop:
                 

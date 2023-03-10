@@ -577,7 +577,7 @@ loc_12E3A:
                 lea     (PALETTE_3_BASE).l,a1
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   
-                movea.l (p_plt_EndKiss).l,a0
+                conditionalLongAddr movea.l, p_plt_EndKiss, a0
                 lea     (PALETTE_2_CURRENT).l,a1
                 move.w  #$20,d7 
                 jsr     (CopyBytes).w   

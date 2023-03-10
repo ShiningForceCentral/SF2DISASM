@@ -117,9 +117,9 @@ sub_441AA:
                 
                 module
                 movem.l d0-a1,-(sp)
-                cmpi.b  #PLAYERTYPE_RAFT,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
                 beq.w   @Done
-                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 beq.w   byte_441F0      ; No followers
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
@@ -142,11 +142,11 @@ byte_441F0:
                 ; No followers
                 chkFlg  64              ; Raft is unlocked
                 beq.w   @Done
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmp.b   ((RAFT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
+                checkRaftMap d0
                 bne.s   @RaftNotOnMap
-                move.b  ((RAFT_X-$1000000)).w,d1
-                move.b  ((RAFT_Y-$1000000)).w,d2
+                getSavedByte RAFT_X, d1
+                getSavedByte RAFT_Y, d2
                 move.w  #$1F,d0
                 andi.w  #$7F,d1 
                 muls.w  #$180,d1
@@ -196,7 +196,7 @@ IsOverworldMap?:
                 
                 move.b  (a0)+,d0
                 bmi.w   @Break
-                cmp.b   ((CURRENT_MAP-$1000000)).w,d0
+                checkCurrentMap d0
                 bne.s   @Next
                 addq.w  #1,d1
 @Next:

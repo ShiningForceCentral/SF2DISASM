@@ -32,6 +32,10 @@ declareSystemId: macro
     dc.b 'SEGA GENESIS    '
     endm
     
+declareChecksum: macro
+    dc.w $8921
+    endm
+    
 declareRomEnd: macro
     dc.l $1FFFFF
     endm
@@ -204,6 +208,10 @@ addToSavedByte: macro
     addq.b  \1,((\2-$1000000)).w
     endm
     
+subtractSavedByte: macro
+    sub.b   ((\1-$1000000)).w,\2
+    endm
+    
 getSavedWord: macro
     move.w  \3\\1,\2
     endm
@@ -284,6 +292,10 @@ breakItem: macro
     
 repairItem: macro
     bclr    #ITEMENTRY_UPPERBIT_BROKEN,\1
+    endm
+    
+checkCurrentMap: macro
+    cmp.b   ((CURRENT_MAP-$1000000)).w,\1
     endm
     
 checkRaftMap: macro
@@ -514,6 +526,10 @@ battles: macro
     
 background: macro
     defineShorthand.b BATTLEBACKGROUND_,\1
+    endm
+    
+enemyFacing: macro
+    defineShorthand.b LASER_,\1
     endm
     
 ; Names

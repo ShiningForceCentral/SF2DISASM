@@ -36,10 +36,10 @@ InitAllyCombatantEntry:
                 
                 movem.l d0-d3/a0-a1,-(sp)
                 move.w  d0,d1
-                mulu.w  #COMBATANT_ENTRY_SIZE,d1
-                lea     ((COMBATANT_ENTRIES-$1000000)).w,a1
+                mulu.w  #COMBATANT_ENTRY_REAL_SIZE,d1
+                loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d1,a1
-                movea.l (p_tbl_AllyNames).l,a0
+                conditionalLongAddr movea.l, p_tbl_AllyNames, a0
                 move.w  d0,d1
                 subq.w  #1,d1
                 blt.s   @GetNameCounter
@@ -58,7 +58,7 @@ InitAllyCombatantEntry:
                 blt.s   @GetRemainingNameBytesCounter
 @LoadName_Loop:
                 
-                move.b  (a0)+,(a1)+
+                setSavedByteWithPostIncrement (a0)+, a1
                 dbf     d2,@LoadName_Loop
 @GetRemainingNameBytesCounter:
                 
@@ -66,13 +66,13 @@ InitAllyCombatantEntry:
                 blt.s   @LoadAllyStartData
 @ClearRemainingNameBytes_Loop:
                 
-                clr.b   (a1)+
+                clearSavedByteWithPostIncrement a1
                 dbf     d3,@ClearRemainingNameBytes_Loop
 @LoadAllyStartData:
                 
                 move.w  d0,d1
                 mulu.w  #ALLYSTARTDEF_ENTRY_SIZE,d1
-                movea.l (p_tbl_AllyStartDefs).l,a0
+                conditionalLongAddr movea.l, p_tbl_AllyStartDefs, a0
                 adda.w  d1,a0
                 suba.w  #ALLYNAME_MAX_LENGTH,a1
                 move.b  (a0)+,d1
@@ -82,14 +82,14 @@ InitAllyCombatantEntry:
                 ext.w   d2
                 move.w  d2,-(sp)        ; -> push starting level
                 clr.w   d3
-                move.b  (a0)+,d3
-                move.w  d3,COMBATANT_OFFSET_ITEM_0(a1)
-                move.b  (a0)+,d3
-                move.w  d3,COMBATANT_OFFSET_ITEM_1(a1)
-                move.b  (a0)+,d3
-                move.w  d3,COMBATANT_OFFSET_ITEM_2(a1)
-                move.b  (a0)+,d3
-                move.w  d3,COMBATANT_OFFSET_ITEM_3(a1)
+                getStartingItem (a0)+, d3
+                setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_0
+                getStartingItem (a0)+, d3
+                setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_1
+                getStartingItem (a0)+, d3
+                setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_2
+                getStartingItem (a0)+, d3
+                setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_3
                 move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1) ; spell entries default to nothing
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
@@ -110,10 +110,10 @@ InitAllyCombatantEntry:
 LoadAllyClassData:
                 
                 movem.l d0-d1/a0-a1,-(sp)
-                mulu.w  #COMBATANT_ENTRY_SIZE,d0
-                lea     ((COMBATANT_ENTRIES-$1000000)).w,a1
+                mulu.w  #COMBATANT_ENTRY_REAL_SIZE,d0
+                loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d0,a1
-                movea.l (p_tbl_ClassDefs).l,a0
+                conditionalLongAddr movea.l, p_tbl_ClassDefs, a0
                 andi.w  #CLASS_MASK_INDEX,d1
                 mulu.w  #CLASSDEF_ENTRY_SIZE,d1
                 adda.w  d1,a0
@@ -152,26 +152,26 @@ InitGameSettings:
                 
                 movem.l d0/d7-a0,-(sp)
                 moveq   #LONGWORD_GAMEFLAGS_INITVALUE,d0
-                lea     ((GAME_FLAGS-$1000000)).w,a0
+                loadSavedDataAddress GAME_FLAGS, a0
                 moveq   #LONGWORD_GAMEFLAGS_COUNTER,d7
 @ClearGameFlags_Loop:
                 
-                move.l  d0,(a0)+
+                setSavedLongWithPostIncrement d0, a0
                 dbf     d7,@ClearGameFlags_Loop
                 
-                lea     ((DEALS_ITEMS-$1000000)).w,a0
+                loadSavedDataAddress DEALS_ITEMS, a0
                 moveq   #LONGWORD_DEALS_COUNTER,d7
 @ClearDealsItems_Loop:
                 
-                move.l  d0,(a0)+
+                setSavedLongWithPostIncrement d0, a0
                 dbf     d7,@ClearDealsItems_Loop
                 
                 move.l  #LONGWORD_CARAVAN_INITVALUE,d0
-                lea     ((CARAVAN_ITEMS-$1000000)).w,a0
+                loadSavedDataAddress CARAVAN_ITEMS, a0
                 moveq   #LONGWORD_CARAVAN_COUNTER,d7
 @ClearCaravanItems_Loop:
                 
-                move.l  d0,(a0)+
+                setSavedLongWithPostIncrement d0, a0
                 dbf     d7,@ClearCaravanItems_Loop
                 
                 moveq   #0,d0
@@ -244,8 +244,8 @@ GetFlag:
                 
                 andi.l  #FLAG_MASK,d1
                 divu.w  #8,d1           ; get the byte in which the flag is stored
-                lea     ((GAME_FLAGS-$1000000)).w,a0 ; go to the flag location in RAM
-                adda.w  d1,a0           ; go to the concerned byte
+                loadSavedDataAddress GAME_FLAGS, a0
+                addSavedByteOffset d1, a0           ; go to the concerned byte
                 swap    d1
                 moveq   #$FFFFFF80,d0
                 lsr.b   d1,d0
@@ -472,9 +472,9 @@ RemoveItemFromDeals:
 GetDealsItemInfo:
                 
                 andi.l  #ITEMENTRY_MASK_INDEX,d1
-                lea     ((DEALS_ITEMS-$1000000)).w,a0
+                loadSavedDataAddress DEALS_ITEMS, a0
                 divu.w  #2,d1
-                adda.w  d1,a0
+                addSavedByteOffset d1, a0
                 move.b  (a0),d2
                 btst    #DEALS_BIT_REMAINDER,d1 ; since deals are stacked 2 to a byte, this is the bit index that stores whether we are an even or odd item index
                 bne.s   @OddIndex

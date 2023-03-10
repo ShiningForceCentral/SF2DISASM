@@ -41,7 +41,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 beq.w   @Done           ; skip function if target is an ally
                 tst.b   targetDies(a2)
                 beq.w   @Done           ; skip function if target was not defeated
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d3
+                getSavedByte CURRENT_BATTLE, d3
                 lea     tbl_EnemyItemDrops(pc), a0
 @FindEntry_Loop:
                 
@@ -63,6 +63,15 @@ WriteBattlesceneScript_EnemyDropItem:
                 bra.w   @Done
 @EntryFound:
                 
+            if (STANDARD_BUILD=1)
+                andi.w  #ITEMENTRY_MASK_INDEX,d1
+                move.w  d1,d3
+                move.w  d2,d4
+                lea     tbl_RandomItemDrops(pc),a0
+                moveq   #1,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w   ; a0 = pointer to drop chance in 256
+                bcs.s   @DropItem
+            else
                 move.w  d1,d3
                 andi.w  #ITEMENTRY_MASK_INDEX,d3
                 move.w  d2,d4
@@ -73,8 +82,15 @@ WriteBattlesceneScript_EnemyDropItem:
                 cmpi.w  #ITEM_COUNTER_SWORD,d3
                 beq.w   @DetermineRandomDrop
                 bra.w   @DropItem
+            endif
 @DetermineRandomDrop:
                 
+            if (STANDARD_BUILD=1)
+                move.w  #256,d0
+                jsr     (GenerateRandomOrDebugNumber).w
+                cmp.b   (a0),d0
+                bhi.w   @Done
+            else
                 moveq   #ENEMYITEMDROP_RANDOM_CHANCE,d0
                 jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
@@ -87,11 +103,12 @@ WriteBattlesceneScript_EnemyDropItem:
                 jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 beq.w   @Done
+            endif
 @DropItem:
                 
                 clr.w   d0
                 move.b  ENEMYITEMDROP_OFFSET_FLAG(a0),d0
-                lea     ((ENEMY_ITEM_DROPPED_FLAGS-$1000000)).w,a0
+                loadSavedDataAddress ENEMY_ITEM_DROPPED_FLAGS, a0
                 divu.w  #8,d0
                 adda.w  d0,a0
                 swap    d0

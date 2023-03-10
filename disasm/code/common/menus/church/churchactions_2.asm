@@ -164,7 +164,7 @@ ReplaceSpellsWithSORCdefaults:
                 move.w  #COMBATANT_SPELLSLOTS_COUNTER,d7
 @Loop:
                 
-                move.b  #SPELL_NOTHING,(a0)+
+                setSavedByteWithPostIncrement #SPELL_NOTHING, a0
                 dbf     d7,@Loop
                 
                 move.w  member(a6),d0

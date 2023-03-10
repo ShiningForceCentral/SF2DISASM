@@ -12,7 +12,7 @@ ms_map14_InitFunction:
                 bne.s   return_58F28
                 script  cs_58FA4
                 setFlg  703             ; Set after the scene where Bowie brings the plank above deck, also set after the initial Ribble scene, where the guy runs away
-                move.b  #MAP_SHIP_DAMAGED,((EGRESS_MAP-$1000000)).w
+                setSavedByte #MAP_SHIP_DAMAGED, EGRESS_MAP
 return_58F28:
                 
                 rts

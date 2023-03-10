@@ -10,7 +10,7 @@
 
 BattleLoop:
                 
-                clr.b   ((PLAYER_TYPE-$1000000)).w
+                clearSavedByte PLAYER_TYPE
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 chkFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 beq.s   @Initialize
@@ -28,14 +28,14 @@ BattleLoop:
                 clr.l   ((SECONDS_COUNTER-$1000000)).w
                 
                 movem.w d0-d1,-(sp)
-                move.b  d0,((CURRENT_MAP-$1000000)).w
-                move.b  d1,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte d0, CURRENT_MAP
+                setSavedByte d1, CURRENT_BATTLE
                 bsr.w   SetBaseVIntFunctions
                 jsr     j_ExecuteBattleCutscene_Intro
                 movem.w (sp)+,d0-d1
                 
-                move.b  d0,((CURRENT_MAP-$1000000)).w
-                move.b  d1,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte d0, CURRENT_MAP
+                setSavedByte d1, CURRENT_BATTLE
                 moveq   #BATTLE_REGION_FLAGS_START,d1
 @ClearBattleRegionFlags_Loop:
                 
@@ -79,9 +79,7 @@ BattleLoop:
 @ExecuteIndividualTurns_Loop:
                 
                 clr.w   d0              ; start of individual turn execution
-                move.b  ((CURRENT_BATTLE_TURN-$1000000)).w,d0
-                lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
-                move.b  (a0,d0.w),d0
+                getBattleTurnActor d0
                 cmpi.b  #CODE_TERMINATOR_BYTE,d0
                 beq.s   @Start          
                 bsr.w   ExecuteIndividualTurn
@@ -101,9 +99,7 @@ BattleLoop:
                 tst.w   d3
                 beq.w   BattleLoop_Victory
                 clr.w   d0
-                move.b  ((CURRENT_BATTLE_TURN-$1000000)).w,d0
-                lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
-                move.b  (a0,d0.w),d0
+                getBattleTurnActor d0
                 bsr.w   HandleAfterTurnEffects
                 jsr     HandleKilledCombatants(pc)
                 nop
@@ -112,7 +108,7 @@ BattleLoop:
                 beq.w   BattleLoop_Defeat
                 tst.w   d3
                 beq.w   BattleLoop_Victory
-                addq.b  #TURN_ORDER_ENTRY_SIZE,((CURRENT_BATTLE_TURN-$1000000)).w
+                addToSavedByte #TURN_ORDER_ENTRY_SIZE, CURRENT_BATTLE_TURN
                 bra.s   @ExecuteIndividualTurns_Loop
 
     ; End of function BattleLoop
@@ -292,7 +288,7 @@ BattleLoop_Victory:
             endif
 @Continue:
                 
-                move.b  ((CURRENT_MAP-$1000000)).w,((MAP_EVENT_PARAM_2-$1000000)).w
+                getSavedByte CURRENT_MAP, ((MAP_EVENT_PARAM_2-$1000000)).w
                 jsr     (UpdateForceAndGetFirstBattlePartyMemberIndex).w
                 jsr     j_GetXPos
                 add.b   ((BATTLE_AREA_X-$1000000)).w,d1
@@ -307,7 +303,7 @@ BattleLoop_Victory:
                 move.b  #0,((MAP_EVENT_PARAM_1-$1000000)).w
                 jsr     j_ExecuteAfterBattleCutscene
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
                 addi.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     j_ClearFlag
                 addi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
@@ -373,9 +369,7 @@ BattleLoop_Defeat:
                 moveq   #MAP_GALAM_CASTLE_INNER,d0
                 clr.w   d4
             endif
-@Return:
-                
-                rts
+@Return:        rts
 
     ; End of function BattleLoop_Defeat
 
@@ -438,7 +432,7 @@ byte_23DFA:
 UpdateBattleUnlockedFlag:
                 
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag     ; Check whether current battle is marked as completed
                 beq.s   @Return

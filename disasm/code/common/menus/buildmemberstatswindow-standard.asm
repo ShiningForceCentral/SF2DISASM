@@ -63,6 +63,7 @@ member = -2
                 beq.s   @Poison
                 move.l  #VDPTILES_STATUSEFFECT_CURSE,d0
                 bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                
 @Poison:        ; Poison
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_POISON,d2

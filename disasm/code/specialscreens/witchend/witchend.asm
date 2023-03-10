@@ -9,7 +9,7 @@ EndGame:
                 
                 bset    #7,(SAVE_FLAGS).l
                 jsr     (DisableDisplayAndInterrupts).w
-                movea.l (p_WitchEndTiles).l,a0
+                conditionalLongAddr movea.l, p_WitchEndTiles, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
                 jsr     (LoadCompressedData).w
@@ -18,7 +18,7 @@ EndGame:
                 move.w  #$2000,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
-                movea.l (p_WitchEndLayout).l,a0
+                conditionalLongAddr movea.l, p_WitchEndLayout, a0
                 lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 jsr     (CopyBytes).w   
@@ -34,7 +34,7 @@ EndGame:
                 move.w  #$380,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
-                movea.l (p_plt_WitchEnd).l,a0
+                conditionalLongAddr movea.l, p_plt_WitchEnd, a0
                 lea     (PALETTE_1_BASE).l,a1
                 moveq   #$20,d7 
                 jsr     (CopyBytes).w   
@@ -88,7 +88,7 @@ EndGame:
                 move.w  #$380,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
-                movea.l (p_JewelEndScreenTiles).l,a0
+                conditionalLongAddr movea.l, p_JewelEndScreenTiles, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
                 jsr     (LoadCompressedData).w
@@ -97,7 +97,7 @@ EndGame:
                 move.w  #$2000,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
-                movea.l (p_JewelEndScreenLayout).l,a0
+                conditionalLongAddr movea.l, p_JewelEndScreenLayout, a0
                 lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 jsr     (CopyBytes).w   
@@ -106,7 +106,7 @@ EndGame:
                 move.w  #$400,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
-                movea.l (p_plt_JewelsEndScreen).l,a0
+                conditionalLongAddr movea.l, p_plt_JewelsEndScreen, a0
                 lea     (PALETTE_1_BASE).l,a1
                 moveq   #$40,d7 
                 jsr     (CopyBytes).w   
@@ -179,7 +179,7 @@ loc_27C2C:
 sub_27C64:
                 
                 move.w  d0,-(sp)
-                movea.l (p_JewelEndScreenLayout).l,a0
+                conditionalLongAddr movea.l, p_JewelEndScreenLayout, a0
                 lea     $700(a0),a0
                 mulu.w  #30,d0
                 adda.w  d0,a0
@@ -223,7 +223,7 @@ VInt_WitchEndBlink:
                 subq.w  #1,(a2)
                 cmpi.w  #3,(a2)
                 bne.s   loc_27CDC
-                movea.l (p_WitchEndLayout).l,a0
+                conditionalLongAddr movea.l, p_WitchEndLayout, a0
                 lea     $700(a0),a0
                 lea     (byte_FFE0DC).l,a1
                 move.w  #$403,d1
@@ -233,7 +233,7 @@ loc_27CDC:
                 
                 tst.w   (a2)
                 bne.s   loc_27D08
-                movea.l (p_WitchEndLayout).l,a0
+                conditionalLongAddr movea.l, p_WitchEndLayout, a0
                 lea     $720(a0),a0
                 lea     (byte_FFE0DC).l,a1
                 move.w  #$403,d1
@@ -256,7 +256,7 @@ loc_27D1A:
                 subq.w  #1,(a2)
                 cmpi.w  #5,(a2)
                 bne.s   loc_27D3E
-                movea.l (p_WitchEndLayout).l,a0
+                conditionalLongAddr movea.l, p_WitchEndLayout, a0
                 lea     $718(a0),a0
                 lea     (byte_FFE19C).l,a1
                 move.w  #$401,d1
@@ -268,7 +268,7 @@ loc_27D3E:
                 bne.s   loc_27D6A
 loc_27D42:
                 
-                movea.l (p_WitchEndLayout).l,a0
+                conditionalLongAddr movea.l, p_WitchEndLayout, a0
                 lea     $738(a0),a0
                 lea     (byte_FFE19C).l,a1
                 move.w  #$401,d1

@@ -379,14 +379,14 @@ loc_447FA:
                 addq.w  #1,battleEntity(a6)
                 dbf     d7,loc_4474A
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   loc_448BC
                 lea     ((byte_FFB160-$1000000)).w,a1
                 lea     BattleNeutralEntities(pc), a0
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
 loc_44824:
                 
                 cmpi.w  #$FFFF,(a0)

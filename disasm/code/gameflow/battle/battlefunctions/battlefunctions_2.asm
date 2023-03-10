@@ -73,11 +73,14 @@ loc_24492:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Unused in standard build
 
 ClearDeadCombatantsListLength:
                 
+            if (STANDARD_BUILD=0)
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 rts
+            endif
 
     ; End of function ClearDeadCombatantsListLength
 
@@ -1318,7 +1321,7 @@ loc_25236:
                 bra.s   loc_25236
 @SuspendGame:
                 
-                tst.b   ((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #BATTLE_VERSUS_ALL_BOSSES, CURRENT_BATTLE
                 beq.s   loc_25236
                 txt     0               ; "The game will be suspended.{N}OK?"
                 jsr     j_YesNoChoiceBox
@@ -1327,7 +1330,7 @@ loc_25236:
                 bmi.w   loc_25236
                 move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                getCurrentSaveSlot d0
                 jsr     (SaveGame).l
                 tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
                 beq.w   byte_252E6

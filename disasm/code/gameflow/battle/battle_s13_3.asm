@@ -23,7 +23,7 @@ BattleDebugFunction1B120A:
                 jsr     j_RemoveItemFromCaravan
                 moveq   #ALLY_BOWIE,d0
                 jsr     j_JoinForce
-                move.b  #BATTLE_VERSUS_ALL_BOSSES,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte #BATTLE_VERSUS_ALL_BOSSES, CURRENT_BATTLE
                 jsr     j_InitEnemyList
                 bsr.w   InitAllAlliesBattlePositions
                 bsr.w   InitAllEnemiesBattlePositions
@@ -126,7 +126,7 @@ InitAllEnemiesBattlePositions:
 InitEnemyBattlePosition:
                 
                 movem.l d0-a6,-(sp)
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 move.b  (a0),d1
                 cmpi.b  #BATTLE_TO_MOUN,d1
                 bne.s   loc_1B132E
@@ -489,10 +489,9 @@ GetBattleSpritesetSubsection:
                 move.b  d1,d2
                 clr.w   d1
                 clr.w   d0
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d0
+                getSavedByte CURRENT_BATTLE, d0
                 lsl.w   #2,d0
-                lea     pt_BattleSpritesets(pc), a0
-                nop
+                conditionalPc lea,pt_BattleSpriteSets,a0,nop
                 movea.l (a0,d0.w),a0
                 tst.b   d2
                 beq.w   @ReturnInfo     ; 0 = Section sizes
@@ -646,7 +645,7 @@ DoesBattleUpgrade:
                 
                 movem.l d0/d2-a6,-(sp)
                 clr.w   d1              ; clear d1 for "false"
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 clr.w   d7
                 move.b  (a0),d7         ; d7 contains battle index
                 clr.w   d6
@@ -685,7 +684,7 @@ DoesBattleUpgrade:
 UpgradeBattle:
                 
                 movem.l d0-a6,-(sp)
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 move.b  (a0),d7
                 lea     tbl_RandomBattlesList(pc), a1
                 nop
@@ -722,7 +721,7 @@ UpgradeBattle:
 ShouldBattleUpgrade:
                 
                 movem.l d0/d2-a6,-(sp)
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 move.b  (a0),d7
                 lea     tbl_RandomBattlesList(pc), a1
                 nop
@@ -891,7 +890,7 @@ UpgradeEnemyIndex:
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d2
 @Continue:
                 
-                lea     ((CURRENT_BATTLE-$1000000)).w,a1
+                loadSavedDataAddress CURRENT_BATTLE, a1
                 clr.w   d1
                 move.b  (a1),d1
                 sub.w   d1,d2           ; subtract battle index from Bowie's effective level

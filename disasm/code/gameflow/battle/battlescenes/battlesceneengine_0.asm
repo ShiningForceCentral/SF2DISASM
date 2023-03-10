@@ -54,6 +54,8 @@ InitializeBattlescene:
 @Continue:
                 
                 bsr.w   GetBattlesceneBackground
+                
+                disableSram
                 move.w  d1,d0
                 lea     (FF2000_LOADING_SPACE).l,a1 ; store it in RAM for DMA
                 bsr.w   LoadBattlesceneBackground
@@ -121,6 +123,7 @@ InitializeBattlescene:
                 dbf     d0,@LoadBackgroundPalette_Loop
                 
                 ; Load enemy plane layout to VRAM
+                switchRomBanks
                 cmpi.w  #$FFFF,((BATTLESCENE_ENEMY-$1000000)).w
                 beq.w   @LoadAllyVdpSprite
                 
@@ -166,9 +169,13 @@ InitializeBattlescene:
                 move.w  ((ALLY_BATTLE_SPRITE-$1000000)).w,d0
                 move.w  ((ALLY_BATTLE_PALETTE-$1000000)).w,d1
                 bsr.w   LoadAllyBattleSpritePropertiesAndPalette
+                
+                restoreRomBanksAndEnableSram
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 bsr.w   GetBattlesceneGround
                 move.b  d1,((BATTLESCENE_BACKGROUND-$1000000)).w
+                
+                disableSram
                 cmpi.w  #$FFFF,d1
                 beq.w   @CheckWeaponSprite
                 
@@ -192,9 +199,10 @@ InitializeBattlescene:
                 cmpi.w  #$FFFF,d0
                 beq.w   @StatusAnimationTilesToVram
                 
+                switchRomBanks
                 bsr.w   LoadWeaponSprite
                 move.w  ((ALLY_BATTLE_ANIMATION-$1000000)).w,d0
-                movea.l (p_pt_AllyAnimations).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyAnimations, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #4,a0
@@ -214,14 +222,17 @@ InitializeBattlescene:
                 jsr     (ApplyImmediateVramDma).w
                 move.w  ((ALLY_WEAPON_PALETTE-$1000000)).w,d0
                 bsr.w   LoadWeaponPalette
+                
+                restoreRomBanks
 @StatusAnimationTilesToVram:
                 
-                movea.l (p_StatusAnimationTiles).l,a0
+                conditionalLongAddr movea.l, p_StatusAnimationTiles, a0
                 lea     ($F600).l,a1
                 move.w  #$270,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDmaOnCompressedTiles).w
                 
+                enableSram
                 bsr.w   ApplyStatusEffectsToAnimations
                 move.w  ((ALLY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w,d0
                 lsr.w   #1,d0
@@ -768,18 +779,25 @@ bsc07_switchAllies:
                 cmpi.w  #$FFFF,d0
                 beq.s   loc_18736
                 bsr.w   GetBattleSpriteAndPalette
+                
+                disableSramAndSwitchRomBanks
                 move.w  d1,d0
                 bsr.w   LoadNewAllyBattleSprite
                 move.w  d1,d0
                 move.w  d2,d1
                 bsr.w   LoadAllyBattleSpritePropertiesAndPalette
+                
+                restoreRomBanksAndEnableSram
                 move.w  d7,d0
                 bsr.w   GetBattlesceneGround
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_1871E
                 
+                disableSram
                 move.w  d1,d0
                 bsr.w   LoadBattlesceneGround
+                
+                enableSram
 loc_1871E:
                 
                 move.w  d7,d0
@@ -787,10 +805,13 @@ loc_1871E:
                 cmpi.w  #$FFFF,d2
                 beq.s   loc_18736
                 
+                disableSramAndSwitchRomBanks
                 move.w  d2,d0
                 bsr.w   LoadWeaponSprite
                 move.w  d3,d0
                 bsr.w   LoadWeaponPalette
+                
+                restoreRomBanksAndEnableSram
 loc_18736:
                 
                 cmpi.w  #$FFFF,((BATTLESCENE_ALLY-$1000000)).w
@@ -874,7 +895,7 @@ loc_18818:
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_1888C
                 move.w  ((ALLY_BATTLE_ANIMATION-$1000000)).w,d0
-                movea.l (p_pt_AllyAnimations).l,a0
+                conditionalLongAddr movea.l, p_pt_AllyAnimations, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #4,a0
@@ -1024,9 +1045,13 @@ bsc06_switchEnemies:
                 bset    #7,$10(a0)
                 move.w  (a6),d0
                 bsr.w   GetBattleSpriteAndPalette
+                
+                disableSramAndSwitchRomBanks
                 move.w  d1,d0
                 bsr.w   LoadNewEnemyBattleSprite
-                movea.l (p_pt_BattlesceneTransitionTiles).l,a2
+                
+                restoreRomBanks
+                conditionalLongAddr movea.l, p_pt_BattlesceneTransitionTiles, a2
                 movea.l (a2)+,a0
                 move.l  a2,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a1
@@ -1040,9 +1065,11 @@ bsc06_switchEnemies:
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
 loc_189AE:
                 
+                enableSram
                 bsr.w   GetBattlesceneBackground
                 move.w  d1,d0
                 
+                disableSram
                 move.w  d0,-(sp)
                 lea     (FF2000_LOADING_SPACE).l,a1
                 bsr.w   LoadBattlesceneBackground
@@ -1094,6 +1121,7 @@ loc_18A2E:
                 movem.w (sp)+,d0-d2
                 dbf     d0,loc_18A18
                 
+                enableSram
                 move.w  (a6),d0
                 move.w  d0,((BATTLESCENE_ENEMY-$1000000)).w
                 bsr.w   GetBattleSpriteAndPalette
@@ -1129,7 +1157,11 @@ loc_18A96:
                 
                 move.w  ((ENEMY_BATTLE_SPRITE-$1000000)).w,d0
                 move.w  ((ENEMY_BATTLE_PALETTE-$1000000)).w,d1
+                
+                disableSramAndSwitchRomBanks
                 bsr.w   LoadEnemyBattleSpritePropertiesAndPalette
+                
+                restoreRomBanksAndEnableSram
                 bset    #2,((byte_FFB56E-$1000000)).w
                 bsr.w   sub_1EF2E
 loc_18AAC:
@@ -1218,7 +1250,10 @@ loc_18B8C:
                 cmpi.w  #$FFFF,d0
                 beq.s   loc_18BA0
                 
+                disableSramAndSwitchRomBanks
                 bsr.w   LoadWeaponSprite
+                
+                restoreRomBanksAndEnableSram
 loc_18BA0:
                 
                 addq.w  #4,a6
@@ -1903,17 +1938,17 @@ bsc10_displayMessage:
                 move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.l  (a6)+,((TEXT_NUMBER-$1000000)).w
                 clr.w   (SPEECH_SFX).l
-                tst.b   ((DISPLAY_BATTLE_MESSAGES-$1000000)).w
+                checkSavedByte #0, DISPLAY_BATTLE_MESSAGES
                 bne.s   loc_1920C
                 jsr     (DisplayText).l 
-                tst.b   ((MESSAGE_SPEED-$1000000)).w
+                checkSavedByte #0, MESSAGE_SPEED
                 bne.s   loc_1920C
                 txt     362             ; "{DICT}{W2}"
                 rts
 loc_1920C:
                 
                 clr.w   d0
-                move.b  ((MESSAGE_SPEED-$1000000)).w,d0
+                getSavedByte MESSAGE_SPEED, d0
                 moveq   #8,d1
                 sub.w   d0,d1
                 clr.w   d0
@@ -1964,7 +1999,7 @@ bsc12_hideTextBox:
 EndBattlescene:
                 
                 clr.w   d0
-                move.b  ((MESSAGE_SPEED-$1000000)).w,d0
+                getSavedByte MESSAGE_SPEED, d0
                 moveq   #7,d1
                 sub.w   d0,d1
                 clr.w   d0

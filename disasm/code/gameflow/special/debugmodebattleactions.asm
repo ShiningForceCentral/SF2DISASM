@@ -78,7 +78,7 @@ rjt_DebugModeBattleactions:
                 bra.w   @Done
 @PrismLaser:
                 
-                move.b  #BATTLE_VERSUS_PRISM_FLOWERS,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte #BATTLE_VERSUS_PRISM_FLOWERS, CURRENT_BATTLE
 @Done:
                 
                 movem.l (sp)+,d0-d3/a0

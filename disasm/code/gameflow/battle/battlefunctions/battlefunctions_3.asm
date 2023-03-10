@@ -11,7 +11,7 @@ LoadBattle:
                 
                 move.w  d0,-(sp)
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
+                getSavedByte CURRENT_MAP, d1
                 bsr.w   FadeOutToBlackAll
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 jsr     (LoadMapTilesets).w
@@ -53,8 +53,7 @@ LoadBattle:
                 jsr     (PlayMapMusic).w
             endif
                 jsr     (FadeInFromBlack).w
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; if battle 44, then special battle !
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; if battle 44, then special battle !
                 bne.s   return_256A0
                 jsr     j_DisplayTimerWindow
 return_256A0:

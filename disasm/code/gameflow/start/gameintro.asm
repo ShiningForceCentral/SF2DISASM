@@ -86,7 +86,7 @@ loc_729C:
                 
                 move.b  #0,((byte_FFB082-$1000000)).w
                 jsr     j_ClearEntities
-                movea.l (p_SpeechBalloonTiles).l,a0
+                conditionalLongAddr movea.l, p_SpeechBalloonTiles, a0
                 lea     ($8000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -102,7 +102,7 @@ loc_729C:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_WitchBlink
-                bsr.w   CheckSram       
+                bsr.w   CheckSram
                 moveq   #$20,d7 
                 move.b  d7,(SAVED_ERRCODE_BYTE0).l
                 move.b  d7,(SAVED_ERRCODE_BYTE1).l

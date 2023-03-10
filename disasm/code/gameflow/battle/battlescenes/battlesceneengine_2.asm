@@ -6181,11 +6181,11 @@ loc_1CEAA:
                 
                 tst.b   8(a5)
                 bne.s   loc_1CEB8
-                movea.l (p_BoltAnimData_A).l,a0
+                conditionalLongAddr movea.l, p_BoltAnimData_A, a0
                 bra.s   loc_1CEBE
 loc_1CEB8:
                 
-                movea.l (p_BoltAnimData_B).l,a0
+                conditionalLongAddr movea.l, p_BoltAnimData_B, a0
 loc_1CEBE:
                 
                 lsl.w   #3,d1
