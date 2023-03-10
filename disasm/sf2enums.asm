@@ -325,14 +325,35 @@ MOVETYPE_UPPER_HEALER: equ $C0
 ; ---------------------------------------------------------------------------
 
 ; enum Prowess (bitfield)
-PROWESS_CRITICAL150_1IN32: equ $0
-PROWESS_CRITICAL125_1IN32: equ $1
-PROWESS_CRITICAL150_1IN16: equ $2
-PROWESS_CRITICAL125_1IN16: equ $3
-PROWESS_CRITICAL150_1IN8: equ $4
-PROWESS_CRITICAL125_1IN8: equ $5
-PROWESS_CRITICAL150_1IN4: equ $6
-PROWESS_CRITICAL125_1IN4: equ $7
+
+critical150_1in32 = 0
+critical125_1in32 = 1
+critical150_1in16 = 2
+critical125_1in16 = 3
+critical150_1in8 = 4
+critical125_1in8 = 5
+critical150_1in4 = 6
+critical125_1in4 = 7
+
+    if (STANDARD_BUILD&FIX_CRIT_TABLE=1)
+critical125_1in32 = 0
+critical150_1in32 = 1
+critical125_1in16 = 2
+critical150_1in16 = 3
+critical125_1in8 = 4
+critical150_1in8 = 5
+critical125_1in4 = 6
+critical150_1in4 = 7
+    endif
+
+PROWESS_CRITICAL150_1IN32: equ critical150_1in32
+PROWESS_CRITICAL125_1IN32: equ critical125_1in32
+PROWESS_CRITICAL150_1IN16: equ critical150_1in16
+PROWESS_CRITICAL125_1IN16: equ critical125_1in16
+PROWESS_CRITICAL150_1IN8: equ critical150_1in8
+PROWESS_CRITICAL125_1IN8: equ critical125_1in8
+PROWESS_CRITICAL150_1IN4: equ critical150_1in4
+PROWESS_CRITICAL125_1IN4: equ critical125_1in4
 PROWESS_CRITICAL_NONE: equ $8
 PROWESS_CRITICAL_POISON: equ $9
 PROWESS_CRITICAL_SLEEP: equ $A
@@ -373,6 +394,19 @@ CRITICALHITSETTING_OFFSET_DAMAGE_MODIFIER: equ $1
 
 ; ---------------------------------------------------------------------------
 
+; enum CriticalHit_BonusFactor (damage = 2^-factor)
+factor1 = 1
+factor2 = 2
+
+    if (STANDARD_BUILD&FIX_CRIT_TABLE=1)
+factor1 = 2
+factor2 = 1
+    endif
+
+CRITFACTOR_1: equ factor1
+CRITFACTOR_2: equ factor2
+
+; ---------------------------------------------------------------------------
 ; enum Classes
 CLASS_SDMN: equ $0
 CLASS_KNTE: equ $1
