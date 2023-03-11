@@ -1335,6 +1335,12 @@ GetEquippedItemByType:
 AddItem:
                 
                 movem.l d0/a0,-(sp)
+            if (STANDARD_BUILD&FIX_ENEMY_BATTLE_EQUIP=1)
+                tst.b   d0
+                bmi.s   @SkipMasking
+                andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
+@SkipMasking:
+            endif
                 bsr.w   GetCombatantEntryAddress
                 lea     COMBATANT_OFFSET_ITEMS(a0),a0
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d0
@@ -1349,8 +1355,10 @@ AddItem:
                 move.w  #1,d2           ; no empty slot available
                 bra.s   @Done
 @Break:
-                
+            if (STANDARD_BUILD&FIX_ENEMY_BATTLE_EQUIP=1)
+            else
                 andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
+            endif
                 move.w  d1,-(a0)        ; move item in empty slot
                 clr.w   d2
 @Done:
