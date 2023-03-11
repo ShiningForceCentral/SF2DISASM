@@ -58,11 +58,15 @@ loc_47E30:
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_47E66
                 move.b  (a0),d0
+            if (STANDARD_BUILD&CUTSCENE_PROTECTION=1)
+                ; Always apply positions 
+            else
                 jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   loc_47E4C       
                 cmpi.b  #$80,d0
                 bne.w   loc_47E60
+            endif
 loc_47E4C:
                 
                 move.b  1(a0),d1        ; if character alive, apply positions
