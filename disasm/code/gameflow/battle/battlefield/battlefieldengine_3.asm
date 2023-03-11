@@ -333,6 +333,100 @@ SpellRange3:    dc.b 12
                 dc.b -3, 0
                 dc.b -2, 1
                 dc.b -1, 2
+            if (STANDARD_BUILD&EXPANDED_RANGES=1)
+SpellRange4:    dc.b 16
+                dc.b  0, -4
+                dc.b -1, -3
+                dc.b -2, -2
+                dc.b -3, -1
+                dc.b -4,  0
+                dc.b -3,  1
+                dc.b -2,  2
+                dc.b -1,  3
+                dc.b  0,  4
+                dc.b  1,  3
+                dc.b  2,  2
+                dc.b  3,  1
+                dc.b  4,  0
+                dc.b  3, -1
+                dc.b  2, -2
+                dc.b  1, -3
+SpellRange5:    dc.b 20
+                dc.b  0, -5
+                dc.b -1, -4
+                dc.b -2, -3
+                dc.b -3, -2
+                dc.b -4, -1
+                dc.b -5,  0
+                dc.b -4,  1
+                dc.b -3,  2
+                dc.b -2,  3
+                dc.b -1,  4
+                dc.b  0,  5
+                dc.b  1,  4
+                dc.b  2,  3
+                dc.b  3,  2
+                dc.b  4,  1
+                dc.b  5,  0
+                dc.b  4, -1
+                dc.b  3, -2
+                dc.b  2, -3
+                dc.b  1, -4
+SpellRange6:    dc.b 24
+                dc.b  0, -6
+                dc.b -1, -5
+                dc.b -2, -4
+                dc.b -3, -3
+                dc.b -4, -2
+                dc.b -5, -1
+                dc.b -6,  0
+                dc.b -5,  1
+                dc.b -4,  2
+                dc.b -3,  3
+                dc.b -2,  4
+                dc.b -1,  5
+                dc.b  0,  6
+                dc.b  1,  5
+                dc.b  2,  4
+                dc.b  3,  3
+                dc.b  4,  2
+                dc.b  5,  1
+                dc.b  6,  0
+                dc.b  5, -1
+                dc.b  4, -2
+                dc.b  3, -3
+                dc.b  2, -4
+                dc.b  1, -5
+SpellRange7:    dc.b 28
+                dc.b  0, -7
+                dc.b -1, -6
+                dc.b -2, -5
+                dc.b -3, -4
+                dc.b -4, -3
+                dc.b -5, -2
+                dc.b -6, -1
+                dc.b -7,  0
+                dc.b -6,  1
+                dc.b -5,  2
+                dc.b -4,  3
+                dc.b -3,  4
+                dc.b -2,  5
+                dc.b -1,  6
+                dc.b  0,  7
+                dc.b  1,  6
+                dc.b  2,  5
+                dc.b  3,  4
+                dc.b  4,  3
+                dc.b  5,  2
+                dc.b  6,  1
+                dc.b  7,  0
+                dc.b  6, -1
+                dc.b  5, -2
+                dc.b  4, -3
+                dc.b  3, -4
+                dc.b  2, -5
+                dc.b  1, -6
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 

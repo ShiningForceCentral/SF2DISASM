@@ -1160,6 +1160,7 @@ spr_2358C:      ; unknown VDP sprite definitions
 ;
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
+                ; Cursor radius 0
                 vdpSprite 116, V4|H4|16, 1664|PALETTE3, 124
                 vdpSprite 1, V4|H4|10, 1664|PALETTE3, 1
                 vdpSprite 1, V4|H4|11, 1664|PALETTE3, 1
@@ -1168,6 +1169,8 @@ spr_2358C:      ; unknown VDP sprite definitions
                 vdpSprite 1, V4|H4|14, 1664|PALETTE3, 1
                 vdpSprite 1, V4|H4|15, 1664|PALETTE3, 1
                 vdpSprite 1, V4|H4|16, 1664|PALETTE3, 1
+                
+                ; Cursor radius 1
                 vdpSprite 86, V4|H4|9, 1680|PALETTE3, 124
                 vdpSprite 116, V4|H4|10, 1696|PALETTE3, 100
                 vdpSprite 146, V4|H4|11, 1680|FLIP|PALETTE3, 124
@@ -1176,6 +1179,8 @@ spr_2358C:      ; unknown VDP sprite definitions
                 vdpSprite 1, V4|H4|14, 1664|PALETTE3, 1
                 vdpSprite 1, V4|H4|15, 1664|PALETTE3, 1
                 vdpSprite 1, V4|H4|16, 1664|PALETTE3, 1
+                
+                ; Cursor radius 2
                 vdpSprite 62, V4|H4|9, 1680|PALETTE3, 124
                 vdpSprite 116, V4|H4|10, 1696|PALETTE3, 76
                 vdpSprite 170, V4|H4|11, 1680|FLIP|PALETTE3, 124
@@ -1184,6 +1189,29 @@ spr_2358C:      ; unknown VDP sprite definitions
                 vdpSprite 86, V4|H4|14, 1712|MIRROR|PALETTE3, 153
                 vdpSprite 146, V4|H4|15, 1712|FLIP|PALETTE3, 95
                 vdpSprite 146, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 153
+                
+            if (STANDARD_BUILD&EXPANDED_RANGES=1)
+                ; Cursor radius 3
+                vdpSprite 38, V4|H4|9, 1680|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 52
+                vdpSprite 200, V4|H4|11, 1680|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 196
+                vdpSprite 56, V4|H4|13, 1712|PALETTE3, 95
+                vdpSprite 56, V4|H4|14, 1712|MIRROR|PALETTE3, 153
+                vdpSprite 176, V4|H4|15, 1712|FLIP|PALETTE3, 95
+                vdpSprite 176, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 153
+                
+                ; Cursor radius 4
+                vdpSprite 14, V4|H4|9, 1680|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 28
+                vdpSprite 230, V4|H4|11, 1680|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 220
+                vdpSprite 56, V4|H4|13, 1712|PALETTE3, 71
+                vdpSprite 56, V4|H4|14, 1712|MIRROR|PALETTE3, 177
+                vdpSprite 176, V4|H4|15, 1712|FLIP|PALETTE3, 71
+                vdpSprite 176, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 177
+            endif
+
 
 ; =============== S U B R O U T I N E =======================================
 
