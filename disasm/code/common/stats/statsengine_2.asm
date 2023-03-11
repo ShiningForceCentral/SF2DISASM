@@ -1002,6 +1002,37 @@ ApplyItemOnStats:
     ; End of function ApplyItemOnStats
 
 pt_EquipEffectFunctions:
+            if (STANDARD_BUILD&ADDITIONAL_EQUIPEFFECTS=1)
+                dc.l nullsub_8B22
+                dc.l IncreaseCurrentATT
+                dc.l IncreaseCurrentDEF
+                dc.l IncreaseCurrentAGI
+                dc.l IncreaseCurrentMOV
+                dc.l EquipEffect_IncreaseCriticalProwess
+                dc.l EquipEffect_IncreaseDoubleAttackProwess
+                dc.l EquipEffect_IncreaseCounterAttackProwess
+                dc.l EquipEffect_IncreaseResistanceGroup1
+                dc.l EquipEffect_IncreaseResistanceGroup2
+                dc.l DecreaseCurrentATT
+                dc.l DecreaseCurrentDEF
+                dc.l DecreaseCurrentAGI
+                dc.l DecreaseCurrentMOV
+                dc.l EquipEffect_DecreaseCriticalProwess
+                dc.l EquipEffect_DecreaseDoubleAttackProwess
+                dc.l EquipEffect_DecreaseCounterAttackProwess
+                dc.l EquipEffect_DecreaseResistanceGroup1
+                dc.l EquipEffect_DecreaseResistanceGroup2
+                dc.l SetCurrentATT
+                dc.l SetCurrentDEF
+                dc.l SetCurrentAGI
+                dc.l SetCurrentMOV
+                dc.l EquipEffect_SetCriticalProwess
+                dc.l EquipEffect_SetDoubleAttackProwess
+                dc.l EquipEffect_SetCounterAttackProwess
+                dc.l EquipEffect_SetResistanceGroup1
+                dc.l EquipEffect_SetResistanceGroup2
+                dc.l EquipEffect_SetStatus
+            else
                 dc.l nullsub_8B22
                 dc.l nullsub_8B22
                 dc.l EquipEffect_IncreaseCriticalProwess
@@ -1019,6 +1050,7 @@ pt_EquipEffectFunctions:
                 dc.l EquipEffect_SetCriticalProwess
                 dc.l EquipEffect_SetDoubleAttackProwess
                 dc.l EquipEffect_SetCounterAttackProwess
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1096,6 +1128,9 @@ EquipEffect_IncreaseCounterAttackProwess:
 
     ; End of function EquipEffect_IncreaseCounterAttackProwess
 
+            if (STANDARD_BUILD&ADDITIONAL_EQUIPEFFECTS=1)
+                include "code\common\stats\additional-equipeffects.asm"
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 
