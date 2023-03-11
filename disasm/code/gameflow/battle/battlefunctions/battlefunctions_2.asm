@@ -514,9 +514,13 @@ sub_24966:
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
                 bne.w   @HasItem
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                bra.w   loc_24D6C
+            else
                 txt     438             ; "You have no item.{W1}"
                 clsTxt
                 bra.w   loc_24746
+            endif
 @HasItem:
                 
                 clr.w   d1
@@ -950,7 +954,9 @@ loc_24DF0:
                 clr.w   d1
                 bra.s   loc_24DCC
 loc_24E26:
-                
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                clsTxt
+            endif
                 clr.b   ((word_FFAF8E-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   sub_230E2
@@ -967,6 +973,8 @@ loc_24E4C:
                 jsr     j_HideMiniStatusWindow
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+            else
                 cmpi.w  #4,d2
                 beq.w   loc_24E8E
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
@@ -978,6 +986,7 @@ loc_24E4C:
                 bclr    #ITEMENTRY_BIT_EQUIPPED,d1
                 jsr     j_AddItem
                 bra.w   loc_24F62
+            endif
 loc_24E8E:
                 
                 move.w  itemOrSpellIndex(a6),d0
@@ -1045,7 +1054,17 @@ loc_24F62:
                 clr.w   d0
                 bra.w   loc_25188
 loc_24F6E:
-                
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
+                jsr     GetItemBySlotAndHeldItemsNumber
+                cmpi.w  #0,d2
+                bne.s   @ChooseDiscard
+                txt     438             ; "You have no item.{W1}"
+                clsTxt
+                bra.s   @ReturnToMenu
+@ChooseDiscard:
+            endif
+            
                 move.w  combatant(a6),d0
                 bsr.w   HideUnitCursor
                 move.w  d1,-(sp)
@@ -1069,6 +1088,8 @@ loc_24F6E:
                 jsr     j_ExecuteItemMenu
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24FC2
+@ReturnToMenu:
+                
                 moveq   #$FFFFFFFF,d1
                 bra.w   @ChooseItem
 loc_24FC2:
