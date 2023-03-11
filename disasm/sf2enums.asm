@@ -3263,6 +3263,22 @@ DIFFICULTY_OUCH: equ $3
 
 ; ---------------------------------------------------------------------------
 
+; enum DifficultyModifiers
+
+    if (STANDARD_BUILD&DIFFICULTY_FACTORS=1)
+NORMAL_TO_HARD_ATT: equ 5   ; modifier * 25%
+NORMAL_TO_HARD_DEF: equ 4
+NORMAL_TO_HARD_AGI: equ 4
+HARD_TO_SUPER_ATT: equ 5
+HARD_TO_SUPER_DEF: equ 4
+HARD_TO_SUPER_AGI: equ 4
+SUPER_TO_OUCH_ATT: equ 4
+SUPER_TO_OUCH_DEF: equ 4
+SUPER_TO_OUCH_AGI: equ 6
+    endif
+
+; ---------------------------------------------------------------------------
+
 ; enum EnemyItemDrop_Offsets
 ENEMYITEMDROP_OFFSET_BATTLE: equ $0
 ENEMYITEMDROP_OFFSET_ENTITY: equ $1
