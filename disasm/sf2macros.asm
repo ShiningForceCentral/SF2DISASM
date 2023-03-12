@@ -591,6 +591,10 @@ equipFlags: macro
     defineBitfield.l EQUIPFLAG_,\1
     endm
     
+equipFlags2: macro
+    defineBitfield.l EQUIPFLAG2_,\1
+    endm
+    
 range: macro Min,Max
     dc.b Max,Min
     endm

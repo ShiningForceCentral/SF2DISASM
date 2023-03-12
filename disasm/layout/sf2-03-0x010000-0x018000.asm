@@ -56,7 +56,11 @@
                 include "code\specialscreens\witch\witchmainmenu.asm"    ; Witch main menu
                 include "code\common\menus\menuengine_10.asm"    ; Menu engine
                 include "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                include "data\stats\items\itemdefs-expandedclasses.asm"
+            else
                 include "data\stats\items\itemdefs.asm"    ; Item definitions
+            endif
                 include "data\stats\spells\spelldefs.asm"    ; Spell definitions
                 include "data\stats\items\itemnames.asm"    ; Item names
                 align
