@@ -1924,7 +1924,7 @@ GetNewAttAndDefWithItemEquipped:
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d0
                 and.b   d2,d0
                 movem.l (sp)+,d0-d1/a0
-                bne.w   @GetNewATTandDEF ; is the item type we're looking for
+                bne.w   @GetNewAttAndDef ; is the item type we're looking for
 @Next:
                 
                 addq.w  #ITEMENTRY_SIZE,d4
@@ -1936,12 +1936,12 @@ GetNewAttAndDefWithItemEquipped:
                 
                 move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
                 btst    #ITEMENTRY_BIT_EQUIPPED,d5
-                beq.w   @GetNewATTandDEF
+                beq.w   @GetNewAttAndDef
                 addq.w  #ITEMENTRY_SIZE,d4
                 dbf     d7,@FindFirstUnequippedItem_Loop
                 
                 clr.w   d4              ; default to item 0
-@GetNewATTandDEF:
+@GetNewAttAndDef:
                 
                 move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
                 movem.l d4-d5/a0,-(sp)
