@@ -86,9 +86,9 @@ ChurchMenuActions:
                 beq.w   @ConfirmRaise
                 
             if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
-                jsr     GetCurrentLevel
-                mulu.w  #CHURCHMENU_PER_LEVEL_RAISE_COST,d1
-                add.l   d1,-8(a6)
+                move.l  actionCost(a6),d1
+                add.l   d1,d1
+                move.l  d1,actionCost(a6)
             endif
                 addi.l  #CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED,actionCost(a6)
 @ConfirmRaise:
@@ -157,20 +157,19 @@ ChurchMenuActions:
                 addi.w  #1,poisonedMembersCount(a6)
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     121             ; "Gosh!  {NAME} is{N}poisoned!{W2}"
-                
             if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
                 jsr     GetCurrentLevel
-                mulu.w  #CHURCHMENU_PER_LEVEL_POISON_COST,d1
-                move.l  d1,-8(a6)
+                mulu.w  #CHURCHMENU_PER_LEVEL_CURE_POISON_COST,d1
+                move.l  d1,actionCost(a6)
                 jsr     GetClass
                 move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
                 bsr.w   GetPromotionData
-                cmpi.w  #0,-$24(a6)
-                beq.w   @CurePoison_Unpromoted
-                jsr     GetCurrentLevel
-                mulu.w  #CHURCHMENU_PER_LEVEL_POISON_COST,d1
-                add.l   d1,-8(a6)
-                addi.l  #CHURCHMENU_POISON_COST_EXTRA_WHEN_PROMOTED,-8(a6)
+                tst.w   cannotPromoteFlag(a6)
+                beq.s   @CurePoison_Unpromoted
+                move.l  actionCost(a6),d1
+                add.l   d1,d1
+                move.l  d1,actionCost(a6)
+                addi.l  #CHURCHMENU_CURE_POISON_COST_EXTRA_WHEN_PROMOTED,actionCost(a6)
                 
 @CurePoison_Unpromoted:
             else
