@@ -391,7 +391,7 @@ byte_22210:
                 move.l  d7,-(sp)
                 move.b  (a0)+,d0
                 jsr     IsWeaponOrRingEquippable?
-                movea.l (sp)+,d7
+                movem.l (sp)+,d7
             else
                 move.b  (a0)+,d0
                 jsr     j_IsWeaponOrRingEquippable?

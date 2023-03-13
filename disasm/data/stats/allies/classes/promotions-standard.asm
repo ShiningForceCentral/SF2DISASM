@@ -1,12 +1,8 @@
 
-; ASM FILE data\stats\allies\promotions-expandedclasses.asm :
-; 0x21046..0x21072 : Promotions
+; ASM FILE data\stats\allies\promotions-standard.asm :
+; Promotions
 tbl_Promotions: 
 ; Syntax        promotionSection [CLASS_]enum,..[CLASS_]enum
-;               promotionItems   [ITEM_]enum,..[ITEM_]enum
-;
-; Notes: 4 promotion sections and 1 promotion items list are required.
-;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 promotionSection &      ; Regular base classes
                     SDMN, KNTE, WARR, MAGE, PRST, ACHR, BDMN, WFMN, RNGR, PHNK, THIF, TORT

@@ -323,8 +323,8 @@ ChurchMenuActions:
                 bra.w   @RestartPromo
 @CheckSpecialPromo:
                 
-            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
-                include "code\common\menus\church\checkspecialpromo-expandedclasses.asm"
+            if (STANDARD_BUILD=1)
+                include "code\common\menus\church\checkspecialpromo-standard.asm"
             else
                 move.w  currentClass(a6),d1
                 move.w  #PROMOTIONSECTION_SPECIAL_BASE,d2

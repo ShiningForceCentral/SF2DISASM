@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\church\checkspecialpromo-expandedclasses.asm :
+; ASM FILE code\common\menus\church\checkspecialpromo-standard.asm :
 
 ; ChurchMenuActions:@CheckSpecialPromo
                 
