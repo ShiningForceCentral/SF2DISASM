@@ -1723,12 +1723,10 @@ AddItem:
                 move.w  #1,d2           ; no empty slot available
                 bra.s   @Done
 @Break:
-                
             if (STANDARD_BUILD&FIX_ENEMY_BATTLE_EQUIP=1)
             else
                 andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
             endif
-            
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 movep.w d1,COMBATANT_OFFSET_ITEMS-ITEMENTRY_SIZE(a0)
             else
