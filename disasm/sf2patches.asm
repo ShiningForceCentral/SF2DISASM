@@ -53,7 +53,7 @@ TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock dama
 DIFFICULTY_FACTORS:                 equ 1       ; Allow 4 distinct difficulties.
 LEARN_SPELL_AT_PROMOTION:           equ 0       ; Allow learning 1 spell immediately upon promotion.
 PER_LEVEL_CHURCH_COST:              equ 0       ; Raise/Cure cost based on ally level (double cost per promo level.)
-ADDITIONAL_EQUIPEFFECTS:            equ 0       ; Add new equipeffects to offer more options (Set ATK, Increase Resistance, Decrease Double...)
+ADDITIONAL_EQUIPEFFECTS:            equ 0       ; Add new equipeffects to offer more options (Set ATT, Increase Resistance, Decrease Double...)
 
 ; AI enhancements
 HEALER_AI_ENHANCEMENTS:             equ 1       ; See SF2_AI_Healing_Rewrite.txt for more details.
