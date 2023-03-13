@@ -57,7 +57,7 @@ ADDITIONAL_EQUIPEFFECTS:            equ 0       ; Add new equipeffects to offer 
 
 ; AI enhancements
 HEALER_AI_ENHANCEMENTS:             equ 1       ; See SF2_AI_Healing_Rewrite.txt for more details.
-DEBUFF_AI_ENHANCEMENTS:             equ 1       ; Increase debuff options enemeies can use
+SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options enemies can use.
 
 ; Menu enhancements
 THREE_DIGITS_STATS:                 equ 0       ; 

@@ -42,8 +42,8 @@ ExecuteAiCommand_Support:
                 clr.w   d3
                 bsr.w   GetNextSupportSpell
                 cmpi.w  #SPELL_NOTHING,d1
-            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
-                bne.s   @CheckMPcost
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
+                bne.s   @CheckMpCost
             else
                 bne.s   @CheckMuddle
             endif
@@ -55,18 +55,18 @@ ExecuteAiCommand_Support:
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   @Done
-            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
             else
 @CheckMuddle:
                 
                 cmpi.w  #SPELL_MUDDLE|SPELL_LV2,d1 ; HARDCODED spell entries
                 bne.s   @CheckDispel
-                bra.w   @CheckMPcost    
+                bra.w   @CheckMpCost    
 @CheckDispel:
                 
                 cmpi.w  #SPELL_DISPEL,d1
                 bne.s   @DoNothing
-                bra.w   @CheckMPcost    
+                bra.w   @CheckMpCost    
 @DoNothing:
                 
                 move.w  #$FFFF,d1
@@ -76,7 +76,7 @@ ExecuteAiCommand_Support:
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   @Done
             endif
-@CheckMPcost:
+@CheckMpCost:
                 
                 move.w  d1,d6           ; d6 = copy of debuff spell entry
                 bsr.w   FindSpellDefAddress
@@ -90,7 +90,7 @@ ExecuteAiCommand_Support:
                 bge.s   @CheckTargetingGroup
                 
                 ; If not enough MP, do nothing
-            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
                 bra.w   @DoNothing
             else
                 move.w  #$FFFF,d1
@@ -102,7 +102,7 @@ ExecuteAiCommand_Support:
             endif
 @CheckTargetingGroup:
                 
-            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
                 bsr.w   GetMoveInfo     
                 bsr.w   MakeRangeLists
                 btst    #SPELLPROPS_BIT_TARGETING,d5
@@ -146,14 +146,14 @@ ExecuteAiCommand_Support:
                 
                 clr.w   d1
                 move.b  d6,d1
-            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
                 move.w    d6,d3
                 andi.b    #SPELLENTRY_MASK_INDEX,d3
             endif
                 clr.w   d0
                 move.b  d7,d0
                 
-            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
                 
                 ; MUDDLE spell
                 cmpi.w  #SPELL_MUDDLE,d3
