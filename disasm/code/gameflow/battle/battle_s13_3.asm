@@ -414,84 +414,88 @@ loc_1B15A4:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Set enemy base stats according to difficulty
-
+; Adjust enemy base ATT according to difficulty.
+; If DIFFICULTY_FACTORS is enabled, adjust DEF and AGI as well.
+;
+;   In: d0.b = combatant index
 
 AlterEnemyStats:
-                
-                move.l  d1,-(sp)
-                jsr     j_GetDifficulty
+SetEnemyBaseATT:
                 
             if (STANDARD_BUILD&DIFFICULTY_FACTORS=1)
-                cmpi.w  #DIFFICULTY_NORMAL,d1
-                beq.w   @Done
+                
+@capEnemyStat:  macro
+                cmpi.w #255,d1
+                ble.s  @Continue\@
+                move.w #255,d1
+@Continue\@:
+                endm
+                
+                move.l  d1,-(sp)
+                jsr     GetDifficulty
+                beq.w   @Done                   ; no adjustments if Normal Difficulty
 
-;HardDifficulty
-                clr.l   d1
+                ; Hard Difficulty
                 jsr     GetBaseATT
-                mulu.w  #NORMAL_TO_HARD_ATK,d1
-                lsr.l   #2,d1           ; base ATT effectively multiplied by 1.25
-                capEnemyStat
+                mulu.w  #NORMAL_TO_HARD_ATT,d1  ; default: base ATT * 1.25
+                lsr.w   #2,d1
+                @capEnemyStat
                 jsr     SetBaseATT
-                clr.l   d1
                 jsr     GetBaseDEF
-                mulu.w  #NORMAL_TO_HARD_DEF,d1
-                lsr.l   #2,d1           ; base DEF effectively multiplied by 1.25
-                capEnemyStat
+                mulu.w  #NORMAL_TO_HARD_DEF,d1  ; default: base DEF * 1
+                lsr.w   #2,d1
+                @capEnemyStat
                 jsr     SetBaseDEF
-                clr.l   d1
                 jsr     GetBaseAGI
-                mulu.w  #NORMAL_TO_HARD_AGI,d1
-                lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
-                capEnemyStat
+                mulu.w  #NORMAL_TO_HARD_AGI,d1  ; default: base AGI * 1
+                lsr.w   #2,d1
+                @capEnemyStat
                 jsr     SetBaseAGI
-                jsr     j_GetDifficulty
+                jsr     GetDifficulty
                 cmpi.w  #DIFFICULTY_HARD,d1
                 beq.w   @Done
                 
-;SuperDifficulty
-                clr.l   d1
+                ; Super Difficulty
                 jsr     GetBaseATT
-                mulu.w  #HARD_TO_SUPER_ATK,d1
-                lsr.l   #2,d1           ; base ATT effectively multiplied by 1.25
-                capEnemyStat
+                mulu.w  #HARD_TO_SUPER_ATT,d1   ; default: base ATT * 1.25
+                lsr.w   #2,d1
+                @capEnemyStat
                 jsr     SetBaseATT
-                clr.l   d1
                 jsr     GetBaseDEF
-                mulu.w  #HARD_TO_SUPER_DEF,d1
-                lsr.l   #2,d1           ; base DEF effectively multiplied by 1.25
-                capEnemyStat
+                mulu.w  #HARD_TO_SUPER_DEF,d1   ; default: base DEF * 1
+                lsr.w   #2,d1
+                @capEnemyStat
                 jsr     SetBaseDEF
-                clr.l   d1
                 jsr     GetBaseAGI
-                mulu.w  #HARD_TO_SUPER_AGI,d1
-                lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
-                capEnemyStat
+                mulu.w  #HARD_TO_SUPER_AGI,d1   ; default: base AGI * 1
+                lsr.w   #2,d1
+                @capEnemyStat
                 jsr     SetBaseAGI
-                jsr     j_GetDifficulty
+                jsr     GetDifficulty
                 cmpi.w  #DIFFICULTY_SUPER,d1
-                beq.w   @Done
+                beq.s   @Done
 
-;OuchDifficulty
-                clr.l   d1
+                ; Ouch Difficulty
                 jsr     GetBaseATT
-                mulu.w  #SUPER_TO_OUCH_ATK,d1
-                lsr.l   #2,d1           ; base ATT effectively multiplied by 1.25
-                capEnemyStat
+                mulu.w  #SUPER_TO_OUCH_ATT,d1   ; default: base ATT * 1
+                lsr.w   #2,d1
+                @capEnemyStat
                 jsr     SetBaseATT
-                clr.l   d1
                 jsr     GetBaseDEF
-                mulu.w  #SUPER_TO_OUCH_DEF,d1
-                lsr.l   #2,d1           ; base DEF effectively multiplied by 1.25
-                capEnemyStat
+                mulu.w  #SUPER_TO_OUCH_DEF,d1   ; default: base DEF * 1
+                lsr.w   #2,d1
+                @capEnemyStat
                 jsr     SetBaseDEF
-                clr.l   d1
                 jsr     GetBaseAGI
-                mulu.w  #SUPER_TO_OUCH_AGI,d1
-                lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
-                capEnemyStat
+                mulu.w  #SUPER_TO_OUCH_AGI,d1   ; default: base AGI * 1.5
+                lsr.w   #2,d1
+                @capEnemyStat
                 jsr     SetBaseAGI
+@Done:          move.l  (sp)+,d1
+                rts
             else
+                move.l  d1,-(sp)
+                jsr     j_GetDifficulty
                 cmpi.w  #DIFFICULTY_SUPER,d1 ; pointless comparison
                 beq.s   @Continue
                 beq.w   @Done
@@ -513,13 +517,13 @@ AlterEnemyStats:
                 mulu.w  #5,d1
                 lsr.l   #2,d1           ; if SUPER difficulty, multiply base ATT by 1.25 a second time
                 jsr     j_SetBaseATT
-            endif
 @Done:
                 
                 move.l  (sp)+,d1
                 rts
+            endif
 
-    ; End of function AlterEnemyStats
+    ; End of function SetEnemyBaseATT
 
 
 ; =============== S U B R O U T I N E =======================================

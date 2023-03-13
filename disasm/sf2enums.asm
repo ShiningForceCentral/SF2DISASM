@@ -3707,16 +3707,19 @@ DIFFICULTY_OUCH: equ $3
 
 ; ---------------------------------------------------------------------------
 
-; enum Difficulty Modifiers (modifier * 25%)
-NORMAL_TO_HARD_ATK: equ $5
-NORMAL_TO_HARD_DEF: equ $4
-NORMAL_TO_HARD_AGI: equ $4
-HARD_TO_SUPER_ATK: equ $5
-HARD_TO_SUPER_DEF: equ $4
-HARD_TO_SUPER_AGI: equ $4
-SUPER_TO_OUCH_ATK: equ $4
-SUPER_TO_OUCH_DEF: equ $4
-SUPER_TO_OUCH_AGI: equ $6
+; enum DifficultyModifiers
+
+    if (STANDARD_BUILD&DIFFICULTY_FACTORS=1)
+NORMAL_TO_HARD_ATT: equ 5   ; modifier * 25%
+NORMAL_TO_HARD_DEF: equ 4
+NORMAL_TO_HARD_AGI: equ 4
+HARD_TO_SUPER_ATT: equ 5
+HARD_TO_SUPER_DEF: equ 4
+HARD_TO_SUPER_AGI: equ 4
+SUPER_TO_OUCH_ATT: equ 4
+SUPER_TO_OUCH_DEF: equ 4
+SUPER_TO_OUCH_AGI: equ 6
+    endif
 
 ; ---------------------------------------------------------------------------
 

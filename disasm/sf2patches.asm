@@ -50,7 +50,7 @@ SEND_DESTROYED_ITEMS_TO_DEALS:      equ 0       ; Add item that was destroyed up
 SEND_DROPPED_ITEMS_TO_CARAVAN:      equ 0       ; If character inventory is full, add dropped item to the Caravan instead of shop deals, regardless of rarity. If the Caravan itself is full, then drops follow the usual routine: go to deals if rare, or become lost completely if not rare.
 SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
 TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock damage with difficulty.   Normal:100%  Hard:125%  Super: 150%  Ouch: 175%
-DIFFICULTY_FACTORS:                 equ 1       ; Allow 4 distinct difficulties
+DIFFICULTY_FACTORS:                 equ 1       ; Allow 4 distinct difficulties.
 LEARN_SPELL_AT_PROMOTION:           equ 0       ; Allows learning 1 spell immeadiately upon promotion
 PER_LEVEL_CHURCH_COST:              equ 0       ; Raise/Cure cost based on ally level (double cost per promo level)
 ADDITIONAL_EQUIPEFFECTS:            equ 0       ; Add new equipeffects to offer more options (Set ATK, Increase Resistance, Decrease Double...)
