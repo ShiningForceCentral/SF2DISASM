@@ -16,7 +16,7 @@ FIX_MOVEMENT_GLITCH:                equ 1       ; The movement glitch is used in
 FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE:equ 1       ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
 FIX_DWARVEN_MINER_VOICE:            equ 1       ; A cutscene has a fairy NPC concluding her dialogue, and when the dwarf delivers his first line, it uses the same female NPC speech sound effect until his follow-up dialogue line.
 FIX_CARAVAN_FREE_REPAIR_EXPLOIT:    equ 1       ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reducded to 32 items unless SRAM is expanded.)
-FIX_GIZMO_ARRANGEMENT:              equ 1       ; Gizmos spread out into battle places during cutscene
+FIX_GIZMO_ARRANGEMENT:              equ 1       ; Gizmos spread out into battle places during cutscene.
 FIX_CRIT_TABLE:                     equ 1       ; Makes the "Increase Crit" effect never lower damage potential
 FIX_GOLD_GIFT:                      equ 1       ; Gold increases when Minister gives you gift in New Granseal
 FIX_CARAVAN_DESCRIPTIONS:           equ 1       ; Breaks up character list into chuncks of 4

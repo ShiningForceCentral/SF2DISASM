@@ -44,6 +44,10 @@ declareChecksum: macro
     endc
     endm
     
+declareChecksum: macro
+    dc.w $8921
+    endm
+    
 declareRomEnd: macro
     if (expandedRom=1)
     dc.l $3FFFFF
@@ -393,6 +397,10 @@ addToSavedByte: macro
     endc
     endm
     
+subtractSavedByte: macro
+    sub.b   ((\1-$1000000)).w,\2
+    endm
+    
 getSavedWord: macro
     if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
     if (narg>=3)
@@ -566,6 +574,10 @@ repairItem: macro
     else
     bclr    #ITEMENTRY_UPPERBIT_BROKEN,\1
     endc
+    endm
+    
+checkCurrentMap: macro
+    cmp.b   ((CURRENT_MAP-$1000000)).w,\1
     endm
     
 checkRaftMap: macro

@@ -12,7 +12,11 @@ combatant = -2
 
 HandleAfterTurnEffects:
                 
+            if (STANDARD_BUILD=1)
+                clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
+            else
                 bsr.w   ClearDeadCombatantsListLength
+            endif
                 link    a6,#-16
                 move.w  d0,combatant(a6)
                 jsr     j_GetCurrentHP

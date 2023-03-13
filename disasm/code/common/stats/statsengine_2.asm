@@ -397,11 +397,7 @@ IncreaseCurrentHP:
                 movem.l d5-a0,-(sp)
                 clr.w   d5
                 bsr.w   GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_HP_MAX(a0),d6
-            else
-                move.w  COMBATANT_OFFSET_HP_MAX(a0),d6
-            endif
+                getSavedWord (a0), d6, COMBATANT_OFFSET_HP_MAX
                 moveq   #COMBATANT_OFFSET_HP_CURRENT,d7
                 bsr.w   IncreaseAndClampWord
                 movem.l (sp)+,d5-a0
@@ -635,11 +631,7 @@ DecreaseCurrentHP:
                 movem.l d5-a0,-(sp)
                 clr.w   d5
                 bsr.w   GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_HP_MAX(a0),d6
-            else
-                move.w  COMBATANT_OFFSET_HP_MAX(a0),d6
-            endif
+                getSavedWord (a0), d6, COMBATANT_OFFSET_HP_MAX
                 moveq   #COMBATANT_OFFSET_HP_CURRENT,d7
                 bsr.w   DecreaseAndClampWord
                 movem.l (sp)+,d5-a0

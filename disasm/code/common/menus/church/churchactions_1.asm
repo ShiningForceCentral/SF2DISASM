@@ -674,21 +674,13 @@ ChurchMenuActions:
     ; End of function ChurchMenuActions
     
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
-
-; =============== S U B R O U T I N E =======================================
-
-PromoWithItem:
-                
-                move.b  (a0)+,d0
+PromoWithItem:  move.b  (a0)+,d0
                 dbf     d7,PromoWithItem
                 move.w  d0,newClass(a6)
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  promotionItem(a6),((TEXT_NAME_INDEX_3-$1000000)).w
                 move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     $8F             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
-                txt     $93             ; "OK?"
+                txt     143             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
+                txt     147             ; "OK?"
                 rts
-
-    ; End of function PromoWithItem
-    
             endif
