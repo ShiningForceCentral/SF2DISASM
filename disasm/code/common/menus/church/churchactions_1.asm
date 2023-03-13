@@ -525,7 +525,7 @@ PromoWithItem:  move.b  (a0)+,d0
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  promotionItem(a6),((TEXT_NAME_INDEX_3-$1000000)).w
                 move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     159             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
+                txt     143             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
                 txt     147             ; "OK?"
                 rts
             endif
