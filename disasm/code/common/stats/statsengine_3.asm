@@ -186,16 +186,16 @@ InitializeGameSettings:
                 moveq   #0,d0
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 lea     (COMBATANT_ENTRIES).l,a0
-                movep.w d0,CARAVAN_ITEMS_NUMBER_OFFSET(a0)
-                movep.w d0,CURRENT_GOLD_OFFSET(a0)
-                move.b  d0,PLAYER_TYPE_OFFSET(a0)
-                move.b  d0,CURRENT_MAP_OFFSET(a0)
-                move.b  d0,CURRENT_BATTLE_OFFSET(a0)
-                move.b  d0,DISPLAY_BATTLE_MESSAGES_OFFSET(a0)
-                move.b  d0,EGRESS_MAP_OFFSET(a0)
+                movep.w d0,SAVED_DATA_OFFSET_CARAVAN_ITEMS_NUMBER(a0)
+                movep.w d0,SAVED_DATA_OFFSET_CURRENT_GOLD(a0)
+                move.b  d0,SAVED_DATA_OFFSET_PLAYER_TYPE(a0)
+                move.b  d0,SAVED_DATA_OFFSET_CURRENT_MAP(a0)
+                move.b  d0,SAVED_DATA_OFFSET_CURRENT_BATTLE(a0)
+                move.b  d0,SAVED_DATA_OFFSET_DISPLAY_BATTLE_MESSAGES(a0)
+                move.b  d0,SAVED_DATA_OFFSET_EGRESS_MAP(a0)
                 move.l  #359999,d0
-                movep.l d0,SPECIAL_BATTLE_RECORD_OFFSET(a0)
-                move.b  #2,MESSAGE_SPEED_OFFSET(a0)
+                movep.l d0,SAVED_DATA_OFFSET_SPECIAL_BATTLE_RECORD(a0)
+                move.b  #2,SAVED_DATA_OFFSET_MESSAGE_SPEED(a0)
             else
                 move.w  d0,((CARAVAN_ITEMS_NUMBER-$1000000)).w ; number of items in caravan
                 move.w  d0,((CURRENT_GOLD-$1000000)).w
