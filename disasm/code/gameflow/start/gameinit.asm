@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-InitGame:
+InitializeGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
@@ -27,7 +27,7 @@ InitGame:
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 beq.s   loc_7118
                 jsr     (EnableDisplayAndInterrupts).w
-                bsr.w   InitDisplay
+                bsr.w   InitializeDisplay
                 jsr     (EnableDisplayAndInterrupts).w
                 jmp     j_nullsub_18010
 loc_7118:
@@ -37,21 +37,21 @@ loc_7118:
                 btst    #INPUT_BIT_DOWN,((P1_INPUT-$1000000)).w
                 beq.w   j_GameIntro
                 jsr     (EnableDisplayAndInterrupts).w
-                bsr.w   InitDisplay
+                bsr.w   InitializeDisplay
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   FadeInFromBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
                 move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
-                bsr.w   InitWindowProperties
+                bsr.w   InitializeWindowProperties
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 moveq   #0,d0
                 moveq   #0,d1
                 moveq   #$38,d2 
                 jsr     j_NumberPrompt
                 clr.w   d1
-                move.b  DebugModeAvailableMaps(pc,d0.w),d0
+                move.b  tbl_DebugModeAvailableMaps(pc,d0.w),d0
                 bsr.w   GetSavePointForMap
                 moveq   #0,d4
                 movem.w d0-d4,-(sp)
@@ -61,5 +61,5 @@ loc_7118:
                 jsr     j_ExplorationLoop
                 bra.w   MainLoop        
 
-    ; End of function InitGame
+    ; End of function InitializeGame
 

@@ -42,7 +42,7 @@ loc_62A8:
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
                 cmpi.b  #1,((COMPRESSED_STRING_LENGTH-$1000000)).w ; check length
                 beq.w   loc_62FE
-                jsr     j_InitDecoder   ; initialize decoder
+                jsr     j_InitializeHuffmanDecoder ; initialize decoder
                 move.l  a0,((COMPRESSED_STRING_POINTER-$1000000)).w ; keep string pointer
 loc_62CA:
                 
@@ -186,7 +186,7 @@ ParseSpecialTextSymbol:
                 bra.w   loc_62CA
 @delay2:
                 
-                move.w  #$77,d0 
+                move.w  #119,d0
                 move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
                 movem.w d2,-(sp)
                 clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
@@ -418,7 +418,7 @@ symbol_clear:
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  d0,-(sp)
-                bsr.w   GetWindowInfo   
+                bsr.w   GetWindowEntryAddress
                 movea.l (a0),a1
                 bsr.w   sub_67E6
                 move.w  (sp)+,d0
@@ -904,11 +904,7 @@ loc_68A8:
                 move.w  (sp)+,d1
                 clr.w   d0
                 moveq   #3,d2
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                sub.b   (MESSAGE_SPEED).l,d2
-            else
-                sub.b   ((MESSAGE_SPEED-$1000000)).w,d2
-            endif
+                subtractSavedByte MESSAGE_SPEED, d2
                 beq.s   loc_68C2
                 subq.w  #1,d2
                 bset    d2,d0
@@ -1177,7 +1173,7 @@ loc_6B00:
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  d0,-(sp)
-                bsr.w   GetWindowInfo   
+                bsr.w   GetWindowEntryAddress
                 movea.l (a0),a1
                 bsr.w   sub_67E6
                 move.w  (sp)+,d0

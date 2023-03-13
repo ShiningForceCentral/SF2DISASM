@@ -9,7 +9,7 @@ WitchSuspend:
                 
                  
                 sndCom  MUSIC_SUSPEND
-                bsr.w   InitWitchSuspendVIntFunctions
+                bsr.w   InitializeWitchSuspendVIntFunctions
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
                 move.b  #$FF,((byte_FFB082-$1000000)).w
@@ -25,7 +25,7 @@ WitchSuspend:
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 dbne    d0,@WaitForStartInput
                 
-                sndCom  SOUND_COMMAND_FADE_OUT
+ResetGame:      sndCom  SOUND_COMMAND_FADE_OUT
                 bsr.w   FadeOutToBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR

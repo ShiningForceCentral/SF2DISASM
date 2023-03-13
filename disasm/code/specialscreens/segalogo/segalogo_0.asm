@@ -43,6 +43,7 @@ DisplaySegaLogo:
                 jsr     (ApplyVIntCramDma).w
                 jsr     (EnableDmaQueueProcessing).w
                 jsr     (EnableDisplayAndInterrupts).w
+                
                 move.l  #tbl_ConfigurationModeInputSequence,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
@@ -55,17 +56,17 @@ DisplaySegaLogo:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 bsr.w   CalculateRomChecksum
                 lea     byte_28BB8(pc), a0
                 nop
                 bsr.w   sub_28B12
-                moveq   #$14,d0
+                moveq   #20,d0
                 jsr     (Sleep).w       
                 bsr.w   sub_28B12
                 move.l  #$D80405,(SPRITE_04).l
                 move.l  #$62014A,(SPRITE_04_TILE_FLAGS).l
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 move.w  #$28,d0 
 @Continue:

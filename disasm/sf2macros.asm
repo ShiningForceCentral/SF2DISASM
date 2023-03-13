@@ -44,6 +44,10 @@ declareChecksum: macro
     endc
     endm
     
+declareChecksum: macro
+    dc.w $8921
+    endm
+    
 declareRomEnd: macro
     if (expandedRom=1)
     dc.l $3FFFFF
@@ -393,6 +397,10 @@ addToSavedByte: macro
     endc
     endm
     
+subtractSavedByte: macro
+    sub.b   ((\1-$1000000)).w,\2
+    endm
+    
 getSavedWord: macro
     if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
     if (narg>=3)
@@ -566,6 +574,10 @@ repairItem: macro
     else
     bclr    #ITEMENTRY_UPPERBIT_BROKEN,\1
     endc
+    endm
+    
+checkCurrentMap: macro
+    cmp.b   ((CURRENT_MAP-$1000000)).w,\1
     endm
     
 checkRaftMap: macro
@@ -820,6 +832,38 @@ battles: macro
     
 background: macro
     defineShorthand.b BATTLEBACKGROUND_,\1
+    endm
+    
+enemyFacing: macro
+    defineShorthand.b LASER_,\1
+    endm
+    
+; Battle spriteset definitions
+    
+allyCombatant: macro
+    dc.b \1
+    dc.b \2
+    dc.b \3
+    endm
+    
+enemyCombatant: macro
+    defineShorthand.b ENEMY_,\1
+    dc.b \2
+    dc.b \3
+    endm
+    
+combatantAiAndItem: macro
+    defineShorthand.b AICOMMANDSET_,\1
+    defineBitfield.w ITEM_,\2
+    endm
+    
+combatantBehavior: macro
+    defineBitfield.b AIORDER_,\1
+    dc.b \2
+    defineBitfield.b AIORDER_,\3
+    dc.b \4
+    dc.b \5
+    defineBitfield.b SPAWN_,\6
     endm
     
 ; Names

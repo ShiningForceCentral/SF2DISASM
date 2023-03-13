@@ -8,6 +8,7 @@
 ExplorationLoop:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
+                activateMusicResuming
                 subi.w  #20000,((word_FFB196-$1000000)).w
                 bge.s   loc_257D0
                 clr.w   ((word_FFB196-$1000000)).w
@@ -31,7 +32,7 @@ loc_257D0:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 jsr     j_GetMapSetupEntities
-                jsr     j_InitMapEntities
+                jsr     j_InitializeMapEntities
                 jsr     (LoadMapEntitySprites).w
                 bsr.w   ClearMapSetupTempFlags
                 setFlg  80              ; Set @ loc_257D0, also set during exploration loop at 0x25824
@@ -146,7 +147,7 @@ FadeOutToBlackAll:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
                 dc.l VInt_UpdateScrollingData

@@ -1,9 +1,9 @@
 
 ; ASM FILE data\graphics\battles\battlesprites\allyidlebattlesprites.asm :
 ; 0x1FAD6..0x1FADD : Ally Idle Battlesprites
-tbl_AllyBattleSpriteIdleAnimate:
+tbl_AllyBattlespriteIdleAnimate:
                 
-; Ally battle sprites which do not animate while idle.
+; Ally battlesprites which do not animate while idle.
                 
 ; Syntax        allyBattleSprite [ALLYBATTLESPRITE_]enum (or index)
                 

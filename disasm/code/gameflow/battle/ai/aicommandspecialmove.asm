@@ -8,8 +8,8 @@
 
 var_4 = -4
 var_3 = -3
-var_2 = -2
-var_1 = -1
+teammateToFollow = -2
+movingCombatant = -1
 
 ExecuteAiCommand_SpecialMove:
                 
@@ -25,10 +25,10 @@ ExecuteAiCommand_SpecialMove:
                 bra.w   loc_EB7A
 loc_E9B2:
                 
-                move.b  d0,var_1(a6)
-                move.b  d1,var_2(a6)
+                move.b  d0,movingCombatant(a6)
+                move.b  d1,teammateToFollow(a6)
                 move.b  d2,var_4(a6)
-                bsr.w   GetCurrentMOV
+                bsr.w   GetCurrentMov
                 tst.b   d1
                 bne.s   @CanMove
                 move.b  #$FF,d1
@@ -55,7 +55,7 @@ loc_EA00:
                 bne.s   loc_EA2E
                 clr.w   d0
                 move.b  d1,d0
-                bsr.w   GetCurrentHP
+                bsr.w   GetCurrentHp
                 tst.w   d1
                 bne.s   loc_EA2E
                 move.b  #$FF,d1
@@ -66,18 +66,18 @@ loc_EA00:
                 bra.w   loc_EB7A
 loc_EA2E:
                 
-                move.b  var_2(a6),d0
+                move.b  teammateToFollow(a6),d0
                 tst.b   d0
                 bne.w   loc_EAE6
-                move.b  var_1(a6),d0
+                move.b  movingCombatant(a6),d0
                 move.w  #$FFFF,d3
-                bsr.w   UpdateTargetsList_Allies
+                bsr.w   UpdateBattleTerrainOccupiedByAllies
                 bsr.w   GetMoveInfo     
-                bsr.w   MakeRangeLists
+                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
                 clr.w   d3
-                bsr.w   UpdateTargetsList_Allies
+                bsr.w   UpdateBattleTerrainOccupiedByAllies
                 clr.w   d0
-                move.b  var_1(a6),d0
+                move.b  movingCombatant(a6),d0
                 bsr.w   sub_CE96
                 tst.b   d1
                 bne.s   loc_EA78
@@ -89,10 +89,10 @@ loc_EA2E:
                 bra.w   loc_EB7A
 loc_EA78:
                 
-                jsr     j_ClearTerrainListObstructions
-                move.b  var_1(a6),d0
+                jsr     j_ClearBattleTerrainArrayObstructionFlags
+                move.b  movingCombatant(a6),d0
                 jsr     sub_1AC028      
-                move.b  var_1(a6),d0
+                move.b  movingCombatant(a6),d0
                 clr.w   d1
                 bsr.w   ExecuteAiCommand_Attack
                 tst.b   d1
@@ -101,10 +101,10 @@ loc_EA78:
                 bra.w   loc_EB7A
 loc_EA9C:
                 
-                jsr     j_ClearTerrainListObstructions
-                move.b  var_1(a6),d0
+                jsr     j_ClearBattleTerrainArrayObstructionFlags
+                move.b  movingCombatant(a6),d0
                 move.b  var_3(a6),d1
-                bsr.w   sub_F7A0
+                bsr.w   sub_F7A0        
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  (a0),d1
                 cmpi.b  #$FF,d1
@@ -128,8 +128,8 @@ loc_EAE2:
 loc_EAE6:
                 
                 clr.w   d0
-                move.b  var_1(a6),d0
-                move.b  var_2(a6),d1
+                move.b  movingCombatant(a6),d0
+                move.b  teammateToFollow(a6),d1
                 bsr.w   sub_D430
                 tst.b   d1
                 bne.s   loc_EB10
@@ -141,10 +141,10 @@ loc_EAE6:
                 bra.w   loc_EB7A
 loc_EB10:
                 
-                jsr     j_ClearTerrainListObstructions
-                move.b  var_1(a6),d0
+                jsr     j_ClearBattleTerrainArrayObstructionFlags
+                move.b  movingCombatant(a6),d0
                 jsr     sub_1AC028      
-                move.b  var_1(a6),d0
+                move.b  movingCombatant(a6),d0
                 clr.w   d1
                 bsr.w   ExecuteAiCommand_Attack
                 tst.b   d1
@@ -153,10 +153,10 @@ loc_EB10:
                 bra.w   loc_EB7A
 loc_EB34:
                 
-                jsr     j_ClearTerrainListObstructions
-                move.b  var_1(a6),d0
+                jsr     j_ClearBattleTerrainArrayObstructionFlags
+                move.b  movingCombatant(a6),d0
                 move.b  var_3(a6),d1
-                bsr.w   sub_F7A0
+                bsr.w   sub_F7A0        
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  (a0),d1
                 cmpi.b  #$FF,d1

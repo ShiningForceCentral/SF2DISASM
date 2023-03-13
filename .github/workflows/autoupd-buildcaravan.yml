@@ -14,7 +14,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
     - name: Auto merge on branch 'build/caravan'
-      uses: robotology/gh-action-nightly-merge@v1.2.0
+      uses: robotology/gh-action-nightly-merge@v1.3.3
       with:
         stable_branch: 'master'
         development_branch: 'build/caravan'

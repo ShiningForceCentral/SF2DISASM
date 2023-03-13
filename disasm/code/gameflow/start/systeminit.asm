@@ -18,7 +18,7 @@ SystemInit:
             endif
                 bsr.w   InitZ80
                 bsr.s   InitVdpData
-                jmp     (InitGame).l
+                jmp     (InitializeGame).l
 
     ; End of function SystemInit
 

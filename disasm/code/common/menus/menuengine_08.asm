@@ -547,15 +547,15 @@ sub_1604A:
                 
                 lea     AlphabetWindowLayout(pc), a0
                 movea.l alphabetWindowTilesEnd(a6),a1
-                move.w  #$366,d7
+                move.w  #870,d7
                 jsr     (CopyBytes).w   
                 lea     NameEntryWindowLayout(pc), a0
                 movea.l entryWindowTilesEnd(a6),a1
-                move.w  #$2A,d7 
+                move.w  #42,d7
                 jsr     (CopyBytes).w   
                 lea     WindowBorderTiles(pc), a0
                 movea.l portraitWindowTilesEnd(a6),a1
-                move.w  #$A0,d7 
+                move.w  #160,d7
                 jsr     (CopyBytes).w   
                 rts
 

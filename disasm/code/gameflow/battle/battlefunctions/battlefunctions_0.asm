@@ -5,10 +5,10 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-LevelUpCutscene:
+FieldItem_LevelUp:
                 
                 moveq   #0,d1
-                jsr     j_SetCurrentEXP
+                jsr     j_SetCurrentExp
                 jsr     j_LevelUp
                 lea     ((LEVELUP_ARGUMENTS-$1000000)).w,a5
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -73,7 +73,7 @@ byte_22C5A:
                 txt     3523            ; "{W1}"
                 rts
 
-    ; End of function LevelUpCutscene
+    ; End of function FieldItem_LevelUp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -99,50 +99,60 @@ GetPlayerEntityPosition:
 ; =============== S U B R O U T I N E =======================================
 
 
-CreateMoveableRangeForUnit:
+CreatePulsatingBlocksRange:
                 
                 movem.l d6-a1,-(sp)
                 bsr.w   GetBattleMapProperties
-loc_22C8C:
+@OuterLoop:
                 
                 movem.l d6/a0-a1,-(sp)
-loc_22C90:
+@InnerLoop:
                 
                 tst.b   (a0)+
-                bpl.s   loc_22C9A
-                ori.w   #$C000,(a1)+
-                bra.s   loc_22C9E
-loc_22C9A:
+                bpl.s   @MovableSpace
+                ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
+                bra.s   @Continue
+@MovableSpace:
                 
                 andi.w  #$3FFF,(a1)+
-loc_22C9E:
+@Continue:
                 
-                dbf     d6,loc_22C90
+                dbf     d6,@InnerLoop
+                
                 movem.l (sp)+,d6/a0-a1
-                lea     $30(a0),a0
-                lea     $80(a1),a1
-                dbf     d7,loc_22C8C
+                lea     MAP_SIZE_MAXWIDTH(a0),a0
+                lea     128(a1),a1
+                dbf     d7,@OuterLoop
+                
                 movem.l (sp)+,d6-a1
                 movem.l d0/a0,-(sp)
                 lea     (PALLETE_2_BASE).l,a0
                 moveq   #7,d0
-loc_22CC2:
+@CopyPalette_Loop:
                 
-                move.l  -$20(a0),(a0)+
-                dbf     d0,loc_22CC2
+                move.l  -NEXT_PALETTE(a0),(a0)+
+                dbf     d0,@CopyPalette_Loop
+                
                 movem.l (sp)+,d0/a0
-                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%10,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.b  #PULSATING_1,((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  #1,((FADING_COUNTER-$1000000)).w
-                bra.w   loc_22D56
+                bra.w   CheckMapLayerType
+
+    ; End of function CreatePulsatingBlocksRange
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Out: a0 = pointer to movable grid array
+;      a1 = pointer to start of battle map vdptile layout
+;      d6.w, d7.w = width, height of battle map
+
+
 GetBattleMapProperties:
                 
-                lea     (FF4D00_LOADING_SPACE).l,a0 ;     Get battle map dimensions, address of movable bool grid, address of map tiles starting at top-left of battle map.
-                                        ;     Out: A0 = address of movable bool grid
-                                        ;          A1 = address of map tile at top-left battle map X/Y
-                                        ;          D6 = width of battle map
-                                        ;          D7 = height of battle map
+                lea     (FF4D00_LOADING_SPACE).l,a0
                 move.w  ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d7
                 lsl.w   #6,d7
                 add.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d7
@@ -159,47 +169,48 @@ GetBattleMapProperties:
                 divs.w  #$180,d7
                 rts
 
-    ; End of function CreateMoveableRangeForUnit
+    ; End of function GetBattleMapProperties
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-ClearFadingBlockRange:
+ClearPulsatingBlocksRange:
                 
                 movem.l d6-a1,-(sp)
                 bsr.s   GetBattleMapProperties
-loc_22D26:
+@OuterLoop:
                 
                 movem.l d6/a1,-(sp)
-loc_22D2A:
+@InnerLoop:
                 
                 andi.w  #$3FFF,(a1)+
-                dbf     d6,loc_22D2A
+                dbf     d6,@InnerLoop
+                
                 movem.l (sp)+,d6/a1
-                lea     $80(a1),a1
-                dbf     d7,loc_22D26
+                lea     128(a1),a1
+                dbf     d7,@OuterLoop
                 
                 movem.l (sp)+,d6-a1
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 clr.b   ((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  #1,((FADING_COUNTER-$1000000)).w
-loc_22D56:
+CheckMapLayerType:
                 
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                beq.s   loc_22D6A
+                beq.s   @SetForegroundUpdate
                 bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
                 move.b  #$FF,((byte_FFA8FF-$1000000)).w
-                bra.s   return_22D70
-loc_22D6A:
+                bra.s   @Return
+@SetForegroundUpdate:
                 
                 bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
-return_22D70:
+@Return:
                 
                 rts
 
-    ; End of function ClearFadingBlockRange
+    ; End of function ClearPulsatingBlocksRange
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -347,19 +358,19 @@ UpdateBattleEntityPosition:
                 ext.l   d3
                 divs.w  #$180,d3
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 move.w  d1,-(sp)
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  d1,-(sp)
                 move.w  d2,d1
-                jsr     j_SetXPos
+                jsr     j_SetCombatantX
                 move.w  d3,d1
-                jsr     j_SetYPos
+                jsr     j_SetCombatantY
                 jsr     sub_10070
                 move.w  (sp)+,d1
-                jsr     j_SetYPos
+                jsr     j_SetCombatantY
                 move.w  (sp)+,d1
-                jsr     j_SetXPos
+                jsr     j_SetCombatantX
                 movem.w (sp)+,d0-d3
                 rts
 
@@ -577,7 +588,7 @@ sub_230E2:
                 movem.l d1-a0,-(sp)
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 bne.s   loc_230F2
-                moveq   #$FFFFFFFF,d0
+                moveq   #-1,d0
                 bra.w   byte_2321E
 loc_230F2:
                 
@@ -590,7 +601,7 @@ loc_23102:
                 
                 jsr     (WaitForVInt).w
                 jsr     (WaitForViewScrollEnd).w
-                jsr     j_HideMiniStatusWindow
+                jsr     j_RemoveMiniStatusWindow
 loc_23110:
                 
                 clr.w   d0
@@ -599,30 +610,30 @@ loc_23110:
                 move.w  d0,-(sp)
                 clr.w   d0
                 move.b  (a0,d1.w),d0
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 move.w  d1,d2
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  d1,d3
                 move.w  d6,d0
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 sub.w   d1,d2
                 blt.s   loc_23142
-                moveq   #0,d4
+                moveq   #RIGHT,d4
                 bra.s   loc_23146
 loc_23142:
                 
-                moveq   #2,d4
+                moveq   #LEFT,d4
                 neg.w   d2
 loc_23146:
                 
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 sub.w   d1,d3
                 blt.s   loc_23154
-                moveq   #3,d5
+                moveq   #DOWN,d5
                 bra.s   loc_23158
 loc_23154:
                 
-                moveq   #1,d5
+                moveq   #UP,d5
                 neg.w   d3
 loc_23158:
                 
@@ -693,7 +704,7 @@ loc_231E0:
                 
                 btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_231F6
-                jsr     j_HideMiniStatusWindow
+                jsr     j_RemoveMiniStatusWindow
                 move.w  #$FFFF,d0
                 bra.w   byte_2321E
 loc_231F6:
@@ -729,9 +740,9 @@ byte_2321E:
 sub_2322C:
                 
                 movem.l d0-a0,-(sp)
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 move.w  d1,d2
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  d1,d3
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
@@ -783,9 +794,9 @@ sub_23256:
 
 SetUnitCursorDestinationToNextCombatant:
                 
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 move.w  d1,d2
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  d1,d3
 
     ; End of function SetUnitCursorDestinationToNextCombatant
@@ -1120,12 +1131,12 @@ WaitForUnitCursor:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_23554:
+UpdateUnitCursorSprites:
                 
                 movem.l d0-d2/d7-a1,-(sp)
-                lea     spr_2358C(pc), a0
+                lea     spr_UnitCursor(pc), a0
                 clr.w   d2
-                move.b  ((word_FFAF8E-$1000000)).w,d2
+                move.b  ((UNIT_CURSOR_RADIUS-$1000000)).w,d2
                 andi.w  #$F,d2
                 lsl.w   #6,d2
                 adda.w  d2,a0
@@ -1145,11 +1156,9 @@ loc_23572:
                 movem.l (sp)+,d0-d2/d7-a1
                 rts
 
-    ; End of function sub_23554
+    ; End of function UpdateUnitCursorSprites
 
-spr_2358C:      ; unknown VDP sprite definitions
-;
-; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+spr_UnitCursor: ; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
 ;
 ;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
 ;
@@ -1160,6 +1169,7 @@ spr_2358C:      ; unknown VDP sprite definitions
 ;
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
+                ; Cursor radius 0
                 vdpSprite 116, V4|H4|16, 1664|PALETTE3, 124
                 vdpSprite 1, V4|H4|10, 1664|PALETTE3, 1
                 vdpSprite 1, V4|H4|11, 1664|PALETTE3, 1
@@ -1168,6 +1178,8 @@ spr_2358C:      ; unknown VDP sprite definitions
                 vdpSprite 1, V4|H4|14, 1664|PALETTE3, 1
                 vdpSprite 1, V4|H4|15, 1664|PALETTE3, 1
                 vdpSprite 1, V4|H4|16, 1664|PALETTE3, 1
+                
+                ; Cursor radius 1
                 vdpSprite 86, V4|H4|9, 1680|PALETTE3, 124
                 vdpSprite 116, V4|H4|10, 1696|PALETTE3, 100
                 vdpSprite 146, V4|H4|11, 1680|FLIP|PALETTE3, 124
@@ -1176,6 +1188,8 @@ spr_2358C:      ; unknown VDP sprite definitions
                 vdpSprite 1, V4|H4|14, 1664|PALETTE3, 1
                 vdpSprite 1, V4|H4|15, 1664|PALETTE3, 1
                 vdpSprite 1, V4|H4|16, 1664|PALETTE3, 1
+                
+                ; Cursor radius 2
                 vdpSprite 62, V4|H4|9, 1680|PALETTE3, 124
                 vdpSprite 116, V4|H4|10, 1696|PALETTE3, 76
                 vdpSprite 170, V4|H4|11, 1680|FLIP|PALETTE3, 124

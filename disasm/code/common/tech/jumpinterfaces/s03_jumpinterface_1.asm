@@ -65,11 +65,11 @@ j_CreateBattlefieldMiniStatusWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_HideMiniStatusWindow:
+j_RemoveMiniStatusWindow:
                 
-                jmp     HideMiniStatusWindow(pc)
+                jmp     RemoveMiniStatusWindow(pc)
 
-    ; End of function j_HideMiniStatusWindow
+    ; End of function j_RemoveMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -145,41 +145,41 @@ sub_10034:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitPortraitWindow:
+j_CreatePortraitWindow:
                 
-                jmp     InitPortraitWindow(pc)
+                jmp     CreatePortraitWindow(pc)
 
-    ; End of function j_InitPortraitWindow
+    ; End of function j_CreatePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_HidePortraitWindow:
+j_RemovePortraitWindow:
                 
-                jmp     HidePortraitWindow(pc)
+                jmp     RemovePortraitWindow(pc)
 
-    ; End of function j_HidePortraitWindow
+    ; End of function j_RemovePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitMemberListScreen:
+j_InitializeMemberListScreen:
                 
-                jmp     InitMemberListScreen(pc)
+                jmp     InitializeMemberListScreen(pc)
 
-    ; End of function j_InitMemberListScreen
+    ; End of function j_InitializeMemberListScreen
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_BuildMemberListScreen_NewATTandDEF:
+j_BuildMemberListScreen_NewAttAndDefPage:
                 
-                jmp     BuildMemberListScreen_NewATTandDEF(pc)
+                jmp     BuildMemberListScreen_NewAttAndDefPage(pc)
 
-    ; End of function j_BuildMemberListScreen_NewATTandDEF
+    ; End of function j_BuildMemberListScreen_NewAttAndDefPage
 
 
 ; =============== S U B R O U T I N E =======================================
