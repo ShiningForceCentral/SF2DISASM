@@ -370,9 +370,9 @@ byte_22210:
                 
         if (STANDARD_BUILD&FIX_CARAVAN_DESCRIPTIONS=1)
                 clr.w   d3
-@ClearCount:
-                clr.w   d6
+@ClearCount:    clr.w   d6
 @EquippableMessage_Loop:
+                
                 cmpi.w  #4,d6
                 beq.s   @ClearCount
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
@@ -386,15 +386,14 @@ byte_22210:
             endif
                 bcc.s   @NextMember
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
-                txt     $62             ; "{DICT}{NAME}, {W1}"
+                txt     98              ; "{DICT}{NAME},"
                 addq.w  #1,d6
                 moveq   #2,d3
                 cmpi.w  #4,d6
                 bne.s   @NextMember
-                txt     $63             ; "{N}"
-@NextMember:
-                
-                dbf     d7,@EquippableMessage_Loop
+                txt     99              ; "{N}"
+@NextMember:    dbf     d7,@EquippableMessage_Loop
+
                 tst.w   d3
         else
                 clr.w   d6
@@ -427,10 +426,10 @@ byte_22210:
                 
                 tst.w   d6
         endif
-                bne.s   @FinishEquipList      
+                bne.s   byte_2229C      
                 txt     97              ; "nobody so far.{W2}"
                 bra.s   @Goto_IsUnsellable?
-@FinishEquipList:
+byte_2229C:
                 
                 txt     100             ; "to equip.{W2}"
 @Goto_IsUnsellable?:

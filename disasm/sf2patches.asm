@@ -19,7 +19,7 @@ FIX_CARAVAN_FREE_REPAIR_EXPLOIT:    equ 1       ; Preserve the broken bit when i
 FIX_GIZMO_ARRANGEMENT:              equ 1       ; Gizmos spread out into battle places during cutscene.
 FIX_CRIT_TABLE:                     equ 1       ; Make the "Increase Crit" effect never lower damage potential.
 FIX_GOLD_GIFT:                      equ 1       ; Gold increases when Minister gives you gift in New Granseal.
-FIX_CARAVAN_DESCRIPTIONS:           equ 1       ; Breaks up character list into chuncks of 4
+FIX_CARAVAN_DESCRIPTIONS:           equ 1       ; Break up character list into chunks of 4.
 FIX_SHIP_PRIEST:                    equ 1       ; Ensure priest onboard broken-up ship is usable for church action during battle 08
 FIX_LABYRINTH_DELETION:             equ 1       ; Prevent a section of the labyrinth from being deleted due to AI region activation
 FIX_ENEMY_BATTLE_EQUIP:             equ 1       ; Enemies will equip battle items as designated in spriteset
