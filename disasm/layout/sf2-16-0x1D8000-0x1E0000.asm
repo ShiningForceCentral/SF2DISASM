@@ -7,7 +7,11 @@
                 includeIfVanillaLayout "code\common\tech\pointers\s16_iconspointer.asm"    ; Game Section 16 Icons Pointer
                 includeIfVanillaRom "data\graphics\icons\entries.asm"   ; Icons
                 
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                includeIfExpandedRom "data\stats\items\itemdefs-expandedclasses.asm"
+            else
                 includeIfExpandedRom "data\stats\items\itemdefs.asm"        ; Item definitions
+            endif
                 includeIfExpandedRom "data\stats\spells\spelldefs.asm"      ; Spell definitions
                 includeIfExpandedRom "data\stats\items\itemnames.asm"       ; Item names
                 align

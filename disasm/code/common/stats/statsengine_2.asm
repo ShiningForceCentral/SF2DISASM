@@ -1363,7 +1363,6 @@ GetEquipmentType:
                 
                 move.l  a0,-(sp)
                 bsr.s   GetItemDefAddress
-            
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 add.w   #ITEMDEF_OFFSET_TYPE,a0
             else
@@ -1659,14 +1658,14 @@ IsItemEquippableAndCursed?:
                 move.l  a0,-(sp)
 @EquipFlag_Loop:
                 move.l  (a0)+,d1         ; get class-equippable bitfield
-                cmpi.b  #$20,d0
+                cmpi.b  #32,d0
                 bls.s   @EquipCompare
-                subi.b  #$20,d0
+                subi.b  #32,d0
                 bra.s   @EquipFlag_Loop
 @EquipCompare:
                 lsr.l   d0,d1           ; push relevant class-equippable bit into carry
+                movea.l (sp)+,a0
                 bcc.s   @NotEquippable
-                move.l  (sp)+,a0
             else
                 move.l  (a0),d1         ; get class-equippable bitfield
                 lsr.l   d0,d1           ; push relevant class-equippable bit into carry
@@ -1684,10 +1683,7 @@ IsItemEquippableAndCursed?:
                 
                 bra.s   @Done
 @NotEquippable:
-
-            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
-                move.l  (sp)+,a0
-            endif
+                
                 move.w  #1,d2           ; code 1: not equippable
 @Done:
                 
@@ -2024,17 +2020,19 @@ GetEquippableItemsByType:
                 
                 bsr.w   GetCombatantEntryAddress
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
+                
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 clr.w   d7
 @CompareClass_Loop:
-                cmpi.b  #$1F,d0
+                cmpi.b  #31,d0
                 bls.w   @Break
-                subi.b  #$20,d0
+                subi.b  #32,d0
                 addq.w  #1,d7
                 bra.s   @CompareClass_Loop
                 
 @Break:
             endif
+                
                 moveq   #1,d3
                 lsl.l   d0,d3           ; place class bit in long value
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
@@ -2145,17 +2143,19 @@ IsWeaponOrRingEquippable?:
                 move.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2
                 bsr.w   GetCombatantEntryAddress
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
+                
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 clr.w   d7
 @CompareClass_Loop:
-                cmpi.b  #$1F,d0
+                cmpi.b  #31,d0
                 bls.w   @Break
-                subi.b  #$20,d0
+                subi.b  #32,d0
                 addq.w  #1,d7
                 bra.s   @CompareClass_Loop
                 
 @Break:
             endif
+                
                 moveq   #1,d3
                 lsl.l   d0,d3
                 bsr.s   IsItemEquippable?
@@ -2180,17 +2180,19 @@ GetEquipNewATTandDEF:
                 move.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2
                 clr.w   d0
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
+                
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 clr.w   d7
 @CompareClass_Loop:
-                cmpi.b  #$1F,d0
+                cmpi.b  #31,d0
                 bls.w   @Break
-                subi.b  #$20,d0
+                subi.b  #32,d0
                 addq.w  #1,d7
                 bra.s   @CompareClass_Loop
                 
 @Break:
             endif
+                
                 moveq   #1,d3
                 lsl.l   d0,d3
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)

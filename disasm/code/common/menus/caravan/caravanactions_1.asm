@@ -376,13 +376,13 @@ byte_22210:
                 cmpi.w  #4,d6
                 beq.s   @ClearCount
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
-                movem.l d7,-(sp)
+                move.l  d7,-(sp)
                 move.b  (a0)+,d0
                 jsr     IsWeaponOrRingEquippable?
                 movem.l (sp)+,d7
             else
                 move.b  (a0)+,d0
-                jsr     IsWeaponOrRingEquippable?
+                jsr     j_IsWeaponOrRingEquippable?
             endif
                 bcc.s   @NextMember
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
@@ -400,9 +400,9 @@ byte_22210:
 @EquippableMessage_Loop:
                 
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
-                movem.l d7/a0,-(sp)
+                move.l  d7,-(sp)
                 move.b  (a0)+,d0
-                jsr     j_IsWeaponOrRingEquippable?
+                jsr     IsWeaponOrRingEquippable?
                 movem.l (sp)+,d7
             else
                 move.b  (a0)+,d0

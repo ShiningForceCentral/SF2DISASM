@@ -553,6 +553,7 @@ CLASS_NONE: equ $FF
 ; ---------------------------------------------------------------------------
 
 ; enum ClassIndex
+
 classTotal = 32
 classMask = $1F
     if (STANDARD_BUILD&EXPANDED_CLASSES=1)
@@ -809,7 +810,6 @@ itemPrice = 6
 itemTypeOffset = 8
 useSpellOffset = 9
 equipEffectsOffset = 10
-
     if (STANDARD_BUILD&EXPANDED_CLASSES=1)
 maxRange = 8
 minRange = 9
@@ -819,7 +819,7 @@ useSpellOffset = 13
 equipEffectsOffset = 14
     endif
     
-ITEMDEF_OFFSET_EQUIPFLAGS: equ $0
+ITEMDEF_OFFSET_EQUIPFLAGS: equ 0
 ITEMDEF_OFFSET_MAX_RANGE: equ maxRange
 ITEMDEF_OFFSET_MIN_RANGE: equ minRange
 ITEMDEF_OFFSET_PRICE: equ itemPrice
