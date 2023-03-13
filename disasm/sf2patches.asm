@@ -23,7 +23,7 @@ FIX_CARAVAN_DESCRIPTIONS:           equ 1       ; Break up character list into c
 FIX_SHIP_PRIEST:                    equ 1       ; Ensure priest onboard broken-up ship is usable for church action during battle 08
 FIX_LABYRINTH_DELETION:             equ 1       ; Prevent a section of the labyrinth from being deleted due to AI region activation.
 FIX_ENEMY_BATTLE_EQUIP:             equ 1       ; Enemies will equip battle items as designated in spriteset.
-FIX_MISSING_RANDOM_BATTLES:         equ 1       ; Adds zone events for random battles without
+FIX_MISSING_RANDOM_BATTLES:         equ 1       ; Add zone events for random battles without.
 
 ; Quality of life features
 ACCURATE_LAND_EFFECT_DISPLAY:       equ 0       ; Read values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
