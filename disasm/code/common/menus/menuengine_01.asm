@@ -722,7 +722,7 @@ loc_10616:
                 beq.s   loc_10630
                 moveq   #1,d1
             if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
-                cmp.b    #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s    @SkipItemCheck1
             endif
                 cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
@@ -736,7 +736,7 @@ loc_10630:
                 beq.s   loc_1064A
                 moveq   #2,d1
             if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
-                cmp.b    #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s    @SkipItemCheck2
             endif
                 cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
@@ -757,7 +757,7 @@ loc_1065C:
                 beq.s   loc_10676
                 moveq   #3,d1
             if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
-                cmp.b    #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s    @SkipItemCheck3
             endif
                 cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w

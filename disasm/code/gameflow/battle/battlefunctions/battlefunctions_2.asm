@@ -1068,10 +1068,10 @@ loc_24F6E:
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 jsr     GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #0,d2
-                bne.s    @ChooseDiscard
-                txt     $1B6            ; "You have no item.{W1}"
+                bne.s   @ChooseDiscard
+                txt     438             ; "You have no item.{W1}"
                 clsTxt
-                bra.s    @ReturnToMenu
+                bra.s   @ReturnToMenu
 @ChooseDiscard:
             endif
             
@@ -1098,9 +1098,8 @@ loc_24F6E:
                 jsr     j_ExecuteItemMenu
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24FC2
-            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
-@ReturnToMenu
-            endif
+@ReturnToMenu:  
+                
                 moveq   #$FFFFFFFF,d1
                 bra.w   @ChooseItem
 loc_24FC2:
