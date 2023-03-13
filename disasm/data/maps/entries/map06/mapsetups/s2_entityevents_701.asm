@@ -486,14 +486,14 @@ byte_54C32:
                 bra.w   loc_54CBE
 loc_54C4C:
                 
-                moveq   #$72,d1 
+                moveq   #ITEM_CANNON,d1
                 jsr     j_GetItemInventoryLocation
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 bne.s   byte_54C8E      
                 txt     1116            ; "Sir Astral, may I give him{N}the dynamite?{W1}"
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$1F,d0
+                move.w  #FOLLOWER_B,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
@@ -509,9 +509,9 @@ byte_54C8E:
                 script  cs_54CC6
                 txt     1120            ; "Sir Astral said it was OK!{N}Here is the explosive.{W1}"
                 clsTxt
-                move.w  #$74,d0 
+                move.w  #ITEM_DYNAMITE,d0
                 moveq   #0,d1
-                bsr.w   GetMandatoryItem
+                bsr.w   ReceiveMandatoryItem
                 btst    #0,d0
                 bne.s   byte_54CBA      
                 setFlg  804             ; Set after the dwarf gives you dynamite

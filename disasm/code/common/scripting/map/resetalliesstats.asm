@@ -12,11 +12,11 @@ ResetAlliesBattleStats:
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
 @Loop:
                 
-                jsr     j_GetCurrentHP
-                jsr     j_GetMaxHP
-                jsr     j_SetCurrentHP
-                jsr     j_GetMaxMP
-                jsr     j_SetCurrentMP
+                jsr     j_GetCurrentHp
+                jsr     j_GetMaxHp
+                jsr     j_SetCurrentHp
+                jsr     j_GetMaxMp
+                jsr     j_SetCurrentMp
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE,d1
                 jsr     j_SetStatusEffects

@@ -36,12 +36,12 @@ EndGame:
                 jsr     (ApplyImmediateVramDma).w
                 conditionalLongAddr movea.l, p_plt_WitchEnd, a0
                 lea     (PALETTE_1_BASE).l,a1
-                moveq   #$20,d7 
+                moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
-                lea     $20(a1),a1
+                lea     NEXT_PALETTE(a1),a1
                 jsr     (CopyBytes).w   
                 jsr     (EnableDisplayAndInterrupts).w
-                move.w  #$3C,d0 
+                move.w  #60,d0
                 jsr     (Sleep).w       
                 jsr     (FadeInFromWhite).w
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
@@ -52,14 +52,14 @@ EndGame:
                 move.w  #SFX_DIALOG_BLEEP_2,((SPEECH_SFX-$1000000)).w
                 txt     239             ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
                 clsTxt
-                move.w  #$5A,d0 
+                move.w  #90,d0
                 jsr     (Sleep).w       
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
-                moveq   #$3C,d0 
+                move.b  #1,((FADING_PALETTE_BITFIELD-$1000000)).w
+                moveq   #60,d0
                 jsr     (Sleep).w       
                 clr.b   ((byte_FFB082-$1000000)).w
                 trap    #VINT_FUNCTIONS
@@ -68,14 +68,14 @@ EndGame:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_FallingJewels
-                moveq   #$1E,d0
+                moveq   #30,d0
                 jsr     (Sleep).w       
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
-                moveq   #$3C,d0 
+                move.b  #%10,((FADING_PALETTE_BITFIELD-$1000000)).w
+                moveq   #60,d0
                 jsr     (Sleep).w       
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
@@ -108,15 +108,15 @@ EndGame:
                 jsr     (ApplyImmediateVramDma).w
                 conditionalLongAddr movea.l, p_plt_JewelsEndScreen, a0
                 lea     (PALETTE_1_BASE).l,a1
-                moveq   #$40,d7 
+                moveq   #64,d7
                 jsr     (CopyBytes).w   
                 jsr     (EnableDisplayAndInterrupts).w
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
-                moveq   #$78,d0 
+                move.b  #1,((FADING_PALETTE_BITFIELD-$1000000)).w
+                moveq   #120,d0
                 jsr     (Sleep).w       
                 move.w  #0,d0
                 jsr     sub_27C64(pc)
@@ -133,14 +133,14 @@ EndGame:
                 nop
                 jsr     sub_27C64(pc)
                 nop
-                moveq   #$78,d0 
+                moveq   #120,d0
                 jsr     (Sleep).w       
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
-                move.w  #$12C,d0
+                move.b  #%10,((FADING_PALETTE_BITFIELD-$1000000)).w
+                move.w  #300,d0
                 jsr     (Sleep).w       
                 sndCom  SOUND_COMMAND_FADE_OUT
                 move.w  #END_GAME_TIMER,d0 ; wait for 3 minutes

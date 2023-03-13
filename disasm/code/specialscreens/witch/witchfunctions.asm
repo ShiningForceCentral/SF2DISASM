@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-InitWitchSuspendVIntFunctions:
+InitializeWitchSuspendVIntFunctions:
                 
                 move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 trap    #VINT_FUNCTIONS
@@ -19,7 +19,7 @@ InitWitchSuspendVIntFunctions:
                 bsr.w   DisableDisplayAndInterrupts
                 bsr.w   ClearVsramAndSprites
                 bsr.w   EnableDisplayAndInterrupts
-                bsr.w   InitDisplay
+                bsr.w   InitializeDisplay
                 bsr.w   DisableDisplayAndInterrupts
                 clr.b   ((byte_FFB198-$1000000)).w
                 move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w
@@ -35,14 +35,14 @@ InitWitchSuspendVIntFunctions:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
-                bsr.w   InitWindowProperties
+                bsr.w   InitializeWindowProperties
                 bsr.w   WaitForVInt
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_WitchBlink
                 rts
 
-    ; End of function InitWitchSuspendVIntFunctions
+    ; End of function InitializeWitchSuspendVIntFunctions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -71,13 +71,13 @@ DisplayWitchScreen:
                 bsr.w   ApplyImmediateVramDma
                 conditionalLongAddr movea.l, p_plt_Witch, a0 ; Two palettes
                 lea     (PALETTE_1_BASE).l,a1
-                moveq   #$20,d7 ; Palette 1
+                moveq   #CRAM_PALETTE_SIZE,d7 ; Palette 1
                 bsr.w   CopyBytes       
-                lea     $20(a0),a0
+                lea     NEXT_PALETTE(a0),a0
                 lea     $60(a1),a1
-                moveq   #$20,d7 ; Palette 4
+                moveq   #CRAM_PALETTE_SIZE,d7 ; Palette 4
                 bsr.w   CopyBytes       
-                move.w  #$1E,((BLINK_COUNTER-$1000000)).w
+                move.w  #30,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
                 rts
 

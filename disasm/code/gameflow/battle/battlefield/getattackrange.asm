@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get max/min attack range for combatant d0.b -> d3.w, d4.w
+; Get max, min attack range for combatant d0.b -> d3.w, d4.w
 
 
 GetAttackRange:
@@ -27,7 +27,7 @@ GetAttackRange:
                 bra.w   @Done
 @CheckEnemies:
                 
-                jsr     GetEnemyIndex   
+                jsr     GetEnemy        
                 cmpi.b  #ENEMY_KRAKEN_ARM,d1
                 bne.s   @CheckKrakenHead
                 move.w  #2,d3           ; HARDCODED Kraken Arm's attack range

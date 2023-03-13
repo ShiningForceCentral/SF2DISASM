@@ -7,7 +7,7 @@
 ; In: d0.b = caster index
 ;     d1.w = command parameter (values of 0-2), unused
 ; 
-; Out: d1.w = $FFFF if command failed
+; Out: d1.w = -1 if command failed
 
 option = -5
 caster = -4
@@ -45,7 +45,7 @@ ExecuteAiCommand_Heal:
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),spellEntry(a6)
                 move.w  #COMBATANT_ENEMIES_START,d0
-                bsr.w   IsCombatantAtLessThanHalfHP?
+                bsr.w   IsCombatantAtLessThanHalfHp
                 bcc.s   @UseItem        ; first enemy has less than half HP, and we have a healing rain, so use it
                 move.b  #ITEM_NOTHING,itemEntry(a6)
                 move.b  #SPELL_NOTHING,spellEntry(a6)
@@ -59,7 +59,7 @@ ExecuteAiCommand_Heal:
                 move.w  d0,BATTLEACTION_OFFSET_ITEM_SLOT(a1)
                 clr.w   d0
                 move.b  caster(a6),d0
-                move.w  d0,BATTLEACTION_OFFSET_TARGET(a1)
+                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a1)
                 clr.w   d1
                 move.b  itemEntry(a6),d1
                 move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
@@ -76,7 +76,7 @@ ExecuteAiCommand_Heal:
                 move.b  d1,spellEntry(a6)
                 move.w  d1,d2
                 andi.w  #SPELLENTRY_MASK_INDEX,d2
-                bsr.w   GetCurrentMP    ; d1 = current MP
+                bsr.w   GetCurrentMp    ; d1 = current MP
                 cmpi.w  #SPELL_HEAL,d2  ; HARDCODED spell index
                 bne.s   @CheckAura      
                 cmpi.w  #ENEMYAI_MIN_MP_HEAL1,d1 ; HARDCODED required MP amount
@@ -119,20 +119,20 @@ ExecuteAiCommand_Heal:
                 move.b  caster(a6),d0
                 btst    #COMBATANT_BIT_ENEMY,d0
                 beq.s   @AllyCaster
-                bsr.w   MakeTargetsList_Enemies
+                bsr.w   PopulateTargetsArrayWithEnemies
                 bra.s   @UpdateTargetsList
 @AllyCaster:
                 
-                bsr.w   MakeTargetsList_Allies
+                bsr.w   PopulateTargetsArrayWithAllies
 @UpdateTargetsList:
                 
                 move.w  #$FFFF,d3
-                bsr.w   UpdateTargetsList_Allies
+                bsr.w   UpdateBattleTerrainOccupiedByAllies
                 move.b  caster(a6),d0
                 bsr.w   GetMoveInfo     
-                bsr.w   MakeRangeLists
+                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
                 clr.w   d3
-                bsr.w   UpdateTargetsList_Allies ; Update target list to only include targets in range of the spell.
+                bsr.w   UpdateBattleTerrainOccupiedByAllies ; Update target list to only include targets in range of the spell.
                                         ; Because this doesn't look at the range for all spell levels,
                                         ;  if the range of higher level spells is less than lower levels,
                                         ;  then those targets in range of a lower level spell will be excluded from the search.
@@ -151,13 +151,13 @@ ExecuteAiCommand_Heal:
                 move.w  #COMBATANT_ENEMIES_COUNTER,d4 ; check the first 32 monsters in a battle
 @MakeTargetsList_Loop:
                 
-                bsr.w   GetCurrentHP    ; d1 = current HP
+                bsr.w   GetCurrentHp    ; d1 = current HP
                 tst.w   d1
                 bne.s   @TargetIsAlive
                 bra.w   @NextTarget     ; if target is dead
 @TargetIsAlive:
                 
-                bsr.w   DoesCombatantRequireHealing?
+                bsr.w   DoesCombatantRequireHealing
                 bcc.s   @PopulateList   
                 bra.w   @NextTarget     
 @PopulateList:
@@ -189,7 +189,7 @@ ExecuteAiCommand_Heal:
                 move.b  (a0,d4.w),d0    ; combatant offset of target needing healing that is the center of the AOE (target on which the heal spell is actually cast)
                 clr.w   d1
                 move.b  spellEntry(a6),d1
-                bsr.w   CreateTargetGrid
+                bsr.w   PopulateTargetableGrid
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d5
                 tst.w   d5
                 bne.s   @Continue_0
@@ -301,7 +301,7 @@ ExecuteAiCommand_Heal:
                 
                 ; If is a lv 1 spell and the target is not the spell user, then do an additional MP check
                 move.b  caster(a6),d0
-                bsr.w   GetCurrentMP    ; d1 = current MP
+                bsr.w   GetCurrentMp    ; d1 = current MP
                 cmpi.b  #ENEMYAI_MIN_MP_HEAL3,d1
                 blt.s   @UpdateSpellEntry ; if less than 11 MP
                 move.b  spellEntry(a6),d0
@@ -336,11 +336,11 @@ ExecuteAiCommand_Heal:
                 bsr.w   GetSpellRange   
 @GetPosition:
                 
-                bsr.w   GetYPos         ; In: d0 = heal target combatant index; Out: d1 = y position
+                bsr.w   GetCombatantY   ; In: d0 = heal target combatant index; Out: d1 = y position
                 move.w  d1,d2
-                bsr.w   GetXPos         ; In: d0 = heal target combatant index; Out: d1 = x position
+                bsr.w   GetCombatantX   ; In: d0 = heal target combatant index; Out: d1 = x position
                 bsr.w   GetClosestAttackPosition
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 beq.s   @FindPositionForNextTarget ; if no spell or item cast position is available
                 bra.w   @LoadBattleactionData
 @FindPositionForNextTarget:
@@ -367,7 +367,7 @@ ExecuteAiCommand_Heal:
                 move.b  d2,d1           ; d2 = chosen y pos
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4400_LOADING_SPACE).l,a3
-                bsr.w   MakeAiMoveString
+                bsr.w   BuildAiMoveString
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1 ; unnecessary
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a1
                 cmpi.b  #ITEM_NOTHING,itemEntry(a6)
@@ -380,7 +380,7 @@ ExecuteAiCommand_Heal:
                 move.w  d0,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
                 clr.w   d0
                 move.b  (a0,d6.w),d0
-                move.w  d0,BATTLEACTION_OFFSET_TARGET(a1)
+                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a1)
                 bra.s   @Goto_Done
 @LoadUseItemData:
                 
@@ -390,7 +390,7 @@ ExecuteAiCommand_Heal:
                 move.w  d0,BATTLEACTION_OFFSET_ITEM_SLOT(a1)
                 clr.w   d0
                 move.b  (a0,d6.w),d0
-                move.w  d0,BATTLEACTION_OFFSET_TARGET(a1)
+                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a1)
                 clr.w   d0
                 move.b  caster(a6),d0
                 move.b  itemSlot(a6),d1
