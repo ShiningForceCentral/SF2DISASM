@@ -2118,7 +2118,7 @@ GetNewAttAndDefWithItemEquipped:
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d0
                 and.b   d2,d0
                 movem.l (sp)+,d0-d1/a0
-                bne.w   @GetNewATTandDEF ; is the item type we're looking for
+                bne.w   @GetNewAttAndDef ; is the item type we're looking for
 @Next:
                 
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
@@ -2142,7 +2142,7 @@ GetNewAttAndDefWithItemEquipped:
                 move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
             endif
                 btst    #ITEMENTRY_BIT_EQUIPPED,d5
-                beq.w   @GetNewATTandDEF
+                beq.w   @GetNewAttAndDef
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 addq.w  #ITEMENTRY_SIZE,a0
             else
@@ -2155,7 +2155,7 @@ GetNewAttAndDefWithItemEquipped:
             else
                 clr.w   d4              ; default to item 0
             endif
-@GetNewATTandDEF:
+@GetNewAttAndDef:
                 
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 movep.w COMBATANT_OFFSET_ITEMS(a0),d5
