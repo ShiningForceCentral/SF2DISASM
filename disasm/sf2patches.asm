@@ -18,7 +18,7 @@ FIX_DWARVEN_MINER_VOICE:            equ 1       ; A cutscene has a fairy NPC con
 FIX_CARAVAN_FREE_REPAIR_EXPLOIT:    equ 1       ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reducded to 32 items unless SRAM is expanded.)
 FIX_GIZMO_ARRANGEMENT:              equ 1       ; Gizmos spread out into battle places during cutscene.
 FIX_CRIT_TABLE:                     equ 1       ; Make the "Increase Crit" effect never lower damage potential.
-FIX_GOLD_GIFT:                      equ 1       ; Gold increases when Minister gives you gift in New Granseal
+FIX_GOLD_GIFT:                      equ 1       ; Gold increases when Minister gives you gift in New Granseal.
 FIX_CARAVAN_DESCRIPTIONS:           equ 1       ; Breaks up character list into chuncks of 4
 FIX_SHIP_PRIEST:                    equ 1       ; Ensure priest onboard broken-up ship is usable for church action during battle 08
 FIX_LABYRINTH_DELETION:             equ 1       ; Prevent a section of the labyrinth from being deleted due to AI region activation
