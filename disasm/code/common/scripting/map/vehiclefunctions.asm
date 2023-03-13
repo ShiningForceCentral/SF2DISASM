@@ -276,7 +276,7 @@ ShrinkIntoCaravanBowieAndFollowers:
                 bsr.w   WaitForFollowersStopped
                 move.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 moveq   #3,d0
-                jsr     (Sleep).w       
+                jsr     (3844).w        
                 rts
 
     ; End of function ShrinkIntoCaravanBowieAndFollowers

@@ -396,7 +396,7 @@ sub_165C0:
                 jsr     (GetWindowTileAddress).l
                 movem.l a1,-(sp)
                 lea     TimerWindowLayout(pc), a0
-                moveq   #$40,d7 
+                moveq   #64,d7
                 jsr     (CopyBytes).w   
                 movem.l (sp)+,a1
                 adda.w  #$22,a1 

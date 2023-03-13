@@ -28,12 +28,12 @@ ChurchMenuActions:
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
                 blt.s   @txt_6E         
-                jsr     j_InitPortraitWindow
+                jsr     j_CreatePortraitWindow
 @txt_6E:
                 
                 txt     110             ; "Welcome!{W2}{N}Your desire will be fulfilled!{W2}"
                 clsTxt
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
 @StartMenu:
                 
                 moveq   #0,d0           ; initial choice : up
@@ -49,12 +49,12 @@ ChurchMenuActions:
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
                 blt.s   @txt_71         
-                jsr     j_InitPortraitWindow
+                jsr     j_CreatePortraitWindow
 @txt_71:
                 
                 txt     113             ; "{CLEAR}Be careful.  The light{N}is always on your side.{W1}"
                 clsTxt
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
@@ -70,7 +70,7 @@ ChurchMenuActions:
                 clr.w   d0
                 move.b  (a0)+,d0
                 move.w  d0,member(a6)
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 bhi.w   @RaiseNextMember
                 addi.w  #1,deadMembersCount(a6)
@@ -112,7 +112,7 @@ ChurchMenuActions:
                 jsr     j_DecreaseGold
                 move.w  member(a6),d0
                 move.w  #CHAR_STATCAP_HP,d1
-                jsr     j_IncreaseCurrentHP
+                jsr     j_IncreaseCurrentHp
                 sndCom  MUSIC_REVIVE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
@@ -220,7 +220,7 @@ ChurchMenuActions:
                 
                 move.w  d6,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   @IsNextItemCursed
                 jsr     j_GetItemDefAddress
                 clr.l   d4
@@ -286,7 +286,7 @@ ChurchMenuActions:
                 txt     136             ; "{CLEAR}Who do you want to{N}promote?{W2}"
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitMemberListScreen
+                jsr     j_InitializeMemberListScreen
                 cmpi.w  #$FFFF,d0
                 bne.w   @CheckPromotableClass
                 txt     137             ; "Oh, I'm wrong.{W2}"
@@ -470,7 +470,7 @@ ChurchMenuActions:
                 move.b  #1,d1
                 jsr     j_SetLevel
                 clr.w   d1
-                jsr     j_SetCurrentEXP
+                jsr     j_SetCurrentExp
 @RestartPromo:
                 
                 bra.w   @StartPromo     

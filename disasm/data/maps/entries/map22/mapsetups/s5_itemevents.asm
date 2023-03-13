@@ -10,9 +10,9 @@ ms_map22_Section5:
 
 Map22_ItemEvent0:
                 
-                moveq   #$7D,d1 ; Wooden Panel
+                moveq   #ITEM_COTTON_BALLOON,d1
                 jsr     j_GetItemInventoryLocation
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.s   byte_59624
                 jsr     j_RemoveItemBySlot
 byte_59624:

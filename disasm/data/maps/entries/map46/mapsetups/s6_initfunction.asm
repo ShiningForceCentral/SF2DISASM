@@ -7,7 +7,7 @@
 
 ms_map46_InitFunction:
                 
-                jmp     InitHeadquartersForceMembers
+                jmp     InitializeTacticalBaseForceMembers
                 rts
 
     ; End of function ms_map46_InitFunction

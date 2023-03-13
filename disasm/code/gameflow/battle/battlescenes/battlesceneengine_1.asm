@@ -21,7 +21,7 @@ GetEnemyAnimation:
                 clr.w   d1
 @GetAnimationIndex:
                 
-                add.w   ((ENEMY_BATTLE_ANIMATION-$1000000)).w,d1
+                add.w   ((BATTLESCENE_ENEMYBATTLEANIMATION-$1000000)).w,d1
 @GetAnimationPointer:
                 
                 movea.l (p_pt_EnemyAnimations).l,a0
@@ -35,51 +35,47 @@ GetEnemyAnimation:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Return whether or not ally battle sprite should animate when idle
+; Return whether or not ally battlesprite d0.b should animate when idle.
 ; 
-;       In: D0 = ally battle sprite index
-; 
-;       Out: D1 = 0 if animates, 1 if not
+;       Out: d1.l = 0 if it animates, 1 if not
 
 
-GetAllyBattleSpriteIdleAnimate:
+GetAllyBattlespriteIdleAnimate:
                 
                 move.l  a0,-(sp)
-                lea     tbl_AllyBattleSpriteIdleAnimate(pc), a0
-                bra.w   loc_19870
+                lea     tbl_AllyBattlespriteIdleAnimate(pc), a0
+                bra.w   GetBattlespriteIdleAnimate
 
-    ; End of function GetAllyBattleSpriteIdleAnimate
+    ; End of function GetAllyBattlespriteIdleAnimate
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Return whether or not enemy battle sprite should animate when idle
+; Return whether or not enemy battlesprite d0.b should animate when idle.
 ; 
-;       In: D0 = enemy battle sprite index
-; 
-;       Out: D1 = 0 if animates, 1 if not
+;       Out: d1.l = 0 if it animates, 1 if not
 
 
-GetEnemyBattleSpriteIdleAnimate:
+GetEnemyBattlespriteIdleAnimate:
                 
                 move.l  a0,-(sp)
-                lea     tbl_EnemyBattleSpriteIdleAnimate(pc), a0
-loc_19870:
+                lea     tbl_EnemyBattlespriteIdleAnimate(pc), a0
+GetBattlespriteIdleAnimate:
                 
                 moveq   #0,d1
-loc_19872:
+@FindBattlesprite_Loop:
                 
                 cmp.b   (a0),d0
-                beq.w   loc_19880
+                beq.w   @Found
                 cmpi.b  #CODE_TERMINATOR_BYTE,(a0)+
-                bne.s   loc_19872
+                bne.s   @FindBattlesprite_Loop
                 moveq   #1,d1
-loc_19880:
+@Found:
                 
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function GetEnemyBattleSpriteIdleAnimate
+    ; End of function GetEnemyBattlespriteIdleAnimate
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -164,7 +160,7 @@ loc_19912:
 loc_1991C:
                 
                 moveq   #$10,d0
-                jsr     (InitSprites).w 
+                jsr     (InitializeSprites).w
                 jmp     (sub_1942).w    
 
 ; END OF FUNCTION CHUNK FOR bsc07_switchAllies
@@ -214,16 +210,16 @@ loc_1995C:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = enemy battle sprite index
+; In: d0.w = enemy battlesprite index
 ;     d1.w = palette index
 
 
-LoadEnemyBattleSpritePropertiesAndPalette:
+LoadEnemyBattlespritePropertiesAndPalette:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                movea.l (p_pt_EnemyBattlesprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
-                move.w  (a0)+,((ENEMY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
+                move.w  (a0)+,((BATTLESCENE_ENEMYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w
                 move.w  (a0)+,((ENEMY_BATTLESPRITE_PROP1-$1000000)).w
                 move.w  (a0),d0
                 adda.w  d0,a0           ; a0 = pointer to palettes
@@ -240,18 +236,18 @@ LoadEnemyBattleSpritePropertiesAndPalette:
                 
                 rts
 
-    ; End of function LoadEnemyBattleSpritePropertiesAndPalette
+    ; End of function LoadEnemyBattlespritePropertiesAndPalette
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = enemy battle sprite index
+; In: d0.w = enemy battlesprite index
 ;     d1.w = frame index
 
 
-LoadEnemyBattleSpriteFrameToVram:
+LoadEnemyBattlespriteFrameToVram:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                movea.l (p_pt_EnemyBattlesprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -262,18 +258,18 @@ LoadEnemyBattleSpriteFrameToVram:
                 move.w  #$C00,d0
                 jmp     (ApplyImmediateVramDmaOnCompressedTiles).w
 
-    ; End of function LoadEnemyBattleSpriteFrameToVram
+    ; End of function LoadEnemyBattlespriteFrameToVram
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = enemy battle sprite index
+; In: d0.w = enemy battlesprite index
 ;     d1.w = frame index
 
 
-LoadEnemyBattleSpriteFrameAndWaitForDma:
+LoadEnemyBattlespriteFrameAndWaitForDma:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                movea.l (p_pt_EnemyBattlesprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -285,21 +281,21 @@ LoadEnemyBattleSpriteFrameAndWaitForDma:
                 jsr     (ApplyVIntVramDmaOnCompressedTiles).w
                 jmp     (WaitForDmaQueueProcessing).w
 
-    ; End of function LoadEnemyBattleSpriteFrameAndWaitForDma
+    ; End of function LoadEnemyBattlespriteFrameAndWaitForDma
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = ally battle sprite index
+; In: d0.w = ally battlesprite index
 ;     d1.w = palette index
 
 
-LoadAllyBattleSpritePropertiesAndPalette:
+LoadAllyBattlespritePropertiesAndPalette:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                movea.l (p_pt_AllyBattlesprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
-                move.w  (a0)+,((ALLY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w
+                move.w  (a0)+,((BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w
                 move.w  (a0)+,((ALLY_BATTLESPRITE_PROP1-$1000000)).w
                 move.w  (a0),d0
                 adda.w  d0,a0           ; a0 = pointer to palettes
@@ -316,18 +312,18 @@ LoadAllyBattleSpritePropertiesAndPalette:
                 
                 rts
 
-    ; End of function LoadAllyBattleSpritePropertiesAndPalette
+    ; End of function LoadAllyBattlespritePropertiesAndPalette
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = ally battle sprite index
+; In: d0.w = ally battlesprite index
 ;     d1.w = frame index
 
 
-LoadAllyBattleSpriteFrameToVram:
+LoadAllyBattlespriteFrameToVram:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                movea.l (p_pt_AllyBattlesprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -338,18 +334,18 @@ LoadAllyBattleSpriteFrameToVram:
                 move.w  #$900,d0
                 jmp     (ApplyImmediateVramDmaOnCompressedTiles).w
 
-    ; End of function LoadAllyBattleSpriteFrameToVram
+    ; End of function LoadAllyBattlespriteFrameToVram
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = ally battle sprite index
+; In: d0.w = ally battlesprite index
 ;     d1.w = frame index
 
 
-LoadAllyBattleSpriteFrameAndWaitForDma:
+LoadAllyBattlespriteFrameAndWaitForDma:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                movea.l (p_pt_AllyBattlesprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -361,7 +357,7 @@ LoadAllyBattleSpriteFrameAndWaitForDma:
                 jsr     (ApplyVIntVramDmaOnCompressedTiles).w
                 jmp     (WaitForDmaQueueProcessing).w
 
-    ; End of function LoadAllyBattleSpriteFrameAndWaitForDma
+    ; End of function LoadAllyBattlespriteFrameAndWaitForDma
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -381,12 +377,12 @@ LoadWeaponPalette:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = weapon sprite index
+; In: d0.w = weaponsprite index
 
 
-LoadWeaponSprite:
+LoadWeaponsprite:
                 
-                movea.l (p_pt_WeaponSprites).l,a0
+                movea.l (p_pt_Weaponsprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF2000_LOADING_SPACE).l,a1
@@ -400,7 +396,7 @@ LoadWeaponSprite:
                 
                 rts
 
-    ; End of function LoadWeaponSprite
+    ; End of function LoadWeaponsprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -412,7 +408,7 @@ LoadBattlesceneGroundToVram:
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
-                move.l  (a0)+,6(a1)
+                move.l  (a0)+,6(a1)     ; replace base palette color indexes 3, 4, and 8
                 move.w  (a0)+,$10(a1)
                 move.w  (a0),d0
                 adda.w  d0,a0
@@ -426,21 +422,21 @@ LoadBattlesceneGroundToVram:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = ally battle sprite index
+; In: d0.w = ally battlesprite index
 ;     d1.w = frame index
 
 
-LoadAllyBattleSpriteFrame:
+LoadAllyBattlespriteFrame:
                 
-                movea.l (p_pt_AllyBattleSprites).l,a0
-                move.w  ((ALLY_BATTLE_SPRITE-$1000000)).w,d0
+                movea.l (p_pt_AllyBattlesprites).l,a0
+                move.w  ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
                 btst    #0,((byte_FFB56E-$1000000)).w
                 beq.s   loc_19AD6
-                move.w  ((ALLY_BATTLE_SPRITE-$1000000)).w,d0
-                bsr.w   GetAllyBattleSpriteIdleAnimate
+                move.w  ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d0
+                bsr.w   GetAllyBattlespriteIdleAnimate
                 add.w   d1,d1
                 adda.w  d1,a0
 loc_19AD6:
@@ -450,17 +446,17 @@ loc_19AD6:
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jmp     (LoadCompressedData).w
 
-    ; End of function LoadAllyBattleSpriteFrame
+    ; End of function LoadAllyBattlespriteFrame
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-LoadNewAllyBattleSprite:
+LoadNewAllyBattlesprite:
                 
                 move.w  d1,-(sp)
                 move.w  d0,-(sp)
-                movea.l (p_pt_AllyBattleSprites).l,a0
+                movea.l (p_pt_AllyBattlesprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -471,7 +467,7 @@ LoadNewAllyBattleSprite:
                 jsr     (LoadCompressedData).w
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
-                bsr.w   GetAllyBattleSpriteIdleAnimate
+                bsr.w   GetAllyBattlespriteIdleAnimate
                 add.w   d1,d1
                 adda.w  d1,a0
                 move.w  (a0),d0
@@ -481,18 +477,18 @@ LoadNewAllyBattleSprite:
                 move.w  (sp)+,d1
                 rts
 
-    ; End of function LoadNewAllyBattleSprite
+    ; End of function LoadNewAllyBattlesprite
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = enemy battle sprite index
+; In: d0.w = enemy battlesprite index
 ;     d1.w = frame index
 
 
-LoadEnemyBattleSpriteFrame:
+LoadEnemyBattlespriteFrame:
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                movea.l (p_pt_EnemyBattlesprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -503,20 +499,20 @@ LoadEnemyBattleSpriteFrame:
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jmp     (LoadCompressedData).w
 
-    ; End of function LoadEnemyBattleSpriteFrame
+    ; End of function LoadEnemyBattlespriteFrame
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = enemy battle sprite index
+; In: d0.w = enemy battlesprite index
 
 
-LoadNewEnemyBattleSprite:
+LoadNewEnemyBattlesprite:
                 
                 cmpi.w  #$FFFF,d0
                 beq.w   @Return
                 
-                movea.l (p_pt_EnemyBattleSprites).l,a0
+                movea.l (p_pt_EnemyBattlesprites).l,a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -535,7 +531,7 @@ LoadNewEnemyBattleSprite:
                 
                 rts
 
-    ; End of function LoadNewEnemyBattleSprite
+    ; End of function LoadNewEnemyBattlesprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -594,11 +590,11 @@ LoadBattlesceneGround:
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
-                move.l  (a0)+,6(a1)
+                move.l  (a0)+,6(a1)     ; replace base palette color indexes 3, 4, and 8
                 move.w  (a0)+,$10(a1)
                 move.w  (a0),d0
                 adda.w  d0,a0
-                lea     (byte_FF8C02).l,a1
+                lea     (FF8C02_LOADING_SPACE).l,a1
                 jmp     (LoadCompressedData).w
 
     ; End of function LoadBattlesceneGround
@@ -607,9 +603,10 @@ LoadBattlesceneGround:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: d0.w = invocation sprite index
+;     d1.w = frame number
 
 
-LoadInvocationSpellTilesToVram:
+LoadInvocationSpriteFrameToVram:
                 
                 movea.l (p_pt_InvocationSprites).l,a0
                 lsl.w   #2,d0
@@ -673,7 +670,7 @@ loc_19CA0:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function LoadInvocationSpellTilesToVram
+    ; End of function LoadInvocationSpriteFrameToVram
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -689,7 +686,7 @@ LoadSpellGraphics:
                 move.w  (a0)+,d0
                 lea     ((PALETTE_3_CURRENT-$1000000)).w,a1
                 lea     ((PALETTE_3_BASE-$1000000)).w,a2
-                move.w  (a0),$12(a1)
+                move.w  (a0),$12(a1)    ; replace base palette color indexes 9, 13, and 14
                 move.w  (a0)+,$12(a2)
                 move.w  (a0),$1A(a1)
                 move.w  (a0)+,$1A(a2)
@@ -741,10 +738,10 @@ LoadSpellGraphicsForInvocation:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get battle sprite and palette indexes for combatant D0 -> D1 (sprite), D2 (palette)
+; Get battlesprite and palette indexes for combatant d0.w -> d1.w, d2.w
 
 
-GetBattleSpriteAndPalette:
+GetBattlespriteAndPalette:
                 
                 cmpi.w  #$FFFF,d0
                 bne.s   @Continue
@@ -758,7 +755,7 @@ GetBattleSpriteAndPalette:
                 bcc.w   @Enemy
                 movem.l d0/a0,-(sp)
                 jsr     j_GetClass
-                lea     tbl_AllyBattleSprites(pc), a0
+                lea     tbl_AllyBattlesprites(pc), a0
                 mulu.w  #9,d0
                 adda.w  d0,a0
                 moveq   #2,d0
@@ -787,8 +784,8 @@ GetBattleSpriteAndPalette:
 @Enemy:
                 
                 move.l  a0,-(sp)
-                jsr     j_GetEnemyIndex
-                lea     tbl_EnemyBattleSprites(pc), a0
+                jsr     j_GetEnemy
+                lea     tbl_EnemyBattlesprites(pc), a0
                 add.w   d1,d1
                 move.b  1(a0,d1.w),d2
                 ext.w   d2
@@ -798,5 +795,5 @@ GetBattleSpriteAndPalette:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function GetBattleSpriteAndPalette
+    ; End of function GetBattlespriteAndPalette
 

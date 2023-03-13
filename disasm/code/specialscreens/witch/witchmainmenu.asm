@@ -27,7 +27,7 @@ WitchMainMenu:
                 move.l  a1,var_4(a6)
                 movea.l (p_plt_WitchChoice).l,a0
                 lea     (PALETTE_2_CURRENT).l,a1
-                move.w  #$20,d7 
+                move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 jsr     (ApplyVIntCramDma).w
                 bsr.w   sub_1679E

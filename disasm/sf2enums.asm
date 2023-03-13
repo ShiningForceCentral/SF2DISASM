@@ -45,19 +45,19 @@ GFX_DIAMENU_ICON_PIXELS_NUMBER: equ $240
 
 ; enum Combatant
 COMBATANT_ALLIES_START: equ $0
+COMBATANT_ALLIES_MINUS_PLAYER_COUNTER: equ $1C
 COMBATANT_ALLIES_COUNTER: equ $1D
 COMBATANT_ALLIES_END: equ $1D
 COMBATANT_ALLIES_NUMBER: equ $1E
 COMBATANT_ENEMIES_COUNTER: equ $1F
-COMBATANT_ALLIES_SPACEEND_MINUS_ONE: equ $1F
+COMBATANT_ALLIES_SPACE_END_MINUS_ONE: equ $1F
 COMBATANT_ENEMIES_NUMBER: equ $20
-COMBATANT_ALLIES_SPACEEND: equ $20
+COMBATANT_ALLIES_SPACE_END: equ $20
 COMBATANTS_ALL_COUNTER: equ $3D
 COMBATANT_SLOTS_NUMBER: equ $40
-COMBATANT_ALLIES_SPACEEND_AND_ENEMIES_START_DIFFERENCE: equ $60
+COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END: equ $60
 COMBATANT_ENEMIES_START: equ $80
 COMBATANT_ENEMIES_END: equ $9F
-COMBATANT_ENEMIES_SPACEEND: equ $A0
 
 ; ---------------------------------------------------------------------------
 
@@ -146,7 +146,7 @@ COMBATANT_ITEMSLOTS_COUNTER: equ $3
 COMBATANT_SPELLSLOTS_COUNTER: equ $3
 COMBATANT_ITEMSLOTS: equ $4
 COMBATANT_SPELLSLOTS: equ $4
-COMBATANT_ENTRY_SIZE: equ $38
+COMBATANT_ENTRY_REAL_SIZE: equ $38
 
 ; ---------------------------------------------------------------------------
 
@@ -264,6 +264,13 @@ RESISTANCE_STATUS_IMMUNITY: equ $C000
 
 ; enum Resistance_None
 RESISTANCE_NONE: equ $0
+RESISTANCE_WIND_NONE: equ $0
+RESISTANCE_LIGHTNING_NONE: equ $0
+RESISTANCE_ICE_NONE: equ $0
+RESISTANCE_FIRE_NONE: equ $0
+RESISTANCE_UNDEFINED1_NONE: equ $0
+RESISTANCE_UNDEFINED2_NONE: equ $0
+RESISTANCE_STATUS_NONE: equ $0
 
 ; ---------------------------------------------------------------------------
 
@@ -536,23 +543,38 @@ SPELLPOWER_ENHANCED: equ $63
 
 ; ---------------------------------------------------------------------------
 
-; enum AiCodes
-AI_0: equ $0
-AI_1: equ $1
-AI_2: equ $2
-AI_3: equ $3
-AI_4: equ $4
-AI_5: equ $5
-AI_6: equ $6
-AI_7: equ $7
-AI_SENTRY: equ $8
-AI_9: equ $9
-AI_INACTIVE: equ $A
-AI_11: equ $B
-AI_12: equ $C
-AI_13: equ $D
-AI_LEADER: equ $E
-AI_SWARM: equ $F
+; enum AiCommandsets
+AICOMMANDSET_HEALER1: equ $0
+AICOMMANDSET_HEALER2: equ $1
+AICOMMANDSET_HEALER3: equ $2
+AICOMMANDSET_HEALER4: equ $3
+AICOMMANDSET_HEALER5: equ $4
+AICOMMANDSET_HEALER6: equ $5
+AICOMMANDSET_ATTACKER1: equ $6
+AICOMMANDSET_ATTACKER2: equ $7
+AICOMMANDSET_SENTRY: equ $8
+AICOMMANDSET_ATTACKER3: equ $9
+AICOMMANDSET_INACTIVE: equ $A
+AICOMMANDSET_11: equ $B
+AICOMMANDSET_SUPPORT: equ $C
+AICOMMANDSET_CRITICAL: equ $D
+AICOMMANDSET_LEADER: equ $E
+AICOMMANDSET_SWARM: equ $F
+
+; ---------------------------------------------------------------------------
+
+; enum AiOrders
+AIORDER_FOLLOW_TARGET: equ $0
+AIORDER_MOVE_TO: equ $40
+AIORDER_FOLLOW_ENEMY: equ $80
+AIORDER_NONE: equ $FF
+
+; ---------------------------------------------------------------------------
+
+; enum SpawnSettings
+SPAWN_STARTING: equ $0
+SPAWN_RESPAWN: equ $1
+SPAWN_HIDDEN: equ $2
 
 ; ---------------------------------------------------------------------------
 
@@ -702,6 +724,7 @@ DEALS_ADD_AMOUNT_ODD: equ $1
 DEALS_MAX_NUMBER_PER_ITEM: equ $F
 DEALS_BIT_REMAINDER: equ $10
 DEALS_ADD_AMOUNT_EVEN: equ $10
+DEALS_ITEMS_BYTES: equ $40
 DEALS_ITEMS_COUNTER: equ $7F
 
 ; ---------------------------------------------------------------------------
@@ -851,6 +874,7 @@ ITEM_CHIRRUP_SANDALS: equ $7E
 ITEM_NOTHING: equ $7F
 ITEM_EQUIPPED: equ $80
 ITEM_USABLE_BY_AI: equ $2000
+ITEM_UNUSED_ITEM_DROP: equ $4000
 ITEM_BROKEN: equ $8000
 
 ; ---------------------------------------------------------------------------
@@ -927,6 +951,7 @@ MITHRILWEAPON_CLASSES_COUNTER: equ $7
 ; enum MapDef
 MAP_SIZE_MAXHEIGHT: equ $30
 MAP_SIZE_MAXWIDTH: equ $30
+MAP_ARRAY_SIZE: equ $900
 MAP_BLOCKINDEX_CLOSED_CHEST: equ $D801
 MAP_BLOCKINDEX_OPEN_CHEST: equ $D802
 MAP_NULLPOSITION: equ $FFFF
@@ -1335,7 +1360,7 @@ CHANCE_TO_INFLICT_DESOUL: equ $5
 CHANCE_TO_INFLICT_SLOW: equ $5
 CHANCE_TO_INFLICT_SILENCE: equ $5
 CHANCE_TO_INFLICT_SLEEP: equ $5
-STATUSEFFECT_SPELLS_EXP: equ $5
+STATUSEFFECT_SPELL_EXP: equ $5
 CHANCE_TO_CRITICAL_BUBBLE_BREATH: equ $8
 CHANCE_TO_CRITICAL_BOLT: equ $8
 CHANCE_TO_CRITICAL_FLAME_BREATH: equ $10
@@ -1344,6 +1369,7 @@ HEALING_EXP_CAP: equ $19
 CHANCE_TO_CRITICAL_BLAZE: equ $20
 CHANCE_TO_CRITICAL_FREEZE: equ $20
 CHANCE_TO_CRITICAL_BLAST: equ $20
+PER_ACTION_EXP_CAP: equ $31
 
 ; ---------------------------------------------------------------------------
 
@@ -1516,8 +1542,8 @@ BATTLEACTION_TRAPPED_CHEST: equ $80
 ; enum Battleaction_Offsets
 BATTLEACTION_OFFSET_TYPE: equ $0
 BATTLEACTION_OFFSET_ITEM_OR_SPELL: equ $2
-BATTLEACTION_OFFSET_3: equ $3
-BATTLEACTION_OFFSET_TARGET: equ $4
+BATTLEACTION_OFFSET_TARGET: equ $3
+BATTLEACTION_OFFSET_ACTOR: equ $4
 BATTLEACTION_OFFSET_ITEM_SLOT: equ $6
 
 ; ---------------------------------------------------------------------------
@@ -1590,6 +1616,16 @@ CODE_TERMINATOR_WORD: equ $FFFF
 
 ; enum Special_Offsets
 NRO: equ $FF000000
+
+; ---------------------------------------------------------------------------
+
+; enum MapsetupOffsets
+MAPSETUP_OFFSET_ENTITIES: equ $0
+MAPSETUP_OFFSET_ENTITY_EVENTS: equ $4
+MAPSETUP_OFFSET_ZONE_EVENTS: equ $8
+MAPSETUP_OFFSET_AREA_DESCRIPTIONS: equ $C
+MAPSETUP_OFFSET_SECTION_5: equ $10
+MAPSETUP_OFFSET_INIT_FUNCTION: equ $14
 
 ; ---------------------------------------------------------------------------
 
@@ -1748,6 +1784,7 @@ WINDOW_DIALOGUE_TILELINECOUNTER_BATTLE: equ $3
 WINDOW_DIALOGUE_TILELINECOUNTER_EVENT: equ $5
 WINDOW_ENTRIES_COUNTER: equ $7
 WINDOW_ENTRY_SIZE: equ $10
+NEXT_WINDOW: equ $10
 WINDOW_DIALOGUE_WIDTHINTILES: equ $1A
 WINDOW_ENTRIES_LONGWORD_COUNTER: equ $1F
 
@@ -2376,6 +2413,15 @@ UP: equ $1
 LEFT: equ $2
 DOWN: equ $3
 NO_DIRECTION: equ $FF
+
+; ---------------------------------------------------------------------------
+
+; enum LaserFacing
+LASER_RIGHT: equ $0
+LASER_UP: equ $1
+LASER_LEFT: equ $2
+LASER_DOWN: equ $3
+LASER_NONE: equ $FF
 
 ; ---------------------------------------------------------------------------
 
@@ -3131,7 +3177,11 @@ ENEMYITEMDROP_RANDOM_CHANCE: equ $20
 
 ; enum Terrain
 TERRAIN_MASK_TYPE: equ $F
-TERRAINS_COUNTER: equ $F
+TERRAIN_TYPES_COUNTER: equ $F
+TERRAIN_ARRAY_ROWS_COUNTER: equ $2F
+TERRAIN_ARRAY_COLUMNS_COUNTER: equ $2F
+TERRAIN_ARRAY_OFFSET_NEXT_ROW: equ $30
+TERRAIN_OBSTRUCTED: equ $FF
 
 ; ---------------------------------------------------------------------------
 
@@ -3170,6 +3220,7 @@ END_GAME_TIMER: equ $2A30
 ; enum Cram
 CRAM_LONGWORDS_COUNTER: equ $1F
 CRAM_PALETTE_SIZE: equ $20
+NEXT_PALETTE: equ $20
 CRAM_COLORS_COUNTER: equ $3F
 CRAM_SIZE: equ $80
 

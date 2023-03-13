@@ -10,7 +10,7 @@ SystemInit:
                 bsr.s   InitVdp         ; and clear 68K RAM
                 bsr.w   InitZ80         ; and load sound driver to Z80 RAM
                 bsr.s   InitVdpData
-                jmp     (InitGame).l
+                jmp     (InitializeGame).l
 
     ; End of function SystemInit
 

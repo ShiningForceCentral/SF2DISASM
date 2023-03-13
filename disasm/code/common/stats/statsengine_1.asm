@@ -30,7 +30,7 @@ GetCombatantName:
 @Enemy:
                 
                 clr.w   d1
-                bsr.w   GetEnemyIndex   
+                bsr.w   GetEnemy        
                 movea.l (p_tbl_EnemyNames).l,a0
                 bsr.w   FindName        
 @Done:
@@ -43,7 +43,7 @@ GetCombatantName:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's class index -> D1
+; Get class index for combatant d0.b -> d1.w
 
 
 GetClass:
@@ -59,7 +59,7 @@ GetClass:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's current level -> D1
+; Get current level for combatant d0.b -> d1.w
 
 
 GetCurrentLevel:
@@ -76,7 +76,7 @@ GetCurrentLevel:
 ; =============== S U B R O U T I N E =======================================
 
 
-GetMaxHP:
+GetMaxHp:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_HP_MAX,d7
@@ -84,13 +84,13 @@ GetMaxHP:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetMaxHP
+    ; End of function GetMaxHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentHP:
+GetCurrentHp:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_HP_CURRENT,d7
@@ -98,13 +98,13 @@ GetCurrentHP:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetCurrentHP
+    ; End of function GetCurrentHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetMaxMP:
+GetMaxMp:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MP_MAX,d7
@@ -112,13 +112,13 @@ GetMaxMP:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetMaxMP
+    ; End of function GetMaxMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentMP:
+GetCurrentMp:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MP_CURRENT,d7
@@ -126,13 +126,13 @@ GetCurrentMP:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetCurrentMP
+    ; End of function GetCurrentMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetBaseATT:
+GetBaseAtt:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_ATT_BASE,d7
@@ -140,13 +140,13 @@ GetBaseATT:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetBaseATT
+    ; End of function GetBaseAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentATT:
+GetCurrentAtt:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_ATT_CURRENT,d7
@@ -154,13 +154,13 @@ GetCurrentATT:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetCurrentATT
+    ; End of function GetCurrentAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetBaseDEF:
+GetBaseDef:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_DEF_BASE,d7
@@ -168,13 +168,13 @@ GetBaseDEF:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetBaseDEF
+    ; End of function GetBaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentDEF:
+GetCurrentDef:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_DEF_CURRENT,d7
@@ -182,13 +182,13 @@ GetCurrentDEF:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetCurrentDEF
+    ; End of function GetCurrentDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetBaseAGI:
+GetBaseAgi:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_AGI_BASE,d7
@@ -196,13 +196,13 @@ GetBaseAGI:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetBaseAGI
+    ; End of function GetBaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentAGI:
+GetCurrentAgi:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_AGI_CURRENT,d7
@@ -210,13 +210,13 @@ GetCurrentAGI:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetCurrentAGI
+    ; End of function GetCurrentAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetBaseMOV:
+GetBaseMov:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MOV_BASE,d7
@@ -224,13 +224,13 @@ GetBaseMOV:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetBaseMOV
+    ; End of function GetBaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentMOV:
+GetCurrentMov:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MOV_CURRENT,d7
@@ -238,7 +238,7 @@ GetCurrentMOV:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetCurrentMOV
+    ; End of function GetCurrentMov
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -314,7 +314,7 @@ GetStatusEffects:
 ; =============== S U B R O U T I N E =======================================
 
 
-GetXPos:
+GetCombatantX:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_X,d7
@@ -323,13 +323,13 @@ GetXPos:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetXPos
+    ; End of function GetCombatantX
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetYPos:
+GetCombatantY:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_Y,d7
@@ -338,13 +338,13 @@ GetYPos:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetYPos
+    ; End of function GetCombatantY
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentEXP:
+GetCurrentExp:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_EXP,d7
@@ -352,7 +352,7 @@ GetCurrentEXP:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetCurrentEXP
+    ; End of function GetCurrentExp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -392,8 +392,8 @@ GetAiCommandset:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: D1 = combatant index to follow
-;      D2 = second AI point
+; Out: d1.w = combatant index to follow, or first AI point if bit 6 is set
+;      d2.w = second AI point
 
 
 GetAiSpecialMoveOrders:
@@ -454,13 +454,13 @@ GetAiActivationFlag:
 ; Out: d1.w = enemy index, or -1 if not an enemy
 
 
-GetEnemyIndex:
+GetEnemy:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Continue
                 move.w  #-1,d1          ; return -1 if combatant is not an enemy
                 rts
-                bra.s   GetKills
+                bra.s   GetKills        ; unreachable code
 @Continue:
                 
                 movem.l d7-a0,-(sp)
@@ -469,7 +469,7 @@ GetEnemyIndex:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetEnemyIndex
+    ; End of function GetEnemy
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -524,7 +524,7 @@ GetCombatantType:
                 bra.s   @Return
 @Enemy:
                 
-                bsr.s   GetEnemyIndex   
+                bsr.s   GetEnemy        
 @Return:
                 
                 rts

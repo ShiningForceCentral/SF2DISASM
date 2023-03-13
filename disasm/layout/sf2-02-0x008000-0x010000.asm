@@ -40,7 +40,7 @@
                 include "code\gameflow\battle\battleactions\nullsub_BBE4.asm"    ; Unused nullsub
                 include "code\gameflow\battle\battleactions\breakuseditem.asm"    ; Write Battlescene Script : Break Used Item
                 include "data\stats\items\itembreakmessages.asm"    ; Item break messages
-                include "code\gameflow\battle\battleactions\writebattlescenecommanddropenemyitem.asm"    ; Write Battlescene Command : Drop Enemy Item function
+                include "code\gameflow\battle\battleactions\dropenemyitem.asm"    ; Write Battlescene Command : Drop Enemy Item function
                 include "data\battles\global\enemyitemdrops.asm"    ; Enemy item drops
                 include "data\stats\enemies\enemygold.asm"    ; Enemy gold amounts
                 include "code\gameflow\battle\battleactions\battleactionsengine_6.asm"    ; Battleactions engine

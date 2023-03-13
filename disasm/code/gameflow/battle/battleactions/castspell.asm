@@ -37,7 +37,7 @@ rjt_SpellEffects:
                 dc.w SpellEffect_Freeze-rjt_SpellEffects ; FREEZE
                 dc.w SpellEffect_Bolt-rjt_SpellEffects ; BOLT
                 dc.w SpellEffect_Blast-rjt_SpellEffects ; BLAST
-                dc.w SpellEffect_DrainMP-rjt_SpellEffects ; SPOIT
+                dc.w SpellEffect_DrainMp-rjt_SpellEffects ; SPOIT
                 dc.w SpellEffect_Heal-rjt_SpellEffects ; HEALIN
                 dc.w SpellEffect_FlameBreath-rjt_SpellEffects ; FLAME
                 dc.w SpellEffect_Freeze-rjt_SpellEffects ; SNOW
@@ -75,9 +75,9 @@ SpellEffect_Heal:
                 
                 module
                 move.b  (a5),d0
-                jsr     GetMaxHP
+                jsr     GetMaxHp
                 move.w  d1,d2
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 sub.w   d1,d2           ; D2 = target's missing HP
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     FindSpellDefAddress
@@ -110,7 +110,7 @@ byte_B17A:
                 
                 displayMessage #MESSAGE_BATTLE_RECOVERED_HIT_POINTS,d0,#0,d6 
                                                         ; Message, Combatant, Item or Spell, Number
-                bsr.w   CalculateHealingEXP
+                bsr.w   CalculateHealingExp
                 rts
 
     ; End of function SpellEffect_Heal
@@ -161,7 +161,7 @@ byte_B1F4:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @GiveEXP:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   AddStatusEffectSpellExp
                 
                 ; Check if Poison was cured
                 btst    #0,d2
@@ -225,13 +225,13 @@ byte_B2B6:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
-                jsr     GetBaseAGI
+                bsr.w   AddStatusEffectSpellExp
+                jsr     GetBaseAgi
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
-                jsr     GetBaseDEF
+                jsr     GetBaseDef
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_DEF_INCREASE,d0,#0,d1 
@@ -275,15 +275,15 @@ byte_B350:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @GiveEXP:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   AddStatusEffectSpellExp
 WriteBattlesceneScript_SlowMessage:
                 
-                jsr     GetBaseAGI
+                jsr     GetBaseAgi
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_AGILITY_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
-                jsr     GetBaseDEF
+                jsr     GetBaseDef
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_DEFENSE_DECREASED_BY,d0,#0,d1 
@@ -320,8 +320,8 @@ byte_B3E2:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
-                jsr     GetBaseATT
+                bsr.w   AddStatusEffectSpellExp
+                jsr     GetBaseAtt
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_ATTACK_SPELL_EFFECT,d0,#0,d1 
@@ -366,7 +366,7 @@ byte_B45A:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   AddStatusEffectSpellExp
                 displayMessage #MESSAGE_BATTLE_HAS_BEEN_SILENCED,d0,#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
@@ -417,7 +417,7 @@ byte_B4EA:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   AddStatusEffectSpellExp
                 displayMessage d2,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
@@ -468,7 +468,7 @@ byte_B53C:
                 executeEnemyReaction #$8000,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineBattleMessage:
                 
-                bsr.w   GiveEXPandGoldForKill
+                bsr.w   AddExpAndGoldForKill
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
                 move.w  #MESSAGE_BATTLE_SOUL_WAS_STOLEN_ALLY,d2 ; ally message
@@ -507,7 +507,7 @@ byte_B5A8:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   AddStatusEffectSpellExp
                 displayMessage #MESSAGE_BATTLE_FELL_ASLEEP,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
@@ -518,11 +518,11 @@ byte_B5A8:
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_DrainMP:
+SpellEffect_DrainMp:
                 
                 module
                 move.b  (a5),d0
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 moveq   #3,d0
                 jsr     (GenerateRandomOrDebugNumber).w
                 addq.w  #3,d0
@@ -556,7 +556,7 @@ byte_B642:
                 executeEnemyReaction #0,d2,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   AddStatusEffectSpellExp
                 bscHideTextBox
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
@@ -571,7 +571,7 @@ byte_B66C:
                 displayMessage d1,d0,#0,d2 ; Message, Combatant, Item or Spell, Number
                 rts
 
-    ; End of function SpellEffect_DrainMP
+    ; End of function SpellEffect_DrainMp
 
                 modend
 
@@ -599,7 +599,7 @@ byte_B6A2:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseBaseATT
+                jsr     IncreaseBaseAtt
                 jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
@@ -631,7 +631,7 @@ byte_B708:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseBaseDEF
+                jsr     IncreaseBaseDef
                 jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
@@ -663,7 +663,7 @@ byte_B76E:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseBaseAGI
+                jsr     IncreaseBaseAgi
                 jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
@@ -688,7 +688,7 @@ byte_B7D4:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineIncreaseValue:
                 
-                jsr     GetBaseMOV
+                jsr     GetBaseMov
                 clr.w   d2
                 cmpi.b  #9,d1
                 beq.w   byte_B802       
@@ -701,7 +701,7 @@ byte_B802:
                 displayMessage #MESSAGE_BATTLE_MOVEMENT_RANGE_IS_ENLARGED_BY,d0,#0,d2 
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d2,d1
-                jsr     IncreaseBaseMOV
+                jsr     IncreaseBaseMov
                 jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
@@ -733,7 +733,7 @@ SpellEffect_CheerfulBread:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseMaxHP
+                jsr     IncreaseMaxHp
                 rts
 
     ; End of function SpellEffect_CheerfulBread
@@ -747,7 +747,7 @@ SpellEffect_BrightHoney:
                 
                 module
                 move.b  (a5),d0
-                jsr     GetMaxMP
+                jsr     GetMaxMp
                 tst.w   d1
                 bne.s   @TargetHasMP
                 moveq   #8,d2
@@ -772,7 +772,7 @@ byte_B8BA:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseMaxMP
+                jsr     IncreaseMaxMp
                 rts
 
     ; End of function SpellEffect_BrightHoney
@@ -787,7 +787,7 @@ SpellEffect_BraveApple:
                 module
                 move.b  (a5),d0
                 moveq   #0,d1
-                jsr     SetCurrentEXP
+                jsr     SetCurrentExp
                 jsr     LevelUp         
                 lea     ((LEVELUP_ARGUMENTS-$1000000)).w,a1
                 cmpi.b  #$FF,(a1)       ; check if target is able to level up
@@ -871,9 +871,9 @@ SpellEffect_FairyTear:
                 
                 module
                 move.b  (a5),d0
-                jsr     GetMaxMP
+                jsr     GetMaxMp
                 move.w  d1,d2
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 sub.w   d1,d2
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     FindSpellDefAddress
@@ -902,7 +902,7 @@ byte_BA7C:
                 
                 displayMessage #MESSAGE_BATTLE_RECOVERED_MAGIC_POINTS,d0,#0,d6 
                                                         ; Message, Combatant, Item or Spell, Number
-                bsr.w   CalculateHealingEXP
+                bsr.w   CalculateHealingExp
                 rts
 
     ; End of function SpellEffect_FairyTear

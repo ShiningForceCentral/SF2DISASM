@@ -210,6 +210,34 @@ background: macro
     defineShorthand.b BATTLEBACKGROUND_,\1
     endm
     
+; Battle spriteset definitions
+    
+allyCombatant: macro
+    dc.b \1
+    dc.b \2
+    dc.b \3
+    endm
+    
+enemyCombatant: macro
+    defineShorthand.b ENEMY_,\1
+    dc.b \2
+    dc.b \3
+    endm
+    
+combatantAiAndItem: macro
+    defineShorthand.b AICOMMANDSET_,\1
+    defineBitfield.w ITEM_,\2
+    endm
+    
+combatantBehavior: macro
+    defineBitfield.b AIORDER_,\1
+    dc.b \2
+    defineBitfield.b AIORDER_,\3
+    dc.b \4
+    dc.b \5
+    defineBitfield.b SPAWN_,\6
+    endm
+    
 ; Names
     
 defineName: macro
