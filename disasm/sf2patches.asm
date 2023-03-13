@@ -36,7 +36,7 @@ SPELLS_REFRESH_STATUS_COUNTERS:     equ 0       ; Boost, Slow, and Attack spells
 TRADEABLE_ITEMS:                    equ 0       ; Allow trading items in battle without full inventory.
 CUTSCENE_PROTECTION:                equ 1       ; Prevent game from freezing if dead character is needed for scene after leader death (as Slade for battle 5.)
 CARAVAN_IN_TOWER:                   equ 0       ; Add access to Caravan before tower climb battle.
-MINIATURES_SHOP:                    equ 0       ; Places a shopworker on the desktop and floor of the Miniatures Room
+MINIATURES_SHOP:                    equ 0       ; Place a shopworker on the desktop and floor of the Miniatures Room.
 
 ; Misc. features
 AGILITY_AFFECTS_CHANCE_TO_DODGE:    equ 0       ; Adjust chance to dodge proportionally to the difference between the attacker's and the target's current AGI.
