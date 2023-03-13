@@ -304,12 +304,11 @@ CalculateStatGain:
                 
             if (STANDARD_BUILD&LEARN_SPELL_AT_PROMOTION=1)
                 tst.b   d2
-                bne.s   @CheckZero  ; keep going if curve type other than None
+                bne.s   @CheckZero      ; keep going if curve type other than None
                 move.w  #0,d1           ; otherwise, stat gain value = 0
                 rts
-@CheckZero:
-            
-                tst.b   d5
+                
+@CheckZero:     tst.b   d5
                 bne.s   @EvaluateLevel  ; keep going if level other than zero
                 move.w  #0,d1           ; otherwise, stat gain value = 0
                 rts
