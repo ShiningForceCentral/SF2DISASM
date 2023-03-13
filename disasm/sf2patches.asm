@@ -35,7 +35,7 @@ NO_RANDOM_BATTLES:                  equ 0       ; 0 = Battles    1 = No Battles
 SPELLS_REFRESH_STATUS_COUNTERS:     equ 0       ; Boost, Slow, and Attack spells refresh status counters instead of failing, as long as the counter is increased by at least 1. Battle messages display the actual regained stats values.
 TRADEABLE_ITEMS:                    equ 0       ; Allow trading items in battle without full inventory.
 CUTSCENE_PROTECTION:                equ 1       ; Prevent game from freezing if dead character is needed for scene after leader death (as Slade for battle 5.)
-CARAVAN_IN_TOWER:                   equ 0       ; Adds access to Caravan before tower climb battle
+CARAVAN_IN_TOWER:                   equ 0       ; Add access to Caravan before tower climb battle.
 MINIATURES_SHOP:                    equ 0       ; Places a shopworker on the desktop and floor of the Miniatures Room
 
 ; Misc. features
