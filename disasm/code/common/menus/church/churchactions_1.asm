@@ -408,9 +408,8 @@ ChurchMenuActions:
                 move.w  cursedMembersCount(a6),d0 ; temporary variable : index of member holding promotion item
                 move.w  itemsHeldNumber(a6),d1 ; temporary variable : item slot
                 jsr     j_RemoveItemBySlot
-            endif
-                
                 bra.w   @DoPromo
+            endif
 @CheckRegularPromo:
                 
                 move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
@@ -518,14 +517,3 @@ ChurchMenuActions:
 
     ; End of function ChurchMenuActions
 
-            if (STANDARD_BUILD=1)
-PromoWithItem:  move.b  (a0)+,d0
-                dbf     d7,PromoWithItem
-                move.w  d0,newClass(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  promotionItem(a6),((TEXT_NAME_INDEX_3-$1000000)).w
-                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     143             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
-                txt     147             ; "OK?"
-                rts
-            endif
