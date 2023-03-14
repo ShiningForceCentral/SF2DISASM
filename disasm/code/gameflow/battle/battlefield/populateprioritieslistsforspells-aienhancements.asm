@@ -28,7 +28,7 @@ MakePrioritiesListForSpell_Dispel:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w    d3,d1
-                bsr.w   CreateTargetGrid
+                bsr.w   PopulateTargetableGrid
                 bsr.w   CalculateDispelSpellTargetPriority
                 move.b  d1,(a2)+
                 dbf     d5,@GetTargetsPriority_Loop
@@ -117,7 +117,7 @@ MakePrioritiesListForSpell_Muddle2:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w    d3,d1
-                bsr.w   CreateTargetGrid
+                bsr.w   PopulateTargetableGrid
                 move.w  (a3),d2         ; d2.w = number of targets in area of effect
                 move.b  d2,(a2)+
                 dbf     d5,@GetTargetsPriority_Loop

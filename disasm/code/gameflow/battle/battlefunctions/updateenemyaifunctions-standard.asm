@@ -9,7 +9,7 @@ UpdateAllEnemiesAi:
                 
                 move.w  #COMBATANT_ENEMIES_START,d0
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
-@Loop:          jsr     GetXPos
+@Loop:          jsr     GetCombatantX
                 bmi.s   @Next
                 jsr     GetCurrentHP
                 beq.s   @Next

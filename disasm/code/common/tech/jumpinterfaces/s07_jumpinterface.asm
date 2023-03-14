@@ -7,7 +7,7 @@
 
 sub_44000:
                 
-                jmp     sub_440D4(pc)
+                jmp     sub_440D4(pc)   
 
     ; End of function sub_44000
 
@@ -15,11 +15,11 @@ sub_44000:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitMapEntities:
+j_InitializeMapEntities:
                 
-                jmp     InitMapEntities(pc)
+                jmp     InitializeMapEntities(pc)
 
-    ; End of function j_InitMapEntities
+    ; End of function j_InitializeMapEntities
 
 
 ; =============== S U B R O U T I N E =======================================

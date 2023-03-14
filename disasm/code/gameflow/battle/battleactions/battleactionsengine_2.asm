@@ -47,7 +47,7 @@ WriteBattlesceneScript_End:
                 move.b  (a4),d0
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   loc_A396
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   loc_A3B2
                 bra.s   loc_A3AE
@@ -56,12 +56,12 @@ loc_A396:
                 cmpi.w  #BATTLEACTION_ATTACKTYPE_COUNTER,((BATTLESCENE_ATTACK_TYPE-$1000000)).w
                 bne.w   loc_A3B2
                 move.b  (a5),d0
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   loc_A3B2
 loc_A3AE:
                 
-                bsr.w   WriteBattlesceneScript_EXPandGold
+                bsr.w   WriteBattlesceneScript_GiveExpAndGold
 loc_A3B2:
                 
                 lea     allCombatantsCurrentHpTable(a2),a0
@@ -75,7 +75,7 @@ loc_A3BE:
                 cmpi.w  #COMBATANT_ALLIES_END,d0
                 bgt.s   loc_A3CE
                 move.w  -(a0),d1
-                jsr     SetCurrentHP
+                jsr     SetCurrentHp
                 bra.s   loc_A3BC
 loc_A3CE:
                 
@@ -89,7 +89,7 @@ loc_A3D6:
                 cmpi.w  #COMBATANT_ENEMIES_END,d0
                 bgt.s   byte_A3E6
                 move.w  -(a0),d1
-                jsr     SetCurrentHP
+                jsr     SetCurrentHp
                 bra.s   loc_A3D4
 byte_A3E6:
                 

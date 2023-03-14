@@ -34,10 +34,10 @@ UpdateAllEnemiesAi:
 
 UpdateEnemyAi:
                 
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 tst.b   d1
                 bmi.w   @Return
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.w   @Return
                 tst.b   d0

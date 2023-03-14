@@ -24,7 +24,7 @@ Map3_ZoneEvent0:
                 bne.s   byte_50DA6      
                 jsr     (WaitForViewScrollEnd).l
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$8C,d0 
+                move.w  #140,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
@@ -51,7 +51,7 @@ Map3_ZoneEvent1:
                 bne.s   byte_50DE0      
                 jsr     (WaitForViewScrollEnd).l
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$8A,d0 
+                move.w  #138,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
@@ -85,7 +85,7 @@ Map3_ZoneEvent4:
                 chkFlg  259             ; TEMP FLAG #03
                 bne.s   byte_50E2C      
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$8B,d0 
+                move.w  #139,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
@@ -141,7 +141,7 @@ Map3_ZoneEvent7:
                 chkFlg  602             ; Set after Astral's second basement line
                 bne.s   byte_50E96      
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$8E,d0 
+                move.w  #142,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
@@ -153,7 +153,7 @@ byte_50E96:
                 chkFlg  260             ; TEMP FLAG #04
                 bne.s   return_50ED0
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$8E,d0 
+                move.w  #142,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w

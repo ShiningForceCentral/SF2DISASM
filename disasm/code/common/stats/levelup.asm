@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = ally index
+; In: d0.w = ally index
 
 ally = -2
 
@@ -65,38 +65,38 @@ LevelUp:
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                bsr.w   GetMaxHP
+                bsr.w   GetMaxHp
                 bsr.w   CalculateStatGain
                 move.b  d1,1(a1)
-                bsr.w   IncreaseMaxHP
+                bsr.w   IncreaseMaxHp
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                bsr.w   GetMaxMP
+                bsr.w   GetMaxMp
                 bsr.w   CalculateStatGain
                 move.b  d1,2(a1)
-                bsr.w   IncreaseMaxMP
+                bsr.w   IncreaseMaxMp
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                bsr.w   GetBaseATT
+                bsr.w   GetBaseAtt
                 bsr.w   CalculateStatGain
                 move.b  d1,3(a1)
-                bsr.w   IncreaseBaseATT
+                bsr.w   IncreaseBaseAtt
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                bsr.w   GetBaseDEF
+                bsr.w   GetBaseDef
                 bsr.w   CalculateStatGain
                 move.b  d1,4(a1)
-                bsr.w   IncreaseBaseDEF
+                bsr.w   IncreaseBaseDef
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                bsr.w   GetBaseAGI
+                bsr.w   GetBaseAgi
                 bsr.w   CalculateStatGain
                 move.b  d1,5(a1)
-                bsr.w   IncreaseBaseAGI
+                bsr.w   IncreaseBaseAgi
                 
                 ; Increase level
                 addq.w  #1,d5
@@ -160,7 +160,7 @@ LevelUp:
 ;     d1.w = starting level
 
 
-InitAllyStats:
+InitializeAllyStats:
                 
                 movem.l d0-d2/a0,-(sp)
                 move.w  d1,-(sp)        ; -> push starting level
@@ -175,25 +175,25 @@ InitAllyStats:
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_STARTING_HP,a0
                 move.b  (a0)+,d1
-                bsr.w   SetMaxHP
-                bsr.w   SetCurrentHP
+                bsr.w   SetMaxHp
+                bsr.w   SetCurrentHp
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
-                bsr.w   SetMaxMP
-                bsr.w   SetCurrentMP
+                bsr.w   SetMaxMp
+                bsr.w   SetCurrentMp
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
-                bsr.w   SetBaseATT
+                bsr.w   SetBaseAtt
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
-                bsr.w   SetBaseDEF
+                bsr.w   SetBaseDef
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
-                bsr.w   SetBaseAGI
+                bsr.w   SetBaseAgi
                 moveq   #1,d1
                 bsr.w   SetLevel
                 
@@ -286,7 +286,7 @@ InitAllyStats:
                 movem.l (sp)+,d0-d2/a0
                 rts
 
-    ; End of function InitAllyStats
+    ; End of function InitializeAllyStats
 
 
 ; =============== S U B R O U T I N E =======================================

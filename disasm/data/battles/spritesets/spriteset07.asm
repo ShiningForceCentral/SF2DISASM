@@ -1,118 +1,123 @@
-; Battle spriteset form
 
-; # Force members
-	dc.b 7
-; # Enemies
-	dc.b 10
-; # AI Regions
-	dc.b 4
-; # AI Points
-	dc.b 1
-	
-	allyCombatant 0, 13, 33
-	allyFillA
-	allyCombatant 1, 13, 34
-	allyFillA
-	allyCombatant 2, 13, 35
-	allyFillA
-	allyCombatant 3, 12, 34
-	allyFillA
-	allyCombatant 4, 14, 34
-	allyFillA
-	allyCombatant 5, 12, 35
-	allyFillA
-	allyCombatant 6, 14, 35
-	allyFillA
-	
-	; Enemy members
-	;dc.b 	; Character index
-	;dc.b 	; relative x position
-	;dc.b 	; relative y position
-	;dc.b 	; AI code
-	;dc.w 	; Unique Item
-	;dc.b 	; Move order 1 $FF=No order $0X=Follow Force Member X $4X=Move towards point X $8X=Follow enemy X
-	;dc.b 	; Trigger Region
-	;dc.b 	; Order
-	;dc.b 	; Trigger Region
-	;dc.b 	; 
-	;dc.b 	; Spawn code 01=Continuous respawn 02=Region-triggered spawn
-	
-	enemyCombatant DARK_SMOKE, 10, 14
-	enemyAIandItem ATTACKER2, NOTHING
-	enemyBehavior  NONE, $1, NONE, $F, $0, STARTING
-	
-	enemyCombatant DARK_SMOKE, 16, 16
-	enemyAIandItem ATTACKER1, NOTHING
-	enemyBehavior  NONE, $0, NONE, $F, $0, STARTING
-	
-	enemyCombatant GALAM_MAGE, 22, 17
-	enemyAIandItem ATTACKER3, NOTHING
-	enemyBehavior  FOLLOW_DEVIL|1, $2, FOLLOW_DEVIL|1, $3, $0, STARTING
-	
-	enemyCombatant DARK_CLERIC, 23, 18
-	enemyAIandItem HEALER3, NOTHING
-	enemyBehavior  FOLLOW_DEVIL|1, $2, FOLLOW_DEVIL|1, $3, $0, STARTING
-	
-	enemyCombatant GALAM_ARCHER, 18, 22
-	enemyAIandItem ATTACKER1, NOTHING
-	enemyBehavior  NONE, $F, NONE, $F, $0, STARTING
-	
-	enemyCombatant GALAM_KNIGHT, 9, 24
-	enemyAIandItem ATTACKER1, NOTHING
-	enemyBehavior  NONE, $F, NONE, $F, $0, STARTING
-	
-	enemyCombatant GALAM_ARCHER, 7, 25
-	enemyAIandItem ATTACKER3, NOTHING
-	enemyBehavior  FOLLOW_DEVIL|5, $F, NONE, $F, $0, STARTING
-	
-	enemyCombatant GALAM_ARCHER, 19, 30
-	enemyAIandItem ATTACKER3, NOTHING
-	enemyBehavior  FOLLOW_DEVIL|8, $F, NONE, $F, $0, STARTING
-	
-	enemyCombatant GALAM_KNIGHT, 22, 31
-	enemyAIandItem ATTACKER1, NOTHING
-	enemyBehavior  NONE, $F, NONE, $F, $0, STARTING
-	
-	enemyCombatant GALAM_KNIGHT, 7, 29
-	enemyAIandItem ATTACKER1, NOTHING
-	enemyBehavior  NONE, $F, NONE, $F, $0, STARTING
-	
-	; AI Regions
-	dc.b 4		; 04=Type 1, 03=Type 2
-	dc.b 0		; 
-	dc.b 0, 0	; x1, y1
-	dc.b 0, 29	; x2, y2
-	dc.b 26, 29	; x3, y3
-	dc.b 26, 0	; x4, y4
-	dc.b 0		; 
-	dc.b 0		; 
-	
-	dc.b 4		; 04=Type 1, 03=Type 2
-	dc.b 0		; 
-	dc.b 0, 0	; x1, y1
-	dc.b 0, 25	; x2, y2
-	dc.b 26, 25	; x3, y3
-	dc.b 26, 0	; x4, y4
-	dc.b 0		; 
-	dc.b 0		; 
-	
-	dc.b 4		; 04=Type 1, 03=Type 2
-	dc.b 0		; 
-	dc.b 0, 0	; x1, y1
-	dc.b 0, 27	; x2, y2
-	dc.b 26, 27	; x3, y3
-	dc.b 26, 0	; x4, y4
-	dc.b 0		; 
-	dc.b 0		; 
-	
-	dc.b 4		; 04=Type 1, 03=Type 2
-	dc.b 0		; 
-	dc.b 0, 17	; x1, y1
-	dc.b 0, 29	; x2, y2
-	dc.b 12, 29	; x3, y3
-	dc.b 26, 17	; x4, y4
-	dc.b 0		; 
-	dc.b 0		; 
-	
-	; AI point
-	dc.b 13, 16	; X offset, Y offset
+; ASM FILE data\battles\spritesets\spriteset07.asm :
+; 0x1B3720..0x1B3822 : Battle Spritesets 07
+BattleSpriteset07:
+                ; # Allies
+                dc.b 7
+                ; # Enemies
+                dc.b 10
+                ; # AI Regions
+                dc.b 4
+                ; # AI Points
+                dc.b 1
+                
+                ; Allies
+                allyCombatant 0, 13, 33
+                combatantAiAndItem HEALER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                allyCombatant 1, 13, 34
+                combatantAiAndItem HEALER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                allyCombatant 2, 13, 35
+                combatantAiAndItem HEALER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                allyCombatant 3, 12, 34
+                combatantAiAndItem HEALER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                allyCombatant 4, 14, 34
+                combatantAiAndItem HEALER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                allyCombatant 5, 12, 35
+                combatantAiAndItem HEALER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                allyCombatant 6, 14, 35
+                combatantAiAndItem HEALER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                ; Enemies
+                enemyCombatant DARK_SMOKE, 10, 14
+                combatantAiAndItem ATTACKER2, NOTHING
+                combatantBehavior NONE, 1, NONE, 15, 0, STARTING
+                
+                enemyCombatant DARK_SMOKE, 16, 16
+                combatantAiAndItem ATTACKER1, NOTHING
+                combatantBehavior NONE, 0, NONE, 15, 0, STARTING
+                
+                enemyCombatant GALAM_MAGE, 22, 17
+                combatantAiAndItem ATTACKER3, NOTHING
+                combatantBehavior FOLLOW_ENEMY|1, 2, FOLLOW_ENEMY|1, 3, 0, STARTING
+                
+                enemyCombatant DARK_CLERIC, 23, 18
+                combatantAiAndItem HEALER3, NOTHING
+                combatantBehavior FOLLOW_ENEMY|1, 2, FOLLOW_ENEMY|1, 3, 0, STARTING
+                
+                enemyCombatant GALAM_ARCHER, 18, 22
+                combatantAiAndItem ATTACKER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                enemyCombatant GALAM_KNIGHT, 9, 24
+                combatantAiAndItem ATTACKER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                enemyCombatant GALAM_ARCHER, 7, 25
+                combatantAiAndItem ATTACKER3, NOTHING
+                combatantBehavior FOLLOW_ENEMY|5, 15, NONE, 15, 0, STARTING
+                
+                enemyCombatant GALAM_ARCHER, 19, 30
+                combatantAiAndItem ATTACKER3, NOTHING
+                combatantBehavior FOLLOW_ENEMY|8, 15, NONE, 15, 0, STARTING
+                
+                enemyCombatant GALAM_KNIGHT, 22, 31
+                combatantAiAndItem ATTACKER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                enemyCombatant GALAM_KNIGHT, 7, 29
+                combatantAiAndItem ATTACKER1, NOTHING
+                combatantBehavior NONE, 15, NONE, 15, 0, STARTING
+                
+                ; AI Regions
+                dc.b 4
+                dc.b 0
+                dc.b 0, 0
+                dc.b 0, 29
+                dc.b 26, 29
+                dc.b 26, 0
+                dc.b 0
+                dc.b 0
+                
+                dc.b 4
+                dc.b 0
+                dc.b 0, 0
+                dc.b 0, 25
+                dc.b 26, 25
+                dc.b 26, 0
+                dc.b 0
+                dc.b 0
+                
+                dc.b 4
+                dc.b 0
+                dc.b 0, 0
+                dc.b 0, 27
+                dc.b 26, 27
+                dc.b 26, 0
+                dc.b 0
+                dc.b 0
+                
+                dc.b 4
+                dc.b 0
+                dc.b 0, 17
+                dc.b 0, 29
+                dc.b 12, 29
+                dc.b 26, 17
+                dc.b 0
+                dc.b 0
+                
+                ; AI Points
+                dc.b 13, 16
+                

@@ -633,7 +633,7 @@ ApplyFadingEffect:
                 move.b  ((FADING_POINTER-$1000000)).w,d1
                 ext.w   d1
                 add.w   d1,d0
-                move.b  FadingData(pc,d0.w),d1
+                move.b  tbl_FadingData(pc,d0.w),d1
                 cmpi.w  #$80,d1 
                 bne.s   loc_AEC
                 clr.b   ((FADING_SETTING-$1000000)).w
@@ -651,7 +651,7 @@ loc_B0A:
                 
                 ext.w   d1
                 move.w  d1,d0
-                move.b  ((FADING_PALETTE_BITMAP-$1000000)).w,d1
+                move.b  ((FADING_PALETTE_BITFIELD-$1000000)).w,d1
                 ext.w   d1
                 bsr.w   ApplyCurrentColorFadingValue
                 addq.b  #1,((FADING_POINTER-$1000000)).w
@@ -661,7 +661,7 @@ return_B1C:
 
     ; End of function ApplyFadingEffect
 
-FadingData:     incbin "data/graphics/tech/fadingdata.bin" ; 80 : end
+tbl_FadingData: incbin "data/graphics/tech/fadingdata.bin" ; 80 : end
                                         ; 8x : go x backward
 
 ; =============== S U B R O U T I N E =======================================
@@ -965,7 +965,7 @@ ExecuteFading:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
 @Wait:
                 
                 bsr.w   WaitForVInt
@@ -978,6 +978,8 @@ ExecuteFading:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d1.w = palette bitfield
 
 
 ApplyCurrentColorFadingValue:
@@ -997,7 +999,7 @@ loc_D30:
                 bra.w   loc_DA8
 loc_D44:
                 
-                moveq   #$F,d7
+                moveq   #15,d7
 loc_D46:
                 
                 movem.l d0,-(sp)
@@ -1066,10 +1068,10 @@ loc_DA8:
 ClearVsramAndSprites:
                 
                 move.w  #$100,(Z80BusReq).l
-loc_DC2:
+@Wait:
                 
                 btst    #0,(Z80BusReq).l
-                bne.s   loc_DC2         ; wait for bus available
+                bne.s   @Wait           ; wait for bus available
                 bsr.s   ClearScrollTableData
                 bsr.s   ClearSpriteTable
                 bsr.s   UpdateVdpSpriteTable

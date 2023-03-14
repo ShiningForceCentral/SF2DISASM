@@ -82,7 +82,7 @@
             if (STANDARD_BUILD=1)
                 include "code\gameflow\battle\battleactions\dropenemyitem-standard.asm"
             else
-                include "code\gameflow\battle\battleactions\writebattlescenecommanddropenemyitem.asm"    ; Write Battlescene Command : Drop Enemy Item function
+                include "code\gameflow\battle\battleactions\dropenemyitem.asm"    ; Write Battlescene Command : Drop Enemy Item function
             endif
                 include "data\battles\global\enemyitemdrops.asm"    ; Enemy item drops
                 align

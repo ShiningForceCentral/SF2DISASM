@@ -19,7 +19,7 @@ MainLoop:
 loc_75C8:
                 
                 bsr.w   CheckMapSwitch  ; Check table "FlagSwitchedMaps" for possible flag-triggered map switch
-                bsr.w   CheckBattle     ; Check table "BattleMapCoords" and then "Battle unlocked" flags for possible battle according to map and player coords
+                bsr.w   CheckBattle     ; Check table "BattleMapCoordinates" and then "Battle unlocked" flags for possible battle according to map and player position
                 cmpi.w  #$FFFF,d7
                 beq.w   loc_75E4        ; If battle index available, enter battle loop
                 move.w  d7,d1

@@ -852,43 +852,21 @@ allyCombatant: macro
     dc.b \3
     endm
     
-allyFillA: macro
-    dc.b AI_HEALER1
-    dc.w ITEM_NOTHING
-    dc.b ORDER_NONE
-    dc.b $F
-    dc.b ORDER_NONE
-    dc.b $F
-    dc.b $0
-    dc.b SPAWN_STARTING
-    endm
-    
-allyFillB: macro
-    dc.b AI_HEALER1
-    dc.w ITEM_NOTHING
-    dc.b ORDER_NONE
-    dc.b $0
-    dc.b ORDER_NONE
-    dc.b $0
-    dc.b $0
-    dc.b SPAWN_STARTING
-    endm
-    
 enemyCombatant: macro
     defineShorthand.b ENEMY_,\1
     dc.b \2
     dc.b \3
     endm
     
-enemyAIandItem: macro
-    defineShorthand.b AI_,\1
+combatantAiAndItem: macro
+    defineShorthand.b AICOMMANDSET_,\1
     defineBitfield.w ITEM_,\2
     endm
     
-enemyBehavior: macro
-    defineBitfield.b ORDER_,\1
+combatantBehavior: macro
+    defineBitfield.b AIORDER_,\1
     dc.b \2
-    defineBitfield.b ORDER_,\3
+    defineBitfield.b AIORDER_,\3
     dc.b \4
     dc.b \5
     defineBitfield.b SPAWN_,\6

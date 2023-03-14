@@ -10,7 +10,7 @@ ms_map1_InitFunction:
                  
                 chkFlg  21              ; Taya joined
                 beq.s   return_5E770
-                move.w  #$88,d0 
+                move.w  #136,d0
                 jsr     MoveEntityOutOfMap
 return_5E770:
                 

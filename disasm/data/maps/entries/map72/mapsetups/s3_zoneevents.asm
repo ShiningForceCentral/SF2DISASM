@@ -38,13 +38,13 @@ Map72_ZoneEvent3:
                 chkFlg  256             ; TEMP FLAG #00
                 bne.s   return_4FF04
                 clrFlg  256             ; TEMP FLAG #00
-                moveq   #ITEM_CANNON,d1 
+                moveq   #ITEM_CANNON,d1
                 jsr     j_GetItemInventoryLocation
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.s   loc_4FEF4
-                moveq   #ITEM_DYNAMITE,d1 
+                moveq   #ITEM_DYNAMITE,d1
                 jsr     j_GetItemInventoryLocation
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.s   loc_4FEE6
                 moveq   #ITEM_CANNON,d0 
                 jsr     RemoveItemFromInventory

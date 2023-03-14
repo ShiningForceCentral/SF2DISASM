@@ -26,14 +26,14 @@ BuildMiniStatusWindow:
                 ; Get highest of HP or MP stat bar length -> D6
                 ext.w   d0
                 move.w  d0,combatant(a6)
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 move.w  d1,d2
-                jsr     j_GetMaxHP
+                jsr     j_GetMaxHp
                 move.w  d1,d3
                 movem.w d2-d3,-(sp)     ; -> push current/max HP values
-                jsr     j_GetCurrentMP
+                jsr     j_GetCurrentMp
                 move.w  d1,d2
-                jsr     j_GetMaxMP
+                jsr     j_GetMaxMp
                 move.w  d1,d3
                 movem.w (sp)+,d0-d1     ; D0, D1 <- pull current/max HP values
                 move.w  d1,d6

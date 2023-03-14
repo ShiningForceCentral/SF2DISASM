@@ -31,7 +31,7 @@ ExecuteAiCommand_Heal:
                 
                 ; Check if the first enemy is at less than 50% HP
                 move.w  #COMBATANT_ENEMIES_START,d0
-                bsr.w   IsCombatantAtLessThanHalfHP?
+                bsr.w   IsCombatantAtLessThanHalfHp
                 blo.s   @CheckHealingSpell  ; if the first monster is at 50% or more HP then skip this section
                 
                 ; Aura 4 check --> If the first monster is at less than 50% HP and the caster has Aura 4, cast it
@@ -78,9 +78,9 @@ ExecuteAiCommand_Heal:
                 ;  d2 = chosen y pos for monster to move to
                 clr.w   d0
                 move.b  caster(a6),d0
-                bsr.w   GetYPos         ; In: d0 = character index; Out: d1 = Y position
+                bsr.w   GetCombatantY   ; In: d0 = character index; Out: d1 = Y position
                 move.w  d1,d2
-                bsr.w   GetXPos
+                bsr.w   GetCombatantX
                 
                 ; The regular code builds a list of possible targets at a0, with d6 being the offset for the target.
                 ; Below a list of a single byte containing the caster's combatant offset is created at a0, with d6 = 0 so that it is selected.
@@ -121,20 +121,20 @@ ExecuteAiCommand_Heal:
                 
                 move.b  caster(a6),d0
                 bpl.s   @AllyCaster
-                bsr.w   MakeTargetsList_Enemies
+                bsr.w   PopulateTargetsArrayWithEnemies
                 bra.s   @UpdateTargetsList
 @AllyCaster:
                 
-                bsr.w   MakeTargetsList_Allies
+                bsr.w   PopulateTargetsArrayWithAllies
 @UpdateTargetsList:
                 
                 move.w  #$FFFF,d3
-                bsr.w   UpdateTargetsList_Allies
+                bsr.w   UpdateBattleTerrainOccupiedByAllies
                 move.b  caster(a6),d0
                 bsr.w   GetMoveInfo     
-                bsr.w   MakeRangeLists
+                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
                 clr.w   d3
-                bsr.w   UpdateTargetsList_Allies
+                bsr.w   UpdateBattleTerrainOccupiedByAllies
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a0
                 clr.w   d3
                 move.b  caster(a6),d0
@@ -208,7 +208,7 @@ ExecuteAiCommand_Heal:
                 move.b  (a0,d4.w),d0
                 clr.w   d1
                 move.b  spellEntry(a6),d1
-                bsr.w   CreateTargetGrid
+                bsr.w   PopulateTargetableGrid
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d5
                 subq.w  #1,d5
                 beq.s   @RecordTotalPriority    ; if no targets are found in AOE
@@ -385,7 +385,7 @@ ExecuteAiCommand_Heal:
                 move.b  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4400_LOADING_SPACE).l,a3
-                bsr.w   MakeAiMoveString
+                bsr.w   BuildAiMoveString
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a1
                 clr.w   d0
                 move.b  (a0,d6.w),d0
@@ -442,9 +442,9 @@ GetClosestHealingPositionForSpell:
                 bsr.w   GetSpellRange   ; In:  d1 = spell index; Out: d3 = max range; d4 = min range
 GetClosestHealingPosition:
                 
-                bsr.w   GetYPos
+                bsr.w   GetCombatantY
                 move.w  d1,d2
-                bsr.w   GetXPos
+                bsr.w   GetCombatantX
                 bsr.w   GetClosestAttackPosition    ; closest attack position of the unit whose turn it is to attack unit d0
                 cmpi.b  #$FF,d1
                 rts

@@ -79,7 +79,7 @@
                 
 @CheckSpecialPromo4:
                 move.w  currentClass(a6),d1
-                move.w  #PROMOTIONSECTION_TOME_BASE,d2
+                move.w  #PROMOTIONSECTION_BOOK_BASE,d2
                 bsr.w   GetPromotionData
                 tst.w   cannotPromoteFlag(a6)
                 bne.s   @CheckSpecialPromo5
@@ -87,7 +87,7 @@
                 clr.w   promotionItem(a6)
                 move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
-                move.w  #PROMOTIONSECTION_TOME_PROMO,d2
+                move.w  #PROMOTIONSECTION_BOOK_PROMO,d2
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
                 move.w  #ITEM_SECRET_BOOK,d1
