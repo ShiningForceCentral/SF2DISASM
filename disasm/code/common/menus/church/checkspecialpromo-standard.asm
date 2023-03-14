@@ -53,13 +53,15 @@
                 txt     144             ; "Then"
                 bra.s   @Start_Loop
                 
-                
-@ChangeSpells:  cmpi.w  #CLASS_SORC,newClass(a6)
-                bne.s   @RemoveItem
+@ChangeSpells:  lea     tbl_LoseAllSpellsClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #1,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @RemoveItem
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     145             ; "{NAME} loses all spells{N}that were learned.{N}OK?"
                 jsr     YesNoChoiceBox
-                bne.s   @Start_Loop
+                bne.w   @Start_Loop
                 
 @RemoveItem:    move.w  promotionItem(a6),d0
                 jsr     RemoveItemFromInventory
