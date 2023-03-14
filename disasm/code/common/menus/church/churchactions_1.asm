@@ -431,9 +431,8 @@ ChurchMenuActions:
                 move.w  cursedMembersCount(a6),d0 ; temporary variable : index of member holding promotion item
                 move.w  itemsHeldNumber(a6),d1 ; temporary variable : item slot
                 jsr     j_RemoveItemBySlot
-            endif
-                
                 bra.w   @DoPromo
+            endif
 @CheckRegularPromo:
                 
                 move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
@@ -441,7 +440,7 @@ ChurchMenuActions:
                 bsr.w   GetPromotionData
                 move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
-                move.w  #1,d2
+                move.w  #PROMOTIONSECTION_REGULAR_PROMO,d2
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
                 clr.w   d0
@@ -467,16 +466,33 @@ ChurchMenuActions:
                 move.w  newClass(a6),d1
                 jsr     j_SetClass
                 jsr     j_Promote
+            if (STANDARD_BUILD=1)
+                lea     tbl_LoseAllSpellsClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #1,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @CheckNewWeaponTypeClasses
+                move.b  (a0),d1         ; d1.w = replacement spell entry
+            else
                 cmpi.w  #CLASS_SORC,newClass(a6)
                 bne.s   @CheckNewWeaponTypeClasses
+            endif
                 bsr.w   ReplaceSpellsWithSORCdefaults
 @CheckNewWeaponTypeClasses:
                 
+            if (STANDARD_BUILD=1)
+                lea     tbl_DifferentWeaponTypeClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @sndCom_PromotionMusic
+            else
                 cmpi.w  #CLASS_MMNK,newClass(a6)
                 beq.s   @UnequipWeapon  
                 cmpi.w  #CLASS_NINJ,newClass(a6)
                 beq.s   @UnequipWeapon  
                 bra.w   @sndCom_PromotionMusic
+            endif
 @UnequipWeapon:
                 
                 move.w  member(a6),d0   ; new class uses a different type of weapon, so unequip weapon
@@ -541,14 +557,3 @@ ChurchMenuActions:
 
     ; End of function ChurchMenuActions
 
-            if (STANDARD_BUILD=1)
-PromoWithItem:  move.b  (a0)+,d0
-                dbf     d7,PromoWithItem
-                move.w  d0,newClass(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  promotionItem(a6),((TEXT_NAME_INDEX_3-$1000000)).w
-                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                txt     143             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
-                txt     147             ; "OK?"
-                rts
-            endif

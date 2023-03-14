@@ -932,7 +932,9 @@ equipFlags: macro
     endm
     
 equipFlags2: macro
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
     defineBitfield.l EQUIPFLAG2_,\1
+    endc
     endm
     
 range: macro Min,Max
