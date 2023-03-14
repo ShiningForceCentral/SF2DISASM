@@ -4,19 +4,19 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Initialise Huffman decoder
+; Initialize Huffman decoder.
 ; - clear Huffman (script) data
 ; - set starting tree
 
 
-InitDecoder:
+InitializeHuffmanDecoder:
                 
                 move.b  #$FE,(DECODED_TEXT_SYMBOL).l
                 clr.w   (STRING_BIT_COUNTER).l
                 clr.w   (STRING_BYTE).l
                 rts
 
-    ; End of function InitDecoder
+    ; End of function InitializeHuffmanDecoder
 
 
 ; =============== S U B R O U T I N E =======================================

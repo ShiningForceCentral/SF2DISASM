@@ -1,100 +1,100 @@
 
 ; ASM FILE data\graphics\battles\battlesprites\allies\entries.asm :
 ; 0x18001C..0x1AA16E : Ally battlesprites
-pt_AllyBattleSprites:
-                dc.l AllyBattleSprite00
-                dc.l AllyBattleSprite01
-                dc.l AllyBattleSprite02
-                dc.l AllyBattleSprite03
-                dc.l AllyBattleSprite04
-                dc.l AllyBattleSprite05
-                dc.l AllyBattleSprite06
-                dc.l AllyBattleSprite07
-                dc.l AllyBattleSprite08
-                dc.l AllyBattleSprite09
-                dc.l AllyBattleSprite10
-                dc.l AllyBattleSprite11
-                dc.l AllyBattleSprite12
-                dc.l AllyBattleSprite13
-                dc.l AllyBattleSprite14
-                dc.l AllyBattleSprite15
-                dc.l AllyBattleSprite16
-                dc.l AllyBattleSprite17
-                dc.l AllyBattleSprite18
-                dc.l AllyBattleSprite19
-                dc.l AllyBattleSprite20
-                dc.l AllyBattleSprite21
-                dc.l AllyBattleSprite22
-                dc.l AllyBattleSprite23
-                dc.l AllyBattleSprite24
-                dc.l AllyBattleSprite25
-                dc.l AllyBattleSprite26
-                dc.l AllyBattleSprite27
-                dc.l AllyBattleSprite28
-                dc.l AllyBattleSprite29
-                dc.l AllyBattleSprite30
-                dc.l AllyBattleSprite31
-AllyBattleSprite00:
+pt_AllyBattlesprites:
+                dc.l AllyBattlesprite00
+                dc.l AllyBattlesprite01
+                dc.l AllyBattlesprite02
+                dc.l AllyBattlesprite03
+                dc.l AllyBattlesprite04
+                dc.l AllyBattlesprite05
+                dc.l AllyBattlesprite06
+                dc.l AllyBattlesprite07
+                dc.l AllyBattlesprite08
+                dc.l AllyBattlesprite09
+                dc.l AllyBattlesprite10
+                dc.l AllyBattlesprite11
+                dc.l AllyBattlesprite12
+                dc.l AllyBattlesprite13
+                dc.l AllyBattlesprite14
+                dc.l AllyBattlesprite15
+                dc.l AllyBattlesprite16
+                dc.l AllyBattlesprite17
+                dc.l AllyBattlesprite18
+                dc.l AllyBattlesprite19
+                dc.l AllyBattlesprite20
+                dc.l AllyBattlesprite21
+                dc.l AllyBattlesprite22
+                dc.l AllyBattlesprite23
+                dc.l AllyBattlesprite24
+                dc.l AllyBattlesprite25
+                dc.l AllyBattlesprite26
+                dc.l AllyBattlesprite27
+                dc.l AllyBattlesprite28
+                dc.l AllyBattlesprite29
+                dc.l AllyBattlesprite30
+                dc.l AllyBattlesprite31
+AllyBattlesprite00:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite00.bin"
-AllyBattleSprite01:
+AllyBattlesprite01:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite01.bin"
-AllyBattleSprite02:
+AllyBattlesprite02:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite02.bin"
-AllyBattleSprite03:
+AllyBattlesprite03:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite03.bin"
-AllyBattleSprite04:
+AllyBattlesprite04:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite04.bin"
-AllyBattleSprite05:
+AllyBattlesprite05:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite05.bin"
-AllyBattleSprite06:
+AllyBattlesprite06:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite06.bin"
-AllyBattleSprite07:
+AllyBattlesprite07:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite07.bin"
-AllyBattleSprite08:
+AllyBattlesprite08:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite08.bin"
-AllyBattleSprite09:
+AllyBattlesprite09:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite09.bin"
-AllyBattleSprite10:
+AllyBattlesprite10:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite10.bin"
-AllyBattleSprite11:
+AllyBattlesprite11:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite11.bin"
-AllyBattleSprite12:
+AllyBattlesprite12:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite12.bin"
-AllyBattleSprite13:
+AllyBattlesprite13:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite13.bin"
-AllyBattleSprite14:
+AllyBattlesprite14:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite14.bin"
-AllyBattleSprite15:
+AllyBattlesprite15:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite15.bin"
-AllyBattleSprite16:
+AllyBattlesprite16:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite16.bin"
-AllyBattleSprite17:
+AllyBattlesprite17:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite17.bin"
-AllyBattleSprite18:
+AllyBattlesprite18:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite18.bin"
-AllyBattleSprite19:
+AllyBattlesprite19:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite19.bin"
-AllyBattleSprite20:
+AllyBattlesprite20:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite20.bin"
-AllyBattleSprite21:
+AllyBattlesprite21:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite21.bin"
-AllyBattleSprite22:
+AllyBattlesprite22:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite22.bin"
-AllyBattleSprite23:
+AllyBattlesprite23:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite23.bin"
-AllyBattleSprite24:
+AllyBattlesprite24:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite24.bin"
-AllyBattleSprite25:
+AllyBattlesprite25:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite25.bin"
-AllyBattleSprite26:
+AllyBattlesprite26:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite26.bin"
-AllyBattleSprite27:
+AllyBattlesprite27:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite27.bin"
-AllyBattleSprite28:
+AllyBattlesprite28:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite28.bin"
-AllyBattleSprite29:
+AllyBattlesprite29:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite29.bin"
-AllyBattleSprite30:
+AllyBattlesprite30:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite30.bin"
-AllyBattleSprite31:
+AllyBattlesprite31:
                 incbin "data/graphics/battles/battlesprites/allies/allybattlesprite31.bin"

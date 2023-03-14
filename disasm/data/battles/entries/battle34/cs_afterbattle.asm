@@ -111,9 +111,9 @@ cs_4D692:       csc_end
 
 csub_4D694:
                 
-                moveq   #$71,d0 
+                moveq   #ITEM_SKY_ORB,d0
                 moveq   #1,d1
-                jmp     GetMandatoryItem
+                jmp     ReceiveMandatoryItem
 
     ; End of function csub_4D694
 

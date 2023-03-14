@@ -74,7 +74,7 @@ GenerateBattleTurnOrder:
 
 AddTurnOrderEntries_Loop:
                 
-                jsr     GetXPos
+                jsr     GetCombatantX
                 bmi.s   @HandleNextCombatant
                 jsr     GetCurrentHP
                 beq.s   @HandleNextCombatant

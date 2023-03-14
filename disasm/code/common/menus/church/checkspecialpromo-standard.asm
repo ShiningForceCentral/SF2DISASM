@@ -3,139 +3,63 @@
 
 ; ChurchMenuActions:@CheckSpecialPromo
                 
-                move.w  currentClass(a6),d1
-                move.w  #PROMOTIONSECTION_VIGOR_BASE,d2
+                lea     tbl_PromotionItems(pc), a1
+                clr.w   promotionItem(a6)
+                clr.w   d1
+                
+                ; Do we possess a special promotion item?
+@Start_Loop:    cmpi.b  #CODE_TERMINATOR_BYTE,(a1)
+                beq.w   @CheckRegularPromo
+                move.b  (a1)+,d1                    ; d1.w = special promo item
+                move.b  d1,promotionItem(a6)
+                jsr     GetItemInventoryLocation
+                bpl.s   @Break
+                
+@NextItem:      addq.l  #2,a1
+                bra.s   @Start_Loop
+                
+                ; Is current class eligible to use this item to promote?
+@Break:         move.w  currentClass(a6),d1
+                clr.w   d2
+                move.b  (a1)+,d2                    ; d2.w = base classes section
                 bsr.w   GetPromotionData
                 tst.w   cannotPromoteFlag(a6)
-                bne.s   @CheckSpecialPromo2
+                bne.s   @NextItem
                 
-                clr.w   promotionItem(a6)
+                ; Get new class
                 move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
-                move.w  #PROMOTIONSECTION_VIGOR_PROMO,d2
+                move.b  (a1)+,d2                    ; d2.w = promoted classes section
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
-                move.w  #ITEM_VIGOR_BALL,d1
-                jsr     GetItemInventoryLocation
-                cmpi.w  #-1,d0
-                beq.s   @CheckSpecialPromo2
-                
-                move.w  #ITEM_VIGOR_BALL,promotionItem(a6)
                 clr.w   d0
-                bsr.w   PromoWithItem
-                jsr     YesNoChoiceBox
-                beq.w   @ChangeSpells
-                txt     144             ; "Then"
+@GetSpecialClass_Loop:
                 
-@CheckSpecialPromo2:
-                move.w  currentClass(a6),d1
-                move.w  #PROMOTIONSECTION_WING_BASE,d2
-                bsr.w   GetPromotionData
-                tst.w   cannotPromoteFlag(a6)
-                bne.s   @CheckSpecialPromo3
+                move.b  (a0)+,d0
+                dbf     d7,@GetSpecialClass_Loop
                 
-                clr.w   promotionItem(a6)
-                move.w  promotionSectionOffset(a6),d7
-                subq.w  #1,d7
-                move.w  #PROMOTIONSECTION_WING_PROMO,d2
-                bsr.w   FindPromotionSection
-                addq.w  #1,a0
-                move.w  #ITEM_PEGASUS_WING,d1
-                jsr     GetItemInventoryLocation
-                cmpi.w  #-1,d0
-                beq.s   @CheckSpecialPromo3
-                
-                move.w  #ITEM_PEGASUS_WING,promotionItem(a6)
-                clr.w   d0
-                bsr.w   PromoWithItem
-                jsr     YesNoChoiceBox
-                beq.w   @ChangeSpells
-                txt     144             ; "Then"
-                
-@CheckSpecialPromo3:
-                move.w  currentClass(a6),d1
-                move.w  #PROMOTIONSECTION_PRIDE_BASE,d2
-                bsr.w   GetPromotionData
-                tst.w   cannotPromoteFlag(a6)
-                bne.s   @CheckSpecialPromo4
-                
-                clr.w   promotionItem(a6)
-                move.w  promotionSectionOffset(a6),d7
-                subq.w  #1,d7
-                move.w  #PROMOTIONSECTION_PRIDE_PROMO,d2
-                bsr.w   FindPromotionSection
-                addq.w  #1,a0
-                move.w  #ITEM_WARRIORS_PRIDE,d1
-                jsr     GetItemInventoryLocation
-                cmpi.w  #-1,d0
-                beq.s   @CheckSpecialPromo4
-                
-                move.w  #ITEM_WARRIORS_PRIDE,promotionItem(a6)
-                clr.w   d0
-                bsr.w   PromoWithItem
-                jsr     YesNoChoiceBox
-                beq.w   @ChangeSpells
-                txt     144             ; "Then"
-                
-@CheckSpecialPromo4:
-                move.w  currentClass(a6),d1
-                move.w  #PROMOTIONSECTION_TOME_BASE,d2
-                bsr.w   GetPromotionData
-                tst.w   cannotPromoteFlag(a6)
-                bne.s   @CheckSpecialPromo5
-                
-                clr.w   promotionItem(a6)
-                move.w  promotionSectionOffset(a6),d7
-                subq.w  #1,d7
-                move.w  #PROMOTIONSECTION_TOME_PROMO,d2
-                bsr.w   FindPromotionSection
-                addq.w  #1,a0
-                move.w  #ITEM_SECRET_BOOK,d1
-                jsr     GetItemInventoryLocation
-                cmpi.w  #-1,d0
-                beq.s   @CheckSpecialPromo5
-                
-                move.w  #ITEM_SECRET_BOOK,promotionItem(a6)
-                clr.w   d0
-                bsr.w   PromoWithItem
+                ; Confirm action
+                move.w  d0,newClass(a6)
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  promotionItem(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                txt     143             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
+                txt     147             ; "OK?"
                 jsr     YesNoChoiceBox
                 beq.s   @ChangeSpells
                 txt     144             ; "Then"
+                bra.s   @NextItem
                 
-@CheckSpecialPromo5:
-                move.w  currentClass(a6),d1
-                move.w  #PROMOTIONSECTION_TANK_BASE,d2
-                bsr.w   GetPromotionData
-                tst.w   cannotPromoteFlag(a6)
-                bne.s   @CheckRegularPromo
                 
-                clr.w   promotionItem(a6)
-                move.w  promotionSectionOffset(a6),d7
-                subq.w  #1,d7
-                move.w  #PROMOTIONSECTION_TANK_PROMO,d2
-                bsr.w   FindPromotionSection
-                addq.w  #1,a0
-                move.w  #ITEM_SILVER_TANK,d1
-                jsr     GetItemInventoryLocation
-                cmpi.w  #-1,d0
-                beq.s   @CheckRegularPromo
-                
-                move.w  #ITEM_SILVER_TANK,promotionItem(a6)
-                clr.w   d0
-                bsr.w   PromoWithItem
-                jsr     YesNoChoiceBox
-                beq.s   @ChangeSpells
-                txt     144             ; "Then"
-                bra.s   @CheckRegularPromo
-@ChangeSpells:
-                
-                cmpi.w  #CLASS_SORC,newClass(a6)
-                bne.s   @RemovePromoItem
+@ChangeSpells:  cmpi.w  #CLASS_SORC,newClass(a6)
+                bne.s   @RemoveItem
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     145             ; "{NAME} loses all spells{N}that were learned.{N}OK?"
                 jsr     YesNoChoiceBox
-                bne.w   @RestartPromo
-@RemovePromoItem:
+                bne.s   @NextItem
                 
-                move.w  promotionItem(a6),d0
+@RemoveItem:    move.w  promotionItem(a6),d0
                 jsr     RemoveItemFromInventory
+                bra.s   @DoPromo
+                
+; ChurchMenuActions:@CheckRegularPromo

@@ -8,9 +8,9 @@
 sub_D3CA:
                 
                 movem.l d1-d2,-(sp)
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 move.w  d1,d2
-                jsr     GetMaxMP
+                jsr     GetMaxMp
                 bra.w   loc_D3FC
 
     ; End of function sub_D3CA
@@ -23,7 +23,7 @@ sub_D3E0:
                 
                 movem.l d1-d2,-(sp)
                 move.w  d1,d2
-                jsr     GetMaxMP
+                jsr     GetMaxMp
                 bra.w   loc_D3FC
 
     ; End of function sub_D3E0
@@ -36,7 +36,7 @@ sub_D3F0:
                 
                 movem.l d1-d2,-(sp)
                 move.w  d1,d2
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
 loc_D3FC:
                 
                 mulu.w  #3,d2
@@ -146,7 +146,7 @@ MakePrioritiesListForSpell_Attack:
                 clr.w   d0
                 move.b  (a1,d4.w),d0
                 move.w  #SPELL_DISPEL|SPELL_LV2,d1
-                bsr.w   CreateTargetGrid
+                bsr.w   PopulateTargetableGrid
                 bsr.w   CalculateAttackSpellTargetPriority
                 tst.w   d1
                 beq.s   @Next
@@ -207,7 +207,7 @@ loc_D52E:
                 clr.w   d0
                 move.b  (a1,d4.w),d0
                 move.w  #SPELL_DISPEL|SPELL_LV2,d1
-                bsr.w   CreateTargetGrid
+                bsr.w   PopulateTargetableGrid
                 bsr.w   CalculateBoostSpellTargetPriority
                 tst.w   d1
                 beq.s   loc_D550
@@ -256,7 +256,7 @@ MakePrioritiesListForSpell_Dispel:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  #SPELL_DISPEL,d1
-                bsr.w   CreateTargetGrid
+                bsr.w   PopulateTargetableGrid
                 bsr.w   CalculateDispelSpellTargetPriority
                 move.b  d1,(a2)+
                 dbf     d5,@GetTargetsPriority_Loop
@@ -346,7 +346,7 @@ MakePrioritiesListForSpell_Muddle2:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  #SPELL_MUDDLE|SPELL_LV2,d1
-                bsr.w   CreateTargetGrid
+                bsr.w   PopulateTargetableGrid
                 move.w  (a3),d2         ; d2.w = number of targets in area of effect
                 move.b  d2,(a2)+
                 dbf     d5,@GetTargetsPriority_Loop
@@ -492,7 +492,7 @@ CalculateBoostSpellTargetPriority:
                 cmpi.b  #$FF,d2
                 beq.s   @Next
                 move.w  d2,d0
-                bsr.w   GetCurrentHP
+                bsr.w   GetCurrentHp
                 tst.w   d1
                 beq.s   @Next
                 addi.w  #1,d5
@@ -554,13 +554,13 @@ CalculateAttackSpellTargetPriority:
                 
                 ; Check if target's last target is still alive
                 move.w  d2,d0
-                bsr.w   GetCurrentHP
+                bsr.w   GetCurrentHp
                 tst.w   d1
                 beq.s   @Next
                 
                 ; 
                 move.b  (a0,d4.w),d0
-                bsr.w   GetCurrentATT
+                bsr.w   GetCurrentAtt
                 move.w  #255,d0
                 sub.w   d1,d0
                 add.w   d0,d5

@@ -40,7 +40,7 @@ DetermineIneffectiveAttack:
                 cmpi.w  #BATTLEACTION_ATTACK,(a3)
                 bne.w   @CheckFlag
                 move.b  (a5),d0
-                jsr     GetEnemyIndex   
+                jsr     GetEnemy        
                 cmpi.w  #ENEMY_TAROS,d1
                 bne.w   @CheckFlag
                 move.b  (a4),d0
@@ -51,7 +51,7 @@ DetermineIneffectiveAttack:
 @CheckFlag:
                 
                 move.b  (a5),d0
-                jsr     GetEnemyIndex   
+                jsr     GetEnemy        
                 cmpi.w  #ENEMY_TAROS,d1
                 bne.s   @Skip
                 chkFlg  112             ; Currently attacking Taros with Achilles Sword

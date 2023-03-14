@@ -276,7 +276,7 @@ ShrinkIntoCaravanBowieAndFollowers:
                 bsr.w   WaitForFollowersStopped
                 setSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 moveq   #3,d0
-                jsr     (Sleep).w       
+                jsr     (3844).w        
                 rts
 
     ; End of function ShrinkIntoCaravanBowieAndFollowers

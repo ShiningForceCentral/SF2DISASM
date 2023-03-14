@@ -38,7 +38,7 @@ ms_map37_EntityEvents:
 Map37_EntityEvent0:
                 
                 moveq   #1,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent0
 
@@ -49,7 +49,7 @@ Map37_EntityEvent0:
 Map37_EntityEvent1:
                 
                 moveq   #2,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent1
 
@@ -60,7 +60,7 @@ Map37_EntityEvent1:
 Map37_EntityEvent2:
                 
                 moveq   #3,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent2
 
@@ -71,7 +71,7 @@ Map37_EntityEvent2:
 Map37_EntityEvent3:
                 
                 moveq   #4,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent3
 
@@ -82,7 +82,7 @@ Map37_EntityEvent3:
 Map37_EntityEvent4:
                 
                 moveq   #5,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent4
 
@@ -93,7 +93,7 @@ Map37_EntityEvent4:
 Map37_EntityEvent5:
                 
                 moveq   #6,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent5
 
@@ -104,7 +104,7 @@ Map37_EntityEvent5:
 Map37_EntityEvent6:
                 
                 moveq   #7,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent6
 
@@ -115,7 +115,7 @@ Map37_EntityEvent6:
 Map37_EntityEvent7:
                 
                 moveq   #8,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent7
 
@@ -126,7 +126,7 @@ Map37_EntityEvent7:
 Map37_EntityEvent8:
                 
                 moveq   #9,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent8
 
@@ -137,7 +137,7 @@ Map37_EntityEvent8:
 Map37_EntityEvent9:
                 
                 moveq   #$A,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent9
 
@@ -148,7 +148,7 @@ Map37_EntityEvent9:
 Map37_EntityEvent10:
                 
                 moveq   #$B,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent10
 
@@ -159,7 +159,7 @@ Map37_EntityEvent10:
 Map37_EntityEvent11:
                 
                 moveq   #$C,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent11
 
@@ -170,7 +170,7 @@ Map37_EntityEvent11:
 Map37_EntityEvent12:
                 
                 moveq   #$D,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent12
 
@@ -181,7 +181,7 @@ Map37_EntityEvent12:
 Map37_EntityEvent13:
                 
                 moveq   #$E,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent13
 
@@ -192,7 +192,7 @@ Map37_EntityEvent13:
 Map37_EntityEvent14:
                 
                 moveq   #$F,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent14
 
@@ -203,7 +203,7 @@ Map37_EntityEvent14:
 Map37_EntityEvent15:
                 
                 moveq   #$10,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent15
 
@@ -214,7 +214,7 @@ Map37_EntityEvent15:
 Map37_EntityEvent16:
                 
                 moveq   #$11,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent16
 
@@ -225,7 +225,7 @@ Map37_EntityEvent16:
 Map37_EntityEvent17:
                 
                 moveq   #$12,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent17
 
@@ -236,7 +236,7 @@ Map37_EntityEvent17:
 Map37_EntityEvent18:
                 
                 moveq   #$13,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent18
 
@@ -247,7 +247,7 @@ Map37_EntityEvent18:
 Map37_EntityEvent19:
                 
                 moveq   #$14,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent19
 
@@ -258,7 +258,7 @@ Map37_EntityEvent19:
 Map37_EntityEvent20:
                 
                 moveq   #$15,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent20
 
@@ -269,7 +269,7 @@ Map37_EntityEvent20:
 Map37_EntityEvent21:
                 
                 moveq   #$16,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent21
 
@@ -280,7 +280,7 @@ Map37_EntityEvent21:
 Map37_EntityEvent22:
                 
                 moveq   #$17,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent22
 
@@ -291,7 +291,7 @@ Map37_EntityEvent22:
 Map37_EntityEvent23:
                 
                 moveq   #$18,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent23
 
@@ -302,7 +302,7 @@ Map37_EntityEvent23:
 sub_5F9A0:
                 
                 moveq   #$19,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function sub_5F9A0
 
@@ -325,7 +325,7 @@ Map37_EntityEvent24:
 sub_5F9AE:
                 
                 moveq   #$1B,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function sub_5F9AE
 
@@ -336,7 +336,7 @@ sub_5F9AE:
 sub_5F9B6:
                 
                 moveq   #$1C,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function sub_5F9B6
 
@@ -347,7 +347,7 @@ sub_5F9B6:
 Map37_EntityEvent25:
                 
                 moveq   #$1D,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent25
 

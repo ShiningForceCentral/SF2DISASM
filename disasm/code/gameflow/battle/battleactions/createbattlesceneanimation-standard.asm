@@ -88,7 +88,7 @@ CreateBattlesceneAnimation:
                 bsr.w   GetClass
                 bra.s   @Continue1
 @Enemy1:        lea     tbl_SpecialCriticalHitsForEnemies(pc), a0
-                bsr.w   GetEnemyIndex
+                bsr.w   GetEnemy
 @Continue1:     jsr     (FindSpecialPropertyWordsAddressForObject).w
                 bcs.s   @CheckUnarmed
                 
@@ -140,7 +140,7 @@ CreateBattlesceneAnimation:
                 bsr.w   GetClass
                 bra.s   @Continue2
 @Enemy2:        lea     tbl_SpellcastAnimationsForEnemies(pc), a0
-                bsr.w   GetEnemyIndex
+                bsr.w   GetEnemy
 @Continue2:     jsr     (FindSpecialPropertyWordsAddressForObject).w
                 bcs.s   @Return
                 move.w  (a0),d5
@@ -159,7 +159,7 @@ CreateBattlesceneAnimation:
                 bsr.w   GetClass
                 bra.s   @Continue2
 @Enemy2:        lea     tbl_UseItemAnimationsForEnemies(pc), a0
-                bsr.w   GetEnemyIndex
+                bsr.w   GetEnemy
 @Continue2:     jsr     (FindSpecialPropertyWordsAddressForObject).w
                 bcs.s   @Return
                 move.w  (a0),d5

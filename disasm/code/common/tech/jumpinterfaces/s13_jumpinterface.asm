@@ -15,51 +15,51 @@ j_LoadBattleTerrainData:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitAllAlliesBattlePositions:
+j_InitializeAllAlliesBattlePositions:
                 
-                jmp     InitAllAlliesBattlePositions(pc)
+                jmp     InitializeAllAlliesBattlePositions(pc)
 
-    ; End of function j_InitAllAlliesBattlePositions
+    ; End of function j_InitializeAllAlliesBattlePositions
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitAllEnemiesBattlePositions:
+j_InitializeAllEnemiesBattlePositions:
                 
-                jmp     InitAllEnemiesBattlePositions(pc)
+                jmp     InitializeAllEnemiesBattlePositions(pc)
 
-    ; End of function j_InitAllEnemiesBattlePositions
+    ; End of function j_InitializeAllEnemiesBattlePositions
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RespawnEnemyIfOpen:
+j_ResetEnemyStatsForRespawn:
                 
-                jmp     UpdateEnemyStatsForRespawn(pc)
+                jmp     ResetEnemyStatsForRespawn(pc)
 
-    ; End of function j_RespawnEnemyIfOpen
+    ; End of function j_ResetEnemyStatsForRespawn
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitEnemyList:
+j_InitializeEnemyList:
                 
-                jmp     InitEnemyList(pc)
+                jmp     InitializeEnemyList(pc)
 
-    ; End of function j_InitEnemyList
+    ; End of function j_InitializeEnemyList
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetEnemyAiTargetPosition:
+j_GetAiSpecialMoveOrderCoordinates:
                 
-                jmp     GetEnemyAiTargetPosition(pc)
+                jmp     GetAiSpecialMoveOrderCoordinates(pc)
 
-    ; End of function j_GetEnemyAiTargetPosition
+    ; End of function j_GetAiSpecialMoveOrderCoordinates
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -85,11 +85,11 @@ j_BattleDebugFunction1B120A:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetCombatantStartingPositions:
+j_GetCombatantStartingPosition:
                 
-                jmp     GetCombatantStartingPositions(pc)
+                jmp     GetCombatantStartingPosition(pc)
 
-    ; End of function j_GetCombatantStartingPositions
+    ; End of function j_GetCombatantStartingPosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -141,11 +141,11 @@ sub_1AC030:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ClearTerrainListObstructions:
+j_ClearBattleTerrainArrayObstructionFlags:
                 
-                jmp     ClearTerrainListObstructions(pc)
+                jmp     ClearBattleTerrainArrayObstructionFlags(pc)
 
-    ; End of function j_ClearTerrainListObstructions
+    ; End of function j_ClearBattleTerrainArrayObstructionFlags
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -173,31 +173,31 @@ j_UpdateTriggeredRegionsAndAi:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetListOfSpawningEnemies:
+j_PopulateTargetsListWithRespawningEnemies:
                 
-                jmp     GetListOfSpawningEnemies(pc)
+                jmp     PopulateTargetsListWithRespawningEnemies(pc)
 
-    ; End of function j_GetListOfSpawningEnemies
+    ; End of function j_PopulateTargetsListWithRespawningEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RandomUnderD6:
+j_GenerateRandomNumberUnderD6:
                 
-                jmp     RandomUnderD6(pc)
+                jmp     GenerateRandomNumberUnderD6(pc)
 
-    ; End of function j_RandomUnderD6
+    ; End of function j_GenerateRandomNumberUnderD6
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DoesBattleUpgrade:
+j_IsBattleUpgradable:
                 
-                jmp     DoesBattleUpgrade(pc)
+                jmp     IsBattleUpgradable(pc)
 
-    ; End of function j_DoesBattleUpgrade
+    ; End of function j_IsBattleUpgradable
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -213,11 +213,11 @@ j_UpgradeBattle:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ShouldBattleUpgrade:
+j_DetermineBattleUpgrade:
                 
-                jmp     ShouldBattleUpgrade(pc)
+                jmp     DetermineBattleUpgrade(pc)
 
-    ; End of function j_ShouldBattleUpgrade
+    ; End of function j_DetermineBattleUpgrade
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -24,7 +24,7 @@ loc_49006:
                 move.l  (a0)+,(a1)+     ; replace palette 1
                 dbf     d0,loc_49006    
                 jsr     (ApplyVIntCramDma).w
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
                 lea     (PALETTE_1_CURRENT).l,a1
@@ -34,7 +34,7 @@ loc_49022:
                 move.l  (a0)+,(a1)+     ; restore original palette
                 dbf     d0,loc_49022    
                 jsr     (ApplyVIntCramDma).w
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 movem.l (sp)+,d0/a0-a1
                 rts

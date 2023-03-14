@@ -53,13 +53,13 @@ FinalCounterAttackCheck:
                 
                 ; Enemies that cannot counter
                 move.b  (a5),d0
-                jsr     GetEnemyIndex   
+                jsr     GetEnemy        
                 cmpi.w  #ENEMY_TAROS,d1 ; HARDCODED enemy indexes
                 beq.w   @ClearCounter
                 
                 ; Enemies that cannot be countered
                 move.b  (a4),d0
-                jsr     GetEnemyIndex   
+                jsr     GetEnemy        
                 cmpi.w  #ENEMY_BURST_ROCK,d1
                 beq.w   @ClearCounter
                 cmpi.w  #ENEMY_KRAKEN_HEAD,d1
