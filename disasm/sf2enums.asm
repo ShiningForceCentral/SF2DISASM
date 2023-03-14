@@ -2878,6 +2878,10 @@ LEFT: equ $2
 DOWN: equ $3
 NO_DIRECTION: equ $FF
 
+; ---------------------------------------------------------------------------
+
+; enum LaserFacing
+
 laserRight = 0
 laserUp    = 1
 laserLeft  = 2
@@ -2889,21 +2893,6 @@ laserUp    = 2
 laserLeft  = 4
 laserDown  = 8
     endif
-
-LASER_RIGHT: equ laserRight
-LASER_UP: equ laserUp
-LASER_LEFT: equ laserLeft
-LASER_DOWN: equ laserDown
-LASER_NONE: equ $FF
-
-; ---------------------------------------------------------------------------
-
-; enum LaserFacing
-
-laserRight = 0
-laserUp    = 1
-laserLeft  = 2
-laserDown  = 3
 
 LASER_RIGHT: equ laserRight
 LASER_UP: equ laserUp
