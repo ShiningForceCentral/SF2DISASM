@@ -40,6 +40,7 @@ tbl_Promotions:
                 promotionSection &      ; 11: Silver Tank promoted classes
                     BRGN
                 
+                
 tbl_PromotionItems:
                 ; Item, base classes section, promoted classes section
                 dc.b ITEM_PEGASUS_WING, 2, 3
@@ -47,5 +48,20 @@ tbl_PromotionItems:
                 dc.b ITEM_SECRET_BOOK, 6, 7
                 dc.b ITEM_VIGOR_BALL, 8, 9
                 dc.b ITEM_SILVER_TANK, 10, 11
+                
+                tableEnd.b
+                
+                
+tbl_LoseAllSpellsClasses:
+                ; Class, replacement spell
+                dc.b CLASS_SORC, SPELL_DAO
+                
+                tableEnd.b
+                
+                
+tbl_DifferentWeaponTypeClasses:
+                ; Classes that have their weapon unequipped when promoting
+                dc.b CLASS_MMNK
+                dc.b CLASS_NINJ
                 
                 tableEnd.b

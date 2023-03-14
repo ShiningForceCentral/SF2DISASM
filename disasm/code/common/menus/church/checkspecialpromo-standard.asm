@@ -13,21 +13,24 @@
                 move.b  (a1)+,d1                    ; d1.w = special promo item
                 move.b  d1,promotionItem(a6)
                 jsr     GetItemInventoryLocation
-                bpl.s   @Break
+                bpl.s   @FoundItem
                 
-@NextItem:      addq.l  #2,a1
+                addq.w  #2,a1
                 bra.s   @Start_Loop
                 
                 ; Is current class eligible to use this item to promote?
-@Break:         move.w  currentClass(a6),d1
+@FoundItem:     move.w  currentClass(a6),d1
                 clr.w   d2
                 move.b  (a1)+,d2                    ; d2.w = base classes section
                 bsr.w   GetPromotionData
                 tst.w   cannotPromoteFlag(a6)
-                bne.s   @NextItem
+                beq.s   @CanPromote
+                
+                addq.w  #1,a1
+                bra.s   @Start_Loop
                 
                 ; Get new class
-                move.w  promotionSectionOffset(a6),d7
+@CanPromote:    move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
                 move.b  (a1)+,d2                    ; d2.w = promoted classes section
                 bsr.w   FindPromotionSection
@@ -48,15 +51,17 @@
                 jsr     YesNoChoiceBox
                 beq.s   @ChangeSpells
                 txt     144             ; "Then"
-                bra.s   @NextItem
+                bra.s   @Start_Loop
                 
-                
-@ChangeSpells:  cmpi.w  #CLASS_SORC,newClass(a6)
-                bne.s   @RemoveItem
+@ChangeSpells:  lea     tbl_LoseAllSpellsClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #1,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @RemoveItem
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     145             ; "{NAME} loses all spells{N}that were learned.{N}OK?"
                 jsr     YesNoChoiceBox
-                bne.s   @NextItem
+                bne.w   @Start_Loop
                 
 @RemoveItem:    move.w  promotionItem(a6),d0
                 jsr     RemoveItemFromInventory

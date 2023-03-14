@@ -417,7 +417,7 @@ ChurchMenuActions:
                 bsr.w   GetPromotionData
                 move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
-                move.w  #1,d2
+                move.w  #PROMOTIONSECTION_REGULAR_PROMO,d2
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
                 clr.w   d0
@@ -443,16 +443,33 @@ ChurchMenuActions:
                 move.w  newClass(a6),d1
                 jsr     j_SetClass
                 jsr     j_Promote
+            if (STANDARD_BUILD=1)
+                lea     tbl_LoseAllSpellsClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #1,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @CheckNewWeaponTypeClasses
+                move.b  (a0),d1         ; d1.w = replacement spell entry
+            else
                 cmpi.w  #CLASS_SORC,newClass(a6)
                 bne.s   @CheckNewWeaponTypeClasses
+            endif
                 bsr.w   ReplaceSpellsWithSORCdefaults
 @CheckNewWeaponTypeClasses:
                 
+            if (STANDARD_BUILD=1)
+                lea     tbl_DifferentWeaponTypeClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @sndCom_PromotionMusic
+            else
                 cmpi.w  #CLASS_MMNK,newClass(a6)
                 beq.s   @UnequipWeapon  
                 cmpi.w  #CLASS_NINJ,newClass(a6)
                 beq.s   @UnequipWeapon  
                 bra.w   @sndCom_PromotionMusic
+            endif
 @UnequipWeapon:
                 
                 move.w  member(a6),d0   ; new class uses a different type of weapon, so unequip weapon
