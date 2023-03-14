@@ -282,16 +282,7 @@ Map22_EntityEvent15:
 
 Map22_EntityEvent13:
                 
-                
-            if (STANDARD_BUILD&MINIATURES_SHOP=1)
-                chkFlg  522
-                beq.s   @ChessPieceDialogue
-                move.b  #30,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     ShopMenuActions
-                rts
-                
-@ChessPieceDialogue:
-            endif
+                 
                 txt     1788            ; "Is healing is my only ability?{N}Ha, ha!  You have a lot to{N}learn!{W1}"
                 rts
 
