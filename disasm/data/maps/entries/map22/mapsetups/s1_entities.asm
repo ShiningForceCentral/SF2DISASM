@@ -13,9 +13,6 @@ ms_map22_Entities:
                 msFixedEntity 15, 2, DOWN, MAPSPRITE_DESKTOP_KING, eas_Init
                 msFixedEntity 8, 7, LEFT, MAPSPRITE_SOLDIER1, eas_Init
                 msFixedEntity 33, 24, LEFT, MAPSPRITE_SOLDIER1, eas_Init
-            if (STANDARD_BUILD&MINIATURES_SHOP=1)
-                msFixedEntity 10, 11, DOWN, MAPSPRITE_SAILOR, eas_Init
-            endif
                 msFixedEntity 24, 5, DOWN, MAPSPRITE_KING, eas_Init
                 msFixedEntity 26, 5, DOWN, MAPSPRITE_QUEEN, eas_Init
                 msFixedEntity 22, 5, DOWN, MAPSPRITE_BISHOP, eas_Init
@@ -35,4 +32,7 @@ ms_map22_Entities:
                 msFixedEntity 63, 63, DOWN, MAPSPRITE_ORB, eas_InitFixedSprite
                 msFixedEntity 63, 63, DOWN, MAPSPRITE_ORB, eas_InitFixedSprite
                 msFixedEntity 63, 63, DOWN, MAPSPRITE_ORB, eas_InitFixedSprite
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                msFixedEntity 10, 11, DOWN, MAPSPRITE_SAILOR, eas_Init
+            endif
                 msEntitiesEnd
