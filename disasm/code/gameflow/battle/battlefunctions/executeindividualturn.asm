@@ -31,19 +31,19 @@ ExecuteIndividualTurn:
                 clrFlg  112             ; Currently attacking Taros with Achilles Sword
 @IsActorAlive:
                 
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.w   @Done           ; skip turn if actor is dead
                 
                 ; Actor is alive
                 move.w  combatant(a6),d0
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 move.w  d1,((word_FFB08E-$1000000)).w
                 move.w  d1,((word_FFB094-$1000000)).w
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  d1,((word_FFB090-$1000000)).w
                 move.w  d1,((word_FFB092-$1000000)).w
-                clr.b   ((word_FFAF8E-$1000000)).w
+                clr.b   ((UNIT_CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
@@ -70,7 +70,7 @@ ExecuteIndividualTurn:
                 bra.w   @PlayerControl  
 @AiControl1:
                 
-                jsr     j_ExecuteAiControl ; AI controlled unit (enemy, auto-control cheat, MUDDLEd force member)
+                jsr     j_StartAiControl ; AI controlled unit (enemy, auto-control cheat, MUDDLEd force member)
 @PlayerControl:
                 
                 bsr.w   WaitForUnitCursor ; player controlled unit (normal force member, enemy with control opponent cheat)
@@ -82,7 +82,7 @@ ExecuteIndividualTurn:
                 jsr     j_CreateLandEffectWindow
                 move.w  combatant(a6),d0
                 jsr     j_GenerateTargetRangeLists
-                bsr.w   CreateMoveableRangeForUnit
+                bsr.w   CreatePulsatingBlocksRange
                 bsr.w   HideUnitCursor
                 move.w  combatant(a6),d0
                 jsr     j_GetStatusEffects
@@ -109,19 +109,19 @@ ExecuteIndividualTurn:
                 bne.w   @AiControl2
 @Continue:
                 
-                bsr.w   sub_24662       
+                bsr.w   HandleBattleEntityControlPlayerInput
                 cmpi.w  #$FFFF,d0
                 bne.w   @CheckBattleaction_CastEgress
                 jsr     (WaitForViewScrollEnd).w
                 move.w  combatant(a6),d0
                 clr.b   ((IS_TARGETING-$1000000)).w
-                jsr     j_HideLandEffectWindow
-                jsr     j_HideMiniStatusWindow
+                jsr     j_RemoveLandEffectWindow
+                jsr     j_RemoveMiniStatusWindow
                 move.w  combatant(a6),d0
                 bsr.w   SetEntityBlinkingFlag
                 move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
-                moveq   #3,d1
+                moveq   #DOWN,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).l
@@ -225,7 +225,7 @@ ExecuteIndividualTurn:
                 
                 move.b  #MUSIC_ENEMY_ATTACK,((BATTLESCENE_MUSIC_INDEX-$1000000)).w 
                                                         ; enemy
-                jsr     j_GetEnemyIndex
+                jsr     j_GetEnemy
                 
                 ; Determine boss attack music
                 cmpi.b  #ENEMY_KRAKEN_HEAD,d1 ; HARDCODED enemy indexes
@@ -313,13 +313,13 @@ ExecuteIndividualTurn:
                 clr.b   ((IS_TARGETING-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
-                moveq   #3,d1
+                moveq   #DOWN,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).l
                 move.w  combatant(a6),d0
-                jsr     j_HideLandEffectWindow
-                jsr     j_HideMiniStatusWindow
+                jsr     j_RemoveLandEffectWindow
+                jsr     j_RemoveMiniStatusWindow
 @Done:
                 
                 unlk    a6

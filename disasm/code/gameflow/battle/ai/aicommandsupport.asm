@@ -55,12 +55,12 @@ ExecuteAiCommand_Support:
                 
                 cmpi.w  #SPELL_MUDDLE|SPELL_LV2,d1 ; HARDCODED spell entries
                 bne.s   @CheckDispel
-                bra.w   @CheckMPcost    
+                bra.w   @CheckMpCost    
 @CheckDispel:
                 
                 cmpi.w  #SPELL_DISPEL,d1
                 bne.s   @DoNothing
-                bra.w   @CheckMPcost    
+                bra.w   @CheckMpCost    
 @DoNothing:
                 
                 move.w  #$FFFF,d1
@@ -69,7 +69,7 @@ ExecuteAiCommand_Support:
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   @Done
-@CheckMPcost:
+@CheckMpCost:
                 
                 move.w  d1,d6           ; d6 = copy of debuff spell entry
                 bsr.w   FindSpellDefAddress
@@ -78,7 +78,7 @@ ExecuteAiCommand_Support:
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d5
                 clr.w   d0
                 move.b  d7,d0
-                bsr.w   GetCurrentMP
+                bsr.w   GetCurrentMp
                 cmp.b   d2,d1
                 bge.s   @CheckTargetingGroup
                 
@@ -95,26 +95,26 @@ ExecuteAiCommand_Support:
                 btst    #SPELLPROPS_BIT_TARGETING,d5
                 move.w  #$FFFF,d3
                 bne.s   @TargetTeammates1
-                bsr.w   UpdateTargetsList_Enemies ; made unreachable by the preceding move.w #$FFFF,d3 instruction
+                bsr.w   UpdateBattleTerrainOccupiedByEnemies ; made unreachable by the preceding move.w #$FFFF,d3 instruction
                 bra.s   @CheckTargetingGroup2
 @TargetTeammates1:
                 
-                bsr.w   UpdateTargetsList_Allies
+                bsr.w   UpdateBattleTerrainOccupiedByAllies
 @CheckTargetingGroup2:
                 
                 move.b  d7,d0
                 bsr.w   GetMoveInfo     
-                bsr.w   MakeRangeLists
+                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
                 btst    #SPELLPROPS_BIT_TARGETING,d5
                 clr.w   d3
                 bne.s   @TargetTeammates2
-                bsr.w   UpdateTargetsList_Enemies
-                bsr.w   MakeTargetsList_Allies
+                bsr.w   UpdateBattleTerrainOccupiedByEnemies
+                bsr.w   PopulateTargetsArrayWithAllies
                 bra.s   @MakeTargetsList
 @TargetTeammates2:
                 
-                bsr.w   UpdateTargetsList_Allies ; made unreachable by the preceding clr.w d3 instruction
-                bsr.w   MakeTargetsList_Enemies
+                bsr.w   UpdateBattleTerrainOccupiedByAllies ; made unreachable by the preceding clr.w d3 instruction
+                bsr.w   PopulateTargetsArrayWithEnemies
 @MakeTargetsList:
                 
                 clr.w   d1
@@ -203,14 +203,14 @@ ExecuteAiCommand_Support:
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_CAST_SPELL,(a0)
                 move.w  d6,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
-                move.w  d0,BATTLEACTION_OFFSET_TARGET(a0)
+                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a0)
                 move.w  d6,d1
                 bsr.w   GetSpellRange   
-                move.w  BATTLEACTION_OFFSET_TARGET(a0),d0
-                bsr.w   MakeTargetsList_Everybody
-                jsr     GetYPos
+                move.w  BATTLEACTION_OFFSET_ACTOR(a0),d0
+                bsr.w   PopulateTargetsArrayWithAllCombatants
+                jsr     GetCombatantY
                 move.w  d1,d2
-                jsr     GetXPos
+                jsr     GetCombatantX
                 bsr.w   GetClosestAttackPosition
                 cmpi.w  #$FF,d1
                 bne.s   @MakeMoveString
@@ -228,7 +228,7 @@ ExecuteAiCommand_Support:
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                bsr.w   MakeAiMoveString
+                bsr.w   BuildAiMoveString
                 clr.w   d1
 @Done:
                 

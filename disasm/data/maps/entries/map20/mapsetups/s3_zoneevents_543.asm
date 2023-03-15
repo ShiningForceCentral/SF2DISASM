@@ -59,7 +59,7 @@ Map20_21F_ZoneEvent1:
                 chkFlg  983
                 bne.s   return_6332E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$80,d0 
+                move.w  #128,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
@@ -84,7 +84,7 @@ Map20_21F_ZoneEvent2:
                 bne.s   return_6335C
                 script  cs_6335E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$80,d0 
+                move.w  #128,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w

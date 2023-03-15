@@ -8,7 +8,7 @@
 PlayIntroOrEndCutscene:
                 
                 move.w  d0,-(sp)
-                jsr     (InitWindowProperties).w
+                jsr     (InitializeWindowProperties).w
                 move.b  #$FF,((byte_FFB198-$1000000)).w
                 move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 trap    #VINT_FUNCTIONS
