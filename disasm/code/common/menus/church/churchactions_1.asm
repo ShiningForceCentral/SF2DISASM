@@ -454,7 +454,7 @@ ChurchMenuActions:
                 cmpi.w  #CLASS_SORC,newClass(a6)
                 bne.s   @CheckNewWeaponTypeClasses
             endif
-                bsr.w   ReplaceSpellsWithSORCdefaults
+                bsr.w   ReplaceSpellsWithSorcDefaults
 @CheckNewWeaponTypeClasses:
                 
             if (STANDARD_BUILD=1)

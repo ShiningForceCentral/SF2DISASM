@@ -375,9 +375,15 @@ PROWESS_INFLICT_AILMENTS_START: equ $9
 
 ; ---------------------------------------------------------------------------
 
-; enum CriticalHitSetting_Offsets
-CRITICALHITSETTING_OFFSET_CHANCE: equ $0
-CRITICALHITSETTING_OFFSET_DAMAGE_MODIFIER: equ $1
+; enum CriticalHitDef_Offsets
+CRITICALHITDEF_OFFSET_CHANCE: equ $0
+CRITICALHITDEF_OFFSET_DAMAGE_FACTOR: equ $1
+
+; ---------------------------------------------------------------------------
+
+; enum CriticalHitDamageFactors
+CRITICAL_HIT_DAMAGE_FACTOR_1: equ $1
+CRITICAL_HIT_DAMAGE_FACTOR_2: equ $2
 
 ; ---------------------------------------------------------------------------
 
