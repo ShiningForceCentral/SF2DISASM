@@ -16,13 +16,15 @@ GetSavePointForMap:
                  
                 module
                 chkFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
-                bne.s   loc_75FC        ; egress always goes back to Bowie's room if you haven't triggered the gizmos cutscene
+                bne.s   @Continue
+                
+                ; Go back to Bowie's room if the gizmos cutscene has not been triggered
                 moveq   #MAP_GRANSEAL,d0 ; HARDCODED initial egress position : map, x, y, facing
                 moveq   #56,d1
                 moveq   #3,d2
                 moveq   #DOWN,d3
                 rts
-loc_75FC:
+@Continue:
                 
                 move.l  a0,-(sp)
                 moveq   #1,d1
@@ -31,7 +33,7 @@ loc_75FC:
                 conditionalPc lea,SavepointMapCoordinates,a0
 @FindEgressEntry_Loop:
                 
-                cmpi.b  #$FF,(a0)
+                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
                 beq.w   byte_7620       ; No match
                 cmp.b   (a0),d0
                 beq.s   @EgressEntryFound
@@ -52,7 +54,7 @@ byte_7620:
 @FindRaftEntry_Loop:
                 
                 addq.l  #4,a0
-                cmpi.b  #$FF,(a0)
+                cmpi.b  #MAP_NONE,(a0)
                 beq.w   @RaftEntryNotFound
                 cmp.b   (a0),d0         ; If found egress map matches entry map, then move raft back to given location
                 bne.s   @FindRaftEntry_Loop

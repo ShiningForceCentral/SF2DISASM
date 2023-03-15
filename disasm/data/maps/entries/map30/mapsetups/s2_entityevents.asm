@@ -105,18 +105,18 @@ sub_5A278:
                 moveq   #0,d0
                 moveq   #0,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
-                cmpi.w  #4,d2
+                cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 bne.s   loc_5A296
                 txt     1729            ; "Oh, your hands are full.{N}I'll give it to you later.{W1}"
                 bra.s   return_5A2C0
 loc_5A296:
                 
                 moveq   #0,d0
-                moveq   #$72,d1 
+                moveq   #ITEM_CANNON,d1
                 jsr     j_AddItem
                 sndCom  MUSIC_ITEM
                 txt     1728            ; "{LEADER} is given a{N}Cannon.{W1}"
-                moveq   #$64,d0 
+                moveq   #100,d0
                 jsr     (Sleep).w       
                 clsTxt
                 setFlg  761             ; Set after the dwarf gives Bowie the cannon

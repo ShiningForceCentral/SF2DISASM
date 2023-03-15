@@ -28,12 +28,12 @@ ChurchMenuActions:
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
                 blt.s   @txt_6E         
-                jsr     j_InitPortraitWindow
+                jsr     j_CreatePortraitWindow
 @txt_6E:
                 
                 txt     110             ; "Welcome!{W2}{N}Your desire will be fulfilled!{W2}"
                 clsTxt
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
 @StartMenu:
                 
                 moveq   #0,d0           ; initial choice : up
@@ -49,12 +49,12 @@ ChurchMenuActions:
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
                 blt.s   @txt_71         
-                jsr     j_InitPortraitWindow
+                jsr     j_CreatePortraitWindow
 @txt_71:
                 
                 txt     113             ; "{CLEAR}Be careful.  The light{N}is always on your side.{W1}"
                 clsTxt
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
@@ -70,7 +70,7 @@ ChurchMenuActions:
                 clr.w   d0
                 move.b  (a0)+,d0
                 move.w  d0,member(a6)
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 bhi.w   @RaiseNextMember
                 addi.w  #1,deadMembersCount(a6)
@@ -112,7 +112,7 @@ ChurchMenuActions:
                 jsr     j_DecreaseGold
                 move.w  member(a6),d0
                 move.w  #CHAR_STATCAP_HP,d1
-                jsr     j_IncreaseCurrentHP
+                jsr     j_IncreaseCurrentHp
                 sndCom  MUSIC_REVIVE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
@@ -220,7 +220,7 @@ ChurchMenuActions:
                 
                 move.w  d6,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   @IsNextItemCursed
                 jsr     j_GetItemDefAddress
                 clr.l   d4
@@ -286,7 +286,7 @@ ChurchMenuActions:
                 txt     136             ; "{CLEAR}Who do you want to{N}promote?{W2}"
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitMemberListScreen
+                jsr     j_InitializeMemberListScreen
                 cmpi.w  #$FFFF,d0
                 bne.w   @CheckPromotableClass
                 txt     137             ; "Oh, I'm wrong.{W2}"
@@ -323,6 +323,9 @@ ChurchMenuActions:
                 bra.w   @RestartPromo
 @CheckSpecialPromo:
                 
+            if (STANDARD_BUILD=1)
+                include "code\common\menus\church\checkspecialpromo-standard.asm"
+            else
                 move.w  currentClass(a6),d1
                 move.w  #PROMOTIONSECTION_SPECIAL_BASE,d2
                 bsr.w   GetPromotionData
@@ -406,6 +409,7 @@ ChurchMenuActions:
                 move.w  itemsHeldNumber(a6),d1 ; temporary variable : item slot
                 jsr     j_RemoveItemBySlot
                 bra.w   @DoPromo
+            endif
 @CheckRegularPromo:
                 
                 move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
@@ -413,7 +417,7 @@ ChurchMenuActions:
                 bsr.w   GetPromotionData
                 move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
-                move.w  #1,d2
+                move.w  #PROMOTIONSECTION_REGULAR_PROMO,d2
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
                 clr.w   d0
@@ -439,16 +443,33 @@ ChurchMenuActions:
                 move.w  newClass(a6),d1
                 jsr     j_SetClass
                 jsr     j_Promote
+            if (STANDARD_BUILD=1)
+                lea     tbl_LoseAllSpellsClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #1,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @CheckNewWeaponTypeClasses
+                move.b  (a0),d1         ; d1.w = replacement spell entry
+            else
                 cmpi.w  #CLASS_SORC,newClass(a6)
                 bne.s   @CheckNewWeaponTypeClasses
+            endif
                 bsr.w   ReplaceSpellsWithSORCdefaults
 @CheckNewWeaponTypeClasses:
                 
+            if (STANDARD_BUILD=1)
+                lea     tbl_DifferentWeaponTypeClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @sndCom_PromotionMusic
+            else
                 cmpi.w  #CLASS_MMNK,newClass(a6)
                 beq.s   @UnequipWeapon  
                 cmpi.w  #CLASS_NINJ,newClass(a6)
                 beq.s   @UnequipWeapon  
                 bra.w   @sndCom_PromotionMusic
+            endif
 @UnequipWeapon:
                 
                 move.w  member(a6),d0   ; new class uses a different type of weapon, so unequip weapon
@@ -470,7 +491,7 @@ ChurchMenuActions:
                 move.b  #1,d1
                 jsr     j_SetLevel
                 clr.w   d1
-                jsr     j_SetCurrentEXP
+                jsr     j_SetCurrentExp
 @RestartPromo:
                 
                 bra.w   @StartPromo     
@@ -512,3 +533,4 @@ ChurchMenuActions:
                 bra.w   @StartMenu      
 
     ; End of function ChurchMenuActions
+

@@ -76,7 +76,7 @@ byte_60494:
                 bne.s   Map5_212_DefaultEntityEvent
                 script  cs_6060E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$1C,d0
+                move.w  #ALLY_LEMON,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w

@@ -137,7 +137,8 @@ FindPromotionSection:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A6 = church actions stack
+; In: a6 = church actions stack
+;     d1.w = replacement spell entry (if STANDARD_BUILD is enabled)
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
@@ -167,10 +168,14 @@ ReplaceSpellsWithSORCdefaults:
                 setSavedByteWithPostIncrement #SPELL_NOTHING, a0
                 dbf     d7,@Loop
                 
+            if (STANDARD_BUILD=1)
+                jmp     LearnSpell
+            else
                 move.w  member(a6),d0
                 move.w  #SPELL_DAO,d1
                 jsr     j_LearnSpell
                 rts
+            endif
 
     ; End of function ReplaceSpellsWithSORCdefaults
 

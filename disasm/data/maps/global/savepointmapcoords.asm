@@ -26,4 +26,4 @@ SavepointMapCoordinates:
                 savePointMapCoords MAP_SECRET_DWARVEN_VILLAGE_OUTSIDE, 55, 10, UP
                 savePointMapCoords MAP_PACALON, 41, 10, UP
                 savePointMapCoords MAP_PACALON_CASTLE, 40, 5, UP
-                dc.b $FF
+                tableEnd.b

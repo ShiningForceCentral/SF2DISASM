@@ -4,13 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get battlescene weapon sprite and palette indexes for equipped weapon.
+; Get battlescene weaponsprite and palette indexes for equipped weapon.
 ; 
 ; In: d0.w = combatant index
-; Out: d2.w = weapon sprite index, d3.w = palette index
+; Out: d2.w = weaponsprite index, d3.w = palette index
 
 
-GetWeaponSpriteAndPalette:
+GetWeaponspriteAndPalette:
                 
                 movem.l d1/a0,-(sp)
                 cmpi.w  #COMBATANT_ENEMIES_START,d0
@@ -39,5 +39,5 @@ GetWeaponSpriteAndPalette:
                 movem.l (sp)+,d1/a0
                 rts
 
-    ; End of function GetWeaponSpriteAndPalette
+    ; End of function GetWeaponspriteAndPalette
 
