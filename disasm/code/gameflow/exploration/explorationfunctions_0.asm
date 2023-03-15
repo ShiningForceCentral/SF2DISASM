@@ -54,7 +54,7 @@ loc_237FE:
                 
                 cmp.b   ((VIEW_TARGET_ENTITY-$1000000)).w,d0
                 beq.w   loc_2382A       ; skip this entity because it's the player!
-                bsr.w   IsFollowerEntity?
+                bsr.w   IsFollowerEntity
                 bne.w   loc_2382A       ; skip this entity because it's a follower!
                 ; get distance from activated block
                 move.w  (a0),d5
@@ -97,7 +97,7 @@ loc_23840:
 ; Is entity d0.b a follower? Return CCR zero-bit set if true.
 
 
-IsFollowerEntity?:
+IsFollowerEntity:
                 
                 movem.l d0/a0,-(sp)
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a0
@@ -114,7 +114,7 @@ IsFollowerEntity?:
                 movem.l (sp)+,d0/a0
                 rts
 
-    ; End of function IsFollowerEntity?
+    ; End of function IsFollowerEntity
 
 
 ; =============== S U B R O U T I N E =======================================

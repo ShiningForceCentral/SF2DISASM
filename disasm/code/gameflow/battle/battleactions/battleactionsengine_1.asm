@@ -71,9 +71,9 @@ loc_9BE4:
                 move.b  d1,explode(a2)
                 move.b  d1,ineffectiveAttack(a2)
                 bsr.w   DetermineTargetsByAction
-                bsr.w   InitBattlesceneProperties
+                bsr.w   InitializeBattlesceneProperties
                 bsr.w   DetermineIneffectiveAttack
-                bsr.w   InitBattlesceneDisplayedCombatants
+                bsr.w   InitializeBattlesceneDisplayedCombatants
                 tst.b   curseInaction(a2)
                 beq.s   loc_9C5A
                 displayMessage #MESSAGE_BATTLE_IS_CURSED_AND_STUNNED,(a4),#0,#0 
@@ -121,6 +121,8 @@ loc_9CB6:
                 bsr.w   FinalDoubleAttackCheck
                 tst.b   doubleAttack(a2)
                 beq.s   loc_9D3E
+                
+                ; Perform second attack
                 move.w  #BATTLEACTION_ATTACKTYPE_SECOND,((BATTLESCENE_ATTACK_TYPE-$1000000)).w
                 moveq   #0,d1
                 move.b  d1,dodge(a2)
@@ -193,7 +195,7 @@ loc_9DC4:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A3 = action data
+; In: a3 = pointer to battleaction type
 
 
 DetermineTargetsByAction:
@@ -201,23 +203,23 @@ DetermineTargetsByAction:
                 cmpi.w  #BATTLEACTION_ATTACK,(a3)
                 bne.s   @CheckCastSpell
                 move.w  #1,((TARGETS_LIST_LENGTH-$1000000)).w
-                move.b  BATTLEACTION_OFFSET_3(a3),((TARGETS_LIST-$1000000)).w
+                move.b  BATTLEACTION_OFFSET_TARGET(a3),((TARGETS_LIST-$1000000)).w
                 bra.s   @Done
 @CheckCastSpell:
                 
                 cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
                 bne.s   @CheckUseItem
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                move.w  BATTLEACTION_OFFSET_TARGET(a3),d0
-                jsr     CreateTargetGridFromSpell
+                move.w  BATTLEACTION_OFFSET_ACTOR(a3),d0
+                jsr     PopulateTargetableGridFromSpell
                 bra.s   @Done
 @CheckUseItem:
                 
                 cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
                 bne.w   @CheckBurstRock
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                move.w  BATTLEACTION_OFFSET_TARGET(a3),d0
-                jsr     CreateTargetGridFromUsedItem
+                move.w  BATTLEACTION_OFFSET_ACTOR(a3),d0
+                jsr     PopulateTargetableGridFromUsedItem
                 bra.s   @Done
 @CheckBurstRock:
                 
@@ -225,7 +227,7 @@ DetermineTargetsByAction:
                 bne.w   @CheckNoAction
                 move.b  (a4),d0
                 move.w  #SPELL_B_ROCK,d1
-                jsr     CreateTargetGridFromSpell
+                jsr     PopulateTargetableGridFromSpell
                 bra.s   @Done
 @CheckNoAction:
                 
@@ -237,7 +239,7 @@ DetermineTargetsByAction:
                 
                 cmpi.w  #BATTLEACTION_PRISM_LASER,(a3)
                 bne.w   @Done
-                jsr     MakeTargetsList_Everybody
+                jsr     PopulateTargetsArrayWithAllCombatants
                 move.b  #$FF,((TARGETS_LIST-$1000000)).w
                 move.b  (a4),d0
                 jsr     j_GetLaserFacing
@@ -251,10 +253,10 @@ DetermineTargetsByAction:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
-;     A3 = pointer to action type in RAM
-;     A4 = pointer to actor index in RAM
-;     A5 = pointer to target index in RAM
+; In: a2 = battlescene script stack frame
+;     a3 = pointer to action type in RAM
+;     a4 = pointer to actor index in RAM
+;     a5 = pointer to target index in RAM
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -279,7 +281,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-InitBattlesceneDisplayedCombatants:
+InitializeBattlesceneDisplayedCombatants:
                 
                 move.b  #$FF,d3
                 move.b  #$FF,d4
@@ -327,5 +329,5 @@ InitBattlesceneDisplayedCombatants:
                 move.b  d4,((BATTLESCENE_LAST_ENEMY-$1000000)).w
                 rts
 
-    ; End of function InitBattlesceneDisplayedCombatants
+    ; End of function InitializeBattlesceneDisplayedCombatants
 

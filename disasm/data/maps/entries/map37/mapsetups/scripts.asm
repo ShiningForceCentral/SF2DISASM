@@ -209,7 +209,7 @@ sub_5FD92:
                 move.b  #1,((FADING_TIMER_BYTE-$1000000)).w
                 lea     plt_5FDB4(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
-                moveq   #$20,d7 
+                moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_1_BASE).l,a0
                 jsr     (sub_19C8).w    

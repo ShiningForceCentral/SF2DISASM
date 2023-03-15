@@ -257,7 +257,7 @@ loc_10220:
                 lsl.w   #2,d0
                 lea     pt_MenuTiles(pc), a0
                 move.l  (a0,d0.w),d0
-                bclr    #$1F,d0
+                bclr    #31,d0
                 bne.s   loc_10250
                 movea.l d0,a0
                 movea.l (a0),a0
@@ -368,14 +368,14 @@ loc_10328:
                 jsr     (a0)
 loc_10356:
                 
-                moveq   #$1D,d6
+                moveq   #29,d6
 loc_10358:
                 
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
                 bsr.w   LoadVdpTileListForDiamenuIcon
                 subq.w  #1,d6
                 bne.s   loc_10366
-                moveq   #$1E,d6
+                moveq   #30,d6
 loc_10366:
                 
                 movem.l d6-d7,-(sp)
@@ -426,7 +426,7 @@ LoadDiamenuWindowVdpTileData:
                 move.w  windowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  #$D8,d7 
+                move.w  #216,d7
                 jsr     (CopyBytes).w   
                 move.w  menuIndex(a6),d0
                 lsl.w   #2,d0
@@ -448,6 +448,8 @@ LoadDiamenuWindowVdpTileData:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d6.w = frame counter
+
 
 LoadVdpTileListForDiamenuIcon:
                 
@@ -465,11 +467,13 @@ rjt_DiamenuIconsLoadingFunctions:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d6.w = frame counter
+
 
 LoadVdpTileListForDiamenuIcon_Top:
                 
                 lea     (FF8804_LOADING_SPACE).l,a0
-                cmpi.w  #$F,d6
+                cmpi.w  #15,d6
                 blt.s   loc_10420
                 adda.w  #$120,a0
 loc_10420:
@@ -484,11 +488,13 @@ loc_10420:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d6.w = frame counter
+
 
 LoadVdpTileListForDiamenuIcon_Left:
                 
                 lea     (byte_FF8A44).l,a0
-                cmpi.w  #$F,d6
+                cmpi.w  #15,d6
                 blt.s   loc_10440
                 adda.w  #$120,a0
 loc_10440:
@@ -505,11 +511,13 @@ loc_10440:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d6.w = frame counter
+
 
 LoadVdpTileListForDiamenuIcon_Right:
                 
                 lea     (byte_FF8C84).l,a0
-                cmpi.w  #$F,d6
+                cmpi.w  #15,d6
                 blt.s   loc_1046A
                 adda.w  #$120,a0
 loc_1046A:
@@ -532,7 +540,7 @@ sub_10484:
                 move.l  a1,-(sp)
                 moveq   #3,d7
                 move.l  a0,-(sp)
-                lea     MenuHBarTiles(pc), a0
+                lea     MenuHBarTiles1(pc), a0
 loc_1048E:
                 
                 move.l  $20(a0),$40(a1)
@@ -554,7 +562,7 @@ loc_104A4:
                 adda.w  #$20,a1 
                 dbf     d7,loc_104A4
                 moveq   #3,d7
-                lea     byte_11336(pc), a0
+                lea     MenuHBarTiles2(pc), a0
 loc_104D0:
                 
                 move.l  $20(a0),$40(a1)
@@ -575,7 +583,7 @@ sub_104E6:
                 move.l  a1,-(sp)
                 moveq   #3,d7
                 move.l  a0,-(sp)
-                lea     byte_11366(pc), a0
+                lea     MenuHBarTiles3(pc), a0
 loc_104F0:
                 
                 move.l  $20(a0),$40(a1)
@@ -597,7 +605,7 @@ loc_10506:
                 adda.w  #$20,a1 
                 dbf     d7,loc_10506
                 moveq   #3,d7
-                lea     byte_11396(pc), a0
+                lea     MenuHBarTiles4(pc), a0
 loc_10532:
                 
                 move.l  $20(a0),$40(a1)
@@ -612,11 +620,13 @@ loc_10532:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d6.w = frame counter
+
 
 LoadVdpTileListForDiamenuIcon_Bottom:
                 
                 lea     (byte_FF8EC4).l,a0
-                cmpi.w  #$F,d6
+                cmpi.w  #15,d6
                 blt.s   loc_10558
                 adda.w  #$120,a0
 loc_10558:
@@ -639,11 +649,12 @@ LoadMainMenuIcon:
                 conditionalLongAddr movea.l, p_MainMenuTiles, a0
                 mulu.w  #GFX_DIAMENU_ICON_PIXELS_NUMBER,d0
                 adda.w  d0,a0
-                move.w  #$8F,d0 
-loc_1057C:
+                move.w  #143,d0
+@Loop:
                 
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_1057C
+                dbf     d0,@Loop
+                
                 move.l  (sp)+,d0
                 rts
 
@@ -694,10 +705,10 @@ loc_105B2:
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
                 clr.w   d6
-                bsr.w   sub_10800
-                bsr.w   sub_10820
-                bsr.w   sub_1084A
-                bsr.w   sub_10920
+                bsr.w   sub_10800       
+                bsr.w   sub_10820       
+                bsr.w   sub_1084A       
+                bsr.w   sub_10920       
                 move.w  windowSlot(a6),d0
                 move.w  #$C15,d1
                 move.w  #4,d2
@@ -788,14 +799,14 @@ loc_106D6:
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
                 move.l  subroutineAddress(a6),d0
-                moveq   #$1D,d6
+                moveq   #29,d6
 loc_106E8:
                 
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
                 bsr.w   sub_107EA       
                 subq.w  #1,d6
                 bne.s   loc_106F6
-                moveq   #$1E,d6
+                moveq   #30,d6
 loc_106F6:
                 
                 jsr     (WaitForVInt).w
@@ -901,6 +912,8 @@ aNothing:       dc.b '\Nothing',0
 ; =============== S U B R O U T I N E =======================================
 
 ; related to menu choice
+; 
+; In: d6.w = frame counter
 
 
 sub_107EA:
@@ -919,11 +932,13 @@ rjt_107F8:      dc.w sub_10800-rjt_107F8
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d6.w = frame counter
+
 
 sub_10800:
                 
                 lea     (FF8804_LOADING_SPACE).l,a0
-                cmpi.w  #$F,d6
+                cmpi.w  #15,d6
                 blt.s   loc_10810
                 adda.w  #$C0,a0 
 loc_10810:
@@ -938,11 +953,13 @@ loc_10810:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d6.w = frame counter
+
 
 sub_10820:
                 
                 lea     (byte_FF8984).l,a0
-                cmpi.w  #$F,d6
+                cmpi.w  #15,d6
                 blt.s   loc_10830
                 adda.w  #$C0,a0 
 loc_10830:
@@ -959,11 +976,13 @@ loc_10830:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d6.w = frame counter
+
 
 sub_1084A:
                 
                 lea     (byte_FF8B04).l,a0
-                cmpi.w  #$F,d6
+                cmpi.w  #15,d6
                 blt.s   loc_1085A
                 adda.w  #$C0,a0 
 loc_1085A:
@@ -985,7 +1004,7 @@ sub_10874:
                 
                 move.l  a1,-(sp)
                 move.l  a0,-(sp)
-                lea     MenuHBarTiles(pc), a0
+                lea     MenuHBarTiles1(pc), a0
                 moveq   #3,d7
 loc_1087E:
                 
@@ -1006,7 +1025,7 @@ loc_1088E:
                 move.l  (a0)+,$3C(a1)
                 adda.w  #$20,a1 
                 dbf     d7,loc_1088E
-                lea     byte_11336(pc), a0
+                lea     MenuHBarTiles2(pc), a0
                 moveq   #3,d7
 loc_108BA:
                 
@@ -1026,7 +1045,7 @@ sub_108CA:
                 
                 move.l  a1,-(sp)
                 move.l  a0,-(sp)
-                lea     byte_11366(pc), a0
+                lea     MenuHBarTiles3(pc), a0
                 moveq   #3,d7
 loc_108D4:
                 
@@ -1047,7 +1066,7 @@ loc_108E4:
                 move.l  (a0)+,$3C(a1)
                 adda.w  #$20,a1 
                 dbf     d7,loc_108E4
-                lea     byte_11396(pc), a0
+                lea     MenuHBarTiles4(pc), a0
                 moveq   #3,d7
 loc_10910:
                 
@@ -1062,11 +1081,13 @@ loc_10910:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d6.w = frame counter
+
 
 sub_10920:
                 
                 lea     (byte_FF8C84).l,a0
-                cmpi.w  #$F,d6
+                cmpi.w  #15,d6
                 blt.s   loc_10930
                 adda.w  #$C0,a0 
 loc_10930:
@@ -1192,10 +1213,10 @@ loc_10A74:
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableSpellIcon
                 clr.w   d6
-                bsr.w   sub_10800
-                bsr.w   sub_10820
-                bsr.w   sub_1084A
-                bsr.w   sub_10920
+                bsr.w   sub_10800       
+                bsr.w   sub_10820       
+                bsr.w   sub_1084A       
+                bsr.w   sub_10920       
                 move.w  windowSlot(a6),d0
                 move.w  #$C15,d1
                 move.w  #4,d2
@@ -1381,7 +1402,7 @@ BuildMagicMenu:
                 add.w   d2,d1
                 lsr.w   #4,d1
                 adda.w  d1,a0
-                moveq   #$C,d7
+                moveq   #12,d7
                 jsr     (CopyBytes).w   
                 move.w  windowSlot(a6),d0
                 move.w  #MENU_MAGIC_MP_COST_COORDS,d1
@@ -1509,7 +1530,7 @@ sub_10D56:
                 move.w  windowSlot(a6),d0
                 move.w  #MENU_MAGIC_SPELL_LEVEL_TILES_COORDS,d1
                 jsr     (GetWindowTileAddress).w
-                move.w  #$C,d7
+                move.w  #12,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
                 lsl.w   #6,d5

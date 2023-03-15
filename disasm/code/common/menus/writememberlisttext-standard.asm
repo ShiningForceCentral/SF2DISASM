@@ -57,7 +57,7 @@ headerLength = 17
                 
                 move.l  a1,-(sp)        ; -> stash current character's name offset
                 move.w  d0,d1
-                jsr     IsInBattleParty?
+                jsr     IsInBattleParty
                 beq.s   @DetermineNameColor
                 move.w  #VDPTILE_SWORD_ICON|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-2(a1) 
                                                         ; display sword icon to denote battle party members
@@ -145,8 +145,8 @@ headerLength = 17
                 
                 move.w  currentMember(a6),d0
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
-                jsr     IsWeaponOrRingEquippable?
-                bcs.s   @WriteEntry_NewATTandDEF
+                jsr     IsWeaponOrRingEquippable
+                bcs.s   @WriteEntry_NewAttAndDef
                 
                 lea     aUnequippable(pc), a0
                 addq.w  #WINDOW_MEMBERLIST_OFFSET_ENTRY_UNEQUIPPABLE,a1
@@ -155,8 +155,8 @@ headerLength = 17
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 bra.s   @NextEntry
                 
-@WriteEntry_NewATTandDEF:
-                jsr     GetEquipNewATTandDEF  ; Get new ATT and DEF -> D2, D3
+@WriteEntry_NewAttAndDef:
+                jsr     GetEquipNewAttAndDef  ; Get new ATT and DEF -> D2, D3
                 addq.w  #2,a1
                 
                 ; Write current -> new ATT

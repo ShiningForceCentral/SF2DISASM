@@ -184,9 +184,9 @@ loc_47270:
                 jsr     (WaitForViewScrollEnd).w
                 jsr     (DisplayText).l 
                 addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w ; increment script number (move forward in script bank)
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
                 clsTxt
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 bra.s   return_4729C
 loc_47298:
@@ -225,9 +225,9 @@ loc_472BE:
                 jsr     (WaitForViewScrollEnd).w
                 jsr     (DisplayText).l 
                 addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
                 clsTxt
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 rts
 
@@ -402,7 +402,7 @@ loc_473EC:
 
 csc09_hideTextBoxAndPortrait:
                 
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
                 clsTxt
                 rts
 
@@ -513,7 +513,7 @@ return_47462:
 csc0F_jumpIfCharacterDead:
                 
                 move.w  (a6)+,d0
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.w   loc_47476       ; <-- Branch if character's current HP != 0, i.e., is alive.
                 movea.l (a6),a6
@@ -568,7 +568,7 @@ loc_474A8:
                 jsr     j_ClearFlag
 loc_474AE:
                 
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 rts
 

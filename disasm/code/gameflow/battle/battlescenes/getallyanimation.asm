@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = animation type, Out: A0 = animation pointer
+; In: d1.w = animation type, Out: a0 = animation pointer
 
 
 GetAllyAnimation:
@@ -15,21 +15,21 @@ GetAllyAnimation:
                 tst.w   d1
                 bne.w   @CheckSpecialAnimation
                 
-                ; Check if centaur battle sprite
+                ; Check if centaur battlesprite
                 moveq   #ALLYBATTLEANIMATION_SPECIALS_START,d2
-                cmpi.w  #ALLYBATTLESPRITE_KNTE,((ALLY_BATTLE_ANIMATION-$1000000)).w
-                beq.w   @CheckSpearWeaponSprites
+                cmpi.w  #ALLYBATTLESPRITE_KNTE,((BATTLESCENE_ALLYBATTLEANIMATION-$1000000)).w
+                beq.w   @CheckSpearWeaponsprites
                 addq.w  #1,d2
-                cmpi.w  #ALLYBATTLESPRITE_PLDN,((ALLY_BATTLE_ANIMATION-$1000000)).w
-                beq.w   @CheckSpearWeaponSprites
+                cmpi.w  #ALLYBATTLESPRITE_PLDN,((BATTLESCENE_ALLYBATTLEANIMATION-$1000000)).w
+                beq.w   @CheckSpearWeaponsprites
                 addq.w  #1,d2
-                cmpi.w  #ALLYBATTLESPRITE_PGNT,((ALLY_BATTLE_ANIMATION-$1000000)).w
+                cmpi.w  #ALLYBATTLESPRITE_PGNT,((BATTLESCENE_ALLYBATTLEANIMATION-$1000000)).w
                 bne.w   @CheckSpecialAnimation
-@CheckSpearWeaponSprites:
+@CheckSpearWeaponsprites:
                 
-                cmpi.w  #WEAPONSPRITE_SPEAR,((ALLY_WEAPON_SPRITE-$1000000)).w
+                cmpi.w  #WEAPONSPRITE_SPEAR,((BATTLESCENE_WEAPONSPRITE-$1000000)).w
                 bcs.w   @CheckSpecialAnimation
-                cmpi.w  #WEAPONSPRITE_JAVELIN,((ALLY_WEAPON_SPRITE-$1000000)).w
+                cmpi.w  #WEAPONSPRITE_JAVELIN,((BATTLESCENE_WEAPONSPRITE-$1000000)).w
                 bhi.w   @CheckSpecialAnimation
                 move.w  d2,d1
                 bra.w   @GetAnimationPointer
@@ -48,7 +48,7 @@ GetAllyAnimation:
                 clr.w   d1              ; default to regular attack animation
 @GetAnimationIndex:
                 
-                add.w   ((ALLY_BATTLE_ANIMATION-$1000000)).w,d1
+                add.w   ((BATTLESCENE_ALLYBATTLEANIMATION-$1000000)).w,d1
 @GetAnimationPointer:
                 
                 conditionalLongAddr movea.l, p_pt_AllyAnimations, a0
