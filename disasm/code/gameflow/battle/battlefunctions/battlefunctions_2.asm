@@ -1304,7 +1304,7 @@ loc_251FC:
                 jsr     j_CreateBattlefieldMiniStatusWindow
                 jsr     j_CreateLandEffectWindow
                 jsr     (WaitForPlayerInput).w
-                jsr     j_HideLandEffectWindow
+                jsr     j_RemoveLandEffectWindow
                 jsr     j_RemoveMiniStatusWindow
 loc_2521C:
                 

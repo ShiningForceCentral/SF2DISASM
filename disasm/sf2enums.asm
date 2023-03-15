@@ -360,7 +360,8 @@ critical150_1in8 = 4
 critical125_1in8 = 5
 critical150_1in4 = 6
 critical125_1in4 = 7
-    if (STANDARD_BUILD&FIX_CRIT_TABLE=1)
+
+    if (STANDARD_BUILD&FIX_CRITICAL_HIT_DEFINITIONS=1)
 critical125_1in32 = 0
 critical150_1in32 = 1
 critical125_1in16 = 2
@@ -413,23 +414,23 @@ PROWESS_INFLICT_AILMENTS_START: equ $9
 
 ; ---------------------------------------------------------------------------
 
-; enum CriticalHitSetting_Offsets
-CRITICALHITSETTING_OFFSET_CHANCE: equ $0
-CRITICALHITSETTING_OFFSET_DAMAGE_MODIFIER: equ $1
+; enum CriticalHitDef_Offsets
+CRITICALHITDEF_OFFSET_CHANCE: equ $0
+CRITICALHITDEF_OFFSET_DAMAGE_FACTOR: equ $1
 
 ; ---------------------------------------------------------------------------
 
-; enum CriticalHit_BonusFactor (damage = 2^-factor)
+; enum CriticalHitDamageFactors
 factor1 = 1
 factor2 = 2
 
-    if (STANDARD_BUILD&FIX_CRIT_TABLE=1)
+    if (STANDARD_BUILD&FIX_CRITICAL_HIT_DEFINITIONS=1)
 factor1 = 2
 factor2 = 1
     endif
 
-CRITFACTOR_1: equ factor1
-CRITFACTOR_2: equ factor2
+CRITICAL_HIT_DAMAGE_FACTOR_1: equ factor1
+CRITICAL_HIT_DAMAGE_FACTOR_2: equ factor2
 
 ; ---------------------------------------------------------------------------
 

@@ -325,7 +325,7 @@ SpellRange2:    dc.b 8
                 dc.b  0,  2
                 dc.b  1,  1
                 dc.b  2,  0
-                dc.b 1, -1
+                dc.b  1, -1
                 
 SpellRange3:    dc.b 12
                 dc.b  0,  3

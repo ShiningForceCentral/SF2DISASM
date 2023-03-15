@@ -289,7 +289,7 @@ InitializeEnemyStats:
                 andi.w  #$FFF,d1
                 or.w    d2,d1
                 jsr     j_SetAiActivationFlag
-                bsr.w   AdjustEnemyBaseAtt
+                bsr.w   AdjustEnemyBaseAttForDifficulty
                 jsr     j_ApplyStatusEffectsAndItemsOnStats
                 movem.l (sp)+,d0-a1
                 rts
@@ -420,7 +420,7 @@ loc_1B15A4:
 ;   In: d0.b = combatant index
 
 
-AdjustEnemyBaseAtt:
+AdjustEnemyBaseAttForDifficulty:
                 
             if (STANDARD_BUILD&DIFFICULTY_FACTORS=1)
                 
@@ -523,7 +523,7 @@ AdjustEnemyBaseAtt:
                 rts
             endif
 
-    ; End of function AdjustEnemyBaseAtt
+    ; End of function AdjustEnemyBaseAttForDifficulty
 
 
 ; =============== S U B R O U T I N E =======================================

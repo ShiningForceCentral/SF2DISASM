@@ -13,7 +13,7 @@ ms_map70_ZoneEvents:
 
 Map70_ZoneEvent0:
                 
-                move.w  #$E,d0
+                move.w  #BATTLE_SOUTHEAST_DESERT,d0
                 jsr     CheckRandomBattle
                 rts
 

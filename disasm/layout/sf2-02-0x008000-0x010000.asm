@@ -63,7 +63,7 @@
                 include "code\gameflow\battle\battleactions\calculatedamage.asm"    ; Calculate attack damage function
             endif
                 include "code\gameflow\battle\battleactions\determinecriticalhit.asm"    ; Determine critical hit function
-                include "data\stats\allies\classes\criticalhitsettings.asm"    ; Critical hit settings
+                include "data\stats\allies\classes\criticalhitdefs.asm"    ; Critical hit settings definitions
                 include "code\gameflow\battle\battleactions\battleactionsengine_5.asm"    ; Battleactions engine
                 include "code\gameflow\battle\battleactions\castspell.asm"    ; Write Battlescene Script : Cast Spell
             if (STANDARD_BUILD=1)

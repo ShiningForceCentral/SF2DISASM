@@ -62,7 +62,8 @@ ApplyPositionsAfterEnemyLeaderDies:
             if (STANDARD_BUILD&CUTSCENE_PROTECTION=1)
                 ; Always apply positions 
             else
-                jsr     j_GetCurrentHP
+                ; If character is alive, apply positions
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   @ApplyPositions
                 cmpi.b  #$80,d0
@@ -70,7 +71,7 @@ ApplyPositionsAfterEnemyLeaderDies:
             endif
 @ApplyPositions:
                 
-                move.b  1(a0),d1        ; if character alive, apply positions
+                move.b  1(a0),d1
                 jsr     j_SetCombatantX
                 move.b  2(a0),d1
                 jsr     j_SetCombatantY

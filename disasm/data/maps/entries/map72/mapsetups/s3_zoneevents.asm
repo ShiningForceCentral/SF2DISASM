@@ -18,7 +18,7 @@ ms_map72_ZoneEvents:
 
 Map72_ZoneEvent0:
                 
-                move.w  #$1A,d0
+                move.w  #BATTLE_OUTSIDE_KETTO,d0
                 jsr     CheckRandomBattle
                 rts
 
@@ -82,12 +82,12 @@ Map72_DefaultZoneEvent:
                  
                 chkFlg  523             ; Battle 23 completed - BATTLE_VERSUS_WILLARD              
                 bne.s   loc_4FF18
-                move.w  #8,d0
+                move.w  #BATTLE_NORTH_CLIFF,d0
                 jsr     CheckRandomBattle
                 bra.s   return_4FF22
 loc_4FF18:
                 
-                move.w  #$18,d0
+                move.w  #BATTLE_TO_NORTH_PARMECIA,d0
                 jsr     CheckRandomBattle
 return_4FF22:
                 

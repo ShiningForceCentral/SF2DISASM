@@ -802,7 +802,7 @@ GetLaserFacing:
                 
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d3
-@CheckTile_Loop:
+@CheckSpace_Loop:
                 
                 jsr     j_SetMovableSpace
                 jsr     j_GetCombatantOccupyingSpace
@@ -867,7 +867,7 @@ GetLaserFacing:
                 bra.w   @Done
 @NextSpace:
                 
-                bra.s   @CheckTile_Loop
+                bra.s   @CheckSpace_Loop
 @Done:
                 
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
