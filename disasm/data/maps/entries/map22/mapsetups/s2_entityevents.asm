@@ -13,25 +13,6 @@ ms_map22_EntityEvents:
                 msEntityEvent 134, DOWN, Map22_EntityEvent8-ms_map22_EntityEvents
                 msEntityEvent 135, DOWN, Map22_EntityEvent9-ms_map22_EntityEvents
                 msEntityEvent 136, DOWN, Map22_EntityEvent10-ms_map22_EntityEvents
-            if (STANDARD_BUILD&MINIATURES_SHOP=1)
-                msEntityEvent 137, RIGHT, Map22_EntityEvent22-ms_map22_EntityEvents
-                msEntityEvent 138, RIGHT, Map22_EntityEvent11-ms_map22_EntityEvents
-                msEntityEvent 139, RIGHT, Map22_EntityEvent12-ms_map22_EntityEvents
-                msEntityEvent 140, RIGHT, Map22_EntityEvent13-ms_map22_EntityEvents
-                msEntityEvent 141, RIGHT, Map22_EntityEvent13-ms_map22_EntityEvents
-                msEntityEvent 142, RIGHT, Map22_EntityEvent15-ms_map22_EntityEvents
-                msEntityEvent 143, RIGHT, Map22_EntityEvent15-ms_map22_EntityEvents
-                msEntityEvent 144, RIGHT, Map22_EntityEvent17-ms_map22_EntityEvents
-                msEntityEvent 145, RIGHT, Map22_EntityEvent17-ms_map22_EntityEvents
-                msEntityEvent 146, RIGHT, Map22_EntityEvent12-ms_map22_EntityEvents
-                msEntityEvent 147, RIGHT, Map22_EntityEvent12-ms_map22_EntityEvents
-                msEntityEvent 148, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
-                msEntityEvent 149, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
-                msEntityEvent 150, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
-                msEntityEvent 151, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
-                msEntityEvent 152, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
-                msEntityEvent 153, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
-            else
                 msEntityEvent 137, RIGHT, Map22_EntityEvent11-ms_map22_EntityEvents
                 msEntityEvent 138, RIGHT, Map22_EntityEvent12-ms_map22_EntityEvents
                 msEntityEvent 139, RIGHT, Map22_EntityEvent13-ms_map22_EntityEvents
@@ -48,6 +29,8 @@ ms_map22_EntityEvents:
                 msEntityEvent 150, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
                 msEntityEvent 151, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
                 msEntityEvent 152, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                msEntityEvent 153, RIGHT, Map22_EntityEvent22-ms_map22_EntityEvents
             endif
                 msDefaultEntityEvent Map22_DefaultEntityEvent-ms_map22_EntityEvents
 
@@ -282,7 +265,10 @@ Map22_EntityEvent15:
 
 Map22_EntityEvent13:
                 
-                 
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                chkFlg  522             ; Battle 22 completed - BATTLE_CHESSBOARD
+                bne.s   Map22_EntityEvent22
+            endif
                 txt     1788            ; "Is healing is my only ability?{N}Ha, ha!  You have a lot to{N}learn!{W1}"
                 rts
 
@@ -312,19 +298,6 @@ Map22_EntityEvent11:
                 rts
 
     ; End of function Map22_EntityEvent11
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-Map22_EntityEvent22:
-                
-                 
-                txt     1790            ; "The Chess Army of Desktop{N}Kingdom is a well balanced{N}force!{W2}"
-                txt     1791            ; "If it is King Ponpei's wish,{N}we will accept your{N}challenge!{W1}"
-                rts
-
-    ; End of function Map22_EntityEvent22
 
 
 ; =============== S U B R O U T I N E =======================================
