@@ -495,6 +495,8 @@ sub_47832:
 
 CheckRandomBattle:
                 
+            if (STANDARD_BUILD&NO_RANDOM_BATTLES=1)
+            else
                 movem.l d1/d6-d7,-(sp)
                 move.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 add.w   d0,d1
@@ -512,11 +514,7 @@ loc_4787A:
                 
                 moveq   #8,d6
                 jsr     (GenerateRandomNumber).w
-            if (STANDARD_BUILD&NO_RANDOM_BATTLES=1)
-                tst.w   d1
-            else
                 tst.w   d7
-            endif
                 bne.s   loc_47888
                 moveq   #$FFFFFFFF,d1
                 bra.s   loc_47896
@@ -542,6 +540,7 @@ loc_47896:
 loc_478C0:
                 
                 movem.l (sp)+,d1/d6-d7
+            endif
                 rts
 
     ; End of function CheckRandomBattle
