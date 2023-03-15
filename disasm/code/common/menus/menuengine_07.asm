@@ -34,7 +34,7 @@ CreateLandEffectWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-HideLandEffectWindow:
+RemoveLandEffectWindow:
                 
                 tst.w   ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w
                 beq.w   @Return
@@ -54,7 +54,7 @@ HideLandEffectWindow:
                 
                 rts
 
-    ; End of function HideLandEffectWindow
+    ; End of function RemoveLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================

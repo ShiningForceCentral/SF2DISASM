@@ -59,14 +59,16 @@ ApplyPositionsAfterEnemyLeaderDies:
                 cmpi.w  #CODE_NOTHING_WORD,(a0)
                 beq.w   @Done
                 move.b  (a0),d0
+                
+                ; If character is alive, apply positions
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                bne.s   @ApplyPositions 
+                bne.s   @ApplyPositions
                 cmpi.b  #$80,d0
                 bne.w   @NextCombatant
 @ApplyPositions:
                 
-                move.b  1(a0),d1        ; if character alive, apply positions
+                move.b  1(a0),d1
                 jsr     j_SetCombatantX
                 move.b  2(a0),d1
                 jsr     j_SetCombatantY

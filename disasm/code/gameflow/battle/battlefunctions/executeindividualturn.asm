@@ -113,7 +113,7 @@ ExecuteIndividualTurn:
                 jsr     (WaitForViewScrollEnd).w
                 move.w  combatant(a6),d0
                 clr.b   ((IS_TARGETING-$1000000)).w
-                jsr     j_HideLandEffectWindow
+                jsr     j_RemoveLandEffectWindow
                 jsr     j_RemoveMiniStatusWindow
                 move.w  combatant(a6),d0
                 bsr.w   SetEntityBlinkingFlag
@@ -317,7 +317,7 @@ ExecuteIndividualTurn:
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).l
                 move.w  combatant(a6),d0
-                jsr     j_HideLandEffectWindow
+                jsr     j_RemoveLandEffectWindow
                 jsr     j_RemoveMiniStatusWindow
 @Done:
                 

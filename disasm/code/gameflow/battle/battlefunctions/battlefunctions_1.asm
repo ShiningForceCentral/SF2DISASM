@@ -401,7 +401,7 @@ UpdateBattleUnlockedFlag:
 
 HideBattlefieldWindows:
                 
-                jsr     j_HideLandEffectWindow
+                jsr     j_RemoveLandEffectWindow
                 jsr     j_RemoveMiniStatusWindow
                 clr.b   ((IS_TARGETING-$1000000)).w
                 jsr     j_RemoveMiniStatusWindow

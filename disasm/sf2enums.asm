@@ -58,6 +58,7 @@ COMBATANT_SLOTS_NUMBER: equ $40
 COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END: equ $60
 COMBATANT_ENEMIES_START: equ $80
 COMBATANT_ENEMIES_END: equ $9F
+COMBATANT_ENEMIES_SPACEEND: equ $A0
 
 ; ---------------------------------------------------------------------------
 
@@ -360,9 +361,15 @@ PROWESS_INFLICT_AILMENTS_START: equ $9
 
 ; ---------------------------------------------------------------------------
 
-; enum CriticalHitSetting_Offsets
-CRITICALHITSETTING_OFFSET_CHANCE: equ $0
-CRITICALHITSETTING_OFFSET_DAMAGE_MODIFIER: equ $1
+; enum CriticalHitDef_Offsets
+CRITICALHITDEF_OFFSET_CHANCE: equ $0
+CRITICALHITDEF_OFFSET_DAMAGE_FACTOR: equ $1
+
+; ---------------------------------------------------------------------------
+
+; enum CriticalHitDamageFactors
+CRITICAL_HIT_DAMAGE_FACTOR_1: equ $1
+CRITICAL_HIT_DAMAGE_FACTOR_2: equ $2
 
 ; ---------------------------------------------------------------------------
 

@@ -413,7 +413,7 @@ ChurchMenuActions:
                 bsr.w   GetPromotionData
                 move.w  promotionSectionOffset(a6),d7
                 subq.w  #1,d7
-                move.w  #1,d2
+                move.w  #PROMOTIONSECTION_REGULAR_PROMO,d2
                 bsr.w   FindPromotionSection
                 addq.w  #1,a0
                 clr.w   d0
@@ -441,7 +441,7 @@ ChurchMenuActions:
                 jsr     j_Promote
                 cmpi.w  #CLASS_SORC,newClass(a6)
                 bne.s   @CheckNewWeaponTypeClasses
-                bsr.w   ReplaceSpellsWithSORCdefaults
+                bsr.w   ReplaceSpellsWithSorcDefaults
 @CheckNewWeaponTypeClasses:
                 
                 cmpi.w  #CLASS_MMNK,newClass(a6)

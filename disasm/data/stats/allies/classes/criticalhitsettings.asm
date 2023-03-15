@@ -1,21 +1,18 @@
 
 ; ASM FILE data\stats\allies\classes\criticalhitsettings.asm :
 ; 0xACCA..0xACEA : Critical hit settings
-tbl_CriticalHitSettings:
+tbl_CriticalHitDefs:
                 
-; Syntax        dc.b chance, modifier
-;               
-; Notes: Chance to inflict critical hit = 1/chance
-;        Additional damage = damage/2^modifier
+; Syntax        dc.b chance (1/n), damageFactor (additionalDamage = damage/2^n)
                 
-                dc.b 32, 1              ; 1/32 chance to inflict +50% damage
-                dc.b 32, 2              ; 1/32 chance to inflict +25% damage
-                dc.b 16, 1              ; 1/16 chance to inflict +50% damage
-                dc.b 16, 2              ; 1/16 chance to inflict +25% damage
-                dc.b 8, 1               ; 1/8 chance to inflict +50% damage
-                dc.b 8, 2               ; 1/8 chance to inflict +25% damage
-                dc.b 4, 1               ; 1/4 chance to inflict +50% damage
-                dc.b 4, 2               ; 1/4 chance to inflict +25% damage
+                dc.b 32, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/32 chance to inflict +50% damage
+                dc.b 32, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/32 chance to inflict +25% damage
+                dc.b 16, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/16 chance to inflict +50% damage
+                dc.b 16, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/16 chance to inflict +25% damage
+                dc.b 8, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/8 chance to inflict +50% damage
+                dc.b 8, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/8 chance to inflict +25% damage
+                dc.b 4, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/4 chance to inflict +50% damage
+                dc.b 4, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/4 chance to inflict +25% damage
                 dc.b 0, 0               ; No chance to inflict critical hits
                 dc.b 4, 0               ; 1/4 chance to inflict poison, no additional damage
                 dc.b 4, 0               ; 1/4 chance to inflict sleep, no additional damage
