@@ -521,10 +521,11 @@ sub_24966:
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
-                bne.w   @HasItem
             if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
-                bra.w   loc_24D6C
+                ; Skip ahead to Give action if no item held
+                beq.w   loc_24D6C
             else
+                bne.w   @HasItem
                 txt     438             ; "You have no item.{W1}"
                 clsTxt
                 bra.w   loc_24746
@@ -986,7 +987,9 @@ loc_24E4C:
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
             if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                ; Always trade items
             else
+                ; Trade items if target's inventory is full
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 beq.w   loc_24E8E
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
@@ -1069,8 +1072,9 @@ loc_24F6E:
             if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 jsr     GetItemBySlotAndHeldItemsNumber
-                cmpi.w  #0,d2
+                tst.w   d2
                 bne.s   @ChooseDiscard
+                
                 txt     438             ; "You have no item.{W1}"
                 clsTxt
                 bra.s   @ReturnToMenu
