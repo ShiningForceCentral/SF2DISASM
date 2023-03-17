@@ -259,7 +259,7 @@ Church_CureStun:
                 move.w  #0,d2
                 bsr.w   GetPromotionData
                 tst.w   cannotPromoteFlag(a6)
-                beq.w   @CureParalysis_Unpromoted
+                beq.s   @CureParalysis_Unpromoted
                 
                 move.l  actionCost(a6),d1
                 addi.l  #CHURCHMENU_CURE_STUN_COST_EXTRA_WHEN_PROMOTED,d1
