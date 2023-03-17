@@ -30,7 +30,7 @@ loc_2C76E:
                 jsr     (ApplyImmediateVramDma).w
                 lea     TitleScreenPalettes(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
-                moveq   #$20,d7 
+                moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 rts
 

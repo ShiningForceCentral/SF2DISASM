@@ -14,7 +14,7 @@ PlayEndCredits:
                 jsr     (DisableDisplayAndInterrupts).w
                 jsr     (ClearVsramAndSprites).w
                 jsr     (EnableDisplayAndInterrupts).w
-                jsr     (InitDisplay).w
+                jsr     (InitializeDisplay).w
                 bsr.w   ClearPalette2
                 jsr     (DisableDisplayAndInterrupts).w
                 bsr.w   LoadEndCreditsFont
@@ -51,7 +51,7 @@ loc_1AC09E:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_EndCredits
-                moveq   #$78,d0 
+                moveq   #120,d0
                 jsr     (Sleep).w       
                 jsr     j_UpdateForce
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
@@ -83,18 +83,18 @@ loc_1AC10E:
                 addi.w  #$20,d7 
                 neg.w   d7
                 move.w  d7,(VERTICAL_SCROLL_DATA+2).l
-                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%10,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.w  #$B4,d0 
+                move.w  #180,d0
                 jsr     (Sleep).w       
                 move.b  #OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                moveq   #$2C,d0 
+                moveq   #44,d0
                 jsr     (Sleep).w       
                 movem.l (sp)+,d7-a0
                 addq.l  #1,a0
@@ -105,10 +105,10 @@ loc_1AC1A8:
                 cmpi.b  #$FF,(a0)
                 bne.s   loc_1AC1A8
                 bsr.w   ClearPalette2
-                move.w  #$B4,d0 
+                move.w  #180,d0
                 jsr     (Sleep).w       
                 jsr     (FadeOutToBlack).w
-                move.w  #$78,d0 
+                move.w  #120,d0
                 jsr     (Sleep).w       
                 rts
 
