@@ -86,11 +86,13 @@ ChurchMenuActions:
                 beq.w   @ConfirmRaise
                 
             if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+                ; Twice as expansive per level cost when promoted
                 move.l  actionCost(a6),d1
-                add.l   d1,d1
-                move.l  d1,actionCost(a6)
-            endif
+                addi.l  #CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED,d1
+                add.l   d1,actionCost(a6)
+            else
                 addi.l  #CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED,actionCost(a6)
+            endif
 @ConfirmRaise:
                 
                 move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
@@ -166,11 +168,10 @@ ChurchMenuActions:
                 bsr.w   GetPromotionData
                 tst.w   cannotPromoteFlag(a6)
                 beq.s   @CurePoison_Unpromoted
-                move.l  actionCost(a6),d1
-                add.l   d1,d1
-                move.l  d1,actionCost(a6)
-                addi.l  #CHURCHMENU_CURE_POISON_COST_EXTRA_WHEN_PROMOTED,actionCost(a6)
                 
+                move.l  actionCost(a6),d1
+                addi.l  #CHURCHMENU_CURE_POISON_COST_EXTRA_WHEN_PROMOTED,d1
+                add.l   d1,actionCost(a6)
 @CurePoison_Unpromoted:
             else
                 move.l  #CHURCHMENU_CURE_POISON_COST,actionCost(a6)
