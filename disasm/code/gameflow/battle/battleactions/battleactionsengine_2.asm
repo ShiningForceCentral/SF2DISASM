@@ -153,19 +153,13 @@ loc_A410:
 loc_A41C:
                 
                 cmpi.w  #BATTLEACTION_BURST_ROCK,(a3)
+                bne.s   loc_A436
+                move.w  #BATTLEACTION_BURST_ROCK_POWER,d6
             if (STANDARD_BUILD&TRAP_DAMAGE_RAISES_WITH_DIFFICULTY=1)
                 bsr.w   GetDifficulty
                 addq.w  #4,d1
                 mulu.w  d1,d6
                 lsr.w   #2,d6
-            endif
-                bne.s   loc_A436
-                move.w  #BATTLEACTION_BURST_ROCK_POWER,d6
-            if (STANDARD_BUILD&TRAP_DAMAGE_RAISES_WITH_DIFFICULTY=1)
-                jsr        GetDifficulty
-                addi.b    #4,d1
-                mulu.w    d1,d6
-                lsr.w    #2,d6
             endif
                 bsr.w   WriteBattlesceneScript_InflictDamage
                 tst.b   targetDies(a2)
