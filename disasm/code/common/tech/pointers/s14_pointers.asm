@@ -2,8 +2,8 @@
 ; ASM FILE code\common\tech\pointers\s14_pointers.asm :
 ; 0x1B8000..0x1B8028 : Game Section 14 Pointers
 p_pt_Grounds:   dc.l pt_Grounds
-p_pt_WeaponSprites:
-                dc.l pt_WeaponSprites
+p_pt_Weaponsprites:
+                dc.l pt_Weaponsprites
 p_plt_WeaponPalettes:
                 dc.l WeaponPalette00
 p_pt_SpellGraphics:

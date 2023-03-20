@@ -11,7 +11,7 @@ Map76_DefaultZoneEvent:
                 
                  
             if (STANDARD_BUILD&FIX_MISSING_RANDOM_BATTLES=1)
-                move.w  #$23,d0
+                move.w  #BATTLE_TO_ROFT,d0
                 jsr     CheckRandomBattle
             else
                 chkFlg  535             ; Battle 35 completed - BATTLE_TO_ROFT                     

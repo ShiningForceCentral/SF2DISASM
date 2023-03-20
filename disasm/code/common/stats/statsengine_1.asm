@@ -48,7 +48,7 @@ GetCombatantName:
 @Enemy:
                 
                 clr.w   d1
-                bsr.w   GetEnemyIndex   
+                bsr.w   GetEnemy        
                 conditionalLongAddr movea.l, p_tbl_EnemyNames, a0
                 bsr.w   FindName        
 @Done:
@@ -61,7 +61,7 @@ GetCombatantName:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's class index -> D1
+; Get class index for combatant d0.b -> d1.w
 
 
 GetClass:
@@ -74,7 +74,7 @@ GetClass:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's current level -> D1
+; Get current level for combatant d0.b -> d1.w
 
 
 GetCurrentLevel:
@@ -88,133 +88,133 @@ GetCurrentLevel:
 ; =============== S U B R O U T I N E =======================================
 
 
-GetMaxHP:
+GetMaxHp:
                 
                 getSavedCombatantWord COMBATANT_OFFSET_HP_MAX
                 rts
 
-    ; End of function GetMaxHP
+    ; End of function GetMaxHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentHP:
+GetCurrentHp:
                 
                 getSavedCombatantWord COMBATANT_OFFSET_HP_CURRENT
                 rts
 
-    ; End of function GetCurrentHP
+    ; End of function GetCurrentHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetMaxMP:
+GetMaxMp:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_MP_MAX
                 rts
 
-    ; End of function GetMaxMP
+    ; End of function GetMaxMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentMP:
+GetCurrentMp:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_MP_CURRENT
                 rts
 
-    ; End of function GetCurrentMP
+    ; End of function GetCurrentMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetBaseATT:
+GetBaseAtt:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_ATT_BASE
                 rts
 
-    ; End of function GetBaseATT
+    ; End of function GetBaseAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentATT:
+GetCurrentAtt:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_ATT_CURRENT
                 rts
 
-    ; End of function GetCurrentATT
+    ; End of function GetCurrentAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetBaseDEF:
+GetBaseDef:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_DEF_BASE
                 rts
 
-    ; End of function GetBaseDEF
+    ; End of function GetBaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentDEF:
+GetCurrentDef:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_DEF_CURRENT
                 rts
 
-    ; End of function GetCurrentDEF
+    ; End of function GetCurrentDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetBaseAGI:
+GetBaseAgi:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_AGI_BASE
                 rts
 
-    ; End of function GetBaseAGI
+    ; End of function GetBaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentAGI:
+GetCurrentAgi:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_AGI_CURRENT
                 rts
 
-    ; End of function GetCurrentAGI
+    ; End of function GetCurrentAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetBaseMOV:
+GetBaseMov:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_MOV_BASE
                 rts
 
-    ; End of function GetBaseMOV
+    ; End of function GetBaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentMOV:
+GetCurrentMov:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_MOV_CURRENT
                 rts
 
-    ; End of function GetCurrentMOV
+    ; End of function GetCurrentMov
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -275,34 +275,34 @@ GetStatusEffects:
 ; =============== S U B R O U T I N E =======================================
 
 
-GetXPos:
+GetCombatantX:
                 
                 getSavedCombatantPosition COMBATANT_OFFSET_X
                 rts
 
-    ; End of function GetXPos
+    ; End of function GetCombatantX
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetYPos:
+GetCombatantY:
                 
                 getSavedCombatantPosition COMBATANT_OFFSET_Y
                 rts
 
-    ; End of function GetYPos
+    ; End of function GetCombatantY
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetCurrentEXP:
+GetCurrentExp:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_EXP
                 rts
 
-    ; End of function GetCurrentEXP
+    ; End of function GetCurrentExp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -359,8 +359,8 @@ GetAiCommandset:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: D1 = combatant index to follow
-;      D2 = second AI point
+; Out: d1.w = combatant index to follow, or first AI point if bit 6 is set
+;      d2.w = second AI point
 
 
 GetAiSpecialMoveOrders:
@@ -440,7 +440,7 @@ GetAiActivationFlag:
 ; Out: d1.w = enemy index, or -1 if not an enemy
 
 
-GetEnemyIndex:
+GetEnemy:
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 tst.b   d0
                 bmi.s   @Continue
@@ -451,14 +451,14 @@ GetEnemyIndex:
                 bne.s   @Continue
                 move.w  #-1,d1          ; return -1 if combatant is not an enemy
                 rts
-                bra.s   GetKills
+                bra.s   GetKills        ; unreachable code
             endif
 @Continue:
                 
                 getSavedCombatantByte COMBATANT_OFFSET_ENEMY_INDEX
                 rts
 
-    ; End of function GetEnemyIndex
+    ; End of function GetEnemy
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -507,7 +507,7 @@ GetCombatantType:
                 bra.s   @Return
 @Enemy:
                 
-                bsr.s   GetEnemyIndex   
+                bsr.s   GetEnemy        
 @Return:
                 
                 rts

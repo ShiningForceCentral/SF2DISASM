@@ -23,11 +23,11 @@ BlacksmithActions:
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
                 blt.s   byte_21A50      
-                jsr     j_InitPortraitWindow
+                jsr     j_CreatePortraitWindow
 byte_21A50:
                 
                 txt     194             ; "Welcome to the Dwarf{N}Craftsman!{D3}"
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
                 clr.w   readyToFulfillOrdersNumber(a6)
                 clr.w   pendingOrdersNumber(a6)
                 clr.w   fulfilledOrdersNumber(a6)
@@ -36,12 +36,12 @@ byte_21A50:
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
                 blt.s   byte_21A7C      
-                jsr     j_InitPortraitWindow
+                jsr     j_CreatePortraitWindow
 byte_21A7C:
                 
                 txt     198             ; "{CLEAR}Thank you very much!{W1}"
                 clsTxt
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
@@ -80,7 +80,7 @@ ProcessBlacksmithOrders:
                 ; Ready to fulfill orders?
                 bsr.w   CountPendingAndReadyToFulfillOrders
                 cmpi.w  #1,fulfillOrdersFlag(a6)
-                bne.w   @AnyReadyToFulfillOrders?
+                bne.w   @CheckReadyToFulfillOrders
                 
                 ; Fulfill orders
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
@@ -103,10 +103,10 @@ ProcessBlacksmithOrders:
 @Next:
                 
                 dbf     d7,@FulfillOrders_Loop
-@AnyReadyToFulfillOrders?:
+@CheckReadyToFulfillOrders:
                 
                 cmpi.w  #0,readyToFulfillOrdersNumber(a6)
-                beq.w   @AnyPendingOrders?
+                beq.w   @CheckPendingOrders
                 
                 move.w  readyToFulfillOrdersNumber(a6),d0
                 add.w   pendingOrdersNumber(a6),d0
@@ -115,7 +115,7 @@ ProcessBlacksmithOrders:
                 beq.w   @Return
                 txt     196             ; "{CLEAR}Anything else?"
                 bra.w   @Call_PlaceOrder
-@AnyPendingOrders?:
+@CheckPendingOrders:
                 
                 cmpi.w  #0,pendingOrdersNumber(a6)
                 beq.w   byte_21B38      
@@ -169,12 +169,12 @@ byte_21B58:
                 clsTxt
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewATTandDEF
+                jsr     j_BuildMemberListScreen_NewAttAndDefPage
                 cmpi.w  #$FFFF,d0
-                bne.s   @IsMemberInventoryFull?
+                bne.s   @IsMemberInventoryFull
                 txt     197             ; "{CLEAR}What a pity!{W2}"
                 bra.w   @Done
-@IsMemberInventoryFull?:
+@IsMemberInventoryFull:
                 
                 move.w  d0,member(a6)
                 moveq   #0,d1
@@ -200,7 +200,7 @@ byte_21B58:
                 ; Is item equippable?
                 move.w  itemIndex(a6),d1
                 move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable?
+                jsr     j_IsWeaponOrRingEquippable
                 bcs.s   @AddItem
                 
                 ; Not equippable
@@ -233,7 +233,7 @@ byte_21B58:
                 addi.w  #1,fulfilledOrdersNumber(a6)
                 move.w  itemIndex(a6),d1
                 move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable?
+                jsr     j_IsWeaponOrRingEquippable
                 bcc.w   byte_21CD0      
                 txt     173             ; "{CLEAR}Equip it now?"
                 jsr     j_YesNoChoiceBox
@@ -244,7 +244,7 @@ byte_21B58:
                 move.w  itemIndex(a6),d1
                 jsr     j_GetEquipmentType
                 cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
-                bne.s   @HasRingEquipped?
+                bne.s   @HasRingEquipped
                 
                 ; Has weapon equipped?
                 move.w  member(a6),d0
@@ -262,7 +262,7 @@ byte_21B58:
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_21CD0      
-@HasRingEquipped?:
+@HasRingEquipped:
                 
                 move.w  member(a6),d0
                 jsr     j_GetEquippedRing
@@ -335,7 +335,7 @@ byte_21CDE:
                 clsTxt
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewATTandDEF
+                jsr     j_BuildMemberListScreen_NewAttAndDefPage
                 cmpi.w  #$FFFF,d0
                 beq.w   @Done
                 
@@ -354,7 +354,7 @@ byte_21D1A:
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewATTandDEF
+                jsr     j_BuildMemberListScreen_NewAttAndDefPage
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_21CDE      
                 
@@ -363,15 +363,15 @@ byte_21D1A:
                 jsr     j_GetClass
                 move.w  d1,characterClass(a6)
                 cmpi.w  #CHAR_CLASS_FIRSTPROMOTED,d1
-                bcc.w   @IsCustomerClassEligible?
+                bcc.w   @IsCustomerClassEligible
                 
                 ; Not promoted
                 move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     211             ; "{NAME} has to be promoted{N}first.{W1}"
                 bra.s   byte_21D1A      
-@IsCustomerClassEligible?:
+@IsCustomerClassEligible:
                 
-                bsr.w   IsClassBlacksmithEligible?
+                bsr.w   IsClassBlacksmithEligible
                 cmpi.w  #0,d0
                 beq.w   @ConfirmOrder
                 
@@ -516,7 +516,8 @@ CountPendingAndReadyToFulfillOrders:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: d0.w = 0 if true
+; Is character belonging to class d1.w eligible to place a blacksmith order?
+; Return d0.w = 0 if true.
 
 characterClass = -24
 ordersCounter = -22
@@ -530,7 +531,7 @@ targetMember = -8
 member = -6
 currentGold = -4
 
-IsClassBlacksmithEligible?:
+IsClassBlacksmithEligible:
                 
                 movem.l d1-d2/d7-a0,-(sp)
                 clr.w   d0
@@ -551,5 +552,5 @@ IsClassBlacksmithEligible?:
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-    ; End of function IsClassBlacksmithEligible?
+    ; End of function IsClassBlacksmithEligible
 

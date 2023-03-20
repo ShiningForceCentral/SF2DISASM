@@ -37,7 +37,7 @@ WriteBattlesceneScript_DetermineCriticalHit:
                 andi.w  #PROWESS_MASK_CRITICAL,d1
                 move.w  d1,d2
                 lsl.w   #1,d2
-                lea     tbl_CriticalHitSettings(pc,d2.w),a0
+                lea     tbl_CriticalHitDefs(pc,d2.w),a0
                 clr.w   d0
                 move.b  (a0),d0
                 beq.s   @Return

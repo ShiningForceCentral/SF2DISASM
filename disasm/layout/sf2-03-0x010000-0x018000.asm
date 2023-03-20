@@ -68,8 +68,8 @@
             else
                 include "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout
             endif
-                includeIfVanillaRom "data\stats\items\itemdefs.asm"     ; Item definitions
-                includeIfVanillaRom "data\stats\spells\spelldefs.asm"   ; Spell definitions
+                includeIfVanillaRom "data\stats\items\itemdefs.asm"    ; Item definitions
+                includeIfVanillaRom "data\stats\spells\spelldefs.asm"    ; Spell definitions
                 includeIfVanillaRom "data\stats\items\itemnames.asm"    ; Item names
                 align
                 include "data\stats\allies\classes\classnames.asm"    ; Class names

@@ -57,7 +57,7 @@ GetSpellAnimation:
                 bra.s   @Continue
                 
 @Enemy:         lea     tbl_AttackSpellAnimationsForEnemy(pc),a0
-                bsr.w   GetEnemyIndex       ; d1.w = enemy index
+                bsr.w   GetEnemy      ; d1.w = enemy index
                 
 @Continue:      jsr     (FindSpecialPropertyBytesAddressForObject).w   ; -> a0
                 bcc.s   @GetAnimation       ; if class or enemy found, get matching spell animation

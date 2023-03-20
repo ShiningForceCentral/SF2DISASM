@@ -97,13 +97,13 @@ CopyCaravanItems:
 ; Return CCR carry-bit set if true.
 
 
-IsItemInSlotEquippedAndCursed?:
+IsItemInSlotEquippedAndCursed:
                 
                 movem.l d1,-(sp)
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 bclr    #ITEMENTRY_BIT_EQUIPPED,d1
                 beq.s   @NotEquipped
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   @NotCursed
                 sndCom  MUSIC_CURSED_ITEM
                 move.w  #60,d0
@@ -124,7 +124,7 @@ IsItemInSlotEquippedAndCursed?:
                 movem.l (sp)+,d1
                 rts
 
-    ; End of function IsItemInSlotEquippedAndCursed?
+    ; End of function IsItemInSlotEquippedAndCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -146,7 +146,7 @@ PlayPreviousMusicAfterCurrentOne:
 ; Is item d1.w unsellable? Return CCR carry-bit set if true.
 
 
-IsItemUnsellable?:
+IsItemUnsellable:
                 
                 movem.l d1/a0,-(sp)
                 jsr     j_GetItemDefAddress
@@ -165,5 +165,5 @@ IsItemUnsellable?:
                 movem.l (sp)+,d1/a0
                 rts
 
-    ; End of function IsItemUnsellable?
+    ; End of function IsItemUnsellable
 
