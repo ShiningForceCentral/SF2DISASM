@@ -1221,30 +1221,6 @@ spr_UnitCursor: ; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpT
                 vdpSprite 176, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 177
             endif
 
-
-            if (STANDARD_BUILD&EXPANDED_RANGES=1)
-                
-                ; Cursor radius 3
-                vdpSprite 38, V4|H4|9, 1680|PALETTE3, 124
-                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 52
-                vdpSprite 200, V4|H4|11, 1680|FLIP|PALETTE3, 124
-                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 196
-                vdpSprite 56, V4|H4|13, 1712|PALETTE3, 95
-                vdpSprite 56, V4|H4|14, 1712|MIRROR|PALETTE3, 153
-                vdpSprite 176, V4|H4|15, 1712|FLIP|PALETTE3, 95
-                vdpSprite 176, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 153
-                
-                ; Cursor radius 4
-                vdpSprite 14, V4|H4|9, 1680|PALETTE3, 124
-                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 28
-                vdpSprite 230, V4|H4|11, 1680|FLIP|PALETTE3, 124
-                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 220
-                vdpSprite 56, V4|H4|13, 1712|PALETTE3, 71
-                vdpSprite 56, V4|H4|14, 1712|MIRROR|PALETTE3, 177
-                vdpSprite 176, V4|H4|15, 1712|FLIP|PALETTE3, 71
-                vdpSprite 176, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 177
-            endif
-
 ; =============== S U B R O U T I N E =======================================
 
 
