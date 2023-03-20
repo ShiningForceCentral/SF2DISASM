@@ -721,8 +721,13 @@ loc_10616:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10630
                 moveq   #1,d1
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                cmp.b    #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                bne.s    @SkipItemCheck1
+            endif
                 cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_10630
+@SkipItemCheck1:
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
 loc_10630:
@@ -730,8 +735,13 @@ loc_10630:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1064A
                 moveq   #2,d1
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                cmp.b    #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                bne.s    @SkipItemCheck2
+            endif
                 cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_1064A
+@SkipItemCheck2:
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
 loc_1064A:
@@ -746,8 +756,13 @@ loc_1065C:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10676
                 moveq   #3,d1
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                cmp.b    #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                bne.s    @SkipItemCheck3
+            endif
                 cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_10676
+@SkipItemCheck3:
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
 loc_10676:

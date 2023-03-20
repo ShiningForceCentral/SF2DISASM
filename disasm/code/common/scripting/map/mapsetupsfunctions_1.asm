@@ -510,7 +510,11 @@ loc_4787A:
                 
                 moveq   #8,d6
                 jsr     (GenerateRandomNumber).w
+            if (STANDARD_BUILD&NO_RANDOM_BATTLES=1)
+                tst.w   d1
+            else
                 tst.w   d7
+            endif
                 bne.s   loc_47888
                 moveq   #$FFFFFFFF,d1
                 bra.s   loc_47896

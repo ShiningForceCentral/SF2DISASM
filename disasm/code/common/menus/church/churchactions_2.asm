@@ -245,7 +245,25 @@ Church_CureStun:
                 addi.w  #1,stunnedMembersCount(a6)
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     132             ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
+                
+            if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+                jsr     GetCurrentLevel
+                mulu.w  #CHURCHMENU_PER_LEVEL_PARALYSIS_COST,d1
+                move.l  d1,-8(a6)
+                jsr     GetClass
+                move.w  #0,d2
+                bsr.w   GetPromotionData
+                cmpi.w  #0,-36(a6)
+                beq.w   @CureParalysis_Unpromoted
+                jsr     GetCurrentLevel
+                mulu.w  #CHURCHMENU_PER_LEVEL_PARALYSIS_COST,d1
+                add.l   d1,8(a6)
+                addi.l  #CHURCHMENU_PARALYSIS_COST_EXTRA_WHEN_PROMOTED,-8(a6)
+                
+@CureParalysis_Unpromoted:
+            else
                 move.l  #CHURCHMENU_CURE_STUN_COST,actionCost(a6)
+            endif
                 move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
                 jsr     j_CreateGoldWindow

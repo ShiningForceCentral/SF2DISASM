@@ -11,4 +11,7 @@ ms_map26_Entities:
                 msFixedEntity 63, 63, UP, MAPSPRITE_OBJECT1, eas_InitFixedSprite
                 msFixedEntity 4, 35, DOWN, MAPSPRITE_PRIEST, eas_Init
                 msFixedEntity 11, 35, DOWN, MAPSPRITE_CARAVAN, eas_Init
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                msFixedEntity 11, 37, DOWN, MAPSPRITE_SAILOR, eas_Init
+            endif
                 msEntitiesEnd

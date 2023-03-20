@@ -76,6 +76,10 @@ Map26_EntityEvent5:
 
 Map26_EntityEvent3:
                 
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                move.b  #30,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     ShopMenuActions
+            endif
                 rts
 
     ; End of function Map26_EntityEvent3

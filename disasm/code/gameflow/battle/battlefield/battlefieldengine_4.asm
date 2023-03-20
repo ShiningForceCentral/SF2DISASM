@@ -24,21 +24,21 @@ CalculateHealTargetPriority:
                 
                 movem.l d0-d5/d7-a6,-(sp)
                 bsr.w   GetAiCommandset 
-                cmpi.w  #AI_13,d1
+                cmpi.w  #AI_CRITICAL,d1
                 bne.s   @CheckLeaderAi
-                move.w  #13,d6
+                move.w  #MOVETYPE_TOTAL,d6
                 bra.w   @Done
 @CheckLeaderAi:
                 
                 cmpi.w  #AI_LEADER,d1
                 bne.s   @PrioritizeByMoveType
-                move.w  #13,d6
+                move.w  #MOVETYPE_TOTAL,d6
                 bra.w   @Done
 @PrioritizeByMoveType:
                 
                 bsr.w   GetMoveType     
                 lea     (tbl_HealPriorityMoveTypes).l,a0
-                move.w  #13,d6
+                move.w  #MOVETYPE_TOTAL,d6
                 clr.w   d0
 @FindHealPriority_Loop:
                 
@@ -191,6 +191,8 @@ GetHighestUsableSpellLevel:
 
     ; End of function GetHighestUsableSpellLevel
 
+    if (STANDARD_BUILD=1)
+    else
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -262,4 +264,5 @@ loc_CF6C:
                 rts
 
     ; End of function GetSlotContainingItem
-
+    
+    endif

@@ -289,7 +289,7 @@ InitEnemyStats:
                 andi.w  #$FFF,d1
                 or.w    d2,d1
                 jsr     j_SetAiActivationFlag
-                bsr.w   SetEnemyBaseATT 
+                bsr.w   AlterEnemyStats 
                 jsr     j_ApplyStatusEffectsAndItemsOnStats
                 movem.l (sp)+,d0-a1
                 rts
@@ -414,13 +414,84 @@ loc_1B15A4:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Set enemy base ATT according to difficulty
+; Set enemy base stats according to difficulty
 
 
-SetEnemyBaseATT:
+AlterEnemyStats:
                 
                 move.l  d1,-(sp)
                 jsr     j_GetDifficulty
+                
+            if (STANDARD_BUILD&DIFFICULTY_FACTORS=1)
+                cmpi.w  #DIFFICULTY_NORMAL,d1
+                beq.w   @Done
+
+;HardDifficulty
+                clr.l   d1
+                jsr     GetBaseATT
+                mulu.w  #NORMAL_TO_HARD_ATK,d1
+                lsr.l   #2,d1           ; base ATT effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseATT
+                clr.l   d1
+                jsr     GetBaseDEF
+                mulu.w  #NORMAL_TO_HARD_DEF,d1
+                lsr.l   #2,d1           ; base DEF effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseDEF
+                clr.l   d1
+                jsr     GetBaseAGI
+                mulu.w  #NORMAL_TO_HARD_AGI,d1
+                lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseAGI
+                jsr     j_GetDifficulty
+                cmpi.w  #DIFFICULTY_HARD,d1
+                beq.w   @Done
+                
+;SuperDifficulty
+                clr.l   d1
+                jsr     GetBaseATT
+                mulu.w  #HARD_TO_SUPER_ATK,d1
+                lsr.l   #2,d1           ; base ATT effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseATT
+                clr.l   d1
+                jsr     GetBaseDEF
+                mulu.w  #HARD_TO_SUPER_DEF,d1
+                lsr.l   #2,d1           ; base DEF effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseDEF
+                clr.l   d1
+                jsr     GetBaseAGI
+                mulu.w  #HARD_TO_SUPER_AGI,d1
+                lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseAGI
+                jsr     j_GetDifficulty
+                cmpi.w  #DIFFICULTY_SUPER,d1
+                beq.w   @Done
+
+;OuchDifficulty
+                clr.l   d1
+                jsr     GetBaseATT
+                mulu.w  #SUPER_TO_OUCH_ATK,d1
+                lsr.l   #2,d1           ; base ATT effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseATT
+                clr.l   d1
+                jsr     GetBaseDEF
+                mulu.w  #SUPER_TO_OUCH_DEF,d1
+                lsr.l   #2,d1           ; base DEF effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseDEF
+                clr.l   d1
+                jsr     GetBaseAGI
+                mulu.w  #SUPER_TO_OUCH_AGI,d1
+                lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseAGI
+            else
                 cmpi.w  #DIFFICULTY_SUPER,d1 ; pointless comparison
                 beq.s   @Continue
                 beq.w   @Done
@@ -442,12 +513,13 @@ SetEnemyBaseATT:
                 mulu.w  #5,d1
                 lsr.l   #2,d1           ; if SUPER difficulty, multiply base ATT by 1.25 a second time
                 jsr     j_SetBaseATT
+            endif
 @Done:
                 
                 move.l  (sp)+,d1
                 rts
 
-    ; End of function SetEnemyBaseATT
+    ; End of function AlterEnemyStats
 
 
 ; =============== S U B R O U T I N E =======================================

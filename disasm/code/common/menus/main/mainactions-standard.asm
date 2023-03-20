@@ -444,6 +444,7 @@ MainItemSubmenu_Drop:
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
+                move.w  itemIndex(a6),d1
                 jsr     GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 

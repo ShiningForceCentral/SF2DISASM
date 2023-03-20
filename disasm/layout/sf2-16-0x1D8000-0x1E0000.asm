@@ -21,7 +21,7 @@
                 includeIfExpandedRom "data\stats\allies\stats\entries.asm"  ; Ally stats
                 align
                 includeIfExpandedRom "data\stats\allies\allystartdefs.asm"      ; Ally start definitions
-                includeIfExpandedRom "data\stats\allies\classes\classdefs.asm"  ; Class definitions
+                includeIfExpandedRom "data\stats\allies\classes\classdefs-standard.asm"  ; Class definitions
                 if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
                     includeIfExpandedRom "data\stats\allies\classes\fullclassnames.asm"
                     align

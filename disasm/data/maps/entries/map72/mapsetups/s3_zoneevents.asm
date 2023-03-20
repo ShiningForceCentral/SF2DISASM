@@ -38,31 +38,31 @@ Map72_ZoneEvent3:
                 chkFlg  256             ; TEMP FLAG #00
                 bne.s   return_4FF04
                 clrFlg  256             ; TEMP FLAG #00
-                moveq   #$72,d1 
+                moveq   #ITEM_CANNON,d1 
                 jsr     j_GetItemInventoryLocation
                 cmpi.w  #$FFFF,d0
                 beq.s   loc_4FEF4
-                moveq   #$74,d1 
+                moveq   #ITEM_DYNAMITE,d1 
                 jsr     j_GetItemInventoryLocation
                 cmpi.w  #$FFFF,d0
                 beq.s   loc_4FEE6
-                moveq   #$72,d0 
+                moveq   #ITEM_CANNON,d0 
                 jsr     RemoveItemFromInventory
-                moveq   #$74,d0 
+                moveq   #ITEM_DYNAMITE,d0 
                 jsr     RemoveItemFromInventory
                 script  cs_4FFDA
                 setFlg  750             ; Set after Rohde clears the blockage at the North Cliff cave
                 bra.s   loc_4FEF2
 loc_4FEE6:
                 
-                move.w  #$74,((TEXT_NAME_INDEX_1-$1000000)).w 
+                move.w  #ITEM_DYNAMITE,((TEXT_NAME_INDEX_1-$1000000)).w 
                 script  cs_5023E
 loc_4FEF2:
                 
                 bra.s   byte_4FF00      
 loc_4FEF4:
                 
-                move.w  #$74,((TEXT_NAME_INDEX_1-$1000000)).w 
+                move.w  #ITEM_DYNAMITE,((TEXT_NAME_INDEX_1-$1000000)).w 
                 script  cs_5023E
 byte_4FF00:
                 

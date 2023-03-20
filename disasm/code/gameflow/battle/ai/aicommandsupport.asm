@@ -42,7 +42,11 @@ ExecuteAiCommand_Support:
                 clr.w   d3
                 bsr.w   GetNextSupportSpell
                 cmpi.w  #SPELL_NOTHING,d1
-                bne.s   @CheckMuddle    
+            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+                bne.s   @CheckMPcost
+            else
+                bne.s   @CheckMuddle
+            endif
                 
                 ; If no known status spell, do nothing
                 move.w  #$FFFF,d1
@@ -51,6 +55,8 @@ ExecuteAiCommand_Support:
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   @Done
+            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+            else
 @CheckMuddle:
                 
                 cmpi.w  #SPELL_MUDDLE|SPELL_LV2,d1 ; HARDCODED spell entries
@@ -69,6 +75,7 @@ ExecuteAiCommand_Support:
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   @Done
+            endif
 @CheckMPcost:
                 
                 move.w  d1,d6           ; d6 = copy of debuff spell entry
@@ -83,14 +90,33 @@ ExecuteAiCommand_Support:
                 bge.s   @CheckTargetingGroup
                 
                 ; If not enough MP, do nothing
+            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+                bra.w   @DoNothing
+            else
                 move.w  #$FFFF,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   @Done
+            endif
 @CheckTargetingGroup:
                 
+            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+                bsr.w   GetMoveInfo     
+                bsr.w   MakeRangeLists
+                btst    #SPELLPROPS_BIT_TARGETING,d5
+                bne.s   @TargetTeammates
+                clr.w   d3
+                                         
+                bsr.w   UpdateTargetsList_Enemies
+                bsr.w   MakeTargetsList_Allies
+                bra.s   @MakeTargetsList
+@TargetTeammates:
+                move.w  #$FFFF,d3
+                bsr.w   UpdateTargetsList_Allies ; made unreachable by the preceding clr.w d3 instruction
+                bsr.w   MakeTargetsList_Enemies
+            else
                 clr.w   d0
                 btst    #SPELLPROPS_BIT_TARGETING,d5
                 move.w  #$FFFF,d3
@@ -115,13 +141,45 @@ ExecuteAiCommand_Support:
                 
                 bsr.w   UpdateTargetsList_Allies ; made unreachable by the preceding clr.w d3 instruction
                 bsr.w   MakeTargetsList_Enemies
+            endif
 @MakeTargetsList:
                 
                 clr.w   d1
                 move.b  d6,d1
+            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+                move.w    d6,d3
+                andi.b    #SPELLENTRY_MASK_INDEX,d3
+            endif
                 clr.w   d0
                 move.b  d7,d0
                 
+            if (STANDARD_BUILD&DEBUFF_AI_ENHANCEMENTS=1)
+                
+                ; MUDDLE spell
+                cmpi.w  #SPELL_MUDDLE,d3
+                bne.s   @CheckSpell_Slow
+                bsr.w   MakePrioritiesListForSpell_Muddle2
+                bra.w   @CheckReachableTargets
+@CheckSpell_Slow:
+                
+                cmpi.w  #SPELL_SLOW,d3
+                bne.s   @CheckSpell_Sleep
+                bsr.w   MakePrioritiesListForSpell_Muddle2
+                bra.w   @CheckReachableTargets
+@CheckSpell_Sleep:
+                
+                cmpi.w  #SPELL_SLEEP,d3
+                bne.s   @CheckSpell_Dispel
+                bsr.w   MakePrioritiesListForSpell_Dispel
+                bra.w   @CheckReachableTargets
+@CheckSpell_Dispel:
+                
+                cmpi.w  #SPELL_DISPEL,d3
+                bne.s   @DoNothing
+                bsr.w   MakePrioritiesListForSpell_Dispel
+                bra.w   @CheckReachableTargets
+@DoNothing:
+            else
                 ; ATTACK spell
                 cmpi.w  #SPELL_ATTACK,d1
                 bne.s   @CheckBoost
@@ -145,6 +203,7 @@ ExecuteAiCommand_Support:
                 bne.s   @DoNothing2
                 bsr.w   MakePrioritiesListForSpell_Dispel
                 bra.w   @CheckReachableTargets
+            endif
 @DoNothing2:
                 
                 move.w  #$FFFF,d1

@@ -1086,6 +1086,37 @@ ApplyItemOnStats:
     ; End of function ApplyItemOnStats
 
 pt_EquipEffectFunctions:
+            if (STANDARD_BUILD&ADDITIONAL_EQUIPEFFECTS=1)
+                dc.l nullsub_8B22
+                dc.l IncreaseCurrentATT
+                dc.l IncreaseCurrentDEF
+                dc.l IncreaseCurrentAGI
+                dc.l IncreaseCurrentMOV
+                dc.l EquipEffect_IncreaseCriticalProwess
+                dc.l EquipEffect_IncreaseDoubleAttackProwess
+                dc.l EquipEffect_IncreaseCounterAttackProwess
+                dc.l EquipEffect_IncreaseResistanceGroup1
+                dc.l EquipEffect_IncreaseResistanceGroup2
+                dc.l DecreaseCurrentATT
+                dc.l DecreaseCurrentDEF
+                dc.l DecreaseCurrentAGI
+                dc.l DecreaseCurrentMOV
+                dc.l EquipEffect_DecreaseCriticalProwess
+                dc.l EquipEffect_DecreaseDoubleAttackProwess
+                dc.l EquipEffect_DecreaseCounterAttackProwess
+                dc.l EquipEffect_DecreaseResistanceGroup1
+                dc.l EquipEffect_DecreaseResistanceGroup2
+                dc.l SetCurrentATT
+                dc.l SetCurrentDEF
+                dc.l SetCurrentAGI
+                dc.l SetCurrentMOV
+                dc.l EquipEffect_SetCriticalProwess
+                dc.l EquipEffect_SetDoubleAttackProwess
+                dc.l EquipEffect_SetCounterAttackProwess
+                dc.l EquipEffect_SetResistanceGroup1
+                dc.l EquipEffect_SetResistanceGroup2
+                dc.l EquipEffect_SetStatus
+            else
                 dc.l nullsub_8B22
                 dc.l nullsub_8B22
                 dc.l EquipEffect_IncreaseCriticalProwess
@@ -1103,6 +1134,7 @@ pt_EquipEffectFunctions:
                 dc.l EquipEffect_SetCriticalProwess
                 dc.l EquipEffect_SetDoubleAttackProwess
                 dc.l EquipEffect_SetCounterAttackProwess
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1182,6 +1214,233 @@ EquipEffect_IncreaseCounterAttackProwess:
                 rts
 
     ; End of function EquipEffect_IncreaseCounterAttackProwess
+
+            if (STANDARD_BUILD&ADDITIONAL_EQUIPEFFECTS=1)
+
+; =============== S U B R O U T I N E =======================================
+
+EquipEffect_DecreaseCriticalProwess:
+                
+                move.b  (a2),d2
+                andi.b  #PROWESS_MASK_CRITICAL,d2
+                cmpi.b  #8,d2
+                bcc.s   @Skip           ; skip if not a regular critical hit setting
+                sub.b   d1,d2
+                cmpi.b  #0,d2
+                bcs.s   @Skip
+                moveq   #8,d2           ; cap to null critical hit setting
+@Skip:
+                
+                andi.b  #PROWESS_MASK_DOUBLE|PROWESS_MASK_COUNTER,(a2)
+                or.b    d2,(a2)
+                rts
+
+    ; End of function EquipEffect_IncreaseCriticalProwess
+
+
+; =============== S U B R O U T I N E =======================================
+
+EquipEffect_DecreaseDoubleAttackProwess:
+                
+                move.b  (a2),d2
+                lsr.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2
+                andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d2
+                sub.b   d1,d2
+                cmpi.b  #0,d2
+                bcs.s   @Continue
+                moveq   #0,d2           ; cap to lowest double attack setting
+@Continue:
+                
+                lsl.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2
+                andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_COUNTER,(a2)
+                or.b    d2,(a2)
+                rts
+
+    ; End of function EquipEffect_IncreaseDoubleAttackProwess
+
+
+; =============== S U B R O U T I N E =======================================
+
+EquipEffect_DecreaseCounterAttackProwess:
+                
+                move.b  (a2),d2
+                lsr.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d2
+                andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d2
+                sub.b   d1,d2
+                cmpi.b  #0,d2
+                bcs.s   @Continue
+                moveq   #0,d2           ; cap to highest counter attack setting
+@Continue:
+                
+                lsl.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d2
+                andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_DOUBLE,(a2)
+                or.b    d2,(a2)
+                rts
+
+    ; End of function EquipEffect_IncreaseCounterAttackProwess
+
+
+; =============== S U B R O U T I N E =======================================
+
+EquipEffect_IncreaseResistanceGroup2:
+
+                movem.l  d0-a5,-(sp)
+                lsl.w    #8,d1
+                bra.s    EquipEffect_IncreaseResistance
+
+    ; End of function EquipEffect_IncreaseResistanceGroup2
+
+
+; =============== S U B R O U T I N E =======================================
+
+EquipEffect_IncreaseResistanceGroup1:
+                
+                movem.l  d0-a5,-(sp)
+EquipEffect_IncreaseResistance:
+                clr.l    d4
+                clr.l    d2
+                clr.l    d3
+                clr.l    d5
+                move.w   d1,d2
+                move.b   #7,d5
+                
+@Loop_Elements:
+                lsl.w    #2,d4
+                jsr      GetCurrentResistance
+                move.w   d2,d3
+                lsl.w    #1,d5
+                ror.w    d5,d3
+                andi.w   #3,d3
+                ror.w    d5,d1
+                andi.w   #3,d1
+                add.b    d3,d1
+                cmp.b    #3,d1
+                ble.s    @ValidResist
+                move.b   #3,d1
+@ValidResist:
+                btst     #0,d1
+                beq.s    @TestBit1
+                bset     #0,d4
+@TestBit1:
+                
+                btst     #1,d1
+                beq.s    @NextElement
+                bset     #1,d4
+@NextElement:
+                lsr.w    #1,d5
+                dbf      d5,@Loop_Elements
+                
+                move.w   d4,d1
+                jsr      SetCurrentResistance
+                movem.l  (sp)+,d0-a5
+                rts
+
+    ; End of function EquipEffect_IncreaseResistanceGroup1
+
+
+; =============== S U B R O U T I N E =======================================
+
+EquipEffect_DecreaseResistanceGroup2:
+                
+                movem.l  d0-a5,-(sp)
+                lsl.w    #8,d1
+                bra.s    EquipEffect_DecreaseResistance
+
+    ; End of function EquipEffect_DecreaseResistanceGroup2
+
+
+; =============== S U B R O U T I N E =======================================
+
+EquipEffect_DecreaseResistanceGroup1:
+                
+                movem.l  d0-a5,-(sp)
+EquipEffect_DecreaseResistance:
+                clr.l    d4
+                clr.l    d2
+                clr.l    d3
+                clr.l    d5
+                move.w   d1,d2
+                move.b   #7,d5
+                
+@Loop_Elements:
+                lsl.w    #2,d4
+                jsr      GetCurrentResistance
+                move.w   d2,d3
+                lsl.w    #1,d5
+                ror.w    d5,d3
+                andi.w   #3,d3
+                ror.w    d5,d1
+                andi.w   #3,d1
+                sub.b    d3,d1
+                cmp.b    #3,d1
+                ble.s    @ValidResist
+                move.b   #3,d1
+@ValidResist:
+                btst     #0,d1
+                beq.s    @TestBit1
+                bset     #0,d4
+@TestBit1:
+                
+                btst     #1,d1
+                beq.s    @NextElement
+                bset     #1,d4
+@NextElement:
+                lsr.w    #1,d5
+                dbf      d5,@Loop_Elements
+                
+                move.w   d4,d1
+                jsr      SetCurrentResistance
+                
+                movem.l  (sp)+,d0-a5
+                rts
+
+    ; End of function EquipEffect_DecreaseResistanceGroup1
+
+
+; =============== S U B R O U T I N E =======================================
+
+EquipEffect_SetResistanceGroup2:
+                
+                movem.l  d0-a5,-(sp)
+                lsl.w    #8,d1
+                ori.w    #RESIST_GROUP2_MASK,d1
+                move.w   d1,d3
+                jsr      GetCurrentResistance
+                ori.w    #RESIST_GROUP1_MASK,d1
+                bra.s    EquipEffect_SetResistance
+
+    ; End of function EquipEffect_SetResistanceGroup2
+
+
+; =============== S U B R O U T I N E =======================================
+
+EquipEffect_SetResistanceGroup1:
+                
+                movem.l  d0-a5,-(sp)
+                ori.w    #RESIST_GROUP1_MASK,d1
+                move.w   d1,d3
+                jsr      GetCurrentResistance
+                ori.w    #RESIST_GROUP2_MASK,d1
+EquipEffect_SetResistance:
+                
+                and.w    d3,d1
+                jsr      SetCurrentResistance
+                movem.l  (sp)+,d0-a5
+                rts
+
+    ; End of function EquipEffect_SetResistanceGroup1
+
+
+; =============== S U B R O U T I N E =======================================
+
+EquipEffect_SetStatus:
+                
+                bset.l   d1,d3
+                rts
+
+    ; End of function EquipEffect_SetResistanceGroup1
+    
+            endif
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1336,7 +1595,12 @@ GetEquipmentType:
                 
                 move.l  a0,-(sp)
                 bsr.s   GetItemDefAddress
+            
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                add.w   #ITEMDEF_OFFSET_TYPE,a0
+            else
                 addq.w  #ITEMDEF_OFFSET_TYPE,a0
+            endif
                 btst    #ITEMTYPE_BIT_WEAPON,(a0)
                 bne.s   @Weapon         
                 btst    #ITEMTYPE_BIT_RING,(a0)
@@ -1444,6 +1708,12 @@ GetEquippedItemByType:
 AddItem:
                 
                 movem.l d0/a0,-(sp)
+            if (STANDARD_BUILD&FIX_ENEMY_BATTLE_EQUIP=1)
+                tst.b   d0
+                bmi.s   @SkipMasking
+                andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
+@SkipMasking:
+            endif
                 bsr.w   GetCombatantEntryAddress
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
             else
@@ -1462,7 +1732,11 @@ AddItem:
                 bra.s   @Done
 @Break:
                 
+            if (STANDARD_BUILD&FIX_ENEMY_BATTLE_EQUIP=1)
+            else
                 andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
+            endif
+            
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 movep.w d1,COMBATANT_OFFSET_ITEMS-ITEMENTRY_SIZE(a0)
             else
@@ -1614,9 +1888,24 @@ IsItemEquippableAndCursed?:
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
                 addq.b  #1,d0
                 bsr.w   GetItemDefAddress
+                
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.l  a0,-(sp)
+@EquipFlag_Loop:
+                move.l  (a0)+,d1         ; get class-equippable bitfield
+                cmpi.b  #$20,d0
+                bls.s   @EquipCompare
+                subi.b  #$20,d0
+                bra.s   @EquipFlag_Loop
+@EquipCompare:
+                lsr.l   d0,d1           ; push relevant class-equippable bit into carry
+                bcc.s   @NotEquippable
+                move.l  (sp)+,a0
+            else
                 move.l  (a0),d1         ; get class-equippable bitfield
                 lsr.l   d0,d1           ; push relevant class-equippable bit into carry
-                bcc.s   @NotEquippable  
+                bcc.s   @NotEquippable
+            endif
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0) 
                                                         ; test cursed bit of itemdef's misc byte
                 bne.s   @EquippableAndCursed
@@ -1629,7 +1918,10 @@ IsItemEquippableAndCursed?:
                 
                 bra.s   @Done
 @NotEquippable:
-                
+
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.l  (sp)+,a0
+            endif
                 move.w  #1,d2           ; code 1: not equippable
 @Done:
                 
@@ -1966,6 +2258,17 @@ GetEquippableItemsByType:
                 
                 bsr.w   GetCombatantEntryAddress
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                clr.w   d7
+@CompareClass_Loop:
+                cmpi.b  #$1F,d0
+                bls.w   @Break
+                subi.b  #$20,d0
+                addq.w  #1,d7
+                bra.s   @CompareClass_Loop
+                
+@Break:
+            endif
                 moveq   #1,d3
                 lsl.l   d0,d3           ; place class bit in long value
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
@@ -1976,9 +2279,9 @@ GetEquippableItemsByType:
                 
                 ; Init list with default values
             if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                move.l  #$FF0004,(a2)
-                move.l  #$FF0004,4(a2)
-                move.l  #$FF0004,8(a2)
+                move.l  #$7F0004,(a2)
+                move.l  #$7F0004,4(a2)
+                move.l  #$7F0004,8(a2)
                 move.l  #$1000004,12(a2)
             else
                 move.l  #$7F0004,(a2)
@@ -2029,6 +2332,23 @@ GetEquippableItemsByType:
 
 IsItemEquippable?:
                 
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                movem.l d7/a0,-(sp)
+                bsr.w   GetItemDefAddress
+                move.b  ITEMDEF_OFFSET_TYPE(a0),d6
+                and.b   d2,d6
+                beq.s   @Done           ; skip if not a weapon/ring
+                lsl.w   #2,d7
+                adda.l  d7,a0
+                move.l  (a0),d6
+                and.l   d3,d6
+                beq.s   @Done
+                ori     #1,ccr          ; set carry flag : Item is Equippable !
+@Done:
+                
+                movem.l (sp)+,d7/a0
+                rts
+            else
                 movem.l a0,-(sp)
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d6
@@ -2042,6 +2362,7 @@ IsItemEquippable?:
                 
                 movem.l (sp)+,a0
                 rts
+            endif
 
     ; End of function IsItemEquippable?
 
@@ -2058,6 +2379,17 @@ IsWeaponOrRingEquippable?:
                 move.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2
                 bsr.w   GetCombatantEntryAddress
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                clr.w   d7
+@CompareClass_Loop:
+                cmpi.b  #$1F,d0
+                bls.w   @Break
+                subi.b  #$20,d0
+                addq.w  #1,d7
+                bra.s   @CompareClass_Loop
+                
+@Break:
+            endif
                 moveq   #1,d3
                 lsl.l   d0,d3
                 bsr.s   IsItemEquippable?
@@ -2082,9 +2414,24 @@ GetEquipNewATTandDEF:
                 move.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2
                 clr.w   d0
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                clr.w   d7
+@CompareClass_Loop:
+                cmpi.b  #$1F,d0
+                bls.w   @Break
+                subi.b  #$20,d0
+                addq.w  #1,d7
+                bra.s   @CompareClass_Loop
+                
+@Break:
+            endif
                 moveq   #1,d3
                 lsl.l   d0,d3
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                bsr.w   IsItemEquippable?
+            else
                 bsr.s   IsItemEquippable?
+            endif
                 movem.w (sp)+,d0/d2-d3
                 bcc.w   @Skip           ; skip if item is not equippable
                 movem.l d1/a0,-(sp)

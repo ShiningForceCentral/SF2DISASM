@@ -25,11 +25,15 @@ Map70_ZoneEvent0:
 
 Map70_DefaultZoneEvent:
                 
-                 
+            if (STANDARD_BUILD&FIX_MISSING_RANDOM_BATTLES=1)
+                move.w  #$A,d0
+                jsr     CheckRandomBattle
+            else
                 chkFlg  510             ; Battle 10 completed - BATTLE_TO_THE_EAST                 
                 bne.s   return_4FE30
                 setFlg  410             ; Battle 10 unlocked - BATTLE_TO_THE_EAST               
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
+            endif
 return_4FE30:
                 
                 rts

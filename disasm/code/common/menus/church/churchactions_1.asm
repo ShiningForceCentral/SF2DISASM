@@ -84,6 +84,12 @@ ChurchMenuActions:
                 bsr.w   GetPromotionData
                 cmpi.w  #0,cannotPromoteFlag(a6)
                 beq.w   @ConfirmRaise
+                
+            if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+                jsr     GetCurrentLevel
+                mulu.w  #CHURCHMENU_PER_LEVEL_RAISE_COST,d1
+                add.l   d1,-8(a6)
+            endif
                 addi.l  #CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED,actionCost(a6)
 @ConfirmRaise:
                 
@@ -151,7 +157,25 @@ ChurchMenuActions:
                 addi.w  #1,poisonedMembersCount(a6)
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     121             ; "Gosh!  {NAME} is{N}poisoned!{W2}"
+                
+            if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+                jsr     GetCurrentLevel
+                mulu.w  #CHURCHMENU_PER_LEVEL_POISON_COST,d1
+                move.l  d1,-8(a6)
+                jsr     GetClass
+                move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
+                bsr.w   GetPromotionData
+                cmpi.w  #0,-$24(a6)
+                beq.w   @CurePoison_Unpromoted
+                jsr     GetCurrentLevel
+                mulu.w  #CHURCHMENU_PER_LEVEL_POISON_COST,d1
+                add.l   d1,-8(a6)
+                addi.l  #CHURCHMENU_POISON_COST_EXTRA_WHEN_PROMOTED,-8(a6)
+                
+@CurePoison_Unpromoted:
+            else
                 move.l  #CHURCHMENU_CURE_POISON_COST,actionCost(a6)
+            endif
                 move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
                 jsr     j_CreateGoldWindow
@@ -322,7 +346,7 @@ ChurchMenuActions:
                 txt     137             ; "Oh, I'm wrong.{W2}"
                 bra.w   @RestartPromo
 @CheckSpecialPromo:
-                
+            if (STANDARD_BUILD&EXPANDED_CLASSES=0)
                 move.w  currentClass(a6),d1
                 move.w  #PROMOTIONSECTION_SPECIAL_BASE,d2
                 bsr.w   GetPromotionData
@@ -405,6 +429,142 @@ ChurchMenuActions:
                 move.w  cursedMembersCount(a6),d0 ; temporary variable : index of member holding promotion item
                 move.w  itemsHeldNumber(a6),d1 ; temporary variable : item slot
                 jsr     j_RemoveItemBySlot
+                
+            else
+                move.w  currentClass(a6),d1
+                move.w  #PROMOTIONSECTION_VIGOR_BASE,d2
+                bsr.w   GetPromotionData
+                cmpi.w  #0,cannotPromoteFlag(a6)
+                bne.w   @CheckSpecialPromo2
+                clr.w   promotionItem(a6)
+                move.w  promotionSectionOffset(a6),d7
+                subq.w  #1,d7
+                move.w  #PROMOTIONSECTION_VIGOR_PROMO,d2
+                bsr.w   FindPromotionSection
+                addq.w  #1,a0
+                move.w  #ITEM_VIGOR_BALL,d1
+                jsr     GetItemInventoryLocation
+                cmpi.w  #$FFFF,d0
+                beq.s   @CheckSpecialPromo2
+                move.w  #ITEM_VIGOR_BALL,promotionItem(a6)
+                clr.w   d0
+                bsr.w   PromoWithItem
+                jsr     YesNoChoiceBox
+                cmpi.w  #0,d0
+                beq.w   @ChangeSpells
+                txt     $90             ; "Then"
+                
+@CheckSpecialPromo2:
+                move.w  currentClass(a6),d1
+                move.w  #PROMOTIONSECTION_WING_BASE,d2
+                bsr.w   GetPromotionData
+                cmpi.w  #0,cannotPromoteFlag(a6)
+                bne.w   @CheckSpecialPromo3
+                clr.w   promotionItem(a6)
+                move.w  promotionSectionOffset(a6),d7
+                subq.w  #1,d7
+                move.w  #PROMOTIONSECTION_WING_PROMO,d2
+                bsr.w   FindPromotionSection
+                addq.w  #1,a0
+                move.w  #ITEM_PEGASUS_WING,d1
+                jsr     GetItemInventoryLocation
+                cmpi.w  #$FFFF,d0
+                beq.s   @CheckSpecialPromo3
+                move.w  #ITEM_PEGASUS_WING,promotionItem(a6)
+                clr.w   d0
+                bsr.w   PromoWithItem
+                jsr     YesNoChoiceBox
+                cmpi.w  #0,d0
+                beq.w   @ChangeSpells
+                txt     $90             ; "Then"
+                
+@CheckSpecialPromo3:
+                move.w  currentClass(a6),d1
+                move.w  #PROMOTIONSECTION_PRIDE_BASE,d2
+                bsr.w   GetPromotionData
+                cmpi.w  #0,cannotPromoteFlag(a6)
+                bne.w   @CheckSpecialPromo4
+                clr.w   promotionItem(a6)
+                move.w  promotionSectionOffset(a6),d7
+                subq.w  #1,d7
+                move.w  #PROMOTIONSECTION_PRIDE_PROMO,d2
+                bsr.w   FindPromotionSection
+                addq.w  #1,a0
+                move.w  #ITEM_WARRIORS_PRIDE,d1
+                jsr     GetItemInventoryLocation
+                cmpi.w  #$FFFF,d0
+                beq.s   @CheckSpecialPromo4
+                move.w  #ITEM_WARRIORS_PRIDE,promotionItem(a6)
+                clr.w   d0
+                bsr.w   PromoWithItem
+                jsr     YesNoChoiceBox
+                cmpi.w  #0,d0
+                beq.w   @ChangeSpells
+                txt     $90             ; "Then"
+                
+@CheckSpecialPromo4:
+                move.w  currentClass(a6),d1
+                move.w  #PROMOTIONSECTION_TOME_BASE,d2
+                bsr.w   GetPromotionData
+                cmpi.w  #0,cannotPromoteFlag(a6)
+                bne.w   @CheckSpecialPromo5
+                clr.w   promotionItem(a6)
+                move.w  promotionSectionOffset(a6),d7
+                subq.w  #1,d7
+                move.w  #PROMOTIONSECTION_TOME_PROMO,d2
+                bsr.w   FindPromotionSection
+                addq.w  #1,a0
+                move.w  #ITEM_SECRET_BOOK,d1
+                jsr     GetItemInventoryLocation
+                cmpi.w  #$FFFF,d0
+                beq.s   @CheckSpecialPromo5
+                move.w  #ITEM_SECRET_BOOK,promotionItem(a6)
+                clr.w   d0
+                bsr.w   PromoWithItem
+                jsr     YesNoChoiceBox
+                cmpi.w  #0,d0
+                beq.w   @ChangeSpells
+                txt     $90             ; "Then"
+                
+@CheckSpecialPromo5:
+                move.w  currentClass(a6),d1
+                move.w  #PROMOTIONSECTION_TANK_BASE,d2
+                bsr.w   GetPromotionData
+                cmpi.w  #0,cannotPromoteFlag(a6)
+                bne.w   @CheckRegularPromo
+                clr.w   promotionItem(a6)
+                move.w  promotionSectionOffset(a6),d7
+                subq.w  #1,d7
+                move.w  #PROMOTIONSECTION_TANK_PROMO,d2
+                bsr.w   FindPromotionSection
+                addq.w  #1,a0
+                move.w  #ITEM_SILVER_TANK,d1
+                jsr     GetItemInventoryLocation
+                cmpi.w  #$FFFF,d0
+                beq.s   @CheckRegularPromo
+                move.w  #ITEM_SILVER_TANK,promotionItem(a6)
+                clr.w   d0
+                bsr.w   PromoWithItem
+                jsr     YesNoChoiceBox
+                cmpi.w  #0,d0
+                beq.w   @ChangeSpells
+                txt     $90             ; "Then"
+                bra.w   @CheckRegularPromo
+@ChangeSpells:
+                
+                cmpi.w  #CLASS_SORC,newClass(a6)
+                bne.w   @RemovePromoItem
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                txt     $91             ; "{NAME} loses all spells{N}that were learned.{N}OK?"
+                jsr     YesNoChoiceBox
+                cmpi.w  #0,d0
+                bne.w   @RestartPromo
+@RemovePromoItem:
+                
+                move.w  promotionItem(a6),d0
+                jsr     RemoveItemFromInventory
+            endif
+            
                 bra.w   @DoPromo
 @CheckRegularPromo:
                 
@@ -512,3 +672,23 @@ ChurchMenuActions:
                 bra.w   @StartMenu      
 
     ; End of function ChurchMenuActions
+    
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+
+; =============== S U B R O U T I N E =======================================
+
+PromoWithItem:
+                
+                move.b  (a0)+,d0
+                dbf     d7,PromoWithItem
+                move.w  d0,newClass(a6)
+                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  promotionItem(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                txt     $8F             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
+                txt     $93             ; "OK?"
+                rts
+
+    ; End of function PromoWithItem
+    
+            endif
