@@ -60,7 +60,7 @@ SetLevel:
 ; =============== S U B R O U T I N E =======================================
 
 
-SetMaxHP:
+SetMaxHp:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_HP_MAX,d7
@@ -68,13 +68,13 @@ SetMaxHP:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetMaxHP
+    ; End of function SetMaxHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetCurrentHP:
+SetCurrentHp:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_HP_CURRENT,d7
@@ -82,13 +82,13 @@ SetCurrentHP:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetCurrentHP
+    ; End of function SetCurrentHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetMaxMP:
+SetMaxMp:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MP_MAX,d7
@@ -96,13 +96,13 @@ SetMaxMP:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetMaxMP
+    ; End of function SetMaxMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetCurrentMP:
+SetCurrentMp:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MP_CURRENT,d7
@@ -110,13 +110,13 @@ SetCurrentMP:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetCurrentMP
+    ; End of function SetCurrentMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetBaseATT:
+SetBaseAtt:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_ATT_BASE,d7
@@ -124,13 +124,13 @@ SetBaseATT:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetBaseATT
+    ; End of function SetBaseAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetCurrentATT:
+SetCurrentAtt:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_ATT_CURRENT,d7
@@ -138,13 +138,13 @@ SetCurrentATT:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetCurrentATT
+    ; End of function SetCurrentAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetBaseDEF:
+SetBaseDef:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_DEF_BASE,d7
@@ -152,13 +152,13 @@ SetBaseDEF:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetBaseDEF
+    ; End of function SetBaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetCurrentDEF:
+SetCurrentDef:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_DEF_CURRENT,d7
@@ -166,13 +166,13 @@ SetCurrentDEF:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetCurrentDEF
+    ; End of function SetCurrentDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetBaseAGI:
+SetBaseAgi:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_AGI_BASE,d7
@@ -180,13 +180,13 @@ SetBaseAGI:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetBaseAGI
+    ; End of function SetBaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetCurrentAGI:
+SetCurrentAgi:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_AGI_CURRENT,d7
@@ -194,13 +194,13 @@ SetCurrentAGI:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetCurrentAGI
+    ; End of function SetCurrentAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetBaseMOV:
+SetBaseMov:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MOV_BASE,d7
@@ -208,13 +208,13 @@ SetBaseMOV:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetBaseMOV
+    ; End of function SetBaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetCurrentMOV:
+SetCurrentMov:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MOV_CURRENT,d7
@@ -222,7 +222,7 @@ SetCurrentMOV:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetCurrentMOV
+    ; End of function SetCurrentMov
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -298,7 +298,7 @@ SetStatusEffects:
 ; =============== S U B R O U T I N E =======================================
 
 
-SetXPos:
+SetCombatantX:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_X,d7
@@ -306,13 +306,13 @@ SetXPos:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetXPos
+    ; End of function SetCombatantX
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetYPos:
+SetCombatantY:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_Y,d7
@@ -320,13 +320,13 @@ SetYPos:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetYPos
+    ; End of function SetCombatantY
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetCurrentEXP:
+SetCurrentExp:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_EXP,d7
@@ -334,7 +334,7 @@ SetCurrentEXP:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetCurrentEXP
+    ; End of function SetCurrentExp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -432,7 +432,7 @@ IncreaseLevel:
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseMaxHP:
+IncreaseMaxHp:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -442,13 +442,13 @@ IncreaseMaxHP:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseMaxHP
+    ; End of function IncreaseMaxHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseCurrentHP:
+IncreaseCurrentHp:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -459,13 +459,13 @@ IncreaseCurrentHP:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseCurrentHP
+    ; End of function IncreaseCurrentHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseMaxMP:
+IncreaseMaxMp:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -475,13 +475,13 @@ IncreaseMaxMP:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseMaxMP
+    ; End of function IncreaseMaxMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseCurrentMP:
+IncreaseCurrentMp:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -492,13 +492,13 @@ IncreaseCurrentMP:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseCurrentMP
+    ; End of function IncreaseCurrentMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseBaseATT:
+IncreaseBaseAtt:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -508,13 +508,13 @@ IncreaseBaseATT:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseBaseATT
+    ; End of function IncreaseBaseAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseCurrentATT:
+IncreaseCurrentAtt:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -524,13 +524,13 @@ IncreaseCurrentATT:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseCurrentATT
+    ; End of function IncreaseCurrentAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseBaseDEF:
+IncreaseBaseDef:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -540,13 +540,13 @@ IncreaseBaseDEF:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseBaseDEF
+    ; End of function IncreaseBaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseCurrentDEF:
+IncreaseCurrentDef:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -556,13 +556,13 @@ IncreaseCurrentDEF:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseCurrentDEF
+    ; End of function IncreaseCurrentDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseBaseAGI:
+IncreaseBaseAgi:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -572,13 +572,13 @@ IncreaseBaseAGI:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseBaseAGI
+    ; End of function IncreaseBaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseCurrentAGI:
+IncreaseCurrentAgi:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -588,13 +588,13 @@ IncreaseCurrentAGI:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseCurrentAGI
+    ; End of function IncreaseCurrentAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseBaseMOV:
+IncreaseBaseMov:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -604,13 +604,13 @@ IncreaseBaseMOV:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseBaseMOV
+    ; End of function IncreaseBaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseCurrentMOV:
+IncreaseCurrentMov:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -620,13 +620,13 @@ IncreaseCurrentMOV:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseCurrentMOV
+    ; End of function IncreaseCurrentMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-IncreaseEXP:
+IncreaseExp:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -636,7 +636,7 @@ IncreaseEXP:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function IncreaseEXP
+    ; End of function IncreaseExp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -682,7 +682,7 @@ IncreaseDefeats:
 ; =============== S U B R O U T I N E =======================================
 
 
-DecreaseCurrentHP:
+DecreaseCurrentHp:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -693,13 +693,13 @@ DecreaseCurrentHP:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function DecreaseCurrentHP
+    ; End of function DecreaseCurrentHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DecreaseCurrentMP:
+DecreaseCurrentMp:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -710,13 +710,13 @@ DecreaseCurrentMP:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function DecreaseCurrentMP
+    ; End of function DecreaseCurrentMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DecreaseCurrentATT:
+DecreaseCurrentAtt:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -726,13 +726,13 @@ DecreaseCurrentATT:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function DecreaseCurrentATT
+    ; End of function DecreaseCurrentAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DecreaseBaseDEF:
+DecreaseBaseDef:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -742,13 +742,13 @@ DecreaseBaseDEF:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function DecreaseBaseDEF
+    ; End of function DecreaseBaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DecreaseCurrentDEF:
+DecreaseCurrentDef:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -758,13 +758,13 @@ DecreaseCurrentDEF:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function DecreaseCurrentDEF
+    ; End of function DecreaseCurrentDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DecreaseBaseAGI:
+DecreaseBaseAgi:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -774,13 +774,13 @@ DecreaseBaseAGI:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function DecreaseBaseAGI
+    ; End of function DecreaseBaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DecreaseCurrentAGI:
+DecreaseCurrentAgi:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -790,13 +790,13 @@ DecreaseCurrentAGI:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function DecreaseCurrentAGI
+    ; End of function DecreaseCurrentAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DecreaseBaseMOV:
+DecreaseBaseMov:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -806,13 +806,13 @@ DecreaseBaseMOV:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function DecreaseBaseMOV
+    ; End of function DecreaseBaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DecreaseCurrentMOV:
+DecreaseCurrentMov:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
@@ -822,7 +822,7 @@ DecreaseCurrentMOV:
                 movem.l (sp)+,d5-a0
                 rts
 
-    ; End of function DecreaseCurrentMOV
+    ; End of function DecreaseCurrentMov
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -939,7 +939,7 @@ ApplyStatusEffectsAndItemsOnStats:
                 bsr.w   GetStatusEffects
                 move.w  d1,d3
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d3
-                bsr.w   InitCurrentStats
+                bsr.w   InitializeCurrentStats
                 bsr.w   GetCombatantEntryAddress
                 lea     COMBATANT_OFFSET_ITEMS(a0),a1
                 lea     COMBATANT_OFFSET_PROWESS_CURRENT(a0),a2
@@ -982,38 +982,38 @@ ApplyStatusEffectsOnStats:
                 move.w  d3,d2
                 andi.w  #STATUSEFFECT_ATTACK,d2
                 rol.w   #2,d2
-                bsr.w   GetBaseATT
+                bsr.w   GetBaseAtt
                 mulu.w  d2,d1
                 lsr.l   #3,d1
-                bsr.w   IncreaseCurrentATT
+                bsr.w   IncreaseCurrentAtt
                 move.w  d3,d2
                 andi.w  #STATUSEFFECT_BOOST,d2
                 rol.w   #4,d2
-                bsr.w   GetBaseDEF
+                bsr.w   GetBaseDef
                 mulu.w  d2,d1
                 lsr.l   #3,d1
-                bsr.w   IncreaseCurrentDEF
-                bsr.w   GetBaseAGI
+                bsr.w   IncreaseCurrentDef
+                bsr.w   GetBaseAgi
                 mulu.w  d2,d1
                 lsr.l   #3,d1
-                bsr.w   IncreaseCurrentAGI
+                bsr.w   IncreaseCurrentAgi
                 move.w  d3,d2
                 andi.w  #STATUSEFFECT_SLOW,d2
                 rol.w   #6,d2
-                bsr.w   GetBaseDEF
+                bsr.w   GetBaseDef
                 mulu.w  d2,d1
                 lsr.l   #3,d1
-                bsr.w   DecreaseCurrentDEF
-                bsr.w   GetBaseAGI
+                bsr.w   DecreaseCurrentDef
+                bsr.w   GetBaseAgi
                 mulu.w  d2,d1
                 lsr.l   #3,d1
-                bsr.w   DecreaseCurrentAGI
+                bsr.w   DecreaseCurrentAgi
                 btst    #STATUSEFFECT_BIT_STUN,d3
                 beq.s   @Return
                 moveq   #1,d1
-                bsr.w   DecreaseCurrentMOV
+                bsr.w   DecreaseCurrentMov
                 moveq   #5,d1
-                bsr.w   DecreaseCurrentAGI
+                bsr.w   DecreaseCurrentAgi
 @Return:
                 
                 rts
@@ -1079,14 +1079,14 @@ pt_EquipEffectFunctions:
                 dc.l EquipEffect_IncreaseDoubleAttackProwess
                 dc.l EquipEffect_IncreaseCounterAttackProwess
                 dc.l nullsub_8B22
-                dc.l IncreaseCurrentATT
-                dc.l IncreaseCurrentDEF
-                dc.l IncreaseCurrentAGI
-                dc.l IncreaseCurrentMOV
-                dc.l DecreaseCurrentATT
-                dc.l DecreaseCurrentDEF
-                dc.l DecreaseCurrentAGI
-                dc.l DecreaseCurrentMOV
+                dc.l IncreaseCurrentAtt
+                dc.l IncreaseCurrentDef
+                dc.l IncreaseCurrentAgi
+                dc.l IncreaseCurrentMov
+                dc.l DecreaseCurrentAtt
+                dc.l DecreaseCurrentDef
+                dc.l DecreaseCurrentAgi
+                dc.l DecreaseCurrentMov
                 dc.l EquipEffect_SetCriticalProwess
                 dc.l EquipEffect_SetDoubleAttackProwess
                 dc.l EquipEffect_SetCounterAttackProwess
@@ -1212,7 +1212,7 @@ EquipEffect_SetCounterAttackProwess:
 ; =============== S U B R O U T I N E =======================================
 
 
-InitCurrentStats:
+InitializeCurrentStats:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
@@ -1225,7 +1225,7 @@ InitCurrentStats:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function InitCurrentStats
+    ; End of function InitializeCurrentStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1514,7 +1514,7 @@ EquipItemBySlot:
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1 ; test if item is "nothing"
                 beq.s   @Nothing        
-                bsr.s   IsItemEquippableAndCursed?
+                bsr.s   IsItemEquippableAndCursed
                 cmpi.w  #1,d2
                 beq.s   @Goto_Done      ; skip if item is not equippable
                 bset    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
@@ -1539,7 +1539,7 @@ EquipItemBySlot:
 ;   Out: d2.w = 0 if equippable, 1 if not, 2 if equippable and cursed
 
 
-IsItemEquippableAndCursed?:
+IsItemEquippableAndCursed:
                 
                 movem.l d0-d1/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
@@ -1568,7 +1568,7 @@ IsItemEquippableAndCursed?:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function IsItemEquippableAndCursed?
+    ; End of function IsItemEquippableAndCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1580,7 +1580,7 @@ IsItemEquippableAndCursed?:
 UnequipItemBySlotIfNotCursed:
                 
                 movem.l d0-d1/a0,-(sp)
-                bsr.s   IsItemInSlotEquippedOrCursed?
+                bsr.s   IsItemInSlotEquippedOrCursed
                 tst.w   d2
                 bne.s   @Skip           ; skip if anything but equipped and not cursed
                 bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
@@ -1602,7 +1602,7 @@ UnequipItemBySlotIfNotCursed:
 ;        d2.w = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if neither
 
 
-IsItemInSlotEquippedOrCursed?:
+IsItemInSlotEquippedOrCursed:
                 
                 bsr.w   GetCombatantEntryAddress
                 add.w   d1,d1
@@ -1639,7 +1639,7 @@ IsItemInSlotEquippedOrCursed?:
                 
                 rts
 
-    ; End of function IsItemInSlotEquippedOrCursed?
+    ; End of function IsItemInSlotEquippedOrCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1653,7 +1653,7 @@ IsItemInSlotEquippedOrCursed?:
 UnequipItemBySlot:
                 
                 movem.l d0-d1/a0,-(sp)
-                bsr.s   IsItemInSlotEquippedOrCursed?
+                bsr.s   IsItemInSlotEquippedOrCursed
                 bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a0)
                 movem.l (sp)+,d0-d1/a0
                 bra.w   ApplyStatusEffectsAndItemsOnStats
@@ -1864,7 +1864,7 @@ GetEquippableItemsByType:
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Next           ; next if empty slot
-                bsr.s   IsItemEquippable?
+                bsr.s   IsItemEquippable
                 bcc.s   @Next           ; branch if not equippable
                 move.w  d1,(a2)+        ; item index -> equippable items list
                 move.w  d4,(a2)+        ; item slot -> equippable items list
@@ -1891,7 +1891,7 @@ GetEquippableItemsByType:
 ; Out: CCR carry-bit set if true
 
 
-IsItemEquippable?:
+IsItemEquippable:
                 
                 movem.l a0,-(sp)
                 bsr.w   GetItemDefAddress
@@ -1907,7 +1907,7 @@ IsItemEquippable?:
                 movem.l (sp)+,a0
                 rts
 
-    ; End of function IsItemEquippable?
+    ; End of function IsItemEquippable
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1916,7 +1916,7 @@ IsItemEquippable?:
 ; Return CCR carry-bit set if true.
 
 
-IsWeaponOrRingEquippable?:
+IsWeaponOrRingEquippable:
                 
                 movem.l d0/d2-d6/a0,-(sp)
                 move.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2
@@ -1924,17 +1924,17 @@ IsWeaponOrRingEquippable?:
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
                 moveq   #1,d3
                 lsl.l   d0,d3
-                bsr.s   IsItemEquippable?
+                bsr.s   IsItemEquippable
                 movem.l (sp)+,d0/d2-d6/a0
                 rts
 
-    ; End of function IsWeaponOrRingEquippable?
+    ; End of function IsWeaponOrRingEquippable
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-GetEquipNewATTandDEF:
+GetEquipNewAttAndDef:
                 
                 movem.l d0/d4-d6/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
@@ -1948,7 +1948,7 @@ GetEquipNewATTandDEF:
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
                 moveq   #1,d3
                 lsl.l   d0,d3
-                bsr.s   IsItemEquippable?
+                bsr.s   IsItemEquippable
                 movem.w (sp)+,d0/d2-d3
                 bcc.w   @Skip           ; skip if item is not equippable
                 movem.l d1/a0,-(sp)
@@ -1957,13 +1957,13 @@ GetEquipNewATTandDEF:
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d2
                 movem.l (sp)+,d1/a0
                 andi.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2 ; get weapon/ring type
-                bsr.w   GetNewATTandDEFwithItemEquipped
+                bsr.w   GetNewAttAndDefWithItemEquipped
 @Skip:
                 
                 movem.l (sp)+,d0/d4-d6/a0
                 rts
 
-    ; End of function GetEquipNewATTandDEF
+    ; End of function GetEquipNewAttAndDef
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1976,7 +1976,7 @@ GetEquipNewATTandDEF:
 ;      D3 = current DEF with item equipped
 
 
-GetNewATTandDEFwithItemEquipped:
+GetNewAttAndDefWithItemEquipped:
                 
                 movem.l d0-d1/d4-a0,-(sp)
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d7
@@ -2031,7 +2031,7 @@ GetNewATTandDEFwithItemEquipped:
                 movem.l (sp)+,d0-d1/d4-a0
                 rts
 
-    ; End of function GetNewATTandDEFwithItemEquipped
+    ; End of function GetNewAttAndDefWithItemEquipped
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2078,7 +2078,7 @@ loc_90A2:
 ; Is item d1.w cursed? Return CCR carry-bit set if true.
 
 
-IsItemCursed?:
+IsItemCursed:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
@@ -2094,7 +2094,7 @@ IsItemCursed?:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function IsItemCursed?
+    ; End of function IsItemCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2102,7 +2102,7 @@ IsItemCursed?:
 ; Is item d1.w usable in battle? Return CCR carry-bit set if true.
 
 
-IsItemUsableInBattle?:
+IsItemUsableInBattle:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
@@ -2118,7 +2118,7 @@ IsItemUsableInBattle?:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function IsItemUsableInBattle?
+    ; End of function IsItemUsableInBattle
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2127,15 +2127,15 @@ IsItemUsableInBattle?:
 ; Return CCR carry-bit set if true.
 
 
-IsItemUsableByCombatant?:
+IsItemUsableByCombatant:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetEquipmentType
                 tst.w   d2
                 beq.s   @Usable         ; allow usage if item is not a type of equipment
-                bsr.w   IsWeaponOrRingEquippable?
+                bsr.w   IsWeaponOrRingEquippable
                 bcc.s   @NotUsable      ; if weapon or ring is not equippable, disallow usage
-                bsr.s   IsItemUsableInBattle?
+                bsr.s   IsItemUsableInBattle
                 bcc.s   @NotUsable      ; if item has no use spell, disallow usage
 @Usable:
                 
@@ -2149,7 +2149,7 @@ IsItemUsableByCombatant?:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function IsItemUsableByCombatant?
+    ; End of function IsItemUsableByCombatant
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -2177,7 +2177,7 @@ UnequipAllItemsIfNotCursed:
                 bclr    #ITEMENTRY_BIT_EQUIPPED,ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT(a1)
 @Next:
                 
-                addq.w  #2,a1
+                addq.w  #ITEMENTRY_SIZE,a1
                 dbf     d0,@Loop
                 
                 movem.l (sp)+,d0-d1/a0-a1
@@ -2188,6 +2188,9 @@ UnequipAllItemsIfNotCursed:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d1.w = item
+; Out: d0.b = character, d1.w = item slot
+
 
 GetItemInventoryLocation:
                 
@@ -2197,33 +2200,33 @@ GetItemInventoryLocation:
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d6
                 subq.w  #1,d6
-loc_915A:
+@Characters_Loop:
                 
                 move.b  (a0)+,d0
                 clr.w   d1
                 bsr.w   GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
-                beq.s   loc_9182
+                beq.s   @NextCharacter
                 move.w  d2,d7           ; number of items
                 subq.w  #1,d7
-loc_916A:
+@Items_Loop:
                 
                 move.w  d7,d1
                 bsr.w   GetItemBySlotAndHeldItemsNumber
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmp.w   d3,d1
-                bne.s   loc_917E
+                bne.s   @NextItem
                 move.w  d7,d1
-                bra.w   loc_918E
-loc_917E:
+                bra.w   @Done
+@NextItem:
                 
-                dbf     d7,loc_916A
-loc_9182:
+                dbf     d7,@Items_Loop
+@NextCharacter:
                 
-                dbf     d6,loc_915A
-                move.w  #$FFFF,d0
-                move.w  #$FFFF,d1
-loc_918E:
+                dbf     d6,@Characters_Loop
+                move.w  #-1,d0
+                move.w  #-1,d1
+@Done:
                 
                 movem.l (sp)+,d2-d3/d6-a0
                 rts
@@ -2432,14 +2435,14 @@ GetCombatantEntryAddress:
                 movem.w d0-d1,-(sp)
                 cmpi.b  #COMBATANT_ENEMIES_START,d0
                 bcc.s   @Enemy
-                cmpi.b  #COMBATANT_ALLIES_SPACEEND_MINUS_ONE,d0
+                cmpi.b  #COMBATANT_ALLIES_SPACE_END_MINUS_ONE,d0
                 bhi.s   @ErrorHandling
                 bra.s   @GetAddress
 @Enemy:
                 
-                cmpi.b  #COMBATANT_ENEMIES_SPACEEND,d0
+                cmpi.b  #$A0,d0
                 bhi.s   @ErrorHandling
-                subi.b  #COMBATANT_ALLIES_SPACEEND_AND_ENEMIES_START_DIFFERENCE,d0
+                subi.b  #COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END,d0
 @GetAddress:
                 
                 andi.w  #$FF,d0
@@ -2790,20 +2793,20 @@ GetDistanceBetweenEntities:
                 clr.w   d2
                 clr.w   d3
                 clr.w   d4
-                bsr.w   GetXPos
+                bsr.w   GetCombatantX
                 cmpi.b  #$FF,d1
                 beq.w   loc_9478
                 move.w  d1,d2           ; keep 1st character XPos
-                bsr.w   GetYPos
+                bsr.w   GetCombatantY
                 cmpi.b  #$FF,d1
                 beq.w   loc_9478
                 move.w  d1,d3           ; keep 1st character YPos
                 move.w  d5,d0
-                bsr.w   GetXPos
+                bsr.w   GetCombatantX
                 cmpi.b  #$FF,d1
                 beq.w   loc_9478
                 move.w  d1,d4
-                bsr.w   GetYPos
+                bsr.w   GetCombatantY
                 cmpi.b  #$FF,d1
                 beq.w   loc_9478
                 move.w  d1,d5

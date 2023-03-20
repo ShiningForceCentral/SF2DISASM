@@ -9,7 +9,7 @@ WitchSuspend:
                 
                  
                 sndCom  MUSIC_SUSPEND
-                bsr.w   InitWitchSuspendVIntFunctions
+                bsr.w   InitializeWitchSuspendVIntFunctions
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
                 move.b  #$FF,((byte_FFB082-$1000000)).w

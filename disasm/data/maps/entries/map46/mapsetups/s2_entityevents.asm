@@ -40,7 +40,7 @@ ms_map46_EntityEvents:
 Map46_EntityEvent0:
                 
                 moveq   #1,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent0
 
@@ -51,7 +51,7 @@ Map46_EntityEvent0:
 Map46_EntityEvent1:
                 
                 moveq   #2,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent1
 
@@ -62,7 +62,7 @@ Map46_EntityEvent1:
 Map46_EntityEvent2:
                 
                 moveq   #3,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent2
 
@@ -73,7 +73,7 @@ Map46_EntityEvent2:
 Map46_EntityEvent3:
                 
                 moveq   #4,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent3
 
@@ -84,7 +84,7 @@ Map46_EntityEvent3:
 Map46_EntityEvent4:
                 
                 moveq   #5,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent4
 
@@ -95,7 +95,7 @@ Map46_EntityEvent4:
 Map46_EntityEvent5:
                 
                 moveq   #6,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent5
 
@@ -106,7 +106,7 @@ Map46_EntityEvent5:
 Map46_EntityEvent6:
                 
                 moveq   #7,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent6
 
@@ -117,7 +117,7 @@ Map46_EntityEvent6:
 Map46_EntityEvent7:
                 
                 moveq   #8,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent7
 
@@ -128,7 +128,7 @@ Map46_EntityEvent7:
 Map46_EntityEvent8:
                 
                 moveq   #9,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent8
 
@@ -139,7 +139,7 @@ Map46_EntityEvent8:
 Map46_EntityEvent9:
                 
                 moveq   #$A,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent9
 
@@ -150,7 +150,7 @@ Map46_EntityEvent9:
 Map46_EntityEvent10:
                 
                 moveq   #$B,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent10
 
@@ -161,7 +161,7 @@ Map46_EntityEvent10:
 Map46_EntityEvent11:
                 
                 moveq   #$C,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent11
 
@@ -172,7 +172,7 @@ Map46_EntityEvent11:
 Map46_EntityEvent12:
                 
                 moveq   #$D,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent12
 
@@ -183,7 +183,7 @@ Map46_EntityEvent12:
 Map46_EntityEvent13:
                 
                 moveq   #$E,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent13
 
@@ -194,7 +194,7 @@ Map46_EntityEvent13:
 Map46_EntityEvent14:
                 
                 moveq   #$F,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent14
 
@@ -205,7 +205,7 @@ Map46_EntityEvent14:
 Map46_EntityEvent15:
                 
                 moveq   #$10,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent15
 
@@ -216,7 +216,7 @@ Map46_EntityEvent15:
 Map46_EntityEvent16:
                 
                 moveq   #$11,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent16
 
@@ -227,7 +227,7 @@ Map46_EntityEvent16:
 Map46_EntityEvent17:
                 
                 moveq   #$12,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent17
 
@@ -238,7 +238,7 @@ Map46_EntityEvent17:
 Map46_EntityEvent18:
                 
                 moveq   #$13,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent18
 
@@ -249,7 +249,7 @@ Map46_EntityEvent18:
 Map46_EntityEvent19:
                 
                 moveq   #$14,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent19
 
@@ -260,7 +260,7 @@ Map46_EntityEvent19:
 Map46_EntityEvent20:
                 
                 moveq   #$15,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent20
 
@@ -271,7 +271,7 @@ Map46_EntityEvent20:
 Map46_EntityEvent21:
                 
                 moveq   #$16,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent21
 
@@ -282,7 +282,7 @@ Map46_EntityEvent21:
 Map46_EntityEvent22:
                 
                 moveq   #$17,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent22
 
@@ -293,7 +293,7 @@ Map46_EntityEvent22:
 Map46_EntityEvent23:
                 
                 moveq   #$18,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent23
 
@@ -304,7 +304,7 @@ Map46_EntityEvent23:
 Map46_EntityEvent24:
                 
                 moveq   #$19,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent24
 
@@ -315,7 +315,7 @@ Map46_EntityEvent24:
 Map46_EntityEvent25:
                 
                 moveq   #$1A,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent25
 
@@ -326,7 +326,7 @@ Map46_EntityEvent25:
 Map46_EntityEvent26:
                 
                 moveq   #$1B,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent26
 
@@ -337,7 +337,7 @@ Map46_EntityEvent26:
 Map46_EntityEvent27:
                 
                 moveq   #$1C,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent27
 
@@ -348,7 +348,7 @@ Map46_EntityEvent27:
 Map46_EntityEvent28:
                 
                 moveq   #$1D,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map46_EntityEvent28
 

@@ -36,25 +36,25 @@ UseItemOnField:
                 bra.w   @Done
 rjt_FieldItemEffects:
                 
-                dc.w ITEM_ANTIDOTE
+                dc.w 3
                 dc.w FieldItem_CurePoison-rjt_FieldItemEffects
-                dc.w ITEM_FAIRY_POWDER
+                dc.w 5
                 dc.w FieldItem_CurePoisonAndParalysis-rjt_FieldItemEffects
-                dc.w ITEM_POWER_WATER
-                dc.w FieldItem_IncreaseATT-rjt_FieldItemEffects
-                dc.w ITEM_PROTECT_MILK
-                dc.w FieldItem_IncreaseDEF-rjt_FieldItemEffects
-                dc.w ITEM_QUICK_CHICKEN
-                dc.w FieldItem_IncreaseAGI-rjt_FieldItemEffects
-                dc.w ITEM_RUNNING_PIMENTO
-                dc.w FieldItem_IncreaseMOV-rjt_FieldItemEffects
-                dc.w ITEM_CHEERFUL_BREAD
-                dc.w FieldItem_IncreaseHP-rjt_FieldItemEffects
-                dc.w ITEM_BRIGHT_HONEY
-                dc.w FieldItem_IncreaseMP-rjt_FieldItemEffects
-                dc.w ITEM_BRAVE_APPLE
-                dc.w LevelUpCutscene-rjt_FieldItemEffects
-                dc.w CODE_TERMINATOR_WORD
+                dc.w 9
+                dc.w FieldItem_IncreaseAtt-rjt_FieldItemEffects
+                dc.w $A
+                dc.w FieldItem_IncreaseDef-rjt_FieldItemEffects
+                dc.w $B
+                dc.w FieldItem_IncreaseAgi-rjt_FieldItemEffects
+                dc.w $C
+                dc.w FieldItem_IncreaseMov-rjt_FieldItemEffects
+                dc.w $D
+                dc.w FieldItem_IncreaseHp-rjt_FieldItemEffects
+                dc.w $E
+                dc.w FieldItem_IncreaseMp-rjt_FieldItemEffects
+                dc.w $F
+                dc.w FieldItem_LevelUp-rjt_FieldItemEffects
+                dc.w $FFFF
 @Done:
                 
                 movem.l (sp)+,d0-d1/d6-d7
@@ -123,7 +123,7 @@ loc_22AA0:
 ; =============== S U B R O U T I N E =======================================
 
 
-FieldItem_IncreaseATT:
+FieldItem_IncreaseAtt:
                 
                 moveq   #3,d6
                 jsr     (GenerateRandomNumber).w
@@ -133,18 +133,18 @@ FieldItem_IncreaseATT:
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     150             ; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
-                jsr     j_IncreaseBaseATT
+                jsr     j_IncreaseBaseAtt
                 move.w  d7,d1
-                jsr     j_IncreaseCurrentATT
+                jsr     j_IncreaseCurrentAtt
                 rts
 
-    ; End of function FieldItem_IncreaseATT
+    ; End of function FieldItem_IncreaseAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-FieldItem_IncreaseDEF:
+FieldItem_IncreaseDef:
                 
                 moveq   #3,d6
                 jsr     (GenerateRandomNumber).w
@@ -154,18 +154,18 @@ FieldItem_IncreaseDEF:
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     151             ; "{NAME}'s defensive{N}power is boosted by {#}.{W2}"
-                jsr     j_IncreaseBaseDEF
+                jsr     j_IncreaseBaseDef
                 move.w  d7,d1
-                jsr     j_IncreaseCurrentDEF
+                jsr     j_IncreaseCurrentDef
                 rts
 
-    ; End of function FieldItem_IncreaseDEF
+    ; End of function FieldItem_IncreaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-FieldItem_IncreaseAGI:
+FieldItem_IncreaseAgi:
                 
                 moveq   #3,d6
                 jsr     (GenerateRandomNumber).w
@@ -175,20 +175,20 @@ FieldItem_IncreaseAGI:
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     152             ; "{NAME}'s agility{N}is boosted by {#}.{W2}"
-                jsr     j_IncreaseAGI
+                jsr     j_IncreaseBaseAgi
                 move.w  d7,d1
-                jsr     j_IncreaseCurrentAGI
+                jsr     j_IncreaseCurrentAgi
                 rts
 
-    ; End of function FieldItem_IncreaseAGI
+    ; End of function FieldItem_IncreaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-FieldItem_IncreaseMOV:
+FieldItem_IncreaseMov:
                 
-                jsr     j_GetBaseMOV
+                jsr     j_GetBaseMov
                 clr.w   d7
                 cmpi.b  #9,d1
                 beq.w   loc_22B42
@@ -203,18 +203,18 @@ loc_22B42:
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     153             ; "{NAME}'s movement{N}range enlarged by {#}.{W2}"
-                jsr     j_IncreaseBaseMOV
+                jsr     j_IncreaseBaseMov
                 move.w  d7,d1
-                jsr     j_IncreaseCurrentMOV
+                jsr     j_IncreaseCurrentMov
                 rts
 
-    ; End of function FieldItem_IncreaseMOV
+    ; End of function FieldItem_IncreaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-FieldItem_IncreaseHP:
+FieldItem_IncreaseHp:
                 
                 moveq   #3,d6
                 jsr     (GenerateRandomNumber).w
@@ -224,20 +224,21 @@ FieldItem_IncreaseHP:
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     154             ; "{NAME}'s max. HP{N}are raised by {#}.{W2}"
-                jsr     j_IncreaseMaxHP
+                jsr     j_IncreaseMaxHp
                 move.w  d7,d1
-                jsr     j_IncreaseCurrentHP
+                jsr     j_IncreaseCurrentHp
                 rts
 
-    ; End of function FieldItem_IncreaseHP
+    ; End of function FieldItem_IncreaseHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-FieldItem_IncreaseMP:
+FieldItem_IncreaseMp:
                 
-                jsr     j_GetMaxMP
+                module
+                jsr     j_GetMaxMp
                 tst.w   d1
                 beq.s   byte_22BBC      
                 moveq   #3,d6
@@ -248,16 +249,17 @@ FieldItem_IncreaseMP:
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     155             ; "{NAME}'s max. MP{N}are raised by {#}.{W2}"
-                jsr     j_IncreaseMP
+                jsr     j_IncreaseMaxMp
                 move.w  d7,d1
-                jsr     j_IncreaseCurrentMP
-                bra.s   return_22BC0
+                jsr     j_IncreaseCurrentMp
+                bra.s   @Return
 byte_22BBC:
                 
                 txt     148             ; "It has no use.{W2}"
-return_22BC0:
+@Return:
                 
                 rts
 
-    ; End of function FieldItem_IncreaseMP
+    ; End of function FieldItem_IncreaseMp
 
+                modend

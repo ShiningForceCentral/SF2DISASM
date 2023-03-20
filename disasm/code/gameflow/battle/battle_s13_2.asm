@@ -74,7 +74,7 @@ sub_1ACA72:
                 clr.w   d0
 loc_1ACA7C:
                 
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.s   loc_1ACA88
                 bpl.s   loc_1ACA8C
@@ -83,7 +83,7 @@ loc_1ACA88:
                 bra.w   loc_1ACABC
 loc_1ACA8C:
                 
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 tst.b   d1
                 bpl.s   loc_1ACA9A
                 bra.w   loc_1ACABC
@@ -92,7 +92,7 @@ loc_1ACA9A:
                 clr.w   d5
                 move.b  d1,d5
                 lsl.w   #8,d5
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 tst.b   d1
                 bpl.s   loc_1ACAAE
                 bra.w   loc_1ACABC
@@ -641,14 +641,12 @@ UpdateTriggeredRegionsAndAi:
 
 ; =============== S U B R O U T I N E =======================================
 
-; adds respawning enemy #s to target list in RAM
 
-
-GetListOfSpawningEnemies:
+PopulateTargetsListWithRespawningEnemies:
                 
                 movem.l d0-a6,-(sp)
-                move.w  #$20,d7 
-                move.w  #$80,d4 
+                move.w  #COMBATANT_ENEMIES_NUMBER,d7
+                move.w  #COMBATANT_ENEMIES_START,d4
                 move.w  d4,d0
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d5
@@ -670,7 +668,7 @@ loc_1ACF56:
 loc_1ACF6A:
                 
                 move.w  d4,d0
-                jsr     j_GetMaxHP
+                jsr     j_GetMaxHp
                 tst.w   d1
                 beq.s   loc_1ACF7A
                 bra.w   loc_1ACFEA
@@ -678,7 +676,7 @@ loc_1ACF7A:
                 
                 move.w  d4,d0
                 jsr     j_GetAiActivationFlag
-                bsr.w   UpdateEnemyStatsForRespawn
+                bsr.w   ResetEnemyStatsForRespawn
                 bcs.w   loc_1ACFEA
                 move.b  d4,(a0,d5.w)
                 addi.w  #1,d5
@@ -686,7 +684,7 @@ loc_1ACF92:
                 
                 cmpi.w  #$100,d1        ; 0x100 - respawn - check if dead
                 bne.w   loc_1ACFC0      
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.s   loc_1ACFA8
                 bra.w   loc_1ACFEA
@@ -694,7 +692,7 @@ loc_1ACFA8:
                 
                 move.w  d4,d0
                 jsr     j_GetAiActivationFlag
-                bsr.w   UpdateEnemyStatsForRespawn
+                bsr.w   ResetEnemyStatsForRespawn
                 bcs.w   loc_1ACFEA
                 move.b  d4,(a0,d5.w)
                 addi.w  #1,d5
@@ -710,7 +708,7 @@ loc_1ACFD2:
                 
                 move.w  d4,d0
                 jsr     j_GetAiActivationFlag
-                bsr.w   UpdateEnemyStatsForRespawn
+                bsr.w   ResetEnemyStatsForRespawn
                 bcs.w   loc_1ACFEA
                 move.b  d4,(a0,d5.w)
                 addi.w  #1,d5
@@ -725,7 +723,7 @@ loc_1ACFEA:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function GetListOfSpawningEnemies
+    ; End of function PopulateTargetsListWithRespawningEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -739,7 +737,7 @@ loc_1ACFEA:
 UpdateEnemyActivationIfDead:
                 
                 movem.l d1-a6,-(sp)
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.s   loc_1AD014
                 bra.w   loc_1AD07E
@@ -791,33 +789,33 @@ loc_1AD088:
 ; =============== S U B R O U T I N E =======================================
 
 
-GetRandomValueSigned:
+GenerateRandomValueSigned:
                 
                 movem.l d0-d5/a0-a6,-(sp)
                 lea     (RANDOM_WAITING_FOR_INPUT).l,a0
                 clr.w   d7
                 move.b  (a0),d7
                 ext.w   d7
-                mulu.w  #$21D,d7
-                addi.w  #$3039,d7
+                mulu.w  #541,d7
+                addi.w  #12345,d7
                 andi.w  #$FF,d7
                 move.b  d7,(a0)
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
 
-    ; End of function GetRandomValueSigned
+    ; End of function GenerateRandomValueSigned
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-RandomUnderD6:
+GenerateRandomNumberUnderD6:
                 
                 movem.l d0-d5/a0-a6,-(sp)
                 move.b  d6,d1
 loc_1AD0BA:
                 
-                bsr.s   GetRandomValueSigned
+                bsr.s   GenerateRandomValueSigned
                 cmpi.b  #1,d1
                 beq.s   loc_1AD0C4
                 bpl.s   loc_1AD0C8
@@ -839,7 +837,7 @@ loc_1AD0D4:
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
 
-    ; End of function RandomUnderD6
+    ; End of function GenerateRandomNumberUnderD6
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -855,7 +853,7 @@ LoadBattleTerrainData:
                 move.b  (a1),d1
                 lsl.l   #2,d1
                 movea.l (a0,d1.w),a0
-                lea     (BATTLE_TERRAIN).l,a1
+                lea     (BATTLE_TERRAIN_ARRAY).l,a1
                 jsr     (LoadCompressedData).w
                 movem.l (sp)+,d0-d6/a0-a5
                 rts

@@ -137,7 +137,7 @@ FindPromotionSection:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A6 = church actions stack
+; In: a6 = church actions stack
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
@@ -156,7 +156,7 @@ membersListLength = -10
 actionCost = -8
 currentGold = -4
 
-ReplaceSpellsWithSORCdefaults:
+ReplaceSpellsWithSorcDefaults:
                 
                 move.w  member(a6),d0
                 jsr     j_GetCombatantEntryAddress
@@ -172,7 +172,7 @@ ReplaceSpellsWithSORCdefaults:
                 jsr     j_LearnSpell
                 rts
 
-    ; End of function ReplaceSpellsWithSORCdefaults
+    ; End of function ReplaceSpellsWithSorcDefaults
 
 
 ; =============== S U B R O U T I N E =======================================

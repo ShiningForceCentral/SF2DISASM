@@ -13,7 +13,7 @@
                 includeIfVanillaRom "data\battles\terrainentries.asm"    ; Battle terrain data
                 include "code\gameflow\battle\battle_s13_3.asm"    ; Battle init, terrain, AI stuff to split more properly
                 include "data\stats\enemies\enemydefs.asm"    ; Enemy definitions
-                includeIfVanillaRom "data\battles\spritesetentries.asm"    ; Battle spritesets
+                includeIfVanillaRom "data\battles\spritesetentries.asm"    ; Battle Spritesets
                 include "data\battles\global\randombattles.asm"    ; Random battles list, and data related to UpgradeEnemyIndex function
                 includeIfVanillaRom "code\specialscreens\endkiss\graphics.asm"    ; End Kiss Graphics
                 align $1B8000

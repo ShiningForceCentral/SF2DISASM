@@ -256,7 +256,7 @@ loc_139A6:
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
-                jsr     j_GetCurrentATT
+                jsr     j_GetCurrentAtt
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -268,7 +268,7 @@ loc_139A6:
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
-                jsr     j_GetCurrentDEF
+                jsr     j_GetCurrentDef
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -280,7 +280,7 @@ loc_139A6:
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
-                jsr     j_GetCurrentAGI
+                jsr     j_GetCurrentAgi
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -292,7 +292,7 @@ loc_139A6:
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
-                jsr     j_GetCurrentMOV
+                jsr     j_GetCurrentMov
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -610,7 +610,7 @@ aNothing_2:     dc.b '\Nothing',0
                 
 TextHighlightTiles:
                 incbin "data/graphics/tech/texthighlighttiles.bin"
-word_13EDE:     
+wl_13EDE:       
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;
 ; Notes: PALETTE3 and PRIORITY bits are always set.
@@ -2033,7 +2033,7 @@ sub_14BB0:
                 
                 movea.l inventoryWindowTilesEnd(a6),a1
                 lea     ShopInventoryWindowLayout(pc), a0
-                move.w  #$144,d7
+                move.w  #324,d7
                 jsr     (CopyBytes).w   
                 bsr.w   *+4
                 lea     (byte_FF6942).l,a0
@@ -2211,12 +2211,12 @@ sub_14D0C:
                 movea.l a0,a1
                 adda.w  #$A2,a0 
                 adda.w  #$36,a1 
-                move.w  #$6C,d7 
+                move.w  #108,d7
                 jsr     (CopyBytes).w   
                 lea     ShopInventoryWindowLayout_SpacerLine(pc), a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$A2,a1 
-                move.w  #$36,d7 
+                move.w  #54,d7
                 jsr     (CopyBytes).w   
                 lea     ShopInventoryWindowLayout_SpacerLine(pc), a0
                 movea.l inventoryWindowTilesEnd(a6),a1
@@ -2250,23 +2250,23 @@ sub_14D6A:
                 lea     ShopInventoryWindowLayout_SpacerLine(pc), a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$36,a1 
-                move.w  #$36,d7 
+                move.w  #54,d7
                 jsr     (CopyBytes).w   
                 lea     ShopInventoryWindowLayout_SpacerLine(pc), a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$6C,a1 
-                move.w  #$36,d7 
+                move.w  #54,d7
                 jsr     (CopyBytes).w   
                 lea     inventoryWindowTilesLoadingSpace(a6),a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$A2,a1 
-                move.w  #$6C,d7 
+                move.w  #108,d7
                 jsr     (CopyBytes).w   
                 bsr.w   sub_14DBE
                 lea     inventoryWindowTilesLoadingSpace(a6),a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$36,a1 
-                move.w  #$D8,d7 
+                move.w  #216,d7
                 jsr     (CopyBytes).w   
 
     ; End of function sub_14D6A
@@ -2299,17 +2299,17 @@ sub_14DC0:
                 movea.l a0,a1
                 adda.w  #$36,a0 
                 adda.w  #$A2,a1 
-                move.w  #$6C,d7 
+                move.w  #108,d7
                 jsr     (CopyBytes).w   
                 lea     ShopInventoryWindowLayout_SpacerLine(pc), a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$36,a1 
-                move.w  #$36,d7 
+                move.w  #54,d7
                 jsr     (CopyBytes).w   
                 lea     ShopInventoryWindowLayout_SpacerLine(pc), a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$6C,a1 
-                move.w  #$36,d7 
+                move.w  #54,d7
                 jsr     (CopyBytes).w   
                 bra.w   loc_14D4A
 
@@ -2331,24 +2331,24 @@ sub_14E06:
                 lea     ShopInventoryWindowLayout_SpacerLine(pc), a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$A2,a1 
-                move.w  #$36,d7 
+                move.w  #54,d7
                 jsr     (CopyBytes).w   
                 lea     ShopInventoryWindowLayout_SpacerLine(pc), a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$D8,a1 
-                move.w  #$36,d7 
+                move.w  #54,d7
                 jsr     (CopyBytes).w   
                 lea     inventoryWindowTilesLoadingSpace(a6),a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$6C,a0 
                 adda.w  #$36,a1 
-                move.w  #$6C,d7 
+                move.w  #108,d7
                 jsr     (CopyBytes).w   
                 bsr.w   sub_14E5E
                 lea     inventoryWindowTilesLoadingSpace(a6),a0
                 movea.l inventoryWindowTilesEnd(a6),a1
                 adda.w  #$36,a1 
-                move.w  #$D8,d7 
+                move.w  #216,d7
                 jsr     (CopyBytes).w   
 
     ; End of function sub_14E06
@@ -2379,7 +2379,7 @@ sub_14E62:
                 movea.l inventoryWindowTilesEnd(a6),a0
                 adda.w  #$36,a0 
                 lea     inventoryWindowTilesLoadingSpace(a6),a1
-                move.w  #$D8,d7 
+                move.w  #216,d7
                 jsr     (CopyBytes).w   
                 tst.b   ((word_FFAF9E-$1000000)).w
                 bne.s   loc_14E82
@@ -2394,7 +2394,7 @@ loc_14E86:
                 movea.l inventoryWindowTilesEnd(a6),a0
                 adda.w  #$36,a0 
                 lea     inventoryWindowTilesLoadingSpace(a6),a1
-                move.w  #$D8,d7 
+                move.w  #216,d7
                 jsr     (CopyBytes).w   
                 tst.b   ((word_FFAF9E-$1000000)).w
                 bne.s   loc_14EAA
@@ -2927,7 +2927,7 @@ CopyYesNoIconsToRam:
                 
                 movea.l windowTilesEnd(a6),a1
                 lea     YesNoPromptMenuLayout(pc), a0
-                move.w  #$54,d7 
+                move.w  #84,d7
                 jsr     (CopyBytes).w   
                 tst.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 bne.s   loc_15486

@@ -5,15 +5,17 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-InitMapEntities:
+InitializeMapEntities:
                 
                 movem.l d0-a5,-(sp)
                 bra.w   loc_440E2
 
-    ; End of function InitMapEntities
+    ; End of function InitializeMapEntities
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused InitializeMapEntities entry point
 
 
 sub_440D4:
@@ -26,7 +28,7 @@ sub_440D4:
     ; End of function sub_440D4
 
 
-; START OF FUNCTION CHUNK FOR InitMapEntities
+; START OF FUNCTION CHUNK FOR InitializeMapEntities
 
 loc_440E2:
                 
@@ -34,7 +36,7 @@ loc_440E2:
                 mulu.w  #$180,d2
                 bsr.w   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
-                lea     $20(a1),a2
+                lea     NEXT_ENTITYDEF(a1),a2
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a3
                 movem.w d1-d3,-(sp)
                 moveq   #1,d0
@@ -107,7 +109,7 @@ loc_44180:
                 movem.l (sp)+,d0-a5
                 rts
 
-; END OF FUNCTION CHUNK FOR InitMapEntities
+; END OF FUNCTION CHUNK FOR InitializeMapEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -129,7 +131,7 @@ sub_441AA:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #CODE_TERMINATOR_BYTE,d0
                 beq.s   byte_441F0      ; No followers
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 move.w  d1,(a1,d0.w)
@@ -147,12 +149,12 @@ byte_441F0:
                 bne.s   @RaftNotOnMap
                 move.b  ((RAFT_X-$1000000)).w,d1
                 move.b  ((RAFT_Y-$1000000)).w,d2
-                move.w  #$1F,d0
+                move.w  #FOLLOWER_B,d0
                 andi.w  #$7F,d1 
                 muls.w  #$180,d1
                 andi.w  #$7F,d2 
                 muls.w  #$180,d2
-                moveq   #2,d3
+                moveq   #LEFT,d3        ; facing
                 moveq   #MAPSPRITE_RAFT,d4
                 move.l  #eas_Standing,d5
                 clr.w   d6
@@ -160,7 +162,7 @@ byte_441F0:
                 move.b  d0,$3F(a0)
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
-                move.w  #$1F,d0
+                move.w  #FOLLOWER_B,d0
                 move.w  d3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
@@ -187,7 +189,7 @@ byte_441F0:
 ; Out: ccr zero-bit clear if true
 
 
-IsOverworldMap?:
+IsOverworldMap:
                 
                 movem.l d0-d1/a0,-(sp)
                 clr.w   d1
@@ -208,5 +210,5 @@ IsOverworldMap?:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function IsOverworldMap?
+    ; End of function IsOverworldMap
 

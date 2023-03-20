@@ -157,7 +157,7 @@ loc_4DC4:
                 blt.w   loc_4E0A
                 cmpi.w  #$100,d1
                 bgt.w   loc_4E0A
-                jsr     sub_20020
+                jsr     j_UpdateUnitCursorSprites
                 bra.w   loc_4E10
 loc_4E0A:
                 
@@ -556,7 +556,7 @@ loc_50D6:
                 bne.w   loc_51A8
                 movem.w d0-d1,-(sp)
                 movem.w d2-d3,-(sp)
-                bsr.w   GetMapPixelCoordRamOffset
+                bsr.w   ConvertMapPixelCoordinatesToRamOffset
                 move.w  d2,d0
                 movem.w (sp)+,d2-d3
                 move.w  (a4,d0.w),d1
@@ -685,7 +685,7 @@ loc_5220:
                 
                 movem.w (sp)+,d4-d6
                 movem.w d2-d3,-(sp)
-                bsr.w   GetMapPixelCoordRamOffset
+                bsr.w   ConvertMapPixelCoordinatesToRamOffset
                 move.w  (a4,d2.w),d3
                 andi.w  #$3C00,d3
                 cmpi.w  #$3800,d3
@@ -823,7 +823,7 @@ loc_5360:
                 move.w  6(a1),d3
                 lsl.w   #4,d3
                 bsr.w   sub_5FAC
-                bsr.w   GetMapPixelCoordRamOffset
+                bsr.w   ConvertMapPixelCoordinatesToRamOffset
                 cmpi.w  #$C000,(a4,d2.w)
                 bcs.s   loc_53B4
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
@@ -833,7 +833,7 @@ loc_5360:
                 clr.w   d3
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d4
                 bsr.w   sub_5FAC
-                bsr.w   GetMapPixelCoordRamOffset
+                bsr.w   ConvertMapPixelCoordinatesToRamOffset
                 cmpi.w  #$C000,(a4,d2.w)
                 bcs.s   loc_53B4
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
@@ -985,7 +985,7 @@ loc_54CC:
                 movem.w d2-d3,-(sp)
                 move.w  (a0),d0
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
-                bsr.w   GetMapPixelCoordRamOffset
+                bsr.w   ConvertMapPixelCoordinatesToRamOffset
                 move.w  d2,d0
                 movem.w (sp)+,d2-d3
                 move.w  (a4,d0.w),d1
@@ -1050,7 +1050,7 @@ loc_5596:
                 add.w   d7,d1
                 move.w  (sp)+,d7
                 movem.w d2-d3,-(sp)
-                bsr.w   GetMapPixelCoordRamOffset
+                bsr.w   ConvertMapPixelCoordinatesToRamOffset
                 cmpi.w  #$C000,(a4,d2.w)
                 movem.w (sp)+,d2-d3
                 bcc.w   loc_55B8
@@ -1269,7 +1269,7 @@ loc_575C:
                 
                 movem.w (sp)+,d4-d6
                 movem.w d2-d3,-(sp)
-                bsr.w   GetMapPixelCoordRamOffset
+                bsr.w   ConvertMapPixelCoordinatesToRamOffset
                 move.w  (a4,d2.w),d3
                 andi.w  #$3C00,d3
                 cmpi.w  #$400,d3
@@ -1433,7 +1433,7 @@ loc_58DE:
                 
                 movem.w (sp)+,d4-d6
                 movem.w d2-d3,-(sp)
-                bsr.w   GetMapPixelCoordRamOffset
+                bsr.w   ConvertMapPixelCoordinatesToRamOffset
                 move.w  (a4,d2.w),d3
                 andi.w  #$3C00,d3
                 cmpi.w  #$400,d3
@@ -2153,7 +2153,7 @@ esc40_checkMapBlockCopy:
                 bne.s   loc_5D42
                 move.w  (a0),d0         ; get player's pixel position from entity info
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
-                bsr.w   GetMapPixelCoordRamOffset
+                bsr.w   ConvertMapPixelCoordinatesToRamOffset
                 move.w  (a4,d2.w),d3    ; copy block index under player from RAM
                 move.w  d3,d2
                 andi.w  #$3C00,d2
@@ -2453,7 +2453,7 @@ loc_5F28:
                 movem.w d0-d3,-(sp)
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
                 move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
-                bsr.w   GetMapPixelCoordRamOffset
+                bsr.w   ConvertMapPixelCoordinatesToRamOffset
                 move.w  (a4,d2.w),d0
                 andi.w  #$3C00,d0
                 cmpi.w  #$2000,d0
@@ -2623,8 +2623,8 @@ tbl_FacingValues_2:
 
 ; In: d0.b = entity index
 ;     d1.w = new facing direction
-;     d2.b = new B flags (keep current if = $FF)
-;     d3.b = new map sprite index (keep current if = $FF)
+;     d2.b = new B flags (keep current if = -1)
+;     d3.b = new map sprite index (keep current if = -1)
 
 
 UpdateEntityProperties:
@@ -2633,14 +2633,14 @@ UpdateEntityProperties:
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
-                cmpi.b  #$FF,d2
+                cmpi.b  #-1,d2
                 beq.s   @CheckMapSprite
                 andi.w  #$7F,d2 
                 andi.b  #$80,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 or.b    d2,ENTITYDEF_OFFSET_FLAGS_B(a0)
 @CheckMapSprite:
                 
-                cmpi.b  #$FF,d3
+                cmpi.b  #-1,d3
                 beq.s   @ChangeDirection
                 move.b  d3,ENTITYDEF_OFFSET_MAPSPRITE(a0)
 @ChangeDirection:
@@ -2828,12 +2828,11 @@ DmaMapSprite:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = x pixel coord
-;     D1 = y pixel coord
-; Out: D2 = RAM offset from start of map VDP tile data
+; In: d0.w, d1.w = X, Y pixel coordinates
+; Out: d2.w = RAM offset from start of map VDP tile data
 
 
-GetMapPixelCoordRamOffset:
+ConvertMapPixelCoordinatesToRamOffset:
                 
                 movem.w d0-d1,-(sp)
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
@@ -2875,5 +2874,5 @@ loc_622E:
                 movem.w (sp)+,d0-d1
                 rts
 
-    ; End of function GetMapPixelCoordRamOffset
+    ; End of function ConvertMapPixelCoordinatesToRamOffset
 
