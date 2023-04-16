@@ -119,7 +119,7 @@ loc_46BE:
                 move.w  d7,d0
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d0
                 lsr.w   #8,d0
-                move.w  d0,((word_FFA820-$1000000)).w
+                move.w  d0,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
 loc_46D0:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
@@ -127,7 +127,7 @@ loc_46D0:
                 move.w  d7,d0
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d0
                 lsr.w   #8,d0
-                move.w  d0,((word_FFA822-$1000000)).w
+                move.w  d0,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
 loc_46E2:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
@@ -135,7 +135,7 @@ loc_46E2:
                 move.w  d7,d0
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d0
                 lsr.w   #8,d0
-                move.w  d0,((word_FFA824-$1000000)).w
+                move.w  d0,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
 loc_46F4:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
@@ -143,7 +143,7 @@ loc_46F4:
                 move.w  d7,d0
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d0
                 lsr.w   #8,d0
-                move.w  d0,((word_FFA826-$1000000)).w
+                move.w  d0,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
 return_4706:
                 
                 rts

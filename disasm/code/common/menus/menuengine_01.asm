@@ -134,7 +134,7 @@ tbl_MainFontAlternateSymbols:
 
 ; START OF FUNCTION CHUNK FOR WriteTilesFromAsciiWithOrangeFont
 
-loc_1016A:      
+loc_1016A:
             if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
                 tst.w   d1
                 bne.s   @Continue
@@ -711,10 +711,10 @@ loc_105B2:
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
                 clr.w   d6
-                bsr.w   sub_10800       
-                bsr.w   sub_10820       
-                bsr.w   sub_1084A       
-                bsr.w   sub_10920       
+                bsr.w   LoadVdpTileListForDiaItemIcon_Top
+                bsr.w   LoadVdpTileListForDiaItemIcon_Left
+                bsr.w   LoadVdpTileListForDiaItemIcon_Right
+                bsr.w   LoadVdpTileListForDiaItemIcon_Bottom
                 move.w  windowSlot(a6),d0
                 move.w  #$C15,d1
                 move.w  #4,d2
@@ -806,7 +806,7 @@ loc_106B4:
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
                 clr.w   d6
-                bsr.w   sub_107EA       
+                bsr.w   LoadVdpTileListForDiaItemIcon       
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 bsr.w   BuildItemMenu
@@ -824,7 +824,7 @@ loc_106D6:
 loc_106E8:
                 
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                bsr.w   sub_107EA       
+                bsr.w   LoadVdpTileListForDiaItemIcon       
                 subq.w  #1,d6
                 bne.s   loc_106F6
                 moveq   #30,d6
@@ -942,26 +942,27 @@ aNothing:       dc.b '\Nothing',0
 ; In: d6.w = frame counter
 
 
-sub_107EA:
+LoadVdpTileListForDiaItemIcon:
                 
                 andi.w  #3,d0
                 add.w   d0,d0
-                move.w  rjt_107F8(pc,d0.w),d0
-                jmp     rjt_107F8(pc,d0.w)
+                move.w  rjt_DiaItemIconsLoadingFunctions(pc,d0.w),d0
+                jmp     rjt_DiaItemIconsLoadingFunctions(pc,d0.w)
 
-    ; End of function sub_107EA
+    ; End of function LoadVdpTileListForDiaItemIcon
 
-rjt_107F8:      dc.w sub_10800-rjt_107F8
-                dc.w sub_10820-rjt_107F8
-                dc.w sub_1084A-rjt_107F8
-                dc.w sub_10920-rjt_107F8
+rjt_DiaItemIconsLoadingFunctions:
+                dc.w LoadVdpTileListForDiaItemIcon_Top-rjt_DiaItemIconsLoadingFunctions
+                dc.w LoadVdpTileListForDiaItemIcon_Left-rjt_DiaItemIconsLoadingFunctions
+                dc.w LoadVdpTileListForDiaItemIcon_Right-rjt_DiaItemIconsLoadingFunctions
+                dc.w LoadVdpTileListForDiaItemIcon_Bottom-rjt_DiaItemIconsLoadingFunctions
 
 ; =============== S U B R O U T I N E =======================================
 
 ; In: d6.w = frame counter
 
 
-sub_10800:
+LoadVdpTileListForDiaItemIcon_Top:
                 
                 lea     (FF8804_LOADING_SPACE).l,a0
                 cmpi.w  #15,d6
@@ -974,7 +975,7 @@ loc_10810:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function sub_10800
+    ; End of function LoadVdpTileListForDiaItemIcon_Top
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -982,7 +983,7 @@ loc_10810:
 ; In: d6.w = frame counter
 
 
-sub_10820:
+LoadVdpTileListForDiaItemIcon_Left:
                 
                 lea     (byte_FF8984).l,a0
                 cmpi.w  #15,d6
@@ -997,7 +998,7 @@ loc_10830:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function sub_10820
+    ; End of function LoadVdpTileListForDiaItemIcon_Left
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1005,7 +1006,7 @@ loc_10830:
 ; In: d6.w = frame counter
 
 
-sub_1084A:
+LoadVdpTileListForDiaItemIcon_Right:
                 
                 lea     (byte_FF8B04).l,a0
                 cmpi.w  #15,d6
@@ -1020,7 +1021,7 @@ loc_1085A:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function sub_1084A
+    ; End of function LoadVdpTileListForDiaItemIcon_Right
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1110,7 +1111,7 @@ loc_10910:
 ; In: d6.w = frame counter
 
 
-sub_10920:
+LoadVdpTileListForDiaItemIcon_Bottom:
                 
                 lea     (byte_FF8C84).l,a0
                 cmpi.w  #15,d6
@@ -1123,7 +1124,7 @@ loc_10930:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function sub_10920
+    ; End of function LoadVdpTileListForDiaItemIcon_Bottom
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1239,10 +1240,10 @@ loc_10A74:
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableSpellIcon
                 clr.w   d6
-                bsr.w   sub_10800       
-                bsr.w   sub_10820       
-                bsr.w   sub_1084A       
-                bsr.w   sub_10920       
+                bsr.w   LoadVdpTileListForDiaItemIcon_Top
+                bsr.w   LoadVdpTileListForDiaItemIcon_Left
+                bsr.w   LoadVdpTileListForDiaItemIcon_Right
+                bsr.w   LoadVdpTileListForDiaItemIcon_Bottom
                 move.w  windowSlot(a6),d0
                 move.w  #$C15,d1
                 move.w  #4,d2
@@ -1353,7 +1354,7 @@ loc_10BBC:
                 add.w   d0,d0
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 move.w  (a0,d0.w),d0
-                bsr.w   sub_10CC6       
+                bsr.w   sub_10CC6
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_10BEC
                 bsr.w   BuildMagicMenu
@@ -1452,15 +1453,15 @@ sub_10CB0:
                 
                 andi.w  #3,d0
                 add.w   d0,d0
-                move.w  rjt_10CBE(pc,d0.w),d0
-                jmp     rjt_10CBE(pc,d0.w)
+                move.w  tbl_MagicTiles(pc,d0.w),d0
+                jmp     tbl_MagicTiles(pc,d0.w)
 
     ; End of function sub_10CB0
 
-rjt_10CBE:      dc.w (sub_10800-rjt_10CBE) & $FFFF
-                dc.w (sub_10820-rjt_10CBE) & $FFFF
-                dc.w (sub_1084A-rjt_10CBE) & $FFFF
-                dc.w (sub_10920-rjt_10CBE) & $FFFF
+tbl_MagicTiles: dc.w (LoadVdpTileListForDiaItemIcon_Top-tbl_MagicTiles) & $FFFF
+                dc.w (LoadVdpTileListForDiaItemIcon_Left-tbl_MagicTiles) & $FFFF
+                dc.w (LoadVdpTileListForDiaItemIcon_Right-tbl_MagicTiles) & $FFFF
+                dc.w (LoadVdpTileListForDiaItemIcon_Bottom-tbl_MagicTiles) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1613,7 +1614,7 @@ spr_SpellLevelHighlight:
 
 sub_10DE2:
                 
-                lea     (SPRITE_08).l,a1
+                lea     (SPRITE_CURSOR_DATA).l,a1
                 lea     spr_SpellLevelHighlight(pc), a0
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+

@@ -20,8 +20,8 @@ GetSavePointForMap:
                 
                 ; Go back to Bowie's room if the gizmos cutscene has not been triggered
                 moveq   #MAP_GRANSEAL,d0 ; HARDCODED initial egress position : map, x, y, facing
-                moveq   #56,d1
-                moveq   #3,d2
+                moveq   #GAMESTART_SAVE_X,d1
+                moveq   #GAMESTART_SAVE_Y,d2
                 moveq   #DOWN,d3
                 rts
 @Continue:

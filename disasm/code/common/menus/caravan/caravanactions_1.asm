@@ -94,7 +94,7 @@ CaravanMenu_Join:
                 moveq   #1,d1           ; battle party members
                 bsr.w   PopulateGenericListWithMembersList
                 cmpi.w  #FORCE_MAX_SIZE,((GENERIC_LIST_LENGTH-$1000000)).w
-                bcc.s   @ChooseRelief   
+                bcc.s   @ChooseRelief
                 
                 ; If force max size not reached, join immediately
                 move.w  member(a6),d0

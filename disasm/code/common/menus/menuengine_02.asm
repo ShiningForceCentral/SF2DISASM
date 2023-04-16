@@ -464,7 +464,7 @@ HideBattleEquipWindow:
                 
                 movem.l d0-a2,-(sp)
                 move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
-                move.w  #$F612,d1
+                move.w  #$F612,d1	; window offset
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
@@ -492,28 +492,28 @@ BuildBattleEquipWindow:
                 move.w  d1,d0
                 movea.l windowTilesAddress(a6),a1
                 moveq   #STATS_DIGITS_NUMBER,d7
-                bsr.w   WriteStatValue  
+                bsr.w   WriteStatValue
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 jsr     j_GetCurrentDef
                 move.w  d1,d0
                 movea.l windowTilesAddress(a6),a1
-                adda.w  #$28,a1 
+                adda.w  #$28,a1 ; second stat offset
                 moveq   #STATS_DIGITS_NUMBER,d7
-                bsr.w   WriteStatValue  
+                bsr.w   WriteStatValue
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 jsr     j_GetCurrentAgi
                 move.w  d1,d0
                 movea.l windowTilesAddress(a6),a1
-                adda.w  #$50,a1 
+                adda.w  #$50,a1 ; third stat offset
                 moveq   #STATS_DIGITS_NUMBER,d7
-                bsr.w   WriteStatValue  
+                bsr.w   WriteStatValue
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 jsr     j_GetCurrentMov
                 move.w  d1,d0
                 movea.l windowTilesAddress(a6),a1
-                adda.w  #$78,a1 
+                adda.w  #$78,a1 ; fourth stat offset
                 moveq   #STATS_DIGITS_NUMBER,d7
-                bsr.w   WriteStatValue  
+                bsr.w   WriteStatValue
                 unlk    a6
                 rts
 

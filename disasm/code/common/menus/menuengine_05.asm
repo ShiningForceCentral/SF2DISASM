@@ -436,7 +436,7 @@ loc_12D04:
                 cmpi.w  #$7000,d0
                 beq.w   loc_12D6E
                 move.w  var_30(a6),d1
-                bra.w   loc_12D34       
+                bra.w   loc_12D34
 loc_12D26:
                 
                 move.w  (a0),d0
@@ -485,7 +485,7 @@ loc_12D82:
                 lea     (SPRITE_TABLE).l,a0
                 move.w  #$38,d0 
                 moveq   #$2F,d7 
-                move.w  #$10,d1
+                move.w  #$10,d1	; sprites 16-63
 loc_12D96:
                 
                 move.w  d1,d2
@@ -500,7 +500,7 @@ loc_12DA8:
                 addq.w  #1,d1
                 dbf     d7,loc_12D96
                 moveq   #$2F,d7 
-                move.w  #$10,d1
+                move.w  #$10,d1	; sprites 16-63
 loc_12DB4:
                 
                 move.w  d1,d2
@@ -537,8 +537,8 @@ PlayEndKiss:
                 
                 move.b  #$FF,(DEACTIVATE_WINDOW_HIDING).l
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                move.w  #$120E,d0
-                move.w  #$707,d1
+                move.w  #$120E,d0	; window dimensions
+                move.w  #$707,d1	; window offset
                 jsr     (CreateWindow).w
                 move.w  d0,d4
                 move.w  #$A640,d5
@@ -627,18 +627,18 @@ goldWindowTilesEnd = -18
 
 CreateGoldWindow:
                 
-                tst.w   ((word_FFB086-$1000000)).w
+                tst.w   ((GOLD_WINDOW_INDEX-$1000000)).w
                 bne.w   return_12F5C
                 movem.l d0-a1,-(sp)
                 link    a6,#-32
-                move.w  #$904,d0
-                move.w  #$2017,d1
+                move.w  #WINDOW_GOLD_SIZE,d0	; window dimensions
+                move.w  #WINDOW_GOLD_DEST,d1	; window offset
                 jsr     (CreateWindow).l
                 addq.w  #1,d0
-                move.w  d0,((word_FFB086-$1000000)).w
+                move.w  d0,((GOLD_WINDOW_INDEX-$1000000)).w
                 move.l  a1,goldWindowTilesEnd(a6)
-                bsr.w   sub_14B28       
-                move.w  ((word_FFB086-$1000000)).w,d0
+                bsr.w   WriteGoldInfo       
+                move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$1617,d1
                 moveq   #4,d2
@@ -659,17 +659,17 @@ goldWindowTilesEnd = -18
 
 sub_12F5E:
                 
-                tst.w   ((word_FFB086-$1000000)).w
+                tst.w   ((GOLD_WINDOW_INDEX-$1000000)).w
                 beq.s   return_12F5C
                 movem.l d0-a1,-(sp)
                 link    a6,#-32
-                move.w  ((word_FFB086-$1000000)).w,d0
+                move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
                 move.l  a1,goldWindowTilesEnd(a6)
-                bsr.w   sub_14B28       
-                move.w  ((word_FFB086-$1000000)).w,d0
+                bsr.w   WriteGoldInfo       
+                move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
@@ -685,12 +685,12 @@ sub_12F5E:
 
 HideGoldWindow:
                 
-                tst.w   ((word_FFB086-$1000000)).w
+                tst.w   ((GOLD_WINDOW_INDEX-$1000000)).w
                 beq.s   return_12F5C
                 movem.l d0-a1,-(sp)
-                move.w  ((word_FFB086-$1000000)).w,d0
+                move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
-                move.w  #$2017,d1
+                move.w  #WINDOW_GOLD_DEST,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
@@ -702,10 +702,10 @@ HideGoldWindow:
 @Skip:
                 
                 jsr     (WaitForWindowMovementEnd).l
-                move.w  ((word_FFB086-$1000000)).w,d0
+                move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 jsr     (ClearWindowAndUpdateEndPointer).l
-                clr.w   ((word_FFB086-$1000000)).w
+                clr.w   ((GOLD_WINDOW_INDEX-$1000000)).w
                 movem.l (sp)+,d0-a1
                 rts
 
@@ -1092,7 +1092,7 @@ loc_1337C:
                 
                 moveq   #$A,d1
                 bsr.w   sub_133A0
-                bsr.w   sub_14108       
+                bsr.w   sub_14108
 return_13386:
                 
                 rts
@@ -1136,9 +1136,9 @@ sub_133A0:
 loc_133A8:
                 
                 move.w  d0,-(sp)
-                lea     (SPRITE_08).l,a0
+                lea     (SPRITE_CURSOR_DATA).l,a0
                 lea     spr_MemberListTextHighlight(pc), a1
-                cmpi.w  #7,d1
+                cmpi.w  #7,d1		; blink on/off
                 bge.s   loc_133C0
                 move.w  #$100,d0
                 bra.s   loc_133C2
@@ -1159,13 +1159,13 @@ loc_133CC:
                 move.w  d2,VDPSPRITE_OFFSET_SIZE(a0)
                 move.w  (a1)+,VDPSPRITE_OFFSET_TILE(a0)
                 move.w  (a1)+,VDPSPRITE_OFFSET_X(a0)
-                addq.l  #8,a0
+                addq.l  #VDP_SPRITE_SIZE,a0
                 dbf     d7,loc_133CC
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 tst.w   ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w
                 beq.s   loc_13404
-                cmpi.w  #7,d1
+                cmpi.w  #7,d1		; blink on/off
                 blt.s   loc_13404
                 move.w  #$97,VDPSPRITE_OFFSET_X(a0) 
                 move.w  #$104,(a0)
@@ -1173,14 +1173,14 @@ loc_13404:
                 
                 move.w  #WINDOW_MEMBERLIST_SPRITELINK_DOWNARROW,VDPSPRITE_OFFSET_SIZE(a0)
                 move.w  #VDPTILE_V_ARROW|VDPTILE_FLIP|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
-                addq.l  #8,a0
+                addq.l  #VDP_SPRITE_SIZE,a0
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 move.w  ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w,d0
                 addq.w  #5,d0
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d0
                 bge.s   loc_13438
-                cmpi.w  #7,d1
+                cmpi.w  #7,d1		; blink on/off
                 blt.s   loc_13438
                 move.w  #$97,VDPSPRITE_OFFSET_X(a0) 
                 move.w  #$14D,(a0)

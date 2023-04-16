@@ -767,8 +767,8 @@ ApplyOverworldMapTransition_Right:
                 
                 move.w  #0,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
                 move.w  #0,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
-                move.w  #0,((word_FFA818-$1000000)).w
-                move.w  #0,((word_FFA81C-$1000000)).w
+                move.w  #0,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
+                move.w  #0,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1D,d7
@@ -833,8 +833,8 @@ ApplyOverworldMapTransition_Left:
                 
                 move.w  #$4F80,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
                 move.w  #$4F80,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
-                move.w  #$4F80,((word_FFA818-$1000000)).w
-                move.w  #$4F80,((word_FFA81C-$1000000)).w
+                move.w  #$4F80,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
+                move.w  #$4F80,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1D,d7
@@ -901,8 +901,8 @@ ApplyOverworldMapTransition_Up:
                 
                 move.w  #$5100,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
                 move.w  #$5100,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
-                move.w  #$5100,((word_FFA81A-$1000000)).w
-                move.w  #$5100,((word_FFA81E-$1000000)).w
+                move.w  #$5100,((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w
+                move.w  #$5100,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1A,d7
@@ -967,8 +967,8 @@ ApplyOverworldMapTransition_Down:
                 
                 move.w  #0,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
                 move.w  #0,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
-                move.w  #0,((word_FFA81A-$1000000)).w
-                move.w  #0,((word_FFA81E-$1000000)).w
+                move.w  #0,((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w
+                move.w  #0,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
                 move.w  #$1A,d7
@@ -1155,17 +1155,17 @@ LoadMapTilesets:
 
 LoadMap:
                 
-                move.l  ((word_FFA818-$1000000)).w,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
-                move.l  ((word_FFA81C-$1000000)).w,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
-                clr.l   ((word_FFA820-$1000000)).w
-                clr.l   ((word_FFA824-$1000000)).w
+                move.l  ((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
+                move.l  ((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
+                clr.l   ((PLANE_A_SCROLL_SPEED_X-$1000000)).w
+                clr.l   ((PLANE_B_SCROLL_SPEED_X-$1000000)).w
                 clr.b   ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 move.w  d0,-(sp)
                 move.w  d1,-(sp)
                 bsr.w   InitializeDisplay
                 move.w  (sp)+,d1
                 ext.w   d1
-                bpl.s   loc_2ACC        
+                bpl.s   loc_2ACC
                 
                 ; Reload current map
                 clr.w   d1              ; If D1<0, re-load current map
@@ -1278,9 +1278,9 @@ loc_2BC0:
 loc_2BD0:
                 
                 andi.w  #$3F,d4 
-                lsl.w   #5,d4
+                lsl.w   #ENTITYDEF_SIZE_BITS,d4
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.w  2(a0,d4.w),d5
+                move.w  ENTITYDEF_OFFSET_Y(a0,d4.w),d5
                 move.w  (a0,d4.w),d4
                 movea.l (sp)+,a0
                 bra.s   loc_2BF0
@@ -1308,7 +1308,7 @@ loc_2C0C:
                 bra.w   loc_2B82
 loc_2C14:
                 
-                bsr.w   LoadMapArea     
+                bsr.w   LoadMapArea
                 move.w  (sp)+,d0
                 cmpi.w  #$FFFF,d0
                 bne.s   loc_2C70

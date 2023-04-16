@@ -771,7 +771,7 @@ loc_1401E:
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
                 clr.w   d6
-                bsr.w   sub_14074       
+                bsr.w   LoadVdpTileListForMiniStatusIcon       
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 moveq   #$1D,d6
@@ -779,7 +779,7 @@ loc_14034:
                 
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                bsr.w   sub_14074       
+                bsr.w   LoadVdpTileListForMiniStatusIcon       
                 moveq   #$14,d1
                 bsr.w   LoadMiniStatusTextHighlightSprites
                 subq.w  #1,d6
@@ -816,24 +816,25 @@ loc_1406E:
 ; related to menu choice
 
 
-sub_14074:
+LoadVdpTileListForMiniStatusIcon:
                 
                 moveq   #$7F,d7 
                 add.w   d0,d0           ; d0 is current diamond-menu choice
-                move.w  rjt_14080(pc,d0.w),d0
-                jmp     rjt_14080(pc,d0.w)
+                move.w  rjt_MiniStatusIconsLoadingFunctions(pc,d0.w),d0
+                jmp     rjt_MiniStatusIconsLoadingFunctions(pc,d0.w)
 
-    ; End of function sub_14074
+    ; End of function LoadVdpTileListForMiniStatusIcon
 
-rjt_14080:      dc.w DmaIcon1-rjt_14080
-                dc.w DmaIcon2-rjt_14080
-                dc.w DmaIcon3-rjt_14080
-                dc.w DmaIcon4-rjt_14080
+rjt_MiniStatusIconsLoadingFunctions:
+                dc.w LoadVdpTileListForMiniStatusIcon_Top-rjt_MiniStatusIconsLoadingFunctions
+                dc.w LoadVdpTileListForMiniStatusIcon_Left-rjt_MiniStatusIconsLoadingFunctions
+                dc.w LoadVdpTileListForMiniStatusIcon_Right-rjt_MiniStatusIconsLoadingFunctions
+                dc.w LoadVdpTileListForMiniStatusIcon_Bottom-rjt_MiniStatusIconsLoadingFunctions
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DmaIcon1:
+LoadVdpTileListForMiniStatusIcon_Top:
                 
                 lea     (FF8804_LOADING_SPACE).l,a0
                 cmpi.w  #$F,d6
@@ -846,13 +847,13 @@ loc_14098:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function DmaIcon1
+    ; End of function LoadVdpTileListForMiniStatusIcon_Top
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DmaIcon2:
+LoadVdpTileListForMiniStatusIcon_Left:
                 
                 lea     (byte_FF8984).l,a0
                 cmpi.w  #$F,d6
@@ -865,13 +866,13 @@ loc_140B8:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function DmaIcon2
+    ; End of function LoadVdpTileListForMiniStatusIcon_Left
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DmaIcon3:
+LoadVdpTileListForMiniStatusIcon_Right:
                 
                 lea     (byte_FF8B04).l,a0
                 cmpi.w  #$F,d6
@@ -884,13 +885,13 @@ loc_140D8:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function DmaIcon3
+    ; End of function LoadVdpTileListForMiniStatusIcon_Right
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DmaIcon4:
+LoadVdpTileListForMiniStatusIcon_Bottom:
                 
                 lea     (byte_FF8C84).l,a0
                 cmpi.w  #$F,d6
@@ -903,7 +904,7 @@ loc_140F8:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function DmaIcon4
+    ; End of function LoadVdpTileListForMiniStatusIcon_Bottom
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -942,7 +943,7 @@ sub_14108:
                 move.w  d2,d5
                 move.w  d1,d4
                 jsr     j_GetEquippedWeapon
-                bsr.w   EquipNewItem    
+                bsr.w   EquipNewItem
 @Ring:
                 
                 jsr     j_GetEquippableRings
@@ -978,7 +979,7 @@ sub_14108:
                 move.w  d2,d5
                 move.w  d1,d4
                 jsr     j_GetEquippedRing
-                bsr.w   EquipNewItem    
+                bsr.w   EquipNewItem
 @Done:
                 
                 movem.l (sp)+,d0/d3-a2
@@ -1005,7 +1006,7 @@ BuildEquippingWindow:
                 tst.w   d1
                 bpl.s   loc_141EA       ; branch if something equipped
                 cmpi.w  #4,d3
-                bne.s   loc_141E6       
+                bne.s   loc_141E6
                 
                 ; Equip first item if inventory is full with equippable items
                 clr.w   d1
@@ -1053,10 +1054,10 @@ loc_141FE:
                 bsr.w   CleanIconCorners
                 clr.w   d6
                 moveq   #$1F,d7
-                bsr.w   DmaIcon1
-                bsr.w   DmaIcon2
-                bsr.w   DmaIcon3
-                bsr.w   DmaIcon4
+                bsr.w   LoadVdpTileListForMiniStatusIcon_Top
+                bsr.w   LoadVdpTileListForMiniStatusIcon_Left
+                bsr.w   LoadVdpTileListForMiniStatusIcon_Right
+                bsr.w   LoadVdpTileListForMiniStatusIcon_Bottom
                 jsr     (WaitForWindowMovementEnd).w
                 moveq   #$1E,d6
 loc_14264:
@@ -1119,7 +1120,7 @@ loc_142FA:
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
                 clr.w   d6
-                bsr.w   sub_14074       
+                bsr.w   LoadVdpTileListForMiniStatusIcon       
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 move.w  d0,d2
@@ -1156,13 +1157,13 @@ loc_14366:
                 
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                bsr.w   sub_14074       
+                bsr.w   LoadVdpTileListForMiniStatusIcon       
                 moveq   #$14,d1
                 bsr.w   LoadMiniStatusTextHighlightSprites
             if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
-                move.b  #16,(SPRITE_10_LINK).l
+                move.b  #16,(SPRITE_NAME_HILIGHT_END_NEW).l
             else
-                move.b  #16,(SPRITE_09_LINK).l
+                move.b  #16,(SPRITE_NAME_HILIGHT_END).l
             endif
                 subq.w  #1,d6
                 bne.s   loc_14384
@@ -1299,15 +1300,15 @@ sub_1445A:
                 move.w  d1,(a0)+
                 moveq   #1,d1
                 jsr     GetSpellAndNumberOfSpells
-                andi.w  #SPELLENTRY_MASK_INDEX,d1 
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
                 move.w  d1,(a0)+
                 moveq   #2,d1
                 jsr     GetSpellAndNumberOfSpells
-                andi.w  #SPELLENTRY_MASK_INDEX,d1 
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
                 move.w  d1,(a0)+
                 moveq   #3,d1
                 jsr     GetSpellAndNumberOfSpells
-                andi.w  #SPELLENTRY_MASK_INDEX,d1 
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
                 move.w  d1,(a0)+
             else
                 jsr     j_GetSpellAndNumberOfSpells
@@ -1404,7 +1405,7 @@ loc_14574:
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
                 clr.w   d6
-                bsr.w   sub_14074       
+                bsr.w   LoadVdpTileListForMiniStatusIcon       
                 move.w  (sp)+,d0
                 move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
                 moveq   #$1D,d6
@@ -1412,7 +1413,7 @@ loc_1458A:
                 
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                bsr.w   sub_14074       
+                bsr.w   LoadVdpTileListForMiniStatusIcon       
                 moveq   #$14,d1
                 bsr.w   LoadMiniStatusTextHighlightSprites
                 subq.w  #1,d6
@@ -1441,7 +1442,7 @@ loc_145BC:
                 moveq   #$1E,d6
                 clr.w   d0
                 move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                bsr.w   sub_14074       
+                bsr.w   LoadVdpTileListForMiniStatusIcon       
                 move.w  (sp)+,d2
                 move.w  d2,d4
                 lsr.w   #SPELLENTRY_OFFSET_LV,d4
@@ -1548,7 +1549,7 @@ CleanIconCorners:
 LoadMiniStatusTextHighlightSprites:
                 
                 movem.w d0/d2,-(sp)
-                lea     (SPRITE_08).l,a0
+                lea     (SPRITE_CURSOR_DATA).l,a0
                 lea     spr_MiniStatusTextHighlight(pc), a1
                 move.w  ((DISPLAYED_MEMBERLIST_SELECTED_ENTRY-$1000000)).w,d0
                 lsl.w   #4,d0
@@ -1596,7 +1597,7 @@ LoadMiniStatusTextHighlightSprites:
                 move.w  d2,VDPSPRITE_OFFSET_SIZE(a0)
                 move.w  (a1)+,VDPSPRITE_OFFSET_TILE(a0)
                 move.w  (a1)+,VDPSPRITE_OFFSET_X(a0)
-                addq.l  #8,a0
+                addq.l  #VDP_SPRITE_SIZE,a0
                 dbf     d7,@LoadMiniStatusSprites_Loop
                 
                 bsr.w   sub_101E6
@@ -1730,7 +1731,7 @@ EquipNewItem:
 WaitForMusicResumeAndPlayerInput_0:
                 
                 move.w  d0,-(sp)
-                move.w  #$FB,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0 
                 jsr     (PlayMusicAfterCurrentOne).w
                 jsr     (WaitForPlayerInput).w
                 move.w  (sp)+,d0
@@ -1778,7 +1779,7 @@ loc_14814:
                 jsr     (CreateWindow).l
                 move.w  d0,goldWindowSlot(a6)
                 move.l  a1,goldWindowTilesEnd(a6)
-                bsr.w   sub_14B28       
+                bsr.w   WriteGoldInfo       
                 move.w  inventoryWindowSlot(a6),d0
                 move.w  #$201,d1
                 moveq   #4,d2
@@ -1807,7 +1808,7 @@ loc_148BC:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14906
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d2
-                mulu.w  #6,d2
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d2
                 add.w   d0,d2
                 addq.w  #1,d2
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d2
@@ -1832,7 +1833,7 @@ loc_14906:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1494A
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d2
-                mulu.w  #6,d2
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d2
                 add.w   d0,d2
                 ble.s   loc_1494A
                 subq.w  #1,d0
@@ -1864,7 +1865,7 @@ loc_1496A:
                 beq.s   loc_149C2
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d2
                 addq.w  #1,d2
-                mulu.w  #6,d2
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d2
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d2
                 bge.s   loc_149C2
                 addq.w  #1,((CURRENT_ITEMLIST_PAGE-$1000000)).w
@@ -1877,9 +1878,9 @@ loc_1496A:
                 add.w   d2,d2
                 move.w  ((GENERIC_LIST_LENGTH-$1000000)).w,d1
                 sub.w   d2,d1
-                cmpi.w  #6,d1
+                cmpi.w  #ITEMS_PER_SHOP_PAGE,d1
                 ble.s   loc_149A8
-                moveq   #6,d1
+                moveq   #ITEMS_PER_SHOP_PAGE,d1
 loc_149A8:
                 
                 move.w  d1,((word_FFB134-$1000000)).w
@@ -1914,7 +1915,7 @@ loc_149EC:
 loc_149F2:
                 
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d1
-                mulu.w  #6,d1
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d1
                 add.w   ((CURRENT_ITEMLIST_SELECTION-$1000000)).w,d1
                 lea     ((GENERIC_LIST-$1000000)).w,a0
                 move.b  (a0,d1.w),d0
@@ -1963,7 +1964,7 @@ loc_14A26:
 
 sub_14A82:
                 
-                lea     (SPRITE_08).l,a0
+                lea     (SPRITE_CURSOR_DATA).l,a0
                 cmpi.w  #7,d1
                 bge.s   loc_14A9A
                 move.w  #1,(a0)
@@ -1978,9 +1979,9 @@ loc_14A9A:
                 move.w  #$91,(a0) 
 loc_14AAC:
                 
-                move.w  #$F09,VDPSPRITE_OFFSET_SIZE(a0)
-                move.w  #$C7F0,VDPSPRITE_OFFSET_TILE(a0)
-                addq.l  #8,a0
+                move.w  #VDPSPRITESIZE_V4|VDPSPRITESIZE_H4|09,VDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #VDPTILE_PRIORITY|VDPTILE_PLT3|$7F0,VDPSPRITE_OFFSET_TILE(a0)
+                addq.l  #VDP_SPRITE_SIZE,a0
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 tst.w   ((CURRENT_ITEMLIST_PAGE-$1000000)).w
@@ -1991,16 +1992,16 @@ loc_14AAC:
                 move.w  #$90,(a0) 
 loc_14ADA:
                 
-                move.w  #$A,VDPSPRITE_OFFSET_SIZE(a0)
-                move.w  #$D064,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #VDPSPRITESIZE_V1|VDPSPRITESIZE_H1|10,VDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #VDPTILE_PRIORITY|VDPTILE_PLT3|VDPTILE_FLIP|VDPTILE_V_ARROW,VDPSPRITE_OFFSET_TILE(a0)
 loc_14AE6:
                 
-                addq.l  #8,a0
+                addq.l  #VDP_SPRITE_SIZE,a0
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 move.w  ((CURRENT_ITEMLIST_PAGE-$1000000)).w,d0
                 addq.w  #1,d0
-                mulu.w  #6,d0
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d0
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d0
                 bge.s   loc_14B1E
                 cmpi.w  #7,d1
@@ -2009,8 +2010,8 @@ loc_14AE6:
                 move.w  #$A8,(a0) 
 loc_14B12:
                 
-                move.w  #$10,VDPSPRITE_OFFSET_SIZE(a0)
-                move.w  #$C064,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #VDPSPRITESIZE_V1|VDPSPRITESIZE_H1|16,VDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #VDPTILE_PRIORITY|VDPTILE_PLT3|VDPTILE_V_ARROW,VDPSPRITE_OFFSET_TILE(a0)
 loc_14B1E:
                 
                 subq.w  #1,d1
@@ -2035,7 +2036,7 @@ itemNameAndPriceWindowSlot = -8
 inventoryWindowTilesEnd = -6
 inventoryWindowSlot = -2
 
-sub_14B28:
+WriteGoldInfo:
                 
                 move.w  #$904,d0
                 movea.l goldWindowTilesEnd(a6),a1
@@ -2054,7 +2055,7 @@ sub_14B28:
                 jsr     WriteTilesFromNumber
                 rts
 
-    ; End of function sub_14B28
+    ; End of function WriteGoldInfo
 
 aGold:          dc.b 'GOLD',0
                 dc.b 0
@@ -2129,9 +2130,9 @@ loc_14BCE:
                 adda.w  d0,a1
                 move.w  ((GENERIC_LIST_LENGTH-$1000000)).w,d1
                 sub.w   d0,d1
-                cmpi.w  #6,d1
+                cmpi.w  #ITEMS_PER_SHOP_PAGE,d1
                 ble.s   loc_14BF8
-                moveq   #6,d1
+                moveq   #ITEMS_PER_SHOP_PAGE,d1
 loc_14BF8:
                 
                 move.w  d1,((word_FFB134-$1000000)).w
@@ -2154,7 +2155,7 @@ loc_14C0E:
                 movea.l (sp)+,a0
                 bsr.w   sub_14C56       
                 move.w  #VDPTILE_SHOP_PRICE_TAG_STRING|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a2)
-                addq.l  #8,a2
+                addq.l  #VDP_SPRITE_SIZE,a2
                 move.w  (sp)+,d7
                 dbf     d7,loc_14C0E
                 lea     (FF6802_LOADING_SPACE).l,a0
@@ -2816,7 +2817,7 @@ loc_1528E:
                 jsr     (MoveWindowWithSfx).w
 loc_152F0:
                 
-                move.w  ((word_FFB086-$1000000)).w,d0
+                move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_15302
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -2889,7 +2890,7 @@ loc_15378:
                 jsr     (SetWindowDestination).w
 loc_153AC:
                 
-                move.w  ((word_FFB086-$1000000)).w,d0
+                move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_153BE
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -2923,7 +2924,7 @@ loc_153D6:
                 jsr     (MoveWindowWithSfx).w
 loc_153F6:
                 
-                move.w  ((word_FFB086-$1000000)).w,d0
+                move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_15408
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -3093,7 +3094,7 @@ YesNoPromptMenuLayout:
 
 ClosePortraitEyes:
                 
-                clr.b   ((byte_FFB082-$1000000)).w
+                clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 jsr     (WaitForVInt).w
                 move.w  d0,-(sp)
                 btst    #0,d0
@@ -3133,7 +3134,7 @@ VInt_HandlePortraitBlinking:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 beq.w   return_155C2
-                tst.b   ((byte_FFB082-$1000000)).w
+                tst.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 beq.w   return_155C2
                 lea     ((BLINK_COUNTER-$1000000)).w,a0
                 subq.w  #1,(a0)
@@ -3230,7 +3231,7 @@ loc_155DC:
                 move.w  d6,d0
 loc_155FA:
                 
-                or.w    ((word_FFB07E-$1000000)).w,d0
+                or.w    ((PORTRAIT_TILE_FLAGS-$1000000)).w,d0
                 tst.b   ((PORTRAIT_IS_FLIPPED-$1000000)).w
                 beq.s   loc_1560E
                 eori.w  #7,d6

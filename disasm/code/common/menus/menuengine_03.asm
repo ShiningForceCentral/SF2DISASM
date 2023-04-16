@@ -471,12 +471,12 @@ AdjustStringLengthForSpecialCharacters:
                 bmi.w   @Return
 @Loop:
                 
-                cmpi.b  #$9E,(a0)
+                cmpi.b  #$9E,(a0)	; Dollar Sign
                 bne.s   @Continue
                 subq.w  #1,d7
 @Continue:
                 
-                cmpi.b  #$9F,(a0)+
+                cmpi.b  #$9F,(a0)+	; Percent Sign
                 bne.s   @Next
                 subq.w  #1,d7
 @Next:

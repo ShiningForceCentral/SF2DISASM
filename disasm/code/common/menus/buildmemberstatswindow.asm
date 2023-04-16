@@ -437,7 +437,7 @@ aJewel:
                 lsl.w   #6,d1
                 addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
-                jsr     (CopyBytes).w   
+                jsr     (CopyBytes).w
                 ori.b   #$F0,(a1)
                 ori.b   #$F,$23(a1)
                 ori.b   #$F0,$9C(a1)

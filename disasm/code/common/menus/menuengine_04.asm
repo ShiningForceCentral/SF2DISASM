@@ -14,14 +14,14 @@ CreatePortraitWindow:
                 move.w  d0,-(sp)
                 move.b  d2,((PORTRAIT_IS_FLIPPED-$1000000)).w
                 move.b  d1,((PORTRAIT_IS_ON_RIGHT-$1000000)).w
-                move.w  #$A7C0,((word_FFB07E-$1000000)).w
+                move.w  #$A7C0,((PORTRAIT_TILE_FLAGS-$1000000)).w
                 move.w  #$14,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
-                move.w  #$80A,d0
-                move.w  #$2F6,d1
+                move.w  #$80A,d0	; Portrait dimensions
+                move.w  #$2F6,d1	; Portrait offset
                 tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
                 beq.s   loc_11B84
-                addi.w  #$1500,d1
+                addi.w  #$1500,d1	; adjustment to other side
 loc_11B84:
                 
                 jsr     (CreateWindow).w
@@ -48,7 +48,7 @@ loc_11B9E:
                 move.w  #$201,d1
                 tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
                 beq.s   loc_11BC4
-                addi.w  #$1500,d1
+                addi.w  #$1500,d1	; adjustment to other side
 loc_11BC4:
                 
                 moveq   #4,d2
@@ -57,7 +57,7 @@ loc_11BC4:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_HandlePortraitBlinking
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 movem.l (sp)+,d0-a1
 return_11BE0:
                 
@@ -84,7 +84,7 @@ RemovePortraitWindow:
                 move.w  #$2F6,d1
                 tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
                 beq.s   @Continue
-                addi.w  #$1500,d1
+                addi.w  #$1500,d1	; adjustment to other side
 @Continue:
                 
                 moveq   #4,d2
@@ -175,13 +175,13 @@ loc_11CD2:
 loc_11CE6:
                 
                 jsr     (WaitForWindowMovementEnd).w
-                move.w  #$A7C0,((word_FFB07E-$1000000)).w
+                move.w  #$A7C0,((PORTRAIT_TILE_FLAGS-$1000000)).w
                 move.w  #$14,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_HandlePortraitBlinking
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11D1A
@@ -274,7 +274,7 @@ loc_11DDC:
                 move.w  (sp)+,d0
                 move.b  d0,(a1)
                 movea.l (sp)+,a1
-                clr.b   ((byte_FFB082-$1000000)).w
+                clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
                 dc.l VInt_HandlePortraitBlinking
@@ -313,11 +313,11 @@ loc_11E74:
                 
                 checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 bne.s   loc_11E80
-                moveq   #$3E,d4 
+                moveq   #MAPSPRITE_CARAVAN,d4 
                 bra.s   loc_11E82
 loc_11E80:
                 
-                moveq   #$3D,d4 
+                moveq   #MAPSPRITE_RAFT,d4 
 loc_11E82:
                 
                 clr.w   d0

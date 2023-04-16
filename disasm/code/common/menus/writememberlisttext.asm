@@ -169,7 +169,7 @@ WriteMemberListText:
 @WriteEntry_Unequippable:
                 
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_NEWATTANDDEF,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
-                bne.w   @NextEntry      
+                bne.w   @NextEntry
                 
                 move.w  currentMember(a6),d0
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
