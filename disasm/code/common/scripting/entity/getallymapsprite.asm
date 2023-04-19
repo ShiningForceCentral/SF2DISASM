@@ -20,7 +20,7 @@ GetAllyMapSprite:
                 bne.s   @CheckNpcSprite
                 
                 ; Check if ally is alive
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   @CheckNpcSprite
                 move.w  #MAPSPRITE_BLUE_FLAME,d4

@@ -33,15 +33,15 @@ ExecuteIndividualTurn:
                 beq.w   @Done           ; skip turn if actor is dead
                 
                 ; Actor is alive
-                jsr     GetCombatantX
+                jsr     GetXPos
                 move.w  d1,((word_FFB08E-$1000000)).w
                 move.w  d1,((word_FFB094-$1000000)).w
                 move.w  d1,d2
-                jsr     GetCombatantY
+                jsr     GetYPos
                 move.w  d1,((word_FFB090-$1000000)).w
                 move.w  d1,((word_FFB092-$1000000)).w
                 move.w  d1,d3
-                clr.b   ((UNIT_CURSOR_RADIUS-$1000000)).w
+                clr.b   ((word_FFAF8E-$1000000)).w
                 bsr.w   GetEntityIndexForCombatant
                 move.w  d0,battleEntity(a6)
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
@@ -64,7 +64,7 @@ ExecuteIndividualTurn:
                 beq.s   @PlayerControl
                 
 @AiControl1:    st      aiControlFlag(a6)
-                jsr     StartAiControl      ; AI controlled unit (enemy, auto-control cheat, MUDDLEd force member)
+                jsr     ExecuteAiControl    ; AI controlled unit (enemy, auto-control cheat, MUDDLEd force member)
                 
 @PlayerControl: bsr.w   WaitForUnitCursor   ; player controlled unit (normal force member, enemy with control opponent cheat)
                 jsr     (WaitForViewScrollEnd).w
@@ -74,7 +74,7 @@ ExecuteIndividualTurn:
                 jsr     CreateBattlefieldMiniStatusWindow
                 jsr     CreateLandEffectWindow
                 jsr     GenerateTargetRangeLists
-                bsr.w   CreatePulsatingBlocksRange
+                bsr.w   CreateMoveableRangeForUnit
                 bsr.w   HideUnitCursor
                 move.w  statusEffects(a6),d1
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_SLEEP,d1
@@ -83,13 +83,13 @@ ExecuteIndividualTurn:
                 bne.s   @AiControl2
                 
                 ; Handle player input
-                bsr.w   HandleBattleEntityControlPlayerInput
+                bsr.w   sub_24662
                 cmpi.w  #$FFFF,d0
                 bne.s   @HandleBattleaction
                 jsr     (WaitForViewScrollEnd).w
                 clr.b   ((IS_TARGETING-$1000000)).w
-                jsr     RemoveLandEffectWindow
-                jsr     RemoveMiniStatusWindow
+                jsr     HideLandEffectWindow
+                jsr     HideMiniStatusWindow
                 move.w  combatant(a6),d0
                 bsr.w   SetEntityBlinkingFlag
                 move.w  battleEntity(a6),d0
@@ -110,8 +110,8 @@ ExecuteIndividualTurn:
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
                 jsr     (UpdateEntityProperties).w
-                jsr     RemoveLandEffectWindow
-                jsr     RemoveMiniStatusWindow
+                jsr     HideLandEffectWindow
+                jsr     HideMiniStatusWindow
                 bra.w   @Done
                 
 @AiControl2:    bsr.w   sub_252FA        
@@ -215,14 +215,14 @@ DetermineRandomAttackSpell:
                 jsr     GetClass
                 bra.s   @Continue
 @Enemy:         lea     tbl_RandomAttackSpellsForEnemies(pc), a0
-                jsr     GetEnemy
+                jsr     GetEnemyIndex
 @Continue:      jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @Done
                 
                 ; Randomly determine if spell is cast
                 move.w  #256,d6
                 jsr     (GenerateRandomNumber).w
-                cmp.w   (a0)+,d7                     ; d6/256 chance to cast spell
+                cmp.b   (a0)+,d7                     ; d6/256 chance to cast spell
                 bhs.s   @Done
                 
                 ; Determine spell level
@@ -232,17 +232,17 @@ DetermineRandomAttackSpell:
                 clr.w   d0
                 
                 ; Check upgrade level 1
-                cmp.w   (a0)+,d1
+                cmp.b   (a0)+,d1
                 blt.s   @CheckUpgrade2
                 addq.w  #1,d0
-@CheckUpgrade2: cmp.w   (a0)+,d1
+@CheckUpgrade2: cmp.b   (a0)+,d1
                 blt.s   @CheckUpgrade3
                 addq.w  #1,d0
-@CheckUpgrade3: cmp.w   (a0)+,d1
+@CheckUpgrade3: cmp.b   (a0)+,d1
                 blt.s   @LoadSpell
                 addq.w  #1,d0
 @LoadSpell:     lsl.w   #6,d0
-                or.w    (a0),d0
+                or.b    (a0),d0
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
 @Done:          movem.l (sp)+,d1-d2/a0
                 rts
@@ -266,7 +266,7 @@ LoadBattlesceneMusicIndex:
                 bra.s   @LoadIndex
 @Enemy:         move.b  #MUSIC_ENEMY_ATTACK,d3
                 lea     tbl_EnemyBattlesceneMusics(pc), a0
-                jsr     GetEnemy
+                jsr     GetEnemyIndex
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @LoadIndex

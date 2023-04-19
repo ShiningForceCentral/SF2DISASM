@@ -12,9 +12,9 @@ GetEnemyDestination:
                 
                 movem.l d0/a0,-(sp)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                jsr     GetCombatantY
+                jsr     GetYPos
                 move.w  d1,d2
-                jsr     GetCombatantX
+                jsr     GetXPos
 @Loop:
                 
                 move.b  (a0)+,d0

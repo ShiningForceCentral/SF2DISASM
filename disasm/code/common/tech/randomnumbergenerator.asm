@@ -34,7 +34,7 @@ WaitForRandomValueToMatch:
                 move.b  d6,d1
 loc_162E:
                 
-                bsr.w   GenerateRandomValueUnsigned
+                bsr.w   GetRandomValueUnsigned
                 cmpi.b  #1,d1
                 beq.s   loc_163A
                 bpl.s   loc_163E
@@ -62,20 +62,20 @@ loc_164A:
 ; =============== S U B R O U T I N E =======================================
 
 
-GenerateRandomValueUnsigned:
+GetRandomValueUnsigned:
                 
                 movem.l d0-d5/a0-a6,-(sp)
                 lea     (RANDOM_WAITING_FOR_INPUT).l,a0
                 clr.w   d7
                 move.w  (a0),d7
-                mulu.w  #541,d7
-                addi.w  #12345,d7
+                mulu.w  #$21D,d7
+                addi.w  #$3039,d7
                 move.w  d7,(a0)
                 andi.w  #$FF,d7
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
 
-    ; End of function GenerateRandomValueUnsigned
+    ; End of function GetRandomValueUnsigned
 
 
 ; =============== S U B R O U T I N E =======================================

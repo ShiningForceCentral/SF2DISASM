@@ -9,11 +9,11 @@ ExecuteBattleCutscene_Defeated:
                 
                 movem.l d0-d1/d7-a0,-(sp)
                 moveq   #0,d0
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.w   loc_47C88
                 move.w  #COMBATANT_ENEMIES_START,d0
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.w   loc_47C88
                 clr.w   d1

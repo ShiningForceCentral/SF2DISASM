@@ -22,9 +22,9 @@ DetermineHealingSpellLevel:
                 lsr.w   #SPELLENTRY_OFFSET_LV,d5
                 andi.w  #SPELLENTRY_LOWERMASK_LV,d5
                 move.w  d1,d3
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 move.w  d1,d2
-                jsr     GetMaxHp
+                jsr     GetMaxHP
                 sub.w   d2,d1           ; d1 = max HP - current HP
                 moveq   #$FFFFFFFF,d2
                 cmpi.w  #ENEMYAI_THRESHOLD_HEAL1,d1 ; 2
@@ -43,7 +43,7 @@ DetermineHealingSpellLevel:
 loc_CDB8:
                 
                 move.w  d3,d0
-                jsr     GetCurrentMp
+                jsr     GetCurrentMP
                 move.w  d1,d3
 loc_CDC2:
                 

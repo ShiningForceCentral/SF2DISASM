@@ -16,19 +16,19 @@ byte_57040:
                 
                 chkFlg  720             ; Set after the King of Bedoe speaks to his soldiers and they disperse
                 beq.s   return_5708C
-                move.w  #150,d0
+                move.w  #$96,d0 
                 jsr     MoveEntityOutOfMap
-                move.w  #151,d0
+                move.w  #$97,d0 
                 jsr     MoveEntityOutOfMap
-                move.w  #152,d0
+                move.w  #$98,d0 
                 jsr     MoveEntityOutOfMap
-                move.w  #153,d0
+                move.w  #$99,d0 
                 jsr     MoveEntityOutOfMap
-                move.w  #154,d0
+                move.w  #$9A,d0 
                 jsr     MoveEntityOutOfMap
-                move.w  #155,d0
+                move.w  #$9B,d0 
                 jsr     MoveEntityOutOfMap
-                move.w  #156,d0
+                move.w  #$9C,d0 
                 jsr     MoveEntityOutOfMap
 return_5708C:
                 

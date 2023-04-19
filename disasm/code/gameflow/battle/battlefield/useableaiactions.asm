@@ -207,7 +207,7 @@ GetNextUsableAttackItem:
                 bra.w   @Next
 @Continue:
                 
-                jsr     IsItemUsableInBattle
+                jsr     IsItemUsableInBattle?
                 bcs.w   @CheckAllowedToUse
 @Next:
                 
@@ -301,7 +301,7 @@ GetNextUsableHealingItem:
 @Continue:
                 
                 move.w  d1,d7
-                jsr     IsItemUsableInBattle
+                jsr     IsItemUsableInBattle?
                 bcc.s   @Next
                 
                 ; Is AI allowed to use item?

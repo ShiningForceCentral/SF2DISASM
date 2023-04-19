@@ -26,9 +26,9 @@ Map41_DescFunc0:
                  
                 chkFlg  930             ; Set after opening Devil's Head with the Force Sword
                 bne.s   byte_5F44C      
-                moveq   #ITEM_FORCE_SWORD,d1
+                moveq   #$43,d1 ; force sword
                 jsr     j_GetItemInventoryLocation ; check if force sword available in inventory ?
-                cmpi.w  #-1,d0
+                cmpi.w  #$FFFF,d0
                 bne.s   byte_5F446      
                 txt     3511            ; "A statue of a devil's head.{N}It looks ready to bite you.{W1}"
                 bra.s   loc_5F44A

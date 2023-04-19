@@ -4,12 +4,12 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Starting point for the AI control process.
+; related to AI controlled unit (enemy, auto-control cheat, MUDDLEd force member)
 ; 
-;   In: d0.w = combatant index
+;     In: D0 = AI controlled combatant index
 
 
-StartAiControl:
+ExecuteAiControl:
                 
                 movem.l d0-a5,-(sp)
                 move.w  d0,d7           ; D7 = copy of AI controlled combatant index
@@ -20,14 +20,14 @@ StartAiControl:
 @Enemy:
                 
                 bsr.w   GetAiCommandset 
-                cmpi.b  #AICOMMANDSET_SWARM,d1 ; check for AI #15, the "swarm" AI used in Kraken, Harpy, and Chess Battles
+                cmpi.b  #AI_SWARM,d1    ; check for AI #15, the "swarm" AI used in Kraken, Harpy, and Chess Battles
                 beq.s   @CheckFullHP
                 bra.w   @Attack
 @CheckFullHP:
                 
-                bsr.w   GetMaxHp
+                bsr.w   GetMaxHP
                 move.w  d1,d2
-                bsr.w   GetCurrentHp
+                bsr.w   GetCurrentHP
                 cmp.w   d2,d1
                 beq.s   @FindSwarmBattle ; if AI #15 and full HP, go to the "swarm" AI check
                 bra.w   @Attack         ; if AI #15 but not at full HP, then immediately activate and attack normally
@@ -109,7 +109,7 @@ StartAiControl:
                 beq.s   @CheckSpecialMoveOrders ; skip if ally
                 
                 ; If enemy, handle special attackers
-                bsr.w   GetEnemy        
+                bsr.w   GetEnemyIndex   
                 
                 ; Check if Prism Flower
                 cmpi.w  #ENEMY_PRISM_FLOWER,d1
@@ -137,7 +137,7 @@ StartAiControl:
                 btst    #6,d1
                 bne.s   @HandleSecondaryCharacteristics
                 move.w  d1,d0
-                bsr.w   GetCurrentHp
+                bsr.w   GetCurrentHP
                 tst.w   d1
                 bne.s   @HandleSecondaryCharacteristics
                 move.w  d7,d0
@@ -179,7 +179,7 @@ StartAiControl:
                 clr.w   d1
                 move.b  (a1),d1
                 move.b  d7,d0
-                bsr.w   ExecuteAiCommand
+                bsr.w   HandleAiCommand 
                 tst.b   d1
                 bne.s   @NextAiCommand
                 bra.w   @Done
@@ -189,11 +189,11 @@ StartAiControl:
                 dbf     d2,@HandleAiCommandset_Loop
 @Done:
                 
-                jsr     j_ClearBattleTerrainArrayObstructionFlags
+                jsr     j_ClearTerrainListObstructions
                 movem.l (sp)+,d0-a5
                 rts
 
-    ; End of function StartAiControl
+    ; End of function ExecuteAiControl
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -213,7 +213,7 @@ CountDefeatedEnemies:
                 clr.w   d3
 @Loop:
                 
-                bsr.w   GetCurrentHp
+                bsr.w   GetCurrentHP
                 tst.w   d1
                 bne.s   @Next
                 addi.w  #1,d3
@@ -236,7 +236,7 @@ HandleLineAttackerAi:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   MakeTargetsList_Allies
                 move.w  d7,d0
                 jsr     j_GetLaserFacing
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
@@ -275,21 +275,21 @@ HandleExploderAi:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d5
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   MakeTargetsList_Allies
                 move.w  #SPELL_B_ROCK,d1 ; Burst Rock spell
-                bsr.w   PopulateTargetableGridFromSpell
+                bsr.w   CreateTargetGridFromSpell
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  (a0),d0
                 tst.w   d0
                 beq.s   loc_E190
                 move.w  #6,d6
-                jsr     j_GenerateRandomNumberUnderD6
+                jsr     j_RandomUnderD6
                 cmpi.b  #4,d7
                 bne.s   loc_E190
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_BURST_ROCK,(a0)
                 move.w  #SPELL_B_ROCK,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
-                move.w  d5,BATTLEACTION_OFFSET_ACTOR(a0)
+                move.w  d5,BATTLEACTION_OFFSET_TARGET(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   loc_E1A6
@@ -298,7 +298,7 @@ loc_E190:
                 move.w  d5,d0
                 move.w  #AICOMMAND_MOVE,d1
                 clr.w   d7
-                bsr.w   ExecuteAiCommand
+                bsr.w   HandleAiCommand 
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_STAY,(a0)
 loc_E1A6:

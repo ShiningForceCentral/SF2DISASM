@@ -18,7 +18,7 @@ SystemInit:
             endif
                 bsr.w   InitZ80         ; and load sound driver to Z80 RAM
                 bsr.s   InitVdpData
-                jmp     (InitializeGame).l
+                jmp     (InitGame).l
 
     ; End of function SystemInit
 

@@ -1159,10 +1159,10 @@ LoadMap:
                 move.l  ((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
                 clr.l   ((PLANE_A_SCROLL_SPEED_X-$1000000)).w
                 clr.l   ((PLANE_B_SCROLL_SPEED_X-$1000000)).w
-                clr.b   ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
+                clr.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 move.w  d0,-(sp)
                 move.w  d1,-(sp)
-                bsr.w   InitializeDisplay
+                bsr.w   InitDisplay
                 move.w  (sp)+,d1
                 ext.w   d1
                 bpl.s   loc_2ACC
@@ -1188,7 +1188,7 @@ loc_2ACC:
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (PALETTE_1_BASE).l,a1
-                move.w  #CRAM_PALETTE_SIZE,d7
+                move.w  #$20,d7 
                 bsr.w   CopyBytes       
                 clr.w   (PALETTE_1_BASE).l
                 tst.b   (a5)+
@@ -1425,7 +1425,7 @@ loc_2CF6:
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   UpdateVdpHScrollData
                 bsr.w   UpdateVdpVScrollData
-                bsr.w   InitializeWindowProperties
+                bsr.w   InitWindowProperties
                 bsr.w   ToggleRoofOnMapLoad
                 bsr.w   WaitForVInt
                 bsr.w   UpdateVdpPlaneA
@@ -1584,7 +1584,7 @@ LoadMapArea:
                 enableSram
                 move.w  (a1)+,d7
                 lea     (FF6802_LOADING_SPACE).l,a0
-                lea     (CURRENT_MAP_TILESET_2_COPY).l,a1
+                lea     (byte_FF9B04).l,a1
                 lsl.w   #5,d7
                 bsr.w   CopyBytes       
                 addq.l  #4,((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w
@@ -1628,7 +1628,7 @@ loc_2F04:
                 bsr.w   SetVdpReg
                 bsr.w   WaitForVInt
                 bsr.w   sub_2F24
-                tst.b   ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
+                tst.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
                 bne.s   loc_2F04
                 rts
 

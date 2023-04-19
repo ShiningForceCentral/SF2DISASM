@@ -3,31 +3,28 @@
 ; 0x16EA6..0x176A6 : Item definitions
 tbl_ItemDefs:   
 ; Syntax        equipFlags   [EQUIPFLAG_]bitfield
-;               equipFlags2  [EQUIPFLAG2_]bitfield (if EXPANDED_CLASSES is enabled)
+;               equipFlags2  [EQUIPFLAG2_]bitfield
 ;               range        min, max 0-3
 ;               price        0-65535
 ;               itemType     [ITEMTYPE_]bitfield
 ;               useSpell     [SPELL_]enum[|level]
-;               equipEffects [EQUIPEFFECT_]enum, parameter, &
-;                            [EQUIPEFFECT_]enum, parameter, &
-;                            [EQUIPEFFECT_]enum, parameter
+;               equipEffects [EQUIPEFFECT_]enum, parameter, &      (parameters for INCREASE/DECREASE_RES_ can be a combination ie. MODIFY_FIRE1|MODIFY_WIND3)
+;                            [EQUIPEFFECT_]enum, parameter, &      (parameter for SET_RES_ should be every resistance for the byte ie. RESISTANCE_WIND_NONE|RESISTANCE_LIGHTNING_MAJOR|RESISTANCE_ICE_WEAKNESS|RESISTANCE_FIRE_NONE)
+;                            [EQUIPEFFECT_]enum, parameter         (parameter for SET_STATUS should be single effect ie. STATUS_POISON, STATUS_SILENCE, etc)
 ;
 ;        level: LV1 = 0 (default when omitted)
 ;               LV2 = $40
 ;               LV3 = $80
 ;               LV4 = $C0
 ;
-; Notes regarding additional equip effects:
-;       Parameters for INCREASE/DECREASE_RES_ can be a combination i.e. MODIFY_FIRE1|MODIFY_WIND3
-;       Parameter for SET_RES_ should be every resistance for the byte i.e. RESISTANCE_WIND_NONE|RESISTANCE_LIGHTNING_MAJOR|RESISTANCE_ICE_WEAKNESS|RESISTANCE_FIRE_NONE
-;       Parameter for SET_STATUS should be single effect i.e. STATUS_POISON, STATUS_SILENCE, etc.
-;
 ; Notes: Equip parameter range depends on effect.
 ;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 ; 0: Medical Herb
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 1
                 price        10
                 itemType     CONSUMABLE
@@ -38,7 +35,9 @@ tbl_ItemDefs:
                 
                 ; 1: Healing Seed
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 1
                 price        200
                 itemType     CONSUMABLE
@@ -49,7 +48,9 @@ tbl_ItemDefs:
                 
                 ; 2: Healing Drop
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 1
                 price        300
                 itemType     CONSUMABLE
@@ -60,7 +61,9 @@ tbl_ItemDefs:
                 
                 ; 3: Antidote
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 1
                 price        20
                 itemType     CONSUMABLE
@@ -71,7 +74,9 @@ tbl_ItemDefs:
                 
                 ; 4: Angel Wing
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        40
                 itemType     CONSUMABLE
@@ -82,7 +87,9 @@ tbl_ItemDefs:
                 
                 ; 5: Fairy Powder
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 1
                 price        100
                 itemType     CONSUMABLE
@@ -93,7 +100,9 @@ tbl_ItemDefs:
                 
                 ; 6: Healing Water
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 1
                 price        400
                 itemType     CONSUMABLE
@@ -104,7 +113,9 @@ tbl_ItemDefs:
                 
                 ; 7: Fairy Tear
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 1
                 price        300
                 itemType     CONSUMABLE
@@ -115,7 +126,9 @@ tbl_ItemDefs:
                 
                 ; 8: Healing Rain
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        10000
                 itemType     RARE|CONSUMABLE
@@ -126,7 +139,9 @@ tbl_ItemDefs:
                 
                 ; 9: Power Water
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        500
                 itemType     CONSUMABLE
@@ -137,7 +152,9 @@ tbl_ItemDefs:
                 
                 ; 10: Protect Milk
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        500
                 itemType     CONSUMABLE
@@ -148,7 +165,9 @@ tbl_ItemDefs:
                 
                 ; 11: Quick Chicken
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        500
                 itemType     CONSUMABLE
@@ -159,7 +178,9 @@ tbl_ItemDefs:
                 
                 ; 12: Running Pimento
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        1500
                 itemType     CONSUMABLE
@@ -170,7 +191,9 @@ tbl_ItemDefs:
                 
                 ; 13: Cheerful Bread
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        500
                 itemType     CONSUMABLE
@@ -181,7 +204,9 @@ tbl_ItemDefs:
                 
                 ; 14: Bright Honey
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        500
                 itemType     CONSUMABLE
@@ -192,7 +217,9 @@ tbl_ItemDefs:
                 
                 ; 15: Brave Apple
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        500
                 itemType     CONSUMABLE
@@ -203,7 +230,9 @@ tbl_ItemDefs:
                 
                 ; 16: Shining Ball
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 1
                 price        1000
                 itemType     RARE|CONSUMABLE
@@ -214,7 +243,9 @@ tbl_ItemDefs:
                 
                 ; 17: Blizzard
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 1
                 price        1200
                 itemType     RARE|CONSUMABLE
@@ -225,7 +256,9 @@ tbl_ItemDefs:
                 
                 ; 18: Holy Thunder
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 1
                 price        1500
                 itemType     RARE|CONSUMABLE
@@ -236,7 +269,9 @@ tbl_ItemDefs:
                 
                 ; 19: Power Ring
                 equipFlags   ALL
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        3000
                 itemType     RING|RARE|BREAKABLE
@@ -247,7 +282,9 @@ tbl_ItemDefs:
                 
                 ; 20: Protect Ring
                 equipFlags   ALL
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        3000
                 itemType     RING|RARE|BREAKABLE
@@ -258,7 +295,9 @@ tbl_ItemDefs:
                 
                 ; 21: Quick Ring
                 equipFlags   ALL
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        3000
                 itemType     RING|RARE|BREAKABLE
@@ -269,7 +308,9 @@ tbl_ItemDefs:
                 
                 ; 22: Running Ring
                 equipFlags   ALL
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        3000
                 itemType     RING|RARE
@@ -280,7 +321,9 @@ tbl_ItemDefs:
                 
                 ; 23: White Ring
                 equipFlags   HERO|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        5000
                 itemType     RING|RARE|BREAKABLE
@@ -291,7 +334,9 @@ tbl_ItemDefs:
                 
                 ; 24: Black Ring
                 equipFlags   WIZ|SORC
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        5000
                 itemType     RING|RARE|CURSED|BREAKABLE
@@ -302,7 +347,9 @@ tbl_ItemDefs:
                 
                 ; 25: Evil Ring
                 equipFlags   WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        5000
                 itemType     RING|RARE|CURSED|BREAKABLE
@@ -313,7 +360,9 @@ tbl_ItemDefs:
                 
                 ; 26: Leather Glove
                 equipFlags   MMNK
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        1300
                 itemType     WEAPON
@@ -324,7 +373,9 @@ tbl_ItemDefs:
                 
                 ; 27: Power Glove
                 equipFlags   MMNK
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        1800
                 itemType     WEAPON
@@ -335,7 +386,9 @@ tbl_ItemDefs:
                 
                 ; 28: Brass Knuckles
                 equipFlags   MMNK
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        2900
                 itemType     WEAPON
@@ -346,7 +399,9 @@ tbl_ItemDefs:
                 
                 ; 29: Iron Knuckles
                 equipFlags   MMNK
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        4800
                 itemType     WEAPON
@@ -357,7 +412,9 @@ tbl_ItemDefs:
                 
                 ; 30: Misty Knuckles
                 equipFlags   MMNK
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        5500
                 itemType     WEAPON|RARE|BREAKABLE
@@ -368,7 +425,9 @@ tbl_ItemDefs:
                 
                 ; 31: Giant Knuckles
                 equipFlags   MMNK
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        7500
                 itemType     WEAPON|RARE|BREAKABLE
@@ -379,7 +438,9 @@ tbl_ItemDefs:
                 
                 ; 32: Evil Knuckles
                 equipFlags   MMNK
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        9500
                 itemType     WEAPON|RARE|CURSED
@@ -390,7 +451,9 @@ tbl_ItemDefs:
                 
                 ; 33: Short Axe
                 equipFlags   WARR|GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        120
                 itemType     WEAPON
@@ -401,7 +464,9 @@ tbl_ItemDefs:
                 
                 ; 34: Hand Axe
                 equipFlags   WARR|GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        340
                 itemType     WEAPON
@@ -412,7 +477,9 @@ tbl_ItemDefs:
                 
                 ; 35: Middle Axe
                 equipFlags   WARR|GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        610
                 itemType     WEAPON
@@ -423,7 +490,9 @@ tbl_ItemDefs:
                 
                 ; 36: Power Axe
                 equipFlags   WARR|GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        1100
                 itemType     WEAPON
@@ -434,7 +503,9 @@ tbl_ItemDefs:
                 
                 ; 37: Battle Axe
                 equipFlags   WARR|GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        1370
                 itemType     WEAPON
@@ -445,7 +516,9 @@ tbl_ItemDefs:
                 
                 ; 38: Large Axe
                 equipFlags   GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        2250
                 itemType     WEAPON
@@ -456,7 +529,9 @@ tbl_ItemDefs:
                 
                 ; 39: Great Axe
                 equipFlags   GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        4600
                 itemType     WEAPON
@@ -467,7 +542,9 @@ tbl_ItemDefs:
                 
                 ; 40: Heat Axe
                 equipFlags   GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        7200
                 itemType     WEAPON|RARE|BREAKABLE
@@ -478,7 +555,9 @@ tbl_ItemDefs:
                 
                 ; 41: Atlas Axe
                 equipFlags   GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        9600
                 itemType     WEAPON|RARE|BREAKABLE
@@ -489,7 +568,9 @@ tbl_ItemDefs:
                 
                 ; 42: Ground Axe
                 equipFlags   GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        10000
                 itemType     WEAPON|RARE
@@ -500,7 +581,9 @@ tbl_ItemDefs:
                 
                 ; 43: Rune Axe
                 equipFlags   GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        10000
                 itemType     WEAPON|RARE|BREAKABLE
@@ -511,7 +594,9 @@ tbl_ItemDefs:
                 
                 ; 44: Evil Axe
                 equipFlags   GLDT|BRN|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        15000
                 itemType     WEAPON|RARE|CURSED
@@ -522,7 +607,9 @@ tbl_ItemDefs:
                 
                 ; 45: Wooden Arrow
                 equipFlags   ACHR|RNGR|SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 2
                 price        250
                 itemType     WEAPON
@@ -533,7 +620,9 @@ tbl_ItemDefs:
                 
                 ; 46: Iron Arrow
                 equipFlags   ACHR|RNGR|SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 2
                 price        600
                 itemType     WEAPON
@@ -544,7 +633,9 @@ tbl_ItemDefs:
                 
                 ; 47: Steel Arrow
                 equipFlags   ACHR|RNGR|SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 2
                 price        1270
                 itemType     WEAPON
@@ -555,7 +646,9 @@ tbl_ItemDefs:
                 
                 ; 48: Robin Arrow
                 equipFlags   SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 3
                 price        1480
                 itemType     WEAPON
@@ -566,7 +659,9 @@ tbl_ItemDefs:
                 
                 ; 49: Assault Shell
                 equipFlags   SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 3
                 price        2500
                 itemType     WEAPON
@@ -577,7 +672,9 @@ tbl_ItemDefs:
                 
                 ; 50: Great Shot
                 equipFlags   SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 3
                 price        5000
                 itemType     WEAPON
@@ -588,7 +685,9 @@ tbl_ItemDefs:
                 
                 ; 51: Nazca Cannon
                 equipFlags   SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 3
                 price        3000
                 itemType     WEAPON|RARE
@@ -599,7 +698,9 @@ tbl_ItemDefs:
                 
                 ; 52: Buster Shot
                 equipFlags   SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 3
                 price        6800
                 itemType     WEAPON|RARE
@@ -610,7 +711,9 @@ tbl_ItemDefs:
                 
                 ; 53: Hyper Cannon
                 equipFlags   SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 3
                 price        8700
                 itemType     WEAPON|RARE
@@ -621,7 +724,9 @@ tbl_ItemDefs:
                 
                 ; 54: Grand Cannon
                 equipFlags   SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 3
                 price        9800
                 itemType     WEAPON|RARE|BREAKABLE
@@ -632,7 +737,9 @@ tbl_ItemDefs:
                 
                 ; 55: Evil Shot
                 equipFlags   SNIP|BRGN|BWNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        2, 3
                 price        13000
                 itemType     WEAPON|RARE|CURSED
@@ -643,7 +750,9 @@ tbl_ItemDefs:
                 
                 ; 56: Wooden Stick
                 equipFlags   KNTE|PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        70
                 itemType     WEAPON
@@ -654,7 +763,9 @@ tbl_ItemDefs:
                 
                 ; 57: Short Sword
                 equipFlags   SDMN|BDMN|HERO|BRN|BDBT|NINJ|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        140
                 itemType     WEAPON
@@ -665,7 +776,9 @@ tbl_ItemDefs:
                 
                 ; 58: Middle Sword
                 equipFlags   SDMN|BDMN|HERO|BRN|BDBT|NINJ|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        340
                 itemType     WEAPON
@@ -676,7 +789,9 @@ tbl_ItemDefs:
                 
                 ; 59: Long Sword
                 equipFlags   SDMN|BDMN|HERO|BRN|BDBT|NINJ|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        620
                 itemType     WEAPON
@@ -687,7 +802,9 @@ tbl_ItemDefs:
                 
                 ; 60: Steel Sword
                 equipFlags   SDMN|BDMN|HERO|BRN|BDBT|NINJ|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        1120
                 itemType     WEAPON
@@ -698,7 +815,9 @@ tbl_ItemDefs:
                 
                 ; 61: Achilles Sword
                 equipFlags   SDMN|HERO
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        1350
                 itemType     WEAPON|RARE
@@ -709,7 +828,9 @@ tbl_ItemDefs:
                 
                 ; 62: Broad Sword
                 equipFlags   HERO|BRN|BDBT|NINJ|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        1600
                 itemType     WEAPON
@@ -720,7 +841,9 @@ tbl_ItemDefs:
                 
                 ; 63: Buster Sword
                 equipFlags   HERO|BRN|BDBT|NINJ|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        2600
                 itemType     WEAPON
@@ -731,7 +854,9 @@ tbl_ItemDefs:
                 
                 ; 64: Great Sword
                 equipFlags   HERO|BRN|BDBT|NINJ|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        5100
                 itemType     WEAPON
@@ -742,7 +867,9 @@ tbl_ItemDefs:
                 
                 ; 65: Critical Sword
                 equipFlags   HERO|BRN|BDBT|NINJ|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        7200
                 itemType     WEAPON|RARE
@@ -753,7 +880,9 @@ tbl_ItemDefs:
                 
                 ; 66: Battle Sword
                 equipFlags   HERO|BRN|BDBT|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        9200
                 itemType     WEAPON|RARE
@@ -764,7 +893,9 @@ tbl_ItemDefs:
                 
                 ; 67: Force Sword
                 equipFlags   HERO
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        10000
                 itemType     WEAPON|RARE|UNSELLABLE
@@ -775,7 +906,9 @@ tbl_ItemDefs:
                 
                 ; 68: Counter Sword
                 equipFlags   HERO|BRN|BDBT|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        13000
                 itemType     WEAPON|RARE
@@ -786,7 +919,9 @@ tbl_ItemDefs:
                 
                 ; 69: Levanter
                 equipFlags   HERO
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        14000
                 itemType     WEAPON|RARE|BREAKABLE
@@ -797,7 +932,9 @@ tbl_ItemDefs:
                 
                 ; 70: Dark Sword
                 equipFlags   HERO|BRN|BDBT|NINJ|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        17000
                 itemType     WEAPON|RARE|CURSED|BREAKABLE
@@ -808,7 +945,9 @@ tbl_ItemDefs:
                 
                 ; 71: Wooden Sword
                 equipFlags   SDMN|BDMN|HERO|BRN|BDBT|NINJ|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        60
                 itemType     WEAPON
@@ -819,7 +958,9 @@ tbl_ItemDefs:
                 
                 ; 72: Short Spear
                 equipFlags   KNTE|PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 2
                 price        120
                 itemType     WEAPON
@@ -830,7 +971,9 @@ tbl_ItemDefs:
                 
                 ; 73: Bronze Lance
                 equipFlags   KNTE|PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        260
                 itemType     WEAPON
@@ -841,7 +984,9 @@ tbl_ItemDefs:
                 
                 ; 74: Spear
                 equipFlags   KNTE|PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 2
                 price        460
                 itemType     WEAPON
@@ -852,7 +997,9 @@ tbl_ItemDefs:
                 
                 ; 75: Steel Lance
                 equipFlags   KNTE|PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        810
                 itemType     WEAPON
@@ -863,7 +1010,9 @@ tbl_ItemDefs:
                 
                 ; 76: Power Spear
                 equipFlags   KNTE|PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 2
                 price        1270
                 itemType     WEAPON
@@ -874,7 +1023,9 @@ tbl_ItemDefs:
                 
                 ; 77: Heavy Lance
                 equipFlags   PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        1600
                 itemType     WEAPON
@@ -885,7 +1036,9 @@ tbl_ItemDefs:
                 
                 ; 78: Javelin
                 equipFlags   PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 2
                 price        3400
                 itemType     WEAPON
@@ -896,7 +1049,9 @@ tbl_ItemDefs:
                 
                 ; 79: Chrome Lance
                 equipFlags   PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        6900
                 itemType     WEAPON
@@ -907,7 +1062,9 @@ tbl_ItemDefs:
                 
                 ; 80: Valkyrie
                 equipFlags   PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 2
                 price        7700
                 itemType     WEAPON|RARE|BREAKABLE
@@ -918,7 +1075,9 @@ tbl_ItemDefs:
                 
                 ; 81: Holy Lance
                 equipFlags   PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        9300
                 itemType     WEAPON|RARE|BREAKABLE
@@ -929,7 +1088,9 @@ tbl_ItemDefs:
                 
                 ; 82: Mist Javelin
                 equipFlags   PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 2
                 price        9900
                 itemType     WEAPON|RARE
@@ -940,7 +1101,9 @@ tbl_ItemDefs:
                 
                 ; 83: Halberd
                 equipFlags   PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        7300
                 itemType     WEAPON|RARE|BREAKABLE
@@ -951,7 +1114,9 @@ tbl_ItemDefs:
                 
                 ; 84: Evil Lance
                 equipFlags   PLDN|PGNT
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        11000
                 itemType     WEAPON|RARE|CURSED
@@ -962,7 +1127,9 @@ tbl_ItemDefs:
                 
                 ; 85: Wooden Rod
                 equipFlags   MAGE|PRST|WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        60
                 itemType     WEAPON
@@ -973,7 +1140,9 @@ tbl_ItemDefs:
                 
                 ; 86: Short Rod
                 equipFlags   MAGE|PRST|WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        130
                 itemType     WEAPON
@@ -984,7 +1153,9 @@ tbl_ItemDefs:
                 
                 ; 87: Bronze Rod
                 equipFlags   MAGE|PRST|WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        360
                 itemType     WEAPON
@@ -995,7 +1166,9 @@ tbl_ItemDefs:
                 
                 ; 88: Iron Rod
                 equipFlags   MAGE|PRST|WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        560
                 itemType     WEAPON
@@ -1006,7 +1179,9 @@ tbl_ItemDefs:
                 
                 ; 89: Power Stick
                 equipFlags   MAGE|PRST|WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        1050
                 itemType     WEAPON
@@ -1017,7 +1192,9 @@ tbl_ItemDefs:
                 
                 ; 90: Flail
                 equipFlags   WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        1490
                 itemType     WEAPON
@@ -1028,7 +1205,9 @@ tbl_ItemDefs:
                 
                 ; 91: Guardian Staff
                 equipFlags   WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        2380
                 itemType     WEAPON
@@ -1039,7 +1218,9 @@ tbl_ItemDefs:
                 
                 ; 92: Indra Staff
                 equipFlags   WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        3200
                 itemType     WEAPON|BREAKABLE
@@ -1050,7 +1231,9 @@ tbl_ItemDefs:
                 
                 ; 93: Mage Staff
                 equipFlags   WIZ|SORC
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        6300
                 itemType     WEAPON|RARE|BREAKABLE
@@ -1061,7 +1244,9 @@ tbl_ItemDefs:
                 
                 ; 94: Wish Staff
                 equipFlags   VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        6100
                 itemType     WEAPON|RARE|BREAKABLE
@@ -1072,7 +1257,9 @@ tbl_ItemDefs:
                 
                 ; 95: Great Rod
                 equipFlags   WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        7900
                 itemType     WEAPON|RARE
@@ -1083,7 +1270,9 @@ tbl_ItemDefs:
                 
                 ; 96: Supply Staff
                 equipFlags   WIZ|SORC
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        8500
                 itemType     WEAPON|RARE|BREAKABLE
@@ -1094,7 +1283,9 @@ tbl_ItemDefs:
                 
                 ; 97: Holy Staff
                 equipFlags   VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        9000
                 itemType     WEAPON|RARE
@@ -1105,7 +1296,9 @@ tbl_ItemDefs:
                 
                 ; 98: Freeze Staff
                 equipFlags   WIZ|SORC
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        9500
                 itemType     WEAPON|RARE|BREAKABLE
@@ -1116,7 +1309,9 @@ tbl_ItemDefs:
                 
                 ; 99: Goddess Staff
                 equipFlags   VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        9700
                 itemType     WEAPON|RARE|BREAKABLE
@@ -1127,7 +1322,9 @@ tbl_ItemDefs:
                 
                 ; 100: Mystery Staff
                 equipFlags   WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        10000
                 itemType     WEAPON|RARE
@@ -1138,7 +1335,9 @@ tbl_ItemDefs:
                 
                 ; 101: Demon Rod
                 equipFlags   WIZ|SORC|VICR
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        12500
                 itemType     WEAPON|RARE|CURSED|BREAKABLE
@@ -1149,7 +1348,9 @@ tbl_ItemDefs:
                 
                 ; 102: Iron Ball
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        3800
                 itemType     WEAPON|RARE|CURSED|BREAKABLE
@@ -1160,7 +1361,9 @@ tbl_ItemDefs:
                 
                 ; 103: Short Knife
                 equipFlags   THIF
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        70
                 itemType     WEAPON
@@ -1171,7 +1374,9 @@ tbl_ItemDefs:
                 
                 ; 104: Dagger
                 equipFlags   THIF
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        320
                 itemType     WEAPON
@@ -1182,7 +1387,9 @@ tbl_ItemDefs:
                 
                 ; 105: Knife
                 equipFlags   THIF
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        500
                 itemType     WEAPON
@@ -1193,7 +1400,9 @@ tbl_ItemDefs:
                 
                 ; 106: Thieve's Dagger
                 equipFlags   THIF
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        940
                 itemType     WEAPON
@@ -1204,7 +1413,9 @@ tbl_ItemDefs:
                 
                 ; 107: Katana
                 equipFlags   NINJ
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        9600
                 itemType     WEAPON|RARE
@@ -1215,7 +1426,9 @@ tbl_ItemDefs:
                 
                 ; 108: Ninja Katana
                 equipFlags   NINJ
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        11500
                 itemType     WEAPON|RARE
@@ -1226,7 +1439,9 @@ tbl_ItemDefs:
                 
                 ; 109: Gisarme
                 equipFlags   NINJ
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 1
                 price        15000
                 itemType     WEAPON|RARE
@@ -1237,7 +1452,9 @@ tbl_ItemDefs:
                 
                 ; 110: Taros Sword
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        1, 2
                 price        10000
                 itemType     WEAPON|RARE|BREAKABLE
@@ -1248,7 +1465,9 @@ tbl_ItemDefs:
                 
                 ; 111: Right of Hope
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        10000
                 itemType     RARE|CONSUMABLE
@@ -1259,7 +1478,9 @@ tbl_ItemDefs:
                 
                 ; 112: Wooden Panel
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     RARE|UNSELLABLE
@@ -1270,7 +1491,9 @@ tbl_ItemDefs:
                 
                 ; 113: Sky Orb
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     RARE|UNSELLABLE
@@ -1281,7 +1504,9 @@ tbl_ItemDefs:
                 
                 ; 114: Cannon
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     RARE|UNSELLABLE
@@ -1292,7 +1517,9 @@ tbl_ItemDefs:
                 
                 ; 115: Dry Stone
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     RARE|UNSELLABLE
@@ -1303,7 +1530,9 @@ tbl_ItemDefs:
                 
                 ; 116: Dynamite
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     RARE|UNSELLABLE
@@ -1314,7 +1543,9 @@ tbl_ItemDefs:
                 
                 ; 117: Arm of Golem
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     RARE|UNSELLABLE
@@ -1325,7 +1556,9 @@ tbl_ItemDefs:
                 
                 ; 118: Pegasus Wing
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        3000
                 itemType     RARE
@@ -1336,7 +1569,9 @@ tbl_ItemDefs:
                 
                 ; 119: Warrior Pride
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        3000
                 itemType     RARE
@@ -1347,7 +1582,9 @@ tbl_ItemDefs:
                 
                 ; 120: Silver Tank
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        3000
                 itemType     RARE
@@ -1358,7 +1595,9 @@ tbl_ItemDefs:
                 
                 ; 121: Secret Book
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        3000
                 itemType     RARE
@@ -1369,7 +1608,9 @@ tbl_ItemDefs:
                 
                 ; 122: Vigor Ball
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        3000
                 itemType     RARE
@@ -1380,7 +1621,9 @@ tbl_ItemDefs:
                 
                 ; 123: Mithril
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        2000
                 itemType     RARE
@@ -1391,7 +1634,9 @@ tbl_ItemDefs:
                 
                 ; 124: Life Ring
                 equipFlags   HERO|PLDN|PGNT|GLDT|BRN|WIZ|SORC|VICR|MMNK|SNIP|BRGN|BDBT|WFBR|BWNT|PHNX|NINJ|MNST|RBT|GLM|RDBN
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        5000
                 itemType     RING|RARE
@@ -1402,7 +1647,9 @@ tbl_ItemDefs:
                 
                 ; 125: Cotton Balloon
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     RARE|UNSELLABLE
@@ -1413,7 +1660,9 @@ tbl_ItemDefs:
                 
                 ; 126: Chirrup Sandals
                 equipFlags   ALL
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        5
                 itemType     RING|RARE
@@ -1424,7 +1673,9 @@ tbl_ItemDefs:
                 
                 ; 127: Empty
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1437,7 +1688,9 @@ tbl_ItemDefs:
                 
                 ; 128: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1448,7 +1701,9 @@ tbl_ItemDefs:
                 
                 ; 129: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1459,7 +1714,9 @@ tbl_ItemDefs:
                 
                 ; 130: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1470,7 +1727,9 @@ tbl_ItemDefs:
                 
                 ; 131: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1481,7 +1740,9 @@ tbl_ItemDefs:
                 
                 ; 132: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1492,7 +1753,9 @@ tbl_ItemDefs:
                 
                 ; 133: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1503,7 +1766,9 @@ tbl_ItemDefs:
                 
                 ; 134: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1514,7 +1779,9 @@ tbl_ItemDefs:
                 
                 ; 135: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1525,7 +1792,9 @@ tbl_ItemDefs:
                 
                 ; 136: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1536,7 +1805,9 @@ tbl_ItemDefs:
                 
                 ; 137: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1547,7 +1818,9 @@ tbl_ItemDefs:
                 
                 ; 138: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1558,7 +1831,9 @@ tbl_ItemDefs:
                 
                 ; 139: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1569,7 +1844,9 @@ tbl_ItemDefs:
                 
                 ; 140: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1580,7 +1857,9 @@ tbl_ItemDefs:
                 
                 ; 141: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1591,7 +1870,9 @@ tbl_ItemDefs:
                 
                 ; 142: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1602,7 +1883,9 @@ tbl_ItemDefs:
                 
                 ; 143: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1613,7 +1896,9 @@ tbl_ItemDefs:
                 
                 ; 144: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1624,7 +1909,9 @@ tbl_ItemDefs:
                 
                 ; 145: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1635,7 +1922,9 @@ tbl_ItemDefs:
                 
                 ; 146: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1646,7 +1935,9 @@ tbl_ItemDefs:
                 
                 ; 147: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1657,7 +1948,9 @@ tbl_ItemDefs:
                 
                 ; 148: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1668,7 +1961,9 @@ tbl_ItemDefs:
                 
                 ; 149: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1679,7 +1974,9 @@ tbl_ItemDefs:
                 
                 ; 150: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1690,7 +1987,9 @@ tbl_ItemDefs:
                 
                 ; 151: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1701,7 +2000,9 @@ tbl_ItemDefs:
                 
                 ; 152: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1712,7 +2013,9 @@ tbl_ItemDefs:
                 
                 ; 153: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1723,7 +2026,9 @@ tbl_ItemDefs:
                 
                 ; 154: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1734,7 +2039,9 @@ tbl_ItemDefs:
                 
                 ; 155: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1745,7 +2052,9 @@ tbl_ItemDefs:
                 
                 ; 156: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1756,7 +2065,9 @@ tbl_ItemDefs:
                 
                 ; 157: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1767,7 +2078,9 @@ tbl_ItemDefs:
                 
                 ; 158: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1778,7 +2091,9 @@ tbl_ItemDefs:
                 
                 ; 159: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1789,7 +2104,9 @@ tbl_ItemDefs:
                 
                 ; 160: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1800,7 +2117,9 @@ tbl_ItemDefs:
                 
                 ; 161: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1811,7 +2130,9 @@ tbl_ItemDefs:
                 
                 ; 162: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1822,7 +2143,9 @@ tbl_ItemDefs:
                 
                 ; 163: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1833,7 +2156,9 @@ tbl_ItemDefs:
                 
                 ; 164: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1844,7 +2169,9 @@ tbl_ItemDefs:
                 
                 ; 165: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1855,7 +2182,9 @@ tbl_ItemDefs:
                 
                 ; 166: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1866,7 +2195,9 @@ tbl_ItemDefs:
                 
                 ; 167: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1877,7 +2208,9 @@ tbl_ItemDefs:
                 
                 ; 168: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1888,7 +2221,9 @@ tbl_ItemDefs:
                 
                 ; 169: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1899,7 +2234,9 @@ tbl_ItemDefs:
                 
                 ; 170: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1910,7 +2247,9 @@ tbl_ItemDefs:
                 
                 ; 171: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1921,7 +2260,9 @@ tbl_ItemDefs:
                 
                 ; 172: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1932,7 +2273,9 @@ tbl_ItemDefs:
                 
                 ; 173: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1943,7 +2286,9 @@ tbl_ItemDefs:
                 
                 ; 174: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1954,7 +2299,9 @@ tbl_ItemDefs:
                 
                 ; 175: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1965,7 +2312,9 @@ tbl_ItemDefs:
                 
                 ; 176: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1976,7 +2325,9 @@ tbl_ItemDefs:
                 
                 ; 177: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1987,7 +2338,9 @@ tbl_ItemDefs:
                 
                 ; 178: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -1998,7 +2351,9 @@ tbl_ItemDefs:
                 
                 ; 179: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2009,7 +2364,9 @@ tbl_ItemDefs:
                 
                 ; 180: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2020,7 +2377,9 @@ tbl_ItemDefs:
                 
                 ; 181: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2031,7 +2390,9 @@ tbl_ItemDefs:
                 
                 ; 182: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2042,7 +2403,9 @@ tbl_ItemDefs:
                 
                 ; 183: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2053,7 +2416,9 @@ tbl_ItemDefs:
                 
                 ; 184: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2064,7 +2429,9 @@ tbl_ItemDefs:
                 
                 ; 185: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2075,7 +2442,9 @@ tbl_ItemDefs:
                 
                 ; 186: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2086,7 +2455,9 @@ tbl_ItemDefs:
                 
                 ; 187: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2097,7 +2468,9 @@ tbl_ItemDefs:
                 
                 ; 188: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2108,7 +2481,9 @@ tbl_ItemDefs:
                 
                 ; 189: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2119,7 +2494,9 @@ tbl_ItemDefs:
                 
                 ; 190: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2130,7 +2507,9 @@ tbl_ItemDefs:
                 
                 ; 191:
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2141,7 +2520,9 @@ tbl_ItemDefs:
                 
                 ; 192: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2152,7 +2533,9 @@ tbl_ItemDefs:
                 
                 ; 193: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2163,7 +2546,9 @@ tbl_ItemDefs:
                 
                 ; 194: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2174,7 +2559,9 @@ tbl_ItemDefs:
                 
                 ; 195: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2185,7 +2572,9 @@ tbl_ItemDefs:
                 
                 ; 196: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2196,7 +2585,9 @@ tbl_ItemDefs:
                 
                 ; 197: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2207,7 +2598,9 @@ tbl_ItemDefs:
                 
                 ; 198: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2218,7 +2611,9 @@ tbl_ItemDefs:
                 
                 ; 199: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2229,7 +2624,9 @@ tbl_ItemDefs:
                 
                 ; 200: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2240,7 +2637,9 @@ tbl_ItemDefs:
                 
                 ; 201: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2251,7 +2650,9 @@ tbl_ItemDefs:
                 
                 ; 202: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2262,7 +2663,9 @@ tbl_ItemDefs:
                 
                 ; 203: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2273,7 +2676,9 @@ tbl_ItemDefs:
                 
                 ; 204: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2284,7 +2689,9 @@ tbl_ItemDefs:
                 
                 ; 205: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2295,7 +2702,9 @@ tbl_ItemDefs:
                 
                 ; 206: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2306,7 +2715,9 @@ tbl_ItemDefs:
                 
                 ; 207: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2317,7 +2728,9 @@ tbl_ItemDefs:
                 
                 ; 208: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2328,7 +2741,9 @@ tbl_ItemDefs:
                 
                 ; 209: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2339,7 +2754,9 @@ tbl_ItemDefs:
                 
                 ; 210: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2350,7 +2767,9 @@ tbl_ItemDefs:
                 
                 ; 211: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2361,7 +2780,9 @@ tbl_ItemDefs:
                 
                 ; 212: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2372,7 +2793,9 @@ tbl_ItemDefs:
                 
                 ; 213: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2383,7 +2806,9 @@ tbl_ItemDefs:
                 
                 ; 214: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2394,7 +2819,9 @@ tbl_ItemDefs:
                 
                 ; 215: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2405,7 +2832,9 @@ tbl_ItemDefs:
                 
                 ; 216: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2416,7 +2845,9 @@ tbl_ItemDefs:
                 
                 ; 217: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2427,7 +2858,9 @@ tbl_ItemDefs:
                 
                 ; 218: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2438,7 +2871,9 @@ tbl_ItemDefs:
                 
                 ; 219: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2449,7 +2884,9 @@ tbl_ItemDefs:
                 
                 ; 220: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2460,7 +2897,9 @@ tbl_ItemDefs:
                 
                 ; 221: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2471,7 +2910,9 @@ tbl_ItemDefs:
                 
                 ; 222: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2482,7 +2923,9 @@ tbl_ItemDefs:
                 
                 ; 223: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2493,7 +2936,9 @@ tbl_ItemDefs:
                 
                 ; 224: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2504,7 +2949,9 @@ tbl_ItemDefs:
                 
                 ; 225: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2515,7 +2962,9 @@ tbl_ItemDefs:
                 
                 ; 226: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2526,7 +2975,9 @@ tbl_ItemDefs:
                 
                 ; 227: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2537,7 +2988,9 @@ tbl_ItemDefs:
                 
                 ; 228: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2548,7 +3001,9 @@ tbl_ItemDefs:
                 
                 ; 229: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2559,7 +3014,9 @@ tbl_ItemDefs:
                 
                 ; 230: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2570,7 +3027,9 @@ tbl_ItemDefs:
                 
                 ; 231: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2581,7 +3040,9 @@ tbl_ItemDefs:
                 
                 ; 232: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2592,7 +3053,9 @@ tbl_ItemDefs:
                 
                 ; 233: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2603,7 +3066,9 @@ tbl_ItemDefs:
                 
                 ; 234: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2614,7 +3079,9 @@ tbl_ItemDefs:
                 
                 ; 235: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2625,7 +3092,9 @@ tbl_ItemDefs:
                 
                 ; 236: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2636,7 +3105,9 @@ tbl_ItemDefs:
                 
                 ; 237: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2647,7 +3118,9 @@ tbl_ItemDefs:
                 
                 ; 238: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2658,7 +3131,9 @@ tbl_ItemDefs:
                 
                 ; 239: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2669,7 +3144,9 @@ tbl_ItemDefs:
                 
                 ; 240: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2680,7 +3157,9 @@ tbl_ItemDefs:
                 
                 ; 241: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2691,7 +3170,9 @@ tbl_ItemDefs:
                 
                 ; 242: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2702,7 +3183,9 @@ tbl_ItemDefs:
                 
                 ; 243: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2713,7 +3196,9 @@ tbl_ItemDefs:
                 
                 ; 244: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2724,7 +3209,9 @@ tbl_ItemDefs:
                 
                 ; 245: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2735,7 +3222,9 @@ tbl_ItemDefs:
                 
                 ; 246: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2746,7 +3235,9 @@ tbl_ItemDefs:
                 
                 ; 247: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2757,7 +3248,9 @@ tbl_ItemDefs:
                 
                 ; 248: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2768,7 +3261,9 @@ tbl_ItemDefs:
                 
                 ; 249: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2779,7 +3274,9 @@ tbl_ItemDefs:
                 
                 ; 250: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2790,7 +3287,9 @@ tbl_ItemDefs:
                 
                 ; 251: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2801,7 +3300,9 @@ tbl_ItemDefs:
                 
                 ; 252: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2812,7 +3313,9 @@ tbl_ItemDefs:
                 
                 ; 253: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2823,7 +3326,9 @@ tbl_ItemDefs:
                 
                 ; 254: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE
@@ -2834,7 +3339,9 @@ tbl_ItemDefs:
                 
                 ; 255: 
                 equipFlags   NONE
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 equipFlags2  NONE
+            endif
                 range        0, 0
                 price        0
                 itemType     NONE

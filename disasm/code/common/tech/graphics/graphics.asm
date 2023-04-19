@@ -7,7 +7,7 @@
 ; In: d0.w = Number of sprites to initialize
 
 
-InitializeSprites:
+InitSprites:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     (SPRITE_TABLE).l,a0
@@ -26,7 +26,7 @@ InitializeSprites:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function InitializeSprites
+    ; End of function InitSprites
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -361,8 +361,6 @@ loc_19A8:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; clear table related to sprites
 
 
 sub_19B0:

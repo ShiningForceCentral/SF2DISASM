@@ -62,7 +62,7 @@ GetCombatantMapSprite:
                 bra.s   @Done
                 
 @Enemy:         move.w  d1,-(sp)
-                jsr     GetEnemy
+                jsr     GetEnemyIndex
                 clr.w   d4
                 move.b  tbl_EnemyMapSprites(pc,d1.w),d4
                 move.w  (sp)+,d1

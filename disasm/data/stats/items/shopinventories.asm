@@ -301,3 +301,9 @@ tbl_ShopInventories:
                               ANTIDOTE, &
                               FAIRY_POWDER, &
                               ANGEL_WING
+                
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                ; Minatures Shop
+                shopInventory MEDICAL_HERB
+            endif
+                

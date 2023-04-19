@@ -58,8 +58,8 @@ BattleLoop:
                 ble.s   @ClearBattleRegionFlags_Loop
                 
                 bsr.w   HealLivingAndImmortalAllies
-                jsr     j_InitializeAllAlliesBattlePositions
-                jsr     j_InitializeAllEnemiesBattlePositions
+                jsr     j_InitAllAlliesBattlePositions
+                jsr     j_InitAllEnemiesBattlePositions
                 jsr     j_ClearAiMoveInfo
                 clr.w   d0
                 bsr.w   LoadBattle      
@@ -74,7 +74,7 @@ BattleLoop:
                 bsr.w   PrintAllActivatedDefCons
 @SpawnEnemies:
                 
-                jsr     j_PopulateTargetsListWithRespawningEnemies
+                jsr     j_GetListOfSpawningEnemies
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 beq.s   @Call_GenerateBattleTurnOrder
                 
@@ -84,7 +84,7 @@ BattleLoop:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
-                bsr.w   SpawnEnemyWithCamera
+                bsr.w   SpawnEnemy      
                 dbf     d7,@SpawnEnemies_Loop
 @Call_GenerateBattleTurnOrder:
                 
@@ -138,19 +138,19 @@ KillRemainingEnemies:
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
 @Loop:
                 
-                jsr     j_GetCombatantX
+                jsr     j_GetXPos
                 tst.b   d1
                 bmi.w   @Skip           ; skip if already dead
-                jsr     j_GetCombatantY
+                jsr     j_GetYPos
                 tst.b   d1
                 bmi.w   @Skip
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.w   @Skip
                 move.b  d0,(a0)+
                 addq.w  #1,((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 moveq   #0,d1
-                jsr     j_SetCurrentHp
+                jsr     j_SetCurrentHP
 @Skip:
                 
                 addq.w  #1,d0
@@ -200,15 +200,15 @@ HealLivingAndImmortalAllies:
                 beq.w   @Immortal
                 cmpi.b  #ALLY_LEMON,d0
                 beq.w   @Immortal       ; always heal if character is immortal
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.s   @Dead           ; skip healing if character is dead
 @Immortal:
                 
-                jsr     j_GetMaxHp
-                jsr     j_SetCurrentHp
-                jsr     j_GetMaxMp
-                jsr     j_SetCurrentMp
+                jsr     j_GetMaxHP
+                jsr     j_SetCurrentHP
+                jsr     j_GetMaxMP
+                jsr     j_SetCurrentMP
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE,d1 
                                                         ; cure all but lasting status effects
@@ -239,10 +239,10 @@ GetRemainingCombatants:
                 move.w  #COMBATANT_ALLIES_COUNTER,d7
 @Allies_Loop:
                 
-                jsr     j_GetCombatantX
+                jsr     j_GetXPos
                 tst.b   d1
                 bmi.w   @DeadAlly
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.w   @DeadAlly
                 addq.w  #1,d2
@@ -255,10 +255,10 @@ GetRemainingCombatants:
                 move.w  #COMBATANT_ENEMIES_COUNTER,d7
 @Enemies_Loop:
                 
-                jsr     j_GetCombatantX
+                jsr     j_GetXPos
                 tst.b   d1
                 bmi.w   @DeadEnemy
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.w   @DeadEnemy
                 addq.w  #1,d3
@@ -267,14 +267,14 @@ GetRemainingCombatants:
                 addq.w  #1,d0
                 dbf     d7,@Enemies_Loop
                 
-            if (STANDARD_BUILD&BOWIE_CAN_DIE=1)
-            else
-                clr.w   d0
-                jsr     j_GetCurrentHp
-                tst.w   d1
-                bne.s   @Return
-                clr.w   d2
-            endif
+                if (STANDARD_BUILD&BOWIE_CAN_DIE=1)
+                else
+                    clr.w   d0
+                    jsr     j_GetCurrentHP
+                    tst.w   d1
+                    bne.s   @Return
+                    clr.w   d2
+                endif
 @Return:
                 
                 rts
@@ -307,16 +307,16 @@ BattleLoop_Victory:
                 getSavedByte CURRENT_MAP, ((MAP_EVENT_PARAM_2-$1000000)).w
                 jsr     (UpdateForceAndGetFirstBattlePartyMemberIndex).w
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                jsr     GetCombatantX
+                jsr     GetXPos
                 add.b   (BATTLE_AREA_X).l,d1
                 move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
-                jsr     GetCombatantY
+                jsr     GetYPos
                 add.b   (BATTLE_AREA_Y).l,d1
             else
-                jsr     j_GetCombatantX
+                jsr     j_GetXPos
                 add.b   ((BATTLE_AREA_X-$1000000)).w,d1
                 move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
-                jsr     j_GetCombatantY
+                jsr     j_GetYPos
                 add.b   ((BATTLE_AREA_Y-$1000000)).w,d1
             endif
                 move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
@@ -361,8 +361,8 @@ BattleLoop_Defeat:
                 nop
           else
                 clr.w   d0
-                jsr     j_GetMaxHp
-                jsr     j_SetCurrentHp
+                jsr     j_GetMaxHP
+                jsr     j_SetCurrentHP
                 jsr     j_GetGold
                 lsr.l   #1,d1           ; divide current gold amount by 2
                 jsr     j_SetGold
@@ -433,7 +433,7 @@ ExecuteBattleaction_Egress:
                 move.w  combatant(a6),d0
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 jsr     j_GetSpellCost
-                jsr     j_DecreaseCurrentMp
+                jsr     j_DecreaseCurrentMP
                 bsr.w   HideBattlefieldWindows
                 move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
@@ -479,10 +479,10 @@ UpdateBattleUnlockedFlag:
 
 HideBattlefieldWindows:
                 
-                jsr     j_RemoveLandEffectWindow
-                jsr     j_RemoveMiniStatusWindow
+                jsr     j_HideLandEffectWindow
+                jsr     j_HideMiniStatusWindow
                 clr.b   ((IS_TARGETING-$1000000)).w
-                jsr     j_RemoveMiniStatusWindow
+                jsr     j_HideMiniStatusWindow
                 rts
 
     ; End of function HideBattlefieldWindows

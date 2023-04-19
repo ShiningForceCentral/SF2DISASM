@@ -16,10 +16,10 @@ CreateBattlefieldMiniStatusWindow:
                 move.w  #WINDOW_MINISTATUS_DEST,d1
                 lea     ((MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
                 tst.b   ((IS_TARGETING-$1000000)).w
-                beq.s   @CreateWindow
+                beq.s   loc_11594
                 addq.l  #2,a2
-                addi.w  #21,d1
-@CreateWindow:
+                addi.w  #$15,d1
+loc_11594:
                 
                 jsr     (CreateWindow).w
                 move.w  d0,(a2)
@@ -29,21 +29,21 @@ CreateBattlefieldMiniStatusWindow:
                 bsr.w   BuildMiniStatusWindow
                 move.w  #1,d1
                 move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
-                move.w  #31,d4
+                move.w  #$1F,d4
                 sub.w   d3,d4
                 lsl.w   #8,d4
                 or.w    d4,d1
                 moveq   #4,d2
                 tst.b   ((IS_TARGETING-$1000000)).w
-                beq.s   @MoveWindow
-                addi.w  #21,d1
-@MoveWindow:
+                beq.s   loc_115C4
+                addi.w  #$15,d1
+loc_115C4:
                 
                 move.w  (a2),d0
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForVInt).w
-                bsr.w   DmaHpAndMpBarTiles
+                bsr.w   sub_11804
                 jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a2
                 rts
@@ -53,24 +53,22 @@ CreateBattlefieldMiniStatusWindow:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Move window offscreen, then clear it from memory.
 
-
-RemoveMiniStatusWindow:
+HideMiniStatusWindow:
                 
                 movem.l d0-a2,-(sp)
                 lea     ((MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
                 tst.b   ((IS_TARGETING-$1000000)).w
-                beq.s   @Continue
+                beq.s   loc_115F0
                 addq.l  #2,a2
-@Continue:
+loc_115F0:
                 
                 move.w  (a2),d0
                 move.w  #WINDOW_MINISTATUS_DEST,d1
                 tst.b   ((IS_TARGETING-$1000000)).w
-                beq.s   @MoveWindow
-                addi.w  #21,d1
-@MoveWindow:
+                beq.s   loc_11600
+                addi.w  #$15,d1
+loc_11600:
                 
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
@@ -81,7 +79,7 @@ RemoveMiniStatusWindow:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function RemoveMiniStatusWindow
+    ; End of function HideMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -89,7 +87,7 @@ RemoveMiniStatusWindow:
 
 CreateBattlesceneMiniStatusWindows:
                 
-                jsr     (InitializeWindowProperties).w
+                jsr     (InitWindowProperties).w
                 move.w  #WINDOW_MINISTATUS_SIZE,d0
                 move.w  #WINDOW_MINISTATUS_DEST,d1
                 jsr     (CreateWindow).w
@@ -139,7 +137,7 @@ loc_11674:
                 moveq   #1,d2
                 jsr     (MoveWindow).l  
                 jsr     (WaitForVInt).w
-                bsr.w   DmaHpAndMpBarTiles
+                bsr.w   sub_11804
                 jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a1
                 rts
@@ -204,7 +202,7 @@ loc_116F6:
                 moveq   #1,d2
                 jsr     (MoveWindow).l  
                 jsr     (WaitForVInt).w
-                bsr.w   DmaHpAndMpBarTiles
+                bsr.w   sub_11804
                 jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a1
 return_11714:
@@ -359,7 +357,7 @@ DrawColoredStatBar:
 ; =============== S U B R O U T I N E =======================================
 
 
-DmaHpAndMpBarTiles:
+sub_11804:
                 
                 movem.l d0-d2/a0-a1,-(sp)
                 lea     (FF8804_LOADING_SPACE).l,a0
@@ -371,7 +369,7 @@ DmaHpAndMpBarTiles:
                 movem.l (sp)+,d0-d2/a0-a1
                 rts
 
-    ; End of function DmaHpAndMpBarTiles
+    ; End of function sub_11804
 
 
 ; =============== S U B R O U T I N E =======================================

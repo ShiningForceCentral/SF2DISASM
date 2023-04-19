@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-CalculateHealingExp:
+CalculateHealingEXP:
                 
                 movem.l d0-d3/a0,-(sp)
                 move.b  (a4),d0
@@ -32,81 +32,81 @@ CalculateHealingExp:
 @Continue:
                 
                 move.b  (a5),d0
-                jsr     GetMaxHp
+                jsr     GetMaxHP
                 tst.w   d1
                 beq.w   @Skip           ; safety measure to prevent division by 0
                 move.w  #25,d5
                 mulu.w  d6,d5
                 divu.w  d1,d5
                 cmpi.w  #10,d5
-                bcc.s   @Add
+                bcc.s   @GiveEXP
                 moveq   #10,d5
-@Add:
+@GiveEXP:
                 
-                bsr.w   AddExpAndApplyHealingCap
+                bsr.w   GiveEXPandHealingCap
 @Skip:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function CalculateHealingExp
+    ; End of function CalculateHealingEXP
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-CalculateDamageExp:
+CalculateDamageEXP:
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
                 bne.w   @Skip           ; skip function if actor is an enemy
                 move.b  (a5),d0
-                jsr     GetMaxHp
+                jsr     GetMaxHP
                 tst.w   d1
                 beq.w   @Skip           ; skip function to prevent division by zero error
-                bsr.w   GetKillExp      
+                bsr.w   GetAmountOfEXPforEncounter
                 mulu.w  d6,d5
                 divu.w  d1,d5
-                bsr.w   AddExpAndApplyPerActionCap
+                bsr.w   GiveEXPandCap
 @Skip:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function CalculateDamageExp
+    ; End of function CalculateDamageEXP
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-AddStatusEffectSpellExp:
+GiveStatusEffectSpellEXP:
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
                 bne.w   @Done
-                moveq   #STATUSEFFECT_SPELL_EXP,d5
-                bsr.w   AddExpAndApplyPerActionCap
+                moveq   #STATUSEFFECT_SPELLS_EXP,d5
+                bsr.w   GiveEXPandCap
 @Done:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function AddStatusEffectSpellExp
+    ; End of function GiveStatusEffectSpellEXP
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-AddExpAndGoldForKill:
+GiveEXPandGoldForKill:
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
                 bne.w   @Skip           ; skip if actor is an enemy
-                bsr.w   GetKillExp      
-                bsr.w   AddExpAndApplyPerActionCap
+                bsr.w   GetAmountOfEXPforEncounter
+                bsr.w   GiveEXPandCap
                 move.b  (a5),d0
                 bpl.s   @Skip
-                jsr     GetEnemy        
+                jsr     GetEnemyIndex   
                 add.w   d1,d1
                 lea     tbl_EnemyGold(pc), a0
                 adda.w  d1,a0
@@ -117,29 +117,29 @@ AddExpAndGoldForKill:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function AddExpAndGoldForKill
+    ; End of function GiveEXPandGoldForKill
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-AddExpAndApplyPerActionCap:
+GiveEXPandCap:
                 
                 add.w   d5,((BATTLESCENE_EXP-$1000000)).w
-                cmpi.w  #PER_ACTION_EXP_CAP,((BATTLESCENE_EXP-$1000000)).w
+                cmpi.w  #49,((BATTLESCENE_EXP-$1000000)).w
                 ble.s   @Return
-                move.w  #PER_ACTION_EXP_CAP,((BATTLESCENE_EXP-$1000000)).w
+                move.w  #49,((BATTLESCENE_EXP-$1000000)).w
 @Return:
                 
                 rts
 
-    ; End of function AddExpAndApplyPerActionCap
+    ; End of function GiveEXPandCap
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-AddExpAndApplyHealingCap:
+GiveEXPandHealingCap:
                 
                 add.w   d5,((BATTLESCENE_EXP-$1000000)).w
                 cmpi.w  #HEALING_EXP_CAP,((BATTLESCENE_EXP-$1000000)).w
@@ -149,18 +149,20 @@ AddExpAndApplyHealingCap:
                 
                 rts
 
-    ; End of function AddExpAndApplyHealingCap
+    ; End of function GiveEXPandHealingCap
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get EXP gained for a kill based on level difference between actor and target.
+; Get amount of EXP gained from encounter based on level difference between actor and target
 ; 
-;   In: a4, a5 = pointers to actor and target indexes in RAM
-;   Out: d5.l = EXP amount
+;       In: A4 = pointer to actor index in RAM
+;           A5 = pointer to target index in RAM
+; 
+;       Out: D5 = amount of EXP
 
 
-GetKillExp:
+GetAmountOfEXPforEncounter:
                 
                 movem.l d0-d3/a0,-(sp)
                 move.b  (a5),d0
@@ -197,7 +199,7 @@ GetKillExp:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function GetKillExp
+    ; End of function GetAmountOfEXPforEncounter
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -214,7 +216,7 @@ loc_A9DE:
                 
                 move.b  (a0,d7.w),d0
                 bpl.s   loc_A9F8
-                jsr     GetEnemy        
+                jsr     GetEnemyIndex   
                 cmpi.w  #ENEMY_BURST_ROCK,d1
                 bne.s   loc_A9F8
                 ori.b   #COMBATANT_MASK_SORT_BIT,d0
@@ -256,11 +258,11 @@ loc_AA40:
                 beq.s   loc_AA78
                 move.b  (a0,d6.w),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_ENEMY_BIT,d0
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 move.w  d1,d2
                 move.b  1(a0,d6.w),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_ENEMY_BIT,d0
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 cmp.w   d1,d2
                 bcc.s   loc_AA78
                 move.b  (a0,d6.w),d0

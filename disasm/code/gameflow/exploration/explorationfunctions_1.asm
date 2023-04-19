@@ -23,7 +23,7 @@ loc_239EE:
                 txt     413             ; "{NAME} found{N}{ITEM}.{W2}{CLEAR}"
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
-                cmpi.w  #COMBATANT_ITEMSLOTS,d2
+                cmpi.w  #4,d2
                 bge.s   loc_23A1E
                 move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d1
                 jsr     j_AddItem
@@ -44,7 +44,7 @@ loc_23A32:
                 move.b  (a0)+,d0
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
-                cmpi.w  #COMBATANT_ITEMSLOTS,d2
+                cmpi.w  #4,d2
                 bge.s   loc_23A62
                 move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d1
                 jsr     j_AddItem

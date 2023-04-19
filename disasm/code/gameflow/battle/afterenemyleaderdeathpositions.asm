@@ -11,75 +11,73 @@
 ApplyPositionsAfterEnemyLeaderDies:
                 
                 movem.l d0-d1/d7-a0,-(sp)
-                moveq   #ALLY_BOWIE,d0
-                jsr     j_GetCurrentHp
+                moveq   #0,d0
+                jsr     j_GetCurrentHP
                 tst.w   d1
-                beq.w   @Done
-                move.w  #COMBATANT_ENEMIES_START,d0
-                jsr     j_GetCurrentHp
+                beq.w   loc_47E66
+                move.w  #$80,d0 
+                jsr     j_GetCurrentHP
                 tst.w   d1
-                bne.w   @Done
+                bne.w   loc_47E66
                 lea     tbl_AfterBattlePositions(pc), a0 ; if Bowie alive and enemy leader dead
                 clr.w   d1
                 getSavedByte CURRENT_BATTLE, d1
-@FindBattle_Loop:
+loc_47DCA:
                 
-                cmpi.w  #CODE_TERMINATOR_WORD,(a0)
-                beq.w   @Done
+                cmpi.w  #$FFFF,(a0)
+                beq.w   loc_47E66
                 cmp.w   (a0),d1
-                beq.w   @Found          ; entry first word is battle index
+                beq.w   loc_47DEE       ; entry first word is battle index
                 adda.w  #6,a0
-                bra.s   @FindBattle_Loop
+                bra.s   loc_47DCA
                 move.w  #$80FF,(DEAD_COMBATANTS_LIST).l ; unreachable code
                 move.w  #1,(DEAD_COMBATANTS_LIST_LENGTH).l
-@Found:
+loc_47DEE:
                 
                 moveq   #COMBATANT_ALLIES_START,d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
-@MoveAllCombatantOffscreen_Loop:
+loc_47DF2:
                 
-                move.w  #-1,d1
-                jsr     j_SetCombatantX
+                move.w  #$FFFF,d1
+                jsr     j_SetXPos
                 ori.b   #COMBATANT_MASK_ENEMY_BIT,d0
-                jsr     j_SetCombatantX ; move enemy as well
+                jsr     j_SetXPos       ; move enemy as well
                 moveq   #0,d1
-                jsr     j_SetCurrentHp
+                jsr     j_SetCurrentHP
                 andi.b  #$7F,d0 
                 addq.w  #1,d0
-                dbf     d7,@MoveAllCombatantOffscreen_Loop
-                
-                move.w  #158,d0
-                jsr     j_SetCombatantX
+                dbf     d7,loc_47DF2
+                move.w  #$9E,d0 
+                jsr     j_SetXPos
                 addq.w  #1,d0
-                jsr     j_SetCombatantX
-                movea.l 2(a0),a0        ; get entry address for this battle
+                jsr     j_SetXPos
+                movea.l 2(a0),a0
                 clr.w   d1
-@FindCombatant_Loop:
+loc_47E30:
                 
-                cmpi.w  #CODE_NOTHING_WORD,(a0)
-                beq.w   @Done
+                cmpi.w  #$FFFF,(a0)
+                beq.w   loc_47E66
                 move.b  (a0),d0
-            if (STANDARD_BUILD&CUTSCENE_PROTECTION=1)
-                ; Always apply positions 
-            else
-                ; If character is alive, apply positions
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
-                bne.s   @ApplyPositions
-                cmpi.b  #$80,d0
-                bne.w   @NextCombatant
+            if (STANDARD_BUILD&CUTSCENE_PROTECTION=1)
+                bra.s   loc_47E4C
+            else
+                bne.s   loc_47E4C
             endif
-@ApplyPositions:
+                cmpi.b  #$80,d0
+                bne.w   loc_47E60
+loc_47E4C:
                 
-                move.b  1(a0),d1
-                jsr     j_SetCombatantX
+                move.b  1(a0),d1        ; if character alive, apply positions
+                jsr     j_SetXPos
                 move.b  2(a0),d1
-                jsr     j_SetCombatantY
-@NextCombatant:
+                jsr     j_SetYPos
+loc_47E60:
                 
                 adda.w  #4,a0
-                bra.s   @FindCombatant_Loop
-@Done:
+                bra.s   loc_47E30
+loc_47E66:
                 
                 movem.l (sp)+,d0-d1/d7-a0
                 rts

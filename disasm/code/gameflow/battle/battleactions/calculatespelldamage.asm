@@ -77,13 +77,13 @@ CalculateSpellDamage:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Miscellaneous hacks to alter spell power (125% if promoted, damage divided if SORC spells.)
+; Miscellaneous hacks to alter spell power (125% if promoted, damage divided if SORC spells)
 ; 
-;   In: a3 = pointer to action type index in RAM
-;       a4 = pointer to caster's index in RAM
-;       d6.w = original spell power
+;       In: A3 = pointer to action type index in RAM
+;           A4 = pointer to caster's index in RAM
+;           D6 = original spell power
 ; 
-;   Out: d6.w = altered spell power
+;       Out: D6 = altered spell power
 
 
 AdjustSpellPower:

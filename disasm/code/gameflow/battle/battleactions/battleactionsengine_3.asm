@@ -59,7 +59,7 @@ WriteBattlesceneScript_SwitchTargets:
                 
                 movem.l d0-d1,-(sp)
                 move.b  (a5),d0
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 tst.w   d1
                 beq.w   loc_A7CA        ; skip if target is dead
                 bscHideTextBox
@@ -134,7 +134,7 @@ WriteBattlesceneScript_IdleSprite:
                 
                 movem.l d1,-(sp)
                 move.b  (a4),d0
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 tst.w   d1
                 beq.w   @Done           ; skip if actor is dead
                 btst    #COMBATANT_BIT_ENEMY,(a4)
@@ -154,7 +154,7 @@ WriteBattlesceneScript_IdleSprite:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a2 = battlescene script stack frame
+; In: A2 = battlescene script stack frame
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -179,57 +179,55 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_GiveExpAndGold:
+WriteBattlesceneScript_EXPandGold:
                 
-                module
                 movem.l d0-d1/a0,-(sp)
                 move.w  ((BATTLESCENE_EXP-$1000000)).w,d1
                 tst.b   targetIsOnSameSide(a2)
-                bne.w   @RandomizeExp1
-                
-                ; Should EXP be halved?
+                bne.w   loc_A81E
                 getSavedByte CURRENT_BATTLE, d0
-                lea     tbl_HalvedExpEarnedBattles(pc), a0
-@FindBattle_Loop:
+                lea     tbl_HalvedEXPearnedBattles(pc), a0
+loc_A810:
                 
                 cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
-                beq.w   @RandomizeExp1
+                beq.w   loc_A81E
                 cmp.b   (a0)+,d0
-                bne.s   @FindBattle_Loop
+                bne.s   loc_A810
                 lsr.w   #1,d1           ; divide earned EXP by 2
-@RandomizeExp1:
+loc_A81E:
                 
-                move.w  #16,d0
+                move.w  #$10,d0
                 jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
-                bne.s   @RandomizeExp2
+                bne.s   loc_A82C
                 addq.w  #1,d1
-@RandomizeExp2:
+loc_A82C:
                 
-                move.w  #16,d0
+                move.w  #$10,d0
                 jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
-                bne.s   @CheckMinimum
+                bne.s   loc_A83A
                 subq.w  #1,d1
-@CheckMinimum:
+loc_A83A:
                 
                 tst.w   d1
                 bgt.s   byte_A840
-                moveq   #1,d1           ; minimum EXP = 1
+                moveq   #1,d1
 byte_A840:
                 
                 giveEXP d1
+loc_A846:
+                
                 move.w  ((BATTLESCENE_GOLD-$1000000)).w,d1
                 tst.w   d1
-                beq.s   @Done
+                beq.s   loc_A86A
                 displayMessage #MESSAGE_BATTLE_FOUND_GOLD_COINS,#0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 jsr     IncreaseGold
-@Done:
+loc_A86A:
                 
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function WriteBattlesceneScript_GiveExpAndGold
+    ; End of function WriteBattlesceneScript_EXPandGold
 
-                modend

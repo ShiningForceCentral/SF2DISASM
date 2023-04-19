@@ -50,7 +50,7 @@ return_4FAD2:
 
 Map66_DefaultZoneEvent:
                 
-                move.w  #BATTLE_TO_HAWEL_HOUSE,d0 ; flag $1F7 : Battle 3 completed
+                move.w  #3,d0           ; flag $1F7 : Battle 3 completed
                 jsr     CheckRandomBattle
                 rts
 

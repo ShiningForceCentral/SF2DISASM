@@ -5,11 +5,11 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitializeHuffmanDecoder:
+j_InitDecoder:
                 
-                jmp     InitializeHuffmanDecoder(pc)
+                jmp     InitDecoder(pc) 
 
-    ; End of function j_InitializeHuffmanDecoder
+    ; End of function j_InitDecoder
 
 
 ; =============== S U B R O U T I N E =======================================

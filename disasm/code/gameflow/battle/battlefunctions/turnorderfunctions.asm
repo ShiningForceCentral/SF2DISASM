@@ -21,7 +21,7 @@ GenerateBattleTurnOrder:
 @AddAllyTurns_Loop:
                 
                 move.w  d7,-(sp)
-                bsr.w   AddCombatantAndRandomizedAgiToTurnOrder
+                bsr.w   AddCombatantAndRandomizedAGItoTurnOrder
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,@AddAllyTurns_Loop
@@ -31,7 +31,7 @@ GenerateBattleTurnOrder:
 @AddEnemyTurns_Loop:
                 
                 move.w  d7,-(sp)
-                bsr.w   AddCombatantAndRandomizedAgiToTurnOrder
+                bsr.w   AddCombatantAndRandomizedAGItoTurnOrder
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,@AddEnemyTurns_Loop
@@ -69,15 +69,15 @@ GenerateBattleTurnOrder:
 ;     d0.w = combatant index
 
 
-AddCombatantAndRandomizedAgiToTurnOrder:
+AddCombatantAndRandomizedAGItoTurnOrder:
                 
-                jsr     j_GetCombatantX
+                jsr     j_GetXPos
                 tst.b   d1
                 bmi.w   @Return
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.w   @Return         ; skip if combatant is not alive
-                jsr     j_GetCurrentAgi
+                jsr     j_GetCurrentAGI
                 move.w  d1,d3
                 andi.w  #TURN_AGILITY_MASK,d1
                 move.w  d1,d6
@@ -112,5 +112,5 @@ AddCombatantAndRandomizedAgiToTurnOrder:
                 
                 rts
 
-    ; End of function AddCombatantAndRandomizedAgiToTurnOrder
+    ; End of function AddCombatantAndRandomizedAGItoTurnOrder
 

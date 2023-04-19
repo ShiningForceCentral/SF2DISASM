@@ -40,8 +40,8 @@ Map67_DescFunc0:
                 bra.s   loc_4FD3A
 loc_4FD22:
                 
-                move.w  #ALLY_ELRIC,d0
-                jsr     j_GetCurrentHp
+                move.w  #$D,d0
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   loc_4FD3A
                 jsr     LoadAndDisplayCurrentPortrait

@@ -4,10 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Is item d1.b usable on field? Return d2.l = 0 if true.
+; In: d1.b = item index
+; Out: d2.l = 0 if true, -1 if false
 
 
-IsItemUsableOnField:
+IsItemUsableOnField?:
                 
                 moveq   #0,d2
                 lea     tbl_UsableOnFieldItems(pc), a0
@@ -24,5 +25,5 @@ IsItemUsableOnField:
                 
                 rts
 
-    ; End of function IsItemUsableOnField
+    ; End of function IsItemUsableOnField?
 

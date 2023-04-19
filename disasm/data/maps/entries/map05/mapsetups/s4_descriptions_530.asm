@@ -56,7 +56,7 @@ Map5_212_DescFunc1:
                 bne.s   byte_605C4      
                 script  cs_6060E
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #ALLY_LEMON,d0
+                move.w  #$1C,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w
@@ -69,7 +69,7 @@ byte_605C4:
                 chkFlg  28              ; Lemon joined
                 bne.s   loc_605EE
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #ALLY_LEMON,d0
+                move.w  #$1C,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w

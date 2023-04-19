@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = ally index
+; In: D0 = ally index
 
 ally = -2
 
@@ -65,38 +65,38 @@ LevelUp:
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                bsr.w   GetMaxHp
+                bsr.w   GetMaxHP
                 bsr.w   CalculateStatGain
                 move.b  d1,1(a1)
-                bsr.w   IncreaseMaxHp
+                bsr.w   IncreaseMaxHP
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                bsr.w   GetMaxMp
+                bsr.w   GetMaxMP
                 bsr.w   CalculateStatGain
                 move.b  d1,2(a1)
-                bsr.w   IncreaseMaxMp
+                bsr.w   IncreaseMaxMP
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                bsr.w   GetBaseAtt
+                bsr.w   GetBaseATT
                 bsr.w   CalculateStatGain
                 move.b  d1,3(a1)
-                bsr.w   IncreaseBaseAtt
+                bsr.w   IncreaseBaseATT
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                bsr.w   GetBaseDef
+                bsr.w   GetBaseDEF
                 bsr.w   CalculateStatGain
                 move.b  d1,4(a1)
-                bsr.w   IncreaseBaseDef
+                bsr.w   IncreaseBaseDEF
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                bsr.w   GetBaseAgi
+                bsr.w   GetBaseAGI
                 bsr.w   CalculateStatGain
                 move.b  d1,5(a1)
-                bsr.w   IncreaseBaseAgi
+                bsr.w   IncreaseBaseAGI
                 
                 ; Increase level
                 addq.w  #1,d5
@@ -160,7 +160,7 @@ LevelUp:
 ;     d1.w = starting level
 
 
-InitializeAllyStats:
+InitAllyStats:
                 
                 movem.l d0-d2/a0,-(sp)
                 move.w  d1,-(sp)        ; -> push starting level
@@ -175,25 +175,25 @@ InitializeAllyStats:
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_STARTING_HP,a0
                 move.b  (a0)+,d1
-                bsr.w   SetMaxHp
-                bsr.w   SetCurrentHp
+                bsr.w   SetMaxHP
+                bsr.w   SetCurrentHP
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
-                bsr.w   SetMaxMp
-                bsr.w   SetCurrentMp
+                bsr.w   SetMaxMP
+                bsr.w   SetCurrentMP
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
-                bsr.w   SetBaseAtt
+                bsr.w   SetBaseATT
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
-                bsr.w   SetBaseDef
+                bsr.w   SetBaseDEF
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
-                bsr.w   SetBaseAgi
+                bsr.w   SetBaseAGI
                 moveq   #1,d1
                 bsr.w   SetLevel
                 
@@ -286,7 +286,7 @@ InitializeAllyStats:
                 movem.l (sp)+,d0-d2/a0
                 rts
 
-    ; End of function InitializeAllyStats
+    ; End of function InitAllyStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -304,11 +304,12 @@ CalculateStatGain:
                 
             if (STANDARD_BUILD&LEARN_SPELL_AT_PROMOTION=1)
                 tst.b   d2
-                bne.s   @CheckZero      ; keep going if curve type other than None
+                bne.s   @CheckZero  ; keep going if curve type other than None
                 move.w  #0,d1           ; otherwise, stat gain value = 0
                 rts
-                
-@CheckZero:     tst.b   d5
+@CheckZero:
+            
+                tst.b   d5
                 bne.s   @EvaluateLevel  ; keep going if level other than zero
                 move.w  #0,d1           ; otherwise, stat gain value = 0
                 rts

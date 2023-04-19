@@ -60,27 +60,22 @@ DetermineMuddleBattleaction:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: a2, a3 = pointers to total movecosts and movable grid arrays
-;      a4 = pointer to battle terrain array
-;      a5 = pointer to move costs table
-;      d0.w = move value (MOV*2)
-;      d3.w, d4.w = moving combatant X, Y
-;        
+; Get combatant D0's current MOV*2, X, Y -> D0, D3, D4
 
 
 GetMoveInfo:
                 
                 movem.l d1-d2/d5-a1,-(sp)
-                bsr.w   PopulateMoveCostsTable
+                bsr.w   MemorizePath    
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                lea     (BATTLE_TERRAIN_ARRAY).l,a4
-                lea     ((MOVE_COSTS_TABLE-$1000000)).w,a5
-                jsr     GetCombatantX
+                lea     (BATTLE_TERRAIN).l,a4
+                lea     ((MOVE_COSTS_LIST-$1000000)).w,a5
+                jsr     GetXPos
                 move.w  d1,d3
-                jsr     GetCombatantY
+                jsr     GetYPos
                 move.w  d1,d4
-                jsr     GetCurrentMov
+                jsr     GetCurrentMOV
                 move.w  d1,d0
                 add.w   d0,d0
                 movem.l (sp)+,d1-d2/d5-a1

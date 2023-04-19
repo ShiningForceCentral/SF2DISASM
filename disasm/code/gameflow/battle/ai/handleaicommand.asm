@@ -8,7 +8,7 @@
 ;     d1.b = command code (like Heal, Attack, etc.)
 
 
-ExecuteAiCommand:
+HandleAiCommand:
                 
                 movem.l d0/d2-a5,-(sp)
                 cmpi.b  #AICOMMAND_HEAL,d1
@@ -142,5 +142,5 @@ ExecuteAiCommand:
                 movem.l (sp)+,d0/d2-a5
                 rts
 
-    ; End of function ExecuteAiCommand
+    ; End of function HandleAiCommand
 

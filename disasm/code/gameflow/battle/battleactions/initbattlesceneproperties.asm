@@ -32,7 +32,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-InitializeBattlesceneProperties:
+InitBattlesceneProperties:
                 
                 movem.l d0-d3/a0,-(sp)
                 lea     allCombatantsCurrentHpTable(a2),a0
@@ -45,7 +45,7 @@ InitializeBattlesceneProperties:
                 
                 cmpi.w  #COMBATANT_ALLIES_END,d0
                 bgt.s   @Break1
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 move.w  d1,-(a0)
                 bra.s   @CreateListOfAlliesCurrentHP_Loop
 @Break1:
@@ -59,7 +59,7 @@ InitializeBattlesceneProperties:
                 
                 cmpi.w  #COMBATANT_ENEMIES_END,d0
                 bgt.s   @Break2
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 move.w  d1,-(a0)
                 bra.s   @CreateListOfEnemiesCurrentHP_Loop
 @Break2:
@@ -161,5 +161,5 @@ InitializeBattlesceneProperties:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function InitializeBattlesceneProperties
+    ; End of function InitBattlesceneProperties
 

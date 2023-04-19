@@ -65,24 +65,26 @@ j_WitchMainMenu:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateTacticalBaseAllyNameWindow:
+sub_100AC:
                 
-                jmp     CreateTacticalBaseAllyNameWindow(pc)
+                jmp     sub_169AE(pc)
 
-    ; End of function j_CreateTacticalBaseAllyNameWindow
+    ; End of function sub_100AC
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveTacticalBaseAllyNameWindow:
+sub_100B0:
                 
-                jmp     RemoveTacticalBaseAllyNameWindow(pc)
+                jmp     sub_16A30(pc)
 
-    ; End of function j_RemoveTacticalBaseAllyNameWindow
+    ; End of function sub_100B0
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; related to end kiss
 
 
 j_PlayEndKiss:

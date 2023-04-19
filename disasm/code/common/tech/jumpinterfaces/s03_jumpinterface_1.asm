@@ -65,11 +65,11 @@ j_CreateBattlefieldMiniStatusWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveMiniStatusWindow:
+j_HideMiniStatusWindow:
                 
-                jmp     RemoveMiniStatusWindow(pc)
+                jmp     HideMiniStatusWindow(pc)
 
-    ; End of function j_RemoveMiniStatusWindow
+    ; End of function j_HideMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -145,41 +145,41 @@ sub_10034:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreatePortraitWindow:
+j_InitPortraitWindow:
                 
-                jmp     CreatePortraitWindow(pc)
+                jmp     InitPortraitWindow(pc)
 
-    ; End of function j_CreatePortraitWindow
+    ; End of function j_InitPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemovePortraitWindow:
+j_HidePortraitWindow:
                 
-                jmp     RemovePortraitWindow(pc)
+                jmp     HidePortraitWindow(pc)
 
-    ; End of function j_RemovePortraitWindow
+    ; End of function j_HidePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitializeMemberListScreen:
+j_InitMemberListScreen:
                 
-                jmp     InitializeMemberListScreen(pc)
+                jmp     InitMemberListScreen(pc)
 
-    ; End of function j_InitializeMemberListScreen
+    ; End of function j_InitMemberListScreen
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_BuildMemberListScreen_NewAttAndDefPage:
+j_BuildMemberListScreen_NewATTandDEF:
                 
-                jmp     BuildMemberListScreen_NewAttAndDefPage(pc)
+                jmp     BuildMemberListScreen_NewATTandDEF(pc)
 
-    ; End of function j_BuildMemberListScreen_NewAttAndDefPage
+    ; End of function j_BuildMemberListScreen_NewATTandDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -275,11 +275,11 @@ j_CreateLandEffectWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveLandEffectWindow:
+j_HideLandEffectWindow:
                 
-                jmp     RemoveLandEffectWindow(pc)
+                jmp     HideLandEffectWindow(pc)
 
-    ; End of function j_RemoveLandEffectWindow
+    ; End of function j_HideLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================

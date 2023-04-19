@@ -304,7 +304,7 @@ eas_5EF46:       ac_animSpeedX2 ON
 cs_5EF60:       textCursor 3739
                 loadMapFadeIn MAP_NAZCA_SHIP_INTERIOR,4,6
                 loadEntitiesFromMapSetup 9,11,DOWN
-                executeSubroutine InitializeNazcaShipForceMembers
+                executeSubroutine InitNazcaShipForceMembers
                 setPos ALLY_ZYNK,8,10,RIGHT
                 executeSubroutine sub_5F32E
                 setActscriptWait ALLY_PETER,eas_Init
@@ -428,7 +428,7 @@ csub_5F14C:
                 
                 lea     plt_NazcaShip(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
-                moveq   #CRAM_PALETTE_SIZE,d7
+                moveq   #$20,d7 
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
@@ -443,7 +443,7 @@ csub_5F14C:
 
 sub_5F16C:
                 
-                moveq   #23,d7
+                moveq   #$17,d7
 loc_5F16E:
                 
                 subq.b  #1,((ENTITY_SPECIAL_SPRITE_LAYER-$1000000)).w

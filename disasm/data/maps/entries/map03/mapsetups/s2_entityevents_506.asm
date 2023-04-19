@@ -153,7 +153,7 @@ Map3_1FA_EntityEvent15:
                 bne.s   return_512B8
                 txt     674             ; "(Shiver)...ooouu....{W1}"
                 clsTxt
-                jsr     j_RemovePortraitWindow
+                jsr     j_HidePortraitWindow
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 clr.w   ((SPEECH_SFX-$1000000)).w
                 txt     675             ; "{CLEAR}He is shivering.{N}Will you name him?"
@@ -169,7 +169,7 @@ Map3_1FA_EntityEvent15:
                 jsr     LoadAndDisplayCurrentPortrait
                 txt     677             ; "Oooo!  Ooooo!{W1}"
                 clsTxt
-                jsr     j_RemovePortraitWindow
+                jsr     j_HidePortraitWindow
                 script  cs_512BA
 return_512B8:
                 

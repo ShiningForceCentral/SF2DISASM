@@ -52,7 +52,7 @@ MainMenu_Member:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 clsTxt
 @StartMember:   clr.b   ((byte_FFB13C-$1000000)).w
-                jsr     InitializeMemberListScreen
+                jsr     InitMemberListScreen
                 tst.w   d0
                 bmi.s   @StartMain              ; if player pressed B on member list screen, restart main menu
                 jsr     BuildMemberScreen
@@ -101,7 +101,7 @@ MainMenu_Magic:
                 bra.w   @StartMain
 @CurrentlyOnOverworldMap?:
                 
-                jsr     IsOverworldMap
+                jsr     IsOverworldMap?
                 beq.s   @NothingHappened        ; nothing happens if not an overworld map
                 
 @Egress:        move.b  spellEntry(a6),d1
@@ -127,7 +127,7 @@ MainMenu_Magic:
                 clsTxt
                 clr.b   ((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     BuildMemberListScreen_NewAttAndDefPage
+                jsr     BuildMemberListScreen_NewATTandDEF
                 move.w  d0,targetMember(a6)
                 bmi.w   @StartMagic
                 
@@ -206,7 +206,7 @@ MainItemSubmenu_Use:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
 @StartItemUse:  move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     BuildMemberListScreen_NewAttAndDefPage
+                jsr     BuildMemberListScreen_NewATTandDEF
                 tst.w   d0
                 bmi.w   @ExitItemSubmenuAction
                 
@@ -218,7 +218,7 @@ MainItemSubmenu_Use:
                 ; Using Angel Wing on an overworld map?
                 cmpi.w  #ITEM_ANGEL_WING,d2
                 bne.s   @HandleNonAngelWingItems
-                jsr     IsOverworldMap
+                jsr     IsOverworldMap?
                 beq.s   @HandleNonAngelWingItems
                 
                 ; Use Angel Wing
@@ -230,7 +230,7 @@ MainItemSubmenu_Use:
 @HandleNonAngelWingItems:
                 
                 move.w  itemIndex(a6),d1
-                jsr     IsItemUsableOnField
+                jsr     IsItemUsableOnField?
                 tst.w   d2
                 beq.s   @PickTarget        
                 
@@ -252,7 +252,7 @@ MainItemSubmenu_Use:
                 
 @PickTarget:    clsTxt
                 clr.b   ((byte_FFB13C-$1000000)).w
-                jsr     InitializeMemberListScreen
+                jsr     InitMemberListScreen
                 tst.w   d0
                 bmi.w   @StartItemUse
                 
@@ -270,7 +270,7 @@ MainItemSubmenu_Give:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
 @StartItemGive: move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     BuildMemberListScreen_NewAttAndDefPage
+                jsr     BuildMemberListScreen_NewATTandDEF
                 tst.w   d0
                 bmi.w   @ExitItemSubmenuAction
                 
@@ -293,7 +293,7 @@ MainItemSubmenu_Give:
                 
                 ; Giving a cursed item?
                 move.w  itemIndex(a6),d1
-                jsr     IsItemCursed
+                jsr     IsItemCursed?
                 bcc.s   @PickRecipient          ; immediately pick recipient if not cursed
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
@@ -306,7 +306,7 @@ MainItemSubmenu_Give:
                 clsTxt
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     BuildMemberListScreen_NewAttAndDefPage
+                jsr     BuildMemberListScreen_NewATTandDEF
                 tst.w   d0
                 bmi.w   @StartItemGive
                 
@@ -358,7 +358,7 @@ MainItemSubmenu_Give:
                 
                 ; Exchanging a cursed item?
                 move.w  exchangedItemEntry(a6),d1
-                jsr     IsItemCursed
+                jsr     IsItemCursed?
                 bcc.s   @StartExchange          ; immediately start exchange if not cursed
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
@@ -428,7 +428,7 @@ MainItemSubmenu_Equip:
                 move.b  #3,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 pea     MainMenu_Item(pc)
-                jmp     BuildMemberListScreen_NewAttAndDefPage
+                jmp     BuildMemberListScreen_NewATTandDEF
 ; ---------------------------------------------------------------------------
 
 MainItemSubmenu_Drop:
@@ -436,7 +436,7 @@ MainItemSubmenu_Drop:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
 @StartItemDrop: move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     BuildMemberListScreen_NewAttAndDefPage
+                jsr     BuildMemberListScreen_NewATTandDEF
                 tst.w   d0
                 bmi.w   @ExitItemSubmenuAction
                 
@@ -479,7 +479,7 @@ MainItemSubmenu_Drop:
                 
                 ; Dropping a cursed item?
                 move.w  itemIndex(a6),d1
-                jsr     IsItemCursed
+                jsr     IsItemCursed?
                 bcc.s   @DropItem               ; immediately drop item if not cursed
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM

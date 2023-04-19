@@ -12,11 +12,7 @@
                 include "data\stats\items\debugshop.asm"    ; Debug shop
                 align
                 include "code\common\menus\church\churchactions_1.asm"    ; Church functions
-            if (STANDARD_BUILD=1)
-                include "data\stats\allies\classes\promotions-standard.asm"
-            else
-                include "data\stats\allies\classes\promotions.asm"    ; Promotions
-            endif
+                include "data\stats\allies\promotions.asm"    ; Promotions
                 align
                 include "code\common\menus\church\churchactions_2.asm"    ; Church functions
             if (STANDARD_BUILD=1)

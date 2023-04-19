@@ -7,7 +7,7 @@
 
 SetBaseVIntFunctions:
                 
-                jsr     (InitializeWindowProperties).w
+                jsr     (InitWindowProperties).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 trap    #VINT_FUNCTIONS

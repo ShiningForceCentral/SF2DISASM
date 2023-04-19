@@ -16,7 +16,7 @@ loc_47C48:
                 lea     (DEAD_COMBATANTS_LIST).l,a0
 loc_47C62:
                 
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.s   loc_47C82
                 move.w  (DEAD_COMBATANTS_LIST_LENGTH).l,d1

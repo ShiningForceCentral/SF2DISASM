@@ -36,7 +36,7 @@ Map67_ZoneEvent0:
                 chkFlg  13              ; Elric joined
                 beq.s   return_4FB56
                 move.w  #$D,d0
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.s   return_4FB56
                 script  cs_4FC32
@@ -53,7 +53,7 @@ return_4FB56:
 
 Map67_DefaultZoneEvent:
                 
-                move.w  #BATTLE_DEVIL_TAIL,d0
+                move.w  #$15,d0
                 jsr     CheckRandomBattle
                 rts
 

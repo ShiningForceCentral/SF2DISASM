@@ -160,7 +160,7 @@ GetNextUsableAttackItem:
                 beq.s   @Next
                 
                 ; Is item usable?
-                bsr.w   IsItemUsableInBattle
+                bsr.w   IsItemUsableInBattle?
                 bcc.s   @Next
                 
                 ; Is AI allowed to use item?
@@ -227,7 +227,7 @@ GetNextUsableHealingItem:
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Next
                 
-                bsr.w   IsItemUsableInBattle
+                bsr.w   IsItemUsableInBattle?
                 bcc.s   @Next
                 
                 ; Is AI allowed to use item?

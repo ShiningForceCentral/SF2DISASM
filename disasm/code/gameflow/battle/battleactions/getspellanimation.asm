@@ -53,7 +53,7 @@ GetSpellAnimation:
                 bra.s   @CheckWeapon    ; otherwise, check ally's equipped weapon
 @Enemy:
                 
-                jsr     GetEnemy        
+                jsr     GetEnemyIndex   
                 cmpi.w  #ENEMY_DARK_GUNNER,d1
                 beq.w   @Continue1      ; move on to next step if enemy attacker is Dark Gunner
 @CheckWeapon:

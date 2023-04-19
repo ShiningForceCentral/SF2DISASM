@@ -75,23 +75,23 @@ DebugModeBattleTest:
             endif
                 moveq   #0,d0
                 move.w  #$63,d1 
-                bsr.w   j_SetBaseAgi
-                bsr.w   j_SetBaseAtt
-                bsr.w   j_SetBaseDef
-                bsr.w   j_SetMaxHp
-                bsr.w   j_SetCurrentAgi
-                bsr.w   j_SetCurrentAtt
-                bsr.w   j_SetCurrentDef
-                bsr.w   j_SetCurrentHp
+                bsr.w   j_SetBaseAGI
+                bsr.w   j_SetBaseATT
+                bsr.w   j_SetBaseDEF
+                bsr.w   j_SetMaxHP
+                bsr.w   j_SetCurrentAGI
+                bsr.w   j_SetCurrentATT
+                bsr.w   j_SetCurrentDEF
+                bsr.w   j_SetCurrentHP
                 sndCom  MUSIC_BATTLE_THEME_3
                 bsr.w   EnableDisplayAndInterrupts
-                bsr.w   InitializeDisplay
+                bsr.w   InitDisplay
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   FadeInFromBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
-                bsr.w   InitializeWindowProperties
+                bsr.w   InitWindowProperties
                 move.w  #COMBATANT_ALLIES_NUMBER,(GENERIC_LIST_LENGTH).l
                 lea     (GENERIC_LIST).l,a0
                 move.l  #$10203,(a0)+
@@ -163,7 +163,7 @@ loc_7820:
 loc_7894:
                 
                 bsr.w   sub_78BC
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitMemberListScreen
                 tst.b   d0
                 bne.w   byte_77DE       
                 bpl.s   loc_78B6
@@ -189,32 +189,31 @@ sub_78BC:
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
                 lea     (FF0000_RAM_START).l,a0
-@Loop:
+loc_78C6:
                 
                 bsr.w   j_GetCurrentLevel
                 bsr.w   sub_7930
                 move.w  d1,(a0)
-                bsr.w   j_GetMaxHp
-                bsr.w   j_SetCurrentHp
+                bsr.w   j_GetMaxHP
+                bsr.w   j_SetCurrentHP
                 bsr.w   sub_7930
                 move.w  d1,2(a0)
-                bsr.w   j_GetMaxMp
-                bsr.w   j_SetCurrentMp
+                bsr.w   j_GetMaxMP
+                bsr.w   j_SetCurrentMP
                 bsr.w   sub_7930
                 move.w  d1,4(a0)
-                bsr.w   j_GetBaseAtt
+                bsr.w   j_GetBaseATT
                 bsr.w   sub_7930
                 move.w  d1,6(a0)
-                bsr.w   j_GetBaseDef
+                bsr.w   j_GetBaseDEF
                 bsr.w   sub_7930
                 move.w  d1,8(a0)
-                bsr.w   j_GetBaseAgi
+                bsr.w   j_GetBaseAGI
                 bsr.w   sub_7930
-                move.w  d1,10(a0)
-                adda.w  #16,a0
+                move.w  d1,$A(a0)
+                adda.w  #$10,a0
                 addq.w  #1,d0
-                dbf     d7,@Loop
-                
+                dbf     d7,loc_78C6
                 rts
 
     ; End of function sub_78BC
@@ -245,15 +244,15 @@ sub_7930:
                 
                 move.w  d1,d2
                 ext.l   d2
-                divs.w  #100,d2
+                divs.w  #$64,d2 
                 move.w  d2,d3
-                mulu.w  #256,d3
+                mulu.w  #$100,d3
                 move.w  d3,d1
                 swap    d2
                 ext.l   d2
-                divs.w  #10,d2
+                divs.w  #$A,d2
                 move.w  d2,d3
-                mulu.w  #16,d3
+                mulu.w  #$10,d3
                 add.w   d3,d1
                 swap    d2
                 add.w   d2,d1

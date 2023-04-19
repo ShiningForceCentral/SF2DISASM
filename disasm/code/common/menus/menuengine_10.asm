@@ -5,21 +5,21 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-CreateTacticalBaseAllyNameWindow:
+ShowPortraitName:
                 
                 movem.l d0-a1,-(sp)
-                tst.w   (ALLY_NAME_WINDOW_INDEX).l
+                tst.w   (NAME_WINDOW_INDEX).l
                 bne.s   loc_16A2A
                 movem.w d0,-(sp)
                 move.w  #WINDOW_MEMBER_NAME_SIZE,d0	; window dimensions
                 move.w  #WINDOW_MEMBER_NAME_DEST,d1	; window offset
                 jsr     (CreateWindow).l
                 addq.w  #1,d0
-                move.w  d0,(ALLY_NAME_WINDOW_INDEX).l
+                move.w  d0,(NAME_WINDOW_INDEX).l
                 move.w  #WINDOW_MEMBER_NAME_SIZE,d0
                 bsr.w   sub_1018E       
                 movem.w (sp)+,d0
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 move.w  d1,d2
                 jsr     j_GetCombatantName
                 move.w  d7,d0
@@ -39,7 +39,7 @@ CreateTacticalBaseAllyNameWindow:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
 @DisplayName:
                 
-                move.w  (ALLY_NAME_WINDOW_INDEX).l,d0
+                move.w  (NAME_WINDOW_INDEX).l,d0
                 subq.w  #1,d0
                 move.w  #$10B,d1
                 moveq   #4,d2
@@ -50,30 +50,28 @@ loc_16A2A:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function CreateTacticalBaseAllyNameWindow
+    ; End of function ShowPortraitName
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Move window offscreen, then clear it from memory.
 
-
-RemoveTacticalBaseAllyNameWindow:
+HidePortraitName:
                 
                 movem.l d0-d1/a0-a1,-(sp)
-                move.w  (ALLY_NAME_WINDOW_INDEX).l,d0
-                beq.s   @Done
+                move.w  (NAME_WINDOW_INDEX).l,d0
+                beq.s   @Skip
                 subq.w  #1,d0
                 move.w  #WINDOW_MEMBER_NAME_DEST,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
                 jsr     (ClearWindowAndUpdateEndPointer).l
-                clr.w   (ALLY_NAME_WINDOW_INDEX).l
-@Done:
+                clr.w   (NAME_WINDOW_INDEX).l
+@Skip:
                 
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-    ; End of function RemoveTacticalBaseAllyNameWindow
+    ; End of function HidePortraitName
 

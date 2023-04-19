@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-InitializeWindowProperties:
+InitWindowProperties:
                 
                 move.l  a0,-(sp)
                 move.w  d7,-(sp)
@@ -30,7 +30,7 @@ InitializeWindowProperties:
                 clr.w   ((TIMER_WINDOW_INDEX-$1000000)).w
                 rts
 
-    ; End of function InitializeWindowProperties
+    ; End of function InitWindowProperties
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -98,7 +98,7 @@ SetWindowDestination:
                 
                 move.l  a0,-(sp)
                 movem.w d0-d1,-(sp)
-                bsr.w   GetWindowEntryAddress
+                bsr.w   GetWindowInfo   
                 tst.l   (a0)
                 beq.w   loc_4898
                 move.w  X(a0),d0
@@ -149,7 +149,7 @@ sub_48BE:
                 
                 move.l  a0,-(sp)
                 move.w  d0,-(sp)
-                bsr.w   GetWindowEntryAddress
+                bsr.w   GetWindowInfo   
                 move.w  #1,$E(a0)
                 move.w  (sp)+,d0
                 movea.l (sp)+,a0
@@ -207,7 +207,7 @@ loc_4900:
                 
                 move.l  a0,-(sp)
                 movem.w d0-d1,-(sp)
-                bsr.w   GetWindowEntryAddress
+                bsr.w   GetWindowInfo   
                 cmpi.w  #$8080,d1
                 bne.s   loc_4914
                 move.w  X(a0),d1
@@ -230,7 +230,7 @@ loc_4914:
 ClearWindowAndUpdateEndPointer:
                 
                 movem.l d0-d4/a0-a1,-(sp)
-                bsr.w   GetWindowEntryAddress
+                bsr.w   GetWindowInfo   
                 clr.l   (a0)
                 clr.l   d1
                 lea     (WINDOW_ENTRIES).l,a0
@@ -247,9 +247,8 @@ loc_4946:
                 move.b  HEIGHT(a0),d4
 loc_4956:
                 
-                lea     NEXT_WINDOW(a0),a0
+                lea     $10(a0),a0
                 dbf     d0,loc_4946
-                
                 tst.l   d1
                 bne.s   loc_496A
                 move.l  #WINDOW_TILE_LAYOUTS,d1
@@ -275,7 +274,7 @@ loc_4972:
 WaitForWindowMovementEnd:
                 
                 bsr.w   WaitForVInt
-                tst.b   ((MOVING_WINDOWS_BITFIELD-$1000000)).w
+                tst.b   ((MOVING_WINDOWS_BITMAP-$1000000)).w
                 bne.s   WaitForWindowMovementEnd
                 rts
 
@@ -292,7 +291,7 @@ VInt_UpdateWindows:
                 rts
 loc_4994:
                 
-                clr.b   ((MOVING_WINDOWS_BITFIELD-$1000000)).w
+                clr.b   ((MOVING_WINDOWS_BITMAP-$1000000)).w
                 moveq   #7,d7
                 lea     (WINDOW_ENTRIES).l,a2
 loc_49A0:
@@ -304,7 +303,7 @@ loc_49A0:
                 beq.w   loc_49C8
                 moveq   #7,d0
                 sub.w   d7,d0
-                bset    d0,((MOVING_WINDOWS_BITFIELD-$1000000)).w
+                bset    d0,((MOVING_WINDOWS_BITMAP-$1000000)).w
                 movea.l (a2),a0
                 move.w  4(a2),d0
                 move.w  6(a2),d1
@@ -587,29 +586,29 @@ return_4C36:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get entry address for window d0.w -> a0
+; In D0=Window index, Out A0=Address
 
 
-GetWindowEntryAddress:
+GetWindowInfo:
                 
                 lsl.w   #4,d0
                 lea     (WINDOW_ENTRIES).l,a0
                 adda.w  d0,a0
                 rts
 
-    ; End of function GetWindowEntryAddress
+    ; End of function GetWindowInfo
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get address of tile at coordinates d1.w in layout for window d0.w -> a1
+; In D0=Windows index, D1=Tile coords, Out A1=Address
 
 
 GetWindowTileAddress:
                 
                 move.l  a0,-(sp)
                 movem.w d0-d2,-(sp)
-                bsr.s   GetWindowEntryAddress
+                bsr.s   GetWindowInfo   
                 movea.l (a0)+,a1
                 clr.w   d0
                 move.b  (a0),d0

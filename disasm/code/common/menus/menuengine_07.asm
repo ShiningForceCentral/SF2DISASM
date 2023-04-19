@@ -13,15 +13,15 @@ CreateLandEffectWindow:
                 jsr     (CreateWindow).w
                 addq.w  #1,d0
                 move.w  d0,((LAND_EFFECT_WINDOW_INDEX-$1000000)).w
-                bsr.w   BuildLandEffectWindow
+                bsr.w   DrawLandEffectWindow
                 move.w  ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$201,d1
                 move.w  #4,d2
                 cmpi.w  #WINDOW_MINISTATUS_MAX_WIDTH,((MINISTATUS_WINDOW_WIDTH-$1000000)).w
-                blt.s   @Continue
+                blt.s   loc_157A6
                 move.w  #$101,d1
-@Continue:
+loc_157A6:
                 
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
@@ -34,7 +34,7 @@ CreateLandEffectWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-RemoveLandEffectWindow:
+HideLandEffectWindow:
                 
                 tst.w   ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w
                 beq.w   @Return
@@ -54,7 +54,7 @@ RemoveLandEffectWindow:
                 
                 rts
 
-    ; End of function RemoveLandEffectWindow
+    ; End of function HideLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -65,7 +65,7 @@ sub_157E8:
                 tst.w   ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w
                 beq.w   @Return
                 movem.l d0-a2,-(sp)
-                bsr.w   BuildLandEffectWindow
+                bsr.w   DrawLandEffectWindow
                 tst.b   ((HIDE_WINDOWS-$1000000)).w
                 bne.s   @Done
                 move.w  ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w,d0
@@ -85,7 +85,7 @@ sub_157E8:
 ; =============== S U B R O U T I N E =======================================
 
 
-BuildLandEffectWindow:
+DrawLandEffectWindow:
                 
                 move.w  ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -118,7 +118,7 @@ BuildLandEffectWindow:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 rts
 
-    ; End of function BuildLandEffectWindow
+    ; End of function DrawLandEffectWindow
 
 landEffectDisplayValue: macro
                 ; Exit macro if parameter is a terminator word
@@ -273,7 +273,7 @@ CopyBattlefieldOptionsMenuLayout:
                 
                 lea     BattleConfigWindowLayout(pc), a0
                 movea.l windowTilesEnd(a6),a1
-                move.w  #342,d7
+                move.w  #$156,d7
                 jmp     (CopyBytes).w   
 
     ; End of function CopyBattlefieldOptionsMenuLayout

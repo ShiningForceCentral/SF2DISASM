@@ -4,97 +4,103 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Convert coordinates to offset and add to address argument.
-; 
-;   In: a0 = start of grid address, d1.w,d2.w = X,Y coordinates
-;   Out: a0 = start of grid address + offset
+;     Convert coordinate to offset and add to address argument.
+;     In: A0 = start of grid
+;         D1 = X coord
+;         D2 = Y coord
+;     Out: A0 = start of grid + offset
 
 
-ConvertCoordinatesToAddress:
+ConvertCoordToOffset:
                 
                 move.l  d2,-(sp)
-                mulu.w  #MAP_SIZE_MAXWIDTH,d2
+                mulu.w  #$30,d2 
                 add.w   d1,d2
                 adda.l  d2,a0
                 move.l  (sp)+,d2
                 rts
 
-    ; End of function ConvertCoordinatesToAddress
+    ; End of function ConvertCoordToOffset
 
 
 ; =============== S U B R O U T I N E =======================================
 
+;     Clear valid target index grid at RAM:5600.
 
-ClearTargetsArray:
+
+ClearTargetGrid:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     (FF5600_LOADING_SPACE).l,a0
-                move.w  #576,d0
-                moveq   #-1,d1
-@Loop:
+                move.w  #$240,d0
+                moveq   #$FFFFFFFF,d1
+loc_C0B8:
                 
                 move.l  d1,(a0)+
                 subq.w  #1,d0
-                bne.s   @Loop
-                
+                bne.s   loc_C0B8
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function ClearTargetsArray
+    ; End of function ClearTargetGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
+;     Clear moveable tile data at RAM:4400 and RAM:4d00.
 
-ClearTotalMovecostsAndMovableGridArrays:
+
+ClearMovableGrid:
                 
                 movem.l d0-a6,-(sp)
                 lea     (FF4400_LOADING_SPACE).l,a0
                 lea     (FF4D00_LOADING_SPACE).l,a1
-                move.w  #576,d0
-                moveq   #-1,d1
-@Loop:
+                move.w  #$240,d0
+                moveq   #$FFFFFFFF,d1
+loc_C0DA:
                 
                 move.l  d1,(a0)+
                 move.l  d1,(a1)+
                 subq.w  #1,d0
-                bne.s   @Loop
-                
+                bne.s   loc_C0DA
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function ClearTotalMovecostsAndMovableGridArrays
+    ; End of function ClearMovableGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get index of combatant occupying position d1.w,d2.w -> d0.b
+;     Get value at converted coordinate offset.
+;     In: D1 = X coord
+;         D2 = Y coord
+;     Out: D0 = terrain at offset
 
 
-GetCombatantOccupyingSpace:
+GetTargetAtCoordOffset:
                 
                 movem.l d1-a6,-(sp)
                 lea     (FF5600_LOADING_SPACE).l,a0
-                bsr.s   ConvertCoordinatesToAddress
+                bsr.s   ConvertCoordToOffset
                 move.b  (a0),d0
                 movem.l (sp)+,d1-a6
                 rts
 
-    ; End of function GetCombatantOccupyingSpace
+    ; End of function GetTargetAtCoordOffset
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get movecost to reach entity d0.b -> d0.b
+; get distance from current unit to entity D0 -> D0
 
 
 GetMoveCostToEntity:
                 
                 movem.l d1-a6,-(sp)
-                jsr     GetCombatantY
+                jsr     GetYPos
                 move.b  d1,d2
-                jsr     GetCombatantX
-                bsr.w   GetMoveCostToDestination
+                jsr     GetXPos
+                bsr.w   GetDestinationMoveCost
                 movem.l (sp)+,d1-a6
                 rts
 
@@ -103,38 +109,38 @@ GetMoveCostToEntity:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get movecost to reach space at coordinates d1.w,d2.w -> d0.b
+; get movecost to get to tile D1,D2 -> D0
 
 
-GetMoveCostToDestination:
+GetDestinationMoveCost:
                 
                 movem.l d1-a6,-(sp)
                 lea     (FF4400_LOADING_SPACE).l,a0
                 lea     (FF4D00_LOADING_SPACE).l,a1
                 clr.w   d0
-                mulu.w  #MAP_SIZE_MAXWIDTH,d2
+                mulu.w  #48,d2
                 andi.w  #$FF,d1
-                add.w   d1,d2           ; d2.w = coordinates converted to offset
+                add.w   d1,d2
                 move.b  (a1,d2.w),d0
                 lsl.w   #8,d0
                 move.b  (a0,d2.w),d0
                 movem.l (sp)+,d1-a6
                 rts
 
-    ; End of function GetMoveCostToDestination
+    ; End of function GetDestinationMoveCost
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get terrain type of space occupied by battle entity d0.b -> d0.b
+; get terrain type of tile under entity D0 -> D0
 
 
 GetCurrentTerrainType:
                 
                 movem.l d1-a6,-(sp)
-                jsr     GetCombatantY
+                jsr     GetYPos
                 move.w  d1,d2
-                jsr     GetCombatantX
+                jsr     GetXPos
                 bsr.w   GetTerrain      
                 movem.l (sp)+,d1-a6
                 rts
@@ -144,14 +150,17 @@ GetCurrentTerrainType:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get terrain entry at coordinates d1.w,d2.w -> d0.b
+;     Get obstruction at converted coordinate offset.
+;     In: D1 = X coord
+;         D2 = Y coord
+;     Out: D0 = target at offset
 
 
 GetTerrain:
                 
                 movem.l d1-a6,-(sp)
-                lea     (BATTLE_TERRAIN_ARRAY).l,a0
-                bsr.w   ConvertCoordinatesToAddress
+                lea     (BATTLE_TERRAIN).l,a0
+                bsr.w   ConvertCoordToOffset
                 move.b  (a0),d0
                 movem.l (sp)+,d1-a6
                 rts
@@ -161,14 +170,12 @@ GetTerrain:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Set terrain entry d0.b at coordinates d1.w,d2.w
-
 
 SetTerrain:
                 
                 movem.l d1-a6,-(sp)
-                lea     (BATTLE_TERRAIN_ARRAY).l,a0
-                bsr.w   ConvertCoordinatesToAddress
+                lea     (BATTLE_TERRAIN).l,a0
+                bsr.w   ConvertCoordToOffset
                 move.b  d0,(a0)
                 movem.l (sp)+,d1-a6
                 rts
@@ -178,18 +185,18 @@ SetTerrain:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Populate move costs table for currently moving battle entity d0.b
+; Populate move costs list for currently moving entity
 
 
-PopulateMoveCostsTable:
+MemorizePath:
                 
                 movem.l d0-a6,-(sp)
                 jsr     GetMoveType     
                 lsl.w   #4,d1
                 lea     tbl_LandEffectSettingsAndMoveCosts(pc), a0
                 adda.w  d1,a0
-                lea     ((MOVE_COSTS_TABLE-$1000000)).w,a1
-                moveq   #TERRAIN_TYPES_COUNTER,d7
+                lea     ((MOVE_COSTS_LIST-$1000000)).w,a1
+                moveq   #TERRAINS_COUNTER,d7
 @Loop:
                 
                 move.b  (a0)+,d1
@@ -205,7 +212,7 @@ PopulateMoveCostsTable:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function PopulateMoveCostsTable
+    ; End of function MemorizePath
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -214,8 +221,8 @@ PopulateMoveCostsTable:
 sub_C1BE:
                 
                 movem.l d0/d2-a6,-(sp)
-                bsr.s   PopulateMoveCostsTable
-                lea     ((MOVE_COSTS_TABLE-$1000000)).w,a0
+                bsr.s   MemorizePath    
+                lea     ((MOVE_COSTS_LIST-$1000000)).w,a0
                 bsr.w   GetCurrentTerrainType
                 andi.w  #$F,d0
                 adda.w  d0,a0
@@ -229,7 +236,7 @@ sub_C1BE:
 ; =============== S U B R O U T I N E =======================================
 
 ; In:  d0.b = combatant index
-; Out: d1.w = land effect setting (0 = 0%, 1 = 15%, 2 = 30%)
+; Out: d1.b = land effect setting (0 = 0%, 1 = 15%, 2 = 30%)
 
 
 GetLandEffectSetting:
@@ -253,22 +260,25 @@ GetLandEffectSetting:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Set space at position d1.w,d2.w as movable and clear movecost.
+; Set coord to movable in movable grid
+; 
+;       In: D1 = X coord
+;           D2 = Y coord
 
 
-SetMovableSpace:
+SetMovableAtCoord:
                 
                 movem.l d0-a6,-(sp)
                 lea     (FF4400_LOADING_SPACE).l,a0
-                bsr.w   ConvertCoordinatesToAddress
+                bsr.w   ConvertCoordToOffset
                 move.b  #0,(a0)
                 lea     (FF4D00_LOADING_SPACE).l,a0
-                bsr.w   ConvertCoordinatesToAddress
+                bsr.w   ConvertCoordToOffset
                 move.b  #0,(a0)
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function SetMovableSpace
+    ; End of function SetMovableAtCoord
 
 
 ; =============== S U B R O U T I N E =======================================

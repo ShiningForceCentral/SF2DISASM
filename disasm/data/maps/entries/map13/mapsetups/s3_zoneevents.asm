@@ -22,7 +22,7 @@ Map13_ZoneEvent0:
                 bra.s   byte_5825E      
 loc_58254:
                 
-                move.w  #130,d0
+                move.w  #$82,d0 
                 jsr     MoveEntityOutOfMap
 byte_5825E:
                 

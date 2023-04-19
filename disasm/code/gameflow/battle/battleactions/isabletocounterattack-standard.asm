@@ -52,14 +52,14 @@ FinalCounterAttackCheck:
                 moveq   #0,d2
                 lea     tbl_UnableToCounterEnemies(pc), a0
                 move.b  (a5),d0
-                bsr.w   GetEnemy
+                bsr.w   GetEnemyIndex
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcc.s   @NoCounter
                 
                 ; Enemies that cannot be countered
                 lea     tbl_CannotBeCounteredEnemies(pc), a0
                 move.b  (a4),d0
-                bsr.w   GetEnemy
+                bsr.w   GetEnemyIndex
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcc.s   @NoCounter
                 

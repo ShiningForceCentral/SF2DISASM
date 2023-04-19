@@ -12,10 +12,10 @@
 WriteBattlesceneScript_CalculateDamage:
                 
                 move.b  (a4),d0
-                jsr     GetCurrentAtt
+                jsr     GetCurrentATT
                 move.w  d1,d2
                 move.b  (a5),d0
-                jsr     GetCurrentDef
+                jsr     GetCurrentDEF
                 sub.w   d1,d2
                 bhi.s   @Continue       
                 moveq   #1,d2           ; minimum base damage = 1

@@ -100,7 +100,7 @@ CreateBattlesceneMessage:
 ; ---------------------------------------------------------------------------
 
 @PrismLaser:    module
-                bsr.w   GetEnemy  
+                bsr.w   GetEnemyIndex   
                 cmpi.w  #ENEMY_ZEON_GUARD,d1
                 bne.s   @PrismFlower    
                 move.w  #MESSAGE_BATTLE_DEMON_LASER,d1 ; 0141=Demon laser!

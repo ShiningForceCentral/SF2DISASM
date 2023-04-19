@@ -15,7 +15,7 @@ byte_57D10:
                 
                 chkFlg  518             ; Battle 18 completed - BATTLE_VERSUS_TAROS                
                 beq.s   return_57D20
-                move.w  #128,d0
+                move.w  #$80,d0 
                 jsr     MoveEntityOutOfMap
 return_57D20:
                 

@@ -24,15 +24,15 @@ BattleDebugFunction1B120A:
                 moveq   #ALLY_BOWIE,d0
                 jsr     j_JoinForce
                 setSavedByte #BATTLE_VERSUS_ALL_BOSSES, CURRENT_BATTLE
-                jsr     j_InitializeEnemyList
-                bsr.w   InitializeAllAlliesBattlePositions
-                bsr.w   InitializeAllEnemiesBattlePositions
+                jsr     j_InitEnemyList
+                bsr.w   InitAllAlliesBattlePositions
+                bsr.w   InitAllEnemiesBattlePositions
                 move.b  #$80,d0
                 moveq   #0,d1
-                jsr     j_SetCombatantX
+                jsr     j_SetXPos
                 move.w  #$AAAA,d1
-                bsr.w   ResetEnemyStatsForRespawn
-                bsr.w   GetAiSpecialMoveOrderCoordinates
+                bsr.w   UpdateEnemyStatsForRespawn
+                bsr.w   GetEnemyAiTargetPosition
 loc_1B126E:
                 
                 bra.s   loc_1B126E
@@ -44,15 +44,15 @@ loc_1B126E:
 ; =============== S U B R O U T I N E =======================================
 
 
-InitializeAllAlliesBattlePositions:
+InitAllAlliesBattlePositions:
                 
                 movem.l d0-a6,-(sp)
                 moveq   #COMBATANT_ALLIES_START,d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
-                move.w  #-1,d1
+                move.w  #$FFFF,d1
 @ResetPositions_Loop:
                 
-                jsr     j_SetCombatantX
+                jsr     j_SetXPos
                 addq.b  #1,d0
                 dbf     d7,@ResetPositions_Loop
                 
@@ -70,14 +70,14 @@ InitializeAllAlliesBattlePositions:
 @InitPositions_Loop:
                 
                 move.b  (a1),d0         ; D0 = ally index from battle party members table
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.s   @Skip           ; skip positioning if ally is dead
                 clr.w   d1
                 move.b  BATTLESPRITESET_COMBATANT_OFFSET_STARTING_X(a0),d1
-                jsr     j_SetCombatantX
+                jsr     j_SetXPos
                 move.b  BATTLESPRITESET_COMBATANT_OFFSET_STARTING_Y(a0),d1
-                jsr     j_SetCombatantY
+                jsr     j_SetYPos
                 lea     NEXT_BATTLESPRITESET_COMBATANT(a0),a0
 @Skip:
                 
@@ -95,27 +95,27 @@ InitializeAllAlliesBattlePositions:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function InitializeAllAlliesBattlePositions
+    ; End of function InitAllAlliesBattlePositions
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-InitializeAllEnemiesBattlePositions:
+InitAllEnemiesBattlePositions:
                 
                 movem.l d0/d7,-(sp)
                 move.b  #COMBATANT_ENEMIES_START,d0
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
 @InitPositions_Loop:
                 
-                bsr.w   InitializeEnemyBattlePosition
+                bsr.w   InitEnemyBattlePosition
                 addq.b  #1,d0
                 dbf     d7,@InitPositions_Loop
                 
                 movem.l (sp)+,d0/d7
                 rts
 
-    ; End of function InitializeAllEnemiesBattlePositions
+    ; End of function InitAllEnemiesBattlePositions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -123,14 +123,14 @@ InitializeAllEnemiesBattlePositions:
 ; In: d0.b = combatant index
 
 
-InitializeEnemyBattlePosition:
+InitEnemyBattlePosition:
                 
                 movem.l d0-a6,-(sp)
                 loadSavedDataAddress CURRENT_BATTLE, a0
                 move.b  (a0),d1
                 cmpi.b  #BATTLE_TO_MOUN,d1
                 bne.s   loc_1B132E
-                cmpi.b  #143,d0
+                cmpi.b  #$8F,d0
                 bne.s   loc_1B132E
                 bsr.w   HasJaroJoinedTheForce ; HARDCODED check for Jaro in battle 32
                 tst.w   d1
@@ -153,17 +153,17 @@ loc_1B132E:
                 andi.w  #$F,d1
                 cmpi.w  #2,d1
                 bge.w   loc_1B1368
-                bsr.w   InitializeEnemyStats
+                bsr.w   InitEnemyStats  
                 bra.w   loc_1B139A
 loc_1B1368:
                 
                 lsl.w   #8,d1
                 jsr     j_SetAiActivationFlag
                 clr.w   d1
-                jsr     j_SetMaxHp
-                jsr     j_SetCurrentHp
-                move.w  #-1,d1
-                jsr     j_SetCombatantX
+                jsr     j_SetMaxHP
+                jsr     j_SetCurrentHP
+                move.w  #$FFFF,d1
+                jsr     j_SetXPos
                 clr.w   d1
                 clr.w   d2
                 move.b  BATTLESPRITESET_COMBATANT_OFFSET_AI_TRIGGER_REGION(a0),d1
@@ -174,18 +174,18 @@ loc_1B139A:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function InitializeEnemyBattlePosition
+    ; End of function InitEnemyBattlePosition
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = combatant index
-;     d1.w = AI activation flag
+; In: D0 = character index
+;     D1 = character word 34 (AI stuff)
 ; 
-; Out: CCR carry-bit clear if respawn
+; Out: carry = 0 if respawn, 1 if not
 
 
-ResetEnemyStatsForRespawn:
+UpdateEnemyStatsForRespawn:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d1,d2
@@ -193,35 +193,35 @@ ResetEnemyStatsForRespawn:
                 bsr.w   GetBattleSpritesetSubsection
                 bset    #7,d1
                 cmp.b   d1,d0
-                bcc.w   @PositionEnemyOffscreen
+                bcc.w   loc_1B13E8
                 move.b  d0,d1
-                andi.l  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
+                andi.l  #$7F,d1 
                 mulu.w  #BATTLESPRITESET_COMBATANT_ENTRY_SIZE,d1
                 adda.w  d1,a0
                 clr.w   d3
                 clr.w   d4
                 move.b  BATTLESPRITESET_COMBATANT_OFFSET_STARTING_X(a0),d3
                 move.b  BATTLESPRITESET_COMBATANT_OFFSET_STARTING_Y(a0),d4
-                bsr.w   IsEnemyStartingPositionOccupied
-                bcs.w   @PositionEnemyOffscreen
-                bsr.w   InitializeEnemyStats
+                bsr.w   IsEnemyStartingPositionOccupied?
+                bcs.w   loc_1B13E8
+                bsr.w   InitEnemyStats  
                 move.w  d2,d1
                 jsr     j_SetAiActivationFlag
-                bra.w   @Done
-@PositionEnemyOffscreen:
+                bra.w   loc_1B1404
+loc_1B13E8:
                 
                 clr.w   d1
-                jsr     j_SetMaxHp
-                jsr     j_SetCurrentHp
-                move.w  #-1,d1
-                jsr     j_SetCombatantX
+                jsr     j_SetMaxHP
+                jsr     j_SetCurrentHP
+                move.w  #$FFFF,d1
+                jsr     j_SetXPos
                 ori     #1,ccr
-@Done:
+loc_1B1404:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function ResetEnemyStatsForRespawn
+    ; End of function UpdateEnemyStatsForRespawn
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -230,12 +230,12 @@ ResetEnemyStatsForRespawn:
 ;     d0.b = combatant index
 
 
-InitializeEnemyStats:
+InitEnemyStats:
                 
                 movem.l d0-a1,-(sp)
                 clr.l   d1
                 move.b  (a0),d1
-                bsr.w   UpgradeRandomBattleEnemies
+                bsr.w   UpgradeEnemyIndex
                 move.w  d1,d6           ; d1.w, d6.w = upgraded enemy index
                 mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
                 lea     tbl_EnemyDefs(pc), a1
@@ -255,15 +255,15 @@ InitializeEnemyStats:
                 dbf     d7,@Loop
                 
                 movea.l (sp)+,a0
-                jsr     j_GetMaxHp
-                jsr     j_SetCurrentHp
-                jsr     j_GetMaxMp
-                jsr     j_SetCurrentMp
+                jsr     j_GetMaxHP
+                jsr     j_SetCurrentHP
+                jsr     j_GetMaxMP
+                jsr     j_SetCurrentMP
                 clr.w   d1
                 move.b  BATTLESPRITESET_COMBATANT_OFFSET_STARTING_X(a0),d1
-                jsr     j_SetCombatantX
+                jsr     j_SetXPos
                 move.b  BATTLESPRITESET_COMBATANT_OFFSET_STARTING_Y(a0),d1
-                jsr     j_SetCombatantY
+                jsr     j_SetYPos
                 jsr     j_GetMoveType
                 lsl.w   #4,d1
                 andi.w  #$F0,d1
@@ -280,7 +280,7 @@ InitializeEnemyStats:
                 move.b  BATTLESPRITESET_COMBATANT_OFFSET_MOVE_TO_POSITION(a0),d2
                 jsr     j_SetAiSpecialMoveOrders
                 move.w  BATTLESPRITESET_COMBATANT_OFFSET_ITEMS(a0),d1
-                bsr.w   InitializeEnemyItems
+                bsr.w   InitEnemyItems
                 jsr     j_GetAiActivationFlag
                 move.w  d1,d2
                 andi.w  #$F000,d2
@@ -289,18 +289,18 @@ InitializeEnemyStats:
                 andi.w  #$FFF,d1
                 or.w    d2,d1
                 jsr     j_SetAiActivationFlag
-                bsr.w   AdjustEnemyBaseAttForDifficulty
+                bsr.w   AlterEnemyStats 
                 jsr     j_ApplyStatusEffectsAndItemsOnStats
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function InitializeEnemyStats
+    ; End of function InitEnemyStats
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-InitializeEnemyList:
+InitEnemyList:
                 
                 movem.l d1/a0-a1,-(sp)
                 lea     ((ENEMY_LIST-$1000000)).w,a1
@@ -321,13 +321,13 @@ loc_1B14F4:
                 movem.l (sp)+,d1/a0-a1
                 rts
 
-    ; End of function InitializeEnemyList
+    ; End of function InitEnemyList
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-InitializeEnemyItems:
+InitEnemyItems:
                 
                 movem.l d0-a0,-(sp)
                 cmpi.w  #ITEM_NOTHING,d1
@@ -359,7 +359,7 @@ loc_1B154E:
                 movem.l (sp)+,d0-a0
                 rts
 
-    ; End of function InitializeEnemyItems
+    ; End of function InitEnemyItems
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -368,17 +368,17 @@ loc_1B154E:
 ; Return CCR carry-bit set if true.
 
 
-IsEnemyStartingPositionOccupied:
+IsEnemyStartingPositionOccupied?:
                 
                 movem.l d0-d2/d7,-(sp)
                 moveq   #COMBATANT_ALLIES_START,d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
 loc_1B155C:
                 
-                jsr     j_GetCombatantX
+                jsr     j_GetXPos
                 cmp.w   d1,d3
                 bne.s   loc_1B1576
-                jsr     j_GetCombatantY
+                jsr     j_GetYPos
                 cmp.w   d1,d4
                 ori     #1,ccr
                 beq.w   loc_1B15A4
@@ -391,10 +391,10 @@ loc_1B1576:
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
 loc_1B1582:
                 
-                jsr     j_GetCombatantX
+                jsr     j_GetXPos
                 cmp.w   d1,d3
                 bne.s   loc_1B159C
-                jsr     j_GetCombatantY
+                jsr     j_GetYPos
                 cmp.w   d1,d4
                 ori     #1,ccr
                 beq.w   loc_1B15A4
@@ -409,103 +409,99 @@ loc_1B15A4:
                 movem.l (sp)+,d0-d2/d7
                 rts
 
-    ; End of function IsEnemyStartingPositionOccupied
+    ; End of function IsEnemyStartingPositionOccupied?
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Adjust enemy base ATT according to difficulty.
-; If DIFFICULTY_FACTORS is enabled, adjust DEF and AGI as well.
-;
-;   In: d0.b = combatant index
+; Set enemy base stats according to difficulty
 
 
-AdjustEnemyBaseAttForDifficulty:
-                
-            if (STANDARD_BUILD&DIFFICULTY_FACTORS=1)
-                
-@capEnemyStat:  macro
-                cmpi.w #255,d1
-                ble.s  @Continue\@
-                move.w #255,d1
-@Continue\@:
-                endm
+AlterEnemyStats:
                 
                 move.l  d1,-(sp)
-                jsr     GetDifficulty
-                beq.w   @Done                   ; no adjustments if Normal Difficulty
+                jsr     j_GetDifficulty
+                
+            if (STANDARD_BUILD&DIFFICULTY_FACTORS=1)
+                cmpi.w  #DIFFICULTY_NORMAL,d1
+                beq.w   @Done
 
-                ; Hard Difficulty
+;HardDifficulty
+                clr.l   d1
                 jsr     GetBaseATT
-                mulu.w  #NORMAL_TO_HARD_ATT,d1  ; default: base ATT * 1.25
-                lsr.w   #2,d1
-                @capEnemyStat
+                mulu.w  #NORMAL_TO_HARD_ATK,d1
+                lsr.l   #2,d1           ; base ATT effectively multiplied by 1.25
+                capEnemyStat
                 jsr     SetBaseATT
+                clr.l   d1
                 jsr     GetBaseDEF
-                mulu.w  #NORMAL_TO_HARD_DEF,d1  ; default: base DEF * 1
-                lsr.w   #2,d1
-                @capEnemyStat
+                mulu.w  #NORMAL_TO_HARD_DEF,d1
+                lsr.l   #2,d1           ; base DEF effectively multiplied by 1.25
+                capEnemyStat
                 jsr     SetBaseDEF
+                clr.l   d1
                 jsr     GetBaseAGI
-                mulu.w  #NORMAL_TO_HARD_AGI,d1  ; default: base AGI * 1
-                lsr.w   #2,d1
-                @capEnemyStat
+                mulu.w  #NORMAL_TO_HARD_AGI,d1
+                lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
+                capEnemyStat
                 jsr     SetBaseAGI
-                jsr     GetDifficulty
+                jsr     j_GetDifficulty
                 cmpi.w  #DIFFICULTY_HARD,d1
                 beq.w   @Done
                 
-                ; Super Difficulty
+;SuperDifficulty
+                clr.l   d1
                 jsr     GetBaseATT
-                mulu.w  #HARD_TO_SUPER_ATT,d1   ; default: base ATT * 1.25
-                lsr.w   #2,d1
-                @capEnemyStat
+                mulu.w  #HARD_TO_SUPER_ATK,d1
+                lsr.l   #2,d1           ; base ATT effectively multiplied by 1.25
+                capEnemyStat
                 jsr     SetBaseATT
+                clr.l   d1
                 jsr     GetBaseDEF
-                mulu.w  #HARD_TO_SUPER_DEF,d1   ; default: base DEF * 1
-                lsr.w   #2,d1
-                @capEnemyStat
+                mulu.w  #HARD_TO_SUPER_DEF,d1
+                lsr.l   #2,d1           ; base DEF effectively multiplied by 1.25
+                capEnemyStat
                 jsr     SetBaseDEF
+                clr.l   d1
                 jsr     GetBaseAGI
-                mulu.w  #HARD_TO_SUPER_AGI,d1   ; default: base AGI * 1
-                lsr.w   #2,d1
-                @capEnemyStat
+                mulu.w  #HARD_TO_SUPER_AGI,d1
+                lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
+                capEnemyStat
                 jsr     SetBaseAGI
-                jsr     GetDifficulty
-                cmpi.w  #DIFFICULTY_SUPER,d1
-                beq.s   @Done
-
-                ; Ouch Difficulty
-                jsr     GetBaseATT
-                mulu.w  #SUPER_TO_OUCH_ATT,d1   ; default: base ATT * 1
-                lsr.w   #2,d1
-                @capEnemyStat
-                jsr     SetBaseATT
-                jsr     GetBaseDEF
-                mulu.w  #SUPER_TO_OUCH_DEF,d1   ; default: base DEF * 1
-                lsr.w   #2,d1
-                @capEnemyStat
-                jsr     SetBaseDEF
-                jsr     GetBaseAGI
-                mulu.w  #SUPER_TO_OUCH_AGI,d1   ; default: base AGI * 1.5
-                lsr.w   #2,d1
-                @capEnemyStat
-                jsr     SetBaseAGI
-@Done:          move.l  (sp)+,d1
-                rts
-            else
-                move.l  d1,-(sp)
                 jsr     j_GetDifficulty
+                cmpi.w  #DIFFICULTY_SUPER,d1
+                beq.w   @Done
+
+;OuchDifficulty
+                clr.l   d1
+                jsr     GetBaseATT
+                mulu.w  #SUPER_TO_OUCH_ATK,d1
+                lsr.l   #2,d1           ; base ATT effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseATT
+                clr.l   d1
+                jsr     GetBaseDEF
+                mulu.w  #SUPER_TO_OUCH_DEF,d1
+                lsr.l   #2,d1           ; base DEF effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseDEF
+                clr.l   d1
+                jsr     GetBaseAGI
+                mulu.w  #SUPER_TO_OUCH_AGI,d1
+                lsr.l   #2,d1           ; base AGI effectively multiplied by 1.25
+                capEnemyStat
+                jsr     SetBaseAGI
+            else
                 cmpi.w  #DIFFICULTY_SUPER,d1 ; pointless comparison
                 beq.s   @Continue
                 beq.w   @Done
 @Continue:
                 
                 clr.l   d1
-                jsr     j_GetBaseAtt
+                jsr     j_GetBaseATT
                 mulu.w  #5,d1
                 lsr.l   #2,d1           ; base ATT effectively multiplied by 1.25
-                jsr     j_SetBaseAtt
+                jsr     j_SetBaseATT
                 jsr     j_GetDifficulty
                 cmpi.w  #DIFFICULTY_SUPER,d1
                 beq.s   @SuperDifficulty
@@ -513,36 +509,34 @@ AdjustEnemyBaseAttForDifficulty:
 @SuperDifficulty:
                 
                 clr.l   d1
-                jsr     j_GetBaseAtt
+                jsr     j_GetBaseATT
                 mulu.w  #5,d1
                 lsr.l   #2,d1           ; if SUPER difficulty, multiply base ATT by 1.25 a second time
-                jsr     j_SetBaseAtt
+                jsr     j_SetBaseATT
+            endif
 @Done:
                 
                 move.l  (sp)+,d1
                 rts
-            endif
 
-    ; End of function AdjustEnemyBaseAttForDifficulty
+    ; End of function AlterEnemyStats
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get coordinates for AI special move order d0.w -> d1.w, d2.w
+; coords of anchor point used in AI byte D0 -> D1, D2
 
 
-GetAiSpecialMoveOrderCoordinates:
+GetEnemyAiTargetPosition:
                 
                 movem.l d0/a0,-(sp)
                 btst    #6,d0
-                bne.s   @GetAiPointCoordinates
-                
-                ; Get position of combatant to follow
-                jsr     j_GetCombatantY
+                bne.s   loc_1B1612
+                jsr     j_GetYPos
                 move.w  d1,d2
-                jsr     j_GetCombatantX
-                bra.s   @Done
-@GetAiPointCoordinates:
+                jsr     j_GetXPos
+                bra.s   loc_1B162A
+loc_1B1612:
                 
                 moveq   #BATTLESPRITESET_SUBSECTION_AI_POINTS,d1
                 bsr.w   GetBattleSpritesetSubsection
@@ -553,12 +547,12 @@ GetAiSpecialMoveOrderCoordinates:
                 clr.w   d2
                 move.b  (a0),d1
                 move.b  1(a0),d2
-@Done:
+loc_1B162A:
                 
                 movem.l (sp)+,d0/a0
                 rts
 
-    ; End of function GetAiSpecialMoveOrderCoordinates
+    ; End of function GetEnemyAiTargetPosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -613,10 +607,10 @@ GetBattleSpritesetSubsection:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get starting X, Y of combatant d0.b -> d1.w, d2.w
+; Get starting X and Y of combatant D0 -> D1, D2
 
 
-GetCombatantStartingPosition:
+GetCombatantStartingPositions:
                 
                 movem.l d0/d3-a6,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,d0
@@ -659,7 +653,7 @@ GetCombatantStartingPosition:
                 movem.l (sp)+,d0/d3-a6
                 rts
 
-    ; End of function GetCombatantStartingPosition
+    ; End of function GetCombatantStartingPositions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -682,7 +676,7 @@ sub_1B16FE:
                 move.w  #COMBATANT_ENEMIES_START,d0
                 tst.w   d1
                 bne.s   loc_1B1724
-                move.w  #-1,d0
+                move.w  #$FFFF,d0
                 bra.w   loc_1B177A
 loc_1B1724:
                 
@@ -700,11 +694,11 @@ loc_1B1724:
                 bne.s   loc_1B176A
                 cmpi.w  #$F,d2
                 bne.s   loc_1B176A
-                jsr     j_GetMaxHp
+                jsr     j_GetMaxHP
                 tst.w   d1
                 bne.s   loc_1B176A
                 jsr     j_GetAiActivationFlag
-                bsr.w   ResetEnemyStatsForRespawn
+                bsr.w   UpdateEnemyStatsForRespawn
                 bra.w   loc_1B177A
 loc_1B176A:
                 
@@ -722,10 +716,10 @@ loc_1B177A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Is current battle upgradable? Return d1.w = -1 if true.
+; Check if current battle can be upgraded (0x0000=no, 0xffff=yes) -> D1
 
 
-IsBattleUpgradable:
+DoesBattleUpgrade:
                 
                 movem.l d0/d2-a6,-(sp)
                 clr.w   d1              ; clear d1 for "false"
@@ -747,7 +741,7 @@ IsBattleUpgradable:
                 move.b  (a0)+,d0        ; put next byte in d0
                 cmp.b   d7,d0
                 bne.s   @Next           ; while d0 not battle index
-                move.w  #-1,d1          ; else, battle index is in the list, put -1 in d1.w, for "true"
+                move.w  #$FFFF,d1       ; else, battle index is in the list, put FFFF ind d1, for "true"
                 bra.w   @Done
 @Next:
                 
@@ -757,7 +751,7 @@ IsBattleUpgradable:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function IsBattleUpgradable
+    ; End of function DoesBattleUpgrade
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -799,10 +793,10 @@ UpgradeBattle:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Should random battle enemies be upgraded? Return d1.w = 1 if so.
+; check if battle should be upgraded based on index in RAM:f712 and if normal battle was done (0=no, 1=yes) -> D1
 
 
-DetermineBattleUpgrade:
+ShouldBattleUpgrade:
                 
                 movem.l d0/d2-a6,-(sp)
                 loadSavedDataAddress CURRENT_BATTLE, a0
@@ -814,33 +808,33 @@ DetermineBattleUpgrade:
                 subi.w  #1,d2
                 adda.w  #1,a1
                 clr.w   d3
-@FindBattle_Loop:
+loc_1B181C:
                 
                 clr.w   d1
                 move.b  (a1,d3.w),d1
                 cmp.b   d1,d7
-                bne.s   @Next
+                bne.s   loc_1B183E
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag
-                bne.s   @AllowUpgrade
+                bne.s   loc_1B1836
                 clr.w   d1
-                bra.s   @Goto_Done
-@AllowUpgrade:
+                bra.s   loc_1B183A
+loc_1B1836:
                 
                 move.w  #1,d1
-@Goto_Done:
+loc_1B183A:
                 
-                bra.w   @Done
-@Next:
+                bra.w   loc_1B1846
+loc_1B183E:
                 
                 addi.w  #1,d3
-                dbf     d2,@FindBattle_Loop
-@Done:
+                dbf     d2,loc_1B181C
+loc_1B1846:
                 
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function DetermineBattleUpgrade
+    ; End of function ShouldBattleUpgrade
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -848,18 +842,18 @@ DetermineBattleUpgrade:
 ; Upgrade enemy index d1.w -> d1.w
 
 
-UpgradeRandomBattleEnemies:
+UpgradeEnemyIndex:
                 
                 movem.l d0/d2-a6,-(sp)
                 move.w  d1,d5           ; D5 = original enemy index backup
-                bsr.w   IsBattleUpgradable
+                bsr.w   DoesBattleUpgrade
                 tst.w   d1
                 bne.s   @DetermineUpgrade
                 move.w  d5,d1
                 bra.w   @Done
 @DetermineUpgrade:
                 
-                bsr.s   DetermineBattleUpgrade
+                bsr.s   ShouldBattleUpgrade
                 tst.w   d1
                 bne.s   @DoUpgrade
                 move.w  d5,d1
@@ -1084,12 +1078,14 @@ UpgradeRandomBattleEnemies:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function UpgradeRandomBattleEnemies
+    ; End of function UpgradeEnemyIndex
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Has Jaro joined the Force? Return d1.w = 1 if true.
+; Check if Jaro has joined the Force
+; 
+;       Out: D1 = 0 if false, 1 if true
 
 
 HasJaroJoinedTheForce:

@@ -14,7 +14,7 @@ RunMapSetupInitFunction:
                 bra.w   loc_47514
 loc_4750E:
                 
-                movea.l MAPSETUP_OFFSET_INIT_FUNCTION(a0),a0
+                movea.l $14(a0),a0
                 jsr     (a0)
 loc_47514:
                 
@@ -33,7 +33,7 @@ RunMapSetupZoneEvent:
                 bsr.w   GetCurrentMapSetup
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_47576
-                movea.l MAPSETUP_OFFSET_ZONE_EVENTS(a0),a0
+                movea.l 8(a0),a0
                 clr.w   d7
 loc_47530:
                 
@@ -63,7 +63,7 @@ loc_47566:
 loc_4756A:
                 
                 jsr     (a0)
-                jsr     j_RemovePortraitWindow
+                jsr     j_HidePortraitWindow
                 clsTxt
 loc_47576:
                 
@@ -94,7 +94,7 @@ RunMapSetupItemEvent:
                 bsr.w   GetCurrentMapSetup
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_4760A
-                movea.l MAPSETUP_OFFSET_SECTION_5(a0),a0
+                movea.l $10(a0),a0
                 clr.w   d7
 loc_475AA:
                 
@@ -134,7 +134,7 @@ loc_475FA:
 loc_475FE:
                 
                 jsr     (a0)
-                jsr     j_RemovePortraitWindow
+                jsr     j_HidePortraitWindow
                 clsTxt
 loc_4760A:
                 
@@ -160,7 +160,7 @@ RunMapSetupEntityEvent:
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_476D6
                 movem.w d1-d2,-(sp)
-                movea.l MAPSETUP_OFFSET_ENTITY_EVENTS(a0),a0
+                movea.l 4(a0),a0
                 clr.w   d7
 loc_47638:
                 
@@ -226,7 +226,7 @@ loc_476A8:
                 jsr     (UpdateEntityProperties).w
 loc_476C4:
                 
-                jsr     j_RemovePortraitWindow
+                jsr     j_HidePortraitWindow
                 clsTxt
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
@@ -264,7 +264,7 @@ LoadAndDisplayCurrentPortrait:
                 blt.s   loc_476FC
                 clr.w   d1
                 clr.w   d2
-                jsr     j_CreatePortraitWindow
+                jsr     j_InitPortraitWindow
 loc_476FC:
                 
                 movem.w (sp)+,d0-d2
@@ -283,7 +283,7 @@ RunMapSetupAreaDescription:
                 clr.w   d7
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_4771A
-                movea.l MAPSETUP_OFFSET_AREA_DESCRIPTIONS(a0),a0
+                movea.l $C(a0),a0
                 jsr     (a0)
 loc_4771A:
                 
@@ -334,7 +334,7 @@ loc_4774C:
                 jsr     (DisplayText).w 
 loc_4776E:
                 
-                jsr     j_RemovePortraitWindow
+                jsr     j_HidePortraitWindow
                 clsTxt
                 moveq   #-1,d7
                 rts
@@ -362,9 +362,9 @@ GetMapSetupEntityList:
                 
                 bsr.w   GetCurrentMapSetup
                 cmpi.w  #$FFFF,(a0)
-                beq.s   @Return
+                beq.s   return_4779C
                 movea.l (a0),a0
-@Return:
+return_4779C:
                 
                 rts
 
@@ -490,13 +490,9 @@ sub_47832:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = battle index
-
 
 CheckRandomBattle:
                 
-            if (STANDARD_BUILD&NO_RANDOM_BATTLES=1)
-            else
                 movem.l d1/d6-d7,-(sp)
                 move.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 add.w   d0,d1
@@ -514,7 +510,11 @@ loc_4787A:
                 
                 moveq   #8,d6
                 jsr     (GenerateRandomNumber).w
+            if (STANDARD_BUILD&NO_RANDOM_BATTLES=1)
+                tst.w   d1
+            else
                 tst.w   d7
+            endif
                 bne.s   loc_47888
                 moveq   #$FFFFFFFF,d1
                 bra.s   loc_47896
@@ -540,7 +540,6 @@ loc_47896:
 loc_478C0:
                 
                 movem.l (sp)+,d1/d6-d7
-            endif
                 rts
 
     ; End of function CheckRandomBattle

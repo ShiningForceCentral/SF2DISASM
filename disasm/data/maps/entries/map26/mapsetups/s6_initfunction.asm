@@ -17,7 +17,7 @@ byte_59DF2:
                 
                 chkFlg  780             ; Set after the man tries to lift the giant ring in Floor World
                 beq.s   return_59E02
-                move.w  #129,d0
+                move.w  #$81,d0 
                 jsr     MoveEntityOutOfMap
 return_59E02:
                 

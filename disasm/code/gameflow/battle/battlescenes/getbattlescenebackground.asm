@@ -15,7 +15,7 @@ GetBattlesceneBackground:
                 beq.s   @CheckCustomBackground
                 cmpi.w  #COMBATANT_ENEMIES_START,d0
                 bcs.s   @CheckCustomBackground
-                jsr     j_GetEnemy
+                jsr     j_GetEnemyIndex
                 cmpi.w  #ENEMY_ZEON,d1  ; HARDCODED : if enemy is Zeon, get his own background
                 bne.s   @CheckCustomBackground
                 moveq   #BATTLEBACKGROUND_VERSUS_ZEON,d1

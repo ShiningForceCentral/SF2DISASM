@@ -60,9 +60,9 @@ cs_5FF06:       textCursor 3335
 
 csub_5FF56:
                 
-                move.w  #ITEM_FORCE_SWORD,d0
+                move.w  #$43,d0 
                 moveq   #1,d1
-                jmp     ReceiveMandatoryItem
+                jmp     GetMandatoryItem
 
     ; End of function csub_5FF56
 

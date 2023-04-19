@@ -9,7 +9,7 @@ ms_map68_ZoneEvents:
 
 Map68_DefaultZoneEvent:
                 
-                move.w  #BATTLE_OUTSIDE_ELVEN_VILLAGE,d0
+                move.w  #$13,d0
                 jsr     CheckRandomBattle
                 rts
 

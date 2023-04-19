@@ -1,112 +1,111 @@
 
 ; ASM FILE data\battles\global\battleneutralentities.asm :
 ; 0x448C4..0x4497A : Battle entities which are not force members or enemies
-tbl_BattleNeutralEntities:
-                dc.w BATTLE_INSIDE_ANCIENT_TOWER ; [Battle][X][Y][Facing][Sprite][ActScript]
+BattleNeutralEntities:
+                dc.w 1                  ; [Battle][X][Y][Facing][Sprite][ActScript]
                 dc.b 7
                 dc.b 4
-                dc.b DOWN
-                dc.b MAPSPRITE_MIST_DEMON
+                dc.b 3
+                dc.b $72
                 dc.l eas_Standing
                 dc.b 7                  ; Then Sir Astral [X][Y][Facing][Sprite][ActScript]
                 dc.b 6
-                dc.b UP
-                dc.b MAPSPRITE_ASTRAL
+                dc.b 1
+                dc.b $D1
                 dc.l eas_Standing
                 dc.w $FFFF              ; FFFF to say "end of definition for this battle"
-                dc.w BATTLE_VERSUS_DARK_SMOKES ; Non-enemy entity definition for battle 7
-                dc.b 13
-                dc.b 21
-                dc.b DOWN
-                dc.b MAPSPRITE_ASTRAL
-                dc.l eas_LyingLeft
-                dc.b 13
-                dc.b 17
+                dc.w 7                  ; Non-enemy entity definition for battle 7
+                dc.b $D
+                dc.b $15
                 dc.b 3
-                dc.b MAPSPRITE_GALAM_EVIL
+                dc.b $D1
                 dc.l eas_LyingLeft
-                dc.b 12
-                dc.b 15
-                dc.b DOWN
-                dc.b MAPSPRITE_ELIS
+                dc.b $D
+                dc.b $11
+                dc.b 3
+                dc.b $A4
+                dc.l eas_LyingLeft
+                dc.b $C
+                dc.b $F
+                dc.b 3
+                dc.b $CC
                 dc.l eas_Standing
-                dc.b 15
-                dc.b 35
-                dc.b UP
-                dc.b MAPSPRITE_MINISTER
+                dc.b $F
+                dc.b $23
+                dc.b 1
+                dc.b $CD
                 dc.l eas_Standing
-                dc.b 11
-                dc.b 35
-                dc.b UP
-                dc.b MAPSPRITE_GRANSEAL_KING
+                dc.b $B
+                dc.b $23
+                dc.b 1
+                dc.b $CB
                 dc.l eas_Standing
                 dc.w $FFFF
-                dc.w BATTLE_NORTH_CLIFF
-                dc.b 13
+                dc.w 8
+                dc.b $D
                 dc.b 2
-                dc.b DOWN
-                dc.b MAPSPRITE_WORKER
+                dc.b 3
+                dc.b $CA
                 dc.l eas_LyingLeft
                 dc.w $FFFF
-                dc.w BATTLE_POLCA_VILLAGE
-                dc.b 16
-                dc.b 13
-                dc.b DOWN
-                dc.b MAPSPRITE_LUKE_BASE
+                dc.w $D
+                dc.b $10
+                dc.b $D
+                dc.b 3
+                dc.b $18
                 dc.l eas_LyingLeft
                 dc.w $FFFF
-                dc.w BATTLE_VERSUS_TAROS
-                dc.b 12
+                dc.w $12
+                dc.b $C
                 dc.b 5
-                dc.b LEFT
-                dc.b MAPSPRITE_CARAVAN
+                dc.b 2
+                dc.b $3E
                 dc.l eas_Motionless
                 dc.w $FFFF
-                dc.w BATTLE_HARPIES_POND
+                dc.w $14
                 dc.b 6
                 dc.b 6
-                dc.b DOWN
-                dc.b MAPSPRITE_ELRIC_BASE
+                dc.b 3
+                dc.b $1E
                 dc.l eas_WhirlsInWater
                 dc.w $FFFF
-                dc.w BATTLE_CHESSBOARD
+                dc.w $16
                 dc.b 6
                 dc.b 2
-                dc.b DOWN
-                dc.b MAPSPRITE_DESKTOP_KING
+                dc.b 3
+                dc.b $BC
                 dc.l eas_Standing
                 dc.b 5
                 dc.b 3
-                dc.b DOWN
-                dc.b MAPSPRITE_MAID
+                dc.b 3
+                dc.b $D0
                 dc.l eas_Standing
                 dc.w $FFFF
-                dc.w BATTLE_OUTSIDE_KETTO
-                dc.b 18
-                dc.b 14
-                dc.b DOWN
-                dc.b MAPSPRITE_HIGINS_PROMO
+                dc.w $1A
+                dc.b $12
+                dc.b $E
+                dc.b 3
+                dc.b $30
                 dc.l eas_LyingLeft
                 dc.w $FFFF
-                dc.w BATTLE_PANGOAT_VALLEY_BRIDGE
-                dc.b 12
-                dc.b 24
-                dc.b UP
-                dc.b MAPSPRITE_POSE3
+                dc.w $1C
+                dc.b $C
+                dc.b $18
+                dc.b 1
+                dc.b $B0
                 dc.l eas_Motionless
                 dc.w $FFFF
-                dc.w BATTLE_VERSUS_GALAM
-                dc.b 13
-                dc.b 15
-                dc.b DOWN
-                dc.b MAPSPRITE_ELIS
+                dc.w $2A
+                dc.b $D
+                dc.b $F
+                dc.b 3
+                dc.b $CC
                 dc.l eas_LyingLeft
                 dc.w $FFFF
-                dc.w BATTLE_VERSUS_ZEON
-                dc.b 11
-                dc.b 15
-                dc.b DOWN
-                dc.b MAPSPRITE_ELIS
+                dc.w $2B
+                dc.b $B
+                dc.b $F
+                dc.b 3
+                dc.b $CC
                 dc.l eas_LyingLeft
-                dc.w $FFFF
-                dc.w $FFFF
+                dc.l $FFFFFFFF

@@ -57,7 +57,7 @@ j_CaravanActions:
 
 j_LevelUpCutscene:
                 
-                jmp     FieldItem_LevelUp(pc)
+                jmp     LevelUpCutscene(pc)
 
     ; End of function j_LevelUpCutscene
 
@@ -85,11 +85,11 @@ j_LoadUnitCursorTileData:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateUnitCursorSprites:
+sub_20020:
                 
-                jmp     UpdateUnitCursorSprites(pc)
+                jmp     sub_23554(pc)
 
-    ; End of function j_UpdateUnitCursorSprites
+    ; End of function sub_20020
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -14,9 +14,9 @@ ms_map18_flag530_InitFunction:
                 setFlg  920             ; Set after the scene with Zeon plays as you leave the Galam Drawbridge area
 loc_612A8:
                 
-                move.w  #128,d0
+                move.w  #$80,d0 
                 jsr     MoveEntityOutOfMap
-                move.w  #130,d0
+                move.w  #$82,d0 
                 jsr     MoveEntityOutOfMap
                 rts
 

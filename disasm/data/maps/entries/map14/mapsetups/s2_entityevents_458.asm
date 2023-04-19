@@ -10,7 +10,11 @@ ms_map14_flag458_EntityEvents:
 
 Map14_1CA_EntityEvent0:
                 
-                jsr     j_ChurchMenuActions
+            if (STANDARD_BUILD&FIX_SHIP_PRIEST=1)
+                jsr     ChurchMenuActions
+            else
+                jsr     (MapTileset050+$3D6-ms_map14_flag458_EntityEvents)
+            endif
                 rts
 
     ; End of function Map14_1CA_EntityEvent0

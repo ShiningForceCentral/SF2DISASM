@@ -75,11 +75,11 @@ CaravanMenu_Join:
                 ; Pick joiner
                 move.w  #15,d1          ; "Who joins the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitMemberListScreen
                 move.w  d0,member(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_220E8      ; Exit Join action
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   @CheckBattleParty
                 
@@ -107,7 +107,7 @@ CaravanMenu_Join:
                 
                 move.w  #23,d1          ; "Choose a relief.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_220DE      ; Close textbox and restart Join action
                 
@@ -189,7 +189,7 @@ CaravanMenu_Purge:
                 ; Pick a quitter
                 move.w  #16,d1          ; "Who quits the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_22144      ; Exit Purge action
                 
@@ -305,108 +305,109 @@ CaravanDepotSubmenu_Look:
                 chkFlg  70              ; Astral is a follower
                 bne.s   @AstralIsFollower
                 moveq   #PORTRAIT_ROHDE,d0
-                bra.s   @HasSpecialDescription
+                bra.s   @HasSpecialDescription?
 @AstralIsFollower:
                 
                 moveq   #PORTRAIT_ASTRAL,d0
-@HasSpecialDescription:
+@HasSpecialDescription?:
                 
                 moveq   #0,d1
-                jsr     j_CreatePortraitWindow
+                jsr     j_InitPortraitWindow
                 move.w  itemIndex(a6),d1
                 bsr.w   DisplaySpecialCaravanDescription
-                bne.w   @IsUnsellable
+                bne.w   @IsUnsellable?
                 
                 ; Check equipment type
                 move.w  itemIndex(a6),d1
                 jsr     j_GetEquipmentType
                 tst.w   d2
-                bne.s   @IsWeapon
+                bne.s   @IsWeapon?
                 txt     92              ; "It's a tool.{W2}"
-                bra.s   @HasUseSpell
-@IsWeapon:
+                bra.s   @HasUseSpell?
+@IsWeapon?:
                 
                 cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
                 bne.s   byte_221F4      
                 txt     90              ; "It's a weapon.{W2}"
-                bra.s   @HasUseSpell
+                bra.s   @HasUseSpell?
 byte_221F4:
                 
                 txt     91              ; "It's a ring.{W2}"
-@HasUseSpell:
+@HasUseSpell?:
                 
                 move.w  itemIndex(a6),d1
                 jsr     j_GetItemDefAddress
                 cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
                 beq.s   byte_22210      
                 txt     93              ; "It has a special effect when{N}used in battle.{W2}"
-                bra.s   @IsWeaponOrRing
+                bra.s   @IsWeaponOrRing?
 byte_22210:
                 
                 txt     94              ; "It has no effect in battle.{W2}"
-@IsWeaponOrRing:
+@IsWeaponOrRing?:
                 
                 move.w  itemIndex(a6),d1
                 jsr     j_GetEquipmentType
                 tst.w   d2
-                beq.w   @IsUnsellable
+                beq.w   @IsUnsellable?
                 
                 cmpi.w  #ITEM_POWER_RING,d1 ; HARDCODED item indexes with special message
-                beq.w   byte_222A4
+                beq.w   @AnyoneCanEquip      
                 cmpi.w  #ITEM_PROTECT_RING,d1
-                beq.w   byte_222A4
+                beq.w   @AnyoneCanEquip      
                 cmpi.w  #ITEM_QUICK_RING,d1
-                beq.w   byte_222A4
+                beq.w   @AnyoneCanEquip      
                 cmpi.w  #ITEM_RUNNING_RING,d1
-                beq.w   byte_222A4
+                beq.w   @AnyoneCanEquip      
                 move.w  itemIndex(a6),d1
                 move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     96              ; "The {ITEM} is for{N}"
                 jsr     j_UpdateForce
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-                bcs.w   @IsUnsellable
+                bcs.w   @IsUnsellable?
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 
         if (STANDARD_BUILD&FIX_CARAVAN_DESCRIPTIONS=1)
                 clr.w   d3
-@ClearCount:    clr.w   d6
+@ClearCount:
+                clr.w   d6
 @EquippableMessage_Loop:
-                
                 cmpi.w  #4,d6
                 beq.s   @ClearCount
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
-                move.l  d7,-(sp)
+                movem.l d7,-(sp)
                 move.b  (a0)+,d0
-                jsr     IsWeaponOrRingEquippable
+                jsr     IsWeaponOrRingEquippable?
                 movem.l (sp)+,d7
             else
                 move.b  (a0)+,d0
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     IsWeaponOrRingEquippable?
             endif
                 bcc.s   @NextMember
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
-                txt     98              ; "{DICT}{NAME},"
+                txt     $62             ; "{DICT}{NAME}, {W1}"
                 addq.w  #1,d6
                 moveq   #2,d3
                 cmpi.w  #4,d6
                 bne.s   @NextMember
-                txt     99              ; "{N}"
-@NextMember:    dbf     d7,@EquippableMessage_Loop
-
+                txt     $63             ; "{N}"
+@NextMember:
+                
+                dbf     d7,@EquippableMessage_Loop
                 tst.w   d3
         else
                 clr.w   d6
 @EquippableMessage_Loop:
                 
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
-                move.l  d7,-(sp)
+                movem.l d7/a0,-(sp)
                 move.b  (a0)+,d0
-                jsr     IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 movem.l (sp)+,d7
             else
                 move.b  (a0)+,d0
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
             endif
                 bcc.s   @NextMember
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
@@ -426,19 +427,19 @@ byte_22210:
                 
                 tst.w   d6
         endif
-                bne.s   byte_2229C      
+                bne.s   @FinishEquipList      
                 txt     97              ; "nobody so far.{W2}"
-                bra.s   @Goto_IsUnsellable
-byte_2229C:
+                bra.s   @Goto_IsUnsellable?
+@FinishEquipList:
                 
                 txt     100             ; "to equip.{W2}"
-@Goto_IsUnsellable:
+@Goto_IsUnsellable?:
                 
-                bra.w   @IsUnsellable
-byte_222A4:
+                bra.w   @IsUnsellable?
+@AnyoneCanEquip:
                 
                 txt     95              ; "Everybody can equip it.{W2}"
-@IsUnsellable:
+@IsUnsellable?:
                 
                 move.w  itemIndex(a6),d1
                 jsr     j_GetItemDefAddress
@@ -457,8 +458,8 @@ byte_222A4:
 byte_222D4:
                 
                 clsTxt
-                jsr     j_RemovePortraitWindow
-                bra.s   @Goto_Restart
+                jsr     j_HidePortraitWindow
+                bra.s   @Restart
 byte_222E0:
                 
                 txt     4               ; "Did you change your mind?{W2}"
@@ -470,16 +471,16 @@ byte_222E0:
 
 ; START OF FUNCTION CHUNK FOR CaravanDepotSubmenu_Look
 
-@Goto_Restart:
+@Restart:
                 
-                bra.s   @Restart
+                bra.s   loc_222F6
 @StorehouseIsEmpty:
                 
                 move.w  #MESSAGE_CARAVAN_WELL_THE_STOREHOUSE_IS_EMPTY,d1 
                                                         ; "Well, the storehouse is{N}empty.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 rts
-@Restart:
+loc_222F6:
                 
                 bra.w   CaravanDepotSubmenu_Look
 
@@ -503,14 +504,14 @@ CaravanDepotSubmenu_Deposit:
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_2236A      
                 
-                bsr.w   IsItemInSlotEquippedAndCursed
+                bsr.w   IsItemInSlotEquippedAndCursed?
                 bcs.w   @Restart
                 
                 ; Deposit item
@@ -579,7 +580,7 @@ CaravanDepotSubmenu_Derive:
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,targetMember(a6)
                 move.w  d1,targetItemSlot(a6)
                 move.w  d2,targetItemIndex(a6)
@@ -613,7 +614,7 @@ CaravanDepotSubmenu_Derive:
                 
                 move.w  targetMember(a6),d1
                 move.w  targetItemSlot(a6),d1
-                bsr.w   IsItemInSlotEquippedAndCursed
+                bsr.w   IsItemInSlotEquippedAndCursed?
                 bcs.w   @Restart_0
                 
                 move.w  targetMember(a6),d0
@@ -688,7 +689,7 @@ CaravanDepotSubmenu_Drop:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 move.w  itemIndex(a6),d1
-                jsr     IsItemUnsellable
+                jsr     IsItemUnsellable?
                 bcs.w   @Restart_0
                 cmpi.w  #$FFFF,itemIndex(a6)
                 beq.s   byte_2251E      
@@ -804,7 +805,7 @@ CaravanItemSubmenu_Use:
                 bsr.w   PopulateGenericListWithMembersList
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -813,7 +814,7 @@ CaravanItemSubmenu_Use:
                 
                 ; Is item usable?
                 move.w  itemIndex(a6),d1
-                jsr     IsItemUsableOnField
+                jsr     IsItemUsableOnField?
                 tst.w   d2
                 bne.s   @NotUsable
                 
@@ -822,7 +823,7 @@ CaravanItemSubmenu_Use:
                 move.w  #25,d1          ; "Use the {ITEM}{N}on whom?{D1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitMemberListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_225E4      
                 
@@ -890,14 +891,14 @@ CaravanItemSubmenu_Give:
                 bsr.w   PopulateGenericListWithMembersList
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_22760      
                 
-                bsr.w   IsItemInSlotEquippedAndCursed
+                bsr.w   IsItemInSlotEquippedAndCursed?
                 bcs.w   @Restart_0
                 
                 ; Pick a recipient
@@ -906,7 +907,7 @@ CaravanItemSubmenu_Give:
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,targetMember(a6)
                 move.w  d1,targetItemSlot(a6)
                 move.w  d2,targetItemIndex(a6)
@@ -915,7 +916,7 @@ CaravanItemSubmenu_Give:
                 
                 ; Is giving to self?
                 cmp.w   member(a6),d0
-                bne.s   @IsInventoryFull
+                bne.s   @IsInventoryFull?
                 
                 move.w  member(a6),d0
                 move.w  itemSlot(a6),d1
@@ -927,7 +928,7 @@ CaravanItemSubmenu_Give:
                 move.w  #48,d1          ; "{NAME} now has the{N}{ITEM} in hand.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.w   @Goto_Restart
-@IsInventoryFull:
+@IsInventoryFull?:
                 
                 moveq   #0,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
@@ -950,7 +951,7 @@ CaravanItemSubmenu_Give:
                 
                 move.w  targetMember(a6),d1
                 move.w  targetItemSlot(a6),d1
-                bsr.w   IsItemInSlotEquippedAndCursed
+                bsr.w   IsItemInSlotEquippedAndCursed?
                 bcs.w   @Restart_0
                 
                 move.w  targetMember(a6),d0
@@ -1018,7 +1019,7 @@ CaravanItemSubmenu_Equip:
                 bsr.w   PopulateGenericListWithMembersList
                 move.b  #3,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 cmpi.w  #$FFFF,d0
                 bne.s   @Restart
                 txt     4               ; "Did you change your mind?{W2}"
@@ -1060,19 +1061,19 @@ CaravanItemSubmenu_Drop:
                 bsr.w   PopulateGenericListWithMembersList
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMemberListScreen_NewATTandDEF
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 cmpi.w  #$FFFF,member(a6)
                 beq.s   byte_2284E      
                 
-                bsr.w   IsItemInSlotEquippedAndCursed
+                bsr.w   IsItemInSlotEquippedAndCursed?
                 bcs.w   @Restart
                 
                 ; Confirm discard
                 move.w  itemIndex(a6),d1
-                jsr     IsItemUnsellable
+                jsr     IsItemUnsellable?
                 bcs.w   @Restart
                 
                 move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w

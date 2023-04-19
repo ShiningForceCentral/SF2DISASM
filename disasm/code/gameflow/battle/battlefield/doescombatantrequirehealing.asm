@@ -7,20 +7,20 @@
 ; Is combatant d0.w at 2/3 or less of max HP? Return CCR carry-bit clear if true.
 
 
-DoesCombatantRequireHealing:
+DoesCombatantRequireHealing?:
                 
                 movem.l d1-d2,-(sp)
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 move.w  d1,d2
-                jsr     GetMaxHp
+                jsr     GetMaxHP
                 bra.w   @Continue
                 movem.l d1-d2,-(sp)     ; unreachable code
                 move.w  d1,d2
-                jsr     GetMaxHp
+                jsr     GetMaxHP
                 bra.w   @Continue
                 movem.l d1-d2,-(sp)
                 move.w  d1,d2
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
 @Continue:
                 
                 mulu.w  #3,d2
@@ -29,5 +29,5 @@ DoesCombatantRequireHealing:
                 movem.l (sp)+,d1-d2
                 rts
 
-    ; End of function DoesCombatantRequireHealing
+    ; End of function DoesCombatantRequireHealing?
 

@@ -11,15 +11,15 @@ ms_map20_flag501_ZoneEvents:
 Map20_1F5_ZoneEvent0:
                 
                 moveq   #1,d0
-                jsr     j_GetMaxHp
-                jsr     j_SetCurrentHp
-                jsr     j_GetMaxMp
-                jsr     j_SetCurrentMp
+                jsr     j_GetMaxHP
+                jsr     j_SetCurrentHP
+                jsr     j_GetMaxMP
+                jsr     j_SetCurrentMP
                 moveq   #2,d0
-                jsr     j_GetMaxHp
-                jsr     j_SetCurrentHp
-                jsr     j_GetMaxMp
-                jsr     j_SetCurrentMp
+                jsr     j_GetMaxHP
+                jsr     j_SetCurrentHP
+                jsr     j_GetMaxMP
+                jsr     j_SetCurrentMP
                 script  cs_53B66
                 rts
 

@@ -23,7 +23,7 @@ GetAttackRange:
                 bsr.w   GetClass
                 bra.s   @Continue
 @Enemy:         lea     tbl_UnarmedAttackRangesForEnemies(pc), a0
-                bsr.w   GetEnemy
+                bsr.w   GetEnemyIndex
 @Continue:      jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcc.s   @Special
                 

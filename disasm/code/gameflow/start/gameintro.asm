@@ -23,7 +23,7 @@ j_j_DisplaySegaLogo:
     ; End of function j_j_DisplaySegaLogo
 
 
-; START OF FUNCTION CHUNK FOR InitializeGame
+; START OF FUNCTION CHUNK FOR InitGame
 
 GameIntro:
                 
@@ -40,7 +40,7 @@ loc_71EC:
                 bsr.w   EnableInterrupts
                 lea     (PALETTE_1_CURRENT).l,a0
                 lea     (PALETTE_1_BASE).l,a1
-                move.w  #CRAM_SIZE,d7
+                move.w  #$80,d7 
                 bsr.w   CopyBytes       
                 bsr.w   FadeOutToBlack
                 trap    #VINT_FUNCTIONS
@@ -51,7 +51,7 @@ loc_71EC:
                 jsr     (UpdateForegroundVScrollData).w
                 jsr     (UpdateBackgroundVScrollData).w
                 jsr     (WaitForDmaQueueProcessing).w
-                bsr.w   InitializeDisplay
+                bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndInterrupts
                 sndCom  MUSIC_TITLE
                 jsr     TitleScreen
@@ -74,7 +74,7 @@ loc_724E:
                 jsr     (UpdateForegroundVScrollData).w
                 jsr     (UpdateBackgroundVScrollData).w
                 jsr     (WaitForDmaQueueProcessing).w
-                bsr.w   InitializeDisplay
+                bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndInterrupts
                 clr.b   ((byte_FFB198-$1000000)).w
                 move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w 
@@ -97,7 +97,7 @@ loc_729C:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
-                bsr.w   InitializeWindowProperties
+                bsr.w   InitWindowProperties
                 bsr.w   WaitForVInt
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
@@ -186,7 +186,7 @@ loc_73E8:
                 move.w  rjt_WitchChoice(pc,d0.w),d0
                 jmp     rjt_WitchChoice(pc,d0.w)
 
-; END OF FUNCTION CHUNK FOR InitializeGame
+; END OF FUNCTION CHUNK FOR InitGame
 
 rjt_WitchChoice:dc.w WitchNew-rjt_WitchChoice
                 dc.w WitchLoad-rjt_WitchChoice

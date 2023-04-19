@@ -59,13 +59,13 @@ Map31_DescFunc1:
                 jsr     j_YesNoPrompt
                 tst.w   d0
                 bne.s   byte_5D608      
-                move.w  #ITEM_ARM_OF_GOLEM,d0
+                move.w  #$75,d0 
                 moveq   #0,d1
-                jsr     ReceiveMandatoryItem
+                jsr     GetMandatoryItem
                 btst    #0,d0
                 bne.s   byte_5D5FE      
                 setFlg  835             ; Set after picking up the Arm of Golem in Moun
-                move.w  #137,d0
+                move.w  #$89,d0 
                 jsr     MoveEntityOutOfMap
                 bra.s   loc_5D606
 byte_5D5FE:

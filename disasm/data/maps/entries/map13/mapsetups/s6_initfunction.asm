@@ -22,7 +22,7 @@ byte_582FE:
                 
                 chkFlg  718             ; Set after Oddler runs after you as you leave Polca, and tags along
                 beq.s   return_5830E
-                move.w  #140,d0
+                move.w  #$8C,d0 
                 jsr     MoveEntityOutOfMap
 return_5830E:
                 

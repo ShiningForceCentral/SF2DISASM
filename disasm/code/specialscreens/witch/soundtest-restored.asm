@@ -172,7 +172,7 @@ DisplayTrackTitle:
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  d0,-(sp)
-                jsr     (GetWindowEntryAddress).w
+                jsr     (GetWindowInfo).w
                 movea.l (a0),a1
                 jsr     (sub_67E6).w
                 move.w  (sp)+,d0

@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-CreatePortraitWindow:
+InitPortraitWindow:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 bne.w   return_11BE0
@@ -36,7 +36,7 @@ loc_11B9A:
                 lea     PortraitWindowLayout(pc), a0
 loc_11B9E:
                 
-                move.w  #160,d7
+                move.w  #$A0,d7 
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d0
             if (STANDARD_BUILD=0)
@@ -63,15 +63,13 @@ return_11BE0:
                 
                 rts
 
-    ; End of function CreatePortraitWindow
+    ; End of function InitPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Move window offscreen, then clear it from memory.
 
-
-RemovePortraitWindow:
+HidePortraitWindow:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 beq.s   return_11BE0
@@ -83,9 +81,9 @@ RemovePortraitWindow:
                 subq.w  #1,d0
                 move.w  #$2F6,d1
                 tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
-                beq.s   @Continue
+                beq.s   loc_11C08
                 addi.w  #$1500,d1	; adjustment to other side
-@Continue:
+loc_11C08:
                 
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
@@ -98,7 +96,7 @@ RemovePortraitWindow:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function RemovePortraitWindow
+    ; End of function HidePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -190,7 +188,7 @@ loc_11CE6:
 loc_11D1A:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   loc_11D2C
                 clr.w   d0
@@ -240,7 +238,7 @@ loc_11D6C:
                 move.w  member(a6),d0
                 jsr     j_GetAllyMapSprite
                 clr.w   d0
-                moveq   #DOWN,d1
+                moveq   #3,d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
@@ -248,12 +246,12 @@ loc_11D6C:
 loc_11DBC:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   loc_11DDC
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 clr.w   d0
-                moveq   #DOWN,d1
+                moveq   #3,d1
                 moveq   #$FFFFFFFF,d2
                 move.w  #$AB,d3 
                 jsr     (UpdateEntityProperties).w
@@ -330,7 +328,7 @@ loc_11E82:
 loc_11E94:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 bne.s   loc_11EBA
                 clr.w   d0
@@ -492,13 +490,13 @@ LoadTileDataForMemberScreen:
                 lea     WindowBorderTiles(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  #160,d7
+                move.w  #$A0,d7 
                 jsr     (CopyBytes).w   
                 lea     GoldWindowLayout(pc), a0
                 move.w  goldWindowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  #64,d7
+                move.w  #$40,d7 
                 jsr     (CopyBytes).w   
                 adda.w  #$22,a1 
                 jsr     j_GetGold

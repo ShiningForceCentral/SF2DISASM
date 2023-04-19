@@ -24,13 +24,13 @@ CalculateHealTargetPriority:
                 
                 movem.l d0-d5/d7-a6,-(sp)
                 bsr.w   GetAiCommandset 
-                cmpi.w  #AICOMMANDSET_CRITICAL,d1
+                cmpi.w  #AI_CRITICAL,d1
                 bne.s   @CheckLeaderAi
                 move.w  #MOVETYPE_TOTAL,d6
                 bra.w   @Done
 @CheckLeaderAi:
                 
-                cmpi.w  #AICOMMANDSET_LEADER,d1
+                cmpi.w  #AI_LEADER,d1
                 bne.s   @PrioritizeByMoveType
                 move.w  #MOVETYPE_TOTAL,d6
                 bra.w   @Done
@@ -128,16 +128,16 @@ loc_CE90:
 sub_CE96:
                 
                 movem.l d0/d3-a6,-(sp)
-                jsr     GetCombatantY
+                jsr     GetYPos
                 move.w  d1,d2
-                jsr     GetCombatantX
-                bsr.w   PopulateTargetsArrayWithAllCombatants
+                jsr     GetXPos
+                bsr.w   MakeTargetsList_Everybody
                 moveq   #0,d3
                 moveq   #0,d4
                 move.w  d1,d5
                 move.w  d2,d6
                 bsr.w   GetClosestAttackPosition
-                cmpi.w  #-1,d1
+                cmpi.w  #$FFFF,d1
                 bne.w   loc_CECC
                 moveq   #1,d3
                 moveq   #1,d4
@@ -166,7 +166,7 @@ GetHighestUsableSpellLevel:
                 
                 movem.l d0/d2-a6,-(sp)
                 move.w  d1,d2
-                jsr     GetCurrentMp
+                jsr     GetCurrentMP
                 move.w  d1,d3
                 move.w  d2,d1
                 andi.w  #SPELLENTRY_MASK_INDEX,d1

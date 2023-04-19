@@ -193,9 +193,9 @@ AddFollower:
                 movea.l (ENTITY_WALKING_PARAMS).l,a1
                 move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 lea     eas_Follower1(pc), a0
-                move.w  #42,d7
+                move.w  #$2A,d7 
                 jsr     (CopyBytes).w   
-                addi.l  #42,(ENTITY_WALKING_PARAMS).l
+                addi.l  #$2A,(ENTITY_WALKING_PARAMS).l 
                 move.w  d1,$1E(a1)
                 move.w  d2,$20(a1)
                 move.w  d3,$22(a1)
@@ -274,9 +274,9 @@ SetWalkingActscript:
                 movea.l (ENTITY_WALKING_PARAMS).l,a1
                 move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 lea     eas_Walking(pc), a0
-                move.w  #50,d7
+                move.w  #$32,d7 
                 jsr     (CopyBytes).w   
-                addi.l  #50,(ENTITY_WALKING_PARAMS).l
+                addi.l  #$32,(ENTITY_WALKING_PARAMS).l 
                 move.w  d1,$22(a1)
                 move.w  d2,$24(a1)
                 move.w  d3,$26(a1)
@@ -301,9 +301,9 @@ sub_44D0E:
                 movea.l (ENTITY_WALKING_PARAMS).l,a1
                 move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 lea     eas_Walking(pc), a0
-                move.w  #32,d7
+                move.w  #$20,d7 
                 jsr     (CopyBytes).w   
-                addi.l  #32,(ENTITY_WALKING_PARAMS).l
+                addi.l  #$20,(ENTITY_WALKING_PARAMS).l 
                 movea.l (ENTITY_WALKING_PARAMS).l,a1
                 movea.l d5,a2
                 move.l  a1,d5

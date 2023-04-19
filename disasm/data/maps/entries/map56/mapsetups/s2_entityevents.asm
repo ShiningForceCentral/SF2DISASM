@@ -24,11 +24,17 @@ byte_614C2:
                 txt     3612            ; "Now, what can I do for you?{W1}"
                 clsTxt
                 jmp     j_ChurchMenuActions
+
+    ; End of function Map56_EntityEvent0
+
+; =============== S U B R O U T I N E =======================================
+
 Map56_EntityEvent1:
                 
             if (STANDARD_BUILD&CARAVAN_IN_TOWER=1)
-                jmp     CaravanMenuActions
+                jsr     CaravanMenuActions
             endif
+            
 Map56_DefaultEntityEvent:
                 
                 rts

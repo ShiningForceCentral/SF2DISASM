@@ -55,7 +55,7 @@ WriteMemberListText:
                 
                 move.l  a1,-(sp)        ; -> push current character's name offset
                 move.w  d0,d1
-                jsr     j_IsInBattleParty
+                jsr     j_IsInBattleParty?
                 beq.s   @DetermineNameColor
                 move.w  #VDPTILE_SWORD_ICON|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-2(a1) 
                                                         ; display sword icon to denote battle party members
@@ -63,7 +63,7 @@ WriteMemberListText:
                 
                 move.l  a1,-(sp)
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 move.w  d1,d2
                 jsr     j_GetCombatantName
                 moveq   #-58,d1
@@ -103,7 +103,7 @@ WriteMemberListText:
                 
                 ; Write EXP
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentExp
+                jsr     j_GetCurrentEXP
                 moveq   #EXP_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -115,7 +115,7 @@ WriteMemberListText:
                 
                 ; Write HP
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -124,7 +124,7 @@ WriteMemberListText:
                 
                 ; Write MP
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentMp
+                jsr     j_GetCurrentMP
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -133,7 +133,7 @@ WriteMemberListText:
                 
                 ; Write ATT
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentAtt
+                jsr     j_GetCurrentATT
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -142,7 +142,7 @@ WriteMemberListText:
                 
                 ; Write DEF
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentDef
+                jsr     j_GetCurrentDEF
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -151,7 +151,7 @@ WriteMemberListText:
                 
                 ; Write AGI
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentAgi
+                jsr     j_GetCurrentAGI
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -160,7 +160,7 @@ WriteMemberListText:
                 
                 ; Write MOV
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentMov
+                jsr     j_GetCurrentMOV
                 moveq   #MOV_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -173,7 +173,7 @@ WriteMemberListText:
                 
                 move.w  currentMember(a6),d0
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
-                jsr     j_IsWeaponOrRingEquippable
+                jsr     j_IsWeaponOrRingEquippable?
                 bcs.s   @WriteEntry_NewATTandDEF
                 
                 lea     aUnequippable(pc), a0
@@ -184,10 +184,10 @@ WriteMemberListText:
                 bra.s   @NextEntry      
 @WriteEntry_NewATTandDEF:
                 
-                jsr     j_GetEquipNewAttAndDef
+                jsr     j_GetEquipNewATTandDEF
                 addq.l  #2,a1
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentAtt
+                jsr     j_GetCurrentATT
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -199,7 +199,7 @@ WriteMemberListText:
                 bsr.w   WriteStatValue  
                 addq.l  #WINDOW_MEMBERLIST_OFFSET_ENTRY_NEWDEFENSE,a1
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentDef
+                jsr     j_GetCurrentDEF
                 moveq   #STATS_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0

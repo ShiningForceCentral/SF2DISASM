@@ -16,7 +16,7 @@ byte_52460:
                 
                 chkFlg  663             ; Set after Galam and Lemon leave with their army
                 beq.s   byte_52476      
-                move.w  #131,d0
+                move.w  #$83,d0 
                 jsr     MoveEntityOutOfMap
                 script  cs_5247C
 byte_52476:

@@ -26,7 +26,7 @@ byte_513A8:
                 
                 chkFlg  603             ; Set after the messenger scene
                 beq.s   return_513B8
-                move.w  #142,d0
+                move.w  #$8E,d0
                 jsr     MoveEntityOutOfMap
 return_513B8:
                 

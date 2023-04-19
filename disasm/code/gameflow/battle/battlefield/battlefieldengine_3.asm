@@ -81,14 +81,14 @@ CheckMuddled2:
 GenerateTargetRangeLists:
                 
                 movem.l d0-a6,-(sp)
-                move.w  #-1,d3          ; set occupied flags
-                bsr.w   UpdateBattleTerrainOccupiedByOpponents
+                move.w  #$FFFF,d3
+                bsr.w   UpdateTargetsList
                 move.l  d0,-(sp)
                 bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   MakeRangeLists
                 move.l  (sp)+,d0
-                move.w  #0,d3           ; clear occupied flags
-                bsr.w   UpdateBattleTerrainOccupiedByOpponents
+                move.w  #0,d3
+                bsr.w   UpdateTargetsList
                 movem.l (sp)+,d0-a6
                 rts
 
@@ -101,11 +101,11 @@ GenerateTargetRangeLists:
 CreateAttackRangeGrid:
                 
                 movem.l d0-a6,-(sp)
-                bsr.w   ClearTargetsArray
-                bsr.w   ClearTotalMovecostsAndMovableGridArrays
+                bsr.w   ClearTargetGrid 
+                bsr.w   ClearMovableGrid
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 eori.w  #$FFFF,d0
-                bsr.w   PopulateTargetsArrayWithOpponents
+                bsr.w   MakeTargetsList
                 eori.w  #$FFFF,d0
                 bsr.w   GetAttackRange  
                 move.w  d3,d2
@@ -121,7 +121,7 @@ CreateAttackRangeGrid:
 @Loop:
                 
                 movea.l -(a1),a0
-                bsr.w   ApplyRelativeCoordinatesListToGrid
+                bsr.w   ApplyRelativeCoordListToGrids
                 subq.w  #1,d2
                 bne.s   @Loop
                 
@@ -140,8 +140,8 @@ CreateAttackRangeGrid:
 CreateItemRangeGrid:
                 
                 movem.l d0-a6,-(sp)
-                bsr.w   ClearTargetsArray
-                bsr.w   ClearTotalMovecostsAndMovableGridArrays
+                bsr.w   ClearTargetGrid 
+                bsr.w   ClearMovableGrid
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 jsr     GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
@@ -167,19 +167,19 @@ CreateItemRangeGrid:
 CreateSpellRangeGrid:
                 
                 movem.l d0-a6,-(sp)
-                bsr.w   ClearTargetsArray
-                bsr.w   ClearTotalMovecostsAndMovableGridArrays
+                bsr.w   ClearTargetGrid 
+                bsr.w   ClearMovableGrid
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 jsr     FindSpellDefAddress
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   loc_C4AA
                 btst    #SPELLPROPS_BIT_TARGETING,SPELLDEF_OFFSET_PROPS(a0)
                 beq.s   loc_C4A4
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   MakeTargetsList_Allies
                 bra.s   loc_C4A8
 loc_C4A4:
                 
-                bsr.w   PopulateTargetsArrayWithEnemies
+                bsr.w   MakeTargetsList_Enemies
 loc_C4A8:
                 
                 bra.s   loc_C4BC
@@ -187,11 +187,11 @@ loc_C4AA:
                 
                 btst    #SPELLPROPS_BIT_TARGETING,SPELLDEF_OFFSET_PROPS(a0)
                 beq.s   loc_C4B8
-                bsr.w   PopulateTargetsArrayWithEnemies
+                bsr.w   MakeTargetsList_Enemies
                 bra.s   loc_C4BC
 loc_C4B8:
                 
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   MakeTargetsList_Allies
 loc_C4BC:
                 
                 moveq   #-1,d5
@@ -208,7 +208,7 @@ loc_C4BC:
 loc_C4D8:
                 
                 movea.l -(a1),a0
-                bsr.w   ApplyRelativeCoordinatesListToGrid
+                bsr.w   ApplyRelativeCoordListToGrids
                 subq.w  #1,d2
                 bne.s   loc_C4D8
                 movem.l (sp)+,d0-a6
@@ -223,14 +223,14 @@ loc_C4D8:
 sub_C4E8:
                 
                 movem.l d0-a6,-(sp)
-                bsr.w   ClearTargetsArray
-                bsr.w   ClearTotalMovecostsAndMovableGridArrays
+                bsr.w   ClearTargetGrid 
+                bsr.w   ClearMovableGrid
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                bsr.w   PopulateTargetsArrayWithOpponents
-                moveq   #-1,d5
+                bsr.w   MakeTargetsList
+                moveq   #$FFFFFFFF,d5
                 lea     SpellRange1(pc), a0
                 nop
-                bsr.w   ApplyRelativeCoordinatesListToGrid
+                bsr.w   ApplyRelativeCoordListToGrids
                 movem.l (sp)+,d0-a6
                 rts
 
@@ -239,68 +239,72 @@ sub_C4E8:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Apply relative coordinates list to movable grid and add any targets to target list.
+; Apply coord list at A0 and add any targets to target list
 ; 
-;   In: a0 = address of relative coordinates list
-;       d0.b = battle entity index
-;       d5.b = ignore obstructed terrain if = 0
+;       In: A0 = address of relative coord list
+;           D0 = current entity index
+;           D1 = starting X coord
+;           D2 = starting Y coord
 
 
-ApplyRelativeCoordinatesListToGrid:
+ApplyRelativeCoordListToGrids:
                 
                 movem.l d0-a6,-(sp)
-                jsr     GetCombatantX
-                cmpi.w  #-1,d1
-                beq.w   @Done
+                jsr     GetXPos
+                cmpi.w  #$FFFF,d1
+                beq.w   loc_C58A
                 move.w  d1,d3
-                jsr     GetCombatantY
-                move.w  d1,d4           ; d3.w,d4.w = X,Y
+                jsr     GetYPos
+                move.w  d1,d4
                 clr.w   d7
                 move.b  (a0)+,d7
                 subq.w  #1,d7
-@Loop:
+loc_C532:
                 
                 move.w  d4,d2
                 add.b   1(a0),d2
-                cmpi.w  #MAP_SIZE_MAXHEIGHT,d2
-                bcc.w   @NextCoordinates
+                cmpi.w  #$30,d2 
+loc_C53C:
+                
+                bcc.w   loc_C584
                 move.w  d3,d1
                 add.b   (a0),d1
-                cmpi.w  #MAP_SIZE_MAXWIDTH,d1
-                bcc.w   @NextCoordinates
+                cmpi.w  #$30,d1 
+                bcc.w   loc_C584
                 tst.b   d5
-                beq.s   @Continue
+                beq.s   loc_C55E
                 bsr.w   GetTerrain      
-                cmpi.b  #TERRAIN_OBSTRUCTED,d0
-                beq.s   @Continue
-                bsr.w   SetMovableSpace 
-@Continue:
-                
-                bsr.w   GetCombatantOccupyingSpace
                 cmpi.b  #$FF,d0
-                beq.w   @NextCoordinates
-                jsr     GetCurrentHp
+                beq.s   loc_C55E
+                bsr.w   SetMovableAtCoord
+loc_C55E:
+                
+                bsr.w   GetTargetAtCoordOffset
+                cmpi.b  #$FF,d0
+                beq.w   loc_C584
+                jsr     GetCurrentHP
                 tst.w   d1
-                beq.w   @NextCoordinates
+                beq.w   loc_C584
                 lea     ((TARGETS_LIST-$1000000)).w,a1
                 adda.w  ((TARGETS_LIST_LENGTH-$1000000)).w,a1
                 move.b  d0,(a1)
                 addq.w  #1,((TARGETS_LIST_LENGTH-$1000000)).w
-@NextCoordinates:
+loc_C584:
                 
                 addq.l  #2,a0
-                dbf     d7,@Loop
-@Done:
+                dbf     d7,loc_C532
+loc_C58A:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function ApplyRelativeCoordinatesListToGrid
+    ; End of function ApplyRelativeCoordListToGrids
 
 pt_SpellRanges: dc.l SpellRange0
                 dc.l SpellRange1
                 dc.l SpellRange2
                 dc.l SpellRange3
+                
             if (STANDARD_BUILD&EXPANDED_RANGES=1)
                 dc.l SpellRange4
                 dc.l SpellRange5
@@ -309,143 +313,141 @@ pt_SpellRanges: dc.l SpellRange0
             endif
             
 SpellRange0:    dc.b 1
-                dc.b  0,  0
+                dc.b 0, 0
                 
 SpellRange1:    dc.b 4
-                dc.b  0,  1
-                dc.b  1,  0
-                dc.b  0, -1
-                dc.b -1,  0
+                dc.b 0, 1
+                dc.b 1, 0
+                dc.b 0, -1
+                dc.b -1, 0
                 
 SpellRange2:    dc.b 8
-                dc.b  0, -2
+                dc.b 0, -2
                 dc.b -1, -1
-                dc.b -2,  0
-                dc.b -1,  1
-                dc.b  0,  2
-                dc.b  1,  1
-                dc.b  2,  0
-                dc.b  1, -1
+                dc.b -2, 0
+                dc.b -1, 1
+                dc.b 0, 2
+                dc.b 1, 1
+                dc.b 2, 0
+                dc.b 1, -1
                 
 SpellRange3:    dc.b 12
-                dc.b  0,  3
-                dc.b  1,  2
-                dc.b  2,  1
-                dc.b  3,  0
-                dc.b  2, -1
-                dc.b  1, -2
-                dc.b  0, -3
+                dc.b 0, 3
+                dc.b 1, 2
+                dc.b 2, 1
+                dc.b 3, 0
+                dc.b 2, -1
+                dc.b 1, -2
+                dc.b 0, -3
                 dc.b -1, -2
                 dc.b -2, -1
-                dc.b -3,  0
-                dc.b -2,  1
-                dc.b -1,  2
+                dc.b -3, 0
+                dc.b -2, 1
+                dc.b -1, 2
                 
             if (STANDARD_BUILD&EXPANDED_RANGES=1)
-SpellRange4:    dc.b 16
-                dc.b  0, -4
-                dc.b -1, -3
-                dc.b -2, -2
-                dc.b -3, -1
-                dc.b -4,  0
-                dc.b -3,  1
-                dc.b -2,  2
-                dc.b -1,  3
-                dc.b  0,  4
-                dc.b  1,  3
-                dc.b  2,  2
-                dc.b  3,  1
-                dc.b  4,  0
-                dc.b  3, -1
-                dc.b  2, -2
-                dc.b  1, -3
-                
-SpellRange5:    dc.b 20
-                dc.b  0, -5
-                dc.b -1, -4
-                dc.b -2, -3
-                dc.b -3, -2
-                dc.b -4, -1
-                dc.b -5,  0
-                dc.b -4,  1
-                dc.b -3,  2
-                dc.b -2,  3
-                dc.b -1,  4
-                dc.b  0,  5
-                dc.b  1,  4
-                dc.b  2,  3
-                dc.b  3,  2
-                dc.b  4,  1
-                dc.b  5,  0
-                dc.b  4, -1
-                dc.b  3, -2
-                dc.b  2, -3
-                dc.b  1, -4
-                
-SpellRange6:    dc.b 24
-                dc.b  0, -6
-                dc.b -1, -5
-                dc.b -2, -4
-                dc.b -3, -3
-                dc.b -4, -2
-                dc.b -5, -1
-                dc.b -6,  0
-                dc.b -5,  1
-                dc.b -4,  2
-                dc.b -3,  3
-                dc.b -2,  4
-                dc.b -1,  5
-                dc.b  0,  6
-                dc.b  1,  5
-                dc.b  2,  4
-                dc.b  3,  3
-                dc.b  4,  2
-                dc.b  5,  1
-                dc.b  6,  0
-                dc.b  5, -1
-                dc.b  4, -2
-                dc.b  3, -3
-                dc.b  2, -4
-                dc.b  1, -5
-                
-SpellRange7:    dc.b 28
-                dc.b  0, -7
-                dc.b -1, -6
-                dc.b -2, -5
-                dc.b -3, -4
-                dc.b -4, -3
-                dc.b -5, -2
-                dc.b -6, -1
-                dc.b -7,  0
-                dc.b -6,  1
-                dc.b -5,  2
-                dc.b -4,  3
-                dc.b -3,  4
-                dc.b -2,  5
-                dc.b -1,  6
-                dc.b  0,  7
-                dc.b  1,  6
-                dc.b  2,  5
-                dc.b  3,  4
-                dc.b  4,  3
-                dc.b  5,  2
-                dc.b  6,  1
-                dc.b  7,  0
-                dc.b  6, -1
-                dc.b  5, -2
-                dc.b  4, -3
-                dc.b  3, -4
-                dc.b  2, -5
-                dc.b  1, -6
+SpellRange4:    dc.b $10
+                dc.b   0, $FC
+                dc.b $FF, $FD
+                dc.b $FE, $FE
+                dc.b $FD, $FF
+                dc.b $FC,   0
+                dc.b $FD,   1
+                dc.b $FE,   2
+                dc.b $FF,   3
+                dc.b   0,   4
+                dc.b   1,   3
+                dc.b   2,   2
+                dc.b   3,   1
+                dc.b   4,   0
+                dc.b   3, $FF
+                dc.b   2, $FE
+                dc.b   1, $FD
+
+SpellRange5:    dc.b $14
+                dc.b   0, $FB
+                dc.b $FF, $FC
+                dc.b $FE, $FD
+                dc.b $FD, $FE
+                dc.b $FC, $FF
+                dc.b $FB,   0
+                dc.b $FC,   1
+                dc.b $FD,   2
+                dc.b $FE,   3
+                dc.b $FF,   4
+                dc.b   0,   5
+                dc.b   1,   4
+                dc.b   2,   3
+                dc.b   3,   2
+                dc.b   4,   1
+                dc.b   5,   0
+                dc.b   4, $FF
+                dc.b   3, $FE
+                dc.b   2, $FD
+                dc.b   1, $FC
+
+SpellRange6:    dc.b $18
+                dc.b   0, $FA
+                dc.b $FF, $FB
+                dc.b $FE, $FC
+                dc.b $FD, $FD
+                dc.b $FC, $FE
+                dc.b $FB, $FF
+                dc.b $FA,   0
+                dc.b $FB,   1
+                dc.b $FC,   2
+                dc.b $FD,   3
+                dc.b $FE,   4
+                dc.b $FF,   5
+                dc.b   0,   6
+                dc.b   1,   5
+                dc.b   2,   4
+                dc.b   3,   3
+                dc.b   4,   2
+                dc.b   5,   1
+                dc.b   6,   0
+                dc.b   5, $FF
+                dc.b   4, $FE
+                dc.b   3, $FD
+                dc.b   2, $FC
+                dc.b   1, $FB
+
+SpellRange7:    dc.b $1C
+                dc.b   0, $F9
+                dc.b $FF, $FA
+                dc.b $FE, $FB
+                dc.b $FD, $FC
+                dc.b $FC, $FD
+                dc.b $FB, $FE
+                dc.b $FA, $FF
+                dc.b $F9,   0
+                dc.b $FA,   1
+                dc.b $FB,   2
+                dc.b $FC,   3
+                dc.b $FD,   4
+                dc.b $FE,   5
+                dc.b $FF,   6
+                dc.b   0,   7
+                dc.b   1,   6
+                dc.b   2,   5
+                dc.b   3,   4
+                dc.b   4,   3
+                dc.b   5,   2
+                dc.b   6,   1
+                dc.b   7,   0
+                dc.b   6, $FF
+                dc.b   5, $FE
+                dc.b   4, $FD
+                dc.b   3, $FC
+                dc.b   2, $FB
+                dc.b   1, $FA
             endif
+            
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = actor combatant index
-;     d1.w = item index
 
-
-PopulateTargetableGridFromUsedItem:
+CreateTargetGridFromUsedItem:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
@@ -453,18 +455,16 @@ PopulateTargetableGridFromUsedItem:
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 cmpi.b  #$FF,d1
                 beq.s   @Done
-                bsr.w   PopulateTargetableGridFromSpell
+                bsr.w   CreateTargetGridFromSpell
 @Done:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function PopulateTargetableGridFromUsedItem
+    ; End of function CreateTargetGridFromUsedItem
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; unused
 
 
 sub_C5FA:
@@ -474,9 +474,9 @@ sub_C5FA:
                 jsr     GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 cmpi.b  #$FF,d1
-                beq.s   @Done
-                bsr.w   PopulateTargetableGrid
-@Done:
+                beq.s   loc_C618
+                bsr.w   CreateTargetGrid
+loc_C618:
                 
                 movem.l (sp)+,d0-a6
                 rts
@@ -486,29 +486,26 @@ sub_C5FA:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = actor combatant index
-;     d1.w = spell index
 
-
-PopulateTargetableGridFromSpell:
+CreateTargetGridFromSpell:
                 
                 cmpi.b  #SPELL_B_ROCK,d1
-                bne.s   @Continue
-                bsr.w   PopulateTargetsArrayWithAllCombatants
-                bra.s   PopulateTargetableGrid
-@Continue:
+                bne.s   loc_C62A
+                bsr.w   MakeTargetsList_Everybody
+                bra.s   CreateTargetGrid
+loc_C62A:
                 
-                bsr.w   PopulateTargetsArrayWithOpponents
+                bsr.w   MakeTargetsList
 
-    ; End of function PopulateTargetableGridFromSpell
+    ; End of function CreateTargetGridFromSpell
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d1.b = spell entry
+; In: D1 = spell entry
 
 
-PopulateTargetableGrid:
+CreateTargetGrid:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
@@ -533,7 +530,7 @@ PopulateTargetableGrid:
 @PopulateTargetCoordinates_Loop:
                 
                 movea.l -(a1),a0
-                bsr.w   ApplyRelativeCoordinatesListToGrid
+                bsr.w   ApplyRelativeCoordListToGrids
                 subq.w  #1,d2
                 bne.s   @PopulateTargetCoordinates_Loop
                 bra.w   @Done
@@ -541,123 +538,122 @@ PopulateTargetableGrid:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @TargetEnemies
-                bsr.w   PopulateTargetsListWithAllies
+                bsr.w   MakeTargetAllies
                 bra.s   @Done
 @TargetEnemies:
                 
-                bsr.w   PopulateTargetsListWithEnemies
+                bsr.w   MakeTargetEnemies
 @Done:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function PopulateTargetableGrid
+    ; End of function CreateTargetGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-PopulateTargetsListWithAllies:
+MakeTargetAllies:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  #COMBATANT_ALLIES_START,d0
-                bra.s   @Continue
-@Loop:
+                bra.s   loc_C6A4
+loc_C6A2:
                 
                 addq.w  #1,d0
-@Continue:
+loc_C6A4:
                 
                 cmpi.w  #COMBATANT_ALLIES_END,d0
-                bgt.s   @Done
-                jsr     GetCombatantX
-                cmpi.b  #-1,d1
-                beq.w   @Next
-                jsr     GetCurrentHp
+                bgt.s   loc_C6CE
+                jsr     GetXPos
+                cmpi.b  #$FF,d1
+                beq.w   loc_C6CC
+                jsr     GetCurrentHP
                 tst.w   d1
-                beq.w   @Next
+                beq.w   loc_C6CC
                 move.b  d0,(a0)
                 addq.l  #1,a0
                 addq.w  #1,((TARGETS_LIST_LENGTH-$1000000)).w
-@Next:
+loc_C6CC:
                 
-                bra.s   @Loop
-@Done:
+                bra.s   loc_C6A2
+loc_C6CE:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function PopulateTargetsListWithAllies
+    ; End of function MakeTargetAllies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-PopulateTargetsListWithEnemies:
+MakeTargetEnemies:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  #COMBATANT_ENEMIES_START,d0
-                bra.s   @Continue
-@Loop:
+                bra.s   loc_C6EA
+loc_C6E8:
                 
                 addq.w  #1,d0
-@Continue:
+loc_C6EA:
                 
                 cmpi.w  #COMBATANT_ENEMIES_END,d0
-                bgt.s   @Done
-                jsr     GetCombatantX
-                cmpi.b  #-1,d1
-                beq.w   @Next
-                jsr     GetCurrentHp
+                bgt.s   loc_C714
+                jsr     GetXPos
+                cmpi.b  #$FF,d1
+                beq.w   loc_C712
+                jsr     GetCurrentHP
                 tst.w   d1
-                beq.w   @Next
+                beq.w   loc_C712
                 move.b  d0,(a0)
                 addq.l  #1,a0
                 addq.w  #1,((TARGETS_LIST_LENGTH-$1000000)).w
-@Next:
+loc_C712:
                 
-                bra.s   @Loop
-@Done:
+                bra.s   loc_C6E8
+loc_C714:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function PopulateTargetsListWithEnemies
+    ; End of function MakeTargetEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d1.b,d2.b = current X,Y
-;     d3.b,d4.b = max,min range
+; In: D1 = X pos, D2 = Y pos, D3 = max range, D4 = min range
 ; 
-; Out: d1.b,d2.b = destination X,Y (-1 if no position is available)
+; Out: D1 = chosen X pos, return $FF if no attack position is available
+;      D2 = chosen Y pos
 
-movecost = -5
-destinationY = -4
-destinationX = -3
+var_5 = -5
+var_4 = -4
+var_3 = -3
 currentY = -2
 currentX = -1
 
 GetClosestAttackPosition:
                 
-                module
                 movem.l d0/d3-a6,-(sp)
                 link    a6,#-6
                 move.b  d1,currentX(a6)
                 move.b  d2,currentY(a6)
-                move.b  #$FF,destinationX(a6)
-                move.b  #$FF,destinationY(a6)
-                move.b  #$FF,movecost(a6)
+                move.b  #$FF,var_3(a6)
+                move.b  #$FF,var_4(a6)
+                move.b  #$FF,var_5(a6)
                 cmpi.b  #MAP_SIZE_MAXWIDTH,d1
                 bcc.w   loc_C7E2
                 cmpi.b  #MAP_SIZE_MAXHEIGHT,d2
                 bcc.w   loc_C7E2
                 move.b  d3,d6
-                neg.b   d6              ; d6.b = negative max range
-@Start:
+                neg.b   d6              ; D6 is now negative max range
+loc_C750:
                 
                 move.b  d3,d5
                 move.b  d6,d0
@@ -681,22 +677,22 @@ loc_C760:
                 add.b   d6,d2
                 cmpi.b  #MAP_SIZE_MAXHEIGHT,d2
                 bcc.w   loc_C7BE
-                bsr.w   GetMoveCostToDestination
-                tst.w   d0
-                beq.w   @Done           ; already in range, so end because it can't get cheaper
+                bsr.w   GetDestinationMoveCost
+                tst.w   d0              ; already in range, so end because it can't get cheaper
+                beq.w   loc_C7EA
                 btst    #$F,d0
                 bne.w   loc_C7BE
-                cmp.b   movecost(a6),d0
+                cmp.b   var_5(a6),d0
                 bcc.w   loc_C7BE
                 move.b  d0,d7
                 andi.w  #$FF,d1
                 andi.w  #$FF,d2
-                bsr.w   GetCombatantOccupyingSpace
+                bsr.w   GetTargetAtCoordOffset
                 cmpi.b  #$FF,d0
                 bne.w   loc_C7BE        ; already someone there, so it can't be chosen
-                move.b  d7,movecost(a6)
-                move.b  d1,destinationX(a6)
-                move.b  d2,destinationY(a6)
+                move.b  d7,var_5(a6)
+                move.b  d1,var_3(a6)
+                move.b  d2,var_4(a6)
 loc_C7BE:
                 
                 addq.b  #1,d5
@@ -718,12 +714,12 @@ loc_C7D0:
                 cmp.b   d3,d6
                 beq.w   loc_C7E2
                 addq.b  #1,d6
-                bra.w   @Start
+                bra.w   loc_C750
 loc_C7E2:
                 
-                move.b  destinationX(a6),d1
-                move.b  destinationY(a6),d2
-@Done:
+                move.b  var_3(a6),d1
+                move.b  var_4(a6),d2
+loc_C7EA:
                 
                 unlk    a6
                 movem.l (sp)+,d0/d3-a6
@@ -731,71 +727,62 @@ loc_C7E2:
 
     ; End of function GetClosestAttackPosition
 
-                modend
 
 ; =============== S U B R O U T I N E =======================================
 
-; Populate array of targets with alignment opposite to d0.w
-; (Note: enemy bit is flipped prior to calling this routine.)
 
-
-PopulateTargetsArrayWithOpponents:
+MakeTargetsList:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.w   PopulateTargetsArrayWithEnemies
+                bne.w   MakeTargetsList_Enemies ; generate list of targets: opposite alignment of D0
 
-    ; End of function PopulateTargetsArrayWithOpponents
+    ; End of function MakeTargetsList
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Clear target grid, then add allies
 
-PopulateTargetsArrayWithAllies:
+
+MakeTargetsList_Allies:
                 
                 movem.l d0-a0,-(sp)
-                bsr.w   ClearTargetsArray
+                bsr.w   ClearTargetGrid 
                 moveq   #COMBATANT_ALLIES_START,d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
-                bra.w   PopulateTargetsArray
+                bra.w   loc_C828
 
-    ; End of function PopulateTargetsArrayWithAllies
+    ; End of function MakeTargetsList_Allies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-PopulateTargetsArrayWithEnemies:
+MakeTargetsList_Enemies:
                 
                 movem.l d0-a0,-(sp)
-                bsr.w   ClearTargetsArray
+                bsr.w   ClearTargetGrid 
                 move.w  #COMBATANT_ENEMIES_START,d0
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
-                bra.w   PopulateTargetsArray
+                bra.w   loc_C828
 
-    ; End of function PopulateTargetsArrayWithEnemies
+    ; End of function MakeTargetsList_Enemies
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Populate an array containing all combatants present on the battlefield.
+; Populate a list of all combatants on the battlefield
 
 
-PopulateTargetsArrayWithAllCombatants:
+MakeTargetsList_Everybody:
                 
                 movem.l d0-a0,-(sp)
-                bsr.s   PopulateTargetsArrayWithAllies
+                bsr.s   MakeTargetsList_Allies
                 move.w  #COMBATANT_ENEMIES_START,d0
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
-
-    ; End of function PopulateTargetsArrayWithAllCombatants
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-PopulateTargetsArray:
+loc_C828:
                 
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 tst.w   d1
                 beq.w   loc_C86E
                 jsr     GetAiActivationFlag
@@ -804,157 +791,139 @@ PopulateTargetsArray:
                 bra.w   loc_C86E
 loc_C844:
                 
-                jsr     GetCombatantY
+                jsr     GetYPos
                 cmpi.w  #MAP_SIZE_MAXHEIGHT,d1
                 bcc.w   loc_C86E
                 move.w  d1,d2
-                jsr     GetCombatantX
+                jsr     GetXPos
                 cmpi.w  #MAP_SIZE_MAXWIDTH,d1
                 bcc.w   loc_C86E
-                
-                ; d1.w,d2.w = X,Y
                 lea     (FF5600_LOADING_SPACE).l,a0
-                bsr.w   ConvertCoordinatesToAddress
+                bsr.w   ConvertCoordToOffset
                 move.b  d0,(a0)
 loc_C86E:
                 
                 addq.b  #1,d0
-                dbf     d7,PopulateTargetsArray
-                
+                dbf     d7,loc_C828
                 movem.l (sp)+,d0-a0
                 rts
 
-    ; End of function PopulateTargetsArray
+    ; End of function MakeTargetsList_Everybody
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateBattleTerrainOccupiedByOpponents:
+UpdateTargetsList:
                 
-                module
                 btst    #COMBATANT_BIT_ENEMY,d0
-                beq.w   UpdateBattleTerrainOccupiedByEnemies
+                beq.w   UpdateTargetsList_Enemies
 
-    ; End of function UpdateBattleTerrainOccupiedByOpponents
+    ; End of function UpdateTargetsList
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateBattleTerrainOccupiedByAllies:
+UpdateTargetsList_Allies:
                 
                 movem.l d0-a0,-(sp)
                 moveq   #COMBATANT_ALLIES_START,d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
-                bra.w   UpdateBattleTerrainOccupiedFlag
+                bra.w   UpdateTargetsList_Loop
 
-    ; End of function UpdateBattleTerrainOccupiedByAllies
+    ; End of function UpdateTargetsList_Allies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateBattleTerrainOccupiedByEnemies:
+UpdateTargetsList_Enemies:
                 
                 movem.l d0-a0,-(sp)
                 move.w  #COMBATANT_ENEMIES_START,d0
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
-
-    ; End of function UpdateBattleTerrainOccupiedByEnemies
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: d3.w = 0 to clear flag, set otherwise
-
-
-UpdateBattleTerrainOccupiedFlag:
+UpdateTargetsList_Loop:
                 
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 tst.w   d1
-                beq.w   @Next
-                jsr     GetCombatantY
+                beq.w   loc_C8F4
+                jsr     GetYPos
                 move.w  d1,d2
                 cmpi.w  #MAP_SIZE_MAXHEIGHT,d2
-                bcc.w   @Next
-                jsr     GetCombatantX
+                bcc.w   loc_C8F4
+                jsr     GetXPos
                 cmpi.w  #MAP_SIZE_MAXWIDTH,d1
-                bcc.w   @Next
-                lea     (BATTLE_TERRAIN_ARRAY).l,a0
-                bsr.w   ConvertCoordinatesToAddress
+                bcc.w   loc_C8F4
+                lea     (BATTLE_TERRAIN).l,a0
+                bsr.w   ConvertCoordToOffset
                 move.b  (a0),d4
-                cmpi.b  #TERRAIN_OBSTRUCTED,d4
+                cmpi.b  #$FF,d4
                 bne.s   loc_C8D8
-                bra.w   @Next           ; move on if space is obstructed
+                bra.w   loc_C8F4
 loc_C8D8:
                 
                 btst    #6,d4
                 beq.s   loc_C8E6
                 tst.w   d3
                 bne.s   loc_C8E6
-                bra.w   @Next
+                bra.w   loc_C8F4
 loc_C8E6:
                 
                 tst.w   d3
                 bne.s   loc_C8F0
                 bclr    #7,(a0)
-                bra.s   @Next
+                bra.s   loc_C8F4
 loc_C8F0:
                 
                 bset    #7,(a0)
-@Next:
+loc_C8F4:
                 
                 addq.b  #1,d0
-                dbf     d7,UpdateBattleTerrainOccupiedFlag
-                
+                dbf     d7,UpdateTargetsList_Loop
                 movem.l (sp)+,d0-a0
                 rts
 
-    ; End of function UpdateBattleTerrainOccupiedFlag
+    ; End of function UpdateTargetsList_Enemies
 
-                modend
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d3.w = clear bit 7 if = 0, set otherwise
 
-
-UpdateMovableGridArray:
+sub_C900:
                 
                 movem.l d0-a0,-(sp)
                 move.w  #COMBATANT_ALLIES_START,d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
-@Loop:
+loc_C90A:
                 
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 tst.w   d1
-                beq.w   @Next
-                jsr     GetCombatantY
+                beq.w   loc_C94C
+                jsr     GetYPos
                 move.w  d1,d2
                 cmpi.w  #MAP_SIZE_MAXHEIGHT,d2
-                bcc.w   @Next
-                jsr     GetCombatantX
+                bcc.w   loc_C94C
+                jsr     GetXPos
                 cmpi.w  #MAP_SIZE_MAXWIDTH,d1
-                bcc.w   @Next
+                bcc.w   loc_C94C
                 lea     (FF4D00_LOADING_SPACE).l,a0
-                bsr.w   ConvertCoordinatesToAddress
+                bsr.w   ConvertCoordToOffset
                 tst.w   d3
-                bne.s   @Set
+                bne.s   loc_C948
                 bclr    #7,(a0)
-                bra.s   @Next
-@Set:
+                bra.s   loc_C94C
+loc_C948:
                 
                 bset    #7,(a0)
-@Next:
+loc_C94C:
                 
                 addq.b  #1,d0
-                dbf     d7,@Loop
-                
+                dbf     d7,loc_C90A
                 movem.l (sp)+,d0-a0
                 rts
 
-    ; End of function UpdateMovableGridArray
+    ; End of function sub_C900
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -973,14 +942,14 @@ PrioritizeReachableTargets:
                 movem.l d1-a2,-(sp)
                 move.l  d0,-(sp)
                 moveq   #$FFFFFFFF,d3   ; If d3<0 then clear bit 7 when calling UpdateTargetsList
-                bsr.w   UpdateBattleTerrainOccupiedByOpponents ; List all living opponents (enemies or allies, depending upon the character index)
+                bsr.w   UpdateTargetsList ; List all living opponents (enemies or allies, depending upon the character index)
                                         ;  and clear bit 7 of the map data.
                 bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   MakeRangeLists
                 
                 ; Check Item Use
                 moveq   #0,d3
-                bsr.w   UpdateBattleTerrainOccupiedByOpponents
+                bsr.w   UpdateTargetsList
                 clr.w   ((TARGETS_REACHABLE_BY_ITEM_NUMBER-$1000000)).w
                 clr.w   ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w
                 clr.w   ((FF8804_LOADING_SPACE-$1000000)).w ; # targets reachable by attack
@@ -989,7 +958,7 @@ PrioritizeReachableTargets:
                 bsr.w   GetNextUsableAttackItem
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.w   @CheckSpellCast
-                bsr.w   PopulateTargetsArrayWithAllCombatants
+                bsr.w   MakeTargetsList_Everybody
                 bsr.w   GetTargetsReachableByItem
                 move.w  ((TARGETS_REACHABLE_BY_ITEM_NUMBER-$1000000)).w,d7
                 subq.w  #1,d7
@@ -1002,11 +971,11 @@ PrioritizeReachableTargets:
                 bsr.w   CheckMuddled2   
                 tst.b   d1
                 bne.s   @MuddledAllyItemUser
-                bsr.w   PopulateTargetsArrayWithEnemies
+                bsr.w   MakeTargetsList_Enemies
                 bra.s   @Goto_PopulateItemPrioritiesList
 @MuddledAllyItemUser:
                 
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   MakeTargetsList_Allies
 @Goto_PopulateItemPrioritiesList:
                 
                 bra.s   @PopulateItemPrioritiesList
@@ -1015,11 +984,11 @@ PrioritizeReachableTargets:
                 bsr.w   CheckMuddled2   
                 tst.b   d1
                 bne.s   @MuddledEnemyItemUser
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   MakeTargetsList_Allies
                 bra.s   @PopulateItemPrioritiesList
 @MuddledEnemyItemUser:
                 
-                bsr.w   PopulateTargetsArrayWithEnemies
+                bsr.w   MakeTargetsList_Enemies
                 
                 ; At this point (FF5600_LOADING_SPACE) has the list of all opposing combatants that could be selected as a target, if they were in range
 @PopulateItemPrioritiesList:
@@ -1045,7 +1014,7 @@ PrioritizeReachableTargets:
                 bsr.w   GetNextUsableAttackSpell
                 cmpi.w  #SPELL_NOTHING,d1
                 beq.w   @CheckAttack    ; if no attack spell, skip this step
-                bsr.w   PopulateTargetsArrayWithAllCombatants
+                bsr.w   MakeTargetsList_Everybody
                 bsr.w   GetTargetsReachableBySpell
                 move.w  ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,d7
                 subq.w  #1,d7
@@ -1058,11 +1027,11 @@ PrioritizeReachableTargets:
                 bsr.w   CheckMuddled2   
                 tst.b   d1
                 bne.s   @MuddledAllySpellCaster
-                bsr.w   PopulateTargetsArrayWithEnemies
+                bsr.w   MakeTargetsList_Enemies
                 bra.s   @Goto_PopulateSpellPrioritiesList
 @MuddledAllySpellCaster:
                 
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   MakeTargetsList_Allies
 @Goto_PopulateSpellPrioritiesList:
                 
                 bra.s   @PopulateSpellPrioritiesList
@@ -1071,11 +1040,11 @@ PrioritizeReachableTargets:
                 bsr.w   CheckMuddled2   
                 tst.b   d1
                 bne.s   @MuddledEnemySpellCaster
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   MakeTargetsList_Allies
                 bra.s   @PopulateSpellPrioritiesList
 @MuddledEnemySpellCaster:
                 
-                bsr.w   PopulateTargetsArrayWithEnemies
+                bsr.w   MakeTargetsList_Enemies
                 
                 ; At this point (FF5600_LOADING_SPACE) has the list of all opposing combatants that could be selected as a target, if they were in range
 @PopulateSpellPrioritiesList:
@@ -1095,7 +1064,7 @@ PrioritizeReachableTargets:
                 dbf     d7,@PopulateSpellPrioritiesList_Loop
 @CheckAttack:
                 
-                bsr.w   PopulateTargetsArrayWithAllCombatants
+                bsr.w   MakeTargetsList_Everybody
                 bsr.w   GetTargetsReachableByAttack
                 move.w  ((FF8804_LOADING_SPACE-$1000000)).w,d7 ; # targets reachable
                 subq.w  #1,d7
@@ -1108,11 +1077,11 @@ PrioritizeReachableTargets:
                 bsr.w   CheckMuddled2   
                 tst.b   d1
                 bne.s   @MuddledAllyAttacker
-                bsr.w   PopulateTargetsArrayWithEnemies
+                bsr.w   MakeTargetsList_Enemies
                 bra.s   @Goto_PopulateAttackPrioritiesList
 @MuddledAllyAttacker:
                 
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   MakeTargetsList_Allies
 @Goto_PopulateAttackPrioritiesList:
                 
                 bra.s   @PopulateAttackPrioritiesList
@@ -1121,11 +1090,11 @@ PrioritizeReachableTargets:
                 bsr.w   CheckMuddled2   
                 tst.b   d1
                 bne.s   @MuddledEnemyAttacker
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   MakeTargetsList_Allies
                 bra.s   @PopulateAttackPrioritiesList
 @MuddledEnemyAttacker:
                 
-                bsr.w   PopulateTargetsArrayWithEnemies
+                bsr.w   MakeTargetsList_Enemies
 @PopulateAttackPrioritiesList:
                 
                 move.l  (sp)+,d1        ; unnecessary
@@ -1141,7 +1110,7 @@ PrioritizeReachableTargets:
                 move.b  d6,(a2,d7.w)    ; d6 = target priority (higher is better)
                 dbf     d7,@PopulateAttackPrioritiesList_Loop
                 
-                bsr.w   PopulateTargetsArrayWithAllCombatants
+                bsr.w   MakeTargetsList_Everybody
 @Done:
                 
                 movem.l (sp)+,d1-a2
@@ -1177,7 +1146,7 @@ CalculateAttackTargetPriority:
                 
                 move.b  d0,d3           ; d3 = caster
                 move.b  d2,d0           ; d0 = target
-                bsr.w   PopulateTargetableGrid ; insert the list of all who would be affected by the spell in TARGETS_LIST
+                bsr.w   CreateTargetGrid ; insert the list of all who would be affected by the spell in TARGETS_LIST
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 beq.s   @Done
                 move.b  d3,d0           ; d0 = caster
@@ -1229,7 +1198,7 @@ AdjustAttackTargetPriorityForDifficulty:
                 lsl.w   #2,d2
                 movea.l pt_TargetPriorityScripts(pc,d2.w),a0
                 move.b  d3,d0
-                bsr.w   CalculatePotentialRemainingHp
+                bsr.w   CalculatePotentialRemainingHP
                 clr.w   d7
                 jsr     (a0)            ; Execute target priority adjustment script
                 movem.l (sp)+,d0-d5/d7-a6
@@ -1308,7 +1277,7 @@ loc_CBEA:
                 
                 move.b  (a1)+,d0
                 bsr.w   GetSpellPowerAdjustedForResistance
-                bsr.w   CalculatePotentialRemainingHp
+                bsr.w   CalculatePotentialRemainingHP
                 move.l  d7,-(sp)
                 move.w  #1,d7
                 jsr     (a0)            ; Execute target priority adjustment script
@@ -1334,10 +1303,10 @@ CalculatePotentialDamage:
                 
                 movem.l d0-d5/d7-a6,-(sp)
                 move.b  d1,d2
-                jsr     GetCurrentAtt
+                jsr     GetCurrentATT
                 move.b  d2,d0
                 move.w  d1,d2
-                jsr     GetCurrentDef
+                jsr     GetCurrentDEF
                 sub.w   d1,d2
                 bhi.s   @Continue
                 moveq   #1,d2           ; min damage = 1
@@ -1406,10 +1375,10 @@ GetSpellPowerAdjustedForResistance:
 ; Out: D1 = target's potential remaining HP
 
 
-CalculatePotentialRemainingHp:
+CalculatePotentialRemainingHP:
                 
                 movem.l d0/d2-a6,-(sp)
-                jsr     GetCurrentHp
+                jsr     GetCurrentHP
                 sub.w   d6,d1
                 bcc.s   @Continue
                 moveq   #0,d1           ; min remaining HP = 0
@@ -1418,7 +1387,7 @@ CalculatePotentialRemainingHp:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function CalculatePotentialRemainingHp
+    ; End of function CalculatePotentialRemainingHP
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1512,7 +1481,7 @@ TargetPriorityScript3:
                 
                 movem.l d0-d5/d7-a6,-(sp)
                 moveq   #3,d6
-                jsr     j_GenerateRandomNumberUnderD6
+                jsr     j_RandomUnderD6
                 tst.b   d7
                 beq.w   loc_CD3C        ; If d7=0, then check for death of target
                 move.b  d5,d0           ; Otherwise, prioritize closer targets

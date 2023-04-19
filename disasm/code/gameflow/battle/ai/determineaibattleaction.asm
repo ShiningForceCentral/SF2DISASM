@@ -134,7 +134,7 @@ loc_EEC2:
 loc_EEC6:
                 
                 move.b  #2,d6
-                jsr     j_GenerateRandomNumberUnderD6
+                jsr     j_RandomUnderD6
                 cmpi.b  #1,d7
                 bne.s   loc_EEDC
                 bra.w   loc_EF14

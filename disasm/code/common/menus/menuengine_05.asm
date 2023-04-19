@@ -46,7 +46,7 @@ sub_1288E:
                 move.b  #HALF_OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #%101,((FADING_PALETTE_BITFIELD-$1000000)).w
+                move.b  #5,((FADING_PALETTE_BITMAP-$1000000)).w
                 bsr.w   sub_129E8
 loc_1291E:
                 
@@ -90,17 +90,17 @@ loc_1291E:
                 move.b  #FLICKER_ONCE,((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #%101,((FADING_PALETTE_BITFIELD-$1000000)).w
+                move.b  #5,((FADING_PALETTE_BITMAP-$1000000)).w
                 jsr     (WaitForWindowMovementEnd).w
                 move.w  d0,var_2(a6)
                 jsr     (ClearWindowAndUpdateEndPointer).w
-                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
+                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 move.l  var_32(a6),((ENTITY_SPECIAL_SPRITE_DATA-$1000000)).w
                 move.l  var_32(a6),((ENTITY_SPECIAL_SPRITE_DESTINATION-$1000000)).w
                 lea     (PALETTE_1_BASE).l,a0
                 lea     (PALETTE_1_CURRENT).l,a1
-                move.w  #CRAM_SIZE,d7
+                move.w  #CRAM_SIZE,d7 
                 jsr     (CopyBytes).w   
                 jsr     (ApplyVIntCramDma).w
                 unlk    a6
@@ -571,22 +571,22 @@ loc_12E3A:
                 move.b  #5,((FADING_COUNTER_MAX-$1000000)).w
                 lea     (PALETTE_3_CURRENT).l,a0
                 lea     (PALETTE_4_CURRENT).l,a1
-                move.w  #CRAM_PALETTE_SIZE,d7
+                move.w  #CRAM_PALETTE_SIZE,d7 
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_3_CURRENT).l,a0
                 lea     (PALETTE_3_BASE).l,a1
-                move.w  #CRAM_PALETTE_SIZE,d7
+                move.w  #CRAM_PALETTE_SIZE,d7 
                 jsr     (CopyBytes).w   
                 conditionalLongAddr movea.l, p_plt_EndKiss, a0
                 lea     (PALETTE_2_CURRENT).l,a1
-                move.w  #CRAM_PALETTE_SIZE,d7
+                move.w  #CRAM_PALETTE_SIZE,d7 
                 jsr     (CopyBytes).w   
                 lea     $80(a1),a1
                 jsr     (CopyBytes).w   
                 jsr     (ApplyVIntCramDma).w
                 lea     (PALETTE_1_CURRENT).l,a0
                 lea     (PALETTE_1_BASE).l,a1
-                move.w  #CRAM_SIZE,d7
+                move.w  #CRAM_SIZE,d7 
                 jsr     (CopyBytes).w   
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.w  #$5FF,d0
@@ -611,7 +611,7 @@ loc_12EB4:
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
                 jsr     j_EndKissPictureSequence
-                move.w  #180,d0
+                move.w  #$B4,d0 
                 jsr     (Sleep).w       
                 move.w  d4,d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
@@ -715,7 +715,7 @@ HideGoldWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-InitializeMemberListScreen:
+InitMemberListScreen:
                 
                 clr.b   ((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
@@ -727,13 +727,13 @@ InitializeMemberListScreen:
                 
                 bra.w   BuildMemberListScreen
 
-    ; End of function InitializeMemberListScreen
+    ; End of function InitMemberListScreen
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-BuildMemberListScreen_NewAttAndDefPage:
+BuildMemberListScreen_NewATTandDEF:
                 
                 move.b  #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
@@ -751,7 +751,7 @@ loc_1302C:
                 
                 bra.w   BuildMemberListScreen
 
-    ; End of function BuildMemberListScreen_NewAttAndDefPage
+    ; End of function BuildMemberListScreen_NewATTandDEF
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1293,26 +1293,26 @@ sub_134A8:
                 beq.s   loc_134E0
                 adda.w  #$74,a0 
                 adda.w  #$AE,a1 
-                move.w  #522,d7
+                move.w  #$20A,d7
                 jsr     (CopyBytes).w   
-                lea     wl_13EDE(pc), a0
+                lea     word_13EDE(pc), a0
                 suba.w  #$38,a1 
-                move.w  #54,d7
+                move.w  #$36,d7 
                 jsr     (CopyBytes).w   
                 bra.s   loc_13510
 loc_134E0:
                 
                 adda.w  #$E8,a0 
                 adda.w  #$AE,a1 
-                move.w  #464,d7
+                move.w  #$1D0,d7
                 jsr     (CopyBytes).w   
-                lea     wl_13EDE(pc), a0
+                lea     word_13EDE(pc), a0
                 suba.w  #$38,a1 
-                move.w  #54,d7
+                move.w  #$36,d7 
                 jsr     (CopyBytes).w   
-                lea     wl_13EDE(pc), a0
+                lea     word_13EDE(pc), a0
                 adda.w  #$20A,a1
-                move.w  #54,d7
+                move.w  #$36,d7 
                 jsr     (CopyBytes).w   
 loc_13510:
                 
@@ -1365,7 +1365,7 @@ sub_1354C:
                 lea     WindowBorderTiles(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
-                move.w  #160,d7
+                move.w  #$A0,d7 
                 jsr     (CopyBytes).w   
                 rts
 

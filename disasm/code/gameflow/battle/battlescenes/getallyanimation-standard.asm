@@ -20,14 +20,14 @@ GetAllyAnimation:
                 
                 ; Is weapon sprite a spear?
                 lea     tbl_SpearWeaponSprites(pc), a0
-                move.w  ((BATTLESCENE_WEAPONSPRITE-$1000000)).w,d1
+                move.w  ((ALLY_WEAPON_SPRITE-$1000000)).w,d1
                 moveq   #0,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @Default                ; Weapon is not a spear; get regular attack animation
                 
                 ; Is battle sprite a knight?
                 lea     tbl_KnightBattleSprites(pc), a0
-                move.w  ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d1
+                move.w  ((ALLY_BATTLE_SPRITE-$1000000)).w,d1
                 move.w  #@KNIGHTS_TO_SPEARS_OFFSET-1,d2
                 
 @FindKnight_Loop:
@@ -58,7 +58,7 @@ GetAllyAnimation:
 @Default:       clr.w   d1                      ; default to regular attack animation
                 
 @GetAnimationIndex:
-                add.w   ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d1
+                add.w   ((ALLY_BATTLE_SPRITE-$1000000)).w,d1
                 
 @GetAnimationPointer:
                 conditionalLongAddr movea.l, p_pt_AllyAnimations, a0

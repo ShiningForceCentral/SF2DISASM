@@ -12,14 +12,10 @@ combatant = -2
 
 HandleAfterTurnEffects:
                 
-            if (STANDARD_BUILD=1)
-                clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
-            else
                 bsr.w   ClearDeadCombatantsListLength
-            endif
                 link    a6,#-16
                 move.w  d0,combatant(a6)
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 tst.w   d1
                 beq.w   @Skip           ; skip everything if combatant is dead
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
@@ -169,10 +165,10 @@ HandleAfterTurnEffects:
                 jsr     j_GetEquippedWeapon
                 cmpi.w  #ITEM_HOLY_STAFF,d1
                 bne.s   @ApplyMysteryStaffRecovery
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 move.w  d1,d2
                 moveq   #HOLY_STAFF_HP_RECOVERY,d1
-                jsr     j_IncreaseCurrentHp
+                jsr     j_IncreaseCurrentHP
                 sub.w   d2,d1
                 ble.s   @ApplyMysteryStaffRecovery
                 ext.l   d1
@@ -184,10 +180,10 @@ HandleAfterTurnEffects:
                 jsr     j_GetEquippedWeapon
                 cmpi.w  #ITEM_MYSTERY_STAFF,d1
                 bne.s   @ApplyLifeRingRecovery
-                jsr     j_GetCurrentMp
+                jsr     j_GetCurrentMP
                 move.w  d1,d2
                 moveq   #MYSTERY_STAFF_MP_RECOVERY,d1
-                jsr     j_IncreaseCurrentMp
+                jsr     j_IncreaseCurrentMP
                 sub.w   d2,d1
                 ble.s   @ApplyLifeRingRecovery
                 ext.l   d1
@@ -199,10 +195,10 @@ HandleAfterTurnEffects:
                 jsr     j_GetEquippedRing
                 cmpi.w  #ITEM_LIFE_RING,d1
                 bne.s   @ApplyPoisonDamage
-                jsr     j_GetCurrentHp
+                jsr     j_GetCurrentHP
                 move.w  d1,d2
                 moveq   #LIFE_RING_HP_RECOVERY,d1
-                jsr     j_IncreaseCurrentHp
+                jsr     j_IncreaseCurrentHP
                 sub.w   d2,d1
                 ble.s   @ApplyPoisonDamage
                 ext.l   d1
@@ -218,7 +214,7 @@ HandleAfterTurnEffects:
                 moveq   #POISON_DAMAGE,d1 ; constant poison damage
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     307             ; "{CLEAR}{NAME} gets damaged{N}by {#} because of the poison.{D3}"
-                jsr     j_DecreaseCurrentHp
+                jsr     j_DecreaseCurrentHP
                 tst.w   d1
                 bne.s   @UpdateStats
                 txt     308             ; "{NAME} is exhausted.{D3}"

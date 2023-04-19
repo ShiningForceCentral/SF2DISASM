@@ -10,19 +10,19 @@ ms_map19_flag543_InitFunction:
                  
                 chkFlg  25              ; Shiela joined
                 bne.s   byte_62CAE      
-                move.w  #ALLY_SHEELA,d0
+                move.w  #$19,d0
                 jsr     MoveEntityOutOfMap
 byte_62CAE:
                 
                 chkFlg  8               ; May joined
                 bne.s   byte_62CBE      
-                move.w  #ALLY_MAY,d0
+                move.w  #8,d0
                 jsr     MoveEntityOutOfMap
 byte_62CBE:
                 
                 chkFlg  27              ; Chaz joined
                 bne.s   byte_62CCE
-                move.w  #ALLY_CHAZ,d0
+                move.w  #$1B,d0
                 jsr     MoveEntityOutOfMap
 byte_62CCE:
                 

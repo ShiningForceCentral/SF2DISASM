@@ -4,10 +4,6 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a1 = pointer to entity event indexes list in RAM
-;     a3 = pointer to followers list in RAM
-;     d0.l = 1
-
 
 InitializeFollowerEntities:
                 
@@ -18,12 +14,12 @@ InitializeFollowerEntities:
                 moveq   #0,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 movem.l (sp)+,d1-d2/a0
-                bcc.w   @Return
+                bcc.w   return_44336
             else
                 checkSavedByte #MAP_NEW_GRANSEAL_HQ, CURRENT_MAP    ; HARDCODED maps with no followers
-                beq.w   @Return
+                beq.w   return_44336
                 checkSavedByte #MAP_NAZCA_SHIP_INTERIOR, CURRENT_MAP
-                beq.w   @Return
+                beq.w   return_44336
             endif
                 
                 movem.l a6,-(sp)
@@ -32,44 +28,41 @@ InitializeFollowerEntities:
                 lea     ((byte_FFAFB0-$1000000)).w,a5
                 move.b  #1,(a5)
                 chkFlg  65              ; Caravan is unlocked
-                beq.s   @DeclareFollowers_Loop
-                bsr.s   IsOverworldMap  
-                beq.s   @DeclareFollowers_Loop
+                beq.s   loc_442D2
+                bsr.s   IsOverworldMap? 
+                beq.s   loc_442D2
                 lea     tbl_OverworldFollowers(pc), a4
-                lea     pt_eas_OverworldFollowers(pc), a6
-@DeclareFollowers_Loop:
+                lea     pt_eas_WorldmapFollowers(pc), a6
+loc_442D2:
                 
-                cmpi.w  #CODE_TERMINATOR_WORD,(a4)
-                beq.w   @Done
-                
-                ; Is follower unlocked?
+                cmpi.w  #$FFFF,(a4)
+                beq.w   loc_44332
                 movem.w d1,-(sp)
                 clr.w   d1
                 move.b  (a4),d1
                 jsr     j_CheckFlag
                 movem.w (sp)+,d1
-                beq.s   @Next
-                
+                beq.s   loc_4432E
                 move.w  d0,-(sp)
                 clr.w   d0
-                move.b  1(a4),d0        ; d0.w = entity index
+                move.b  1(a4),d0
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d0
-                bcc.s   @NonAlly
+                bcc.s   loc_44302
                 bsr.w   GetAllyMapSprite
-                bra.s   @AdjustEntityIndex
-@NonAlly:
+                bra.s   loc_44308
+loc_44302:
                 
                 clr.w   d4
                 move.b  2(a4),d4        ; optional mapsprite index for non-force members
-@AdjustEntityIndex:
+loc_44308:
                 
                 move.w  (sp)+,d0
                 clr.l   d6
                 move.b  1(a4),d6
                 tst.b   d6
-                bpl.s   @SetPriority
-                subi.w  #96,d6
-@SetPriority:
+                bpl.s   loc_44318
+                subi.w  #$60,d6 
+loc_44318:
                 
                 move.b  3(a4),(a5,d0.w)
                 move.b  d0,(a1,d6.w)
@@ -78,14 +71,14 @@ InitializeFollowerEntities:
                 bsr.w   DeclareNewEntity
                 move.b  d0,(a3)+
                 addq.w  #1,d0
-@Next:
+loc_4432E:
                 
                 addq.l  #4,a4
-                bra.s   @DeclareFollowers_Loop
-@Done:
+                bra.s   loc_442D2
+loc_44332:
                 
                 movem.l (sp)+,a6
-@Return:
+return_44336:
                 
                 rts
 

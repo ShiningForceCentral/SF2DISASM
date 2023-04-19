@@ -47,13 +47,13 @@ byte_6067C:
                 
                 chkFlg  27              ; Chaz joined
                 beq.s   byte_6068C      
-                move.w  #ALLY_CHAZ,d0
+                move.w  #$1B,d0
                 jsr     MoveEntityOutOfMap
 byte_6068C:
                 
                 chkFlg  944             ; Set after Lemon jumps off the cliff in Yeel
                 bne.s   byte_6069C      
-                move.w  #130,d0
+                move.w  #$82,d0 
                 jsr     MoveEntityOutOfMap
 byte_6069C:
                 

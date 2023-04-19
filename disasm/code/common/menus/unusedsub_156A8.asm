@@ -46,7 +46,7 @@ sub_156CE:
                 movem.l d7-a1,-(sp)
                 lea     WindowLayout_15706(pc), a0
                 lea     ((WINDOW_TILE_LAYOUTS-$1000000)).w,a1
-                move.w  #48,d7
+                move.w  #$30,d7 
                 jsr     (CopyBytes).w   
                 movem.l (sp)+,d7-a1
                 jsr     j_GetCombatantName

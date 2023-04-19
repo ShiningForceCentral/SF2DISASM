@@ -99,7 +99,7 @@ Map9_EntityEvent8:
                 move.w  #$86,d0 
                 moveq   #3,d1
                 jsr     sub_4781A       
-                moveq   #40,d0
+                moveq   #$28,d0 
                 jsr     (Sleep).w       
                 move.w  #$86,d0 
                 move.b  ((byte_FFB651-$1000000)).w,d1
@@ -163,9 +163,9 @@ Map9_EntityEvent0:
                  
                 chkFlg  727             ; Set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
                 bne.s   byte_5682A      
-                moveq   #ITEM_ACHILLES_SWORD,d1
+                moveq   #$3D,d1 ; Achilles Sword
                 jsr     j_GetItemInventoryLocation
-                cmpi.w  #-1,d0
+                cmpi.w  #$FFFF,d0
                 bne.s   byte_56804      
                 txt     1371            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
                 setFlg  798             ; Set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
@@ -175,9 +175,9 @@ byte_56804:
                 chkFlg  798             ; Set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
                 bne.s   byte_5681E
                 txt     1371            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
-                jsr     j_RemovePortraitWindow
+                jsr     j_HidePortraitWindow
                 clsTxt
-                moveq   #40,d0
+                moveq   #$28,d0 
                 jsr     (Sleep).w       
 byte_5681E:
                 

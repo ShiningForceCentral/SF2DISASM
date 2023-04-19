@@ -1,9 +1,9 @@
 
 ; ASM FILE data\graphics\battles\battlesprites\enemyidlebattlesprites.asm :
 ; 0x1FADD..0x1FAEA : Enemy Idle Battlesprites
-tbl_EnemyBattlespriteIdleAnimate:
+tbl_EnemyBattleSpriteIdleAnimate:
                 
-; Enemy battlesprites which do not animate while idle.
+; Enemy battle sprites which do not animate while idle.
                 
 ; Syntax        enemyBattleSprite [ENEMYBATTLESPRITE_]enum (or index)
                 
