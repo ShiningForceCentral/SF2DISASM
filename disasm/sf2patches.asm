@@ -33,10 +33,10 @@ NO_AI_PETER:                        equ 0       ;
 NO_DARKNESS_IN_CAVES:               equ 0       ; The darkness gimmick in caves is disabled.
 NO_RANDOM_BATTLES:                  equ 0       ; 0 = Battles    1 = No Battles
 SPELLS_REFRESH_STATUS_COUNTERS:     equ 0       ; Boost, Slow, and Attack spells refresh status counters instead of failing, as long as the counter is increased by at least 1. Battle messages display the actual regained stats values.
-TRADEABLE_ITEMS                     equ 0       ; Allows trading items in battle without full inventory
+TRADEABLE_ITEMS                     equ 1       ; Allows trading items in battle without full inventory
 CUTSCENE_PROTECTION:                equ 1       ; Prevents game from freezing if dead character is needed for scene after leader death (as Slade for battle 5)
-CARAVAN_IN_TOWER:                   equ 0       ; Adds access to Caravan before tower climb battle
-MINIATURES_SHOP:                    equ 0       ; Places a shopworker on the desktop and floor of the Miniatures Room
+CARAVAN_IN_TOWER:                   equ 1       ; Adds access to Caravan before tower climb battle
+MINIATURES_SHOP:                    equ 1       ; Places a shopworker on the desktop and floor of the Miniatures Room
 
 ; Misc. features
 AGILITY_AFFECTS_CHANCE_TO_DODGE:    equ 0       ; Adjust chance to dodge proportionally to the difference between the attacker's and the target's current AGI.
@@ -51,21 +51,21 @@ SEND_DROPPED_ITEMS_TO_CARAVAN:      equ 0       ; If character inventory is full
 SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
 TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock damage with difficulty   Normal:100%  Hard:125%  Super: 150%  Ouch: 175%
 DIFFICULTY_FACTORS:                 equ 1       ; Allow 4 distinct difficulties
-LEARN_SPELL_AT_PROMOTION:           equ 0       ; Allows learning 1 spell immeadiately upon promotion
-PER_LEVEL_CHURCH_COST:              equ 0       ; Raise/Cure cost based on ally level (double cost per promo level)
-ADDITIONAL_EQUIPEFFECTS:            equ 0       ; Add new equipeffects to offer more options (Set ATK, Increase Resistance, Decrease Double...)
+LEARN_SPELL_AT_PROMOTION:           equ 1       ; Allows learning 1 spell immeadiately upon promotion
+PER_LEVEL_CHURCH_COST:              equ 1       ; Raise/Cure cost based on ally level (double cost per promo level)
+ADDITIONAL_EQUIPEFFECTS:            equ 1       ; Add new equipeffects to offer more options (Set ATK, Increase Resistance, Decrease Double...)
 
 ; AI enhancements
 HEALER_AI_ENHANCEMENTS:             equ 1       ; See SF2_AI_Healing_Rewrite.txt for more details.
 DEBUFF_AI_ENHANCEMENTS:             equ 1       ; Increase debuff options enemeies can use
 
 ; Menu enhancements
-THREE_DIGITS_STATS:                 equ 0       ; 
+THREE_DIGITS_STATS:                 equ 1       ; 
 FULL_CLASS_NAMES:                   equ 0       ; 
 EIGHT_CHARACTERS_MEMBER_NAMES:      equ 0       ; 
 EXTENDED_SPELL_NAMES:               equ 0       ; 
 ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 0       ; 1 = small icons, 2 = no display
-SHOW_ENEMY_LEVEL:                   equ 0       ; 
+SHOW_ENEMY_LEVEL:                   equ 1       ; 
 SHOW_ALL_SPELLS_IN_MEMBER_SCREEN:   equ 0       ; 
 
 ; Music resuming

@@ -474,13 +474,13 @@ ce_5F19E:       mainEntity 0,0,UP
                 entity 13,4,UP,MAPSPRITE_ZEON,eas_Init
                 entity 13,8,UP,MAPSPRITE_GESHP,eas_Init
                 entity 13,25,UP,MAPSPRITE_ODD_EYE,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5F1BE:       mainEntity 63,63,UP
                 entity 5,5,UP,MAPSPRITE_NAZCA_SHIP,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5F1CE:       mainEntity 63,63,UP
                 entity 25,19,UP,MAPSPRITE_NAZCA_SHIP,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5F1DE:       mainEntity 0,0,UP
                 entity 11,19,UP,MAPSPRITE_EXECUTIONER,eas_Init
                 entity 63,63,RIGHT,MAPSPRITE_GESHP,eas_Init
@@ -493,7 +493,7 @@ ce_5F1DE:       mainEntity 0,0,UP
                 entity 11,16,LEFT,MAPSPRITE_DRAGONEWT,eas_Init
                 entity 15,19,DOWN,MAPSPRITE_CHAOS_WIZARD,eas_Init
                 entity 13,19,RIGHT,MAPSPRITE_CHAOS_WIZARD,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5F23E:       mainEntity 0,0,UP
                 entity 12,16,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 16,18,RIGHT,MAPSPRITE_GESHP,eas_Init
@@ -504,7 +504,7 @@ ce_5F23E:       mainEntity 0,0,UP
                 entity 12,17,RIGHT,MAPSPRITE_CHAOS_WIZARD,eas_Init
                 entity 13,19,RIGHT,MAPSPRITE_DRAGONEWT,eas_Init
                 entity 14,20,RIGHT,MAPSPRITE_CHAOS_WIZARD,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5F28E:       mainEntity 0,0,UP
                 entity 11,16,RIGHT,MAPSPRITE_DRAGONEWT,eas_Init
                 entity 16,18,RIGHT,MAPSPRITE_GESHP,eas_Init
@@ -523,7 +523,7 @@ ce_5F28E:       mainEntity 0,0,UP
                 entity 13,17,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 14,19,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 15,20,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 
 ; =============== S U B R O U T I N E =======================================
 

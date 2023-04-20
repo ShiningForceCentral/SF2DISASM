@@ -14,7 +14,7 @@ RunMapSetupInitFunction:
                 bra.w   loc_47514
 loc_4750E:
                 
-                movea.l $14(a0),a0
+                movea.l MAPSETUP_INITIALIZE(a0),a0
                 jsr     (a0)
 loc_47514:
                 
@@ -33,7 +33,7 @@ RunMapSetupZoneEvent:
                 bsr.w   GetCurrentMapSetup
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_47576
-                movea.l 8(a0),a0
+                movea.l MAPSETUP_ZONEEVENTS(a0),a0
                 clr.w   d7
 loc_47530:
                 
@@ -94,7 +94,7 @@ RunMapSetupItemEvent:
                 bsr.w   GetCurrentMapSetup
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_4760A
-                movea.l $10(a0),a0
+                movea.l MAPSETUP_ITEMEVENTS(a0),a0
                 clr.w   d7
 loc_475AA:
                 
@@ -160,7 +160,7 @@ RunMapSetupEntityEvent:
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_476D6
                 movem.w d1-d2,-(sp)
-                movea.l 4(a0),a0
+                movea.l MAPSETUP_ENTITYEVENTS(a0),a0
                 clr.w   d7
 loc_47638:
                 
@@ -283,7 +283,7 @@ RunMapSetupAreaDescription:
                 clr.w   d7
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_4771A
-                movea.l $C(a0),a0
+                movea.l MAPSETUP_DESCRIPTIONS(a0),a0
                 jsr     (a0)
 loc_4771A:
                 
@@ -382,35 +382,35 @@ GetCurrentMapSetup:
                 clr.w   d0
                 getSavedByte CURRENT_MAP, d0
                 lea     MapSetups(pc), a1
-loc_477AC:
+@NextMap_Loop:
                 
                 cmpi.w  #$FFFF,(a1)
-                bne.s   loc_477BA
+                bne.s   @Continue
                 lea     ms_Void(pc), a0
-                bra.w   loc_477E2
-loc_477BA:
+                bra.w   @Return
+@Continue:
                 
                 cmp.w   (a1)+,d0
-                bne.s   loc_477DA
+                bne.s   @CheckNextWord
                 movea.l (a1)+,a0
-loc_477C0:
+@CheckFlag_Loop:
                 
                 move.w  (a1)+,d1
                 cmpi.w  #$FFFD,d1
-                beq.w   loc_477E2
+                beq.w   @Return
                 jsr     j_CheckFlag
-                beq.s   loc_477D4
+                beq.s   @NextFlag
                 movea.l (a1),a0
-loc_477D4:
+@NextFlag:
                 
                 adda.w  #4,a1
-                bra.s   loc_477C0
-loc_477DA:
+                bra.s   @CheckFlag_Loop
+@CheckNextWord:
                 
                 cmpi.w  #$FFFD,(a1)+
-                bne.s   loc_477DA
-                bra.s   loc_477AC
-loc_477E2:
+                bne.s   @CheckNextWord
+                bra.s   @NextMap_Loop
+@Return:
                 
                 movem.l (sp)+,d0-d1/a1
                 rts

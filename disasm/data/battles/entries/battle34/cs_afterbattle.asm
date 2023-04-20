@@ -123,4 +123,4 @@ ce_4D69E:       mainEntity 7,12,UP
                 entity 63,63,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 6,12,UP,MAPSPRITE_CARAVAN,eas_Init
                 entity 63,63,LEFT,MAPSPRITE_ORB,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

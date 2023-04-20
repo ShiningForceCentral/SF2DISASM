@@ -35,12 +35,12 @@ ExecuteIndividualTurn:
                 ; Actor is alive
                 move.w  combatant(a6),d0
                 jsr     j_GetXPos
-                move.w  d1,((word_FFB08E-$1000000)).w
-                move.w  d1,((word_FFB094-$1000000)).w
+                move.w  d1,((BATTLE_ACTOR_X-$1000000)).w
+                move.w  d1,((BATTLE_TARGET_X-$1000000)).w
                 jsr     j_GetYPos
-                move.w  d1,((word_FFB090-$1000000)).w
-                move.w  d1,((word_FFB092-$1000000)).w
-                clr.b   ((word_FFAF8E-$1000000)).w
+                move.w  d1,((BATTLE_ACTOR_Y-$1000000)).w
+                move.w  d1,((BATTLE_TARGET_Y-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w

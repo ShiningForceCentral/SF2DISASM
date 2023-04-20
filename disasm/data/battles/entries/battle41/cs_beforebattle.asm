@@ -26,4 +26,4 @@ cs_4ED48:       playSound MUSIC_BATTLE_THEME_3
 ce_4ED76:       mainEntity 17,24,RIGHT
                 entity 16,24,RIGHT,ALLY_PETER,eas_Init
                 entity 16,6,DOWN,MAPSPRITE_REAPER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

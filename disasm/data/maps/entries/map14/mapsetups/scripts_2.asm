@@ -228,4 +228,4 @@ ce_59270:       mainEntity 13,11,DOWN
                 entity 12,11,RIGHT,MAPSPRITE_OBJECT2,eas_InitFixedSprite
                 entity 13,11,DOWN,MAPSPRITE_OBJECT2,eas_InitFixedSprite
                 entity 14,11,LEFT,MAPSPRITE_OBJECT2,eas_InitFixedSprite
-                dc.w $FFFF
+                cscEntitiesEnd

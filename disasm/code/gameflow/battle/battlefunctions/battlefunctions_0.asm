@@ -866,7 +866,7 @@ loc_23376:
                 move.w  d0,d7
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d7
                 lsr.w   #8,d7
-                move.w  d7,((word_FFA820-$1000000)).w
+                move.w  d7,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
 loc_23388:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
@@ -874,7 +874,7 @@ loc_23388:
                 move.w  d1,d7
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d7
                 lsr.w   #8,d7
-                move.w  d7,((word_FFA822-$1000000)).w
+                move.w  d7,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
 loc_2339A:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
@@ -882,7 +882,7 @@ loc_2339A:
                 move.w  d0,d7
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d7
                 lsr.w   #8,d7
-                move.w  d7,((word_FFA824-$1000000)).w
+                move.w  d7,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
 loc_233AC:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
@@ -890,7 +890,7 @@ loc_233AC:
                 move.w  d1,d7
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d7
                 lsr.w   #8,d7
-                move.w  d7,((word_FFA826-$1000000)).w
+                move.w  d7,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
 loc_233BE:
                 
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
@@ -1125,11 +1125,11 @@ sub_23554:
                 movem.l d0-d2/d7-a1,-(sp)
                 lea     spr_2358C(pc), a0
                 clr.w   d2
-                move.b  ((word_FFAF8E-$1000000)).w,d2
+                move.b  ((CURSOR_RADIUS-$1000000)).w,d2
                 andi.w  #$F,d2
                 lsl.w   #6,d2
                 adda.w  d2,a0
-                lea     (SPRITE_08).l,a1
+                lea     (SPRITE_CURSOR_DATA).l,a1
                 moveq   #7,d7
 loc_23572:
                 
@@ -1218,7 +1218,7 @@ spr_2358C:      ; unknown VDP sprite definitions
 
 sub_2364C:
                 
-                move.l  #$10F10,(SPRITE_08).l ; y = 1, size and link = V4|H4|16
+                move.l  #$10F10,(SPRITE_CURSOR_DATA).l ; y = 1, size and link = V4|H4|16
                 rts
 
     ; End of function sub_2364C

@@ -147,4 +147,4 @@ ce_49F36:       mainEntity 13,35,UP
                 entity 63,63,UP,MAPSPRITE_GALAM_MAGE,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GALAM_ARCHER,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GALAM_KNIGHT,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

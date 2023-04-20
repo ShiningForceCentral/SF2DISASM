@@ -84,7 +84,7 @@ loc_4443C:
                 andi.w  #$7F,d2 
                 muls.w  #$180,d2
                 moveq   #2,d3
-                moveq   #$3D,d4 
+                moveq   #MAPSPRITE_RAFT,d4 
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0

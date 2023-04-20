@@ -57,4 +57,4 @@ ce_4AA14:       mainEntity 4,50,RIGHT
                 entity 63,63,DOWN,MAPSPRITE_GOBLIN,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GREEN_OOZE,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_HUNTER_GOBLIN,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

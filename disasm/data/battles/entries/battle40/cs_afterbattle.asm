@@ -150,4 +150,4 @@ ce_4ECD6:       mainEntity 15,10,UP
                 entity 63,63,DOWN,MAPSPRITE_OBJECT1,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_OBJECT1,eas_Init
                 entity 15,8,DOWN,MAPSPRITE_ODD_EYE,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

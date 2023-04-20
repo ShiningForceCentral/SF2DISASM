@@ -253,7 +253,7 @@ loc_11DBC:
                 clr.w   d0
                 moveq   #3,d1
                 moveq   #$FFFFFFFF,d2
-                move.w  #$AB,d3 
+                move.w  #MAPSPRITE_FLAME1,d3 
                 jsr     (UpdateEntityProperties).w
 loc_11DDC:
                 

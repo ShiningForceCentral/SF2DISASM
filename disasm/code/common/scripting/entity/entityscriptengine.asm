@@ -1303,14 +1303,14 @@ loc_57B8:
                 bra.w   loc_57E0
 loc_57C0:
                 
-                move.w  d2,4(a0)
+                move.w  d2,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 beq.s   loc_57CC
-                move.w  #$180,8(a0)
+                move.w  #$180,ENTITYDEF_OFFSET_XTRAVEL(a0)
 loc_57CC:
                 
-                move.w  d3,6(a0)
+                move.w  d3,ENTITYDEF_OFFSET_YVELOCITY(a0)
                 beq.s   loc_57D8
-                move.w  #$180,$A(a0)
+                move.w  #$180,ENTITYDEF_OFFSET_YTRAVEL(a0)
 loc_57D8:
                 
                 add.w   d4,ENTITYDEF_OFFSET_XDEST(a0)
@@ -1515,24 +1515,24 @@ esc09_moveToFacingRelativePosition:
                 bra.w   loc_55C8
 word_59AC:
                 
-                dc.w 384
+                dc.w MAP_TILE_PLUS
 word_59AE:
                 
                 dc.w 0
                 dc.w 0
-                dc.w -384
-                dc.w -384
+                dc.w MAP_TILE_MINUS
+                dc.w MAP_TILE_MINUS
                 dc.w 0
                 dc.w 0
-                dc.w 384
-                dc.w 384
-                dc.w -384
-                dc.w -384
-                dc.w -384
-                dc.w -384
-                dc.w 384
-                dc.w 384
-                dc.w 384
+                dc.w MAP_TILE_PLUS
+                dc.w MAP_TILE_PLUS
+                dc.w MAP_TILE_MINUS
+                dc.w MAP_TILE_MINUS
+                dc.w MAP_TILE_MINUS
+                dc.w MAP_TILE_MINUS
+                dc.w MAP_TILE_PLUS
+                dc.w MAP_TILE_PLUS
+                dc.w MAP_TILE_PLUS
 
     ; End of function esc09_moveToFacingRelativePosition
 
@@ -2158,7 +2158,7 @@ esc40_checkMapBlockCopy:
                 move.w  d3,d2
                 andi.w  #$3C00,d2
                 cmpi.w  #$800,d2        ; check for block copy "show" flag
-                bne.s   loc_5D38        
+                bne.s   loc_5D38
                 bsr.w   PerformMapBlockCopyScript
                 bra.s   loc_5D42
 loc_5D38:
@@ -2296,7 +2296,7 @@ loc_5DDC:
                 move.b  ENTITYDEF_OFFSET_YACCEL(a0),d5
 loc_5DFC:
                 
-                btst    #3,$1C(a0)
+                btst    #3,ENTITYDEF_OFFSET_FLAGS_A(a0)
                 beq.s   loc_5E0E
                 cmp.w   d6,d1
                 bge.s   loc_5E0E

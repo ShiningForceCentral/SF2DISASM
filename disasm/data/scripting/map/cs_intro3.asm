@@ -352,4 +352,4 @@ ce_48A50:       mainEntity 63,63,UP
                 entity 26,5,UP,MAPSPRITE_WORKER,eas_Init
                 entity 27,6,UP,MAPSPRITE_WORKER,eas_Init
                 entity 26,4,DOWN,MAPSPRITE_OBJECT1,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

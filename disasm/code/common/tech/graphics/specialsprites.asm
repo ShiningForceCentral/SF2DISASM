@@ -23,7 +23,7 @@ LoadSpecialSprite:
                 
                 module                  ; Start of special sprite loading module
                 movem.l d0-a1,-(sp)
-                move.b  #$FF,d0
+                move.b  #MAPSPRITES_SPECIALS_END,d0
                 sub.b   d1,d0
                 andi.w  #$FF,d0
                 move.w  d0,d1
@@ -139,7 +139,7 @@ loc_25D0E:
                 
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.w   loc_25DF0
-                move.b  #$FF,d6
+                move.b  #MAPSPRITES_SPECIALS_END,d6
                 sub.b   ENTITYDEF_OFFSET_MAPSPRITE(a0),d6
                 andi.w  #$F,d6
                 add.w   d6,d6
@@ -216,7 +216,7 @@ loc_25D7E:
 UpdateExplorationSpecialSprite:
                 
                 clr.w   d6
-                move.b  $11(a0),d6
+                move.b  ENTITYDEF_OFFSET_LAYER(a0),d6
                 lea     (SPRITE_46).l,a1
                 lea     SpecialSpriteData_NazcaShip(pc), a0
                 movem.l d0-d1,-(sp)

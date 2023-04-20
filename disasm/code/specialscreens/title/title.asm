@@ -92,8 +92,8 @@ loc_100104:
                 move.w  #$80,d7 
                 jsr     (CopyBytes).w   
                 jsr     j_LoadTitleScreenFont
-                move.l  #$AE0405,(SPRITE_04).l
-                move.l  #$C062014E,(SPRITE_04_TILE_FLAGS).l
+                move.l  #$AE0405,(SPRITE_TRADEMARK).l
+                move.l  #$C062014E,(SPRITE_TRADEMARK_TILE_FLAGS).l
                 jsr     (EnableDisplayAndInterrupts).w
                 move.w  #$18,d6
                 jsr     (UpdateBackgroundVScrollData).w

@@ -76,7 +76,7 @@ loc_724E:
                 jsr     (WaitForDmaQueueProcessing).w
                 bsr.w   InitDisplay
                 bsr.w   DisableDisplayAndInterrupts
-                clr.b   ((byte_FFB198-$1000000)).w
+                clr.b   ((MOUTH_CONTROL_TOGGLE-$1000000)).w
                 move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w 
                                                         ; Witch speech SFX
                 bsr.w   DisplayWitchScreen
@@ -84,7 +84,7 @@ loc_724E:
                 move.w  #6,((word_FFB07C-$1000000)).w
 loc_729C:
                 
-                move.b  #0,((byte_FFB082-$1000000)).w
+                move.b  #0,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 jsr     j_ClearEntities
                 conditionalLongAddr movea.l, p_SpeechBalloonTiles, a0
                 lea     ($8000).l,a1
@@ -136,7 +136,7 @@ loc_734C:
                 bsr.w   WaitForVInt
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 txt     217             ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
 loc_737C:
                 
@@ -156,7 +156,7 @@ loc_73AA:
                 bsr.w   UpdateWitchHead
                 bsr.w   WaitForVInt
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
 byte_73C2:
                 
                 txt     221             ; "{CLEAR}Whatcha gonna do?"

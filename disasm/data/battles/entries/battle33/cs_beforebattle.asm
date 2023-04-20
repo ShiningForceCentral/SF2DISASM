@@ -89,7 +89,7 @@ ce_4D048:       mainEntity 26,37,LEFT
                 entity 10,10,DOWN,MAPSPRITE_SHAMAN,eas_Init
                 entity 9,10,DOWN,MAPSPRITE_DEVIL_SOLDIER,eas_Init
                 entity 11,10,DOWN,MAPSPRITE_DEVIL_SOLDIER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 
 ; =============== S U B R O U T I N E =======================================
 

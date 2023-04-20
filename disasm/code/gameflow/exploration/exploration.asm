@@ -101,7 +101,7 @@ loc_36BE:
                 add.w   d7,d3
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
                 bne.s   loc_3702
-                move.w  d0,((word_FFA818-$1000000)).w
+                move.w  d0,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
                 bra.s   loc_3706
 loc_3702:
                 
@@ -110,7 +110,7 @@ loc_3706:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
                 bne.s   loc_3712
-                move.w  d1,((word_FFA81A-$1000000)).w
+                move.w  d1,((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w
                 bra.s   loc_3716
 loc_3712:
                 
@@ -119,7 +119,7 @@ loc_3716:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
                 bne.s   loc_3722
-                move.w  d2,((word_FFA81C-$1000000)).w
+                move.w  d2,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
                 bra.s   loc_3726
 loc_3722:
                 
@@ -128,7 +128,7 @@ loc_3726:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
                 bne.s   loc_3732
-                move.w  d3,((word_FFA81E-$1000000)).w
+                move.w  d3,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
                 bra.s   loc_3736
 loc_3732:
                 
@@ -389,8 +389,8 @@ loc_3968:
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 move.w  d0,d5
                 move.w  d0,d7
-                move.w  ((word_FFA818-$1000000)).w,d1
-                move.w  ((word_FFA820-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w,d1
+                move.w  ((PLANE_A_SCROLL_SPEED_X-$1000000)).w,d2
                 sub.w   d1,d5
                 move.w  d5,var_2(a6)
                 bge.s   loc_3998
@@ -461,8 +461,8 @@ loc_3A1A:
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d0
                 move.w  d0,d5
                 move.w  d0,d7
-                move.w  ((word_FFA81A-$1000000)).w,d1
-                move.w  ((word_FFA822-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w,d1
+                move.w  ((PLANE_A_SCROLL_SPEED_Y-$1000000)).w,d2
                 sub.w   d1,d5
                 move.w  d5,var_2(a6)
                 bge.s   loc_3A4A
@@ -541,8 +541,8 @@ loc_3AE0:
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 move.w  d0,d5
                 move.w  d0,d7
-                move.w  ((word_FFA81C-$1000000)).w,d1
-                move.w  ((word_FFA824-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w,d1
+                move.w  ((PLANE_B_SCROLL_SPEED_X-$1000000)).w,d2
                 sub.w   d1,d5
                 move.w  d5,var_2(a6)
                 bge.s   loc_3B10
@@ -613,8 +613,8 @@ loc_3B92:
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d0
                 move.w  d0,d5
                 move.w  d0,d7
-                move.w  ((word_FFA81E-$1000000)).w,d1
-                move.w  ((word_FFA826-$1000000)).w,d2
+                move.w  ((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w,d1
+                move.w  ((PLANE_B_SCROLL_SPEED_Y-$1000000)).w,d2
                 sub.w   d1,d5
                 move.w  d5,var_2(a6)
                 bge.s   loc_3BC2
@@ -689,8 +689,8 @@ loc_3C44:
                 cmpi.b  #$80,d0
                 bne.s   loc_3C6C
                 bsr.w   sub_38C0
-                move.w  #$10,((word_FFA820-$1000000)).w
-                move.w  d0,((word_FFA818-$1000000)).w
+                move.w  #$10,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
+                move.w  d0,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
                 lea     (byte_FF9904).l,a2
                 bsr.w   sub_3758
                 bra.s   loc_3C82
@@ -704,8 +704,8 @@ loc_3C6C:
                 neg.w   d0
 loc_3C7A:
                 
-                move.w  d0,((word_FFA820-$1000000)).w
-                move.w  d1,((word_FFA818-$1000000)).w
+                move.w  d0,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
+                move.w  d1,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
 loc_3C82:
                 
                 bset    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
@@ -716,8 +716,8 @@ loc_3C88:
                 cmpi.b  #$80,d0
                 bne.s   loc_3CA8
                 bsr.w   sub_38C0
-                move.w  #8,((word_FFA822-$1000000)).w
-                move.w  d1,((word_FFA81A-$1000000)).w
+                move.w  #8,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
+                move.w  d1,((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w
                 bsr.w   sub_37B2
                 bra.s   loc_3CBE
 loc_3CA8:
@@ -730,8 +730,8 @@ loc_3CA8:
                 neg.w   d0
 loc_3CB6:
                 
-                move.w  d0,((word_FFA822-$1000000)).w
-                move.w  d1,((word_FFA81A-$1000000)).w
+                move.w  d0,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
+                move.w  d1,((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w
 loc_3CBE:
                 
                 bset    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
@@ -742,8 +742,8 @@ loc_3CC4:
                 cmpi.b  #$80,d0
                 bne.s   loc_3CEC
                 bsr.w   sub_38C0
-                move.w  #$10,((word_FFA824-$1000000)).w
-                move.w  d0,((word_FFA81C-$1000000)).w
+                move.w  #$10,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
+                move.w  d0,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
                 lea     (byte_FF9984).l,a2
                 move.w  d0,d2
                 bsr.w   sub_380C
@@ -758,8 +758,8 @@ loc_3CEC:
                 neg.w   d0
 loc_3CFA:
                 
-                move.w  d0,((word_FFA824-$1000000)).w
-                move.w  d1,((word_FFA81C-$1000000)).w
+                move.w  d0,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
+                move.w  d1,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
 loc_3D02:
                 
                 bset    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
@@ -770,8 +770,8 @@ loc_3D08:
                 cmpi.b  #$80,d0
                 bne.s   loc_3D2A
                 bsr.w   sub_38C0
-                move.w  #$10,((word_FFA826-$1000000)).w
-                move.w  d1,((word_FFA81E-$1000000)).w
+                move.w  #$10,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
+                move.w  d1,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
                 move.w  d1,d3
                 bsr.w   sub_3866
                 bra.s   loc_3D40
@@ -785,8 +785,8 @@ loc_3D2A:
                 neg.w   d0
 loc_3D38:
                 
-                move.w  d0,((word_FFA826-$1000000)).w
-                move.w  d1,((word_FFA81E-$1000000)).w
+                move.w  d0,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
+                move.w  d1,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
 loc_3D40:
                 
                 bset    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
@@ -946,7 +946,7 @@ OpenDoor:
                 conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
-                movea.l $16(a2),a2      ; get map step events
+                movea.l MAPSETUP_OFFSET_STEPEVENTS(a2),a2      ; get map step events
 loc_3E80:
                 
                 tst.b   (a2)
@@ -1055,7 +1055,7 @@ loc_3F38:
                 conditionalLongAddr movea.l, p_pt_MapData, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
-                movea.l $1A(a0),a0
+                movea.l MAPSETUP_OFFSET_ROOFEVENTS(a0),a0
 loc_3F60:
                 
                 tst.b   (a0)
@@ -1138,7 +1138,7 @@ PerformMapBlockCopyScript:
                 conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
-                movea.l $1A(a2),a2
+                movea.l MAPSETUP_OFFSET_ROOFEVENTS(a2),a2
 loc_4028:
                 
                 tst.b   (a2)
@@ -1406,7 +1406,7 @@ GetChestItem:
                 conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data
-                movea.l $22(a2),a2      ; get address of current map's chest item data
+                movea.l MAPSETUP_OFFSET_CHESTITEMS(a2),a2      ; get address of current map's chest item data
                 bra.w   GetItem
 
     ; End of function GetChestItem
@@ -1422,7 +1422,7 @@ GetNonChestItem:
                 conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2
-                movea.l $26(a2),a2      ; get address of current map's non-chest item data
+                movea.l MAPSETUP_OFFSET_OTHERITEMS(a2),a2      ; get address of current map's non-chest item data
 
     ; End of function GetNonChestItem
 
@@ -1500,7 +1500,7 @@ WarpIfSetAtPoint:
                 conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
-                movea.l $1E(a2),a2
+                movea.l MAPSETUP_OFFSET_WARPEVENTS(a2),a2
 loc_4302:
                 
                 cmpi.w  #$FFFF,(a2)

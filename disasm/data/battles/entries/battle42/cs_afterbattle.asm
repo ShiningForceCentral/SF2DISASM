@@ -276,4 +276,4 @@ ce_4F328:       mainEntity 13,17,UP
                 entity 13,19,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
                 entity 13,15,DOWN,MAPSPRITE_ELIS,eas_Init
                 entity 62,62,DOWN,MAPSPRITE_ZEON,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

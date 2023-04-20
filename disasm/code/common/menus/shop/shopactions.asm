@@ -116,7 +116,7 @@ loc_2015E:
                 txt     168             ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                beq.s   byte_2013C      
+                beq.s   @SelectRecipient_Buy      
                 bra.w   byte_20118      
 loc_201AC:
                 
@@ -132,7 +132,7 @@ loc_201AC:
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                bne.w   byte_2013C      
+                bne.w   @SelectRecipient_Buy      
 loc_201E4:
                 
                 moveq   #0,d1
@@ -604,7 +604,7 @@ byte_207CC:
 WaitForMusicResumeAndPlayerInput_Shop:
                 
                 move.w  d0,-(sp)
-                move.w  #$SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0 
                 jsr     (PlayMusicAfterCurrentOne).w
                 jsr     (WaitForPlayerInput).w
                 move.w  (sp)+,d0

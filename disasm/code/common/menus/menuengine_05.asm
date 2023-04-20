@@ -420,7 +420,7 @@ loc_12CB2:
 loc_12CF0:
                 
                 move.l  a1,d0
-                cmpi.w  #$DE80,d0
+                cmpi.w  #ADDRESS_BEYOND_SPRITES,d0
                 beq.w   loc_12D82
                 cmpi.w  #1,(a1)
                 beq.s   loc_12D04
@@ -430,7 +430,7 @@ loc_12D04:
                 
                 cmpi.w  #7,d6
                 blt.w   loc_12D6E
-                cmpa.w  #$AEE2,a0
+                cmpa.w  #ENTITY_SPECIAL_SPRITE_ADDRESS,a0
                 bne.s   loc_12D26
                 move.w  var_32(a6),d0
                 cmpi.w  #$7000,d0

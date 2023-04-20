@@ -51,7 +51,7 @@ loc_45224:
 loc_45238:
                 
                 jsr     (WaitForVInt).w
-                cmpi.l  #eas_Idle,$14(a0)
+                cmpi.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 bne.s   loc_45238
                 movem.l (sp)+,d0/a0
 return_4524A:

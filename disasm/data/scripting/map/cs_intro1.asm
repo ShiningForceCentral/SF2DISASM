@@ -264,4 +264,4 @@ ce_48340:       mainEntity 63,63,UP
                 entity 63,63,LEFT,MAPSPRITE_EFFECT4,eas_Init
                 entity 63,63,UP,MAPSPRITE_EFFECT4,eas_Init
                 entity 63,63,UP,MAPSPRITE_EFFECT4,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

@@ -51,7 +51,7 @@ loc_44104:
                 muls.w  #$180,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                cmpi.b  #$F0,d4
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d4
                 bcs.s   loc_44146
                 movem.w d0,-(sp)
                 move.w  #$2F,d0 
