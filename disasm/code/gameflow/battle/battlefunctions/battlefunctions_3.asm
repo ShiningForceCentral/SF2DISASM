@@ -28,7 +28,7 @@ LoadBattle:
 @Ally:
                 
                 andi.w  #$3F,d0 
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0           ; offset to appropriate entity
                 move.w  (a0)+,d0        ; move x offset
@@ -87,7 +87,7 @@ GetEntityPositionAfterApplyingFacing:
                 move.w  d1,d2
                 jsr     j_GetYPos
                 bsr.w   GetEntityIndexForCombatant_0
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 clr.w   d3
                 move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3

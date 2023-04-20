@@ -20,7 +20,7 @@ sub_440D4:
                 
                 movem.l d0-a5,-(sp)
                 lea     GetEntityPortaitAndSpeechSfx(pc), a0
-                lsl.w   #2,d0
+                mulu.w  #5,d0
                 movea.l (a0,d0.w),a0
 
     ; End of function sub_440D4
@@ -50,8 +50,8 @@ loc_44104:
                 andi.w  #$3F,d2 
                 muls.w  #$180,d2
                 move.b  (a0)+,d3
-                move.b  (a0)+,d4
-                cmpi.b  #MAPSPRITES_SPECIALS_START,d4
+                move.w  (a0)+,d4
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
                 bcs.s   loc_44146
                 movem.w d0,-(sp)
                 move.w  #$2F,d0 
@@ -64,7 +64,7 @@ loc_44104:
                 bra.s   loc_44104
 loc_44146:
                 
-                cmpi.b  #COMBATANT_ALLIES_NUMBER,d4
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d4
                 bcc.s   loc_44170
                 ext.w   d4
                 tst.b   (a1,d4.w)
@@ -131,7 +131,7 @@ sub_441AA:
                 move.b  (a0)+,d0
                 cmpi.b  #$FF,d0
                 beq.s   byte_441F0      ; No followers
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 move.w  d1,(a1,d0.w)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a1,d0.w)
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a1,d0.w)
@@ -153,7 +153,7 @@ byte_441F0:
                 andi.w  #$7F,d2 
                 muls.w  #$180,d2
                 moveq   #2,d3
-                moveq   #MAPSPRITE_RAFT,d4
+                move.w  #MAPSPRITE_RAFT,d4
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0

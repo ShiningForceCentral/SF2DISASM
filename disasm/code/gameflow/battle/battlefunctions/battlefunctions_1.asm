@@ -321,7 +321,7 @@ BattleLoop_Victory:
             endif
                 move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
                 bsr.w   GetEntityIndexForCombatant
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),((MAP_EVENT_PARAM_5-$1000000)).w
                 move.b  #0,((MAP_EVENT_PARAM_1-$1000000)).w

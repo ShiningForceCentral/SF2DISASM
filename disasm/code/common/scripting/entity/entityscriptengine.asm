@@ -258,7 +258,7 @@ sub_4E86:
                 clr.w   d0
                 move.b  (a1)+,d0
                 bmi.w   @NotAlly
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 cmpi.w  #$7000,(a0,d0.w)
                 bge.s   @LoopAllies
                 move.w  (a0),(a0,d0.w)
@@ -790,7 +790,7 @@ esc03_follow:
                 move.l  a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 move.w  2(a1),d2
-                lsl.w   #ENTITYDEF_SIZE_BITS,d2
+                mulu.w  #ENTITYDEF_SIZE,d2
                 adda.w  d2,a0
                 move.w  (a0),d2
                 move.w  ENTITYDEF_OFFSET_Y(a0),d3
@@ -1546,7 +1546,7 @@ esc0E_moveToEntityFacingRelativePosition:
                 move.w  4(a1),d2
                 move.w  6(a1),d3
                 move.w  2(a1),d0
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a1
                 adda.w  d0,a1
                 move.b  ENTITYDEF_OFFSET_FACING(a1),d0 ; other entity facing
@@ -1628,7 +1628,7 @@ esc0D_clonePosition:
                 
                 move.l  a1,-(sp)
                 move.w  2(a1),d0
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a1
                 adda.w  d0,a1
                 move.l  (a1),(a0)
@@ -1652,7 +1652,7 @@ esc0F_waitUntilOtherEntityReachesDest:
                 move.l  a0,-(sp)
                 move.w  2(a1),d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 adda.w  d0,a0
                 move.w  (a0),d0         ; pos
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
@@ -1819,7 +1819,7 @@ esc16_setEntityNumber:
 
 esc17_setSpriteNumber:
                 
-                move.b  3(a1),ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                move.w  2(a1),ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
@@ -2630,7 +2630,7 @@ tbl_FacingValues_2:
 UpdateEntityProperties:
                 
                 movem.l d0-a2,-(sp)
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 cmpi.b  #$FF,d2
@@ -2640,9 +2640,9 @@ UpdateEntityProperties:
                 or.b    d2,ENTITYDEF_OFFSET_FLAGS_B(a0)
 @CheckMapSprite:
                 
-                cmpi.b  #$FF,d3
+                cmpi.w  #$FFFF,d3
                 beq.s   @ChangeDirection
-                move.b  d3,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                move.w  d3,ENTITYDEF_OFFSET_MAPSPRITE(a0)
 @ChangeDirection:
                 
                 move.w  d1,d6
@@ -2685,8 +2685,8 @@ ChangeEntitySprite:
 loc_60B6:
                 
                 movem.l a0-a1,-(sp)
-                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-                cmpi.b  #MAPSPRITES_SPECIALS_START,d1
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d1
                 bcc.w   loc_617C
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
@@ -2696,7 +2696,7 @@ loc_60B6:
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d1
                 move.w  d1,-(sp)
-                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1
@@ -2789,7 +2789,7 @@ DmaMapSprite:
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
                 move.w  d1,-(sp)
                 clr.w   d1
-                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 cmpi.w  #MAPSPRITES_SPECIALS_START,d1 ; HARDCODED special mapsprites start index
                 blt.s   @LoadRegularSprite
                 jsr     j_LoadSpecialSprite

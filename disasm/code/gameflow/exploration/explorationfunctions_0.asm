@@ -20,7 +20,7 @@ loc_237A4:
                 ; get X/Y/facing/size of player entity
                 movem.l d3-a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 adda.w  d0,a0
                 move.w  (a0,d0.w),d1    ; get X
                 move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d2
@@ -133,7 +133,7 @@ loc_2386C:
                 clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
                 clr.w   ((SPEECH_SFX-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 adda.w  d0,a0
                 move.w  (a0,d0.w),d2
                 move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d1

@@ -206,7 +206,7 @@ loc_11D32:
                 move.b  (a1),d1
                 move.w  d1,-(sp)
                 move.b  #1,(a1)
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 adda.w  d0,a0
                 move.w  #$240,d0
                 move.w  #$740,d1

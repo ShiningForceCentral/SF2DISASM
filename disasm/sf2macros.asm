@@ -1118,12 +1118,12 @@ input: macro
 follower: macro
     dc.b \1
     dc.b \2
-    dc.b \3
+    dc.w \3
     dc.b \4
     endm
     
 mapSprite: macro
-    defineShorthand.b MAPSPRITE_,\1
+    defineShorthand.w MAPSPRITE_,\1
     endm
     
 portrait: macro

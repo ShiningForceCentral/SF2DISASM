@@ -53,7 +53,7 @@ loc_442D2:
 loc_44302:
                 
                 clr.w   d4
-                move.b  2(a4),d4        ; optional mapsprite index for non-force members
+                move.w  2(a4),d4        ; optional mapsprite index for non-force members
 loc_44308:
                 
                 move.w  (sp)+,d0
@@ -64,7 +64,7 @@ loc_44308:
                 subi.w  #$60,d6 
 loc_44318:
                 
-                move.b  3(a4),(a5,d0.w)
+                move.b  4(a4),(a5,d0.w)
                 move.b  d0,(a1,d6.w)
                 move.w  d0,d6
                 move.l  (a6)+,d5
@@ -73,7 +73,7 @@ loc_44318:
                 addq.w  #1,d0
 loc_4432E:
                 
-                addq.l  #4,a4
+                addq.l  #5,a4
                 bra.s   loc_442D2
 loc_44332:
                 

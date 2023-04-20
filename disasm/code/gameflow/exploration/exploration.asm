@@ -326,7 +326,7 @@ loc_38E4:
                 bra.s   loc_392A
 loc_38E6:
                 
-                lsl.w   #ENTITYDEF_SIZE_BITS,d2
+                mulu.w  #ENTITYDEF_SIZE,d2
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d2,a0
                 move.w  (a0)+,d2        ; x location
@@ -1046,7 +1046,7 @@ ToggleRoofOnMapLoad:
 loc_3F38:
                 
                 andi.w  #$3F,d4 
-                lsl.w   #ENTITYDEF_SIZE_BITS,d4
+                mulu.w  #ENTITYDEF_SIZE,d4
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 move.w  ENTITYDEF_OFFSET_Y(a0,d4.w),d5
                 move.w  (a0,d4.w),d4

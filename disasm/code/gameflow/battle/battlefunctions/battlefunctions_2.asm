@@ -116,7 +116,7 @@ HandleKilledCombatants:
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
 @Continue:
                 
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 move.b  #$FF,(a1,d0.w)
                 dbf     d7,@GetDeadCombatant_Loop
                 

@@ -156,7 +156,7 @@ DeclareNewEntity:
                 move.l  a0,-(sp)
                 move.w  d0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 adda.w  d0,a0
                 move.w  (sp)+,d0
                 move.w  d1,(a0)
@@ -170,7 +170,7 @@ DeclareNewEntity:
                 swap    d6
                 move.b  d6,ENTITYDEF_OFFSET_LAYER(a0)
                 swap    d6
-                move.b  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                move.w  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 tst.l   d5
                 bpl.s   loc_4463C
                 move.l  (ENTITY_WALKING_PARAMS).l,-(sp)
@@ -228,6 +228,7 @@ loc_44666:
                 clr.l   (a0)+           ; clear actscriptaddr
                 clr.l   (a0)+           ; clear accel/speed
                 clr.l   (a0)+
+                clr.b   (a0)+
                 dbf     d7,loc_44666    
                 
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
@@ -355,7 +356,7 @@ loc_447AA:
                 moveq   #3,d3
                 move.l  #eas_Standing,d5
                 bsr.w   GetCombatantMapSprite
-                cmpi.b  #MAPSPRITES_SPECIALS_START,d4
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
                 bcs.s   loc_447E8
                 move.w  d0,-(sp)
                 move.w  #ENTITY_SPECIAL_SPRITE,d0 
@@ -399,9 +400,11 @@ loc_44824:
                 beq.s   loc_44838
 loc_44830:
                 
-                cmpi.w  #$FFFF,(a0)+
-                beq.s   loc_44824
-                bra.s   loc_44830
+                adda.w  #NEUTRAL_ENTITY_SIZE,a0
+                cmpi.w  #$FFFF,(a0)
+                bne.s   loc_44830
+                cmp.w   (a0)+,d1
+                bra.s   loc_44824
 loc_44838:
                 
                 move.w  #$9F,battleEntity(a6) 
@@ -433,7 +436,7 @@ loc_4483E:
                 muls.w  #MAP_TILE_SIZE,d2
                 move.b  (a0)+,d3
                 clr.w   d4
-                move.b  (a0)+,d4
+                move.w  (a0)+,d4
                 move.l  (a0)+,d5
                 clr.l   d6
                 move.w  d0,d6

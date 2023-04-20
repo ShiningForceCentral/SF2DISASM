@@ -10,7 +10,7 @@ VInt_UpdateViewData:
                 clr.w   d0
                 move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d0
                 bmi.w   loc_468C        
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 move.w  (a0)+,d4        ; Entity X

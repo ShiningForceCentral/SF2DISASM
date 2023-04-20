@@ -23,8 +23,8 @@ LoadSpecialSprite:
                 
                 module                  ; Start of special sprite loading module
                 movem.l d0-a1,-(sp)
-                move.b  #MAPSPRITES_SPECIALS_END,d0
-                sub.b   d1,d0
+                move.w  #MAPSPRITES_SPECIALS_END,d0
+                sub.w   d1,d0
                 andi.w  #$FF,d0
                 move.w  d0,d1
                 lsl.w   #2,d0
@@ -137,9 +137,9 @@ loc_25D0C:
                 clr.w   d5
 loc_25D0E:
                 
-                cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                cmpi.w  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.w   loc_25DF0
-                move.b  #MAPSPRITES_SPECIALS_END,d6
+                move.w  #MAPSPRITES_SPECIALS_END,d6
                 sub.b   ENTITYDEF_OFFSET_MAPSPRITE(a0),d6
                 andi.w  #$F,d6
                 add.w   d6,d6

@@ -390,7 +390,7 @@ loc_44DD0:
 
 GetEntityEntryAddress:
                 
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0 ; start of entity information
                 adda.w  d0,a0
                 rts

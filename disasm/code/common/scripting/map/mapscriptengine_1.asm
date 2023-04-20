@@ -936,7 +936,7 @@ csc1A_setEntitySprite:
                 move.w  d4,d0
 @NotAlly:
                 
-                move.b  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
+                move.w  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
                 jsr     (WaitForVInt).w
                 bsr.w   UpdateEntitySprite_0
                 rts
@@ -1489,7 +1489,7 @@ csc2B_initializeNewEntity:
                 move.b  (a6)+,d1
                 move.b  (a6)+,d2
                 move.b  (a6)+,d3
-                move.b  (a6)+,d4
+                move.w  (a6)+,d4
                 move.l  #eas_Init,d5
                 jsr     InitializeNewEntity
                 rts
@@ -1834,7 +1834,7 @@ loc_4705A:
                 
                 move.b  (a5,d0.w),d0
                 move.l  d0,-(sp)
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a5
                 adda.w  d0,a5
                 move.l  (sp)+,d0
@@ -1924,7 +1924,7 @@ LoadMapsprite:
 @Continue:
                 
                 clr.w   d1
-                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1

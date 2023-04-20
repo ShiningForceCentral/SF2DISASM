@@ -233,7 +233,7 @@ ControlUnitCursor:
                 mulu.w  #$180,d3
                 moveq   #ENTITY_UNIT_CURSOR,d0
                 jsr     j_SetUnitCursorSpeedx2
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 move.w  d2,(a0)
@@ -283,7 +283,7 @@ ControlBattleEntity:
                 lea     ((ENTITY_DATA-$1000000)).w,a1
                 bsr.w   GetEntityIndexForCombatant_0
                 move.w  d0,battleEntity(a6)
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 adda.w  d0,a1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d0
                 move.w  d0,-(sp)
@@ -458,7 +458,7 @@ MoveBattleEntityByMoveString:
                 bsr.s   GetEntityIndexForCombatant_0
                 move.w  d0,battleEntity(a6)
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 adda.w  d0,a1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d0
                 move.w  d0,-(sp)
@@ -761,7 +761,7 @@ sub_23256:
                 mulu.w  #$180,d5
                 moveq   #ENTITY_UNIT_CURSOR,d0
                 jsr     sub_4402C
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 move.w  d4,(a0)
@@ -813,7 +813,7 @@ SetUnitCursorDestinationToNextBattleEntity:
                 moveq   #ENTITY_UNIT_CURSOR,d0
                 jsr     j_SetUnitCursorActscript
                 jsr     (WaitForVInt).w
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 move.w  d4,(a0)
@@ -980,7 +980,7 @@ SetEntityBlinkingFlag:
                 
                 movem.l d0/a0,-(sp)
                 bsr.w   GetEntityIndexForCombatant
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 bset    #7,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
                 movem.l (sp)+,d0/a0
@@ -996,7 +996,7 @@ ClearEntityBlinkingFlag:
                 
                 movem.l d0/a0,-(sp)
                 bsr.w   GetEntityIndexForCombatant
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 bclr    #7,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
                 movem.l (sp)+,d0/a0
@@ -1055,15 +1055,15 @@ UpdateBattleEntitySprite:
 @Continue:
                 
                 clr.w   d1
-                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
-                cmpi.b  #MAPSPRITES_SPECIALS_START,d1
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d1
                 bcc.s   @Done
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1
                 cmpi.b  #$20,d1 
                 beq.s   @Done
                 move.w  d1,-(sp)
                 clr.w   d1
-                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1
@@ -1251,7 +1251,7 @@ SetEntityPosition:
                 
                 movem.l d0/a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
+                mulu.w  #ENTITYDEF_SIZE,d0
                 adda.w  d0,a0
                 move.w  d1,(a0)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a0)

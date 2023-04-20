@@ -441,7 +441,7 @@ csc2B: macro
     dc.b \2
     dc.b \3
     dc.b \4
-    dc.b \5
+    dc.w \5
     endm
     
 newEntity: macro ;alias
@@ -900,6 +900,7 @@ cscNop: macro
 
 csc_end: macro
     dc.w $FFFF
+    align
     endm
 
 
@@ -915,19 +916,20 @@ entity: macro
     dc.b \1
     dc.b \2
     dc.b \3
-    dc.b \4
+    dc.w \4
     dc.l \5
     endm
 	
 cscEntitiesEnd:	macro
 	dc.w $FFFF
+    align
 	endm
     
 entityRandomWalk: macro
     dc.b \1
     dc.b \2
     dc.b \3
-    dc.b \4
+    dc.w \4
     dc.b $FF
     dc.b \5
     dc.b \6

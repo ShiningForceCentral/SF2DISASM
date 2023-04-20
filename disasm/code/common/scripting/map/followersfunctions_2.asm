@@ -45,7 +45,7 @@ loc_443D6:
                 lea     NEXT_ENTITYDEF(a0),a0
 loc_443FA:
                 
-                addq.l  #4,a4
+                addq.l  #5,a4
                 bra.s   loc_443D6
 loc_443FE:
                 
@@ -62,7 +62,7 @@ sub_44404:
                 
                 checkSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
                 bne.s   byte_44420      
-                move.b  #MAPSPRITE_RAFT,((ENTITY_MAPSPRITE-$1000000)).w
+                move.w  #MAPSPRITE_RAFT,((ENTITY_MAPSPRITE-$1000000)).w
                 bsr.w   sub_4446C
                 move.w  #$40,d1 
                 move.w  d1,d2
@@ -84,7 +84,7 @@ loc_4443C:
                 andi.w  #$7F,d2 
                 muls.w  #$180,d2
                 moveq   #2,d3
-                moveq   #MAPSPRITE_RAFT,d4 
+                move.w  #MAPSPRITE_RAFT,d4 
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
