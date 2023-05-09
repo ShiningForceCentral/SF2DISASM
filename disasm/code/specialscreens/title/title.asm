@@ -92,8 +92,8 @@ loc_100104:
                 move.w  #$80,d7 
                 jsr     (CopyBytes).w   
                 jsr     j_LoadTitleScreenFont
-                move.l  #$AE0405,(SPRITE_TRADEMARK).l
-                move.l  #$C062014E,(SPRITE_TRADEMARK_TILE_FLAGS).l
+                move.l  #$AE0405,(SPRITE_04).l
+                move.l  #$C062014E,(SPRITE_04_TILE_FLAGS).l
                 jsr     (EnableDisplayAndInterrupts).w
                 move.w  #$18,d6
                 jsr     (UpdateBackgroundVScrollData).w
@@ -108,7 +108,7 @@ loc_100104:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #1,((FADING_PALETTE_BITFIELD-$1000000)).w
                 moveq   #$64,d0 
                 bsr.w   WaitForPlayer1InputStart
                 moveq   #$20,d0 
@@ -117,7 +117,7 @@ loc_100104:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%10,((FADING_PALETTE_BITFIELD-$1000000)).w
                 moveq   #$10,d0
                 bsr.w   TitleScreenLoop1
                 moveq   #$32,d0 
@@ -126,7 +126,7 @@ loc_100104:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #4,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%100,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.w  #$78,d0 
                 bsr.w   WaitForPlayer1InputStart
                 move.w  #$12C,d0

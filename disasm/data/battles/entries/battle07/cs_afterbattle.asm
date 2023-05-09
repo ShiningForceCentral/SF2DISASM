@@ -650,4 +650,4 @@ ce_4A912:       mainEntity 13,23,UP
                 entity 12,14,DOWN,MAPSPRITE_ELIS,eas_Init
                 entity 12,27,UP,MAPSPRITE_GRANSEAL_KING,eas_Init
                 entity 14,27,UP,MAPSPRITE_MINISTER,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

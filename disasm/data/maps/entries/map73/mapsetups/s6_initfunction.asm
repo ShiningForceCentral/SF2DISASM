@@ -279,7 +279,7 @@ ce_506DE:       mainEntity 63,63,UP
                 entity 63,63,DOWN,MAPSPRITE_SAILOR,eas_Init
                 entity 63,63,DOWN,ALLY_SLADE,eas_Init
                 entity 5,5,RIGHT,MAPSPRITE_BOAT,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF
 ce_5072E:       mainEntity 0,0,UP
                 entity 23,30,DOWN,MAPSPRITE_MINISTER,eas_Init
                 entity 19,29,UP,MAPSPRITE_MAN3,eas_Init
@@ -294,7 +294,7 @@ ce_5072E:       mainEntity 0,0,UP
                 entity 26,31,UP,MAPSPRITE_MAN1,eas_Init
                 entity 24,26,UP,MAPSPRITE_WOMAN2,eas_Init
                 entity 23,27,UP,MAPSPRITE_MAN2,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF
 ce_5079E:       mainEntity 40,8,LEFT
                 entity 51,8,DOWN,ALLY_SARAH,eas_Init
                 entity 41,10,DOWN,ALLY_CHESTER,eas_Init
@@ -308,7 +308,7 @@ ce_5079E:       mainEntity 40,8,LEFT
                 entity 44,6,RIGHT,MAPSPRITE_OBJECT2,eas_Init
                 entity 45,6,DOWN,MAPSPRITE_OBJECT2,eas_Init
                 entity 46,6,LEFT,MAPSPRITE_OBJECT2,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF
 cs_50806:       textCursor 2288
                 loadMapEntities ce_5094A
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -386,4 +386,4 @@ ce_5094A:       mainEntity 61,48,LEFT
                 entity 62,48,LEFT,MAPSPRITE_WORKER,eas_Init
                 entity 63,48,LEFT,MAPSPRITE_WORKER,eas_Init
                 entity 28,49,RIGHT,MAPSPRITE_BOAT,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

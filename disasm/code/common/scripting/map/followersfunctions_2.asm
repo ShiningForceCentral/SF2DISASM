@@ -7,8 +7,8 @@ pt_eas_Followers:
                 dc.l eas_Follower3
                 dc.l eas_Follower4
                 dc.l eas_Follower4
-pt_eas_WorldmapFollowers:
-                dc.l eas_Follower1      ; when on worldmap
+pt_eas_OverworldFollowers:
+                dc.l eas_Follower1      ; when on overworld
                 dc.l eas_OverworldFollower2
                 dc.l eas_OverworldFollower3
                 dc.l eas_Follower2
@@ -24,10 +24,10 @@ InitializeFollowerActscripts:
                 lea     pt_eas_Followers(pc), a6
                 chkFlg  65              ; Caravan is unlocked
                 beq.s   loc_443D2
-                bsr.w   IsOverworldMap? 
+                bsr.w   IsOverworldMap  
                 beq.s   loc_443D2
                 lea     tbl_OverworldFollowers(pc), a4
-                lea     pt_eas_WorldmapFollowers(pc), a6
+                lea     pt_eas_OverworldFollowers(pc), a6
 loc_443D2:
                 
                 lea     ((OTHER_ENTITIES_DATA-$1000000)).w,a0
@@ -45,7 +45,7 @@ loc_443D6:
                 lea     NEXT_ENTITYDEF(a0),a0
 loc_443FA:
                 
-                addq.l  #5,a4
+                addq.l  #4,a4
                 bra.s   loc_443D6
 loc_443FE:
                 
@@ -62,7 +62,7 @@ sub_44404:
                 
                 checkSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
                 bne.s   byte_44420      
-                move.w  #MAPSPRITE_RAFT,((ENTITY_MAPSPRITE-$1000000)).w
+                move.b  #MAPSPRITE_RAFT,((ENTITY_MAPSPRITE-$1000000)).w
                 bsr.w   sub_4446C
                 move.w  #$40,d1 
                 move.w  d1,d2
@@ -78,13 +78,13 @@ byte_44420:
                 getSavedByte RAFT_Y, d2
 loc_4443C:
                 
-                move.w  #$1F,d0
+                move.w  #FOLLOWER_B,d0
                 andi.w  #$7F,d1 
                 muls.w  #$180,d1
                 andi.w  #$7F,d2 
                 muls.w  #$180,d2
-                moveq   #2,d3
-                move.w  #MAPSPRITE_RAFT,d4 
+                moveq   #LEFT,d3        ; facing
+                moveq   #MAPSPRITE_RAFT,d4
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
@@ -109,7 +109,7 @@ sub_4446C:
 loc_44478:
                 
                 move.b  (a0)+,d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #CODE_TERMINATOR_BYTE,d0
                 beq.s   loc_4449C
                 movem.l a0,-(sp)
                 bsr.w   GetEntityEntryAddress

@@ -176,6 +176,6 @@ tbl_AllyMapSprites:
 ; Allies who use a different mapsprite before joining the Force.
 tbl_AllyMapSpritesIfNotJoined:
                 
-                dc.w ALLY_ROHDE, MAPSPRITE_NPC_ROHDE
+                dc.b ALLY_ROHDE, MAPSPRITE_NPC_ROHDE
                 
-                tableEnd.w
+                tableEnd.b

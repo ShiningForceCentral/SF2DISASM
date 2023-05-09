@@ -1159,10 +1159,10 @@ LoadMap:
                 move.l  ((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
                 clr.l   ((PLANE_A_SCROLL_SPEED_X-$1000000)).w
                 clr.l   ((PLANE_B_SCROLL_SPEED_X-$1000000)).w
-                clr.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                clr.b   ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 move.w  d0,-(sp)
                 move.w  d1,-(sp)
-                bsr.w   InitDisplay
+                bsr.w   InitializeDisplay
                 move.w  (sp)+,d1
                 ext.w   d1
                 bpl.s   loc_2ACC
@@ -1173,7 +1173,7 @@ LoadMap:
                 conditionalLongAddr movea.l, p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
-                lea     MAPSETUP_OFFSET_AREAS(a5),a5       ; get address 02 - map properties
+                lea     $E(a5),a5       ; get address 02 - map properties
                 bra.w   loc_2B80        
 loc_2ACC:
                 
@@ -1188,7 +1188,7 @@ loc_2ACC:
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (PALETTE_1_BASE).l,a1
-                move.w  #$20,d7 
+                move.w  #CRAM_PALETTE_SIZE,d7
                 bsr.w   CopyBytes       
                 clr.w   (PALETTE_1_BASE).l
                 tst.b   (a5)+
@@ -1278,7 +1278,7 @@ loc_2BC0:
 loc_2BD0:
                 
                 andi.w  #$3F,d4 
-                mulu.w  #ENTITYDEF_SIZE,d4
+                lsl.w   #ENTITYDEF_SIZE_BITS,d4
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 move.w  ENTITYDEF_OFFSET_Y(a0,d4.w),d5
                 move.w  (a0,d4.w),d4
@@ -1425,7 +1425,7 @@ loc_2CF6:
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   UpdateVdpHScrollData
                 bsr.w   UpdateVdpVScrollData
-                bsr.w   InitWindowProperties
+                bsr.w   InitializeWindowProperties
                 bsr.w   ToggleRoofOnMapLoad
                 bsr.w   WaitForVInt
                 bsr.w   UpdateVdpPlaneA
@@ -1584,7 +1584,7 @@ LoadMapArea:
                 enableSram
                 move.w  (a1)+,d7
                 lea     (FF6802_LOADING_SPACE).l,a0
-                lea     (byte_FF9B04).l,a1
+                lea     (CURRENT_MAP_TILESET_2_COPY).l,a1
                 lsl.w   #5,d7
                 bsr.w   CopyBytes       
                 addq.l  #4,((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w
@@ -1628,7 +1628,7 @@ loc_2F04:
                 bsr.w   SetVdpReg
                 bsr.w   WaitForVInt
                 bsr.w   sub_2F24
-                tst.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                tst.b   ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 bne.s   loc_2F04
                 rts
 
@@ -1641,32 +1641,32 @@ loc_2F04:
 sub_2F24:
                 
                 move.w  d0,-(sp)
-                move.w  ((PLANE_A_SCROLL_SPEED_X-$1000000)).w,d0
+                move.w  ((word_FFA820-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F36
-                move.w  d0,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
+                move.w  d0,((word_FFA820-$1000000)).w
 loc_2F36:
                 
-                move.w  ((PLANE_A_SCROLL_SPEED_Y-$1000000)).w,d0
+                move.w  ((word_FFA822-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F46
-                move.w  d0,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
+                move.w  d0,((word_FFA822-$1000000)).w
 loc_2F46:
                 
-                move.w  ((PLANE_B_SCROLL_SPEED_X-$1000000)).w,d0
+                move.w  ((word_FFA824-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F56
-                move.w  d0,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
+                move.w  d0,((word_FFA824-$1000000)).w
 loc_2F56:
                 
-                move.w  ((PLANE_B_SCROLL_SPEED_Y-$1000000)).w,d0
+                move.w  ((word_FFA826-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F66
-                move.w  d0,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
+                move.w  d0,((word_FFA826-$1000000)).w
 loc_2F66:
                 
                 move.w  (sp)+,d0

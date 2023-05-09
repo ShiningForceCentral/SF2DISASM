@@ -39,4 +39,4 @@ abcs_battle13:  textCursor 2495
                 csc_end
 ce_4AD96:       mainEntity 16,12,DOWN
                 entity 16,13,DOWN,ALLY_LUKE,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

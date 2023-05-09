@@ -9,13 +9,13 @@ WitchSuspend:
                 
                  
                 sndCom  MUSIC_SUSPEND
-                bsr.w   InitWitchSuspendVIntFunctions
+                bsr.w   InitializeWitchSuspendVIntFunctions
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
-                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
+                move.b  #$FF,((byte_FFB082-$1000000)).w
                 txt     240             ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
                 clsTxt
-                clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
+                clr.b   ((byte_FFB082-$1000000)).w
                 bsr.w   sub_7CDC
                 jsr     j_SuspendGame
                 move.w  #600,d0         ; wait for 10 seconds, or until player presses Start before restarting the game

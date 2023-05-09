@@ -134,4 +134,4 @@ loc_54726:
     ; End of function csub_54714
 
 ce_54736:       mainEntity 34,33,RIGHT
-                cscEntitiesEnd
+                dc.w $FFFF

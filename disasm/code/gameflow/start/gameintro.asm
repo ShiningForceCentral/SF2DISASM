@@ -23,7 +23,7 @@ j_j_DisplaySegaLogo:
     ; End of function j_j_DisplaySegaLogo
 
 
-; START OF FUNCTION CHUNK FOR InitGame
+; START OF FUNCTION CHUNK FOR InitializeGame
 
 GameIntro:
                 
@@ -40,7 +40,7 @@ loc_71EC:
                 bsr.w   EnableInterrupts
                 lea     (PALETTE_1_CURRENT).l,a0
                 lea     (PALETTE_1_BASE).l,a1
-                move.w  #$80,d7 
+                move.w  #CRAM_SIZE,d7
                 bsr.w   CopyBytes       
                 bsr.w   FadeOutToBlack
                 trap    #VINT_FUNCTIONS
@@ -51,7 +51,7 @@ loc_71EC:
                 jsr     (UpdateForegroundVScrollData).w
                 jsr     (UpdateBackgroundVScrollData).w
                 jsr     (WaitForDmaQueueProcessing).w
-                bsr.w   InitDisplay
+                bsr.w   InitializeDisplay
                 bsr.w   DisableDisplayAndInterrupts
                 sndCom  MUSIC_TITLE
                 jsr     TitleScreen
@@ -74,9 +74,9 @@ loc_724E:
                 jsr     (UpdateForegroundVScrollData).w
                 jsr     (UpdateBackgroundVScrollData).w
                 jsr     (WaitForDmaQueueProcessing).w
-                bsr.w   InitDisplay
+                bsr.w   InitializeDisplay
                 bsr.w   DisableDisplayAndInterrupts
-                clr.b   ((MOUTH_CONTROL_TOGGLE-$1000000)).w
+                clr.b   ((byte_FFB198-$1000000)).w
                 move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w 
                                                         ; Witch speech SFX
                 bsr.w   DisplayWitchScreen
@@ -84,7 +84,7 @@ loc_724E:
                 move.w  #6,((word_FFB07C-$1000000)).w
 loc_729C:
                 
-                move.b  #0,((BLINK_CONTROL_TOGGLE-$1000000)).w
+                move.b  #0,((byte_FFB082-$1000000)).w
                 jsr     j_ClearEntities
                 conditionalLongAddr movea.l, p_SpeechBalloonTiles, a0
                 lea     ($8000).l,a1
@@ -97,7 +97,7 @@ loc_729C:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
-                bsr.w   InitWindowProperties
+                bsr.w   InitializeWindowProperties
                 bsr.w   WaitForVInt
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
@@ -136,7 +136,7 @@ loc_734C:
                 bsr.w   WaitForVInt
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
-                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
+                move.b  #$FF,((byte_FFB082-$1000000)).w
                 txt     217             ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
 loc_737C:
                 
@@ -156,7 +156,7 @@ loc_73AA:
                 bsr.w   UpdateWitchHead
                 bsr.w   WaitForVInt
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
-                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
+                move.b  #$FF,((byte_FFB082-$1000000)).w
 byte_73C2:
                 
                 txt     221             ; "{CLEAR}Whatcha gonna do?"
@@ -186,7 +186,7 @@ loc_73E8:
                 move.w  rjt_WitchChoice(pc,d0.w),d0
                 jmp     rjt_WitchChoice(pc,d0.w)
 
-; END OF FUNCTION CHUNK FOR InitGame
+; END OF FUNCTION CHUNK FOR InitializeGame
 
 rjt_WitchChoice:dc.w WitchNew-rjt_WitchChoice
                 dc.w WitchLoad-rjt_WitchChoice

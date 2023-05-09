@@ -55,4 +55,4 @@ ce_4E4AC:       mainEntity 8,9,DOWN
                 entity 9,23,UP,MAPSPRITE_EVIL_BISHOP,eas_Init
                 entity 6,23,UP,MAPSPRITE_DARK_GUNNER,eas_Init
                 entity 10,23,UP,MAPSPRITE_CYCLOPS,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

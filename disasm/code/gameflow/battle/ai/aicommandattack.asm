@@ -48,7 +48,7 @@ ExecuteAiCommand_Attack:
                 move.w  #BATTLEACTION_USE_ITEM,(a0)
                 lea     ((ATTACK_COMMAND_ITEM_SLOT-$1000000)).w,a1
                 move.w  (a1),BATTLEACTION_OFFSET_ITEM_SLOT(a0)
-                move.w  d0,BATTLEACTION_OFFSET_TARGET(a0)
+                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a0)
                 move.w  d7,d0           ; d7 --> d0 = character index (aka attacker)
                 move.w  (a1),d1         ; d1 = item slot of the attack item
                 bsr.w   GetItemBySlotAndHeldItemsNumber
@@ -69,18 +69,18 @@ ExecuteAiCommand_Attack:
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 bsr.w   GetSpellRange   
-                bsr.w   MakeTargetsList_Everybody
+                bsr.w   PopulateTargetsArrayWithAllCombatants
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
-                move.w  BATTLEACTION_OFFSET_TARGET(a0),d0
-                jsr     GetYPos
+                move.w  BATTLEACTION_OFFSET_ACTOR(a0),d0
+                jsr     GetCombatantY
                 move.w  d1,d2
-                jsr     GetXPos
+                jsr     GetCombatantX
                 bsr.w   GetClosestAttackPosition
                 move.w  d1,d0
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                bsr.w   MakeAiMoveString
+                bsr.w   BuildAiMoveString
                 bra.w   @EndTurn
 @Check_CastSpell:
                 
@@ -93,7 +93,7 @@ ExecuteAiCommand_Attack:
                 move.w  #BATTLEACTION_CAST_SPELL,(a0)
                 lea     ((ATTACK_COMMAND_SPELL-$1000000)).w,a1
                 move.w  (a1),BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
-                move.w  d0,BATTLEACTION_OFFSET_TARGET(a0)
+                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a0)
                 lea     ((AI_LAST_TARGET_TABLE-$1000000)).w,a2
                 move.w  d7,d1
                 btst    #COMBATANT_BIT_ENEMY,d1
@@ -104,16 +104,16 @@ ExecuteAiCommand_Attack:
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0),d1
                 bsr.w   GetSpellRange   
-                bsr.w   MakeTargetsList_Everybody
-                jsr     GetYPos
+                bsr.w   PopulateTargetsArrayWithAllCombatants
+                jsr     GetCombatantY
                 move.w  d1,d2
-                jsr     GetXPos
+                jsr     GetCombatantX
                 bsr.w   GetClosestAttackPosition
                 move.w  d1,d0
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                bsr.w   MakeAiMoveString
+                bsr.w   BuildAiMoveString
                 bra.w   @EndTurn
 @Check_Attack:
                 
@@ -174,16 +174,16 @@ ExecuteAiCommand_Attack:
 @FindTarget:
                 
                 move.l  (sp)+,d0
-                bsr.w   MakeTargetsList_Everybody
-                jsr     GetYPos
+                bsr.w   PopulateTargetsArrayWithAllCombatants
+                jsr     GetCombatantY
                 move.w  d1,d2
-                jsr     GetXPos
+                jsr     GetCombatantX
                 bsr.w   GetClosestAttackPosition
                 move.w  d1,d0
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                bsr.w   MakeAiMoveString
+                bsr.w   BuildAiMoveString
                 bra.w   @EndTurn
 @EndTurn_Stay:
                 

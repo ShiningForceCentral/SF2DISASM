@@ -108,7 +108,7 @@ CreateBattlesceneAnimation:
                 moveq   #ALLYBATTLEANIMATION_SPECIAL_MNST,d5
                 cmpi.w  #CLASS_MNST,d1  ; MNST
                 beq.w   @AnimateSprite
-                jsr     GetEnemyIndex   
+                jsr     GetEnemy        
                 moveq   #ENEMYBATTLEANIMATION_SPECIAL_HELL_HOUND,d5
                 cmpi.w  #ENEMY_HELL_HOUND,d1 ; HARDCODED enemy indexes
                 beq.w   @AnimateSprite
@@ -143,7 +143,7 @@ CreateBattlesceneAnimation:
 @BurstRockSelfDestruction:
                 
                 moveq   #0,d1           ; Burst Rock is killed when it explodes
-                jsr     SetCurrentHP
+                jsr     SetCurrentHp
 @Skip:
                 
                 movem.l (sp)+,d0-d3/a0

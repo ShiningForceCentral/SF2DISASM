@@ -67,4 +67,4 @@ bbcs_18:        textCursor 2520
 ce_4B2DA:       mainEntity 12,32,UP
                 entity 12,8,DOWN,MAPSPRITE_TAROS,eas_Init
                 entity 12,5,DOWN,MAPSPRITE_CARAVAN,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

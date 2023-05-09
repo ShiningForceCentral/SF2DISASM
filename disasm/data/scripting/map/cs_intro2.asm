@@ -115,4 +115,4 @@ ce_48510:       mainEntity 63,63,UP
                 entity 12,13,UP,MAPSPRITE_SOLDIER1,eas_Init
                 entity 9,6,LEFT,MAPSPRITE_EFFECT6,eas_Init
                 entity 15,6,LEFT,MAPSPRITE_EFFECT6,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

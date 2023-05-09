@@ -118,4 +118,4 @@ cs_4DBEE:       stopEntity ALLY_LEMON
 ce_4DD8C:       mainEntity 36,57,DOWN
                 entity 33,59,RIGHT,ALLY_PETER,eas_Init
                 entity 35,59,DOWN,ALLY_LEMON,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

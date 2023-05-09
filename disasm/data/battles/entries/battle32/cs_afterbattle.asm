@@ -83,4 +83,4 @@ ce_4CEEC:       mainEntity 10,25,UP
                 entity 11,25,UP,ALLY_PETER,eas_Init
                 entity 11,26,UP,ALLY_FRAYJA,eas_Init
                 entity 10,22,DOWN,ALLY_JARO,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

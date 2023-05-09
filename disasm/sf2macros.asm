@@ -44,6 +44,10 @@ declareChecksum: macro
     endc
     endm
     
+declareChecksum: macro
+    dc.w $8921
+    endm
+    
 declareRomEnd: macro
     if (expandedRom=1)
     dc.l $3FFFFF
@@ -393,6 +397,10 @@ addToSavedByte: macro
     endc
     endm
     
+subtractSavedByte: macro
+    sub.b   ((\1-$1000000)).w,\2
+    endm
+    
 getSavedWord: macro
     if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
     if (narg>=3)
@@ -566,6 +574,10 @@ repairItem: macro
     else
     bclr    #ITEMENTRY_UPPERBIT_BROKEN,\1
     endc
+    endm
+    
+checkCurrentMap: macro
+    cmp.b   ((CURRENT_MAP-$1000000)).w,\1
     endm
     
 checkRaftMap: macro
@@ -840,43 +852,21 @@ allyCombatant: macro
     dc.b \3
     endm
     
-allyFillA: macro
-    dc.b AI_HEALER1
-    dc.w ITEM_NOTHING
-    dc.b ORDER_NONE
-    dc.b $F
-    dc.b ORDER_NONE
-    dc.b $F
-    dc.b $0
-    dc.b SPAWN_STARTING
-    endm
-    
-allyFillB: macro
-    dc.b AI_HEALER1
-    dc.w ITEM_NOTHING
-    dc.b ORDER_NONE
-    dc.b $0
-    dc.b ORDER_NONE
-    dc.b $0
-    dc.b $0
-    dc.b SPAWN_STARTING
-    endm
-    
 enemyCombatant: macro
     defineShorthand.b ENEMY_,\1
     dc.b \2
     dc.b \3
     endm
     
-enemyAIandItem: macro
-    defineShorthand.b AI_,\1
+combatantAiAndItem: macro
+    defineShorthand.b AICOMMANDSET_,\1
     defineBitfield.w ITEM_,\2
     endm
     
-enemyBehavior: macro
-    defineBitfield.b ORDER_,\1
+combatantBehavior: macro
+    defineBitfield.b AIORDER_,\1
     dc.b \2
-    defineBitfield.b ORDER_,\3
+    defineBitfield.b AIORDER_,\3
     dc.b \4
     dc.b \5
     defineBitfield.b SPAWN_,\6
@@ -942,7 +932,9 @@ equipFlags: macro
     endm
     
 equipFlags2: macro
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
     defineBitfield.l EQUIPFLAG2_,\1
+    endc
     endm
     
 range: macro Min,Max
@@ -1118,12 +1110,12 @@ input: macro
 follower: macro
     dc.b \1
     dc.b \2
-    dc.w \3
+    dc.b \3
     dc.b \4
     endm
     
 mapSprite: macro
-    defineShorthand.w MAPSPRITE_,\1
+    defineShorthand.b MAPSPRITE_,\1
     endm
     
 portrait: macro

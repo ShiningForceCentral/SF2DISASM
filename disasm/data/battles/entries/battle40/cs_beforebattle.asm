@@ -220,4 +220,4 @@ ce_4E878:       mainEntity 16,39,UP
                 entity 16,41,UP,MAPSPRITE_CARAVAN,eas_Init
                 entity 16,4,DOWN,MAPSPRITE_ODD_EYE,eas_Init
                 entity 63,63,UP,MAPSPRITE_EFFECT3,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

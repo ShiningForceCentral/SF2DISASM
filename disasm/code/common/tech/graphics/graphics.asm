@@ -7,7 +7,7 @@
 ; In: d0.w = Number of sprites to initialize
 
 
-InitSprites:
+InitializeSprites:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     (SPRITE_TABLE).l,a0
@@ -26,7 +26,7 @@ InitSprites:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function InitSprites
+    ; End of function InitializeSprites
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -315,7 +315,7 @@ sub_1942:
 
 sub_196C:
                 
-                lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a0
+                lea     (byte_FFAFA1).l,a0
                 moveq   #$3E,d7 
                 moveq   #1,d2
 loc_1976:
@@ -340,7 +340,7 @@ loc_1982:
 
 sub_198C:
                 
-                lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a0
+                lea     (byte_FFAFA1).l,a0
                 moveq   #$3E,d7 
                 moveq   #1,d2
 loc_1996:
@@ -361,6 +361,8 @@ loc_19A8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; clear table related to sprites
 
 
 sub_19B0:

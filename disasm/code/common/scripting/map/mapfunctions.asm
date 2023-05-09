@@ -5,28 +5,30 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-InitMapEntities:
+InitializeMapEntities:
                 
                 movem.l d0-a5,-(sp)
                 bra.w   loc_440E2
 
-    ; End of function InitMapEntities
+    ; End of function InitializeMapEntities
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused InitializeMapEntities entry point
 
 
 sub_440D4:
                 
                 movem.l d0-a5,-(sp)
                 lea     GetEntityPortaitAndSpeechSfx(pc), a0
-                mulu.w  #5,d0
+                lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
 
     ; End of function sub_440D4
 
 
-; START OF FUNCTION CHUNK FOR InitMapEntities
+; START OF FUNCTION CHUNK FOR InitializeMapEntities
 
 loc_440E2:
                 
@@ -34,7 +36,7 @@ loc_440E2:
                 mulu.w  #$180,d2
                 bsr.w   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
-                lea     $20(a1),a2
+                lea     NEXT_ENTITYDEF(a1),a2
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a3
                 movem.w d1-d3,-(sp)
                 moveq   #1,d0
@@ -50,8 +52,8 @@ loc_44104:
                 andi.w  #$3F,d2 
                 muls.w  #$180,d2
                 move.b  (a0)+,d3
-                move.w  (a0)+,d4
-                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
+                move.b  (a0)+,d4
+                cmpi.b  #$F0,d4
                 bcs.s   loc_44146
                 movem.w d0,-(sp)
                 move.w  #$2F,d0 
@@ -64,7 +66,7 @@ loc_44104:
                 bra.s   loc_44104
 loc_44146:
                 
-                cmpi.w  #COMBATANT_ALLIES_NUMBER,d4
+                cmpi.b  #COMBATANT_ALLIES_NUMBER,d4
                 bcc.s   loc_44170
                 ext.w   d4
                 tst.b   (a1,d4.w)
@@ -107,7 +109,7 @@ loc_44180:
                 movem.l (sp)+,d0-a5
                 rts
 
-; END OF FUNCTION CHUNK FOR InitMapEntities
+; END OF FUNCTION CHUNK FOR InitializeMapEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -129,9 +131,9 @@ sub_441AA:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #CODE_TERMINATOR_BYTE,d0
                 beq.s   byte_441F0      ; No followers
-                mulu.w  #ENTITYDEF_SIZE,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 move.w  d1,(a1,d0.w)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a1,d0.w)
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a1,d0.w)
@@ -147,20 +149,20 @@ byte_441F0:
                 bne.s   @RaftNotOnMap
                 getSavedByte RAFT_X, d1
                 getSavedByte RAFT_Y, d2
-                move.w  #$1F,d0
+                move.w  #FOLLOWER_B,d0
                 andi.w  #$7F,d1 
                 muls.w  #$180,d1
                 andi.w  #$7F,d2 
                 muls.w  #$180,d2
-                moveq   #2,d3
-                move.w  #MAPSPRITE_RAFT,d4
+                moveq   #LEFT,d3        ; facing
+                moveq   #MAPSPRITE_RAFT,d4
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 move.b  d0,$3F(a0)
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
-                move.w  #$1F,d0
+                move.w  #FOLLOWER_B,d0
                 move.w  d3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3
@@ -187,7 +189,7 @@ byte_441F0:
 ; Out: ccr zero-bit clear if true
 
 
-IsOverworldMap?:
+IsOverworldMap:
                 
                 movem.l d0-d1/a0,-(sp)
                 clr.w   d1
@@ -195,13 +197,8 @@ IsOverworldMap?:
 @Loop:
                 
                 move.b  (a0)+,d0
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                bmi.s   @Break
-                cmp.b   (CURRENT_MAP).l,d0
-            else
                 bmi.w   @Break
-                cmp.b   ((CURRENT_MAP-$1000000)).w,d0
-           endif
+                checkCurrentMap d0
                 bne.s   @Next
                 addq.w  #1,d1
 @Next:
@@ -213,5 +210,5 @@ IsOverworldMap?:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function IsOverworldMap?
+    ; End of function IsOverworldMap
 

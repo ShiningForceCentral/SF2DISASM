@@ -50,4 +50,4 @@ ce_4B84C:       mainEntity 27,23,LEFT
                 entity 63,63,RIGHT,MAPSPRITE_ARROW_LAUNCHER,eas_Init
                 entity 63,63,RIGHT,MAPSPRITE_HARPY,eas_Init
                 entity 63,63,RIGHT,MAPSPRITE_ORC,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

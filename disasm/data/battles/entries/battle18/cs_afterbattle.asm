@@ -263,4 +263,4 @@ abcs_battle18:  textCursor 2528
                 csc_end
 ce_4B6BE:       mainEntity 12,9,UP
                 entity 12,5,DOWN,MAPSPRITE_CARAVAN,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

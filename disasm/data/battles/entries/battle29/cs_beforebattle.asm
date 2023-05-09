@@ -126,4 +126,4 @@ ce_4C5AE:       mainEntity 15,33,UP
                 entity 63,63,DOWN,MAPSPRITE_ORC_LORD,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_WIZARD,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_WORM,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

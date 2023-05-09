@@ -18,16 +18,15 @@
                 include "data\battles\global\battleneutralentities.asm"    ; Battle entities which are not force members or enemies
                 include "data\scripting\entity\eas_battleneutralentities.asm"    ; Entity actscripts for battle entities which are not force members or enemies
             if (STANDARD_BUILD=1)
-                include "code\common\scripting\entity\getallymapsprite-standard.asm"
-                include "data\stats\allies\allymapsprites-standard.asm"
                 include "code\common\scripting\entity\getcombatantmapsprite-standard.asm"
+                include "data\stats\allies\allymapsprites-standard.asm"
             else
                 include "code\common\scripting\entity\getallymapsprite.asm"    ; Get ally map sprite index function
                 include "data\stats\allies\allymapsprites.asm"    ; Ally map sprite indexes table
                 include "code\common\scripting\entity\getcombatantmapsprite.asm"    ; Get combatant map sprite index function
             endif
-                align
                 include "data\stats\enemies\enemymapsprites.asm"    ; Enemy map sprite indexes table
+                align
                 include "code\common\scripting\entity\entityfunctions_2.asm"    ; Entity functions
                 include "data\scripting\entity\eas_main.asm"    ; Main entity actscripts
                 include "code\common\scripting\entity\entityfunctions_3.asm"    ; Entity functions

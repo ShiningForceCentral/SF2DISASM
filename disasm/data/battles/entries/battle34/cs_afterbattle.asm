@@ -111,9 +111,9 @@ cs_4D692:       csc_end
 
 csub_4D694:
                 
-                moveq   #$71,d0 
+                moveq   #ITEM_SKY_ORB,d0
                 moveq   #1,d1
-                jmp     GetMandatoryItem
+                jmp     ReceiveMandatoryItem
 
     ; End of function csub_4D694
 
@@ -123,4 +123,4 @@ ce_4D69E:       mainEntity 7,12,UP
                 entity 63,63,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 6,12,UP,MAPSPRITE_CARAVAN,eas_Init
                 entity 63,63,LEFT,MAPSPRITE_ORB,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

@@ -113,6 +113,7 @@ pt_MenuTiles:   dc.l $85010204          ; starting with references to uncompress
                 dc.l p_MenuTiles_Shop
                 dc.l p_MenuTiles_Caravan
                 dc.l p_MenuTiles_Depot
+                
 pt_MenuOptions: dc.l pt_FieldMenu_Names
                 dc.l pt_BattleMenu_Names
                 dc.l pt_BattleMenuOverItem_Names
@@ -122,6 +123,7 @@ pt_MenuOptions: dc.l pt_FieldMenu_Names
                 dc.l pt_ShopMenu_Names
                 dc.l pt_CaravanMenu_Names
                 dc.l pt_DepotMenu_Names
+                
 pt_FieldMenu_Names:
                 dc.l aMember            
                 dc.l aMagic             
@@ -131,7 +133,8 @@ aMember:        dc.b 'MEMBER',0
 aMagic:         dc.b 'MAGIC',0
 aItem:          dc.b 'ITEM',0
 aSearch:        dc.b 'SEARCH',0
-                dc.b $FF
+                align
+                
 pt_BattleMenu_Names:
                 dc.l aAttack_0          
                 dc.l aMagic_0           
@@ -141,7 +144,8 @@ aAttack_0:      dc.b 'ATTACK',0
 aMagic_0:       dc.b 'MAGIC',0
 aItem_0:        dc.b 'ITEM',0
 aStay:          dc.b 'STAY',0
-                dc.b $FF
+                align
+                
 pt_BattleMenuOverItem_Names:
                 dc.l aAttack_1          
                 dc.l aMagic_1           
@@ -151,7 +155,8 @@ aAttack_1:      dc.b 'ATTACK',0
 aMagic_1:       dc.b 'MAGIC',0
 aItem_1:        dc.b 'ITEM',0
 aSearch_0:      dc.b 'SEARCH',0
-                dc.b $FF
+                align
+                
 pt_ItemMenu_Names:
                 dc.l aUse               
                 dc.l aGive              
@@ -161,6 +166,8 @@ aUse:           dc.b 'USE',0
 aGive:          dc.b 'GIVE',0
 aEquip:         dc.b 'EQUIP',0
 aDrop:          dc.b 'DROP',0
+                align
+                
 pt_BattlefieldMenu_Names:
                 dc.l aMember_0          
                 dc.l aMap               
@@ -170,6 +177,8 @@ aMember_0:      dc.b 'MEMBER',0
 aMap:           dc.b 'MAP',0
 aSpeed_0:       dc.b 'SPEED',0
 aQuit:          dc.b 'QUIT',0
+                align
+                
 pt_ChurchMenu_Names:
                 dc.l aRaise             
                 dc.l aCure              
@@ -179,7 +188,8 @@ aRaise:         dc.b 'RAISE',0
 aCure:          dc.b 'CURE',0
 aPromo_:        dc.b 'PROMO.',0
 aSave:          dc.b 'SAVE',0
-                dc.b $FF
+                align
+                
 pt_ShopMenu_Names:
                 dc.l aBuy               
                 dc.l aSell              
@@ -189,6 +199,8 @@ aBuy:           dc.b 'BUY',0
 aSell:          dc.b 'SELL',0
 aRepair:        dc.b 'REPAIR',0
 aDeals:         dc.b 'DEALS',0
+                align
+                
 pt_CaravanMenu_Names:
                 dc.l aJoin              
                 dc.l aDepot             
@@ -198,6 +210,8 @@ aJoin:          dc.b 'JOIN',0
 aDepot:         dc.b 'DEPOT',0
 aItem_2:        dc.b 'ITEM',0
 aPurge:         dc.b 'PURGE',0
+                align
+                
 pt_DepotMenu_Names:
                 dc.l aLook              
                 dc.l aDepos_            
@@ -207,7 +221,9 @@ aLook:          dc.b 'LOOK',0
 aDepos_:        dc.b 'DEPOS.',0
 aDerive:        dc.b 'DERIVE',0
 aDrop_0:        dc.b 'DROP',0
-MenuHBarTiles:  dc.b 2
+                align
+                
+MenuHBarTiles1: dc.b 2
                 dc.b $22
                 dc.b $22
                 dc.b $22
@@ -255,7 +271,7 @@ MenuHBarTiles:  dc.b 2
                 dc.b $22
                 dc.b $22
                 dc.b $22
-byte_11336:     dc.b 2
+MenuHBarTiles2: dc.b 2
                 dc.b $22
                 dc.b $22
                 dc.b $22
@@ -303,7 +319,7 @@ byte_11336:     dc.b 2
                 dc.b $22
                 dc.b $22
                 dc.b $22
-byte_11366:     dc.b $22
+MenuHBarTiles3: dc.b $22
                 dc.b $22
                 dc.b $22
                 dc.b $22
@@ -351,7 +367,7 @@ byte_11366:     dc.b $22
                 dc.b $22
                 dc.b $22
                 dc.b $20
-byte_11396:     dc.b $22
+MenuHBarTiles4: dc.b $22
                 dc.b $22
                 dc.b $22
                 dc.b $22
@@ -411,9 +427,9 @@ CreateBattleEquipWindow:
                 jsr     (CreateWindow).w
                 move.w  d0,((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w
                 lea     BattleEquipWindowLayout(pc), a0
-                move.w  #$B4,d7 
+                move.w  #180,d7
                 jsr     (CopyBytes).w   
-                bsr.w   DrawBattleEquipWindowStats
+                bsr.w   BuildBattleEquipWindow
                 move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
                 move.w  #$212,d1
                 move.w  #4,d2
@@ -431,7 +447,7 @@ CreateBattleEquipWindow:
 sub_11404:
                 
                 movem.l d0-a2,-(sp)
-                bsr.w   DrawBattleEquipWindowStats
+                bsr.w   BuildBattleEquipWindow
                 move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
@@ -464,7 +480,7 @@ HideBattleEquipWindow:
 
 windowTilesAddress = -4
 
-DrawBattleEquipWindowStats:
+BuildBattleEquipWindow:
                 
                 link    a6,#-4
                 move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
@@ -472,27 +488,27 @@ DrawBattleEquipWindowStats:
                 jsr     (GetWindowTileAddress).w
                 move.l  a1,windowTilesAddress(a6)
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentATT
+                jsr     j_GetCurrentAtt
                 move.w  d1,d0
                 movea.l windowTilesAddress(a6),a1
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentDEF
+                jsr     j_GetCurrentDef
                 move.w  d1,d0
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #$28,a1 ; second stat offset
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentAGI
+                jsr     j_GetCurrentAgi
                 move.w  d1,d0
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #$50,a1 ; third stat offset
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentMOV
+                jsr     j_GetCurrentMov
                 move.w  d1,d0
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #$78,a1 ; fourth stat offset
@@ -501,5 +517,5 @@ DrawBattleEquipWindowStats:
                 unlk    a6
                 rts
 
-    ; End of function DrawBattleEquipWindowStats
+    ; End of function BuildBattleEquipWindow
 

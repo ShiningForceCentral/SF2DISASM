@@ -8,13 +8,13 @@
 NewGame:
                 
                 movem.w d0-d1/d7,-(sp)
-                bsr.w   InitGameSettings
+                bsr.w   InitializeGameSettings
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
 @Loop:
                 
                 moveq   #COMBATANT_ALLIES_COUNTER,d0
                 sub.w   d7,d0
-                bsr.w   InitAllyCombatantEntry
+                bsr.w   InitializeAllyCombatantEntry
                 dbf     d7,@Loop
                 
                 moveq   #GOLD_STARTING_AMOUNT,d1 ; starting gold value
@@ -32,11 +32,11 @@ NewGame:
 ; In: D0 = ally index
 
 
-InitAllyCombatantEntry:
+InitializeAllyCombatantEntry:
                 
                 movem.l d0-d3/a0-a1,-(sp)
                 move.w  d0,d1
-                mulu.w  #COMBATANT_ENTRY_SIZE,d1
+                mulu.w  #COMBATANT_ENTRY_REAL_SIZE,d1
                 loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d1,a1
                 conditionalLongAddr movea.l, p_tbl_AllyNames, a0
@@ -98,16 +98,16 @@ InitAllyCombatantEntry:
                 move.l  #$3F3F3F3F,d3
                 movep.l d3,COMBATANT_OFFSET_SPELLS(a1) 
             else
-                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1)    ; spell entries default to nothing
+                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1) ; spell entries default to nothing
             endif
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
-                bsr.w   InitAllyStats   
+                bsr.w   InitializeAllyStats
                 bsr.w   ApplyStatusEffectsAndItemsOnStats
                 movem.l (sp)+,d0-d3/a0-a1
                 rts
 
-    ; End of function InitAllyCombatantEntry
+    ; End of function InitializeAllyCombatantEntry
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -119,7 +119,7 @@ InitAllyCombatantEntry:
 LoadAllyClassData:
                 
                 movem.l d0-d1/a0-a1,-(sp)
-                mulu.w  #COMBATANT_ENTRY_SIZE,d0
+                mulu.w  #COMBATANT_ENTRY_REAL_SIZE,d0
                 loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d0,a1
                 conditionalLongAddr movea.l, p_tbl_ClassDefs, a0
@@ -157,7 +157,7 @@ Promote:
 ; Clear all flags and important game variables.
 
 
-InitGameSettings:
+InitializeGameSettings:
                 
                 movem.l d0/d7-a0,-(sp)
                 moveq   #LONGWORD_GAMEFLAGS_INITVALUE,d0
@@ -186,16 +186,16 @@ InitGameSettings:
                 moveq   #0,d0
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 lea     (COMBATANT_ENTRIES).l,a0
-                movep.w d0,CARAVAN_ITEMS_NUMBER_OFFSET(a0)
-                movep.w d0,CURRENT_GOLD_OFFSET(a0)
-                move.b  d0,PLAYER_TYPE_OFFSET(a0)
-                move.b  d0,CURRENT_MAP_OFFSET(a0)
-                move.b  d0,CURRENT_BATTLE_OFFSET(a0)
-                move.b  d0,DISPLAY_BATTLE_MESSAGES_OFFSET(a0)
-                move.b  d0,EGRESS_MAP_OFFSET(a0)
+                movep.w d0,SAVED_DATA_OFFSET_CARAVAN_ITEMS_NUMBER(a0)
+                movep.w d0,SAVED_DATA_OFFSET_CURRENT_GOLD(a0)
+                move.b  d0,SAVED_DATA_OFFSET_PLAYER_TYPE(a0)
+                move.b  d0,SAVED_DATA_OFFSET_CURRENT_MAP(a0)
+                move.b  d0,SAVED_DATA_OFFSET_CURRENT_BATTLE(a0)
+                move.b  d0,SAVED_DATA_OFFSET_DISPLAY_BATTLE_MESSAGES(a0)
+                move.b  d0,SAVED_DATA_OFFSET_EGRESS_MAP(a0)
                 move.l  #359999,d0
-                movep.l d0,SPECIAL_BATTLE_RECORD_OFFSET(a0)
-                move.b  #2,MESSAGE_SPEED_OFFSET(a0)
+                movep.l d0,SAVED_DATA_OFFSET_SPECIAL_BATTLE_RECORD(a0)
+                move.b  #2,SAVED_DATA_OFFSET_MESSAGE_SPEED(a0)
             else
                 move.w  d0,((CARAVAN_ITEMS_NUMBER-$1000000)).w ; number of items in caravan
                 move.w  d0,((CURRENT_GOLD-$1000000)).w
@@ -212,7 +212,7 @@ InitGameSettings:
                 movem.l (sp)+,d0/d7-a0
                 rts
 
-    ; End of function InitGameSettings
+    ; End of function InitializeGameSettings
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -367,7 +367,7 @@ LeaveForce:
                 addi.w  #FORCEMEMBER_JOINED_FLAGS_START,d1
                 bsr.w   ClearFlag
                 move.w  #MAP_NULLPOSITION,d1
-                jsr     SetXPos
+                jsr     SetCombatantX
                 move.l  (sp)+,d1
                 rts
 
@@ -379,7 +379,7 @@ LeaveForce:
 ; Is ally d0.b currently in battle party? Return CCR zero-bit set if true.
 
 
-IsInBattleParty?:
+IsInBattleParty:
                 
                 movem.l d1,-(sp)
                 move.b  d0,d1
@@ -389,7 +389,7 @@ IsInBattleParty?:
                 movem.l (sp)+,d1
                 rts
 
-    ; End of function IsInBattleParty?
+    ; End of function IsInBattleParty
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -423,7 +423,7 @@ LeaveBattleParty:
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.w   ClearFlag
                 move.w  #$FFFF,d1
-                jsr     SetXPos
+                jsr     SetCombatantX
                 move.l  (sp)+,d1
                 rts
 

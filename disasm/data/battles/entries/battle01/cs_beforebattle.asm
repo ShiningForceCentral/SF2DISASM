@@ -152,4 +152,4 @@ ce_49694:       mainEntity 7,16,UP
                 entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
                 entity 7,11,UP,MAPSPRITE_ASTRAL,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

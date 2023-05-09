@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\global\debugmodemaps.asm :
 ; 0x7186..0x71C0 : Debug mode maps
-DebugModeAvailableMaps:
+tbl_DebugModeAvailableMaps:
                 dc.b MAP_GRANSEAL
                 dc.b MAP_GRANSEAL_EARTHQUAKE
                 dc.b MAP_YEEL

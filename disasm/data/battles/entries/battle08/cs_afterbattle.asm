@@ -88,4 +88,4 @@ ce_4ABBE:       mainEntity 14,37,UP
                 entity 16,35,UP,ALLY_CHESTER,eas_Init
                 entity 16,34,LEFT,ALLY_KIWI,eas_Init
                 entity 14,34,DOWN,MAPSPRITE_WORKER,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

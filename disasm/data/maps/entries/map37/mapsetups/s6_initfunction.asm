@@ -7,11 +7,11 @@
 
 ms_map37_InitFunction:
                 
-                jsr     InitNazcaShipForceMembers
+                jsr     InitializeNazcaShipForceMembers
                 chkFlg  836             ; Set after the scene where Zynk stops you as you leave the Moun underground
-                beq.s   return_5FA9A
+                beq.s   @Return
                 script  cs_5FA9C
-return_5FA9A:
+@Return:
                 
                 rts
 

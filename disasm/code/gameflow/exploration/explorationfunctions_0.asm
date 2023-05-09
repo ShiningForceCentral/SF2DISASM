@@ -20,7 +20,7 @@ loc_237A4:
                 ; get X/Y/facing/size of player entity
                 movem.l d3-a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                mulu.w  #ENTITYDEF_SIZE,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 move.w  (a0,d0.w),d1    ; get X
                 move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d2
@@ -54,7 +54,7 @@ loc_237FE:
                 
                 cmp.b   ((VIEW_TARGET_ENTITY-$1000000)).w,d0
                 beq.w   loc_2382A       ; skip this entity because it's the player!
-                bsr.w   IsFollowerEntity?
+                bsr.w   IsFollowerEntity
                 bne.w   loc_2382A       ; skip this entity because it's a follower!
                 ; get distance from activated block
                 move.w  (a0),d5
@@ -97,7 +97,7 @@ loc_23840:
 ; Is entity d0.b a follower? Return CCR zero-bit set if true.
 
 
-IsFollowerEntity?:
+IsFollowerEntity:
                 
                 movem.l d0/a0,-(sp)
                 lea     ((FOLLOWERS_LIST-$1000000)).w,a0
@@ -114,7 +114,7 @@ IsFollowerEntity?:
                 movem.l (sp)+,d0/a0
                 rts
 
-    ; End of function IsFollowerEntity?
+    ; End of function IsFollowerEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -133,7 +133,7 @@ loc_2386C:
                 clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
                 clr.w   ((SPEECH_SFX-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                mulu.w  #ENTITYDEF_SIZE,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 move.w  (a0,d0.w),d2
                 move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d1

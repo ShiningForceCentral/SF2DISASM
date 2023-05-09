@@ -1,502 +1,726 @@
 
 ; ASM FILE data\graphics\mapsprites\entries.asm :
 ; 0xC8000..0xFFC48 : Map sprites
-pt_MapSprites:  dc.l MapSprite000_0, MapSprite000_1, MapSprite000_2
-                dc.l MapSprite001_0, MapSprite001_1, MapSprite001_2
-                dc.l MapSprite002_0, MapSprite002_1, MapSprite002_2
-                dc.l MapSprite003_0, MapSprite003_1, MapSprite003_2
-                dc.l MapSprite004_0, MapSprite004_1, MapSprite004_2
-                dc.l MapSprite005_0, MapSprite005_1, MapSprite005_2
-                dc.l MapSprite006_0, MapSprite006_1, MapSprite006_2
-                dc.l MapSprite007_0, MapSprite007_1, MapSprite007_2
-                dc.l MapSprite008_0, MapSprite008_1, MapSprite008_2
-                dc.l MapSprite009_0, MapSprite009_1, MapSprite009_2
-                dc.l MapSprite010_0, MapSprite010_1, MapSprite010_2
-                dc.l MapSprite011_0, MapSprite011_1, MapSprite011_2
-                dc.l MapSprite012_0, MapSprite012_1, MapSprite012_2
-                dc.l MapSprite013_0, MapSprite013_1, MapSprite013_2
-                dc.l MapSprite014_0, MapSprite014_1, MapSprite014_2
-                dc.l MapSprite015_0, MapSprite015_1, MapSprite015_2
-                dc.l MapSprite016_0, MapSprite016_1, MapSprite016_2
-                dc.l MapSprite017_0, MapSprite017_1, MapSprite017_2
-                dc.l MapSprite018_0, MapSprite018_1, MapSprite018_2
-                dc.l MapSprite019_0, MapSprite019_1, MapSprite019_2
-                dc.l MapSprite020_0, MapSprite020_1, MapSprite020_2
-                dc.l MapSprite021_0, MapSprite021_1, MapSprite021_2
-                dc.l MapSprite022_0, MapSprite022_1, MapSprite022_2
-                dc.l MapSprite023_0, MapSprite023_1, MapSprite023_2
-                dc.l MapSprite024_0, MapSprite024_1, MapSprite024_2
-                dc.l MapSprite025_0, MapSprite025_1, MapSprite025_2
-                dc.l MapSprite026_0, MapSprite026_1, MapSprite026_2
-                dc.l MapSprite027_0, MapSprite027_1, MapSprite027_2
-                dc.l MapSprite028_0, MapSprite028_1, MapSprite028_2
-                dc.l MapSprite029_0, MapSprite029_1, MapSprite029_2
-                dc.l MapSprite030_0, MapSprite030_1, MapSprite030_2
-                dc.l MapSprite031_0, MapSprite031_1, MapSprite031_2
-                dc.l MapSprite032_0, MapSprite032_1, MapSprite032_2
-                dc.l MapSprite033_0, MapSprite033_1, MapSprite033_2
-                dc.l MapSprite034_0, MapSprite034_1, MapSprite034_2
-                dc.l MapSprite035_0, MapSprite035_1, MapSprite035_2
-                dc.l MapSprite036_0, MapSprite036_1, MapSprite036_2
-                dc.l MapSprite037_0, MapSprite037_1, MapSprite037_2
-                dc.l MapSprite038_0, MapSprite038_1, MapSprite038_2
-                dc.l MapSprite039_0, MapSprite039_1, MapSprite039_2
-                dc.l MapSprite040_0, MapSprite040_1, MapSprite040_2
-                dc.l MapSprite041_0, MapSprite041_1, MapSprite041_2
-                dc.l MapSprite042_0, MapSprite042_1, MapSprite042_2
-                dc.l MapSprite043_0, MapSprite043_1, MapSprite043_2
-                dc.l MapSprite044_0, MapSprite044_1, MapSprite044_2
-                dc.l MapSprite045_0, MapSprite045_1, MapSprite045_2
-                dc.l MapSprite046_0, MapSprite046_1, MapSprite046_2
-                dc.l MapSprite047_0, MapSprite047_1, MapSprite047_2
-                dc.l MapSprite048_0, MapSprite048_1, MapSprite048_2
-                dc.l MapSprite049_0, MapSprite049_1, MapSprite049_2
-                dc.l MapSprite050_0, MapSprite050_1, MapSprite050_2
-                dc.l MapSprite051_0, MapSprite051_1, MapSprite051_2
-                dc.l MapSprite052_0, MapSprite052_1, MapSprite052_2
-                dc.l MapSprite053_0, MapSprite053_1, MapSprite053_2
-                dc.l MapSprite054_0, MapSprite054_1, MapSprite054_2
-                dc.l MapSprite055_0, MapSprite055_1, MapSprite055_2
-                dc.l MapSprite056_0, MapSprite056_1, MapSprite056_2
-                dc.l MapSprite057_0, MapSprite057_1, MapSprite057_2
-                dc.l MapSprite058_0, MapSprite058_1, MapSprite058_2
-                dc.l MapSprite059_0, MapSprite059_1, MapSprite059_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite061_0, MapSprite061_1, MapSprite061_2
-                dc.l MapSprite062_0, MapSprite062_1, MapSprite062_2
-                dc.l MapSprite063_0, MapSprite063_1, MapSprite063_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite060_0, MapSprite060_1, MapSprite060_2
-                dc.l MapSprite064_0, MapSprite064_1, MapSprite064_2
-                dc.l MapSprite065_0, MapSprite065_1, MapSprite065_2
-                dc.l MapSprite066_0, MapSprite066_1, MapSprite066_2
-                dc.l MapSprite067_0, MapSprite067_1, MapSprite067_2
-                dc.l MapSprite068_0, MapSprite068_1, MapSprite068_2
-                dc.l MapSprite069_0, MapSprite069_1, MapSprite069_2
-                dc.l MapSprite070_0, MapSprite070_1, MapSprite070_2
-                dc.l MapSprite071_0, MapSprite071_1, MapSprite071_2
-                dc.l MapSprite072_0, MapSprite072_1, MapSprite072_2
-                dc.l MapSprite073_0, MapSprite073_1, MapSprite073_2
-                dc.l MapSprite074_0, MapSprite074_1, MapSprite074_2
-                dc.l MapSprite075_0, MapSprite075_1, MapSprite075_2
-                dc.l MapSprite076_0, MapSprite076_1, MapSprite076_2
-                dc.l MapSprite077_0, MapSprite077_1, MapSprite077_2
-                dc.l MapSprite078_0, MapSprite078_1, MapSprite078_2
-                dc.l MapSprite079_0, MapSprite079_1, MapSprite079_2
-                dc.l MapSprite080_0, MapSprite080_1, MapSprite080_2
-                dc.l MapSprite081_0, MapSprite081_1, MapSprite081_2
-                dc.l MapSprite082_0, MapSprite082_1, MapSprite082_2
-                dc.l MapSprite083_0, MapSprite083_1, MapSprite083_2
-                dc.l MapSprite084_0, MapSprite084_1, MapSprite084_2
-                dc.l MapSprite085_0, MapSprite085_1, MapSprite085_2
-                dc.l MapSprite086_0, MapSprite086_1, MapSprite086_2
-                dc.l MapSprite087_0, MapSprite087_1, MapSprite087_2
-                dc.l MapSprite088_0, MapSprite088_1, MapSprite088_2
-                dc.l MapSprite089_0, MapSprite089_1, MapSprite089_2
-                dc.l MapSprite090_0, MapSprite090_1, MapSprite090_2
-                dc.l MapSprite091_0, MapSprite091_1, MapSprite091_2
-                dc.l MapSprite092_0, MapSprite092_1, MapSprite092_2
-                dc.l MapSprite093_0, MapSprite093_1, MapSprite093_2
-                dc.l MapSprite094_0, MapSprite094_1, MapSprite094_2
-                dc.l MapSprite095_0, MapSprite095_1, MapSprite095_2
-                dc.l MapSprite096_0, MapSprite096_1, MapSprite096_2
-                dc.l MapSprite097_0, MapSprite097_1, MapSprite097_2
-                dc.l MapSprite098_0, MapSprite098_1, MapSprite098_2
-                dc.l MapSprite099_0, MapSprite099_1, MapSprite099_2
-                dc.l MapSprite100_0, MapSprite100_1, MapSprite100_2
-                dc.l MapSprite101_0, MapSprite101_1, MapSprite101_2
-                dc.l MapSprite102_0, MapSprite102_1, MapSprite102_2
-                dc.l MapSprite103_0, MapSprite103_1, MapSprite103_2
-                dc.l MapSprite104_0, MapSprite104_1, MapSprite104_2
-                dc.l MapSprite105_0, MapSprite105_1, MapSprite105_2
-                dc.l MapSprite106_0, MapSprite106_1, MapSprite106_2
-                dc.l MapSprite107_0, MapSprite107_1, MapSprite107_2
-                dc.l MapSprite108_0, MapSprite108_1, MapSprite108_2
-                dc.l MapSprite109_0, MapSprite109_1, MapSprite109_2
-                dc.l MapSprite110_0, MapSprite110_1, MapSprite110_2
-                dc.l MapSprite111_0, MapSprite111_1, MapSprite111_2
-                dc.l MapSprite112_0, MapSprite112_1, MapSprite112_2
-                dc.l MapSprite113_0, MapSprite113_1, MapSprite113_2
-                dc.l MapSprite114_0, MapSprite114_1, MapSprite114_2
-                dc.l MapSprite115_0, MapSprite115_1, MapSprite115_2
-                dc.l MapSprite116_0, MapSprite116_1, MapSprite116_2
-                dc.l MapSprite117_0, MapSprite117_1, MapSprite117_2
-                dc.l MapSprite118_0, MapSprite118_1, MapSprite118_2
-                dc.l MapSprite119_0, MapSprite119_1, MapSprite119_2
-                dc.l MapSprite120_0, MapSprite120_1, MapSprite120_2
-                dc.l MapSprite121_0, MapSprite121_1, MapSprite121_2
-                dc.l MapSprite122_0, MapSprite122_1, MapSprite122_2
-                dc.l MapSprite123_0, MapSprite123_1, MapSprite123_2
-                dc.l MapSprite124_0, MapSprite124_1, MapSprite124_2
-                dc.l MapSprite125_0, MapSprite125_1, MapSprite125_2
-                dc.l MapSprite126_0, MapSprite126_1, MapSprite126_2
-                dc.l MapSprite127_0, MapSprite127_1, MapSprite127_2
-                dc.l MapSprite128_0, MapSprite128_1, MapSprite128_2
-                dc.l MapSprite129_0, MapSprite129_1, MapSprite129_2
-                dc.l MapSprite130_0, MapSprite130_1, MapSprite130_2
-                dc.l MapSprite131_0, MapSprite131_1, MapSprite131_2
-                dc.l MapSprite132_0, MapSprite132_1, MapSprite132_2
-                dc.l MapSprite133_0, MapSprite133_1, MapSprite133_2
-                dc.l MapSprite134_0, MapSprite134_1, MapSprite134_2
-                dc.l MapSprite135_0, MapSprite135_1, MapSprite135_2
-                dc.l MapSprite136_0, MapSprite136_1, MapSprite136_2
-                dc.l MapSprite137_0, MapSprite137_1, MapSprite137_2
-                dc.l MapSprite138_0, MapSprite138_1, MapSprite138_2
-                dc.l MapSprite139_0, MapSprite139_1, MapSprite139_2
-                dc.l MapSprite140_0, MapSprite140_1, MapSprite140_2
-                dc.l MapSprite141_0, MapSprite141_1, MapSprite141_2
-                dc.l MapSprite142_0, MapSprite142_1, MapSprite142_2
-                dc.l MapSprite143_0, MapSprite143_1, MapSprite143_2
-                dc.l MapSprite144_0, MapSprite144_1, MapSprite144_2
-                dc.l MapSprite145_0, MapSprite145_1, MapSprite145_2
-                dc.l MapSprite146_0, MapSprite146_1, MapSprite146_2
-                dc.l MapSprite147_0, MapSprite147_1, MapSprite147_2
-                dc.l MapSprite148_0, MapSprite148_1, MapSprite148_2
-                dc.l MapSprite149_0, MapSprite149_1, MapSprite149_2
-                dc.l MapSprite150_0, MapSprite150_1, MapSprite150_2
-                dc.l MapSprite151_0, MapSprite151_0, MapSprite151_0
-                dc.l MapSprite151_0, MapSprite151_0, MapSprite151_0
-                dc.l MapSprite151_0, MapSprite153_1, MapSprite153_2
-                dc.l MapSprite154_0, MapSprite154_1, MapSprite154_2
-                dc.l MapSprite155_0, MapSprite155_1, MapSprite155_2
-                dc.l MapSprite156_0, MapSprite156_1, MapSprite156_2
-                dc.l MapSprite157_0, MapSprite157_1, MapSprite157_2
-                dc.l MapSprite057_0, MapSprite057_1, MapSprite057_2
-                dc.l MapSprite159_0, MapSprite159_1, MapSprite159_2
-                dc.l MapSprite160_0, MapSprite160_1, MapSprite160_2
-                dc.l MapSprite161_0, MapSprite161_0, MapSprite161_0
-                dc.l MapSprite161_0, MapSprite161_0, MapSprite161_0
-                dc.l MapSprite163_0, MapSprite163_1, MapSprite163_2
-                dc.l MapSprite163_0, MapSprite163_1, MapSprite163_2
-                dc.l MapSprite161_0, MapSprite161_0, MapSprite161_0
-                dc.l MapSprite161_0, MapSprite161_0, MapSprite161_0
-                dc.l MapSprite161_0, MapSprite161_0, MapSprite161_0
-                dc.l MapSprite161_0, MapSprite161_0, MapSprite161_0
-                dc.l MapSprite161_0, MapSprite161_0, MapSprite161_0
-                dc.l MapSprite161_0, MapSprite170_1, MapSprite170_2
-                dc.l MapSprite171_0, MapSprite171_1, MapSprite171_2
-                dc.l MapSprite172_0, MapSprite172_1, MapSprite172_2
-                dc.l MapSprite173_0, MapSprite173_1, MapSprite173_2
-                dc.l MapSprite174_0, MapSprite174_1, MapSprite174_2
-                dc.l MapSprite175_0, MapSprite175_1, MapSprite175_2
-                dc.l MapSprite176_0, MapSprite176_1, MapSprite176_2
-                dc.l MapSprite177_0, MapSprite177_1, MapSprite177_2
-                dc.l MapSprite178_0, MapSprite178_1, MapSprite178_2
-                dc.l MapSprite179_0, MapSprite179_1, MapSprite179_2
-                dc.l MapSprite180_0, MapSprite180_1, MapSprite180_2
-                dc.l MapSprite181_0, MapSprite181_1, MapSprite181_2
-                dc.l MapSprite182_0, MapSprite182_1, MapSprite182_2
-                dc.l MapSprite183_0, MapSprite183_1, MapSprite183_2
-                dc.l MapSprite184_0, MapSprite184_1, MapSprite184_2
-                dc.l MapSprite185_0, MapSprite185_1, MapSprite185_2
-                dc.l MapSprite186_0, MapSprite186_1, MapSprite186_2
-                dc.l MapSprite187_0, MapSprite187_1, MapSprite187_2
-                dc.l MapSprite188_0, MapSprite188_1, MapSprite188_2
-                dc.l MapSprite189_0, MapSprite189_1, MapSprite189_2
-                dc.l MapSprite190_0, MapSprite190_1, MapSprite190_2
-                dc.l MapSprite191_0, MapSprite191_0, MapSprite191_0
-                dc.l MapSprite191_0, MapSprite192_1, MapSprite192_2
-                dc.l MapSprite193_0, MapSprite193_1, MapSprite193_2
-                dc.l MapSprite194_0, MapSprite194_1, MapSprite194_2
-                dc.l MapSprite195_0, MapSprite195_1, MapSprite195_2
-                dc.l MapSprite196_0, MapSprite196_1, MapSprite196_2
-                dc.l MapSprite197_0, MapSprite197_1, MapSprite197_2
-                dc.l MapSprite198_0, MapSprite198_1, MapSprite198_2
-                dc.l MapSprite199_0, MapSprite199_1, MapSprite199_2
-                dc.l MapSprite200_0, MapSprite200_1, MapSprite200_2
-                dc.l MapSprite201_0, MapSprite201_1, MapSprite201_2
-                dc.l MapSprite202_0, MapSprite202_1, MapSprite202_2
-                dc.l MapSprite188_0, MapSprite188_1, MapSprite188_2
-                dc.l MapSprite204_0, MapSprite204_1, MapSprite204_2
-                dc.l MapSprite205_0, MapSprite205_1, MapSprite205_2
-                dc.l MapSprite206_0, MapSprite206_1, MapSprite206_2
-                dc.l MapSprite207_0, MapSprite207_1, MapSprite207_2
-                dc.l MapSprite208_0, MapSprite208_1, MapSprite208_2
-                dc.l MapSprite209_0, MapSprite209_1, MapSprite209_2
-                dc.l MapSprite210_0, MapSprite210_1, MapSprite210_2
-                dc.l MapSprite211_0, MapSprite211_1, MapSprite211_2
-                dc.l MapSprite212_0, MapSprite212_1, MapSprite212_2
-                dc.l MapSprite213_0, MapSprite213_1, MapSprite213_2
-                dc.l MapSprite163_0, MapSprite163_1, MapSprite163_2
-                dc.l MapSprite215_0, MapSprite215_1, MapSprite215_2
-                dc.l MapSprite216_0, MapSprite216_1, MapSprite216_2
-                dc.l MapSprite217_0, MapSprite217_1, MapSprite217_2
-                dc.l MapSprite218_0, MapSprite218_1, MapSprite218_2
-                dc.l MapSprite219_0, MapSprite219_1, MapSprite219_2
-                dc.l MapSprite220_0, MapSprite220_1, MapSprite220_2
-                dc.l MapSprite221_0, MapSprite221_1, MapSprite221_2
-                dc.l MapSprite222_0, MapSprite222_1, MapSprite222_2
-                dc.l MapSprite223_0, MapSprite223_1, MapSprite223_2
-                dc.l MapSprite224_0, MapSprite224_1, MapSprite224_2
-                dc.l MapSprite225_0, MapSprite225_1, MapSprite225_2
-                dc.l MapSprite226_0, MapSprite226_1, MapSprite226_2
-                dc.l MapSprite227_0, MapSprite227_1, MapSprite227_2
-                dc.l MapSprite228_0, MapSprite228_1, MapSprite228_2
-                dc.l MapSprite229_0, MapSprite229_1, MapSprite229_2
-                dc.l MapSprite230_0, MapSprite230_1, MapSprite230_2
-                dc.l MapSprite231_0, MapSprite231_1, MapSprite231_2
-                dc.l MapSprite232_0, MapSprite232_1, MapSprite232_2
-                dc.l MapSprite233_0, MapSprite233_1, MapSprite233_2
-                dc.l MapSprite234_0, MapSprite234_1, MapSprite234_2
-                dc.l MapSprite235_0, MapSprite235_1, MapSprite235_2
-                dc.l MapSprite236_0, MapSprite236_1, MapSprite236_2
-                dc.l MapSprite237_0, MapSprite237_0, MapSprite237_0
-                dc.l MapSprite237_0, MapSprite237_0, MapSprite237_0
-                dc.l MapSprite237_0, MapSprite237_0, MapSprite237_0
+pt_MapSprites:  dc.l MapSprite000_0
+                dc.l MapSprite000_1
+                dc.l MapSprite000_2
+                dc.l MapSprite001_0
+                dc.l MapSprite001_1
+                dc.l MapSprite001_2
+                dc.l MapSprite002_0
+                dc.l MapSprite002_1
+                dc.l MapSprite002_2
+                dc.l MapSprite003_0
+                dc.l MapSprite003_1
+                dc.l MapSprite003_2
+                dc.l MapSprite004_0
+                dc.l MapSprite004_1
+                dc.l MapSprite004_2
+                dc.l MapSprite005_0
+                dc.l MapSprite005_1
+                dc.l MapSprite005_2
+                dc.l MapSprite006_0
+                dc.l MapSprite006_1
+                dc.l MapSprite006_2
+                dc.l MapSprite007_0
+                dc.l MapSprite007_1
+                dc.l MapSprite007_2
+                dc.l MapSprite008_0
+                dc.l MapSprite008_1
+                dc.l MapSprite008_2
+                dc.l MapSprite009_0
+                dc.l MapSprite009_1
+                dc.l MapSprite009_2
+                dc.l MapSprite010_0
+                dc.l MapSprite010_1
+                dc.l MapSprite010_2
+                dc.l MapSprite011_0
+                dc.l MapSprite011_1
+                dc.l MapSprite011_2
+                dc.l MapSprite012_0
+                dc.l MapSprite012_1
+                dc.l MapSprite012_2
+                dc.l MapSprite013_0
+                dc.l MapSprite013_1
+                dc.l MapSprite013_2
+                dc.l MapSprite014_0
+                dc.l MapSprite014_1
+                dc.l MapSprite014_2
+                dc.l MapSprite015_0
+                dc.l MapSprite015_1
+                dc.l MapSprite015_2
+                dc.l MapSprite016_0
+                dc.l MapSprite016_1
+                dc.l MapSprite016_2
+                dc.l MapSprite017_0
+                dc.l MapSprite017_1
+                dc.l MapSprite017_2
+                dc.l MapSprite018_0
+                dc.l MapSprite018_1
+                dc.l MapSprite018_2
+                dc.l MapSprite019_0
+                dc.l MapSprite019_1
+                dc.l MapSprite019_2
+                dc.l MapSprite020_0
+                dc.l MapSprite020_1
+                dc.l MapSprite020_2
+                dc.l MapSprite021_0
+                dc.l MapSprite021_1
+                dc.l MapSprite021_2
+                dc.l MapSprite022_0
+                dc.l MapSprite022_1
+                dc.l MapSprite022_2
+                dc.l MapSprite023_0
+                dc.l MapSprite023_1
+                dc.l MapSprite023_2
+                dc.l MapSprite024_0
+                dc.l MapSprite024_1
+                dc.l MapSprite024_2
+                dc.l MapSprite025_0
+                dc.l MapSprite025_1
+                dc.l MapSprite025_2
+                dc.l MapSprite026_0
+                dc.l MapSprite026_1
+                dc.l MapSprite026_2
+                dc.l MapSprite027_0
+                dc.l MapSprite027_1
+                dc.l MapSprite027_2
+                dc.l MapSprite028_0
+                dc.l MapSprite028_1
+                dc.l MapSprite028_2
+                dc.l MapSprite029_0
+                dc.l MapSprite029_1
+                dc.l MapSprite029_2
+                dc.l MapSprite030_0
+                dc.l MapSprite030_1
+                dc.l MapSprite030_2
+                dc.l MapSprite031_0
+                dc.l MapSprite031_1
+                dc.l MapSprite031_2
+                dc.l MapSprite032_0
+                dc.l MapSprite032_1
+                dc.l MapSprite032_2
+                dc.l MapSprite033_0
+                dc.l MapSprite033_1
+                dc.l MapSprite033_2
+                dc.l MapSprite034_0
+                dc.l MapSprite034_1
+                dc.l MapSprite034_2
+                dc.l MapSprite035_0
+                dc.l MapSprite035_1
+                dc.l MapSprite035_2
+                dc.l MapSprite036_0
+                dc.l MapSprite036_1
+                dc.l MapSprite036_2
+                dc.l MapSprite037_0
+                dc.l MapSprite037_1
+                dc.l MapSprite037_2
+                dc.l MapSprite038_0
+                dc.l MapSprite038_1
+                dc.l MapSprite038_2
+                dc.l MapSprite039_0
+                dc.l MapSprite039_1
+                dc.l MapSprite039_2
+                dc.l MapSprite040_0
+                dc.l MapSprite040_1
+                dc.l MapSprite040_2
+                dc.l MapSprite041_0
+                dc.l MapSprite041_1
+                dc.l MapSprite041_2
+                dc.l MapSprite042_0
+                dc.l MapSprite042_1
+                dc.l MapSprite042_2
+                dc.l MapSprite043_0
+                dc.l MapSprite043_1
+                dc.l MapSprite043_2
+                dc.l MapSprite044_0
+                dc.l MapSprite044_1
+                dc.l MapSprite044_2
+                dc.l MapSprite045_0
+                dc.l MapSprite045_1
+                dc.l MapSprite045_2
+                dc.l MapSprite046_0
+                dc.l MapSprite046_1
+                dc.l MapSprite046_2
+                dc.l MapSprite047_0
+                dc.l MapSprite047_1
+                dc.l MapSprite047_2
+                dc.l MapSprite048_0
+                dc.l MapSprite048_1
+                dc.l MapSprite048_2
+                dc.l MapSprite049_0
+                dc.l MapSprite049_1
+                dc.l MapSprite049_2
+                dc.l MapSprite050_0
+                dc.l MapSprite050_1
+                dc.l MapSprite050_2
+                dc.l MapSprite051_0
+                dc.l MapSprite051_1
+                dc.l MapSprite051_2
+                dc.l MapSprite052_0
+                dc.l MapSprite052_1
+                dc.l MapSprite052_2
+                dc.l MapSprite053_0
+                dc.l MapSprite053_1
+                dc.l MapSprite053_2
+                dc.l MapSprite054_0
+                dc.l MapSprite054_1
+                dc.l MapSprite054_2
+                dc.l MapSprite055_0
+                dc.l MapSprite055_1
+                dc.l MapSprite055_2
+                dc.l MapSprite056_0
+                dc.l MapSprite056_1
+                dc.l MapSprite056_2
+                dc.l MapSprite057_0
+                dc.l MapSprite057_1
+                dc.l MapSprite057_2
+                dc.l MapSprite058_0
+                dc.l MapSprite058_1
+                dc.l MapSprite058_2
+                dc.l MapSprite059_0
+                dc.l MapSprite059_1
+                dc.l MapSprite059_2
+                dc.l MapSprite060_0
+                dc.l MapSprite060_1
+                dc.l MapSprite060_2
+                dc.l MapSprite061_0
+                dc.l MapSprite061_1
+                dc.l MapSprite061_2
+                dc.l MapSprite062_0
+                dc.l MapSprite062_1
+                dc.l MapSprite062_2
+                dc.l MapSprite063_0
+                dc.l MapSprite063_1
+                dc.l MapSprite063_2
+                dc.l MapSprite064_0
+                dc.l MapSprite064_1
+                dc.l MapSprite064_2
+                dc.l MapSprite065_0
+                dc.l MapSprite065_1
+                dc.l MapSprite065_2
+                dc.l MapSprite066_0
+                dc.l MapSprite066_1
+                dc.l MapSprite066_2
+                dc.l MapSprite067_0
+                dc.l MapSprite067_1
+                dc.l MapSprite067_2
+                dc.l MapSprite068_0
+                dc.l MapSprite068_1
+                dc.l MapSprite068_2
+                dc.l MapSprite069_0
+                dc.l MapSprite069_1
+                dc.l MapSprite069_2
+                dc.l MapSprite070_0
+                dc.l MapSprite070_1
+                dc.l MapSprite070_2
+                dc.l MapSprite071_0
+                dc.l MapSprite071_1
+                dc.l MapSprite071_2
+                dc.l MapSprite072_0
+                dc.l MapSprite072_1
+                dc.l MapSprite072_2
+                dc.l MapSprite073_0
+                dc.l MapSprite073_1
+                dc.l MapSprite073_2
+                dc.l MapSprite074_0
+                dc.l MapSprite074_1
+                dc.l MapSprite074_2
+                dc.l MapSprite075_0
+                dc.l MapSprite075_1
+                dc.l MapSprite075_2
+                dc.l MapSprite076_0
+                dc.l MapSprite076_1
+                dc.l MapSprite076_2
+                dc.l MapSprite077_0
+                dc.l MapSprite077_1
+                dc.l MapSprite077_2
+                dc.l MapSprite078_0
+                dc.l MapSprite078_1
+                dc.l MapSprite078_2
+                dc.l MapSprite079_0
+                dc.l MapSprite079_1
+                dc.l MapSprite079_2
+                dc.l MapSprite080_0
+                dc.l MapSprite080_1
+                dc.l MapSprite080_2
+                dc.l MapSprite081_0
+                dc.l MapSprite081_1
+                dc.l MapSprite081_2
+                dc.l MapSprite082_0
+                dc.l MapSprite082_1
+                dc.l MapSprite082_2
+                dc.l MapSprite083_0
+                dc.l MapSprite083_1
+                dc.l MapSprite083_2
+                dc.l MapSprite084_0
+                dc.l MapSprite084_1
+                dc.l MapSprite084_2
+                dc.l MapSprite085_0
+                dc.l MapSprite085_1
+                dc.l MapSprite085_2
+                dc.l MapSprite086_0
+                dc.l MapSprite086_1
+                dc.l MapSprite086_2
+                dc.l MapSprite087_0
+                dc.l MapSprite087_1
+                dc.l MapSprite087_2
+                dc.l MapSprite088_0
+                dc.l MapSprite088_1
+                dc.l MapSprite088_2
+                dc.l MapSprite089_0
+                dc.l MapSprite089_1
+                dc.l MapSprite089_2
+                dc.l MapSprite090_0
+                dc.l MapSprite090_1
+                dc.l MapSprite090_2
+                dc.l MapSprite091_0
+                dc.l MapSprite091_1
+                dc.l MapSprite091_2
+                dc.l MapSprite092_0
+                dc.l MapSprite092_1
+                dc.l MapSprite092_2
+                dc.l MapSprite093_0
+                dc.l MapSprite093_1
+                dc.l MapSprite093_2
+                dc.l MapSprite094_0
+                dc.l MapSprite094_1
+                dc.l MapSprite094_2
+                dc.l MapSprite095_0
+                dc.l MapSprite095_1
+                dc.l MapSprite095_2
+                dc.l MapSprite096_0
+                dc.l MapSprite096_1
+                dc.l MapSprite096_2
+                dc.l MapSprite097_0
+                dc.l MapSprite097_1
+                dc.l MapSprite097_2
+                dc.l MapSprite098_0
+                dc.l MapSprite098_1
+                dc.l MapSprite098_2
+                dc.l MapSprite099_0
+                dc.l MapSprite099_1
+                dc.l MapSprite099_2
+                dc.l MapSprite100_0
+                dc.l MapSprite100_1
+                dc.l MapSprite100_2
+                dc.l MapSprite101_0
+                dc.l MapSprite101_1
+                dc.l MapSprite101_2
+                dc.l MapSprite102_0
+                dc.l MapSprite102_1
+                dc.l MapSprite102_2
+                dc.l MapSprite103_0
+                dc.l MapSprite103_1
+                dc.l MapSprite103_2
+                dc.l MapSprite104_0
+                dc.l MapSprite104_1
+                dc.l MapSprite104_2
+                dc.l MapSprite105_0
+                dc.l MapSprite105_1
+                dc.l MapSprite105_2
+                dc.l MapSprite106_0
+                dc.l MapSprite106_1
+                dc.l MapSprite106_2
+                dc.l MapSprite107_0
+                dc.l MapSprite107_1
+                dc.l MapSprite107_2
+                dc.l MapSprite108_0
+                dc.l MapSprite108_1
+                dc.l MapSprite108_2
+                dc.l MapSprite109_0
+                dc.l MapSprite109_1
+                dc.l MapSprite109_2
+                dc.l MapSprite110_0
+                dc.l MapSprite110_1
+                dc.l MapSprite110_2
+                dc.l MapSprite111_0
+                dc.l MapSprite111_1
+                dc.l MapSprite111_2
+                dc.l MapSprite112_0
+                dc.l MapSprite112_1
+                dc.l MapSprite112_2
+                dc.l MapSprite113_0
+                dc.l MapSprite113_1
+                dc.l MapSprite113_2
+                dc.l MapSprite114_0
+                dc.l MapSprite114_1
+                dc.l MapSprite114_2
+                dc.l MapSprite115_0
+                dc.l MapSprite115_1
+                dc.l MapSprite115_2
+                dc.l MapSprite116_0
+                dc.l MapSprite116_1
+                dc.l MapSprite116_2
+                dc.l MapSprite117_0
+                dc.l MapSprite117_1
+                dc.l MapSprite117_2
+                dc.l MapSprite118_0
+                dc.l MapSprite118_1
+                dc.l MapSprite118_2
+                dc.l MapSprite119_0
+                dc.l MapSprite119_1
+                dc.l MapSprite119_2
+                dc.l MapSprite120_0
+                dc.l MapSprite120_1
+                dc.l MapSprite120_2
+                dc.l MapSprite121_0
+                dc.l MapSprite121_1
+                dc.l MapSprite121_2
+                dc.l MapSprite122_0
+                dc.l MapSprite122_1
+                dc.l MapSprite122_2
+                dc.l MapSprite123_0
+                dc.l MapSprite123_1
+                dc.l MapSprite123_2
+                dc.l MapSprite124_0
+                dc.l MapSprite124_1
+                dc.l MapSprite124_2
+                dc.l MapSprite125_0
+                dc.l MapSprite125_1
+                dc.l MapSprite125_2
+                dc.l MapSprite126_0
+                dc.l MapSprite126_1
+                dc.l MapSprite126_2
+                dc.l MapSprite127_0
+                dc.l MapSprite127_1
+                dc.l MapSprite127_2
+                dc.l MapSprite128_0
+                dc.l MapSprite128_1
+                dc.l MapSprite128_2
+                dc.l MapSprite129_0
+                dc.l MapSprite129_1
+                dc.l MapSprite129_2
+                dc.l MapSprite130_0
+                dc.l MapSprite130_1
+                dc.l MapSprite130_2
+                dc.l MapSprite131_0
+                dc.l MapSprite131_1
+                dc.l MapSprite131_2
+                dc.l MapSprite132_0
+                dc.l MapSprite132_1
+                dc.l MapSprite132_2
+                dc.l MapSprite133_0
+                dc.l MapSprite133_1
+                dc.l MapSprite133_2
+                dc.l MapSprite134_0
+                dc.l MapSprite134_1
+                dc.l MapSprite134_2
+                dc.l MapSprite135_0
+                dc.l MapSprite135_1
+                dc.l MapSprite135_2
+                dc.l MapSprite136_0
+                dc.l MapSprite136_1
+                dc.l MapSprite136_2
+                dc.l MapSprite137_0
+                dc.l MapSprite137_1
+                dc.l MapSprite137_2
+                dc.l MapSprite138_0
+                dc.l MapSprite138_1
+                dc.l MapSprite138_2
+                dc.l MapSprite139_0
+                dc.l MapSprite139_1
+                dc.l MapSprite139_2
+                dc.l MapSprite140_0
+                dc.l MapSprite140_1
+                dc.l MapSprite140_2
+                dc.l MapSprite141_0
+                dc.l MapSprite141_1
+                dc.l MapSprite141_2
+                dc.l MapSprite142_0
+                dc.l MapSprite142_1
+                dc.l MapSprite142_2
+                dc.l MapSprite143_0
+                dc.l MapSprite143_1
+                dc.l MapSprite143_2
+                dc.l MapSprite144_0
+                dc.l MapSprite144_1
+                dc.l MapSprite144_2
+                dc.l MapSprite145_0
+                dc.l MapSprite145_1
+                dc.l MapSprite145_2
+                dc.l MapSprite146_0
+                dc.l MapSprite146_1
+                dc.l MapSprite146_2
+                dc.l MapSprite147_0
+                dc.l MapSprite147_1
+                dc.l MapSprite147_2
+                dc.l MapSprite148_0
+                dc.l MapSprite148_1
+                dc.l MapSprite148_2
+                dc.l MapSprite149_0
+                dc.l MapSprite149_1
+                dc.l MapSprite149_2
+                dc.l MapSprite150_0
+                dc.l MapSprite150_1
+                dc.l MapSprite150_2
+                dc.l MapSprite151_0
+                dc.l MapSprite151_0
+                dc.l MapSprite151_0
+                dc.l MapSprite151_0
+                dc.l MapSprite151_0
+                dc.l MapSprite151_0
+                dc.l MapSprite151_0
+                dc.l MapSprite153_1
+                dc.l MapSprite153_2
+                dc.l MapSprite154_0
+                dc.l MapSprite154_1
+                dc.l MapSprite154_2
+                dc.l MapSprite155_0
+                dc.l MapSprite155_1
+                dc.l MapSprite155_2
+                dc.l MapSprite156_0
+                dc.l MapSprite156_1
+                dc.l MapSprite156_2
+                dc.l MapSprite157_0
+                dc.l MapSprite157_1
+                dc.l MapSprite157_2
+                dc.l MapSprite057_0
+                dc.l MapSprite057_1
+                dc.l MapSprite057_2
+                dc.l MapSprite159_0
+                dc.l MapSprite159_1
+                dc.l MapSprite159_2
+                dc.l MapSprite160_0
+                dc.l MapSprite160_1
+                dc.l MapSprite160_2
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite163_0
+                dc.l MapSprite163_1
+                dc.l MapSprite163_2
+                dc.l MapSprite163_0
+                dc.l MapSprite163_1
+                dc.l MapSprite163_2
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite161_0
+                dc.l MapSprite170_1
+                dc.l MapSprite170_2
+                dc.l MapSprite171_0
+                dc.l MapSprite171_1
+                dc.l MapSprite171_2
+                dc.l MapSprite172_0
+                dc.l MapSprite172_1
+                dc.l MapSprite172_2
+                dc.l MapSprite173_0
+                dc.l MapSprite173_1
+                dc.l MapSprite173_2
+                dc.l MapSprite174_0
+                dc.l MapSprite174_1
+                dc.l MapSprite174_2
+                dc.l MapSprite175_0
+                dc.l MapSprite175_1
+                dc.l MapSprite175_2
+                dc.l MapSprite176_0
+                dc.l MapSprite176_1
+                dc.l MapSprite176_2
+                dc.l MapSprite177_0
+                dc.l MapSprite177_1
+                dc.l MapSprite177_2
+                dc.l MapSprite178_0
+                dc.l MapSprite178_1
+                dc.l MapSprite178_2
+                dc.l MapSprite179_0
+                dc.l MapSprite179_1
+                dc.l MapSprite179_2
+                dc.l MapSprite180_0
+                dc.l MapSprite180_1
+                dc.l MapSprite180_2
+                dc.l MapSprite181_0
+                dc.l MapSprite181_1
+                dc.l MapSprite181_2
+                dc.l MapSprite182_0
+                dc.l MapSprite182_1
+                dc.l MapSprite182_2
+                dc.l MapSprite183_0
+                dc.l MapSprite183_1
+                dc.l MapSprite183_2
+                dc.l MapSprite184_0
+                dc.l MapSprite184_1
+                dc.l MapSprite184_2
+                dc.l MapSprite185_0
+                dc.l MapSprite185_1
+                dc.l MapSprite185_2
+                dc.l MapSprite186_0
+                dc.l MapSprite186_1
+                dc.l MapSprite186_2
+                dc.l MapSprite187_0
+                dc.l MapSprite187_1
+                dc.l MapSprite187_2
+                dc.l MapSprite188_0
+                dc.l MapSprite188_1
+                dc.l MapSprite188_2
+                dc.l MapSprite189_0
+                dc.l MapSprite189_1
+                dc.l MapSprite189_2
+                dc.l MapSprite190_0
+                dc.l MapSprite190_1
+                dc.l MapSprite190_2
+                dc.l MapSprite191_0
+                dc.l MapSprite191_0
+                dc.l MapSprite191_0
+                dc.l MapSprite191_0
+                dc.l MapSprite192_1
+                dc.l MapSprite192_2
+                dc.l MapSprite193_0
+                dc.l MapSprite193_1
+                dc.l MapSprite193_2
+                dc.l MapSprite194_0
+                dc.l MapSprite194_1
+                dc.l MapSprite194_2
+                dc.l MapSprite195_0
+                dc.l MapSprite195_1
+                dc.l MapSprite195_2
+                dc.l MapSprite196_0
+                dc.l MapSprite196_1
+                dc.l MapSprite196_2
+                dc.l MapSprite197_0
+                dc.l MapSprite197_1
+                dc.l MapSprite197_2
+                dc.l MapSprite198_0
+                dc.l MapSprite198_1
+                dc.l MapSprite198_2
+                dc.l MapSprite199_0
+                dc.l MapSprite199_1
+                dc.l MapSprite199_2
+                dc.l MapSprite200_0
+                dc.l MapSprite200_1
+                dc.l MapSprite200_2
+                dc.l MapSprite201_0
+                dc.l MapSprite201_1
+                dc.l MapSprite201_2
+                dc.l MapSprite202_0
+                dc.l MapSprite202_1
+                dc.l MapSprite202_2
+                dc.l MapSprite188_0
+                dc.l MapSprite188_1
+                dc.l MapSprite188_2
+                dc.l MapSprite204_0
+                dc.l MapSprite204_1
+                dc.l MapSprite204_2
+                dc.l MapSprite205_0
+                dc.l MapSprite205_1
+                dc.l MapSprite205_2
+                dc.l MapSprite206_0
+                dc.l MapSprite206_1
+                dc.l MapSprite206_2
+                dc.l MapSprite207_0
+                dc.l MapSprite207_1
+                dc.l MapSprite207_2
+                dc.l MapSprite208_0
+                dc.l MapSprite208_1
+                dc.l MapSprite208_2
+                dc.l MapSprite209_0
+                dc.l MapSprite209_1
+                dc.l MapSprite209_2
+                dc.l MapSprite210_0
+                dc.l MapSprite210_1
+                dc.l MapSprite210_2
+                dc.l MapSprite211_0
+                dc.l MapSprite211_1
+                dc.l MapSprite211_2
+                dc.l MapSprite212_0
+                dc.l MapSprite212_1
+                dc.l MapSprite212_2
+                dc.l MapSprite213_0
+                dc.l MapSprite213_1
+                dc.l MapSprite213_2
+                dc.l MapSprite163_0
+                dc.l MapSprite163_1
+                dc.l MapSprite163_2
+                dc.l MapSprite215_0
+                dc.l MapSprite215_1
+                dc.l MapSprite215_2
+                dc.l MapSprite216_0
+                dc.l MapSprite216_1
+                dc.l MapSprite216_2
+                dc.l MapSprite217_0
+                dc.l MapSprite217_1
+                dc.l MapSprite217_2
+                dc.l MapSprite218_0
+                dc.l MapSprite218_1
+                dc.l MapSprite218_2
+                dc.l MapSprite219_0
+                dc.l MapSprite219_1
+                dc.l MapSprite219_2
+                dc.l MapSprite220_0
+                dc.l MapSprite220_1
+                dc.l MapSprite220_2
+                dc.l MapSprite221_0
+                dc.l MapSprite221_1
+                dc.l MapSprite221_2
+                dc.l MapSprite222_0
+                dc.l MapSprite222_1
+                dc.l MapSprite222_2
+                dc.l MapSprite223_0
+                dc.l MapSprite223_1
+                dc.l MapSprite223_2
+                dc.l MapSprite224_0
+                dc.l MapSprite224_1
+                dc.l MapSprite224_2
+                dc.l MapSprite225_0
+                dc.l MapSprite225_1
+                dc.l MapSprite225_2
+                dc.l MapSprite226_0
+                dc.l MapSprite226_1
+                dc.l MapSprite226_2
+                dc.l MapSprite227_0
+                dc.l MapSprite227_1
+                dc.l MapSprite227_2
+                dc.l MapSprite228_0
+                dc.l MapSprite228_1
+                dc.l MapSprite228_2
+                dc.l MapSprite229_0
+                dc.l MapSprite229_1
+                dc.l MapSprite229_2
+                dc.l MapSprite230_0
+                dc.l MapSprite230_1
+                dc.l MapSprite230_2
+                dc.l MapSprite231_0
+                dc.l MapSprite231_1
+                dc.l MapSprite231_2
+                dc.l MapSprite232_0
+                dc.l MapSprite232_1
+                dc.l MapSprite232_2
+                dc.l MapSprite233_0
+                dc.l MapSprite233_1
+                dc.l MapSprite233_2
+                dc.l MapSprite234_0
+                dc.l MapSprite234_1
+                dc.l MapSprite234_2
+                dc.l MapSprite235_0
+                dc.l MapSprite235_1
+                dc.l MapSprite235_2
+                dc.l MapSprite236_0
+                dc.l MapSprite236_1
+                dc.l MapSprite236_2
+                dc.l MapSprite237_0
+                dc.l MapSprite237_0
+                dc.l MapSprite237_0
+                dc.l MapSprite237_0
+                dc.l MapSprite237_0
+                dc.l MapSprite237_0
+                dc.l MapSprite237_0
+                dc.l MapSprite237_0
+                dc.l MapSprite237_0
 MapSprite000_0: incbin "data/graphics/mapsprites/mapsprite000-0.bin"
 MapSprite000_1: incbin "data/graphics/mapsprites/mapsprite000-1.bin"
 MapSprite000_2: incbin "data/graphics/mapsprites/mapsprite000-2.bin"

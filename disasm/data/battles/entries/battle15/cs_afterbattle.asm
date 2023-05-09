@@ -83,4 +83,4 @@ abcs_battle15:  textCursor 2506
                 warp MAP_ACHILLES_SHRINES,27,11,UP
                 csc_end
 ce_4AFB6:       mainEntity 14,5,DOWN
-                cscEntitiesEnd
+                dc.w $FFFF

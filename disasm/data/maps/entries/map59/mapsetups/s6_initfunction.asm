@@ -304,7 +304,7 @@ eas_5EF46:       ac_animSpeedX2 ON
 cs_5EF60:       textCursor 3739
                 loadMapFadeIn MAP_NAZCA_SHIP_INTERIOR,4,6
                 loadEntitiesFromMapSetup 9,11,DOWN
-                executeSubroutine InitNazcaShipForceMembers
+                executeSubroutine InitializeNazcaShipForceMembers
                 setPos ALLY_ZYNK,8,10,RIGHT
                 executeSubroutine sub_5F32E
                 setActscriptWait ALLY_PETER,eas_Init
@@ -428,7 +428,7 @@ csub_5F14C:
                 
                 lea     plt_NazcaShip(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
-                moveq   #$20,d7 
+                moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
@@ -443,7 +443,7 @@ csub_5F14C:
 
 sub_5F16C:
                 
-                moveq   #$17,d7
+                moveq   #23,d7
 loc_5F16E:
                 
                 subq.b  #1,((ENTITY_SPECIAL_SPRITE_LAYER-$1000000)).w
@@ -474,13 +474,13 @@ ce_5F19E:       mainEntity 0,0,UP
                 entity 13,4,UP,MAPSPRITE_ZEON,eas_Init
                 entity 13,8,UP,MAPSPRITE_GESHP,eas_Init
                 entity 13,25,UP,MAPSPRITE_ODD_EYE,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF
 ce_5F1BE:       mainEntity 63,63,UP
                 entity 5,5,UP,MAPSPRITE_NAZCA_SHIP,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF
 ce_5F1CE:       mainEntity 63,63,UP
                 entity 25,19,UP,MAPSPRITE_NAZCA_SHIP,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF
 ce_5F1DE:       mainEntity 0,0,UP
                 entity 11,19,UP,MAPSPRITE_EXECUTIONER,eas_Init
                 entity 63,63,RIGHT,MAPSPRITE_GESHP,eas_Init
@@ -493,7 +493,7 @@ ce_5F1DE:       mainEntity 0,0,UP
                 entity 11,16,LEFT,MAPSPRITE_DRAGONEWT,eas_Init
                 entity 15,19,DOWN,MAPSPRITE_CHAOS_WIZARD,eas_Init
                 entity 13,19,RIGHT,MAPSPRITE_CHAOS_WIZARD,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF
 ce_5F23E:       mainEntity 0,0,UP
                 entity 12,16,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 16,18,RIGHT,MAPSPRITE_GESHP,eas_Init
@@ -504,7 +504,7 @@ ce_5F23E:       mainEntity 0,0,UP
                 entity 12,17,RIGHT,MAPSPRITE_CHAOS_WIZARD,eas_Init
                 entity 13,19,RIGHT,MAPSPRITE_DRAGONEWT,eas_Init
                 entity 14,20,RIGHT,MAPSPRITE_CHAOS_WIZARD,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF
 ce_5F28E:       mainEntity 0,0,UP
                 entity 11,16,RIGHT,MAPSPRITE_DRAGONEWT,eas_Init
                 entity 16,18,RIGHT,MAPSPRITE_GESHP,eas_Init
@@ -523,7 +523,7 @@ ce_5F28E:       mainEntity 0,0,UP
                 entity 13,17,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 14,19,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 15,20,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF
 
 ; =============== S U B R O U T I N E =======================================
 

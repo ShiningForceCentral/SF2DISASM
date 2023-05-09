@@ -194,4 +194,4 @@ ce_4BC5A:       mainEntity 7,25,RIGHT
                 entity 63,63,DOWN,MAPSPRITE_EVIL_CLOUD,eas_Init
                 entity 17,15,UP,MAPSPRITE_PACALON_SOLDIER,eas_Init
                 entity 19,15,UP,MAPSPRITE_PACALON_SOLDIER,eas_Init
-                cscEntitiesEnd
+                dc.w $FFFF

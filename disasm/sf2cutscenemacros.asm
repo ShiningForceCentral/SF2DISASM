@@ -356,7 +356,7 @@ csc22: macro
         
 animEntityFX: macro ;alias
     csc22 \1,\2
-    endm
+    endm    
     
 csc23: macro
     dc.w $23
@@ -366,7 +366,7 @@ csc23: macro
         
 setFacing: macro ;alias
     csc23 \1,\2
-    endm
+    endm    
     
 csc24: macro
     dc.w $24
@@ -375,7 +375,7 @@ csc24: macro
         
 setCameraEntity: macro ;alias
     csc24 \1
-    endm
+    endm    
     
 csc25: macro
     dc.w $25
@@ -385,7 +385,7 @@ csc25: macro
         
 cloneEntity: macro ;alias
     csc25 \1,\2
-    endm
+    endm    
     
 csc26: macro
     dc.w $26
@@ -394,7 +394,7 @@ csc26: macro
     
 nod: macro ;alias
     csc26 \1
-    endm
+    endm    
     
 csc27: macro
     dc.w $27
@@ -413,7 +413,7 @@ csc28: macro
         
 moveNextToPlayer: macro ;alias
     csc28 \1,\2
-    endm
+    endm    
     
 csc29: macro
     dc.w $29
@@ -424,7 +424,7 @@ csc29: macro
         
 setDest: macro ;alias
     csc29 \1,\2,\3
-    endm
+    endm    
     
 csc2A: macro
     dc.w $2A
@@ -433,7 +433,7 @@ csc2A: macro
         
 shiver: macro ;alias
     csc2A \1
-    endm
+    endm    
     
 csc2B: macro
     dc.w $2B
@@ -441,12 +441,12 @@ csc2B: macro
     dc.b \2
     dc.b \3
     dc.b \4
-    dc.w \5
-    endm
+    dc.b \5
+    endm    
     
 newEntity: macro ;alias
     csc2B \1,\2,\3,\4,\5
-    endm
+    endm    
     
 csc2C: macro
     dc.w $2C
@@ -667,7 +667,7 @@ csc39: macro
     
 fadeInB: macro ;alias
     csc39
-    endm
+    endm    
     
 csc3A: macro
     dc.w $3A
@@ -800,7 +800,7 @@ csc48: macro
     
 mapLoad: macro ;alias
     csc48 \1,\2,\3
-    endm
+    endm    
     
 csc49: macro
     dc.w $49
@@ -811,7 +811,7 @@ csc49: macro
     
 loadEntitiesFromMapSetup: macro ;alias
     csc49 \1,\2,\3
-    endm
+    endm    
     
 csc4A: macro
     dc.w $4A
@@ -837,7 +837,7 @@ csc50: macro
     
 setSize: macro ;alias
     csc50 \1,\2
-    endm
+    endm    
     
 csc51: macro
     dc.w $51
@@ -846,7 +846,7 @@ csc51: macro
     
 joinBatParty: macro ;alias
     csc51 \1
-    endm
+    endm    
     
 csc52: macro
     dc.w $52
@@ -856,7 +856,7 @@ csc52: macro
     
 faceEntity: macro ;alias
     csc52 \1,\2
-    endm
+    endm    
     
 csc53: macro
     dc.w $53
@@ -866,7 +866,7 @@ csc53: macro
     
 setPriority: macro ;alias
     csc53 \1,\2
-    endm
+    endm    
     
 csc54: macro
     dc.w $54
@@ -876,7 +876,7 @@ csc54: macro
     
 joinForceAI: macro ;alias
     csc54 \1,\2
-    endm
+    endm    
     
 csc55: macro
     dc.w $55
@@ -884,7 +884,7 @@ csc55: macro
     
 resetForceBattleStats: macro ;alias
     csc55
-    endm
+    endm    
     
 csc56: macro
     dc.w $56
@@ -900,7 +900,6 @@ cscNop: macro
 
 csc_end: macro
     dc.w $FFFF
-    align
     endm
 
 
@@ -916,25 +915,20 @@ entity: macro
     dc.b \1
     dc.b \2
     dc.b \3
-    dc.w \4
+    dc.b \4
     dc.l \5
     endm
-	
-cscEntitiesEnd:	macro
-	dc.w $FFFF
-    align
-	endm
     
 entityRandomWalk: macro
     dc.b \1
     dc.b \2
     dc.b \3
-    dc.w \4
+    dc.b \4
     dc.b $FF
     dc.b \5
     dc.b \6
     dc.b \7
-    endm
+    endm    
     
     
 ; entity actscript commands    

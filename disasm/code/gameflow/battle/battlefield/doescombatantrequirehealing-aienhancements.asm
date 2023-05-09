@@ -16,7 +16,7 @@ DoesCombatantRequireHealing:
                 
                 movem.l d1-d2/d5-d6,-(sp)
                 bsr.w   GetAiCommandset     ; In: d0 = combatant index; Out: d1 = AI commandset
-                cmpi.w  #AI_LEADER,d1
+                cmpi.w  #AICOMMANDSET_LEADER,d1
                 blt.s   @CheckBoss
                 lsr.w   #6,d6
                 bra.s   @Calculate

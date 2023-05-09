@@ -11,9 +11,9 @@ sub_444A2:
                 link    a6,#-16
                 move.w  d0,battleEntity(a6)
                 movem.l d0-d7,-(sp)
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  d1,d2
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 move.w  d1,-(sp)
                 jsr     j_GetMoveType
                 clr.w   d6
@@ -150,13 +150,20 @@ loc_445A0:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d1.w = initial X
+;     d2.w = initial Y
+;     d3.b = initial facing
+;     d4.b = mapsprite
+;     d5.l = actscript address
+;     d6.w = entity index (lower byte), layer (upper byte)
+
 
 DeclareNewEntity:
                 
                 move.l  a0,-(sp)
                 move.w  d0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                mulu.w  #ENTITYDEF_SIZE,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 move.w  (sp)+,d0
                 move.w  d1,(a0)
@@ -170,7 +177,7 @@ DeclareNewEntity:
                 swap    d6
                 move.b  d6,ENTITYDEF_OFFSET_LAYER(a0)
                 swap    d6
-                move.w  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                move.b  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 tst.l   d5
                 bpl.s   loc_4463C
                 move.l  (ENTITY_WALKING_PARAMS).l,-(sp)
@@ -217,7 +224,7 @@ ClearEntities:
                 
                 movem.l d7-a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.w  #$30,d7 
+                move.w  #48,d7
 loc_44666:
                 
                 move.l  #$70007000,(a0)+ ; set location off map
@@ -228,18 +235,17 @@ loc_44666:
                 clr.l   (a0)+           ; clear actscriptaddr
                 clr.l   (a0)+           ; clear accel/speed
                 clr.l   (a0)+
-                clr.b   (a0)+
                 dbf     d7,loc_44666    
                 
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
-                moveq   #$F,d7
+                moveq   #15,d7
 loc_44688:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_44688
                 
                 move.l  #FF5600_LOADING_SPACE,(ENTITY_WALKING_PARAMS).l
-                jsr     (sub_19B0).w
+                jsr     (sub_19B0).w    
                 movem.l (sp)+,d7-a0
                 rts
 
@@ -263,14 +269,14 @@ loc_446B8:
                 
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  (sp)+,d0
                 move.w  d1,d2
                 tst.b   d2
                 bmi.w   loc_44732
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 move.w  (sp)+,d0
                 tst.b   d1
                 bmi.w   loc_44732
@@ -322,14 +328,14 @@ loc_4474A:
                 bne.w   loc_447F6
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  (sp)+,d0
                 move.w  d1,d2
                 tst.b   d2
                 bmi.w   loc_447F6
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 move.w  (sp)+,d0
                 tst.b   d1
                 bmi.w   loc_447F6
@@ -356,7 +362,7 @@ loc_447AA:
                 moveq   #3,d3
                 move.l  #eas_Standing,d5
                 bsr.w   GetCombatantMapSprite
-                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d4
                 bcs.s   loc_447E8
                 move.w  d0,-(sp)
                 move.w  #ENTITY_SPECIAL_SPRITE,d0 
@@ -389,7 +395,7 @@ loc_447FA:
             else
                 lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
             endif
-                lea     BattleNeutralEntities(pc), a0
+                lea     tbl_BattleNeutralEntities(pc), a0
                 clr.w   d1
                 getSavedByte CURRENT_BATTLE, d1
 loc_44824:
@@ -400,11 +406,9 @@ loc_44824:
                 beq.s   loc_44838
 loc_44830:
                 
-                adda.w  #NEUTRAL_ENTITY_SIZE,a0
-                cmpi.w  #$FFFF,(a0)
-                bne.s   loc_44830
-                cmp.w   (a0)+,d1
-                bra.s   loc_44824
+                cmpi.w  #$FFFF,(a0)+
+                beq.s   loc_44824
+                bra.s   loc_44830
 loc_44838:
                 
                 move.w  #$9F,battleEntity(a6) 
@@ -415,8 +419,8 @@ loc_4483E:
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
                 clr.w   d1
-                jsr     j_SetMaxHP
-                jsr     j_SetCurrentHP
+                jsr     j_SetMaxHp
+                jsr     j_SetCurrentHp
                 jsr     j_SetStatusEffects
                 jsr     j_GetAiActivationFlag
                 ori.w   #8,d1
@@ -424,10 +428,10 @@ loc_4483E:
                 clr.w   d1
                 move.b  (a0)+,d1
                 move.w  d1,d3
-                jsr     j_SetXPos
+                jsr     j_SetCombatantX
                 move.b  (a0)+,d1
                 move.w  d1,d2
-                jsr     j_SetYPos
+                jsr     j_SetCombatantY
                 move.w  (sp)+,d0
                 move.w  d3,d1
                 andi.w  #$3F,d1 
@@ -436,7 +440,7 @@ loc_4483E:
                 muls.w  #MAP_TILE_SIZE,d2
                 move.b  (a0)+,d3
                 clr.w   d4
-                move.w  (a0)+,d4
+                move.b  (a0)+,d4
                 move.l  (a0)+,d5
                 clr.l   d6
                 move.w  d0,d6

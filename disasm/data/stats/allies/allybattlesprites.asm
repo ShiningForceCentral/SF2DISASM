@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\allybattlesprites.asm :
 ; 0x1F806..0x1F914 : Ally battlesprites table
-tbl_AllyBattleSprites:
+tbl_AllyBattlesprites:
                 
 ; Syntax        allyBattleSprAndPlt [CLASS_]enum, [ALLYBATTLESPRITE_]enum, palette
 ;
