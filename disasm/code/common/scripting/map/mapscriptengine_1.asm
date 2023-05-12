@@ -936,11 +936,11 @@ csc1A_setEntitySprite:
                 move.w  d4,d0
 @NotAlly:
                 
-			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 move.w  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
-			else
+            else
                 move.b  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
-			endif
+            endif
                 jsr     (WaitForVInt).w
                 bsr.w   UpdateEntitySprite_0
                 rts
@@ -1383,11 +1383,11 @@ loc_46D4C:
 loc_46D5C:
                 
                 move.w  d1,ENTITYDEF_OFFSET_XTRAVEL(a5)
-			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a5)
-			else
+            else
                 move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a5)
-			endif
+            endif
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a5)
                 move.w  #$30,d5 
                 sub.w   ENTITYDEF_OFFSET_Y(a5),d2
@@ -1397,11 +1397,11 @@ loc_46D5C:
 loc_46D76:
                 
                 move.w  d2,ENTITYDEF_OFFSET_YTRAVEL(a5)
-			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a5)
-			else
+            else
                 move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a5)
-			endif
+            endif
                 bsr.w   WaitForEntityToStopMoving
                 addq.w  #2,d3
                 andi.b  #3,d3
@@ -1438,11 +1438,11 @@ csc29_setEntityDest:
 loc_46DC4:
                 
                 move.w  d1,ENTITYDEF_OFFSET_XTRAVEL(a5)
-			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 move.b  d3,ENTITYDEF_OFFSET_XVELOCITY(a5)
-			else
+            else
                 move.w  d3,ENTITYDEF_OFFSET_XVELOCITY(a5)
-			endif
+            endif
                 move.w  #$20,d3 
                 sub.w   ENTITYDEF_OFFSET_Y(a5),d2
                 bpl.s   loc_46DDA
@@ -1451,11 +1451,11 @@ loc_46DC4:
 loc_46DDA:
                 
                 move.w  d2,ENTITYDEF_OFFSET_YTRAVEL(a5)
-			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 move.b  d3,ENTITYDEF_OFFSET_YVELOCITY(a5)
-			else
+            else
                 move.w  d3,ENTITYDEF_OFFSET_YVELOCITY(a5)
-			endif
+            endif
                 btst    #$F,d6
                 bne.s   return_46DEC
                 bsr.w   WaitForEntityToStopMoving
@@ -1508,13 +1508,13 @@ csc2B_initializeNewEntity:
                 clr.w   d4
                 move.b  (a6)+,d1
                 move.b  (a6)+,d2
-			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 move.w  (a6)+,d3
                 move.w  (a6)+,d4
-			else
+            else
                 move.b  (a6)+,d3
                 move.b  (a6)+,d4
-			endif
+            endif
                 move.l  #eas_Init,d5
                 jsr     InitializeNewEntity
                 rts
@@ -1942,11 +1942,11 @@ LoadMapsprite:
 @Continue:
                 
                 clr.w   d1
-			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
-			else
+            else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
-			endif
+            endif
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1

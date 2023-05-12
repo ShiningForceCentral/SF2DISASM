@@ -101,10 +101,10 @@ loc_4D5C:
                 move.w  d6,-(sp)
                 clr.w   d4
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d4
-                move.w  d4,d6	;
-                lsl.w   #3,d4	; mult 18
-                add.w   d6,d4	;
-                add.w   d4,d4	;
+                move.w  d4,d6    ;
+                lsl.w   #3,d4    ; mult 18
+                add.w   d6,d4    ;
+                add.w   d4,d4    ;
                 add.w   d4,d5
                 addi.w  #$80,d0 
                 addi.w  #$70,d1 
@@ -195,17 +195,17 @@ sub_4E1E:
 sub_4E24:
                 
                 lea     (SPRITE_TABLE).l,a1
-                moveq   #7,d7	; cursor sprite counter
+                moveq   #7,d7    ; cursor sprite counter
                 move.w  #$40,d6 ; start at sprite_08
 loc_4E30:
                 
-                cmpi.b  #$10,VDPSPRITE_OFFSET_LINK(a1,d6.w)	; compare to cursor end sprite
+                cmpi.b  #$10,VDPSPRITE_OFFSET_LINK(a1,d6.w)    ; compare to cursor end sprite
                 beq.s   loc_4E3E
                 addq.w  #VDP_SPRITE_SIZE,d6
                 dbf     d7,loc_4E30
 loc_4E3E:
                 
-                clr.b   VDPSPRITE_OFFSET_LINK(a1,d6.w)	; link with sprite_00
+                clr.b   VDPSPRITE_OFFSET_LINK(a1,d6.w)    ; link with sprite_00
                 move.w  #$38,d6 ; start at sprite_07
                 moveq   #$2F,d7 
                 lea     ((byte_FFAFB0-$1000000)).w,a0
@@ -237,7 +237,7 @@ loc_4E7A:
                 dbf     d7,loc_4E68
 loc_4E7E:
                 
-                move.b  #8,VDPSPRITE_OFFSET_LINK(a1,d6.w)	; link with sprite_08
+                move.b  #8,VDPSPRITE_OFFSET_LINK(a1,d6.w)    ; link with sprite_08
                 rts
 
     ; End of function sub_4E24
@@ -756,7 +756,7 @@ loc_52E8:
                 move.w  ((MOVE_SFX-$1000000)).w,d0
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
                 move.w  (sp)+,d0
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.b  d2,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 beq.s   loc_5300
                 move.w  #MAP_TILE_SIZE,ENTITYDEF_OFFSET_XTRAVEL(a0)
@@ -765,7 +765,7 @@ loc_5300:
                 move.b  d3,ENTITYDEF_OFFSET_YVELOCITY(a0)
                 beq.s   loc_530C
                 move.w  #MAP_TILE_SIZE,ENTITYDEF_OFFSET_YTRAVEL(a0)
-			else
+            else
                 move.w  d2,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 beq.s   loc_5300
                 move.w  #MAP_TILE_SIZE,ENTITYDEF_OFFSET_XTRAVEL(a0)
@@ -774,7 +774,7 @@ loc_5300:
                 move.w  d3,ENTITYDEF_OFFSET_YVELOCITY(a0)
                 beq.s   loc_530C
                 move.w  #MAP_TILE_SIZE,ENTITYDEF_OFFSET_YTRAVEL(a0)
-			endif
+            endif
 loc_530C:
                 
                 add.w   d4,ENTITYDEF_OFFSET_XDEST(a0)
@@ -867,11 +867,11 @@ loc_53C8:
 loc_53CE:
                 
                 move.w  d0,ENTITYDEF_OFFSET_XTRAVEL(a0)
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.b  d3,ENTITYDEF_OFFSET_XVELOCITY(a0)
-			else
+            else
                 move.w  d3,ENTITYDEF_OFFSET_XVELOCITY(a0)
-			endif
+            endif
                 move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
                 move.w  ENTITYDEF_OFFSET_Y(a0),d2
                 move.b  ENTITYDEF_OFFSET_YSPEED(a0),d3
@@ -887,11 +887,11 @@ loc_53EA:
 loc_53F0:
                 
                 move.w  d1,ENTITYDEF_OFFSET_YTRAVEL(a0)
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.b  d3,ENTITYDEF_OFFSET_YVELOCITY(a0)
-			else
+            else
                 move.w  d3,ENTITYDEF_OFFSET_YVELOCITY(a0)
-			endif
+            endif
 loc_53F8:
                 
                 addq.l  #8,a1
@@ -1119,13 +1119,13 @@ loc_55FC:
                 
                 move.w  d0,ENTITYDEF_OFFSET_XTRAVEL(a0)
                 move.w  d1,ENTITYDEF_OFFSET_YTRAVEL(a0)
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a0)
-			else
+            else
                 move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a0)
-			endif
+            endif
                 bra.w   esc_clearTimerGoToNextCommand
 
     ; End of function esc06_walkRandomly
@@ -1251,7 +1251,7 @@ loc_56FA:
                 
                 unlk    a6
                 tst.w   d6
-                bge.w   loc_5708	; no facing change
+                bge.w   loc_5708    ; no facing change
                 addq.l  #2,a1
                 bra.w   esc_goToNextEntity
 loc_5708:
@@ -1327,21 +1327,21 @@ loc_57B8:
                 bra.w   loc_57E0
 loc_57C0:
                 
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.b  d2,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 beq.s   loc_57CC
                 move.w  #$180,ENTITYDEF_OFFSET_XTRAVEL(a0)
 loc_57CC:
                 
                 move.b  d3,ENTITYDEF_OFFSET_YVELOCITY(a0)
-			else
+            else
                 move.w  d2,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 beq.s   loc_57CC
                 move.w  #$180,ENTITYDEF_OFFSET_XTRAVEL(a0)
 loc_57CC:
                 
                 move.w  d3,ENTITYDEF_OFFSET_YVELOCITY(a0)
-			endif
+            endif
                 beq.s   loc_57D8
                 move.w  #$180,ENTITYDEF_OFFSET_YTRAVEL(a0)
 loc_57D8:
@@ -1500,21 +1500,21 @@ loc_593A:
                 bra.w   loc_5962
 loc_5942:
                 
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.b  d2,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 beq.s   loc_594E
                 move.w  #$180,ENTITYDEF_OFFSET_XTRAVEL(a0)
 loc_594E:
                 
                 move.b  d3,ENTITYDEF_OFFSET_YVELOCITY(a0)
-			else
+            else
                 move.w  d2,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 beq.s   loc_594E
                 move.w  #$180,ENTITYDEF_OFFSET_XTRAVEL(a0)
 loc_594E:
                 
                 move.w  d3,ENTITYDEF_OFFSET_YVELOCITY(a0)
-			endif
+            endif
                 beq.s   loc_595A
                 move.w  #$180,ENTITYDEF_OFFSET_YTRAVEL(a0)
 loc_595A:
@@ -1861,11 +1861,11 @@ esc16_setEntityNumber:
 
 esc17_setSpriteNumber:
                 
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.w  2(a1),ENTITYDEF_OFFSET_MAPSPRITE(a0)
-			else
+            else
                 move.b  3(a1),ENTITYDEF_OFFSET_MAPSPRITE(a0)
-			endif
+            endif
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
 
@@ -2354,7 +2354,7 @@ loc_5E0E:
                 cmp.w   d2,d0
                 beq.s   loc_5E2E
                 bge.s   loc_5E24
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 add.b   d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 bne.s   loc_5E22
                 sub.b   d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
@@ -2386,9 +2386,9 @@ loc_5E4A:
                 
                 move.b  ENTITYDEF_OFFSET_XVELOCITY(a0),d4
                 move.b  ENTITYDEF_OFFSET_YVELOCITY(a0),d5
-				ext.w   d4
-				ext.w   d5
-			else
+                ext.w   d4
+                ext.w   d5
+            else
                 add.w   d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 bne.s   loc_5E22
                 sub.w   d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
@@ -2420,7 +2420,7 @@ loc_5E4A:
                 
                 move.w  ENTITYDEF_OFFSET_XVELOCITY(a0),d4
                 move.w  ENTITYDEF_OFFSET_YVELOCITY(a0),d5
-			endif
+            endif
                 tst.w   ENTITYDEF_OFFSET_XTRAVEL(a0)
                 beq.s   loc_5E5A
                 add.w   d4,(a0)
@@ -2436,12 +2436,12 @@ loc_5E64:
                 clr.w   d3
                 move.w  ENTITYDEF_OFFSET_XTRAVEL(a0),d0
                 beq.s   loc_5E82
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.b  ENTITYDEF_OFFSET_XVELOCITY(a0),d0
-				ext.w   d0
-			else
+                ext.w   d0
+            else
                 move.w  ENTITYDEF_OFFSET_XVELOCITY(a0),d0
-			endif
+            endif
                 move.w  d0,d2
                 bge.s   loc_5E80
                 moveq   #$FFFFFFFF,d0
@@ -2454,12 +2454,12 @@ loc_5E82:
                 
                 move.w  ENTITYDEF_OFFSET_YTRAVEL(a0),d1
                 beq.s   loc_5E98
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.b  ENTITYDEF_OFFSET_YVELOCITY(a0),d1
-				ext.w   d1
-			else
+                ext.w   d1
+            else
                 move.w  ENTITYDEF_OFFSET_YVELOCITY(a0),d1
-			endif
+            endif
                 move.w  d1,d3
                 bge.s   loc_5E96
                 moveq   #$FFFFFFFF,d1
@@ -2732,15 +2732,15 @@ UpdateEntityProperties:
                 or.b    d2,ENTITYDEF_OFFSET_FLAGS_B(a0)
 @CheckMapSprite:
                 
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 cmpi.w  #-1,d3
                 beq.s   @ChangeDirection
                 move.w  d3,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-			else
+            else
                 cmpi.b  #-1,d3
                 beq.s   @ChangeDirection
                 move.b  d3,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-			endif
+            endif
 @ChangeDirection:
                 
                 move.w  d1,d6
@@ -2783,7 +2783,7 @@ ChangeEntitySprite:
 loc_60B6:
                 
                 movem.l a0-a1,-(sp)
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 cmpi.w  #MAPSPRITES_SPECIALS_START,d1
                 bcc.w   loc_617C
@@ -2796,7 +2796,7 @@ loc_60B6:
                 move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d1
                 move.w  d1,-(sp)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-			else
+            else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
                 bcc.w   loc_617C
@@ -2809,7 +2809,7 @@ loc_60B6:
                 move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d1
                 move.w  d1,-(sp)
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-			endif
+            endif
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1
@@ -2902,11 +2902,11 @@ DmaMapSprite:
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
                 move.w  d1,-(sp)
                 clr.w   d1
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-			else
+            else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-			endif
+            endif
                 cmpi.w  #MAPSPRITES_SPECIALS_START,d1 ; HARDCODED special mapsprites start index
                 blt.s   @LoadRegularSprite
                 jsr     j_LoadSpecialSprite

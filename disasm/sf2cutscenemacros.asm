@@ -150,7 +150,7 @@ csc0E: macro
     dc.l \2
     endm
     
-jumpIfDefeatedByLastAttack:	macro ;alias
+jumpIfDefeatedByLastAttack: macro ;alias
     csc0E \1,\2
     endm    
     
@@ -160,7 +160,7 @@ csc0F: macro
     dc.l \2
     endm
     
-jumpIfDead:	macro ;alias
+jumpIfDead: macro ;alias
     csc0F \1,\2
     endm    
     
@@ -443,14 +443,14 @@ csc2B: macro
     dc.b \3
     dc.w \4
     dc.w \5
-	else
+    else
     dc.w $2B
     dc.w \1
     dc.b \2
     dc.b \3
     dc.b \4
     dc.b \5
-	endc
+    endc
     endm    
     
 newEntity: macro ;alias
@@ -927,18 +927,18 @@ entity: macro
     dc.w \3
     dc.w \4
     dc.l \5
-	else
+    else
     dc.b \1
     dc.b \2
     dc.b \3
     dc.b \4
     dc.l \5
-	endc
+    endc
     endm
-	
-cscEntitiesEnd:	macro
-	dc.w $FFFF
-	endm
+    
+cscEntitiesEnd: macro
+    dc.w $FFFF
+    endm
     
 entityRandomWalk: macro
     if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
@@ -950,7 +950,7 @@ entityRandomWalk: macro
     dc.b \5
     dc.b \6
     dc.b \7
-	else
+    else
     dc.b \1
     dc.b \2
     dc.b \3
@@ -959,7 +959,7 @@ entityRandomWalk: macro
     dc.b \5
     dc.b \6
     dc.b \7
-	endc
+    endc
     endm    
     
     

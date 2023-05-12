@@ -534,13 +534,13 @@ loc_23044:
                 move.b  -1(a0),d0
                 cmp.b   -2(a0),d0
                 beq.s   loc_2306A
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a1)
                 move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a1)
-			else
+            else
                 move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a1)
                 move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a1)
-			endif
+            endif
                 ori.b   #3,ENTITYDEF_OFFSET_FLAGS_A(a1)
 loc_2306A:
                 
@@ -982,13 +982,13 @@ loc_23448:
                 
                 move.w  d0,ENTITYDEF_OFFSET_XTRAVEL(a0)
                 move.w  d1,ENTITYDEF_OFFSET_YTRAVEL(a0)
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a0)
-			else
+            else
                 move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a0)
-			endif
+            endif
                 rts
 
     ; End of function sub_23414
@@ -1076,7 +1076,7 @@ UpdateBattleEntitySprite:
 @Continue:
                 
                 clr.w   d1
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
                 cmpi.w  #MAPSPRITES_SPECIALS_START,d1
                 bcc.s   @Done
@@ -1086,7 +1086,7 @@ UpdateBattleEntitySprite:
                 move.w  d1,-(sp)
                 clr.w   d1
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
-			else
+            else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
                 bcc.s   @Done
@@ -1096,7 +1096,7 @@ UpdateBattleEntitySprite:
                 move.w  d1,-(sp)
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
-			endif
+            endif
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1

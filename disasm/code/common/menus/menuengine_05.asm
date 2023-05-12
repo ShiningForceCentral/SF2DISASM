@@ -452,7 +452,7 @@ loc_12D34:
                 add.w   d2,d0
                 add.w   d3,d1
                 move.w  #$E0FE,d4
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 cmpi.w  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.s   loc_12D5A
                 cmpi.w  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
@@ -461,7 +461,7 @@ loc_12D34:
 loc_12D5A:
                 
                 cmpi.w  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-			else
+            else
                 cmpi.b  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.s   loc_12D5A
                 cmpi.b  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
@@ -470,7 +470,7 @@ loc_12D5A:
 loc_12D5A:
                 
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-			endif
+            endif
                 bcs.s   loc_12D64
                 subq.w  #1,d4
 loc_12D64:
@@ -496,7 +496,7 @@ loc_12D82:
                 lea     (SPRITE_TABLE).l,a0
                 move.w  #$38,d0 
                 moveq   #$2F,d7 
-                move.w  #$10,d1	; sprites 16-63
+                move.w  #$10,d1    ; sprites 16-63
 loc_12D96:
                 
                 move.w  d1,d2
@@ -511,7 +511,7 @@ loc_12DA8:
                 addq.w  #1,d1
                 dbf     d7,loc_12D96
                 moveq   #$2F,d7 
-                move.w  #$10,d1	; sprites 16-63
+                move.w  #$10,d1    ; sprites 16-63
 loc_12DB4:
                 
                 move.w  d1,d2
@@ -548,8 +548,8 @@ PlayEndKiss:
                 
                 move.b  #$FF,(DEACTIVATE_WINDOW_HIDING).l
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                move.w  #$120E,d0	; window dimensions
-                move.w  #$707,d1	; window offset
+                move.w  #$120E,d0    ; window dimensions
+                move.w  #$707,d1    ; window offset
                 jsr     (CreateWindow).w
                 move.w  d0,d4
                 move.w  #$A640,d5
@@ -642,8 +642,8 @@ CreateGoldWindow:
                 bne.w   return_12F5C
                 movem.l d0-a1,-(sp)
                 link    a6,#-32
-                move.w  #WINDOW_GOLD_SIZE,d0	; window dimensions
-                move.w  #WINDOW_GOLD_DEST,d1	; window offset
+                move.w  #WINDOW_GOLD_SIZE,d0    ; window dimensions
+                move.w  #WINDOW_GOLD_DEST,d1    ; window offset
                 jsr     (CreateWindow).l
                 addq.w  #1,d0
                 move.w  d0,((GOLD_WINDOW_INDEX-$1000000)).w
@@ -1149,7 +1149,7 @@ loc_133A8:
                 move.w  d0,-(sp)
                 lea     (SPRITE_CURSOR_DATA).l,a0
                 lea     spr_MemberListTextHighlight(pc), a1
-                cmpi.w  #7,d1		; blink on/off
+                cmpi.w  #7,d1        ; blink on/off
                 bge.s   loc_133C0
                 move.w  #$100,d0
                 bra.s   loc_133C2
@@ -1176,7 +1176,7 @@ loc_133CC:
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 tst.w   ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w
                 beq.s   loc_13404
-                cmpi.w  #7,d1		; blink on/off
+                cmpi.w  #7,d1        ; blink on/off
                 blt.s   loc_13404
                 move.w  #$97,VDPSPRITE_OFFSET_X(a0) 
                 move.w  #$104,(a0)
@@ -1191,7 +1191,7 @@ loc_13404:
                 addq.w  #5,d0
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d0
                 bge.s   loc_13438
-                cmpi.w  #7,d1		; blink on/off
+                cmpi.w  #7,d1        ; blink on/off
                 blt.s   loc_13438
                 move.w  #$97,VDPSPRITE_OFFSET_X(a0) 
                 move.w  #$14D,(a0)

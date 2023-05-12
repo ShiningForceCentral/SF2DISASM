@@ -795,9 +795,9 @@ itemBreakMessage: macro
 battle: macro
     if strcmp('\0','w')
     defineShorthand.w BATTLE_,\1
-	else
+    else
     defineShorthand.b BATTLE_,\1
-	endc
+    endc
     endm
     
 enemyEntity: macro
@@ -858,7 +858,7 @@ npcFacing: macro
     dc.w \1
     else
     dc.b \1
-	endc
+    endc
     endm
     
 ; Battle spriteset definitions
@@ -1130,21 +1130,21 @@ follower: macro
     dc.b \2
     dc.w \3
     dc.b \4
-	dc.b 0
-	else
+    dc.b 0
+    else
     dc.b \1
     dc.b \2
     dc.b \3
     dc.b \4
-	endc
+    endc
     endm
     
 mapSprite: macro
     if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
     defineShorthand.w MAPSPRITE_,\1
-	else
+    else
     defineShorthand.b MAPSPRITE_,\1
-	endc
+    endc
     endm
     
 portrait: macro
@@ -1154,10 +1154,10 @@ portrait: macro
 speechSfx: macro
     if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
     defineShorthand.b SFX_,\1
-	else
+    else
     defineShorthand.b SFX_,\1
     dc.b 0
-	endc
+    endc
     endm
     
 speechSound: macro ; alias

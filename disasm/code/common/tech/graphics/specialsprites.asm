@@ -23,15 +23,15 @@ LoadSpecialSprite:
                 
                 module                  ; Start of special sprite loading module
                 movem.l d0-a1,-(sp)
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.w  #MAPSPRITES_SPECIALS_END,d0
                 sub.w   d1,d0
                 andi.w  #MAPSPRITE_MASK,d0
-			else
+            else
                 move.b  #MAPSPRITES_SPECIALS_END,d0
                 sub.b   d1,d0
                 andi.w  #MAPSPRITE_MASK,d0
-			endif
+            endif
                 move.w  d0,d1
                 lsl.w   #2,d0
                 movea.l pt_SpecialSprites(pc,d0.w),a0
@@ -143,17 +143,17 @@ loc_25D0C:
                 clr.w   d5
 loc_25D0E:
                 
-			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 cmpi.w  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.w   loc_25DF0
                 move.w  #MAPSPRITES_SPECIALS_END,d6
                 sub.w   ENTITYDEF_OFFSET_MAPSPRITE(a0),d6
-			else
+            else
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.w   loc_25DF0
                 move.b  #MAPSPRITES_SPECIALS_END,d6
                 sub.b   ENTITYDEF_OFFSET_MAPSPRITE(a0),d6
-			endif
+            endif
                 andi.w  #$F,d6
                 add.w   d6,d6
                 move.w  rjt_SpecialSpriteUpdate(pc,d6.w),d6

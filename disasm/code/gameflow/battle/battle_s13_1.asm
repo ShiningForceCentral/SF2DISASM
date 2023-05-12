@@ -760,43 +760,43 @@ GetLaserFacing:
                 move.w  d1,d2
                 jsr     j_GetCombatantX
                 jsr     j_ClearTotalMovecostsAndMovableGridArrays
-			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
-                btst   	#0,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #0,d6
                 beq.s   @CheckFace_Up
-			else
+            else
                 tst.w   d6
                 bne.s   @CheckFace_Up
-			endif
+            endif
                 addi.w  #1,d1
 @CheckFace_Up:
                 
-			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
-                btst   	#1,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #1,d6
                 beq.s   @CheckFace_Left
-			else
+            else
                 cmpi.w  #UP,d6
                 bne.s   @CheckFace_Left
-			endif
+            endif
                 subi.w  #1,d2
 @CheckFace_Left:
                 
-			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
-                btst   	#2,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #2,d6
                 beq.s   @CheckFace_Down
-			else
+            else
                 cmpi.w  #LEFT,d6
                 bne.s   @CheckFace_Down
-			endif
+            endif
                 subi.w  #1,d1
 @CheckFace_Down:
                 
-			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
-                btst   	#3,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #3,d6
                 beq.s   @ContinueToTargets
-			else
+            else
                 cmpi.w  #DOWN,d6
                 bne.s   @ContinueToTargets
-			endif
+            endif
                 addi.w  #1,d2
 @ContinueToTargets:
                 
@@ -815,52 +815,52 @@ GetLaserFacing:
                 addi.w  #1,d3
 @CheckIncrementSpace_Right:
                 
-			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
-                btst   	#0,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #0,d6
                 beq.s   @CheckIncrementSpace_Up
-			else
+            else
                 tst.w   d6
                 bne.s   @CheckIncrementSpace_Up
-			endif
+            endif
                 addi.w  #1,d1
                 cmpi.w  #47,d1
                 ble.s   @CheckIncrementSpace_Up
                 bra.w   @Done
 @CheckIncrementSpace_Up:
                 
-			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
-                btst   	#1,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #1,d6
                 beq.s   @CheckIncrementSpace_Left
-			else
+            else
                 cmpi.w  #UP,d6
                 bne.s   @CheckIncrementSpace_Left
-			endif
+            endif
                 subi.w  #1,d2
                 tst.w   d2
                 bpl.s   @CheckIncrementSpace_Left
                 bra.w   @Done
 @CheckIncrementSpace_Left:
                 
-			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
-                btst   	#2,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #2,d6
                 beq.s   @CheckIncrementSpace_Down
-			else
+            else
                 cmpi.w  #LEFT,d6
                 bne.s   @CheckIncrementSpace_Down
-			endif
+            endif
                 subi.w  #1,d1
                 tst.w   d1
                 bpl.s   @CheckIncrementSpace_Down
                 bra.w   @Done
 @CheckIncrementSpace_Down:
                 
-			if (STANDARD_BUILD&DIAGONAL_LASERS=1)
-                btst   	#3,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #3,d6
                 beq.s   @NextSpace
-			else
+            else
                 cmpi.w  #DOWN,d6
                 bne.s   @NextSpace
-			endif
+            endif
                 addi.w  #1,d2
                 cmpi.w  #47,d2
                 ble.s   @NextSpace

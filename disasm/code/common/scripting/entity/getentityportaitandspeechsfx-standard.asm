@@ -15,26 +15,26 @@ GetEntityPortaitAndSpeechSfx:
                 
                 clr.w   d2
                 bsr.w   GetEntityAddressFromCharacter       ; -> a5
-			if (EXPANDED_MAPSPRITES=1)
+            if (EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0   ; entity's map sprite index -> D0
                 lea     tbl_SpriteDialogProperties(pc), a0
                 
-@Loop:          cmp.w   (a0),d0							    ; loop until we find entry matching the given map sprite
-			else
+@Loop:          cmp.w   (a0),d0                                ; loop until we find entry matching the given map sprite
+            else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0   ; entity's map sprite index -> D0
                 lea     tbl_SpriteDialogProperties(pc), a0
                 
-@Loop:          cmp.b   (a0),d0							    ; loop until we find entry matching the given map sprite
+@Loop:          cmp.b   (a0),d0                                ; loop until we find entry matching the given map sprite
             endif
                 beq.s   @Found
                 adda.w  #SPRITEDIALOGDEF_ENTRY_SIZE,a0
                 cmpi.w  #CODE_TERMINATOR_WORD,(a0)
-                bne.s   @Loop				                ; keep searching as long as we haven't reached end of table
+                bne.s   @Loop                                ; keep searching as long as we haven't reached end of table
                 
                 ; Return default portrait and speech sfx is map sprite is not found
                 move.w  #PORTRAIT_DEFAULT,d1
                 move.w  #SFX_DIALOG_BLEEP_6,d2
-				bra.s   @Done
+                bra.s   @Done
                 
 @Found:         move.b  SPRITEDIALOGDEF_OFFSET_PORTRAIT(a0),d1  ; return portrait and speech sfx indexes -> D1, D2
                 ext.w   d1
@@ -60,4 +60,4 @@ GetEntityPortaitAndSpeechSfx:
 @Done:          movem.l (sp)+,d0/a0/a5
                 rts
 
-	; End of function GetEntityPortaitAndSpeechSfx
+    ; End of function GetEntityPortaitAndSpeechSfx
