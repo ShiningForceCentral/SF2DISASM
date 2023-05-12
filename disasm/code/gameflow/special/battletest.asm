@@ -94,14 +94,14 @@ DebugModeBattleTest:
                 bsr.w   InitializeWindowProperties
                 move.w  #COMBATANT_ALLIES_NUMBER,(GENERIC_LIST_LENGTH).l
                 lea     (GENERIC_LIST).l,a0
-                move.l  #$10203,(a0)+
-                move.l  #$4050607,(a0)+
-                move.l  #$8090A0B,(a0)+
-                move.l  #$C0D0E0F,(a0)+
-                move.l  #$10111213,(a0)+
-                move.l  #$14151617,(a0)+
-                move.l  #$18191A1B,(a0)+
-                move.l  #$1C1D1E1F,(a0)+
+                move.l  #$10203,(a0)+     ; ally indexes 0-3
+                move.l  #$4050607,(a0)+   ; ally indexes 4-7
+                move.l  #$8090A0B,(a0)+   ; ally indexes 8-11
+                move.l  #$C0D0E0F,(a0)+   ; ally indexes 12-15
+                move.l  #$10111213,(a0)+  ; ally indexes 16-19
+                move.l  #$14151617,(a0)+  ; ally indexes 20-23
+                move.l  #$18191A1B,(a0)+  ; ally indexes 24-27
+                move.l  #$1C1D1E1F,(a0)+  ; ally indexes 28-31
                 bsr.w   CheatModeConfiguration
 byte_77DE:
                 
@@ -127,7 +127,7 @@ byte_77DE:
 loc_7820:
                 
                 movem.w d0-d4,-(sp)
-                move.w  #$46,d0 
+                move.w  #FLAG_INDEX_FOLLOWERS_ASTRAL,d0 
                 jsr     j_DebugFlagSetter
                 movem.w (sp)+,d0-d4
                 clr.w   d1

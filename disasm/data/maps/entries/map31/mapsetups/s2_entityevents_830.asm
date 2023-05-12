@@ -32,7 +32,7 @@ Map31_33E_EntityEvent0:
 
 Map31_33E_EntityEvent1:
                 
-                move.b  #$C,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_MOUN,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 
@@ -158,7 +158,7 @@ nullsub_5D540:
 
 Map31_33E_EntityEvent9:
                 
-                move.b  #$1B,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_MOUN,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 

@@ -25,19 +25,29 @@ GetAllyMapSprite:
                 
 @CheckJoined:   lea     tbl_AllyMapSpritesIfNotJoined(pc), a0
                 move.w  d0,d1
+			if (EXPANDED_MAPSPRITES=1)
+                moveq   #2,d2
+                jsr     (FindSpecialPropertyWordsAddressForObject).w
+			else
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
+			endif
                 bcs.s   @RegularSprite
                 jsr     CheckFlag                       ; check if ally has joined the Force
                 bne.s   @RegularSprite
-                move.b  (a0),d4                         ; if not, return alternate mapsprite
+                move.w  (a0),d4                         ; if not, return alternate mapsprite
                 bra.s   @Done
                 
 @RegularSprite: jsr     GetClassType
                 add.w   d0,d4                           ; effectively multiply combatant index by 3
                 add.w   d0,d4                           ;     (i.e., the expanded sprites table entry size)
                 add.w   d1,d4
+			if (EXPANDED_MAPSPRITES=1)
+				add.w   d4,d4
+                move.w  tbl_AllyMapSprites(pc,d4.w),d4  ; map sprite index for the given class type -> d4.w
+			else
                 move.b  tbl_AllyMapSprites(pc,d4.w),d4  ; map sprite index for the given class type -> d4.w
+			endif
                 
 @Done:          movem.l (sp)+,d1-d2/a0
 @Return:        rts
@@ -63,8 +73,15 @@ GetCombatantMapSprite:
                 
 @Enemy:         move.w  d1,-(sp)
                 jsr     GetEnemy
+			if (EXPANDED_MAPSPRITES=1)
+				add.w   d1,d1
+                clr.w   d4
+				lea     tbl_EnemyMapSprites(pc),a0
+                move.w  (a0,d1.w),d4
+			else
                 clr.w   d4
                 move.b  tbl_EnemyMapSprites(pc,d1.w),d4
+			endif
                 move.w  (sp)+,d1
                 
 @Done:          move.w  (sp)+,d0

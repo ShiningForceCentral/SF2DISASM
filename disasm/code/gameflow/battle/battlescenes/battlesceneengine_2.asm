@@ -2898,7 +2898,7 @@ loc_1B2BE:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #8,4(a0)
-                lea     (byte_FFAFA1).l,a0
+                lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a0
                 moveq   #$F,d0
 loc_1B304:
                 
@@ -10046,7 +10046,7 @@ loc_1EEF6:
                 andi.w  #$30,d7 
                 add.w   d7,d7
                 adda.w  d7,a0
-                lea     ((SPRITE_10-$1000000)).w,a1
+                lea     ((SPRITE_WEAPON_DATA-$1000000)).w,a1
                 moveq   #3,d7
 loc_1EF08:
                 
@@ -10379,7 +10379,7 @@ loc_1F19E:
                 dbf     d2,loc_1F19E
                 cmpi.w  #$FFFF,((BATTLESCENE_WEAPONSPRITE-$1000000)).w
                 beq.s   loc_1F1C2
-                lea     ((SPRITE_10-$1000000)).w,a0
+                lea     ((SPRITE_WEAPON_DATA-$1000000)).w,a0
                 moveq   #3,d2
 loc_1F1B6:
                 

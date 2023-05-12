@@ -420,7 +420,7 @@ loc_12CB2:
 loc_12CF0:
                 
                 move.l  a1,d0
-                cmpi.w  #$DE80,d0
+                cmpi.w  #WORD_ADDRESS_LAST_SPRITE_PLUS_ONE,d0
                 beq.w   loc_12D82
                 cmpi.w  #1,(a1)
                 beq.s   loc_12D04
@@ -430,7 +430,7 @@ loc_12D04:
                 
                 cmpi.w  #7,d6
                 blt.w   loc_12D6E
-                cmpa.w  #$AEE2,a0
+                cmpa.w  #WORD_ADDRESS_ENTITY_SPECIAL_SPRITE,a0
                 bne.s   loc_12D26
                 move.w  var_32(a6),d0
                 cmpi.w  #$7000,d0
@@ -452,6 +452,16 @@ loc_12D34:
                 add.w   d2,d0
                 add.w   d3,d1
                 move.w  #$E0FE,d4
+			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                cmpi.w  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                bcs.s   loc_12D5A
+                cmpi.w  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                bhi.s   loc_12D5A
+                subq.w  #1,d4
+loc_12D5A:
+                
+                cmpi.w  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+			else
                 cmpi.b  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.s   loc_12D5A
                 cmpi.b  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
@@ -460,6 +470,7 @@ loc_12D34:
 loc_12D5A:
                 
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+			endif
                 bcs.s   loc_12D64
                 subq.w  #1,d4
 loc_12D64:

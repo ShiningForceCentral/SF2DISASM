@@ -255,7 +255,7 @@ loc_11DBC:
                 clr.w   d0
                 moveq   #DOWN,d1
                 moveq   #$FFFFFFFF,d2
-                move.w  #$AB,d3 
+                move.w  #MAPSPRITE_FLAME1,d3 
                 jsr     (UpdateEntityProperties).w
 loc_11DDC:
                 
@@ -313,11 +313,19 @@ loc_11E74:
                 
                 checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 bne.s   loc_11E80
+			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w   #MAPSPRITE_CARAVAN,d4
+                bra.s   loc_11E82
+loc_11E80:
+                
+                move.w   #MAPSPRITE_RAFT,d4
+			else
                 moveq   #MAPSPRITE_CARAVAN,d4 
                 bra.s   loc_11E82
 loc_11E80:
                 
                 moveq   #MAPSPRITE_RAFT,d4 
+			endif
 loc_11E82:
                 
                 clr.w   d0

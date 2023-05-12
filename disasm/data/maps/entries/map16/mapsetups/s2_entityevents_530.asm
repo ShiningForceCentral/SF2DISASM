@@ -139,7 +139,7 @@ Map16_212_EntityEvent8:
 
 Map16_212_EntityEvent9:
                 
-                move.b  #$1D,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_GALAM_1,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 
@@ -214,7 +214,7 @@ Map16_212_EntityEvent14:
 
 Map16_212_EntityEvent15:
                 
-                move.b  #$E,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_GALAM_1,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 

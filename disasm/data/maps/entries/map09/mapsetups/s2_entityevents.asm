@@ -57,7 +57,7 @@ Map9_EntityEvent4:
 
 Map9_EntityEvent5:
                 
-                move.b  #6,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_HASSAN_0,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 
@@ -69,7 +69,7 @@ Map9_EntityEvent5:
 
 Map9_EntityEvent6:
                 
-                move.b  #$15,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_HASSAN,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 
@@ -148,7 +148,7 @@ Map9_EntityEvent10:
 
 Map9_EntityEvent11:
                 
-                move.b  #7,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_HASSAN_1,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 

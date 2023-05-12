@@ -9,34 +9,34 @@ PopulateGenericListWithMembersList:
                 
                 movem.l d7-a1,-(sp)
                 jsr     j_UpdateForce
-                tst.w   d1
-                bne.s   loc_228F0
+                tst.w   d1		; all members
+                bne.s   @CheckMemberGroup
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                bra.s   loc_22908
-loc_228F0:
+                bra.s   @GenerateList
+@CheckMemberGroup:
                 
                 cmpi.w  #1,d1
-                bne.s   loc_22900
+                bne.s   @ReserveMembers
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-                bra.s   loc_22908
-loc_22900:
+                bra.s   @GenerateList
+@ReserveMembers:
                 
                 lea     ((RESERVE_MEMBERS-$1000000)).w,a0
                 move.w  ((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-loc_22908:
+@GenerateList:
                 
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-                bcs.w   loc_22920
-loc_2291A:
+                bcs.w   @SkipLoop
+@PopulateList_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_2291A
-loc_22920:
+                dbf     d7,@PopulateList_Loop
+@SkipLoop:
                 
                 movem.l (sp)+,d7-a1
                 rts

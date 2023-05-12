@@ -754,12 +754,12 @@ loc_46928:
                 move.l  #eas_Idle,(a0)+
                 addq.l  #1,a6
                 move.l  a0,(dword_FFB1A4).l
-                move.l  d0,$14(a5)
+                move.l  d0,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a5)
                 tst.b   d4
                 beq.w   return_4694E
 loc_46944:
                 
-                cmpi.l  #eas_Idle,$14(a5)
+                cmpi.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a5)
                 bne.s   loc_46944
 return_4694E:
                 
@@ -936,7 +936,11 @@ csc1A_setEntitySprite:
                 move.w  d4,d0
 @NotAlly:
                 
+			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.w  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
+			else
                 move.b  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
+			endif
                 jsr     (WaitForVInt).w
                 bsr.w   UpdateEntitySprite_0
                 rts
@@ -1109,19 +1113,22 @@ csc22_animateEntityFadeInOrOut:
                 bsr.w   GetEntityAddressFromCharacter
                 lea     (FF6802_LOADING_SPACE).l,a0
                 move.w  (a6)+,d0
-                moveq   #0,d1
+                
+                moveq   #0,d1    ; mosaic out
                 cmpi.w  #6,d0
                 beq.w   loc_46BE2
-                moveq   #$FFFFFFFF,d1
+                
+                moveq   #$FFFFFFFF,d1    ;mosaic in
                 cmpi.w  #7,d0
                 beq.w   loc_46BE2
+                
                 move.w  d0,d2
                 lsl.w   #3,d0
                 lea     byte_46BB2(pc,d0.w),a1
                 move.w  (a1),d0
                 move.w  2(a1),d1
                 moveq   #$16,d7
-loc_46B74:
+@Transistion_Loop:
                 
                 bsr.w   LoadMapsprite
                 jsr     ApplySpriteCropEffect
@@ -1130,66 +1137,53 @@ loc_46B74:
                 jsr     (WaitForVInt).w
                 add.w   4(a1),d0
                 add.w   6(a1),d1
-                dbf     d7,loc_46B74
+                dbf     d7,@Transistion_Loop
+                
                 cmpi.w  #4,d2
-                bne.s   return_46BB0
+                bne.s   @Return
                 bsr.w   LoadMapsprite
                 move.l  #$FFFF,d0
                 jsr     sub_45E10
                 bsr.w   sub_4709E       
-return_46BB0:
+@Return:
                 
                 rts
 byte_46BB2:
+                ;scan down
+                dc.w 1
+                dc.w 0
+                dc.w 0
+                dc.w 1
                 
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b $15
-                dc.b 0
-                dc.b 0
-                dc.b $FF
-                dc.b $FF
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $16
-                dc.b 0
-                dc.b 0
-                dc.b $FF
-                dc.b $FF
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b $16
-                dc.b 0
-                dc.b 1
-                dc.b $FF
-                dc.b $FF
-                dc.b 0
-                dc.b $16
-                dc.b 0
-                dc.b 1
-                dc.b $FF
-                dc.b $FF
-                dc.b 0
-                dc.b 1
+                ;scan up
+                dc.w 1
+                dc.w $15
+                dc.w 0
+                dc.w $FFFF
+                
+                ;wipe out
+                dc.w 1
+                dc.w 0
+                dc.w 1
+                dc.w 0
+                
+                ;wipe in
+                dc.w $16
+                dc.w 0
+                dc.w $FFFF
+                dc.w 0
+                
+                ;slide out
+                dc.w 1
+                dc.w $16
+                dc.w 1
+                dc.w $FFFF
+                
+                ;slide in
+                dc.w $16
+                dc.w 1
+                dc.w $FFFF
+                dc.w 1
 loc_46BE2:
                 
                 tst.w   d1              ; manage param 6/7
@@ -1292,7 +1286,7 @@ csc26_entityNodHead:
                 
                 move.w  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
-                move.b  #$FF,$1E(a5)
+                move.b  #$FF,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
                 lea     (FF6802_LOADING_SPACE).l,a0
                 moveq   #0,d7
                 moveq   #10,d0
@@ -1308,7 +1302,7 @@ loc_46C8A:
                 moveq   #10,d0
                 jsr     (Sleep).w       
                 dbf     d7,loc_46C8A
-                move.b  #0,$1E(a5)
+                move.b  #0,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
                 rts
 
     ; End of function csc26_entityNodHead
@@ -1321,7 +1315,7 @@ csc27_entityShakeHead:
                 
                 move.w  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
-                move.b  #$FF,$1E(a5)
+                move.b  #$FF,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
                 lea     (FF6802_LOADING_SPACE).l,a0
                 moveq   #6,d7
 loc_46CC8:
@@ -1341,7 +1335,7 @@ loc_46CC8:
                 bsr.w   UpdateEntitySprite_0
                 jsr     (WaitForVInt).w
                 dbf     d7,loc_46CC8
-                move.b  #0,$1E(a5)
+                move.b  #0,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
                 rts
 
     ; End of function csc27_entityShakeHead
@@ -1388,18 +1382,26 @@ loc_46D4C:
                 neg.w   d4
 loc_46D5C:
                 
-                move.w  d1,8(a5)
-                move.w  d4,4(a5)
+                move.w  d1,ENTITYDEF_OFFSET_XTRAVEL(a5)
+			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a5)
+			else
+                move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a5)
+			endif
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a5)
                 move.w  #$30,d5 
-                sub.w   2(a5),d2
+                sub.w   ENTITYDEF_OFFSET_Y(a5),d2
                 bpl.s   loc_46D76
                 neg.w   d2
                 neg.w   d5
 loc_46D76:
                 
-                move.w  d2,$A(a5)
-                move.w  d5,6(a5)
+                move.w  d2,ENTITYDEF_OFFSET_YTRAVEL(a5)
+			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a5)
+			else
+                move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a5)
+			endif
                 bsr.w   WaitForEntityToStopMoving
                 addq.w  #2,d3
                 andi.b  #3,d3
@@ -1435,17 +1437,25 @@ csc29_setEntityDest:
                 neg.w   d3
 loc_46DC4:
                 
-                move.w  d1,8(a5)
-                move.w  d3,4(a5)
+                move.w  d1,ENTITYDEF_OFFSET_XTRAVEL(a5)
+			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d3,ENTITYDEF_OFFSET_XVELOCITY(a5)
+			else
+                move.w  d3,ENTITYDEF_OFFSET_XVELOCITY(a5)
+			endif
                 move.w  #$20,d3 
-                sub.w   2(a5),d2
+                sub.w   ENTITYDEF_OFFSET_Y(a5),d2
                 bpl.s   loc_46DDA
                 neg.w   d2
                 neg.w   d3
 loc_46DDA:
                 
-                move.w  d2,$A(a5)
-                move.w  d3,6(a5)
+                move.w  d2,ENTITYDEF_OFFSET_YTRAVEL(a5)
+			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d3,ENTITYDEF_OFFSET_YVELOCITY(a5)
+			else
+                move.w  d3,ENTITYDEF_OFFSET_YVELOCITY(a5)
+			endif
                 btst    #$F,d6
                 bne.s   return_46DEC
                 bsr.w   WaitForEntityToStopMoving
@@ -1498,8 +1508,13 @@ csc2B_initializeNewEntity:
                 clr.w   d4
                 move.b  (a6)+,d1
                 move.b  (a6)+,d2
+			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.w  (a6)+,d3
+                move.w  (a6)+,d4
+			else
                 move.b  (a6)+,d3
                 move.b  (a6)+,d4
+			endif
                 move.l  #eas_Init,d5
                 jsr     InitializeNewEntity
                 rts
@@ -1576,11 +1591,11 @@ csc2F_fly:
                 bsr.w   GetEntityAddressFromCharacter
                 move.w  (a6)+,d0
                 bne.s   loc_46EB8
-                clr.b   $11(a5)
+                clr.b   ENTITYDEF_OFFSET_LAYER(a5)
                 bra.s   return_46EBE
 loc_46EB8:
                 
-                move.b  #$10,$11(a5)
+                move.b  #$10,ENTITYDEF_OFFSET_LAYER(a5)
 return_46EBE:
                 
                 rts
@@ -1837,7 +1852,7 @@ loc_4705A:
                 
                 move.b  (a5,d0.w),d0
                 move.l  d0,-(sp)
-                lsl.w   #5,d0
+                lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a5
                 adda.w  d0,a5
                 move.l  (sp)+,d0
@@ -1927,7 +1942,11 @@ LoadMapsprite:
 @Continue:
                 
                 clr.w   d1
+			if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
+			else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
+			endif
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1

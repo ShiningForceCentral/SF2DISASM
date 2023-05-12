@@ -147,7 +147,7 @@ InitializeBattlescene:
                 beq.w   @StatusAnimationTilesToVram
                 lea     spr_BattlesceneAlly(pc), a0
                 lea     ((SPRITE_01-$1000000)).w,a1
-                lea     (byte_FFAFA1).l,a2
+                lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a2
                 moveq   #8,d0
 @LoadAllyVdpSprite_Loop:
                 
@@ -181,8 +181,8 @@ InitializeBattlescene:
                 
                 ; Load ground VDP sprite
                 lea     spr_BattlesceneGround(pc), a0
-                lea     ((SPRITE_14-$1000000)).w,a1
-                lea     (word_FFAFAE).l,a2
+                lea     ((SPRITE_GROUND_DATA-$1000000)).w,a1
+                lea     (BATTLESCENE_GROUNDSPRITE_TOGGLE).l,a2
                 moveq   #2,d0
 @LoadGroundVdpSprite_Loop:
                 
@@ -300,7 +300,7 @@ InitializeBattlescene:
                 cmpi.b  #$FF,((BATTLESCENE_BACKGROUND-$1000000)).w
                 beq.s   @WaitForNextFrame
                 
-                lea     ((SPRITE_14_Y-$1000000)).w,a0
+                lea     ((SPRITE_GROUND_Y-$1000000)).w,a0
                 moveq   #2,d1
 @MoveGroundToPosition_Loop:
                 
@@ -986,7 +986,7 @@ loc_18908:
                 move.w  d0,((word_FFB3FA-$1000000)).w
                 cmpi.b  #$FF,((BATTLESCENE_BACKGROUND-$1000000)).w
                 beq.s   loc_18922
-                lea     ((SPRITE_14_Y-$1000000)).w,a0
+                lea     ((SPRITE_GROUND_Y-$1000000)).w,a0
                 moveq   #2,d2
 loc_1891A:
                 
@@ -1039,7 +1039,7 @@ bsc06_switchEnemies:
                 bsr.w   sub_1F1CC
                 clr.w   d6
                 bsr.w   sub_1F1F0
-                lea     ((SPRITE_14_TILE_FLAGS-$1000000)).w,a0
+                lea     ((SPRITE_GROUND_TILE_FLAGS-$1000000)).w,a0
                 bset    #7,(a0)
                 bset    #7,8(a0)
                 bset    #7,$10(a0)
@@ -1224,7 +1224,7 @@ loc_18B30:
                 jsr     (WaitForVInt).w
                 tst.w   d0
                 bne.s   loc_18B30
-                lea     ((SPRITE_14_TILE_FLAGS-$1000000)).w,a0
+                lea     ((SPRITE_GROUND_TILE_FLAGS-$1000000)).w,a0
                 bclr    #7,(a0)
                 bclr    #7,8(a0)
                 bclr    #7,$10(a0)
@@ -2266,7 +2266,7 @@ loc_193F6:
                 move.w  d0,((word_FFB3F2-$1000000)).w
                 addi.w  #$C0,d1 
                 move.w  d1,((word_FFB3F4-$1000000)).w
-                lea     (byte_FFAFA1).l,a0
+                lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a0
                 move.l  #$1010101,d0
                 move.b  d0,(a0)+
                 move.l  d0,(a0)+
@@ -2426,7 +2426,7 @@ sub_19504:
                 subi.w  #$70,d0 
 loc_19520:
                 
-                lea     ((SPRITE_14-$1000000)).w,a1
+                lea     ((SPRITE_GROUND_DATA-$1000000)).w,a1
                 moveq   #2,d7
 loc_19526:
                 
@@ -2437,7 +2437,7 @@ loc_19526:
                 add.w   d0,(a1)+
                 dbf     d7,loc_19526
                 move.w  #$101,d0
-                move.w  d0,(word_FFAFAE).l
+                move.w  d0,(BATTLESCENE_GROUNDSPRITE_TOGGLE).l
                 move.b  d0,(byte_FFAFB0).l
 return_19544:
                 
@@ -2516,7 +2516,7 @@ loc_195AC:
                 andi.w  #$30,d7 
                 add.w   d7,d7
                 adda.w  d7,a0
-                lea     ((SPRITE_10-$1000000)).w,a1
+                lea     ((SPRITE_WEAPON_DATA-$1000000)).w,a1
                 moveq   #3,d7
 loc_195BE:
                 
@@ -2530,7 +2530,7 @@ loc_195BE:
                 move.b  ((WEAPON_FRAME_LAYER-$1000000)).w,d1
                 subq.b  #1,d1
                 lsl.l   d1,d0
-                move.l  d0,(dword_FFAFAA).l
+                move.l  d0,(BATTLESCENE_WEAPONSPRITE_TOGGLE).l
 return_195E0:
                 
                 rts

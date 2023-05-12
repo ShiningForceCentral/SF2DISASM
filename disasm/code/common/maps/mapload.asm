@@ -1173,7 +1173,7 @@ LoadMap:
                 conditionalLongAddr movea.l, p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
-                lea     $E(a5),a5       ; get address 02 - map properties
+                lea     MAPDATA_OFFSET_AREAS(a5),a5       ; get address 02 - map properties
                 bra.w   loc_2B80        
 loc_2ACC:
                 
@@ -1641,32 +1641,32 @@ loc_2F04:
 sub_2F24:
                 
                 move.w  d0,-(sp)
-                move.w  ((word_FFA820-$1000000)).w,d0
+                move.w  ((PLANE_A_SCROLL_SPEED_X-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F36
-                move.w  d0,((word_FFA820-$1000000)).w
+                move.w  d0,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
 loc_2F36:
                 
-                move.w  ((word_FFA822-$1000000)).w,d0
+                move.w  ((PLANE_A_SCROLL_SPEED_Y-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F46
-                move.w  d0,((word_FFA822-$1000000)).w
+                move.w  d0,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
 loc_2F46:
                 
-                move.w  ((word_FFA824-$1000000)).w,d0
+                move.w  ((PLANE_B_SCROLL_SPEED_X-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F56
-                move.w  d0,((word_FFA824-$1000000)).w
+                move.w  d0,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
 loc_2F56:
                 
-                move.w  ((word_FFA826-$1000000)).w,d0
+                move.w  ((PLANE_B_SCROLL_SPEED_Y-$1000000)).w,d0
                 addq.w  #1,d0
                 cmpi.w  #$80,d0 
                 bgt.s   loc_2F66
-                move.w  d0,((word_FFA826-$1000000)).w
+                move.w  d0,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
 loc_2F66:
                 
                 move.w  (sp)+,d0

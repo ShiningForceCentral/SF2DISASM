@@ -194,7 +194,7 @@ loc_19932:
 sub_19952:
                 
                 movem.l d0/a0,-(sp)
-                lea     ((SPRITE_14-$1000000)).w,a0
+                lea     ((SPRITE_GROUND_DATA-$1000000)).w,a0
                 moveq   #2,d0
 loc_1995C:
                 

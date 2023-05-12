@@ -31,7 +31,7 @@ rbcs_battle32:  textCursor 2849
 
 csub_4CD56:
                 
-                move.w  #143,d0
+                move.w  #COMBATANT_ENEMY_INDEX_15,d0
                 jsr     j_GetCombatantX
                 move.w  d1,d7
                 jsr     j_GetCombatantY
@@ -51,7 +51,7 @@ csub_4CD56:
                 jsr     j_JoinForce
                 moveq   #ALLY_JARO,d0
                 jsr     j_JoinBattleParty
-                move.b  (byte_FFB16F).l,(ENTITY_EVENT_INDEX_LIST+$17).l
+                move.b  (ENTITY_EVENT_ENEMY_JAR).l,(ENTITY_EVENT_ALLY_JARO).l
                 rts
 
     ; End of function csub_4CD56

@@ -36,7 +36,7 @@ Map29_EntityEvent1:
 
 Map29_EntityEvent2:
                 
-                move.b  #$1C,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_DWARVEN_VILLAGE,((CURRENT_SHOP_INDEX-$1000000)).w
                 jmp     j_ShopMenuActions
 
     ; End of function Map29_EntityEvent2

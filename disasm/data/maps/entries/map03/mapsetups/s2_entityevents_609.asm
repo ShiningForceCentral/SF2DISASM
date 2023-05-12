@@ -84,7 +84,7 @@ Map3_261_EntityEvent2:
 
 Map3_261_EntityEvent3:
                 
-                move.b  #0,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_GRANSEAL,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 
@@ -370,7 +370,7 @@ byte_511B6:
 
 Map3_261_EntityEvent26:
                 
-                move.b  #$F,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_GRANSEAL,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 

@@ -57,7 +57,7 @@ Map10_EntityEvent1:
 
 Map10_EntityEvent2:
                 
-                move.b  #$14,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_BEDOE,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 
@@ -146,7 +146,7 @@ Map10_EntityEvent8:
 
 Map10_EntityEvent9:
                 
-                move.b  #5,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_BEDOE,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 

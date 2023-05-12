@@ -26,24 +26,24 @@ msEnd:	macro
 msFixedEntity:	macro
 	dc.b \1
 	dc.b \2
-	dc.b \3
-	dc.b \4
+	dc.w \3
+	dc.w \4
 	dc.l \5
 	endm
 
 msSequencedEntity:	macro
 	dc.b \1
 	dc.b \2
-	dc.b \3
-	dc.b \4
+	dc.w \3
+	dc.w \4
 	dc.l \5+$FE000000
 	endm
 	
 msWalkingEntity:	macro
 	dc.b \1
 	dc.b \2
-	dc.b \3
-	dc.b \4
+	dc.w \3
+	dc.w \4
 	dc.b $FF
 	dc.b \5
 	dc.b \6

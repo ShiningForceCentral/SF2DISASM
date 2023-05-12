@@ -42,12 +42,12 @@ CreateBattlesceneAnimation:
                 move.w  (a3),d1
                 cmpi.w  #BATTLEACTION_MUDDLE,d1
                 beq.s   @Done
+                bsr.w   GetSpellAnimation
                 cmpi.w  #BATTLEACTION_STAY,d1
                 bhs.s   @AnimateSprite
                 
                 bscHideTextBox
                 move.b  (a4),d0
-                bsr.w   GetSpellAnimation
                 add.w   d1,d1
                 add.w   d1,d1
                 jsr     @bt_Battleactions(pc,d1.w)

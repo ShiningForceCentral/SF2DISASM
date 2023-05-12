@@ -422,7 +422,7 @@ MenuHBarTiles4: dc.b $22
 CreateBattleEquipWindow:
                 
                 movem.l d0-a2,-(sp)
-                move.w  #$A09,d0
+                move.w  #WINDOW_BATTLEEQUIP_SIZE,d0
                 move.w  #$F612,d1
                 jsr     (CreateWindow).w
                 move.w  d0,((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w

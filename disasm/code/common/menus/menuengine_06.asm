@@ -1980,7 +1980,7 @@ loc_14A9A:
 loc_14AAC:
                 
                 move.w  #VDPSPRITESIZE_V4|VDPSPRITESIZE_H4|09,VDPSPRITE_OFFSET_SIZE(a0)
-                move.w  #VDPTILE_PRIORITY|VDPTILE_PLT3|$7F0,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #VDPTILE_PRIORITY|VDPTILE_PALETTE3|$7F0,VDPSPRITE_OFFSET_TILE(a0)
                 addq.l  #VDP_SPRITE_SIZE,a0
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
@@ -1993,7 +1993,7 @@ loc_14AAC:
 loc_14ADA:
                 
                 move.w  #VDPSPRITESIZE_V1|VDPSPRITESIZE_H1|10,VDPSPRITE_OFFSET_SIZE(a0)
-                move.w  #VDPTILE_PRIORITY|VDPTILE_PLT3|VDPTILE_FLIP|VDPTILE_V_ARROW,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #VDPTILE_PRIORITY|VDPTILE_PALETTE3|VDPTILE_FLIP|VDPTILE_V_ARROW,VDPSPRITE_OFFSET_TILE(a0)
 loc_14AE6:
                 
                 addq.l  #VDP_SPRITE_SIZE,a0
@@ -2011,7 +2011,7 @@ loc_14AE6:
 loc_14B12:
                 
                 move.w  #VDPSPRITESIZE_V1|VDPSPRITESIZE_H1|16,VDPSPRITE_OFFSET_SIZE(a0)
-                move.w  #VDPTILE_PRIORITY|VDPTILE_PLT3|VDPTILE_V_ARROW,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #VDPTILE_PRIORITY|VDPTILE_PALETTE3|VDPTILE_V_ARROW,VDPSPRITE_OFFSET_TILE(a0)
 loc_14B1E:
                 
                 subq.w  #1,d1

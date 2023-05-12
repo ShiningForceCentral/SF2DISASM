@@ -168,7 +168,11 @@ DeclareNewEntity:
                 move.w  (sp)+,d0
                 move.w  d1,(a0)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a0)
+			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                clr.w   ENTITYDEF_OFFSET_XVELOCITY(a0)
+			else
                 clr.l   ENTITYDEF_OFFSET_XVELOCITY(a0)
+			endif
                 clr.l   ENTITYDEF_OFFSET_XTRAVEL(a0)
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
@@ -177,7 +181,11 @@ DeclareNewEntity:
                 swap    d6
                 move.b  d6,ENTITYDEF_OFFSET_LAYER(a0)
                 swap    d6
+			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+			else
                 move.b  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+			endif
                 tst.l   d5
                 bpl.s   loc_4463C
                 move.l  (ENTITY_WALKING_PARAMS).l,-(sp)
@@ -362,7 +370,11 @@ loc_447AA:
                 moveq   #3,d3
                 move.l  #eas_Standing,d5
                 bsr.w   GetCombatantMapSprite
+			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
+			else
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d4
+			endif
                 bcs.s   loc_447E8
                 move.w  d0,-(sp)
                 move.w  #ENTITY_SPECIAL_SPRITE,d0 
@@ -406,9 +418,17 @@ loc_44824:
                 beq.s   loc_44838
 loc_44830:
                 
+			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                adda.w  #NEUTRAL_ENTITY_SIZE,a0
+                cmpi.w  #$FFFF,(a0)
+                bne.s   loc_44830
+                cmp.w   (a0)+,d1
+                bra.s   loc_44824
+			else
                 cmpi.w  #$FFFF,(a0)+
                 beq.s   loc_44824
                 bra.s   loc_44830
+			endif
 loc_44838:
                 
                 move.w  #$9F,battleEntity(a6) 
@@ -438,9 +458,15 @@ loc_4483E:
                 muls.w  #MAP_TILE_SIZE,d1
                 andi.w  #$3F,d2 
                 muls.w  #MAP_TILE_SIZE,d2
+			if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  (a0)+,d3
+                clr.w   d4
+                move.w  (a0)+,d4
+			else
                 move.b  (a0)+,d3
                 clr.w   d4
                 move.b  (a0)+,d4
+			endif
                 move.l  (a0)+,d5
                 clr.l   d6
                 move.w  d0,d6

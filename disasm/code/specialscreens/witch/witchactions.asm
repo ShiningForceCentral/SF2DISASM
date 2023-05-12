@@ -39,14 +39,14 @@ loc_7428:
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 beq.w   byte_7476       
                 moveq   #1,d0
-                moveq   #$1B,d7
+                moveq   #COMBATANT_ALLIES_MINUS_PLAYER_AND_CREATURE_COUNTER,d7
 loc_7464:
                 
                 jsr     j_NameAlly
 loc_746A:
                 
                 addq.w  #1,d0
-                cmpi.w  #6,d0
+                cmpi.w  #ALLY_KIWI,d0
                 beq.s   loc_746A
                 dbf     d7,loc_7464
 byte_7476:

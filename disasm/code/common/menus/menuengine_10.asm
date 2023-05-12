@@ -11,12 +11,12 @@ CreateTacticalBaseAllyNameWindow:
                 tst.w   (ALLY_NAME_WINDOW_INDEX).l
                 bne.s   loc_16A2A
                 movem.w d0,-(sp)
-                move.w  #WINDOW_MEMBER_NAME_SIZE,d0	; window dimensions
-                move.w  #WINDOW_MEMBER_NAME_DEST,d1	; window offset
+                move.w  #WINDOW_HEADQUARTERS_NAME_SIZE,d0	; window dimensions
+                move.w  #WINDOW_HEADQUARTERS_NAME_DEST,d1	; window offset
                 jsr     (CreateWindow).l
                 addq.w  #1,d0
                 move.w  d0,(ALLY_NAME_WINDOW_INDEX).l
-                move.w  #WINDOW_MEMBER_NAME_SIZE,d0
+                move.w  #WINDOW_HEADQUARTERS_NAME_SIZE,d0
                 bsr.w   sub_1018E       
                 movem.w (sp)+,d0
                 jsr     j_GetCurrentHp
@@ -64,7 +64,7 @@ RemoveTacticalBaseAllyNameWindow:
                 move.w  (ALLY_NAME_WINDOW_INDEX).l,d0
                 beq.s   @Done
                 subq.w  #1,d0
-                move.w  #WINDOW_MEMBER_NAME_DEST,d1
+                move.w  #WINDOW_HEADQUARTERS_NAME_DEST,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l

@@ -254,8 +254,8 @@ HandleBattleEntityControlPlayerInput:
                 
                 ; Pressed B
                 movem.w d2-d3,-(sp)
-                move.w  ((word_FFB08E-$1000000)).w,d3
-                move.w  ((word_FFB090-$1000000)).w,d4
+                move.w  ((BATTLE_ACTOR_X-$1000000)).w,d3
+                move.w  ((BATTLE_ACTOR_Y-$1000000)).w,d4
                 lea     ((MOVE_COSTS_TABLE-$1000000)).w,a5
                 moveq   #1,d0
                 bsr.s   UpdateTargetsListForCombatant
@@ -349,9 +349,9 @@ loc_24784:
                 cmpi.w  #$FFFF,d0
                 bne.w   @CheckChoice_Attack
                 move.w  combatant(a6),d0
-                move.w  ((word_FFB08E-$1000000)).w,d1
+                move.w  ((BATTLE_ACTOR_X-$1000000)).w,d1
                 jsr     j_SetCombatantX
-                move.w  ((word_FFB090-$1000000)).w,d1
+                move.w  ((BATTLE_ACTOR_Y-$1000000)).w,d1
                 jsr     j_SetCombatantY
                 move.w  combatant(a6),d0
                 jsr     j_GenerateTargetRangeLists
@@ -474,9 +474,9 @@ loc_248BA:
                 bne.w   loc_24952
                 move.w  combatant(a6),d0
                 jsr     j_GetCombatantX
-                move.w  d1,((word_FFB094-$1000000)).w
+                move.w  d1,((BATTLE_TARGET_X-$1000000)).w
                 jsr     j_GetCombatantY
-                move.w  d1,((word_FFB092-$1000000)).w
+                move.w  d1,((BATTLE_TARGET_Y-$1000000)).w
                 clr.b   ((UNIT_CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   sub_2322C
@@ -613,9 +613,9 @@ loc_24A24:
                 bne.w   @ContinueWithTarget
                 move.w  combatant(a6),d0
                 jsr     j_GetCombatantX
-                move.w  d1,((word_FFB094-$1000000)).w
+                move.w  d1,((BATTLE_TARGET_X-$1000000)).w
                 jsr     j_GetCombatantY
-                move.w  d1,((word_FFB092-$1000000)).w
+                move.w  d1,((BATTLE_TARGET_Y-$1000000)).w
                 clr.b   ((UNIT_CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   sub_2322C

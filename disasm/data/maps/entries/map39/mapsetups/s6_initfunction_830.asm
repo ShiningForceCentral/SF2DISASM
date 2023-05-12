@@ -17,5 +17,5 @@ return_5E0EC:
 
     ; End of function ms_map39_flag830_InitFunction
 
-cs_5E0EE:       newEntity ALLY_ZYNK,4,12,UP,MAPSPRITE_TAROS
+cs_5E0EE:       newEntity ALLY_ZYNK,4,12,UP,$FF
                 csc_end
