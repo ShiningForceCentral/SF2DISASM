@@ -3633,7 +3633,7 @@ ALLY_MASK_INDEX: equ $1F
 
 followerA = 30
 followerB = 31
-followerSize = 5
+followerSize = 4
     if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
 followerA = 156
 followerB = 157

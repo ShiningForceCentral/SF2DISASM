@@ -24,22 +24,39 @@ msEnd:	macro
 	endm
 
 msFixedEntity:	macro
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
 	dc.b \1
 	dc.b \2
 	dc.w \3
 	dc.w \4
 	dc.l \5
+	else
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.l \5
+	endc
 	endm
 
 msSequencedEntity:	macro
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
 	dc.b \1
 	dc.b \2
 	dc.w \3
 	dc.w \4
 	dc.l \5+$FE000000
+	else
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.l \5+$FE000000
+	endc
 	endm
 	
 msWalkingEntity:	macro
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
 	dc.b \1
 	dc.b \2
 	dc.w \3
@@ -48,6 +65,16 @@ msWalkingEntity:	macro
 	dc.b \5
 	dc.b \6
 	dc.b \7
+	else
+	dc.b \1
+	dc.b \2
+	dc.b \3
+	dc.b \4
+	dc.b $FF
+	dc.b \5
+	dc.b \6
+	dc.b \7
+	endc
 	endm
 	
 msEntitiesEnd:	macro

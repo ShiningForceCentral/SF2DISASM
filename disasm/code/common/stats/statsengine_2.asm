@@ -712,7 +712,7 @@ DecreaseBaseAgi:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
-                move.w  #CHAR_STATCAP_AGI_BASE,d6
+                move.w  #CHAR_STATCAP_AGI_DECREASING,d6
                 moveq   #COMBATANT_OFFSET_AGI_BASE,d7
                 bsr.w   DecreaseAndClampByte
                 movem.l (sp)+,d5-a0
@@ -728,7 +728,7 @@ DecreaseCurrentAgi:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
-                move.w  #CHAR_STATCAP_AGI_CURRENT,d6
+                move.w  #CHAR_STATCAP_AGI_DECREASING,d6
                 moveq   #COMBATANT_OFFSET_AGI_CURRENT,d7
                 bsr.w   DecreaseAndClampByte
                 movem.l (sp)+,d5-a0
