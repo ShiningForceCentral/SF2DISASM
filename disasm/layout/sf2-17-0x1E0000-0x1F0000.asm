@@ -8,7 +8,7 @@
                 incbin "data/sound/pcmbank1.bin"
                 incbin "data/sound/yminst.bin"
 SoundDriver:    incbin "data/sound/sounddriver.bin"
-                include "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
+                includeIfVanillaLayout "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
                 include "data\stats\allies\growthcurves.asm"    ; Stat growth curves
                 include "data\stats\allies\stats\entries.asm"    ; Ally stats
                 align

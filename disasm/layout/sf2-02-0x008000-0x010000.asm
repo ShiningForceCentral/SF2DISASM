@@ -5,7 +5,7 @@
 
 
                 include "code\common\tech\jumpinterfaces\s02_jumpinterface.asm"    ; Game Section 02 Jump Interface
-                include "code\common\tech\pointers\s02_pointers.asm"    ; Game Section 02 Pointers
+                includeIfVanillaLayout "code\common\tech\pointers\s02_pointers.asm"    ; Game Section 02 Pointers
                 
                 ; Stats engine
                 include "code\common\stats\statsengine_1.asm"    ; Character stats engine

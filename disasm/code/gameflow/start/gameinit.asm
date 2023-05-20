@@ -9,7 +9,9 @@ InitializeGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
+            if (REGION_FREE_ROM=0)
                 bsr.w   CheckRegion
+            endif
                 jsr     j_NewGame
                 jsr     j_DisplaySegaLogo
                 bne.w   loc_71EC

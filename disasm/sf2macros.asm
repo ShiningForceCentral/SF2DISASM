@@ -45,7 +45,11 @@ declareSramEnd: macro
     endm
     
 declareRegionSupport: macro
+    if (REGION_FREE_ROM=1)
+    dc.b 'JUE             '
+    else
     dc.b 'U               '
+    endc
     endm
     
     
@@ -116,14 +120,29 @@ conditionalWordAddr: macro
     endm
     
 conditionalLongAddr: macro
+    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
+    \1 (\2).w,\3
+    else
     \1 (\2).l,\3
+    endc
     endm
     
 alignIfVanillaLayout: macro
+    if (STANDARD_BUILD=0)
     align \1
+    mexit
+    endc
+    if (OPTIMIZED_ROM_LAYOUT=1)
+    align
+    else
+    align \1
+    endc
     endm
     
 alignIfOptimizedLayout: macro
+    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
+    align \1
+    endc
     endm
     
 alignIfExtendedSsf: macro
@@ -151,10 +170,19 @@ incbinIfExpandedRom: macro
     endm
     
 includeIfVanillaLayout: macro
+    if (STANDARD_BUILD=0)
     include \1
+    mexit
+    endc
+    if (OPTIMIZED_ROM_LAYOUT=0)
+    include \1
+    endc
     endm
     
 includeIfOptimizedLayout: macro
+    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
+    include \1
+    endc
     endm
     
     

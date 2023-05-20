@@ -37,4 +37,4 @@
                 include "data\graphics\battles\battlesprites\enemyidlebattlesprites.asm"    ; Enemy Idle Battlesprites
                 align
                 include "data\graphics\tech\backgroundlayout.asm"    ; Battlescene Background Layout
-                align $20000
+                alignIfVanillaLayout $20000

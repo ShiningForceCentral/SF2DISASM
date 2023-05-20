@@ -4,11 +4,11 @@
 ; FREE SPACE : 474 bytes.
 
 
-                include "code\common\tech\pointers\s14_pointers.asm"    ; Game Section 14 Pointers
+                includeIfVanillaLayout "code\common\tech\pointers\s14_pointers.asm"    ; Game Section 14 Pointers
                 include "data\graphics\battles\grounds\entries.asm"    ; Battlescene Grounds
                 include "data\graphics\battles\weapons\entries.asm"    ; Battlescene Weapons
                 include "data\graphics\battles\weapons\palettes\entries.asm"    ; Battlescene Weapon Palettes
                 include "data\graphics\battles\spells\entries.asm"    ; Spell Graphics
                 include "code\specialscreens\witch\graphics.asm"    ; Witch Screen
                 include "code\specialscreens\witchend\graphics.asm"    ; Witch End Screen
-                align $1C8000
+                alignIfVanillaLayout $1C8000
