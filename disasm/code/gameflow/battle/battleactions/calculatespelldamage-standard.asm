@@ -89,10 +89,39 @@ AdjustSpellPower:
                 cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
                 bne.s   @CheckInvocation    ; go to next step if action is not a spell
                 move.b  (a4),d0
+                
+        if (MUSCLE_MAGIC>=1)
+            case MUSCLE_MAGIC_STAT
+=0
+                jsr     GetCurrentMaxHp
+=1
+                jsr     GetCurrentHp
+=2
+                jsr     GetCurrentMaxMp
+=3
+                jsr     GetCurrentMp
+=4
+                jsr     GetBaseAtt
+=5
+                jsr     GetCurrentAtt
+=6
+                jsr     GetBaseDef
+=7
+                jsr     GetCurrentDef
+=8
+                jsr     GetBaseAgi
+=?
+                jsr     GetCurrentAgi
+            endcase
+                mulu.w  #MUSCLE_MAGIC,d1
+                lsr.l   #8,d1
+                add.w   d1,d6
+        else
                 bsr.w   GetClassType
                 beq.s   @CheckInvocation    ; go to next step if caster is not promoted
                 mulu.w  #5,d6
                 lsr.w   #2,d6               ; +25% spell power
+        endif
 @CheckInvocation:
                 
                 lea     tbl_Invocations(pc),a0
