@@ -1080,6 +1080,7 @@ UpdateBattleEntitySprite:
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
                 cmpi.w  #MAPSPRITES_SPECIALS_START,d1
                 bcc.s   @Done
+				clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1
                 cmpi.b  #$20,d1
                 beq.s   @Done
