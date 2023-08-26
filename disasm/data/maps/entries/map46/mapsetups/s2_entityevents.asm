@@ -193,8 +193,12 @@ Map46_EntityEvent13:
 
 Map46_EntityEvent14:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     SoundTest
+            else
                 moveq   #$F,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map46_EntityEvent14
 
@@ -204,8 +208,22 @@ Map46_EntityEvent14:
 
 Map46_EntityEvent15:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                move.w  (TEST_BUILD_CURRENT_MESSAGE).w,d0
+                cmpi.w  #MESSAGE_MAX_INDEX,d0
+                bls.s   @Continue
+                move.w  #MESSAGE_MAX_INDEX,d0
+@Continue:      moveq   #0,d1
+                move.w  #MESSAGE_MAX_INDEX,d2
+                jsr     NumberPrompt
+                bmi.s   @Return
+                move.w  d0,(TEST_BUILD_CURRENT_MESSAGE).w
+                jsr     (DisplayText).w
+@Return:        rts
+            else
                 moveq   #$10,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map46_EntityEvent15
 
@@ -259,8 +277,12 @@ Map46_EntityEvent19:
 
 Map46_EntityEvent20:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     StartMapTest
+            else
                 moveq   #$15,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map46_EntityEvent20
 
@@ -303,8 +325,12 @@ Map46_EntityEvent23:
 
 Map46_EntityEvent24:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     StartBattleTest
+            else
                 moveq   #$19,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map46_EntityEvent24
 
@@ -314,8 +340,12 @@ Map46_EntityEvent24:
 
 Map46_EntityEvent25:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     StartConfiguration
+            else
                 moveq   #$1A,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map46_EntityEvent25
 
@@ -358,9 +388,21 @@ Map46_EntityEvent28:
 
 Map46_EntityEvent29:
                 
-                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jsr     CaravanMenuActions
+                txt     460             ; "Shop number?{D1}"
+                moveq   #DEBUG_SHOP_INDEX,d0
+                moveq   #0,d1
+                moveq   #SHOP_MAX_INDEX,d2
+                jsr     NumberPrompt
+                bmi.s   @Skip
+                move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     ShopMenuActions
+@Skip:          jmp     ChurchMenuActions
+            else
                 txt     11              ; "{LEADER}, take it easy!{W1}"
                 rts
+            endif
 
     ; End of function Map46_EntityEvent29
 

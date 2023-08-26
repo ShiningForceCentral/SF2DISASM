@@ -79,14 +79,14 @@ loc_74A8:
 loc_74B4:
                 
                 getCurrentSaveSlot d0
-                setSavedByte #MAP_GRANSEAL, CURRENT_MAP
-                setSavedByte #MAP_GRANSEAL, EGRESS_MAP
+                setSavedByte #GAMESTART_MAP, CURRENT_MAP
+                setSavedByte #GAMESTART_MAP, EGRESS_MAP
                 bsr.w   SaveGame
                 clsTxt
-                move.b  #MAP_GRANSEAL,d0 ; HARDCODED new game starting map
-                move.w  #56,d1          ; HARDCODED main entity starting X
-                move.w  #3,d2           ; HARDCODED main entity starting Y
-                move.w  #DOWN,d3        ; HARDCODED main entity starting facing
+                move.b  #GAMESTART_MAP,d0           ; Granseal
+                move.w  #GAMESTART_SAVEPOINT_X,d1   ; 56
+                move.w  #GAMESTART_SAVEPOINT_Y,d2   ; 3
+                move.w  #GAMESTART_FACING,d3        ; 3: Down
                 moveq   #1,d4
 loc_74DE:
                 

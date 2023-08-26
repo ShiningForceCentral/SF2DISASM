@@ -7,30 +7,28 @@
 
 CheatModeConfiguration:
                 
-                if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
-                    nop
-                    nop
-                    nop
-                    nop
-                    nop
-                else
-                    btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
-                    beq.w   return_7EC4
-                endif
+                module
+            if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
+            else
+                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                beq.w   @Default
+            endif
                 
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 beq.s   loc_7E58
                 btst    #7,(SAVE_FLAGS).l
-                if (STANDARD_BUILD&SOUND_TEST_RESTORATION=1)
-                    beq.s   loc_7E58
-                    jmp     SoundTest
-                else
-                    bne.w   SoundTest
-                endif
+            if (STANDARD_BUILD&SOUND_TEST_RESTORATION=1)
+                beq.s   loc_7E58
+                jmp     SoundTest
+            else
+                bne.w   SoundTest
+            endif
 loc_7E58:
                 
                 tst.b   ((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
-                beq.w   return_7EC4
+                beq.w   @Default
+StartConfiguration:
+                
                 txt     448             ; "Configuration....{D3}"
                 txt     450             ; "{CLEAR}Special Turbo"
                 jsr     j_YesNoChoiceBox
@@ -65,9 +63,28 @@ loc_7EB8:
 byte_7EC0:
                 
                 txt     461             ; "Configuration is done.{N}Go ahead!{W1}"
-return_7EC4:
                 
-                rts
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                bra.s   @Return
+            endif
+@Default:
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                ; Default configuration settings
+                move.b  #TEST_BUILD_INITIAL_DEBUG_MODE,((DEBUG_MODE_ACTIVATED-$1000000)).w
+                move.b  #TEST_BUILD_INITIAL_SPECIAL_TURBO,((SPECIAL_TURBO_CHEAT-$1000000)).w
+                move.b  #TEST_BUILD_INITIAL_CONTROL_OPPONENT,((CONTROL_OPPONENT_CHEAT-$1000000)).w
+                move.b  #TEST_BUILD_INITIAL_AUTO_BATTLE,((AUTO_BATTLE_CHEAT-$1000000)).w
+                move.b  #TEST_BUILD_INITIAL_MESSAGE_SPEED,((MESSAGE_SPEED-$1000000)).w
+                move.b  #TEST_BUILD_INITIAL_DISPLAY_BATTLE_MESSAGES,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
+              if (TEST_BUILD_INITIAL_GAME_COMPLETED=1)
+                bset    #7,(SAVE_FLAGS).l
+              else
+                bclr    #7,(SAVE_FLAGS).l
+              endif
+            endif
+                
+@Return:        rts
 
     ; End of function CheatModeConfiguration
 
+                modend

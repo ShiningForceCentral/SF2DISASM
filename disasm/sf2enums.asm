@@ -987,6 +987,20 @@ EQUIPEFFECTS_MAX_INDEX: equ totalEffects
 
 ; ---------------------------------------------------------------------------
 
+; enum ShopProperties
+shopsNumber: = 31
+shopMaxIndex: = shopsNumber-1
+shopsDebugNumber: = 100
+    if (STANDARD_BUILD&TEST_BUILD=1)
+shopsDebugNumber: = shopMaxIndex
+    endif
+SHOP_MAX_INDEX: equ shopMaxIndex
+SHOPS_NUMBER:  equ shopsNumber
+SHOPS_DEBUG_NUMBER: equ shopsDebugNumber
+DEBUG_SHOP_INDEX: equ 30
+
+; ---------------------------------------------------------------------------
+
 ; enum Deals
 
 dealsItemsByteSize = 64
@@ -1729,6 +1743,23 @@ KIWI_FLAME_BREATH_UPGRADE_LEVEL3: equ $32
 
 ; ---------------------------------------------------------------------------
 
+; enum MapProperties
+mapsDebugNumber: = 56
+mapsNumber: = 79
+mapsMaxIndex: = mapsNumber-1
+    if (STANDARD_BUILD&TEST_BUILD=1)
+mapsDebugNumber: = mapsMaxIndex
+    endif
+MAPS_DEBUG_NUMBER: equ mapsDebugNumber
+MAPS_MAX_INDEX: equ mapsMaxIndex
+MAPS_NUMBER: equ mapsNumber
+MINIMAP_TILE_SIZE: equ $60
+MAP_TILE_SIZE: equ $180
+MAP_TILE_PLUS: equ $180
+MAP_TILE_MINUS: equ $FE80
+
+; ---------------------------------------------------------------------------
+
 ; enum Maps
 MAP_OUTSIDE_MITULA: equ $0
 MAP_INSIDE_MITULA: equ $1
@@ -1813,6 +1844,19 @@ MAP_NONE: equ $FF
 
 ; ---------------------------------------------------------------------------
 
+; enum BattleProperties
+battlesNumber: = 45
+battlesMaxIndex: = battlesNumber-1
+battlesDebugNumber: = 49
+    if (STANDARD_BUILD&TEST_BUILD=1)
+battlesDebugNumber: = battlesMaxIndex
+    endif
+BATTLE_MAX_INDEX: equ battlesMaxIndex
+BATTLES_NUMBER:  equ battlesNumber
+BATTLES_DEBUG_NUMBER: equ battlesDebugNumber
+
+; ---------------------------------------------------------------------------
+
 ; enum Battles
 BATTLE_VERSUS_ALL_BOSSES: equ $0
 BATTLE_INSIDE_ANCIENT_TOWER: equ $1
@@ -1860,11 +1904,6 @@ BATTLE_VERSUS_GALAM: equ $2A
 BATTLE_VERSUS_ZEON: equ $2B
 BATTLE_FAIRY_WOODS: equ $2C
 NOT_CURRENTLY_IN_BATTLE: equ $FF
-
-; ---------------------------------------------------------------------------
-
-; enum BattlesProperties
-BATTLES_MAX_NUMBER: equ $2C
 
 ; ---------------------------------------------------------------------------
 
@@ -2032,6 +2071,15 @@ PROMOTIONSECTION_REGULAR_PROMO: equ $1
 PROMOTIONSECTION_SPECIAL_BASE: equ $2
 PROMOTIONSECTION_SPECIAL_PROMO: equ $3
 PROMOTIONSECTION_SPECIAL_ITEM: equ $4
+
+; ---------------------------------------------------------------------------
+
+; enum MessageProperties
+messagesNumber: = 4267
+messageMaxIndex: = messagesNumber-1
+
+MESSAGES_NUMBER: equ messagesNumber
+MESSAGE_MAX_INDEX: equ messageMaxIndex
 
 ; ---------------------------------------------------------------------------
 
@@ -3512,6 +3560,8 @@ ALLY_ZYNK: equ $1A
 ALLY_CHAZ: equ $1B
 ALLY_LEMON: equ $1C
 ALLY_CLAUDE: equ $1D
+ALLY_30: equ 30
+ALLY_31: equ 31
 
 ; ---------------------------------------------------------------------------
 
@@ -3958,3 +4008,24 @@ LONGWORD_DEALS_COUNTER: equ longwordDealsCounter
 LONGWORD_CARAVAN_COUNTER: equ longwordCaravanCounter
 LONGWORD_GAMEFLAGS_COUNTER: equ longwordGameFlagsCounter
 LONGWORD_CARAVAN_INITVALUE: equ longwordCaravanInitValue
+
+; ---------------------------------------------------------------------------
+
+; enum GameStartValues
+gamestartGold = 60
+gamestartMap = MAP_GRANSEAL
+gamestartSavepointX = 56
+gamestartSavepointY = 3
+gamestartFacing = DOWN
+    if (STANDARD_BUILD&TEST_BUILD=1)
+gamestartGold = -1
+gamestartMap = MAP_NEW_GRANSEAL_CASTLE
+gamestartSavepointX = 19
+gamestartSavepointY = 3
+gamestartFacing = UP
+    endif
+GAMESTART_MAP:          equ gamestartMap
+GAMESTART_SAVEPOINT_Y:  equ gamestartSavepointY
+GAMESTART_FACING:       equ gamestartFacing
+GAMESTART_SAVEPOINT_X:  equ gamestartSavepointX
+GAMESTART_GOLD:         equ gamestartGold

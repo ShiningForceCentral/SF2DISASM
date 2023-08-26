@@ -68,9 +68,9 @@ DebugModeBattleTest:
                 moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
             if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
-                moveq   #30,d0
+                moveq   #ALLY_30,d0
                 bsr.w   JoinForce
-                moveq   #31,d0
+                moveq   #ALLY_31,d0
                 bsr.w   JoinForce
             endif
                 moveq   #0,d0
@@ -103,12 +103,12 @@ DebugModeBattleTest:
                 move.l  #$18191A1B,(a0)+
                 move.l  #$1C1D1E1F,(a0)+
                 bsr.w   CheatModeConfiguration
-byte_77DE:
+StartBattleTest:
                 
                 txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
-                move.w  #49,d2
+                move.w  #BATTLES_DEBUG_NUMBER,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0
@@ -127,7 +127,7 @@ byte_77DE:
 loc_7820:
                 
                 movem.w d0-d4,-(sp)
-                move.w  #$46,d0 
+                move.w  #70,d0 
                 jsr     j_DebugFlagSetter
                 movem.w (sp)+,d0-d4
                 clr.w   d1
@@ -147,25 +147,38 @@ loc_7820:
                 move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
             endif
+                
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                move.b  #DEBUG_SHOP_INDEX,((CURRENT_SHOP_INDEX-$1000000)).w
+                pea     StartBattleTest(pc)
+                pea     MainMenuActions
+                pea     ChurchMenuActions
+                pea     ShopMenuActions
+                pea     CaravanMenuActions
+                jmp     BattleLoop
+            else
                 jsr     j_BattleLoop
                 jsr     j_ChurchMenuActions
                 txt     460             ; "Shop number?{D1}"
                 move.w  #0,d0
                 move.w  #0,d1
-                move.w  #$64,d2 
+                move.w  #SHOPS_DEBUG_NUMBER,d2 
                 jsr     j_NumberPrompt
                 clsTxt
                 move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 jsr     j_MainMenuActions
                 jsr     j_CaravanActions
-                bra.w   byte_77DE       
+                bra.w   StartBattleTest      
+            endif
 loc_7894:
-                
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                rts
+            else
                 bsr.w   sub_78BC
                 jsr     j_InitializeMemberListScreen
                 tst.b   d0
-                bne.w   byte_77DE       
+                bne.w   StartBattleTest       
                 bpl.s   loc_78B6
                 movem.l d0-a6,-(sp)
                 jsr     j_ChurchMenuActions
@@ -177,6 +190,7 @@ loc_78B6:
 loc_78BA:
                 
                 bra.s   loc_7894
+            endif
 
     ; End of function DebugModeBattleTest
 

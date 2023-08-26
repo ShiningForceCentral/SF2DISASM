@@ -26,7 +26,7 @@ CheckBattle:
 @Continue:
                 
                 conditionalPc lea,BattleMapCoordinates,a0
-                moveq   #BATTLES_MAX_NUMBER,d6
+                moveq   #BATTLE_MAX_INDEX,d6
                 clr.w   d7
 @Loop:
                 
