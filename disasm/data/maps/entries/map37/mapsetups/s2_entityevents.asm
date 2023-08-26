@@ -264,8 +264,12 @@ Map37_EntityEvent18:
 
 Map37_EntityEvent19:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     RenameAllAllies
+            else
                 moveq   #$14,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map37_EntityEvent19
 

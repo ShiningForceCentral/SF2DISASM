@@ -34,12 +34,20 @@ loc_7428:
                 clsTxt
                 clr.w   d0
                 jsr     j_NameAlly
+            if (STANDARD_BUILD&EASY_RENAME_CHARACTERS=1)
+                ; skip conditions
+            else
                 btst    #7,(SAVE_FLAGS).l ; "Game completed" bit
                 beq.w   byte_7476       
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 beq.w   byte_7476       
+            endif
+                
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                bsr.s   RenameAllAllies
+            else
                 moveq   #1,d0
-                moveq   #$1B,d7
+                moveq   #27,d7
 loc_7464:
                 
                 jsr     j_NameAlly
@@ -49,6 +57,7 @@ loc_746A:
                 cmpi.w  #6,d0
                 beq.s   loc_746A
                 dbf     d7,loc_7464
+            endif
 byte_7476:
                 
                 txt     223             ; "{NAME;0}....{N}Nice name, huh?{W2}"
@@ -94,6 +103,19 @@ loc_74DE:
 
     ; End of function WitchNew
 
+
+            if (STANDARD_BUILD&TEST_BUILD=1)
+RenameAllAllies:
+                
+                moveq   #0,d0
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
+                
+@Loop:          jsr     NameAlly
+                addq.w  #1,d0
+                dbf     d7,@Loop
+                
+                rts
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 

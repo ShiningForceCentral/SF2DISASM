@@ -15,8 +15,12 @@ CheatModeConfiguration:
             endif
                 
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
+            if (STANDARD_BUILD&EASY_SOUND_TEST=1)
+            else
                 beq.s   loc_7E58
                 btst    #7,(SAVE_FLAGS).l
+            endif
+            
             if (STANDARD_BUILD&SOUND_TEST_RESTORATION=1)
                 beq.s   loc_7E58
                 jmp     SoundTest
