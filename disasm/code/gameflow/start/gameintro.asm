@@ -18,7 +18,7 @@ j_GameIntro:
 j_j_DisplaySegaLogo:
                 
                 jsr     j_DisplaySegaLogo
-                bne.w   loc_71EC
+                bne.w   AfterGameIntro
 
     ; End of function j_j_DisplaySegaLogo
 
@@ -28,12 +28,12 @@ j_j_DisplaySegaLogo:
 GameIntro:
                 
                 move.l  sp,(GAME_INTRO_SP_OFFSET).l
-                move.l  #loc_71EC,((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
+                move.l  #AfterGameIntro,((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
                 jsr     (EnableDisplayAndInterrupts).w
                 clr.w   d0
                 jsr     j_PlayIntroOrEndCutscene
                 clr.l   ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
-loc_71EC:
+AfterGameIntro:
                 
                 clr.w   ((QUAKE_AMPLITUDE-$1000000)).w
                 move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
@@ -52,15 +52,19 @@ loc_71EC:
                 jsr     (UpdateBackgroundVScrollData).w
                 jsr     (WaitForDmaQueueProcessing).w
                 bsr.w   InitializeDisplay
+            if (STANDARD_BUILD&TEST_BUILD&TEST_BUILD_SKIP_TITLE_SCREEN=1)
+                ; flow into witch screen
+            else
                 bsr.w   DisableDisplayAndInterrupts
                 sndCom  MUSIC_TITLE
                 jsr     TitleScreen
-                bne.s   loc_724E        
+                bne.s   WitchScreen
                 move    #$2700,sr
                 movea.l (InitStack).w,sp
                 movea.l (p_Start).w,a0  
                 jmp     (a0)            ; reset
-loc_724E:
+            endif
+WitchScreen:
                 
                 bsr.w   DisableDisplayAndInterrupts ; title screen -> witch menu
                 bsr.w   ClearVsramAndSprites
@@ -82,8 +86,6 @@ loc_724E:
                 bsr.w   DisplayWitchScreen
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
-loc_729C:
-                
                 move.b  #0,((byte_FFB082-$1000000)).w
                 jsr     j_ClearEntities
                 conditionalLongAddr movea.l, p_SpeechBalloonTiles, a0
@@ -113,23 +115,27 @@ loc_729C:
                 move.b  d7,(SAVED_ERRCODE_BYTE6).l
                 move.b  d7,(SAVED_ERRCODE_BYTE7).l
                 tst.w   d0
-                bpl.s   loc_7332
+                bpl.s   @IsSaveSlot2Corrupted
                 move.l  #1,((TEXT_NUMBER-$1000000)).w
                 sndCom  MUSIC_CORRUPTED_SAVE
                 txt     237             ; "Ooops!  Record {#} has{N}vanished!{W2}"
                 jsr     j_FadeOut_WaitForP1Input
-loc_7332:
+@IsSaveSlot2Corrupted:
                 
                 tst.w   d1
-                bpl.s   loc_734C
+                bpl.s   @StartWitchDialogue
                 move.l  #2,((TEXT_NUMBER-$1000000)).w
                 sndCom  MUSIC_CORRUPTED_SAVE
                 txt     237             ; "Ooops!  Record {#} has{N}vanished!{W2}"
                 jsr     j_FadeOut_WaitForP1Input
-loc_734C:
+@StartWitchDialogue:
                 
+            if (STANDARD_BUILD&TEST_BUILD&TEST_BUILD_SKIP_WITCH_DIALOGUE=1)
+                bra.w   @SkipWitchDialogue
+            else
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
-                bne.w   loc_73AA
+                bne.w   @SkipWitchDialogue
+            endif
                 txt     216             ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
                 bsr.w   WaitForVInt
                 bsr.w   UpdateWitchHead
@@ -138,8 +144,6 @@ loc_734C:
                 move.w  #6,((word_FFB07C-$1000000)).w
                 move.b  #$FF,((byte_FFB082-$1000000)).w
                 txt     217             ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
-loc_737C:
-                
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_73C2       
                 txt     218             ; "Yes, yes...I used a spell{N}on you.{W2}"
@@ -150,7 +154,7 @@ loc_737C:
                 bne.w   byte_73C2       
                 txt     220             ; "from this mystery forest{N}unless you help me.{W2}"
                 bra.w   byte_73C2       
-loc_73AA:
+@SkipWitchDialogue:
                 
                 bsr.w   WaitForVInt
                 bsr.w   UpdateWitchHead

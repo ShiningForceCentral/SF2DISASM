@@ -53,8 +53,12 @@ SoundTest:
                 
                 btst    #INPUT_BIT_B,((P1_INPUT-$1000000)).w
                 beq.s   @Start
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                rts
+            else
                 sndCom  SOUND_COMMAND_FADE_OUT
                 bra.s   @Start
+            endif
 
     ; End of function SoundTest
 
