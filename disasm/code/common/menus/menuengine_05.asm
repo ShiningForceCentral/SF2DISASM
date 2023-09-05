@@ -577,7 +577,7 @@ loc_12E3A:
                 lea     (PALETTE_3_BASE).l,a1
                 move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
-                conditionalLongAddr movea.l, p_plt_EndKiss, a0
+                getPointer p_plt_EndKiss, a0
                 lea     (PALETTE_2_CURRENT).l,a1
                 move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
@@ -610,7 +610,11 @@ loc_12EB4:
                 move.w  d4,d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
+            if (STANDARD_BUILD=1)
+                bsr.s   EndKissPictureSequence
+            else
                 jsr     j_EndKissPictureSequence
+            endif
                 move.w  #180,d0
                 jsr     (Sleep).w       
                 move.w  d4,d0
@@ -620,6 +624,7 @@ loc_12EB4:
 
     ; End of function PlayEndKiss
 
+                includeIfStandard "code\specialscreens\endkiss\endkissfunctions_0.asm"    ; End kiss function
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -6,11 +6,16 @@
 
 
 SystemInit:
-                
+            if (STANDARD_BUILD=1)
+                pea     InitializeGame(pc)
+                pea     InitVdpData(pc)
+                pea     InitZ80(pc)
+            else
                 bsr.s   InitVdp         ; and clear 68K RAM
                 bsr.w   InitZ80         ; and load sound driver to Z80 RAM
                 bsr.s   InitVdpData
                 jmp     (InitializeGame).l
+            endif
 
     ; End of function SystemInit
 
@@ -36,11 +41,16 @@ InitVdp:
                 move.w  (a0)+,d0
                 bsr.w   SetVdpReg
                 dbf     d1,@SetVdpReg_Loop
+                
                 clr.w   d0
                 clr.w   d1
                 clr.w   d2
+            if (STANDARD_BUILD=1)
+                include "code\common\tech\interrupts\applyvramdmafill.asm"
+            else
                 bsr.w   ApplyVramDmaFill
                 rts
+            endif
 
     ; End of function InitVdp
 
@@ -57,30 +67,40 @@ InitVdpData:
                 move.b  d0,(CTRL2).l
                 move.b  d0,(CTRL3_BIS).l
                 lea     (HORIZONTAL_SCROLL_DATA).l,a0
-                move.w  #$FF,d0
+                move.w  #255,d0
 loc_276:
                 
                 move.w  #0,(a0)+        ; clear from FFD100 to FFD500
                 move.w  #0,(a0)+
                 dbf     d0,loc_276      
+                
                 lea     (VERTICAL_SCROLL_DATA).l,a0
-                move.w  #$13,d0
+                move.w  #19,d0
 loc_28C:
                 
                 move.w  #0,(a0)+        ; clear next 80d bytes
                 move.w  #0,(a0)+
                 dbf     d0,loc_28C      
+                
                 lea     (PALETTE_1_BASE).l,a0
                 moveq   #$7F,d1 
 loc_2A0:
                 
                 clr.w   (a0)+           ; clear palette replicas ?
                 dbf     d1,loc_2A0      
+                
+            if (STANDARD_BUILD=1)
+                pea     EnableDmaQueueProcessing(pc)
+                pea     UpdateVdpVScrollData(pc)
+                pea     UpdateVdpHScrollData(pc)
+                bra.w   ClearSpriteTable
+            else
                 bsr.w   ClearSpriteTable
                 bsr.w   UpdateVdpHScrollData
                 bsr.w   UpdateVdpVScrollData
                 bsr.w   EnableDmaQueueProcessing
                 rts
+            endif
 
     ; End of function InitVdpData
 

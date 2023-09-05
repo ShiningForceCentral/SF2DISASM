@@ -4,51 +4,25 @@
 ; FREE SPACE : 6681 bytes.
 
 
-                includeIfVanillaLayout "code\common\tech\pointers\s06_textbankspointer.asm"    ; Game Section 06 Text Banks Pointer
+                includeIfVanilla "code\common\tech\pointers\s06_textbankspointer.asm"    ; Game Section 06 Text Banks Pointer
                 include "code\common\tech\jumpinterfaces\s06_jumpinterface_1.asm"    ; Game Section 06 Jump Interface, part 1
-                includeIfVanillaLayout "code\common\tech\pointers\s06_pointers.asm"    ; Game Section 06 Pointers
+                includeIfVanilla "code\common\tech\pointers\s06_pointers.asm"    ; Game Section 06 Pointers
                 include "code\common\tech\jumpinterfaces\s06_jumpinterface_2.asm"    ; Game Section 06 Jump Interface, part 2
-                includeIfVanillaLayout "code\common\tech\pointers\s06_gamestaffpointer.asm"    ; Game Section 06 Game Staff Pointer
-                include "code\common\tech\jumpinterfaces\s06_jumpinterface_3.asm"    ; Game Section 06 Jump Interface, part 3
+                includeIfVanilla "code\common\tech\pointers\s06_gamestaffpointer.asm"    ; Game Section 06 Game Staff Pointer
+                includeIfVanilla "code\common\tech\jumpinterfaces\s06_jumpinterface_3.asm"    ; Game Section 06 Jump Interface, part 3
                 include "code\specialscreens\segalogo\segalogo_0.asm"    ; SEGA logo functions
                 include "data\tech\configurationmodeinputsequence.asm"    ; Configuration mode input sequence
                 align
                 include "code\specialscreens\segalogo\segalogo_1.asm"    ; SEGA logo functions
                 include "data\tech\debugmodeinputsequence.asm"    ; Debug mode input sequence
                 align
-VariableWidthFont:
-                incbin "data/graphics/tech/fonts/variablewidthfont.bin"
-MenuTiles_Uncompressed:
-                incbin "data/graphics/tech/menus/mainmenutiles.bin" ; uncompressed
-MenuTiles_Item: incbin "data/graphics/tech/menus/menutilesitem.bin"
-MenuTiles_BattleField:
-                incbin "data/graphics/tech/menus/menutilesbattlefield.bin"
-MenuTiles_Church:
-                incbin "data/graphics/tech/menus/menutileschurch.bin"
-MenuTiles_Shop: incbin "data/graphics/tech/menus/menutilesshop.bin"
-MenuTiles_Caravan:
-                incbin "data/graphics/tech/menus/menutilescaravan.bin"
-MenuTiles_Depot:incbin "data/graphics/tech/menus/menutilesdepot.bin"
-MenuTiles_YesNo:incbin "data/graphics/tech/menus/menutilesyesno.bin"
-plt_WitchChoice:incbin "data/graphics/specialscreens/witchscreen/witchchoicepalette.bin"
-WitchBubbleAnimation:
-                incbin "data/graphics/specialscreens/witchscreen/witchbubbleanimation.bin"
-SpeechBalloonTiles:
-                incbin "data/graphics/specialscreens/witchscreen/speechballoontiles.bin"
-                include "code\specialscreens\endkiss\endkissfunctions_0.asm"    ; End kiss function
-                include "code\specialscreens\title\loadfont.asm"    ; Title screen font loading function
-UnusedCloudTiles:
-                incbin "data/graphics/tech/unusedcloudtiles.bin" ; looks like compressed tiles but no idea of what they represent (32x8 tiles)
-StaticWidthFont:incbin "data/graphics/tech/fonts/staticwidthfont.bin" 
-                                                        ; used for title screen
-TitleScreenPalettes:
-                incbin "data/graphics/specialscreens/titlescreen/titlescreenpalettes.bin"
+                includeIfVanilla "code\common\tech\incbins\s06_incbins_graphics.asm"    ; Game Section 06 Incbin Directives, part 1
+                includeIfVanilla "code\specialscreens\endkiss\endkissfunctions_0.asm"    ; End kiss function
+                includeIfVanilla "code\specialscreens\title\loadfont.asm"    ; Title screen font loading function
+                includeIfVanilla "code\common\tech\incbins\s06_incbins_titlescreen.asm"    ; Game Section 06 Incbin Directives, part 2
                 include "code\common\scripting\text\decoding.asm"    ; Text decoding functions
-TextBankTreeOffsets:
-                incbin "data/scripting/text/huffmantreeoffsets.bin"
-TextBankTreeData:
-                incbin "data/scripting/text/huffmantrees.bin"
+                include "code\common\tech\incbins\s06_incbins_textbanktrees.asm"    ; Game Section 06 Incbin Directives, part 3
                 include "data\scripting\text\entries.asm"    ; Textbank entries
-                include "code\specialscreens\credits\gamestaff.asm"    ; Game Staff
+                includeIfVanilla "data\scripting\gamestaff.asm"    ; Game Staff
                 align
-                alignIfVanillaLayout $44000
+                alignIfVanilla $44000

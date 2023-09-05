@@ -24,8 +24,11 @@ CheckBattle:
                 clr.w   d0
                 getSavedByte CURRENT_MAP, d0
 @Continue:
-                
-                conditionalPc lea,BattleMapCoordinates,a0
+            if (STANDARD_BUILD=1)
+                getPointer p_table_BattleMapCoordinates, a0
+            else
+                lea     table_BattleMapCoordinates(pc), a0
+            endif
                 moveq   #BATTLES_MAX_NUMBER,d6
                 clr.w   d7
 @Loop:

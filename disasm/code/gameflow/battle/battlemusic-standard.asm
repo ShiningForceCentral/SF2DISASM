@@ -20,8 +20,7 @@ PlayMapMusic:
                 bcs.s   @Continue
                 move.b  (a0),d0
                 
-@Continue:      
-                sndCom  SOUND_COMMAND_GET_D0_PARAMETER
+@Continue:      sndCom  SOUND_COMMAND_GET_D0_PARAMETER
                 movem.l (sp)+,d0-d2/a0
                 rts
 

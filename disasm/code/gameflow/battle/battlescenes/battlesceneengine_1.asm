@@ -24,7 +24,7 @@ GetEnemyAnimation:
                 add.w   ((BATTLESCENE_ENEMYBATTLEANIMATION-$1000000)).w,d1
 @GetAnimationPointer:
                 
-                conditionalLongAddr movea.l, p_pt_EnemyAnimations, a0
+                getPointer p_pt_EnemyAnimations, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
                 move.w  (sp)+,d1
@@ -113,7 +113,7 @@ plt_BattlesceneBasePalette:
 ; =============== S U B R O U T I N E =======================================
 
 
-LoadBattlesceneBackgroundLayout:
+LoadBattlescenelayout_BattlesceneBackground:
                 
                 movem.l d0/a0-a1,-(sp)
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
@@ -127,7 +127,11 @@ loc_198E0:
                 
                 move.w  #VDPTILE_BLANK|VDPTILE_PALETTE3,(a0)+
                 dbf     d0,loc_198E0
-                conditionalPc lea,BackgroundLayout,a1
+            if (STANDARD_BUILD=1)
+                getPointer p_layout_BattlesceneBackground, a1
+            else
+                lea     layout_BattlesceneBackground(pc), a1
+            endif
                 move.w  #191,d0 
 loc_198F0:
                 
@@ -147,7 +151,7 @@ loc_19904:
                 movem.l (sp)+,d0/a0-a1
                 rts
 
-    ; End of function LoadBattlesceneBackgroundLayout
+    ; End of function LoadBattlescenelayout_BattlesceneBackground
 
 
 ; START OF FUNCTION CHUNK FOR bsc07_switchAllies
@@ -216,7 +220,7 @@ loc_1995C:
 
 LoadEnemyBattlespritePropertiesAndPalette:
                 
-                conditionalLongAddr movea.l, p_pt_EnemyBattlesprites, a0
+                getPointer p_pt_EnemyBattlesprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((BATTLESCENE_ENEMYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -247,7 +251,7 @@ LoadEnemyBattlespritePropertiesAndPalette:
 
 LoadEnemyBattlespriteFrameToVram:
                 
-                conditionalLongAddr movea.l, p_pt_EnemyBattlesprites, a0
+                getPointer p_pt_EnemyBattlesprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -270,7 +274,7 @@ LoadEnemyBattlespriteFrameToVram:
 LoadEnemyBattlespriteFrameAndWaitForDma:
                 
                 disableSramAndSwitchRomBanks
-                conditionalLongAddr movea.l, p_pt_EnemyBattlesprites, a0
+                getPointer p_pt_EnemyBattlesprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -292,7 +296,7 @@ LoadEnemyBattlespriteFrameAndWaitForDma:
 
 LoadAllyBattlespritePropertiesAndPalette:
                 
-                conditionalLongAddr movea.l, p_pt_AllyBattlesprites, a0
+                getPointer p_pt_AllyBattlesprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -323,7 +327,7 @@ LoadAllyBattlespritePropertiesAndPalette:
 
 LoadAllyBattlespriteFrameToVram:
                 
-                conditionalLongAddr movea.l, p_pt_AllyBattlesprites, a0
+                getPointer p_pt_AllyBattlesprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -346,7 +350,7 @@ LoadAllyBattlespriteFrameToVram:
 LoadAllyBattlespriteFrameAndWaitForDma:
                 
                 disableSramAndSwitchRomBanks
-                conditionalLongAddr movea.l, p_pt_AllyBattlesprites, a0
+                getPointer p_pt_AllyBattlesprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -367,7 +371,7 @@ LoadAllyBattlespriteFrameAndWaitForDma:
 
 LoadWeaponPalette:
                 
-                conditionalLongAddr movea.l, p_plt_WeaponPalettes, a0
+                getPointer p_plt_WeaponPalettes, a0
                 lsl.w   #2,d0
                 move.l  (a0,d0.w),((PALETTE_1_BASE_0E-$1000000)).w
                 rts
@@ -382,7 +386,7 @@ LoadWeaponPalette:
 
 LoadWeaponsprite:
                 
-                conditionalLongAddr movea.l, p_pt_Weaponsprites, a0
+                getPointer p_pt_Weaponsprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF2000_LOADING_SPACE).l,a1
@@ -404,7 +408,7 @@ LoadWeaponsprite:
 
 LoadBattlesceneGroundToVram:
                 
-                conditionalLongAddr movea.l, p_pt_Grounds, a0
+                getPointer p_pt_Grounds, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
@@ -429,7 +433,7 @@ LoadBattlesceneGroundToVram:
 LoadAllyBattlespriteFrame:
                 
                 disableSramAndSwitchRomBanks
-                conditionalLongAddr movea.l, p_pt_AllyBattlesprites, a0
+                getPointer p_pt_AllyBattlesprites, a0
                 move.w  ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
@@ -457,7 +461,7 @@ LoadNewAllyBattlesprite:
                 
                 move.w  d1,-(sp)
                 move.w  d0,-(sp)
-                conditionalLongAddr movea.l, p_pt_AllyBattlesprites, a0
+                getPointer p_pt_AllyBattlesprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -490,7 +494,7 @@ LoadNewAllyBattlesprite:
 LoadEnemyBattlespriteFrame:
                 
                 disableSramAndSwitchRomBanks
-                conditionalLongAddr movea.l, p_pt_EnemyBattlesprites, a0
+                getPointer p_pt_EnemyBattlesprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -514,7 +518,7 @@ LoadNewEnemyBattlesprite:
                 cmpi.w  #$FFFF,d0
                 beq.w   @Return
                 
-                conditionalLongAddr movea.l, p_pt_EnemyBattlesprites, a0
+                getPointer p_pt_EnemyBattlesprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -546,7 +550,7 @@ LoadBattlesceneBackground:
                 tst.w   d0
                 bmi.s   @Return
                 
-                conditionalLongAddr movea.l, p_pt_Backgrounds, a2
+                getPointer p_pt_Backgrounds, a2
                 lsl.w   #2,d0
                 movea.l (a2,d0.w),a2
                 move.w  (a2)+,d0        ; tileset 1 offset
@@ -588,7 +592,7 @@ LoadBattlesceneBackground:
 
 LoadBattlesceneGround:
                 
-                conditionalLongAddr movea.l, p_pt_Grounds, a0
+                getPointer p_pt_Grounds, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
@@ -611,7 +615,7 @@ LoadBattlesceneGround:
 LoadInvocationSpriteFrameToVram:
                 
                 disableSram
-                conditionalLongAddr movea.l, p_pt_InvocationSprites, a0
+                getPointer p_pt_InvocationSprites, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.l  a0,-(sp)
@@ -684,7 +688,7 @@ loc_19CA0:
 LoadSpellGraphics:
                 
                 disableSram
-                conditionalLongAddr movea.l, p_pt_SpellGraphics, a0
+                getPointer p_pt_SpellGraphics, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0
@@ -715,7 +719,7 @@ LoadSpellGraphics:
 LoadSpellGraphicsForInvocation:
                 
                 disableSram
-                conditionalLongAddr movea.l, p_pt_SpellGraphics, a0
+                getPointer p_pt_SpellGraphics, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0        ; load bytes 0-1

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\backgroundlayout.asm :
 ; 0x1FAEA..0x1FDEA : Battlescene Background Layout
-BackgroundLayout:
+layout_BattlesceneBackground:
                 vdpTile 928|PALETTE4
                 vdpTile 932|PALETTE4
                 vdpTile 936|PALETTE4

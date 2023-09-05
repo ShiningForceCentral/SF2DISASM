@@ -1,191 +1,272 @@
-; ---------------------------------------------------------------------------
-; Align and pad
-; input: length to align to, value to use as padding (default is $FF)
-; ---------------------------------------------------------------------------
 
     include "sf2cutscenemacros.asm"
     include "sf2mapmacros.asm"
     include "sf2mapsetupmacros.asm"
     include "sf2battlescenemacros.asm"
 
+
+; ---------------------------------------------------------------------------
+; Align and pad
+; input: length to align to, value to use as padding (default is $FF)
+; ---------------------------------------------------------------------------
+
 align: macro
-    case narg
-=0  ; If no arguments given, align to word boundary.
-    dcb.b *%2,$FF
-=1  ; If given an address argument only, pad with $FF.
-    dcb.b \1-(*%\1),$FF
-=?  ; If two arguments or more, pad with second argument.
-    dcb.b \1-(*%\1),\2
-    endcase
+            case narg
+=0              ; If no arguments given, align to word boundary.
+                dcb.b *%2,$FF
+                
+=1              ; If given an address argument only, pad with default $FF value.
+                dcb.b \1-(*%\1),$FF
+                
+=?              ; If two arguments or more, pad with second argument value.
+                dcb.b \1-(*%\1),\2
+            endcase
+        endm
+
+
+wordAlign:  macro ;alias
+                align
+                inform 0,"INFO: 'wordAlign' macro is obsolete. Please use 'align' with no arguments instead."
+            endm
+
+
+alignIfStandard: macro
+        if (STANDARD_BUILD=1)
+            case narg
+=0
+                align
+=1
+                align \1
+=?
+                align \1, \2
+            endcase
+        endif
     endm
-    
-wordAlign: macro ;alias
-    align
+
+
+alignIfOptimizedLayout: macro ;alias
+                alignIfStandard \1, \2
+                inform 0,"INFO: 'alignIfOptimizedLayout' macro is obsolete. Please use 'alignIfStandard' instead."
+            endm
+
+
+alignIfVanilla: macro
+        if (VANILLA_BUILD=1)
+            case narg
+=0
+                align
+=1
+                align \1
+=?
+                align \1, \2
+            endcase
+        endif
     endm
-    
-    
+
+
+alignIfVanillaLayout: macro ;alias
+                alignIfVanilla \1, \2
+                inform 0,"INFO: 'alignIfVanillaLayout' macro is obsolete. Please use 'alignIfVanilla' instead."
+            endm
+
+
+alignIfExtendedSsf: macro
+            endm
+
+
+objIfExtendedSsf: macro
+            endm
+
+
+objendIfExtendedSsf: macro
+            endm
+
+
+
+; ---------------------------------------------------------------------------
+; Conditional INCLUDE and INCBIN
+; ---------------------------------------------------------------------------
+
+incbinIfStandard: macro
+            if (STANDARD_BUILD=1)
+                incbin \1
+            endif
+        endm
+
+incbinIfExpandedRom: macro ;alias
+                incbinIfStandard \1
+                inform 0,"INFO: 'incbinIfExpandedRom' macro is obsolete. Please use 'incbinIfStandard' instead."
+            endm
+
+incbinIfVanilla: macro
+            if (VANILLA_BUILD=1)
+                incbin \1
+            endif
+        endm
+
+incbinIfVanillaRom: macro ;alias
+                incbinIfVanilla \1
+                inform 0,"INFO: 'incbinIfVanillaRom' macro is obsolete. Please use 'incbinIfVanilla' instead."
+            endm
+
+includeIfStandard: macro
+            if (STANDARD_BUILD=1)
+                include \1
+            endif
+        endm
+
+includeIfExpandedRom: macro ;alias
+                includeIfStandard \1
+                inform 0,"INFO: 'includeIfExpandedRom' macro is obsolete. Please use 'includeIfStandard' instead."
+            endm
+
+includeIfOptimizedLayout: macro ;alias
+                includeIfStandard \1
+                inform 0,"INFO: 'includeIfOptimizedLayout' macro is obsolete. Please use 'includeIfStandard' instead."
+            endm
+
+includeIfVanilla: macro
+            if (VANILLA_BUILD=1)
+                include \1
+            endif
+        endm
+
+includeIfVanillaLayout: macro ;alias
+                includeIfVanilla \1
+                inform 0,"INFO: 'includeIfVanillaLayout' macro is obsolete. Please use 'includeIfVanilla' instead."
+            endm
+
+includeIfVanillaRom: macro ;alias
+                includeIfVanilla \1
+                inform 0,"INFO: 'includeIfVanillaRom' macro is obsolete. Please use 'includeIfVanilla' instead."
+            endm
+
+
+
 ; ---------------------------------------------------------------------------
 ; ROM Header
 ; ---------------------------------------------------------------------------
     
 declareSystemId: macro
-    dc.b 'SEGA GENESIS    '
-    endm
+                dc.b 'SEGA GENESIS    '
+            endm
     
 declareChecksum: macro
-    dc.w $8921
-    endm
+                dc.w $8921
+            endm
     
 declareRomEnd: macro
-    dc.l $1FFFFF
-    endm
+                dc.l $1FFFFF
+            endm
     
 declareSramEnd: macro
-    dc.l $203FFF
-    endm
+                dc.l $203FFF
+            endm
     
 declareRegionSupport: macro
-    if (REGION_FREE_ROM=1)
-    dc.b 'JUE             '
-    else
-    dc.b 'U               '
-    endc
-    endm
-    
-    
+            if (STANDARD_BUILD=1)
+                dc.b 'JUE             '
+            else
+                dc.b 'U               '
+            endif
+        endm
+
+
+
 ; ---------------------------------------------------------------------------
 ; Expanded ROM
 ; ---------------------------------------------------------------------------
     
 getCurrentSaveSlot: macro
-    move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,\1
-    endm
+                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,\1
+            endm
     
 setCurrentSaveSlot: macro
-    move.w  \1,((CURRENT_SAVE_SLOT-$1000000)).w
-    endm
+                move.w  \1,((CURRENT_SAVE_SLOT-$1000000)).w
+            endm
     
 enableSram: macro
-    endm
+            endm
     
 enableSramAndReturn: macro
-    rts
-    endm
+                rts
+            endm
     
 disableSram: macro
-    endm
+            endm
     
 disableSramAndSwitchRomBanks: macro
-    endm
+            endm
     
 switchRomBanks: macro
-    endm
+            endm
     
 restoreRomBanks: macro
-    endm
+            endm
     
 restoreRomBanksAndEnableSram: macro
-    endm
+            endm
     
 processDmaAndRestoreMemoryMap: macro
-    jsr     (\1).w
-    jmp     (\2).w
-    endm
+                jsr     (\1).w
+                jmp     (\2).w
+            endm
     
 processDmaAndEnableSram: macro
-    processDmaAndRestoreMemoryMap \1, WaitForDmaQueueProcessing, ControlMapper_EnableSram
-    endm
+                processDmaAndRestoreMemoryMap \1, WaitForDmaQueueProcessing, ControlMapper_EnableSram
+            endm
     
 processDmaRestoreRomBanksAndEnableSram: macro
-    processDmaAndRestoreMemoryMap \1, WaitForDmaQueueProcessing, ControlMapper_RestoreRomBanksAndEnableSram
-    endm
+                processDmaAndRestoreMemoryMap \1, WaitForDmaQueueProcessing, ControlMapper_RestoreRomBanksAndEnableSram
+            endm
     
 loadCompressedDataRestoreRomBanksAndEnableSram: macro
-    jmp     (LoadCompressedData).w
-    endm
+                jmp     (LoadCompressedData).w
+            endm
     
 conditionalMapperInit: macro
-    endm
+            endm
     
 conditionalRomExpand: macro
-    endm
+            endm
     
 conditionalPc: macro
-    \1 \2(pc),\3
-    \4
-    endm
+                \1 \2(pc),\3
+                \4
+                inform 0,"INFO: 'conditionalPc' macro is obsolete."
+            endm
     
 conditionalWordAddr: macro
-    \1 (\2).w,\3
-    endm
+                \1 (\2).w,\3
+                inform 0,"INFO: 'conditionalWordAddr' macro is obsolete."
+            endm
     
+getPointer: macro
+            if (STANDARD_BUILD=1)
+                movea.l (\1).w,\2
+            else
+                movea.l (\1).l,\2
+            endif
+        endm
+        
+loadPointer: macro
+            if (STANDARD_BUILD=1)
+                move.l  (\1).w,\2
+            else
+                move.l  (\1).l,\2
+            endif
+        endm
+        
 conditionalLongAddr: macro
-    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
-    \1 (\2).w,\3
-    else
-    \1 (\2).l,\3
-    endc
-    endm
-    
-alignIfVanillaLayout: macro
-    if (STANDARD_BUILD=0)
-    align \1
-    mexit
-    endc
-    if (OPTIMIZED_ROM_LAYOUT=1)
-    align
-    else
-    align \1
-    endc
-    endm
-    
-alignIfOptimizedLayout: macro
-    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
-    align \1
-    endc
-    endm
-    
-alignIfExtendedSsf: macro
-    align \2
-    endm
-    
-objIfExtendedSsf: macro
-    endm
-    
-objendIfExtendedSsf: macro
-    endm
-    
-includeIfVanillaRom: macro
-    include \1
-    endm
-    
-incbinIfVanillaRom: macro
-    incbin \1
-    endm
-    
-includeIfExpandedRom: macro
-    endm
-    
-incbinIfExpandedRom: macro
-    endm
-    
-includeIfVanillaLayout: macro
-    if (STANDARD_BUILD=0)
-    include \1
-    mexit
-    endc
-    if (OPTIMIZED_ROM_LAYOUT=0)
-    include \1
-    endc
-    endm
-    
-includeIfOptimizedLayout: macro
-    if (STANDARD_BUILD&OPTIMIZED_ROM_LAYOUT=1)
-    include \1
-    endc
-    endm
-    
-    
+            if (STANDARD_BUILD=1)
+                \1 (\2).w,\3
+            else
+                \1 (\2).l,\3
+            endif
+                inform 0,"INFO: 'conditionalLongAddr' macro is obsolete. Please use 'getPointer' and remove the 'movea.l' parameter."
+        endm
+
+
 ; ---------------------------------------------------------------------------
 ; Relocated saved data to SRAM
 ; ---------------------------------------------------------------------------
@@ -516,7 +597,7 @@ enemyEntity: macro
     dc.b \1+128
     endm
     
-itemDrop: macro ; alias
+itemDrop: macro ;alias
     item \1
     endm
     
@@ -524,7 +605,7 @@ droppedFlag: macro
     dc.b \1
     endm
     
-dropFlag: macro ; alias
+dropFlag: macro ;alias
     droppedFlag \1
     endm
     
@@ -678,7 +759,7 @@ entry: macro
     defineBitfield.b SPELL_,\1
     endm
     
-index: macro ; alias
+index: macro ;alias
     entry \1
     endm
     
@@ -756,7 +837,7 @@ shopInventory: macro
     endr
     endm
     
-shopDef: macro ; alias
+shopDef: macro ;alias
     shopInventory \_
     endm
     
@@ -784,11 +865,11 @@ classes: macro
     endr
     endm
     
-blacksmithClasses: macro    ; alias
+blacksmithClasses: macro    ;alias
     classes \1
     endm
     
-mithrilWeaponClass: macro   ; alias
+mithrilWeaponClass: macro   ;alias
     classes \1
     endm
     
@@ -809,7 +890,7 @@ specialCaravanDescription: macro
     defineShorthand.w MESSAGE_CARAVANDESC_,\3
     endm
     
-usableOutsideBattleItem: macro  ; alias
+usableOutsideBattleItem: macro  ;alias
     item \1
     endm
     
@@ -837,7 +918,7 @@ speechSfx: macro
     dc.b 0
     endm
     
-speechSound: macro ; alias
+speechSound: macro ;alias
     speechSfx \1
     endm
     
@@ -868,7 +949,7 @@ baseAtt: macro
     dc.b \1,0
     endm
     
-baseAtk: macro ; alias
+baseAtk: macro ;alias
     baseAtt \1
     endm
     
@@ -919,7 +1000,7 @@ unknownWord: macro
     dcb.b 2,0
     endm
     
-randomBattles: macro ; alias
+randomBattles: macro ;alias
     battles
     endm
     
@@ -956,7 +1037,7 @@ attGrowth: macro
     defineStatGrowth \1,\2,\3
     endm
     
-atkGrowth: macro ; alias
+atkGrowth: macro ;alias
     attGrowth \1,\2,\3
     endm
     

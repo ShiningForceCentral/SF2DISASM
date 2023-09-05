@@ -42,7 +42,7 @@ IF NOT EXIST "..\musicbank1.bin" (
 cd ../../../
 echo Assembling game ...
 SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%"
-@"../tools/asm68k" /e STANDARD_BUILD=1 /k /m /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%.bin", ../build/%buildname%.sym, ../build/%buildname%.lst > ../build/output.log
+@"../tools/asm68k" /e VANILLA_BUILD=0 /e STANDARD_BUILD=1 /k /m /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%.bin", ../build/%buildname%.sym, ../build/%buildname%.lst > ../build/output.log
 echo End of assembly, produced %buildname%.bin
 
 echo -------------------------------------------------------------

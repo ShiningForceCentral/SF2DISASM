@@ -9,7 +9,9 @@ InitializeGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
-            if (REGION_FREE_ROM=0)
+                
+            ; Disable region-lock mechanism if standard build
+            if (STANDARD_BUILD=0)
                 bsr.w   CheckRegion
             endif
                 jsr     j_NewGame
@@ -30,7 +32,12 @@ loc_7118:
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 bne.w   DebugModeBattleTest
                 btst    #INPUT_BIT_DOWN,((P1_INPUT-$1000000)).w
+            if (STANDARD_BUILD=1)
+                beq.w   GameIntro
+            else
                 beq.w   j_GameIntro
+            endif
+                
                 jsr     (EnableDisplayAndInterrupts).w
                 bsr.w   InitializeDisplay
                 bsr.w   EnableDisplayAndInterrupts
@@ -43,10 +50,12 @@ loc_7118:
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 moveq   #0,d0
                 moveq   #0,d1
-                moveq   #$38,d2 
+                moveq   #MAPS_MAX_DEBUG_INDEX,d2 
                 jsr     j_NumberPrompt
                 clr.w   d1
+            if (VANILLA_BUILD=1)
                 move.b  tbl_DebugModeAvailableMaps(pc,d0.w),d0
+            endif
                 bsr.w   GetSavePointForMap
                 moveq   #0,d4
                 movem.w d0-d4,-(sp)

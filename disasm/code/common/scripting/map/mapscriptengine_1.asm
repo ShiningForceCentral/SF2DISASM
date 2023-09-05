@@ -100,7 +100,11 @@ csc35_setBlocksVar:
 csc36_resetMap:
                 
                 move.l  a6,-(sp)
+            if (STANDARD_BUILD=1)
+                jsr     (ReloadCurrentMap).w
+            else
                 jsr     (ResetCurrentMap).l
+            endif
                 movea.l (sp)+,a6
                 rts
 

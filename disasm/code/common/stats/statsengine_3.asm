@@ -39,7 +39,7 @@ InitializeAllyCombatantEntry:
                 mulu.w  #COMBATANT_ENTRY_REAL_SIZE,d1
                 loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d1,a1
-                conditionalLongAddr movea.l, p_tbl_AllyNames, a0
+                getPointer p_tbl_AllyNames, a0
                 move.w  d0,d1
                 subq.w  #1,d1
                 blt.s   @GetNameCounter
@@ -72,7 +72,7 @@ InitializeAllyCombatantEntry:
                 
                 move.w  d0,d1
                 mulu.w  #ALLYSTARTDEF_ENTRY_SIZE,d1
-                conditionalLongAddr movea.l, p_tbl_AllyStartDefs, a0
+                getPointer p_tbl_AllyStartDefs, a0
                 adda.w  d1,a0
                 suba.w  #ALLYNAME_MAX_LENGTH,a1
                 move.b  (a0)+,d1
@@ -113,7 +113,7 @@ LoadAllyClassData:
                 mulu.w  #COMBATANT_ENTRY_REAL_SIZE,d0
                 loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d0,a1
-                conditionalLongAddr movea.l, p_tbl_ClassDefs, a0
+                getPointer p_tbl_ClassDefs, a0
                 andi.w  #CLASS_MASK_INDEX,d1
                 mulu.w  #CLASSDEF_ENTRY_SIZE,d1
                 adda.w  d1,a0

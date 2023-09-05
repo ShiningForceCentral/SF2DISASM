@@ -4,6 +4,6 @@
 ; FREE SPACE : 1467 bytes.
 
 
-                includeIfVanillaLayout "code\common\tech\pointers\s15_portraitspointer.asm"    ; Game Section 15 Portraits Pointer
-                include "data\graphics\portraits\entries.asm"    ; Portraits
-                alignIfVanillaLayout $1D8000
+                includeIfVanilla "code\common\tech\pointers\s15_portraitspointer.asm"    ; Game Section 15 Portraits Pointer
+                includeIfVanilla "data\graphics\portraits\entries.asm"    ; Portraits
+                alignIfVanilla $1D8000

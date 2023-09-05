@@ -6,8 +6,9 @@
 
 
 j_GameIntro:
-                
+            if (VANILLA_BUILD=1)
                 bra.w   GameIntro
+            endif
 
     ; End of function j_GameIntro
 
@@ -16,9 +17,10 @@ j_GameIntro:
 
 
 j_j_DisplaySegaLogo:
-                
+            if (VANILLA_BUILD=1)
                 jsr     j_DisplaySegaLogo
                 bne.w   loc_71EC
+            endif
 
     ; End of function j_j_DisplaySegaLogo
 
@@ -86,7 +88,7 @@ loc_729C:
                 
                 move.b  #0,((byte_FFB082-$1000000)).w
                 jsr     j_ClearEntities
-                conditionalLongAddr movea.l, p_SpeechBalloonTiles, a0
+                getPointer p_SpeechBalloonTiles, a0
                 lea     ($8000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1

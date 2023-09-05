@@ -1,10 +1,6 @@
 
 ; 0 = OFF, 1 = ON
 
-; ROM optimizations
-FORCE_OPTIMIZED_ROM_LAYOUT:         equ 1       ; Align ROM sections to next word boundary to consolidate free space.
-FORCE_REGION_FREE_ROM:              equ 1       ; Skip checking system region, omit including related function, and update ROM header.
-
 ; Assembler optimizations
 OPTIMIZED_PC_RELATIVE_ADDRESSING:   equ 1       ; Optimize to PC relative addressing.
 OPTIMIZED_SHORT_BRANCHES:           equ 1       ; Optimize short branches.
@@ -13,23 +9,6 @@ OPTIMIZED_ZERO_DISPLACEMENTS:       equ 1       ; Optimize zero displacements.
 OPTIMIZED_ADDS_TO_QUICK_FORM:       equ 1       ; Optimize adds to quick form.
 OPTIMIZED_SUBS_TO_QUICK_FORM:       equ 1       ; Optimize subtract to quick form.
 OPTIMIZED_MOVE_TO_QUICK_FORM:       equ 1       ; Optimize move to quick form.
-
-
-
-    ; If standard build and FORCE_OPTIMIZED_ROM_LAYOUT is enabled.
-optimizedRomLayout = 0
-    if (STANDARD_BUILD&FORCE_OPTIMIZED_ROM_LAYOUT=1)
-optimizedRomLayout = 1
-    endif
-OPTIMIZED_ROM_LAYOUT = optimizedRomLayout
-
-    ; If standard build, and either OPTIMIZED_ROM_LAYOUT or FORCE_REGION_FREE_ROM are enabled,
-    ; build a region free ROM to make space for relocated pointers in a non-expanded ROM.
-regionFreeRom = 0
-    if (STANDARD_BUILD&(OPTIMIZED_ROM_LAYOUT!FORCE_REGION_FREE_ROM)=1)
-regionFreeRom = 1
-    endif
-REGION_FREE_ROM = regionFreeRom
 
 
 

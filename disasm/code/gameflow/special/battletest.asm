@@ -127,7 +127,12 @@ loc_7820:
                 clr.w   d1
                 move.b  d0,d1
                 mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
-                conditionalPc lea,BattleMapCoordinates,a0,nop
+            if (STANDARD_BUILD=1)
+                getPointer p_table_BattleMapCoordinates, a0
+            else
+                lea     table_BattleMapCoordinates(pc), a0
+                nop
+            endif
                 adda.w  d0,a0
                 move.b  (a0)+,d0
                 move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w

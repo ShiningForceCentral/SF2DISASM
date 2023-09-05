@@ -432,7 +432,7 @@ csub_5F14C:
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
-                jsr     (sub_19C8).w    
+                jsr     (UpdateBasePalettesAndBackupCurrent).w    
                 rts
 
     ; End of function csub_5F14C

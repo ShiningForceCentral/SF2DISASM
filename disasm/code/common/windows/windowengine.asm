@@ -146,7 +146,7 @@ loc_48B0:
 
 
 sub_48BE:
-                
+            if (VANILLA_BUILD=1)
                 move.l  a0,-(sp)
                 move.w  d0,-(sp)
                 bsr.w   GetWindowEntryAddress
@@ -154,6 +154,7 @@ sub_48BE:
                 move.w  (sp)+,d0
                 movea.l (sp)+,a0
                 rts
+            endif
 
     ; End of function sub_48BE
 

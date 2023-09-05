@@ -30,7 +30,11 @@ GetSavePointForMap:
                 moveq   #1,d1
                 moveq   #1,d2
                 moveq   #UP,d3
-                conditionalPc lea,SavepointMapCoordinates,a0
+            if (STANDARD_BUILD=1)
+                getPointer p_table_SavepointMapCoordinates, a0
+            else
+                lea     table_SavepointMapCoordinates(pc), a0
+            endif
 @FindEgressEntry_Loop:
                 
                 cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
@@ -50,15 +54,27 @@ byte_7620:
                 ; No match
                 chkFlg  64              ; Raft is unlocked
                 beq.s   @Done
-                conditionalPc lea,RaftResetMapCoordinates-4,a0 ; Some egress locations imply to put the raft back in an initial place
+            if (STANDARD_BUILD=1)
+                getPointer p_table_RaftResetMapCoordinates, a0
+@FindRaftEntry_Loop:
+                
+                cmpi.b  #MAP_NONE,(a0)
+                beq.s   @RaftEntry
+                cmp.b   (a0),d0
+                beq.s   @RaftEntry
+                addq.l  #4,a0
+                bra.s   @FindRaftEntry_Loop
+            else
+                lea     table_RaftResetMapCoordinates-4(pc), a0 ; Some egress locations imply to put the raft back in an initial place
 @FindRaftEntry_Loop:
                 
                 addq.l  #4,a0
                 cmpi.b  #MAP_NONE,(a0)
-                beq.w   @RaftEntryNotFound
+                beq.w   @RaftEntry
                 cmp.b   (a0),d0         ; If found egress map matches entry map, then move raft back to given location
                 bne.s   @FindRaftEntry_Loop
-@RaftEntryNotFound:
+            endif
+@RaftEntry:
                 
                 setSavedByte 1(a0), RAFT_MAP
                 setSavedByte 2(a0), RAFT_X

@@ -91,7 +91,11 @@ loc_100104:
                 lea     (PALETTE_1_BASE).l,a1
                 move.w  #$80,d7 
                 jsr     (CopyBytes).w   
+            if (STANDARD_BUILD=1)
+                bsr.w   LoadTitleScreenFont
+            else
                 jsr     j_LoadTitleScreenFont
+            endif
                 move.l  #$AE0405,(SPRITE_04).l
                 move.l  #$C062014E,(SPRITE_04_TILE_FLAGS).l
                 jsr     (EnableDisplayAndInterrupts).w

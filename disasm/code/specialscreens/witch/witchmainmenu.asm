@@ -25,7 +25,7 @@ WitchMainMenu:
                 jsr     (CreateWindow).l
                 move.w  d0,var_6(a6)
                 move.l  a1,var_4(a6)
-                conditionalLongAddr movea.l, p_plt_WitchChoice, a0
+                getPointer p_plt_WitchChoice, a0
                 lea     (PALETTE_2_CURRENT).l,a1
                 move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
@@ -192,7 +192,7 @@ var_4 = -4
 
 DrawWitchMenuBubble:
                 
-                conditionalLongAddr movea.l, p_WitchBubbleAnimation, a0
+                getPointer p_WitchBubbleAnimation, a0
                 movea.l var_4(a6),a1
                 cmp.b   d0,d3
                 bne.s   loc_1683A

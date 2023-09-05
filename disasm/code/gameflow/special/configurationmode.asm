@@ -7,16 +7,21 @@
 
 CheatModeConfiguration:
                 
+                module
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
-                beq.w   return_7EC4
+                beq.w   @Return
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
                 beq.s   loc_7E58
                 btst    #7,(SAVE_FLAGS).l
+            if (STANDARD_BUILD=1)
+                bne.s   @Return
+            else
                 bne.w   SoundTest       
+            endif
 loc_7E58:
                 
                 tst.b   ((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
-                beq.w   return_7EC4
+                beq.w   @Return
                 txt     448             ; "Configuration....{D3}"
                 txt     450             ; "{CLEAR}Special Turbo"
                 jsr     j_YesNoChoiceBox
@@ -51,9 +56,10 @@ loc_7EB8:
 byte_7EC0:
                 
                 txt     461             ; "Configuration is done.{N}Go ahead!{W1}"
-return_7EC4:
+@Return:
                 
                 rts
 
     ; End of function CheatModeConfiguration
 
+                modend

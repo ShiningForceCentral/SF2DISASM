@@ -1057,6 +1057,7 @@ ENTITY_UNIT_CURSOR_ADDRESS: equ $AF02
 SOUND_COMMAND_INIT_DRIVER: equ $20
 SOUND_COMMAND_WAIT_MUSIC_END: equ $F0
 SOUND_COMMAND_PLAY_PREVIOUS_MUSIC: equ $FB
+SOUND_COMMAND_UPDATE_MUSIC_LEVEL: equ $FC
 SOUND_COMMAND_FADE_OUT: equ $FD
 SOUND_COMMAND_GET_D0_PARAMETER: equ $FFFF
 
@@ -1456,6 +1457,17 @@ KIWI_FLAME_BREATH_UPGRADE_LEVEL3: equ $32
 
 ; ---------------------------------------------------------------------------
 
+; enum MapProperties
+mapsNumber: = 79
+mapsMaxIndex: = mapsNumber-1
+mapsMaxDebugIndex: = 56
+    if (STANDARD_BUILD=1)
+mapsMaxDebugIndex: = mapsMaxIndex
+    endif
+MAPS_MAX_DEBUG_INDEX: equ mapsMaxDebugIndex
+
+; ---------------------------------------------------------------------------
+
 ; enum Maps
 MAP_OUTSIDE_MITULA: equ $0
 MAP_INSIDE_MITULA: equ $1
@@ -1684,6 +1696,11 @@ CODE_TERMINATOR_WORD: equ $FFFF
 
 ; enum Special_Offsets
 NRO: equ $FF000000
+
+; ---------------------------------------------------------------------------
+
+; enum MapLayoutProperties
+MAP_LAYOUT_LONGS_COUNTER: equ 2047
 
 ; ---------------------------------------------------------------------------
 
@@ -3538,3 +3555,12 @@ LONGWORD_DEALS_COUNTER: equ longwordDealsCounter
 LONGWORD_CARAVAN_COUNTER: equ longwordCaravanCounter
 LONGWORD_GAMEFLAGS_COUNTER: equ longwordGameFlagsCounter
 LONGWORD_CARAVAN_INITVALUE: equ longwordCaravanInitValue
+
+; ---------------------------------------------------------------------------
+
+; enum SoundDriverProperties
+
+soundDriverByteSize = 8064
+
+SOUND_DRIVER_LONG_SIZE: equ soundDriverByteSize/4
+SOUND_DRIVER_BYTE_SIZE: equ soundDriverByteSize

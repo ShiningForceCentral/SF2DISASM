@@ -54,99 +54,13 @@ loc_151C:
 
 ; =============== S U B R O U T I N E =======================================
 
-
+                module
+@Wait:          bsr.w   WaitForVInt
 WaitForPlayerInput:
                 
                 andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((CURRENT_PLAYER_INPUT-$1000000)).w
-                bne.s   @Return
-                bsr.w   WaitForVInt
-                bra.s   WaitForPlayerInput
-@Return:
-                
+                beq.s   @Wait
                 rts
+                modend
 
     ; End of function WaitForPlayerInput
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-WaitForPlayer1NewInput:
-                
-                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((P1_INPUT-$1000000)).w
-                beq.s   @Wait
-                bsr.w   WaitForVInt
-                bra.s   WaitForPlayer1NewInput
-@Wait:
-                
-                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((P1_INPUT-$1000000)).w
-                bne.s   @Return
-                bsr.w   WaitForVInt
-                bra.s   @Wait
-@Return:
-                
-                rts
-
-    ; End of function WaitForPlayer1NewInput
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused
-
-
-sub_15A4:
-                
-                movem.l d7,-(sp)
-                move.b  ((P1_INPUT-$1000000)).w,d7
-                and.b   ((byte_FFDE9E-$1000000)).w,d7
-                beq.s   loc_15CA
-                addq.b  #1,((byte_FFDE9F-$1000000)).w
-                move.b  ((byte_FFDE9F-$1000000)).w,d7
-                cmpi.b  #$A,d7
-                bcc.s   loc_15CA
-                clr.b   ((P1_INPUT-$1000000)).w
-                movem.l (sp)+,d7
-                rts
-loc_15CA:
-                
-                clr.b   ((byte_FFDE9E-$1000000)).w
-                clr.b   ((byte_FFDE9F-$1000000)).w
-                movem.l (sp)+,d7
-                rts
-
-    ; End of function sub_15A4
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-WaitForInputFor1Second:
-                
-                movem.l d5,-(sp)
-                moveq   #59,d5          ; number of frames to wait, minus one
-WaitForInput_Loop:
-                
-                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((P1_INPUT-$1000000)).w
-                bne.s   @Done
-                bsr.w   WaitForVInt
-                dbf     d5,WaitForInput_Loop
-@Done:
-                
-                movem.l (sp)+,d5
-                rts
-
-    ; End of function WaitForInputFor1Second
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-WaitForInputFor3Seconds:
-                
-                movem.l d5,-(sp)
-                move.l  #179,d5
-                bra.s   WaitForInput_Loop
-
-    ; End of function WaitForInputFor3Seconds
-

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\stats\statsengine_1.asm :
-; 0x82D0..0x853A : Character stats engine
+; 0x82D0..0x851A : Character stats engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -31,7 +31,7 @@ GetCombatantName:
                 
                 clr.w   d1
                 bsr.w   GetEnemy        
-                conditionalLongAddr movea.l, p_tbl_EnemyNames, a0
+                getPointer p_tbl_EnemyNames, a0
                 bsr.w   FindName        
 @Done:
                 
@@ -418,36 +418,3 @@ GetDefeats:
                 rts
 
     ; End of function GetDefeats
-
-
-; =============== S U B R O U T I N E =======================================
-
-; Get combatant d0.w type -> d1.w
-; 
-; If combatant is an ally, type is equal to combatant index plus allies number
-;  times class type (0, 1, or 2 for base, promoted, and special, respectively),
-;  and the most significant bit is set. However, this feature is unused.
-; 
-; Otherwise, if an enemy, return the enemy index.
-
-
-GetCombatantType:
-                
-                btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @Enemy
-                moveq   #0,d1
-                bsr.w   GetClass        
-                move.b  tbl_ClassTypes(pc,d1.w),d1 ; 0,1,2 = base class, promoted class, special promoted class
-                mulu.w  #COMBATANT_ALLIES_NUMBER,d1
-                add.w   d0,d1
-                bset    #15,d1
-                bra.s   @Return
-@Enemy:
-                
-                bsr.s   GetEnemy        
-@Return:
-                
-                rts
-
-    ; End of function GetCombatantType
-

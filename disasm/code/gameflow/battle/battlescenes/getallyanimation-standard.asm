@@ -61,7 +61,7 @@ GetAllyAnimation:
                 add.w   ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d1
                 
 @GetAnimationPointer:
-                conditionalLongAddr movea.l, p_pt_AllyAnimations, a0
+                getPointer p_pt_AllyAnimations, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
                 
