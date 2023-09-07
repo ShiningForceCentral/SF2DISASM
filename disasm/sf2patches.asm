@@ -1,6 +1,11 @@
 
 ; 0 = OFF, 1 = ON
 
+; Music resuming
+MUSIC_RESUMING:                     equ 1       ; Replace the original sound driver with Wiz's custom driver.
+RESUME_BATTLEFIELD_MUSIC_ONLY:      equ 0       ; Do not resume battlescene music.
+RESUME_MUSIC_AFTER_JOIN_JINGLE:     equ 0       ; Resume background music after playing a "Joined the Force" jingle.
+
 ; Assembler optimizations
 OPTIMIZED_PC_RELATIVE_ADDRESSING:   equ 1       ; Optimize to PC relative addressing.
 OPTIMIZED_SHORT_BRANCHES:           equ 1       ; Optimize short branches.

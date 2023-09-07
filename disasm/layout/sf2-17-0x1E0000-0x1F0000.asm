@@ -7,7 +7,12 @@
                 incbin "data/sound/pcmbank0.bin"
                 incbin "data/sound/pcmbank1.bin"
                 incbin "data/sound/yminst.bin"
-SoundDriver:    incbin "data/sound/sounddriver.bin"
+SoundDriver:
+            if (STANDARD_BUILD&MUSIC_RESUMING=1)
+                incbin "data/sound/cubewiz.bin"
+            else
+                incbin "data/sound/sounddriver.bin"
+            endif
                 includeIfVanilla "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
                 includeIfVanilla "data\stats\allies\growthcurves.asm"    ; Stat growth curves
                 includeIfVanilla "data\stats\allies\stats\entries.asm"    ; Ally stats

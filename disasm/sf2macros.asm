@@ -449,9 +449,15 @@ sndCom: macro
     endm
     
 deactivateMusicResuming: macro
+    if (STANDARD_BUILD&MUSIC_RESUMING=1)
+    sndCom SOUND_COMMAND_DEACTIVATE_RESUMING
+    endc
     endm
 
 activateMusicResuming: macro
+    if (STANDARD_BUILD&MUSIC_RESUMING=1)
+    sndCom SOUND_COMMAND_ACTIVATE_RESUMING
+    endc
     endm
     
 chkFlg: macro
