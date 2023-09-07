@@ -1918,7 +1918,7 @@ highlightSpritesCounter = highlightSpritesCounter+1
 memberlistDownArrow     = memberlistDownArrow+1
     endif
 
-    if (secondMemberListStatsPage=1)
+    if (SECOND_MEMBERS_LIST_PAGE=1)
 hpMpPage                = 1
 statsPage               = 2
 newAttAndDefPage        = 3
@@ -1926,7 +1926,7 @@ newAttAndDefEntryOffset = newAttAndDefEntryOffset-4
 levelEntryOffset        = levelEntryOffset-2
     endif
 
-    if (secondMemberListStatsPage|(STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES)=1)
+    if (SECOND_MEMBERS_LIST_PAGE|(STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES)=1)
 entryStartOffset        = entryStartOffset+2
     endif
 

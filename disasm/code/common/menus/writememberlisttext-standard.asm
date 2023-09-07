@@ -15,10 +15,10 @@ selectedMember = -2
                 
 headerStringOffset = 8
 headerLength = 17
-    if (secondMemberListStatsPage=1)
+    if (SECOND_MEMBERS_LIST_PAGE=1)
 headerLength = headerLength-1
     endif
-    if (secondMemberListStatsPage|(STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES)=1)
+    if (SECOND_MEMBERS_LIST_PAGE|(STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES)=1)
 headerStringOffset = headerStringOffset+2
     endif
                 
@@ -38,7 +38,7 @@ headerStringOffset = headerStringOffset+2
                 
                 ; Determine header string
                 move.b  ((CURRENT_MEMBERLIST_PAGE-$1000000)).w,d0
-            if (secondMemberListStatsPage=1)
+            if (SECOND_MEMBERS_LIST_PAGE=1)
                 bne.s   @CheckStatsPage
                 lea     aClassLvExp(pc), a0
                 bra.s   @WriteHeaderString
@@ -133,7 +133,7 @@ headerStringOffset = headerStringOffset+2
                 bsr.w   WriteLvOrExpValue
                 
 @WriteEntry_Stats:
-            if (secondMemberListStatsPage=1)
+            if (SECOND_MEMBERS_LIST_PAGE=1)
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMP,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.s   @WriteEntry_Stats2
                 move.w  currentMember(a6),d0              ; Write current HP
@@ -156,7 +156,7 @@ headerStringOffset = headerStringOffset+2
 @WriteEntry_Stats2:
                 cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
                 bne.w   @WriteEntry_Unequippable
-            if (secondMemberListStatsPage=0)
+            if (SECOND_MEMBERS_LIST_PAGE=0)
                 move.w  currentMember(a6),d0    ; Write current HP
                 jsr     GetCurrentHP
                 bsr.w   WriteStatValue
@@ -241,7 +241,7 @@ headerStringOffset = headerStringOffset+2
     ; End of function WriteMemberListText
 
 aName:          dc.b 'NAME'
-            if (secondMemberListStatsPage=1)
+            if (SECOND_MEMBERS_LIST_PAGE=1)
 aClassLvExp:    dc.b 'CLASS     LV EXP'
 aHpMaxMpMax:    dc.b ' HP/MAX   MP/MAX'
 aAttDefAgiMov:  dc.b ' ATT DEF AGI MOV'
