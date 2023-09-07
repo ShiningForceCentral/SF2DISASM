@@ -75,9 +75,8 @@ GetAdjustedHealingPower:
                 
                 clr.w   d5
                 move.b  SPELLDEF_OFFSET_POWER(a0),d5
-                bsr.w   GetClass
-                cmpi.b  #CHAR_CLASS_FIRSTPROMOTED,d1
-                blo.s   @Return
+                bsr.w   GetClassType
+                beq.s   @Return     ; go to next step if caster is not promoted
                 mulu.w  #5,d5
                 lsr.w   #2,d5       ; +25% spell power
 @Return:        rts

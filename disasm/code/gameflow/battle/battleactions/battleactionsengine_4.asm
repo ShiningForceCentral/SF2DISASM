@@ -169,10 +169,19 @@ GetKillExp:
                 move.b  (a4),d0
                 jsr     GetClass        
                 move.w  d1,d3
+            if (STANDARD_BUILD=1)
+                bsr.w   GetCurrentLevel
+                move.w  d1,d5
+                bsr.w   GetClassType
+                beq.s   @NotPromoted
+                addi.w  #CHAR_CLASS_EXTRALEVEL,d5
+@NotPromoted:   move.w  d5,d1
+            else
                 jsr     GetCurrentLevel 
                 cmpi.b  #CHAR_CLASS_FIRSTPROMOTED,d3
                 bcs.s   @Continue
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d1
+            endif
 @Continue:
                 
                 sub.w   d2,d1

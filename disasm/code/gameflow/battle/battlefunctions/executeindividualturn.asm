@@ -17,11 +17,8 @@ ExecuteIndividualTurn:
                 andi.w  #COMBATANT_MASK_ALL,d0
                 move.w  d0,combatant(a6)
 @Start:
-            if (STANDARD_BUILD=1)
-                clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
-            else
+                
                 bsr.w   ClearDeadCombatantsListLength
-            endif
                 
                 ; Check if we're currently battling Taros, and Bowie is the actor
                 checkSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE  ; HARDCODED battle index
