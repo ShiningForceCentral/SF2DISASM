@@ -29,7 +29,6 @@ TEST_BUILD_INITIAL_DISPLAY_BATTLE_MESSAGES: equ 0       ; 1 = no battle messages
 FIX_SEARCH_IN_BATTLE:               equ 1       ; Restore the ability to search chests during battle.
 FIX_INCREASE_DOUBLE_RESETS_COUNTER: equ 1       ; Equipment that increases the chance to double attack also erroneously set the chance to counter attack to 1/32.
 FIX_GARBLED_HP_BAR:                 equ 1       ; Prevent drawing garbage pixels when HP is greater then 600. (Keep drawing black bars instead.)
-FIX_KIWI_SPELLS_LEARNING_LEVEL:     equ 1       ; Kiwi's base class is wrongfully treated as promoted for the purpose of learning spells.
 FIX_HIGINS_SPELL:                   equ 1       ; Prevent unequipping from possibly corrupting characters spell entries.
 FIX_MOVEMENT_GLITCH:                equ 1       ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
 FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE:equ 1       ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.

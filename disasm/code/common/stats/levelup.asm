@@ -15,13 +15,21 @@ LevelUp:
                 move.w  d0,ally(a6)
                 bsr.w   GetClass        
                 move.w  d1,d3
-                bsr.w   GetCurrentLevel 
                 
                 ; Determine level cap for class
+            if (STANDARD_BUILD=1)
+                moveq   #CHAR_LEVELCAP_PROMOTED,d2
+                bsr.w   GetClassType
+                bne.s   @Promoted
+                moveq   #CHAR_LEVELCAP_BASE,d2
+@Promoted:      bsr.w   GetCurrentLevel 
+            else
+                bsr.w   GetCurrentLevel 
                 moveq   #CHAR_LEVELCAP_PROMOTED,d2
                 cmpi.w  #CHAR_CLASS_FIRSTPROMOTED,d3
                 bge.s   @FindStatsBlockForClass
                 moveq   #CHAR_LEVELCAP_BASE,d2
+            endif
 @FindStatsBlockForClass:
                 
                 lsl.w   #2,d0
@@ -105,14 +113,15 @@ LevelUp:
                 move.b  d5,(a1)
                 
                 ; Add extra levels if promoted
+            if (STANDARD_BUILD=1)
+                bsr.w   GetClassType
+                beq.s   @FindLearnableSpell
+            else
                 bsr.w   GetClass        
                 cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED -- TORT class is being wrongfully treated as promoted here
                                         ;  Should either compare to first promoted class, or change branch condition to "lower than or equal".
-                if (STANDARD_BUILD&FIX_KIWI_SPELLS_LEARNING_LEVEL=1)
-                    ble.s   @FindLearnableSpell
-                else
-                    blt.s   @FindLearnableSpell
-                endif
+                blt.s   @FindLearnableSpell
+            endif
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5
 @FindLearnableSpell:
                 
@@ -200,14 +209,15 @@ InitializeAllyStats:
                 ; Determine effective level
                 move.w  (sp)+,d4        ; D4 <- pull starting level
                 move.w  d4,d5           ; D5 = effective level (takes additional levels into account if promoted for the purpose of spell learning)
+            if (STANDARD_BUILD=1)
+                bsr.w   GetClassType
+                beq.s   @FindLearnableSpell
+            else
                 bsr.w   GetClass        
                 cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED -- TORT class is being wrongfully treated as promoted here
                                         ;  Should either compare to first promoted class, or change branch condition to "lower than or equal".
-                if (STANDARD_BUILD&FIX_KIWI_SPELLS_LEARNING_LEVEL=1)
-                    ble.s   @FindStatsBlockForClass
-                else
-                    blt.s   @FindStatsBlockForClass
-                endif
+                blt.s   @FindStatsBlockForClass
+            endif
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5 ; add 20 to effective level if promoted
 @FindStatsBlockForClass:
                 
