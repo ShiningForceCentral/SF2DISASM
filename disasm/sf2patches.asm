@@ -43,7 +43,6 @@ FIX_ENEMY_BATTLE_EQUIP:             equ 1       ; Enemies will equip battle item
 FIX_MISSING_RANDOM_BATTLES:         equ 1       ; Add zone events for random battles without.
 
 ; Quality of life features
-ACCURATE_LAND_EFFECT_DISPLAY:       equ 0       ; Read values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
 CAPITALIZED_CHARACTER_NAMES:        equ 0       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
 NO_AI_JARO:                         equ 0       ; 
 NO_AI_PETER:                        equ 0       ; 
@@ -78,13 +77,14 @@ HEALER_AI_ENHANCEMENTS:             equ 1       ; See SF2_AI_Healing_Rewrite.txt
 SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options enemies can use.
 
 ; Menu enhancements
-THREE_DIGITS_STATS:                 equ 0       ; 
-FULL_CLASS_NAMES:                   equ 0       ; 
-EIGHT_CHARACTERS_MEMBER_NAMES:      equ 0       ; 
-EXTENDED_SPELL_NAMES:               equ 0       ; 
-ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 0       ; 1 = small icons, 2 = no display
-SHOW_ENEMY_LEVEL:                   equ 0       ; 
+THREE_DIGITS_STATS:                 equ 1       ; 
+FULL_CLASS_NAMES:                   equ 1       ; 
+EIGHT_CHARACTERS_MEMBER_NAMES:      equ 1       ; 
+EXTENDED_SPELL_NAMES:               equ 1       ; 
+ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 1       ; 1 = small icons, 2 = no display
+SHOW_ENEMY_LEVEL:                   equ 1       ; 
 SHOW_ALL_SPELLS_IN_MEMBER_SCREEN:   equ 0       ; 
+ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Read values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
 
 ; Sound
 SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
@@ -116,14 +116,15 @@ OPTIMIZED_ADDS_TO_QUICK_FORM:       equ 1       ; Optimize adds to quick form.
 OPTIMIZED_SUBS_TO_QUICK_FORM:       equ 1       ; Optimize subtract to quick form.
 OPTIMIZED_MOVE_TO_QUICK_FORM:       equ 1       ; Optimize move to quick form.
 
-    
-    ; If standard build, and either THREE_DIGITS_STATS or FULL_CLASS_NAMES
-    ; are enabled, implement a second member list stats page.
+
+
+; If standard build, and either THREE_DIGITS_STATS or FULL_CLASS_NAMES
+; are enabled, implement a second member list stats page.
+secondMembersListPage = 0
     if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
-secondMemberListStatsPage = 1
-    else
-secondMemberListStatsPage = 0
+secondMembersListPage = 1
     endif
+SECOND_MEMBERS_LIST_PAGE: equ secondMembersListPage
     
     ; If standard build, and either EXPANDED_ROM, EXTENDED_SSF_MAPPER, or EXPANDED_ITEMS_AND_SPELLS
     ; are enabled, build an expanded ROM.
