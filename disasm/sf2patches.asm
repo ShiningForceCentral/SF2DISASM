@@ -2,15 +2,33 @@
 ; 0 = OFF, 1 = ON
 
 ; Debugging facilitations
-EASY_DEBUG_MODE:                    equ 0       ; Activate Debug Mode automatically when booting up the game.
-EASY_BATTLE_TEST:                   equ 0       ; If Debug Mode is activated, go to Battle Test instead of playing the intro cutscene.
-EASY_CONFIGURATION_MODE:            equ 0       ; Activate Configuration Mode automatically, and skip checking if the Start button is pressed.
+TEST_BUILD:                 equ 1       ; Game starts with all characters having joined and at level 24, ready to be promoted.
+EASY_DEBUG_MODE:            equ 0       ; Toggle Debug Mode ON automatically when booting up the game.
+EASY_BATTLE_TEST:           equ 0       ; If Debug Mode is on, go to Battle Test instead of playing the intro cutscene.
+EASY_CONFIGURATION_MODE:    equ 0       ; Toggle Configuration Mode ON automatically, and skip checking if the Start button is pressed.
+EASY_SOUND_TEST:            equ 0       ; Hold Up while entering Configuration Mode; there is no need to have set Game Completed save flag.
+EASY_RENAME_CHARACTERS:     equ 0       ; Rename all characters when starting a new game.
+
+; Debug build configuration
+TEST_BUILD_SKIP_SEGA_LOGO:                  equ 1
+TEST_BUILD_SKIP_GAME_INTRO:                 equ 1
+TEST_BUILD_SKIP_TITLE_SCREEN:               equ 1
+TEST_BUILD_SKIP_WITCH_DIALOGUE:             equ 1
+TEST_BUILD_SKIP_NEW_GRANSEAL_CUTSCENE:      equ 1
+TEST_BUILD_ALLIES_START_LEVEL:              equ 24
+TEST_BUILD_INITIAL_DEBUG_MODE:              equ -1      ; -1 = toggle ON
+TEST_BUILD_INITIAL_CONFIGURATION_MODE:      equ 0       ; -1 = toggle ON
+TEST_BUILD_INITIAL_SPECIAL_TURBO:           equ -1      ; -1 = toggle ON
+TEST_BUILD_INITIAL_CONTROL_OPPONENT:        equ 0       ; -1 = toggle ON
+TEST_BUILD_INITIAL_AUTO_BATTLE:             equ 0       ; -1 = toggle ON
+TEST_BUILD_INITIAL_GAME_COMPLETED:          equ 1
+TEST_BUILD_INITIAL_MESSAGE_SPEED:           equ 3       ; [0, 3]
+TEST_BUILD_INITIAL_DISPLAY_BATTLE_MESSAGES: equ 0       ; 1 = no battle messages display ON
 
 ; Fixes
 FIX_SEARCH_IN_BATTLE:               equ 1       ; Restore the ability to search chests during battle.
 FIX_INCREASE_DOUBLE_RESETS_COUNTER: equ 1       ; Equipment that increases the chance to double attack also erroneously set the chance to counter attack to 1/32.
 FIX_GARBLED_HP_BAR:                 equ 1       ; Prevent drawing garbage pixels when HP is greater then 600. (Keep drawing black bars instead.)
-FIX_KIWI_SPELLS_LEARNING_LEVEL:     equ 1       ; Kiwi's base class is wrongfully treated as promoted for the purpose of learning spells.
 FIX_HIGINS_SPELL:                   equ 1       ; Prevent unequipping from possibly corrupting characters spell entries.
 FIX_MOVEMENT_GLITCH:                equ 1       ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
 FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE:equ 1       ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
@@ -47,7 +65,6 @@ PERCENT_POISON_DAMAGE:              equ 0       ; 1-100 = n% of max HP
 PLAYER_DEFEAT_IS_GAME_OVER:         equ 0       ; On player defeat, rather than halve the gold and return to town, reset the game.
 SEND_DESTROYED_ITEMS_TO_DEALS:      equ 0       ; Add item that was destroyed upon usage to shop deals if rare and if not a consumable.
 SEND_DROPPED_ITEMS_TO_CARAVAN:      equ 0       ; If character inventory is full, add dropped item to the Caravan instead of shop deals, regardless of rarity. If the Caravan itself is full, then drops follow the usual routine: go to deals if rare, or become lost completely if not rare.
-SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
 TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock damage with difficulty.   Normal:100%  Hard:125%  Super: 150%  Ouch: 175%
 DIFFICULTY_FACTORS:                 equ 0       ; Allow 4 distinct difficulties.
 LEARN_SPELL_AT_PROMOTION:           equ 0       ; Allow learning 1 spell immediately upon promotion.
@@ -69,7 +86,8 @@ ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 0       ; 1 = small icons, 2 = no displa
 SHOW_ENEMY_LEVEL:                   equ 0       ; 
 SHOW_ALL_SPELLS_IN_MEMBER_SCREEN:   equ 0       ; 
 
-; Music resuming
+; Sound
+SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
 MUSIC_RESUMING:                     equ 0       ; Replace the original sound driver with Wiz's custom driver.
 RESUME_BATTLEFIELD_MUSIC_ONLY:      equ 0       ; Do not resume battlescene music.
 RESUME_MUSIC_AFTER_JOIN_JINGLE:     equ 0       ; Resume background music after playing a "Joined the Force" jingle.

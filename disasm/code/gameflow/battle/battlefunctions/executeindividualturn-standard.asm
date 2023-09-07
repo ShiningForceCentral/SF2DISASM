@@ -222,7 +222,7 @@ DetermineRandomAttackSpell:
                 ; Randomly determine if spell is cast
                 move.w  #256,d6
                 jsr     (GenerateRandomNumber).w
-                cmp.w   (a0)+,d7                     ; d6/256 chance to cast spell
+                cmp.b   (a0)+,d7                     ; d6/256 chance to cast spell
                 bhs.s   @Done
                 
                 ; Determine spell level
@@ -232,17 +232,17 @@ DetermineRandomAttackSpell:
                 clr.w   d0
                 
                 ; Check upgrade level 1
-                cmp.w   (a0)+,d1
+                cmp.b   (a0)+,d1
                 blt.s   @CheckUpgrade2
                 addq.w  #1,d0
-@CheckUpgrade2: cmp.w   (a0)+,d1
+@CheckUpgrade2: cmp.b   (a0)+,d1
                 blt.s   @CheckUpgrade3
                 addq.w  #1,d0
-@CheckUpgrade3: cmp.w   (a0)+,d1
+@CheckUpgrade3: cmp.b   (a0)+,d1
                 blt.s   @LoadSpell
                 addq.w  #1,d0
 @LoadSpell:     lsl.w   #6,d0
-                or.w    (a0),d0
+                or.b    (a0),d0
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
 @Done:          movem.l (sp)+,d1-d2/a0
                 rts
