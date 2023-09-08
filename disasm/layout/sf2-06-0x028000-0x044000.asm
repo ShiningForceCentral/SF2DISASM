@@ -27,6 +27,6 @@
                 align
             if (STANDARD_BUILD&MUSIC_RESUMING=1)
                 align $43000
-                incbin "data\sound\cubesfx.bin"
+                incbin "data/sound/cubesfx.bin"
             endif
                 alignIfVanilla $44000

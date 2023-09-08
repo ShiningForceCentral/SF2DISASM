@@ -93,3 +93,22 @@ return_1A7E:
 
     ; End of function sub_19F8
 
+
+; =============== S U B R O U T I N E =======================================
+
+
+nullsub_1A80:
+                rts
+
+    ; End of function nullsub_1A80
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+nullsub_1A82:
+                rts
+
+    ; End of function nullsub_1A82
+
+

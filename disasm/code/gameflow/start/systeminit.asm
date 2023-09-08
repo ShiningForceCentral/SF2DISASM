@@ -6,13 +6,13 @@
 
 
 SystemInit:
-            if (STANDARD_BUILD=1)
-                pea     InitializeGame(pc)
-                pea     InitVdpData(pc)
-                pea     InitZ80(pc)
-            else
+                
                 bsr.s   InitVdp         ; and clear 68K RAM
                 bsr.w   InitZ80         ; and load sound driver to Z80 RAM
+            if (STANDARD_BUILD=1)
+                bsr.w   InitVdpData
+                bra.w   InitializeGame
+            else
                 bsr.s   InitVdpData
                 jmp     (InitializeGame).l
             endif

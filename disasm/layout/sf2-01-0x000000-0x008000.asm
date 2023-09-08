@@ -52,7 +52,7 @@
                 includeIfStandard "code\common\tech\interrupts\updatescrolldata-standard.asm"
                 includeIfVanilla "code\common\tech\interrupts\updatescrolldata.asm"    ; Horizontal and Vertical Scroll data update functions
                 include "code\common\tech\interrupts\vintengine_3.asm"    ; Vertical Interrupt Engine - Main Technical Engine - Triggered at each frame display, part 3
-                includeIfVanilla "code\common\tech\interrupts\code\common\tech\interrupts\unused_vint_3.asm"    ; Unused Vertical Interrupt engine functions
+                includeIfVanilla "code\common\tech\interrupts\unused_vint_3.asm"    ; Unused Vertical Interrupt engine functions
                 includeIfVanilla "code\common\tech\interrupts\applyvramdmafill.asm"    ; VRAM DMA filler function
                 include "code\common\scripting\text\asciinumber.asm"    ; ASCII number function
                 includeIfStandard "code\common\tech\input-standard.asm"
@@ -70,7 +70,7 @@
                 include "code\common\maps\mapload.asm"    ; Map loading functions
                 includeIfVanilla "code\common\maps\unused_mapload.asm"    ; Unused map loading functions
                 include "code\common\tech\graphics\displayinit.asm"    ; Display initialization
-                includeIfVanilla "code\common\maps\unused_display.asm"    ; Unused display function
+                includeIfVanilla "code\common\tech\graphics\unused_display.asm"    ; Unused display function
                 include "code\common\tech\graphics\display.asm"    ; Display functions
                 include "code\gameflow\exploration\exploration.asm"    ; Exploration functions
                 includeIfVanilla "code\gameflow\battle\battlemusic.asm"    ; Battle music function

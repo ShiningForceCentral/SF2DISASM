@@ -21,5 +21,5 @@ SoundDriver:
                 includeIfVanilla "data\stats\allies\classes\classdefs.asm"    ; Class definitions
                 includeIfVanilla "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 includeIfVanilla "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
-                includeIfVanilla "code\common\tech\pointers\s17_incbins_basetiles.asm"    ; Game Section 17 Incbin Directives
+                includeIfVanilla "code\common\tech\incbins\s17_incbins_basetiles.asm"    ; Game Section 17 Incbin Directives
                 align $1F0000
