@@ -7,6 +7,12 @@
 ;     a4 = Pointer to attacker index in RAM
 ;     a5 = Pointer to target index in RAM
 
+; Attack action variables
+currentHpTableSize = 2*(COMBATANT_ALLIES_SPACE_END+COMBATANT_ENEMIES_NUMBER)
+
+finalDamage = -28-currentHpTableSize
+leechAmountCap = -26-currentHpTableSize
+
 ; Battlescene script variables
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -31,16 +37,11 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-; Attack action variables
-finalDamage = -4
-leechAmountCap = -2
-
 WriteBattlesceneScript_Attack:
                 
-                link    a6,#-4
                 move.b  (a5),d0
                 jsr	    GetCurrentHp
-                move.w  d1,leechAmountCap(a6)   ; lifesteal weapons leech amount is capped to target's current HP prior to suffering damage
+                move.w  d1,leechAmountCap(a2)   ; lifesteal weapons leech amount is capped to target's current HP prior to suffering damage
                 
                 bsr.w   WriteBattlesceneScript_DetermineDodge
                 tst.b   dodge(a2)
@@ -49,30 +50,28 @@ WriteBattlesceneScript_Attack:
                 bsr.w   WriteBattlesceneScript_CalculateDamage
                 bsr.w   WriteBattlesceneScript_DetermineCriticalHit
                 bsr.w   WriteBattlesceneScript_InflictDamage
-                move.w  d6,finalDamage(a6)
+                move.w  d6,finalDamage(a2)
                 tst.b   targetDies(a2)
                 beq.s   @AilmentAndCurse
                 
                 bsr.w   WriteBattlesceneScript_DeathMessage
-                bsr.s   AttackEffect_Lifesteal
-                bra.s   @Done
+                bra.s   AttackEffect_Lifesteal
 @AilmentAndCurse:      
                 
                 bsr.w   WriteBattlesceneScript_InflictAilment
                 bsr.s   AttackEffect_Lifesteal
-                move.w  finalDamage(a6),d6
+                move.w  finalDamage(a2),d6
                 bsr.w   WriteBattlesceneScript_InflictCurseDamage
                 tst.b   targetDies(a2)
-                beq.s   @DoubleAndCounter
+                bne.s   @Death
+@DoubleAndCounter:
+                
+                bra.w   WriteBattlesceneScript_DetermineDoubleAndCounter
+@Death:
                 
                 exg     a4,a5
                 bsr.w   WriteBattlesceneScript_DeathMessage
                 exg     a4,a5
-                bra.s   @Done
-@DoubleAndCounter:
-                
-                bsr.w   WriteBattlesceneScript_DetermineDoubleAndCounter
-@Done:          unlk    a6
                 rts
 
     ; End of function WriteBattlesceneScript_Attack
@@ -80,7 +79,7 @@ WriteBattlesceneScript_Attack:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a6 = Attack action stack frame
+; In: a2 = Battlescene script stack frame
 ;     d6.w = Inflicted damage
 
 AttackEffect_Lifesteal:    
@@ -90,7 +89,7 @@ AttackEffect_Lifesteal:
                 bne.s   @IsLifestealWeapon
                 
                 ; If target was killed, apply leech amount cap
-                move.w  leechAmountCap(a6),d6
+                move.w  leechAmountCap(a2),d6
 @IsLifestealWeapon:
                 
                 ; Is attacker using a lifesteal weapon?
