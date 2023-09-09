@@ -1060,7 +1060,7 @@ SOUND_COMMAND_PLAY_PREVIOUS_MUSIC: equ $FB
 SOUND_COMMAND_UPDATE_MUSIC_LEVEL: equ $FC
 SOUND_COMMAND_FADE_OUT: equ $FD
 SOUND_COMMAND_GET_D0_PARAMETER: equ $FFFF
-    if (STANDARD_BUILD&MUSIC_RESUMING=1)
+    if (STANDARD_BUILD=1)
 SOUND_COMMAND_DEACTIVATE_RESUMING: equ $F9
 SOUND_COMMAND_ACTIVATE_RESUMING: equ $FA
     endif
@@ -1646,7 +1646,12 @@ BATTLEACTION_ATTACKTYPE_COUNTER: equ $2
 ; ---------------------------------------------------------------------------
 
 ; enum Battlescene
-BATTLESCENE_STACK_NEGSIZE: equ $FF68
+
+battlesceneStackNegsize = -152
+    if (STANDARD_BUILD=1)
+battlesceneStackNegsize = -156
+    endif
+BATTLESCENE_STACK_NEGSIZE: equ battlesceneStackNegsize
 
 ; ---------------------------------------------------------------------------
 

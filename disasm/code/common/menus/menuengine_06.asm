@@ -257,7 +257,7 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentAtt
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -271,7 +271,7 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentDef
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -285,7 +285,7 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentAgi
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -299,7 +299,7 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentMov
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -604,7 +604,7 @@ loc_13CDE:
 
     ; End of function CopyWindowTilesToRam
 
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
 aNameClassLevExp:
                 dc.b 'NAME    CLASS     LEV EXP',0
 aNameHpMpAtDfAgMv:

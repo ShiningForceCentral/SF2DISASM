@@ -31,8 +31,7 @@ ApplyZ80BusUpdates:
                 move.w  2(a0),(a0)+
                 clr.w   (a0)
                 
-            if (MUSIC_RESUMING=1)
-                ; Resuming commands
+                ; CUBEWIZ music resuming commands
                 cmpi.b  #SOUND_COMMAND_DEACTIVATE_RESUMING,d0
                 beq.s   @SendResumingCommand
                 cmpi.b  #SOUND_COMMAND_ACTIVATE_RESUMING,d0
@@ -42,7 +41,6 @@ ApplyZ80BusUpdates:
                 move.b  d0,(Z80_SoundDriverCommand).l
                 bra.w   @ProcessInputs
 @TestPlayPreviousMusic:
-            endif
                 
                 cmpi.b  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0
                 bne.s   @IsFadeOut

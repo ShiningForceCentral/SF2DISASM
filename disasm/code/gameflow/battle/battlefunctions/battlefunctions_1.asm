@@ -11,7 +11,7 @@
 BattleLoop:
                 
                 clearSavedByte PLAYER_TYPE
-            if (RESUME_BATTLEFIELD_MUSIC_ONLY=0)
+            if (MUSIC_RESUMING&RESUME_BATTLESCENE_MUSIC=1)
                 activateMusicResuming
             endif
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens

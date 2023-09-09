@@ -8,7 +8,7 @@
 UpdateBackgroundHScrollData:
                 
                 module
-                move.w  d7,-(sp)
+                movem.l d7/a6,-(sp)
                 lea     ((HORIZONTAL_SCROLL_DATA+2)).l,a6
                 bra.s   @Continue
 UpdateForegroundHScrollData:
@@ -21,10 +21,10 @@ UpdateForegroundHScrollData:
                 addq.l  #2,a6
                 dbf     d7,@Loop
                 
-                move.w  (sp)+,d7
+                movem.l (sp)+,d7/a6
 UpdateVdpHScrollData:
                 
-                movem.l a6,-(sp)
+                move.l  a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.w  #$8F02,(a6)+    ; auto-increment : 2
                 btst    #1,(VDP_REG0B_VALUE).l ; Check HScroll mode
@@ -49,7 +49,7 @@ UpdateVdpHScrollData:
                                         ; A15-0 = 1110 1100 0000 0000 = 0xEC00 (HScroll Data location in VRAM)
                 move.l  a6,(DMA_QUEUE_POINTER).l
                 addq.b  #1,(DMA_QUEUE_SIZE).l
-                movem.l (sp)+,a6
+                movea.l (sp)+,a6
                 rts
                 modend
 
@@ -62,7 +62,7 @@ UpdateVdpHScrollData:
 UpdateBackgroundVScrollData:
                 
                 module
-                move.w  d7,-(sp)
+                movem.l d7/a6,-(sp)
                 lea     ((VERTICAL_SCROLL_DATA+2)).l,a6
                 bra.s   @Continue
 UpdateForegroundVScrollData:
@@ -75,10 +75,10 @@ UpdateForegroundVScrollData:
                 addq.l  #2,a6
                 dbf     d7,@Loop
                 
-                move.w  (sp)+,d7
+                movem.l (sp)+,d7/a6
 UpdateVdpVScrollData:
                 
-                movem.l a6,-(sp)
+                move.l  a6,-(sp)
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.w  #$8F02,(a6)+    ; auto-inc : 2
                 btst    #2,(VDP_REG0B_VALUE).l ; Check vertical scrolling mode
@@ -98,7 +98,7 @@ UpdateVdpVScrollData:
                 move.w  #$90,(a6)+ 
                 move.l  a6,(DMA_QUEUE_POINTER).l
                 addq.b  #1,(DMA_QUEUE_SIZE).l
-                movem.l (sp)+,a6
+                movea.l (sp)+,a6
                 rts
                 modend
 

@@ -21,7 +21,7 @@ PlayMapMusic:
                 move.b  (a0),d0
                 
 @Continue:      
-            if (RESUME_BATTLEFIELD_MUSIC_ONLY=1)
+            if (MUSIC_RESUMING&RESUME_BATTLEFIELD_MUSIC_ONLY=1)
                 activateMusicResuming
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
                 deactivateMusicResuming

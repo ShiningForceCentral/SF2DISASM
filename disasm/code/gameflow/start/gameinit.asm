@@ -8,10 +8,13 @@
 InitializeGame:
                 
                 move    #$2300,sr
+            if (MUSIC_RESUMING=0)
+                deactivateMusicResuming
+            endif
                 bsr.w   LoadBaseTiles
                 
             ; Disable region-lock mechanism if standard build
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 bsr.w   CheckRegion
             endif
                 jsr     j_NewGame

@@ -16,32 +16,25 @@ set seconds=%seconds:~-2%
 echo -------------------------------------------------------------
 echo Start of assembly
 echo Checking sound binaries ...
-cd ../disasm/data/sound/
-IF NOT EXIST "sounddriver.bin" (
-    echo Assembling sound driver ...
-    ..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\sounddriver.asm
-    ..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\sounddriver.p .\sounddriver.bin -k -r $0000-$1fff
-) ELSE echo sounddriver.bin already exists!
-IF NOT EXIST "cubewiz.bin" (
-    echo Assembling Cube/Wiz driver ...
-    ..\..\..\tools\asw\asw.exe ..\..\code\common\tech\sound\cubewiz.asm
-    ..\..\..\tools\asw\p2bin.exe ..\..\code\common\tech\sound\cubewiz.p .\cubewiz.bin -k -r $0000-$1fff
-) ELSE echo cubewiz.bin already exists!
-cd musicbank0/
-IF NOT EXIST "..\musicbank0.bin" (
-    echo Assembling music bank 0 ...
-    ..\..\..\..\tools\asw\asw.exe -x -E errors.log .\musicbank0.asm
+cd ../disasm/code/common/tech/sound/cubewiz/
+echo Assembling CUBEWIZ driver ...
+    ..\..\..\..\..\..\tools\asw\asw.exe .\cubewiz.asm
+    ..\..\..\..\..\..\tools\asw\p2bin.exe .\cubewiz.p ..\..\..\..\..\data\sound\cubewiz.bin -k -r $0000-$1fff
+cd ../../../../../data/sound/musicbank0/
+echo Assembling music bank 0 ...
+    ..\..\..\..\tools\asw\asw.exe .\musicbank0.asm
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank0.p ..\musicbank0.bin -k -r $8000-$ffff
-) ELSE echo musicbank0.bin already exists!
 cd ../musicbank1/
-IF NOT EXIST "..\musicbank1.bin" (
-    echo Assembling music bank 1 ...
-    ..\..\..\..\tools\asw\asw.exe -x -E errors.log .\musicbank1.asm
+echo Assembling music bank 1 ...
+    ..\..\..\..\tools\asw\asw.exe .\musicbank1.asm
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1.bin -k -r $8000-$ffff
-) ELSE echo musicbank1.bin already exists!
+cd ../sfxbank/
+echo Assembling SFX bank ...
+    ..\..\..\..\tools\asw\asw.exe .\sfxbank.asm
+    ..\..\..\..\tools\asw\p2bin.exe .\sfxbank.p ..\sfxbank.bin -k -r $E000-$ffff
 cd ../../../
 echo Assembling game ...
-SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%"
+SET "buildname=sf2standard-%today%-%hour%%minutes%%seconds%"
 @"../tools/asm68k" /e VANILLA_BUILD=0 /e STANDARD_BUILD=1 /k /m /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%.bin", ../build/%buildname%.sym, ../build/%buildname%.lst > ../build/output.log
 echo End of assembly, produced %buildname%.bin
 

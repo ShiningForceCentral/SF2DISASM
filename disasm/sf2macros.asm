@@ -442,60 +442,60 @@ addIconOffset: macro
 ; ---------------------------------------------------------------------------
 ; Traps
 ; ---------------------------------------------------------------------------
-    
-sndCom: macro
-    trap #SOUND_COMMAND
-    dc.w \1
-    endm
-    
+
+sndCom:     macro
+                trap #SOUND_COMMAND
+                dc.w \1
+            endm
+
 deactivateMusicResuming: macro
-    if (STANDARD_BUILD&MUSIC_RESUMING=1)
-    sndCom SOUND_COMMAND_DEACTIVATE_RESUMING
-    endc
-    endm
+            if (STANDARD_BUILD=1)
+                sndCom SOUND_COMMAND_DEACTIVATE_RESUMING
+            endif
+        endm
 
 activateMusicResuming: macro
-    if (STANDARD_BUILD&MUSIC_RESUMING=1)
-    sndCom SOUND_COMMAND_ACTIVATE_RESUMING
-    endc
-    endm
-    
-chkFlg: macro
-    trap #CHECK_FLAG
-    dc.w \1
-    endm
-    
-setFlg: macro
-    trap #SET_FLAG
-    dc.w \1
-    endm
-    
-clrFlg: macro
-    trap #CLEAR_FLAG
-    dc.w \1
-    endm
-    
-checkFlg: macro
-    trap #4
-    dc.w \1
-    endm
-    
-txt: macro
-    trap #TEXTBOX
-    dc.w \1
-    endm
-    
-clsTxt: macro
-    trap #TEXTBOX
-    dc.w $FFFF
-    endm
-    
-script: macro
-    lea \1(pc), a0
-    trap #MAPSCRIPT
-    endm
-    
-    
+            if (STANDARD_BUILD=1)
+                sndCom SOUND_COMMAND_ACTIVATE_RESUMING
+            endif
+        endm
+
+chkFlg:     macro
+                trap #CHECK_FLAG
+                dc.w \1
+            endm
+
+setFlg:     macro
+                trap #SET_FLAG
+                dc.w \1
+            endm
+
+clrFlg:     macro
+                trap #CLEAR_FLAG
+                dc.w \1
+            endm
+
+checkFlg:   macro
+                trap #4
+                dc.w \1
+            endm
+
+txt:        macro
+                trap #TEXTBOX
+                dc.w \1
+            endm
+
+clsTxt:     macro
+                trap #TEXTBOX
+                dc.w $FFFF
+            endm
+
+script:     macro
+                lea \1(pc), a0
+                trap #MAPSCRIPT
+            endm
+
+
 ; ---------------------------------------------------------------------------
 ; Data definition macros
 ; ---------------------------------------------------------------------------

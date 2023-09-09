@@ -77,7 +77,7 @@ SpawnEnemy:
 
 ClearDeadCombatantsListLength:
                 
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 rts
             endif

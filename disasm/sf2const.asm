@@ -34,11 +34,13 @@ SAVED_DATA_TOTAL_SIZE: equ savedDataTotalSize
 
 ; START OF SEGMENT Z80 OFFSETS FROM Z80:A00000 TO 0:00A0FFFF
 Z80_Memory: equ $A00000
+
 z80Channel1NotInUse = $A01383
-    if (STANDARD_BUILD&MUSIC_RESUMING=1)
-z80Channel1NotInUse = $A01713
+    if (STANDARD_BUILD=1)
+z80Channel1NotInUse = $A01813
     endif
 Z80_CHANNEL_1_NOT_IN_USE: equ z80Channel1NotInUse
+
 Z80_SoundDriverFadeInData: equ $A01FFC
 Z80_SoundDriverMusicLevel: equ $A01FFD
 Z80_SoundDriverCommand: equ $A01FFF
