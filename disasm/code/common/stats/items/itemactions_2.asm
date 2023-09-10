@@ -73,7 +73,7 @@ FieldItem_CurePoison:
                 jsr     j_GetStatusEffects
                 bclr    #STATUSEFFECT_BIT_POISON,d1
                 beq.s   byte_22A64      
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     149             ; "{NAME} is no longer{N}poisoned.{W2}"
                 bra.s   loc_22A68
 byte_22A64:
@@ -96,14 +96,14 @@ FieldItem_CurePoisonAndParalysis:
                 moveq   #0,d2
                 bclr    #STATUSEFFECT_BIT_POISON,d1
                 beq.s   loc_22A88
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     149             ; "{NAME} is no longer{N}poisoned.{W2}"
                 moveq   #$FFFFFFFF,d2
 loc_22A88:
                 
                 bclr    #STATUSEFFECT_BIT_STUN,d1
                 beq.s   loc_22A98
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     156             ; "{NAME} is no longer{N}paralyzed.{W2}"
                 moveq   #$FFFFFFFF,d2
 loc_22A98:
@@ -130,7 +130,7 @@ FieldItem_IncreaseAtt:
                 addq.w  #2,d7
                 clr.l   d1
                 move.w  d7,d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     150             ; "{NAME}'s attack{N}power is boosted by {#}.{W2}"
                 jsr     j_IncreaseBaseAtt
@@ -151,7 +151,7 @@ FieldItem_IncreaseDef:
                 addq.w  #2,d7
                 clr.l   d1
                 move.w  d7,d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     151             ; "{NAME}'s defensive{N}power is boosted by {#}.{W2}"
                 jsr     j_IncreaseBaseDef
@@ -172,7 +172,7 @@ FieldItem_IncreaseAgi:
                 addq.w  #2,d7
                 clr.l   d1
                 move.w  d7,d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     152             ; "{NAME}'s agility{N}is boosted by {#}.{W2}"
                 jsr     j_IncreaseBaseAgi
@@ -200,7 +200,7 @@ loc_22B42:
                 
                 clr.l   d1
                 move.w  d7,d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     153             ; "{NAME}'s movement{N}range enlarged by {#}.{W2}"
                 jsr     j_IncreaseBaseMov
@@ -221,7 +221,7 @@ FieldItem_IncreaseHp:
                 addq.w  #2,d7
                 clr.l   d1
                 move.w  d7,d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     154             ; "{NAME}'s max. HP{N}are raised by {#}.{W2}"
                 jsr     j_IncreaseMaxHp
@@ -246,7 +246,7 @@ FieldItem_IncreaseMp:
                 addq.w  #2,d7
                 clr.l   d1
                 move.w  d7,d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     155             ; "{NAME}'s max. MP{N}are raised by {#}.{W2}"
                 jsr     j_IncreaseMaxMp

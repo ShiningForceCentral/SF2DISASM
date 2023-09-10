@@ -66,7 +66,7 @@ byte_200CE:
                 move.w  d0,d1
                 jsr     j_GetItemDefAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
-                move.w  selectedItem(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  selectedItem(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 clr.l   ((TEXT_NUMBER-$1000000)).w
                 move.w  itemPrice(a6),((CURRENT_ITEM_PRICE-$1000000)).w
                 txt     163             ; "The {ITEM} costs{N}{#} gold coins.{N}OK?"
@@ -112,7 +112,7 @@ loc_2015E:
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 bcs.s   loc_201AC
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     168             ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
@@ -128,7 +128,7 @@ loc_201AC:
                 move.w  member(a6),d0
                 jsr     j_IsWeaponOrRingEquippable
                 bcs.s   loc_201E4
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
@@ -161,7 +161,7 @@ loc_201E4:
                 jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_2028A
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_202BE      
 loc_2025E:
@@ -174,7 +174,7 @@ loc_2025E:
                 jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_2028A
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_202BE      
 loc_2028A:
@@ -189,7 +189,7 @@ loc_2028A:
                 sndCom  MUSIC_CURSED_ITEM
                 jsr     WaitForMusicResumeAndPlayerInput_Shop(pc)
                 nop
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     175             ; "Gee, {NAME} gets{N}cursed.{W2}"
                 bra.s   loc_202BC
 byte_202B8:
@@ -441,7 +441,7 @@ byte_205C8:
                 move.w  d0,d1
                 jsr     j_GetItemDefAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
-                move.w  selectedItem(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  selectedItem(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 clr.l   ((TEXT_NUMBER-$1000000)).w
                 move.w  itemPrice(a6),((CURRENT_ITEM_PRICE-$1000000)).w
                 txt     163             ; "The {ITEM} costs{N}{#} gold coins.{N}OK?"
@@ -487,7 +487,7 @@ loc_20652:
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 bcs.s   loc_206A0
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     168             ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
@@ -503,7 +503,7 @@ loc_206A0:
                 move.w  member(a6),d0
                 jsr     j_IsWeaponOrRingEquippable
                 bcs.s   loc_206D8
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
@@ -538,7 +538,7 @@ loc_206D8:
                 jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_20788
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_207C0      
 loc_2075C:
@@ -551,7 +551,7 @@ loc_2075C:
                 jsr     j_UnequipItemBySlotIfNotCursed
                 cmpi.w  #2,d2
                 bne.w   loc_20788
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_207C0      
 loc_20788:
@@ -566,7 +566,7 @@ loc_20788:
                 sndCom  MUSIC_CURSED_ITEM
                 jsr     WaitForMusicResumeAndPlayerInput_Shop(pc)
                 nop
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     175             ; "Gee, {NAME} gets{N}cursed.{W2}"
                 clsTxt
                 bra.s   loc_207BE

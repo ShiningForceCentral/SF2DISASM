@@ -11,7 +11,7 @@ FieldItem_LevelUp:
                 jsr     j_SetCurrentExp
                 jsr     j_LevelUp
                 lea     ((LEVELUP_ARGUMENTS-$1000000)).w,a5
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 clr.l   d1
                 move.b  (a5)+,d1
                 cmpi.b  #$FF,d1
@@ -66,7 +66,7 @@ loc_22C4C:
                 
                 addq.w  #1,d1
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                move.w  d2,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d2,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     272             ; "{D1}{SPELL} increased to{N}level {#}!"
 byte_22C5A:
                 

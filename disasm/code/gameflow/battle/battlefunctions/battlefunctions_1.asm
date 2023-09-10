@@ -331,7 +331,7 @@ BattleLoop_Victory:
 BattleLoop_Defeat:
                 
                 bsr.w   UpdateBattleUnlockedFlag
-                clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+                clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_SAD_THEME_2
                 txt     363             ; "{LEADER} is exhausted.{W1}"
                 clsTxt
@@ -388,7 +388,7 @@ ExecuteBattleaction_AngelWing:
                 move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,d1
                 jsr     j_RemoveItemBySlot
                 bsr.w   HideBattlefieldWindows
-                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
                 andi.w  #ITEMENTRY_MASK_INDEX,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     275             ; "{NAME} used{N}{ITEM}!"
@@ -409,7 +409,7 @@ ExecuteBattleaction_Egress:
                 jsr     j_GetSpellCost
                 jsr     j_DecreaseCurrentMp
                 bsr.w   HideBattlefieldWindows
-                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
                 andi.w  #SPELLENTRY_MASK_INDEX,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.l  #1,((TEXT_NUMBER-$1000000)).w

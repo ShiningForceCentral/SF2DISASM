@@ -82,6 +82,7 @@
                 includeIfVanilla "code\common\scripting\entity\unused_entityscriptfunction.asm"
                 include "code\common\scripting\entity\entityscriptengine_2.asm"    ; Entity script engine, part 2
                 include "code\common\scripting\text\textfunctions.asm"    ; Text functions
+                includeIfStandard "code\common\scripting\text\displayuncompressedtext-standard.asm"
                 includeIfVanilla "code\common\scripting\text\unused_textfunctionsdata.asm"
                 includeIfStandard "code\common\tech\sram\sramfunctions-standard.asm"
                 includeIfVanilla "code\common\tech\sram\sramfunctions.asm"   ; SRAM functions

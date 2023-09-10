@@ -96,7 +96,7 @@ ce_4D048:       mainEntity 26,37,LEFT
 
 sub_4D078:
                 
-                cmpi.w  #$FFFF,(TEXT_NAME_INDEX_1).l
+                cmpi.w  #$FFFF,(DIALOGUE_NAME_INDEX_1).l
                 beq.s   return_4D098
                 jsr     (HideTextBox).l
                 move.w  #$B3A,d0

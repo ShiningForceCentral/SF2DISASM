@@ -698,7 +698,7 @@ HideGoldWindow:
                 move.w  #$2017,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   @Skip
                 subq.w  #1,d0
                 move.w  #$8080,d1

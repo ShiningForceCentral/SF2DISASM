@@ -1836,7 +1836,7 @@ bsc0F_giveExp:
                 move.l  d1,-(sp)
                 andi.w  #$7FFF,d1
                 jsr     j_IncreaseExp
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  (sp)+,d1
                 btst    #$F,d1
                 bne.s   loc_1910C
@@ -1852,7 +1852,7 @@ loc_1910C:
                 jsr     j_LevelUp
                 clr.w   (SPEECH_SFX).l
                 lea     (LEVELUP_ARGUMENTS).l,a5
-                move.w  ((BATTLESCENE_ALLY-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  ((BATTLESCENE_ALLY-$1000000)).w,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 cmpi.b  #$FF,d0
@@ -1907,14 +1907,14 @@ loc_191AC:
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 lsr.w   #SPELLENTRY_OFFSET_LV,d1
                 bne.s   loc_191D0
-                move.w  ((BATTLESCENE_ALLY-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  ((BATTLESCENE_ALLY-$1000000)).w,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  d0,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     271             ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
                 bra.s   return_191DE
 loc_191D0:
                 
                 addq.w  #1,d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     272             ; "{D1}{SPELL} increased to{N}level {#}!"
 return_191DE:
@@ -1935,7 +1935,7 @@ return_191DE:
 bsc10_displayMessage:
                 
                 move.w  (a6)+,d0
-                move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  (a6)+,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.l  (a6)+,((TEXT_NUMBER-$1000000)).w
                 clr.w   (SPEECH_SFX).l
@@ -1975,7 +1975,7 @@ return_19228:
 bsc11_displayMessageWithNoWait:
                 
                 move.w  (a6)+,d0
-                move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  (a6)+,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.l  (a6)+,((TEXT_NUMBER-$1000000)).w
                 clr.w   (SPEECH_SFX).l

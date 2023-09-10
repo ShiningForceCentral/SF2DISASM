@@ -20,7 +20,7 @@ Map77_DefaultItemEvent1:
 
 Map77_ItemEvent0:
                 
-                move.w  #$73,((TEXT_NAME_INDEX_1-$1000000)).w 
+                move.w  #$73,((DIALOGUE_NAME_INDEX_1-$1000000)).w 
                 txt     421             ; "{LEADER} uses the {ITEM}.{D3}"
                 chkFlg  900             ; Set after using the Dry Stone to open the way to the Dwarven Village
                 bne.s   byte_50AB6      

@@ -26,7 +26,7 @@ InitializeWindowProperties:
 @Continue:
                 
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                clr.w   ((TEXT_WINDOW_INDEX-$1000000)).w
+                clr.w   ((DIALOGUE_WINDOW_INDEX-$1000000)).w
                 clr.w   ((TIMER_WINDOW_INDEX-$1000000)).w
                 rts
 

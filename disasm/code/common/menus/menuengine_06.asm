@@ -1668,7 +1668,7 @@ EquipNewItem:
                 jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.w   @Return         ; return if new item is not cursed
-                move.w  d0,(TEXT_NAME_INDEX_1).l
+                move.w  d0,(DIALOGUE_NAME_INDEX_1).l
                 jsr     HideMemberListWindow(pc)
                 sndCom  MUSIC_CURSED_ITEM
                 txt     34              ; "Gosh!  {NAME} is{N}cursed!{W2}"
@@ -1882,7 +1882,7 @@ loc_14A0A:
                 movem.w d0-d1,-(sp)
                 clr.w   d1
                 bsr.s   sub_14A82
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_14A26
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -2766,7 +2766,7 @@ loc_1528E:
                 move.w  #$C11,d1
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_152F0
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -2840,7 +2840,7 @@ loc_15378:
                 move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_153AC
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -2873,7 +2873,7 @@ loc_153D6:
                 move.w  #$F011,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_153F6
                 subq.w  #1,d0
                 move.w  #$8080,d1

@@ -248,7 +248,7 @@ Church_CureStun:
                 andi.w  #STATUSEFFECT_STUN,d3
                 beq.w   @Next
                 addi.w  #1,stunnedMembersCount(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     132             ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
                 move.l  #CHURCHMENU_CURE_STUN_COST,actionCost(a6)
                 move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
@@ -282,7 +282,7 @@ Church_CureStun:
                 sndCom  MUSIC_CURE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     133             ; "{NAME} is no longer{N}paralyzed.{W2}"
 @Next:
                 

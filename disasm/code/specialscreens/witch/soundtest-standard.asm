@@ -5,53 +5,45 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-SoundTest:
-
-                txt     464                         ; "Oh! I have a good idea.{N}Let's listen to music!{W1}"
+SoundTest:      txt     464                         ; "Oh! I have a good idea.{N}Let's listen to music!{W1}"
                 sndCom  SOUND_COMMAND_FADE_OUT
                 clr.w   ((SPEECH_SFX-$1000000)).w
                 clr.w   d7                          ; D7 = # bytes into sound table, so we clear it here
                 clr.w   d0
-@UpdateTrack:
                 
-                move.b  tbl_SoundTracks(pc,d7.w),d0
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                bsr.w   DisplayTrackTitle
-@Start:
+@UpdateTrack:   move.b  tbl_SoundTracks(pc,d7.w),d0
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                lea     tbl_TrackTitles(pc),a0
+                moveq   #41,d0
+                jsr     (DisplayUncompressedText).w
                 
-                jsr     (WaitForVInt).w
+@Start:         jsr     (WaitForVInt).w
                 
-; Right
-                btst    #INPUT_BIT_RIGHT,((P1_INPUT-$1000000)).w
+@Right:         btst    #INPUT_BIT_RIGHT,((P1_INPUT-$1000000)).w
                 beq.s   @Left
                 cmpi.w  #91,d7      ; check we're not trying to go beyond final track
                 bge.s   @Left       ; if we are, branch into 'left button push' code
                 addq.w  #1,d7
                 bra.s   @UpdateTrack
-@Left:
                 
-                btst    #INPUT_BIT_LEFT,((P1_INPUT-$1000000)).w
+@Left:          btst    #INPUT_BIT_LEFT,((P1_INPUT-$1000000)).w
                 beq.s   @A
                 tst.w   d7          ; check we're not trying to go below the first track
                 ble.s   @A          ; if we are, branch into 'A button push' code
                 subq.w  #1,d7
                 bra.s   @UpdateTrack
-@A:
                 
-                btst    #INPUT_BIT_A,((P1_INPUT-$1000000)).w
+@A:             btst    #INPUT_BIT_A,((P1_INPUT-$1000000)).w
                 beq.s   @C
                 bra.s   @PlayTrack
-@C:
                 
-                btst    #INPUT_BIT_C,((P1_INPUT-$1000000)).w
+@C:             btst    #INPUT_BIT_C,((P1_INPUT-$1000000)).w
                 beq.s   @B
-@PlayTrack:
                 
-                sndCom  MUSIC_STOP
+@PlayTrack:     sndCom  MUSIC_STOP
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
-@B:
                 
-                btst    #INPUT_BIT_B,((P1_INPUT-$1000000)).w
+@B:             btst    #INPUT_BIT_B,((P1_INPUT-$1000000)).w
                 beq.s   @Start
                 sndCom  SOUND_COMMAND_FADE_OUT
                 bra.s   @Start
@@ -154,82 +146,6 @@ tbl_SoundTracks:
                 dc.b SFX_INTRO_LIGHTNING
                 dc.b SFX_BOLT_SPELL
                 dc.b SFX_TINKLING
-
-; =============== S U B R O U T I N E =======================================
-
-
-DisplayTrackTitle:
-                
-                movem.l d0-a6,-(sp)
-                jsr     (sub_676E).w    ; create message window
-                move.b  #1,((CURRENTLY_TYPEWRITING-$1000000)).w
-                clr.b   ((byte_FFB6D8-$1000000)).w
-                move.l  #TEXT_NAME_INDEX_1,((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w
-                move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
-                
-                ; Clear window
-                jsr     (sub_6872).w
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
-                subq.w  #1,d0
-                move.w  d0,-(sp)
-                jsr     (GetWindowEntryAddress).w
-                movea.l (a0),a1
-                jsr     (sub_67E6).w
-                move.w  (sp)+,d0
-                move.w  #$8080,d1
-                jsr     (SetWindowDestination).w
-                jsr     (WaitForVInt).w
-                
-                jsr     (sub_6648).w    ; get text name index -> d1.w
-                cmpi.w  #41,d1
-                bhi.s   @Number
-                
-                ; Load ASCII string
-                lea     tbl_TrackTitles(pc), a0
-                jsr     FindName
-                jsr     (CopyAsciiBytesForDialogueString).w
-                bra.s   @Print_Loop
-@Number:
-                
-                moveq   #0,d0
-                move.w  d1,d0
-                jsr     (WriteAsciiNumber).w
-                lea     ((DIALOGUE_STRING_TO_PRINT-$1000000)).w,a1
-                move.l  a1,((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w
-                lea     ((LOADED_NUMBER-$1000000)).w,a0
-                moveq   #9,d1
-@CopyNumber_Loop:
-                
-                clr.w   d0
-                move.b  (a0)+,d0
-                cmpi.b  #32,d0
-                beq.s   @Skip
-                move.b  d0,(a1)+
-@Skip:
-                
-                dbf     d1,@CopyNumber_Loop
-                clr.b   (a1)
-@Print_Loop:
-                
-                jsr     (GetNextTextSymbol).w
-                bset    #0,((byte_FFB6D8-$1000000)).w
-                bne.s   @Continue
-                cmpi.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
-                beq.s   @Continue
-                move.b  #$FF,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
-@Continue:
-                
-                jsr     (sub_6308).w
-                jsr     (SymbolsToGraphics).w
-                jsr     (HandleDialogueTypewriting).w
-                tst.l   ((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w
-                bne.s   @Print_Loop
-                
-                clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
-                movem.l (sp)+,d0-a6
-                rts
-
-    ; End of function DisplayTrackTitle
 
 ; ---------------------------------------------------------------------------
 

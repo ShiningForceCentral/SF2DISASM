@@ -87,7 +87,7 @@ IsItemInSlotEquippedAndCursed:
                 sndCom  MUSIC_CURSED_ITEM
                 move.w  #60,d0
                 jsr     (Sleep).w       
-                move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d1,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #30,d1          ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bsr.w   PlayPreviousMusicAfterCurrentOne
@@ -131,7 +131,7 @@ IsItemUnsellable:
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @NotUnsellable
-                move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d1,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #37,d1          ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 ori     #1,ccr
