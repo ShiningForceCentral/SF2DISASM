@@ -833,7 +833,7 @@ SetUnitCursorDestinationToNextBattleEntity:
                 move.w  d3,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  #$40,ENTITYDEF_OFFSET_XSPEED(a0) 
                 move.b  #$40,ENTITYDEF_OFFSET_YSPEED(a0) 
-                tst.b   ((SPECIAL_TURBO_CHEAT-$1000000)).w
+                tst.b   ((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 beq.s   loc_23328
                 move.b  #$60,ENTITYDEF_OFFSET_XSPEED(a0) 
                 move.b  #$60,ENTITYDEF_OFFSET_YSPEED(a0) 
@@ -866,7 +866,7 @@ loc_2335E:
                 move.w  #$70,d1 
 loc_23368:
                 
-                tst.b   ((SPECIAL_TURBO_CHEAT-$1000000)).w
+                tst.b   ((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 beq.s   loc_23376
                 move.w  #$80,d0 
                 move.w  #$80,d1 

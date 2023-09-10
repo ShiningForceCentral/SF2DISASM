@@ -37,7 +37,7 @@ GenerateRandomOrDebugNumber:
                 move.l  d6,-(sp)
                 move.l  d7,-(sp)
                 move.w  d0,d6
-                tst.b   (DEBUG_MODE_ACTIVATED).l
+                tst.b   (DEBUG_MODE_TOGGLE).l
                 beq.s   @Skip
                 
                 moveq   #0,d0

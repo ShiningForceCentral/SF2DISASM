@@ -46,7 +46,7 @@ MainMenuActions:
 @StartMember:
                 
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 cmpi.w  #$FFFF,d0
                 beq.w   @ExitMember
                 jsr     j_BuildMemberScreen
@@ -276,7 +276,7 @@ byte_21468:
                 move.w  #50,d1
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 cmpi.w  #$FFFF,d0
                 beq.w   @StartItemUse
                 

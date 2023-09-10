@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\caravan\caravanactions_1.asm :
+; ASM FILE code\common\menus\caravan\CaravanMenuActions_1.asm :
 ; 0x21FD2..0x228A2 : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,7 +75,7 @@ CaravanMenu_Join:
                 ; Pick joiner
                 move.w  #15,d1          ; "Who joins the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 move.w  d0,member(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_220E8      ; Exit Join action
@@ -107,7 +107,7 @@ CaravanMenu_Join:
                 
                 move.w  #23,d1          ; "Choose a relief.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_220DE      ; Close textbox and restart Join action
                 
@@ -183,7 +183,7 @@ CaravanMenu_Purge:
                 ; Pick a quitter
                 move.w  #16,d1          ; "Who quits the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_22144      ; Exit Purge action
                 
@@ -764,7 +764,7 @@ CaravanItemSubmenu_Use:
                 move.w  #25,d1          ; "Use the {ITEM}{N}on whom?{D1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_225E4      
                 

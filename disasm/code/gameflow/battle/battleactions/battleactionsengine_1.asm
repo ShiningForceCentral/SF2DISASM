@@ -41,7 +41,7 @@ WriteBattlesceneScript:
                 move.b  #0,debugCritical(a2)
                 move.b  #0,debugDouble(a2)
                 move.b  #0,debugCounter(a2)
-                tst.b   (DEBUG_MODE_ACTIVATED).l
+                tst.b   (DEBUG_MODE_TOGGLE).l
                 beq.s   loc_9BE4
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 beq.s   loc_9BD8

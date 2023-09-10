@@ -239,7 +239,7 @@ Map16_212_EntityEvent16:
 
 Map16_212_EntityEvent17:
                 
-                jsr     j_CaravanActions
+                jsr     j_CaravanMenuActions
 Map16_212_DefaultEntityEvent:
                 
                 rts

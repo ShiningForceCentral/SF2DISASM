@@ -273,7 +273,7 @@ loc_50BC:
                 
                 btst    #6,$1C(a0)
                 beq.w   loc_51A8
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   loc_50D6
                 btst    #INPUT_BIT_B,((P1_INPUT-$1000000)).w
                 bne.w   loc_51A8
@@ -469,7 +469,7 @@ loc_52C0:
                 cmpi.w  #$C000,(a4,d2.w)
                 movem.w (sp)+,d2-d3
                 bcs.w   loc_52E8
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   loc_52DE
                 btst    #INPUT_BIT_B,((P1_INPUT-$1000000)).w
                 bne.w   loc_52E8

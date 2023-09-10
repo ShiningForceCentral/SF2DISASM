@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\caravan\caravanactions_2.asm :
+; ASM FILE code\common\menus\caravan\CaravanMenuActions_2.asm :
 ; 0x228D8..0x229CA : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================

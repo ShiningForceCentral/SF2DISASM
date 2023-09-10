@@ -1,6 +1,8 @@
 
 ; 0 = OFF, 1 = ON
 
+SOUND_TEST_RESTORATION: equ 1   ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
+
 ; Music resuming
 MUSIC_RESUMING:                     equ 1       ; 
 RESUME_BATTLEFIELD_MUSIC_ONLY:      equ 1       ; Do not resume battlescene music.

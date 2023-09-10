@@ -6,8 +6,9 @@
 
 
 nullsub_18010:
-                
+            if (VANILLA_BUILD=1)
                 rts
+            endif
 
     ; End of function nullsub_18010
 

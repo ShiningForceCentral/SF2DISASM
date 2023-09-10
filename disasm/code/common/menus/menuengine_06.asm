@@ -3051,7 +3051,7 @@ YesNoPromptMenuLayout:
 
 ClosePortraitEyes:
                 
-                clr.b   ((byte_FFB082-$1000000)).w
+                clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 jsr     (WaitForVInt).w
                 move.w  d0,-(sp)
                 btst    #0,d0
@@ -3091,7 +3091,7 @@ VInt_HandlePortraitBlinking:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 beq.w   return_155C2
-                tst.b   ((byte_FFB082-$1000000)).w
+                tst.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 beq.w   return_155C2
                 lea     ((BLINK_COUNTER-$1000000)).w,a0
                 subq.w  #1,(a0)

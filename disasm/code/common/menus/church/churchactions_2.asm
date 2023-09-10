@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\church\churchactions_2.asm :
+; ASM FILE code\common\menus\church\ChurchMenuActions_2.asm :
 ; 0x21072..0x2127E : Church functions
 
 ; =============== S U B R O U T I N E =======================================

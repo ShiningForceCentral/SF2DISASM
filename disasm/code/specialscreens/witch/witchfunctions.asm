@@ -23,7 +23,7 @@ InitializeWitchSuspendVIntFunctions:
                 bsr.w   DisableDisplayAndInterrupts
                 clr.b   ((byte_FFB198-$1000000)).w
                 move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w
-                bsr.w   DisplayWitchScreen
+                bsr.w   BuildWitchScreen
                 bsr.w   EnableDisplayAndInterrupts
                 getPointer p_WitchLayout, a0
                 lea     $700(a0),a0
@@ -48,7 +48,7 @@ InitializeWitchSuspendVIntFunctions:
 ; =============== S U B R O U T I N E =======================================
 
 
-DisplayWitchScreen:
+BuildWitchScreen:
                 
                 jsr     (DisableDisplayAndInterrupts).w
                 getPointer p_WitchTiles, a0
@@ -81,7 +81,7 @@ DisplayWitchScreen:
                 move.w  #6,((word_FFB07C-$1000000)).w
                 rts
 
-    ; End of function DisplayWitchScreen
+    ; End of function BuildWitchScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -165,7 +165,7 @@ var_2 = -2
 VInt_WitchBlink:
                 
                 link    a6,#-2
-                tst.b   ((byte_FFB082-$1000000)).w
+                tst.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 beq.w   loc_7E16
                 clr.w   var_2(a6)
                 lea     ((BLINK_COUNTER-$1000000)).w,a2

@@ -1304,7 +1304,7 @@ loc_25236:
                 jsr     (CopyBytes).w   
 @CreateMemberList_Loop:
                 
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 tst.b   d0
                 bmi.s   loc_25236
                 jsr     j_BuildMemberScreen
@@ -1334,7 +1334,7 @@ loc_25236:
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 getCurrentSaveSlot d0
                 jsr     (SaveGame).l
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.w   byte_252E6
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_252F2      

@@ -201,7 +201,7 @@ MoveWindowWithSfx:
 
 MoveWindow:
                 
-                tst.b   ((SPECIAL_TURBO_CHEAT-$1000000)).w
+                tst.b   ((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 beq.s   loc_4900
                 moveq   #1,d2
 loc_4900:

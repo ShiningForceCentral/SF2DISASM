@@ -6,8 +6,9 @@
 
 
 j_nullsub_18010:
-                
+            if (VANILLA_BUILD=1)
                 jmp     nullsub_18010(pc)
+            endif
 
     ; End of function j_nullsub_18010
 

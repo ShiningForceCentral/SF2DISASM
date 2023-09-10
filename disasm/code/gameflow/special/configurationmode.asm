@@ -11,14 +11,11 @@ CheatModeConfiguration:
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 beq.w   @Return
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
-                beq.s   loc_7E58
+                beq.s   @IsConfigurationModeOn
+                
                 btst    #7,(SAVE_FLAGS).l
-            if (STANDARD_BUILD=1)
-                bne.s   @Return
-            else
-                bne.w   SoundTest       
-            endif
-loc_7E58:
+                bne.w   SoundTest
+@IsConfigurationModeOn:
                 
                 tst.b   ((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
                 beq.w   @Return
@@ -27,7 +24,7 @@ loc_7E58:
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
                 bne.s   byte_7E78       
-                move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
+                move.b  #$FF,((SPECIAL_TURBO_TOGGLE-$1000000)).w
 byte_7E78:
                 
                 txt     451             ; "{CLEAR}Control Opponent"

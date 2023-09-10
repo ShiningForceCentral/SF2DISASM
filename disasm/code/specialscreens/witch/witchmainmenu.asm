@@ -10,7 +10,7 @@ var_8 = -8
 var_6 = -6
 var_4 = -4
 
-WitchMainMenu:
+ExecuteWitchMainMenu:
                 
                 movem.l d1-a1,-(sp)
                 link    a6,#-16
@@ -103,7 +103,7 @@ byte_1675A:
                 movem.l (sp)+,d1-a1
                 rts
 
-    ; End of function WitchMainMenu
+    ; End of function ExecuteWitchMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\church\churchactions_1.asm :
+; ASM FILE code\common\menus\church\ChurchMenuActions_1.asm :
 ; 0x20A02..0x21046 : Church functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -286,7 +286,7 @@ ChurchMenuActions:
                 txt     136             ; "{CLEAR}Who do you want to{N}promote?{W2}"
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 cmpi.w  #$FFFF,d0
                 bne.w   @CheckPromotableClass
                 txt     137             ; "Oh, I'm wrong.{W2}"

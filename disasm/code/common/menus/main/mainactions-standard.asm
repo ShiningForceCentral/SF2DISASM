@@ -52,7 +52,7 @@ MainMenu_Member:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 clsTxt
 @StartMember:   clr.b   ((byte_FFB13C-$1000000)).w
-                jsr     InitializeMemberListScreen
+                jsr     InitializeMembersListScreen
                 tst.w   d0
                 bmi.s   @StartMain              ; if player pressed B on member list screen, restart main menu
                 jsr     BuildMemberScreen
@@ -252,7 +252,7 @@ MainItemSubmenu_Use:
                 
 @PickTarget:    clsTxt
                 clr.b   ((byte_FFB13C-$1000000)).w
-                jsr     InitializeMemberListScreen
+                jsr     InitializeMembersListScreen
                 tst.w   d0
                 bmi.w   @StartItemUse
                 

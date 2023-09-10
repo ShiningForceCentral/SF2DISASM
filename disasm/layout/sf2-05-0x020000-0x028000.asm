@@ -69,6 +69,6 @@
                 include "code\common\tech\graphics\specialsprites.asm"    ; Special Sprites functions
                 include "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
                 include "code\common\tech\graphics\specialspritesanims.asm"    ; Special Sprites Animations
-                include "code\specialscreens\suspend\suspend.asm"    ; Suspend functions
-                include "code\specialscreens\witchend\witchend.asm"    ; Witch end functions
+                includeIfVanilla "code\specialscreens\suspend\suspend.asm"    ; Suspend functions
+                includeIfVanilla "code\specialscreens\witchend\witchend.asm"    ; Witch end functions
                 alignIfVanilla $28000

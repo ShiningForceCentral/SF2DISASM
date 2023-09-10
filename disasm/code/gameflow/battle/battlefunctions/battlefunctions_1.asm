@@ -58,7 +58,7 @@ BattleLoop:
                 
                 bsr.w   UpdateAllEnemiesAi ; start of battle loop
                 jsr     j_ExecuteBattleRegionCutscene
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   @SpawnEnemies
                 
                 bsr.w   PrintAllActivatedDefCons
@@ -86,7 +86,7 @@ BattleLoop:
                 cmpi.b  #CODE_TERMINATOR_BYTE,d0
                 beq.s   @Start          
                 bsr.w   ExecuteIndividualTurn
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   @Continue
                 cmpi.b  #INPUT_UP|INPUT_B|INPUT_C|INPUT_A,((P1_INPUT-$1000000)).w
                 bne.s   @Continue

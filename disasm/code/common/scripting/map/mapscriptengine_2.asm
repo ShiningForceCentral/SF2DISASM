@@ -17,7 +17,7 @@ loc_47140:
                 
                 btst    #INPUT_BIT_START,((P2_INPUT-$1000000)).w ; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
                 beq.s   loc_47156
-                tst.b   (DEBUG_MODE_ACTIVATED).l
+                tst.b   (DEBUG_MODE_TOGGLE).l
                 beq.s   loc_47156
                 move.b  #$FF,((SKIP_CUTSCENE_TEXT-$1000000)).w
 loc_47156:

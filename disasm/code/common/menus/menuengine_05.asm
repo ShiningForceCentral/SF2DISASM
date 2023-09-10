@@ -720,7 +720,7 @@ HideGoldWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-InitializeMemberListScreen:
+InitializeMembersListScreen:
                 
                 clr.b   ((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
@@ -732,7 +732,7 @@ InitializeMemberListScreen:
                 
                 bra.w   BuildMemberListScreen
 
-    ; End of function InitializeMemberListScreen
+    ; End of function InitializeMembersListScreen
 
 
 ; =============== S U B R O U T I N E =======================================

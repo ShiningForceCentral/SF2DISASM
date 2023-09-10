@@ -763,6 +763,12 @@ DEALS_ITEMS_COUNTER: equ (dealsItemsByteSize*2)-1
 
 ; ---------------------------------------------------------------------------
 
+; enum ShopProperties
+ITEMS_PER_SHOP_PAGE: equ 6
+DEBUG_SHOP_INDEX: equ $1E
+
+; ---------------------------------------------------------------------------
+
 ; enum Blacksmith
 BLACKSMITH_ORDERS_COUNTER: equ $3
 BLACKSMITH_MAX_ORDERS_NUMBER: equ $4
@@ -1553,6 +1559,13 @@ MAP_OVERWORLD_GRANS_RETURN_PATH: equ $4C
 MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE: equ $4D
 MAP_OVERWORLD_PACALON_2: equ $4E
 MAP_NONE: equ $FF
+
+; ---------------------------------------------------------------------------
+
+; enum BattleProperties
+BATTLE_MAX_INDEX: equ 44
+BATTLES_NUMBER:  equ 45
+BATTLES_DEBUG_NUMBER: equ 49
 
 ; ---------------------------------------------------------------------------
 
@@ -3573,3 +3586,17 @@ soundDriverByteSize = 8064
 
 SOUND_DRIVER_LONG_SIZE: equ soundDriverByteSize/4
 SOUND_DRIVER_BYTE_SIZE: equ soundDriverByteSize
+
+; ---------------------------------------------------------------------------
+
+; enum GameStartValues
+gamestartGold = 60
+gamestartMap = MAP_GRANSEAL
+gamestartSavepointX = 56
+gamestartSavepointY = 3
+gamestartFacing = DOWN
+GAMESTART_MAP:          equ gamestartMap
+GAMESTART_SAVEPOINT_Y:  equ gamestartSavepointY
+GAMESTART_FACING:       equ gamestartFacing
+GAMESTART_SAVEPOINT_X:  equ gamestartSavepointX
+GAMESTART_GOLD:         equ gamestartGold

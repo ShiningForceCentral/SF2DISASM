@@ -7,23 +7,23 @@
                 include "code\romheader.asm"    ; ROM Header
                 
                 ; Relocated pointers
-                includeIfStandard "code\common\tech\pointers\s00_pointers-standard.asm"
-                includeIfStandard "code\common\tech\pointers\s02_pointers.asm"                           ; Game Section 02 Pointers
-                includeIfStandard "code\common\tech\pointers\s03_pointers.asm"                           ; Game Section 03 Pointers
-                includeIfStandard "code\common\tech\pointers\s03_memberstatuswindowlayoutpointer.asm"    ; Game Section 03 Member Status Window Layout Pointer
-                includeIfStandard "code\common\tech\pointers\s04_backgroundlayoutpointer-standard.asm"
-                includeIfStandard "code\common\tech\pointers\s06_textbankspointer.asm"                   ; Game Section 06 Text Banks Pointer
-                includeIfStandard "code\common\tech\pointers\s06_pointers.asm"                           ; Game Section 06 Pointers
-                includeIfStandard "code\common\tech\pointers\s06_gamestaffpointer.asm"                   ; Game Section 06 Game Staff Pointer
-                includeIfStandard "code\common\tech\pointers\s08_pointers.asm"                           ; Game Section 08 Pointers
-                includeIfStandard "code\common\tech\pointers\s10_pointers.asm"                           ; Game Section 10 Pointers
-                includeIfStandard "code\common\tech\pointers\s11_enemybattlespritespointer.asm"          ; Game Section 11 Enemy Battlesprites Pointer
-                includeIfStandard "code\common\tech\pointers\s12_pointers.asm"                           ; Game Section 12 Pointers
-                includeIfStandard "code\common\tech\pointers\s13_pointers.asm"                           ; Game Section 13 Pointers
-                includeIfStandard "code\common\tech\pointers\s14_pointers.asm"                           ; Game Section 14 Pointers
-                includeIfStandard "code\common\tech\pointers\s15_portraitspointer.asm"                   ; Game Section 15 Portraits Pointer
-                includeIfStandard "code\common\tech\pointers\s16_iconspointer.asm"                       ; Game Section 16 Icons Pointer
-                includeIfStandard "code\common\tech\pointers\s17_pointers.asm"                           ; Game Section 17 Pointers
+                includeIfStandard "code\common\tech\pointers\s00_pointers-standard.asm"                 ; 
+                includeIfStandard "code\common\tech\pointers\s02_pointers.asm"                          ; Game Section 02 Pointers
+                includeIfStandard "code\common\tech\pointers\s03_pointers.asm"                          ; Game Section 03 Pointers
+                includeIfStandard "code\common\tech\pointers\s03_memberstatuswindowlayoutpointer.asm"   ; Game Section 03 Member Status Window Layout Pointer
+                includeIfStandard "code\common\tech\pointers\s04_backgroundlayoutpointer-standard.asm"  ; 
+                includeIfStandard "code\common\tech\pointers\s06_textbankspointer.asm"                  ; Game Section 06 Text Banks Pointer
+                includeIfStandard "code\common\tech\pointers\s06_pointers.asm"                          ; Game Section 06 Pointers
+                includeIfStandard "code\common\tech\pointers\s06_gamestaffpointer.asm"                  ; Game Section 06 Game Staff Pointer
+                includeIfStandard "code\common\tech\pointers\s08_pointers.asm"                          ; Game Section 08 Pointers
+                includeIfStandard "code\common\tech\pointers\s10_pointers.asm"                          ; Game Section 10 Pointers
+                includeIfStandard "code\common\tech\pointers\s11_enemybattlespritespointer.asm"         ; Game Section 11 Enemy Battlesprites Pointer
+                includeIfStandard "code\common\tech\pointers\s12_pointers.asm"                          ; Game Section 12 Pointers
+                includeIfStandard "code\common\tech\pointers\s13_pointers.asm"                          ; Game Section 13 Pointers
+                includeIfStandard "code\common\tech\pointers\s14_pointers.asm"                          ; Game Section 14 Pointers
+                includeIfStandard "code\common\tech\pointers\s15_portraitspointer.asm"                  ; Game Section 15 Portraits Pointer
+                includeIfStandard "code\common\tech\pointers\s16_iconspointer.asm"                      ; Game Section 16 Icons Pointer
+                includeIfStandard "code\common\tech\pointers\s17_pointers.asm"                          ; Game Section 17 Pointers
                 
                 include "code\gameflow\start\systeminit.asm"    ; System init functions
                 include "code\gameflow\start\gamestart.asm"    ; Start function
@@ -87,14 +87,14 @@
                 includeIfVanilla "code\common\tech\sram\sramfunctions.asm"   ; SRAM functions
                 include "code\specialscreens\suspend\witchsuspend.asm"    ; Witch suspend function
                 include "code\specialscreens\witchend\witchendinit.asm"    ; Witch end function
-                include "code\gameflow\start\gameinit.asm"    ; Game init
+                includeIfVanilla "code\gameflow\start\gameinit.asm"    ; Game init
                 includeIfVanilla "data\maps\global\debugmodemaps.asm"    ; Debug mode maps
-                include "code\gameflow\start\gameintro.asm"    ; Game intro
-                include "code\specialscreens\witch\witchactions.asm"    ; Witch actions
+                includeIfVanilla "code\gameflow\start\gameintro.asm"    ; Game intro
+                includeIfVanilla "code\specialscreens\witch\witchstart.asm"    ; Start witch screen
                 include "code\gameflow\mainloop.asm"    ; Main loop
                 include "code\common\maps\egressinit.asm"    ; Egress map init function
                 include "code\gameflow\start\basetiles.asm"    ; Base tiles loading
-                include "code\gameflow\special\battletest.asm"    ; Battle test functions
+                includeIfVanilla "code\gameflow\special\battletest.asm"    ; Battle test functions
                 include "code\common\maps\mapinit_0.asm"    ; Map init functions
                 includeIfVanilla "data\maps\global\flagswitchedmaps.asm"    ; Flag-switched maps
                 include "code\common\maps\getbattle.asm"    ; GetNextBattleOnMap function
@@ -103,7 +103,7 @@
                 includeIfVanilla "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
                 alignIfVanilla
                 include "code\specialscreens\witch\witchfunctions.asm"    ; Witch functions
-                include "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
+                includeIfVanilla "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
                 includeIfVanilla "code\gameflow\start\regioncheck.asm"    ; Region check function
                 includeIfVanilla "code\specialscreens\witch\soundtest.asm"    ; Sound Test function missing in US version
                 includeIfStandard "code\common\tech\findspecialproperties-standard.asm"

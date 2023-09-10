@@ -7,8 +7,8 @@
 
 DebugModeBattleTest:
                 
-                move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
-                move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
+                move.b  #$FF,((DEBUG_MODE_TOGGLE-$1000000)).w
+                move.b  #$FF,((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 moveq   #ALLY_SARAH,d0
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CHESTER,d0
@@ -127,12 +127,8 @@ loc_7820:
                 clr.w   d1
                 move.b  d0,d1
                 mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
-            if (STANDARD_BUILD=1)
-                getPointer p_table_BattleMapCoordinates, a0
-            else
                 lea     table_BattleMapCoordinates(pc), a0
                 nop
-            endif
                 adda.w  d0,a0
                 move.b  (a0)+,d0
                 move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
@@ -150,12 +146,12 @@ loc_7820:
                 move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 jsr     j_MainMenuActions
-                jsr     j_CaravanActions
+                jsr     j_CaravanMenuActions
                 bra.w   byte_77DE       
 loc_7894:
                 
                 bsr.w   sub_78BC
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 tst.b   d0
                 bne.w   byte_77DE       
                 bpl.s   loc_78B6

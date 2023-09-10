@@ -11,11 +11,10 @@ SystemInit:
                 bsr.w   InitZ80         ; and load sound driver to Z80 RAM
             if (STANDARD_BUILD=1)
                 bsr.w   InitVdpData
-                bra.w   InitializeGame
             else
                 bsr.s   InitVdpData
-                jmp     (InitializeGame).l
             endif
+                jmp     (InitializeGame).l
 
     ; End of function SystemInit
 
