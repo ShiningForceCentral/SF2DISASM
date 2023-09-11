@@ -144,14 +144,14 @@ HandleAfterTurnEffects:
                 andi.w  #STATUSEFFECT_POISON,d1
                 beq.s   @UpdateStats
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                if (PERCENT_POISON_DAMAGE>=1)
-                    jsr     GetMaxHP
-                    mulu.w  #PERCENT_POISON_DAMAGE,d1
-                    divu.w  #100,d1
-                    andi.l  #$FFFF,d1
-                else
-                    moveq   #POISON_DAMAGE,d1 ; constant poison damage
-                endif
+            if (PERCENT_POISON_DAMAGE>=1)
+                jsr     GetMaxHP
+                mulu.w  #PERCENT_POISON_DAMAGE,d1
+                divu.w  #100,d1
+                andi.l  #$FFFF,d1
+            else
+                moveq   #POISON_DAMAGE,d1 ; constant poison damage
+            endif
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     307             ; "{CLEAR}{NAME} gets damaged{N}by {#} because of the poison.{D3}"
                 jsr     DecreaseCurrentHP
@@ -178,14 +178,15 @@ ApplyAfterTurnRecovery:
                 
                 movem.l d1-d6/a0,-(sp)
                 move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
-                moveq   #1,d2
                 clr.w   d5                  ; d5.w = recovery amount
                 jsr     GetEquippedRing
                 move.w  d1,d4               ; d4.w = copy of equipped ring
                 jsr     GetEquippedWeapon
                 move.w  d1,d3               ; d3.w = copy of equipped weapon
+                moveq   #1,d2               ; d2.w = properties bytesize per item
                 
                 ; Check HP recovery for weapon
+                tst.w   d1
                 bmi.s   @CheckRingHp        ; skip if no equipped weapon
                 lea     tbl_AfterTurnHpRecoveryForWeapons(pc), a0
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
