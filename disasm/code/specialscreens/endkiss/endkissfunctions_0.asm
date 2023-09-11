@@ -7,7 +7,7 @@
 
 EndKissPictureSequence:
                 
-                conditionalLongAddr movea.l, p_EndKissPicture, a0
+                getPointer p_EndKissPicture, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 lea     (FF6802_LOADING_SPACE).l,a0
@@ -23,7 +23,7 @@ loc_2C5A6:
                 dbf     d7,loc_2C5A6
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   (FADING_TIMER_BYTE).l
-                jsr     (sub_19C8).w    
+                jsr     (UpdateBasePalettesAndBackupCurrent).w    
                 move.w  #870,d0         ; wait for 14 seconds
                 jsr     (Sleep).w       
                 lea     (PALETTE_1_BASE).l,a0
@@ -34,7 +34,7 @@ loc_2C5CC:
                 dbf     d7,loc_2C5CC
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   (FADING_TIMER_BYTE).l
-                jsr     (sub_19C8).w    
+                jsr     (UpdateBasePalettesAndBackupCurrent).w    
                 rts
 
     ; End of function EndKissPictureSequence
@@ -70,7 +70,7 @@ loc_2C61C:
                 dbf     d7,loc_2C61C
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   (FADING_TIMER_BYTE).l
-                jsr     (sub_19C8).w    
+                jsr     (UpdateBasePalettesAndBackupCurrent).w    
                 movem.l (sp)+,d0-a3
                 rts
 

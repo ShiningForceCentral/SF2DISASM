@@ -11,6 +11,9 @@
 BattleLoop:
                 
                 clearSavedByte PLAYER_TYPE
+            if (MUSIC_RESUMING&RESUME_BATTLESCENE_MUSIC=1)
+                activateMusicResuming
+            endif
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 chkFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 beq.s   @Initialize
@@ -65,7 +68,7 @@ BattleLoop:
                 
                 bsr.w   UpdateAllEnemiesAi ; start of battle loop
                 jsr     j_ExecuteBattleRegionCutscene
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   @SpawnEnemies
                 
                 bsr.w   PrintAllActivatedDefCons
@@ -93,7 +96,7 @@ BattleLoop:
                 cmpi.b  #CODE_TERMINATOR_BYTE,d0
                 beq.s   @Start          
                 bsr.w   ExecuteIndividualTurn
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   @Continue
                 cmpi.b  #INPUT_UP|INPUT_B|INPUT_C|INPUT_A,((P1_INPUT-$1000000)).w
                 bne.s   @Continue
@@ -346,7 +349,7 @@ BattleLoop_Victory:
 BattleLoop_Defeat:
                 
                 bsr.w   UpdateBattleUnlockedFlag
-                clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+                clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_SAD_THEME_2
                 txt     363             ; "{LEADER} is exhausted.{W1}"
                 clsTxt
@@ -403,7 +406,7 @@ ExecuteBattleaction_AngelWing:
                 move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,d1
                 jsr     j_RemoveItemBySlot
                 bsr.w   HideBattlefieldWindows
-                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
                 andi.w  #ITEMENTRY_MASK_INDEX,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     275             ; "{NAME} used{N}{ITEM}!"
@@ -424,7 +427,7 @@ ExecuteBattleaction_Egress:
                 jsr     j_GetSpellCost
                 jsr     j_DecreaseCurrentMp
                 bsr.w   HideBattlefieldWindows
-                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
                 andi.w  #SPELLENTRY_MASK_INDEX,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.l  #1,((TEXT_NUMBER-$1000000)).w
@@ -468,7 +471,7 @@ UpdateBattleUnlockedFlag:
 
 HideBattlefieldWindows:
                 
-                jsr     j_HideLandEffectWindow
+                jsr     j_RemoveLandEffectWindow
                 jsr     j_RemoveMiniStatusWindow
                 clr.b   ((IS_TARGETING-$1000000)).w
                 jsr     j_RemoveMiniStatusWindow

@@ -9,18 +9,11 @@ InitializeGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
-            if (regionFreeRom=0)
                 bsr.w   CheckRegion
-            endif
-            if (STANDARD_BUILD&MEMORY_MAPPER=1)
-                tst.b   ((SRAM_CONTROL-$1000000)).w
-                ble.s   @Continue
-                jmp     MapperErrorHandling
-            endif
-@Continue:      jsr     j_NewGame
+                jsr     j_NewGame
                 jsr     j_DisplaySegaLogo
-                bne.w   loc_71EC
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                bne.w   AfterGameIntro
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.w   GameIntro
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   WaitForVInt
@@ -43,12 +36,12 @@ loc_7118:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
-                move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
+                move.b  #$FF,((DEBUG_MODE_TOGGLE-$1000000)).w
                 bsr.w   InitializeWindowProperties
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 moveq   #0,d0
                 moveq   #0,d1
-                moveq   #$38,d2 
+                moveq   #MAPS_MAX_DEBUG_INDEX,d2 
                 jsr     j_NumberPrompt
                 clr.w   d1
                 move.b  tbl_DebugModeAvailableMaps(pc,d0.w),d0

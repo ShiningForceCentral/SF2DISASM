@@ -53,7 +53,7 @@ return_4FB56:
 
 Map67_DefaultZoneEvent:
                 
-                move.w  #$15,d0
+                move.w  #BATTLE_DEVIL_TAIL,d0
                 jsr     CheckRandomBattle
                 rts
 

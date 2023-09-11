@@ -160,7 +160,7 @@ BlacksmithAction_FulfillOrder:
                 
                 module
                 movem.l d0-a1,-(sp)
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     207             ; "{CLEAR}I've been waiting!{N}This {ITEM} is for{N}you.  Isn't it great?!{W1}"
                 txt     166             ; "Who gets it?{W2}"
                 clsTxt
@@ -183,7 +183,7 @@ byte_21B58:
                 bcs.s   @CheckEquipmentType
                 
                 ; Inventory if full
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     208             ; "{NAME}'s hands are are{N}full.  May I pass it to{N}somebody else?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
@@ -204,7 +204,7 @@ byte_21B58:
                 bcs.s   @AddItem
                 
                 ; Not equippable
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
@@ -259,7 +259,7 @@ byte_21B58:
                 bne.w   @EquipNewItem
                 
                 ; Currently equipped weapon is cursed
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_21CD0      
 @HasRingEquipped:
@@ -276,7 +276,7 @@ byte_21B58:
                 bne.w   @EquipNewItem
                 
                 ; Currently equipped ring is cursed
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     176             ; "{NAME} can't remove{N}the cursed equipment.{W2}"
                 bra.s   byte_21CD0      
 @EquipNewItem:
@@ -292,7 +292,7 @@ byte_21B58:
                 ; Newly equipped item is cursed
                 sndCom  MUSIC_CURSED_ITEM
                 bsr.w   WaitForMusicResumeAndPlayerInput_Blacksmith
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     175             ; "Gee, {NAME} gets{N}cursed.{W2}"
                 bra.w   @Done
 byte_21CC8:
@@ -366,7 +366,7 @@ byte_21D1A:
                 bcc.w   @IsCustomerClassEligible
                 
                 ; Not promoted
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     211             ; "{NAME} has to be promoted{N}first.{W1}"
                 bra.s   byte_21D1A      
 @IsCustomerClassEligible:
@@ -376,12 +376,12 @@ byte_21D1A:
                 beq.w   @ConfirmOrder
                 
                 ; Not eligible
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     212             ; "Sorry, I can't create a{N}weapon for {NAME}.{W1}"
                 bra.s   byte_21D1A      
 @ConfirmOrder:
                 
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  #BLACKSMITH_ORDER_COST,((TEXT_NUMBER-$1000000)).w
                 txt     202             ; "For {NAME}!  It will cost{N}{#} gold coins.  OK?"
                 jsr     j_CreateGoldWindow

@@ -1,41 +1,67 @@
 
-; ASM FILE data\stats\allies\promotions-standard.asm :
+; ASM FILE data\stats\allies\classes\promotions-standard.asm :
 ; Promotions
 tbl_Promotions: 
 ; Syntax        promotionSection [CLASS_]enum,..[CLASS_]enum
                 
-                promotionSection &      ; Regular base classes
+                promotionSection &      ; 00: Regular base classes
                     SDMN, KNTE, WARR, MAGE, PRST, ACHR, BDMN, WFMN, RNGR, PHNK, THIF, TORT
                 
-                promotionSection &      ; Regular promoted classes
+                promotionSection &      ; 01: Regular promoted classes
                     HERO, PLDN, GLDT, WIZ, VICR, SNIP, BDBT, WFBR, BWNT, PHNX, NINJ, MNST
                 
-                promotionSection &      ; Vigor Ball base classes
-                    PRST
-                
-                promotionSection &      ; Vigor Ball promoted classes
-                    MMNK
-                
-                promotionSection &      ; Pegasus Wing base classes
+                promotionSection &      ; 02: Pegasus Wing base classes
                     KNTE
                 
-                promotionSection &      ; Pegasus Wing promoted classes
+                promotionSection &      ; 03: Pegasus Wing promoted classes
                     PGNT
                 
-                promotionSection &      ; Warrior Pride base classes
+                promotionSection &      ; 04: Warrior Pride base classes
                     WARR
                 
-                promotionSection &      ; Warrior Pride promoted classes
+                promotionSection &      ; 05: Warrior Pride promoted classes
                     BRN
                 
-                promotionSection &      ; Secret Book base classes
+                promotionSection &      ; 06: Secret Book base classes
                     MAGE
                 
-                promotionSection &      ; Secret Book promoted classes
+                promotionSection &      ; 07: Secret Book promoted classes
                     SORC
                 
-                promotionSection &      ; Silver Tank base classes
+                promotionSection &      ; 08: Vigor Ball base classes
+                    PRST
+                
+                promotionSection &      ; 09: Vigor Ball promoted classes
+                    MMNK
+                
+                promotionSection &      ; 10: Silver Tank base classes
                     ACHR
                 
-                promotionSection &      ; Silver Tank promoted classes
+                promotionSection &      ; 11: Silver Tank promoted classes
                     BRGN
+                
+                
+tbl_PromotionItems:
+                ; Item, base classes section, promoted classes section
+                dc.b ITEM_PEGASUS_WING, 2, 3
+                dc.b ITEM_WARRIORS_PRIDE, 4, 5
+                dc.b ITEM_SECRET_BOOK, 6, 7
+                dc.b ITEM_VIGOR_BALL, 8, 9
+                dc.b ITEM_SILVER_TANK, 10, 11
+                
+                tableEnd.b
+                
+                
+tbl_LoseAllSpellsClasses:
+                ; Class, replacement spell
+                dc.b CLASS_SORC, SPELL_DAO
+                
+                tableEnd.b
+                
+                
+tbl_DifferentWeaponTypeClasses:
+                ; Classes that have their weapon unequipped when promoting
+                dc.b CLASS_MMNK
+                dc.b CLASS_NINJ
+                
+                tableEnd.b

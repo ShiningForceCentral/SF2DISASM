@@ -165,11 +165,11 @@ j_RemovePortraitWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitializeMemberListScreen:
+j_InitializeMembersListScreen:
                 
-                jmp     InitializeMemberListScreen(pc)
+                jmp     InitializeMembersListScreen(pc)
 
-    ; End of function j_InitializeMemberListScreen
+    ; End of function j_InitializeMembersListScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -275,11 +275,11 @@ j_CreateLandEffectWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_HideLandEffectWindow:
+j_RemoveLandEffectWindow:
                 
-                jmp     HideLandEffectWindow(pc)
+                jmp     RemoveLandEffectWindow(pc)
 
-    ; End of function j_HideLandEffectWindow
+    ; End of function j_RemoveLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================

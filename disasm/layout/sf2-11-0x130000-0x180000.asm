@@ -4,7 +4,6 @@
 ; FREE SPACE : 429 bytes.
 
 
-                includeIfVanillaLayout "code\common\tech\pointers\s11_enemybattlespritespointer.asm"    ; Game Section 11 Enemy Battlesprites Pointer
-                includeIfVanillaRom "data\graphics\battles\battlesprites\enemies\entries.asm"   ; Enemy battlesprites
-                includeIfExpandedRom "data\graphics\mapsprites\entries.asm"                     ; Map sprites
-                alignIfVanillaLayout $180000
+                includeIfVanilla "code\common\tech\pointers\s11_enemybattlespritespointer.asm"    ; Game Section 11 Enemy Battlesprites Pointer
+                includeIfVanilla "data\graphics\battles\battlesprites\enemies\entries.asm"    ; Enemy battlesprites
+                alignIfVanilla $180000

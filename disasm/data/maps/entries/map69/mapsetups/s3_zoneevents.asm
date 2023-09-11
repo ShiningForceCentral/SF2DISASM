@@ -12,7 +12,7 @@ ms_map69_ZoneEvents:
 
 Map69_ZoneEvent0:
                 
-                move.w  #$11,d0
+                move.w  #BATTLE_TO_TAROS_SHRINE,d0
                 jsr     CheckRandomBattle
                 rts
 

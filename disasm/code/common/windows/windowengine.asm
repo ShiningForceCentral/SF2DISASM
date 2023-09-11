@@ -26,7 +26,7 @@ InitializeWindowProperties:
 @Continue:
                 
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                clr.w   ((TEXT_WINDOW_INDEX-$1000000)).w
+                clr.w   ((DIALOGUE_WINDOW_INDEX-$1000000)).w
                 clr.w   ((TIMER_WINDOW_INDEX-$1000000)).w
                 rts
 
@@ -146,7 +146,7 @@ loc_48B0:
 
 
 sub_48BE:
-                
+            if (VANILLA_BUILD=1)
                 move.l  a0,-(sp)
                 move.w  d0,-(sp)
                 bsr.w   GetWindowEntryAddress
@@ -154,6 +154,7 @@ sub_48BE:
                 move.w  (sp)+,d0
                 movea.l (sp)+,a0
                 rts
+            endif
 
     ; End of function sub_48BE
 
@@ -200,7 +201,7 @@ MoveWindowWithSfx:
 
 MoveWindow:
                 
-                tst.b   ((SPECIAL_TURBO_CHEAT-$1000000)).w
+                tst.b   ((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 beq.s   loc_4900
                 moveq   #1,d2
 loc_4900:

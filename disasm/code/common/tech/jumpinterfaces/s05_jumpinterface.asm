@@ -45,11 +45,11 @@ j_BlacksmithActions:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CaravanActions:
+j_CaravanMenuActions:
                 
                 jmp     CaravanMenuActions(pc)
 
-    ; End of function j_CaravanActions
+    ; End of function j_CaravanMenuActions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -236,8 +236,9 @@ sub_20058:
 
 
 j_EndGame:
-                
+            if (VANILLA_BUILD=1)
                 jmp     EndGame(pc)
+            endif
 
     ; End of function j_EndGame
 
@@ -246,8 +247,9 @@ j_EndGame:
 
 
 j_SuspendGame:
-                
+            if (VANILLA_BUILD=1)
                 jmp     SuspendGame(pc)
+            endif
 
     ; End of function j_SuspendGame
 

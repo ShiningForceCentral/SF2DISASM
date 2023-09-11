@@ -32,13 +32,13 @@ ReceiveMandatoryItem:
                 moveq   #1,d0
                 tst.w   d5
                 beq.w   @Done
-                move.w  d4,(TEXT_NAME_INDEX_1).l
+                move.w  d4,(DIALOGUE_NAME_INDEX_1).l
                 txt     214             ; "Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}"
                 clsTxt
                 movem.w d4,-(sp)
                 bsr.w   DiscardItem     
                 movem.w (sp)+,d1
-                move.w  d0,(TEXT_NAME_INDEX_1).l
+                move.w  d0,(DIALOGUE_NAME_INDEX_1).l
                 move.w  d2,(TEXT_NAME_INDEX_2).l
                 jsr     j_AddItem
                 move.w  d1,(TEXT_NAME_INDEX_3).l
@@ -53,7 +53,7 @@ ReceiveMandatoryItem:
                 
                 move.w  d4,d1
                 jsr     j_AddItem
-                move.w  d0,(TEXT_NAME_INDEX_1).l
+                move.w  d0,(DIALOGUE_NAME_INDEX_1).l
                 move.w  d1,(TEXT_NAME_INDEX_2).l
                 sndCom  MUSIC_ITEM
                 txt     213             ; "{NAME} received the{N}{ITEM}."
@@ -135,12 +135,12 @@ loc_4F5B6:
                 andi.b  #ITEMTYPE_UNSELLABLE,d1
                 cmpi.b  #0,d1
                 beq.s   loc_4F5F0
-                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     37              ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
                 bra.w   loc_4F6CA
 loc_4F5F0:
                 
-                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 clsTxt
@@ -162,7 +162,7 @@ loc_4F610:
                 move.w  itemEntry(a6),d1
                 jsr     j_IsItemCursed
                 bcc.w   loc_4F69C
-                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
                 clsTxt
                 bra.w   loc_4F6CA
@@ -179,7 +179,7 @@ loc_4F65C:
                 move.w  itemEntry(a6),d1
                 jsr     j_IsItemCursed
                 bcc.w   loc_4F69C
-                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
                 bra.w   loc_4F6CA
 loc_4F69C:
@@ -187,7 +187,7 @@ loc_4F69C:
                 move.w  character(a6),d0
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_RARE,d1
                 cmpi.b  #0,d1

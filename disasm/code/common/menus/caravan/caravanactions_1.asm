@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\caravan\caravanactions_1.asm :
+; ASM FILE code\common\menus\caravan\CaravanMenuActions_1.asm :
 ; 0x21FD2..0x228A2 : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,7 +75,7 @@ CaravanMenu_Join:
                 ; Pick joiner
                 move.w  #15,d1          ; "Who joins the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 move.w  d0,member(a6)
                 cmpi.w  #$FFFF,d0
                 beq.w   byte_220E8      ; Exit Join action
@@ -84,7 +84,7 @@ CaravanMenu_Join:
                 bne.s   @CheckBattleParty
                 
                 ; Joiner is dead
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     19              ; "{NAME} is dead.{N}Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
@@ -99,7 +99,7 @@ CaravanMenu_Join:
                 ; If force max size not reached, join immediately
                 move.w  member(a6),d0
                 jsr     j_JoinBattleParty
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #21,d1          ; "{NAME}, fight bravely in the{N}front.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @RestartJoin
@@ -107,7 +107,7 @@ CaravanMenu_Join:
                 
                 move.w  #23,d1          ; "Choose a relief.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_220DE      ; Close textbox and restart Join action
                 
@@ -116,7 +116,7 @@ CaravanMenu_Join:
                 beq.s   @LeaderCannotLeave
                 
                 ; 
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 jsr     j_LeaveBattleParty
                 move.w  member(a6),d0
                 jsr     j_JoinBattleParty
@@ -183,7 +183,7 @@ CaravanMenu_Purge:
                 ; Pick a quitter
                 move.w  #16,d1          ; "Who quits the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_22144      ; Exit Purge action
                 
@@ -191,7 +191,7 @@ CaravanMenu_Purge:
                 tst.w   d0
                 beq.s   @LeaderCannotLeave
                 jsr     j_LeaveBattleParty
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #22,d1          ; "{NAME}, why don't you{N}take a rest now?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @RestartPurge
@@ -348,7 +348,7 @@ byte_22210:
                 cmpi.w  #ITEM_RUNNING_RING,d1
                 beq.w   byte_222A4      
                 move.w  itemIndex(a6),d1
-                move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d1,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     96              ; "The {ITEM} is for{N}"
                 jsr     j_UpdateForce
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
@@ -361,7 +361,7 @@ byte_22210:
                 move.b  (a0)+,d0
                 jsr     j_IsWeaponOrRingEquippable
                 bcc.s   @NextMember
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     98              ; "{DICT}{NAME},"
                 addq.w  #1,d6
                 cmpi.w  #1,d6
@@ -469,7 +469,7 @@ CaravanDepotSubmenu_Deposit:
                 jsr     j_AddItemToCaravan
                 move.w  itemSlot(a6),d1
                 jsr     j_DropItemBySlot
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_ITEM_IS_NOW_IN_THE_STOREHOUSE,d1 
                                                         ; "{NAME}'s {ITEM}{N}is now in the storehouse.{W2}"
@@ -525,7 +525,7 @@ CaravanDepotSubmenu_Derive:
                 ; Pick recipient
                 moveq   #0,d1           ; all force members
                 bsr.w   PopulateGenericListWithMembersList
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_PASS_THE_ITEM_TO_WHOM,d1 ; "Pass the {ITEM}{N}to whom?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
@@ -554,7 +554,7 @@ CaravanDepotSubmenu_Derive:
             if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                 jsr     AddItem
             endif
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_CHARACTER_NOW_HAS_THE_ITEM,d1 
                                                         ; "{NAME} now has the{N}{ITEM}.{W2}"
@@ -580,7 +580,7 @@ CaravanDepotSubmenu_Derive:
                 jsr     j_AddItem
                 move.w  targetItemIndex(a6),d1
                 jsr     j_AddItemToCaravan
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  targetItemIndex(a6),((TEXT_NAME_INDEX_3-$1000000)).w
                 move.w  #MESSAGE_ITEMMENU_ITEM_IS_EXCHANGED_FOR,d1 ; "{ITEM} is exchanged{N}for {NAME}'s {ITEM}.{W2}"
@@ -645,7 +645,7 @@ CaravanDepotSubmenu_Drop:
                 beq.s   byte_2251E      
                 
                 ; Confirm discard
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
@@ -660,7 +660,7 @@ CaravanDepotSubmenu_Drop:
                 jsr     j_AddItemToDeals
 @Continue:
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #MESSAGE_ITEMMENU_DISCARDED_THE_ITEM,d1 ; "Discarded the {ITEM}.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @Goto_Restart
@@ -769,11 +769,11 @@ CaravanItemSubmenu_Use:
                 bne.s   @NotUsable
                 
                 ; Pick target
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #25,d1          ; "Use the {ITEM}{N}on whom?{D1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 cmpi.w  #$FFFF,d0
                 beq.s   byte_225E4      
                 
@@ -792,7 +792,7 @@ byte_225E4:
                 bra.s   @Restart
 @NotUsable:
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #26,d1          ; "{LEADER}! {D1}{N}What do you think you're{N}doing with the {ITEM}?!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
 @Restart:
@@ -852,7 +852,7 @@ CaravanItemSubmenu_Give:
                 bcs.w   @Restart_0
                 
                 ; Pick a recipient
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #29,d1          ; "Pass the {ITEM}{N}to whom?{D1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
@@ -873,7 +873,7 @@ CaravanItemSubmenu_Give:
                 jsr     j_RemoveItemBySlot
                 move.w  itemIndex(a6),d1
                 jsr     j_AddItem
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  #48,d1          ; "{NAME} now has the{N}{ITEM} in hand.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
@@ -892,7 +892,7 @@ CaravanItemSubmenu_Give:
                 move.w  member(a6),d0
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  #40,d1          ; "{ITEM} belongs{N}to {NAME} now.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
@@ -916,7 +916,7 @@ CaravanItemSubmenu_Give:
                 move.w  member(a6),d0
                 move.w  targetItemIndex(a6),d1
                 jsr     j_AddItem
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  targetItemIndex(a6),((TEXT_NAME_INDEX_3-$1000000)).w
                 move.w  #41,d1          ; "{ITEM} is exchanged{N}for {NAME}'s {ITEM}.{W2}"
@@ -1026,7 +1026,7 @@ CaravanItemSubmenu_Drop:
                 jsr     IsItemUnsellable
                 bcs.w   @Restart
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 tst.w   d0
@@ -1043,7 +1043,7 @@ CaravanItemSubmenu_Drop:
                 jsr     j_AddItemToDeals
 @Continue:
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #42,d1          ; "Discarded the {ITEM}.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @Goto_Restart

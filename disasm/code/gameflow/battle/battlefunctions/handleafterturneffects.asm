@@ -22,14 +22,14 @@ HandleAfterTurnEffects:
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.w   @Skip           ; skip everything if combatant is dead
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 
                 ; Check Stun
                 jsr     j_GetStatusEffects
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_STUN,d1
                 beq.s   @CheckSleep
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 andi.w  #STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d2
                 move.w  #CHANCE_TO_NO_LONGER_BE_STUNNED,d6 ; 1/2 chance to no longer be stunned
                 jsr     (GenerateRandomNumber).w
@@ -51,7 +51,7 @@ HandleAfterTurnEffects:
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_SLEEP,d1
                 beq.s   @CheckMuddle
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d2
                 
                 ; Randomly wake early
@@ -84,7 +84,7 @@ HandleAfterTurnEffects:
                 jsr     (GenerateRandomNumber).w
                 andi.w  #STATUSEFFECT_MUDDLE,d7
                 bne.s   @Muddled        
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     355             ; "{CLEAR}{NAME} is fine.{D3}"
                 clr.w   d1
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d2
@@ -107,7 +107,7 @@ HandleAfterTurnEffects:
                 jsr     (GenerateRandomNumber).w
                 andi.w  #STATUSEFFECT_SILENCE,d7
                 bne.s   @Silenced       
-                move.w  #SPELL_DISPEL,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  #SPELL_DISPEL,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  d0,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     351             ; "{CLEAR}{SPELL} expired.{N}{NAME} is no longer{N}silenced.{D3}"
                 clr.w   d1
@@ -128,7 +128,7 @@ HandleAfterTurnEffects:
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d2
                 subi.w  #STATUSEFFECTCOUNTER_SLOW,d1 ; decrement slow counter
                 bne.s   @UpdateSlow
-                move.w  #SPELL_SLOW,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  #SPELL_SLOW,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     349             ; "{CLEAR}{SPELL} expired.{N}Agility and defense{N}return to normal.{D3}"
 @UpdateSlow:
                 
@@ -143,7 +143,7 @@ HandleAfterTurnEffects:
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST,d2
                 subi.w  #STATUSEFFECTCOUNTER_ATTACK,d1 ; decrement attack counter
                 bne.s   @UpdateAttack
-                move.w  #SPELL_ATTACK,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  #SPELL_ATTACK,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     350             ; "{CLEAR}{SPELL} expired.{N}Attack returns to normal.{D3}"
 @UpdateAttack:
                 
@@ -158,7 +158,7 @@ HandleAfterTurnEffects:
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_ATTACK,d2
                 subi.w  #STATUSEFFECTCOUNTER_BOOST,d1 ; decrement boost counter
                 bne.s   @UpdateBoost
-                move.w  #SPELL_BOOST,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  #SPELL_BOOST,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     348             ; "{CLEAR}{SPELL} expired.{N}Agility and defense{N}return to normal.{D3}"
 @UpdateBoost:
                 
@@ -176,7 +176,7 @@ HandleAfterTurnEffects:
                 sub.w   d2,d1
                 ble.s   @ApplyMysteryStaffRecovery
                 ext.l   d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     356             ; "{CLEAR}{NAME} recovered{N}{#} hit points.{D3}"
 @ApplyMysteryStaffRecovery:
@@ -191,7 +191,7 @@ HandleAfterTurnEffects:
                 sub.w   d2,d1
                 ble.s   @ApplyLifeRingRecovery
                 ext.l   d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     357             ; "{CLEAR}{NAME} recovered{N}{#} magic points.{D3}"
 @ApplyLifeRingRecovery:
@@ -206,7 +206,7 @@ HandleAfterTurnEffects:
                 sub.w   d2,d1
                 ble.s   @ApplyPoisonDamage
                 ext.l   d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     356             ; "{CLEAR}{NAME} recovered{N}{#} hit points.{D3}"
 @ApplyPoisonDamage:
@@ -214,7 +214,7 @@ HandleAfterTurnEffects:
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_POISON,d1
                 beq.s   @UpdateStats
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 moveq   #POISON_DAMAGE,d1 ; constant poison damage
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     307             ; "{CLEAR}{NAME} gets damaged{N}by {#} because of the poison.{D3}"

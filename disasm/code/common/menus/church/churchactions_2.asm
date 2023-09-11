@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\church\churchactions_2.asm :
+; ASM FILE code\common\menus\church\ChurchMenuActions_2.asm :
 ; 0x21072..0x2127E : Church functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -137,7 +137,8 @@ FindPromotionSection:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A6 = church actions stack
+; In: a6 = church actions stack
+;     d1.w = replacement spell entry (if STANDARD_BUILD is enabled)
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
@@ -156,7 +157,7 @@ membersListLength = -10
 actionCost = -8
 currentGold = -4
 
-ReplaceSpellsWithSORCdefaults:
+ReplaceSpellsWithSorcDefaults:
                 
                 move.w  member(a6),d0
                 jsr     j_GetCombatantEntryAddress
@@ -167,12 +168,16 @@ ReplaceSpellsWithSORCdefaults:
                 setSavedByteWithPostIncrement #SPELL_NOTHING, a0
                 dbf     d7,@Loop
                 
+            if (STANDARD_BUILD=1)
+                jmp     LearnSpell
+            else
                 move.w  member(a6),d0
                 move.w  #SPELL_DAO,d1
                 jsr     j_LearnSpell
                 rts
+            endif
 
-    ; End of function ReplaceSpellsWithSORCdefaults
+    ; End of function ReplaceSpellsWithSorcDefaults
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -243,7 +248,7 @@ Church_CureStun:
                 andi.w  #STATUSEFFECT_STUN,d3
                 beq.w   @Next
                 addi.w  #1,stunnedMembersCount(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     132             ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
                 move.l  #CHURCHMENU_CURE_STUN_COST,actionCost(a6)
                 move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
@@ -277,7 +282,7 @@ Church_CureStun:
                 sndCom  MUSIC_CURE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     133             ; "{NAME} is no longer{N}paralyzed.{W2}"
 @Next:
                 

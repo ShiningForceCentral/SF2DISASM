@@ -2,18 +2,58 @@
 ; 0 = OFF, 1 = ON
 
 ; Fixes
-FIX_CARAVAN_FREE_REPAIR_EXPLOIT:    equ 1       ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reducded to 32 items unless SRAM is expanded.)
+FIX_CARAVAN_FREE_REPAIR_EXPLOIT:equ 1       ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reducded to 32 items unless SRAM is expanded.)
+
+
+; Music resuming
+MUSIC_RESUMING:                 equ 1       ; 
+RESUME_BATTLEFIELD_MUSIC_ONLY:  equ 1       ; Do not resume battlescene music.
+RESUME_MUSIC_AFTER_JOIN_JINGLE: equ 1       ; Resume background music after playing a "Joined the Force" jingle.
+
+resumeBattlesceneMusic = 1
+    if (RESUME_BATTLEFIELD_MUSIC_ONLY=1)
+resumeBattlesceneMusic = 0
+    endif
+RESUME_BATTLESCENE_MUSIC: equ resumeBattlesceneMusic
+
 
 ; ROM expansions
-EXPANDED_ROM:                       equ 1       ; Build a 4MB ROM and manage SRAM mapping.
-MEMORY_MAPPER:                      equ 0       ; Build a 6MB ROM and manage both ROM and SRAM mapping, supporting both SEGA and Extended SSF mappers.
-SSF_SYSTEM_ID:                      equ 0       ; Put "SEGA SSF" string in ROM header to activate memory mapper on Mega EverDrive cartridges.
-EXPANDED_SRAM:                      equ 1       ; Expand SRAM from 8KB to 32KB.
-RELOCATED_SAVED_DATA_TO_SRAM:       equ 0       ; Relocate currently loaded saved data from system RAM to cartridge SRAM.
-EXPANDED_FORCE_MEMBERS:             equ 1       ; Enable all 32 force members supported by the engine instead of 30.
-EXPANDED_ITEMS_AND_SPELLS:          equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of 4MB ROM with 32KB SRAM.
-OPTIMIZED_ROM_LAYOUT:               equ 1       ; Align ROM sections to next word boundary to consolidate free space.
-REGION_FREE_ROM:                    equ 1       ; Skip checking system region, omit including related function, and update ROM header.
+ROM_EXPANSION:                  equ 1       ; 0 = 2 MB ROM, 1 = 4 MB ROM (default), 2 = 6 MB ROM
+SRAM_EXPANSION:                 equ 1       ; Expand SRAM from 8KB to 32KB.
+RELOCATED_SAVED_DATA_TO_SRAM:   equ 0       ; Relocate currently loaded saved data from system RAM to cartridge SRAM.
+EXPANDED_FORCE_MEMBERS:         equ 1       ; Enable all 32 force members supported by the engine instead of 30.
+EXPANDED_ITEMS_AND_SPELLS:      equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of 4MB ROM with 32KB SRAM.
+
+
+; If standard build, and either EXPANDED_ROM or EXPANDED_ITEMS_AND_SPELLS are enabled, build an expanded ROM.
+expandedRom = 0
+    ;if (STANDARD_BUILD&(ROM_EXPANSION!EXPANDED_ITEMS_AND_SPELLS)=1)
+    if (STANDARD_BUILD=1)
+        if (ROM_EXPANSION>=1)
+expandedRom = 1
+        endif
+    endif
+EXPANDED_ROM: equ expandedRom
+
+
+; If building a >= 6MB ROM, implement ROM and SRAM mapping management, supporting both SEGA and Extended SSF mappers.
+memoryMapper = 0
+    if (ROM_EXPANSION>=2)
+memoryMapper = 1
+    endif
+MEMORY_MAPPER: equ memoryMapper
+SSF_SYSTEM_ID: equ 0    ; Put "SEGA SSF" string in ROM header to activate memory mapper on Mega EverDrive cartridges.
+
+
+; If standard build, and either EXPANDED_SRAM, RELOCATED_SAVED_DATA_TO_SRAM, or EXPANDED_ITEMS_AND_SPELLS
+; are enabled, expand SRAM.
+expandedSram = 0
+    if (STANDARD_BUILD&(SRAM_EXPANSION!RELOCATED_SAVED_DATA_TO_SRAM!EXPANDED_ITEMS_AND_SPELLS)=1)
+expandedSram = 1
+    endif
+EXPANDED_SRAM: equ expandedSram
+
+
 
 ; Assembler optimizations
 OPTIMIZED_PC_RELATIVE_ADDRESSING:   equ 1       ; Optimize to PC relative addressing.
@@ -25,31 +65,7 @@ OPTIMIZED_SUBS_TO_QUICK_FORM:       equ 1       ; Optimize subtract to quick for
 OPTIMIZED_MOVE_TO_QUICK_FORM:       equ 1       ; Optimize move to quick form.
 
 
-    ; If standard build, and either EXPANDED_ROM, MEMORY_MAPPER, or EXPANDED_ITEMS_AND_SPELLS
-    ; are enabled, build an expanded ROM.
-    if (STANDARD_BUILD&(EXPANDED_ROM!MEMORY_MAPPER!EXPANDED_ITEMS_AND_SPELLS)=1)
-expandedRom = 1
-    else
-expandedRom = 0
-    endif
-    
-    ; If standard build, and either EXPANDED_SRAM, RELOCATED_SAVED_DATA_TO_SRAM, or EXPANDED_ITEMS_AND_SPELLS
-    ; are enabled, expand SRAM.
-    if (STANDARD_BUILD&(EXPANDED_SRAM!RELOCATED_SAVED_DATA_TO_SRAM!EXPANDED_ITEMS_AND_SPELLS)=1)
-expandedSram = 1
-    else
-expandedSram = 0
-    endif
-    
-    ; If standard build, and either OPTIMIZED_ROM_LAYOUT or REGION_FREE_ROM are enabled,
-    ; build a region free ROM to make space for relocated pointers in a non-expanded ROM.
-    if (STANDARD_BUILD&(OPTIMIZED_ROM_LAYOUT!REGION_FREE_ROM)=1)
-regionFreeRom = 1
-    else
-regionFreeRom = 0
-    endif
-    
-    
+
     ; Apply optional assembler optimizations.
     if (STANDARD_BUILD&OPTIMIZED_PC_RELATIVE_ADDRESSING=1)
         opt op+     ; Switches to PC relative addressing from absolute long addressing if this is permissible in the current code context.

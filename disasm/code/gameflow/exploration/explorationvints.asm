@@ -22,7 +22,7 @@ ProcessPlayerAction:
                 rts
 loc_25B02:
                 
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w ; BUTTON C PUSHED
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w ; BUTTON C PUSHED
                 beq.s   loc_25B40       
                 btst    #INPUT_BIT_B,((P2_INPUT-$1000000)).w ; If Debug Mode and P1 C pushed while P2 B pushed, access Debug Flag Setter and then Chuch Actions
                 beq.s   loc_25B22
@@ -67,7 +67,7 @@ loc_25B64:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
                 dc.l VInt_UpdateViewData
-                jsr     j_CaravanActions
+                jsr     j_CaravanMenuActions
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l VInt_UpdateViewData

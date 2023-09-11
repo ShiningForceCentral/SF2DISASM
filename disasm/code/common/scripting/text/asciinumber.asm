@@ -53,8 +53,9 @@ tbl_PowersOfTen:dc.l 1000000000
 
 
 nullsub_150A:
-                
+            if (VANILLA_BUILD=1)
                 rts
+            endif
 
     ; End of function nullsub_150A
 
@@ -63,8 +64,9 @@ nullsub_150A:
 
 
 nullsub_150C:
-                
+            if (VANILLA_BUILD=1)
                 rts
+            endif
 
     ; End of function nullsub_150C
 

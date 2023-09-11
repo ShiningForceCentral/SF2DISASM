@@ -27,7 +27,7 @@ member = -2
                 move.l  a1,windowTilesAddress(a6)
                 
                 ; Copy window layout
-                conditionalLongAddr movea.l, p_MemberStatusWindowLayout, a0
+                getPointer p_MemberStatusWindowLayout, a0
                 move.w  #WINDOW_MEMBERSTATUS_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w
                 
@@ -265,7 +265,7 @@ WriteEnemyLvOrExp:
                 move.w  d5,d1
                 andi.l  #SPELLENTRY_MASK_INDEX,d1
                 addi.w  #ICON_SPELLS_START,d1
-                conditionalLongAddr movea.l, p_Icons, a0
+                getPointer p_Icons, a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
@@ -327,7 +327,7 @@ WriteEnemyLvOrExp:
 @LoadItemIcon:  ; Load icon pixel data to temp space
                 move.w  d5,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                conditionalLongAddr movea.l, p_Icons, a0
+                getPointer p_Icons, a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
@@ -339,7 +339,7 @@ WriteEnemyLvOrExp:
                 btst    #ITEMENTRY_BIT_BROKEN,d1
                 beq.s   @CleanIconCorners
                 
-                conditionalLongAddr movea.l, p_Icons, a0
+                getPointer p_Icons, a0
             if (EXPANDED_ITEMS_AND_SPELLS=1)
                 adda.l  #ICONTILES_OFFSET_CRACKS,a0
             else
@@ -465,7 +465,7 @@ WriteJewelIcons:
 ; =============== S U B R O U T I N E =======================================
 
 LoadJewelIconPixels:
-                conditionalLongAddr movea.l, p_Icons, a0
+                getPointer p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1

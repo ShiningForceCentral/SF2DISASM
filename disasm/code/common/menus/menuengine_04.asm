@@ -39,7 +39,7 @@ loc_11B9E:
                 move.w  #160,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d0
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 bsr.w   GetAllyPortrait 
             endif
                 bsr.w   LoadPortrait    
@@ -57,7 +57,7 @@ loc_11BC4:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_HandlePortraitBlinking
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 movem.l (sp)+,d0-a1
 return_11BE0:
                 
@@ -146,7 +146,7 @@ BuildMemberScreen:
                 bsr.w   LoadTileDataForMemberScreen
                 move.w  portraitIndex(a6),d0
                 blt.s   loc_11CA6
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 bsr.w   GetAllyPortrait 
             endif
                 bsr.w   LoadPortrait    
@@ -181,7 +181,7 @@ loc_11CE6:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_HandlePortraitBlinking
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11D1A
@@ -274,7 +274,7 @@ loc_11DDC:
                 move.w  (sp)+,d0
                 move.b  d0,(a1)
                 movea.l (sp)+,a1
-                clr.b   ((byte_FFB082-$1000000)).w
+                clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
                 dc.l VInt_HandlePortraitBlinking
@@ -424,7 +424,7 @@ LoadTileDataForMemberScreen:
                 bsr.w   WriteTilesFromNumber
 @CheckDebugMode:
                 
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   @CheckPortrait
                 
                 ; Write combatant index inside kills/defeat window in debug mode

@@ -1,10 +1,6 @@
 
 ; ASM FILE code\common\tech\interrupts\trap0_soundcommand.asm :
-; 0x45A..0x490 : Trap 0 - Sound Command
-                rts
-
-    ; End of function CopyByteToZ80
-
+; 0x45C..0x490 : Trap 0 - Sound Command
 
 ; =============== S U B R O U T I N E =======================================
 

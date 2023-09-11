@@ -8,37 +8,29 @@
                 include "code\common\scripting\map\mapfunctions.asm"    ; Map functions
                 include "data\maps\global\overworldmaps.asm"    ; Overworld maps
                 include "code\common\scripting\map\followersfunctions_1.asm"    ; Follower functions, part 1
-            if (STANDARD_BUILD=1)
-                include "data\scripting\map\mapswithnofollowers-standard.asm"
-                align
-            endif
+                includeIfStandard "data\scripting\map\mapswithnofollowers-standard.asm"
+                alignIfStandard
                 include "data\scripting\entity\followers.asm"    ; Follower declarations
                 include "code\common\scripting\map\followersfunctions_2.asm"    ; Follower functions, part 2
                 include "code\common\scripting\entity\entityfunctions_1.asm"    ; Entity functions
                 include "data\battles\global\battleneutralentities.asm"    ; Battle entities which are not force members or enemies
                 include "data\scripting\entity\eas_battleneutralentities.asm"    ; Entity actscripts for battle entities which are not force members or enemies
-            if (STANDARD_BUILD=1)
-                include "code\common\scripting\entity\getcombatantmapsprite-standard.asm"
-                include "data\stats\allies\allymapsprites-standard.asm"
-            else
-                include "code\common\scripting\entity\getallymapsprite.asm"    ; Get ally map sprite index function
-                include "data\stats\allies\allymapsprites.asm"    ; Ally map sprite indexes table
-                include "code\common\scripting\entity\getcombatantmapsprite.asm"    ; Get combatant map sprite index function
-            endif
+                includeIfStandard "code\common\scripting\entity\getcombatantmapsprite-standard.asm"
+                includeIfStandard "data\stats\allies\allymapsprites-standard.asm"
+                includeIfVanilla "code\common\scripting\entity\getallymapsprite.asm"    ; Get ally map sprite index function
+                includeIfVanilla "data\stats\allies\allymapsprites.asm"    ; Ally map sprite indexes table
+                includeIfVanilla "code\common\scripting\entity\getcombatantmapsprite.asm"    ; Get combatant map sprite index function
                 include "data\stats\enemies\enemymapsprites.asm"    ; Enemy map sprite indexes table
                 align
                 include "code\common\scripting\entity\entityfunctions_2.asm"    ; Entity functions
                 include "data\scripting\entity\eas_main.asm"    ; Main entity actscripts
                 include "code\common\scripting\entity\entityfunctions_3.asm"    ; Entity functions
                 include "code\common\scripting\map\vehiclefunctions.asm"    ; Mapscripts and functions for Caravan and Raft
-            if (STANDARD_BUILD=1)
-                include "code\common\scripting\entity\getentityportaitandspeechsfx-standard.asm"
-                include "data\stats\allies\allydialogproperties-standard.asm"
-                include "data\spritedialogproperties-standard.asm"
-            else
-                include "code\common\scripting\entity\getentityportaitandspeechsfx.asm"    ; Get entity portrait and speech sfx indexes function
-                include "data\spritedialogproperties.asm"    ; Sprite dialog properties
-            endif
+                includeIfStandard "code\common\scripting\entity\getentityportaitandspeechsfx-standard.asm"
+                includeIfStandard "data\stats\allies\allydialogproperties-standard.asm"
+                includeIfStandard "data\spritedialogproperties-standard.asm"
+                includeIfVanilla "code\common\scripting\entity\getentityportaitandspeechsfx.asm"    ; Get entity portrait and speech sfx indexes function
+                includeIfVanilla "data\spritedialogproperties.asm"    ; Sprite dialog properties
                 include "code\common\scripting\entity\entityfunctions_4.asm"    ; Entity functions
                 include "data\scripting\entity\eas_actions.asm"    ; Entity scripts for cutscene actions
                 include "code\common\scripting\map\mapscriptengine_1.asm"    ; Mapscript engine, part 1
@@ -78,7 +70,8 @@
                 include "data\scripting\map\cs_end.asm"    ; End cutscene
                 include "data\scripting\map\debugscripts.asm"    ; Debugging scripts
                 include "data\battles\entries\battlecutscenesstorage.asm"
+                includeIfStandard "code\common\scripting\map\bbcs_11_function.asm"
                 include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
                 include "data\maps\mapsetups.asm"    ; Map setups table
                 include "data\maps\mapsetupsstorage.asm"
-                alignIfVanillaLayout $64000
+                alignIfVanilla $64000

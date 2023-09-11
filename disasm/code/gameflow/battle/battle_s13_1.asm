@@ -11,7 +11,7 @@
 
 LoadEndCreditsFont:
                 
-                conditionalLongAddr movea.l, p_BaseTiles, a0
+                getPointer p_BaseTiles, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 lea     (byte_FF6C02).l,a0
@@ -782,7 +782,7 @@ GetLaserFacing:
                 
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d3
-@CheckTile_Loop:
+@CheckSpace_Loop:
                 
                 jsr     j_SetMovableSpace
                 jsr     j_GetCombatantOccupyingSpace
@@ -827,7 +827,7 @@ GetLaserFacing:
                 bra.w   @Done
 @NextSpace:
                 
-                bra.s   @CheckTile_Loop
+                bra.s   @CheckSpace_Loop
 @Done:
                 
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0

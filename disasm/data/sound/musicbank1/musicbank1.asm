@@ -2,11 +2,10 @@
    cpu z80
    listing off
    phase	0
-   include "..\musicmacros.asm"
-   include "..\musicenums.asm"
+   include "..\macros.asm"
+   include "..\enums.asm"
    org 08000h
 
-		; File Name   : D:\SEGADEV\GITHUB\SF2DISASM\disasm\data\sound\musicbank1\musicbank1.bin
 		dw Music_33
 		dw Music_34
 		dw Music_35

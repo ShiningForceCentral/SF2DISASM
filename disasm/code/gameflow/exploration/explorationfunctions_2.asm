@@ -8,7 +8,9 @@
 ExplorationLoop:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
+            if (MUSIC_RESUMING=1)
                 activateMusicResuming
+            endif
                 subi.w  #20000,((word_FFB196-$1000000)).w
                 bge.s   loc_257D0
                 clr.w   ((word_FFB196-$1000000)).w

@@ -17,7 +17,7 @@ loc_47140:
                 
                 btst    #INPUT_BIT_START,((P2_INPUT-$1000000)).w ; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
                 beq.s   loc_47156
-                tst.b   (DEBUG_MODE_ACTIVATED).l
+                tst.b   (DEBUG_MODE_TOGGLE).l
                 beq.s   loc_47156
                 move.b  #$FF,((SKIP_CUTSCENE_TEXT-$1000000)).w
 loc_47156:
@@ -136,7 +136,7 @@ rjt_cutsceneScriptCommands:
                 dc.w csc_doNothing-rjt_cutsceneScriptCommands
 loc_47234:
                 
-                tst.w   ((TEXT_WINDOW_INDEX-$1000000)).w
+                tst.w   ((DIALOGUE_WINDOW_INDEX-$1000000)).w
                 beq.s   loc_4723E
                 jsr     (WaitForViewScrollEnd).w
 loc_4723E:
@@ -219,7 +219,7 @@ loc_472B8:
 loc_472BE:
                 
                 adda.w  #2,a6
-                move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  (a6)+,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
                 jsr     (WaitForViewScrollEnd).w
@@ -291,7 +291,7 @@ loc_4734C:
 loc_47352:
                 
                 adda.w  #2,a6
-                move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  (a6)+,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
                 jsr     (WaitForViewScrollEnd).w
@@ -360,6 +360,9 @@ csc07_warp:
 csc08_joinForce:
                 
                 move.w  #0,((SPEECH_SFX-$1000000)).w
+            if (MUSIC_RESUMING&RESUME_MUSIC_AFTER_JOIN_JINGLE=1)
+                activateMusicResuming
+            endif
                 jsr     (WaitForViewScrollEnd).w
                 move.w  (a6)+,d0
                 bclr    #15,d0
@@ -383,13 +386,16 @@ loc_473D4:
                 
                 jsr     j_JoinForce
                 jsr     j_GetClass
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     446             ; "{NAME} the {CLASS} {N}has joined the force."
 loc_473EC:
                 
                 jsr     j_FadeOut_WaitForP1Input
                 clsTxt
+            if (MUSIC_RESUMING&RESUME_MUSIC_AFTER_JOIN_JINGLE=1)
+                deactivateMusicResuming
+            endif
                 moveq   #10,d0
                 jsr     (Sleep).w       
                 rts
