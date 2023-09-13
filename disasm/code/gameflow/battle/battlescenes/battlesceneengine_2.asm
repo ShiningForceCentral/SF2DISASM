@@ -55,7 +55,7 @@ FadeInFromBlackIntoBattlescene:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 rts
 
     ; End of function FadeInFromBlackIntoBattlescene
@@ -70,7 +70,7 @@ FadeOutToBlackForBattlescene:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 rts
 
     ; End of function FadeOutToBlackForBattlescene
@@ -215,7 +215,7 @@ loc_19FC8:
                 move.b  d0,(a2)+
                 addq.w  #8,a0
                 dbf     d1,loc_19FC8
-				
+                
                 movem.l (sp)+,d0-d3/a1-a2
                 add.w   d1,d0
                 rts
@@ -236,7 +236,7 @@ loc_1A00E:
                 nop
                 bsr.w   sub_19F5E
                 dbf     d7,loc_1A00E
-				
+                
                 jmp     (sub_1942).w    
 
     ; End of function sub_1A00A
@@ -670,8 +670,8 @@ Tint_Apollo:
                 move.l  (a1)+,(a0)+     ; restore palette 1
                 dbf     d0,@Palette1_Loop
                 
-                lea     $20(a0),a0
-                lea     $20(a1),a1
+                lea     NEXT_PALETTE(a0),a0
+                lea     NEXT_PALETTE(a1),a1
                 moveq   #7,d0
 @Palette3_Loop:
                 
@@ -735,10 +735,10 @@ sub_1A270:
 
 ; =============== S U B R O U T I N E =======================================
 
-;     In: D0 = color to flash
+; In: d0.w = color to flash
 
 
-ExecSpellAnimationFlash:
+ExecuteSpellcastFlashEffect:
                 
                 move.w  d0,d6
                 moveq   #3,d7
@@ -758,7 +758,7 @@ ExecSpellAnimationFlash:
                 
                 rts
 
-    ; End of function ExecSpellAnimationFlash
+    ; End of function ExecuteSpellcastFlashEffect
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -830,7 +830,7 @@ LoadInvocationSpell:
                 movem.l d0/a6,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #INVOCATION_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,((BATTLESCENE_ALLY_COPY-$1000000)).w
                 lea     ((word_FFB562-$1000000)).w,a6
                 move.w  #$FFFF,(a6)
@@ -839,7 +839,7 @@ LoadInvocationSpell:
                 movem.l (sp)+,d0/a6
                 jsr     (WaitForVInt).w
                 clr.w   d1
-                bsr.w   LoadInvocationSpellTilesToVram
+                bsr.w   LoadInvocationSpriteFrameToVram
                 moveq   #8,d0
                 jsr     (Sleep).w       
                 bchg    #6,((byte_FFB56E-$1000000)).w
@@ -940,7 +940,7 @@ loc_1A418:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #1,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #1,((FADING_PALETTE_BITFIELD-$1000000)).w
 loc_1A43E:
                 
                 tst.b   ((FADING_SETTING-$1000000)).w
@@ -996,7 +996,7 @@ sa01_Blaze:
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #BLAZE_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellAnimationProperties
                 moveq   #SPELLGRAPHICS_BLAZE,d0
                 bsr.w   LoadSpellGraphics
@@ -1295,7 +1295,7 @@ sa02_Freeze:
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #FREEZE_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellAnimationProperties
                 moveq   #SPELLGRAPHICS_FREEZE,d0
                 bsr.w   LoadSpellGraphics
@@ -1444,7 +1444,7 @@ sa03_Desoul:
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #DESOUL_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellAnimationProperties
                 bsr.w   sub_1A00A
                 moveq   #SPELLGRAPHICS_DESOUL,d0
@@ -1567,7 +1567,7 @@ sa04_HealingFairy:
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #HEALING_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellAnimationProperties
                 moveq   #SPELLGRAPHICS_HEALING,d0
                 bsr.w   LoadSpellGraphics
@@ -1692,7 +1692,7 @@ sa05_Blast:
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #BLAST_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellAnimationProperties
                 moveq   #SPELLGRAPHICS_BLAST,d0
                 bsr.w   LoadSpellGraphics
@@ -1801,7 +1801,7 @@ sa06_Detox:
                  
                 sndCom  SFX_SPELL_CAST
                 move.w  #$A8A,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellAnimationProperties
                 moveq   #SPELLGRAPHICS_DETOX,d0
                 bsr.w   LoadSpellGraphics
@@ -1837,7 +1837,7 @@ sa07_Bolt:
                 move.w  d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #BOLT_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellAnimationProperties
                 moveq   #SPELLGRAPHICS_BOLT,d0
                 bsr.w   LoadSpellGraphics
@@ -2010,7 +2010,7 @@ loc_1ABAC:
                 movem.w d0-d1,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #BUFF_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellAnimationProperties
                 movem.w (sp)+,d0-d1
                 move.w  d0,((byte_FFB532-$1000000)).w
@@ -2066,7 +2066,7 @@ loc_1AC08:
                 move.l  a0,-(sp)
                 sndCom  SFX_SPELL_CAST
                 move.w  #DEBUFF_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellAnimationProperties
                 moveq   #SPELLGRAPHICS_DEBUFF,d0
                 bsr.w   LoadSpellGraphics
@@ -2148,7 +2148,7 @@ sa0A_Absorb:
                  
                 sndCom  SFX_WARP
                 move.w  #ABSORB_FLASH_COLOR,d0
-                bra.w   ExecSpellAnimationFlash
+                bra.w   ExecuteSpellcastFlashEffect
 
     ; End of function sa0A_Absorb
 
@@ -2164,7 +2164,7 @@ sa0B_DemonBreath:
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a1
-                cmpi.w  #ENEMYBATTLESPRITE_ZEON,((ENEMY_BATTLE_SPRITE-$1000000)).w 
+                cmpi.w  #ENEMYBATTLESPRITE_ZEON,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
                                                         ; HARDCODED Zeon enemy battle sprite
                 bne.s   loc_1AD0C
                 move.l  #$B000EA,(a1)
@@ -2646,12 +2646,12 @@ loc_1B026:
 byte_1B036:
                 
                 sndCom  SFX_INTRO_LIGHTNING
-                moveq   #$14,d0
+                moveq   #20,d0
                 jsr     (Sleep).w       
 loc_1B040:
                 
                 clr.w   d0
-                bsr.w   LoadInvocationSpellTilesToVram
+                bsr.w   LoadInvocationSpriteFrameToVram
                 bchg    #6,((byte_FFB56E-$1000000)).w
                 bsr.w   sub_1A3E8
                 movem.w (sp)+,d1-d2
@@ -2715,16 +2715,16 @@ loc_1B0EE:
                 movea.l (sp)+,a0
                 jsr     (WaitForVInt).w
                 dbf     d0,loc_1B0EA
-                moveq   #3,d0
+                moveq   #SUMMON_APOLLO,d0
                 moveq   #1,d1
-                bsr.w   LoadInvocationSpellTilesToVram
-                moveq   #$1E,d0
+                bsr.w   LoadInvocationSpriteFrameToVram
+                moveq   #30,d0
                 jsr     (Sleep).w       
                 bchg    #6,((byte_FFB56E-$1000000)).w
                 bsr.w   sub_1A3E8
-                moveq   #3,d0
+                moveq   #SUMMON_APOLLO,d0
                 moveq   #2,d1
-                bsr.w   LoadInvocationSpellTilesToVram
+                bsr.w   LoadInvocationSpriteFrameToVram
                 moveq   #SPELLGRAPHICS_APOLLO,d0
                 bsr.w   LoadSpellGraphicsForInvocation
                 lea     (byte_FF8B04).l,a0
@@ -2825,9 +2825,9 @@ sa13_Neptun:
                 bclr    #6,((byte_FFB56E-$1000000)).w
                 moveq   #SUMMON_NEPTUNE,d0
                 bsr.w   LoadInvocationSpell
-                moveq   #2,d0
+                moveq   #SUMMON_NEPTUNE,d0
                 moveq   #1,d1
-                bsr.w   LoadInvocationSpellTilesToVram
+                bsr.w   LoadInvocationSpriteFrameToVram
                 sndCom  SFX_PRISM_LASER_FIRING
                 bset    #6,((byte_FFB56E-$1000000)).w
                 moveq   #$14,d1
@@ -2862,7 +2862,7 @@ loc_1B268:
                 moveq   #$26,d0 
                 lea     byte_1B364(pc), a0
                 bsr.w   sub_19F5E
-                moveq   #$19,d0
+                moveq   #25,d0
                 jsr     (Sleep).w       
                 bclr    #6,((byte_FFB56E-$1000000)).w
                 bsr.w   sub_1A3E8
@@ -2914,7 +2914,7 @@ loc_1B314:
                 
                 move.b  #1,(a0)+
                 dbf     d0,loc_1B314
-                moveq   #$14,d0
+                moveq   #20,d0
                 jsr     (Sleep).w       
                 move.l  #byte_1B36C,((BATTLESCENE_BACKGROUND_MODIFICATION-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
@@ -2974,9 +2974,9 @@ sa14_Atlas:
                 bclr    #6,((byte_FFB56E-$1000000)).w
                 moveq   #SUMMON_ATLAS,d0
                 bsr.w   LoadInvocationSpell
-                moveq   #1,d0
+                moveq   #SUMMON_ATLAS,d0
                 moveq   #1,d1
-                bsr.w   LoadInvocationSpellTilesToVram
+                bsr.w   LoadInvocationSpriteFrameToVram
                 lea     ((byte_FFB532-$1000000)).w,a0
                 move.w  #$900,(a0)+
                 move.w  #$A00,(a0)+
@@ -3018,7 +3018,7 @@ sa15_PrismLaser:
                 bsr.w   LoadSpellGraphics
                 moveq   #1,d0
                 jsr     sub_1A2F6(pc)
-                cmpi.w  #ENEMYBATTLESPRITE_PRISM_FLOWER,((ENEMY_BATTLE_SPRITE-$1000000)).w 
+                cmpi.w  #ENEMYBATTLESPRITE_PRISM_FLOWER,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
                                                         ; HARDCODED Prism Flower enemy battle sprite
                 bne.s   loc_1B426
                 move.w  #$28,4(a0) 
@@ -3125,7 +3125,7 @@ loc_1B508:
                 
                 bclr    #3,((byte_FFB56E-$1000000)).w
                 move.w  #CUTOFF_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 move.l  #byte_1B53A,((BATTLESCENE_BATTLESPRITE_MODIFICATION-$1000000)).w
                 move.w  #1,((word_FFB3CA-$1000000)).w
                 move.b  #$A,((byte_FFB583-$1000000)).w
@@ -3146,7 +3146,7 @@ loc_1B53E:
                 
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   @NotMirrored_Anim
-                cmpi.w  #ENEMYBATTLESPRITE_ZEON,((ENEMY_BATTLE_SPRITE-$1000000)).w 
+                cmpi.w  #ENEMYBATTLESPRITE_ZEON,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
                                                         ; HARDCODED Zeon enemy battle sprite
                 bne.s   @Continue
                 rts
@@ -3246,7 +3246,7 @@ sa1A_AttackSpell:
                  
                 sndCom  SFX_SPELL_CAST
                 move.w  #ATTACK_SPELL_FLASH_COLOR,d0
-                bsr.w   ExecSpellAnimationFlash
+                bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellAnimationProperties
                 moveq   #SPELLGRAPHICS_DETOX,d0
                 bsr.w   LoadSpellGraphics
@@ -3407,8 +3407,8 @@ byte_1B794:     dc.b 1
                 dc.b $20
                 dc.b 5
                 dc.b $21
-				
-                dc.b 0		; mirror
+                
+                dc.b 0        ; mirror
                 dc.b $D2
                 dc.b 0
                 dc.b $CC
@@ -3519,7 +3519,7 @@ sub_1B82A:
                 cmpi.b  #SPELLANIMATION_ATLAS,((CURRENT_SPELLANIMATION-$1000000)).w
                 bhi.s   loc_1B858
                 moveq   #$10,d0
-                jsr     (InitSprites).w 
+                jsr     (InitializeSprites).w
 loc_1B858:
                 
                 clr.w   ((byte_FFB404-$1000000)).w
@@ -6186,11 +6186,11 @@ loc_1CEAA:
                 
                 tst.b   8(a5)
                 bne.s   loc_1CEB8
-                movea.l (p_BoltAnimData_A).l,a0
+                conditionalLongAddr movea.l, p_BoltAnimData_A, a0
                 bra.s   loc_1CEBE
 loc_1CEB8:
                 
-                movea.l (p_BoltAnimData_B).l,a0
+                conditionalLongAddr movea.l, p_BoltAnimData_B, a0
 loc_1CEBE:
                 
                 lsl.w   #3,d1
@@ -6692,7 +6692,7 @@ loc_1D2F6:
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.w   loc_1D33C
                 addq.w  #8,a0
-                move.w  ((ENEMY_BATTLE_SPRITE-$1000000)).w,d2
+                move.w  ((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w,d2
                 cmpi.w  #$E,d2
                 beq.w   loc_1D33C
                 addq.w  #8,a0
@@ -7654,7 +7654,7 @@ loc_1DB2E:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.w  #1,(a4)
                 bsr.w   sub_1B8FE
 loc_1DB62:
@@ -7668,7 +7668,7 @@ loc_1DB62:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
 loc_1DB8E:
                 
                 cmpi.w  #$36,(a5) 
@@ -8696,7 +8696,7 @@ loc_1E33C:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
 loc_1E36C:
                 
                 move.w  #$D8,d3 
@@ -8710,7 +8710,7 @@ loc_1E36C:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 bra.w   return_1E452
 loc_1E3A8:
                 
@@ -9952,8 +9952,8 @@ VInt_UpdateBattlesceneGraphics:
                 
                 addq.w  #1,((BATTLESCENE_FRAME_COUNTER-$1000000)).w
                 clr.b   ((byte_FFB56D-$1000000)).w
-                bsr.w   UpdateEnemyBattleSprite
-                bsr.w   UpdateAllyBattleSprite
+                bsr.w   UpdateEnemyBattlesprite
+                bsr.w   UpdateAllyBattlesprite
                 bsr.w   UpdateStatusEffectAnimations
                 bsr.w   sub_1F282
                 bsr.w   UpdateSpellAnimation
@@ -9967,47 +9967,47 @@ VInt_UpdateBattlesceneGraphics:
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateEnemyBattleSprite:
+UpdateEnemyBattlesprite:
                 
                 btst    #3,((byte_FFB56E-$1000000)).w
                 beq.s   @Return
                 btst    #5,((byte_FFB56E-$1000000)).w
                 beq.s   @Return
-                subq.w  #1,((ENEMY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
+                subq.w  #1,((BATTLESCENE_ENEMYBATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
                 bne.s   @Return
                 bsr.w   sub_1EF2E
-                move.w  ((ENEMY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w,((ENEMY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
+                move.w  ((BATTLESCENE_ENEMYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w,((BATTLESCENE_ENEMYBATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
 @Return:
                 
                 rts
 
-    ; End of function UpdateEnemyBattleSprite
+    ; End of function UpdateEnemyBattlesprite
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateAllyBattleSprite:
+UpdateAllyBattlesprite:
                 
                 btst    #1,((byte_FFB56E-$1000000)).w
                 beq.s   @Return
                 btst    #4,((byte_FFB56E-$1000000)).w
                 beq.s   @Return
-                subq.w  #1,((ALLY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
+                subq.w  #1,((BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
                 bne.s   @Return
-                bsr.s   UpdateWeaponSprite
-                move.w  ((ALLY_BATTLESPRITE_ANIMATION_SPEED-$1000000)).w,((ALLY_BATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
+                bsr.s   UpdateWeaponsprite
+                move.w  ((BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w,((BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
 @Return:
                 
                 rts
 
-    ; End of function UpdateAllyBattleSprite
+    ; End of function UpdateAllyBattlesprite
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateWeaponSprite:
+UpdateWeaponsprite:
                 
                 bchg    #0,((byte_FFB56E-$1000000)).w
                 beq.s   loc_1EEAA
@@ -10037,7 +10037,7 @@ loc_1EECC:
                 addq.w  #8,a0
                 addq.w  #8,a1
                 dbf     d7,loc_1EECC
-                cmpi.w  #$FFFF,((ALLY_WEAPON_SPRITE-$1000000)).w
+                cmpi.w  #$FFFF,((BATTLESCENE_WEAPONSPRITE-$1000000)).w
                 beq.w   return_1EF2C
                 ext.w   d3
                 ext.w   d4
@@ -10072,7 +10072,7 @@ return_1EF2C:
                 
                 rts
 
-    ; End of function UpdateWeaponSprite
+    ; End of function UpdateWeaponsprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10382,7 +10382,7 @@ loc_1F19E:
                 addq.w  #6,a0
                 add.w   d0,(a0)+
                 dbf     d2,loc_1F19E
-                cmpi.w  #$FFFF,((ALLY_WEAPON_SPRITE-$1000000)).w
+                cmpi.w  #$FFFF,((BATTLESCENE_WEAPONSPRITE-$1000000)).w
                 beq.s   loc_1F1C2
                 lea     ((SPRITE_BATTLESCENE_WEAPON-$1000000)).w,a0
                 moveq   #3,d2
@@ -10455,7 +10455,7 @@ sub_1F214:
                 
                 movem.l d0/a0,-(sp)
                 move.w  d6,((word_FFB3EC-$1000000)).w
-                cmpi.w  #ENEMYBATTLESPRITE_ZEON,((ENEMY_BATTLE_SPRITE-$1000000)).w 
+                cmpi.w  #ENEMYBATTLESPRITE_ZEON,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
                                                         ; HARDCODED Zeon enemy battle sprite
                 bne.s   loc_1F236
                 btst    #2,((byte_FFB56F-$1000000)).w
@@ -10490,7 +10490,7 @@ sub_1F254:
                 
                 movem.l d0/a0,-(sp)
                 move.w  d6,((word_FFB3F0-$1000000)).w
-                cmpi.w  #ENEMYBATTLESPRITE_ZEON,((ENEMY_BATTLE_SPRITE-$1000000)).w 
+                cmpi.w  #ENEMYBATTLESPRITE_ZEON,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
                 bne.s   loc_1F266
                 subq.w  #8,d6
 loc_1F266:
@@ -10929,8 +10929,8 @@ spr_BattlesceneAlly:
                 vdpSprite 192, V4|H4|0, 352|PRIORITY, 328
                 vdpSprite 224, V4|H4|0, 368|PRIORITY, 328
                 vdpSprite 256, V4|H4|0, 384|PRIORITY, 328
-				
-				; Mirrored Battlesprite
+                
+                ; Mirrored Battlesprite
                 vdpSprite 192, V4|H4|0, 256|MIRROR|PRIORITY, 328
                 vdpSprite 224, V4|H4|0, 272|MIRROR|PRIORITY, 328
                 vdpSprite 256, V4|H4|0, 288|MIRROR|PRIORITY, 328
@@ -10942,25 +10942,25 @@ spr_BattlesceneAlly:
                 vdpSprite 256, V4|H4|0, 384|MIRROR|PRIORITY, 264
                 
 spr_BattlesceneWeapon:
-				; Weapon frame 0
+                ; Weapon frame 0
                 vdpSprite 192, V4|H4|0, 1728|PRIORITY, 264
                 vdpSprite 224, V4|H4|0, 1744|PRIORITY, 264
                 vdpSprite 192, V4|H4|0, 1760|PRIORITY, 296
                 vdpSprite 224, V4|H4|0, 1776|PRIORITY, 296
-				
-				; Weapon frame 1
+                
+                ; Weapon frame 1
                 vdpSprite 192, V4|H4|0, 1728|MIRROR|PRIORITY, 296
                 vdpSprite 224, V4|H4|0, 1744|MIRROR|PRIORITY, 296
                 vdpSprite 192, V4|H4|0, 1760|MIRROR|PRIORITY, 264
                 vdpSprite 224, V4|H4|0, 1776|MIRROR|PRIORITY, 264
-				
-				; Weapon frame 2
+                
+                ; Weapon frame 2
                 vdpSprite 224, V4|H4|0, 1728|FLIP|PRIORITY, 264
                 vdpSprite 192, V4|H4|0, 1744|FLIP|PRIORITY, 264
                 vdpSprite 224, V4|H4|0, 1760|FLIP|PRIORITY, 296
                 vdpSprite 192, V4|H4|0, 1776|FLIP|PRIORITY, 296
-				
-				; Weapon frame 3
+                
+                ; Weapon frame 3
                 vdpSprite 224, V4|H4|0, 1728|MIRROR|FLIP|PRIORITY, 296
                 vdpSprite 192, V4|H4|0, 1744|MIRROR|FLIP|PRIORITY, 296
                 vdpSprite 224, V4|H4|0, 1760|MIRROR|FLIP|PRIORITY, 264
@@ -10970,8 +10970,8 @@ spr_BattlesceneGround:
                 vdpSprite 268, V4|H4|0, 1920|PALETTE3, 264
                 vdpSprite 268, V4|H4|0, 1936|PALETTE3, 296
                 vdpSprite 268, V4|H4|0, 1952|PALETTE3, 328
-				
-				; Mirrored ground plate
+                
+                ; Mirrored ground plate
                 vdpSprite 268, V4|H4|0, 1920|MIRROR|PALETTE3, 328
                 vdpSprite 268, V4|H4|0, 1936|MIRROR|PALETTE3, 296
                 vdpSprite 268, V4|H4|0, 1952|MIRROR|PALETTE3, 264

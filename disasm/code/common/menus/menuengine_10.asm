@@ -5,21 +5,21 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-ShowPortraitName:
+DisplayNameUnderPortrait:
                 
                 movem.l d0-a1,-(sp)
-                tst.w   (word_FFB08C).l
+                tst.w   (ALLY_NAME_WINDOW_INDEX).l
                 bne.s   @Done
                 movem.w d0,-(sp)
                 move.w  #$A03,d0
                 move.w  #$F60B,d1
                 jsr     (CreateWindow).l
                 addq.w  #1,d0
-                move.w  d0,(word_FFB08C).l
+                move.w  d0,(ALLY_NAME_WINDOW_INDEX).l
                 move.w  #$A03,d0
                 bsr.w   sub_1018E       
                 movem.w (sp)+,d0
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 move.w  d1,d2
                 jsr     j_GetCombatantName
                 move.w  d7,d0
@@ -39,7 +39,7 @@ ShowPortraitName:
                 bsr.w   WriteTilesFromAsciiWithRegularFont ; living member
 @DisplayName:
                 
-                move.w  (word_FFB08C).l,d0
+                move.w  (ALLY_NAME_WINDOW_INDEX).l,d0
                 subq.w  #1,d0
                 move.w  #$10B,d1
                 moveq   #4,d2
@@ -50,28 +50,31 @@ ShowPortraitName:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function ShowPortraitName
+    ; End of function DisplayNameUnderPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Move window offscreen, then clear it from memory.
 
-HidePortraitName:
+
+CloseNameUnderPortraitWindow:
                 
                 movem.l d0-d1/a0-a1,-(sp)
-                move.w  (word_FFB08C).l,d0
-                beq.s   @Skip
+                move.w  (ALLY_NAME_WINDOW_INDEX).l,d0
+                beq.s   @Done
+                
                 subq.w  #1,d0
                 move.w  #$F60B,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
                 jsr     (ClearWindowAndUpdateEndPointer).l
-                clr.w   (word_FFB08C).l
-@Skip:
+                clr.w   (ALLY_NAME_WINDOW_INDEX).l
+@Done:
                 
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-    ; End of function HidePortraitName
+    ; End of function CloseNameUnderPortraitWindow
 

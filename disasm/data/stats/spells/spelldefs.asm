@@ -734,3 +734,161 @@ tbl_SpellDefs:
                 radius     1
                 power      20
                 
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                
+                entry      44
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      45
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      46
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      47
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      48
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      49
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      50
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      51
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      52
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      53
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      54
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      55
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      56
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      57
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      58
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      59
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      60
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      61
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                entry      62
+                mpCost     0
+                animation  NONE
+                properties TYPE_ATTACK
+                range      0, 0
+                radius     0
+                power      0
+                
+                
+                ; Fill out table with dummy entries
+                dcb.b (SPELLDEF_ENTRY_SIZE*252)-(*-tbl_SpellDefs),0
+            endif

@@ -2,6 +2,10 @@
 # No rom files or game content on the repository
 *.bin
 
+# No symbols or listings files
+*.lst
+*.sym
+
 # No log files
 *.log
 
@@ -302,3 +306,7 @@ disasm/data/maps/entries/map*/*layoutflags*.txt
 disasm/code/common/menus/getallyportrait-expanded.asm
 disasm/code/common/scripting/entity/getallymapsprite-expanded.asm
 disasm/code/gameflow/special/battletest-expanded.asm
+
+# CHAPTER_SCREEN
+!**/chapterscreen/*.bin
+!**/chapterscreen/*.png

@@ -7,9 +7,9 @@
 
 WitchEnd:
                 
-                moveq   #$3C,d0 
+                moveq   #60,d0
                 bsr.w   Sleep           
-                bsr.w   InitWitchSuspendVIntFunctions
+                bsr.w   InitializeWitchSuspendVIntFunctions
                 move.w  #$1E,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
                 move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w

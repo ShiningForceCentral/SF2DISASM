@@ -24,21 +24,21 @@ CalculateHealTargetPriority:
                 
                 movem.l d0-d5/d7-a6,-(sp)
                 bsr.w   GetAiCommandset 
-                cmpi.w  #AI_13,d1
+                cmpi.w  #AICOMMANDSET_CRITICAL,d1
                 bne.s   @CheckLeaderAi
-                move.w  #13,d6
+                move.w  #MOVETYPE_TOTAL,d6
                 bra.w   @Done
 @CheckLeaderAi:
                 
-                cmpi.w  #AI_LEADER,d1
+                cmpi.w  #AICOMMANDSET_LEADER,d1
                 bne.s   @PrioritizeByMoveType
-                move.w  #13,d6
+                move.w  #MOVETYPE_TOTAL,d6
                 bra.w   @Done
 @PrioritizeByMoveType:
                 
                 bsr.w   GetMoveType     
                 lea     (tbl_HealPriorityMoveTypes).l,a0
-                move.w  #13,d6
+                move.w  #MOVETYPE_TOTAL,d6
                 clr.w   d0
 @FindHealPriority_Loop:
                 
@@ -128,16 +128,16 @@ loc_CE90:
 sub_CE96:
                 
                 movem.l d0/d3-a6,-(sp)
-                jsr     GetYPos
+                jsr     GetCombatantY
                 move.w  d1,d2
-                jsr     GetXPos
-                bsr.w   MakeTargetsList_Everybody
+                jsr     GetCombatantX
+                bsr.w   PopulateTargetsArrayWithAllCombatants
                 moveq   #0,d3
                 moveq   #0,d4
                 move.w  d1,d5
                 move.w  d2,d6
                 bsr.w   GetClosestAttackPosition
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 bne.w   loc_CECC
                 moveq   #1,d3
                 moveq   #1,d4
@@ -166,7 +166,7 @@ GetHighestUsableSpellLevel:
                 
                 movem.l d0/d2-a6,-(sp)
                 move.w  d1,d2
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 move.w  d1,d3
                 move.w  d2,d1
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
@@ -191,6 +191,8 @@ GetHighestUsableSpellLevel:
 
     ; End of function GetHighestUsableSpellLevel
 
+    if (STANDARD_BUILD=1)
+    else
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -262,4 +264,5 @@ loc_CF6C:
                 rts
 
     ; End of function GetSlotContainingItem
-
+    
+    endif

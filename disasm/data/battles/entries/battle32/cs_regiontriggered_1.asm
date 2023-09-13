@@ -16,7 +16,11 @@ rbcs_battle32:  textCursor 2849
                 nextSingleText $0,ALLY_JARO ; "Didn't you hear me?{W1}"
                 setFacing ALLY_JARO,DOWN
                 nextSingleText $0,ALLY_JARO ; "Hey, Granseal guys!{N}I'm on your side from now{N}on! OK?{W1}"
+            if (STANDARD_BUILD&NO_AI_JARO=1)
+                join ALLY_JARO
+            else
                 joinForceAI ALLY_JARO,$FFFF ; 0054 JOIN FORCE WITH AI
+            endif
                 setF 386                ; Set during battle 32, after Jaro switches sides
                 csc_end
 
@@ -27,22 +31,22 @@ rbcs_battle32:  textCursor 2849
 
 csub_4CD56:
                 
-                move.w  #$8F,d0 
-                jsr     j_GetXPos
+                move.w  #143,d0
+                jsr     j_GetCombatantX
                 move.w  d1,d7
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  d1,d6
                 clr.w   d1
-                jsr     j_SetCurrentHP
-                move.w  #$FFFF,d1
-                jsr     j_SetXPos
-                move.w  #$FFFF,d1
-                jsr     j_SetYPos
+                jsr     j_SetCurrentHp
+                move.w  #-1,d1
+                jsr     j_SetCombatantX
+                move.w  #-1,d1
+                jsr     j_SetCombatantY
                 moveq   #ALLY_JARO,d0
                 move.w  d7,d1
-                jsr     j_SetXPos
+                jsr     j_SetCombatantX
                 move.w  d6,d1
-                jsr     j_SetYPos
+                jsr     j_SetCombatantY
                 moveq   #ALLY_JARO,d0
                 jsr     j_JoinForce
                 moveq   #ALLY_JARO,d0

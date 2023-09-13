@@ -4,8 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = item index
+;     d1.w = whether an item must be discarded if inventory is full (0 if false)
+; 
+; Out: d0.w = 0 if item was received, 1 if there was no room, or 2 if another item was discarded
 
-GetMandatoryItem:
+
+ReceiveMandatoryItem:
                 
                 movem.l d1-d5/a0,-(sp)
                 move.w  d0,d4
@@ -14,19 +19,19 @@ GetMandatoryItem:
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d3
                 subq.w  #1,d3
-loc_4F4A2:
+@FindEmptyItemSlot_Loop:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
-                cmpi.w  #4,d2
-                bcs.w   loc_4F510
-                dbf     d3,loc_4F4A2
-				
+                cmpi.w  #COMBATANT_ITEMSLOTS,d2
+                bcs.w   @ReceiveItem
+                dbf     d3,@FindEmptyItemSlot_Loop
+                
                 moveq   #1,d0
                 tst.w   d5
-                beq.w   loc_4F53C
+                beq.w   @Done
                 move.w  d4,(TEXT_NAME_INDEX_1).l
                 txt     214             ; "Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}"
                 clsTxt
@@ -43,8 +48,8 @@ loc_4F4A2:
                 jsr     (WaitForPlayerInput).w
                 clsTxt
                 moveq   #2,d0
-                bra.w   loc_4F53C
-loc_4F510:
+                bra.w   @Done
+@ReceiveItem:
                 
                 move.w  d4,d1
                 jsr     j_AddItem
@@ -56,12 +61,12 @@ loc_4F510:
                 jsr     (WaitForPlayerInput).w
                 clsTxt
                 clr.w   d0
-loc_4F53C:
+@Done:
                 
                 movem.l (sp)+,d1-d5/a0
                 rts
 
-    ; End of function GetMandatoryItem
+    ; End of function ReceiveMandatoryItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -72,14 +77,14 @@ RemoveItemFromInventory:
                 movem.w d1-d2,-(sp)
                 move.w  d0,d1
                 jsr     j_GetItemInventoryLocation
-                cmpi.w  #$FFFF,d0
-                beq.w   loc_4F56A
+                cmpi.w  #-1,d0
+                beq.w   @Done
                 jsr     j_RemoveItemBySlot
-                move.w  #$FFFF,d0
+                move.w  #-1,d0
                 cmpi.w  #3,d2
-                beq.w   loc_4F56A
+                beq.w   @Done
                 clr.w   d0
-loc_4F56A:
+@Done:
                 
                 movem.w (sp)+,d1-d2
                 rts
@@ -114,7 +119,7 @@ loc_4F596:
 loc_4F59C:
                 
                 move.b  #1,(byte_FFB13C).l
-                jsr     j_BuildMemberListScreen_NewATTandDEF
+                jsr     j_BuildMemberListScreen_NewAttAndDefPage
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_4F5B6
                 bra.w   loc_4F6CA
@@ -155,7 +160,7 @@ loc_4F610:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_4F69C
                 move.w  itemEntry(a6),d1
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   loc_4F69C
                 move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
@@ -172,7 +177,7 @@ loc_4F65C:
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_4F69C
                 move.w  itemEntry(a6),d1
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   loc_4F69C
                 move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"

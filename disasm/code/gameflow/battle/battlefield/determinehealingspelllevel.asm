@@ -22,13 +22,13 @@ DetermineHealingSpellLevel:
                 lsr.w   #SPELLENTRY_OFFSET_LV,d5
                 andi.w  #SPELLENTRY_LOWERMASK_LV,d5
                 move.w  d1,d3
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 move.w  d1,d2
-                jsr     GetMaxHP
+                jsr     GetMaxHp
                 sub.w   d2,d1           ; d1 = max HP - current HP
                 moveq   #$FFFFFFFF,d2
                 cmpi.w  #ENEMYAI_THRESHOLD_HEAL1,d1 ; 2
-                bls.w   loc_CDDC        
+                bls.w   loc_CDDC
                 moveq   #0,d2
                 cmpi.w  #ENEMYAI_THRESHOLD_HEAL2,d1 ; 14
                 bls.w   loc_CDB8
@@ -43,7 +43,7 @@ DetermineHealingSpellLevel:
 loc_CDB8:
                 
                 move.w  d3,d0
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 move.w  d1,d3
 loc_CDC2:
                 
@@ -61,7 +61,7 @@ loc_CDC2:
                                         ;  but this doesn't work due to the bugs above
                 jsr     FindSpellDefAddress
                 cmp.b   SPELLDEF_OFFSET_MP_COST(a0),d3 ; check if spell cost is more than current MP
-                bcc.w   loc_CDDC        
+                bcc.w   loc_CDDC
                 dbf     d2,loc_CDC2
 loc_CDDC:
                 

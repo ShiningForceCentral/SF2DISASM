@@ -29,6 +29,9 @@ ms_map22_EntityEvents:
                 msEntityEvent 150, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
                 msEntityEvent 151, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
                 msEntityEvent 152, RIGHT, Map22_EntityEvent21-ms_map22_EntityEvents
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                msEntityEvent 153, RIGHT, Map22_EntityEvent22-ms_map22_EntityEvents
+            endif
                 msDefaultEntityEvent Map22_DefaultEntityEvent-ms_map22_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -262,7 +265,10 @@ Map22_EntityEvent15:
 
 Map22_EntityEvent13:
                 
-                 
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                chkFlg  522             ; Battle 22 completed - BATTLE_CHESSBOARD
+                bne.s   Map22_EntityEvent22
+            endif
                 txt     1788            ; "Is healing is my only ability?{N}Ha, ha!  You have a lot to{N}learn!{W1}"
                 rts
 
@@ -296,6 +302,13 @@ Map22_EntityEvent11:
 
 ; =============== S U B R O U T I N E =======================================
 
+
+Map22_EntityEvent22:
+
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                move.b  #22,((CURRENT_SHOP_INDEX-$1000000)).w
+                jmp     ShopMenuActions
+            endif
 
 Map22_DefaultEntityEvent:
                 

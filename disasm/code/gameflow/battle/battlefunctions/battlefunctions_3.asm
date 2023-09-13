@@ -11,7 +11,7 @@ LoadBattle:
                 
                 move.w  d0,-(sp)
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
+                getSavedByte CURRENT_MAP, d1
                 bsr.w   FadeOutToBlackAll
                 move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
                 jsr     (LoadMapTilesets).w
@@ -40,17 +40,20 @@ LoadBattle:
                 divs.w  #$180,d0
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 moveq   #$3F,d0 
-                jsr     (InitSprites).w 
+                jsr     (InitializeSprites).w
                 move.w  #$FFFF,d0
                 jsr     (LoadMap).w     
                 jsr     (WaitForVInt).w
                 jsr     (LoadMapEntitySprites).w
                 bsr.w   SetBaseVIntFunctions
                 jsr     j_LoadBattleTerrainData
+            if (STANDARD_BUILD=1)
+                bsr.w   PlayMapMusic
+            else
                 jsr     (PlayMapMusic).w
+            endif
                 jsr     (FadeInFromBlack).w
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; if battle 44, then special battle !
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; if battle 44, then special battle !
                 bne.s   return_256A0
                 jsr     j_DisplayTimerWindow
 return_256A0:
@@ -80,9 +83,9 @@ tbl_RelativeTileMoveY:
 GetEntityPositionAfterApplyingFacing:
                 
                 movem.l d2-d3/a0,-(sp)
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 move.w  d1,d2
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 bsr.w   GetEntityIndexForCombatant_0
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
@@ -110,10 +113,10 @@ sub_256E6:
                 move.w  #COMBATANTS_ALL_COUNTER,d7
 loc_256F4:
                 
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 cmp.w   d1,d2
                 bne.w   loc_25712
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 cmp.w   d1,d3
                 bne.w   loc_25712
                 move.w  d0,d3

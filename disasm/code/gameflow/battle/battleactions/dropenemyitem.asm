@@ -1,5 +1,5 @@
 
-; ASM FILE code\gameflow\battle\battleactions\writebattlescenecommanddropenemyitem.asm :
+; ASM FILE code\gameflow\battle\battleactions\dropenemyitem.asm :
 ; 0xBD24..0xBE52 : Write Battlescene Command : Drop Enemy Item function
 
 ; =============== S U B R O U T I N E =======================================
@@ -80,7 +80,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 tst.w   d0
                 bne.w   @Done
                 bra.w   @DropItem
-                jsr     j_DoesBattleUpgrade ; unreachable code
+                jsr     j_IsBattleUpgradable ; unreachable code
                 tst.w   d1
                 beq.w   @DropItem       ; if battle index not in list
                 moveq   #3,d0           ; else
@@ -95,13 +95,13 @@ WriteBattlesceneScript_EnemyDropItem:
                 divu.w  #8,d0
                 adda.w  d0,a0
                 swap    d0
-                bset    d0,(a0)         ; set item dropped flag
-                bne.w   @Done
+                bset    d0,(a0)
+                bne.w   @Done           ; done if item dropped flag was already set
                 move.b  (a5),d0
                 move.w  d4,d1
                 jsr     RemoveItemBySlot
                 move.b  (a4),d0
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   @AddRareItemToDeals
                 move.w  d3,d1

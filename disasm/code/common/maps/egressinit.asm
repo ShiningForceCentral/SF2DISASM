@@ -16,22 +16,25 @@ GetSavePointForMap:
                  
                 module
                 chkFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
-                bne.s   loc_75FC        ; egress always goes back to Bowie's room if you haven't triggered the gizmos cutscene
-                moveq   #MAP_GRANSEAL,d0 ; HARDCODED initial egress position : map, x, y, facing
-                moveq   #GAMESTART_SAVEPOINT_X,d1
-                moveq   #GAMESTART_SAVEPOINT_Y,d2
-                moveq   #DOWN,d3
+                bne.s   @Continue
+                
+                ; Go back to Bowie's room if the gizmos cutscene has not been triggered
+                ; HARDCODED initial egress position : map, x, y, facing
+                moveq   #GAMESTART_MAP,d0           ; 3: Granseal
+                moveq   #GAMESTART_SAVEPOINT_X,d1   ; 56
+                moveq   #GAMESTART_SAVEPOINT_Y,d2   ; 3
+                moveq   #GAMESTART_FACING,d3        ; 3: Down
                 rts
-loc_75FC:
+@Continue:
                 
                 move.l  a0,-(sp)
                 moveq   #1,d1
                 moveq   #1,d2
                 moveq   #UP,d3
-                lea     SavepointMapCoordinates(pc), a0
+                conditionalPc lea,SavepointMapCoordinates,a0
 @FindEgressEntry_Loop:
                 
-                cmpi.b  #$FF,(a0)
+                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
                 beq.w   byte_7620       ; No match
                 cmp.b   (a0),d0
                 beq.s   @EgressEntryFound
@@ -48,19 +51,19 @@ byte_7620:
                 ; No match
                 chkFlg  64              ; Raft is unlocked
                 beq.s   @Done
-                lea RaftResetMapCoordinates-4(pc),a0 ; Some egress locations imply to put the raft back in an initial place
+                conditionalPc lea,RaftResetMapCoordinates-4,a0 ; Some egress locations imply to put the raft back in an initial place
 @FindRaftEntry_Loop:
                 
                 addq.l  #4,a0
-                cmpi.b  #$FF,(a0)
+                cmpi.b  #MAP_NONE,(a0)
                 beq.w   @RaftEntryNotFound
                 cmp.b   (a0),d0         ; If found egress map matches entry map, then move raft back to given location
                 bne.s   @FindRaftEntry_Loop
 @RaftEntryNotFound:
                 
-                move.b  1(a0),((RAFT_MAP-$1000000)).w
-                move.b  2(a0),((RAFT_X-$1000000)).w
-                move.b  3(a0),((RAFT_Y-$1000000)).w
+                setSavedByte 1(a0), RAFT_MAP
+                setSavedByte 2(a0), RAFT_X
+                setSavedByte 3(a0), RAFT_Y
 @Done:
                 
                 movea.l (sp)+,a0

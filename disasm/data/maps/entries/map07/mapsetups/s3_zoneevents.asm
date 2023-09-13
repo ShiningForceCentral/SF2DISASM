@@ -22,6 +22,11 @@ Map7_ZoneEvent0:
                 chkFlg  702             ; Set after the scene with Peter at the Castle (ends with you leaving the Castle)
                 bne.s   loc_557D6
                 script  cs_55A36
+            if (STANDARD_BUILD&FIX_GOLD_GIFT=1)
+                jsr     GetGold
+                addi.l  #GOLD_GIFT,d1
+                jsr     SetGold
+            endif
                 setFlg  702             ; Set after the scene with Peter at the Castle (ends with you leaving the Castle)
                 setFlg  67              ; Peter is a follower
 loc_557D6:

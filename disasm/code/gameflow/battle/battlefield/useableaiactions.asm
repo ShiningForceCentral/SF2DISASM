@@ -193,7 +193,7 @@ GetNextSupportSpell:
 GetNextUsableAttackItem:
                 
                 movem.l d0/d3-a6,-(sp)
-                bsr.w   CheckMuddled2   
+                bsr.w   CheckMuddled2
                 move.w  d1,d6           ; remember whether caster is muddled
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Loop
@@ -207,7 +207,7 @@ GetNextUsableAttackItem:
                 bra.w   @Next
 @Continue:
                 
-                jsr     IsItemUsableInBattle?
+                jsr     IsItemUsableInBattle
                 bcs.w   @CheckAllowedToUse
 @Next:
                 
@@ -301,7 +301,7 @@ GetNextUsableHealingItem:
 @Continue:
                 
                 move.w  d1,d7
-                jsr     IsItemUsableInBattle?
+                jsr     IsItemUsableInBattle
                 bcc.s   @Next
                 
                 ; Is AI allowed to use item?

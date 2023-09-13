@@ -16,7 +16,14 @@ ms_map24_InitFunction:
                 txt     467             ; "Welcome to the fairy woods{N}special stage!{W2}"
                 txt     468             ; "How quickly can you defeat{N}all the hidden monsters?{W2}"
                 txt     469             ; "Now, set a new record.{W2}"
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                lea     (SPECIAL_BATTLE_RECORD).l,a0
+                movep.l 0(a0),d0
+                movea.l (sp)+,a0
+            else
                 move.l  ((SPECIAL_BATTLE_RECORD-$1000000)).w,d0
+            endif
                 divs.w  #$3C,d0 
                 move.w  d0,d1
                 ext.l   d1
@@ -61,11 +68,29 @@ loc_59CB2:
                 ext.l   d0
                 move.l  d0,((TEXT_NUMBER-$1000000)).w
                 txt     476             ; "{DICT} {#} sec.{W2}"
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                lea     (SPECIAL_BATTLE_RECORD).l,a0
+                movep.l 0(a0),d0
+                cmp.l   ((SPECIAL_BATTLE_TIME-$1000000)).w,d0
+                movea.l (sp)+,a0
+                blo.s   byte_59CF0  
+            else
                 move.l  ((SPECIAL_BATTLE_TIME-$1000000)).w,d0
                 cmp.l   ((SPECIAL_BATTLE_RECORD-$1000000)).w,d0
-                bcc.s   byte_59CF0      
+                bhs.s   byte_59CF0  
+            endif
+                
                 txt     477             ; "Congratulations!{N}You made it!"
+                
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                lea     (SPECIAL_BATTLE_RECORD).l,a0
+                movep.l d0,0(a0)
+                movea.l (sp)+,a0
+            else
                 move.l  d0,((SPECIAL_BATTLE_RECORD-$1000000)).w
+            endif
                 sndCom  MUSIC_ITEM
                 jsr     j_FadeOut_WaitForP1Input ; fade out music and wait for P2 input ?!
                 bra.s   byte_59CF4      

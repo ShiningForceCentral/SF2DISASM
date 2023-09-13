@@ -116,7 +116,7 @@ csc37_loadMapAndFadeIn:
                 clr.w   (FADING_TIMER_WORD).l
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
 
     ; End of function csc37_loadMapAndFadeIn
 
@@ -303,7 +303,7 @@ csc42_loadMapEntities:
                 move.w  (a0)+,d1
                 move.w  (a0)+,d2
                 move.w  (a0)+,d3
-                jsr     InitMapEntities
+                jsr     InitializeMapEntities
                 jsr     (LoadMapEntitySprites).w
                 jsr     (EnableDisplayAndInterrupts).w
                 trap    #VINT_FUNCTIONS
@@ -348,7 +348,7 @@ csc44_reloadEntities:
                 clr.w   d3
                 move.b  ENTITYDEF_OFFSET_FACING(a5),d3
                 movea.l (a6)+,a0
-                jsr     InitMapEntities
+                jsr     InitializeMapEntities
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l 0
@@ -428,7 +428,7 @@ csc49_loadEntitiesFromMapSetup:
                 move.w  (a6)+,d1
                 move.w  (a6)+,d2
                 move.w  (a6)+,d3
-                jsr     j_InitMapEntities
+                jsr     j_InitializeMapEntities
                 jsr     (LoadMapEntitySprites).w
                 jsr     (EnableDisplayAndInterrupts).w
                 trap    #VINT_FUNCTIONS
@@ -478,7 +478,7 @@ LaunchFading:
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,d3
                 clr.w   (FADING_TIMER_WORD).l
                 clr.b   ((FADING_POINTER-$1000000)).w
-                move.b  d0,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  d0,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.b  d1,((FADING_COUNTER_MAX-$1000000)).w
                 move.b  d2,((FADING_SETTING-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
@@ -489,7 +489,7 @@ loc_467C6:
                 bne.s   loc_467C6
                 jsr     (WaitForVInt).w
                 move.b  d3,((FADING_COUNTER_MAX-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.b  (sp)+,d3
                 rts
 
@@ -1003,7 +1003,7 @@ loc_46AB6:
                 move.w  d1,d0
                 move.w  d3,d1
                 move.w  d4,d2
-                jsr     j_InitPortraitWindow
+                jsr     j_CreatePortraitWindow
 return_46AD0:
                 
                 rts
@@ -1017,7 +1017,7 @@ return_46AD0:
 csc1E_hidePortrait:
                 
                 jsr     (WaitForViewScrollEnd).w
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
                 rts
 
     ; End of function csc1E_hidePortrait
@@ -1052,7 +1052,7 @@ csc20_updateDefeatedAllies:
                 moveq   #$1F,d7
 loc_46AFE:
                 
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 cmpi.w  #$FFFF,d1
                 beq.s   loc_46B0E
                 move.b  d0,(a1)+
@@ -1109,15 +1109,15 @@ csc22_animateEntityFadeInOrOut:
                 bsr.w   GetEntityAddressFromCharacter
                 lea     (FF6802_LOADING_SPACE).l,a0
                 move.w  (a6)+,d0
-				
-                moveq   #0,d1	; mosaic out
+                
+                moveq   #0,d1    ; mosaic out
                 cmpi.w  #6,d0
                 beq.w   loc_46BE2
-				
-                moveq   #$FFFFFFFF,d1	;mosaic in
+                
+                moveq   #$FFFFFFFF,d1    ;mosaic in
                 cmpi.w  #7,d0
                 beq.w   loc_46BE2
-				
+                
                 move.w  d0,d2
                 lsl.w   #3,d0
                 lea     byte_46BB2(pc,d0.w),a1
@@ -1134,7 +1134,7 @@ loc_46B74:
                 add.w   4(a1),d0
                 add.w   6(a1),d1
                 dbf     d7,loc_46B74
-				
+                
                 cmpi.w  #4,d2
                 bne.s   return_46BB0
                 bsr.w   LoadMapsprite
@@ -1154,8 +1154,8 @@ byte_46BB2:
                 dc.b 0
                 dc.b 0
                 dc.b 1
-				
-				;scan up
+                
+                ;scan up
                 dc.b 0
                 dc.b 1
                 dc.b 0
@@ -1165,8 +1165,8 @@ byte_46BB2:
                 dc.b $FF
                 dc.b $FF
                 
-				;wipe out
-				dc.b 0
+                ;wipe out
+                dc.b 0
                 dc.b 1
                 dc.b 0
                 dc.b 0
@@ -1175,8 +1175,8 @@ byte_46BB2:
                 dc.b 0
                 dc.b 0
                 
-				;wipe in
-				dc.b 0
+                ;wipe in
+                dc.b 0
                 dc.b $16
                 dc.b 0
                 dc.b 0
@@ -1185,8 +1185,8 @@ byte_46BB2:
                 dc.b 0
                 dc.b 0
                 
-				;slide out
-				dc.b 0
+                ;slide out
+                dc.b 0
                 dc.b 1
                 dc.b 0
                 dc.b $16
@@ -1195,8 +1195,8 @@ byte_46BB2:
                 dc.b $FF
                 dc.b $FF
                 
-				;slide in
-				dc.b 0
+                ;slide in
+                dc.b 0
                 dc.b $16
                 dc.b 0
                 dc.b 1
@@ -1309,17 +1309,17 @@ csc26_entityNodHead:
                 move.b  #$FF,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
                 lea     (FF6802_LOADING_SPACE).l,a0
                 moveq   #0,d7
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
 loc_46C8A:
                 
                 bsr.w   LoadMapsprite
                 jsr     sub_45D70
                 bsr.w   sub_4709E       
-                moveq   #$14,d0
+                moveq   #20,d0
                 jsr     (Sleep).w       
                 bsr.w   UpdateEntitySprite_0
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 dbf     d7,loc_46C8A
                 move.b  #0,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
@@ -1375,29 +1375,29 @@ csc28_moveEntityNextToPlayer:
                 move.w  (a6)+,d3
                 tst.b   d3
                 bne.s   loc_46D30
-				
-				; bring to right
+                
+                ; bring to right
                 addi.w  #MAP_TILE_SIZE,d1
                 bra.s   loc_46D4C
 loc_46D30:
                 
                 cmpi.b  #UP,d3
                 bne.s   loc_46D3C
-				
-				; bring to top
+                
+                ; bring to top
                 subi.w  #MAP_TILE_SIZE,d2
                 bra.s   loc_46D4C
 loc_46D3C:
                 
                 cmpi.b  #LEFT,d3
                 bne.s   loc_46D48
-				
-				; bring to left
+                
+                ; bring to left
                 subi.w  #MAP_TILE_SIZE,d1
                 bra.s   loc_46D4C
 loc_46D48:
                 
-				; bring to bottom
+                ; bring to bottom
                 addi.w  #MAP_TILE_SIZE,d2
 loc_46D4C:
                 
@@ -1500,7 +1500,7 @@ loc_46E0A:
                 moveq   #5,d0
                 jsr     (Sleep).w       
                 dbf     d7,loc_46E0A
-				
+                
                 move.b  d5,ENTITYDEF_OFFSET_ANIMCOUNTER(a5)
                 move.w  d6,((SPRITE_SIZE-$1000000)).w
                 rts
@@ -1546,7 +1546,7 @@ csc2C_followEntity:
                 move.w  d3,d0
                 move.w  (a6)+,d2
                 add.w   d2,d2
-                lea     FollowerPositions(pc,d2.w),a0
+                lea     tbl_FollowerPositions(pc,d2.w),a0
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 ext.w   d2
@@ -1556,23 +1556,23 @@ csc2C_followEntity:
 
     ; End of function csc2C_followEntity
 
-FollowerPositions:
-                dc.b $18
+tbl_FollowerPositions:
+                dc.b 24
                 dc.b 0
                 dc.b 0
-                dc.b $E8
-                dc.b $E8
+                dc.b -24
+                dc.b -24
                 dc.b 0
                 dc.b 0
-                dc.b $18
-                dc.b $18
-                dc.b $E8
-                dc.b $E8
-                dc.b $E8
-                dc.b $E8
-                dc.b $18
-                dc.b $18
-                dc.b $18
+                dc.b 24
+                dc.b 24
+                dc.b -24
+                dc.b -24
+                dc.b -24
+                dc.b -24
+                dc.b 24
+                dc.b 24
+                dc.b 24
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1654,7 +1654,7 @@ csc51_joinBattleParty:
                 move.w  #$FFFF,((TEXT_NAME_INDEX_1-$1000000)).w
                 nop
                 move.w  (a6)+,d0
-                jsr     j_IsInBattleParty?
+                jsr     j_IsInBattleParty
                 bne.w   return_46F56
                 move.w  d0,d6
                 jsr     j_UpdateForce
@@ -1666,12 +1666,12 @@ csc51_joinBattleParty:
 loc_46F2C:
                 
                 move.b  (a0),d0
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.w   loc_46F40 ; replace dead member
                 addq.l  #1,a0
                 dbf     d7,loc_46F2C
-				; else replace last active member
+                ; else replace last active member
 loc_46F40:
                 
                 move.b  (a0),d0
@@ -1897,7 +1897,7 @@ AdjustScriptPointerByCharacterAliveStatus:
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d0
                 bge.s   @Return
                 
-                jsr     j_GetCurrentHP  ; it must be a force member
+                jsr     j_GetCurrentHp  ; it must be a force member
                 tst.w   d1
                 bne.s   @Return
                 adda.w  d7,a6

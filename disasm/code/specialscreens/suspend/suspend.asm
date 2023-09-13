@@ -7,9 +7,9 @@
 
 SuspendGame:
                 
-                moveq   #$3C,d0 
+                moveq   #60,d0
                 jsr     (Sleep).w       
-                movea.l (p_SuspendStringTiles).l,a0
+                conditionalLongAddr movea.l, p_SuspendStringTiles, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
                 jsr     (LoadCompressedData).w
@@ -19,15 +19,15 @@ SuspendGame:
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
                 jsr     (WaitForDmaQueueProcessing).w
-                movea.l (p_plt_SuspendString).l,a0
+                conditionalLongAddr movea.l, p_plt_SuspendString, a0
                 lea     (PALLETE_2_BASE).l,a1
-                moveq   #$20,d7 
+                moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #2,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%10,((FADING_PALETTE_BITFIELD-$1000000)).w
                 moveq   #3,d0
                 jsr     (Sleep).w       
                 lea     (PLANE_A_MAP_LAYOUT).l,a0

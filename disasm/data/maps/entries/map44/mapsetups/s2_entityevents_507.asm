@@ -203,7 +203,7 @@ Map44_1FB_EntityEvent7:
                 txt     1008            ; "Sire!  Sir Astral!{N}Glad to see you again!{N}Can we put out now?{W1}"
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$1F,d0
+                move.w  #FOLLOWER_B,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((SPEECH_SFX-$1000000)).w

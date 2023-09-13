@@ -38,7 +38,7 @@ ms_map37_EntityEvents:
 Map37_EntityEvent0:
                 
                 moveq   #1,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent0
 
@@ -49,7 +49,7 @@ Map37_EntityEvent0:
 Map37_EntityEvent1:
                 
                 moveq   #2,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent1
 
@@ -60,7 +60,7 @@ Map37_EntityEvent1:
 Map37_EntityEvent2:
                 
                 moveq   #3,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent2
 
@@ -71,7 +71,7 @@ Map37_EntityEvent2:
 Map37_EntityEvent3:
                 
                 moveq   #4,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent3
 
@@ -82,7 +82,7 @@ Map37_EntityEvent3:
 Map37_EntityEvent4:
                 
                 moveq   #5,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent4
 
@@ -93,7 +93,7 @@ Map37_EntityEvent4:
 Map37_EntityEvent5:
                 
                 moveq   #6,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent5
 
@@ -104,7 +104,7 @@ Map37_EntityEvent5:
 Map37_EntityEvent6:
                 
                 moveq   #7,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent6
 
@@ -115,7 +115,7 @@ Map37_EntityEvent6:
 Map37_EntityEvent7:
                 
                 moveq   #8,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent7
 
@@ -126,7 +126,7 @@ Map37_EntityEvent7:
 Map37_EntityEvent8:
                 
                 moveq   #9,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent8
 
@@ -137,7 +137,7 @@ Map37_EntityEvent8:
 Map37_EntityEvent9:
                 
                 moveq   #$A,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent9
 
@@ -148,7 +148,7 @@ Map37_EntityEvent9:
 Map37_EntityEvent10:
                 
                 moveq   #$B,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent10
 
@@ -159,7 +159,7 @@ Map37_EntityEvent10:
 Map37_EntityEvent11:
                 
                 moveq   #$C,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent11
 
@@ -170,7 +170,7 @@ Map37_EntityEvent11:
 Map37_EntityEvent12:
                 
                 moveq   #$D,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent12
 
@@ -181,7 +181,7 @@ Map37_EntityEvent12:
 Map37_EntityEvent13:
                 
                 moveq   #$E,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent13
 
@@ -191,8 +191,12 @@ Map37_EntityEvent13:
 
 Map37_EntityEvent14:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     SoundTest
+            else
                 moveq   #$F,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map37_EntityEvent14
 
@@ -202,8 +206,22 @@ Map37_EntityEvent14:
 
 Map37_EntityEvent15:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                move.w  (TEST_BUILD_CURRENT_MESSAGE).w,d0
+                cmpi.w  #MESSAGE_MAX_INDEX,d0
+                bhi.s   @Continue
+                move.w  #MESSAGE_MAX_INDEX,d0
+@Continue:      moveq   #0,d1
+                move.w  #MESSAGE_MAX_INDEX,d2
+                jsr     NumberPrompt
+                bmi.s   @Return
+                move.w  d0,(TEST_BUILD_CURRENT_MESSAGE).w
+                jsr     (DisplayText).w
+@Return:        rts
+            else
                 moveq   #$10,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map37_EntityEvent15
 
@@ -214,7 +232,7 @@ Map37_EntityEvent15:
 Map37_EntityEvent16:
                 
                 moveq   #$11,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent16
 
@@ -225,7 +243,7 @@ Map37_EntityEvent16:
 Map37_EntityEvent17:
                 
                 moveq   #$12,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent17
 
@@ -236,7 +254,7 @@ Map37_EntityEvent17:
 Map37_EntityEvent18:
                 
                 moveq   #$13,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent18
 
@@ -246,8 +264,12 @@ Map37_EntityEvent18:
 
 Map37_EntityEvent19:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     RenameAllAllies
+            else
                 moveq   #$14,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map37_EntityEvent19
 
@@ -257,8 +279,12 @@ Map37_EntityEvent19:
 
 Map37_EntityEvent20:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     StartMapTest
+            else
                 moveq   #$15,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map37_EntityEvent20
 
@@ -269,7 +295,7 @@ Map37_EntityEvent20:
 Map37_EntityEvent21:
                 
                 moveq   #$16,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent21
 
@@ -280,7 +306,7 @@ Map37_EntityEvent21:
 Map37_EntityEvent22:
                 
                 moveq   #$17,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent22
 
@@ -291,7 +317,7 @@ Map37_EntityEvent22:
 Map37_EntityEvent23:
                 
                 moveq   #$18,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent23
 
@@ -301,8 +327,12 @@ Map37_EntityEvent23:
 
 sub_5F9A0:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     StartBattleTest
+            else
                 moveq   #$19,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function sub_5F9A0
 
@@ -312,9 +342,12 @@ sub_5F9A0:
 
 Map37_EntityEvent24:
                 
-                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     StartConfiguration
+            else
                 txt     3376            ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
                 rts
+            endif
 
     ; End of function Map37_EntityEvent24
 
@@ -325,7 +358,7 @@ Map37_EntityEvent24:
 sub_5F9AE:
                 
                 moveq   #$1B,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function sub_5F9AE
 
@@ -336,7 +369,7 @@ sub_5F9AE:
 sub_5F9B6:
                 
                 moveq   #$1C,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function sub_5F9B6
 
@@ -347,7 +380,7 @@ sub_5F9B6:
 Map37_EntityEvent25:
                 
                 moveq   #$1D,d0
-                jmp     DisplayHeadquartersQuote
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent25
 
@@ -369,8 +402,20 @@ sub_5F9C6:
 
 Map37_EntityEvent26:
                 
-                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jsr     CaravanMenuActions
+                txt     460             ; "Shop number?{D1}"
+                moveq   #DEBUG_SHOP_INDEX,d0
+                moveq   #0,d1
+                moveq   #SHOP_MAX_INDEX,d2
+                jsr     NumberPrompt
+                bmi.s   @Skip
+                move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     ShopMenuActions
+@Skip:          jmp     ChurchMenuActions
+            else
                 txt     11              ; "{LEADER}, take it easy!{W1}"
+            endif
 Map37_EntityEvent27:
                 
                 rts

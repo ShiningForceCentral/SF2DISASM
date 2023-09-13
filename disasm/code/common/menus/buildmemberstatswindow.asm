@@ -17,7 +17,7 @@ BuildMemberStatusWindow:
                 move.l  a1,windowTilesAddress(a6)
                 
                 ; Copy window layout
-                movea.l (p_MemberStatusWindowLayout).l,a0
+                conditionalLongAddr movea.l, p_MemberStatusWindowLayout, a0
                 move.w  #WINDOW_MEMBERSTATUS_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 
@@ -111,7 +111,7 @@ BuildMemberStatusWindow:
 @WriteCurrentHP:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 cmpi.w  #UNKNOWN_STAT_VALUE_THRESHOLD,d1
                 bge.s   @WriteMaxHP
                 movea.l windowTilesAddress(a6),a1
@@ -123,7 +123,7 @@ BuildMemberStatusWindow:
 @WriteMaxHP:
                 
                 move.w  member(a6),d0
-                jsr     j_GetMaxHP
+                jsr     j_GetMaxHp
                 cmpi.w  #UNKNOWN_STAT_VALUE_THRESHOLD,d1
                 bge.s   @WriteCurrentMP
                 movea.l windowTilesAddress(a6),a1
@@ -135,7 +135,7 @@ BuildMemberStatusWindow:
 @WriteCurrentMP:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentMP
+                jsr     j_GetCurrentMp
                 cmpi.w  #UNKNOWN_STAT_VALUE_THRESHOLD,d1
                 bge.s   @WriteMaxMP
                 movea.l windowTilesAddress(a6),a1
@@ -147,7 +147,7 @@ BuildMemberStatusWindow:
 @WriteMaxMP:
                 
                 move.w  member(a6),d0
-                jsr     j_GetMaxMP
+                jsr     j_GetMaxMp
                 cmpi.w  #UNKNOWN_STAT_VALUE_THRESHOLD,d1
                 bge.s   @WriteLVandEXP
                 movea.l windowTilesAddress(a6),a1
@@ -169,7 +169,7 @@ BuildMemberStatusWindow:
                 ext.l   d0
                 bsr.w   WriteTilesFromNumber
                 move.w  member(a6),d0
-                jsr     j_GetCurrentEXP
+                jsr     j_GetCurrentExp
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_EXP,a1
                 moveq   #EXP_DIGITS_NUMBER,d7
@@ -192,7 +192,7 @@ BuildMemberStatusWindow:
 @WriteATT:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentATT
+                jsr     j_GetCurrentAtt
                 cmpi.w  #UNKNOWN_STAT_VALUE_THRESHOLD,d1
                 bge.s   @WriteDEF
                 movea.l windowTilesAddress(a6),a1
@@ -204,7 +204,7 @@ BuildMemberStatusWindow:
 @WriteDEF:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentDEF
+                jsr     j_GetCurrentDef
                 cmpi.w  #UNKNOWN_STAT_VALUE_THRESHOLD,d1
                 bge.s   @WriteAGI
                 movea.l windowTilesAddress(a6),a1
@@ -216,7 +216,7 @@ BuildMemberStatusWindow:
 @WriteAGI:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentAGI
+                jsr     j_GetCurrentAgi
                 andi.w  #DISPLAYED_AGI_VALUE_MASK,d1
                 cmpi.w  #UNKNOWN_STAT_VALUE_THRESHOLD,d1
                 bge.s   @WriteMOV
@@ -229,7 +229,7 @@ BuildMemberStatusWindow:
 @WriteMOV:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentMOV
+                jsr     j_GetCurrentMov
                 cmpi.w  #UNKNOWN_STAT_VALUE_THRESHOLD,d1
                 bge.s   @WriteSpells
                 movea.l windowTilesAddress(a6),a1
@@ -286,7 +286,7 @@ BuildMemberStatusWindow:
                 lsr.w   #4,d1
                 adda.w  d1,a0
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_SPELL_LV_TILES,a1
-                moveq   #$C,d7          ; spell level VDP tiles bytes size
+                moveq   #12,d7          ; spell level VDP tiles bytes size
                 jsr     (CopyBytes).w   
                 movem.l (sp)+,a0-a1
                 movem.w (sp)+,d6-d7
@@ -430,12 +430,12 @@ aJewel:
                 move.l  a0,-(sp)
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
                 addi.w  #ICON_SPELLS_START,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)
@@ -461,16 +461,16 @@ aJewel:
                 move.l  a0,-(sp)
                 move.w  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 mulu.w  #ICONTILES_BYTESIZE,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
                 btst    #ITEMENTRY_BIT_BROKEN,d1
                 beq.s   @CleanIconCorners
                 movem.l d2-d3/a0-a1,-(sp)
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 lea     ICONTILES_OFFSET_CRACKS(a0),a0
                 move.w  #ICONTILES_CRACKS_PIXELS_COUNTER,d2
 @DrawCracks_Loop:
@@ -507,12 +507,12 @@ aJewel:
 @LoadJewelIcons:
                 
                 move.w  #ICON_JEWEL_OF_LIGHT,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)
@@ -521,12 +521,12 @@ aJewel:
                 ori.b   #$F,$BF(a1)
                 adda.w  #ICONTILES_BYTESIZE,a1
                 move.w  #ICON_JEWEL_OF_EVIL,d1
-                movea.l (p_Icons).l,a0
+                conditionalLongAddr movea.l, p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICONTILES_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #$F0,(a1)

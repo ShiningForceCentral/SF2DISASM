@@ -137,7 +137,8 @@ FindPromotionSection:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A6 = church actions stack
+; In: a6 = church actions stack
+;     d1.w = replacement spell entry (if STANDARD_BUILD is enabled)
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
@@ -156,7 +157,7 @@ membersListLength = -10
 actionCost = -8
 currentGold = -4
 
-ReplaceSpellsWithSORCdefaults:
+ReplaceSpellsWithSorcDefaults:
                 
                 move.w  member(a6),d0
                 jsr     j_GetCombatantEntryAddress
@@ -164,15 +165,19 @@ ReplaceSpellsWithSORCdefaults:
                 move.w  #COMBATANT_SPELLSLOTS_COUNTER,d7
 @Loop:
                 
-                move.b  #SPELL_NOTHING,(a0)+
+                setSavedByteWithPostIncrement #SPELL_NOTHING, a0
                 dbf     d7,@Loop
                 
+            if (STANDARD_BUILD=1)
+                jmp     LearnSpell
+            else
                 move.w  member(a6),d0
                 move.w  #SPELL_DAO,d1
                 jsr     j_LearnSpell
                 rts
+            endif
 
-    ; End of function ReplaceSpellsWithSORCdefaults
+    ; End of function ReplaceSpellsWithSorcDefaults
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -245,7 +250,24 @@ Church_CureStun:
                 addi.w  #1,stunnedMembersCount(a6)
                 move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
                 txt     132             ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
+                
+            if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+                jsr     GetCurrentLevel
+                mulu.w  #CHURCHMENU_PER_LEVEL_CURE_STUN_COST,d1
+                move.l  d1,actionCost(a6)
+                jsr     GetClass
+                move.w  #0,d2
+                bsr.w   GetPromotionData
+                tst.w   cannotPromoteFlag(a6)
+                beq.s   @CureParalysis_Unpromoted
+                
+                move.l  actionCost(a6),d1
+                addi.l  #CHURCHMENU_CURE_STUN_COST_EXTRA_WHEN_PROMOTED,d1
+                add.l   d1,actionCost(a6)
+@CureParalysis_Unpromoted:
+            else
                 move.l  #CHURCHMENU_CURE_STUN_COST,actionCost(a6)
+            endif
                 move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
                 jsr     j_CreateGoldWindow

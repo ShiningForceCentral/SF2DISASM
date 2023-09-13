@@ -16,7 +16,7 @@ ms_map59_InitFunction:
                 script  cs_5EDB8
                 script  cs_5EF60
                 setFlg  999             ; Set after the Nazca ship shootdown scene
-                move.b  #MAP_DOJO,((EGRESS_MAP-$1000000)).w
+                setSavedByte #MAP_DOJO, EGRESS_MAP
                 setFlg  436             ; Battle 36 unlocked - BATTLE_VERSUS_PRISM_FLOWERS      
                 setFlg  440             ; Battle 40 unlocked - BATTLE_VERSUS_ODD_EYE            
                 setFlg  442             ; Battle 42 unlocked - BATTLE_VERSUS_GALAM              
@@ -304,7 +304,7 @@ eas_5EF46:       ac_animSpeedX2 ON
 cs_5EF60:       textCursor 3739
                 loadMapFadeIn MAP_NAZCA_SHIP_INTERIOR,4,6
                 loadEntitiesFromMapSetup 9,11,DOWN
-                executeSubroutine InitNazcaShipForceMembers
+                executeSubroutine InitializeNazcaShipForceMembers
                 setPos ALLY_ZYNK,8,10,RIGHT
                 executeSubroutine sub_5F32E
                 setActscriptWait ALLY_PETER,eas_Init
@@ -428,7 +428,7 @@ csub_5F14C:
                 
                 lea     plt_NazcaShip(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
-                moveq   #$20,d7 
+                moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
@@ -443,7 +443,7 @@ csub_5F14C:
 
 sub_5F16C:
                 
-                moveq   #$17,d7
+                moveq   #23,d7
 loc_5F16E:
                 
                 subq.b  #1,((ENTITY_SPECIAL_SPRITE_LAYER-$1000000)).w

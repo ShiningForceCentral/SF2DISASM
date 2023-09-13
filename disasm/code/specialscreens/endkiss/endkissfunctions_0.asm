@@ -7,13 +7,13 @@
 
 EndKissPictureSequence:
                 
-                movea.l (p_EndKissPicture).l,a0
+                conditionalLongAddr movea.l, p_EndKissPicture, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     ($C800).l,a1
                 bsr.w   DisplayEndingKissWithPixelFilling
-                move.w  #$168,d0
+                move.w  #360,d0
                 jsr     (Sleep).w       ; wait for 6 seconds
                 lea     (PALETTE_1_BASE).l,a0
                 moveq   #7,d7
@@ -24,7 +24,7 @@ loc_2C5A6:
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   (FADING_TIMER_BYTE).l
                 jsr     (sub_19C8).w    
-                move.w  #$366,d0        ; wait for 14 seconds
+                move.w  #870,d0         ; wait for 14 seconds
                 jsr     (Sleep).w       
                 lea     (PALETTE_1_BASE).l,a0
                 moveq   #$1F,d7
@@ -48,7 +48,7 @@ sub_2C5E4:
                 movem.l d0-a3,-(sp)
                 lea     (PALETTE_1_CURRENT).l,a0
                 lea     (PALETTE_1_BASE).l,a1
-                move.w  #$80,d7 
+                move.w  #CRAM_SIZE,d7
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_1_BASE).l,a0
                 moveq   #7,d7

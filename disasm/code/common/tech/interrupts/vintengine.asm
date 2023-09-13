@@ -305,7 +305,7 @@ loc_822:
                 beq.w   loc_832
                 addq.w  #1,d1
                 dbf     d7,loc_822
-				
+                
                 bra.w   loc_8D6
 loc_832:
                 
@@ -332,7 +332,7 @@ loc_84A:
                 beq.w   loc_85A
                 addq.w  #1,d1
                 dbf     d7,loc_84A
-				
+                
                 bra.w   loc_8D6
 loc_85A:
                 
@@ -360,7 +360,7 @@ loc_876:
                 beq.w   loc_886
                 addq.w  #1,d1
                 dbf     d7,loc_876
-				
+                
                 bra.w   loc_8D6
 loc_886:
                 
@@ -391,7 +391,7 @@ loc_8A8:
                 beq.w   loc_8B8         
                 addq.w  #1,d1
                 dbf     d7,loc_8A8
-				
+                
                 bra.w   loc_8D6
 loc_8B8:
                 
@@ -412,7 +412,7 @@ loc_8CC:
                 
                 addq.w  #1,d1
                 dbf     d7,loc_8C6
-				
+                
                 move.b  d0,((VINT_FUNCS_ENABLED_BITFIELD-$1000000)).w
 loc_8D6:
                 
@@ -451,6 +451,19 @@ loc_906:
                 move.w  2(a0),(a0)+
                 move.w  2(a0),(a0)+
                 clr.w   (a0)
+            if (STANDARD_BUILD&MUSIC_RESUMING=1)
+                ; Resuming commands
+                cmpi.b  #SOUND_COMMAND_DEACTIVATE_RESUMING,d0
+                beq.s   @SendResumingCommand
+                cmpi.b  #SOUND_COMMAND_ACTIVATE_RESUMING,d0
+                bne.s   @TestPlayPreviousMusic
+@SendResumingCommand:
+                    
+                move.b  d0,(Z80_SoundDriverCommand).l
+                bra.w   loc_9F6
+@TestPlayPreviousMusic:
+                    
+            endif
                 cmpi.b  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0
                 bne.s   loc_95A         ; if command FB, play back previous music
                 tst.b   ((MUSIC_STACK_LENGTH-$1000000)).w
@@ -625,7 +638,7 @@ ApplyFadingEffect:
                 move.b  ((FADING_POINTER-$1000000)).w,d1
                 ext.w   d1
                 add.w   d1,d0
-                move.b  FadingData(pc,d0.w),d1
+                move.b  tbl_FadingData(pc,d0.w),d1
                 cmpi.w  #$80,d1 
                 bne.s   loc_AEC
                 clr.b   ((FADING_SETTING-$1000000)).w
@@ -643,7 +656,7 @@ loc_B0A:
                 
                 ext.w   d1
                 move.w  d1,d0
-                move.b  ((FADING_PALETTE_BITMAP-$1000000)).w,d1
+                move.b  ((FADING_PALETTE_BITFIELD-$1000000)).w,d1
                 ext.w   d1
                 bsr.w   ApplyCurrentColorFadingValue
                 addq.b  #1,((FADING_POINTER-$1000000)).w
@@ -653,7 +666,7 @@ return_B1C:
 
     ; End of function ApplyFadingEffect
 
-FadingData:     incbin "data/graphics/tech/fadingdata.bin" ; 80 : end
+tbl_FadingData: incbin "data/graphics/tech/fadingdata.bin" ; 80 : end
                                         ; 8x : go x backward
 
 ; =============== S U B R O U T I N E =======================================
@@ -959,7 +972,7 @@ ExecuteFading:
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
 @Wait:
                 
                 bsr.w   WaitForVInt
@@ -972,6 +985,8 @@ ExecuteFading:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d1.w = palette bitfield
 
 
 ApplyCurrentColorFadingValue:
@@ -991,7 +1006,7 @@ loc_D30:
                 bra.w   loc_DA8
 loc_D44:
                 
-                moveq   #$F,d7
+                moveq   #15,d7
 loc_D46:
                 
                 movem.l d0,-(sp)
@@ -1060,10 +1075,10 @@ loc_DA8:
 ClearVsramAndSprites:
                 
                 move.w  #$100,(Z80BusReq).l
-loc_DC2:
+@Wait:
                 
                 btst    #0,(Z80BusReq).l
-                bne.s   loc_DC2         ; wait for bus available
+                bne.s   @Wait           ; wait for bus available
                 bsr.s   ClearScrollTableData
                 bsr.s   ClearSpriteTable
                 bsr.s   UpdateVdpSpriteTable
@@ -1741,7 +1756,7 @@ loc_1330:
                 move.w  d6,(a6)+
                 addq.l  #2,a6
                 dbf     d7,loc_1330
-				
+                
                 movem.l (sp)+,d7/a6
                 bra.s   UpdateVdpVScrollData
 

@@ -99,24 +99,29 @@ Map30_DefaultEntityEvent:
 
 sub_5A278:
                 
-                 
+            if (STANDARD_BUILD&FIX_DWARVEN_MINER_VOICE=1)
+                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+                move.w  #128,d0
+                jsr     GetEntityPortaitAndSpeechSfx
+                move.w  d2,((SPEECH_SFX-$1000000)).w
+            endif
                 txt     1726            ; "Thanks to you, he recovered.{W2}"
                 txt     1727            ; "We all thank you.{N}Take this gift.{W1}"
                 moveq   #0,d0
                 moveq   #0,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
-                cmpi.w  #4,d2
+                cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 bne.s   loc_5A296
                 txt     1729            ; "Oh, your hands are full.{N}I'll give it to you later.{W1}"
                 bra.s   return_5A2C0
 loc_5A296:
                 
                 moveq   #0,d0
-                moveq   #$72,d1 
+                moveq   #ITEM_CANNON,d1
                 jsr     j_AddItem
                 sndCom  MUSIC_ITEM
                 txt     1728            ; "{LEADER} is given a{N}Cannon.{W1}"
-                moveq   #$64,d0 
+                moveq   #100,d0
                 jsr     (Sleep).w       
                 clsTxt
                 setFlg  761             ; Set after the dwarf gives Bowie the cannon

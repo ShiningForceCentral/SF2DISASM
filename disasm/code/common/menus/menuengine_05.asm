@@ -46,7 +46,7 @@ sub_1288E:
                 move.b  #HALF_OUT_TO_BLACK,((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #5,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%101,((FADING_PALETTE_BITFIELD-$1000000)).w
                 bsr.w   sub_129E8
 loc_1291E:
                 
@@ -90,17 +90,17 @@ loc_1291E:
                 move.b  #FLICKER_ONCE,((FADING_SETTING-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #5,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%101,((FADING_PALETTE_BITFIELD-$1000000)).w
                 jsr     (WaitForWindowMovementEnd).w
                 move.w  d0,var_2(a6)
                 jsr     (ClearWindowAndUpdateEndPointer).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 move.l  var_32(a6),((ENTITY_SPECIAL_SPRITE_DATA-$1000000)).w
                 move.l  var_32(a6),((ENTITY_SPECIAL_SPRITE_DESTINATION-$1000000)).w
                 lea     (PALETTE_1_BASE).l,a0
                 lea     (PALETTE_1_CURRENT).l,a1
-                move.w  #CRAM_SIZE,d7 
+                move.w  #CRAM_SIZE,d7
                 jsr     (CopyBytes).w   
                 jsr     (ApplyVIntCramDma).w
                 unlk    a6
@@ -571,22 +571,22 @@ loc_12E3A:
                 move.b  #5,((FADING_COUNTER_MAX-$1000000)).w
                 lea     (PALETTE_3_CURRENT).l,a0
                 lea     (PALETTE_4_CURRENT).l,a1
-                move.w  #$20,d7 
+                move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_3_CURRENT).l,a0
                 lea     (PALETTE_3_BASE).l,a1
-                move.w  #$20,d7 
+                move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
-                movea.l (p_plt_EndKiss).l,a0
+                conditionalLongAddr movea.l, p_plt_EndKiss, a0
                 lea     (PALETTE_2_CURRENT).l,a1
-                move.w  #$20,d7 
+                move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 lea     $80(a1),a1
                 jsr     (CopyBytes).w   
                 jsr     (ApplyVIntCramDma).w
                 lea     (PALETTE_1_CURRENT).l,a0
                 lea     (PALETTE_1_BASE).l,a1
-                move.w  #$80,d7 
+                move.w  #CRAM_SIZE,d7
                 jsr     (CopyBytes).w   
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.w  #$5FF,d0
@@ -611,7 +611,7 @@ loc_12EB4:
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
                 jsr     j_EndKissPictureSequence
-                move.w  #$B4,d0 
+                move.w  #180,d0
                 jsr     (Sleep).w       
                 move.w  d4,d0
                 jsr     (ClearWindowAndUpdateEndPointer).w
@@ -715,7 +715,7 @@ HideGoldWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-InitMemberListScreen:
+InitializeMemberListScreen:
                 
                 clr.b   ((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
@@ -727,13 +727,13 @@ InitMemberListScreen:
                 
                 bra.w   BuildMemberListScreen
 
-    ; End of function InitMemberListScreen
+    ; End of function InitializeMemberListScreen
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-BuildMemberListScreen_NewATTandDEF:
+BuildMemberListScreen_NewAttAndDefPage:
                 
                 move.b  #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
@@ -751,7 +751,7 @@ loc_1302C:
                 
                 bra.w   BuildMemberListScreen
 
-    ; End of function BuildMemberListScreen_NewATTandDEF
+    ; End of function BuildMemberListScreen_NewAttAndDefPage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1066,12 +1066,12 @@ sub_13328:
                 beq.w   @Return
                 cmpi.b  #WINDOW_MEMBERSUMMARY_PAGE_ITEMS,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
                 bne.w   loc_13388
-				
+                
                 tst.b   ((byte_FFB13C-$1000000)).w
                 beq.w   @Return
                 cmpi.b  #1,((byte_FFB13C-$1000000)).w
                 bne.s   loc_13358
-				
+                
                 moveq   #$A,d1
                 bsr.w   sub_133A0
                 bsr.w   sub_13F14
@@ -1084,7 +1084,7 @@ loc_13358:
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 bne.s   loc_13378
-				
+                
                 moveq   #$A,d1
                 bsr.w   sub_133A0
                 bsr.w   sub_13F14
@@ -1165,12 +1165,12 @@ loc_133CC:
                 move.w  (a1)+,VDPSPRITE_OFFSET_X(a0)
                 addq.l  #VDP_SPRITE_SIZE,a0
                 dbf     d7,loc_133CC
-				
+                
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
                 tst.w   ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w
                 beq.s   loc_13404
-				
+                
                 cmpi.w  #7,d1
                 blt.s   loc_13404
                 move.w  #$97,VDPSPRITE_OFFSET_X(a0) 
@@ -1186,7 +1186,7 @@ loc_13404:
                 addq.w  #5,d0
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d0
                 bge.s   loc_13438
-				
+                
                 cmpi.w  #7,d1
                 blt.s   loc_13438
                 move.w  #$97,VDPSPRITE_OFFSET_X(a0) 
@@ -1220,7 +1220,12 @@ spr_MemberListTextHighlight:
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 vdpSprite 260, V2|H4|9, 1472|PALETTE3|PRIORITY, 156
+            if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                vdpSprite 260, V2|H1|10, 1474|PALETTE3|PRIORITY, 188
+                vdpSprite 260, V2|H4|11, 1472|MIRROR|PALETTE3|PRIORITY, 196
+            else
                 vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1295,26 +1300,26 @@ sub_134A8:
                 beq.s   loc_134E0
                 adda.w  #$74,a0 
                 adda.w  #$AE,a1 
-                move.w  #$20A,d7
+                move.w  #522,d7
                 jsr     (CopyBytes).w   
-                lea     word_13EDE(pc), a0
+                lea     wl_13EDE(pc), a0
                 suba.w  #$38,a1 
-                move.w  #$36,d7 
+                move.w  #54,d7
                 jsr     (CopyBytes).w   
                 bra.s   loc_13510
 loc_134E0:
                 
                 adda.w  #$E8,a0 
                 adda.w  #$AE,a1 
-                move.w  #$1D0,d7
+                move.w  #464,d7
                 jsr     (CopyBytes).w   
-                lea     word_13EDE(pc), a0
+                lea     wl_13EDE(pc), a0
                 suba.w  #$38,a1 
-                move.w  #$36,d7 
+                move.w  #54,d7
                 jsr     (CopyBytes).w   
-                lea     word_13EDE(pc), a0
+                lea     wl_13EDE(pc), a0
                 adda.w  #$20A,a1
-                move.w  #$36,d7 
+                move.w  #54,d7
                 jsr     (CopyBytes).w   
 loc_13510:
                 
@@ -1367,7 +1372,7 @@ sub_1354C:
                 lea     WindowBorderTiles(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
-                move.w  #$A0,d7 
+                move.w  #160,d7
                 jsr     (CopyBytes).w   
                 rts
 

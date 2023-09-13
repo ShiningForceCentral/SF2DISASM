@@ -4,19 +4,19 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Initialise Huffman decoder
+; Initialize Huffman decoder.
 ; - clear Huffman (script) data
 ; - set starting tree
 
 
-InitDecoder:
+InitializeHuffmanDecoder:
                 
                 move.b  #$FE,(DECODED_TEXT_SYMBOL).l
                 clr.w   (STRING_BIT_COUNTER).l
                 clr.w   (STRING_BYTE).l
                 rts
 
-    ; End of function InitDecoder
+    ; End of function InitializeHuffmanDecoder
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -41,7 +41,7 @@ HuffmanDecode:
 loc_2E150:
                 
                 dbf     d3,loc_2E158 
-				
+                
                 moveq   #7,d3
                 move.b  (a1)+,d2        ; Load next Huffman tree byte
 loc_2E158:
@@ -51,7 +51,7 @@ loc_2E158:
                                         ; C = 0 --> Non-leaf node, read next string bit
                                         ; 
                 dbf     d6,loc_2E164    
-				
+                
                 moveq   #7,d6
                 move.b  (a0)+,d7        ; Load next compressed string byte
 loc_2E164:

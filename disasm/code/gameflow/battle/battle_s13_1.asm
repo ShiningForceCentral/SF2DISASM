@@ -11,7 +11,7 @@
 
 LoadEndCreditsFont:
                 
-                movea.l (p_BaseTiles).l,a0
+                conditionalLongAddr movea.l, p_BaseTiles, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 lea     (byte_FF6C02).l,a0
@@ -61,13 +61,13 @@ loc_1AC31E:
                 
                 move.b  d0,(a1)+
                 dbf     d5,loc_1AC2E4
-				
+                
                 addq.l  #4,a1
                 dbf     d6,loc_1AC2E2
                 clr.l   (a1)+
                 addq.l  #4,a1
                 dbf     d7,loc_1AC2E0
-				
+                
                 lea     (FF8804_LOADING_SPACE).l,a0
                 lea     (BATTLE_ENTITY_MOVE_STRING).l,a1
                 clr.l   (a1)+
@@ -79,7 +79,7 @@ loc_1AC344:
                 mulu.w  #2,d0
                 move.l  d0,(a1)+
                 dbf     d7,loc_1AC344
-				
+                
                 lea     (FF8804_LOADING_SPACE).l,a0
                 lea     (BATTLE_ENTITY_MOVE_STRING).l,a1
                 move.w  #$3FE,d7
@@ -92,7 +92,7 @@ loc_1AC362:
                 and.l   (a1)+,d0
                 or.l    d0,(a0)+
                 dbf     d7,loc_1AC362
-				
+                
                 lea     (FF8804_LOADING_SPACE).l,a0
                 lea     ($2000).w,a1    ; ?
                 move.w  #$800,d0
@@ -111,9 +111,9 @@ loc_1AC362:
 sub_1AC38E:
                 
                 movem.l d0/d5-a6,-(sp)
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 move.w  d1,d3
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  d1,d4
                 jsr     j_GetAiSpecialMoveOrders
                 cmpi.b  #$FF,d1
@@ -134,16 +134,16 @@ loc_1AC3C2:
                 move.b  d1,d0
 loc_1AC3C4:
                 
-                btst    #6,d0
+                btst    #COMBATANT_BIT_SORT,d0
                 bne.s   loc_1AC3DC
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   loc_1AC3DC
                 move.w  #$FFFF,d5
                 bra.w   loc_1AC434
 loc_1AC3DC:
                 
-                jsr     GetEnemyAiTargetPosition
+                jsr     GetAiSpecialMoveOrderCoordinates
                 clr.w   d5
                 cmp.w   d3,d1
                 bge.s   loc_1AC3EC
@@ -198,53 +198,56 @@ loc_1AC434:
 
 ; =============== S U B R O U T I N E =======================================
 
+; used by AI
+
 
 GetMoveListForEnemyTarget:
                 
+                module
                 movem.l d0-a6,-(sp)
                 move.b  d0,d7
                 jsr     j_GetAiSpecialMoveOrders
                 cmpi.b  #$FF,d1
-                bne.s   loc_1AC454
-                bra.w   loc_1AC4EA
-                bra.s   loc_1AC456
-loc_1AC454:
+                bne.s   @IsFollowOrder  
+                bra.w   @Done
+                bra.s   loc_1AC456      ; unreachable code
+@IsFollowOrder:
                 
-                move.b  d1,d0
+                move.b  d1,d0           ; d0.w = AI special move order
 loc_1AC456:
                 
-                btst    #6,d0
-                bne.s   loc_1AC46A
-                jsr     j_GetCurrentHP
+                btst    #COMBATANT_BIT_SORT,d0
+                bne.s   @Continue       ; continue is ordered to move into position
+                jsr     j_GetCurrentHp
                 tst.w   d1
-                bne.s   loc_1AC46A
-                bra.w   loc_1AC4EA
-loc_1AC46A:
+                bne.s   @Continue       ; continue if combatant to follow is alive
+                bra.w   @Done
+@Continue:
                 
-                jsr     GetEnemyAiTargetPosition
+                jsr     GetAiSpecialMoveOrderCoordinates
                 clr.l   d5
                 clr.l   d6
                 move.w  d1,d5
                 move.w  d2,d6
                 move.w  d7,d0
-                jsr     j_GetMoveInfo   
+                jsr     j_GetMoveInfo
                 move.w  d5,d3
                 move.w  d6,d4
-                jsr     j_MakeRangeLists
-                move.w  #$2F,d4 
+                jsr     j_PopulateTotalMovecostsAndMovableGridArrays
+                move.w  #TERRAIN_ARRAY_ROWS_COUNTER,d4
                 move.w  #0,d2
-                lea     (BATTLE_TERRAIN).l,a0
+                lea     (BATTLE_TERRAIN_ARRAY).l,a0
                 lea     (FF4D00_LOADING_SPACE).l,a1
-loc_1AC49E:
+@OuterLoop:
                 
-                move.w  #$2F,d3 
+                move.w  #TERRAIN_ARRAY_COLUMNS_COUNTER,d3
                 move.w  #0,d1
-loc_1AC4A6:
+@InnerLoop:
                 
                 move.b  (a0,d1.w),d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #TERRAIN_OBSTRUCTED,d0
                 bne.s   loc_1AC4B4
-                bra.w   loc_1AC4D2
+                bra.w   @Next
 loc_1AC4B4:
                 
                 move.l  d3,-(sp)
@@ -253,27 +256,28 @@ loc_1AC4B4:
                 btst    #7,d0
                 beq.s   loc_1AC4D0
                 move.w  d3,d0
-                bset    #7,d0
+                bset    #7,d0           ; set obstruction flag
                 bset    #6,d0
                 move.b  d0,(a0,d1.w)
 loc_1AC4D0:
                 
                 move.l  (sp)+,d3
-loc_1AC4D2:
+@Next:
                 
                 addi.w  #1,d1
-                dbf     d3,loc_1AC4A6
-                adda.w  #$30,a0 
-                adda.w  #$30,a1 
+                dbf     d3,@InnerLoop
+                adda.w  #TERRAIN_ARRAY_OFFSET_NEXT_ROW,a0
+                adda.w  #TERRAIN_ARRAY_OFFSET_NEXT_ROW,a1
                 addi.w  #1,d2
-                dbf     d4,loc_1AC49E
-loc_1AC4EA:
+                dbf     d4,@OuterLoop
+@Done:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
     ; End of function GetMoveListForEnemyTarget
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -306,39 +310,39 @@ loc_1AC52A:
                 move.b  d1,d0
 loc_1AC52C:
                 
-                btst    #6,d0
+                btst    #COMBATANT_BIT_SORT,d0
                 bne.s   loc_1AC540
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   loc_1AC540
                 bra.w   loc_1AC5A4
 loc_1AC540:
                 
-                jsr     GetEnemyAiTargetPosition
+                jsr     GetAiSpecialMoveOrderCoordinates
                 move.w  d1,d5
                 move.w  d2,d6
-                lea     (BATTLE_TERRAIN).l,a0
-                move.w  #$2F,d4 
+                lea     (BATTLE_TERRAIN_ARRAY).l,a0
+                move.w  #TERRAIN_ARRAY_ROWS_COUNTER,d4
 loc_1AC554:
                 
-                move.w  #$2F,d3 
+                move.w  #TERRAIN_ARRAY_COLUMNS_COUNTER,d3
                 move.w  #0,d1
 loc_1AC55C:
                 
                 move.b  (a0,d1.w),d0
-                cmpi.b  #$FF,d0
-                bne.s   loc_1AC56A
+                cmpi.b  #TERRAIN_OBSTRUCTED,d0
+                bne.s   loc_1AC56A      
                 bra.w   loc_1AC576
 loc_1AC56A:
                 
-                bset    #7,d0
+                bset    #7,d0           ; set obstruction flags
                 bset    #6,d0
                 move.b  d0,(a0,d1.w)
 loc_1AC576:
                 
                 addi.w  #1,d1
                 dbf     d3,loc_1AC55C
-                adda.w  #$30,a0 
+                adda.w  #TERRAIN_ARRAY_OFFSET_NEXT_ROW,a0
                 dbf     d4,loc_1AC554
                 lea     byte_1AC848(pc), a0
                 nop
@@ -376,39 +380,39 @@ loc_1AC5C2:
                 move.b  d1,d0
 loc_1AC5C4:
                 
-                btst    #6,d0
+                btst    #COMBATANT_BIT_SORT,d0
                 bne.s   loc_1AC5D8
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   loc_1AC5D8
                 bra.w   loc_1AC64E
 loc_1AC5D8:
                 
-                bsr.w   GetEnemyAiTargetPosition
+                bsr.w   GetAiSpecialMoveOrderCoordinates
                 move.w  d1,d5
                 move.w  d2,d6
-                move.w  #$2F,d4 
-                lea     (BATTLE_TERRAIN).l,a0
+                move.w  #TERRAIN_ARRAY_ROWS_COUNTER,d4
+                lea     (BATTLE_TERRAIN_ARRAY).l,a0
 loc_1AC5EA:
                 
-                move.w  #$2F,d3 
+                move.w  #TERRAIN_ARRAY_COLUMNS_COUNTER,d3
                 move.w  #0,d1
 loc_1AC5F2:
                 
                 move.b  (a0,d1.w),d0
-                cmpi.b  #$FF,d0
-                bne.s   loc_1AC600
+                cmpi.b  #TERRAIN_OBSTRUCTED,d0
+                bne.s   loc_1AC600      
                 bra.w   loc_1AC60C
 loc_1AC600:
                 
-                bset    #7,d0
+                bset    #7,d0           ; set obstruction flags
                 bset    #6,d0
                 move.b  d0,(a0,d1.w)
 loc_1AC60C:
                 
                 addi.w  #1,d1
                 dbf     d3,loc_1AC5F2
-                adda.w  #$30,a0 
+                adda.w  #TERRAIN_ARRAY_OFFSET_NEXT_ROW,a0
                 dbf     d4,loc_1AC5EA
                 lea     byte_1AC848(pc), a0
                 nop
@@ -435,39 +439,40 @@ loc_1AC64E:
 
 ; =============== S U B R O U T I N E =======================================
 
-; clear upper two bits from all tiles in terrain list
+; Clear upper two bits from all entries in terrain array.
 
 
-ClearTerrainListObstructions:
+ClearBattleTerrainArrayObstructionFlags:
                 
                 movem.l d0-a6,-(sp)
-                move.w  #$2F,d4 
-                lea     (BATTLE_TERRAIN).l,a0
-loc_1AC662:
+                move.w  #TERRAIN_ARRAY_ROWS_COUNTER,d4
+                lea     (BATTLE_TERRAIN_ARRAY).l,a0
+@OuterLoop:
                 
-                move.w  #$2F,d3 
+                move.w  #TERRAIN_ARRAY_COLUMNS_COUNTER,d3
                 move.w  #0,d1
-loc_1AC66A:
+@InnerLoop:
                 
                 move.b  (a0,d1.w),d0
-                cmpi.b  #$FF,d0
-                bne.s   loc_1AC678
-                bra.w   loc_1AC684
-loc_1AC678:
+                cmpi.b  #TERRAIN_OBSTRUCTED,d0
+                bne.s   @ClearFlags
+                bra.w   @Next
+@ClearFlags:
                 
                 bclr    #7,d0
                 bclr    #6,d0
                 move.b  d0,(a0,d1.w)
-loc_1AC684:
+@Next:
                 
                 addi.w  #1,d1
-                dbf     d3,loc_1AC66A
-                adda.w  #$30,a0 
-                dbf     d4,loc_1AC662
+                dbf     d3,@InnerLoop
+                adda.w  #TERRAIN_ARRAY_OFFSET_NEXT_ROW,a0
+                dbf     d4,@OuterLoop
+                
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function ClearTerrainListObstructions
+    ; End of function ClearBattleTerrainArrayObstructionFlags
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -581,7 +586,7 @@ loc_1AC79C:
                 move.b  var_2(a6),d4
                 sub.b   var_1(a6),d4
                 ext.w   d4
-                lea     (BATTLE_TERRAIN).l,a0
+                lea     (BATTLE_TERRAIN_ARRAY).l,a0
                 move.b  var_1(a6),d2
                 ext.w   d2
 loc_1AC7B4:
@@ -595,7 +600,7 @@ loc_1AC7C4:
                 
                 movea.l a0,a1
                 move.l  d2,-(sp)
-                mulu.w  #$30,d2 
+                mulu.w  #48,d2
                 adda.w  d2,a1
                 move.l  (sp)+,d2
                 move.b  (a1,d1.w),d0
@@ -620,6 +625,9 @@ loc_1AC7E6:
 ; =============== S U B R O U T I N E =======================================
 
 ; AI-related
+; 
+;   In: a0 = pointer to relative coordinates list
+;       d5.w,d6.w = X,Y
 
 
 sub_1AC7FE:
@@ -628,119 +636,79 @@ sub_1AC7FE:
                 clr.w   d7
                 move.b  (a0)+,d7
                 subq.w  #1,d7
-loc_1AC808:
+@Loop:
                 
                 move.w  d6,d2
                 add.b   1(a0),d2
-                cmpi.w  #$30,d2 
-                bcc.w   loc_1AC83C
+                cmpi.w  #MAP_SIZE_MAXHEIGHT,d2
+                bcc.w   @Next
                 move.w  d5,d1
                 add.b   (a0),d1
-                cmpi.w  #$30,d1 
-                bcc.w   loc_1AC83C
+                cmpi.w  #MAP_SIZE_MAXWIDTH,d1
+                bcc.w   @Next
                 jsr     j_GetTerrain
-                cmpi.b  #$FF,d0
-                beq.s   loc_1AC83C
-                bclr    #7,d0
+                cmpi.b  #TERRAIN_OBSTRUCTED,d0
+                beq.s   @Next
+                bclr    #7,d0           ; clear obstructed flags
                 bclr    #6,d0
                 jsr     j_SetTerrain
-loc_1AC83C:
+@Next:
                 
                 addq.l  #2,a0
-                dbf     d7,loc_1AC808
+                dbf     d7,@Loop
                 movem.l (sp)+,d0-a1
                 rts
 
     ; End of function sub_1AC7FE
 
-byte_1AC848:    dc.b 1                  ; AI-related data
-                dc.b 0
-                dc.b 0
-byte_1AC84B:    dc.b 4                  ; AI-related data
-                dc.b 0
-                dc.b 1
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                dc.b $FF
-                dc.b $FF
-                dc.b 0
-byte_1AC854:    dc.b 8                  ; AI-related data
-                dc.b 0
-                dc.b $FE
-                dc.b $FF
-                dc.b $FF
-                dc.b $FE
-                dc.b 0
-                dc.b $FF
-                dc.b 1
-                dc.b 0
-                dc.b 2
-                dc.b 1
-                dc.b 1
-                dc.b 2
-                dc.b 0
-                dc.b 1
-                dc.b $FF
-byte_1AC865:    dc.b $C                 ; AI-related data
-                dc.b 0
-                dc.b $FD
-                dc.b $FF
-                dc.b $FE
-                dc.b $FE
-                dc.b $FF
-                dc.b $FD
-                dc.b 0
-                dc.b $FE
-                dc.b 1
-                dc.b $FF
-                dc.b 2
-                dc.b 0
-                dc.b 3
-                dc.b 1
-                dc.b 2
-                dc.b 2
-                dc.b 1
-                dc.b 3
-                dc.b 0
-                dc.b 2
-                dc.b $FF
-                dc.b 1
-                dc.b $FE
-byte_1AC87E:    dc.b $10                ; AI-related data
-                dc.b 0
-                dc.b $FC
-                dc.b $FF
-                dc.b $FD
-                dc.b $FE
-                dc.b $FE
-                dc.b $FD
-                dc.b $FF
-                dc.b $FC
-                dc.b 0
-                dc.b $FD
-                dc.b 1
-                dc.b $FE
-                dc.b 2
-                dc.b $FF
-                dc.b 3
-                dc.b 0
-                dc.b 4
-                dc.b 1
-                dc.b 3
-                dc.b 2
-                dc.b 2
-                dc.b 3
-                dc.b 1
-                dc.b 4
-                dc.b 0
-                dc.b 3
-                dc.b $FF
-                dc.b 2
-                dc.b $FE
-                dc.b 1
-                dc.b $FD
-                dc.b $FF
+byte_1AC848:    dc.b 1                  ; AI-related relative coordinates list
+                dc.b 0, 0
+byte_1AC84B:    dc.b 4                  ; AI-related relative coordinates list
+                dc.b 0, 1
+                dc.b 1, 0
+                dc.b 0, -1
+                dc.b -1, 0
+byte_1AC854:    dc.b 8                  ; AI-related relative coordinates list
+                dc.b 0, -2
+                dc.b -1, -1
+                dc.b -2, 0
+                dc.b -1, 1
+                dc.b 0, 2
+                dc.b 1, 1
+                dc.b 2, 0
+                dc.b 1, -1
+byte_1AC865:    dc.b 12                 ; AI-related relative coordinates list
+                dc.b 0, -3
+                dc.b -1, -2
+                dc.b -2, -1
+                dc.b -3, 0
+                dc.b -2, 1
+                dc.b -1, 2
+                dc.b 0, 3
+                dc.b 1, 2
+                dc.b 2, 1
+                dc.b 3, 0
+                dc.b 2, -1
+                dc.b 1, -2
+byte_1AC87E:    dc.b 16                 ; AI-related relative coordinates list
+                dc.b 0, -4
+                dc.b -1, -3
+                dc.b -2, -2
+                dc.b -3, -1
+                dc.b -4, 0
+                dc.b -3, 1
+                dc.b -2, 2
+                dc.b -1, 3
+                dc.b 0, 4
+                dc.b 1, 3
+                dc.b 2, 2
+                dc.b 3, 1
+                dc.b 4, 0
+                dc.b 3, -1
+                dc.b 2, -2
+                dc.b 1, -3
+                
+                align
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -751,7 +719,7 @@ GetLaserFacing:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 clr.w   d2
                 move.b  (a0),d2
                 lea     tbl_BattlesWithLasers(pc), a0
@@ -781,7 +749,7 @@ GetLaserFacing:
                 movea.l (a0,d3.w),a0
                 clr.w   d0
                 move.b  d7,d0
-                andi.w  #$7F,d0 
+                andi.w  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
                 clr.w   d6
                 move.b  (a0,d0.w),d6    ; get entity facing
                 cmpi.b  #$FF,d6
@@ -792,78 +760,118 @@ GetLaserFacing:
                 
                 clr.w   d0
                 move.b  d7,d0
-                jsr     j_GetYPos
+                jsr     j_GetCombatantY
                 move.w  d1,d2
-                jsr     j_GetXPos
-                jsr     j_ClearMovableGrid
+                jsr     j_GetCombatantX
+                jsr     j_ClearTotalMovecostsAndMovableGridArrays
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #0,d6
+                beq.s   @CheckFace_Up
+            else
                 tst.w   d6
                 bne.s   @CheckFace_Up
+            endif
                 addi.w  #1,d1
 @CheckFace_Up:
                 
-                cmpi.w  #1,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #1,d6
+                beq.s   @CheckFace_Left
+            else
+                cmpi.w  #UP,d6
                 bne.s   @CheckFace_Left
+            endif
                 subi.w  #1,d2
 @CheckFace_Left:
                 
-                cmpi.w  #2,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #2,d6
+                beq.s   @CheckFace_Down
+            else
+                cmpi.w  #LEFT,d6
                 bne.s   @CheckFace_Down
+            endif
                 subi.w  #1,d1
 @CheckFace_Down:
                 
-                cmpi.w  #3,d6
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #3,d6
+                beq.s   @ContinueToTargets
+            else
+                cmpi.w  #DOWN,d6
                 bne.s   @ContinueToTargets
+            endif
                 addi.w  #1,d2
 @ContinueToTargets:
                 
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d3
-@CheckTile_Loop:
+@CheckSpace_Loop:
                 
-                jsr     j_SetMovableAtCoord
-                jsr     j_GetTargetAtCoordOffset
+                jsr     j_SetMovableSpace
+                jsr     j_GetCombatantOccupyingSpace
                 cmpi.b  #$FF,d0
-                bne.s   @TargetOnTile
-                bra.w   @CheckIncrementTile_Right
-@TargetOnTile:
+                bne.s   @TargetOnSpace
+                bra.w   @CheckIncrementSpace_Right
+@TargetOnSpace:
                 
                 move.b  d0,(a0,d3.w)
                 addi.w  #1,d3
-@CheckIncrementTile_Right:
+@CheckIncrementSpace_Right:
                 
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #0,d6
+                beq.s   @CheckIncrementSpace_Up
+            else
                 tst.w   d6
-                bne.s   @CheckIncrementTile_Up
+                bne.s   @CheckIncrementSpace_Up
+            endif
                 addi.w  #1,d1
-                cmpi.w  #$2F,d1 
-                ble.s   @CheckIncrementTile_Up
+                cmpi.w  #47,d1
+                ble.s   @CheckIncrementSpace_Up
                 bra.w   @Done
-@CheckIncrementTile_Up:
+@CheckIncrementSpace_Up:
                 
-                cmpi.w  #1,d6
-                bne.s   @CheckIncrementTile_Left
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #1,d6
+                beq.s   @CheckIncrementSpace_Left
+            else
+                cmpi.w  #UP,d6
+                bne.s   @CheckIncrementSpace_Left
+            endif
                 subi.w  #1,d2
                 tst.w   d2
-                bpl.s   @CheckIncrementTile_Left
+                bpl.s   @CheckIncrementSpace_Left
                 bra.w   @Done
-@CheckIncrementTile_Left:
+@CheckIncrementSpace_Left:
                 
-                cmpi.w  #2,d6
-                bne.s   @CheckIncrementTile_Down
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #2,d6
+                beq.s   @CheckIncrementSpace_Down
+            else
+                cmpi.w  #LEFT,d6
+                bne.s   @CheckIncrementSpace_Down
+            endif
                 subi.w  #1,d1
                 tst.w   d1
-                bpl.s   @CheckIncrementTile_Down
+                bpl.s   @CheckIncrementSpace_Down
                 bra.w   @Done
-@CheckIncrementTile_Down:
+@CheckIncrementSpace_Down:
                 
-                cmpi.w  #3,d6
-                bne.s   @NextTile
+            if (STANDARD_BUILD&DIAGONAL_LASERS=1)
+                btst       #3,d6
+                beq.s   @NextSpace
+            else
+                cmpi.w  #DOWN,d6
+                bne.s   @NextSpace
+            endif
                 addi.w  #1,d2
-                cmpi.w  #$2F,d2 
-                ble.s   @NextTile
+                cmpi.w  #47,d2
+                ble.s   @NextSpace
                 bra.w   @Done
-@NextTile:
+@NextSpace:
                 
-                bra.s   @CheckTile_Loop
+                bra.s   @CheckSpace_Loop
 @Done:
                 
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0

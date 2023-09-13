@@ -16,10 +16,10 @@ CreateBattlefieldMiniStatusWindow:
                 move.w  #WINDOW_MINISTATUS_DEST,d1
                 lea     ((MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
                 tst.b   ((IS_TARGETING-$1000000)).w
-                beq.s   loc_11594
+                beq.s   @CreateWindow
                 addq.l  #2,a2
-                addi.w  #$15,d1
-loc_11594:
+                addi.w  #21,d1
+@CreateWindow:
                 
                 jsr     (CreateWindow).w
                 move.w  d0,(a2)
@@ -29,21 +29,21 @@ loc_11594:
                 bsr.w   BuildMiniStatusWindow
                 move.w  #1,d1
                 move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
-                move.w  #$1F,d4
+                move.w  #31,d4
                 sub.w   d3,d4
                 lsl.w   #8,d4
                 or.w    d4,d1
                 moveq   #4,d2
                 tst.b   ((IS_TARGETING-$1000000)).w
-                beq.s   loc_115C4
-                addi.w  #$15,d1
-loc_115C4:
+                beq.s   @MoveWindow
+                addi.w  #21,d1
+@MoveWindow:
                 
                 move.w  (a2),d0
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForVInt).w
-                bsr.w   sub_11804
+                bsr.w   DmaHpAndMpBarTiles
                 jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a2
                 rts
@@ -53,22 +53,24 @@ loc_115C4:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Move window offscreen, then clear it from memory.
 
-HideMiniStatusWindow:
+
+RemoveMiniStatusWindow:
                 
                 movem.l d0-a2,-(sp)
                 lea     ((MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
                 tst.b   ((IS_TARGETING-$1000000)).w
-                beq.s   loc_115F0
+                beq.s   @Continue
                 addq.l  #2,a2
-loc_115F0:
+@Continue:
                 
                 move.w  (a2),d0
                 move.w  #WINDOW_MINISTATUS_DEST,d1
                 tst.b   ((IS_TARGETING-$1000000)).w
-                beq.s   loc_11600
-                addi.w  #$15,d1
-loc_11600:
+                beq.s   @MoveWindow
+                addi.w  #21,d1
+@MoveWindow:
                 
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
@@ -79,7 +81,7 @@ loc_11600:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function HideMiniStatusWindow
+    ; End of function RemoveMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -87,7 +89,7 @@ loc_11600:
 
 CreateBattlesceneMiniStatusWindows:
                 
-                jsr     (InitWindowProperties).w
+                jsr     (InitializeWindowProperties).w
                 move.w  #WINDOW_MINISTATUS_SIZE,d0
                 move.w  #WINDOW_MINISTATUS_DEST,d1
                 jsr     (CreateWindow).w
@@ -137,7 +139,7 @@ loc_11674:
                 moveq   #1,d2
                 jsr     (MoveWindow).l  
                 jsr     (WaitForVInt).w
-                bsr.w   sub_11804
+                bsr.w   DmaHpAndMpBarTiles
                 jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a1
                 rts
@@ -202,7 +204,7 @@ loc_116F6:
                 moveq   #1,d2
                 jsr     (MoveWindow).l  
                 jsr     (WaitForVInt).w
-                bsr.w   sub_11804
+                bsr.w   DmaHpAndMpBarTiles
                 jsr     (WaitForWindowMovementEnd).w
                 movem.l (sp)+,d0-a1
 return_11714:
@@ -357,7 +359,7 @@ DrawColoredStatBar:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_11804:
+DmaHpAndMpBarTiles:
                 
                 movem.l d0-d2/a0-a1,-(sp)
                 lea     (FF8804_LOADING_SPACE).l,a0
@@ -369,7 +371,7 @@ sub_11804:
                 movem.l (sp)+,d0-d2/a0-a1
                 rts
 
-    ; End of function sub_11804
+    ; End of function DmaHpAndMpBarTiles
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -432,7 +434,12 @@ WriteStatBarColumn:
                 lsl.w   #2,d6
                 lsr.w   #3,d7
                 lsl.w   #5,d7
-                lsl.w   #2,d4
+                if (STANDARD_BUILD&FIX_GARBLED_HP_BAR=1)
+                    cmpi.w  #(WriteStatBarColumn-tbl_StatBarColumns-4)/4,d4
+                    ble.s   @Continue
+                    moveq   #(WriteStatBarColumn-tbl_StatBarColumns-4)/4,d4
+                endif
+@Continue:      lsl.w   #2,d4
                 move.l  tbl_StatBarColumns(pc,d4.w),d4
 @Loop:
                 

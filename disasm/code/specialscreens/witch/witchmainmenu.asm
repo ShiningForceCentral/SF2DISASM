@@ -25,9 +25,9 @@ WitchMainMenu:
                 jsr     (CreateWindow).l
                 move.w  d0,var_6(a6)
                 move.l  a1,var_4(a6)
-                movea.l (p_plt_WitchChoice).l,a0
+                conditionalLongAddr movea.l, p_plt_WitchChoice, a0
                 lea     (PALETTE_2_CURRENT).l,a1
-                move.w  #$20,d7 
+                move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 jsr     (ApplyVIntCramDma).w
                 bsr.w   sub_1679E
@@ -192,7 +192,7 @@ var_4 = -4
 
 DrawWitchMenuBubble:
                 
-                movea.l (p_WitchBubbleAnimation).l,a0
+                conditionalLongAddr movea.l, p_WitchBubbleAnimation, a0
                 movea.l var_4(a6),a1
                 cmp.b   d0,d3
                 bne.s   loc_1683A
@@ -247,7 +247,7 @@ WitchPage0_FileOptions:
                 rts
 
     ; End of function DrawWitchMenuBubble
-	
+    
 pt_s_WitchMenu:
                 
                 dc.l aStart             

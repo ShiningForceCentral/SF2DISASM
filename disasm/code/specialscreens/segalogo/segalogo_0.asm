@@ -43,29 +43,40 @@ DisplaySegaLogo:
                 jsr     (ApplyVIntCramDma).w
                 jsr     (EnableDmaQueueProcessing).w
                 jsr     (EnableDisplayAndInterrupts).w
+                
                 move.l  #tbl_ConfigurationModeInputSequence,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
+            if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
+                dc.l VInt_ActivateConfigurationModeCheat
+            else
                 dc.l VInt_CheckConfigurationModeCheat
+            endif
+                
                 move.l  #tbl_DebugModeInputSequence,((ENTITY_WALKING_PARAMS-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
+            if (STANDARD_BUILD&EASY_DEBUG_MODE=1)
+                dc.l VInt_ActivateDebugModeCheat
+            else
                 dc.l VInt_CheckDebugModeCheat
+            endif
+                
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 bsr.w   CalculateRomChecksum
                 lea     byte_28BB8(pc), a0
                 nop
                 bsr.w   sub_28B12
-                moveq   #$14,d0
+                moveq   #20,d0
                 jsr     (Sleep).w       
                 bsr.w   sub_28B12
                 move.l  #$D80405,(SPRITE_TRADEMARK).l
                 move.l  #$62014A,(SPRITE_TRADEMARK_VDPTILE).l
-                moveq   #$A,d0
+                moveq   #10,d0
                 jsr     (Sleep).w       
                 move.w  #$28,d0 
 @Continue:
@@ -91,9 +102,13 @@ DisplaySegaLogo:
                 bne.w   DisplaySegaLogo_Quit
                 subq.w  #1,d0
                 bne.s   @WaitForInput_Start
+                
+            if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
+            else
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
                 dc.l VInt_CheckConfigurationModeCheat
+            endif
 @Done:
                 
                 jsr     (FadeOutToBlack).w

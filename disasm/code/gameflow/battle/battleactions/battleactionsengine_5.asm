@@ -35,7 +35,7 @@ cutoff = -1
 WriteBattlesceneScript_InflictDamage:
                 
                 move.b  (a5),d0
-                jsr     GetEnemyIndex   
+                jsr     GetEnemy        
                 cmpi.w  #ENEMY_TAROS,d1 ; if enemy target is Taros, check if attack is ineffective
                 bne.s   @CheckCounterAttack ; otherwise, go to next step
                 tst.b   ineffectiveAttack(a2)
@@ -46,17 +46,17 @@ WriteBattlesceneScript_InflictDamage:
 @CheckCounterAttack:
                 
                 cmpi.w  #BATTLEACTION_ATTACKTYPE_COUNTER,((BATTLESCENE_ATTACK_TYPE-$1000000)).w
-                bne.s   @CheckBurstRock
+                bne.s   @CheckBurstRock 
                 lsr.w   #1,d6           ; inflict 1/2 damage if counter attack
 @CheckBurstRock:
                 
-                move.b  (a5),d0
-                jsr     GetEnemyIndex   
+                move.b  (a5),d0         ; No damage variance if target is Burst Rock
+                jsr     GetEnemy        
                 cmpi.w  #ENEMY_BURST_ROCK,d1
                 bne.s   @ApplyDamageVariance
                 tst.w   d6
                 bne.s   @Goto_CheckCutoff
-                moveq   #1,d6
+                moveq   #1,d6           ; minimum damage = 1
 @Goto_CheckCutoff:
                 
                 bra.w   @CheckCutoff
@@ -75,7 +75,7 @@ WriteBattlesceneScript_InflictDamage:
                 moveq   #1,d6           ; minimum damage = 1
 @CheckCutoff:
                 
-                jsr     CalculateDamageEXP
+                jsr     CalculateDamageExp
                 tst.b   cutoff(a2)
                 beq.s   @CheckTargetDies
                 move.w  #SPELLANIMATION_CUTOFF,d4
@@ -86,12 +86,12 @@ WriteBattlesceneScript_InflictDamage:
                 
                 move.b  (a5),d0
                 move.w  d6,d1
-                jsr     DecreaseCurrentHP
-                jsr     GetCurrentHP
+                jsr     DecreaseCurrentHp
+                jsr     GetCurrentHp
                 tst.w   d1
                 bne.s   @CheckExplode
                 move.b  #$FF,targetDies(a2)
-                bsr.w   GiveEXPandGoldForKill
+                bsr.w   AddExpAndGoldForKill
 @CheckExplode:
                 
                 move.b  (a5),d0
@@ -99,7 +99,7 @@ WriteBattlesceneScript_InflictDamage:
                 neg.w   d2
                 tst.b   targetDies(a2)
                 beq.s   @WriteScriptCommands
-                jsr     GetEnemyIndex   
+                jsr     GetEnemy        
                 cmpi.b  #ENEMY_BURST_ROCK,d1
                 bne.s   @WriteScriptCommands
                 tst.w   d7
@@ -217,7 +217,7 @@ pt_InflictAilmentFunctions:
                 dc.l WriteBattlesceneScript_InflictStun
                 dc.l WriteBattlesceneScript_InflictMuddle
                 dc.l WriteBattlesceneScript_InflictSlow
-                dc.l WriteBattlesceneScript_DrainMP
+                dc.l WriteBattlesceneScript_DrainMp
                 dc.l WriteBattlesceneScript_InflictSilence
 WriteBattlesceneScript_InflictPoison:
                 displayMessageWithNoWait #MESSAGE_BATTLE_IS_POISONED,d0,#0,#0 
@@ -258,19 +258,19 @@ WriteBattlesceneScript_InflictSlow:
 ; =============== S U B R O U T I N E =======================================
 
 
-WriteBattlesceneScript_DrainMP:
+WriteBattlesceneScript_DrainMp:
                 
                 movem.l d0-d1,-(sp)
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 tst.w   d1
                 beq.s   @Skip           ; skip if target has no MP
-                bsr.w   SpellEffect_DrainMP
+                bsr.w   SpellEffect_DrainMp
 @Skip:
                 
                 movem.l (sp)+,d0-d1
                 rts
 
-    ; End of function WriteBattlesceneScript_DrainMP
+    ; End of function WriteBattlesceneScript_DrainMp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -343,8 +343,8 @@ WriteBattlesceneScript_InflictCurseDamage:
                 lsr.w   #3,d3
                 addq.w  #1,d3           ; D3 = curse damage = (damage / 8) + 1
                 move.w  d3,d1
-                jsr     DecreaseCurrentHP
-                jsr     GetCurrentHP
+                jsr     DecreaseCurrentHp
+                jsr     GetCurrentHp
                 tst.w   d1
                 bne.s   @Continue
                 move.b  #$FF,targetDies(a2) ; killed by curse damage

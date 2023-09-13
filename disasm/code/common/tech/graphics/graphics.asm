@@ -7,7 +7,7 @@
 ; In: d0.w = Number of sprites to initialize
 
 
-InitSprites:
+InitializeSprites:
                 
                 movem.l d0-d1/a0,-(sp)
                 lea     (SPRITE_TABLE).l,a0
@@ -26,7 +26,7 @@ InitSprites:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-    ; End of function InitSprites
+    ; End of function InitializeSprites
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -331,7 +331,7 @@ loc_1982:
                 
                 addq.w  #1,d2
                 dbf     d7,loc_1976
-				
+                
                 subq.w  #1,d0
                 rts
 
@@ -364,6 +364,8 @@ loc_19A8:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; clear table related to sprites
 
 
 sub_19B0:
@@ -461,7 +463,7 @@ loc_1A1C:
                 move.b  d2,(a1)+
                 move.w  (sp)+,d7
                 dbf     d7,loc_1A1C
-				
+                
                 jsr     ApplyVIntCramDma(pc)
                 tst.b   ((FADING_TIMER_WORD-$1000000)).w
                 bne.s   return_1A7E
@@ -666,7 +668,7 @@ loc_1BEE:
                 
                 lsl.w   #4,d2
                 dbf     d3,loc_1BF8
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1BF8:
@@ -674,7 +676,7 @@ loc_1BF8:
                 add.w   d0,d0
                 bcc.w   loc_1C76
                 dbf     d3,loc_1C06
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1C06:
@@ -683,7 +685,7 @@ loc_1C06:
                 bcs.s   loc_1C22
                 moveq   #0,d1
                 dbf     d3,loc_1C14
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1C14:
@@ -692,12 +694,12 @@ loc_1C14:
                 addx.w  d1,d1
                 bset    d1,d2
                 dbf     d4,loc_1BEE
-				
+                
                 bra.w   loc_1C7A
 loc_1C22:
                 
                 dbf     d3,loc_1C2A
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1C2A:
@@ -706,12 +708,12 @@ loc_1C2A:
                 bcs.s   loc_1C38
                 addq.w  #4,d2
                 dbf     d4,loc_1BEE
-				
+                
                 bra.w   loc_1C7A
 loc_1C38:
                 
                 dbf     d3,loc_1C40
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1C40:
@@ -720,7 +722,7 @@ loc_1C40:
                 bcs.s   loc_1C4E
                 addq.b  #8,d2
                 dbf     d4,loc_1BEE
-				
+                
                 bra.w   loc_1C7A
 loc_1C4E:
                 
@@ -784,14 +786,14 @@ loc_1CB0:
 loc_1CB8:
                 
                 dbf     d3,loc_1CC0
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1CC0:
                 
                 add.w   d0,d0
                 dbcs    d5,loc_1CB8
-				
+                
                 addi.w  #$20,d5 
                 add.w   d5,d1
                 move.w  d1,(a1)+
@@ -803,7 +805,7 @@ loc_1CD4:
                 
                 lsl.w   #4,d7
                 dbf     d3,loc_1CDE
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1CDE:
@@ -811,7 +813,7 @@ loc_1CDE:
                 add.w   d0,d0
                 bcs.s   loc_1D08
                 dbf     d3,loc_1CEA
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1CEA:
@@ -820,7 +822,7 @@ loc_1CEA:
                 bcs.s   loc_1CF8
                 add.w   (a5),d7
                 dbf     d6,loc_1CD4
-				
+                
                 bra.w   loc_1E34
 loc_1CF8:
                 
@@ -829,12 +831,12 @@ loc_1CF8:
                 swap    d5
                 move.l  d5,(a5)
                 dbf     d6,loc_1CD4
-				
+                
                 bra.w   loc_1E34
 loc_1D08:
                 
                 dbf     d3,loc_1D10
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1D10:
@@ -842,7 +844,7 @@ loc_1D10:
                 add.w   d0,d0
                 bcs.s   loc_1D4E
                 dbf     d3,loc_1D1C
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1D1C:
@@ -854,7 +856,7 @@ loc_1D1C:
                 move.l  (a5),2(a5)
                 move.w  d5,(a5)
                 dbf     d6,loc_1CD4
-				
+                
                 bra.w   loc_1E34
 loc_1D34:
                 
@@ -865,12 +867,12 @@ loc_1D34:
                 swap    d5
                 move.w  d5,6(a5)
                 dbf     d6,loc_1CD4
-				
+                
                 bra.w   loc_1E34
 loc_1D4E:
                 
                 dbf     d3,loc_1D56
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1D56:
@@ -883,7 +885,7 @@ loc_1D56:
                 move.l  (a5),2(a5)
                 move.w  d5,(a5)
                 dbf     d6,loc_1CD4
-				
+                
                 bra.w   loc_1E34
 loc_1D74:
                 
@@ -973,7 +975,7 @@ loc_1E0A:
                 
                 moveq   #7,d5
                 dbf     d3,loc_1E14
-				
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1E14:
@@ -994,7 +996,7 @@ loc_1E26:
 loc_1E2A:
                 
                 dbf     d5,loc_1E26
-				
+                
                 move.w  d1,(a2)
                 dbf     d6,loc_1CD4
 loc_1E34:
@@ -1054,7 +1056,7 @@ loc_1E92:
                 
                 lsl.w   #4,d2           ; bit sequence 0 --> d2 = xxx0
                 dbf     d3,loc_1E8E     ; loop 4 times
-				
+                
                 bra.w   loc_1F24        
 loc_1E9C:
                 
@@ -1079,7 +1081,7 @@ loc_1EB4:
                 addx.w  d1,d1           ; d1 = 0 or 1 depending on parsed bit
                 bset    d1,d2           ; d2 = xxx1 or xxx2 if next bit was 1
                 dbf     d3,loc_1E8E     
-				
+                
                 bra.w   loc_1F24        
 loc_1EC0:
                 
@@ -1096,7 +1098,7 @@ loc_1ECC:
                 lsl.w   #4,d2           ; bit sequence 110 --> d2 = xxx4
                 addq.w  #4,d2           ; d2 = xxx4
                 dbf     d3,loc_1E8E     
-				
+                
                 bra.w   loc_1F24        
 loc_1ED8:
                 
@@ -1113,7 +1115,7 @@ loc_1EE4:
                 lsl.w   #4,d2           ; bit sequence 1110 --> d2 = xxx8
                 addq.b  #8,d2           ; d2 = xxx8
                 dbf     d3,loc_1E8E     
-				
+                
                 bra.w   loc_1F24        
 loc_1EF0:
                 
@@ -1174,7 +1176,7 @@ loc_1F3A:
                 
                 add.w   d4,d7           ; bit sequence 00, d7 = xxx0
                 dbf     d3,loc_1F30     
-				
+                
                 bra.w   loc_2040        
 loc_1F44:
                 
@@ -1186,9 +1188,9 @@ word_1F4C:
                 
                 dc.w $CD44              ; bit sequence 01, d7 = xxx1
                                         ;  exg     d6,d4
-                add.w	d4,d7           
+                add.w    d4,d7           
                 dbf     d3,loc_1F30     
-				
+                
                 bra.w   loc_2040        
 loc_1F58:
                 
@@ -1208,9 +1210,9 @@ loc_1F68:
                 
                 exg     d6,a3           ; bit sequence 100, d7 = xxx2
                 dc.w $CD44              ; exg     d6,d4
-                add.w	d4,d7           
+                add.w    d4,d7           
                 dbf     d3,loc_1F30     
-				
+                
                 bra.w   loc_2040        
 loc_1F76:
                 
@@ -1222,11 +1224,11 @@ word_1F7E:
                 
                 dc.w $C94B              ; bit sequence 101, d7 = xxx3
                                         ; exg     a4,a3
-                exg		d6,a3           
+                exg        d6,a3           
                 dc.w $CD44              ; exg     d6,d4
-                add.w	d4,d7           
+                add.w    d4,d7           
                 dbf     d3,loc_1F30     
-				
+                
                 bra.w   loc_2040        
 loc_1F8E:
                 
@@ -1248,7 +1250,7 @@ loc_1F9A:
                 move.l  d5,d4
                 add.w   d4,d7
                 dbf     d3,loc_1F30     
-				
+                
                 bra.w   loc_2040        
 loc_1FB0:
                 
@@ -1336,7 +1338,7 @@ loc_202A:
 loc_202E:
                 
                 dbf     d5,loc_202A     
-				
+                
                 move.w  a4,(a2)
                 movea.l a3,a4
                 movea.l d6,a3
@@ -1373,7 +1375,7 @@ loc_2068:
                                         ; relative offset of section to copy,
                                         ; in words back from current output position
                 dbeq    d5,loc_2068
-				
+                
                 beq.s   loc_2076
                 addx.w  d1,d1           ; 11th bit
                 bra.s   loc_2082

@@ -4,11 +4,13 @@
 ; FREE SPACE : 871 bytes.
 
 
-                include "code\common\tech\pointers\s12_pointers.asm"    ; Game Section 12 Pointers
-                include "data\graphics\battles\battlesprites\allies\entries.asm"    ; Ally battlesprites
-                include "data\graphics\battles\tech\statusanimation\entries.asm"    ; Status effect animation tiles
-                include "data\graphics\battles\tech\battlescenetransition\entries.asm"    ; Battlescene transition tiles
+                includeIfVanillaLayout "code\common\tech\pointers\s12_pointers.asm"    ; Game Section 12 Pointers
+                includeIfExpandedRom "data\scripting\text\entries.asm"    ; Textbank entries
+                includeIfVanillaRom "data\graphics\battles\battlesprites\allies\entries.asm"    ; Ally battlesprites
+                includeIfVanillaRom "data\graphics\battles\tech\statusanimation\entries.asm"    ; Status effect animation tiles
+                includeIfVanillaRom "data\graphics\battles\tech\battlescenetransition\entries.asm"    ; Battlescene transition tiles
                 include "data\graphics\battles\spells\animations\boltanimdata.asm"    ; Bolt spell animation data
                 include "data\graphics\battles\battlesprites\allies\animations\entries.asm"    ; Ally animations
                 include "data\graphics\battles\battlesprites\enemies\animations\entries.asm"    ; Enemy animations
-                align $1AC000
+                includeIfExpandedRom "code\specialscreens\credits\gamestaff.asm" ; Game Staff
+                alignIfVanillaLayout $1AC000

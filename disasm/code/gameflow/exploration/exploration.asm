@@ -153,7 +153,7 @@ loc_3736:
 sub_3758:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 beq.s   loc_3770
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3770
@@ -163,7 +163,7 @@ loc_3770:
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d4
                 cmp.w   d0,d4
                 beq.s   return_37B0
-                bset    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bset    #3,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 cmp.w   d0,d4
                 bge.s   return_37B0
                 movem.w d0-d3,-(sp)
@@ -192,7 +192,7 @@ return_37B0:
 sub_37B2:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 beq.s   loc_37CA
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_37CA
@@ -202,7 +202,7 @@ loc_37CA:
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d4
                 cmp.w   d1,d4
                 beq.s   return_380A
-                bset    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bset    #2,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 cmp.w   d1,d4
                 bge.s   return_380A
                 movem.w d0-d3,-(sp)
@@ -231,7 +231,7 @@ return_380A:
 sub_380C:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 beq.s   loc_3824
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_3824
@@ -241,7 +241,7 @@ loc_3824:
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d4
                 cmp.w   d2,d4
                 beq.s   return_3864
-                bset    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bset    #1,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 cmp.w   d2,d4
                 bge.s   return_3864
                 movem.w d0-d3,-(sp)
@@ -270,7 +270,7 @@ return_3864:
 sub_3866:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 beq.s   loc_387E
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_387E
@@ -280,7 +280,7 @@ loc_387E:
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d4
                 cmp.w   d3,d4
                 beq.s   return_38BE
-                bset    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bset    #0,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 cmp.w   d3,d4
                 bge.s   return_38BE
                 movem.w d0-d3,-(sp)
@@ -367,24 +367,24 @@ var_2 = -2
 VInt_UpdateScrollingData:
                 
                 link    a6,#-2
-                move.b  ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w,d0
+                move.b  ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w,d0
                 andi.b  #$C,d0
                 beq.s   loc_3944
                 move.b  #$FF,((HIDE_WINDOWS-$1000000)).w
 loc_3944:
                 
-                tst.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                tst.b   ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 beq.w   loc_3C44
                 movem.w d0-d7,-(sp)
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 beq.s   loc_3968
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3968
                 move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_3968:
                 
-                btst    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                btst    #3,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 beq.w   loc_3A1A
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 move.w  d0,d5
@@ -428,13 +428,13 @@ loc_39D4:
                 sub.w   d1,d4
                 bne.s   loc_39E6
                 move.w  d1,d0
-                bclr    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bclr    #3,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_39E6:
                 
                 eor.w   d5,d4
                 bge.s   loc_39F2
                 move.w  d1,d0
-                bclr    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bclr    #3,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_39F2:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
@@ -456,7 +456,7 @@ loc_3A0A:
                 move.w  d0,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
 loc_3A1A:
                 
-                btst    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                btst    #2,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 beq.w   loc_3AC8
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d0
                 move.w  d0,d5
@@ -500,13 +500,13 @@ loc_3A82:
                 sub.w   d1,d4
                 bne.s   loc_3A94
                 move.w  d1,d0
-                bclr    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bclr    #2,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_3A94:
                 
                 eor.w   d5,d4
                 bge.s   loc_3AA0
                 move.w  d1,d0
-                bclr    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bclr    #2,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_3AA0:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
@@ -529,14 +529,14 @@ loc_3AB8:
 loc_3AC8:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
-                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 beq.s   loc_3AE0
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_3AE0
                 move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
 loc_3AE0:
                 
-                btst    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                btst    #1,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 beq.w   loc_3B92
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 move.w  d0,d5
@@ -580,13 +580,13 @@ loc_3B4C:
                 sub.w   d1,d4
                 bne.s   loc_3B5E
                 move.w  d1,d0
-                bclr    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bclr    #1,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_3B5E:
                 
                 eor.w   d5,d4
                 bge.s   loc_3B6A
                 move.w  d1,d0
-                bclr    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bclr    #1,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_3B6A:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
@@ -608,7 +608,7 @@ loc_3B82:
                 move.w  d0,((VIEW_PLANE_B_X_COUNTER-$1000000)).w
 loc_3B92:
                 
-                btst    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                btst    #0,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 beq.w   loc_3C40
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d0
                 move.w  d0,d5
@@ -652,13 +652,13 @@ loc_3BFA:
                 sub.w   d1,d4
                 bne.s   loc_3C0C
                 move.w  d1,d0
-                bclr    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bclr    #0,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_3C0C:
                 
                 eor.w   d5,d4
                 bge.s   loc_3C18
                 move.w  d1,d0
-                bclr    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bclr    #0,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_3C18:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
@@ -708,7 +708,7 @@ loc_3C7A:
                 move.w  d1,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
 loc_3C82:
                 
-                bset    #3,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bset    #3,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_3C88:
                 
                 move.b  ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w,d0
@@ -734,7 +734,7 @@ loc_3CB6:
                 move.w  d1,((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w
 loc_3CBE:
                 
-                bset    #2,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bset    #2,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_3CC4:
                 
                 move.b  ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w,d0
@@ -762,7 +762,7 @@ loc_3CFA:
                 move.w  d1,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
 loc_3D02:
                 
-                bset    #1,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bset    #1,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 loc_3D08:
                 
                 move.b  ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w,d0
@@ -789,7 +789,7 @@ loc_3D38:
                 move.w  d1,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
 loc_3D40:
                 
-                bset    #0,((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                bset    #0,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
 
     ; End of function VInt_UpdateScrollingData
 
@@ -928,7 +928,7 @@ loc_3E10:
 
 OpenDoor:
                 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.w   return_3F22
                 
                 movem.w d0-d7,-(sp)
@@ -942,8 +942,8 @@ OpenDoor:
                 move.b  (a2,d1.w),d1
                 andi.w  #$3F,d1 
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d7
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $16(a2),a2      ; get map step events
@@ -1051,8 +1051,8 @@ loc_3F38:
                 move.w  ENTITYDEF_OFFSET_Y(a0,d4.w),d5
                 move.w  (a0,d4.w),d4
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
-                movea.l (p_pt_MapData).l,a0
+                getSavedByte CURRENT_MAP, d1
+                conditionalLongAddr movea.l, p_pt_MapData, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
                 movea.l $1A(a0),a0
@@ -1134,8 +1134,8 @@ PerformMapBlockCopyScript:
                 move.b  (a3,d1.w),d1
                 andi.w  #$3F,d1 
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d7
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $1A(a2),a2
@@ -1402,8 +1402,8 @@ loc_422C:
 GetChestItem:
                 
                 clr.w   d2
-                move.b  ((CURRENT_MAP-$1000000)).w,d2
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d2
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data
                 movea.l $22(a2),a2      ; get address of current map's chest item data
@@ -1418,8 +1418,8 @@ GetChestItem:
 GetNonChestItem:
                 
                 clr.w   d2
-                move.b  ((CURRENT_MAP-$1000000)).w,d2
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d2
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2
                 movea.l $26(a2),a2      ; get address of current map's non-chest item data
@@ -1435,11 +1435,11 @@ GetItem:
                 move.w  d0,d4           ; save d0 and d1
                 move.w  d1,d5
                 clr.w   d2
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d2
+                getSavedByte CURRENT_BATTLE, d2
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,d2
                 beq.w   loc_4290        ; if we are not in battle branch
                 movem.l a0,-(sp)
-                lea     (BattleMapCoordinates).w,a0
+                conditionalWordAddr lea,BattleMapCoordinates,a0
                 mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE,d2 ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
                 add.b   1(a0,d2.w),d0
                 add.b   2(a0,d2.w),d1   ; add x1 and y1 of battle camera bounds
@@ -1469,6 +1469,9 @@ loc_42C6:
                 moveq   #$FFFFFFFF,d0
                 move.w  d0,d1
                 move.w  d0,d2
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                andi.b  #ITEM_NOTHING,d2
+            endif
 loc_42CC:
                 
                 lea     (FF0000_RAM_START).l,a2
@@ -1493,8 +1496,8 @@ WarpIfSetAtPoint:
                 divs.w  #$180,d0
                 divs.w  #$180,d1
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d7
+                conditionalLongAddr movea.l, p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $1E(a2),a2
@@ -1624,7 +1627,7 @@ UpdateVdpPlane:
                 lea     MapOffsetHashTable(pc), a3
                 lea     (FF0000_RAM_START).l,a4
                 lea     (FF2000_LOADING_SPACE).l,a5
-                cmpi.b  #$F,((FADING_PALETTE_BITMAP-$1000000)).w
+                cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 bne.w   loc_44B4
                 moveq   #$20,d7 
 loc_4434:

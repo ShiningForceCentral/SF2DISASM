@@ -21,7 +21,7 @@ GenerateBattleTurnOrder:
 @AddAllyTurns_Loop:
                 
                 move.w  d7,-(sp)
-                bsr.w   AddCombatantAndRandomizedAGItoTurnOrder
+                bsr.w   AddCombatantAndRandomizedAgiToTurnOrder
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,@AddAllyTurns_Loop
@@ -31,7 +31,7 @@ GenerateBattleTurnOrder:
 @AddEnemyTurns_Loop:
                 
                 move.w  d7,-(sp)
-                bsr.w   AddCombatantAndRandomizedAGItoTurnOrder
+                bsr.w   AddCombatantAndRandomizedAgiToTurnOrder
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,@AddEnemyTurns_Loop
@@ -69,15 +69,15 @@ GenerateBattleTurnOrder:
 ;     d0.w = combatant index
 
 
-AddCombatantAndRandomizedAGItoTurnOrder:
+AddCombatantAndRandomizedAgiToTurnOrder:
                 
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 tst.b   d1
                 bmi.w   @Return
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.w   @Return         ; skip if combatant is not alive
-                jsr     j_GetCurrentAGI
+                jsr     j_GetCurrentAgi
                 move.w  d1,d3
                 andi.w  #TURN_AGILITY_MASK,d1
                 move.w  d1,d6
@@ -90,7 +90,7 @@ AddCombatantAndRandomizedAGItoTurnOrder:
                 jsr     (GenerateRandomNumber).w
                 subq.w  #1,d7
                 add.w   d7,d1
-                move.b  d0,(a0)+
+@AddTurnData1:  move.b  d0,(a0)+
                 move.b  d1,(a0)+
                 cmpi.w  #TWO_TURN_THRESHOLD,d3
                 blt.s   @Return
@@ -106,11 +106,11 @@ AddCombatantAndRandomizedAGItoTurnOrder:
                 add.w   d7,d1
                 jsr     (GenerateRandomNumber).w
                 sub.w   d7,d1
-                move.b  d0,(a0)+
+@AddTurnData2:  move.b  d0,(a0)+
                 move.b  d1,(a0)+
 @Return:
                 
                 rts
 
-    ; End of function AddCombatantAndRandomizedAGItoTurnOrder
+    ; End of function AddCombatantAndRandomizedAgiToTurnOrder
 

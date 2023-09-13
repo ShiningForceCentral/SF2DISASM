@@ -4,140 +4,158 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: a2, a3 = movecost arrays
+;     d0.w = move value (MOV*2)
+;     d3.b, d4.b = moving combatant X, Y
+
 var_64 = -64
 var_63 = -63
 
-MakeRangeLists:
+PopulateTotalMovecostsAndMovableGridArrays:
                 
+                module
                 movem.l d0-a5,-(sp)
                 link    a6,#-64
                 lea     (a6),a1
-                move.w  #$F,d5
+                move.w  #15,d5
                 move.l  #$40004000,d1
-loc_DA96:
+@InitStackFrame_Loop:
                 
                 move.l  d1,-(a1)
-                dbf     d5,loc_DA96
+                dbf     d5,@InitStackFrame_Loop
+                
                 lea     (a3),a1
-                move.w  #$8F,d5 
-                moveq   #$FFFFFFFF,d1
-loc_DAA4:
+                move.w  #143,d5
+                moveq   #-1,d1
+@InitArray1_Loop:
                 
                 move.l  d1,(a1)+
                 move.l  d1,(a1)+
                 move.l  d1,(a1)+
                 move.l  d1,(a1)+
-                dbf     d5,loc_DAA4
+                dbf     d5,@InitArray1_Loop
+                
                 lea     (a2),a1
-                move.w  #$8F,d5 
-                moveq   #$FFFFFFFF,d1
-loc_DAB8:
+                move.w  #143,d5
+                moveq   #-1,d1
+@InitArray2_Loop:
                 
                 move.l  d1,(a1)+
                 move.l  d1,(a1)+
                 move.l  d1,(a1)+
                 move.l  d1,(a1)+
-                dbf     d5,loc_DAB8
+                dbf     d5,@InitArray2_Loop
+                
                 clr.w   d6
                 moveq   #0,d5
                 move.b  d4,d5
-                mulu.w  #$30,d5 
+                mulu.w  #MAP_SIZE_MAXWIDTH,d5
                 andi.w  #$FF,d3
-                add.w   d3,d5
-loc_DAD4:
+                add.w   d3,d5           ; d5.w = coordinates converted to offset
+@Loop:
                 
-                move.b  d6,(a2,d5.w)
+                move.b  d6,(a2,d5.w)    ; populate array entry with move count
                 move.w  d6,d1
                 lsr.w   #8,d1
                 move.b  d1,(a3,d5.w)
-                tst.b   1(a3,d5.w)
-                bpl.s   loc_DAEC
+                
+                ; Check right
+                tst.b   1(a3,d5.w)      ; check 1 space ahead to the right
+                bpl.s   @CheckLeft
                 addq.w  #1,d5
-                bsr.s   sub_DB48
+                bsr.s   sub_DB48        
                 subq.w  #1,d5
-loc_DAEC:
+@CheckLeft:
                 
                 tst.b   -1(a3,d5.w)
-                bpl.s   loc_DAF8
+                bpl.s   @CheckUp
                 subq.w  #1,d5
-                bsr.s   sub_DB48
+                bsr.s   sub_DB48        
                 addq.w  #1,d5
-loc_DAF8:
+@CheckUp:
                 
-                tst.b   -$30(a3,d5.w)
-                bpl.s   loc_DB08
-                subi.w  #$30,d5 
-                bsr.s   sub_DB48
-                addi.w  #$30,d5 
-loc_DB08:
+                tst.b   -MAP_SIZE_MAXWIDTH(a3,d5.w)
+                bpl.s   @CheckDown
+                subi.w  #MAP_SIZE_MAXWIDTH,d5
+                bsr.s   sub_DB48        
+                addi.w  #MAP_SIZE_MAXWIDTH,d5
+@CheckDown:
                 
-                tst.b   $30(a3,d5.w)
+                tst.b   MAP_SIZE_MAXWIDTH(a3,d5.w)
                 bpl.s   loc_DB18
-                addi.w  #$30,d5 
-                bsr.s   sub_DB48
-                subi.w  #$30,d5 
+                addi.w  #MAP_SIZE_MAXWIDTH,d5
+                bsr.s   sub_DB48        
+                subi.w  #MAP_SIZE_MAXWIDTH,d5
 loc_DB18:
                 
                 move.w  d0,d1
                 andi.w  #$1F,d1
                 add.w   d1,d1
-                move.w  var_64(a6,d1.w),d5
-                btst    #$E,d5
-                bne.s   loc_DB38
+                move.w  var_64(a6,d1.w),d5 ; retrieve coordinates offset
+                btst    #14,d5
+                bne.s   @Break          
                 move.b  (a3,d5.w),var_64(a6,d1.w)
                 move.b  (a2,d5.w),var_63(a6,d1.w)
-                bra.s   loc_DAD4
-loc_DB38:
+                bra.s   @Loop           
+@Break:
                 
-                addq.w  #1,d6
-                subq.w  #1,d0
-                bmi.s   loc_DB40
+                addq.w  #1,d6           ; increment move count
+                subq.w  #1,d0           ; decrement move value
+                bmi.s   @Done
                 bne.s   loc_DB18
-loc_DB40:
+@Done:
                 
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
 
-    ; End of function MakeRangeLists
+    ; End of function PopulateTotalMovecostsAndMovableGridArrays
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: a2, a3 = movecost arrays
+;     a4 = pointer to battle terrain array
+;     a5 = pointer to move costs table
+;     d0.w = move value (MOV*2)
+;     d5.w = coordinates offset
+;     d6.w = move count
 
 var_64 = -64
 var_63 = -63
 
 sub_DB48:
                 
-                cmpi.w  #$900,d5
-                bcs.s   loc_DB50
+                cmpi.w  #2304,d5
+                bcs.s   @Continue       ; continue if not reached end of array
                 rts
-loc_DB50:
+@Continue:
                 
-                move.b  (a4,d5.w),d1
+                move.b  (a4,d5.w),d1    ; d1.w = terrain entry
                 btst    #7,d1
-                beq.s   loc_DB5C
+                beq.s   @SpaceNotOccupied ; continue if space is not occupied
                 rts
-loc_DB5C:
+@SpaceNotOccupied:
                 
-                andi.w  #$1F,d1
+                andi.w  #$1F,d1         ; d1.w = terrain type
                 move.b  (a5,d1.w),d2
-                ext.w   d2
+                ext.w   d2              ; d2.w = move cost
                 cmp.w   d2,d0
-                bcc.s   loc_DB6C
+                bcc.s   @CanAffordMove  ; continue if move can be afforded
                 rts
-loc_DB6C:
+@CanAffordMove:
                 
-                beq.s   loc_DB8A
+                beq.s   @Skip           ; skip if move value is fully expanded
                 move.w  d0,d1
-                sub.w   d2,d1
+                sub.w   d2,d1           ; subtract movecost from value
                 andi.w  #$1F,d1
                 add.w   d1,d1
                 move.b  var_64(a6,d1.w),(a3,d5.w)
                 move.b  var_63(a6,d1.w),(a2,d5.w)
-                move.w  d5,var_64(a6,d1.w)
-                rts
-loc_DB8A:
+                move.w  d5,var_64(a6,d1.w) ; store coordinates offset
+                rts                     ; (and clear bit 14 from stack frame entry in the process, indicating that the space has been checked)
+@Skip:
                 
                 add.w   d6,d2
                 move.b  d2,(a2,d5.w)
@@ -151,27 +169,32 @@ loc_DB8A:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: a2, a3 = pointers to total movecosts and movable grid arrays
+;     d0.b, d1.b = X, Y
 
-MakeBattleEntityCancelMoveString:
+
+BuildCancelMoveString:
                 
                 movem.l d0-d6/a0-a5,-(sp)
-                bsr.w   sub_DBA8
+                bsr.w   alt_BuildCancelMoveString
                 movem.l (sp)+,d0-d6/a0-a5
                 rts
 
-    ; End of function MakeBattleEntityCancelMoveString
+    ; End of function BuildCancelMoveString
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Alternate entry point
 
-sub_DBA8:
+
+alt_BuildCancelMoveString:
                 
                 clr.w   d2
                 move.b  d1,d2
-                mulu.w  #$30,d2 
+                mulu.w  #MAP_SIZE_MAXWIDTH,d2
                 andi.w  #$FF,d0
-                add.w   d0,d2
+                add.w   d0,d2           ; d2.w = coordinates converted to offset
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 clr.b   d3
 loc_DBBC:
@@ -179,7 +202,7 @@ loc_DBBC:
                 move.b  (a3,d2.w),d4
                 lsl.w   #8,d4
                 move.b  (a2,d2.w),d4
-                tst.w   d4
+                tst.w   d4              ; d4.w = (upper byte), (lower byte)
                 bne.s   loc_DBCE
                 bra.w   loc_DD0A
 loc_DBCE:
@@ -201,7 +224,7 @@ loc_DBE8:
                 bne.s   loc_DBFA
 loc_DBEE:
                 
-                cmpi.w  #$900,d2
+                cmpi.w  #MAP_ARRAY_SIZE,d2
                 bcc.s   loc_DBFA
                 bset    #0,d5
                 move.w  d0,d4
@@ -223,7 +246,7 @@ loc_DC12:
                 bne.s   loc_DC2E
 loc_DC18:
                 
-                cmpi.w  #$900,d2
+                cmpi.w  #MAP_ARRAY_SIZE,d2
                 bcc.s   loc_DC2E
                 tst.b   d5
                 bne.s   loc_DC28
@@ -239,7 +262,7 @@ loc_DC2E:
                 
                 addq.w  #1,d2
                 clr.b   d0
-                subi.w  #$30,d2 
+                subi.w  #48,d2
                 move.b  (a3,d2.w),d0
                 lsl.w   #8,d0
                 move.b  (a2,d2.w),d0
@@ -253,7 +276,7 @@ loc_DC48:
                 bne.s   loc_DC64
 loc_DC4E:
                 
-                cmpi.w  #$900,d2
+                cmpi.w  #MAP_ARRAY_SIZE,d2
                 bcc.s   loc_DC64
                 tst.b   d5
                 bne.s   loc_DC5E
@@ -267,9 +290,9 @@ loc_DC62:
                 move.w  d0,d4
 loc_DC64:
                 
-                addi.w  #$30,d2 
+                addi.w  #48,d2
                 clr.b   d0
-                addi.w  #$30,d2 
+                addi.w  #48,d2
                 move.b  (a3,d2.w),d0
                 lsl.w   #8,d0
                 move.b  (a2,d2.w),d0
@@ -283,7 +306,7 @@ loc_DC80:
                 bne.s   loc_DC9C
 loc_DC86:
                 
-                cmpi.w  #$900,d2
+                cmpi.w  #MAP_ARRAY_SIZE,d2
                 bcc.s   loc_DC9C
                 tst.b   d5
                 bne.s   loc_DC96
@@ -297,7 +320,7 @@ loc_DC9A:
                 move.w  d0,d4
 loc_DC9C:
                 
-                subi.w  #$30,d2 
+                subi.w  #48,d2
                 move.b  d3,d1
                 and.b   d5,d1
                 bne.s   loc_DCAA
@@ -344,7 +367,7 @@ loc_DCE6:
                 
                 moveq   #1,d5
                 moveq   #2,d3
-                subi.w  #$30,d2 
+                subi.w  #48,d2
                 bra.w   loc_DD04
 loc_DCF2:
                 
@@ -356,38 +379,37 @@ loc_DCFC:
                 
                 moveq   #3,d5
                 moveq   #8,d3
-                addi.w  #$30,d2 
+                addi.w  #48,d2
 loc_DD04:
                 
                 move.b  d5,(a0)+
                 bra.w   loc_DBBC
 loc_DD0A:
                 
-                move.b  #$FF,(a0)
+                move.b  #CODE_TERMINATOR_BYTE,(a0)
                 rts
 
-    ; End of function sub_DBA8
+    ; End of function alt_BuildCancelMoveString
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = loading space
-;     A3 = loading space
-;     D0 = destination X
-;     D1 = destination Y
+; In: a2, a3 = pointers to total movecosts and movable grid arrays
+;     d0.b, d1.b = destination X,Y
 
 
-MakeAiMoveString:
+BuildAiMoveString:
                 
+                module
                 movem.l d0-d6/a0-a5,-(sp)
-                bsr.w   sub_DBA8
+                bsr.w   alt_BuildCancelMoveString
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
                 move.w  a0,d0
                 move.w  a1,d1
-                sub.w   d1,d0
-                bne.s   loc_DD28
-                bra.w   loc_DD5A
-loc_DD28:
+                sub.w   d1,d0           ; d0.w = move string length
+                bne.s   @Continue
+                bra.w   @Done
+@Continue:
                 
                 move.w  d0,d2
                 lsr.w   #1,d2
@@ -405,7 +427,7 @@ loc_DD36:
                 move.b  d1,(a0)
                 cmpa.w  a0,a1
                 bne.s   loc_DD48
-                bra.w   loc_DD5A
+                bra.w   @Done
 loc_DD48:
                 
                 eori.b  #2,d0
@@ -413,13 +435,14 @@ loc_DD48:
                 suba.w  #1,a0
                 adda.w  #1,a1
                 dbf     d2,loc_DD36
-loc_DD5A:
+@Done:
                 
                 movem.l (sp)+,d0-d6/a0-a5
                 rts
 
-    ; End of function MakeAiMoveString
+    ; End of function BuildAiMoveString
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -438,54 +461,61 @@ AddAllToStack:
 ; =============== S U B R O U T I N E =======================================
 
 ; should be combined with following subroutine
+; 
+; In: a2, a3 = pointers to total movecosts and movable grid arrays
+;     d0.w, d1.w = starting X, Y
+;     d3.w = move value (MOV*2)
 
-j_makeEnemyMoveOrder:
+
+
+BuildMoveString:
                 
+                module
                 movem.l d0-d6/a0-a5,-(sp)
-                bsr.w   MakeEnemyMoveOrder
+                bsr.w   alt_BuildMoveString
                 movem.l (sp)+,d0-d6/a0-a5
                 rts
 
-    ; End of function j_makeEnemyMoveOrder
+    ; End of function BuildMoveString
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; create enemy move order from movecost lists
+; Alternate entry point
 
 
-MakeEnemyMoveOrder:
+alt_BuildMoveString:
                 
                 clr.w   d2
                 move.b  d1,d2
-                mulu.w  #$30,d2 
+                mulu.w  #MAP_SIZE_MAXWIDTH,d2
                 andi.w  #$FF,d0
-                add.w   d0,d2
+                add.w   d0,d2           ; d2.w = coordinates converted to offset
                 move.b  (a3,d2.w),d6
                 lsl.w   #8,d6
                 move.b  (a2,d2.w),d6
                 ext.w   d3
-                sub.w   d3,d6
+                sub.w   d3,d6           ; d6.w = move cost - move value
                 tst.w   d6
-                bpl.s   loc_DD9A
+                bpl.s   @Continue
                 clr.w   d6
-loc_DD9A:
+@Continue:
                 
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 clr.b   d3
-loc_DDA0:
+@Start:
                 
                 move.b  (a3,d2.w),d4
                 lsl.w   #8,d4
-                move.b  (a2,d2.w),d4
+                move.b  (a2,d2.w),d4    ; d4.w =
                 cmp.w   d4,d6
                 bcs.s   loc_DDB2
-                bra.w   loc_DEF6
+                bra.w   @Done
 loc_DDB2:
                 
                 tst.w   d4
                 bne.s   loc_DDBA
-                bra.w   loc_DEF6
+                bra.w   @Done
 loc_DDBA:
                 
                 subq.w  #1,d4
@@ -505,7 +535,7 @@ loc_DDD4:
                 bne.s   loc_DDE6
 loc_DDDA:
                 
-                cmpi.w  #$900,d2
+                cmpi.w  #MAP_ARRAY_SIZE,d2
                 bcc.s   loc_DDE6
                 bset    #0,d5
                 move.w  d0,d4
@@ -527,7 +557,7 @@ loc_DDFE:
                 bne.s   loc_DE1A
 loc_DE04:
                 
-                cmpi.w  #$900,d2
+                cmpi.w  #MAP_ARRAY_SIZE,d2
                 bcc.s   loc_DE1A
                 tst.b   d5
                 bne.s   loc_DE14
@@ -559,7 +589,7 @@ loc_DE34:
                 bne.s   loc_DE50
 loc_DE3A:
                 
-                cmpi.w  #$900,d2
+                cmpi.w  #MAP_ARRAY_SIZE,d2
                 bcc.s   loc_DE50
                 tst.b   d5
                 bne.s   loc_DE4A
@@ -589,7 +619,7 @@ loc_DE6C:
                 bne.s   loc_DE88
 loc_DE72:
                 
-                cmpi.w  #$900,d2
+                cmpi.w  #MAP_ARRAY_SIZE,d2
                 bcc.s   loc_DE88
                 tst.b   d5
                 bne.s   loc_DE82
@@ -639,7 +669,7 @@ loc_DEBA:
                 bra.w   loc_DEE8
 loc_DEC2:
                 
-                bra.w   loc_DEF6
+                bra.w   @Done
 loc_DEC6:
                 
                 moveq   #0,d5
@@ -666,11 +696,12 @@ loc_DEE8:
 loc_DEF0:
                 
                 move.b  d5,(a0)+
-                bra.w   loc_DDA0
-loc_DEF6:
+                bra.w   @Start
+@Done:
                 
-                move.b  #$FF,(a0)
+                move.b  #CODE_TERMINATOR_BYTE,(a0)
                 rts
 
-    ; End of function MakeEnemyMoveOrder
+    ; End of function alt_BuildMoveString
 
+                modend

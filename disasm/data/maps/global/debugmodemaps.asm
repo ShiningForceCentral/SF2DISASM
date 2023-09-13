@@ -1,7 +1,19 @@
 
 ; ASM FILE data\maps\global\debugmodemaps.asm :
 ; 0x7186..0x71C0 : Debug mode maps
-DebugModeAvailableMaps:
+tbl_DebugModeAvailableMaps:
+                
+@declareAllMaps: macro
+i: = 0
+            rept MAPS_NUMBER
+                dc.b i
+i: = i+1
+            endr
+        endm
+                
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                @declareAllMaps
+            else
                 dc.b MAP_GRANSEAL
                 dc.b MAP_GRANSEAL_EARTHQUAKE
                 dc.b MAP_YEEL
@@ -59,4 +71,5 @@ DebugModeAvailableMaps:
                 dc.b MAP_OVERWORLD_GRANS_NORTH_SHORE
                 dc.b MAP_ZEON_ARENA
                 dc.b MAP_OVERWORLD_NEW_GRANSEAL_SHORE
+            endif
                 dc.b MAP_NONE

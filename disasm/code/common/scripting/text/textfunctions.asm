@@ -17,7 +17,7 @@ DisplayText:
                 movem.w d0,-(sp)        ; save string #
                 lsr.w   #6,d0
                 andi.b  #$FC,d0         ; string # -> bank pointer offset
-                movea.l (p_pt_TextBanks).l,a0 ; load script bank pointer
+                conditionalLongAddr movea.l, p_pt_TextBanks, a0 ; load script bank pointer
                 movea.l (a0,d0.w),a0
                 movem.w (sp)+,d0        ; restore string #
                 andi.w  #$FF,d0         ; restrict to range 0-255
@@ -42,7 +42,7 @@ loc_62A8:
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
                 cmpi.b  #1,((COMPRESSED_STRING_LENGTH-$1000000)).w ; check length
                 beq.w   loc_62FE
-                jsr     j_InitDecoder   ; initialize decoder
+                jsr     j_InitializeHuffmanDecoder ; initialize decoder
                 move.l  a0,((COMPRESSED_STRING_POINTER-$1000000)).w ; keep string pointer
 loc_62CA:
                 
@@ -186,7 +186,7 @@ ParseSpecialTextSymbol:
                 bra.w   loc_62CA
 @delay2:
                 
-                move.w  #$77,d0 
+                move.w  #119,d0
                 move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
                 movem.w d2,-(sp)
                 clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
@@ -353,7 +353,11 @@ loc_6574:
 symbol_class:
                 
                 bsr.w   sub_6648
+            if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
+                bsr.w   GetFullClassName
+            else
                 jsr     j_GetClassName
+            endif
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_wait1:
@@ -418,7 +422,7 @@ symbol_clear:
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  d0,-(sp)
-                bsr.w   GetWindowInfo   
+                bsr.w   GetWindowEntryAddress
                 movea.l (a0),a1
                 bsr.w   sub_67E6
                 move.w  (sp)+,d0
@@ -832,7 +836,7 @@ loc_6844:
 loc_684E:
                 
                 dbf     d6,loc_6822
-				
+                
                 move.w  #$D060,d0
                 move.w  #$D061,d1
                 move.w  #$D860,d2
@@ -883,7 +887,7 @@ loc_688C:
                 
                 move.l  #$FFFFFFFF,(a0)+
                 dbf     d7,loc_688C
-				
+                
                 clr.w   d0
                 bra.w   loc_68FC
 
@@ -899,13 +903,13 @@ HandleDialogueTypewriting:
                 beq.w   return_68FA
                 cmpi.b  #$7D,d0 
                 beq.w   return_68FA
-				
+                
                 move.w  d0,-(sp)
                 bsr.w   HandleBlinkingDialogueCursor
                 move.w  (sp)+,d1
                 clr.w   d0
                 moveq   #3,d2
-                sub.b   ((MESSAGE_SPEED-$1000000)).w,d2
+                subtractSavedByte MESSAGE_SPEED, d2
                 beq.s   loc_68C2
                 subq.w  #1,d2
                 bset    d2,d0
@@ -1174,7 +1178,7 @@ loc_6B00:
                 move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  d0,-(sp)
-                bsr.w   GetWindowInfo   
+                bsr.w   GetWindowEntryAddress
                 movea.l (a0),a1
                 bsr.w   sub_67E6
                 move.w  (sp)+,d0
@@ -1253,7 +1257,7 @@ DialogueGraphicsToRam:
                 
                 subq.w  #1,d7
                 lsl.w   #5,d7
-                movea.l (p_VariableWidthFont).l,a0
+                conditionalLongAddr movea.l, p_VariableWidthFont, a0
                 adda.w  d7,a0
                 move.w  (a0)+,d4
                 andi.w  #$F,d4
@@ -1275,7 +1279,7 @@ loc_6BC0:
 loc_6BD4:
                 
                 dbf     d7,loc_6BC0
-				
+                
                 add.b   d4,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 rts
 

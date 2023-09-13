@@ -37,7 +37,7 @@ WriteBattlesceneScript_DetermineCriticalHit:
                 andi.w  #PROWESS_MASK_CRITICAL,d1
                 move.w  d1,d2
                 lsl.w   #1,d2
-                lea     tbl_CriticalHitSettings(pc,d2.w),a0
+                lea     tbl_CriticalHitDefs(pc,d2.w),a0
                 clr.w   d0
                 move.b  (a0),d0
                 beq.s   @Return
@@ -66,8 +66,16 @@ WriteBattlesceneScript_DetermineCriticalHit:
                 move.b  #$FF,criticalHit(a2)
                 move.b  (a4),d0
                 jsr     GetEquippedWeapon
+            if (STANDARD_BUILD=1)
+                bmi.s   @Return
+                lea     tbl_CutOffWeapons(pc), a0
+                clr.w   d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @Return
+            else
                 cmpi.w  #ITEM_GISARME,d1
                 bne.s   @Skip
+            endif
                 move.b  (a5),d0
                 move.w  #SPELL_DESOUL,d1
                 bsr.w   GetResistanceToSpell

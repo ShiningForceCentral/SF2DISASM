@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-InitPortraitWindow:
+CreatePortraitWindow:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 bne.w   return_11BE0
@@ -36,10 +36,12 @@ loc_11B9A:
                 lea     PortraitWindowLayout(pc), a0
 loc_11B9E:
                 
-                move.w  #$A0,d7 
+                move.w  #160,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d0
+            if (STANDARD_BUILD=0)
                 bsr.w   GetAllyPortrait 
+            endif
                 bsr.w   LoadPortrait    
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -61,13 +63,15 @@ return_11BE0:
                 
                 rts
 
-    ; End of function InitPortraitWindow
+    ; End of function CreatePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Move window offscreen, then clear it from memory.
 
-HidePortraitWindow:
+
+RemovePortraitWindow:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 beq.s   return_11BE0
@@ -79,9 +83,9 @@ HidePortraitWindow:
                 subq.w  #1,d0
                 move.w  #$2F6,d1
                 tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
-                beq.s   loc_11C08
+                beq.s   @Continue
                 addi.w  #$1500,d1
-loc_11C08:
+@Continue:
                 
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
@@ -94,7 +98,7 @@ loc_11C08:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function HidePortraitWindow
+    ; End of function RemovePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -142,7 +146,9 @@ BuildMemberScreen:
                 bsr.w   LoadTileDataForMemberScreen
                 move.w  portraitIndex(a6),d0
                 blt.s   loc_11CA6
+            if (STANDARD_BUILD=0)
                 bsr.w   GetAllyPortrait 
+            endif
                 bsr.w   LoadPortrait    
 loc_11CA6:
                 
@@ -177,14 +183,14 @@ loc_11CE6:
                 dc.l VInt_HandlePortraitBlinking
                 move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11D1A
                 clr.w   d0
                 bra.s   loc_11D32
 loc_11D1A:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   loc_11D2C
                 clr.w   d0
@@ -228,13 +234,13 @@ loc_11D6C:
                 move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  #64,ENTITYDEF_OFFSET_LAYER(a0)
                 andi.b  #$7F,ENTITYDEF_OFFSET_FLAGS_B(a0) 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11DBC
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 move.w  member(a6),d0
                 jsr     j_GetAllyMapSprite
                 clr.w   d0
-                moveq   #3,d1
+                moveq   #DOWN,d1
                 moveq   #$FFFFFFFF,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
@@ -242,12 +248,12 @@ loc_11D6C:
 loc_11DBC:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   loc_11DDC
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 clr.w   d0
-                moveq   #3,d1
+                moveq   #DOWN,d1
                 moveq   #$FFFFFFFF,d2
                 move.w  #$AB,d3 
                 jsr     (UpdateEntityProperties).w
@@ -296,16 +302,16 @@ loc_11E54:
                 
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 jsr     (WaitForVInt).w
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11E94
                 clr.w   d0
-                tst.b   ((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 bne.s   loc_11E74
                 jsr     j_GetAllyMapSprite
                 bra.s   loc_11E82
 loc_11E74:
                 
-                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 bne.s   loc_11E80
                 moveq   #MAPSPRITE_CARAVAN,d4 
                 bra.s   loc_11E82
@@ -324,7 +330,7 @@ loc_11E82:
 loc_11E94:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   loc_11EBA
                 clr.w   d0
@@ -367,8 +373,13 @@ AddStatusEffectTileIndexesToVdpTileOrder:
                 subq.l  #4,a1
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 beq.s   @Return
+            if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
+                addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
+                movea.l d3,a1
+            else
                 movea.l windowTilesAddress(a6),a1
-                adda.w  #$78,a1 
+                adda.w  #$78,a1
+            endif
 @Return:
                 
                 rts
@@ -397,7 +408,28 @@ LoadTileDataForMemberScreen:
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #WINDOW_MEMBER_KD_VDPTILEORDER_BYTESIZE,d7
-                jsr     (CopyBytes).w  
+                jsr     (CopyBytes).w   
+            if (STANDARD_BUILD&ALTERNATE_JEWEL_ICONS_DISPLAY=1)
+                ; Display small jewel icons next to Bowie's mapsprite
+                tst.w   -2(a6)
+                bne.s   @SkipJewels         ; skip if anyone other than Bowie
+                move.l  a1,-(sp)
+                adda.w  #26,a1              ; offset into window layout
+                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                beq.s   @CheckJewelOfEvil
+                move.w  #VDPTILE_JEWEL_OF_LIGHT|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+@CheckJewelOfEvil:
+                
+                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
+                beq.s   @SkipJewelOfEvil
+                adda.w  #2,a1
+                move.w  #VDPTILE_JEWEL_OF_EVIL|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+@SkipJewelOfEvil:
+                
+                movea.l (sp)+,a1
+            endif
+@SkipJewels:
+                
                 adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
                 move.w  member(a6),d0
                 tst.b   d0
@@ -460,13 +492,13 @@ LoadTileDataForMemberScreen:
                 lea     WindowBorderTiles(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  #$A0,d7 
+                move.w  #160,d7
                 jsr     (CopyBytes).w   
                 lea     GoldWindowLayout(pc), a0
                 move.w  goldWindowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  #$40,d7 
+                move.w  #64,d7
                 jsr     (CopyBytes).w   
                 adda.w  #$22,a1 
                 jsr     j_GetGold

@@ -65,26 +65,24 @@ j_WitchMainMenu:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_100AC:
+j_DisplayNameUnderPortrait:
                 
-                jmp     ShowPortraitName(pc)
+                jmp     DisplayNameUnderPortrait(pc)
 
-    ; End of function sub_100AC
+    ; End of function j_DisplayNameUnderPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_100B0:
+j_CloseNameUnderPortraitWindow:
                 
-                jmp     HidePortraitName(pc)
+                jmp     CloseNameUnderPortraitWindow(pc)
 
-    ; End of function sub_100B0
+    ; End of function j_CloseNameUnderPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; related to end kiss
 
 
 j_PlayEndKiss:

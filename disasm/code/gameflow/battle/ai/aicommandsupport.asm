@@ -42,7 +42,11 @@ ExecuteAiCommand_Support:
                 clr.w   d3
                 bsr.w   GetNextSupportSpell
                 cmpi.w  #SPELL_NOTHING,d1
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
+                bne.s   @CheckMpCost
+            else
                 bne.s   @CheckMuddle
+            endif
                 
                 ; If no known status spell, do nothing
                 move.w  #$FFFF,d1
@@ -51,16 +55,18 @@ ExecuteAiCommand_Support:
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   @Done
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
+            else
 @CheckMuddle:
                 
                 cmpi.w  #SPELL_MUDDLE|SPELL_LV2,d1 ; HARDCODED spell entries
                 bne.s   @CheckDispel
-                bra.w   @CheckMPcost    
+                bra.w   @CheckMpCost    
 @CheckDispel:
                 
                 cmpi.w  #SPELL_DISPEL,d1
                 bne.s   @DoNothing
-                bra.w   @CheckMPcost    
+                bra.w   @CheckMpCost    
 @DoNothing:
                 
                 move.w  #$FFFF,d1
@@ -69,7 +75,8 @@ ExecuteAiCommand_Support:
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   @Done
-@CheckMPcost:
+            endif
+@CheckMpCost:
                 
                 move.w  d1,d6           ; d6 = copy of debuff spell entry
                 bsr.w   FindSpellDefAddress
@@ -78,50 +85,101 @@ ExecuteAiCommand_Support:
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d5
                 clr.w   d0
                 move.b  d7,d0
-                bsr.w   GetCurrentMP
+                bsr.w   GetCurrentMp
                 cmp.b   d2,d1
                 bge.s   @CheckTargetingGroup
                 
                 ; If not enough MP, do nothing
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
+                bra.w   @DoNothing
+            else
                 move.w  #$FFFF,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #CODE_TERMINATOR_BYTE,(a0)
                 bra.w   @Done
+            endif
 @CheckTargetingGroup:
                 
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
+                bsr.w   GetMoveInfo     
+                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                btst    #SPELLPROPS_BIT_TARGETING,d5
+                bne.s   @TargetTeammates
+                clr.w   d3
+                                         
+                bsr.w   UpdateBattleTerrainOccupiedByEnemies
+                bsr.w   PopulateTargetsArrayWithAllies
+                bra.s   @MakeTargetsList
+@TargetTeammates:
+                move.w  #$FFFF,d3
+                bsr.w   UpdateBattleTerrainOccupiedByAllies
+                bsr.w   PopulateTargetsArrayWithEnemies
+            else
                 clr.w   d0
                 btst    #SPELLPROPS_BIT_TARGETING,d5
                 move.w  #$FFFF,d3
                 bne.s   @TargetTeammates1
-                bsr.w   UpdateTargetsList_Enemies ; made unreachable by the preceding move.w #$FFFF,d3 instruction
+                bsr.w   UpdateBattleTerrainOccupiedByEnemies ; made unreachable by the preceding move.w #$FFFF,d3 instruction
                 bra.s   @CheckTargetingGroup2
 @TargetTeammates1:
                 
-                bsr.w   UpdateTargetsList_Allies
+                bsr.w   UpdateBattleTerrainOccupiedByAllies
 @CheckTargetingGroup2:
                 
                 move.b  d7,d0
                 bsr.w   GetMoveInfo     
-                bsr.w   MakeRangeLists
+                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
                 btst    #SPELLPROPS_BIT_TARGETING,d5
                 clr.w   d3
                 bne.s   @TargetTeammates2
-                bsr.w   UpdateTargetsList_Enemies
-                bsr.w   MakeTargetsList_Allies
+                bsr.w   UpdateBattleTerrainOccupiedByEnemies
+                bsr.w   PopulateTargetsArrayWithAllies
                 bra.s   @MakeTargetsList
 @TargetTeammates2:
                 
-                bsr.w   UpdateTargetsList_Allies ; made unreachable by the preceding clr.w d3 instruction
-                bsr.w   MakeTargetsList_Enemies
+                bsr.w   UpdateBattleTerrainOccupiedByAllies ; made unreachable by the preceding clr.w d3 instruction
+                bsr.w   PopulateTargetsArrayWithEnemies
+            endif
 @MakeTargetsList:
                 
                 clr.w   d1
                 move.b  d6,d1
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
+                move.w    d6,d3
+                andi.b    #SPELLENTRY_MASK_INDEX,d3
+            endif
                 clr.w   d0
                 move.b  d7,d0
                 
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
+                
+                ; MUDDLE spell
+                cmpi.w  #SPELL_MUDDLE,d3
+                bne.s   @CheckSpell_Slow
+                bsr.w   MakePrioritiesListForSpell_Muddle2
+                bra.w   @CheckReachableTargets
+@CheckSpell_Slow:
+                
+                cmpi.w  #SPELL_SLOW,d3
+                bne.s   @CheckSpell_Sleep
+                bsr.w   MakePrioritiesListForSpell_Muddle2
+                bra.w   @CheckReachableTargets
+@CheckSpell_Sleep:
+                
+                cmpi.w  #SPELL_SLEEP,d3
+                bne.s   @CheckSpell_Dispel
+                bsr.w   MakePrioritiesListForSpell_Dispel
+                bra.w   @CheckReachableTargets
+@CheckSpell_Dispel:
+                
+                cmpi.w  #SPELL_DISPEL,d3
+                bne.s   @DoNothing
+                bsr.w   MakePrioritiesListForSpell_Dispel
+                bra.w   @CheckReachableTargets
+@DoNothing:
+            else
                 ; ATTACK spell
                 cmpi.w  #SPELL_ATTACK,d1
                 bne.s   @CheckBoost
@@ -145,6 +203,7 @@ ExecuteAiCommand_Support:
                 bne.s   @DoNothing2
                 bsr.w   MakePrioritiesListForSpell_Dispel
                 bra.w   @CheckReachableTargets
+            endif
 @DoNothing2:
                 
                 move.w  #$FFFF,d1
@@ -203,14 +262,14 @@ ExecuteAiCommand_Support:
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_CAST_SPELL,(a0)
                 move.w  d6,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
-                move.w  d0,BATTLEACTION_OFFSET_TARGET(a0)
+                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a0)
                 move.w  d6,d1
                 bsr.w   GetSpellRange   
-                move.w  BATTLEACTION_OFFSET_TARGET(a0),d0
-                bsr.w   MakeTargetsList_Everybody
-                jsr     GetYPos
+                move.w  BATTLEACTION_OFFSET_ACTOR(a0),d0
+                bsr.w   PopulateTargetsArrayWithAllCombatants
+                jsr     GetCombatantY
                 move.w  d1,d2
-                jsr     GetXPos
+                jsr     GetCombatantX
                 bsr.w   GetClosestAttackPosition
                 cmpi.w  #$FF,d1
                 bne.s   @MakeMoveString
@@ -228,7 +287,7 @@ ExecuteAiCommand_Support:
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                bsr.w   MakeAiMoveString
+                bsr.w   BuildAiMoveString
                 clr.w   d1
 @Done:
                 

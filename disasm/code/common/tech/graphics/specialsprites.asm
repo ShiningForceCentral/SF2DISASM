@@ -94,16 +94,16 @@ LoadSpecialSprite_Exploration:
 sub_25CB6:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                lea     (SpecialSprites_EvilSpirit+$20)(pc), a0
+                conditionalPc lea,(SpecialSprites_EvilSpirit+$20),a0
                 tst.w   d0
                 beq.s   loc_25CD2
                 cmpi.b  #1,d0
                 bne.s   loc_25CCE
-                lea     SpecialSprites_EvilSpiritAlt(pc), a0
+                conditionalPc lea,SpecialSprites_EvilSpiritAlt,a0
                 bra.s   loc_25CD2
 loc_25CCE:
                 
-                lea     (SpecialSprites_Zeon+$20)(pc), a0
+                conditionalPc lea,(SpecialSprites_Zeon+$20),a0
 loc_25CD2:
                 
                 lea     (FF6802_LOADING_SPACE).l,a1
@@ -233,7 +233,7 @@ loc_25DB0:
                 add.w   d0,d2
                 move.w  d2,(a1)+
                 dbf     d7,loc_25DB0
-				
+                
                 movem.l (sp)+,d0-d1
                 sub.w   d6,d0
                 btst    #0,((FRAME_COUNTER-$1000000)).w
@@ -253,7 +253,7 @@ loc_25DD8:
                 add.w   d0,d2
                 move.w  d2,(a1)+
                 dbf     d7,loc_25DD8
-				
+                
                 bra.w   *+4
 loc_25DF0:
                 

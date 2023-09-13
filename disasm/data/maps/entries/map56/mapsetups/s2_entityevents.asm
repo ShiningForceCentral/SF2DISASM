@@ -3,6 +3,9 @@
 ; 0x614AA..0x614D6 : 
 ms_map56_EntityEvents:
                 msEntityEvent 128, UP, Map56_EntityEvent0-ms_map56_EntityEvents
+            if (STANDARD_BUILD&CARAVAN_IN_TOWER=1)
+                msEntityEvent 129, LEFT, Map56_EntityEvent1-ms_map56_EntityEvents
+            endif
                 msDefaultEntityEvent Map56_DefaultEntityEvent-ms_map56_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -21,9 +24,14 @@ byte_614C2:
                 txt     3612            ; "Now, what can I do for you?{W1}"
                 clsTxt
                 jmp     j_ChurchMenuActions
+Map56_EntityEvent1:
+                
+            if (STANDARD_BUILD&CARAVAN_IN_TOWER=1)
+                jmp     CaravanMenuActions
+            endif
 Map56_DefaultEntityEvent:
                 
                 rts
 
-    ; End of function Map56_EntityEvent0
+    ; End of function Map56_EntityEvent1
 

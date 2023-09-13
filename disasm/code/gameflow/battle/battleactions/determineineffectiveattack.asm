@@ -32,7 +32,7 @@ cutoff = -1
 DetermineIneffectiveAttack:
                 
                 movem.l d0-d1,-(sp)
-                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE
                 bne.w   @Skip
                 clrFlg  112             ; Currently attacking Taros with Achilles Sword
                 tst.b   (a4)
@@ -40,7 +40,7 @@ DetermineIneffectiveAttack:
                 cmpi.w  #BATTLEACTION_ATTACK,(a3)
                 bne.w   @CheckFlag
                 move.b  (a5),d0
-                jsr     GetEnemyIndex   
+                jsr     GetEnemy        
                 cmpi.w  #ENEMY_TAROS,d1
                 bne.w   @CheckFlag
                 move.b  (a4),d0
@@ -51,7 +51,7 @@ DetermineIneffectiveAttack:
 @CheckFlag:
                 
                 move.b  (a5),d0
-                jsr     GetEnemyIndex   
+                jsr     GetEnemy        
                 cmpi.w  #ENEMY_TAROS,d1
                 bne.s   @Skip
                 chkFlg  112             ; Currently attacking Taros with Achilles Sword
