@@ -237,7 +237,7 @@ CopyBattlefieldOptionsMenuLayout:
 
 sub_1598C:
                 
-                lea     (SPRITE_CURSOR_DATA).l,a0
+                lea     (SPRITE_BATTLE_CURSOR).l,a0
                 moveq   #3,d7
 @Loop:
                 
@@ -257,7 +257,7 @@ sub_159A0:
                 tst.w   ((HIDE_WINDOWS-$1000000)).w
                 bne.s   sub_1598C
                 movem.w d3-d4/d7,-(sp)
-                lea     (SPRITE_CURSOR_DATA).l,a0
+                lea     (SPRITE_BATTLE_CURSOR).l,a0
                 lea     spr_BattleConfig(pc), a1
                 clr.w   d3
                 move.b  ((MESSAGE_SPEED-$1000000)).w,d3

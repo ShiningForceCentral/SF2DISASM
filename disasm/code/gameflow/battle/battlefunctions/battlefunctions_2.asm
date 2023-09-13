@@ -34,7 +34,7 @@ loc_24492:
                 bne.s   @Skip
                 
                 ; Move cursor to combatant's position
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
@@ -361,7 +361,7 @@ loc_24784:
                 bra.w   loc_24746
 @HaveTarget_Attack:
                 
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
@@ -371,7 +371,7 @@ loc_24784:
                 move.w  d1,d2
                 jsr     j_GetYPos
                 move.w  d1,d3
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
@@ -457,7 +457,7 @@ loc_248BA:
                 
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 jsr     j_FindSpellDefAddress
-                move.b  SPELLDEF_OFFSET_RADIUS(a0),((AOE_RADIUS-$1000000)).w
+                move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24952
@@ -466,7 +466,7 @@ loc_248BA:
                 move.w  d1,((word_FFB094-$1000000)).w
                 jsr     j_GetYPos
                 move.w  d1,((word_FFB092-$1000000)).w
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
@@ -591,7 +591,7 @@ loc_24A24:
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 jsr     j_FindSpellDefAddress
-                move.b  SPELLDEF_OFFSET_RADIUS(a0),((AOE_RADIUS-$1000000)).w
+                move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
                 bne.w   @ContinueWithTarget
@@ -600,7 +600,7 @@ loc_24A24:
                 move.w  d1,((word_FFB094-$1000000)).w
                 jsr     j_GetYPos
                 move.w  d1,((word_FFB092-$1000000)).w
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
@@ -948,12 +948,12 @@ loc_24DF0:
                 bra.s   loc_24DCC
 loc_24E26:
                 
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   sub_230E2
                 cmpi.w  #$FFFF,d0
                 bne.w   loc_24E4C
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   sub_2322C
                 moveq   #$FFFFFFFF,d1
@@ -1224,7 +1224,7 @@ combatant = -2
 
 BattlefieldMenuActions:
                 
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 clr.w   ((MOVE_SFX-$1000000)).w
                 bsr.w   ControlUnitCursor
                 btst    #INPUT_BIT_B,((P1_INPUT-$1000000)).w
@@ -1385,7 +1385,7 @@ sub_252FA:
                 jsr     j_CreateAttackRangeGrid
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
@@ -1402,7 +1402,7 @@ sub_252FA:
                 bsr.w   CreateMoveableRangeForUnit
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 jsr     j_FindSpellDefAddress
-                move.b  SPELLDEF_OFFSET_RADIUS(a0),((AOE_RADIUS-$1000000)).w
+                move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
@@ -1422,7 +1422,7 @@ sub_252FA:
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 jsr     j_FindSpellDefAddress
-                move.b  SPELLDEF_OFFSET_RADIUS(a0),((AOE_RADIUS-$1000000)).w
+                move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
@@ -1439,7 +1439,7 @@ sub_252FA:
                 bsr.w   CreateMoveableRangeForUnit
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 jsr     j_FindSpellDefAddress
-                move.b  SPELLDEF_OFFSET_RADIUS(a0),((AOE_RADIUS-$1000000)).w
+                move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E
@@ -1453,7 +1453,7 @@ sub_252FA:
                 jsr     j_GetLaserFacing
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreateMoveableRangeForUnit
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
                 bsr.w   sub_2548E

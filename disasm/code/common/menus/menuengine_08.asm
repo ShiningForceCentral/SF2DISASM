@@ -403,7 +403,7 @@ sub_15F24:
                 moveq   #1,d1
 loc_15F2C:
                 
-                lea     (SPRITE_CURSOR_DATA).l,a0
+                lea     (SPRITE_BATTLE_CURSOR).l,a0
                 cmpi.w  #7,d1
                 bge.s   loc_15F50
                 move.w  #1,(a0)

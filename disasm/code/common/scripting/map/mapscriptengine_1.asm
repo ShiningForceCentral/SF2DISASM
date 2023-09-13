@@ -1808,7 +1808,7 @@ csc56_addFollower:
                 move.w  (a6)+,d0
                 bsr.w   GetEntityAddressFromCharacter
                 moveq   #0,d1
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
 @FindEnd_Loop:
                 
                 cmpi.b  #$FF,(a0)

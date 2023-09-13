@@ -104,7 +104,7 @@ return_4446A:
 sub_4446C:
                 
                 movem.l d0/a0-a1,-(sp)
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
                 lea     eas_Standing(pc), a1
 loc_44478:
                 

@@ -100,7 +100,7 @@ loc_23840:
 IsFollowerEntity?:
                 
                 movem.l d0/a0,-(sp)
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
 @FindEntity_Loop:
                 
                 cmpi.b  #CODE_TERMINATOR_BYTE,(a0)

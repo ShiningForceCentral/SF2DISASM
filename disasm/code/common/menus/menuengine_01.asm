@@ -1556,7 +1556,7 @@ spr_SpellLevelHighlight:
 
 sub_10DE2:
                 
-                lea     (SPRITE_CURSOR_DATA).l,a1
+                lea     (SPRITE_BATTLE_CURSOR).l,a1
                 lea     spr_SpellLevelHighlight(pc), a0
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+

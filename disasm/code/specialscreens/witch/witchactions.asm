@@ -84,8 +84,8 @@ loc_74B4:
                 bsr.w   SaveGame
                 clsTxt
                 move.b  #MAP_GRANSEAL,d0       ; HARDCODED new game starting map
-                move.w  #GAMESTART_SAVE_X,d1   ; HARDCODED main entity starting X
-                move.w  #GAMESTART_SAVE_Y,d2   ; HARDCODED main entity starting Y
+                move.w  #GAMESTART_SAVEPOINT_X,d1   ; HARDCODED main entity starting X
+                move.w  #GAMESTART_SAVEPOINT_Y,d2   ; HARDCODED main entity starting Y
                 move.w  #DOWN,d3               ; HARDCODED main entity starting facing
                 moveq   #1,d4
 loc_74DE:

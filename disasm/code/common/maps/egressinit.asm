@@ -18,8 +18,8 @@ GetSavePointForMap:
                 chkFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 bne.s   loc_75FC        ; egress always goes back to Bowie's room if you haven't triggered the gizmos cutscene
                 moveq   #MAP_GRANSEAL,d0 ; HARDCODED initial egress position : map, x, y, facing
-                moveq   #GAMESTART_SAVE_X,d1
-                moveq   #GAMESTART_SAVE_Y,d2
+                moveq   #GAMESTART_SAVEPOINT_X,d1
+                moveq   #GAMESTART_SAVEPOINT_Y,d2
                 moveq   #DOWN,d3
                 rts
 loc_75FC:

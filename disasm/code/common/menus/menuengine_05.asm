@@ -1140,7 +1140,7 @@ sub_133A0:
 loc_133A8:
                 
                 move.w  d0,-(sp)
-                lea     (SPRITE_CURSOR_DATA).l,a0
+                lea     (SPRITE_BATTLE_CURSOR).l,a0
                 lea     spr_MemberListTextHighlight(pc), a1
                 cmpi.w  #7,d1
                 bge.s   loc_133C0

@@ -64,7 +64,7 @@ DisplaySegaLogo:
                 jsr     (Sleep).w       
                 bsr.w   sub_28B12
                 move.l  #$D80405,(SPRITE_TRADEMARK).l
-                move.l  #$62014A,(SPRITE_TRADEMARK_TILE_FLAGS).l
+                move.l  #$62014A,(SPRITE_TRADEMARK_VDPTILE).l
                 moveq   #$A,d0
                 jsr     (Sleep).w       
                 move.w  #$28,d0 
@@ -106,7 +106,7 @@ DisplaySegaLogo:
 DisplaySegaLogo_Quit:
                 
                 move.l  #$D80405,(SPRITE_TRADEMARK).l
-                move.l  #$62014A,(SPRITE_TRADEMARK_TILE_FLAGS).l
+                move.l  #$62014A,(SPRITE_TRADEMARK_VDPTILE).l
                 jsr     (FadeOutToBlack).w
                 moveq   #$FFFFFFFF,d0
                 rts

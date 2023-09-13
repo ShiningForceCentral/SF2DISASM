@@ -34,7 +34,7 @@ loc_239EE:
 loc_23A1E:
                 
                 jsr     j_UpdateForce
-                lea     ((OTHER_FORCE_MEMBER_LIST-$1000000)).w,a0
+                lea     ((OTHER_FORCE_MEMBERS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #2,d7
                 bmi.w   loc_23A66

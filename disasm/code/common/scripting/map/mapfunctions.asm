@@ -35,7 +35,7 @@ loc_440E2:
                 bsr.w   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
                 lea     $20(a1),a2
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a3
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a3
                 movem.w d1-d3,-(sp)
                 moveq   #1,d0
                 bsr.w   InitializeFollowerEntities
@@ -123,7 +123,7 @@ sub_441AA:
                 beq.w   byte_441F0      ; No followers
                 mulu.w  #$180,d1
                 mulu.w  #$180,d2
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
                 lea     ((ENTITY_DATA-$1000000)).w,a1
 @GetFollowerPosition_Loop:
                 

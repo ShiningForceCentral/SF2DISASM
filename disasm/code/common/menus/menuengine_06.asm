@@ -1128,7 +1128,7 @@ loc_14366:
                 bsr.w   sub_14074       
                 moveq   #$14,d1
                 bsr.w   LoadMiniStatusTextHighlightSprites
-                move.b  #16,(SPRITE_NAME_HILIGHT_END).l
+                move.b  #16,(SPRITE_NAME_HIGHLIGHT_LINK).l
                 subq.w  #1,d6
                 bne.s   loc_14384
                 moveq   #$1E,d6
@@ -1495,7 +1495,7 @@ CleanIconCorners:
 LoadMiniStatusTextHighlightSprites:
                 
                 movem.w d0/d2,-(sp)
-                lea     (SPRITE_CURSOR_DATA).l,a0
+                lea     (SPRITE_BATTLE_CURSOR).l,a0
                 lea     spr_MiniStatusTextHighlight(pc), a1
                 move.w  ((DISPLAYED_MEMBERLIST_SELECTED_ENTRY-$1000000)).w,d0
                 lsl.w   #4,d0
@@ -1885,7 +1885,7 @@ loc_14A26:
 
 sub_14A82:
                 
-                lea     (SPRITE_CURSOR_DATA).l,a0
+                lea     (SPRITE_BATTLE_CURSOR).l,a0
                 cmpi.w  #7,d1
                 bge.s   loc_14A9A
                 move.w  #1,(a0)

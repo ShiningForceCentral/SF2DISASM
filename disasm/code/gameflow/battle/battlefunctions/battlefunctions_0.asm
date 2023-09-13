@@ -1128,11 +1128,11 @@ sub_23554:
                 movem.l d0-d2/d7-a1,-(sp)
                 lea     tbl_AoE_Border(pc), a0
                 clr.w   d2
-                move.b  ((AOE_RADIUS-$1000000)).w,d2
+                move.b  ((CURSOR_RADIUS-$1000000)).w,d2
                 andi.w  #$F,d2
                 lsl.w   #6,d2
                 adda.w  d2,a0
-                lea     (SPRITE_CURSOR_DATA).l,a1
+                lea     (SPRITE_BATTLE_CURSOR).l,a1
                 moveq   #7,d7
 loc_23572:
                 
@@ -1193,7 +1193,7 @@ tbl_AoE_Border:
 
 sub_2364C:
                 
-                move.l  #$10F10,(SPRITE_CURSOR_DATA).l ; y = 1, size and link = V4|H4|16
+                move.l  #$10F10,(SPRITE_BATTLE_CURSOR).l ; y = 1, size and link = V4|H4|16
                 rts
 
     ; End of function sub_2364C

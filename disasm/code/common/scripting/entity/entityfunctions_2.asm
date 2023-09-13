@@ -199,7 +199,7 @@ AddFollower:
                 move.w  d1,$1E(a1)
                 move.w  d2,$20(a1)
                 move.w  d3,$22(a1)
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
                 move.w  (sp)+,d0
 loc_44C6A:
                 
@@ -240,7 +240,7 @@ loc_44CA0:
 loc_44CAA:
                 
                 dbf     d7,loc_44CA0
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
 loc_44CB2:
                 
                 cmpi.b  #$FF,(a0)

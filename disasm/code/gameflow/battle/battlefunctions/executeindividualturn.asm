@@ -41,7 +41,7 @@ ExecuteIndividualTurn:
                 jsr     j_GetYPos
                 move.w  d1,((word_FFB090-$1000000)).w
                 move.w  d1,((word_FFB092-$1000000)).w
-                clr.b   ((AOE_RADIUS-$1000000)).w
+                clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w

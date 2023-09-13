@@ -907,7 +907,7 @@ loc_1A3C6:
 
 sub_1A3E8:
                 
-                lea     ((SPRITE_20_TILE_FLAGS-$1000000)).w,a0
+                lea     ((SPRITE_20_VDPTILE-$1000000)).w,a0
                 lea     (word_1F776).l,a1
                 moveq   #$11,d0
                 btst    #5,((byte_FFB56F-$1000000)).w
@@ -10028,7 +10028,7 @@ loc_1EEB6:
                 lea     $48(a0),a0
 loc_1EEC6:
                 
-                lea     ((SPRITE_01_TILE_FLAGS-$1000000)).w,a1
+                lea     ((SPRITE_01_VDPTILE-$1000000)).w,a1
                 moveq   #8,d7
 loc_1EECC:
                 
@@ -10051,7 +10051,7 @@ loc_1EEF6:
                 andi.w  #$30,d7 
                 add.w   d7,d7
                 adda.w  d7,a0
-                lea     ((SPRITE_WEAPON_DATA-$1000000)).w,a1
+                lea     ((SPRITE_BATTLESCENE_WEAPON-$1000000)).w,a1
                 moveq   #3,d7
 loc_1EF08:
                 
@@ -10384,7 +10384,7 @@ loc_1F19E:
                 dbf     d2,loc_1F19E
                 cmpi.w  #$FFFF,((ALLY_WEAPON_SPRITE-$1000000)).w
                 beq.s   loc_1F1C2
-                lea     ((SPRITE_WEAPON_DATA-$1000000)).w,a0
+                lea     ((SPRITE_BATTLESCENE_WEAPON-$1000000)).w,a0
                 moveq   #3,d2
 loc_1F1B6:
                 

@@ -76,7 +76,7 @@ InitializeBattlescene:
                 bsr.w   InitializeBattlescenePalettes
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     (PLANE_B_LAYOUT).l,a1
-                move.w  #LONGWORD_VIEWPLANE_COUNTER,d0
+                move.w  #VRAM_PLANE_LONGWORD_COUNTER,d0
 @ClearPlanes_Loop:
                 
                 clr.l   (a0)+
@@ -174,7 +174,7 @@ InitializeBattlescene:
                 
                 ; Load ground VDP sprite
                 lea     spr_BattlesceneGround(pc), a0
-                lea     ((SPRITE_GROUND_DATA-$1000000)).w,a1
+                lea     ((SPRITE_BATTLESCENE_GROUND-$1000000)).w,a1
                 lea     (word_FFAFAE).l,a2
                 moveq   #2,d0
 @LoadGroundVdpSprite_Loop:
@@ -289,7 +289,7 @@ InitializeBattlescene:
                 cmpi.b  #$FF,((BATTLESCENE_BACKGROUND-$1000000)).w
                 beq.s   @WaitForNextFrame
                 
-                lea     ((SPRITE_GROUND_Y-$1000000)).w,a0
+                lea     ((SPRITE_BATTLESCENE_GROUND_X-$1000000)).w,a0
                 moveq   #2,d1
 @MoveGroundToPosition_Loop:
                 
@@ -965,7 +965,7 @@ loc_18908:
                 move.w  d0,((word_FFB3FA-$1000000)).w
                 cmpi.b  #$FF,((BATTLESCENE_BACKGROUND-$1000000)).w
                 beq.s   loc_18922
-                lea     ((SPRITE_GROUND_Y-$1000000)).w,a0
+                lea     ((SPRITE_BATTLESCENE_GROUND_X-$1000000)).w,a0
                 moveq   #2,d2
 loc_1891A:
                 
@@ -1018,7 +1018,7 @@ bsc06_switchEnemies:
                 bsr.w   sub_1F1CC
                 clr.w   d6
                 bsr.w   sub_1F1F0
-                lea     ((SPRITE_GROUND_TILE_FLAGS-$1000000)).w,a0
+                lea     ((SPRITE_BATTLESCENE_GROUND_VDPTILE-$1000000)).w,a0
                 bset    #7,(a0)
                 bset    #7,8(a0)
                 bset    #7,$10(a0)
@@ -1192,7 +1192,7 @@ loc_18B30:
                 jsr     (WaitForVInt).w
                 tst.w   d0
                 bne.s   loc_18B30
-                lea     ((SPRITE_GROUND_TILE_FLAGS-$1000000)).w,a0
+                lea     ((SPRITE_BATTLESCENE_GROUND_VDPTILE-$1000000)).w,a0
                 bclr    #7,(a0)
                 bclr    #7,8(a0)
                 bclr    #7,$10(a0)
@@ -2391,7 +2391,7 @@ sub_19504:
                 subi.w  #$70,d0 
 loc_19520:
                 
-                lea     ((SPRITE_GROUND_DATA-$1000000)).w,a1
+                lea     ((SPRITE_BATTLESCENE_GROUND-$1000000)).w,a1
                 moveq   #2,d7
 loc_19526:
                 
@@ -2481,7 +2481,7 @@ loc_195AC:
                 andi.w  #$30,d7 
                 add.w   d7,d7
                 adda.w  d7,a0
-                lea     ((SPRITE_WEAPON_DATA-$1000000)).w,a1
+                lea     ((SPRITE_BATTLESCENE_WEAPON-$1000000)).w,a1
                 moveq   #3,d7
 loc_195BE:
                 

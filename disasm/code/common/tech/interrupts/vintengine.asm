@@ -1136,15 +1136,15 @@ ClearScrollTableData:
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
                 
-                move.w  #LONGWORD_VIEWPLANE_COUNTER,d7
+                move.w  #VRAM_PLANE_LONGWORD_COUNTER,d7
                 lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a6
 @ClearPlane_A:
                 
                 clr.l   (a6)+
                 dbf     d7,@ClearPlane_A
                 
-                move.w  #LONGWORD_VIEWPLANE_COUNTER,d7
-                adda.w  #VIEWPLANE_ADDRESS_DIFFERENCE,a6
+                move.w  #VRAM_PLANE_LONGWORD_COUNTER,d7
+                adda.w  #VRAM_PLANES_ADDRESS_DIFFERENCE,a6
 @ClearPlane_B:
                 
                 clr.l   (a6)+

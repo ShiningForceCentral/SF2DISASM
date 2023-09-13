@@ -23,7 +23,7 @@ WaitForFollowersStopped:
 
 WaitForHeroAndFollowersStopped:
                 
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
                 bsr.w   WaitForPartyEntitiesIdle
                 rts
 
@@ -68,7 +68,7 @@ return_4524A:
 
 ApplyActscriptToHeroAndFollowers:
                 
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
                 bra.w   ApplyActscriptToPartyEntities
 
     ; End of function ApplyActscriptToHeroAndFollowers

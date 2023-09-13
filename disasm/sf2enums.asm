@@ -39,8 +39,8 @@ ENABLE_VINT: equ $7
 
 ; enum GraphicsValues
 GFX_MAX_SPRITES_TO_LOAD: equ $7
-GFX_DIAMENU_ICON_PIXELS_NUMBER: equ $240
 GFX_MAPSPRITE_PIXEL_COUNTER: equ $23F
+GFX_DIAMENU_ICON_PIXELS_NUMBER: equ $240
 
 ; ---------------------------------------------------------------------------
 
@@ -946,12 +946,6 @@ MAP_BLOCKINDEX_CLOSED_CHEST: equ $D801
 MAP_BLOCKINDEX_OPEN_CHEST: equ $D802
 MAP_NULLPOSITION: equ $FFFF
 
-MAP_TILE_SIZE: equ $180
-MINIMAP_TILE_SIZE: equ $60
-
-MAP_TILE_PLUS: equ $180
-MAP_TILE_MINUS: equ $FE80
-
 ; ---------------------------------------------------------------------------
 
 ; enum Map_Entity
@@ -1380,6 +1374,16 @@ CHANCE_TO_DODGE_DEFAULT: equ $20
 KIWI_FLAME_BREATH_UPGRADE_LEVEL1: equ $20
 KIWI_FLAME_BREATH_UPGRADE_LEVEL2: equ $28
 KIWI_FLAME_BREATH_UPGRADE_LEVEL3: equ $32
+
+; ---------------------------------------------------------------------------
+
+; enum MapProperties
+MAPS_DEBUG_NUMBER: equ 56
+MAPS_NUMBER:     equ 79
+MINIMAP_TILE_SIZE: equ 96
+MAP_TILE_SIZE:   equ 384
+MAP_TILE_PLUS:   equ 384
+MAP_TILE_MINUS:  equ 65152
 
 ; ---------------------------------------------------------------------------
 
@@ -2357,21 +2361,20 @@ GOLD_STARTING_AMOUNT: equ $3C
 
 ; ---------------------------------------------------------------------------
 
-; enum WindowProperties
-WINDOWDEF_ACTIVE: equ $0
-WINDOWDEF_LAYOUT: equ $2
-WINDOWDEF_WIDTH: equ $4
-WINDOWDEF_HEIGHT: equ $5
-WINDOWDEF_X: equ $6
-WINDOWDEF_Y: equ $7
-WINDOWDEF_ANIM_ORIG_X: equ $8
-WINDOWDEF_ANIM_ORIG_Y: equ $9
-WINDOWDEF_ANIM_DEST_X: equ $A
-WINDOWDEF_ANIM_DEST_Y: equ $B
-WINDOWDEF_ANIM_LENGTH: equ $C
-WINDOWDEF_ANIM_COUNTER: equ $D
-
-NEXT_WINDOWDEF: equ $10
+; enum WindowDefinitionOffsets
+WINDOWDEF_OFFSET_ACTIVE: equ 0
+WINDOWDEF_OFFSET_LAYOUT_ADDRESS: equ 2
+WINDOWDEF_OFFSET_WIDTH: equ 4
+WINDOWDEF_OFFSET_HEIGHT: equ 5
+WINDOWDEF_OFFSET_X: equ 6
+WINDOWDEF_OFFSET_Y: equ 7
+WINDOWDEF_OFFSET_ANIM_ORIG_X: equ 8
+WINDOWDEF_OFFSET_ANIM_ORIG_Y: equ 9
+WINDOWDEF_OFFSET_ANIM_DEST_X: equ $A
+WINDOWDEF_OFFSET_ANIM_DEST_Y: equ $B
+WINDOWDEF_OFFSET_ANIM_LENGTH: equ $C
+WINDOWDEF_OFFSET_ANIM_COUNTER: equ $D
+NEXT_WINDOWDEF:  equ $10
 
 ; ---------------------------------------------------------------------------
 
@@ -2401,6 +2404,9 @@ LEFT: equ $2
 DOWN: equ $3
 NO_DIRECTION: equ $FF
 
+; ---------------------------------------------------------------------------
+
+; enum Facing
 FACING_MASK: equ $3
 
 ; ---------------------------------------------------------------------------
@@ -3215,17 +3221,17 @@ SRAM_COUNTER: equ $1FFF
 ; ---------------------------------------------------------------------------
 
 ; enum Vram
+VRAM_PLANE_LONGWORD_COUNTER: equ $1FF
+VRAM_PLANE_BYTE_SIZE: equ $1000
+VRAM_PLANES_ADDRESS_DIFFERENCE: equ $1800
 VRAM_ADDRESS_PLANE_A: equ $C000
 VRAM_ADDRESS_PLANE_B: equ $E000
-VIEWPLANE_ADDRESS_DIFFERENCE: equ $1800
-
-LONGWORD_VIEWPLANE_COUNTER: equ $1FF
 
 ; ---------------------------------------------------------------------------
 
 ; enum Vdp
-VDP_SPRITES_COUNTER: equ $3F
 VDP_SPRITE_SIZE: equ $8
+VDP_SPRITES_COUNTER: equ $3F
 
 ; ---------------------------------------------------------------------------
 
@@ -3317,5 +3323,11 @@ LONGWORD_CARAVAN_COUNTER: equ $F
 LONGWORD_GAMEFLAGS_COUNTER: equ $1F
 LONGWORD_CARAVAN_INITVALUE: equ $7F7F7F7F
 
-GAMESTART_SAVE_X: equ $38
-GAMESTART_SAVE_Y: equ $3
+; ---------------------------------------------------------------------------
+
+; enum GameStartValues
+GAMESTART_MAP:   equ 3
+GAMESTART_SAVEPOINT_Y: equ 3
+GAMESTART_FACING: equ 3
+GAMESTART_SAVEPOINT_X: equ 56
+GAMESTART_GOLD:  equ 60
