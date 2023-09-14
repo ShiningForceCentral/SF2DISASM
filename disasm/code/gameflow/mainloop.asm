@@ -24,7 +24,7 @@ loc_75C8:
                 beq.w   loc_75E4        ; If battle index available, enter battle loop
                 move.w  d7,d1
                 jsr     j_BattleLoop    ; Return when battle ends
-loc_75E0:
+alt_MainLoopEntry:
                 
                 bsr.w   CheckMapSwitch  ; Check table "FlagSwitchedMaps" for possible flag-triggered map switch
 loc_75E4:

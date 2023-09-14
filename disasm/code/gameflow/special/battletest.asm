@@ -7,8 +7,8 @@
 
 DebugModeBattleTest:
                 
-                move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
-                move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
+                move.b  #$FF,((DEBUG_MODE_TOGGLE-$1000000)).w
+                move.b  #$FF,((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 
                 moveq   #ALLY_SARAH,d0
                 bsr.w   j_JoinForce
@@ -68,12 +68,6 @@ DebugModeBattleTest:
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
-            if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
-                moveq   #ALLY_30,d0
-                bsr.w   JoinForce
-                moveq   #ALLY_31,d0
-                bsr.w   JoinForce
-            endif
                 
                 moveq   #0,d0
                 move.w  #$63,d1 
@@ -135,30 +129,15 @@ loc_7820:
                 clr.w   d1
                 move.b  d0,d1
                 mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
-                conditionalPc lea,BattleMapCoordinates,a0,nop
+                lea     table_BattleMapCoordinates(pc), a0
+                nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.b  (a0)+,(BATTLE_AREA_X).l
-                move.b  (a0)+,(BATTLE_AREA_Y).l
-                move.b  (a0)+,(BATTLE_AREA_WIDTH).l
-                move.b  (a0)+,(BATTLE_AREA_HEIGHT).l
-            else
                 move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
-            endif
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                move.b  #DEBUG_SHOP_INDEX,((CURRENT_SHOP_INDEX-$1000000)).w
-                pea     StartBattleTest(pc)
-                pea     MainMenuActions
-                pea     ChurchMenuActions
-                pea     ShopMenuActions
-                pea     CaravanMenuActions
-                jmp     BattleLoop
-            else
                 jsr     j_BattleLoop
                 jsr     j_ChurchMenuActions
                 txt     460             ; "Shop number?{D1}"
@@ -170,15 +149,12 @@ loc_7820:
                 move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 jsr     j_MainMenuActions
-                jsr     j_CaravanActions
-                bra.w   StartBattleTest      
-            endif
+                jsr     j_CaravanMenuActions
+                bra.w   StartBattleTest
 loc_7894:
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                rts
-            else
+                
                 bsr.w   LoadAllyStatsDecimalDigits
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 tst.b   d0
                 bne.w   StartBattleTest       
                 bpl.s   loc_78B6
@@ -192,7 +168,6 @@ loc_78B6:
 loc_78BA:
                 
                 bra.s   loc_7894
-            endif
 
     ; End of function DebugModeBattleTest
 

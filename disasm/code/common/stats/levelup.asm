@@ -33,7 +33,7 @@ LevelUp:
 @FindStatsBlockForClass:
                 
                 lsl.w   #2,d0
-                conditionalLongAddr movea.l, p_pt_AllyStats, a0
+                getPointer p_pt_AllyStats, a0
                 movea.l (a0,d0.w),a0
 @FindStatsBlockForClass_Loop:
                 
@@ -136,7 +136,7 @@ LevelUp:
                 ; Get pointer to previous stats block
                 move.w  d0,d2
                 lsl.w   #2,d2
-                conditionalLongAddr movea.l, p_pt_AllyStats, a0
+                getPointer p_pt_AllyStats, a0
                 movea.l (a0,d2.w),a0
                 lea     ALLYSTATS_OFFSET_SPELL_LIST(a0),a0
                 bra.s   @FindLearnableSpell_Loop
@@ -177,7 +177,7 @@ InitializeAllyStats:
                 ; Get ally stats entry address -> A0
                 move.w  d0,d2
                 lsl.w   #2,d2
-                conditionalLongAddr movea.l, p_pt_AllyStats, a0
+                getPointer p_pt_AllyStats, a0
                 movea.l (a0,d2.w),a0
                 
                 ; Set starting values
@@ -223,7 +223,7 @@ InitializeAllyStats:
                 
                 move.w  d0,d2
                 lsl.w   #2,d2
-                conditionalLongAddr movea.l, p_pt_AllyStats, a0
+                getPointer p_pt_AllyStats, a0
                 movea.l (a0,d2.w),a0
 @FindStatsBlockForClass_Loop:
                 
@@ -249,7 +249,7 @@ InitializeAllyStats:
                 ; Get pointer to previous stats block
                 move.w  d0,d2
                 lsl.w   #2,d2
-                conditionalLongAddr movea.l, p_pt_AllyStats, a0
+                getPointer p_pt_AllyStats, a0
                 movea.l (a0,d2.w),a0
                 lea     ALLYSTATS_OFFSET_SPELL_LIST(a0),a0
                 bra.s   @FindLearnableSpell_Loop
@@ -343,7 +343,7 @@ CalculateStatGain:
                 andi.w  #GROWTHCURVE_MASK_INDEX,d2
                 subq.w  #1,d2
                 muls.w  #GROWTHCURVE_DEF_SIZE,d2
-                conditionalLongAddr movea.l, p_tbl_StatGrowthCurves, a0
+                getPointer p_tbl_StatGrowthCurves, a0
                 adda.w  d2,a0
                 move.w  d5,d2
                 subq.w  #1,d2

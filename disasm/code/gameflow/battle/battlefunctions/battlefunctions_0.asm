@@ -11,7 +11,7 @@ FieldItem_LevelUp:
                 jsr     j_SetCurrentExp
                 jsr     j_LevelUp
                 lea     ((LEVELUP_ARGUMENTS-$1000000)).w,a5
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 clr.l   d1
                 move.b  (a5)+,d1
                 cmpi.b  #$FF,d1
@@ -66,7 +66,7 @@ loc_22C4C:
                 
                 addq.w  #1,d1
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
-                move.w  d2,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d2,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     272             ; "{D1}{SPELL} increased to{N}level {#}!"
 byte_22C5A:
                 
@@ -833,7 +833,7 @@ SetUnitCursorDestinationToNextBattleEntity:
                 move.w  d3,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  #$40,ENTITYDEF_OFFSET_XSPEED(a0) 
                 move.b  #$40,ENTITYDEF_OFFSET_YSPEED(a0) 
-                tst.b   ((SPECIAL_TURBO_CHEAT-$1000000)).w
+                tst.b   ((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 beq.s   loc_23328
                 move.b  #$60,ENTITYDEF_OFFSET_XSPEED(a0) 
                 move.b  #$60,ENTITYDEF_OFFSET_YSPEED(a0) 
@@ -866,7 +866,7 @@ loc_2335E:
                 move.w  #$70,d1 
 loc_23368:
                 
-                tst.b   ((SPECIAL_TURBO_CHEAT-$1000000)).w
+                tst.b   ((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 beq.s   loc_23376
                 move.w  #$80,d0 
                 move.w  #$80,d1 

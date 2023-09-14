@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\global\battlemapcoords.asm :
 ; 0x7A36..0x7B71 : Battle map coords
-BattleMapCoordinates:
+table_BattleMapCoordinates:
                 ; Map, X, Y, Width, Height, Trigger X, Trigger Y
                 battleMapCoords 63, 0, 12, 32, 36, 255, 255
                 battleMapCoords 57, 0, 0, 16, 20, 255, 255

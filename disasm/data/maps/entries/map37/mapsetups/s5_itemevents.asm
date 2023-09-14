@@ -23,7 +23,7 @@ Map37_ItemEvent0:
                  
                 chkFlg  999             ; Set after the Nazca ship shootdown scene
                 bne.s   return_5FA86
-                move.w  #$71,((TEXT_NAME_INDEX_1-$1000000)).w 
+                move.w  #$71,((DIALOGUE_NAME_INDEX_1-$1000000)).w 
                 chkFlg  836             ; Set after the scene where Zynk stops you as you leave the Moun underground
                 bne.s   byte_5FA76      
                 txt     3373            ; "{LEADER} tries to use{N}the {ITEM}.{W2}{N}But, he doesn't know how.{W1}"

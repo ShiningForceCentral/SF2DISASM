@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\start\gamestart.asm :
-; 0x2DE..0x45A : Start function
+; 0x2DE..0x3F6 : Start function
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -170,6 +170,7 @@ loc_3DE:
 
     ; End of function Start
 
+            if (VANILLA_BUILD=1)
                 dc.b $F3                ; Unused Z80 code
                 dc.b $31                ; di
                 dc.b $F0                ; ld      sp, 1FF0h
@@ -178,56 +179,4 @@ loc_3DE:
                 dc.b 0
                 dc.b 0
                 dc.b 0
-
-; =============== S U B R O U T I N E =======================================
-
-
-InitZ80:
-                
-                movem.l d0-a1,-(sp)
-loc_3FA:
-                
-                move.w  #$100,(Z80BusReq).l
-                move.w  #$100,(Z80BusReset).l
-                lea     (Z80_Memory).l,a0
-                move.w  #$1F80,d7
-                lea     (SoundDriver).l,a1
-loc_41A:
-                
-                move.b  (a1)+,d0
-                bsr.w   CopyByteToZ80
-                dbf     d7,loc_41A
-                move.w  #0,(Z80BusReset).l
-                moveq   #$10,d7
-loc_42E:
-                
-                dbf     d7,loc_42E
-                move.w  #$100,(Z80BusReset).l
-                move.w  #0,(Z80BusReq).l
-                lea     ((MUSIC_STACK_LENGTH-$1000000)).w,a0
-                movem.l (sp)+,d0-a1
-                rts
-
-    ; End of function InitZ80
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-CopyWordToZ80:
-                
-                bsr.w   CopyByteToZ80
-                lsr.w   #8,d0
-
-    ; End of function CopyWordToZ80
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-CopyByteToZ80:
-                
-                move.b  d0,(a0)
-                cmp.b   (a0),d0
-                bne.s   CopyByteToZ80
-                addq.l  #1,a0
+            endif

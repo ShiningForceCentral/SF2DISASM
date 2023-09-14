@@ -14,8 +14,8 @@
         include "data\graphics\battles\grounds\entries.asm"                     ; Battlescene Grounds
         align
         include "data\graphics\battles\spells\entries.asm"                      ; Spell Graphics
-        alignIfExtendedSsf $400000
-        objIfExtendedSsf $200000
+        conditionalAlign $400000
+        objIfMemoryMapper $200000
         include "data\graphics\battles\battlesprites\enemies\entries.asm"   ; Enemy battlesprites
         align
         include "data\graphics\battles\battlesprites\allies\entries.asm"    ; Ally battlesprites
@@ -23,5 +23,5 @@
         include "data\graphics\battles\weapons\entries.asm"                 ; Battlescene Weapons
         align
         include "data\graphics\battles\weapons\palettes\entries.asm"        ; Battlescene Weapon Palettes
-        objendIfExtendedSsf
-        alignIfExtendedSsf $600000, $400000
+        objendIfMemoryMapper
+        conditionalAlign $600000, $400000

@@ -17,20 +17,28 @@ WitchSuspend:
                 clsTxt
                 clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 bsr.w   sub_7CDC
+            if (STANDARD_BUILD=1)
+                jsr     SuspendGame
+            else
                 jsr     j_SuspendGame
+            endif
                 move.w  #600,d0         ; wait for 10 seconds, or until player presses Start before restarting the game
 @WaitForStartInput:
                 
                 bsr.w   WaitForVInt
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 dbne    d0,@WaitForStartInput
+
+
+FadeOutAndResetGame:
                 
-ResetGame:      sndCom  SOUND_COMMAND_FADE_OUT
+                sndCom  SOUND_COMMAND_FADE_OUT
                 bsr.w   FadeOutToBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 bsr.w   DisableDisplayAndInterrupts
-                move    #$2700,sr
+                
+ResetGame:      move    #$2700,sr
                 movea.l (InitStack).w,sp
                 movea.l (p_Start).w,a0  
                 jmp     (a0)

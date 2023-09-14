@@ -39,7 +39,7 @@ loc_11B9E:
                 move.w  #160,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d0
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 bsr.w   GetAllyPortrait 
             endif
                 bsr.w   LoadPortrait    
@@ -146,7 +146,7 @@ BuildMemberScreen:
                 bsr.w   LoadTileDataForMemberScreen
                 move.w  portraitIndex(a6),d0
                 blt.s   loc_11CA6
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 bsr.w   GetAllyPortrait 
             endif
                 bsr.w   LoadPortrait    
@@ -450,7 +450,7 @@ LoadTileDataForMemberScreen:
                 bsr.w   WriteTilesFromNumber
 @CheckDebugMode:
                 
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   @CheckPortrait
                 
                 ; Write combatant index inside kills/defeat window in debug mode

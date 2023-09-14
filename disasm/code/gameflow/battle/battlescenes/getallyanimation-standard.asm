@@ -16,7 +16,7 @@ GetAllyAnimation:
                 move.w  d1,-(sp)
                 
                 ; Branch if not performing a regular attack
-                bne.s   @IsSpecialAnimation?
+                bne.s   @IsSpecialAnimation
                 
                 ; Is weapon sprite a spear?
                 lea     tbl_SpearWeaponSprites(pc), a0
@@ -40,7 +40,7 @@ GetAllyAnimation:
                 move.w  @KNIGHTS_TO_SPEARS_OFFSET(a0,d2.w),d1
                 bra.s   @GetAnimationPointer
                 
-@IsSpecialAnimation?:
+@IsSpecialAnimation:
                 cmpi.w  #ALLYBATTLEANIMATION_SPECIALS_START,d1
                 bhs.s   @GetAnimationPointer
                 
@@ -60,7 +60,7 @@ GetAllyAnimation:
                 add.w   ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d1
                 
 @GetAnimationPointer:
-                conditionalLongAddr movea.l, p_pt_AllyAnimations, a0
+                getPointer p_pt_AllyAnimations, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
                 

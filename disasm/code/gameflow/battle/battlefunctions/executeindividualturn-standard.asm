@@ -56,11 +56,11 @@ ExecuteIndividualTurn:
                 bne.s   @AiControl1
                 tst.b   d0
                 bpl.s   @IsAutoBattle       ; check auto battle if ally
-                tst.b   ((CONTROL_OPPONENT_CHEAT-$1000000)).w
+                tst.b   ((CONTROL_OPPONENT_TOGGLE-$1000000)).w
                 beq.s   @AiControl1
                 bra.s   @PlayerControl
                 
-@IsAutoBattle:  tst.b   ((AUTO_BATTLE_CHEAT-$1000000)).w
+@IsAutoBattle:  tst.b   ((AUTO_BATTLE_TOGGLE-$1000000)).w
                 beq.s   @PlayerControl
                 
 @AiControl1:    st      aiControlFlag(a6)

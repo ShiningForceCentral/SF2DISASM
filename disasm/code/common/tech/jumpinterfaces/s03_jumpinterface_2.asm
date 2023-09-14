@@ -55,11 +55,11 @@ j_VInt_UpdateTimerWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_WitchMainMenu:
+j_ExecuteWitchMainMenu:
                 
-                jmp     WitchMainMenu(pc)
+                jmp     ExecuteWitchMainMenu(pc)
 
-    ; End of function j_WitchMainMenu
+    ; End of function j_ExecuteWitchMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================

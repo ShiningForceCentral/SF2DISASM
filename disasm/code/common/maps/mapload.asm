@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\maps\mapload.asm :
-; 0x20E6..0x2F6A : Map loading functions
+; 0x20E6..0x2EC0 : Map loading functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -670,11 +670,11 @@ ProcessMapTransition:
                 getSavedByte CURRENT_MAP, d1
                 
                 disableSram
-                conditionalLongAddr movea.l, p_pt_MapData, a5
+                getPointer p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
                 addq.l  #1,a5
-                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
+                getPointer p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
@@ -693,7 +693,7 @@ ProcessMapTransition:
 loc_25E8:
                 
                 addq.l  #1,a5
-                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
+                getPointer p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
@@ -711,7 +711,7 @@ loc_25E8:
                 bsr.w   WaitForDmaQueueProcessing
 loc_260E:
                 
-                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
+                getPointer p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
@@ -1090,13 +1090,13 @@ LoadMapTilesets:
                 blt.w   @Skip           ; skip if map index > 127
                 
                 disableSram
-                conditionalLongAddr movea.l, p_pt_MapData, a5
+                getPointer p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
                 move.b  (a5)+,d0
                 
                 ; Check tileset 1
-                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
+                getPointer p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
@@ -1112,7 +1112,7 @@ LoadMapTilesets:
                 bsr.w   LoadCompressedData
 @CheckTileset2:
                 
-                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
+                getPointer p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
@@ -1128,7 +1128,7 @@ LoadMapTilesets:
                 bsr.w   LoadCompressedData
 @CheckTileset3:
                 
-                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
+                getPointer p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
@@ -1144,7 +1144,7 @@ LoadMapTilesets:
                 bsr.w   LoadCompressedData
 @CheckTileset4:
                 
-                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
+                getPointer p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
@@ -1160,7 +1160,7 @@ LoadMapTilesets:
                 bsr.w   LoadCompressedData
 @CheckTileset5:
                 
-                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
+                getPointer p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
@@ -1191,7 +1191,23 @@ LoadMapTilesets:
 ; 
 ;   In: d1.b = Map index, or -1 to indicate current map
 
-
+ReloadCurrentMap:
+            if (STANDARD_BUILD=1)
+                lea     (FF0000_RAM_START).l,a2
+                move.w  #MAP_LAYOUT_LONGS_COUNTER,d7
+                
+@Clear_Loop:    clr.l   (a2)+
+                dbf     d7,@Clear_Loop
+                
+                lea     (FF2000_LOADING_SPACE).l,a2
+                move.l  #$C0F8C0F8,(a2)+
+                move.l  #$C0F8C0F8,(a2)+
+                move.l  #$C0F8C0F8,(a2)+
+                move.l  #$C0F8C0F8,(a2)+
+                move.w  #$C0F8,(a2)+
+                clr.w   d0
+                moveq   #-1,d1   ; reload current map  include "code\common\maps\reloadmap-standard.asm"
+            endif
 LoadMap:
                 
                 move.l  ((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
@@ -1209,7 +1225,7 @@ LoadMap:
                 ; Reload current map
                 clr.w   d1              ; If D1<0, re-load current map
                 getSavedByte CURRENT_MAP, d1
-                conditionalLongAddr movea.l, p_pt_MapData, a5
+                getPointer p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
                 lea     $E(a5),a5       ; get address 02 - map properties
@@ -1218,10 +1234,10 @@ loc_2ACC:
                 
                 clr.w   ((word_FFAF42-$1000000)).w ; Load new map D1
                 setSavedByte d1, CURRENT_MAP  
-                conditionalLongAddr movea.l, p_pt_MapData, a5
+                getPointer p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
-                conditionalLongAddr movea.l, p_pt_MapPalettes, a0
+                getPointer p_pt_MapPalettes, a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 lsl.w   #2,d0
@@ -1637,7 +1653,7 @@ LoadMapArea:
                 move.w  (a1)+,d0
                 
                 disableSram
-                conditionalLongAddr movea.l, p_pt_MapTilesets, a0
+                getPointer p_pt_MapTilesets, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.l  a1,-(sp)
@@ -1658,83 +1674,3 @@ LoadMapArea:
                 rts
 
     ; End of function LoadMapArea
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused code
-sub_2EC0:
-                
-                move.w  #$20,d6 
-                bsr.w   GenerateRandomNumber
-                move.w  d7,d0
-                move.w  #4,d6
-                bsr.w   GenerateRandomNumber
-                move.w  d7,d1
-                addi.w  #$1C,d1
-                move.w  #$10,d6
-                bsr.w   GenerateRandomNumber
-                move.w  d7,d2
-                move.w  #4,d6
-                bsr.w   GenerateRandomNumber
-                move.w  d7,d3
-                move.w  #4,d4
-                move.w  #4,d5
-                move.w  #4,d6
-                move.w  #4,d7
-                bsr.w   sub_36B2
-                bsr.w   WaitForVInt
-loc_2F04:
-                
-                move.w  #$8721,d0
-                bsr.w   SetVdpReg
-                move.w  #$8700,d0
-                bsr.w   SetVdpReg
-                bsr.w   WaitForVInt
-                bsr.w   sub_2F24
-                tst.b   ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
-                bne.s   loc_2F04
-                rts
-
-    ; End of function sub_2EC0
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused code
-sub_2F24:
-                
-                move.w  d0,-(sp)
-                move.w  ((PLANE_A_SCROLL_SPEED_X-$1000000)).w,d0
-                addq.w  #1,d0
-                cmpi.w  #$80,d0 
-                bgt.s   loc_2F36
-                move.w  d0,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
-loc_2F36:
-                
-                move.w  ((PLANE_A_SCROLL_SPEED_Y-$1000000)).w,d0
-                addq.w  #1,d0
-                cmpi.w  #$80,d0 
-                bgt.s   loc_2F46
-                move.w  d0,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
-loc_2F46:
-                
-                move.w  ((PLANE_B_SCROLL_SPEED_X-$1000000)).w,d0
-                addq.w  #1,d0
-                cmpi.w  #$80,d0 
-                bgt.s   loc_2F56
-                move.w  d0,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
-loc_2F56:
-                
-                move.w  ((PLANE_B_SCROLL_SPEED_Y-$1000000)).w,d0
-                addq.w  #1,d0
-                cmpi.w  #$80,d0 
-                bgt.s   loc_2F66
-                move.w  d0,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
-loc_2F66:
-                
-                move.w  (sp)+,d0
-                rts
-
-    ; End of function sub_2F24
-

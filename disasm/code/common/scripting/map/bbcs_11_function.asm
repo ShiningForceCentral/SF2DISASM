@@ -6,8 +6,11 @@
 
 
 sub_458E:
-                
+            if (STANDARD_BUILD=1)
+                jsr     (sub_38C0).w
+            else
                 bsr.w   sub_38C0
+            endif
                 move.w  d0,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
                 move.w  d0,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
                 lsr.w   #4,d0

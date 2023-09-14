@@ -43,7 +43,7 @@
                 
                 ; Confirm action
                 move.w  d0,newClass(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  promotionItem(a6),((TEXT_NAME_INDEX_3-$1000000)).w
                 move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     143             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
@@ -58,7 +58,7 @@
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @RemoveItem
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     145             ; "{NAME} loses all spells{N}that were learned.{N}OK?"
                 jsr     YesNoChoiceBox
                 bne.w   @Start_Loop

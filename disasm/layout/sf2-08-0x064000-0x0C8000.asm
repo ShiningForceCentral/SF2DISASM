@@ -4,8 +4,8 @@
 ; FREE SPACE : 953 bytes.
 
 
-                includeIfVanillaLayout "code\common\tech\pointers\s08_pointers.asm"    ; Game Section 08 Pointers
-                includeIfVanillaRom "data\graphics\maps\maptilesets\entries.asm"    ; Map Tilesets
-                include "data\graphics\maps\mappalettes\entries.asm"    ; Map palettes
-                include "data\maps\entries.asm"    ; Map entries
-                alignIfVanillaLayout $C8000
+                includeIfVanilla "code\common\tech\pointers\s08_pointers.asm"    ; Game Section 08 Pointers
+                includeIfVanilla "data\graphics\maps\maptilesets\entries.asm"    ; Map Tilesets
+                includeIfVanilla "data\graphics\maps\mappalettes\entries.asm"    ; Map palettes
+                includeIfVanilla "data\maps\entries.asm"    ; Map entries
+                alignIfVanilla $C8000

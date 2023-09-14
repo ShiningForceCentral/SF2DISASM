@@ -100,7 +100,11 @@ csc35_setBlocksVar:
 csc36_resetMap:
                 
                 move.l  a6,-(sp)
+            if (STANDARD_BUILD=1)
+                jsr     (ReloadCurrentMap).w
+            else
                 jsr     (ResetCurrentMap).l
+            endif
                 movea.l (sp)+,a6
                 rts
 
@@ -1651,7 +1655,7 @@ csc50_setEntitySize:
 
 csc51_joinBattleParty:
                 
-                move.w  #$FFFF,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  #$FFFF,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 nop
                 move.w  (a6)+,d0
                 jsr     j_IsInBattleParty
@@ -1675,7 +1679,7 @@ loc_46F2C:
 loc_46F40:
                 
                 move.b  (a0),d0
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 nop
                 jsr     j_LeaveBattleParty
                 move.b  d6,d0

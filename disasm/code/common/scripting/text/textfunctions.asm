@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\scripting\text\textfunctions.asm :
-; 0x6260..0x6E94 : Text functions
+; 0x6260..0x6D74 : Text functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -11,13 +11,13 @@ DisplayText:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,-(sp)
-                bsr.w   sub_676E
+                bsr.w   CreateDialogueWindow
                 move.w  (sp)+,d0
                 move.b  #1,((CURRENTLY_TYPEWRITING-$1000000)).w ; "Currently typewriting"
                 movem.w d0,-(sp)        ; save string #
                 lsr.w   #6,d0
                 andi.b  #$FC,d0         ; string # -> bank pointer offset
-                conditionalLongAddr movea.l, p_pt_TextBanks, a0 ; load script bank pointer
+                getPointer p_pt_TextBanks, a0 ; load script bank pointer
                 movea.l (a0,d0.w),a0
                 movem.w (sp)+,d0        ; restore string #
                 andi.w  #$FF,d0         ; restrict to range 0-255
@@ -33,12 +33,12 @@ loc_6298:
                 dbf     d0,GoToNextString ; loop until wanted string reached
                 clr.l   ((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w 
                                                         ; get ready
-                clr.b   ((byte_FFB6D8-$1000000)).w
+                clr.b   ((DIALOGUE_REGULAR_TILE_TOGGLE-$1000000)).w
                 move.b  (a0)+,((COMPRESSED_STRING_LENGTH-$1000000)).w 
                                                         ; keep length of current string
 loc_62A8:
                 
-                move.l  #TEXT_NAME_INDEX_1,((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w
+                move.l  #DIALOGUE_NAME_INDEX_1,((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
                 cmpi.b  #1,((COMPRESSED_STRING_LENGTH-$1000000)).w ; check length
                 beq.w   loc_62FE
@@ -51,14 +51,14 @@ loc_62CA:
                 beq.s   loc_62FE
                 cmpi.b  #$EE,d0
                 bcc.w   ParseSpecialTextSymbol ; if symbol >= $EE
-                bset    #0,((byte_FFB6D8-$1000000)).w
+                bset    #0,((DIALOGUE_REGULAR_TILE_TOGGLE-$1000000)).w
                 bne.s   loc_62F2
                 cmpi.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 beq.s   loc_62F2
                 move.b  #$FF,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 loc_62F2:
                 
-                bsr.s   sub_6308
+                bsr.s   ApplyAutomaticNewDialogueLine
                 bsr.w   SymbolsToGraphics
                 bsr.w   HandleDialogueTypewriting
                 bra.s   loc_62CA
@@ -74,7 +74,7 @@ loc_62FE:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_6308:
+ApplyAutomaticNewDialogueLine:
                 
                 cmpi.b  #$CC,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 bls.s   return_634C
@@ -92,7 +92,7 @@ loc_6338:
                 
                 bcs.s   return_634C
 
-    ; End of function sub_6308
+    ; End of function ApplyAutomaticNewDialogueLine
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -182,7 +182,7 @@ ParseSpecialTextSymbol:
                 bra.w   loc_62CA
 @regularTile:
                 
-                move.b  #1,((byte_FFB6D8-$1000000)).w
+                move.b  #1,((DIALOGUE_REGULAR_TILE_TOGGLE-$1000000)).w
                 bra.w   loc_62CA
 @delay2:
                 
@@ -319,14 +319,14 @@ symbol_player:
                 bra.w   loc_62CA
 symbol_name:
                 
-                bsr.w   sub_6648
+                bsr.w   GetCurrentDialogueNameIndex
                 move.w  d1,d0
                 jsr     j_GetCombatantName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_item:
                 
-                bsr.w   sub_6648
+                bsr.w   GetCurrentDialogueNameIndex
                 jsr     j_FindItemName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
@@ -352,7 +352,7 @@ loc_6574:
                 bra.w   loc_62CA
 symbol_class:
                 
-                bsr.w   sub_6648
+                bsr.w   GetCurrentDialogueNameIndex
             if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
                 bsr.w   GetFullClassName
             else
@@ -412,19 +412,19 @@ symbol_delay3:
                 bra.s   loc_65CC
 symbol_spell:
                 
-                bsr.w   sub_6648
+                bsr.w   GetCurrentDialogueNameIndex
                 jsr     j_FindSpellName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_clear:
                 
-                bsr.w   sub_6872
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                bsr.w   ClearDialogueWindowLayout
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  d0,-(sp)
                 bsr.w   GetWindowEntryAddress
                 movea.l (a0),a1
-                bsr.w   sub_67E6
+                bsr.w   LoadDialogueWindowLayout
                 move.w  (sp)+,d0
                 move.w  #$8080,d1
                 bsr.w   SetWindowDestination
@@ -442,14 +442,14 @@ symbol_color:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_6648:
+GetCurrentDialogueNameIndex:
                 
                 movea.l ((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w,a1
                 move.w  (a1)+,d1
                 move.l  a1,((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w
                 rts
 
-    ; End of function sub_6648
+    ; End of function GetCurrentDialogueNameIndex
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -735,12 +735,12 @@ byte_666E:      dc.b 1
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_676E:
+CreateDialogueWindow:
                 
-                tst.w   ((TEXT_WINDOW_INDEX-$1000000)).w
+                tst.w   ((DIALOGUE_WINDOW_INDEX-$1000000)).w
                 bne.w   return_67E4
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                bsr.w   sub_6872
+                bsr.w   ClearDialogueWindowLayout
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
 loc_6784:
                 
@@ -756,11 +756,11 @@ loc_6798:
                 move.w  #$21D,d1
                 bsr.w   CreateWindow    
                 addq.w  #1,d0
-                move.w  d0,((TEXT_WINDOW_INDEX-$1000000)).w
-                bsr.w   sub_67E6
+                move.w  d0,((DIALOGUE_WINDOW_INDEX-$1000000)).w
+                bsr.w   LoadDialogueWindowLayout
                 cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_VDPTILE).l
                 bne.s   loc_67CE
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$213,d1
                 move.w  #8,d2
@@ -770,7 +770,7 @@ loc_6798:
                 bra.s   return_67E4
 loc_67CE:
                 
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$215,d1
                 move.w  #1,d2
@@ -782,13 +782,13 @@ return_67E4:
                 
                 rts
 
-    ; End of function sub_676E
+    ; End of function CreateDialogueWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_67E6:
+LoadDialogueWindowLayout:
                 
                 cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_VDPTILE).l 
                                                         ; check if we are on the map or in battle (by checking for presence of black bar sprites)
@@ -842,7 +842,7 @@ loc_684E:
                 move.w  #$D860,d2
                 clr.w   d3
 
-    ; End of function sub_67E6
+    ; End of function LoadDialogueWindowLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -874,7 +874,7 @@ loc_6866:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_6872:
+ClearDialogueWindowLayout:
                 
                 clr.w   ((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w
                 move.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
@@ -891,7 +891,7 @@ loc_688C:
                 clr.w   d0
                 bra.w   loc_68FC
 
-    ; End of function sub_6872
+    ; End of function ClearDialogueWindowLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -950,7 +950,7 @@ return_68FA:
     ; End of function HandleDialogueTypewriting
 
 
-; START OF FUNCTION CHUNK FOR sub_6872
+; START OF FUNCTION CHUNK FOR ClearDialogueWindowLayout
 
 loc_68FC:
                 
@@ -988,7 +988,7 @@ loc_6976:
                 
                 bra.w   EnableDmaQueueProcessing
 
-; END OF FUNCTION CHUNK FOR sub_6872
+; END OF FUNCTION CHUNK FOR ClearDialogueWindowLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1060,7 +1060,7 @@ loc_6A0C:
 
 HideTextBox:
                 
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 blt.s   return_6A7E
                 move.w  #$21D,d1
@@ -1082,10 +1082,10 @@ loc_6A56:
 loc_6A68:
                 
                 bsr.w   WaitForWindowMovementEnd
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 bsr.w   ClearWindowAndUpdateEndPointer
-                clr.w   ((TEXT_WINDOW_INDEX-$1000000)).w
+                clr.w   ((DIALOGUE_WINDOW_INDEX-$1000000)).w
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 return_6A7E:
                 
@@ -1175,12 +1175,12 @@ loc_6AFC:
 loc_6B00:
                 
                 move.w  d0,((DIALOGUE_VDPTILE_ROW_SCROLLING_OFFSET-$1000000)).w
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  d0,-(sp)
                 bsr.w   GetWindowEntryAddress
                 movea.l (a0),a1
-                bsr.w   sub_67E6
+                bsr.w   LoadDialogueWindowLayout
                 move.w  (sp)+,d0
 loc_6B18:
                 
@@ -1257,7 +1257,7 @@ DialogueGraphicsToRam:
                 
                 subq.w  #1,d7
                 lsl.w   #5,d7
-                conditionalLongAddr movea.l, p_VariableWidthFont, a0
+                getPointer p_VariableWidthFont, a0
                 adda.w  d7,a0
                 move.w  (a0)+,d4
                 andi.w  #$F,d4
@@ -1607,291 +1607,3 @@ sub_6D66:
 
     ; End of function sub_6D66
 
-                dc.b 0                  ; unused layout ?
-                dc.b $EE
-                dc.b $EE
-                dc.b $EE
-                dc.b $E
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $EC
-                dc.b $CB
-                dc.b $BB
-                dc.b $BB
-                dc.b $EC
-                dc.b $BE
-                dc.b $CB
-                dc.b $11
-                dc.b $EC
-                dc.b $BC
-                dc.b $B1
-                dc.b $CC
-                dc.b $EC
-                dc.b $BB
-                dc.b $1C
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EE
-                dc.b $EE
-                dc.b $EE
-                dc.b $EE
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $11
-                dc.b $11
-                dc.b $11
-                dc.b $11
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $EE
-                dc.b $EE
-                dc.b $EE
-                dc.b $EE
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $11
-                dc.b $11
-                dc.b $11
-                dc.b $11
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $EE
-                dc.b $EE
-                dc.b $EE
-                dc.b $EE
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $11
-                dc.b $11
-                dc.b $11
-                dc.b $11
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $EE
-                dc.b $EE
-                dc.b $EE
-                dc.b $EE
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $BB
-                dc.b $11
-                dc.b $11
-                dc.b $11
-                dc.b $11
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $CC
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD
-                dc.b $EC
-                dc.b $B1
-                dc.b $CD
-                dc.b $DD

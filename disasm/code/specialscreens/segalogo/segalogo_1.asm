@@ -19,7 +19,7 @@ VInt_CheckDebugModeCheat:
 
 VInt_ActivateDebugModeCheat:
                 
-                move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
+                move.b  #$FF,((DEBUG_MODE_TOGGLE-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
                 rts
 

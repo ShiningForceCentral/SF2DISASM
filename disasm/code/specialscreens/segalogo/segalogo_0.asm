@@ -1193,7 +1193,7 @@ VInt_CheckConfigurationModeCheat:
 
 VInt_ActivateConfigurationModeCheat:
                 
-                move.b  #$FF,((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
+                move.b  #$FF,((CONFIGURATION_MODE_TOGGLE-$1000000)).w
                 sndCom  MUSIC_ITEM
                 rts
 

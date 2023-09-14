@@ -55,12 +55,12 @@ ExecuteIndividualTurn:
                 bne.w   @AiControl1     
                 tst.b   d0
                 bpl.s   @CheckAutoBattleCheat1 ; check auto battle if ally
-                tst.b   ((CONTROL_OPPONENT_CHEAT-$1000000)).w
+                tst.b   ((CONTROL_OPPONENT_TOGGLE-$1000000)).w
                 beq.w   @AiControl1     
                 bra.s   @Goto_PlayerControl
 @CheckAutoBattleCheat1:
                 
-                tst.b   ((AUTO_BATTLE_CHEAT-$1000000)).w
+                tst.b   ((AUTO_BATTLE_TOGGLE-$1000000)).w
                 bne.w   @AiControl1     
 @Goto_PlayerControl:
                 
@@ -97,12 +97,12 @@ ExecuteIndividualTurn:
                 bne.w   @AiControl2
                 tst.b   d0
                 bpl.s   @CheckAutoBattleCheat2
-                tst.b   ((CONTROL_OPPONENT_CHEAT-$1000000)).w
+                tst.b   ((CONTROL_OPPONENT_TOGGLE-$1000000)).w
                 beq.w   @AiControl2
                 bra.s   @Continue
 @CheckAutoBattleCheat2:
                 
-                tst.b   ((AUTO_BATTLE_CHEAT-$1000000)).w
+                tst.b   ((AUTO_BATTLE_TOGGLE-$1000000)).w
                 bne.w   @AiControl2
 @Continue:
                 

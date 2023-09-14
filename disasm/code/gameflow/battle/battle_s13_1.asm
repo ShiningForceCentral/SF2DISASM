@@ -11,7 +11,7 @@
 
 LoadEndCreditsFont:
                 
-                conditionalLongAddr movea.l, p_BaseTiles, a0
+                getPointer p_BaseTiles, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 lea     (byte_FF6C02).l,a0

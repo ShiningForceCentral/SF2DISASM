@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\enemies\enemydefs.asm :
 ; 0x1B1A66..0x1B30EE : Enemy definitions
-tbl_EnemyDefs:  
+table_EnemyDefs:  
 ; Syntax        unknownByte    ?
 ;               spellPower     [SPELLPOWER_]REGULAR *or* [SPELLPOWER_]ENHANCED
 ;               level          0-255

@@ -9,6 +9,7 @@ EASY_CONFIGURATION_MODE:    equ 0       ; Toggle Configuration Mode ON automatic
 EASY_SOUND_TEST:            equ 0       ; Hold Up while entering Configuration Mode; there is no need to have set Game Completed save flag.
 EASY_RENAME_CHARACTERS:     equ 0       ; Rename all characters when starting a new game.
 
+
 ; Debug build configuration
 TEST_BUILD_SKIP_SEGA_LOGO:                  equ 1
 TEST_BUILD_SKIP_GAME_INTRO:                 equ 1
@@ -25,6 +26,7 @@ TEST_BUILD_INITIAL_GAME_COMPLETED:          equ 1
 TEST_BUILD_INITIAL_MESSAGE_SPEED:           equ 3       ; [0, 3]
 TEST_BUILD_INITIAL_DISPLAY_BATTLE_MESSAGES: equ 0       ; 1 = no battle messages display ON
 
+
 ; Fixes
 FIX_SEARCH_IN_BATTLE:               equ 1       ; Restore the ability to search chests during battle.
 FIX_INCREASE_DOUBLE_RESETS_COUNTER: equ 1       ; Equipment that increases the chance to double attack also erroneously set the chance to counter attack to 1/32.
@@ -33,7 +35,7 @@ FIX_HIGINS_SPELL:                   equ 1       ; Prevent unequipping from possi
 FIX_MOVEMENT_GLITCH:                equ 1       ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
 FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE:equ 1       ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
 FIX_DWARVEN_MINER_VOICE:            equ 1       ; A cutscene has a fairy NPC concluding her dialogue, and when the dwarf delivers his first line, it uses the same female NPC speech sound effect until his follow-up dialogue line.
-FIX_CARAVAN_FREE_REPAIR_EXPLOIT:    equ 1       ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reducded to 32 items unless SRAM is expanded.)
+FIX_CARAVAN_FREE_REPAIR_EXPLOIT:    equ 1       ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reduced to 32 items unless SRAM is expanded.)
 FIX_GIZMO_ARRANGEMENT:              equ 1       ; Gizmos spread out into battle places during cutscene.
 FIX_CRITICAL_HIT_DEFINITIONS:       equ 1       ; Make the "Increase Critical" equipeffect never lower damage potential.
 FIX_GOLD_GIFT:                      equ 1       ; Gold increases when Minister gives you gift in New Granseal.
@@ -41,6 +43,7 @@ FIX_CARAVAN_DESCRIPTIONS:           equ 1       ; Break up character list into c
 FIX_LABYRINTH_DELETION:             equ 1       ; Prevent a section of the labyrinth from being deleted due to AI region activation.
 FIX_ENEMY_BATTLE_EQUIP:             equ 1       ; Enemies will equip battle items as designated in spriteset.
 FIX_MISSING_RANDOM_BATTLES:         equ 1       ; Add zone events for random battles without.
+
 
 ; Quality of life features
 CAPITALIZED_CHARACTER_NAMES:        equ 0       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
@@ -53,6 +56,7 @@ TRADEABLE_ITEMS:                    equ 0       ; Allow trading items in battle 
 CUTSCENE_PROTECTION:                equ 1       ; Prevent game from freezing if dead character is needed for scene after leader death (as Slade for battle 5.)
 CARAVAN_IN_TOWER:                   equ 0       ; Add access to Caravan before tower climb battle.
 MINIATURES_SHOP:                    equ 0       ; Place a shopworker on the desktop and floor of the Miniatures Room.
+
 
 ; Misc. features
 AGILITY_AFFECTS_CHANCE_TO_DODGE:    equ 0       ; Adjust chance to dodge proportionally to the difference between the attacker's and the target's current AGI.
@@ -72,9 +76,15 @@ ADDITIONAL_EQUIPEFFECTS:            equ 0       ; Add new equipeffects to offer 
 MUSCLE_MAGIC:                       equ 0       ; 0 = OFF, 1-256 = spell power increased by (muscleMagicStat * n) / 256
 MUSCLE_MAGIC_STAT:                  equ 5       ; 0 = Max HP, 1 = Current HP, 2 = Max MP, 3 = Current MP, 4 = Base ATT, 5 = Current ATT, 6 = Base DEF, 7 = Current DEF, 8 = Base AGI, 9 = Current AGI
 
+
+; Special screens
+CHAPTER_SCREEN:                     equ 0       ; Patch implementation with template SFCD screen as applicable example.
+
+
 ; AI enhancements
 HEALER_AI_ENHANCEMENTS:             equ 1       ; See SF2_AI_Healing_Rewrite.txt for more details.
 SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options enemies can use.
+
 
 ; Menu enhancements
 THREE_DIGITS_STATS:                 equ 1       ; 
@@ -86,26 +96,69 @@ SHOW_ENEMY_LEVEL:                   equ 1       ;
 SHOW_ALL_SPELLS_IN_MEMBER_SCREEN:   equ 0       ; 
 ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Read values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
 
-; Sound
-SOUND_TEST_RESTORATION:             equ 1       ; Reimplement Sound Test functions that are missing in the US version. Based on Earl's patch.
-MUSIC_RESUMING:                     equ 0       ; Replace the original sound driver with Wiz's custom driver.
-RESUME_BATTLEFIELD_MUSIC_ONLY:      equ 0       ; Do not resume battlescene music.
-RESUME_MUSIC_AFTER_JOIN_JINGLE:     equ 0       ; Resume background music after playing a "Joined the Force" jingle.
+; If standard build, and either THREE_DIGITS_STATS or FULL_CLASS_NAMES are enabled, implement a second member list stats page.
+secondMembersListPage = 0
+    if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
+secondMembersListPage = 1
+    endif
+SECOND_MEMBERS_LIST_PAGE: equ secondMembersListPage
 
-; New special screens
-CHAPTER_SCREEN:                     equ 0       ; Patch implementation with template SFCD screen as applicable example.
+
+; Sound driver
+MUSIC_RESUMING:                     equ 1       ; 
+RESUME_BATTLEFIELD_MUSIC_ONLY:      equ 1       ; Do not resume battlescene music.
+RESUME_MUSIC_AFTER_JOIN_JINGLE:     equ 1       ; Resume background music after playing a "Joined the Force" jingle.
+
+resumeBattlesceneMusic = 1
+    if (RESUME_BATTLEFIELD_MUSIC_ONLY=1)
+resumeBattlesceneMusic = 0
+    endif
+RESUME_BATTLESCENE_MUSIC: equ resumeBattlesceneMusic
+
+
+; Data expansions
+EXPANDED_FORCE_MEMBERS:     equ 1       ; Enable all 32 force members supported by the engine instead of 30.
+EXPANDED_CLASSES:           equ 1       ; Enable support for 64 classes.
+EXPANDED_ITEMS_AND_SPELLS:  equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of a >= 4MB ROM with 32KB SRAM.
+
 
 ; ROM expansions
-EXPANDED_ROM:                       equ 1       ; Build a 4MB ROM and manage SRAM mapping.
-MEMORY_MAPPER:                      equ 0       ; Build a 6MB ROM and manage both ROM and SRAM mapping, supporting both SEGA and Extended SSF mappers.
-SSF_SYSTEM_ID:                      equ 0       ; Put "SEGA SSF" string in ROM header to activate memory mapper on Mega EverDrive cartridges.
-EXPANDED_SRAM:                      equ 1       ; Expand SRAM from 8KB to 32KB.
-RELOCATED_SAVED_DATA_TO_SRAM:       equ 0       ; Relocate currently loaded saved data from system RAM to cartridge SRAM.
-EXPANDED_FORCE_MEMBERS:             equ 1       ; Enable all 32 force members supported by the engine instead of 30.
-EXPANDED_CLASSES:                   equ 1       ; Enable support for 64 classes.
-EXPANDED_ITEMS_AND_SPELLS:          equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of 4MB ROM with 32KB SRAM.
-OPTIMIZED_ROM_LAYOUT:               equ 1       ; Align ROM sections to next word boundary to consolidate free space.
-REGION_FREE_ROM:                    equ 1       ; Skip checking system region, omit including related function, and update ROM header.
+ROM_EXPANSION:              equ 1       ; 0 = 2 MB ROM, 1 = 4 MB ROM (default), 2 = 6 MB ROM
+SRAM_EXPANSION:             equ 1       ; Expand SRAM from 8KB to 32KB.
+SAVED_DATA_EXPANSION:       equ 1       ; Relocate currently loaded saved data from system RAM to cartridge SaveRAM.
+
+; If standard build, and either ROM_EXPANSION or EXPANDED_ITEMS_AND_SPELLS are enabled, build an expanded ROM.
+expandedRom = 0
+    ;if (STANDARD_BUILD&(ROM_EXPANSION!EXPANDED_ITEMS_AND_SPELLS)=1)
+    if (STANDARD_BUILD=1)
+        if (ROM_EXPANSION!EXPANDED_ITEMS_AND_SPELLS>=1)
+expandedRom = 1
+        endif
+    endif
+EXPANDED_ROM: equ expandedRom
+
+; If building a >= 6MB ROM, implement ROM and SRAM mapping management, supporting both SEGA and Extended SSF mappers.
+memoryMapper = 0
+    if (ROM_EXPANSION>=2)
+memoryMapper = 1
+    endif
+MEMORY_MAPPER: equ memoryMapper
+SSF_SYSTEM_ID: equ 0    ; Put "SEGA SSF" string in ROM header to activate memory mapper on Mega EverDrive cartridges.
+
+; If standard build, and either SRAM_EXPANSION, SAVED_DATA_EXPANSION, or EXPANDED_ITEMS_AND_SPELLS are enabled, expand SRAM.
+expandedSram = 0
+    if (STANDARD_BUILD&(SRAM_EXPANSION!SAVED_DATA_EXPANSION!EXPANDED_ITEMS_AND_SPELLS)=1)
+expandedSram = 1
+    endif
+EXPANDED_SRAM: equ expandedSram
+
+; If standard build, and SAVED_DATA_EXPANSION is enabled, relocate saved data to cartridge SaveRAM.
+relocatedSavedData = 0
+    if (STANDARD_BUILD&SAVED_DATA_EXPANSION=1)
+relocatedSavedData = 1
+    endif
+RELOCATED_SAVED_DATA_TO_SRAM: equ relocatedSavedData
+
 
 ; Assembler optimizations
 OPTIMIZED_PC_RELATIVE_ADDRESSING:   equ 1       ; Optimize to PC relative addressing.
@@ -117,40 +170,6 @@ OPTIMIZED_SUBS_TO_QUICK_FORM:       equ 1       ; Optimize subtract to quick for
 OPTIMIZED_MOVE_TO_QUICK_FORM:       equ 1       ; Optimize move to quick form.
 
 
-
-; If standard build, and either THREE_DIGITS_STATS or FULL_CLASS_NAMES
-; are enabled, implement a second member list stats page.
-secondMembersListPage = 0
-    if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
-secondMembersListPage = 1
-    endif
-SECOND_MEMBERS_LIST_PAGE: equ secondMembersListPage
-    
-    ; If standard build, and either EXPANDED_ROM, EXTENDED_SSF_MAPPER, or EXPANDED_ITEMS_AND_SPELLS
-    ; are enabled, build an expanded ROM.
-    if (STANDARD_BUILD&(EXPANDED_ROM!MEMORY_MAPPER!EXPANDED_ITEMS_AND_SPELLS)=1)
-expandedRom = 1
-    else
-expandedRom = 0
-    endif
-    
-    ; If standard build, and either EXPANDED_SRAM, RELOCATED_SAVED_DATA_TO_SRAM, or EXPANDED_ITEMS_AND_SPELLS
-    ; are enabled, expand SRAM.
-    if (STANDARD_BUILD&(EXPANDED_SRAM!RELOCATED_SAVED_DATA_TO_SRAM!EXPANDED_ITEMS_AND_SPELLS)=1)
-expandedSram = 1
-    else
-expandedSram = 0
-    endif
-    
-    ; If standard build, and either OPTIMIZED_ROM_LAYOUT or REGION_FREE_ROM are enabled,
-    ; build a region free ROM to make space for relocated pointers in a non-expanded ROM.
-    if (STANDARD_BUILD&(OPTIMIZED_ROM_LAYOUT!REGION_FREE_ROM)=1)
-regionFreeRom = 1
-    else
-regionFreeRom = 0
-    endif
-    
-    
     ; Apply optional assembler optimizations.
     if (STANDARD_BUILD&OPTIMIZED_PC_RELATIVE_ADDRESSING=1)
         opt op+     ; Switches to PC relative addressing from absolute long addressing if this is permissible in the current code context.

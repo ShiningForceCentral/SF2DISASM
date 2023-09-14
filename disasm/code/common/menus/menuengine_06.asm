@@ -264,7 +264,7 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentAtt
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -278,7 +278,7 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentDef
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -292,7 +292,7 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentAgi
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -306,7 +306,7 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentMov
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
@@ -445,7 +445,7 @@ LoadItemIcon:
                 
                 module  ; start of icon loading module
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                conditionalLongAddr movea.l, p_Icons, a0
+                getPointer p_Icons, a0
             if (STANDARD_BUILD=1)
                 cmpi.w  #ITEM_NOTHING,d1
                 bne.s   LoadIcon
@@ -463,7 +463,7 @@ LoadItemIcon:
 LoadSpellIcon:
                 
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
-                conditionalLongAddr movea.l, p_Icons, a0
+                getPointer p_Icons, a0
                 cmpi.w  #SPELL_NOTHING,d1
                 bne.s   @Spell
 @Nothing:       move.w  #ICON_NOTHING,d1
@@ -617,7 +617,7 @@ loc_13CDE:
 
     ; End of function CopyWindowTilesToRam
 
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
 aNameClassLevExp:
                 dc.b 'NAME    CLASS     LEV EXP',0
 aNameHpMpAtDfAgMv:
@@ -1710,7 +1710,7 @@ EquipNewItem:
                 jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.w   @Return         ; return if new item is not cursed
-                move.w  d0,(TEXT_NAME_INDEX_1).l
+                move.w  d0,(DIALOGUE_NAME_INDEX_1).l
                 jsr     HideMemberListWindow(pc)
                 sndCom  MUSIC_CURSED_ITEM
                 txt     34              ; "Gosh!  {NAME} is{N}cursed!{W2}"
@@ -1924,7 +1924,7 @@ loc_14A0A:
                 movem.w d0-d1,-(sp)
                 clr.w   d1
                 bsr.s   sub_14A82
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_14A26
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -2227,7 +2227,7 @@ CopyIconPixels:
                 
                 move.l  a1,-(sp)
                 move.w  d0,-(sp)
-                conditionalLongAddr movea.l, p_Icons, a1
+                getPointer p_Icons, a1
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
@@ -2797,7 +2797,7 @@ loc_1528E:
                 jsr     (CreateWindow).w
                 move.w  d0,windowSlot(a6)
                 move.l  a1,windowTilesEnd(a6)
-                conditionalLongAddr movea.l, p_MenuTiles_YesNo, a0
+                getPointer p_MenuTiles_YesNo, a0
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jsr     (LoadCompressedData).w
                 clr.b   ((CURRENT_DIAMENU_CHOICE-$1000000)).w
@@ -2809,7 +2809,7 @@ loc_1528E:
                 move.w  #$C11,d1
                 move.w  #4,d2
                 jsr     (MoveWindowWithSfx).w
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_152F0
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -2883,7 +2883,7 @@ loc_15378:
                 move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_153AC
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -2916,7 +2916,7 @@ loc_153D6:
                 move.w  #$F011,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
-                move.w  ((TEXT_WINDOW_INDEX-$1000000)).w,d0
+                move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   loc_153F6
                 subq.w  #1,d0
                 move.w  #$8080,d1
@@ -3260,7 +3260,7 @@ loc_1560E:
 LoadPortrait:
                 
                 movem.l d0-a3,-(sp)
-                conditionalLongAddr movea.l, p_pt_Portraits, a0
+                getPointer p_pt_Portraits, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0

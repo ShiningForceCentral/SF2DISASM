@@ -39,7 +39,7 @@ ms_map22_EntityEvents:
 
 Map22_EntityEvent2:
                 
-                jsr     j_CaravanActions
+                jsr     j_CaravanMenuActions
                 rts
 
     ; End of function Map22_EntityEvent2

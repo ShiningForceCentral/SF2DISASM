@@ -90,7 +90,7 @@ GenerateRandomOrDebugNumber:
                 
                 movem.l d6-d7,-(sp)
                 move.w  d0,d6
-                tst.b   (DEBUG_MODE_ACTIVATED).l
+                tst.b   (DEBUG_MODE_TOGGLE).l
                 beq.s   loc_16B2
                 moveq   #0,d0
                 btst    #INPUT_BIT_RIGHT,((P1_INPUT-$1000000)).w

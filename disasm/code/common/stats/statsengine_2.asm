@@ -786,7 +786,7 @@ GetClassAndName:
             endif
 GetClassName:
                 
-                conditionalLongAddr movea.l, p_tbl_ClassNames, a0
+                getPointer p_tbl_ClassNames, a0
 
     ; End of function GetClassName
 
@@ -1287,7 +1287,7 @@ FindItemName:
                 
                 move.w  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                conditionalLongAddr movea.l, p_tbl_ItemNames, a0
+                getPointer p_tbl_ItemNames, a0
                 bsr.w   FindName        
                 move.w  (sp)+,d1
                 rts
@@ -1305,7 +1305,7 @@ GetItemDefAddress:
                 move.l  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 mulu.w  #ITEMDEF_SIZE,d1
-                conditionalLongAddr movea.l, p_tbl_ItemDefs, a0
+                getPointer p_tbl_ItemDefs, a0
                 adda.w  d1,a0
                 move.l  (sp)+,d1
                 rts
@@ -2588,7 +2588,7 @@ FindSpellName:
                 
                 move.w  d1,-(sp)
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
-                conditionalLongAddr movea.l, p_tbl_SpellNames, a0
+                getPointer p_tbl_SpellNames, a0
                 bsr.w   FindName        
                 move.w  (sp)+,d1
                 rts
@@ -2604,7 +2604,7 @@ FindSpellName:
 FindSpellDefAddress:
                 
                 move.l  d0,-(sp)
-                conditionalLongAddr movea.l, p_tbl_SpellDefs, a0
+                getPointer p_tbl_SpellDefs, a0
                 getSpellDefsCounter d0
 @Loop:
                 
@@ -2614,7 +2614,7 @@ FindSpellDefAddress:
                 dbf     d0,@Loop
                 
                 ; Default to first entry if not found
-                conditionalLongAddr movea.l, p_tbl_SpellDefs, a0
+                getPointer p_tbl_SpellDefs, a0
 @Found:
                 
                 move.l  (sp)+,d0

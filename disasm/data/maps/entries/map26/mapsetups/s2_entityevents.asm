@@ -68,7 +68,7 @@ Map26_EntityEvent4:
 
 Map26_EntityEvent5:
                 
-                jsr     j_CaravanActions
+                jsr     j_CaravanMenuActions
                 rts
 
     ; End of function Map26_EntityEvent5

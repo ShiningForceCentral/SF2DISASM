@@ -1,7 +1,7 @@
 
 ; ASM FILE data\spritedialogproperties-standard.asm :
 
-tbl_SpriteDialogProperties:
+table_MapspriteDialogueProperties:
                 
 ; Syntax        mapSprite [MAPSPRITE_]enum (or index)
 ;               portrait  [PORTRAIT_]enum (or index)

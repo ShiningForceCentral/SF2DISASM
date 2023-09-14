@@ -1025,7 +1025,8 @@ DEALS_ITEMS_COUNTER: equ (dealsItemsByteSize*2)-1
 ; ---------------------------------------------------------------------------
 
 ; enum ShopProperties
-ITEMS_PER_SHOP_PAGE: equ $6
+ITEMS_PER_SHOP_PAGE: equ 6
+DEBUG_SHOP_INDEX: equ $1E
 
 ; ---------------------------------------------------------------------------
 
@@ -1042,7 +1043,7 @@ caravanItemEntrySize = 1
 caravanMaxItemsNumber = 64
     if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
 caravanItemEntrySize = 2
-      if (expandedSram=0)
+      if (EXPANDED_SRAM=0)
 caravanMaxItemsNumber = 32
       endif
     endif
@@ -1350,9 +1351,10 @@ ENTITY_UNIT_CURSOR_ADDRESS: equ $AF02
 SOUND_COMMAND_INIT_DRIVER: equ $20
 SOUND_COMMAND_WAIT_MUSIC_END: equ $F0
 SOUND_COMMAND_PLAY_PREVIOUS_MUSIC: equ $FB
+SOUND_COMMAND_UPDATE_MUSIC_LEVEL: equ $FC
 SOUND_COMMAND_FADE_OUT: equ $FD
 SOUND_COMMAND_GET_D0_PARAMETER: equ $FFFF
-    if (STANDARD_BUILD&MUSIC_RESUMING=1)
+    if (STANDARD_BUILD=1)
 SOUND_COMMAND_DEACTIVATE_RESUMING: equ $F9
 SOUND_COMMAND_ACTIVATE_RESUMING: equ $FA
     endif
@@ -1756,13 +1758,13 @@ KIWI_FLAME_BREATH_UPGRADE_LEVEL3: equ $32
 ; ---------------------------------------------------------------------------
 
 ; enum MapProperties
-mapsDebugNumber: = 56
 mapsNumber: = 79
 mapsMaxIndex: = mapsNumber-1
-    if (STANDARD_BUILD&TEST_BUILD=1)
-mapsDebugNumber: = mapsMaxIndex
+mapsMaxDebugIndex: = 56
+    if (STANDARD_BUILD=1)
+mapsMaxDebugIndex: = mapsMaxIndex
     endif
-MAPS_DEBUG_NUMBER: equ mapsDebugNumber
+MAPS_MAX_DEBUG_INDEX: equ mapsMaxDebugIndex
 MAPS_MAX_INDEX: equ mapsMaxIndex
 MAPS_NUMBER: equ mapsNumber
 MINIMAP_TILE_SIZE: equ 96
@@ -1954,7 +1956,12 @@ BATTLEACTION_ATTACKTYPE_COUNTER: equ $2
 ; ---------------------------------------------------------------------------
 
 ; enum Battlescene
-BATTLESCENE_STACK_NEGSIZE: equ $FF68
+
+battlesceneStackNegsize = -152
+    if (STANDARD_BUILD=1)
+battlesceneStackNegsize = -156
+    endif
+BATTLESCENE_STACK_NEGSIZE: equ battlesceneStackNegsize
 
 ; ---------------------------------------------------------------------------
 
@@ -2008,6 +2015,11 @@ CODE_TERMINATOR_WORD: equ $FFFF
 
 ; enum Special_Offsets
 NRO: equ $FF000000
+
+; ---------------------------------------------------------------------------
+
+; enum MapLayoutProperties
+MAP_LAYOUT_LONGS_COUNTER: equ 2047
 
 ; ---------------------------------------------------------------------------
 
@@ -3542,11 +3554,11 @@ PORTRAIT_DEFAULT: equ $FFFF
 ; ---------------------------------------------------------------------------
 
 ; enum SpriteDialogDef
-SPRITEDIALOGDEF_OFFSET_MAPSPRITE: equ $0
-SPRITEDIALOGDEF_OFFSET_PORTRAIT: equ $1
-SPRITEDIALOGDEF_OFFSET_SPEECHSFX: equ $2
-SPRITEDIALOGDEF_OFFSET_UNDEFINED: equ $3
-SPRITEDIALOGDEF_ENTRY_SIZE: equ $4
+MAPSPRITEDIALOGUEDEF_OFFSET_MAPSPRITE: equ $0
+MAPSPRITEDIALOGUEDEF_OFFSET_PORTRAIT: equ $1
+MAPSPRITEDIALOGUEDEF_OFFSET_SPEECHSFX: equ $2
+MAPSPRITEDIALOGUEDEF_OFFSET_UNDEFINED: equ $3
+MAPSPRITEDIALOGUEDEF_ENTRY_SIZE: equ $4
 
 ; ---------------------------------------------------------------------------
 
@@ -3869,8 +3881,10 @@ SAVED_DATA_OFFSET_MITHRIL_WEAPONS_ON_ORDER: rs.w blacksmithMaxOrdersNumber*saved
 SAVED_DATA_SIZE:                            equ __RS
 
     if (SAVED_DATA_SIZE>5040)
-        inform 0,"Warning: Saved data is large enough that it risks being overwritten by the stack."
-        inform 1,"Patch RELOCATED_SAVED_DATA_TO_SRAM should be enabled."
+        if (RELOCATED_SAVED_DATA_TO_SRAM=0)
+            inform 0,"Warning: Saved data is large enough that it risks being overwritten by the stack."
+            inform 1,"Patch RELOCATED_SAVED_DATA_TO_SRAM should be enabled."
+        endif
     endif
 
 ; ---------------------------------------------------------------------------
@@ -3884,7 +3898,7 @@ sramSize = 8192
 saveSlotRealSize = saveSlotRealSize/2
 saveSlotSize = saveSlotSize/2
     endif
-    if (expandedSram=1)
+    if (EXPANDED_SRAM=1)
 sramSize = 32768
     endif
 
@@ -4026,10 +4040,10 @@ longwordDealsCounter = (DEALS_ITEMS_BYTES/4)-1
 longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/4)-1
 longwordGameFlagsCounter = 31
 longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING*256)|(ITEM_NOTHING*65536)|(ITEM_NOTHING*16777216)
-    if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT&expandedSram=1)
-      if (expandedSram=1)
+    if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT&EXPANDED_SRAM=1)
+        if (EXPANDED_SRAM=1)
 longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/2)-1
-      endif
+        endif
 longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING*65536)
     endif
 
@@ -4039,6 +4053,15 @@ LONGWORD_DEALS_COUNTER: equ longwordDealsCounter
 LONGWORD_CARAVAN_COUNTER: equ longwordCaravanCounter
 LONGWORD_GAMEFLAGS_COUNTER: equ longwordGameFlagsCounter
 LONGWORD_CARAVAN_INITVALUE: equ longwordCaravanInitValue
+
+; ---------------------------------------------------------------------------
+
+; enum SoundDriverProperties
+
+soundDriverByteSize = 8064
+
+SOUND_DRIVER_LONG_SIZE: equ soundDriverByteSize/4
+SOUND_DRIVER_BYTE_SIZE: equ soundDriverByteSize
 
 ; ---------------------------------------------------------------------------
 

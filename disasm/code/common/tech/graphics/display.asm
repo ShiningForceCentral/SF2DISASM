@@ -1,77 +1,6 @@
 
 ; ASM FILE code\common\tech\graphics\display.asm :
-; 0x2F6A..0x31CC : Display function
-tbl_BlackScreenLayout:
-                dcb.b $80,$22
-spr_MaskSprites:vdpSprite 128, V4|H1|1, 1916|PALETTE3|PRIORITY, 128
-                vdpSprite 160, V4|H1|2, 1916|PALETTE3|PRIORITY, 128
-                vdpSprite 192, V4|H1|3, 1916|PALETTE3|PRIORITY, 128
-                vdpSprite 224, V4|H1|4, 1916|PALETTE3|PRIORITY, 128
-                vdpSprite 256, V4|H1|5, 1916|PALETTE3|PRIORITY, 128
-                vdpSprite 288, V4|H1|6, 1916|PALETTE3|PRIORITY, 128
-                vdpSprite 320, V4|H1|7, 1916|PALETTE3|PRIORITY, 128
-
-; =============== S U B R O U T I N E =======================================
-
-
-InitializeDisplay:
-                
-                trap    #VINT_FUNCTIONS
-                dc.w VINTS_DEACTIVATE   ; clear all triggers
-                dc.l 0
-                bsr.w   WaitForVInt
-                bsr.w   DisableDisplayAndInterrupts
-                bsr.w   ClearSpriteTable
-                move.w  #$8C00,d0       ; H32 cell mode, no interlace
-                bsr.w   SetVdpReg
-                move.w  #$9000,d0       ; scroll size : V32 cell, H32 cell
-                bsr.w   SetVdpReg
-                move.w  #$8230,d0       ; scroll A table VRAM address : C000
-                bsr.w   SetVdpReg
-                move.w  #$8407,d0       ; scroll B table VRAM address : E000
-                bsr.w   SetVdpReg
-                move.w  #$8B00,d0       ; disable external interrupt, full scrolls
-                bsr.w   SetVdpReg
-                move.w  #$8D3B,d0       ; H Scroll table VRAM address : EC00
-                bsr.w   SetVdpReg
-                lea     tbl_BlackScreenLayout(pc), a0
-                lea     ($EF80).l,a1
-                move.w  #$40,d0 
-                moveq   #2,d1
-                bsr.w   ApplyImmediateVramDma
-                lea     spr_MaskSprites(pc), a0
-                lea     (SPRITE_TABLE).l,a1
-                moveq   #56,d7
-                bsr.w   CopyBytes       
-                lea     plt_Base(pc), a0
-                lea     (PALETTE_3_BASE).l,a1
-                move.w  #CRAM_PALETTE_SIZE,d7
-                bsr.w   CopyBytes       
-                rts
-
-    ; End of function InitializeDisplay
-
-plt_Base:       incbin "data/graphics/tech/basepalette.bin" ; Palette for UI and mapsprites
-
-; =============== S U B R O U T I N E =======================================
-
-;unused
-sub_30BE:
-                
-                lea     (PLANE_A_MAP_LAYOUT).l,a0
-                lea     ($C000).l,a1
-                move.w  #$400,d0
-                moveq   #2,d1
-                bsr.w   ApplyVIntVramDma
-                lea     (PLANE_B_LAYOUT).l,a0
-                lea     ($E000).l,a1
-                move.w  #$400,d0
-                moveq   #2,d1
-                bsr.w   ApplyVIntVramDma
-                bra.w   WaitForDmaQueueProcessing
-
-    ; End of function sub_30BE
-
+; 0x30EE..0x3758 : Display functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -165,3 +94,151 @@ loc_3196:
                 bsr.w   EnableDmaQueueProcessing
                 movem.w (sp)+,d0-d5/d7
                 movem.l (sp)+,a0-a5
+                rts
+
+    ; End of function sub_3158
+
+MapOffsetHashTable:
+                incbin "data/maps/global/mapoffsethashtable.bin"
+
+; =============== S U B R O U T I N E =======================================
+
+
+sub_364E:
+                
+                movem.w d0-d1/d3-d4/d6,-(sp)
+                add.w   d0,d0
+                clr.w   d2
+                move.b  1(a3,d0.w),d2
+                move.b  (a3,d0.w),d0
+                ext.w   d0
+                add.w   d1,d1
+                clr.w   d3
+                move.b  1(a3,d1.w),d3
+                move.b  (a3,d1.w),d1
+                ext.w   d1
+                lsl.w   #6,d1
+                add.w   d1,d0
+                add.w   d0,d0
+                move.w  d3,d4
+                add.w   d3,d3
+                add.w   d4,d3
+                add.w   d3,d2
+                add.w   d2,d2
+                move.w  (a4,d0.w),d0
+                cmpi.w  #VRAM_ADDRESS_PLANE_A,d0
+                bcs.s   loc_368C
+                clr.w   d6
+                bra.s   loc_3690
+loc_368C:
+                
+                move.w  ((TILE_PALETTE_MASK-$1000000)).w,d6
+loc_3690:
+                
+                andi.w  #$3FF,d0
+                add.w   d0,d0
+                move.w  d0,d1
+                lsl.w   #3,d0
+                add.w   d1,d0
+                add.w   d0,d2
+                move.w  (a5,d2.w),d2
+                or.w    d6,d2
+                movem.w (sp)+,d0-d1/d3-d4/d6
+                rts
+
+    ; End of function sub_364E
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+SetViewDest:
+                
+                movem.w d0-d7,-(sp)
+            if (VANILLA_BUILD=1)
+                bra.w   loc_36BE
+            endif
+
+    ; End of function SetViewDest
+
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+sub_36B2:
+            if (VANILLA_BUILD=1)
+                movem.w d0-d7,-(sp)
+                lsl.w   #7,d0
+                lsl.w   #7,d1
+                lsl.w   #7,d2
+                lsl.w   #7,d3
+            endif
+loc_36BE:
+                
+                move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d4
+                move.w  ((MAP_AREA_LAYER2_STARTY-$1000000)).w,d5
+                move.w  ((MAP_AREA_BACKGROUND_STARTX-$1000000)).w,d6
+                move.w  ((MAP_AREA_BACKGROUND_STARTY-$1000000)).w,d7
+                lsl.w   #7,d4
+                lsl.w   #7,d5
+                lsl.w   #7,d6
+                lsl.w   #7,d7
+                mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d0
+                lsr.l   #8,d0
+                mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d1
+                lsr.l   #8,d1
+                mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d2
+                lsr.l   #8,d2
+                mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d3
+                lsr.l   #8,d3
+                add.w   d4,d0
+                add.w   d5,d1
+                add.w   d6,d2
+                add.w   d7,d3
+                tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
+                bne.s   loc_3702
+                move.w  d0,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
+                bra.s   loc_3706
+loc_3702:
+                
+                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
+loc_3706:
+                
+                tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
+                bne.s   loc_3712
+                move.w  d1,((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w
+                bra.s   loc_3716
+loc_3712:
+                
+                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
+loc_3716:
+                
+                tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
+                bne.s   loc_3722
+                move.w  d2,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
+                bra.s   loc_3726
+loc_3722:
+                
+                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
+loc_3726:
+                
+                tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
+                bne.s   loc_3732
+                move.w  d3,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
+                bra.s   loc_3736
+loc_3732:
+                
+                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
+loc_3736:
+                
+                lea     (byte_FF9A04).l,a2
+                bsr.w   sub_3758
+                bsr.w   sub_37B2
+                lea     (byte_FF9A84).l,a2
+                bsr.w   sub_380C
+                bsr.w   sub_3866
+                movem.w (sp)+,d0-d7
+                rts
+
+    ; End of function sub_36B2

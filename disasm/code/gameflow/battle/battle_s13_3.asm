@@ -238,7 +238,11 @@ InitializeEnemyStats:
                 bsr.w   UpgradeRandomBattleEnemies
                 move.w  d1,d6           ; d1.w, d6.w = upgraded enemy index
                 mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
-                lea     tbl_EnemyDefs(pc), a1
+            if (STANDARD_BUILD=1)
+                getPointer p_table_EnemyDefs, a1
+            else
+                lea     table_EnemyDefs(pc), a1
+            endif
                 adda.w  d1,a1
                 move.l  a0,-(sp)
                 jsr     j_GetCombatantEntryAddress_0
@@ -575,7 +579,12 @@ GetBattleSpritesetSubsection:
                 clr.w   d0
                 getSavedByte CURRENT_BATTLE, d0
                 lsl.w   #2,d0
-                conditionalPc lea,pt_BattleSpriteSets,a0,nop
+            if (STANDARD_BUILD=1)
+                getPointer p_pt_BattleSpriteSets, a0
+            else
+                lea     pt_BattleSpriteSets(pc), a0
+                nop
+            endif
                 movea.l (a0,d0.w),a0
                 tst.b   d2
                 beq.w   @ReturnInfo     ; 0 = Section sizes
@@ -872,7 +881,11 @@ UpgradeRandomBattleEnemies:
                 ; Get pointer to enemy upgrade data based on move type -> A0
                 move.b  d5,d1
                 mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
-                lea     tbl_EnemyDefs(pc), a1
+            if (STANDARD_BUILD=1)
+                getPointer p_table_EnemyDefs, a1
+            else
+                lea     table_EnemyDefs(pc), a1
+            endif
                 adda.w  d1,a1
                 move.b  ENEMYDEF_OFFSET_MOVETYPE(a1),d2
                 lsr.w   #4,d2           ; shift movetype upper nibble to lower position

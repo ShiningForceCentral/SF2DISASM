@@ -846,7 +846,12 @@ loc_1AD0D4:
 LoadBattleTerrainData:
                 
                 movem.l d0-d6/a0-a5,-(sp)
-                conditionalPc lea,pt_BattleTerrainData,a0,nop
+            if (STANDARD_BUILD=1)
+                getPointer p_pt_BattleTerrainData, a0
+            else
+                lea     pt_BattleTerrainData(pc), a0
+                nop
+            endif
                 loadSavedDataAddress CURRENT_BATTLE, a1
                 clr.l   d1
                 move.b  (a1),d1

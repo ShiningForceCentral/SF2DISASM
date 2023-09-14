@@ -652,7 +652,7 @@ LoadMainMenuIcon:
                 
                 move.l  d0,-(sp)
                 ext.w   d0
-                conditionalLongAddr movea.l, p_MainMenuTiles, a0
+                getPointer p_MainMenuTiles, a0
                 mulu.w  #GFX_DIAMENU_ICON_PIXELS_NUMBER,d0
                 adda.w  d0,a0
                 move.w  #143,d0
@@ -933,7 +933,7 @@ BuildItemMenu:
 aEquipped:      dc.b '\Equipped',0
 aNothing:       dc.b '\Nothing',0
                 
-                wordAlign
+                align
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1177,7 +1177,7 @@ LoadHighlightableIcon:
                 
                 adda.w  #ICONTILES_BYTESIZE,a1
                 mulu.w  #ICONTILES_BYTESIZE,d0
-                conditionalLongAddr movea.l, p_Icons, a0
+                getPointer p_Icons, a0
                 addIconOffset d0, a0
                 move.w  #$2F,d1 
                 lea     IconHighlightTiles(pc), a2

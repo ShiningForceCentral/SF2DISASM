@@ -23,9 +23,9 @@ InitializeWitchSuspendVIntFunctions:
                 bsr.w   DisableDisplayAndInterrupts
                 clr.b   ((MOUTH_CONTROL_TOGGLE-$1000000)).w
                 move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w
-                bsr.w   DisplayWitchScreen
+                bsr.w   BuildWitchScreen
                 bsr.w   EnableDisplayAndInterrupts
-                conditionalLongAddr movea.l, p_WitchLayout, a0
+                getPointer p_WitchLayout, a0
                 lea     $700(a0),a0
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$707,d1
@@ -48,10 +48,10 @@ InitializeWitchSuspendVIntFunctions:
 ; =============== S U B R O U T I N E =======================================
 
 
-DisplayWitchScreen:
+BuildWitchScreen:
                 
                 jsr     (DisableDisplayAndInterrupts).w
-                conditionalLongAddr movea.l, p_WitchTiles, a0
+                getPointer p_WitchTiles, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
                 bsr.w   LoadCompressedData
@@ -60,7 +60,7 @@ DisplayWitchScreen:
                 move.w  #$2000,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-                conditionalLongAddr movea.l, p_WitchLayout, a0
+                getPointer p_WitchLayout, a0
                 lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 bsr.w   CopyBytes       
@@ -69,7 +69,7 @@ DisplayWitchScreen:
                 move.w  #$400,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-                conditionalLongAddr movea.l, p_plt_Witch, a0 ; Two palettes
+                getPointer p_plt_Witch, a0 ; Two palettes
                 lea     (PALETTE_1_BASE).l,a1
                 moveq   #CRAM_PALETTE_SIZE,d7 ; Palette 1
                 bsr.w   CopyBytes       
@@ -81,7 +81,7 @@ DisplayWitchScreen:
                 move.w  #6,((word_FFB07C-$1000000)).w
                 rts
 
-    ; End of function DisplayWitchScreen
+    ; End of function BuildWitchScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -89,7 +89,7 @@ DisplayWitchScreen:
 
 sub_7CDC:
                 
-                conditionalLongAddr movea.l, p_WitchLayout, a0
+                getPointer p_WitchLayout, a0
                 lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 bsr.w   CopyBytes       
@@ -103,7 +103,7 @@ sub_7CDC:
 
 UpdateWitchHead:
                 
-                conditionalLongAddr movea.l, p_WitchLayout, a0
+                getPointer p_WitchLayout, a0
                 lea     $700(a0),a0
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$707,d1
@@ -172,7 +172,7 @@ VInt_WitchBlink:
                 subq.w  #1,(a2)
                 cmpi.w  #3,(a2)
                 bne.s   loc_7D8A
-                conditionalLongAddr movea.l, p_WitchLayout, a0
+                getPointer p_WitchLayout, a0
                 lea     $762(a0),a0
                 lea     (byte_FFE21E).l,a1
                 move.w  #$302,d1
@@ -182,7 +182,7 @@ loc_7D8A:
                 
                 tst.w   (a2)
                 bne.s   loc_7DB4
-                conditionalLongAddr movea.l, p_WitchLayout, a0
+                getPointer p_WitchLayout, a0
                 lea     $700(a0),a0
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$705,d1
@@ -205,7 +205,7 @@ loc_7DC6:
                 subq.w  #1,(a2)
                 cmpi.w  #5,(a2)
                 bne.s   loc_7DEA
-                conditionalLongAddr movea.l, p_WitchLayout, a0
+                getPointer p_WitchLayout, a0
                 lea     $780(a0),a0
                 lea     (byte_FFE29E).l,a1
                 move.w  #$301,d1
@@ -217,7 +217,7 @@ loc_7DEA:
                 bne.s   loc_7E16
 loc_7DEE:
                 
-                conditionalLongAddr movea.l, p_WitchLayout, a0
+                getPointer p_WitchLayout, a0
                 lea     $77A(a0),a0
                 lea     (byte_FFE29E).l,a1
                 move.w  #$301,d1

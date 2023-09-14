@@ -66,7 +66,7 @@ VInt_UpdateMapAnimations:
                 bge.w   loc_47A2
                 clr.w   d0
                 move.b  (TILE_ANIMATION_MAP_INDEX).l,d0
-                conditionalLongAddr movea.l, p_pt_MapData, a0
+                getPointer p_pt_MapData, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 movea.l $2A(a0),a0

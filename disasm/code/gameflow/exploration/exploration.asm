@@ -1,151 +1,6 @@
 
 ; ASM FILE code\gameflow\exploration\exploration.asm :
-; 0x31CC..0x4544 : Exploration functions
-                rts
-
-    ; End of function sub_3158
-
-MapOffsetHashTable:
-                incbin "data/maps/global/mapoffsethashtable.bin"
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_364E:
-                
-                movem.w d0-d1/d3-d4/d6,-(sp)
-                add.w   d0,d0
-                clr.w   d2
-                move.b  1(a3,d0.w),d2
-                move.b  (a3,d0.w),d0
-                ext.w   d0
-                add.w   d1,d1
-                clr.w   d3
-                move.b  1(a3,d1.w),d3
-                move.b  (a3,d1.w),d1
-                ext.w   d1
-                lsl.w   #6,d1
-                add.w   d1,d0
-                add.w   d0,d0
-                move.w  d3,d4
-                add.w   d3,d3
-                add.w   d4,d3
-                add.w   d3,d2
-                add.w   d2,d2
-                move.w  (a4,d0.w),d0
-                cmpi.w  #VRAM_ADDRESS_PLANE_A,d0
-                bcs.s   loc_368C
-                clr.w   d6
-                bra.s   loc_3690
-loc_368C:
-                
-                move.w  ((TILE_PALETTE_MASK-$1000000)).w,d6
-loc_3690:
-                
-                andi.w  #$3FF,d0
-                add.w   d0,d0
-                move.w  d0,d1
-                lsl.w   #3,d0
-                add.w   d1,d0
-                add.w   d0,d2
-                move.w  (a5,d2.w),d2
-                or.w    d6,d2
-                movem.w (sp)+,d0-d1/d3-d4/d6
-                rts
-
-    ; End of function sub_364E
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-SetViewDest:
-                
-                movem.w d0-d7,-(sp)
-                bra.w   loc_36BE
-
-    ; End of function SetViewDest
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_36B2:
-                
-                movem.w d0-d7,-(sp)
-                lsl.w   #7,d0
-                lsl.w   #7,d1
-                lsl.w   #7,d2
-                lsl.w   #7,d3
-loc_36BE:
-                
-                move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d4
-                move.w  ((MAP_AREA_LAYER2_STARTY-$1000000)).w,d5
-                move.w  ((MAP_AREA_BACKGROUND_STARTX-$1000000)).w,d6
-                move.w  ((MAP_AREA_BACKGROUND_STARTY-$1000000)).w,d7
-                lsl.w   #7,d4
-                lsl.w   #7,d5
-                lsl.w   #7,d6
-                lsl.w   #7,d7
-                mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d0
-                lsr.l   #8,d0
-                mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d1
-                lsr.l   #8,d1
-                mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d2
-                lsr.l   #8,d2
-                mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d3
-                lsr.l   #8,d3
-                add.w   d4,d0
-                add.w   d5,d1
-                add.w   d6,d2
-                add.w   d7,d3
-                tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
-                bne.s   loc_3702
-                move.w  d0,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
-                bra.s   loc_3706
-loc_3702:
-                
-                move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
-loc_3706:
-                
-                tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
-                bne.s   loc_3712
-                move.w  d1,((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w
-                bra.s   loc_3716
-loc_3712:
-                
-                move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
-loc_3716:
-                
-                tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
-                bne.s   loc_3722
-                move.w  d2,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
-                bra.s   loc_3726
-loc_3722:
-                
-                move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
-loc_3726:
-                
-                tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
-                bne.s   loc_3732
-                move.w  d3,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
-                bra.s   loc_3736
-loc_3732:
-                
-                move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
-loc_3736:
-                
-                lea     (byte_FF9A04).l,a2
-                bsr.w   sub_3758
-                bsr.w   sub_37B2
-                lea     (byte_FF9A84).l,a2
-                bsr.w   sub_380C
-                bsr.w   sub_3866
-                movem.w (sp)+,d0-d7
-                rts
-
-    ; End of function sub_36B2
-
+; 0x3758..0x4544 : Exploration functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -802,19 +657,33 @@ FinalizeScrollDataUpdate:
                 move.l  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,(VERTICAL_SCROLL_DATA).l
                 move.l  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,(HORIZONTAL_SCROLL_DATA).l
                 move.w  ((QUAKE_AMPLITUDE-$1000000)).w,d6
-                beq.s   loc_3D7E
+                beq.s   @Continue
+                
+                ; Apply the earthquake effect here
                 addq.w  #1,d6
+            if (STANDARD_BUILD=1)
+                bsr.s   GetRandomValue
+            else
                 bsr.w   GetRandomValue
+            endif
                 add.w   d0,(HORIZONTAL_SCROLL_DATA).l
                 add.w   d0,(HORIZONTAL_SCROLL_DATA+2).l
+            if (STANDARD_BUILD=1)
+                bsr.s   GetRandomValue
+            else
                 bsr.w   GetRandomValue
+            endif
                 add.w   d0,(VERTICAL_SCROLL_DATA).l
                 add.w   d0,(VERTICAL_SCROLL_DATA+2).l
-loc_3D7E:
+@Continue:
                 
                 bsr.w   UpdateVdpHScrollData
+            if (STANDARD_BUILD=1)
+                bra.w   UpdateVdpVScrollData
+            else
                 bsr.w   UpdateVdpVScrollData
                 rts
+            endif
 
     ; End of function FinalizeScrollDataUpdate
 
@@ -837,7 +706,7 @@ GetRandomValue:
 
 
 sub_3D96:
-                
+            if (VANILLA_BUILD=1)
                 bsr.w   CopyMapBlocks
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3DA8
@@ -849,6 +718,7 @@ loc_3DA8:
 return_3DAE:
                 
                 rts
+            endif
 
     ; End of function sub_3D96
 
@@ -901,7 +771,7 @@ loc_3DE2:
 
 
 ResetCurrentMap:
-                
+            if (VANILLA_BUILD=1)
                 lea     (FF0000_RAM_START).l,a2
                 move.w  #$7FF,d7
 loc_3E10:
@@ -917,6 +787,7 @@ loc_3E10:
                 clr.w   d0
                 moveq   #$FFFFFFFF,d1   ; reload current map ?
                 bra.w   LoadMap         
+            endif
 
     ; End of function ResetCurrentMap
 
@@ -943,7 +814,7 @@ OpenDoor:
                 andi.w  #$3F,d1 
                 clr.w   d7
                 getSavedByte CURRENT_MAP, d7
-                conditionalLongAddr movea.l, p_pt_MapData, a2
+                getPointer p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $16(a2),a2      ; get map step events
@@ -1041,9 +912,9 @@ ToggleRoofOnMapLoad:
                 
                 movem.l d0-a1,-(sp)
                 move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d4
-                bpl.s   loc_3F38
+                bpl.s   @Continue
                 clr.w   d4
-loc_3F38:
+@Continue:
                 
                 andi.w  #$3F,d4 
                 lsl.w   #ENTITYDEF_SIZE_BITS,d4
@@ -1052,14 +923,19 @@ loc_3F38:
                 move.w  (a0,d4.w),d4
                 clr.w   d1
                 getSavedByte CURRENT_MAP, d1
-                conditionalLongAddr movea.l, p_pt_MapData, a0
+                getPointer p_pt_MapData, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
                 movea.l $1A(a0),a0
-loc_3F60:
+@Loop:
                 
                 tst.b   (a0)
-                bmi.w   loc_3FE4
+            if (STANDARD_BUILD=1)
+                bmi.s   @Done
+            else
+                bmi.w   @Done
+            endif
+                
                 move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d2
                 ext.l   d2
                 divs.w  #3,d2
@@ -1085,19 +961,29 @@ loc_3F60:
                 mulu.w  #$180,d2
                 mulu.w  #$180,d3
                 cmp.w   d0,d4
-                blt.w   loc_3FCA
+            if (STANDARD_BUILD=1)
+                blt.s   @Next
                 cmp.w   d1,d5
-                blt.w   loc_3FCA
+                blt.s   @Next
                 cmp.w   d2,d4
-                bgt.w   loc_3FCA
+                bgt.s   @Next
                 cmp.w   d3,d5
-                bgt.w   loc_3FCA
-                bra.w   loc_3FCE
-loc_3FCA:
+                ble.s   @Break
+            else
+                blt.w   @Next
+                cmp.w   d1,d5
+                blt.w   @Next
+                cmp.w   d2,d4
+                bgt.w   @Next
+                cmp.w   d3,d5
+                bgt.w   @Next
+                bra.w   @Break
+            endif
+@Next:
                 
                 addq.l  #8,a0
-                bra.s   loc_3F60
-loc_3FCE:
+                bra.s   @Loop
+@Break:
                 
                 clr.w   d0
                 move.b  (a0),d0         ; get x trigger coord of block copy script
@@ -1105,8 +991,12 @@ loc_3FCE:
                 clr.w   d1
                 move.b  1(a0),d1        ; get y trigger coord of block copy script
                 mulu.w  #$180,d1
+            if (STANDARD_BUILD=1)
+                bsr.s   PerformMapBlockCopyScript
+            else
                 bsr.w   PerformMapBlockCopyScript
-loc_3FE4:
+            endif
+@Done:
                 
                 movem.l (sp)+,d0-a1
                 rts
@@ -1135,7 +1025,7 @@ PerformMapBlockCopyScript:
                 andi.w  #$3F,d1 
                 clr.w   d7
                 getSavedByte CURRENT_MAP, d7
-                conditionalLongAddr movea.l, p_pt_MapData, a2
+                getPointer p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $1A(a2),a2
@@ -1403,11 +1293,15 @@ GetChestItem:
                 
                 clr.w   d2
                 getSavedByte CURRENT_MAP, d2
-                conditionalLongAddr movea.l, p_pt_MapData, a2
+                getPointer p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data
                 movea.l $22(a2),a2      ; get address of current map's chest item data
+            if (STANDARD_BUILD=1)
+                bra.s   GetItem
+            else
                 bra.w   GetItem
+            endif
 
     ; End of function GetChestItem
 
@@ -1419,7 +1313,7 @@ GetNonChestItem:
                 
                 clr.w   d2
                 getSavedByte CURRENT_MAP, d2
-                conditionalLongAddr movea.l, p_pt_MapData, a2
+                getPointer p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2
                 movea.l $26(a2),a2      ; get address of current map's non-chest item data
@@ -1437,21 +1331,43 @@ GetItem:
                 clr.w   d2
                 getSavedByte CURRENT_BATTLE, d2
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,d2
-                beq.w   loc_4290        ; if we are not in battle branch
+            if (STANDARD_BUILD=1)
+                beq.s   @Start
+            else
+                beq.w   @Start
+            endif
+                
+                ; Currently in battle
                 movem.l a0,-(sp)
-                conditionalWordAddr lea,BattleMapCoordinates,a0
+            if (STANDARD_BUILD=1)
+                getPointer p_table_BattleMapCoordinates, a0
+            else
+                lea     (table_BattleMapCoordinates).w,a0
+            endif
                 mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE,d2 ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
                 add.b   1(a0,d2.w),d0
                 add.b   2(a0,d2.w),d1   ; add x1 and y1 of battle camera bounds
                 movem.l (sp)+,a0
-loc_4290:
+@Start:
                 
                 tst.b   (a2)
-                bmi.w   loc_42C6        ; if negative, then value > map max coord, so value = FF : end of data
+            if (STANDARD_BUILD=1)
+                bmi.s   @OutOfBounds
+            else
+                bmi.w   @OutOfBounds    ; if negative, then value > map max coord, so value = FF : end of data
+            endif
+                
+            if (STANDARD_BUILD=1)
                 cmp.b   (a2),d0
-                bne.w   loc_42D8        ; test coords
+                bne.s   @NextItem
                 cmp.b   1(a2),d1
-                bne.w   loc_42D8        
+                bne.s   @NextItem   
+            else
+                cmp.b   (a2),d0
+                bne.w   @NextItem       ; test coords
+                cmp.b   1(a2),d1
+                bne.w   @NextItem       
+            endif
                 move.w  d4,d0           ; get back original coords
                 move.w  d5,d1
                 andi.w  #$3F,d1 
@@ -1463,8 +1379,12 @@ loc_4290:
                 move.b  2(a2),d1        ; item flag
                 clr.w   d2
                 move.b  3(a2),d2        ; item index
-                bra.w   loc_42CC
-loc_42C6:
+            if (STANDARD_BUILD=1)
+                bra.s   @Continue
+            else
+                bra.w   @Continue
+            endif
+@OutOfBounds:
                 
                 moveq   #$FFFFFFFF,d0
                 move.w  d0,d1
@@ -1472,15 +1392,15 @@ loc_42C6:
             if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
                 andi.b  #ITEM_NOTHING,d2
             endif
-loc_42CC:
+@Continue:
                 
                 lea     (FF0000_RAM_START).l,a2
                 movem.w (sp)+,d4-d5
                 rts
-loc_42D8:
+@NextItem:
                 
                 addq.l  #4,a2           ; go to next item
-                bra.s   loc_4290
+                bra.s   @Start
 
 ; END OF FUNCTION CHUNK FOR GetChestItem
 
@@ -1490,6 +1410,7 @@ loc_42D8:
 
 WarpIfSetAtPoint:
                 
+                module
                 movem.l d0-d1/d7,-(sp)
                 ext.l   d0
                 ext.l   d1
@@ -1497,41 +1418,54 @@ WarpIfSetAtPoint:
                 divs.w  #$180,d1
                 clr.w   d7
                 getSavedByte CURRENT_MAP, d7
-                conditionalLongAddr movea.l, p_pt_MapData, a2
+                getPointer p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
                 movea.l $1E(a2),a2
 loc_4302:
                 
                 cmpi.w  #$FFFF,(a2)
-                beq.w   loc_433A
+            if (STANDARD_BUILD=1)
+                beq.s   @Done
+            else
+                beq.w   @Done
+            endif
                 tst.b   (a2)
                 blt.s   loc_4314
                 cmp.b   (a2),d0
-                bne.w   loc_4340
+            if (STANDARD_BUILD=1)
+                bne.s   @NextPoint
+            else
+                bne.w   @NextPoint
+            endif
 loc_4314:
                 
                 tst.b   1(a2)
                 blt.s   loc_4322
                 cmp.b   1(a2),d1
-                bne.w   loc_4340
+            if (STANDARD_BUILD=1)
+                bne.s   @NextPoint
+            else
+                bne.w   @NextPoint
+            endif
 loc_4322:
                 
                 move.w  #MAPEVENT_WARP,((MAP_EVENT_TYPE-$1000000)).w
                 move.l  2(a2),((MAP_EVENT_PARAM_1-$1000000)).w
                 move.w  6(a2),((MAP_EVENT_PARAM_5-$1000000)).w
                 move.w  #SFX_WARP,((WARP_SFX-$1000000)).w
-loc_433A:
+@Done:
                 
                 movem.l (sp)+,d0-d1/d7
                 rts
-loc_4340:
+@NextPoint:
                 
                 addq.l  #8,a2
                 bra.s   loc_4302
 
     ; End of function WarpIfSetAtPoint
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1554,7 +1488,11 @@ loc_435E:
                 move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
+            if (STANDARD_BUILD=1)
+                bsr.s   UpdateVdpPlane
+            else
                 bsr.w   UpdateVdpPlane
+            endif
                 movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
                 bne.s   loc_439A
@@ -1593,7 +1531,11 @@ loc_43BE:
                 move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_B_LAYOUT).l,a1
+            if (STANDARD_BUILD=1)
+                bsr.s   UpdateVdpPlane
+            else
                 bsr.w   UpdateVdpPlane
+            endif
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1    ; Update VDP Plane B layout data
                 move.w  #$400,d0
@@ -1674,13 +1616,18 @@ loc_4496:
                 
                 addq.w  #1,d0
                 dbf     d6,loc_443A
+                
                 movem.w (sp)+,d0/d3
                 addi.w  #$40,d3 
                 bclr    #$B,d3
                 addq.w  #1,d1
-                dbf     d7,loc_4434
+                dbf     d7,loc_4434           
+            if (STANDARD_BUILD=1)
+                bra.w   FinalizeScrollDataUpdate
+            else
                 bsr.w   FinalizeScrollDataUpdate
                 rts
+            endif
 loc_44B4:
                 
                 moveq   #$20,d7 

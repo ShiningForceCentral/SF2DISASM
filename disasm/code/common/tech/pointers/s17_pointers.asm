@@ -18,5 +18,7 @@ p_plt_SuspendString:
 p_SuspendStringTiles:
                 dc.l SuspendStringTiles
 p_unused_BasePalettes:
+            if (VANILLA_BUILD=1)
                 dc.l unused_BasePalettes
+            endif
 p_BaseTiles:    dc.l BaseTiles

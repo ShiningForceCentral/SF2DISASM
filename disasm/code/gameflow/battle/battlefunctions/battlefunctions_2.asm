@@ -61,7 +61,7 @@ SpawnEnemy:
                 dbf     d7,@Loop
                 
                 sndCom  SFX_SPAWN
-                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     397             ; "{CLEAR}{NAME} appeared!{D3}"
                 clsTxt
                 unlk    a6
@@ -77,7 +77,7 @@ SpawnEnemy:
 
 ClearDeadCombatantsListLength:
                 
-            if (STANDARD_BUILD=0)
+            if (VANILLA_BUILD=1)
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 rts
             endif
@@ -846,7 +846,7 @@ EquipNewItemInBattle:
                 bne.w   @Return         ; return if not cursed
                 jsr     j_HideBattleEquipWindow
                 sndCom  MUSIC_CURSED_ITEM
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     34              ; "Gosh!  {NAME} is{N}cursed!{W2}"
 @Continue:
                 
@@ -1130,14 +1130,14 @@ loc_24FFA:
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   loc_25022
-                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     443             ; "Are you sure?"
                 clsTxt
                 clr.w   d1
                 bra.w   @ItemMenuChoice_Drop
 loc_25022:
                 
-                move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_YesNoChoiceBox
                 clsTxt
@@ -1173,12 +1173,12 @@ byte_25066:
 loc_25088:
                 
                 move.w  combatant(a6),d0
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 bsr.w   sub_256E6
                 cmpi.w  #$FFFF,d3
                 beq.s   loc_250B0
-                move.w  d3,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d3,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     418             ; "{NAME} is distributing{N}items from the open chest.{W1}"
                 clsTxt
                 clr.w   d1
@@ -1221,11 +1221,11 @@ loc_250FC:
                 move.w  ((CHEST_CONTENTS-$1000000)).w,d1
                 move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.w  combatant(a6),d0
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 jsr     j_AddItem
                 tst.w   d2
                 bne.w   byte_2515A      
-                move.w  combatant(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
                 sndCom  MUSIC_ITEM
                 txt     415             ; "{NAME} recieved{N}{ITEM}."
@@ -1345,7 +1345,7 @@ loc_25236:
                 jsr     (CopyBytes).w   
 @CreateMemberList_Loop:
                 
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 tst.b   d0
                 bmi.s   loc_25236
                 jsr     j_BuildMemberScreen
@@ -1385,7 +1385,7 @@ loc_25236:
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 getCurrentSaveSlot d0
                 jsr     (SaveGame).l
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.w   byte_252E6
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 bne.w   byte_252F2      

@@ -7,28 +7,19 @@
                 incbin "data/sound/pcmbank0.bin"
                 incbin "data/sound/pcmbank1.bin"
                 incbin "data/sound/yminst.bin"
-SoundDriver:    
-            if (STANDARD_BUILD&MUSIC_RESUMING=1)
-                incbin "data/sound/cubewiz.bin"
-            else
-                incbin "data/sound/sounddriver.bin"
-            endif
-                includeIfVanillaLayout "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
-                includeIfVanillaRom "data\stats\allies\growthcurves.asm"    ; Stat growth curves
-                includeIfVanillaRom "data\stats\allies\stats\entries.asm"    ; Ally stats
-                align
-                includeIfVanillaRom "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
-                includeIfVanillaRom "data\stats\allies\classes\classdefs.asm"    ; Class definitions
-            if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
-                includeIfVanillaRom "data\stats\allies\classes\fullclassnames.asm"
-                align
-            endif
-                includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
-                includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
-            if (STANDARD_BUILD&EXPANDED_ROM=1)
-            else
-unused_BasePalettes:
-                incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
-BaseTiles:      incbin "data/graphics/tech/basetiles.bin"
-            endif
-                align $1F0000
+SoundDriver:
+                
+                incbinIfStandard "data/sound/cubewiz.bin"
+                incbinIfStandard "data/sound/sfxbank.bin"
+                
+                incbinIfVanilla "data/sound/sounddriver.bin"
+                includeIfVanilla "code\common\tech\pointers\s17_pointers.asm"    ; Game Section 17 Pointers
+                includeIfVanilla "data\stats\allies\growthcurves.asm"    ; Stat growth curves
+                includeIfVanilla "data\stats\allies\stats\entries.asm"    ; Ally stats
+                alignIfVanilla
+                includeIfVanilla "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
+                includeIfVanilla "data\stats\allies\classes\classdefs.asm"    ; Class definitions
+                includeIfVanilla "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
+                includeIfVanilla "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
+                includeIfVanilla "code\common\tech\incbins\s17_incbins_basetiles.asm"    ; Game Section 17 Incbin Directives
+                alignIfVanilla $1F0000

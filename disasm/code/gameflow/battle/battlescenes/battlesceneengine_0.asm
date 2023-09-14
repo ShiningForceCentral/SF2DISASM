@@ -6,8 +6,9 @@
 
 
 nullsub_18010:
-                
+            if (VANILLA_BUILD=1)
                 rts
+            endif
 
     ; End of function nullsub_18010
 
@@ -96,7 +97,7 @@ InitializeBattlescene:
                 move.w  #$400,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
-                bsr.w   LoadBattlesceneBackgroundLayout
+                bsr.w   LoadBattlescenelayout_BattlesceneBackground
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1
                 move.w  #$400,d0
@@ -202,7 +203,7 @@ InitializeBattlescene:
                 switchRomBanks
                 bsr.w   LoadWeaponsprite
                 move.w  ((BATTLESCENE_ALLYBATTLEANIMATION-$1000000)).w,d0
-                conditionalLongAddr movea.l, p_pt_AllyAnimations, a0
+                getPointer p_pt_AllyAnimations, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #4,a0
@@ -226,7 +227,7 @@ InitializeBattlescene:
                 restoreRomBanks
 @StatusAnimationTilesToVram:
                 
-                conditionalLongAddr movea.l, p_StatusAnimationTiles, a0
+                getPointer p_StatusAnimationTiles, a0
                 lea     ($F600).l,a1
                 move.w  #$270,d0
                 moveq   #2,d1
@@ -895,7 +896,7 @@ loc_18818:
                 cmpi.w  #$FFFF,d0
                 beq.w   loc_1888C
                 move.w  ((BATTLESCENE_ALLYBATTLEANIMATION-$1000000)).w,d0
-                conditionalLongAddr movea.l, p_pt_AllyAnimations, a0
+                getPointer p_pt_AllyAnimations, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #4,a0
@@ -1051,7 +1052,7 @@ bsc06_switchEnemies:
                 bsr.w   LoadNewEnemyBattlesprite
                 
                 restoreRomBanks
-                conditionalLongAddr movea.l, p_pt_BattlesceneTransitionTiles, a2
+                getPointer p_pt_BattlesceneTransitionTiles, a2
                 movea.l (a2)+,a0
                 move.l  a2,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a1
@@ -1075,7 +1076,7 @@ loc_189AE:
                 bsr.w   LoadBattlesceneBackground
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 jsr     j_RemoveEnemyBattlesceneWindow
-                bsr.w   LoadBattlesceneBackgroundLayout
+                bsr.w   LoadBattlescenelayout_BattlesceneBackground
                 move.w  (sp)+,d0
                 
                 move.w  2(a6),d1
@@ -1835,7 +1836,7 @@ bsc0F_giveExp:
                 move.l  d1,-(sp)
                 andi.w  #$7FFF,d1
                 jsr     j_IncreaseExp
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  (sp)+,d1
                 btst    #$F,d1
                 bne.s   loc_1910C
@@ -1851,7 +1852,7 @@ loc_1910C:
                 jsr     j_LevelUp
                 clr.w   (SPEECH_SFX).l
                 lea     (LEVELUP_ARGUMENTS).l,a5
-                move.w  ((BATTLESCENE_ALLY-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  ((BATTLESCENE_ALLY-$1000000)).w,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 cmpi.b  #$FF,d0
@@ -1906,14 +1907,14 @@ loc_191AC:
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 lsr.w   #SPELLENTRY_OFFSET_LV,d1
                 bne.s   loc_191D0
-                move.w  ((BATTLESCENE_ALLY-$1000000)).w,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  ((BATTLESCENE_ALLY-$1000000)).w,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  d0,((TEXT_NAME_INDEX_2-$1000000)).w
                 txt     271             ; "{D1}{NAME} learned the new{N}magic spell {SPELL}!"
                 bra.s   return_191DE
 loc_191D0:
                 
                 addq.w  #1,d1
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((TEXT_NUMBER-$1000000)).w
                 txt     272             ; "{D1}{SPELL} increased to{N}level {#}!"
 return_191DE:
@@ -1934,7 +1935,7 @@ return_191DE:
 bsc10_displayMessage:
                 
                 move.w  (a6)+,d0
-                move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  (a6)+,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.l  (a6)+,((TEXT_NUMBER-$1000000)).w
                 clr.w   (SPEECH_SFX).l
@@ -1974,7 +1975,7 @@ return_19228:
 bsc11_displayMessageWithNoWait:
                 
                 move.w  (a6)+,d0
-                move.w  (a6)+,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  (a6)+,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
                 move.l  (a6)+,((TEXT_NUMBER-$1000000)).w
                 clr.w   (SPEECH_SFX).l

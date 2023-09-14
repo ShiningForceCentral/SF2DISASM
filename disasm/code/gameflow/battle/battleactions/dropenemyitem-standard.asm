@@ -43,7 +43,7 @@ WriteBattlesceneScript_EnemyDropItem:
                 beq.w   @Return       ; continue function if target was not defeated
                 
 @Continue:      movem.l d0-d3/a0-a1,-(sp)
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d3
+                getSavedByte CURRENT_BATTLE, d3
                 lea     tbl_EnemyItemDrops(pc), a1
                 
 @FindEntry_Loop:cmpi.w  #CODE_TERMINATOR_WORD,(a1)
@@ -77,8 +77,11 @@ WriteBattlesceneScript_EnemyDropItem:
                 
 @DropItem:      clr.w   d0
                 move.b  ENEMYITEMDROP_OFFSET_FLAG(a1),d0
-                lea     ((ENEMY_ITEM_DROPPED_FLAGS-$1000000)).w,a0
+                loadSavedDataAddress ENEMY_ITEM_DROPPED_FLAGS, a0
                 divu.w  #8,d0
+            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+                add.w   d0,d0
+            endif
                 adda.w  d0,a0
                 swap    d0
                 bset    d0,(a0)

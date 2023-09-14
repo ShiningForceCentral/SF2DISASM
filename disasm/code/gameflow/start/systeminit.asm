@@ -8,16 +8,25 @@
 SystemInit:
                 
                 bsr.s   InitVdp         ; and clear 68K RAM
+                
             if (STANDARD_BUILD&MEMORY_MAPPER=1)
                 bsr.w   InitMapper
-            elseif (expandedRom=1)
+            elseif (EXPANDED_ROM=1)
                 enableSram              ; make sure that SRAM is enabled now, in case we need to init saved data
             endif
+                
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 bsr.w   InitSavedData
             endif
+                
                 bsr.w   InitZ80         ; and load sound driver to Z80 RAM
+                
+            if (STANDARD_BUILD=1)
+                bsr.w   InitVdpData
+            else
                 bsr.s   InitVdpData
+            endif
+                
                 jmp     (InitializeGame).l
 
     ; End of function SystemInit
@@ -44,11 +53,16 @@ InitVdp:
                 move.w  (a0)+,d0
                 bsr.w   SetVdpReg
                 dbf     d1,@SetVdpReg_Loop
+                
                 clr.w   d0
                 clr.w   d1
                 clr.w   d2
+            if (STANDARD_BUILD=1)
+                include "code\common\tech\interrupts\applyvramdmafill.asm"
+            else
                 bsr.w   ApplyVramDmaFill
                 rts
+            endif
 
     ; End of function InitVdp
 
@@ -65,30 +79,40 @@ InitVdpData:
                 move.b  d0,(CTRL2).l
                 move.b  d0,(CTRL3_BIS).l
                 lea     (HORIZONTAL_SCROLL_DATA).l,a0
-                move.w  #$FF,d0
+                move.w  #255,d0
 loc_276:
                 
                 move.w  #0,(a0)+        ; clear from FFD100 to FFD500
                 move.w  #0,(a0)+
                 dbf     d0,loc_276      
+                
                 lea     (VERTICAL_SCROLL_DATA).l,a0
-                move.w  #$13,d0
+                move.w  #19,d0
 loc_28C:
                 
                 move.w  #0,(a0)+        ; clear next 80d bytes
                 move.w  #0,(a0)+
                 dbf     d0,loc_28C      
+                
                 lea     (PALETTE_1_BASE).l,a0
                 moveq   #$7F,d1 
 loc_2A0:
                 
                 clr.w   (a0)+           ; clear palette replicas ?
                 dbf     d1,loc_2A0      
+                
+            if (STANDARD_BUILD=1)
+                pea     EnableDmaQueueProcessing(pc)
+                pea     UpdateVdpVScrollData(pc)
+                pea     UpdateVdpHScrollData(pc)
+                bra.w   ClearSpriteTable
+            else
                 bsr.w   ClearSpriteTable
                 bsr.w   UpdateVdpHScrollData
                 bsr.w   UpdateVdpVScrollData
                 bsr.w   EnableDmaQueueProcessing
                 rts
+            endif
 
     ; End of function InitVdpData
 

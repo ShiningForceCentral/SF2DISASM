@@ -371,7 +371,7 @@ loc_55F34:
                 dbf     d0,loc_55F06
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
                 lea     (PALETTE_1_BASE).l,a0
-                jmp     (sub_19C8).w    
+                jmp     (UpdateBasePalettesAndBackupCurrent).w    
 
     ; End of function csub_55EF4
 
@@ -395,7 +395,7 @@ sub_55F82:
                 
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
-                jmp     (sub_19C8).w    
+                jmp     (UpdateBasePalettesAndBackupCurrent).w    
 
     ; End of function sub_55F82
 

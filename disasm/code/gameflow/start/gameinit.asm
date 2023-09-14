@@ -9,45 +9,22 @@ InitializeGame:
                 
                 move    #$2300,sr
                 bsr.w   LoadBaseTiles
-            if (regionFreeRom=0)
                 bsr.w   CheckRegion
-            endif
-            
-            if (STANDARD_BUILD&MEMORY_MAPPER=1)
-                tst.b   ((SRAM_CONTROL-$1000000)).w
-                ble.s   @Continue
-                jmp     MapperErrorHandling
-            endif
-                
-@Continue:      jsr     j_NewGame
-                
-            if (STANDARD_BUILD&TEST_BUILD&TEST_BUILD_SKIP_SEGA_LOGO=1)
-            else
+                jsr     j_NewGame
                 jsr     j_DisplaySegaLogo
-            endif
-            
-            if (STANDARD_BUILD&TEST_BUILD&TEST_BUILD_SKIP_GAME_INTRO=1)
-                bra.w   AfterGameIntro
-            else
                 bne.w   AfterGameIntro
-            endif
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.w   GameIntro
                 
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   WaitForVInt
-            if (STANDARD_BUILD&EASY_BATTLE_TEST=1)
-                bra.w   DebugModeBattleTest
-            elseif (STANDARD_BUILD&EASY_DEBUG_MODE=1)
-                ; flow into debug mode
-            else
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 beq.s   @DebugModeMapTest
+                
                 jsr     (EnableDisplayAndInterrupts).w
                 bsr.w   InitializeDisplay
                 jsr     (EnableDisplayAndInterrupts).w
                 jmp     j_nullsub_18010
-            endif
 @DebugModeMapTest:
                 
                 btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
@@ -61,20 +38,15 @@ InitializeGame:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
-                move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
+                move.b  #$FF,((DEBUG_MODE_TOGGLE-$1000000)).w
                 bsr.w   InitializeWindowProperties
-StartMapTest:
                 
+                ; Start map test
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 moveq   #0,d0
                 moveq   #0,d1
-                moveq   #MAPS_DEBUG_NUMBER,d2
+                moveq   #MAPS_MAX_DEBUG_INDEX,d2 
                 jsr     j_NumberPrompt
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                bpl.s   @Continue
-                rts
-@Continue:
-            endif
                 clr.w   d1
                 move.b  tbl_DebugModeAvailableMaps(pc,d0.w),d0
                 bsr.w   GetSavePointForMap

@@ -7,7 +7,7 @@
 loc_239C8:
                 
                 clr.w   d0
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 cmpi.w  #ITEMINDEX_GOLDCHESTS_START,d2
                 blt.s   loc_239EE
                 bsr.s   GetChestGoldAmount
@@ -60,7 +60,7 @@ loc_23A66:
                 
                 move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d3
                 clr.w   d0
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     417             ; "But, everyone's hands are{N}full.{W1}"
                 move.w  d4,d0
                 move.w  d5,d1
