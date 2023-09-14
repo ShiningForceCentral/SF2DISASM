@@ -9,13 +9,13 @@ SoundTest:      txt     464                         ; "Oh! I have a good idea.{N
                 sndCom  SOUND_COMMAND_FADE_OUT
                 clr.w   ((SPEECH_SFX-$1000000)).w
                 clr.w   d7                          ; D7 = # bytes into sound table, so we clear it here
-                clr.w   d0
                 
-@UpdateTrack:   move.b  tbl_SoundTracks(pc,d7.w),d0
-                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                lea     tbl_TrackTitles(pc),a0
-                moveq   #41,d0
-                jsr     (DisplayUncompressedText).w
+                lea     table_SoundtrackTitles(pc),a0
+                clr.w   d1
+                moveq   #41,d2                      ; d2.w = index beyond which a number is written instead of a title
+                
+@UpdateTrack:   move.b  table_Soundtracks(pc,d7.w),d1
+                jsr     (DisplaySoundtrackTitle).w
                 
 @Start:         jsr     (WaitForVInt).w
                 
@@ -56,7 +56,7 @@ SoundTest:      txt     464                         ; "Oh! I have a good idea.{N
 
 ; ---------------------------------------------------------------------------
 
-tbl_SoundTracks:
+table_Soundtracks:
                 
                 dc.b MUSIC_INTRO
                 dc.b MUSIC_WITCH
@@ -153,7 +153,7 @@ tbl_SoundTracks:
 
 ; ---------------------------------------------------------------------------
 
-tbl_TrackTitles:
+table_SoundtrackTitles:
                 
                 defineName ""
                 defineName "Legend of Light"

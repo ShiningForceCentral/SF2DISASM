@@ -6,25 +6,35 @@
 
 ; Display any prefixed with length string in the dialogue window.
 
-; In: a0 = names table pointer, d0.w = number of names, DIALOGUE_NAME_INDEX_1 = name index
+; In: a0 = names table pointer, d1.w = name index, d2.w = (optional) number of names
 
+                module
 
-namesNumber = -6
-tablePointer = -4
+@namesNumber = -8
+@index = -6
+@pointer = -4
+
+DisplaySoundtrackTitle:
+                
+                movem.l d0-a6,-(sp)
+                bra.s   @Continue
 
 DisplayUncompressedText:
                 
                 movem.l d0-a6,-(sp)
-                link    a6,#-6
-                move.l  a0,tablePointer(a6)
-                move.w  d0,namesNumber(a6)
+                moveq   #-1,d2
+@Continue:      link    a6,#-8
+                move.l  a0,@pointer(a6)
+                move.w  d1,@index(a6)
+                move.w  d2,@namesNumber(a6)
+                
                 bsr.w   CreateDialogueWindow
                 move.b  #1,((CURRENTLY_TYPEWRITING-$1000000)).w
                 clr.b   ((DIALOGUE_REGULAR_TILE_TOGGLE-$1000000)).w
                 move.l  #DIALOGUE_NAME_INDEX_1,((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
                 
-                ; Clear window
+                ; Re-initialize dialogue window
                 bsr.w   ClearDialogueWindowLayout
                 move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -37,14 +47,16 @@ DisplayUncompressedText:
                 bsr.w   SetWindowDestination
                 bsr.w   WaitForVInt
                 
-                bsr.w   GetCurrentDialogueNameIndex ; get text name index -> d1.w
-                tst.w   namesNumber(a6)
+                ; Should a number or text be written?
+                move.w  @index(a6),d1
+                tst.w   @namesNumber(a6)
                 bmi.s   @Text               ; skip to @Text if names number parameter = -1
-                cmp.w   namesNumber(a6),d1
+                
+                cmp.w   @namesNumber(a6),d1
                 bhi.s   @Number
                 
                 ; Load ASCII string
-@Text:          movea.l tablePointer(a6),a0
+@Text:          movea.l @pointer(a6),a0
                 jsr     FindName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.s   @Print_Loop
@@ -70,12 +82,13 @@ DisplayUncompressedText:
                 
 @Print_Loop:    bsr.w   GetNextTextSymbol
                 bset    #0,((DIALOGUE_REGULAR_TILE_TOGGLE-$1000000)).w
-                bne.s   @Continue
+                bne.s   @ContinuePrinting
                 cmpi.b  #2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
-                beq.s   @Continue
+                beq.s   @ContinuePrinting
                 st      ((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
+@ContinuePrinting:
                 
-@Continue:      bsr.w   ApplyAutomaticNewDialogueLine
+                bsr.w   ApplyAutomaticNewDialogueLine
                 bsr.w   SymbolsToGraphics
                 bsr.w   HandleDialogueTypewriting
                 tst.l   ((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w
@@ -85,5 +98,6 @@ DisplayUncompressedText:
                 unlk    a6
                 movem.l (sp)+,d0-a6
                 rts
+                modend
 
     ; End of function DisplayUncompressedText
