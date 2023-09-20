@@ -26,7 +26,7 @@ StartWitchScreen:
                 move.w  #6,((word_FFB07C-$1000000)).w
                 move.b  #0,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 jsr     j_ClearEntities
-                conditionalLongAddr movea.l, p_SpeechBalloonTiles, a0
+                getPointer p_SpeechBalloonTiles, a0
                 lea     ($8000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
@@ -169,7 +169,7 @@ loc_7428:
                 beq.w   byte_7476       
                 
                 moveq   #1,d0
-                moveq   #COMBATANT_ALLIES_MINUS_TWO_COUNTER,d7
+                moveq   #COMBATANT_ALLIES_MINUS_PLAYER_AND_CREATURE_COUNTER,d7
 @NameAlly_Loop:
                 
                 jsr     j_NameAlly

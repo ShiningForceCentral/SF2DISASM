@@ -176,6 +176,12 @@ tbl_AllyMapSprites:
 ; Allies who use a different mapsprite before joining the Force.
 tbl_AllyMapSpritesIfNotJoined:
                 
+            if (EXPANDED_MAPSPRITES=1)
+                dc.w ALLY_ROHDE, MAPSPRITE_NPC_ROHDE
+                
+                tableEnd
+            else
                 dc.b ALLY_ROHDE, MAPSPRITE_NPC_ROHDE
                 
                 tableEnd.b
+            endif

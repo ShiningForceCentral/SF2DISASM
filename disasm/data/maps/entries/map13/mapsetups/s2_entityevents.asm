@@ -75,7 +75,7 @@ return_5808E:
 
 Map13_EntityEvent4:
                 
-                move.b  #4,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_POLCA,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 
@@ -87,7 +87,7 @@ Map13_EntityEvent4:
 
 Map13_EntityEvent5:
                 
-                move.b  #$13,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_POLCA,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 

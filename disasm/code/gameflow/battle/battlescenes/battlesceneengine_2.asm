@@ -2902,7 +2902,7 @@ loc_1B2BE:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6
                 move.w  #8,4(a0)
-                lea     (byte_FFAFA1).l,a0
+                lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a0
                 moveq   #$F,d0
 loc_1B304:
                 

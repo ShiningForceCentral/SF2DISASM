@@ -34,9 +34,9 @@ loc_20088:
                 lea     (InitStack).w,a0
                 jsr     j_ExecuteMenu
                 cmpi.w  #$FFFF,d0
-                beq.s   loc_200A2
+                beq.s   @ExitShop
                 bra.w   @CheckChoice_Buy
-loc_200A2:
+@ExitShop:
                 
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
@@ -84,10 +84,10 @@ loc_20120:
                 clr.l   d0
                 move.w  itemPrice(a6),d0
                 cmp.l   d0,d1
-                bcc.s   byte_2013C      
+                bcc.s   @SelectRecipient_Buy
                 txt     165             ; "You need more money to buy{N}it.{W2}"
                 bra.w   byte_202C2
-byte_2013C:
+@SelectRecipient_Buy:
                 
                 txt     166             ; "Who gets it?{W2}"
                 clsTxt
@@ -116,7 +116,7 @@ loc_2015E:
                 txt     168             ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                beq.s   byte_2013C      
+                beq.s   @SelectRecipient_Buy      
                 bra.w   byte_20118      
 loc_201AC:
                 
@@ -132,7 +132,7 @@ loc_201AC:
                 txt     167             ; "{NAME} can't be{N}equipped with it.  OK?"
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
-                bne.w   byte_2013C      
+                bne.w   @SelectRecipient_Buy      
 loc_201E4:
                 
                 moveq   #0,d1
@@ -151,7 +151,7 @@ loc_201E4:
                 bne.w   byte_202BE      
                 move.w  selectedItem(a6),d1
                 jsr     j_GetEquipmentType
-                cmpi.w  #1,d2
+                cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
                 bne.s   loc_2025E
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
@@ -239,29 +239,29 @@ loc_202F4:
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 clr.l   d0
                 move.w  itemPrice(a6),d0
-                mulu.w  #3,d0
-                lsr.l   #2,d0
+                mulu.w  #ITEMSELLPRICE_MULTIPLIER,d0
+                lsr.l   #ITEMSELLPRICE_BITSHIFTRIGHT,d0
                 move.l  d0,currentGold(a6)
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_UNSELLABLE,d1
                 cmpi.b  #0,d1
-                beq.s   loc_20364
+                beq.s   @NotKeyItem
                 txt     180             ; "{CLEAR}Sorry, I can't buy that....{W2}"
                 bra.w   byte_2043A
-loc_20364:
+@NotKeyItem:
                 
                 move.l  currentGold(a6),((TEXT_NUMBER-$1000000)).w
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_RARE,d1
                 cmpi.b  #0,d1
-                beq.s   byte_20384      
+                beq.s   @NotRareItem      
                 move.w  #1,rareItemFlag(a6)
                 txt     183             ; "Wow, it's a rare bird.{N}I'll pay {#} gold coins{N}for it. OK?"
-                bra.s   loc_20388
-byte_20384:
+                bra.s   @ConfirmSale
+@NotRareItem:
                 
                 txt     178             ; "I'll pay {#} gold coins{N}for it, OK?"
-loc_20388:
+@ConfirmSale:
                 
                 jsr     j_YesNoChoiceBox
                 cmpi.w  #0,d0
@@ -272,7 +272,7 @@ loc_2039C:
                 
                 move.w  selectedItem(a6),d1
                 jsr     j_GetEquipmentType
-                cmpi.w  #1,d2
+                cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
                 bne.s   loc_203DC
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
@@ -306,10 +306,10 @@ loc_2040C:
                 move.w  itemSlot(a6),d1
                 jsr     j_DropItemBySlot
                 cmpi.w  #0,rareItemFlag(a6)
-                beq.s   byte_20436      
+                beq.s   @NotDealsItem      
                 move.w  selectedItem(a6),d1
                 jsr     j_AddItemToDeals
-byte_20436:
+@NotDealsItem:
                 
                 txt     181             ; "{CLEAR}Yeah, I got it.{W2}"
 byte_2043A:
@@ -604,7 +604,7 @@ byte_207CC:
 WaitForMusicResumeAndPlayerInput_Shop:
                 
                 move.w  d0,-(sp)
-                move.w  #$FB,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0 
                 jsr     (PlayMusicAfterCurrentOne).w
                 jsr     (WaitForPlayerInput).w
                 move.w  (sp)+,d0

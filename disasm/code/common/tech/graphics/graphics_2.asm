@@ -31,7 +31,7 @@ sub_1942:
 
 sub_196C:
                 
-                lea     (byte_FFAFA1).l,a0
+                lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a0
                 moveq   #$3E,d7 
                 moveq   #1,d2
 loc_1976:
@@ -57,7 +57,7 @@ loc_1982:
 
 sub_198C:
                 
-                lea     (byte_FFAFA1).l,a0
+                lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a0
                 moveq   #$3E,d7 
                 moveq   #1,d2
 loc_1996:

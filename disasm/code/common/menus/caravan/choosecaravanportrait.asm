@@ -12,13 +12,13 @@ DisplayCaravanMessageWithPortrait:
                 movem.l d0-d1,-(sp)
                 move.l  d1,-(sp)
                 chkFlg  70              ; Astral is a follower
-                bne.s   loc_228B8
+                bne.s   @AstralIsPresent
                 moveq   #PORTRAIT_ROHDE,d0 ; HARDCODED portraits
-                bra.s   loc_228BA
-loc_228B8:
+                bra.s   @DeliverLines
+@AstralIsPresent:
                 
                 moveq   #PORTRAIT_ASTRAL,d0
-loc_228BA:
+@DeliverLines:
                 
                 moveq   #0,d1
                 jsr     j_CreatePortraitWindow

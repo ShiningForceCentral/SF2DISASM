@@ -33,7 +33,7 @@ RunMapSetupZoneEvent:
                 bsr.w   GetCurrentMapSetup
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_47576
-                movea.l MAPSETUP_OFFSET_ZONE_EVENTS(a0),a0
+                movea.l MAPSETUP_OFFSET_EVENT_ZONE(a0),a0
                 clr.w   d7
 loc_47530:
                 
@@ -94,7 +94,7 @@ RunMapSetupItemEvent:
                 bsr.w   GetCurrentMapSetup
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_4760A
-                movea.l MAPSETUP_OFFSET_SECTION_5(a0),a0
+                movea.l MAPSETUP_OFFSET_EVENT_ITEM(a0),a0
                 clr.w   d7
 loc_475AA:
                 
@@ -160,7 +160,7 @@ RunMapSetupEntityEvent:
                 cmpi.w  #$FFFF,(a0)
                 beq.w   loc_476D6
                 movem.w d1-d2,-(sp)
-                movea.l MAPSETUP_OFFSET_ENTITY_EVENTS(a0),a0
+                movea.l MAPSETUP_OFFSET_EVENT_ENTITY(a0),a0
                 clr.w   d7
 loc_47638:
                 
@@ -381,7 +381,7 @@ GetCurrentMapSetup:
                 movem.l d0-d1/a1,-(sp)
                 clr.w   d0
                 getSavedByte CURRENT_MAP, d0
-                lea     MapSetups(pc), a1
+                conditionalPc lea, MapSetups, a1
 loc_477AC:
                 
                 cmpi.w  #$FFFF,(a1)
@@ -532,7 +532,7 @@ loc_47896:
                 move.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 add.w   d0,d1
                 jsr     j_SetFlag
-                move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
+                move.l  #MAP_EVENT_RELOADMAP,((MAP_EVENT_TYPE-$1000000)).w
                 move.w  #$7530,((word_FFB196-$1000000)).w
                 jsr     (WaitForViewScrollEnd).w
                 sndCom  SFX_BOOST

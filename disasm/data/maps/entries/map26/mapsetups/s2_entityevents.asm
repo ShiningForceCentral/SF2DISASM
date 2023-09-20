@@ -80,7 +80,7 @@ Map26_EntityEvent5:
 Map26_EntityEvent6:
                 
             if (STANDARD_BUILD&MINIATURES_SHOP=1)
-                move.b  #22,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_MINATURES_ROOM,((CURRENT_SHOP_INDEX-$1000000)).w
                 jmp     ShopMenuActions
             endif
                 

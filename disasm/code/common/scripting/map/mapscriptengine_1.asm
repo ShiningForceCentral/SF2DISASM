@@ -940,7 +940,11 @@ csc1A_setEntitySprite:
                 move.w  d4,d0
 @NotAlly:
                 
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.w  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
+            else
                 move.b  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
+            endif
                 jsr     (WaitForVInt).w
                 bsr.w   UpdateEntitySprite_0
                 rts
@@ -1128,7 +1132,7 @@ csc22_animateEntityFadeInOrOut:
                 move.w  (a1),d0
                 move.w  2(a1),d1
                 moveq   #$16,d7
-loc_46B74:
+@Transistion_Loop:
                 
                 bsr.w   LoadMapsprite
                 jsr     ApplySpriteCropEffect
@@ -1137,77 +1141,53 @@ loc_46B74:
                 jsr     (WaitForVInt).w
                 add.w   4(a1),d0
                 add.w   6(a1),d1
-                dbf     d7,loc_46B74
+                dbf     d7,@Transistion_Loop
                 
                 cmpi.w  #4,d2
-                bne.s   return_46BB0
+                bne.s   @Return
                 bsr.w   LoadMapsprite
                 move.l  #$FFFF,d0
                 jsr     sub_45E10
                 bsr.w   sub_4709E       
-return_46BB0:
+@Return:
                 
                 rts
 byte_46BB2:
                 ;scan down
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 1
+                dc.w 1
+                dc.w 0
+                dc.w 0
+                dc.w 1
                 
                 ;scan up
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b $15
-                dc.b 0
-                dc.b 0
-                dc.b $FF
-                dc.b $FF
+                dc.w 1
+                dc.w $15
+                dc.w 0
+                dc.w $FFFF
                 
                 ;wipe out
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
+                dc.w 1
+                dc.w 0
+                dc.w 1
+                dc.w 0
                 
                 ;wipe in
-                dc.b 0
-                dc.b $16
-                dc.b 0
-                dc.b 0
-                dc.b $FF
-                dc.b $FF
-                dc.b 0
-                dc.b 0
+                dc.w $16
+                dc.w 0
+                dc.w $FFFF
+                dc.w 0
                 
                 ;slide out
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b $16
-                dc.b 0
-                dc.b 1
-                dc.b $FF
-                dc.b $FF
+                dc.w 1
+                dc.w $16
+                dc.w 1
+                dc.w $FFFF
                 
                 ;slide in
-                dc.b 0
-                dc.b $16
-                dc.b 0
-                dc.b 1
-                dc.b $FF
-                dc.b $FF
-                dc.b 0
-                dc.b 1
+                dc.w $16
+                dc.w 1
+                dc.w $FFFF
+                dc.w 1
 loc_46BE2:
                 
                 tst.w   d1              ; manage param 6/7
@@ -1414,7 +1394,11 @@ loc_46D4C:
 loc_46D5C:
                 
                 move.w  d1,ENTITYDEF_OFFSET_XTRAVEL(a5)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a5)
+            else
                 move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a5)
+            endif
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a5)
                 move.w  #$30,d5 
                 sub.w   ENTITYDEF_OFFSET_Y(a5),d2
@@ -1424,7 +1408,11 @@ loc_46D5C:
 loc_46D76:
                 
                 move.w  d2,ENTITYDEF_OFFSET_YTRAVEL(a5)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a5)
+            else
                 move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a5)
+            endif
                 bsr.w   WaitForEntityToStopMoving
                 addq.w  #2,d3 ; entity has opposite facing
                 andi.b  #FACING_MASK,d3
@@ -1461,7 +1449,11 @@ csc29_setEntityDest:
 loc_46DC4:
                 
                 move.w  d1,ENTITYDEF_OFFSET_XTRAVEL(a5)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d3,ENTITYDEF_OFFSET_XVELOCITY(a5)
+            else
                 move.w  d3,ENTITYDEF_OFFSET_XVELOCITY(a5)
+            endif
                 move.w  #$20,d3 
                 sub.w   ENTITYDEF_OFFSET_Y(a5),d2
                 bpl.s   loc_46DDA
@@ -1470,7 +1462,11 @@ loc_46DC4:
 loc_46DDA:
                 
                 move.w  d2,ENTITYDEF_OFFSET_YTRAVEL(a5)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d3,ENTITYDEF_OFFSET_YVELOCITY(a5)
+            else
                 move.w  d3,ENTITYDEF_OFFSET_YVELOCITY(a5)
+            endif
                 btst    #$F,d6
                 bne.s   return_46DEC
                 bsr.w   WaitForEntityToStopMoving
@@ -1524,8 +1520,13 @@ csc2B_initializeNewEntity:
                 clr.w   d4
                 move.b  (a6)+,d1
                 move.b  (a6)+,d2
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.w  (a6)+,d3
+                move.w  (a6)+,d4
+            else
                 move.b  (a6)+,d3
                 move.b  (a6)+,d4
+            endif
                 move.l  #eas_Init,d5
                 jsr     InitializeNewEntity
                 rts
@@ -1955,7 +1956,11 @@ LoadMapsprite:
 @Continue:
                 
                 clr.w   d1
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
+            else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
+            endif
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1

@@ -69,7 +69,7 @@ VInt_UpdateMapAnimations:
                 getPointer p_pt_MapData, a0
                 lsl.w   #2,d0
                 movea.l (a0,d0.w),a0
-                movea.l $2A(a0),a0
+                movea.l MAPDATA_OFFSET_ANIMATIONS(a0),a0
                 tst.l   (a0)+
                 move.w  (a0)+,d1
 loc_47A2:

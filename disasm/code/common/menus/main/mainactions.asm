@@ -242,7 +242,7 @@ byte_21468:
                 move.w  itemIndex(a6),d1
                 jsr     IsItemUsableOnField
                 tst.w   d2
-                beq.w   @PickTarget     
+                beq.w   @PickTarget
                 
                 ; Check map events
                 bsr.w   GetPlayerEntityPosition ; Get first entity's X, Y and facing -> d1.l, d2.l, d3.w

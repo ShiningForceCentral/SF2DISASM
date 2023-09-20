@@ -114,8 +114,8 @@ loc_4D5C:
                 move.w  d6,VDPSPRITE_OFFSET_SIZE(a1)
                 ori.w   #VDPTILE_PALETTE3,d5
                 move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d0
-                andi.w  #3,d0
-                cmpi.w  #2,d0
+                andi.w  #ORIENTATION_MASK,d0
+                cmpi.w  #ORIENTATION_INVERTED,d0
                 bne.s   loc_4DA0
                 ori.w   #VDPTILE_FLIP,d5
 loc_4DA0:

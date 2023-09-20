@@ -118,7 +118,7 @@ Map2_EntityEvent6:
 
 Map2_EntityEvent7:
                 
-                move.b  #$A,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_PACALON,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 
@@ -130,7 +130,7 @@ Map2_EntityEvent7:
 
 Map2_EntityEvent8:
                 
-                move.b  #$19,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_PACALON,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 

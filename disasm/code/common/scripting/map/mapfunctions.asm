@@ -51,9 +51,15 @@ loc_44104:
                 move.b  (a0)+,d2
                 andi.w  #$3F,d2 
                 muls.w  #MAP_TILE_SIZE,d2
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  (a0)+,d3
+                move.w  (a0)+,d4
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
+            else
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d4
+            endif
                 bcs.s   loc_44146
                 movem.w d0,-(sp)
                 move.w  #$2F,d0 
@@ -66,7 +72,11 @@ loc_44104:
                 bra.s   loc_44104
 loc_44146:
                 
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d4
+            else
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d4
+            endif
                 bcc.s   loc_44170
                 ext.w   d4
                 tst.b   (a1,d4.w)
@@ -149,20 +159,24 @@ byte_441F0:
                 bne.s   @RaftNotOnMap
                 getSavedByte RAFT_X, d1
                 getSavedByte RAFT_Y, d2
-                move.w  #FOLLOWER_B,d0
+                move.w  #ENTITY_UNIT_RAFT,d0
                 andi.w  #$7F,d1 
                 muls.w  #$180,d1
                 andi.w  #$7F,d2 
                 muls.w  #$180,d2
                 moveq   #LEFT,d3        ; facing
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  #MAPSPRITE_RAFT,d4
+            else
                 moveq   #MAPSPRITE_RAFT,d4
+            endif
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 move.b  d0,$3F(a0)
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
-                move.w  #FOLLOWER_B,d0
+                move.w  #ENTITY_UNIT_RAFT,d0
                 move.w  d3,d1
                 moveq   #$FFFFFFFF,d2
                 moveq   #$FFFFFFFF,d3

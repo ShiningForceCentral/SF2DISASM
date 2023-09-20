@@ -11,12 +11,12 @@ DisplayNameUnderPortrait:
                 tst.w   (ALLY_NAME_WINDOW_INDEX).l
                 bne.s   @Done
                 movem.w d0,-(sp)
-                move.w  #$A03,d0
-                move.w  #$F60B,d1
+                move.w  #WINDOW_HEADQUARTERS_NAME_SIZE,d0	; window dimensions
+                move.w  #WINDOW_HEADQUARTERS_NAME_DEST,d1	; window offset
                 jsr     (CreateWindow).l
                 addq.w  #1,d0
                 move.w  d0,(ALLY_NAME_WINDOW_INDEX).l
-                move.w  #$A03,d0
+                move.w  #WINDOW_HEADQUARTERS_NAME_SIZE,d0
                 bsr.w   sub_1018E       
                 movem.w (sp)+,d0
                 jsr     j_GetCurrentHp
@@ -31,12 +31,12 @@ DisplayNameUnderPortrait:
                 moveq   #-16,d1
                 moveq   #10,d7
                 tst.w   d2
-                bne.s   @LivingMember
-                bsr.w   WriteTilesFromAsciiWithOrangeFont ; dead member
+                bne.s   @LivingCharacter
+                bsr.w   WriteTilesFromAsciiWithOrangeFont
                 bra.s   @DisplayName
-@LivingMember:
+@LivingCharacter:
                 
-                bsr.w   WriteTilesFromAsciiWithRegularFont ; living member
+                bsr.w   WriteTilesFromAsciiWithRegularFont
 @DisplayName:
                 
                 move.w  (ALLY_NAME_WINDOW_INDEX).l,d0
@@ -63,9 +63,8 @@ CloseNameUnderPortraitWindow:
                 movem.l d0-d1/a0-a1,-(sp)
                 move.w  (ALLY_NAME_WINDOW_INDEX).l,d0
                 beq.s   @Done
-                
                 subq.w  #1,d0
-                move.w  #$F60B,d1
+                move.w  #WINDOW_HEADQUARTERS_NAME_DEST,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l

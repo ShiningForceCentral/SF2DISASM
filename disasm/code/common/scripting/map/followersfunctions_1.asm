@@ -60,7 +60,11 @@ InitializeFollowerEntities:
 @NonAlly:
                 
                 clr.w   d4
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  2(a4),d4        ; optional mapsprite index for non-force members
+            else
                 move.b  2(a4),d4        ; optional mapsprite index for non-force members
+            endif
 @AdjustEntityIndex:
                 
                 move.w  (sp)+,d0
@@ -71,7 +75,11 @@ InitializeFollowerEntities:
                 subi.w  #96,d6
 @SetPriority:
                 
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.b  4(a4),(a5,d0.w)
+            else
                 move.b  3(a4),(a5,d0.w)
+            endif
                 move.b  d0,(a1,d6.w)
                 move.w  d0,d6
                 move.l  (a6)+,d5
@@ -80,7 +88,7 @@ InitializeFollowerEntities:
                 addq.w  #1,d0
 @Next:
                 
-                addq.l  #4,a4
+                addq.l  #FOLLOWER_ENTITY_SIZE,a4
                 bra.s   @DeclareFollowers_Loop
 @Done:
                 

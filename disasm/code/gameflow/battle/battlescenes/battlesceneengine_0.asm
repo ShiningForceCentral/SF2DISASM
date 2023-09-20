@@ -148,7 +148,7 @@ InitializeBattlescene:
                 beq.w   @StatusAnimationTilesToVram
                 lea     spr_BattlesceneAlly(pc), a0
                 lea     ((SPRITE_01-$1000000)).w,a1
-                lea     (byte_FFAFA1).l,a2
+                lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a2
                 moveq   #8,d0
 @LoadAllyVdpSprite_Loop:
                 
@@ -183,7 +183,7 @@ InitializeBattlescene:
                 ; Load ground VDP sprite
                 lea     spr_BattlesceneGround(pc), a0
                 lea     ((SPRITE_BATTLESCENE_GROUND-$1000000)).w,a1
-                lea     (word_FFAFAE).l,a2
+                lea     (BATTLESCENE_GROUNDSPRITE_TOGGLE).l,a2
                 moveq   #2,d0
 @LoadGroundVdpSprite_Loop:
                 
@@ -2267,7 +2267,7 @@ loc_193F6:
                 move.w  d0,((word_FFB3F2-$1000000)).w
                 addi.w  #$C0,d1 
                 move.w  d1,((word_FFB3F4-$1000000)).w
-                lea     (byte_FFAFA1).l,a0
+                lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a0
                 move.l  #$1010101,d0
                 move.b  d0,(a0)+
                 move.l  d0,(a0)+
@@ -2438,7 +2438,7 @@ loc_19526:
                 add.w   d0,(a1)+
                 dbf     d7,loc_19526
                 move.w  #$101,d0
-                move.w  d0,(word_FFAFAE).l
+                move.w  d0,(BATTLESCENE_GROUNDSPRITE_TOGGLE).l
                 move.b  d0,(byte_FFAFB0).l
 return_19544:
                 
@@ -2531,7 +2531,7 @@ loc_195BE:
                 move.b  ((WEAPON_FRAME_LAYER-$1000000)).w,d1
                 subq.b  #1,d1
                 lsl.l   d1,d0
-                move.l  d0,(dword_FFAFAA).l
+                move.l  d0,(BATTLESCENE_WEAPONSPRITE_TOGGLE).l
 return_195E0:
                 
                 rts

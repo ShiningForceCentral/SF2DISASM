@@ -24,7 +24,7 @@ loc_2C5A6:
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   (FADING_TIMER_BYTE).l
                 jsr     (UpdateBasePalettesAndBackupCurrent).w    
-                move.w  #870,d0         ; wait for 14 seconds
+                move.w  #870,d0         ; wait for 14.5 seconds
                 jsr     (Sleep).w       
                 lea     (PALETTE_1_BASE).l,a0
                 moveq   #$1F,d7

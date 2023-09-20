@@ -30,13 +30,13 @@ loc_444D6:
                 swap    d6
                 move.w  (sp)+,d1
                 andi.w  #$3F,d1 
-                muls.w  #$180,d1
+                muls.w  #MAP_TILE_SIZE,d1
                 andi.w  #$3F,d2 
-                muls.w  #$180,d2
+                muls.w  #MAP_TILE_SIZE,d2
                 moveq   #3,d3
                 move.l  #eas_Idle,d5
                 bsr.w   GetCombatantMapSprite
-                bsr.w   sub_44536
+                bsr.w   GetEntityEvent
                 movem.l a0-a1,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a0
                 move.l  a0,-(sp)
@@ -65,7 +65,7 @@ loc_4450A:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_44536:
+GetEntityEvent:
                 
                 movem.l d0-d5/d7-a0,-(sp)
                 move.w  d0,-(sp)
@@ -75,9 +75,9 @@ sub_44536:
 @CheckEntityEvent_Loop:
                 
                 cmp.b   (a0),d0
-                bge.s   @Skip
+                bge.s   @NextEntityEvent
                 move.b  (a0),d0
-@Skip:
+@NextEntityEvent:
                 
                 addq.l  #1,a0
                 dbf     d7,@CheckEntityEvent_Loop
@@ -96,7 +96,7 @@ loc_4455C:
                 movem.l (sp)+,d0-d5/d7-a0
                 rts
 
-    ; End of function sub_44536
+    ; End of function GetEntityEvent
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -138,8 +138,8 @@ loc_445A0:
                 move.b  d0,(a0)
                 clr.l   d6
                 move.w  d0,d6
-                mulu.w  #$180,d1
-                mulu.w  #$180,d2
+                mulu.w  #MAP_TILE_SIZE,d1
+                mulu.w  #MAP_TILE_SIZE,d2
                 bsr.w   DeclareNewEntity
                 move.w  d3,d1
                 moveq   #$FFFFFFFF,d2
@@ -171,7 +171,11 @@ DeclareNewEntity:
                 move.w  (sp)+,d0
                 move.w  d1,(a0)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a0)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                clr.w   ENTITYDEF_OFFSET_XVELOCITY(a0)
+            else
                 clr.l   ENTITYDEF_OFFSET_XVELOCITY(a0)
+            endif
                 clr.l   ENTITYDEF_OFFSET_XTRAVEL(a0)
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
@@ -180,7 +184,11 @@ DeclareNewEntity:
                 swap    d6
                 move.b  d6,ENTITYDEF_OFFSET_LAYER(a0)
                 swap    d6
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+            else
                 move.b  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+            endif
                 tst.l   d5
                 bpl.s   loc_4463C
                 move.l  (ENTITY_WALKING_PARAMS).l,-(sp)
@@ -201,7 +209,7 @@ DeclareNewEntity:
                 bra.s   loc_44634
 loc_44630:
                 
-                bsr.w   sub_44D0E       
+                bsr.w   sub_44D0E
 loc_44634:
                 
                 movem.l (sp)+,d0-d4
@@ -287,12 +295,12 @@ loc_446B8:
                 move.w  battleEntity(a6),d0
                 jsr     j_GetMoveType
                 clr.w   d6
-                cmpi.b  #5,d1
+                cmpi.b  #MOVETYPE_LOWER_FLYING,d1
                 bne.s   loc_446FA
                 addq.w  #1,d6
 loc_446FA:
                 
-                cmpi.b  #6,d1
+                cmpi.b  #MOVETYPE_LOWER_HOVERING,d1
                 bne.s   loc_44702
                 addq.w  #1,d6
 loc_44702:
@@ -300,9 +308,9 @@ loc_44702:
                 swap    d6
                 movem.w (sp)+,d0-d1
                 andi.w  #$3F,d1 
-                muls.w  #$180,d1
+                muls.w  #MAP_TILE_SIZE,d1
                 andi.w  #$3F,d2 
-                muls.w  #$180,d2
+                muls.w  #MAP_TILE_SIZE,d2
                 moveq   #3,d3
                 move.l  #eas_Standing,d5
                 bsr.w   GetCombatantMapSprite
@@ -346,12 +354,12 @@ loc_4474A:
                 move.w  battleEntity(a6),d0
                 jsr     j_GetMoveType
                 clr.w   d6
-                cmpi.b  #5,d1
+                cmpi.b  #MOVETYPE_LOWER_FLYING,d1
                 bne.s   loc_447A2
                 addq.w  #1,d6
 loc_447A2:
                 
-                cmpi.b  #6,d1
+                cmpi.b  #MOVETYPE_LOWER_HOVERING,d1
                 bne.s   loc_447AA
                 addq.w  #1,d6
 loc_447AA:
@@ -359,17 +367,21 @@ loc_447AA:
                 swap    d6
                 movem.w (sp)+,d0-d1
                 andi.w  #$3F,d1 
-                muls.w  #$180,d1
+                muls.w  #MAP_TILE_SIZE,d1
                 andi.w  #$3F,d2 
-                muls.w  #$180,d2
+                muls.w  #MAP_TILE_SIZE,d2
                 moveq   #3,d3
                 move.l  #eas_Standing,d5
                 bsr.w   GetCombatantMapSprite
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
+            else
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d4
+            endif
                 bcs.s   loc_447E8
                 move.w  d0,-(sp)
                 move.w  #ENTITY_SPECIAL_SPRITE,d0 
-                move.w  #$20,d6 
+                move.w  #ENTITY_ENEMY_START,d6 
                 bsr.w   DeclareNewEntity
                 move.b  d0,(a1)+
                 move.w  (sp)+,d0
@@ -393,7 +405,11 @@ loc_447FA:
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   loc_448BC
+            if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
+                lea     ((ENTITY_EVENT_ENEMY_END-$1000000)).w,a1
+            else
                 lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
+            endif
                 lea     tbl_BattleNeutralEntities(pc), a0
                 clr.w   d1
                 getSavedByte CURRENT_BATTLE, d1
@@ -405,9 +421,17 @@ loc_44824:
                 beq.s   loc_44838
 loc_44830:
                 
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                adda.w  #NEUTRAL_ENTITY_SIZE,a0
+                cmpi.w  #$FFFF,(a0)
+                bne.s   loc_44830
+                cmp.w   (a0)+,d1
+                bra.s   loc_44824
+            else
                 cmpi.w  #$FFFF,(a0)+
                 beq.s   loc_44824
                 bra.s   loc_44830
+            endif
 loc_44838:
                 
                 move.w  #$9F,battleEntity(a6) 
@@ -434,12 +458,18 @@ loc_4483E:
                 move.w  (sp)+,d0
                 move.w  d3,d1
                 andi.w  #$3F,d1 
-                muls.w  #$180,d1
+                muls.w  #MAP_TILE_SIZE,d1
                 andi.w  #$3F,d2 
-                muls.w  #$180,d2
+                muls.w  #MAP_TILE_SIZE,d2
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  (a0)+,d3
+                clr.w   d4
+                move.w  (a0)+,d4
+            else
                 move.b  (a0)+,d3
                 clr.w   d4
                 move.b  (a0)+,d4
+            endif
                 move.l  (a0)+,d5
                 clr.l   d6
                 move.w  d0,d6

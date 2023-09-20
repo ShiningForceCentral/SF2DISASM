@@ -28,7 +28,7 @@ Map69_DefaultZoneEvent:
                 chkFlg  509             ; Battle 9 completed - BATTLE_TO_RIBBLE                    
                 bne.s   return_4FDD0
                 setFlg  409             ; Battle 9 unlocked - BATTLE_TO_RIBBLE                 
-                move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
+                move.l  #MAP_EVENT_RELOADMAP,((MAP_EVENT_TYPE-$1000000)).w
 return_4FDD0:
                 
                 rts

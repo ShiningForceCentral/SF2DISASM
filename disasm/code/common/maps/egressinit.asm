@@ -55,6 +55,7 @@ byte_7620:
                 ; No match
                 chkFlg  64              ; Raft is unlocked
                 beq.s   @Done
+                
             if (STANDARD_BUILD=1)
                 getPointer p_table_RaftResetMapCoordinates, a0
 @FindRaftEntry_Loop:

@@ -2784,7 +2784,7 @@ GetCombatantEntryAddress:
                 bra.s   @GetAddress
 @Enemy:
                 
-                cmpi.b  #$A0,d0
+                cmpi.b  #COMBATANT_ENEMIES_SPACE_END,d0
                 bhi.s   @ErrorHandling
                 subi.b  #COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END,d0
 @GetAddress:

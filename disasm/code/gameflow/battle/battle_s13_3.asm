@@ -130,7 +130,7 @@ InitializeEnemyBattlePosition:
                 move.b  (a0),d1
                 cmpi.b  #BATTLE_TO_MOUN,d1
                 bne.s   loc_1B132E
-                cmpi.b  #143,d0
+                cmpi.b  #COMBATANT_ENEMY_INDEX_15,d0
                 bne.s   loc_1B132E
                 bsr.w   HasJaroJoinedTheForce ; HARDCODED check for Jaro in battle 32
                 tst.w   d1

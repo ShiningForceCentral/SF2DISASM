@@ -1220,7 +1220,7 @@ LoadMap:
                 bsr.w   InitializeDisplay
                 move.w  (sp)+,d1
                 ext.w   d1
-                bpl.s   loc_2ACC        
+                bpl.s   loc_2ACC
                 
                 ; Reload current map
                 clr.w   d1              ; If D1<0, re-load current map
@@ -1228,7 +1228,7 @@ LoadMap:
                 getPointer p_pt_MapData, a5
                 lsl.w   #2,d1
                 movea.l (a5,d1.w),a5
-                lea     $E(a5),a5       ; get address 02 - map properties
+                lea     MAPDATA_OFFSET_AREAS(a5),a5       ; get address 02 - map properties
                 bra.w   loc_2B80        
 loc_2ACC:
                 
@@ -1358,9 +1358,9 @@ loc_2BC0:
 loc_2BD0:
                 
                 andi.w  #$3F,d4 
-                lsl.w   #5,d4
+                lsl.w   #ENTITYDEF_SIZE_BITS,d4
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.w  2(a0,d4.w),d5
+                move.w  ENTITYDEF_OFFSET_Y(a0,d4.w),d5
                 move.w  (a0,d4.w),d4
                 movea.l (sp)+,a0
                 bra.s   loc_2BF0

@@ -46,7 +46,7 @@ cs_5F4B8:       setActscriptWait ALLY_BOWIE,eas_Init
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,ALLY_PETER,2
                 csc_end
-cs_5F594:       newEntity ALLY_LEMON,6,15,UP,MAPSPRITE_TAROS
+cs_5F594:       newEntity ALLY_LEMON,6,15,UP,$FF
                 textCursor 3513
                 nextSingleText $0,ALLY_LEMON ; "Sir Astral!  {LEADER}!{W1}"
                 setDest FOLLOWER_B,6,10

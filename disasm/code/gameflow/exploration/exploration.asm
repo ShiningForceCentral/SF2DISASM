@@ -817,7 +817,7 @@ OpenDoor:
                 getPointer p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
-                movea.l $16(a2),a2      ; get map step events
+                movea.l MAPDATA_OFFSET_EVENT_STEP(a2),a2      ; get map step events
 loc_3E80:
                 
                 tst.b   (a2)
@@ -926,7 +926,7 @@ ToggleRoofOnMapLoad:
                 getPointer p_pt_MapData, a0
                 lsl.w   #2,d1
                 movea.l (a0,d1.w),a0
-                movea.l $1A(a0),a0
+                movea.l MAPDATA_OFFSET_EVENT_ROOF(a0),a0
 @Loop:
                 
                 tst.b   (a0)
@@ -1028,7 +1028,7 @@ PerformMapBlockCopyScript:
                 getPointer p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
-                movea.l $1A(a2),a2
+                movea.l MAPDATA_OFFSET_EVENT_ROOF(a2),a2
 loc_4028:
                 
                 tst.b   (a2)
@@ -1296,7 +1296,7 @@ GetChestItem:
                 getPointer p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data
-                movea.l $22(a2),a2      ; get address of current map's chest item data
+                movea.l MAPDATA_OFFSET_ITEM_CHEST(a2),a2      ; get address of current map's chest item data
             if (STANDARD_BUILD=1)
                 bra.s   GetItem
             else
@@ -1316,7 +1316,7 @@ GetNonChestItem:
                 getPointer p_pt_MapData, a2
                 lsl.w   #2,d2
                 movea.l (a2,d2.w),a2
-                movea.l $26(a2),a2      ; get address of current map's non-chest item data
+                movea.l MAPDATA_OFFSET_ITEM_OTHER(a2),a2      ; get address of current map's non-chest item data
 
     ; End of function GetNonChestItem
 
@@ -1421,7 +1421,7 @@ WarpIfSetAtPoint:
                 getPointer p_pt_MapData, a2
                 lsl.w   #2,d7
                 movea.l (a2,d7.w),a2
-                movea.l $1E(a2),a2
+                movea.l MAPDATA_OFFSET_EVENT_WARP(a2),a2
 loc_4302:
                 
                 cmpi.w  #$FFFF,(a2)

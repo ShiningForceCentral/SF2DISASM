@@ -140,7 +140,7 @@ return_453F0:
     ; End of function MapEventType3
 
 cs_453F2:       setActscriptWait ALLY_BOWIE,eas_4540C
-                setPos 159,64,64,DOWN
+                setPos FOLLOWER_D,64,64,DOWN
                 setActscriptWait ALLY_BOWIE,eas_45426
                 csc_end
 
@@ -157,7 +157,7 @@ eas_4540C:       ac_moveEntFacRelPos 31,0,0
 byte_45414:      ac_wait 6
                  ac_soundCommand SFX_WARP
                  ac_waitDest
-                 ac_clonePos $1F
+                 ac_clonePos ENTITY_UNIT_RAFT
 word_45422:      ac_branch
                 dc.w (eas_Idle-word_45422) & $FFFF
 eas_45426:       ac_setSprite MAPSPRITE_RAFT
@@ -188,11 +188,11 @@ MapEventType5:
 
     ; End of function MapEventType5
 
-cs_45470:       setActscriptWait 159,eas_45360
+cs_45470:       setActscriptWait FOLLOWER_D,eas_45360
                 setSprite ALLY_BOWIE,ALLY_BOWIE
                 setActscriptWait ALLY_BOWIE,eas_4548C
                 csc_end
-byte_45488:      ac_clonePos $1F
+byte_45488:      ac_clonePos ENTITY_UNIT_RAFT
 eas_4548C:       ac_moveFacRelPos 0,1
                  ac_soundCommand SFX_WARP
                  ac_waitDest
@@ -276,7 +276,7 @@ ShrinkIntoCaravanBowieAndFollowers:
                 bsr.w   WaitForFollowersStopped
                 setSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 moveq   #3,d0
-                jsr     (3844).w        
+                jsr     (Sleep).w
                 rts
 
     ; End of function ShrinkIntoCaravanBowieAndFollowers

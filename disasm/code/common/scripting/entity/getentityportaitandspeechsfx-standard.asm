@@ -15,10 +15,17 @@ GetEntityPortaitAndSpeechSfx:
                 
                 clr.w   d2
                 bsr.w   GetEntityAddressFromCharacter       ; -> a5
+            if (EXPANDED_MAPSPRITES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0   ; entity's map sprite index -> D0
+                lea     table_MapspriteDialogueProperties(pc), a0
+                
+@Loop:          cmp.w   (a0),d0                                ; loop until we find entry matching the given map sprite
+            else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0   ; entity's map sprite index -> D0
                 lea     table_MapspriteDialogueProperties(pc), a0
                 
 @Loop:          cmp.b   (a0),d0                                ; loop until we find entry matching the given map sprite
+            endif
                 beq.s   @Found
                 adda.w  #MAPSPRITEDIALOGUEDEF_ENTRY_SIZE,a0
                 cmpi.w  #CODE_TERMINATOR_WORD,(a0)

@@ -102,7 +102,7 @@ Map25_EntityEvent5:
                 bra.s   return_5D2D0
 loc_5D2C4:
                 
-                move.b  #9,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_KETTO,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
 return_5D2D0:
                 
@@ -174,7 +174,7 @@ loc_5D328:
                 bra.s   return_5D336
 loc_5D32A:
                 
-                move.b  #$1B,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_KETTO,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
 return_5D336:
                 

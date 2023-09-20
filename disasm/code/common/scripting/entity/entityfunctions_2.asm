@@ -231,29 +231,29 @@ HideEntity:
                 move.l  (a0),ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  (sp)+,d0
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
-                moveq   #$3F,d7 
-loc_44CA0:
+                moveq   #ENTITY_TOTAL_COUNTER,d7 
+@Loop_EntityEvent:
                 
                 cmp.b   (a0)+,d0
-                bne.s   loc_44CAA
+                bne.s   @NextEntity
                 move.b  #$FF,-1(a0)
-loc_44CAA:
+@NextEntity:
                 
-                dbf     d7,loc_44CA0
+                dbf     d7,@Loop_EntityEvent
                 lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
-loc_44CB2:
+@Loop_Follower:
                 
                 cmpi.b  #$FF,(a0)
-                beq.w   loc_44CCA
+                beq.w   @Done
                 cmp.b   (a0)+,d0
-                bne.s   loc_44CB2
-loc_44CBE:
+                bne.s   @Loop_Follower
+@ShiftFollowers:
                 
                 move.b  (a0),-1(a0)
-                bmi.w   loc_44CCA
+                bmi.w   @Done
                 addq.l  #1,a0
-                bra.s   loc_44CBE
-loc_44CCA:
+                bra.s   @ShiftFollowers
+@Done:
                 
                 movem.l (sp)+,a0-a1
                 rts

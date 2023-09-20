@@ -250,7 +250,7 @@ loc_1594C:
                 move.w  #$71E,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
-                bsr.w   sub_1598C
+                bsr.w   TurnOnBattlefieldOptionCursors
                 jsr     (WaitForWindowMovementEnd).l
                 move.w  windowSlot(a6),d0
                 jsr     (ClearWindowAndUpdateEndPointer).l
@@ -282,7 +282,7 @@ CopyBattlefieldOptionsMenuLayout:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1598C:
+TurnOnBattlefieldOptionCursors:
                 
                 lea     (SPRITE_BATTLE_CURSOR).l,a0
                 moveq   #3,d7
@@ -293,7 +293,7 @@ sub_1598C:
                 dbf     d7,@Loop
                 rts
 
-    ; End of function sub_1598C
+    ; End of function TurnOnBattlefieldOptionCursors
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -302,7 +302,7 @@ sub_1598C:
 sub_159A0:
                 
                 tst.w   ((HIDE_WINDOWS-$1000000)).w
-                bne.s   sub_1598C
+                bne.s   TurnOnBattlefieldOptionCursors
                 movem.w d3-d4/d7,-(sp)
                 lea     (SPRITE_BATTLE_CURSOR).l,a0
                 lea     spr_BattleConfig(pc), a1

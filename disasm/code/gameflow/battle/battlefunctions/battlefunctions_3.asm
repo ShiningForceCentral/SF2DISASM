@@ -144,7 +144,7 @@ loc_25724:
 
 PrintAllActivatedDefCons:
                 
-                moveq   #$5A,d1 
+                moveq   #BATTLE_REGION_FLAGS_START,d1 
                 bsr.w   PrintActivatedDefCon
                 bsr.w   PrintActivatedDefCon
                 bsr.w   PrintActivatedDefCon

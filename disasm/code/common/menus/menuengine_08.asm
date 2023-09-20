@@ -306,7 +306,7 @@ loc_15E94:
 loc_15EAC:
                 
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
-                bsr.s   BottomToTopWrapCursorLocation
+                bsr.s   WrapCursorLocationBottomToTop
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_15D22
 loc_15EBA:
@@ -322,7 +322,7 @@ loc_15ED2:
                 
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 sndCom  SFX_MENU_SELECTION
-                bsr.s   BottomToTopWrapCursorLocation
+                bsr.s   WrapCursorLocationBottomToTop
                 bra.w   loc_15D22
 
     ; End of function NavigateAlphabetWindow
@@ -331,7 +331,7 @@ loc_15ED2:
 ; =============== S U B R O U T I N E =======================================
 
 
-BottomToTopWrapCursorLocation:
+WrapCursorLocationBottomToTop:
                 
                 cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 bne.s   return_15F20
@@ -371,7 +371,7 @@ return_15F20:
                 
                 rts
 
-    ; End of function BottomToTopWrapCursorLocation
+    ; End of function WrapCursorLocationBottomToTop
 
 
 ; START OF FUNCTION CHUNK FOR NavigateAlphabetWindow

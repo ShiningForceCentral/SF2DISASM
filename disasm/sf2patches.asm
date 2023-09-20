@@ -120,6 +120,7 @@ RESUME_BATTLESCENE_MUSIC: equ resumeBattlesceneMusic
 EXPANDED_FORCE_MEMBERS:     equ 1       ; Enable all 32 force members supported by the engine instead of 30.
 EXPANDED_CLASSES:           equ 1       ; Enable support for 64 classes.
 EXPANDED_ITEMS_AND_SPELLS:  equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of a >= 4MB ROM with 32KB SRAM.
+EXPANDED_MAPSPRITES:        equ 1       ; Store mapsprite index in word-sized structure allowing 65k+ unique sprites.
 
 
 ; ROM expansions

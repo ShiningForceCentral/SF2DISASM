@@ -238,7 +238,7 @@ Map38_EntityEvent11:
 
 Map38_EntityEvent12:
                 
-                move.b  #$D,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_ROFT,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 
@@ -250,7 +250,7 @@ Map38_EntityEvent12:
 
 Map38_EntityEvent13:
                 
-                move.b  #$1C,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_ROFT,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 

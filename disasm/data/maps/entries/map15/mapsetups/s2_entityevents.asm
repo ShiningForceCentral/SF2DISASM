@@ -138,7 +138,7 @@ Map15_EntityEvent8:
 
 Map15_EntityEvent9:
                 
-                move.b  #$1A,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_TRISTAN,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 
@@ -161,7 +161,7 @@ Map15_EntityEvent10:
 
 Map15_EntityEvent11:
                 
-                move.b  #$B,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_WEAPON_TRISTAN,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenuActions
                 rts
 

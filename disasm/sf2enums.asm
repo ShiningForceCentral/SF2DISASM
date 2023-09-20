@@ -56,7 +56,7 @@ combatantAlliesNumber = 32
     endif
 
 COMBATANT_ALLIES_START: equ 0
-COMBATANT_ALLIES_MINUS_TWO_COUNTER: equ combatantAlliesNumber-3
+COMBATANT_ALLIES_MINUS_PLAYER_AND_CREATURE_COUNTER: equ combatantAlliesNumber-3
 COMBATANT_ALLIES_MINUS_PLAYER_COUNTER: equ combatantAlliesNumber-2
 COMBATANT_ALLIES_COUNTER: equ combatantAlliesNumber-1
 COMBATANT_ALLIES_END: equ combatantAlliesNumber-1
@@ -69,18 +69,27 @@ COMBATANTS_ALL_COUNTER: equ combatantAlliesNumber+combatantEnemiesNumber-1
 COMBATANT_SLOTS_NUMBER: equ combatantSlotsNumber
 COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END: equ combatantEnemiesStart-combatantAlliesSpaceEnd
 COMBATANT_ENEMIES_START: equ combatantEnemiesStart
+COMBATANT_ENEMY_INDEX_15: equ combatantEnemiesStart+$F
 COMBATANT_ENEMIES_END: equ combatantEnemiesStart+combatantEnemiesNumber-1
 COMBATANT_ENEMIES_SPACE_END: equ combatantEnemiesStart+combatantEnemiesNumber
 
 ; ---------------------------------------------------------------------------
 
 ; enum Battle_Entity
+
+neutralEntitySize = 8
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+neutralEntitySize = 10
+    endif
+
 ENTITY_ENEMY_COUNTER: equ $1D
 ENTITY_ALLY_COUNTER: equ $1F
 ENTITY_ENEMY_COUNT: equ $20
 ENTITY_ALLY_COUNT: equ $20
 ENTITY_TOTAL_COUNTER: equ $3F
 ENTITY_TOTAL: equ $40
+
+NEUTRAL_ENTITY_SIZE: equ neutralEntitySize
 
 ; ---------------------------------------------------------------------------
 
@@ -995,16 +1004,55 @@ EQUIPEFFECTS_MAX_INDEX: equ totalEffects
 ; ---------------------------------------------------------------------------
 
 ; enum ShopProperties
+
 shopsNumber: = 31
 shopMaxIndex: = shopsNumber-1
 shopsDebugNumber: = 100
     if (STANDARD_BUILD&TEST_BUILD=1)
 shopsDebugNumber: = shopMaxIndex
     endif
+
+ITEMS_PER_SHOP_PAGE: equ 6
 SHOP_MAX_INDEX: equ shopMaxIndex
 SHOPS_NUMBER:  equ shopsNumber
 SHOPS_DEBUG_NUMBER: equ shopsDebugNumber
 DEBUG_SHOP_INDEX: equ 30
+
+; ---------------------------------------------------------------------------
+
+; enum Shops
+SHOP_WEAPON_GRANSEAL: equ 0
+SHOP_WEAPON_GALAM_0: equ 1
+SHOP_WEAPON_NEW_GRANSEAL_0: equ 2
+SHOP_WEAPON_RIBBLE: equ 3
+SHOP_WEAPON_POLCA: equ 4
+SHOP_WEAPON_BEDOE: equ 5
+SHOP_WEAPON_HASSAN_0: equ 6
+SHOP_WEAPON_HASSAN_1: equ 7
+SHOP_WEAPON_NEW_GRANSEAL_1: equ 8
+SHOP_WEAPON_KETTO: equ 9
+SHOP_WEAPON_PACALON: equ 10
+SHOP_WEAPON_TRISTAN: equ 11
+SHOP_WEAPON_MOUN: equ 12
+SHOP_WEAPON_ROFT: equ 13
+SHOP_WEAPON_GALAM_1: equ 14
+SHOP_ITEM_GRANSEAL: equ 15
+SHOP_ITEM_GALAM_0: equ 16
+SHOP_ITEM_NEW_GRANSEAL_0: equ 17
+SHOP_ITEM_RIBBLE: equ 18
+SHOP_ITEM_POLCA: equ 19
+SHOP_ITEM_BEDOE: equ 20
+SHOP_ITEM_HASSAN: equ 21
+SHOP_MINATURES_ROOM: equ 22                     ; made available in the Desktop Kingdom if MINIATURES_SHOP=1
+SHOP_ITEM_NEW_GRANSEAL_1: equ 23
+SHOP_ITEM_PACALON: equ 25
+SHOP_ITEM_TRISTAN: equ 26
+SHOP_ITEM_KETTO: equ 27
+SHOP_ITEM_MOUN: equ 27
+SHOP_ITEM_ROFT: equ 28
+SHOP_DWARVEN_VILLAGE: equ 28
+SHOP_ITEM_GALAM_1: equ 29
+SHOP_YEEL_UNDERGROUND: equ 29
 
 ; ---------------------------------------------------------------------------
 
@@ -1021,12 +1069,6 @@ DEALS_BIT_REMAINDER: equ $10
 DEALS_ADD_AMOUNT_EVEN: equ $10
 DEALS_ITEMS_BYTES: equ dealsItemsByteSize
 DEALS_ITEMS_COUNTER: equ (dealsItemsByteSize*2)-1
-
-; ---------------------------------------------------------------------------
-
-; enum ShopProperties
-ITEMS_PER_SHOP_PAGE: equ 6
-DEBUG_SHOP_INDEX: equ $1E
 
 ; ---------------------------------------------------------------------------
 
@@ -1299,27 +1341,41 @@ MITHRILWEAPON_CLASSES_COUNTER: equ $7
 ; enum MapDef
 MAP_SIZE_MAXHEIGHT: equ $30
 MAP_SIZE_MAXWIDTH: equ $30
+MAP_TILE_SIZE: equ $180
+MAP_TILE_PLUS: equ $180
 MAP_ARRAY_SIZE: equ $900
 MAP_BLOCKINDEX_CLOSED_CHEST: equ $D801
 MAP_BLOCKINDEX_OPEN_CHEST: equ $D802
+MAP_TILE_MINUS: equ $FE80
 MAP_NULLPOSITION: equ $FFFF
 
 ; ---------------------------------------------------------------------------
 
 ; enum Map_Entity
+
+entityVelocityYOffset = 6
+entityDestinationXOffset = 12
+entityDestinationYOffset = 14
+entityMapspriteOffset = 19
+entitySize = 32
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+entityVelocityYOffset = 5
+entityMapspriteOffset = 6
+    endif
+	
 ENTITYDEF_OFFSET_X: equ $0
 ENTITYDEF_OFFSET_Y: equ $2
 ENTITYDEF_OFFSET_XVELOCITY: equ $4
 ENTITYDEF_SIZE_BITS: equ $5
-ENTITYDEF_OFFSET_YVELOCITY: equ $6
+ENTITYDEF_OFFSET_YVELOCITY: equ entityVelocityYOffset
 ENTITYDEF_OFFSET_XTRAVEL: equ $8
 ENTITYDEF_OFFSET_YTRAVEL: equ $A
-ENTITYDEF_OFFSET_XDEST: equ $C
-ENTITYDEF_OFFSET_YDEST: equ $E
+ENTITYDEF_OFFSET_XDEST: equ entityDestinationXOffset
+ENTITYDEF_OFFSET_YDEST: equ entityDestinationYOffset
 ENTITYDEF_OFFSET_FACING: equ $10
 ENTITYDEF_OFFSET_LAYER: equ $11
 ENTITYDEF_OFFSET_ENTNUM: equ $12
-ENTITYDEF_OFFSET_MAPSPRITE: equ $13
+ENTITYDEF_OFFSET_MAPSPRITE: equ entityMapspriteOffset
 ENTITYDEF_OFFSET_ACTSCRIPTADDR: equ $14
 ENTITYDEF_OFFSET_XACCEL: equ $18
 ENTITYDEF_OFFSET_YACCEL: equ $19
@@ -1329,21 +1385,25 @@ ENTITYDEF_OFFSET_FLAGS_A: equ $1C
 ENTITYDEF_OFFSET_FLAGS_B: equ $1D
 ENTITYDEF_OFFSET_ANIMCOUNTER: equ $1E
 ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER: equ $1F
-ENTITYDEF_SIZE: equ $20
-NEXT_ENTITYDEF: equ $20
-ENTITYDEF_SECOND_ENTITY_XDEST: equ $2C
-ENTITYDEF_SECOND_ENTITY_YDEST: equ $2E
-ENTITYDEF_SECOND_ENTITY_MAPSPRITE: equ $33
-ENTITYDEF_ENTITY32_XDEST: equ $3EC
-ENTITYDEF_ENTITY32_YDEST: equ $3EE
+ENTITYDEF_SIZE: equ entitySize
+NEXT_ENTITYDEF: equ entitySize
+ENTITYDEF_SECOND_ENTITY_XDEST: equ entitySize+entityDestinationXOffset
+ENTITYDEF_SECOND_ENTITY_YDEST: equ entitySize+entityDestinationYOffset
+ENTITYDEF_SECOND_ENTITY_MAPSPRITE: equ entitySize+entityMapspriteOffset
+ENTITYDEF_ENTITY32_XDEST: equ 31*entitySize+entityDestinationXOffset
+ENTITYDEF_ENTITY32_YDEST: equ 31*entitySize+entityDestinationYOffset
 
 ; ---------------------------------------------------------------------------
 
 ; enum Entities
 ENTITY_PLAYER_CHARACTER: equ $0
+ENTITY_UNIT_RAFT: equ $1F
+ENTITY_ENEMY_START equ $20
 ENTITY_SPECIAL_SPRITE: equ $2F
 ENTITY_UNIT_CURSOR: equ $30
 ENTITY_UNIT_CURSOR_ADDRESS: equ $AF02
+WORD_ADDRESS_ENTITY_SPECIAL_SPRITE: equ ENTITY_SPECIAL_SPRITE_DATA-FF0000_RAM_START
+WORD_ADDRESS_LAST_SPRITE_PLUS_ONE: equ SPRITE_63+VDP_SPRITE_SIZE-FF0000_RAM_START
 
 ; ---------------------------------------------------------------------------
 
@@ -2023,12 +2083,27 @@ MAP_LAYOUT_LONGS_COUNTER: equ 2047
 
 ; ---------------------------------------------------------------------------
 
+; enum MapDataOffsets
+MAPDATA_OFFSET_TILESETS: equ $0
+MAPDATA_OFFSET_BLOCKS: equ $6
+MAPDATA_OFFSET_LAYOUT: equ $A
+MAPDATA_OFFSET_AREAS: equ $E
+MAPDATA_OFFSET_EVENT_FLAG: equ $12
+MAPDATA_OFFSET_EVENT_STEP: equ $16
+MAPDATA_OFFSET_EVENT_ROOF: equ $1A
+MAPDATA_OFFSET_EVENT_WARP: equ $1E
+MAPDATA_OFFSET_ITEM_CHEST: equ $22
+MAPDATA_OFFSET_ITEM_OTHER: equ $26
+MAPDATA_OFFSET_ANIMATIONS: equ $2A
+
+; ---------------------------------------------------------------------------
+
 ; enum MapsetupOffsets
 MAPSETUP_OFFSET_ENTITIES: equ $0
-MAPSETUP_OFFSET_ENTITY_EVENTS: equ $4
-MAPSETUP_OFFSET_ZONE_EVENTS: equ $8
+MAPSETUP_OFFSET_EVENT_ENTITY: equ $4
+MAPSETUP_OFFSET_EVENT_ZONE: equ $8
 MAPSETUP_OFFSET_AREA_DESCRIPTIONS: equ $C
-MAPSETUP_OFFSET_SECTION_5: equ $10
+MAPSETUP_OFFSET_EVENT_ITEM: equ $10
 MAPSETUP_OFFSET_INIT_FUNCTION: equ $14
 
 ; ---------------------------------------------------------------------------
@@ -2238,7 +2313,7 @@ WINDOW_MEMBER_PORTRAIT_DEST: equ $F8F6
 
 ; ---------------------------------------------------------------------------
 
-; enum Window_BattleEquip_Stats
+; enum Window_BattleEquip
 
 statsTileCoords = $701
     if (STANDARD_BUILD&THREE_DIGITS_STATS=1)
@@ -2246,6 +2321,7 @@ statsTileCoords = statsTileCoords-$100
     endif
 
 WINDOW_BATTLEEQUIP_STATS_TILE_COORDS: equ statsTileCoords
+WINDOW_BATTLEEQUIP_SIZE: equ $A09
 
 ; ---------------------------------------------------------------------------
 
@@ -2487,6 +2563,18 @@ WINDOW_SHOP_ITEM_NAME_AND_PRICE_SIZE: equ $A05
 WINDOW_SHOP_INVENTORY_SIZE: equ $1B06
 WINDOW_SHOP_GOLD_DEST: equ $2017
 WINDOW_SHOP_ITEM_NAME_AND_PRICE_DEST: equ $F606
+
+; ---------------------------------------------------------------------------
+
+; enum Window_Gold
+WINDOW_GOLD_SIZE: equ $904
+WINDOW_GOLD_DEST: equ $2017
+
+; ---------------------------------------------------------------------------
+
+; enum Window_HeadquartersName
+WINDOW_HEADQUARTERS_NAME_SIZE: equ $A03
+WINDOW_HEADQUARTERS_NAME_DEST: equ $F60B
 
 ; ---------------------------------------------------------------------------
 
@@ -2954,6 +3042,9 @@ UP: equ $1
 LEFT: equ $2
 DOWN: equ $3
 NO_DIRECTION: equ $FF
+
+ORIENTATION_INVERTED: equ $2
+ORIENTATION_MASK: equ $3
 
 ; ---------------------------------------------------------------------------
 
@@ -3492,6 +3583,8 @@ MAPSPRITE_DEFAULT: equ $0
 MAPSPRITES_ENEMIES_START: equ $40
 MAPSPRITES_NPCS_START: equ $AA
 MAPSPRITES_SPECIALS_START: equ $F0
+MAPSPRITES_SPECIALS_END: equ $FF
+MAPSPRITE_MASK: equ $FF
 
 ; ---------------------------------------------------------------------------
 
@@ -3553,10 +3646,18 @@ PORTRAIT_DEFAULT: equ $FFFF
 
 ; ---------------------------------------------------------------------------
 
-; enum SpriteDialogDef
+; enum MapspriteDialogueDef
+
+mapspriteDialoguePortraitOffset = 1
+mapspriteDialogueSoundOffset = 2
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+mapspriteDialoguePortraitOffset = 2
+mapspriteDialogueSoundOffset = 3
+    endif
+
 MAPSPRITEDIALOGUEDEF_OFFSET_MAPSPRITE: equ $0
-MAPSPRITEDIALOGUEDEF_OFFSET_PORTRAIT: equ $1
-MAPSPRITEDIALOGUEDEF_OFFSET_SPEECHSFX: equ $2
+MAPSPRITEDIALOGUEDEF_OFFSET_PORTRAIT: equ mapspriteDialoguePortraitOffset
+MAPSPRITEDIALOGUEDEF_OFFSET_SPEECHSFX: equ mapspriteDialogueSoundOffset
 MAPSPRITEDIALOGUEDEF_OFFSET_UNDEFINED: equ $3
 MAPSPRITEDIALOGUEDEF_ENTRY_SIZE: equ $4
 
@@ -3607,15 +3708,19 @@ ALLY_MASK_INDEX: equ $1F
 
 followerA = 30
 followerB = 31
+followerSize = 4
     if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
 followerA = 156
 followerB = 157
+followerSize = 6
     endif
 
 FOLLOWER_A: equ followerA 
 FOLLOWER_B: equ followerB
 FOLLOWER_C: equ $9E
 FOLLOWER_D: equ $9F
+
+FOLLOWER_ENTITY_SIZE: equ followerSize
 
 ; ---------------------------------------------------------------------------
 
@@ -3969,6 +4074,8 @@ MAPEVENT_GETINTORAFT: equ $3
 MAPEVENT_GETOUTOFRAFT: equ $4
 MAPEVENT_GETOUTOFCARAVAN: equ $5
 MAPEVENT_ZONE_EVENT: equ $6
+
+MAP_EVENT_RELOADMAP: equ $100FF
 
 ; ---------------------------------------------------------------------------
 
