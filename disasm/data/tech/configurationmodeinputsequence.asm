@@ -1,7 +1,7 @@
 
 ; ASM FILE data\tech\configurationmodeinputsequence.asm :
 ; 0x28FBC..0x28FCB : Configuration mode input sequence
-tbl_ConfigurationModeInputSequence:
+table_ConfigurationModeInputSequence:
                 
 ; Syntax        input [INPUT_]bitfield
                 

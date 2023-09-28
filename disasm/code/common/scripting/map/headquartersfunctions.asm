@@ -7,27 +7,30 @@
 
 DisplayTacticalBaseQuote:
                 
-                jsr     j_CreateTacticalBaseAllyNameWindow
+                jsr     j_DisplayNameUnderPortrait
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                bne.s   loc_47924
-                move.w  #1,d0
-                bra.s   loc_4793C       
-loc_47924:
+                bne.s   @LivingMember
+                
+                move.w  #1,d0           ; empty quote
+                bra.s   @DisplayQuote   
+@LivingMember:
                 
                 move.w  d0,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 jsr     j_CheckFlag
-                beq.s   loc_47938       
+                beq.s   @InReserve      
+                
+                ; In battle party
                 addi.w  #$DC3,d0        ; 0DC3={W1}
-                bra.s   loc_4793C       ; start of headquarters 'in party' quotes
-loc_47938:
+                bra.s   @DisplayQuote   ; start of headquarters 'in party' quotes
+@InReserve:
                 
                 addi.w  #$DE1,d0        ; 0DE1={W1}
-loc_4793C:
+@DisplayQuote:
                 
                 jsr     (DisplayText).w ; start of headquarters 'outside of party' quotes
-                jsr     j_RemoveTacticalBaseAllyNameWindow
+                jsr     j_CloseNameUnderPortraitWindow
                 rts
 
     ; End of function DisplayTacticalBaseQuote
@@ -42,7 +45,7 @@ InitializeNazcaShipForceMembers:
                 moveq   #1,d0
                 moveq   #COMBATANT_ALLIES_MINUS_PLAYER_COUNTER,d7
                 lea     ((OTHER_ENTITIES_DATA-$1000000)).w,a0
-                lea     tbl_TacticalBaseBattlePartyPositions(pc), a2
+                lea     table_TacticalBaseBattlePartyPositions(pc), a2
 @PositionMember_Loop:
                 
                 move.w  d0,d1
@@ -76,7 +79,7 @@ InitializeTacticalBaseForceMembers:
                 moveq   #1,d0
                 moveq   #COMBATANT_ALLIES_MINUS_PLAYER_COUNTER,d7
                 lea     ((OTHER_ENTITIES_DATA-$1000000)).w,a0
-                lea     tbl_TacticalBaseBattlePartyPositions(pc), a2
+                lea     table_TacticalBaseBattlePartyPositions(pc), a2
 @PositionMember_Loop:
                 
                 move.w  d0,d1
@@ -102,10 +105,10 @@ InitializeTacticalBaseForceMembers:
                 ; Position member in battle party area
                 clr.w   d2
                 move.b  (a2)+,d2
-                mulu.w  #$180,d2
+                mulu.w  #MAP_TILE_SIZE,d2
                 clr.w   d3
                 move.b  (a2)+,d3
-                mulu.w  #$180,d3
+                mulu.w  #MAP_TILE_SIZE,d3
                 move.w  d2,(a0)
                 move.w  d3,ENTITYDEF_OFFSET_Y(a0)
                 move.w  d2,ENTITYDEF_OFFSET_XDEST(a0)
@@ -113,9 +116,9 @@ InitializeTacticalBaseForceMembers:
                 move.b  #DOWN,ENTITYDEF_OFFSET_FACING(a0)
                 move.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movem.w d0-d4,-(sp)
-                jsr     j_GetAllyMapSprite
+                jsr     j_GetAllyMapsprite
                 move.w  #DOWN,d1
-                moveq   #$FFFFFFFF,d2
+                moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
                 jsr     (WaitForVInt).w
@@ -131,7 +134,7 @@ InitializeTacticalBaseForceMembers:
 
     ; End of function InitializeTacticalBaseForceMembers
 
-tbl_TacticalBaseBattlePartyPositions:
+table_TacticalBaseBattlePartyPositions:
                 dc.b 17, 7              ; positions for battle party Force members
                 dc.b 18, 7
                 dc.b 20, 7

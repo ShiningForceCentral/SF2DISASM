@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_01.asm :
-; 0x100C8..0x10E1C : Menu engine
+; 0x100C8..0x10940 : Menu engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -11,7 +11,7 @@ useOrangeFont = -2
 WriteTilesFromAsciiWithOrangeFont:
                 
                 link    a6,#-2
-                move.w  #$FFFF,useOrangeFont(a6) ; set to use the orange font
+                move.w  #-1,useOrangeFont(a6) ; set to use the orange font
                 bra.s   WriteTilesFromAscii
 
     ; End of function WriteTilesFromAsciiWithOrangeFont
@@ -26,7 +26,7 @@ WriteTilesFromNumber:
                 
                 jsr     (WriteAsciiNumber).w
                 lea     ((LOADED_NUMBER-$1000000)).w,a0
-                moveq   #$A,d0
+                moveq   #10,d0
                 sub.w   d7,d0
                 adda.w  d0,a0
 
@@ -85,7 +85,7 @@ loc_10122:
                 clr.w   d1
                 move.b  d0,d1
                 subi.b  #$20,d1 
-                move.b  tbl_MainFontAlternateSymbols(pc,d1.w),d0
+                move.b  table_MainFontAlternateSymbols(pc,d1.w),d0
                 move.w  (sp)+,d1
                 bra.s   loc_10156
 loc_10140:
@@ -109,7 +109,7 @@ loc_10156:
 
 ; END OF FUNCTION CHUNK FOR WriteTilesFromAsciiWithOrangeFont
 
-tbl_MainFontAlternateSymbols:
+table_MainFontAlternateSymbols:
                 dc.b VDPTILE_SPACE      ; VDP tile indexes to substitute in for symbol ASCII values when using orange font
                 dc.b VDPTILE_ORANGE_EXCLAMATION_MARK
                 dc.b VDPTILE_ORANGE_QUOTATION_MARK
@@ -158,49 +158,49 @@ loc_10186:
 
 ; =============== S U B R O U T I N E =======================================
 
-; draw box tiles into A1, dimensions in D0, including borders (xxyy)
+; Write window tiles onto layout a1, dimensions d0.w including borders (xxyy).
 
 
-sub_1018E:
+WriteWindowTiles:
                 
                 movem.l d4-d5/a1,-(sp)
                 move.w  d0,d4
-                lsr.w   #8,d4
+                lsr.w   #BYTE_SHIFT_COUNT,d4
                 subq.l  #3,d4
-                move.w  #$C060,(a1)+
+                move.w  #VDPTILE_CORNER|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
 loc_1019C:
                 
-                move.w  #$C061,(a1)+
+                move.w  #VDPTILE_H_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 dbf     d4,loc_1019C
-                move.w  #$C860,(a1)+
+                move.w  #VDPTILE_CORNER|VDPTILE_MIRROR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  d0,d5
-                andi.w  #$FF,d5
+                andi.w  #BYTE_MASK,d5
                 subq.w  #3,d5
 loc_101B0:
                 
                 move.w  d0,d4
-                lsr.w   #8,d4
+                lsr.w   #BYTE_SHIFT_COUNT,d4
                 subq.w  #3,d4
-                move.w  #$C070,(a1)+
+                move.w  #VDPTILE_V_BORDER|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
 loc_101BA:
                 
-                move.w  #$C020,(a1)+
+                move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 dbf     d4,loc_101BA
-                move.w  #$C870,(a1)+
+                move.w  #VDPTILE_V_BORDER|VDPTILE_MIRROR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 dbf     d5,loc_101B0
                 move.w  d0,d4
-                lsr.w   #8,d4
+                lsr.w   #BYTE_SHIFT_COUNT,d4
                 subq.w  #3,d4
-                move.w  #$D060,(a1)+
+                move.w  #VDPTILE_CORNER|VDPTILE_FLIP|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
 loc_101D4:
                 
-                move.w  #$D061,(a1)+
+                move.w  #VDPTILE_H_BORDER|VDPTILE_FLIP|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 dbf     d4,loc_101D4
-                move.w  #$D860,(a1)+
+                move.w  #VDPTILE_CORNER|VDPTILE_MIRROR|VDPTILE_FLIP|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 movem.l (sp)+,d4-d5/a1
                 rts
 
-    ; End of function sub_1018E
+    ; End of function WriteWindowTiles
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -217,24 +217,24 @@ sub_101E6:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = special subroutine address to handle menu, default handling if not supplied (unused functionality)
-;     D0 = initial choice (00=up, 01=left, 02=right, 03=down)
-;     D1 = animate-in direction (00=from bottom, other=from right)
-;     D2 = menu index to use (just affects icons and text)
+; In: a0 = special subroutine address to handle menu, default handling if not supplied (unused functionality)
+;     d0.b = initial choice (0 = up, 1 = left, 2 = right, 3 = down)
+;     d1.w = animate-in direction (0 = from bottom, other = from right)
+;     d2.w = menu index to use (only affects icons and text)
 
 windowSlot = -12
 animationDirection = -10
 subroutineAddress = -8
 menuIndex = -4
 
-ExecuteMenu:
+ExecuteDiamondMenu:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 link    a6,#-12
                 move.w  d2,menuIndex(a6)
                 move.l  a0,subroutineAddress(a6)
                 move.w  d1,animationDirection(a6)
-                move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
+                move.b  d0,((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w
                 move.w  #$1206,d0
                 tst.w   d1
                 bne.s   loc_1021C
@@ -247,17 +247,17 @@ loc_10220:
                 
                 jsr     (CreateWindow).w
                 move.w  d0,windowSlot(a6)
-                bsr.w   LoadDiamenuWindowVdpTileData
+                bsr.w   LoadDiamondMenuWindowLayout
                 move.w  menuIndex(a6),d0
-                lsl.w   #2,d0
-                lea     pt_MenuTiles(pc), a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
+                lea     pt_tiles_Menu(pc), a0
                 move.l  (a0,d0.w),d0
                 bclr    #31,d0
                 bne.s   loc_10250
                 movea.l d0,a0
                 movea.l (a0),a0
                 lea     (FF8804_LOADING_SPACE).l,a1
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 bra.s   loc_1026E
 loc_10250:
                 
@@ -274,10 +274,10 @@ loc_1026E:
                 
                 jsr     (WaitForVInt).w
                 clr.w   d6
-                bsr.w   LoadVdpTileListForDiamenuIcon_Top
-                bsr.w   LoadVdpTileListForDiamenuIcon_Left
-                bsr.w   LoadVdpTileListForDiamenuIcon_Right
-                bsr.w   LoadVdpTileListForDiamenuIcon_Bottom
+                bsr.w   dmaDiamondMenuIcon_Up
+                bsr.w   dmaDiamondMenuIcon_Left
+                bsr.w   dmaDiamondMenuIcon_Right
+                bsr.w   dmaDiamondMenuIcon_Down
                 move.w  windowSlot(a6),d0
                 move.w  #$C15,d1
                 move.w  #4,d2
@@ -323,9 +323,9 @@ loc_102EC:
                 ; no dpad button was pressed
                 btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10300
-                moveq   #$FFFFFFFF,d1   ; B pressed, so cancel menu
-                moveq   #$FFFFFFFF,d0
-                move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
+                moveq   #-1,d1          ; B pressed, so cancel menu
+                moveq   #-1,d0
+                move.b  d0,((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w
                 bra.w   loc_10382
 loc_10300:
                 
@@ -333,7 +333,7 @@ loc_10300:
                 beq.s   loc_10314
                 clr.w   d1              ; C pressed, so confirm menu
                 clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
                 bra.w   loc_10382
 loc_10314:
                 
@@ -341,19 +341,19 @@ loc_10314:
                 beq.s   loc_10358
                 clr.w   d1              ; A pressed, so confirm menu
                 clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
                 bra.w   loc_10382
 loc_10328:
                 
                 ; dpad button was pressed
                 move.w  d1,-(sp)
                 clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
                 clr.w   d6
-                bsr.w   LoadVdpTileListForDiamenuIcon
+                bsr.w   DmaDiamondMenuIcons
                 move.w  (sp)+,d0
-                move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
-                bsr.w   LoadDiamenuWindowVdpTileData
+                move.b  d0,((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w
+                bsr.w   LoadDiamondMenuWindowLayout
                 move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
@@ -366,8 +366,8 @@ loc_10356:
                 moveq   #29,d6
 loc_10358:
                 
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                bsr.w   LoadVdpTileListForDiamenuIcon
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
+                bsr.w   DmaDiamondMenuIcons
                 subq.w  #1,d6
                 bne.s   loc_10366
                 moveq   #30,d6
@@ -397,39 +397,39 @@ loc_10398:
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
                 move.w  windowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 movem.w (sp)+,d0-d1
                 unlk    a6
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function ExecuteMenu
+    ; End of function ExecuteDiamondMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: -12(A6) = window slot index
+; In: -12(a6) = window slot index
 
 windowSlot = -12
 animationDirection = -10
 subroutineAddress = -8
 menuIndex = -4
 
-LoadDiamenuWindowVdpTileData:
+LoadDiamondMenuWindowLayout:
                 
-                lea     DiamondMenuLayout(pc), a0
+                lea     layout_DiamondMenu(pc), a0
                 move.w  windowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #216,d7
                 jsr     (CopyBytes).w   
                 move.w  menuIndex(a6),d0
-                lsl.w   #2,d0
-                lea     pt_MenuOptions(pc), a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
+                lea     pt_MenuOptionNames(pc), a0
                 movea.l (a0,d0.w),a0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
                 andi.w  #3,d0
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  windowSlot(a6),d0
                 move.w  #$B04,d1
@@ -438,7 +438,7 @@ LoadDiamenuWindowVdpTileData:
                 moveq   #12,d7
                 bra.w   WriteTilesFromAsciiWithRegularFont
 
-    ; End of function LoadDiamenuWindowVdpTileData
+    ; End of function LoadDiamondMenuWindowLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -446,26 +446,26 @@ LoadDiamenuWindowVdpTileData:
 ; In: d6.w = frame counter
 
 
-LoadVdpTileListForDiamenuIcon:
+DmaDiamondMenuIcons:
                 
                 add.w   d0,d0
-                move.w  rjt_DiamenuIconsLoadingFunctions(pc,d0.w),d0
-                jmp     rjt_DiamenuIconsLoadingFunctions(pc,d0.w)
+                move.w  rjt_DmaDiamondMenuIconFunctions(pc,d0.w),d0
+                jmp     rjt_DmaDiamondMenuIconFunctions(pc,d0.w)
 
-    ; End of function LoadVdpTileListForDiamenuIcon
+    ; End of function DmaDiamondMenuIcons
 
-rjt_DiamenuIconsLoadingFunctions:
-                dc.w LoadVdpTileListForDiamenuIcon_Top-rjt_DiamenuIconsLoadingFunctions
-                dc.w LoadVdpTileListForDiamenuIcon_Left-rjt_DiamenuIconsLoadingFunctions
-                dc.w LoadVdpTileListForDiamenuIcon_Right-rjt_DiamenuIconsLoadingFunctions
-                dc.w LoadVdpTileListForDiamenuIcon_Bottom-rjt_DiamenuIconsLoadingFunctions
+rjt_DmaDiamondMenuIconFunctions:
+                dc.w dmaDiamondMenuIcon_Up-rjt_DmaDiamondMenuIconFunctions
+                dc.w dmaDiamondMenuIcon_Left-rjt_DmaDiamondMenuIconFunctions
+                dc.w dmaDiamondMenuIcon_Right-rjt_DmaDiamondMenuIconFunctions
+                dc.w dmaDiamondMenuIcon_Down-rjt_DmaDiamondMenuIconFunctions
 
 ; =============== S U B R O U T I N E =======================================
 
 ; In: d6.w = frame counter
 
 
-LoadVdpTileListForDiamenuIcon_Top:
+dmaDiamondMenuIcon_Up:
                 
                 lea     (FF8804_LOADING_SPACE).l,a0
                 cmpi.w  #15,d6
@@ -478,7 +478,7 @@ loc_10420:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function LoadVdpTileListForDiamenuIcon_Top
+    ; End of function dmaDiamondMenuIcon_Up
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -486,22 +486,22 @@ loc_10420:
 ; In: d6.w = frame counter
 
 
-LoadVdpTileListForDiamenuIcon_Left:
+dmaDiamondMenuIcon_Left:
                 
-                lea     (byte_FF8A44).l,a0
+                lea     (FF8A44_LOADING_SPACE).l,a0
                 cmpi.w  #15,d6
                 blt.s   loc_10440
                 adda.w  #$120,a0
 loc_10440:
                 
-                lea     (byte_FF9104).l,a1
+                lea     (FF9104_LOADING_SPACE).l,a1
                 bsr.w   sub_10484
                 lea     ($B920).l,a1
                 move.w  #$C0,d0 
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function LoadVdpTileListForDiamenuIcon_Left
+    ; End of function dmaDiamondMenuIcon_Left
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -509,22 +509,22 @@ loc_10440:
 ; In: d6.w = frame counter
 
 
-LoadVdpTileListForDiamenuIcon_Right:
+dmaDiamondMenuIcon_Right:
                 
-                lea     (byte_FF8C84).l,a0
+                lea     (FF8C84_LOADING_SPACE).l,a0
                 cmpi.w  #15,d6
                 blt.s   loc_1046A
                 adda.w  #$120,a0
 loc_1046A:
                 
-                lea     (byte_FF9284).l,a1
+                lea     (FF9284_LOADING_SPACE).l,a1
                 bsr.w   sub_104E6
                 lea     ($BAA0).l,a1
                 move.w  #$C0,d0 
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function LoadVdpTileListForDiamenuIcon_Right
+    ; End of function dmaDiamondMenuIcon_Right
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -535,7 +535,7 @@ sub_10484:
                 move.l  a1,-(sp)
                 moveq   #3,d7
                 move.l  a0,-(sp)
-                lea     MenuHBarTiles1(pc), a0
+                lea     tiles_DiamondMenuBorder1(pc), a0
 loc_1048E:
                 
                 move.l  $20(a0),$40(a1)
@@ -557,7 +557,7 @@ loc_104A4:
                 adda.w  #$20,a1 
                 dbf     d7,loc_104A4
                 moveq   #3,d7
-                lea     MenuHBarTiles2(pc), a0
+                lea     tiles_DiamondMenuBorder2(pc), a0
 loc_104D0:
                 
                 move.l  $20(a0),$40(a1)
@@ -578,7 +578,7 @@ sub_104E6:
                 move.l  a1,-(sp)
                 moveq   #3,d7
                 move.l  a0,-(sp)
-                lea     MenuHBarTiles3(pc), a0
+                lea     tiles_DiamondMenuBorder3(pc), a0
 loc_104F0:
                 
                 move.l  $20(a0),$40(a1)
@@ -600,7 +600,7 @@ loc_10506:
                 adda.w  #$20,a1 
                 dbf     d7,loc_10506
                 moveq   #3,d7
-                lea     MenuHBarTiles4(pc), a0
+                lea     tiles_DiamondMenuBorder4(pc), a0
 loc_10532:
                 
                 move.l  $20(a0),$40(a1)
@@ -618,9 +618,9 @@ loc_10532:
 ; In: d6.w = frame counter
 
 
-LoadVdpTileListForDiamenuIcon_Bottom:
+dmaDiamondMenuIcon_Down:
                 
-                lea     (byte_FF8EC4).l,a0
+                lea     (FF8EC4_LOADING_SPACE).l,a0
                 cmpi.w  #15,d6
                 blt.s   loc_10558
                 adda.w  #$120,a0
@@ -631,18 +631,20 @@ loc_10558:
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function LoadVdpTileListForDiamenuIcon_Bottom
+    ; End of function dmaDiamondMenuIcon_Down
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.b = menu icon index
 
 
 LoadMainMenuIcon:
                 
                 move.l  d0,-(sp)
                 ext.w   d0
-                movea.l (p_MainMenuTiles).l,a0
-                mulu.w  #GFX_DIAMENU_ICON_PIXELS_NUMBER,d0
+                movea.l (p_tiles_MainMenu).l,a0
+                mulu.w  #GFX_DIAMOND_MENU_ICON_PIXELS_NUMBER,d0
                 adda.w  d0,a0
                 move.w  #143,d0
 @Loop:
@@ -676,7 +678,7 @@ ExecuteItemMenu:
                 move.w  d2,menuIndex(a6)
                 move.l  a0,subroutineAddress(a6)
                 move.w  d1,animationDirection(a6)
-                move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
+                move.b  d0,((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w
                 move.w  #$1206,d0
                 tst.w   d1
                 bne.s   loc_105AE
@@ -700,10 +702,10 @@ loc_105B2:
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
                 clr.w   d6
-                bsr.w   sub_10800       
-                bsr.w   sub_10820       
-                bsr.w   sub_1084A       
-                bsr.w   sub_10920       
+                bsr.w   dmaSelectedIcon_Up
+                bsr.w   dmaSelectedIcon_Left
+                bsr.w   dmaSelectedIcon_Right
+                bsr.w   dmaSelectedIcon_Down
                 move.w  windowSlot(a6),d0
                 move.w  #$C15,d1
                 move.w  #4,d2
@@ -754,9 +756,9 @@ loc_10676:
                 
                 btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1068C
-                moveq   #$FFFFFFFF,d6
-                moveq   #$FFFFFFFF,d0
-                move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
+                moveq   #-1,d6
+                moveq   #-1,d0
+                move.b  #-1,((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w
                 bra.w   loc_10710
 loc_1068C:
                 
@@ -764,7 +766,7 @@ loc_1068C:
                 beq.s   loc_106A0
                 clr.w   d6
                 clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
                 bra.w   loc_106FE
 loc_106A0:
                 
@@ -772,17 +774,17 @@ loc_106A0:
                 beq.s   loc_106E8
                 clr.w   d6
                 clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
                 bra.w   loc_106FE
 loc_106B4:
                 
                 move.w  d1,-(sp)
                 clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
                 clr.w   d6
-                bsr.w   sub_107EA       
+                bsr.w   DmaSelectedIcon 
                 move.w  (sp)+,d0
-                move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
+                move.b  d0,((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w
                 bsr.w   BuildItemMenu
                 move.l  subroutineAddress(a6),d0
                 beq.s   loc_106D6
@@ -797,8 +799,8 @@ loc_106D6:
                 moveq   #29,d6
 loc_106E8:
                 
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                bsr.w   sub_107EA       
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
+                bsr.w   DmaSelectedIcon 
                 subq.w  #1,d6
                 bne.s   loc_106F6
                 moveq   #30,d6
@@ -809,7 +811,7 @@ loc_106F6:
 loc_106FE:
                 
                 clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
                 move.w  d0,d1
                 add.w   d0,d0
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
@@ -831,7 +833,7 @@ loc_10726:
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
                 move.w  windowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 movem.w (sp)+,d0-d1
                 unlk    a6
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
@@ -850,7 +852,7 @@ menuIndex = -4
 
 BuildItemMenu:
                 
-                lea     ItemMenuLayout(pc), a0
+                lea     layout_ItemMenu(pc), a0
                 move.w  windowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
@@ -858,13 +860,13 @@ BuildItemMenu:
                 jsr     (CopyBytes).w   
                 lsl.w   #1,d0
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
+                move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
                 andi.w  #3,d0
                 lsl.w   #1,d0
                 move.w  (a0,d0.w),d1
                 cmpi.w  #ICON_UNARMED,d1
                 bne.s   @WriteItemName
-                move.w  #ITEM_NOTHING,((word_FFB18C-$1000000)).w
+                move.w  #ITEM_NOTHING,((TEMP_ITEM_OR_SPELL-$1000000)).w
                 move.w  windowSlot(a6),d0
                 move.w  #MENU_ITEM_NOTHING_STRING_COORDS,d1
                 jsr     (GetWindowTileAddress).w
@@ -875,7 +877,7 @@ BuildItemMenu:
                 bra.s   @Return
 @WriteItemName:
                 
-                move.w  d1,((word_FFB18C-$1000000)).w
+                move.w  d1,((TEMP_ITEM_OR_SPELL-$1000000)).w
                 move.w  d1,-(sp)
                 jsr     j_FindItemName
                 move.w  windowSlot(a6),d0
@@ -906,44 +908,43 @@ aNothing:       dc.b '\Nothing',0
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to menu choice
-; 
 ; In: d6.w = frame counter
 
 
-sub_107EA:
+DmaSelectedIcon:
                 
                 andi.w  #3,d0
                 add.w   d0,d0
-                move.w  rjt_107F8(pc,d0.w),d0
-                jmp     rjt_107F8(pc,d0.w)
+                move.w  rjt_DmaSelectedIconFunctions(pc,d0.w),d0
+                jmp     rjt_DmaSelectedIconFunctions(pc,d0.w)
 
-    ; End of function sub_107EA
+    ; End of function DmaSelectedIcon
 
-rjt_107F8:      dc.w sub_10800-rjt_107F8
-                dc.w sub_10820-rjt_107F8
-                dc.w sub_1084A-rjt_107F8
-                dc.w sub_10920-rjt_107F8
+rjt_DmaSelectedIconFunctions:
+                dc.w dmaSelectedIcon_Up-rjt_DmaSelectedIconFunctions
+                dc.w dmaSelectedIcon_Left-rjt_DmaSelectedIconFunctions
+                dc.w dmaSelectedIcon_Right-rjt_DmaSelectedIconFunctions
+                dc.w dmaSelectedIcon_Down-rjt_DmaSelectedIconFunctions
 
 ; =============== S U B R O U T I N E =======================================
 
 ; In: d6.w = frame counter
 
 
-sub_10800:
+dmaSelectedIcon_Up:
                 
                 lea     (FF8804_LOADING_SPACE).l,a0
                 cmpi.w  #15,d6
-                blt.s   loc_10810
-                adda.w  #$C0,a0 
-loc_10810:
+                blt.s   @Continue
+                adda.w  #ICON_TILE_BYTESIZE,a0
+@Continue:
                 
                 lea     ($B800).l,a1
-                move.w  #$60,d0 
+                move.w  #96,d0
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function sub_10800
+    ; End of function dmaSelectedIcon_Up
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -951,22 +952,22 @@ loc_10810:
 ; In: d6.w = frame counter
 
 
-sub_10820:
+dmaSelectedIcon_Left:
                 
-                lea     (byte_FF8984).l,a0
+                lea     (FF8984_LOADING_SPACE).l,a0
                 cmpi.w  #15,d6
-                blt.s   loc_10830
-                adda.w  #$C0,a0 
-loc_10830:
+                blt.s   @Continue
+                adda.w  #ICON_TILE_BYTESIZE,a0
+@Continue:
                 
-                lea     (byte_FF8E04).l,a1
+                lea     (FF8E04_LOADING_SPACE).l,a1
                 bsr.w   sub_10874
                 lea     ($B8C0).l,a1
                 move.w  #$80,d0 
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function sub_10820
+    ; End of function dmaSelectedIcon_Left
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -974,22 +975,22 @@ loc_10830:
 ; In: d6.w = frame counter
 
 
-sub_1084A:
+dmaSelectedIcon_Right:
                 
-                lea     (byte_FF8B04).l,a0
+                lea     (FF8B04_LOADING_SPACE).l,a0
                 cmpi.w  #15,d6
-                blt.s   loc_1085A
-                adda.w  #$C0,a0 
-loc_1085A:
+                blt.s   @Continue
+                adda.w  #ICON_TILE_BYTESIZE,a0
+@Continue:
                 
-                lea     (byte_FF8F04).l,a1
+                lea     (FF8F04_LOADING_SPACE).l,a1
                 bsr.w   sub_108CA
                 lea     ($BA80).l,a1
                 move.w  #$80,d0 
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function sub_1084A
+    ; End of function dmaSelectedIcon_Right
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -999,7 +1000,7 @@ sub_10874:
                 
                 move.l  a1,-(sp)
                 move.l  a0,-(sp)
-                lea     MenuHBarTiles1(pc), a0
+                lea     tiles_DiamondMenuBorder1(pc), a0
                 moveq   #3,d7
 loc_1087E:
                 
@@ -1020,7 +1021,7 @@ loc_1088E:
                 move.l  (a0)+,$3C(a1)
                 adda.w  #$20,a1 
                 dbf     d7,loc_1088E
-                lea     MenuHBarTiles2(pc), a0
+                lea     tiles_DiamondMenuBorder2(pc), a0
                 moveq   #3,d7
 loc_108BA:
                 
@@ -1040,7 +1041,7 @@ sub_108CA:
                 
                 move.l  a1,-(sp)
                 move.l  a0,-(sp)
-                lea     MenuHBarTiles3(pc), a0
+                lea     tiles_DiamondMenuBorder3(pc), a0
                 moveq   #3,d7
 loc_108D4:
                 
@@ -1061,7 +1062,7 @@ loc_108E4:
                 move.l  (a0)+,$3C(a1)
                 adda.w  #$20,a1 
                 dbf     d7,loc_108E4
-                lea     MenuHBarTiles4(pc), a0
+                lea     tiles_DiamondMenuBorder4(pc), a0
                 moveq   #3,d7
 loc_10910:
                 
@@ -1079,523 +1080,18 @@ loc_10910:
 ; In: d6.w = frame counter
 
 
-sub_10920:
+dmaSelectedIcon_Down:
                 
-                lea     (byte_FF8C84).l,a0
+                lea     (FF8C84_LOADING_SPACE).l,a0
                 cmpi.w  #15,d6
-                blt.s   loc_10930
-                adda.w  #$C0,a0 
-loc_10930:
+                blt.s   @Continue
+                adda.w  #ICON_TILE_BYTESIZE,a0
+@Continue:
                 
                 lea     ($B9C0).l,a1
-                move.w  #$60,d0 
+                move.w  #96,d0
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
-    ; End of function sub_10920
-
-
-; =============== S U B R O U T I N E =======================================
-
-; Copy spell icon to RAM
-; 
-;       In: A1 = destination in RAM
-;           D0 = spell index
-; 
-;       Out: A1 = end of affected section after copy
-
-
-LoadHighlightableSpellIcon:
-                
-                andi.w  #SPELLENTRY_MASK_INDEX,d0
-                cmpi.w  #SPELL_NOTHING,d0
-                bne.s   @GetSpellIcon
-                move.w  #ICON_NOTHING,d0
-                bra.s   @Continue
-@GetSpellIcon:
-                
-                addi.w  #ICON_SPELLS_START,d0
-@Continue:
-                
-                bra.w   LoadHighlightableIcon
-
-    ; End of function LoadHighlightableSpellIcon
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-LoadHighlightableItemIcon:
-                
-                cmpi.w  #ICON_UNARMED,d0
-                beq.s   LoadHighlightableIcon
-                andi.w  #ITEMENTRY_MASK_INDEX,d0
-
-    ; End of function LoadHighlightableItemIcon
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-LoadHighlightableIcon:
-                
-                adda.w  #ICONTILES_BYTESIZE,a1
-                mulu.w  #ICONTILES_BYTESIZE,d0
-                movea.l (p_Icons).l,a0
-                adda.w  d0,a0           ; icon offset
-                move.w  #$2F,d1 
-                lea     IconHighlightTiles(pc), a2
-@Loop:
-                
-                move.l  (a0)+,d0
-                move.l  d0,-ICONTILES_BYTESIZE(a1)
-                and.l   (a2)+,d0
-                move.l  d0,(a1)+
-                dbf     d1,@Loop
-                
-                rts
-
-    ; End of function LoadHighlightableIcon
-
-IconHighlightTiles:
-                incbin "data/graphics/tech/iconhighlighttiles.bin"
-
-; =============== S U B R O U T I N E =======================================
-
-; In: A0 = special subroutine address to handle menu, default handling if not supplied
-;     D0 = initial choice (00=up, 01=left, 02=right, 03=down)
-;     D1 = animate-in direction (00=from bottom, other=from right)
-;     D2 = menu index to use (just affects icons and text)
-
-windowSlot = -12
-animationDirection = -10
-subroutineAddress = -8
-menuIndex = -4
-
-ExecuteMagicMenu:
-                
-                addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                link    a6,#65524
-                move.w  d2,menuIndex(a6)
-                move.l  a0,subroutineAddress(a6)
-                move.w  d1,animationDirection(a6)
-                move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
-                move.w  #$1206,d0
-                tst.w   d1
-                bne.s   loc_10A70
-                move.w  #$C1D,d1
-                bra.s   loc_10A74
-loc_10A70:
-                
-                move.w  #$2015,d1
-loc_10A74:
-                
-                jsr     (CreateWindow).w
-                move.w  d0,windowSlot(a6)
-                bsr.w   BuildMagicMenu
-                lea     (FF8804_LOADING_SPACE).l,a1
-                move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
-                bsr.w   LoadHighlightableSpellIcon
-                move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
-                bsr.w   LoadHighlightableSpellIcon
-                move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
-                bsr.w   LoadHighlightableSpellIcon
-                move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
-                bsr.w   LoadHighlightableSpellIcon
-                clr.w   d6
-                bsr.w   sub_10800       
-                bsr.w   sub_10820       
-                bsr.w   sub_1084A       
-                bsr.w   sub_10920       
-                move.w  windowSlot(a6),d0
-                move.w  #$C15,d1
-                move.w  #4,d2
-                jsr     (MoveWindowWithSfx).w
-                jsr     (WaitForWindowMovementEnd).w
-loc_10ACC:
-                
-                move.l  subroutineAddress(a6),d0
-                beq.s   loc_10AD6
-                movea.l d0,a0
-                jsr     (a0)
-loc_10AD6:
-                
-                moveq   #$1E,d6
-loc_10AD8:
-                
-                btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10AF2
-                moveq   #1,d1
-                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
-                beq.s   loc_10AF2
-                sndCom  SFX_MENU_SELECTION
-                bra.w   loc_10B76
-loc_10AF2:
-                
-                btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10B0C
-                moveq   #2,d1
-                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
-                beq.s   loc_10B0C
-                sndCom  SFX_MENU_SELECTION
-                bra.w   loc_10B76
-loc_10B0C:
-                
-                btst    #INPUT_BIT_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10B1E
-                clr.w   d1
-                sndCom  SFX_MENU_SELECTION
-                bra.w   loc_10B76
-loc_10B1E:
-                
-                btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10B38
-                moveq   #3,d1
-                cmpi.w  #SPELL_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
-                beq.s   loc_10B38
-                sndCom  SFX_MENU_SELECTION
-                bra.w   loc_10B76
-loc_10B38:
-                
-                btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10B4E
-                moveq   #$FFFFFFFF,d1
-                moveq   #$FFFFFFFF,d0
-                move.b  #$FF,((CURRENT_DIAMENU_CHOICE-$1000000)).w
-                bra.w   loc_10BEC
-loc_10B4E:
-                
-                btst    #INPUT_BIT_C,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10B62
-                clr.w   d1
-                clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                bra.w   loc_10BBC
-loc_10B62:
-                
-                btst    #INPUT_BIT_A,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10BA6
-                clr.w   d1
-                clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                bra.w   loc_10BBC
-loc_10B76:
-                
-                move.w  d1,-(sp)
-                clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                clr.w   d6
-                bsr.w   sub_10CB0       
-                move.w  (sp)+,d0
-                move.b  d0,((CURRENT_DIAMENU_CHOICE-$1000000)).w
-                bsr.w   BuildMagicMenu
-                move.w  windowSlot(a6),d0
-                move.w  #$8080,d1
-                jsr     (SetWindowDestination).w
-                move.l  subroutineAddress(a6),d0
-                beq.s   loc_10BA4
-                movea.l d0,a0
-                jsr     (a0)
-loc_10BA4:
-                
-                moveq   #$1D,d6
-loc_10BA6:
-                
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                bsr.w   sub_10CB0       
-                subq.w  #1,d6
-                bne.s   loc_10BB4
-                moveq   #$1E,d6
-loc_10BB4:
-                
-                jsr     (WaitForVInt).w
-                bra.w   loc_10AD8
-loc_10BBC:
-                
-                clr.w   d0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                add.w   d0,d0
-                lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
-                move.w  (a0,d0.w),d0
-                bsr.w   sub_10CC6       
-                cmpi.w  #$FFFF,d0
-                bne.w   loc_10BEC
-                bsr.w   BuildMagicMenu
-                move.w  windowSlot(a6),d0
-                move.w  #$8080,d1
-                jsr     (SetWindowDestination).w
-                bra.w   loc_10ACC
-loc_10BEC:
-                
-                movem.w d0-d1,-(sp)
-                move.w  windowSlot(a6),d0
-                tst.w   d1
-                beq.s   loc_10BFE
-                move.w  #$C1D,d1
-                bra.s   loc_10C02
-loc_10BFE:
-                
-                move.w  #$2015,d1
-loc_10C02:
-                
-                move.w  #4,d2
-                jsr     (MoveWindowWithSfx).w
-                jsr     (WaitForWindowMovementEnd).w
-                move.w  windowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
-                movem.w (sp)+,d0-d1
-                unlk    a6
-                subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                rts
-
-    ; End of function ExecuteMagicMenu
-
-
-; =============== S U B R O U T I N E =======================================
-
-windowSlot = -12
-animationDirection = -10
-subroutineAddress = -8
-menuIndex = -4
-
-BuildMagicMenu:
-                
-                lea     MagicMenuLayout(pc), a0
-                move.w  windowSlot(a6),d0
-                clr.w   d1
-                jsr     (GetWindowTileAddress).w
-                move.w  #MENU_MAGIC_LAYOUT_BYTESIZE,d7
-                jsr     (CopyBytes).w   
-                lsl.w   #1,d0
-                lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
-                move.b  ((CURRENT_DIAMENU_CHOICE-$1000000)).w,d0
-                andi.w  #3,d0
-                lsl.w   #1,d0
-                move.w  (a0,d0.w),d1
-                move.w  d1,((word_FFB18C-$1000000)).w
-                move.w  d1,-(sp)
-                jsr     j_FindSpellName
-                move.w  windowSlot(a6),d0
-                move.w  #MENU_MAGIC_SPELL_NAME_COORDS,d1
-                jsr     (GetWindowTileAddress).w
-                moveq   #-36,d1
-                bsr.w   WriteTilesFromAsciiWithRegularFont
-                move.w  windowSlot(a6),d0
-                move.w  #MENU_MAGIC_SPELL_LEVEL_TILES_COORDS,d1
-                jsr     (GetWindowTileAddress).w
-                move.w  (sp)+,d1
-                move.w  d1,-(sp)
-                lea     SpellLevelTilesLayout1(pc), a0
-                andi.w  #$C0,d1 
-                move.w  d1,d2
-                add.w   d1,d1
-                add.w   d2,d1
-                lsr.w   #4,d1
-                adda.w  d1,a0
-                moveq   #12,d7
-                jsr     (CopyBytes).w   
-                move.w  windowSlot(a6),d0
-                move.w  #MENU_MAGIC_MP_COST_COORDS,d1
-                jsr     (GetWindowTileAddress).w
-                move.w  (sp)+,d1
-                jsr     j_GetSpellCost
-                move.w  d1,d0
-                moveq   #3,d7
-                bsr.w   WriteTilesFromNumber
-                rts
-
-    ; End of function BuildMagicMenu
-
-
-; =============== S U B R O U T I N E =======================================
-
-; related to menu choice
-
-
-sub_10CB0:
-                
-                andi.w  #3,d0
-                add.w   d0,d0
-                move.w  rjt_10CBE(pc,d0.w),d0
-                jmp     rjt_10CBE(pc,d0.w)
-
-    ; End of function sub_10CB0
-
-rjt_10CBE:      dc.w (sub_10800-rjt_10CBE) & $FFFF
-                dc.w (sub_10820-rjt_10CBE) & $FFFF
-                dc.w (sub_1084A-rjt_10CBE) & $FFFF
-                dc.w (sub_10920-rjt_10CBE) & $FFFF
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D0 = displayed spell icon
-
-
-sub_10CC6:
-                
-                 
-                sndCom  SFX_VALIDATION
-                move.w  d0,-(sp)
-                lea     TextHighlightTiles(pc), a0
-                lea     ($BC00).l,a1
-                move.w  #$A0,d0 
-                moveq   #2,d1
-                jsr     (ApplyVIntVramDma).w
-                jsr     (WaitForDmaQueueProcessing).w
-                move.w  (sp)+,d0
-                move.w  d0,d4
-                lsr.w   #SPELLENTRY_OFFSET_LV,d4
-                move.w  d4,d5
-                andi.w  #SPELLENTRY_MASK_INDEX,d0
-                jsr     (WaitForVInt).w
-loc_10CF4:
-                
-                btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10D0A
-                subq.w  #1,d5
-                cmpi.w  #$FFFF,d5
-                bne.s   loc_10D06
-                move.w  d4,d5
-loc_10D06:
-                
-                bra.w   sub_10D56
-loc_10D0A:
-                
-                btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10D1E
-                addq.w  #1,d5
-                cmp.w   d4,d5
-                ble.s   loc_10D1A
-                clr.w   d5
-loc_10D1A:
-                
-                bra.w   sub_10D56
-loc_10D1E:
-                
-                btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10D32
-                moveq   #$FFFFFFFF,d0
-                jsr     (WaitForVInt).w
-                sndCom  SFX_VALIDATION
-                rts
-loc_10D32:
-                
-                btst    #INPUT_BIT_A,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.s   loc_10D3E
-                bra.w   byte_10D48
-loc_10D3E:
-                
-                btst    #INPUT_BIT_C,((CURRENT_PLAYER_INPUT-$1000000)).w
-                beq.w   loc_10DC0
-byte_10D48:
-                
-                sndCom  SFX_VALIDATION
-                lsl.w   #6,d5
-                or.w    d5,d0
-                jsr     (WaitForVInt).w
-                rts
-
-    ; End of function sub_10CC6
-
-
-; =============== S U B R O U T I N E =======================================
-
-windowSlot = -12
-animationDirection = -10
-subroutineAddress = -8
-menuIndex = -4
-
-sub_10D56:
-                
-                 
-                sndCom  SFX_MENU_SELECTION
-                movem.w d0-d5,-(sp)
-                lsl.w   #2,d4
-                add.w   d5,d4
-                lsl.w   #2,d4
-                lea     pt_SpellLevelTilesLayouts(pc), a0
-                nop
-                movea.l (a0,d4.w),a0
-                move.w  d0,-(sp)
-                move.w  windowSlot(a6),d0
-                move.w  #MENU_MAGIC_SPELL_LEVEL_TILES_COORDS,d1
-                jsr     (GetWindowTileAddress).w
-                move.w  #12,d7
-                jsr     (CopyBytes).w   
-                move.w  (sp)+,d1
-                lsl.w   #6,d5
-                andi.w  #SPELLENTRY_MASK_INDEX,d1
-                or.w    d5,d1
-                move.w  d1,((word_FFB18C-$1000000)).w
-                jsr     j_GetSpellCost
-                move.w  d1,d0
-                moveq   #3,d7
-                adda.w  #MENU_MAGIC_OFFSET_MP_COST,a1
-                bsr.w   WriteTilesFromNumber
-                move.l  subroutineAddress(a6),d0
-                beq.s   loc_10DAE
-                movea.l d0,a0
-                jsr     (a0)
-loc_10DAE:
-                
-                move.w  windowSlot(a6),d0
-                move.w  #$8080,d1
-                jsr     (SetWindowDestination).w
-                movem.w (sp)+,d0-d5
-                moveq   #$13,d6
-loc_10DC0:
-                
-                bsr.w   sub_10DE2
-                jsr     (WaitForVInt).w
-                subq.w  #1,d6
-                bne.s   loc_10DCE
-                moveq   #$14,d6
-loc_10DCE:
-                
-                bra.w   loc_10CF4
-
-    ; End of function sub_10D56
-
-spr_SpellLevelHighlight:
-                
-; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
-;
-;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
-;
-;      palette: PALETTE1 = 0 (default when omitted)
-;               PALETTE2 = $2000
-;               PALETTE3 = $4000
-;               PALETTE4 = $6000
-;
-; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
-                
-                vdpSprite 316, V2|H4|9, 1504|PALETTE3|PRIORITY, 292
-                vdpSprite 316, V2|H4|16, 1504|MIRROR|PALETTE3|PRIORITY, 316
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_10DE2:
-                
-                lea     (SPRITE_08).l,a1
-                lea     spr_SpellLevelHighlight(pc), a0
-                move.l  (a0)+,(a1)+
-                move.l  (a0)+,(a1)+
-                move.l  (a0)+,(a1)+
-                move.l  (a0)+,(a1)+
-                cmpi.w  #$A,d6
-                bge.s   loc_10E06
-                move.w  #1,-$10(a1)
-                move.w  #1,-8(a1)
-loc_10E06:
-                
-                tst.b   ((HIDE_WINDOWS-$1000000)).w
-                beq.s   loc_10E18
-                move.w  #1,-$10(a1)
-                move.w  #1,-8(a1)
-loc_10E18:
-                
-                bra.w   sub_101E6
-
-    ; End of function sub_10DE2
+    ; End of function dmaSelectedIcon_Down
 

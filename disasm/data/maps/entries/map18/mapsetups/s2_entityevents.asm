@@ -15,7 +15,7 @@ Map18_EntityEvent0:
                 
                  
                 txt     870             ; "Why, you're wearing a{N}beautiful jewel!  Wow!{N}Give it to me!{W1}"
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 clsTxt
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 clr.w   ((SPEECH_SFX-$1000000)).w

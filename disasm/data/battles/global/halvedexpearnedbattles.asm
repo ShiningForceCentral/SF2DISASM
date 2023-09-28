@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\global\halvedexpearnedbattles.asm :
 ; 0xA870..0xA872 : Halved EXP earned battles table
-tbl_HalvedExpEarnedBattles:
+table_HalvedExpEarnedBattles:
                 
 ; Syntax        battle [BATTLE_]enum (or index)
                 

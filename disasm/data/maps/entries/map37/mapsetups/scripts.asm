@@ -212,7 +212,7 @@ sub_5FD92:
                 moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_1_BASE).l,a0
-                jsr     (sub_19C8).w    
+                jsr     (UpdateBasePalettesAndBackupCurrent).w
                 rts
 
     ; End of function sub_5FD92

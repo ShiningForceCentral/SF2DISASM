@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\menus\diamondmenulayout.asm :
 ; 0x10E1C..0x10EF4 : Diamond menu layout
-DiamondMenuLayout:
+layout_DiamondMenu:
                 
 ; Syntax        vdpTile [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
 ;
@@ -15,9 +15,9 @@ DiamondMenuLayout:
                 vdpTile                 ; tile layout for diamond menus
                 vdpTile 
                 vdpTile 
-                vdpTile MENU1|PALETTE3|PRIORITY
-                vdpTile MENU2|PALETTE3|PRIORITY
-                vdpTile MENU3|PALETTE3|PRIORITY
+                vdpTile MENUTILE1|PALETTE3|PRIORITY
+                vdpTile MENUTILE2|PALETTE3|PRIORITY
+                vdpTile MENUTILE3|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile 
                 vdpTile 
@@ -30,15 +30,15 @@ DiamondMenuLayout:
                 vdpTile 
                 vdpTile 
                 vdpTile 
-                vdpTile MENU10|PALETTE3|PRIORITY
-                vdpTile MENU11|PALETTE3|PRIORITY
-                vdpTile MENU12|PALETTE3|PRIORITY
-                vdpTile MENU4|PALETTE3|PRIORITY
-                vdpTile MENU5|PALETTE3|PRIORITY
-                vdpTile MENU6|PALETTE3|PRIORITY
-                vdpTile MENU22|PALETTE3|PRIORITY
-                vdpTile MENU23|PALETTE3|PRIORITY
-                vdpTile MENU24|PALETTE3|PRIORITY
+                vdpTile MENUTILE10|PALETTE3|PRIORITY
+                vdpTile MENUTILE11|PALETTE3|PRIORITY
+                vdpTile MENUTILE12|PALETTE3|PRIORITY
+                vdpTile MENUTILE4|PALETTE3|PRIORITY
+                vdpTile MENUTILE5|PALETTE3|PRIORITY
+                vdpTile MENUTILE6|PALETTE3|PRIORITY
+                vdpTile MENUTILE22|PALETTE3|PRIORITY
+                vdpTile MENUTILE23|PALETTE3|PRIORITY
+                vdpTile MENUTILE24|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile 
                 vdpTile 
@@ -48,15 +48,15 @@ DiamondMenuLayout:
                 vdpTile 
                 vdpTile 
                 vdpTile 
-                vdpTile MENU13|PALETTE3|PRIORITY
-                vdpTile MENU14|PALETTE3|PRIORITY
-                vdpTile MENU15|PALETTE3|PRIORITY
-                vdpTile MENU7|PALETTE3|PRIORITY
-                vdpTile MENU8|PALETTE3|PRIORITY
-                vdpTile MENU9|PALETTE3|PRIORITY
-                vdpTile MENU25|PALETTE3|PRIORITY
-                vdpTile MENU26|PALETTE3|PRIORITY
-                vdpTile MENU27|PALETTE3|PRIORITY
+                vdpTile MENUTILE13|PALETTE3|PRIORITY
+                vdpTile MENUTILE14|PALETTE3|PRIORITY
+                vdpTile MENUTILE15|PALETTE3|PRIORITY
+                vdpTile MENUTILE7|PALETTE3|PRIORITY
+                vdpTile MENUTILE8|PALETTE3|PRIORITY
+                vdpTile MENUTILE9|PALETTE3|PRIORITY
+                vdpTile MENUTILE25|PALETTE3|PRIORITY
+                vdpTile MENUTILE26|PALETTE3|PRIORITY
+                vdpTile MENUTILE27|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile 
                 vdpTile 
@@ -66,15 +66,15 @@ DiamondMenuLayout:
                 vdpTile 
                 vdpTile 
                 vdpTile 
-                vdpTile MENU16|PALETTE3|PRIORITY
-                vdpTile MENU17|PALETTE3|PRIORITY
-                vdpTile MENU18|PALETTE3|PRIORITY
-                vdpTile MENU34|PALETTE3|PRIORITY
-                vdpTile MENU35|PALETTE3|PRIORITY
-                vdpTile MENU36|PALETTE3|PRIORITY
-                vdpTile MENU28|PALETTE3|PRIORITY
-                vdpTile MENU29|PALETTE3|PRIORITY
-                vdpTile MENU30|PALETTE3|PRIORITY
+                vdpTile MENUTILE16|PALETTE3|PRIORITY
+                vdpTile MENUTILE17|PALETTE3|PRIORITY
+                vdpTile MENUTILE18|PALETTE3|PRIORITY
+                vdpTile MENUTILE34|PALETTE3|PRIORITY
+                vdpTile MENUTILE35|PALETTE3|PRIORITY
+                vdpTile MENUTILE36|PALETTE3|PRIORITY
+                vdpTile MENUTILE28|PALETTE3|PRIORITY
+                vdpTile MENUTILE29|PALETTE3|PRIORITY
+                vdpTile MENUTILE30|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile CORNER|PALETTE3|PRIORITY
                 vdpTile H_BORDER|PALETTE3|PRIORITY
@@ -84,15 +84,15 @@ DiamondMenuLayout:
                 vdpTile H_BORDER|PALETTE3|PRIORITY
                 vdpTile H_BORDER|PALETTE3|PRIORITY
                 vdpTile CORNER|MIRROR|PALETTE3|PRIORITY
-                vdpTile MENU19|PALETTE3|PRIORITY
-                vdpTile MENU20|PALETTE3|PRIORITY
-                vdpTile MENU21|PALETTE3|PRIORITY
-                vdpTile MENU37|PALETTE3|PRIORITY
-                vdpTile MENU38|PALETTE3|PRIORITY
-                vdpTile MENU39|PALETTE3|PRIORITY
-                vdpTile MENU31|PALETTE3|PRIORITY
-                vdpTile MENU32|PALETTE3|PRIORITY
-                vdpTile MENU33|PALETTE3|PRIORITY
+                vdpTile MENUTILE19|PALETTE3|PRIORITY
+                vdpTile MENUTILE20|PALETTE3|PRIORITY
+                vdpTile MENUTILE21|PALETTE3|PRIORITY
+                vdpTile MENUTILE37|PALETTE3|PRIORITY
+                vdpTile MENUTILE38|PALETTE3|PRIORITY
+                vdpTile MENUTILE39|PALETTE3|PRIORITY
+                vdpTile MENUTILE31|PALETTE3|PRIORITY
+                vdpTile MENUTILE32|PALETTE3|PRIORITY
+                vdpTile MENUTILE33|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile V_BORDER|PALETTE3|PRIORITY
                 vdpTile SPACE|PALETTE3|PRIORITY
@@ -105,9 +105,9 @@ DiamondMenuLayout:
                 vdpTile 
                 vdpTile 
                 vdpTile 
-                vdpTile MENU40|PALETTE3|PRIORITY
-                vdpTile MENU41|PALETTE3|PRIORITY
-                vdpTile MENU42|PALETTE3|PRIORITY
+                vdpTile MENUTILE40|PALETTE3|PRIORITY
+                vdpTile MENUTILE41|PALETTE3|PRIORITY
+                vdpTile MENUTILE42|PALETTE3|PRIORITY
                 vdpTile 
                 vdpTile 
                 vdpTile 

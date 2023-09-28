@@ -222,8 +222,6 @@ j_DetermineBattleUpgrade:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Battle-related
-
 
 sub_1AC054:
                 

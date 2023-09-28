@@ -332,7 +332,7 @@ loc_55F06:
                 moveq   #0,d1
                 move.w  (a0),d1
                 andi.w  #$E00,d1
-                lsr.w   #8,d1
+                lsr.w   #BYTE_SHIFT_COUNT,d1
                 lsr.w   #1,d1
                 move.w  (a0),d2
                 andi.w  #$E,d2
@@ -358,8 +358,8 @@ loc_55F34:
                 move.b  $10(a2,d1.w),d1
                 ext.w   d1
                 clr.w   d4
-                lsl.w   #8,d1
-                lsl.w   #4,d3
+                lsl.w   #BYTE_SHIFT_COUNT,d1
+                lsl.w   #NIBBLE_SHIFT_COUNT,d3
                 or.w    d1,d4
                 or.w    d2,d4
                 or.w    d3,d4
@@ -367,7 +367,7 @@ loc_55F34:
                 dbf     d0,loc_55F06
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
                 lea     (PALETTE_1_BASE).l,a0
-                jmp     (sub_19C8).w    
+                jmp     (UpdateBasePalettesAndBackupCurrent).w
 
     ; End of function csub_55EF4
 
@@ -391,7 +391,7 @@ sub_55F82:
                 
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
                 lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
-                jmp     (sub_19C8).w    
+                jmp     (UpdateBasePalettesAndBackupCurrent).w
 
     ; End of function sub_55F82
 

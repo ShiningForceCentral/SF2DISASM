@@ -26,7 +26,7 @@ DetermineHealingSpellLevel:
                 move.w  d1,d2
                 jsr     GetMaxHp
                 sub.w   d2,d1           ; d1 = max HP - current HP
-                moveq   #$FFFFFFFF,d2
+                moveq   #-1,d2
                 cmpi.w  #ENEMYAI_THRESHOLD_HEAL1,d1 ; 2
                 bls.w   loc_CDDC        
                 moveq   #0,d2

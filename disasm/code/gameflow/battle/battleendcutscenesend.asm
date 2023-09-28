@@ -8,7 +8,7 @@ loc_47C48:
                 
                 clr.w   d0
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d0
-                move.b  tbl_EnemyLeaderPresence(pc,d0.w),d0
+                move.b  table_EnemyLeaderPresentFlags(pc,d0.w),d0
                 tst.b   d0
                 beq.s   loc_47C88
                 move.w  #COMBATANT_ENEMIES_START,d0

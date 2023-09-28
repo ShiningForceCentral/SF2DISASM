@@ -11,9 +11,10 @@ Trap5_TextBox:
                 movea.l $3E(sp),a6
                 addq.l  #2,$3E(sp)
                 move.w  (a6)+,d0
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 bne.s   loc_570
-                bsr.w   HideTextBox
+                
+                bsr.w   CloseDialogueWindow
                 bra.s   loc_574
 loc_570:
                 

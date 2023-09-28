@@ -32,16 +32,16 @@ ReceiveMandatoryItem:
                 moveq   #1,d0
                 tst.w   d5
                 beq.w   @Done
-                move.w  d4,(TEXT_NAME_INDEX_1).l
+                move.w  d4,(DIALOGUE_NAME_INDEX_1).l
                 txt     214             ; "Found the {ITEM}, but{N}can't carry it.{N}You must discard something.{W1}"
                 clsTxt
                 movem.w d4,-(sp)
                 bsr.w   DiscardItem     
                 movem.w (sp)+,d1
-                move.w  d0,(TEXT_NAME_INDEX_1).l
-                move.w  d2,(TEXT_NAME_INDEX_2).l
+                move.w  d0,(DIALOGUE_NAME_INDEX_1).l
+                move.w  d2,(DIALOGUE_NAME_INDEX_2).l
                 jsr     j_AddItem
-                move.w  d1,(TEXT_NAME_INDEX_3).l
+                move.w  d1,(DIALOGUE_NAME_INDEX_3).l
                 sndCom  MUSIC_ITEM
                 txt     215             ; "{NAME} discarded{N}the {ITEM} and{N}picked up the {ITEM}."
                 jsr     j_FadeOut_WaitForP1Input
@@ -53,8 +53,8 @@ ReceiveMandatoryItem:
                 
                 move.w  d4,d1
                 jsr     j_AddItem
-                move.w  d0,(TEXT_NAME_INDEX_1).l
-                move.w  d1,(TEXT_NAME_INDEX_2).l
+                move.w  d0,(DIALOGUE_NAME_INDEX_1).l
+                move.w  d1,(DIALOGUE_NAME_INDEX_2).l
                 sndCom  MUSIC_ITEM
                 txt     213             ; "{NAME} received the{N}{ITEM}."
                 jsr     j_FadeOut_WaitForP1Input
@@ -100,7 +100,7 @@ RemoveItemFromInventory:
 itemTypeBitfield = -10
 itemSlot = -6
 itemEntry = -4
-character = -2
+member = -2
 
 DiscardItem:
                 
@@ -119,13 +119,13 @@ loc_4F596:
 loc_4F59C:
                 
                 move.b  #1,(byte_FFB13C).l
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
-                cmpi.w  #$FFFF,d0
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                cmpi.w  #-1,d0
                 bne.w   loc_4F5B6
                 bra.w   loc_4F6CA
 loc_4F5B6:
                 
-                move.w  d0,character(a6)
+                move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemEntry(a6)
                 move.w  itemEntry(a6),d1
@@ -135,14 +135,14 @@ loc_4F5B6:
                 andi.b  #ITEMTYPE_UNSELLABLE,d1
                 cmpi.b  #0,d1
                 beq.s   loc_4F5F0
-                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     37              ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
                 bra.w   loc_4F6CA
 loc_4F5F0:
                 
-                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 clsTxt
                 cmpi.w  #0,d0
                 beq.w   loc_4F610
@@ -151,18 +151,19 @@ loc_4F610:
                 
                 move.w  itemEntry(a6),d1
                 jsr     j_GetEquipmentType
-                cmpi.w  #1,d2
+                cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
                 bne.s   loc_4F65C
-                move.w  character(a6),d0
+                move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   loc_4F69C
+                
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_4F69C
                 move.w  itemEntry(a6),d1
                 jsr     j_IsItemCursed
                 bcc.w   loc_4F69C
-                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
                 clsTxt
                 bra.w   loc_4F6CA
@@ -170,24 +171,25 @@ loc_4F65C:
                 
                 cmpi.w  #0,d2
                 beq.w   loc_4F69C
-                move.w  character(a6),d0
+                move.w  member(a6),d0
                 jsr     j_GetEquippedRing
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   loc_4F69C
+                
                 cmp.w   itemSlot(a6),d2
                 bne.w   loc_4F69C
                 move.w  itemEntry(a6),d1
                 jsr     j_IsItemCursed
                 bcc.w   loc_4F69C
-                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
                 bra.w   loc_4F6CA
 loc_4F69C:
                 
-                move.w  character(a6),d0
+                move.w  member(a6),d0
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  itemEntry(a6),(TEXT_NAME_INDEX_1).l
+                move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_RARE,d1
                 cmpi.b  #0,d1
@@ -199,7 +201,7 @@ loc_4F6CA:
                 bra.w   loc_4F59C
 loc_4F6CE:
                 
-                move.w  character(a6),d0
+                move.w  member(a6),d0
                 move.w  itemSlot(a6),d1
                 move.w  itemEntry(a6),d2
                 unlk    a6

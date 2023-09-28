@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\battleconfigwindowlayout.asm :
 ; 0x15A5A..0x15BB0 : Battle config window layout
-BattleConfigWindowLayout:
+layout_BattlefieldSettingsWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;

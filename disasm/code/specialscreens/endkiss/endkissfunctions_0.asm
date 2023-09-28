@@ -5,14 +5,14 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-EndKissPictureSequence:
+DisplayEndingKissPicture:
                 
-                movea.l (p_EndKissPicture).l,a0
+                movea.l (p_tiles_EndingKiss).l,a0
                 lea     (FF6802_LOADING_SPACE).l,a1
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     ($C800).l,a1
-                bsr.w   DisplayEndingKissWithPixelFilling
+                bsr.w   DrawEndingKissPictureWithPixelFilling
                 move.w  #360,d0
                 jsr     (Sleep).w       ; wait for 6 seconds
                 lea     (PALETTE_1_BASE).l,a0
@@ -21,10 +21,11 @@ loc_2C5A6:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_2C5A6
+                
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   (FADING_TIMER_BYTE).l
-                jsr     (sub_19C8).w    
-                move.w  #870,d0         ; wait for 14 seconds
+                jsr     (UpdateBasePalettesAndBackupCurrent).w
+                move.w  #870,d0         ; wait for 14.5 seconds
                 jsr     (Sleep).w       
                 lea     (PALETTE_1_BASE).l,a0
                 moveq   #$1F,d7
@@ -32,12 +33,13 @@ loc_2C5CC:
                 
                 clr.l   (a0)+
                 dbf     d7,loc_2C5CC
+                
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   (FADING_TIMER_BYTE).l
-                jsr     (sub_19C8).w    
+                jsr     (UpdateBasePalettesAndBackupCurrent).w
                 rts
 
-    ; End of function EndKissPictureSequence
+    ; End of function DisplayEndingKissPicture
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -70,7 +72,7 @@ loc_2C61C:
                 dbf     d7,loc_2C61C
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   (FADING_TIMER_BYTE).l
-                jsr     (sub_19C8).w    
+                jsr     (UpdateBasePalettesAndBackupCurrent).w
                 movem.l (sp)+,d0-a3
                 rts
 
@@ -80,7 +82,7 @@ loc_2C61C:
 ; =============== S U B R O U T I N E =======================================
 
 
-DisplayEndingKissWithPixelFilling:
+DrawEndingKissPictureWithPixelFilling:
                 
                 move.w  #$BFF,d7
                 lea     (FF0000_RAM_START).l,a2
@@ -89,7 +91,7 @@ loc_2C64C:
                 clr.l   (a2)+
                 dbf     d7,loc_2C64C
                 lea     (FF0000_RAM_START).l,a2
-                lea     byte_2C6FC(pc), a3
+                lea     table_EndingKissPixelFillingData(pc), a3
                 moveq   #$3F,d7 
 loc_2C65E:
                 
@@ -114,13 +116,13 @@ loc_2C664:
                 move.b  (a0,d0.w),d2
                 btst    #0,d1
                 bne.s   loc_2C69A
-                andi.b  #$F0,d2
-                andi.b  #$F,(a2,d0.w)
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d2
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,(a2,d0.w)
                 bra.s   loc_2C6A4
 loc_2C69A:
                 
-                andi.b  #$F,d2
-                andi.b  #$F0,(a2,d0.w)
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,(a2,d0.w)
 loc_2C6A4:
                 
                 or.b    d2,(a2,d0.w)
@@ -135,7 +137,7 @@ loc_2C6A4:
                 movem.l (sp)+,d0-a3
                 movem.l d0-a3,-(sp)
                 lea     $C00(a1),a1
-                lea     (byte_FF0C00).l,a0
+                lea     (ENDING_KISS_PICTURE_LOADING_SPACE).l,a0
                 move.w  #$600,d0
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
@@ -149,9 +151,10 @@ loc_2C6F6:
                 dbf     d7,loc_2C65E
                 rts
 
-    ; End of function DisplayEndingKissWithPixelFilling
+    ; End of function DrawEndingKissPictureWithPixelFilling
 
-byte_2C6FC:     dc.b $13                ; Pixel appearance parameters for end kiss picture
+table_EndingKissPixelFillingData:
+                dc.b $13                ; Pixel appearance parameters for end kiss picture
                 dc.b 9
                 dc.b $1D
                 dc.b $33

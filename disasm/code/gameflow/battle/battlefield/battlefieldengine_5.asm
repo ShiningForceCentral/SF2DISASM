@@ -130,6 +130,8 @@ IsCombatantAtLessThanHalfHp:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 sub_D2D2:
                 
@@ -148,11 +150,10 @@ sub_D2D2:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = defender index
-;     D1 = defenders theoretical remaining HP after attack
-; 
 ; Set the carry flag if less than 2/3rds of defenders remaining HP
-;  is expected to be taken by the attack.
+;   is expected to be taken by the attack.
+; 
+;   In: d0.w = defender index, d1.w = defenders theoretical remaining HP after attack
 
 
 sub_D2F8:

@@ -16,7 +16,7 @@ Map63_ItemEvent0:
                 moveq   #$75,d0 ; Golem Arm
                 jsr     RemoveItemFromInventory
                 script  cs_5CBB4
-                move.w  #$FFFF,d6
+                move.w  #-1,d6
                 bra.s   Map63_DefaultItemEvent1
 loc_5CA4C:
                 

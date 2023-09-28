@@ -18,7 +18,7 @@ Map22_ItemEvent0:
 byte_59624:
                 
                 script  cs_599B2
-                moveq   #$FFFFFFFF,d6
+                moveq   #-1,d6
 Map22_DefaultItemEvent1:
                 
                 rts

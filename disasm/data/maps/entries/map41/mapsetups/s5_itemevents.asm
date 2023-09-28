@@ -31,7 +31,7 @@ Map41_ItemEvent0:
                 setFlg  71              ; Lemon is a follower
 loc_5F49A:
                 
-                move.w  #$FFFF,d6
+                move.w  #-1,d6
 return_5F49E:
                 
                 rts

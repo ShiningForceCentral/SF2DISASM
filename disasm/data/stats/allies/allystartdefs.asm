@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\allystartdefs.asm :
 ; 0x1EE7D0..0x1EE890 : Ally start definitions
-tbl_AllyStartDefs:
+table_AllyStartDefinitions:
                 
 ; Syntax        startClass [CLASS_]enum
 ;               startLevel 1-255

@@ -7,37 +7,37 @@
 ; Get mapsprite index for combatant d0.w -> d4.w
 
 
-GetAllyMapSprite:
+GetAllyMapsprite:
                 
                 cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
-                blt.s   @CheckCurrentlyInBattle
+                blt.s   @IsCurrentlyInBattle
                 move.w  d0,d4
                 bra.w   @Return         ; return if combatant is not an ally
-@CheckCurrentlyInBattle:
+@IsCurrentlyInBattle:
                 
                 movem.w d1,-(sp)
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
-                bne.s   @CheckNpcSprite
+                bne.s   @IsNpcSprite
                 
                 ; Check if ally is alive
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                bne.s   @CheckNpcSprite
+                bne.s   @IsNpcSprite
                 move.w  #MAPSPRITE_BLUE_FLAME,d4
                 bra.w   @Done           ; return blue flame sprite if ally is not alive, and we're not currently in battle
-@CheckNpcSprite:
+@IsNpcSprite:
                 
                 cmpi.b  #ALLY_ROHDE,d0  ; Rhode !
-                bne.s   @GetMapSpriteForClass
+                bne.s   @GetMapspriteForClass
                 chkFlg  11              ; Rohde joined
-                bne.s   @GetMapSpriteForClass
+                bne.s   @GetMapspriteForClass
                 move.w  #MAPSPRITE_NPC_ROHDE,d4
                 bra.w   @Done           ; Rhode hasn't joined yet, so use his NPC sprite
-@GetMapSpriteForClass:
+@GetMapspriteForClass:
                 
                 move.w  d0,d4           ; start handling sprites based on class
                 andi.w  #ALLY_MASK_INDEX,d4
-                move.b  tbl_AllyMapSprites(pc,d4.w),d4
+                move.b  table_AllyMapsprites(pc,d4.w),d4
                 jsr     j_GetClass
                 cmpi.b  #CLASS_HERO,d1  ; HARDCODED class indexes
                 beq.w   @Done           ; if HERO, use index as is from the table
@@ -51,19 +51,19 @@ GetAllyMapSprite:
                                         ;     BDBT, WFBR, BWNT, PHNX, NINJ, MNST, RBT, GLM, RDBN
                 bge.w   @Done           ;     ...we're done
                 cmpi.b  #CLASS_BDMN,d1
-                blt.s   @CheckPromotedClass
+                blt.s   @IsPromoted     
                 cmpi.b  #CLASS_TORT,d1
-                bgt.s   @CheckPromotedClass
+                bgt.s   @IsPromoted     
                 subq.w  #1,d4           ; else if one of these:
                                         ;     BDMN, WFMN, RNGR, PHNK, THIF, TORT
                 bra.w   @Done           ;     ...subtract 1
-@CheckPromotedClass:
+@IsPromoted:
                 
                 cmpi.b  #CLASS_ACHR,d1  ; at this point, we're down to classes for which a special promotion exists
-                bgt.s   @CheckSpecialClass ; if class is listed above ACHR, they must be promoted
+                bgt.s   @IsSpecialClass ; if class is listed above ACHR, they must be promoted
                 subq.w  #2,d4
                 bra.w   @Done           ; else, subtract 2
-@CheckSpecialClass:
+@IsSpecialClass:
                 
                 btst    #0,d1
                 beq.s   @Done           ; if class index is even, it must be a special class, so we're done
@@ -76,5 +76,5 @@ GetAllyMapSprite:
                 
                 rts
 
-    ; End of function GetAllyMapSprite
+    ; End of function GetAllyMapsprite
 

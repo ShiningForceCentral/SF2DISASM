@@ -9,8 +9,8 @@ PlayIntroOrEndCutscene:
                 
                 move.w  d0,-(sp)
                 jsr     (InitializeWindowProperties).w
-                move.b  #$FF,((byte_FFB198-$1000000)).w
-                move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
+                move.b  #-1,((MOUTH_CONTROL_TOGGLE-$1000000)).w
+                move.b  #-1,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 trap    #VINT_FUNCTIONS
@@ -35,7 +35,7 @@ PlayIntroOrEndCutscene:
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateMapAnimations
                 move.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
-                jsr     (sub_4EC6).w    
+                jsr     (InitializeExplorationSpritesFrameCounter).w
                 move.w  (sp)+,d0
                 bne.s   byte_47F72
                 sndCom  MUSIC_INTRO

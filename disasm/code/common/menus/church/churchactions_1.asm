@@ -21,27 +21,27 @@ membersListLength = -10
 actionCost = -8
 currentGold = -4
 
-ChurchMenuActions:
+ChurchMenu:
                 
                 movem.l d0-a5,-(sp)
                 link    a6,#-36
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
                 blt.s   @txt_6E         
-                jsr     j_CreatePortraitWindow
+                jsr     j_OpenPortraitWindow
 @txt_6E:
                 
                 txt     110             ; "Welcome!{W2}{N}Your desire will be fulfilled!{W2}"
                 clsTxt
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
 @StartMenu:
                 
                 moveq   #0,d0           ; initial choice : up
                 moveq   #0,d1           ; animate-in direction : bottom
                 moveq   #MENU_CHURCH,d2
-                lea     (InitStack).w,a0
-                jsr     j_ExecuteMenu
-                cmpi.w  #$FFFF,d0
+                lea     (InitialStack).w,a0
+                jsr     j_ExecuteDiamondMenu
+                cmpi.w  #-1,d0
                 beq.s   @ExitMenu
                 bra.w   @CheckRaiseAction
 @ExitMenu:
@@ -49,12 +49,12 @@ ChurchMenuActions:
                 moveq   #0,d1
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
                 blt.s   @txt_71         
-                jsr     j_CreatePortraitWindow
+                jsr     j_OpenPortraitWindow
 @txt_71:
                 
                 txt     113             ; "{CLEAR}Be careful.  The light{N}is always on your side.{W1}"
                 clsTxt
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
@@ -74,7 +74,7 @@ ChurchMenuActions:
                 tst.w   d1
                 bhi.w   @RaiseNextMember
                 addi.w  #1,deadMembersCount(a6)
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     129             ; "Gosh!  {NAME} is{N}exhausted!{W2}"
                 jsr     j_GetCurrentLevel
                 mulu.w  #CHURCHMENU_PER_LEVEL_RAISE_COST,d1
@@ -87,11 +87,11 @@ ChurchMenuActions:
                 addi.l  #CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED,actionCost(a6)
 @ConfirmRaise:
                 
-                move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
+                move.l  actionCost(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     130             ; "But I can recall the soul.{W2}{N}It will cost {#} gold{N}coins.  OK?"
-                jsr     j_CreateGoldWindow
-                jsr     j_YesNoChoiceBox
-                jsr     j_HideGoldWindow
+                jsr     j_OpenGoldWindow
+                jsr     j_alt_YesNoPrompt
+                jsr     j_CloseGoldWindow
                 cmpi.w  #0,d0
                 beq.w   @CheckRaiseCost
                 txt     124             ; "You don't need my help?{W2}"
@@ -117,8 +117,8 @@ ChurchMenuActions:
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
                 move.w  member(a6),d0
-                bsr.w   UpdateAllyMapSprite
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                bsr.w   UpdateAllyMapsprite
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     131             ; "{NAME} is revived!{W2}"
 @RaiseNextMember:
                 
@@ -149,14 +149,14 @@ ChurchMenuActions:
                 andi.w  #STATUSEFFECT_POISON,d3
                 beq.w   @CureNextPoisonedMember
                 addi.w  #1,poisonedMembersCount(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     121             ; "Gosh!  {NAME} is{N}poisoned!{W2}"
                 move.l  #CHURCHMENU_CURE_POISON_COST,actionCost(a6)
-                move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
+                move.l  actionCost(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
-                jsr     j_CreateGoldWindow
-                jsr     j_YesNoChoiceBox
-                jsr     j_HideGoldWindow
+                jsr     j_OpenGoldWindow
+                jsr     j_alt_YesNoPrompt
+                jsr     j_CloseGoldWindow
                 cmpi.w  #0,d0
                 beq.w   @CheckCurePoisonCost
                 txt     124             ; "You don't need my help?{W2}"
@@ -183,7 +183,7 @@ ChurchMenuActions:
                 sndCom  MUSIC_CURE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     126             ; "{NAME} is no longer{N}poisoned.{W2}"
 @CureNextPoisonedMember:
                 
@@ -208,7 +208,7 @@ ChurchMenuActions:
                 andi.w  #STATUSEFFECT_CURSE,d2
                 beq.w   @CureNextCursedMember
                 addi.w  #1,cursedMembersCount(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     122             ; "Gosh!  {NAME} is{N}cursed!{W2}"
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
@@ -231,11 +231,11 @@ ChurchMenuActions:
                 
                 dbf     d6,@CalculateCureCurseCost_Loop
                 move.l  d3,actionCost(a6)
-                move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
+                move.l  actionCost(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
-                jsr     j_CreateGoldWindow
-                jsr     j_YesNoChoiceBox
-                jsr     j_HideGoldWindow
+                jsr     j_OpenGoldWindow
+                jsr     j_alt_YesNoPrompt
+                jsr     j_CloseGoldWindow
                 cmpi.w  #0,d0
                 beq.w   @CheckCureCurseCost
                 txt     124             ; "You don't need my help?{W2}"
@@ -260,7 +260,7 @@ ChurchMenuActions:
                 sndCom  MUSIC_CURE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     127             ; "{NAME} is no longer{N}cursed.{W2}"
 @CureNextCursedMember:
                 
@@ -286,8 +286,8 @@ ChurchMenuActions:
                 txt     136             ; "{CLEAR}Who do you want to{N}promote?{W2}"
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMemberListScreen
-                cmpi.w  #$FFFF,d0
+                jsr     j_InitializeMembersListScreen
+                cmpi.w  #-1,d0
                 bne.w   @CheckPromotableClass
                 txt     137             ; "Oh, I'm wrong.{W2}"
                 bra.w   @ExitSave
@@ -300,7 +300,7 @@ ChurchMenuActions:
                 bsr.w   GetPromotionData
                 cmpi.w  #0,cannotPromoteFlag(a6)
                 beq.w   @CheckPromotableLevel
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     142             ; "Hmmm...{D1} {NAME} had{N}better remain the current{N}class.{W2}"
                 bra.w   @RestartPromo
 @CheckPromotableLevel:
@@ -308,15 +308,15 @@ ChurchMenuActions:
                 jsr     j_GetCurrentLevel
                 cmpi.w  #CHURCHMENU_MIN_PROMOTABLE_LEVEL,d1
                 bcc.w   @ConfirmPromo
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     138             ; "Hmmm...{NAME} needs{N}more experience!{W2}"
                 bra.w   @RestartPromo
 @ConfirmPromo:
                 
                 clr.w   newClass(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     139             ; "{NAME} wants to be{N}promoted to the a fighting{N}class, right?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 cmpi.w  #0,d0
                 beq.w   @CheckSpecialPromo
                 txt     137             ; "Oh, I'm wrong.{W2}"
@@ -381,12 +381,12 @@ ChurchMenuActions:
                 dbf     d7,@GetSpecialClass_Loop
                 
                 move.w  d0,newClass(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  promotionItem(a6),((TEXT_NAME_INDEX_3-$1000000)).w
-                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  promotionItem(a6),((DIALOGUE_NAME_INDEX_3-$1000000)).w
+                move.w  newClass(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     143             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
                 txt     147             ; "OK?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 cmpi.w  #0,d0
                 beq.w   @CheckSORC
                 txt     144             ; "Then"
@@ -395,9 +395,9 @@ ChurchMenuActions:
                 
                 cmpi.w  #CLASS_SORC,newClass(a6)
                 bne.w   @RemovePromotionItem
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     145             ; "{NAME} loses all spells{N}that were learned.{N}OK?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 cmpi.w  #0,d0
                 bne.w   @RestartPromo
 @RemovePromotionItem:
@@ -423,17 +423,17 @@ ChurchMenuActions:
                 dbf     d7,@GetNewClass_Loop
                 
                 move.w  d0,newClass(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  newClass(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     146             ; "{NAME} can be promoted{N}to {CLASS}.{N}OK?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 cmpi.w  #0,d0
                 bne.w   @RestartPromo
 @DoPromo:
                 
-                move.w  currentClass(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  member(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  newClass(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  currentClass(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                move.w  newClass(a6),((DIALOGUE_NAME_INDEX_3-$1000000)).w
                 txt     140             ; "Now, let me conduct the{N}rite.{D1}  The light blesses...{N}{D1}{CLASS} {NAME}...{W2}{N}with a class of {CLASS}!{W2}"
                 move.w  member(a6),d0
                 move.w  newClass(a6),d1
@@ -453,8 +453,9 @@ ChurchMenuActions:
                 
                 move.w  member(a6),d0   ; new class uses a different type of weapon, so unequip weapon
                 jsr     j_GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.s   @sndCom_PromotionMusic
+                
                 jsr     j_UnequipWeapon
 @sndCom_PromotionMusic:
                 
@@ -462,9 +463,9 @@ ChurchMenuActions:
                 jsr     WaitForMusicResumeAndPlayerInput(pc)
                 nop
                 move.w  member(a6),d0
-                bsr.w   UpdateAllyMapSprite
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                bsr.w   UpdateAllyMapsprite
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  newClass(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     141             ; "{NAME} was successfully{N}promoted to {CLASS}.{W2}"
                 move.w  member(a6),d0
                 move.b  #1,d1
@@ -478,7 +479,7 @@ ChurchMenuActions:
                 
                 ; @StartSave
                 txt     114             ; "May I record your adventure{N}now?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 cmpi.w  #0,d0
                 beq.w   @DoSaveGame
                 txt     124             ; "You don't need my help?{W2}"
@@ -494,7 +495,7 @@ ChurchMenuActions:
                 nop
                 txt     115             ; "{CLEAR}The light allows you to{N}resume your adventure!{W1}"
                 txt     116             ; "{CLEAR}Will you continue your{N}adventure?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 cmpi.w  #0,d0
                 beq.w   @ExitMenu
                 txt     117             ; "{CLEAR}Then, take a rest before{N}you continue.{W1}"
@@ -505,11 +506,11 @@ ChurchMenuActions:
                 
                 clsTxt
                 txt     112             ; "{CLEAR}Do you have another desire?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 cmpi.w  #0,d0
                 bne.w   @ExitMenu
                 clsTxt
                 bra.w   @StartMenu      
 
-    ; End of function ChurchMenuActions
+    ; End of function ChurchMenu
 

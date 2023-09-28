@@ -198,7 +198,7 @@ Map36_EntityEvent11:
 
 Map36_EntityEvent12:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map36_EntityEvent12

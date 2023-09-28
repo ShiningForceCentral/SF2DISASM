@@ -9,6 +9,8 @@
                 include "code\common\tech\jumpinterfaces\s03_jumpinterface_2.asm"    ; Game Section 03 Jump Interface, part 2
                 include "code\common\tech\pointers\s03_memberstatuswindowlayoutpointer.asm"    ; Game Section 03 Member Status Window Layout Pointer
                 include "code\common\menus\menuengine_01.asm"    ; Menu engine
+                include "code\common\menus\loadhighlightableicon.asm"    ; Load highlightable icon function
+                include "code\common\menus\magicmenu.asm"    ; Magic menu actions
                 include "data\graphics\tech\menus\diamondmenulayout.asm"    ; Diamond menu layout
                 include "data\graphics\tech\menus\magicmenulayout.asm"    ; Magic menu layout
                 include "data\graphics\tech\menus\itemmenulayout.asm"    ; Item menu layout

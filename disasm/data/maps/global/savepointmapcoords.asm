@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\global\savepointmapcoords.asm :
 ; 0x7B71..0x7BCE : Save point map coords
-SavepointMapCoordinates:
+table_SavepointMapCoordinates:
                 ; Map, X, Y, Facing
                 savePointMapCoords MAP_GRANSEAL, 32, 13, UP
                 savePointMapCoords MAP_GRANSEAL_EARTHQUAKE, 29, 2, DOWN

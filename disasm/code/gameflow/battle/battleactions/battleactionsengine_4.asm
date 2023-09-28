@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleactions\battleactionsengine_4.asm :
-; 0xA872..0xAAFC : Battleactions engine
+; 0xA872..0xAAB6 : Battleactions Engine, part 4
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -47,7 +47,7 @@ CalculateHealingExp:
 ; =============== S U B R O U T I N E =======================================
 
 
-CalculateDamageExp:
+battlesceneScript_CalculateDamageExp:
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
@@ -56,7 +56,7 @@ CalculateDamageExp:
                 jsr     GetMaxHp
                 tst.w   d1
                 beq.w   @Skip           ; skip function to prevent division by zero error
-                bsr.w   GetKillExp      
+                bsr.w   battlesceneScript_GetKillExp
                 mulu.w  d6,d5
                 divu.w  d1,d5
                 bsr.w   AddExpAndApplyPerActionCap
@@ -65,7 +65,7 @@ CalculateDamageExp:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function CalculateDamageExp
+    ; End of function battlesceneScript_CalculateDamageExp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -89,18 +89,18 @@ AddStatusEffectSpellExp:
 ; =============== S U B R O U T I N E =======================================
 
 
-AddExpAndGoldForKill:
+battlesceneScript_AddExpAndGoldForKill:
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
                 bne.w   @Skip           ; skip if actor is an enemy
-                bsr.w   GetKillExp      
+                bsr.w   battlesceneScript_GetKillExp
                 bsr.w   AddExpAndApplyPerActionCap
                 move.b  (a5),d0
                 bpl.s   @Skip
                 jsr     GetEnemy        
                 add.w   d1,d1
-                lea     tbl_EnemyGold(pc), a0
+                lea     table_EnemyGold(pc), a0
                 adda.w  d1,a0
                 move.w  (a0),d0
                 add.w   d0,((BATTLESCENE_GOLD-$1000000)).w
@@ -109,7 +109,7 @@ AddExpAndGoldForKill:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function AddExpAndGoldForKill
+    ; End of function battlesceneScript_AddExpAndGoldForKill
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -148,11 +148,11 @@ AddExpAndApplyHealingCap:
 
 ; Get EXP gained for a kill based on level difference between actor and target.
 ; 
-;   In: a4, a5 = pointers to actor and target indexes in RAM
+;   In: a4, a5 = pointers to actor and target indexes
 ;   Out: d5.l = EXP amount
 
 
-GetKillExp:
+battlesceneScript_GetKillExp:
                 
                 movem.l d0-d3/a0,-(sp)
                 move.b  (a5),d0
@@ -189,7 +189,7 @@ GetKillExp:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function GetKillExp
+    ; End of function battlesceneScript_GetKillExp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -281,6 +281,8 @@ loc_AA92:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 OneSecondSleep:
                 
@@ -295,6 +297,8 @@ OneSecondSleep:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 NopOnce:
                 
@@ -305,6 +309,8 @@ NopOnce:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 NopTwice:
@@ -318,6 +324,8 @@ NopTwice:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 NopThrice:
                 
@@ -327,63 +335,4 @@ NopThrice:
                 rts
 
     ; End of function NopThrice
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: A2 = battlescene script stack frame
-
-allCombatantsCurrentHpTable = -24
-debugDodge = -23
-debugCritical = -22
-debugDouble = -21
-debugCounter = -20
-explodingActor = -17
-explode = -16
-specialCritical = -15
-ineffectiveAttack = -14
-doubleAttack = -13
-counterAttack = -12
-silencedActor = -11
-stunInaction = -10
-curseInaction = -9
-muddledActor = -8
-targetIsOnSameSide = -7
-rangedAttack = -6
-dodge = -5
-targetDies = -4
-criticalHit = -3
-inflictAilment = -2
-cutoff = -1
-
-WriteBattlesceneScript_Attack:
-                
-                bsr.w   WriteBattlesceneScript_DetermineDodge
-                tst.b   dodge(a2)
-                bne.w   loc_AAF6
-                bsr.w   WriteBattlesceneScript_CalculateDamage
-                bsr.w   WriteBattlesceneScript_DetermineCriticalHit
-                bsr.w   WriteBattlesceneScript_InflictDamage
-                tst.b   targetDies(a2)
-                beq.s   loc_AADC
-                bsr.w   WriteBattlesceneScript_DeathMessage
-                bra.w   return_AAFA
-loc_AADC:
-                
-                bsr.w   WriteBattlesceneScript_InflictAilment
-                bsr.w   WriteBattlesceneScript_InflictCurseDamage
-                tst.b   targetDies(a2)
-                beq.s   loc_AAF6
-                exg     a4,a5
-                bsr.w   WriteBattlesceneScript_DeathMessage
-                exg     a4,a5
-                bra.w   return_AAFA
-loc_AAF6:
-                
-                bsr.w   WriteBattlesceneScript_DetermineDoubleAndCounter
-return_AAFA:
-                
-                rts
-
-    ; End of function WriteBattlesceneScript_Attack
 

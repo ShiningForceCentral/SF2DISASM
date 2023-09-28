@@ -7,7 +7,7 @@
 ; In: D0 = map index (if not supplied, will be pulled from CURRENT_MAP)
 ;     D1 = player X coord to check
 ;     D2 = player Y coord to check
-; Out: D7 = battle index to trigger ($FFFF if none)
+; Out: D7 = battle index to trigger (-1 if none)
 ; ...more
 
 
@@ -17,7 +17,7 @@ CheckBattle:
                 move.w  d1,d4
                 move.w  d2,d5
                 move.w  d0,-(sp)
-                cmpi.b  #$FF,d0
+                cmpi.b  #MAP_CURRENT,d0 
                 bne.s   @Continue
                 
                 ; Get current map
@@ -25,8 +25,8 @@ CheckBattle:
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
 @Continue:
                 
-                lea     BattleMapCoordinates(pc), a0
-                moveq   #BATTLES_MAX_NUMBER,d6
+                lea     table_BattleMapCoordinates(pc), a0
+                moveq   #BATTLE_MAX_INDEX,d6
                 clr.w   d7
 @Loop:
                 
@@ -36,25 +36,24 @@ CheckBattle:
                 add.w   d7,d1
                 jsr     j_CheckFlag
                 beq.s   @Next
-                cmpi.b  #$FF,BATTLEMAPCOORDINATES_OFFSET_TRIGGER_X(a0)
+                cmpi.b  #-1,BATTLEMAPCOORDS_OFFSET_TRIGGER_X(a0)
                 
                 ; Check Trigger X
                 beq.w   @CheckTriggerY
-                cmp.b   BATTLEMAPCOORDINATES_OFFSET_TRIGGER_X(a0),d4
+                cmp.b   BATTLEMAPCOORDS_OFFSET_TRIGGER_X(a0),d4
                 bne.w   @Next
 @CheckTriggerY:
                 
-                cmpi.b  #$FF,BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y(a0)
+                cmpi.b  #-1,BATTLEMAPCOORDS_OFFSET_TRIGGER_Y(a0)
                 beq.w   @SetCurrentCoordinates
-                cmp.b   BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y(a0),d5 
-                                                        ; if player is not on specified coords (bytes 5/6), then don't return battle index.
+                cmp.b   BATTLEMAPCOORDS_OFFSET_TRIGGER_Y(a0),d5 ; if player is not on specified coords (bytes 5/6), then don't return battle index.
                 bne.w   @Next
 @SetCurrentCoordinates:
                 
-                move.b  BATTLEMAPCOORDINATES_OFFSET_X(a0),((BATTLE_AREA_X-$1000000)).w
-                move.b  BATTLEMAPCOORDINATES_OFFSET_Y(a0),((BATTLE_AREA_Y-$1000000)).w
-                move.b  BATTLEMAPCOORDINATES_OFFSET_WIDTH(a0),((BATTLE_AREA_WIDTH-$1000000)).w
-                move.b  BATTLEMAPCOORDINATES_OFFSET_HEIGHT(a0),((BATTLE_AREA_HEIGHT-$1000000)).w
+                move.b  BATTLEMAPCOORDS_OFFSET_X(a0),((BATTLE_AREA_X-$1000000)).w
+                move.b  BATTLEMAPCOORDS_OFFSET_Y(a0),((BATTLE_AREA_Y-$1000000)).w
+                move.b  BATTLEMAPCOORDS_OFFSET_WIDTH(a0),((BATTLE_AREA_WIDTH-$1000000)).w
+                move.b  BATTLEMAPCOORDS_OFFSET_HEIGHT(a0),((BATTLE_AREA_HEIGHT-$1000000)).w
                 addi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
                 jsr     j_CheckFlag
                 beq.s   @TriggerBattle
@@ -66,11 +65,11 @@ CheckBattle:
                 bra.w   @Done
 @Next:
                 
-                addq.l  #BATTLEMAPCOORDINATES_ENTRY_SIZE,a0
+                addq.l  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,a0
                 addq.w  #1,d7
                 dbf     d6,@Loop
                 
-                moveq   #$FFFFFFFF,d7
+                moveq   #-1,d7
                 move.w  (sp)+,d0
 @Done:
                 

@@ -10,13 +10,13 @@
 IsItemUsableOnField:
                 
                 moveq   #0,d2
-                lea     tbl_UsableOnFieldItems(pc), a0
+                lea     table_UsableOnFieldItems(pc), a0
                 nop
 @Loop:
                 
                 cmp.b   (a0)+,d1
                 beq.w   @Return
-                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
+                cmpi.b  #-1,(a0)
                 bne.s   @Loop
                 
                 moveq   #-1,d2

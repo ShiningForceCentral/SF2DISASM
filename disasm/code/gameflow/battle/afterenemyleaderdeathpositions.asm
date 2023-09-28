@@ -19,12 +19,12 @@ ApplyPositionsAfterEnemyLeaderDies:
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.w   @Done
-                lea     tbl_AfterBattlePositions(pc), a0 ; if Bowie alive and enemy leader dead
+                lea     table_AfterBattlePositions(pc), a0 ; if Bowie alive and enemy leader dead
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
 @FindBattle_Loop:
                 
-                cmpi.w  #CODE_TERMINATOR_WORD,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   @Done
                 cmp.w   (a0),d1
                 beq.w   @Found          ; entry first word is battle index
@@ -56,7 +56,7 @@ ApplyPositionsAfterEnemyLeaderDies:
                 clr.w   d1
 @FindCombatant_Loop:
                 
-                cmpi.w  #CODE_NOTHING_WORD,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   @Done
                 move.b  (a0),d0
                 

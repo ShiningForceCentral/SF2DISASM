@@ -68,7 +68,7 @@ byte_44EA6:      ac_checkMapBlockCopy
                  ac_waitDest
 word_44EAC:      ac_branch
                 dc.w (byte_44EA6-word_44EAC) & $FFFF
-eas_UnitCursorSpeedx2:
+eas_CursorSpeedx2:
                  ac_entityObstructable OFF
                  ac_mapUncollidable OFF
                  ac_entityUncollidable OFF
@@ -80,7 +80,7 @@ byte_44ECC:      ac_controlCharacter
                  ac_waitDest
 word_44ED0:      ac_branch
                 dc.w (byte_44ECC-word_44ED0) & $FFFF
-eas_UnitCursor:  ac_entityObstructable OFF
+eas_Cursor:      ac_entityObstructable OFF
                  ac_mapUncollidable OFF
                  ac_entityUncollidable OFF
                  ac_accelFactors 1,1

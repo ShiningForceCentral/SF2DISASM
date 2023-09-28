@@ -7,7 +7,7 @@
 
 InitializeWitchSuspendVIntFunctions:
                 
-                move.b  #$FF,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
+                move.b  #-1,((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 clr.w   d6
@@ -21,11 +21,11 @@ InitializeWitchSuspendVIntFunctions:
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   InitializeDisplay
                 bsr.w   DisableDisplayAndInterrupts
-                clr.b   ((byte_FFB198-$1000000)).w
+                clr.b   ((MOUTH_CONTROL_TOGGLE-$1000000)).w
                 move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w
-                bsr.w   DisplayWitchScreen
+                bsr.w   BuildWitchScreen
                 bsr.w   EnableDisplayAndInterrupts
-                movea.l (p_WitchLayout).l,a0
+                movea.l (p_layout_Witch).l,a0
                 lea     $700(a0),a0
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$707,d1
@@ -48,28 +48,28 @@ InitializeWitchSuspendVIntFunctions:
 ; =============== S U B R O U T I N E =======================================
 
 
-DisplayWitchScreen:
+BuildWitchScreen:
                 
                 jsr     (DisableDisplayAndInterrupts).w
-                movea.l (p_WitchTiles).l,a0
+                movea.l (p_tiles_Witch).l,a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
-                bsr.w   LoadCompressedData
+                bsr.w   LoadStackCompressedData
                 movea.l (sp)+,a0
                 lea     ($2000).w,a1
-                move.w  #$2000,d0
+                move.w  #8192,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-                movea.l (p_WitchLayout).l,a0
+                movea.l (p_layout_Witch).l,a0
                 lea     (PLANE_B_LAYOUT).l,a1
-                move.w  #$800,d7
+                move.w  #2048,d7
                 bsr.w   CopyBytes       
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
-                move.w  #$400,d0
+                move.w  #1024,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-                movea.l (p_plt_Witch).l,a0 ; Two palettes
+                movea.l (p_palette_Witch).l,a0 ; Two palettes
                 lea     (PALETTE_1_BASE).l,a1
                 moveq   #CRAM_PALETTE_SIZE,d7 ; Palette 1
                 bsr.w   CopyBytes       
@@ -81,21 +81,21 @@ DisplayWitchScreen:
                 move.w  #6,((word_FFB07C-$1000000)).w
                 rts
 
-    ; End of function DisplayWitchScreen
+    ; End of function BuildWitchScreen
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_7CDC:
+ReinitializeWitchLayout:
                 
-                movea.l (p_WitchLayout).l,a0
+                movea.l (p_layout_Witch).l,a0
                 lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 bsr.w   CopyBytes       
                 bra.w   QueueDmaForWitchLayout
 
-    ; End of function sub_7CDC
+    ; End of function ReinitializeWitchLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -103,7 +103,7 @@ sub_7CDC:
 
 UpdateWitchHead:
                 
-                movea.l (p_WitchLayout).l,a0
+                movea.l (p_layout_Witch).l,a0
                 lea     $700(a0),a0
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$707,d1
@@ -130,7 +130,7 @@ QueueDmaForWitchLayout:
 
 ; =============== S U B R O U T I N E =======================================
 
-; D1=Width/Height
+; In: d1.w = Width/Height
 
 
 UpdateWitchLayoutZone:
@@ -138,20 +138,22 @@ UpdateWitchLayoutZone:
                 movem.l d0-a1,-(sp)
                 move.w  d1,d6
                 move.w  d1,d7
-                lsr.w   #8,d6
+                lsr.w   #BYTE_SHIFT_COUNT,d6
                 ext.w   d7
                 subq.w  #1,d6
                 subq.w  #1,d7
-loc_7D38:
+@OuterLoop:
                 
                 movem.l d6/a1,-(sp)
-loc_7D3C:
+@InnerLoop:
                 
                 move.w  (a0)+,(a1)+
-                dbf     d6,loc_7D3C
+                dbf     d6,@InnerLoop
+                
                 movem.l (sp)+,d6/a1
                 lea     $40(a1),a1
-                dbf     d7,loc_7D38
+                dbf     d7,@OuterLoop
+                
                 movem.l (sp)+,d0-a1
                 rts
 
@@ -165,14 +167,15 @@ var_2 = -2
 VInt_WitchBlink:
                 
                 link    a6,#-2
-                tst.b   ((byte_FFB082-$1000000)).w
+                tst.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 beq.w   loc_7E16
                 clr.w   var_2(a6)
                 lea     ((BLINK_COUNTER-$1000000)).w,a2
                 subq.w  #1,(a2)
                 cmpi.w  #3,(a2)
                 bne.s   loc_7D8A
-                movea.l (p_WitchLayout).l,a0
+                
+                movea.l (p_layout_Witch).l,a0
                 lea     $762(a0),a0
                 lea     (byte_FFE21E).l,a1
                 move.w  #$302,d1
@@ -182,7 +185,8 @@ loc_7D8A:
                 
                 tst.w   (a2)
                 bne.s   loc_7DB4
-                movea.l (p_WitchLayout).l,a0
+                
+                movea.l (p_layout_Witch).l,a0
                 lea     $700(a0),a0
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$705,d1
@@ -197,6 +201,7 @@ loc_7DB4:
                 lea     ((word_FFB07C-$1000000)).w,a2
                 tst.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
                 bne.s   loc_7DC6
+                
                 cmpi.w  #5,(a2)
                 ble.s   loc_7DEE
                 bra.s   loc_7E16
@@ -205,7 +210,8 @@ loc_7DC6:
                 subq.w  #1,(a2)
                 cmpi.w  #5,(a2)
                 bne.s   loc_7DEA
-                movea.l (p_WitchLayout).l,a0
+                
+                movea.l (p_layout_Witch).l,a0
                 lea     $780(a0),a0
                 lea     (byte_FFE29E).l,a1
                 move.w  #$301,d1
@@ -217,7 +223,7 @@ loc_7DEA:
                 bne.s   loc_7E16
 loc_7DEE:
                 
-                movea.l (p_WitchLayout).l,a0
+                movea.l (p_layout_Witch).l,a0
                 lea     $77A(a0),a0
                 lea     (byte_FFE29E).l,a1
                 move.w  #$301,d1
@@ -231,6 +237,7 @@ loc_7E16:
                 
                 tst.w   var_2(a6)
                 beq.s   loc_7E36
+                
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$200,d0

@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-WriteBattlesceneScript_UseItem:
+battlesceneScript_UseItem:
                 
                 move.w  ((BATTLESCENE_ITEM-$1000000)).w,d1
                 jsr     GetItemDefAddress
@@ -17,7 +17,7 @@ WriteBattlesceneScript_UseItem:
                 lsr.b   #SPELLENTRY_OFFSET_LV,d0
                 andi.w  #SPELLENTRY_LOWERMASK_LV,d0
                 move.w  d0,((BATTLESCENE_SPELL_LEVEL-$1000000)).w
-                bra.w   WriteBattlesceneScript_CastSpell
+                bra.w   battlesceneScript_CastSpell
 
-    ; End of function WriteBattlesceneScript_UseItem
+    ; End of function battlesceneScript_UseItem
 

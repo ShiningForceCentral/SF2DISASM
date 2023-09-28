@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\stats\statsengine_2.asm :
-; 0x855A..0x9484 : Character stats engine
+; 0x855A..0x9484 : Character stats engine, part 2
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -357,8 +357,8 @@ SetMoveType:
 SetAiSpecialMoveOrders:
                 
                 movem.l d1-d2/d7-a0,-(sp)
-                lsl.w   #8,d1
-                andi.w  #$FF,d2
+                lsl.w   #BYTE_SHIFT_COUNT,d1
+                andi.w  #BYTE_MASK,d2
                 or.w    d2,d1
                 moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
                 bsr.w   SetCombatantWord
@@ -374,8 +374,8 @@ SetAiSpecialMoveOrders:
 SetAiRegion:
                 
                 movem.l d1-d2/d7-a0,-(sp)
-                lsl.b   #4,d1
-                andi.b  #$F,d2
+                lsl.b   #NIBBLE_SHIFT_COUNT,d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
                 or.b    d2,d1
                 moveq   #COMBATANT_OFFSET_AI_REGION,d7
                 bsr.w   SetCombatantByte
@@ -388,15 +388,15 @@ SetAiRegion:
 ; =============== S U B R O U T I N E =======================================
 
 
-SetAiActivationFlag:
+SetActivationBitfield:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_AI_ACTIVATION_FLAG,d7
+                moveq   #COMBATANT_OFFSET_ACTIVATION_BITFIELD,d7
                 bsr.w   SetCombatantWord
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetAiActivationFlag
+    ; End of function SetActivationBitfield
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -768,7 +768,7 @@ DecreaseBaseAgi:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
-                move.w  #$C8,d6
+                move.w  #CHAR_STATCAP_AGI_DECREASING,d6
                 moveq   #COMBATANT_OFFSET_AGI_BASE,d7
                 bsr.w   DecreaseAndClampByte
                 movem.l (sp)+,d5-a0
@@ -784,7 +784,7 @@ DecreaseCurrentAgi:
                 
                 movem.l d5-a0,-(sp)
                 clr.w   d5
-                move.w  #$C8,d6
+                move.w  #CHAR_STATCAP_AGI_DECREASING,d6
                 moveq   #COMBATANT_OFFSET_AGI_CURRENT,d7
                 bsr.w   DecreaseAndClampByte
                 movem.l (sp)+,d5-a0
@@ -830,7 +830,7 @@ DecreaseCurrentMov:
 
 GetClassName:
                 
-                movea.l (p_tbl_ClassNames).l,a0
+                movea.l (p_table_ClassNames).l,a0
 
     ; End of function GetClassName
 
@@ -1023,9 +1023,9 @@ ApplyStatusEffectsOnStats:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = address in RAM of combatant's prowess
-;     D0 = combatant index
-;     D1 = item index
+; In: a2 = prowess entry pointer
+;     d0.w = combatant index
+;     d1.w = item index
 
 
 ApplyItemOnStats:
@@ -1049,8 +1049,9 @@ ApplyItemOnStats:
                 
                 move.b  1(a0),d1        ; value
                 move.b  (a0),d2         ; effect code
-                cmpi.b  #$FF,d2
+                cmpi.b  #-1,d2
                 beq.w   @Next
+                
                 cmpi.b  #EQUIPEFFECTS_MAX_INDEX,d2
                 bcs.s   @ExecuteEquipEffectFunction
 @InfiniteLoop:
@@ -1058,7 +1059,7 @@ ApplyItemOnStats:
                 bra.s   @InfiniteLoop   ; caught in an inifinite loop if equip effect index is too high
 @ExecuteEquipEffectFunction:
                 
-                lsl.w   #2,d2
+                lsl.w   #INDEX_SHIFT_COUNT,d2
                 lea     pt_EquipEffectFunctions(pc,d2.w),a1
                 movea.l (a1),a1
                 jsr     (a1)
@@ -1075,9 +1076,9 @@ ApplyItemOnStats:
 pt_EquipEffectFunctions:
                 dc.l nullsub_8B22
                 dc.l nullsub_8B22
-                dc.l EquipEffect_IncreaseCriticalProwess
-                dc.l EquipEffect_IncreaseDoubleAttackProwess
-                dc.l EquipEffect_IncreaseCounterAttackProwess
+                dc.l equipEffect_IncreaseCriticalProwess
+                dc.l equipEffect_IncreaseDoubleAttackProwess
+                dc.l equipEffect_IncreaseCounterAttackProwess
                 dc.l nullsub_8B22
                 dc.l IncreaseCurrentAtt
                 dc.l IncreaseCurrentDef
@@ -1087,9 +1088,9 @@ pt_EquipEffectFunctions:
                 dc.l DecreaseCurrentDef
                 dc.l DecreaseCurrentAgi
                 dc.l DecreaseCurrentMov
-                dc.l EquipEffect_SetCriticalProwess
-                dc.l EquipEffect_SetDoubleAttackProwess
-                dc.l EquipEffect_SetCounterAttackProwess
+                dc.l equipEffect_SetCriticalProwess
+                dc.l equipEffect_SetDoubleAttackProwess
+                dc.l equipEffect_SetCounterAttackProwess
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1104,7 +1105,7 @@ nullsub_8B22:
 ; =============== S U B R O U T I N E =======================================
 
 
-EquipEffect_IncreaseCriticalProwess:
+equipEffect_IncreaseCriticalProwess:
                 
                 move.b  (a2),d2
                 andi.b  #PROWESS_MASK_CRITICAL,d2
@@ -1120,16 +1121,16 @@ EquipEffect_IncreaseCriticalProwess:
                 or.b    d2,(a2)
                 rts
 
-    ; End of function EquipEffect_IncreaseCriticalProwess
+    ; End of function equipEffect_IncreaseCriticalProwess
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-EquipEffect_IncreaseDoubleAttackProwess:
+equipEffect_IncreaseDoubleAttackProwess:
                 
                 move.b  (a2),d2
-                lsr.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2
+                lsr.b   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
                 andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d2
                 add.b   d1,d2
                 cmpi.b  #4,d2
@@ -1137,22 +1138,22 @@ EquipEffect_IncreaseDoubleAttackProwess:
                 moveq   #3,d2           ; cap to highest double attack setting
 @Continue:
                 
-                lsl.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2
+                lsl.b   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
                 andi.b  #PROWESS_MASK_CRITICAL,(a2) ; BUGGED chance to counter attack is being set to 1/32
                                         ; setting should be masked as well
                 or.b    d2,(a2)
                 rts
 
-    ; End of function EquipEffect_IncreaseDoubleAttackProwess
+    ; End of function equipEffect_IncreaseDoubleAttackProwess
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-EquipEffect_IncreaseCounterAttackProwess:
+equipEffect_IncreaseCounterAttackProwess:
                 
                 move.b  (a2),d2
-                lsr.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d2
+                lsr.b   #PROWESS_LOWER_COUNTER_SHIFT_COUNT,d2
                 andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d2
                 add.b   d1,d2
                 cmpi.b  #4,d2
@@ -1160,53 +1161,53 @@ EquipEffect_IncreaseCounterAttackProwess:
                 moveq   #3,d2           ; cap to highest counter attack setting
 @Continue:
                 
-                lsl.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d2
+                lsl.b   #PROWESS_LOWER_COUNTER_SHIFT_COUNT,d2
                 andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_DOUBLE,(a2)
                 or.b    d2,(a2)
                 rts
 
-    ; End of function EquipEffect_IncreaseCounterAttackProwess
+    ; End of function equipEffect_IncreaseCounterAttackProwess
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-EquipEffect_SetCriticalProwess:
+equipEffect_SetCriticalProwess:
                 
                 andi.b  #PROWESS_MASK_CRITICAL,d1
                 andi.b  #PROWESS_MASK_DOUBLE|PROWESS_MASK_COUNTER,(a2)
                 or.b    d1,(a2)
                 rts
 
-    ; End of function EquipEffect_SetCriticalProwess
+    ; End of function equipEffect_SetCriticalProwess
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-EquipEffect_SetDoubleAttackProwess:
+equipEffect_SetDoubleAttackProwess:
                 
                 andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d1
-                lsl.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d1
+                lsl.b   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d1
                 andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_COUNTER,(a2)
                 or.b    d1,(a2)
                 rts
 
-    ; End of function EquipEffect_SetDoubleAttackProwess
+    ; End of function equipEffect_SetDoubleAttackProwess
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-EquipEffect_SetCounterAttackProwess:
+equipEffect_SetCounterAttackProwess:
                 
                 andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d1
-                lsl.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d1
+                lsl.b   #PROWESS_LOWER_COUNTER_SHIFT_COUNT,d1
                 andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_DOUBLE,(a2)
                 or.b    d1,(a2)
                 rts
 
-    ; End of function EquipEffect_SetCounterAttackProwess
+    ; End of function equipEffect_SetCounterAttackProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1239,7 +1240,7 @@ FindItemName:
                 
                 move.w  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_tbl_ItemNames).l,a0
+                movea.l (p_table_ItemNames).l,a0
                 bsr.w   FindName        
                 move.w  (sp)+,d1
                 rts
@@ -1257,7 +1258,7 @@ GetItemDefAddress:
                 move.l  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 mulu.w  #ITEMDEF_SIZE,d1
-                movea.l (p_tbl_ItemDefs).l,a0
+                movea.l (p_table_ItemDefinitions).l,a0
                 adda.w  d1,a0
                 move.l  (sp)+,d1
                 rts
@@ -1332,7 +1333,7 @@ GetEquipmentType:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's equipped weapon and slot indexes -> D1 and D2 ($FFFF if nothing equipped)
+; Get equipped weapon and slot indexes for combatant d0.b -> d1.w, d2.w (-1 if nothing equipped)
 
 
 GetEquippedWeapon:
@@ -1346,7 +1347,7 @@ GetEquippedWeapon:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's equipped ring and slot indexes -> D1 and D2 ($FFFF if nothing equipped)
+; Get equipped ring and slot indexes for combatant d0.b -> d1.w, d2.w (-1 if nothing equipped)
 
 
 GetEquippedRing:
@@ -1382,7 +1383,7 @@ GetEquippedItemByType:
                 addq.w  #1,d2           ; return item slot in D2
                 dbf     d3,@Loop
                 
-                move.w  #CODE_NOTHING_WORD,d1
+                move.w  #-1,d1
                 move.w  d1,d2
                 bra.s   @Done
 @Break:
@@ -1764,7 +1765,7 @@ RemoveItemBySlot:
 UnequipWeapon:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                move.w  #ITEMTYPE_WEAPON,d2 ; weapon
+                move.w  #ITEMTYPE_WEAPON,d2
                 bra.s   UnequipItemByType
 
     ; End of function UnequipWeapon
@@ -1776,7 +1777,7 @@ UnequipWeapon:
 UnequipRing:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                move.w  #ITEMTYPE_RING,d2 ; ring
+                move.w  #ITEMTYPE_RING,d2
 
     ; End of function UnequipRing
 
@@ -2106,8 +2107,9 @@ IsItemUsableInBattle:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
-                cmpi.b  #$FF,ITEMDEF_OFFSET_USE_SPELL(a0) ; BUG -- should compare to $3F for 'no spell'
+                cmpi.b  #-1,ITEMDEF_OFFSET_USE_SPELL(a0) ; BUG -- should compare to $3F for 'no spell'
                 beq.s   @HasNoUse
+                
                 ori     #1,ccr
                 bra.s   @Done
 @HasNoUse:
@@ -2154,7 +2156,7 @@ IsItemUsableByCombatant:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
+; In: d0.w = combatant index
 
 
 UnequipAllItemsIfNotCursed:
@@ -2280,7 +2282,7 @@ FindSpellName:
                 
                 move.w  d1,-(sp)
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
-                movea.l (p_tbl_SpellNames).l,a0
+                movea.l (p_table_SpellNames).l,a0
                 bsr.w   FindName        
                 move.w  (sp)+,d1
                 rts
@@ -2296,7 +2298,7 @@ FindSpellName:
 FindSpellDefAddress:
                 
                 move.l  d0,-(sp)
-                movea.l (p_tbl_SpellDefs).l,a0
+                movea.l (p_table_SpellDefinitions).l,a0
                 moveq   #SPELLDEFS_COUNTER,d0
 @Loop:
                 
@@ -2306,7 +2308,7 @@ FindSpellDefAddress:
                 dbf     d0,@Loop
                 
                 ; Default to first entry if not found
-                movea.l (p_tbl_SpellDefs).l,a0
+                movea.l (p_table_SpellDefinitions).l,a0
 @Found:
                 
                 move.l  (sp)+,d0
@@ -2440,13 +2442,13 @@ GetCombatantEntryAddress:
                 bra.s   @GetAddress
 @Enemy:
                 
-                cmpi.b  #$A0,d0
+                cmpi.b  #160,d0
                 bhi.s   @ErrorHandling
                 subi.b  #COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END,d0
 @GetAddress:
                 
-                andi.w  #$FF,d0
-                lsl.w   #3,d0
+                andi.w  #BYTE_MASK,d0
+                lsl.w   #3,d0           ; multiply by combatant entry size
                 move.w  d0,d1
                 lsl.w   #3,d0
                 sub.w   d1,d0
@@ -2569,22 +2571,22 @@ IncreaseAndClampByte:
                 
                 bsr.w   GetCombatantEntryAddress
                 add.b   (a0,d7.w),d1
-                bcs.s   loc_9320
+                bcs.s   @MakeMaxValue   ; check if overflow to negative
                 cmp.b   d6,d1
-                bcs.s   loc_9324
-loc_9320:
+                bcs.s   @Continue       ; check if less than max
+@MakeMaxValue:
                 
                 move.b  d6,d1
-                bra.s   loc_932A
-loc_9324:
+                bra.s   @Done
+@Continue:
                 
                 cmp.b   d5,d1
-                bcc.s   loc_932A
+                bcc.s   @Done
                 move.b  d5,d1
-loc_932A:
+@Done:
                 
                 move.b  d1,(a0,d7.w)
-                andi.w  #$FF,d1
+                andi.w  #BYTE_MASK,d1
                 rts
 
     ; End of function IncreaseAndClampByte
@@ -2618,7 +2620,7 @@ loc_935C:
                 
                 or.b    d3,d1
                 move.b  d1,(a0,d7.w)
-                andi.w  #$FF,d1
+                andi.w  #BYTE_MASK,d1
                 movem.w (sp)+,d2-d3
                 rts
 
@@ -2637,23 +2639,23 @@ DecreaseAndClampByte:
                 move.b  d1,d4
                 move.b  (a0,d7.w),d1
                 sub.b   d4,d1
-                bcs.s   loc_9380
+                bcs.s   @MakeMinValue
                 cmp.b   d5,d1
-                bcc.s   loc_9384
-loc_9380:
+                bcc.s   @CheckForMaxValue
+@MakeMinValue:
                 
                 move.b  d5,d1
-                bra.s   loc_938A
-loc_9384:
+                bra.s   @Continue
+@CheckForMaxValue:
                 
                 cmp.b   d6,d1
-                bcs.s   loc_938A
+                bcs.s   @Continue
                 move.b  d6,d1
-loc_938A:
+@Continue:
                 
                 move.b  d1,(a0,d7.w)
                 move.w  (sp)+,d4
-                andi.w  #$FF,d1
+                andi.w  #BYTE_MASK,d1
                 rts
 
     ; End of function DecreaseAndClampByte
@@ -2666,19 +2668,19 @@ IncreaseAndClampWord:
                 
                 bsr.w   GetCombatantEntryAddress
                 add.w   (a0,d7.w),d1
-                bmi.s   loc_93A4
+                bmi.s   @MakeMaxValue   ; check if overflow to negative
                 cmp.w   d6,d1
-                bcs.s   loc_93A8
-loc_93A4:
+                bcs.s   @Continue       ; check if less than max
+@MakeMaxValue:
                 
                 move.w  d6,d1
-                bra.s   loc_93AE
-loc_93A8:
+                bra.s   @Done
+@Continue:
                 
                 cmp.w   d5,d1
-                bcc.s   loc_93AE
-                move.w  d5,d1
-loc_93AE:
+                bcc.s   @Done
+                move.w  d5,d1           ; if below min, set to min
+@Done:
                 
                 move.w  d1,(a0,d7.w)
                 rts
@@ -2696,19 +2698,19 @@ DecreaseAndClampWord:
                 move.w  d1,d4
                 move.w  (a0,d7.w),d1
                 sub.w   d4,d1
-                bmi.s   loc_93C8
+                bmi.s   @MakeMinValue   ; check if less than value
                 cmp.w   d5,d1
-                bhi.s   loc_93CC
-loc_93C8:
+                bhi.s   @CheckForMaxValue ; compare to min
+@MakeMinValue:
                 
-                move.w  d5,d1
-                bra.s   loc_93D2
-loc_93CC:
+                move.w  d5,d1           ; set to min
+                bra.s   @Continue
+@CheckForMaxValue:
                 
                 cmp.w   d6,d1
-                bls.s   loc_93D2
-                move.w  d6,d1
-loc_93D2:
+                bls.s   @Continue
+                move.w  d6,d1           ; if above max, set to max
+@Continue:
                 
                 move.w  d1,(a0,d7.w)
                 move.w  (sp)+,d4
@@ -2718,6 +2720,8 @@ loc_93D2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 IncreaseAndClampLong:
@@ -2745,6 +2749,8 @@ loc_93F2:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 DecreaseAndClampLong:
@@ -2777,38 +2783,42 @@ loc_9416:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get distance between two combatants (simple X and Y calculation, no obstructions)
+; Get distance between two combatants on the battlefield (simple X and Y calculation, no obstructions.)
 ; 
-;       In: D0 = from combatant
-;           D1 = to combatant
+;       In: d0.w = actor entity
+;           d1.w = target entity
 ; 
-;       Out: D2 = distance
+;       Out: d2.w = distance in map blocks
 
 
-GetDistanceBetweenEntities:
+GetDistanceBetweenBattleEntities:
                 
                 movem.l d0-d1/d3-d5,-(sp)
-                move.w  d1,d5           ; d0 and d1 are character indexes
+                move.w  d1,d5
                 clr.w   d1
                 clr.w   d2
                 clr.w   d3
                 clr.w   d4
                 bsr.w   GetCombatantX
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 beq.w   loc_9478
-                move.w  d1,d2           ; keep 1st character XPos
+                
+                move.w  d1,d2           ; keep 1st entity X position
                 bsr.w   GetCombatantY
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 beq.w   loc_9478
-                move.w  d1,d3           ; keep 1st character YPos
+                
+                move.w  d1,d3           ; keep 1st entity Y position
                 move.w  d5,d0
                 bsr.w   GetCombatantX
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 beq.w   loc_9478
+                
                 move.w  d1,d4
                 bsr.w   GetCombatantY
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 beq.w   loc_9478
+                
                 move.w  d1,d5
                 sub.w   d4,d2
                 bcc.s   loc_946C
@@ -2824,13 +2834,13 @@ loc_9472:
                 bra.w   loc_947C
 loc_9478:
                 
-                move.w  #$FFFF,d2
+                move.w  #-1,d2
 loc_947C:
                 
                 movem.l (sp)+,d0-d1/d3-d5
                 rts
 
-    ; End of function GetDistanceBetweenEntities
+    ; End of function GetDistanceBetweenBattleEntities
 
 
 ; =============== S U B R O U T I N E =======================================

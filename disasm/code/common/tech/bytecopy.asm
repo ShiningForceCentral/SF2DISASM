@@ -11,23 +11,25 @@ CopyBytes:
                 
                 movem.l d7-a1,-(sp)
                 cmpa.l  a0,a1
-                bgt.w   loc_16EE
+                bgt.w   @Decrement
                 subq.w  #1,d7
-loc_16E2:
+@Increment_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_16E2
+                dbf     d7,@Increment_Loop
+                
                 movem.l (sp)+,d7-a1
                 rts
-loc_16EE:
+@Decrement:
                 
                 adda.w  d7,a0
                 adda.w  d7,a1
                 subq.w  #1,d7
-loc_16F4:
+@Decrement_Loop:
                 
                 move.b  -(a0),-(a1)
-                dbf     d7,loc_16F4
+                dbf     d7,@Decrement_Loop
+                
                 movem.l (sp)+,d7-a1
                 rts
 

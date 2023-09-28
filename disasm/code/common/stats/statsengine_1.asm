@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\stats\statsengine_1.asm :
-; 0x82D0..0x853A : Character stats engine
+; 0x82D0..0x851A : Character stats engine, part 1
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -31,7 +31,7 @@ GetCombatantName:
                 
                 clr.w   d1
                 bsr.w   GetEnemy        
-                movea.l (p_tbl_EnemyNames).l,a0
+                movea.l (p_table_EnemyNames).l,a0
                 bsr.w   FindName        
 @Done:
                 
@@ -357,7 +357,7 @@ GetCurrentExp:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's move type, shifted into lower nibble position -> D1
+; Get movetype for combatant d0.w, shifted to the lower nibble position -> d1.w
 
 
 GetMoveType:
@@ -365,8 +365,8 @@ GetMoveType:
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
                 bsr.w   GetCombatantByte
-                lsr.w   #4,d1
-                andi.w  #$F,d1
+                lsr.w   #NIBBLE_SHIFT_COUNT,d1
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
                 movem.l (sp)+,d7-a0
                 rts
 
@@ -375,7 +375,7 @@ GetMoveType:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get combatant D0's AI commandset -> D1
+; Get AI commandset for combatant d0.w -> d1.w
 
 
 GetAiCommandset:
@@ -383,7 +383,7 @@ GetAiCommandset:
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
                 bsr.w   GetCombatantByte
-                andi.w  #$F,d1
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
                 movem.l (sp)+,d7-a0
                 rts
 
@@ -402,9 +402,9 @@ GetAiSpecialMoveOrders:
                 moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
                 bsr.w   GetCombatantWord
                 move.w  d1,d2
-                lsr.w   #8,d1
-                andi.w  #$FF,d1
-                andi.w  #$FF,d2
+                lsr.w   #BYTE_SHIFT_COUNT,d1
+                andi.w  #BYTE_MASK,d1
+                andi.w  #BYTE_MASK,d2
                 movem.l (sp)+,d7-a0
                 rts
 
@@ -413,10 +413,8 @@ GetAiSpecialMoveOrders:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-; 
-; Out: D1 = AI activation region index 1
-;      D2 = AI activation region index 2
+; In: d0.w = combatant index
+; Out: d1.w, d2.w = AI activation regions 1 and 2 indexes
 
 
 GetAiRegion:
@@ -425,9 +423,9 @@ GetAiRegion:
                 moveq   #COMBATANT_OFFSET_AI_REGION,d7
                 bsr.w   GetCombatantByte
                 move.w  d1,d2
-                lsr.w   #ENEMYCOMBATANT_AI_SETTINGS_SHIFTCOUNT,d1
-                andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d1
-                andi.w  #ENEMYCOMBATANT_AI_SETTINGS_MASK,d2
+                lsr.w   #NIBBLE_SHIFT_COUNT,d1
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d2
                 movem.l (sp)+,d7-a0
                 rts
 
@@ -437,15 +435,15 @@ GetAiRegion:
 ; =============== S U B R O U T I N E =======================================
 
 
-GetAiActivationFlag:
+GetActivationBitfield:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_AI_ACTIVATION_FLAG,d7
+                moveq   #COMBATANT_OFFSET_ACTIVATION_BITFIELD,d7
                 bsr.w   GetCombatantWord
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetAiActivationFlag
+    ; End of function GetActivationBitfield
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -498,36 +496,4 @@ GetDefeats:
                 rts
 
     ; End of function GetDefeats
-
-
-; =============== S U B R O U T I N E =======================================
-
-; Get combatant d0.w type -> d1.w
-; 
-; If combatant is an ally, type is equal to combatant index plus allies number
-;  times class type (0, 1, or 2 for base, promoted, and special, respectively),
-;  and the most significant bit is set. However, this feature is unused.
-; 
-; Otherwise, if an enemy, return the enemy index.
-
-
-GetCombatantType:
-                
-                btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @Enemy
-                moveq   #0,d1
-                bsr.w   GetClass        
-                move.b  tbl_ClassTypes(pc,d1.w),d1 ; 0,1,2 = base class, promoted class, special promoted class
-                mulu.w  #COMBATANT_ALLIES_NUMBER,d1
-                add.w   d0,d1
-                bset    #15,d1
-                bra.s   @Return
-@Enemy:
-                
-                bsr.s   GetEnemy        
-@Return:
-                
-                rts
-
-    ; End of function GetCombatantType
 

@@ -107,9 +107,9 @@ defineShorthand: macro Prefix,Shorthand
     
 tableEnd: macro
     if strcmp('\0','b')
-    dc.b CODE_TERMINATOR_BYTE
+    dc.b TERMINATOR_BYTE
     else
-    dc.w CODE_TERMINATOR_WORD
+    dc.w TERMINATOR_WORD
     endc
     endm
     
@@ -163,14 +163,18 @@ itemBreakMessage: macro
 ; Enemy item drops
     
 battle: macro
+    if strcmp('\0','w')
+    defineShorthand.w BATTLE_,\1
+    else
     defineShorthand.b BATTLE_,\1
+    endc
     endm
     
 enemyEntity: macro
     dc.b \1+128
     endm
     
-itemDrop: macro ; alias
+itemDrop: macro ;alias
     item \1
     endm
     
@@ -178,8 +182,9 @@ droppedFlag: macro
     dc.b \1
     endm
     
-dropFlag: macro ; alias
+dropFlag: macro ;alias
     droppedFlag \1
+    inform 0,"INFO: 'dropFlag' macro is obsolete. Please use 'droppedFlag' instead."
     endm
     
 spellElement: macro
@@ -208,6 +213,19 @@ battles: macro
     
 background: macro
     defineShorthand.b BATTLEBACKGROUND_,\1
+    endm
+    
+enemyFacing: macro
+    defineShorthand.b LASER_,\1
+    endm
+    
+position: macro
+    dc.b \1
+    dc.b \2
+    endm
+    
+facing: macro
+    dc.b \1
     endm
     
 ; Battle spriteset definitions
@@ -320,7 +338,7 @@ entry: macro
     defineBitfield.b SPELL_,\1
     endm
     
-index: macro ; alias
+index: macro ;alias
     entry \1
     endm
     
@@ -394,7 +412,7 @@ shopInventory: macro
     endr
     endm
     
-shopDef: macro ; alias
+shopDef: macro ;alias
     shopInventory \_
     endm
     
@@ -422,11 +440,11 @@ classes: macro
     endr
     endm
     
-blacksmithClasses: macro    ; alias
+blacksmithClasses: macro    ;alias
     classes \1
     endm
     
-mithrilWeaponClass: macro   ; alias
+mithrilWeaponClass: macro   ;alias
     classes \1
     endm
     
@@ -447,7 +465,7 @@ specialCaravanDescription: macro
     defineShorthand.w MESSAGE_CARAVANDESC_,\3
     endm
     
-usableOutsideBattleItem: macro  ; alias
+usableOutsideBattleItem: macro  ;alias
     item \1
     endm
     
@@ -462,7 +480,7 @@ follower: macro
     dc.b \4
     endm
     
-mapSprite: macro
+mapsprite: macro
     defineShorthand.b MAPSPRITE_,\1
     endm
     
@@ -475,8 +493,9 @@ speechSfx: macro
     dc.b 0
     endm
     
-speechSound: macro ; alias
+speechSound: macro ;alias
     speechSfx \1
+    inform 0,"INFO: 'speechSound' macro is obsolete. Please use 'speechSfx' instead."
     endm
     
 ; Enemy definitions
@@ -506,8 +525,9 @@ baseAtt: macro
     dc.b \1,0
     endm
     
-baseAtk: macro ; alias
+baseAtk: macro ;alias
     baseAtt \1
+    inform 0,"INFO: 'baseAtk' macro is obsolete. Please use 'baseAtt' instead."
     endm
     
 baseDef: macro
@@ -557,7 +577,7 @@ unknownWord: macro
     dcb.b 2,0
     endm
     
-randomBattles: macro ; alias
+randomBattles: macro ;alias
     battles
     endm
     
@@ -594,7 +614,7 @@ attGrowth: macro
     defineStatGrowth \1,\2,\3
     endm
     
-atkGrowth: macro ; alias
+atkGrowth: macro ;alias
     attGrowth \1,\2,\3
     endm
     

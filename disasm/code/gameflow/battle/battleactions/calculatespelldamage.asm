@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; In: a2 = battlescene script stack frame
-;     d2.w = resistance setting (0=none, 1=minor, 2=major, 3=weakness)
+;     d2.w = resistance setting (0 = none, 1 = minor, 2 = major, 3 = weakness)
 ;     d3.l = chance to critical hit
 
 allCombatantsCurrentHpTable = -24
@@ -16,7 +16,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -31,7 +31,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-CalculateSpellDamage:
+battlesceneScript_CalculateSpellDamage:
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     FindSpellDefAddress
@@ -61,18 +61,18 @@ CalculateSpellDamage:
                 tst.w   d0
                 bne.s   @Skip
                 add.w   d1,d6           ; +25% damage if successful critical hit
-                move.b  #$FF,criticalHit(a2)
+                move.b  #-1,criticalHit(a2)
 @Skip:
                 
-                bsr.w   WriteBattlesceneScript_InflictDamage
+                bsr.w   battlesceneScript_InflictDamage
                 tst.b   targetDies(a2)
                 beq.s   @Return
-                bsr.w   WriteBattlesceneScript_DeathMessage
+                bsr.w   battlesceneScript_DisplayDeathMessage
 @Return:
                 
                 rts
 
-    ; End of function CalculateSpellDamage
+    ; End of function battlesceneScript_CalculateSpellDamage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -113,9 +113,9 @@ AdjustSpellPower:
                 
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d0
                 beq.w   @Done
-                andi.w  #$FFFF,d6
+                andi.w  #WORD_MASK,d6
                 divu.w  d0,d6           ; divide spell power by number of targets
-                andi.w  #$FFFF,d6
+                andi.w  #WORD_MASK,d6
 @Done:
                 
                 movem.l (sp)+,d0-d1/a0

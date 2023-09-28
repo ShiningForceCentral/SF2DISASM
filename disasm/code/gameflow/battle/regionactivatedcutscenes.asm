@@ -14,8 +14,9 @@ ExecuteBattleRegionCutscene:
 loc_47E8A:
                 
                 addq.w  #8,a0
-                cmpi.w  #$FFFF,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   loc_47EC2
+                
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
                 cmp.b   (a0),d1
                 bne.s   loc_47E8A

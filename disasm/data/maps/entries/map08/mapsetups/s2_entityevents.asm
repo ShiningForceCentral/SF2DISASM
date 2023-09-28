@@ -55,7 +55,7 @@ Map8_2C4_EntityEvent2:
 
 Map8_2C4_EntityEvent3:
                 
-                jmp     j_ChurchMenuActions
+                jmp     j_ChurchMenu
 
     ; End of function Map8_2C4_EntityEvent3
 
@@ -100,8 +100,8 @@ return_560E0:
 
 Map8_2C4_EntityEvent6:
                 
-                move.b  #3,((CURRENT_SHOP_INDEX-$1000000)).w
-                jmp     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_RIBBLE,((CURRENT_SHOP_INDEX-$1000000)).w
+                jmp     j_ShopMenu
 
     ; End of function Map8_2C4_EntityEvent6
 
@@ -177,9 +177,9 @@ Map8_2C4_EntityEvent11:
 
 Map8_2C4_EntityEvent13:
                 
-                move.b  #3,((CURRENT_SHOP_INDEX-$1000000)).w
-                move.b  #$12,((CURRENT_SHOP_INDEX-$1000000)).w
-                jmp     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_RIBBLE,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_ITEM_RIBBLE,((CURRENT_SHOP_INDEX-$1000000)).w
+                jmp     j_ShopMenu
 
     ; End of function Map8_2C4_EntityEvent13
 

@@ -1,509 +1,18 @@
 
-; ASM FILE code\common\tech\graphics\graphics.asm :
-; 0x1770..0x20E6 : Graphics functions
+; ASM FILE code\common\tech\graphics\decompression.asm :
+; 0x1A84..0x20E6 : Graphics decompression and loading functions
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = Number of sprites to initialize
-
-
-InitializeSprites:
-                
-                movem.l d0-d1/a0,-(sp)
-                lea     (SPRITE_TABLE).l,a0
-                move.w  #1,d1
-@Loop:
-                
-                move.w  #1,(a0)+
-                move.w  d1,(a0)+
-                move.w  #1,(a0)+
-                move.w  #1,(a0)+
-                addq.w  #1,d1
-                dbf     d0,@Loop
-                
-                subq.l  #6,a0
-                clr.w   (a0)
-                movem.l (sp)+,d0-d1/a0
-                rts
-
-    ; End of function InitializeSprites
-
-
-; =============== S U B R O U T I N E =======================================
-
-; related to spell animations
-
-
-sub_179C:
-                
-                movem.l d0/d2/a0,-(sp)
-                andi.w  #$FF,d0
-                move.w  d0,d2
-                lsr.w   #6,d2
-                lea     byte_183C(pc), a0
-                move.b  (a0,d2.w),d2
-                andi.w  #$3F,d0 
-                add.w   d0,d0
-                lea     word_1840(pc), a0
-                move.w  d0,d1
-                lsr.b   #1,d2
-                bcc.s   loc_17C6
-                subi.w  #$80,d1 
-                neg.w   d1
-loc_17C6:
-                
-                move.w  (a0,d1.w),d1
-                lsr.b   #1,d2
-                bcc.s   loc_17D0
-                neg.w   d1
-loc_17D0:
-                
-                swap    d1
-                lsr.b   #1,d2
-                bcc.s   loc_17DC
-                subi.w  #$80,d0 
-                neg.w   d0
-loc_17DC:
-                
-                move.w  (a0,d0.w),d1
-                lsr.b   #1,d2
-                bcc.s   loc_17E6
-                neg.w   d1
-loc_17E6:
-                
-                movem.l (sp)+,d0/d2/a0
-                rts
-
-    ; End of function sub_179C
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_17EC:
-                
-                movem.l d1/d3,-(sp)
-                move.w  d1,d3
-                lsr.w   #1,d3
-                bsr.s   sub_179C        
-                move.w  d1,d2
-                muls.w  d3,d2
-                asr.l   #8,d2
-                asr.l   #7,d2
-                swap    d1
-                swap    d2
-                muls.w  d3,d1
-                asr.l   #8,d1
-                asr.l   #7,d1
-                move.w  d1,d2
-                swap    d2
-                movem.l (sp)+,d1/d3
-                rts
-
-    ; End of function sub_17EC
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_1812:
-                
-                movem.l d1/d3,-(sp)
-                move.l  d1,d3
-                bsr.s   sub_179C        
-                move.w  d1,d2
-                lsr.w   #1,d3
-                muls.w  d3,d2
-                asr.l   #8,d2
-                asr.l   #7,d2
-                swap    d1
-                swap    d2
-                swap    d3
-                lsr.w   #1,d3
-                muls.w  d3,d1
-                asr.l   #8,d1
-                asr.l   #7,d1
-                move.w  d1,d2
-                swap    d2
-                movem.l (sp)+,d1/d3
-                rts
-
-    ; End of function sub_1812
-
-byte_183C:      dc.b 6                  ; related to spell animations
-                dc.b $B
-                dc.b $C
-                dc.b 1
-word_1840:      dc.w 0
-                dc.w 6
-                dc.w $C
-                dc.w $12
-                dc.w $19
-                dc.w $1F
-                dc.w $25
-                dc.w $2B
-                dc.w $31
-                dc.w $38
-                dc.w $3E
-                dc.w $44
-                dc.w $4A
-                dc.w $50
-                dc.w $56
-                dc.w $5C
-                dc.w $61
-                dc.w $67
-                dc.w $6D
-                dc.w $73
-                dc.w $78
-                dc.w $7E
-                dc.w $83
-                dc.w $88
-                dc.w $8E
-                dc.w $93
-                dc.w $98
-                dc.w $9D
-                dc.w $A2
-                dc.w $A7
-                dc.w $AB
-                dc.w $B0
-                dc.w $B5
-                dc.w $B9
-                dc.w $BD
-                dc.w $C1
-                dc.w $C5
-                dc.w $C9
-                dc.w $CD
-                dc.w $D1
-                dc.w $D4
-                dc.w $D8
-                dc.w $DB
-                dc.w $DE
-                dc.w $E1
-                dc.w $E4
-                dc.w $E7
-                dc.w $EA
-                dc.w $EC
-                dc.w $EE
-                dc.w $F1
-                dc.w $F3
-                dc.w $F4
-                dc.w $F6
-                dc.w $F8
-                dc.w $F9
-                dc.w $FB
-                dc.w $FC
-                dc.w $FD
-                dc.w $FE
-                dc.w $FE
-                dc.w $FF
-                dc.w $FF
-                dc.w $FF
-                dc.w $100
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_18C2:
-                
-                movem.l d0-d2,-(sp)
-                ext.l   d6
-                move.w  d6,d0
-                moveq   #$13,d2
-                lsr.w   #1,d0
-                move.w  d0,d7
-loc_18D0:
-                
-                move.w  d7,d1
-                mulu.w  d1,d1
-                lsr.w   #1,d0
-                cmp.l   d1,d6
-                beq.w   loc_18E8
-                blt.s   loc_18E2
-                add.w   d0,d7
-                bra.s   loc_18E4
-loc_18E2:
-                
-                sub.w   d0,d7
-loc_18E4:
-                
-                dbf     d2,loc_18D0
-loc_18E8:
-                
-                movem.l (sp)+,d0-d2
-                rts
-
-    ; End of function sub_18C2
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_18EE:
-                
-                movem.l d0-d2,-(sp)
-                move.w  d6,d0
-                move.w  d7,d1
-                muls.w  d6,d6
-                muls.w  d7,d7
-                add.w   d7,d6
-                bsr.s   sub_18C2
-                move.w  d7,d6
-                move.w  d1,d7
-                bge.s   loc_1906
-                neg.w   d7
-loc_1906:
-                
-                lsl.w   #6,d7
-                divs.w  d6,d7
-                move.b  sub_1942(pc,d7.w),d7
-                andi.w  #$FF,d7
-                movem.l d0,-(sp)
-                muls.w  d1,d0
-                movem.l (sp)+,d0
-                blt.s   loc_192E
-                tst.w   d1
-                bge.s   loc_1928
-                addi.w  #$40,d7 
-                bra.s   loc_192C
-loc_1928:
-                
-                addi.w  #$C0,d7 
-loc_192C:
-                
-                bra.s   loc_193C
-loc_192E:
-                
-                subi.w  #$40,d7 
-                neg.w   d7
-                tst.w   d1
-                bge.s   loc_193C
-                addi.w  #$80,d7 
-loc_193C:
-                
-                movem.l (sp)+,d0-d2
-                rts
-
-    ; End of function sub_18EE
-
-
-; =============== S U B R O U T I N E =======================================
-
-; something with clearing/resetting sprite info when transitioning to battlescene?
-
-
-sub_1942:
-                
-                movem.l d0-d2/d7-a1,-(sp)
-                lea     (SPRITE_00_LINK).l,a1
-                clr.w   d1
-                moveq   #2,d0
-                bsr.w   sub_196C
-                bsr.w   sub_196C
-                bsr.w   sub_198C
-                clr.w   d2
-                move.b  d2,(a1,d1.w)
-                move.w  d2,d1
-                lsl.w   #3,d1
-                movem.l (sp)+,d0-d2/d7-a1
-                rts
-
-    ; End of function sub_1942
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_196C:
-                
-                lea     (byte_FFAFA1).l,a0
-                moveq   #$3E,d7 
-                moveq   #1,d2
-loc_1976:
-                
-                cmp.b   (a0)+,d0
-                bne.s   loc_1982
-                move.b  d2,(a1,d1.w)
-                move.w  d2,d1
-                lsl.w   #3,d1
-loc_1982:
-                
-                addq.w  #1,d2
-                dbf     d7,loc_1976
-                subq.w  #1,d0
-                rts
-
-    ; End of function sub_196C
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_198C:
-                
-                lea     (byte_FFAFA1).l,a0
-                moveq   #$3E,d7 
-                moveq   #1,d2
-loc_1996:
-                
-                cmp.b   (a0)+,d0
-                bne.s   loc_19A8
-                move.b  d2,(a1,d1.w)
-                move.w  d2,d1
-                lsl.w   #3,d1
-                bclr    #7,1(a1,d1.w)
-loc_19A8:
-                
-                addq.w  #1,d2
-                dbf     d7,loc_1996
-                rts
-
-    ; End of function sub_198C
-
-
-; =============== S U B R O U T I N E =======================================
-
-; clear table related to sprites
-
-
-sub_19B0:
-                
-                movem.l d0/a0,-(sp)
-                moveq   #63,d0
-                lea     (byte_FFAFA0).l,a0
-@Loop:
-                
-                clr.b   (a0)+
-                dbf     d0,@Loop
-                
-                movem.l (sp)+,d0/a0
-                rts
-
-    ; End of function sub_19B0
-
-
-; =============== S U B R O U T I N E =======================================
-
-; palette copies to figure out
-
-
-sub_19C8:
-                
-                movem.l d7-a1,-(sp)
-                lea     (PALETTE_1_BASE).l,a1
-                move.w  #CRAM_SIZE,d7
-                jsr     CopyBytes(pc)   
-                lea     (PALETTE_1_CURRENT).l,a0
-                lea     ((PALETTE_1_BACKUP-$1000000)).w,a1
-                move.w  #CRAM_SIZE,d7
-                jsr     CopyBytes(pc)   
-                move.b  #32,((FADING_TIMER_WORD-$1000000)).w
-                movem.l (sp)+,d7-a1
-                rts
-
-    ; End of function sub_19C8
-
-
-; =============== S U B R O U T I N E =======================================
-
-; related to palette updating, maybe unused
-
-
-sub_19F8:
-                
-                clr.w   d6
-                move.b  ((FADING_TIMER_WORD-$1000000)).w,d6
-                bne.s   loc_1A02
-                rts
-loc_1A02:
-                
-                lea     (PALETTE_1_BASE).l,a0
-                lea     (PALETTE_1_CURRENT).l,a1
-                lea     ((PALETTE_1_BACKUP-$1000000)).w,a2
-                moveq   #$3F,d7 
-                subq.w  #1,d6
-                move.b  d6,((FADING_TIMER_WORD-$1000000)).w
-                lsr.w   #2,d6
-loc_1A1C:
-                
-                clr.w   d0
-                clr.w   d1
-                move.b  (a2)+,d0
-                move.b  (a2)+,d1
-                move.w  d1,d2
-                lsr.w   #4,d1
-                andi.w  #$F,d2
-                clr.w   d3
-                clr.w   d4
-                move.b  (a0)+,d3
-                move.b  (a0)+,d4
-                move.w  d4,d5
-                lsr.w   #4,d4
-                andi.w  #$F,d5
-                move.w  d7,-(sp)
-                moveq   #8,d7
-                sub.w   d6,d7
-                mulu.w  d6,d0
-                mulu.w  d6,d1
-                mulu.w  d6,d2
-                mulu.w  d7,d3
-                mulu.w  d7,d4
-                mulu.w  d7,d5
-                add.w   d3,d0
-                add.w   d4,d1
-                add.w   d5,d2
-                lsr.w   #3,d0
-                lsr.w   #3,d1
-                lsr.w   #3,d2
-                lsl.w   #4,d1
-                or.w    d1,d2
-                move.b  d0,(a1)+
-                move.b  d2,(a1)+
-                move.w  (sp)+,d7
-                dbf     d7,loc_1A1C
-                jsr     ApplyVIntCramDma(pc)
-                tst.b   ((FADING_TIMER_WORD-$1000000)).w
-                bne.s   return_1A7E
-                lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
-                tst.b   ((FADING_TIMER_BYTE-$1000000)).w
-                bne.w   sub_19C8        
-return_1A7E:
-                
-                rts
-
-    ; End of function sub_19F8
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-nullsub_1A80:
-                
-                rts
-
-    ; End of function nullsub_1A80
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-nullsub_1A82:
-                
-                rts
-
-    ; End of function nullsub_1A82
-
-
-; =============== S U B R O U T I N E =======================================
-
-; Basic tile decompression : a0 = Source, a1 = Destination
+; Basic tile decompression.  In: a0 = Source, a1 = Destination
 
 var_32 = -32
 
-LoadSpriteData:
+LoadBasicCompressedData:
                 
                 movem.l d1-d2/a0-a3,-(sp)
                 movea.l a1,a3
-                moveq   #$FFFFFFFF,d0
+                moveq   #-1,d0
                 add.w   d0,d0
                 bra.s   loc_1A92
 loc_1A90:
@@ -662,8 +171,9 @@ loc_1BEC:
                 moveq   #3,d4
 loc_1BEE:
                 
-                lsl.w   #4,d2
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2
                 dbf     d3,loc_1BF8
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1BF8:
@@ -671,6 +181,7 @@ loc_1BF8:
                 add.w   d0,d0
                 bcc.w   loc_1C76
                 dbf     d3,loc_1C06
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1C06:
@@ -679,6 +190,7 @@ loc_1C06:
                 bcs.s   loc_1C22
                 moveq   #0,d1
                 dbf     d3,loc_1C14
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1C14:
@@ -687,10 +199,12 @@ loc_1C14:
                 addx.w  d1,d1
                 bset    d1,d2
                 dbf     d4,loc_1BEE
+                
                 bra.w   loc_1C7A
 loc_1C22:
                 
                 dbf     d3,loc_1C2A
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1C2A:
@@ -699,10 +213,12 @@ loc_1C2A:
                 bcs.s   loc_1C38
                 addq.w  #4,d2
                 dbf     d4,loc_1BEE
+                
                 bra.w   loc_1C7A
 loc_1C38:
                 
                 dbf     d3,loc_1C40
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1C40:
@@ -711,6 +227,7 @@ loc_1C40:
                 bcs.s   loc_1C4E
                 addq.b  #8,d2
                 dbf     d4,loc_1BEE
+                
                 bra.w   loc_1C7A
 loc_1C4E:
                 
@@ -726,7 +243,7 @@ loc_1C4E:
                 addi.w  #$10,d3
                 move.l  d0,d1
                 swap    d1
-                andi.w  #$F,d1
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
                 bra.s   loc_1C74
 loc_1C6E:
                 
@@ -770,10 +287,11 @@ loc_1CB0:
                 
                 beq.w   loc_1E3E
                 lsl.w   #5,d1
-                moveq   #$FFFFFFFF,d5
+                moveq   #-1,d5
 loc_1CB8:
                 
                 dbf     d3,loc_1CC0
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1CC0:
@@ -789,8 +307,9 @@ loc_1CD2:
                 moveq   #3,d6
 loc_1CD4:
                 
-                lsl.w   #4,d7
+                lsl.w   #NIBBLE_SHIFT_COUNT,d7
                 dbf     d3,loc_1CDE
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1CDE:
@@ -798,6 +317,7 @@ loc_1CDE:
                 add.w   d0,d0
                 bcs.s   loc_1D08
                 dbf     d3,loc_1CEA
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1CEA:
@@ -806,6 +326,7 @@ loc_1CEA:
                 bcs.s   loc_1CF8
                 add.w   (a5),d7
                 dbf     d6,loc_1CD4
+                
                 bra.w   loc_1E34
 loc_1CF8:
                 
@@ -814,10 +335,12 @@ loc_1CF8:
                 swap    d5
                 move.l  d5,(a5)
                 dbf     d6,loc_1CD4
+                
                 bra.w   loc_1E34
 loc_1D08:
                 
                 dbf     d3,loc_1D10
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1D10:
@@ -825,6 +348,7 @@ loc_1D10:
                 add.w   d0,d0
                 bcs.s   loc_1D4E
                 dbf     d3,loc_1D1C
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1D1C:
@@ -836,6 +360,7 @@ loc_1D1C:
                 move.l  (a5),2(a5)
                 move.w  d5,(a5)
                 dbf     d6,loc_1CD4
+                
                 bra.w   loc_1E34
 loc_1D34:
                 
@@ -846,10 +371,12 @@ loc_1D34:
                 swap    d5
                 move.w  d5,6(a5)
                 dbf     d6,loc_1CD4
+                
                 bra.w   loc_1E34
 loc_1D4E:
                 
                 dbf     d3,loc_1D56
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1D56:
@@ -862,6 +389,7 @@ loc_1D56:
                 move.l  (a5),2(a5)
                 move.w  d5,(a5)
                 dbf     d6,loc_1CD4
+                
                 bra.w   loc_1E34
 loc_1D74:
                 
@@ -951,6 +479,7 @@ loc_1E0A:
                 
                 moveq   #7,d5
                 dbf     d3,loc_1E14
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_1E14:
@@ -971,6 +500,7 @@ loc_1E26:
 loc_1E2A:
                 
                 dbf     d5,loc_1E26
+                
                 move.w  d1,(a2)
                 dbf     d6,loc_1CD4
 loc_1E34:
@@ -979,6 +509,7 @@ loc_1E34:
 loc_1E36:
                 
                 dbf     d4,loc_1C7E
+                
                 bra.w   loc_1BEC
 loc_1E3E:
                 
@@ -987,16 +518,16 @@ loc_1E3E:
                 movem.l (sp)+,d0-a2/a5
                 rts
 
-    ; End of function LoadSpriteData
+    ; End of function LoadBasicCompressedData
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Stack decompression : a0 = Source, a1 = Destination
+; Stack decompression.  In: a0 = Source, a1 = Destination
 
 history = -32
 
-LoadCompressedData:
+LoadStackCompressedData:
                 
                 movem.l d1-a5,-(sp)
                 link    a6,#-32         ; push d1-a6 to stack
@@ -1028,8 +559,9 @@ loc_1E8E:
                 bcs.s   loc_1E9C        
 loc_1E92:
                 
-                lsl.w   #4,d2           ; bit sequence 0 --> d2 = xxx0
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2 ; bit sequence 0 --> d2 = xxx0
                 dbf     d3,loc_1E8E     ; loop 4 times
+                
                 bra.w   loc_1F24        
 loc_1E9C:
                 
@@ -1043,7 +575,7 @@ loc_1EA4:
                 bcs.s   loc_1EC0        
 loc_1EA8:
                 
-                lsl.w   #4,d2           ; next bit was 0, d2 4-bit-shifted
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2 ; next bit was 0, d2 4-bit-shifted
                 moveq   #0,d1           ; d1 = 0
                 add.w   d0,d0           ; test next bit
                 bne.s   loc_1EB4        
@@ -1054,6 +586,7 @@ loc_1EB4:
                 addx.w  d1,d1           ; d1 = 0 or 1 depending on parsed bit
                 bset    d1,d2           ; d2 = xxx1 or xxx2 if next bit was 1
                 dbf     d3,loc_1E8E     
+                
                 bra.w   loc_1F24        
 loc_1EC0:
                 
@@ -1067,9 +600,10 @@ loc_1EC8:
                 bcs.s   loc_1ED8        
 loc_1ECC:
                 
-                lsl.w   #4,d2           ; bit sequence 110 --> d2 = xxx4
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2 ; bit sequence 110 --> d2 = xxx4
                 addq.w  #4,d2           ; d2 = xxx4
                 dbf     d3,loc_1E8E     
+                
                 bra.w   loc_1F24        
 loc_1ED8:
                 
@@ -1083,9 +617,10 @@ loc_1EE0:
                 bcs.s   loc_1EF0        
 loc_1EE4:
                 
-                lsl.w   #4,d2           ; bit sequence 1110 --> d2 = xxx8
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2 ; bit sequence 1110 --> d2 = xxx8
                 addq.b  #8,d2           ; d2 = xxx8
                 dbf     d3,loc_1E8E     
+                
                 bra.w   loc_1F24        
 loc_1EF0:
                 
@@ -1126,7 +661,7 @@ loc_1F1E:
                 dbf     d3,loc_1E8E     
 loc_1F24:
                 
-                moveq   #$FFFFFFFF,d1   ; d3 = 0, loop end, d2 is set
+                moveq   #-1,d1          ; d3 = 0, loop end, d2 is set
                 add.w   d1,d1           ; d1 = -2 and carry set
                 addx.w  d2,d2           ; test next d2 bit and add 1
                 bcs.w   loc_204C        
@@ -1135,7 +670,7 @@ loc_1F2E:
                 moveq   #3,d3           ; start of loop for literal value from history stack
 loc_1F30:
                 
-                lsl.w   #4,d7           ; shift d7 (destination word)
+                lsl.w   #NIBBLE_SHIFT_COUNT,d7 ; shift d7 (destination word)
                 add.w   d0,d0           ; test next compressed data bit
                 bcs.s   loc_1F58        
 loc_1F36:
@@ -1146,6 +681,7 @@ loc_1F3A:
                 
                 add.w   d4,d7           ; bit sequence 00, d7 = xxx0
                 dbf     d3,loc_1F30     
+                
                 bra.w   loc_2040        
 loc_1F44:
                 
@@ -1159,6 +695,7 @@ word_1F4C:
                                         ;  exg     d6,d4
                 dc.w $DE44              ;  add.w   d4,d7
                 dbf     d3,loc_1F30     
+                
                 bra.w   loc_2040        
 loc_1F58:
                 
@@ -1180,6 +717,7 @@ loc_1F68:
                 dc.w $CD44              ; exg     d6,d4
                 dc.w $DE44              ; add.w   d4,d7
                 dbf     d3,loc_1F30     
+                
                 bra.w   loc_2040        
 loc_1F76:
                 
@@ -1195,6 +733,7 @@ word_1F7E:
                 dc.w $CD44              ; exg     d6,d4
                 dc.w $DE44              ; add.w   d4,d7
                 dbf     d3,loc_1F30     
+                
                 bra.w   loc_2040        
 loc_1F8E:
                 
@@ -1216,6 +755,7 @@ loc_1F9A:
                 move.l  d5,d4
                 add.w   d4,d7
                 dbf     d3,loc_1F30     
+                
                 bra.w   loc_2040        
 loc_1FB0:
                 
@@ -1303,6 +843,7 @@ loc_202A:
 loc_202E:
                 
                 dbf     d5,loc_202A     
+                
                 move.w  a4,(a2)
                 movea.l a3,a4
                 movea.l d6,a3
@@ -1423,5 +964,5 @@ loc_20DA:
                 sub.l   a1,d0
                 rts
 
-    ; End of function LoadCompressedData
+    ; End of function LoadStackCompressedData
 

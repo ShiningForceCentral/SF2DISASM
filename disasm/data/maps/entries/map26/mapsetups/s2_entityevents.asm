@@ -54,7 +54,7 @@ Map26_EntityEvent2:
 
 Map26_EntityEvent4:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map26_EntityEvent4
@@ -65,7 +65,7 @@ Map26_EntityEvent4:
 
 Map26_EntityEvent5:
                 
-                jsr     j_CaravanActions
+                jsr     j_CaravanMenu
                 rts
 
     ; End of function Map26_EntityEvent5
