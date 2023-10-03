@@ -23,32 +23,32 @@
                   warpFacing DOWN
                 mWarp 2, 11
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   2, 24
                   warpFacing RIGHT
                 mWarp 2, 24
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   2, 11
                   warpFacing RIGHT
                 mWarp 26, 26
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   58, 12
                   warpFacing RIGHT
                 mWarp 58, 12
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   26, 26
                   warpFacing RIGHT
                 mWarp 35, 14
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   39, 30
                   warpFacing DOWN
                 mWarp 42, 30
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   24, 9
                   warpFacing DOWN
                 mWarp 15, 22

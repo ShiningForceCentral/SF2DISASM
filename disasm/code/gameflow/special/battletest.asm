@@ -7,8 +7,8 @@
 
 DebugModeBattleTest:
                 
-                move.b  #$FF,((DEBUG_MODE_TOGGLE-$1000000)).w
-                move.b  #$FF,((SPECIAL_TURBO_TOGGLE-$1000000)).w
+                move.b  #-1,((DEBUG_MODE_TOGGLE-$1000000)).w
+                move.b  #-1,((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 
                 moveq   #ALLY_SARAH,d0
                 bsr.w   j_JoinForce
@@ -69,8 +69,8 @@ DebugModeBattleTest:
                 moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
                 
-                moveq   #0,d0
-                move.w  #$63,d1 
+                moveq   #ALLY_BOWIE,d0
+                move.w  #99,d1
                 bsr.w   j_SetBaseAgi
                 bsr.w   j_SetBaseAtt
                 bsr.w   j_SetBaseDef
@@ -88,6 +88,8 @@ DebugModeBattleTest:
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
                 bsr.w   InitializeWindowProperties
+                
+                ; Populate generic list with ally indexes [0,31]
                 move.w  #COMBATANT_ALLIES_NUMBER,(GENERIC_LIST_LENGTH).l
                 lea     (GENERIC_LIST).l,a0
                 move.l  #$10203,(a0)+     ; ally indexes 0-3
@@ -99,8 +101,9 @@ DebugModeBattleTest:
                 move.l  #$18191A1B,(a0)+  ; ally indexes 24-27
                 move.l  #$1C1D1E1F,(a0)+  ; ally indexes 28-31
                 bsr.w   CheatModeConfiguration
-StartBattleTest:
+byte_77DE:
                 
+                @Start:
                 txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
@@ -108,7 +111,8 @@ StartBattleTest:
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0
-                blt.w   loc_7894
+                blt.w   @DebugLevelUp
+                
                 movem.w d0-d2,-(sp)
                 clr.w   d0
                 clr.w   d1
@@ -116,19 +120,20 @@ StartBattleTest:
                 jsr     j_NumberPrompt
                 tst.w   d0
                 movem.w (sp)+,d0-d2
-                beq.s   loc_7820
+                
+                beq.s   @DebugSetFlags
                 move.w  d0,d1
                 addi.w  #BATTLE_INTRO_CUTSCENE_FLAGS_START,d1
                 jsr     j_SetFlag
-loc_7820:
+@DebugSetFlags:
                 
                 movem.w d0-d4,-(sp)
-                move.w  #FLAG_INDEX_FOLLOWERS_ASTRAL,d0 
+                move.w  #FLAG_INDEX_FOLLOWERS_ASTRAL,d0 ; Astral is a follower
                 jsr     j_DebugFlagSetter
                 movem.w (sp)+,d0-d4
                 clr.w   d1
                 move.b  d0,d1
-                mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
+                mulu.w  #BATTLEMAPCOORDINATES_ENTRY_SIZE_FULL,d0
                 lea     table_BattleMapCoordinates(pc), a0
                 nop
                 adda.w  d0,a0
@@ -139,35 +144,35 @@ loc_7820:
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
                 
                 jsr     j_BattleLoop
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 txt     460             ; "Shop number?{D1}"
                 move.w  #0,d0
                 move.w  #0,d1
-                move.w  #SHOPS_DEBUG_NUMBER,d2 
+                move.w  #SHOPS_DEBUG_MAX_INDEX,d2 
                 jsr     j_NumberPrompt
                 clsTxt
                 move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
-                jsr     j_MainMenuActions
-                jsr     j_CaravanMenuActions
-                bra.w   StartBattleTest
-loc_7894:
+                jsr     j_ShopMenu
+                jsr     j_FieldMenu
+                jsr     j_CaravanMenu
+                bra.w   byte_77DE       ; @Start
+@DebugLevelUp:
                 
                 bsr.w   LoadAllyStatsDecimalDigits
                 jsr     j_InitializeMembersListScreen
                 tst.b   d0
-                bne.w   StartBattleTest       
-                bpl.s   loc_78B6
+                bne.w   byte_77DE       ; @Start
+                bpl.s   @loc_4
                 movem.l d0-a6,-(sp)
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 movem.l (sp)+,d0-a6
-                bra.s   loc_78BA
-loc_78B6:
+                bra.s   @loc_5
+@loc_4:
                 
                 bsr.w   LevelUpWholeForce
-loc_78BA:
+@loc_5:
                 
-                bra.s   loc_7894
+                bra.s   @DebugLevelUp
 
     ; End of function DebugModeBattleTest
 

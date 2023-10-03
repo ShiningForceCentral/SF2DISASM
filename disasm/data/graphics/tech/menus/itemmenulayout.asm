@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\menus\itemmenulayout.asm :
 ; 0x10FCC..0x110A4 : Item menu layout
-ItemMenuLayout: 
+layout_ItemMenu:
 ; Syntax        vdpTile [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
 ;
 ;      palette: PALETTE1 = 0 (default when omitted)

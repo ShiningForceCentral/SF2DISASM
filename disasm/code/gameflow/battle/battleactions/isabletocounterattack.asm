@@ -15,7 +15,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -30,68 +30,70 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-FinalCounterAttackCheck:
+battlesceneScript_ValidateCounterAttack:
                 
                 movem.l d0-d3/a0,-(sp)
                 tst.b   counterAttack(a2)
-                beq.w   @ClearCounter
+                beq.w   @ClearCounterToggle
                 tst.b   targetDies(a2)
-                bne.w   @ClearCounter
+                bne.w   @ClearCounterToggle
                 tst.b   muddledActor(a2)
-                bne.w   @ClearCounter
+                bne.w   @ClearCounterToggle
                 tst.b   targetIsOnSameSide(a2)
-                bne.w   @ClearCounter
+                bne.w   @ClearCounterToggle
                 
                 ; Check status effects
                 move.b  (a4),d0
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_SLEEP,d1
-                bne.w   @ClearCounter
+                bne.w   @ClearCounterToggle
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_STUN,d1
-                bne.w   @ClearCounter
+                bne.w   @ClearCounterToggle
                 
                 ; Enemies that cannot counter
                 move.b  (a5),d0
                 jsr     GetEnemy        
                 cmpi.w  #ENEMY_TAROS,d1 ; HARDCODED enemy indexes
-                beq.w   @ClearCounter
+                beq.w   @ClearCounterToggle
                 
                 ; Enemies that cannot be countered
                 move.b  (a4),d0
                 jsr     GetEnemy        
                 cmpi.w  #ENEMY_BURST_ROCK,d1
-                beq.w   @ClearCounter
+                beq.w   @ClearCounterToggle
                 cmpi.w  #ENEMY_KRAKEN_HEAD,d1
-                beq.w   @ClearCounter
+                beq.w   @ClearCounterToggle
                 cmpi.w  #ENEMY_PRISM_FLOWER,d1
-                beq.w   @ClearCounter
+                beq.w   @ClearCounterToggle
                 cmpi.w  #ENEMY_ZEON_GUARD,d1
-                beq.w   @ClearCounter
+                beq.w   @ClearCounterToggle
                 
                 ; Check if target is in range
                 move.b  (a4),d0
                 move.b  (a5),d1
-                jsr     GetDistanceBetweenEntities
+                jsr     GetDistanceBetweenBattleEntities
                 move.b  (a4),d0
                 jsr     GetAttackRange  
                 cmp.b   d3,d2
-                bhi.w   @ClearCounter
+                bhi.w   @ClearCounterToggle
                 cmp.b   d4,d2
-                bcs.w   @ClearCounter
+                bcs.w   @ClearCounterToggle
+                
                 bra.w   @CheckDebugCounter
-@ClearCounter:
+@ClearCounterToggle:
                 
                 clr.b   counterAttack(a2)
 @CheckDebugCounter:
                 
                 tst.b   debugCounter(a2)
                 beq.s   @Done
-                move.b  #$FF,counterAttack(a2)
+                
+                move.b  #-1,counterAttack(a2)
 @Done:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function FinalCounterAttackCheck
+    ; End of function battlesceneScript_ValidateCounterAttack
 

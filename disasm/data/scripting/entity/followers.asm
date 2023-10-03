@@ -1,9 +1,9 @@
 
 ; ASM FILE data\scripting\entity\followers.asm :
 ; 0x44338..0x4438A : Follower declarations
-tbl_OverworldFollowers:
+table_OverworldFollowers:
                 follower 65, FOLLOWER_A, MAPSPRITE_CARAVAN, 0
-tbl_Followers:  follower 66, ALLY_SARAH, $FF, 1
+table_Followers:follower 66, ALLY_SARAH, $FF, 1
                 follower 67, ALLY_PETER, $FF, 1
                 follower 72, ALLY_KAZIN, $FF, 1
                 follower 73, ALLY_SLADE, $FF, 1
@@ -23,4 +23,4 @@ tbl_Followers:  follower 66, ALLY_SARAH, $FF, 1
                 follower 83, FOLLOWER_D, MAPSPRITE_MINISTER, 1
                 follower 84, ALLY_ROHDE, $FF, 1
                 
-                tableEnd
+                tableEnd.w

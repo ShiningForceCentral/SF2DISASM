@@ -28,7 +28,7 @@ Map5_EntityEvent0:
                 txt     784             ; "What can I do for you?{N}Oh, you would like to see my{N}master?{W2}"
                 txt     785             ; "I am studying at his house.{N}Please follow me.{W1}"
                 clsTxt
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
                 clr.w   ((SPEECH_SFX-$1000000)).w
                 txt     786             ; "{CLEAR}{LEADER} decided to{N}follow {NAME;4}.{W1}{CLEAR}"
@@ -242,7 +242,7 @@ Map5_EntityEvent15:
 
 Map5_EntityEvent14:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map5_EntityEvent14

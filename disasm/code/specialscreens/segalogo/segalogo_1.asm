@@ -7,8 +7,8 @@
 
 VInt_CheckDebugModeCheat:
                 
-                movea.l ((ENTITY_WALKING_PARAMS-$1000000)).w,a0
-                cmpi.b  #$FF,(a0)
+                movea.l ((ENTITY_WALKING_PARAMETERS-$1000000)).w,a0
+                cmpi.b  #-1,(a0)
                 bne.s   CheckDebugModeInputSequence
 
     ; End of function VInt_CheckDebugModeCheat
@@ -19,7 +19,7 @@ VInt_CheckDebugModeCheat:
 
 VInt_ActivateDebugModeCheat:
                 
-                move.b  #$FF,((DEBUG_MODE_TOGGLE-$1000000)).w
+                move.b  #-1,((DEBUG_MODE_TOGGLE-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
                 rts
 
@@ -32,9 +32,9 @@ VInt_ActivateDebugModeCheat:
 CheckDebugModeInputSequence:
                 
                 move.b  (a0),d0
-                cmp.b   ((P1_INPUT-$1000000)).w,d0
+                cmp.b   ((PLAYER_1_INPUT-$1000000)).w,d0
                 bne.s   @Return
-                addq.l  #1,((ENTITY_WALKING_PARAMS-$1000000)).w
+                addq.l  #1,((ENTITY_WALKING_PARAMETERS-$1000000)).w
 @Return:
                 
                 rts

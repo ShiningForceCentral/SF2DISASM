@@ -21,6 +21,8 @@ WaitDmaEnd:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+; 
 ; VDP Reg Status -> d0.w
 
 
@@ -84,7 +86,8 @@ ApplyLogicalAndOnVdpReg:
     ; End of function ApplyLogicalAndOnVdpReg
 
 
-; START OF FUNCTION CHUNK FOR ApplyLogicalOrOnVdpReg
+; =============== S U B R O U T I N E =======================================
+
 
 SendVdpCommand:
                 
@@ -93,7 +96,7 @@ SendVdpCommand:
                 movem.l (sp)+,d0-d1/a0
                 rts
 
-; END OF FUNCTION CHUNK FOR ApplyLogicalOrOnVdpReg
+    ; End of function SendVdpCommand
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -171,7 +174,7 @@ DisableDisplayAndInterrupts:
 
 ActivateVIntDmaQueueProcessing:
                 
-                bclr    #DEACTIVATE_DMA,(VINT_PARAMS).l
+                bclr    #DEACTIVATE_DMA,(VINT_PARAMETERS).l
                 rts
 
     ; End of function ActivateVIntDmaQueueProcessing
@@ -179,10 +182,12 @@ ActivateVIntDmaQueueProcessing:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 DeactivateVIntDmaQueueProcessing:
                 
-                bset    #DEACTIVATE_DMA,(VINT_PARAMS).l
+                bset    #DEACTIVATE_DMA,(VINT_PARAMETERS).l
                 rts
 
     ; End of function DeactivateVIntDmaQueueProcessing
@@ -201,6 +206,7 @@ DuplicatePalettes:
                 
                 move.w  (a5)+,(a6)+
                 dbf     d7,@Loop
+                
                 movem.l (sp)+,d7/a5-a6
 
     ; End of function DuplicatePalettes
@@ -232,3 +238,4 @@ ApplyVIntCramDma:
                 rts
 
     ; End of function ApplyVIntCramDma
+

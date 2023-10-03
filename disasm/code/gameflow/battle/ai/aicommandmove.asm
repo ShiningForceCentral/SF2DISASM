@@ -20,20 +20,21 @@ ExecuteAiCommand_Move:
                 move.w  d0,d7           ; d0.w, d7.w = combatant index of the moving entity
                 move.b  d1,var_98(a6)
                 tst.b   d1
-                beq.s   loc_F1FE
+                beq.s   @loc_2
+                
                 cmpi.b  #1,d1
-                bne.s   loc_F1F2
+                bne.s   @loc_1
                 jsr     j_GetMoveListForEnemyTarget
-loc_F1F2:
+@loc_1:
                 
                 cmpi.b  #2,d1
-                bne.s   loc_F1FE
+                bne.s   @loc_2
                 jsr     sub_1AC030      
-loc_F1FE:
+@loc_2:
                 
-                bsr.w   GetMoveInfo     
+                bsr.w   InitializeMovementArrays
                 move.w  #128,d0         ; HARDCODED move value
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   PopulateMovementArrays
                 bsr.w   PopulateTargetsArrayWithAllCombatants
                 move.w  d7,d0
                 bsr.w   CheckMuddled2   
@@ -49,7 +50,7 @@ loc_F1FE:
                 move.w  #COMBATANT_ENEMIES_START,d6
 @Ally:
                 
-                bra.w   loc_F39E
+                bra.w   @loc_31
 @NotMuddled:
                 
                 move.w  d7,d0
@@ -108,27 +109,27 @@ loc_F1FE:
                 
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d1
                 cmpi.w  #1,d1
-                bgt.s   loc_F2A8
-                bra.w   loc_F39A
-loc_F2A8:
+                bgt.s   @loc_14
+                bra.w   @loc_30
+@loc_14:
                 
                 subq.w  #2,d1
                 move.b  #0,d2
                 lea     ((TARGETS_LIST-$1000000)).w,a0
-loc_F2B2:
+@loc_15:
                 
                 tst.b   d2
-                bpl.s   loc_F2BA
-                bra.w   loc_F2F6
-loc_F2BA:
+                bpl.s   @loc_16
+                bra.w   @loc_20
+@loc_16:
                 
-                move.b  #$FF,d2
+                move.b  #-1,d2
                 clr.w   d3
-loc_F2C0:
+@loc_17:
                 
                 move.b  var_95(a6,d3.w),d4
                 cmp.b   var_96(a6,d3.w),d4
-                bcc.s   loc_F2E8
+                bcc.s   @loc_18
                 move.b  var_95(a6,d3.w),d4
                 move.b  var_96(a6,d3.w),var_95(a6,d3.w)
                 move.b  d4,var_96(a6,d3.w)
@@ -136,23 +137,23 @@ loc_F2C0:
                 move.b  (a0,d3.w),1(a0,d3.w)
                 move.b  d4,(a0,d3.w)
                 move.w  d3,d2
-loc_F2E8:
+@loc_18:
                 
                 tst.w   d1
-                beq.s   loc_F2F2
+                beq.s   @loc_19
                 addq.w  #1,d3
                 subq.w  #1,d1
-                bra.s   loc_F2C0
-loc_F2F2:
+                bra.s   @loc_17
+@loc_19:
                 
                 move.w  d2,d1
-                bra.s   loc_F2B2
-loc_F2F6:
+                bra.s   @loc_15
+@loc_20:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_F300
-                bra.w   loc_F39A
-loc_F300:
+                bne.s   @loc_21
+                bra.w   @loc_30
+@loc_21:
                 
                 clr.w   d0
                 move.b  d7,d0
@@ -190,25 +191,25 @@ loc_F300:
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d6
                 subi.w  #2,d6
                 clr.w   d5
-loc_F350:
+@loc_26:
                 
                 move.b  var_48(a6,d5.w),d0
                 move.b  var_47(a6,d5.w),d1
                 sub.b   d1,d0
-                bpl.s   loc_F35E
+                bpl.s   @loc_27
                 neg.b   d0
-loc_F35E:
+@loc_27:
                 
                 cmpi.b  #1,d0
-                bgt.s   loc_F392
+                bgt.s   @loc_29
                 move.b  (a0,d5.w),d0
                 sub.b   1(a0,d5.w),d0
-                bpl.s   loc_F370
+                bpl.s   @loc_28
                 neg.b   d0
-loc_F370:
+@loc_28:
                 
                 cmpi.b  #3,d0
-                bgt.s   loc_F392
+                bgt.s   @loc_29
                 move.b  var_48(a6,d5.w),d0
                 move.b  d0,var_47(a6,d5.w)
                 move.b  d1,var_48(a6,d5.w)
@@ -216,15 +217,15 @@ loc_F370:
                 move.b  1(a0,d5.w),d1
                 move.b  d0,1(a0,d5.w)
                 move.b  d1,(a0,d5.w)
-loc_F392:
+@loc_29:
                 
                 addi.w  #1,d5
-                dbf     d6,loc_F350
-loc_F39A:
+                dbf     d6,@loc_26
+@loc_30:
                 
                 clr.w   d6
                 move.b  (a0),d6
-loc_F39E:
+@loc_31:
                 
                 clr.w   d0
                 move.b  d7,d0
@@ -233,21 +234,21 @@ loc_F39E:
                 bsr.w   GetEnemy        
                 cmpi.b  #ENEMY_KRAKEN_LEG,d1 ; HARDCODED enemy indexes
                 bne.s   @CheckKrakenArm
-                bra.w   @SpecialMoveCosts
+                bra.w   @SpecialMovecosts
 @CheckKrakenArm:
                 
                 cmpi.b  #ENEMY_KRAKEN_ARM,d1
                 bne.s   @CheckKrakenHead
-                bra.w   @SpecialMoveCosts
+                bra.w   @SpecialMovecosts
 @CheckKrakenHead:
                 
                 cmpi.b  #ENEMY_KRAKEN_HEAD,d1
                 bne.s   @NoMoveTable
-                bra.w   @SpecialMoveCosts
+                bra.w   @SpecialMovecosts
 @NoMoveTable:
                 
                 bra.w   @BasicMovement
-@SpecialMoveCosts:
+@SpecialMovecosts:
                 
                 jsr     j_ClearBattleTerrainArrayObstructionFlags
                 move.b  d6,d0
@@ -259,7 +260,7 @@ loc_F39E:
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN_ARRAY).l,a4
-                lea     tbl_KrakenMoveCosts(pc), a5
+                lea     table_KrakenMovecosts(pc), a5
                 nop
                 bra.w   @CommitMoveString
 @BasicMovement:
@@ -267,7 +268,7 @@ loc_F39E:
                 jsr     j_ClearBattleTerrainArrayObstructionFlags
                 clr.w   d0
                 move.b  d7,d0
-                bsr.w   PopulateMoveCostsTable
+                bsr.w   PopulateMovecostsTable
                 move.b  d6,d0
                 bsr.w   GetCombatantY
                 move.w  d1,d4
@@ -277,10 +278,10 @@ loc_F39E:
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN_ARRAY).l,a4
-                lea     ((MOVE_COSTS_TABLE-$1000000)).w,a5
+                lea     ((MOVECOSTS_TABLE-$1000000)).w,a5
 @CommitMoveString:
                 
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   PopulateMovementArrays
                 move.b  d7,d0
                 bsr.w   GetCombatantX
                 move.w  d1,d2
@@ -290,35 +291,36 @@ loc_F39E:
                 bsr.w   BuildMoveString 
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  (a0),d0
-                cmpi.b  #CODE_TERMINATOR_BYTE,d0
-                bne.s   loc_F476        
+                cmpi.b  #-1,d0
+                bne.s   @loc_38         
+                
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_STAY,(a0)
-                bra.w   loc_F512
-loc_F476:
+                bra.w   @loc_42
+@loc_38:
                 
                 move.b  var_98(a6),d1   ; special AI d1 value between 0-2
                 tst.b   d1
-                beq.s   loc_F49A        ; if d1 = 0, then no additional work
+                beq.s   @loc_40         ; if d1 = 0, then no additional work
                 cmpi.b  #1,d1
-                bne.s   loc_F48C
+                bne.s   @loc_39
                 move.b  d7,d0           ; d7 = character index of the moving unit
                 jsr     j_GetMoveListForEnemyTarget ; if d1 = 1
-loc_F48C:
+@loc_39:
                 
                 cmpi.b  #2,d1
-                bne.s   loc_F49A
+                bne.s   @loc_40
                 move.b  d7,d0
                 jsr     sub_1AC030      ; if d1 = 2
-loc_F49A:
+@loc_40:
                 
                 move.w  d7,d0
-                move.w  #$FFFF,d3
+                move.w  #-1,d3
                 bsr.w   UpdateBattleTerrainOccupiedByOpponents
-                bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   InitializeMovementArrays
+                bsr.w   PopulateMovementArrays
                 bsr.w   PopulateTargetsArrayWithAllCombatants
                 move.w  #0,d3
                 move.w  d7,d0
@@ -330,27 +332,27 @@ loc_F49A:
                 clr.w   d4
                 bsr.w   GetClosestAttackPosition
                 cmpi.b  #-1,d1
-                bne.s   loc_F4FE
+                bne.s   @loc_41
                 move.b  d7,d0
                 bsr.w   GetEnemyDestination
                 move.w  #1,d3
                 move.w  #1,d4
                 bsr.w   GetClosestAttackPosition
                 cmpi.b  #-1,d1
-                bne.s   loc_F4FE
+                bne.s   @loc_41
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_STAY,(a0)
-                bra.w   loc_F512
-loc_F4FE:
+                bra.w   @loc_42
+@loc_41:
                 
                 move.w  d1,d0
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   BuildAiMoveString
-loc_F512:
+@loc_42:
                 
                 jsr     j_ClearBattleTerrainArrayObstructionFlags
                 clr.w   d1

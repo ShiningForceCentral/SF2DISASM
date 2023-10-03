@@ -15,21 +15,23 @@ ExecuteMapScript:
                 clr.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
 loc_47140:
                 
-                btst    #INPUT_BIT_START,((P2_INPUT-$1000000)).w ; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
+                btst    #INPUT_BIT_START,((PLAYER_2_INPUT-$1000000)).w 
+                                                        ; if P2 START and DEBUG MODE, DEACTIVATE DIALOGS
                 beq.s   loc_47156
                 tst.b   (DEBUG_MODE_TOGGLE).l
                 beq.s   loc_47156
-                move.b  #$FF,((SKIP_CUTSCENE_TEXT-$1000000)).w
+                move.b  #-1,((SKIP_CUTSCENE_TEXT-$1000000)).w
 loc_47156:
                 
                 move.w  (a6)+,d0
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.w   loc_47234
+                
                 tst.w   d0
                 bpl.s   loc_47174
                 tst.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
                 bne.s   loc_47172       ; if cmd > $8000 and dialogs activated, SLEEP CMD
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 jsr     (Sleep).w       
 loc_47172:
                 
@@ -52,7 +54,7 @@ rjt_cutsceneScriptCommands:
                 dc.w csc06_doNothing-rjt_cutsceneScriptCommands
                 dc.w csc07_warp-rjt_cutsceneScriptCommands
                 dc.w csc08_joinForce-rjt_cutsceneScriptCommands
-                dc.w csc09_hideTextBoxAndPortrait-rjt_cutsceneScriptCommands
+                dc.w csc09_hideDialogueAndPortraitWindows-rjt_cutsceneScriptCommands
                 dc.w csc0A_executeSubroutine-rjt_cutsceneScriptCommands 
                                                         ; execute subroutine xxxxxxxx
                 dc.w csc0B_jump-rjt_cutsceneScriptCommands
@@ -60,7 +62,7 @@ rjt_cutsceneScriptCommands:
                 dc.w csc0D_jumpIfFlagClear-rjt_cutsceneScriptCommands
                 dc.w csc0E_jumpIfForceMemberInList-rjt_cutsceneScriptCommands
                 dc.w csc0F_jumpIfCharacterDead-rjt_cutsceneScriptCommands
-                dc.w csc10_ToggleFlag-rjt_cutsceneScriptCommands
+                dc.w csc10_toggleFlag-rjt_cutsceneScriptCommands
                 dc.w csc11_promptYesNoForStoryFlow-rjt_cutsceneScriptCommands
                 dc.w csc12_executeContextMenu-rjt_cutsceneScriptCommands
                 dc.w csc13_setStoryFlag-rjt_cutsceneScriptCommands
@@ -165,8 +167,9 @@ csc00_displaySingleTextbox:
                 
                 tst.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
                 bne.s   loc_47298
-                cmpi.w  #$FFFF,(a6)
+                cmpi.w  #-1,(a6)
                 beq.s   loc_4726A
+                
                 move.l  a6,-(sp)
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
@@ -184,7 +187,7 @@ loc_47270:
                 jsr     (WaitForViewScrollEnd).w
                 jsr     (DisplayText).l 
                 addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w ; increment script number (move forward in script bank)
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 clsTxt
                 moveq   #10,d0
                 jsr     (Sleep).w       
@@ -204,8 +207,9 @@ return_4729C:
 
 csc01_displaySingleTextboxWithVars:
                 
-                cmpi.w  #$FFFF,(a6)
+                cmpi.w  #-1,(a6)
                 beq.s   loc_472B8
+                
                 move.l  a6,-(sp)
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
@@ -220,12 +224,12 @@ loc_472BE:
                 
                 adda.w  #2,a6
                 move.w  (a6)+,((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  (a6)+,((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
                 jsr     (WaitForViewScrollEnd).w
                 jsr     (DisplayText).l 
                 addq.w  #1,((CUTSCENE_DIALOG_INDEX-$1000000)).w
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 clsTxt
                 moveq   #10,d0
                 jsr     (Sleep).w       
@@ -241,8 +245,9 @@ csc02_displayTextbox:
                 
                 tst.b   ((SKIP_CUTSCENE_TEXT-$1000000)).w
                 bne.s   loc_4732C
-                cmpi.w  #$FFFF,(a6)
+                cmpi.w  #-1,(a6)
                 beq.s   loc_4730E
+                
                 move.l  a6,-(sp)
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
@@ -276,8 +281,9 @@ return_47330:
 
 csc03_displayTextboxWithVars:
                 
-                cmpi.w  #$FFFF,(a6)
+                cmpi.w  #-1,(a6)
                 beq.s   loc_4734C
+                
                 move.l  a6,-(sp)
                 bsr.w   csc1D_showPortrait
                 movea.l (sp)+,a6
@@ -292,7 +298,7 @@ loc_47352:
                 
                 adda.w  #2,a6
                 move.w  (a6)+,((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  (a6)+,((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  (a6)+,((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  ((CUTSCENE_DIALOG_INDEX-$1000000)).w,d0
                 jsr     (WaitForViewScrollEnd).w
                 jsr     (DisplayText).l 
@@ -387,7 +393,7 @@ loc_473D4:
                 jsr     j_JoinForce
                 jsr     j_GetClass
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  d1,((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  d1,((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     446             ; "{NAME} the {CLASS} {N}has joined the force."
 loc_473EC:
                 
@@ -406,13 +412,13 @@ loc_473EC:
 ; =============== S U B R O U T I N E =======================================
 
 
-csc09_hideTextBoxAndPortrait:
+csc09_hideDialogueAndPortraitWindows:
                 
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 clsTxt
                 rts
 
-    ; End of function csc09_hideTextBoxAndPortrait
+    ; End of function csc09_hideDialogueAndPortraitWindows
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -539,7 +545,7 @@ return_47478:
 ; xxxx yyyy
 
 
-csc10_ToggleFlag:
+csc10_toggleFlag:
                 
                 move.w  (a6)+,d1
                 move.w  (a6)+,d0
@@ -553,7 +559,7 @@ return_4748E:
                 
                 rts
 
-    ; End of function csc10_ToggleFlag
+    ; End of function csc10_toggleFlag
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -590,17 +596,17 @@ csc12_executeContextMenu:
                 move.l  a6,-(sp)
                 tst.w   d0
                 bne.s   loc_474C4
-                jsr     j_ChurchMenuActions ; xxxx = 0
+                jsr     j_ChurchMenu    ; xxxx = 0
 loc_474C4:
                 
                 cmpi.w  #1,d0
                 bne.s   loc_474D0
-                jsr     j_ShopMenuActions ; xxxx = 1
+                jsr     j_ShopMenu      ; xxxx = 1
 loc_474D0:
                 
                 cmpi.w  #2,d0
                 bne.s   loc_474DC
-                jsr     j_BlacksmithActions ; xxxx = 2
+                jsr     j_BlacksmithMenu ; xxxx = 2
 loc_474DC:
                 
                 movea.l (sp)+,a6
@@ -626,7 +632,9 @@ csc13_setStoryFlag:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 sub_474EE:
                 
                 moveq   #0,d0

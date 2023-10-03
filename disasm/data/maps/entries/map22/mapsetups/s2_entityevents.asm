@@ -39,7 +39,7 @@ ms_map22_EntityEvents:
 
 Map22_EntityEvent2:
                 
-                jsr     j_CaravanMenuActions
+                jsr     j_CaravanMenu
                 rts
 
     ; End of function Map22_EntityEvent2
@@ -116,7 +116,7 @@ Map22_EntityEvent1:
 
 Map22_EntityEvent6:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map22_EntityEvent6
@@ -307,7 +307,7 @@ Map22_EntityEvent22:
 
             if (STANDARD_BUILD&MINIATURES_SHOP=1)
                 move.b  #SHOP_MINATURES_ROOM,((CURRENT_SHOP_INDEX-$1000000)).w
-                jmp     ShopMenuActions
+                jmp     ShopMenu
             endif
 
 Map22_DefaultEntityEvent:

@@ -11,7 +11,7 @@
 statusEffects = -4
 combatant = -2
 
-HandleAfterTurnEffects:
+ProcessAfterTurnEffects:
                 
                 jsr     GetCurrentHP
                 bne.s   @Continue
@@ -92,7 +92,7 @@ HandleAfterTurnEffects:
                 andi.w  #STATUSEFFECT_SILENCE,d7
                 bne.s   @Silenced       
                 move.w  #SPELL_DISPEL,((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  d0,((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     351             ; "{CLEAR}{SPELL} expired.{N}{NAME} is no longer{N}silenced.{D3}"
                 clr.w   d1
                 bra.s   @UpdateSilence
@@ -152,7 +152,7 @@ HandleAfterTurnEffects:
             else
                 moveq   #POISON_DAMAGE,d1 ; constant poison damage
             endif
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     307             ; "{CLEAR}{NAME} gets damaged{N}by {#} because of the poison.{D3}"
                 jsr     DecreaseCurrentHP
                 tst.w   d1
@@ -165,7 +165,7 @@ HandleAfterTurnEffects:
                 unlk    a6
                 rts
 
-    ; End of function HandleAfterTurnEffects
+    ; End of function ProcessAfterTurnEffects
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -188,7 +188,7 @@ ApplyAfterTurnRecovery:
                 ; Check HP recovery for weapon
                 tst.w   d1
                 bmi.s   @CheckRingHp        ; skip if no equipped weapon
-                lea     tbl_AfterTurnHpRecoveryForWeapons(pc), a0
+                lea     table_AfterTurnHpRecoveryForWeapons(pc), a0
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @CheckRingHp
                 clr.w   d1
@@ -197,7 +197,7 @@ ApplyAfterTurnRecovery:
                 
 @CheckRingHp:   move.w  d4,d1
                 bmi.s   @RecoverHp          ; skip if no equipped ring
-                lea     tbl_AfterTurnHpRecoveryForRings(pc), a0
+                lea     table_AfterTurnHpRecoveryForRings(pc), a0
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @RecoverHp
                 clr.w   d1
@@ -213,13 +213,13 @@ ApplyAfterTurnRecovery:
                 sub.w   d6,d1
                 ble.s   @CheckWeaponMp
                 ext.l   d1
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     356                 ; "{CLEAR}{NAME} recovered{N}{#} hit points.{D3}"
                 
 @CheckWeaponMp: clr.w   d5
                 move.w  d3,d1
                 bmi.s   @CheckRingMp        ; skip if no equipped weapon
-                lea     tbl_AfterTurnMpRecoveryForWeapons(pc), a0
+                lea     table_AfterTurnMpRecoveryForWeapons(pc), a0
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @CheckRingMp
                 clr.w   d1
@@ -228,7 +228,7 @@ ApplyAfterTurnRecovery:
                 
 @CheckRingMp:   move.w  d4,d1
                 bmi.s   @RecoverMp          ; skip if no equipped ring
-                lea     tbl_AfterTurnMpRecoveryForRings(pc), a0
+                lea     table_AfterTurnMpRecoveryForRings(pc), a0
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @RecoverMp
                 clr.w   d1
@@ -244,7 +244,7 @@ ApplyAfterTurnRecovery:
                 sub.w   d6,d1
                 ble.s   @Done
                 ext.l   d1
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     357                 ; "{CLEAR}{NAME} recovered{N}{#} magic points.{D3}"
                 
 @Done:          movem.l (sp)+,d1-d6/a0

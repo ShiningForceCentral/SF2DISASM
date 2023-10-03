@@ -14,7 +14,7 @@ numberMax = -12
 numberMin = -10
 numberEntry = -8
 windowSlot = -6
-windowTilesEnd = -4
+windowLayoutEndAddress = -4
 
 NumberPrompt:
                 
@@ -27,8 +27,8 @@ NumberPrompt:
                 move.w  #WINDOW_NUMBERPROMPT_ORIGIN,d1
                 jsr     (CreateWindow).l
                 move.w  d0,windowSlot(a6)
-                move.l  a1,windowTilesEnd(a6)
-                bsr.w   WritePromptNumberTiles
+                move.l  a1,windowLayoutEndAddress(a6)
+                bsr.w   WriteNumberPromptDigits
                 move.w  windowSlot(a6),d0
                 move.w  #WINDOW_NUMBERPROMPT_DESTINATION,d1
                 moveq   #WINDOW_NUMBERPROMPT_ANIMATION_LENGTH,d2
@@ -36,7 +36,7 @@ NumberPrompt:
                 jsr     (WaitForWindowMovementEnd).l
 @Loop:
                 
-                bsr.w   WritePromptNumberTiles
+                bsr.w   WriteNumberPromptDigits
                 move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
@@ -78,7 +78,7 @@ NumberPrompt:
                 bra.s   @Loop
 @ReturnDefaultNumber:
                 
-                move.w  #$FFFF,numberEntry(a6)
+                move.w  #-1,numberEntry(a6)
 @ReturnChosenNumber:
                 
                 move.w  windowSlot(a6),d0
@@ -87,7 +87,7 @@ NumberPrompt:
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
                 move.w  windowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).l
+                jsr     (DeleteWindow).l
                 move.w  numberEntry(a6),d0
                 unlk    a6
                 movem.l (sp)+,d1-a1
@@ -104,14 +104,14 @@ numberMax = -12
 numberMin = -10
 numberEntry = -8
 windowSlot = -6
-windowTilesEnd = -4
+windowLayoutEndAddress = -4
 
-WritePromptNumberTiles:
+WriteNumberPromptDigits:
                 
-                movea.l windowTilesEnd(a6),a1
+                movea.l windowLayoutEndAddress(a6),a1
                 move.w  #WINDOW_NUMBERPROMPT_SIZE,d0
-                bsr.w   CopyWindowTilesToRam
-                movea.l windowTilesEnd(a6),a1
+                bsr.w   alt_WriteWindowTiles
+                movea.l windowLayoutEndAddress(a6),a1
                 adda.w  #WINDOW_NUMBERPROMPT_DIGITS_OFFSET,a1
                 move.w  numberEntry(a6),d0
                 ext.l   d0
@@ -119,7 +119,7 @@ WritePromptNumberTiles:
                 moveq   #WINDOW_NUMBERPROMPT_DIGITS_NUMBER,d7
                 bra.w   WriteTilesFromNumber
 
-    ; End of function WritePromptNumberTiles
+    ; End of function WriteNumberPromptDigits
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -130,7 +130,7 @@ numberMax = -12
 numberMin = -10
 numberEntry = -8
 windowSlot = -6
-windowTilesEnd = -4
+windowLayoutEndAddress = -4
 
 ModifyPromptNumber:
                 
@@ -155,30 +155,30 @@ ModifyPromptNumber:
 
 ; =============== S U B R O U T I N E =======================================
 
-var_8 = -8
-var_6 = -6
-var_4 = -4
+flag = -8
+windowSlot = -6
+windowLayoutEndAddress = -4
 
 DebugFlagSetter:
                 
                 movem.l d0-a1,-(sp)
                 link    a6,#-16
-                move.w  d0,var_8(a6)
+                move.w  d0,flag(a6)
                 move.w  #$703,d0
                 move.w  #$2001,d1
                 jsr     (CreateWindow).l
-                move.w  d0,var_6(a6)
-                move.l  a1,var_4(a6)
-                bsr.s   WritePromptNumberTiles
-                move.w  var_6(a6),d0
+                move.w  d0,windowSlot(a6)
+                move.l  a1,windowLayoutEndAddress(a6)
+                bsr.s   WriteNumberPromptDigits
+                move.w  windowSlot(a6),d0
                 move.w  #$1801,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
 loc_163F6:
                 
-                bsr.w   sub_164AC
-                move.w  var_6(a6),d0
+                bsr.w   WriteDebugFlagSetterWindowLayout
+                move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -189,7 +189,7 @@ loc_16416:
                 
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16424
-                moveq   #$FFFFFFFF,d3
+                moveq   #-1,d3
                 bsr.w   sub_164E8
 loc_16424:
                 
@@ -218,24 +218,24 @@ loc_1645E:
 byte_16464:
                 
                 sndCom  SFX_VALIDATION
-                move.w  var_8(a6),d1
+                move.w  flag(a6),d1
                 jsr     j_SetFlag
                 bra.s   loc_1645E
 byte_16474:
                 
                 sndCom  SFX_VALIDATION
-                move.w  var_8(a6),d1
+                move.w  flag(a6),d1
                 jsr     j_ClearFlag
                 bra.s   loc_1645E
 loc_16484:
                 
-                move.w  var_6(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$2001,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
-                move.w  var_6(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).l
+                move.w  windowSlot(a6),d0
+                jsr     (DeleteWindow).l
                 unlk    a6
                 movem.l (sp)+,d0-a1
                 rts
@@ -245,47 +245,47 @@ loc_16484:
 
 ; =============== S U B R O U T I N E =======================================
 
-var_8 = -8
-var_6 = -6
-var_4 = -4
+flag = -8
+windowSlot = -6
+windowLayoutEndAddress = -4
 
-sub_164AC:
+WriteDebugFlagSetterWindowLayout:
                 
-                movea.l var_4(a6),a1
+                movea.l windowLayoutEndAddress(a6),a1
                 move.w  #$703,d0
-                bsr.w   CopyWindowTilesToRam
-                movea.l var_4(a6),a1
+                bsr.w   alt_WriteWindowTiles
+                movea.l windowLayoutEndAddress(a6),a1
                 adda.w  #$10,a1
-                move.w  var_8(a6),d0
+                move.w  flag(a6),d0
                 ext.l   d0
-                moveq   #$FFFFFFF2,d1
+                moveq   #-14,d1
                 moveq   #3,d7
                 bsr.w   WriteTilesFromNumber
                 addq.l  #2,a1
-                move.w  var_8(a6),d1
+                move.w  flag(a6),d1
                 jsr     j_CheckFlag
                 bne.s   loc_164E2
-                move.w  #$C030,(a1)
+                move.w  #VDPTILE_NUMBER_0|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 bra.s   return_164E6
 loc_164E2:
                 
-                move.w  #$C031,(a1)
+                move.w  #VDPTILE_NUMBER_1|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
 return_164E6:
                 
                 rts
 
-    ; End of function sub_164AC
+    ; End of function WriteDebugFlagSetterWindowLayout
 
 
 ; =============== S U B R O U T I N E =======================================
 
-var_8 = -8
-var_6 = -6
-var_4 = -4
+flag = -8
+windowSlot = -6
+windowLayoutEndAddress = -4
 
 sub_164E8:
                 
-                move.w  var_8(a6),d0
+                move.w  flag(a6),d0
                 add.w   d3,d0
                 cmpi.w  #0,d0
                 bge.s   loc_164F8
@@ -297,7 +297,7 @@ loc_164F8:
                 move.w  #$3FF,d0
 loc_16502:
                 
-                move.w  d0,var_8(a6)
+                move.w  d0,flag(a6)
                 sndCom  SFX_MENU_SELECTION
                 rts
 
@@ -307,15 +307,16 @@ loc_16502:
 ; =============== S U B R O U T I N E =======================================
 
 
-DisplayTimerWindow:
+OpenTimerWindow:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 tst.w   ((TIMER_WINDOW_INDEX-$1000000)).w
                 bne.s   @Skip
+                
                 move.w  #$804,d0        ; width height
                 move.w  #$117,d1        ; X-Y screen pos
                 jsr     (CreateWindow).l
-                bsr.w   WriteTimeDigits
+                bsr.w   WriteTimerDigits
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
                 addq.w  #1,d0
@@ -323,29 +324,30 @@ DisplayTimerWindow:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateTimerWindow
-                move.l  #$FFFFFFFF,((SPECIAL_BATTLE_TIME-$1000000)).w
+                move.l  #-1,((SPECIAL_BATTLE_TIME-$1000000)).w
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 @Skip:
                 
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-    ; End of function DisplayTimerWindow
+    ; End of function OpenTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-RemoveTimerWindow:
+CloseTimerWindow:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 move.w  ((TIMER_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   @Skip
+                
                 subq.w  #1,d0
                 move.w  #$2020,d1
                 jsr     (SetWindowDestination).l
                 jsr     (WaitForVInt).w
-                jsr     (ClearWindowAndUpdateEndPointer).l
+                jsr     (DeleteWindow).l
                 clr.w   ((TIMER_WINDOW_INDEX-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
@@ -356,7 +358,7 @@ RemoveTimerWindow:
                 movem.l (sp)+,d0-d1/a0-a1
                 rts
 
-    ; End of function RemoveTimerWindow
+    ; End of function CloseTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -372,9 +374,9 @@ VInt_UpdateTimerWindow:
                 beq.s   loc_165BA
                 move.l  d1,((SPECIAL_BATTLE_TIME-$1000000)).w
                 subq.w  #1,d0
-                bsr.w   WriteTimeDigits
+                bsr.w   WriteTimerDigits
                 sndCom  SFX_MENU_SELECTION
-                tst.b   ((HIDE_WINDOWS-$1000000)).w
+                tst.b   ((HIDE_WINDOWS_TOGGLE-$1000000)).w
                 bne.s   loc_165BA
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
@@ -389,19 +391,19 @@ loc_165BA:
 ; =============== S U B R O U T I N E =======================================
 
 
-WriteTimeDigits:
+WriteTimerDigits:
                 
                 move.w  d0,-(sp)
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
                 movem.l a1,-(sp)
-                lea     TimerWindowLayout(pc), a0
+                lea     layout_TimerWindow(pc), a0
                 moveq   #64,d7
                 jsr     (CopyBytes).w   
                 movem.l (sp)+,a1
-                adda.w  #$22,a1 
+                adda.w  #34,a1
                 move.l  ((SECONDS_COUNTER-$1000000)).w,d0
-                divu.w  #60,d0 
+                divu.w  #60,d0
                 move.l  d0,-(sp)
                 ext.l   d0
                 cmpi.l  #999,d0
@@ -409,18 +411,18 @@ WriteTimeDigits:
                 move.l  #999,d0
 loc_165FA:
                 
-                moveq   #$FFFFFFF0,d1
+                moveq   #-16,d1
                 moveq   #3,d7
                 bsr.w   WriteTilesFromNumber
                 move.l  (sp)+,d0
                 swap    d0
                 ext.l   d0
-                addi.w  #100,d0 
+                addi.w  #100,d0
                 addq.l  #2,a1
                 moveq   #2,d7
                 bsr.w   WriteTilesFromNumber
                 move.w  (sp)+,d0
                 rts
 
-    ; End of function WriteTimeDigits
+    ; End of function WriteTimerDigits
 

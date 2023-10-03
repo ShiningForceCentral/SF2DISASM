@@ -7,7 +7,7 @@
 ; Now making use of previously unused consumable item type bit.
 
 
-WriteBattlesceneScript_BreakUsedItem:
+battlesceneScript_BreakUsedItem:
                 
                 cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
                 bne.s   @Return                         ; return if not using an item
@@ -62,7 +62,7 @@ WriteBattlesceneScript_BreakUsedItem:
 @Done:          movem.l (sp)+,d0-d3/a0
 @Return:        rts
 
-    ; End of function WriteBattlesceneScript_BreakUsedItem
+    ; End of function battlesceneScript_BreakUsedItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -98,9 +98,9 @@ DisplayItemBreakMessage:
                                                         ; And the {ITEM}{N}burst into flames.
                 
 @FindItem:      andi.w  #ITEMENTRY_MASK_INDEX,d1
-                lea     tbl_ItemBreakMessages(pc), a0
+                lea     table_ItemBreakMessages(pc), a0
                 
-@FindItem_Loop: cmpi.w  #CODE_TERMINATOR_WORD,(a0)
+@FindItem_Loop: cmpi.w  #TERMINATOR_WORD,(a0)
                 beq.s   @Break
                 cmp.b   (a0)+,d1
                 beq.s   @Found

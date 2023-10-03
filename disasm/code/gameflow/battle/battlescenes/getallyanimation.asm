@@ -52,7 +52,7 @@ GetAllyAnimation:
 @GetAnimationPointer:
                 
                 getPointer p_pt_AllyAnimations, a0
-                lsl.w   #2,d1
+                lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a0,d1.w),a0
                 movem.l (sp)+,d1-d2
                 rts

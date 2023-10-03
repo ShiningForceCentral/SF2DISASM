@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\items\lifestealweapons-standard.asm :
 
 ; Weapons that leech a fraction of damage dealt and restore the user's HP.
-tbl_LifestealWeapons:
+table_LifestealWeapons:
                 
                 ; Item index, recovery amount = n/256, where 0 = 256
                 ;dc.b ITEM_EVIL_KNUCKLES, 128

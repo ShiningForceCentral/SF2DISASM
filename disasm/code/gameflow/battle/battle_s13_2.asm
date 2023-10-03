@@ -6,54 +6,56 @@
 
 ; AI-related
 ; 
-; In: d0.b = 
+; In: d0.b = AI region bit
 ; Out: d1.w = 
 
 
 sub_1AC9FC:
                 
                 movem.l d0/d2-a6,-(sp)
-                cmpi.b  #$FF,d0
-                bne.s   loc_1ACA0C
+                cmpi.b  #-1,d0
+                bne.s   @loc_1
+                
                 clr.w   d6
-                bra.w   loc_1ACA6A
-loc_1ACA0C:
+                bra.w   @ReturnInfo
+@loc_1:
                 
                 move.w  d0,d7
                 move.b  #BATTLESPRITESET_SUBSECTION_AI_REGIONS,d1
                 bsr.w   GetBattleSpritesetSubsection
                 cmp.b   d1,d7
-                ble.s   loc_1ACA1E
-                bra.w   loc_1ACA6A
-loc_1ACA1E:
+                ble.s   @loc_2
+                bra.w   @ReturnInfo     ; keep returning the same result once regions for a given battle have been exhausted
+@loc_2:
                 
                 move.w  d7,d0
-                mulu.w  #BATTLESPRITESET_COMBATANT_ENTRY_SIZE,d0
+                mulu.w  #BATTLESPRITESET_REGION_ENTRY_SIZE,d0
                 adda.w  d0,a0
                 move.b  (a0),d0
-                cmpi.b  #3,d0
-                bne.s   loc_1ACA40
-                move.w  2(a0),d2
-                move.w  4(a0),d3
-                move.w  6(a0),d4
-                bsr.w   sub_1ACA72      
-                bra.s   loc_1ACA6A
-loc_1ACA40:
+                cmpi.b  #3,d0           ; check region type
+                bne.s   @loc_3
                 
-                move.w  2(a0),d2
-                move.w  4(a0),d3
-                move.w  8(a0),d4
+                move.w  BATTLESPRITESET_REGIONOFFSET_X1_Y1(a0),d2
+                move.w  BATTLESPRITESET_REGIONOFFSET_X2_Y2(a0),d3
+                move.w  BATTLESPRITESET_REGIONOFFSET_X3_Y3(a0),d4
+                bsr.w   sub_1ACA72      
+                bra.s   @ReturnInfo
+@loc_3:
+                
+                move.w  BATTLESPRITESET_REGIONOFFSET_X1_Y1(a0),d2
+                move.w  BATTLESPRITESET_REGIONOFFSET_X2_Y2(a0),d3
+                move.w  BATTLESPRITESET_REGIONOFFSET_X4_Y4(a0),d4
                 bsr.w   sub_1ACA72      
                 cmpi.b  #0,d6
-                beq.s   loc_1ACA5A
-                bra.w   loc_1ACA6A
-loc_1ACA5A:
+                beq.s   @loc_4
+                bra.w   @ReturnInfo
+@loc_4:
                 
-                move.w  6(a0),d2
-                move.w  4(a0),d3
-                move.w  8(a0),d4
+                move.w  BATTLESPRITESET_REGIONOFFSET_X3_Y3(a0),d2
+                move.w  BATTLESPRITESET_REGIONOFFSET_X2_Y2(a0),d3
+                move.w  BATTLESPRITESET_REGIONOFFSET_X4_Y4(a0),d4
                 bsr.w   sub_1ACA72      
-loc_1ACA6A:
+@ReturnInfo:
                 
                 move.w  d6,d1
                 movem.l (sp)+,d0/d2-a6
@@ -64,7 +66,9 @@ loc_1ACA6A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; AI-related
+; related to AI regions
+; 
+; In: d2.w, d3.w, d4.w = region delimiter coordinates
 
 
 sub_1ACA72:
@@ -72,47 +76,49 @@ sub_1ACA72:
                 movem.l d0-d5/d7-a6,-(sp)
                 move.w  #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
-loc_1ACA7C:
+@Loop:
                 
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                beq.s   loc_1ACA88
-                bpl.s   loc_1ACA8C
-loc_1ACA88:
+                beq.s   @Skip           ; skip if dead
+                bpl.s   @CheckX
+@Skip:
                 
-                bra.w   loc_1ACABC
-loc_1ACA8C:
+                bra.w   @Next
+@CheckX:
                 
                 jsr     j_GetCombatantX
                 tst.b   d1
-                bpl.s   loc_1ACA9A
-                bra.w   loc_1ACABC
-loc_1ACA9A:
+                bpl.s   @CheckY
+                bra.w   @Next           ; skip if combatant has been moved outside the battlefield
+@CheckY:
                 
                 clr.w   d5
                 move.b  d1,d5
-                lsl.w   #8,d5
+                lsl.w   #BYTE_SHIFT_COUNT,d5
                 jsr     j_GetCombatantY
                 tst.b   d1
-                bpl.s   loc_1ACAAE
-                bra.w   loc_1ACABC
-loc_1ACAAE:
+                bpl.s   @loc_5          
+                bra.w   @Next
+@loc_5:
                 
-                or.b    d1,d5
+                or.b    d1,d5           ; combine X and Y into a single word
                 bsr.w   sub_1ACAD6      
                 tst.w   d6
-                bne.s   loc_1ACABC
-                bra.w   loc_1ACACC
-loc_1ACABC:
+                bne.s   @Next
+                
+                bra.w   @loc_7
+@Next:
                 
                 addi.w  #1,d0
-                dbf     d7,loc_1ACA7C
-                move.w  #0,d6
-                bra.w   loc_1ACAD0
-loc_1ACACC:
+                dbf     d7,@Loop
                 
-                move.w  #$FFFF,d6
-loc_1ACAD0:
+                move.w  #0,d6
+                bra.w   @Done
+@loc_7:
+                
+                move.w  #-1,d6
+@Done:
                 
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
@@ -122,7 +128,10 @@ loc_1ACAD0:
 
 ; =============== S U B R O U T I N E =======================================
 
-; AI-related
+; related to AI regions
+; 
+; In: d2.w, d3.w, d4.w = region delimiter coordinates
+;     d5.w = combatant coordinates
 
 var_9 = -9
 var_8 = -8
@@ -139,28 +148,28 @@ sub_1ACAD6:
                 movem.l d0-d5/d7-a6,-(sp)
                 link    a6,#-10
                 move.w  d2,d0
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.b  d0,var_2(a6)
                 move.w  d2,d0
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 move.b  d0,var_1(a6)
                 move.w  d3,d0
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.b  d0,var_4(a6)
                 move.w  d3,d0
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 move.b  d0,var_3(a6)
                 move.w  d4,d0
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.b  d0,var_6(a6)
                 move.w  d4,d0
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 move.b  d0,var_5(a6)
                 move.w  d5,d0
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.b  d0,var_8(a6)
                 move.w  d5,d0
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 move.b  d0,var_7(a6)
                 clr.w   d1
                 clr.w   d2
@@ -252,7 +261,7 @@ loc_1ACC10:
                 rts
 loc_1ACC1A:
                 
-                move.b  #$FF,d6
+                move.b  #-1,d6
                 unlk    a6
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
@@ -604,10 +613,10 @@ UpdateTriggeredRegionsAndAi:
                 
                 clr.w   d0
                 move.w  d7,d0
-                jsr     j_GetAiActivationFlag
+                jsr     j_GetActivationBitfield
                 andi.w  #$FFFE,d1
                 bset    #0,d1
-                jsr     j_SetAiActivationFlag
+                jsr     j_SetActivationBitfield
                 bra.w   @Done
 @CheckActivationRegion2:
                 
@@ -626,11 +635,11 @@ UpdateTriggeredRegionsAndAi:
                 
                 clr.w   d0
                 move.w  d7,d0
-                jsr     j_GetAiActivationFlag
+                jsr     j_GetActivationBitfield
                 andi.w  #$FFFC,d1
                 bset    #0,d1
                 bset    #1,d1
-                jsr     j_SetAiActivationFlag
+                jsr     j_SetActivationBitfield
 @Done:
                 
                 movem.l (sp)+,d0-a6
@@ -650,74 +659,75 @@ PopulateTargetsListWithRespawningEnemies:
                 move.w  d4,d0
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d5
-loc_1ACF44:
+@Main_Loop:
                 
-                jsr     j_GetAiActivationFlag
-                andi.w  #$F00,d1
+                jsr     j_GetActivationBitfield
+                andi.w  #WORD_LOWER_NIBBLE_MASK,d1
                 tst.w   d1
-                bne.s   loc_1ACF56      
-                bra.w   loc_1ACFEA
-loc_1ACF56:
+                bne.s   @loc_2          
+                bra.w   @Next
+@loc_2:
                 
                 cmpi.w  #$200,d1        ; 0x200 - region-triggered spawn - check if triggered and if not spawned yet
-                bne.w   loc_1ACF92      
+                bne.w   @loc_5          
                 bsr.w   UpdateEnemyActivationIfDead
                 tst.w   d0
-                beq.s   loc_1ACF6A
-                bra.w   loc_1ACFEA
-loc_1ACF6A:
+                beq.s   @loc_3
+                bra.w   @Next
+@loc_3:
                 
                 move.w  d4,d0
                 jsr     j_GetMaxHp
                 tst.w   d1
-                beq.s   loc_1ACF7A
-                bra.w   loc_1ACFEA
-loc_1ACF7A:
+                beq.s   @loc_4
+                bra.w   @Next
+@loc_4:
                 
                 move.w  d4,d0
-                jsr     j_GetAiActivationFlag
+                jsr     j_GetActivationBitfield
                 bsr.w   ResetEnemyStatsForRespawn
-                bcs.w   loc_1ACFEA
+                bcs.w   @Next
                 move.b  d4,(a0,d5.w)
                 addi.w  #1,d5
-loc_1ACF92:
+@loc_5:
                 
                 cmpi.w  #$100,d1        ; 0x100 - respawn - check if dead
-                bne.w   loc_1ACFC0      
+                bne.w   @loc_7          
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                beq.s   loc_1ACFA8
-                bra.w   loc_1ACFEA
-loc_1ACFA8:
+                beq.s   @loc_6
+                bra.w   @Next
+@loc_6:
                 
                 move.w  d4,d0
-                jsr     j_GetAiActivationFlag
+                jsr     j_GetActivationBitfield
                 bsr.w   ResetEnemyStatsForRespawn
-                bcs.w   loc_1ACFEA
+                bcs.w   @Next
                 move.b  d4,(a0,d5.w)
                 addi.w  #1,d5
-loc_1ACFC0:
+@loc_7:
                 
                 cmpi.w  #$300,d1        ; 0x300 - region-triggered respawn - check if dead and triggered
-                bne.s   loc_1ACFEA
+                bne.s   @Next
                 bsr.w   UpdateEnemyActivationIfDead
                 tst.w   d0
-                beq.s   loc_1ACFD2
-                bra.w   loc_1ACFEA
-loc_1ACFD2:
+                beq.s   @loc_8
+                bra.w   @Next
+@loc_8:
                 
                 move.w  d4,d0
-                jsr     j_GetAiActivationFlag
+                jsr     j_GetActivationBitfield
                 bsr.w   ResetEnemyStatsForRespawn
-                bcs.w   loc_1ACFEA
+                bcs.w   @Next
                 move.b  d4,(a0,d5.w)
                 addi.w  #1,d5
-loc_1ACFEA:
+@Next:
                 
                 addi.w  #1,d4
                 move.w  d4,d0
                 subq.w  #1,d7
-                bne.w   loc_1ACF44
+                bne.w   @Main_Loop
+                
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  d5,(a0)
                 movem.l (sp)+,d0-a6
@@ -751,9 +761,9 @@ loc_1AD014:
                 jsr     j_CheckFlag
                 beq.s   loc_1AD044
                 move.w  d4,d0
-                jsr     j_GetAiActivationFlag
+                jsr     j_GetActivationBitfield
                 bset    #0,d1
-                jsr     j_SetAiActivationFlag
+                jsr     j_SetActivationBitfield
                 bra.w   loc_1AD088
 loc_1AD044:
                 
@@ -767,14 +777,14 @@ loc_1AD044:
                 jsr     j_CheckFlag
                 beq.s   loc_1AD07E
                 move.w  d4,d0
-                jsr     j_GetAiActivationFlag
+                jsr     j_GetActivationBitfield
                 bset    #0,d1
                 bset    #1,d1
-                jsr     j_SetAiActivationFlag
+                jsr     j_SetActivationBitfield
                 bra.w   loc_1AD088
 loc_1AD07E:
                 
-                move.w  #$FFFF,d0
+                move.w  #-1,d0
                 movem.l (sp)+,d1-a6
                 rts
 loc_1AD088:
@@ -798,7 +808,7 @@ GenerateRandomValueSigned:
                 ext.w   d7
                 mulu.w  #541,d7
                 addi.w  #12345,d7
-                andi.w  #$FF,d7
+                andi.w  #BYTE_MASK,d7
                 move.b  d7,(a0)
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
@@ -858,7 +868,7 @@ LoadBattleTerrainData:
                 lsl.l   #2,d1
                 movea.l (a0,d1.w),a0
                 lea     (BATTLE_TERRAIN_ARRAY).l,a1
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 movem.l (sp)+,d0-d6/a0-a5
                 rts
 

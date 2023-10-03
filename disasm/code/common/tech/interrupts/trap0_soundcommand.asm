@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; if xxxx = $FFFF, then get d0.w
+; If interrupt parameter word = -1, then get d0.w
 
 
 Trap0_SoundCommand:
@@ -13,7 +13,7 @@ Trap0_SoundCommand:
                 movea.l $E(sp),a0
                 move.w  (a0),d1         ; get interrupt param
                 addq.l  #2,$E(sp)
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 bne.s   loc_472
                 move.w  d0,d1           ; if param = FFFF, then get param from d0
 loc_472:

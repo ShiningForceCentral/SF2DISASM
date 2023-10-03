@@ -1,24 +1,25 @@
 
 ; ASM FILE code\common\tech\pointers\s17_pointers.asm :
 ; 0x1EE000..0x1EE02C : Game Section 17 Pointers
-p_tbl_StatGrowthCurves:
-                dc.l tbl_StatGrowthCurves
+p_table_StatGrowthCurves:
+                dc.l table_StatGrowthCurves
 p_pt_AllyStats: dc.l pt_AllyStats       
-p_tbl_AllyStartDefs:
-                dc.l tbl_AllyStartDefs  
-p_tbl_ClassDefs:dc.l tbl_ClassDefs      
-p_JewelEndScreenTiles:
-                dc.l JewelsEndScreenTiles
-p_JewelEndScreenLayout:
-                dc.l JewelsEndScreenLayout
-p_plt_JewelsEndScreen:
-                dc.l plt_JewelsEndScreen
-p_plt_SuspendString:
-                dc.l plt_SuspendString
-p_SuspendStringTiles:
-                dc.l SuspendStringTiles
+p_table_AllyStartDefinitions:
+                dc.l table_AllyStartDefinitions
+p_table_ClassDefinitions:
+                dc.l table_ClassDefinitions
+p_tiles_JewelEndScreen:
+                dc.l tiles_EndingJewels
+p_layout_JewelEndScreen:
+                dc.l layout_EndingJewels
+p_palette_JewelsEndScreen:
+                dc.l palette_EndingJewels
+p_palette_SuspendString:
+                dc.l palette_SuspendString
+p_tiles_SuspendString:
+                dc.l tiles_SuspendString
 p_unused_BasePalettes:
             if (VANILLA_BUILD=1)
                 dc.l unused_BasePalettes
             endif
-p_BaseTiles:    dc.l BaseTiles
+p_tiles_Base:   dc.l tiles_Base

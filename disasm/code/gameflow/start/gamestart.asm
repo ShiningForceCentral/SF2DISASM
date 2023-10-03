@@ -13,11 +13,11 @@ Start:
 loc_2EC:
                 
                 bne.s   loc_36A
-                lea     StartParams(pc), a5
+                lea     table_StartParameters(pc), a5
                 movem.w (a5)+,d5-d7     ; copy parameters
                 movem.l (a5)+,a0-a4     ; copy adresses
                 move.b  -$10FF(a1),d0   ; get HW Info at 0xA10001
-                andi.b  #$F,d0
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d0
                 beq.s   loc_30C         
                 move.l  #'SEGA',$2F00(a1)
 loc_30C:
@@ -33,6 +33,7 @@ loc_316:
                 move.w  d5,(a4)
                 add.w   d7,d5
                 dbf     d1,loc_316      
+                
                 move.l  (a5)+,(a4)
                 move.w  d0,(a3)         ; move 0 to vdp data port
                 move.w  d7,(a1)         ; Z80 busreq cancel ?
@@ -46,6 +47,7 @@ loc_32E:
                 
                 move.b  (a5)+,(a0)+     ; copy 37 bytes to Z80 ram
                 dbf     d2,loc_32E      
+                
                 move.w  d0,(a2)         ; Z80 reset request ?
                 move.w  d0,(a1)         ; Z80 busreq cancel ?
                 move.w  d7,(a2)         ; Z80 reset cancel ?
@@ -53,6 +55,7 @@ loc_33A:
                 
                 move.l  d0,-(a6)        ; clear RAM
                 dbf     d6,loc_33A      
+                
                 move.l  (a5)+,(a4)      ; disable DMA, increment data bias number : 2
                 move.l  (a5)+,(a4)      ; address set : CRAM write ?
                 moveq   #$1F,d3         ; loop 31 times
@@ -60,24 +63,27 @@ loc_346:
                 
                 move.l  d0,(a3)         ; clear CRAM ?
                 dbf     d3,loc_346      
+                
                 move.l  (a5)+,(a4)      ; VSRAM write
                 moveq   #$13,d4         ; loop 19 times
 loc_350:
                 
                 move.l  d0,(a3)         ; clear VSRAM
                 dbf     d4,loc_350      
+                
                 moveq   #3,d5           ; loop 3 times
 loc_358:
                 
                 move.b  (a5)+,$11(a3)   ; set PSG volume to 0
                 dbf     d5,loc_358      
+                
                 move.w  d0,(a2)         ; bus reset cancel ?
                 movem.l (a6),d0-a6      ; clear registers
                 move    #$2700,sr       ; Move 0x2700 into Status Register, which now has these set: no trace, A7 is Interupt Stack Pointer, no interrupts, clear condition code bits
 loc_36A:
                 
                 bra.s   loc_3D8
-StartParams:
+table_StartParameters:
                 
                 dc.w $8000              ; vdp register set base word
                 dc.w $3FFF
@@ -166,7 +172,7 @@ loc_3DE:
                 andi.w  #2,d0           ; wait for free DMA
                 bne.s   loc_3DE
                 
-                bra.w   SystemInit
+                bra.w   InitializeSystem
 
     ; End of function Start
 

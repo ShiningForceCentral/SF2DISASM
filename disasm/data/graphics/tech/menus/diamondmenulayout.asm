@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\menus\diamondmenulayout.asm :
 ; 0x10E1C..0x10EF4 : Diamond menu layout
-DiamondMenuLayout:
+layout_DiamondMenu:
                 
 ; Syntax        vdpTile [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
 ;

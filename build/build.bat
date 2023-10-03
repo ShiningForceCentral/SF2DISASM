@@ -28,10 +28,6 @@ cd ../musicbank1/
 echo Assembling music bank 1 ...
     ..\..\..\..\tools\asw\asw.exe .\musicbank1.asm
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1.bin -k -r $8000-$ffff
-cd ../sfxbank/
-echo Assembling SFX bank ...
-    ..\..\..\..\tools\asw\asw.exe .\sfxbank.asm
-    ..\..\..\..\tools\asw\p2bin.exe .\sfxbank.p ..\sfxbank.bin -k -r $E000-$ffff
 cd ../../../
 echo Assembling game ...
 SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%"

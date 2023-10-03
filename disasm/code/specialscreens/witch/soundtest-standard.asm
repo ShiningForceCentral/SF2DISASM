@@ -19,31 +19,31 @@ SoundTest:      txt     464                         ; "Oh! I have a good idea.{N
                 
 @Start:         jsr     (WaitForVInt).w
                 
-@Right:         btst    #INPUT_BIT_RIGHT,((P1_INPUT-$1000000)).w
+@Right:         btst    #INPUT_BIT_RIGHT,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @Left
                 cmpi.w  #91,d7      ; check we're not trying to go beyond final track
                 bge.s   @Left       ; if we are, branch into 'left button push' code
                 addq.w  #1,d7
                 bra.s   @UpdateTrack
                 
-@Left:          btst    #INPUT_BIT_LEFT,((P1_INPUT-$1000000)).w
+@Left:          btst    #INPUT_BIT_LEFT,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @A
                 tst.w   d7          ; check we're not trying to go below the first track
                 ble.s   @A          ; if we are, branch into 'A button push' code
                 subq.w  #1,d7
                 bra.s   @UpdateTrack
                 
-@A:             btst    #INPUT_BIT_A,((P1_INPUT-$1000000)).w
+@A:             btst    #INPUT_BIT_A,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @C
                 bra.s   @PlayTrack
                 
-@C:             btst    #INPUT_BIT_C,((P1_INPUT-$1000000)).w
+@C:             btst    #INPUT_BIT_C,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @B
                 
 @PlayTrack:     sndCom  MUSIC_STOP
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
                 
-@B:             btst    #INPUT_BIT_B,((P1_INPUT-$1000000)).w
+@B:             btst    #INPUT_BIT_B,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @Start
             if (STANDARD_BUILD&TEST_BUILD=1)
                 rts

@@ -15,7 +15,7 @@ itemIndex = -8
 targetMember = -6
 member = -4
 
-MainMenuActions:
+FieldMenu:
                 
                 module
                 movem.l d0-a5,-(sp)
@@ -24,10 +24,10 @@ MainMenuActions:
                 
                 moveq   #0,d0           ; initial choice : up
                 moveq   #0,d1           ; animate-in from bottom
-                moveq   #MENU_MAIN,d2
-                lea     (InitStack).w,a0
-                jsr     j_ExecuteMenu
-                cmpi.w  #$FFFF,d0
+                moveq   #MENU_FIELD,d2
+                lea     (InitialStack).w,a0
+                jsr     j_ExecuteDiamondMenu
+                cmpi.w  #-1,d0
                 beq.s   @ExitMain
                 bra.w   @IsMemberAction
 @ExitMain:
@@ -47,8 +47,9 @@ MainMenuActions:
                 
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 jsr     j_InitializeMembersListScreen
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.w   @ExitMember
+                
                 jsr     j_BuildMemberScreen
                 bra.s   @StartMember
 @ExitMember:
@@ -64,9 +65,10 @@ MainMenuActions:
                 ; MAGIC action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_BuildMemberListScreen_MagicPage
-                cmpi.w  #$FFFF,d0
+                jsr     j_BuildMembersListScreen_MagicPage
+                cmpi.w  #-1,d0
                 beq.w   @ExitMagic
+                
                 move.w  d0,member(a6)
                 move.w  d1,spellEntry(a6)
                 move.w  d1,spellIndex(a6)
@@ -80,8 +82,8 @@ MainMenuActions:
                 
                 ; Cast a spell other than Detox
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  spellIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.l  spellLevel(a6),((TEXT_NUMBER-$1000000)).w
+                move.w  spellIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                move.l  spellLevel(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 sndCom  SFX_SPELL_CAST
                 clsTxt
@@ -112,7 +114,7 @@ byte_21348:
                 jsr     j_DecreaseCurrentMp
                 jsr     j_ExecuteFlashScreenScript
                 getSavedByte EGRESS_MAP, d0
-                jsr     (GetSavePointForMap).w
+                jsr     (GetSavepointForMap).w
                 lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
                 move.w  #1,(a0)+
                 move.b  #0,(a0)+
@@ -130,13 +132,13 @@ byte_213A8:
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
                 move.w  d0,targetMember(a6)
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.w   @StartMagic
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  spellIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.l  spellLevel(a6),((TEXT_NUMBER-$1000000)).w
+                move.w  spellIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                move.l  spellLevel(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 clsTxt
                 move.b  spellEntry(a6),d1
@@ -195,9 +197,9 @@ byte_21468:
                 moveq   #0,d0           ; initial choice: up
                 moveq   #0,d1           ; animate-in from bottom
                 moveq   #MENU_ITEM,d2
-                lea     (InitStack).w,a0
-                jsr     j_ExecuteMenu
-                cmpi.w  #$FFFF,d0
+                lea     (InitialStack).w,a0
+                jsr     j_ExecuteDiamondMenu
+                cmpi.w  #-1,d0
                 beq.w   @StartMain      
                 
                 ; Is Item submenu Use action?
@@ -210,11 +212,11 @@ byte_21468:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.w   byte_2158E      ; Exit Item Use
                 
                 ; Using Angel Wing?
@@ -234,7 +236,7 @@ byte_21468:
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     73              ; "{NAME} used the{N}{ITEM}.{W2}"
                 bra.w   @Egress
 @HandleNonAngelWingItems:
@@ -254,7 +256,7 @@ byte_21468:
                 
                 ; Nothing happened
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     73              ; "{NAME} used the{N}{ITEM}.{W2}"
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     422             ; "But nothing happened.{D1}"
@@ -267,7 +269,7 @@ byte_21468:
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 jsr     j_InitializeMembersListScreen
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.w   @StartItemUse
                 
                 ; Use item
@@ -293,8 +295,8 @@ byte_2158E:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
-                cmpi.w  #$FFFF,d0
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                cmpi.w  #-1,d0
                 bne.w   @IsGivingWeapon
                 bra.w   byte_2184E      ; Close textbox and restart item submenu
 @IsGivingWeapon:
@@ -310,8 +312,9 @@ byte_2158E:
                 ; Give weapon
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @PickRecipient
+                
                 cmp.w   itemSlot(a6),d2
                 bne.w   @PickRecipient
                 move.w  itemIndex(a6),d1
@@ -330,8 +333,9 @@ byte_2158E:
                 ; Give ring
                 move.w  member(a6),d0
                 jsr     j_GetEquippedRing
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @PickRecipient
+                
                 cmp.w   itemSlot(a6),d2
                 bne.w   @PickRecipient
                 move.w  itemIndex(a6),d1
@@ -350,8 +354,8 @@ byte_2158E:
                 clsTxt
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
-                cmpi.w  #$FFFF,d0
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                cmpi.w  #-1,d0
                 bne.w   @GiveItem
                 bra.w   @StartItemGive
 @GiveItem:
@@ -376,13 +380,13 @@ byte_2158E:
                 
                 ; Give to self
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     74              ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
                 bra.s   @ExitItemGive   
 @GiveToRecipient:
                 
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     65              ; "The {ITEM} now{N}belongs to {NAME}.{W2}"
 @ExitItemGive:
                 
@@ -400,8 +404,9 @@ byte_2158E:
                 ; Exchange weapon
                 move.w  targetMember(a6),d0
                 jsr     j_GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @StartExchange
+                
                 cmp.w   targetItemSlot(a6),d2
                 bne.w   @StartExchange
                 move.w  exchangedItemEntry(a6),d1
@@ -421,8 +426,9 @@ byte_2158E:
                 ; Exchange ring
                 move.w  targetMember(a6),d0
                 jsr     j_GetEquippedRing
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @StartExchange
+                
                 cmp.w   targetItemSlot(a6),d2
                 bne.w   @StartExchange
                 move.w  exchangedItemEntry(a6),d1
@@ -482,14 +488,14 @@ byte_2158E:
                 
                 ; "Changed hands" message
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     74              ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
                 bra.s   byte_2184E      ; Close textbox and restart item submenu
 @ExchangedMessage:
                 
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  exchangedItemEntry(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                move.w  exchangedItemEntry(a6),((DIALOGUE_NAME_INDEX_3-$1000000)).w
                 txt     66              ; "The {ITEM} was{N}exchanged for {NAME}'s{N}{ITEM}.{W2}"
 byte_2184E:
                 
@@ -506,15 +512,16 @@ byte_2184E:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #3,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
-                cmpi.w  #$FFFF,d0
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                cmpi.w  #-1,d0
                 beq.w   @Goto_ExitItemEquip
                 bra.w   @ExitItemEquip
 @Goto_ExitItemEquip:
                 
                 bra.w   @ExitItemEquip
-                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w ; unreachable code
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w 
+                                                        ; unreachable code
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     70              ; "{NAME} is already{N}equipped with the{N}{ITEM}.{W2}"
 @ExitItemEquip:
                 
@@ -526,8 +533,8 @@ byte_2184E:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
-                cmpi.w  #$FFFF,d0
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                cmpi.w  #-1,d0
                 bne.w   @IsItemUnsellable
                 bra.w   byte_219D0      ; Close textbox and restart item submenu
 @IsItemUnsellable:
@@ -549,7 +556,7 @@ byte_2184E:
                 
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     69              ; "The {ITEM} will be{N}discarded.  OK?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 clsTxt
                 cmpi.w  #0,d0
                 beq.w   @IsDroppingWeapon
@@ -564,8 +571,9 @@ byte_2184E:
                 ; Drop weapon
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @DropItem
+                
                 cmp.w   itemSlot(a6),d2
                 bne.w   @DropItem
                 move.w  itemIndex(a6),d1
@@ -585,8 +593,9 @@ byte_2184E:
                 ; Drop ring
                 move.w  member(a6),d0
                 jsr     j_GetEquippedRing
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @DropItem
+                
                 cmp.w   itemSlot(a6),d2
                 bne.w   @DropItem
                 move.w  itemIndex(a6),d1
@@ -628,7 +637,7 @@ byte_219D0:
                 
                 bra.w   @StartMain      
 
-    ; End of function MainMenuActions
+    ; End of function FieldMenu
 
                 modend
 
@@ -654,14 +663,12 @@ PopulateGenericListWithCurrentForceMembers:
 
     ; End of function PopulateGenericListWithCurrentForceMembers
 
-;unused
-
-byte_21A16:     dc.b 0
+table_21A16:    dc.b 0                  ; unused
                 dc.b 2
                 dc.b 0
                 dc.b 2
                 dc.b 0
-                dc.b $A
+                dc.b 10
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -671,7 +678,7 @@ byte_21A16:     dc.b 0
 sub_21A1C:
                 
                 movem.l d7-a0,-(sp)
-                lea     byte_21A16(pc), a0
+                lea     table_21A16(pc), a0
                 clr.w   d7
                 move.w  (a0)+,d7
                 subq.w  #1,d7

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleactions\battleactionsengine_4.asm :
-; 0xA872..0xAAB6 : Battleactions engine
+; 0xA872..0xAAB6 : Battleactions Engine, part 4
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -14,7 +14,7 @@ CalculateHealingExp:
                 
                 ; Check if healer class
             if (STANDARD_BUILD=1)
-                lea     tbl_HealerClasses(pc),a0
+                lea     table_HealerClasses(pc),a0
                 bsr.w   GetClass
                 moveq   #0,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
@@ -55,7 +55,7 @@ CalculateHealingExp:
 ; =============== S U B R O U T I N E =======================================
 
 
-CalculateDamageExp:
+battlesceneScript_CalculateDamageExp:
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
@@ -64,7 +64,7 @@ CalculateDamageExp:
                 jsr     GetMaxHp
                 tst.w   d1
                 beq.w   @Skip           ; skip function to prevent division by zero error
-                bsr.w   GetKillExp      
+                bsr.w   battlesceneScript_GetKillExp
                 mulu.w  d6,d5
                 divu.w  d1,d5
                 bsr.w   AddExpAndApplyPerActionCap
@@ -73,7 +73,7 @@ CalculateDamageExp:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function CalculateDamageExp
+    ; End of function battlesceneScript_CalculateDamageExp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -97,18 +97,18 @@ AddStatusEffectSpellExp:
 ; =============== S U B R O U T I N E =======================================
 
 
-AddExpAndGoldForKill:
+battlesceneScript_AddExpAndGoldForKill:
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
                 bne.w   @Skip           ; skip if actor is an enemy
-                bsr.w   GetKillExp      
+                bsr.w   battlesceneScript_GetKillExp
                 bsr.w   AddExpAndApplyPerActionCap
                 move.b  (a5),d0
                 bpl.s   @Skip
                 jsr     GetEnemy        
                 add.w   d1,d1
-                lea     tbl_EnemyGold(pc), a0
+                lea     table_EnemyGold(pc), a0
                 adda.w  d1,a0
                 move.w  (a0),d0
                 add.w   d0,((BATTLESCENE_GOLD-$1000000)).w
@@ -117,7 +117,7 @@ AddExpAndGoldForKill:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function AddExpAndGoldForKill
+    ; End of function battlesceneScript_AddExpAndGoldForKill
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -156,11 +156,11 @@ AddExpAndApplyHealingCap:
 
 ; Get EXP gained for a kill based on level difference between actor and target.
 ; 
-;   In: a4, a5 = pointers to actor and target indexes in RAM
+;   In: a4, a5 = pointers to actor and target indexes
 ;   Out: d5.l = EXP amount
 
 
-GetKillExp:
+battlesceneScript_GetKillExp:
                 
                 movem.l d0-d3/a0,-(sp)
                 move.b  (a5),d0
@@ -206,7 +206,7 @@ GetKillExp:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function GetKillExp
+    ; End of function battlesceneScript_GetKillExp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -298,7 +298,9 @@ loc_AA92:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 OneSecondSleep:
                 
                 move.l  d0,-(sp)
@@ -312,7 +314,9 @@ OneSecondSleep:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 NopOnce:
                 
                 nop
@@ -323,7 +327,9 @@ NopOnce:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 NopTwice:
                 
                 nop
@@ -335,7 +341,9 @@ NopTwice:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 NopThrice:
                 
                 nop

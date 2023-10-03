@@ -140,7 +140,7 @@ Map16_212_EntityEvent8:
 Map16_212_EntityEvent9:
                 
                 move.b  #SHOP_ITEM_GALAM_1,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map16_212_EntityEvent9
@@ -151,7 +151,7 @@ Map16_212_EntityEvent9:
 
 Map16_212_EntityEvent10:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map16_212_EntityEvent10
@@ -215,7 +215,7 @@ Map16_212_EntityEvent14:
 Map16_212_EntityEvent15:
                 
                 move.b  #SHOP_WEAPON_GALAM_1,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map16_212_EntityEvent15
@@ -239,7 +239,7 @@ Map16_212_EntityEvent16:
 
 Map16_212_EntityEvent17:
                 
-                jsr     j_CaravanMenuActions
+                jsr     j_CaravanMenu
 Map16_212_DefaultEntityEvent:
                 
                 rts

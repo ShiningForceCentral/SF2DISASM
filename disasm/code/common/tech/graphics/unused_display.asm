@@ -4,6 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 sub_30BE:
                 
@@ -20,3 +22,4 @@ sub_30BE:
                 bra.w   WaitForDmaQueueProcessing
 
     ; End of function sub_30BE
+

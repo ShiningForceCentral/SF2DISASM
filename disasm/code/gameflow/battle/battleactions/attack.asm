@@ -4,7 +4,9 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
+; In: a2 = battlescene script stack frame
+;     a4 = pointer to attacker index in RAM
+;     a5 = pointer to target index in RAM
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -14,7 +16,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -29,34 +31,34 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_Attack:
+battlesceneScript_Attack:
                 
-                bsr.w   WriteBattlesceneScript_DetermineDodge
+                bsr.w   battlesceneScript_DetermineDodge
                 tst.b   dodge(a2)
-                bne.w   loc_AAF6
-                bsr.w   WriteBattlesceneScript_CalculateDamage
-                bsr.w   WriteBattlesceneScript_DetermineCriticalHit
-                bsr.w   WriteBattlesceneScript_InflictDamage
+                bne.w   @DoubleAndCounter
+                bsr.w   battlesceneScript_CalculateDamage
+                bsr.w   battlesceneScript_DetermineCriticalHit
+                bsr.w   battlesceneScript_InflictDamage
                 tst.b   targetDies(a2)
-                beq.s   loc_AADC
-                bsr.w   WriteBattlesceneScript_DeathMessage
-                bra.w   return_AAFA
-loc_AADC:
+                beq.s   @Continue
+                bsr.w   battlesceneScript_DisplayDeathMessage
+                bra.w   @Return
+@Continue:
                 
-                bsr.w   WriteBattlesceneScript_InflictAilment
-                bsr.w   WriteBattlesceneScript_InflictCurseDamage
+                bsr.w   battlesceneScript_InflictAilment
+                bsr.w   battlesceneScript_InflictCurseDamage
                 tst.b   targetDies(a2)
-                beq.s   loc_AAF6
+                beq.s   @DoubleAndCounter
                 exg     a4,a5
-                bsr.w   WriteBattlesceneScript_DeathMessage
+                bsr.w   battlesceneScript_DisplayDeathMessage
                 exg     a4,a5
-                bra.w   return_AAFA
-loc_AAF6:
+                bra.w   @Return
+@DoubleAndCounter:
                 
-                bsr.w   WriteBattlesceneScript_DetermineDoubleAndCounter
-return_AAFA:
+                bsr.w   battlesceneScript_DetermineDoubleAndCounter
+@Return:
                 
                 rts
 
-    ; End of function WriteBattlesceneScript_Attack
+    ; End of function battlesceneScript_Attack
 

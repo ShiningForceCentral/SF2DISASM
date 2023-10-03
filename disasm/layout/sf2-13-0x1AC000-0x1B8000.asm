@@ -11,6 +11,7 @@
                 include "data\battles\global\laserbattles.asm"    ; Laser battles data
                 include "code\gameflow\battle\battle_s13_2.asm"    ; Battle init, terrain, AI stuff to split more properly
                 includeIfVanilla "data\battles\terrainentries.asm"    ; Battle terrain data
+                includeIfVanilla "code\gameflow\battle\battledebugfunction1B120A.asm"    ; unused
                 include "code\gameflow\battle\battle_s13_3.asm"    ; Battle init, terrain, AI stuff to split more properly
                 includeIfVanilla "data\stats\enemies\enemydefs.asm"    ; Enemy definitions
                 includeIfVanilla "data\battles\spritesets\entries.asm"    ; Battle Spritesets

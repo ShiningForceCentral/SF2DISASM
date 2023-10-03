@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\caravan\CaravanMenuActions_2.asm :
+; ASM FILE code\common\menus\caravan\CaravanMenu_2.asm :
 ; 0x228D8..0x229CA : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -9,23 +9,23 @@ PopulateGenericListWithMembersList:
                 
                 movem.l d7-a1,-(sp)
                 jsr     j_UpdateForce
-                tst.w   d1		; all members
+                tst.w   d1              ; all members
                 bne.s   @CheckMemberGroup
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                bra.s   @GenerateList
+                bra.s   @PopulateList
 @CheckMemberGroup:
                 
                 cmpi.w  #1,d1
                 bne.s   @ReserveMembers
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-                bra.s   @GenerateList
+                bra.s   @PopulateList
 @ReserveMembers:
                 
                 lea     ((RESERVE_MEMBERS-$1000000)).w,a0
                 move.w  ((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-@GenerateList:
+@PopulateList:
                 
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
@@ -49,7 +49,6 @@ PopulateGenericListWithMembersList:
 ; Copy caravan item indexes to generic list space
 
 caravanItemsAddress = CARAVAN_ITEMS
-
     if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
 caravanItemsAddress = caravanItemsAddress+2
     endif
@@ -73,15 +72,15 @@ CopyCaravanItems:
                 lea     ((GENERIC_LIST-$1000000)).w,a1
 @Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+        if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 move.b  (a0),(a1)+
                 addq.w  #CARAVAN_ITEM_ENTRY_SIZE,a0
-            else
-              if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+        else
+            if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                 addq.w  #1,a0
-              endif
-                move.b  (a0)+,(a1)+
             endif
+                move.b  (a0)+,(a1)+
+        endif
                 dbf     d7,@Loop
 @Skip:
                 
@@ -133,7 +132,7 @@ IsItemInSlotEquippedAndCursed:
 PlayPreviousMusicAfterCurrentOne:
                 
                 move.w  d0,-(sp)
-                move.w  #$FB,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0
                 jsr     (PlayMusicAfterCurrentOne).w
                 move.w  (sp)+,d0
                 rts

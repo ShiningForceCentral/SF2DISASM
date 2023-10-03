@@ -12,6 +12,7 @@ ClearVsramAndSprites:
                 
                 btst    #0,(Z80BusReq).l
                 bne.s   @Wait           ; wait for bus available
+                
                 bsr.s   ClearScrollTableData
                 bsr.s   ClearSpriteTable
                 bsr.s   UpdateVdpSpriteTable
@@ -57,8 +58,8 @@ ClearSpriteTable:
 @Loop:
                 
                 move.l  d0,(a0)
-                clr.l   4(a0)
-                addq.w  #8,a0
+                clr.l   VDPSPRITE_OFFSET_TILE(a0)
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
                 addq.b  #1,d0
                 dbf     d1,@Loop
                 
@@ -76,27 +77,27 @@ ClearScrollTableData:
                 
                 movem.l d7/a6,-(sp)
                 move.w  #VRAM_ADDRESS_PLANE_A,d0 ; clear scroll A table
-                move.w  #$1000,d1
+                move.w  #VRAM_PLANE_BYTE_SIZE,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
                 move.w  #VRAM_ADDRESS_PLANE_B,d0 ; clear scroll B table
-                move.w  #$1000,d1
+                move.w  #VRAM_PLANE_BYTE_SIZE,d1
                 clr.w   d2
                 bsr.w   ApplyVramDmaFill
                 
-                move.w  #$1FF,d7
+                move.w  #VRAM_PLANE_LONGWORD_COUNTER,d7
                 lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a6
-loc_E62:
+@ClearPlane_A:
                 
                 clr.l   (a6)+
-                dbf     d7,loc_E62
+                dbf     d7,@ClearPlane_A
                 
-                move.w  #$1FF,d7
-                adda.w  #$1800,a6
-loc_E70:
+                move.w  #VRAM_PLANE_LONGWORD_COUNTER,d7
+                adda.w  #VRAM_PLANES_ADDRESS_DIFFERENCE,a6
+@ClearPlane_B:
                 
                 clr.l   (a6)+
-                dbf     d7,loc_E70
+                dbf     d7,@ClearPlane_B
                 
                 movem.l (sp)+,d7/a6
                 rts
@@ -105,6 +106,8 @@ loc_E70:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 ClearCram:
@@ -140,12 +143,12 @@ ClearCram:
 
 WaitForVInt:
                 
-                bset    #ENABLE_VINT,(VINT_PARAMS).l
+                bset    #ENABLE_VINT,(VINT_PARAMETERS).l
                 move.b  #1,((WAITING_NEXT_VINT-$1000000)).w
 @Wait:
                 
-                tst.b   ((WAITING_NEXT_VINT-$1000000)).w ; wait until FFDEF7 clear
-                bne.s   @Wait           
+                tst.b   ((WAITING_NEXT_VINT-$1000000)).w
+                bne.s   @Wait
                 rts
 
     ; End of function WaitForVInt
@@ -171,3 +174,4 @@ Sleep:
                 rts
 
     ; End of function Sleep
+

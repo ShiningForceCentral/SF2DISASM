@@ -9,7 +9,7 @@
 
 UpdatePlayerInputs:
                 
-                lea     ((P1_INPUT-$1000000)).w,a5
+                lea     ((PLAYER_1_INPUT-$1000000)).w,a5
                 lea     (DATA1).l,a6    
                 bsr.s   @loc_1          ; do it with DATA1 and then DATA2
                 addq.w  #2,a6

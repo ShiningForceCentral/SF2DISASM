@@ -88,7 +88,7 @@ return_59B9C:
 
 Map23_EntityEvent5:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map23_EntityEvent5

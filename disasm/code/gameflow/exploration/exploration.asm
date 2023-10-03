@@ -9,32 +9,33 @@ sub_3758:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
-                beq.s   loc_3770
+                beq.s   @Continue
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                beq.s   loc_3770
+                beq.s   @Continue
                 move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
-loc_3770:
+@Continue:
                 
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d4
                 cmp.w   d0,d4
-                beq.s   return_37B0
+                beq.s   @Return
                 bset    #3,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 cmp.w   d0,d4
-                bge.s   return_37B0
+                bge.s   @Return
+                
                 movem.w d0-d3,-(sp)
                 clr.w   d4
                 clr.w   d5
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
-                asr.w   #4,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
-                asr.w   #4,d1
-                addi.w  #$100,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d1
+                addi.w  #256,d0
                 move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
                 bsr.w   sub_3158
                 movem.w (sp)+,d0-d3
-return_37B0:
+@Return:
                 
                 rts
 
@@ -48,32 +49,33 @@ sub_37B2:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
-                beq.s   loc_37CA
+                beq.s   @Continue
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                beq.s   loc_37CA
+                beq.s   @Continue
                 move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
-loc_37CA:
+@Continue:
                 
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d4
                 cmp.w   d1,d4
-                beq.s   return_380A
+                beq.s   @Return
                 bset    #2,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 cmp.w   d1,d4
-                bge.s   return_380A
+                bge.s   @Return
+                
                 movem.w d0-d3,-(sp)
                 clr.w   d4
                 clr.w   d5
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
-                asr.w   #4,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
-                asr.w   #4,d1
-                addi.w  #$100,d1
+                asr.w   #NIBBLE_SHIFT_COUNT,d1
+                addi.w  #256,d1
                 move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
                 bsr.w   sub_30EE
                 movem.w (sp)+,d0-d3
-return_380A:
+@Return:
                 
                 rts
 
@@ -87,32 +89,33 @@ sub_380C:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
-                beq.s   loc_3824
+                beq.s   @Continue
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                bne.s   loc_3824
+                bne.s   @Continue
                 move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
-loc_3824:
+@Continue:
                 
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d4
                 cmp.w   d2,d4
-                beq.s   return_3864
+                beq.s   @Return
                 bset    #1,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 cmp.w   d2,d4
-                bge.s   return_3864
+                bge.s   @Return
+                
                 movem.w d0-d3,-(sp)
                 clr.w   d4
                 clr.w   d5
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
-                asr.w   #4,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
-                asr.w   #4,d1
-                addi.w  #$100,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d1
+                addi.w  #256,d0
                 move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_B_LAYOUT).l,a1
                 bsr.w   sub_3158
                 movem.w (sp)+,d0-d3
-return_3864:
+@Return:
                 
                 rts
 
@@ -126,32 +129,33 @@ sub_3866:
                 
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
                 cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
-                beq.s   loc_387E
+                beq.s   @Continue
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                bne.s   loc_387E
+                bne.s   @Continue
                 move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
-loc_387E:
+@Continue:
                 
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d4
                 cmp.w   d3,d4
-                beq.s   return_38BE
+                beq.s   @Return
                 bset    #0,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 cmp.w   d3,d4
-                bge.s   return_38BE
+                bge.s   @Return
+                
                 movem.w d0-d3,-(sp)
                 clr.w   d4
                 clr.w   d5
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
-                asr.w   #4,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
-                asr.w   #4,d1
-                addi.w  #$100,d1
+                asr.w   #NIBBLE_SHIFT_COUNT,d1
+                addi.w  #256,d1
                 move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_B_LAYOUT).l,a1
                 bsr.w   sub_30EE
                 movem.w (sp)+,d0-d3
-return_38BE:
+@Return:
                 
                 rts
 
@@ -166,20 +170,21 @@ sub_38C0:
                 movem.l d2-d3/a0,-(sp)
                 clr.w   d2
                 move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d2
-                bpl.s   loc_38E6
+                bpl.s   @Continue
+                
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                bne.s   loc_38DC
+                bne.s   @MapOnForeground
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
-                bra.s   loc_38E4
-loc_38DC:
+                bra.s   @Goto_Done
+@MapOnForeground:
                 
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
-loc_38E4:
+@Goto_Done:
                 
-                bra.s   loc_392A
-loc_38E6:
+                bra.s   @Done
+@Continue:
                 
                 lsl.w   #ENTITYDEF_SIZE_BITS,d2
                 lea     ((ENTITY_DATA-$1000000)).w,a0
@@ -187,27 +192,28 @@ loc_38E6:
                 move.w  (a0)+,d2        ; x location
                 move.w  (a0)+,d3        ; y location
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                bne.s   loc_390A
+                bne.s   @loc_1
+                
                 sub.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
                 sub.w   ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
                 move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d0
                 move.w  ((MAP_AREA_LAYER2_STARTY-$1000000)).w,d1
-                bra.s   loc_391A
-loc_390A:
+                bra.s   @loc_2
+@loc_1:
                 
                 sub.w   ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d2
                 sub.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d3
                 move.w  ((MAP_AREA_BACKGROUND_STARTX-$1000000)).w,d0
                 move.w  ((MAP_AREA_BACKGROUND_STARTY-$1000000)).w,d1
-loc_391A:
+@loc_2:
                 
                 lsl.w   #7,d0
                 lsl.w   #7,d1
-                addi.w  #$D80,d0
-                addi.w  #$D80,d1
+                addi.w  #3456,d0
+                addi.w  #3456,d1
                 sub.w   d2,d0
                 sub.w   d3,d1
-loc_392A:
+@Done:
                 
                 movem.l (sp)+,d2-d3/a0
                 rts
@@ -217,7 +223,7 @@ loc_392A:
 
 ; =============== S U B R O U T I N E =======================================
 
-var_2 = -2
+distance = -2
 
 VInt_UpdateScrollingData:
                 
@@ -225,7 +231,7 @@ VInt_UpdateScrollingData:
                 move.b  ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w,d0
                 andi.b  #$C,d0
                 beq.s   loc_3944
-                move.b  #$FF,((HIDE_WINDOWS-$1000000)).w
+                move.b  #-1,((HIDE_WINDOWS_TOGGLE-$1000000)).w
 loc_3944:
                 
                 tst.b   ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
@@ -236,7 +242,7 @@ loc_3944:
                 beq.s   loc_3968
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3968
-                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
+                move.w  #%10000000000000,((TILE_PALETTE_MASK-$1000000)).w
 loc_3968:
                 
                 btst    #3,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
@@ -247,10 +253,10 @@ loc_3968:
                 move.w  ((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w,d1
                 move.w  ((PLANE_A_SCROLL_SPEED_X-$1000000)).w,d2
                 sub.w   d1,d5
-                move.w  d5,var_2(a6)
+                move.w  d5,distance(a6)
                 bge.s   loc_3998
                 add.w   d2,d0
-                move.w  #$100,d6
+                move.w  #256,d6
                 move.w  #1,d4
                 clr.w   d5
                 bra.s   loc_39A2
@@ -266,9 +272,9 @@ loc_39A2:
                 btst    #7,d7
                 beq.s   loc_39D4
                 movem.w d0-d1,-(sp)
-                asr.w   #4,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
-                asr.w   #4,d1
+                asr.w   #NIBBLE_SHIFT_COUNT,d1
                 add.w   d6,d0
                 move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
@@ -278,7 +284,7 @@ loc_39A2:
                 movem.w (sp)+,d0-d1
 loc_39D4:
                 
-                move.w  var_2(a6),d5
+                move.w  distance(a6),d5
                 move.w  d0,d4
                 sub.w   d1,d4
                 bne.s   loc_39E6
@@ -305,9 +311,9 @@ loc_3A00:
 loc_3A0A:
                 
                 move.w  d0,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
-                lsr.w   #4,d0
+                lsr.w   #NIBBLE_SHIFT_COUNT,d0
                 neg.w   d0
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.w  d0,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
 loc_3A1A:
                 
@@ -319,10 +325,10 @@ loc_3A1A:
                 move.w  ((VIEW_PLANE_A_PIXEL_Y_DEST-$1000000)).w,d1
                 move.w  ((PLANE_A_SCROLL_SPEED_Y-$1000000)).w,d2
                 sub.w   d1,d5
-                move.w  d5,var_2(a6)
+                move.w  d5,distance(a6)
                 bge.s   loc_3A4A
                 add.w   d2,d0
-                move.w  #$100,d6
+                move.w  #256,d6
                 clr.w   d4
                 move.w  #1,d5
                 bra.s   loc_3A54
@@ -338,10 +344,10 @@ loc_3A54:
                 btst    #7,d7
                 beq.s   loc_3A82
                 movem.w d0-d1,-(sp)
-                asr.w   #4,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
                 move.w  d0,d1
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
-                asr.w   #4,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
                 add.w   d6,d1
                 move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
@@ -350,7 +356,7 @@ loc_3A54:
                 movem.w (sp)+,d0-d1
 loc_3A82:
                 
-                move.w  var_2(a6),d5
+                move.w  distance(a6),d5
                 move.w  d0,d4
                 sub.w   d1,d4
                 bne.s   loc_3A94
@@ -377,9 +383,9 @@ loc_3AAE:
 loc_3AB8:
                 
                 move.w  d0,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
-                lsr.w   #4,d0
+                lsr.w   #NIBBLE_SHIFT_COUNT,d0
                 addq.w  #8,d0
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.w  d0,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
 loc_3AC8:
                 
@@ -388,7 +394,7 @@ loc_3AC8:
                 beq.s   loc_3AE0
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   loc_3AE0
-                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
+                move.w  #%10000000000000,((TILE_PALETTE_MASK-$1000000)).w
 loc_3AE0:
                 
                 btst    #1,((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
@@ -399,10 +405,10 @@ loc_3AE0:
                 move.w  ((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w,d1
                 move.w  ((PLANE_B_SCROLL_SPEED_X-$1000000)).w,d2
                 sub.w   d1,d5
-                move.w  d5,var_2(a6)
+                move.w  d5,distance(a6)
                 bge.s   loc_3B10
                 add.w   d2,d0
-                move.w  #$100,d6
+                move.w  #256,d6
                 move.w  #1,d4
                 clr.w   d5
                 bra.s   loc_3B1A
@@ -418,9 +424,9 @@ loc_3B1A:
                 btst    #7,d7
                 beq.s   loc_3B4C
                 movem.w d0-d1,-(sp)
-                asr.w   #4,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
-                asr.w   #4,d1
+                asr.w   #NIBBLE_SHIFT_COUNT,d1
                 add.w   d6,d0
                 move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
@@ -430,7 +436,7 @@ loc_3B1A:
                 movem.w (sp)+,d0-d1
 loc_3B4C:
                 
-                move.w  var_2(a6),d5
+                move.w  distance(a6),d5
                 move.w  d0,d4
                 sub.w   d1,d4
                 bne.s   loc_3B5E
@@ -457,9 +463,9 @@ loc_3B78:
 loc_3B82:
                 
                 move.w  d0,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
-                lsr.w   #4,d0
+                lsr.w   #NIBBLE_SHIFT_COUNT,d0
                 neg.w   d0
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.w  d0,((VIEW_PLANE_B_X_COUNTER-$1000000)).w
 loc_3B92:
                 
@@ -471,10 +477,10 @@ loc_3B92:
                 move.w  ((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w,d1
                 move.w  ((PLANE_B_SCROLL_SPEED_Y-$1000000)).w,d2
                 sub.w   d1,d5
-                move.w  d5,var_2(a6)
+                move.w  d5,distance(a6)
                 bge.s   loc_3BC2
                 add.w   d2,d0
-                move.w  #$100,d6
+                move.w  #256,d6
                 clr.w   d4
                 move.w  #1,d5
                 bra.s   loc_3BCC
@@ -490,10 +496,10 @@ loc_3BCC:
                 btst    #7,d7
                 beq.s   loc_3BFA
                 movem.w d0-d1,-(sp)
-                asr.w   #4,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
                 move.w  d0,d1
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
-                asr.w   #4,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
                 add.w   d6,d1
                 move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
@@ -502,7 +508,7 @@ loc_3BCC:
                 movem.w (sp)+,d0-d1
 loc_3BFA:
                 
-                move.w  var_2(a6),d5
+                move.w  distance(a6),d5
                 move.w  d0,d4
                 sub.w   d1,d4
                 bne.s   loc_3C0C
@@ -529,9 +535,9 @@ loc_3C26:
 loc_3C30:
                 
                 move.w  d0,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
-                lsr.w   #4,d0
+                lsr.w   #NIBBLE_SHIFT_COUNT,d0
                 addq.w  #8,d0
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.w  d0,((VIEW_PLANE_B_Y_COUNTER-$1000000)).w
 loc_3C40:
                 
@@ -541,10 +547,10 @@ loc_3C44:
                 unlk    a6
                 move.b  ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w,d0
                 beq.s   loc_3C88
-                cmpi.b  #$80,d0
+                cmpi.b  #128,d0
                 bne.s   loc_3C6C
                 bsr.w   sub_38C0
-                move.w  #$10,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
+                move.w  #16,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
                 move.w  d0,((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w
                 lea     (byte_FF9904).l,a2
                 bsr.w   sub_3758
@@ -568,7 +574,7 @@ loc_3C88:
                 
                 move.b  ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w,d0
                 beq.s   loc_3CC4
-                cmpi.b  #$80,d0
+                cmpi.b  #128,d0
                 bne.s   loc_3CA8
                 bsr.w   sub_38C0
                 move.w  #8,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
@@ -594,10 +600,10 @@ loc_3CC4:
                 
                 move.b  ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w,d0
                 beq.s   loc_3D08
-                cmpi.b  #$80,d0
+                cmpi.b  #128,d0
                 bne.s   loc_3CEC
                 bsr.w   sub_38C0
-                move.w  #$10,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
+                move.w  #16,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
                 move.w  d0,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
                 lea     (byte_FF9984).l,a2
                 move.w  d0,d2
@@ -622,10 +628,10 @@ loc_3D08:
                 
                 move.b  ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w,d0
                 beq.s   FinalizeScrollDataUpdate
-                cmpi.b  #$80,d0
+                cmpi.b  #128,d0
                 bne.s   loc_3D2A
                 bsr.w   sub_38C0
-                move.w  #$10,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
+                move.w  #16,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
                 move.w  d1,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
                 move.w  d1,d3
                 bsr.w   sub_3866
@@ -704,17 +710,19 @@ GetRandomValue:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 sub_3D96:
             if (VANILLA_BUILD=1)
                 bsr.w   CopyMapBlocks
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3DA8
-                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
+                bset    #0,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
                 bra.s   return_3DAE
 loc_3DA8:
                 
-                bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
+                bset    #1,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
 return_3DAE:
                 
                 rts
@@ -733,17 +741,17 @@ CopyMapBlocks:
                 move.b  d1,d7
                 subq.w  #1,d7
                 move.w  d1,d6
-                lsr.w   #8,d6
+                lsr.w   #BYTE_SHIFT_COUNT,d6
                 subq.w  #1,d6
                 clr.w   d3
                 move.b  d2,d3
-                lsr.w   #8,d2
+                lsr.w   #BYTE_SHIFT_COUNT,d2
                 lsl.w   #6,d3
                 add.w   d3,d2
                 add.w   d2,d2
                 clr.w   d1
                 move.b  d0,d1
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 lsl.w   #6,d1
                 add.w   d1,d0
                 add.w   d0,d0
@@ -757,10 +765,12 @@ loc_3DE2:
                 addq.w  #2,d0
                 addq.w  #2,d2
                 dbf     d6,loc_3DE2
+                
                 movem.w (sp)+,d0/d2/d6
-                addi.w  #$80,d0 
-                addi.w  #$80,d2 
+                addi.w  #128,d0
+                addi.w  #128,d2
                 dbf     d7,loc_3DDE
+                
                 movem.l (sp)+,d0-d7/a2
                 rts
 
@@ -773,11 +783,12 @@ loc_3DE2:
 ResetCurrentMap:
             if (VANILLA_BUILD=1)
                 lea     (FF0000_RAM_START).l,a2
-                move.w  #$7FF,d7
-loc_3E10:
+                move.w  #MAP_LAYOUT_LONGS_COUNTER,d7
+@Clear_Loop:
                 
                 clr.l   (a2)+
-                dbf     d7,loc_3E10
+                dbf     d7,@Clear_Loop
+                
                 lea     (FF2000_LOADING_SPACE).l,a2
                 move.l  #$C0F8C0F8,(a2)+
                 move.l  #$C0F8C0F8,(a2)+
@@ -785,7 +796,7 @@ loc_3E10:
                 move.l  #$C0F8C0F8,(a2)+
                 move.w  #$C0F8,(a2)+
                 clr.w   d0
-                moveq   #$FFFFFFFF,d1   ; reload current map ?
+                moveq   #-1,d1          ; reload current map
                 bra.w   LoadMap         
             endif
 
@@ -799,13 +810,14 @@ loc_3E10:
 
 OpenDoor:
                 
+                module
                 checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
-                bne.w   return_3F22
+                bne.w   @Return
                 
                 movem.w d0-d7,-(sp)
                 lsr.w   #7,d0
                 lsr.w   #7,d1
-                lea     MapOffsetHashTable(pc), a2
+                lea     table_MapOffsetHash(pc), a2
                 add.w   d0,d0
                 move.b  (a2,d0.w),d0
                 andi.w  #$3F,d0 
@@ -815,17 +827,18 @@ OpenDoor:
                 clr.w   d7
                 getSavedByte CURRENT_MAP, d7
                 getPointer p_pt_MapData, a2
-                lsl.w   #2,d7
+                lsl.w   #INDEX_SHIFT_COUNT,d7
                 movea.l (a2,d7.w),a2
-                movea.l MAPDATA_OFFSET_EVENT_STEP(a2),a2      ; get map step events
-loc_3E80:
+                movea.l MAPDATA_OFFSET_EVENT_STEP(a2),a2 ; get map step events
+@Main_Loop:
                 
                 tst.b   (a2)
-                bmi.w   loc_3F1E
+                bmi.w   @Done
                 cmp.b   (a2),d0
-                bne.w   loc_3F24
+                bne.w   @NextEvent
                 cmp.b   1(a2),d1
-                bne.w   loc_3F24
+                bne.w   @NextEvent
+                
                 tst.w   (a2)+
                 move.b  (a2)+,d0
                 ext.w   d0
@@ -865,7 +878,7 @@ loc_3ECC:
                 addi.w  #$80,d2 
                 dbf     d7,loc_3EC8
                 
-                bra.s   byte_3F06
+                bra.s   byte_3F06       ; @PlaySfx
 loc_3EEC:
                 
                 movem.w d2/d6,-(sp)
@@ -880,28 +893,30 @@ loc_3EF0:
                 dbf     d7,loc_3EEC
 byte_3F06:
                 
+                @PlaySfx:
                 sndCom  SFX_DOOR_OPEN
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                beq.s   loc_3F18
-                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
-                bra.s   loc_3F1E
-loc_3F18:
+                beq.s   @UpdatePlaneB
+                bset    #0,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
+                bra.s   @Done
+@UpdatePlaneB:
                 
-                bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
-loc_3F1E:
+                bset    #1,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
+@Done:
                 
                 movem.w (sp)+,d0-d7
-return_3F22:
+@Return:
                 
                 rts
-loc_3F24:
+@NextEvent:
                 
                 addq.l  #8,a2
                 addq.w  #1,d2
-                bra.w   loc_3E80
+                bra.w   @Main_Loop
 
     ; End of function OpenDoor
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -924,7 +939,7 @@ ToggleRoofOnMapLoad:
                 clr.w   d1
                 getSavedByte CURRENT_MAP, d1
                 getPointer p_pt_MapData, a0
-                lsl.w   #2,d1
+                lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a0,d1.w),a0
                 movea.l MAPDATA_OFFSET_EVENT_ROOF(a0),a0
 @Loop:
@@ -956,10 +971,10 @@ ToggleRoofOnMapLoad:
                 subq.b  #1,d2
                 add.b   d1,d3
                 subq.b  #1,d3
-                mulu.w  #$180,d0
-                mulu.w  #$180,d1
-                mulu.w  #$180,d2
-                mulu.w  #$180,d3
+                mulu.w  #MAP_TILE_SIZE,d0
+                mulu.w  #MAP_TILE_SIZE,d1
+                mulu.w  #MAP_TILE_SIZE,d2
+                mulu.w  #MAP_TILE_SIZE,d3
                 cmp.w   d0,d4
             if (STANDARD_BUILD=1)
                 blt.s   @Next
@@ -987,10 +1002,10 @@ ToggleRoofOnMapLoad:
                 
                 clr.w   d0
                 move.b  (a0),d0         ; get x trigger coord of block copy script
-                mulu.w  #$180,d0
+                mulu.w  #MAP_TILE_SIZE,d0
                 clr.w   d1
                 move.b  1(a0),d1        ; get y trigger coord of block copy script
-                mulu.w  #$180,d1
+                mulu.w  #MAP_TILE_SIZE,d1
             if (STANDARD_BUILD=1)
                 bsr.s   PerformMapBlockCopyScript
             else
@@ -1016,7 +1031,7 @@ PerformMapBlockCopyScript:
                 lsr.w   #7,d0
                 lsr.w   #7,d1
                 moveq   #1,d2
-                lea     MapOffsetHashTable(pc), a3
+                lea     table_MapOffsetHash(pc), a3
                 add.w   d0,d0
                 move.b  (a3,d0.w),d0
                 andi.w  #$3F,d0 
@@ -1026,7 +1041,7 @@ PerformMapBlockCopyScript:
                 clr.w   d7
                 getSavedByte CURRENT_MAP, d7
                 getPointer p_pt_MapData, a2
-                lsl.w   #2,d7
+                lsl.w   #INDEX_SHIFT_COUNT,d7
                 movea.l (a2,d7.w),a2
                 movea.l MAPDATA_OFFSET_EVENT_ROOF(a2),a2
 loc_4028:
@@ -1099,9 +1114,9 @@ loc_40BE:
                 dbf     d7,loc_40BA
 loc_40D8:
                 
-                move.w  #$FFFF,(a3)
+                move.w  #-1,(a3)
                 sndCom  MUSIC_NOTHING
-                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
+                bset    #0,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
 loc_40E6:
                 
                 move.w  (sp)+,d7
@@ -1118,7 +1133,7 @@ loc_40EA:
 ; =============== S U B R O U T I N E =======================================
 
 
-csub_56632_0:
+csub_40F2:
                 
                 movem.w d7,-(sp)
                 tst.w   ((word_FFAF42-$1000000)).w
@@ -1141,20 +1156,23 @@ loc_4130:
                 move.w  (a3)+,(a2,d2.w)
                 addq.w  #2,d2
                 dbf     d6,loc_4130
+                
                 movem.w (sp)+,d2/d6
-                addi.w  #$80,d2 
+                addi.w  #128,d2
                 dbf     d7,loc_412C
                 sndCom  MUSIC_NOTHING
-                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
+                bset    #0,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
 loc_4150:
                 
                 movem.w (sp)+,d7
                 rts
 
-    ; End of function csub_56632_0
+    ; End of function csub_40F2
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w, d1.w = Candidate coordinates
 
 
 OpenChest:
@@ -1162,22 +1180,23 @@ OpenChest:
                 movem.l d0-d1/a2,-(sp)
                 bsr.w   GetChestItem    
                 tst.w   d0
-                blt.s   loc_418E
+                blt.s   @Done
+                
                 jsr     j_CheckFlag
-                beq.s   loc_416E
+                beq.s   @Continue
                 move.w  #ITEM_NOTHING,d2
-loc_416E:
+@Continue:
                 
                 jsr     j_SetFlag
                 move.w  #MAP_BLOCKINDEX_OPEN_CHEST,(a2,d0.w) ; set block index to open chest
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                beq.s   loc_4188
-                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
-                bra.s   loc_418E
-loc_4188:
+                beq.s   @UpdatePlaneB
+                bset    #0,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
+                bra.s   @Done
+@UpdatePlaneB:
                 
-                bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
-loc_418E:
+                bset    #1,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
+@Done:
                 
                 movem.l (sp)+,d0-d1/a2
                 rts
@@ -1187,23 +1206,26 @@ loc_418E:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w, d1.w = Candidate coordinates
+
 
 CloseChest:
                 
                 movem.l d0-d1/a2,-(sp)
                 bsr.w   GetChestItem    
                 tst.w   d0
-                blt.s   loc_41C0
+                blt.s   @Done
+                
                 jsr     j_ClearFlag
                 move.w  #MAP_BLOCKINDEX_CLOSED_CHEST,(a2,d0.w)
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                beq.s   loc_41BA
-                bset    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
-                bra.s   loc_41C0
-loc_41BA:
+                beq.s   @UpdatePlaneB
+                bset    #0,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
+                bra.s   @Done
+@UpdatePlaneB:
                 
-                bset    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
-loc_41C0:
+                bset    #1,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
+@Done:
                 
                 movem.l (sp)+,d0-d1/a2
                 rts
@@ -1213,24 +1235,27 @@ loc_41C0:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w, d1.w = Candidate coordinates
+
 
 CheckChestItem:
                 
                 movem.l d0-d1/a2,-(sp)
                 bsr.w   GetChestItem    
                 tst.w   d0
-                blt.s   loc_41F0
+                blt.s   @Done
+                
                 jsr     j_CheckFlag
-                beq.s   loc_41DE
+                beq.s   @Continue
                 move.w  #ITEM_NOTHING,d2 ; no item if chest has already been opened
-loc_41DE:
+@Continue:
                 
                 move.w  (a2,d0.w),d0
                 andi.w  #$3C00,d0
                 cmpi.w  #$1800,d0
-                beq.s   loc_41F0
-                move.w  #$FFFF,d2
-loc_41F0:
+                beq.s   @Done
+                move.w  #-1,d2
+@Done:
                 
                 movem.l (sp)+,d0-d1/a2
                 rts
@@ -1246,14 +1271,15 @@ CheckNonChestItem:
                 movem.l d0-d1/a2,-(sp)
                 bsr.w   GetNonChestItem
                 tst.w   d0
-                blt.s   loc_4214
+                blt.s   @Done
+                
                 jsr     j_CheckFlag
-                beq.s   loc_420E
+                beq.s   @Continue
                 move.w  #ITEM_NOTHING,d2
-loc_420E:
+@Continue:
                 
                 jsr     j_SetFlag
-loc_4214:
+@Done:
                 
                 movem.l (sp)+,d0-d1/a2
                 rts
@@ -1269,9 +1295,10 @@ RefillNonChestItem:
                 movem.l d0-d1/a2,-(sp)
                 bsr.w   GetNonChestItem
                 tst.w   d0
-                blt.s   loc_422C
+                blt.s   @Done
+                
                 jsr     j_ClearFlag
-loc_422C:
+@Done:
                 
                 movem.l (sp)+,d0-d1/a2
                 rts
@@ -1294,9 +1321,9 @@ GetChestItem:
                 clr.w   d2
                 getSavedByte CURRENT_MAP, d2
                 getPointer p_pt_MapData, a2
-                lsl.w   #2,d2
+                lsl.w   #INDEX_SHIFT_COUNT,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data
-                movea.l MAPDATA_OFFSET_ITEM_CHEST(a2),a2      ; get address of current map's chest item data
+                movea.l MAPDATA_OFFSET_ITEM_CHEST(a2),a2 ; get address of current map's chest item data
             if (STANDARD_BUILD=1)
                 bra.s   GetItem
             else
@@ -1314,14 +1341,15 @@ GetNonChestItem:
                 clr.w   d2
                 getSavedByte CURRENT_MAP, d2
                 getPointer p_pt_MapData, a2
-                lsl.w   #2,d2
+                lsl.w   #INDEX_SHIFT_COUNT,d2
                 movea.l (a2,d2.w),a2
-                movea.l MAPDATA_OFFSET_ITEM_OTHER(a2),a2      ; get address of current map's non-chest item data
+                movea.l MAPDATA_OFFSET_ITEM_OTHER(a2),a2 ; get address of current map's non-chest item data
 
     ; End of function GetNonChestItem
 
 
-; START OF FUNCTION CHUNK FOR GetChestItem
+; =============== S U B R O U T I N E =======================================
+
 
 GetItem:
                 
@@ -1344,7 +1372,7 @@ GetItem:
             else
                 lea     (table_BattleMapCoordinates).w,a0
             endif
-                mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE,d2 ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
+                mulu.w  #BATTLEMAPCOORDINATES_ENTRY_SIZE,d2 ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
                 add.b   1(a0,d2.w),d0
                 add.b   2(a0,d2.w),d1   ; add x1 and y1 of battle camera bounds
                 movem.l (sp)+,a0
@@ -1354,7 +1382,7 @@ GetItem:
             if (STANDARD_BUILD=1)
                 bmi.s   @OutOfBounds
             else
-                bmi.w   @OutOfBounds    ; if negative, then value > map max coord, so value = FF : end of data
+                bmi.w   @OutOfBounds    ; if negative, then value > map max coord, so value = $FF : end of data
             endif
                 
             if (STANDARD_BUILD=1)
@@ -1386,7 +1414,7 @@ GetItem:
             endif
 @OutOfBounds:
                 
-                moveq   #$FFFFFFFF,d0
+                moveq   #-1,d0
                 move.w  d0,d1
                 move.w  d0,d2
             if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
@@ -1402,7 +1430,7 @@ GetItem:
                 addq.l  #4,a2           ; go to next item
                 bra.s   @Start
 
-; END OF FUNCTION CHUNK FOR GetChestItem
+    ; End of function GetItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1414,17 +1442,17 @@ WarpIfSetAtPoint:
                 movem.l d0-d1/d7,-(sp)
                 ext.l   d0
                 ext.l   d1
-                divs.w  #$180,d0
-                divs.w  #$180,d1
+                divs.w  #MAP_TILE_SIZE,d0
+                divs.w  #MAP_TILE_SIZE,d1
                 clr.w   d7
                 getSavedByte CURRENT_MAP, d7
                 getPointer p_pt_MapData, a2
-                lsl.w   #2,d7
+                lsl.w   #INDEX_SHIFT_COUNT,d7
                 movea.l (a2,d7.w),a2
                 movea.l MAPDATA_OFFSET_EVENT_WARP(a2),a2
 loc_4302:
                 
-                cmpi.w  #$FFFF,(a2)
+                cmpi.w  #-1,(a2)
             if (STANDARD_BUILD=1)
                 beq.s   @Done
             else
@@ -1450,7 +1478,7 @@ loc_4314:
             endif
 loc_4322:
                 
-                move.w  #MAPEVENT_WARP,((MAP_EVENT_TYPE-$1000000)).w
+                move.w  #MAP_EVENT_WARP,((MAP_EVENT_TYPE-$1000000)).w
                 move.l  2(a2),((MAP_EVENT_PARAM_1-$1000000)).w
                 move.w  6(a2),((MAP_EVENT_PARAM_5-$1000000)).w
                 move.w  #SFX_WARP,((WARP_SFX-$1000000)).w
@@ -1475,13 +1503,13 @@ UpdateVdpPlaneA:
                 movem.l a0-a1,-(sp)
                 movem.w d7,-(sp)
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                bne.s   loc_4358
+                bne.s   @MapOnForeground
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
-                bra.s   loc_435E
-loc_4358:
+                bra.s   @Continue
+@MapOnForeground:
                 
                 move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
-loc_435E:
+@Continue:
                 
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
@@ -1493,15 +1521,16 @@ loc_435E:
             else
                 bsr.w   UpdateVdpPlane
             endif
-                movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
+                movea.l ((WINDOW_LAYOUTS_END_POINTER-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
-                bne.s   loc_439A
+                bne.s   @Done
+                
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1    ; Update VDP Plane A layout data
                 move.w  #$400,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDma
-loc_439A:
+@Done:
                 
                 movem.w (sp)+,d7
                 movem.l (sp)+,a0-a1
@@ -1518,13 +1547,13 @@ UpdateVdpPlaneB:
                 movem.l a0-a1,-(sp)
                 movem.w d7,-(sp)
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                beq.s   loc_43B8
+                beq.s   @MapOnBackground
                 clr.w   ((TILE_PALETTE_MASK-$1000000)).w
-                bra.s   loc_43BE
-loc_43B8:
+                bra.s   @Continue
+@MapOnBackground:
                 
-                move.w  #$2000,((TILE_PALETTE_MASK-$1000000)).w
-loc_43BE:
+                move.w  #%10000000000000,((TILE_PALETTE_MASK-$1000000)).w
+@Continue:
                 
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
@@ -1554,11 +1583,11 @@ loc_43BE:
 UpdateVdpPlane:
                 
                 neg.w   d2
-                andi.w  #$FF,d2
+                andi.w  #BYTE_MASK,d2
                 lsr.w   #3,d2
                 add.w   d2,d2
                 subq.w  #8,d3
-                andi.w  #$FF,d3
+                andi.w  #BYTE_MASK,d3
                 lsr.w   #3,d3
                 add.w   d3,d3
                 lsl.w   #5,d3
@@ -1566,16 +1595,16 @@ UpdateVdpPlane:
                 add.w   d2,d3
                 lsr.w   #7,d0
                 lsr.w   #7,d1
-                lea     MapOffsetHashTable(pc), a3
+                lea     table_MapOffsetHash(pc), a3
                 lea     (FF0000_RAM_START).l,a4
                 lea     (FF2000_LOADING_SPACE).l,a5
                 cmpi.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 bne.w   loc_44B4
-                moveq   #$20,d7 
+                moveq   #32,d7
 loc_4434:
                 
                 movem.w d0/d3,-(sp)
-                moveq   #$20,d6 
+                moveq   #32,d6
 loc_443A:
                 
                 movem.w d0-d1,-(sp)
@@ -1611,17 +1640,18 @@ loc_443A:
                 eor.w   d3,d2
                 btst    #6,d2
                 beq.s   loc_4496
-                subi.w  #$40,d3 
+                subi.w  #64,d3
 loc_4496:
                 
                 addq.w  #1,d0
                 dbf     d6,loc_443A
                 
                 movem.w (sp)+,d0/d3
-                addi.w  #$40,d3 
-                bclr    #$B,d3
+                addi.w  #64,d3
+                bclr    #11,d3
                 addq.w  #1,d1
                 dbf     d7,loc_4434           
+                
             if (STANDARD_BUILD=1)
                 bra.w   FinalizeScrollDataUpdate
             else
@@ -1630,11 +1660,11 @@ loc_4496:
             endif
 loc_44B4:
                 
-                moveq   #$20,d7 
+                moveq   #32,d7
 loc_44B6:
                 
                 movem.w d0/d3,-(sp)
-                moveq   #$20,d6 
+                moveq   #32,d6
 loc_44BC:
                 
                 movem.w d0-d1,-(sp)
@@ -1680,16 +1710,18 @@ loc_44FE:
                 eor.w   d3,d2
                 btst    #6,d2
                 beq.s   loc_452A
-                subi.w  #$40,d3 
+                subi.w  #64,d3
 loc_452A:
                 
                 addq.w  #1,d0
                 dbf     d6,loc_44BC
+                
                 movem.w (sp)+,d0/d3
-                addi.w  #$40,d3 
-                bclr    #$B,d3
+                addi.w  #64,d3
+                bclr    #11,d3
                 addq.w  #1,d1
                 dbf     d7,loc_44B6
+                
                 rts
 
     ; End of function UpdateVdpPlane

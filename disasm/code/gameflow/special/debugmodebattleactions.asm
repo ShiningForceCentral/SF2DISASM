@@ -14,8 +14,9 @@ DebugModeActionSelect:
                 moveq   #0,d1
                 moveq   #6,d2
                 jsr     j_NumberPrompt
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 beq.w   @Done
+                
                 move.w  d0,(a0)+
                 add.w   d0,d0
                 move.w  rjt_DebugModeBattleactions(pc,d0.w),d0
@@ -108,7 +109,7 @@ DebugModeSelectTargetEnemy:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
+; In: a2 = battlescene script stack frame
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -118,7 +119,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11

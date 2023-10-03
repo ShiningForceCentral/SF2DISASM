@@ -255,11 +255,11 @@ j_GetAiRegion:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetAiActivationFlag:
+j_GetActivationBitfield:
                 
-                jmp     GetAiActivationFlag(pc)
+                jmp     GetActivationBitfield(pc)
 
-    ; End of function j_GetAiActivationFlag
+    ; End of function j_GetActivationBitfield
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -565,11 +565,11 @@ j_SetAiRegion:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetAiActivationFlag:
+j_SetActivationBitfield:
                 
-                jmp     SetAiActivationFlag(pc)
+                jmp     SetActivationBitfield(pc)
 
-    ; End of function j_SetAiActivationFlag
+    ; End of function j_SetActivationBitfield
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1245,11 +1245,11 @@ j_GetCombatantEntryAddress_0:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetDistanceBetweenEntities:
+j_GetDistanceBetweenBattleEntities:
                 
-                jmp     GetDistanceBetweenEntities(pc)
+                jmp     GetDistanceBetweenBattleEntities(pc)
 
-    ; End of function j_GetDistanceBetweenEntities
+    ; End of function j_GetDistanceBetweenBattleEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1355,21 +1355,21 @@ j_CreateItemRangeGrid:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_821C:
+j_PopulateTargetableGrid_GiveItem:
                 
-                jmp     AdjacentRange(pc)
+                jmp     PopulateTargetableGrid_GiveItem(pc)
 
-    ; End of function sub_821C
+    ; End of function j_PopulateTargetableGrid_GiveItem
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_PopulateTargetableGridFromUsedItem:
+j_PopulateTargetableGrid_UseItem:
                 
-                jmp     PopulateTargetableGridFromUsedItem(pc)
+                jmp     PopulateTargetableGrid_UseItem(pc)
 
-    ; End of function j_PopulateTargetableGridFromUsedItem
+    ; End of function j_PopulateTargetableGrid_UseItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1385,11 +1385,11 @@ sub_8224:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_PopulateTargetableGridFromSpell:
+j_PopulateTargetableGrid_CastSpell:
                 
-                jmp     PopulateTargetableGridFromSpell(pc)
+                jmp     PopulateTargetableGrid_CastSpell(pc)
 
-    ; End of function j_PopulateTargetableGridFromSpell
+    ; End of function j_PopulateTargetableGrid_CastSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1695,21 +1695,21 @@ j_StartAiControl:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_PopulateTotalMovecostsAndMovableGridArrays:
+j_PopulateMovementArrays:
                 
-                jmp     PopulateTotalMovecostsAndMovableGridArrays(pc)
+                jmp     PopulateMovementArrays(pc)
 
-    ; End of function j_PopulateTotalMovecostsAndMovableGridArrays
+    ; End of function j_PopulateMovementArrays
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GenerateTargetRangeLists:
+j_CreateMovementRangeGrid:
                 
-                jmp     GenerateTargetRangeLists(pc)
+                jmp     CreateMovementRangeGrid(pc)
 
-    ; End of function j_GenerateTargetRangeLists
+    ; End of function j_CreateMovementRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1755,11 +1755,11 @@ j_ClearAiMoveInfo:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetMoveInfo:
+j_InitializeMovementArrays:
                 
-                jmp     GetMoveInfo(pc) 
+                jmp     InitializeMovementArrays(pc)
 
-    ; End of function j_GetMoveInfo
+    ; End of function j_InitializeMovementArrays
 
 
 ; =============== S U B R O U T I N E =======================================

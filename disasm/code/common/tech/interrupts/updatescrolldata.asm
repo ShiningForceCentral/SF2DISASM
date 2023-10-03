@@ -15,7 +15,7 @@ sub_1234:
                 ori.w   #$4000,d7
                 move.w  d7,(VDP_Control).l
                 move.w  a6,d7
-                lsr.w   #8,d7
+                lsr.w   #BYTE_SHIFT_COUNT,d7
                 lsr.w   #6,d7
                 move.w  d7,(VDP_Control).l
                 movem.w (sp)+,d7
@@ -33,15 +33,16 @@ UpdateVdpHScrollData:
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.w  #$8F02,(a6)+    ; auto-increment : 2
                 btst    #1,(VDP_REG0B_VALUE).l ; Check HScroll mode
-                bne.s   loc_127C        
+                bne.s   @HScrollMode10  
+                
                 move.w  #$9400,(a6)+    ; If HScroll mode = 00, then full screen
                 move.w  #$9302,(a6)+    ; DMA length = 2
-                bra.s   loc_1284
-loc_127C:
+                bra.s   @Finalize
+@HScrollMode10:
                 
                 move.w  #$9402,(a6)+    ; If HScroll mode = 10, then 8 pixel rows
                 move.w  #$9300,(a6)+    ; DMA length = $200 = 512
-loc_1284:
+@Finalize:
                 
                 move.w  #$96E8,(a6)+
                 move.w  #$9580,(a6)+
@@ -70,12 +71,13 @@ UpdateForegroundHScrollData:
                 lea     (HORIZONTAL_SCROLL_DATA).l,a6
 loc_12B4:
                 
-                move.w  #$FF,d7
+                move.w  #255,d7
 loc_12B8:
                 
                 move.w  d6,(a6)+
                 addq.l  #2,a6
                 dbf     d7,loc_12B8
+                
                 movem.l (sp)+,d7/a6
                 bra.s   UpdateVdpHScrollData
 
@@ -105,15 +107,16 @@ UpdateVdpVScrollData:
                 movea.l (DMA_QUEUE_POINTER).l,a6
                 move.w  #$8F02,(a6)+    ; auto-inc : 2
                 btst    #2,(VDP_REG0B_VALUE).l ; Check vertical scrolling mode
-                bne.s   loc_12F4        
+                bne.s   @VScrollMode1   
+                
                 move.w  #$9400,(a6)+    ; If VS mode = 0, then full screen (1 longword only in VSRAM)
                 move.w  #$9304,(a6)+    ; DMA length = 4
-                bra.s   loc_12FC
-loc_12F4:
+                bra.s   @Finalize
+@VScrollMode1:
                 
                 move.w  #$9400,(a6)+    ; if VS mode = 1 then 16 pixel columns (1 word per column in VSRAM)
                 move.w  #$9328,(a6)+    ; DMA length = 40
-loc_12FC:
+@Finalize:
                 
                 move.w  #$96EA,(a6)+
                 move.w  #$9580,(a6)+
@@ -137,12 +140,13 @@ UpdateForegroundVScrollData:
                 lea     (VERTICAL_SCROLL_DATA).l,a6
 loc_132C:
                 
-                move.w  #$13,d7
+                move.w  #19,d7
 loc_1330:
                 
                 move.w  d6,(a6)+
                 addq.l  #2,a6
                 dbf     d7,loc_1330
+                
                 movem.l (sp)+,d7/a6
                 bra.s   UpdateVdpVScrollData
 

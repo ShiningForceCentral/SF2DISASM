@@ -19,9 +19,9 @@ GetWeaponSpriteAndPalette:
                 bmi.s   @Skip
                 
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                lea     tbl_WeaponGraphics(pc), a0
+                lea     table_WeaponGraphics(pc), a0
 @FindWeapon_Loop:
-                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
+                cmpi.b  #TERMINATOR_BYTE,(a0)
                 beq.s   @Skip
                 cmp.b   (a0)+,d1
                 beq.s   @Found

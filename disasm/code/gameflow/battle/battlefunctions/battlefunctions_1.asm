@@ -93,18 +93,19 @@ BattleLoop:
                 
                 clr.w   d0              ; start of individual turn execution
                 getBattleTurnActor d0
-                cmpi.b  #CODE_TERMINATOR_BYTE,d0
+                cmpi.b  #-1,d0
                 beq.s   @Start          
+                
                 bsr.w   ExecuteIndividualTurn
                 tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   @Continue
-                cmpi.b  #INPUT_UP|INPUT_B|INPUT_C|INPUT_A,((P1_INPUT-$1000000)).w
+                cmpi.b  #INPUT_UP|INPUT_B|INPUT_C|INPUT_A,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @Continue
                 bsr.w   KillRemainingEnemies
 @Continue:
                 
                 jsr     j_ExecuteBattleCutscene_Defeated
-                jsr     HandleKilledCombatants(pc)
+                jsr     ProcessKilledCombatants(pc)
                 nop
                 bsr.w   GetRemainingCombatants
                 tst.w   d2
@@ -113,8 +114,8 @@ BattleLoop:
                 beq.w   BattleLoop_Victory
                 clr.w   d0
                 getBattleTurnActor d0
-                bsr.w   HandleAfterTurnEffects
-                jsr     HandleKilledCombatants(pc)
+                bsr.w   ProcessAfterTurnEffects
+                jsr     ProcessKilledCombatants(pc)
                 nop
                 bsr.w   GetRemainingCombatants
                 tst.w   d2
@@ -171,7 +172,7 @@ HealLivingAndImmortalAllies:
                 moveq   #0,d2
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 
-@Loop:          lea     tbl_ImmortalAllies(pc), a0
+@Loop:          lea     table_ImmortalAllies(pc), a0
                 move.w  d0,d1
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcc.s   @Immortal
@@ -290,17 +291,17 @@ BattleLoop_Victory:
                 bsr.w   HealLivingAndImmortalAllies
             if (STANDARD_BUILD=1)
                 movem.l d1-d2/a0,-(sp)
-                lea     tbl_DisplayTimerBattles(pc), a0
+                lea     table_DisplayTimerBattles(pc), a0
                 getSavedByte CURRENT_BATTLE, d1
                 moveq   #0,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 movem.l (sp)+,d1-d2/a0
                 bcs.s   @Continue
-                jsr     RemoveTimerWindow
+                jsr     CloseTimerWindow
             else
                 checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check for fairy woods
                 bne.s   @Continue
-                jsr     j_RemoveTimerWindow
+                jsr     j_CloseTimerWindow
             endif
 @Continue:
                 
@@ -374,7 +375,7 @@ BattleLoop_Defeat:
             if (STANDARD_BUILD=1)
                 movem.l d1-d2/a0,-(sp)
                 clr.w   d1
-                lea     tbl_LosableBattles(pc), a0
+                lea     table_LosableBattles(pc), a0
                 getSavedByte CURRENT_BATTLE, d1
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
@@ -383,7 +384,7 @@ BattleLoop_Defeat:
                 jsr     ClearFlag
                 addi.w  #BATTLE_COMPLETED_FLAGS_START-BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     SetFlag
-                cmpi.b  #MAP_NONE,(a0)
+                cmpi.b  #TERMINATOR_BYTE,(a0)
                 beq.s   @Done
                 move.b  (a0),d0
                 clr.w   d4
@@ -413,10 +414,10 @@ ExecuteBattleaction_AngelWing:
                 move.w  combatant(a6),d0
                 move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,d1
                 jsr     j_RemoveItemBySlot
-                bsr.w   HideBattlefieldWindows
+                bsr.w   CloseBattlefieldWindows
                 move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
-                andi.w  #ITEMENTRY_MASK_INDEX,((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                andi.w  #ITEMENTRY_MASK_INDEX,((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     275             ; "{NAME} used{N}{ITEM}!"
                 bra.w   byte_23DFA
 
@@ -434,11 +435,11 @@ ExecuteBattleaction_Egress:
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 jsr     j_GetSpellCost
                 jsr     j_DecreaseCurrentMp
-                bsr.w   HideBattlefieldWindows
+                bsr.w   CloseBattlefieldWindows
                 move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((TEXT_NAME_INDEX_2-$1000000)).w
-                andi.w  #SPELLENTRY_MASK_INDEX,((TEXT_NAME_INDEX_2-$1000000)).w
-                move.l  #1,((TEXT_NUMBER-$1000000)).w
+                move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                andi.w  #SPELLENTRY_MASK_INDEX,((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                move.l  #1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     274             ; "{NAME} cast{N}{SPELL} level {#}!"
 byte_23DFA:
                 
@@ -477,13 +478,13 @@ UpdateBattleUnlockedFlag:
 ; =============== S U B R O U T I N E =======================================
 
 
-HideBattlefieldWindows:
+CloseBattlefieldWindows:
                 
-                jsr     j_RemoveLandEffectWindow
-                jsr     j_RemoveMiniStatusWindow
+                jsr     j_CloseLandEffectWindow
+                jsr     j_CloseMiniStatusWindow
                 clr.b   ((IS_TARGETING-$1000000)).w
-                jsr     j_RemoveMiniStatusWindow
+                jsr     j_CloseMiniStatusWindow
                 rts
 
-    ; End of function HideBattlefieldWindows
+    ; End of function CloseBattlefieldWindows
 

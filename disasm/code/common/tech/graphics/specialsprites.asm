@@ -33,7 +33,7 @@ LoadSpecialSprite:
                 andi.w  #MAPSPRITE_MASK,d0
             endif
                 move.w  d0,d1
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l pt_SpecialSprites(pc,d0.w),a0
                 lea     (PALETTE_4_BASE).l,a1
                 move.l  (a0)+,(a1)+
@@ -51,34 +51,34 @@ LoadSpecialSprite:
     ; End of function LoadSpecialSprite
 
 rjt_SpecialSpriteFunctions:
-                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
-                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
-                dc.w LoadSpecialSprite_Exploration-rjt_SpecialSpriteFunctions
-                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
-                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
-                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
-                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
-                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
-                dc.w LoadSpecialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w specialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w specialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w specialSprite_Exploration-rjt_SpecialSpriteFunctions
+                dc.w specialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w specialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w specialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w specialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w specialSprite_Battle-rjt_SpecialSpriteFunctions
+                dc.w specialSprite_Battle-rjt_SpecialSpriteFunctions
 
 ; START OF FUNCTION CHUNK FOR LoadSpecialSprite
 
-LoadSpecialSprite_Battle:
+specialSprite_Battle:
                 
                 lea     (FF8002_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 movea.l (sp)+,a0
                 lea     ($AF00).l,a1
                 move.w  #$480,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
                 bra.w   @Done
-LoadSpecialSprite_Exploration:
+specialSprite_Exploration:
                 
                 lea     (FF4D00_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 movea.l (sp)+,a0
                 lea     ($A3C0).l,a1
                 move.w  #$A20,d0
@@ -96,25 +96,27 @@ LoadSpecialSprite_Exploration:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = 0. Evil Spirit, 1. Evil Spirit (alt.), 2. Zeon
 
-sub_25CB6:
+
+AnimateSpecialSprite:
                 
                 movem.l d0-d2/a0-a1,-(sp)
                 lea     (SpecialSprites_EvilSpirit+$20)(pc), a0
                 tst.w   d0
-                beq.s   loc_25CD2
+                beq.s   @Continue
                 cmpi.b  #1,d0
-                bne.s   loc_25CCE
+                bne.s   @Zeon
                 lea     SpecialSprites_EvilSpiritAlt(pc), a0
-                bra.s   loc_25CD2
-loc_25CCE:
+                bra.s   @Continue
+@Zeon:
                 
                 lea     (SpecialSprites_Zeon+$20)(pc), a0
-loc_25CD2:
+@Continue:
                 
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 movea.l (sp)+,a0
                 lea     ($AF00).l,a1
                 move.w  #$480,d0
@@ -124,13 +126,15 @@ loc_25CD2:
                 movem.l (sp)+,d0-d2/a0-a1
                 rts
 
-    ; End of function sub_25CB6
+    ; End of function AnimateSpecialSprite
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: a0 = entity data pointer
 
-UpdateSpecialSprites:
+
+UpdateSpecialSprite:
                 
                 movem.l d0-d2/d7-a2,-(sp)
                 move.b  ((WINDOW_IS_PRESENT-$1000000)).w,d7
@@ -154,38 +158,38 @@ loc_25D0E:
                 move.b  #MAPSPRITES_SPECIALS_END,d6
                 sub.b   ENTITYDEF_OFFSET_MAPSPRITE(a0),d6
             endif
-                andi.w  #$F,d6
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d6
                 add.w   d6,d6
-                move.w  rjt_SpecialSpriteUpdate(pc,d6.w),d6
-                jmp     rjt_SpecialSpriteUpdate(pc,d6.w)
+                move.w  rjt_SpecialSpriteUpdates(pc,d6.w),d6
+                jmp     rjt_SpecialSpriteUpdates(pc,d6.w)
 
-    ; End of function UpdateSpecialSprites
+    ; End of function UpdateSpecialSprite
 
-rjt_SpecialSpriteUpdate:
-                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
-                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
-                dc.w UpdateSpecialSprite_Exploration-rjt_SpecialSpriteUpdate
-                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
-                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
-                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
-                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
-                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
-                dc.w UpdateSpecialSprite_Battle-rjt_SpecialSpriteUpdate
+rjt_SpecialSpriteUpdates:
+                dc.w specialSpriteUpdate_Battle-rjt_SpecialSpriteUpdates
+                dc.w specialSpriteUpdate_Battle-rjt_SpecialSpriteUpdates
+                dc.w specialSpriteUpdate_Exploration-rjt_SpecialSpriteUpdates
+                dc.w specialSpriteUpdate_Battle-rjt_SpecialSpriteUpdates
+                dc.w specialSpriteUpdate_Battle-rjt_SpecialSpriteUpdates
+                dc.w specialSpriteUpdate_Battle-rjt_SpecialSpriteUpdates
+                dc.w specialSpriteUpdate_Battle-rjt_SpecialSpriteUpdates
+                dc.w specialSpriteUpdate_Battle-rjt_SpecialSpriteUpdates
+                dc.w specialSpriteUpdate_Battle-rjt_SpecialSpriteUpdates
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateSpecialSprite_Battle:
+specialSpriteUpdate_Battle:
                 
                 lea     (SPRITE_60).l,a1
                 move.b  ENTITYDEF_OFFSET_ANIMCOUNTER(a0),d2
                 cmpi.b  #$F,d2
                 ble.s   loc_25D56
-                lea     word_2784C(pc), a2
+                lea     table_2784C(pc), a2
                 bra.s   loc_25D5A
 loc_25D56:
                 
-                lea     word_2786C(pc), a2
+                lea     table_2786C(pc), a2
 loc_25D5A:
                 
                 btst    #4,ENTITYDEF_OFFSET_FLAGS_B(a0)
@@ -218,15 +222,16 @@ loc_25D7E:
                 add.w   d0,d2
                 move.w  d2,(a1)+
                 dbf     d7,loc_25D7E
+                
                 bra.w   loc_25DF0
 
-    ; End of function UpdateSpecialSprite_Battle
+    ; End of function specialSpriteUpdate_Battle
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateSpecialSprite_Exploration:
+specialSpriteUpdate_Exploration:
                 
                 clr.w   d6
                 move.b  ENTITYDEF_OFFSET_LAYER(a0),d6
@@ -251,7 +256,7 @@ loc_25DB0:
                 sub.w   d6,d0
                 btst    #0,((FRAME_COUNTER-$1000000)).w
                 bne.s   loc_25DD6
-                move.w  #$180,d0
+                move.w  #MAP_TILE_SIZE,d0
 loc_25DD6:
                 
                 moveq   #8,d7
@@ -273,5 +278,5 @@ loc_25DF0:
                 movem.l (sp)+,d0-d2/d7-a2
                 rts
 
-    ; End of function UpdateSpecialSprite_Exploration
+    ; End of function specialSpriteUpdate_Exploration
 

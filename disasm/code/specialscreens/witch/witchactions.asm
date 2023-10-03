@@ -36,7 +36,7 @@ loc_7428:
                 jsr     j_NameAlly
                 btst    #7,(SAVE_FLAGS).l ; "Game completed" bit
                 beq.w   byte_7476       
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.w   byte_7476       
                 moveq   #1,d0
                 moveq   #COMBATANT_ALLIES_MINUS_PLAYER_AND_CREATURE_COUNTER,d7
@@ -134,9 +134,9 @@ loc_753A:
                 
                 clr.w   d0
                 getSavedByte CURRENT_MAP, d0
-                jsr     GetSavePointForMap(pc)
+                jsr     GetSavepointForMap(pc)
                 nop
-                moveq   #$FFFFFFFF,d4
+                moveq   #-1,d4
                 bra.w   loc_75E0        
 
     ; End of function WitchLoad
@@ -149,7 +149,7 @@ WitchCopy:
                 
                  
                 txt     227             ; "Copy?  Really?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 tst.w   d0
                 bne.w   byte_73C2       
                 move.b  (SAVE_FLAGS).l,d0
@@ -188,7 +188,7 @@ loc_7590:
                 subq.w  #1,d0
                 setCurrentSaveSlot d0
                 txt     230             ; "Delete?  Are you sure?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 tst.w   d0
                 bne.w   byte_73C2       
                 getCurrentSaveSlot d0

@@ -41,16 +41,16 @@ GenerateRandomOrDebugNumber:
                 beq.s   @Skip
                 
                 moveq   #0,d0
-                btst    #INPUT_BIT_RIGHT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_RIGHT,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @Done
                 moveq   #1,d0
-                btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_UP,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @Done
                 moveq   #2,d0
-                btst    #INPUT_BIT_LEFT,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_LEFT,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @Done
                 moveq   #3,d0
-                btst    #INPUT_BIT_DOWN,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_DOWN,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @Done
 @Skip:
                 

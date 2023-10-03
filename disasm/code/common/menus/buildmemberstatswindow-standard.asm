@@ -37,7 +37,7 @@ member = -2
                 move.l  a1,windowTilesAddress(a6)
                 
                 ; Copy window layout
-                getPointer p_MemberStatusWindowLayout, a0
+                getPointer p_layout_MemberStatusWindow, a0
             if (FULL_CLASS_NAMES=1)
                 move.w  #126,d7     ; window layout head bytesize
                 jsr     (CopyBytes).w
@@ -56,7 +56,7 @@ member = -2
 @CopyLayoutTail:move.w  #630,d7     ; window layout tail bytesize
                 jsr     (CopyBytes).w
             else
-                getPointer p_MemberStatusWindowLayout, a0
+                getPointer p_layout_MemberStatusWindow, a0
                 move.w  #WINDOW_MEMBERSTATUS_VDPTILEORDER_BYTESIZE,d7
                 jsr     (CopyBytes).w
             endif
@@ -104,63 +104,63 @@ member = -2
                 andi.w  #STATUSEFFECT_CURSE,d2
                 beq.s   @Poison
                 move.l  #VDPTILES_STATUSEFFECT_CURSE,d0
-                bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                bsr.w   WriteStatusEffectTiles
                 
 @Poison:        ; Poison
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_POISON,d2
                 beq.s   @Muddle
                 move.l  #VDPTILES_STATUSEFFECT_POISON,d0
-                bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                bsr.w   WriteStatusEffectTiles
                 
 @Muddle:        ; Muddle
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_MUDDLE,d2
                 beq.s   @Silence
                 move.l  #VDPTILES_STATUSEFFECT_MUDDLE,d0
-                bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                bsr.w   WriteStatusEffectTiles
                 
 @Silence:       ; Silence
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_SILENCE,d2
                 beq.s   @Stun
                 move.l  #VDPTILES_STATUSEFFECT_SILENCE,d0
-                bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                bsr.w   WriteStatusEffectTiles
                 
 @Stun:          ; Stun
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_STUN,d2
                 beq.s   @Sleep
                 move.l  #VDPTILES_STATUSEFFECT_STUN,d0
-                bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                bsr.w   WriteStatusEffectTiles
                 
 @Sleep:         ; Sleep
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_SLEEP,d2
                 beq.s   @Attack
                 move.l  #VDPTILES_STATUSEFFECT_SLEEP,d0
-                bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                bsr.w   WriteStatusEffectTiles
                 
 @Attack:        ; Attack
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_ATTACK,d2
                 beq.s   @Boost
                 move.l  #VDPTILES_STATUSEFFECT_ATTACK,d0
-                bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                bsr.w   WriteStatusEffectTiles
                 
 @Boost:         ; Boost
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_BOOST,d2
                 beq.s   @Slow
                 move.l  #VDPTILES_STATUSEFFECT_BOOST,d0
-                bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                bsr.w   WriteStatusEffectTiles
                 
 @Slow:          ; Slow
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_SLOW,d2
                 beq.s   @WriteStatValues
                 move.l  #VDPTILES_STATUSEFFECT_SLOW,d0
-                bsr.w   AddStatusEffectTileIndexesToVdpTileOrder
+                bsr.w   WriteStatusEffectTiles
                 
 @WriteStatValues:
                 move.w  member(a6),d0
@@ -316,7 +316,7 @@ WriteEnemyLvOrExp:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 
                 ; Copy spell level tiles to window layout
-                lea     SpellLevelTilesLayout1(pc), a0
+                lea     layout_SpellLevelIndicator(pc), a0
                 move.w  d5,d1
                 andi.w  #SPELLENTRY_MASK_LV,d1
                 move.w  d1,d2
@@ -334,13 +334,13 @@ WriteEnemyLvOrExp:
                 andi.l  #SPELLENTRY_MASK_INDEX,d1
                 addi.w  #ICON_SPELLS_START,d1
                 getPointer p_Icons, a0
-                mulu.w  #ICONTILES_BYTESIZE,d1
+                mulu.w  #ICON_TILE_BYTESIZE,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
-                move.w  #ICONTILES_BYTESIZE,d7
+                move.w  #ICON_TILE_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 bsr.w   CleanMemberStatsIconCorners
-                adda.w  #ICONTILES_BYTESIZE,a2
+                adda.w  #ICON_TILE_BYTESIZE,a2
                 addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_SPELL,d4
 @NextSpell:     dbf     d6,@WriteSpells_Loop
                 
@@ -396,10 +396,10 @@ WriteEnemyLvOrExp:
                 move.w  d5,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 getPointer p_Icons, a0
-                mulu.w  #ICONTILES_BYTESIZE,d1
+                mulu.w  #ICON_TILE_BYTESIZE,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
-                move.w  #ICONTILES_BYTESIZE,d7
+                move.w  #ICON_TILE_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 
                 ; Draw cracks over icon if item is broken
@@ -409,11 +409,11 @@ WriteEnemyLvOrExp:
                 
                 getPointer p_Icons, a0
             if (EXPANDED_ITEMS_AND_SPELLS=1)
-                adda.l  #ICONTILES_OFFSET_CRACKS,a0
+                adda.l  #ICONS_OFFSET_CRACKS,a0
             else
-                lea     ICONTILES_OFFSET_CRACKS(a0),a0
+                lea     ICONS_OFFSET_CRACKS(a0),a0
             endif
-                move.w  #ICONTILES_CRACKS_PIXELS_COUNTER,d0
+                move.w  #ICON_PIXELS_BYTE_COUNTER,d0
                 
 @DrawCracks_Loop:
                 move.b  (a0)+,d1
@@ -434,7 +434,7 @@ WriteEnemyLvOrExp:
                 
 @CleanIconCorners:
                 bsr.w   CleanMemberStatsIconCorners
-                adda.w  #ICONTILES_BYTESIZE,a2
+                adda.w  #ICON_TILE_BYTESIZE,a2
                 addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_ITEM,d4
                 dbf     d6,@WriteItems_Loop
                 
@@ -513,7 +513,7 @@ WriteJewelIcons:
                 ; Load Jewel of Light icon pixel data to temp space
                 move.w  #ICON_JEWEL_OF_LIGHT,d1
                 bsr.s   LoadJewelIconPixels
-                adda.w  #ICONTILES_BYTESIZE,a2
+                adda.w  #ICON_TILE_BYTESIZE,a2
                 
                 chkFlg  385             ; Set after Bowie obtains King Galam's jewel
                 beq.s   @Return         ; skip if we haven't obtained Jewel of Evil
@@ -545,7 +545,7 @@ LoadJewelIconPixels:
                 lsl.w   #6,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
-                move.w  #ICONTILES_BYTESIZE,d7
+                move.w  #ICON_TILE_BYTESIZE,d7
                 jsr     (CopyBytes).w
             endif
                 

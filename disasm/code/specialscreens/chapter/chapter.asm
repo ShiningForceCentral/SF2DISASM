@@ -64,7 +64,7 @@ ChapterScreen:
                 movea.l (a0,d0.w),a0
                 movem.w d0,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a1
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     ($2000).w,a1
                 move.w  #$1000,d0

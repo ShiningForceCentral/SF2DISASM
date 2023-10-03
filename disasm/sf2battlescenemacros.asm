@@ -115,7 +115,7 @@ displayMessageWithNoWait: macro
     writeBscParam \4
     endm
     
-bscHideTextBox: macro
+bscCloseDialogueWindow: macro
     move.w  #$12,(a6)+
     endm
     

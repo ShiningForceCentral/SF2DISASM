@@ -27,12 +27,12 @@ j_j_DisplaySegaLogo:
 
 GameIntro:
                 
-                move.l  sp,(GAME_INTRO_SP_OFFSET).l
-                move.l  #AfterGameIntro,((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
+                move.l  sp,(GAME_INTRO_STACK_POINTER_BACKUP).l
+                move.l  #AfterGameIntro,((AFTER_INTRO_JUMP_POINTER-$1000000)).w
                 jsr     (EnableDisplayAndInterrupts).w
                 clr.w   d0
                 jsr     j_PlayIntroOrEndCutscene
-                clr.l   ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
+                clr.l   ((AFTER_INTRO_JUMP_POINTER-$1000000)).w
 AfterGameIntro:
                 
                 clr.w   ((QUAKE_AMPLITUDE-$1000000)).w
@@ -54,9 +54,10 @@ AfterGameIntro:
                 bsr.w   InitializeDisplay
                 bsr.w   DisableDisplayAndInterrupts
                 sndCom  MUSIC_TITLE
-                jsr     TitleScreen
-                bne.s   StartWitchScreen       
+                jsr     StartTitleScreen
+                bne.s   StartWitchScreen
+                
                 move    #$2700,sr
-                movea.l (InitStack).w,sp
+                movea.l (InitialStack).w,sp
                 movea.l (p_Start).w,a0  
                 jmp     (a0)            ; reset

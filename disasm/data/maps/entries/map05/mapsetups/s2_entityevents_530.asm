@@ -38,7 +38,7 @@ Map5_212_EntityEvent1:
 
 Map5_212_EntityEvent2:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map5_212_EntityEvent2
@@ -50,7 +50,7 @@ Map5_212_EntityEvent2:
 Map5_212_EntityEvent3:
                 
                 move.b  #SHOP_YEEL_UNDERGROUND,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map5_212_EntityEvent3

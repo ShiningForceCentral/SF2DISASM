@@ -9,10 +9,10 @@
 ; Then, AI will always target the highest priority option based upon
 ;  the chosen action, unless there are multiple options with equal priority.
 ; 
-;       In: D0 = character index of attacker
-;       Out: D0 = target index, D1 = priority (max of 15), D2 = battle action
+;       In: d0.b = character index of attacker
+;       Out: d0.w = target index, d1.w = priority (max of 15), d2.b = battle action
 ; 
-; If no targets in range then D0 = $FFFF, D1 = 0, D2 = 3
+; If no targets in range then d0.w = -1, d1.w = 0, d2.b = 3
 
 highPriorityTargetsCount = -196
 battleaction = -195
@@ -53,7 +53,7 @@ DetermineAiBattleaction:
                 bne.s   @TakeAction     
                                         ; If no targets
                 moveq   #BATTLEACTION_STAY,d2
-                move.w  #$FFFF,d0
+                move.w  #-1,d0
                 moveq   #0,d1
                 bra.w   loc_F1CC
 @TakeAction:
@@ -310,7 +310,7 @@ loc_F034:
                 movea.l (a4,d3.l),a4
                 cmpi.b  #BATTLEACTION_CAST_SPELL,battleaction(a6)
                 bne.s   loc_F05E
-                lea     (tbl_AttackPriority_Mage).l,a4
+                lea     (table_AttackPriority_Mage).l,a4
 loc_F05E:
                 
                 clr.l   d4
@@ -367,9 +367,10 @@ loc_F0A8:
 loc_F0D8:
                 
                 addq.b  #1,d4
-                cmpi.b  #$30,d4 ; max num targets
+                cmpi.b  #48,d4          ; max num targets
                 blt.s   loc_F0EE
-                move.b  #$FF,d0
+                
+                move.b  #-1,d0
                 clr.w   d1
                 move.b  #3,d2
                 bra.w   loc_F1CC
@@ -414,7 +415,8 @@ loc_F13C:
                 addi.w  #1,d4
                 cmpi.w  #$30,d4 
                 blt.s   loc_F154
-                move.b  #$FF,d0
+                
+                move.b  #-1,d0
                 clr.w   d1
                 move.b  #3,d2
                 bra.w   loc_F1CC
@@ -432,12 +434,13 @@ loc_F154:
 loc_F172:
                 
                 clr.l   d2
-                move.b  #$FF,d2
+                move.b  #-1,d2
                 clr.w   d3
                 move.b  highPriorityTargetsCount(a6),d3
                 cmpi.w  #$30,d3 
                 ble.s   loc_F192
-                move.b  #$FF,d0
+                
+                move.b  #-1,d0
                 clr.w   d1
                 move.b  #3,d2
                 bra.w   loc_F1CC
@@ -459,9 +462,10 @@ loc_F1A8:
                 addi.w  #1,d4
                 subq.w  #1,d3
                 bne.s   loc_F196
-                cmpi.b  #$FF,d2
+                cmpi.b  #-1,d2
                 bne.s   loc_F1C2
-                move.b  #$FF,d0
+                
+                move.b  #-1,d0
                 clr.w   d1
                 move.b  #3,d2
                 bra.s   loc_F1CC

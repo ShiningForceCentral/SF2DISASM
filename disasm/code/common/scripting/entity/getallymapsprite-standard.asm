@@ -6,7 +6,7 @@
 
 ; Get mapsprite index for combatant d0.w -> d4.w
 
-GetAllyMapSprite:
+GetAllyMapsprite:
                 
                 move.w  d0,d4                           ; map sprite index = combatant index
                 cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
@@ -23,7 +23,7 @@ GetAllyMapSprite:
                 move.w  #MAPSPRITE_BLUE_FLAME,d4
                 bra.s   @Done                           ; return blue flame sprite if ally is not alive, and we're not currently in battle
                 
-@CheckJoined:   lea     tbl_AllyMapSpritesIfNotJoined(pc), a0
+@CheckJoined:   lea     table_AllyMapspritesIfNotJoined(pc), a0
                 move.w  d0,d1
             if (EXPANDED_MAPSPRITES=1)
                 moveq   #2,d2
@@ -48,13 +48,13 @@ GetAllyMapSprite:
                 add.w   d1,d4
             if (EXPANDED_MAPSPRITES=1)
                 add.w   d4,d4
-                move.w  tbl_AllyMapSprites(pc,d4.w),d4  ; map sprite index for the given class type -> d4.w
+                move.w  table_AllyMapsprites(pc,d4.w),d4  ; map sprite index for the given class type -> d4.w
             else
-                move.b  tbl_AllyMapSprites(pc,d4.w),d4  ; map sprite index for the given class type -> d4.w
+                move.b  table_AllyMapsprites(pc,d4.w),d4  ; map sprite index for the given class type -> d4.w
             endif
                 
 @Done:          movem.l (sp)+,d1-d2/a0
 @Return:        rts
 
-    ; End of function GetAllyMapSprite
+    ; End of function GetAllyMapsprite
 

@@ -76,8 +76,9 @@ j_GetBattleSpritesetSubsection:
 
 
 j_BattleDebugFunction1B120A:
-                
+            if (VANILLA_BUILD=1)
                 jmp     BattleDebugFunction1B120A(pc)
+            endif
 
     ; End of function j_BattleDebugFunction1B120A
 
@@ -221,8 +222,6 @@ j_DetermineBattleUpgrade:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; Battle-related
 
 
 sub_1AC054:

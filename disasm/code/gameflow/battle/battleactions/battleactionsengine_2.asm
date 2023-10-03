@@ -1,10 +1,10 @@
 
 ; ASM FILE code\gameflow\battle\battleactions\battleactionsengine_2.asm :
-; 0xA34E..0xA49C : Battleactions engine
+; 0xA34E..0xA49C : Battleactions Engine, part 2
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
+; In: a2 = battlescene script stack frame
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -14,7 +14,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -29,13 +29,13 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_End:
+battlesceneScript_End:
                 
                 movem.l d0-d3/a0,-(sp)
                 endAnimation
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
                 moveq   #3,d6
-                bsr.w   WriteBattlesceneScript_SwitchTargets
+                bsr.w   battlesceneScript_SwitchTargets
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
                 lea     ((TARGETS_LIST-$1000000)).w,a5
                 tst.b   curseInaction(a2)
@@ -61,7 +61,7 @@ loc_A396:
                 beq.w   loc_A3B2
 loc_A3AE:
                 
-                bsr.w   WriteBattlesceneScript_GiveExpAndGold
+                bsr.w   battlesceneScript_GiveExpAndGold
 loc_A3B2:
                 
                 lea     allCombatantsCurrentHpTable(a2),a0
@@ -93,20 +93,20 @@ loc_A3D6:
                 bra.s   loc_A3D4
 byte_A3E6:
                 
-                bscHideTextBox
+                bscCloseDialogueWindow
                 bscEnd
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function WriteBattlesceneScript_End
+    ; End of function battlesceneScript_End
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
-;     A3 = address in RAM of scene action type
-;     A4 = address in RAM of actor index
-;     A5 = address in RAM of target index
+; In: a2 = battlescene script stack frame
+;     a3 = battleaction type pointer
+;     a4 = actor index pointer
+;     a5 = target index pointer
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -116,7 +116,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -131,29 +131,33 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_DoAction:
+battlesceneScript_ApplyActionEffect:
                 
                 movem.l d0-d3/a0,-(sp)
                 cmpi.w  #BATTLEACTION_ATTACK,(a3)
-                bne.s   loc_A404
-                bsr.w   WriteBattlesceneScript_Attack
-                bra.s   loc_A458
-loc_A404:
+                bne.s   @IsCastSpell
+                
+                bsr.w   battlesceneScript_Attack
+                bra.s   @Done
+@IsCastSpell:
                 
                 cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
-                bne.s   loc_A410
-                bsr.w   WriteBattlesceneScript_CastSpell
-                bra.s   loc_A458
-loc_A410:
+                bne.s   @IsUseItem
+                
+                bsr.w   battlesceneScript_CastSpell
+                bra.s   @Done
+@IsUseItem:
                 
                 cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
-                bne.s   loc_A41C
-                bsr.w   WriteBattlesceneScript_UseItem
-                bra.s   loc_A458
-loc_A41C:
+                bne.s   @IsBurstRock
+                
+                bsr.w   battlesceneScript_UseItem
+                bra.s   @Done
+@IsBurstRock:
                 
                 cmpi.w  #BATTLEACTION_BURST_ROCK,(a3)
-                bne.s   loc_A436
+                bne.s   @IsMuddled
+                
                 move.w  #BATTLEACTION_BURST_ROCK_POWER,d6
             if (STANDARD_BUILD&TRAP_DAMAGE_RAISES_WITH_DIFFICULTY=1)
                 bsr.w   GetDifficulty
@@ -161,22 +165,24 @@ loc_A41C:
                 mulu.w  d1,d6
                 lsr.w   #2,d6
             endif
-                bsr.w   WriteBattlesceneScript_InflictDamage
+                bsr.w   battlesceneScript_InflictDamage
                 tst.b   targetDies(a2)
-                beq.s   loc_A434
-                bsr.w   WriteBattlesceneScript_DeathMessage
-loc_A434:
+                beq.s   @Goto_Done
                 
-                bra.s   loc_A458
-loc_A436:
+                ; Burst Rock dies
+                bsr.w   battlesceneScript_DisplayDeathMessage
+@Goto_Done:
                 
-                cmpi.w  #BATTLEACTION_MUDDLE,(a3)
-                bne.w   loc_A440
-                bra.s   loc_A458
-loc_A440:
+                bra.s   @Done
+@IsMuddled:
+                
+                cmpi.w  #BATTLEACTION_MUDDLED,(a3)
+                bne.w   @IsPrismLaser
+                bra.s   @Done
+@IsPrismLaser:
                 
                 cmpi.w  #BATTLEACTION_PRISM_LASER,(a3)
-                bne.s   loc_A458
+                bne.s   @Done
                 move.w  #BATTLEACTION_PRISM_LASER_POWER,d6
             if (STANDARD_BUILD&TRAP_DAMAGE_RAISES_WITH_DIFFICULTY=1)
                 bsr.w   GetDifficulty
@@ -184,21 +190,21 @@ loc_A440:
                 mulu.w  d1,d6
                 lsr.w   #2,d6
             endif
-                bsr.w   WriteBattlesceneScript_InflictDamage
+                bsr.w   battlesceneScript_InflictDamage
                 tst.b   targetDies(a2)
-                beq.s   loc_A458
-                bsr.w   WriteBattlesceneScript_DeathMessage
-loc_A458:
+                beq.s   @Done
+                bsr.w   battlesceneScript_DisplayDeathMessage
+@Done:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function WriteBattlesceneScript_DoAction
+    ; End of function battlesceneScript_ApplyActionEffect
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
+; In: a2 = battlescene script stack frame
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -208,7 +214,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -223,7 +229,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-FinalDoubleAttackCheck:
+battlesceneScript_ValidateDoubleAttack:
                 
                 movem.l d0-d3/a0,-(sp)
                 tst.b   doubleAttack(a2)
@@ -234,6 +240,7 @@ FinalDoubleAttackCheck:
                 bne.w   @ClearDoubleAttack
                 tst.b   targetIsOnSameSide(a2)
                 bne.w   @ClearDoubleAttack
+                
                 bra.w   @CheckDebugDouble
 @ClearDoubleAttack:
                 
@@ -242,11 +249,12 @@ FinalDoubleAttackCheck:
                 
                 tst.b   debugDouble(a2)
                 beq.s   @Done
-                move.b  #$FF,doubleAttack(a2)
+                
+                move.b  #-1,doubleAttack(a2)
 @Done:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function FinalDoubleAttackCheck
+    ; End of function battlesceneScript_ValidateDoubleAttack
 

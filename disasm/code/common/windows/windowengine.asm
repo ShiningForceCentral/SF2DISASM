@@ -16,11 +16,11 @@ InitializeWindowProperties:
                 clr.l   (a0)+
                 dbf     d7,@Clear_Loop
                 
-                move.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END-$1000000)).w
+                move.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END_POINTER-$1000000)).w
                 move.w  (sp)+,d7
                 movea.l (sp)+,a0
                 clr.b   ((WINDOW_IS_PRESENT-$1000000)).w
-                checkSavedByte #MAP_NONE, CURRENT_MAP
+                checkSavedByte #MAP_CURRENT, CURRENT_MAP
                 beq.s   @Continue
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 @Continue:
@@ -36,7 +36,7 @@ InitializeWindowProperties:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: d0.w = width/height, d1.w = X/Y position
-; Out: a1 = window tiles end, d0.w = window slot (-1 if no free slot available)
+; Out: a1 = window layout end address, d0.w = window slot (-1 if no free slot available)
 
 
 CreateWindow:
@@ -58,13 +58,13 @@ FindFreeWindowSlot_Loop:
                 bra.w   @Done
 @Found:
                 
-                movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
+                movea.l ((WINDOW_LAYOUTS_END_POINTER-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
                 bne.s   @Continue
                 bsr.w   CopyPlaneALayoutForWindows
 @Continue:
                 
-                move.l  a1,(a0)+        ; window tiles end
+                move.l  a1,(a0)+        ; window layout end
                 move.w  d0,(a0)+        ; width height
                 move.w  d1,(a0)+        ; X Y pos 3 times
                 move.w  d1,(a0)+
@@ -72,12 +72,12 @@ FindFreeWindowSlot_Loop:
                 move.w  #$101,(a0)+     ; another X Y pos
                 clr.w   (a0)+
                 move.w  d0,d7
-                lsr.w   #8,d7           ; get width
-                andi.w  #$FF,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d7 ; get width
+                andi.w  #BYTE_MASK,d0
                 mulu.w  d7,d0
                 add.w   d0,d0
                 adda.w  d0,a1
-                move.l  a1,((WINDOW_LAYOUTS_END-$1000000)).w
+                move.l  a1,((WINDOW_LAYOUTS_END_POINTER-$1000000)).w
                 move.w  d6,d0
                 movea.l -WINDOW_ENTRY_SIZE(a0),a1
 @Done:
@@ -91,7 +91,8 @@ FindFreeWindowSlot_Loop:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In DO=Windows index, D1=Value ($8080->X/Y), Out A0=Window properties
+; In: d0.w = Windows index, d1.w = Value ($8080->X/Y)
+; Out: a0 = Window properties
 
 
 SetWindowDestination:
@@ -111,7 +112,7 @@ loc_488A:
                 
                 move.w  d1,WINDOWDEF_OFFSET_ANIM_ORIG_X(a0)
                 move.w  d1,WINDOWDEF_OFFSET_ANIM_DEST_X(a0)
-                move.w  #$100,WINDOWDEF_OFFSET_ANIM_LENGTH(a0)
+                move.w  #256,WINDOWDEF_OFFSET_ANIM_LENGTH(a0)
 loc_4898:
                 
                 movem.w (sp)+,d0-d1
@@ -131,11 +132,12 @@ FixWindowsPositions:
                 clr.w   d0
                 move.w  #$8080,d1
                 moveq   #7,d7
-loc_48B0:
+@Loop:
                 
                 bsr.s   SetWindowDestination
                 addq.w  #1,d0
-                dbf     d7,loc_48B0
+                dbf     d7,@Loop
+                
                 movem.w (sp)+,d0-d1/d7
                 rts
 
@@ -143,6 +145,8 @@ loc_48B0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 sub_48BE:
@@ -179,9 +183,9 @@ CopyPlaneALayoutForWindows:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = window slot
-;     D1 = destination
-;     D2 = animation length
+; In: d0.w = window slot
+;     d1.w = destination
+;     d2.b = animation length
 
 
 MoveWindowWithSfx:
@@ -194,9 +198,9 @@ MoveWindowWithSfx:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = window slot
-;     D1 = destination
-;     D2 = animation length
+; In: d0.w = window slot
+;     d1.w = destination
+;     d2.b = animation length
 
 
 MoveWindow:
@@ -228,7 +232,7 @@ loc_4914:
 ; =============== S U B R O U T I N E =======================================
 
 
-ClearWindowAndUpdateEndPointer:
+DeleteWindow:
                 
                 movem.l d0-d4/a0-a1,-(sp)
                 bsr.w   GetWindowEntryAddress
@@ -238,36 +242,36 @@ ClearWindowAndUpdateEndPointer:
                 moveq   #WINDOW_ENTRIES_COUNTER,d0
                 clr.w   d3
                 clr.w   d4
-loc_4946:
+@ClearWindow_Loop:
                 
                 move.l  (a0),d2
                 cmp.l   d1,d2
-                bls.s   loc_4956
+                bls.s   @Next
                 move.l  d2,d1
                 move.b  WINDOWDEF_OFFSET_WIDTH(a0),d3
                 move.b  WINDOWDEF_OFFSET_HEIGHT(a0),d4
-loc_4956:
+@Next:
                 
                 lea     NEXT_WINDOWDEF(a0),a0
-                dbf     d0,loc_4946
+                dbf     d0,@ClearWindow_Loop
                 
                 tst.l   d1
-                bne.s   loc_496A
+                bne.s   @Continue
                 move.l  #WINDOW_TILE_LAYOUTS,d1
-                bra.s   loc_4972
-loc_496A:
+                bra.s   @UpdateEndPointer
+@Continue:
                 
                 mulu.w  d4,d3
                 add.w   d3,d3
                 ext.l   d3
                 add.l   d3,d1
-loc_4972:
+@UpdateEndPointer:
                 
-                move.l  d1,((WINDOW_LAYOUTS_END-$1000000)).w
+                move.l  d1,((WINDOW_LAYOUTS_END_POINTER-$1000000)).w
                 movem.l (sp)+,d0-d4/a0-a1
                 rts
 
-    ; End of function ClearWindowAndUpdateEndPointer
+    ; End of function DeleteWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -288,7 +292,7 @@ WaitForWindowMovementEnd:
 
 VInt_UpdateWindows:
                 
-                cmpi.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END-$1000000)).w
+                cmpi.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END_POINTER-$1000000)).w
                 bne.s   loc_4994
                 rts
 loc_4994:
@@ -334,11 +338,11 @@ loc_49D8:
                 move.b  WINDOWDEF_OFFSET_ANIM_COUNTER(a2),d5
                 move.w  WINDOWDEF_OFFSET_ANIM_ORIG_X(a2),d3
                 move.w  d3,d4
-                asr.w   #8,d3
+                asr.w   #BYTE_SHIFT_COUNT,d3
                 ext.w   d4
                 move.w  WINDOWDEF_OFFSET_ANIM_DEST_X(a2),d1
                 move.w  d1,d2
-                asr.w   #8,d1
+                asr.w   #BYTE_SHIFT_COUNT,d1
                 ext.w   d2
                 sub.w   d3,d1
                 muls.w  d5,d1
@@ -348,11 +352,11 @@ loc_49D8:
                 muls.w  d5,d2
                 divs.w  d6,d2
                 add.w   d4,d2
-                lsl.w   #8,d1
-                andi.w  #$FF,d2
+                lsl.w   #BYTE_SHIFT_COUNT,d1
+                andi.w  #BYTE_MASK,d2
                 or.w    d2,d1
                 move.w  d1,WINDOWDEF_OFFSET_X(a2)
-                tst.b   ((HIDE_WINDOWS-$1000000)).w
+                tst.b   ((HIDE_WINDOWS_TOGGLE-$1000000)).w
                 bne.s   loc_4A40
                 bsr.w   sub_4AC8
                 bra.s   loc_4A72
@@ -380,33 +384,35 @@ loc_4A72:
                 lea     NEXT_WINDOWDEF(a2),a2
                 dbf     d7,loc_49D8
                 
-                tst.b   ((HIDE_WINDOWS-$1000000)).w
+                tst.b   ((HIDE_WINDOWS_TOGGLE-$1000000)).w
                 beq.s   loc_4A92
-                tst.b   ((byte_FFA8FE-$1000000)).w
+                tst.b   ((FIX_WINDOWS_POSITIONS_TOGGLE-$1000000)).w
                 bne.s   loc_4A90
                 bsr.w   CopyPlaneALayoutForWindows
-                move.w  #$FFFF,((byte_FFA8FE-$1000000)).w
+                move.w  #-1,((FIX_WINDOWS_POSITIONS_TOGGLE-$1000000)).w
 loc_4A90:
                 
                 bra.s   loc_4AA2
 loc_4A92:
                 
-                tst.b   ((byte_FFA8FE-$1000000)).w
+                tst.b   ((FIX_WINDOWS_POSITIONS_TOGGLE-$1000000)).w
                 beq.s   loc_4AA2
                 bsr.w   FixWindowsPositions
-                move.w  #$FF,((byte_FFA8FE-$1000000)).w
+                move.w  #$FF,((FIX_WINDOWS_POSITIONS_TOGGLE-$1000000)).w
 loc_4AA2:
                 
-                tst.b   ((byte_FFA8FF-$1000000)).w
-                beq.s   return_4AC6
+                tst.b   ((UPDATE_WINDOWS_TOGGLE-$1000000)).w
+                beq.s   @Return
+                
+                ; Update VDP Plane A
                 lea     (PLANE_A_MAP_AND_WINDOWS_LAYOUT).l,a0
-                lea     ($C000).l,a1    ; Update VDP Plane A
+                lea     ($C000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDma
                 bsr.w   EnableDmaQueueProcessing
-                clr.b   ((byte_FFA8FF-$1000000)).w
-return_4AC6:
+                clr.b   ((UPDATE_WINDOWS_TOGGLE-$1000000)).w
+@Return:
                 
                 rts
 
@@ -426,7 +432,7 @@ sub_4AC8:
                 ext.w   d0
                 subq.w  #1,d0
                 bmi.w   loc_4B52
-                asr.w   #8,d1
+                asr.w   #BYTE_SHIFT_COUNT,d1
                 subq.w  #1,d1
                 bmi.w   loc_4B52
 loc_4AEC:
@@ -464,6 +470,7 @@ loc_4B1C:
 loc_4B30:
                 
                 dbf     d1,loc_4B06
+                
                 movem.w (sp)+,d1-d2/d6
 loc_4B38:
                 
@@ -473,9 +480,9 @@ loc_4B38:
                 dbf     d0,loc_4AEC
 loc_4B46:
                 
-                tst.b   ((HIDE_WINDOWS-$1000000)).w
+                tst.b   ((HIDE_WINDOWS_TOGGLE-$1000000)).w
                 bne.s   loc_4B52
-                move.b  #$FF,((byte_FFA8FF-$1000000)).w
+                move.b  #-1,((UPDATE_WINDOWS_TOGGLE-$1000000)).w
 loc_4B52:
                 
                 movem.w (sp)+,d0-d3/d6-d7
@@ -499,7 +506,7 @@ sub_4B5C:
                 ext.w   d0
                 subq.w  #1,d0
                 bmi.w   loc_4BE0
-                asr.w   #8,d1
+                asr.w   #BYTE_SHIFT_COUNT,d1
                 subq.w  #1,d1
                 bmi.w   loc_4BE0
 loc_4B86:
@@ -528,6 +535,7 @@ loc_4BAC:
 loc_4BBE:
                 
                 dbf     d1,loc_4B98
+                
                 movem.w (sp)+,d1-d2/d6
 loc_4BC6:
                 
@@ -537,9 +545,9 @@ loc_4BC6:
                 dbf     d0,loc_4B86
 loc_4BD4:
                 
-                tst.b   ((HIDE_WINDOWS-$1000000)).w
+                tst.b   ((HIDE_WINDOWS_TOGGLE-$1000000)).w
                 bne.s   loc_4BE0
-                move.b  #$FF,((byte_FFA8FF-$1000000)).w
+                move.b  #-1,((UPDATE_WINDOWS_TOGGLE-$1000000)).w
 loc_4BE0:
                 
                 movem.w (sp)+,d0-d1/d6-d7
@@ -555,7 +563,7 @@ loc_4BE0:
 sub_4BEA:
                 
                 move.w  d1,d6
-                asr.w   #8,d1
+                asr.w   #BYTE_SHIFT_COUNT,d1
                 move.w  d1,d2
                 andi.w  #$1F,d1
                 ext.w   d6
@@ -595,7 +603,7 @@ return_4C36:
 
 GetWindowEntryAddress:
                 
-                lsl.w   #4,d0
+                lsl.w   #NIBBLE_SHIFT_COUNT,d0
                 lea     (WINDOW_ENTRIES).l,a0
                 adda.w  d0,a0
                 rts
@@ -605,7 +613,7 @@ GetWindowEntryAddress:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get address of tile at coordinates d1.w in layout for window d0.w -> a1
+; Get pointer to tile at coordinates d1.w in layout for window d0.w -> a1
 
 
 GetWindowTileAddress:
@@ -615,14 +623,16 @@ GetWindowTileAddress:
                 bsr.s   GetWindowEntryAddress
                 movea.l (a0)+,a1
                 clr.w   d0
+                
+                ; Unpack coordinates
                 move.b  (a0),d0
                 clr.w   d2
-                move.b  d1,d2
-                lsr.w   #8,d1
+                move.b  d1,d2           ; d2.w = y
+                lsr.w   #BYTE_SHIFT_COUNT,d1 ; d1.w = x
                 mulu.w  d2,d0
                 add.w   d1,d0
                 add.w   d0,d0
-                adda.w  d0,a1
+                adda.w  d0,a1           ; convert position to address
                 movem.w (sp)+,d0-d2
                 movea.l (sp)+,a0
                 rts

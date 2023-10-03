@@ -28,7 +28,7 @@ sub_13C0:
 
 
 sub_13E4:
-            
+                
                 movem.l d0-d1/a0-a1,-(sp)
                 lea     ((PLANE_A_MAP_LAYOUT-$1000000)).w,a0
                 lea     ($E000).l,a1
@@ -48,8 +48,9 @@ sub_13E4:
 
 
 DmaAndWait:
-            
+                
                 bsr.s   sub_13C0        
                 bra.w   WaitForVInt
 
     ; End of function DmaAndWait
+

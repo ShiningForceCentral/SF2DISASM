@@ -26,7 +26,7 @@ StartWitchScreen:
                 move.w  #6,((word_FFB07C-$1000000)).w
                 clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 jsr     ClearEntities
-                getPointer p_SpeechBalloonTiles, a0
+                getPointer p_tiles_SpeechBalloon, a0
                 lea     ($8000).l,a1
                 move.w  #1024,d0
                 moveq   #2,d1
@@ -55,7 +55,7 @@ StartWitchScreen:
                 tst.w   d0
                 bpl.s   @IsSaveSlot2Corrupted
                 
-                move.l  #1,((TEXT_NUMBER-$1000000)).w
+                move.l  #1,((DIALOGUE_NUMBER-$1000000)).w
                 sndCom  MUSIC_CORRUPTED_SAVE
                 txt     237             ; "Ooops!  Record {#} has{N}vanished!{W2}"
                 jsr     FadeOut_WaitForP1Input
@@ -64,7 +64,7 @@ StartWitchScreen:
                 tst.w   d1
                 bpl.s   @StartWitchDialogue
                 
-                move.l  #2,((TEXT_NUMBER-$1000000)).w
+                move.l  #2,((DIALOGUE_NUMBER-$1000000)).w
                 sndCom  MUSIC_CORRUPTED_SAVE
                 txt     237             ; "Ooops!  Record {#} has{N}vanished!{W2}"
                 jsr     FadeOut_WaitForP1Input
@@ -73,7 +73,7 @@ StartWitchScreen:
             if (STANDARD_BUILD&TEST_BUILD&TEST_BUILD_SKIP_WITCH_DIALOGUE=1)
                 bra.w   @SkipWitchDialogue
             else
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 bne.w   @SkipWitchDialogue
             endif
                 txt     216             ; "{CLEAR}Hee, hee, hee...{N}You're finally here!{W2}"
@@ -84,13 +84,13 @@ StartWitchScreen:
                 move.w  #6,((word_FFB07C-$1000000)).w
                 st      ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 txt     217             ; "Ah, you look so confused.{N}You don't know why you're{N}here?{W2}"
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @DisplayText
                 txt     218             ; "Yes, yes...I used a spell{N}on you.{W2}"
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @DisplayText
                 txt     219             ; "Ha, ha.  Where are you{N}going?  You can't escape{W2}"
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @DisplayText
                 txt     220             ; "from this mystery forest{N}unless you help me.{W2}"
                 bra.s   @DisplayText
@@ -171,7 +171,7 @@ witchMenuAction_New:
             else
                 btst    #7,(SAVE_FLAGS).l ; "Game completed" bit
                 beq.w   @Configuration
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.w   @Configuration
             endif
                 
@@ -277,7 +277,7 @@ witchMenuAction_Load:
                 
 @loc_18:        clr.w   d0
                 getSavedByte CURRENT_MAP, d0
-                jsr     GetSavePointForMap
+                jsr     GetSavepointForMap
                 moveq   #-1,d4
                 jmp     (alt_MainLoopEntry).w
 
@@ -291,7 +291,7 @@ witchMenuAction_Copy:
                 
                  
                 txt     227             ; "Copy?  Really?"
-                jsr     YesNoChoiceBox
+                jsr     alt_YesNoPrompt
                 tst.w   d0
                 bne.w   @DisplayText
                 
@@ -331,7 +331,7 @@ witchMenuAction_Del:
                 subq.w  #1,d0
                 setCurrentSaveSlot d0
                 txt     230             ; "Delete?  Are you sure?"
-                jsr     YesNoChoiceBox
+                jsr     alt_YesNoPrompt
                 tst.w   d0
                 bne.w   @DisplayText
                 

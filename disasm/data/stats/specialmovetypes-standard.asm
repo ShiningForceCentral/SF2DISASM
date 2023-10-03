@@ -3,7 +3,7 @@
 ;
 
 ; Movetypes that have a higher chance to dodge non-archer attacks.
-tbl_AirborneMovetypes:
+table_AirborneMovetypes:
                 
                 dc.b MOVETYPE_LOWER_FLYING
                 dc.b MOVETYPE_LOWER_HOVERING
@@ -12,7 +12,7 @@ tbl_AirborneMovetypes:
 
 
 ; Movetypes that ignore airborne targets' higher chance to dodge, and also inflict additional damage to them.
-tbl_ArcherMovetypes:
+table_ArcherMovetypes:
                 
                 dc.b MOVETYPE_LOWER_BRASS_GUNNER
                 dc.b MOVETYPE_LOWER_ARCHER

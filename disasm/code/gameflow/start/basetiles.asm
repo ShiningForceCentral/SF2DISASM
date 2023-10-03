@@ -25,7 +25,7 @@ LoadBaseTiles:
             else
                 jsr     (SetVdpReg).w
             endif
-                getPointer p_BaseTiles, a0
+                getPointer p_tiles_Base, a0
                 lea     (0).w,a1
                 move.w  #4096,d0
                 moveq   #2,d1

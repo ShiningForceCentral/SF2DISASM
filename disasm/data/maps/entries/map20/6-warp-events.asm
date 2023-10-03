@@ -33,7 +33,7 @@
                   warpFacing LEFT
                 mWarp 25, 35
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   25, 50
                   warpFacing RIGHT
                 mWarp 36, 40
@@ -43,17 +43,17 @@
                   warpFacing RIGHT
                 mWarp 39, 39
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   39, 53
                   warpFacing LEFT
                 mWarp 39, 53
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   39, 39
                   warpFacing LEFT
                 mWarp 25, 50
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   25, 35
                   warpFacing RIGHT
                 endWord

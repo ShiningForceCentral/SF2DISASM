@@ -24,12 +24,12 @@ LE_DMG_MULT_14: equ 0
 LE_DMG_MULT_15: equ 205      ; land effect for units (like Taros) on obstructed square
 
 landEffectDamageMultiplier: macro
-            if ~(\1=CODE_TERMINATOR_WORD)
+            if ~(\1=TERMINATOR_WORD)
                 dc.w \1
             endif
         endm
 
-tbl_LandEffectDamageMultipliers:
+table_LandEffectDamageMultipliers:
                 
                 landEffectDamageMultiplier LE_DMG_MULT_0
                 landEffectDamageMultiplier LE_DMG_MULT_1

@@ -28,7 +28,7 @@ GetEntityPortaitAndSpeechSfx:
             endif
                 beq.s   @Found
                 adda.w  #MAPSPRITEDIALOGUEDEF_ENTRY_SIZE,a0
-                cmpi.w  #CODE_TERMINATOR_WORD,(a0)
+                cmpi.w  #TERMINATOR_WORD,(a0)
                 bne.s   @Loop                                ; keep searching as long as we haven't reached end of table
                 
                 ; Return default portrait and speech sfx is map sprite is not found

@@ -5,6 +5,8 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; Move scripts (move to point, follow ally, follow force member)
+; 
+; Out: d1.b = -1 if command failed to execute
 
 var_4 = -4
 var_3 = -3
@@ -17,11 +19,12 @@ ExecuteAiCommand_SpecialMove:
                 link    a6,#-6
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   loc_E9B2
-                move.b  #$FF,d1
+                
+                move.b  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   loc_EB7A
 loc_E9B2:
                 
@@ -31,22 +34,24 @@ loc_E9B2:
                 bsr.w   GetCurrentMov
                 tst.b   d1
                 bne.s   @CanMove
-                move.b  #$FF,d1
+                
+                move.b  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   loc_EB7A
 @CanMove:
                 
                 bsr.w   GetAiSpecialMoveOrders
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 bne.s   loc_EA00
-                move.b  #$FF,d1
+                
+                move.b  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   loc_EB7A
 loc_EA00:
                 
@@ -58,11 +63,12 @@ loc_EA00:
                 bsr.w   GetCurrentHp
                 tst.w   d1
                 bne.s   loc_EA2E
-                move.b  #$FF,d1
+                
+                move.b  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   loc_EB7A
 loc_EA2E:
                 
@@ -70,10 +76,10 @@ loc_EA2E:
                 tst.b   d0
                 bne.w   loc_EAE6
                 move.b  movingCombatant(a6),d0
-                move.w  #$FFFF,d3
+                move.w  #-1,d3
                 bsr.w   UpdateBattleTerrainOccupiedByAllies
-                bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   InitializeMovementArrays
+                bsr.w   PopulateMovementArrays
                 clr.w   d3
                 bsr.w   UpdateBattleTerrainOccupiedByAllies
                 clr.w   d0
@@ -81,9 +87,10 @@ loc_EA2E:
                 bsr.w   sub_CE96
                 tst.b   d1
                 bne.s   loc_EA78
-                move.w  #$FFFF,d1
+                
+                move.w  #-1,d1
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 bra.w   loc_EB7A
@@ -107,14 +114,15 @@ loc_EA9C:
                 bsr.w   sub_F7A0        
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  (a0),d1
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 bne.s   loc_EAD4
+                
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 bra.w   loc_EB7A
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 bra.s   loc_EAE2
 loc_EAD4:
                 
@@ -133,9 +141,10 @@ loc_EAE6:
                 bsr.w   sub_D430
                 tst.b   d1
                 bne.s   loc_EB10
-                move.w  #$FFFF,d1
+                
+                move.w  #-1,d1
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 bra.w   loc_EB7A
@@ -159,14 +168,15 @@ loc_EB34:
                 bsr.w   sub_F7A0        
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  (a0),d1
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 bne.s   loc_EB6C
+                
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 bra.w   loc_EB7A
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 bra.s   loc_EB7A
 loc_EB6C:
                 

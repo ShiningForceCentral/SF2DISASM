@@ -11,7 +11,7 @@ loc_239C8:
                 cmpi.w  #ITEMINDEX_GOLDCHESTS_START,d2
                 blt.s   loc_239EE
                 bsr.s   GetChestGoldAmount
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 jsr     j_IncreaseGold
                 sndCom  MUSIC_ITEM
                 txt     414             ; "{NAME} found {#} gold{N}coins."
@@ -19,13 +19,13 @@ loc_239C8:
                 bra.s   byte_23994
 loc_239EE:
                 
-                move.w  d2,((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  d2,((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     413             ; "{NAME} found{N}{ITEM}.{W2}{CLEAR}"
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 bge.s   loc_23A1E
-                move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d1
+                move.w  ((DIALOGUE_NAME_INDEX_2-$1000000)).w,d1
                 jsr     j_AddItem
                 sndCom  MUSIC_ITEM
                 txt     415             ; "{NAME} recieved{N}{ITEM}."
@@ -46,9 +46,9 @@ loc_23A32:
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 bge.s   loc_23A62
-                move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d1
+                move.w  ((DIALOGUE_NAME_INDEX_2-$1000000)).w,d1
                 jsr     j_AddItem
-                move.w  d0,((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_3-$1000000)).w
                 sndCom  MUSIC_ITEM
                 txt     416             ; "{NAME} passed the{N}{ITEM} to {NAME}."
                 bsr.w   FadeOut_WaitForP1Input
@@ -58,13 +58,13 @@ loc_23A62:
                 dbf     d7,loc_23A32
 loc_23A66:
                 
-                move.w  ((TEXT_NAME_INDEX_2-$1000000)).w,d3
+                move.w  ((DIALOGUE_NAME_INDEX_2-$1000000)).w,d3
                 clr.w   d0
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     417             ; "But, everyone's hands are{N}full.{W1}"
                 move.w  d4,d0
                 move.w  d5,d1
-                jsr     (CloseChest).w
+                jsr     (CloseChest).w  
                 jsr     (RefillNonChestItem).w
                 bra.w   byte_23994
 

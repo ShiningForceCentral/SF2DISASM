@@ -7,7 +7,7 @@
 ; In: a1 = window tiles address, d0.w = selected member index
 
 
-WriteMemberListText:
+WriteMembersListText:
                 
 currentMember = -8
 windowTilesAddress = -6
@@ -25,8 +25,8 @@ headerStringOffset = headerStringOffset+2
                 link    a6,#-8
                 move.w  d0,selectedMember(a6)
                 move.l  a1,windowTilesAddress(a6)
-                move.w  #WINDOW_MEMBERLIST_SIZE,d0
-                bsr.w   CopyWindowTilesToRam
+                move.w  #WINDOW_MEMBERS_LIST_SIZE,d0
+                bsr.w   alt_WriteWindowTiles
                 movea.l windowTilesAddress(a6),a1
                 
                 adda.w  #62,a1  ; 'NAME' offset
@@ -37,18 +37,18 @@ headerStringOffset = headerStringOffset+2
                 moveq   #headerLength,d7
                 
                 ; Determine header string
-                move.b  ((CURRENT_MEMBERLIST_PAGE-$1000000)).w,d0
+                move.b  ((CURRENT_MEMBERS_LIST_PAGE-$1000000)).w,d0
             if (SECOND_MEMBERS_LIST_PAGE=1)
                 bne.s   @CheckStatsPage
                 lea     aClassLvExp(pc), a0
                 bra.s   @WriteHeaderString
-@CheckStatsPage:cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMP,d0
+@CheckStatsPage:cmpi.b  #WINDOW_MEMBERS_LIST_PAGE_HPMP,d0
                 bne.s   @CheckStatsPage2
                 lea     aHpMaxMpMax(pc), a0
                 bra.s   @WriteHeaderString
 @CheckStatsPage2:
                 
-                cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,d0
+                cmpi.b  #WINDOW_MEMBERS_LIST_PAGE_STATS,d0
                 bne.s   @Default
                 lea     aAttDefAgiMov(pc), a0
             else
@@ -57,7 +57,7 @@ headerStringOffset = headerStringOffset+2
                 bra.s   @WriteHeaderString
                 
 @CheckStatsPage:    
-                cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,d0
+                cmpi.b  #WINDOW_MEMBERS_LIST_PAGE_STATS,d0
                 bne.s   @Default
                 lea     aHpMpAtDfAgMv(pc), a0
             endif
@@ -69,9 +69,9 @@ headerStringOffset = headerStringOffset+2
                 
                 ; Create entry
                 movea.l windowTilesAddress(a6),a1
-                adda.w  #WINDOW_MEMBERLIST_OFFSET_ENTRY_NAME,a1
-                moveq   #WINDOW_MEMBERLIST_ENTRIES_COUNTER,d5
-                move.w  ((DISPLAYED_MEMBERLIST_FIRST_ENTRY-$1000000)).w,d4
+                adda.w  #WINDOW_MEMBERS_LIST_OFFSET_ENTRY_NAME,a1
+                moveq   #WINDOW_MEMBERS_LIST_ENTRIES_COUNTER,d5
+                move.w  ((DISPLAYED_MEMBERS_LIST_FIRST_ENTRY-$1000000)).w,d4
                 
 @CreateEntry_Loop:
                 lea     ((GENERIC_LIST-$1000000)).w,a0
@@ -91,7 +91,7 @@ headerStringOffset = headerStringOffset+2
                 jsr     GetCurrentHP
                 move.w  d1,d2
                 jsr     GetCombatantName
-                moveq   #-WINDOW_MEMBERLIST_OFFSET_NEXT_LINE,d1
+                moveq   #-WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE,d1
                 moveq   #ALLYNAME_MAX_LENGTH,d7
                 tst.w   d2
                 bne.s   @WriteEntry_Name
@@ -103,8 +103,8 @@ headerStringOffset = headerStringOffset+2
                 
 @WriteEntry_ClassLvExp:
                 movea.l (sp)+,a1
-                lea     WINDOW_MEMBERLIST_OFFSET_ENTRY_START(a1),a1
-                tst.b   ((CURRENT_MEMBERLIST_PAGE-$1000000)).w
+                lea     WINDOW_MEMBERS_LIST_OFFSET_ENTRY_START(a1),a1
+                tst.b   ((CURRENT_MEMBERS_LIST_PAGE-$1000000)).w
                 bne.s   @WriteEntry_Stats
                 move.l  a1,-(sp)
                 
@@ -114,14 +114,14 @@ headerStringOffset = headerStringOffset+2
                 jsr     GetClassAndFullName
                 cmpi.w  #10,d7
                 blt.s   @Continue
-                lea     -WINDOW_MEMBERLIST_OFFSET_NEXT_LINE(a1),a1
+                lea     -WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE(a1),a1
             else
                 jsr     GetClassAndName
             endif
-@Continue:      moveq   #-WINDOW_MEMBERLIST_OFFSET_NEXT_LINE,d1
+@Continue:      moveq   #-WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movea.l (sp)+,a1
-                lea     WINDOW_MEMBERLIST_OFFSET_ENTRY_LEVEL(a1),a1
+                lea     WINDOW_MEMBERS_LIST_OFFSET_ENTRY_LEVEL(a1),a1
                 
                 ; Write LV
                 move.w  currentMember(a6),d0
@@ -136,7 +136,7 @@ headerStringOffset = headerStringOffset+2
                 
 @WriteEntry_Stats:
             if (SECOND_MEMBERS_LIST_PAGE=1)
-                cmpi.b  #WINDOW_MEMBERLIST_PAGE_HPMP,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
+                cmpi.b  #WINDOW_MEMBERS_LIST_PAGE_HPMP,((CURRENT_MEMBERS_LIST_PAGE-$1000000)).w
                 bne.s   @WriteEntry_Stats2
                 move.w  currentMember(a6),d0              ; Write current HP
                 jsr     GetCurrentHP
@@ -156,7 +156,7 @@ headerStringOffset = headerStringOffset+2
             endif
                 
 @WriteEntry_Stats2:
-                cmpi.b  #WINDOW_MEMBERLIST_PAGE_STATS,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
+                cmpi.b  #WINDOW_MEMBERS_LIST_PAGE_STATS,((CURRENT_MEMBERS_LIST_PAGE-$1000000)).w
                 bne.w   @WriteEntry_Unequippable
             if (SECOND_MEMBERS_LIST_PAGE=0)
                 move.w  currentMember(a6),d0    ; Write current HP
@@ -193,7 +193,7 @@ headerStringOffset = headerStringOffset+2
                 bsr.w   WriteStatValue
                 
 @WriteEntry_Unequippable:
-                cmpi.b  #WINDOW_MEMBERLIST_PAGE_NEWATTANDDEF,((CURRENT_MEMBERLIST_PAGE-$1000000)).w
+                cmpi.b  #WINDOW_MEMBERS_LIST_PAGE_NEWATTANDDEF,((CURRENT_MEMBERS_LIST_PAGE-$1000000)).w
                 bne.w   @NextEntry
                 
                 move.w  currentMember(a6),d0
@@ -202,9 +202,9 @@ headerStringOffset = headerStringOffset+2
                 bcs.s   @WriteEntry_NewAttAndDef
                 
                 lea     aUnequippable(pc), a0
-                addq.w  #WINDOW_MEMBERLIST_OFFSET_ENTRY_UNEQUIPPABLE,a1
-                moveq   #WINDOW_MEMBERLIST_ENTRY_UNEQUIPPABLE_LENGTH,d7
-                moveq   #-WINDOW_MEMBERLIST_OFFSET_NEXT_LINE,d1
+                addq.w  #WINDOW_MEMBERS_LIST_OFFSET_ENTRY_UNEQUIPPABLE,a1
+                moveq   #WINDOW_MEMBERS_LIST_ENTRY_UNEQUIPPABLE_LENGTH,d7
+                moveq   #-WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 bra.s   @NextEntry
                 
@@ -221,7 +221,7 @@ headerStringOffset = headerStringOffset+2
                 move.w  #VDPTILE_HORIZONTAL_ARROW|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  d2,d0
                 bsr.w   WriteStatValueD0
-                addq.w  #WINDOW_MEMBERLIST_OFFSET_ENTRY_NEWDEFENSE,a1
+                addq.w  #WINDOW_MEMBERS_LIST_OFFSET_ENTRY_NEWDEFENSE,a1
                 
                 ; Write current -> new DEF
                 move.w  currentMember(a6),d0
@@ -232,7 +232,7 @@ headerStringOffset = headerStringOffset+2
                 bsr.w   WriteStatValueD0
                 
 @NextEntry:     movea.l (sp)+,a1        ; A1 <- pop current character's name offset
-                adda.w  #WINDOW_MEMBERLIST_OFFSET_NEXT_ENTRY,a1
+                adda.w  #WINDOW_MEMBERS_LIST_OFFSET_NEXT_ENTRY,a1
                 addq.w  #1,d4
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d4
                 dbeq    d5,@CreateEntry_Loop
@@ -240,7 +240,7 @@ headerStringOffset = headerStringOffset+2
                 unlk    a6
                 rts
 
-    ; End of function WriteMemberListText
+    ; End of function WriteMembersListText
 
 aName:          dc.b 'NAME'
             if (SECOND_MEMBERS_LIST_PAGE=1)

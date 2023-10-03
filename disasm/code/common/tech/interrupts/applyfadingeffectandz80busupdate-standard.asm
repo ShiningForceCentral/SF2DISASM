@@ -127,7 +127,7 @@ ApplyZ80BusUpdates:
                 tst.b   ((CONTROLLING_UNIT_CURSOR-$1000000)).w
                 bne.s   @IsNewInput
                 moveq   #2,d0
-                move.b  ((P1_INPUT-$1000000)).w,d1
+                move.b  ((PLAYER_1_INPUT-$1000000)).w,d1
                 lsr.w   #1,d1
                 dbcc    d0,*+4
                 lsr.w   #1,d1
@@ -141,9 +141,9 @@ ApplyZ80BusUpdates:
                 
                 ; Get current walking direction
                 move.b  ((PRIMARY_WALKING_DIRECTION-$1000000)).w,d0
-                eor.b   d0,((P1_INPUT-$1000000)).w ; get new direction
+                eor.b   d0,((PLAYER_1_INPUT-$1000000)).w ; get new direction
                 moveq   #2,d0
-                move.b  ((P1_INPUT-$1000000)).w,d1
+                move.b  ((PLAYER_1_INPUT-$1000000)).w,d1
                 lsr.w   #1,d1
                 dbcc    d0,*+4
                 lsr.w   #1,d1
@@ -154,15 +154,15 @@ ApplyZ80BusUpdates:
                 dbcc    d0,*+4
                 tst.w   d0
                 bgt.s   @IsNewInput
-                andi.b  #INPUT_UP|INPUT_DOWN,((P1_INPUT-$1000000)).w ; if both directions are new, only keep vertical one
+                andi.b  #INPUT_UP|INPUT_DOWN,((PLAYER_1_INPUT-$1000000)).w ; if both directions are new, only keep vertical one
                 bra.s   @IsNewInput
 @SetPrimaryDirection:
                 
-                move.b  ((P1_INPUT-$1000000)).w,d1 ; if only one direction pushed, set it as primary
+                move.b  ((PLAYER_1_INPUT-$1000000)).w,d1 ; if only one direction pushed, set it as primary
                 andi.w  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT,d1
                 move.b  d1,((PRIMARY_WALKING_DIRECTION-$1000000)).w
                 
-@IsNewInput:    move.b  ((P1_INPUT-$1000000)).w,d0
+@IsNewInput:    move.b  ((PLAYER_1_INPUT-$1000000)).w,d0
                 move.b  d0,((CURRENT_PLAYER_INPUT-$1000000)).w ; overwrite P2 6-button data with P1 state with walking direction
                 cmp.b   ((LAST_PLAYER_INPUT-$1000000)).w,d0
                 bne.s   @WasPushingDirection         
@@ -292,7 +292,7 @@ ApplyFadingEffectAndZ80BusUpdates:
                 move.b  ((FADING_POINTER-$1000000)).w,d1
                 ext.w   d1
                 add.w   d1,d0
-                move.b  tbl_FadingData(pc,d0.w),d1
+                move.b  table_FadingData(pc,d0.w),d1
                 cmpi.w  #$80,d1 
                 bne.s   @Continue
                 

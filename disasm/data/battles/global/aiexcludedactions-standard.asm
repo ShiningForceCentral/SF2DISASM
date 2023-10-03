@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\items\aiexcludedactions-standard.asm :
 
 ; Attack type spells which are ignored by the AI when casting.
-tbl_AiExcludedAttackSpells:
+table_AiExcludedAttackSpells:
                 
                 dc.b SPELL_DESOUL
                 dc.b SPELL_FLAME
@@ -25,7 +25,7 @@ tbl_AiExcludedAttackSpells:
 
 
 ; Attack type spells which are ignored by the AI when using items.
-tbl_AiExcludedItemUseAttackSpells:
+table_AiExcludedItemUseAttackSpells:
                 
                 dc.b SPELL_DESOUL
                 dc.b SPELL_FLAME

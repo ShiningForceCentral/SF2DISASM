@@ -31,7 +31,7 @@ DisplayUncompressedText:
                 bsr.w   CreateDialogueWindow
                 move.b  #1,((CURRENTLY_TYPEWRITING-$1000000)).w
                 clr.b   ((DIALOGUE_REGULAR_TILE_TOGGLE-$1000000)).w
-                move.l  #DIALOGUE_NAME_INDEX_1,((CURRENT_DIALOGUE_NAME_INDEX_ADDRESS-$1000000)).w
+                move.l  #DIALOGUE_NAME_INDEX_1,((CURRENT_DIALOGUE_NAME_INDEX_POINTER-$1000000)).w
                 move.b  #1,((USE_REGULAR_DIALOGUE_FONT-$1000000)).w
                 
                 ; Re-initialize dialogue window
@@ -88,7 +88,7 @@ DisplayUncompressedText:
                 st      ((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
 @ContinuePrinting:
                 
-                bsr.w   ApplyAutomaticNewDialogueLine
+                bsr.w   ApplyAutomaticNewline
                 bsr.w   SymbolsToGraphics
                 bsr.w   HandleDialogueTypewriting
                 tst.l   ((CURRENT_DIALOGUE_ASCII_BYTE_ADDRESS-$1000000)).w

@@ -24,7 +24,7 @@ TEST_BUILD_INITIAL_CONTROL_OPPONENT:        equ 0       ; -1 = toggle ON
 TEST_BUILD_INITIAL_AUTO_BATTLE:             equ 0       ; -1 = toggle ON
 TEST_BUILD_INITIAL_GAME_COMPLETED:          equ 1
 TEST_BUILD_INITIAL_MESSAGE_SPEED:           equ 3       ; [0, 3]
-TEST_BUILD_INITIAL_DISPLAY_BATTLE_MESSAGES: equ 0       ; 1 = no battle messages display ON
+TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES_TOGGLE: equ 0       ; 1 = no battle messages display ON
 
 
 ; Fixes

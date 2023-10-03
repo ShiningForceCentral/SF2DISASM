@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\global\explorationtobattlemusics-standard.asm :
 
 ; Map musics that change when switching to battle mode.
-tbl_ExplorationToBattleMusics:
+table_ExplorationToBattleMusics:
                 
                 dc.b MUSIC_NOTHING, MUSIC_BATTLE_THEME_3
                 dc.b MUSIC_TOWN, MUSIC_BATTLE_THEME_3

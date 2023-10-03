@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\global\swarmbattles.asm :
 ; 0xE25B..0xE294 : Parameters for battles implementing swarm AI
-tbl_SwarmBattlesList:
+list_SwarmBattles:
                 
 ; List of battles prefixed with length.
 ;
@@ -12,11 +12,11 @@ tbl_SwarmBattlesList:
                 battles VERSUS_KRAKEN, HARPIES_POND, CHESSBOARD
                 
                 align
-pt_SwarmBattlesParams:
-                dc.l SwarmBattleParams0
-                dc.l SwarmBattleParams1
-                dc.l SwarmBattleParams2
-SwarmBattleParams0:
+pt_SwarmAiEnemyCounts:
+                dc.l table_SwarmAiEnemyCounts0
+                dc.l table_SwarmAiEnemyCounts1
+                dc.l table_SwarmAiEnemyCounts2
+table_SwarmAiEnemyCounts0:
                 dc.b 5
                 dc.b 4
                 dc.b 2
@@ -28,7 +28,7 @@ SwarmBattleParams0:
                 dc.b 1
                 dc.b 3
                 dc.b 0
-SwarmBattleParams1:
+table_SwarmAiEnemyCounts1:
                 dc.b 3
                 dc.b 0
                 dc.b 0
@@ -41,7 +41,7 @@ SwarmBattleParams1:
                 dc.b 0
                 dc.b 0
                 dc.b 1
-SwarmBattleParams2:
+table_SwarmAiEnemyCounts2:
                 dc.b 0
                 dc.b 0
                 dc.b 0

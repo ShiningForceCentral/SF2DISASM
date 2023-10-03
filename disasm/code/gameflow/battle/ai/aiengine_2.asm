@@ -4,10 +4,12 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = attacker combatant
+
 var_4 = -4
 attacker = -3
-var_2 = -2
-var_1 = -1
+startingY = -2
+startingX = -1
 
 sub_F522:
                 
@@ -21,7 +23,7 @@ sub_F522:
                 lea     (CURRENT_BATTLEACTION).l,a2
                 move.w  #BATTLEACTION_STAY,(a2)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
-                move.b  #CODE_TERMINATOR_BYTE,(a2)
+                move.b  #-1,(a2)
                 bra.w   loc_F782
 loc_F554:
                 
@@ -30,7 +32,7 @@ loc_F554:
                 lea     (CURRENT_BATTLEACTION).l,a2
                 move.w  #BATTLEACTION_STAY,(a2)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
-                move.b  #CODE_TERMINATOR_BYTE,(a2)
+                move.b  #-1,(a2)
                 bra.w   loc_F782
 loc_F570:
                 
@@ -39,7 +41,7 @@ loc_F570:
                 lea     (CURRENT_BATTLEACTION).l,a2
                 move.w  #BATTLEACTION_STAY,(a2)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
-                move.b  #CODE_TERMINATOR_BYTE,(a2)
+                move.b  #-1,(a2)
                 bra.w   loc_F782
 loc_F58C:
                 
@@ -49,7 +51,7 @@ loc_F58C:
                 lea     (CURRENT_BATTLEACTION).l,a2
                 move.w  #BATTLEACTION_STAY,(a2)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
-                move.b  #CODE_TERMINATOR_BYTE,(a2)
+                move.b  #-1,(a2)
                 bra.w   loc_F782
 loc_F5AA:
                 
@@ -58,8 +60,8 @@ loc_F5AA:
                 clr.w   d0
                 move.b  attacker(a6),d0
                 jsr     j_GetCombatantStartingPosition
-                move.b  d1,var_1(a6)
-                move.b  d2,var_2(a6)
+                move.b  d1,startingX(a6)
+                move.b  d2,startingY(a6)
                 bra.s   loc_F5DE
 loc_F5C4:
                 
@@ -68,13 +70,13 @@ loc_F5C4:
                 bsr.w   GetAiSpecialMoveOrders
                 move.w  d1,d0
                 jsr     j_GetAiSpecialMoveOrderCoordinates
-                move.b  d1,var_1(a6)
-                move.b  d1,var_2(a6)
+                move.b  d1,startingX(a6)
+                move.b  d1,startingY(a6)
 loc_F5DE:
                 
                 move.b  attacker(a6),d0
-                bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   InitializeMovementArrays
+                bsr.w   PopulateMovementArrays
                 bsr.w   PopulateTargetsArrayWithAllCombatants
                 lea     (byte_FFB1DC).l,a0
                 clr.w   d0
@@ -83,7 +85,7 @@ loc_F5DE:
                 adda.w  d0,a0
                 clr.w   d1
                 move.b  (a0),d1
-                andi.b  #$F,d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 tst.b   d1
                 bne.s   loc_F62A
                 clr.w   d6
@@ -106,10 +108,10 @@ loc_F62A:
                 subi.l  #1,d5
                 clr.w   d1
                 move.b  (a0),d1
-                lsr.w   #4,d1
+                lsr.w   #NIBBLE_SHIFT_COUNT,d1
                 move.w  d1,d6
                 clr.w   d7
-                lea     off_F78A(pc), a1
+                lea     pt_F78A(pc), a1
                 nop
                 move.b  var_4(a6),d7
                 subi.b  #3,d7
@@ -124,14 +126,14 @@ loc_F65C:
                 clr.w   d2
                 move.b  (a1,d0.w),d1
                 move.b  1(a1,d0.w),d2
-                add.b   var_1(a6),d1
-                add.b   var_2(a6),d2
+                add.b   startingX(a6),d1
+                add.b   startingY(a6),d2
                 tst.b   d1
                 bpl.s   loc_F678
                 bra.w   loc_F6AC
 loc_F678:
                 
-                cmpi.b  #$30,d1 
+                cmpi.b  #MAP_SIZE_MAX_TILEWIDTH,d1
                 ble.s   loc_F682
                 bra.w   loc_F6AC
 loc_F682:
@@ -141,7 +143,7 @@ loc_F682:
                 bra.w   loc_F6AC
 loc_F68A:
                 
-                cmpi.b  #$30,d2 
+                cmpi.b  #MAP_SIZE_MAX_TILEHEIGHT,d2
                 ble.s   loc_F694
                 bra.w   loc_F6AC
 loc_F694:
@@ -174,7 +176,7 @@ loc_F6AC:
                 lea     (CURRENT_BATTLEACTION).l,a2
                 move.w  #BATTLEACTION_STAY,(a2)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
-                move.b  #CODE_TERMINATOR_BYTE,(a2)
+                move.b  #-1,(a2)
                 bra.w   loc_F782
 loc_F6EA:
                 
@@ -220,9 +222,9 @@ loc_F72E:
                 adda.w  d0,a0
                 move.b  (a0),d0
                 move.b  d1,d2
-                lsl.w   #4,d2
-                andi.b  #$F0,d2
-                andi.b  #$F,d0
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d2
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d0
                 or.b    d2,d0
                 move.b  d0,(a0)
                 clr.l   d7
@@ -230,8 +232,8 @@ loc_F72E:
                 lsl.w   #1,d7
                 move.b  (a1,d7.w),d0
                 move.b  1(a1,d7.w),d1
-                add.b   var_1(a6),d0
-                add.b   var_2(a6),d1
+                add.b   startingX(a6),d0
+                add.b   startingY(a6),d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 bsr.w   BuildAiMoveString
@@ -245,12 +247,12 @@ loc_F782:
 
     ; End of function sub_F522
 
-off_F78A:       dc.l byte_F792
-                dc.l byte_F798
-byte_F792:      dc.b 0, -1
+pt_F78A:        dc.l table_F792
+                dc.l table_F798
+table_F792:     dc.b 0, -1
                 dc.b -1, 1
                 dc.b 1, 1
-byte_F798:      dc.b 0, -1
+table_F798:     dc.b 0, -1
                 dc.b -1, 0
                 dc.b 0, 1
                 dc.b 1, 0
@@ -273,7 +275,7 @@ sub_F7A0:
                 move.b  d1,teammateToFollow(a6)
                 clr.w   d0
                 move.b  movingCombatant(a6),d0
-                bsr.w   PopulateMoveCostsTable
+                bsr.w   PopulateMovecostsTable
                 move.b  teammateToFollow(a6),d0
                 jsr     j_GetAiSpecialMoveOrderCoordinates
                 move.w  d1,d3
@@ -282,8 +284,8 @@ sub_F7A0:
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN_ARRAY).l,a4
-                lea     ((MOVE_COSTS_TABLE-$1000000)).w,a5
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                lea     ((MOVECOSTS_TABLE-$1000000)).w,a5
+                bsr.w   PopulateMovementArrays
                 move.w  #-1,d3
                 bsr.w   UpdateMovableGridArray
                 bsr.w   PopulateTargetsArrayWithAllCombatants
@@ -299,7 +301,7 @@ sub_F7A0:
                 bsr.w   BuildMoveString 
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  (a0),d0
-                cmpi.b  #CODE_TERMINATOR_BYTE,d0
+                cmpi.b  #-1,d0
                 bne.s   loc_F820
                 bra.w   loc_F8E2
 loc_F820:
@@ -312,8 +314,8 @@ loc_F820:
                 move.w  #-1,d3
                 bsr.w   UpdateBattleTerrainOccupiedByAllies
                 move.b  movingCombatant(a6),d0
-                bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   InitializeMovementArrays
+                bsr.w   PopulateMovementArrays
                 move.w  #0,d3
                 bsr.w   UpdateBattleTerrainOccupiedByAllies
                 move.b  destinationX(a6),d1
@@ -357,7 +359,7 @@ loc_F8A4:
 loc_F8C2:
                 
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   loc_F8E2
 loc_F8CE:
                 
@@ -394,8 +396,9 @@ sub_F8EA:
                 move.b  d1,var_1(a6)
                 move.b  d2,var_2(a6)
                 move.b  var_3(a6),d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 beq.s   loc_F924
+                
                 cmpi.b  #$F,d1
                 beq.s   loc_F924
                 move.b  #1,d1
@@ -403,8 +406,9 @@ sub_F8EA:
 loc_F924:
                 
                 move.b  var_4(a6),d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 beq.s   loc_F93C
+                
                 cmpi.b  #$F,d2
                 beq.s   loc_F93C
                 move.b  #1,d1
@@ -412,14 +416,16 @@ loc_F924:
 loc_F93C:
                 
                 move.b  var_3(a6),d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 beq.s   loc_F96E
+                
                 move.b  var_1(a6),d0
                 cmpi.b  #$F,d0
                 bne.s   loc_F96E
                 move.b  var_4(a6),d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 bne.s   loc_F96E
+                
                 move.b  var_2(a6),d0
                 cmpi.b  #$F,d0
                 beq.s   loc_F96E
@@ -429,8 +435,9 @@ loc_F93C:
 loc_F96E:
                 
                 move.b  var_3(a6),d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 bne.s   loc_F98A
+                
                 move.b  var_1(a6),d0
                 cmpi.b  #$F,d0
                 beq.s   loc_F98A
@@ -440,8 +447,9 @@ loc_F96E:
 loc_F98A:
                 
                 move.b  var_4(a6),d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 bne.s   loc_F9A6
+                
                 move.b  var_2(a6),d0
                 cmpi.b  #$F,d0
                 beq.s   loc_F9A6

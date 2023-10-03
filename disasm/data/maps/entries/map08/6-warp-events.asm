@@ -8,12 +8,12 @@
                   warpFacing DOWN
                 mWarp 18, 5
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   40, 8
                   warpFacing RIGHT
                 mWarp 40, 8
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   18, 5
                   warpFacing LEFT
                 mWarp 255, 20

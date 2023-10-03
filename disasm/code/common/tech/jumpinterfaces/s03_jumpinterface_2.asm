@@ -25,21 +25,21 @@ j_DebugFlagSetter:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DisplayTimerWindow:
+j_OpenTimerWindow:
                 
-                jmp     DisplayTimerWindow(pc)
+                jmp     OpenTimerWindow(pc)
 
-    ; End of function j_DisplayTimerWindow
+    ; End of function j_OpenTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveTimerWindow:
+j_CloseTimerWindow:
                 
-                jmp     RemoveTimerWindow(pc)
+                jmp     CloseTimerWindow(pc)
 
-    ; End of function j_RemoveTimerWindow
+    ; End of function j_CloseTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -85,11 +85,11 @@ j_CloseNameUnderPortraitWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_PlayEndKiss:
+j_PlayEndingKissSequence:
                 
-                jmp     PlayEndKiss(pc)
+                jmp     PlayEndingKissSequence(pc)
 
-    ; End of function j_PlayEndKiss
+    ; End of function j_PlayEndingKissSequence
 
 
 ; =============== S U B R O U T I N E =======================================

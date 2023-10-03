@@ -52,18 +52,18 @@ GetSpellAnimation:
                 move.b  (a4),d0             ; d0.b = actor index
                 bmi.s   @Enemy
                 
-                lea     tbl_AttackSpellAnimationsForClass(pc),a0
+                lea     table_AttackSpellAnimationsForClass(pc),a0
                 bsr.w   GetClass            ; d1.w = class index
                 bra.s   @Continue
                 
-@Enemy:         lea     tbl_AttackSpellAnimationsForEnemy(pc),a0
+@Enemy:         lea     table_AttackSpellAnimationsForEnemy(pc),a0
                 bsr.w   GetEnemy      ; d1.w = enemy index
                 
 @Continue:      jsr     (FindSpecialPropertyBytesAddressForObject).w   ; -> a0
                 bcc.s   @GetAnimation       ; if class or enemy found, get matching spell animation
                                             ; otherwise, check equipped weapon
                 
-                lea     tbl_AttackSpellAnimationsForWeapon(pc),a0
+                lea     table_AttackSpellAnimationsForWeapon(pc),a0
                 bsr.w   GetEquippedWeapon   ; d1.w = equipped weapon index
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w   ; -> a0

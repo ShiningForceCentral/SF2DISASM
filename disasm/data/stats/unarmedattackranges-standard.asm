@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\items\unarmedattackranges-standard.asm :
 
 ; Classes that use a special attack range when attacking without a weapon equipped.
-tbl_UnarmedAttackRangesForClasses:
+table_UnarmedAttackRangesForClasses:
                 
                 ; Class index, min range, max range
                 dc.b CLASS_BRGN, 1, 2
@@ -11,7 +11,7 @@ tbl_UnarmedAttackRangesForClasses:
 
 
 ; Same as above, but for enemies.
-tbl_UnarmedAttackRangesForEnemies:
+table_UnarmedAttackRangesForEnemies:
                 
                 dc.b ENEMY_KRAKEN_ARM, 1, 2
                 dc.b ENEMY_KRAKEN_HEAD, 1, 3

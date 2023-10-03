@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\classes\criticalhitdefs.asm :
 ; 0xACCA..0xACEA : Critical hit settings definitions
-tbl_CriticalHitDefs:
+table_CriticalHitDefinitions:
                 
 ; Syntax        dc.b chance (1/n), damageFactor (additionalDamage = damage/2^n)
                 

@@ -5,12 +5,12 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-GameIntro:      move.l  sp,(GAME_INTRO_SP_OFFSET).l
-                move.l  #AfterGameIntro,((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
+GameIntro:      move.l  sp,(GAME_INTRO_STACK_POINTER_BACKUP).l
+                move.l  #AfterGameIntro,((AFTER_INTRO_JUMP_POINTER-$1000000)).w
                 jsr     (EnableDisplayAndInterrupts).w
                 clr.w   d0
                 jsr     PlayIntroOrEndCutscene
-                clr.l   ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
+                clr.l   ((AFTER_INTRO_JUMP_POINTER-$1000000)).w
                 
 AfterGameIntro: clr.w   ((QUAKE_AMPLITUDE-$1000000)).w
                 move.b  #3,((FADING_COUNTER_MAX-$1000000)).w

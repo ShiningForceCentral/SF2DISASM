@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\menus\magicmenulayout-extendedspellnames.asm :
 ; Magic menu layout : Included when patch EXTENDED_SPELL_NAMES is enabled.
-MagicMenuLayout:
+layout_MagicMenu:
 ; Syntax        vdpTile [VDPTILE_]index[|mirror|flip|palette|priority]
                 
 ; 1st line

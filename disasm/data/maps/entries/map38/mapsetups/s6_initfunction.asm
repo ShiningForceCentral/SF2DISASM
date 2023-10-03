@@ -30,7 +30,7 @@ return_5DD8C:
 
     ; End of function ms_map38_InitFunction
 
-cs_5DD8E:       newEntity ALLY_ZYNK,11,8,DOWN,$FF
+cs_5DD8E:       newEntity ALLY_ZYNK,11,8,DOWN,NOTHING_BYTE
                 setFacing ALLY_ZYNK,DOWN
                 csc_end
 cs_5DD9C:       setPos 128,14,26,DOWN

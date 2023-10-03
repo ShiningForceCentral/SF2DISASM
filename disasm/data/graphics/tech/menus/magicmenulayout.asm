@@ -1,7 +1,8 @@
 
 ; ASM FILE data\graphics\tech\menus\magicmenulayout.asm :
 ; 0x10EF4..0x10FCC : Magic menu layout
-MagicMenuLayout:
+layout_MagicMenu:
+                
 ; Syntax        vdpTile [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
 ;
 ;      palette: PALETTE1 = 0 (default when omitted)

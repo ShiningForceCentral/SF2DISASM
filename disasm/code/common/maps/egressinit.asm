@@ -4,14 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = from map index
-; Out: D0 = to map index
-;      D1 = X
-;      D2 = Y
-;      D3 = facing
+; In: d0.b = From map index
+; Out: d0.b = To map index, d1.b = X, d2.b = Y, d3.b = Facing
 
 
-GetSavePointForMap:
+GetSavepointForMap:
                 
                  
                 module
@@ -38,8 +35,9 @@ GetSavePointForMap:
             endif
 @FindEgressEntry_Loop:
                 
-                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
+                cmpi.b  #-1,(a0)
                 beq.w   byte_7620       ; No match
+                
                 cmp.b   (a0),d0
                 beq.s   @EgressEntryFound
                 addq.l  #4,a0
@@ -60,7 +58,7 @@ byte_7620:
                 getPointer p_table_RaftResetMapCoordinates, a0
 @FindRaftEntry_Loop:
                 
-                cmpi.b  #MAP_NONE,(a0)
+                cmpi.b  #MAP_CURRENT,(a0)
                 beq.s   @RaftEntry
                 cmp.b   (a0),d0
                 beq.s   @RaftEntry
@@ -71,7 +69,7 @@ byte_7620:
 @FindRaftEntry_Loop:
                 
                 addq.l  #4,a0
-                cmpi.b  #MAP_NONE,(a0)
+                cmpi.b  #MAP_CURRENT,(a0)
                 beq.w   @RaftEntry
                 cmp.b   (a0),d0         ; If found egress map matches entry map, then move raft back to given location
                 bne.s   @FindRaftEntry_Loop
@@ -86,6 +84,6 @@ byte_7620:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function GetSavePointForMap
+    ; End of function GetSavepointForMap
 
                 modend

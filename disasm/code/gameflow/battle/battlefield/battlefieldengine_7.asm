@@ -4,14 +4,14 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a2, a3 = movecost arrays
+; In: a2, a3 = pointers to total movecosts and movable grid arrays
 ;     d0.w = move value (MOV*2)
 ;     d3.b, d4.b = moving combatant X, Y
 
 var_64 = -64
 var_63 = -63
 
-PopulateTotalMovecostsAndMovableGridArrays:
+PopulateMovementArrays:
                 
                 module
                 movem.l d0-a5,-(sp)
@@ -19,10 +19,10 @@ PopulateTotalMovecostsAndMovableGridArrays:
                 lea     (a6),a1
                 move.w  #15,d5
                 move.l  #$40004000,d1
-@InitStackFrame_Loop:
+@InitialStackFrame_Loop:
                 
                 move.l  d1,-(a1)
-                dbf     d5,@InitStackFrame_Loop
+                dbf     d5,@InitialStackFrame_Loop
                 
                 lea     (a3),a1
                 move.w  #143,d5
@@ -49,18 +49,18 @@ PopulateTotalMovecostsAndMovableGridArrays:
                 clr.w   d6
                 moveq   #0,d5
                 move.b  d4,d5
-                mulu.w  #MAP_SIZE_MAXWIDTH,d5
-                andi.w  #$FF,d3
+                mulu.w  #MAP_SIZE_MAX_TILEWIDTH,d5
+                andi.w  #BYTE_MASK,d3
                 add.w   d3,d5           ; d5.w = coordinates converted to offset
-@Loop:
+@Main_Loop:
                 
                 move.b  d6,(a2,d5.w)    ; populate array entry with move count
                 move.w  d6,d1
-                lsr.w   #8,d1
+                lsr.w   #BYTE_SHIFT_COUNT,d1
                 move.b  d1,(a3,d5.w)
                 
-                ; Check right
-                tst.b   1(a3,d5.w)      ; check 1 space ahead to the right
+                ; Check right 1 space ahead to the right
+                tst.b   1(a3,d5.w)
                 bpl.s   @CheckLeft
                 addq.w  #1,d5
                 bsr.s   sub_DB48        
@@ -74,19 +74,19 @@ PopulateTotalMovecostsAndMovableGridArrays:
                 addq.w  #1,d5
 @CheckUp:
                 
-                tst.b   -MAP_SIZE_MAXWIDTH(a3,d5.w)
+                tst.b   -MAP_SIZE_MAX_TILEWIDTH(a3,d5.w)
                 bpl.s   @CheckDown
-                subi.w  #MAP_SIZE_MAXWIDTH,d5
+                subi.w  #MAP_SIZE_MAX_TILEWIDTH,d5
                 bsr.s   sub_DB48        
-                addi.w  #MAP_SIZE_MAXWIDTH,d5
+                addi.w  #MAP_SIZE_MAX_TILEWIDTH,d5
 @CheckDown:
                 
-                tst.b   MAP_SIZE_MAXWIDTH(a3,d5.w)
-                bpl.s   loc_DB18
-                addi.w  #MAP_SIZE_MAXWIDTH,d5
+                tst.b   MAP_SIZE_MAX_TILEWIDTH(a3,d5.w)
+                bpl.s   @loc_1
+                addi.w  #MAP_SIZE_MAX_TILEWIDTH,d5
                 bsr.s   sub_DB48        
-                subi.w  #MAP_SIZE_MAXWIDTH,d5
-loc_DB18:
+                subi.w  #MAP_SIZE_MAX_TILEWIDTH,d5
+@loc_1:
                 
                 move.w  d0,d1
                 andi.w  #$1F,d1
@@ -96,20 +96,20 @@ loc_DB18:
                 bne.s   @Break          
                 move.b  (a3,d5.w),var_64(a6,d1.w)
                 move.b  (a2,d5.w),var_63(a6,d1.w)
-                bra.s   @Loop           
+                bra.s   @Main_Loop      
 @Break:
                 
                 addq.w  #1,d6           ; increment move count
                 subq.w  #1,d0           ; decrement move value
                 bmi.s   @Done
-                bne.s   loc_DB18
+                bne.s   @loc_1
 @Done:
                 
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
 
-    ; End of function PopulateTotalMovecostsAndMovableGridArrays
+    ; End of function PopulateMovementArrays
 
                 modend
 
@@ -160,7 +160,7 @@ sub_DB48:
                 add.w   d6,d2
                 move.b  d2,(a2,d5.w)
                 move.w  d2,d1
-                lsr.w   #8,d1
+                lsr.w   #BYTE_SHIFT_COUNT,d1
                 move.b  d1,(a3,d5.w)
                 rts
 
@@ -192,15 +192,15 @@ alt_BuildCancelMoveString:
                 
                 clr.w   d2
                 move.b  d1,d2
-                mulu.w  #MAP_SIZE_MAXWIDTH,d2
-                andi.w  #$FF,d0
+                mulu.w  #MAP_SIZE_MAX_TILEWIDTH,d2
+                andi.w  #BYTE_MASK,d0
                 add.w   d0,d2           ; d2.w = coordinates converted to offset
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 clr.b   d3
 loc_DBBC:
                 
                 move.b  (a3,d2.w),d4
-                lsl.w   #8,d4
+                lsl.w   #BYTE_SHIFT_COUNT,d4
                 move.b  (a2,d2.w),d4
                 tst.w   d4              ; d4.w = (upper byte), (lower byte)
                 bne.s   loc_DBCE
@@ -212,7 +212,7 @@ loc_DBCE:
                 clr.b   d0
                 addq.w  #1,d2
                 move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
+                lsl.w   #BYTE_SHIFT_COUNT,d0
                 move.b  (a2,d2.w),d0
                 tst.w   d0
                 bpl.s   loc_DBE8
@@ -234,7 +234,7 @@ loc_DBFA:
                 clr.b   d0
                 subq.w  #1,d2
                 move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
+                lsl.w   #BYTE_SHIFT_COUNT,d0
                 move.b  (a2,d2.w),d0
                 tst.w   d0
                 bpl.s   loc_DC12
@@ -264,7 +264,7 @@ loc_DC2E:
                 clr.b   d0
                 subi.w  #48,d2
                 move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
+                lsl.w   #BYTE_SHIFT_COUNT,d0
                 move.b  (a2,d2.w),d0
                 tst.w   d0
                 bpl.s   loc_DC48
@@ -294,7 +294,7 @@ loc_DC64:
                 clr.b   d0
                 addi.w  #48,d2
                 move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
+                lsl.w   #BYTE_SHIFT_COUNT,d0
                 move.b  (a2,d2.w),d0
                 tst.w   d0
                 bpl.s   loc_DC80
@@ -386,7 +386,7 @@ loc_DD04:
                 bra.w   loc_DBBC
 loc_DD0A:
                 
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 rts
 
     ; End of function alt_BuildCancelMoveString
@@ -488,11 +488,11 @@ alt_BuildMoveString:
                 
                 clr.w   d2
                 move.b  d1,d2
-                mulu.w  #MAP_SIZE_MAXWIDTH,d2
-                andi.w  #$FF,d0
+                mulu.w  #MAP_SIZE_MAX_TILEWIDTH,d2
+                andi.w  #BYTE_MASK,d0
                 add.w   d0,d2           ; d2.w = coordinates converted to offset
                 move.b  (a3,d2.w),d6
-                lsl.w   #8,d6
+                lsl.w   #BYTE_SHIFT_COUNT,d6
                 move.b  (a2,d2.w),d6
                 ext.w   d3
                 sub.w   d3,d6           ; d6.w = move cost - move value
@@ -506,7 +506,7 @@ alt_BuildMoveString:
 @Start:
                 
                 move.b  (a3,d2.w),d4
-                lsl.w   #8,d4
+                lsl.w   #BYTE_SHIFT_COUNT,d4
                 move.b  (a2,d2.w),d4    ; d4.w =
                 cmp.w   d4,d6
                 bcs.s   loc_DDB2
@@ -523,7 +523,7 @@ loc_DDBA:
                 clr.b   d0
                 addq.w  #1,d2
                 move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
+                lsl.w   #BYTE_SHIFT_COUNT,d0
                 move.b  (a2,d2.w),d0
                 tst.w   d0
                 bpl.s   loc_DDD4
@@ -545,7 +545,7 @@ loc_DDE6:
                 clr.b   d0
                 subq.w  #1,d2
                 move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
+                lsl.w   #BYTE_SHIFT_COUNT,d0
                 move.b  (a2,d2.w),d0
                 tst.w   d0
                 bpl.s   loc_DDFE
@@ -577,7 +577,7 @@ loc_DE1A:
 loc_DE22:
                 
                 move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
+                lsl.w   #BYTE_SHIFT_COUNT,d0
                 move.b  (a2,d2.w),d0
                 tst.w   d0
                 bpl.s   loc_DE34
@@ -607,7 +607,7 @@ loc_DE50:
                 clr.b   d0
                 addi.w  #$30,d2 
                 move.b  (a3,d2.w),d0
-                lsl.w   #8,d0
+                lsl.w   #BYTE_SHIFT_COUNT,d0
                 move.b  (a2,d2.w),d0
                 tst.w   d0
                 bpl.s   loc_DE6C
@@ -699,7 +699,7 @@ loc_DEF0:
                 bra.w   @Start
 @Done:
                 
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 rts
 
     ; End of function alt_BuildMoveString

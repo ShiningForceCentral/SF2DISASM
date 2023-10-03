@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\church\ChurchMenuActions_2.asm :
+; ASM FILE code\common\menus\church\ChurchMenu_2.asm :
 ; 0x21072..0x2127E : Church functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -117,7 +117,7 @@ GetPromotionData:
 FindPromotionSection:
                 
                 movem.l d0/d6,-(sp)
-                lea     tbl_Promotions(pc), a0
+                lea     table_Promotions(pc), a0
                 move.w  d2,d6
                 subq.w  #1,d6
                 bcs.w   @Done
@@ -268,11 +268,11 @@ Church_CureStun:
             else
                 move.l  #CHURCHMENU_CURE_STUN_COST,actionCost(a6)
             endif
-                move.l  actionCost(a6),((TEXT_NUMBER-$1000000)).w
+                move.l  actionCost(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
-                jsr     j_CreateGoldWindow
-                jsr     j_YesNoChoiceBox
-                jsr     j_HideGoldWindow
+                jsr     j_OpenGoldWindow
+                jsr     j_alt_YesNoPrompt
+                jsr     j_CloseGoldWindow
                 cmpi.w  #0,d0
                 beq.w   @CheckGold
                 txt     124             ; "You don't need my help?{W2}"
@@ -334,14 +334,14 @@ WaitForMusicResumeAndPlayerInput:
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateAllyMapSprite:
+UpdateAllyMapsprite:
                 
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d0
                 bhi.s   @Return
                 
                 movem.l d0-d4/a0,-(sp)
                 move.w  d0,d1
-                jsr     j_GetAllyMapSprite
+                jsr     j_GetAllyMapsprite
                 move.w  d4,d3
                 tst.b   d1
                 beq.w   @Skip           ; skip getting entity index if player character
@@ -352,7 +352,7 @@ UpdateAllyMapSprite:
                 
                 clr.w   d1
                 move.b  ((ENTITY_FACING-$1000000)).w,d1
-                moveq   #$FFFFFFFF,d2
+                moveq   #-1,d2
                 jsr     (UpdateEntityProperties).w
 @Done:
                 
@@ -361,5 +361,5 @@ UpdateAllyMapSprite:
                 
                 rts
 
-    ; End of function UpdateAllyMapSprite
+    ; End of function UpdateAllyMapsprite
 

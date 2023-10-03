@@ -1,3 +1,5 @@
+
+; ASM FILE code\common\scripting\entity\entityscriptengine_1.asm :
 ; 0x4C68..0x4E86 : Entity script engine, part 1
 
 ; =============== S U B R O U T I N E =======================================
@@ -5,107 +7,115 @@
 
 VInt_UpdateSprites:
                 
-                tst.b   ((byte_FFAF69-$1000000)).w
-                bne.s   loc_4C74
-                move.b  ((byte_FFAF6A-$1000000)).w,((byte_FFAF69-$1000000)).w
-loc_4C74:
+                module
+                tst.b   ((SPRITES_FRAME_COUNTER-$1000000)).w
+                bne.s   @Continue
                 
-                subq.b  #1,((byte_FFAF69-$1000000)).w
-                move.b  ((byte_FFAF69-$1000000)).w,d6
-                sub.b   ((byte_FFAF6B-$1000000)).w,d6
+                ; Loop counter back to start
+                move.b  ((SPRITES_FRAME_COUNTER_START-$1000000)).w,((SPRITES_FRAME_COUNTER-$1000000)).w
+@Continue:
+                
+                subq.b  #1,((SPRITES_FRAME_COUNTER-$1000000)).w
+                move.b  ((SPRITES_FRAME_COUNTER-$1000000)).w,d6
+                sub.b   ((SPRITES_FRAME_BLINKING_THRESHOLD-$1000000)).w,d6
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 lea     (SPRITE_16).l,a1
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                bne.s   loc_4CB2
+                bne.s   @MapOnForeground
+                
                 move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
                 sub.w   (HORIZONTAL_SCROLL_DATA+2).l,d2
-                asl.w   #4,d2
+                asl.w   #NIBBLE_SHIFT_COUNT,d2
                 add.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
                 move.w  (VERTICAL_SCROLL_DATA+2).l,d3
                 sub.w   ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
-                asl.w   #4,d3
+                asl.w   #NIBBLE_SHIFT_COUNT,d3
                 add.w   ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
-                bra.s   loc_4CD2
-loc_4CB2:
+                bra.s   @loc_1
+@MapOnForeground:
                 
                 move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 sub.w   (HORIZONTAL_SCROLL_DATA).l,d2
-                asl.w   #4,d2
+                asl.w   #NIBBLE_SHIFT_COUNT,d2
                 add.w   ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d2
                 move.w  (VERTICAL_SCROLL_DATA).l,d3
                 sub.w   ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
-                asl.w   #4,d3
+                asl.w   #NIBBLE_SHIFT_COUNT,d3
                 add.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d3
-loc_4CD2:
+@loc_1:
                 
-                subi.w  #$F,d2
-                subi.w  #$F,d3
-                moveq   #$2F,d7 ; number of entities, for iterating
-loc_4CDC:
+                subi.w  #15,d2
+                subi.w  #15,d3
+                moveq   #ENTITIES_COUNTER_MINUS_ONE,d7 ; number of entities, for iterating
+@Loop:
                 
                 move.w  (a0),d0
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
                 sub.w   d2,d0
                 sub.w   d3,d1
-                asr.w   #4,d0
-                asr.w   #4,d1
-                cmpi.w  #$FFE8,d0
-                blt.w   sub_4E1E
-                cmpi.w  #$100,d0
-                bgt.w   sub_4E1E
-                cmpi.w  #$FFE8,d1
-                blt.w   sub_4E1E
-                cmpi.w  #$100,d1
-                bgt.w   sub_4E1E
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d1
+                cmpi.w  #-24,d0
+                blt.w   @MoveSpriteOffScreen
+                cmpi.w  #256,d0
+                bgt.w   @MoveSpriteOffScreen
+                cmpi.w  #-24,d1
+                blt.w   @MoveSpriteOffScreen
+                cmpi.w  #256,d1
+                bgt.w   @MoveSpriteOffScreen
+                
+                ; Is entity blinking?
                 btst    #7,ENTITYDEF_OFFSET_FLAGS_B(a0)
-                beq.s   loc_4D18
+                beq.s   @IsSpecialSprite
                 tst.b   d6
-                bge.w   sub_4E1E
-loc_4D18:
+                bge.w   @MoveSpriteOffScreen ; move sprite off-screen to produce blinking effect
+@IsSpecialSprite:
                 
                 tst.w   d7
-                bne.s   loc_4D2A
+                bne.s   @DetermineWalkingFrame
                 move.b  ENTITYDEF_OFFSET_LAYER(a0),d5
-                jsr     j_UpdateSpecialSprites
-                bra.w   loc_4DC4
-loc_4D2A:
+                jsr     j_UpdateSpecialSprite
+                bra.w   @NextEntity
+@DetermineWalkingFrame:
                 
                 move.b  ENTITYDEF_OFFSET_ANIMCOUNTER(a0),d4
-                cmpi.b  #$F,d4
-                bge.s   loc_4D3A
-                move.w  #VDPTILE_ENTITIES_FRAME_1_START,d5
-                bra.s   loc_4D3E
-loc_4D3A:
+                cmpi.b  #15,d4
+                bge.s   @WalkingFrame2
+                move.w  #VDPTILE_ENTITIES_FRAME_1_START,d5 ; use first walking frame
+                bra.s   @IsAnimated
+@WalkingFrame2:
                 
-                move.w  #VDPTILE_ENTITIES_FRAME_2_START,d5
-loc_4D3E:
+                move.w  #VDPTILE_ENTITIES_FRAME_2_START,d5 ; use second walking frame
+@IsAnimated:
                 
-                cmpi.b  #$FF,d4
-                beq.s   loc_4D5C
-                addq.b  #1,d4
+                cmpi.b  #-1,d4
+                beq.s   @loc_2
+                addq.b  #1,d4           ; increment counter if so
+                
+                ; Is 2x animation speed?
                 btst    #4,ENTITYDEF_OFFSET_FLAGS_B(a0)
-                beq.s   loc_4D50
+                beq.s   @CheckCounterEnd
                 addq.b  #2,d4
-loc_4D50:
+@CheckCounterEnd:
                 
-                cmpi.b  #$1E,d4
-                ble.s   loc_4D58
+                cmpi.b  #30,d4
+                ble.s   @UpdateCounter
                 clr.w   d4
-loc_4D58:
+@UpdateCounter:
                 
                 move.b  d4,ENTITYDEF_OFFSET_ANIMCOUNTER(a0)
-loc_4D5C:
+@loc_2:
                 
                 move.w  d6,-(sp)
                 clr.w   d4
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d4
-                move.w  d4,d6
+                move.w  d4,d6           ; multiply by 18
                 lsl.w   #3,d4
                 add.w   d6,d4
                 add.w   d4,d4
                 add.w   d4,d5
-                addi.w  #$80,d0 
-                addi.w  #$70,d1 
+                addi.w  #128,d0
+                addi.w  #112,d1
                 move.w  d0,VDPSPRITE_OFFSET_X(a1)
                 move.w  d1,(a1)
                 move.w  #64,d6          ; link
@@ -122,7 +132,7 @@ loc_4DA0:
                 
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d0
                 ext.w   d0
-                move.b  byte_4E16(pc,d0.w),d0
+                move.b  table_4E16(pc,d0.w),d0
                 bne.s   loc_4DB0
                 ori.w   #VDPTILE_MIRROR,d5
 loc_4DB0:
@@ -135,32 +145,32 @@ loc_4DBE:
                 
                 move.w  d5,VDPSPRITE_OFFSET_TILE(a1)
                 move.w  (sp)+,d6
-loc_4DC4:
+@NextEntity:
                 
                 adda.w  #ENTITYDEF_SIZE,a0
-                addq.l  #8,a1
-                dbf     d7,loc_4CDC
+                addq.l  #VDP_SPRITE_ENTRY_SIZE,a1
+                dbf     d7,@Loop
                 
                 clr.b   -5(a1)
                 move.w  (a0),d0
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
                 sub.w   d2,d0
                 sub.w   d3,d1
-                asr.w   #4,d0
-                asr.w   #4,d1
-                cmpi.w  #$FFE8,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d0
+                asr.w   #NIBBLE_SHIFT_COUNT,d1
+                cmpi.w  #-24,d0
                 blt.w   loc_4E0A
-                cmpi.w  #$100,d0
+                cmpi.w  #256,d0
                 bgt.w   loc_4E0A
-                cmpi.w  #$FFE8,d1
+                cmpi.w  #-24,d1
                 blt.w   loc_4E0A
-                cmpi.w  #$100,d1
+                cmpi.w  #256,d1
                 bgt.w   loc_4E0A
-                jsr     j_UpdateUnitCursorSprites
+                jsr     j_UpdateCursorSprites
                 bra.w   loc_4E10
 loc_4E0A:
                 
-                jsr     sub_20024
+                jsr     j_UpdateSpritesHelper
 loc_4E10:
             if (STANDARD_BUILD=1)
                 bra.s   sub_4E24
@@ -171,7 +181,7 @@ loc_4E10:
 
     ; End of function VInt_UpdateSprites
 
-byte_4E16:      dc.b 0
+table_4E16:     dc.b 0
                 dc.b 1
                 dc.b 2
                 dc.b 3
@@ -180,16 +190,16 @@ byte_4E16:      dc.b 0
                 dc.b 2
                 dc.b 0
 
-; =============== S U B R O U T I N E =======================================
+; START OF FUNCTION CHUNK FOR VInt_UpdateSprites
 
-
-sub_4E1E:
+@MoveSpriteOffScreen:
                 
                 move.w  #1,(a1)
-                bra.s   loc_4DC4
+                bra.s   @NextEntity
 
-    ; End of function sub_4E1E
+; END OF FUNCTION CHUNK FOR VInt_UpdateSprites
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -197,51 +207,49 @@ sub_4E1E:
 sub_4E24:
                 
                 lea     (SPRITE_TABLE).l,a1
-                moveq   #7,d7
-                move.w  #$40,d6 
+                moveq   #7,d7           ; cursor sprite counter
+                move.w  #64,d6          ; start at sprite 8
 loc_4E30:
                 
-                cmpi.b  #$10,VDPSPRITE_OFFSET_LINK(a1,d6.w)
+                cmpi.b  #16,VDPSPRITE_OFFSET_LINK(a1,d6.w)
                 beq.s   loc_4E3E
-                addq.w  #VDP_SPRITE_SIZE,d6
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,d6
                 dbf     d7,loc_4E30
 loc_4E3E:
                 
-                clr.b   VDPSPRITE_OFFSET_LINK(a1,d6.w)
-                
-                move.w  #$38,d6 
-                moveq   #$2F,d7 
+                clr.b   VDPSPRITE_OFFSET_LINK(a1,d6.w) ; link with sprite 0
+                move.w  #56,d6          ; start at sprite 7
+                moveq   #47,d7
                 lea     ((byte_FFAFB0-$1000000)).w,a0
 loc_4E4C:
                 
                 tst.b   (a0)+
                 beq.s   loc_4E5E
-                move.w  #$3F,d0 
+                move.w  #63,d0
                 sub.w   d7,d0
                 move.b  d0,VDPSPRITE_OFFSET_LINK(a1,d6.w)
                 move.w  d0,d6
-                lsl.w   #3,d6
+                lsl.w   #3,d6           ; multiply by sprite entry size
 loc_4E5E:
                 
                 dbf     d7,loc_4E4C
                 
-                moveq   #$2F,d7 
+                moveq   #47,d7
                 lea     ((byte_FFAFB0-$1000000)).w,a0
 loc_4E68:
                 
                 tst.b   (a0)+
                 bne.s   loc_4E7A
-                move.w  #$3F,d0 
+                move.w  #63,d0
                 sub.w   d7,d0
                 move.b  d0,VDPSPRITE_OFFSET_LINK(a1,d6.w)
                 move.w  d0,d6
-                lsl.w   #3,d6
+                lsl.w   #3,d6           ; multiply by sprite entry size
 loc_4E7A:
                 
                 dbf     d7,loc_4E68
-loc_4E7E:
                 
-                move.b  #8,VDPSPRITE_OFFSET_LINK(a1,d6.w)
+                move.b  #8,VDPSPRITE_OFFSET_LINK(a1,d6.w) ; link with sprite 8
                 rts
 
     ; End of function sub_4E24

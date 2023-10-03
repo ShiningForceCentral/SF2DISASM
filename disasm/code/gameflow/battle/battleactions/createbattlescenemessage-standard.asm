@@ -9,7 +9,7 @@
 ;       In: a3 = action type index in RAM
 ;           a4 = actor index in RAM
 
-CreateBattlesceneMessage:
+battlesceneScript_DisplayMessage:
                 
                 movem.l d0-d3/a0,-(sp)
                 
@@ -23,7 +23,7 @@ CreateBattlesceneMessage:
 @Done:          movem.l (sp)+,d0-d3/a0
 @Return:        rts
                 
-    ; End of function CreateBattlesceneMessage
+    ; End of function battlesceneScript_DisplayMessage
 
 @bt_Battleactions:
                 bra.w   @Attack
@@ -53,12 +53,12 @@ CreateBattlesceneMessage:
                 move.w  #MESSAGE_SPELLCAST_DEFAULT,d3 ; {NAME} cast{N}{SPELL} level {#}!
                 moveq   #2,d2
                 
-                lea     tbl_SpellcastMessagesForIndexes(pc), a0
+                lea     table_SpellcastMessagesForIndexes(pc), a0
                 move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
                 jsr     (FindSpecialPropertyWordsAddressForObject).w
                 bcc.s   @Special
                 
-                lea     tbl_SpellcastMessagesForEntries(pc), a0
+                lea     table_SpellcastMessagesForEntries(pc), a0
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     (FindSpecialPropertyWordsAddressForObject).w
                 bcs.s   @Default

@@ -43,7 +43,7 @@ byte_5FA76:
                 script  cs_5FB6A
 loc_5FA84:
                 
-                moveq   #$FFFFFFFF,d6
+                moveq   #-1,d6
 return_5FA86:
                 
                 rts

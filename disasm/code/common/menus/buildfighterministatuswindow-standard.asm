@@ -77,7 +77,7 @@ combatant = -2
                 
 @CopyTileColumns:
                 move.w  d6,((MINISTATUS_WINDOW_WIDTH-$1000000)).w
-                lea     MiniStatusWindowLayout(pc), a0
+                lea     layout_MiniStatusWindow(pc), a0
                 movea.l windowTilesAddress(a6),a1
                 
                 ; Copy leftmost columns
@@ -88,7 +88,7 @@ combatant = -2
                 subi.w  #WINDOW_MINISTATUS_SIDECOLUMNS_NUMBER_PLUS_ONE,d7
                 
 @CopyMiddleColumns_Loop:
-                lea     MiniStatusWindowLayout_Body(pc), a0
+                lea     layout_MiniStatusWindowBody(pc), a0
                 bsr.w   CopyMinistatusWindowTileColumn
                 dbf     d7,@CopyMiddleColumns_Loop
                 

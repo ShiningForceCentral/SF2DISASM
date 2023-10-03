@@ -3,7 +3,7 @@
 ; Member stats window layout : Included when patch THREE_DIGITS_STATS or FULL_CLASS_NAMES is enabled.
                 module
                 
-MemberStatusWindowLayout:
+layout_MemberStatusWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]index[|mirror|flip]
                 
@@ -58,7 +58,7 @@ MemberStatusWindowLayout:
                 @spacerLine ; 2nd line
                 @spacerLine ; 3rd line
                 
-MemberStatusWindowLayout_Body:
+layout_MemberStatusWindow_Body:
 ; 4th line
             if (THREE_DIGITS_STATS=1)
                 ; Three digits stats (HP and MP on single line)
@@ -257,7 +257,7 @@ MemberStatusWindowLayout_Body:
                 
                 @spacerLine ; 11th line
                 
-MemberStatusWindowLayout_Tail:
+layout_MemberStatusWindow_Tail:
                 @spacerLine ; 12th line
                 
 ; 13th line

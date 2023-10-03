@@ -85,7 +85,7 @@ Map3_261_EntityEvent2:
 Map3_261_EntityEvent3:
                 
                 move.b  #SHOP_WEAPON_GRANSEAL,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map3_261_EntityEvent3
@@ -290,7 +290,7 @@ Map3_261_EntityEvent20:
 
 Map3_261_EntityEvent21:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map3_261_EntityEvent21
@@ -371,7 +371,7 @@ byte_511B6:
 Map3_261_EntityEvent26:
                 
                 move.b  #SHOP_ITEM_GRANSEAL,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map3_261_EntityEvent26

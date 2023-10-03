@@ -227,7 +227,7 @@ return_5DCA2:
 
 Map38_EntityEvent11:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map38_EntityEvent11
@@ -239,7 +239,7 @@ Map38_EntityEvent11:
 Map38_EntityEvent12:
                 
                 move.b  #SHOP_WEAPON_ROFT,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map38_EntityEvent12
@@ -251,7 +251,7 @@ Map38_EntityEvent12:
 Map38_EntityEvent13:
                 
                 move.b  #SHOP_ITEM_ROFT,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map38_EntityEvent13

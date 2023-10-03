@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\namecharacterentrywindowlayout-menuenhancements.asm :
 ; Name character entry window layout : Included when patch EIGHT_CHARACTERS_MEMBER_NAMES is enabled.
-NameEntryWindowLayout:
+layout_NameEntryWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]index[|mirror|flip]
                 

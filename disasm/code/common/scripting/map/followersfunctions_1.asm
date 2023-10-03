@@ -13,7 +13,7 @@ InitializeFollowerEntities:
                 
             if (STANDARD_BUILD=1)
                 movem.l d1-d2/a0,-(sp)
-                lea     tbl_MapsWithNoFollowers(pc), a0
+                lea     table_MapsWithNoFollowers(pc), a0
                 getSavedByte CURRENT_MAP, d1
                 moveq   #0,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
@@ -27,7 +27,7 @@ InitializeFollowerEntities:
             endif
                 
                 movem.l a6,-(sp)
-                lea     tbl_Followers(pc), a4
+                lea     table_Followers(pc), a4
                 lea     pt_eas_Followers(pc), a6
                 lea     ((byte_FFAFB0-$1000000)).w,a5
                 move.b  #1,(a5)
@@ -35,11 +35,11 @@ InitializeFollowerEntities:
                 beq.s   @DeclareFollowers_Loop
                 bsr.s   IsOverworldMap  
                 beq.s   @DeclareFollowers_Loop
-                lea     tbl_OverworldFollowers(pc), a4
+                lea     table_OverworldFollowers(pc), a4
                 lea     pt_eas_OverworldFollowers(pc), a6
 @DeclareFollowers_Loop:
                 
-                cmpi.w  #CODE_TERMINATOR_WORD,(a4)
+                cmpi.w  #-1,(a4)
                 beq.w   @Done
                 
                 ; Is follower unlocked?
@@ -55,7 +55,7 @@ InitializeFollowerEntities:
                 move.b  1(a4),d0        ; d0.w = entity index
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d0
                 bcc.s   @NonAlly
-                bsr.w   GetAllyMapSprite
+                bsr.w   GetAllyMapsprite
                 bra.s   @AdjustEntityIndex
 @NonAlly:
                 

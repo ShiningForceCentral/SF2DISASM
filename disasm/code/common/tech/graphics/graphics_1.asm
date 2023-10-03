@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\tech\graphics\graphics_1.asm :
-; 0x1770..0x18C2 : Graphics functions, part 1
+; 0x1770..0x183C : Graphics functions, part 1
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -31,20 +31,20 @@ InitializeSprites:
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to spell animations
+; related to spellanimations
 
 
 sub_179C:
                 
                 movem.l d0/d2/a0,-(sp)
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.w  d0,d2
                 lsr.w   #6,d2
-                lea     byte_183C(pc), a0
+                lea     table_183C(pc), a0
                 move.b  (a0,d2.w),d2
                 andi.w  #$3F,d0 
                 add.w   d0,d0
-                lea     word_1840(pc), a0
+                lea     table_1840(pc), a0
                 move.w  d0,d1
                 lsr.b   #1,d2
                 bcc.s   loc_17C6
@@ -79,6 +79,8 @@ loc_17E6:
 
 ; =============== S U B R O U T I N E =======================================
 
+; related to spellanimations
+
 
 sub_17EC:
                 
@@ -88,12 +90,12 @@ sub_17EC:
                 bsr.s   sub_179C        
                 move.w  d1,d2
                 muls.w  d3,d2
-                asr.l   #8,d2
+                asr.l   #BYTE_SHIFT_COUNT,d2
                 asr.l   #7,d2
                 swap    d1
                 swap    d2
                 muls.w  d3,d1
-                asr.l   #8,d1
+                asr.l   #BYTE_SHIFT_COUNT,d1
                 asr.l   #7,d1
                 move.w  d1,d2
                 swap    d2
@@ -105,6 +107,8 @@ sub_17EC:
 
 ; =============== S U B R O U T I N E =======================================
 
+; related to spellanimations
+
 
 sub_1812:
                 
@@ -114,14 +118,14 @@ sub_1812:
                 move.w  d1,d2
                 lsr.w   #1,d3
                 muls.w  d3,d2
-                asr.l   #8,d2
+                asr.l   #BYTE_SHIFT_COUNT,d2
                 asr.l   #7,d2
                 swap    d1
                 swap    d2
                 swap    d3
                 lsr.w   #1,d3
                 muls.w  d3,d1
-                asr.l   #8,d1
+                asr.l   #BYTE_SHIFT_COUNT,d1
                 asr.l   #7,d1
                 move.w  d1,d2
                 swap    d2
@@ -130,72 +134,3 @@ sub_1812:
 
     ; End of function sub_1812
 
-byte_183C:      dc.b 6                  ; related to spell animations
-                dc.b $B
-                dc.b $C
-                dc.b 1
-word_1840:      dc.w 0
-                dc.w 6
-                dc.w $C
-                dc.w $12
-                dc.w $19
-                dc.w $1F
-                dc.w $25
-                dc.w $2B
-                dc.w $31
-                dc.w $38
-                dc.w $3E
-                dc.w $44
-                dc.w $4A
-                dc.w $50
-                dc.w $56
-                dc.w $5C
-                dc.w $61
-                dc.w $67
-                dc.w $6D
-                dc.w $73
-                dc.w $78
-                dc.w $7E
-                dc.w $83
-                dc.w $88
-                dc.w $8E
-                dc.w $93
-                dc.w $98
-                dc.w $9D
-                dc.w $A2
-                dc.w $A7
-                dc.w $AB
-                dc.w $B0
-                dc.w $B5
-                dc.w $B9
-                dc.w $BD
-                dc.w $C1
-                dc.w $C5
-                dc.w $C9
-                dc.w $CD
-                dc.w $D1
-                dc.w $D4
-                dc.w $D8
-                dc.w $DB
-                dc.w $DE
-                dc.w $E1
-                dc.w $E4
-                dc.w $E7
-                dc.w $EA
-                dc.w $EC
-                dc.w $EE
-                dc.w $F1
-                dc.w $F3
-                dc.w $F4
-                dc.w $F6
-                dc.w $F8
-                dc.w $F9
-                dc.w $FB
-                dc.w $FC
-                dc.w $FD
-                dc.w $FE
-                dc.w $FE
-                dc.w $FF
-                dc.w $FF
-                dc.w $FF
-                dc.w $100

@@ -5,37 +5,37 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-SystemInit:
+InitializeSystem:
                 
-                bsr.s   InitVdp         ; and clear 68K RAM
+                bsr.s   InitializeVdp   ; and clear 68K RAM
                 
             if (STANDARD_BUILD&MEMORY_MAPPER=1)
-                bsr.w   InitMapper
+                bsr.w   InitializeMapper
             elseif (EXPANDED_ROM=1)
                 enableSram              ; make sure that SRAM is enabled now, in case we need to init saved data
             endif
                 
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                bsr.w   InitSavedData
+                bsr.w   InitializeSavedData
             endif
                 
-                bsr.w   InitZ80         ; and load sound driver to Z80 RAM
+                bsr.w   InitializeZ80   ; and load sound driver to Z80 RAM
                 
             if (STANDARD_BUILD=1)
-                bsr.w   InitVdpData
+                bsr.w   InitializeVdpData
             else
-                bsr.s   InitVdpData
+                bsr.s   InitializeVdpData
             endif
                 
                 jmp     (InitializeGame).l
 
-    ; End of function SystemInit
+    ; End of function InitializeSystem
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-InitVdp:
+InitializeVdp:
                 
                 move.w  #$3FFE,d0
                 lea     (FF0000_RAM_START).l,a0
@@ -46,8 +46,8 @@ InitVdp:
                 
                 move.b  #3,((FADING_COUNTER_MAX-$1000000)).w
                 clr.b   ((FADING_SETTING-$1000000)).w
-                lea     vdp_init_params(pc), a0
-                moveq   #$12,d1
+                lea     table_VdpInitializationParameters(pc), a0
+                moveq   #18,d1
 @SetVdpReg_Loop:
                 
                 move.w  (a0)+,d0
@@ -64,13 +64,15 @@ InitVdp:
                 rts
             endif
 
-    ; End of function InitVdp
+    ; End of function InitializeVdp
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; Clear WRAM data tables reserved by the program for VDP control.
 
-InitVdpData:
+
+InitializeVdpData:
                 
                 move.l  #VDP_COMMAND_QUEUE,(VDP_COMMAND_QUEUE_POINTER).l
                 move.l  #DMA_QUEUE,(DMA_QUEUE_POINTER).l
@@ -80,26 +82,26 @@ InitVdpData:
                 move.b  d0,(CTRL3_BIS).l
                 lea     (HORIZONTAL_SCROLL_DATA).l,a0
                 move.w  #255,d0
-loc_276:
+@ClearHScrollData_Loop:
                 
                 move.w  #0,(a0)+        ; clear from FFD100 to FFD500
                 move.w  #0,(a0)+
-                dbf     d0,loc_276      
+                dbf     d0,@ClearHScrollData_Loop
                 
                 lea     (VERTICAL_SCROLL_DATA).l,a0
                 move.w  #19,d0
-loc_28C:
+@ClearVScrollData_Loop:
                 
                 move.w  #0,(a0)+        ; clear next 80d bytes
                 move.w  #0,(a0)+
-                dbf     d0,loc_28C      
+                dbf     d0,@ClearVScrollData_Loop
                 
                 lea     (PALETTE_1_BASE).l,a0
-                moveq   #$7F,d1 
-loc_2A0:
+                moveq   #CRAM_BYTE_COUNTER,d1
+@ClearPalettes_Loop:
                 
                 clr.w   (a0)+           ; clear palette replicas ?
-                dbf     d1,loc_2A0      
+                dbf     d1,@ClearPalettes_Loop  
                 
             if (STANDARD_BUILD=1)
                 pea     EnableDmaQueueProcessing(pc)
@@ -114,9 +116,10 @@ loc_2A0:
                 rts
             endif
 
-    ; End of function InitVdpData
+    ; End of function InitializeVdpData
 
-vdp_init_params:dc.w $8004              ; disable H int, enable read H V counter
+table_VdpInitializationParameters:
+                dc.w $8004              ; disable H int, enable read H V counter
                 dc.w $8124              ; disable display, enable Vint, disable DMA, V28 cell mode
                 dc.w $8230              ; scroll A table VRAM address : C000
                 dc.w $8338              ; window table VRAM address : E000

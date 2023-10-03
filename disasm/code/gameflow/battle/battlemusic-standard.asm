@@ -13,7 +13,7 @@ PlayMapMusic:
                 checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 beq.s   @Continue
                 
-                lea     tbl_ExplorationToBattleMusics(pc), a0
+                lea     table_ExplorationToBattleMusics(pc), a0
                 move.w  d0,d1
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w

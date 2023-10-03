@@ -25,7 +25,7 @@ DecompressTilesForVramDma:
                 
                 movem.l d0-d1/a1,-(sp)
                 lea     (FF8804_LOADING_SPACE).l,a1
-                bsr.w   LoadCompressedData
+                bsr.w   LoadStackCompressedData
                 lea     (FF8804_LOADING_SPACE).l,a0
                 movem.l (sp)+,d0-d1/a1
                 move.w  #2,d1
@@ -46,3 +46,4 @@ ApplyVIntVramDmaOnCompressedTiles:
                 rts
 
     ; End of function ApplyVIntVramDmaOnCompressedTiles
+

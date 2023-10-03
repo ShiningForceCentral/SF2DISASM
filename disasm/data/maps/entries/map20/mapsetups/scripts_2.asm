@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map20\mapsetups\scripts_2.asm :
 ; 0x633C4..0x6343C : 
-cs_EndKiss:     hideText
+cs_EndingKiss:  hideText
                 setCameraEntity 65535
                 setFacing ALLY_BOWIE,RIGHT
                 customActscriptWait ALLY_BOWIE
@@ -33,5 +33,5 @@ cs_EndKiss:     hideText
                 csWait 16
                 setActscriptWait ALLY_BOWIE,eas_StopMoving
                 csWait 120
-                executeSubroutine j_PlayEndKiss
+                executeSubroutine j_PlayEndingKissSequence
                 csc_end

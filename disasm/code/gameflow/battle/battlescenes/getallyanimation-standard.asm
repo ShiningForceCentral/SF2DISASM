@@ -10,7 +10,7 @@
 
 GetAllyAnimation:
                 
-@KNIGHTS_TO_SPEARS_OFFSET: equ tbl_SpearThrowAnimations-tbl_KnightBattleSprites
+@KNIGHTS_TO_SPEARS_OFFSET: equ table_SpearThrowAnimations-table_KnightBattleSprites
                 
                 move.l  d2,-(sp)
                 move.w  d1,-(sp)
@@ -19,14 +19,14 @@ GetAllyAnimation:
                 bne.s   @IsSpecialAnimation
                 
                 ; Is weapon sprite a spear?
-                lea     tbl_SpearWeaponSprites(pc), a0
+                lea     table_SpearWeaponSprites(pc), a0
                 move.w  ((BATTLESCENE_WEAPONSPRITE-$1000000)).w,d1
                 moveq   #0,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @Default                ; Weapon is not a spear; get regular attack animation
                 
                 ; Is battle sprite a knight?
-                lea     tbl_KnightBattleSprites(pc), a0
+                lea     table_KnightBattleSprites(pc), a0
                 move.w  ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d1
                 move.w  #@KNIGHTS_TO_SPEARS_OFFSET-1,d2
                 

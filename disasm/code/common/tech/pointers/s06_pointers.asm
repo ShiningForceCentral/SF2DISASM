@@ -1,26 +1,27 @@
 
 ; ASM FILE code\common\tech\pointers\s06_pointers.asm :
 ; 0x2800C..0x2803C : Game Section 06 Pointers
-p_VariableWidthFont:
-                dc.l VariableWidthFont
-p_MainMenuTiles:dc.l MenuTiles_Uncompressed
-p_MenuTiles_Item:
-                dc.l MenuTiles_Item
-p_MenuTiles_BattleField:
-                dc.l MenuTiles_BattleField
-p_Menutiles_Church:
-                dc.l MenuTiles_Church
-p_MenuTiles_Shop:
-                dc.l MenuTiles_Shop
-p_MenuTiles_Caravan:
-                dc.l MenuTiles_Caravan
-p_MenuTiles_Depot:
-                dc.l MenuTiles_Depot
-p_MenuTiles_YesNo:
-                dc.l MenuTiles_YesNo
-p_plt_WitchChoice:
-                dc.l plt_WitchChoice
+p_font_VariableWidth:
+                dc.l font_VariableWidth
+p_tiles_MainMenu:
+                dc.l tiles_MainMenu     
+p_tiles_ItemMenu:
+                dc.l tiles_ItemMenu
+p_tiles_BattlefieldMenu:
+                dc.l tiles_BattleFieldMenu
+p_tiles_ChurchMenu:
+                dc.l tiles_ChurchMenu
+p_tiles_ShopMenu:
+                dc.l tiles_ShopMenu
+p_tiles_CaravanMenu:
+                dc.l tiles_CaravanMenu
+p_tiles_DepotMenu:
+                dc.l tiles_DepotMenu
+p_tiles_YesNoPrompt:
+                dc.l tiles_YesNoPrompt
+p_palette_WitchChoice:
+                dc.l palette_WitchChoice
 p_WitchBubbleAnimation:
                 dc.l WitchBubbleAnimation
-p_SpeechBalloonTiles:
-                dc.l SpeechBalloonTiles
+p_tiles_SpeechBalloon:
+                dc.l tiles_SpeechBalloon

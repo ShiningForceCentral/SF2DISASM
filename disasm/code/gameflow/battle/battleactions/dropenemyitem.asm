@@ -4,10 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
-;     A3 = scene action type in RAM
-;     A4 = actor index in RAM
-;     A5 = target index in RAM
+; In: a2 = battlescene script stack frame
+;     a3 = battleaction type pointer
+;     a4 = actor index pointer
+;     a5 = target index pointer
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -17,7 +17,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -32,7 +32,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_EnemyDropItem:
+battlesceneScript_DropEnemyItem:
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
@@ -41,8 +41,9 @@ WriteBattlesceneScript_EnemyDropItem:
                 beq.w   @Done           ; skip function if target is an ally
                 tst.b   targetDies(a2)
                 beq.w   @Done           ; skip function if target was not defeated
+                
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d3
-                lea     tbl_EnemyItemDrops(pc), a0
+                lea     table_EnemyItemDrops(pc), a0
 @FindEntry_Loop:
                 
                 cmp.b   (a0),d3
@@ -53,12 +54,12 @@ WriteBattlesceneScript_EnemyDropItem:
                 clr.w   d1
                 move.b  ENEMYITEMDROP_OFFSET_ITEM(a0),d1
                 bsr.w   GetItemSlotContainingIndex
-                cmpi.w  #CODE_NOTHING_WORD,d2
+                cmpi.w  #-1,d2
                 bne.w   @EntryFound
 @Next:
                 
                 adda.w  #ENEMYITEMDROP_ENTRY_SIZE,a0
-                cmpi.w  #CODE_TERMINATOR_WORD,(a0)
+                cmpi.w  #-1,(a0)
                 bne.s   @FindEntry_Loop
                 bra.w   @Done
 @EntryFound:
@@ -125,5 +126,5 @@ WriteBattlesceneScript_EnemyDropItem:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function WriteBattlesceneScript_EnemyDropItem
+    ; End of function battlesceneScript_DropEnemyItem
 

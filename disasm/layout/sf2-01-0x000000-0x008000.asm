@@ -15,6 +15,7 @@
                 includeIfStandard "code\common\tech\pointers\s06_textbankspointer.asm"                  ; Game Section 06 Text Banks Pointer
                 includeIfStandard "code\common\tech\pointers\s06_pointers.asm"                          ; Game Section 06 Pointers
                 includeIfStandard "code\common\tech\pointers\s06_gamestaffpointer.asm"                  ; Game Section 06 Game Staff Pointer
+                includeIfStandard "code\common\tech\pointers\s07_mapsetupspointer-standard.asm"         ; 
                 includeIfStandard "code\common\tech\pointers\s08_pointers.asm"                          ; Game Section 08 Pointers
                 includeIfStandard "code\common\tech\pointers\s10_pointers.asm"                          ; Game Section 10 Pointers
                 includeIfStandard "code\common\tech\pointers\s11_enemybattlespritespointer.asm"         ; Game Section 11 Enemy Battlesprites Pointer
@@ -63,12 +64,14 @@
                 include "code\common\tech\bytecopy.asm"    ; Byte-copy function
                 include "code\common\tech\interrupts\trap1-4_flags.asm"    ; Trap 1-4 - Flag Functions
                 include "code\common\tech\graphics\graphics_1.asm"    ; Graphics functions, part 1
+                include "data\tech\spellanimations.asm"    ; Spell animations data
                 includeIfVanilla "code\common\tech\graphics\unused_graphics.asm"    ; Unused graphics functions
                 include "code\common\tech\graphics\graphics_2.asm"    ; Graphics functions, part 2
                 includeIfVanilla "code\common\tech\graphics\updatefadingpalette.asm"    ; Palette update during fading function
                 include "code\common\tech\graphics\decompression.asm"    ; Graphics decompression and loading functions
                 include "code\common\maps\mapload.asm"    ; Map loading functions
                 includeIfVanilla "code\common\maps\unused_mapload.asm"    ; Unused map loading functions
+                include "data\tech\displaydata.asm"    ; Display data tables
                 include "code\common\tech\graphics\displayinit.asm"    ; Display initialization
                 includeIfVanilla "code\common\tech\graphics\unused_display.asm"    ; Unused display function
                 include "code\common\tech\graphics\display.asm"    ; Display functions
@@ -84,7 +87,7 @@
                 include "code\common\scripting\text\textfunctions.asm"    ; Text functions
                 includeIfStandard "code\common\scripting\text\displayuncompressedtext-standard.asm"
                 includeIfStandard "code\common\tech\findspecialproperties-standard.asm"
-                includeIfVanilla "code\common\scripting\text\unused_textfunctionsdata.asm"
+                includeIfVanilla "code\common\scripting\text\unused_textfunctionsdata.asm"    ; Text functions
             if (MEMORY_MAPPER=1)
                 includeIfStandard "code\common\tech\mapperfunctions-standard.asm"   ; Memory mapper functions
             endif
@@ -94,6 +97,7 @@
                 include "code\specialscreens\witchend\witchendinit.asm"    ; Witch end function
                 includeIfVanilla "code\gameflow\start\gameinit.asm"    ; Game init
                 includeIfVanilla "data\maps\global\debugmodemaps.asm"    ; Debug mode maps
+                alignIfVanilla
                 includeIfVanilla "code\gameflow\start\gameintro.asm"    ; Game intro
                 includeIfVanilla "code\specialscreens\witch\witchstart.asm"    ; Start witch screen
                 include "code\gameflow\mainloop.asm"    ; Main loop

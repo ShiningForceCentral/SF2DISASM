@@ -13,9 +13,9 @@ sub_1942:
                 lea     (SPRITE_00_LINK).l,a1
                 clr.w   d1
                 moveq   #2,d0
-                bsr.w   sub_196C
-                bsr.w   sub_196C
-                bsr.w   sub_198C
+                bsr.w   sub_196C        
+                bsr.w   sub_196C        
+                bsr.w   sub_198C        
                 clr.w   d2
                 move.b  d2,(a1,d1.w)
                 move.w  d2,d1
@@ -27,6 +27,8 @@ sub_1942:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; related to the battlescene
 
 
 sub_196C:
@@ -54,11 +56,13 @@ loc_1982:
 
 ; =============== S U B R O U T I N E =======================================
 
+; related to the battlescene
+
 
 sub_198C:
                 
                 lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a0
-                moveq   #$3E,d7 
+                moveq   #62,d7
                 moveq   #1,d2
 loc_1996:
                 
@@ -72,6 +76,7 @@ loc_19A8:
                 
                 addq.w  #1,d2
                 dbf     d7,loc_1996
+                
                 rts
 
     ; End of function sub_198C

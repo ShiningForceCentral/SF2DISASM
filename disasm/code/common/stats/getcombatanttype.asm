@@ -19,7 +19,7 @@ GetCombatantType:
                 bne.s   @Enemy
                 moveq   #0,d1
                 bsr.w   GetClass        
-                move.b  tbl_ClassTypes(pc,d1.w),d1 ; 0,1,2 = base class, promoted class, special promoted class
+                move.b  table_ClassTypes(pc,d1.w),d1 ; 0,1,2 = base class, promoted class, special promoted class
                 mulu.w  #COMBATANT_ALLIES_NUMBER,d1
                 add.w   d0,d1
                 bset    #15,d1

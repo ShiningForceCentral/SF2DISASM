@@ -37,24 +37,27 @@ WaitForHeroAndFollowersStopped:
 
 WaitForPartyEntitiesIdle:
                 
-                cmpi.b  #$FF,(a0)+
-                beq.w   return_4524A
-                jsr     (WaitForVInt).w
-loc_45224:
+                cmpi.b  #-1,(a0)+
+                beq.w   @Return
                 
-                cmpi.b  #$FF,(a0)+
-                bne.s   loc_45224
+                jsr     (WaitForVInt).w
+@loc_1:
+                
+                cmpi.b  #-1,(a0)+
+                bne.s   @loc_1
+                
                 clr.w   d0
                 move.b  -2(a0),d0
                 movem.l d0/a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-loc_45238:
+@loc_2:
                 
                 jsr     (WaitForVInt).w
                 cmpi.l  #eas_Idle,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
-                bne.s   loc_45238
+                bne.s   @loc_2
+                
                 movem.l (sp)+,d0/a0
-return_4524A:
+@Return:
                 
                 rts
 
@@ -91,8 +94,9 @@ ApplyActscriptToFollowers:
 ApplyActscriptToPartyEntities:
                 
                 move.b  (a0)+,d0
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 beq.s   @Return
+                
                 bsr.w   SetEntityActscript
                 bra.s   ApplyActscriptToPartyEntities
 @Return:

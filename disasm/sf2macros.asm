@@ -305,19 +305,19 @@ processDmaRestoreRomBanksAndEnableSram: macro
 loadCompressedDataRestoreRomBanksAndEnableSram: macro
             if (STANDARD_BUILD&MEMORY_MAPPER=1)
                 pea     (ControlMapper_RestoreRomBanksAndEnableSram).w
-                jmp     (LoadCompressedData).w
+                jmp     (LoadStackCompressedData).w
             elseif (EXPANDED_ROM=1)
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 move.b  #1,(SEGA_MAPPER_CTRL0).l
                 rts
             else
-                jmp     (LoadCompressedData).w
+                jmp     (LoadStackCompressedData).w
             endif
         endm
     
 conditionalMapperInit: macro
             if (STANDARD_BUILD&MEMORY_MAPPER=1)
-                bsr.w   InitMapper
+                bsr.w   InitializeMapper
             endif
         endm
     
@@ -809,9 +809,9 @@ defineShorthand: macro Prefix,Shorthand
     
 tableEnd: macro
     if strcmp('\0','b')
-    dc.b CODE_TERMINATOR_BYTE
+    dc.b TERMINATOR_BYTE
     else
-    dc.w CODE_TERMINATOR_WORD
+    dc.w TERMINATOR_WORD
     endc
     endm
     
@@ -886,6 +886,7 @@ droppedFlag: macro
     
 dropFlag: macro ;alias
     droppedFlag \1
+    inform 0,"INFO: 'dropFlag' macro is obsolete. Please use 'droppedFlag' instead."
     endm
     
 spellElement: macro
@@ -920,12 +921,12 @@ enemyFacing: macro
     defineShorthand.b LASER_,\1
     endm
     
-npcPosition: macro
+position: macro
     dc.b \1
     dc.b \2
     endm
     
-npcFacing: macro
+facing: macro
     if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
     dc.w \1
     else
@@ -1211,7 +1212,7 @@ follower: macro
     endc
     endm
     
-mapSprite: macro
+mapsprite: macro
     if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
     defineShorthand.w MAPSPRITE_,\1
     else
@@ -1234,6 +1235,7 @@ speechSfx: macro
     
 speechSound: macro ;alias
     speechSfx \1
+    inform 0,"INFO: 'speechSound' macro is obsolete. Please use 'speechSfx' instead."
     endm
     
 ; Enemy definitions
@@ -1265,6 +1267,7 @@ baseAtt: macro
     
 baseAtk: macro ;alias
     baseAtt \1
+    inform 0,"INFO: 'baseAtk' macro is obsolete. Please use 'baseAtt' instead."
     endm
     
 baseDef: macro

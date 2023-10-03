@@ -9,7 +9,7 @@
 ; Out: d6.w = damage
 
 
-WriteBattlesceneScript_CalculateDamage:
+battlesceneScript_CalculateDamage:
                 
                 move.l  a0,-(sp)
                 move.b  (a4),d0
@@ -25,7 +25,7 @@ WriteBattlesceneScript_CalculateDamage:
 @Continue:      move.b  (a5),d0
                 bsr.w   GetLandEffectSetting
                 add.w   d1,d1
-                move.w  tbl_LandEffectDamageMultipliers(pc,d1.w),d1
+                move.w  table_LandEffectDamageMultipliers(pc,d1.w),d1
                 mulu.w  d1,d6
                 lsr.w   #8,d6
                 
@@ -33,14 +33,14 @@ WriteBattlesceneScript_CalculateDamage:
                 moveq   #0,d2           ; zero property bytes
                 
                 ; Check if target is either flying or hovering
-                lea     tbl_AirborneMovetypes(pc), a0
+                lea     table_AirborneMovetypes(pc), a0
                 move.b  (a5),d0
                 bsr.w   GetMoveType
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @Done
                 
                 ; Check if attacker is an archer
-                lea     tbl_ArcherMovetypes(pc), a0
+                lea     table_ArcherMovetypes(pc), a0
                 move.b  (a4),d0
                 bsr.w   GetMoveType
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
@@ -54,5 +54,5 @@ WriteBattlesceneScript_CalculateDamage:
 @Done:          movea.l (sp)+,a0
                 rts
 
-    ; End of function WriteBattlesceneScript_CalculateDamage
+    ; End of function battlesceneScript_CalculateDamage
 

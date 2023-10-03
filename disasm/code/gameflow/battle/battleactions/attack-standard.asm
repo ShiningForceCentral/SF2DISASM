@@ -37,44 +37,44 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_Attack:
+battlesceneScript_Attack:
                 
                 move.b  (a5),d0
                 jsr     GetCurrentHp
                 move.w  d1,leechAmountCap(a6)   ; lifesteal weapons leech amount is capped to target's current HP prior to suffering damage
                 
-                bsr.w   WriteBattlesceneScript_DetermineDodge
+                bsr.w   battlesceneScript_DetermineDodge
                 tst.b   dodge(a2)
                 bne.s   @DoubleAndCounter
                 
-                bsr.w   WriteBattlesceneScript_CalculateDamage
-                bsr.w   WriteBattlesceneScript_DetermineCriticalHit
-                bsr.w   WriteBattlesceneScript_InflictDamage
+                bsr.w   battlesceneScript_CalculateDamage
+                bsr.w   battlesceneScript_DetermineCriticalHit
+                bsr.w   battlesceneScript_InflictDamage
                 move.w  d6,finalDamage(a2)
                 tst.b   targetDies(a2)
                 beq.s   @AilmentAndCurse
                 
-                bsr.w   WriteBattlesceneScript_DeathMessage
+                bsr.w   battlesceneScript_DisplayDeathMessage
                 bra.s   AttackEffect_Lifesteal
 @AilmentAndCurse:      
                 
-                bsr.w   WriteBattlesceneScript_InflictAilment
+                bsr.w   battlesceneScript_InflictAilment
                 bsr.s   AttackEffect_Lifesteal
                 move.w  finalDamage(a2),d6
-                bsr.w   WriteBattlesceneScript_InflictCurseDamage
+                bsr.w   battlesceneScript_InflictCurseDamage
                 tst.b   targetDies(a2)
                 bne.s   @Death
 @DoubleAndCounter:
                 
-                bra.w   WriteBattlesceneScript_DetermineDoubleAndCounter
+                bra.w   battlesceneScript_DetermineDoubleAndCounter
 @Death:
                 
                 exg     a4,a5
-                bsr.w   WriteBattlesceneScript_DeathMessage
+                bsr.w   battlesceneScript_DisplayDeathMessage
                 exg     a4,a5
                 rts
 
-    ; End of function WriteBattlesceneScript_Attack
+    ; End of function battlesceneScript_Attack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -93,7 +93,7 @@ AttackEffect_Lifesteal:
 @IsLifestealWeapon:
                 
                 ; Is attacker using a lifesteal weapon?
-                lea     tbl_LifestealWeapons(pc), a0
+                lea     table_LifestealWeapons(pc), a0
                 move.b  (a4),d0                             ; d0.b = attacker
                 jsr     GetEquippedWeapon
                 moveq   #1,d2
@@ -135,7 +135,7 @@ AttackEffect_Lifesteal:
 @EnemyReaction: executeEnemyReaction d6,#0,d1,#2
 @DisplayMessage:
                 
-                bscHideTextBox
+                bscCloseDialogueWindow
                 displayMessage #MESSAGE_BATTLE_RECOVERED_HIT_POINTS,d0,#0,d6
                 exg     a4,a5
                 

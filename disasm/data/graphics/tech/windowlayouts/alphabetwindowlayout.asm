@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\alphabetwindowlayout.asm :
 ; 0x1607C..0x16204 : Alphabet window layout
-AlphabetWindowLayout:
+layout_AlphabetWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;
@@ -40,8 +40,7 @@ AlphabetWindowLayout:
                 
 ; 2nd line
                 vdpBaseTile V_BORDER
-AlphabetWindowLayout_Start:
-                vdpBaseTile UPPERCASE_A
+AlphabetStart:  vdpBaseTile UPPERCASE_A
                 vdpBaseTile UPPERCASE_B
                 vdpBaseTile UPPERCASE_C
                 vdpBaseTile UPPERCASE_D

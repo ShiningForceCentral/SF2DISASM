@@ -8,7 +8,7 @@
 
 
 VInt:           movem.l d0-a6,-(sp)
-                bclr    #ENABLE_VINT,(VINT_PARAMS).l
+                bclr    #ENABLE_VINT,(VINT_PARAMETERS).l
                 beq.w   @SkipUpdates
                 
                 bsr.w   WaitDmaEnd
@@ -18,7 +18,7 @@ VInt:           movem.l d0-a6,-(sp)
                 bsr.w   EnableDisplayOnVdp
                 
                 ; Process VRAM read
-                bclr    #VRAM_READ_REQUEST,(VINT_PARAMS).l ; Check if VRAM read requested
+                bclr    #VRAM_READ_REQUEST,(VINT_PARAMETERS).l ; Check if VRAM read requested
                 beq.s   @loc_1
                 
                 lea     (VDP_COMMAND_QUEUE).l,a0
@@ -39,28 +39,28 @@ VInt:           movem.l d0-a6,-(sp)
                 andi    #$F800,sr                               ; disable interrupts
                 
                 ; Should windows be hidden?
-                clr.b   ((HIDE_WINDOWS-$1000000)).w
+                clr.b   ((HIDE_WINDOWS_TOGGLE-$1000000)).w
                 tst.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
                 bne.s   @Continue
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @Continue
-                st      ((HIDE_WINDOWS-$1000000)).w             ; if Start pushed, hide windows
+                st      ((HIDE_WINDOWS_TOGGLE-$1000000)).w             ; if Start pushed, hide windows
                 
 @Continue:      bsr.s   CallContextualFunctions
                 clr.b   ((WAITING_NEXT_VINT-$1000000)).w
                 move.b  ((VINT_ENABLED-$1000000)).w,d0
-                or.b    d0,(VINT_PARAMS).l
+                or.b    d0,(VINT_PARAMETERS).l
                 
 @SkipUpdates:   addq.b  #1,((FRAME_COUNTER-$1000000)).w
                 clr.b   (byte_FFDEA1).l 
                 move.w  (VDP_REG00_STATUS).l,(VDP_Control).l
-                move.l  ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w,d0
+                move.l  ((AFTER_INTRO_JUMP_POINTER-$1000000)).w,d0
                 beq.s   @Done
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @Done
                 
-                clr.l   ((AFTER_INTRO_JUMP_OFFSET-$1000000)).w
-                movea.l (GAME_INTRO_SP_OFFSET).l,sp             ; if P1 START pushed during intro cutscenes, stop and go back to game intro flow
+                clr.l   ((AFTER_INTRO_JUMP_POINTER-$1000000)).w
+                movea.l (GAME_INTRO_STACK_POINTER_BACKUP).l,sp             ; if P1 START pushed during intro cutscenes, stop and go back to game intro flow
                 movea.l d0,a0
                 move    #$2300,sr                               ; enable interrupts
                 jmp     (a0)
@@ -112,7 +112,7 @@ CallContextualFunctions:
 ProcessVdpQueues:
                 
                 ; Process VDP command queue
-                bclr    #VDP_COMMAND_REQUEST,(VINT_PARAMS).l
+                bclr    #VDP_COMMAND_REQUEST,(VINT_PARAMETERS).l
                 beq.s   @ProcessDmaQueue
                 tst.b   (VDP_COMMAND_COUNTER).l
                 beq.s   @ProcessDmaQueue
@@ -150,16 +150,16 @@ ProcessVdpQueues:
                 move.l  #VDP_COMMAND_QUEUE,(VDP_COMMAND_QUEUE_POINTER).l
 @ProcessDmaQueue:
                 
-                bclr    #DMA_REQUEST,(VINT_PARAMS).l ; Check if DMA requested
+                bclr    #DMA_REQUEST,(VINT_PARAMETERS).l ; Check if DMA requested
                 bne.s   @Continue         
-                btst    #DEACTIVATE_DMA,(VINT_PARAMS).l ; Check if DMA deactivated
+                btst    #DEACTIVATE_DMA,(VINT_PARAMETERS).l ; Check if DMA deactivated
                 bne.s   @Return
                 
 @Continue:      move.w  #$100,(Z80BusReq).l ; Bus request
 @WaitForZ80Bus: btst    #0,(Z80BusReq).l ; Check bus availability
                 bne.s   @WaitForZ80Bus         
                 
-                btst    #DEACTIVATE_DMA,(VINT_PARAMS).l ; Check if DMA deactivated
+                btst    #DEACTIVATE_DMA,(VINT_PARAMETERS).l ; Check if DMA deactivated
                 bne.s   @Return
                 
                 bsr.w   UpdateVdpSpriteTable ; Update sprites

@@ -1,6 +1,6 @@
 
-; ASM FILE code\common\tech\pointers\s17_incbins_basetiles.asm :
-; 0x29002..0x2C576 : Game Section 17 Incbin Directives
+; ASM FILE code\common\tech\incbins\s17_incbins_basetiles.asm :
+; 0x1EF5A6..0x1EFE32 : Game Section 17 Incbin Directives
 unused_BasePalettes:
-                incbinIfVanilla "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
-BaseTiles:      incbin "data/graphics/tech/basetiles.bin"
+                incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
+tiles_Base:     incbin "data/graphics/tech/basetiles.bin"

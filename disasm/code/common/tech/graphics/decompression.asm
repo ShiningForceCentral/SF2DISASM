@@ -4,15 +4,15 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Basic tile decompression : a0 = Source, a1 = Destination
+; Basic tile decompression.  In: a0 = Source, a1 = Destination
 
 var_32 = -32
 
-LoadSpriteData:
+LoadBasicCompressedData:
                 
                 movem.l d1-d2/a0-a3,-(sp)
                 movea.l a1,a3
-                moveq   #$FFFFFFFF,d0
+                moveq   #-1,d0
                 add.w   d0,d0
                 bra.s   loc_1A92
 loc_1A90:
@@ -171,7 +171,7 @@ loc_1BEC:
                 moveq   #3,d4
 loc_1BEE:
                 
-                lsl.w   #4,d2
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2
                 dbf     d3,loc_1BF8
                 
                 moveq   #$F,d3
@@ -243,7 +243,7 @@ loc_1C4E:
                 addi.w  #$10,d3
                 move.l  d0,d1
                 swap    d1
-                andi.w  #$F,d1
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
                 bra.s   loc_1C74
 loc_1C6E:
                 
@@ -287,7 +287,7 @@ loc_1CB0:
                 
                 beq.w   loc_1E3E
                 lsl.w   #5,d1
-                moveq   #$FFFFFFFF,d5
+                moveq   #-1,d5
 loc_1CB8:
                 
                 dbf     d3,loc_1CC0
@@ -308,7 +308,7 @@ loc_1CD2:
                 moveq   #3,d6
 loc_1CD4:
                 
-                lsl.w   #4,d7
+                lsl.w   #NIBBLE_SHIFT_COUNT,d7
                 dbf     d3,loc_1CDE
                 
                 moveq   #$F,d3
@@ -510,6 +510,7 @@ loc_1E34:
 loc_1E36:
                 
                 dbf     d4,loc_1C7E
+                
                 bra.w   loc_1BEC
 loc_1E3E:
                 
@@ -518,16 +519,16 @@ loc_1E3E:
                 movem.l (sp)+,d0-a2/a5
                 rts
 
-    ; End of function LoadSpriteData
+    ; End of function LoadBasicCompressedData
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Stack decompression : a0 = Source, a1 = Destination
+; Stack decompression.  In: a0 = Source, a1 = Destination
 
 history = -32
 
-LoadCompressedData:
+LoadStackCompressedData:
                 
                 movem.l d1-a5,-(sp)
                 link    a6,#-32         ; push d1-a6 to stack
@@ -559,7 +560,7 @@ loc_1E8E:
                 bcs.s   loc_1E9C        
 loc_1E92:
                 
-                lsl.w   #4,d2           ; bit sequence 0 --> d2 = xxx0
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2 ; bit sequence 0 --> d2 = xxx0
                 dbf     d3,loc_1E8E     ; loop 4 times
                 
                 bra.w   loc_1F24        
@@ -575,7 +576,7 @@ loc_1EA4:
                 bcs.s   loc_1EC0        
 loc_1EA8:
                 
-                lsl.w   #4,d2           ; next bit was 0, d2 4-bit-shifted
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2 ; next bit was 0, d2 4-bit-shifted
                 moveq   #0,d1           ; d1 = 0
                 add.w   d0,d0           ; test next bit
                 bne.s   loc_1EB4        
@@ -600,7 +601,7 @@ loc_1EC8:
                 bcs.s   loc_1ED8        
 loc_1ECC:
                 
-                lsl.w   #4,d2           ; bit sequence 110 --> d2 = xxx4
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2 ; bit sequence 110 --> d2 = xxx4
                 addq.w  #4,d2           ; d2 = xxx4
                 dbf     d3,loc_1E8E     
                 
@@ -617,7 +618,7 @@ loc_1EE0:
                 bcs.s   loc_1EF0        
 loc_1EE4:
                 
-                lsl.w   #4,d2           ; bit sequence 1110 --> d2 = xxx8
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2 ; bit sequence 1110 --> d2 = xxx8
                 addq.b  #8,d2           ; d2 = xxx8
                 dbf     d3,loc_1E8E     
                 
@@ -661,7 +662,7 @@ loc_1F1E:
                 dbf     d3,loc_1E8E     
 loc_1F24:
                 
-                moveq   #$FFFFFFFF,d1   ; d3 = 0, loop end, d2 is set
+                moveq   #-1,d1          ; d3 = 0, loop end, d2 is set
                 add.w   d1,d1           ; d1 = -2 and carry set
                 addx.w  d2,d2           ; test next d2 bit and add 1
                 bcs.w   loc_204C        
@@ -670,7 +671,7 @@ loc_1F2E:
                 moveq   #3,d3           ; start of loop for literal value from history stack
 loc_1F30:
                 
-                lsl.w   #4,d7           ; shift d7 (destination word)
+                lsl.w   #NIBBLE_SHIFT_COUNT,d7 ; shift d7 (destination word)
                 add.w   d0,d0           ; test next compressed data bit
                 bcs.s   loc_1F58        
 loc_1F36:
@@ -965,5 +966,5 @@ loc_20DA:
                 sub.l   a1,d0
                 rts
 
-    ; End of function LoadCompressedData
+    ; End of function LoadStackCompressedData
 

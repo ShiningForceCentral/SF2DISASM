@@ -10,9 +10,9 @@
 GenerateRandomNumber:
                 
                 move.w  (RANDOM_SEED).l,d7
-                mulu.w  #$D,d7
+                mulu.w  #13,d7
                 addi.w  #7,d7
-                andi.l  #$FFFF,d7
+                andi.l  #WORD_MASK,d7
                 move.w  d7,(RANDOM_SEED).l
                 move.w  d6,-(sp)
                 add.w   d6,d6
@@ -27,7 +27,9 @@ GenerateRandomNumber:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 WaitForRandomValueToMatch:
                 
                 movem.l d0-d5/a0-a6,-(sp)
@@ -63,6 +65,7 @@ loc_164A:
 
 ; unused
 
+
 GenerateRandomValueUnsigned:
                 
                 movem.l d0-d5/a0-a6,-(sp)
@@ -72,7 +75,7 @@ GenerateRandomValueUnsigned:
                 mulu.w  #541,d7
                 addi.w  #12345,d7
                 move.w  d7,(a0)
-                andi.w  #$FF,d7
+                andi.w  #BYTE_MASK,d7
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
 
@@ -91,24 +94,25 @@ GenerateRandomOrDebugNumber:
                 movem.l d6-d7,-(sp)
                 move.w  d0,d6
                 tst.b   (DEBUG_MODE_TOGGLE).l
-                beq.s   loc_16B2
+                beq.s   @Skip
+                
                 moveq   #0,d0
-                btst    #INPUT_BIT_RIGHT,((P1_INPUT-$1000000)).w
-                bne.w   loc_16B8
+                btst    #INPUT_BIT_RIGHT,((PLAYER_1_INPUT-$1000000)).w
+                bne.w   @Done
                 moveq   #1,d0
-                btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
-                bne.w   loc_16B8
+                btst    #INPUT_BIT_UP,((PLAYER_1_INPUT-$1000000)).w
+                bne.w   @Done
                 moveq   #2,d0
-                btst    #INPUT_BIT_LEFT,((P1_INPUT-$1000000)).w
-                bne.w   loc_16B8
+                btst    #INPUT_BIT_LEFT,((PLAYER_1_INPUT-$1000000)).w
+                bne.w   @Done
                 moveq   #3,d0
-                btst    #INPUT_BIT_DOWN,((P1_INPUT-$1000000)).w
-                bne.w   loc_16B8
-loc_16B2:
+                btst    #INPUT_BIT_DOWN,((PLAYER_1_INPUT-$1000000)).w
+                bne.w   @Done
+@Skip:
                 
                 bsr.w   GenerateRandomNumber
                 move.w  d7,d0
-loc_16B8:
+@Done:
                 
                 movem.l (sp)+,d6-d7
                 rts

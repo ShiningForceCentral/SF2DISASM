@@ -40,7 +40,7 @@ HuffmanDecode:
                 clr.w   d5              ; clear skipped symbols counter
 loc_2E150:
                 
-                dbf     d3,loc_2E158 
+                dbf     d3,loc_2E158    
                 
                 moveq   #7,d3
                 move.b  (a1)+,d2        ; Load next Huffman tree byte
@@ -63,6 +63,7 @@ loc_2E164:
 loc_2E16A:
                 
                 dbf     d3,loc_2E172    ; count left sub-tree symbols to skip
+                
                 moveq   #7,d3
                 move.b  (a1)+,d2        ; Load next huffman tree byte
 loc_2E172:
@@ -76,6 +77,7 @@ loc_2E17A:
                 
                 subq.w  #1,d5           ; increment skipped symbols counter
                 dbf     d4,loc_2E16A    ; Continue until all nodes in left subtree exhausted
+                
                 bra.s   loc_2E150       ; Examine next tree node
 loc_2E182:
                 

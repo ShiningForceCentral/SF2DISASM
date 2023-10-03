@@ -13,13 +13,13 @@ LoadBattle:
                 clr.w   d1
                 getSavedByte CURRENT_MAP, d1
                 bsr.w   FadeOutToBlackAll
-                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
+                move.b  #-1,((VIEW_TARGET_ENTITY-$1000000)).w
                 jsr     (LoadMapTilesets).w
                 bsr.w   WaitForFadeToFinish
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 jsr     (WaitForVInt).w
-                jsr     j_MoveEntitiesToBattlePositions
+                jsr     j_PositionBattleEntities
                 move.w  (sp)+,d0
                 bsr.w   GetEntityIndexForCombatant
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
@@ -33,18 +33,18 @@ LoadBattle:
                 adda.w  d0,a0           ; offset to appropriate entity
                 move.w  (a0)+,d0        ; move x offset
                 ext.l   d0
-                divs.w  #$180,d0
+                divs.w  #MAP_TILE_SIZE,d0
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
                 move.w  (a0)+,d0        ; move y offset
                 ext.l   d0
-                divs.w  #$180,d0
+                divs.w  #MAP_TILE_SIZE,d0
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 moveq   #$3F,d0 
                 jsr     (InitializeSprites).w
-                move.w  #$FFFF,d0
+                move.w  #-1,d0
                 jsr     (LoadMap).w     
                 jsr     (WaitForVInt).w
-                jsr     (LoadMapEntitySprites).w
+                jsr     (LoadEntityMapsprites).w
                 bsr.w   SetBaseVIntFunctions
                 jsr     j_LoadBattleTerrainData
             if (STANDARD_BUILD=1)
@@ -53,18 +53,18 @@ LoadBattle:
                 jsr     (PlayMapMusic).w
             endif
                 jsr     (FadeInFromBlack).w
-                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; if battle 44, then special battle !
-                bne.s   return_256A0
-                jsr     j_DisplayTimerWindow
-return_256A0:
+                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE ; if battle 44, then special battle !
+                bne.s   @Return
+                jsr     j_OpenTimerWindow
+@Return:
                 
                 rts
 
     ; End of function LoadBattle
 
-tbl_RelativeTileMoveX:
+table_RelativeTileMoveX:
                 dc.w 1
-tbl_RelativeTileMoveY:
+table_RelativeTileMoveY:
                 dc.w 0
                 dc.w 0
                 dc.w -1
@@ -92,9 +92,9 @@ GetEntityPositionAfterApplyingFacing:
                 clr.w   d3
                 move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3
                 move.w  d2,d0
-                lsl.w   #2,d3
-                add.w   tbl_RelativeTileMoveX(pc,d3.w),d0
-                add.w   tbl_RelativeTileMoveY(pc,d3.w),d1
+                lsl.w   #INDEX_SHIFT_COUNT,d3
+                add.w   table_RelativeTileMoveX(pc,d3.w),d0
+                add.w   table_RelativeTileMoveY(pc,d3.w),d1
                 movem.l (sp)+,d2-d3/a0
                 rts
 
@@ -130,7 +130,7 @@ loc_25712:
 loc_2571E:
                 
                 dbf     d7,loc_256F4
-                moveq   #$FFFFFFFF,d3
+                moveq   #-1,d3
 loc_25724:
                 
                 movem.l (sp)+,d0-d2/d7
@@ -144,7 +144,7 @@ loc_25724:
 
 PrintAllActivatedDefCons:
                 
-                moveq   #BATTLE_REGION_FLAGS_START,d1 
+                moveq   #BATTLE_REGION_FLAGS_START,d1
                 bsr.w   PrintActivatedDefCon
                 bsr.w   PrintActivatedDefCon
                 bsr.w   PrintActivatedDefCon
@@ -179,7 +179,7 @@ PrintActivatedDefCon:
                 beq.s   @RegionInactive
                 subi.w  #BATTLE_REGION_FLAGS_START,d1
                 ext.l   d1
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     463             ; "DEF-CON No. {#} has been{N}implemented.{D3}"
 @RegionInactive:
                 

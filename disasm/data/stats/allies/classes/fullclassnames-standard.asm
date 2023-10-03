@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\classes\fullclassnames-standard.asm :
 ; Full class names table : Included when patch FULL_CLASS_NAMES is enabled.
-tbl_FullClassNames: 
+table_FullClassNames: 
                 className "Swordsman"
                 className "Knight"
                 className "Warrior"

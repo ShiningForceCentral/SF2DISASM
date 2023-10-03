@@ -20,7 +20,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-InitMapper:     ; Init ROM banks
+InitializeMapper:     ; Init ROM banks
                 bsr.s   ControlMapper_RestoreRomBanks ; make sure banks are restored now in case of soft reset
                 
                 ; Test SEGA mapper control register
@@ -41,7 +41,7 @@ InitMapper:     ; Init ROM banks
                 neg.b   ((SRAM_CONTROL-$1000000)).w
 @Return:        rts
 
-    ; End of function InitMapper
+    ; End of function InitializeMapper
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-InitZ80:
+InitializeZ80:
                 
                 movem.l d0/d7-a1,-(sp)
                 move.w  #$100,(Z80BusReq).l

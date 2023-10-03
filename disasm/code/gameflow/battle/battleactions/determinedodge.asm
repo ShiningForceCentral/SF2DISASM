@@ -5,8 +5,8 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; In: a2 = battlescene script stack frame
-;     a4 = pointer to attacker index in RAM
-;     a5 = pointer to target index in RAM
+;     a4 = attacker index pointer
+;     a5 = target index pointer
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -16,7 +16,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -31,7 +31,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_DetermineDodge:
+battlesceneScript_DetermineDodge:
                 
                 move.b  (a5),d0
                 jsr     j_GetStatusEffects
@@ -79,17 +79,17 @@ WriteBattlesceneScript_DetermineDodge:
                 jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.w   @Return
-                move.w  #$FFFF,d4
+                move.w  #-1,d4
                 move.w  #1,d5
                 exg     a4,a5
-                bsr.w   WriteBattlesceneScript_AnimateAction
+                bsr.w   battlesceneScript_AnimateAction
                 displayMessage #MESSAGE_BATTLE_DODGE,(a4),#0,#0 ; Message, Combatant, Item or Spell, Number
-                bsr.w   WriteBattlesceneScript_IdleSprite
+                bsr.w   battlesceneScript_MakeActorIdle
                 exg     a4,a5
-                move.b  #$FF,dodge(a2)
+                move.b  #-1,dodge(a2)
 @Return:
                 
                 rts
 
-    ; End of function WriteBattlesceneScript_DetermineDodge
+    ; End of function battlesceneScript_DetermineDodge
 

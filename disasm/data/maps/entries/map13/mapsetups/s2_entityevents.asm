@@ -76,7 +76,7 @@ return_5808E:
 Map13_EntityEvent4:
                 
                 move.b  #SHOP_WEAPON_POLCA,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map13_EntityEvent4
@@ -88,7 +88,7 @@ Map13_EntityEvent4:
 Map13_EntityEvent5:
                 
                 move.b  #SHOP_ITEM_POLCA,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map13_EntityEvent5
@@ -121,7 +121,7 @@ return_580C4:
 
 Map13_EntityEvent7:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map13_EntityEvent7

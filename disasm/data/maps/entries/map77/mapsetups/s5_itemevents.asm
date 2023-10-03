@@ -32,7 +32,7 @@ byte_50AB6:
                 txt     422             ; "But nothing happened.{D1}"
 loc_50ABA:
                 
-                moveq   #$FFFFFFFF,d6
+                moveq   #-1,d6
                 rts
 
     ; End of function Map77_ItemEvent0

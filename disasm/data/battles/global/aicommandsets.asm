@@ -24,62 +24,62 @@ AiCommandset00:
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 aiCommandset HEAL, &
-                             DEBUFF, &
+                             SUPPORT, &
                              ATTACK, &
                              MOVE, &
                              STAY
 AiCommandset01: 
                 aiCommandset SPECIAL_MOVE, &
                              HEAL, &
-                             DEBUFF, &
+                             SUPPORT, &
                              ATTACK, &
                              MOVE2, &
                              STAY
 AiCommandset02: 
                 aiCommandset HEAL2, &
                              SPECIAL_MOVE4, &
-                             DEBUFF, &
+                             SUPPORT, &
                              ATTACK3, &
                              MOVE2, &
                              STAY
 AiCommandset03: 
                 aiCommandset HEAL2, &
                              SPECIAL_MOVE4, &
-                             DEBUFF, &
+                             SUPPORT, &
                              ATTACK3, &
                              MOVE, &
                              STAY
 AiCommandset04: 
                 aiCommandset HEAL3, &
                              SPECIAL_MOVE5, &
-                             DEBUFF, &
+                             SUPPORT, &
                              ATTACK2, &
                              MOVE3, &
                              STAY
 AiCommandset05: 
                 aiCommandset HEAL3, &
                              SPECIAL_MOVE5, &
-                             DEBUFF, &
+                             SUPPORT, &
                              ATTACK2, &
                              MOVE3, &
                              STAY
 AiCommandset06: 
                 aiCommandset ATTACK, &
                              HEAL, &
-                             DEBUFF, &
+                             SUPPORT, &
                              MOVE, &
                              STAY
 AiCommandset07: 
                 aiCommandset SPECIAL_MOVE, &
                              ATTACK, &
                              HEAL, &
-                             DEBUFF, &
+                             SUPPORT, &
                              MOVE, &
                              STAY
 AiCommandset08: 
                 aiCommandset ATTACK, &
                              HEAL, &
-                             DEBUFF, &
+                             SUPPORT, &
                              STAY
 AiCommandset10: 
                 aiCommandset STAY
@@ -87,13 +87,13 @@ AiCommandset09:
                 aiCommandset SPECIAL_MOVE3, &
                              ATTACK3, &
                              HEAL2, &
-                             DEBUFF, &
+                             SUPPORT, &
                              SPECIAL_MOVE4, &
                              MOVE2, &
                              STAY
 AiCommandset12: 
                 aiCommandset SPECIAL_MOVE4, &
-                             DEBUFF, &
+                             SUPPORT, &
                              ATTACK3, &
                              HEAL2, &
                              MOVE, &
@@ -103,7 +103,7 @@ AiCommandset13:
                 aiCommandset SPECIAL_MOVE5, &
                              ATTACK2, &
                              HEAL3, &
-                             DEBUFF, &
+                             SUPPORT, &
                              SPECIAL_MOVE2, &
                              MOVE3, &
                              STAY
@@ -111,14 +111,14 @@ AiCommandset15:
                 aiCommandset SPECIAL_MOVE, &
                              ATTACK3, &
                              HEAL2, &
-                             DEBUFF, &
+                             SUPPORT, &
                              SPECIAL_MOVE2, &
                              MOVE2, &
                              STAY
-byte_E249:      
+table_E249:     
 ; These seem to correspond to the secondary characteristics of each AI script
 ;  for Heal, Attack, and Special Move, but not for Support or normal Move
-;  with one byte per AI...
+;  with one byte per AI.
                 
                 dc.b 0
                 dc.b 0

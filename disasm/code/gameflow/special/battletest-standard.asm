@@ -79,7 +79,7 @@ StartBattleTest:
                 
                 clr.w   d1
                 move.b  d0,d1
-                mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
+                mulu.w  #BATTLEMAPCOORDINATES_ENTRY_SIZE_FULL,d0
                 getPointer p_table_BattleMapCoordinates, a0
                 adda.w  d0,a0
                 move.b  (a0)+,d0
@@ -95,26 +95,26 @@ StartBattleTest:
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
             endif
             if (TEST_BUILD=1)
-                move.b  #DEBUG_SHOP_INDEX,((CURRENT_SHOP_INDEX-$1000000)).w
+                move.b  #SHOP_DEBUG,((CURRENT_SHOP_INDEX-$1000000)).w
                 pea     @Start(pc)
-                pea     MainMenuActions
-                pea     ChurchMenuActions
-                pea     ShopMenuActions
-                pea     CaravanMenuActions
+                pea     FieldMenu
+                pea     ChurchMenu
+                pea     ShopMenu
+                pea     CaravanMenu
                 jmp     BattleLoop
             else
                 jsr     BattleLoop
-                jsr     ChurchMenuActions
+                jsr     ChurchMenu
                 txt     460             ; "Shop number?{D1}"
                 move.w  #0,d0
                 move.w  #0,d1
-                move.w  #DEBUG_SHOP_INDEX,d2 
+                move.w  #SHOP_DEBUG,d2 
                 jsr     NumberPrompt
                 clsTxt
                 move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     ShopMenuActions
-                jsr     MainMenuActions
-                jsr     CaravanMenuActions
+                jsr     ShopMenu
+                jsr     FieldMenu
+                jsr     CaravanMenu
                 bra.w   @Start
             endif
 @DebugLevelUp:  
@@ -128,7 +128,7 @@ StartBattleTest:
                 bpl.s   @LevelUpWholeForce
                 
                 movem.l d0-a6,-(sp)
-                jsr     ChurchMenuActions
+                jsr     ChurchMenu
                 movem.l (sp)+,d0-a6
                 
                 bra.s   @DebugLevelUp

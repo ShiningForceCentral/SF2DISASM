@@ -39,6 +39,8 @@ loc_18E8:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 sub_18EE:
                 
@@ -58,7 +60,7 @@ loc_1906:
                 lsl.w   #6,d7
                 divs.w  d6,d7
                 move.b  sub_1942(pc,d7.w),d7
-                andi.w  #$FF,d7
+                andi.w  #BYTE_MASK,d7
                 movem.l d0,-(sp)
                 muls.w  d1,d0
                 movem.l (sp)+,d0
@@ -86,3 +88,4 @@ loc_193C:
                 rts
 
     ; End of function sub_18EE
+

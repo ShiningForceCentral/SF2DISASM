@@ -32,7 +32,7 @@ loc_1112:
                 move.w  d2,(a6)
                 clr.w   d2
                 move.b  d0,d2
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 swap    d0
                 move.w  d2,d0
                 ori.l   #$94009300,d0
@@ -41,7 +41,7 @@ loc_1112:
                 move.l  a0,d0
                 lsr.l   #1,d0
                 move.b  d0,d2
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 swap    d2
                 move.b  d0,d2
                 swap    d2
@@ -99,7 +99,7 @@ ApplyVIntVramDma:
                 move.l  d2,d1
                 clr.w   d2
                 move.b  d0,d2
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 swap    d0
                 move.w  d2,d0
                 ori.l   #$94009300,d0
@@ -108,7 +108,7 @@ ApplyVIntVramDma:
                 move.l  a0,d0
                 lsr.l   #1,d0
                 move.b  d0,d2
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 swap    d2
                 move.b  d0,d2
                 swap    d2

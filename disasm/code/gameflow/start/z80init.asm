@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-InitZ80:
+InitializeZ80:
                 
                 movem.l d0-a1,-(sp)
                 move.w  #$100,(Z80BusReq).l
@@ -24,13 +24,14 @@ InitZ80:
 @WasteCycles_Loop:
                 
                 dbf     d7,@WasteCycles_Loop
+                
                 move.w  #$100,(Z80BusReset).l
                 move.w  #0,(Z80BusReq).l
                 lea     ((MUSIC_STACK_LENGTH-$1000000)).w,a0
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function InitZ80
+    ; End of function InitializeZ80
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -39,7 +40,7 @@ InitZ80:
 CopyWordToZ80:
                 
                 bsr.w   CopyByteToZ80
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
 
     ; End of function CopyWordToZ80
 
@@ -56,3 +57,4 @@ CopyByteToZ80:
                 rts
 
     ; End of function CopyByteToZ80
+

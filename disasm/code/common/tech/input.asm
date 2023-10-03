@@ -9,11 +9,11 @@
 
 UpdatePlayerInputs:
                 
-                lea     ((P1_INPUT-$1000000)).w,a5
+                lea     ((PLAYER_1_INPUT-$1000000)).w,a5
                 lea     (DATA1).l,a6    
-                bsr.s   loc_151C        ; do it with DATA1 and then DATA2
+                bsr.s   @loc_1          ; do it with DATA1 and then DATA2
                 addq.w  #2,a6
-loc_151C:
+@loc_1:
                 
                 move.b  #0,(a6)
                 nop
@@ -72,16 +72,18 @@ WaitForPlayerInput:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 WaitForPlayer1NewInput:
                 
-                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((P1_INPUT-$1000000)).w
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @Wait
                 bsr.w   WaitForVInt
                 bra.s   WaitForPlayer1NewInput
 @Wait:
                 
-                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((P1_INPUT-$1000000)).w
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @Return
                 bsr.w   WaitForVInt
                 bra.s   @Wait
@@ -100,14 +102,14 @@ WaitForPlayer1NewInput:
 sub_15A4:
                 
                 movem.l d7,-(sp)
-                move.b  ((P1_INPUT-$1000000)).w,d7
+                move.b  ((PLAYER_1_INPUT-$1000000)).w,d7
                 and.b   ((byte_FFDE9E-$1000000)).w,d7
                 beq.s   loc_15CA
                 addq.b  #1,((byte_FFDE9F-$1000000)).w
                 move.b  ((byte_FFDE9F-$1000000)).w,d7
                 cmpi.b  #$A,d7
                 bcc.s   loc_15CA
-                clr.b   ((P1_INPUT-$1000000)).w
+                clr.b   ((PLAYER_1_INPUT-$1000000)).w
                 movem.l (sp)+,d7
                 rts
 loc_15CA:
@@ -122,14 +124,16 @@ loc_15CA:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 WaitForInputFor1Second:
                 
                 movem.l d5,-(sp)
                 moveq   #59,d5          ; number of frames to wait, minus one
 WaitForInput_Loop:
                 
-                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((P1_INPUT-$1000000)).w
+                andi.b  #INPUT_UP|INPUT_DOWN|INPUT_LEFT|INPUT_RIGHT|INPUT_B|INPUT_C|INPUT_A|INPUT_START,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @Done
                 bsr.w   WaitForVInt
                 dbf     d5,WaitForInput_Loop
@@ -143,7 +147,9 @@ WaitForInput_Loop:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 WaitForInputFor3Seconds:
                 
                 movem.l d5,-(sp)

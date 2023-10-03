@@ -4,9 +4,12 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 RequestVdpCommandQueueProcessing:
-                bset    #VDP_COMMAND_REQUEST,(VINT_PARAMS).l
+                
+                bset    #VDP_COMMAND_REQUEST,(VINT_PARAMETERS).l
                 rts
 
     ; End of function RequestVdpCommandQueueProcessing
@@ -14,9 +17,13 @@ RequestVdpCommandQueueProcessing:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 WaitForVdpCommandQueueProcessing:
+                
                 bsr.s   RequestVdpCommandQueueProcessing
                 bra.w   WaitForVInt
 
     ; End of function WaitForVdpCommandQueueProcessing
+

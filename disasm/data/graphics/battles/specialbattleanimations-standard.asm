@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\items\specialbattleanimations-standard.asm :
 
 ; Classes that have an additional chance to perform a critical hit for which a special animation is used.
-tbl_SpecialCriticalHitsForClasses:
+table_SpecialCriticalHitsForClasses:
                 
                 ; Class index, n/256 chance to crit, ally animation index
                 dc.w CLASS_MMNK, 16, ALLYBATTLEANIMATION_SPECIAL_MMNK
@@ -12,7 +12,7 @@ tbl_SpecialCriticalHitsForClasses:
 
 
 ; Same as above, but for enemies.
-tbl_SpecialCriticalHitsForEnemies:
+table_SpecialCriticalHitsForEnemies:
                 
                 ; Enemy index, n/256 chance to crit, enemy animation index
                 
@@ -20,7 +20,7 @@ tbl_SpecialCriticalHitsForEnemies:
 
 
 ; Classes that use a special animation when attacking without a weapon equipped.
-tbl_UnarmedAttackAnimationsForClasses:
+table_UnarmedAttackAnimationsForClasses:
                 
                 ; Class index, spell animation index, ally animation index
                 dc.w CLASS_BRGN, SPELLANIMATION_NONE, ALLYBATTLEANIMATION_SPECIAL_BRGN
@@ -28,7 +28,7 @@ tbl_UnarmedAttackAnimationsForClasses:
                 tableEnd
 
 
-tbl_UnarmedAttackAnimationsForEnemies:
+table_UnarmedAttackAnimationsForEnemies:
                 
                 ; Enemy index, spell animation index, enemy animation index
                 
@@ -36,14 +36,14 @@ tbl_UnarmedAttackAnimationsForEnemies:
 
 
 ; Classes that use a special animation when casting spells.
-tbl_SpellcastAnimationsForClasses:
+table_SpellcastAnimationsForClasses:
                 
                 dc.w CLASS_MNST, ALLYBATTLEANIMATION_SPECIAL_MNST
                 
                 tableEnd
 
 
-tbl_SpellcastAnimationsForEnemies:
+table_SpellcastAnimationsForEnemies:
                 
                 dc.w ENEMY_HELL_HOUND, ENEMYBATTLEANIMATION_SPECIAL_HELL_HOUND
                 dc.w ENEMY_CERBERUS, ENEMYBATTLEANIMATION_SPECIAL_HELL_HOUND
@@ -54,11 +54,11 @@ tbl_SpellcastAnimationsForEnemies:
 
 
 ; Classes that use a special animation when using items.
-tbl_UseItemAnimationsForClasses:
+table_UseItemAnimationsForClasses:
                 
                 tableEnd
 
 
-tbl_UseItemAnimationsForEnemies:
+table_UseItemAnimationsForEnemies:
                 
                 tableEnd

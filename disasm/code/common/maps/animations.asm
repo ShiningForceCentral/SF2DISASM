@@ -31,20 +31,20 @@ loc_4740:
 
 VInt_UpdateMapPlanes:
                 
-                bclr    #0,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
-                beq.s   loc_4764
+                bclr    #0,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
+                beq.s   @PlaneB
                 bsr.w   UpdateVdpPlaneA
-                movea.l ((WINDOW_LAYOUTS_END-$1000000)).w,a1
+                movea.l ((WINDOW_LAYOUTS_END_POINTER-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
-                beq.s   loc_4764
+                beq.s   @PlaneB
                 bsr.w   CopyPlaneALayoutForWindows
                 bsr.w   FixWindowsPositions
-loc_4764:
+@PlaneB:
                 
-                bclr    #1,((VIEW_PLANE_UPDATE_TRIGGERS-$1000000)).w
-                beq.s   return_4770
+                bclr    #1,((VIEW_PLANE_UPDATE_TOGGLE_BITFIELD-$1000000)).w
+                beq.s   @Return
                 bsr.w   UpdateVdpPlaneB
-return_4770:
+@Return:
                 
                 rts
 
@@ -56,18 +56,20 @@ return_4770:
 
 VInt_UpdateMapAnimations:
                 
+                module
                 move.l  ((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w,d0
-                ble.s   return_47C4
+                ble.s   @Return
                 subq.w  #1,((TILE_ANIMATION_COUNTER-$1000000)).w
-                bne.s   return_47C4
+                bne.s   @Return
                 
                 movea.l d0,a0
                 move.w  (a0)+,d1
                 bge.w   loc_47A2
+                
                 clr.w   d0
                 move.b  (TILE_ANIMATION_MAP_INDEX).l,d0
                 getPointer p_pt_MapData, a0
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 movea.l MAPDATA_OFFSET_ANIMATIONS(a0),a0
                 tst.l   (a0)+
@@ -83,12 +85,13 @@ loc_47A2:
                 adda.w  d1,a0
                 lsl.w   #5,d2
                 movea.w d2,a1
-                lsl.w   #4,d0
+                lsl.w   #NIBBLE_SHIFT_COUNT,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDma
-return_47C4:
+@Return:
                 
                 rts
 
     ; End of function VInt_UpdateMapAnimations
 
+                modend

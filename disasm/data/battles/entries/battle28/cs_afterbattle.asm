@@ -208,7 +208,7 @@ abcs_battle28:  textCursor 2670
                 followEntity 129,ALLY_BOWIE,2
                 followEntity FOLLOWER_B,129,1
                 followEntity ALLY_PETER,129,3
-                warp 255,16,30,RIGHT
+                warp MAP_CURRENT,16,30,RIGHT
                 csc_end
 ce_4C3B4:       mainEntity 12,28,DOWN
                 entity 12,31,UP,MAPSPRITE_POSE3,eas_Init

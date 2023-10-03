@@ -8,7 +8,7 @@
 @Loop1:         adda.w  d2,a0
                 
 FindSpecialPropertyBytesAddressForObject:
-                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
+                cmpi.b  #TERMINATOR_BYTE,(a0)
                 beq.s   @NotFound
                 cmp.b   (a0)+,d1
                 bne.s   @Loop1
@@ -18,7 +18,7 @@ FindSpecialPropertyBytesAddressForObject:
 @Loop2:         adda.w  d2,a0
                 
 FindSpecialPropertyWordsAddressForObject:
-                cmpi.w  #CODE_TERMINATOR_WORD,(a0)
+                cmpi.w  #TERMINATOR_WORD,(a0)
                 beq.s   @NotFound
                 cmp.w   (a0)+,d1
                 bne.s   @Loop2

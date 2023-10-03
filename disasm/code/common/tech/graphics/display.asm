@@ -10,11 +10,11 @@ sub_30EE:
                 movem.l a0-a5,-(sp)
                 movem.w d0-d5/d7,-(sp)
                 neg.w   d2
-                andi.w  #$FF,d2
+                andi.w  #BYTE_MASK,d2
                 lsr.w   #3,d2
                 add.w   d2,d2
                 subq.w  #8,d3
-                andi.w  #$FF,d3
+                andi.w  #BYTE_MASK,d3
                 lsr.w   #3,d3
                 add.w   d5,d3
                 add.w   d3,d3
@@ -22,23 +22,23 @@ sub_30EE:
                 andi.w  #$7FE,d3
                 adda.w  d3,a1
                 move.w  d2,d3
-                moveq   #$20,d7 
+                moveq   #32,d7
                 lsr.w   #3,d0
                 lsr.w   #3,d1
-                lea     MapOffsetHashTable(pc), a3
+                lea     table_MapOffsetHash(pc), a3
                 lea     (FF0000_RAM_START).l,a4
                 lea     (FF2000_LOADING_SPACE).l,a5
-loc_312C:
+@Loop:
                 
                 bsr.w   sub_364E
                 move.w  d2,(a1,d3.w)
                 addq.w  #2,d3
                 bclr    #6,d3
                 addq.w  #1,d0
-                dbf     d7,loc_312C
+                dbf     d7,@Loop
                 
                 movea.l a1,a0
-                moveq   #$20,d0 
+                moveq   #32,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDma
                 bsr.w   EnableDmaQueueProcessing
@@ -57,39 +57,39 @@ sub_3158:
                 movem.l a0-a5,-(sp)
                 movem.w d0-d5/d7,-(sp)
                 neg.w   d2
-                andi.w  #$FF,d2
+                andi.w  #BYTE_MASK,d2
                 lsr.w   #3,d2
                 add.w   d4,d2
                 add.w   d2,d2
                 andi.w  #$3E,d2 
                 adda.w  d2,a1
                 subq.w  #8,d3
-                andi.w  #$FF,d3
+                andi.w  #BYTE_MASK,d3
                 lsr.w   #3,d3
                 add.w   d3,d3
                 move.w  d3,d5
                 lsl.w   #5,d3
-                moveq   #$20,d7 
+                moveq   #32,d7
                 lsr.w   #3,d0
                 lsr.w   #3,d1
-                lea     MapOffsetHashTable(pc), a3
+                lea     table_MapOffsetHash(pc), a3
                 lea     (FF0000_RAM_START).l,a4
                 lea     (FF2000_LOADING_SPACE).l,a5
-loc_3196:
+@Loop:
                 
                 bsr.w   sub_364E
                 move.w  d2,(a1,d3.w)
-                addi.w  #$40,d3 
-                bclr    #$B,d3
+                addi.w  #64,d3
+                bclr    #11,d3
                 move.w  d2,(a2,d5.w)
                 addq.w  #2,d5
                 bclr    #6,d5
                 addq.w  #1,d1
-                dbf     d7,loc_3196
+                dbf     d7,@Loop
                 
                 movea.l a2,a0
-                moveq   #$20,d0 
-                moveq   #$40,d1 
+                moveq   #32,d0
+                moveq   #64,d1
                 bsr.w   ApplyVIntVramDma
                 bsr.w   EnableDmaQueueProcessing
                 movem.w (sp)+,d0-d5/d7
@@ -98,7 +98,7 @@ loc_3196:
 
     ; End of function sub_3158
 
-MapOffsetHashTable:
+table_MapOffsetHash:
                 incbin "data/maps/global/mapoffsethashtable.bin"
 
 ; =============== S U B R O U T I N E =======================================
@@ -152,18 +152,19 @@ loc_3690:
 ; =============== S U B R O U T I N E =======================================
 
 
-SetViewDest:
+SetViewDestination:
                 
                 movem.w d0-d7,-(sp)
             if (VANILLA_BUILD=1)
                 bra.w   loc_36BE
             endif
 
-    ; End of function SetViewDest
-
+    ; End of function SetViewDestination
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 sub_36B2:
@@ -185,13 +186,13 @@ loc_36BE:
                 lsl.w   #7,d6
                 lsl.w   #7,d7
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d0
-                lsr.l   #8,d0
+                lsr.l   #BYTE_SHIFT_COUNT,d0
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d1
-                lsr.l   #8,d1
+                lsr.l   #BYTE_SHIFT_COUNT,d1
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d2
-                lsr.l   #8,d2
+                lsr.l   #BYTE_SHIFT_COUNT,d2
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d3
-                lsr.l   #8,d3
+                lsr.l   #BYTE_SHIFT_COUNT,d3
                 add.w   d4,d0
                 add.w   d5,d1
                 add.w   d6,d2
@@ -242,3 +243,4 @@ loc_3736:
                 rts
 
     ; End of function sub_36B2
+

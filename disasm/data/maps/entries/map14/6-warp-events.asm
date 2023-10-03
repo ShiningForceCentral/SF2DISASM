@@ -8,47 +8,47 @@
                   warpFacing UP
                 mWarp 12, 11
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   44, 8
                   warpFacing UP
                 mWarp 13, 11
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   45, 8
                   warpFacing UP
                 mWarp 14, 11
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   46, 8
                   warpFacing UP
                 mWarp 44, 9
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   12, 12
                   warpFacing DOWN
                 mWarp 45, 9
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   13, 12
                   warpFacing DOWN
                 mWarp 46, 9
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   14, 12
                   warpFacing DOWN
                 mWarp 12, 32
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   44, 35
                   warpFacing UP
                 mWarp 13, 32
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   45, 35
                   warpFacing UP
                 mWarp 14, 32
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   46, 35
                   warpFacing UP
                 mWarp 44, 36

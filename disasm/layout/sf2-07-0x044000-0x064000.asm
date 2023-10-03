@@ -45,6 +45,7 @@
                 include "code\common\scripting\map\ms_empty.asm"    ; Empty mapscript
                 include "code\gameflow\battle\beforebattlecutscenesstart.asm"    ; Before battle cutscenes function start
                 include "data\battles\beforebattlecutscenes.asm"    ; Before battle cutscenes
+                includeIfStandard "code\common\scripting\map\bbcs_11_function.asm"
                 include "code\gameflow\battle\beforebattlecutscenesend.asm"    ; Before battle cutscenes function end
                 include "code\gameflow\battle\battlestartcutscenesstart.asm"    ; Battle start cutscenes function start
                 include "data\battles\battlestartcutscenes.asm"    ; Battle start cutscenes
@@ -72,7 +73,6 @@
                 include "data\scripting\map\cs_end.asm"    ; End cutscene
                 include "data\scripting\map\debugscripts.asm"    ; Debugging scripts
                 include "data\battles\entries\battlecutscenesstorage.asm"
-                includeIfStandard "code\common\scripting\map\bbcs_11_function.asm"
                 include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
                 include "data\maps\mapsetups.asm"    ; Map setups table
                 include "data\maps\mapsetupsstorage.asm"

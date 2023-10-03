@@ -10,7 +10,7 @@
 
 combatant = -2
 
-HandleAfterTurnEffects:
+ProcessAfterTurnEffects:
                 
             if (STANDARD_BUILD=1)
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
@@ -108,7 +108,7 @@ HandleAfterTurnEffects:
                 andi.w  #STATUSEFFECT_SILENCE,d7
                 bne.s   @Silenced       
                 move.w  #SPELL_DISPEL,((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  d0,((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     351             ; "{CLEAR}{SPELL} expired.{N}{NAME} is no longer{N}silenced.{D3}"
                 clr.w   d1
                 bra.s   @UpdateSilence
@@ -177,7 +177,7 @@ HandleAfterTurnEffects:
                 ble.s   @ApplyMysteryStaffRecovery
                 ext.l   d1
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     356             ; "{CLEAR}{NAME} recovered{N}{#} hit points.{D3}"
 @ApplyMysteryStaffRecovery:
                 
@@ -192,7 +192,7 @@ HandleAfterTurnEffects:
                 ble.s   @ApplyLifeRingRecovery
                 ext.l   d1
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     357             ; "{CLEAR}{NAME} recovered{N}{#} magic points.{D3}"
 @ApplyLifeRingRecovery:
                 
@@ -207,7 +207,7 @@ HandleAfterTurnEffects:
                 ble.s   @ApplyPoisonDamage
                 ext.l   d1
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     356             ; "{CLEAR}{NAME} recovered{N}{#} hit points.{D3}"
 @ApplyPoisonDamage:
                 
@@ -216,7 +216,7 @@ HandleAfterTurnEffects:
                 beq.s   @UpdateStats
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 moveq   #POISON_DAMAGE,d1 ; constant poison damage
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     307             ; "{CLEAR}{NAME} gets damaged{N}by {#} because of the poison.{D3}"
                 jsr     j_DecreaseCurrentHp
                 tst.w   d1
@@ -233,5 +233,5 @@ HandleAfterTurnEffects:
                 unlk    a6
                 rts
 
-    ; End of function HandleAfterTurnEffects
+    ; End of function ProcessAfterTurnEffects
 

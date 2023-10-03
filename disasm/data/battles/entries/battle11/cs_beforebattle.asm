@@ -7,7 +7,7 @@ bbcs_11:        textCursor 2483
                 loadMapEntities ce_4ACA0
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setCameraEntity ALLY_BOWIE
-                executeSubroutine sub_458E
+                executeSubroutine csub_458E
                 fadeInB
                 playSound $FD
                 entityActionsWait ALLY_PETER

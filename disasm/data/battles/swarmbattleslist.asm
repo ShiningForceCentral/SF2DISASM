@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\swarmbattleslist.asm :
 ; 0xE25B..0xE25F : List of battles implementing swarm AI
-tbl_SwarmBattlesList:
+table_SwarmBattlesList:
                 
 ; List of battles prefixed with length.
 ;

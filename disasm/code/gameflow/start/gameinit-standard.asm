@@ -43,7 +43,7 @@ InitializeGame:
             elseif (EASY_DEBUG_MODE=1)
                 ; flow into debug mode
             else
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @DebugModeMapTest
                 
                 jsr     (EnableDisplayAndInterrupts).w
@@ -52,10 +52,10 @@ InitializeGame:
             endif
 @DebugModeMapTest:
                 
-                btst    #INPUT_BIT_UP,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_UP,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   DebugModeBattleTest
                 
-                btst    #INPUT_BIT_DOWN,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_DOWN,((PLAYER_1_INPUT-$1000000)).w
                 beq.w   GameIntro
                 
                 jsr     (EnableDisplayAndInterrupts).w
@@ -72,7 +72,7 @@ StartMapTest:
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 moveq   #0,d0
                 moveq   #0,d1
-                moveq   #MAPS_MAX_DEBUG_INDEX,d2 
+                moveq   #MAPS_DEBUG_MAX_INDEX,d2 
                 jsr     NumberPrompt
             if (TEST_BUILD=1)
                 bpl.s   @ContinueMapTest
@@ -80,7 +80,7 @@ StartMapTest:
 @ContinueMapTest:
             endif
                 clr.w   d1
-                jsr     (GetSavePointForMap).w
+                jsr     (GetSavepointForMap).w
                 moveq   #0,d4
                 
                 movem.w d0-d4,-(sp)

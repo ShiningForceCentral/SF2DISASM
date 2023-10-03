@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\items\mithrilweapons.asm :
 ; 0x21F62..0x21FD2 : Mithril weapons data
-tbl_MithrilWeaponClasses:
+list_MithrilWeaponClasses:
                 
 ; Syntax        mithrilWeaponClass [CLASS_]enum,..[CLASS_]enum
                 
@@ -14,7 +14,7 @@ tbl_MithrilWeaponClasses:
                 classes NINJ
                 classes MMNK
                 classes BRN, RDBN
-tbl_MithrilWeapons:
+table_MithrilWeapons:
                 
 ; Syntax        mithrilWeapons parameter, [ITEM_]enum, &
 ;                              parameter, [ITEM_]enum, &

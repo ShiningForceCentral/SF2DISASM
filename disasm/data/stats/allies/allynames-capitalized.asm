@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\allynames-capitalized.asm :
 ; Capitalized ally names : Included when patch CAPITALIZED_CHARACTER_NAMES is enabled.
-tbl_AllyNames:  allyName "Bowie"
+table_AllyNames:  allyName "Bowie"
                 allyName "Sarah"
                 allyName "Chester"
                 allyName "Jaha"

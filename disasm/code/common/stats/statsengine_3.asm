@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\stats\statsengine_3.asm :
-; 0x9736..0x9A3C : Character stats engine
+; 0x9736..0x9A3C : Character stats engine, part 3
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -46,7 +46,7 @@ InitializeAllyCombatantEntry:
                 mulu.w  #COMBATANT_ENTRY_REAL_SIZE,d1
                 loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d1,a1
-                getPointer p_tbl_AllyNames, a0
+                getPointer p_table_AllyNames, a0
                 move.w  d0,d1
                 subq.w  #1,d1
                 blt.s   @GetNameCounter
@@ -79,7 +79,7 @@ InitializeAllyCombatantEntry:
                 
                 move.w  d0,d1
                 mulu.w  #ALLYSTARTDEF_ENTRY_SIZE,d1
-                getPointer p_tbl_AllyStartDefs, a0
+                getPointer p_table_AllyStartDefinitions, a0
                 adda.w  d1,a0
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 suba.w  #ALLYNAME_MAX_LENGTH*2,a1
@@ -122,8 +122,8 @@ InitializeAllyCombatantEntry:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = ally index
-;     D1 = class index
+; In: d0.w = ally index
+;     d1.w = class index
 
 
 LoadAllyClassData:
@@ -132,7 +132,7 @@ LoadAllyClassData:
                 mulu.w  #COMBATANT_ENTRY_REAL_SIZE,d0
                 loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d0,a1
-                getPointer p_tbl_ClassDefs, a0
+                getPointer p_table_ClassDefinitions, a0
                 andi.w  #CLASS_MASK_INDEX,d1
                 mulu.w  #CLASSDEF_ENTRY_SIZE,d1
                 adda.w  d1,a0
@@ -201,7 +201,7 @@ InitializeGameSettings:
                 move.b  d0,SAVED_DATA_OFFSET_PLAYER_TYPE(a0)
                 move.b  d0,SAVED_DATA_OFFSET_CURRENT_MAP(a0)
                 move.b  d0,SAVED_DATA_OFFSET_CURRENT_BATTLE(a0)
-                move.b  d0,SAVED_DATA_OFFSET_DISPLAY_BATTLE_MESSAGES(a0)
+                move.b  d0,SAVED_DATA_OFFSET_NO_BATTLE_MESSAGES_TOGGLE(a0)
                 move.b  d0,SAVED_DATA_OFFSET_EGRESS_MAP(a0)
                 move.l  #359999,d0
                 movep.l d0,SAVED_DATA_OFFSET_SPECIAL_BATTLE_RECORD(a0)
@@ -209,16 +209,16 @@ InitializeGameSettings:
             else
                 move.w  d0,((CARAVAN_ITEMS_NUMBER-$1000000)).w ; number of items in caravan
                 move.w  d0,((CURRENT_GOLD-$1000000)).w
-                move.b  d0,((PLAYER_TYPE-$1000000)).w ; holds which player entity type we are (00=BOWIE, 01=caravan, 02=raft)
-                move.b  d0,((CURRENT_MAP-$1000000)).w ; holds which map index we're currently using
-                move.b  d0,((CURRENT_BATTLE-$1000000)).w ; holds which battle we're currently doing
-                move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
-                move.b  d0,((EGRESS_MAP-$1000000)).w ; holds which map index to teleport back to after we EGRESS or lose
+                move.b  d0,((PLAYER_TYPE-$1000000)).w
+                move.b  d0,((CURRENT_MAP-$1000000)).w
+                move.b  d0,((CURRENT_BATTLE-$1000000)).w
+                move.b  d0,((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w
+                move.b  d0,((EGRESS_MAP-$1000000)).w
                 move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 move.b  #2,((MESSAGE_SPEED-$1000000)).w
             endif
-                move.l  #$FFFFFFFF,((EXPLORATION_ENTITIES-$1000000)).w
-                move.w  #$FFFF,((byte_FFAF26-$1000000)).w
+                move.l  #-1,((EXPLORATION_ENTITIES-$1000000)).w
+                move.w  #-1,((byte_FFAF26-$1000000)).w
                 movem.l (sp)+,d0/d7-a0
                 rts
 
@@ -373,7 +373,7 @@ LeaveForce:
                 
                 move.l  d1,-(sp)
                 move.b  d0,d1
-                andi.b  #$FF,d1
+                andi.b  #BYTE_MASK,d1
                 addi.w  #FORCEMEMBER_JOINED_FLAGS_START,d1
                 bsr.w   ClearFlag
                 move.w  #MAP_NULLPOSITION,d1
@@ -393,7 +393,7 @@ IsInBattleParty:
                 
                 movem.l d1,-(sp)
                 move.b  d0,d1
-                andi.b  #$FF,d1
+                andi.b  #BYTE_MASK,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.w   CheckFlag
                 movem.l (sp)+,d1
@@ -411,7 +411,7 @@ JoinBattleParty:
                 
                 move.l  d1,-(sp)
                 move.b  d0,d1
-                andi.b  #$FF,d1
+                andi.b  #BYTE_MASK,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.w   SetFlag
                 move.l  (sp)+,d1
@@ -429,10 +429,10 @@ LeaveBattleParty:
                 
                 move.l  d1,-(sp)
                 move.b  d0,d1
-                andi.b  #$FF,d1
+                andi.b  #BYTE_MASK,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.w   ClearFlag
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 jsr     SetCombatantX
                 move.l  (sp)+,d1
                 rts

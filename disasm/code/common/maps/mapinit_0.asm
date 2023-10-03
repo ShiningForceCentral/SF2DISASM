@@ -4,14 +4,12 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Alter map index if certain flags are set (Granseal, Pacalon, etc)
+; Alter map index if certain flags are set (Granseal, Pacalon, etc.)
 ; 
-;       In: D0 = map index
-; 
-;       Out: D0 = new map index
+; In: d0.w = original map index, Out: d0.w = new map index
 
 
-CheckMapSwitch:
+SwitchMap:
                 
                 movem.l d1-d2/a0,-(sp)
             if (STANDARD_BUILD=1)
@@ -19,25 +17,25 @@ CheckMapSwitch:
             else
                 lea     table_FlagSwitchedMaps(pc), a0
             endif
-loc_795E:
+@Loop:
                 
                 move.w  (a0),d2
-                bmi.w   loc_7982
+                bmi.w   @Done
                 cmp.w   d0,d2
-                bne.w   loc_797E
+                bne.w   @Next
                 move.w  2(a0),d1
                 jsr     j_CheckFlag
-                beq.s   loc_797E
+                beq.s   @Next
                 move.w  4(a0),d0
-                bra.w   loc_7982
-loc_797E:
+                bra.w   @Done
+@Next:
                 
                 addq.l  #6,a0
-                bra.s   loc_795E
-loc_7982:
+                bra.s   @Loop
+@Done:
                 
                 movem.l (sp)+,d1-d2/a0
                 rts
 
-    ; End of function CheckMapSwitch
+    ; End of function SwitchMap
 

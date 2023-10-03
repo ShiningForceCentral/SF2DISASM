@@ -13,6 +13,7 @@
                 includeIfStandard "code\specialscreens\title\loadfont.asm"    ; Title screen font loading function
                 includeIfStandard "code\common\tech\incbins\s06_incbins_titlescreen.asm"    ; Game Section 06 Incbin Directives, part 2
                 include "code\specialscreens\title\graphics.asm"    ; Title Screen Graphics
+                include "data\graphics\specialscreens\titlescreen\titlescreenlayouts.asm"    ; Title Screen Layouts
                 includeIfStandard "code\specialscreens\witch\witchstart-standard.asm"    ; Start witch screen
                 includeIfStandard "code\gameflow\special\configurationmode.asm"    ; Configuration mode function
                 includeIfStandard "code\specialscreens\witch\soundtest-standard.asm"    ; Restored sound test

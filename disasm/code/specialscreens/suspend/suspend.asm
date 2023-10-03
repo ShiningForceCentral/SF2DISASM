@@ -9,17 +9,17 @@ SuspendGame:
                 
                 moveq   #60,d0
                 jsr     (Sleep).w       
-                getPointer p_SuspendStringTiles, a0
+                getPointer p_tiles_SuspendString, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 movea.l (sp)+,a0
                 lea     ($8000).l,a1
                 move.w  #$400,d0
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
                 jsr     (WaitForDmaQueueProcessing).w
-                getPointer p_plt_SuspendString, a0
+                getPointer p_palette_SuspendString, a0
                 lea     (PALLETE_2_BASE).l,a1
                 moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   

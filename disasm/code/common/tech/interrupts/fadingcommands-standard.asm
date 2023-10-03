@@ -124,7 +124,7 @@ WaitForDmaQueueProcessing:
                 pea     WaitForVInt(pc)
 EnableDmaQueueProcessing:
                 
-                bset    #DMA_REQUEST,(VINT_PARAMS).l
+                bset    #DMA_REQUEST,(VINT_PARAMETERS).l
                 rts
 
     ; End of function EnableDmaQueueProcessing

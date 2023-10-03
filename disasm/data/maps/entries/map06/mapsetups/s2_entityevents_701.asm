@@ -36,7 +36,7 @@ byte_549D0:
                 cmpi.b  #1,((byte_FFB651-$1000000)).w
                 bne.s   byte_549EC      
                 move.b  #SHOP_ITEM_NEW_GRANSEAL_0,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 bra.s   loc_549F0
 byte_549EC:
                 
@@ -49,7 +49,7 @@ loc_549F2:
                 cmpi.b  #1,((byte_FFB651-$1000000)).w
                 bne.s   byte_54A08      
                 move.b  #SHOP_ITEM_NEW_GRANSEAL_1,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 bra.s   return_54A0C
 byte_54A08:
                 
@@ -192,7 +192,7 @@ loc_54ABA:
                 
                 cmpi.b  #1,((byte_FFB651-$1000000)).w
                 bne.s   byte_54ACA      
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 bra.s   loc_54ACE
 byte_54ACA:
                 
@@ -202,7 +202,7 @@ loc_54ACE:
                 bra.s   return_54AD6
 loc_54AD0:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
 return_54AD6:
                 
                 rts
@@ -236,7 +236,7 @@ byte_54AF4:
                 cmpi.b  #1,((byte_FFB651-$1000000)).w
                 bne.s   byte_54B10      
                 move.b  #SHOP_WEAPON_NEW_GRANSEAL_0,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 bra.s   loc_54B18
 byte_54B10:
                 
@@ -250,7 +250,7 @@ loc_54B1A:
                 cmpi.b  #1,((byte_FFB651-$1000000)).w
                 bne.s   byte_54B30      
                 move.b  #SHOP_WEAPON_NEW_GRANSEAL_1,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                jsr     j_ShopMenu
                 bra.s   return_54B34
 byte_54B30:
                 

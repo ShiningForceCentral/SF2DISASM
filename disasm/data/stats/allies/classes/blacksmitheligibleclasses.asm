@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\classes\blacksmitheligibleclasses.asm :
 ; 0x21EB6..0x21ED6 : Blacksmith eligible classes list
-tbl_BlacksmithEligibleClasses:
+list_BlacksmithEligibleClasses:
                 
 ; List of word-sized class indexes, prefixed with length.
 ;

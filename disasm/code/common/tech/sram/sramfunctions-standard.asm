@@ -57,7 +57,7 @@ CheckSram:      movem.l d7-a1,-(sp)
                 moveq   #1,d1
                 bra.s   @Slot1
                 
-@ClearSlot2:    moveq   #$FFFFFFFF,d1
+@ClearSlot2:    moveq   #-1,d1
                 bclr    #1,(SAVE_FLAGS).l
                 
 @Slot1:         btst    #0,(SAVE_FLAGS).l
@@ -72,7 +72,7 @@ CheckSram:      movem.l d7-a1,-(sp)
                 moveq   #1,d0
                 bra.s   @Done
                 
-@ClearSlot1:    moveq   #$FFFFFFFF,d0
+@ClearSlot1:    moveq   #-1,d0
                 bclr    #0,(SAVE_FLAGS).l
                 bra.s   @Done
                 
@@ -274,7 +274,7 @@ ClearSaveSlotFlag:
 ; Clear active saved data slot during system initialization if RELOCATED_SAVED_DATA_TO_SRAM is enabled.
 
 
-InitSavedData:
+InitializeSavedData:
                 
             if (RELOCATED_SAVED_DATA_TO_SRAM=1)
                 lea     (combatantEntries).l,a0
