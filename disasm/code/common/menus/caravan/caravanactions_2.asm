@@ -9,7 +9,7 @@ PopulateGenericListWithMembersList:
                 
                 movem.l d7-a1,-(sp)
                 jsr     j_UpdateForce
-                tst.w   d1
+                tst.w   d1              ; all members
                 bne.s   @CheckMemberGroup
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7

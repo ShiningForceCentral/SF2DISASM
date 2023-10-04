@@ -2051,7 +2051,7 @@ LoadItemIconsAndPriceTagTiles:
                 
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  ((CURRENT_SHOP_PAGE-$1000000)).w,d0
-                move.w  d0,d1
+                move.w  d0,d1           ; multiply page by 6
                 add.w   d0,d0
                 add.w   d1,d0
                 add.w   d0,d0

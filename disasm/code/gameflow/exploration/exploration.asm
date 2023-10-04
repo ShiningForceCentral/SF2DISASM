@@ -1328,7 +1328,7 @@ GetItem:
                 ; Currently in battle
                 movem.l a0,-(sp)
                 lea     (table_BattleMapCoordinates).w,a0
-                mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE,d2 ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
+                mulu.w  #BATTLEMAPCOORDINATES_ENTRY_SIZE,d2 ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
                 add.b   1(a0,d2.w),d0
                 add.b   2(a0,d2.w),d1   ; add x1 and y1 of battle camera bounds
                 movem.l (sp)+,a0

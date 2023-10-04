@@ -21,7 +21,7 @@ loc_47C62:
                 beq.s   loc_47C82
                 move.w  (DEAD_COMBATANTS_LIST_LENGTH).l,d1
                 move.b  d0,(a0,d1.w)
-                move.b  #$FF,1(a0,d1.w)
+                move.b  #-1,1(a0,d1.w)
                 addq.w  #1,(DEAD_COMBATANTS_LIST_LENGTH).l
 loc_47C82:
                 

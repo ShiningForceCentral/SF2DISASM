@@ -49,15 +49,15 @@ byte_7620:
                 ; No match
                 chkFlg  64              ; Raft is unlocked
                 beq.s   @Done
-                lea table_RaftResetMapCoordinates-4(pc),a0 ; Some egress locations imply to put the raft back in an initial place
+                lea     table_RaftResetMapCoordinates-4(pc),a0 ; Some egress locations imply to put the raft back in an initial place
 @FindRaftEntry_Loop:
                 
                 addq.l  #4,a0
                 cmpi.b  #MAP_CURRENT,(a0)
-                beq.w   @RaftEntryNotFound
+                beq.w   @RaftEntry
                 cmp.b   (a0),d0         ; If found egress map matches entry map, then move raft back to given location
                 bne.s   @FindRaftEntry_Loop
-@RaftEntryNotFound:
+@RaftEntry:
                 
                 move.b  1(a0),((RAFT_MAP-$1000000)).w
                 move.b  2(a0),((RAFT_X-$1000000)).w

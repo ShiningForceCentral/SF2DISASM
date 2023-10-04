@@ -94,7 +94,7 @@ StartTitleScreen:
                 dbf     d6,@InnerLoop
                 dbf     d7,@OuterLoop
                 
-                lea     palettes_TitleScreen(pc), a0
+                lea     palette_TitleScreen(pc), a0
                 lea     (PALETTE_1_BASE).l,a1
                 move.w  #128,d7
                 jsr     (CopyBytes).w   

@@ -267,7 +267,7 @@ spellEffect_Slow:
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B350       ; @@Reaction_Enemy
+                bne.s   byte_B350       ; @Reaction_Enemy
                 executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @GiveEXP
 byte_B350:

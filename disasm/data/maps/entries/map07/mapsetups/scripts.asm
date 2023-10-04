@@ -325,7 +325,7 @@ csub_55EF4:
                 
                 lea     (PALETTE_1_CURRENT).l,a0
                 lea     (PALETTE_1_BASE).l,a1
-                lea     plt_55F6A(pc), a2
+                lea     palette_55F6A(pc), a2
                 moveq   #$3F,d0 
 loc_55F06:
                 
@@ -371,7 +371,7 @@ loc_55F34:
 
     ; End of function csub_55EF4
 
-plt_55F6A:      dc.w $E0C
+palette_55F6A:  dc.w $E0C
                 dc.w $A08
                 dc.w $806
                 dc.w $402

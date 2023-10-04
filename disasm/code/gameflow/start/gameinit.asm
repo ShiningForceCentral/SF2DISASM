@@ -47,7 +47,7 @@ InitializeGame:
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 moveq   #0,d0
                 moveq   #0,d1
-                moveq   #56,d2
+                moveq   #MAPS_DEBUG_MAX_INDEX,d2
                 jsr     j_NumberPrompt
                 clr.w   d1
                 move.b  table_DebugModeAvailableMaps(pc,d0.w),d0

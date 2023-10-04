@@ -123,7 +123,7 @@ flagSwitchedMapsEnd: macro
     dc.w $FFFF
     endm
     
-battleMapCoords: macro
+battleMapCoordinates: macro
     dc.b \1
     dc.b \2
     dc.b \3
@@ -133,14 +133,14 @@ battleMapCoords: macro
     dc.b \7
     endm
     
-savePointMapCoords: macro
+savePointMapCoordinates: macro
     dc.b \1
     dc.b \2
     dc.b \3
     dc.b \4
     endm
     
-raftResetMapCoords: macro
+raftResetMapCoordinates: macro
     dc.b \1
     dc.b \2
     dc.b \3

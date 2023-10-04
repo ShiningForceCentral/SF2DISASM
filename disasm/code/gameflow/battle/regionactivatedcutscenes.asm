@@ -10,7 +10,7 @@
 ExecuteBattleRegionCutscene:
                 
                 movem.l d0-d1/a0,-(sp)
-                lea     loc_47EC0(pc), a0
+                lea     table_BattleRegionCutscenes-8(pc), a0
 loc_47E8A:
                 
                 addq.w  #8,a0

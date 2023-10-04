@@ -2442,7 +2442,7 @@ GetCombatantEntryAddress:
                 bra.s   @GetAddress
 @Enemy:
                 
-                cmpi.b  #160,d0
+                cmpi.b  #COMBATANT_ENEMIES_SPACEEND,d0
                 bhi.s   @ErrorHandling
                 subi.b  #COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END,d0
 @GetAddress:
@@ -2582,7 +2582,7 @@ IncreaseAndClampByte:
                 
                 cmp.b   d5,d1
                 bcc.s   @Done
-                move.b  d5,d1
+                move.b  d5,d1           ; if below min, set to min
 @Done:
                 
                 move.b  d1,(a0,d7.w)
@@ -2650,7 +2650,7 @@ DecreaseAndClampByte:
                 
                 cmp.b   d6,d1
                 bcs.s   @Continue
-                move.b  d6,d1
+                move.b  d6,d1           ; if above max, set to max
 @Continue:
                 
                 move.b  d1,(a0,d7.w)

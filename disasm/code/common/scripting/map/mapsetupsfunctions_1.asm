@@ -98,7 +98,7 @@ RunMapSetupItemEvent:
                 cmpi.w  #-1,(a0)
                 beq.w   loc_4760A
                 
-                movea.l MAPSETUP_OFFSET_SECTION_5(a0),a0
+                movea.l MAPSETUP_OFFSET_ITEM_EVENTS(a0),a0
                 clr.w   d7
 loc_475AA:
                 

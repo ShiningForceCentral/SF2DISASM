@@ -133,7 +133,7 @@ byte_77DE:
                 movem.w (sp)+,d0-d4
                 clr.w   d1
                 move.b  d0,d1
-                mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
+                mulu.w  #BATTLEMAPCOORDINATES_ENTRY_SIZE_FULL,d0
                 lea     table_BattleMapCoordinates(pc), a0
                 nop
                 adda.w  d0,a0
@@ -147,7 +147,7 @@ byte_77DE:
                 txt     460             ; "Shop number?{D1}"
                 move.w  #0,d0
                 move.w  #0,d1
-                move.w  #100,d2
+                move.w  #SHOPS_DEBUG_MAX_INDEX,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w

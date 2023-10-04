@@ -750,7 +750,8 @@ EQUIPEFFECTS_MAX_INDEX: equ $11
 
 ; enum ShopProperties
 ITEMS_PER_SHOP_PAGE: equ $6
-DEBUG_SHOP_INDEX: equ $1E
+SHOPS_NUMBER: equ $1F
+SHOPS_DEBUG_MAX_INDEX: equ $64
 
 ; ---------------------------------------------------------------------------
 
@@ -787,6 +788,7 @@ SHOP_DWARVEN_VILLAGE: equ $1C
 SHOP_ITEM_ROFT: equ $1C
 SHOP_ITEM_GALAM_1: equ $1D
 SHOP_YEEL_UNDERGROUND: equ $1D
+SHOP_DEBUG: equ $1E
 
 ; ---------------------------------------------------------------------------
 
@@ -1477,7 +1479,8 @@ KIWI_FLAME_BREATH_UPGRADE_LEVEL3: equ $32
 ; ---------------------------------------------------------------------------
 
 ; enum MapProperties
-MAPS_DEBUG_NUMBER: equ $38
+MAPS_DEBUG_MAX_INDEX: equ $38
+MAPS_MAX_INDEX: equ $4E
 MAPS_NUMBER: equ $4F
 MINIMAP_TILE_SIZE: equ $60
 MAP_TILE_SIZE: equ $180
@@ -1571,7 +1574,7 @@ MAP_CURRENT: equ $FF
 ; ---------------------------------------------------------------------------
 
 ; enum BattleProperties
-BATTLE_MAX_INDEX: equ $2C
+BATTLES_MAX_INDEX: equ $2C
 BATTLES_NUMBER: equ $2D
 BATTLES_DEBUG_NUMBER: equ $31
 
@@ -1736,7 +1739,7 @@ MAPSETUP_OFFSET_ENTITIES: equ $0
 MAPSETUP_OFFSET_ENTITY_EVENTS: equ $4
 MAPSETUP_OFFSET_ZONE_EVENTS: equ $8
 MAPSETUP_OFFSET_AREA_DESCRIPTIONS: equ $C
-MAPSETUP_OFFSET_SECTION_5: equ $10
+MAPSETUP_OFFSET_ITEM_EVENTS: equ $10
 MAPSETUP_OFFSET_INIT_FUNCTION: equ $14
 
 ; ---------------------------------------------------------------------------
@@ -1790,6 +1793,7 @@ PROMOTIONSECTION_SPECIAL_ITEM: equ $4
 ; ---------------------------------------------------------------------------
 
 ; enum MessageProperties
+MESSAGES_MAX_INDEX: equ $10AA
 MESSAGES_NUMBER: equ $10AB
 
 ; ---------------------------------------------------------------------------
@@ -3237,20 +3241,20 @@ LIFE_RING_HP_RECOVERY: equ $5
 
 ; ---------------------------------------------------------------------------
 
-; enum BattleMapCoordsProperties
-BATTLEMAPCOORDS_ENTRY_SIZE: equ $5
-BATTLEMAPCOORDS_ENTRY_SIZE_FULL: equ $7
+; enum BattleMapCoordinatesProperties
+BATTLEMAPCOORDINATES_ENTRY_SIZE: equ $5
+BATTLEMAPCOORDINATES_ENTRY_SIZE_FULL: equ $7
 
 ; ---------------------------------------------------------------------------
 
-; enum BattleMapCoordsOffsets
-BATTLEMAPCOORDS_OFFSET_MAP: equ $0
-BATTLEMAPCOORDS_OFFSET_X: equ $1
-BATTLEMAPCOORDS_OFFSET_Y: equ $2
-BATTLEMAPCOORDS_OFFSET_WIDTH: equ $3
-BATTLEMAPCOORDS_OFFSET_HEIGHT: equ $4
-BATTLEMAPCOORDS_OFFSET_TRIGGER_X: equ $5
-BATTLEMAPCOORDS_OFFSET_TRIGGER_Y: equ $6
+; enum BattleMapCoordinatesOffsets
+BATTLEMAPCOORDINATES_OFFSET_MAP: equ $0
+BATTLEMAPCOORDINATES_OFFSET_X: equ $1
+BATTLEMAPCOORDINATES_OFFSET_Y: equ $2
+BATTLEMAPCOORDINATES_OFFSET_WIDTH: equ $3
+BATTLEMAPCOORDINATES_OFFSET_HEIGHT: equ $4
+BATTLEMAPCOORDINATES_OFFSET_TRIGGER_X: equ $5
+BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y: equ $6
 
 ; ---------------------------------------------------------------------------
 

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\scripting\text\unused_textfunctionsdata.asm :
-; 0x6D74..0x6E94 : Text functions
+; 0x6D74..0x6E94 : Unused text functions data
                 dc.b 0                  ; unused data
                 dc.b $EE
                 dc.b $EE

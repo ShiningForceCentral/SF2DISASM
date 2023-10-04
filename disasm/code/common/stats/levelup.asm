@@ -245,6 +245,7 @@ InitializeAllyStats:
                 blt.s   @FindLearnableSpell_Loop
                 
                 ; Increase base double attack setting when learning Heal 3
+                ; to give Karna extra double attack as PRST
                 cmpi.b  #SPELL_HEAL|SPELL_LV3,d1
                 bne.s   @LearnSpell
                 bsr.w   GetBaseProwess

@@ -36,7 +36,7 @@ loc_440E2:
                 mulu.w  #MAP_TILE_SIZE,d2
                 bsr.w   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
-                lea     $20(a1),a2
+                lea     NEXT_ENTITYDEF(a1),a2
                 lea     ((EXPLORATION_ENTITIES-$1000000)).w,a3
                 movem.w d1-d3,-(sp)
                 moveq   #1,d0
@@ -60,7 +60,7 @@ loc_44104:
                 move.b  d0,(a2)+
                 move.l  (a0)+,d5
                 clr.l   d6
-                move.w  #$20,d6 
+                move.w  #ENTITY_ENEMY_START,d6
                 bsr.w   DeclareNewEntity
                 movem.w (sp)+,d0
                 bra.s   loc_44104

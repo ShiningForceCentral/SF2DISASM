@@ -57,7 +57,7 @@
                 include "code\common\scripting\entity\unused_entityscriptfunction.asm"    ; Unused entity script function
                 include "code\common\scripting\entity\entityscriptengine_2.asm"    ; Entity script engine, part 2
                 include "code\common\scripting\text\textfunctions.asm"    ; Text functions
-                include "code\common\scripting\text\unused_textfunctionsdata.asm"    ; Text functions
+                include "code\common\scripting\text\unused_textfunctionsdata.asm"    ; Unused text functions data
                 include "code\common\tech\sram\sramfunctions.asm"    ; SRAM functions
                 include "code\specialscreens\suspend\witchsuspend.asm"    ; Witch suspend function
                 include "code\specialscreens\witchend\witchendinit.asm"    ; Witch end function
