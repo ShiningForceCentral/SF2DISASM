@@ -7,7 +7,7 @@
 ; Get battlescene weaponsprite and palette indexes for equipped weapon.
 ; 
 ; In: d0.w = combatant index
-; Out: d2.w = weaponsprite index, d3.w = palette index
+; Out: d2.w = weaponsprite index, d3.w = palette index (-1 if skipped)
 
 
 GetWeaponspriteAndPalette:
@@ -21,7 +21,8 @@ GetWeaponspriteAndPalette:
                 bcs.w   @Skip
                 cmpi.w  #ITEMINDEX_WEAPONS_END,d1 ; HARDCODED end index for weapon items with battlescene graphics
                 bhi.w   @Skip
-                lea     tbl_WeaponGraphics(pc), a0
+                
+                lea     table_WeaponGraphics(pc), a0
                 subi.w  #ITEMINDEX_WEAPONS_START,d1 ; Same here : HARDCODED start index for weapon items with battlescene graphics
                 add.w   d1,d1
                 move.b  (a0,d1.w),d2
@@ -32,7 +33,7 @@ GetWeaponspriteAndPalette:
                 rts
 @Skip:
                 
-                move.w  #$FFFF,d2
+                move.w  #-1,d2
                 move.w  d2,d3
 @Done:
                 

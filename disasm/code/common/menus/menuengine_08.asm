@@ -13,16 +13,16 @@ ally = -20
 alphabetWindowSlot = -18
 entryWindowSlot = -16
 portraitWindowSlot = -14
-alphabetWindowTilesEnd = -12
-entryWindowTilesEnd = -8
-portraitWindowTilesEnd = -4
+alphabetWindowLayoutEndAddress = -12
+entryWindowLayoutEndAddress = -8
+portraitWindowLayoutEndAddress = -4
 
 NameAlly:
                 
                 movem.l d0-a2,-(sp)
                 link    a6,#-32
                 move.w  d0,ally(a6)
-                lea     AlphabetHighlightTiles(pc), a0
+                lea     tiles_AlphabetHighlight(pc), a0
                 lea     ($B800).l,a1
                 move.w  #$C0,d0 
                 moveq   #2,d1
@@ -32,19 +32,19 @@ NameAlly:
                 move.w  #WINDOW_NAMEALLY_ALPHABET_DEST,d1
                 jsr     (CreateWindow).w
                 move.w  d0,alphabetWindowSlot(a6)
-                move.l  a1,alphabetWindowTilesEnd(a6)
+                move.l  a1,alphabetWindowLayoutEndAddress(a6)
                 move.w  #WINDOW_NAMEALLY_ENTRY_SIZE,d0
                 move.w  #WINDOW_NAMEALLY_ENTRY_DEST,d1
                 jsr     (CreateWindow).w
                 move.w  d0,entryWindowSlot(a6)
-                move.l  a1,entryWindowTilesEnd(a6)
+                move.l  a1,entryWindowLayoutEndAddress(a6)
                 move.w  #WINDOW_NAMEALLY_PORTRAIT_SIZE,d0
                 move.w  #WINDOW_NAMEALLY_PORTRAIT_DEST,d1
                 jsr     (CreateWindow).w
                 move.w  d0,portraitWindowSlot(a6)
                 addq.w  #1,d0
                 move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                move.l  a1,portraitWindowTilesEnd(a6)
+                move.l  a1,portraitWindowLayoutEndAddress(a6)
                 move.w  ally(a6),d0
                 bsr.w   GetCombatantPortrait
                 move.w  d0,portraitIndex(a6)
@@ -62,7 +62,7 @@ NameAlly:
                 move.w  #WINDOW_NAMEALLY_PORTRAIT_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
-                jsr     sub_15CC4(pc)
+                jsr     NavigateAlphabetWindow(pc)
                 nop
                 move.w  ally(a6),d0
                 lea     (TEMP_NAME_ENTRY_SPACE).l,a0
@@ -71,7 +71,7 @@ NameAlly:
                 jsr     j_LoadAllyName
 @Skip:
                 
-                bsr.w   sub_15FD8
+                bsr.w   OpenNameEntryWindow
                 move.w  alphabetWindowSlot(a6),d0
                 move.w  #WINDOW_NAMEALLY_ALPHABET_DEST,d1
                 moveq   #4,d2
@@ -85,11 +85,11 @@ NameAlly:
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 jsr     (WaitForWindowMovementEnd).w
                 move.w  alphabetWindowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 move.w  entryWindowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 move.w  portraitWindowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 unlk    a6
                 movem.l (sp)+,d0-a2
                 rts
@@ -106,11 +106,11 @@ ally = -20
 alphabetWindowSlot = -18
 entryWindowSlot = -16
 portraitWindowSlot = -14
-alphabetWindowTilesEnd = -12
-entryWindowTilesEnd = -8
-portraitWindowTilesEnd = -4
+alphabetWindowLayoutEndAddress = -12
+entryWindowLayoutEndAddress = -8
+portraitWindowLayoutEndAddress = -4
 
-sub_15CC4:
+NavigateAlphabetWindow:
                 
                 lea     (FF8804_LOADING_SPACE).l,a0
                 clr.l   (a0)+
@@ -119,7 +119,7 @@ sub_15CC4:
                 clr.w   ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
                 clr.w   nameEntryCount(a6)
                 clr.w   d0
-                moveq   #$14,d1
+                moveq   #20,d1
 loc_15CDC:
                 
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -155,13 +155,13 @@ loc_15D46:
                 add.w   d0,d0
                 clr.w   d2
                 move.b  ((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w,d2
-                mulu.w  #$38,d2 
+                mulu.w  #56,d2
                 add.w   d2,d0
-                lea     AlphabetWindowLayout_Start(pc), a0
+                lea     AlphabetStart(pc), a0
                 move.w  (a0,d0.w),d0
                 tst.b   d0
                 bpl.s   loc_15D64
-                subi.b  #$20,d0 
+                subi.b  #32,d0
 loc_15D64:
                 
                 bsr.w   loc_15DC2
@@ -170,12 +170,12 @@ loc_15D64:
                 addq.w  #1,nameEntryCount(a6)
 loc_15D72:
                 
-                bsr.w   LoadNameEntryWindowTiles
+                bsr.w   LoadNameEntryWindowLayout
                 move.w  entryWindowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
                 jsr     (WaitForVInt).w
-                moveq   #$14,d1
+                moveq   #20,d1
                 cmpi.w  #ALLYNAME_MAX_DISPLAYED_LENGTH,nameEntryCount(a6)
                 bne.s   loc_15D96
                 move.w  #$1704,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
@@ -184,9 +184,9 @@ loc_15D96:
                 bra.w   loc_15CDC
 loc_15D9A:
                 
-                cmpi.b  #$17,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
+                cmpi.b  #23,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
                 beq.w   loc_15F22
-                cmpi.b  #$13,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
+                cmpi.b  #19,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
                 bne.s   loc_15D46
 loc_15DAC:
                 
@@ -220,7 +220,7 @@ loc_15DE0:
                 bne.w   loc_15DFE
                 cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 bne.w   loc_15D22
-                cmpi.b  #$13,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
+                cmpi.b  #19,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
                 bne.w   loc_15D22
 loc_15DFE:
                 
@@ -228,7 +228,7 @@ loc_15DFE:
                 addq.b  #1,d0
                 cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 bge.s   loc_15E16
-                cmpi.b  #$1A,d0         ; HARDCODED stuff ?
+                cmpi.b  #26,d0
                 bne.s   loc_15E14
                 moveq   #0,d0
 loc_15E14:
@@ -236,17 +236,17 @@ loc_15E14:
                 bra.s   loc_15E2E
 loc_15E16:
                 
-                cmpi.b  #$12,d0
+                cmpi.b  #18,d0
                 bne.s   loc_15E1E
-                moveq   #$13,d0
+                moveq   #19,d0
 loc_15E1E:
                 
-                cmpi.b  #$14,d0
+                cmpi.b  #20,d0
                 bne.s   loc_15E26
-                moveq   #$17,d0
+                moveq   #23,d0
 loc_15E26:
                 
-                cmpi.b  #$18,d0
+                cmpi.b  #24,d0
                 bne.s   loc_15E2E
                 moveq   #0,d0
 loc_15E2E:
@@ -260,7 +260,7 @@ loc_15E3A:
                 bne.w   loc_15E58
                 cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 bne.w   loc_15D22
-                cmpi.b  #$17,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
+                cmpi.b  #23,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
                 bne.w   loc_15D22
 loc_15E58:
                 
@@ -268,27 +268,27 @@ loc_15E58:
                 subq.b  #1,d0
                 cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 bge.s   loc_15E70
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 bne.s   loc_15E6E
-                moveq   #$19,d0
+                moveq   #25,d0
 loc_15E6E:
                 
                 bra.s   loc_15E88
 loc_15E70:
                 
-                cmpi.b  #$16,d0
+                cmpi.b  #22,d0
                 bne.s   loc_15E78
-                moveq   #$13,d0
+                moveq   #19,d0
 loc_15E78:
                 
-                cmpi.b  #$12,d0
+                cmpi.b  #18,d0
                 bne.s   loc_15E80
-                moveq   #$11,d0
+                moveq   #17,d0
 loc_15E80:
                 
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 bne.s   loc_15E88
-                moveq   #$17,d0
+                moveq   #23,d0
 loc_15E88:
                 
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
@@ -300,13 +300,13 @@ loc_15E94:
                 beq.w   loc_15D22
                 move.b  ((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w,d0
                 subq.b  #2,d0
-                cmpi.b  #$FE,d0
+                cmpi.b  #-2,d0
                 bne.s   loc_15EAC
                 moveq   #4,d0
 loc_15EAC:
                 
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
-                bsr.s   sub_15EE0
+                bsr.s   WrapCursorLocationBottomToTop
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_15D22
 loc_15EBA:
@@ -322,48 +322,48 @@ loc_15ED2:
                 
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 sndCom  SFX_MENU_SELECTION
-                bsr.s   sub_15EE0
+                bsr.s   WrapCursorLocationBottomToTop
                 bra.w   loc_15D22
 
-    ; End of function sub_15CC4
+    ; End of function NavigateAlphabetWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_15EE0:
+WrapCursorLocationBottomToTop:
                 
                 cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 bne.s   return_15F20
                 move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d0
-                cmpi.b  #$12,d0         ; HARDCODED stuff ?
+                cmpi.b  #18,d0
                 bne.s   loc_15EF4
-                moveq   #$13,d0
+                moveq   #19,d0
 loc_15EF4:
                 
-                cmpi.b  #$14,d0
+                cmpi.b  #20,d0
                 bne.s   loc_15EFC
-                moveq   #$13,d0
+                moveq   #19,d0
 loc_15EFC:
                 
-                cmpi.b  #$15,d0
+                cmpi.b  #21,d0
                 bne.s   loc_15F04
-                moveq   #$13,d0
+                moveq   #19,d0
 loc_15F04:
                 
-                cmpi.b  #$16,d0
+                cmpi.b  #22,d0
                 bne.s   loc_15F0C
-                moveq   #$17,d0
+                moveq   #23,d0
 loc_15F0C:
                 
-                cmpi.b  #$18,d0
+                cmpi.b  #24,d0
                 bne.s   loc_15F14
-                moveq   #$17,d0
+                moveq   #23,d0
 loc_15F14:
                 
-                cmpi.b  #$19,d0
+                cmpi.b  #25,d0
                 bne.s   loc_15F1C
-                moveq   #$17,d0
+                moveq   #23,d0
 loc_15F1C:
                 
                 move.b  d0,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
@@ -371,16 +371,16 @@ return_15F20:
                 
                 rts
 
-    ; End of function sub_15EE0
+    ; End of function WrapCursorLocationBottomToTop
 
 
-; START OF FUNCTION CHUNK FOR sub_15CC4
+; START OF FUNCTION CHUNK FOR NavigateAlphabetWindow
 
 loc_15F22:
                 
                 clr.w   d1
 
-; END OF FUNCTION CHUNK FOR sub_15CC4
+; END OF FUNCTION CHUNK FOR NavigateAlphabetWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -392,71 +392,71 @@ ally = -20
 alphabetWindowSlot = -18
 entryWindowSlot = -16
 portraitWindowSlot = -14
-alphabetWindowTilesEnd = -12
-entryWindowTilesEnd = -8
-portraitWindowTilesEnd = -4
+alphabetWindowLayoutEndAddress = -12
+entryWindowLayoutEndAddress = -8
+portraitWindowLayoutEndAddress = -4
 
 sub_15F24:
                 
-                tst.b   ((HIDE_WINDOWS-$1000000)).w
+                tst.b   ((HIDE_WINDOWS_TOGGLE-$1000000)).w
                 beq.s   loc_15F2C
                 moveq   #1,d1
 loc_15F2C:
                 
-                lea     (SPRITE_08).l,a0
+                lea     (SPRITE_BATTLE_CURSOR).l,a0
                 cmpi.w  #7,d1
                 bge.s   loc_15F50
                 move.w  #1,(a0)
                 move.w  #1,VDPSPRITE_OFFSET_X(a0)
-                move.w  #1,8(a0)
-                move.w  #1,$E(a0)
+                move.w  #1,NEXTVDPSPRITE_OFFSET_Y(a0)
+                move.w  #1,NEXTVDPSPRITE_OFFSET_X(a0)
                 bra.s   loc_15F90
 loc_15F50:
                 
                 clr.w   d0
                 move.b  ((BATTLE_ENTITY_CHOSEN_X-$1000000)).w,d0
                 lsl.w   #3,d0
-                addi.w  #$94,d0 
-                move.w  d0,6(a0)
+                addi.w  #148,d0
+                move.w  d0,VDPSPRITE_OFFSET_X(a0)
                 clr.w   d0
                 move.b  ((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w,d0
                 lsl.w   #3,d0
-                addi.w  #$DC,d0 
+                addi.w  #220,d0
                 move.w  d0,(a0)
                 move.w  nameEntryCount(a6),d0
                 cmpi.w  #ALLYNAME_MAX_DISPLAYED_LENGTH,d0
                 bge.s   loc_15F84
                 lsl.w   #3,d0
-                addi.w  #$D8,d0 
-                move.w  d0,$E(a0)
+                addi.w  #216,d0
+                move.w  d0,NEXTVDPSPRITE_OFFSET_X(a0)
                 bra.s   loc_15F8A
 loc_15F84:
                 
-                move.w  #1,$E(a0)
+                move.w  #1,NEXTVDPSPRITE_OFFSET_X(a0)
 loc_15F8A:
                 
-                move.w  #$C9,8(a0) 
+                move.w  #201,NEXTVDPSPRITE_OFFSET_Y(a0)
 loc_15F90:
                 
-                move.b  #5,2(a0)
-                move.w  #$C5C8,4(a0)
-                cmpi.b  #$13,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
+                move.b  #5,VDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #VDPTILE_MENUTILE9|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
+                cmpi.b  #19,((BATTLE_ENTITY_CHOSEN_X-$1000000)).w
                 blt.s   loc_15FB8
                 cmpi.b  #4,((BATTLE_ENTITY_CHOSEN_Y-$1000000)).w
                 bne.s   loc_15FB8
-                move.b  #$D,2(a0)
-                move.w  #$C5C0,4(a0)
+                move.b  #VDPSPRITESIZE_V1|VDPSPRITESIZE_H1|$D,VDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #VDPTILE_MENUTILE1|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
 loc_15FB8:
                 
-                clr.b   $A(a0)
-                move.w  #$C5C3,$C(a0)
+                clr.b   NEXTVDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #VDPTILE_MENUTILE4|VDPTILE_PALETTE3|VDPTILE_PRIORITY,NEXTVDPSPRITE_OFFSET_TILE(a0)
                 subq.w  #1,d1
                 bne.s   loc_15FC8
-                moveq   #$14,d1
+                moveq   #20,d1
 loc_15FC8:
                 
-                move.b  #9,3(a0)
-                move.b  #$10,$B(a0)
+                move.b  #9,VDPSPRITE_OFFSET_LINK(a0)
+                move.b  #16,NEXTVDPSPRITE_OFFSET_LINK(a0)
                 bra.w   sub_101E6
 
     ; End of function sub_15F24
@@ -471,14 +471,14 @@ ally = -20
 alphabetWindowSlot = -18
 entryWindowSlot = -16
 portraitWindowSlot = -14
-alphabetWindowTilesEnd = -12
-entryWindowTilesEnd = -8
-portraitWindowTilesEnd = -4
+alphabetWindowLayoutEndAddress = -12
+entryWindowLayoutEndAddress = -8
+portraitWindowLayoutEndAddress = -4
 
-sub_15FD8:
+OpenNameEntryWindow:
                 
-                lea     NameEntryWindowLayout(pc), a0
-                movea.l entryWindowTilesEnd(a6),a1
+                lea     layout_NameEntryWindow(pc), a0
+                movea.l entryWindowLayoutEndAddress(a6),a1
                 move.w  #42,d7
                 jsr     (CopyBytes).w   
                 lea     (TEMP_NAME_ENTRY_SPACE).l,a0
@@ -486,6 +486,7 @@ sub_15FD8:
                 jsr     j_GetCombatantName
                 tst.w   var_26(a6)
                 beq.s   loc_1601E
+                
                 moveq   #10,d7
                 lea     38(a1),a1
                 move.l  #$C020C020,(a1)
@@ -495,10 +496,10 @@ sub_15FD8:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
 loc_1601E:
                 
-                move.w  #$FFFF,var_26(a6)
+                move.w  #-1,var_26(a6)
                 rts
 
-    ; End of function sub_15FD8
+    ; End of function OpenNameEntryWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -510,14 +511,14 @@ ally = -20
 alphabetWindowSlot = -18
 entryWindowSlot = -16
 portraitWindowSlot = -14
-alphabetWindowTilesEnd = -12
-entryWindowTilesEnd = -8
-portraitWindowTilesEnd = -4
+alphabetWindowLayoutEndAddress = -12
+entryWindowLayoutEndAddress = -8
+portraitWindowLayoutEndAddress = -4
 
-LoadNameEntryWindowTiles:
+LoadNameEntryWindowLayout:
                 
-                lea     NameEntryWindowLayout(pc), a0
-                movea.l entryWindowTilesEnd(a6),a1
+                lea     layout_NameEntryWindow(pc), a0
+                movea.l entryWindowLayoutEndAddress(a6),a1
                 move.w  #42,d7
                 jsr     (CopyBytes).w   
                 lea     (TEMP_NAME_ENTRY_SPACE).l,a0
@@ -527,7 +528,7 @@ LoadNameEntryWindowTiles:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 rts
 
-    ; End of function LoadNameEntryWindowTiles
+    ; End of function LoadNameEntryWindowLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -539,22 +540,22 @@ ally = -20
 alphabetWindowSlot = -18
 entryWindowSlot = -16
 portraitWindowSlot = -14
-alphabetWindowTilesEnd = -12
-entryWindowTilesEnd = -8
-portraitWindowTilesEnd = -4
+alphabetWindowLayoutEndAddress = -12
+entryWindowLayoutEndAddress = -8
+portraitWindowLayoutEndAddress = -4
 
 sub_1604A:
                 
-                lea     AlphabetWindowLayout(pc), a0
-                movea.l alphabetWindowTilesEnd(a6),a1
+                lea     layout_AlphabetWindow(pc), a0
+                movea.l alphabetWindowLayoutEndAddress(a6),a1
                 move.w  #870,d7
                 jsr     (CopyBytes).w   
-                lea     NameEntryWindowLayout(pc), a0
-                movea.l entryWindowTilesEnd(a6),a1
+                lea     layout_NameEntryWindow(pc), a0
+                movea.l entryWindowLayoutEndAddress(a6),a1
                 move.w  #42,d7
                 jsr     (CopyBytes).w   
-                lea     WindowBorderTiles(pc), a0
-                movea.l portraitWindowTilesEnd(a6),a1
+                lea     tiles_WindowBorder(pc), a0
+                movea.l portraitWindowLayoutEndAddress(a6),a1
                 move.w  #160,d7
                 jsr     (CopyBytes).w   
                 rts

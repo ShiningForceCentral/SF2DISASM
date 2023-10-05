@@ -4,9 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Supoort spells AI (Muddle 2, Dispel 1)
+; Support spells AI (Muddle 2, Dispel 1)
 ; 
-;       In: D0 = caster index
+; In: d0.w = caster index
+; Out: d1.b = -1 if command failed to execute
 
 
 ExecuteAiCommand_Support:
@@ -17,11 +18,11 @@ ExecuteAiCommand_Support:
                 bne.s   @Enemy
                 
                 ; If ally, do nothing
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @Done
 @Enemy:
                 
@@ -30,11 +31,11 @@ ExecuteAiCommand_Support:
                 beq.s   @CheckSupportSpell ; Does caster know any support spell?
                 
                 ; If muddled, do nothing
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @Done
 @CheckSupportSpell:
                 
@@ -49,11 +50,11 @@ ExecuteAiCommand_Support:
             endif
                 
                 ; If no known status spell, do nothing
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @Done
             if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
             else
@@ -69,11 +70,11 @@ ExecuteAiCommand_Support:
                 bra.w   @CheckMpCost    
 @DoNothing:
                 
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @Done
             endif
 @CheckMpCost:
@@ -93,18 +94,18 @@ ExecuteAiCommand_Support:
             if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
                 bra.w   @DoNothing
             else
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @Done
             endif
 @CheckTargetingGroup:
                 
             if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
-                bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   InitializeMovementArrays     
+                bsr.w   PopulateMovementArrays
                 btst    #SPELLPROPS_BIT_TARGETING,d5
                 bne.s   @TargetTeammates
                 clr.w   d3
@@ -119,7 +120,7 @@ ExecuteAiCommand_Support:
             else
                 clr.w   d0
                 btst    #SPELLPROPS_BIT_TARGETING,d5
-                move.w  #$FFFF,d3
+                move.w  #-1,d3
                 bne.s   @TargetTeammates1
                 bsr.w   UpdateBattleTerrainOccupiedByEnemies ; made unreachable by the preceding move.w #$FFFF,d3 instruction
                 bra.s   @CheckTargetingGroup2
@@ -129,8 +130,8 @@ ExecuteAiCommand_Support:
 @CheckTargetingGroup2:
                 
                 move.b  d7,d0
-                bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   InitializeMovementArrays
+                bsr.w   PopulateMovementArrays
                 btst    #SPELLPROPS_BIT_TARGETING,d5
                 clr.w   d3
                 bne.s   @TargetTeammates2
@@ -170,47 +171,47 @@ ExecuteAiCommand_Support:
                 
                 cmpi.w  #SPELL_SLEEP,d3
                 bne.s   @CheckSpell_Dispel
-                bsr.w   MakePrioritiesListForSpell_Dispel
+                bsr.w   PopulatePrioritiesListForSpell_Dispel
                 bra.w   @CheckReachableTargets
 @CheckSpell_Dispel:
                 
                 cmpi.w  #SPELL_DISPEL,d3
                 bne.s   @DoNothing
-                bsr.w   MakePrioritiesListForSpell_Dispel
+                bsr.w   PopulatePrioritiesListForSpell_Dispel
                 bra.w   @CheckReachableTargets
 @DoNothing:
             else
                 ; ATTACK spell
                 cmpi.w  #SPELL_ATTACK,d1
                 bne.s   @CheckBoost
-                bsr.w   MakePrioritiesListForSpell_Attack
+                bsr.w   PopulatePrioritiesListForSpell_Attack
                 bra.w   @CheckReachableTargets
 @CheckBoost:
                 
                 cmpi.w  #SPELL_BOOST|SPELL_LV2,d1
                 bne.s   @CheckMuddle2
-                bsr.w   MakePrioritiesListForSpell_Boost2
+                bsr.w   PopulatePrioritiesListForSpell_Boost2
                 bra.w   @CheckReachableTargets
 @CheckMuddle2:
                 
                 cmpi.w  #SPELL_MUDDLE|SPELL_LV2,d1
                 bne.s   @CheckDispel2
-                bsr.w   MakePrioritiesListForSpell_Muddle2
+                bsr.w   PopulatePrioritiesListForSpell_Muddle2
                 bra.w   @CheckReachableTargets
 @CheckDispel2:
                 
                 cmpi.w  #SPELL_DISPEL,d1
                 bne.s   @DoNothing2
-                bsr.w   MakePrioritiesListForSpell_Dispel
+                bsr.w   PopulatePrioritiesListForSpell_Dispel
                 bra.w   @CheckReachableTargets
             endif
 @DoNothing2:
                 
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @Done
 @CheckReachableTargets:
                 
@@ -220,18 +221,18 @@ ExecuteAiCommand_Support:
                 bne.s   @GetTarget
                 
                 ; If no reachable target, do nothing
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @Done
 @GetTarget:
                 
                 subi.w  #1,d5
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a0
                 lea     ((SPELL_TARGET_PRIORITIES_LIST-$1000000)).w,a1
-                move.b  #$FF,d0
+                move.b  #-1,d0
                 clr.w   d1
                 clr.w   d2
 @GetTarget_Loop:
@@ -247,15 +248,15 @@ ExecuteAiCommand_Support:
                 addi.w  #1,d2
                 dbf     d5,@GetTarget_Loop
                 
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 bne.s   @LoadBattleactionData
                 
                 ; If no reachable target, do nothing
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @Done
 @LoadBattleactionData:
                 
@@ -271,15 +272,15 @@ ExecuteAiCommand_Support:
                 move.w  d1,d2
                 jsr     GetCombatantX
                 bsr.w   GetClosestAttackPosition
-                cmpi.w  #$FF,d1
+                cmpi.w  #NOTHING_BYTE,d1
                 bne.s   @MakeMoveString
                 
                 ; If no valid attack position, do nothing
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @Done
 @MakeMoveString:
                 

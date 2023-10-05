@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\items\spellcastmessages-standard.asm :
 
 ; Spells that display a special message for all levels.
-tbl_SpellcastMessagesForIndexes:
+table_SpellcastMessagesForIndexes:
                 
                 dc.w SPELL_SPOIT, MESSAGE_SPELLCAST_PUT_ON_A_DEMON_SMILE    ; {NAME} put on{N}a demon's smile.
                 dc.w SPELL_FLAME, MESSAGE_SPELLCAST_BELCHED_OUT_FLAMES      ; {NAME} belched{N}out flames!
@@ -19,7 +19,7 @@ tbl_SpellcastMessagesForIndexes:
 
 
 ; Spells that display a different special message for each level.
-tbl_SpellcastMessagesForEntries:
+table_SpellcastMessagesForEntries:
                 
                 dc.w SPELL_AQUA|SPELL_LV1, MESSAGE_SPELLCAST_BLEW_OUT_AQUA_BREATH   ; {NAME} blew out{N}aqua-breath!
                 dc.w SPELL_AQUA|SPELL_LV2, MESSAGE_SPELLCAST_BLEW_OUT_BUBBLE_BREATH ; {NAME} blew out{N}bubble-breath!

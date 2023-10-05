@@ -7,7 +7,7 @@
 ; In: d0.w = combatant index
 
 
-CreateBattlefieldMiniStatusWindow:
+OpenBattlefieldMiniStatusWindow:
                 
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a2,-(sp)
@@ -31,7 +31,7 @@ CreateBattlefieldMiniStatusWindow:
                 move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
                 move.w  #31,d4
                 sub.w   d3,d4
-                lsl.w   #8,d4
+                lsl.w   #BYTE_SHIFT_COUNT,d4
                 or.w    d4,d1
                 moveq   #4,d2
                 tst.b   ((IS_TARGETING-$1000000)).w
@@ -48,7 +48,7 @@ CreateBattlefieldMiniStatusWindow:
                 movem.l (sp)+,d0-a2
                 rts
 
-    ; End of function CreateBattlefieldMiniStatusWindow
+    ; End of function OpenBattlefieldMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -56,7 +56,7 @@ CreateBattlefieldMiniStatusWindow:
 ; Move window offscreen, then clear it from memory.
 
 
-RemoveMiniStatusWindow:
+CloseMiniStatusWindow:
                 
                 movem.l d0-a2,-(sp)
                 lea     ((MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
@@ -76,18 +76,18 @@ RemoveMiniStatusWindow:
                 jsr     (MoveWindowWithSfx).w
                 jsr     (WaitForWindowMovementEnd).w
                 move.w  (a2),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 movem.l (sp)+,d0-a2
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function RemoveMiniStatusWindow
+    ; End of function CloseMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-CreateBattlesceneMiniStatusWindows:
+OpenBattlesceneMiniStatusWindows:
                 
                 jsr     (InitializeWindowProperties).w
                 move.w  #WINDOW_MINISTATUS_SIZE,d0
@@ -98,7 +98,7 @@ CreateBattlesceneMiniStatusWindows:
                 jsr     (CreateWindow).w
                 rts
 
-    ; End of function CreateBattlesceneMiniStatusWindows
+    ; End of function OpenBattlesceneMiniStatusWindows
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -110,7 +110,7 @@ CreateBattlesceneMiniStatusWindows:
 ShowAllyBattlesceneWindow:
                 
                 module
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 beq.w   return_11714
                 
                 movem.l d0-a1,-(sp)
@@ -123,16 +123,16 @@ ShowAllyBattlesceneWindow:
                 movem.w (sp)+,d0
                 bsr.w   BuildMiniStatusWindow
                 move.w  (sp)+,d1
-                bne.s   loc_11670
+                bne.s   @loc_1
                 move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
                 move.w  #$1F,d1
                 sub.w   d3,d1
-                lsl.w   #8,d1
-                bra.s   loc_11674
-loc_11670:
+                lsl.w   #BYTE_SHIFT_COUNT,d1
+                bra.s   @loc_2
+@loc_1:
                 
                 move.w  #$100,d1
-loc_11674:
+@loc_2:
                 
                 ori.w   #1,d1
                 clr.w   d0
@@ -150,9 +150,9 @@ loc_11674:
 ; =============== S U B R O U T I N E =======================================
 
 
-RemoveAllyBattlesceneWindow:
+HideAllyBattlesceneWindow:
                 
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 beq.w   return_11714
                 
                 movem.l d0-a1,-(sp)
@@ -164,7 +164,7 @@ RemoveAllyBattlesceneWindow:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function RemoveAllyBattlesceneWindow
+    ; End of function HideAllyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -175,12 +175,12 @@ RemoveAllyBattlesceneWindow:
 
 ShowEnemyBattlesceneWindow:
                 
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 beq.w   return_11714
                 
                 movem.l d0-a1,-(sp)
                 move.w  d1,-(sp)
-                move.b  #$FF,((IS_TARGETING-$1000000)).w
+                move.b  #-1,((IS_TARGETING-$1000000)).w
                 movem.w d0,-(sp)
                 moveq   #1,d0
                 clr.w   d1
@@ -192,7 +192,7 @@ ShowEnemyBattlesceneWindow:
                 move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
                 move.w  #$1F,d1
                 sub.w   d3,d1
-                lsl.w   #8,d1
+                lsl.w   #BYTE_SHIFT_COUNT,d1
                 bra.s   loc_116F6
 loc_116F2:
                 
@@ -217,12 +217,13 @@ return_11714:
 ; =============== S U B R O U T I N E =======================================
 
 
-RemoveEnemyBattlesceneWindow:
+HideEnemyBattlesceneWindow:
                 
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 beq.s   return_11714
+                
                 movem.l d0-a1,-(sp)
-                move.b  #$FF,((IS_TARGETING-$1000000)).w
+                move.b  #-1,((IS_TARGETING-$1000000)).w
                 moveq   #1,d0
                 move.w  #$2006,d1
                 moveq   #1,d2
@@ -230,7 +231,7 @@ RemoveEnemyBattlesceneWindow:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function RemoveEnemyBattlesceneWindow
+    ; End of function HideEnemyBattlesceneWindow
 
                 modend
 
@@ -249,7 +250,7 @@ DrawColoredStatBar:
                 movem.l d0-a1,-(sp)
                 tst.b   ((IS_TARGETING-$1000000)).w
                 beq.s   @InitVdpTileEntry
-                addi.w  #$A,d2          ; draw bar in bottom left window
+                addi.w  #10,d2          ; draw bar in bottom left window
 @InitVdpTileEntry:
                 
                 ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
@@ -321,7 +322,7 @@ DrawColoredStatBar:
                 
                 lea     $20(a0),a0      ; advance 8 columns
                 move.l  8(a0),d3        ; get 3rd column in current tile -> D3
-                cmpi.l  #$FFFFFFFF,d3
+                cmpi.l  #-1,d3
                 beq.w   @Done           ; if 3rd column in current tile is empty, we're done
                 cmp.l   d3,d6
                 bne.s   @NextTile       ; if 3rd columns in previous and current tiles are not the same, start drawing next VDP tile
@@ -381,18 +382,18 @@ DmaStatBarTiles:
                 
                 tst.b   ((IS_TARGETING-$1000000)).w
                 beq.s   @Continue
-                addi.w  #$A,d2          ; draw bar in bottom left window
+                addi.w  #10,d2          ; draw bar in bottom left window
 @Continue:
                 
                 lsl.w   #5,d2
                 movea.w d2,a1
-                move.w  #$50,d0 
+                move.w  #80,d0
                 moveq   #2,d1
                 jmp     (ApplyVIntVramDma).w
 
     ; End of function DmaStatBarTiles
 
-tbl_StatBarColumns:
+table_StatBarColumns:
                 
 ; Colors that stay consistant in battlescenes:
 ; 
@@ -434,13 +435,15 @@ WriteStatBarColumn:
                 lsl.w   #2,d6
                 lsr.w   #3,d7
                 lsl.w   #5,d7
-                if (STANDARD_BUILD&FIX_GARBLED_HP_BAR=1)
-                    cmpi.w  #(WriteStatBarColumn-tbl_StatBarColumns-4)/4,d4
-                    ble.s   @Continue
-                    moveq   #(WriteStatBarColumn-tbl_StatBarColumns-4)/4,d4
-                endif
-@Continue:      lsl.w   #2,d4
-                move.l  tbl_StatBarColumns(pc,d4.w),d4
+            if (STANDARD_BUILD&FIX_GARBLED_HP_BAR=1)
+                cmpi.w  #(WriteStatBarColumn-table_StatBarColumns-4)/4,d4
+                ble.s   @Continue
+                moveq   #(WriteStatBarColumn-table_StatBarColumns-4)/4,d4
+            endif
+@Continue:
+                
+                lsl.w   #INDEX_SHIFT_COUNT,d4
+                move.l  table_StatBarColumns(pc,d4.w),d4
 @Loop:
                 
                 move.l  d4,d5
@@ -471,12 +474,12 @@ AdjustStringLengthForSpecialCharacters:
                 bmi.w   @Return
 @Loop:
                 
-                cmpi.b  #$9E,(a0)
+                cmpi.b  #VDPTILE_ORANGE_DOLLAR_SIGN,(a0)
                 bne.s   @Continue
                 subq.w  #1,d7
 @Continue:
                 
-                cmpi.b  #$9F,(a0)+
+                cmpi.b  #VDPTILE_ORANGE_PERCENT_SIGN,(a0)+
                 bne.s   @Next
                 subq.w  #1,d7
 @Next:

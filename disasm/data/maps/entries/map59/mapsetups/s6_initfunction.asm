@@ -426,13 +426,13 @@ cs_5EF60:       textCursor 3739
 
 csub_5F14C:
                 
-                lea     plt_NazcaShip(pc), a0
+                lea     palette_NazcaShip(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
                 moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
-                jsr     (sub_19C8).w    
+                jsr     (UpdateBasePalettesAndBackupCurrent).w
                 rts
 
     ; End of function csub_5F14C
@@ -454,7 +454,8 @@ loc_5F16E:
 
     ; End of function sub_5F16C
 
-plt_NazcaShip:  dc.w 0
+palette_NazcaShip:
+                dc.w 0
                 dc.w $C40
                 dc.w $E84
                 dc.w $26

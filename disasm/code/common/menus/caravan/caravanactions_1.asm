@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\caravan\caravanactions_1.asm :
+; ASM FILE code\common\menus\caravan\CaravanMenu_1.asm :
 ; 0x21FD2..0x228A2 : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -11,7 +11,7 @@ itemSlot = -6
 itemIndex = -4
 member = -2
 
-CaravanMenuActions:
+CaravanMenu:
                 
                 module
                 movem.l d0-a5,-(sp)
@@ -27,20 +27,20 @@ CaravanMenuActions:
                 
                 moveq   #0,d0           ; initial choice : up
                 moveq   #MENU_CARAVAN,d2
-                lea     (InitStack).w,a0
-                jsr     j_ExecuteMenu
-                cmpi.w  #$FFFF,d0
+                lea     (InitialStack).w,a0
+                jsr     j_ExecuteDiamondMenu
+                cmpi.w  #-1,d0
                 beq.w   @ExitCaravan
                 add.w   d0,d0
-                move.w  rjt_CaravanMenuActions(pc,d0.w),d0
-                jsr     rjt_CaravanMenuActions(pc,d0.w)
+                move.w  rjt_CaravanMenu(pc,d0.w),d0
+                jsr     rjt_CaravanMenu(pc,d0.w)
                 bra.s   @RestartCaravan 
-rjt_CaravanMenuActions:
+rjt_CaravanMenu:
                 
-                dc.w CaravanMenu_Join-rjt_CaravanMenuActions
-                dc.w CaravanMenu_Depot-rjt_CaravanMenuActions
-                dc.w CaravanMenu_Item-rjt_CaravanMenuActions
-                dc.w CaravanMenu_Purge-rjt_CaravanMenuActions
+                dc.w caravanMenu_Join-rjt_CaravanMenu
+                dc.w caravanMenu_Depot-rjt_CaravanMenu
+                dc.w caravanMenu_Item-rjt_CaravanMenu
+                dc.w caravanMenu_Purge-rjt_CaravanMenu
 @ExitCaravan:
                 
                 moveq   #0,d0
@@ -51,7 +51,7 @@ rjt_CaravanMenuActions:
                 movem.l (sp)+,d0-a5
                 rts
 
-    ; End of function CaravanMenuActions
+    ; End of function CaravanMenu
 
                 modend
 
@@ -64,7 +64,7 @@ itemSlot = -6
 itemIndex = -4
 member = -2
 
-CaravanMenu_Join:
+caravanMenu_Join:
                 
                 module
                 moveq   #2,d1           ; ; reserve members
@@ -75,58 +75,61 @@ CaravanMenu_Join:
                 ; Pick joiner
                 move.w  #15,d1          ; "Who joins the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
+                jsr     j_InitializeMembersListScreen
                 move.w  d0,member(a6)
-                cmpi.w  #$FFFF,d0
-                beq.w   byte_220E8      ; Exit Join action
+                cmpi.w  #-1,d0
+                beq.w   byte_220E8      ; @Exit
+                
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   @CheckBattleParty
                 
                 ; Joiner is dead
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     19              ; "{NAME} is dead.{N}Are you sure?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 tst.w   d0
-                bne.w   loc_220FE
+                bne.w   @Restart
 @CheckBattleParty:
                 
                 moveq   #1,d1           ; battle party members
                 bsr.w   PopulateGenericListWithMembersList
                 cmpi.w  #FORCE_MAX_SIZE,((GENERIC_LIST_LENGTH-$1000000)).w
-                bcc.s   @ChooseRelief   
+                bcc.s   @ChooseRelief
                 
                 ; If force max size not reached, join immediately
                 move.w  member(a6),d0
                 jsr     j_JoinBattleParty
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #21,d1          ; "{NAME}, fight bravely in the{N}front.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                bra.s   @RestartJoin
+                bra.s   @Goto_Restart
 @ChooseRelief:
                 
                 move.w  #23,d1          ; "Choose a relief.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
-                cmpi.w  #$FFFF,d0
-                beq.s   byte_220DE      ; Close textbox and restart Join action
+                jsr     j_InitializeMembersListScreen
+                cmpi.w  #-1,d0
+                beq.s   byte_220DE      ; @CloseDialogueWindowAndRestart
                 
                 ; Is leader leaving the battle party?
             if (STANDARD_BUILD&BOWIE_CAN_LEAVE_BATTLE_PARTY=1)
+                ; Do nothing
             else
                 tst.w   d0
                 beq.s   @LeaderCannotLeave
             endif
                 
                 ; 
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 jsr     j_LeaveBattleParty
                 move.w  member(a6),d0
                 jsr     j_JoinBattleParty
-                move.w  member(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  #17,d1          ; "{NAME} returns to the{N}Caravan.{W2}{N}{NAME} joins the battle{N}party.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
             if (STANDARD_BUILD&BOWIE_CAN_LEAVE_BATTLE_PARTY=1)
+                ; Do nothing
             else
                 bra.s   @Goto_RestartJoin
 @LeaderCannotLeave:
@@ -136,49 +139,41 @@ CaravanMenu_Join:
             endif
 @Goto_RestartJoin:
                 
-                bra.s   @RestartJoin
+                bra.s   @Goto_Restart
 byte_220DE:
                 
-                
-                ; Close textbox and restart Join action
+                @CloseDialogueWindowAndRestart:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
-@RestartJoin:
+@Goto_Restart:
                 
-                bra.s   loc_220F2
+                bra.s   @Goto_Restart_0
 byte_220E8:
                 
-                
-                ; Exit Join action
+                @Exit:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
-
-    ; End of function CaravanMenu_Join
-
-
-; START OF FUNCTION CHUNK FOR CaravanMenu_Join
-
-loc_220F2:
+@Goto_Restart_0:
                 
-                bra.s   loc_220FE
+                bra.s   @Restart
 @NoReserveMembers:
                 
                 move.w  #18,d1          ; "Oh, {LEADER}...there are{N}no reliefs.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 rts
-loc_220FE:
+@Restart:
                 
-                bra.w   CaravanMenu_Join
+                bra.w   caravanMenu_Join
 
-; END OF FUNCTION CHUNK FOR CaravanMenu_Join
+    ; End of function caravanMenu_Join
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-CaravanMenu_Purge:
+caravanMenu_Purge:
                 
                 module
                 moveq   #1,d1           ; battle party members
@@ -189,9 +184,9 @@ CaravanMenu_Purge:
                 ; Pick a quitter
                 move.w  #16,d1          ; "Who quits the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMemberListScreen
-                cmpi.w  #$FFFF,d0
-                beq.s   byte_22144      ; Exit Purge action
+                jsr     j_InitializeMembersListScreen
+                cmpi.w  #-1,d0
+                beq.s   byte_22144      ; @Exit
                 
             if (STANDARD_BUILD&BOWIE_CAN_LEAVE_BATTLE_PARTY=1)
                 ; Is there only 1 battle party member remaining?
@@ -203,48 +198,41 @@ CaravanMenu_Purge:
                 beq.s   @LeaderCannotLeave
             endif
                 jsr     j_LeaveBattleParty
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #22,d1          ; "{NAME}, why don't you{N}take a rest now?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                bra.s   @RestartPurge
+                bra.s   @Goto_Restart
 @LeaderCannotLeave:
                 
                 move.w  #20,d1          ; "{LEADER}!  What will they{N}do without you?!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-@RestartPurge:
+@Goto_Restart:
                 
-                bra.s   loc_2214E
+                bra.s   @Goto_Restart_0
 byte_22144:
                 
-                
-                ; Exit Purge action
+                @Exit:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
-
-    ; End of function CaravanMenu_Purge
-
-
-; START OF FUNCTION CHUNK FOR CaravanMenu_Purge
-
-loc_2214E:
+@Goto_Restart_0:
                 
-                bra.s   loc_22152
+                bra.s   @Restart
 @Return:
                 
                 rts
-loc_22152:
+@Restart:
                 
-                bra.s   CaravanMenu_Purge
+                bra.s   caravanMenu_Purge
 
-; END OF FUNCTION CHUNK FOR CaravanMenu_Purge
+    ; End of function caravanMenu_Purge
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-CaravanMenu_Depot:
+caravanMenu_Depot:
                 
                 module
                 moveq   #0,d1           ; animate-in from bottom
@@ -256,9 +244,9 @@ CaravanMenu_Depot:
                 
                 moveq   #0,d0           ; initial choice : up
                 moveq   #MENU_DEPOT,d2
-                lea     (InitStack).w,a0
-                jsr     j_ExecuteMenu
-                cmpi.w  #$FFFF,d0
+                lea     (InitialStack).w,a0
+                jsr     j_ExecuteDiamondMenu
+                cmpi.w  #-1,d0
                 beq.w   @Return
                 add.w   d0,d0
                 move.w  rjt_CaravanDepotSubmenuActions(pc,d0.w),d0
@@ -266,15 +254,15 @@ CaravanMenu_Depot:
                 bra.s   @Restart        
 rjt_CaravanDepotSubmenuActions:
                 
-                dc.w CaravanDepotSubmenu_Look-rjt_CaravanDepotSubmenuActions
-                dc.w CaravanDepotSubmenu_Deposit-rjt_CaravanDepotSubmenuActions
-                dc.w CaravanDepotSubmenu_Derive-rjt_CaravanDepotSubmenuActions
-                dc.w CaravanDepotSubmenu_Drop-rjt_CaravanDepotSubmenuActions
+                dc.w caravanDepotSubmenu_Look-rjt_CaravanDepotSubmenuActions
+                dc.w caravanDepotSubmenu_Deposit-rjt_CaravanDepotSubmenuActions
+                dc.w caravanDepotSubmenu_Derive-rjt_CaravanDepotSubmenuActions
+                dc.w caravanDepotSubmenu_Drop-rjt_CaravanDepotSubmenuActions
 @Return:
                 
                 rts
 
-    ; End of function CaravanMenu_Depot
+    ; End of function caravanMenu_Depot
 
                 modend
 
@@ -287,7 +275,7 @@ itemSlot = -6
 itemIndex = -4
 member = -2
 
-CaravanDepotSubmenu_Look:
+caravanDepotSubmenu_Look:
                 
                 module
                 bsr.w   CopyCaravanItems
@@ -296,12 +284,12 @@ CaravanDepotSubmenu_Look:
                 
                 move.w  #MESSAGE_CARAVAN_APPRAISE_WHICH_ITEM,d1 ; "Appraise which item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_CreateShopInventoryScreen
+                jsr     j_BuildShopInventoryScreen
                 move.w  d0,d2
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
-                cmpi.w  #$FFFF,d0
-                beq.w   byte_222E0      
+                cmpi.w  #-1,d0
+                beq.w   byte_222E0      ; @ChangedYourMind
                 chkFlg  70              ; Astral is a follower
                 bne.s   @AstralIsFollower
                 moveq   #PORTRAIT_ROHDE,d0
@@ -312,7 +300,7 @@ CaravanDepotSubmenu_Look:
 @HasSpecialDescription:
                 
                 moveq   #0,d1
-                jsr     j_CreatePortraitWindow
+                jsr     j_OpenPortraitWindow
                 move.w  itemIndex(a6),d1
                 bsr.w   DisplaySpecialCaravanDescription
                 bne.w   @IsUnsellable
@@ -327,22 +315,24 @@ CaravanDepotSubmenu_Look:
 @IsWeapon:
                 
                 cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
-                bne.s   byte_221F4      
+                bne.s   byte_221F4      ; @Ring
                 txt     90              ; "It's a weapon.{W2}"
                 bra.s   @HasUseSpell
 byte_221F4:
                 
+                @Ring:
                 txt     91              ; "It's a ring.{W2}"
 @HasUseSpell:
                 
                 move.w  itemIndex(a6),d1
                 jsr     j_GetItemDefAddress
                 cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
-                beq.s   byte_22210      
+                beq.s   byte_22210      ; @NoEffect
                 txt     93              ; "It has a special effect when{N}used in battle.{W2}"
                 bra.s   @IsWeaponOrRing
 byte_22210:
                 
+                @NoEffect:
                 txt     94              ; "It has no effect in battle.{W2}"
 @IsWeaponOrRing:
                 
@@ -352,15 +342,15 @@ byte_22210:
                 beq.w   @IsUnsellable
                 
                 cmpi.w  #ITEM_POWER_RING,d1 ; HARDCODED item indexes with special message
-                beq.w   byte_222A4
+                beq.w   byte_222A4      ; @EverybodyCanEquipIt
                 cmpi.w  #ITEM_PROTECT_RING,d1
-                beq.w   byte_222A4
+                beq.w   byte_222A4      ; @EverybodyCanEquipIt
                 cmpi.w  #ITEM_QUICK_RING,d1
-                beq.w   byte_222A4
+                beq.w   byte_222A4      ; @EverybodyCanEquipIt
                 cmpi.w  #ITEM_RUNNING_RING,d1
-                beq.w   byte_222A4
+                beq.w   byte_222A4      ; @EverybodyCanEquipIt
                 move.w  itemIndex(a6),d1
-                move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d1,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     96              ; "The {ITEM} is for{N}"
                 jsr     j_UpdateForce
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
@@ -385,7 +375,7 @@ byte_22210:
                 jsr     j_IsWeaponOrRingEquippable
             endif
                 bcc.s   @NextMember
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     98              ; "{DICT}{NAME},"
                 addq.w  #1,d6
                 moveq   #2,d3
@@ -409,7 +399,7 @@ byte_22210:
                 jsr     j_IsWeaponOrRingEquippable
             endif
                 bcc.s   @NextMember
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     98              ; "{DICT}{NAME},"
                 addq.w  #1,d6
                 cmpi.w  #1,d6
@@ -437,6 +427,7 @@ byte_2229C:
                 bra.w   @IsUnsellable
 byte_222A4:
                 
+                @EverybodyCanEquipIt:
                 txt     95              ; "Everybody can equip it.{W2}"
 @IsUnsellable:
                 
@@ -445,31 +436,27 @@ byte_222A4:
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @GetSellingPrice
                 txt     102             ; "You can't sell it at a shop.{W2}"
-                bra.s   byte_222D4
+                bra.s   byte_222D4      ; @CannotBeSold
 @GetSellingPrice:
                 
                 clr.l   d1
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d1
                 mulu.w  #ITEMSELLPRICE_MULTIPLIER,d1
                 lsr.l   #ITEMSELLPRICE_BITSHIFTRIGHT,d1
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     101             ; "It brings {#} gold coins{N}at a shop.{W2}"
 byte_222D4:
                 
+                @CannotBeSold:
                 clsTxt
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 bra.s   @Goto_Restart
 byte_222E0:
                 
+                @ChangedYourMind:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
-
-    ; End of function CaravanDepotSubmenu_Look
-
-
-; START OF FUNCTION CHUNK FOR CaravanDepotSubmenu_Look
-
 @Goto_Restart:
                 
                 bra.s   @Restart
@@ -481,16 +468,16 @@ byte_222E0:
                 rts
 @Restart:
                 
-                bra.w   CaravanDepotSubmenu_Look
+                bra.w   caravanDepotSubmenu_Look
 
-; END OF FUNCTION CHUNK FOR CaravanDepotSubmenu_Look
+    ; End of function caravanDepotSubmenu_Look
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-CaravanDepotSubmenu_Deposit:
+caravanDepotSubmenu_Deposit:
                 
                 module
                 bsr.w   CopyCaravanItems
@@ -503,12 +490,12 @@ CaravanDepotSubmenu_Deposit:
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
-                cmpi.w  #$FFFF,d0
-                beq.s   byte_2236A      
+                cmpi.w  #-1,d0
+                beq.s   byte_2236A      ; @ChangedYourMind
                 
                 bsr.w   IsItemInSlotEquippedAndCursed
                 bcs.w   @Restart
@@ -518,14 +505,15 @@ CaravanDepotSubmenu_Deposit:
                 jsr     j_AddItemToCaravan
                 move.w  itemSlot(a6),d1
                 jsr     j_DropItemBySlot
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_ITEM_IS_NOW_IN_THE_STOREHOUSE,d1 
                                                         ; "{NAME}'s {ITEM}{N}is now in the storehouse.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @Goto_Restart
 byte_2236A:
                 
+                @ChangedYourMind:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
@@ -537,24 +525,18 @@ byte_2236A:
                 move.w  #MESSAGE_CARAVAN_SORRY_THERE_IS_NO_ROOM,d1 ; "Sorry, there's no room!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 rts
-
-    ; End of function CaravanDepotSubmenu_Deposit
-
-
-; START OF FUNCTION CHUNK FOR CaravanDepotSubmenu_Deposit
-
 @Restart:
                 
-                bra.w   CaravanDepotSubmenu_Deposit
+                bra.w   caravanDepotSubmenu_Deposit
 
-; END OF FUNCTION CHUNK FOR CaravanDepotSubmenu_Deposit
+    ; End of function caravanDepotSubmenu_Deposit
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-CaravanDepotSubmenu_Derive:
+caravanDepotSubmenu_Derive:
                 
                 module
                 bsr.w   CopyCaravanItems
@@ -564,26 +546,26 @@ CaravanDepotSubmenu_Derive:
                 ; Pick item from storehouse
                 move.w  #MESSAGE_CARAVAN_CHOOSE_WHICH_ITEM,d1 ; "Choose which item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_CreateShopInventoryScreen
+                jsr     j_BuildShopInventoryScreen
                 move.w  d0,d2
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
-                cmpi.w  #$FFFF,d2
-                beq.w   byte_2247E      
+                cmpi.w  #-1,d2
+                beq.w   byte_2247E      ; @ChangedYourMind
                 
                 ; Pick recipient
                 moveq   #0,d1           ; all force members
                 bsr.w   PopulateGenericListWithMembersList
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_PASS_THE_ITEM_TO_WHOM,d1 ; "Pass the {ITEM}{N}to whom?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
                 move.w  d0,targetMember(a6)
                 move.w  d1,targetItemSlot(a6)
                 move.w  d2,targetItemIndex(a6)
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.w   @Goto_Restart
                 
                 ; Is recipient's inventory full?
@@ -603,8 +585,8 @@ CaravanDepotSubmenu_Derive:
             if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                 jsr     AddItem
             endif
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_CHARACTER_NOW_HAS_THE_ITEM,d1 
                                                         ; "{NAME} now has the{N}{ITEM}.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
@@ -614,7 +596,7 @@ CaravanDepotSubmenu_Derive:
                 move.w  targetMember(a6),d1
                 move.w  targetItemSlot(a6),d1
                 bsr.w   IsItemInSlotEquippedAndCursed
-                bcs.w   @Restart_0
+                bcs.w   @Restart
                 
                 move.w  targetMember(a6),d0
                 move.w  targetItemSlot(a6),d1
@@ -623,45 +605,41 @@ CaravanDepotSubmenu_Derive:
                 jsr     j_RemoveItemFromCaravan
                 move.w  targetMember(a6),d0
             if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                ; Do nothing
             else
                 move.w  itemIndex(a6),d1
             endif
                 jsr     j_AddItem
                 move.w  targetItemIndex(a6),d1
                 jsr     j_AddItemToCaravan
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  targetItemIndex(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                move.w  targetItemIndex(a6),((DIALOGUE_NAME_INDEX_3-$1000000)).w
                 move.w  #MESSAGE_ITEMMENU_ITEM_IS_EXCHANGED_FOR,d1 ; "{ITEM} is exchanged{N}for {NAME}'s {ITEM}.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
 @Goto_Restart:
                 
-                bra.s   @Restart
+                bra.s   @Goto_Restart_0
 byte_2247E:
                 
+                @ChangedYourMind:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
-
-    ; End of function CaravanDepotSubmenu_Derive
-
-
-; START OF FUNCTION CHUNK FOR CaravanDepotSubmenu_Derive
-
-@Restart:
+@Goto_Restart_0:
                 
-                bra.s   @Restart_0
+                bra.s   @Restart
 @Exit:
                 
                 move.w  #MESSAGE_CARAVAN_WELL_THE_STOREHOUSE_IS_EMPTY,d1 
                                                         ; "Well, the storehouse is{N}empty.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 rts
-@Restart_0:
+@Restart:
                 
-                bra.w   CaravanDepotSubmenu_Derive
+                bra.w   caravanDepotSubmenu_Derive
 
-; END OF FUNCTION CHUNK FOR CaravanDepotSubmenu_Derive
+    ; End of function caravanDepotSubmenu_Derive
 
                 modend
 
@@ -674,7 +652,7 @@ itemSlot = -6
 itemIndex = -4
 member = -2
 
-CaravanDepotSubmenu_Drop:
+caravanDepotSubmenu_Drop:
                 
                 module
                 bsr.w   CopyCaravanItems
@@ -683,22 +661,22 @@ CaravanDepotSubmenu_Drop:
                 
                 move.w  #MESSAGE_CARAVAN_DISCARD_WHICH_ITEM,d1 ; "Discard which item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_CreateShopInventoryScreen
+                jsr     j_BuildShopInventoryScreen
                 move.w  d0,d2
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 move.w  itemIndex(a6),d1
                 jsr     IsItemUnsellable
-                bcs.w   @Restart_0
-                cmpi.w  #$FFFF,itemIndex(a6)
-                beq.s   byte_2251E      
+                bcs.w   @Restart
+                cmpi.w  #-1,itemIndex(a6)
+                beq.s   byte_2251E      ; @ChangedYourMind
                 
                 ; Confirm discard
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 tst.w   d0
-                bne.s   byte_22518      
+                bne.s   byte_22518      ; @CancelDiscard
                 
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemFromCaravan
@@ -709,48 +687,44 @@ CaravanDepotSubmenu_Drop:
                 jsr     j_AddItemToDeals
 @Continue:
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #MESSAGE_ITEMMENU_DISCARDED_THE_ITEM,d1 ; "Discarded the {ITEM}.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @Goto_Restart
 byte_22518:
                 
+                @CancelDiscard:
                 txt     4               ; "Did you change your mind?{W2}"
 @Goto_Restart:
                 
-                bra.s   @Restart
+                bra.s   @Goto_Restart_0
 byte_2251E:
                 
+                @ChangedYourMind:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
-
-    ; End of function CaravanDepotSubmenu_Drop
-
-
-; START OF FUNCTION CHUNK FOR CaravanDepotSubmenu_Drop
-
-@Restart:
+@Goto_Restart_0:
                 
-                bra.s   @Restart_0
+                bra.s   @Restart
 @Exit:
                 
                 move.w  #MESSAGE_CARAVAN_WELL_THE_STOREHOUSE_IS_EMPTY,d1 
                                                         ; "Well, the storehouse is{N}empty.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 rts
-@Restart_0:
+@Restart:
                 
-                bra.w   CaravanDepotSubmenu_Drop
+                bra.w   caravanDepotSubmenu_Drop
 
-; END OF FUNCTION CHUNK FOR CaravanDepotSubmenu_Drop
+    ; End of function caravanDepotSubmenu_Drop
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-CaravanMenu_Item:
+caravanMenu_Item:
                 
                 module
                 moveq   #0,d1           ; animate-in from bottom
@@ -762,9 +736,9 @@ CaravanMenu_Item:
                 
                 moveq   #0,d0           ; initial choice : up
                 moveq   #MENU_ITEM,d2
-                lea     (InitStack).w,a0
-                jsr     j_ExecuteMenu
-                cmpi.w  #$FFFF,d0
+                lea     (InitialStack).w,a0
+                jsr     j_ExecuteDiamondMenu
+                cmpi.w  #-1,d0
                 beq.w   @Return
                 add.w   d0,d0
                 move.w  rjt_CaravanItemSubmenuActions(pc,d0.w),d0
@@ -772,15 +746,15 @@ CaravanMenu_Item:
                 bra.s   @Restart        
 rjt_CaravanItemSubmenuActions:
                 
-                dc.w CaravanItemSubmenu_Use-rjt_CaravanItemSubmenuActions
-                dc.w CaravanItemSubmenu_Give-rjt_CaravanItemSubmenuActions
-                dc.w CaravanItemSubmenu_Equip-rjt_CaravanItemSubmenuActions
-                dc.w CaravanItemSubmenu_Drop-rjt_CaravanItemSubmenuActions
+                dc.w caravanItemSubmenu_Use-rjt_CaravanItemSubmenuActions
+                dc.w caravanItemSubmenu_Give-rjt_CaravanItemSubmenuActions
+                dc.w caravanItemSubmenu_Equip-rjt_CaravanItemSubmenuActions
+                dc.w caravanItemSubmenu_Drop-rjt_CaravanItemSubmenuActions
 @Return:
                 
                 rts
 
-    ; End of function CaravanMenu_Item
+    ; End of function caravanMenu_Item
 
                 modend
 
@@ -793,7 +767,7 @@ itemSlot = -6
 itemIndex = -4
 member = -2
 
-CaravanItemSubmenu_Use:
+caravanItemSubmenu_Use:
                 
                 module
                 move.w  #24,d1          ; "Use whose item?{D1}"
@@ -804,12 +778,12 @@ CaravanItemSubmenu_Use:
                 bsr.w   PopulateGenericListWithMembersList
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
-                cmpi.w  #$FFFF,d0
-                beq.s   byte_225FA      ; Exit Item Use action
+                cmpi.w  #-1,d0
+                beq.s   byte_225FA      ; @Exit
                 
                 ; Is item usable?
                 move.w  itemIndex(a6),d1
@@ -818,13 +792,13 @@ CaravanItemSubmenu_Use:
                 bne.s   @NotUsable
                 
                 ; Pick target
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #25,d1          ; "Use the {ITEM}{N}on whom?{D1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMemberListScreen
-                cmpi.w  #$FFFF,d0
-                beq.s   byte_225E4      
+                jsr     j_InitializeMembersListScreen
+                cmpi.w  #-1,d0
+                beq.s   byte_225E4      ; @CancelChoice
                 
                 ; Use item
                 move.w  itemIndex(a6),d1
@@ -835,38 +809,32 @@ CaravanItemSubmenu_Use:
                 bra.s   @Goto_Restart
 byte_225E4:
                 
+                @CancelChoice:
                 txt     4               ; "Did you change your mind?{W2}"
 @Goto_Restart:
                 
-                bra.s   @Restart
+                bra.s   @Goto_Restart_0
 @NotUsable:
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #26,d1          ; "{LEADER}! {D1}{N}What do you think you're{N}doing with the {ITEM}?!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-@Restart:
+@Goto_Restart_0:
                 
-                bra.s   loc_22604
+                bra.s   @Restart
 byte_225FA:
                 
-                
-                ; Exit Item Use action
+                @Exit:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
-
-    ; End of function CaravanItemSubmenu_Use
-
-
-; START OF FUNCTION CHUNK FOR CaravanItemSubmenu_Use
-
-loc_22604:
+@Restart:
                 
                 move.w  #27,d1          ; "Use another item?{N}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.w   @Start          
 
-; END OF FUNCTION CHUNK FOR CaravanItemSubmenu_Use
+    ; End of function caravanItemSubmenu_Use
 
                 modend
 
@@ -879,7 +847,7 @@ itemSlot = -6
 itemIndex = -4
 member = -2
 
-CaravanItemSubmenu_Give:
+caravanItemSubmenu_Give:
                 
                 module
                 move.w  #28,d1          ; "Pass whose item?{W2}"
@@ -890,28 +858,28 @@ CaravanItemSubmenu_Give:
                 bsr.w   PopulateGenericListWithMembersList
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
-                cmpi.w  #$FFFF,d0
-                beq.w   byte_22760      
+                cmpi.w  #-1,d0
+                beq.w   byte_22760      ; @Exit
                 
                 bsr.w   IsItemInSlotEquippedAndCursed
-                bcs.w   @Restart_0
+                bcs.w   @Restart
                 
                 ; Pick a recipient
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #29,d1          ; "Pass the {ITEM}{N}to whom?{D1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
                 move.w  d0,targetMember(a6)
                 move.w  d1,targetItemSlot(a6)
                 move.w  d2,targetItemIndex(a6)
-                cmpi.w  #$FFFF,d0
-                beq.w   byte_2275A      ; Changed your mind
+                cmpi.w  #-1,d0
+                beq.w   byte_2275A      ; @ChangedYourMind
                 
                 ; Is giving to self?
                 cmp.w   member(a6),d0
@@ -922,8 +890,8 @@ CaravanItemSubmenu_Give:
                 jsr     j_RemoveItemBySlot
                 move.w  itemIndex(a6),d1
                 jsr     j_AddItem
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  #48,d1          ; "{NAME} now has the{N}{ITEM} in hand.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.w   @Goto_Restart
@@ -941,8 +909,8 @@ CaravanItemSubmenu_Give:
                 move.w  member(a6),d0
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  #40,d1          ; "{ITEM} belongs{N}to {NAME} now.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @Goto_Restart
@@ -951,7 +919,7 @@ CaravanItemSubmenu_Give:
                 move.w  targetMember(a6),d1
                 move.w  targetItemSlot(a6),d1
                 bsr.w   IsItemInSlotEquippedAndCursed
-                bcs.w   @Restart_0
+                bcs.w   @Restart
                 
                 move.w  targetMember(a6),d0
                 move.w  targetItemSlot(a6),d1
@@ -965,49 +933,41 @@ CaravanItemSubmenu_Give:
                 move.w  member(a6),d0
                 move.w  targetItemIndex(a6),d1
                 jsr     j_AddItem
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  targetItemIndex(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                move.w  targetItemIndex(a6),((DIALOGUE_NAME_INDEX_3-$1000000)).w
                 move.w  #41,d1          ; "{ITEM} is exchanged{N}for {NAME}'s {ITEM}.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
 @Goto_Restart:
                 
-                bra.s   @Restart
+                bra.s   @Goto_Restart_0
 byte_2275A:
                 
-                
-                ; Changed your mind
+                @ChangedYourMind:
                 txt     4               ; "Did you change your mind?{W2}"
-@Restart:
+@Goto_Restart_0:
                 
-                bra.s   @Restart_0
+                bra.s   @Restart
 byte_22760:
                 
-                
-                ; Exit Item Give action
+                @Exit:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
-
-    ; End of function CaravanItemSubmenu_Give
-
-
-; START OF FUNCTION CHUNK FOR CaravanItemSubmenu_Give
-
-@Restart_0:
+@Restart:
                 
                 move.w  #32,d1          ; "Pass another item?"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.w   @Start          
 
-; END OF FUNCTION CHUNK FOR CaravanItemSubmenu_Give
+    ; End of function caravanItemSubmenu_Give
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-CaravanItemSubmenu_Equip:
+caravanItemSubmenu_Equip:
                 
                 module
                 move.w  #33,d1          ; "Who will you equip?{D1}"
@@ -1018,25 +978,19 @@ CaravanItemSubmenu_Equip:
                 bsr.w   PopulateGenericListWithMembersList
                 move.b  #3,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
-                cmpi.w  #$FFFF,d0
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                cmpi.w  #-1,d0
                 bne.s   @Restart
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
-
-    ; End of function CaravanItemSubmenu_Equip
-
-
-; START OF FUNCTION CHUNK FOR CaravanItemSubmenu_Equip
-
 @Restart:
                 
                 move.w  #35,d1          ; Equip another item?{D1}
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @Start          
 
-; END OF FUNCTION CHUNK FOR CaravanItemSubmenu_Equip
+    ; End of function caravanItemSubmenu_Equip
 
                 modend
 
@@ -1049,7 +1003,7 @@ itemSlot = -6
 itemIndex = -4
 member = -2
 
-CaravanItemSubmenu_Drop:
+caravanItemSubmenu_Drop:
                 
                 module
                 move.w  #36,d1          ; "Discard whose item?{D1}"
@@ -1060,12 +1014,12 @@ CaravanItemSubmenu_Drop:
                 bsr.w   PopulateGenericListWithMembersList
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewAttAndDefPage
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
-                cmpi.w  #$FFFF,member(a6)
-                beq.s   byte_2284E      
+                cmpi.w  #-1,member(a6)
+                beq.s   byte_2284E      ; @CancelDiscard_0
                 
                 bsr.w   IsItemInSlotEquippedAndCursed
                 bcs.w   @Restart
@@ -1075,11 +1029,11 @@ CaravanItemSubmenu_Drop:
                 jsr     IsItemUnsellable
                 bcs.w   @Restart
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 tst.w   d0
-                bne.s   byte_22844      
+                bne.s   byte_22844      ; @CancelDiscard
                 
                 ; Discard item
                 move.w  member(a6),d0
@@ -1092,12 +1046,13 @@ CaravanItemSubmenu_Drop:
                 jsr     j_AddItemToDeals
 @Continue:
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #42,d1          ; "Discarded the {ITEM}.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.s   @Goto_Restart
 byte_22844:
                 
+                @CancelDiscard:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
 @Goto_Restart:
@@ -1105,22 +1060,17 @@ byte_22844:
                 bra.s   @Restart
 byte_2284E:
                 
+                @CancelDiscard_0:
                 txt     4               ; "Did you change your mind?{W2}"
                 clsTxt
                 rts
-
-    ; End of function CaravanItemSubmenu_Drop
-
-
-; START OF FUNCTION CHUNK FOR CaravanItemSubmenu_Drop
-
 @Restart:
                 
                 move.w  #38,d1          ; "Discard another item?"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bra.w   @Start          
 
-; END OF FUNCTION CHUNK FOR CaravanItemSubmenu_Drop
+    ; End of function caravanItemSubmenu_Drop
 
                 modend
 
@@ -1134,10 +1084,10 @@ DisplaySpecialCaravanDescription:
                 
                 movem.l d0-d1/a0,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                lea     tbl_SpecialCaravanDescriptions(pc), a0
+                lea     table_SpecialCaravanDescriptions(pc), a0
 @FindItem_Loop:
                 
-                cmpi.w  #CODE_TERMINATOR_WORD,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   @Done
                 cmp.b   (a0),d1
                 bne.s   @Next

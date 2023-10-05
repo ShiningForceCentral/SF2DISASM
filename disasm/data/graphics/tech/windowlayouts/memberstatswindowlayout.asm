@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\memberstatswindowlayout.asm :
 ; 0x16A62..0x16EA6 : Member stats window layout
-MemberStatusWindowLayout:
+layout_MemberStatusWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;

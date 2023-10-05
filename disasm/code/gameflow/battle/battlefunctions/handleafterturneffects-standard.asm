@@ -11,7 +11,7 @@
 statusEffects = -4
 combatant = -2
 
-HandleAfterTurnEffects:
+ProcessAfterTurnEffects:
                 
                 jsr     GetCurrentHP
                 bne.s   @Continue
@@ -20,7 +20,7 @@ HandleAfterTurnEffects:
 @Continue:      clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 link    a6,#-4
                 move.w  d0,combatant(a6)
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 
                 ; Check Stun
                 jsr     GetStatusEffects
@@ -28,7 +28,7 @@ HandleAfterTurnEffects:
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_STUN,d1
                 beq.s   @CheckSleep
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 andi.w  #STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d2
                 move.w  #CHANCE_TO_NO_LONGER_BE_STUNNED,d6 ; 1/2 chance to no longer be stunned
                 jsr     (GenerateRandomNumber).w
@@ -45,7 +45,7 @@ HandleAfterTurnEffects:
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_SLEEP,d1
                 beq.s   @CheckMuddle
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d2
                 
                 ; Randomly wake early
@@ -73,7 +73,7 @@ HandleAfterTurnEffects:
                 jsr     (GenerateRandomNumber).w
                 andi.w  #STATUSEFFECT_MUDDLE,d7
                 bne.s   @Muddled        
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     355             ; "{CLEAR}{NAME} is fine.{D3}"
                 clr.w   d1
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d2
@@ -91,8 +91,8 @@ HandleAfterTurnEffects:
                 jsr     (GenerateRandomNumber).w
                 andi.w  #STATUSEFFECT_SILENCE,d7
                 bne.s   @Silenced       
-                move.w  #SPELL_DISPEL,((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  d0,((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  #SPELL_DISPEL,((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     351             ; "{CLEAR}{SPELL} expired.{N}{NAME} is no longer{N}silenced.{D3}"
                 clr.w   d1
                 bra.s   @UpdateSilence
@@ -107,7 +107,7 @@ HandleAfterTurnEffects:
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d2
                 subi.w  #STATUSEFFECTCOUNTER_SLOW,d1 ; decrement slow counter
                 bne.s   @UpdateSlow
-                move.w  #SPELL_SLOW,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  #SPELL_SLOW,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     349             ; "{CLEAR}{SPELL} expired.{N}Agility and defense{N}return to normal.{D3}"
 @UpdateSlow:    or.w    d2,d1
                 move.w  d1,statusEffects(a6)
@@ -119,7 +119,7 @@ HandleAfterTurnEffects:
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST,d2
                 subi.w  #STATUSEFFECTCOUNTER_ATTACK,d1 ; decrement attack counter
                 bne.s   @UpdateAttack
-                move.w  #SPELL_ATTACK,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  #SPELL_ATTACK,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     350             ; "{CLEAR}{SPELL} expired.{N}Attack returns to normal.{D3}"
 @UpdateAttack:  or.w    d2,d1
                 move.w  d1,statusEffects(a6)
@@ -131,7 +131,7 @@ HandleAfterTurnEffects:
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_ATTACK,d2
                 subi.w  #STATUSEFFECTCOUNTER_BOOST,d1 ; decrement boost counter
                 bne.s   @UpdateBoost
-                move.w  #SPELL_BOOST,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  #SPELL_BOOST,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     348             ; "{CLEAR}{SPELL} expired.{N}Agility and defense{N}return to normal.{D3}"
 @UpdateBoost:   or.w    d2,d1
                 move.w  d1,statusEffects(a6)
@@ -143,7 +143,7 @@ HandleAfterTurnEffects:
                 ; Apply poison damage
                 andi.w  #STATUSEFFECT_POISON,d1
                 beq.s   @UpdateStats
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
             if (PERCENT_POISON_DAMAGE>=1)
                 jsr     GetMaxHP
                 mulu.w  #PERCENT_POISON_DAMAGE,d1
@@ -152,7 +152,7 @@ HandleAfterTurnEffects:
             else
                 moveq   #POISON_DAMAGE,d1 ; constant poison damage
             endif
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     307             ; "{CLEAR}{NAME} gets damaged{N}by {#} because of the poison.{D3}"
                 jsr     DecreaseCurrentHP
                 tst.w   d1
@@ -165,7 +165,7 @@ HandleAfterTurnEffects:
                 unlk    a6
                 rts
 
-    ; End of function HandleAfterTurnEffects
+    ; End of function ProcessAfterTurnEffects
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -177,7 +177,7 @@ HandleAfterTurnEffects:
 ApplyAfterTurnRecovery:
                 
                 movem.l d1-d6/a0,-(sp)
-                move.w  d0,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 clr.w   d5                  ; d5.w = recovery amount
                 jsr     GetEquippedRing
                 move.w  d1,d4               ; d4.w = copy of equipped ring
@@ -188,7 +188,7 @@ ApplyAfterTurnRecovery:
                 ; Check HP recovery for weapon
                 tst.w   d1
                 bmi.s   @CheckRingHp        ; skip if no equipped weapon
-                lea     tbl_AfterTurnHpRecoveryForWeapons(pc), a0
+                lea     table_AfterTurnHpRecoveryForWeapons(pc), a0
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @CheckRingHp
                 clr.w   d1
@@ -197,7 +197,7 @@ ApplyAfterTurnRecovery:
                 
 @CheckRingHp:   move.w  d4,d1
                 bmi.s   @RecoverHp          ; skip if no equipped ring
-                lea     tbl_AfterTurnHpRecoveryForRings(pc), a0
+                lea     table_AfterTurnHpRecoveryForRings(pc), a0
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @RecoverHp
                 clr.w   d1
@@ -213,13 +213,13 @@ ApplyAfterTurnRecovery:
                 sub.w   d6,d1
                 ble.s   @CheckWeaponMp
                 ext.l   d1
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     356                 ; "{CLEAR}{NAME} recovered{N}{#} hit points.{D3}"
                 
 @CheckWeaponMp: clr.w   d5
                 move.w  d3,d1
                 bmi.s   @CheckRingMp        ; skip if no equipped weapon
-                lea     tbl_AfterTurnMpRecoveryForWeapons(pc), a0
+                lea     table_AfterTurnMpRecoveryForWeapons(pc), a0
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @CheckRingMp
                 clr.w   d1
@@ -228,7 +228,7 @@ ApplyAfterTurnRecovery:
                 
 @CheckRingMp:   move.w  d4,d1
                 bmi.s   @RecoverMp          ; skip if no equipped ring
-                lea     tbl_AfterTurnMpRecoveryForRings(pc), a0
+                lea     table_AfterTurnMpRecoveryForRings(pc), a0
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @RecoverMp
                 clr.w   d1
@@ -244,7 +244,7 @@ ApplyAfterTurnRecovery:
                 sub.w   d6,d1
                 ble.s   @Done
                 ext.l   d1
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     357                 ; "{CLEAR}{NAME} recovered{N}{#} magic points.{D3}"
                 
 @Done:          movem.l (sp)+,d1-d6/a0

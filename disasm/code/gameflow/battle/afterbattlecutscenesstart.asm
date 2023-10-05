@@ -12,7 +12,7 @@ ExecuteAfterBattleCutscene:
                 getSavedByte CURRENT_BATTLE, d1
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag
-                bne.w   loc_47D54
+                bne.w   EndAfterBattleCutscene
                 movem.l d0/a0,-(sp)
                 clr.w   d0
                 getSavedByte CURRENT_BATTLE, d0
@@ -21,4 +21,7 @@ ExecuteAfterBattleCutscene:
                 lea     rpt_AfterBattleCutscenes(pc,d0.w),a0
                 bsr.w   ExecuteMapScript
                 movem.l (sp)+,d0/a0
-                bra.w   loc_47D54
+                bra.w   EndAfterBattleCutscene
+
+    ; End of function ExecuteAfterBattleCutscene
+

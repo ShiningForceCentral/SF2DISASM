@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: D0 = $FFFFFFFF if pressing start, 0 if not
+; Out: d0.w = -1 if pressing start, 0 if not
 
 
 DisplaySegaLogo:
@@ -25,12 +25,12 @@ DisplaySegaLogo:
                 jsr     (SetVdpReg).w
                 move.w  #$8B03,d0
                 jsr     (SetVdpReg).w
-                lea     SegaLogo(pc), a0
+                lea     tiles_SegaLogo(pc), a0
                 lea     ($2000).w,a1
                 move.w  #$C00,d0
                 move.w  #2,d1
                 jsr     (ApplyImmediateVramDmaOnCompressedTiles).w
-                lea     SegaLogoPalette(pc), a0
+                lea     palette_SegaLogo(pc), a0
                 lea     (PALETTE_1_CURRENT).l,a1
                 lea     (PALETTE_1_BASE).l,a2
                 moveq   #7,d7
@@ -44,7 +44,7 @@ DisplaySegaLogo:
                 jsr     (EnableDmaQueueProcessing).w
                 jsr     (EnableDisplayAndInterrupts).w
                 
-                move.l  #tbl_ConfigurationModeInputSequence,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
+                move.l  #table_ConfigurationModeInputSequence,((CONFIGURATION_MODE_OR_GAME_STAFF_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
             if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
@@ -53,7 +53,7 @@ DisplaySegaLogo:
                 dc.l VInt_CheckConfigurationModeCheat
             endif
                 
-                move.l  #tbl_DebugModeInputSequence,((ENTITY_WALKING_PARAMS-$1000000)).w
+                move.l  #table_DebugModeInputSequence,((ENTITY_WALKING_PARAMETERS-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
             if (STANDARD_BUILD&EASY_DEBUG_MODE=1)
@@ -68,17 +68,17 @@ DisplaySegaLogo:
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 bsr.w   CalculateRomChecksum
-                lea     byte_28BB8(pc), a0
+                lea     table_28BB8(pc), a0
                 nop
                 bsr.w   sub_28B12
                 moveq   #20,d0
                 jsr     (Sleep).w       
                 bsr.w   sub_28B12
-                move.l  #$D80405,(SPRITE_04).l
-                move.l  #$62014A,(SPRITE_04_TILE_FLAGS).l
+                move.l  #$D80405,(SPRITE_TRADEMARK).l
+                move.l  #$62014A,(SPRITE_TRADEMARK_VDPTILE).l
                 moveq   #10,d0
                 jsr     (Sleep).w       
-                move.w  #$28,d0 
+                move.w  #40,d0
 @Continue:
                 
                 lea     SegaLogoColors+4(pc,d0.w),a0 ; lea     segaLogoColors(pc,d0.w),a0
@@ -94,11 +94,11 @@ DisplaySegaLogo:
                 movem.l (sp)+,d0
                 subq.w  #2,d0
                 bpl.s   @CheckInput_Start
-                move.w  #$3C,d0 
+                move.w  #60,d0
 @WaitForInput_Start:
                 
                 jsr     (WaitForVInt).w
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 bne.w   DisplaySegaLogo_Quit
                 subq.w  #1,d0
                 bne.s   @WaitForInput_Start
@@ -116,32 +116,34 @@ DisplaySegaLogo:
                 rts
 @CheckInput_Start:
                 
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @Continue       ; keep going if not pressing start
 DisplaySegaLogo_Quit:
                 
-                move.l  #$D80405,(SPRITE_04).l
-                move.l  #$62014A,(SPRITE_04_TILE_FLAGS).l
+                move.l  #$D80405,(SPRITE_TRADEMARK).l
+                move.l  #$62014A,(SPRITE_TRADEMARK_VDPTILE).l
                 jsr     (FadeOutToBlack).w
-                moveq   #$FFFFFFFF,d0
+                moveq   #-1,d0
                 rts
 
     ; End of function DisplaySegaLogo
 
 SegaLogoColors: incbin "data/graphics/tech/segalogocolors.bin"
-SegaLogoPalette:incbin "data/graphics/tech/segalogopalette.bin"
-SegaLogo:       incbin "data/graphics/tech/segalogo.bin"
+palette_SegaLogo:
+                incbin "data/graphics/tech/segalogopalette.bin"
+tiles_SegaLogo: incbin "data/graphics/tech/segalogotiles.bin"
 
 ; =============== S U B R O U T I N E =======================================
 
 
 sub_28B12:
                 
-                cmpi.b  #$FF,(a0)
+                cmpi.b  #-1,(a0)
                 beq.w   loc_28B64
+                
                 moveq   #3,d7
                 lea     (SPRITE_03).l,a1
-                lea     word_28BB0(pc), a2
+                lea     table_28BB0(pc), a2
 loc_28B26:
                 
                 clr.w   d0
@@ -155,14 +157,14 @@ loc_28B26:
                 move.w  d0,(a1)
                 clr.w   d0
                 move.b  (a0)+,d0
-                lsl.w   #4,d0
+                lsl.w   #NIBBLE_SHIFT_COUNT,d0
                 addi.w  #$100,d0
                 move.w  d0,VDPSPRITE_OFFSET_TILE(a1)
                 move.w  (a2)+,VDPSPRITE_OFFSET_SIZE(a1)
                 subq.w  #8,a1
                 dbf     d7,loc_28B26
                 jsr     (WaitForVInt).w
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   loc_28B68
                 bra.s   sub_28B12
 loc_28B64:
@@ -171,11 +173,11 @@ loc_28B64:
                 rts
 loc_28B68:
                 
-                lea     byte_28F31(pc), a0
+                lea     table_28F31(pc), a0
                 nop
                 moveq   #3,d7
                 lea     (SPRITE_03).l,a1
-                lea     word_28BB0(pc), a2
+                lea     table_28BB0(pc), a2
 loc_28B7A:
                 
                 clr.w   d0
@@ -189,7 +191,7 @@ loc_28B7A:
                 move.w  d0,(a1)
                 clr.w   d0
                 move.b  (a0)+,d0
-                lsl.w   #4,d0
+                lsl.w   #NIBBLE_SHIFT_COUNT,d0
                 addi.w  #$100,d0
                 move.w  d0,VDPSPRITE_OFFSET_TILE(a1)
                 move.w  (a2)+,VDPSPRITE_OFFSET_SIZE(a1)
@@ -200,11 +202,11 @@ loc_28B7A:
 
     ; End of function sub_28B12
 
-word_28BB0:     dc.w $F04
+table_28BB0:    dc.w $F04
                 dc.w $F03
                 dc.w $F02
                 dc.w $F01
-byte_28BB8:     dc.b $D0
+table_28BB8:    dc.b $D0
                 dc.b $D
                 dc.b 4
                 dc.b $D0
@@ -1093,7 +1095,7 @@ byte_28BB8:     dc.b $D0
                 dc.b $43
                 dc.b 4
                 dc.b 7
-byte_28F31:     dc.b 0
+table_28F31:    dc.b 0
                 dc.b 4
                 dc.b 0
                 dc.b $15
@@ -1150,7 +1152,7 @@ LoadSegaLogoPalette:
 CalculateRomChecksum:
                 
                 jsr     (WaitForVInt).w
-                btst    #INPUT_BIT_START,((P2_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_2_INPUT-$1000000)).w
                 beq.s   @Return         ; execute only if P2 START pressed
                 lea     (RomEndAddress).w,a0
                 move.l  (a0),d1
@@ -1181,8 +1183,8 @@ CalculateRomChecksum:
 
 VInt_CheckConfigurationModeCheat:
                 
-                movea.l ((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w,a0
-                cmpi.b  #$FF,(a0)
+                movea.l ((CONFIGURATION_MODE_OR_GAME_STAFF_POINTER-$1000000)).w,a0
+                cmpi.b  #-1,(a0)
                 bne.s   CheckConfigurationModeInputSequence
 
     ; End of function VInt_CheckConfigurationModeCheat
@@ -1193,7 +1195,7 @@ VInt_CheckConfigurationModeCheat:
 
 VInt_ActivateConfigurationModeCheat:
                 
-                move.b  #$FF,((CONFIGURATION_MODE_ACTIVATED-$1000000)).w
+                move.b  #-1,((CONFIGURATION_MODE_TOGGLE-$1000000)).w
                 sndCom  MUSIC_ITEM
                 rts
 
@@ -1206,9 +1208,9 @@ VInt_ActivateConfigurationModeCheat:
 CheckConfigurationModeInputSequence:
                 
                 move.b  (a0),d0
-                cmp.b   ((P1_INPUT-$1000000)).w,d0
+                cmp.b   ((PLAYER_1_INPUT-$1000000)).w,d0
                 bne.s   @Return
-                addq.l  #1,((CONFMODE_AND_CREDITS_SEQUENCE_POINTER-$1000000)).w
+                addq.l  #1,((CONFIGURATION_MODE_OR_GAME_STAFF_POINTER-$1000000)).w
 @Return:
                 
                 rts

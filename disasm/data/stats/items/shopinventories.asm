@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\items\shopinventories.asm :
 ; 0x20878..0x20981 : Shop inventories
-tbl_ShopInventories:
+list_ShopInventories:
                 
 ; Syntax        shopInventory [ITEM_]enum,..[ITEM_]enum
 ;

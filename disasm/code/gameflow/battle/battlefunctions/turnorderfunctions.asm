@@ -12,7 +12,7 @@ GenerateBattleTurnOrder:
                 moveq   #TURN_ORDER_ENTRIES_COUNTER,d7
 @ClearTurnOrder_Loop:
                 
-                move.w  #$FFFF,(a0)+
+                move.w  #-1,(a0)+
                 dbf     d7,@ClearTurnOrder_Loop
                 
                 movea.l (sp)+,a0
@@ -27,7 +27,7 @@ GenerateBattleTurnOrder:
                 dbf     d7,@AddAllyTurns_Loop
                 
                 move.w  #COMBATANT_ENEMIES_START,d0
-                moveq   #ENTITY_ENEMY_COUNTER,d7
+                moveq   #BATTLE_ENEMY_ENTITIES_COUNTER,d7
 @AddEnemyTurns_Loop:
                 
                 move.w  d7,-(sp)

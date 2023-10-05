@@ -4,11 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; Load proper battlescene sprite/magic animation properties.
+; Load battlescene sprite and spellanimation properties.
 ; 
 ;       In: a2 = battlescene script stack frame
-;           a3 = pointer to action data in RAM
-;           a4 = battlescene actor index in RAM
+;           a3 = battleaction data pointer
+;           a4 = actor index pointer
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -18,7 +18,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -33,12 +33,13 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-CreateBattlesceneAnimation:
+battlesceneScript_PerformAnimation:
                 
+                module
                 movem.l d0-d3/a0,-(sp)
                 move.b  (a4),d0
                 cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
-                bne.s   @CheckMuddled
+                bne.s   @IsMuddled
                 
                 ; Decrease caster's MP
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
@@ -47,21 +48,23 @@ CreateBattlesceneAnimation:
                 neg.w   d2
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction  
+                bne.s   byte_A238       ; @Reaction_Enemy
                 executeAllyReaction #0,d2,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
-                bra.s   @CheckMuddled
-@EnemyReaction:
+                bra.s   @IsMuddled
+byte_A238:
                 
+                @Reaction_Enemy:
                 executeEnemyReaction #0,d2,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
-@CheckMuddled:
+@IsMuddled:
                 
-                cmpi.w  #BATTLEACTION_MUDDLE,(a3)
+                cmpi.w  #BATTLEACTION_MUDDLED,(a3)
                 beq.w   @Skip           ; skip if action type is "muddled"
-                bscHideTextBox
-                bsr.w   GetSpellAnimation
+                
+                bscCloseDialogueWindow
+                bsr.w   battlesceneScript_GetSpellanimation
                 moveq   #BATTLEANIMATION_ATTACK,d5
                 tst.w   (a3)
-                bne.s   @CheckCastSpell
+                bne.s   @IsCastSpell
                 
                 ; Determine attack animation
                 move.b  (a4),d0
@@ -76,7 +79,7 @@ CreateBattlesceneAnimation:
                 cmpi.w  #CLASS_BRGN,d1  ; BRGN
                 bne.s   @RegularAttackAnimation
                 jsr     GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 bne.s   @RegularAttackAnimation
                 moveq   #ALLYBATTLEANIMATION_SPECIAL_BRGN,d5
                 moveq   #SPELLANIMATION_NONE,d4
@@ -87,20 +90,20 @@ CreateBattlesceneAnimation:
                 bra.w   @AnimateSprite
 @DetermineSpecialCritical:
                 
-                moveq   #CHANCE_TO_PERFORM_SPECIAL_ATTACK,d0 ; 1/16 chance to perform special MMNK or RBT attack animation (which also forces a critical hit)
+                moveq   #CHANCE_TO_PERFORM_SPECIAL_CRITICAL,d0 ; 1/16 chance to perform special MMNK or RBT attack animation (which also forces a critical hit)
                 jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   @RegularAttackAnimation_0
-                move.b  #$FF,specialCritical(a2)
+                move.b  #-1,specialCritical(a2)
                 bra.w   @AnimateSprite
 @RegularAttackAnimation_0:
                 
                 moveq   #BATTLEANIMATION_ATTACK,d5
                 bra.w   @AnimateSprite
-@CheckCastSpell:
+@IsCastSpell:
                 
                 cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
-                bne.s   @CheckUseItem
+                bne.s   @IsUseItem
                 
                 ; Determine spellcasting animation
                 move.b  (a4),d0
@@ -121,24 +124,28 @@ CreateBattlesceneAnimation:
                 cmpi.w  #ENEMY_ODD_EYE,d1
                 beq.w   @AnimateSprite
                 moveq   #BATTLEANIMATION_ATTACK,d5
-@CheckUseItem:
+@IsUseItem:
                 
                 cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
                 bne.s   @AnimateSprite
+                
                 moveq   #BATTLEANIMATION_USE_ITEM,d5
 @AnimateSprite:
                 
-                bsr.w   WriteBattlesceneScript_AnimateAction
+                bsr.w   battlesceneScript_AnimateAction
                 cmpi.w  #BATTLEACTION_BURST_ROCK,(a3)
-                bne.s   @Skip           ; skip if action type is NOT "burst rock"
+                bne.s   @Skip
+                
+                ; Burst Rock
                 move.w  #$8000,d2
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction_BurstRock
+                bne.s   byte_A330       ; @Reaction_EnemyBurstRock
                 executeAllyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BurstRockSelfDestruction
-@EnemyReaction_BurstRock:
+byte_A330:
                 
+                @Reaction_EnemyBurstRock:
                 executeEnemyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BurstRockSelfDestruction:
                 
@@ -149,5 +156,6 @@ CreateBattlesceneAnimation:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function CreateBattlesceneAnimation
+    ; End of function battlesceneScript_PerformAnimation
 
+                modend

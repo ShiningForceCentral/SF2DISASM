@@ -6,13 +6,13 @@
 
 ; In: a1 = window tiles address, d0.w = combatant index
 
-windowTilesAddress = -8
+windowLayoutStartAddress = -8
 combatant = -2
 
 BuildMiniStatusWindow:
                 
                 link    a6,#-8
-                move.l  a1,windowTilesAddress(a6)
+                move.l  a1,windowLayoutStartAddress(a6)
                 
                 ; Clear window tiles
                 movem.l d7/a1,-(sp)
@@ -87,36 +87,36 @@ BuildMiniStatusWindow:
 @CopyTileColumns:
                 
                 move.w  d6,((MINISTATUS_WINDOW_WIDTH-$1000000)).w
-                lea     MiniStatusWindowLayout(pc), a0
-                movea.l windowTilesAddress(a6),a1
+                lea     layout_MiniStatusWindow(pc), a0
+                movea.l windowLayoutStartAddress(a6),a1
                 
                 ; Copy leftmost columns
-                bsr.w   CopyMiniStatusWindowTileColumn
-                bsr.w   CopyMiniStatusWindowTileColumn
-                bsr.w   CopyMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
                 move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d7
                 subi.w  #WINDOW_MINISTATUS_SIDECOLUMNS_NUMBER_PLUS_ONE,d7
 @CopyMiddleColumns_Loop:
                 
-                lea     MiniStatusWindowLayout_Body(pc), a0
+                lea     layout_MiniStatusWindowBody(pc), a0
                 nop
-                bsr.w   CopyMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
                 dbf     d7,@CopyMiddleColumns_Loop
                 
                 ; Copy rightmost columns
-                lea     MiniStatusWindowLayout_Tail(pc), a0
+                lea     layout_MiniStatusWindowTail(pc), a0
                 nop
-                bsr.w   CopyMiniStatusWindowTileColumn
-                bsr.w   CopyMiniStatusWindowTileColumn
-                bsr.w   CopyMiniStatusWindowTileColumn
-                bsr.w   CopyMiniStatusWindowTileColumn
-                bsr.w   CopyMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
                 
                 ; Write name, class, level
                 movem.w d0-d3,-(sp)
                 move.w  combatant(a6),d0
                 jsr     j_GetCombatantName
-                movea.l windowTilesAddress(a6),a1
+                movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
                 addq.l  #2,a1
                 moveq   #-44,d1
@@ -146,7 +146,7 @@ BuildMiniStatusWindow:
                 ; Draw HP bar
                 movem.w d0-d3,-(sp)
                 movem.w d2-d3,-(sp)     ; -> push current/max MP values
-                movea.l windowTilesAddress(a6),a1
+                movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_TWO_LINES,a1
                 addq.w  #WINDOW_MINISTATUS_OFFSET_STATBARS_START,a1
                 move.l  a1,-(sp)        ; -> push stat bars start address
@@ -169,7 +169,7 @@ BuildMiniStatusWindow:
                 
                 ; Write current HP
                 ext.l   d0
-                movea.l windowTilesAddress(a6),a1
+                movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_TWO_LINES,a1
                 move.l  a1,-(sp)
                 adda.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
@@ -239,7 +239,7 @@ aUnknownValue:  dc.b '??'
 ; Draw tiles from a0 into a1 (one column)
 
 
-CopyMiniStatusWindowTileColumn:
+WriteOneMiniStatusWindowTileColumn:
                 
                 movem.l a1,-(sp)
                 move.w  (a0)+,(a1)
@@ -255,5 +255,5 @@ CopyMiniStatusWindowTileColumn:
                 addq.w  #2,a1
                 rts
 
-    ; End of function CopyMiniStatusWindowTileColumn
+    ; End of function WriteOneMiniStatusWindowTileColumn
 

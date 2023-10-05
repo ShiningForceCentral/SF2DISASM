@@ -15,7 +15,7 @@ loc_48FF2:
                 
                 move.l  (a0)+,(a1)+     ; save current palette 1
                 dbf     d0,loc_48FF2    
-                lea     plt_IntroStormEffect(pc), a0
+                lea     palette_IntroStormEffect(pc), a0
                 nop
                 lea     (PALETTE_1_CURRENT).l,a1
                 moveq   #7,d0
@@ -41,7 +41,7 @@ loc_49022:
 
     ; End of function ApplyStormEffect
 
-plt_IntroStormEffect:
+palette_IntroStormEffect:
                 dc.w 0
                 dc.w $C40
                 dc.w $E84

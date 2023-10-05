@@ -24,8 +24,8 @@ GetEnemyAnimation:
                 add.w   ((BATTLESCENE_ENEMYBATTLEANIMATION-$1000000)).w,d1
 @GetAnimationPointer:
                 
-                conditionalLongAddr movea.l, p_pt_EnemyAnimations, a0
-                lsl.w   #2,d1
+                getPointer p_pt_EnemyAnimations, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a0,d1.w),a0
                 move.w  (sp)+,d1
                 rts
@@ -43,7 +43,7 @@ GetEnemyAnimation:
 GetAllyBattlespriteIdleAnimate:
                 
                 move.l  a0,-(sp)
-                lea     tbl_AllyBattlespriteIdleAnimate(pc), a0
+                lea     table_AnimatedWhenIdleAllyBattlesprites(pc), a0
                 bra.w   GetBattlespriteIdleAnimate
 
     ; End of function GetAllyBattlespriteIdleAnimate
@@ -59,7 +59,7 @@ GetAllyBattlespriteIdleAnimate:
 GetEnemyBattlespriteIdleAnimate:
                 
                 move.l  a0,-(sp)
-                lea     tbl_EnemyBattlespriteIdleAnimate(pc), a0
+                lea     table_AnimatedWhenIdleEnemyBattlesprites(pc), a0
 GetBattlespriteIdleAnimate:
                 
                 moveq   #0,d1
@@ -67,7 +67,7 @@ GetBattlespriteIdleAnimate:
                 
                 cmp.b   (a0),d0
                 beq.w   @Found
-                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)+
+                cmpi.b  #-1,(a0)+
                 bne.s   @FindBattlesprite_Loop
                 moveq   #1,d1
 @Found:
@@ -94,7 +94,7 @@ InitializeBattlescenePalettes:
                 clr.l   (a1)+
                 dbf     d0,@ClearPalettes_Loop
                 
-                lea     plt_BattlesceneBasePalette(pc), a0
+                lea     palette_BattlesceneBase(pc), a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
                 moveq   #7,d0
 @LoadBattlesceneBasePalette_Loop:
@@ -106,8 +106,8 @@ InitializeBattlescenePalettes:
 
     ; End of function InitializeBattlescenePalettes
 
-plt_BattlesceneBasePalette:
-                incbin "data/graphics/battles/plt_battlescenebasepalette.bin" 
+palette_BattlesceneBase:
+                incbin "data/graphics/battles/battlescenebasepalette.bin" 
                                                         ; Base palette for battlescene UI and ground
 
 ; =============== S U B R O U T I N E =======================================
@@ -127,7 +127,11 @@ loc_198E0:
                 
                 move.w  #VDPTILE_BLANK|VDPTILE_PALETTE3,(a0)+
                 dbf     d0,loc_198E0
-                conditionalPc lea,BackgroundLayout,a1
+            if (STANDARD_BUILD=1)
+                getPointer p_layout_BattlesceneBackground, a1
+            else
+                lea     layout_BattlesceneBackground(pc), a1
+            endif
                 move.w  #191,d0 
 loc_198F0:
                 
@@ -194,7 +198,7 @@ loc_19932:
 sub_19952:
                 
                 movem.l d0/a0,-(sp)
-                lea     ((SPRITE_14-$1000000)).w,a0
+                lea     ((SPRITE_BATTLESCENE_GROUND-$1000000)).w,a0
                 moveq   #2,d0
 loc_1995C:
                 
@@ -216,8 +220,8 @@ loc_1995C:
 
 LoadEnemyBattlespritePropertiesAndPalette:
                 
-                conditionalLongAddr movea.l, p_pt_EnemyBattlesprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_EnemyBattlesprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((BATTLESCENE_ENEMYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w
                 move.w  (a0)+,((ENEMY_BATTLESPRITE_PROP1-$1000000)).w
@@ -247,8 +251,8 @@ LoadEnemyBattlespritePropertiesAndPalette:
 
 LoadEnemyBattlespriteFrameToVram:
                 
-                conditionalLongAddr movea.l, p_pt_EnemyBattlesprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_EnemyBattlesprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
                 add.w   d1,d1
@@ -270,8 +274,8 @@ LoadEnemyBattlespriteFrameToVram:
 LoadEnemyBattlespriteFrameAndWaitForDma:
                 
                 disableSramAndSwitchRomBanks
-                conditionalLongAddr movea.l, p_pt_EnemyBattlesprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_EnemyBattlesprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
                 add.w   d1,d1
@@ -292,8 +296,8 @@ LoadEnemyBattlespriteFrameAndWaitForDma:
 
 LoadAllyBattlespritePropertiesAndPalette:
                 
-                conditionalLongAddr movea.l, p_pt_AllyBattlesprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_AllyBattlesprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w
                 move.w  (a0)+,((ALLY_BATTLESPRITE_PROP1-$1000000)).w
@@ -323,8 +327,8 @@ LoadAllyBattlespritePropertiesAndPalette:
 
 LoadAllyBattlespriteFrameToVram:
                 
-                conditionalLongAddr movea.l, p_pt_AllyBattlesprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_AllyBattlesprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
                 add.w   d1,d1
@@ -339,15 +343,16 @@ LoadAllyBattlespriteFrameToVram:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = ally battlesprite index
+; In: a1 = frame location in VRAM
+;     d0.w = ally battlesprite index
 ;     d1.w = frame index
 
 
 LoadAllyBattlespriteFrameAndWaitForDma:
                 
                 disableSramAndSwitchRomBanks
-                conditionalLongAddr movea.l, p_pt_AllyBattlesprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_AllyBattlesprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
                 add.w   d1,d1
@@ -367,8 +372,8 @@ LoadAllyBattlespriteFrameAndWaitForDma:
 
 LoadWeaponPalette:
                 
-                conditionalLongAddr movea.l, p_plt_WeaponPalettes, a0
-                lsl.w   #2,d0
+                getPointer p_WeaponPalettes, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 move.l  (a0,d0.w),((PALETTE_1_BASE_0E-$1000000)).w
                 rts
 
@@ -382,11 +387,11 @@ LoadWeaponPalette:
 
 LoadWeaponsprite:
                 
-                conditionalLongAddr movea.l, p_pt_Weaponsprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_Weaponsprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF2000_LOADING_SPACE).l,a1
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 lea     (byte_FF4000).l,a0
                 move.w  #511,d0
 @Loop:
@@ -404,8 +409,8 @@ LoadWeaponsprite:
 
 LoadBattlesceneGroundToVram:
                 
-                conditionalLongAddr movea.l, p_pt_Grounds, a0
-                lsl.w   #2,d0
+                getPointer p_pt_Grounds, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
                 move.l  (a0)+,6(a1)     ; replace base palette color indexes 3, 4, and 8
@@ -429,9 +434,9 @@ LoadBattlesceneGroundToVram:
 LoadAllyBattlespriteFrame:
                 
                 disableSramAndSwitchRomBanks
-                conditionalLongAddr movea.l, p_pt_AllyBattlesprites, a0
+                getPointer p_pt_AllyBattlesprites, a0
                 move.w  ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d0
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
                 btst    #0,((byte_FFB56E-$1000000)).w
@@ -457,15 +462,15 @@ LoadNewAllyBattlesprite:
                 
                 move.w  d1,-(sp)
                 move.w  d0,-(sp)
-                conditionalLongAddr movea.l, p_pt_AllyBattlesprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_AllyBattlesprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
                 move.w  (a0),d0
                 move.l  a0,-(sp)
                 adda.w  d0,a0
                 lea     (FF6802_LOADING_SPACE).l,a1
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 bsr.w   GetAllyBattlespriteIdleAnimate
@@ -473,8 +478,8 @@ LoadNewAllyBattlesprite:
                 adda.w  d1,a0
                 move.w  (a0),d0
                 adda.w  d0,a0
-                lea     (FF7A02_LOADING_SPACE).l,a1
-                jsr     (LoadCompressedData).w
+                lea     (ALLY_BATTLESPRITE_FRAME_LOADING_SPACE).l,a1
+                jsr     (LoadStackCompressedData).w
                 move.w  (sp)+,d1
                 rts
 
@@ -490,8 +495,8 @@ LoadNewAllyBattlesprite:
 LoadEnemyBattlespriteFrame:
                 
                 disableSramAndSwitchRomBanks
-                conditionalLongAddr movea.l, p_pt_EnemyBattlesprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_EnemyBattlesprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
                 add.w   d1,d1
@@ -511,18 +516,18 @@ LoadEnemyBattlespriteFrame:
 
 LoadNewEnemyBattlesprite:
                 
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.w   @Return
                 
-                conditionalLongAddr movea.l, p_pt_EnemyBattlesprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_EnemyBattlesprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
                 move.w  (a0),d0
                 adda.w  d0,a0           ; a0 = pointer to sprite frame
-                lea     (ENEMY_BATTLESPRITE_UNCOMP_SPACE).l,a1
-                jsr     (LoadCompressedData).w
-                lea     (ENEMY_BATTLESPRITE_UNCOMP_SPACE).l,a0
+                lea     (ENEMY_BATTLESPRITE_LOADING_SPACE).l,a1
+                jsr     (LoadStackCompressedData).w
+                lea     (ENEMY_BATTLESPRITE_LOADING_SPACE).l,a0
                 lea     (FF5000_LOADING_SPACE).l,a1
                 move.w  #511,d0
 @Loop:
@@ -546,14 +551,14 @@ LoadBattlesceneBackground:
                 tst.w   d0
                 bmi.s   @Return
                 
-                conditionalLongAddr movea.l, p_pt_Backgrounds, a2
-                lsl.w   #2,d0
+                getPointer p_pt_Backgrounds, a2
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a2,d0.w),a2
                 move.w  (a2)+,d0        ; tileset 1 offset
                 
                 movem.l a1-a2,-(sp)
                 lea     -2(a2,d0.w),a0
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 movem.l (sp)+,a1-a2
                 
                 move.w  (a2)+,d0        ; tileset 2 offset
@@ -561,7 +566,7 @@ LoadBattlesceneBackground:
                 move.l  a2,-(sp)
                 lea     -2(a2,d0.w),a0
                 lea     $1800(a1),a1
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 movea.l (sp)+,a2
                 
                 move.w  (a2),d0
@@ -588,8 +593,8 @@ LoadBattlesceneBackground:
 
 LoadBattlesceneGround:
                 
-                conditionalLongAddr movea.l, p_pt_Grounds, a0
-                lsl.w   #2,d0
+                getPointer p_pt_Grounds, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
                 move.l  (a0)+,6(a1)     ; replace base palette color indexes 3, 4, and 8
@@ -597,7 +602,7 @@ LoadBattlesceneGround:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 lea     (FF8C02_LOADING_SPACE).l,a1
-                jmp     (LoadCompressedData).w
+                jmp     (LoadStackCompressedData).w
 
     ; End of function LoadBattlesceneGround
 
@@ -611,8 +616,8 @@ LoadBattlesceneGround:
 LoadInvocationSpriteFrameToVram:
                 
                 disableSram
-                conditionalLongAddr movea.l, p_pt_InvocationSprites, a0
-                lsl.w   #2,d0
+                getPointer p_pt_InvocationSprites, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.l  a0,-(sp)
                 addq.w  #6,a0
@@ -657,7 +662,7 @@ loc_19C58:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 lea     (FF8804_LOADING_SPACE).l,a0
                 lea     ($B600).l,a1
                 move.w  #$500,d0
@@ -678,14 +683,14 @@ loc_19CA0:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = spell animation tiles index
+; In: d0.w = spellanimation graphics data index
 
 
 LoadSpellGraphics:
                 
                 disableSram
-                conditionalLongAddr movea.l, p_pt_SpellGraphics, a0
-                lsl.w   #2,d0
+                getPointer p_pt_SpellGraphics, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0
                 lea     ((PALETTE_3_CURRENT-$1000000)).w,a1
@@ -709,14 +714,14 @@ LoadSpellGraphics:
 
 ; Loads spell graphics for Apollo and Neptun invocations.
 ; 
-; In: d0.w = spell animation tiles index
+; In: d0.w = spellanimation graphics data index
 
 
 LoadSpellGraphicsForInvocation:
                 
                 disableSram
-                conditionalLongAddr movea.l, p_pt_SpellGraphics, a0
-                lsl.w   #2,d0
+                getPointer p_pt_SpellGraphics, a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0        ; load bytes 0-1
                 lea     ((PALETTE_3_CURRENT-$1000000)).w,a1
@@ -729,7 +734,7 @@ LoadSpellGraphicsForInvocation:
                 move.w  (a0)+,$1C(a2)
                 jsr     (ApplyVIntCramDma).w
                 lea     (FF8804_LOADING_SPACE).l,a1
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 lea     (FF8804_LOADING_SPACE).l,a0
                 lea     ($F000).l,a1
                 move.w  #$300,d0
@@ -746,8 +751,9 @@ LoadSpellGraphicsForInvocation:
 
 GetBattlespriteAndPalette:
                 
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 bne.s   @Continue
+                
                 move.w  d0,d1
                 move.w  d0,d2
                 move.w  d0,d3
@@ -758,7 +764,7 @@ GetBattlespriteAndPalette:
                 bcc.w   @Enemy
                 movem.l d0/a0,-(sp)
                 jsr     j_GetClass
-                lea     tbl_AllyBattlesprites(pc), a0
+                lea     table_AllyBattlesprites(pc), a0
                 mulu.w  #9,d0
                 adda.w  d0,a0
                 moveq   #2,d0
@@ -788,7 +794,7 @@ GetBattlespriteAndPalette:
                 
                 move.l  a0,-(sp)
                 jsr     j_GetEnemy
-                lea     tbl_EnemyBattlesprites(pc), a0
+                lea     table_EnemyBattlesprites(pc), a0
                 add.w   d1,d1
                 move.b  1(a0,d1.w),d2
                 ext.w   d2

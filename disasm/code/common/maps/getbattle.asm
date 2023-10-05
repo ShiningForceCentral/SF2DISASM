@@ -7,7 +7,7 @@
 ; In: D0 = map index (if not supplied, will be pulled from CURRENT_MAP)
 ;     D1 = player X coord to check
 ;     D2 = player Y coord to check
-; Out: D7 = battle index to trigger ($FFFF if none)
+; Out: D7 = battle index to trigger (-1 if none)
 ; ...more
 
 
@@ -17,16 +17,19 @@ CheckBattle:
                 move.w  d1,d4
                 move.w  d2,d5
                 move.w  d0,-(sp)
-                cmpi.b  #$FF,d0
+                cmpi.b  #MAP_CURRENT,d0 
                 bne.s   @Continue
                 
                 ; Get current map
                 clr.w   d0
                 getSavedByte CURRENT_MAP, d0
 @Continue:
-                
-                conditionalPc lea,BattleMapCoordinates,a0
-                moveq   #BATTLE_MAX_INDEX,d6
+            if (STANDARD_BUILD=1)
+                getPointer p_table_BattleMapCoordinates, a0
+            else
+                lea     table_BattleMapCoordinates(pc), a0
+            endif
+                moveq   #BATTLES_MAX_INDEX,d6
                 clr.w   d7
 @Loop:
                 
@@ -36,15 +39,15 @@ CheckBattle:
                 add.w   d7,d1
                 jsr     j_CheckFlag
                 beq.s   @Next
-                cmpi.b  #$FF,BATTLEMAPCOORDINATES_OFFSET_TRIGGER_X(a0)
                 
                 ; Check Trigger X
+                cmpi.b  #-1,BATTLEMAPCOORDINATES_OFFSET_TRIGGER_X(a0)
                 beq.w   @CheckTriggerY
                 cmp.b   BATTLEMAPCOORDINATES_OFFSET_TRIGGER_X(a0),d4
                 bne.w   @Next
 @CheckTriggerY:
                 
-                cmpi.b  #$FF,BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y(a0)
+                cmpi.b  #-1,BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y(a0)
                 beq.w   @SetCurrentCoordinates
                 cmp.b   BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y(a0),d5 
                                                         ; if player is not on specified coords (bytes 5/6), then don't return battle index.
@@ -66,11 +69,11 @@ CheckBattle:
                 bra.w   @Done
 @Next:
                 
-                addq.l  #BATTLEMAPCOORDINATES_ENTRY_SIZE,a0
+                addq.l  #BATTLEMAPCOORDINATES_ENTRY_SIZE_FULL,a0
                 addq.w  #1,d7
                 dbf     d6,@Loop
                 
-                moveq   #$FFFFFFFF,d7
+                moveq   #-1,d7
                 move.w  (sp)+,d0
 @Done:
                 

@@ -28,4 +28,4 @@ GetCombatantPortrait:
                 move.w  d1,d0
                 rts
 
-	; End of function GetCombatantPortrait
+    ; End of function GetCombatantPortrait

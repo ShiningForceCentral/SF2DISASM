@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\classes\promotions-standard.asm :
 ; Promotions
-tbl_Promotions: 
+table_Promotions: 
 ; Syntax        promotionSection [CLASS_]enum,..[CLASS_]enum
                 
                 promotionSection &      ; 00: Regular base classes
@@ -41,7 +41,7 @@ tbl_Promotions:
                     BRGN
                 
                 
-tbl_PromotionItems:
+table_PromotionItems:
                 ; Item, base classes section, promoted classes section
                 dc.b ITEM_PEGASUS_WING, 2, 3
                 dc.b ITEM_WARRIORS_PRIDE, 4, 5
@@ -52,14 +52,14 @@ tbl_PromotionItems:
                 tableEnd.b
                 
                 
-tbl_LoseAllSpellsClasses:
+table_LoseAllSpellsClasses:
                 ; Class, replacement spell
                 dc.b CLASS_SORC, SPELL_DAO
                 
                 tableEnd.b
                 
                 
-tbl_DifferentWeaponTypeClasses:
+table_DifferentWeaponTypeClasses:
                 ; Classes that have their weapon unequipped when promoting
                 dc.b CLASS_MMNK
                 dc.b CLASS_NINJ

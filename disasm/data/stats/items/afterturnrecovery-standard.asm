@@ -3,27 +3,27 @@
 
 ; Item index, recovery amount
 
-tbl_AfterTurnHpRecoveryForWeapons:
+table_AfterTurnHpRecoveryForWeapons:
                 
                 dc.b ITEM_HOLY_STAFF, 2
                 
                 tableEnd.b
 
 
-tbl_AfterTurnHpRecoveryForRings:
+table_AfterTurnHpRecoveryForRings:
                 
                 dc.b ITEM_LIFE_RING, 5
                 
                 tableEnd.b
 
 
-tbl_AfterTurnMpRecoveryForWeapons:
+table_AfterTurnMpRecoveryForWeapons:
                 
                 dc.b ITEM_MYSTERY_STAFF, 2
                 
                 tableEnd.b
 
 
-tbl_AfterTurnMpRecoveryForRings:
+table_AfterTurnMpRecoveryForRings:
                 
                 tableEnd.b

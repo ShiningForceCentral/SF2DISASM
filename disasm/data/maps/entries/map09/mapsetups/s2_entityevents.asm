@@ -57,8 +57,8 @@ Map9_EntityEvent4:
 
 Map9_EntityEvent5:
                 
-                move.b  #6,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_HASSAN_0,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map9_EntityEvent5
@@ -69,8 +69,8 @@ Map9_EntityEvent5:
 
 Map9_EntityEvent6:
                 
-                move.b  #$15,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_HASSAN,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map9_EntityEvent6
@@ -81,7 +81,7 @@ Map9_EntityEvent6:
 
 Map9_EntityEvent7:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map9_EntityEvent7
@@ -148,8 +148,8 @@ Map9_EntityEvent10:
 
 Map9_EntityEvent11:
                 
-                move.b  #7,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_HASSAN_1,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map9_EntityEvent11
@@ -175,7 +175,7 @@ byte_56804:
                 chkFlg  798             ; Set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
                 bne.s   byte_5681E
                 txt     1371            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 clsTxt
                 moveq   #40,d0
                 jsr     (Sleep).w       

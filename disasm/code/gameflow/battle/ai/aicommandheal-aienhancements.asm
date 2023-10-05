@@ -131,8 +131,8 @@ ExecuteAiCommand_Heal:
                 move.w  #$FFFF,d3
                 bsr.w   UpdateBattleTerrainOccupiedByAllies
                 move.b  caster(a6),d0
-                bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   InitializeMovementArrays     
+                bsr.w   PopulateMovementArrays
                 clr.w   d3
                 bsr.w   UpdateBattleTerrainOccupiedByAllies
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a0
@@ -252,7 +252,7 @@ ExecuteAiCommand_Heal:
                 
                 tst.b   d2
                 bmi.s   @FindPositionForTargets
-                move.b  #$FF,d2
+                move.b  #-1,d2
                 clr.w   d3
 @SortTargets_InnerLoop:
                 
@@ -303,8 +303,8 @@ ExecuteAiCommand_Heal:
                 move.b  caster(a6),d1
                 move.b  spellEntry(a6),d4
                 bsr.w   DetermineHealingSpellLevel  ; In:  D0 = heal target character index; D1 = combatant index of the spell caster; D4 = spell index
-                                                    ; Out: D2 = spell level to cast (if $FF, then no spell is cast)
-                cmpi.b  #$FF,d2
+                                                    ; Out: D2 = spell level to cast (if -1, then no spell is cast)
+                cmpi.b  #-1,d2
                 beq.s   @FindPositionForNextTarget  ; If no spell is selected, loop to the next potential target to check
                 
                 ; Update spell entry
@@ -446,7 +446,7 @@ GetClosestHealingPosition:
                 move.w  d1,d2
                 bsr.w   GetCombatantX
                 bsr.w   GetClosestAttackPosition    ; closest attack position of the unit whose turn it is to attack unit d0
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 rts
 
     ; End of function GetClosestHealingPositionForSpell

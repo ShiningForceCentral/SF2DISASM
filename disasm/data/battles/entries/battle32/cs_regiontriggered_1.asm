@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle32\cs_regiontriggered_1.asm :
 ; 0x4CD10..0x4CDB4 : Region-activated cutscene for battle 32
 rbcs_battle32:  textCursor 2849
-                executeSubroutine csub_4CD56
+                executeSubroutine csub_JaroJoinForce
                 cameraSpeed $38
                 setCameraEntity ALLY_JARO
                 csWait 60
@@ -29,9 +29,9 @@ rbcs_battle32:  textCursor 2849
 ; Jaro joins the Force
 
 
-csub_4CD56:
+csub_JaroJoinForce:
                 
-                move.w  #143,d0
+                move.w  #COMBATANT_ENEMY_INDEX_15,d0
                 jsr     j_GetCombatantX
                 move.w  d1,d7
                 jsr     j_GetCombatantY
@@ -51,8 +51,8 @@ csub_4CD56:
                 jsr     j_JoinForce
                 moveq   #ALLY_JARO,d0
                 jsr     j_JoinBattleParty
-                move.b  (byte_FFB16F).l,(ENTITY_EVENT_INDEX_LIST+$17).l
+                move.b  (ENTITY_EVENT_ENEMY_JAR).l,(ENTITY_EVENT_ALLY_JARO).l
                 rts
 
-    ; End of function csub_4CD56
+    ; End of function csub_JaroJoinForce
 

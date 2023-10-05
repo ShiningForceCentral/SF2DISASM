@@ -1,7 +1,8 @@
 
 ; ASM FILE data\stats\spells\spelldefs.asm :
 ; 0x176A6..0x1796E : Spell definitions
-tbl_SpellDefs:  
+table_SpellDefinitions:
+                
 ; Syntax        entry      [SPELL_]enum[|level]
 ;               mpCost     0-255
 ;               animation  [SPELLANIMATION_]enum[|variation]
@@ -890,5 +891,5 @@ tbl_SpellDefs:
                 
                 
                 ; Fill out table with dummy entries
-                dcb.b (SPELLDEF_ENTRY_SIZE*252)-(*-tbl_SpellDefs),0
+                dcb.b (SPELLDEF_ENTRY_SIZE*252)-(*-table_SpellDefinitions),0
             endif

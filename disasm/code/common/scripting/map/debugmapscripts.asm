@@ -15,7 +15,7 @@ DebugMapScript:
                 moveq   #0,d1
                 moveq   #$A,d2
                 jsr     j_NumberPrompt
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l DebugMapScripts(pc,d0.w),a0
                 bsr.w   ExecuteMapScript
                 rts

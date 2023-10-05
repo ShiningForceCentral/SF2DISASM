@@ -31,7 +31,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-CalculateSpellDamage:
+battlesceneScript_CalculateSpellDamage:
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     FindSpellDefAddress
@@ -63,13 +63,13 @@ CalculateSpellDamage:
                 add.w   d1,d6           ; +25% damage if successful critical hit
                 st      criticalHit(a2)
                 
-@Skip:          bsr.w   WriteBattlesceneScript_InflictDamage
+@Skip:          bsr.w   battlesceneScript_InflictDamage
                 tst.b   targetDies(a2)
                 beq.s   @Return
-                bsr.w   WriteBattlesceneScript_DeathMessage
+                bsr.w   battlesceneScript_DisplayDeathMessage
 @Return:        rts
 
-    ; End of function CalculateSpellDamage
+    ; End of function battlesceneScript_CalculateSpellDamage
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -89,13 +89,42 @@ AdjustSpellPower:
                 cmpi.w  #BATTLEACTION_CAST_SPELL,(a3)
                 bne.s   @CheckInvocation    ; go to next step if action is not a spell
                 move.b  (a4),d0
+                
+        if (MUSCLE_MAGIC>=1)
+            case MUSCLE_MAGIC_STAT
+=0
+                jsr     GetCurrentMaxHp
+=1
+                jsr     GetCurrentHp
+=2
+                jsr     GetCurrentMaxMp
+=3
+                jsr     GetCurrentMp
+=4
+                jsr     GetBaseAtt
+=5
+                jsr     GetCurrentAtt
+=6
+                jsr     GetBaseDef
+=7
+                jsr     GetCurrentDef
+=8
+                jsr     GetBaseAgi
+=?
+                jsr     GetCurrentAgi
+            endcase
+                mulu.w  #MUSCLE_MAGIC,d1
+                lsr.l   #8,d1
+                add.w   d1,d6
+        else
                 bsr.w   GetClassType
                 beq.s   @CheckInvocation    ; go to next step if caster is not promoted
                 mulu.w  #5,d6
                 lsr.w   #2,d6               ; +25% spell power
+        endif
 @CheckInvocation:
                 
-                lea     tbl_Invocations(pc),a0
+                lea     table_Invocations(pc),a0
                 move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
                 moveq   #0,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w

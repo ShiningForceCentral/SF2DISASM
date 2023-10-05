@@ -19,10 +19,10 @@ GetAttackRange:
                 moveq   #2,d2
                 tst.b   d0
                 bmi.s   @Enemy
-                lea     tbl_UnarmedAttackRangesForClasses(pc), a0
+                lea     table_UnarmedAttackRangesForClasses(pc), a0
                 bsr.w   GetClass
                 bra.s   @Continue
-@Enemy:         lea     tbl_UnarmedAttackRangesForEnemies(pc), a0
+@Enemy:         lea     table_UnarmedAttackRangesForEnemies(pc), a0
                 bsr.w   GetEnemy
 @Continue:      jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcc.s   @Special

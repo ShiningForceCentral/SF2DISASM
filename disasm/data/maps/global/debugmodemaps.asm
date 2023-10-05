@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\global\debugmodemaps.asm :
 ; 0x7186..0x71C0 : Debug mode maps
-tbl_DebugModeAvailableMaps:
+table_DebugModeAvailableMaps:
                 
 @declareAllMaps: macro
 i: = 0
@@ -72,4 +72,3 @@ i: = i+1
                 dc.b MAP_ZEON_ARENA
                 dc.b MAP_OVERWORLD_NEW_GRANSEAL_SHORE
             endif
-                dc.b MAP_NONE

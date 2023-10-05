@@ -22,7 +22,7 @@ sub_440D4:
                 
                 movem.l d0-a5,-(sp)
                 lea     GetEntityPortaitAndSpeechSfx(pc), a0
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
 
     ; End of function sub_440D4
@@ -32,41 +32,51 @@ sub_440D4:
 
 loc_440E2:
                 
-                mulu.w  #$180,d1
-                mulu.w  #$180,d2
+                mulu.w  #MAP_TILE_SIZE,d1
+                mulu.w  #MAP_TILE_SIZE,d2
                 bsr.w   ClearEntities
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
                 lea     NEXT_ENTITYDEF(a1),a2
-                lea     ((FOLLOWERS_LIST-$1000000)).w,a3
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a3
                 movem.w d1-d3,-(sp)
                 moveq   #1,d0
                 bsr.w   InitializeFollowerEntities
 loc_44104:
                 
                 move.b  (a0)+,d1
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 beq.w   loc_44180
                 andi.w  #$3F,d1 
-                muls.w  #$180,d1
+                muls.w  #MAP_TILE_SIZE,d1
                 move.b  (a0)+,d2
                 andi.w  #$3F,d2 
-                muls.w  #$180,d2
+                muls.w  #MAP_TILE_SIZE,d2
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  (a0)+,d3
+                move.w  (a0)+,d4
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
+            else
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
-                cmpi.b  #$F0,d4
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d4
+            endif
                 bcs.s   loc_44146
                 movem.w d0,-(sp)
-                move.w  #$2F,d0 
+                move.w  #ENTITY_SPECIAL_SPRITE,d0
                 move.b  d0,(a2)+
                 move.l  (a0)+,d5
                 clr.l   d6
-                move.w  #$20,d6 
+                move.w  #ENTITY_ENEMY_START,d6
                 bsr.w   DeclareNewEntity
                 movem.w (sp)+,d0
                 bra.s   loc_44104
 loc_44146:
                 
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d4
+            else
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d4
+            endif
                 bcc.s   loc_44170
                 ext.w   d4
                 tst.b   (a1,d4.w)
@@ -79,7 +89,7 @@ loc_4415A:
                 movem.w d0-d1,-(sp)
                 clr.w   d0
                 move.b  d4,d0
-                bsr.w   GetAllyMapSprite
+                bsr.w   GetAllyMapsprite
                 movem.w (sp)+,d0-d1
                 bra.s   loc_44172
 loc_44170:
@@ -100,11 +110,11 @@ loc_44180:
                 movem.w (sp)+,d1-d3
                 clr.w   d0
                 clr.l   d6
-                bsr.w   GetAllyMapSprite
+                bsr.w   GetAllyMapsprite
                 move.l  #eas_Idle,d5
                 bsr.w   DeclareNewEntity
                 move.w  #$10,((SPRITE_SIZE-$1000000)).w
-                move.b  #$FF,(a3)
+                move.b  #-1,(a3)
                 bsr.w   sub_44404
                 movem.l (sp)+,d0-a5
                 rts
@@ -115,24 +125,26 @@ loc_44180:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_441AA:
+DeclareRaftEntity:
                 
                 module
                 movem.l d0-a1,-(sp)
                 checkSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
                 beq.w   @Done
                 checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
-                beq.w   byte_441F0      ; No followers
-                mulu.w  #$180,d1
-                mulu.w  #$180,d2
-                lea     ((FOLLOWERS_LIST-$1000000)).w,a0
+                beq.w   byte_441F0      ; no followers
+                
+                mulu.w  #MAP_TILE_SIZE,d1
+                mulu.w  #MAP_TILE_SIZE,d2
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
                 lea     ((ENTITY_DATA-$1000000)).w,a1
 @GetFollowerPosition_Loop:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
-                cmpi.b  #CODE_TERMINATOR_BYTE,d0
-                beq.s   byte_441F0      ; No followers
+                cmpi.b  #-1,d0
+                beq.s   byte_441F0      ; no followers
+                
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 move.w  d1,(a1,d0.w)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a1,d0.w)
@@ -141,31 +153,40 @@ sub_441AA:
                 bra.s   @GetFollowerPosition_Loop
 byte_441F0:
                 
-                ; No followers
-                chkFlg  64              ; Raft is unlocked
+                
+                ; Is raft unlocked?
+                chkFlg  64
                 beq.w   @Done
+                
+                ; Is raft present on map?
                 getSavedByte CURRENT_MAP, d0
                 checkRaftMap d0
                 bne.s   @RaftNotOnMap
+                
+                ; Declare raft entity
                 getSavedByte RAFT_X, d1
                 getSavedByte RAFT_Y, d2
-                move.w  #FOLLOWER_B,d0
-                andi.w  #$7F,d1 
-                muls.w  #$180,d1
-                andi.w  #$7F,d2 
-                muls.w  #$180,d2
+                move.w  #ENTITY_RAFT,d0
+                andi.w  #$7F,d1
+                muls.w  #MAP_TILE_SIZE,d1
+                andi.w  #$7F,d2
+                muls.w  #MAP_TILE_SIZE,d2
                 moveq   #LEFT,d3        ; facing
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  #MAPSPRITE_RAFT,d4
+            else
                 moveq   #MAPSPRITE_RAFT,d4
+            endif
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
                 move.b  d0,$3F(a0)
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
-                move.w  #FOLLOWER_B,d0
+                move.w  #ENTITY_RAFT,d0
                 move.w  d3,d1
-                moveq   #$FFFFFFFF,d2
-                moveq   #$FFFFFFFF,d3
+                moveq   #-1,d2
+                moveq   #-1,d3
                 jsr     (UpdateEntityProperties).w
                 bra.s   @Done
 @RaftNotOnMap:
@@ -180,7 +201,7 @@ byte_441F0:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function sub_441AA
+    ; End of function DeclareRaftEntity
 
                 modend
 
@@ -193,7 +214,7 @@ IsOverworldMap:
                 
                 movem.l d0-d1/a0,-(sp)
                 clr.w   d1
-                lea     tbl_OverworldMaps(pc), a0
+                lea     table_OverworldMaps(pc), a0
 @Loop:
                 
                 move.b  (a0)+,d0

@@ -30,7 +30,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-FinalCounterAttackCheck:
+battlesceneScript_ValidateCounterAttack:
                 
                 movem.l d0-d4/a0,-(sp)
                 tst.b   counterAttack(a2)
@@ -50,14 +50,14 @@ FinalCounterAttackCheck:
                 
                 ; Enemies that cannot counter
                 moveq   #0,d2
-                lea     tbl_UnableToCounterEnemies(pc), a0
+                lea     table_UnableToCounterEnemies(pc), a0
                 move.b  (a5),d0
                 bsr.w   GetEnemy
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcc.s   @NoCounter
                 
                 ; Enemies that cannot be countered
-                lea     tbl_CannotBeCounteredEnemies(pc), a0
+                lea     table_CannotBeCounteredEnemies(pc), a0
                 move.b  (a4),d0
                 bsr.w   GetEnemy
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
@@ -65,7 +65,7 @@ FinalCounterAttackCheck:
                 
                 ; Check if target is in range
                 move.b  (a5),d1
-                bsr.w   GetDistanceBetweenEntities
+                bsr.w   GetDistanceBetweenBattleEntities
                 bsr.w   GetAttackRange  
                 cmp.b   d3,d2
                 bhi.s   @NoCounter
@@ -75,9 +75,9 @@ FinalCounterAttackCheck:
 @NoCounter:     clr.b   counterAttack(a2)
 @Continue:      tst.b   debugCounter(a2)
                 beq.s   @Done
-                move.b  #$FF,counterAttack(a2)
+                st      counterAttack(a2)
 @Done:          movem.l (sp)+,d0-d4/a0
                 rts
 
-    ; End of function FinalCounterAttackCheck
+    ; End of function battlesceneScript_ValidateCounterAttack
 

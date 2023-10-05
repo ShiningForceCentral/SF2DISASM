@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\items\specialcounterattackenemies-standard.asm :
 
 ; Enemies that are unable to counter attack
-tbl_UnableToCounterEnemies:
+table_UnableToCounterEnemies:
                 
                 dc.b ENEMY_TAROS
                 
@@ -10,7 +10,7 @@ tbl_UnableToCounterEnemies:
 
 
 ; Enemies that cannot be counter attacked
-tbl_CannotBeCounteredEnemies:
+table_CannotBeCounteredEnemies:
                 
                 dc.b ENEMY_BURST_ROCK
                 dc.b ENEMY_KRAKEN_HEAD

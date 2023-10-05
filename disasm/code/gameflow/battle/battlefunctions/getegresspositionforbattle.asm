@@ -54,7 +54,7 @@ loc_23EA6:
                 getSavedByte EGRESS_MAP, d0
 loc_23EAA:
                 
-                jsr     (GetSavePointForMap).w
+                jsr     (GetSavepointForMap).w
                 rts
 
     ; End of function GetEgressPositionForBattle

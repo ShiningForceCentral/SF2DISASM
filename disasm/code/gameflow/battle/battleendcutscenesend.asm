@@ -8,7 +8,7 @@ loc_47C48:
                 
                 clr.w   d0
                 getSavedByte CURRENT_BATTLE, d0
-                move.b  tbl_EnemyLeaderPresence(pc,d0.w),d0
+                move.b  table_EnemyLeaderPresentFlags(pc,d0.w),d0
                 tst.b   d0
                 beq.s   loc_47C88
                 move.w  #COMBATANT_ENEMIES_START,d0
@@ -21,7 +21,7 @@ loc_47C62:
                 beq.s   loc_47C82
                 move.w  (DEAD_COMBATANTS_LIST_LENGTH).l,d1
                 move.b  d0,(a0,d1.w)
-                move.b  #$FF,1(a0,d1.w)
+                move.b  #-1,1(a0,d1.w)
                 addq.w  #1,(DEAD_COMBATANTS_LIST_LENGTH).l
 loc_47C82:
                 

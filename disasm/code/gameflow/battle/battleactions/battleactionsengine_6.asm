@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleactions\battleactionsengine_6.asm :
-; 0xC024..0xC09A : Battleactions engine
+; 0xC024..0xC09A : Battleactions Engine, part 6
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -18,7 +18,7 @@ GetEnemyDestination:
 @Loop:
                 
                 move.b  (a0)+,d0
-                cmpi.b  #CODE_TERMINATOR_BYTE,d0
+                cmpi.b  #-1,d0
                 beq.w   @Done
                 
                 ; Check move right
@@ -70,7 +70,7 @@ ClearAiMoveInfo:
                 move.w  #48,d1
 @Loop:
                 
-                move.b  #$FF,(a0,d0.w)
+                move.b  #-1,(a0,d0.w)
                 move.b  #0,(a1,d0.w)
                 addq.w  #1,d0
                 subq.w  #1,d1

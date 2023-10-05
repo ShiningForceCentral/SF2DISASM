@@ -37,7 +37,7 @@ GetNextUsableAttackSpell:
                 bne.s   @Break
                 
                 ; Is spell excluded?
-                lea     tbl_AiExcludedAttackSpells(pc), a0
+                lea     table_AiExcludedAttackSpells(pc), a0
                 clr.w   d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @Break
@@ -186,7 +186,7 @@ GetNextUsableAttackItem:
                 bne.s   @Break
                 
                 ; Is spell excluded?
-                lea     tbl_AiExcludedItemUseAttackSpells(pc), a0
+                lea     table_AiExcludedItemUseAttackSpells(pc), a0
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
                 clr.w   d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w

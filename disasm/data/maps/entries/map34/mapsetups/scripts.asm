@@ -585,7 +585,7 @@ cs_5B6C0:       textCursor 3207
 csub_5BFD0:
                 
                 moveq   #0,d0
-                jsr     sub_20058
+                jsr     j_AnimateSpecialSprite
                 rts
 
     ; End of function csub_5BFD0
@@ -597,7 +597,7 @@ csub_5BFD0:
 sub_5BFDA:
                 
                 moveq   #1,d0
-                jsr     sub_20058
+                jsr     j_AnimateSpecialSprite
                 rts
 
     ; End of function sub_5BFDA
@@ -609,7 +609,7 @@ sub_5BFDA:
 sub_5BFE4:
                 
                 moveq   #2,d0
-                jsr     sub_20058
+                jsr     j_AnimateSpecialSprite
                 rts
 
     ; End of function sub_5BFE4

@@ -27,14 +27,14 @@ ms_map24_InitFunction:
                 divs.w  #$3C,d0 
                 move.w  d0,d1
                 ext.l   d1
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     470             ; "Best record so far is{N}{#} min."
                 swap    d0
                 ext.l   d0
-                move.l  d0,((TEXT_NUMBER-$1000000)).w
+                move.l  d0,((DIALOGUE_NUMBER-$1000000)).w
                 txt     471             ; "{DICT} {#} sec.{W2}"
                 txt     472             ; "Are you ready?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 tst.w   d0
                 bne.s   byte_59C92      
                 txt     473             ; "...set...GO!{W2}"
@@ -62,11 +62,11 @@ loc_59CB2:
                 divs.w  #$3C,d0 
                 move.w  d0,d1
                 ext.l   d1
-                move.l  d1,((TEXT_NUMBER-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     475             ; "You recorded{N}{#} min."
                 swap    d0
                 ext.l   d0
-                move.l  d0,((TEXT_NUMBER-$1000000)).w
+                move.l  d0,((DIALOGUE_NUMBER-$1000000)).w
                 txt     476             ; "{DICT} {#} sec.{W2}"
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 move.l  a0,-(sp)

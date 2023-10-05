@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\items\enemybattlescenemusics-standard.asm :
 
 ; Enemies that use an alternate battlescene music.
-tbl_EnemyBattlesceneMusics:
+table_EnemyBattlesceneMusics:
                 
                 ; Enemy index, music index
                 dc.b ENEMY_KRAKEN_HEAD, MUSIC_BOSS_ATTACK

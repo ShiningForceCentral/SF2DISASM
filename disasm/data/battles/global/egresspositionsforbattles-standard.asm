@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\items\egresspositionsforbattles-standard.asm :
 
 ; Battles for which a specific Egress map is forced.
-tbl_EgressPositionsForBattles:
+table_EgressPositionsForBattles:
                 
                 ; Battle index, map index (or 255 to clear the battle unlocked flag)
                 dc.b BATTLE_VERSUS_GESHP, 255

@@ -3,12 +3,12 @@
 ; 0x9E4CC..0x9E4E6 : 
                 mWarp 255, 19
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   8, 13
                   warpFacing DOWN
                 mWarp 255, 12
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   39, 18
                   warpFacing UP
                 mWarp 8, 34

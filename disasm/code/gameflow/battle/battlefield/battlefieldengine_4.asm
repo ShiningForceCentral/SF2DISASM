@@ -11,7 +11,7 @@
 ;  which approximately goes highest to lowest priority of
 ;  healer, mage, archer, flyer, melee, aquatic.
 ; 
-; Specific decending priority for each move type is in tbl_MovetypesHealTargetPriority.
+; Specific decending priority for each move type is in table_HealPriorityMoveTypes.
 ; 
 ; The first byte in that table is $FF to ensure there is never a movetype
 ;  match and therefore nothing has a priority higher than AI #14 or AI #15.
@@ -37,7 +37,7 @@ CalculateHealTargetPriority:
 @PrioritizeByMoveType:
                 
                 bsr.w   GetMoveType     
-                lea     (tbl_HealPriorityMoveTypes).l,a0
+                lea     (table_HealPriorityMoveTypes).l,a0
                 move.w  #MOVETYPE_TOTAL,d6
                 clr.w   d0
 @FindHealPriority_Loop:
@@ -94,16 +94,16 @@ loc_CE56:
                 
                 cmpi.b  #1,d7
                 bne.s   loc_CE66
-                lea     (byte_DA22).l,a4
+                lea     (table_DA22).l,a4
                 bra.w   loc_CE80
 loc_CE66:
                 
                 clr.l   d0
                 move.b  d4,d0           ; d0 = attacker index
-                jsr     GetMoveType     
+                jsr     GetMoveType
                 clr.l   d3
                 move.b  d1,d3
-                lea     (off_D9C2).l,a4 
+                lea     (pt_D9C2).l,a4  
                 lsl.l   #2,d3
                 movea.l (a4,d3.l),a4
 loc_CE80:
@@ -154,12 +154,10 @@ loc_CECC:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get highest usable level of spell D1, considering current MP and highest known level
+; Get highest usable level of spell D1, considering current MP and highest known level.
 ; 
-;       In: D0 = caster index
-;           D1 = highest known level spell entry
-; 
-;       Out: D1 = highest usuable level spell entry
+;   In: d0.w = caster index, d1.w = highest known level spell entry
+;   Out: d1.w = highest usuable level spell entry
 
 
 GetHighestUsableSpellLevel:
@@ -196,13 +194,12 @@ GetHighestUsableSpellLevel:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = spell index
+; unused
 ; 
-; Out: D1 = spell index
-;      D2 = slot
+;   In: d0.b = combatant index, d1.b = spell index
+;   Out: d1.w = spell index, d2.w = slot
 
-
+;unused
 GetSlotContainingSpell:
                 
                 movem.l d0/d3-a6,-(sp)
@@ -232,13 +229,12 @@ loc_CF38:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item index
+; unused
 ; 
-; Out: D1 = item index
-;      D2 = slot
+;   In: d0.b = combatant index, d1.b = item index
+;   Out: d1.w = item index, d2.w = slot
 
-
+;unused
 GetSlotContainingItem:
                 
                 movem.l d0/d3-a6,-(sp)

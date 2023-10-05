@@ -1,14 +1,14 @@
 
 ; ASM FILE code\common\menus\church\checkspecialpromo-standard.asm :
 
-; ChurchMenuActions:@CheckSpecialPromo
+; ChurchMenu:@CheckSpecialPromo
                 
-                lea     tbl_PromotionItems(pc), a1
+                lea     table_PromotionItems(pc), a1
                 clr.w   promotionItem(a6)
                 clr.w   d1
                 
                 ; Do we possess a special promotion item?
-@Start_Loop:    cmpi.b  #CODE_TERMINATOR_BYTE,(a1)
+@Start_Loop:    cmpi.b  #TERMINATOR_BYTE,(a1)
                 beq.w   @CheckRegularPromo
                 move.b  (a1)+,d1                    ; d1.w = special promo item
                 move.b  d1,promotionItem(a6)
@@ -43,28 +43,28 @@
                 
                 ; Confirm action
                 move.w  d0,newClass(a6)
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  promotionItem(a6),((TEXT_NAME_INDEX_3-$1000000)).w
-                move.w  newClass(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  promotionItem(a6),((DIALOGUE_NAME_INDEX_3-$1000000)).w
+                move.w  newClass(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     143             ; "{NAME} can be promoted{N}to {CLASS} with the{N}{ITEM}.{W2}"
                 txt     147             ; "OK?"
-                jsr     YesNoChoiceBox
+                jsr     alt_YesNoPrompt
                 beq.s   @ChangeSpells
                 txt     144             ; "Then"
                 bra.s   @Start_Loop
                 
-@ChangeSpells:  lea     tbl_LoseAllSpellsClasses(pc), a0
+@ChangeSpells:  lea     table_LoseAllSpellsClasses(pc), a0
                 move.w  newClass(a6),d1
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @RemoveItem
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     145             ; "{NAME} loses all spells{N}that were learned.{N}OK?"
-                jsr     YesNoChoiceBox
+                jsr     alt_YesNoPrompt
                 bne.w   @Start_Loop
                 
 @RemoveItem:    move.w  promotionItem(a6),d0
                 jsr     RemoveItemFromInventory
                 bra.s   @DoPromo
                 
-; ChurchMenuActions:@CheckRegularPromo
+; ChurchMenu:@CheckRegularPromo

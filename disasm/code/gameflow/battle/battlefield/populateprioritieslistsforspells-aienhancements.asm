@@ -6,7 +6,7 @@
 ; AI: cast DISPEL spell
 
 
-MakePrioritiesListForSpell_Dispel:
+PopulatePrioritiesListForSpell_Dispel:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -29,7 +29,7 @@ MakePrioritiesListForSpell_Dispel:
                 move.b  (a1)+,d0
                 move.w    d3,d1
                 bsr.w   PopulateTargetableGrid
-                bsr.w   CalculateDispelSpellTargetPriority
+                bsr.w   CalculateTargetPriorityForSpell_Dispel
                 move.b  d1,(a2)+
                 dbf     d5,@GetTargetsPriority_Loop
                 
@@ -86,7 +86,7 @@ MakePrioritiesListForSpell_Dispel:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function MakePrioritiesListForSpell_Dispel
+    ; End of function PopulatePrioritiesListForSpell_Dispel
 
 
 ; =============== S U B R O U T I N E =======================================

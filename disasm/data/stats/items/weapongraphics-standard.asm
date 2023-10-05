@@ -2,7 +2,7 @@
 ; ASM FILE data\stats\items\weapongraphics-standard.asm :
 
 ; Weapon sprites that cause an alternate attack animation to be used for knight classes.
-tbl_SpearWeaponSprites:
+table_SpearWeaponSprites:
                 
                 dc.b WEAPONSPRITE_SPEAR
                 dc.b WEAPONSPRITE_JAVELIN
@@ -10,7 +10,7 @@ tbl_SpearWeaponSprites:
                 tableEnd.b
 
 
-tbl_WeaponGraphics:
+table_WeaponGraphics:
                 
 ; Syntax        weaponGraphics [ITEM_]enum, [WEAPONSPRITE_]enum, [WEAPONPALETTE_]enum
 ;

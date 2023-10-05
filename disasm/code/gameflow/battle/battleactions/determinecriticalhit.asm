@@ -4,8 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
-;     D6 = damage
+; In: a2 = battlescene script stack frame
+;     d6.w = damage
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -15,7 +15,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -30,14 +30,14 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_DetermineCriticalHit:
+battlesceneScript_DetermineCriticalHit:
                 
                 move.b  (a4),d0
                 jsr     GetCurrentProwess
                 andi.w  #PROWESS_MASK_CRITICAL,d1
                 move.w  d1,d2
                 lsl.w   #1,d2
-                lea     tbl_CriticalHitDefs(pc,d2.w),a0
+                lea     table_CriticalHitDefinitions(pc,d2.w),a0
                 clr.w   d0
                 move.b  (a0),d0
                 beq.s   @Return
@@ -63,12 +63,12 @@ WriteBattlesceneScript_DetermineCriticalHit:
                 
                 cmpi.w  #PROWESS_INFLICT_AILMENTS_START,d1
                 bcc.s   @SetInflictAilment
-                move.b  #$FF,criticalHit(a2)
+                move.b  #-1,criticalHit(a2)
                 move.b  (a4),d0
                 jsr     GetEquippedWeapon
             if (STANDARD_BUILD=1)
                 bmi.s   @Return
-                lea     tbl_CutOffWeapons(pc), a0
+                lea     table_CutOffWeapons(pc), a0
                 clr.w   d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @Return
@@ -81,17 +81,17 @@ WriteBattlesceneScript_DetermineCriticalHit:
                 bsr.w   GetResistanceToSpell
                 cmpi.w  #RESISTANCESETTING_STATUSEFFECT_IMMUNITY,d2
                 beq.s   @Skip           ; skip if target is immune to desoul
-                move.b  #$FF,cutoff(a2)
+                move.b  #-1,cutoff(a2)
                 clr.b   criticalHit(a2)
 @Skip:
                 
                 bra.s   @Return
 @SetInflictAilment:
                 
-                move.b  #$FF,inflictAilment(a2)
+                move.b  #-1,inflictAilment(a2)
 @Return:
                 
                 rts
 
-    ; End of function WriteBattlesceneScript_DetermineCriticalHit
+    ; End of function battlesceneScript_DetermineCriticalHit
 

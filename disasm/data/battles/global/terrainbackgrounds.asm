@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\global\terrainbackgrounds.asm :
 ; 0x19E5E..0x19E6E : Terrain backgrounds table
-tbl_TerrainBackgrounds:
+table_TerrainBackgrounds:
                 
 ; Syntax        background [BATTLEBACKGROUND_]enum (or index)
                 

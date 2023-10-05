@@ -31,7 +31,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_DetermineDodge:
+battlesceneScript_DetermineDodge:
                 
                 tst.b   debugDodge(a2)
                 bne.s   @Success    ; always dodge if dodge debug flag is set
@@ -53,14 +53,14 @@ WriteBattlesceneScript_DetermineDodge:
                 moveq   #0,d2       ; zero property bytes
                 
                 ; Is target airborne? (i.e., either flying or hovering)
-                lea     tbl_AirborneMovetypes(pc), a0
+                lea     table_AirborneMovetypes(pc), a0
                 move.b  (a5),d0
                 bsr.w   GetMoveType
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @DefaultChance
                 
                 ; Is attacker an archer?
-                lea     tbl_ArcherMovetypes(pc), a0
+                lea     table_ArcherMovetypes(pc), a0
                 move.b  (a4),d0
                 bsr.w   GetMoveType
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
@@ -95,15 +95,15 @@ WriteBattlesceneScript_DetermineDodge:
                 bhs.s   @Return
                 
                 ; Successfully dodge
-@Success:       move.w  #$FFFF,d4
+@Success:       move.w  #-1,d4
                 move.w  #1,d5
                 exg     a4,a5
-                bsr.w   WriteBattlesceneScript_AnimateAction
+                bsr.w   battlesceneScript_AnimateAction
                 displayMessage #MESSAGE_BATTLE_DODGE,(a4),#0,#0 ; Message, Combatant, Item or Spell, Number
-                bsr.w   WriteBattlesceneScript_IdleSprite
+                bsr.w   battlesceneScript_MakeActorIdle
                 exg     a4,a5
                 st      dodge(a2)
 @Return:        rts
 
-    ; End of function WriteBattlesceneScript_DetermineDodge
+    ; End of function battlesceneScript_DetermineDodge
 

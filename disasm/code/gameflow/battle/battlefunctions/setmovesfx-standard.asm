@@ -14,7 +14,7 @@ SetMoveSfx:
 @Continue:      move.w  #SFX_WALKING,((MOVE_SFX-$1000000)).w
                 
 @FindMoveSfx:   movem.l d1-d2/a0,-(sp)
-                lea     tbl_MoveSfxForEquippedRing(pc), a0
+                lea     table_MoveSfxForEquippedRing(pc), a0
                 jsr     GetEquippedRing
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w

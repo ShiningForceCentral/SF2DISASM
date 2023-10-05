@@ -68,14 +68,14 @@ DetermineMuddleBattleaction:
 ;        
 
 
-GetMoveInfo:
+InitializeMovementArrays:
                 
                 movem.l d1-d2/d5-a1,-(sp)
-                bsr.w   PopulateMoveCostsTable
+                bsr.w   PopulateMovecostsTable
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN_ARRAY).l,a4
-                lea     ((MOVE_COSTS_TABLE-$1000000)).w,a5
+                lea     ((MOVECOSTS_TABLE-$1000000)).w,a5
                 jsr     GetCombatantX
                 move.w  d1,d3
                 jsr     GetCombatantY
@@ -86,5 +86,5 @@ GetMoveInfo:
                 movem.l (sp)+,d1-d2/d5-a1
                 rts
 
-    ; End of function GetMoveInfo
+    ; End of function InitializeMovementArrays
 

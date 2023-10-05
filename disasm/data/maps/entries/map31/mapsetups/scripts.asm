@@ -73,9 +73,9 @@ sub_5D73E:
                 
                 movem.l d0-d2/a0,-(sp)
                 move.w  #PORTRAIT_BOWIE_PAINTING,d0 ; Bowie painting portrait index
-                moveq   #$FFFFFFFF,d1
+                moveq   #-1,d1
                 clr.w   d2
-                jsr     j_CreatePortraitWindow
+                jsr     j_OpenPortraitWindow
                 movem.l (sp)+,d0-d2/a0
                 rts
 

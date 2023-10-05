@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\caravan\caravanactions_2.asm :
+; ASM FILE code\common\menus\caravan\CaravanMenu_2.asm :
 ; 0x228D8..0x229CA : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -9,34 +9,34 @@ PopulateGenericListWithMembersList:
                 
                 movem.l d7-a1,-(sp)
                 jsr     j_UpdateForce
-                tst.w   d1
-                bne.s   loc_228F0
+                tst.w   d1              ; all members
+                bne.s   @CheckMemberGroup
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                bra.s   loc_22908
-loc_228F0:
+                bra.s   @PopulateList
+@CheckMemberGroup:
                 
                 cmpi.w  #1,d1
-                bne.s   loc_22900
+                bne.s   @ReserveMembers
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-                bra.s   loc_22908
-loc_22900:
+                bra.s   @PopulateList
+@ReserveMembers:
                 
                 lea     ((RESERVE_MEMBERS-$1000000)).w,a0
                 move.w  ((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-loc_22908:
+@PopulateList:
                 
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-                bcs.w   loc_22920
-loc_2291A:
+                bcs.w   @SkipLoop
+@PopulateList_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_2291A
-loc_22920:
+                dbf     d7,@PopulateList_Loop
+@SkipLoop:
                 
                 movem.l (sp)+,d7-a1
                 rts
@@ -49,7 +49,6 @@ loc_22920:
 ; Copy caravan item indexes to generic list space
 
 caravanItemsAddress = CARAVAN_ITEMS
-
     if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
 caravanItemsAddress = caravanItemsAddress+2
     endif
@@ -73,15 +72,15 @@ CopyCaravanItems:
                 lea     ((GENERIC_LIST-$1000000)).w,a1
 @Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+        if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 move.b  (a0),(a1)+
                 addq.w  #CARAVAN_ITEM_ENTRY_SIZE,a0
-            else
-              if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+        else
+            if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
                 addq.w  #1,a0
-              endif
-                move.b  (a0)+,(a1)+
             endif
+                move.b  (a0)+,(a1)+
+        endif
                 dbf     d7,@Loop
 @Skip:
                 
@@ -108,7 +107,7 @@ IsItemInSlotEquippedAndCursed:
                 sndCom  MUSIC_CURSED_ITEM
                 move.w  #60,d0
                 jsr     (Sleep).w       
-                move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d1,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #30,d1          ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bsr.w   PlayPreviousMusicAfterCurrentOne
@@ -133,7 +132,7 @@ IsItemInSlotEquippedAndCursed:
 PlayPreviousMusicAfterCurrentOne:
                 
                 move.w  d0,-(sp)
-                move.w  #$FB,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0
                 jsr     (PlayMusicAfterCurrentOne).w
                 move.w  (sp)+,d0
                 rts
@@ -152,7 +151,7 @@ IsItemUnsellable:
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @NotUnsellable
-                move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d1,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #37,d1          ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 ori     #1,ccr

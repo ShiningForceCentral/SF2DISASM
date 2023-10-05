@@ -55,14 +55,14 @@ Map72_ZoneEvent3:
                 bra.s   loc_4FEF2
 loc_4FEE6:
                 
-                move.w  #ITEM_DYNAMITE,((TEXT_NAME_INDEX_1-$1000000)).w 
+                move.w  #ITEM_DYNAMITE,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 script  cs_5023E
 loc_4FEF2:
                 
                 bra.s   byte_4FF00      
 loc_4FEF4:
                 
-                move.w  #ITEM_DYNAMITE,((TEXT_NAME_INDEX_1-$1000000)).w 
+                move.w  #ITEM_DYNAMITE,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 script  cs_5023E
 byte_4FF00:
                 

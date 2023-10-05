@@ -7,28 +7,29 @@
 
 LoadTitleScreenFont:
                 
-                lea     StaticWidthFont(pc), a0
+                lea     font_TitleScreen(pc), a0
                 lea     (FF6802_LOADING_SPACE).l,a1
-                jsr     (LoadCompressedData).w
+                jsr     (LoadStackCompressedData).w
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     ($B000).l,a1
-                move.w  #$800,d0
+                move.w  #2048,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
                 lea     (PLANE_B_LAYOUT).l,a0
-                move.w  #$6200,d0
-                move.w  #$3FF,d7
-loc_2C76E:
+                move.w  #$200|VDPTILE_PALETTE4,d0
+                move.w  #1023,d7
+@Loop:
                 
                 move.w  #0,(a0)+
                 addq.w  #1,d0
-                dbf     d7,loc_2C76E
+                dbf     d7,@Loop
+                
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
-                move.w  #$380,d0
+                move.w  #896,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
-                lea     TitleScreenPalettes(pc), a0
+                lea     palette_TitleScreenFont(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
                 moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   

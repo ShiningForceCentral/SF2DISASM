@@ -23,11 +23,11 @@ byte_614C2:
                 txt     3611            ; "There is no church around{N}here.  Think of me as a{N}priest.{W1}"
                 txt     3612            ; "Now, what can I do for you?{W1}"
                 clsTxt
-                jmp     j_ChurchMenuActions
+                jmp     j_ChurchMenu
 Map56_EntityEvent1:
                 
             if (STANDARD_BUILD&CARAVAN_IN_TOWER=1)
-                jmp     CaravanMenuActions
+                jmp     CaravanMenu
             endif
 Map56_DefaultEntityEvent:
                 

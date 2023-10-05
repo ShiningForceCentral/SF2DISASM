@@ -60,7 +60,7 @@ ExecuteAiCommand:
                 bra.w   @Done
 @CheckSupport:
                 
-                cmpi.b  #AICOMMAND_DEBUFF,d1
+                cmpi.b  #AICOMMAND_SUPPORT,d1
                 bne.s   @CheckSpecialMove
                 move.w  #1,d1
                 move.w  #0,d2
@@ -102,7 +102,7 @@ ExecuteAiCommand:
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 clr.w   d0
                 bra.w   @Done
 @CheckSpecialMove2:

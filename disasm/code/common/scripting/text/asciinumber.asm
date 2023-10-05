@@ -8,12 +8,12 @@
 WriteAsciiNumber:
                 
                 movem.l d5-d7/a5-a6,-(sp)
-                lea     tbl_PowersOfTen(pc), a5
+                lea     table_PowersOfTen(pc), a5
                 lea     ((LOADED_NUMBER-$1000000)).w,a6
                 moveq   #9,d5
 loc_14B4:
                 
-                move.w  #$2F,d6 
+                move.w  #47,d6
 loc_14B8:
                 
                 addq.w  #1,d6
@@ -27,9 +27,9 @@ loc_14B8:
                 moveq   #8,d6
 loc_14CC:
                 
-                cmpi.b  #$30,(a6) 
+                cmpi.b  #48,(a6)
                 bne.w   loc_14DC
-                move.b  #$20,(a6)+ 
+                move.b  #32,(a6)+
                 dbf     d6,loc_14CC
 loc_14DC:
                 
@@ -38,7 +38,8 @@ loc_14DC:
 
     ; End of function WriteAsciiNumber
 
-tbl_PowersOfTen:dc.l 1000000000
+table_PowersOfTen:
+                dc.l 1000000000
                 dc.l 100000000
                 dc.l 10000000
                 dc.l 1000000
@@ -53,8 +54,9 @@ tbl_PowersOfTen:dc.l 1000000000
 
 
 nullsub_150A:
-                
+            if (VANILLA_BUILD=1)
                 rts
+            endif
 
     ; End of function nullsub_150A
 
@@ -63,8 +65,9 @@ nullsub_150A:
 
 
 nullsub_150C:
-                
+            if (VANILLA_BUILD=1)
                 rts
+            endif
 
     ; End of function nullsub_150C
 

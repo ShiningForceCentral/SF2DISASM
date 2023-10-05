@@ -26,7 +26,7 @@ Map16_297_EntityEvent0:
 
 Map16_EntityEvent0:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map16_EntityEvent0
@@ -98,8 +98,8 @@ Map16_297_EntityEvent6:
 
 Map16_297_EntityEvent7:
                 
-                move.b  #1,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_GALAM_0,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map16_297_EntityEvent7
@@ -212,8 +212,8 @@ Map16_297_EntityEvent15:
 
 Map16_297_EntityEvent16:
                 
-                move.b  #$10,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_GALAM_0,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map16_297_EntityEvent16

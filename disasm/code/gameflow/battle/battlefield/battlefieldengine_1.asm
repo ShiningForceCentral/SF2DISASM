@@ -13,7 +13,7 @@
 ConvertCoordinatesToAddress:
                 
                 move.l  d2,-(sp)
-                mulu.w  #MAP_SIZE_MAXWIDTH,d2
+                mulu.w  #MAP_SIZE_MAX_TILEWIDTH,d2
                 add.w   d1,d2
                 adda.l  d2,a0
                 move.l  (sp)+,d2
@@ -112,11 +112,11 @@ GetMoveCostToDestination:
                 lea     (FF4400_LOADING_SPACE).l,a0
                 lea     (FF4D00_LOADING_SPACE).l,a1
                 clr.w   d0
-                mulu.w  #MAP_SIZE_MAXWIDTH,d2
-                andi.w  #$FF,d1
+                mulu.w  #MAP_SIZE_MAX_TILEWIDTH,d2
+                andi.w  #BYTE_MASK,d1
                 add.w   d1,d2           ; d2.w = coordinates converted to offset
                 move.b  (a1,d2.w),d0
-                lsl.w   #8,d0
+                lsl.w   #BYTE_SHIFT_COUNT,d0
                 move.b  (a0,d2.w),d0
                 movem.l (sp)+,d1-a6
                 rts
@@ -178,22 +178,22 @@ SetTerrain:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Populate move costs table for currently moving battle entity d0.b
+; Populate movecosts table for moving battle entity d0.b
 
 
-PopulateMoveCostsTable:
+PopulateMovecostsTable:
                 
                 movem.l d0-a6,-(sp)
                 jsr     GetMoveType     
-                lsl.w   #4,d1
-                lea     tbl_LandEffectSettingsAndMoveCosts(pc), a0
+                lsl.w   #NIBBLE_SHIFT_COUNT,d1
+                lea     table_LandEffectSettingsAndMovecosts(pc), a0
                 adda.w  d1,a0
-                lea     ((MOVE_COSTS_TABLE-$1000000)).w,a1
+                lea     ((MOVECOSTS_TABLE-$1000000)).w,a1
                 moveq   #TERRAIN_TYPES_COUNTER,d7
 @Loop:
                 
                 move.b  (a0)+,d1
-                andi.b  #LANDEFFECT_AND_MOVECOST_MASK_LOWERNIBBLE,d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 cmpi.b  #MOVECOST_OBSTRUCTED,d1
                 bne.s   @Continue
                 moveq   #-1,d1
@@ -205,19 +205,21 @@ PopulateMoveCostsTable:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function PopulateMoveCostsTable
+    ; End of function PopulateMovecostsTable
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 sub_C1BE:
                 
                 movem.l d0/d2-a6,-(sp)
-                bsr.s   PopulateMoveCostsTable
-                lea     ((MOVE_COSTS_TABLE-$1000000)).w,a0
+                bsr.s   PopulateMovecostsTable
+                lea     ((MOVECOSTS_TABLE-$1000000)).w,a0
                 bsr.w   GetCurrentTerrainType
-                andi.w  #$F,d0
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d0
                 adda.w  d0,a0
                 move.b  (a0),d1
                 movem.l (sp)+,d0/d2-a6
@@ -236,15 +238,15 @@ GetLandEffectSetting:
                 
                 movem.l d0/d2-a6,-(sp)
                 jsr     GetMoveType     
-                lsl.w   #4,d1
-                lea     tbl_LandEffectSettingsAndMoveCosts(pc), a0
+                lsl.w   #NIBBLE_SHIFT_COUNT,d1
+                lea     table_LandEffectSettingsAndMovecosts(pc), a0
                 adda.w  d1,a0
                 bsr.w   GetCurrentTerrainType
                 andi.w  #TERRAIN_MASK_TYPE,d0
                 adda.w  d0,a0
                 move.b  (a0),d1
-                lsr.b   #LANDEFFECT_SHIFTCOUNT,d1 ; shift land effect setting into lower nibble position
-                andi.b  #LANDEFFECT_AND_MOVECOST_MASK_LOWERNIBBLE,d1
+                lsr.b   #NIBBLE_SHIFT_COUNT,d1 ; shift land effect setting into lower nibble position
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 movem.l (sp)+,d0/d2-a6
                 rts
 
@@ -280,7 +282,7 @@ GetResistanceToSpell:
                 
                 movem.l d0-d1/d3-a6,-(sp)
                 andi.b  #SPELLENTRY_MASK_INDEX,d1
-                move.b  tbl_SpellElements(pc,d1.w),d2
+                move.b  table_SpellElements(pc,d1.w),d2
                 jsr     GetCurrentResistance
                 andi.w  #RESISTANCEENTRY_MASK_ALL,d1
                 ror.w   d2,d1

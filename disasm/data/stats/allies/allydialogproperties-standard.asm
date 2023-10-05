@@ -9,7 +9,7 @@ allyPortraitAndSfx: macro
 
 ; 3 entries per ally for each class type, 2 bytes per entry.
 
-tbl_AllyDialogProperties:
+table_AllyDialogueProperties:
 
 ; Syntax        allyPortraitAndSfx [PORTRAIT_]enum (or index), [SFX_]enum (or index)
 ;               allyPortraitAndSfx [PORTRAIT_]enum (or index), [SFX_]enum (or index)

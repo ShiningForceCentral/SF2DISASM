@@ -5,11 +5,11 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ExecuteMenu:
+j_ExecuteDiamondMenu:
                 
-                jmp     ExecuteMenu(pc) 
+                jmp     ExecuteDiamondMenu(pc)
 
-    ; End of function j_ExecuteMenu
+    ; End of function j_ExecuteDiamondMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -55,31 +55,31 @@ j_ExecuteMagicMenu:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateBattlefieldMiniStatusWindow:
+j_OpenBattlefieldMiniStatusWindow:
                 
-                jmp     CreateBattlefieldMiniStatusWindow(pc)
+                jmp     OpenBattlefieldMiniStatusWindow(pc)
 
-    ; End of function j_CreateBattlefieldMiniStatusWindow
+    ; End of function j_OpenBattlefieldMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveMiniStatusWindow:
+j_CloseMiniStatusWindow:
                 
-                jmp     RemoveMiniStatusWindow(pc)
+                jmp     CloseMiniStatusWindow(pc)
 
-    ; End of function j_RemoveMiniStatusWindow
+    ; End of function j_CloseMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateBattlesceneMiniStatusWindows:
+j_OpenBattlesceneMiniStatusWindows:
                 
-                jmp     CreateBattlesceneMiniStatusWindows(pc)
+                jmp     OpenBattlesceneMiniStatusWindows(pc)
 
-    ; End of function j_CreateBattlesceneMiniStatusWindows
+    ; End of function j_OpenBattlesceneMiniStatusWindows
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -105,21 +105,21 @@ j_ShowEnemyBattlesceneWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveAllyBattlesceneWindow:
+j_HideAllyBattlesceneWindow:
                 
-                jmp     RemoveAllyBattlesceneWindow(pc)
+                jmp     HideAllyBattlesceneWindow(pc)
 
-    ; End of function j_RemoveAllyBattlesceneWindow
+    ; End of function j_HideAllyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveEnemyBattlesceneWindow:
+j_HideEnemyBattlesceneWindow:
                 
-                jmp     RemoveEnemyBattlesceneWindow(pc)
+                jmp     HideEnemyBattlesceneWindow(pc)
 
-    ; End of function j_RemoveEnemyBattlesceneWindow
+    ; End of function j_HideEnemyBattlesceneWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -135,91 +135,81 @@ j_BuildMemberScreen:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10034:
+j_BuildMinimapScreen:
                 
-                jmp     sub_1288E(pc)
+                jmp     BuildMinimapScreen(pc)
 
-    ; End of function sub_10034
+    ; End of function j_BuildMinimapScreen
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreatePortraitWindow:
+j_OpenPortraitWindow:
                 
-                jmp     CreatePortraitWindow(pc)
+                jmp     OpenPortraitWindow(pc)
 
-    ; End of function j_CreatePortraitWindow
+    ; End of function j_OpenPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemovePortraitWindow:
+j_ClosePortraitWindow:
                 
-                jmp     RemovePortraitWindow(pc)
+                jmp     ClosePortraitWindow(pc)
 
-    ; End of function j_RemovePortraitWindow
+    ; End of function j_ClosePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitializeMemberListScreen:
+j_InitializeMembersListScreen:
                 
-                jmp     InitializeMemberListScreen(pc)
+                jmp     InitializeMembersListScreen(pc)
 
-    ; End of function j_InitializeMemberListScreen
+    ; End of function j_InitializeMembersListScreen
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_BuildMemberListScreen_NewAttAndDefPage:
+j_BuildMembersListScreen_NewAttAndDefPage:
                 
-                jmp     BuildMemberListScreen_NewAttAndDefPage(pc)
+                jmp     BuildMembersListScreen_NewAttAndDefPage(pc)
 
-    ; End of function j_BuildMemberListScreen_NewAttAndDefPage
+    ; End of function j_BuildMembersListScreen_NewAttAndDefPage
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_BuildMemberListScreen_MagicPage:
+j_BuildMembersListScreen_MagicPage:
                 
-                jmp     BuildMemberListScreen_MagicPage(pc)
+                jmp     BuildMembersListScreen_MagicPage(pc)
 
-    ; End of function j_BuildMemberListScreen_MagicPage
+    ; End of function j_BuildMembersListScreen_MagicPage
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateShopInventoryScreen:
+j_BuildShopInventoryScreen:
                 
-                jmp     CreateShopInventoryScreen(pc)
+                jmp     BuildShopInventoryScreen(pc)
 
-    ; End of function j_CreateShopInventoryScreen
+    ; End of function j_BuildShopInventoryScreen
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateGoldWindow:
+j_OpenGoldWindow:
                 
-                jmp     CreateGoldWindow(pc)
+                jmp     OpenGoldWindow(pc)
 
-    ; End of function j_CreateGoldWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_10054:
-                
-                jmp     sub_12F5E(pc)
-
-    ; End of function sub_10054
+    ; End of function j_OpenGoldWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -235,21 +225,21 @@ j_HideGoldWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateBattleEquipWindow:
+j_CloseGoldWindow:
                 
-                jmp     CreateBattleEquipWindow(pc)
+                jmp     CloseGoldWindow(pc)
 
-    ; End of function j_CreateBattleEquipWindow
+    ; End of function j_CloseGoldWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10060:
+j_OpenBattleEquipWindow:
                 
-                jmp     sub_11404(pc)
+                jmp     OpenBattleEquipWindow(pc)
 
-    ; End of function sub_10060
+    ; End of function j_OpenBattleEquipWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -265,41 +255,51 @@ j_HideBattleEquipWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateLandEffectWindow:
+j_CloseBattleEquipWindow:
                 
-                jmp     CreateLandEffectWindow(pc)
+                jmp     CloseBattleEquipWindow(pc)
 
-    ; End of function j_CreateLandEffectWindow
+    ; End of function j_CloseBattleEquipWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveLandEffectWindow:
+j_OpenLandEffectWindow:
                 
-                jmp     RemoveLandEffectWindow(pc)
+                jmp     OpenLandEffectWindow(pc)
 
-    ; End of function j_RemoveLandEffectWindow
+    ; End of function j_OpenLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10070:
+j_CloseLandEffectWindow:
                 
-                jmp     sub_157E8(pc)
+                jmp     CloseLandEffectWindow(pc)
 
-    ; End of function sub_10070
+    ; End of function j_CloseLandEffectWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_YesNoChoiceBox:
+j_HideLandEffectWindow:
                 
-                jmp     YesNoChoiceBox(pc)
+                jmp     HideLandEffectWindow(pc)
 
-    ; End of function j_YesNoChoiceBox
+    ; End of function j_HideLandEffectWindow
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+j_alt_YesNoPrompt:
+                
+                jmp     alt_YesNoPrompt(pc)
+
+    ; End of function j_alt_YesNoPrompt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -325,9 +325,9 @@ j_NameAlly:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_10080:
+j_BuildBattlefieldSettingsScreen:
                 
-                jmp     sub_1586E(pc)   
+                jmp     BuildBattlefieldSettingsScreen(pc)
 
-    ; End of function sub_10080
+    ; End of function j_BuildBattlefieldSettingsScreen
 

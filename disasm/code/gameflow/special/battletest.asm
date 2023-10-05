@@ -7,8 +7,9 @@
 
 DebugModeBattleTest:
                 
-                move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
-                move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
+                move.b  #-1,((DEBUG_MODE_TOGGLE-$1000000)).w
+                move.b  #-1,((SPECIAL_TURBO_TOGGLE-$1000000)).w
+                
                 moveq   #ALLY_SARAH,d0
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CHESTER,d0
@@ -67,14 +68,9 @@ DebugModeBattleTest:
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
-            if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
-                moveq   #ALLY_30,d0
-                bsr.w   JoinForce
-                moveq   #ALLY_31,d0
-                bsr.w   JoinForce
-            endif
-                moveq   #0,d0
-                move.w  #$63,d1 
+                
+                moveq   #ALLY_BOWIE,d0
+                move.w  #99,d1
                 bsr.w   j_SetBaseAgi
                 bsr.w   j_SetBaseAtt
                 bsr.w   j_SetBaseDef
@@ -92,19 +88,22 @@ DebugModeBattleTest:
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
                 bsr.w   InitializeWindowProperties
+                
+                ; Populate generic list with ally indexes [0,31]
                 move.w  #COMBATANT_ALLIES_NUMBER,(GENERIC_LIST_LENGTH).l
                 lea     (GENERIC_LIST).l,a0
-                move.l  #$10203,(a0)+
-                move.l  #$4050607,(a0)+
-                move.l  #$8090A0B,(a0)+
-                move.l  #$C0D0E0F,(a0)+
-                move.l  #$10111213,(a0)+
-                move.l  #$14151617,(a0)+
-                move.l  #$18191A1B,(a0)+
-                move.l  #$1C1D1E1F,(a0)+
+                move.l  #$10203,(a0)+     ; ally indexes 0-3
+                move.l  #$4050607,(a0)+   ; ally indexes 4-7
+                move.l  #$8090A0B,(a0)+   ; ally indexes 8-11
+                move.l  #$C0D0E0F,(a0)+   ; ally indexes 12-15
+                move.l  #$10111213,(a0)+  ; ally indexes 16-19
+                move.l  #$14151617,(a0)+  ; ally indexes 20-23
+                move.l  #$18191A1B,(a0)+  ; ally indexes 24-27
+                move.l  #$1C1D1E1F,(a0)+  ; ally indexes 28-31
                 bsr.w   CheatModeConfiguration
-StartBattleTest:
+byte_77DE:
                 
+                @Start:
                 txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
@@ -112,7 +111,8 @@ StartBattleTest:
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0
-                blt.w   loc_7894
+                blt.w   @DebugLevelUp
+                
                 movem.w d0-d2,-(sp)
                 clr.w   d0
                 clr.w   d1
@@ -120,77 +120,59 @@ StartBattleTest:
                 jsr     j_NumberPrompt
                 tst.w   d0
                 movem.w (sp)+,d0-d2
-                beq.s   loc_7820
+                
+                beq.s   @DebugSetFlags
                 move.w  d0,d1
                 addi.w  #BATTLE_INTRO_CUTSCENE_FLAGS_START,d1
                 jsr     j_SetFlag
-loc_7820:
+@DebugSetFlags:
                 
                 movem.w d0-d4,-(sp)
-                move.w  #70,d0 
+                move.w  #FLAG_INDEX_FOLLOWERS_ASTRAL,d0 ; Astral is a follower
                 jsr     j_DebugFlagSetter
                 movem.w (sp)+,d0-d4
                 clr.w   d1
                 move.b  d0,d1
-                mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
-                conditionalPc lea,BattleMapCoordinates,a0,nop
+                mulu.w  #BATTLEMAPCOORDINATES_ENTRY_SIZE_FULL,d0
+                lea     table_BattleMapCoordinates(pc), a0
+                nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.b  (a0)+,(BATTLE_AREA_X).l
-                move.b  (a0)+,(BATTLE_AREA_Y).l
-                move.b  (a0)+,(BATTLE_AREA_WIDTH).l
-                move.b  (a0)+,(BATTLE_AREA_HEIGHT).l
-            else
                 move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
-            endif
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                move.b  #DEBUG_SHOP_INDEX,((CURRENT_SHOP_INDEX-$1000000)).w
-                pea     StartBattleTest(pc)
-                pea     MainMenuActions
-                pea     ChurchMenuActions
-                pea     ShopMenuActions
-                pea     CaravanMenuActions
-                jmp     BattleLoop
-            else
                 jsr     j_BattleLoop
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 txt     460             ; "Shop number?{D1}"
                 move.w  #0,d0
                 move.w  #0,d1
-                move.w  #SHOPS_DEBUG_NUMBER,d2 
+                move.w  #SHOPS_DEBUG_MAX_INDEX,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
-                jsr     j_MainMenuActions
-                jsr     j_CaravanActions
-                bra.w   StartBattleTest      
-            endif
-loc_7894:
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                rts
-            else
-                bsr.w   sub_78BC
-                jsr     j_InitializeMemberListScreen
+                jsr     j_ShopMenu
+                jsr     j_FieldMenu
+                jsr     j_CaravanMenu
+                bra.w   byte_77DE       ; @Start
+@DebugLevelUp:
+                
+                bsr.w   LoadAllyStatsDecimalDigits
+                jsr     j_InitializeMembersListScreen
                 tst.b   d0
-                bne.w   StartBattleTest       
-                bpl.s   loc_78B6
+                bne.w   byte_77DE       ; @Start
+                bpl.s   @loc_4
                 movem.l d0-a6,-(sp)
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 movem.l (sp)+,d0-a6
-                bra.s   loc_78BA
-loc_78B6:
+                bra.s   @loc_5
+@loc_4:
                 
                 bsr.w   LevelUpWholeForce
-loc_78BA:
+@loc_5:
                 
-                bra.s   loc_7894
-            endif
+                bra.s   @DebugLevelUp
 
     ; End of function DebugModeBattleTest
 
@@ -198,7 +180,7 @@ loc_78BA:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_78BC:
+LoadAllyStatsDecimalDigits:
                 
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
@@ -206,24 +188,24 @@ sub_78BC:
 @Loop:
                 
                 bsr.w   j_GetCurrentLevel
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,(a0)
                 bsr.w   j_GetMaxHp
                 bsr.w   j_SetCurrentHp
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,2(a0)
                 bsr.w   j_GetMaxMp
                 bsr.w   j_SetCurrentMp
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,4(a0)
                 bsr.w   j_GetBaseAtt
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,6(a0)
                 bsr.w   j_GetBaseDef
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,8(a0)
                 bsr.w   j_GetBaseAgi
-                bsr.w   sub_7930
+                bsr.w   GetDecimalDigits
                 move.w  d1,10(a0)
                 adda.w  #16,a0
                 addq.w  #1,d0
@@ -231,7 +213,7 @@ sub_78BC:
                 
                 rts
 
-    ; End of function sub_78BC
+    ; End of function LoadAllyStatsDecimalDigits
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -255,7 +237,7 @@ LevelUpWholeForce:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_7930:
+GetDecimalDigits:
                 
                 move.w  d1,d2
                 ext.l   d2
@@ -273,5 +255,5 @@ sub_7930:
                 add.w   d2,d1
                 rts
 
-    ; End of function sub_7930
+    ; End of function GetDecimalDigits
 

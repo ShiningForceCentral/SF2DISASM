@@ -12,21 +12,21 @@
 
 
 ; Spell animations that play when a given class attacks. Takes precedence over equipped weapon.
-tbl_AttackSpellAnimationsForClass:
+table_AttackSpellAnimationsForClass:
                 dc.b CLASS_BRGN, @gunner
                 
                 tableEnd.b
 
 
 ; Spell animations that play when a given enemy attacks. Takes precedence over equipped weapon.
-tbl_AttackSpellAnimationsForEnemy:
+table_AttackSpellAnimationsForEnemy:
                 dc.b ENEMY_DARK_GUNNER, @gunner
                 
                 tableEnd.b
 
 
 ; Spell animations that play when attacking with a given weapon equipped.
-tbl_AttackSpellAnimationsForWeapon:
+table_AttackSpellAnimationsForWeapon:
                 dc.b ITEM_WOODEN_ARROW,  @arrow1
                 dc.b ITEM_IRON_ARROW,    @arrow1
                 dc.b ITEM_STEEL_ARROW,   @arrow1

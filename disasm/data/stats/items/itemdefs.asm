@@ -1,7 +1,8 @@
 
 ; ASM FILE data\stats\items\itemdefs.asm :
 ; 0x16EA6..0x176A6 : Item definitions
-tbl_ItemDefs:   
+table_ItemDefinitions:
+                
 ; Syntax        equipFlags   [EQUIPFLAG_]bitfield
 ;               equipFlags2  [EQUIPFLAG2_]bitfield (if EXPANDED_CLASSES is enabled)
 ;               range        min, max 0-3

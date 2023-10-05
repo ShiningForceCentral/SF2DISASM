@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\timerwindowlayout.asm :
 ; 0x16618..0x16658 : Timer window layout
-TimerWindowLayout:
+layout_TimerWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;

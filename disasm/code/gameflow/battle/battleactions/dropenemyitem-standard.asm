@@ -32,7 +32,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_EnemyDropItem:
+battlesceneScript_DropEnemyItem:
                 
                 ; all 3 conditions must be met for drop
                 tst.b   (a4)
@@ -43,10 +43,10 @@ WriteBattlesceneScript_EnemyDropItem:
                 beq.w   @Return       ; continue function if target was not defeated
                 
 @Continue:      movem.l d0-d3/a0-a1,-(sp)
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d3
-                lea     tbl_EnemyItemDrops(pc), a1
+                getSavedByte CURRENT_BATTLE, d3
+                lea     table_EnemyItemDrops(pc), a1
                 
-@FindEntry_Loop:cmpi.w  #CODE_TERMINATOR_WORD,(a1)
+@FindEntry_Loop:cmpi.w  #TERMINATOR_WORD,(a1)
                 beq.w   @Done
                 cmp.b   (a1),d3
                 bne.s   @Next           ; move on to next entry if current battle doesn't match
@@ -64,7 +64,7 @@ WriteBattlesceneScript_EnemyDropItem:
 @EntryFound:    andi.w  #ITEMENTRY_MASK_INDEX,d1
                 move.w  d1,d3
                 move.w  d2,d4
-                lea     tbl_RandomItemDrops(pc),a0
+                lea     table_RandomItemDrops(pc),a0
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w   ; a0 = pointer to drop chance in 256
                 bcs.s   @DropItem       ; immediately drop if not an item with random chance to drop
@@ -77,8 +77,11 @@ WriteBattlesceneScript_EnemyDropItem:
                 
 @DropItem:      clr.w   d0
                 move.b  ENEMYITEMDROP_OFFSET_FLAG(a1),d0
-                lea     ((ENEMY_ITEM_DROPPED_FLAGS-$1000000)).w,a0
+                loadSavedDataAddress ENEMY_ITEM_DROPPED_FLAGS, a0
                 divu.w  #8,d0
+            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+                add.w   d0,d0
+            endif
                 adda.w  d0,a0
                 swap    d0
                 bset    d0,(a0)
@@ -113,5 +116,5 @@ WriteBattlesceneScript_EnemyDropItem:
 @Done:          movem.l (sp)+,d0-d3/a0-a1
 @Return:        rts
 
-    ; End of function WriteBattlesceneScript_EnemyDropItem
+    ; End of function battlesceneScript_DropEnemyItem
 

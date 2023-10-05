@@ -49,7 +49,7 @@ Map6_DescFunc0:
                 bra.s   return_54E02
 loc_54DEE:
                 
-                clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+                clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #$1A8,d0        ; {NAME} investigated.{W2}{CLEAR}
                 jsr     (DisplayText).w 
                 move.w  #$1B2,d0        ; Nothing special there.{W1}

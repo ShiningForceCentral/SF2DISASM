@@ -33,26 +33,26 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-CreateBattlesceneAnimation:
+battlesceneScript_PerformAnimation:
                 
                 movem.l d0-d3/a0,-(sp)
                 moveq   #BATTLEANIMATION_ATTACK,d5  ; regular attack animation by default
                 
                 ; Jump to module for battleaction
                 move.w  (a3),d1
-                cmpi.w  #BATTLEACTION_MUDDLE,d1
+                cmpi.w  #BATTLEACTION_MUDDLED,d1
                 beq.s   @Done
+                bsr.w   GetSpellAnimation
                 cmpi.w  #BATTLEACTION_STAY,d1
                 bhs.s   @AnimateSprite
                 
-                bscHideTextBox
+                bscCloseDialogueWindow
                 move.b  (a4),d0
-                bsr.w   GetSpellAnimation
                 add.w   d1,d1
                 add.w   d1,d1
                 jsr     @bt_Battleactions(pc,d1.w)
                 
-@AnimateSprite: bsr.w   WriteBattlesceneScript_AnimateAction
+@AnimateSprite: bsr.w   battlesceneScript_AnimateAction
                 cmpi.w  #BATTLEACTION_BURST_ROCK,(a3)
                 bne.s   @Done
                 
@@ -70,7 +70,7 @@ CreateBattlesceneAnimation:
 @Done:          movem.l (sp)+,d0-d3/a0
 @Return:        rts
 
-    ; End of function CreateBattlesceneAnimation
+    ; End of function battlesceneScript_PerformAnimation
 
 @bt_Battleactions:
                 bra.w   @Attack
@@ -84,10 +84,10 @@ CreateBattlesceneAnimation:
                 ; Check special critical hits
                 tst.b   d0
                 bmi.s   @Enemy1
-                lea     tbl_SpecialCriticalHitsForClasses(pc), a0
+                lea     table_SpecialCriticalHitsForClasses(pc), a0
                 bsr.w   GetClass
                 bra.s   @Continue1
-@Enemy1:        lea     tbl_SpecialCriticalHitsForEnemies(pc), a0
+@Enemy1:        lea     table_SpecialCriticalHitsForEnemies(pc), a0
                 bsr.w   GetEnemy
 @Continue1:     jsr     (FindSpecialPropertyWordsAddressForObject).w
                 bcs.s   @CheckUnarmed
@@ -103,9 +103,9 @@ CreateBattlesceneAnimation:
                 
 @CheckUnarmed:  move.b  (a4),d0
                 bmi.s   @Enemy2
-                lea     tbl_UnarmedAttackAnimationsForClasses(pc), a0
+                lea     table_UnarmedAttackAnimationsForClasses(pc), a0
                 bra.s   @Continue2
-@Enemy2:        lea     tbl_UnarmedAttackAnimationsForEnemies(pc), a0
+@Enemy2:        lea     table_UnarmedAttackAnimationsForEnemies(pc), a0
 @Continue2:     jsr     (FindSpecialPropertyWordsAddressForObject).w
                 bcs.s   @Return
                 
@@ -136,10 +136,10 @@ CreateBattlesceneAnimation:
                 ; Determine spellcasting animation
                 tst.b   d0
                 bmi.s   @Enemy2
-                lea     tbl_SpellcastAnimationsForClasses(pc), a0
+                lea     table_SpellcastAnimationsForClasses(pc), a0
                 bsr.w   GetClass
                 bra.s   @Continue2
-@Enemy2:        lea     tbl_SpellcastAnimationsForEnemies(pc), a0
+@Enemy2:        lea     table_SpellcastAnimationsForEnemies(pc), a0
                 bsr.w   GetEnemy
 @Continue2:     jsr     (FindSpecialPropertyWordsAddressForObject).w
                 bcs.s   @Return
@@ -155,10 +155,10 @@ CreateBattlesceneAnimation:
                 ; Determine item usage animation
                 tst.b   d0
                 bmi.s   @Enemy2
-                lea     tbl_UseItemAnimationsForClasses(pc), a0
+                lea     table_UseItemAnimationsForClasses(pc), a0
                 bsr.w   GetClass
                 bra.s   @Continue2
-@Enemy2:        lea     tbl_UseItemAnimationsForEnemies(pc), a0
+@Enemy2:        lea     table_UseItemAnimationsForEnemies(pc), a0
                 bsr.w   GetEnemy
 @Continue2:     jsr     (FindSpecialPropertyWordsAddressForObject).w
                 bcs.s   @Return
