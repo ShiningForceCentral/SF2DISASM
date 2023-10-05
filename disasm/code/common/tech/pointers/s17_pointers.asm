@@ -18,8 +18,8 @@ p_palette_SuspendString:
                 dc.l palette_SuspendString
 p_tiles_SuspendString:
                 dc.l tiles_SuspendString
-p_unused_BasePalettes:
+p_palette_UnusedBase:
             if (VANILLA_BUILD=1)
-                dc.l unused_BasePalettes
+                dc.l palette_UnusedBase 
             endif
 p_tiles_Base:   dc.l tiles_Base

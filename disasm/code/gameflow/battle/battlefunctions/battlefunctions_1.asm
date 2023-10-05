@@ -44,7 +44,7 @@ BattleLoop:
                 setSavedByte d0, CURRENT_MAP
                 setSavedByte d1, CURRENT_BATTLE
                 bsr.w   SetBaseVIntFunctions
-                jsr     j_ExecuteBattleCutscene_Intro
+                jsr     j_ExecuteBeforeBattleCutscene
                 movem.w (sp)+,d0-d1
                 
                 setSavedByte d0, CURRENT_MAP
@@ -63,7 +63,7 @@ BattleLoop:
                 jsr     j_ClearAiMoveInfo
                 clr.w   d0
                 bsr.w   LoadBattle      
-                jsr     j_ExecuteBattleCutscene_Start
+                jsr     j_ExecuteBattleStartCutscene
 @Start:
                 
                 bsr.w   UpdateAllEnemiesAi ; start of battle loop

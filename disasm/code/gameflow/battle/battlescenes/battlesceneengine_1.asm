@@ -525,9 +525,9 @@ LoadNewEnemyBattlesprite:
                 addq.w  #6,a0
                 move.w  (a0),d0
                 adda.w  d0,a0           ; a0 = pointer to sprite frame
-                lea     (ENEMY_BATTLESPRITE_UNCOMP_SPACE).l,a1
+                lea     (ENEMY_BATTLESPRITE_LOADING_SPACE).l,a1
                 jsr     (LoadStackCompressedData).w
-                lea     (ENEMY_BATTLESPRITE_UNCOMP_SPACE).l,a0
+                lea     (ENEMY_BATTLESPRITE_LOADING_SPACE).l,a0
                 lea     (FF5000_LOADING_SPACE).l,a1
                 move.w  #511,d0
 @Loop:

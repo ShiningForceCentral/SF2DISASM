@@ -3817,7 +3817,7 @@ LIFE_RING_HP_RECOVERY: equ $5
 
 ; ---------------------------------------------------------------------------
 
-; enum BattleMapCoordinates_Properties
+; enum BattleMapCoordinatesProperties
 
 battleMapCoordsEntrySize = 5
     if (STANDARD_BUILD&FIX_SEARCH_IN_BATTLE=1)

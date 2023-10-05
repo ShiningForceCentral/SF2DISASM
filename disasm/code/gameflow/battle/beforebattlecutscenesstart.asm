@@ -7,7 +7,7 @@
 ; cutscene before the battle begins
 
 
-ExecuteBattleCutscene_Intro:
+ExecuteBeforeBattleCutscene:
                 
                 movem.l d1,-(sp)
                 clr.w   d1

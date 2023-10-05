@@ -292,6 +292,7 @@ WaitForWindowMovementEnd:
 
 VInt_UpdateWindows:
                 
+                module
                 cmpi.l  #WINDOW_TILE_LAYOUTS,((WINDOW_LAYOUTS_END_POINTER-$1000000)).w
                 bne.s   loc_4994
                 rts
@@ -307,7 +308,7 @@ loc_49A0:
                 move.b  WINDOWDEF_OFFSET_ANIM_LENGTH(a2),d0
                 cmp.b   WINDOWDEF_OFFSET_ANIM_COUNTER(a2),d0
                 beq.w   @NextWindow
-                moveq   #7,d0
+                moveq   #WINDOW_ENTRIES_COUNTER,d0
                 sub.w   d7,d0
                 bset    d0,((MOVING_WINDOWS_BITFIELD-$1000000)).w
                 movea.l (a2),a0
@@ -418,6 +419,7 @@ loc_4AA2:
 
     ; End of function VInt_UpdateWindows
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

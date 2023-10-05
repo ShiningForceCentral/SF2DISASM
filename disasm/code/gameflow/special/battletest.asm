@@ -148,7 +148,7 @@ byte_77DE:
                 txt     460             ; "Shop number?{D1}"
                 move.w  #0,d0
                 move.w  #0,d1
-                move.w  #SHOPS_DEBUG_MAX_INDEX,d2 
+                move.w  #SHOPS_DEBUG_MAX_INDEX,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w

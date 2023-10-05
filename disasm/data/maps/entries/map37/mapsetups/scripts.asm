@@ -207,7 +207,7 @@ loc_5FD82:
 sub_5FD92:
                 
                 move.b  #1,((FADING_TIMER_BYTE-$1000000)).w
-                lea     plt_5FDB4(pc), a0
+                lea     palette_5FDB4(pc), a0
                 lea     (PALETTE_4_BASE).l,a1
                 moveq   #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
@@ -217,7 +217,7 @@ sub_5FD92:
 
     ; End of function sub_5FD92
 
-plt_5FDB4:      dc.w 0
+palette_5FDB4:  dc.w 0
                 dc.w 0
                 dc.w 0
                 dc.w $E60

@@ -1239,16 +1239,16 @@ SymbolsToGraphics:
                 
                 move.b  ((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w,d2
                 movem.w d0-d2/d7,-(sp)
-                bsr.s   DialogueGraphicsToRam
+                bsr.s   LoadVariableWidthFont
                 movem.w (sp)+,d0-d2/d7
                 addq.b  #1,d2
                 move.b  d2,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
-                bsr.s   DialogueGraphicsToRam
+                bsr.s   LoadVariableWidthFont
                 addq.w  #1,d4
                 bra.s   @Done
 @UseRegularDialogueFont:
                 
-                bsr.s   DialogueGraphicsToRam
+                bsr.s   LoadVariableWidthFont
 @Done:
                 
                 movem.w (sp)+,d0-d2
@@ -1260,7 +1260,7 @@ SymbolsToGraphics:
 ; =============== S U B R O U T I N E =======================================
 
 
-DialogueGraphicsToRam:
+LoadVariableWidthFont:
                 
                 subq.w  #1,d7
                 lsl.w   #5,d7
@@ -1290,7 +1290,7 @@ loc_6BD4:
                 add.b   d4,((DIALOGUE_TYPEWRITING_CURRENT_X-$1000000)).w
                 rts
 
-    ; End of function DialogueGraphicsToRam
+    ; End of function LoadVariableWidthFont
 
 
 ; =============== S U B R O U T I N E =======================================

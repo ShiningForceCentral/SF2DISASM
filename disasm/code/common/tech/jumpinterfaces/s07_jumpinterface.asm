@@ -165,21 +165,21 @@ j_ExecuteMapScript:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ExecuteBattleCutscene_Intro:
+j_ExecuteBeforeBattleCutscene:
                 
-                jmp     ExecuteBattleCutscene_Intro(pc)
+                jmp     ExecuteBeforeBattleCutscene(pc)
 
-    ; End of function j_ExecuteBattleCutscene_Intro
+    ; End of function j_ExecuteBeforeBattleCutscene
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ExecuteBattleCutscene_Start:
+j_ExecuteBattleStartCutscene:
                 
-                jmp     ExecuteBattleCutscene_Start(pc)
+                jmp     ExecuteBattleStartCutscene(pc)
 
-    ; End of function j_ExecuteBattleCutscene_Start
+    ; End of function j_ExecuteBattleStartCutscene
 
 
 ; =============== S U B R O U T I N E =======================================

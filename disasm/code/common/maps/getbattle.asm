@@ -49,7 +49,8 @@ CheckBattle:
                 
                 cmpi.b  #-1,BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y(a0)
                 beq.w   @SetCurrentCoordinates
-                cmp.b   BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y(a0),d5 ; if player is not on specified coords (bytes 5/6), then don't return battle index.
+                cmp.b   BATTLEMAPCOORDINATES_OFFSET_TRIGGER_Y(a0),d5 
+                                                        ; if player is not on specified coords (bytes 5/6), then don't return battle index.
                 bne.w   @Next
 @SetCurrentCoordinates:
                 

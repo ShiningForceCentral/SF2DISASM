@@ -87,7 +87,7 @@
                 include "code\common\scripting\text\textfunctions.asm"    ; Text functions
                 includeIfStandard "code\common\scripting\text\displayuncompressedtext-standard.asm"
                 includeIfStandard "code\common\tech\findspecialproperties-standard.asm"
-                includeIfVanilla "code\common\scripting\text\unused_textfunctionsdata.asm"    ; Text functions
+                includeIfVanilla "code\common\scripting\text\unused_textfunctionsdata.asm"    ; Unused text functions data
             if (MEMORY_MAPPER=1)
                 includeIfStandard "code\common\tech\mapperfunctions-standard.asm"   ; Memory mapper functions
             endif

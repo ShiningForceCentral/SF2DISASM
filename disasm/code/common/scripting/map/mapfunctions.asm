@@ -66,7 +66,7 @@ loc_44104:
                 move.b  d0,(a2)+
                 move.l  (a0)+,d5
                 clr.l   d6
-                move.w  #$20,d6 
+                move.w  #ENTITY_ENEMY_START,d6
                 bsr.w   DeclareNewEntity
                 movem.w (sp)+,d0
                 bra.s   loc_44104
