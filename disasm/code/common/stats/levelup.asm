@@ -212,7 +212,7 @@ InitializeAllyStats:
                 move.w  d4,d5           ; D5 = effective level (takes additional levels into account if promoted for the purpose of spell learning)
             if (STANDARD_BUILD=1)
                 bsr.w   GetClassType
-                beq.s   @FindLearnableSpell
+                beq.s   @FindStatsBlockForClass
             else
                 bsr.w   GetClass        
                 cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED -- TORT class is being wrongfully treated as promoted here
@@ -221,7 +221,9 @@ InitializeAllyStats:
             endif
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5 ; add 20 to effective level if promoted
 @FindStatsBlockForClass:
-                
+            if (STANDARD_BUILD=1)
+                bsr.w   GetClass
+            endif
                 move.w  d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
                 getPointer p_pt_AllyStats, a0
