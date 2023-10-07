@@ -102,8 +102,8 @@ Map25_EntityEvent5:
                 bra.s   return_5D2D0
 loc_5D2C4:
                 
-                move.b  #9,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_KETTO,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
 return_5D2D0:
                 
                 rts
@@ -123,7 +123,7 @@ Map25_EntityEvent6:
                 setFlg  256             ; TEMP FLAG #00
 loc_5D2E0:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map25_EntityEvent6
@@ -174,8 +174,8 @@ loc_5D328:
                 bra.s   return_5D336
 loc_5D32A:
                 
-                move.b  #$1B,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_KETTO,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
 return_5D336:
                 
                 rts

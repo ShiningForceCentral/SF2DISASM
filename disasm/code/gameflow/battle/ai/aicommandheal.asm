@@ -64,7 +64,7 @@ ExecuteAiCommand_Heal:
                 move.b  itemEntry(a6),d1
                 move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1
-                move.w  #CODE_TERMINATOR_BYTE,(a1)
+                move.w  #TERMINATOR_BYTE,(a1)
                 bra.w   @Done
 @CheckHealingSpell:
                 
@@ -126,11 +126,11 @@ ExecuteAiCommand_Heal:
                 bsr.w   PopulateTargetsArrayWithAllies
 @UpdateTargetsList:
                 
-                move.w  #$FFFF,d3
+                move.w  #-1,d3
                 bsr.w   UpdateBattleTerrainOccupiedByAllies
                 move.b  caster(a6),d0
-                bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   InitializeMovementArrays
+                bsr.w   PopulateMovementArrays
                 clr.w   d3
                 bsr.w   UpdateBattleTerrainOccupiedByAllies ; Update target list to only include targets in range of the spell.
                                         ; Because this doesn't look at the range for all spell levels,
@@ -247,7 +247,7 @@ ExecuteAiCommand_Heal:
                 bra.w   @FindPositionForTargets
 @Continue_1:
                 
-                move.b  #$FF,d2
+                move.b  #-1,d2
                 clr.w   d3
 @SortTargets_InnerLoop:
                 
@@ -401,7 +401,7 @@ ExecuteAiCommand_Heal:
                 bra.w   @Done
 @Skip:
                 
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 unlk    a6
                 movem.l (sp)+,d0/d2-a6
                 rts

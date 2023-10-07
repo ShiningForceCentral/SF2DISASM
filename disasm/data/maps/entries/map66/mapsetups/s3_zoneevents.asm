@@ -18,7 +18,7 @@ Map66_ZoneEvent0:
                 chkFlg  538             ; Battle 38 completed - BATTLE_VERSUS_GESHP                
                 bne.s   return_4FAB8
                 setFlg  438             ; Battle 38 unlocked - BATTLE_VERSUS_GESHP              
-                move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
+                move.l  #MAP_EVENT_RELOADMAP,((MAP_EVENT_TYPE-$1000000)).w
 return_4FAB8:
                 
                 rts
@@ -37,7 +37,7 @@ Map66_ZoneEvent2:
                 chkFlg  539             ; Battle 39 completed - BATTLE_TO_ANCIENT_SHRINE           
                 bne.s   return_4FAD2
                 setFlg  439             ; Battle 39 unlocked - BATTLE_TO_ANCIENT_SHRINE         
-                move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
+                move.l  #MAP_EVENT_RELOADMAP,((MAP_EVENT_TYPE-$1000000)).w
 return_4FAD2:
                 
                 rts

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\global\aipriority.asm :
 ; 0xD8F4..0xDA82 : AI priority data
-tbl_HealPriorityMoveTypes:
+table_HealPriorityMoveTypes:
                 dc.b $FF
                 dc.b MOVETYPE_LOWER_HEALER
                 dc.b MOVETYPE_LOWER_MAGE
@@ -16,7 +16,7 @@ tbl_HealPriorityMoveTypes:
                 dc.b MOVETYPE_LOWER_REGULAR
                 dc.b MOVETYPE_LOWER_AQUATIC
                 
-tbl_AttackPriority_Regular:
+table_AttackPriority_Regular:
                 dc.b CLASS_SDMN
                 dc.b CLASS_HERO
                 dc.b CLASS_MAGE
@@ -50,7 +50,7 @@ tbl_AttackPriority_Regular:
                 dc.b CLASS_TORT
                 dc.b CLASS_MNST
                 
-tbl_AttackPriority_Mage:
+table_AttackPriority_Mage:
                 dc.b CLASS_SDMN
                 dc.b CLASS_HERO
                 dc.b CLASS_TORT
@@ -84,7 +84,7 @@ tbl_AttackPriority_Mage:
                 dc.b CLASS_PGNT
                 dc.b CLASS_BDBT
                 
-tbl_AttackPriority_Archer:
+table_AttackPriority_Archer:
                 dc.b CLASS_BDMN
                 dc.b CLASS_PHNK
                 dc.b CLASS_BDBT
@@ -118,7 +118,7 @@ tbl_AttackPriority_Archer:
                 dc.b CLASS_TORT
                 dc.b CLASS_MNST
                 
-tbl_AttackPriority_Flying:
+table_AttackPriority_Flying:
                 dc.b CLASS_SDMN
                 dc.b CLASS_HERO
                 dc.b CLASS_MAGE
@@ -154,41 +154,41 @@ tbl_AttackPriority_Flying:
                 dc.b CLASS_NONE
                 
 pt_AttackPriorityForMoveType:
-                dc.l tbl_AttackPriority_Regular ; moveType None
-                dc.l tbl_AttackPriority_Regular ; moveType Regular
-                dc.l tbl_AttackPriority_Regular ; moveType Centaur
-                dc.l tbl_AttackPriority_Regular ; moveType Stealth
-                dc.l tbl_AttackPriority_Regular ; moveType Brass Gunner
-                dc.l tbl_AttackPriority_Flying ; moveType Flying
-                dc.l tbl_AttackPriority_Flying ; moveType Hovering
-                dc.l tbl_AttackPriority_Regular ; moveType Aquatic
-                dc.l tbl_AttackPriority_Archer ; moveType Archer
-                dc.l tbl_AttackPriority_Archer ; moveType Centaur Archer
-                dc.l tbl_AttackPriority_Mage ; moveType Stealth Archer
-                dc.l tbl_AttackPriority_Mage ; moveType Mage
-                dc.l tbl_AttackPriority_Regular ; moveType Healer
-                dc.l tbl_AttackPriority_Regular
-                dc.l tbl_AttackPriority_Regular
-                dc.l tbl_AttackPriority_Regular
+                dc.l table_AttackPriority_Regular ; moveType None
+                dc.l table_AttackPriority_Regular ; moveType Regular
+                dc.l table_AttackPriority_Regular ; moveType Centaur
+                dc.l table_AttackPriority_Regular ; moveType Stealth
+                dc.l table_AttackPriority_Regular ; moveType Brass Gunner
+                dc.l table_AttackPriority_Flying ; moveType Flying
+                dc.l table_AttackPriority_Flying ; moveType Hovering
+                dc.l table_AttackPriority_Regular ; moveType Aquatic
+                dc.l table_AttackPriority_Archer ; moveType Archer
+                dc.l table_AttackPriority_Archer ; moveType Centaur Archer
+                dc.l table_AttackPriority_Mage ; moveType Stealth Archer
+                dc.l table_AttackPriority_Mage ; moveType Mage
+                dc.l table_AttackPriority_Regular ; moveType Healer
+                dc.l table_AttackPriority_Regular
+                dc.l table_AttackPriority_Regular
+                dc.l table_AttackPriority_Regular
                 
-off_D9C2:       dc.l byte_DA02          ; moveType None
-                dc.l byte_DA02          ; moveType Regular
-                dc.l byte_DA02          ; moveType Centaur
-                dc.l byte_DA02          ; moveType Stealth
-                dc.l byte_DA02          ; moveType Brass Gunner
-                dc.l byte_DA62          ; moveType Flying
-                dc.l byte_DA62          ; moveType Hovering
-                dc.l byte_DA02          ; moveType Aquatic
-                dc.l byte_DA42          ; moveType Archer
-                dc.l byte_DA42          ; moveType Centaur Archer
-                dc.l byte_DA22          ; moveType Stealth Archer
-                dc.l byte_DA22          ; moveType Mage
-                dc.l byte_DA02          ; moveType Healer
-                dc.l byte_DA02
-                dc.l byte_DA02
-                dc.l byte_DA02
+pt_D9C2:        dc.l table_DA02         ; moveType None
+                dc.l table_DA02         ; moveType Regular
+                dc.l table_DA02         ; moveType Centaur
+                dc.l table_DA02         ; moveType Stealth
+                dc.l table_DA02         ; moveType Brass Gunner
+                dc.l table_DA62         ; moveType Flying
+                dc.l table_DA62         ; moveType Hovering
+                dc.l table_DA02         ; moveType Aquatic
+                dc.l table_DA42         ; moveType Archer
+                dc.l table_DA42         ; moveType Centaur Archer
+                dc.l table_DA22         ; moveType Stealth Archer
+                dc.l table_DA22         ; moveType Mage
+                dc.l table_DA02         ; moveType Healer
+                dc.l table_DA02
+                dc.l table_DA02
+                dc.l table_DA02
                 
-byte_DA02:      dc.b 4
+table_DA02:     dc.b 4
                 dc.b 1
                 dc.b 0
                 dc.b 4
@@ -215,79 +215,79 @@ byte_DA02:      dc.b 4
                 dc.b 1
                 dc.b 2
                 dc.b 2
-                dc.b 2
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                
-byte_DA22:      dc.b 3
-                dc.b 1
-                dc.b 3
-                dc.b 0
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 3
-                dc.b 3
-                dc.b 2
-                dc.b 0
-                dc.b 3
-                dc.b 3
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 1
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 3
-                dc.b 2
-                dc.b 3
-                dc.b 3
-                
-byte_DA42:      dc.b 3
-                dc.b 1
-                dc.b 0
-                dc.b 3
-                dc.b 3
-                dc.b 2
-                dc.b 4
-                dc.b 2
-                dc.b 2
-                dc.b 4
-                dc.b 2
-                dc.b 0
-                dc.b 3
-                dc.b 1
-                dc.b 4
-                dc.b 0
-                dc.b 0
-                dc.b 3
-                dc.b 3
-                dc.b 3
-                dc.b 3
-                dc.b 2
-                dc.b 2
-                dc.b 4
-                dc.b 2
-                dc.b 2
-                dc.b 4
                 dc.b 2
                 dc.b 0
                 dc.b 1
                 dc.b 0
                 dc.b 0
                 
-byte_DA62:      dc.b 3
+table_DA22:     dc.b 3
+                dc.b 1
+                dc.b 3
+                dc.b 0
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 3
+                dc.b 3
+                dc.b 2
+                dc.b 0
+                dc.b 3
+                dc.b 3
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 0
+                dc.b 1
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 1
+                dc.b 0
+                dc.b 1
+                dc.b 3
+                dc.b 2
+                dc.b 3
+                dc.b 3
+                
+table_DA42:     dc.b 3
+                dc.b 1
+                dc.b 0
+                dc.b 3
+                dc.b 3
+                dc.b 2
+                dc.b 4
+                dc.b 2
+                dc.b 2
+                dc.b 4
+                dc.b 2
+                dc.b 0
+                dc.b 3
+                dc.b 1
+                dc.b 4
+                dc.b 0
+                dc.b 0
+                dc.b 3
+                dc.b 3
+                dc.b 3
+                dc.b 3
+                dc.b 2
+                dc.b 2
+                dc.b 4
+                dc.b 2
+                dc.b 2
+                dc.b 4
+                dc.b 2
+                dc.b 0
+                dc.b 1
+                dc.b 0
+                dc.b 0
+                
+table_DA62:     dc.b 3
                 dc.b 2
                 dc.b 2
                 dc.b 3

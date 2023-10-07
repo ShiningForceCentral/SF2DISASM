@@ -54,7 +54,7 @@ loc_23EA6:
                 move.b  ((EGRESS_MAP-$1000000)).w,d0
 loc_23EAA:
                 
-                jsr     (GetSavePointForMap).w
+                jsr     (GetSavepointForMap).w
                 rts
 
     ; End of function GetEgressPositionForBattle

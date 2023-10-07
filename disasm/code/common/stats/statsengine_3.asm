@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\stats\statsengine_3.asm :
-; 0x9736..0x9A3C : Character stats engine
+; 0x9736..0x9A3C : Character stats engine, part 3
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -17,7 +17,7 @@ NewGame:
                 bsr.w   InitializeAllyCombatantEntry
                 dbf     d7,@Loop
                 
-                moveq   #GOLD_STARTING_AMOUNT,d1 ; starting gold value
+                moveq   #GAMESTART_GOLD,d1 ; starting gold value
                 bsr.w   SetGold
                 moveq   #ALLY_BOWIE,d0  ; starting character
                 bsr.w   JoinForce       
@@ -39,7 +39,7 @@ InitializeAllyCombatantEntry:
                 mulu.w  #COMBATANT_ENTRY_REAL_SIZE,d1
                 lea     ((COMBATANT_ENTRIES-$1000000)).w,a1
                 adda.w  d1,a1
-                movea.l (p_tbl_AllyNames).l,a0
+                movea.l (p_table_AllyNames).l,a0
                 move.w  d0,d1
                 subq.w  #1,d1
                 blt.s   @GetNameCounter
@@ -72,7 +72,7 @@ InitializeAllyCombatantEntry:
                 
                 move.w  d0,d1
                 mulu.w  #ALLYSTARTDEF_ENTRY_SIZE,d1
-                movea.l (p_tbl_AllyStartDefs).l,a0
+                movea.l (p_table_AllyStartDefinitions).l,a0
                 adda.w  d1,a0
                 suba.w  #ALLYNAME_MAX_LENGTH,a1
                 move.b  (a0)+,d1
@@ -103,8 +103,8 @@ InitializeAllyCombatantEntry:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = ally index
-;     D1 = class index
+; In: d0.w = ally index
+;     d1.w = class index
 
 
 LoadAllyClassData:
@@ -113,7 +113,7 @@ LoadAllyClassData:
                 mulu.w  #COMBATANT_ENTRY_REAL_SIZE,d0
                 lea     ((COMBATANT_ENTRIES-$1000000)).w,a1
                 adda.w  d0,a1
-                movea.l (p_tbl_ClassDefs).l,a0
+                movea.l (p_table_ClassDefinitions).l,a0
                 andi.w  #CLASS_MASK_INDEX,d1
                 mulu.w  #CLASSDEF_ENTRY_SIZE,d1
                 adda.w  d1,a0
@@ -180,12 +180,12 @@ InitializeGameSettings:
                 move.b  d0,((PLAYER_TYPE-$1000000)).w
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 move.b  d0,((CURRENT_BATTLE-$1000000)).w
-                move.b  d0,((DISPLAY_BATTLE_MESSAGES-$1000000)).w
+                move.b  d0,((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w
                 move.b  d0,((EGRESS_MAP-$1000000)).w
                 move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 move.b  #2,((MESSAGE_SPEED-$1000000)).w
-                move.l  #$FFFFFFFF,((FOLLOWERS_LIST-$1000000)).w
-                move.w  #$FFFF,((byte_FFAF26-$1000000)).w
+                move.l  #-1,((EXPLORATION_ENTITIES-$1000000)).w
+                move.w  #-1,((byte_FFAF26-$1000000)).w
                 movem.l (sp)+,d0/d7-a0
                 rts
 
@@ -336,7 +336,7 @@ LeaveForce:
                 
                 move.l  d1,-(sp)
                 move.b  d0,d1
-                andi.b  #$FF,d1
+                andi.b  #BYTE_MASK,d1
                 addi.w  #FORCEMEMBER_JOINED_FLAGS_START,d1
                 bsr.w   ClearFlag
                 move.w  #MAP_NULLPOSITION,d1
@@ -356,7 +356,7 @@ IsInBattleParty:
                 
                 movem.l d1,-(sp)
                 move.b  d0,d1
-                andi.b  #$FF,d1
+                andi.b  #BYTE_MASK,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.w   CheckFlag
                 movem.l (sp)+,d1
@@ -374,7 +374,7 @@ JoinBattleParty:
                 
                 move.l  d1,-(sp)
                 move.b  d0,d1
-                andi.b  #$FF,d1
+                andi.b  #BYTE_MASK,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.w   SetFlag
                 move.l  (sp)+,d1
@@ -392,10 +392,10 @@ LeaveBattleParty:
                 
                 move.l  d1,-(sp)
                 move.b  d0,d1
-                andi.b  #$FF,d1
+                andi.b  #BYTE_MASK,d1
                 addi.w  #FORCEMEMBER_ACTIVE_FLAGS_START,d1
                 bsr.w   ClearFlag
-                move.w  #$FFFF,d1
+                move.w  #-1,d1
                 jsr     SetCombatantX
                 move.l  (sp)+,d1
                 rts

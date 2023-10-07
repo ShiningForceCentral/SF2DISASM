@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\goldwindowlayout.asm :
 ; 0x1284E..0x1288E : Member screen gold window layout
-GoldWindowLayout:
+layout_GoldWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;

@@ -1,7 +1,8 @@
 
 ; ASM FILE data\stats\allies\classes\promotions.asm :
 ; 0x21046..0x21072 : Promotions
-tbl_Promotions: 
+table_Promotions:
+                
 ; Syntax        promotionSection [CLASS_]enum,..[CLASS_]enum
 ;               promotionItems   [ITEM_]enum,..[ITEM_]enum
 ;

@@ -16,10 +16,11 @@ loc_257D0:
                 jsr     HealLivingAndImmortalAllies
                 jsr     FadeOutToBlackAll(pc)
                 nop
-                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
+                move.b  #-1,((VIEW_TARGET_ENTITY-$1000000)).w
                 move.w  d0,-(sp)
-                cmpi.b  #$FF,d0         ; map index is $FF, not provided
-                beq.s   loc_25828
+                cmpi.b  #-1,d0
+                beq.s   @MapIndexNotProvided
+                
                 move.b  d0,((CURRENT_MAP-$1000000)).w
                 move.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 movem.w d1-d3,-(sp)
@@ -32,20 +33,20 @@ loc_257D0:
                 dc.w VINTS_CLEAR
                 jsr     j_GetMapSetupEntities
                 jsr     j_InitializeMapEntities
-                jsr     (LoadMapEntitySprites).w
+                jsr     (LoadEntityMapsprites).w
                 bsr.w   ClearMapSetupTempFlags
                 setFlg  80              ; Set @ loc_257D0, also set during exploration loop at 0x25824
                 bra.s   loc_25836
-loc_25828:
+@MapIndexNotProvided:
                 
                 bsr.w   WaitForFadeToFinish
-                bsr.w   sub_258A8       
-                jsr     sub_440AC
+                bsr.w   UpdateMainEntityProperties
+                jsr     j_DeclareRaftEntity
 loc_25836:
                 
-                jsr     (sub_4EC6).w    
+                jsr     (InitializeExplorationSpritesFrameCounter).w
                 move.w  (sp)+,d1
-                move.w  #$FFFF,d0
+                move.w  #-1,d0
                 move.b  #0,((VIEW_TARGET_ENTITY-$1000000)).w
                 jsr     (LoadMap).w     
                 bsr.w   SetBaseVIntFunctions
@@ -99,38 +100,36 @@ ClearMapSetupTempFlags:
 
 ; =============== S U B R O U T I N E =======================================
 
-; update main entity properties
 
-
-sub_258A8:
+UpdateMainEntityProperties:
                 
                 movem.l d0-d3/a0,-(sp)
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 tst.b   d1
                 blt.s   loc_258BE
-                mulu.w  #$180,d1
+                mulu.w  #MAP_TILE_SIZE,d1
                 move.w  d1,(a0)
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a0)
 loc_258BE:
                 
                 tst.b   d2
                 blt.s   loc_258CE
-                mulu.w  #$180,d2
+                mulu.w  #MAP_TILE_SIZE,d2
                 move.w  d2,ENTITYDEF_OFFSET_Y(a0)
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
 loc_258CE:
                 
                 move.b  d3,ENTITYDEF_OFFSET_FACING(a0)
                 clr.w   d0
-                jsr     j_GetAllyMapSprite
+                jsr     j_GetAllyMapsprite
                 move.w  d3,d1
-                moveq   #$FFFFFFFF,d2
+                moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function sub_258A8
+    ; End of function UpdateMainEntityProperties
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -271,11 +270,11 @@ loc_259CC:
 @Continue:
                 
                 move.b  d0,((CURRENT_MAP-$1000000)).w
-                moveq   #$FFFFFFFF,d0
+                moveq   #-1,d0
                 jsr     (ProcessMapTransition).w
                 move.b  ((MAP_EVENT_PARAM_3-$1000000)).w,d0
                 blt.s   loc_25A04
-                mulu.w  #$180,d0
+                mulu.w  #MAP_TILE_SIZE,d0
                 move.w  d0,((ENTITY_DATA-$1000000)).w
                 move.w  d0,((ENTITY_X_DEST-$1000000)).w
 loc_25A04:
@@ -283,7 +282,7 @@ loc_25A04:
                 clr.w   d0
                 move.b  ((MAP_EVENT_PARAM_4-$1000000)).w,d0
                 blt.s   loc_25A18
-                mulu.w  #$180,d0
+                mulu.w  #MAP_TILE_SIZE,d0
                 move.w  d0,((ENTITY_Y-$1000000)).w
                 move.w  d0,((ENTITY_Y_DEST-$1000000)).w
 loc_25A18:
@@ -292,7 +291,7 @@ loc_25A18:
                 clr.w   d2
                 clr.w   d3
                 bsr.w   UpdatePlayerPosFromMapEvent
-                jsr     sub_440AC
+                jsr     j_DeclareRaftEntity
                 rts
 
     ; End of function ProcessMapEventType1_Warp
@@ -307,10 +306,10 @@ UpdatePlayerPosFromMapEvent:
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 move.w  (a0),d1         ; X
                 ext.l   d1
-                divs.w  #$180,d1
+                divs.w  #MAP_TILE_SIZE,d1
                 move.w  ENTITYDEF_OFFSET_Y(a0),d2 ; Y
                 ext.l   d2
-                divs.w  #$180,d2
+                divs.w  #MAP_TILE_SIZE,d2
                 clr.w   d3
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d3
                 movea.l (sp)+,a0

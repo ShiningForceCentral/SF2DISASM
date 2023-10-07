@@ -9,7 +9,7 @@ RunMapSetupInitFunction:
                 
                 movem.l d0-a1,-(sp)
                 bsr.w   GetCurrentMapSetup
-                cmpi.w  #$FFFF,(a0)
+                cmpi.w  #-1,(a0)
                 bne.s   loc_4750E
                 bra.w   loc_47514
 loc_4750E:
@@ -31,8 +31,9 @@ RunMapSetupZoneEvent:
                 
                 movem.l d0-a1,-(sp)
                 bsr.w   GetCurrentMapSetup
-                cmpi.w  #$FFFF,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   loc_47576
+                
                 movea.l MAPSETUP_OFFSET_ZONE_EVENTS(a0),a0
                 clr.w   d7
 loc_47530:
@@ -43,14 +44,16 @@ loc_47530:
                 bra.s   loc_4756A
 loc_4753E:
                 
-                cmpi.b  #$FF,(a0,d7.w)
+                cmpi.b  #-1,(a0,d7.w)
                 beq.w   loc_47550
+                
                 cmp.b   (a0,d7.w),d1
                 bne.w   loc_47562
 loc_47550:
                 
-                cmpi.b  #$FF,1(a0,d7.w)
+                cmpi.b  #-1,1(a0,d7.w)
                 beq.w   loc_47566
+                
                 cmp.b   1(a0,d7.w),d2
                 beq.w   loc_47566
 loc_47562:
@@ -63,7 +66,7 @@ loc_47566:
 loc_4756A:
                 
                 jsr     (a0)
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 clsTxt
 loc_47576:
                 
@@ -92,9 +95,10 @@ RunMapSetupItemEvent:
                 move.b  d2,((byte_FFB651-$1000000)).w
                 moveq   #0,d6
                 bsr.w   GetCurrentMapSetup
-                cmpi.w  #$FFFF,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   loc_4760A
-                movea.l MAPSETUP_OFFSET_SECTION_5(a0),a0
+                
+                movea.l MAPSETUP_OFFSET_ITEM_EVENTS(a0),a0
                 clr.w   d7
 loc_475AA:
                 
@@ -104,20 +108,23 @@ loc_475AA:
                 bra.s   loc_475FE
 loc_475B8:
                 
-                cmpi.b  #$FF,(a0,d7.w)
+                cmpi.b  #-1,(a0,d7.w)
                 beq.w   loc_475CA
+                
                 cmp.b   (a0,d7.w),d1    ; x
                 bne.w   loc_475F6       
 loc_475CA:
                 
-                cmpi.b  #$FF,1(a0,d7.w)
+                cmpi.b  #-1,1(a0,d7.w)
                 beq.w   loc_475DC       
+                
                 cmp.b   1(a0,d7.w),d2   ; y
                 bne.w   loc_475F6       
 loc_475DC:
                 
-                cmpi.b  #$FF,2(a0,d7.w) ; if entry value $FF then don't care about facing value
+                cmpi.b  #-1,2(a0,d7.w)  ; if entry value $FF then don't care about facing value
                 beq.w   loc_475EE       
+                
                 cmp.b   2(a0,d7.w),d3   ; facing
                 bne.w   loc_475F6       
 loc_475EE:
@@ -134,7 +141,7 @@ loc_475FA:
 loc_475FE:
                 
                 jsr     (a0)
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 clsTxt
 loc_4760A:
                 
@@ -157,8 +164,9 @@ RunMapSetupEntityEvent:
                 movem.l d0-a1,-(sp)
                 move.b  d2,((byte_FFB651-$1000000)).w
                 bsr.w   GetCurrentMapSetup
-                cmpi.w  #$FFFF,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   loc_476D6
+                
                 movem.w d1-d2,-(sp)
                 movea.l MAPSETUP_OFFSET_ENTITY_EVENTS(a0),a0
                 clr.w   d7
@@ -195,11 +203,11 @@ loc_47670:
                 movem.w (sp)+,d1-d2
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
                 tst.b   d0
-                bpl.s   loc_47680
-                subi.b  #$60,d0 
-loc_47680:
+                bpl.s   @Ally
+                subi.b  #ENTITY_ENEMY_INDEX_DIFFERENCE,d0
+@Ally:
                 
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.b  (a1,d0.w),d0
                 movem.w d0-d2/d6,-(sp)
                 btst    #0,d6
@@ -208,8 +216,8 @@ loc_47680:
                 addi.w  #2,d2
                 andi.w  #3,d2
                 move.w  d2,d1
-                moveq   #$FFFFFFFF,d2
-                moveq   #$FFFFFFFF,d3
+                moveq   #-1,d2
+                moveq   #-1,d3
                 jsr     (UpdateEntityProperties).w
 loc_476A8:
                 
@@ -221,12 +229,12 @@ loc_476A8:
                 btst    #1,d6
                 beq.s   loc_476C4
                 ; finish event by closing windows
-                moveq   #$FFFFFFFF,d2
-                moveq   #$FFFFFFFF,d3
+                moveq   #-1,d2
+                moveq   #-1,d3
                 jsr     (UpdateEntityProperties).w
 loc_476C4:
                 
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 clsTxt
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
@@ -240,6 +248,8 @@ loc_476D6:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 sub_476DC:
@@ -264,7 +274,7 @@ LoadAndDisplayCurrentPortrait:
                 blt.s   loc_476FC
                 clr.w   d1
                 clr.w   d2
-                jsr     j_CreatePortraitWindow
+                jsr     j_OpenPortraitWindow
 loc_476FC:
                 
                 movem.w (sp)+,d0-d2
@@ -281,8 +291,9 @@ RunMapSetupAreaDescription:
                 movem.l d0-a1,-(sp)
                 bsr.w   GetCurrentMapSetup
                 clr.w   d7
-                cmpi.w  #$FFFF,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   loc_4771A
+                
                 movea.l MAPSETUP_OFFSET_AREA_DESCRIPTIONS(a0),a0
                 jsr     (a0)
 loc_4771A:
@@ -299,8 +310,8 @@ loc_4771A:
 
 DisplayAreaDescription:
                 
-                lsl.w   #8,d0
-                andi.w  #$FF,d1
+                lsl.w   #BYTE_SHIFT_COUNT,d0
+                andi.w  #BYTE_MASK,d1
                 or.w    d1,d0
                 clr.w   d7
 loc_4772C:
@@ -334,7 +345,7 @@ loc_4774C:
                 jsr     (DisplayText).w 
 loc_4776E:
                 
-                jsr     j_RemovePortraitWindow
+                jsr     j_ClosePortraitWindow
                 clsTxt
                 moveq   #-1,d7
                 rts
@@ -355,14 +366,15 @@ loc_4778C:
 
 ; =============== S U B R O U T I N E =======================================
 
-; returns entity list of map setup in a0
+; Returns entity list of map setup in a0.
 
 
 GetMapSetupEntityList:
                 
                 bsr.w   GetCurrentMapSetup
-                cmpi.w  #$FFFF,(a0)
+                cmpi.w  #-1,(a0)
                 beq.s   @Return
+                
                 movea.l (a0),a0
 @Return:
                 
@@ -373,7 +385,7 @@ GetMapSetupEntityList:
 
 ; =============== S U B R O U T I N E =======================================
 
-; returns map setup address in a0
+; Returns map setup address in a0.
 
 
 GetCurrentMapSetup:
@@ -384,8 +396,9 @@ GetCurrentMapSetup:
                 lea     MapSetups(pc), a1
 loc_477AC:
                 
-                cmpi.w  #$FFFF,(a1)
+                cmpi.w  #-1,(a1)
                 bne.s   loc_477BA
+                
                 lea     ms_Void(pc), a0
                 bra.w   loc_477E2
 loc_477BA:
@@ -458,8 +471,8 @@ sub_4781A:
                 
                 movem.l d0-d3,-(sp)
                 jsr     j_GetEntityIndexForCombatant
-                moveq   #$FFFFFFFF,d2
-                moveq   #$FFFFFFFF,d3
+                moveq   #-1,d2
+                moveq   #-1,d3
                 jsr     (UpdateEntityProperties).w
                 movem.l (sp)+,d0-d3
                 rts
@@ -479,8 +492,8 @@ sub_47832:
                 move.b  ((byte_FFB651-$1000000)).w,d1
                 addi.w  #2,d1
                 andi.w  #3,d1
-                moveq   #$FFFFFFFF,d2
-                moveq   #$FFFFFFFF,d3
+                moveq   #-1,d2
+                moveq   #-1,d3
                 jsr     (UpdateEntityProperties).w
                 movem.l (sp)+,d0-d3
                 rts
@@ -500,7 +513,7 @@ CheckRandomBattle:
                 add.w   d0,d1
                 jsr     j_CheckFlag
                 bne.s   loc_4786E
-                moveq   #$FFFFFFFF,d1
+                moveq   #-1,d1
                 bra.w   loc_47896
 loc_4786E:
                 
@@ -514,7 +527,7 @@ loc_4787A:
                 jsr     (GenerateRandomNumber).w
                 tst.w   d7
                 bne.s   loc_47888
-                moveq   #$FFFFFFFF,d1
+                moveq   #-1,d1
                 bra.s   loc_47896
 loc_47888:
                 

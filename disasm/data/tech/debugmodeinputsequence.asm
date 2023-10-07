@@ -1,7 +1,7 @@
 
 ; ASM FILE data\tech\debugmodeinputsequence.asm :
 ; 0x28FF0..0x29001 : Debug mode input sequence
-tbl_DebugModeInputSequence:
+table_DebugModeInputSequence:
                 
 ; Syntax        input [INPUT_]bitfield
                 

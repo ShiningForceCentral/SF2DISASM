@@ -1,13 +1,13 @@
 
 ; ASM FILE code\gameflow\battle\battleactions\battleactionsengine_5.asm :
-; 0xACEA..0xB0A8 : Battleactions engine
+; 0xACEA..0xB0A8 : Battleactions Engine, part 5
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
-;     A4 = pointer to actor index in RAM
-;     A5 = pointer to target index in RAM
-;     D6 = damage
+; In: a2 = battlescene script stack frame
+;     a4 = actor index pointer
+;     a5 = target index pointer
+;     d6.w = damage value
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -17,7 +17,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -32,13 +32,14 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_InflictDamage:
+battlesceneScript_InflictDamage:
                 
+                module
                 move.b  (a5),d0
                 jsr     GetEnemy        
                 cmpi.w  #ENEMY_TAROS,d1 ; if enemy target is Taros, check if attack is ineffective
                 bne.s   @CheckCounterAttack ; otherwise, go to next step
-                tst.b   ineffectiveAttack(a2)
+                tst.b   ineffectiveAttackToggle(a2)
                 beq.s   @CheckCounterAttack
                 displayMessage #MESSAGE_BATTLE_INEFFECTIVE_ATTACK,(a5),#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -75,12 +76,12 @@ WriteBattlesceneScript_InflictDamage:
                 moveq   #1,d6           ; minimum damage = 1
 @CheckCutoff:
                 
-                jsr     CalculateDamageExp
+                jsr     battlesceneScript_CalculateDamageExp
                 tst.b   cutoff(a2)
                 beq.s   @CheckTargetDies
                 move.w  #SPELLANIMATION_CUTOFF,d4
-                move.w  #$FFFF,d5
-                bsr.w   WriteBattlesceneScript_AnimateAction
+                move.w  #-1,d5
+                bsr.w   battlesceneScript_AnimateAction
                 move.w  #$8000,d6
 @CheckTargetDies:
                 
@@ -90,8 +91,8 @@ WriteBattlesceneScript_InflictDamage:
                 jsr     GetCurrentHp
                 tst.w   d1
                 bne.s   @CheckExplode
-                move.b  #$FF,targetDies(a2)
-                bsr.w   AddExpAndGoldForKill
+                move.b  #-1,targetDies(a2)
+                bsr.w   battlesceneScript_AddExpAndGoldForKill
 @CheckExplode:
                 
                 move.b  (a5),d0
@@ -104,18 +105,19 @@ WriteBattlesceneScript_InflictDamage:
                 bne.s   @WriteScriptCommands
                 tst.w   d7
                 bne.s   @WriteScriptCommands
-                move.b  #$FF,explode(a2)
+                move.b  #-1,explode(a2)
                 move.b  d0,explodingActor(a2)
                 moveq   #0,d2
 @WriteScriptCommands:
                 
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction  
+                bne.s   byte_ADD8       ; @Reaction_Enemy
                 executeAllyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineBattleMessage
-@EnemyReaction:
+byte_ADD8:
                 
+                @Reaction_Enemy:
                 executeEnemyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineBattleMessage:
                 
@@ -143,21 +145,23 @@ WriteBattlesceneScript_InflictDamage:
 @CutoffMessage:
                 
                 tst.b   cutoff(a2)
-                beq.s   @DisplayBattleMessage
+                beq.s   byte_AE1A       ; @Message
                 move.w  #MESSAGE_BATTLE_CUTOFF,d1 ; message when target is cut off
-@DisplayBattleMessage:
+byte_AE1A:
                 
+                @Message:
                 displayMessage d1,(a5),#0,d6 ; Message, Combatant, Item or Spell, Number
 @Return:
                 
                 rts
 
-    ; End of function WriteBattlesceneScript_InflictDamage
+    ; End of function battlesceneScript_InflictDamage
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
+; In: a2 = battlescene script stack frame
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -167,7 +171,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -182,11 +186,12 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_InflictAilment:
+battlesceneScript_InflictAilment:
                 
                 module
                 tst.b   inflictAilment(a2)
                 beq.w   @Return
+                
                 move.b  (a4),d0
                 jsr     GetCurrentProwess
                 andi.w  #PROWESS_MASK_CRITICAL,d1
@@ -194,47 +199,48 @@ WriteBattlesceneScript_InflictAilment:
                 subi.w  #PROWESS_INFLICT_AILMENTS_START,d2
                 move.b  (a5),d0
                 jsr     GetStatusEffects
-                lsl.w   #2,d2
+                lsl.w   #INDEX_SHIFT_COUNT,d2
                 movea.l pt_InflictAilmentFunctions(pc,d2.w),a1
                 jsr     (a1)
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_AE76       
+                bne.s   byte_AE76       ; @Reaction_Enemy
                 executeAllyReaction #0,#0,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @Return
 byte_AE76:
                 
+                @Reaction_Enemy:
                 executeEnemyReaction #0,#0,d1,#0 ; HP change (signed), MP change (signed), Status Effects, Flags
 @Return:
                 
                 rts
 
-    ; End of function WriteBattlesceneScript_InflictAilment
+    ; End of function battlesceneScript_InflictAilment
 
                 modend
 pt_InflictAilmentFunctions:
-                dc.l WriteBattlesceneScript_InflictPoison
-                dc.l WriteBattlesceneScript_InflictSleep
-                dc.l WriteBattlesceneScript_InflictStun
-                dc.l WriteBattlesceneScript_InflictMuddle
-                dc.l WriteBattlesceneScript_InflictSlow
-                dc.l WriteBattlesceneScript_DrainMp
-                dc.l WriteBattlesceneScript_InflictSilence
-WriteBattlesceneScript_InflictPoison:
+                dc.l inflictAilment_Poison
+                dc.l inflictAilment_Sleep
+                dc.l inflictAilment_Stun
+                dc.l inflictAilment_Muddle
+                dc.l inflictAilment_Slow
+                dc.l inflictAilment_AbsorbMp
+                dc.l inflictAilment_Silence
+inflictAilment_Poison:
                 displayMessageWithNoWait #MESSAGE_BATTLE_IS_POISONED,d0,#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
                 ori.w   #STATUSEFFECT_POISON,d1
                 rts
-WriteBattlesceneScript_InflictSleep:
+inflictAilment_Sleep:
                 displayMessageWithNoWait #MESSAGE_BATTLE_FELL_ASLEEP,d0,#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
                 ori.w   #STATUSEFFECT_SLEEP,d1
                 rts
-WriteBattlesceneScript_InflictStun:
+inflictAilment_Stun:
                 displayMessageWithNoWait #MESSAGE_BATTLE_IS_STUNNED,d0,#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
                 ori.w   #STATUSEFFECT_STUN,d1
                 rts
-WriteBattlesceneScript_InflictMuddle:
+inflictAilment_Muddle:
                 displayMessageWithNoWait #MESSAGE_BATTLE_BECOMES_CONFUSED,d0,#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
                 ori.w   #STATUSEFFECT_MUDDLE2,d1
@@ -244,39 +250,39 @@ WriteBattlesceneScript_InflictMuddle:
 ; =============== S U B R O U T I N E =======================================
 
 
-WriteBattlesceneScript_InflictSlow:
+inflictAilment_Slow:
                 
                 movem.l d0-d1,-(sp)
-                bsr.w   WriteBattlesceneScript_SlowMessage
+                bsr.w   battlesceneScript_DisplaySlowMessages
                 movem.l (sp)+,d0-d1
                 ori.w   #STATUSEFFECT_SLOW,d1
                 rts
 
-    ; End of function WriteBattlesceneScript_InflictSlow
+    ; End of function inflictAilment_Slow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-WriteBattlesceneScript_DrainMp:
+inflictAilment_AbsorbMp:
                 
                 movem.l d0-d1,-(sp)
                 jsr     GetCurrentMp
                 tst.w   d1
                 beq.s   @Skip           ; skip if target has no MP
-                bsr.w   SpellEffect_DrainMp
+                bsr.w   spellEffect_AbsorbMp
 @Skip:
                 
                 movem.l (sp)+,d0-d1
                 rts
 
-    ; End of function WriteBattlesceneScript_DrainMp
+    ; End of function inflictAilment_AbsorbMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-WriteBattlesceneScript_InflictSilence:
+inflictAilment_Silence:
                 
                 move.w  d1,d3
                 moveq   #0,d1
@@ -291,13 +297,13 @@ WriteBattlesceneScript_InflictSilence:
                 move.w  d3,d1
                 rts
 
-    ; End of function WriteBattlesceneScript_InflictSilence
+    ; End of function inflictAilment_Silence
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
-;     D6 = damage
+; In: a2 = battlescene script stack frame
+;     d6.w = final damage
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -307,7 +313,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -322,8 +328,9 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_InflictCurseDamage:
+battlesceneScript_InflictCurseDamage:
                 
+                module
                 move.b  (a4),d0
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.w   @Return
@@ -335,9 +342,9 @@ WriteBattlesceneScript_InflictCurseDamage:
                 tst.w   d0
                 beq.w   @Return
                 exg     a4,a5
-                bsr.w   WriteBattlesceneScript_SwitchTargets
+                bsr.w   battlesceneScript_SwitchTargets
                 exg     a4,a5
-                bsr.w   WriteBattlesceneScript_IdleSprite
+                bsr.w   battlesceneScript_MakeActorIdle
                 move.b  (a4),d0
                 move.w  d6,d3
                 lsr.w   #3,d3
@@ -347,7 +354,7 @@ WriteBattlesceneScript_InflictCurseDamage:
                 jsr     GetCurrentHp
                 tst.w   d1
                 bne.s   @Continue
-                move.b  #$FF,targetDies(a2) ; killed by curse damage
+                move.b  #-1,targetDies(a2) ; killed by curse damage
 @Continue:
                 
                 move.w  d3,d2
@@ -355,14 +362,16 @@ WriteBattlesceneScript_InflictCurseDamage:
                 move.b  (a4),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @Enemy          
+                bne.s   byte_AFE4       ; @Reaction_Enemy
                 executeAllyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
-                bra.s   @Message
-@Enemy:
+                bra.s   byte_AFF4       ; @Message
+byte_AFE4:
                 
+                @Reaction_Enemy:
                 executeEnemyReaction d2,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
-@Message:
+byte_AFF4:
                 
+                @Message:
                 bscHideTextBox
                 displayMessage #MESSAGE_BATTLE_IS_CURSED_AND_DAMAGED,d0,#0,d3 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -370,14 +379,15 @@ WriteBattlesceneScript_InflictCurseDamage:
                 
                 rts
 
-    ; End of function WriteBattlesceneScript_InflictCurseDamage
+    ; End of function battlesceneScript_InflictCurseDamage
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
-;     A4 = pointer to actor index in RAM
-;     A5 = pointer to target index in RAM
+; In: a2 = battlescene script stack frame
+;     a4 = actor index pointer
+;     a5 = target index pointer
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -387,7 +397,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -402,11 +412,11 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-WriteBattlesceneScript_DetermineDoubleAndCounter:
+battlesceneScript_DetermineDoubleAndCounter:
                 
                 move.b  (a4),d0         ; evaluate chance to double attack
                 jsr     GetCurrentProwess
-                lsr.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d1
+                lsr.b   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d1
                 moveq   #32,d0          ; 1/32 chance to double attack if setting value is 0
                 andi.w  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d1
                 beq.w   @DetermineDouble
@@ -422,12 +432,12 @@ WriteBattlesceneScript_DetermineDoubleAndCounter:
                 jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   @EvaluateChanceToCounter
-                move.b  #$FF,doubleAttack(a2)
+                move.b  #-1,doubleAttack(a2)
 @EvaluateChanceToCounter:
                 
                 move.b  (a5),d0         ; evaluate chance to counter using same mechanism as above
                 jsr     GetCurrentProwess
-                lsr.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d1
+                lsr.b   #PROWESS_LOWER_COUNTER_SHIFT_COUNT,d1
                 moveq   #32,d0
                 andi.w  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d1
                 beq.w   @DetermineCounter
@@ -443,18 +453,18 @@ WriteBattlesceneScript_DetermineDoubleAndCounter:
                 jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   @Return
-                move.b  #$FF,counterAttack(a2)
+                move.b  #-1,counterAttack(a2)
 @Return:
                 
                 rts
 
-    ; End of function WriteBattlesceneScript_DetermineDoubleAndCounter
+    ; End of function battlesceneScript_DetermineDoubleAndCounter
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-WriteBattlesceneScript_DeathMessage:
+battlesceneScript_DisplayDeathMessage:
                 
                 move.b  (a5),d0
                 btst    #COMBATANT_BIT_ENEMY,d0
@@ -469,5 +479,5 @@ WriteBattlesceneScript_DeathMessage:
                 displayMessage d1,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
-    ; End of function WriteBattlesceneScript_DeathMessage
+    ; End of function battlesceneScript_DisplayDeathMessage
 

@@ -27,7 +27,7 @@ return_4FF40:
                 nextSingleText $0,ALLY_BOWIE ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
                 csc_end
 cs_4FF5A:       textCursor 1556
-                newEntity ALLY_LUKE,43,47,DOWN,MAPSPRITE_TAROS
+                newEntity ALLY_LUKE,43,47,DOWN,NOTHING_BYTE
                 csWait 1
                 setPos ALLY_BOWIE,45,47,LEFT
                 setPos ALLY_PETER,44,47,DOWN

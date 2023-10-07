@@ -25,11 +25,11 @@ j_InitializeMapEntities:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MoveEntitiesToBattlePositions:
+j_PositionBattleEntities:
                 
-                jmp     MoveEntitiesToBattlePositions(pc)
+                jmp     PositionBattleEntities(pc)
 
-    ; End of function j_MoveEntitiesToBattlePositions
+    ; End of function j_PositionBattleEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -95,21 +95,21 @@ j_SetEntityMovescriptToIdle:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetUnitCursorSpeedx2:
+j_SetCursorEntitySpeedx2:
                 
-                jmp     SetUnitCursorSpeedx2(pc)
+                jmp     SetCursorEntitySpeedx2(pc)
 
-    ; End of function j_SetUnitCursorSpeedx2
+    ; End of function j_SetCursorEntitySpeedx2
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetUnitCursorActscript:
+j_SetCursorEntityActscript:
                 
-                jmp     SetUnitCursorActscript(pc)
+                jmp     SetCursorEntityActscript(pc)
 
-    ; End of function j_SetUnitCursorActscript
+    ; End of function j_SetCursorEntityActscript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -165,21 +165,21 @@ j_ExecuteMapScript:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ExecuteBattleCutscene_Intro:
+j_ExecuteBeforeBattleCutscene:
                 
-                jmp     ExecuteBattleCutscene_Intro(pc)
+                jmp     ExecuteBeforeBattleCutscene(pc)
 
-    ; End of function j_ExecuteBattleCutscene_Intro
+    ; End of function j_ExecuteBeforeBattleCutscene
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ExecuteBattleCutscene_Start:
+j_ExecuteBattleStartCutscene:
                 
-                jmp     ExecuteBattleCutscene_Start(pc)
+                jmp     ExecuteBattleStartCutscene(pc)
 
-    ; End of function j_ExecuteBattleCutscene_Start
+    ; End of function j_ExecuteBattleStartCutscene
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -307,7 +307,7 @@ j_ApplySpriteGhostEffect:
 
 sub_44078:
                 
-                jmp     sub_474EE(pc)
+                jmp     sub_474EE(pc)   
 
     ; End of function sub_44078
 
@@ -437,21 +437,21 @@ j_RunMapSetupInitFunction:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_440AC:
+j_DeclareRaftEntity:
                 
-                jmp     sub_441AA(pc)
+                jmp     DeclareRaftEntity(pc)
 
-    ; End of function sub_440AC
+    ; End of function j_DeclareRaftEntity
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetAllyMapSprite:
+j_GetAllyMapsprite:
                 
-                jmp     GetAllyMapSprite(pc)
+                jmp     GetAllyMapsprite(pc)
 
-    ; End of function j_GetAllyMapSprite
+    ; End of function j_GetAllyMapsprite
 
 
 ; =============== S U B R O U T I N E =======================================

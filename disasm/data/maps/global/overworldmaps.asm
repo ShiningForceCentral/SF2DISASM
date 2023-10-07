@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\global\overworldmaps.asm :
 ; 0x4428A..0x44298 : Overworld maps
-tbl_OverworldMaps:
+table_OverworldMaps:
                 dc.b MAP_OVERWORLD_GRANS_GRANSEAL
                 dc.b MAP_OVERWORLD_DEVILS_TAIL
                 dc.b MAP_OVERWORLD_AROUND_ELVEN_VILLAGE

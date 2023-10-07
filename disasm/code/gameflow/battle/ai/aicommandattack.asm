@@ -20,7 +20,7 @@ ExecuteAiCommand_Attack:
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @EndTurn_Stay
 @TakeAction:
                 
@@ -32,9 +32,9 @@ ExecuteAiCommand_Attack:
                 beq.s   @NotMuddleAction
                 movem.l (sp)+,d0-d3
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
-                move.w  #BATTLEACTION_MUDDLE,(a0)
+                move.w  #BATTLEACTION_MUDDLED,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 bra.w   @EndTurn
 @NotMuddleAction:
                 
@@ -136,7 +136,7 @@ ExecuteAiCommand_Attack:
                 move.l  d0,-(sp)
                 move.w  d7,d0
                 jsr     GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 bne.s   @GetWeaponAttackRange
                 clr.l   d3
                 clr.l   d4
@@ -187,7 +187,7 @@ ExecuteAiCommand_Attack:
                 bra.w   @EndTurn
 @EndTurn_Stay:
                 
-                moveq   #$FFFFFFFF,d1
+                moveq   #-1,d1
                 movem.l (sp)+,d0/d2-a6
                 rts
 @EndTurn:

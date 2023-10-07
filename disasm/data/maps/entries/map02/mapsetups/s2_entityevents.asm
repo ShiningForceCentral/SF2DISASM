@@ -118,8 +118,8 @@ Map2_EntityEvent6:
 
 Map2_EntityEvent7:
                 
-                move.b  #$A,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_PACALON,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map2_EntityEvent7
@@ -130,8 +130,8 @@ Map2_EntityEvent7:
 
 Map2_EntityEvent8:
                 
-                move.b  #$19,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_PACALON,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map2_EntityEvent8
@@ -142,7 +142,7 @@ Map2_EntityEvent8:
 
 Map2_EntityEvent9:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map2_EntityEvent9

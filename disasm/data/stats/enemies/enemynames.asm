@@ -1,7 +1,8 @@
 
 ; ASM FILE data\stats\enemies\enemynames.asm :
 ; 0xFB8A..0xFF87 : Enemy names
-tbl_EnemyNames: enemyName "OOZE"
+table_EnemyNames:
+                enemyName "OOZE"
                 enemyName "HUGE RAT"
                 enemyName "GALAM SOLDIER"
                 enemyName "GALAM KNIGHT"

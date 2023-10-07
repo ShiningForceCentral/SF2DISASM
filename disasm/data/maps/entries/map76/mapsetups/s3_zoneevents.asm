@@ -13,7 +13,7 @@ Map76_DefaultZoneEvent:
                 chkFlg  535             ; Battle 35 completed - BATTLE_TO_ROFT                     
                 bne.s   return_50A3A
                 setFlg  435             ; Battle 35 unlocked - BATTLE_TO_ROFT                   
-                move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
+                move.l  #MAP_EVENT_RELOADMAP,((MAP_EVENT_TYPE-$1000000)).w
 return_50A3A:
                 
                 rts

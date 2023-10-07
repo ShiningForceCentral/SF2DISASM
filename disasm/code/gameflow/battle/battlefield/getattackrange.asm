@@ -11,7 +11,7 @@ GetAttackRange:
                 
                 movem.l d0-d2/d5-a6,-(sp)
                 jsr     GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 bne.s   @GetWeaponRange
                 
                 ; Get unarmed attack range

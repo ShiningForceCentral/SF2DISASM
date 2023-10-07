@@ -4,10 +4,11 @@
 		include "data\battles\spritesetentries.asm"
 		align $210000
 		include "code\specialscreens\title\graphics.asm"		; Title Screen Graphics
+        include "data\graphics\specialscreens\titlescreen\titlescreenlayouts.asm"    ; Title Screen Layouts
 		include "code\specialscreens\suspend\graphics.asm"		; Suspend String Graphics
 		include "code\specialscreens\endkiss\graphics.asm"		; End Kiss Graphics
-		include "code\specialscreens\credits\gamestaff.asm"		; Game Staff		
-        wordAlign
+		include "data\scripting\gamestaff.asm"		; Game Staff		
+        align
 		include "code\specialscreens\jewelend\graphics.asm"		; Jewel End Graphics
 		align $220000
 		include "data\graphics\mapsprites\entries.asm"		; Map sprites

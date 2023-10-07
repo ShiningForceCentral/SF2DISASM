@@ -30,9 +30,9 @@ Map20_21F_ZoneEvent0:
                 jsr     j_YesNoPrompt
                 tst.w   d0
                 bne.s   byte_632E0
-                script  cs_EndKiss
-                jsr     PlayEndCredits
-                moveq   #$FFFFFFFF,d0
+                script  cs_EndingKiss
+                jsr     PlayEndingCredits
+                moveq   #-1,d0
                 jsr     PlayIntroOrEndCutscene
                 jmp     (WitchEnd).w
 byte_632E0:

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\items\usableoutsidebattleitems.asm :
 ; 0x229E2..0x229EC : Usable outside battle items
-tbl_UsableOnFieldItems:
+table_UsableOnFieldItems:
                 
 ; Syntax        item [ITEM_]enum (or index)
                 

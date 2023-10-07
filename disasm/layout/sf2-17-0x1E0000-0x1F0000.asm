@@ -16,7 +16,5 @@ SoundDriver:    incbin "data/sound/sounddriver.bin"
                 include "data\stats\allies\classes\classdefs.asm"    ; Class definitions
                 includeIfVanillaRom "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 includeIfVanillaRom "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
-unused_BasePalettes:
-                incbin "data/graphics/tech/unusedbasepalettes.bin" ; two almost identical palettes which look like UI/sprites palette
-BaseTiles:      incbin "data/graphics/tech/basetiles.bin"
+                include "code\common\tech\incbins\s17_incbins_basetiles.asm"    ; Game Section 17 Incbin Directives
                 align $1F0000

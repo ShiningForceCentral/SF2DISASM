@@ -9,7 +9,7 @@
 ; only seems to happen in first "above Pacalon" battle
 
 
-ExecuteBattleCutscene_Start:
+ExecuteBattleStartCutscene:
                 
                 movem.l d1,-(sp)
                 clr.w   d1

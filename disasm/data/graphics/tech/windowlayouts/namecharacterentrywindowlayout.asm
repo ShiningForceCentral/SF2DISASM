@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\namecharacterentrywindowlayout.asm :
 ; 0x16204..0x1623A : Name character entry window layout
-NameEntryWindowLayout:
+layout_NameEntryWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;

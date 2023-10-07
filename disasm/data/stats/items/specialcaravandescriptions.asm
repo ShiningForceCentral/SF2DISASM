@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\items\specialcaravandescriptions.asm :
 ; 0x228A2..0x228A8 : Special Caravan descriptions
-tbl_SpecialCaravanDescriptions:
+table_SpecialCaravanDescriptions:
                 
 ; Syntax        specialCaravanDescription [ITEM_]enum, parameter, [MESSAGE_CARAVANDESC_]enum
 ;
@@ -13,4 +13,4 @@ tbl_SpecialCaravanDescriptions:
                                                         ; "Chirrup sandals.{W2}"
                                         ; "They make you happy when{N}you wear them.{W1}"
                 
-                tableEnd
+                tableEnd.w

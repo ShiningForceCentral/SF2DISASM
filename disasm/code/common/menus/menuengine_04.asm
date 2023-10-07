@@ -5,35 +5,35 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-CreatePortraitWindow:
+OpenPortraitWindow:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 bne.w   return_11BE0
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a1,-(sp)
                 move.w  d0,-(sp)
-                move.b  d2,((PORTRAIT_IS_FLIPPED-$1000000)).w
-                move.b  d1,((PORTRAIT_IS_ON_RIGHT-$1000000)).w
-                move.w  #$A7C0,((word_FFB07E-$1000000)).w
-                move.w  #$14,((BLINK_COUNTER-$1000000)).w
+                move.b  d2,((PORTRAIT_IS_MIRRORED_TOGGLE-$1000000)).w
+                move.b  d1,((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
+                move.w  #VDPTILE_PORTRAITTILE1|VDPTILE_PALETTE2|VDPTILE_PRIORITY,((PORTRAIT_VDPTILES-$1000000)).w
+                move.w  #20,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
-                move.w  #$80A,d0
-                move.w  #$2F6,d1
-                tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
+                move.w  #$80A,d0        ; portrait dimensions
+                move.w  #$2F6,d1        ; portrait offset
+                tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
                 beq.s   loc_11B84
-                addi.w  #$1500,d1
+                addi.w  #$1500,d1       ; adjustment to other side
 loc_11B84:
                 
                 jsr     (CreateWindow).w
                 addq.w  #1,d0
                 move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
-                tst.b   ((PORTRAIT_IS_FLIPPED-$1000000)).w
+                tst.b   ((PORTRAIT_IS_MIRRORED_TOGGLE-$1000000)).w
                 bne.s   loc_11B9A
-                lea     WindowBorderTiles(pc), a0
+                lea     tiles_WindowBorder(pc), a0
                 bra.s   loc_11B9E
 loc_11B9A:
                 
-                lea     PortraitWindowLayout(pc), a0
+                lea     layout_PortraitWindow(pc), a0
 loc_11B9E:
                 
                 move.w  #160,d7
@@ -44,9 +44,9 @@ loc_11B9E:
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$201,d1
-                tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
+                tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
                 beq.s   loc_11BC4
-                addi.w  #$1500,d1
+                addi.w  #$1500,d1       ; adjustment to other side
 loc_11BC4:
                 
                 moveq   #4,d2
@@ -54,14 +54,14 @@ loc_11BC4:
                 jsr     (WaitForWindowMovementEnd).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                dc.l VInt_HandlePortraitBlinking
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                dc.l VInt_PerformPortraitBlinking
+                move.b  #-1,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 movem.l (sp)+,d0-a1
 return_11BE0:
                 
                 rts
 
-    ; End of function CreatePortraitWindow
+    ; End of function OpenPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -69,20 +69,20 @@ return_11BE0:
 ; Move window offscreen, then clear it from memory.
 
 
-RemovePortraitWindow:
+ClosePortraitWindow:
                 
                 tst.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 beq.s   return_11BE0
                 movem.l d0-a1,-(sp)
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
-                dc.l VInt_HandlePortraitBlinking
+                dc.l VInt_PerformPortraitBlinking
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$2F6,d1
-                tst.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
+                tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
                 beq.s   @Continue
-                addi.w  #$1500,d1
+                addi.w  #$1500,d1       ; adjustment to other side
 @Continue:
                 
                 moveq   #4,d2
@@ -90,20 +90,20 @@ RemovePortraitWindow:
                 jsr     (WaitForWindowMovementEnd).w
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 movem.l (sp)+,d0-a1
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function RemovePortraitWindow
+    ; End of function ClosePortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; Create and display member screen
+; Create and display member screen.
 ; 
-;       In: D0 = member index
+;   In: d0.w = member index
 
 portraitIndex = -12
 goldWindowSlot = -10
@@ -114,12 +114,13 @@ member = -2
 
 BuildMemberScreen:
                 
+                module
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a2,-(sp)
                 link    a6,#-16
                 move.w  d0,member(a6)
-                clr.b   ((PORTRAIT_IS_FLIPPED-$1000000)).w
-                clr.b   ((PORTRAIT_IS_ON_RIGHT-$1000000)).w
+                clr.b   ((PORTRAIT_IS_MIRRORED_TOGGLE-$1000000)).w
+                clr.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
                 move.w  #WINDOW_MEMBERSTATUS_SIZE,d0
                 move.w  #WINDOW_MEMBERSTATUS_DEST,d1
                 jsr     (CreateWindow).w ; stats window, on the right
@@ -141,7 +142,7 @@ BuildMemberScreen:
                 move.w  member(a6),d0
                 bsr.w   GetCombatantPortrait
                 move.w  d0,portraitIndex(a6)
-                bsr.w   LoadTileDataForMemberScreen
+                bsr.w   LoadMemberScreenWindowLayouts
                 move.w  portraitIndex(a6),d0
                 blt.s   loc_11CA6
                 bsr.w   GetAllyPortrait 
@@ -171,13 +172,13 @@ loc_11CD2:
 loc_11CE6:
                 
                 jsr     (WaitForWindowMovementEnd).w
-                move.w  #$A7C0,((word_FFB07E-$1000000)).w
-                move.w  #$14,((BLINK_COUNTER-$1000000)).w
+                move.w  #VDPTILE_PORTRAITTILE1|VDPTILE_PALETTE2|VDPTILE_PRIORITY,((PORTRAIT_VDPTILES-$1000000)).w
+                move.w  #20,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
-                dc.l VInt_HandlePortraitBlinking
-                move.b  #$FF,((byte_FFB082-$1000000)).w
+                dc.l VInt_PerformPortraitBlinking
+                move.b  #-1,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   loc_11D1A
@@ -198,7 +199,7 @@ loc_11D32:
                 
                 move.l  a1,-(sp)
                 move.w  d0,d1
-                addi.w  #$10,d1
+                addi.w  #16,d1
                 lea     ((byte_FFAFA0-$1000000)).w,a1
                 adda.w  d1,a1
                 move.b  (a1),d1
@@ -206,14 +207,14 @@ loc_11D32:
                 move.b  #1,(a1)
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
-                move.w  #$240,d0
-                move.w  #$740,d1
+                move.w  #576,d0
+                move.w  #1856,d1
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
-                bne.s   loc_11D64
+                bne.s   @MapOnForeground
                 add.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 add.w   ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
                 bra.s   loc_11D6C
-loc_11D64:
+@MapOnForeground:
                 
                 add.w   ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 add.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
@@ -234,10 +235,10 @@ loc_11D6C:
                 bne.s   loc_11DBC
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 move.w  member(a6),d0
-                jsr     j_GetAllyMapSprite
+                jsr     j_GetAllyMapsprite
                 clr.w   d0
                 moveq   #DOWN,d1
-                moveq   #$FFFFFFFF,d2
+                moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
                 bra.s   loc_11DDC
@@ -250,8 +251,8 @@ loc_11DBC:
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 clr.w   d0
                 moveq   #DOWN,d1
-                moveq   #$FFFFFFFF,d2
-                move.w  #$AB,d3 
+                moveq   #-1,d2
+                move.w  #MAPSPRITE_FLAME1,d3
                 jsr     (UpdateEntityProperties).w
 loc_11DDC:
                 
@@ -270,10 +271,10 @@ loc_11DDC:
                 move.w  (sp)+,d0
                 move.b  d0,(a1)
                 movea.l (sp)+,a1
-                clr.b   ((byte_FFB082-$1000000)).w
+                clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
-                dc.l VInt_HandlePortraitBlinking
+                dc.l VInt_PerformPortraitBlinking
                 move.w  statusWindowSlot(a6),d0
                 move.w  #$2001,d1
                 moveq   #4,d2
@@ -303,23 +304,23 @@ loc_11E54:
                 clr.w   d0
                 tst.b   ((PLAYER_TYPE-$1000000)).w
                 bne.s   loc_11E74
-                jsr     j_GetAllyMapSprite
+                jsr     j_GetAllyMapsprite
                 bra.s   loc_11E82
 loc_11E74:
                 
                 cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
                 bne.s   loc_11E80
-                moveq   #$3E,d4 
+                moveq   #MAPSPRITE_CARAVAN,d4
                 bra.s   loc_11E82
 loc_11E80:
                 
-                moveq   #$3D,d4 
+                moveq   #MAPSPRITE_RAFT,d4
 loc_11E82:
                 
                 clr.w   d0
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d1
-                moveq   #$FFFFFFFF,d2
+                moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
                 bra.s   loc_11EBA
@@ -330,24 +331,24 @@ loc_11E94:
                 tst.w   d1
                 bne.s   loc_11EBA
                 clr.w   d0
-                jsr     j_GetAllyMapSprite
+                jsr     j_GetAllyMapsprite
                 clr.w   d0
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d1
-                moveq   #$FFFFFFFF,d2
+                moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
 loc_11EBA:
                 
                 jsr     (WaitForWindowMovementEnd).w
                 move.w  goldWindowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 move.w  kdWindowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 move.w  portraitWindowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 move.w  statusWindowSlot(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                jsr     (DeleteWindow).w
                 unlk    a6
                 movem.l (sp)+,d0-a2
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
@@ -355,27 +356,28 @@ loc_11EBA:
 
     ; End of function BuildMemberScreen
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A1 = address of VDP tile order in RAM
+; In: a1 = current cursor position in the layout
 
-windowTilesAddress = -6
+windowLayoutStartAddress = -6
 member = -2
 
-AddStatusEffectTileIndexesToVdpTileOrder:
+WriteStatusEffectTiles:
                 
                 move.l  d0,(a1)
                 subq.l  #4,a1
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 beq.s   @Return
-                movea.l windowTilesAddress(a6),a1
+                movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #$78,a1 
 @Return:
                 
                 rts
 
-    ; End of function AddStatusEffectTileIndexesToVdpTileOrder
+    ; End of function WriteStatusEffectTiles
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -387,7 +389,7 @@ portraitWindowSlot = -6
 statusWindowSlot = -4
 member = -2
 
-LoadTileDataForMemberScreen:
+LoadMemberScreenWindowLayouts:
                 
                 move.w  statusWindowSlot(a6),d0
                 clr.w   d1
@@ -395,10 +397,10 @@ LoadTileDataForMemberScreen:
                 move.w  member(a6),d0
                 bsr.w   BuildMemberStatusWindow
                 move.w  kdWindowSlot(a6),d0
-                lea     AllyKillDefeatWindowLayout(pc), a0
+                lea     layout_AllyKillDefeatWindow(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
-                move.w  #WINDOW_MEMBER_KD_VDPTILEORDER_BYTESIZE,d7
+                move.w  #WINDOW_MEMBER_KD_LAYOUT_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
                 move.w  member(a6),d0
@@ -420,36 +422,38 @@ LoadTileDataForMemberScreen:
                 bsr.w   WriteTilesFromNumber
 @CheckDebugMode:
                 
-                tst.b   ((DEBUG_MODE_ACTIVATED-$1000000)).w
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   @CheckPortrait
                 
                 ; Write combatant index inside kills/defeat window in debug mode
                 move.w  kdWindowSlot(a6),d0
-                lea     AllyKillDefeatWindowLayout(pc), a0
+                lea     layout_AllyKillDefeatWindow(pc), a0
                 move.w  #$101,d1
                 jsr     (GetWindowTileAddress).w
                 move.w  member(a6),d0   ; get character index from stack
-                lsr.w   #4,d0
-                andi.w  #$F,d0
+                lsr.w   #NIBBLE_SHIFT_COUNT,d0
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d0
                 cmpi.w  #10,d0
-                blt.s   @Continue1
-                addi.w  #-$3FC9,d0
-                bra.s   @WriteIndexFirstDigit
-@Continue1:
+                blt.s   @loc_2
                 
-                addi.w  #-$3FD0,d0
+                addi.w  #$C037,d0
+                bra.s   @WriteIndexFirstDigit
+@loc_2:
+                
+                addi.w  #$C030,d0
 @WriteIndexFirstDigit:
                 
                 move.w  d0,(a1)+
                 move.w  member(a6),d0
-                andi.w  #$F,d0
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d0
                 cmpi.w  #10,d0
-                blt.s   @Continue2
-                addi.w  #-$3FC9,d0
-                bra.s   @WriteIndexSecondDigit
-@Continue2:
+                blt.s   @loc_4
                 
-                addi.w  #-$3FD0,d0
+                addi.w  #$C037,d0
+                bra.s   @WriteIndexSecondDigit
+@loc_4:
+                
+                addi.w  #$C030,d0
 @WriteIndexSecondDigit:
                 
                 move.w  d0,(a1)+
@@ -459,12 +463,12 @@ LoadTileDataForMemberScreen:
                 blt.s   @Return         ; return if no portrait to display (and assume that it's an enemy, so skip drawing gold window as well)
                 
                 move.w  portraitWindowSlot(a6),d0
-                lea     WindowBorderTiles(pc), a0
+                lea     tiles_WindowBorder(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #160,d7
                 jsr     (CopyBytes).w   
-                lea     GoldWindowLayout(pc), a0
+                lea     layout_GoldWindow(pc), a0
                 move.w  goldWindowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
@@ -479,6 +483,6 @@ LoadTileDataForMemberScreen:
                 
                 rts
 
-    ; End of function LoadTileDataForMemberScreen
+    ; End of function LoadMemberScreenWindowLayouts
 
 aNA:            dc.b 'N/A',0

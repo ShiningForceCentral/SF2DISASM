@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\global\backgroundenemyswitch.asm :
 ; 0x1FAB8..0x1FAD6 : Background enemy switch table
-tbl_BackgroundEnemySwitch:
+table_BackgroundEnemySwitch:
                 
 ; Table of boolean values for background entries, used when switching enemy
                 

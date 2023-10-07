@@ -25,21 +25,21 @@ j_DebugFlagSetter:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DisplayTimerWindow:
+j_OpenTimerWindow:
                 
-                jmp     DisplayTimerWindow(pc)
+                jmp     OpenTimerWindow(pc)
 
-    ; End of function j_DisplayTimerWindow
+    ; End of function j_OpenTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveTimerWindow:
+j_CloseTimerWindow:
                 
-                jmp     RemoveTimerWindow(pc)
+                jmp     CloseTimerWindow(pc)
 
-    ; End of function j_RemoveTimerWindow
+    ; End of function j_CloseTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -55,41 +55,41 @@ j_VInt_UpdateTimerWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_WitchMainMenu:
+j_ExecuteWitchMainMenu:
                 
-                jmp     WitchMainMenu(pc)
+                jmp     ExecuteWitchMainMenu(pc)
 
-    ; End of function j_WitchMainMenu
+    ; End of function j_ExecuteWitchMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateTacticalBaseAllyNameWindow:
+j_DisplayNameUnderPortrait:
                 
-                jmp     CreateTacticalBaseAllyNameWindow(pc)
+                jmp     DisplayNameUnderPortrait(pc)
 
-    ; End of function j_CreateTacticalBaseAllyNameWindow
+    ; End of function j_DisplayNameUnderPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveTacticalBaseAllyNameWindow:
+j_CloseNameUnderPortraitWindow:
                 
-                jmp     RemoveTacticalBaseAllyNameWindow(pc)
+                jmp     CloseNameUnderPortraitWindow(pc)
 
-    ; End of function j_RemoveTacticalBaseAllyNameWindow
+    ; End of function j_CloseNameUnderPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_PlayEndKiss:
+j_PlayEndingKissSequence:
                 
-                jmp     PlayEndKiss(pc)
+                jmp     PlayEndingKissSequence(pc)
 
-    ; End of function j_PlayEndKiss
+    ; End of function j_PlayEndingKissSequence
 
 
 ; =============== S U B R O U T I N E =======================================

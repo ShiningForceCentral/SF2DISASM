@@ -4,14 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = from map index
-; Out: D0 = to map index
-;      D1 = X
-;      D2 = Y
-;      D3 = facing
+; In: d0.b = From map index
+; Out: d0.b = To map index, d1.b = X, d2.b = Y, d3.b = Facing
 
 
-GetSavePointForMap:
+GetSavepointForMap:
                 
                  
                 module
@@ -19,10 +16,11 @@ GetSavePointForMap:
                 bne.s   @Continue
                 
                 ; Go back to Bowie's room if the gizmos cutscene has not been triggered
-                moveq   #MAP_GRANSEAL,d0 ; HARDCODED initial egress position : map, x, y, facing
-                moveq   #56,d1
-                moveq   #3,d2
-                moveq   #DOWN,d3
+                ; HARDCODED initial egress position : map, x, y, facing
+                moveq   #GAMESTART_MAP,d0 ; 3: Granseal
+                moveq   #GAMESTART_SAVEPOINT_X,d1 ; 56
+                moveq   #GAMESTART_SAVEPOINT_Y,d2 ; 3
+                moveq   #GAMESTART_FACING,d3 ; 3: Down
                 rts
 @Continue:
                 
@@ -30,11 +28,12 @@ GetSavePointForMap:
                 moveq   #1,d1
                 moveq   #1,d2
                 moveq   #UP,d3
-                conditionalPc lea,SavepointMapCoordinates,a0
+                conditionalPc lea,table_SavepointMapCoordinates,a0
 @FindEgressEntry_Loop:
                 
-                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
+                cmpi.b  #-1,(a0)
                 beq.w   byte_7620       ; No match
+                
                 cmp.b   (a0),d0
                 beq.s   @EgressEntryFound
                 addq.l  #4,a0
@@ -50,15 +49,15 @@ byte_7620:
                 ; No match
                 chkFlg  64              ; Raft is unlocked
                 beq.s   @Done
-                conditionalPc lea,RaftResetMapCoordinates-4,a0 ; Some egress locations imply to put the raft back in an initial place
+                conditionalPc lea,table_RaftResetMapCoordinates-4,a0 ; Some egress locations imply to put the raft back in an initial place
 @FindRaftEntry_Loop:
                 
                 addq.l  #4,a0
-                cmpi.b  #MAP_NONE,(a0)
-                beq.w   @RaftEntryNotFound
+                cmpi.b  #MAP_CURRENT,(a0)
+                beq.w   @RaftEntry
                 cmp.b   (a0),d0         ; If found egress map matches entry map, then move raft back to given location
                 bne.s   @FindRaftEntry_Loop
-@RaftEntryNotFound:
+@RaftEntry:
                 
                 move.b  1(a0),((RAFT_MAP-$1000000)).w
                 move.b  2(a0),((RAFT_X-$1000000)).w
@@ -68,6 +67,6 @@ byte_7620:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function GetSavePointForMap
+    ; End of function GetSavepointForMap
 
                 modend

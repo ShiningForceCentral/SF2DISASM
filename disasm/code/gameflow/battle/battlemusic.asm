@@ -7,11 +7,12 @@
 
 PlayMapMusic:
                 
+                module
                 move.w  d0,-(sp)
                 clr.w   d0
                 move.b  ((MAP_AREA_MUSIC_INDEX-$1000000)).w,d0
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
-                beq.s   byte_4586
+                beq.s   byte_4586       ; @PlayMusic
                 
                 cmpi.b  #MUSIC_NOTHING,d0
                 bne.s   loc_455E
@@ -34,13 +35,15 @@ loc_4572:
 loc_457C:
                 
                 cmpi.b  #MUSIC_CASTLE,d0
-                bne.s   byte_4586
+                bne.s   byte_4586       ; @PlayMusic
                 move.w  #MUSIC_BATTLE_THEME_1,d0
 byte_4586:
                 
+                @PlayMusic:
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
                 move.w  (sp)+,d0
                 rts
 
     ; End of function PlayMapMusic
 
+                modend

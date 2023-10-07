@@ -15,7 +15,7 @@ Map9_ItemEvent0:
                 bne.s   Map9_DefaultItemEvent1
                 script  cs_569BC
                 setFlg  727             ; Set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
-                moveq   #$FFFFFFFF,d6
+                moveq   #-1,d6
 Map9_DefaultItemEvent1:
                 
                 rts

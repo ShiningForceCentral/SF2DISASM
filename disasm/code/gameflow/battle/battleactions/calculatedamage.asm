@@ -4,12 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a4 = pointer to attacker index in RAM
-;     a5 = pointer to target index in RAM
+; In: a4 = attacker index pointer
+;     a5 = target index pointer
+; 
 ; Out: d6.w = damage
 
 
-WriteBattlesceneScript_CalculateDamage:
+battlesceneScript_CalculateDamage:
                 
                 move.b  (a4),d0
                 jsr     GetCurrentAtt
@@ -36,7 +37,7 @@ WriteBattlesceneScript_CalculateDamage:
 @ApplyLandEffectToDamage:
                 
                 mulu.w  d3,d6
-                lsr.w   #8,d6
+                lsr.w   #BYTE_SHIFT_COUNT,d6
                 
                 ; Check if defender is flying or hovering
                 move.b  (a5),d0
@@ -68,5 +69,5 @@ WriteBattlesceneScript_CalculateDamage:
                 
                 rts
 
-    ; End of function WriteBattlesceneScript_CalculateDamage
+    ; End of function battlesceneScript_CalculateDamage
 

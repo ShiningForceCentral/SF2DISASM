@@ -1,7 +1,8 @@
 
 ; ASM FILE data\stats\spells\spelldefs.asm :
 ; 0x176A6..0x1796E : Spell definitions
-tbl_SpellDefs:  
+table_SpellDefinitions:
+                
 ; Syntax        entry      [SPELL_]enum[|level]
 ;               mpCost     0-255
 ;               animation  [SPELLANIMATION_]enum[|variation]

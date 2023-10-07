@@ -22,7 +22,7 @@ byte_562FC:
                 setFlg  731             ; Set after you open the tree in Ribble with the wooden plank
                 moveq   #$70,d0 
                 jsr     RemoveItemFromInventory ; remove wooden panel from items ?
-                move.w  #$FFFF,d6
+                move.w  #-1,d6
 Map8_DefaultItemEvent2:
                 
                 rts

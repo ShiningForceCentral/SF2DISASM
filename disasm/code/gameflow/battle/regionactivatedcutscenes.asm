@@ -10,12 +10,13 @@
 ExecuteBattleRegionCutscene:
                 
                 movem.l d0-d1/a0,-(sp)
-                lea     loc_47EC0(pc), a0
+                lea     table_BattleRegionCutscenes-8(pc), a0
 loc_47E8A:
                 
                 addq.w  #8,a0
-                cmpi.w  #$FFFF,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   loc_47EC2
+                
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
                 cmp.b   (a0),d1
                 bne.s   loc_47E8A

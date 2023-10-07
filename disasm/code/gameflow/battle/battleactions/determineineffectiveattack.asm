@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A2 = battlescene script stack frame
+; In: a2 = battlescene script stack frame
 
 allCombatantsCurrentHpTable = -24
 debugDodge = -23
@@ -14,7 +14,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -29,7 +29,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-DetermineIneffectiveAttack:
+battlesceneScript_DetermineIneffectiveAttack:
                 
                 movem.l d0-d1,-(sp)
                 cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w
@@ -56,11 +56,11 @@ DetermineIneffectiveAttack:
                 bne.s   @Skip
                 chkFlg  112             ; Currently attacking Taros with Achilles Sword
                 bne.s   @Skip
-                move.b  #$FF,ineffectiveAttack(a2)
+                move.b  #-1,ineffectiveAttackToggle(a2)
 @Skip:
                 
                 movem.l (sp)+,d0-d1
                 rts
 
-    ; End of function DetermineIneffectiveAttack
+    ; End of function battlesceneScript_DetermineIneffectiveAttack
 

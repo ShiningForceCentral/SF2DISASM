@@ -36,7 +36,7 @@ ms_map22_EntityEvents:
 
 Map22_EntityEvent2:
                 
-                jsr     j_CaravanActions
+                jsr     j_CaravanMenu
                 rts
 
     ; End of function Map22_EntityEvent2
@@ -113,7 +113,7 @@ Map22_EntityEvent1:
 
 Map22_EntityEvent6:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map22_EntityEvent6

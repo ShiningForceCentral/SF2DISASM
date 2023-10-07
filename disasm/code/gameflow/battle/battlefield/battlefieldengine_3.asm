@@ -78,21 +78,21 @@ CheckMuddled2:
 ; =============== S U B R O U T I N E =======================================
 
 
-GenerateTargetRangeLists:
+CreateMovementRangeGrid:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #-1,d3          ; set occupied flags
                 bsr.w   UpdateBattleTerrainOccupiedByOpponents
                 move.l  d0,-(sp)
-                bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   InitializeMovementArrays
+                bsr.w   PopulateMovementArrays
                 move.l  (sp)+,d0
                 move.w  #0,d3           ; clear occupied flags
                 bsr.w   UpdateBattleTerrainOccupiedByOpponents
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function GenerateTargetRangeLists
+    ; End of function CreateMovementRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -220,7 +220,7 @@ loc_C4D8:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_C4E8:
+PopulateTargetableGrid_GiveItem:
                 
                 movem.l d0-a6,-(sp)
                 bsr.w   ClearTargetsArray
@@ -234,7 +234,7 @@ sub_C4E8:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_C4E8
+    ; End of function PopulateTargetableGrid_GiveItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -262,11 +262,11 @@ ApplyRelativeCoordinatesListToGrid:
                 
                 move.w  d4,d2
                 add.b   1(a0),d2
-                cmpi.w  #MAP_SIZE_MAXHEIGHT,d2
+                cmpi.w  #MAP_SIZE_MAX_TILEHEIGHT,d2
                 bcc.w   @NextCoordinates
                 move.w  d3,d1
                 add.b   (a0),d1
-                cmpi.w  #MAP_SIZE_MAXWIDTH,d1
+                cmpi.w  #MAP_SIZE_MAX_TILEWIDTH,d1
                 bcc.w   @NextCoordinates
                 tst.b   d5
                 beq.s   @Continue
@@ -277,8 +277,9 @@ ApplyRelativeCoordinatesListToGrid:
 @Continue:
                 
                 bsr.w   GetCombatantOccupyingSpace
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 beq.w   @NextCoordinates
+                
                 jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   @NextCoordinates
@@ -337,21 +338,22 @@ SpellRange3:    dc.b 12
 ;     d1.w = item index
 
 
-PopulateTargetableGridFromUsedItem:
+PopulateTargetableGrid_UseItem:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 jsr     GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 beq.s   @Done
-                bsr.w   PopulateTargetableGridFromSpell
+                
+                bsr.w   PopulateTargetableGrid_CastSpell
 @Done:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function PopulateTargetableGridFromUsedItem
+    ; End of function PopulateTargetableGrid_UseItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -365,8 +367,9 @@ sub_C5FA:
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 jsr     GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 beq.s   @Done
+                
                 bsr.w   PopulateTargetableGrid
 @Done:
                 
@@ -382,7 +385,7 @@ sub_C5FA:
 ;     d1.w = spell index
 
 
-PopulateTargetableGridFromSpell:
+PopulateTargetableGrid_CastSpell:
                 
                 cmpi.b  #SPELL_B_ROCK,d1
                 bne.s   @Continue
@@ -392,7 +395,7 @@ PopulateTargetableGridFromSpell:
                 
                 bsr.w   PopulateTargetsArrayWithOpponents
 
-    ; End of function PopulateTargetableGridFromSpell
+    ; End of function PopulateTargetableGrid_CastSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -540,12 +543,12 @@ GetClosestAttackPosition:
                 link    a6,#-6
                 move.b  d1,currentX(a6)
                 move.b  d2,currentY(a6)
-                move.b  #$FF,destinationX(a6)
-                move.b  #$FF,destinationY(a6)
-                move.b  #$FF,movecost(a6)
-                cmpi.b  #MAP_SIZE_MAXWIDTH,d1
+                move.b  #-1,destinationX(a6)
+                move.b  #-1,destinationY(a6)
+                move.b  #-1,movecost(a6)
+                cmpi.b  #MAP_SIZE_MAX_TILEWIDTH,d1
                 bcc.w   loc_C7E2
-                cmpi.b  #MAP_SIZE_MAXHEIGHT,d2
+                cmpi.b  #MAP_SIZE_MAX_TILEHEIGHT,d2
                 bcc.w   loc_C7E2
                 move.b  d3,d6
                 neg.b   d6              ; d6.b = negative max range
@@ -567,24 +570,24 @@ loc_C760:
                 bcs.w   loc_C7BE
                 move.b  currentX(a6),d1
                 add.b   d5,d1
-                cmpi.b  #MAP_SIZE_MAXWIDTH,d1
+                cmpi.b  #MAP_SIZE_MAX_TILEWIDTH,d1
                 bcc.w   loc_C7BE
                 move.b  currentY(a6),d2
                 add.b   d6,d2
-                cmpi.b  #MAP_SIZE_MAXHEIGHT,d2
+                cmpi.b  #MAP_SIZE_MAX_TILEHEIGHT,d2
                 bcc.w   loc_C7BE
                 bsr.w   GetMoveCostToDestination
                 tst.w   d0
                 beq.w   @Done           ; already in range, so end because it can't get cheaper
-                btst    #$F,d0
+                btst    #15,d0
                 bne.w   loc_C7BE
                 cmp.b   movecost(a6),d0
                 bcc.w   loc_C7BE
                 move.b  d0,d7
-                andi.w  #$FF,d1
-                andi.w  #$FF,d2
+                andi.w  #BYTE_MASK,d1
+                andi.w  #BYTE_MASK,d2
                 bsr.w   GetCombatantOccupyingSpace
-                cmpi.b  #$FF,d0
+                cmpi.b  #-1,d0
                 bne.w   loc_C7BE        ; already someone there, so it can't be chosen
                 move.b  d7,movecost(a6)
                 move.b  d1,destinationX(a6)
@@ -689,26 +692,27 @@ PopulateTargetsArray:
                 
                 jsr     GetCurrentHp
                 tst.w   d1
-                beq.w   loc_C86E
-                jsr     GetAiActivationFlag
+                beq.w   @Next
+                
+                jsr     GetActivationBitfield
                 btst    #3,d1
-                beq.s   loc_C844
-                bra.w   loc_C86E
-loc_C844:
+                beq.s   @Continue
+                bra.w   @Next
+@Continue:
                 
                 jsr     GetCombatantY
-                cmpi.w  #MAP_SIZE_MAXHEIGHT,d1
-                bcc.w   loc_C86E
+                cmpi.w  #MAP_SIZE_MAX_TILEHEIGHT,d1
+                bcc.w   @Next
                 move.w  d1,d2
                 jsr     GetCombatantX
-                cmpi.w  #MAP_SIZE_MAXWIDTH,d1
-                bcc.w   loc_C86E
+                cmpi.w  #MAP_SIZE_MAX_TILEWIDTH,d1
+                bcc.w   @Next
                 
                 ; d1.w,d2.w = X,Y
                 lea     (FF5600_LOADING_SPACE).l,a0
                 bsr.w   ConvertCoordinatesToAddress
                 move.b  d0,(a0)
-loc_C86E:
+@Next:
                 
                 addq.b  #1,d0
                 dbf     d7,PopulateTargetsArray
@@ -720,6 +724,9 @@ loc_C86E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = combatant
+;     d3.w = 0 to clear flag, set otherwise
 
 
 UpdateBattleTerrainOccupiedByOpponents:
@@ -768,10 +775,10 @@ UpdateBattleTerrainOccupiedFlag:
                 beq.w   @Next
                 jsr     GetCombatantY
                 move.w  d1,d2
-                cmpi.w  #MAP_SIZE_MAXHEIGHT,d2
+                cmpi.w  #MAP_SIZE_MAX_TILEHEIGHT,d2
                 bcc.w   @Next
                 jsr     GetCombatantX
-                cmpi.w  #MAP_SIZE_MAXWIDTH,d1
+                cmpi.w  #MAP_SIZE_MAX_TILEWIDTH,d1
                 bcc.w   @Next
                 lea     (BATTLE_TERRAIN_ARRAY).l,a0
                 bsr.w   ConvertCoordinatesToAddress
@@ -824,10 +831,10 @@ UpdateMovableGridArray:
                 beq.w   @Next
                 jsr     GetCombatantY
                 move.w  d1,d2
-                cmpi.w  #MAP_SIZE_MAXHEIGHT,d2
+                cmpi.w  #MAP_SIZE_MAX_TILEHEIGHT,d2
                 bcc.w   @Next
                 jsr     GetCombatantX
-                cmpi.w  #MAP_SIZE_MAXWIDTH,d1
+                cmpi.w  #MAP_SIZE_MAX_TILEWIDTH,d1
                 bcc.w   @Next
                 lea     (FF4D00_LOADING_SPACE).l,a0
                 bsr.w   ConvertCoordinatesToAddress
@@ -864,11 +871,11 @@ PrioritizeReachableTargets:
                 
                 movem.l d1-a2,-(sp)
                 move.l  d0,-(sp)
-                moveq   #$FFFFFFFF,d3   ; If d3<0 then clear bit 7 when calling UpdateTargetsList
+                moveq   #-1,d3          ; If d3<0 then clear bit 7 when calling UpdateTargetsList
                 bsr.w   UpdateBattleTerrainOccupiedByOpponents ; List all living opponents (enemies or allies, depending upon the character index)
                                         ;  and clear bit 7 of the map data.
-                bsr.w   GetMoveInfo     
-                bsr.w   PopulateTotalMovecostsAndMovableGridArrays
+                bsr.w   InitializeMovementArrays
+                bsr.w   PopulateMovementArrays
                 
                 ; Check Item Use
                 moveq   #0,d3
@@ -1103,10 +1110,10 @@ AdjustAttackTargetPriorityForDifficulty:
                 bsr.w   CalculatePotentialDamage
                 btst    #COMBATANT_BIT_ENEMY,d0
                 beq.s   @Ally
-                jsr     GetAiActivationFlag
+                jsr     GetActivationBitfield
                 move.w  d1,d2
                 rol.w   #4,d2
-                andi.w  #$F,d2
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d2
                 bra.s   @Continue
 @Ally:
                 
@@ -1118,7 +1125,7 @@ AdjustAttackTargetPriorityForDifficulty:
                 mulu.w  #4,d1
                 add.w   d1,d2
                 move.l  (sp)+,d1
-                lsl.w   #2,d2
+                lsl.w   #INDEX_SHIFT_COUNT,d2
                 movea.l pt_TargetPriorityScripts(pc,d2.w),a0
                 move.b  d3,d0
                 bsr.w   CalculatePotentialRemainingHp
@@ -1173,7 +1180,7 @@ AdjustSpellTargetPriorityForDifficulty:
                 move.b  d1,d3
                 btst    #COMBATANT_BIT_ENEMY,d0
                 beq.s   @Ally
-                jsr     GetAiActivationFlag
+                jsr     GetActivationBitfield
                 move.w  d1,d2
                 rol.w   #4,d2
                 andi.w  #3,d2
@@ -1188,7 +1195,7 @@ AdjustSpellTargetPriorityForDifficulty:
                 mulu.w  #4,d1
                 add.w   d1,d2
                 move.l  (sp)+,d1
-                lsl.w   #2,d2
+                lsl.w   #INDEX_SHIFT_COUNT,d2
                 movea.l pt_TargetPriorityScripts(pc,d2.w),a0
                 move.b  d3,d1
                 moveq   #0,d3
@@ -1247,7 +1254,7 @@ CalculatePotentialDamage:
 @ApplyLandEffect:
                 
                 mulu.w  d2,d6
-                lsr.w   #8,d6
+                lsr.w   #BYTE_SHIFT_COUNT,d6
                 movem.l (sp)+,d0-d5/d7-a6
                 rts
 

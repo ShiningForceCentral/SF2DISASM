@@ -77,7 +77,7 @@ bbcs_33:        textCursor 2866
                 setFacing ALLY_BOWIE,LEFT
                 nextSingleText $0,FOLLOWER_B ; "{LEADER}, {NAME;22} will be{N}a great asset.{W1}"
                 joinBatParty ALLY_FRAYJA
-                executeSubroutine sub_4D078
+                executeSubroutine csub_4D078
                 textCursor 2875
                 nextSingleText $0,FOLLOWER_B ; "{LEADER}, {NAME;22} is{N}right.  They must die!{W1}"
                 setF 831                ; Set after Frayja forces his way into the party just before the battle in Moun
@@ -94,17 +94,18 @@ ce_4D048:       mainEntity 26,37,LEFT
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_4D078:
+csub_4D078:
                 
-                cmpi.w  #$FFFF,(TEXT_NAME_INDEX_1).l
-                beq.s   return_4D098
-                jsr     (HideTextBox).l
-                move.w  #$B3A,d0
+                cmpi.w  #-1,(DIALOGUE_NAME_INDEX_1).l
+                beq.s   @Return
+                
+                jsr     (CloseDialogueWindow).l
+                move.w  #2874,d0
                 jsr     (DisplayText).l 
-                jsr     (HideTextBox).l
-return_4D098:
+                jsr     (CloseDialogueWindow).l
+@Return:
                 
                 rts
 
-    ; End of function sub_4D078
+    ; End of function csub_4D078
 

@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-characterClass = -24
+clientClass = -24
 ordersCounter = -22
 fulfillOrdersFlag = -20
 readyToFulfillOrdersNumber = -18
@@ -13,14 +13,14 @@ pendingOrdersNumber = -14
 itemSlot = -12
 itemIndex = -10
 targetMember = -8
-member = -6
+clientMember = -6
 currentGold = -4
 
 PickMithrilWeapon:
                 
                 movem.l d0-a0,-(sp)
                 clr.w   d0
-                lea     tbl_MithrilWeaponClasses(pc), a0
+                lea     list_MithrilWeaponClasses(pc), a0
                 move.w  #MITHRILWEAPON_CLASSES_COUNTER,d7
 @FindWeaponClass_Loop:
                 
@@ -29,7 +29,7 @@ PickMithrilWeapon:
 @FindCharacterClass_Loop:
                 
                 move.w  (a0)+,d1        ; D1 = weapon class
-                move.w  characterClass(a6),d2 ; D2 = character class
+                move.w  clientClass(a6),d2 ; D2 = character class
                 cmp.w   d1,d2
                 beq.w   @GetWeaponsEntryAddress ; found character class belonging to weapon class
                 dbf     d6,@FindCharacterClass_Loop
@@ -47,7 +47,7 @@ PickMithrilWeapon:
 @GetWeaponsEntryAddress:
                 
                 lsl.w   #3,d0           ; D0 = weapon class index * 8 (weapons entry size)
-                lea     tbl_MithrilWeapons(pc), a0
+                lea     table_MithrilWeapons(pc), a0
                 adda.w  d0,a0
                 move.w  #MITHRILWEAPONS_PER_CLASS_COUNTER,d5
 @PickWeapon_Loop:

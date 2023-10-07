@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\global\enemyitemdrops.asm :
 ; 0xBE52..0xBECC : Enemy item drops
-tbl_EnemyItemDrops:
+table_EnemyItemDrops:
                 
 ; Syntax        battle      [BATTLE_]enum (or index)
 ;               enemyEntity 0-31
@@ -158,5 +158,5 @@ tbl_EnemyItemDrops:
                 item        POWER_WATER
                 droppedFlag 29
                 
-                tableEnd
+                tableEnd.w
                 
