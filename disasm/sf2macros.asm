@@ -664,7 +664,71 @@ addSavedByteOffset: macro
                 adda.w  \1,\2
         endm
     
+getSavedBattleMapCoordinates: macro
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                lea     (BATTLE_AREA_X).l,a0
+                movep.w 0(a0),\1
+                movep.w BATTLE_AREA_WIDTH-BATTLE_AREA_X(a0),\2
+                movea.l (sp)+,a0
+            else
+                move.w  ((BATTLE_AREA_X-$1000000)).w,\1
+                move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,\2
+            endif
+        endm
     
+getSavedBattleMapDimensions: macro
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                lea     (BATTLE_AREA_WIDTH).l,a0
+                movep.w 0(a0),\1
+                movea.l (sp)+,a0
+            else
+                move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,\1
+            endif
+        endm
+    
+loadSavedMithrilWeaponOrder: macro
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                movep.w 0(\2),d0
+                bne.s   @Next
+                movep.w \1,0(\2)
+                bra.s   @Done
+            else
+                cmpi.w  #0,(\2)
+                bne.w   @Next           ; check next weapon slot if current one is occupied
+                move.w  \1,(\2)
+                bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
+            endif
+        endm
+    
+getSavedMithrilWeaponOrder: macro
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                movep.w 0(\1),d0
+                addq.w  #4,\1
+                move.w  d0,\2
+            else
+                move.w  (\1)+,\2
+                cmpi.w  #0,\2
+            endif
+        endm
+    
+clearMithrilWeaponOrder: macro
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                add.w   \1,\1
+                add.w   \1,\1
+                adda.w  \1,\2
+                clr.w   d0
+                movep.w d0,0(\2)
+            else
+                lsl.w   #1,\1
+                adda.w  \1,\2
+                move.w  (\2),d2
+                move.w  #0,(\2)
+            endif
+        endm
+
+
 ; ---------------------------------------------------------------------------
 ; Items and spells expansion
 ; ---------------------------------------------------------------------------

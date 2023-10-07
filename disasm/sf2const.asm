@@ -1,12 +1,11 @@
 ; SF2CONST.ASM INCLUDED AT START OF SF2.ASM
 
+saveSlotSize   = SAVE_SLOT_SIZE
 savedDataStart = $FFE800
 saveSlotsStart = $2000B1
-saveSlotSize   = SAVE_SLOT_REAL_SIZE*2
     if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
 savedDataStart = $2000B1
-saveSlotsStart = savedDataStart+SAVE_SLOT_REAL_SIZE
-saveSlotSize   = SAVE_SLOT_REAL_SIZE
+saveSlotsStart = savedDataStart+saveSlotSize
     endif
 
 ; START OF SEGMENT SRAM OFFSETS FROM SRAM:00200000 TO 0:00204000

@@ -1615,16 +1615,7 @@ loc_2DD4:
                 
                 checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 beq.s   return_2DEA
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                lea     (BATTLE_AREA_X).l,a0
-                movep.w 0(a0),d0
-                movep.w BATTLE_AREA_WIDTH-BATTLE_AREA_X(a0),d1
-                movea.l (sp)+,a0
-            else
-                move.w  ((BATTLE_AREA_X-$1000000)).w,d0
-                move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d1
-            endif
+                getSavedBattleMapCoordinates d0, d1 ; d0.w = X, Y, d1.w = width, height
                 clr.w   d2
                 bsr.w   CopyMapBlocks
 return_2DEA:
@@ -1651,14 +1642,7 @@ LoadMapArea:
                 bra.s   @Continue
 @Battle:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                lea     (BATTLE_AREA_WIDTH).l,a0
-                movep.w 0(a0),d0
-                movea.l (sp)+,a0
-            else
-                move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d0
-            endif
+                getSavedBattleMapDimensions d0 ; d0.w = width, height
                 clr.w   d1
                 move.b  d0,d1
                 subq.w  #1,d1

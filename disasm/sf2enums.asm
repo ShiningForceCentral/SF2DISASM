@@ -185,8 +185,8 @@ COMBATANT_ENTRY_SIZE:                       equ __RS
 
 ; enum Combatant_Properties
 
-combatantEntryRealSize = COMBATANT_ENTRY_SIZE
 combatantEntrySize = COMBATANT_ENTRY_SIZE
+combatantEntryRealSize = combatantEntrySize
     if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
 combatantEntryRealSize = combatantEntryRealSize/2
     endif
@@ -195,8 +195,8 @@ COMBATANT_ITEMSLOTS_COUNTER: equ $3
 COMBATANT_SPELLSLOTS_COUNTER: equ $3
 COMBATANT_ITEMSLOTS: equ $4
 COMBATANT_SPELLSLOTS: equ $4
-COMBATANT_ENTRY_REAL_SIZE: equ combatantEntryRealSize
 COMBATANT_ENTRY_SIZE: equ combatantEntrySize
+COMBATANT_ENTRY_REAL_SIZE: equ combatantEntryRealSize
 
 ; ---------------------------------------------------------------------------
 
@@ -1084,9 +1084,9 @@ DEALS_ITEMS_COUNTER: equ (dealsItemsByteSize*2)-1
 ; ---------------------------------------------------------------------------
 
 ; enum Blacksmith
-BLACKSMITH_ORDERS_COUNTER: equ $3
-BLACKSMITH_MAX_ORDERS_NUMBER: equ $4
-BLACKSMITH_ORDER_COST: equ $1388
+BLACKSMITH_ORDERS_COUNTER: equ BLACKSMITH_MAX_ORDERS_NUMBER-1
+BLACKSMITH_MAX_ORDERS_NUMBER: equ 4
+BLACKSMITH_ORDER_COST: equ 5000
 
 ; ---------------------------------------------------------------------------
 
@@ -1343,7 +1343,7 @@ mithrilWeaponSlotSize = 2
 mithrilWeaponSlotSize = 4
     endif
 
-MITHRILWEAPON_SLOT_SIZE: equ mithrilWeaponSlotSize
+MITHRIL_WEAPON_ORDER_SLOT_SIZE: equ mithrilWeaponSlotSize
 MITHRILWEAPONS_PER_CLASS_COUNTER: equ $3
 MITHRILWEAPON_CLASSES_COUNTER: equ $7
 
@@ -3992,6 +3992,10 @@ CRAM_SIZE: equ $80
 ; enum SavedDataOffsets
 
 savedByteSize = 1
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+savedByteSize = 2
+    endif
+    
 combatantEntryRealSize = COMBATANT_ENTRY_REAL_SIZE
 combatantSlotsNumber = COMBATANT_SLOTS_NUMBER
 dealsItemsBytes = DEALS_ITEMS_BYTES
@@ -3999,9 +4003,6 @@ caravanItemEntrySize = CARAVAN_ITEM_ENTRY_SIZE
 caravanMaxItemsNumber = CARAVAN_MAX_ITEMS_NUMBER
 turnOrderEntriesNumber = TURN_ORDER_ENTRIES_NUMBER
 blacksmithMaxOrdersNumber = BLACKSMITH_MAX_ORDERS_NUMBER
-    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-savedByteSize = 2
-    endif
 
                                             rsreset
 SAVED_DATA_OFFSET_COMBATANT_ENTRIES:        rs.b combatantEntryRealSize*combatantSlotsNumber*savedByteSize
@@ -4051,11 +4052,12 @@ COLOR_B_CHANNEL_MASK: equ $F00
 
 saveSlotRealSize = SAVED_DATA_SIZE
 saveSlotSize = SAVED_DATA_SIZE*2
-sramSize = 8192
     if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
 saveSlotRealSize = saveSlotRealSize/2
 saveSlotSize = saveSlotSize/2
     endif
+    
+sramSize = 8192
     if (EXPANDED_SRAM=1)
 sramSize = 32768
     endif

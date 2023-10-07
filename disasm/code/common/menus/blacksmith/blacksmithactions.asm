@@ -88,14 +88,7 @@ ProcessBlacksmithOrders:
                 loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 @FulfillOrders_Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w 0(a0),d0
-                addq.w  #4,a0
-                move.w  d0,itemIndex(a6)
-            else
-                move.w  (a0)+,itemIndex(a6)
-                cmpi.w  #0,itemIndex(a6)
-            endif
+                getSavedMithrilWeaponOrder a0, itemIndex(a6)
                 beq.s   @Next
                 move.w  d7,ordersCounter(a6)
                 addi.w  #1,ordersCounter(a6)
@@ -218,19 +211,7 @@ byte_21B58:
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d6
                 sub.w   ordersCounter(a6),d6
                 loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a1
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                add.w   d6,d6
-                add.w   d6,d6
-                adda.w  d6,a1
-                movep.w 0(a1),d2
-                clr.w   d0
-                movep.w d0,0(a1)
-            else
-                lsl.w   #1,d6
-                adda.w  d6,a1
-                move.w  (a1),d2
-                move.w  #0,(a1)
-            endif
+                clearMithrilWeaponOrder d6, a1
                 addi.w  #1,fulfilledOrdersNumber(a6)
                 move.w  itemIndex(a6),d1
                 move.w  clientMember(a6),d0
@@ -487,7 +468,7 @@ CountPendingAndReadyToFulfillOrders:
                 move.w  #1,fulfillOrdersFlag(a6) ; set to fulfill orders if talking to blacksmith for the first time since loading the map
 @Continue:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+            if (STANDARD_BUILD=1)
                 moveq   #BLACKSMITH_ORDERS_COUNTER,d7
             else
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
@@ -496,13 +477,7 @@ CountPendingAndReadyToFulfillOrders:
                 loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 @Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                addq.w  #MITHRILWEAPON_SLOT_SIZE,a0
-                movep.w -MITHRILWEAPON_SLOT_SIZE(a0),d1
-            else
-                move.w  (a0)+,d1
-                cmpi.w  #0,d1
-            endif
+                getSavedMithrilWeaponOrder a0, d1
                 beq.w   @Next
                 cmpi.w  #1,fulfillOrdersFlag(a6)
                 bne.s   @IncrementPlacedOrders
