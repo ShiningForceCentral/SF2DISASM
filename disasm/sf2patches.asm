@@ -46,35 +46,35 @@ FIX_MISSING_RANDOM_BATTLES:         equ 1       ; Add zone events for random bat
 
 
 ; Quality of life features
-CAPITALIZED_CHARACTER_NAMES:        equ 0       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
+BOWIE_CAN_DIE:                      equ 0       ; Bowie's death does not cause defeat.
+BOWIE_CAN_LEAVE_BATTLE_PARTY:       equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
+CAPITALIZED_CHARACTER_NAMES:        equ 1       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
+CARAVAN_IN_TOWER:                   equ 0       ; Add access to Caravan before tower climb battle.
+CUTSCENE_PROTECTION:                equ 1       ; Prevent game from freezing if dead character is needed for scene after leader death (as Slade for battle 5.)
+MINIATURES_SHOP:                    equ 0       ; Place a shopworker on the desktop and floor of the Miniatures Room.
 NO_AI_JARO:                         equ 0       ; 
 NO_AI_PETER:                        equ 0       ; 
 NO_DARKNESS_IN_CAVES:               equ 0       ; The darkness gimmick in caves is disabled.
 NO_RANDOM_BATTLES:                  equ 0       ; 0 = Battles    1 = No Battles
-SPELLS_REFRESH_STATUS_COUNTERS:     equ 0       ; Boost, Slow, and Attack spells refresh status counters instead of failing, as long as the counter is increased by at least 1. Battle messages display the actual regained stats values.
-TRADEABLE_ITEMS:                    equ 0       ; Allow trading items in battle without full inventory.
-CUTSCENE_PROTECTION:                equ 1       ; Prevent game from freezing if dead character is needed for scene after leader death (as Slade for battle 5.)
-CARAVAN_IN_TOWER:                   equ 0       ; Add access to Caravan before tower climb battle.
-MINIATURES_SHOP:                    equ 0       ; Place a shopworker on the desktop and floor of the Miniatures Room.
 
 
 ; Misc. features
+ADDITIONAL_EQUIPEFFECTS:            equ 0       ; Add new equipeffects to offer more options (Set ATT, Increase Resistance, Decrease Double...)
 AGILITY_AFFECTS_CHANCE_TO_DODGE:    equ 0       ; Adjust chance to dodge proportionally to the difference between the attacker's and the target's current AGI.
-BOWIE_CAN_DIE:                      equ 0       ; Bowie's death does not cause defeat.
-BOWIE_CAN_LEAVE_BATTLE_PARTY:       equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
 DIAGONAL_LASERS:                    equ 0       ; Allows laser based enemies to fire in 8 directions (Up, Up-Left, Left, Down-Left, etc).
+DIFFICULTY_FACTORS:                 equ 0       ; Allow 4 distinct difficulties.
 EXPANDED_RANGES:                    equ 1       ; Weapons/spells can have ranges up to 7 and spell radii up to 4.
+LEARN_SPELL_AT_PROMOTION:           equ 0       ; Allow learning 1 spell immediately upon promotion.
+MUSCLE_MAGIC:                       equ 0       ; 0 = OFF, 1-256 = spell power increased by (muscleMagicStat * n) / 256
+MUSCLE_MAGIC_STAT:                  equ 5       ; 0 = Max HP, 1 = Current HP, 2 = Max MP, 3 = Current MP, 4 = Base ATT, 5 = Current ATT, 6 = Base DEF, 7 = Current DEF, 8 = Base AGI, 9 = Current AGI
+PER_LEVEL_CHURCH_COST:              equ 0       ; Raise/Cure cost based on ally level (double cost per promo level.)
 PERCENT_POISON_DAMAGE:              equ 0       ; 1-100 = n% of max HP
 PLAYER_DEFEAT_IS_GAME_OVER:         equ 0       ; On player defeat, rather than halve the gold and return to town, reset the game.
 SEND_DESTROYED_ITEMS_TO_DEALS:      equ 0       ; Add item that was destroyed upon usage to shop deals if rare and if not a consumable.
 SEND_DROPPED_ITEMS_TO_CARAVAN:      equ 0       ; If character inventory is full, add dropped item to the Caravan instead of shop deals, regardless of rarity. If the Caravan itself is full, then drops follow the usual routine: go to deals if rare, or become lost completely if not rare.
+SPELLS_REFRESH_STATUS_COUNTERS:     equ 0       ; Boost, Slow, and Attack spells refresh status counters instead of failing, as long as the counter is increased by at least 1. Battle messages display the actual regained stats values.
+TRADEABLE_ITEMS:                    equ 0       ; Allow trading items in battle without full inventory.
 TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock damage with difficulty.   Normal:100%  Hard:125%  Super: 150%  Ouch: 175%
-DIFFICULTY_FACTORS:                 equ 0       ; Allow 4 distinct difficulties.
-LEARN_SPELL_AT_PROMOTION:           equ 0       ; Allow learning 1 spell immediately upon promotion.
-PER_LEVEL_CHURCH_COST:              equ 0       ; Raise/Cure cost based on ally level (double cost per promo level.)
-ADDITIONAL_EQUIPEFFECTS:            equ 0       ; Add new equipeffects to offer more options (Set ATT, Increase Resistance, Decrease Double...)
-MUSCLE_MAGIC:                       equ 0       ; 0 = OFF, 1-256 = spell power increased by (muscleMagicStat * n) / 256
-MUSCLE_MAGIC_STAT:                  equ 5       ; 0 = Max HP, 1 = Current HP, 2 = Max MP, 3 = Current MP, 4 = Base ATT, 5 = Current ATT, 6 = Base DEF, 7 = Current DEF, 8 = Base AGI, 9 = Current AGI
 
 
 ; Special screens
@@ -87,14 +87,14 @@ SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options
 
 
 ; Menu enhancements
-THREE_DIGITS_STATS:                 equ 1       ; 
-FULL_CLASS_NAMES:                   equ 1       ; 
+ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Read values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
+ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 1       ; 1 = small icons, 2 = no display
 EIGHT_CHARACTERS_MEMBER_NAMES:      equ 1       ; 
 EXTENDED_SPELL_NAMES:               equ 1       ; 
-ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 1       ; 1 = small icons, 2 = no display
-SHOW_ENEMY_LEVEL:                   equ 1       ; 
+FULL_CLASS_NAMES:                   equ 1       ; 
 SHOW_ALL_SPELLS_IN_MEMBER_SCREEN:   equ 0       ; 
-ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Read values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
+SHOW_ENEMY_LEVEL:                   equ 1       ; 
+THREE_DIGITS_STATS:                 equ 1       ; 
 
 ; If standard build, and either THREE_DIGITS_STATS or FULL_CLASS_NAMES are enabled, implement a second member list stats page.
 secondMembersListPage = 0
@@ -117,8 +117,8 @@ RESUME_BATTLESCENE_MUSIC: equ resumeBattlesceneMusic
 
 
 ; Data expansions
-EXPANDED_FORCE_MEMBERS:     equ 1       ; Enable all 32 force members supported by the engine instead of 30.
 EXPANDED_CLASSES:           equ 1       ; Enable support for 64 classes.
+EXPANDED_FORCE_MEMBERS:     equ 1       ; Enable all 32 force members supported by the engine instead of 30.
 EXPANDED_ITEMS_AND_SPELLS:  equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of a >= 4MB ROM with 32KB SRAM.
 EXPANDED_MAPSPRITES:        equ 1       ; Store mapsprite index in word-sized structure allowing 65k+ unique sprites.
 
@@ -126,7 +126,7 @@ EXPANDED_MAPSPRITES:        equ 1       ; Store mapsprite index in word-sized st
 ; ROM expansions
 ROM_EXPANSION:              equ 1       ; 0 = 2 MB ROM, 1 = 4 MB ROM (default), 2 = 6 MB ROM
 SRAM_EXPANSION:             equ 1       ; Expand SRAM from 8KB to 32KB.
-SAVED_DATA_EXPANSION:       equ 1       ; Relocate currently loaded saved data from system RAM to cartridge SaveRAM.
+SAVED_DATA_EXPANSION:       equ 0       ; Relocate currently loaded saved data from system RAM to cartridge SaveRAM.
 
 ; If standard build, and either ROM_EXPANSION or EXPANDED_ITEMS_AND_SPELLS are enabled, build an expanded ROM.
 expandedRom = 0
