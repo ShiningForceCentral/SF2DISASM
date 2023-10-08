@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\stats\additional-equipeffects.asm :
+; ASM FILE code\common\stats\additionalequipeffects-standard.asm :
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -26,14 +26,14 @@ EquipEffect_DecreaseCriticalProwess:
 EquipEffect_DecreaseDoubleAttackProwess:
                 
                 move.b  (a2),d2
-                lsr.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2
+                lsr.b   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
                 andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d2
                 sub.b   d1,d2
                 bcs.s   @Continue
                 moveq   #PROWESS_DOUBLE_1IN32,d2    ; cap to lowest double attack setting
 @Continue:
                 
-                lsl.b   #PROWESS_LOWER_DOUBLE_SHIFTCOUNT,d2
+                lsl.b   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
                 andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_COUNTER,(a2)
                 or.b    d2,(a2)
                 rts
@@ -46,14 +46,14 @@ EquipEffect_DecreaseDoubleAttackProwess:
 EquipEffect_DecreaseCounterAttackProwess:
                 
                 move.b  (a2),d2
-                lsr.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d2
+                lsr.b   #PROWESS_LOWER_COUNTER_SHIFT_COUNT,d2
                 andi.b  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d2
                 sub.b   d1,d2
                 bcs.s   @Continue
                 moveq   #PROWESS_COUNTER_1IN32,d2   ; cap to highest counter attack setting
 @Continue:
                 
-                lsl.b   #PROWESS_LOWER_COUNTER_SHIFTCOUNT,d2
+                lsl.b   #PROWESS_LOWER_COUNTER_SHIFT_COUNT,d2
                 andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_DOUBLE,(a2)
                 or.b    d2,(a2)
                 rts

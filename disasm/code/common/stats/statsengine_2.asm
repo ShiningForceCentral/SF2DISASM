@@ -1209,7 +1209,7 @@ equipEffect_IncreaseCounterAttackProwess:
     ; End of function equipEffect_IncreaseCounterAttackProwess
 
             if (STANDARD_BUILD&ADDITIONAL_EQUIPEFFECTS=1)
-                include "code\common\stats\additional-equipeffects.asm"
+                include "code\common\stats\additionalequipeffects-standard.asm"
             endif
 
 ; =============== S U B R O U T I N E =======================================
