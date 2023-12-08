@@ -50,6 +50,8 @@ IF EXIST "%buildname%.bin" (
         )
         echo "%buildname%.bin" exists in build directory. Success!
     )
+    copy "%buildname%.bin" standardbuild-last.bin
+    copy "%buildname%.lst" standardbuild-last.lst
 ) ELSE (
     echo "%buildname%.bin" does not exist, probably due to an assembly error. Check output.log.
 )
