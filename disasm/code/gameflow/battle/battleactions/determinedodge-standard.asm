@@ -40,7 +40,7 @@ battlesceneScript_DetermineDodge:
                 move.b  (a5),d0
                 bsr.w   GetStatusEffects
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_SLEEP,d1
-                bne.s   @Return     ; never dodge if true
+                bne.w   @Return     ; never dodge if true
                 
                 ; Is attacker muddled?
                 move.w  #CHANCE_TO_DODGE_FOR_MUDDLED_ATTACKER,d2    ; 1/2 chance to dodge if attacker is muddled
