@@ -15,6 +15,7 @@ TEST_BUILD_SKIP_SEGA_LOGO:                  equ 1
 TEST_BUILD_SKIP_GAME_INTRO:                 equ 1
 TEST_BUILD_SKIP_TITLE_SCREEN:               equ 1
 TEST_BUILD_SKIP_WITCH_DIALOGUE:             equ 1
+TEST_BUILD_ALL_ALLIES_JOINED:               equ 1
 TEST_BUILD_SKIP_NEW_GRANSEAL_CUTSCENE:      equ 1
 TEST_BUILD_ALLIES_START_LEVEL:              equ 24
 TEST_BUILD_INITIAL_DEBUG_MODE:              equ -1      ; -1 = toggle ON

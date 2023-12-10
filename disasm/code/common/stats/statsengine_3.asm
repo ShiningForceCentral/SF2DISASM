@@ -15,14 +15,14 @@ NewGame:
                 moveq   #COMBATANT_ALLIES_COUNTER,d0
                 sub.w   d7,d0
                 bsr.w   InitializeAllyCombatantEntry
-            if (STANDARD_BUILD&TEST_BUILD=1)
+            if (STANDARD_BUILD&TEST_BUILD&TEST_BUILD_ALL_ALLIES_JOINED=1)
                 bsr.w   JoinForce
             endif
                 dbf     d7,@Loop
                 
                 moveq   #GAMESTART_GOLD,d1 ; starting gold value
                 bsr.w   SetGold
-            if (STANDARD_BUILD&TEST_BUILD=1)
+            if (STANDARD_BUILD&TEST_BUILD&TEST_BUILD_ALL_ALLIES_JOINED=1)
                 ; do nothing
             else
                 moveq   #ALLY_BOWIE,d0  ; starting character
