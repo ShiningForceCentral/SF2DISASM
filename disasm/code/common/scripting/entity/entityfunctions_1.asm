@@ -438,7 +438,7 @@ PositionBattleEntities:
 @loc_13:
                 
             if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                adda.w  #NEUTRAL_ENTITY_SIZE,a0
+                adda.w  #BATTLE_NEUTRAL_ENTITY_SIZE,a0
                 cmpi.w  #-1,(a0)
                 bne.s   @loc_13
                 cmp.w   (a0)+,d1
