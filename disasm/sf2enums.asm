@@ -3746,6 +3746,8 @@ followerSize = 4
     if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
 followerA = 156
 followerB = 157
+    endif
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
 followerSize = 6
     endif
 
