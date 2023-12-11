@@ -55,7 +55,6 @@
                 alignIfStandard
                 includeIfStandard "data\battles\terrainentries.asm"    ; Battle terrain data
                 includeIfStandard "data\stats\enemies\enemydefs.asm"    ; Enemy definitions
-                ;includeIfStandard "data\battles\spritesetentries.asm"    ; Battle spritesets
                 includeIfStandard "data\battles\spritesets\entries.asm"    ; Battle Spritesets
                 alignIfStandard
                 includeIfStandard "code\specialscreens\witch\graphics.asm"    ; Witch Screen
