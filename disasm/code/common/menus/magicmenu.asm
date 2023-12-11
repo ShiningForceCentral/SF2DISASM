@@ -237,13 +237,11 @@ BuildMagicMenu:
                 adda.w  d1,a0
                 moveq   #12,d7
                 jsr     (CopyBytes).w   
-                move.w  windowSlot(a6),d0
-                move.w  #MENU_MAGIC_MP_COST_COORDS,d1
-                jsr     (GetWindowTileAddress).w
                 move.w  (sp)+,d1
                 jsr     j_GetSpellCost
                 move.w  d1,d0
                 moveq   #3,d7
+                adda.w  #MENU_MAGIC_OFFSET_MP_COST,a1
                 bsr.w   WriteTilesFromNumber
                 rts
 
