@@ -25,14 +25,16 @@ ExecuteIndividualTurn:
                 ; Check if we're currently battling Taros, and Bowie is the actor
                 checkSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE  ; HARDCODED battle index
                 bne.s   @IsActorAlive
-                tst.w   d0
+                tst.w   combatant(a6)
                 bne.s   @IsActorAlive
                 clrFlg  112             ; Currently attacking Taros with Achilles Sword
                 
 @IsActorAlive:  jsr     GetCurrentHP
+                tst.w   d1
                 beq.w   @Done           ; skip turn if actor is dead
                 
                 ; Actor is alive
+                move.w  combatant(a6),d0
                 jsr     GetCombatantX
                 move.w  d1,((BATTLE_ACTOR_X-$1000000)).w
                 move.w  d1,((BATTLE_TARGET_X-$1000000)).w
@@ -42,9 +44,11 @@ ExecuteIndividualTurn:
                 move.w  d1,((BATTLE_TARGET_Y-$1000000)).w
                 move.w  d1,d3
                 clr.b   ((CURSOR_RADIUS-$1000000)).w
+                move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
                 move.w  d0,battleEntity(a6)
                 move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
+                move.w  combatant(a6),d0
                 bsr.w   SetCursorDestinationToNextCombatant ; In: d2.w, d3.w = entity X,Y coordinates
                 move.w  combatant(a6),d0
                 jsr     GetStatusEffects
