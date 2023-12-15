@@ -11,7 +11,7 @@
 @Start_Loop:    cmpi.b  #TERMINATOR_BYTE,(a1)
                 beq.w   @CheckRegularPromo
                 move.b  (a1)+,d1                    ; d1.w = special promo item
-                move.b  d1,promotionItem(a6)
+                move.w  d1,promotionItem(a6)
                 jsr     GetItemInventoryLocation
                 bpl.s   @FoundItem
                 
