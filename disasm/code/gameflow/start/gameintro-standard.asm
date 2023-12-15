@@ -34,7 +34,7 @@ AfterGameIntro: clr.w   ((QUAKE_AMPLITUDE-$1000000)).w
             else
                 jsr     (DisableDisplayAndInterrupts).w
                 sndCom  MUSIC_TITLE
-                bsr.s   TitleScreen
+                bsr.s   StartTitleScreen
                 bne.w   StartWitchScreen   
 @Reset:         jmp     (ResetGame).w
             endif
