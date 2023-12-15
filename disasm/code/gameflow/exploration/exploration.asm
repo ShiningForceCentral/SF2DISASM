@@ -1418,7 +1418,7 @@ GetItem:
                 move.w  d0,d1
                 move.w  d0,d2
             if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                andi.b  #ITEM_NOTHING,d2
+                andi.b  #ITEMENTRY_MASK_INDEX,d2
             endif
 @Continue:
                 
