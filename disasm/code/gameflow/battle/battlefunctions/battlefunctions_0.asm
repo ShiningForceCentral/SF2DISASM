@@ -1013,7 +1013,7 @@ UpdateBattleEntityMapsprite:
                 clr.w   d1
             if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
-                cmpi.w  #MAPSPRITES_SPECIALS_START,d1
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d1
                 bcc.s   @Done
 				clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1

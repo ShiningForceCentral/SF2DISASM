@@ -2507,7 +2507,7 @@ loc_60B6:
                 movem.l a0-a1,-(sp)
             if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-                cmpi.w  #MAPSPRITES_SPECIALS_START,d1
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d1
                 bcc.w   loc_617C
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
@@ -2629,13 +2629,18 @@ DmaEntityMapsprite:
             else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
             endif
+                andi.w  #$00ff,d1
                 cmpi.w  #MAPSPRITES_SPECIALS_START,d1 ; HARDCODED special mapsprites start index
                 blt.s   @LoadRegularSprite
                 jsr     j_LoadSpecialSprite
                 move.w  (sp)+,d1
                 bra.s   @Done
 @LoadRegularSprite:
-                
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+            else
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+            endif                
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1
