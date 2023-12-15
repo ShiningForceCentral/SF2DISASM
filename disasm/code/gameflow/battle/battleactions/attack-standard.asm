@@ -41,7 +41,7 @@ battlesceneScript_Attack:
                 
                 move.b  (a5),d0
                 jsr     GetCurrentHp
-                move.w  d1,leechAmountCap(a6)   ; lifesteal weapons leech amount is capped to target's current HP prior to suffering damage
+                move.w  d1,leechAmountCap(a2)   ; lifesteal weapons leech amount is capped to target's current HP prior to suffering damage
                 
                 bsr.w   battlesceneScript_DetermineDodge
                 tst.b   dodge(a2)
