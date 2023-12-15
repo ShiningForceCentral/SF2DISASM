@@ -361,9 +361,7 @@ BattleLoop_Defeat:
                 jmp     (ResetGame).w
                 nop
           else
-                clr.w   d0
-                jsr     j_GetMaxHp
-                jsr     j_SetCurrentHp
+                bsr.w   HealLivingAndImmortalAllies
                 jsr     j_GetGold
                 lsr.l   #1,d1           ; divide current gold amount by 2
                 jsr     j_SetGold
