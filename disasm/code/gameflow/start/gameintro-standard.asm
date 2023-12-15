@@ -29,7 +29,7 @@ AfterGameIntro: clr.w   ((QUAKE_AMPLITUDE-$1000000)).w
                 jsr     (UpdateBackgroundVScrollData).w
                 jsr     (WaitForDmaQueueProcessing).w
                 jsr     (InitializeDisplay).w
-            if (TEST_BUILD&TEST_BUILD_SKIP_TITLE_SCREEN=1)
+            if (SKIP_TITLE_SCREEN=1)
                 bra.w   StartWitchScreen   
             else
                 jsr     (DisableDisplayAndInterrupts).w

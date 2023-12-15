@@ -11,10 +11,6 @@ EASY_RENAME_CHARACTERS:     equ 0       ; Rename all characters when starting a 
 
 
 ; Debug build configuration
-TEST_BUILD_SKIP_SEGA_LOGO:                  equ 1
-TEST_BUILD_SKIP_GAME_INTRO:                 equ 1
-TEST_BUILD_SKIP_TITLE_SCREEN:               equ 1
-TEST_BUILD_SKIP_WITCH_DIALOGUE:             equ 1
 TEST_BUILD_ALL_ALLIES_JOINED:               equ 1
 TEST_BUILD_SKIP_TO_NEW_GRANSEAL:            equ 1
 TEST_BUILD_SKIP_NEW_GRANSEAL_CUTSCENE:      equ 1
@@ -59,6 +55,10 @@ NO_AI_JARO:                         equ 0       ;
 NO_AI_PETER:                        equ 0       ; 
 NO_DARKNESS_IN_CAVES:               equ 0       ; The darkness gimmick in caves is disabled.
 NO_RANDOM_BATTLES:                  equ 0       ; 0 = Battles    1 = No Battles
+SKIP_SEGA_LOGO:                     equ 0
+SKIP_GAME_INTRO:                    equ 1
+SKIP_TITLE_SCREEN:                  equ 0
+SKIP_WITCH_DIALOGUE:                equ 1
 
 
 ; Misc. features

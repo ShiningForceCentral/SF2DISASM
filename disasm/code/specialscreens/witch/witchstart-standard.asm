@@ -70,7 +70,7 @@ StartWitchScreen:
                 jsr     FadeOut_WaitForP1Input
 @StartWitchDialogue:
                 
-            if (STANDARD_BUILD&TEST_BUILD&TEST_BUILD_SKIP_WITCH_DIALOGUE=1)
+            if (STANDARD_BUILD&SKIP_WITCH_DIALOGUE=1)
                 bra.w   @SkipWitchDialogue
             else
                 btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w

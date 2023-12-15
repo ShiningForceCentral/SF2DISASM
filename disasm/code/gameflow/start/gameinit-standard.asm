@@ -23,12 +23,12 @@ InitializeGame:
                 
 @Continue:      jsr     NewGame
                 
-            if (TEST_BUILD&TEST_BUILD_SKIP_SEGA_LOGO=1)
+            if (SKIP_SEGA_LOGO=1)
                 ; Do nothing
             else
                 jsr     DisplaySegaLogo
             endif
-            if (TEST_BUILD&TEST_BUILD_SKIP_GAME_INTRO=1)
+            if (SKIP_GAME_INTRO=1)
                 bra.w   AfterGameIntro
             else
                 bne.w   AfterGameIntro  ; skip game intro if pressing Start at the SEGA logo
