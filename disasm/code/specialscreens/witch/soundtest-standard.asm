@@ -8,6 +8,7 @@
 SoundTest:      txt     464                         ; "Oh! I have a good idea.{N}Let's listen to music!{W1}"
                 sndCom  SOUND_COMMAND_FADE_OUT
                 clr.w   ((SPEECH_SFX-$1000000)).w
+                clr.w   d0
                 clr.w   d7                          ; D7 = # bytes into sound table, so we clear it here
                 
                 lea     table_SoundtrackTitles(pc),a0
@@ -41,6 +42,7 @@ SoundTest:      txt     464                         ; "Oh! I have a good idea.{N
                 beq.s   @B
                 
 @PlayTrack:     sndCom  MUSIC_STOP
+                move.b  d1,d0
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
                 
 @B:             btst    #INPUT_BIT_B,((PLAYER_1_INPUT-$1000000)).w
