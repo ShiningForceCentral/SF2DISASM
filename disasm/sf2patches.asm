@@ -43,6 +43,7 @@ FIX_CARAVAN_DESCRIPTIONS:           equ 1       ; Break up character list into c
 FIX_LABYRINTH_DELETION:             equ 1       ; Prevent a section of the labyrinth from being deleted due to AI region activation.
 FIX_ENEMY_BATTLE_EQUIP:             equ 1       ; Enemies will equip battle items as designated in spriteset.
 FIX_MISSING_RANDOM_BATTLES:         equ 1       ; Add zone events for random battles without.
+FIX_COUNT_DEFEATED_ENEMIES:         equ 1       ; Fixes the death counter that impacts "swarm AI" for battles 16, 20, 21. In vanilla, does not impact battles 16, 20, but makes 21 more aggressive.
 
 
 ; Quality of life features
