@@ -43,14 +43,25 @@ DisplaySegaLogo:
                 jsr     (ApplyVIntCramDma).w
                 jsr     (EnableDmaQueueProcessing).w
                 jsr     (EnableDisplayAndInterrupts).w
+                
                 move.l  #table_ConfigurationModeInputSequence,((CONFIGURATION_MODE_OR_GAME_STAFF_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
+            if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
+                dc.l VInt_ActivateConfigurationModeCheat
+            else
                 dc.l VInt_CheckConfigurationModeCheat
+            endif
+                
                 move.l  #table_DebugModeInputSequence,((ENTITY_WALKING_PARAMETERS-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
+            if (STANDARD_BUILD&EASY_DEBUG_MODE=1)
+                dc.l VInt_ActivateDebugModeCheat
+            else
                 dc.l VInt_CheckDebugModeCheat
+            endif
+                
                 move.b  #IN_FROM_BLACK,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
@@ -91,9 +102,13 @@ DisplaySegaLogo:
                 bne.w   DisplaySegaLogo_Quit
                 subq.w  #1,d0
                 bne.s   @WaitForInput_Start
+                
+            if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
+            else
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE
                 dc.l VInt_CheckConfigurationModeCheat
+            endif
 @Done:
                 
                 jsr     (FadeOutToBlack).w

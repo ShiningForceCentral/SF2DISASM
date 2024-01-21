@@ -68,7 +68,7 @@ VInt_UpdateMapAnimations:
                 
                 clr.w   d0
                 move.b  (TILE_ANIMATION_MAP_INDEX).l,d0
-                movea.l (p_pt_MapData).l,a0
+                getPointer p_pt_MapData, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 movea.l MAPDATA_OFFSET_ANIMATIONS(a0),a0

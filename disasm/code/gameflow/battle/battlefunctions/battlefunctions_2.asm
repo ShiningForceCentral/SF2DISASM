@@ -73,11 +73,14 @@ SpawnEnemy:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Unused in standard build
 
 ClearDeadCombatantsListLength:
                 
+            if (VANILLA_BUILD=1)
                 clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 rts
+            endif
 
     ; End of function ClearDeadCombatantsListLength
 
@@ -314,7 +317,13 @@ ProcessBattleEntityControlPlayerInput:
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 jsr     (CheckChestItem).w
                 move.w  d2,((CHEST_CONTENTS-$1000000)).w
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                move.w  #-1,d0
+                andi.b  #ITEMENTRY_MASK_INDEX,d0
+                cmp.w   d0,d2
+            else
                 cmpi.w  #-1,d2
+            endif
                 bne.s   @SearchMenu     ; if d2.w != -1, then there is an item
                 moveq   #MENU_BATTLE_WITH_STAY,d2 ; Battle menu with STAY option
                 bra.s   @CheckTargetReachableByAttack
@@ -515,10 +524,15 @@ CreatePulsatingSpellRangeGrid:
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                ; Skip ahead to Give action if no item held
+                beq.w   @StartGiveAction
+            else
                 bne.w   @HasItemToUse
                 txt     438             ; "You have no item.{W1}"
                 clsTxt
                 bra.w   @StartBattleMenu
+            endif
 @HasItemToUse:
                 
                 clr.w   d1
@@ -685,7 +699,7 @@ CreatePulsatingItemRangeGrid:
                 move.w  d1,d3
                 jsr     j_GetEquippedWeapon
                 move.w  d2,-(sp)
-                bsr.w   sub_24C4E       
+                bsr.w   sub_24C4E
                 jsr     j_GetEquippedWeapon
                 move.w  d2,d1
                 jsr     j_UnequipItemBySlot
@@ -784,13 +798,13 @@ sub_24C4E:
                 ; Equip first item if inventory is full with equippable items
                 clr.w   d1
                 jsr     j_EquipItemBySlot
-                bra.s   @Goto_ExecuteMenu
+                bra.s   @Goto_ExecuteDiamondMenu
 @DefaultToUnarmed:
                 
                 moveq   #DOWN,d1        ; set menu initial choice to down slot
-@Goto_ExecuteMenu:
+@Goto_ExecuteDiamondMenu:
                 
-                bra.s   @ExecuteMenu
+                bra.s   @ExecuteDiamondMenu
 @GetMenuInitialChoice:
                 
                 move.l  a0,-(sp)
@@ -804,7 +818,7 @@ sub_24C4E:
                 cmp.w   d2,d4
                 dbeq    d7,@Loop
                 movea.l (sp)+,a0
-@ExecuteMenu:
+@ExecuteDiamondMenu:
                 
                 move.b  d1,d0
                 lea     CreatePulsatingAttackRangeGrid(pc), a0
@@ -843,6 +857,10 @@ EquipNewItemInBattle:
 @Equip:
                 
                 move.w  d4,d1
+            if (STANDARD_BUILD&FIX_HIGINS_SPELL=1)
+                cmpi.w  #COMBATANT_ITEMSLOTS,d1
+                bge.s   @Return
+            endif
                 jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.w   @Return         ; return if not cursed
@@ -970,7 +988,9 @@ loc_24D42:
                 clr.w   d1
                 bra.s   @HasTarget_Give
 @ChooseTarget:
-                
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                clsTxt
+            endif
                 clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   ControlCursorEntity_ChooseTarget
@@ -988,6 +1008,10 @@ loc_24D42:
                 jsr     j_CloseMiniStatusWindow
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                ; Always trade items
+            else
+                ; Trade items if target's inventory is full
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 beq.w   @ChooseItemToTrade
                 
@@ -1000,6 +1024,7 @@ loc_24D42:
                 bclr    #ITEMENTRY_BIT_EQUIPPED,d1
                 jsr     j_AddItem
                 bra.w   @EndGiveAction
+            endif
 @ChooseItemToTrade:
                 
                 move.w  itemOrSpellIndex(a6),d0
@@ -1058,7 +1083,7 @@ loc_24D42:
                 move.w  combatant(a6),d0
                 jsr     j_AddItem
                 move.w  (sp)+,d1
-                bclr    #7,d1
+                bclr    #ITEMENTRY_BIT_EQUIPPED,d1
                 move.w  itemOrSpellIndex(a6),d0
                 jsr     j_AddItem
 @EndGiveAction:
@@ -1067,7 +1092,18 @@ loc_24D42:
                 clr.w   d0
                 bra.w   @EndBattleEntityControl
 @ItemMenuChoice_Drop:
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
+                jsr     GetItemBySlotAndHeldItemsNumber
+                tst.w   d2
+                bne.s   @ChooseDiscard
                 
+                txt     438             ; "You have no item.{W1}"
+                clsTxt
+                bra.s   @ReturnToMenu
+@ChooseDiscard:
+            endif
+            
                 move.w  combatant(a6),d0
                 bsr.w   HideCursorEntity
                 move.w  d1,-(sp)
@@ -1091,6 +1127,8 @@ loc_24D42:
                 jsr     j_ExecuteItemMenu
                 cmpi.w  #-1,d0
                 bne.w   loc_24FC2
+@ReturnToMenu:  
+                
                 moveq   #-1,d1
                 bra.w   @ChooseItemSubmenuAction
 loc_24FC2:
@@ -1144,7 +1182,13 @@ byte_25066:
                 bra.w   @StartBattleMenu
 @CheckChoice_SearchStay:
                 
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                move.w  #-1,d0
+                andi.b  #ITEMENTRY_MASK_INDEX,d0
+                cmp.w   ((CHEST_CONTENTS-$1000000)).w,d0
+            else
                 cmpi.w  #-1,((CHEST_CONTENTS-$1000000)).w
+            endif
                 bne.w   loc_25088
                 move.w  #BATTLEACTION_STAY,((CURRENT_BATTLEACTION-$1000000)).w
                 clr.w   d0
@@ -1345,16 +1389,26 @@ loc_25236:
                 bra.s   loc_25236
 @SuspendGame:
                 
-                tst.b   ((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #BATTLE_VERSUS_ALL_BOSSES, CURRENT_BATTLE
                 beq.s   loc_25236
                 txt     0               ; "The game will be suspended.{N}OK?"
                 jsr     j_alt_YesNoPrompt
                 clsTxt
                 tst.w   d0
                 bmi.w   loc_25236
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  a0,-(sp)
+                move.l  d0,-(sp)
+                lea     (SAVED_SECONDS_COUNTER).l,a0
+                move.l  ((SECONDS_COUNTER-$1000000)).w,d0
+                movep.l d0,0(a0)
+                move.l  (sp)+,d0
+                movea.l (sp)+,a0
+            else
                 move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
+            endif
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                getCurrentSaveSlot d0
                 jsr     (SaveGame).l
                 tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.w   byte_252E6

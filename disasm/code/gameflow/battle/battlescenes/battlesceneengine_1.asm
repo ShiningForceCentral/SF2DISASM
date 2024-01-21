@@ -24,7 +24,7 @@ GetEnemyAnimation:
                 add.w   ((BATTLESCENE_ENEMYBATTLEANIMATION-$1000000)).w,d1
 @GetAnimationPointer:
                 
-                movea.l (p_pt_EnemyAnimations).l,a0
+                getPointer p_pt_EnemyAnimations, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a0,d1.w),a0
                 move.w  (sp)+,d1
@@ -127,8 +127,12 @@ loc_198E0:
                 
                 move.w  #VDPTILE_BLANK|VDPTILE_PALETTE3,(a0)+
                 dbf     d0,loc_198E0
+            if (STANDARD_BUILD=1)
+                getPointer p_layout_BattlesceneBackground, a1
+            else
                 lea     layout_BattlesceneBackground(pc), a1
-                move.w  #191,d0
+            endif
+                move.w  #191,d0 
 loc_198F0:
                 
                 move.l  (a1)+,(a0)+
@@ -216,7 +220,7 @@ loc_1995C:
 
 LoadEnemyBattlespritePropertiesAndPalette:
                 
-                movea.l (p_pt_EnemyBattlesprites).l,a0
+                getPointer p_pt_EnemyBattlesprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((BATTLESCENE_ENEMYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -247,7 +251,7 @@ LoadEnemyBattlespritePropertiesAndPalette:
 
 LoadEnemyBattlespriteFrameToVram:
                 
-                movea.l (p_pt_EnemyBattlesprites).l,a0
+                getPointer p_pt_EnemyBattlesprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -269,7 +273,8 @@ LoadEnemyBattlespriteFrameToVram:
 
 LoadEnemyBattlespriteFrameAndWaitForDma:
                 
-                movea.l (p_pt_EnemyBattlesprites).l,a0
+                disableSramAndSwitchRomBanks
+                getPointer p_pt_EnemyBattlesprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -278,8 +283,7 @@ LoadEnemyBattlespriteFrameAndWaitForDma:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 move.w  #$C00,d0
-                jsr     (ApplyVIntVramDmaOnCompressedTiles).w
-                jmp     (WaitForDmaQueueProcessing).w
+                processDmaRestoreRomBanksAndEnableSram ApplyVIntVramDmaOnCompressedTiles
 
     ; End of function LoadEnemyBattlespriteFrameAndWaitForDma
 
@@ -292,7 +296,7 @@ LoadEnemyBattlespriteFrameAndWaitForDma:
 
 LoadAllyBattlespritePropertiesAndPalette:
                 
-                movea.l (p_pt_AllyBattlesprites).l,a0
+                getPointer p_pt_AllyBattlesprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w
@@ -323,7 +327,7 @@ LoadAllyBattlespritePropertiesAndPalette:
 
 LoadAllyBattlespriteFrameToVram:
                 
-                movea.l (p_pt_AllyBattlesprites).l,a0
+                getPointer p_pt_AllyBattlesprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -346,7 +350,8 @@ LoadAllyBattlespriteFrameToVram:
 
 LoadAllyBattlespriteFrameAndWaitForDma:
                 
-                movea.l (p_pt_AllyBattlesprites).l,a0
+                disableSramAndSwitchRomBanks
+                getPointer p_pt_AllyBattlesprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -355,8 +360,7 @@ LoadAllyBattlespriteFrameAndWaitForDma:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 move.w  #$900,d0
-                jsr     (ApplyVIntVramDmaOnCompressedTiles).w
-                jmp     (WaitForDmaQueueProcessing).w
+                processDmaRestoreRomBanksAndEnableSram ApplyVIntVramDmaOnCompressedTiles
 
     ; End of function LoadAllyBattlespriteFrameAndWaitForDma
 
@@ -368,7 +372,7 @@ LoadAllyBattlespriteFrameAndWaitForDma:
 
 LoadWeaponPalette:
                 
-                movea.l (p_WeaponPalettes).l,a0
+                getPointer p_WeaponPalettes, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 move.l  (a0,d0.w),((PALETTE_1_BASE_0E-$1000000)).w
                 rts
@@ -383,7 +387,7 @@ LoadWeaponPalette:
 
 LoadWeaponsprite:
                 
-                movea.l (p_pt_Weaponsprites).l,a0
+                getPointer p_pt_Weaponsprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF2000_LOADING_SPACE).l,a1
@@ -405,7 +409,7 @@ LoadWeaponsprite:
 
 LoadBattlesceneGroundToVram:
                 
-                movea.l (p_pt_Grounds).l,a0
+                getPointer p_pt_Grounds, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
@@ -429,7 +433,8 @@ LoadBattlesceneGroundToVram:
 
 LoadAllyBattlespriteFrame:
                 
-                movea.l (p_pt_AllyBattlesprites).l,a0
+                disableSramAndSwitchRomBanks
+                getPointer p_pt_AllyBattlesprites, a0
                 move.w  ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
@@ -445,7 +450,7 @@ loc_19AD6:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
-                jmp     (LoadStackCompressedData).w
+                loadCompressedDataRestoreRomBanksAndEnableSram
 
     ; End of function LoadAllyBattlespriteFrame
 
@@ -457,7 +462,7 @@ LoadNewAllyBattlesprite:
                 
                 move.w  d1,-(sp)
                 move.w  d0,-(sp)
-                movea.l (p_pt_AllyBattlesprites).l,a0
+                getPointer p_pt_AllyBattlesprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -489,7 +494,8 @@ LoadNewAllyBattlesprite:
 
 LoadEnemyBattlespriteFrame:
                 
-                movea.l (p_pt_EnemyBattlesprites).l,a0
+                disableSramAndSwitchRomBanks
+                getPointer p_pt_EnemyBattlesprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -498,7 +504,7 @@ LoadEnemyBattlespriteFrame:
                 move.w  (a0),d0
                 adda.w  d0,a0
                 lea     (FF8804_LOADING_SPACE).l,a1
-                jmp     (LoadStackCompressedData).w
+                loadCompressedDataRestoreRomBanksAndEnableSram
 
     ; End of function LoadEnemyBattlespriteFrame
 
@@ -513,7 +519,7 @@ LoadNewEnemyBattlesprite:
                 cmpi.w  #-1,d0
                 beq.w   @Return
                 
-                movea.l (p_pt_EnemyBattlesprites).l,a0
+                getPointer p_pt_EnemyBattlesprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #6,a0
@@ -545,7 +551,7 @@ LoadBattlesceneBackground:
                 tst.w   d0
                 bmi.s   @Return
                 
-                movea.l (p_pt_Backgrounds).l,a2
+                getPointer p_pt_Backgrounds, a2
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a2,d0.w),a2
                 move.w  (a2)+,d0        ; tileset 1 offset
@@ -587,7 +593,7 @@ LoadBattlesceneBackground:
 
 LoadBattlesceneGround:
                 
-                movea.l (p_pt_Grounds).l,a0
+                getPointer p_pt_Grounds, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
@@ -609,7 +615,8 @@ LoadBattlesceneGround:
 
 LoadInvocationSpriteFrameToVram:
                 
-                movea.l (p_pt_InvocationSprites).l,a0
+                disableSram
+                getPointer p_pt_InvocationSprites, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.l  a0,-(sp)
@@ -669,7 +676,7 @@ loc_19C58:
 loc_19CA0:
                 
                 movea.l (sp)+,a0
-                rts
+                enableSramAndReturn
 
     ; End of function LoadInvocationSpriteFrameToVram
 
@@ -681,7 +688,8 @@ loc_19CA0:
 
 LoadSpellGraphics:
                 
-                movea.l (p_pt_SpellGraphics).l,a0
+                disableSram
+                getPointer p_pt_SpellGraphics, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0
@@ -697,8 +705,7 @@ LoadSpellGraphics:
                 lea     ($A400).l,a1
                 lsr.w   #1,d0
                 moveq   #2,d1
-                jsr     (ApplyVIntVramDmaOnCompressedTiles).w
-                jmp     (WaitForDmaQueueProcessing).w
+                processDmaAndEnableSram ApplyVIntVramDmaOnCompressedTiles
 
     ; End of function LoadSpellGraphics
 
@@ -712,7 +719,8 @@ LoadSpellGraphics:
 
 LoadSpellGraphicsForInvocation:
                 
-                movea.l (p_pt_SpellGraphics).l,a0
+                disableSram
+                getPointer p_pt_SpellGraphics, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0        ; load bytes 0-1
@@ -731,8 +739,7 @@ LoadSpellGraphicsForInvocation:
                 lea     ($F000).l,a1
                 move.w  #$300,d0
                 moveq   #2,d1
-                jsr     (ApplyVIntVramDma).w
-                jmp     (WaitForDmaQueueProcessing).w
+                processDmaAndEnableSram ApplyVIntVramDma
 
     ; End of function LoadSpellGraphicsForInvocation
 

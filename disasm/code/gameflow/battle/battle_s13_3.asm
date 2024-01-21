@@ -87,7 +87,7 @@ InitializeAllEnemiesBattlePositions:
 InitializeEnemyBattlePosition:
                 
                 movem.l d0-a6,-(sp)
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 move.b  (a0),d1
                 cmpi.b  #BATTLE_TO_MOUN,d1
                 bne.s   loc_1B132E
@@ -199,14 +199,24 @@ InitializeEnemyStats:
                 bsr.w   UpgradeRandomBattleEnemies
                 move.w  d1,d6           ; d1.w, d6.w = upgraded enemy index
                 mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
+            if (STANDARD_BUILD=1)
+                getPointer p_table_EnemyDefinitions, a1
+            else
                 lea     table_EnemyDefinitions(pc), a1
+            endif
                 adda.w  d1,a1
                 move.l  a0,-(sp)
                 jsr     j_GetCombatantEntryAddress_0
                 moveq   #13,d7
 @Loop:
                 
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.l  (a1)+,d1
+                movep.l d1,0(a0)
+                addq.w  #8,a0
+            else
                 move.l  (a1)+,(a0)+
+            endif
                 dbf     d7,@Loop
                 
                 movea.l (sp)+,a0
@@ -370,12 +380,85 @@ loc_1B15A4:
 ; =============== S U B R O U T I N E =======================================
 
 ; Adjust enemy base ATT according to difficulty.
-; 
+; If DIFFICULTY_FACTORS is enabled, adjust DEF and AGI as well.
+;
 ;   In: d0.b = combatant index
 
 
 AdjustEnemyBaseAttForDifficulty:
                 
+            if (STANDARD_BUILD&DIFFICULTY_FACTORS=1)
+                
+@capEnemyStat:  macro
+                cmpi.w #255,d1
+                ble.s  @Continue\@
+                move.w #255,d1
+@Continue\@:
+                endm
+                
+                move.l  d1,-(sp)
+                jsr     GetDifficulty
+                beq.w   @Done                   ; no adjustments if Normal Difficulty
+
+                ; Hard Difficulty
+                jsr     GetBaseATT
+                mulu.w  #NORMAL_TO_HARD_ATT,d1  ; default: base ATT * 1.25
+                lsr.w   #2,d1
+                @capEnemyStat
+                jsr     SetBaseATT
+                jsr     GetBaseDEF
+                mulu.w  #NORMAL_TO_HARD_DEF,d1  ; default: base DEF * 1
+                lsr.w   #2,d1
+                @capEnemyStat
+                jsr     SetBaseDEF
+                jsr     GetBaseAGI
+                mulu.w  #NORMAL_TO_HARD_AGI,d1  ; default: base AGI * 1
+                lsr.w   #2,d1
+                @capEnemyStat
+                jsr     SetBaseAGI
+                jsr     GetDifficulty
+                cmpi.w  #DIFFICULTY_HARD,d1
+                beq.w   @Done
+                
+                ; Super Difficulty
+                jsr     GetBaseATT
+                mulu.w  #HARD_TO_SUPER_ATT,d1   ; default: base ATT * 1.25
+                lsr.w   #2,d1
+                @capEnemyStat
+                jsr     SetBaseATT
+                jsr     GetBaseDEF
+                mulu.w  #HARD_TO_SUPER_DEF,d1   ; default: base DEF * 1
+                lsr.w   #2,d1
+                @capEnemyStat
+                jsr     SetBaseDEF
+                jsr     GetBaseAGI
+                mulu.w  #HARD_TO_SUPER_AGI,d1   ; default: base AGI * 1
+                lsr.w   #2,d1
+                @capEnemyStat
+                jsr     SetBaseAGI
+                jsr     GetDifficulty
+                cmpi.w  #DIFFICULTY_SUPER,d1
+                beq.s   @Done
+
+                ; Ouch Difficulty
+                jsr     GetBaseATT
+                mulu.w  #SUPER_TO_OUCH_ATT,d1   ; default: base ATT * 1
+                lsr.w   #2,d1
+                @capEnemyStat
+                jsr     SetBaseATT
+                jsr     GetBaseDEF
+                mulu.w  #SUPER_TO_OUCH_DEF,d1   ; default: base DEF * 1
+                lsr.w   #2,d1
+                @capEnemyStat
+                jsr     SetBaseDEF
+                jsr     GetBaseAGI
+                mulu.w  #SUPER_TO_OUCH_AGI,d1   ; default: base AGI * 1.5
+                lsr.w   #2,d1
+                @capEnemyStat
+                jsr     SetBaseAGI
+@Done:          move.l  (sp)+,d1
+                rts
+            else
                 move.l  d1,-(sp)
                 jsr     j_GetDifficulty
                 cmpi.w  #DIFFICULTY_SUPER,d1 ; pointless comparison
@@ -403,6 +486,7 @@ AdjustEnemyBaseAttForDifficulty:
                 
                 move.l  (sp)+,d1
                 rts
+            endif
 
     ; End of function AdjustEnemyBaseAttForDifficulty
 
@@ -454,10 +538,14 @@ GetBattleSpritesetSubsection:
                 move.b  d1,d2
                 clr.w   d1
                 clr.w   d0
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d0
+                getSavedByte CURRENT_BATTLE, d0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
+            if (STANDARD_BUILD=1)
+                getPointer p_pt_BattleSpritesets, a0
+            else
                 lea     pt_BattleSpritesets(pc), a0
                 nop
+            endif
                 movea.l (a0,d0.w),a0
                 tst.b   d2
                 beq.w   @ReturnInfo     ; 0 = Section sizes
@@ -614,7 +702,7 @@ IsBattleUpgradable:
                 
                 movem.l d0/d2-a6,-(sp)
                 clr.w   d1              ; clear d1 for "false"
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 clr.w   d7
                 move.b  (a0),d7         ; d7 contains battle index
                 clr.w   d6
@@ -636,7 +724,7 @@ IsBattleUpgradable:
                 bra.w   @Done
 @Next:
                 
-                dbf     d6,@Loop        
+                dbf     d6,@Loop
 @Done:
                 
                 movem.l (sp)+,d0/d2-a6
@@ -653,7 +741,7 @@ IsBattleUpgradable:
 UpgradeBattle:
                 
                 movem.l d0-a6,-(sp)
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 move.b  (a0),d7
                 lea     list_RandomBattles(pc), a1
                 nop
@@ -690,7 +778,7 @@ UpgradeBattle:
 DetermineBattleUpgrade:
                 
                 movem.l d0/d2-a6,-(sp)
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 move.b  (a0),d7
                 lea     list_RandomBattles(pc), a1
                 nop
@@ -757,7 +845,11 @@ UpgradeRandomBattleEnemies:
                 ; Get pointer to enemy upgrade data based on move type -> A0
                 move.b  d5,d1
                 mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
+            if (STANDARD_BUILD=1)
+                getPointer p_table_EnemyDefinitions, a1
+            else
                 lea     table_EnemyDefinitions(pc), a1
+            endif
                 adda.w  d1,a1
                 move.b  ENEMYDEF_OFFSET_MOVETYPE(a1),d2
                 lsr.w   #NIBBLE_SHIFT_COUNT,d2 ; shift movetype upper nibble to lower position
@@ -859,7 +951,7 @@ UpgradeRandomBattleEnemies:
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d2
 @Continue:
                 
-                lea     ((CURRENT_BATTLE-$1000000)).w,a1
+                loadSavedDataAddress CURRENT_BATTLE, a1
                 clr.w   d1
                 move.b  (a1),d1
                 sub.w   d1,d2           ; subtract battle index from Bowie's effective level

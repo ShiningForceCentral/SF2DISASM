@@ -110,8 +110,12 @@ sub_D430:
 
     ; End of function sub_D430
 
+            if (STANDARD_BUILD&SUPPORT_AI_ENHANCEMENTS=1)
+                include "code\gameflow\battle\battlefield\populateprioritieslistsforspells-aienhancements.asm"
+            else
 
 ; =============== S U B R O U T I N E =======================================
+
 
 ; AI: cast ATTACK spell
 
@@ -415,6 +419,7 @@ PopulatePrioritiesListForSpell_Muddle2:
 
     ; End of function PopulatePrioritiesListForSpell_Muddle2
 
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -10,7 +10,7 @@
 GetEgressPositionForBattle:
                 
                 clr.b   d7
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d7
+                getSavedByte CURRENT_BATTLE, d7
                 cmpi.b  #BATTLE_VERSUS_GESHP,d7
                 bne.s   loc_23E60
                 clrFlg  438             ; Battle 38 unlocked - BATTLE_VERSUS_GESHP              
@@ -51,7 +51,7 @@ loc_23E9A:
                 bra.w   loc_23EAA
 loc_23EA6:
                 
-                move.b  ((EGRESS_MAP-$1000000)).w,d0
+                getSavedByte EGRESS_MAP, d0
 loc_23EAA:
                 
                 jsr     (GetSavepointForMap).w

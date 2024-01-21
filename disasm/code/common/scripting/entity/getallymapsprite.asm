@@ -16,7 +16,7 @@ GetAllyMapsprite:
 @IsCurrentlyInBattle:
                 
                 movem.w d1,-(sp)
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   @IsNpcSprite
                 
                 ; Check if ally is alive

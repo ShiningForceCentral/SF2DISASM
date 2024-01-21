@@ -1,0 +1,65 @@
+22.09.2014 krikzz.com
+Please check ssf-ex-sample for details
+
+Extensions:
+1) Mapper allow to use up to 16 or 32 Mbyte of memory (Depends from installed memory chip)
+2) Write acces to ROM memory. ROM memory can be used as RAM
+3) First bank can be switched like any other bank
+4) Oboard Led control
+5) Hardware division and multiplication
+6) Access to USB IO
+7) Access to SD IO
+
+registers:
+
+Math registers for division or multiplication. Can operate with 16 or 32 bit number. Unsigned values.*
+0xA130D0 MATH_ARG_HI read/write
+0xA130D2 MATH_ARG_LO read/write
+0xA130D4 MATH_MUL_HI write only
+0xA130D6 MATH_MUL_LO write only
+0xA130D8 MATH_DIV_HI write only
+0xA130DA MATH_DIV_LO write only
+ Mul result = MATH_ARG * MATH_MUL
+ Div result = MATH_ARG / MATH_DIV
+ First should be written MATH_ARG, then MATH_MUL or MATH_DIV. Read result from MATH_ARG. Check ssf-ex-sample for more details
+*Math registers were removed in last OS version due the lack of space for SMS FM core.
+
+SD card
+0xA130E0 [DDDDDDDD dddddddd]  read/write
+ d lo data bits
+ D hi data bits (active only in 16bit mode)
+ 
+USB IO
+0xA130E2 [........ DDDDDDDD] read/write
+ D data bits
+
+IO status
+0xA130E4 [.C...... .....RWS] read only
+ S SPI controller ready
+ W USB fifo ready to write
+ R USB fifo ready to read
+ C SD card type. 0=SD, 1=SDHC
+
+IO config
+0xA130E6 [........ .....AMS] write only
+ S Directly connected to SD card chip select
+ M 16bit SPI mode
+ A Auto read. Allow to read data from SPI without writing. Should be used in pair with 16bit mode
+ 
+Mapper control
+0xA130F0 [PXWL.... ...RRRRR] write only
+  P is a protection bit. Bit P always should be set for any manipulations with reg 0xA130F0 (0=access to register is deny, 1=new value can be loaded)
+  X 32x mode. Should be set in case if game use 32x
+  W ROM memory write protect (0=not writable, 1=writable)
+  L LED (0=off, 1=on)
+  R 512Kbyte bank
+ 
+
+0xA130F2-0xA130FE [........ ...RRRRR] write only
+   R 512Kbyte bank
+
+Mapper will be activated in case if ROM header contains "SEGA SSF" string, instead of standard "SEGA GENESIS" string.
+
+Banks 30-31 used by OS, not recommended to touch them, otherwise OS may not boot after reset, in this case OS will start only after cold start.
+
+Bank 31 can be used for saves. Upper 256K of this bank mapped to battery SRAM.

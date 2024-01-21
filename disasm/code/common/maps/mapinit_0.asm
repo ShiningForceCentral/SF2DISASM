@@ -12,7 +12,11 @@
 SwitchMap:
                 
                 movem.l d1-d2/a0,-(sp)
+            if (STANDARD_BUILD=1)
+                getPointer p_table_FlagSwitchedMaps, a0
+            else
                 lea     table_FlagSwitchedMaps(pc), a0
+            endif
 @Loop:
                 
                 move.w  (a0),d2

@@ -98,8 +98,11 @@ StartTitleScreen:
                 lea     (PALETTE_1_BASE).l,a1
                 move.w  #128,d7
                 jsr     (CopyBytes).w   
-                
+            if (STANDARD_BUILD=1)
+                bsr.w   LoadTitleScreenFont
+            else
                 jsr     j_LoadTitleScreenFont
+            endif
                 
                 ; Load "TM" sprite
                 move.l  #$AE0405,(SPRITE_TRADEMARK).l

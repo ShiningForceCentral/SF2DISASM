@@ -174,7 +174,11 @@ DeclareNewEntity:
                 move.w  (sp)+,d0
                 move.w  d1,(a0)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a0)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                clr.w   ENTITYDEF_OFFSET_XVELOCITY(a0)
+            else
                 clr.l   ENTITYDEF_OFFSET_XVELOCITY(a0)
+            endif
                 clr.l   ENTITYDEF_OFFSET_XTRAVEL(a0)
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
@@ -183,7 +187,11 @@ DeclareNewEntity:
                 swap    d6
                 move.b  d6,ENTITYDEF_OFFSET_LAYER(a0)
                 swap    d6
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+            else
                 move.b  d4,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+            endif
                 tst.l   d5
                 bpl.s   @loc_3
                 move.l  (ENTITY_WALKING_PARAMETERS).l,-(sp)
@@ -369,20 +377,24 @@ PositionBattleEntities:
                 swap    d6
                 movem.w (sp)+,d0-d1
                 
-                andi.w  #$3F,d1
+                andi.w  #$3F,d1 
                 muls.w  #MAP_TILE_SIZE,d1
-                andi.w  #$3F,d2
+                andi.w  #$3F,d2 
                 muls.w  #MAP_TILE_SIZE,d2
                 moveq   #3,d3
                 move.l  #eas_Standing,d5
                 bsr.w   GetCombatantMapsprite
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
+            else
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d4
+            endif
                 bcs.s   @RegularSprite
                 
                 ; Enemy uses a special sprite
                 move.w  d0,-(sp)
-                move.w  #ENTITY_SPECIAL_SPRITE,d0
-                move.w  #ENTITY_ENEMY_START,d6
+                move.w  #ENTITY_SPECIAL_SPRITE,d0 
+                move.w  #ENTITY_ENEMY_START,d6 
                 bsr.w   DeclareNewEntity
                 move.b  d0,(a1)+
                 move.w  (sp)+,d0
@@ -403,16 +415,20 @@ PositionBattleEntities:
                 dbf     d7,@PositionEnemies_Loop
                 
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 jsr     j_CheckFlag
                 bne.w   @Done
                 
                 ; Position neutral entities
+            if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
+                lea     ((ENTITY_EVENT_ENEMY_END-$1000000)).w,a1
+            else
                 lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
+            endif
                 lea     table_NeutralBattleEntities(pc), a0
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
 @loc_12:
                 
                 cmpi.w  #-1,(a0)
@@ -421,9 +437,17 @@ PositionBattleEntities:
                 beq.s   @Continue
 @loc_13:
                 
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                adda.w  #BATTLE_NEUTRAL_ENTITY_SIZE,a0
+                cmpi.w  #-1,(a0)
+                bne.s   @loc_13
+                cmp.w   (a0)+,d1
+                bra.s   @loc_12
+            else
                 cmpi.w  #-1,(a0)+
                 beq.s   @loc_12
                 bra.s   @loc_13
+            endif
 @Continue:
                 
                 move.w  #159,battleEntity(a6)
@@ -449,13 +473,19 @@ PositionBattleEntities:
                 jsr     j_SetCombatantY
                 move.w  (sp)+,d0
                 move.w  d3,d1
-                andi.w  #$3F,d1
+                andi.w  #$3F,d1 
                 muls.w  #MAP_TILE_SIZE,d1
-                andi.w  #$3F,d2
+                andi.w  #$3F,d2 
                 muls.w  #MAP_TILE_SIZE,d2
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  (a0)+,d3
+                clr.w   d4
+                move.w  (a0)+,d4
+            else
                 move.b  (a0)+,d3
                 clr.w   d4
                 move.b  (a0)+,d4
+            endif
                 move.l  (a0)+,d5
                 clr.l   d6
                 move.w  d0,d6

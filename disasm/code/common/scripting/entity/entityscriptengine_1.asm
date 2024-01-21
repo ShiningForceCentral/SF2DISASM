@@ -172,9 +172,12 @@ loc_4E0A:
                 
                 jsr     j_UpdateSpritesHelper
 loc_4E10:
-                
+            if (STANDARD_BUILD=1)
+                bra.s   sub_4E24
+            else
                 bsr.w   sub_4E24
                 rts
+            endif
 
     ; End of function VInt_UpdateSprites
 

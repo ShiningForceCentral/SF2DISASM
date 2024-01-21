@@ -298,6 +298,7 @@ loc_1CC0:
                 
                 add.w   d0,d0
                 dbcs    d5,loc_1CB8
+                
                 addi.w  #$20,d5 
                 add.w   d5,d1
                 move.w  d1,(a1)+
@@ -693,7 +694,7 @@ word_1F4C:
                 
                 dc.w $CD44              ; bit sequence 01, d7 = xxx1
                                         ;  exg     d6,d4
-                dc.w $DE44              ;  add.w   d4,d7
+                add.w    d4,d7           
                 dbf     d3,loc_1F30     
                 
                 bra.w   loc_2040        
@@ -715,7 +716,7 @@ loc_1F68:
                 
                 exg     d6,a3           ; bit sequence 100, d7 = xxx2
                 dc.w $CD44              ; exg     d6,d4
-                dc.w $DE44              ; add.w   d4,d7
+                add.w    d4,d7           
                 dbf     d3,loc_1F30     
                 
                 bra.w   loc_2040        
@@ -729,9 +730,9 @@ word_1F7E:
                 
                 dc.w $C94B              ; bit sequence 101, d7 = xxx3
                                         ; exg     a4,a3
-                dc.w $CD8B              ; exg     d6,a3
+                exg        d6,a3           
                 dc.w $CD44              ; exg     d6,d4
-                dc.w $DE44              ; add.w   d4,d7
+                add.w    d4,d7           
                 dbf     d3,loc_1F30     
                 
                 bra.w   loc_2040        
@@ -880,6 +881,7 @@ loc_2068:
                                         ; relative offset of section to copy,
                                         ; in words back from current output position
                 dbeq    d5,loc_2068
+                
                 beq.s   loc_2076
                 addx.w  d1,d1           ; 11th bit
                 bra.s   loc_2082

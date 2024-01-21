@@ -142,6 +142,7 @@ ExecuteAiCommand_Heal:
                 move.b  caster(a6),d0
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyTargets   
+                
                 clr.w   d0              ; if ally (aka force member), highest priority target to heal is Bowie
                 move.w  #COMBATANT_ALLIES_COUNTER,d4 ; check the first 30 force members whether they need healing (this is only for when AI controls the force member)
                 bra.s   @MakeTargetsList_Loop
@@ -327,13 +328,13 @@ ExecuteAiCommand_Heal:
                 ; Check item range
                 clr.w   d1
                 move.b  itemEntry(a6),d1
-                bsr.w   GetItemRange    
-                bra.s   @GetPosition    
+                bsr.w   GetItemRange
+                bra.s   @GetPosition
 @CheckSpellRange:
                 
                 clr.w   d1              ; If no healing items, check the healing spell instead
                 move.b  spellEntry(a6),d1
-                bsr.w   GetSpellRange   
+                bsr.w   GetSpellRange
 @GetPosition:
                 
                 bsr.w   GetCombatantY   ; In: d0 = heal target combatant index; Out: d1 = y position

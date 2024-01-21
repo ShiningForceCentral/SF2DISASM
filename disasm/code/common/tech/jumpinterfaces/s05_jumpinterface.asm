@@ -238,8 +238,9 @@ j_AnimateSpecialSprite:
 
 
 j_EndGame:
-                
+            if (VANILLA_BUILD=1)
                 jmp     EndGame(pc)
+            endif
 
     ; End of function j_EndGame
 
@@ -248,8 +249,9 @@ j_EndGame:
 
 
 j_SuspendGame:
-                
+            if (VANILLA_BUILD=1)
                 jmp     SuspendGame(pc)
+            endif
 
     ; End of function j_SuspendGame
 

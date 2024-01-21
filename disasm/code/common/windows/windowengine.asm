@@ -20,7 +20,7 @@ InitializeWindowProperties:
                 move.w  (sp)+,d7
                 movea.l (sp)+,a0
                 clr.b   ((WINDOW_IS_PRESENT-$1000000)).w
-                cmpi.b  #MAP_CURRENT,((CURRENT_MAP-$1000000)).w
+                checkSavedByte #MAP_CURRENT, CURRENT_MAP
                 beq.s   @Continue
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 @Continue:
@@ -60,7 +60,7 @@ FindFreeWindowSlot_Loop:
                 
                 movea.l ((WINDOW_LAYOUTS_END_POINTER-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
-                bne.s   @Continue       
+                bne.s   @Continue
                 bsr.w   CopyPlaneALayoutForWindows
 @Continue:
                 
@@ -150,7 +150,7 @@ FixWindowsPositions:
 
 
 sub_48BE:
-                
+            if (VANILLA_BUILD=1)
                 move.l  a0,-(sp)
                 move.w  d0,-(sp)
                 bsr.w   GetWindowEntryAddress
@@ -158,6 +158,7 @@ sub_48BE:
                 move.w  (sp)+,d0
                 movea.l (sp)+,a0
                 rts
+            endif
 
     ; End of function sub_48BE
 

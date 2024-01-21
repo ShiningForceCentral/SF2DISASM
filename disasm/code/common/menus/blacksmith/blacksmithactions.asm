@@ -85,11 +85,10 @@ ProcessBlacksmithOrders:
                 ; Fulfill orders
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
                 subq.w  #1,d7
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 @FulfillOrders_Loop:
                 
-                move.w  (a0)+,itemIndex(a6)
-                cmpi.w  #0,itemIndex(a6)
+                getSavedMithrilWeaponOrder a0, itemIndex(a6)
                 beq.s   @Next
                 move.w  d7,ordersCounter(a6)
                 addi.w  #1,ordersCounter(a6)
@@ -211,11 +210,8 @@ byte_21B58:
                 jsr     j_AddItem
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d6
                 sub.w   ordersCounter(a6),d6
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a1
-                lsl.w   #1,d6
-                adda.w  d6,a1
-                move.w  (a1),d2
-                move.w  #0,(a1)
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a1
+                clearMithrilWeaponOrder d6, a1
                 addi.w  #1,fulfilledOrdersNumber(a6)
                 move.w  itemIndex(a6),d1
                 move.w  clientMember(a6),d0
@@ -338,6 +334,7 @@ byte_21CDE:
 byte_21D1A:
                 
                 @ProcessOrder:
+                ; Pick customer
                 txt     201             ; "{CLEAR}Whose weapon should I{N}make?{D1}"
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
@@ -471,13 +468,16 @@ CountPendingAndReadyToFulfillOrders:
                 move.w  #1,fulfillOrdersFlag(a6) ; set to fulfill orders if talking to blacksmith for the first time since loading the map
 @Continue:
                 
+            if (STANDARD_BUILD=1)
+                moveq   #BLACKSMITH_ORDERS_COUNTER,d7
+            else
                 move.w  #BLACKSMITH_MAX_ORDERS_NUMBER,d7
                 subq.w  #1,d7
-                lea     ((MITHRIL_WEAPONS_ON_ORDER-$1000000)).w,a0
+            endif
+                loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 @Loop:
                 
-                move.w  (a0)+,d1
-                cmpi.w  #0,d1
+                getSavedMithrilWeaponOrder a0, d1
                 beq.w   @Next
                 cmpi.w  #1,fulfillOrdersFlag(a6)
                 bne.s   @IncrementPlacedOrders

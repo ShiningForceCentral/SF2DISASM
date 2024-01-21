@@ -29,24 +29,24 @@ loc_7428:
                 tst.w   d0
                 bmi.s   byte_73C2       
                 subq.w  #1,d0
-                move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
+                setCurrentSaveSlot d0
                 jsr     j_NewGame
                 clsTxt
                 clr.w   d0
                 jsr     j_NameAlly
                 btst    #7,(SAVE_FLAGS).l ; "Game completed" bit
                 beq.w   byte_7476       
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.w   byte_7476       
                 moveq   #1,d0
-                moveq   #$1B,d7
+                moveq   #COMBATANT_ALLIES_MINUS_PLAYER_AND_CREATURE_COUNTER,d7
 loc_7464:
                 
                 jsr     j_NameAlly
 loc_746A:
                 
                 addq.w  #1,d0
-                cmpi.w  #6,d0
+                cmpi.w  #ALLY_KIWI,d0
                 beq.s   loc_746A
                 dbf     d7,loc_7464
 byte_7476:
@@ -78,9 +78,9 @@ loc_74A8:
                 txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
 loc_74B4:
                 
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
-                move.b  #MAP_GRANSEAL,((CURRENT_MAP-$1000000)).w
-                move.b  #MAP_GRANSEAL,((EGRESS_MAP-$1000000)).w
+                getCurrentSaveSlot d0
+                setSavedByte #MAP_GRANSEAL, CURRENT_MAP
+                setSavedByte #MAP_GRANSEAL, EGRESS_MAP
                 bsr.w   SaveGame
                 clsTxt
                 move.b  #MAP_GRANSEAL,d0 ; HARDCODED new game starting map
@@ -119,7 +119,7 @@ loc_74FE:
                 tst.w   d0
                 bmi.w   byte_73C2       
                 subq.w  #1,d0
-                move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
+                setCurrentSaveSlot d0
                 bsr.w   LoadGame
                 txt     226             ; "{NAME;0}, yes!  I knew it!{W2}"
                 bsr.w   CheatModeConfiguration
@@ -133,10 +133,10 @@ loc_74FE:
 loc_753A:
                 
                 clr.w   d0
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
-                jsr     GetSavePointForMap(pc)
+                getSavedByte CURRENT_MAP, d0
+                jsr     GetSavepointForMap(pc)
                 nop
-                moveq   #$FFFFFFFF,d4
+                moveq   #-1,d4
                 bra.w   loc_75E0        
 
     ; End of function WitchLoad
@@ -149,7 +149,7 @@ WitchCopy:
                 
                  
                 txt     227             ; "Copy?  Really?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 tst.w   d0
                 bne.w   byte_73C2       
                 move.b  (SAVE_FLAGS).l,d0
@@ -186,15 +186,14 @@ loc_7590:
                 tst.w   d0
                 bmi.w   byte_73C2       
                 subq.w  #1,d0
-                move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
+                setCurrentSaveSlot d0
                 txt     230             ; "Delete?  Are you sure?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 tst.w   d0
                 bne.w   byte_73C2       
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                getCurrentSaveSlot d0
                 bsr.w   ClearSaveSlotFlag
                 txt     231             ; "Hee, hee!  It's gone!{W2}"
                 bra.w   byte_73C2       
 
     ; End of function WitchDel
-

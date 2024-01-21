@@ -49,8 +49,11 @@ abcs_battle32:  textCursor 2853
                 setFacing FOLLOWER_B,DOWN
                 nextSingleText $0,FOLLOWER_B ; "{LEADER}, don't you want{N}{NAME;23} to join our{N}force?{W1}"
                 nod ALLY_BOWIE
+            if (STANDARD_BUILD&NO_AI_JARO=1)
+            else
                 join ALLY_JARO
                 joinForceAI ALLY_JARO,$0 ; 0054 JOIN FORCE WITH AI
+            endif
                 entityActionsWait ALLY_JARO
                  moveDown 1
                 endActions

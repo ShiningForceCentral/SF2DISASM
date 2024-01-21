@@ -436,7 +436,7 @@ loc_12D04:
                 cmpi.w  #$7000,d0
                 beq.w   loc_12D6E
                 move.w  var_30(a6),d1
-                bra.w   loc_12D34       
+                bra.w   loc_12D34
 loc_12D26:
                 
                 move.w  (a0),d0
@@ -452,6 +452,16 @@ loc_12D34:
                 add.w   d2,d0
                 add.w   d3,d1
                 move.w  #$E0FE,d4
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                cmpi.w  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                bcs.s   loc_12D5A
+                cmpi.w  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                bhi.s   loc_12D5A
+                subq.w  #1,d4
+loc_12D5A:
+                
+                cmpi.w  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+            else
                 cmpi.b  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.s   loc_12D5A
                 cmpi.b  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
@@ -460,6 +470,7 @@ loc_12D34:
 loc_12D5A:
                 
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+            endif
                 bcs.s   loc_12D64
                 subq.w  #1,d4
 loc_12D64:
@@ -539,8 +550,8 @@ PlayEndingKissSequence:
                 
                 move.b  #-1,(DEACTIVATE_WINDOW_HIDING).l
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                move.w  #$120E,d0
-                move.w  #$707,d1
+                move.w  #$120E,d0    ; window dimensions
+                move.w  #$707,d1    ; window offset
                 jsr     (CreateWindow).w
                 move.w  d0,d4
                 move.w  #$A640,d5
@@ -579,7 +590,7 @@ loc_12E3A:
                 lea     (PALETTE_3_BASE).l,a1
                 move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
-                movea.l (p_palette_EndingKiss).l,a0
+                getPointer p_palette_EndingKiss, a0
                 lea     (PALETTE_2_CURRENT).l,a1
                 move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
@@ -612,7 +623,11 @@ loc_12EB4:
                 move.w  d4,d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
+            if (STANDARD_BUILD=1)
+                bsr.s   DisplayEndingKissPicture
+            else
                 jsr     j_DisplayEndingKissPicture
+            endif
                 move.w  #180,d0
                 jsr     (Sleep).w       
                 move.w  d4,d0
@@ -622,6 +637,7 @@ loc_12EB4:
 
     ; End of function PlayEndingKissSequence
 
+                includeIfStandard "code\specialscreens\endkiss\endkissfunctions_0.asm"    ; End kiss function
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1227,7 +1243,12 @@ sprite_MembersListHighlight:
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 vdpSprite 260, V2|H4|9, 1472|PALETTE3|PRIORITY, 156
+            if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                vdpSprite 260, V2|H1|10, 1474|PALETTE3|PRIORITY, 188
+                vdpSprite 260, V2|H4|11, 1472|MIRROR|PALETTE3|PRIORITY, 196
+            else
                 vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -667,17 +667,29 @@ FinalizeScrollDataUpdate:
                 
                 ; Apply the earthquake effect here
                 addq.w  #1,d6
+            if (STANDARD_BUILD=1)
+                bsr.s   GetRandomValue
+            else
                 bsr.w   GetRandomValue
+            endif
                 add.w   d0,(HORIZONTAL_SCROLL_DATA).l
                 add.w   d0,(HORIZONTAL_SCROLL_DATA+2).l
+            if (STANDARD_BUILD=1)
+                bsr.s   GetRandomValue
+            else
                 bsr.w   GetRandomValue
+            endif
                 add.w   d0,(VERTICAL_SCROLL_DATA).l
                 add.w   d0,(VERTICAL_SCROLL_DATA+2).l
 @Continue:
                 
                 bsr.w   UpdateVdpHScrollData
+            if (STANDARD_BUILD=1)
+                bra.w   UpdateVdpVScrollData
+            else
                 bsr.w   UpdateVdpVScrollData
                 rts
+            endif
 
     ; End of function FinalizeScrollDataUpdate
 
@@ -702,7 +714,7 @@ GetRandomValue:
 
 
 sub_3D96:
-                
+            if (VANILLA_BUILD=1)
                 bsr.w   CopyMapBlocks
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 beq.s   loc_3DA8
@@ -714,6 +726,7 @@ loc_3DA8:
 return_3DAE:
                 
                 rts
+            endif
 
     ; End of function sub_3D96
 
@@ -768,7 +781,7 @@ loc_3DE2:
 
 
 ResetCurrentMap:
-                
+            if (VANILLA_BUILD=1)
                 lea     (FF0000_RAM_START).l,a2
                 move.w  #MAP_LAYOUT_LONGS_COUNTER,d7
 @Clear_Loop:
@@ -785,6 +798,7 @@ ResetCurrentMap:
                 clr.w   d0
                 moveq   #-1,d1          ; reload current map
                 bra.w   LoadMap         
+            endif
 
     ; End of function ResetCurrentMap
 
@@ -797,7 +811,7 @@ ResetCurrentMap:
 OpenDoor:
                 
                 module
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.w   @Return
                 
                 movem.w d0-d7,-(sp)
@@ -811,8 +825,8 @@ OpenDoor:
                 move.b  (a2,d1.w),d1
                 andi.w  #$3F,d1 
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d7
+                getPointer p_pt_MapData, a2
                 lsl.w   #INDEX_SHIFT_COUNT,d7
                 movea.l (a2,d7.w),a2
                 movea.l MAPDATA_OFFSET_EVENT_STEP(a2),a2 ; get map step events
@@ -923,15 +937,19 @@ ToggleRoofOnMapLoad:
                 move.w  ENTITYDEF_OFFSET_Y(a0,d4.w),d5
                 move.w  (a0,d4.w),d4
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
-                movea.l (p_pt_MapData).l,a0
+                getSavedByte CURRENT_MAP, d1
+                getPointer p_pt_MapData, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a0,d1.w),a0
                 movea.l MAPDATA_OFFSET_EVENT_ROOF(a0),a0
 @Loop:
                 
                 tst.b   (a0)
+            if (STANDARD_BUILD=1)
+                bmi.s   @Done
+            else
                 bmi.w   @Done
+            endif
                 
                 move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d2
                 ext.l   d2
@@ -958,6 +976,15 @@ ToggleRoofOnMapLoad:
                 mulu.w  #MAP_TILE_SIZE,d2
                 mulu.w  #MAP_TILE_SIZE,d3
                 cmp.w   d0,d4
+            if (STANDARD_BUILD=1)
+                blt.s   @Next
+                cmp.w   d1,d5
+                blt.s   @Next
+                cmp.w   d2,d4
+                bgt.s   @Next
+                cmp.w   d3,d5
+                ble.s   @Break
+            else
                 blt.w   @Next
                 cmp.w   d1,d5
                 blt.w   @Next
@@ -966,6 +993,7 @@ ToggleRoofOnMapLoad:
                 cmp.w   d3,d5
                 bgt.w   @Next
                 bra.w   @Break
+            endif
 @Next:
                 
                 addq.l  #8,a0
@@ -978,7 +1006,11 @@ ToggleRoofOnMapLoad:
                 clr.w   d1
                 move.b  1(a0),d1        ; get y trigger coord of block copy script
                 mulu.w  #MAP_TILE_SIZE,d1
+            if (STANDARD_BUILD=1)
+                bsr.s   PerformMapBlockCopyScript
+            else
                 bsr.w   PerformMapBlockCopyScript
+            endif
 @Done:
                 
                 movem.l (sp)+,d0-a1
@@ -1007,8 +1039,8 @@ PerformMapBlockCopyScript:
                 move.b  (a3,d1.w),d1
                 andi.w  #$3F,d1 
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d7
+                getPointer p_pt_MapData, a2
                 lsl.w   #INDEX_SHIFT_COUNT,d7
                 movea.l (a2,d7.w),a2
                 movea.l MAPDATA_OFFSET_EVENT_ROOF(a2),a2
@@ -1287,12 +1319,16 @@ RefillNonChestItem:
 GetChestItem:
                 
                 clr.w   d2
-                move.b  ((CURRENT_MAP-$1000000)).w,d2
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d2
+                getPointer p_pt_MapData, a2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
                 movea.l (a2,d2.w),a2    ; a2 points to current map data
                 movea.l MAPDATA_OFFSET_ITEM_CHEST(a2),a2 ; get address of current map's chest item data
+            if (STANDARD_BUILD=1)
+                bra.s   GetItem
+            else
                 bra.w   GetItem
+            endif
 
     ; End of function GetChestItem
 
@@ -1303,8 +1339,8 @@ GetChestItem:
 GetNonChestItem:
                 
                 clr.w   d2
-                move.b  ((CURRENT_MAP-$1000000)).w,d2
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d2
+                getPointer p_pt_MapData, a2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
                 movea.l (a2,d2.w),a2
                 movea.l MAPDATA_OFFSET_ITEM_OTHER(a2),a2 ; get address of current map's non-chest item data
@@ -1321,13 +1357,21 @@ GetItem:
                 move.w  d0,d4           ; save d0 and d1
                 move.w  d1,d5
                 clr.w   d2
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d2
+                getSavedByte CURRENT_BATTLE, d2
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,d2
+            if (STANDARD_BUILD=1)
+                beq.s   @Start
+            else
                 beq.w   @Start
+            endif
                 
                 ; Currently in battle
                 movem.l a0,-(sp)
+            if (STANDARD_BUILD=1)
+                getPointer p_table_BattleMapCoordinates, a0
+            else
                 lea     (table_BattleMapCoordinates).w,a0
+            endif
                 mulu.w  #BATTLEMAPCOORDINATES_ENTRY_SIZE,d2 ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
                 add.b   1(a0,d2.w),d0
                 add.b   2(a0,d2.w),d1   ; add x1 and y1 of battle camera bounds
@@ -1335,12 +1379,23 @@ GetItem:
 @Start:
                 
                 tst.b   (a2)
+            if (STANDARD_BUILD=1)
+                bmi.s   @OutOfBounds
+            else
                 bmi.w   @OutOfBounds    ; if negative, then value > map max coord, so value = $FF : end of data
+            endif
                 
+            if (STANDARD_BUILD=1)
+                cmp.b   (a2),d0
+                bne.s   @NextItem
+                cmp.b   1(a2),d1
+                bne.s   @NextItem   
+            else
                 cmp.b   (a2),d0
                 bne.w   @NextItem       ; test coords
                 cmp.b   1(a2),d1
                 bne.w   @NextItem       
+            endif
                 move.w  d4,d0           ; get back original coords
                 move.w  d5,d1
                 andi.w  #$3F,d1 
@@ -1352,12 +1407,19 @@ GetItem:
                 move.b  2(a2),d1        ; item flag
                 clr.w   d2
                 move.b  3(a2),d2        ; item index
+            if (STANDARD_BUILD=1)
+                bra.s   @Continue
+            else
                 bra.w   @Continue
+            endif
 @OutOfBounds:
                 
                 moveq   #-1,d0
                 move.w  d0,d1
                 move.w  d0,d2
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                andi.b  #ITEM_NOTHING,d2
+            endif
 @Continue:
                 
                 lea     (FF0000_RAM_START).l,a2
@@ -1383,25 +1445,37 @@ WarpIfSetAtPoint:
                 divs.w  #MAP_TILE_SIZE,d0
                 divs.w  #MAP_TILE_SIZE,d1
                 clr.w   d7
-                move.b  ((CURRENT_MAP-$1000000)).w,d7
-                movea.l (p_pt_MapData).l,a2
+                getSavedByte CURRENT_MAP, d7
+                getPointer p_pt_MapData, a2
                 lsl.w   #INDEX_SHIFT_COUNT,d7
                 movea.l (a2,d7.w),a2
                 movea.l MAPDATA_OFFSET_EVENT_WARP(a2),a2
 loc_4302:
                 
                 cmpi.w  #-1,(a2)
+            if (STANDARD_BUILD=1)
+                beq.s   @Done
+            else
                 beq.w   @Done
+            endif
                 tst.b   (a2)
                 blt.s   loc_4314
                 cmp.b   (a2),d0
+            if (STANDARD_BUILD=1)
+                bne.s   @NextPoint
+            else
                 bne.w   @NextPoint
+            endif
 loc_4314:
                 
                 tst.b   1(a2)
                 blt.s   loc_4322
                 cmp.b   1(a2),d1
+            if (STANDARD_BUILD=1)
+                bne.s   @NextPoint
+            else
                 bne.w   @NextPoint
+            endif
 loc_4322:
                 
                 move.w  #MAP_EVENT_WARP,((MAP_EVENT_TYPE-$1000000)).w
@@ -1442,7 +1516,11 @@ UpdateVdpPlaneA:
                 move.w  ((VIEW_PLANE_A_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_A_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
+            if (STANDARD_BUILD=1)
+                bsr.s   UpdateVdpPlane
+            else
                 bsr.w   UpdateVdpPlane
+            endif
                 movea.l ((WINDOW_LAYOUTS_END_POINTER-$1000000)).w,a1
                 cmpa.l  #WINDOW_TILE_LAYOUTS,a1
                 bne.s   @Done
@@ -1482,7 +1560,11 @@ UpdateVdpPlaneB:
                 move.w  ((VIEW_PLANE_B_X_COUNTER-$1000000)).w,d2
                 move.w  ((VIEW_PLANE_B_Y_COUNTER-$1000000)).w,d3
                 lea     (PLANE_B_LAYOUT).l,a1
+            if (STANDARD_BUILD=1)
+                bsr.s   UpdateVdpPlane
+            else
                 bsr.w   UpdateVdpPlane
+            endif
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1    ; Update VDP Plane B layout data
                 move.w  #$400,d0
@@ -1568,10 +1650,14 @@ loc_4496:
                 addi.w  #64,d3
                 bclr    #11,d3
                 addq.w  #1,d1
-                dbf     d7,loc_4434
+                dbf     d7,loc_4434           
                 
+            if (STANDARD_BUILD=1)
+                bra.w   FinalizeScrollDataUpdate
+            else
                 bsr.w   FinalizeScrollDataUpdate
                 rts
+            endif
 loc_44B4:
                 
                 moveq   #32,d7

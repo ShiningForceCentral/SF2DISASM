@@ -366,6 +366,9 @@ csc07_warp:
 csc08_joinForce:
                 
                 move.w  #0,((SPEECH_SFX-$1000000)).w
+            if (MUSIC_RESUMING&RESUME_MUSIC_AFTER_JOIN_JINGLE=1)
+                activateMusicResuming
+            endif
                 jsr     (WaitForViewScrollEnd).w
                 move.w  (a6)+,d0
                 bclr    #15,d0
@@ -396,6 +399,9 @@ loc_473EC:
                 
                 jsr     j_FadeOut_WaitForP1Input
                 clsTxt
+            if (MUSIC_RESUMING&RESUME_MUSIC_AFTER_JOIN_JINGLE=1)
+                deactivateMusicResuming
+            endif
                 moveq   #10,d0
                 jsr     (Sleep).w       
                 rts
@@ -632,7 +638,7 @@ csc13_setStoryFlag:
 sub_474EE:
                 
                 moveq   #0,d0
-                move.b  #MAP_GALAM_CASTLE_INNER,((CURRENT_MAP-$1000000)).w
+                setSavedByte #MAP_GALAM_CASTLE_INNER, CURRENT_MAP
                 bsr.w   RunMapSetupEntityEvent
                 rts
 

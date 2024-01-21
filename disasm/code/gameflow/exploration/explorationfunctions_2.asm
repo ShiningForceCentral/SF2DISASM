@@ -8,6 +8,9 @@
 ExplorationLoop:
                 
                 clr.w   ((MAP_EVENT_TYPE-$1000000)).w
+            if (MUSIC_RESUMING=1)
+                activateMusicResuming
+            endif
                 subi.w  #20000,((word_FFB196-$1000000)).w
                 bge.s   loc_257D0
                 clr.w   ((word_FFB196-$1000000)).w
@@ -21,11 +24,11 @@ loc_257D0:
                 cmpi.b  #-1,d0
                 beq.s   @MapIndexNotProvided
                 
-                move.b  d0,((CURRENT_MAP-$1000000)).w
-                move.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte d0, CURRENT_MAP
+                setSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 movem.w d1-d3,-(sp)
                 clr.w   d1
-                move.b  ((CURRENT_MAP-$1000000)).w,d1
+                getSavedByte CURRENT_MAP, d1
                 jsr     (LoadMapTilesets).w
                 movem.w (sp)+,d1-d3
                 bsr.w   WaitForFadeToFinish
@@ -54,7 +57,11 @@ loc_25836:
                 move.l  (PALETTE_1_BASE_02).l,d0
                 cmp.l   (PALETTE_1_CURRENT_02).l,d0
                 beq.s   loc_2586A       
+            if (STANDARD_BUILD=1)
+                bsr.w   PlayMapMusic
+            else
                 jsr     (PlayMapMusic).w
+            endif
                 jsr     (FadeInFromBlack).w
 loc_2586A:
                 
@@ -269,7 +276,7 @@ loc_259CC:
                 move.w  #MAP_OVERWORLD_PACALON_2,d0
 @Continue:
                 
-                move.b  d0,((CURRENT_MAP-$1000000)).w
+                setSavedByte d0, CURRENT_MAP
                 moveq   #-1,d0
                 jsr     (ProcessMapTransition).w
                 move.b  ((MAP_EVENT_PARAM_3-$1000000)).w,d0

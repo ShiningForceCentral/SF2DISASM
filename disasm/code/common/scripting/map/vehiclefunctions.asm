@@ -15,7 +15,7 @@ MapEventType2:
                 lea     byte_45316(pc), a1
                 bsr.s   ApplyActscriptToFollowers
                 bsr.s   WaitForFollowersStopped
-                move.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 rts
 
     ; End of function MapEventType2
@@ -75,7 +75,7 @@ MapEventType4:
                 bsr.w   ApplyActscriptToFollowers
                 bsr.w   WaitForFollowersStopped
                 jsr     InitializeFollowerActscripts
-                move.b  #PLAYERTYPE_BOWIE,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 rts
 
     ; End of function MapEventType4
@@ -132,7 +132,7 @@ MapEventType3:
                 lea     byte_45434(pc), a1
                 bsr.w   ApplyActscriptToHeroAndFollowers
                 bsr.w   WaitForHeroAndFollowersStopped
-                move.b  #PLAYERTYPE_RAFT,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
 return_453F0:
                 
                 rts
@@ -140,7 +140,7 @@ return_453F0:
     ; End of function MapEventType3
 
 cs_453F2:       setActscriptWait ALLY_BOWIE,eas_4540C
-                setPos 159,64,64,DOWN
+                setPos FOLLOWER_D,64,64,DOWN
                 setActscriptWait ALLY_BOWIE,eas_45426
                 csc_end
 
@@ -157,7 +157,7 @@ eas_4540C:       ac_moveEntFacRelPos 31,0,0
 byte_45414:      ac_wait 6
                  ac_soundCommand SFX_WARP
                  ac_waitDest
-                 ac_clonePos $1F
+                 ac_clonePos ENTITY_RAFT
 word_45422:      ac_branch
                 dc.w (eas_Idle-word_45422) & $FFFF
 eas_45426:       ac_setSprite MAPSPRITE_RAFT
@@ -183,16 +183,16 @@ MapEventType5:
                 bsr.w   ApplyActscriptToHeroAndFollowers
                 bsr.w   WaitForHeroAndFollowersStopped
                 jsr     InitializeFollowerActscripts
-                move.b  #PLAYERTYPE_BOWIE,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 rts
 
     ; End of function MapEventType5
 
-cs_45470:       setActscriptWait 159,eas_45360
+cs_45470:       setActscriptWait FOLLOWER_D,eas_45360
                 setSprite ALLY_BOWIE,ALLY_BOWIE
                 setActscriptWait ALLY_BOWIE,eas_4548C
                 csc_end
-byte_45488:      ac_clonePos $1F        ; ENTITY_UNIT_RAFT
+byte_45488:      ac_clonePos $1F        ; ENTITY_RAFT
 eas_4548C:       ac_moveFacRelPos 0,1
                  ac_soundCommand SFX_WARP
                  ac_waitDest
@@ -249,11 +249,11 @@ sub_454E4:
                 move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
                 ext.l   d0
                 ext.l   d1
-                divs.w  #MAP_TILE_SIZE,d0
-                divs.w  #MAP_TILE_SIZE,d1
-                move.b  ((CURRENT_MAP-$1000000)).w,((RAFT_MAP-$1000000)).w
-                move.b  d0,((RAFT_X-$1000000)).w
-                move.b  d1,((RAFT_Y-$1000000)).w
+                divs.w  #$180,d0
+                divs.w  #$180,d1
+                copySavedByte CURRENT_MAP, RAFT_MAP
+                setSavedByte d0, RAFT_X
+                setSavedByte d1, RAFT_Y
                 movem.l (sp)+,d0-d1/a0
                 rts
 
@@ -274,7 +274,7 @@ ShrinkIntoCaravanBowieAndFollowers:
                 lea     eas_ShrinkIn(pc), a1
                 bsr.w   ApplyActscriptToFollowers
                 bsr.w   WaitForFollowersStopped
-                move.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 moveq   #3,d0
                 jsr     (Sleep).w       
                 rts
@@ -323,7 +323,7 @@ GrowOutBowieAndFollowers:
                 bsr.w   ApplyActscriptToFollowers
                 bsr.w   WaitForFollowersStopped
                 jsr     InitializeFollowerActscripts
-                move.b  #PLAYERTYPE_BOWIE,((PLAYER_TYPE-$1000000)).w
+                setSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 rts
 
     ; End of function GrowOutBowieAndFollowers

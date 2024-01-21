@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\caravan\caravanactions_1.asm :
+; ASM FILE code\common\menus\caravan\CaravanMenu_1.asm :
 ; 0x21FD2..0x228A2 : Caravan functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -32,15 +32,15 @@ CaravanMenu:
                 cmpi.w  #-1,d0
                 beq.w   @ExitCaravan
                 add.w   d0,d0
-                move.w  rjt_CaravanMenuActions(pc,d0.w),d0
-                jsr     rjt_CaravanMenuActions(pc,d0.w)
+                move.w  rjt_CaravanMenu(pc,d0.w),d0
+                jsr     rjt_CaravanMenu(pc,d0.w)
                 bra.s   @RestartCaravan 
-rjt_CaravanMenuActions:
+rjt_CaravanMenu:
                 
-                dc.w caravanMenu_Join-rjt_CaravanMenuActions
-                dc.w caravanMenu_Depot-rjt_CaravanMenuActions
-                dc.w caravanMenu_Item-rjt_CaravanMenuActions
-                dc.w caravanMenu_Purge-rjt_CaravanMenuActions
+                dc.w caravanMenu_Join-rjt_CaravanMenu
+                dc.w caravanMenu_Depot-rjt_CaravanMenu
+                dc.w caravanMenu_Item-rjt_CaravanMenu
+                dc.w caravanMenu_Purge-rjt_CaravanMenu
 @ExitCaravan:
                 
                 moveq   #0,d0
@@ -95,7 +95,7 @@ caravanMenu_Join:
                 moveq   #1,d1           ; battle party members
                 bsr.w   PopulateGenericListWithMembersList
                 cmpi.w  #FORCE_MAX_SIZE,((GENERIC_LIST_LENGTH-$1000000)).w
-                bcc.s   @ChooseRelief   
+                bcc.s   @ChooseRelief
                 
                 ; If force max size not reached, join immediately
                 move.w  member(a6),d0
@@ -113,8 +113,12 @@ caravanMenu_Join:
                 beq.s   byte_220DE      ; @CloseDialogueWindowAndRestart
                 
                 ; Is leader leaving the battle party?
+            if (STANDARD_BUILD&BOWIE_CAN_LEAVE_BATTLE_PARTY=1)
+                ; Do nothing
+            else
                 tst.w   d0
                 beq.s   @LeaderCannotLeave
+            endif
                 
                 ; 
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -124,11 +128,15 @@ caravanMenu_Join:
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  #17,d1          ; "{NAME} returns to the{N}Caravan.{W2}{N}{NAME} joins the battle{N}party.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
+            if (STANDARD_BUILD&BOWIE_CAN_LEAVE_BATTLE_PARTY=1)
+                ; Do nothing
+            else
                 bra.s   @Goto_RestartJoin
 @LeaderCannotLeave:
                 
                 move.w  #20,d1          ; "{LEADER}!  What will they{N}do without you?!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
+            endif
 @Goto_RestartJoin:
                 
                 bra.s   @Goto_Restart
@@ -180,9 +188,15 @@ caravanMenu_Purge:
                 cmpi.w  #-1,d0
                 beq.s   byte_22144      ; @Exit
                 
+            if (STANDARD_BUILD&BOWIE_CAN_LEAVE_BATTLE_PARTY=1)
+                ; Is there only 1 battle party member remaining?
+                cmpi.w  #1,((GENERIC_LIST_LENGTH-$1000000)).w
+                bls.s   @LeaderCannotLeave
+            else
                 ; Is leader leaving the battle party?
                 tst.w   d0
                 beq.s   @LeaderCannotLeave
+            endif
                 jsr     j_LeaveBattleParty
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #22,d1          ; "{NAME}, why don't you{N}take a rest now?{W2}"
@@ -343,11 +357,47 @@ byte_22210:
                 subq.w  #1,d7
                 bcs.w   @IsUnsellable
                 lea     ((TARGETS_LIST-$1000000)).w,a0
+                
+        if (STANDARD_BUILD&FIX_CARAVAN_DESCRIPTIONS=1)
+                clr.w   d3
+@ClearCount:    clr.w   d6
+@EquippableMessage_Loop:
+                
+                cmpi.w  #4,d6
+                beq.s   @ClearCount
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.l  d7,-(sp)
+                move.b  (a0)+,d0
+                jsr     IsWeaponOrRingEquippable
+                movem.l (sp)+,d7
+            else
+                move.b  (a0)+,d0
+                jsr     j_IsWeaponOrRingEquippable
+            endif
+                bcc.s   @NextMember
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
+                txt     98              ; "{DICT}{NAME},"
+                addq.w  #1,d6
+                moveq   #2,d3
+                cmpi.w  #4,d6
+                bne.s   @NextMember
+                txt     99              ; "{N}"
+@NextMember:    dbf     d7,@EquippableMessage_Loop
+
+                tst.w   d3
+        else
                 clr.w   d6
 @EquippableMessage_Loop:
                 
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.l  d7,-(sp)
+                move.b  (a0)+,d0
+                jsr     IsWeaponOrRingEquippable
+                movem.l (sp)+,d7
+            else
                 move.b  (a0)+,d0
                 jsr     j_IsWeaponOrRingEquippable
+            endif
                 bcc.s   @NextMember
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     98              ; "{DICT}{NAME},"
@@ -365,6 +415,7 @@ byte_22210:
                 dbf     d7,@EquippableMessage_Loop
                 
                 tst.w   d6
+        endif
                 bne.s   byte_2229C      
                 txt     97              ; "nobody so far.{W2}"
                 bra.s   @Goto_IsUnsellable
@@ -524,10 +575,16 @@ caravanDepotSubmenu_Derive:
                 beq.s   @Exchange
                 
                 ; Derive item
+            if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+            else
                 move.w  itemIndex(a6),d1
                 jsr     j_AddItem
+            endif
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemFromCaravan
+            if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                jsr     AddItem
+            endif
                 move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_CHARACTER_NOW_HAS_THE_ITEM,d1 
@@ -547,7 +604,11 @@ caravanDepotSubmenu_Derive:
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemFromCaravan
                 move.w  targetMember(a6),d0
+            if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                ; Do nothing
+            else
                 move.w  itemIndex(a6),d1
+            endif
                 jsr     j_AddItem
                 move.w  targetItemIndex(a6),d1
                 jsr     j_AddItemToCaravan

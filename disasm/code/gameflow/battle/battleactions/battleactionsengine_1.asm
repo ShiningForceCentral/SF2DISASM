@@ -33,7 +33,7 @@ WriteBattlesceneScript:
                 
                 module
                 movem.l d0-a6,-(sp)
-                link    a2,#-152
+                link    a2,#BATTLESCENE_STACK_NEGSIZE
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a3
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
                 lea     ((TARGETS_LIST-$1000000)).w,a5

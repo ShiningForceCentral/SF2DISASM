@@ -65,7 +65,7 @@ battlesceneScript_SwitchTargets:
                 jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   @Done           ; skip if target is dead
-                bscHideTextBox
+                bscCloseDialogueWindow
                 move.w  d6,d1
                 tst.b   targetIsOnSameSide(a2)
                 bne.w   @Continue
@@ -202,7 +202,7 @@ battlesceneScript_GiveExpAndGold:
                 bne.w   @RandomizeExp1
                 
                 ; Should EXP be halved?
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d0
+                getSavedByte CURRENT_BATTLE, d0
                 lea     table_HalvedExpEarnedBattles(pc), a0
 @FindBattle_Loop:
                 

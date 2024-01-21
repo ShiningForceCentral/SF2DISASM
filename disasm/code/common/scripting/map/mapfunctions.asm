@@ -51,9 +51,15 @@ loc_44104:
                 move.b  (a0)+,d2
                 andi.w  #$3F,d2 
                 muls.w  #MAP_TILE_SIZE,d2
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  (a0)+,d3
+                move.w  (a0)+,d4
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
+            else
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d4
+            endif
                 bcs.s   loc_44146
                 movem.w d0,-(sp)
                 move.w  #ENTITY_SPECIAL_SPRITE,d0
@@ -66,7 +72,11 @@ loc_44104:
                 bra.s   loc_44104
 loc_44146:
                 
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d4
+            else
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d4
+            endif
                 bcc.s   loc_44170
                 ext.w   d4
                 tst.b   (a1,d4.w)
@@ -119,9 +129,9 @@ DeclareRaftEntity:
                 
                 module
                 movem.l d0-a1,-(sp)
-                cmpi.b  #PLAYERTYPE_RAFT,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
                 beq.w   @Done
-                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 beq.w   byte_441F0      ; no followers
                 
                 mulu.w  #MAP_TILE_SIZE,d1
@@ -149,20 +159,24 @@ byte_441F0:
                 beq.w   @Done
                 
                 ; Is raft present on map?
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmp.b   ((RAFT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
+                checkRaftMap d0
                 bne.s   @RaftNotOnMap
                 
                 ; Declare raft entity
-                move.b  ((RAFT_X-$1000000)).w,d1
-                move.b  ((RAFT_Y-$1000000)).w,d2
+                getSavedByte RAFT_X, d1
+                getSavedByte RAFT_Y, d2
                 move.w  #ENTITY_RAFT,d0
                 andi.w  #$7F,d1
                 muls.w  #MAP_TILE_SIZE,d1
                 andi.w  #$7F,d2
                 muls.w  #MAP_TILE_SIZE,d2
                 moveq   #LEFT,d3        ; facing
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  #MAPSPRITE_RAFT,d4
+            else
                 moveq   #MAPSPRITE_RAFT,d4
+            endif
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
@@ -205,7 +219,7 @@ IsOverworldMap:
                 
                 move.b  (a0)+,d0
                 bmi.w   @Break
-                cmp.b   ((CURRENT_MAP-$1000000)).w,d0
+                checkCurrentMap d0
                 bne.s   @Next
                 addq.w  #1,d1
 @Next:

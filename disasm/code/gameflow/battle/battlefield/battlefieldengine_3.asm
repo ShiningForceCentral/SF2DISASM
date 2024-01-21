@@ -302,13 +302,22 @@ pt_SpellRanges: dc.l SpellRange0
                 dc.l SpellRange1
                 dc.l SpellRange2
                 dc.l SpellRange3
+            if (STANDARD_BUILD&EXPANDED_RANGES=1)
+                dc.l SpellRange4
+                dc.l SpellRange5
+                dc.l SpellRange6
+                dc.l SpellRange7
+            endif
+            
 SpellRange0:    dc.b 1
                 dc.b  0,  0
+                
 SpellRange1:    dc.b 4
                 dc.b  0,  1
                 dc.b  1,  0
                 dc.b  0, -1
                 dc.b -1,  0
+                
 SpellRange2:    dc.b 8
                 dc.b  0, -2
                 dc.b -1, -1
@@ -318,6 +327,7 @@ SpellRange2:    dc.b 8
                 dc.b  1,  1
                 dc.b  2,  0
                 dc.b  1, -1
+                
 SpellRange3:    dc.b 12
                 dc.b  0,  3
                 dc.b  1,  2
@@ -331,6 +341,104 @@ SpellRange3:    dc.b 12
                 dc.b -3,  0
                 dc.b -2,  1
                 dc.b -1,  2
+                
+            if (STANDARD_BUILD&EXPANDED_RANGES=1)
+SpellRange4:    dc.b 16
+                dc.b  0, -4
+                dc.b -1, -3
+                dc.b -2, -2
+                dc.b -3, -1
+                dc.b -4,  0
+                dc.b -3,  1
+                dc.b -2,  2
+                dc.b -1,  3
+                dc.b  0,  4
+                dc.b  1,  3
+                dc.b  2,  2
+                dc.b  3,  1
+                dc.b  4,  0
+                dc.b  3, -1
+                dc.b  2, -2
+                dc.b  1, -3
+                
+SpellRange5:    dc.b 20
+                dc.b  0, -5
+                dc.b -1, -4
+                dc.b -2, -3
+                dc.b -3, -2
+                dc.b -4, -1
+                dc.b -5,  0
+                dc.b -4,  1
+                dc.b -3,  2
+                dc.b -2,  3
+                dc.b -1,  4
+                dc.b  0,  5
+                dc.b  1,  4
+                dc.b  2,  3
+                dc.b  3,  2
+                dc.b  4,  1
+                dc.b  5,  0
+                dc.b  4, -1
+                dc.b  3, -2
+                dc.b  2, -3
+                dc.b  1, -4
+                
+SpellRange6:    dc.b 24
+                dc.b  0, -6
+                dc.b -1, -5
+                dc.b -2, -4
+                dc.b -3, -3
+                dc.b -4, -2
+                dc.b -5, -1
+                dc.b -6,  0
+                dc.b -5,  1
+                dc.b -4,  2
+                dc.b -3,  3
+                dc.b -2,  4
+                dc.b -1,  5
+                dc.b  0,  6
+                dc.b  1,  5
+                dc.b  2,  4
+                dc.b  3,  3
+                dc.b  4,  2
+                dc.b  5,  1
+                dc.b  6,  0
+                dc.b  5, -1
+                dc.b  4, -2
+                dc.b  3, -3
+                dc.b  2, -4
+                dc.b  1, -5
+                
+SpellRange7:    dc.b 28
+                dc.b  0, -7
+                dc.b -1, -6
+                dc.b -2, -5
+                dc.b -3, -4
+                dc.b -4, -3
+                dc.b -5, -2
+                dc.b -6, -1
+                dc.b -7,  0
+                dc.b -6,  1
+                dc.b -5,  2
+                dc.b -4,  3
+                dc.b -3,  4
+                dc.b -2,  5
+                dc.b -1,  6
+                dc.b  0,  7
+                dc.b  1,  6
+                dc.b  2,  5
+                dc.b  3,  4
+                dc.b  4,  3
+                dc.b  5,  2
+                dc.b  6,  1
+                dc.b  7,  0
+                dc.b  6, -1
+                dc.b  5, -2
+                dc.b  4, -3
+                dc.b  3, -4
+                dc.b  2, -5
+                dc.b  1, -6
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1066,7 +1174,7 @@ CalculateAttackTargetPriority:
                 movem.l d0-d5/d7-a6,-(sp)
                 moveq   #0,d6           ; d6 = that weird extra AI value, so this just clears it
                 cmpi.b  #SPELL_NOTHING,d1
-                bne.s   @Spell          
+                bne.s   @Spell
                 
                 ; Regular attack
                 move.b  d2,d1           ; d1 = target
@@ -1372,12 +1480,12 @@ TargetPriorityScript2:
                 addi.w  #15,d6          ; if the defender is expected to die from the attack, +15 priority
 loc_CCE2:
                 
-                bsr.w   sub_D2F8        
+                bsr.w   sub_D2F8
                 bcs.s   loc_CCEA
                 addq.w  #1,d6           ; +1 target priority if the attack does more than 2/3rds of defenders remaining health
 loc_CCEA:
                 
-                bsr.w   sub_D362        
+                bsr.w   sub_D362
                 bcs.s   loc_CCF2
                 addq.w  #1,d6           ; +1 target priority if defender is expected to be left with less than 20% of max health.
 loc_CCF2:
@@ -1454,7 +1562,7 @@ TargetPriorityScript4:
                 addi.w  #15,d6          ; if the defender is expected to die from the attack, +15 priority
 loc_CD5A:
                 
-                bsr.w   sub_D362        
+                bsr.w   sub_D362
                 bcs.s   loc_CD62
                 addq.w  #1,d6           ; +1 target priority if defender is expected to be left with less than 20% of max health
 loc_CD62:

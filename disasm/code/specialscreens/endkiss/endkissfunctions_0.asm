@@ -7,7 +7,7 @@
 
 DisplayEndingKissPicture:
                 
-                movea.l (p_tiles_EndingKiss).l,a0
+                getPointer p_tiles_EndingKiss, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadStackCompressedData).w
                 lea     (FF6802_LOADING_SPACE).l,a0

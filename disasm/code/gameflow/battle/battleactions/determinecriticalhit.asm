@@ -66,8 +66,16 @@ battlesceneScript_DetermineCriticalHit:
                 move.b  #-1,criticalHit(a2)
                 move.b  (a4),d0
                 jsr     GetEquippedWeapon
+            if (STANDARD_BUILD=1)
+                bmi.s   @Return
+                lea     table_CutOffWeapons(pc), a0
+                clr.w   d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @Return
+            else
                 cmpi.w  #ITEM_GISARME,d1
                 bne.s   @Skip
+            endif
                 move.b  (a5),d0
                 move.w  #SPELL_DESOUL,d1
                 bsr.w   GetResistanceToSpell

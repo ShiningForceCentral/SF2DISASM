@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\church\churchactions_1.asm :
+; ASM FILE code\common\menus\church\ChurchMenu_1.asm :
 ; 0x20A02..0x21046 : Church functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -84,7 +84,15 @@ ChurchMenu:
                 bsr.w   GetPromotionData
                 cmpi.w  #0,cannotPromoteFlag(a6)
                 beq.w   @ConfirmRaise
+                
+            if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+                ; Twice as expansive per level cost when promoted
+                move.l  actionCost(a6),d1
+                addi.l  #CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED,d1
+                add.l   d1,actionCost(a6)
+            else
                 addi.l  #CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED,actionCost(a6)
+            endif
 @ConfirmRaise:
                 
                 move.l  actionCost(a6),((DIALOGUE_NUMBER-$1000000)).w
@@ -151,7 +159,23 @@ ChurchMenu:
                 addi.w  #1,poisonedMembersCount(a6)
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     121             ; "Gosh!  {NAME} is{N}poisoned!{W2}"
+            if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+                jsr     GetCurrentLevel
+                mulu.w  #CHURCHMENU_PER_LEVEL_CURE_POISON_COST,d1
+                move.l  d1,actionCost(a6)
+                jsr     GetClass
+                move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
+                bsr.w   GetPromotionData
+                tst.w   cannotPromoteFlag(a6)
+                beq.s   @CurePoison_Unpromoted
+                
+                move.l  actionCost(a6),d1
+                addi.l  #CHURCHMENU_CURE_POISON_COST_EXTRA_WHEN_PROMOTED,d1
+                add.l   d1,actionCost(a6)
+@CurePoison_Unpromoted:
+            else
                 move.l  #CHURCHMENU_CURE_POISON_COST,actionCost(a6)
+            endif
                 move.l  actionCost(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
                 jsr     j_OpenGoldWindow
@@ -323,6 +347,9 @@ ChurchMenu:
                 bra.w   @RestartPromo
 @CheckSpecialPromo:
                 
+            if (STANDARD_BUILD=1)
+                include "code\common\menus\church\checkspecialpromo-standard.asm"
+            else
                 move.w  currentClass(a6),d1
                 move.w  #PROMOTIONSECTION_SPECIAL_BASE,d2
                 bsr.w   GetPromotionData
@@ -406,6 +433,7 @@ ChurchMenu:
                 move.w  itemsHeldNumber(a6),d1 ; temporary variable : item slot
                 jsr     j_RemoveItemBySlot
                 bra.w   @DoPromo
+            endif
 @CheckRegularPromo:
                 
                 move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
@@ -439,16 +467,33 @@ ChurchMenu:
                 move.w  newClass(a6),d1
                 jsr     j_SetClass
                 jsr     j_Promote
+            if (STANDARD_BUILD=1)
+                lea     table_LoseAllSpellsClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #1,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @CheckNewWeaponTypeClasses
+                move.b  (a0),d1         ; d1.w = replacement spell entry
+            else
                 cmpi.w  #CLASS_SORC,newClass(a6)
                 bne.s   @CheckNewWeaponTypeClasses
+            endif
                 bsr.w   ReplaceSpellsWithSorcDefaults
 @CheckNewWeaponTypeClasses:
                 
+            if (STANDARD_BUILD=1)
+                lea     table_DifferentWeaponTypeClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @sndCom_PromotionMusic
+            else
                 cmpi.w  #CLASS_MMNK,newClass(a6)
                 beq.s   @UnequipWeapon  
                 cmpi.w  #CLASS_NINJ,newClass(a6)
                 beq.s   @UnequipWeapon  
                 bra.w   @sndCom_PromotionMusic
+            endif
 @UnequipWeapon:
                 
                 move.w  member(a6),d0   ; new class uses a different type of weapon, so unequip weapon
@@ -486,8 +531,8 @@ ChurchMenu:
                 bra.w   @ExitSave
 @DoSaveGame:
                 
-                move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP-$1000000)).w
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                copySavedByte CURRENT_MAP, EGRESS_MAP
+                getCurrentSaveSlot d0
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 jsr     (SaveGame).w
                 sndCom  MUSIC_SAVE

@@ -6,8 +6,9 @@
 
 
 nullsub_18010:
-                
+            if (VANILLA_BUILD=1)
                 rts
+            endif
 
     ; End of function nullsub_18010
 
@@ -54,6 +55,8 @@ InitializeBattlescene:
 @Continue:
                 
                 bsr.w   GetBattlesceneBackground
+                
+                disableSram
                 move.w  d1,d0
                 lea     (FF2000_LOADING_SPACE).l,a1 ; store it in RAM for DMA
                 bsr.w   LoadBattlesceneBackground
@@ -121,6 +124,7 @@ InitializeBattlescene:
                 dbf     d0,@LoadBackgroundPalette_Loop
                 
                 ; Load enemy plane layout to VRAM
+                switchRomBanks
                 cmpi.w  #-1,((BATTLESCENE_ENEMY-$1000000)).w
                 beq.w   @LoadAllyVdpSprite
                 
@@ -166,9 +170,13 @@ InitializeBattlescene:
                 move.w  ((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w,d0
                 move.w  ((BATTLESCENE_ALLYBATTLEPALETTE-$1000000)).w,d1
                 bsr.w   LoadAllyBattlespritePropertiesAndPalette
+                
+                restoreRomBanksAndEnableSram
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 bsr.w   GetBattlesceneGround
                 move.b  d1,((BATTLESCENE_BACKGROUND-$1000000)).w
+                
+                disableSram
                 cmpi.w  #-1,d1
                 beq.w   @CheckWeaponsprite
                 
@@ -192,9 +200,10 @@ InitializeBattlescene:
                 cmpi.w  #-1,d0
                 beq.w   @StatusAnimationTilesToVram
                 
+                switchRomBanks
                 bsr.w   LoadWeaponsprite
                 move.w  ((BATTLESCENE_ALLYBATTLEANIMATION-$1000000)).w,d0
-                movea.l (p_pt_AllyAnimations).l,a0
+                getPointer p_pt_AllyAnimations, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #4,a0
@@ -214,14 +223,17 @@ InitializeBattlescene:
                 jsr     (ApplyImmediateVramDma).w
                 move.w  ((BATTLESCENE_WEAPONPALETTE-$1000000)).w,d0
                 bsr.w   LoadWeaponPalette
+                
+                restoreRomBanks
 @StatusAnimationTilesToVram:
                 
-                movea.l (p_tiles_StatusAnimation).l,a0
+                getPointer p_tiles_StatusAnimation, a0
                 lea     ($F600).l,a1
                 move.w  #$270,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDmaOnCompressedTiles).w
                 
+                enableSram
                 bsr.w   ApplyStatusEffectsToAnimations
                 move.w  ((BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_COUNTER-$1000000)).w,d0
                 lsr.w   #1,d0
@@ -268,9 +280,9 @@ InitializeBattlescene:
                 move.w  #22,d0
                 clr.w   d1
                 movem.w d0-d1,-(sp)
-                bsr.w   sub_193B2       
+                bsr.w   sub_193B2
                 movem.w (sp)+,d0-d1
-                bsr.w   sub_19504       
+                bsr.w   sub_19504
 @StartFadeInAndPlayMusic:
                 
                 jsr     (WaitForVInt).w
@@ -779,18 +791,25 @@ bsc07_switchAllies:
                 beq.s   loc_18736
                 
                 bsr.w   GetBattlespriteAndPalette ; d0.w -> d1.w, d2.w
+                
+                disableSramAndSwitchRomBanks
                 move.w  d1,d0
                 bsr.w   LoadNewAllyBattlesprite
                 move.w  d1,d0
                 move.w  d2,d1
                 bsr.w   LoadAllyBattlespritePropertiesAndPalette
+                
+                restoreRomBanksAndEnableSram
                 move.w  d7,d0
                 bsr.w   GetBattlesceneGround
                 cmpi.w  #-1,d1
                 beq.s   @Weaponsprite
                 
+                disableSram
                 move.w  d1,d0
                 bsr.w   LoadBattlesceneGround
+                
+                enableSram
 @Weaponsprite:
                 
                 move.w  d7,d0
@@ -798,10 +817,13 @@ bsc07_switchAllies:
                 cmpi.w  #-1,d2
                 beq.s   loc_18736
                 
+                disableSramAndSwitchRomBanks
                 move.w  d2,d0
                 bsr.w   LoadWeaponsprite
                 move.w  d3,d0
                 bsr.w   LoadWeaponPalette
+                
+                restoreRomBanksAndEnableSram
 loc_18736:
                 
                 cmpi.w  #-1,((BATTLESCENE_ALLY-$1000000)).w
@@ -890,7 +912,7 @@ loc_18818:
                 beq.w   loc_1888C
                 
                 move.w  ((BATTLESCENE_ALLYBATTLEANIMATION-$1000000)).w,d0
-                movea.l (p_pt_AllyAnimations).l,a0
+                getPointer p_pt_AllyAnimations, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 addq.w  #4,a0
@@ -923,10 +945,10 @@ loc_1888C:
                 bsr.w   sub_1892A
                 move.w  (sp)+,d0
                 clr.w   d1
-                bsr.w   sub_193B2       
+                bsr.w   sub_193B2
                 move.w  (sp)+,d0
                 clr.w   d1
-                bsr.w   sub_19504       
+                bsr.w   sub_19504
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 move.b  ((byte_FFB56F-$1000000)).w,d1
                 andi.w  #2,d1
@@ -1046,9 +1068,13 @@ bsc06_switchEnemies:
                 bset    #7,$10(a0)
                 move.w  (a6),d0
                 bsr.w   GetBattlespriteAndPalette
+                
+                disableSramAndSwitchRomBanks
                 move.w  d1,d0
                 bsr.w   LoadNewEnemyBattlesprite
-                movea.l (p_pt_tiles_BattlesceneTransition).l,a2
+                
+                restoreRomBanks
+                getPointer p_pt_tiles_BattlesceneTransition, a2
                 movea.l (a2)+,a0
                 move.l  a2,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a1
@@ -1062,9 +1088,11 @@ bsc06_switchEnemies:
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
 loc_189AE:
                 
+                enableSram
                 bsr.w   GetBattlesceneBackground
                 move.w  d1,d0
                 
+                disableSram
                 move.w  d0,-(sp)
                 lea     (FF2000_LOADING_SPACE).l,a1
                 bsr.w   LoadBattlesceneBackground
@@ -1074,7 +1102,7 @@ loc_189AE:
                 move.w  (sp)+,d0
                 
                 move.w  2(a6),d1
-                bsr.w   sub_19E96       
+                bsr.w   sub_19E96
                 bcc.s   loc_189DC
                 moveq   #4,d1
 loc_189DC:
@@ -1116,6 +1144,7 @@ loc_18A2E:
                 movem.w (sp)+,d0-d2
                 dbf     d0,loc_18A18
                 
+                enableSram
                 move.w  (a6),d0
                 move.w  d0,((BATTLESCENE_ENEMY-$1000000)).w
                 bsr.w   GetBattlespriteAndPalette
@@ -1152,7 +1181,11 @@ loc_18A96:
                 
                 move.w  ((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w,d0
                 move.w  ((BATTLESCENE_ENEMYBATTLEPALETTE-$1000000)).w,d1
+                
+                disableSramAndSwitchRomBanks
                 bsr.w   LoadEnemyBattlespritePropertiesAndPalette
+                
+                restoreRomBanksAndEnableSram
                 bset    #2,((byte_FFB56E-$1000000)).w
                 bsr.w   sub_1EF2E
 loc_18AAC:
@@ -1243,7 +1276,10 @@ loc_18B8C:
                 cmpi.w  #-1,d0
                 beq.s   loc_18BA0
                 
+                disableSramAndSwitchRomBanks
                 bsr.w   LoadWeaponsprite
+                
+                restoreRomBanksAndEnableSram
 loc_18BA0:
                 
                 addq.w  #4,a6
@@ -1574,9 +1610,9 @@ loc_18E6E:
                 bsr.w   MoveEnemyBattlespriteVertically
                 move.w  (sp)+,d0
                 movem.w d0-d1,-(sp)
-                bsr.w   sub_193B2       
+                bsr.w   sub_193B2
                 movem.w (sp)+,d0-d1
-                bsr.w   sub_19504       
+                bsr.w   sub_19504
                 jsr     (sub_1942).w    
                 jsr     (WaitForVInt).w
                 movem.w (sp)+,d0/d4-d5
@@ -1933,17 +1969,17 @@ bsc10_displayMessage:
                 move.w  (a6)+,((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.l  (a6)+,((DIALOGUE_NUMBER-$1000000)).w
                 clr.w   (SPEECH_SFX).l
-                tst.b   ((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w
+                checkSavedByte #0, NO_BATTLE_MESSAGES_TOGGLE
                 bne.s   loc_1920C
                 jsr     (DisplayText).l 
-                tst.b   ((MESSAGE_SPEED-$1000000)).w
+                checkSavedByte #0, MESSAGE_SPEED
                 bne.s   loc_1920C
                 txt     362             ; "{DICT}{W2}"
                 rts
 loc_1920C:
                 
                 clr.w   d0
-                move.b  ((MESSAGE_SPEED-$1000000)).w,d0
+                getSavedByte MESSAGE_SPEED, d0
                 moveq   #8,d1
                 sub.w   d0,d1
                 clr.w   d0
@@ -1994,7 +2030,7 @@ bsc12_closeTextBox:
 EndBattlescene:
                 
                 clr.w   d0
-                move.b  ((MESSAGE_SPEED-$1000000)).w,d0
+                getSavedByte MESSAGE_SPEED, d0
                 moveq   #7,d1
                 sub.w   d0,d1
                 clr.w   d0
@@ -2165,7 +2201,7 @@ loc_19378:
                 move.w  d1,d0
                 asr.w   #BYTE_SHIFT_COUNT,d0
                 ext.w   d1
-                bsr.s   sub_193C4       
+                bsr.s   sub_193C4
                 move.w  (sp)+,d1
                 bsr.w   sub_19546
                 jmp     (sub_1942).w    
@@ -2199,7 +2235,7 @@ sub_1939E:
                 move.w  d1,d0
                 asr.w   #BYTE_SHIFT_COUNT,d0
                 ext.w   d1
-                bsr.s   sub_193C4       
+                bsr.s   sub_193C4
                 move.w  (sp)+,d1
                 bsr.w   sub_1955E
                 jmp     (sub_1942).w    
@@ -2215,9 +2251,9 @@ sub_1939E:
 sub_193B2:
                 
                 movem.w d0-d1,-(sp)
-                bsr.s   sub_193C4       
+                bsr.s   sub_193C4
                 movem.w (sp)+,d0-d1
-                bsr.w   sub_19564       
+                bsr.w   sub_19564
                 jmp     (sub_1942).w    
 
     ; End of function sub_193B2

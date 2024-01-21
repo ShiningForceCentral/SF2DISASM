@@ -33,7 +33,7 @@ StartAiControl:
                 bra.w   @NonSwarmAi     ; if AI #15 but not at full HP, then immediately activate and attack normally
 @FindSwarmBattle:
                 
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 clr.w   d6
                 move.b  (a0),d6
                 lea     list_SwarmBattles(pc), a0
@@ -124,7 +124,8 @@ StartAiControl:
                 bsr.w   ProcessLineAttackerAi
                 bra.w   @Done
 @IsBurstRock:
-                
+
+                ; Check if exploding attacker
                 cmpi.w  #ENEMY_BURST_ROCK,d1
                 bne.s   @CheckSpecialMoveOrders
                 bsr.w   ProcessExploderAi

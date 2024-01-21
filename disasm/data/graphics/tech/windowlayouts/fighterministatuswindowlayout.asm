@@ -28,7 +28,7 @@ layout_MiniStatusWindow:
                 vdpBaseTile UPPERCASE_P
                 vdpBaseTile UPPERCASE_P
                 vdpBaseTile H_BORDER|FLIP
-MiniStatusWindowLayoutBody:
+layout_MiniStatusWindowBody:
                 
 ; 4th column
                 vdpBaseTile H_BORDER
@@ -36,7 +36,7 @@ MiniStatusWindowLayoutBody:
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile H_BORDER|FLIP
-MiniStatusWindowLayoutTail:
+layout_MiniStatusWindowTail:
                 
 ; 5th column
                 vdpBaseTile H_BORDER

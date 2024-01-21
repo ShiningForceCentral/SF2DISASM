@@ -1047,7 +1047,7 @@ spellanimationSetup_Blaze:
                 adda.w  d0,a0
                 moveq   #$26,d0 
                 moveq   #2,d1
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 clr.w   d1
                 move.b  5(a1),d1
                 beq.s   loc_1A52A
@@ -1619,7 +1619,7 @@ loc_1A898:
                 moveq   #$20,d6 
                 jsr     (GenerateRandomNumber).w
                 move.w  d7,d3
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  d4,2(a0)
@@ -2279,7 +2279,7 @@ loc_1ADDA:
                 addq.w  #1,d1
                 clr.w   d2
                 clr.w   d3
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #$72,((byte_FFB404-$1000000)).w 
@@ -5045,7 +5045,7 @@ sub_1C4D8:
                 move.w  d0,-(sp)
                 moveq   #$26,d0 
                 moveq   #4,d1
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 lea     (byte_FFAFC6).l,a0
                 move.b  d4,(a0)+
                 move.b  d4,(a0)+
@@ -6198,11 +6198,11 @@ loc_1CEAA:
                 
                 tst.b   8(a5)
                 bne.s   loc_1CEB8
-                movea.l (p_BoltAnimData_A).l,a0
+                getPointer p_BoltAnimData_A, a0
                 bra.s   loc_1CEBE
 loc_1CEB8:
                 
-                movea.l (p_BoltAnimData_B).l,a0
+                getPointer p_BoltAnimData_B, a0
 loc_1CEBE:
                 
                 lsl.w   #3,d1
@@ -7394,7 +7394,7 @@ loc_1D8DC:
                 add.w   $A(a3),d7
                 move.w  d7,d3
                 moveq   #1,d1
-                bsr.w   sub_19FAA       
+                bsr.w   sub_19FAA
                 moveq   #4,d6
                 jsr     (GenerateRandomNumber).w
                 lsr.w   #1,d7

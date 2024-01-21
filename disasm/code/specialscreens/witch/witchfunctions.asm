@@ -25,12 +25,12 @@ InitializeWitchSuspendVIntFunctions:
                 move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w
                 bsr.w   BuildWitchScreen
                 bsr.w   EnableDisplayAndInterrupts
-                movea.l (p_layout_Witch).l,a0
+                getPointer p_layout_Witch, a0
                 lea     $700(a0),a0
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$707,d1
-                bsr.w   UpdateWitchLayoutZone
-                bsr.w   QueueDmaForWitchLayout
+                bsr.w   Updatelayout_WitchZone
+                bsr.w   QueueDmaForlayout_Witch
                 bsr.w   FadeInFromBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
@@ -51,7 +51,7 @@ InitializeWitchSuspendVIntFunctions:
 BuildWitchScreen:
                 
                 jsr     (DisableDisplayAndInterrupts).w
-                movea.l (p_tiles_Witch).l,a0
+                getPointer p_tiles_Witch, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 move.l  a1,-(sp)
                 bsr.w   LoadStackCompressedData
@@ -60,7 +60,7 @@ BuildWitchScreen:
                 move.w  #8192,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-                movea.l (p_layout_Witch).l,a0
+                getPointer p_layout_Witch, a0
                 lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #2048,d7
                 bsr.w   CopyBytes       
@@ -69,7 +69,7 @@ BuildWitchScreen:
                 move.w  #1024,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-                movea.l (p_palette_Witch).l,a0 ; Two palettes
+                getPointer p_palette_Witch, a0 ; Two palettes
                 lea     (PALETTE_1_BASE).l,a1
                 moveq   #CRAM_PALETTE_SIZE,d7 ; Palette 1
                 bsr.w   CopyBytes       
@@ -87,15 +87,15 @@ BuildWitchScreen:
 ; =============== S U B R O U T I N E =======================================
 
 
-ReinitializeWitchLayout:
+Reinitializelayout_Witch:
                 
-                movea.l (p_layout_Witch).l,a0
+                getPointer p_layout_Witch, a0
                 lea     (PLANE_B_LAYOUT).l,a1
                 move.w  #$800,d7
                 bsr.w   CopyBytes       
-                bra.w   QueueDmaForWitchLayout
+                bra.w   QueueDmaForlayout_Witch
 
-    ; End of function ReinitializeWitchLayout
+    ; End of function Reinitializelayout_Witch
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -103,11 +103,11 @@ ReinitializeWitchLayout:
 
 UpdateWitchHead:
                 
-                movea.l (p_layout_Witch).l,a0
+                getPointer p_layout_Witch, a0
                 lea     $700(a0),a0
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$707,d1
-                bsr.w   UpdateWitchLayoutZone
+                bsr.w   Updatelayout_WitchZone
 
     ; End of function UpdateWitchHead
 
@@ -115,7 +115,7 @@ UpdateWitchHead:
 ; =============== S U B R O U T I N E =======================================
 
 
-QueueDmaForWitchLayout:
+QueueDmaForlayout_Witch:
                 
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
@@ -125,7 +125,7 @@ QueueDmaForWitchLayout:
                 bsr.w   WaitForDmaQueueProcessing
                 rts
 
-    ; End of function QueueDmaForWitchLayout
+    ; End of function QueueDmaForlayout_Witch
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -133,7 +133,7 @@ QueueDmaForWitchLayout:
 ; In: d1.w = Width/Height
 
 
-UpdateWitchLayoutZone:
+Updatelayout_WitchZone:
                 
                 movem.l d0-a1,-(sp)
                 move.w  d1,d6
@@ -157,7 +157,7 @@ UpdateWitchLayoutZone:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function UpdateWitchLayoutZone
+    ; End of function Updatelayout_WitchZone
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -175,22 +175,22 @@ VInt_WitchBlink:
                 cmpi.w  #3,(a2)
                 bne.s   loc_7D8A
                 
-                movea.l (p_layout_Witch).l,a0
+                getPointer p_layout_Witch, a0
                 lea     $762(a0),a0
                 lea     (byte_FFE21E).l,a1
                 move.w  #$302,d1
-                bsr.s   UpdateWitchLayoutZone
+                bsr.s   Updatelayout_WitchZone
                 addq.w  #1,var_2(a6)
 loc_7D8A:
                 
                 tst.w   (a2)
                 bne.s   loc_7DB4
                 
-                movea.l (p_layout_Witch).l,a0
+                getPointer p_layout_Witch, a0
                 lea     $700(a0),a0
                 lea     (PLANE_B_WITCH_HEAD).l,a1
                 move.w  #$705,d1
-                bsr.s   UpdateWitchLayoutZone
+                bsr.s   Updatelayout_WitchZone
                 addq.w  #1,var_2(a6)
                 moveq   #$78,d6 
                 jsr     (GenerateRandomNumber).w
@@ -211,11 +211,11 @@ loc_7DC6:
                 cmpi.w  #5,(a2)
                 bne.s   loc_7DEA
                 
-                movea.l (p_layout_Witch).l,a0
+                getPointer p_layout_Witch, a0
                 lea     $780(a0),a0
                 lea     (byte_FFE29E).l,a1
                 move.w  #$301,d1
-                bsr.w   UpdateWitchLayoutZone
+                bsr.w   Updatelayout_WitchZone
                 addq.w  #1,var_2(a6)
 loc_7DEA:
                 
@@ -223,11 +223,11 @@ loc_7DEA:
                 bne.s   loc_7E16
 loc_7DEE:
                 
-                movea.l (p_layout_Witch).l,a0
+                getPointer p_layout_Witch, a0
                 lea     $77A(a0),a0
                 lea     (byte_FFE29E).l,a1
                 move.w  #$301,d1
-                bsr.w   UpdateWitchLayoutZone
+                bsr.w   Updatelayout_WitchZone
                 addq.w  #1,var_2(a6)
                 moveq   #5,d6
                 jsr     (GenerateRandomNumber).w

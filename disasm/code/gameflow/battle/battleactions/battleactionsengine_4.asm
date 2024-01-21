@@ -13,6 +13,13 @@ CalculateHealingExp:
                 bne.w   @Skip           ; skip if enemy
                 
                 ; Check if healer class
+            if (STANDARD_BUILD=1)
+                lea     table_HealerClasses(pc),a0
+                bsr.w   GetClass
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @Skip
+            else
                 jsr     GetClass        
                 cmpi.b  #CLASS_PRST,d1  ; HARDCODED healer class indexes
                 beq.w   @Continue
@@ -21,6 +28,7 @@ CalculateHealingExp:
                 cmpi.b  #CLASS_MMNK,d1
                 beq.w   @Continue
                 bra.w   @Skip           ; skip if not a healer class
+            endif
 @Continue:
                 
                 move.b  (a5),d0
@@ -161,10 +169,19 @@ battlesceneScript_GetKillExp:
                 move.b  (a4),d0
                 jsr     GetClass        
                 move.w  d1,d3
+            if (STANDARD_BUILD=1)
+                bsr.w   GetCurrentLevel
+                move.w  d1,d5
+                bsr.w   GetClassType
+                beq.s   @NotPromoted
+                addi.w  #CHAR_CLASS_EXTRALEVEL,d5
+@NotPromoted:   move.w  d5,d1
+            else
                 jsr     GetCurrentLevel 
                 cmpi.b  #CHAR_CLASS_FIRSTPROMOTED,d3
                 bcs.s   @Continue
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d1
+            endif
 @Continue:
                 
                 sub.w   d2,d1

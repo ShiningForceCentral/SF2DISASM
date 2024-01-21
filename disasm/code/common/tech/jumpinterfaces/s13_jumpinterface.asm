@@ -76,8 +76,9 @@ j_GetBattleSpritesetSubsection:
 
 
 j_BattleDebugFunction1B120A:
-                
+            if (VANILLA_BUILD=1)
                 jmp     BattleDebugFunction1B120A(pc)
+            endif
 
     ; End of function j_BattleDebugFunction1B120A
 

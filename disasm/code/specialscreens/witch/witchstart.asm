@@ -164,7 +164,7 @@ witchMenuAction_New:
                 tst.w   d0
                 bmi.s   byte_73C2       
                 subq.w  #1,d0
-                move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
+                setCurrentSaveSlot d0
                 jsr     j_NewGame
                 clsTxt
                 clr.w   d0
@@ -173,6 +173,7 @@ witchMenuAction_New:
                 beq.w   byte_7476       ; @Configuration
                 btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.w   byte_7476       ; @Configuration
+                
                 moveq   #1,d0
                 moveq   #COMBATANT_ALLIES_MINUS_PLAYER_AND_CREATURE_COUNTER,d7
 @NameAlly_Loop:
@@ -212,9 +213,10 @@ byte_7476:
                 addi.w  #233,d0         ; HARDCODED text index for difficulty choice reactions
                 bsr.w   DisplayText     
                 txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
-                move.b  #GAMESTART_MAP,((CURRENT_MAP-$1000000)).w
-                move.b  #GAMESTART_MAP,((EGRESS_MAP-$1000000)).w
+                
+                getCurrentSaveSlot d0
+                setSavedByte #GAMESTART_MAP, CURRENT_MAP
+                setSavedByte #GAMESTART_MAP, EGRESS_MAP
                 bsr.w   SaveGame
                 clsTxt
                 
@@ -253,7 +255,7 @@ witchMenuAction_Load:
                 tst.w   d0
                 bmi.w   byte_73C2       
                 subq.w  #1,d0
-                move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
+                setCurrentSaveSlot d0
                 bsr.w   LoadGame
                 txt     226             ; "{NAME;0}, yes!  I knew it!{W2}"
                 bsr.w   CheatModeConfiguration
@@ -267,7 +269,7 @@ witchMenuAction_Load:
 @loc_18:
                 
                 clr.w   d0
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
                 jsr     GetSavepointForMap(pc)
                 nop
                 moveq   #-1,d4
@@ -320,12 +322,12 @@ witchMenuAction_Del:
                 tst.w   d0
                 bmi.w   byte_73C2       
                 subq.w  #1,d0
-                move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
+                setCurrentSaveSlot d0
                 txt     230             ; "Delete?  Are you sure?"
                 jsr     j_alt_YesNoPrompt
                 tst.w   d0
                 bne.w   byte_73C2       
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                getCurrentSaveSlot d0
                 bsr.w   ClearSaveSlotFlag
                 txt     231             ; "Hee, hee!  It's gone!{W2}"
                 bra.w   byte_73C2       

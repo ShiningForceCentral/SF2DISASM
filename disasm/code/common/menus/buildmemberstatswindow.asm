@@ -17,7 +17,7 @@ BuildMemberStatusWindow:
                 move.l  a1,windowLayoutStartAddress(a6)
                 
                 ; Copy window layout
-                movea.l (p_layout_MemberStatusWindow).l,a0
+                getPointer p_layout_MemberStatusWindow, a0
                 move.w  #WINDOW_MEMBERSTATUS_LAYOUT_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 
@@ -430,14 +430,14 @@ aJewel:
                 move.l  a0,-(sp)
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
                 addi.w  #ICON_SPELLS_START,d1
-                movea.l (p_Icons).l,a0
+                getPointer p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICON_TILE_BYTESIZE,d7
-                jsr     (CopyBytes).w   
+                jsr     (CopyBytes).w
                 ori.b   #BYTE_UPPER_NIBBLE_MASK,(a1)
                 ori.b   #BYTE_LOWER_NIBBLE_MASK,$23(a1)
                 ori.b   #BYTE_UPPER_NIBBLE_MASK,$9C(a1)
@@ -461,16 +461,16 @@ aJewel:
                 move.l  a0,-(sp)
                 move.w  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                getPointer p_Icons, a0
                 mulu.w  #ICON_TILE_BYTESIZE,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICON_TILE_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d1
                 btst    #ITEMENTRY_BIT_BROKEN,d1
                 beq.s   @CleanIconCorners
                 movem.l d2-d3/a0-a1,-(sp)
-                movea.l (p_Icons).l,a0
+                getPointer p_Icons, a0
                 lea     ICONS_OFFSET_CRACKS(a0),a0
                 move.w  #ICON_PIXELS_BYTE_COUNTER,d2
 @DrawCracks_Loop:
@@ -507,12 +507,12 @@ aJewel:
 @LoadJewelIcons:
                 
                 move.w  #ICON_JEWEL_OF_LIGHT,d1
-                movea.l (p_Icons).l,a0
+                getPointer p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICON_TILE_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #BYTE_UPPER_NIBBLE_MASK,(a1)
@@ -521,12 +521,12 @@ aJewel:
                 ori.b   #BYTE_LOWER_NIBBLE_MASK,$BF(a1)
                 adda.w  #ICON_TILE_BYTESIZE,a1
                 move.w  #ICON_JEWEL_OF_EVIL,d1
-                movea.l (p_Icons).l,a0
+                getPointer p_Icons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0
+                addIconOffset d1, a0
                 move.w  #ICON_TILE_BYTESIZE,d7
                 jsr     (CopyBytes).w   
                 ori.b   #BYTE_UPPER_NIBBLE_MASK,(a1)

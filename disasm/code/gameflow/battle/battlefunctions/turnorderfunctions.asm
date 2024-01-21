@@ -90,7 +90,7 @@ AddCombatantAndRandomizedAgiToTurnOrder:
                 jsr     (GenerateRandomNumber).w
                 subq.w  #1,d7
                 add.w   d7,d1
-                move.b  d0,(a0)+
+@AddTurnData1:  move.b  d0,(a0)+
                 move.b  d1,(a0)+
                 cmpi.w  #TWO_TURN_THRESHOLD,d3
                 blt.s   @Return
@@ -106,7 +106,7 @@ AddCombatantAndRandomizedAgiToTurnOrder:
                 add.w   d7,d1
                 jsr     (GenerateRandomNumber).w
                 sub.w   d7,d1
-                move.b  d0,(a0)+
+@AddTurnData2:  move.b  d0,(a0)+
                 move.b  d1,(a0)+
 @Return:
                 

@@ -37,6 +37,11 @@ LoadHighlightableItemIcon:
                 cmpi.w  #ICON_UNARMED,d0
                 beq.s   LoadHighlightableIcon
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
+            if (STANDARD_BUILD=1)
+                cmpi.w  #ITEM_NOTHING,d0
+                bne.s   LoadHighlightableIcon
+                move.w  #ICON_NOTHING,d0
+            endif
 
     ; End of function LoadHighlightableItemIcon
 
@@ -48,8 +53,8 @@ LoadHighlightableIcon:
                 
                 adda.w  #ICON_TILE_BYTESIZE,a1
                 mulu.w  #ICON_TILE_BYTESIZE,d0
-                movea.l (p_Icons).l,a0
-                adda.w  d0,a0           ; icon offset
+                getPointer p_Icons, a0
+                addIconOffset d0, a0
                 move.w  #$2F,d1 
                 lea     tiles_IconHighlight(pc), a2
 @Loop:

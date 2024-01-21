@@ -23,7 +23,7 @@ BattleDebugFunction1B120A:
                 jsr     j_RemoveItemFromCaravan
                 moveq   #ALLY_BOWIE,d0
                 jsr     j_JoinForce
-                move.b  #BATTLE_VERSUS_ALL_BOSSES,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte #BATTLE_VERSUS_ALL_BOSSES, CURRENT_BATTLE
                 jsr     j_InitializeEnemyList
                 bsr.w   InitializeAllAlliesBattlePositions
                 bsr.w   InitializeAllEnemiesBattlePositions

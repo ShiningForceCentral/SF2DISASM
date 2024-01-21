@@ -13,13 +13,13 @@ OpenPortraitWindow:
                 movem.l d0-a1,-(sp)
                 move.w  d0,-(sp)
                 move.b  d2,((PORTRAIT_IS_MIRRORED_TOGGLE-$1000000)).w
-                move.b  d1,((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
+                move.b  d1,((PORTRAIT_IS_ON_RIGHT_TOGGLE_TOGGLE-$1000000)).w
                 move.w  #VDPTILE_PORTRAITTILE1|VDPTILE_PALETTE2|VDPTILE_PRIORITY,((PORTRAIT_VDPTILES-$1000000)).w
                 move.w  #20,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
                 move.w  #$80A,d0        ; portrait dimensions
                 move.w  #$2F6,d1        ; portrait offset
-                tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
+                tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE_TOGGLE-$1000000)).w
                 beq.s   loc_11B84
                 addi.w  #$1500,d1       ; adjustment to other side
 loc_11B84:
@@ -39,12 +39,14 @@ loc_11B9E:
                 move.w  #160,d7
                 jsr     (CopyBytes).w   
                 move.w  (sp)+,d0
+            if (VANILLA_BUILD=1)
                 bsr.w   GetAllyPortrait 
+            endif
                 bsr.w   LoadPortrait    
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$201,d1
-                tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
+                tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE_TOGGLE-$1000000)).w
                 beq.s   loc_11BC4
                 addi.w  #$1500,d1       ; adjustment to other side
 loc_11BC4:
@@ -80,7 +82,7 @@ ClosePortraitWindow:
                 move.w  ((PORTRAIT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$2F6,d1
-                tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
+                tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE_TOGGLE-$1000000)).w
                 beq.s   @Continue
                 addi.w  #$1500,d1       ; adjustment to other side
 @Continue:
@@ -120,7 +122,7 @@ BuildMemberScreen:
                 link    a6,#-16
                 move.w  d0,member(a6)
                 clr.b   ((PORTRAIT_IS_MIRRORED_TOGGLE-$1000000)).w
-                clr.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
+                clr.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE_TOGGLE-$1000000)).w
                 move.w  #WINDOW_MEMBERSTATUS_SIZE,d0
                 move.w  #WINDOW_MEMBERSTATUS_DEST,d1
                 jsr     (CreateWindow).w ; stats window, on the right
@@ -145,7 +147,9 @@ BuildMemberScreen:
                 bsr.w   LoadMemberScreenWindowLayouts
                 move.w  portraitIndex(a6),d0
                 blt.s   loc_11CA6
+            if (VANILLA_BUILD=1)
                 bsr.w   GetAllyPortrait 
+            endif
                 bsr.w   LoadPortrait    
 loc_11CA6:
                 
@@ -180,7 +184,7 @@ loc_11CE6:
                 dc.l VInt_PerformPortraitBlinking
                 move.b  #-1,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11D1A
                 clr.w   d0
                 bra.s   loc_11D32
@@ -231,7 +235,7 @@ loc_11D6C:
                 move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  #64,ENTITYDEF_OFFSET_LAYER(a0)
                 andi.b  #$7F,ENTITYDEF_OFFSET_FLAGS_B(a0) 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11DBC
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 move.w  member(a6),d0
@@ -299,22 +303,31 @@ loc_11E54:
                 
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 jsr     (WaitForVInt).w
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_11E94
                 clr.w   d0
-                tst.b   ((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 bne.s   loc_11E74
                 jsr     j_GetAllyMapsprite
                 bra.s   loc_11E82
 loc_11E74:
                 
-                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
+                checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 bne.s   loc_11E80
-                moveq   #MAPSPRITE_CARAVAN,d4
+                
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w   #MAPSPRITE_CARAVAN,d4
                 bra.s   loc_11E82
 loc_11E80:
                 
-                moveq   #MAPSPRITE_RAFT,d4
+                move.w   #MAPSPRITE_RAFT,d4
+            else
+                moveq   #MAPSPRITE_CARAVAN,d4 
+                bra.s   loc_11E82
+loc_11E80:
+                
+                moveq   #MAPSPRITE_RAFT,d4 
+            endif
 loc_11E82:
                 
                 clr.w   d0
@@ -371,8 +384,13 @@ WriteStatusEffectTiles:
                 subq.l  #4,a1
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 beq.s   @Return
+            if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
+                addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
+                movea.l d3,a1
+            else
                 movea.l windowLayoutStartAddress(a6),a1
-                adda.w  #$78,a1 
+                adda.w  #$78,a1
+            endif
 @Return:
                 
                 rts
@@ -402,6 +420,27 @@ LoadMemberScreenWindowLayouts:
                 jsr     (GetWindowTileAddress).w
                 move.w  #WINDOW_MEMBER_KD_LAYOUT_BYTESIZE,d7
                 jsr     (CopyBytes).w   
+            if (STANDARD_BUILD&ALTERNATE_JEWEL_ICONS_DISPLAY=1)
+                ; Display small jewel icons next to Bowie's mapsprite
+                tst.w   -2(a6)
+                bne.s   @SkipJewels         ; skip if anyone other than Bowie
+                move.l  a1,-(sp)
+                adda.w  #26,a1              ; offset into window layout
+                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                beq.s   @CheckJewelOfEvil
+                move.w  #VDPTILE_JEWEL_OF_LIGHT|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+@CheckJewelOfEvil:
+                
+                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
+                beq.s   @SkipJewelOfEvil
+                adda.w  #2,a1
+                move.w  #VDPTILE_JEWEL_OF_EVIL|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+@SkipJewelOfEvil:
+                
+                movea.l (sp)+,a1
+            endif
+@SkipJewels:
+                
                 adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
                 move.w  member(a6),d0
                 tst.b   d0

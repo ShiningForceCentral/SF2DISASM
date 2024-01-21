@@ -21,7 +21,12 @@ WriteTilesFromAsciiWithOrangeFont:
 
 ; write tiles from number in D0 into A1 D7 letters, window width D1
 
-
+WriteLvOrExpValue:
+            if (STANDARD_BUILD=1)
+                moveq   #2,d7   ; two digits
+                move.w  d1,d0
+                ext.l   d0
+            endif
 WriteTilesFromNumber:
                 
                 jsr     (WriteAsciiNumber).w
@@ -130,6 +135,12 @@ table_MainFontAlternateSymbols:
 ; START OF FUNCTION CHUNK FOR WriteTilesFromAsciiWithOrangeFont
 
 loc_1016A:
+            if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
+                tst.w   d1
+                bne.s   @Continue
+                move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
+                bra.s   loc_10156
+@Continue:  endif
                 
                 lea     2(a2),a1
                 suba.w  d1,a1
@@ -643,7 +654,7 @@ LoadMainMenuIcon:
                 
                 move.l  d0,-(sp)
                 ext.w   d0
-                movea.l (p_tiles_MainMenu).l,a0
+                getPointer p_tiles_MainMenu, a0
                 mulu.w  #GFX_DIAMOND_MENU_ICON_PIXELS_NUMBER,d0
                 adda.w  d0,a0
                 move.w  #143,d0
@@ -723,8 +734,13 @@ loc_10616:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10630
                 moveq   #1,d1
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                bne.s    @SkipItemCheck1
+            endif
                 cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_10630
+@SkipItemCheck1:
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
 loc_10630:
@@ -732,8 +748,13 @@ loc_10630:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1064A
                 moveq   #2,d1
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                bne.s    @SkipItemCheck2
+            endif
                 cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_1064A
+@SkipItemCheck2:
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
 loc_1064A:
@@ -748,8 +769,13 @@ loc_1065C:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10676
                 moveq   #3,d1
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                bne.s    @SkipItemCheck3
+            endif
                 cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_10676
+@SkipItemCheck3:
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
 loc_10676:
@@ -886,8 +912,13 @@ BuildItemMenu:
                 moveq   #-36,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  (sp)+,d1
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                btst    #ITEMENTRY_BIT_EQUIPPED,d1
+                beq.s   @Return
+            else
                 tst.b   d1
                 bpl.s   @Return
+            endif
                 lea     aEquipped(pc), a0
                 move.w  windowSlot(a6),d0
                 move.w  #MENU_ITEM_EQUIPPED_STRING_COORDS,d1
@@ -904,7 +935,7 @@ BuildItemMenu:
 aEquipped:      dc.b '\Equipped',0
 aNothing:       dc.b '\Nothing',0
                 
-                wordAlign
+                align
 
 ; =============== S U B R O U T I N E =======================================
 

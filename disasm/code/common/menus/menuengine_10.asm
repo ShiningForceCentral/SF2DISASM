@@ -65,7 +65,6 @@ CloseNameUnderPortraitWindow:
                 movem.l d0-d1/a0-a1,-(sp)
                 move.w  (ALLY_NAME_WINDOW_INDEX).l,d0
                 beq.s   @Done
-                
                 subq.w  #1,d0
                 move.w  #WINDOW_TACTICAL_BASE_NAME_DEST,d1
                 moveq   #4,d2

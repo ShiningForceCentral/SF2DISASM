@@ -57,7 +57,11 @@ rjt_DebugModeBattleactions:
                 
                 moveq   #0,d0
                 moveq   #0,d1
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                move.w  #ITEMINDEX_MAX,d2
+            else
                 moveq   #ITEMINDEX_MAX,d2
+            endif
                 jsr     j_NumberPrompt
                 move.w  d0,(a0)+
                 bsr.w   DebugModeSelectTargetEnemy
@@ -79,7 +83,7 @@ rjt_DebugModeBattleactions:
                 bra.w   @Done
 @PrismLaser:
                 
-                move.b  #BATTLE_VERSUS_PRISM_FLOWERS,((CURRENT_BATTLE-$1000000)).w
+                setSavedByte #BATTLE_VERSUS_PRISM_FLOWERS, CURRENT_BATTLE
 @Done:
                 
                 movem.l (sp)+,d0-d3/a0

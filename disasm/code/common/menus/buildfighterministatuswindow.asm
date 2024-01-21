@@ -98,13 +98,13 @@ BuildMiniStatusWindow:
                 subi.w  #WINDOW_MINISTATUS_SIDECOLUMNS_NUMBER_PLUS_ONE,d7
 @CopyMiddleColumns_Loop:
                 
-                lea     MiniStatusWindowLayoutBody(pc), a0
+                lea     layout_MiniStatusWindowBody(pc), a0
                 nop
                 bsr.w   WriteOneMiniStatusWindowTileColumn
                 dbf     d7,@CopyMiddleColumns_Loop
                 
                 ; Copy rightmost columns
-                lea     MiniStatusWindowLayoutTail(pc), a0
+                lea     layout_MiniStatusWindowTail(pc), a0
                 nop
                 bsr.w   WriteOneMiniStatusWindowTileColumn
                 bsr.w   WriteOneMiniStatusWindowTileColumn

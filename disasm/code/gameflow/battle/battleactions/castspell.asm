@@ -66,7 +66,27 @@ rjt_SpellEffects:
                 dc.w spellEffect_FlameBreath-rjt_SpellEffects ; KIWI
                 dc.w spellEffect_FairyTear-rjt_SpellEffects ; SHINE
                 dc.w spellEffect_Bolt-rjt_SpellEffects ; ODDEYE
-                
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell44
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell45
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell46
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell47
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell48
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell49
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell50
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell51
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell52
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell53
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell54
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell55
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell56
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell57
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell58
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell59
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell60
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell61
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell62
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -102,7 +122,7 @@ spellEffect_Heal:
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   byte_B16A       
                 executeAllyReaction d6,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
-                bra.s   byte_B17A       
+                bra.s   byte_B17A
 byte_B16A:
                 
                 executeEnemyReaction d6,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
@@ -153,7 +173,7 @@ spellEffect_Detox:
                 tst.b   d2
                 beq.w   @Ineffective
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B1F4       
+                bne.s   byte_B1F4
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @GiveEXP
 byte_B1F4:
@@ -211,13 +231,16 @@ spellEffect_Boost:
                 ori.w   #STATUSEFFECT_BOOST,d1
                 jsr     SetStatusEffects
                 andi.w  #STATUSEFFECT_BOOST,d3
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                cmpi.w  #STATUSEFFECT_BOOST,d3 ; check if status counter is already at max value
+            endif
                 beq.s   @WriteScriptCommands
                 moveq   #8,d2
                 bsr.w   DetermineSpellEffectiveness
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B2B6       
+                bne.s   byte_B2B6
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B2B6:
@@ -227,13 +250,30 @@ byte_B2B6:
                 
                 bsr.w   AddStatusEffectSpellExp
                 jsr     GetBaseAgi
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                move.w  d1,d2
+            endif
                 mulu.w  #3,d1
                 lsr.l   #3,d1
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                rol.w   #4,d3           ; calculate difference between full and current BOOST increase values
+                mulu.w  d3,d2
+                lsr.l   #3,d2
+                sub.w   d2,d1
+            endif
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 jsr     GetBaseDef
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                move.w  d1,d2
+            endif
                 mulu.w  #3,d1
                 lsr.l   #3,d1
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                mulu.w  d3,d2
+                lsr.l   #3,d2
+                sub.w   d2,d1
+            endif
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_DEF_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
@@ -261,6 +301,9 @@ spellEffect_Slow:
                 ori.w   #STATUSEFFECT_SLOW,d1
                 jsr     SetStatusEffects
                 andi.w  #STATUSEFFECT_SLOW,d3
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                cmpi.w  #STATUSEFFECT_SLOW,d3 ; check if status counter is already at max value
+            endif
                 beq.s   @WriteScriptCommands
                 moveq   #8,d2
                 bsr.w   DetermineSpellEffectiveness
@@ -280,13 +323,30 @@ byte_B350:
 battlesceneScript_DisplaySlowMessages:
                 
                 jsr     GetBaseAgi
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                move.w  d1,d2
+            endif
                 mulu.w  #3,d1
                 lsr.l   #3,d1
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                rol.w   #6,d3           ; calculate difference between full and current SLOW increase values
+                mulu.w  d3,d2
+                lsr.l   #3,d2
+                sub.w   d2,d1
+            endif
                 displayMessage #MESSAGE_BATTLE_AGILITY_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 jsr     GetBaseDef
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                move.w  d1,d2
+            endif
                 mulu.w  #3,d1
                 lsr.l   #3,d1
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                mulu.w  d3,d2
+                lsr.l   #3,d2
+                sub.w   d2,d1
+            endif
                 displayMessage #MESSAGE_BATTLE_DEFENSE_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
@@ -307,6 +367,9 @@ spellEffect_Attack:
                 ori.w   #STATUSEFFECT_ATTACK,d1
                 jsr     SetStatusEffects
                 andi.w  #STATUSEFFECT_ATTACK,d3
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                cmpi.w  #STATUSEFFECT_ATTACK,d3 ; check if status counter is already at max value
+            endif
                 beq.s   @WriteScriptCommands
                 moveq   #8,d2
                 bsr.w   DetermineSpellEffectiveness
@@ -323,8 +386,17 @@ byte_B3E2:
                 
                 bsr.w   AddStatusEffectSpellExp
                 jsr     GetBaseAtt
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                move.w  d1,d2
+            endif
                 mulu.w  #3,d1
                 lsr.l   #3,d1
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                rol.w   #2,d3           ; calculate difference between full and current ATTACK increase values
+                mulu.w  d3,d2
+                lsr.l   #3,d2
+                sub.w   d2,d1
+            endif
                 displayMessage #MESSAGE_BATTLE_ATTACK_SPELL_EFFECT,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
@@ -359,7 +431,7 @@ spellEffect_Dispel:
                 jsr     GetStatusEffects
                 ori.w   #STATUSEFFECT_SILENCE,d1
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B45A       
+                bne.s   byte_B45A
                 executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B45A:
@@ -410,7 +482,7 @@ spellEffect_Muddle:
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B4EA       
+                bne.s   byte_B4EA
                 executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B4EA:
@@ -461,7 +533,7 @@ spellEffect_Desoul:
                 bsr.w   DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B53C       
+                bne.s   byte_B53C
                 executeAllyReaction #$8000,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineBattleMessage
 byte_B53C:
@@ -473,7 +545,7 @@ byte_B53C:
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
                 move.w  #MESSAGE_BATTLE_SOUL_WAS_STOLEN_ALLY,d2 ; ally message
-                bra.s   byte_B562       
+                bra.s   byte_B562
 @EnemyMessage:
                 
                 move.w  #MESSAGE_BATTLE_SOUL_WAS_STOLEN_ENEMY,d2
@@ -500,7 +572,7 @@ spellEffect_Sleep:
                 jsr     GetStatusEffects
                 ori.w   #STATUSEFFECT_SLEEP,d1
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B5A8       
+                bne.s   byte_B5A8
                 executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B5A8:
@@ -549,7 +621,7 @@ spellEffect_AbsorbMp:
                 move.b  (a4),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B642       
+                bne.s   byte_B642
                 executeAllyReaction #0,d2,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineMessage
 byte_B642:
@@ -558,11 +630,11 @@ byte_B642:
 @DetermineMessage:
                 
                 bsr.w   AddStatusEffectSpellExp
-                bscHideTextBox
+                bscCloseDialogueWindow
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
                 move.w  #MESSAGE_BATTLE_ABSORBED_MAGIC_POINTS,d1 ; ally message
-                bra.s   byte_B66C       
+                bra.s   byte_B66C
 @EnemyMessage:
                 
                 move.b  (a5),d0
@@ -585,7 +657,7 @@ spellEffect_PowerWater:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B6A2       
+                bne.s   byte_B6A2
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @Continue
 byte_B6A2:
@@ -617,7 +689,7 @@ spellEffect_ProtectMilk:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B708       
+                bne.s   byte_B708
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B708:
@@ -649,7 +721,7 @@ spellEffect_QuickChicken:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B76E       
+                bne.s   byte_B76E
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B76E:
@@ -681,7 +753,7 @@ spellEffect_RunningPimento:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B7D4       
+                bne.s   byte_B7D4
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineIncreaseValue
 byte_B7D4:
@@ -692,10 +764,10 @@ byte_B7D4:
                 jsr     GetBaseMov
                 clr.w   d2
                 cmpi.b  #9,d1
-                beq.w   byte_B802       
+                beq.w   byte_B802
                 moveq   #1,d2
                 cmpi.b  #8,d1
-                beq.w   byte_B802       
+                beq.w   byte_B802
                 moveq   #2,d2
 byte_B802:
                 
@@ -759,7 +831,7 @@ spellEffect_BrightHoney:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B8BA       
+                bne.s   byte_B8BA
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B8BA:
@@ -801,7 +873,7 @@ spellEffect_BraveApple:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B93A       
+                bne.s   byte_B93A
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B93A:
@@ -895,9 +967,9 @@ spellEffect_FairyTear:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_BA6C       
+                bne.s   byte_BA6C
                 executeAllyReaction #0,d6,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
-                bra.s   byte_BA7C       
+                bra.s   byte_BA7C
 byte_BA6C:
                 
                 executeEnemyReaction #0,d6,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags

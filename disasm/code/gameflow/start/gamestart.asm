@@ -176,6 +176,7 @@ loc_3DE:
 
     ; End of function Start
 
+            if (VANILLA_BUILD=1)
                 dc.b $F3                ; Unused Z80 code
                 dc.b $31                ; di
                 dc.b $F0                ; ld      sp, 1FF0h
@@ -184,3 +185,4 @@ loc_3DE:
                 dc.b 0
                 dc.b 0
                 dc.b 0
+            endif

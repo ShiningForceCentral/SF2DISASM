@@ -49,7 +49,7 @@ loc_1AC09E:
                 jsr     (UpdateBackgroundVScrollData).w
                 jsr     (EnableDmaQueueProcessing).w
                 jsr     (FadeInFromBlack).w
-                move.l  (p_table_GameStaff).l,((CONFIGURATION_MODE_OR_GAME_STAFF_POINTER-$1000000)).w
+                loadPointer p_table_GameStaff, ((CONFIGURATION_MODE_OR_GAME_STAFF_POINTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_EndCredits
@@ -232,7 +232,7 @@ loc_1AC280:
 
 GenerateEndingCreditsFont:
                 
-                movea.l (p_tiles_Base).l,a0
+                getPointer p_tiles_Base, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadStackCompressedData).w
                 lea     (byte_FF6C02).l,a0

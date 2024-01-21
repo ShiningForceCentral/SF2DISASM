@@ -191,8 +191,12 @@ Map37_EntityEvent13:
 
 Map37_EntityEvent14:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     SoundTest
+            else
                 moveq   #ALLY_KARNA,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map37_EntityEvent14
 
@@ -202,8 +206,22 @@ Map37_EntityEvent14:
 
 Map37_EntityEvent15:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                move.w  (TEST_BUILD_CURRENT_MESSAGE).w,d0
+                cmpi.w  #MESSAGES_MAX_INDEX,d0
+                bhi.s   @Continue
+                move.w  #MESSAGES_MAX_INDEX,d0
+@Continue:      moveq   #0,d1
+                move.w  #MESSAGES_MAX_INDEX,d2
+                jsr     NumberPrompt
+                bmi.s   @Return
+                move.w  d0,(TEST_BUILD_CURRENT_MESSAGE).w
+                jsr     (DisplayText).w
+@Return:        rts
+            else
                 moveq   #ALLY_RANDOLF,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map37_EntityEvent15
 
@@ -246,8 +264,12 @@ Map37_EntityEvent18:
 
 Map37_EntityEvent19:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     RenameAllAllies
+            else
                 moveq   #ALLY_SKREECH,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map37_EntityEvent19
 
@@ -257,8 +279,12 @@ Map37_EntityEvent19:
 
 Map37_EntityEvent20:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     StartMapTest
+            else
                 moveq   #ALLY_TAYA,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function Map37_EntityEvent20
 
@@ -301,8 +327,12 @@ Map37_EntityEvent23:
 
 sub_5F9A0:
                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     StartBattleTest
+            else
                 moveq   #ALLY_SHEELA,d0
                 jmp     DisplayTacticalBaseQuote
+            endif
 
     ; End of function sub_5F9A0
 
@@ -312,9 +342,12 @@ sub_5F9A0:
 
 Map37_EntityEvent24:
                 
-                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jmp     StartConfiguration
+            else
                 txt     3376            ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
                 rts
+            endif
 
     ; End of function Map37_EntityEvent24
 
@@ -369,8 +402,20 @@ sub_5F9C6:
 
 Map37_EntityEvent26:
                 
-                 
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                jsr     CaravanMenu
+                txt     460             ; "Shop number?{D1}"
+                moveq   #SHOP_DEBUG,d0
+                moveq   #0,d1
+                moveq   #SHOPS_MAX_INDEX,d2
+                jsr     NumberPrompt
+                bmi.s   @Skip
+                move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     ShopMenu
+@Skip:          jmp     ChurchMenu
+            else
                 txt     11              ; "{LEADER}, take it easy!{W1}"
+            endif
 Map37_EntityEvent27:
                 
                 rts

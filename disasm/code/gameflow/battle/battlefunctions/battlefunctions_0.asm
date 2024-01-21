@@ -467,8 +467,13 @@ loc_23044:
                 move.b  -1(a0),d0
                 cmp.b   -2(a0),d0
                 beq.s   loc_2306A
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a1)
+                move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a1)
+            else
                 move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a1)
                 move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a1)
+            endif
                 ori.b   #3,ENTITYDEF_OFFSET_FLAGS_A(a1)
 loc_2306A:
                 
@@ -912,8 +917,13 @@ loc_23448:
                 
                 move.w  d0,ENTITYDEF_OFFSET_XTRAVEL(a0)
                 move.w  d1,ENTITYDEF_OFFSET_YTRAVEL(a0)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
+                move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a0)
+            else
                 move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a0)
+            endif
                 rts
 
     ; End of function sub_23414
@@ -1001,6 +1011,18 @@ UpdateBattleEntityMapsprite:
 @Continue:
                 
                 clr.w   d1
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+                cmpi.w  #MAPSPRITES_SPECIALS_START,d1
+                bcc.s   @Done
+				clr.w   d1
+                move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1
+                cmpi.b  #$20,d1
+                beq.s   @Done
+                move.w  d1,-(sp)
+                clr.w   d1
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+            else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
                 bcc.s   @Done
@@ -1010,6 +1032,7 @@ UpdateBattleEntityMapsprite:
                 move.w  d1,-(sp)
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+            endif
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1
@@ -1093,7 +1116,8 @@ loc_23572:
 
     ; End of function UpdateCursorSprites
 
-sprite_Cursor:  ; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+sprite_Cursor: 
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
 ;
 ;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
 ;
@@ -1133,6 +1157,28 @@ sprite_Cursor:  ; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpT
                 vdpSprite 86, V4|H4|14, 1712|MIRROR|PALETTE3, 153
                 vdpSprite 146, V4|H4|15, 1712|FLIP|PALETTE3, 95
                 vdpSprite 146, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 153
+                
+            if (STANDARD_BUILD&EXPANDED_RANGES=1)
+                ; Cursor radius 3
+                vdpSprite 38, V4|H4|9, 1680|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 52
+                vdpSprite 200, V4|H4|11, 1680|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 196
+                vdpSprite 56, V4|H4|13, 1712|PALETTE3, 95
+                vdpSprite 56, V4|H4|14, 1712|MIRROR|PALETTE3, 153
+                vdpSprite 176, V4|H4|15, 1712|FLIP|PALETTE3, 95
+                vdpSprite 176, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 153
+                
+                ; Cursor radius 4
+                vdpSprite 14, V4|H4|9, 1680|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 28
+                vdpSprite 230, V4|H4|11, 1680|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 220
+                vdpSprite 56, V4|H4|13, 1712|PALETTE3, 71
+                vdpSprite 56, V4|H4|14, 1712|MIRROR|PALETTE3, 177
+                vdpSprite 176, V4|H4|15, 1712|FLIP|PALETTE3, 71
+                vdpSprite 176, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 177
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 

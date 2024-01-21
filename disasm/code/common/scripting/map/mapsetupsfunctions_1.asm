@@ -168,7 +168,7 @@ RunMapSetupEntityEvent:
                 beq.w   loc_476D6
                 
                 movem.w d1-d2,-(sp)
-                movea.l MAPSETUP_OFFSET_ENTITY_EVENTS(a0),a0
+                movea.l MAPSETUP_OFFSET_EVENT_ENTITY(a0),a0
                 clr.w   d7
 loc_47638:
                 
@@ -392,8 +392,12 @@ GetCurrentMapSetup:
                 
                 movem.l d0-d1/a1,-(sp)
                 clr.w   d0
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
+            if (STANDARD_BUILD=1)
+                getPointer p_MapSetups, a1
+            else
                 lea     MapSetups(pc), a1
+            endif
 loc_477AC:
                 
                 cmpi.w  #-1,(a1)
@@ -508,6 +512,9 @@ sub_47832:
 
 CheckRandomBattle:
                 
+            if (STANDARD_BUILD&NO_RANDOM_BATTLES=1)
+                ; Do nothing
+            else
                 movem.l d1/d6-d7,-(sp)
                 move.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 add.w   d0,d1
@@ -543,7 +550,7 @@ loc_47896:
                 move.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 add.w   d0,d1
                 jsr     j_SetFlag
-                move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
+                move.l  #MAP_EVENT_RELOADMAP,((MAP_EVENT_TYPE-$1000000)).w
                 move.w  #$7530,((word_FFB196-$1000000)).w
                 jsr     (WaitForViewScrollEnd).w
                 sndCom  SFX_BOOST
@@ -551,6 +558,7 @@ loc_47896:
 loc_478C0:
                 
                 movem.l (sp)+,d1/d6-d7
+            endif
                 rts
 
     ; End of function CheckRandomBattle

@@ -61,6 +61,10 @@ BuildMemberSummaryWindow:
                 ; Draw status effect tiles
                 movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSUMMARY_OFFSET_STATUSEFFECT_TILES,a1
+            if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
+                move.l  d3,-(sp)
+                move.l  a1,d3
+            endif
                 move.w  combatant(a6),d0
                 jsr     j_GetStatusEffects
                 
@@ -128,6 +132,9 @@ BuildMemberSummaryWindow:
                 bsr.w   WriteStatusEffectTiles
 @DetermineMiniStatusPage:
                 
+            if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
+                move.l  (sp)+,d3
+            endif
                 move.b  ((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w,d0
                 bne.s   @Items
                 bsr.w   WriteMemberMiniStatus
@@ -257,9 +264,11 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentAtt
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
+            endif
                 bsr.w   WriteStatValue  
                 movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_DEF_STRING,a1
@@ -269,9 +278,11 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentDef
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
+            endif
                 bsr.w   WriteStatValue  
                 movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_AGI_STRING,a1
@@ -281,9 +292,11 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentAgi
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
+            endif
                 bsr.w   WriteStatValue  
                 movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_MOV_STRING,a1
@@ -293,9 +306,11 @@ loc_139A6:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
                 jsr     j_GetCurrentMov
+            if (VANILLA_BUILD=1)
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #STATS_DIGITS_NUMBER,d7
+            endif
                 bsr.w   WriteStatValue  
                 bra.w   loc_13C36
                 rts                     ; unreachable
@@ -335,12 +350,15 @@ WriteMemberMagicList:
                 movem.w (sp)+,d0-d1/d6-d7
                 movem.w d6-d7,-(sp)
                 lea     WINDOW_MEMBERSUMMARY_OFFSET_SPELL_LEVEL(a1),a1
+            if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+            else
                 move.w  #VDPTILE_UPPERCASE_L|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  #VDPTILE_LOWERCASE_E|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  #VDPTILE_LOWERCASE_V|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  #VDPTILE_LOWERCASE_E|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  #VDPTILE_LOWERCASE_L|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
+            endif
                 lsr.w   #SPELLENTRY_OFFSET_LV,d1
                 addq.w  #1,d1
                 move.w  d1,d0
@@ -355,6 +373,9 @@ WriteMemberMagicList:
 @NoMagic:
                 
                 move.w  d7,-(sp)
+            if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+                addq.w  #2,a1
+            endif
                 lea     aNothing_0(pc), a0
                 moveq   #-42,d1
                 moveq   #10,d7
@@ -422,9 +443,16 @@ return_13B46:
 
 LoadItemIcon:
                 
+                module  ; start of icon loading module
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                getPointer p_Icons, a0
+            if (STANDARD_BUILD=1)
+                cmpi.w  #ITEM_NOTHING,d1
+                bne.s   LoadIcon
+                bra.s   @Nothing
+            else
                 bra.w   LoadIcon
+            endif
 
     ; End of function LoadItemIcon
 
@@ -435,10 +463,10 @@ LoadItemIcon:
 LoadSpellIcon:
                 
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
-                movea.l (p_Icons).l,a0
+                getPointer p_Icons, a0
                 cmpi.w  #SPELL_NOTHING,d1
                 bne.s   @Spell
-                move.w  #ICON_NOTHING,d1
+@Nothing:       move.w  #ICON_NOTHING,d1
                 bra.s   LoadIcon
 @Spell:
                 
@@ -455,7 +483,7 @@ LoadIcon:
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1
-                adda.w  d1,a0           ; icon offset
+                addIconOffset d1, a0
                 moveq   #47,d7
 @Loop:
                 
@@ -467,6 +495,7 @@ LoadIcon:
                 ori.w   #$F,-158(a1)
                 ori.w   #$F000,-192(a1)
                 rts
+                modend  ; end of icon loading module
 
 ; END OF FUNCTION CHUNK FOR LoadItemIcon
 
@@ -592,12 +621,14 @@ loc_13CDE:
 
     ; End of function alt_WriteWindowTiles
 
+            if (VANILLA_BUILD=1)
 aNameClassLevExp:
                 dc.b 'NAME    CLASS     LEV EXP',0
 aNameHpMpAtDfAgMv:
                 dc.b 'NAME    HP MP AT DF AG MV',0
 aNameAttackDefense:
                 dc.b 'NAME    ATTACK   DEFENSE',0
+            endif
 aMagicItem:     dc.b 'MAGIC     ITEM'
 aItem_3:        dc.b '- ITEM -',0
 aMagic_2:       dc.b '- MAGIC -',0
@@ -916,7 +947,7 @@ sub_14108:
                 move.w  d2,d5
                 move.w  d1,d4
                 jsr     j_GetEquippedWeapon
-                bsr.w   EquipNewItem    
+                bsr.w   EquipNewItem
 @Ring:
                 
                 jsr     j_GetEquippableRings
@@ -952,7 +983,7 @@ sub_14108:
                 move.w  d2,d5
                 move.w  d1,d4
                 jsr     j_GetEquippedRing
-                bsr.w   EquipNewItem    
+                bsr.w   EquipNewItem
 @Done:
                 
                 movem.l (sp)+,d0/d3-a2
@@ -979,7 +1010,7 @@ BuildEquippingWindow:
                 tst.w   d1
                 bpl.s   loc_141EA       ; branch if something equipped
                 cmpi.w  #4,d3
-                bne.s   loc_141E6       
+                bne.s   loc_141E6
                 
                 ; Equip first item if inventory is full with equippable items
                 clr.w   d1
@@ -1130,10 +1161,14 @@ loc_14366:
                 
                 clr.w   d0
                 move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
-                bsr.w   DmaMembersListIcon
+                bsr.w   DmaMembersListIcon       
                 moveq   #$14,d1
                 bsr.w   LoadMiniStatusHighlightSprites
+            if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                move.b  #16,(SPRITE_NAME_HIGHLIGHT_LINK_NEW).l
+            else
                 move.b  #16,(SPRITE_NAME_HIGHLIGHT_LINK).l
+            endif
                 subq.w  #1,d6
                 bne.s   loc_14384
                 moveq   #$1E,d6
@@ -1263,21 +1298,39 @@ sub_1445A:
                 sndCom  SFX_VALIDATION
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
+            if (STANDARD_BUILD=1)
+                jsr     GetSpellAndNumberOfSpells
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
+                move.w  d1,(a0)+
+                moveq   #1,d1
+                jsr     GetSpellAndNumberOfSpells
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
+                move.w  d1,(a0)+
+                moveq   #2,d1
+                jsr     GetSpellAndNumberOfSpells
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
+                move.w  d1,(a0)+
+                moveq   #3,d1
+                jsr     GetSpellAndNumberOfSpells
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
+                move.w  d1,(a0)+
+            else
                 jsr     j_GetSpellAndNumberOfSpells
                 andi.w  #$7F,d1         ; BUG -- Should be using spell entry index mask $3F instead.
                 move.w  d1,(a0)+
                 moveq   #1,d1
                 jsr     j_GetSpellAndNumberOfSpells
-                andi.w  #$7F,d1
+                andi.w  #$7F,d1 
                 move.w  d1,(a0)+
                 moveq   #2,d1
                 jsr     j_GetSpellAndNumberOfSpells
-                andi.w  #$7F,d1
+                andi.w  #$7F,d1 
                 move.w  d1,(a0)+
                 moveq   #3,d1
                 jsr     j_GetSpellAndNumberOfSpells
-                andi.w  #$7F,d1
+                andi.w  #$7F,d1 
                 move.w  d1,(a0)+
+            endif
                 clr.b   ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
@@ -1530,8 +1583,11 @@ LoadMiniStatusHighlightSprites:
 @Continue2:
                 
                 clr.w   d0
-@OffsetY:
-                
+@OffsetY:       if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+                    cmpi.b  #WINDOW_MEMBERSUMMARY_PAGE_MAGIC,((CURRENT_MEMBERSUMMARY_PAGE-$1000000)).w
+                    bne.s   @Items
+                    lea     spr_MagicListTextHighlight(pc), a1
+@Items:         endif
                 clr.w   d2
                 move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d2
                 lsl.w   #NIBBLE_SHIFT_COUNT,d2
@@ -1568,11 +1624,29 @@ sprite_MiniStatusHighlight:
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
                 vdpSprite 260, V2|H4|9, 1472|PALETTE3|PRIORITY, 156 ; member name
+            if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                vdpSprite 260, V2|H1|10, 1474|PALETTE3|PRIORITY, 188
+                vdpSprite 260, V2|H4|11, 1472|MIRROR|PALETTE3|PRIORITY, 196
+                vdpSprite 168, V2|H4|12, 1472|PALETTE3|PRIORITY, 300
+                vdpSprite 168, V2|H2|13, 1474|PALETTE3|PRIORITY, 332
+            else
                 vdpSprite 260, V2|H4|10, 1472|MIRROR|PALETTE3|PRIORITY, 188
-                vdpSprite 168, V2|H4|11, 1472|PALETTE3|PRIORITY, 300 
-                                                        ; item or spell
+                vdpSprite 168, V2|H4|11, 1472|PALETTE3|PRIORITY, 300 ; item or spell
                 vdpSprite 168, V2|H2|12, 1474|PALETTE3|PRIORITY, 332
+            endif
                 vdpSprite 168, V2|H4|16, 1472|MIRROR|PALETTE3|PRIORITY, 340
+spr_MagicListTextHighlight:
+                
+        if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+            if (EIGHT_CHARACTERS_MEMBER_NAMES=1)
+                vdpSprite 168, V2|H4|12, 1472|PALETTE3|PRIORITY, 292
+                vdpSprite 168, V2|H3|13, 1474|PALETTE3|PRIORITY, 324
+            else
+                vdpSprite 168, V2|H4|11, 1472|PALETTE3|PRIORITY, 292
+                vdpSprite 168, V2|H3|12, 1474|PALETTE3|PRIORITY, 324
+            endif
+                vdpSprite 168, V2|H4|16, 1472|MIRROR|PALETTE3|PRIORITY, 340
+        endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1635,6 +1709,10 @@ EquipNewItem:
 @Equip:
                 
                 move.w  d4,d1
+                if (STANDARD_BUILD&FIX_HIGINS_SPELL=1)
+                    cmpi.w  #COMBATANT_ITEMSLOTS,d1
+                    bge.s   @Return
+                endif
                 jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.w   @Return         ; return if new item is not cursed
@@ -1919,8 +1997,8 @@ loc_14AAC:
                 move.w  #144,(a0)
 loc_14ADA:
                 
-                move.w  #VDPSPRITESIZE_V1|VDPSPRITESIZE_H1|$A,VDPSPRITE_OFFSET_SIZE(a0)
-                move.w  #VDPTILE_V_ARROW|VDPTILE_FLIP|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #VDPSPRITESIZE_V1|VDPSPRITESIZE_H1|10,VDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #VDPTILE_PRIORITY|VDPTILE_PALETTE3|VDPTILE_FLIP|VDPTILE_V_ARROW,VDPSPRITE_OFFSET_TILE(a0)
 loc_14AE6:
                 
                 addq.l  #VDP_SPRITE_ENTRY_SIZE,a0
@@ -1937,8 +2015,8 @@ loc_14AE6:
                 move.w  #168,(a0)
 loc_14B12:
                 
-                move.w  #VDPSPRITESIZE_V1|VDPSPRITESIZE_H1|$10,VDPSPRITE_OFFSET_SIZE(a0)
-                move.w  #VDPTILE_V_ARROW|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a0)
+                move.w  #VDPSPRITESIZE_V1|VDPSPRITESIZE_H1|16,VDPSPRITE_OFFSET_SIZE(a0)
+                move.w  #VDPTILE_PRIORITY|VDPTILE_PALETTE3|VDPTILE_V_ARROW,VDPSPRITE_OFFSET_TILE(a0)
 loc_14B1E:
                 
                 subq.w  #1,d1
@@ -2160,13 +2238,13 @@ LoadIconPixels:
                 
                 move.l  a1,-(sp)
                 move.w  d0,-(sp)
-                movea.l (p_Icons).l,a1
+                getPointer p_Icons, a1
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
                 lsl.w   #6,d0
-                adda.w  d0,a1
-                moveq   #ICON_PIXELS_LONGWORD_COUNTER,d7
+                addIconOffset d0, a1
+                moveq   #ICON_PIXELS_LONGWORD_COUNTER,d7 
 @Loop:
                 
                 move.l  (a1)+,(a0)+
@@ -2684,6 +2762,7 @@ tiles_ShopInventoryItemHighlight:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused code
 
 sub_15268:
                 
@@ -2729,7 +2808,7 @@ loc_1528E:
                 jsr     (CreateWindow).w
                 move.w  d0,windowSlot(a6)
                 move.l  a1,windowLayoutEndAddress(a6)
-                movea.l (p_tiles_YesNoPrompt).l,a0
+                getPointer p_tiles_YesNoPrompt, a0
                 lea     (FF8804_LOADING_SPACE).l,a1
                 jsr     (LoadStackCompressedData).w
                 clr.b   ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w
@@ -3200,7 +3279,7 @@ UpdatePortrait:
 LoadPortrait:
                 
                 movem.l d0-a3,-(sp)
-                movea.l (p_pt_Portraits).l,a0
+                getPointer p_pt_Portraits, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,d0

@@ -17,7 +17,7 @@ loc_47E8A:
                 cmpi.w  #-1,(a0)
                 beq.w   loc_47EC2
                 
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
                 cmp.b   (a0),d1
                 bne.s   loc_47E8A
                 move.w  2(a0),d1

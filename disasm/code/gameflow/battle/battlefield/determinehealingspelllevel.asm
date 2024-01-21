@@ -28,7 +28,7 @@ DetermineHealingSpellLevel:
                 sub.w   d2,d1           ; d1 = max HP - current HP
                 moveq   #-1,d2
                 cmpi.w  #ENEMYAI_THRESHOLD_HEAL1,d1 ; 2
-                bls.w   loc_CDDC        
+                bls.w   loc_CDDC
                 moveq   #0,d2
                 cmpi.w  #ENEMYAI_THRESHOLD_HEAL2,d1 ; 14
                 bls.w   loc_CDB8
@@ -61,7 +61,7 @@ loc_CDC2:
                                         ;  but this doesn't work due to the bugs above
                 jsr     FindSpellDefAddress
                 cmp.b   SPELLDEF_OFFSET_MP_COST(a0),d3 ; check if spell cost is more than current MP
-                bcc.w   loc_CDDC        
+                bcc.w   loc_CDDC
                 dbf     d2,loc_CDC2
 loc_CDDC:
                 

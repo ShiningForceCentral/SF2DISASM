@@ -22,10 +22,13 @@ CheckBattle:
                 
                 ; Get current map
                 clr.w   d0
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
 @Continue:
-                
+            if (STANDARD_BUILD=1)
+                getPointer p_table_BattleMapCoordinates, a0
+            else
                 lea     table_BattleMapCoordinates(pc), a0
+            endif
                 moveq   #BATTLES_MAX_INDEX,d6
                 clr.w   d7
 @Loop:
@@ -51,10 +54,10 @@ CheckBattle:
                 bne.w   @Next
 @SetCurrentCoordinates:
                 
-                move.b  BATTLEMAPCOORDINATES_OFFSET_X(a0),((BATTLE_AREA_X-$1000000)).w
-                move.b  BATTLEMAPCOORDINATES_OFFSET_Y(a0),((BATTLE_AREA_Y-$1000000)).w
-                move.b  BATTLEMAPCOORDINATES_OFFSET_WIDTH(a0),((BATTLE_AREA_WIDTH-$1000000)).w
-                move.b  BATTLEMAPCOORDINATES_OFFSET_HEIGHT(a0),((BATTLE_AREA_HEIGHT-$1000000)).w
+                setSavedByte BATTLEMAPCOORDINATES_OFFSET_X(a0), BATTLE_AREA_X
+                setSavedByte BATTLEMAPCOORDINATES_OFFSET_Y(a0), BATTLE_AREA_Y
+                setSavedByte BATTLEMAPCOORDINATES_OFFSET_WIDTH(a0), BATTLE_AREA_WIDTH
+                setSavedByte BATTLEMAPCOORDINATES_OFFSET_HEIGHT(a0), BATTLE_AREA_HEIGHT
                 addi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
                 jsr     j_CheckFlag
                 beq.s   @TriggerBattle

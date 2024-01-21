@@ -155,7 +155,9 @@ loc_3690:
 SetViewDestination:
                 
                 movem.w d0-d7,-(sp)
+            if (VANILLA_BUILD=1)
                 bra.w   loc_36BE
+            endif
 
     ; End of function SetViewDestination
 
@@ -166,12 +168,13 @@ SetViewDestination:
 
 
 sub_36B2:
-                
+            if (VANILLA_BUILD=1)
                 movem.w d0-d7,-(sp)
                 lsl.w   #7,d0
                 lsl.w   #7,d1
                 lsl.w   #7,d2
                 lsl.w   #7,d3
+            endif
 loc_36BE:
                 
                 move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d4

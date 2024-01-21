@@ -435,6 +435,13 @@ WriteStatBarColumn:
                 lsl.w   #2,d6
                 lsr.w   #3,d7
                 lsl.w   #5,d7
+            if (STANDARD_BUILD&FIX_GARBLED_HP_BAR=1)
+                cmpi.w  #(WriteStatBarColumn-table_StatBarColumns-4)/4,d4
+                ble.s   @Continue
+                moveq   #(WriteStatBarColumn-table_StatBarColumns-4)/4,d4
+            endif
+@Continue:
+                
                 lsl.w   #INDEX_SHIFT_COUNT,d4
                 move.l  table_StatBarColumns(pc,d4.w),d4
 @Loop:

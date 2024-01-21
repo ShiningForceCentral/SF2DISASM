@@ -7,8 +7,8 @@
 EndAfterBattleCutscene:
                 
                 clr.w   d0
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d0
-                move.b  table_AfterBattleJoins(pc,d0.w),d0 ; unused feature to make an ally join force after battle ?
+                getSavedByte CURRENT_BATTLE, d0
+                move.b  table_AfterBattleJoins(pc,d0.w),d0 ; unused feature to make an ally join force after battle
                 jsr     j_JoinForce     ; unused probably because cutscenes can already trigger force joins
                 movem.l (sp)+,d0-d1
                 rts

@@ -18,7 +18,7 @@ DisplayText:
                 movem.w d0,-(sp)        ; save string #
                 lsr.w   #6,d0
                 andi.b  #$FC,d0         ; string # -> bank pointer offset
-                movea.l (p_pt_TextBanks).l,a0 ; load script bank pointer
+                getPointer p_pt_TextBanks, a0 ; load script bank pointer
                 movea.l (a0,d0.w),a0
                 movem.w (sp)+,d0        ; restore string #
                 andi.w  #BYTE_MASK,d0   ; restrict to range 0-255
@@ -358,7 +358,11 @@ loc_6574:
 symbol_class:
                 
                 bsr.w   GetCurrentDialogueNameIndex
+            if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
+                bsr.w   GetFullClassName
+            else
                 jsr     j_GetClassName
+            endif
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_wait1:
@@ -911,7 +915,7 @@ HandleDialogueTypewriting:
                 move.w  (sp)+,d1
                 clr.w   d0
                 moveq   #3,d2
-                sub.b   ((MESSAGE_SPEED-$1000000)).w,d2
+                subtractSavedByte MESSAGE_SPEED, d2
                 beq.s   loc_68C2
                 subq.w  #1,d2
                 bset    d2,d0
@@ -1260,7 +1264,7 @@ LoadVariableWidthFont:
                 
                 subq.w  #1,d7
                 lsl.w   #5,d7
-                movea.l (p_font_VariableWidth).l,a0
+                getPointer p_font_VariableWidth, a0
                 adda.w  d7,a0
                 move.w  (a0)+,d4
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d4

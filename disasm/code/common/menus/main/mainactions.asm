@@ -113,7 +113,7 @@ byte_21348:
                 move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMp
                 jsr     j_ExecuteFlashScreenScript
-                move.b  ((EGRESS_MAP-$1000000)).w,d0
+                getSavedByte EGRESS_MAP, d0
                 jsr     (GetSavepointForMap).w
                 lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
                 move.w  #1,(a0)+
@@ -122,7 +122,7 @@ byte_21348:
                 move.b  d1,(a0)+
                 move.b  d2,(a0)+
                 move.b  d3,(a0)+
-                clr.b   ((PLAYER_TYPE-$1000000)).w
+                clearSavedByte PLAYER_TYPE
                 bra.w   @ExitMain
 byte_213A8:
                 
@@ -244,7 +244,7 @@ byte_21468:
                 move.w  itemIndex(a6),d1
                 jsr     IsItemUsableOnField
                 tst.w   d2
-                beq.w   @PickTarget     
+                beq.w   @PickTarget
                 
                 ; Check map events
                 bsr.w   GetPlayerEntityPosition ; Get first entity's X, Y and facing -> d1.l, d2.l, d3.w

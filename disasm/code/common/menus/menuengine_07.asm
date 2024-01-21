@@ -95,9 +95,14 @@ WriteLandEffectWindowLayout:
                 move.w  #WINDOW_LANDEFFECT_SIZE,d0
                 bsr.w   alt_WriteWindowTiles
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
+            if (STANDARD_BUILD&ACCURATE_LAND_EFFECT_DISPLAY=1)
+                jsr     GetLandEffectSetting
+                move.b  table_LandEffectDisplayValues(pc,d1.w),d0
+            else
                 jsr     j_GetLandEffectSetting
                 move.w  d1,d0
                 mulu.w  #15,d0
+            endif
                 moveq   #-16,d1
                 moveq   #2,d7
                 movea.l d3,a1
@@ -115,7 +120,49 @@ WriteLandEffectWindowLayout:
 
     ; End of function WriteLandEffectWindowLayout
 
-aLandEffect:    dc.b 'LAND',$B,'EFFECT',0
+landEffectDisplayValue: macro
+                ; Exit macro if parameter is a terminator word
+            if (\1=TERMINATOR_WORD)
+                mexit
+            endif
+                ; Otherwise, convert damage multiplier to reduction percent value, rounded to the nearest whole number
+value:          set (256-\1)*100/256
+remainder:      set (256-\1)*100%256
+            if (remainder>127)
+value:          set value+1
+            endif
+                dc.b value
+        endm
+
+table_LandEffectDisplayValues:
+                
+            if (STANDARD_BUILD&ACCURATE_LAND_EFFECT_DISPLAY=1)
+                landEffectDisplayValue LE_DMG_MULT_0
+                landEffectDisplayValue LE_DMG_MULT_1
+                landEffectDisplayValue LE_DMG_MULT_2
+                landEffectDisplayValue LE_DMG_MULT_3
+                landEffectDisplayValue LE_DMG_MULT_4
+                landEffectDisplayValue LE_DMG_MULT_5
+                landEffectDisplayValue LE_DMG_MULT_6
+                landEffectDisplayValue LE_DMG_MULT_7
+                landEffectDisplayValue LE_DMG_MULT_8
+                landEffectDisplayValue LE_DMG_MULT_9
+                landEffectDisplayValue LE_DMG_MULT_10
+                landEffectDisplayValue LE_DMG_MULT_11
+                landEffectDisplayValue LE_DMG_MULT_12
+                landEffectDisplayValue LE_DMG_MULT_13
+                landEffectDisplayValue LE_DMG_MULT_14
+                landEffectDisplayValue LE_DMG_MULT_15
+                align
+            endif
+            
+aLandEffect:
+                
+            if (STANDARD_BUILD&THREE_DIGITS_STATS=1)
+                dc.b 'LE'
+            else
+                dc.b 'LAND',$B,'EFFECT',0
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -131,8 +178,8 @@ BuildBattlefieldSettingsScreen:
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a1,-(sp)
                 link    a6,#-16
-                move.b  ((MESSAGE_SPEED-$1000000)).w,messageSpeed(a6)
-                move.b  ((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w,noBattleMessagesToggle(a6)
+                getSavedByte MESSAGE_SPEED, messageSpeed(a6)
+                getSavedByte NO_BATTLE_MESSAGES_TOGGLE, noBattleMessagesToggle(a6)
                 move.w  #$1309,d0
                 move.w  #$71C,d1
                 jsr     (CreateWindow).l
@@ -195,8 +242,8 @@ loc_1593E:
                 bra.s   loc_158D6
 loc_15940:
                 
-                move.b  messageSpeed(a6),((MESSAGE_SPEED-$1000000)).w
-                move.b  noBattleMessagesToggle(a6),((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w
+                setSavedByte messageSpeed(a6), MESSAGE_SPEED
+                setSavedByte noBattleMessagesToggle(a6), NO_BATTLE_MESSAGES_TOGGLE
 loc_1594C:
                 
                 move.w  windowSlot(a6),d0
@@ -260,7 +307,7 @@ sub_159A0:
                 lea     (SPRITE_BATTLE_CURSOR).l,a0
                 lea     sprite_BattlefieldSettings(pc), a1
                 clr.w   d3
-                move.b  ((MESSAGE_SPEED-$1000000)).w,d3
+                getSavedByte MESSAGE_SPEED, d3
                 lsl.w   #NIBBLE_SHIFT_COUNT,d3
                 tst.w   d4
                 bne.s   loc_159CA
@@ -274,7 +321,7 @@ loc_159CA:
                 move.w  (a1)+,(a0)
                 add.w   d3,(a0)+
                 clr.w   d3
-                move.b  ((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w,d3
+                getSavedByte NO_BATTLE_MESSAGES_TOGGLE, d3
                 lsl.w   #6,d3
                 tst.w   d4
                 beq.s   loc_159E8
@@ -324,12 +371,12 @@ sub_15A20:
                 clr.w   d3
                 tst.w   d4
                 bne.s   loc_15A30
-                move.b  ((MESSAGE_SPEED-$1000000)).w,d3
+                getSavedByte MESSAGE_SPEED, d3
                 andi.w  #3,d3
                 bra.s   byte_15A38
 loc_15A30:
                 
-                move.b  ((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w,d3
+                getSavedByte NO_BATTLE_MESSAGES_TOGGLE, d3
                 andi.w  #1,d3
 byte_15A38:
                 
@@ -348,12 +395,12 @@ SetBattlefieldSettings:
                 bne.s   @ToggleBattleMessages
                 
                 andi.w  #3,d3
-                move.b  d3,((MESSAGE_SPEED-$1000000)).w
+                setSavedByte d3, MESSAGE_SPEED
                 bra.s   byte_15A54
 @ToggleBattleMessages:
                 
                 andi.w  #1,d3
-                move.b  d3,((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w
+                setSavedByte d3, NO_BATTLE_MESSAGES_TOGGLE
 byte_15A54:
                 
                 sndCom  SFX_MENU_SELECTION

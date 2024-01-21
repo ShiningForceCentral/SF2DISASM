@@ -361,8 +361,14 @@ loc_2046C:
                 jsr     j_GetCombatantEntryAddress
                 move.w  itemSlot(a6),d1
                 add.w   d1,d1
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                add.w   d1,d1
+                adda.w  d1,a0
+                movep.w COMBATANT_OFFSET_ITEMS(a0),d2
+            else
                 lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d2
+            endif
                 btst    #ITEMENTRY_BIT_BROKEN,d2
                 bne.w   loc_204DC
                 txt     188             ; "It's not damaged.{W2}"
@@ -651,7 +657,11 @@ DetermineDealsItemsNotInCurrentShop:
                 lea     ((GENERIC_LIST-$1000000)).w,a0
                 clr.w   ((GENERIC_LIST_LENGTH-$1000000)).w
                 clr.w   d1
+            if (DEALS_ITEMS_COUNTER>127)
+                move.w  #DEALS_ITEMS_COUNTER,d7
+            else
                 moveq   #DEALS_ITEMS_COUNTER,d7
+            endif
 @Loop:
                 
                 jsr     j_GetDealsItemAmount

@@ -21,7 +21,7 @@ ApplyPositionsAfterEnemyLeaderDies:
                 bne.w   @Done
                 lea     table_AfterBattlePositions(pc), a0 ; if Bowie alive and enemy leader dead
                 clr.w   d1
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d1
+                getSavedByte CURRENT_BATTLE, d1
 @FindBattle_Loop:
                 
                 cmpi.w  #-1,(a0)
@@ -59,13 +59,16 @@ ApplyPositionsAfterEnemyLeaderDies:
                 cmpi.w  #-1,(a0)
                 beq.w   @Done
                 move.b  (a0),d0
-                
+            if (STANDARD_BUILD&CUTSCENE_PROTECTION=1)
+                ; Always apply positions 
+            else
                 ; If character is alive, apply positions
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   @ApplyPositions
                 cmpi.b  #$80,d0
                 bne.w   @NextCombatant
+            endif
 @ApplyPositions:
                 
                 move.b  1(a0),d1

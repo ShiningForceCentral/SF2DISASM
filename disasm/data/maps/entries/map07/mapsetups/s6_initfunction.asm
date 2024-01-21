@@ -10,8 +10,12 @@ ms_map7_InitFunction:
                  
                 chkFlg  707             ; Set after the "one year has passed" text, after New Granseal is built
                 bne.s   return_55830
-                move.b  #MAP_NEW_GRANSEAL,((EGRESS_MAP-$1000000)).w
+                setSavedByte #MAP_NEW_GRANSEAL, EGRESS_MAP
+            if (STANDARD_BUILD&TEST_BUILD&TEST_BUILD_SKIP_NEW_GRANSEAL_CUTSCENE=1)
+                ; do nothing
+            else
                 script  cs_55832
+            endif
                 setFlg  707             ; Set after the "one year has passed" text, after New Granseal is built
                 setFlg  411             ; Battle 11 unlocked - BATTLE_CAVE_OF_DARKNESS          
 return_55830:
