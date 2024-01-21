@@ -72,7 +72,7 @@ StartAiControl:
                 
                 bsr.w   CountDefeatedEnemies
                 cmp.b   d1,d0
-                ble.s   @NonSwarmAi     ; if d1 < d0, process normally, else skip turn
+                ble.s   @NonSwarmAi     ; if d1 >= d0, process normally, else skip turn
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
