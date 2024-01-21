@@ -421,11 +421,7 @@ PositionBattleEntities:
                 bne.w   @Done
                 
                 ; Position neutral entities
-            if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
                 lea     ((ENTITY_EVENT_ENEMY_END-$1000000)).w,a1
-            else
-                lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
-            endif
                 lea     table_NeutralBattleEntities(pc), a0
                 clr.w   d1
                 getSavedByte CURRENT_BATTLE, d1
