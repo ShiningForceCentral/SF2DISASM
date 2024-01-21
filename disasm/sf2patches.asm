@@ -1,8 +1,10 @@
 
 ; 0 = OFF, 1 = ON
 
+; TEST_BUILD: Game starts by applying all TEST_BUILD features below.
+;   This is determined by whether standard.bat or standard-test.bat is used when building.
+
 ; Debugging facilitations
-TEST_BUILD:                 equ 1       ; Game starts with all characters having joined and at level 24, ready to be promoted.
 EASY_DEBUG_MODE:            equ 0       ; Toggle Debug Mode ON automatically when booting up the game.
 EASY_BATTLE_TEST:           equ 0       ; If Debug Mode is on, go to Battle Test instead of playing the intro cutscene.
 EASY_CONFIGURATION_MODE:    equ 0       ; Toggle Configuration Mode ON automatically, and skip checking if the Start button is pressed.
@@ -56,9 +58,9 @@ NO_AI_PETER:                        equ 0       ;
 NO_DARKNESS_IN_CAVES:               equ 0       ; The darkness gimmick in caves is disabled.
 NO_RANDOM_BATTLES:                  equ 0       ; 0 = Battles    1 = No Battles
 SKIP_SEGA_LOGO:                     equ 0
-SKIP_GAME_INTRO:                    equ 1
+SKIP_GAME_INTRO:                    equ 0
 SKIP_TITLE_SCREEN:                  equ 0
-SKIP_WITCH_DIALOGUE:                equ 1
+SKIP_WITCH_DIALOGUE:                equ 0
 
 
 ; Misc. features

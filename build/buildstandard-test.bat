@@ -34,8 +34,8 @@ echo Assembling SFX bank ...
     ..\..\..\..\tools\asw\p2bin.exe .\sfxbank.p ..\sfxbank.bin -k -r $E000-$ffff
 cd ../../../
 echo Assembling game ...
-SET "buildname=sf2standard-%today%-%hour%%minutes%%seconds%"
-@"../tools/asm68k" /e VANILLA_BUILD=0 /e STANDARD_BUILD=1 /e TEST_BUILD=0 /k /m /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%.bin", ../build/%buildname%.sym, ../build/%buildname%.lst > ../build/output.log
+SET "buildname=sf2standard-test-%today%-%hour%%minutes%%seconds%"
+@"../tools/asm68k" /e VANILLA_BUILD=0 /e STANDARD_BUILD=1 /e TEST_BUILD=1 /k /m /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%.bin", ../build/%buildname%.sym, ../build/%buildname%.lst > ../build/output.log
 echo End of assembly, produced %buildname%.bin
 
 echo -------------------------------------------------------------
