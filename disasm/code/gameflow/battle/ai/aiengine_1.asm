@@ -205,7 +205,11 @@ StartAiControl:
 CountDefeatedEnemies:
                 
                 movem.l d0/d2-a6,-(sp)
-                move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1
+                if (FIX_COUNT_DEFEATED_ENEMIES=1)
+            	    move.w  #BATTLESPRITESET_SUBSECTION_ENEMIES,d1 ;properly checks all monsters in the battle
+            	else
+            	    move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1 ;incorrectly limits to the counting of dead monsters to the ally battle slot count
+            	endif
                 jsr     j_GetBattleSpritesetSubsection
                 move.w  d1,d2
                 subi.w  #2,d2
