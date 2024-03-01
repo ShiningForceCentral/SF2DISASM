@@ -1813,7 +1813,7 @@ spellanimationSetup_Detox:
                 
                  
                 sndCom  SFX_SPELL_CAST
-                move.w  #$A8A,d0
+                move.w  #DETOX_FLASH_COLOR,d0
                 bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellanimationProperties
                 moveq   #SPELLGRAPHICS_DETOX,d0
