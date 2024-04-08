@@ -132,21 +132,22 @@ StartAiControl:
                 bra.w   @Done
 @CheckSpecialMoveOrders:
                 
+				; Check if following a dead target and if so, change to second special move orders
                 move.w  d7,d0
                 bsr.w   GetAiSpecialMoveOrders
                 cmpi.w  #NOTHING_BYTE,d1
-                beq.s   @HandleSecondaryCharacteristics
+                beq.s   @HandleSecondaryCharacteristics ;skip if no special orders
                 btst    #6,d1
-                bne.s   @HandleSecondaryCharacteristics
+                bne.s   @HandleSecondaryCharacteristics ;skip if following a point
                 move.w  d1,d0
                 bsr.w   GetCurrentHp
                 tst.w   d1
-                bne.s   @HandleSecondaryCharacteristics
+                bne.s   @HandleSecondaryCharacteristics ;skip if the followed target is still alive
                 move.w  d7,d0
                 bsr.w   GetAiSpecialMoveOrders
                 move.w  d2,d1
                 move.w  #NOTHING_BYTE,d2
-                bsr.w   SetAiSpecialMoveOrders
+                bsr.w   SetAiSpecialMoveOrders ;set the primary special move orders equal to that of the secondary, and set the secondary to FF (aka no special orders)
 @HandleSecondaryCharacteristics:
                 
                 move.w  d7,d0
