@@ -1397,7 +1397,7 @@ entitySize = 32
 entityVelocityYOffset = 5
 entityMapspriteOffset = 6
     endif
-	
+
 ENTITYDEF_OFFSET_X: equ 0 
 ENTITYDEF_OFFSET_Y: equ 2 
 ENTITYDEF_OFFSET_Y_LOWERBYTE: equ 3 
