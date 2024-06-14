@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_07.asm :
-; 0x15772..0x15A5A : Menu engine
+; 0x15772..0x15A5A : Menu engine, part 7
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -13,7 +13,7 @@ OpenLandEffectWindow:
                 jsr     (CreateWindow).w
                 addq.w  #1,d0
                 move.w  d0,((LAND_EFFECT_WINDOW_INDEX-$1000000)).w
-                bsr.w   WriteLandEffectWindowLayout
+                bsr.w   BuildLandEffectWindow
                 move.w  ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
                 move.w  #$201,d1
@@ -65,7 +65,7 @@ HideLandEffectWindow:
                 tst.w   ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w
                 beq.w   @Return
                 movem.l d0-a2,-(sp)
-                bsr.w   WriteLandEffectWindowLayout
+                bsr.w   BuildLandEffectWindow
                 tst.b   ((HIDE_WINDOWS_TOGGLE-$1000000)).w
                 bne.s   @Done
                 move.w  ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w,d0
@@ -85,7 +85,7 @@ HideLandEffectWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-WriteLandEffectWindowLayout:
+BuildLandEffectWindow:
                 
                 move.w  ((LAND_EFFECT_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
@@ -113,7 +113,7 @@ WriteLandEffectWindowLayout:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 rts
 
-    ; End of function WriteLandEffectWindowLayout
+    ; End of function BuildLandEffectWindow
 
 aLandEffect:    dc.b 'LAND',$B,'EFFECT',0
 

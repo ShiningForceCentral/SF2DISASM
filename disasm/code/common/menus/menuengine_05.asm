@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_05.asm :
-; 0x1288E..0x135A6 : Menu engine
+; 0x1288E..0x135A6 : Menu engine, part 5
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -25,6 +25,8 @@ GetSavepointForMap:
 @Continue:
                 
                 move.l  a0,-(sp)
+                
+                ; Load default position in case map is not found
                 moveq   #1,d1
                 moveq   #1,d2
                 moveq   #UP,d3

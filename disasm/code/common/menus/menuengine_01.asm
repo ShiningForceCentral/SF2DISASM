@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_01.asm :
-; 0x100C8..0x10940 : Menu engine
+; 0x100C8..0x10940 : Menu engine, part 1
 
 ; =============== S U B R O U T I N E =======================================
 

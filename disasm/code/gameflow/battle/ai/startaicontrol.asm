@@ -1,6 +1,6 @@
 
-; ASM FILE code\gameflow\battle\ai\aiengine_1.asm :
-; 0xDEFC..0xE1AC : AI engine
+; ASM FILE code\gameflow\battle\ai\startaicontrol.asm :
+; 0xDEFC..0xE1AC : AI engine : preparatory phase
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -12,18 +12,20 @@
 StartAiControl:
                 
                 movem.l d0-a5,-(sp)
-                move.w  d0,d7           ; D7 = copy of AI controlled combatant index
+                move.w  d0,d7           ; d7.w = copy of AI controlled combatant index
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Enemy
-                move.w  #6,d5           ; if an ally is AI controlled (Peter, Jaro) use AI #6
+                
+                ; If an ally is AI controlled (e.g., Peter, Jaro) use AI commandset #6
+                move.w  #AICOMMANDSET_ATTACKER1,d5
                 bra.w   @HandleAiCommandset
 @Enemy:
                 
                 bsr.w   GetAiCommandset 
                 cmpi.b  #AICOMMANDSET_SWARM,d1 ; check for AI #15, the "swarm" AI used in Kraken, Harpy, and Chess Battles
-                beq.s   @IsAtFullHP
+                beq.s   @IsAtFullHp
                 bra.w   @NonSwarmAi
-@IsAtFullHP:
+@IsAtFullHp:
                 
                 bsr.w   GetMaxHp
                 move.w  d1,d2
@@ -39,7 +41,7 @@ StartAiControl:
                 lea     list_SwarmBattles(pc), a0
                 nop
                 clr.w   d2
-                move.b  (a0),d2         ; D2 = number of swarm battles
+                move.b  (a0),d2         ; d2.b = number of swarm battles
                 subi.w  #1,d2
                 clr.w   d0
                 adda.w  #1,a0
@@ -62,9 +64,9 @@ StartAiControl:
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 clr.w   d5
-                move.b  d7,d5           ; d7 holds the character index, for monsters it starts at $80
-                andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d5 ; d5 now holds the monster index for the battle (starts at $00)
-                move.b  (a0,d5.w),d0    ; d0 now holds the number from the swarm table corresponding to the monster
+                move.b  d7,d5           ; d5.w = combatant entry
+                andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d5
+                move.b  (a0,d5.w),d0    ; d0.b = number from the swarm table corresponding to the attacker
                 tst.b   d0
                 bne.s   @CheckSwarmActivation
                 bra.w   @NonSwarmAi
@@ -73,6 +75,7 @@ StartAiControl:
                 bsr.w   CountDefeatedEnemies
                 cmp.b   d1,d0
                 ble.s   @NonSwarmAi     ; if d1 >= d0, process normally, else skip turn
+                
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
@@ -99,7 +102,9 @@ StartAiControl:
                 andi.w  #3,d1
                 btst    #0,d1
                 bne.s   @HandleSpecialAttackers
-                bsr.w   sub_F522        
+                
+                ; If combatant AI is not yet activated
+                bsr.w   DetermineStandbyAiMovement
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 bra.w   @Done
@@ -113,7 +118,7 @@ StartAiControl:
                 bsr.w   GetEnemy        
                 
                 ; Check if line attacker
-                cmpi.w  #ENEMY_PRISM_FLOWER,d1
+                cmpi.w  #ENEMY_PRISM_FLOWER,d1 ; HARDCODED enemy indexes
                 bne.s   @IsZeonGuard
                 bsr.w   ProcessLineAttackerAi
                 bra.w   @Done
@@ -135,8 +140,9 @@ StartAiControl:
                 bsr.w   GetAiSpecialMoveOrders
                 cmpi.w  #NOTHING_BYTE,d1
                 beq.s   @HandleSecondaryCharacteristics
-                btst    #6,d1
+                btst    #COMBATANT_BIT_SORT,d1
                 bne.s   @HandleSecondaryCharacteristics
+                
                 move.w  d1,d0
                 bsr.w   GetCurrentHp
                 tst.w   d1
@@ -150,29 +156,29 @@ StartAiControl:
                 
                 move.w  d7,d0
                 bsr.w   GetAiCommandset 
-                move.w  d1,d5           ; D5 = copy of AI commandset
-                lea     table_E249(pc), a0
+                move.w  d1,d5           ; d5.w = copy of AI commandset
+                lea     table_AiSecondaryCharacteristics(pc), a0
                 nop
                 move.b  (a0,d1.w),d6
                 tst.b   d6
                 beq.s   @HandleAiCommandset
                 cmpi.b  #1,d6
                 bne.s   @CheckSecondaryCharacteristic2
-                jsr     j_GetMoveListForEnemyTarget
+                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1
 @CheckSecondaryCharacteristic2:
                 
                 cmpi.b  #2,d6
                 bne.s   @HandleAiCommandset
-                jsr     sub_1AC030      
+                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2
 @HandleAiCommandset:
                 
                 move.w  d5,d1
                 lea     pt_AiCommandsets(pc), a0
                 nop
-                lsl.l   #2,d1
+                lsl.l   #INDEX_SHIFT_COUNT,d1
                 movea.l (a0,d1.w),a1
                 clr.w   d2
-                move.b  (a1),d2         ; D2 = number of commands
+                move.b  (a1),d2         ; d2.b = number of commands
                 adda.w  #1,a1
                 subi.b  #1,d2
 @HandleAiCommandset_Loop:
@@ -205,7 +211,7 @@ StartAiControl:
 CountDefeatedEnemies:
                 
                 movem.l d0/d2-a6,-(sp)
-                move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1
+                move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1 ; BUG -- operand should be #BATTLESPRITESET_SUBSECTION_ENEMIES (#2)
                 jsr     j_GetBattleSpritesetSubsection
                 move.w  d1,d2
                 subi.w  #2,d2
@@ -232,6 +238,8 @@ CountDefeatedEnemies:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = attacker index
+
 
 ProcessLineAttackerAi:
                 
@@ -243,7 +251,8 @@ ProcessLineAttackerAi:
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  (a0),d0
                 tst.w   d0
-                beq.s   loc_E12C
+                beq.s   @Skip           ; skip if no target
+                
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_PRISM_LASER,(a0)
                 lea     ((TARGETS_LIST-$1000000)).w,a1
@@ -252,16 +261,14 @@ ProcessLineAttackerAi:
                 move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #-1,(a0)
-                bra.s   loc_E13E
-loc_E12C:
+                bra.s   @Done
+@Skip:
                 
                 lea     (CURRENT_BATTLEACTION).l,a0
-loc_E132:
-                
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #-1,(a0)
-loc_E13E:
+@Done:
                 
                 movem.l (sp)+,d0-a6
                 rts
@@ -270,6 +277,8 @@ loc_E13E:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = attacker index
 
 
 ProcessExploderAi:
@@ -282,19 +291,21 @@ ProcessExploderAi:
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  (a0),d0
                 tst.w   d0
-                beq.s   loc_E190
+                beq.s   @DoNotExplode   ; do not explode if no target
+                
                 move.w  #6,d6
                 jsr     j_GenerateRandomNumberUnderD6
                 cmpi.b  #4,d7
-                bne.s   loc_E190
+                bne.s   @DoNotExplode   ; randomly do not explode
+                
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_BURST_ROCK,(a0)
                 move.w  #SPELL_B_ROCK,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
                 move.w  d5,BATTLEACTION_OFFSET_ACTOR(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #-1,(a0)
-                bra.w   loc_E1A6
-loc_E190:
+                bra.w   @Done
+@DoNotExplode:
                 
                 move.w  d5,d0
                 move.w  #AICOMMAND_MOVE,d1
@@ -302,7 +313,7 @@ loc_E190:
                 bsr.w   ExecuteAiCommand
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_STAY,(a0)
-loc_E1A6:
+@Done:
                 
                 movem.l (sp)+,d0-a6
                 rts

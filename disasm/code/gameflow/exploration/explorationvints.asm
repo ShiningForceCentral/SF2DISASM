@@ -27,7 +27,7 @@ loc_25B02:
                 btst    #INPUT_BIT_B,((PLAYER_2_INPUT-$1000000)).w ; If Debug Mode and P1 C pushed while P2 B pushed, access Debug Flag Setter and then Chuch Actions
                 beq.s   loc_25B22
                 move.w  #$258,d0
-                jsr     j_DebugFlagSetter
+                jsr     j_DebugSetFlag
                 jsr     j_ChurchMenu
                 rts
 loc_25B22:

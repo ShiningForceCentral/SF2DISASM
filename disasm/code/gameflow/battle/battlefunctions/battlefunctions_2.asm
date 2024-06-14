@@ -316,11 +316,11 @@ ProcessBattleEntityControlPlayerInput:
                 move.w  d2,((CHEST_CONTENTS-$1000000)).w
                 cmpi.w  #-1,d2
                 bne.s   @SearchMenu     ; if d2.w != -1, then there is an item
-                moveq   #MENU_BATTLE_WITH_STAY,d2 ; Battle menu with STAY option
+                moveq   #MENU_BATTLE_WITH_STAY,d2
                 bra.s   @CheckTargetReachableByAttack
 @SearchMenu:
                 
-                moveq   #MENU_BATTLE_WITH_SEARCH,d2 ; Battle menu with SEARCH option
+                moveq   #MENU_BATTLE_WITH_SEARCH,d2
 @CheckTargetReachableByAttack:
                 
                 move.w  combatant(a6),d0
@@ -985,7 +985,7 @@ loc_24D42:
 @IsTargetInventoryFull:
                 
                 move.w  d0,itemOrSpellIndex(a6)
-                jsr     j_CloseMiniStatusWindow
+                jsr     j_CloseBattlefieldMiniStatusWindow
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
@@ -1290,7 +1290,7 @@ loc_251FC:
                 jsr     j_OpenLandEffectWindow
                 jsr     (WaitForPlayerInput).w
                 jsr     j_CloseLandEffectWindow
-                jsr     j_CloseMiniStatusWindow
+                jsr     j_CloseBattlefieldMiniStatusWindow
 loc_2521C:
                 
                 cmp.w   combatant(a6),d0

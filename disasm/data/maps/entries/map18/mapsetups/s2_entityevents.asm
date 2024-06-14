@@ -17,12 +17,12 @@ Map18_EntityEvent0:
                 txt     870             ; "Why, you're wearing a{N}beautiful jewel!  Wow!{N}Give it to me!{W1}"
                 jsr     j_ClosePortraitWindow
                 clsTxt
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     871             ; "The trader tried to remove{N}the jewel.{W1}"
                 clsTxt
                 jsr     LoadAndDisplayCurrentPortrait
-                move.w  ((SPEECH_SFX_BACKUP-$1000000)).w,((SPEECH_SFX-$1000000)).w
+                move.w  ((SPEECH_SFX_COPY-$1000000)).w,((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     872             ; "I can't remove it!  Blast!{N}How did you attach it{N}so firmly?{W1}"
                 rts
 

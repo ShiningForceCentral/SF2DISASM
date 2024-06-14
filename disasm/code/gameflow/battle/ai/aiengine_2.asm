@@ -4,66 +4,76 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; Randomly move an AI controlled combatant around a designated position when not activated.
+; 
 ; In: d0.w = attacker combatant
 
-var_4 = -4
+moveCount = -4
 attacker = -3
 startingY = -2
 startingX = -1
 
-sub_F522:
+DetermineStandbyAiMovement:
                 
                 movem.l d0-a6,-(sp)
                 link    a6,#-4
                 move.b  d0,attacker(a6)
+                
+                ; Determine 3/8 chance to stay put in the most roundabout way
                 move.w  #8,d6
                 jsr     j_GenerateRandomNumberUnderD6
                 cmpi.b  #2,d7
-                bne.s   loc_F554
+                bne.s   @loc1
+                
                 lea     (CURRENT_BATTLEACTION).l,a2
                 move.w  #BATTLEACTION_STAY,(a2)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
                 move.b  #-1,(a2)
-                bra.w   loc_F782
-loc_F554:
+                bra.w   @loc23
+@loc1:
                 
                 cmpi.b  #4,d7
-                bne.s   loc_F570
+                bne.s   @loc2
+                
                 lea     (CURRENT_BATTLEACTION).l,a2
                 move.w  #BATTLEACTION_STAY,(a2)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
                 move.b  #-1,(a2)
-                bra.w   loc_F782
-loc_F570:
+                bra.w   @loc23
+@loc2:
                 
                 cmpi.b  #6,d7
-                bne.s   loc_F58C
-                lea     (CURRENT_BATTLEACTION).l,a2
-                move.w  #BATTLEACTION_STAY,(a2)
-                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
-                move.b  #-1,(a2)
-                bra.w   loc_F782
-loc_F58C:
+                bne.s   @determineMoveOrder
                 
-                bsr.w   sub_F8EA
-                tst.b   d1
-                beq.s   loc_F5AA
                 lea     (CURRENT_BATTLEACTION).l,a2
                 move.w  #BATTLEACTION_STAY,(a2)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
                 move.b  #-1,(a2)
-                bra.w   loc_F782
-loc_F5AA:
+                bra.w   @loc23
+@determineMoveOrder:
+                
+                bsr.w   sub_F8EA        
+                tst.b   d1
+                beq.s   @isSpecialMove
+                
+                lea     (CURRENT_BATTLEACTION).l,a2
+                move.w  #BATTLEACTION_STAY,(a2)
+                lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
+                move.b  #-1,(a2)
+                bra.w   @loc23
+@isSpecialMove:
                 
                 tst.b   d2
-                bne.s   loc_F5C4
+                bne.s   @specialMove
+                
+                ; Perform regular movement
                 clr.w   d0
                 move.b  attacker(a6),d0
                 jsr     j_GetCombatantStartingPosition
                 move.b  d1,startingX(a6)
                 move.b  d2,startingY(a6)
-                bra.s   loc_F5DE
-loc_F5C4:
+                bra.s   @loc6
+@specialMove:
                 
                 clr.w   d0
                 move.b  attacker(a6),d0
@@ -72,7 +82,7 @@ loc_F5C4:
                 jsr     j_GetAiSpecialMoveOrderCoordinates
                 move.b  d1,startingX(a6)
                 move.b  d1,startingY(a6)
-loc_F5DE:
+@loc6:
                 
                 move.b  attacker(a6),d0
                 bsr.w   InitializeMovementArrays
@@ -87,22 +97,24 @@ loc_F5DE:
                 move.b  (a0),d1
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 tst.b   d1
-                bne.s   loc_F62A
+                bne.s   @loc8
+                
                 clr.w   d6
                 move.w  #2,d6
                 jsr     j_GenerateRandomNumberUnderD6
                 tst.b   d7
-                bne.s   loc_F624
+                bne.s   @loc7
+                
                 move.b  #4,d1
                 move.b  d1,(a0)
-                bra.s   loc_F62A
-loc_F624:
+                bra.s   @loc8
+@loc7:
                 
                 move.b  #3,d1
                 move.b  d1,(a0)
-loc_F62A:
+@loc8:
                 
-                move.b  d1,var_4(a6)
+                move.b  d1,moveCount(a6)
                 clr.l   d5
                 move.b  d1,d5
                 subi.l  #1,d5
@@ -111,16 +123,16 @@ loc_F62A:
                 lsr.w   #NIBBLE_SHIFT_COUNT,d1
                 move.w  d1,d6
                 clr.w   d7
-                lea     pt_F78A(pc), a1
+                lea     pt_StandbyAiMovements(pc), a1
                 nop
-                move.b  var_4(a6),d7
+                move.b  moveCount(a6),d7
                 subi.b  #3,d7
                 lsl.l   #2,d7
                 movea.l (a1,d7.w),a1
                 clr.w   d7
                 clr.w   d0
                 clr.w   d3
-loc_F65C:
+@loc9:
                 
                 clr.w   d1
                 clr.w   d2
@@ -129,24 +141,24 @@ loc_F65C:
                 add.b   startingX(a6),d1
                 add.b   startingY(a6),d2
                 tst.b   d1
-                bpl.s   loc_F678
-                bra.w   loc_F6AC
-loc_F678:
+                bpl.s   @loc10
+                bra.w   @loc15
+@loc10:
                 
                 cmpi.b  #MAP_SIZE_MAX_TILEWIDTH,d1
-                ble.s   loc_F682
-                bra.w   loc_F6AC
-loc_F682:
+                ble.s   @loc11
+                bra.w   @loc15
+@loc11:
                 
                 tst.b   d2
-                bpl.s   loc_F68A
-                bra.w   loc_F6AC
-loc_F68A:
+                bpl.s   @loc12
+                bra.w   @loc15
+@loc12:
                 
                 cmpi.b  #MAP_SIZE_MAX_TILEHEIGHT,d2
-                ble.s   loc_F694
-                bra.w   loc_F6AC
-loc_F694:
+                ble.s   @loc13
+                bra.w   @loc15
+@loc13:
                 
                 move.l  d3,-(sp)
                 clr.w   d3
@@ -154,19 +166,21 @@ loc_F694:
                 bsr.w   GetClosestAttackPosition
                 move.l  (sp)+,d3
                 cmpi.b  #-1,d1
-                bne.s   loc_F6AA
-                bra.w   loc_F6AC
-loc_F6AA:
+                bne.s   @loc14
+                bra.w   @loc15
+@loc14:
                 
                 bset    d3,d7
-loc_F6AC:
+@loc15:
                 
                 addi.w  #2,d0
                 addi.w  #1,d3
-                dbf     d5,loc_F65C
+                dbf     d5,@loc9
+                
                 bclr    d6,d7
                 tst.b   d7
-                bne.s   loc_F6EA
+                bne.s   @loc16
+                
                 lea     (byte_FFB1DC).l,a0
                 clr.w   d0
                 move.b  attacker(a6),d0
@@ -177,43 +191,44 @@ loc_F6AC:
                 move.w  #BATTLEACTION_STAY,(a2)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a2
                 move.b  #-1,(a2)
-                bra.w   loc_F782
-loc_F6EA:
+                bra.w   @loc23
+@loc16:
                 
                 move.w  d7,d5
                 move.w  #3,d4
                 clr.w   d0
-loc_F6F2:
+@loc17:
                 
                 lsr.w   #1,d5
-                bcc.s   loc_F6FA
+                bcc.s   @loc18
                 addi.b  #1,d0
-loc_F6FA:
+@loc18:
                 
-                dbf     d4,loc_F6F2
+                dbf     d4,@loc17
+                
                 move.w  d7,d5
                 move.w  d0,d6
                 jsr     j_GenerateRandomNumberUnderD6
                 clr.l   d4
-                move.b  var_4(a6),d4
+                move.b  moveCount(a6),d4
                 subi.w  #1,d4
                 clr.w   d0
                 clr.w   d1
-loc_F716:
+@loc19:
                 
                 lsr.w   #1,d5
-                bcc.s   loc_F726
+                bcc.s   @loc21
                 cmp.b   d7,d0
-                bne.s   loc_F722
-                bra.w   loc_F72E
-loc_F722:
+                bne.s   @loc20
+                bra.w   @loc22
+@loc20:
                 
                 addi.b  #1,d0
-loc_F726:
+@loc21:
                 
                 addi.b  #1,d1
-                dbf     d4,loc_F716
-loc_F72E:
+                dbf     d4,@loc19
+@loc22:
                 
                 lea     (byte_FFB1DC).l,a0
                 clr.w   d0
@@ -239,20 +254,23 @@ loc_F72E:
                 bsr.w   BuildAiMoveString
                 lea     (CURRENT_BATTLEACTION).l,a2
                 move.w  #BATTLEACTION_STAY,(a2)
-loc_F782:
+@loc23:
                 
                 unlk    a6
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_F522
+    ; End of function DetermineStandbyAiMovement
 
-pt_F78A:        dc.l table_F792
-                dc.l table_F798
-table_F792:     dc.b 0, -1
+pt_StandbyAiMovements:
+                dc.l table_StandbyAiMovements1 ; relative coordinates used for AI controlled movement
+                dc.l table_StandbyAiMovements2
+table_StandbyAiMovements1:
+                dc.b 0, -1
                 dc.b -1, 1
                 dc.b 1, 1
-table_F798:     dc.b 0, -1
+table_StandbyAiMovements2:
+                dc.b 0, -1
                 dc.b -1, 0
                 dc.b 0, 1
                 dc.b 1, 0
@@ -379,10 +397,13 @@ loc_F8E2:
 
 ; =============== S U B R O U T I N E =======================================
 
-var_4 = -4
-var_3 = -3
-var_2 = -2
-var_1 = -1
+; Out: d1.w = 0 if allowed to move
+;      d2.w != 0 if combatant is set to perform a special move order
+
+secondAiPoint = -4
+combatantToFollow = -3
+aiActivationRegion2 = -2
+aiActivationRegion1 = -1
 
 sub_F8EA:
                 
@@ -390,77 +411,83 @@ sub_F8EA:
                 link    a6,#-4
                 move.w  d0,d7
                 bsr.w   GetAiSpecialMoveOrders
-                move.b  d1,var_3(a6)
-                move.b  d2,var_4(a6)
+                move.b  d1,combatantToFollow(a6)
+                move.b  d2,secondAiPoint(a6)
                 bsr.w   GetAiRegion     
-                move.b  d1,var_1(a6)
-                move.b  d2,var_2(a6)
-                move.b  var_3(a6),d0
+                move.b  d1,aiActivationRegion1(a6)
+                move.b  d2,aiActivationRegion2(a6)
+                move.b  combatantToFollow(a6),d0
                 cmpi.b  #-1,d0
-                beq.s   loc_F924
+                beq.s   @checkSecondAiPoint
                 
-                cmpi.b  #$F,d1
-                beq.s   loc_F924
+                cmpi.b  #15,d1
+                beq.s   @checkSecondAiPoint
+                
                 move.b  #1,d1
-                bra.w   loc_F9AC
-loc_F924:
+                bra.w   @loc6
+@checkSecondAiPoint:
                 
-                move.b  var_4(a6),d0
+                move.b  secondAiPoint(a6),d0
                 cmpi.b  #-1,d0
-                beq.s   loc_F93C
+                beq.s   @checkCombatantToFollow
                 
-                cmpi.b  #$F,d2
-                beq.s   loc_F93C
+                cmpi.b  #15,d2
+                beq.s   @checkCombatantToFollow
+                
                 move.b  #1,d1
-                bra.w   loc_F9AC
-loc_F93C:
+                bra.w   @loc6
+@checkCombatantToFollow:
                 
-                move.b  var_3(a6),d0
+                move.b  combatantToFollow(a6),d0
                 cmpi.b  #-1,d0
-                beq.s   loc_F96E
+                beq.s   @loc3
                 
-                move.b  var_1(a6),d0
-                cmpi.b  #$F,d0
-                bne.s   loc_F96E
-                move.b  var_4(a6),d0
+                ; If set to follow a combatant
+                move.b  aiActivationRegion1(a6),d0
+                cmpi.b  #15,d0
+                bne.s   @loc3
+                
+                move.b  secondAiPoint(a6),d0
                 cmpi.b  #-1,d0
-                bne.s   loc_F96E
+                bne.s   @loc3
                 
-                move.b  var_2(a6),d0
-                cmpi.b  #$F,d0
-                beq.s   loc_F96E
+                move.b  aiActivationRegion2(a6),d0
+                cmpi.b  #15,d0
+                beq.s   @loc3
+                
                 clr.w   d1
                 move.b  #1,d2
-                bra.w   loc_F9AC
-loc_F96E:
+                bra.w   @loc6
+@loc3:
                 
-                move.b  var_3(a6),d0
+                move.b  combatantToFollow(a6),d0
                 cmpi.b  #-1,d0
-                bne.s   loc_F98A
+                bne.s   @loc4
                 
-                move.b  var_1(a6),d0
-                cmpi.b  #$F,d0
-                beq.s   loc_F98A
+                ; If not set to follow a combatant
+                move.b  aiActivationRegion1(a6),d0
+                cmpi.b  #15,d0
+                beq.s   @loc4
                 clr.w   d1
                 clr.w   d2
-                bra.w   loc_F9AC
-loc_F98A:
+                bra.w   @loc6
+@loc4:
                 
-                move.b  var_4(a6),d0
+                move.b  secondAiPoint(a6),d0
                 cmpi.b  #-1,d0
-                bne.s   loc_F9A6
+                bne.s   @loc5
                 
-                move.b  var_2(a6),d0
-                cmpi.b  #$F,d0
-                beq.s   loc_F9A6
+                move.b  aiActivationRegion2(a6),d0
+                cmpi.b  #15,d0
+                beq.s   @loc5
                 clr.w   d1
                 clr.w   d2
-                bra.w   loc_F9AC
-loc_F9A6:
+                bra.w   @loc6
+@loc5:
                 
                 move.w  #1,d1
                 clr.w   d2
-loc_F9AC:
+@loc6:
                 
                 unlk    a6
                 movem.l (sp)+,d0/d3-a6

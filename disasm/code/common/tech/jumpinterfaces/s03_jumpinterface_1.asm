@@ -65,61 +65,61 @@ j_OpenBattlefieldMiniStatusWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CloseMiniStatusWindow:
+j_CloseBattlefieldMiniStatusWindow:
                 
-                jmp     CloseMiniStatusWindow(pc)
+                jmp     CloseBattlefieldMiniStatusWindow(pc)
 
-    ; End of function j_CloseMiniStatusWindow
+    ; End of function j_CloseBattlefieldMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_OpenBattlesceneMiniStatusWindows:
+j_CreateBattlesceneMiniStatusWindows:
                 
-                jmp     OpenBattlesceneMiniStatusWindows(pc)
+                jmp     CreateBattlesceneMiniStatusWindows(pc)
 
-    ; End of function j_OpenBattlesceneMiniStatusWindows
+    ; End of function j_CreateBattlesceneMiniStatusWindows
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ShowAllyBattlesceneWindow:
+j_OpenAllyBattlesceneMiniStatusWindow:
                 
-                jmp     ShowAllyBattlesceneWindow(pc)
+                jmp     OpenAllyBattlesceneMiniStatusWindow(pc)
 
-    ; End of function j_ShowAllyBattlesceneWindow
+    ; End of function j_OpenAllyBattlesceneMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ShowEnemyBattlesceneWindow:
+j_OpenEnemyBattlesceneMiniStatusWindow:
                 
-                jmp     ShowEnemyBattlesceneWindow(pc)
+                jmp     OpenEnemyBattlesceneMiniStatusWindow(pc)
 
-    ; End of function j_ShowEnemyBattlesceneWindow
+    ; End of function j_OpenEnemyBattlesceneMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_HideAllyBattlesceneWindow:
+j_CloseAllyBattlesceneMiniStatusWindow:
                 
-                jmp     HideAllyBattlesceneWindow(pc)
+                jmp     CloseAllyBattlesceneMiniStatusWindow(pc)
 
-    ; End of function j_HideAllyBattlesceneWindow
+    ; End of function j_CloseAllyBattlesceneMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_HideEnemyBattlesceneWindow:
+j_CloseEnemyBattlesceneMiniStatusWindow:
                 
-                jmp     HideEnemyBattlesceneWindow(pc)
+                jmp     CloseEnemyBattlesceneMiniStatusWindow(pc)
 
-    ; End of function j_HideEnemyBattlesceneWindow
+    ; End of function j_CloseEnemyBattlesceneMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================

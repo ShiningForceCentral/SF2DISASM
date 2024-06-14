@@ -141,7 +141,7 @@ ExecuteAiCommand_Attack:
                 clr.l   d3
                 clr.l   d4
                 jsr     GetCombatantType
-                cmpi.b  #ENEMY_KRAKEN_ARM,d1 ; BUGGED When getting Claude's class type, the previous routine 
+                cmpi.b  #ENEMY_KRAKEN_ARM,d1 ; BUG -- When getting Claude's class type, the previous routine 
                                         ;  returns a value in the byte area that happens to be the same
                                         ;  as the Kraken Arm's index, causing the former to perform 
                                         ;  a ranged attack when controlled by the AI.

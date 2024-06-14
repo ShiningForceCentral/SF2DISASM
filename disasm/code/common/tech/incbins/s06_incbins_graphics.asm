@@ -17,7 +17,7 @@ tiles_YesNoPrompt:
                 incbin "data/graphics/tech/menus/yesnoprompttiles.bin"
 palette_WitchChoice:
                 incbin "data/graphics/specialscreens/witchscreen/witchchoicepalette.bin"
-WitchBubbleAnimation:
+table_WitchBubbleAnimation:
                 incbin "data/graphics/specialscreens/witchscreen/witchbubbleanimation.bin"
 tiles_SpeechBalloon:
                 incbin "data/graphics/specialscreens/witchscreen/speechballoontiles.bin"

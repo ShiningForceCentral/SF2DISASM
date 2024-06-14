@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_02.asm :
-; 0x110A4..0x114BE : Menu engine
+; 0x110A4..0x114BE : Menu engine, part 2
 pt_layouts_SpellLevelIndicator:
                 dc.l layout_SpellLevelIndicator
                 dc.l layout_SpellLevelIndicator

@@ -731,6 +731,8 @@ DecreaseCurrentAtt:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 DecreaseBaseDef:
                 
@@ -763,6 +765,8 @@ DecreaseCurrentDef:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 DecreaseBaseAgi:
                 
@@ -794,6 +798,8 @@ DecreaseCurrentAgi:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 DecreaseBaseMov:
@@ -837,18 +843,15 @@ GetClassName:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = address of names list
-;     D1 = name index
-; 
-; Out: A0 = address of entry in names list
-;      D7 = length of name
+; In: a0 = names list pointer, d1.w = name index
+; Out: a0 = pointer to name entry, d7.w = name length
 
 
 FindName:
                 
                 move.w  d0,-(sp)
                 subq.w  #1,d1
-                bmi.s   @Done           ; done if string length = 0
+                bmi.s   @Done           ; done if name index = 0
                 clr.w   d0
 @Loop:
                 
@@ -972,8 +975,8 @@ ApplyStatusEffectsAndItemsOnStats:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D3 = status effects bitfield
+; In: d0.w = combatant index
+;     d3.w = status effects bitfield
 
 
 ApplyStatusEffectsOnStats:
@@ -1139,7 +1142,7 @@ equipEffect_IncreaseDoubleAttackProwess:
 @Continue:
                 
                 lsl.b   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
-                andi.b  #PROWESS_MASK_CRITICAL,(a2) ; BUGGED chance to counter attack is being set to 1/32
+                andi.b  #PROWESS_MASK_CRITICAL,(a2) ; BUG -- chance to counter attack is being set to 1/32
                                         ; setting should be masked as well
                 or.b    d2,(a2)
                 rts
@@ -2442,7 +2445,7 @@ GetCombatantEntryAddress:
                 bra.s   @GetAddress
 @Enemy:
                 
-                cmpi.b  #COMBATANT_ENEMIES_SPACEEND,d0
+                cmpi.b  #COMBATANT_ENEMIES_SPACE_END,d0
                 bhi.s   @ErrorHandling
                 subi.b  #COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END,d0
 @GetAddress:

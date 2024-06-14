@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_06.asm :
-; 0x137AC..0x156A8 : Menu engine
+; 0x137AC..0x156A8 : Menu engine, part 6
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1216,7 +1216,7 @@ portraitWindow = -6
 membersListWindow = -4
 selectedMember = -2
 
-HideMembersListWindow:
+CloseMembersListWindow:
                 
                 movem.w d0-d2/d7,-(sp)
                 move.w  membersListWindow(a6),d0
@@ -1227,7 +1227,7 @@ HideMembersListWindow:
                 movem.w (sp)+,d0-d2/d7
                 rts
 
-    ; End of function HideMembersListWindow
+    ; End of function CloseMembersListWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1238,7 +1238,7 @@ portraitWindow = -6
 membersListWindow = -4
 selectedMember = -2
 
-ShowMembersListWindow:
+OpenMembersListWindow:
                 
                 movem.w d0-d2/d7,-(sp)
                 move.w  membersListWindow(a6),d0
@@ -1249,7 +1249,7 @@ ShowMembersListWindow:
                 movem.w (sp)+,d0-d2/d7
                 rts
 
-    ; End of function ShowMembersListWindow
+    ; End of function OpenMembersListWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1625,12 +1625,12 @@ EquipNewItem:
                 bne.w   @Equip          ; equip new item if not cursed
                 cmp.w   d4,d1
                 beq.w   @Return         ; return if selecting old item slot
-                jsr     HideMembersListWindow(pc)
+                jsr     CloseMembersListWindow(pc)
                 sndCom  MUSIC_CURSED_ITEM
                 txt     43              ; "Gosh!  The curse prohibits{N}you from exchanging{N}equipment!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput_0
                 clsTxt
-                jsr     ShowMembersListWindow(pc)
+                jsr     OpenMembersListWindow(pc)
                 bra.w   @Return
 @Equip:
                 
@@ -1639,12 +1639,12 @@ EquipNewItem:
                 cmpi.w  #2,d2
                 bne.w   @Return         ; return if new item is not cursed
                 move.w  d0,(DIALOGUE_NAME_INDEX_1).l
-                jsr     HideMembersListWindow(pc)
+                jsr     CloseMembersListWindow(pc)
                 sndCom  MUSIC_CURSED_ITEM
                 txt     34              ; "Gosh!  {NAME} is{N}cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput_0
                 clsTxt
-                jsr     ShowMembersListWindow(pc)
+                jsr     OpenMembersListWindow(pc)
 @Return:
                 
                 rts
@@ -3227,7 +3227,7 @@ loc_15662:
                 
                 lea     (PALETTE_2_CURRENT).l,a1
                 lea     (PALLETE_2_BASE).l,a2
-                lea     ((PALETTE_2_BACKUP-$1000000)).w,a3
+                lea     ((PALETTE_2_COPY-$1000000)).w,a3
                 moveq   #7,d7
 loc_15674:
                 

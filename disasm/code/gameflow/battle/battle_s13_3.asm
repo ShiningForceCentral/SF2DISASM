@@ -415,7 +415,7 @@ AdjustEnemyBaseAttForDifficulty:
 GetAiSpecialMoveOrderCoordinates:
                 
                 movem.l d0/a0,-(sp)
-                btst    #6,d0
+                btst    #COMBATANT_BIT_SORT,d0
                 bne.s   @GetAiPointCoordinates
                 
                 ; Get position of combatant to follow

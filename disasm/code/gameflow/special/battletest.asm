@@ -129,7 +129,7 @@ byte_77DE:
                 
                 movem.w d0-d4,-(sp)
                 move.w  #FLAG_INDEX_FOLLOWERS_ASTRAL,d0 ; Astral is a follower
-                jsr     j_DebugFlagSetter
+                jsr     j_DebugSetFlag
                 movem.w (sp)+,d0-d4
                 clr.w   d1
                 move.b  d0,d1

@@ -24,12 +24,12 @@ ExecuteAiCommand_Move:
                 
                 cmpi.b  #1,d1
                 bne.s   @loc_1
-                jsr     j_GetMoveListForEnemyTarget
+                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1
 @loc_1:
                 
                 cmpi.b  #2,d1
                 bne.s   @loc_2
-                jsr     sub_1AC030      
+                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2
 @loc_2:
                 
                 bsr.w   InitializeMovementArrays
@@ -307,13 +307,15 @@ ExecuteAiCommand_Move:
                 cmpi.b  #1,d1
                 bne.s   @loc_39
                 move.b  d7,d0           ; d7 = character index of the moving unit
-                jsr     j_GetMoveListForEnemyTarget ; if d1 = 1
+                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1 
+                                                        ; if d1 = 1
 @loc_39:
                 
                 cmpi.b  #2,d1
                 bne.s   @loc_40
                 move.b  d7,d0
-                jsr     sub_1AC030      ; if d1 = 2
+                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2 
+                                                        ; if d1 = 2
 @loc_40:
                 
                 move.w  d7,d0
