@@ -199,7 +199,7 @@ var_4 = -4
 DrawWitchMenuBubble:
                 
                 module
-                getPointer p_WitchBubbleAnimation, a0
+                getPointer p_table_WitchBubbleAnimation, a0
                 movea.l var_4(a6),a1
                 cmp.b   d0,d3
                 bne.s   @loc_3

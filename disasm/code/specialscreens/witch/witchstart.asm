@@ -19,7 +19,7 @@ StartWitchScreen:
                 bsr.w   InitializeDisplay
                 bsr.w   DisableDisplayAndInterrupts
                 clr.b   ((MOUTH_CONTROL_TOGGLE-$1000000)).w
-                move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w 
+                move.w  #SFX_DIALOG_BLEEP_4,((CURRENT_SPEECH_SFX-$1000000)).w 
                                                         ; Witch speech SFX
                 bsr.w   BuildWitchScreen
                 move.w  #30,((BLINK_COUNTER-$1000000)).w

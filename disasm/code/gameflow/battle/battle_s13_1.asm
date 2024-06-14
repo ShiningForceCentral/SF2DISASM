@@ -99,26 +99,27 @@ loc_1AC434:
 
 ; =============== S U B R O U T I N E =======================================
 
-; used by AI
+; In: d0.w = combatant index
 
 
-GetMoveListForEnemyTarget:
+AdjustObstructionFlagsForAiWithSecondaryCharacteristic1:
                 
                 module
                 movem.l d0-a6,-(sp)
                 move.b  d0,d7
                 jsr     j_GetAiSpecialMoveOrders
                 cmpi.b  #-1,d1
-                bne.s   @IsFollowOrder  
+                bne.s   @CheckMoveOrderType
                 bra.w   @Done
-                bra.s   loc_1AC456      ; unreachable code
-@IsFollowOrder:
+                bra.s   @loc2           ; unreachable code
+@CheckMoveOrderType:
                 
                 move.b  d1,d0           ; d0.w = AI special move order
-loc_1AC456:
+@loc2:
                 
                 btst    #COMBATANT_BIT_SORT,d0
                 bne.s   @Continue       ; continue is ordered to move into position
+                
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   @Continue       ; continue if combatant to follow is alive
@@ -129,7 +130,7 @@ loc_1AC456:
                 clr.l   d5
                 clr.l   d6
                 move.w  d1,d5
-                move.w  d2,d6
+                move.w  d2,d6           ; d5.w,d6.w = destination X,Y
                 move.w  d7,d0
                 jsr     j_InitializeMovementArrays
                 move.w  d5,d3
@@ -138,7 +139,7 @@ loc_1AC456:
                 move.w  #TERRAIN_ARRAY_ROWS_COUNTER,d4
                 move.w  #0,d2
                 lea     (BATTLE_TERRAIN_ARRAY).l,a0
-                lea     (FF4D00_LOADING_SPACE).l,a1
+                lea     (FF4D00_LOADING_SPACE).l,a1 ; Movable grid array (0 = movable space, -1 = not movable)
 @OuterLoop:
                 
                 move.w  #TERRAIN_ARRAY_COLUMNS_COUNTER,d3
@@ -147,23 +148,24 @@ loc_1AC456:
                 
                 move.b  (a0,d1.w),d0
                 cmpi.b  #TERRAIN_OBSTRUCTED,d0
-                bne.s   loc_1AC4B4
-                bra.w   @Next
-loc_1AC4B4:
+                bne.s   @IsMovableSpace
+                bra.w   @NextSpace
+@IsMovableSpace:
                 
                 move.l  d3,-(sp)
                 move.w  d0,d3
                 move.b  (a1,d1.w),d0
                 btst    #7,d0
-                beq.s   loc_1AC4D0
+                beq.s   @loc7           ; skip if space is movable
+                
                 move.w  d3,d0
                 bset    #7,d0           ; set obstruction flag
                 bset    #6,d0
                 move.b  d0,(a0,d1.w)
-loc_1AC4D0:
+@loc7:
                 
                 move.l  (sp)+,d3
-@Next:
+@NextSpace:
                 
                 addi.w  #1,d1
                 dbf     d3,@InnerLoop
@@ -177,78 +179,79 @@ loc_1AC4D0:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function GetMoveListForEnemyTarget
+    ; End of function AdjustObstructionFlagsForAiWithSecondaryCharacteristic1
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
-; something with targetting grid or ???
+; In: d0.w = combatant index
 
 
-sub_1AC4F0:
+AdjustObstructionFlagsForAiWithSecondaryCharacteristic2:
                 
                 movem.l d0-a6,-(sp)
-                move.b  d0,d7
+                move.b  d0,d7           ; d7.b = copy of combatant
                 clr.w   d1
-                move.b  d0,d1
+                move.b  d0,d1           ; d1.b = copy of combatant
                 lea     (AI_LAST_TARGET_TABLE).l,a0
-                andi.b  #$7F,d1 
+                andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
                 move.b  (a0,d1.w),d1
                 cmpi.b  #-1,d1
-                beq.s   loc_1AC516
+                beq.s   @CheckSpecialMoveOrders
                 
-                bsr.w   sub_1AC5AA      
-                bra.w   loc_1AC5A4
-loc_1AC516:
+                bsr.w   AdjustObstructionFlagsForAiTetheredToLastTarget
+                bra.w   @Done
+@CheckSpecialMoveOrders:
                 
                 move.w  d7,d0
                 jsr     j_GetAiSpecialMoveOrders
                 cmpi.b  #-1,d1
-                bne.s   loc_1AC52A
+                bne.s   @CheckMoveOrderType
                 
-                bra.w   loc_1AC5A4
-                bra.s   loc_1AC52C
-loc_1AC52A:
+                bra.w   @Done           ; done if no special move orders
+                bra.s   @loc3           ; unreachable code
+@CheckMoveOrderType:
                 
                 move.b  d1,d0
-loc_1AC52C:
+@loc3:
                 
                 btst    #COMBATANT_BIT_SORT,d0
-                bne.s   loc_1AC540
+                bne.s   @Continue       ; continue is ordered to move into position (i.e., AI point)
+                
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                bne.s   loc_1AC540
-                bra.w   loc_1AC5A4
-loc_1AC540:
+                bne.s   @Continue       ; continue if combatant to follow is alive
+                bra.w   @Done
+@Continue:
                 
                 jsr     GetAiSpecialMoveOrderCoordinates
                 move.w  d1,d5
                 move.w  d2,d6
                 lea     (BATTLE_TERRAIN_ARRAY).l,a0
                 move.w  #TERRAIN_ARRAY_ROWS_COUNTER,d4
-loc_1AC554:
+@OuterLoop:
                 
                 move.w  #TERRAIN_ARRAY_COLUMNS_COUNTER,d3
                 move.w  #0,d1
-loc_1AC55C:
+@InnerLoop:
                 
                 move.b  (a0,d1.w),d0
                 cmpi.b  #TERRAIN_OBSTRUCTED,d0
-                bne.s   loc_1AC56A      
-                bra.w   loc_1AC576
-loc_1AC56A:
+                bne.s   @SetFlags       
+                bra.w   @Next
+@SetFlags:
                 
                 bset    #7,d0           ; set obstruction flags
                 bset    #6,d0
                 move.b  d0,(a0,d1.w)
-loc_1AC576:
+@Next:
                 
                 addi.w  #1,d1
-                dbf     d3,loc_1AC55C
+                dbf     d3,@InnerLoop
                 
                 adda.w  #TERRAIN_ARRAY_OFFSET_NEXT_ROW,a0
-                dbf     d4,loc_1AC554
+                dbf     d4,@OuterLoop
                 
                 lea     list_1AC848(pc), a0
                 nop
@@ -259,68 +262,70 @@ loc_1AC576:
                 lea     list_1AC854(pc), a0
                 nop
                 bsr.w   sub_1AC7FE      
-loc_1AC5A4:
+@Done:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_1AC4F0
+    ; End of function AdjustObstructionFlagsForAiWithSecondaryCharacteristic2
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; AI-related
+; In: d0.w = combatant index
 
 
-sub_1AC5AA:
+AdjustObstructionFlagsForAiTetheredToLastTarget:
                 
                 movem.l d0-a6,-(sp)
                 move.b  d0,d7
                 jsr     j_GetAiSpecialMoveOrders
                 cmpi.b  #-1,d1
-                bne.s   loc_1AC5C2
+                bne.s   @CheckMoveOrderType
                 
-                bra.w   loc_1AC64E
-                bra.s   loc_1AC5C4
-loc_1AC5C2:
+                bra.w   @Done
+                bra.s   @loc2           ; unreachable code
+@CheckMoveOrderType:
                 
                 move.b  d1,d0
-loc_1AC5C4:
+@loc2:
                 
                 btst    #COMBATANT_BIT_SORT,d0
-                bne.s   loc_1AC5D8
+                bne.s   @Continue
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                bne.s   loc_1AC5D8
-                bra.w   loc_1AC64E
-loc_1AC5D8:
+                bne.s   @Continue
+                bra.w   @Done
+@Continue:
                 
                 bsr.w   GetAiSpecialMoveOrderCoordinates
                 move.w  d1,d5
                 move.w  d2,d6
                 move.w  #TERRAIN_ARRAY_ROWS_COUNTER,d4
                 lea     (BATTLE_TERRAIN_ARRAY).l,a0
-loc_1AC5EA:
+@OuterLoop:
                 
                 move.w  #TERRAIN_ARRAY_COLUMNS_COUNTER,d3
                 move.w  #0,d1
-loc_1AC5F2:
+@InnerLoop:
                 
                 move.b  (a0,d1.w),d0
                 cmpi.b  #TERRAIN_OBSTRUCTED,d0
-                bne.s   loc_1AC600      
-                bra.w   loc_1AC60C
-loc_1AC600:
+                bne.s   @SetFlags       
+                bra.w   @NextSpace
+@SetFlags:
                 
                 bset    #7,d0           ; set obstruction flags
                 bset    #6,d0
                 move.b  d0,(a0,d1.w)
-loc_1AC60C:
+@NextSpace:
                 
                 addi.w  #1,d1
-                dbf     d3,loc_1AC5F2
+                dbf     d3,@InnerLoop
+                
                 adda.w  #TERRAIN_ARRAY_OFFSET_NEXT_ROW,a0
-                dbf     d4,loc_1AC5EA
+                dbf     d4,@OuterLoop
+                
                 lea     list_1AC848(pc), a0
                 nop
                 bsr.w   sub_1AC7FE      
@@ -336,12 +341,12 @@ loc_1AC60C:
                 lea     list_1AC87E(pc), a0
                 nop
                 bsr.w   sub_1AC7FE      
-loc_1AC64E:
+@Done:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function sub_1AC5AA
+    ; End of function AdjustObstructionFlagsForAiTetheredToLastTarget
 
 
 ; =============== S U B R O U T I N E =======================================

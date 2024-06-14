@@ -130,7 +130,7 @@ byte_B17A:
                 
                 displayMessage #MESSAGE_BATTLE_RECOVERED_HIT_POINTS,d0,#0,d6 
                                                         ; Message, Combatant, Item or Spell, Number
-                bsr.w   CalculateHealingExp
+                bsr.w   battlesceneScript_CalculateHealingExp
                 rts
 
     ; End of function spellEffect_Heal
@@ -181,7 +181,7 @@ byte_B1F4:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @GiveEXP:
                 
-                bsr.w   AddStatusEffectSpellExp
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 
                 ; Check if Poison was cured
                 btst    #0,d2
@@ -207,7 +207,7 @@ byte_B1F4:
 @Ineffective:
                 
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @UpdateStatusEffects:
                 
                 move.b  (a5),d0
@@ -236,7 +236,7 @@ spellEffect_Boost:
             endif
                 beq.s   @WriteScriptCommands
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
@@ -248,7 +248,7 @@ byte_B2B6:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   AddStatusEffectSpellExp
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 jsr     GetBaseAgi
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
@@ -295,7 +295,7 @@ spellEffect_Slow:
                 addq.w  #CHANCE_TO_INFLICT_SLOW,d2 ; 3/8 base chance to inflict slow
 @Skip:
                 
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 move.w  d1,d3
                 ori.w   #STATUSEFFECT_SLOW,d1
@@ -306,7 +306,7 @@ spellEffect_Slow:
             endif
                 beq.s   @WriteScriptCommands
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
@@ -319,7 +319,7 @@ byte_B350:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @GiveEXP:
                 
-                bsr.w   AddStatusEffectSpellExp
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
 battlesceneScript_DisplaySlowMessages:
                 
                 jsr     GetBaseAgi
@@ -372,7 +372,7 @@ spellEffect_Attack:
             endif
                 beq.s   @WriteScriptCommands
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
@@ -384,7 +384,7 @@ byte_B3E2:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   AddStatusEffectSpellExp
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 jsr     GetBaseAtt
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
@@ -427,7 +427,7 @@ spellEffect_Dispel:
 @DetermineSuccess:
                 
                 move.w  d3,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 ori.w   #STATUSEFFECT_SILENCE,d1
                 btst    #COMBATANT_BIT_ENEMY,d0
@@ -439,7 +439,7 @@ byte_B45A:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   AddStatusEffectSpellExp
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 displayMessage #MESSAGE_BATTLE_HAS_BEEN_SILENCED,d0,#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
@@ -460,7 +460,7 @@ spellEffect_Muddle:
                 tst.w   ((BATTLESCENE_SPELL_LEVEL-$1000000)).w
                 beq.w   @Muddle1        
                 addq.w  #CHANCE_TO_INFLICT_MUDDLE2,d2 ; 3/8 base chance to inflict muddle 2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 ori.w   #STATUSEFFECT_MUDDLE2,d1
                 ori.w   #STATUSEFFECT_MUDDLE,d1
@@ -475,7 +475,7 @@ spellEffect_Muddle:
                 moveq   #CHANCE_TO_INFLICT_MUDDLE1,d2 ; otherwise, 3/8 base chance to inflict muddle 1
 @DetermineSuccess:
                 
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 ori.w   #STATUSEFFECT_MUDDLE,d1
                 move.w  #MESSAGE_BATTLE_IS_IN_A_DEEP_HAZE,d2
@@ -490,7 +490,7 @@ byte_B4EA:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   AddStatusEffectSpellExp
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 displayMessage d2,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
@@ -530,7 +530,7 @@ spellEffect_Desoul:
                 
                 module
                 addq.w  #CHANCE_TO_INFLICT_DESOUL,d2 ; 3/8 base chance to inflict desoul
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   byte_B53C
@@ -568,7 +568,7 @@ spellEffect_Sleep:
                 
                 module
                 addq.w  #CHANCE_TO_INFLICT_SLEEP,d2 ; 3/8 base chance to inflict sleep
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 ori.w   #STATUSEFFECT_SLEEP,d1
                 btst    #COMBATANT_BIT_ENEMY,d0
@@ -580,7 +580,7 @@ byte_B5A8:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   AddStatusEffectSpellExp
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 displayMessage #MESSAGE_BATTLE_FELL_ASLEEP,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
@@ -629,7 +629,7 @@ byte_B642:
                 executeEnemyReaction #0,d2,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineMessage:
                 
-                bsr.w   AddStatusEffectSpellExp
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 bscCloseDialogueWindow
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
@@ -825,7 +825,7 @@ spellEffect_BrightHoney:
                 tst.w   d1
                 bne.s   @TargetHasMP
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @TargetHasMP:
                 
                 move.b  (a5),d0
@@ -867,7 +867,7 @@ spellEffect_BraveApple:
                 cmpi.b  #-1,(a1)        ; check if target is able to level up
                 bne.s   @AbleToLevelUp
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @AbleToLevelUp:
                 
                 move.b  (a5),d0
@@ -977,7 +977,7 @@ byte_BA7C:
                 
                 displayMessage #MESSAGE_BATTLE_RECOVERED_MAGIC_POINTS,d0,#0,d6 
                                                         ; Message, Combatant, Item or Spell, Number
-                bsr.w   CalculateHealingExp
+                bsr.w   battlesceneScript_CalculateHealingExp
                 rts
 
     ; End of function spellEffect_FairyTear
@@ -1022,7 +1022,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-DetermineSpellEffectiveness:
+battlesceneScript_DetermineSpellEffectiveness:
                 
                 move.l  d0,-(sp)
                 tst.b   debugDodge(a2)
@@ -1045,7 +1045,7 @@ DetermineSpellEffectiveness:
                 move.l  (sp)+,d0
                 rts
 
-    ; End of function DetermineSpellEffectiveness
+    ; End of function battlesceneScript_DetermineSpellEffectiveness
 
 
 ; =============== S U B R O U T I N E =======================================

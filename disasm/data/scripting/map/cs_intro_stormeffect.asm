@@ -9,7 +9,7 @@ ApplyStormEffect:
                 
                 movem.l d0/a0-a1,-(sp)
                 lea     (PALETTE_1_CURRENT).l,a0
-                lea     ((PALETTE_1_BACKUP-$1000000)).w,a1
+                lea     ((PALETTE_1_COPY-$1000000)).w,a1
                 moveq   #7,d0
 loc_48FF2:
                 
@@ -26,7 +26,7 @@ loc_49006:
                 jsr     (ApplyVIntCramDma).w
                 moveq   #10,d0
                 jsr     (Sleep).w       
-                lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
+                lea     ((PALETTE_1_COPY-$1000000)).w,a0
                 lea     (PALETTE_1_CURRENT).l,a1
                 moveq   #7,d0
 loc_49022:

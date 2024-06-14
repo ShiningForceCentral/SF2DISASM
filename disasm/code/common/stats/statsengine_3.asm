@@ -43,7 +43,7 @@ InitializeAllyCombatantEntry:
                 
                 movem.l d0-d3/a0-a1,-(sp)
                 move.w  d0,d1
-                mulu.w  #COMBATANT_ENTRY_SIZE,d1
+                mulu.w  #COMBATANT_DATA_ENTRY_SIZE,d1
                 loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d1,a1
                 getPointer p_table_AllyNames, a0
@@ -129,7 +129,7 @@ InitializeAllyCombatantEntry:
 LoadAllyClassData:
                 
                 movem.l d0-d1/a0-a1,-(sp)
-                mulu.w  #COMBATANT_ENTRY_SIZE,d0
+                mulu.w  #COMBATANT_DATA_ENTRY_SIZE,d0
                 loadSavedDataAddress COMBATANT_ENTRIES, a1
                 adda.w  d0,a1
                 getPointer p_table_ClassDefinitions, a0

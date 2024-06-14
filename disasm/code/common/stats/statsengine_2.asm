@@ -675,6 +675,8 @@ DecreaseCurrentAtt:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 DecreaseBaseDef:
                 
@@ -707,6 +709,8 @@ DecreaseCurrentDef:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 DecreaseBaseAgi:
                 
@@ -738,6 +742,8 @@ DecreaseCurrentAgi:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 DecreaseBaseMov:
@@ -793,18 +799,15 @@ GetClassName:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = address of names list
-;     D1 = name index
-; 
-; Out: A0 = address of entry in names list
-;      D7 = length of name
+; In: a0 = names list pointer, d1.w = name index
+; Out: a0 = pointer to name entry, d7.w = name length
 
 
 FindName:
                 
                 move.w  d0,-(sp)
                 subq.w  #1,d1
-                bmi.s   @Done           ; done if string length = 0
+                bmi.s   @Done           ; done if name index = 0
                 clr.w   d0
 @Loop:
                 
@@ -977,8 +980,8 @@ ApplyStatusEffectsAndItemsOnStats:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D3 = status effects bitfield
+; In: d0.w = combatant index
+;     d3.w = status effects bitfield
 
 
 ApplyStatusEffectsOnStats:
@@ -1179,8 +1182,8 @@ equipEffect_IncreaseDoubleAttackProwess:
             if (STANDARD_BUILD&FIX_INCREASE_DOUBLE_RESETS_COUNTER=1)
                 andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_COUNTER,(a2)
             else
-                andi.b  #PROWESS_MASK_CRITICAL,(a2) ; BUGGED chance to counter attack is being set to 1/32
-            endif                   ; setting should be masked as well
+                andi.b  #PROWESS_MASK_CRITICAL,(a2) ; BUG -- chance to counter attack is being set to 1/32
+            endif                       ; counter atack setting should be masked as well
                 or.b    d2,(a2)
                 rts
 
@@ -2793,7 +2796,7 @@ GetCombatantEntryAddress:
                 
                 andi.w  #BYTE_MASK,d0
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                mulu.w  #COMBATANT_ENTRY_SIZE,d0
+                mulu.w  #COMBATANT_DATA_ENTRY_SIZE,d0
                 lea     (COMBATANT_ENTRIES).l,a0
             else
                 lsl.w   #3,d0           ; multiply by combatant entry size

@@ -120,23 +120,21 @@ sub_1AC028:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetMoveListForEnemyTarget:
+j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1:
                 
-                jmp     GetMoveListForEnemyTarget(pc)
+                jmp     AdjustObstructionFlagsForAiWithSecondaryCharacteristic1(pc)
 
-    ; End of function j_GetMoveListForEnemyTarget
+    ; End of function j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; AI-related
 
-
-sub_1AC030:
+j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2:
                 
-                jmp     sub_1AC4F0(pc)  
+                jmp     AdjustObstructionFlagsForAiWithSecondaryCharacteristic2(pc)
 
-    ; End of function sub_1AC030
+    ; End of function j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2
 
 
 ; =============== S U B R O U T I N E =======================================

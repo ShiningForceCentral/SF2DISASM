@@ -35,7 +35,11 @@ loc_4586C:
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d0
                 lsl.b   #NIBBLE_SHIFT_COUNT,d0
                 move.b  ENTITYDEF_OFFSET_23(a0),d1
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                ; do nothing
+            else
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
+            endif
                 or.b    d1,d0
                 lsl.l   #BYTE_SHIFT_COUNT,d0
                 move.b  ENTITYDEF_OFFSET_YSPEED(a0),d0

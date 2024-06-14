@@ -31,10 +31,8 @@ pt_AllyStats:   dc.l AllyStats00        ; BOWIE
                 dc.l AllyStats27        ; CHAZ
                 dc.l AllyStats28        ; LEMON
                 dc.l AllyStats29        ; CLAUDE
-            if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
                 dc.l AllyStats29
                 dc.l AllyStats29
-            endif
                 include "data\stats\allies\stats\allystats00.asm"    ; Ally stats 00
                 include "data\stats\allies\stats\allystats01.asm"    ; Ally stats 01
                 include "data\stats\allies\stats\allystats02.asm"    ; Ally stats 02

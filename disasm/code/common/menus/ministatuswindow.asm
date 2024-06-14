@@ -1,6 +1,6 @@
 
-; ASM FILE code\common\menus\menuengine_03.asm :
-; 0x11572..0x118BE : Menu engine
+; ASM FILE code\common\menus\ministatuswindow.asm :
+; 0x11572..0x11AEC : Menu engine, part 3 : Mini status window functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -53,10 +53,10 @@ OpenBattlefieldMiniStatusWindow:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Move window offscreen, then clear it from memory.
+; Move window off screen, then clear it from memory.
 
 
-CloseMiniStatusWindow:
+CloseBattlefieldMiniStatusWindow:
                 
                 movem.l d0-a2,-(sp)
                 lea     ((MINISTATUS_WINDOW_INDEX-$1000000)).w,a2
@@ -81,13 +81,13 @@ CloseMiniStatusWindow:
                 subq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 rts
 
-    ; End of function CloseMiniStatusWindow
+    ; End of function CloseBattlefieldMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-OpenBattlesceneMiniStatusWindows:
+CreateBattlesceneMiniStatusWindows:
                 
                 jsr     (InitializeWindowProperties).w
                 move.w  #WINDOW_MINISTATUS_SIZE,d0
@@ -98,7 +98,7 @@ OpenBattlesceneMiniStatusWindows:
                 jsr     (CreateWindow).w
                 rts
 
-    ; End of function OpenBattlesceneMiniStatusWindows
+    ; End of function CreateBattlesceneMiniStatusWindows
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -107,7 +107,7 @@ OpenBattlesceneMiniStatusWindows:
 ;     d1.w = ?
 
 
-ShowAllyBattlesceneWindow:
+OpenAllyBattlesceneMiniStatusWindow:
                 
                 module
                 cmpi.b  #-1,d0
@@ -125,13 +125,13 @@ ShowAllyBattlesceneWindow:
                 move.w  (sp)+,d1
                 bne.s   @loc_1
                 move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
-                move.w  #$1F,d1
+                move.w  #31,d1
                 sub.w   d3,d1
                 lsl.w   #BYTE_SHIFT_COUNT,d1
                 bra.s   @loc_2
 @loc_1:
                 
-                move.w  #$100,d1
+                move.w  #256,d1
 @loc_2:
                 
                 ori.w   #1,d1
@@ -144,13 +144,13 @@ ShowAllyBattlesceneWindow:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function ShowAllyBattlesceneWindow
+    ; End of function OpenAllyBattlesceneMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-HideAllyBattlesceneWindow:
+CloseAllyBattlesceneMiniStatusWindow:
                 
                 cmpi.b  #-1,d0
                 beq.w   return_11714
@@ -164,7 +164,7 @@ HideAllyBattlesceneWindow:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function HideAllyBattlesceneWindow
+    ; End of function CloseAllyBattlesceneMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -173,7 +173,7 @@ HideAllyBattlesceneWindow:
 ;     d1.w = ?
 
 
-ShowEnemyBattlesceneWindow:
+OpenEnemyBattlesceneMiniStatusWindow:
                 
                 cmpi.b  #-1,d0
                 beq.w   return_11714
@@ -188,16 +188,16 @@ ShowEnemyBattlesceneWindow:
                 movem.w (sp)+,d0
                 bsr.w   BuildMiniStatusWindow
                 move.w  (sp)+,d1
-                beq.s   loc_116F2
+                beq.s   @loc_3
                 move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d3
-                move.w  #$1F,d1
+                move.w  #31,d1
                 sub.w   d3,d1
                 lsl.w   #BYTE_SHIFT_COUNT,d1
-                bra.s   loc_116F6
-loc_116F2:
+                bra.s   @loc_4
+@loc_3:
                 
-                move.w  #$100,d1
-loc_116F6:
+                move.w  #256,d1
+@loc_4:
                 
                 ori.w   #$14,d1
                 moveq   #1,d0
@@ -211,13 +211,13 @@ return_11714:
                 
                 rts
 
-    ; End of function ShowEnemyBattlesceneWindow
+    ; End of function OpenEnemyBattlesceneMiniStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-HideEnemyBattlesceneWindow:
+CloseEnemyBattlesceneMiniStatusWindow:
                 
                 cmpi.b  #-1,d0
                 beq.s   return_11714
@@ -231,7 +231,7 @@ HideEnemyBattlesceneWindow:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function HideEnemyBattlesceneWindow
+    ; End of function CloseEnemyBattlesceneMiniStatusWindow
 
                 modend
 
@@ -265,11 +265,10 @@ DrawColoredStatBar:
                 
                 clr.l   (a0)+
                 dbf     d7,@ClearLoadingSpace_Loop
-                
                 movea.l (sp)+,a0
-                clr.w   d7
                 
                 ; Draw an empty column
+                clr.w   d7
                 moveq   #1,d4
                 bsr.w   WriteStatBarColumn
                 
@@ -320,7 +319,7 @@ DrawColoredStatBar:
                 move.w  d2,(a1)+
 @CopyTiles_Loop:
                 
-                lea     $20(a0),a0      ; advance 8 columns
+                lea     32(a0),a0       ; advance 8 columns
                 move.l  8(a0),d3        ; get 3rd column in current tile -> D3
                 cmpi.l  #-1,d3
                 beq.w   @Done           ; if 3rd column in current tile is empty, we're done
@@ -331,14 +330,14 @@ DrawColoredStatBar:
                 moveq   #95,d3
                 movem.l a0-a1,-(sp)
                 movea.l a0,a1
-                lea     $20(a1),a1
+                lea     32(a1),a1
 @ShiftColumns_Loop:
                 
                 move.l  (a1)+,(a0)+
                 dbf     d3,@ShiftColumns_Loop
                 
                 movem.l (sp)+,a0-a1
-                lea     -$20(a0),a0
+                lea     -32(a0),a0
                 bra.s   @CopyTile
 @NextTile:
                 
@@ -463,7 +462,7 @@ WriteStatBarColumn:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Check ASCII name at A0 for two special characters
+; ; Check ASCII name at a0 for two special characters.
 
 
 AdjustStringLengthForSpecialCharacters:
@@ -491,4 +490,260 @@ AdjustStringLengthForSpecialCharacters:
                 rts
 
     ; End of function AdjustStringLengthForSpecialCharacters
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: a1 = window tiles address, d0.w = combatant index
+
+windowLayoutStartAddress = -8
+combatant = -2
+
+BuildMiniStatusWindow:
+                
+                link    a6,#-8
+                move.l  a1,windowLayoutStartAddress(a6)
+                
+                ; Clear window tiles
+                movem.l d7/a1,-(sp)
+                move.w  #WINDOW_MINISTATUS_LONGWORD_COUNTER,d7
+@Clear_Loop:
+                
+                clr.l   (a1)+
+                dbf     d7,@Clear_Loop
+                movem.l (sp)+,d7/a1
+                
+                ; Get highest of HP or MP stat bar length -> D6
+                ext.w   d0
+                move.w  d0,combatant(a6)
+                jsr     j_GetCurrentHp
+                move.w  d1,d2
+                jsr     j_GetMaxHp
+                move.w  d1,d3
+                movem.w d2-d3,-(sp)     ; -> push current/max HP values
+                jsr     j_GetCurrentMp
+                move.w  d1,d2
+                jsr     j_GetMaxMp
+                move.w  d1,d3
+                movem.w (sp)+,d0-d1     ; D0, D1 <- pull current/max HP values
+                move.w  d1,d6
+                cmp.w   d1,d3           ; keep highest of HP or MP
+                ble.s   @CapStatBarLength
+                move.w  d3,d6
+@CapStatBarLength:
+                
+                cmpi.w  #WINDOW_MINISTATUS_MAX_STATBAR_LENGTH,d6
+                ble.s   @CalculateStatBarLinesWidth
+                moveq   #WINDOW_MINISTATUS_MAX_STATBAR_LENGTH,d6
+@CalculateStatBarLinesWidth:
+                
+                addq.w  #3,d6
+                lsr.w   #3,d6
+                addi.w  #WINDOW_MINISTATUS_MIN_WIDTH,d6
+                
+                ; Calculate header line width (name, class, level) -> D4
+                movem.w d0-d1/d7,-(sp)
+                move.w  combatant(a6),d0
+                blt.s   @EnemyName
+                jsr     j_GetCombatantName
+                bsr.w   AdjustStringLengthForSpecialCharacters
+                move.w  d7,d4
+                jsr     j_GetClass
+                jsr     j_GetClassName
+                bsr.w   AdjustStringLengthForSpecialCharacters
+                add.w   d7,d4
+                addq.w  #4,d4
+                jsr     j_GetCurrentLevel
+                cmpi.w  #10,d1
+                blt.s   @Continue
+                addq.w  #1,d4
+@Continue:
+                
+                bra.s   @DetermineWindowWidth
+@EnemyName:
+                
+                jsr     j_GetCombatantName
+                bsr.w   AdjustStringLengthForSpecialCharacters
+                move.w  d7,d4
+                addq.w  #2,d4
+@DetermineWindowWidth:
+                
+                movem.w (sp)+,d0-d1/d7
+                
+                ; Keep widest of stat bar or header lines
+                cmp.w   d4,d6
+                bge.s   @CopyTileColumns
+                move.w  d4,d6
+@CopyTileColumns:
+                
+                move.w  d6,((MINISTATUS_WINDOW_WIDTH-$1000000)).w
+                lea     layout_MiniStatusWindow(pc), a0
+                movea.l windowLayoutStartAddress(a6),a1
+                
+                ; Copy leftmost columns
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                move.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,d7
+                subi.w  #WINDOW_MINISTATUS_SIDECOLUMNS_NUMBER_PLUS_ONE,d7
+@CopyMiddleColumns_Loop:
+                
+                lea     layout_MiniStatusWindowBody(pc), a0
+                nop
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                dbf     d7,@CopyMiddleColumns_Loop
+                
+                ; Copy rightmost columns
+                lea     layout_MiniStatusWindowTail(pc), a0
+                nop
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                bsr.w   WriteOneMiniStatusWindowTileColumn
+                
+                ; Write name, class, level
+                movem.w d0-d3,-(sp)
+                move.w  combatant(a6),d0
+                jsr     j_GetCombatantName
+                movea.l windowLayoutStartAddress(a6),a1
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
+                addq.l  #2,a1
+                moveq   #-44,d1
+                bsr.w   WriteTilesFromAsciiWithRegularFont
+                addq.w  #2,a1
+                move.w  combatant(a6),d0
+                blt.s   @DrawStatBars   ; skip if enemy
+                jsr     j_GetClass
+                jsr     j_GetClassName
+                move.w  #-44,d1
+                bsr.w   WriteTilesFromAsciiWithRegularFont
+                move.w  combatant(a6),d0
+                jsr     j_GetCurrentLevel
+                move.w  d1,d0
+                ext.l   d0
+                moveq   #LV_DIGITS_NUMBER,d7
+                cmpi.w  #10,d0
+                bge.s   @WriteLevel
+                subq.w  #1,d7
+@WriteLevel:
+                
+                bsr.w   WriteTilesFromNumber
+@DrawStatBars:
+                
+                movem.w (sp)+,d0-d3
+                
+                ; Draw HP bar
+                movem.w d0-d3,-(sp)
+                movem.w d2-d3,-(sp)     ; -> push current/max MP values
+                movea.l windowLayoutStartAddress(a6),a1
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_TWO_LINES,a1
+                addq.w  #WINDOW_MINISTATUS_OFFSET_STATBARS_START,a1
+                move.l  a1,-(sp)        ; -> push stat bars start address
+                lea     (FF8804_LOADING_SPACE).l,a0
+                moveq   #1,d2           ; HP bar VDP tile start index
+                bsr.w   DrawColoredStatBar
+                
+                ; Draw MP bar
+                movea.l (sp)+,a1        ; A1 <- pull stat bars start address
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
+                movem.w (sp)+,d0-d1     ; D0, D1 <- pull current/max MP values
+                tst.w   d1
+                beq.s   @WriteStatValues ; skip if 0 max MP
+                lea     (FF8A04_LOADING_SPACE).l,a0
+                moveq   #6,d2           ; MP bar VDP tile start index
+                bsr.w   DrawColoredStatBar
+@WriteStatValues:
+                
+                movem.w (sp)+,d0-d3
+                
+                ; Write current HP
+                ext.l   d0
+                movea.l windowLayoutStartAddress(a6),a1
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_TWO_LINES,a1
+                move.l  a1,-(sp)
+                adda.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
+                adda.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
+                suba.w  #WINDOW_MINISTATUS_OFFSET_STAT_VALUES,a1
+                move.l  a1,-(sp)
+                moveq   #STATS_DIGITS_NUMBER,d7
+                bsr.w   WriteStatValue  
+                
+                ; Write max HP
+                movea.l (sp)+,a1
+                addq.l  #WINDOW_MINISTATUS_OFFSET_MAX_HP,a1
+                move.w  d1,d0
+                ext.l   d0
+                moveq   #STATS_DIGITS_NUMBER,d7
+                bsr.w   WriteStatValue  
+                
+                ; Write current MP
+                movea.l (sp)+,a1
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
+                adda.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
+                adda.w  ((MINISTATUS_WINDOW_WIDTH-$1000000)).w,a1
+                suba.w  #WINDOW_MINISTATUS_OFFSET_STAT_VALUES,a1
+                move.l  a1,-(sp)
+                move.w  d2,d0
+                ext.l   d0
+                movea.l (sp)+,a1
+                moveq   #STATS_DIGITS_NUMBER,d7
+                bsr.w   WriteStatValue  
+                
+                ; Write max MP
+                addq.l  #2,a1
+                move.w  d3,d0
+                ext.l   d0
+                moveq   #STATS_DIGITS_NUMBER,d7
+                bsr.w   WriteStatValue  
+                
+                unlk    a6
+                rts
+
+    ; End of function BuildMiniStatusWindow
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Write stat value d0.w or '??' if above 99
+
+
+WriteStatValue:
+                
+                cmpi.w  #UNKNOWN_STAT_VALUE_THRESHOLD,d0
+                bge.s   @WriteUnknownValueString
+                ext.l   d0
+                bra.w   WriteTilesFromNumber
+                bra.s   aUnknownValue   ; bad instruction
+@WriteUnknownValueString:
+                
+                lea     aUnknownValue(pc), a0
+                bra.w   WriteTilesFromAsciiWithRegularFont
+
+    ; End of function WriteStatValue
+
+aUnknownValue:  dc.b '??'
+
+; =============== S U B R O U T I N E =======================================
+
+; Draw tiles from a0 into a1 (one column)
+
+
+WriteOneMiniStatusWindowTileColumn:
+                
+                movem.l a1,-(sp)
+                move.w  (a0)+,(a1)
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
+                move.w  (a0)+,(a1)
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
+                move.w  (a0)+,(a1)
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
+                move.w  (a0)+,(a1)
+                adda.w  #WINDOW_MINISTATUS_OFFSET_NEXT_LINE,a1
+                move.w  (a0)+,(a1)
+                movem.l (sp)+,a1
+                addq.w  #2,a1
+                rts
+
+    ; End of function WriteOneMiniStatusWindowTileColumn
 

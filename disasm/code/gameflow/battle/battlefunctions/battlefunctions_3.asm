@@ -75,9 +75,8 @@ table_RelativeTileMoveY:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-; Out: D0 = new X
-;      D1 = new Y
+; In: d0.w = combatant index
+; Out: d0.w, d1.w = new X, Y
 
 
 GetEntityPositionAfterApplyingFacing:

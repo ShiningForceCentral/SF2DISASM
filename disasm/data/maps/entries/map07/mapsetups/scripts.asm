@@ -394,7 +394,7 @@ palette_55F6A:  dc.w $E0C
 sub_55F82:
                 
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
-                lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
+                lea     ((PALETTE_1_COPY-$1000000)).w,a0
                 jmp     (UpdateBasePalettesAndBackupCurrent).w
 
     ; End of function sub_55F82

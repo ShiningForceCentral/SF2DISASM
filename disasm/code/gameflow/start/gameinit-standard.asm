@@ -85,7 +85,7 @@ StartMapTest:
                 
                 movem.w d0-d4,-(sp)
                 move.w  #600,d0
-                jsr     DebugFlagSetter
+                jsr     DebugSetFlag
                 movem.w (sp)+,d0-d4
                 
                 jsr     ExplorationLoop

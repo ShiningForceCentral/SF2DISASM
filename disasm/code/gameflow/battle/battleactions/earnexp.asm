@@ -1,11 +1,11 @@
 
-; ASM FILE code\gameflow\battle\battleactions\battleactionsengine_4.asm :
-; 0xA872..0xAAB6 : Battleactions Engine, part 4
+; ASM FILE code\gameflow\battle\battleactions\earnexp.asm :
+; 0xA872..0xA9CC : EXP earning functions
 
 ; =============== S U B R O U T I N E =======================================
 
 
-CalculateHealingExp:
+battlesceneScript_CalculateHealingExp:
                 
                 movem.l d0-d3/a0,-(sp)
                 move.b  (a4),d0
@@ -43,13 +43,13 @@ CalculateHealingExp:
                 moveq   #10,d5
 @Add:
                 
-                bsr.w   AddExpAndApplyHealingCap
+                bsr.w   battlesceneScript_AddExpAndApplyHealingCap
 @Skip:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function CalculateHealingExp
+    ; End of function battlesceneScript_CalculateHealingExp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -67,7 +67,7 @@ battlesceneScript_CalculateDamageExp:
                 bsr.w   battlesceneScript_GetKillExp
                 mulu.w  d6,d5
                 divu.w  d1,d5
-                bsr.w   AddExpAndApplyPerActionCap
+                bsr.w   battlesceneScript_AddExpAndApplyPerActionCap
 @Skip:
                 
                 movem.l (sp)+,d0-d3/a0
@@ -79,19 +79,19 @@ battlesceneScript_CalculateDamageExp:
 ; =============== S U B R O U T I N E =======================================
 
 
-AddStatusEffectSpellExp:
+battlesceneScript_AddStatusEffectSpellExp:
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
                 bne.w   @Done
                 moveq   #STATUSEFFECT_SPELL_EXP,d5
-                bsr.w   AddExpAndApplyPerActionCap
+                bsr.w   battlesceneScript_AddExpAndApplyPerActionCap
 @Done:
                 
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function AddStatusEffectSpellExp
+    ; End of function battlesceneScript_AddStatusEffectSpellExp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -103,7 +103,7 @@ battlesceneScript_AddExpAndGoldForKill:
                 btst    #COMBATANT_BIT_ENEMY,(a4)
                 bne.w   @Skip           ; skip if actor is an enemy
                 bsr.w   battlesceneScript_GetKillExp
-                bsr.w   AddExpAndApplyPerActionCap
+                bsr.w   battlesceneScript_AddExpAndApplyPerActionCap
                 move.b  (a5),d0
                 bpl.s   @Skip
                 jsr     GetEnemy        
@@ -123,7 +123,7 @@ battlesceneScript_AddExpAndGoldForKill:
 ; =============== S U B R O U T I N E =======================================
 
 
-AddExpAndApplyPerActionCap:
+battlesceneScript_AddExpAndApplyPerActionCap:
                 
                 add.w   d5,((BATTLESCENE_EXP-$1000000)).w
                 cmpi.w  #PER_ACTION_EXP_CAP,((BATTLESCENE_EXP-$1000000)).w
@@ -133,13 +133,13 @@ AddExpAndApplyPerActionCap:
                 
                 rts
 
-    ; End of function AddExpAndApplyPerActionCap
+    ; End of function battlesceneScript_AddExpAndApplyPerActionCap
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-AddExpAndApplyHealingCap:
+battlesceneScript_AddExpAndApplyHealingCap:
                 
                 add.w   d5,((BATTLESCENE_EXP-$1000000)).w
                 cmpi.w  #HEALING_EXP_CAP,((BATTLESCENE_EXP-$1000000)).w
@@ -149,7 +149,7 @@ AddExpAndApplyHealingCap:
                 
                 rts
 
-    ; End of function AddExpAndApplyHealingCap
+    ; End of function battlesceneScript_AddExpAndApplyHealingCap
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -207,149 +207,4 @@ battlesceneScript_GetKillExp:
                 rts
 
     ; End of function battlesceneScript_GetKillExp
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-SortTargets:
-                
-                movem.l d0-d2/d6-a0,-(sp)
-                lea     ((TARGETS_LIST-$1000000)).w,a0
-                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
-                bls.w   loc_AA92
-loc_A9DE:
-                
-                move.b  (a0,d7.w),d0
-                bpl.s   loc_A9F8
-                jsr     GetEnemy        
-                cmpi.w  #ENEMY_BURST_ROCK,d1
-                bne.s   loc_A9F8
-                ori.b   #COMBATANT_MASK_SORT_BIT,d0
-                move.b  d0,(a0,d7.w)
-loc_A9F8:
-                
-                dbf     d7,loc_A9DE
-                lea     ((TARGETS_LIST-$1000000)).w,a0
-                moveq   #0,d0
-                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
-                subq.w  #1,d7
-loc_AA0A:
-                
-                move.w  d0,d1
-                addq.w  #1,d1
-loc_AA0E:
-                
-                move.b  (a0,d0.w),d2
-                cmp.b   (a0,d1.w),d2
-                bcs.s   loc_AA22
-                move.b  (a0,d1.w),(a0,d0.w)
-                move.b  d2,(a0,d1.w)
-loc_AA22:
-                
-                addq.w  #1,d1
-                cmp.w   ((TARGETS_LIST_LENGTH-$1000000)).w,d1
-                bcs.w   loc_AA0E
-                addq.w  #1,d0
-                dbf     d7,loc_AA0A
-                lea     ((TARGETS_LIST-$1000000)).w,a0
-                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
-                subq.w  #1,d7
-                moveq   #0,d6
-loc_AA40:
-                
-                btst    #COMBATANT_BIT_SORT,(a0,d6.w)
-                beq.s   loc_AA78
-                move.b  (a0,d6.w),d0
-                andi.b  #COMBATANT_MASK_INDEX_AND_ENEMY_BIT,d0
-                jsr     GetCurrentHp
-                move.w  d1,d2
-                move.b  1(a0,d6.w),d0
-                andi.b  #COMBATANT_MASK_INDEX_AND_ENEMY_BIT,d0
-                jsr     GetCurrentHp
-                cmp.w   d1,d2
-                bcc.s   loc_AA78
-                move.b  (a0,d6.w),d0
-                move.b  1(a0,d6.w),(a0,d6.w)
-                move.b  d0,1(a0,d6.w)
-loc_AA78:
-                
-                addq.w  #1,d6
-                dbf     d7,loc_AA40
-                lea     ((TARGETS_LIST-$1000000)).w,a0
-                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
-loc_AA88:
-                
-                andi.b  #COMBATANT_MASK_INDEX_AND_ENEMY_BIT,(a0,d7.w)
-loc_AA8E:
-                
-                dbf     d7,loc_AA88
-loc_AA92:
-                
-                movem.l (sp)+,d0-d2/d6-a0
-                rts
-
-    ; End of function SortTargets
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused
-
-
-OneSecondSleep:
-                
-                move.l  d0,-(sp)
-                moveq   #60,d0
-                jsr     (Sleep).w       
-                move.l  (sp)+,d0
-                rts
-
-    ; End of function OneSecondSleep
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused
-
-
-NopOnce:
-                
-                nop
-                rts
-
-    ; End of function NopOnce
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused
-
-
-NopTwice:
-                
-                nop
-                nop
-                rts
-
-    ; End of function NopTwice
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused
-
-
-NopThrice:
-                
-                nop
-                nop
-                nop
-                rts
-
-    ; End of function NopThrice
 

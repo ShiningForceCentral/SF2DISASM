@@ -12,7 +12,7 @@ combatant = -2
 ExecuteIndividualTurn:
                 
                 jsr     (InitializeBattlefieldSpritesFrameCounter).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 link    a6,#-16
                 andi.w  #COMBATANT_MASK_ALL,d0
                 move.w  d0,combatant(a6)
@@ -119,7 +119,7 @@ ExecuteIndividualTurn:
                 move.w  combatant(a6),d0
                 clr.b   ((IS_TARGETING-$1000000)).w
                 jsr     j_CloseLandEffectWindow
-                jsr     j_CloseMiniStatusWindow
+                jsr     j_CloseBattlefieldMiniStatusWindow
                 move.w  combatant(a6),d0
                 bsr.w   SetEntityBlinkingFlag
                 move.w  combatant(a6),d0
@@ -324,7 +324,7 @@ ExecuteIndividualTurn:
                 jsr     (UpdateEntityProperties).l
                 move.w  combatant(a6),d0
                 jsr     j_CloseLandEffectWindow
-                jsr     j_CloseMiniStatusWindow
+                jsr     j_CloseBattlefieldMiniStatusWindow
 @Done:
                 
                 unlk    a6

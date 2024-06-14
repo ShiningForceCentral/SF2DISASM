@@ -38,10 +38,12 @@
                 alignIfStandard
                 includeIfVanilla "code\gameflow\battle\battleactions\isabletocounterattack.asm"    ; Is Able To Counter Attack function
                 includeIfVanilla "code\gameflow\battle\battleactions\getspellanimation.asm"    ; Get spell animation function
-                include "code\gameflow\battle\battleactions\battleactionsengine_3.asm"    ; Battleactions Engine, part 3
+                include "code\gameflow\battle\battleactions\animateaction.asm"    ; Battlescene animation functions
+                include "code\gameflow\battle\battleactions\giveexpandgold.asm"    ; Give EXP and gold function
                 include "data\battles\global\halvedexpearnedbattles.asm"    ; Halved EXP earned battles table
                 align
-                include "code\gameflow\battle\battleactions\battleactionsengine_4.asm"    ; Battleactions Engine, part 4
+                include "code\gameflow\battle\battleactions\earnexp.asm"    ; EXP earning functions
+                include "code\gameflow\battle\battleactions\sorttargets.asm"    ; Sort targets list function
                 includeIfStandard "code\gameflow\battle\battleactions\attack-standard.asm"
                 includeIfStandard "code\gameflow\battle\battleactions\determinedodge-standard.asm"
                 includeIfStandard "code\gameflow\battle\battleactions\calculatedamage-standard.asm"
@@ -49,12 +51,17 @@
                 includeIfStandard "data\battles\global\landeffectdamagemultipliers-standard.asm"
                 includeIfStandard "data\stats\specialmovetypes-standard.asm"
                 alignIfStandard
+                includeIfVanilla "code\gameflow\battle\battleactions\unused_battleactions.asm"    ; Unused battleactions functions
                 includeIfVanilla "code\gameflow\battle\battleactions\attack.asm"    ; Write Battlescene Script : Attack
                 includeIfVanilla "code\gameflow\battle\battleactions\determinedodge.asm"    ; Determine dodge function
                 includeIfVanilla "code\gameflow\battle\battleactions\calculatedamage.asm"    ; Calculate attack damage function
                 include "code\gameflow\battle\battleactions\determinecriticalhit.asm"    ; Determine critical hit function
                 include "data\stats\allies\classes\criticalhitdefs.asm"    ; Critical hit settings definitions
-                include "code\gameflow\battle\battleactions\battleactionsengine_5.asm"    ; Battleactions Engine, part 5
+                include "code\gameflow\battle\battleactions\inflictdamage.asm"    ; Write Battlescene Command : Inflict Damage function
+                include "code\gameflow\battle\battleactions\inflictailment.asm"    ; Write Battlescene Command : Inflict Ailment function
+                include "code\gameflow\battle\battleactions\inflictcursedamage.asm"    ; Write Battlescene Command : Inflict Curse Damage function
+                include "code\gameflow\battle\battleactions\determinedoubleandcounter.asm"    ; Write Battlescene Command : Determine Double And Counter function
+                include "code\gameflow\battle\battleactions\displaydeathmessage.asm"    ; Write Battlescene Command : Display Death Message function
                 include "code\gameflow\battle\battleactions\castspell.asm"    ; Write Battlescene Script : Cast Spell
                 includeIfStandard "code\gameflow\battle\battleactions\calculatespelldamage-standard.asm"
                 includeIfVanilla "code\gameflow\battle\battleactions\calculatespelldamage.asm"    ; Calculate Spell Damage function
@@ -68,7 +75,6 @@
                 include "data\battles\global\enemyitemdrops.asm"    ; Enemy item drops
                 align
                 include "data\stats\enemies\enemygold.asm"    ; Enemy gold amounts
-                include "code\gameflow\battle\battleactions\battleactionsengine_6.asm"    ; Battleactions Engine, part 6
                 includeIfStandard "data\stats\allies\classes\healerclasses-standard.asm"
                 includeIfStandard "data\stats\items\cutoffweapons-standard.asm"
                 includeIfStandard "data\stats\spells\invocations-standard.asm"
@@ -106,7 +112,7 @@
                 include "code\gameflow\battle\battlefield\battlefieldengine_7.asm"    ; Battlefield engine
                 
                 ; AI engine
-                include "code\gameflow\battle\ai\aiengine_1.asm"    ; AI engine
+                include "code\gameflow\battle\ai\startaicontrol.asm"    ; AI engine : preparatory phase
                 include "data\battles\global\aicommandsets.asm"    ; AI commands data
                 include "data\battles\global\swarmbattles.asm"    ; Parameters for battles implementing swarm AI
                 include "code\gameflow\battle\ai\handleaicommand.asm"    ; Handle AI Command function

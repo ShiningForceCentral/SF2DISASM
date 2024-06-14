@@ -44,7 +44,7 @@ ApplyPositionsAfterEnemyLeaderDies:
                 jsr     j_SetCombatantX ; move enemy as well
                 moveq   #0,d1
                 jsr     j_SetCurrentHp
-                andi.b  #$7F,d0 
+                andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
                 addq.w  #1,d0
                 dbf     d7,@MoveAllCombatantOffscreen_Loop
                 

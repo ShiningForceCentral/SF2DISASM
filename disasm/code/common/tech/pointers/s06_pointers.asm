@@ -21,7 +21,7 @@ p_tiles_YesNoPrompt:
                 dc.l tiles_YesNoPrompt
 p_palette_WitchChoice:
                 dc.l palette_WitchChoice
-p_WitchBubbleAnimation:
-                dc.l WitchBubbleAnimation
+p_table_WitchBubbleAnimation:
+                dc.l table_WitchBubbleAnimation
 p_tiles_SpeechBalloon:
                 dc.l tiles_SpeechBalloon

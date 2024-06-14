@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_05.asm :
-; 0x1288E..0x135A6 : Menu engine
+; 0x1288E..0x135A6 : Menu engine, part 5
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -393,7 +393,7 @@ windowSlot = -2
 
 sub_12CB0:
                 
-                moveq   #$14,d6
+                moveq   #20,d6
 loc_12CB2:
                 
                 lea     ((ENTITY_DATA-$1000000)).w,a0
@@ -454,25 +454,25 @@ loc_12D34:
                 move.w  #$E0FE,d4
             if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 cmpi.w  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-                bcs.s   loc_12D5A
+                blo.s   @isLargeMapsprite
                 cmpi.w  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-                bhi.s   loc_12D5A
+                bhi.s   @isLargeMapsprite
                 subq.w  #1,d4
-loc_12D5A:
+@isLargeMapsprite:
                 
-                cmpi.w  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE+1(a0) ; check the mapsprite word's lower byte
             else
                 cmpi.b  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-                bcs.s   loc_12D5A
+                bcs.s   @isLargeMapsprite
                 cmpi.b  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-                bhi.s   loc_12D5A
-                subq.w  #1,d4
-loc_12D5A:
+                bhi.s   @isLargeMapsprite
+                subq.w  #1,d4 ; subtract 1 if enemy
+@isLargeMapsprite:
                 
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
             endif
                 bcs.s   loc_12D64
-                subq.w  #1,d4
+                subq.w  #1,d4 ; also subtract 1 if using a large sprite, assuming they must be an enemy too
 loc_12D64:
                 
                 move.w  d1,(a1)+
@@ -532,7 +532,7 @@ loc_12DC6:
                 jsr     (WaitForVInt).w
                 subq.w  #1,d6
                 bne.s   loc_12DDE
-                moveq   #$14,d6
+                moveq   #20,d6
 loc_12DDE:
                 
                 move.b  ((PLAYER_1_INPUT-$1000000)).w,d0

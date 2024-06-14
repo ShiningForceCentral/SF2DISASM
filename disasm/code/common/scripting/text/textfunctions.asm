@@ -926,7 +926,7 @@ loc_68C2:
                 eori.b  #1,((SPEECH_SOUND_TOGGLE-$1000000)).w
                 beq.s   loc_68DC
                 move.w  d0,-(sp)
-                move.w  ((SPEECH_SFX-$1000000)).w,d0
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,d0
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
                 move.w  (sp)+,d0
 loc_68DC:

@@ -27,8 +27,8 @@ ms_map3_flag506_EntityEvents:
 
 Map3_1FA_EntityEvent0:
                 
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     678             ; "Already passed away...{N}{LEADER} feels pity.{W1}"
                 rts
 
@@ -154,8 +154,8 @@ Map3_1FA_EntityEvent15:
                 txt     674             ; "(Shiver)...ooouu....{W1}"
                 clsTxt
                 jsr     j_ClosePortraitWindow
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     675             ; "{CLEAR}He is shivering.{N}Will you name him?"
                 jsr     j_YesNoPrompt
                 clsTxt
@@ -165,7 +165,7 @@ Map3_1FA_EntityEvent15:
                 jsr     j_NameAlly
                 txt     676             ; "{LEADER} named him{N}{NAME;6} and beckoned.{W1}"
                 clsTxt
-                move.w  ((SPEECH_SFX_BACKUP-$1000000)).w,((SPEECH_SFX-$1000000)).w
+                move.w  ((SPEECH_SFX_COPY-$1000000)).w,((CURRENT_SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
                 txt     677             ; "Oooo!  Ooooo!{W1}"
                 clsTxt

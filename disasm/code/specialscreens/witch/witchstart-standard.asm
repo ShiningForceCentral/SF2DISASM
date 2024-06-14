@@ -20,7 +20,7 @@ StartWitchScreen:
                 jsr     (InitializeDisplay).w
                 jsr     (DisableDisplayAndInterrupts).w
                 clr.b   ((MOUTH_CONTROL_TOGGLE-$1000000)).w
-                move.w  #SFX_DIALOG_BLEEP_4,((SPEECH_SFX-$1000000)).w ; Witch speech SFX
+                move.w  #SFX_DIALOG_BLEEP_4,((CURRENT_SPEECH_SFX-$1000000)).w ; Witch speech SFX
                 jsr     (BuildWitchScreen).w
                 move.w  #30,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w

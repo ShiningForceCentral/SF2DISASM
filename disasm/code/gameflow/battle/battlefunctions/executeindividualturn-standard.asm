@@ -15,7 +15,7 @@ combatant = -2
 ExecuteIndividualTurn:
                 
                 jsr     (InitializeBattlefieldSpritesFrameCounter).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 link    a6,#-10
                 move.w  d0,combatant(a6)
                 clr.b   aiControlFlag(a6)
@@ -93,7 +93,7 @@ ExecuteIndividualTurn:
                 jsr     (WaitForViewScrollEnd).w
                 clr.b   ((IS_TARGETING-$1000000)).w
                 jsr     CloseLandEffectWindow
-                jsr     CloseMiniStatusWindow
+                jsr     CloseBattlefieldMiniStatusWindow
                 move.w  combatant(a6),d0
                 bsr.w   SetEntityBlinkingFlag
                 move.w  battleEntity(a6),d0
@@ -115,7 +115,7 @@ ExecuteIndividualTurn:
                 moveq   #-1,d3
                 jsr     (UpdateEntityProperties).w
                 jsr     CloseLandEffectWindow
-                jsr     CloseMiniStatusWindow
+                jsr     CloseBattlefieldMiniStatusWindow
                 bra.w   @Done
                 
 @AiControl2:    bsr.w   ExecuteAiControl

@@ -421,7 +421,11 @@ PositionBattleEntities:
                 bne.w   @Done
                 
                 ; Position neutral entities
-                lea     ((ENTITY_EVENT_ENEMY_END-$1000000)).w,a1
+            if (STANDARD_BUILD=1)
+                lea     ((ENTITY_EVENT_ENEMY_END-$1000000)).w,a1 ; neutral entities occupy enemy combatant slots to accommodate expanded force members
+            else
+                lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
+            endif
                 lea     table_NeutralBattleEntities(pc), a0
                 clr.w   d1
                 getSavedByte CURRENT_BATTLE, d1

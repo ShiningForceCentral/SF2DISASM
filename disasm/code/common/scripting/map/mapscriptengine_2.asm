@@ -175,11 +175,11 @@ csc00_displaySingleTextbox:
                 movea.l (sp)+,a6
                 move.w  (a6),d0
                 bsr.w   GetEntityPortaitAndSpeechSfx
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 bra.s   loc_47270
 loc_4726A:
                 
-                move.w  #0,((SPEECH_SFX-$1000000)).w
+                move.w  #0,((CURRENT_SPEECH_SFX-$1000000)).w
 loc_47270:
                 
                 adda.w  #2,a6
@@ -215,11 +215,11 @@ csc01_displaySingleTextboxWithVars:
                 movea.l (sp)+,a6
                 move.w  (a6),d0
                 bsr.w   GetEntityPortaitAndSpeechSfx
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 bra.s   loc_472BE
 loc_472B8:
                 
-                move.w  #0,((SPEECH_SFX-$1000000)).w
+                move.w  #0,((CURRENT_SPEECH_SFX-$1000000)).w
 loc_472BE:
                 
                 adda.w  #2,a6
@@ -253,11 +253,11 @@ csc02_displayTextbox:
                 movea.l (sp)+,a6
                 move.w  (a6),d0
                 bsr.w   GetEntityPortaitAndSpeechSfx
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 bra.s   loc_47314
 loc_4730E:
                 
-                move.w  #0,((SPEECH_SFX-$1000000)).w
+                move.w  #0,((CURRENT_SPEECH_SFX-$1000000)).w
 loc_47314:
                 
                 adda.w  #2,a6
@@ -289,11 +289,11 @@ csc03_displayTextboxWithVars:
                 movea.l (sp)+,a6
                 move.w  (a6),d0
                 bsr.w   GetEntityPortaitAndSpeechSfx
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 bra.s   loc_47352
 loc_4734C:
                 
-                move.w  #0,((SPEECH_SFX-$1000000)).w
+                move.w  #0,((CURRENT_SPEECH_SFX-$1000000)).w
 loc_47352:
                 
                 adda.w  #2,a6
@@ -365,7 +365,7 @@ csc07_warp:
 
 csc08_joinForce:
                 
-                move.w  #0,((SPEECH_SFX-$1000000)).w
+                move.w  #0,((CURRENT_SPEECH_SFX-$1000000)).w
             if (MUSIC_RESUMING&RESUME_MUSIC_AFTER_JOIN_JINGLE=1)
                 activateMusicResuming
             endif

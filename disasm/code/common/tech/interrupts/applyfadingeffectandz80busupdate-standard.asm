@@ -206,7 +206,7 @@ UpdateFadingPalette:
                 
 @Continue:      lea     (PALETTE_1_BASE).l,a0
                 lea     (PALETTE_1_CURRENT).l,a1
-                lea     ((PALETTE_1_BACKUP-$1000000)).w,a2
+                lea     ((PALETTE_1_COPY-$1000000)).w,a2
                 moveq   #CRAM_COLORS_COUNTER,d7 
                 subq.w  #1,d6
                 move.b  d6,((FADING_TIMER_WORD-$1000000)).w
@@ -252,7 +252,7 @@ UpdateFadingPalette:
                 tst.b   ((FADING_TIMER_WORD-$1000000)).w
                 bne.s   @Return
                 
-                lea     ((PALETTE_1_BACKUP-$1000000)).w,a0
+                lea     ((PALETTE_1_COPY-$1000000)).w,a0
                 tst.b   ((FADING_TIMER_BYTE-$1000000)).w
                 beq.s   @Return
 UpdateBasePalettesAndBackupCurrent:
@@ -262,7 +262,7 @@ UpdateBasePalettesAndBackupCurrent:
                 move.w  #CRAM_SIZE,d7
                 bsr.w   CopyBytes
                 lea     (PALETTE_1_CURRENT).l,a0
-                lea     ((PALETTE_1_BACKUP-$1000000)).w,a1
+                lea     ((PALETTE_1_COPY-$1000000)).w,a1
                 move.w  #CRAM_SIZE,d7
                 bsr.w   CopyBytes
                 move.b  #32,((FADING_TIMER_WORD-$1000000)).w

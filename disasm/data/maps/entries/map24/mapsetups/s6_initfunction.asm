@@ -10,7 +10,7 @@ ms_map24_InitFunction:
                  
                 sndCom  MUSIC_HEADQUARTERS
                 jsr     (FadeInFromBlack).w
-                move.w  #$46,((SPEECH_SFX-$1000000)).w 
+                move.w  #$46,((CURRENT_SPEECH_SFX-$1000000)).w 
                 chkFlg  544             ; Battle 44 completed - BATTLE_FAIRY_WOODS                 
                 bne.w   loc_59CB2
                 txt     467             ; "Welcome to the fairy woods{N}special stage!{W2}"

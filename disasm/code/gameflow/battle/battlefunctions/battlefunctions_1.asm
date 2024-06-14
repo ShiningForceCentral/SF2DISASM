@@ -357,20 +357,19 @@ BattleLoop_Defeat:
                 sndCom  MUSIC_SAD_THEME_2
                 txt     363             ; "{LEADER} is exhausted.{W1}"
                 clsTxt
-          if (STANDARD_BUILD&PLAYER_DEFEAT_IS_GAME_OVER=1)
+        if (STANDARD_BUILD=1)
+            if (PLAYER_DEFEAT_IS_GAME_OVER=1)
                 jmp     (ResetGame).w
-                nop
-          else
+            else
                 bsr.w   HealLivingAndImmortalAllies
-                jsr     j_GetGold
+                jsr     GetGold
                 lsr.l   #1,d1           ; divide current gold amount by 2
-                jsr     j_SetGold
+                jsr     SetGold
                 jsr     GetEgressPositionForBattle(pc)
                 nop
                 moveq   #-1,d4
                 
                 ; Losable battles
-            if (STANDARD_BUILD=1)
                 movem.l d1-d2/a0,-(sp)
                 clr.w   d1
                 lea     table_LosableBattles(pc), a0
@@ -387,7 +386,19 @@ BattleLoop_Defeat:
                 move.b  (a0),d0
                 clr.w   d4
 @Done:          movem.l (sp)+,d1-d2/a0
-              else
+            endif
+        else
+                clr.w   d0
+                jsr     j_GetMaxHp
+                jsr     j_SetCurrentHp
+                jsr     j_GetGold
+                lsr.l   #1,d1           ; divide current gold amount by 2
+                jsr     j_SetGold
+                jsr     GetEgressPositionForBattle(pc)
+                nop
+                moveq   #-1,d4
+                
+                ; Losable battles
                 checkSavedByte #BATTLE_AMBUSHED_BY_GALAM_SOLDIERS, CURRENT_BATTLE    ; HARDCODED battle 4 upgrade
                 bne.s   @Return
                 clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
@@ -395,9 +406,11 @@ BattleLoop_Defeat:
                 jsr     j_UpgradeBattle
                 moveq   #MAP_GALAM_CASTLE_INNER,d0
                 clr.w   d4
-            endif
-@Return:        rts
-          endif
+        endif
+@Return:
+                
+                rts
+
 
     ; End of function BattleLoop_Defeat
 
@@ -479,9 +492,9 @@ UpdateBattleUnlockedFlag:
 CloseBattlefieldWindows:
                 
                 jsr     j_CloseLandEffectWindow
-                jsr     j_CloseMiniStatusWindow
+                jsr     j_CloseBattlefieldMiniStatusWindow
                 clr.b   ((IS_TARGETING-$1000000)).w
-                jsr     j_CloseMiniStatusWindow
+                jsr     j_CloseBattlefieldMiniStatusWindow
                 rts
 
     ; End of function CloseBattlefieldWindows

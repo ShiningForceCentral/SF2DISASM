@@ -2626,21 +2626,16 @@ DmaEntityMapsprite:
                 clr.w   d1
             if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+                cmpi.b  #MAPSPRITES_SPECIALS_START,d1 ; doing this implies that at the end each chunk of 256 mapsprites, a number are considered "special", i.e., 2x2 mapblocks large
             else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-            endif
-                andi.w  #$00ff,d1
                 cmpi.w  #MAPSPRITES_SPECIALS_START,d1 ; HARDCODED special mapsprites start index
+            endif
                 blt.s   @LoadRegularSprite
                 jsr     j_LoadSpecialSprite
                 move.w  (sp)+,d1
                 bra.s   @Done
-@LoadRegularSprite:
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-            else
-                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-            endif                
+@LoadRegularSprite:               
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1

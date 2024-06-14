@@ -1,6 +1,6 @@
 
-; ASM FILE code\common\stats\items\itemactions_2.asm :
-; 0x229EC..0x22C60 : Item functions
+; ASM FILE code\common\stats\items\fielditemeffects.asm :
+; 0x229EC..0x22C60 : Functions to perform effects from using items on an exploration field.
 
 ; =============== S U B R O U T I N E =======================================
 

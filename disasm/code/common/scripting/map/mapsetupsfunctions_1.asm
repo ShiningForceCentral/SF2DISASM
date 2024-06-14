@@ -90,7 +90,7 @@ loc_47576:
 RunMapSetupItemEvent:
                 
                 movem.l d0-d5/d7-a1,-(sp)
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 andi.w  #ITEMENTRY_MASK_INDEX,d4
                 move.b  d2,((byte_FFB651-$1000000)).w
                 moveq   #0,d6
@@ -168,7 +168,7 @@ RunMapSetupEntityEvent:
                 beq.w   loc_476D6
                 
                 movem.w d1-d2,-(sp)
-                movea.l MAPSETUP_OFFSET_EVENT_ENTITY(a0),a0
+                movea.l MAPSETUP_OFFSET_ENTITY_EVENTS(a0),a0
                 clr.w   d7
 loc_47638:
                 
@@ -193,7 +193,7 @@ loc_4765A:
 loc_4765E:
                 
                 bsr.w   GetEntityPortaitAndSpeechSfx
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 blt.s   loc_47670
                 bsr.w   LoadAndDisplayCurrentPortrait

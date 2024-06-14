@@ -10096,7 +10096,7 @@ UpdateWeaponsprite:
 
 sub_1EF2E:
                 
-                bsr.w   sub_1EF50
+                bsr.w   LoadBattlesceneEnemyLayout
                 bra.w   loc_1EFB0
 
     ; End of function sub_1EF2E
@@ -10109,7 +10109,7 @@ sub_1EF2E:
 
 sub_1EF36:
                 
-                bsr.w   sub_1EF50
+                bsr.w   LoadBattlesceneEnemyLayout
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
                 move.w  #$400,d0
@@ -10122,60 +10122,61 @@ sub_1EF36:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1EF50:
+LoadBattlesceneEnemyLayout:
                 
-                lea     table_1F6B6(pc), a0
-                lea     (byte_FFE184).l,a1
+                lea     layout_BattlesceneEnemy(pc), a0
+                lea     (BATTLESCENE_ENEMY_LAYOUT).l,a1
                 bchg    #2,((byte_FFB56E-$1000000)).w
-                beq.s   loc_1EF68
-                move.w  #$A220,d0
-                bra.s   loc_1EF6C
-loc_1EF68:
+                beq.s   @loc1
+                move.w  #$220|VDPTILE_PALETTE2|VDPTILE_PRIORITY,d0
+                bra.s   @loc2
+@loc1:
                 
-                move.w  #$A2E0,d0
-loc_1EF6C:
+                move.w  #$2E0|VDPTILE_PALETTE2|VDPTILE_PRIORITY,d0
+@loc2:
                 
                 btst    #2,((byte_FFB56F-$1000000)).w
-                bne.s   loc_1EF8E
-                moveq   #$B,d7
-loc_1EF76:
+                bne.s   @loc5
                 
-                moveq   #$F,d6
-loc_1EF78:
+                moveq   #11,d7
+@loc3:
+                
+                moveq   #15,d6
+@loc4:
                 
                 clr.w   d5
                 move.b  (a0)+,d5
                 add.w   d0,d5
                 move.w  d5,(a1)+
-                dbf     d6,loc_1EF78
+                dbf     d6,@loc4
                 
-                lea     $20(a1),a1
-                dbf     d7,loc_1EF76
+                lea     32(a1),a1
+                dbf     d7,@loc3
                 
-                bra.s   return_1EFAE
-loc_1EF8E:
+                bra.s   @return
+@loc5:
                 
-                bset    #$B,d0
-                lea     $20(a1),a1
-                moveq   #$B,d7
-loc_1EF98:
+                bset    #11,d0
+                lea     32(a1),a1
+                moveq   #11,d7
+@loc6:
                 
-                moveq   #$F,d6
-loc_1EF9A:
+                moveq   #15,d6
+@loc7:
                 
                 clr.w   d5
                 move.b  (a0)+,d5
                 add.w   d0,d5
                 move.w  d5,-(a1)
-                dbf     d6,loc_1EF9A
+                dbf     d6,@loc7
                 
-                lea     $60(a1),a1
-                dbf     d7,loc_1EF98
-return_1EFAE:
+                lea     96(a1),a1
+                dbf     d7,@loc6
+@return:
                 
                 rts
 
-    ; End of function sub_1EF50
+    ; End of function LoadBattlesceneEnemyLayout
 
 
 ; START OF FUNCTION CHUNK FOR sub_1EF2E
@@ -10183,7 +10184,8 @@ return_1EFAE:
 loc_1EFB0:
                 
                 tst.b   ((WAITING_FOR_BATTLESCENE_GRAPHICS_UPDATE-$1000000)).w
-                bne.s   return_1EFD6
+                bne.s   @return
+                
                 move.b  #1,((WAITING_FOR_BATTLESCENE_GRAPHICS_UPDATE-$1000000)).w
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     ($E000).l,a1
@@ -10191,7 +10193,7 @@ loc_1EFB0:
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
                 jsr     (EnableDmaQueueProcessing).w
-return_1EFD6:
+@return:
                 
                 rts
 
@@ -10607,7 +10609,7 @@ sub_1F2F6:
                 bsr.w   sub_1F1F0
                 btst    #2,((byte_FFB56F-$1000000)).w
                 beq.s   loc_1F32A
-                moveq   #$60,d6 
+                moveq   #96,d6
                 bra.s   loc_1F32C
 loc_1F32A:
                 
@@ -11005,7 +11007,8 @@ sprite_BattlesceneGround:
                 vdpSprite 268, V4|H4|0, 1936|MIRROR|PALETTE3, 296
                 vdpSprite 268, V4|H4|0, 1952|MIRROR|PALETTE3, 264
                 
-table_1F6B6:    dc.b 0
+layout_BattlesceneEnemy:
+                dc.b 0
                 dc.b 4
                 dc.b 8
                 dc.b $C

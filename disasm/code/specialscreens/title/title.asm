@@ -52,6 +52,7 @@ StartTitleScreen:
                 move.w  #896,d0
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
+                
                 lea     layout_TitleScreenB(pc), a0
                 lea     (SPRITE_05).l,a1
                 moveq   #10,d7
@@ -80,8 +81,8 @@ StartTitleScreen:
                 addi.w  #128,d0
                 move.w  d0,(a1)+        ; push Y
                 addq.l  #2,a1           ; skip size and link
-                ori.w   #$2000,d1
-                move.w  d1,(a1)+        ; push vdptile
+                ori.w   #$2000,d1       ; use palette 2
+                move.w  d1,(a1)+        ; push vdptile entry
                 move.w  #31,d0
                 sub.w   d6,d0
                 lsl.w   #3,d0

@@ -7,7 +7,7 @@
 
 SoundTest:      txt     464                         ; "Oh! I have a good idea.{N}Let's listen to music!{W1}"
                 sndCom  SOUND_COMMAND_FADE_OUT
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 clr.w   d0
                 clr.w   d7                          ; D7 = # bytes into sound table, so we clear it here
                 

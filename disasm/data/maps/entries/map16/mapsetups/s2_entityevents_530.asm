@@ -199,8 +199,8 @@ Map16_212_EntityEvent13:
 
 Map16_212_EntityEvent14:
                 
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     423             ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
                 txt     4082            ; "A hole.{W1}"

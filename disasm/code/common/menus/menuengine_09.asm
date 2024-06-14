@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_09.asm :
-; 0x16282..0x16618 : Menu engine
+; 0x16282..0x16618 : Menu engine, part 9
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -159,7 +159,7 @@ flag = -8
 windowSlot = -6
 windowLayoutEndAddress = -4
 
-DebugFlagSetter:
+DebugSetFlag:
                 
                 movem.l d0-a1,-(sp)
                 link    a6,#-16
@@ -240,7 +240,7 @@ loc_16484:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function DebugFlagSetter
+    ; End of function DebugSetFlag
 
 
 ; =============== S U B R O U T I N E =======================================

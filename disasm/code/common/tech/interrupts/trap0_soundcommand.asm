@@ -10,24 +10,27 @@
 Trap0_SoundCommand:
                 
                 movem.l d0-d1/a0,-(sp)
-                movea.l $E(sp),a0
+                movea.l 14(sp),a0
                 move.w  (a0),d1         ; get interrupt param
-                addq.l  #2,$E(sp)
+                addq.l  #2,14(sp)
                 cmpi.w  #-1,d1
-                bne.s   loc_472
-                move.w  d0,d1           ; if param = FFFF, then get param from d0
-loc_472:
+                bne.s   @Continue
+                
+                move.w  d0,d1
+@Continue:
                 
                 tst.b   ((SOUND_COMMANDS_DEACTIVATED-$1000000)).w
-                bne.s   loc_48A
+                bne.s   @Done
+                
                 lea     (SOUND_COMMAND_QUEUE).l,a0
                 moveq   #3,d0
-loc_480:
+@FindOpenSlot_Loop:
                 
                 tst.w   (a0)+
-                dbeq    d0,loc_480
+                dbeq    d0,@FindOpenSlot_Loop
+                
                 move.w  d1,-2(a0)       ; add new sound command to send
-loc_48A:
+@Done:
                 
                 movem.l (sp)+,d0-d1/a0
                 rte

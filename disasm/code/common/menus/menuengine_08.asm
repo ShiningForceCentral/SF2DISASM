@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\menuengine_08.asm :
-; 0x15BB0..0x1607C : Menu engine
+; 0x15BB0..0x1607C : Menu engine, part 8
 
 ; =============== S U B R O U T I N E =======================================
 

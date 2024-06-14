@@ -21,7 +21,7 @@ PickMithrilWeapon:
                 movem.l d0-a0,-(sp)
                 clr.w   d0
                 lea     list_MithrilWeaponClasses(pc), a0
-                move.w  #MITHRILWEAPON_CLASSES_COUNTER,d7
+                move.w  #MITHRIL_WEAPON_CLASSES_COUNTER,d7
 @FindWeaponClass_Loop:
                 
                 move.w  (a0)+,d6        ; D6 = number of character classes
@@ -49,7 +49,7 @@ PickMithrilWeapon:
                 lsl.w   #3,d0           ; D0 = weapon class index * 8 (weapons entry size)
                 lea     table_MithrilWeapons(pc), a0
                 adda.w  d0,a0
-                move.w  #MITHRILWEAPONS_PER_CLASS_COUNTER,d5
+                move.w  #MITHRIL_WEAPONS_PER_CLASS_COUNTER,d5
 @PickWeapon_Loop:
                 
                 clr.w   d0

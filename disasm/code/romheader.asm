@@ -7,7 +7,7 @@ InitialStack:   ; File Name   : D:\SEGADEV\IDB\SF2\sf2.bin
                 dc.l InitialStack       ; Initial Stack Pointer Address
 p_Start:        dc.l Start              ; Program Start Address
                 dc.l Int_OtherError     ; Bus Error
-off_C:          dc.l Int_AddressError   ; Address Error
+                dc.l Int_AddressError   ; Address Error
                 dc.l Int_IllegalInstruction ; Illegal instruction
                 dc.l Int_ZeroDivide     ; Zero Divide
                 dc.l Int_OtherError     ; CHK instruction

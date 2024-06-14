@@ -118,7 +118,7 @@ LevelUp:
                 beq.s   @FindLearnableSpell
             else
                 bsr.w   GetClass        
-                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED -- TORT class is being wrongfully treated as promoted here
+                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUG -- TORT class is being wrongfully treated as promoted here
                                         ;  Should either compare to first promoted class, or change branch condition to "lower than or equal".
                 blt.s   @FindLearnableSpell
             endif
@@ -215,7 +215,7 @@ InitializeAllyStats:
                 beq.s   @FindStatsBlockForClass
             else
                 bsr.w   GetClass        
-                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED -- TORT class is being wrongfully treated as promoted here
+                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUG -- TORT class is being wrongfully treated as promoted here
                                         ;  Should either compare to first promoted class, or change branch condition to "lower than or equal".
                 blt.s   @FindStatsBlockForClass
             endif
@@ -375,7 +375,7 @@ CalculateStatGain:
                 lsr.w   #BYTE_SHIFT_COUNT,d0
                 add.w   d3,d0           ; D0 = expected minimum stat for current level
                 add.w   d6,d1           ; add randomized stat gain to ACTUAL current stat
-                cmp.w   d0,d1           ; If new actual stat greater than or equal to expected minimum
+                cmp.w   d0,d1           ; If new value greater than or equal to expected minimum
                 bge.s   @Done           ;  ...we're done.
                 
                 addq.w  #1,d6           ;  Otherwise, lovingly apply "loser pity bonus."

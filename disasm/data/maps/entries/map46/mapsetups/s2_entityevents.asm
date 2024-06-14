@@ -209,7 +209,7 @@ Map46_EntityEvent14:
 Map46_EntityEvent15:
                 
             if (STANDARD_BUILD&TEST_BUILD=1)
-                move.w  (TEST_BUILD_CURRENT_MESSAGE).w,d0
+                move.w  ((TEST_BUILD_CURRENT_MESSAGE-$1000000)).w,d0
                 cmpi.w  #MESSAGES_MAX_INDEX,d0
                 bls.s   @Continue
                 move.w  #MESSAGES_MAX_INDEX,d0
@@ -217,7 +217,7 @@ Map46_EntityEvent15:
                 move.w  #MESSAGES_MAX_INDEX,d2
                 jsr     NumberPrompt
                 bmi.s   @Return
-                move.w  d0,(TEST_BUILD_CURRENT_MESSAGE).w
+                move.w  d0,((TEST_BUILD_CURRENT_MESSAGE-$1000000)).w
                 jsr     (DisplayText).w
 @Return:        rts
             else

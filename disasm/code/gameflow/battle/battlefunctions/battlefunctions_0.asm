@@ -523,24 +523,26 @@ loc_2308E:
 
 ControlCursorEntity_ChooseTarget:
                 
+                module
                 movem.l d1-a0,-(sp)
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                bne.s   loc_230F2
+                bne.s   @Continue
+                
                 moveq   #-1,d0
                 bra.w   byte_2321E
-loc_230F2:
+@Continue:
                 
                 jsr     (WaitForVInt).w
                 move.w  d0,d6
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.w   d1
-                bra.w   loc_23110
+                bra.w   @Start
 loc_23102:
                 
                 jsr     (WaitForVInt).w
                 jsr     (WaitForViewScrollEnd).w
-                jsr     j_CloseMiniStatusWindow
-loc_23110:
+                jsr     j_CloseBattlefieldMiniStatusWindow
+@Start:
                 
                 clr.w   d0
                 move.b  (a0,d1.w),d0
@@ -642,7 +644,7 @@ loc_231E0:
                 
                 btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_231F6
-                jsr     j_CloseMiniStatusWindow
+                jsr     j_CloseBattlefieldMiniStatusWindow
                 move.w  #-1,d0
                 bra.w   byte_2321E
 loc_231F6:
@@ -671,6 +673,7 @@ byte_2321E:
 
     ; End of function ControlCursorEntity_ChooseTarget
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
