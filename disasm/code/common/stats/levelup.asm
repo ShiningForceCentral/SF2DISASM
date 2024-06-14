@@ -106,7 +106,7 @@ LevelUp:
                 
                 ; Add extra levels if promoted
                 bsr.w   GetClass        
-                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED -- TORT class is being wrongfully treated as promoted here
+                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUG -- TORT class is being wrongfully treated as promoted here
                                         ;  Should either compare to first promoted class, or change branch condition to "lower than or equal".
                 blt.s   @FindLearnableSpell
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5
@@ -198,7 +198,7 @@ InitializeAllyStats:
                 move.w  (sp)+,d4        ; D4 <- pull starting level
                 move.w  d4,d5           ; D5 = effective level (takes additional levels into account if promoted for the purpose of spell learning)
                 bsr.w   GetClass        
-                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUGGED -- TORT class is being wrongfully treated as promoted here
+                cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUG -- TORT class is being wrongfully treated as promoted here
                                         ;  Should either compare to first promoted class, or change branch condition to "lower than or equal".
                 blt.s   @FindStatsBlockForClass
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5 ; add 20 to effective level if promoted
@@ -308,8 +308,8 @@ CalculateStatGain:
                 cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d5 ; If current level within projection
                 blt.s   @Continue       ;  ...keep going.
                 
-                move.w  #256,d0
-                move.w  #384,d4
+                move.w  #256,d0         ; assume 100% of projected stats reached
+                move.w  #384,d4         ; out of growth data, so assume 1.5
                 bra.s   @RandomizeStatGain
 @Continue:
                 
@@ -324,25 +324,25 @@ CalculateStatGain:
                 adda.w  d2,a0
                 move.w  (a0)+,d0        ; D0 = curve_param_1 for current level
                 move.w  (a0)+,d7        ; D7 = curve_param_2 for current level
-                sub.w   d3,d4           ; D4 = projected growth
-                mulu.w  d7,d4
+                sub.w   d3,d4           ; D4 = projected growth (diff between initial and final)
+                mulu.w  d7,d4           ; get portion of growth for current level
 @RandomizeStatGain:
                 
-                move.w  #128,d6
+                move.w  #128,d6         ; do 2 randoms instead of 1 to approx. bell curve
                 jsr     (GenerateRandomNumber).w
-                add.w   d7,d4
+                add.w   d7,d4           ; add 0 to 0.5 to random value
                 jsr     (GenerateRandomNumber).w
-                sub.w   d7,d4
-                addi.w  #128,d4
+                sub.w   d7,d4           ; subtract 0 to 0.5 from random value
+                addi.w  #128,d4         ; add 0.5 so the random gain rounds properly when LSRing
                 lsr.w   #BYTE_SHIFT_COUNT,d4
                 move.w  d4,d6           ; D6 = randomized stat gain
                 movem.w (sp)+,d1-d5     ; D1-D5 <- pull function arguments
-                sub.w   d3,d4           ; D4 = projected growth
-                mulu.w  d4,d0
-                addi.w  #128,d0
+                sub.w   d3,d4           ; D4 = projected growth (diff between initial and final)
+                mulu.w  d4,d0           ; get expected current stat based on growth/level (last byte is decimals)
+                addi.w  #128,d0         ; add 0.5 so the expected stat rounds properly when LSRing
                 lsr.w   #BYTE_SHIFT_COUNT,d0
                 add.w   d3,d0           ; D0 = expected minimum stat for current level
-                add.w   d6,d1
+                add.w   d6,d1           ; add randomized stat gain to ACTUAL current stat
                 cmp.w   d0,d1           ; If new value greater than or equal to expected minimum
                 bge.s   @Done           ;  ...we're done.
                 

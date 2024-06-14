@@ -403,9 +403,9 @@ UpdateBattleUnlockedFlag:
 CloseBattlefieldWindows:
                 
                 jsr     j_CloseLandEffectWindow
-                jsr     j_CloseMiniStatusWindow
+                jsr     j_CloseBattlefieldMiniStatusWindow
                 clr.b   ((IS_TARGETING-$1000000)).w
-                jsr     j_CloseMiniStatusWindow
+                jsr     j_CloseBattlefieldMiniStatusWindow
                 rts
 
     ; End of function CloseBattlefieldWindows

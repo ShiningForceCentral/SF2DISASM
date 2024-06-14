@@ -132,7 +132,7 @@ CheckArea:
 loc_2386C:
                 
                 clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0

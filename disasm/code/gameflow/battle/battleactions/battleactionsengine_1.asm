@@ -263,7 +263,7 @@ battlesceneScript_DetermineTargetsByAction:
                 jsr     j_GetLaserFacing
 @Done:
                 
-                bsr.w   SortTargets
+                bsr.w   battlesceneScript_SortTargets
                 rts
 
     ; End of function battlesceneScript_DetermineTargetsByAction

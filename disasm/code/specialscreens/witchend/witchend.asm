@@ -49,7 +49,7 @@ EndGame:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_PerformEndingWitchBlink
-                move.w  #SFX_DIALOG_BLEEP_2,((SPEECH_SFX-$1000000)).w
+                move.w  #SFX_DIALOG_BLEEP_2,((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     239             ; "{NAME;0}, I thank you.{N}You enabled me to return{N}to my original form.{D2}{D2}{N}Someday we'll meet again.{N}I'll never forget you....{D2}{D2}{D2}"
                 clsTxt
                 move.w  #90,d0

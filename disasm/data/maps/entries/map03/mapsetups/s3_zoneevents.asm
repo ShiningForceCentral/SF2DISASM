@@ -23,11 +23,11 @@ Map3_ZoneEvent0:
                 chkFlg  257             ; TEMP FLAG #01
                 bne.s   byte_50DA6      
                 jsr     (WaitForViewScrollEnd).l
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
                 move.w  #140,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     498             ; "You unruly boy!{N}Where on earth are you{N}going?{W2}"
                 txt     499             ; "There is no school outside!{N}Go to school!{W1}"
 byte_50DA6:
@@ -50,11 +50,11 @@ Map3_ZoneEvent1:
                 chkFlg  258             ; TEMP FLAG #02
                 bne.s   byte_50DE0      
                 jsr     (WaitForViewScrollEnd).l
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
                 move.w  #138,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     497             ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 byte_50DE0:
                 
@@ -84,11 +84,11 @@ Map3_ZoneEvent4:
                 script  cs_51454
                 chkFlg  259             ; TEMP FLAG #03
                 bne.s   byte_50E2C      
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
                 move.w  #139,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 jsr     (WaitForViewScrollEnd).l
                 txt     497             ; "You cannot enter the castle{N}of Granseal.  Go away!{W1}"
 byte_50E2C:
@@ -140,11 +140,11 @@ Map3_ZoneEvent7:
                 bne.s   return_50ED0
                 chkFlg  602             ; Set after Astral's second basement line
                 bne.s   byte_50E96      
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
                 move.w  #142,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
                 txt     513             ; "Mmm...aahh...{N}Oh, yeah!  It must be....{N}No, it's not a....{W1}"
                 bra.s   return_50ED0
@@ -152,11 +152,11 @@ byte_50E96:
                 
                 chkFlg  260             ; TEMP FLAG #04
                 bne.s   return_50ED0
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
                 move.w  #142,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
                 txt     514             ; "By the way, {LEADER},{N}what did you think of the{N}storm last night?{W2}"
                 txt     515             ; "Did you feel something evil,{N}or anything?{W2}"

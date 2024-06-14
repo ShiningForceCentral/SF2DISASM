@@ -18,8 +18,7 @@ byte_5E736:     msDesc 11, 3, 9, 0      ; "{NAME} investigated{N}the statue.{W2}
                                         ; "A statue of beautiful Mitula.{W1}"
                 msDescFunction 44, 26, Map1_DescFunc0-byte_5E736
                 msDescEnd
-                dc.b $4E 
-                dc.b $75 
+                rts
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -28,11 +28,11 @@ Map67_DescFunc0:
                 bne.s   byte_4FD3C      
                 txt     2590            ; "There's a wobbly rock.{W1}"
                 clsTxt
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
                 move.w  #7,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 chkFlg  13              ; Elric joined
                 bne.s   loc_4FD22
                 jsr     LoadAndDisplayCurrentPortrait

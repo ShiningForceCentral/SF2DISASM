@@ -1,6 +1,6 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\portraitwindowlayout.asm :
-; 0x126EE..0x1278E : Member screen portrait window layout
+; 0x126EE..0x1278E : Portrait window layout
 layout_PortraitWindow:
                 
 ; Syntax        vdpTile [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]

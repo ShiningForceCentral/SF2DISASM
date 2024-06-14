@@ -29,15 +29,15 @@ Map5_EntityEvent0:
                 txt     785             ; "I am studying at his house.{N}Please follow me.{W1}"
                 clsTxt
                 jsr     j_ClosePortraitWindow
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     786             ; "{CLEAR}{LEADER} decided to{N}follow {NAME;4}.{W1}{CLEAR}"
                 clsTxt
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
                 move.w  #4,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
                 txt     787             ; "Sir Hawel lives just outside{N}of this village.{W1}"
                 script  cs_51B14

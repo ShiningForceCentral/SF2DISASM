@@ -8,9 +8,9 @@
 ; 
 ; Out: d1.b = -1 if command failed to execute
 
-var_4 = -4
-var_3 = -3
-teammateToFollow = -2
+secondaryCharacteristic = -4
+teammateToFollow = -3
+var_2 = -2
 movingCombatant = -1
 
 ExecuteAiCommand_SpecialMove:
@@ -18,19 +18,20 @@ ExecuteAiCommand_SpecialMove:
                 movem.l d0/d2-a6,-(sp)
                 link    a6,#-6
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_E9B2
+                bne.s   @Enemy
                 
+                ; Skip if ally combatant
                 move.b  #-1,d1
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #-1,(a0)
                 bra.w   loc_EB7A
-loc_E9B2:
+@Enemy:
                 
                 move.b  d0,movingCombatant(a6)
-                move.b  d1,teammateToFollow(a6)
-                move.b  d2,var_4(a6)
+                move.b  d1,var_2(a6)
+                move.b  d2,secondaryCharacteristic(a6)
                 bsr.w   GetCurrentMov
                 tst.b   d1
                 bne.s   @CanMove
@@ -55,8 +56,8 @@ loc_E9B2:
                 bra.w   loc_EB7A
 loc_EA00:
                 
-                move.b  d1,var_3(a6)
-                btst    #6,d1
+                move.b  d1,teammateToFollow(a6)
+                btst    #COMBATANT_BIT_SORT,d1
                 bne.s   loc_EA2E
                 clr.w   d0
                 move.b  d1,d0
@@ -72,7 +73,7 @@ loc_EA00:
                 bra.w   loc_EB7A
 loc_EA2E:
                 
-                move.b  teammateToFollow(a6),d0
+                move.b  var_2(a6),d0
                 tst.b   d0
                 bne.w   loc_EAE6
                 move.b  movingCombatant(a6),d0
@@ -110,7 +111,7 @@ loc_EA9C:
                 
                 jsr     j_ClearBattleTerrainArrayObstructionFlags
                 move.b  movingCombatant(a6),d0
-                move.b  var_3(a6),d1
+                move.b  teammateToFollow(a6),d1
                 bsr.w   sub_F7A0        
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  (a0),d1
@@ -137,7 +138,7 @@ loc_EAE6:
                 
                 clr.w   d0
                 move.b  movingCombatant(a6),d0
-                move.b  teammateToFollow(a6),d1
+                move.b  var_2(a6),d1
                 bsr.w   sub_D430
                 tst.b   d1
                 bne.s   loc_EB10
@@ -164,7 +165,7 @@ loc_EB34:
                 
                 jsr     j_ClearBattleTerrainArrayObstructionFlags
                 move.b  movingCombatant(a6),d0
-                move.b  var_3(a6),d1
+                move.b  teammateToFollow(a6),d1
                 bsr.w   sub_F7A0        
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  (a0),d1
@@ -187,17 +188,17 @@ loc_EB6C:
 loc_EB7A:
                 
                 clr.w   d2
-                move.b  var_4(a6),d2
+                move.b  secondaryCharacteristic(a6),d2
                 tst.w   d2
                 beq.s   loc_EB9C
                 cmpi.w  #1,d2
                 bne.s   loc_EB90
-                jsr     j_GetMoveListForEnemyTarget
+                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1
 loc_EB90:
                 
                 cmpi.w  #2,d2
                 bne.s   loc_EB9C
-                jsr     sub_1AC030      
+                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2
 loc_EB9C:
                 
                 unlk    a6

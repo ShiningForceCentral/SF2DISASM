@@ -55,7 +55,7 @@ InitializeGame:
                 moveq   #0,d4
                 movem.w d0-d4,-(sp)
                 move.w  #600,d0
-                jsr     j_DebugFlagSetter
+                jsr     j_DebugSetFlag
                 movem.w (sp)+,d0-d4
                 jsr     j_ExplorationLoop
                 bra.w   MainLoop        

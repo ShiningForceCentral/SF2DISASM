@@ -26,7 +26,7 @@
                 include "code\common\menus\caravan\caravanactions_2.asm"    ; Caravan functions
                 include "code\common\stats\items\itemactions_1.asm"    ; Item functions
                 include "data\stats\items\usableoutsidebattleitems.asm"    ; Usable outside battle items
-                include "code\common\stats\items\itemactions_2.asm"    ; Item functions
+                include "code\common\stats\items\fielditemeffects.asm"    ; Functions to perform effects from using items on an exploration field.
                 
                 ; Battle functions
                 include "code\gameflow\battle\battlefunctions\battlefunctions_0.asm"    ; Battle functions

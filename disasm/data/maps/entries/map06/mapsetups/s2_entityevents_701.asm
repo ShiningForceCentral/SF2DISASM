@@ -492,11 +492,11 @@ loc_54C4C:
                 bne.s   byte_54C8E      
                 txt     1116            ; "Sir Astral, may I give him{N}the dynamite?{W1}"
                 clsTxt
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
                 move.w  #FOLLOWER_B,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
                 txt     1117            ; "It's too dangerous to use it{N}as it is.{W2}"
                 txt     1118            ; "We need some way to{N}detonate the dynamite{N}safely.{W1}"
