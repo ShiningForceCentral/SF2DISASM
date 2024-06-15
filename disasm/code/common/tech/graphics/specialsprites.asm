@@ -15,7 +15,7 @@ pt_SpecialSprites:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d1.w = special mapsprite index
+; In: d1.w = entity mapsprite index
 
 
 LoadSpecialSprite:
@@ -23,16 +23,15 @@ LoadSpecialSprite:
                 
                 module                  ; Start of special sprite loading module
                 movem.l d0-a1,-(sp)
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                move.w  #MAPSPRITES_SPECIALS_END,d0
-                sub.w   d1,d0
-                andi.w  #MAPSPRITE_MASK,d0
+            if (STANDARD_BUILD=1)
+                bsr.w   GetSpecialSpriteIndex
+                move.w  d1,d0
             else
                 move.b  #MAPSPRITES_SPECIALS_END,d0
                 sub.b   d1,d0
                 andi.w  #MAPSPRITE_MASK,d0
-            endif
                 move.w  d0,d1
+            endif
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l pt_SpecialSprites(pc,d0.w),a0
                 lea     (PALETTE_4_BASE).l,a1
@@ -136,6 +135,7 @@ AnimateSpecialSprite:
 
 UpdateSpecialSprite:
                 
+                module                  ; Start of special sprite update module
                 movem.l d0-d2/d7-a2,-(sp)
                 move.b  ((WINDOW_IS_PRESENT-$1000000)).w,d7
                 cmp.b   d5,d7
@@ -147,14 +147,21 @@ loc_25D0C:
                 clr.w   d5
 loc_25D0E:
                 
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                cmpi.w  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-                bcs.w   loc_25DF0
-                move.w  #MAPSPRITES_SPECIALS_END,d6
-                sub.w   ENTITYDEF_OFFSET_MAPSPRITE(a0),d6
+            if (STANDARD_BUILD=1)
+                move.w  d1,-(sp)
+              if (EXPANDED_MAPSPRITES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+              else
+                clr.w   d1
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+              endif
+                bsr.w   GetSpecialSpriteIndex
+                move.w  d1,d6
+                movem.w (sp)+,d1 ; MOVEM to pull value back from the stack without affecting the CCR
+                bmi.w   @Done    ; branch if an invalid index was returned
             else
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-                bcs.w   loc_25DF0
+                blo.w   @Done
                 move.b  #MAPSPRITES_SPECIALS_END,d6
                 sub.b   ENTITYDEF_OFFSET_MAPSPRITE(a0),d6
             endif
@@ -223,7 +230,7 @@ loc_25D7E:
                 move.w  d2,(a1)+
                 dbf     d7,loc_25D7E
                 
-                bra.w   loc_25DF0
+                bra.w   @Done
 
     ; End of function specialSpriteUpdate_Battle
 
@@ -273,10 +280,11 @@ loc_25DD8:
                 dbf     d7,loc_25DD8
                 
                 bra.w   *+4
-loc_25DF0:
+@Done:
                 
                 movem.l (sp)+,d0-d2/d7-a2
                 rts
 
     ; End of function specialSpriteUpdate_Exploration
 
+                modend                  ; End of special sprite update module

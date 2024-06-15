@@ -96,15 +96,15 @@ COMBATANT_ENEMIES_SPACE_END: equ combatantEnemiesStart+combatantEnemiesNumber
 
 ; enum BattleEntity
 
-neutralEntitySize = 8
+entrySize = 8
 
-    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-neutralEntitySize = 10
+    if (STANDARD_BUILD=1)
+entrySize = entrySize+2 ; EXPANDED_MAPSPRITES
     endif
 
 BATTLE_NEUTRAL_ENTITIES_NUMBER: equ 2
-BATTLE_NEUTRAL_ENTITY_SIZE: equ neutralEntitySize
-BATTLE_ENEMY_ENTITIES_COUNTER: equ BATTLE_ENEMY_ENTITIES_NUMBER-BATTLE_NEUTRAL_ENTITIES_NUMBER-1
+BATTLE_NEUTRAL_ENTITY_SIZE: equ entrySize
+BATTLE_ENEMY_ENTITIES_COUNTER: equ (BATTLE_ENEMY_ENTITIES_NUMBER-BATTLE_NEUTRAL_ENTITIES_NUMBER)-1
 BATTLE_ALLY_ENTITIES_COUNTER: equ BATTLE_ALLY_ENTITIES_NUMBER-1
 BATTLE_ENEMY_ENTITIES_NUMBER: equ 32
 BATTLE_ALLY_ENTITIES_NUMBER: equ 32
@@ -3637,12 +3637,12 @@ MAPSPRITE_BIRDMAN: equ 236
 MAPSPRITE_END_LIST: equ 237 ; to use 2 more sprite this one should become 239
 MAPSPRITE_FREE_SPOT1: equ 238
 MAPSPRITE_FREE_SPOT2: equ 239
-MAPSPRITE_SPECIAL0: equ 240
-MAPSPRITE_SPECIAL1: equ 241
-MAPSPRITE_SPECIAL2: equ 242
-MAPSPRITE_SPECIAL3: equ 243
-MAPSPRITE_SPECIAL4: equ 244
-MAPSPRITE_SPECIAL5: equ 245
+MAPSPRITE_SPECIAL0: equ 240 ; special sprites 0-5 are free to use as regular sprites in a standard build
+MAPSPRITE_SPECIAL1: equ 241 ;
+MAPSPRITE_SPECIAL2: equ 242 ;
+MAPSPRITE_SPECIAL3: equ 243 ;
+MAPSPRITE_SPECIAL4: equ 244 ;
+MAPSPRITE_SPECIAL5: equ 245 ;
 MAPSPRITE_SPECIAL6: equ 246
 MAPSPRITE_SPECIAL7: equ 247
 MAPSPRITE_SPECIAL8: equ 248
@@ -3667,6 +3667,20 @@ MAPSPRITES_NPCS_START: equ 170
 MAPSPRITES_SPECIALS_START: equ 240
 MAPSPRITES_SPECIALS_END: equ 255
 MAPSPRITE_MASK: equ 255
+
+; ---------------------------------------------------------------------------
+
+; enum SpecialSprites
+SPECIALSPRITE_TAROS: equ 0
+SPECIALSPRITE_KRAKEN_1: equ 1
+SPECIALSPRITE_NAZCA_SHIP: equ 2
+SPECIALSPRITE_EVIL_SPIRIT: equ 3
+SPECIALSPRITE_ZEON_1: equ 4
+SPECIALSPRITE_ZEON_2: equ 5
+SPECIALSPRITE_KRAKEN_2: equ 6
+SPECIALSPRITE_KRAKEN_3: equ 7
+SPECIALSPRITE_KRAKEN_4: equ 8
+SPECIALSPRITE_KRAKEN_5: equ 9
 
 ; ---------------------------------------------------------------------------
 
@@ -3730,18 +3744,20 @@ PORTRAIT_DEFAULT: equ 65535
 
 ; enum MapspriteDialogueDefinition
 
-mapspriteDialoguePortraitOffset = 1
-mapspriteDialogueSoundOffset = 2
+defStart = 0
+portraitOffset = defStart+1
+sfxOffset = defStart+2
 
-    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-mapspriteDialoguePortraitOffset = 2
-mapspriteDialogueSoundOffset = 3
+    if (STANDARD_BUILD=1)
+; Push items forward to accommodate a word-sized mapsprite index
+portraitOffset = portraitOffset+1
+sfxOffset = sfxOffset+1
     endif
 
-MAPSPRITEDIALOGUEDEF_OFFSET_MAPSPRITE: equ 0
-MAPSPRITEDIALOGUEDEF_OFFSET_PORTRAIT: equ mapspriteDialoguePortraitOffset
-MAPSPRITEDIALOGUEDEF_OFFSET_SPEECHSFX: equ mapspriteDialogueSoundOffset
-MAPSPRITEDIALOGUEDEF_OFFSET_ALIGNER: equ 3
+MAPSPRITEDIALOGUEDEF_OFFSET_MAPSPRITE: equ defStart
+MAPSPRITEDIALOGUEDEF_OFFSET_PORTRAIT: equ portraitOffset
+MAPSPRITEDIALOGUEDEF_OFFSET_SPEECHSFX: equ sfxOffset
+MAPSPRITEDIALOGUEDEF_OFFSET_ALIGNER: equ 3 ; unused if standard build
 MAPSPRITEDIALOGUEDEF_ENTRY_SIZE: equ 4
 
 ; ---------------------------------------------------------------------------
@@ -3794,19 +3810,21 @@ followerB = 31
 followerSize = 4
 
     if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
-followerA = 156
-followerB = 157
+; Use enemy combatant slots to accommodate expanded force members
+followerA = COMBATANT_MASK_ENEMY_BIT|28
+followerB = COMBATANT_MASK_ENEMY_BIT|29
     endif
 
-    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-followerSize = 6
+    if (STANDARD_BUILD=1)
+; Increase follower entry size to accommodate expanded mapsrites
+followerSize = followerSize+2 ; EXPANDED_MAPSPRITES
     endif
 
 FOLLOWER_ENTITY_SIZE: equ followerSize
 FOLLOWER_A: equ followerA 
 FOLLOWER_B: equ followerB
-FOLLOWER_C: equ 158
-FOLLOWER_D: equ 159
+FOLLOWER_C: equ COMBATANT_MASK_ENEMY_BIT|30
+FOLLOWER_D: equ COMBATANT_MASK_ENEMY_BIT|31
 
 ; ---------------------------------------------------------------------------
 

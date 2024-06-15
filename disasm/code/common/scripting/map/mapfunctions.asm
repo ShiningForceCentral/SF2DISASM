@@ -27,6 +27,7 @@ sub_440D4:
 
     ; End of function sub_440D4
 
+                module
 
 ; START OF FUNCTION CHUNK FOR InitializeMapEntities
 
@@ -41,7 +42,7 @@ loc_440E2:
                 movem.w d1-d3,-(sp)
                 moveq   #1,d0
                 bsr.w   InitializeFollowerEntities
-loc_44104:
+@start:
                 
                 move.b  (a0)+,d1
                 cmpi.b  #-1,d1
@@ -51,16 +52,24 @@ loc_44104:
                 move.b  (a0)+,d2
                 andi.w  #$3F,d2 
                 muls.w  #MAP_TILE_SIZE,d2
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                move.w  (a0)+,d3
+            if (STANDARD_BUILD=1)
+                ; Get word-sized facing direction value -> d3.w, and mapsprite index -> d4.w
+                move.w  (a0)+,d3        ; EXPANDED_MAPSPRITES
                 move.w  (a0)+,d4
-                cmpi.w  #MAPSPRITES_SPECIALS_START,d4
+                
+                move.w  d1,-(sp)
+                move.w  d4,d1
+                jsr     IsSpecialSprite ; Out: CCR carry-bit clear if true
+                movem.w (sp)+,d1        ; MOVEM to pull value back from the stack without affecting the CCR
             else
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
+                
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d4
             endif
-                bcs.s   loc_44146
+                bcs.s   @RegularSprite
+                
+                ; Declare a new special sprite
                 movem.w d0,-(sp)
                 move.w  #ENTITY_SPECIAL_SPRITE,d0
                 move.b  d0,(a2)+
@@ -69,11 +78,11 @@ loc_44104:
                 move.w  #ENTITY_ENEMY_START,d6
                 bsr.w   DeclareNewEntity
                 movem.w (sp)+,d0
-                bra.s   loc_44104
-loc_44146:
+                bra.s   @start
+@RegularSprite:
                 
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                cmpi.w  #COMBATANT_ALLIES_NUMBER,d4
+            if (STANDARD_BUILD=1)
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d4 ; EXPANDED_MAPSPRITES
             else
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d4
             endif
@@ -82,7 +91,11 @@ loc_44146:
                 tst.b   (a1,d4.w)
                 beq.s   loc_4415A
                 move.l  (a0)+,d5
-                bra.w   loc_4417E
+            if (STANDARD_BUILD=1)
+                bra.s   @start ; optimization
+            else
+                bra.w   @goto_start
+            endif
 loc_4415A:
                 
                 move.b  d0,(a1,d4.w)
@@ -102,9 +115,13 @@ loc_44172:
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
                 addq.w  #1,d0
-loc_4417E:
+@goto_start:
                 
-                bra.s   loc_44104
+            if (STANDARD_BUILD=1)
+                bra.w   @start ; to accomodate expanded code
+            else
+                bra.s   @start
+            endif
 loc_44180:
                 
                 movem.w (sp)+,d1-d3
@@ -113,7 +130,7 @@ loc_44180:
                 bsr.w   GetAllyMapsprite
                 move.l  #eas_Idle,d5
                 bsr.w   DeclareNewEntity
-                move.w  #$10,((SPRITE_SIZE-$1000000)).w
+                move.w  #16,((SPRITE_SIZE-$1000000)).w
                 move.b  #-1,(a3)
                 bsr.w   sub_44404
                 movem.l (sp)+,d0-a5
@@ -121,6 +138,7 @@ loc_44180:
 
 ; END OF FUNCTION CHUNK FOR InitializeMapEntities
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -172,8 +190,8 @@ byte_441F0:
                 andi.w  #$7F,d2
                 muls.w  #MAP_TILE_SIZE,d2
                 moveq   #LEFT,d3        ; facing
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                move.w  #MAPSPRITE_RAFT,d4
+            if (STANDARD_BUILD=1)
+                move.w  #MAPSPRITE_RAFT,d4 ; EXPANDED_MAPSPRITES
             else
                 moveq   #MAPSPRITE_RAFT,d4
             endif

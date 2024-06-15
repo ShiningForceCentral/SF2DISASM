@@ -66,6 +66,8 @@
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions
                 
+                includeIfStandard "code\common\tech\graphics\findspecialsprite-standard.asm"
+                includeIfStandard "data\stats\specialsprites-standard.asm"
                 include "code\common\tech\graphics\specialsprites.asm"    ; Special Sprites functions
                 include "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
                 include "code\common\tech\graphics\specialspritesanims.asm"    ; Special Sprites Animations

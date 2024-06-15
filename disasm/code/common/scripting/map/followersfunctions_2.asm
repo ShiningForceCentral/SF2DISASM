@@ -91,8 +91,8 @@ loc_4443C:
                 andi.w  #$7F,d2 
                 muls.w  #MAP_TILE_SIZE,d2
                 moveq   #LEFT,d3        ; facing
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                move.w  #MAPSPRITE_RAFT,d4
+            if (STANDARD_BUILD=1)
+                move.w  #MAPSPRITE_RAFT,d4 ; EXPANDED_MAPSPRITES
             else
                 moveq   #MAPSPRITE_RAFT,d4
             endif

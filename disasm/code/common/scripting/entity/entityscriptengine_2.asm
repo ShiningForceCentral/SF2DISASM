@@ -2497,6 +2497,7 @@ UpdateEntitySprite:
 
 ChangeEntityMapsprite:
                 
+                module
                 move.b  d6,ENTITYDEF_OFFSET_FACING(a0)
                 ext.w   d6
                 move.b  table_FacingValues_1(pc,d6.w),d6
@@ -2505,31 +2506,35 @@ ChangeEntityMapsprite:
 loc_60B6:
                 
                 movem.l a0-a1,-(sp)
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD=1)
+              if (EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-                cmpi.b  #MAPSPRITES_SPECIALS_START,d1
-                bcc.w   loc_617C
+              else
                 clr.w   d1
-                move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
-                cmpi.b  #$20,d1 
-                beq.w   loc_617C
-                move.w  d1,-(sp)
-                clr.w   d1
-                move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d1
-                move.w  d1,-(sp)
-                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+              endif
+                jsr     IsSpecialSprite ; Out: CCR carry-bit clear if true
             else
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
-                bcc.w   loc_617C
+            endif
+                bcc.w   @done ; skip changing facing direction if special sprite
+                
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
-                cmpi.b  #$20,d1 
-                beq.w   loc_617C
-                move.w  d1,-(sp)
+                cmpi.b  #32,d1 
+                beq.w   @done
+                
+                move.w  d1,-(sp)        ; push entnum
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d1
-                move.w  d1,-(sp)
+                move.w  d1,-(sp)        ; push flags B
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+            else
+              if (STANDARD_BUILD=1)
+                clr.w   d1
+              endif
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
             endif
                 move.w  d1,d0
@@ -2548,7 +2553,7 @@ loc_60B6:
                 lea     (a1,d0.w),a1
                 jsr     (LoadBasicCompressedData).w
                 movea.l a1,a0
-                move.w  (sp)+,d1
+                move.w  (sp)+,d1        ; pull flags B
                 btst    #5,d1
                 beq.s   loc_6124
                 jsr     j_ApplySpriteImmersedEffect
@@ -2577,7 +2582,7 @@ loc_6152:
                 jsr     j_OrientSpriteRight
 loc_615E:
                 
-                move.w  (sp)+,d1
+                move.w  (sp)+,d1        ; pull entnum
                 move.w  d1,d0
                 lsl.w   #3,d1
                 add.w   d0,d1
@@ -2588,12 +2593,14 @@ loc_615E:
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDma
                 bsr.w   EnableDmaQueueProcessing
-loc_617C:
+@done:
                 
                 movem.l (sp)+,a0-a1
 return_6180:
                 
                 rts
+                
+                modend
 
     ; End of function ChangeEntityMapsprite
 
@@ -2623,19 +2630,26 @@ DmaEntityMapsprite:
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
                 move.w  d1,-(sp)
-                clr.w   d1
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD=1)
+              if (EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
-                cmpi.b  #MAPSPRITES_SPECIALS_START,d1 ; doing this implies that at the end each chunk of 256 mapsprites, a number are considered "special", i.e., 2x2 mapblocks large
+              else
+                clr.w   d1
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+              endif
+                jsr     IsSpecialSprite ; Out: CCR carry-bit clear if true
+                bcs.s   @LoadRegularSprite
             else
+                clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 cmpi.w  #MAPSPRITES_SPECIALS_START,d1 ; HARDCODED special mapsprites start index
-            endif
                 blt.s   @LoadRegularSprite
+            endif
                 jsr     j_LoadSpecialSprite
                 move.w  (sp)+,d1
                 bra.s   @Done
-@LoadRegularSprite:               
+@LoadRegularSprite:
+                
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1

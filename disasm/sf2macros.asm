@@ -978,8 +978,9 @@ position: macro
             endm
     
 facing: macro
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                dc.w \1
+            if (STANDARD_BUILD=1)
+                ; make sure that neutral battle entities mapsprite index is word-aligned
+                dc.w \1 ; EXPANDED_MAPSPRITES
             else
                 dc.b \1
             endif
@@ -1252,12 +1253,12 @@ input:      macro
             endm
     
 follower: macro
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD=1)
                 dc.b \1
                 dc.b \2
-                dc.w \3
+                dc.w \3 ; word-sized mapsprite index
                 dc.b \4
-                dc.b 0
+                dc.b 0  ; alignment byte
             else
                 dc.b \1
                 dc.b \2
@@ -1267,8 +1268,8 @@ follower: macro
         endm
     
 mapsprite: macro
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                defineShorthand.w MAPSPRITE_,\1
+            if (STANDARD_BUILD=1)
+                defineShorthand.w MAPSPRITE_,\1 ; word-sized index to accomodate up to 65k+ mapsprites
             else
                 defineShorthand.b MAPSPRITE_,\1
             endif
@@ -1279,11 +1280,11 @@ portrait:   macro
             endm
     
 speechSfx: macro
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD=1)
                 defineShorthand.b SFX_,\1
             else
                 defineShorthand.b SFX_,\1
-                dc.b 0
+                dc.b 0  ; alignment byte
             endif
         endm
     

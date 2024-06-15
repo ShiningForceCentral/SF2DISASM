@@ -214,17 +214,12 @@ loc_11E54:
 loc_11E74:
                 
                 checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
-                bne.s   @raft
+                bne.s   @Raft
                 
-            if (EXPANDED_MAPSPRITES=1)
                 move.w   #MAPSPRITE_CARAVAN,d4
                 bra.s   loc_11E82
-@raft           move.w   #MAPSPRITE_RAFT,d4
-            else
-                moveq   #MAPSPRITE_CARAVAN,d4 
-                bra.s   loc_11E82
-@raft           moveq   #MAPSPRITE_RAFT,d4 
-            endif
+@Raft:          move.w   #MAPSPRITE_RAFT,d4
+                
 loc_11E82:
                 
                 clr.w   d0

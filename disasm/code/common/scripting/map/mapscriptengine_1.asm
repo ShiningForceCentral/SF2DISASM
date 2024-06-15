@@ -1963,10 +1963,10 @@ LoadMapsprite:
                 moveq   #2,d6
 @Continue:
                 
-                clr.w   d1
-            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
             else
+                clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
             endif
                 move.w  d1,d0

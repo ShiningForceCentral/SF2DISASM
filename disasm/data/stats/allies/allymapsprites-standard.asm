@@ -173,15 +173,9 @@ table_AllyMapsprites:
             endif
 
 
-; Allies who use a different mapsprite before joining the Force.
+; Allies who use a different mapsprite before joining the Force. Entries are word-sized to accommodate expanded mapsrites.
 table_AllyMapspritesIfNotJoined:
                 
-            if (EXPANDED_MAPSPRITES=1)
                 dc.w ALLY_ROHDE, MAPSPRITE_NPC_ROHDE
                 
                 tableEnd
-            else
-                dc.b ALLY_ROHDE, MAPSPRITE_NPC_ROHDE
-                
-                tableEnd.b
-            endif

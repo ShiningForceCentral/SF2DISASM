@@ -1013,29 +1013,35 @@ UpdateBattleEntityMapsprite:
                 addq.w  #2,d6
 @Continue:
                 
-                clr.w   d1
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+            if (STANDARD_BUILD=1)
+              if (EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
-                cmpi.b  #MAPSPRITES_SPECIALS_START,d1
+              else
+                clr.w   d1
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+              endif
+                bsr.w   IsSpecialSprite ; Out: CCR carry-bit clear if true
                 bcc.s   @Done
-                clr.w   d1
-                move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1
-                cmpi.b  #$20,d1
-                beq.s   @Done
-                move.w  d1,-(sp)
-                clr.w   d1
-                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+                
+                clr.w   d1 ; clear register lower word before moving a byte from memory as good practice
             else
+                clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
-                bcc.s   @Done
+                bhs.s   @Done
+            endif
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1
-                cmpi.b  #$20,d1 
+                cmpi.b  #32,d1
                 beq.s   @Done
-                move.w  d1,-(sp)
+                
+                move.w  d1,-(sp)        ; push entnum
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+            else
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
             endif
+                
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1
@@ -1047,7 +1053,7 @@ UpdateBattleEntityMapsprite:
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadBasicCompressedData).w
                 movea.l a1,a0
-                move.w  (sp)+,d1
+                move.w  (sp)+,d1        ; pull entnum
                 move.w  d1,d0
                 lsl.w   #3,d1
                 add.w   d0,d1

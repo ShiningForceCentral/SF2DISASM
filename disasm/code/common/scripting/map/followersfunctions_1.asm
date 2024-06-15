@@ -60,8 +60,8 @@ InitializeFollowerEntities:
 @NonAlly:
                 
                 clr.w   d4
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                move.w  2(a4),d4        ; optional mapsprite index for non-force members
+            if (STANDARD_BUILD=1)
+                move.w  2(a4),d4        ; EXPANDED_MAPSPRITES
             else
                 move.b  2(a4),d4        ; optional mapsprite index for non-force members
             endif
@@ -75,8 +75,8 @@ InitializeFollowerEntities:
                 subi.w  #96,d6
 @SetPriority:
                 
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                move.b  4(a4),(a5,d0.w)
+            if (STANDARD_BUILD=1)
+                move.b  4(a4),(a5,d0.w) ;  ; EXPANDED_MAPSPRITES (offset should be labeled and patched at the enum level)
             else
                 move.b  3(a4),(a5,d0.w)
             endif

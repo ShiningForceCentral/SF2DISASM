@@ -451,22 +451,34 @@ loc_12D34:
                 divs.w  #96,d1
                 add.w   d2,d0
                 add.w   d3,d1
-                move.w  #$E0FE,d4
-            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
-                cmpi.w  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                move.w  #VDPTILE_GREEN_DOT|VDPTILE_PALETTE4|VDPTILE_PRIORITY,d4 ; minimap ally sprite indicator
+            if (STANDARD_BUILD=1)
+                ; Subtract 1 from d4.w if mapsprite belongs to an enemy entity, regardless of size
+                move.w  d1,-(sp)
+              if (EXPANDED_MAPSPRITES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+              else
+                clr.w   d1
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
+              endif
+                cmpi.w  #MAPSPRITES_ENEMIES_START,d1
                 blo.s   @isLargeMapsprite
-                cmpi.w  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
+                cmpi.w  #MAPSPRITES_NPCS_START,d1
                 bhi.s   @isLargeMapsprite
+                
                 subq.w  #1,d4
 @isLargeMapsprite:
                 
-                cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE+1(a0) ; check the mapsprite word's lower byte
+                jsr     IsEnemySpecialSprite ; In: d1.w = entity mapsprite index, Out: CCR carry-bit clear if true
+                movem.w (sp)+,d1             ; MOVEM to pull value back from the stack without affecting the CCR
             else
+                ; Subtract 1 from d4.w if mapsprite either belongs to an enemy entity, or is large
                 cmpi.b  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
-                bcs.s   @isLargeMapsprite
+                blo.s   @isLargeMapsprite
                 cmpi.b  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bhi.s   @isLargeMapsprite
-                subq.w  #1,d4           ; subtract 1 if enemy
+                
+                subq.w  #1,d4           ; subtract 1 if enemy to use the red dot instead
 @isLargeMapsprite:
                 
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
