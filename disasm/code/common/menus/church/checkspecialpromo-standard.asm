@@ -5,10 +5,10 @@
                 
                 lea     table_PromotionItems(pc), a1
                 clr.w   promotionItem(a6)
-                clr.w   d1
                 
                 ; Do we possess a special promotion item?
-@Start_Loop:    cmpi.b  #TERMINATOR_BYTE,(a1)
+@Start_Loop:    clr.w   d1
+                cmpi.b  #TERMINATOR_BYTE,(a1)
                 beq.w   @CheckRegularPromo
                 move.b  (a1)+,d1                    ; d1.w = special promo item
                 move.w  d1,promotionItem(a6)
