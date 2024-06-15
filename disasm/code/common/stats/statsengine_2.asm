@@ -1143,7 +1143,7 @@ equipEffect_IncreaseDoubleAttackProwess:
                 
                 lsl.b   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
                 andi.b  #PROWESS_MASK_CRITICAL,(a2) ; BUG -- chance to counter attack is being set to 1/32
-                                        ; setting should be masked as well
+                                        ; counter attack setting should be masked as well
                 or.b    d2,(a2)
                 rts
 
