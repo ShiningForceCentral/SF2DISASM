@@ -1183,7 +1183,7 @@ equipEffect_IncreaseDoubleAttackProwess:
                 andi.b  #PROWESS_MASK_CRITICAL|PROWESS_MASK_COUNTER,(a2)
             else
                 andi.b  #PROWESS_MASK_CRITICAL,(a2) ; BUG -- chance to counter attack is being set to 1/32
-            endif                       ; counter atack setting should be masked as well
+            endif                       ; counter attack setting should be masked as well
                 or.b    d2,(a2)
                 rts
 

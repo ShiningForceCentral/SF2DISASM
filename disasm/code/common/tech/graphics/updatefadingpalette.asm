@@ -24,8 +24,6 @@ UpdateBasePalettesAndBackupCurrent:
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to palette updating during fading
-
 
 UpdateFadingPalette:
                 

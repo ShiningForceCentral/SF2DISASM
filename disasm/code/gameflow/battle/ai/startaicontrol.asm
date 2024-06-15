@@ -141,19 +141,19 @@ StartAiControl:
                 move.w  d7,d0
                 bsr.w   GetAiSpecialMoveOrders
                 cmpi.w  #NOTHING_BYTE,d1
-                beq.s   @HandleSecondaryCharacteristics ;skip if no special orders
+                beq.s   @HandleSecondaryCharacteristics ; skip if no special orders
                 btst    #COMBATANT_BIT_SORT,d1
-                bne.s   @HandleSecondaryCharacteristics ;skip if following a point
+                bne.s   @HandleSecondaryCharacteristics ; skip if following a point
                 
                 move.w  d1,d0
                 bsr.w   GetCurrentHp
                 tst.w   d1
-                bne.s   @HandleSecondaryCharacteristics ;skip if the followed target is still alive
+                bne.s   @HandleSecondaryCharacteristics ; skip if the followed target is still alive
                 move.w  d7,d0
                 bsr.w   GetAiSpecialMoveOrders
                 move.w  d2,d1
                 move.w  #NOTHING_BYTE,d2
-                bsr.w   SetAiSpecialMoveOrders ;set the primary special move orders equal to that of the secondary, and set the secondary to FF (aka no special orders)
+                bsr.w   SetAiSpecialMoveOrders ; set the primary special move orders equal to that of the secondary, and set the secondary to FF (aka no special orders)
 @HandleSecondaryCharacteristics:
                 
                 move.w  d7,d0
@@ -217,7 +217,7 @@ CountDefeatedEnemies:
                 move.w  #BATTLESPRITESET_SUBSECTION_ENEMIES,d1 ; properly checks all monsters in the battle
             else
                 move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1 ; BUG -- incorrectly limits the counting of dead monsters to the ally battle slot count
-            endif                                  ; first operand should be #BATTLESPRITESET_SUBSECTION_ENEMIES
+            endif                       ; first operand should be #BATTLESPRITESET_SUBSECTION_ENEMIES
                 jsr     j_GetBattleSpritesetSubsection
                 move.w  d1,d2
                 subi.w  #2,d2
@@ -241,7 +241,7 @@ CountDefeatedEnemies:
 
     ; End of function CountDefeatedEnemies
 
-    
+
 ; =============== S U B R O U T I N E =======================================
 
 ; In: d0.w = attacker index

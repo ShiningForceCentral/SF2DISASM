@@ -466,13 +466,13 @@ loc_12D34:
                 bcs.s   @isLargeMapsprite
                 cmpi.b  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bhi.s   @isLargeMapsprite
-                subq.w  #1,d4 ; subtract 1 if enemy
+                subq.w  #1,d4           ; subtract 1 if enemy
 @isLargeMapsprite:
                 
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
             endif
                 bcs.s   loc_12D64
-                subq.w  #1,d4 ; also subtract 1 if using a large sprite, assuming they must be an enemy too
+                subq.w  #1,d4           ; also subtract 1 if using a large sprite, assuming they must be an enemy too
 loc_12D64:
                 
                 move.w  d1,(a1)+
