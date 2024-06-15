@@ -393,7 +393,7 @@ windowSlot = -2
 
 sub_12CB0:
                 
-                moveq   #$14,d6
+                moveq   #20,d6
 loc_12CB2:
                 
                 lea     ((ENTITY_DATA-$1000000)).w,a0
@@ -456,12 +456,12 @@ loc_12D34:
                 bcs.s   loc_12D5A
                 cmpi.b  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bhi.s   loc_12D5A
-                subq.w  #1,d4
+                subq.w  #1,d4           ; subtract 1 if enemy
 loc_12D5A:
                 
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.s   loc_12D64
-                subq.w  #1,d4
+                subq.w  #1,d4           ; also subtract 1 if using a large sprite, assuming they must be an enemy too
 loc_12D64:
                 
                 move.w  d1,(a1)+
@@ -521,7 +521,7 @@ loc_12DC6:
                 jsr     (WaitForVInt).w
                 subq.w  #1,d6
                 bne.s   loc_12DDE
-                moveq   #$14,d6
+                moveq   #20,d6
 loc_12DDE:
                 
                 move.b  ((PLAYER_1_INPUT-$1000000)).w,d0

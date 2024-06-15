@@ -136,22 +136,24 @@ StartAiControl:
                 bra.w   @Done
 @CheckSpecialMoveOrders:
                 
+                
+                ; Check if following a dead target and if so, change to second special move orders
                 move.w  d7,d0
                 bsr.w   GetAiSpecialMoveOrders
                 cmpi.w  #NOTHING_BYTE,d1
-                beq.s   @HandleSecondaryCharacteristics
+                beq.s   @HandleSecondaryCharacteristics ; skip if no special orders
                 btst    #COMBATANT_BIT_SORT,d1
-                bne.s   @HandleSecondaryCharacteristics
+                bne.s   @HandleSecondaryCharacteristics ; skip if following a point
                 
                 move.w  d1,d0
                 bsr.w   GetCurrentHp
                 tst.w   d1
-                bne.s   @HandleSecondaryCharacteristics
+                bne.s   @HandleSecondaryCharacteristics ; skip if the followed target is still alive
                 move.w  d7,d0
                 bsr.w   GetAiSpecialMoveOrders
                 move.w  d2,d1
                 move.w  #NOTHING_BYTE,d2
-                bsr.w   SetAiSpecialMoveOrders
+                bsr.w   SetAiSpecialMoveOrders ; set the primary special move orders equal to that of the secondary, and set the secondary to FF (aka no special orders)
 @HandleSecondaryCharacteristics:
                 
                 move.w  d7,d0
@@ -211,7 +213,8 @@ StartAiControl:
 CountDefeatedEnemies:
                 
                 movem.l d0/d2-a6,-(sp)
-                move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1 ; BUG -- operand should be #BATTLESPRITESET_SUBSECTION_ENEMIES (#2)
+                move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1 ; BUG -- incorrectly limits the counting of dead monsters to the ally battle slot count
+                                        ; first operand should be #BATTLESPRITESET_SUBSECTION_ENEMIES
                 jsr     j_GetBattleSpritesetSubsection
                 move.w  d1,d2
                 subi.w  #2,d2
