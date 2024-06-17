@@ -451,7 +451,8 @@ loc_12D34:
                 divs.w  #96,d1
                 add.w   d2,d0
                 add.w   d3,d1
-                move.w  #VDPTILE_GREEN_DOT|VDPTILE_PALETTE4|VDPTILE_PRIORITY,d4 ; minimap ally sprite indicator
+                move.w  #VDPTILE_GREEN_DOT|VDPTILE_PALETTE4|VDPTILE_PRIORITY,d4 
+                                                        ; minimap ally sprite indicator
             if (STANDARD_BUILD=1)
                 ; Subtract 1 from d4.w if mapsprite belongs to an enemy entity, regardless of size
                 move.w  d1,-(sp)

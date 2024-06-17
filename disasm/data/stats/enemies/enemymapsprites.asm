@@ -92,7 +92,7 @@ table_EnemyMapsprites:
                 mapsprite EVIL_BISHOP   ; 84: EVIL BISHOP
                 mapsprite BLUE_SHAMAN   ; 85: BLUE SHAMAN
                 mapsprite DARK_SMOKE    ; 86: DARK SMOKE
-                mapsprite KRAKEN        ; 87: KRAKEN HEAD
+                mapsprite KRAKEN_HEAD   ; 87: KRAKEN HEAD
                 mapsprite TAROS         ; 88: TAROS
                 mapsprite KING          ; 89: KING
                 mapsprite WILLARD       ; 90: WILLARD

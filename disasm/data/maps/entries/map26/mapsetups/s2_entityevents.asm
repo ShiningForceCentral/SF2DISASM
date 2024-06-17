@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map26\mapsetups\s2_entityevents.asm :
 ; 0x59D6A..0x59DB6 : 
 ms_map26_EntityEvents:
-                msEntityEvent 16, UP, Map26_EntityEvent0-ms_map26_EntityEvents
-                msEntityEvent 17, UP, Map26_EntityEvent1-ms_map26_EntityEvents
+                msEntityEvent ALLY_RANDOLF, UP, Map26_EntityEvent0-ms_map26_EntityEvents
+                msEntityEvent ALLY_TYRIN, UP, Map26_EntityEvent1-ms_map26_EntityEvents
                 msEntityEvent 128, UP, Map26_EntityEvent2-ms_map26_EntityEvents
                 msEntityEvent 129, UP, Map26_EntityEvent3-ms_map26_EntityEvents
                 msEntityEvent 133, DOWN, Map26_EntityEvent4-ms_map26_EntityEvents

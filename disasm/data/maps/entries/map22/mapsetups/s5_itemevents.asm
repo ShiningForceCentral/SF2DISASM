@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map22\mapsetups\s5_itemevents.asm :
 ; 0x59604..0x5962E : 
 ms_map22_Section5:
-                msItemEvent 35, 24, NO_DIRECTION, 125, Map22_ItemEvent0-ms_map22_Section5
+                msItemEvent 35, 24, NO_DIRECTION, ITEM_COTTON_BALLOON, Map22_ItemEvent0-ms_map22_Section5
                 msDefaultItemEvent Map22_DefaultItemEvent1-ms_map22_Section5
 
 ; =============== S U B R O U T I N E =======================================

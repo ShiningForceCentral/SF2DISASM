@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map41\mapsetups\s5_itemevents.asm :
 ; 0x5F46C..0x5F4A0 : 
 ms_map41_Section5:
-                msItemEvent 6, 8, UP, 67, Map41_ItemEvent0-ms_map41_Section5
+                msItemEvent 6, 8, UP, ITEM_FORCE_SWORD, Map41_ItemEvent0-ms_map41_Section5
                 msDefaultItemEvent Map41_DefaultItemEvent1-ms_map41_Section5
 
 ; =============== S U B R O U T I N E =======================================

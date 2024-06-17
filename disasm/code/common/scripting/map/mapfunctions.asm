@@ -7,6 +7,7 @@
 
 InitializeMapEntities:
                 
+                module
                 movem.l d0-a5,-(sp)
                 bra.w   loc_440E2
 
@@ -27,7 +28,6 @@ sub_440D4:
 
     ; End of function sub_440D4
 
-                module
 
 ; START OF FUNCTION CHUNK FOR InitializeMapEntities
 
@@ -42,7 +42,7 @@ loc_440E2:
                 movem.w d1-d3,-(sp)
                 moveq   #1,d0
                 bsr.w   InitializeFollowerEntities
-@start:
+@Start:
                 
                 move.b  (a0)+,d1
                 cmpi.b  #-1,d1
@@ -78,7 +78,7 @@ loc_440E2:
                 move.w  #ENTITY_ENEMY_START,d6
                 bsr.w   DeclareNewEntity
                 movem.w (sp)+,d0
-                bra.s   @start
+                bra.s   @Start
 @RegularSprite:
                 
             if (STANDARD_BUILD=1)
@@ -92,7 +92,7 @@ loc_440E2:
                 beq.s   loc_4415A
                 move.l  (a0)+,d5
             if (STANDARD_BUILD=1)
-                bra.s   @start ; optimization
+                bra.s   @Start ; optimization
             else
                 bra.w   @goto_start
             endif
@@ -118,9 +118,9 @@ loc_44172:
 @goto_start:
                 
             if (STANDARD_BUILD=1)
-                bra.w   @start ; to accomodate expanded code
+                bra.w   @Start ; to accomodate expanded code
             else
-                bra.s   @start
+                bra.s   @Start
             endif
 loc_44180:
                 

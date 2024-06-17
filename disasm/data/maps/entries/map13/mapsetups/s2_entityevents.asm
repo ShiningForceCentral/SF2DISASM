@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s2_entityevents.asm :
 ; 0x5801E..0x5814C : 
 ms_map13_EntityEvents:
-                msEntityEvent 9, UP, Map13_EntityEvent0-ms_map13_EntityEvents
+                msEntityEvent ALLY_GERHALT, UP, Map13_EntityEvent0-ms_map13_EntityEvents
                 msEntityEvent 128, UP, Map13_EntityEvent1-ms_map13_EntityEvents
                 msEntityEvent 129, UP, Map13_EntityEvent2-ms_map13_EntityEvents
                 msEntityEvent 130, RIGHT, Map13_EntityEvent3-ms_map13_EntityEvents

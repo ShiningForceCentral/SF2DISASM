@@ -89,7 +89,7 @@ bbcs_16:        textCursor 2513
                 csWait 60
                 csc_end
 ce_4B15C:       mainEntity 15,14,RIGHT
-                entity 63,63,DOWN,MAPSPRITE_KRAKEN,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_KRAKEN_HEAD,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_KRAKEN_ARM,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_KRAKEN_ARM,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_KRAKEN_LEG,eas_Init

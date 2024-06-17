@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map05\mapsetups\s2_entityevents_530.asm :
 ; 0x6043A..0x604C8 : 
 ms_map5_flag530_EntityEvents:
-                msEntityEvent 28, DOWN, Map5_212_EntityEvent0-ms_map5_flag530_EntityEvents
-                msEntityEvent 27, UP, Map5_212_EntityEvent1-ms_map5_flag530_EntityEvents
+                msEntityEvent ALLY_LEMON, DOWN, Map5_212_EntityEvent0-ms_map5_flag530_EntityEvents
+                msEntityEvent ALLY_CHAZ, UP, Map5_212_EntityEvent1-ms_map5_flag530_EntityEvents
                 msEntityEvent 128, DOWN, Map5_212_EntityEvent2-ms_map5_flag530_EntityEvents
                 msEntityEvent 129, DOWN, Map5_212_EntityEvent3-ms_map5_flag530_EntityEvents
                 msEntityEvent 130, RIGHT, Map5_212_EntityEvent4-ms_map5_flag530_EntityEvents

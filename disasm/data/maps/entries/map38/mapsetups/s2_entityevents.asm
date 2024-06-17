@@ -16,7 +16,7 @@ ms_map38_EntityEvents:
                 msEntityEvent 139, UP, Map38_EntityEvent11-ms_map38_EntityEvents
                 msEntityEvent 140, UP, Map38_EntityEvent12-ms_map38_EntityEvents
                 msEntityEvent 141, UP, Map38_EntityEvent13-ms_map38_EntityEvents
-                msEntityEvent 26, UP, Map38_EntityEvent14-ms_map38_EntityEvents
+                msEntityEvent ALLY_ZYNK, UP, Map38_EntityEvent14-ms_map38_EntityEvents
                 msDefaultEntityEvent Map38_DefaultEntityEvent-ms_map38_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================

@@ -14,6 +14,6 @@ ms_map8_flag708_EntityEvents:
                 msEntityEvent 137, DOWN, Map8_2C4_EntityEvent9-ms_map8_flag708_EntityEvents
                 msEntityEvent 138, DOWN, Map8_2C4_EntityEvent10-ms_map8_flag708_EntityEvents
                 msEntityEvent 139, DOWN, Map8_2C4_EntityEvent11-ms_map8_flag708_EntityEvents
-                msEntityEvent 8, UP, Map8_2C4_EntityEvent12-ms_map8_flag708_EntityEvents
+                msEntityEvent ALLY_MAY, UP, Map8_2C4_EntityEvent12-ms_map8_flag708_EntityEvents
                 msEntityEvent 140, 7, Map8_2C4_EntityEvent13-ms_map8_flag708_EntityEvents
                 msDefaultEntityEvent Map8_DefaultEntityEvent-ms_map8_flag708_EntityEvents

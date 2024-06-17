@@ -14,8 +14,8 @@ ms_map7_flag701_EntityEvents:
                 msEntityEvent 137, DOWN, Map7_EntityEvent9-ms_map7_flag701_EntityEvents
                 msEntityEvent 138, DOWN, Map7_EntityEvent10-ms_map7_flag701_EntityEvents
                 msEntityEvent 139, UP, Map7_EntityEvent11-ms_map7_flag701_EntityEvents
-                msEntityEvent 4, DOWN, Map7_2BD_EntityEvent12-ms_map7_flag701_EntityEvents
-                msEntityEvent 2, DOWN, Map7_2BD_EntityEvent12-ms_map7_flag701_EntityEvents
-                msEntityEvent 1, DOWN, Map7_2BD_EntityEvent14-ms_map7_flag701_EntityEvents
-                msEntityEvent 3, DOWN, Map7_2BD_EntityEvent12-ms_map7_flag701_EntityEvents
+                msEntityEvent ALLY_KAZIN, DOWN, Map7_2BD_EntityEvent12-ms_map7_flag701_EntityEvents
+                msEntityEvent ALLY_CHESTER, DOWN, Map7_2BD_EntityEvent12-ms_map7_flag701_EntityEvents
+                msEntityEvent ALLY_SARAH, DOWN, Map7_2BD_EntityEvent14-ms_map7_flag701_EntityEvents
+                msEntityEvent ALLY_JAHA, DOWN, Map7_2BD_EntityEvent12-ms_map7_flag701_EntityEvents
                 msDefaultEntityEvent Map7_DefaultEntityEvent-ms_map7_flag701_EntityEvents

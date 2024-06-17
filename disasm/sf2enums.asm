@@ -3651,7 +3651,7 @@ MAPSPRITE_SPECIAL10: equ 250
 MAPSPRITE_ZEON: equ 251
 MAPSPRITE_EVIL_SPIRIT: equ 252
 MAPSPRITE_NAZCA_SHIP: equ 253
-MAPSPRITE_KRAKEN: equ 254
+MAPSPRITE_KRAKEN_HEAD: equ 254
 MAPSPRITE_TAROS: equ 255
 
 ; ---------------------------------------------------------------------------

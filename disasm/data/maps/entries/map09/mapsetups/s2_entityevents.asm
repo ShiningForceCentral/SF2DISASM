@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map09\mapsetups\s2_entityevents.asm :
 ; 0x56722..0x56856 : 
 ms_map9_EntityEvents:
-                msEntityEvent 11, RIGHT, Map9_EntityEvent0-ms_map9_EntityEvents
-                msEntityEvent 12, DOWN, Map9_EntityEvent1-ms_map9_EntityEvents
+                msEntityEvent ALLY_ROHDE, RIGHT, Map9_EntityEvent0-ms_map9_EntityEvents
+                msEntityEvent ALLY_RICK, DOWN, Map9_EntityEvent1-ms_map9_EntityEvents
                 msEntityEvent 128, UP, Map9_EntityEvent2-ms_map9_EntityEvents
                 msEntityEvent 129, UP, Map9_EntityEvent3-ms_map9_EntityEvents
                 msEntityEvent 130, UP, Map9_EntityEvent4-ms_map9_EntityEvents
