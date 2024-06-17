@@ -2410,14 +2410,16 @@ loc_60B6:
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
                 bcc.w   loc_617C
+                
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
-                cmpi.b  #$20,d1 
+                cmpi.b  #32,d1
                 beq.w   loc_617C
-                move.w  d1,-(sp)
+                
+                move.w  d1,-(sp)        ; push entnum
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d1
-                move.w  d1,-(sp)
+                move.w  d1,-(sp)        ; push flags B
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 move.w  d1,d0
                 add.w   d1,d1
@@ -2435,7 +2437,7 @@ loc_60B6:
                 lea     (a1,d0.w),a1
                 jsr     (LoadBasicCompressedData).w
                 movea.l a1,a0
-                move.w  (sp)+,d1
+                move.w  (sp)+,d1        ; pull flags B
                 btst    #5,d1
                 beq.s   loc_6124
                 jsr     j_ApplySpriteImmersedEffect
@@ -2464,7 +2466,7 @@ loc_6152:
                 jsr     j_OrientSpriteRight
 loc_615E:
                 
-                move.w  (sp)+,d1
+                move.w  (sp)+,d1        ; pull entnum
                 move.w  d1,d0
                 lsl.w   #3,d1
                 add.w   d0,d1

@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map22\mapsetups\s2_entityevents.asm :
 ; 0x59474..0x595DE : 
 ms_map22_EntityEvents:
-                msEntityEvent 14, UP, Map22_EntityEvent0-ms_map22_EntityEvents
-                msEntityEvent 15, UP, Map22_EntityEvent1-ms_map22_EntityEvents
+                msEntityEvent ALLY_ERIC, UP, Map22_EntityEvent0-ms_map22_EntityEvents
+                msEntityEvent ALLY_KARNA, UP, Map22_EntityEvent1-ms_map22_EntityEvents
                 msEntityEvent 128, RIGHT, Map22_EntityEvent2-ms_map22_EntityEvents
                 msEntityEvent 129, DOWN, Map22_EntityEvent3-ms_map22_EntityEvents
                 msEntityEvent 130, DOWN, Map22_EntityEvent4-ms_map22_EntityEvents

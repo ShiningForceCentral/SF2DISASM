@@ -293,7 +293,7 @@ RESISTANCE_FIRE_NONE: equ 0
 RESISTANCE_NEUTRAL_NONE: equ 0
 RESISTANCE_UNDEFINED1_NONE: equ 0
 RESISTANCE_UNDEFINED2_NONE: equ 0
-RESISTANCE_STATUS_NONE: equ 1
+RESISTANCE_STATUS_NONE: equ 0
 
 ; ---------------------------------------------------------------------------
 
@@ -3069,7 +3069,7 @@ MAPSPRITE_SPECIAL10: equ 250
 MAPSPRITE_ZEON: equ 251
 MAPSPRITE_EVIL_SPIRIT: equ 252
 MAPSPRITE_NAZCA_SHIP: equ 253
-MAPSPRITE_KRAKEN: equ 254
+MAPSPRITE_KRAKEN_HEAD: equ 254
 MAPSPRITE_TAROS: equ 255
 
 ; ---------------------------------------------------------------------------
@@ -3085,6 +3085,20 @@ MAPSPRITES_NPCS_START: equ 170
 MAPSPRITES_SPECIALS_START: equ 240
 MAPSPRITES_SPECIALS_END: equ 255
 MAPSPRITE_MASK: equ 255
+
+; ---------------------------------------------------------------------------
+
+; enum SpecialSprites
+SPECIALSPRITE_TAROS: equ 0
+SPECIALSPRITE_KRAKEN_1: equ 1
+SPECIALSPRITE_NAZCA_SHIP: equ 2
+SPECIALSPRITE_EVIL_SPIRIT: equ 3
+SPECIALSPRITE_ZEON_1: equ 4
+SPECIALSPRITE_ZEON_2: equ 5
+SPECIALSPRITE_KRAKEN_2: equ 6
+SPECIALSPRITE_KRAKEN_3: equ 7
+SPECIALSPRITE_KRAKEN_4: equ 8
+SPECIALSPRITE_KRAKEN_5: equ 9
 
 ; ---------------------------------------------------------------------------
 
@@ -3196,10 +3210,10 @@ ALLY_MASK_INDEX: equ $1F
 
 ; enum Followers
 FOLLOWER_ENTITY_SIZE: equ 4
-FOLLOWER_A: equ $1E
-FOLLOWER_B: equ $1F
-FOLLOWER_C: equ $9E
-FOLLOWER_D: equ $9F
+FOLLOWER_A: equ 30
+FOLLOWER_B: equ 31
+FOLLOWER_C: equ 158
+FOLLOWER_D: equ 159
 
 ; ---------------------------------------------------------------------------
 

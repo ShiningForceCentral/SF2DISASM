@@ -1008,9 +1008,9 @@ UpdateBattleEntityMapsprite:
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
                 bcc.s   @Done
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1
-                cmpi.b  #$20,d1 
+                cmpi.b  #32,d1
                 beq.s   @Done
-                move.w  d1,-(sp)
+                move.w  d1,-(sp)        ; push entnum
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
                 move.w  d1,d0
@@ -1024,7 +1024,7 @@ UpdateBattleEntityMapsprite:
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadBasicCompressedData).w
                 movea.l a1,a0
-                move.w  (sp)+,d1
+                move.w  (sp)+,d1        ; pull entnum
                 move.w  d1,d0
                 lsl.w   #3,d1
                 add.w   d0,d1
@@ -1043,14 +1043,14 @@ UpdateBattleEntityMapsprite:
     ; End of function UpdateBattleEntityMapsprite
 
 table_FacingValues_3:
-                dc.b 0
-                dc.b 1
-                dc.b 2
-                dc.b 3
-                dc.b 0
-                dc.b 2
-                dc.b 2
-                dc.b 0
+                dc.b RIGHT
+                dc.b UP
+                dc.b LEFT
+                dc.b DOWN
+                dc.b RIGHT
+                dc.b LEFT
+                dc.b LEFT
+                dc.b RIGHT
 
 ; =============== S U B R O U T I N E =======================================
 

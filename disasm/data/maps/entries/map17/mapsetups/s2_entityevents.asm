@@ -9,11 +9,11 @@ ms_map17_EntityEvents:
                 msEntityEvent 132, DOWN, Map17_EntityEvent4-ms_map17_EntityEvents
                 msEntityEvent 133, DOWN, Map17_EntityEvent5-ms_map17_EntityEvents
                 msEntityEvent 134, DOWN, Map17_EntityEvent6-ms_map17_EntityEvents
-                msEntityEvent 2, DOWN, Map17_EntityEvent7-ms_map17_EntityEvents
-                msEntityEvent 3, DOWN, Map17_EntityEvent8-ms_map17_EntityEvents
-                msEntityEvent 1, DOWN, Map17_EntityEvent9-ms_map17_EntityEvents
-                msEntityEvent 4, DOWN, Map17_EntityEvent10-ms_map17_EntityEvents
-                msEntityEvent 5, RIGHT, Map17_EntityEvent11-ms_map17_EntityEvents
+                msEntityEvent ALLY_CHESTER, DOWN, Map17_EntityEvent7-ms_map17_EntityEvents
+                msEntityEvent ALLY_JAHA, DOWN, Map17_EntityEvent8-ms_map17_EntityEvents
+                msEntityEvent ALLY_SARAH, DOWN, Map17_EntityEvent9-ms_map17_EntityEvents
+                msEntityEvent ALLY_KAZIN, DOWN, Map17_EntityEvent10-ms_map17_EntityEvents
+                msEntityEvent ALLY_SLADE, RIGHT, Map17_EntityEvent11-ms_map17_EntityEvents
                 msDefaultEntityEvent Map17_DefaultEntityEvent-ms_map17_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================

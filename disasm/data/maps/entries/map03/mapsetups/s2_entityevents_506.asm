@@ -17,7 +17,7 @@ ms_map3_flag506_EntityEvents:
                 msEntityEvent 140, DOWN, Map3_1FA_EntityEvent12-ms_map3_flag506_EntityEvents
                 msEntityEvent 141, DOWN, Map3_1FA_EntityEvent13-ms_map3_flag506_EntityEvents
                 msEntityEvent 142, DOWN, (Map3_261_EntityEvent26-ms_map3_flag506_EntityEvents) & $FFFF
-                msEntityEvent 6, RIGHT, Map3_1FA_EntityEvent15-ms_map3_flag506_EntityEvents
+                msEntityEvent ALLY_KIWI, RIGHT, Map3_1FA_EntityEvent15-ms_map3_flag506_EntityEvents
                 msDefaultEntityEvent (Map3_DefaultEntityEvent-ms_map3_flag506_EntityEvents) & $FFFF
                 dc.b $FF
                 dc.b $FF

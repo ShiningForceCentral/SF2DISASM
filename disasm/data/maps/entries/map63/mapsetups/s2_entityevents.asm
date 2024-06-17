@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map63\mapsetups\s2_entityevents.asm :
 ; 0x5C98A..0x5C9E2 : 
 ms_map63_EntityEvents:
-                msEntityEvent 29, RIGHT, Map63_EntityEvent0-ms_map63_EntityEvents
+                msEntityEvent ALLY_CLAUDE, RIGHT, Map63_EntityEvent0-ms_map63_EntityEvents
                 msDefaultEntityEvent Map63_DefaultEntityEvent-ms_map63_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================

@@ -2,17 +2,17 @@
 ; ASM FILE data\maps\entries\map19\mapsetups\s2_entityevents_982.asm :
 ; 0x62BCA..0x62C6C : 
 ms_map19_flag982_EntityEvents:
-                msEntityEvent 3, UP, Map19_3D6_EntityEvent0-ms_map19_flag982_EntityEvents
-                msEntityEvent 2, UP, Map19_3D6_EntityEvent1-ms_map19_flag982_EntityEvents
-                msEntityEvent 5, UP, Map19_3D6_EntityEvent2-ms_map19_flag982_EntityEvents
-                msEntityEvent 7, UP, Map19_3D6_EntityEvent3-ms_map19_flag982_EntityEvents
-                msEntityEvent 8, UP, Map19_3D6_EntityEvent4-ms_map19_flag982_EntityEvents
-                msEntityEvent 11, UP, Map19_3D6_EntityEvent5-ms_map19_flag982_EntityEvents
-                msEntityEvent 10, UP, Map19_3D6_EntityEvent6-ms_map19_flag982_EntityEvents
-                msEntityEvent 19, UP, Map19_3D6_EntityEvent7-ms_map19_flag982_EntityEvents
-                msEntityEvent 25, UP, Map19_3D6_EntityEvent8-ms_map19_flag982_EntityEvents
-                msEntityEvent 27, UP, Map19_3D6_EntityEvent9-ms_map19_flag982_EntityEvents
-                msEntityEvent 26, UP, Map19_3D6_EntityEvent10-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_JAHA, UP, Map19_3D6_EntityEvent0-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_CHESTER, UP, Map19_3D6_EntityEvent1-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_SLADE, UP, Map19_3D6_EntityEvent2-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_PETER, UP, Map19_3D6_EntityEvent3-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_MAY, UP, Map19_3D6_EntityEvent4-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_ROHDE, UP, Map19_3D6_EntityEvent5-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_LUKE, UP, Map19_3D6_EntityEvent6-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_HIGINS, UP, Map19_3D6_EntityEvent7-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_SHEELA, UP, Map19_3D6_EntityEvent8-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_CHAZ, UP, Map19_3D6_EntityEvent9-ms_map19_flag982_EntityEvents
+                msEntityEvent ALLY_ZYNK, UP, Map19_3D6_EntityEvent10-ms_map19_flag982_EntityEvents
                 msEntityEvent 128, DOWN, Map19_3D6_EntityEvent11-ms_map19_flag982_EntityEvents
                 msEntityEvent 129, UP, Map19_3D6_EntityEvent12-ms_map19_flag982_EntityEvents
                 msEntityEvent 130, DOWN, (Map19_21F_EntityEvent10-ms_map19_flag982_EntityEvents) & $FFFF
