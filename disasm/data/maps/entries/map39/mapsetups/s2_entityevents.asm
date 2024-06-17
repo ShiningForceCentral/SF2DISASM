@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map39\mapsetups\s2_entityevents.asm :
 ; 0x5E038..0x5E0B2 : 
 ms_map39_EntityEvents:
-                msEntityEvent 26, RIGHT, Map39_EntityEvent0-ms_map39_EntityEvents
+                msEntityEvent ALLY_ZYNK, RIGHT, Map39_EntityEvent0-ms_map39_EntityEvents
                 msEntityEvent 128, UP, Map39_EntityEvent1-ms_map39_EntityEvents
                 msEntityEvent 129, UP, Map39_EntityEvent2-ms_map39_EntityEvents
                 msEntityEvent 130, UP, Map39_EntityEvent3-ms_map39_EntityEvents

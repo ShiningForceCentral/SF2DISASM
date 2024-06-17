@@ -451,12 +451,14 @@ loc_12D34:
                 divs.w  #96,d1
                 add.w   d2,d0
                 add.w   d3,d1
-                move.w  #$E0FE,d4
+                move.w  #VDPTILE_GREEN_DOT|VDPTILE_PALETTE4|VDPTILE_PRIORITY,d4 
+                                                        ; minimap ally sprite indicator
                 cmpi.b  #MAPSPRITES_ENEMIES_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bcs.s   loc_12D5A
                 cmpi.b  #MAPSPRITES_NPCS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
                 bhi.s   loc_12D5A
-                subq.w  #1,d4           ; subtract 1 if enemy
+                
+                subq.w  #1,d4           ; subtract 1 if enemy to use the red dot instead
 loc_12D5A:
                 
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)

@@ -54,7 +54,9 @@ loc_44104:
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d4
-                bcs.s   loc_44146
+                bcs.s   @RegularSprite
+                
+                ; Declare a new special sprite
                 movem.w d0,-(sp)
                 move.w  #ENTITY_SPECIAL_SPRITE,d0
                 move.b  d0,(a2)+
@@ -64,7 +66,7 @@ loc_44104:
                 bsr.w   DeclareNewEntity
                 movem.w (sp)+,d0
                 bra.s   loc_44104
-loc_44146:
+@RegularSprite:
                 
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d4
                 bcc.s   loc_44170
@@ -103,7 +105,7 @@ loc_44180:
                 bsr.w   GetAllyMapsprite
                 move.l  #eas_Idle,d5
                 bsr.w   DeclareNewEntity
-                move.w  #$10,((SPRITE_SIZE-$1000000)).w
+                move.w  #16,((SPRITE_SIZE-$1000000)).w
                 move.b  #-1,(a3)
                 bsr.w   sub_44404
                 movem.l (sp)+,d0-a5

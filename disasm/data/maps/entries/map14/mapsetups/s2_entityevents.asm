@@ -2,11 +2,11 @@
 ; ASM FILE data\maps\entries\map14\mapsetups\s2_entityevents.asm :
 ; 0x58EBA..0x58F0E : 
 ms_map14_EntityEvents:
-                msEntityEvent 1, UP, Map14_EntityEvent0-ms_map14_EntityEvents
-                msEntityEvent 2, RIGHT, Map14_EntityEvent1-ms_map14_EntityEvents
-                msEntityEvent 4, UP, Map14_EntityEvent2-ms_map14_EntityEvents
-                msEntityEvent 5, UP, Map14_EntityEvent3-ms_map14_EntityEvents
-                msEntityEvent 6, UP, Map14_EntityEvent4-ms_map14_EntityEvents
+                msEntityEvent ALLY_SARAH, UP, Map14_EntityEvent0-ms_map14_EntityEvents
+                msEntityEvent ALLY_CHESTER, RIGHT, Map14_EntityEvent1-ms_map14_EntityEvents
+                msEntityEvent ALLY_KAZIN, UP, Map14_EntityEvent2-ms_map14_EntityEvents
+                msEntityEvent ALLY_SLADE, UP, Map14_EntityEvent3-ms_map14_EntityEvents
+                msEntityEvent ALLY_KIWI, UP, Map14_EntityEvent4-ms_map14_EntityEvents
                 msEntityEvent 128, UP, Map14_EntityEvent5-ms_map14_EntityEvents
                 msEntityEvent 129, DOWN, Map14_EntityEvent6-ms_map14_EntityEvents
                 msEntityEvent 130, UP, Map14_EntityEvent7-ms_map14_EntityEvents

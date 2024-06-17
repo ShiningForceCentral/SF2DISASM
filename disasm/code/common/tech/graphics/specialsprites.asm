@@ -15,7 +15,7 @@ pt_SpecialSprites:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d1.w = special mapsprite index
+; In: d1.w = entity mapsprite index
 
 
 LoadSpecialSprite:
@@ -130,6 +130,7 @@ AnimateSpecialSprite:
 
 UpdateSpecialSprite:
                 
+                module                  ; Start of special sprite update module
                 movem.l d0-d2/d7-a2,-(sp)
                 move.b  ((WINDOW_IS_PRESENT-$1000000)).w,d7
                 cmp.b   d5,d7
@@ -267,3 +268,4 @@ loc_25DF0:
 
     ; End of function specialSpriteUpdate_Exploration
 
+                modend                  ; End of special sprite update module

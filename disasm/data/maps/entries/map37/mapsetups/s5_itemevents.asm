@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map37\mapsetups\s5_itemevents.asm :
 ; 0x5FA2A..0x5FA88 : 
 ms_map37_Section5:
-                msItemEvent 8, 11, LEFT, 113, Map37_ItemEvent0-ms_map37_Section5
+                msItemEvent 8, 11, LEFT, ITEM_SKY_ORB, Map37_ItemEvent0-ms_map37_Section5
                 msDefaultItemEvent Map37_DefaultItemEvent1-ms_map37_Section5
 
 ; =============== S U B R O U T I N E =======================================
@@ -23,7 +23,7 @@ Map37_ItemEvent0:
                  
                 chkFlg  999             ; Set after the Nazca ship shootdown scene
                 bne.s   return_5FA86
-                move.w  #$71,((DIALOGUE_NAME_INDEX_1-$1000000)).w 
+                move.w  #ITEM_SKY_ORB,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 chkFlg  836             ; Set after the scene where Zynk stops you as you leave the Moun underground
                 bne.s   byte_5FA76      
                 txt     3373            ; "{LEADER} tries to use{N}the {ITEM}.{W2}{N}But, he doesn't know how.{W1}"

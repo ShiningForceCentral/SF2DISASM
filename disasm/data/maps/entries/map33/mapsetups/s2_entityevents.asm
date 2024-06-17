@@ -5,10 +5,10 @@ ms_map33_EntityEvents:
                 msEntityEvent 128, DOWN, Map33_EntityEvent0-ms_map33_EntityEvents
                 msEntityEvent 129, UP, Map33_EntityEvent1-ms_map33_EntityEvents
                 msEntityEvent 130, UP, Map33_EntityEvent2-ms_map33_EntityEvents
-                msEntityEvent 14, UP, Map33_EntityEvent3-ms_map33_EntityEvents
-                msEntityEvent 16, UP, Map33_EntityEvent4-ms_map33_EntityEvents
-                msEntityEvent 17, UP, Map33_EntityEvent5-ms_map33_EntityEvents
-                msEntityEvent 15, UP, Map33_EntityEvent6-ms_map33_EntityEvents
+                msEntityEvent ALLY_ERIC, UP, Map33_EntityEvent3-ms_map33_EntityEvents
+                msEntityEvent ALLY_RANDOLF, UP, Map33_EntityEvent4-ms_map33_EntityEvents
+                msEntityEvent ALLY_TYRIN, UP, Map33_EntityEvent5-ms_map33_EntityEvents
+                msEntityEvent ALLY_KARNA, UP, Map33_EntityEvent6-ms_map33_EntityEvents
                 msDefaultEntityEvent Map33_DefaultEntityEvent-ms_map33_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================

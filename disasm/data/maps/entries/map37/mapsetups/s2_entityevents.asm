@@ -2,32 +2,32 @@
 ; ASM FILE data\maps\entries\map37\mapsetups\s2_entityevents.asm :
 ; 0x5F86C..0x5F9D2 : 
 ms_map37_EntityEvents:
-                msEntityEvent 1, DOWN, Map37_EntityEvent0-ms_map37_EntityEvents
-                msEntityEvent 2, DOWN, Map37_EntityEvent1-ms_map37_EntityEvents
-                msEntityEvent 3, DOWN, Map37_EntityEvent2-ms_map37_EntityEvents
-                msEntityEvent 4, DOWN, Map37_EntityEvent3-ms_map37_EntityEvents
-                msEntityEvent 5, DOWN, Map37_EntityEvent4-ms_map37_EntityEvents
-                msEntityEvent 6, DOWN, Map37_EntityEvent5-ms_map37_EntityEvents
-                msEntityEvent 7, DOWN, Map37_EntityEvent6-ms_map37_EntityEvents
-                msEntityEvent 8, DOWN, Map37_EntityEvent7-ms_map37_EntityEvents
-                msEntityEvent 9, DOWN, Map37_EntityEvent8-ms_map37_EntityEvents
-                msEntityEvent 10, DOWN, Map37_EntityEvent9-ms_map37_EntityEvents
-                msEntityEvent 11, DOWN, Map37_EntityEvent10-ms_map37_EntityEvents
-                msEntityEvent 12, DOWN, Map37_EntityEvent11-ms_map37_EntityEvents
-                msEntityEvent 13, DOWN, Map37_EntityEvent12-ms_map37_EntityEvents
-                msEntityEvent 14, DOWN, Map37_EntityEvent13-ms_map37_EntityEvents
-                msEntityEvent 15, DOWN, Map37_EntityEvent14-ms_map37_EntityEvents
-                msEntityEvent 16, DOWN, Map37_EntityEvent15-ms_map37_EntityEvents
-                msEntityEvent 17, DOWN, Map37_EntityEvent16-ms_map37_EntityEvents
-                msEntityEvent 18, DOWN, Map37_EntityEvent17-ms_map37_EntityEvents
-                msEntityEvent 19, DOWN, Map37_EntityEvent18-ms_map37_EntityEvents
-                msEntityEvent 20, DOWN, Map37_EntityEvent19-ms_map37_EntityEvents
-                msEntityEvent 21, DOWN, Map37_EntityEvent20-ms_map37_EntityEvents
-                msEntityEvent 22, DOWN, Map37_EntityEvent21-ms_map37_EntityEvents
-                msEntityEvent 23, DOWN, Map37_EntityEvent22-ms_map37_EntityEvents
-                msEntityEvent 24, DOWN, Map37_EntityEvent23-ms_map37_EntityEvents
-                msEntityEvent 26, UP, Map37_EntityEvent24-ms_map37_EntityEvents
-                msEntityEvent 29, DOWN, Map37_EntityEvent25-ms_map37_EntityEvents
+                msEntityEvent ALLY_SARAH, DOWN, Map37_EntityEvent0-ms_map37_EntityEvents
+                msEntityEvent ALLY_CHESTER, DOWN, Map37_EntityEvent1-ms_map37_EntityEvents
+                msEntityEvent ALLY_JAHA, DOWN, Map37_EntityEvent2-ms_map37_EntityEvents
+                msEntityEvent ALLY_KAZIN, DOWN, Map37_EntityEvent3-ms_map37_EntityEvents
+                msEntityEvent ALLY_SLADE, DOWN, Map37_EntityEvent4-ms_map37_EntityEvents
+                msEntityEvent ALLY_KIWI, DOWN, Map37_EntityEvent5-ms_map37_EntityEvents
+                msEntityEvent ALLY_PETER, DOWN, Map37_EntityEvent6-ms_map37_EntityEvents
+                msEntityEvent ALLY_MAY, DOWN, Map37_EntityEvent7-ms_map37_EntityEvents
+                msEntityEvent ALLY_GERHALT, DOWN, Map37_EntityEvent8-ms_map37_EntityEvents
+                msEntityEvent ALLY_LUKE, DOWN, Map37_EntityEvent9-ms_map37_EntityEvents
+                msEntityEvent ALLY_ROHDE, DOWN, Map37_EntityEvent10-ms_map37_EntityEvents
+                msEntityEvent ALLY_RICK, DOWN, Map37_EntityEvent11-ms_map37_EntityEvents
+                msEntityEvent ALLY_ELRIC, DOWN, Map37_EntityEvent12-ms_map37_EntityEvents
+                msEntityEvent ALLY_ERIC, DOWN, Map37_EntityEvent13-ms_map37_EntityEvents
+                msEntityEvent ALLY_KARNA, DOWN, Map37_EntityEvent14-ms_map37_EntityEvents
+                msEntityEvent ALLY_RANDOLF, DOWN, Map37_EntityEvent15-ms_map37_EntityEvents
+                msEntityEvent ALLY_TYRIN, DOWN, Map37_EntityEvent16-ms_map37_EntityEvents
+                msEntityEvent ALLY_JANET, DOWN, Map37_EntityEvent17-ms_map37_EntityEvents
+                msEntityEvent ALLY_HIGINS, DOWN, Map37_EntityEvent18-ms_map37_EntityEvents
+                msEntityEvent ALLY_SKREECH, DOWN, Map37_EntityEvent19-ms_map37_EntityEvents
+                msEntityEvent ALLY_TAYA, DOWN, Map37_EntityEvent20-ms_map37_EntityEvents
+                msEntityEvent ALLY_FRAYJA, DOWN, Map37_EntityEvent21-ms_map37_EntityEvents
+                msEntityEvent ALLY_JARO, DOWN, Map37_EntityEvent22-ms_map37_EntityEvents
+                msEntityEvent ALLY_GYAN, DOWN, Map37_EntityEvent23-ms_map37_EntityEvents
+                msEntityEvent ALLY_ZYNK, UP, Map37_EntityEvent24-ms_map37_EntityEvents
+                msEntityEvent ALLY_CLAUDE, DOWN, Map37_EntityEvent25-ms_map37_EntityEvents
                 msEntityEvent 128, DOWN, Map37_EntityEvent26-ms_map37_EntityEvents
                 msEntityEvent 129, RIGHT, Map37_EntityEvent27-ms_map37_EntityEvents
                 msDefaultEntityEvent Map37_DefaultEntityEvent-ms_map37_EntityEvents

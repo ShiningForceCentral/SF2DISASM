@@ -136,7 +136,6 @@ StartAiControl:
                 bra.w   @Done
 @CheckSpecialMoveOrders:
                 
-                
                 ; Check if following a dead target and if so, change to second special move orders
                 move.w  d7,d0
                 bsr.w   GetAiSpecialMoveOrders

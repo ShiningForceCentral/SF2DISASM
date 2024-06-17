@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map05\mapsetups\s2_entityevents.asm :
 ; 0x51A3E..0x51A82 : 
 ms_map5_EntityEvents:
-                msEntityEvent 4, DOWN, Map5_EntityEvent0-ms_map5_EntityEvents
+                msEntityEvent ALLY_KAZIN, DOWN, Map5_EntityEvent0-ms_map5_EntityEvents
                 msEntityEvent 128, UP, Map5_EntityEvent1-ms_map5_EntityEvents
                 msEntityEvent 129, UP, Map5_EntityEvent2-ms_map5_EntityEvents
                 msEntityEvent 130, DOWN, Map5_EntityEvent3-ms_map5_EntityEvents

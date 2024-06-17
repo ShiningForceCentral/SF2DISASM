@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map08\mapsetups\s5_itemevents.asm :
 ; 0x562E0..0x563A2 : 
 ms_map8_Section5:
-                msItemEvent 15, 19, UP, 112, Map8_ItemEvent0-ms_map8_Section5
-                msItemEvent 16, 19, UP, 112, Map8_ItemEvent0-ms_map8_Section5
+                msItemEvent 15, 19, UP, ITEM_WOODEN_PANEL, Map8_ItemEvent0-ms_map8_Section5
+                msItemEvent 16, 19, UP, ITEM_WOODEN_PANEL, Map8_ItemEvent0-ms_map8_Section5
                 msDefaultItemEvent Map8_DefaultItemEvent2-ms_map8_Section5
 
 ; =============== S U B R O U T I N E =======================================
@@ -20,8 +20,8 @@ byte_562FC:
                 
                 script  cs_56314
                 setFlg  731             ; Set after you open the tree in Ribble with the wooden plank
-                moveq   #$70,d0 
-                jsr     RemoveItemFromInventory ; remove wooden panel from items ?
+                moveq   #ITEM_WOODEN_PANEL,d0
+                jsr     RemoveItemFromInventory
                 move.w  #-1,d6
 Map8_DefaultItemEvent2:
                 

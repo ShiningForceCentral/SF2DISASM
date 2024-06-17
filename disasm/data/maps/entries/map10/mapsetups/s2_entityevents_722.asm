@@ -28,7 +28,7 @@ ms_map10_flag722_EntityEvents:
                 msEntityEvent 151, DOWN, Map10_2D2_EntityEvent23-ms_map10_flag722_EntityEvents
                 msEntityEvent 152, DOWN, Map10_2D2_EntityEvent24-ms_map10_flag722_EntityEvents
                 msEntityEvent 153, DOWN, Map10_2D2_EntityEvent25-ms_map10_flag722_EntityEvents
-                msEntityEvent 10, DOWN, Map10_2D2_EntityEvent26-ms_map10_flag722_EntityEvents
+                msEntityEvent ALLY_LUKE, DOWN, Map10_2D2_EntityEvent26-ms_map10_flag722_EntityEvents
                 msDefaultEntityEvent (Map10_DefaultEntityEvent-ms_map10_flag722_EntityEvents) & $FFFF
 
 ; =============== S U B R O U T I N E =======================================

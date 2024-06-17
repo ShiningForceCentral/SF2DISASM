@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map36\mapsetups\s2_entityevents_530.asm :
 ; 0x5D924..0x5D9C0 : 
 ms_map36_flag530_EntityEvents:
-                msEntityEvent 22, UP, Map36_212_EntityEvent0-ms_map36_flag530_EntityEvents
+                msEntityEvent ALLY_FRAYJA, UP, Map36_212_EntityEvent0-ms_map36_flag530_EntityEvents
                 msEntityEvent 128, UP, Map36_212_EntityEvent1-ms_map36_flag530_EntityEvents
                 msEntityEvent 129, UP, Map36_212_EntityEvent2-ms_map36_flag530_EntityEvents
                 msEntityEvent 130, UP, Map36_212_EntityEvent3-ms_map36_flag530_EntityEvents
