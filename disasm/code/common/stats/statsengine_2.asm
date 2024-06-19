@@ -1997,6 +1997,7 @@ UnequipItemByType:
 
 GetEquippableWeapons:
                 
+                module ; Start of equippable items getter module
                 movem.l d0/d2-d6/a1-a2,-(sp)
                 move.w  #ITEMTYPE_WEAPON,d2
                 bra.s   GetEquippableItemsByType
@@ -2046,17 +2047,10 @@ GetEquippableItemsByType:
                 lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a2
                 
                 ; Init list with default values
-            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                move.l  #$7F0004,(a2)
-                move.l  #$7F0004,4(a2)
-                move.l  #$7F0004,8(a2)
-                move.l  #$1000004,12(a2)
-            else
-                move.l  #$7F0004,(a2)
-                move.l  #$7F0004,4(a2)
-                move.l  #$7F0004,8(a2)
-                move.l  #$800004,12(a2)
-            endif
+                move.l  #(ITEM_NOTHING<<WORD_SHIFT_COUNT)|4,(a2)
+                move.l  #(ITEM_NOTHING<<WORD_SHIFT_COUNT)|4,4(a2)
+                move.l  #(ITEM_NOTHING<<WORD_SHIFT_COUNT)|4,8(a2)
+                move.l  #(ICON_UNARMED<<WORD_SHIFT_COUNT)|4,12(a2)
                 clr.w   d0
                 moveq   #0,d4
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d5
@@ -2088,6 +2082,7 @@ GetEquippableItemsByType:
 
 ; END OF FUNCTION CHUNK FOR GetEquippableWeapons
 
+                modend ; End of equippable items getter module
 
 ; =============== S U B R O U T I N E =======================================
 

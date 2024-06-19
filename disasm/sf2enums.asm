@@ -7,6 +7,7 @@ INDEX_SHIFT_COUNT: equ 2
 NIBBLE_SHIFT_COUNT: equ 4
 BYTE_SHIFT_COUNT: equ 8
 BYTE_LOWER_NIBBLE_MASK: equ $F
+WORD_SHIFT_COUNT: equ 16
 BYTE_UPPER_NIBBLE_MASK: equ $F0
 NOTHING_BYTE: equ $FF
 TERMINATOR_BYTE: equ $FF
@@ -1331,7 +1332,7 @@ ITEMENTRY_BIT_USABLE_BY_AI: equ $D
 ITEMENTRY_BIT_DROPPED_BY_ENEMY: equ $E
 ITEMENTRY_BIT_BROKEN: equ $F
 ITEMENTRY_MASK_INDEX: equ itemEntryMaskIndex
-ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT: equ itemEntryMaskIndex+itemEntryMaskBrokenBit
+ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT: equ itemEntryMaskBrokenBit|itemEntryMaskIndex
 
 ; ---------------------------------------------------------------------------
 
