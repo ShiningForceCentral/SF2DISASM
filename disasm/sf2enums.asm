@@ -1390,6 +1390,7 @@ MAP_NULLPOSITION: equ $FFFF
 ; enum Map_Entity
 
 entityVelocityYOffset = 6
+entityVelocityYLowerByteOffset = entityVelocityYOffset+1
 entityDestinationXOffset = 12
 entityDestinationYOffset = 14
 entityMapspriteOffset = 19
@@ -1397,6 +1398,7 @@ entitySize = 32
 
     if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
 entityVelocityYOffset = 5
+entityVelocityYLowerByteOffset = entityVelocityYOffset
 entityMapspriteOffset = 6
     endif
 
@@ -1406,7 +1408,7 @@ ENTITYDEF_OFFSET_Y_LOWERBYTE: equ 3
 ENTITYDEF_OFFSET_XVELOCITY: equ 4
 ENTITYDEF_SIZE_BITS: equ 5
 ENTITYDEF_OFFSET_YVELOCITY: equ entityVelocityYOffset
-ENTITYDEF_OFFSET_YVELOCITY_LOWERBYTE: equ ENTITYDEF_OFFSET_YVELOCITY+1
+ENTITYDEF_OFFSET_YVELOCITY_LOWERBYTE: equ entityVelocityYLowerByteOffset
 ENTITYDEF_OFFSET_XTRAVEL: equ 8
 ENTITYDEF_OFFSET_YTRAVEL: equ $A
 ENTITYDEF_OFFSET_YTRAVEL_LOWERBYTE: equ ENTITYDEF_OFFSET_YTRAVEL+1
