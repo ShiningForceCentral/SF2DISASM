@@ -8,6 +8,27 @@
 CheatModeConfiguration:
                 
                 module
+                
+            if (STANDARD_BUILD&TEST_BUILD=1)
+                ; Default TEST_BUILD configuration settings
+                move.b  #TEST_BUILD_INITIAL_DEBUG_MODE,((DEBUG_MODE_TOGGLE-$1000000)).w
+                move.b  #TEST_BUILD_INITIAL_SPECIAL_TURBO,((SPECIAL_TURBO_TOGGLE-$1000000)).w
+                move.b  #TEST_BUILD_INITIAL_CONTROL_OPPONENT,((CONTROL_OPPONENT_TOGGLE-$1000000)).w
+                move.b  #TEST_BUILD_INITIAL_AUTO_BATTLE,((AUTO_BATTLE_TOGGLE-$1000000)).w
+              if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.b  #TEST_BUILD_INITIAL_MESSAGE_SPEED,(MESSAGE_SPEED).l
+                move.b  #TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES_TOGGLE,(NO_BATTLE_MESSAGES_TOGGLE).l
+              else
+                move.b  #TEST_BUILD_INITIAL_MESSAGE_SPEED,((MESSAGE_SPEED-$1000000)).w
+                move.b  #TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES_TOGGLE,((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w
+              endif
+              if (TEST_BUILD_INITIAL_GAME_COMPLETED=1)
+                bset    #7,(SAVE_FLAGS).l
+              else
+                bclr    #7,(SAVE_FLAGS).l
+              endif
+            endif
+            
             if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
                 ; Do not check input
             else
@@ -65,26 +86,6 @@ byte_7EC0:
                 
                 txt     461             ; "Configuration is done.{N}Go ahead!{W1}"
 @Return:
-        if (STANDARD_BUILD&TEST_BUILD=1)
-                rts
-                ; Default configuration settings
-                move.b  #TEST_BUILD_INITIAL_DEBUG_MODE,((DEBUG_MODE_TOGGLE-$1000000)).w
-                move.b  #TEST_BUILD_INITIAL_SPECIAL_TURBO,((SPECIAL_TURBO_TOGGLE-$1000000)).w
-                move.b  #TEST_BUILD_INITIAL_CONTROL_OPPONENT,((CONTROL_OPPONENT_TOGGLE-$1000000)).w
-                move.b  #TEST_BUILD_INITIAL_AUTO_BATTLE,((AUTO_BATTLE_TOGGLE-$1000000)).w
-            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.b  #TEST_BUILD_INITIAL_MESSAGE_SPEED,(MESSAGE_SPEED).l
-                move.b  #TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES_TOGGLE,(NO_BATTLE_MESSAGES_TOGGLE).l
-            else
-                move.b  #TEST_BUILD_INITIAL_MESSAGE_SPEED,((MESSAGE_SPEED-$1000000)).w
-                move.b  #TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES_TOGGLE,((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w
-            endif
-            if (TEST_BUILD_INITIAL_GAME_COMPLETED=1)
-                bset    #7,(SAVE_FLAGS).l
-            else
-                bclr    #7,(SAVE_FLAGS).l
-            endif
-        endif
                 
                 rts
 
