@@ -1133,9 +1133,11 @@ CARAVAN_MAX_ITEMS_NUMBER: equ caravanMaxItemsNumber
 
 ; enum Items (bitfield)
 
+itemNothing     = $7F
 itemEquipped    = $80
 
     if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+itemNothing     = $FF
 itemEquipped    = $1000
     endif
 
@@ -1266,7 +1268,7 @@ ITEM_MITHRIL: equ $7B
 ITEM_LIFE_RING: equ $7C
 ITEM_COTTON_BALLOON: equ $7D
 ITEM_CHIRRUP_SANDALS: equ $7E
-ITEM_NOTHING: equ $7F
+ITEM_NOTHING: equ itemNothing
 ITEM_EQUIPPED: equ itemEquipped
 ITEM_USABLE_BY_AI: equ $2000
 ITEM_UNUSED_ITEM_DROP: equ $4000
