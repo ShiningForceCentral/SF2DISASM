@@ -32,3 +32,8 @@ table_AllyNames:  allyName "Bowie"
                 allyName "Lemon"
                 allyName "Claude"
                 
+            if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
+                allyName "0"
+                allyName "0"
+            endif
+                

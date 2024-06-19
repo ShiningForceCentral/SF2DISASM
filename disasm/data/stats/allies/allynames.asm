@@ -32,7 +32,6 @@ table_AllyNames:allyName "BOWIE"
                 allyName "LEMON"
                 allyName "CLAUDE"
                 
-                ; Additional entries to be defined with force members expansion patch
             if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
                 allyName "0"
                 allyName "0"
