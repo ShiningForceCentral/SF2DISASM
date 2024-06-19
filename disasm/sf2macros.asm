@@ -691,14 +691,18 @@ getSavedBattleMapDimensions: macro
 loadSavedMithrilWeaponOrder: macro
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 movep.w 0(\2),d0
+                tst.w   d0
                 bne.s   @Next
                 movep.w \1,0(\2)
                 bra.s   @Done
+@Next:          addq.w  #4,a0
             else
                 cmpi.w  #0,(\2)
                 bne.w   @Next           ; check next weapon slot if current one is occupied
                 move.w  \1,(\2)
                 bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
+                move.w  #2,d0
+@Next:          adda.w  d0,a0
             endif
         endm
     

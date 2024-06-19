@@ -68,10 +68,6 @@ PickMithrilWeapon:
 @LoadIndex_Loop:
                 
                 loadSavedMithrilWeaponOrder d1, a0
-@Next:
-                
-                move.w  #2,d0
-                adda.w  d0,a0
                 dbf     d7,@LoadIndex_Loop
 @Done:
                 
