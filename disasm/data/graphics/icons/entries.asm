@@ -128,15 +128,15 @@ Icon123:        incbin "data/graphics/icons/icon123.bin"
 Icon124:        incbin "data/graphics/icons/icon124.bin"
 Icon125:        incbin "data/graphics/icons/icon125.bin"
 Icon126:        incbin "data/graphics/icons/icon126.bin"
-Icon127:        incbin "data/graphics/icons/icon127.bin"        ; Empty item slot
             if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
               rept 128
                 incbin "data/graphics/icons/icon145.bin"
               endr
             endif
+Icon127:        incbin "data/graphics/icons/icon127.bin"        ; Empty item slot
 Icon128:        incbin "data/graphics/icons/icon128.bin"        ; Unarmed icon
             if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                incbin "data/graphics/icons/icon148.bin"    ; Cracks
+                incbin "data/graphics/icons/icon148.bin"        ; Cracks
             else
 Icon129:        incbin "data/graphics/icons/icon129.bin"
             endif
