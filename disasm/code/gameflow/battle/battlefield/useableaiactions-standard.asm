@@ -49,7 +49,7 @@ GetNextUsableAttackSpell:
                 move.w  #SPELL_NOTHING,d1           ; checked all slots with no valid spell found
                 bra.s   @Done
                 
-@Break:         move.w  d4,d1                       ; restore spell entry
+@Break:         exg     d1,d4                       ; exchange spell index d1 and spell entry d4
                 bsr.w   GetHighestUsableSpellLevel
                 move.w  d3,d2
 @Done:          movem.l (sp)+,d3-d5/a0
