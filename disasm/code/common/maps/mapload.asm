@@ -774,6 +774,8 @@ loc_2632:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l VInt_UpdateScrollingData
+                
+                enableSram
                 bsr.w   LoadMapBlocksAndLayout
                 movea.l (a5)+,a4
                 move.w  (a4)+,d0
@@ -788,7 +790,7 @@ loc_2632:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
                 dc.l 0
-                enableSramAndReturn
+                rts
 
     ; End of function ProcessMapTransition
 
