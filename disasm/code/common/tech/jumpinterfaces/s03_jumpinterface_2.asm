@@ -15,31 +15,31 @@ j_NumberPrompt:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DebugFlagSetter:
+j_DebugSetFlag:
                 
-                jmp     DebugFlagSetter(pc)
+                jmp     DebugSetFlag(pc)
 
-    ; End of function j_DebugFlagSetter
+    ; End of function j_DebugSetFlag
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DisplayTimerWindow:
+j_OpenTimerWindow:
                 
-                jmp     DisplayTimerWindow(pc)
+                jmp     OpenTimerWindow(pc)
 
-    ; End of function j_DisplayTimerWindow
+    ; End of function j_OpenTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RemoveTimerWindow:
+j_CloseTimerWindow:
                 
-                jmp     RemoveTimerWindow(pc)
+                jmp     CloseTimerWindow(pc)
 
-    ; End of function j_RemoveTimerWindow
+    ; End of function j_CloseTimerWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -55,43 +55,41 @@ j_VInt_UpdateTimerWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_WitchMainMenu:
+j_ExecuteWitchMainMenu:
                 
-                jmp     WitchMainMenu(pc)
+                jmp     ExecuteWitchMainMenu(pc)
 
-    ; End of function j_WitchMainMenu
+    ; End of function j_ExecuteWitchMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_100AC:
+j_DisplayNameUnderPortrait:
                 
-                jmp     ShowPortraitName(pc)
+                jmp     DisplayNameUnderPortrait(pc)
 
-    ; End of function sub_100AC
+    ; End of function j_DisplayNameUnderPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_100B0:
+j_CloseNameUnderPortraitWindow:
                 
-                jmp     HidePortraitName(pc)
+                jmp     CloseNameUnderPortraitWindow(pc)
 
-    ; End of function sub_100B0
+    ; End of function j_CloseNameUnderPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to end kiss
 
-
-j_PlayEndKiss:
+j_PlayEndingKissSequence:
                 
-                jmp     PlayEndKiss(pc)
+                jmp     PlayEndingKissSequence(pc)
 
-    ; End of function j_PlayEndKiss
+    ; End of function j_PlayEndingKissSequence
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -1,486 +1,486 @@
 
 ; ASM FILE data\spritedialogproperties.asm :
 ; 0x4567A..0x45858 : Sprite dialog properties
-tbl_SpriteDialogProperties:
+table_MapspriteDialogueProperties:
                 
-; Syntax        mapSprite [MAPSPRITE_]enum (or index)
+; Syntax        mapsprite [MAPSPRITE_]enum (or index)
 ;               portrait  [PORTRAIT_]enum (or index)
 ;               speechSfx [SFX_]enum (or index)
                 
-                mapSprite BOWIE_BASE
+                mapsprite BOWIE_BASE
                 portrait  BOWIE_BASE
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite BOWIE_PROMO
+                mapsprite BOWIE_PROMO
                 portrait  BOWIE_PROMO
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite SARAH_BASE
+                mapsprite SARAH_BASE
                 portrait  SARAH
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite SARAH_PROMO
+                mapsprite SARAH_PROMO
                 portrait  SARAH
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite SARAH_SPECIAL
+                mapsprite SARAH_SPECIAL
                 portrait  SARAH
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite CHESTER_BASE
+                mapsprite CHESTER_BASE
                 portrait  CHESTER
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite CHESTER_PROMO
+                mapsprite CHESTER_PROMO
                 portrait  CHESTER
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite CHESTER_SPECIAL
+                mapsprite CHESTER_SPECIAL
                 portrait  CHESTER
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite JAHA_BASE
+                mapsprite JAHA_BASE
                 portrait  JAHA
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite JAHA_PROMO
+                mapsprite JAHA_PROMO
                 portrait  JAHA
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite JAHA_SPECIAL
+                mapsprite JAHA_SPECIAL
                 portrait  JAHA
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite KAZIN_BASE
+                mapsprite KAZIN_BASE
                 portrait  KAZIN
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite KAZIN_PROMO
+                mapsprite KAZIN_PROMO
                 portrait  KAZIN
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite KAZIN_SPECIAL
+                mapsprite KAZIN_SPECIAL
                 portrait  KAZIN
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite SLADE_BASE
+                mapsprite SLADE_BASE
                 portrait  SLADE_BASE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite SLADE_PROMO
+                mapsprite SLADE_PROMO
                 portrait  SLADE_PROMO
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite KIWI_BASE
+                mapsprite KIWI_BASE
                 portrait  KIWI_BASE
                 speechSfx DIALOG_BLEEP_1
                 
-                mapSprite KIWI_PROMO
+                mapsprite KIWI_PROMO
                 portrait  KIWI_BASE
                 speechSfx DIALOG_BLEEP_7
                 
-                mapSprite PETER_BASE
+                mapsprite PETER_BASE
                 portrait  PETER_BASE
                 speechSfx DIALOG_BLEEP_4
                 
-                mapSprite PETER_PROMO
+                mapsprite PETER_PROMO
                 portrait  PETER_PROMO
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite MAY_BASE
+                mapsprite MAY_BASE
                 portrait  MAY
                 speechSfx DIALOG_BLEEP_3
                 
-                mapSprite MAY_PROMO
+                mapsprite MAY_PROMO
                 portrait  MAY
                 speechSfx DIALOG_BLEEP_3
                 
-                mapSprite GERHALT_BASE
+                mapsprite GERHALT_BASE
                 portrait  GERHALT_BASE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite GERHALT_PROMO
+                mapsprite GERHALT_PROMO
                 portrait  GERHALT_PROMO
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite LUKE_BASE
+                mapsprite LUKE_BASE
                 portrait  LUKE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite LUKE_PROMO
+                mapsprite LUKE_PROMO
                 portrait  LUKE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite ROHDE_SPECIAL
+                mapsprite ROHDE_SPECIAL
                 portrait  ROHDE
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite RICK_BASE
+                mapsprite RICK_BASE
                 portrait  RICK
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite RICK_PROMO
+                mapsprite RICK_PROMO
                 portrait  RICK
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite RICK_SPECIAL
+                mapsprite RICK_SPECIAL
                 portrait  RICK
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite ELRIC_BASE
+                mapsprite ELRIC_BASE
                 portrait  ELRIC
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite ELRIC_PROMO
+                mapsprite ELRIC_PROMO
                 portrait  ELRIC
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite ELRIC_SPECIAL
+                mapsprite ELRIC_SPECIAL
                 portrait  ELRIC
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite ERIC_BASE
+                mapsprite ERIC_BASE
                 portrait  ERIC
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite ERIC_PROMO
+                mapsprite ERIC_PROMO
                 portrait  ERIC
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite ERIC_SPECIAL
+                mapsprite ERIC_SPECIAL
                 portrait  ERIC
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite KARNA_BASE
+                mapsprite KARNA_BASE
                 portrait  KARNA
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite KARNA_PROMO
+                mapsprite KARNA_PROMO
                 portrait  KARNA
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite KARNA_SPECIAL
+                mapsprite KARNA_SPECIAL
                 portrait  KARNA
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite RANDOLF_BASE
+                mapsprite RANDOLF_BASE
                 portrait  RANDOLF
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite RANDOLF_PROMO
+                mapsprite RANDOLF_PROMO
                 portrait  RANDOLF
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite RANDOLF_SPECIAL
+                mapsprite RANDOLF_SPECIAL
                 portrait  RANDOLF
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite TYRIN_BASE
+                mapsprite TYRIN_BASE
                 portrait  TYRIN
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite TYRIN_PROMO
+                mapsprite TYRIN_PROMO
                 portrait  TYRIN
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite TYRIN_SPECIAL
+                mapsprite TYRIN_SPECIAL
                 portrait  TYRIN
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite JANET_BASE
+                mapsprite JANET_BASE
                 portrait  JANET
                 speechSfx DIALOG_BLEEP_4
                 
-                mapSprite JANET_PROMO
+                mapsprite JANET_PROMO
                 portrait  JANET
                 speechSfx DIALOG_BLEEP_4
                 
-                mapSprite JANET_SPECIAL
+                mapsprite JANET_SPECIAL
                 portrait  JANET
                 speechSfx DIALOG_BLEEP_4
                 
-                mapSprite HIGINS_PROMO
+                mapsprite HIGINS_PROMO
                 portrait  HIGINS
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite SKREECH_PROMO
+                mapsprite SKREECH_PROMO
                 portrait  SKREECH
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite TAYA_SPECIAL
+                mapsprite TAYA_SPECIAL
                 portrait  TAYA
                 speechSfx DIALOG_BLEEP_3
                 
-                mapSprite FRAYJA_PROMO
+                mapsprite FRAYJA_PROMO
                 portrait  FRAYJA
                 speechSfx DIALOG_BLEEP_3
                 
-                mapSprite JARO_SPECIAL
+                mapsprite JARO_SPECIAL
                 portrait  JARO
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite GYAN_PROMO
+                mapsprite GYAN_PROMO
                 portrait  GYAN
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite SHEELA_SPECIAL
+                mapsprite SHEELA_SPECIAL
                 portrait  SHEELA
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite ZYNK_PROMO
+                mapsprite ZYNK_PROMO
                 portrait  ZYNK
                 speechSfx DIALOG_BLEEP_8
                 
-                mapSprite CHAZ_PROMO
+                mapsprite CHAZ_PROMO
                 portrait  CHAZ
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite LEMON_SPECIAL
+                mapsprite LEMON_SPECIAL
                 portrait  LEMON
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite CLAUDE_PROMO
+                mapsprite CLAUDE_PROMO
                 portrait  CLAUDE
                 speechSfx DIALOG_BLEEP_7
                 
-                mapSprite POSE1
+                mapsprite POSE1
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite NPC_ROHDE
+                mapsprite NPC_ROHDE
                 portrait  ROHDE
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite POSE4
+                mapsprite POSE4
                 portrait  ELIS
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite EFFECT6
+                mapsprite EFFECT6
                 portrait  SLADE_BASE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite GALAM_ZEON
+                mapsprite GALAM_ZEON
                 portrait  ZEON
                 speechSfx DEMON_BREATH
                 
-                mapSprite GALAM_EVIL
+                mapsprite GALAM_EVIL
                 portrait  GALAM_EVIL
                 speechSfx DIALOG_BLEEP_7
                 
-                mapSprite RED_BARON
+                mapsprite RED_BARON
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite PRIEST
+                mapsprite PRIEST
                 portrait  PRIEST
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite SAILOR
+                mapsprite SAILOR
                 portrait  SAILOR
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite MAN1
+                mapsprite MAN1
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite WOMAN1
+                mapsprite WOMAN1
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_4
                 
-                mapSprite MAN2
+                mapsprite MAN2
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite WOMAN2
+                mapsprite WOMAN2
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_3
                 
-                mapSprite MAN3
+                mapsprite MAN3
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite WOMAN3
+                mapsprite WOMAN3
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_4
                 
-                mapSprite BOY
+                mapsprite BOY
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_1
                 
-                mapSprite GIRL
+                mapsprite GIRL
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_1
                 
-                mapSprite WORKER
+                mapsprite WORKER
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_7
                 
-                mapSprite DESKTOP_KING
+                mapsprite DESKTOP_KING
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite GRANSEAL_KING
+                mapsprite GRANSEAL_KING
                 portrait  GRANSEAL_KING
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite ELIS
+                mapsprite ELIS
                 portrait  ELIS
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite MINISTER
+                mapsprite MINISTER
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite SOLDIER1
+                mapsprite SOLDIER1
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite SOLDIER2
+                mapsprite SOLDIER2
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite MAID
+                mapsprite MAID
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_3
                 
-                mapSprite ASTRAL
+                mapsprite ASTRAL
                 portrait  ASTRAL
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite CAT
+                mapsprite CAT
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_1
                 
-                mapSprite CREED
+                mapsprite CREED
                 portrait  CREED
                 speechSfx DIALOG_BLEEP_8
                 
-                mapSprite ODDLER
+                mapsprite ODDLER
                 portrait  ODDLER
                 speechSfx DIALOG_BLEEP_4
                 
-                mapSprite GALAM_KING
+                mapsprite GALAM_KING
                 portrait  GALAM_KING
                 speechSfx DIALOG_BLEEP_7
                 
-                mapSprite MITULA
+                mapsprite MITULA
                 portrait  MITULA
                 speechSfx DIALOG_BLEEP_3
                 
-                mapSprite POSE6
+                mapsprite POSE6
                 portrait  ELIS
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite POSE7
+                mapsprite POSE7
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_3
                 
-                mapSprite DUCK
+                mapsprite DUCK
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite FAIRY
+                mapsprite FAIRY
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_1
                 
-                mapSprite BEASTMAN1
+                mapsprite BEASTMAN1
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_7
                 
-                mapSprite TURTLE
+                mapsprite TURTLE
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_8
                 
-                mapSprite BEASTMAN2
+                mapsprite BEASTMAN2
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite ELF_BOY
+                mapsprite ELF_BOY
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_4
                 
-                mapSprite ELF_GIRL
+                mapsprite ELF_GIRL
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite VIKING
+                mapsprite VIKING
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_7
                 
-                mapSprite DWARF
+                mapsprite DWARF
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite BEDOE_KING
+                mapsprite BEDOE_KING
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_7
                 
-                mapSprite BEDOE_MINISTER
+                mapsprite BEDOE_MINISTER
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite BEDOE_SOLDIER
+                mapsprite BEDOE_SOLDIER
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_5
                 
-                mapSprite CHICK
+                mapsprite CHICK
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_1
                 
-                mapSprite PACALON_KING
+                mapsprite PACALON_KING
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite PACALON_PRINCESS
+                mapsprite PACALON_PRINCESS
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite PACALON_SOLDIER
+                mapsprite PACALON_SOLDIER
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite PACALON_MAID
+                mapsprite PACALON_MAID
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_2
                 
-                mapSprite HEN
+                mapsprite HEN
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_1
                 
-                mapSprite BIRDMAN
+                mapsprite BIRDMAN
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite ZALBARD
+                mapsprite ZALBARD
                 portrait  ZALBARD
                 speechSfx DIALOG_BLEEP_7
                 
-                mapSprite CAMEELA
+                mapsprite CAMEELA
                 portrait  CAMEELA
                 speechSfx DIALOG_BLEEP_3
                 
-                mapSprite GESHP
+                mapsprite GESHP
                 portrait  GESHP
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite ODD_EYE
+                mapsprite ODD_EYE
                 portrait  ODD_EYE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapSprite ZEON
+                mapsprite ZEON
                 portrait  ZEON
                 speechSfx DEMON_BREATH
                 
-                mapSprite TAROS
+                mapsprite TAROS
                 portrait  TAROS
                 speechSfx TAROS_DIALOG_BLEEP
                 
-                mapSprite EVIL_SPIRIT
+                mapsprite EVIL_SPIRIT
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_8
                 
-                mapSprite NAZCA_SHIP
+                mapsprite NAZCA_SHIP
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_8
                 
-                tableEnd
+                tableEnd.w

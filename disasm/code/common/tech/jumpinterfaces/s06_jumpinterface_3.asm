@@ -5,11 +5,11 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-j_EndKissPictureSequence:
+j_DisplayEndingKissPicture:
                 
-                jmp     EndKissPictureSequence(pc)
+                jmp     DisplayEndingKissPicture(pc)
 
-    ; End of function j_EndKissPictureSequence
+    ; End of function j_DisplayEndingKissPicture
 
 
 ; =============== S U B R O U T I N E =======================================

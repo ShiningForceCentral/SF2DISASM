@@ -12,7 +12,7 @@ GenerateBattleTurnOrder:
                 moveq   #TURN_ORDER_ENTRIES_COUNTER,d7
 @ClearTurnOrder_Loop:
                 
-                move.w  #$FFFF,(a0)+
+                move.w  #-1,(a0)+
                 dbf     d7,@ClearTurnOrder_Loop
                 
                 movea.l (sp)+,a0
@@ -21,17 +21,17 @@ GenerateBattleTurnOrder:
 @AddAllyTurns_Loop:
                 
                 move.w  d7,-(sp)
-                bsr.w   AddCombatantAndRandomizedAGItoTurnOrder
+                bsr.w   AddCombatantAndRandomizedAgiToTurnOrder
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,@AddAllyTurns_Loop
                 
                 move.w  #COMBATANT_ENEMIES_START,d0
-                moveq   #ENTITY_ENEMY_COUNTER,d7
+                moveq   #BATTLE_ENEMY_ENTITIES_COUNTER,d7
 @AddEnemyTurns_Loop:
                 
                 move.w  d7,-(sp)
-                bsr.w   AddCombatantAndRandomizedAGItoTurnOrder
+                bsr.w   AddCombatantAndRandomizedAgiToTurnOrder
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,@AddEnemyTurns_Loop
@@ -69,15 +69,15 @@ GenerateBattleTurnOrder:
 ;     d0.w = combatant index
 
 
-AddCombatantAndRandomizedAGItoTurnOrder:
+AddCombatantAndRandomizedAgiToTurnOrder:
                 
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 tst.b   d1
                 bmi.w   @Return
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.w   @Return         ; skip if combatant is not alive
-                jsr     j_GetCurrentAGI
+                jsr     j_GetCurrentAgi
                 move.w  d1,d3
                 andi.w  #TURN_AGILITY_MASK,d1
                 move.w  d1,d6
@@ -112,5 +112,5 @@ AddCombatantAndRandomizedAGItoTurnOrder:
                 
                 rts
 
-    ; End of function AddCombatantAndRandomizedAGItoTurnOrder
+    ; End of function AddCombatantAndRandomizedAgiToTurnOrder
 

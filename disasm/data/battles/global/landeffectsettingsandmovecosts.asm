@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\global\landeffectsettingsandmovecosts.asm :
 ; 0xD824..0xD8F4 : Land effect settings and move costs table
-tbl_LandEffectSettingsAndMoveCosts:
+table_LandEffectSettingsAndMovecosts:
                 
 ; Syntax        landEffectAndMoveCost [LANDEFFECTSETTING_]enum|moveCost
 ;

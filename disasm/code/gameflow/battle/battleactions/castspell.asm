@@ -4,13 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a2 = battlescene stack
-;     a3 = battleaction data in RAM
-;     a4 = actor index in RAM
-;     a5 = target index in RAM
+; In: a2 = battlescene script stack frame
+;     a3 = battleaction data pointer
+;     a4 = actor index pointer
+;     a5 = target index pointer
 
 
-WriteBattlesceneScript_CastSpell:
+battlesceneScript_CastSpell:
                 
                 move.b  (a5),d0
                 move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
@@ -19,65 +19,65 @@ WriteBattlesceneScript_CastSpell:
                 move.w  rjt_SpellEffects(pc,d1.w),d1
                 jmp     rjt_SpellEffects(pc,d1.w)
 
-    ; End of function WriteBattlesceneScript_CastSpell
+    ; End of function battlesceneScript_CastSpell
 
 rjt_SpellEffects:
-                dc.w SpellEffect_Heal-rjt_SpellEffects ; HEAL
-                dc.w SpellEffect_Heal-rjt_SpellEffects ; AURA
-                dc.w SpellEffect_Detox-rjt_SpellEffects ; DETOX
-                dc.w SpellEffect_Boost-rjt_SpellEffects ; BOOST
-                dc.w SpellEffect_Slow-rjt_SpellEffects ; SLOW
-                dc.w SpellEffect_Attack-rjt_SpellEffects ; ATTACK
-                dc.w SpellEffect_Dispel-rjt_SpellEffects ; DISPEL
-                dc.w SpellEffect_Muddle-rjt_SpellEffects ; MUDDLE
-                dc.w SpellEffect_Desoul-rjt_SpellEffects ; DESOUL
-                dc.w SpellEffect_Sleep-rjt_SpellEffects ; SLEEP
-                dc.w SpellEffect_None-rjt_SpellEffects ; EGRESS
-                dc.w SpellEffect_Blaze-rjt_SpellEffects ; BLAZE
-                dc.w SpellEffect_Freeze-rjt_SpellEffects ; FREEZE
-                dc.w SpellEffect_Bolt-rjt_SpellEffects ; BOLT
-                dc.w SpellEffect_Blast-rjt_SpellEffects ; BLAST
-                dc.w SpellEffect_DrainMP-rjt_SpellEffects ; SPOIT
-                dc.w SpellEffect_Heal-rjt_SpellEffects ; HEALIN
-                dc.w SpellEffect_FlameBreath-rjt_SpellEffects ; FLAME
-                dc.w SpellEffect_Freeze-rjt_SpellEffects ; SNOW
-                dc.w SpellEffect_DemonBreath-rjt_SpellEffects ; DEMON
-                dc.w SpellEffect_PowerWater-rjt_SpellEffects ; POWER
-                dc.w SpellEffect_ProtectMilk-rjt_SpellEffects ; GUARD
-                dc.w SpellEffect_QuickChicken-rjt_SpellEffects ; SPEED
-                dc.w SpellEffect_RunningPimento-rjt_SpellEffects ; IDATEN
-                dc.w SpellEffect_CheerfulBread-rjt_SpellEffects ; HEALTH
-                dc.w SpellEffect_None-rjt_SpellEffects ; B.ROCK
-                dc.w SpellEffect_None-rjt_SpellEffects ; LASER
-                dc.w SpellEffect_Blaze-rjt_SpellEffects ; KATON
-                dc.w SpellEffect_Bolt-rjt_SpellEffects ; RAIJIN
-                dc.w SpellEffect_Blast-rjt_SpellEffects ; DAO
-                dc.w SpellEffect_Blaze-rjt_SpellEffects ; APOLLO
-                dc.w SpellEffect_Neptun-rjt_SpellEffects ; NEPTUN
-                dc.w SpellEffect_Bolt-rjt_SpellEffects ; ATLAS
-                dc.w SpellEffect_Detox-rjt_SpellEffects ; POWDER
-                dc.w SpellEffect_FairyTear-rjt_SpellEffects ; G.TEAR
-                dc.w SpellEffect_BrightHoney-rjt_SpellEffects ; HANNY
-                dc.w SpellEffect_BraveApple-rjt_SpellEffects ; BRAVE
-                dc.w SpellEffect_Blaze-rjt_SpellEffects ; F.BALL
-                dc.w SpellEffect_Freeze-rjt_SpellEffects ; BREZAD
-                dc.w SpellEffect_Bolt-rjt_SpellEffects ; THUNDR
-                dc.w SpellEffect_BubbleBreath-rjt_SpellEffects ; AQUA
-                dc.w SpellEffect_FlameBreath-rjt_SpellEffects ; KIWI
-                dc.w SpellEffect_FairyTear-rjt_SpellEffects ; SHINE
-                dc.w SpellEffect_Bolt-rjt_SpellEffects ; ODDEYE
+                dc.w spellEffect_Heal-rjt_SpellEffects ; HEAL
+                dc.w spellEffect_Heal-rjt_SpellEffects ; AURA
+                dc.w spellEffect_Detox-rjt_SpellEffects ; DETOX
+                dc.w spellEffect_Boost-rjt_SpellEffects ; BOOST
+                dc.w spellEffect_Slow-rjt_SpellEffects ; SLOW
+                dc.w spellEffect_Attack-rjt_SpellEffects ; ATTACK
+                dc.w spellEffect_Dispel-rjt_SpellEffects ; DISPEL
+                dc.w spellEffect_Muddle-rjt_SpellEffects ; MUDDLE
+                dc.w spellEffect_Desoul-rjt_SpellEffects ; DESOUL
+                dc.w spellEffect_Sleep-rjt_SpellEffects ; SLEEP
+                dc.w spellEffect_None-rjt_SpellEffects ; EGRESS
+                dc.w spellEffect_Blaze-rjt_SpellEffects ; BLAZE
+                dc.w spellEffect_Freeze-rjt_SpellEffects ; FREEZE
+                dc.w spellEffect_Bolt-rjt_SpellEffects ; BOLT
+                dc.w spellEffect_Blast-rjt_SpellEffects ; BLAST
+                dc.w spellEffect_AbsorbMp-rjt_SpellEffects ; SPOIT
+                dc.w spellEffect_Heal-rjt_SpellEffects ; HEALIN
+                dc.w spellEffect_FlameBreath-rjt_SpellEffects ; FLAME
+                dc.w spellEffect_Freeze-rjt_SpellEffects ; SNOW
+                dc.w spellEffect_DemonBreath-rjt_SpellEffects ; DEMON
+                dc.w spellEffect_PowerWater-rjt_SpellEffects ; POWER
+                dc.w spellEffect_ProtectMilk-rjt_SpellEffects ; GUARD
+                dc.w spellEffect_QuickChicken-rjt_SpellEffects ; SPEED
+                dc.w spellEffect_RunningPimento-rjt_SpellEffects ; IDATEN
+                dc.w spellEffect_CheerfulBread-rjt_SpellEffects ; HEALTH
+                dc.w spellEffect_None-rjt_SpellEffects ; B.ROCK
+                dc.w spellEffect_None-rjt_SpellEffects ; LASER
+                dc.w spellEffect_Blaze-rjt_SpellEffects ; KATON
+                dc.w spellEffect_Bolt-rjt_SpellEffects ; RAIJIN
+                dc.w spellEffect_Blast-rjt_SpellEffects ; DAO
+                dc.w spellEffect_Blaze-rjt_SpellEffects ; APOLLO
+                dc.w spellEffect_Neptun-rjt_SpellEffects ; NEPTUN
+                dc.w spellEffect_Bolt-rjt_SpellEffects ; ATLAS
+                dc.w spellEffect_Detox-rjt_SpellEffects ; POWDER
+                dc.w spellEffect_FairyTear-rjt_SpellEffects ; G.TEAR
+                dc.w spellEffect_BrightHoney-rjt_SpellEffects ; HANNY
+                dc.w spellEffect_BraveApple-rjt_SpellEffects ; BRAVE
+                dc.w spellEffect_Blaze-rjt_SpellEffects ; F.BALL
+                dc.w spellEffect_Freeze-rjt_SpellEffects ; BREZAD
+                dc.w spellEffect_Bolt-rjt_SpellEffects ; THUNDR
+                dc.w spellEffect_BubbleBreath-rjt_SpellEffects ; AQUA
+                dc.w spellEffect_FlameBreath-rjt_SpellEffects ; KIWI
+                dc.w spellEffect_FairyTear-rjt_SpellEffects ; SHINE
+                dc.w spellEffect_Bolt-rjt_SpellEffects ; ODDEYE
                 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_Heal:
+spellEffect_Heal:
                 
                 module
                 move.b  (a5),d0
-                jsr     GetMaxHP
+                jsr     GetMaxHp
                 move.w  d1,d2
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 sub.w   d1,d2           ; D2 = target's missing HP
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     FindSpellDefAddress
@@ -102,7 +102,7 @@ SpellEffect_Heal:
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   byte_B16A       
                 executeAllyReaction d6,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
-                bra.s   byte_B17A
+                bra.s   byte_B17A       
 byte_B16A:
                 
                 executeEnemyReaction d6,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
@@ -110,17 +110,17 @@ byte_B17A:
                 
                 displayMessage #MESSAGE_BATTLE_RECOVERED_HIT_POINTS,d0,#0,d6 
                                                         ; Message, Combatant, Item or Spell, Number
-                bsr.w   CalculateHealingEXP
+                bsr.w   battlesceneScript_CalculateHealingExp
                 rts
 
-    ; End of function SpellEffect_Heal
+    ; End of function spellEffect_Heal
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_Detox:
+spellEffect_Detox:
                 
                 module
                 move.b  (a5),d0
@@ -153,7 +153,7 @@ SpellEffect_Detox:
                 tst.b   d2
                 beq.w   @Ineffective
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B1F4
+                bne.s   byte_B1F4       
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @GiveEXP
 byte_B1F4:
@@ -161,7 +161,7 @@ byte_B1F4:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @GiveEXP:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 
                 ; Check if Poison was cured
                 btst    #0,d2
@@ -187,7 +187,7 @@ byte_B1F4:
 @Ineffective:
                 
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @UpdateStatusEffects:
                 
                 move.b  (a5),d0
@@ -195,14 +195,14 @@ byte_B1F4:
                 jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
-    ; End of function SpellEffect_Detox
+    ; End of function spellEffect_Detox
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_Boost:
+spellEffect_Boost:
                 
                 module
                 move.b  (a5),d0
@@ -213,11 +213,11 @@ SpellEffect_Boost:
                 andi.w  #STATUSEFFECT_BOOST,d3
                 beq.s   @WriteScriptCommands
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B2B6
+                bne.s   byte_B2B6       
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B2B6:
@@ -225,20 +225,20 @@ byte_B2B6:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
-                jsr     GetBaseAGI
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
+                jsr     GetBaseAgi
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
-                jsr     GetBaseDEF
+                jsr     GetBaseDef
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_DEF_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
 
-    ; End of function SpellEffect_Boost
+    ; End of function spellEffect_Boost
 
                 modend
 
@@ -247,7 +247,7 @@ byte_B2B6:
 ; In: d2.w = target's resistance setting
 
 
-SpellEffect_Slow:
+spellEffect_Slow:
                 
                 module
                 tst.w   d2
@@ -255,7 +255,7 @@ SpellEffect_Slow:
                 addq.w  #CHANCE_TO_INFLICT_SLOW,d2 ; 3/8 base chance to inflict slow
 @Skip:
                 
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 move.w  d1,d3
                 ori.w   #STATUSEFFECT_SLOW,d1
@@ -263,41 +263,42 @@ SpellEffect_Slow:
                 andi.w  #STATUSEFFECT_SLOW,d3
                 beq.s   @WriteScriptCommands
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B350
+                bne.s   byte_B350       ; @Reaction_Enemy
                 executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @GiveEXP
 byte_B350:
                 
+                @Reaction_Enemy:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @GiveEXP:
                 
-                bsr.w   GiveStatusEffectSpellEXP
-WriteBattlesceneScript_SlowMessage:
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
+battlesceneScript_DisplaySlowMessages:
                 
-                jsr     GetBaseAGI
+                jsr     GetBaseAgi
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_AGILITY_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
-                jsr     GetBaseDEF
+                jsr     GetBaseDef
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_DEFENSE_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
 
-    ; End of function SpellEffect_Slow
+    ; End of function spellEffect_Slow
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_Attack:
+spellEffect_Attack:
                 
                 module
                 move.b  (a5),d0
@@ -308,7 +309,7 @@ SpellEffect_Attack:
                 andi.w  #STATUSEFFECT_ATTACK,d3
                 beq.s   @WriteScriptCommands
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
@@ -320,15 +321,15 @@ byte_B3E2:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
-                jsr     GetBaseATT
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
+                jsr     GetBaseAtt
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_ATTACK_SPELL_EFFECT,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
 
-    ; End of function SpellEffect_Attack
+    ; End of function spellEffect_Attack
 
                 modend
 
@@ -337,7 +338,7 @@ byte_B3E2:
 ; In: d2.w = target's resistance setting
 
 
-SpellEffect_Dispel:
+spellEffect_Dispel:
                 
                 module
                 move.w  d2,d3
@@ -354,11 +355,11 @@ SpellEffect_Dispel:
 @DetermineSuccess:
                 
                 move.w  d3,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 ori.w   #STATUSEFFECT_SILENCE,d1
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B45A
+                bne.s   byte_B45A       
                 executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B45A:
@@ -366,12 +367,12 @@ byte_B45A:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 displayMessage #MESSAGE_BATTLE_HAS_BEEN_SILENCED,d0,#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
 
-    ; End of function SpellEffect_Dispel
+    ; End of function spellEffect_Dispel
 
                 modend
 
@@ -380,14 +381,14 @@ byte_B45A:
 ; In: d2.w = target's resistance setting
 
 
-SpellEffect_Muddle:
+spellEffect_Muddle:
                 
                 module
                 move.b  (a5),d0
                 tst.w   ((BATTLESCENE_SPELL_LEVEL-$1000000)).w
                 beq.w   @Muddle1        
                 addq.w  #CHANCE_TO_INFLICT_MUDDLE2,d2 ; 3/8 base chance to inflict muddle 2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 ori.w   #STATUSEFFECT_MUDDLE2,d1
                 ori.w   #STATUSEFFECT_MUDDLE,d1
@@ -402,14 +403,14 @@ SpellEffect_Muddle:
                 moveq   #CHANCE_TO_INFLICT_MUDDLE1,d2 ; otherwise, 3/8 base chance to inflict muddle 1
 @DetermineSuccess:
                 
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 ori.w   #STATUSEFFECT_MUDDLE,d1
                 move.w  #MESSAGE_BATTLE_IS_IN_A_DEEP_HAZE,d2
 @WriteScriptCommands:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B4EA
+                bne.s   byte_B4EA       
                 executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B4EA:
@@ -417,11 +418,11 @@ byte_B4EA:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 displayMessage d2,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
-    ; End of function SpellEffect_Muddle
+    ; End of function spellEffect_Muddle
 
                 modend
 
@@ -438,7 +439,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -453,14 +454,14 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-SpellEffect_Desoul:
+spellEffect_Desoul:
                 
                 module
                 addq.w  #CHANCE_TO_INFLICT_DESOUL,d2 ; 3/8 base chance to inflict desoul
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B53C
+                bne.s   byte_B53C       
                 executeAllyReaction #$8000,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineBattleMessage
 byte_B53C:
@@ -468,21 +469,21 @@ byte_B53C:
                 executeEnemyReaction #$8000,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineBattleMessage:
                 
-                bsr.w   GiveEXPandGoldForKill
+                bsr.w   battlesceneScript_AddExpAndGoldForKill
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
                 move.w  #MESSAGE_BATTLE_SOUL_WAS_STOLEN_ALLY,d2 ; ally message
-                bra.s   byte_B562
+                bra.s   byte_B562       
 @EnemyMessage:
                 
                 move.w  #MESSAGE_BATTLE_SOUL_WAS_STOLEN_ENEMY,d2
 byte_B562:
                 
                 displayMessage d2,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
-                move.b  #$FF,targetDies(a2)
+                move.b  #-1,targetDies(a2)
                 rts
 
-    ; End of function SpellEffect_Desoul
+    ; End of function spellEffect_Desoul
 
                 modend
 
@@ -491,15 +492,15 @@ byte_B562:
 ; In: d2.w = target's resistance setting
 
 
-SpellEffect_Sleep:
+spellEffect_Sleep:
                 
                 module
                 addq.w  #CHANCE_TO_INFLICT_SLEEP,d2 ; 3/8 base chance to inflict sleep
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
                 jsr     GetStatusEffects
                 ori.w   #STATUSEFFECT_SLEEP,d1
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B5A8
+                bne.s   byte_B5A8       
                 executeAllyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B5A8:
@@ -507,22 +508,22 @@ byte_B5A8:
                 executeEnemyReaction #0,#0,d1,#1 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 displayMessage #MESSAGE_BATTLE_FELL_ASLEEP,d0,#0,#0 ; Message, Combatant, Item or Spell, Number
                 rts
 
-    ; End of function SpellEffect_Sleep
+    ; End of function spellEffect_Sleep
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_DrainMP:
+spellEffect_AbsorbMp:
                 
                 module
                 move.b  (a5),d0
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 moveq   #3,d0
                 jsr     (GenerateRandomOrDebugNumber).w
                 addq.w  #3,d0
@@ -548,7 +549,7 @@ SpellEffect_DrainMP:
                 move.b  (a4),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B642
+                bne.s   byte_B642       
                 executeAllyReaction #0,d2,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineMessage
 byte_B642:
@@ -556,12 +557,12 @@ byte_B642:
                 executeEnemyReaction #0,d2,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineMessage:
                 
-                bsr.w   GiveStatusEffectSpellEXP
+                bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 bscHideTextBox
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
                 move.w  #MESSAGE_BATTLE_ABSORBED_MAGIC_POINTS,d1 ; ally message
-                bra.s   byte_B66C
+                bra.s   byte_B66C       
 @EnemyMessage:
                 
                 move.b  (a5),d0
@@ -571,20 +572,20 @@ byte_B66C:
                 displayMessage d1,d0,#0,d2 ; Message, Combatant, Item or Spell, Number
                 rts
 
-    ; End of function SpellEffect_DrainMP
+    ; End of function spellEffect_AbsorbMp
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_PowerWater:
+spellEffect_PowerWater:
                 
                 module
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B6A2
+                bne.s   byte_B6A2       
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @Continue
 byte_B6A2:
@@ -599,24 +600,24 @@ byte_B6A2:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseBaseATT
+                jsr     IncreaseBaseAtt
                 jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
-    ; End of function SpellEffect_PowerWater
+    ; End of function spellEffect_PowerWater
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_ProtectMilk:
+spellEffect_ProtectMilk:
                 
                 module
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B708
+                bne.s   byte_B708       
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B708:
@@ -631,24 +632,24 @@ byte_B708:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseBaseDEF
+                jsr     IncreaseBaseDef
                 jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
-    ; End of function SpellEffect_ProtectMilk
+    ; End of function spellEffect_ProtectMilk
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_QuickChicken:
+spellEffect_QuickChicken:
                 
                 module
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B76E
+                bne.s   byte_B76E       
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B76E:
@@ -663,24 +664,24 @@ byte_B76E:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseBaseAGI
+                jsr     IncreaseBaseAgi
                 jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
-    ; End of function SpellEffect_QuickChicken
+    ; End of function spellEffect_QuickChicken
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_RunningPimento:
+spellEffect_RunningPimento:
                 
                 module
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B7D4
+                bne.s   byte_B7D4       
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @DetermineIncreaseValue
 byte_B7D4:
@@ -688,43 +689,44 @@ byte_B7D4:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @DetermineIncreaseValue:
                 
-                jsr     GetBaseMOV
+                jsr     GetBaseMov
                 clr.w   d2
                 cmpi.b  #9,d1
-                beq.w   byte_B802
+                beq.w   byte_B802       
                 moveq   #1,d2
                 cmpi.b  #8,d1
-                beq.w   byte_B802
+                beq.w   byte_B802       
                 moveq   #2,d2
 byte_B802:
                 
                 displayMessage #MESSAGE_BATTLE_MOVEMENT_RANGE_IS_ENLARGED_BY,d0,#0,d2 
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d2,d1
-                jsr     IncreaseBaseMOV
+                jsr     IncreaseBaseMov
                 jsr     ApplyStatusEffectsAndItemsOnStats
                 rts
 
-    ; End of function SpellEffect_RunningPimento
+    ; End of function spellEffect_RunningPimento
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_CheerfulBread:
+spellEffect_CheerfulBread:
                 
                 module
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @EnemyReaction  
+                bne.s   byte_B848       ; @Reaction_Enemy
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
-                bra.s   @BattleMessage
-@EnemyReaction:
+                bra.s   @Message
+byte_B848:
                 
+                @Reaction_Enemy:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
-@BattleMessage:
+@Message:
                 
                 moveq   #3,d0
                 jsr     (GenerateRandomOrDebugNumber).w
@@ -733,31 +735,31 @@ SpellEffect_CheerfulBread:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseMaxHP
+                jsr     IncreaseMaxHp
                 rts
 
-    ; End of function SpellEffect_CheerfulBread
+    ; End of function spellEffect_CheerfulBread
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_BrightHoney:
+spellEffect_BrightHoney:
                 
                 module
                 move.b  (a5),d0
-                jsr     GetMaxMP
+                jsr     GetMaxMp
                 tst.w   d1
                 bne.s   @TargetHasMP
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @TargetHasMP:
                 
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B8BA
+                bne.s   byte_B8BA       
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B8BA:
@@ -772,34 +774,34 @@ byte_B8BA:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d0,d1
                 move.b  (a5),d0
-                jsr     IncreaseMaxMP
+                jsr     IncreaseMaxMp
                 rts
 
-    ; End of function SpellEffect_BrightHoney
+    ; End of function spellEffect_BrightHoney
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_BraveApple:
+spellEffect_BraveApple:
                 
                 module
                 move.b  (a5),d0
                 moveq   #0,d1
-                jsr     SetCurrentEXP
-                jsr     LevelUp
+                jsr     SetCurrentExp
+                jsr     LevelUp         
                 lea     ((LEVELUP_ARGUMENTS-$1000000)).w,a1
-                cmpi.b  #$FF,(a1)       ; check if target is able to level up
+                cmpi.b  #-1,(a1)        ; check if target is able to level up
                 bne.s   @AbleToLevelUp
                 moveq   #8,d2
-                bsr.w   DetermineSpellEffectiveness
+                bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @AbleToLevelUp:
                 
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_B93A
+                bne.s   byte_B93A       
                 executeAllyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
                 bra.s   @BattleMessage
 byte_B93A:
@@ -842,8 +844,9 @@ byte_B93A:
 @EvaluateLearnedSpell:
                 
                 move.b  (a1)+,d1
-                cmpi.b  #$FF,d1
+                cmpi.b  #-1,d1
                 beq.s   @Return
+                
                 move.w  d1,d2
                 andi.w  #SPELLENTRY_MASK_INDEX,d2
                 lsr.w   #SPELLENTRY_OFFSET_LV,d1
@@ -860,20 +863,20 @@ byte_B93A:
                 
                 rts
 
-    ; End of function SpellEffect_BraveApple
+    ; End of function spellEffect_BraveApple
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_FairyTear:
+spellEffect_FairyTear:
                 
                 module
                 move.b  (a5),d0
-                jsr     GetMaxMP
+                jsr     GetMaxMp
                 move.w  d1,d2
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 sub.w   d1,d2
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 jsr     FindSpellDefAddress
@@ -892,9 +895,9 @@ SpellEffect_FairyTear:
                 move.b  (a5),d0
                 jsr     GetStatusEffects
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   byte_BA6C
+                bne.s   byte_BA6C       
                 executeAllyReaction #0,d6,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
-                bra.s   byte_BA7C
+                bra.s   byte_BA7C       
 byte_BA6C:
                 
                 executeEnemyReaction #0,d6,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
@@ -902,21 +905,21 @@ byte_BA7C:
                 
                 displayMessage #MESSAGE_BATTLE_RECOVERED_MAGIC_POINTS,d0,#0,d6 
                                                         ; Message, Combatant, Item or Spell, Number
-                bsr.w   CalculateHealingEXP
+                bsr.w   battlesceneScript_CalculateHealingExp
                 rts
 
-    ; End of function SpellEffect_FairyTear
+    ; End of function spellEffect_FairyTear
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_None:
+spellEffect_None:
                 
                 rts
 
-    ; End of function SpellEffect_None
+    ; End of function spellEffect_None
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -932,7 +935,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -947,7 +950,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-DetermineSpellEffectiveness:
+battlesceneScript_DetermineSpellEffectiveness:
                 
                 move.l  d0,-(sp)
                 tst.b   debugDodge(a2)
@@ -961,7 +964,7 @@ DetermineSpellEffectiveness:
                 bcc.s   @Success
                 displayMessage #MESSAGE_BATTLE_THE_SPELL_HAS_NO_EFFECT,(a5),#0,#0 
                                                         ; Message, Combatant, Item or Spell, Number
-                move.b  #$FF,dodge(a2)
+                move.b  #-1,dodge(a2)
                 move.l  (sp)+,d0
                 move.l  (sp)+,d0
                 rts
@@ -970,92 +973,92 @@ DetermineSpellEffectiveness:
                 move.l  (sp)+,d0
                 rts
 
-    ; End of function DetermineSpellEffectiveness
+    ; End of function battlesceneScript_DetermineSpellEffectiveness
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_FlameBreath:
+spellEffect_FlameBreath:
                 
                 moveq   #CHANCE_TO_CRITICAL_FLAME_BREATH,d3 ; 1/16 chance to critical hit
-                bra.w   CalculateSpellDamage
+                bra.w   battlesceneScript_CalculateSpellDamage
 
-    ; End of function SpellEffect_FlameBreath
+    ; End of function spellEffect_FlameBreath
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_Blaze:
+spellEffect_Blaze:
                 
                 moveq   #CHANCE_TO_CRITICAL_BLAZE,d3 ; 1/32 chance to critical hit
-                bra.w   CalculateSpellDamage
+                bra.w   battlesceneScript_CalculateSpellDamage
 
-    ; End of function SpellEffect_Blaze
+    ; End of function spellEffect_Blaze
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_Freeze:
+spellEffect_Freeze:
                 
                 moveq   #CHANCE_TO_CRITICAL_FREEZE,d3 ; 1/32 chance to critical hit
-                bra.w   CalculateSpellDamage
+                bra.w   battlesceneScript_CalculateSpellDamage
 
-    ; End of function SpellEffect_Freeze
+    ; End of function spellEffect_Freeze
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_Neptun:
+spellEffect_Neptun:
                 
                 moveq   #CHANCE_TO_CRITICAL_NEPTUN,d3 ; 1/16 chance to critical hit
-                bra.w   CalculateSpellDamage
+                bra.w   battlesceneScript_CalculateSpellDamage
 
-    ; End of function SpellEffect_Neptun
+    ; End of function spellEffect_Neptun
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_BubbleBreath:
+spellEffect_BubbleBreath:
                 
                 moveq   #CHANCE_TO_CRITICAL_BUBBLE_BREATH,d3 ; 1/8 chance to critical hit
-                bra.w   CalculateSpellDamage
+                bra.w   battlesceneScript_CalculateSpellDamage
 
-    ; End of function SpellEffect_BubbleBreath
+    ; End of function spellEffect_BubbleBreath
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_Bolt:
+spellEffect_Bolt:
                 
                 moveq   #CHANCE_TO_CRITICAL_BOLT,d3 ; 1/8 chance to critical hit
-                bra.w   CalculateSpellDamage
+                bra.w   battlesceneScript_CalculateSpellDamage
 
-    ; End of function SpellEffect_Bolt
+    ; End of function spellEffect_Bolt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_Blast:
+spellEffect_Blast:
                 
                 moveq   #CHANCE_TO_CRITICAL_BLAST,d3 ; 1/32 chance to critical hit
-                bra.w   CalculateSpellDamage
+                bra.w   battlesceneScript_CalculateSpellDamage
 
-    ; End of function SpellEffect_Blast
+    ; End of function spellEffect_Blast
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SpellEffect_DemonBreath:
+spellEffect_DemonBreath:
                 
                 moveq   #CHANCE_TO_CRITICAL_DEMON_BREATH,d3 ; no chance to critical hit
 
-    ; End of function SpellEffect_DemonBreath
+    ; End of function spellEffect_DemonBreath
 

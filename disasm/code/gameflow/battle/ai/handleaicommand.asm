@@ -8,7 +8,7 @@
 ;     d1.b = command code (like Heal, Attack, etc.)
 
 
-HandleAiCommand:
+ExecuteAiCommand:
                 
                 movem.l d0/d2-a5,-(sp)
                 cmpi.b  #AICOMMAND_HEAL,d1
@@ -60,7 +60,7 @@ HandleAiCommand:
                 bra.w   @Done
 @CheckSupport:
                 
-                cmpi.b  #AICOMMAND_DEBUFF,d1
+                cmpi.b  #AICOMMAND_SUPPORT,d1
                 bne.s   @CheckSpecialMove
                 move.w  #1,d1
                 move.w  #0,d2
@@ -102,7 +102,7 @@ HandleAiCommand:
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
-                move.b  #CODE_TERMINATOR_BYTE,(a0)
+                move.b  #-1,(a0)
                 clr.w   d0
                 bra.w   @Done
 @CheckSpecialMove2:
@@ -142,5 +142,5 @@ HandleAiCommand:
                 movem.l (sp)+,d0/d2-a5
                 rts
 
-    ; End of function HandleAiCommand
+    ; End of function ExecuteAiCommand
 

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\allykilldefeatwindowlayout.asm :
 ; 0x1278E..0x1284E : Member screen kills and defeat window layout
-AllyKillDefeatWindowLayout:
+layout_AllyKillDefeatWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;

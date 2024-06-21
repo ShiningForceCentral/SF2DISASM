@@ -4,6 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: a0 = entity data pointer
+
 
 OrientSpriteLeft:
                 
@@ -18,61 +20,61 @@ loc_45868:
                 move.w  #3,d5
 loc_4586C:
                 
-                move.b  3(a0),d0
-                lsl.b   #4,d0
-                move.b  7(a0),d1
-                andi.b  #$F,d1
+                move.b  ENTITYDEF_OFFSET_Y_LOWERBYTE(a0),d0
+                lsl.b   #NIBBLE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_YVELOCITY_LOWERBYTE(a0),d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 or.b    d1,d0
-                lsl.w   #8,d0
-                move.b  $B(a0),d0
-                lsl.b   #4,d0
-                move.b  $F(a0),d1
-                andi.b  #$F,d1
+                lsl.w   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_YTRAVEL_LOWERBYTE(a0),d0
+                lsl.b   #NIBBLE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_YDEST_LOWERBYTE(a0),d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 or.b    d1,d0
-                lsl.l   #8,d0
-                move.b  $13(a0),d0
-                lsl.b   #4,d0
-                move.b  $17(a0),d1
-                andi.b  #$F,d1
+                lsl.l   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d0
+                lsl.b   #NIBBLE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_23(a0),d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 or.b    d1,d0
-                lsl.l   #8,d0
-                move.b  $1B(a0),d0
-                lsl.b   #4,d0
-                move.b  $1F(a0),d1
-                andi.b  #$F,d1
+                lsl.l   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_YSPEED(a0),d0
+                lsl.b   #NIBBLE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER(a0),d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 or.b    d1,d0
                 move.l  d0,-(a6)
-                move.b  3(a0),d0
-                andi.b  #$F0,d0
-                move.b  7(a0),d1
-                lsr.b   #4,d1
+                move.b  ENTITYDEF_OFFSET_Y_LOWERBYTE(a0),d0
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d0
+                move.b  ENTITYDEF_OFFSET_YVELOCITY_LOWERBYTE(a0),d1
+                lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 or.b    d1,d0
-                lsl.w   #8,d0
-                move.b  $B(a0),d0
-                andi.b  #$F0,d0
-                move.b  $F(a0),d1
-                lsr.b   #4,d1
+                lsl.w   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_YTRAVEL_LOWERBYTE(a0),d0
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d0
+                move.b  ENTITYDEF_OFFSET_YDEST_LOWERBYTE(a0),d1
+                lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 or.b    d1,d0
-                lsl.l   #8,d0
-                move.b  $13(a0),d0
-                andi.b  #$F0,d0
-                move.b  $17(a0),d1
-                lsr.b   #4,d1
+                lsl.l   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d0
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d0
+                move.b  ENTITYDEF_OFFSET_23(a0),d1
+                lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 or.b    d1,d0
-                lsl.l   #8,d0
-                move.b  $1B(a0),d0
-                andi.b  #$F0,d0
-                move.b  $1F(a0),d1
-                lsr.b   #4,d1
+                lsl.l   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_YSPEED(a0),d0
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d0
+                move.b  ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER(a0),d1
+                lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 or.b    d1,d0
                 move.l  d0,-(a6)
                 subq.l  #1,a0
                 dbf     d5,loc_4586C
-				
-                adda.l  #$24,a0 
+                
+                adda.l  #36,a0
                 dbf     d6,loc_45868
                 dbf     d7,loc_45864
-				
+                
                 move.w  #1,d7
 loc_45914:
                 
@@ -96,7 +98,7 @@ loc_45914:
                 bsr.w   sub_45B0E
                 adda.l  #$120,a6
                 dbf     d7,loc_45914
-				
+                
                 unlk    a6
                 movem.l (sp)+,d0-d1/d5-a0
                 rts
@@ -105,6 +107,8 @@ loc_45914:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: a0 = entity data pointer
 
 
 OrientSpriteRight:
@@ -120,61 +124,61 @@ loc_45984:
                 move.w  #3,d5
 loc_45988:
                 
-                move.b  $1C(a0),d0
-                andi.b  #$F0,d0
-                move.b  $18(a0),d1
-                lsr.b   #4,d1
+                move.b  ENTITYDEF_OFFSET_FLAGS_A(a0),d0
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d0
+                move.b  ENTITYDEF_OFFSET_XACCEL(a0),d1
+                lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 or.b    d1,d0
-                lsl.w   #8,d0
-                move.b  $14(a0),d0
-                andi.b  #$F0,d0
-                move.b  $10(a0),d1
-                lsr.b   #4,d1
+                lsl.w   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0),d0
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d0
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d1
+                lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 or.b    d1,d0
-                lsl.l   #8,d0
-                move.b  $C(a0),d0
-                andi.b  #$F0,d0
-                move.b  8(a0),d1
-                lsr.b   #4,d1
+                lsl.l   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_XDEST(a0),d0
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d0
+                move.b  ENTITYDEF_OFFSET_XTRAVEL(a0),d1
+                lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 or.b    d1,d0
-                lsl.l   #8,d0
-                move.b  4(a0),d0
-                andi.b  #$F0,d0
+                lsl.l   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_XVELOCITY(a0),d0
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d0
                 move.b  (a0),d1
-                lsr.b   #4,d1
+                lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 or.b    d1,d0
                 move.l  d0,-(a6)
-                move.b  $1C(a0),d0
-                lsl.b   #4,d0
-                move.b  $18(a0),d1
-                andi.b  #$F,d1
+                move.b  ENTITYDEF_OFFSET_FLAGS_A(a0),d0
+                lsl.b   #NIBBLE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_XACCEL(a0),d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 or.b    d1,d0
-                lsl.w   #8,d0
-                move.b  $14(a0),d0
-                lsl.b   #4,d0
-                move.b  $10(a0),d1
-                andi.b  #$F,d1
+                lsl.w   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0),d0
+                lsl.b   #NIBBLE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 or.b    d1,d0
-                lsl.l   #8,d0
-                move.b  $C(a0),d0
-                lsl.b   #4,d0
-                move.b  8(a0),d1
-                andi.b  #$F,d1
+                lsl.l   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_XDEST(a0),d0
+                lsl.b   #NIBBLE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_XTRAVEL(a0),d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 or.b    d1,d0
-                lsl.l   #8,d0
-                move.b  4(a0),d0
-                lsl.b   #4,d0
+                lsl.l   #BYTE_SHIFT_COUNT,d0
+                move.b  ENTITYDEF_OFFSET_XVELOCITY(a0),d0
+                lsl.b   #NIBBLE_SHIFT_COUNT,d0
                 move.b  (a0),d1
-                andi.b  #$F,d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 or.b    d1,d0
                 move.l  d0,-(a6)
                 addq.l  #1,a0
                 dbf     d5,loc_45988
-				
-                adda.l  #$1C,a0
+                
+                adda.l  #28,a0
                 dbf     d6,loc_45984
                 dbf     d7,loc_45980
-				
+                
                 move.w  #1,d7
 loc_45A2C:
                 
@@ -198,7 +202,7 @@ loc_45A2C:
                 bsr.w   sub_45B0E
                 adda.l  #$120,a6
                 dbf     d7,loc_45A2C
-				
+                
                 unlk    a6
                 movem.l (sp)+,d0-d1/d5-a0
                 rts
@@ -213,12 +217,12 @@ sub_45A8C:
                 
                 movem.l d0-a0,-(sp)
                 link    a6,#-576
-                move.w  #$8F,d7 
+                move.w  #143,d7
 loc_45A98:
                 
                 move.l  (a0)+,-(a6)
                 dbf     d7,loc_45A98
-				
+                
                 move.w  #1,d7
 loc_45AA2:
                 
@@ -245,7 +249,7 @@ loc_45AA2:
                 bsr.w   sub_45B0E
                 adda.l  #$120,a6
                 dbf     d7,loc_45AA2
-				
+                
                 unlk    a6
                 movem.l (sp)+,d0-a0
                 rts
@@ -281,21 +285,22 @@ sub_45B30:
 loc_45B38:
                 
                 move.b  (a0),d1
-                andi.b  #$F0,d1
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d1
                 cmpi.b  #$20,d1 
                 bne.s   loc_45B48
-                andi.b  #$F,(a0)
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,(a0)
 loc_45B48:
                 
                 move.b  (a0),d1
-                andi.b  #$F,d1
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 cmpi.b  #2,d1
                 bne.s   loc_45B58
-                andi.b  #$F0,(a0)
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,(a0)
 loc_45B58:
                 
                 addq.l  #1,a0
                 dbf     d6,loc_45B38
+                
                 movem.l (sp)+,a0
                 rts
 
@@ -319,6 +324,7 @@ loc_45B78:
                 
                 addq.l  #2,a0
                 dbf     d6,loc_45B6C
+                
                 movem.l (sp)+,a0
                 rts
 
@@ -331,12 +337,12 @@ loc_45B78:
 ApplySpriteGhostEffect:
                 
                 movem.l d0-d1/d7-a0,-(sp)
-                move.w  #GFX_MAPSPRITE_PIXEL_COUNTER,d7
+                move.w  #GFX_MAPSPRITE_PIXELS_COUNTER,d7
 loc_45B8C:
                 
                 move.b  (a0),d0
                 move.b  d0,d1
-                andi.b  #$F,d0
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d0
                 cmpi.b  #2,d0
                 bne.s   loc_45B9E
                 moveq   #1,d0
@@ -346,7 +352,7 @@ loc_45B9E:
                 clr.w   d0
 loc_45BA0:
                 
-                andi.b  #$F0,d1
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d1
                 cmpi.b  #$20,d1 
                 bne.s   loc_45BAE
                 moveq   #$10,d1
@@ -359,6 +365,7 @@ loc_45BB0:
                 move.b  d0,(a0)
                 or.b    d1,(a0)+
                 dbf     d7,loc_45B8C
+                
                 movem.l (sp)+,d0-d1/d7-a0
                 rts
 
@@ -379,7 +386,7 @@ loc_45BCE:
                 
                 move.l  d1,-(a1)
                 dbf     d7,loc_45BCE
-				
+                
                 movea.l a0,a4
                 movea.l a1,a5
                 tst.w   d0
@@ -394,7 +401,7 @@ loc_45BDE:
                 lsr.w   #1,d5
                 move.w  d5,d6
                 add.w   d0,d6
-                lea     byte_45C6A(pc), a0
+                lea     table_45C6A(pc), a0
                 moveq   #1,d7
 loc_45BF8:
                 
@@ -420,17 +427,17 @@ loc_45C18:
                 move.w  d1,d3
                 sub.w   d5,d3
                 mulu.w  d4,d3
-                lsr.w   #8,d3
+                lsr.w   #BYTE_SHIFT_COUNT,d3
                 move.b  (a0,d3.w),d3
                 move.b  (a0,d1.w),d0
                 move.b  (a2,d3.w),d3
                 btst    #0,d1
                 bne.s   loc_45C38
-                andi.b  #$F0,d3
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d3
                 bra.s   loc_45C3C
 loc_45C38:
                 
-                andi.b  #$F,d3
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d3
 loc_45C3C:
                 
                 or.b    d3,(a3,d0.w)
@@ -443,19 +450,20 @@ loc_45C3C:
                 adda.w  #$120,a4
                 adda.w  #$120,a5
                 dbf     d7,loc_45BF8
+                
                 move.w  #$8F,d7 
 loc_45C5C:
                 
                 move.l  -(a5),-(a4)
                 dbf     d7,loc_45C5C
-				
+                
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
 
     ; End of function ResizeSprite
 
-byte_45C6A:     dc.b 0
+table_45C6A:    dc.b 0
                 dc.b 0
                 dc.b 1
                 dc.b 1
@@ -536,7 +544,7 @@ loc_45CBE:
                 suba.l  #4,a0
                 suba.l  #4,a1
                 dbf     d7,loc_45CBE
-				
+                
                 move.w  d0,d7
                 subq.w  #1,d7
                 bcs.w   loc_45D16
@@ -578,11 +586,11 @@ loc_45D2C:
                 addq.w  #1,d1
                 addq.w  #1,d3
                 dbf     d6,loc_45D2C
-				
+                
                 addq.w  #1,d2
                 addq.w  #1,d4
                 dbf     d7,loc_45D26
-				
+                
                 movem.l (sp)+,d1-d7
                 rts
 
@@ -609,11 +617,11 @@ loc_45D56:
                 subq.w  #1,d1
                 subq.w  #1,d3
                 dbf     d6,loc_45D56
-				
+                
                 addq.w  #1,d2
                 addq.w  #1,d4
                 dbf     d7,loc_45D50
-				
+                
                 movem.l (sp)+,d1-d7
                 rts
 
@@ -640,11 +648,11 @@ loc_45D80:
                 addq.w  #1,d1
                 addq.w  #1,d3
                 dbf     d6,loc_45D80
-				
+                
                 subq.w  #1,d2
                 subq.w  #1,d4
                 dbf     d7,loc_45D7A
-				
+                
                 clr.l   (a0)
                 clr.l   $60(a0)
                 clr.l   $C0(a0)
@@ -660,7 +668,7 @@ loc_45D80:
 sub_45DA4:
                 
                 movem.l d1-d4/a1-a3,-(sp)
-                lea     byte_45C6A(pc), a3
+                lea     table_45C6A(pc), a3
                 movea.l a0,a1
                 lsl.w   #2,d2
                 adda.w  d2,a1
@@ -675,29 +683,29 @@ sub_45DA4:
                 move.b  $120(a1),d4
                 btst    #0,d1
                 bne.s   loc_45DD6
-                lsr.w   #4,d2
-                lsr.w   #4,d4
+                lsr.w   #NIBBLE_SHIFT_COUNT,d2
+                lsr.w   #NIBBLE_SHIFT_COUNT,d4
                 bra.s   loc_45DDE
 loc_45DD6:
                 
-                andi.b  #$F,d2
-                andi.b  #$F,d4
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,d4
 loc_45DDE:
                 
                 btst    #0,d3
                 bne.s   loc_45DFA
-                lsl.w   #4,d2
-                andi.b  #$F,(a2)
+                lsl.w   #NIBBLE_SHIFT_COUNT,d2
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,(a2)
                 add.b   d2,(a2)
-                lsl.w   #4,d4
-                andi.b  #$F,$120(a2)
+                lsl.w   #NIBBLE_SHIFT_COUNT,d4
+                andi.b  #BYTE_LOWER_NIBBLE_MASK,$120(a2)
                 add.b   d4,$120(a2)
                 bra.s   loc_45E0A
 loc_45DFA:
                 
-                andi.b  #$F0,(a2)
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,(a2)
                 add.b   d2,(a2)
-                andi.b  #$F0,$120(a2)
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,$120(a2)
                 add.b   d4,$120(a2)
 loc_45E0A:
                 
@@ -713,8 +721,8 @@ loc_45E0A:
 sub_45E10:
                 
                 movem.l d0-d3/d7-a0,-(sp)
-                moveq   #$FFFFFFFF,d1
-                moveq   #$FFFFFFFF,d2
+                moveq   #-1,d1
+                moveq   #-1,d2
                 move.l  #$FFFFFFF,d3
 loc_45E1E:
                 
@@ -737,7 +745,7 @@ loc_45E36:
                 and.l   d1,(a0)+
                 and.l   d2,(a0)+
                 dbf     d7,loc_45E36
-				
+                
                 movem.l (sp)+,d0-d3/d7-a0
                 rts
 

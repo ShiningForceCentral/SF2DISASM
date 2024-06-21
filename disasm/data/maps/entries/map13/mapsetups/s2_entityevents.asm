@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map13\mapsetups\s2_entityevents.asm :
 ; 0x5801E..0x5814C : 
 ms_map13_EntityEvents:
-                msEntityEvent 9, UP, Map13_EntityEvent0-ms_map13_EntityEvents
+                msEntityEvent ALLY_GERHALT, UP, Map13_EntityEvent0-ms_map13_EntityEvents
                 msEntityEvent 128, UP, Map13_EntityEvent1-ms_map13_EntityEvents
                 msEntityEvent 129, UP, Map13_EntityEvent2-ms_map13_EntityEvents
                 msEntityEvent 130, RIGHT, Map13_EntityEvent3-ms_map13_EntityEvents
@@ -75,8 +75,8 @@ return_5808E:
 
 Map13_EntityEvent4:
                 
-                move.b  #4,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_POLCA,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map13_EntityEvent4
@@ -87,8 +87,8 @@ Map13_EntityEvent4:
 
 Map13_EntityEvent5:
                 
-                move.b  #$13,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_POLCA,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map13_EntityEvent5
@@ -121,7 +121,7 @@ return_580C4:
 
 Map13_EntityEvent7:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map13_EntityEvent7

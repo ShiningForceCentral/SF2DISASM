@@ -1,24 +1,24 @@
 
 ; ASM FILE code\common\menus\menuengine_02.asm :
-; 0x110A4..0x114BE : Menu engine
-pt_SpellLevelTilesLayouts:
-                dc.l SpellLevelTilesLayout1
-                dc.l SpellLevelTilesLayout1
-                dc.l SpellLevelTilesLayout1
-                dc.l SpellLevelTilesLayout1
-                dc.l SpellLevelTilesLayout1in2
-                dc.l SpellLevelTilesLayout2
-                dc.l SpellLevelTilesLayout2
-                dc.l SpellLevelTilesLayout2
-                dc.l SpellLevelTilesLayout1in3
-                dc.l SpellLevelTilesLayout2in3
-                dc.l SpellLevelTilesLayout3
-                dc.l SpellLevelTilesLayout3
-                dc.l SpellLevelTilesLayout1in4
-                dc.l SpellLevelTilesLayout2in4
-                dc.l SpellLevelTilesLayout3in4
-                dc.l SpellLevelTilesLayout4
-SpellLevelTilesLayout1:
+; 0x110A4..0x114BE : Menu engine, part 2
+pt_layouts_SpellLevelIndicator:
+                dc.l layout_SpellLevelIndicator
+                dc.l layout_SpellLevelIndicator
+                dc.l layout_SpellLevelIndicator
+                dc.l layout_SpellLevelIndicator
+                dc.l layout_SpellLevelIndicator_1in2
+                dc.l layout_SpellLevelIndicator_2
+                dc.l layout_SpellLevelIndicator_2
+                dc.l layout_SpellLevelIndicator_2
+                dc.l layout_SpellLevelIndicator_1in3
+                dc.l layout_SpellLevelIndicator_2in3
+                dc.l layout_SpellLevelIndicator_3
+                dc.l layout_SpellLevelIndicator_3
+                dc.l layout_SpellLevelIndicator_1in4
+                dc.l layout_SpellLevelIndicator_2in4
+                dc.l layout_SpellLevelIndicator_3in4
+                dc.l layout_SpellLevelIndicator_4
+layout_SpellLevelIndicator:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;
@@ -32,7 +32,7 @@ SpellLevelTilesLayout1:
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 
-SpellLevelTilesLayout2:
+layout_SpellLevelIndicator_2:
                 vdpBaseTile SPELL_LEVEL1
                 vdpBaseTile SPELL_LEVEL3
                 vdpBaseTile SPELL_LEVEL1|MIRROR
@@ -40,7 +40,7 @@ SpellLevelTilesLayout2:
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 
-SpellLevelTilesLayout3:
+layout_SpellLevelIndicator_3:
                 vdpBaseTile SPELL_LEVEL1
                 vdpBaseTile SPELL_LEVEL3
                 vdpBaseTile SPELL_LEVEL1|MIRROR
@@ -48,7 +48,7 @@ SpellLevelTilesLayout3:
                 vdpBaseTile SPELL_LEVEL2
                 vdpBaseTile SPACE
                 
-SpellLevelTilesLayout4:
+layout_SpellLevelIndicator_4:
                 vdpBaseTile SPELL_LEVEL1
                 vdpBaseTile SPELL_LEVEL3
                 vdpBaseTile SPELL_LEVEL1|MIRROR
@@ -56,7 +56,7 @@ SpellLevelTilesLayout4:
                 vdpBaseTile SPELL_LEVEL3
                 vdpBaseTile SPELL_LEVEL1|MIRROR
                 
-SpellLevelTilesLayout1in2:
+layout_SpellLevelIndicator_1in2:
                 vdpBaseTile SPELL_LEVEL1
                 vdpBaseTile SPELL_LEVEL6
                 vdpBaseTile SPELL_LEVEL5
@@ -64,7 +64,7 @@ SpellLevelTilesLayout1in2:
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 
-SpellLevelTilesLayout2in3:
+layout_SpellLevelIndicator_2in3:
                 vdpBaseTile SPELL_LEVEL1
                 vdpBaseTile SPELL_LEVEL3
                 vdpBaseTile SPELL_LEVEL1|MIRROR
@@ -72,7 +72,7 @@ SpellLevelTilesLayout2in3:
                 vdpBaseTile SPELL_LEVEL8
                 vdpBaseTile SPACE
                 
-SpellLevelTilesLayout3in4:
+layout_SpellLevelIndicator_3in4:
                 vdpBaseTile SPELL_LEVEL1
                 vdpBaseTile SPELL_LEVEL3
                 vdpBaseTile SPELL_LEVEL1|MIRROR
@@ -80,7 +80,7 @@ SpellLevelTilesLayout3in4:
                 vdpBaseTile SPELL_LEVEL6
                 vdpBaseTile SPELL_LEVEL5
                 
-SpellLevelTilesLayout1in3:
+layout_SpellLevelIndicator_1in3:
                 vdpBaseTile SPELL_LEVEL1
                 vdpBaseTile SPELL_LEVEL6
                 vdpBaseTile SPELL_LEVEL5
@@ -88,7 +88,7 @@ SpellLevelTilesLayout1in3:
                 vdpBaseTile SPELL_LEVEL8
                 vdpBaseTile SPACE
                 
-SpellLevelTilesLayout2in4:
+layout_SpellLevelIndicator_2in4:
                 vdpBaseTile SPELL_LEVEL1
                 vdpBaseTile SPELL_LEVEL3
                 vdpBaseTile SPELL_LEVEL1|MIRROR
@@ -96,7 +96,7 @@ SpellLevelTilesLayout2in4:
                 vdpBaseTile SPELL_LEVEL7
                 vdpBaseTile SPELL_LEVEL5
                 
-SpellLevelTilesLayout1in4:
+layout_SpellLevelIndicator_1in4:
                 vdpBaseTile SPELL_LEVEL1
                 vdpBaseTile SPELL_LEVEL6
                 vdpBaseTile SPELL_LEVEL5
@@ -104,25 +104,28 @@ SpellLevelTilesLayout1in4:
                 vdpBaseTile SPELL_LEVEL7
                 vdpBaseTile SPELL_LEVEL5
                 
-pt_MenuTiles:   dc.l $85010204          ; starting with references to uncompressed main menu tiles
+pt_tiles_Menu:  dc.l $85010204          ; starting with references to uncompressed main menu tiles
                 dc.l $80010203
                 dc.l $80010204
-                dc.l p_MenuTiles_Item
-                dc.l p_MenuTiles_BattleField
-                dc.l p_Menutiles_Church
-                dc.l p_MenuTiles_Shop
-                dc.l p_MenuTiles_Caravan
-                dc.l p_MenuTiles_Depot
-pt_MenuOptions: dc.l pt_FieldMenu_Names
-                dc.l pt_BattleMenu_Names
-                dc.l pt_BattleMenuOverItem_Names
-                dc.l pt_ItemMenu_Names
-                dc.l pt_BattlefieldMenu_Names
-                dc.l pt_ChurchMenu_Names
-                dc.l pt_ShopMenu_Names
-                dc.l pt_CaravanMenu_Names
-                dc.l pt_DepotMenu_Names
-pt_FieldMenu_Names:
+                dc.l p_tiles_ItemMenu
+                dc.l p_tiles_BattlefieldMenu
+                dc.l p_tiles_ChurchMenu
+                dc.l p_tiles_ShopMenu
+                dc.l p_tiles_CaravanMenu
+                dc.l p_tiles_DepotMenu
+                
+pt_MenuOptionNames:
+                dc.l pt_FieldMenuNames
+                dc.l pt_BattleMenuWithStayNames
+                dc.l pt_BattleMenuWithSearchNames
+                dc.l pt_ItemMenuNames
+                dc.l pt_BattlefieldMenuNames
+                dc.l pt_ChurchMenuNames
+                dc.l pt_ShopMenuNames
+                dc.l pt_CaravanMenuNames
+                dc.l pt_DepotMenuNames
+                
+pt_FieldMenuNames:
                 dc.l aMember            
                 dc.l aMagic             
                 dc.l aItem              
@@ -131,8 +134,9 @@ aMember:        dc.b 'MEMBER',0
 aMagic:         dc.b 'MAGIC',0
 aItem:          dc.b 'ITEM',0
 aSearch:        dc.b 'SEARCH',0
-                dc.b $FF
-pt_BattleMenu_Names:
+                align
+                
+pt_BattleMenuWithStayNames:
                 dc.l aAttack_0          
                 dc.l aMagic_0           
                 dc.l aItem_0            
@@ -141,8 +145,9 @@ aAttack_0:      dc.b 'ATTACK',0
 aMagic_0:       dc.b 'MAGIC',0
 aItem_0:        dc.b 'ITEM',0
 aStay:          dc.b 'STAY',0
-                dc.b $FF
-pt_BattleMenuOverItem_Names:
+                align
+                
+pt_BattleMenuWithSearchNames:
                 dc.l aAttack_1          
                 dc.l aMagic_1           
                 dc.l aItem_1            
@@ -151,8 +156,9 @@ aAttack_1:      dc.b 'ATTACK',0
 aMagic_1:       dc.b 'MAGIC',0
 aItem_1:        dc.b 'ITEM',0
 aSearch_0:      dc.b 'SEARCH',0
-                dc.b $FF
-pt_ItemMenu_Names:
+                align
+                
+pt_ItemMenuNames:
                 dc.l aUse               
                 dc.l aGive              
                 dc.l aEquip             
@@ -161,7 +167,9 @@ aUse:           dc.b 'USE',0
 aGive:          dc.b 'GIVE',0
 aEquip:         dc.b 'EQUIP',0
 aDrop:          dc.b 'DROP',0
-pt_BattlefieldMenu_Names:
+                align
+                
+pt_BattlefieldMenuNames:
                 dc.l aMember_0          
                 dc.l aMap               
                 dc.l aSpeed_0           
@@ -170,7 +178,9 @@ aMember_0:      dc.b 'MEMBER',0
 aMap:           dc.b 'MAP',0
 aSpeed_0:       dc.b 'SPEED',0
 aQuit:          dc.b 'QUIT',0
-pt_ChurchMenu_Names:
+                align
+                
+pt_ChurchMenuNames:
                 dc.l aRaise             
                 dc.l aCure              
                 dc.l aPromo_            
@@ -179,8 +189,9 @@ aRaise:         dc.b 'RAISE',0
 aCure:          dc.b 'CURE',0
 aPromo_:        dc.b 'PROMO.',0
 aSave:          dc.b 'SAVE',0
-                dc.b $FF
-pt_ShopMenu_Names:
+                align
+                
+pt_ShopMenuNames:
                 dc.l aBuy               
                 dc.l aSell              
                 dc.l aRepair            
@@ -189,7 +200,9 @@ aBuy:           dc.b 'BUY',0
 aSell:          dc.b 'SELL',0
 aRepair:        dc.b 'REPAIR',0
 aDeals:         dc.b 'DEALS',0
-pt_CaravanMenu_Names:
+                align
+                
+pt_CaravanMenuNames:
                 dc.l aJoin              
                 dc.l aDepot             
                 dc.l aItem_2            
@@ -198,7 +211,9 @@ aJoin:          dc.b 'JOIN',0
 aDepot:         dc.b 'DEPOT',0
 aItem_2:        dc.b 'ITEM',0
 aPurge:         dc.b 'PURGE',0
-pt_DepotMenu_Names:
+                align
+                
+pt_DepotMenuNames:
                 dc.l aLook              
                 dc.l aDepos_            
                 dc.l aDerive            
@@ -207,7 +222,10 @@ aLook:          dc.b 'LOOK',0
 aDepos_:        dc.b 'DEPOS.',0
 aDerive:        dc.b 'DERIVE',0
 aDrop_0:        dc.b 'DROP',0
-MenuHBarTiles:  dc.b 2
+                align
+                
+tiles_DiamondMenuBorder1:
+                dc.b 2
                 dc.b $22
                 dc.b $22
                 dc.b $22
@@ -255,7 +273,8 @@ MenuHBarTiles:  dc.b 2
                 dc.b $22
                 dc.b $22
                 dc.b $22
-byte_11336:     dc.b 2
+tiles_DiamondMenuBorder2:
+                dc.b 2
                 dc.b $22
                 dc.b $22
                 dc.b $22
@@ -303,7 +322,8 @@ byte_11336:     dc.b 2
                 dc.b $22
                 dc.b $22
                 dc.b $22
-byte_11366:     dc.b $22
+tiles_DiamondMenuBorder3:
+                dc.b $22
                 dc.b $22
                 dc.b $22
                 dc.b $22
@@ -351,7 +371,8 @@ byte_11366:     dc.b $22
                 dc.b $22
                 dc.b $22
                 dc.b $20
-byte_11396:     dc.b $22
+tiles_DiamondMenuBorder4:
+                dc.b $22
                 dc.b $22
                 dc.b $22
                 dc.b $22
@@ -403,17 +424,17 @@ byte_11396:     dc.b $22
 ; =============== S U B R O U T I N E =======================================
 
 
-CreateBattleEquipWindow:
+OpenBattleEquipWindow:
                 
                 movem.l d0-a2,-(sp)
-                move.w  #$A09,d0
+                move.w  #WINDOW_BATTLEEQUIP_SIZE,d0
                 move.w  #$F612,d1
                 jsr     (CreateWindow).w
                 move.w  d0,((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w
-                lea     BattleEquipWindowLayout(pc), a0
-                move.w  #$B4,d7 
+                lea     layout_BattleEquipWindow(pc), a0
+                move.w  #180,d7
                 jsr     (CopyBytes).w   
-                bsr.w   DrawBattleEquipWindowStats
+                bsr.w   WriteBattleEquipWindowLayout
                 move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
                 move.w  #$212,d1
                 move.w  #4,d2
@@ -422,23 +443,7 @@ CreateBattleEquipWindow:
                 movem.l (sp)+,d0-a2
                 rts
 
-    ; End of function CreateBattleEquipWindow
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-sub_11404:
-                
-                movem.l d0-a2,-(sp)
-                bsr.w   DrawBattleEquipWindowStats
-                move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
-                move.w  #$8080,d1
-                jsr     (SetWindowDestination).w
-                movem.l (sp)+,d0-a2
-                rts
-
-    ; End of function sub_11404
+    ; End of function OpenBattleEquipWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -447,13 +452,10 @@ sub_11404:
 HideBattleEquipWindow:
                 
                 movem.l d0-a2,-(sp)
+                bsr.w   WriteBattleEquipWindowLayout
                 move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
-                move.w  #$F612,d1
-                moveq   #4,d2
-                jsr     (MoveWindowWithSfx).w
-                jsr     (WaitForWindowMovementEnd).w
-                move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
-                jsr     (ClearWindowAndUpdateEndPointer).w
+                move.w  #$8080,d1
+                jsr     (SetWindowDestination).w
                 movem.l (sp)+,d0-a2
                 rts
 
@@ -462,44 +464,63 @@ HideBattleEquipWindow:
 
 ; =============== S U B R O U T I N E =======================================
 
-windowTilesAddress = -4
 
-DrawBattleEquipWindowStats:
+CloseBattleEquipWindow:
+                
+                movem.l d0-a2,-(sp)
+                move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
+                move.w  #$F612,d1
+                moveq   #4,d2
+                jsr     (MoveWindowWithSfx).w
+                jsr     (WaitForWindowMovementEnd).w
+                move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
+                jsr     (DeleteWindow).w
+                movem.l (sp)+,d0-a2
+                rts
+
+    ; End of function CloseBattleEquipWindow
+
+
+; =============== S U B R O U T I N E =======================================
+
+windowLayoutStartAddress = -4
+
+WriteBattleEquipWindowLayout:
                 
                 link    a6,#-4
                 move.w  ((BATTLE_EQUIP_WINDOW_SLOT-$1000000)).w,d0
                 move.w  #WINDOW_BATTLEEQUIP_STATS_TILE_COORDS,d1
                 jsr     (GetWindowTileAddress).w
-                move.l  a1,windowTilesAddress(a6)
+                move.l  a1,windowLayoutStartAddress(a6)
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentATT
+                jsr     j_GetCurrentAtt
                 move.w  d1,d0
-                movea.l windowTilesAddress(a6),a1
+                movea.l windowLayoutStartAddress(a6),a1
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue  
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentDEF
+                jsr     j_GetCurrentDef
                 move.w  d1,d0
-                movea.l windowTilesAddress(a6),a1
-                adda.w  #$28,a1 
+                movea.l windowLayoutStartAddress(a6),a1
+                adda.w  #40,a1          ; second stat offset
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue  
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentAGI
+                jsr     j_GetCurrentAgi
                 move.w  d1,d0
-                movea.l windowTilesAddress(a6),a1
-                adda.w  #$50,a1 
+                movea.l windowLayoutStartAddress(a6),a1
+                adda.w  #80,a1          ; third stat offset
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue  
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
-                jsr     j_GetCurrentMOV
+                jsr     j_GetCurrentMov
                 move.w  d1,d0
-                movea.l windowTilesAddress(a6),a1
-                adda.w  #$78,a1 
+                movea.l windowLayoutStartAddress(a6),a1
+                adda.w  #120,a1         ; fourth stat offset
                 moveq   #STATS_DIGITS_NUMBER,d7
                 bsr.w   WriteStatValue  
                 unlk    a6
                 rts
 
-    ; End of function DrawBattleEquipWindowStats
+    ; End of function WriteBattleEquipWindowLayout
 

@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\allies\growthcurves.asm :
 ; 0x1EE02C..0x1EE270 : Stat growth curves
-tbl_StatGrowthCurves:
+table_StatGrowthCurves:
                 
 ; 29 entries per curve (one per level), 2 bytes each :
 ;       a : Total fraction of growth expected to have been gained by this level = a/256

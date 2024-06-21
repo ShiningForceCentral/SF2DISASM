@@ -1,7 +1,7 @@
 
 ; ASM FILE code\common\tech\graphics\specialspritesanims.asm :
 ; 0x2784C..0x2791C : Special Sprites Animations
-word_2784C:     dc.w $5C
+table_2784C:    dc.w $5C
                 dc.b $A
                 dc.b $3D
                 dc.w $6578
@@ -21,7 +21,7 @@ word_2784C:     dc.w $5C
                 dc.b 0
                 dc.w $6593
                 dc.w $8C
-word_2786C:     dc.w $5C
+table_2786C:    dc.w $5C
                 dc.b $A
                 dc.b $3D
                 dc.w $659C

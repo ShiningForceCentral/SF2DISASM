@@ -4,34 +4,40 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = window slot
+;     d1.w = 
+;     d2.w = 
+; 
+; Out: d0.w = -1 if pressed B
+
 var_12 = -12
 var_10 = -10
 var_8 = -8
-var_6 = -6
+windowSlot = -6
 var_4 = -4
 
-WitchMainMenu:
+ExecuteWitchMainMenu:
                 
                 movem.l d1-a1,-(sp)
                 link    a6,#-16
-                andi.w  #$F,d0
+                andi.w  #BYTE_LOWER_NIBBLE_MASK,d0
                 move.w  d2,var_12(a6)
                 beq.w   loc_16756
                 move.w  d1,var_10(a6)
-                move.w  #$A,var_8(a6)
+                move.w  #10,var_8(a6)
                 movem.w d0,-(sp)
                 move.w  #$1C0C,d0
                 move.w  #$2001,d1
                 jsr     (CreateWindow).l
-                move.w  d0,var_6(a6)
+                move.w  d0,windowSlot(a6)
                 move.l  a1,var_4(a6)
-                movea.l (p_plt_WitchChoice).l,a0
+                movea.l (p_palette_WitchChoice).l,a0
                 lea     (PALETTE_2_CURRENT).l,a1
-                move.w  #$20,d7 
+                move.w  #CRAM_PALETTE_SIZE,d7
                 jsr     (CopyBytes).w   
                 jsr     (ApplyVIntCramDma).w
                 bsr.w   sub_1679E
-                move.w  var_6(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$202,d1
                 jsr     (SetWindowDestination).l
                 jsr     (WaitForVInt).w
@@ -40,7 +46,7 @@ loc_166C2:
                 
                 bsr.w   sub_1679E
                 movem.w d0,-(sp)
-                move.w  var_6(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).l
                 movem.w (sp)+,d0
@@ -52,7 +58,7 @@ loc_166EA:
                 
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_166F8
-                moveq   #$FFFFFFFF,d3
+                moveq   #-1,d3
                 bsr.w   sub_1678A
 loc_166F8:
                 
@@ -64,7 +70,7 @@ loc_16706:
                 
                 btst    #INPUT_BIT_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_16714
-                moveq   #$FFFFFFFF,d3
+                moveq   #-1,d3
                 bsr.w   sub_1678A
 loc_16714:
                 
@@ -87,23 +93,23 @@ loc_16752:
                 bra.w   loc_166C2
 loc_16756:
                 
-                move.w  #$FFFF,d0
+                move.w  #-1,d0
 byte_1675A:
                 
                 sndCom  SFX_VALIDATION
                 movem.w d0,-(sp)
-                move.w  var_6(a6),d0
+                move.w  windowSlot(a6),d0
                 move.w  #$2001,d1
                 jsr     (SetWindowDestination).l
                 jsr     (WaitForVInt).w
-                move.w  var_6(a6),d0
-                jsr     (ClearWindowAndUpdateEndPointer).l
+                move.w  windowSlot(a6),d0
+                jsr     (DeleteWindow).l
                 movem.w (sp)+,d0
                 unlk    a6
                 movem.l (sp)+,d1-a1
                 rts
 
-    ; End of function WitchMainMenu
+    ; End of function ExecuteWitchMainMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -111,7 +117,7 @@ byte_1675A:
 var_12 = -12
 var_10 = -10
 var_8 = -8
-var_6 = -6
+windowSlot = -6
 var_4 = -4
 
 sub_1678A:
@@ -133,7 +139,7 @@ sub_1678A:
 var_12 = -12
 var_10 = -10
 var_8 = -8
-var_6 = -6
+windowSlot = -6
 var_4 = -4
 
 sub_1679E:
@@ -187,124 +193,112 @@ return_16808:
 var_12 = -12
 var_10 = -10
 var_8 = -8
-var_6 = -6
+windowSlot = -6
 var_4 = -4
 
 DrawWitchMenuBubble:
                 
-                movea.l (p_WitchBubbleAnimation).l,a0
+                module
+                movea.l (p_table_WitchBubbleAnimation).l,a0
                 movea.l var_4(a6),a1
                 cmp.b   d0,d3
-                bne.s   loc_1683A
+                bne.s   @loc_3
                 move.w  var_8(a6),d7
                 cmpi.w  #5,d7
-                blt.s   loc_16826
+                blt.s   @loc_1
                 addi.w  #$50,d2 
-loc_16826:
+@loc_1:
                 
                 cmpi.w  #$A,d7
-                blt.s   loc_16830
+                blt.s   @loc_2
                 addi.w  #$50,d2 
-loc_16830:
+@loc_2:
                 
                 cmpi.w  #$F,d7
-                blt.s   loc_1683A
+                blt.s   @loc_3
                 subi.w  #$50,d2 
-loc_1683A:
+@loc_3:
                 
                 adda.w  d2,a0
                 adda.w  d1,a1
                 movem.l a1,-(sp)
                 moveq   #4,d7
-loc_16844:
+@loc_4:
                 
                 moveq   #7,d5
-loc_16846:
+@loc_5:
                 
                 move.w  (a0)+,(a1)
                 addi.w  #-$5D00,(a1)+
-                dbf     d5,loc_16846
+                dbf     d5,@loc_5
+                
                 lea     $28(a1),a1
-                dbf     d7,loc_16844
+                dbf     d7,@loc_4
+                
                 movem.l (sp)+,a1
                 cmpi.w  #2,d3
-                blt.s   WitchPage0_FileOptions
+                blt.s   @Page0_FileOptions
                 addq.l  #2,a1
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D3 = bubble number
-
-WitchPage0_FileOptions:
+@Page0_FileOptions:
                 
                 move.w  var_10(a6),d1
-                bne.w   WitchPage1_NewFileNames
+                bne.w   @Page1_NewFileNames
                 adda.w  #$72,a1 
-                lsl.w   #2,d3
-                movea.l pt_s_WitchMenu(pc,d3.w),a0
+                lsl.w   #INDEX_SHIFT_COUNT,d3
+                movea.l @pt_s_WitchMenu(pc,d3.w),a0
                 moveq   #5,d7
                 bsr.w   WriteBubbleText
                 rts
-
-    ; End of function DrawWitchMenuBubble
-	
-pt_s_WitchMenu:
+@pt_s_WitchMenu:
                 
-                dc.l aStart             
-                dc.l aCont_             
-                dc.l aDel_              
-                dc.l aCopy              
-aStart:
+                dc.l @aStart            
+                dc.l @aCont_            
+                dc.l @aDel_             
+                dc.l @aCopy             
+@aStart:
                 
                 dc.b 'START',0
-aCont_:
+@aCont_:
                 
                 dc.b 'CONT.',0
-aDel_:
+@aDel_:
                 
                 dc.b 'DEL.',0
-aCopy:
+@aCopy:
                 
                 dc.b 'COPY',0
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D3 = bubble number
-
-WitchPage1_NewFileNames:
+@Page1_NewFileNames:
                 
                 subq.w  #1,d1
-                bne.w   WitchPage2_LoadedFileNames
+                bne.w   @Page2_LoadedFileNames
                 adda.w  #$72,a1 
-                lsl.w   #2,d3
-                movea.l pt_s_DataMenu(pc,d3.w),a0
+                lsl.w   #INDEX_SHIFT_COUNT,d3
+                movea.l @pt_s_DataMenu(pc,d3.w),a0
                 moveq   #5,d7
                 bsr.w   WriteBubbleText
                 rts
-
-    ; End of function WitchPage1_NewFileNames
-
-pt_s_DataMenu:  dc.l aData1             
-                dc.l aData1             
-                dc.l aData2             
-                dc.l aData2             
-aData1:         dc.b 'DATA1',0
-aData2:         dc.b 'DATA2',0
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D3 = bubble number
-
-WitchPage2_LoadedFileNames:
+@pt_s_DataMenu:
                 
-                subq.w  #1,d1
-                bne.w   WitchPage3_Difficulties
+                dc.l @aData1            
+                dc.l @aData1            
+                dc.l @aData2            
+                dc.l @aData2            
+@aData1:
+                
+                dc.b 'DATA1',0
+@aData2:
+                
+                dc.b 'DATA2',0
+@Page2_LoadedFileNames:
+                
+                subq.w  #1,d1           ; related to with menu bubble
+                bne.w   @Page3_Difficulties
                 movem.l d7-a1,-(sp)
                 lea     (SAVE1_DATA).l,a0
                 cmpi.w  #2,d3
-                blt.s   loc_168F4
+                blt.s   @loc_17
                 lea     (SAVE2_DATA).l,a0
-loc_168F4:
+@loc_17:
                 
                 lea     (FF8804_LOADING_SPACE).l,a1
                 moveq   #9,d7
@@ -313,6 +307,7 @@ loc_168F4:
                 move.b  (a0),(a1)+
                 addq.l  #2,a0
                 dbf     d7,@CopyName_Loop
+                
                 movem.l (sp)+,d7-a1
                 adda.w  #$72,a1 
                 move.l  a1,-(sp)
@@ -322,35 +317,28 @@ loc_168F4:
                 bsr.w   WriteBubbleText
                 movea.l (sp)+,a1
                 cmpi.b  #0,(byte_FF8809).l
-                beq.s   return_16940
+                beq.s   @Return
                 move.b  #$2D,9(a1) 
                 adda.w  #$38,a1 
                 lsl.w   #2,d3
                 lea     (TARGETS_REACHABLE_BY_ITEM_NUMBER).l,a0
                 moveq   #4,d7
                 bsr.w   WriteBubbleText
-return_16940:
+@Return:
                 
                 rts
-
-    ; End of function WitchPage2_LoadedFileNames
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D3 = bubble number
-
-WitchPage3_Difficulties:
+@Page3_Difficulties:
                 
                 adda.w  #$72,a1 
-                lsl.w   #2,d3
+                lsl.w   #INDEX_SHIFT_COUNT,d3
                 movea.l pt_s_DifficultyMenu(pc,d3.w),a0
                 moveq   #5,d7
                 bsr.w   WriteBubbleText
                 rts
 
-    ; End of function WitchPage3_Difficulties
+    ; End of function DrawWitchMenuBubble
 
+                modend
 pt_s_DifficultyMenu:
                 dc.l aNorm_             
                 dc.l aHard              
@@ -373,13 +361,14 @@ WriteBubbleText:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movem.l (sp)+,d7/a1
                 subq.w  #1,d7
-loc_16990:
+@Loop:
                 
                 andi.w  #$9FFF,(a1,d1.w)
                 ori.w   #$2000,(a1,d1.w)
                 andi.w  #$9FFF,(a1)
                 ori.w   #$2000,(a1)+
-                dbf     d7,loc_16990
+                dbf     d7,@Loop
+                
                 movem.w (sp)+,d0
                 rts
 

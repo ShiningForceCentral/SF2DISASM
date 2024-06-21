@@ -16,7 +16,7 @@ ms_map38_EntityEvents:
                 msEntityEvent 139, UP, Map38_EntityEvent11-ms_map38_EntityEvents
                 msEntityEvent 140, UP, Map38_EntityEvent12-ms_map38_EntityEvents
                 msEntityEvent 141, UP, Map38_EntityEvent13-ms_map38_EntityEvents
-                msEntityEvent 26, UP, Map38_EntityEvent14-ms_map38_EntityEvents
+                msEntityEvent ALLY_ZYNK, UP, Map38_EntityEvent14-ms_map38_EntityEvents
                 msDefaultEntityEvent Map38_DefaultEntityEvent-ms_map38_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -227,7 +227,7 @@ return_5DCA2:
 
 Map38_EntityEvent11:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map38_EntityEvent11
@@ -238,8 +238,8 @@ Map38_EntityEvent11:
 
 Map38_EntityEvent12:
                 
-                move.b  #$D,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_ROFT,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map38_EntityEvent12
@@ -250,8 +250,8 @@ Map38_EntityEvent12:
 
 Map38_EntityEvent13:
                 
-                move.b  #$1C,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_ROFT,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map38_EntityEvent13

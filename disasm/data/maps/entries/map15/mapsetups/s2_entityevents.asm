@@ -138,8 +138,8 @@ Map15_EntityEvent8:
 
 Map15_EntityEvent9:
                 
-                move.b  #$1A,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_TRISTAN,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map15_EntityEvent9
@@ -150,7 +150,7 @@ Map15_EntityEvent9:
 
 Map15_EntityEvent10:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map15_EntityEvent10
@@ -161,8 +161,8 @@ Map15_EntityEvent10:
 
 Map15_EntityEvent11:
                 
-                move.b  #$B,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_TRISTAN,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map15_EntityEvent11

@@ -39,7 +39,7 @@ CheckSram:
                 bra.s   @Slot1
 @ClearSlot2:
                 
-                moveq   #$FFFFFFFF,d1
+                moveq   #-1,d1
                 bclr    #1,(SAVE_FLAGS).l
 @Slot1:
                 
@@ -59,7 +59,7 @@ CheckSram:
                 bra.s   @Goto_Done
 @ClearSlot1:
                 
-                moveq   #$FFFFFFFF,d0
+                moveq   #-1,d0
                 bclr    #0,(SAVE_FLAGS).l
 @Goto_Done:
                 

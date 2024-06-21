@@ -9,20 +9,20 @@ WitchSuspend:
                 
                  
                 sndCom  MUSIC_SUSPEND
-                bsr.w   InitWitchSuspendVIntFunctions
-                move.w  #$1E,((BLINK_COUNTER-$1000000)).w
+                bsr.w   InitializeWitchSuspendVIntFunctions
+                move.w  #30,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
-                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
+                move.b  #-1,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 txt     240             ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
                 clsTxt
                 clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
-                bsr.w   sub_7CDC
+                bsr.w   ReinitializeWitchLayout
                 jsr     j_SuspendGame
                 move.w  #600,d0         ; wait for 10 seconds, or until player presses Start before restarting the game
 @WaitForStartInput:
                 
                 bsr.w   WaitForVInt
-                btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
+                btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 dbne    d0,@WaitForStartInput
                 
                 sndCom  SOUND_COMMAND_FADE_OUT
@@ -30,10 +30,19 @@ WitchSuspend:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_CLEAR
                 bsr.w   DisableDisplayAndInterrupts
+
+    ; End of function WitchSuspend
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+ResetGame:
+                
                 move    #$2700,sr
-                movea.l (InitStack).w,sp
+                movea.l (InitialStack).w,sp
                 movea.l (p_Start).w,a0  
                 jmp     (a0)
 
-    ; End of function WitchSuspend
+    ; End of function ResetGame
 

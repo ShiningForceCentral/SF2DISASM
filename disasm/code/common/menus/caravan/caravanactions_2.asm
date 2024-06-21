@@ -9,34 +9,34 @@ PopulateGenericListWithMembersList:
                 
                 movem.l d7-a1,-(sp)
                 jsr     j_UpdateForce
-                tst.w   d1
-                bne.s   loc_228F0
+                tst.w   d1              ; all members
+                bne.s   @CheckMemberGroup
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                bra.s   loc_22908
-loc_228F0:
+                bra.s   @PopulateList
+@CheckMemberGroup:
                 
                 cmpi.w  #1,d1
-                bne.s   loc_22900
+                bne.s   @ReserveMembers
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-                bra.s   loc_22908
-loc_22900:
+                bra.s   @PopulateList
+@ReserveMembers:
                 
                 lea     ((RESERVE_MEMBERS-$1000000)).w,a0
                 move.w  ((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-loc_22908:
+@PopulateList:
                 
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-                bcs.w   loc_22920
-loc_2291A:
+                bcs.w   @SkipLoop
+@PopulateList_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_2291A
-loc_22920:
+                dbf     d7,@PopulateList_Loop
+@SkipLoop:
                 
                 movem.l (sp)+,d7-a1
                 rts
@@ -76,18 +76,18 @@ CopyCaravanItems:
 ; Return CCR carry-bit set if true.
 
 
-IsItemInSlotEquippedAndCursed?:
+IsItemInSlotEquippedAndCursed:
                 
                 movem.l d1,-(sp)
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 bclr    #ITEMENTRY_BIT_EQUIPPED,d1
                 beq.s   @NotEquipped
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   @NotCursed
                 sndCom  MUSIC_CURSED_ITEM
                 move.w  #60,d0
                 jsr     (Sleep).w       
-                move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d1,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #30,d1          ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 bsr.w   PlayPreviousMusicAfterCurrentOne
@@ -103,7 +103,7 @@ IsItemInSlotEquippedAndCursed?:
                 movem.l (sp)+,d1
                 rts
 
-    ; End of function IsItemInSlotEquippedAndCursed?
+    ; End of function IsItemInSlotEquippedAndCursed
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -112,7 +112,7 @@ IsItemInSlotEquippedAndCursed?:
 PlayPreviousMusicAfterCurrentOne:
                 
                 move.w  d0,-(sp)
-                move.w  #$FB,d0 
+                move.w  #SOUND_COMMAND_PLAY_PREVIOUS_MUSIC,d0
                 jsr     (PlayMusicAfterCurrentOne).w
                 move.w  (sp)+,d0
                 rts
@@ -125,13 +125,13 @@ PlayPreviousMusicAfterCurrentOne:
 ; Is item d1.w unsellable? Return CCR carry-bit set if true.
 
 
-IsItemUnsellable?:
+IsItemUnsellable:
                 
                 movem.l d1/a0,-(sp)
                 jsr     j_GetItemDefAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @NotUnsellable
-                move.w  d1,((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  d1,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #37,d1          ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 ori     #1,ccr
@@ -144,5 +144,5 @@ IsItemUnsellable?:
                 movem.l (sp)+,d1/a0
                 rts
 
-    ; End of function IsItemUnsellable?
+    ; End of function IsItemUnsellable
 

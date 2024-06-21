@@ -2,32 +2,32 @@
 ; ASM FILE data\maps\entries\map37\mapsetups\s2_entityevents.asm :
 ; 0x5F86C..0x5F9D2 : 
 ms_map37_EntityEvents:
-                msEntityEvent 1, DOWN, Map37_EntityEvent0-ms_map37_EntityEvents
-                msEntityEvent 2, DOWN, Map37_EntityEvent1-ms_map37_EntityEvents
-                msEntityEvent 3, DOWN, Map37_EntityEvent2-ms_map37_EntityEvents
-                msEntityEvent 4, DOWN, Map37_EntityEvent3-ms_map37_EntityEvents
-                msEntityEvent 5, DOWN, Map37_EntityEvent4-ms_map37_EntityEvents
-                msEntityEvent 6, DOWN, Map37_EntityEvent5-ms_map37_EntityEvents
-                msEntityEvent 7, DOWN, Map37_EntityEvent6-ms_map37_EntityEvents
-                msEntityEvent 8, DOWN, Map37_EntityEvent7-ms_map37_EntityEvents
-                msEntityEvent 9, DOWN, Map37_EntityEvent8-ms_map37_EntityEvents
-                msEntityEvent 10, DOWN, Map37_EntityEvent9-ms_map37_EntityEvents
-                msEntityEvent 11, DOWN, Map37_EntityEvent10-ms_map37_EntityEvents
-                msEntityEvent 12, DOWN, Map37_EntityEvent11-ms_map37_EntityEvents
-                msEntityEvent 13, DOWN, Map37_EntityEvent12-ms_map37_EntityEvents
-                msEntityEvent 14, DOWN, Map37_EntityEvent13-ms_map37_EntityEvents
-                msEntityEvent 15, DOWN, Map37_EntityEvent14-ms_map37_EntityEvents
-                msEntityEvent 16, DOWN, Map37_EntityEvent15-ms_map37_EntityEvents
-                msEntityEvent 17, DOWN, Map37_EntityEvent16-ms_map37_EntityEvents
-                msEntityEvent 18, DOWN, Map37_EntityEvent17-ms_map37_EntityEvents
-                msEntityEvent 19, DOWN, Map37_EntityEvent18-ms_map37_EntityEvents
-                msEntityEvent 20, DOWN, Map37_EntityEvent19-ms_map37_EntityEvents
-                msEntityEvent 21, DOWN, Map37_EntityEvent20-ms_map37_EntityEvents
-                msEntityEvent 22, DOWN, Map37_EntityEvent21-ms_map37_EntityEvents
-                msEntityEvent 23, DOWN, Map37_EntityEvent22-ms_map37_EntityEvents
-                msEntityEvent 24, DOWN, Map37_EntityEvent23-ms_map37_EntityEvents
-                msEntityEvent 26, UP, Map37_EntityEvent24-ms_map37_EntityEvents
-                msEntityEvent 29, DOWN, Map37_EntityEvent25-ms_map37_EntityEvents
+                msEntityEvent ALLY_SARAH, DOWN, Map37_EntityEvent0-ms_map37_EntityEvents
+                msEntityEvent ALLY_CHESTER, DOWN, Map37_EntityEvent1-ms_map37_EntityEvents
+                msEntityEvent ALLY_JAHA, DOWN, Map37_EntityEvent2-ms_map37_EntityEvents
+                msEntityEvent ALLY_KAZIN, DOWN, Map37_EntityEvent3-ms_map37_EntityEvents
+                msEntityEvent ALLY_SLADE, DOWN, Map37_EntityEvent4-ms_map37_EntityEvents
+                msEntityEvent ALLY_KIWI, DOWN, Map37_EntityEvent5-ms_map37_EntityEvents
+                msEntityEvent ALLY_PETER, DOWN, Map37_EntityEvent6-ms_map37_EntityEvents
+                msEntityEvent ALLY_MAY, DOWN, Map37_EntityEvent7-ms_map37_EntityEvents
+                msEntityEvent ALLY_GERHALT, DOWN, Map37_EntityEvent8-ms_map37_EntityEvents
+                msEntityEvent ALLY_LUKE, DOWN, Map37_EntityEvent9-ms_map37_EntityEvents
+                msEntityEvent ALLY_ROHDE, DOWN, Map37_EntityEvent10-ms_map37_EntityEvents
+                msEntityEvent ALLY_RICK, DOWN, Map37_EntityEvent11-ms_map37_EntityEvents
+                msEntityEvent ALLY_ELRIC, DOWN, Map37_EntityEvent12-ms_map37_EntityEvents
+                msEntityEvent ALLY_ERIC, DOWN, Map37_EntityEvent13-ms_map37_EntityEvents
+                msEntityEvent ALLY_KARNA, DOWN, Map37_EntityEvent14-ms_map37_EntityEvents
+                msEntityEvent ALLY_RANDOLF, DOWN, Map37_EntityEvent15-ms_map37_EntityEvents
+                msEntityEvent ALLY_TYRIN, DOWN, Map37_EntityEvent16-ms_map37_EntityEvents
+                msEntityEvent ALLY_JANET, DOWN, Map37_EntityEvent17-ms_map37_EntityEvents
+                msEntityEvent ALLY_HIGINS, DOWN, Map37_EntityEvent18-ms_map37_EntityEvents
+                msEntityEvent ALLY_SKREECH, DOWN, Map37_EntityEvent19-ms_map37_EntityEvents
+                msEntityEvent ALLY_TAYA, DOWN, Map37_EntityEvent20-ms_map37_EntityEvents
+                msEntityEvent ALLY_FRAYJA, DOWN, Map37_EntityEvent21-ms_map37_EntityEvents
+                msEntityEvent ALLY_JARO, DOWN, Map37_EntityEvent22-ms_map37_EntityEvents
+                msEntityEvent ALLY_GYAN, DOWN, Map37_EntityEvent23-ms_map37_EntityEvents
+                msEntityEvent ALLY_ZYNK, UP, Map37_EntityEvent24-ms_map37_EntityEvents
+                msEntityEvent ALLY_CLAUDE, DOWN, Map37_EntityEvent25-ms_map37_EntityEvents
                 msEntityEvent 128, DOWN, Map37_EntityEvent26-ms_map37_EntityEvents
                 msEntityEvent 129, RIGHT, Map37_EntityEvent27-ms_map37_EntityEvents
                 msDefaultEntityEvent Map37_DefaultEntityEvent-ms_map37_EntityEvents
@@ -37,8 +37,8 @@ ms_map37_EntityEvents:
 
 Map37_EntityEvent0:
                 
-                moveq   #1,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_SARAH,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent0
 
@@ -48,8 +48,8 @@ Map37_EntityEvent0:
 
 Map37_EntityEvent1:
                 
-                moveq   #2,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_CHESTER,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent1
 
@@ -59,8 +59,8 @@ Map37_EntityEvent1:
 
 Map37_EntityEvent2:
                 
-                moveq   #3,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_JAHA,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent2
 
@@ -70,8 +70,8 @@ Map37_EntityEvent2:
 
 Map37_EntityEvent3:
                 
-                moveq   #4,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_KAZIN,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent3
 
@@ -81,8 +81,8 @@ Map37_EntityEvent3:
 
 Map37_EntityEvent4:
                 
-                moveq   #5,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_SLADE,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent4
 
@@ -92,8 +92,8 @@ Map37_EntityEvent4:
 
 Map37_EntityEvent5:
                 
-                moveq   #6,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_KIWI,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent5
 
@@ -103,8 +103,8 @@ Map37_EntityEvent5:
 
 Map37_EntityEvent6:
                 
-                moveq   #7,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_PETER,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent6
 
@@ -114,8 +114,8 @@ Map37_EntityEvent6:
 
 Map37_EntityEvent7:
                 
-                moveq   #8,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_MAY,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent7
 
@@ -125,8 +125,8 @@ Map37_EntityEvent7:
 
 Map37_EntityEvent8:
                 
-                moveq   #9,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_GERHALT,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent8
 
@@ -136,8 +136,8 @@ Map37_EntityEvent8:
 
 Map37_EntityEvent9:
                 
-                moveq   #$A,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_LUKE,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent9
 
@@ -147,8 +147,8 @@ Map37_EntityEvent9:
 
 Map37_EntityEvent10:
                 
-                moveq   #$B,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_ROHDE,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent10
 
@@ -158,8 +158,8 @@ Map37_EntityEvent10:
 
 Map37_EntityEvent11:
                 
-                moveq   #$C,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_RICK,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent11
 
@@ -169,8 +169,8 @@ Map37_EntityEvent11:
 
 Map37_EntityEvent12:
                 
-                moveq   #$D,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_ELRIC,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent12
 
@@ -180,8 +180,8 @@ Map37_EntityEvent12:
 
 Map37_EntityEvent13:
                 
-                moveq   #$E,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_ERIC,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent13
 
@@ -191,8 +191,8 @@ Map37_EntityEvent13:
 
 Map37_EntityEvent14:
                 
-                moveq   #$F,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_KARNA,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent14
 
@@ -202,8 +202,8 @@ Map37_EntityEvent14:
 
 Map37_EntityEvent15:
                 
-                moveq   #$10,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_RANDOLF,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent15
 
@@ -213,8 +213,8 @@ Map37_EntityEvent15:
 
 Map37_EntityEvent16:
                 
-                moveq   #$11,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_TYRIN,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent16
 
@@ -224,8 +224,8 @@ Map37_EntityEvent16:
 
 Map37_EntityEvent17:
                 
-                moveq   #$12,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_JANET,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent17
 
@@ -235,8 +235,8 @@ Map37_EntityEvent17:
 
 Map37_EntityEvent18:
                 
-                moveq   #$13,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_HIGINS,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent18
 
@@ -246,8 +246,8 @@ Map37_EntityEvent18:
 
 Map37_EntityEvent19:
                 
-                moveq   #$14,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_SKREECH,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent19
 
@@ -257,8 +257,8 @@ Map37_EntityEvent19:
 
 Map37_EntityEvent20:
                 
-                moveq   #$15,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_TAYA,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent20
 
@@ -268,8 +268,8 @@ Map37_EntityEvent20:
 
 Map37_EntityEvent21:
                 
-                moveq   #$16,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_FRAYJA,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent21
 
@@ -279,8 +279,8 @@ Map37_EntityEvent21:
 
 Map37_EntityEvent22:
                 
-                moveq   #$17,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_JARO,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent22
 
@@ -290,8 +290,8 @@ Map37_EntityEvent22:
 
 Map37_EntityEvent23:
                 
-                moveq   #$18,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_GYAN,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent23
 
@@ -301,8 +301,8 @@ Map37_EntityEvent23:
 
 sub_5F9A0:
                 
-                moveq   #$19,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_SHEELA,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function sub_5F9A0
 
@@ -324,8 +324,8 @@ Map37_EntityEvent24:
 
 sub_5F9AE:
                 
-                moveq   #$1B,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_CHAZ,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function sub_5F9AE
 
@@ -335,8 +335,8 @@ sub_5F9AE:
 
 sub_5F9B6:
                 
-                moveq   #$1C,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_LEMON,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function sub_5F9B6
 
@@ -346,8 +346,8 @@ sub_5F9B6:
 
 Map37_EntityEvent25:
                 
-                moveq   #$1D,d0
-                jmp     DisplayHeadquartersQuote
+                moveq   #ALLY_CLAUDE,d0
+                jmp     DisplayTacticalBaseQuote
 
     ; End of function Map37_EntityEvent25
 

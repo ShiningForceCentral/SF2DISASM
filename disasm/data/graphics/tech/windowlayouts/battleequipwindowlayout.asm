@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\battleequipwindowlayout.asm :
 ; 0x114BE..0x11572 : Battle equip window layout
-BattleEquipWindowLayout:
+layout_BattleEquipWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;

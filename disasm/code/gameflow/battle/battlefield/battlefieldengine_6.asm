@@ -4,13 +4,15 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 sub_D3CA:
                 
                 movem.l d1-d2,-(sp)
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 move.w  d1,d2
-                jsr     GetMaxMP
+                jsr     GetMaxMp
                 bra.w   loc_D3FC
 
     ; End of function sub_D3CA
@@ -18,12 +20,14 @@ sub_D3CA:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 sub_D3E0:
                 
                 movem.l d1-d2,-(sp)
                 move.w  d1,d2
-                jsr     GetMaxMP
+                jsr     GetMaxMp
                 bra.w   loc_D3FC
 
     ; End of function sub_D3E0
@@ -31,12 +35,14 @@ sub_D3E0:
 
 ; =============== S U B R O U T I N E =======================================
 
-;unused
+; unused
+
+
 sub_D3F0:
                 
                 movem.l d1-d2,-(sp)
                 move.w  d1,d2
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
 loc_D3FC:
                 
                 mulu.w  #3,d2
@@ -95,7 +101,7 @@ sub_D430:
                 bra.s   @Done
 @Enemy:
                 
-                move.b  #$FF,d1
+                move.b  #-1,d1
 @Done:
                 
                 unlk    a6
@@ -110,7 +116,7 @@ sub_D430:
 ; AI: cast ATTACK spell
 
 
-MakePrioritiesListForSpell_Attack:
+PopulatePrioritiesListForSpell_Attack:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -146,8 +152,8 @@ MakePrioritiesListForSpell_Attack:
                 clr.w   d0
                 move.b  (a1,d4.w),d0
                 move.w  #SPELL_DISPEL|SPELL_LV2,d1
-                bsr.w   CreateTargetGrid
-                bsr.w   CalculateAttackSpellTargetPriority
+                bsr.w   PopulateTargetableGrid
+                bsr.w   CalculateTargetPriorityForSpell_Attack
                 tst.w   d1
                 beq.s   @Next
                 move.b  d1,(a0,d5.w)
@@ -164,7 +170,7 @@ MakePrioritiesListForSpell_Attack:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function MakePrioritiesListForSpell_Attack
+    ; End of function PopulatePrioritiesListForSpell_Attack
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -172,7 +178,7 @@ MakePrioritiesListForSpell_Attack:
 ; AI: cast BOOST 2 spell
 
 
-MakePrioritiesListForSpell_Boost2:
+PopulatePrioritiesListForSpell_Boost2:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -194,7 +200,7 @@ loc_D50E:
                 
                 move.b  (a0)+,(a1)+
                 dbf     d5,loc_D50E
-				
+                
                 lea     ((SPELL_TARGET_PRIORITIES_LIST-$1000000)).w,a0
                 lea     ((TARGETS_REACHABLE_BY_ATTACK_LIST-$1000000)).w,a1
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a4
@@ -208,8 +214,8 @@ loc_D52E:
                 clr.w   d0
                 move.b  (a1,d4.w),d0
                 move.w  #SPELL_DISPEL|SPELL_LV2,d1
-                bsr.w   CreateTargetGrid
-                bsr.w   CalculateBoostSpellTargetPriority
+                bsr.w   PopulateTargetableGrid
+                bsr.w   CalculateTargetPriorityForSpell_Boost
                 tst.w   d1
                 beq.s   loc_D550
                 move.b  d1,(a0,d5.w)
@@ -219,14 +225,14 @@ loc_D550:
                 
                 addi.w  #1,d4
                 dbf     d6,loc_D52E
-				
+                
                 move.w  d5,(a3)
 loc_D55A:
                 
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function MakePrioritiesListForSpell_Boost2
+    ; End of function PopulatePrioritiesListForSpell_Boost2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -234,7 +240,7 @@ loc_D55A:
 ; AI: cast DISPEL spell
 
 
-MakePrioritiesListForSpell_Dispel:
+PopulatePrioritiesListForSpell_Dispel:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -258,8 +264,8 @@ MakePrioritiesListForSpell_Dispel:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  #SPELL_DISPEL,d1
-                bsr.w   CreateTargetGrid
-                bsr.w   CalculateDispelSpellTargetPriority
+                bsr.w   PopulateTargetableGrid
+                bsr.w   CalculateTargetPriorityForSpell_Dispel
                 move.b  d1,(a2)+
                 dbf     d5,@GetTargetsPriority_Loop
                 
@@ -317,7 +323,7 @@ MakePrioritiesListForSpell_Dispel:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function MakePrioritiesListForSpell_Dispel
+    ; End of function PopulatePrioritiesListForSpell_Dispel
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -325,7 +331,7 @@ MakePrioritiesListForSpell_Dispel:
 ; AI: cast MUDDLE 2 spell
 
 
-MakePrioritiesListForSpell_Muddle2:
+PopulatePrioritiesListForSpell_Muddle2:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
@@ -348,7 +354,7 @@ MakePrioritiesListForSpell_Muddle2:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  #SPELL_MUDDLE|SPELL_LV2,d1
-                bsr.w   CreateTargetGrid
+                bsr.w   PopulateTargetableGrid
                 move.w  (a3),d2         ; d2.w = number of targets in area of effect
                 move.b  d2,(a2)+
                 dbf     d5,@GetTargetsPriority_Loop
@@ -407,7 +413,7 @@ MakePrioritiesListForSpell_Muddle2:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function MakePrioritiesListForSpell_Muddle2
+    ; End of function PopulatePrioritiesListForSpell_Muddle2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -419,7 +425,7 @@ MakePrioritiesListForSpell_Muddle2:
 ; Out: d1.w = target priority
 
 
-CalculateDispelSpellTargetPriority:
+CalculateTargetPriorityForSpell_Dispel:
                 
                 movem.l d0/d2-a6,-(sp)
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
@@ -456,7 +462,7 @@ CalculateDispelSpellTargetPriority:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function CalculateDispelSpellTargetPriority
+    ; End of function CalculateTargetPriorityForSpell_Dispel
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -466,7 +472,7 @@ CalculateDispelSpellTargetPriority:
 ; Out: d1.w = target priority
 
 
-CalculateBoostSpellTargetPriority:
+CalculateTargetPriorityForSpell_Boost:
                 
                 movem.l d0/d2-a6,-(sp)
                 lea     ((TARGETS_LIST-$1000000)).w,a0
@@ -491,10 +497,11 @@ CalculateBoostSpellTargetPriority:
                 bne.s   @Next
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
                 move.b  (a2,d0.w),d2
-                cmpi.b  #$FF,d2
+                cmpi.b  #-1,d2
                 beq.s   @Next
+                
                 move.w  d2,d0
-                bsr.w   GetCurrentHP
+                bsr.w   GetCurrentHp
                 tst.w   d1
                 beq.s   @Next
                 addi.w  #1,d5
@@ -512,7 +519,7 @@ CalculateBoostSpellTargetPriority:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function CalculateBoostSpellTargetPriority
+    ; End of function CalculateTargetPriorityForSpell_Boost
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -522,7 +529,7 @@ CalculateBoostSpellTargetPriority:
 ; Out: d1.w = target priority
 
 
-CalculateAttackSpellTargetPriority:
+CalculateTargetPriorityForSpell_Attack:
                 
                 movem.l d0/d2-a6,-(sp)
                 lea     ((TARGETS_LIST-$1000000)).w,a0
@@ -551,18 +558,18 @@ CalculateAttackSpellTargetPriority:
                 ; Check if target has already targeted anyone
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
                 move.b  (a2,d0.w),d2    ; d2.b = target's last target
-                cmpi.b  #$FF,d2
+                cmpi.b  #-1,d2
                 beq.s   @Next
                 
                 ; Check if target's last target is still alive
                 move.w  d2,d0
-                bsr.w   GetCurrentHP
+                bsr.w   GetCurrentHp
                 tst.w   d1
                 beq.s   @Next
                 
                 ; 
                 move.b  (a0,d4.w),d0
-                bsr.w   GetCurrentATT
+                bsr.w   GetCurrentAtt
                 move.w  #255,d0
                 sub.w   d1,d0
                 add.w   d0,d5
@@ -580,5 +587,5 @@ CalculateAttackSpellTargetPriority:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function CalculateAttackSpellTargetPriority
+    ; End of function CalculateTargetPriorityForSpell_Attack
 

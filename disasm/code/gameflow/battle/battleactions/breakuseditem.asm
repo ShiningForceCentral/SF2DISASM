@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-WriteBattlesceneScript_BreakUsedItem:
+battlesceneScript_BreakUsedItem:
                 
                 movem.l d0-d3/a0,-(sp)
                 cmpi.w  #BATTLEACTION_USE_ITEM,(a3)
@@ -56,7 +56,7 @@ WriteBattlesceneScript_BreakUsedItem:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function WriteBattlesceneScript_BreakUsedItem
+    ; End of function battlesceneScript_BreakUsedItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -74,7 +74,7 @@ debugCounter = -20
 explodingActor = -17
 explode = -16
 specialCritical = -15
-ineffectiveAttack = -14
+ineffectiveAttackToggle = -14
 doubleAttack = -13
 counterAttack = -12
 silencedActor = -11
@@ -121,10 +121,10 @@ GetItemBreakMessage:
                 
                 move.w  ((BATTLESCENE_ITEM-$1000000)).w,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
-                lea     tbl_ItemBreakMessages(pc), a0
+                lea     table_ItemBreakMessages(pc), a0
 @FindItem_Loop:
                 
-                cmpi.w  #CODE_TERMINATOR_WORD,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   @Done
                 cmp.b   (a0),d0
                 beq.w   @Found

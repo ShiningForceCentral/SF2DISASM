@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map22\mapsetups\s2_entityevents.asm :
 ; 0x59474..0x595DE : 
 ms_map22_EntityEvents:
-                msEntityEvent 14, UP, Map22_EntityEvent0-ms_map22_EntityEvents
-                msEntityEvent 15, UP, Map22_EntityEvent1-ms_map22_EntityEvents
+                msEntityEvent ALLY_ERIC, UP, Map22_EntityEvent0-ms_map22_EntityEvents
+                msEntityEvent ALLY_KARNA, UP, Map22_EntityEvent1-ms_map22_EntityEvents
                 msEntityEvent 128, RIGHT, Map22_EntityEvent2-ms_map22_EntityEvents
                 msEntityEvent 129, DOWN, Map22_EntityEvent3-ms_map22_EntityEvents
                 msEntityEvent 130, DOWN, Map22_EntityEvent4-ms_map22_EntityEvents
@@ -36,7 +36,7 @@ ms_map22_EntityEvents:
 
 Map22_EntityEvent2:
                 
-                jsr     j_CaravanActions
+                jsr     j_CaravanMenu
                 rts
 
     ; End of function Map22_EntityEvent2
@@ -113,7 +113,7 @@ Map22_EntityEvent1:
 
 Map22_EntityEvent6:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map22_EntityEvent6

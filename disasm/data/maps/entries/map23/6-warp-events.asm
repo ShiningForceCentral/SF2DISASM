@@ -23,12 +23,12 @@
                   warpFacing RIGHT
                 mWarp 21, 8
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   57, 3
                   warpFacing LEFT
                 mWarp 57, 3
                   warpNoScroll
-                  warpMap    MAP_NONE
+                  warpMap    MAP_CURRENT
                   warpDest   21, 8
                   warpFacing RIGHT
                 endWord

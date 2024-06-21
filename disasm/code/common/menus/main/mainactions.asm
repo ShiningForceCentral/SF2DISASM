@@ -15,7 +15,7 @@ itemIndex = -8
 targetMember = -6
 member = -4
 
-MainMenuActions:
+FieldMenu:
                 
                 module
                 movem.l d0-a5,-(sp)
@@ -24,21 +24,21 @@ MainMenuActions:
                 
                 moveq   #0,d0           ; initial choice : up
                 moveq   #0,d1           ; animate-in from bottom
-                moveq   #MENU_MAIN,d2
-                lea     (InitStack).w,a0
-                jsr     j_ExecuteMenu
-                cmpi.w  #$FFFF,d0
+                moveq   #MENU_FIELD,d2
+                lea     (InitialStack).w,a0
+                jsr     j_ExecuteDiamondMenu
+                cmpi.w  #-1,d0
                 beq.s   @ExitMain
-                bra.w   @IsMemberAction?
+                bra.w   @IsMemberAction
 @ExitMain:
                 
                 unlk    a6
                 movem.l (sp)+,d0-a5
                 rts
-@IsMemberAction?:
+@IsMemberAction:
                 
                 cmpi.w  #0,d0
-                bne.w   @IsMagicAction?
+                bne.w   @IsMagicAction
                 
                 ; MEMBER action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
@@ -46,27 +46,29 @@ MainMenuActions:
 @StartMember:
                 
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitMemberListScreen
-                cmpi.w  #$FFFF,d0
+                jsr     j_InitializeMembersListScreen
+                cmpi.w  #-1,d0
                 beq.w   @ExitMember
+                
                 jsr     j_BuildMemberScreen
                 bra.s   @StartMember
 @ExitMember:
                 
                 bra.w   @Goto_StartMain
-@IsMagicAction?:
+@IsMagicAction:
                 
                 cmpi.w  #1,d0
-                bne.w   @IsItemAction?
+                bne.w   @IsItemAction
 @StartMagic:
                 
                 
                 ; MAGIC action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_BuildMemberListScreen_MagicPage
-                cmpi.w  #$FFFF,d0
+                jsr     j_BuildMembersListScreen_MagicPage
+                cmpi.w  #-1,d0
                 beq.w   @ExitMagic
+                
                 move.w  d0,member(a6)
                 move.w  d1,spellEntry(a6)
                 move.w  d1,spellIndex(a6)
@@ -79,14 +81,14 @@ MainMenuActions:
                 beq.w   byte_213A8      ; Cast Detox
                 
                 ; Cast a spell other than Detox
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  spellIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.l  spellLevel(a6),((TEXT_NUMBER-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  spellIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                move.l  spellLevel(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 sndCom  SFX_SPELL_CAST
                 clsTxt
                 cmpi.w  #SPELL_EGRESS,spellIndex(a6)
-                beq.w   @CurrentlyOnOverworldMap?
+                beq.w   @IsOnOverworldMap
 byte_21348:
                 
                 
@@ -95,7 +97,7 @@ byte_21348:
                 txt     312             ; "But nothing happened."
                 clsTxt
                 bra.w   @ExitMagic
-@CurrentlyOnOverworldMap?:
+@IsOnOverworldMap:
                 
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
@@ -109,10 +111,10 @@ byte_21348:
                 jsr     j_FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
-                jsr     j_DecreaseCurrentMP
+                jsr     j_DecreaseCurrentMp
                 jsr     j_ExecuteFlashScreenScript
                 move.b  ((EGRESS_MAP-$1000000)).w,d0
-                jsr     (GetSavePointForMap).w
+                jsr     (GetSavepointForMap).w
                 lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
                 move.w  #1,(a0)+
                 move.b  #0,(a0)+
@@ -130,20 +132,20 @@ byte_213A8:
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewATTandDEF
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
                 move.w  d0,targetMember(a6)
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.w   @StartMagic
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  spellIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.l  spellLevel(a6),((TEXT_NUMBER-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  spellIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                move.l  spellLevel(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 clsTxt
                 move.b  spellEntry(a6),d1
                 jsr     j_FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
-                jsr     j_DecreaseCurrentMP
+                jsr     j_DecreaseCurrentMp
                 move.w  targetMember(a6),d0
                 jsr     j_GetStatusEffects
                 moveq   #0,d2           ; d2.w = Detox effectivity (0 = nothing happened, -1 = cured something)
@@ -153,7 +155,7 @@ byte_213A8:
                 beq.w   @CureStun
                 bclr    #STATUSEFFECT_BIT_CURSE,d1
                 beq.s   @CureStun
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     303             ; "{NAME} is no longer{N}cursed."
                 moveq   #-1,d2
                 jsr     j_UnequipAllItemsIfNotCursed
@@ -161,17 +163,17 @@ byte_213A8:
                 
                 bclr    #STATUSEFFECT_BIT_STUN,d1
                 beq.s   @CurePoison
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     302             ; "{NAME} is no longer{N}stunned."
                 moveq   #-1,d2
 @CurePoison:
                 
                 bclr    #STATUSEFFECT_BIT_POISON,d1
-                beq.s   @WasDetoxEffective?
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                beq.s   @WasDetoxEffective
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     301             ; "{NAME} is no longer{N}poisoned."
                 moveq   #-1,d2
-@WasDetoxEffective?:
+@WasDetoxEffective:
                 
                 tst.w   d2
                 bne.s   byte_21468
@@ -184,7 +186,7 @@ byte_21468:
 @ExitMagic:
                 
                 bra.w   @Goto_StartMain
-@IsItemAction?:
+@IsItemAction:
                 
                 cmpi.w  #2,d0
                 bne.w   @SearchAction
@@ -195,14 +197,14 @@ byte_21468:
                 moveq   #0,d0           ; initial choice: up
                 moveq   #0,d1           ; animate-in from bottom
                 moveq   #MENU_ITEM,d2
-                lea     (InitStack).w,a0
-                jsr     j_ExecuteMenu
-                cmpi.w  #$FFFF,d0
+                lea     (InitialStack).w,a0
+                jsr     j_ExecuteDiamondMenu
+                cmpi.w  #-1,d0
                 beq.w   @StartMain      
                 
                 ; Is Item submenu Use action?
                 cmpi.w  #0,d0
-                bne.w   @IsItemGiveAction?
+                bne.w   @IsItemGiveAction
 @StartItemUse:
                 
                 
@@ -210,11 +212,11 @@ byte_21468:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewATTandDEF
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 beq.w   byte_2158E      ; Exit Item Use
                 
                 ; Using Angel Wing?
@@ -233,14 +235,14 @@ byte_21468:
                 move.w  member(a6),d0
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     73              ; "{NAME} used the{N}{ITEM}.{W2}"
                 bra.w   @Egress
 @HandleNonAngelWingItems:
                 
                 move.w  itemIndex(a6),d1
-                jsr     IsItemUsableOnField?
+                jsr     IsItemUsableOnField
                 tst.w   d2
                 beq.w   @PickTarget     
                 
@@ -253,10 +255,10 @@ byte_21468:
                 bne.w   @ExitMain
                 
                 ; Nothing happened
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     73              ; "{NAME} used the{N}{ITEM}.{W2}"
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     422             ; "But nothing happened.{D1}"
                 clsTxt
                 bra.w   byte_2158E      ; Exit Item Use
@@ -266,8 +268,8 @@ byte_21468:
                 move.w  #50,d1
                 clsTxt
                 move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitMemberListScreen
-                cmpi.w  #$FFFF,d0
+                jsr     j_InitializeMembersListScreen
+                cmpi.w  #-1,d0
                 beq.w   @StartItemUse
                 
                 ; Use item
@@ -282,10 +284,10 @@ byte_2158E:
                 ; Exit Item Use
                 clsTxt
                 bra.w   @Goto_StartItemSubmenu
-@IsItemGiveAction?:
+@IsItemGiveAction:
                 
                 cmpi.w  #1,d0
-                bne.w   @IsItemEquipAction?
+                bne.w   @IsItemEquipAction
 @StartItemGive:
                 
                 
@@ -293,11 +295,11 @@ byte_2158E:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewATTandDEF
-                cmpi.w  #$FFFF,d0
-                bne.w   @GivingWeapon?
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                cmpi.w  #-1,d0
+                bne.w   @IsGivingWeapon
                 bra.w   byte_2184E      ; Close textbox and restart item submenu
-@GivingWeapon?:
+@IsGivingWeapon:
                 
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
@@ -305,24 +307,25 @@ byte_2158E:
                 move.w  itemIndex(a6),d1
                 jsr     j_GetEquipmentType
                 cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
-                bne.s   @GivingUnequippableItem?
+                bne.s   @IsGivingUnequippableItem
                 
                 ; Give weapon
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @PickRecipient
+                
                 cmp.w   itemSlot(a6),d2
                 bne.w   @PickRecipient
                 move.w  itemIndex(a6),d1
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   @PickRecipient
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
                 txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput
                 bra.s   @StartItemGive
-@GivingUnequippableItem?:
+@IsGivingUnequippableItem:
                 
                 cmpi.w  #EQUIPMENTTYPE_TOOL,d2
                 beq.w   @PickRecipient
@@ -330,14 +333,15 @@ byte_2158E:
                 ; Give ring
                 move.w  member(a6),d0
                 jsr     j_GetEquippedRing
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @PickRecipient
+                
                 cmp.w   itemSlot(a6),d2
                 bne.w   @PickRecipient
                 move.w  itemIndex(a6),d1
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   @PickRecipient
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
                 txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput
@@ -345,13 +349,13 @@ byte_2158E:
                 bra.w   @StartItemGive
 @PickRecipient:
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     54              ; "Pass the {ITEM}{N}to whom?{D1}"
                 clsTxt
                 move.b  #2,((byte_FFB13C-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewATTandDEF
-                cmpi.w  #$FFFF,d0
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                cmpi.w  #-1,d0
                 bne.w   @GiveItem
                 bra.w   @StartItemGive
 @GiveItem:
@@ -375,14 +379,14 @@ byte_2158E:
                 bne.s   @GiveToRecipient
                 
                 ; Give to self
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     74              ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
                 bra.s   @ExitItemGive   
 @GiveToRecipient:
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     65              ; "The {ITEM} now{N}belongs to {NAME}.{W2}"
 @ExitItemGive:
                 
@@ -395,25 +399,26 @@ byte_2158E:
                 move.w  d1,exchangedItemEntry(a6)
                 jsr     j_GetEquipmentType
                 cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
-                bne.s   @ExchangingUnequippableItem?
+                bne.s   @IsExchangingUnequippableItem
                 
                 ; Exchange weapon
                 move.w  targetMember(a6),d0
                 jsr     j_GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @StartExchange
+                
                 cmp.w   targetItemSlot(a6),d2
                 bne.w   @StartExchange
                 move.w  exchangedItemEntry(a6),d1
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   @StartExchange
-                move.w  exchangedItemEntry(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  exchangedItemEntry(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
                 txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput
                 clsTxt
                 bra.w   @PickRecipient
-@ExchangingUnequippableItem?:
+@IsExchangingUnequippableItem:
                 
                 cmpi.w  #EQUIPMENTTYPE_TOOL,d2
                 beq.w   @StartExchange
@@ -421,14 +426,15 @@ byte_2158E:
                 ; Exchange ring
                 move.w  targetMember(a6),d0
                 jsr     j_GetEquippedRing
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @StartExchange
+                
                 cmp.w   targetItemSlot(a6),d2
                 bne.w   @StartExchange
                 move.w  exchangedItemEntry(a6),d1
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   @StartExchange
-                move.w  exchangedItemEntry(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  exchangedItemEntry(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
                 txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput
@@ -481,15 +487,15 @@ byte_2158E:
                 bne.s   @ExchangedMessage
                 
                 ; "Changed hands" message
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     74              ; "{NAME} changed hands{N}to hold the {ITEM}.{W2}"
                 bra.s   byte_2184E      ; Close textbox and restart item submenu
 @ExchangedMessage:
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
-                move.w  targetMember(a6),((TEXT_NAME_INDEX_2-$1000000)).w
-                move.w  exchangedItemEntry(a6),((TEXT_NAME_INDEX_3-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                move.w  exchangedItemEntry(a6),((DIALOGUE_NAME_INDEX_3-$1000000)).w
                 txt     66              ; "The {ITEM} was{N}exchanged for {NAME}'s{N}{ITEM}.{W2}"
 byte_2184E:
                 
@@ -497,7 +503,7 @@ byte_2184E:
                 ; Close textbox and restart item submenu
                 clsTxt
                 bra.w   @Goto_StartItemSubmenu
-@IsItemEquipAction?:
+@IsItemEquipAction:
                 
                 cmpi.w  #2,d0
                 bne.w   @ItemDropAction
@@ -506,15 +512,16 @@ byte_2184E:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #3,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewATTandDEF
-                cmpi.w  #$FFFF,d0
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                cmpi.w  #-1,d0
                 beq.w   @Goto_ExitItemEquip
                 bra.w   @ExitItemEquip
 @Goto_ExitItemEquip:
                 
                 bra.w   @ExitItemEquip
-                move.w  member(a6),((TEXT_NAME_INDEX_1-$1000000)).w ; unreachable code
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_2-$1000000)).w
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w 
+                                                        ; unreachable code
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     70              ; "{NAME} is already{N}equipped with the{N}{ITEM}.{W2}"
 @ExitItemEquip:
                 
@@ -526,11 +533,11 @@ byte_2184E:
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 move.b  #1,((byte_FFB13C-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMemberListScreen_NewATTandDEF
-                cmpi.w  #$FFFF,d0
-                bne.w   @IsItemUnsellable?
+                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                cmpi.w  #-1,d0
+                bne.w   @IsItemUnsellable
                 bra.w   byte_219D0      ; Close textbox and restart item submenu
-@IsItemUnsellable?:
+@IsItemUnsellable:
                 
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
@@ -542,42 +549,43 @@ byte_2184E:
                 andi.b  #ITEMTYPE_UNSELLABLE,d1
                 cmpi.b  #0,d1
                 beq.s   @ConfirmDrop
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     62              ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
                 bra.w   byte_219D0      ; Close textbox and restart item submenu
 @ConfirmDrop:
                 
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     69              ; "The {ITEM} will be{N}discarded.  OK?"
-                jsr     j_YesNoChoiceBox
+                jsr     j_alt_YesNoPrompt
                 clsTxt
                 cmpi.w  #0,d0
-                beq.w   @DroppingWeapon?
+                beq.w   @IsDroppingWeapon
                 bra.s   @ItemDropAction
-@DroppingWeapon?:
+@IsDroppingWeapon:
                 
                 move.w  itemIndex(a6),d1
                 jsr     j_GetEquipmentType
                 cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
-                bne.s   @DroppingUnequippableItem?
+                bne.s   @IsDroppingUnequippableItem
                 
                 ; Drop weapon
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @DropItem
+                
                 cmp.w   itemSlot(a6),d2
                 bne.w   @DropItem
                 move.w  itemIndex(a6),d1
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   @DropItem
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 sndCom  MUSIC_CURSED_ITEM
                 txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bsr.w   WaitForMusicResumeAndPlayerInput
                 clsTxt
                 bra.w   byte_219D0      ; Close textbox and restart item submenu
-@DroppingUnequippableItem?:
+@IsDroppingUnequippableItem:
                 
                 cmpi.w  #EQUIPMENTTYPE_TOOL,d2
                 beq.w   @DropItem
@@ -585,14 +593,15 @@ byte_2184E:
                 ; Drop ring
                 move.w  member(a6),d0
                 jsr     j_GetEquippedRing
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   @DropItem
+                
                 cmp.w   itemSlot(a6),d2
                 bne.w   @DropItem
                 move.w  itemIndex(a6),d1
-                jsr     j_IsItemCursed?
+                jsr     j_IsItemCursed
                 bcc.w   @DropItem
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     55              ; "{LEADER}!  You can't{N}unequip the {ITEM}.{N}It's cursed!{W2}"
                 bra.w   byte_219D0      ; Close textbox and restart item submenu
 @DropItem:
@@ -600,7 +609,7 @@ byte_2184E:
                 move.w  member(a6),d0
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemBySlot
-                move.w  itemIndex(a6),((TEXT_NAME_INDEX_1-$1000000)).w
+                move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     67              ; "The {ITEM} is discarded.{W2}"
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_RARE,d1
@@ -628,7 +637,7 @@ byte_219D0:
                 
                 bra.w   @StartMain      
 
-    ; End of function MainMenuActions
+    ; End of function FieldMenu
 
                 modend
 
@@ -654,14 +663,12 @@ PopulateGenericListWithCurrentForceMembers:
 
     ; End of function PopulateGenericListWithCurrentForceMembers
 
-;unused
-
-byte_21A16:     dc.b 0
+table_21A16:    dc.b 0                  ; unused
                 dc.b 2
                 dc.b 0
                 dc.b 2
                 dc.b 0
-                dc.b $A
+                dc.b 10
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -671,7 +678,7 @@ byte_21A16:     dc.b 0
 sub_21A1C:
                 
                 movem.l d7-a0,-(sp)
-                lea     byte_21A16(pc), a0
+                lea     table_21A16(pc), a0
                 clr.w   d7
                 move.w  (a0)+,d7
                 subq.w  #1,d7

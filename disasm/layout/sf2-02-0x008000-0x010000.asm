@@ -8,42 +8,50 @@
                 include "code\common\tech\pointers\s02_pointers.asm"    ; Game Section 02 Pointers
                 
                 ; Stats engine
-                include "code\common\stats\statsengine_1.asm"    ; Character stats engine
+                include "code\common\stats\statsengine_1.asm"    ; Character stats engine, part 1
+                include "code\common\stats\getcombatanttype.asm"    ; Combatant type getter function
                 include "data\stats\allies\classes\classtypes.asm"    ; Class types table
-                include "code\common\stats\statsengine_2.asm"    ; Character stats engine
+                include "code\common\stats\statsengine_2.asm"    ; Character stats engine, part 2
                 include "code\common\stats\levelup.asm"    ; Level Up functions
-                include "code\common\stats\statsengine_3.asm"    ; Character stats engine
+                include "code\common\stats\statsengine_3.asm"    ; Character stats engine, part 3
                 include "code\common\stats\caravaninventoryfunctions.asm"    ; Caravan inventory management functions
                 
                 ; Battleactions engine
                 include "code\gameflow\special\debugmodebattleactions.asm"    ; Debug mode battle actions
-                include "code\gameflow\battle\battleactions\battleactionsengine_1.asm"    ; Battleactions engine
+                include "code\gameflow\battle\battleactions\battleactionsengine_1.asm"    ; Battleactions Engine, part 1
                 include "code\gameflow\battle\battleactions\determineineffectiveattack.asm"    ; Determine ineffective attack function
                 include "code\gameflow\battle\battleactions\initbattlesceneproperties.asm"    ; Init Battlescene Properties function
                 include "code\gameflow\battle\battleactions\createbattlescenemessage.asm"    ; Create Battlescene Message function
                 include "code\gameflow\battle\battleactions\createbattlesceneanimation.asm"    ; Create battlescene animation function
-                include "code\gameflow\battle\battleactions\battleactionsengine_2.asm"    ; Battleactions engine
+                include "code\gameflow\battle\battleactions\battleactionsengine_2.asm"    ; Battleactions Engine, part 2
                 include "code\gameflow\battle\battleactions\isabletocounterattack.asm"    ; Is Able To Counter Attack function
                 include "code\gameflow\battle\battleactions\getspellanimation.asm"    ; Get spell animation function
-                include "code\gameflow\battle\battleactions\battleactionsengine_3.asm"    ; Battleactions engine
+                include "code\gameflow\battle\battleactions\animateaction.asm"    ; Battlescene animation functions
+                include "code\gameflow\battle\battleactions\giveexpandgold.asm"    ; Give EXP and gold function
                 include "data\battles\global\halvedexpearnedbattles.asm"    ; Halved EXP earned battles table
                 align
-                include "code\gameflow\battle\battleactions\battleactionsengine_4.asm"    ; Battleactions engine
+                include "code\gameflow\battle\battleactions\earnexp.asm"    ; EXP earning functions
+                include "code\gameflow\battle\battleactions\sorttargets.asm"    ; Sort targets list function
+                include "code\gameflow\battle\battleactions\unused_battleactions.asm"    ; Unused battleactions functions
+                include "code\gameflow\battle\battleactions\attack.asm"    ; Write Battlescene Script : Attack
                 include "code\gameflow\battle\battleactions\determinedodge.asm"    ; Determine dodge function
                 include "code\gameflow\battle\battleactions\calculatedamage.asm"    ; Calculate attack damage function
                 include "code\gameflow\battle\battleactions\determinecriticalhit.asm"    ; Determine critical hit function
-                include "data\stats\allies\classes\criticalhitsettings.asm"    ; Critical hit settings
-                include "code\gameflow\battle\battleactions\battleactionsengine_5.asm"    ; Battleactions engine
+                include "data\stats\allies\classes\criticalhitdefs.asm"    ; Critical hit settings definitions
+                include "code\gameflow\battle\battleactions\inflictdamage.asm"    ; Write Battlescene Command : Inflict Damage function
+                include "code\gameflow\battle\battleactions\inflictailment.asm"    ; Write Battlescene Command : Inflict Ailment function
+                include "code\gameflow\battle\battleactions\inflictcursedamage.asm"    ; Write Battlescene Command : Inflict Curse Damage function
+                include "code\gameflow\battle\battleactions\determinedoubleandcounter.asm"    ; Write Battlescene Command : Determine Double And Counter function
+                include "code\gameflow\battle\battleactions\displaydeathmessage.asm"    ; Write Battlescene Command : Display Death Message function
                 include "code\gameflow\battle\battleactions\castspell.asm"    ; Write Battlescene Script : Cast Spell
                 include "code\gameflow\battle\battleactions\calculatespelldamage.asm"    ; Calculate Spell Damage function
                 include "code\gameflow\battle\battleactions\useitem.asm"    ; Write Battlescene Script : Use Item
                 include "code\gameflow\battle\battleactions\nullsub_BBE4.asm"    ; Unused nullsub
                 include "code\gameflow\battle\battleactions\breakuseditem.asm"    ; Write Battlescene Script : Break Used Item
                 include "data\stats\items\itembreakmessages.asm"    ; Item break messages
-                include "code\gameflow\battle\battleactions\writebattlescenecommanddropenemyitem.asm"    ; Write Battlescene Command : Drop Enemy Item function
+                include "code\gameflow\battle\battleactions\dropenemyitem.asm"    ; Write Battlescene Command : Drop Enemy Item function
                 include "data\battles\global\enemyitemdrops.asm"    ; Enemy item drops
                 include "data\stats\enemies\enemygold.asm"    ; Enemy gold amounts
-                include "code\gameflow\battle\battleactions\battleactionsengine_6.asm"    ; Battleactions engine
                 
                 ; Battlefield engine
                 include "code\gameflow\battle\battlefield\battlefieldengine_1.asm"    ; Battlefield engine
@@ -63,7 +71,7 @@
                 include "code\gameflow\battle\battlefield\battlefieldengine_7.asm"    ; Battlefield engine
                 
                 ; AI engine
-                include "code\gameflow\battle\ai\aiengine_1.asm"    ; AI engine
+                include "code\gameflow\battle\ai\startaicontrol.asm"    ; AI engine : preparatory phase
                 include "data\battles\global\aicommandsets.asm"    ; AI commands data
                 include "data\battles\global\swarmbattles.asm"    ; Parameters for battles implementing swarm AI
                 include "code\gameflow\battle\ai\handleaicommand.asm"    ; Handle AI Command function

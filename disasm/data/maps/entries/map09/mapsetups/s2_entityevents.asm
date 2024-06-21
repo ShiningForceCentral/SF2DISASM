@@ -2,8 +2,8 @@
 ; ASM FILE data\maps\entries\map09\mapsetups\s2_entityevents.asm :
 ; 0x56722..0x56856 : 
 ms_map9_EntityEvents:
-                msEntityEvent 11, RIGHT, Map9_EntityEvent0-ms_map9_EntityEvents
-                msEntityEvent 12, DOWN, Map9_EntityEvent1-ms_map9_EntityEvents
+                msEntityEvent ALLY_ROHDE, RIGHT, Map9_EntityEvent0-ms_map9_EntityEvents
+                msEntityEvent ALLY_RICK, DOWN, Map9_EntityEvent1-ms_map9_EntityEvents
                 msEntityEvent 128, UP, Map9_EntityEvent2-ms_map9_EntityEvents
                 msEntityEvent 129, UP, Map9_EntityEvent3-ms_map9_EntityEvents
                 msEntityEvent 130, UP, Map9_EntityEvent4-ms_map9_EntityEvents
@@ -57,8 +57,8 @@ Map9_EntityEvent4:
 
 Map9_EntityEvent5:
                 
-                move.b  #6,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_HASSAN_0,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map9_EntityEvent5
@@ -69,8 +69,8 @@ Map9_EntityEvent5:
 
 Map9_EntityEvent6:
                 
-                move.b  #$15,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_HASSAN,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map9_EntityEvent6
@@ -81,7 +81,7 @@ Map9_EntityEvent6:
 
 Map9_EntityEvent7:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map9_EntityEvent7
@@ -99,7 +99,7 @@ Map9_EntityEvent8:
                 move.w  #$86,d0 
                 moveq   #3,d1
                 jsr     sub_4781A       
-                moveq   #$28,d0 
+                moveq   #40,d0
                 jsr     (Sleep).w       
                 move.w  #$86,d0 
                 move.b  ((byte_FFB651-$1000000)).w,d1
@@ -148,8 +148,8 @@ Map9_EntityEvent10:
 
 Map9_EntityEvent11:
                 
-                move.b  #7,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_HASSAN_1,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map9_EntityEvent11
@@ -163,9 +163,9 @@ Map9_EntityEvent0:
                  
                 chkFlg  727             ; Set after presenting the Achilles Sword to Rohde (yes/no to the Caravan regardless)
                 bne.s   byte_5682A      
-                moveq   #$3D,d1 ; Achilles Sword
+                moveq   #ITEM_ACHILLES_SWORD,d1
                 jsr     j_GetItemInventoryLocation
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 bne.s   byte_56804      
                 txt     1371            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
                 setFlg  798             ; Set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
@@ -175,9 +175,9 @@ byte_56804:
                 chkFlg  798             ; Set after talking to Rohde in Hassan if you DON'T have the Achilles Sword?
                 bne.s   byte_5681E
                 txt     1371            ; "Yes, I'm {NAME;11}.{N}I'm really busy now.{W2}{N}Time is dear to me.{N}Please don't bother me.{W1}"
-                jsr     j_HidePortraitWindow
+                jsr     j_ClosePortraitWindow
                 clsTxt
-                moveq   #$28,d0 
+                moveq   #40,d0
                 jsr     (Sleep).w       
 byte_5681E:
                 

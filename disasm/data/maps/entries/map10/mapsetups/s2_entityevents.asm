@@ -24,7 +24,7 @@ ms_map10_EntityEvents:
                 msEntityEvent 147, UP, Map10_EntityEvent19-ms_map10_EntityEvents
                 msEntityEvent 148, UP, Map10_EntityEvent20-ms_map10_EntityEvents
                 msEntityEvent 149, DOWN, Map10_EntityEvent21-ms_map10_EntityEvents
-                msEntityEvent 10, DOWN, Map10_EntityEvent22-ms_map10_EntityEvents
+                msEntityEvent ALLY_LUKE, DOWN, Map10_EntityEvent22-ms_map10_EntityEvents
                 msDefaultEntityEvent Map10_DefaultEntityEvent-ms_map10_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -57,8 +57,8 @@ Map10_EntityEvent1:
 
 Map10_EntityEvent2:
                 
-                move.b  #$14,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_BEDOE,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map10_EntityEvent2
@@ -146,8 +146,8 @@ Map10_EntityEvent8:
 
 Map10_EntityEvent9:
                 
-                move.b  #5,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_BEDOE,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map10_EntityEvent9
@@ -158,7 +158,7 @@ Map10_EntityEvent9:
 
 Map10_EntityEvent10:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map10_EntityEvent10

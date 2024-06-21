@@ -21,9 +21,9 @@ LoadBaseTiles:
                 bsr.w   SetVdpReg
                 move.w  #$8D3B,d0       ; H Scroll table VRAM address : EC00
                 jsr     (SetVdpReg).w
-                movea.l (p_BaseTiles).l,a0
+                movea.l (p_tiles_Base).l,a0
                 lea     (0).w,a1
-                move.w  #$1000,d0
+                move.w  #4096,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDmaOnCompressedTiles ; load base tiles
                 rts

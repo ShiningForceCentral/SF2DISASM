@@ -35,8 +35,8 @@ byte_549D0:
                 bne.s   loc_549F2
                 cmpi.b  #1,((byte_FFB651-$1000000)).w
                 bne.s   byte_549EC      
-                move.b  #$11,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_NEW_GRANSEAL_0,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 bra.s   loc_549F0
 byte_549EC:
                 
@@ -48,8 +48,8 @@ loc_549F2:
                 
                 cmpi.b  #1,((byte_FFB651-$1000000)).w
                 bne.s   byte_54A08      
-                move.b  #$17,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_NEW_GRANSEAL_1,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 bra.s   return_54A0C
 byte_54A08:
                 
@@ -192,7 +192,7 @@ loc_54ABA:
                 
                 cmpi.b  #1,((byte_FFB651-$1000000)).w
                 bne.s   byte_54ACA      
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 bra.s   loc_54ACE
 byte_54ACA:
                 
@@ -202,7 +202,7 @@ loc_54ACE:
                 bra.s   return_54AD6
 loc_54AD0:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
 return_54AD6:
                 
                 rts
@@ -235,8 +235,8 @@ byte_54AF4:
                 bne.s   loc_54B1A
                 cmpi.b  #1,((byte_FFB651-$1000000)).w
                 bne.s   byte_54B10      
-                move.b  #2,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_NEW_GRANSEAL_0,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 bra.s   loc_54B18
 byte_54B10:
                 
@@ -249,8 +249,8 @@ loc_54B1A:
                 
                 cmpi.b  #1,((byte_FFB651-$1000000)).w
                 bne.s   byte_54B30      
-                move.b  #8,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_NEW_GRANSEAL_1,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 bra.s   return_54B34
 byte_54B30:
                 
@@ -486,17 +486,17 @@ byte_54C32:
                 bra.w   loc_54CBE
 loc_54C4C:
                 
-                moveq   #$72,d1 
+                moveq   #ITEM_CANNON,d1
                 jsr     j_GetItemInventoryLocation
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 bne.s   byte_54C8E      
                 txt     1116            ; "Sir Astral, may I give him{N}the dynamite?{W1}"
                 clsTxt
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                move.w  #$1F,d0
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
+                move.w  #FOLLOWER_B,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
-                move.w  d2,((SPEECH_SFX-$1000000)).w
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
                 txt     1117            ; "It's too dangerous to use it{N}as it is.{W2}"
                 txt     1118            ; "We need some way to{N}detonate the dynamite{N}safely.{W1}"
@@ -509,9 +509,9 @@ byte_54C8E:
                 script  cs_54CC6
                 txt     1120            ; "Sir Astral said it was OK!{N}Here is the explosive.{W1}"
                 clsTxt
-                move.w  #$74,d0 
+                move.w  #ITEM_DYNAMITE,d0
                 moveq   #0,d1
-                bsr.w   GetMandatoryItem
+                bsr.w   ReceiveMandatoryItem
                 btst    #0,d0
                 bne.s   byte_54CBA      
                 setFlg  804             ; Set after the dwarf gives you dynamite

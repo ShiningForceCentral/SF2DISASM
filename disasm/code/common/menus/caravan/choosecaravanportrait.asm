@@ -21,11 +21,11 @@ loc_228B8:
 loc_228BA:
                 
                 moveq   #0,d1
-                jsr     j_InitPortraitWindow
+                jsr     j_CreatePortraitWindow
                 move.l  (sp)+,d0
                 jsr     (DisplayText).w 
                 clsTxt
-                jsr     j_HidePortraitWindow
+                jsr     j_RemovePortraitWindow
                 movem.l (sp)+,d0-d1
                 rts
 

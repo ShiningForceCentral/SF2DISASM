@@ -22,7 +22,7 @@ ms_map3_flag609_EntityEvents:
                 msEntityEvent 145, UP, Map3_261_EntityEvent17-ms_map3_flag609_EntityEvents
                 msEntityEvent 146, UP, Map3_261_EntityEvent18-ms_map3_flag609_EntityEvents
                 msEntityEvent 147, UP, Map3_261_EntityEvent19-ms_map3_flag609_EntityEvents
-                msEntityEvent 6, UP, Map3_261_EntityEvent20-ms_map3_flag609_EntityEvents
+                msEntityEvent ALLY_KIWI, UP, Map3_261_EntityEvent20-ms_map3_flag609_EntityEvents
                 msEntityEvent 148, DOWN, Map3_261_EntityEvent21-ms_map3_flag609_EntityEvents
                 msEntityEvent 149, DOWN, Map3_261_EntityEvent22-ms_map3_flag609_EntityEvents
                 msEntityEvent 150, UP, Map3_261_EntityEvent23-ms_map3_flag609_EntityEvents
@@ -84,8 +84,8 @@ Map3_261_EntityEvent2:
 
 Map3_261_EntityEvent3:
                 
-                move.b  #0,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_WEAPON_GRANSEAL,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map3_261_EntityEvent3
@@ -290,7 +290,7 @@ Map3_261_EntityEvent20:
 
 Map3_261_EntityEvent21:
                 
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 rts
 
     ; End of function Map3_261_EntityEvent21
@@ -370,8 +370,8 @@ byte_511B6:
 
 Map3_261_EntityEvent26:
                 
-                move.b  #$F,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
+                move.b  #SHOP_ITEM_GRANSEAL,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     j_ShopMenu
                 rts
 
     ; End of function Map3_261_EntityEvent26

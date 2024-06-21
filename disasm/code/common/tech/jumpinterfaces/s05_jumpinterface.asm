@@ -5,61 +5,61 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ShopMenuActions:
+j_ShopMenu:
                 
-                jmp     ShopMenuActions(pc)
+                jmp     ShopMenu(pc)
 
-    ; End of function j_ShopMenuActions
+    ; End of function j_ShopMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ChurchMenuActions:
+j_ChurchMenu:
                 
-                jmp     ChurchMenuActions(pc)
+                jmp     ChurchMenu(pc)
 
-    ; End of function j_ChurchMenuActions
+    ; End of function j_ChurchMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MainMenuActions:
+j_FieldMenu:
                 
-                jmp     MainMenuActions(pc)
+                jmp     FieldMenu(pc)
 
-    ; End of function j_MainMenuActions
+    ; End of function j_FieldMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_BlacksmithActions:
+j_BlacksmithMenu:
                 
-                jmp     BlacksmithActions(pc)
+                jmp     BlacksmithMenu(pc)
 
-    ; End of function j_BlacksmithActions
+    ; End of function j_BlacksmithMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CaravanActions:
+j_CaravanMenu:
                 
-                jmp     CaravanMenuActions(pc)
+                jmp     CaravanMenu(pc)
 
-    ; End of function j_CaravanActions
+    ; End of function j_CaravanMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_LevelUpCutscene:
+j_FieldItem_LevelUp:
                 
-                jmp     LevelUpCutscene(pc)
+                jmp     fieldItem_LevelUp(pc)
 
-    ; End of function j_LevelUpCutscene
+    ; End of function j_FieldItem_LevelUp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -75,61 +75,61 @@ j_ExplorationLoop:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_LoadUnitCursorTileData:
+j_DmaCursorTiles:
                 
-                jmp     LoadUnitCursorTileData(pc)
+                jmp     DmaCursorTiles(pc)
 
-    ; End of function j_LoadUnitCursorTileData
+    ; End of function j_DmaCursorTiles
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_20020:
+j_UpdateCursorSprites:
                 
-                jmp     sub_23554(pc)
+                jmp     UpdateCursorSprites(pc)
 
-    ; End of function sub_20020
+    ; End of function j_UpdateCursorSprites
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_20024:
+j_UpdateSpritesHelper:
                 
-                jmp     sub_2364C(pc)
+                jmp     UpdateSpritesHelper(pc)
 
-    ; End of function sub_20024
+    ; End of function j_UpdateSpritesHelper
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ControlUnitCursor:
+j_ControlCursorEntity:
                 
-                jmp     ControlUnitCursor(pc)
+                jmp     ControlCursorEntity(pc)
 
-    ; End of function j_ControlUnitCursor
+    ; End of function j_ControlCursorEntity
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetUnitCursorDestinationToNextBattleEntity:
+j_SetCursorDestinationToNextBattleEntity:
                 
-                jmp     SetUnitCursorDestinationToNextBattleEntity(pc)
+                jmp     SetCursorDestinationToNextBattleEntity(pc)
 
-    ; End of function j_SetUnitCursorDestinationToNextBattleEntity
+    ; End of function j_SetCursorDestinationToNextBattleEntity
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetCameraDestInTiles:
+j_SetCameraDestination:
                 
-                jmp     SetCameraDestInTiles(pc)
+                jmp     SetCameraDestination(pc)
 
-    ; End of function j_SetCameraDestInTiles
+    ; End of function j_SetCameraDestination
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -144,12 +144,14 @@ j_BattleLoop:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
-j_BattleLoop_Unused:
+
+j_BattleLoop_0:
                 
                 jmp     BattleLoop(pc)  
 
-    ; End of function j_BattleLoop_Unused
+    ; End of function j_BattleLoop_0
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -205,11 +207,11 @@ j_CheckArea:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateSpecialSprites:
+j_UpdateSpecialSprite:
                 
-                jmp     UpdateSpecialSprites(pc)
+                jmp     UpdateSpecialSprite(pc)
 
-    ; End of function j_UpdateSpecialSprites
+    ; End of function j_UpdateSpecialSprite
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -225,11 +227,11 @@ j_LoadSpecialSprite:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_20058:
+j_AnimateSpecialSprite:
                 
-                jmp     sub_25CB6(pc)
+                jmp     AnimateSpecialSprite(pc)
 
-    ; End of function sub_20058
+    ; End of function j_AnimateSpecialSprite
 
 
 ; =============== S U B R O U T I N E =======================================

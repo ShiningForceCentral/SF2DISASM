@@ -2,10 +2,10 @@
 ; ASM FILE data\maps\entries\map37\mapsetups\s2_entityevents_999.asm :
 ; 0x5F9D2..0x5FA22 : 
 ms_map37_flag999_EntityEvents:
-                msEntityEvent 26, UP, Map37_3E7_EntityEvent0-ms_map37_flag999_EntityEvents
+                msEntityEvent ALLY_ZYNK, UP, Map37_3E7_EntityEvent0-ms_map37_flag999_EntityEvents
 byte_5F9D6:     msEntityEvent 128, UP, Map37_3E7_EntityEvent1-ms_map37_flag999_EntityEvents
                 msEntityEvent 129, RIGHT, Map37_3E7_EntityEvent2-ms_map37_flag999_EntityEvents
-                msEntityEvent 7, UP, Map37_3E7_EntityEvent3-ms_map37_flag999_EntityEvents
+                msEntityEvent ALLY_PETER, UP, Map37_3E7_EntityEvent3-ms_map37_flag999_EntityEvents
                 msDefaultEntityEvent Map37_DefaultEntityEvent-ms_map37_flag999_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================

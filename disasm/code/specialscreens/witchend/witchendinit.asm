@@ -7,16 +7,16 @@
 
 WitchEnd:
                 
-                moveq   #$3C,d0 
+                moveq   #60,d0
                 bsr.w   Sleep           
-                bsr.w   InitWitchSuspendVIntFunctions
-                move.w  #$1E,((BLINK_COUNTER-$1000000)).w
+                bsr.w   InitializeWitchSuspendVIntFunctions
+                move.w  #30,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
-                move.b  #$FF,((BLINK_CONTROL_TOGGLE-$1000000)).w
+                move.b  #-1,((BLINK_CONTROL_TOGGLE-$1000000)).w
                 txt     238             ; "Finally, you've fulfilled my{N}wish!{N}{D2}{D2}Thanks to you, I can{N}escape from this forest!{D2}{N}Are you really that{N}surprised?{D2}{D2}{D2}"
                 clsTxt
                 clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
-                bsr.w   sub_7CDC
+                bsr.w   ReinitializeWitchLayout
                 bsr.w   FadeOutToWhite
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_REMOVE

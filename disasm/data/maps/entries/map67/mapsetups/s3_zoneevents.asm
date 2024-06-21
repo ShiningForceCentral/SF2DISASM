@@ -36,7 +36,7 @@ Map67_ZoneEvent0:
                 chkFlg  13              ; Elric joined
                 beq.s   return_4FB56
                 move.w  #$D,d0
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.s   return_4FB56
                 script  cs_4FC32
@@ -53,7 +53,7 @@ return_4FB56:
 
 Map67_DefaultZoneEvent:
                 
-                move.w  #$15,d0
+                move.w  #BATTLE_DEVIL_TAIL,d0
                 jsr     CheckRandomBattle
                 rts
 
@@ -101,7 +101,7 @@ cs_4FB64:       textCursor 2543
                 warp MAP_HARPY_POOL,11,22,UP
                 csc_end
 cs_4FC32:       textCursor 2593
-                newEntity ALLY_ELRIC,57,25,UP,MAPSPRITE_TAROS
+                newEntity ALLY_ELRIC,57,25,UP,NOTHING_BYTE
                 setActscriptWait ALLY_ELRIC,eas_Init
                 entityActionsWait ALLY_ELRIC
                  moveUp 1

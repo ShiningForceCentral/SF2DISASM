@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\maps\mapload.asm :
-; 0x20E6..0x2F6A : Map loading functions
+; 0x20E6..0x2EC0 : Map loading functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -12,7 +12,7 @@ LoadMapLayoutData:
                 movem.l d0-a6,-(sp)
                 lea     (MAP_LAYOUT_HISTORY_MAP_SIZES).l,a4
                 moveq   #0,d3
-                move.w  #$7F,d0 
+                move.w  #127,d0
 loc_20F6:
                 
                 move.l  d3,(a4)+        ; clear block history maps
@@ -20,6 +20,7 @@ loc_20F6:
                 move.l  d3,(a4)+
                 move.l  d3,(a4)+
                 dbf     d0,loc_20F6     
+                
                 movea.l a1,a3
                 lea     $2000(a1),a6    ; set a6 as 0x2000 past beginning in RAM (to signify end)
                 clr.w   d3
@@ -35,6 +36,7 @@ loc_2114:
 loc_211E:
                 
                 dbf     d3,loc_2126
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_2126:
@@ -42,6 +44,7 @@ loc_2126:
                 add.w   d0,d0
                 bcs.w   loc_21A6        
                 dbf     d3,loc_2134     
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_2134:
@@ -57,12 +60,13 @@ loc_2134:
                 bra.s   loc_2114        
 loc_214E:
                 
-                moveq   #$FFFFFFFF,d4   ; 01 : Copy section
+                moveq   #-1,d4          ; 01 : Copy section
                 clr.w   d1
                 moveq   #2,d5
 loc_2154:
                 
                 dbf     d3,loc_215C     
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_215C:
@@ -71,6 +75,7 @@ loc_215C:
                 dbcs    d4,loc_2154
                 negx.w  d4
                 dbf     d4,loc_216A
+                
                 bra.s   loc_2180
 loc_216A:
                 
@@ -78,6 +83,7 @@ loc_216A:
 loc_216C:
                 
                 dbf     d3,loc_2174     
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_2174:
@@ -85,11 +91,13 @@ loc_2174:
                 add.w   d0,d0           ; value = value + 2^count
                 addx.w  d1,d1
                 dbf     d4,loc_216C
+                
                 add.w   d5,d1
                 subq.w  #1,d1
 loc_2180:
                 
                 dbf     d3,loc_2188
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_2188:
@@ -100,11 +108,13 @@ loc_218E:
                 
                 move.w  -$80(a1),(a1)+  ; 0 = copy section from upper block N times
                 dbf     d1,loc_218E     
+                
                 bra.w   loc_2114        
 loc_219A:
                 
                 move.w  -2(a1),(a1)+    ; 1 = copy section from left block N times
                 dbf     d1,loc_219A     
+                
                 bra.w   loc_2114        ; END of 01 : Copy section
 loc_21A6:
                 
@@ -123,10 +133,12 @@ loc_21BA:
                 move.b  (a4,d1.w),d1    ; left tile stack size
                 ext.w   d1
                 dbf     d1,loc_21C8
+                
                 bra.s   loc_2208        ; if no left block stack, then this is not a "10" command, go check for 11 or 1
 loc_21C8:
                 
                 dbf     d3,loc_21D0
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_21D0:
@@ -138,6 +150,7 @@ loc_21D0:
 loc_21E0:
                 
                 dbf     d3,loc_21E8
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_21E8:
@@ -176,10 +189,12 @@ loc_221C:
                 move.b  (a4,d1.w),d1
                 ext.w   d1
                 dbf     d1,loc_222E
+                
                 bra.s   loc_226E        ; no upper stack
 loc_222E:
                 
                 dbf     d3,loc_2236
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_2236:
@@ -191,6 +206,7 @@ loc_2236:
 loc_2246:
                 
                 dbf     d3,loc_224E
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_224E:
@@ -216,6 +232,7 @@ loc_226E:
 loc_2272:
                 
                 dbf     d3,loc_227A
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_227A:
@@ -245,6 +262,7 @@ loc_227A:
 ReadMapLayoutBarrelForBlockFlags:
                 
                 dbf     d3,loc_229E
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_229E:
@@ -253,6 +271,7 @@ loc_229E:
                 bcs.w   loc_22B6        
                 clr.w   d1              ; 0...
                 dbf     d3,loc_22AE
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_22AE:
@@ -264,6 +283,7 @@ loc_22AE:
 loc_22B6:
                 
                 dbf     d3,loc_22BE     ; 1...
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_22BE:
@@ -272,6 +292,7 @@ loc_22BE:
                 bcs.w   loc_22D8        
                 clr.w   d1              ; 10...
                 dbf     d3,loc_22CE
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_22CE:
@@ -289,6 +310,7 @@ loc_22D8:
 loc_22DE:
                 
                 dbf     d3,loc_22E6
+                
                 moveq   #$F,d3
                 move.w  (a0)+,d0
 loc_22E6:
@@ -296,6 +318,7 @@ loc_22E6:
                 add.w   d0,d0
                 addx.w  d1,d1
                 dbf     d2,loc_22DE
+                
                 ror.w   #6,d1
                 move.l  (sp)+,d2
                 rts
@@ -349,6 +372,7 @@ loc_2324:
                 lea     (FF6800_MAP_LOADING_LEFT_HISTORY_MAP).l,a2
                 adda.w  d4,a2
                 dbf     d5,loc_2344
+                
                 move.b  #1,(a5)         ; when first value of entry stack
                 move.w  d1,(a2)
                 rts
@@ -362,6 +386,7 @@ loc_2346:
                 cmp.w   d6,d1           ; if existing stack value = saved value, do nothing else
                 beq.s   return_2370
                 dbf     d5,loc_235C
+                
                 subq.w  #4,d2           ; if last stack value to process
                 bcc.s   return_235A     ; if stack already maxed to 4, do nothing else
                 move.w  d6,(a2)         ; else, push previous value and increment stack size
@@ -376,6 +401,7 @@ loc_235C:
                 cmp.w   d4,d1
                 beq.s   return_2370     ; if existing stack value = saved value, do nothing else
                 dbf     d5,loc_2346
+                
                 subq.w  #4,d2
                 bcc.s   return_2370
                 move.w  d4,(a2)         ; if stack maxed to 4, do nothing else
@@ -388,6 +414,7 @@ return_2370:
 
 
 ; =============== S U B R O U T I N E =======================================
+
 ; a0 : input ROM block data
 ; a1 : output RAM data
 
@@ -450,11 +477,13 @@ loc_2402:
 loc_240A:
                 
                 dbf     d5,loc_2414     ; loop while commands remain
+                
                 movem.l (sp)+,d0-a6
                 rts
 loc_2414:
                 
                 dbf     d4,loc_241C
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_241C:
@@ -462,6 +491,7 @@ loc_241C:
                 add.w   d0,d0
                 bcs.w   loc_244C        
                 dbf     d4,loc_242A
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_242A:
@@ -486,6 +516,7 @@ loc_2446:
 loc_244C:
                 
                 dbf     d4,loc_2454     ; 1...
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_2454:
@@ -493,6 +524,7 @@ loc_2454:
                 add.w   d0,d0
                 bcs.w   loc_249E        
                 dbf     d4,loc_2462     
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_2462:
@@ -523,6 +555,7 @@ loc_2496:
 loc_249E:
                 
                 dbf     d4,loc_24A6     ; 11...
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_24A6:
@@ -536,6 +569,7 @@ loc_24B8:
                 
                 clr.w   d7              ; 111
                 dbf     d4,loc_24C2
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_24C2:
@@ -543,6 +577,7 @@ loc_24C2:
                 add.w   d0,d0
                 roxl.w  #3,d7
                 dbf     d4,loc_24CE
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_24CE:
@@ -550,6 +585,7 @@ loc_24CE:
                 add.w   d0,d0
                 addx.w  d7,d7
                 dbf     d4,loc_24DA     
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_24DA:
@@ -560,6 +596,7 @@ loc_24DA:
 loc_24E0:
                 
                 dbf     d4,loc_24E8
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_24E8:
@@ -587,19 +624,20 @@ loc_2514:
                 and.w   d0,d3
 loc_251C:
                 
-                cmpi.w  #$180,d3
+                cmpi.w  #MAP_TILE_SIZE,d3
                 bcs.s   loc_2532        
                 dbf     d4,loc_252A
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_252A:
                 
                 add.w   d0,d0
                 addx.w  d3,d3
-                subi.w  #$180,d3
+                subi.w  #MAP_TILE_SIZE,d3
 loc_2532:
                 
-                addi.w  #$100,d3        ; d3 = tile offset in VDP RAM
+                addi.w  #$100,d3        ; d3.w = tile address in VRAM
                 or.w    d7,d3
                 bra.w   loc_257A        
 loc_253C:
@@ -626,6 +664,7 @@ loc_255C:
 loc_2562:
                 
                 dbf     d4,loc_256A
+                
                 moveq   #$F,d4
                 move.w  (a0)+,d0
 loc_256A:
@@ -669,17 +708,17 @@ ProcessMapTransition:
                 clr.w   d1
                 move.b  ((CURRENT_MAP-$1000000)).w,d1
                 movea.l (p_pt_MapData).l,a5
-                lsl.w   #2,d1
+                lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a5,d1.w),a5
                 addq.l  #1,a5
                 movea.l (p_pt_MapTilesets).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_25E8
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     ($2000).w,a1
-                move.w  #$800,d0
+                move.w  #2048,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDmaOnCompressedTiles
                 bsr.w   WaitForDmaQueueProcessing
@@ -690,10 +729,10 @@ loc_25E8:
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_260E
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     ($4000).w,a1
-                move.w  #$800,d0
+                move.w  #2048,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDmaOnCompressedTiles
                 bsr.w   WaitForDmaQueueProcessing
@@ -703,10 +742,10 @@ loc_260E:
                 clr.w   d0
                 move.b  (a5)+,d0
                 blt.s   loc_2632
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     ($5000).w,a1
-                move.w  #$800,d0
+                move.w  #2048,d0
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDmaOnCompressedTiles
                 bsr.w   WaitForDmaQueueProcessing
@@ -725,10 +764,10 @@ loc_2632:
                 move.w  (a4)+,d1
                 move.w  (a4)+,d2
                 move.w  (a4)+,d3
-                mulu.w  #$180,d0
-                mulu.w  #$180,d1
-                mulu.w  #$180,d2
-                mulu.w  #$180,d3
+                mulu.w  #MAP_TILE_SIZE,d0
+                mulu.w  #MAP_TILE_SIZE,d1
+                mulu.w  #MAP_TILE_SIZE,d2
+                mulu.w  #MAP_TILE_SIZE,d3
                 bsr.w   ApplyOverworldMapTransition
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ACTIVATE
@@ -746,21 +785,21 @@ ApplyOverworldMapTransition:
                 move.b  ((MAP_EVENT_PARAM_1-$1000000)).w,d0
                 andi.w  #3,d0           ; Facing
                 add.w   d0,d0
-                move.w  rjt_OverworldMapTransition(pc,d0.w),d0
-                jmp     rjt_OverworldMapTransition(pc,d0.w)
+                move.w  rjt_OverworldMapTransitions(pc,d0.w),d0
+                jmp     rjt_OverworldMapTransitions(pc,d0.w)
 
     ; End of function ApplyOverworldMapTransition
 
-rjt_OverworldMapTransition:
-                dc.w ApplyOverworldMapTransition_Right-rjt_OverworldMapTransition
-                dc.w ApplyOverworldMapTransition_Up-rjt_OverworldMapTransition
-                dc.w ApplyOverworldMapTransition_Left-rjt_OverworldMapTransition
-                dc.w ApplyOverworldMapTransition_Down-rjt_OverworldMapTransition
+rjt_OverworldMapTransitions:
+                dc.w overworldMapTransition_Right-rjt_OverworldMapTransitions
+                dc.w overworldMapTransition_Up-rjt_OverworldMapTransitions
+                dc.w overworldMapTransition_Left-rjt_OverworldMapTransitions
+                dc.w overworldMapTransition_Down-rjt_OverworldMapTransitions
 
 ; =============== S U B R O U T I N E =======================================
 
 
-ApplyOverworldMapTransition_Right:
+overworldMapTransition_Right:
                 
                 move.w  #0,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
                 move.w  #0,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
@@ -768,34 +807,35 @@ ApplyOverworldMapTransition_Right:
                 move.w  #0,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
-                move.w  #$1D,d7
+                move.w  #29,d7
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
                 move.w  #2,d0
-                move.w  #$3E,d1 
+                move.w  #62,d1
 loc_26C0:
                 
                 subq.w  #8,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
-                cmpi.w  #$14,d7
+                cmpi.w  #20,d7
                 bge.s   loc_26D0
-                move.w  #$F900,d2
+                move.w  #-1792,d2
                 bra.s   loc_26D4
 loc_26D0:
                 
-                move.w  #$F900,d2
+                move.w  #-1792,d2
 loc_26D4:
                 
-                move.w  #$F800,d3
+                move.w  #-2048,d3
                 bsr.w   sub_29A2
                 bsr.w   WaitForVInt
-                move.w  #$1F,d6
+                move.w  #31,d6
                 movem.l d0-d1,-(sp)
 loc_26E8:
                 
                 move.w  (a0,d0.w),(a1,d1.w)
-                addi.w  #$40,d0 
-                addi.w  #$40,d1 
+                addi.w  #64,d0
+                addi.w  #64,d1
                 dbf     d6,loc_26E8
+                
                 movem.l (sp)+,d0-d1
                 addq.w  #2,d0
                 andi.w  #$3E,d0 
@@ -810,6 +850,7 @@ loc_26E8:
                 bsr.w   EnableDmaQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_26C0
+                
                 bsr.w   WaitForVInt
                 move.w  #0,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
                 move.w  #0,((VIEW_PLANE_B_X_COUNTER-$1000000)).w
@@ -820,13 +861,13 @@ loc_26E8:
                 nop
                 rts
 
-    ; End of function ApplyOverworldMapTransition_Right
+    ; End of function overworldMapTransition_Right
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-ApplyOverworldMapTransition_Left:
+overworldMapTransition_Left:
                 
                 move.w  #$4F80,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
                 move.w  #$4F80,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
@@ -834,36 +875,37 @@ ApplyOverworldMapTransition_Left:
                 move.w  #$4F80,((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
-                move.w  #$1D,d7
+                move.w  #29,d7
 loc_2772:
                 
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
-                move.w  #$3C,d0 
+                move.w  #60,d0
                 move.w  #0,d1
 loc_2786:
                 
                 addq.w  #8,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
-                cmpi.w  #$14,d7
+                cmpi.w  #20,d7
                 bge.s   loc_2796
-                move.w  #$700,d2
+                move.w  #1792,d2
                 bra.s   loc_279A
 loc_2796:
                 
-                move.w  #$700,d2
+                move.w  #1792,d2
 loc_279A:
                 
-                move.w  #$800,d3
+                move.w  #2048,d3
                 bsr.w   sub_29A2
                 bsr.w   WaitForVInt
-                move.w  #$1F,d6
+                move.w  #31,d6
                 movem.l d0-d1,-(sp)
 loc_27AE:
                 
                 move.w  (a0,d0.w),(a1,d1.w)
-                addi.w  #$40,d0 
-                addi.w  #$40,d1 
+                addi.w  #64,d0
+                addi.w  #64,d1
                 dbf     d6,loc_27AE
+                
                 movem.l (sp)+,d0-d1
                 subq.w  #2,d0
                 andi.w  #$3E,d0 
@@ -878,6 +920,7 @@ loc_27AE:
                 bsr.w   EnableDmaQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_2786
+                
                 bsr.w   WaitForVInt
                 move.w  #8,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
                 move.w  #8,((VIEW_PLANE_B_X_COUNTER-$1000000)).w
@@ -888,13 +931,13 @@ loc_27AE:
                 nop
                 rts
 
-    ; End of function ApplyOverworldMapTransition_Left
+    ; End of function overworldMapTransition_Left
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-ApplyOverworldMapTransition_Up:
+overworldMapTransition_Up:
                 
                 move.w  #$5100,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
                 move.w  #$5100,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
@@ -902,15 +945,15 @@ ApplyOverworldMapTransition_Up:
                 move.w  #$5100,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
-                move.w  #$1A,d7
+                move.w  #26,d7
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
-                move.w  #$6C0,d0
+                move.w  #1728,d0
                 move.w  #0,d1
 loc_284C:
                 
                 subq.w  #8,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
-                cmpi.w  #$14,d7
+                cmpi.w  #20,d7
                 bge.s   loc_285C
                 move.w  #7,d2
                 bra.s   loc_2860
@@ -922,7 +965,7 @@ loc_2860:
                 move.w  #8,d3
                 bsr.w   sub_29A2
                 bsr.w   WaitForVInt
-                move.w  #$1F,d6
+                move.w  #31,d6
                 movem.l d0-d1,-(sp)
 loc_2874:
                 
@@ -930,10 +973,11 @@ loc_2874:
                 addq.w  #2,d0
                 addq.w  #2,d1
                 dbf     d6,loc_2874
+                
                 movem.l (sp)+,d0-d1
-                subi.w  #$40,d0 
+                subi.w  #64,d0
                 andi.w  #$7FE,d0
-                subi.w  #$40,d1 
+                subi.w  #64,d1
                 andi.w  #$7FE,d1
                 movem.l d0-d1/a0-a1,-(sp)
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
@@ -944,9 +988,10 @@ loc_2874:
                 bsr.w   EnableDmaQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_284C
+                
                 bsr.w   WaitForVInt
-                move.w  #$18,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
-                move.w  #$18,((VIEW_PLANE_B_Y_COUNTER-$1000000)).w
+                move.w  #24,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
+                move.w  #24,((VIEW_PLANE_B_Y_COUNTER-$1000000)).w
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_DEACTIVATE
                 dc.l VInt_UpdateScrollingData
@@ -954,13 +999,13 @@ loc_2874:
                 nop
                 rts
 
-    ; End of function ApplyOverworldMapTransition_Up
+    ; End of function overworldMapTransition_Up
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-ApplyOverworldMapTransition_Down:
+overworldMapTransition_Down:
                 
                 move.w  #0,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
                 move.w  #0,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
@@ -968,27 +1013,27 @@ ApplyOverworldMapTransition_Down:
                 move.w  #0,((VIEW_PLANE_B_PIXEL_Y_DEST-$1000000)).w
                 jsr     UpdateVdpPlaneB(pc)
                 nop
-                move.w  #$1A,d7
+                move.w  #26,d7
                 lea     (PLANE_B_LAYOUT).l,a0
                 lea     (PLANE_A_MAP_LAYOUT).l,a1
-                move.w  #$140,d0
+                move.w  #320,d0
                 move.w  #0,d1
 loc_2912:
                 
                 addq.w  #8,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
-                cmpi.w  #$14,d7
+                cmpi.w  #20,d7
                 bge.s   loc_2922
-                move.w  #$F9,d2 
+                move.w  #249,d2
                 bra.s   loc_2926
 loc_2922:
                 
-                move.w  #$F9,d2 
+                move.w  #249,d2
 loc_2926:
                 
-                move.w  #$F8,d3 
+                move.w  #248,d3
                 bsr.w   sub_29A2
                 bsr.w   WaitForVInt
-                move.w  #$1F,d6
+                move.w  #31,d6
                 movem.l d0-d1,-(sp)
 loc_293A:
                 
@@ -996,10 +1041,11 @@ loc_293A:
                 addq.w  #2,d0
                 addq.w  #2,d1
                 dbf     d6,loc_293A
+                
                 movem.l (sp)+,d0-d1
-                addi.w  #$40,d0 
+                addi.w  #64,d0
                 andi.w  #$7FE,d0
-                addi.w  #$40,d1 
+                addi.w  #64,d1
                 andi.w  #$7FE,d1
                 movem.l d0-d1/a0-a1,-(sp)
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
@@ -1010,6 +1056,7 @@ loc_293A:
                 bsr.w   EnableDmaQueueProcessing
                 movem.l (sp)+,d0-d1/a0-a1
                 dbf     d7,loc_2912
+                
                 bsr.w   WaitForVInt
                 move.w  #8,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
                 move.w  #8,((VIEW_PLANE_B_Y_COUNTER-$1000000)).w
@@ -1020,7 +1067,7 @@ loc_293A:
                 nop
                 rts
 
-    ; End of function ApplyOverworldMapTransition_Down
+    ; End of function overworldMapTransition_Down
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1033,10 +1080,10 @@ sub_29A2:
                 moveq   #$1F,d7
                 move.w  d2,d0
                 move.w  d2,d1
-                asr.w   #8,d0
+                asr.w   #BYTE_SHIFT_COUNT,d0
                 ext.w   d1
                 move.w  d3,d2
-                asr.w   #8,d2
+                asr.w   #BYTE_SHIFT_COUNT,d2
                 ext.w   d3
 loc_29BC:
                 
@@ -1053,8 +1100,9 @@ loc_29CA:
                 add.w   d2,VDPSPRITE_OFFSET_X(a0)
 loc_29D6:
                 
-                addq.l  #8,a0
+                addq.l  #VDP_SPRITE_ENTRY_SIZE,a0
                 dbf     d7,loc_29BC
+                
                 movem.l (sp)+,d0-a0
                 rts
 
@@ -1073,7 +1121,7 @@ LoadMapTilesets:
                 blt.w   @Skip           ; skip if map index > 127
                 
                 movea.l (p_pt_MapData).l,a5
-                lsl.w   #2,d1
+                lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a5,d1.w),a5
                 move.b  (a5)+,d0
                 
@@ -1083,10 +1131,10 @@ LoadMapTilesets:
                 move.b  (a5)+,d0
                 blt.s   @CheckTileset2
                 
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF3000_MAP_TILESET_1).l,a1
-                bsr.w   LoadCompressedData
+                bsr.w   LoadStackCompressedData
 @CheckTileset2:
                 
                 movea.l (p_pt_MapTilesets).l,a0
@@ -1094,10 +1142,10 @@ LoadMapTilesets:
                 move.b  (a5)+,d0
                 blt.s   @CheckTileset3
                 
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF6802_LOADING_SPACE).l,a1
-                bsr.w   LoadCompressedData
+                bsr.w   LoadStackCompressedData
 @CheckTileset3:
                 
                 movea.l (p_pt_MapTilesets).l,a0
@@ -1105,10 +1153,10 @@ LoadMapTilesets:
                 move.b  (a5)+,d0
                 blt.s   @CheckTileset4
                 
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF0000_RAM_START).l,a1
-                bsr.w   LoadCompressedData
+                bsr.w   LoadStackCompressedData
 @CheckTileset4:
                 
                 movea.l (p_pt_MapTilesets).l,a0
@@ -1116,10 +1164,10 @@ LoadMapTilesets:
                 move.b  (a5)+,d0
                 blt.s   @CheckTileset5
                 
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF1000_MAP_TILESET_4).l,a1
-                bsr.w   LoadCompressedData
+                bsr.w   LoadStackCompressedData
 @CheckTileset5:
                 
                 movea.l (p_pt_MapTilesets).l,a0
@@ -1127,10 +1175,10 @@ LoadMapTilesets:
                 move.b  (a5)+,d0
                 blt.s   @Skip
                 
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     (FF2000_LOADING_SPACE).l,a1
-                bsr.w   LoadCompressedData
+                bsr.w   LoadStackCompressedData
 @Skip:
                 
                 movem.l (sp)+,d0-d1/a0-a1/a5
@@ -1152,10 +1200,10 @@ LoadMap:
                 move.l  ((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
                 clr.l   ((PLANE_A_SCROLL_SPEED_X-$1000000)).w
                 clr.l   ((PLANE_B_SCROLL_SPEED_X-$1000000)).w
-                clr.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
+                clr.b   ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w
                 move.w  d0,-(sp)
                 move.w  d1,-(sp)
-                bsr.w   InitDisplay
+                bsr.w   InitializeDisplay
                 move.w  (sp)+,d1
                 ext.w   d1
                 bpl.s   loc_2ACC        
@@ -1164,24 +1212,24 @@ LoadMap:
                 clr.w   d1              ; If D1<0, re-load current map
                 move.b  ((CURRENT_MAP-$1000000)).w,d1
                 movea.l (p_pt_MapData).l,a5
-                lsl.w   #2,d1
+                lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a5,d1.w),a5
-                lea     $E(a5),a5       ; get address 02 - map properties
+                lea     MAPDATA_OFFSET_AREAS(a5),a5 ; get address 02 - map properties
                 bra.w   loc_2B80        
 loc_2ACC:
                 
                 clr.w   ((word_FFAF42-$1000000)).w ; Load new map D1
                 move.b  d1,((CURRENT_MAP-$1000000)).w
                 movea.l (p_pt_MapData).l,a5
-                lsl.w   #2,d1
+                lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a5,d1.w),a5
                 movea.l (p_pt_MapPalettes).l,a0
                 clr.w   d0
                 move.b  (a5)+,d0
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     (PALETTE_1_BASE).l,a1
-                move.w  #$20,d7 
+                move.w  #CRAM_PALETTE_SIZE,d7
                 bsr.w   CopyBytes       
                 clr.w   (PALETTE_1_BASE).l
                 tst.b   (a5)+
@@ -1244,25 +1292,25 @@ loc_2B82:
                 move.w  (a4)+,d1
                 move.w  (a4)+,d2
                 move.w  (a4)+,d3
-                mulu.w  #$180,d0
-                mulu.w  #$180,d1
-                mulu.w  #$180,d2
-                mulu.w  #$180,d3
+                mulu.w  #MAP_TILE_SIZE,d0
+                mulu.w  #MAP_TILE_SIZE,d1
+                mulu.w  #MAP_TILE_SIZE,d2
+                mulu.w  #MAP_TILE_SIZE,d3
                 bra.w   loc_2C14
 loc_2BA6:
                 
                 move.w  (a4)+,d1
                 move.w  (a4)+,d2
                 move.w  (a4)+,d3
-                mulu.w  #$180,d0
-                mulu.w  #$180,d1
-                mulu.w  #$180,d2
-                mulu.w  #$180,d3
+                mulu.w  #MAP_TILE_SIZE,d0
+                mulu.w  #MAP_TILE_SIZE,d1
+                mulu.w  #MAP_TILE_SIZE,d2
+                mulu.w  #MAP_TILE_SIZE,d3
                 move.w  (sp)+,d4
                 move.w  d4,-(sp)
 loc_2BC0:
                 
-                cmpi.w  #$FFFF,d4
+                cmpi.w  #-1,d4
                 bne.s   loc_2BE6
                 move.l  a0,-(sp)
                 move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d4
@@ -1271,9 +1319,9 @@ loc_2BC0:
 loc_2BD0:
                 
                 andi.w  #$3F,d4 
-                lsl.w   #5,d4
+                lsl.w   #ENTITYDEF_SIZE_BITS,d4
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                move.w  2(a0,d4.w),d5
+                move.w  ENTITYDEF_OFFSET_Y(a0,d4.w),d5
                 move.w  (a0,d4.w),d4
                 movea.l (sp)+,a0
                 bra.s   loc_2BF0
@@ -1281,7 +1329,7 @@ loc_2BE6:
                 
                 clr.w   d5
                 move.b  d4,d5
-                lsr.w   #8,d4
+                lsr.w   #BYTE_SHIFT_COUNT,d4
                 lsl.w   #7,d4
                 lsl.w   #7,d5
 loc_2BF0:
@@ -1301,18 +1349,18 @@ loc_2C0C:
                 bra.w   loc_2B82
 loc_2C14:
                 
-                bsr.w   LoadMapArea
+                bsr.w   LoadMapArea     
                 move.w  (sp)+,d0
-                cmpi.w  #$FFFF,d0
+                cmpi.w  #-1,d0
                 bne.s   loc_2C70
                 move.w  d4,d0
                 move.w  d5,d1
                 move.w  d0,d2
                 move.w  d1,d3
-                subi.w  #$780,d0
-                subi.w  #$780,d1
-                addi.w  #$780,d2
-                addi.w  #$600,d3
+                subi.w  #1920,d0
+                subi.w  #1920,d1
+                addi.w  #1920,d2
+                addi.w  #1536,d3
                 cmp.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
                 bge.s   loc_2C42
                 move.w  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
@@ -1321,7 +1369,7 @@ loc_2C42:
                 cmp.w   ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d2
                 ble.s   loc_2C50
                 move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d0
-                subi.w  #$F00,d0
+                subi.w  #3840,d0
 loc_2C50:
                 
                 cmp.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
@@ -1332,18 +1380,18 @@ loc_2C5A:
                 cmp.w   ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d3
                 ble.s   loc_2C68
                 move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d1
-                subi.w  #$D80,d1
+                subi.w  #3456,d1
 loc_2C68:
                 
                 lsr.w   #7,d0
                 lsr.w   #7,d1
-                lsl.w   #8,d0
+                lsl.w   #BYTE_SHIFT_COUNT,d0
                 or.w    d1,d0
 loc_2C70:
                 
                 clr.w   d1
                 move.b  d0,d1
-                lsr.w   #8,d0
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 move.w  d0,d2
                 move.w  d1,d3
                 move.w  ((MAP_AREA_LAYER2_STARTX-$1000000)).w,d4
@@ -1359,13 +1407,13 @@ loc_2C70:
                 lsl.w   #7,d6
                 lsl.w   #7,d7
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_X-$1000000)).w,d0
-                lsr.l   #8,d0
+                lsr.l   #BYTE_SHIFT_COUNT,d0
                 mulu.w  ((MAP_AREA_LAYER1_PARALLAX_Y-$1000000)).w,d1
-                lsr.l   #8,d1
+                lsr.l   #BYTE_SHIFT_COUNT,d1
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_X-$1000000)).w,d2
-                lsr.l   #8,d2
+                lsr.l   #BYTE_SHIFT_COUNT,d2
                 mulu.w  ((MAP_AREA_LAYER2_PARALLAX_Y-$1000000)).w,d3
-                lsr.l   #8,d3
+                lsr.l   #BYTE_SHIFT_COUNT,d3
                 add.w   d4,d0
                 move.w  d0,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
                 add.w   d5,d1
@@ -1396,29 +1444,29 @@ loc_2CEC:
 loc_2CF6:
                 
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
-                lsr.w   #4,d0
+                lsr.w   #NIBBLE_SHIFT_COUNT,d0
                 neg.w   d0
-                andi.w  #$FF,d0
+                andi.w  #BYTE_MASK,d0
                 move.w  d0,((VIEW_PLANE_A_X_COUNTER-$1000000)).w
                 move.w  ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
-                lsr.w   #4,d1
+                lsr.w   #NIBBLE_SHIFT_COUNT,d1
                 addq.w  #8,d1
-                andi.w  #$FF,d1
+                andi.w  #BYTE_MASK,d1
                 move.w  d1,((VIEW_PLANE_A_Y_COUNTER-$1000000)).w
                 move.w  ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d2
-                lsr.w   #4,d2
+                lsr.w   #NIBBLE_SHIFT_COUNT,d2
                 neg.w   d2
-                andi.w  #$FF,d2
+                andi.w  #BYTE_MASK,d2
                 move.w  d2,((VIEW_PLANE_B_X_COUNTER-$1000000)).w
                 move.w  ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d3
-                lsr.w   #4,d3
+                lsr.w   #NIBBLE_SHIFT_COUNT,d3
                 addq.w  #8,d3
-                andi.w  #$FF,d3
+                andi.w  #BYTE_MASK,d3
                 move.w  d3,((VIEW_PLANE_B_Y_COUNTER-$1000000)).w
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   UpdateVdpHScrollData
                 bsr.w   UpdateVdpVScrollData
-                bsr.w   InitWindowProperties
+                bsr.w   InitializeWindowProperties
                 bsr.w   ToggleRoofOnMapLoad
                 bsr.w   WaitForVInt
                 bsr.w   UpdateVdpPlaneA
@@ -1443,7 +1491,7 @@ LoadMapBlocksAndLayout:
 loc_2D74:
                 
                 move.w  (a0),d1
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 beq.w   loc_2D9C
                 jsr     j_CheckFlag
                 beq.w   loc_2D98
@@ -1461,7 +1509,7 @@ loc_2D9C:
                 movea.l $14(a5),a0
 loc_2DA6:
                 
-                cmpi.w  #$FFFF,(a0)
+                cmpi.w  #-1,(a0)
                 beq.w   loc_2DD4
                 clr.w   d1
                 move.b  2(a0),d1
@@ -1513,10 +1561,10 @@ LoadMapArea:
                 clr.w   d1
                 move.b  d0,d1
                 subq.w  #1,d1
-                mulu.w  #$180,d1
-                lsr.w   #8,d0
+                mulu.w  #MAP_TILE_SIZE,d1
+                lsr.w   #BYTE_SHIFT_COUNT,d0
                 subq.w  #1,d0
-                mulu.w  #$180,d0
+                mulu.w  #MAP_TILE_SIZE,d0
                 clr.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w
                 clr.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w
                 move.w  d0,((MAP_AREA_LAYER1_ENDX-$1000000)).w
@@ -1550,15 +1598,15 @@ LoadMapArea:
                 movea.l ((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w,a1
                 move.w  (a1)+,d0
                 movea.l (p_pt_MapTilesets).l,a0
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.l  a1,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a1
-                bsr.w   LoadCompressedData
+                bsr.w   LoadStackCompressedData
                 movea.l (sp)+,a1
                 move.w  (a1)+,d7
                 lea     (FF6802_LOADING_SPACE).l,a0
-                lea     (byte_FF9B04).l,a1
+                lea     (CURRENT_MAP_TILESET_2_COPY).l,a1
                 lsl.w   #5,d7
                 bsr.w   CopyBytes       
                 addq.l  #4,((TILE_ANIMATION_DATA_ADDRESS-$1000000)).w
@@ -1568,83 +1616,4 @@ LoadMapArea:
                 rts
 
     ; End of function LoadMapArea
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused code
-sub_2EC0:
-                
-                move.w  #$20,d6 
-                bsr.w   GenerateRandomNumber
-                move.w  d7,d0
-                move.w  #4,d6
-                bsr.w   GenerateRandomNumber
-                move.w  d7,d1
-                addi.w  #$1C,d1
-                move.w  #$10,d6
-                bsr.w   GenerateRandomNumber
-                move.w  d7,d2
-                move.w  #4,d6
-                bsr.w   GenerateRandomNumber
-                move.w  d7,d3
-                move.w  #4,d4
-                move.w  #4,d5
-                move.w  #4,d6
-                move.w  #4,d7
-                bsr.w   sub_36B2
-                bsr.w   WaitForVInt
-loc_2F04:
-                
-                move.w  #$8721,d0
-                bsr.w   SetVdpReg
-                move.w  #$8700,d0
-                bsr.w   SetVdpReg
-                bsr.w   WaitForVInt
-                bsr.w   sub_2F24
-                tst.b   ((VIEW_SCROLLING_PLANES_BITMAP-$1000000)).w
-                bne.s   loc_2F04
-                rts
-
-    ; End of function sub_2EC0
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused code
-sub_2F24:
-                
-                move.w  d0,-(sp)
-                move.w  ((PLANE_A_SCROLL_SPEED_X-$1000000)).w,d0
-                addq.w  #1,d0
-                cmpi.w  #$80,d0 
-                bgt.s   loc_2F36
-                move.w  d0,((PLANE_A_SCROLL_SPEED_X-$1000000)).w
-loc_2F36:
-                
-                move.w  ((PLANE_A_SCROLL_SPEED_Y-$1000000)).w,d0
-                addq.w  #1,d0
-                cmpi.w  #$80,d0 
-                bgt.s   loc_2F46
-                move.w  d0,((PLANE_A_SCROLL_SPEED_Y-$1000000)).w
-loc_2F46:
-                
-                move.w  ((PLANE_B_SCROLL_SPEED_X-$1000000)).w,d0
-                addq.w  #1,d0
-                cmpi.w  #$80,d0 
-                bgt.s   loc_2F56
-                move.w  d0,((PLANE_B_SCROLL_SPEED_X-$1000000)).w
-loc_2F56:
-                
-                move.w  ((PLANE_B_SCROLL_SPEED_Y-$1000000)).w,d0
-                addq.w  #1,d0
-                cmpi.w  #$80,d0 
-                bgt.s   loc_2F66
-                move.w  d0,((PLANE_B_SCROLL_SPEED_Y-$1000000)).w
-loc_2F66:
-                
-                move.w  (sp)+,d0
-                rts
-
-    ; End of function sub_2F24
 

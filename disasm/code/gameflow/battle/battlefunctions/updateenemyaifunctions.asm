@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; <BUG> A Goddess Staff is added to the deals section in shops whenever a DEF-CON switch 
+; BUG -- A Goddess Staff is added to the deals section in shops whenever a DEF-CON switch 
 ;       is activated, and if one of the following items is also present :
 ;       - Quick Ring
 ;       - Protect Ring
@@ -34,10 +34,10 @@ UpdateAllEnemiesAi:
 
 UpdateEnemyAi:
                 
-                jsr     j_GetXPos
+                jsr     j_GetCombatantX
                 tst.b   d1
                 bmi.w   @Return
-                jsr     j_GetCurrentHP
+                jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.w   @Return
                 tst.b   d0

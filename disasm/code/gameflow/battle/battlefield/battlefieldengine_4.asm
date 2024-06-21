@@ -11,7 +11,7 @@
 ;  which approximately goes highest to lowest priority of
 ;  healer, mage, archer, flyer, melee, aquatic.
 ; 
-; Specific decending priority for each move type is in tbl_MovetypesHealTargetPriority.
+; Specific decending priority for each move type is in table_HealPriorityMoveTypes.
 ; 
 ; The first byte in that table is $FF to ensure there is never a movetype
 ;  match and therefore nothing has a priority higher than AI #14 or AI #15.
@@ -24,21 +24,21 @@ CalculateHealTargetPriority:
                 
                 movem.l d0-d5/d7-a6,-(sp)
                 bsr.w   GetAiCommandset 
-                cmpi.w  #AI_13,d1
+                cmpi.w  #AICOMMANDSET_CRITICAL,d1
                 bne.s   @CheckLeaderAi
-                move.w  #13,d6
+                move.w  #MOVETYPE_TOTAL,d6
                 bra.w   @Done
 @CheckLeaderAi:
                 
-                cmpi.w  #AI_LEADER,d1
+                cmpi.w  #AICOMMANDSET_LEADER,d1
                 bne.s   @PrioritizeByMoveType
-                move.w  #13,d6
+                move.w  #MOVETYPE_TOTAL,d6
                 bra.w   @Done
 @PrioritizeByMoveType:
                 
                 bsr.w   GetMoveType     
-                lea     (tbl_HealPriorityMoveTypes).l,a0
-                move.w  #13,d6
+                lea     (table_HealPriorityMoveTypes).l,a0
+                move.w  #MOVETYPE_TOTAL,d6
                 clr.w   d0
 @FindHealPriority_Loop:
                 
@@ -94,7 +94,7 @@ loc_CE56:
                 
                 cmpi.b  #1,d7
                 bne.s   loc_CE66
-                lea     (byte_DA22).l,a4
+                lea     (table_DA22).l,a4
                 bra.w   loc_CE80
 loc_CE66:
                 
@@ -103,7 +103,7 @@ loc_CE66:
                 jsr     GetMoveType
                 clr.l   d3
                 move.b  d1,d3
-                lea     (off_D9C2).l,a4 
+                lea     (pt_D9C2).l,a4  
                 lsl.l   #2,d3
                 movea.l (a4,d3.l),a4
 loc_CE80:
@@ -128,16 +128,16 @@ loc_CE90:
 sub_CE96:
                 
                 movem.l d0/d3-a6,-(sp)
-                jsr     GetYPos
+                jsr     GetCombatantY
                 move.w  d1,d2
-                jsr     GetXPos
-                bsr.w   MakeTargetsList_Everybody
+                jsr     GetCombatantX
+                bsr.w   PopulateTargetsArrayWithAllCombatants
                 moveq   #0,d3
                 moveq   #0,d4
                 move.w  d1,d5
                 move.w  d2,d6
                 bsr.w   GetClosestAttackPosition
-                cmpi.w  #$FFFF,d1
+                cmpi.w  #-1,d1
                 bne.w   loc_CECC
                 moveq   #1,d3
                 moveq   #1,d4
@@ -154,19 +154,17 @@ loc_CECC:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get highest usable level of spell D1, considering current MP and highest known level
+; Get highest usable level of spell D1, considering current MP and highest known level.
 ; 
-;       In: D0 = caster index
-;           D1 = highest known level spell entry
-; 
-;       Out: D1 = highest usuable level spell entry
+;   In: d0.w = caster index, d1.w = highest known level spell entry
+;   Out: d1.w = highest usuable level spell entry
 
 
 GetHighestUsableSpellLevel:
                 
                 movem.l d0/d2-a6,-(sp)
                 move.w  d1,d2
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 move.w  d1,d3
                 move.w  d2,d1
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
@@ -194,11 +192,10 @@ GetHighestUsableSpellLevel:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = spell index
+; unused
 ; 
-; Out: D1 = spell index
-;      D2 = slot
+;   In: d0.b = combatant index, d1.b = spell index
+;   Out: d1.w = spell index, d2.w = slot
 
 ;unused
 GetSlotContainingSpell:
@@ -230,11 +227,10 @@ loc_CF38:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item index
+; unused
 ; 
-; Out: D1 = item index
-;      D2 = slot
+;   In: d0.b = combatant index, d1.b = item index
+;   Out: d1.w = item index, d2.w = slot
 
 ;unused
 GetSlotContainingItem:

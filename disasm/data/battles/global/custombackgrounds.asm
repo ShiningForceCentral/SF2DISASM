@@ -1,7 +1,7 @@
 
 ; ASM FILE data\battles\global\custombackgrounds.asm :
 ; 0x1FA8A..0x1FAB7 : Battle custom backgrounds table
-tbl_CustomBackgrounds:
+table_CustomBackgrounds:
                 
 ; Syntax        background [BATTLEBACKGROUND_]enum (or index)
 ;

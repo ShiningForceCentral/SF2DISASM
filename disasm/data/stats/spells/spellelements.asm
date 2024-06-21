@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\spells\spellelements.asm :
 ; 0xC24E..0xC27A : Spell elements table
-tbl_SpellElements:
+table_SpellElements:
                 
 ; Syntax        spellElement [SPELLELEMENT_]enum (or index)
                 

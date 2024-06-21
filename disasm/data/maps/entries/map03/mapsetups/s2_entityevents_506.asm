@@ -17,7 +17,7 @@ ms_map3_flag506_EntityEvents:
                 msEntityEvent 140, DOWN, Map3_1FA_EntityEvent12-ms_map3_flag506_EntityEvents
                 msEntityEvent 141, DOWN, Map3_1FA_EntityEvent13-ms_map3_flag506_EntityEvents
                 msEntityEvent 142, DOWN, (Map3_261_EntityEvent26-ms_map3_flag506_EntityEvents) & $FFFF
-                msEntityEvent 6, RIGHT, Map3_1FA_EntityEvent15-ms_map3_flag506_EntityEvents
+                msEntityEvent ALLY_KIWI, RIGHT, Map3_1FA_EntityEvent15-ms_map3_flag506_EntityEvents
                 msDefaultEntityEvent (Map3_DefaultEntityEvent-ms_map3_flag506_EntityEvents) & $FFFF
                 dc.b $FF
                 dc.b $FF
@@ -27,8 +27,8 @@ ms_map3_flag506_EntityEvents:
 
 Map3_1FA_EntityEvent0:
                 
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     678             ; "Already passed away...{N}{LEADER} feels pity.{W1}"
                 rts
 
@@ -153,9 +153,9 @@ Map3_1FA_EntityEvent15:
                 bne.s   return_512B8
                 txt     674             ; "(Shiver)...ooouu....{W1}"
                 clsTxt
-                jsr     j_HidePortraitWindow
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                jsr     j_ClosePortraitWindow
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     675             ; "{CLEAR}He is shivering.{N}Will you name him?"
                 jsr     j_YesNoPrompt
                 clsTxt
@@ -165,11 +165,11 @@ Map3_1FA_EntityEvent15:
                 jsr     j_NameAlly
                 txt     676             ; "{LEADER} named him{N}{NAME;6} and beckoned.{W1}"
                 clsTxt
-                move.w  ((SPEECH_SFX_BACKUP-$1000000)).w,((SPEECH_SFX-$1000000)).w
+                move.w  ((SPEECH_SFX_COPY-$1000000)).w,((CURRENT_SPEECH_SFX-$1000000)).w
                 jsr     LoadAndDisplayCurrentPortrait
                 txt     677             ; "Oooo!  Ooooo!{W1}"
                 clsTxt
-                jsr     j_HidePortraitWindow
+                jsr     j_ClosePortraitWindow
                 script  cs_512BA
 return_512B8:
                 

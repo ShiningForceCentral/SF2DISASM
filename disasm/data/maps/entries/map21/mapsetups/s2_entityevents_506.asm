@@ -39,8 +39,8 @@ return_53EDC:
 
 Map21_1F5_EntityEvent0:
                 
-                move.w  ((SPEECH_SFX-$1000000)).w,((SPEECH_SFX_BACKUP-$1000000)).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     580             ; "He's fainted.{W1}"
                 rts
 

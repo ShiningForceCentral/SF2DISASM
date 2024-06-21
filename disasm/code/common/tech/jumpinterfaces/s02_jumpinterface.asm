@@ -25,41 +25,41 @@ j_GetClass:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetYPos:
+j_GetCombatantY:
                 
-                jmp     GetYPos(pc)
+                jmp     GetCombatantY(pc)
 
-    ; End of function j_GetYPos
+    ; End of function j_GetCombatantY
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetMaxMP:
+j_GetMaxMp:
                 
-                jmp     GetMaxMP(pc)
+                jmp     GetMaxMp(pc)
 
-    ; End of function j_GetMaxMP
+    ; End of function j_GetMaxMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetMaxHP:
+j_GetMaxHp:
                 
-                jmp     GetMaxHP(pc)
+                jmp     GetMaxHp(pc)
 
-    ; End of function j_GetMaxHP
+    ; End of function j_GetMaxHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetXPos:
+j_GetCombatantX:
                 
-                jmp     GetXPos(pc)
+                jmp     GetCombatantX(pc)
 
-    ; End of function j_GetXPos
+    ; End of function j_GetCombatantX
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -105,21 +105,21 @@ j_GetBaseProwess:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetBaseMOV:
+j_GetBaseMov:
                 
-                jmp     GetBaseMOV(pc)
+                jmp     GetBaseMov(pc)
 
-    ; End of function j_GetBaseMOV
+    ; End of function j_GetBaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetBaseDEF:
+j_GetBaseDef:
                 
-                jmp     GetBaseDEF(pc)
+                jmp     GetBaseDef(pc)
 
-    ; End of function j_GetBaseDEF
+    ; End of function j_GetBaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -135,41 +135,41 @@ j_GetBaseResistance:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetBaseATT:
+j_GetBaseAtt:
                 
-                jmp     GetBaseATT(pc)
+                jmp     GetBaseAtt(pc)
 
-    ; End of function j_GetBaseATT
+    ; End of function j_GetBaseAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetBaseAGI:
+j_GetBaseAgi:
                 
-                jmp     GetBaseAGI(pc)
+                jmp     GetBaseAgi(pc)
 
-    ; End of function j_GetBaseAGI
+    ; End of function j_GetBaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetCurrentMOV:
+j_GetCurrentMov:
                 
-                jmp     GetCurrentMOV(pc)
+                jmp     GetCurrentMov(pc)
 
-    ; End of function j_GetCurrentMOV
+    ; End of function j_GetCurrentMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetCurrentMP:
+j_GetCurrentMp:
                 
-                jmp     GetCurrentMP(pc)
+                jmp     GetCurrentMp(pc)
 
-    ; End of function j_GetCurrentMP
+    ; End of function j_GetCurrentMp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -185,31 +185,31 @@ j_GetCurrentLevel:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetCurrentHP:
+j_GetCurrentHp:
                 
-                jmp     GetCurrentHP(pc)
+                jmp     GetCurrentHp(pc)
 
-    ; End of function j_GetCurrentHP
+    ; End of function j_GetCurrentHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetCurrentEXP:
+j_GetCurrentExp:
                 
-                jmp     GetCurrentEXP(pc)
+                jmp     GetCurrentExp(pc)
 
-    ; End of function j_GetCurrentEXP
+    ; End of function j_GetCurrentExp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetCurrentDEF:
+j_GetCurrentDef:
                 
-                jmp     GetCurrentDEF(pc)
+                jmp     GetCurrentDef(pc)
 
-    ; End of function j_GetCurrentDEF
+    ; End of function j_GetCurrentDef
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -225,11 +225,11 @@ j_GetCurrentResistance:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetCurrentATT:
+j_GetCurrentAtt:
                 
-                jmp     GetCurrentATT(pc)
+                jmp     GetCurrentAtt(pc)
 
-    ; End of function j_GetCurrentATT
+    ; End of function j_GetCurrentAtt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -255,31 +255,31 @@ j_GetAiRegion:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetAiActivationFlag:
+j_GetActivationBitfield:
                 
-                jmp     GetAiActivationFlag(pc)
+                jmp     GetActivationBitfield(pc)
 
-    ; End of function j_GetAiActivationFlag
+    ; End of function j_GetActivationBitfield
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetCurrentAGI:
+j_GetCurrentAgi:
                 
-                jmp     GetCurrentAGI(pc)
+                jmp     GetCurrentAgi(pc)
 
-    ; End of function j_GetCurrentAGI
+    ; End of function j_GetCurrentAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetEnemyIndex:
+j_GetEnemy:
                 
-                jmp     GetEnemyIndex(pc)
+                jmp     GetEnemy(pc)    
 
-    ; End of function j_GetEnemyIndex
+    ; End of function j_GetEnemy
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -325,41 +325,41 @@ j_LoadAllyName:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetYPos:
+j_SetCombatantY:
                 
-                jmp     SetYPos(pc)
+                jmp     SetCombatantY(pc)
 
-    ; End of function j_SetYPos
+    ; End of function j_SetCombatantY
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetMaxMP:
+j_SetMaxMp:
                 
-                jmp     SetMaxMP(pc)
+                jmp     SetMaxMp(pc)
 
-    ; End of function j_SetMaxMP
+    ; End of function j_SetMaxMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetMaxHP:
+j_SetMaxHp:
                 
-                jmp     SetMaxHP(pc)
+                jmp     SetMaxHp(pc)
 
-    ; End of function j_SetMaxHP
+    ; End of function j_SetMaxHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetXPos:
+j_SetCombatantX:
                 
-                jmp     SetXPos(pc)
+                jmp     SetCombatantX(pc)
 
-    ; End of function j_SetXPos
+    ; End of function j_SetCombatantX
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -405,21 +405,21 @@ j_SetBaseProwess:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetBaseMOV:
+j_SetBaseMov:
                 
-                jmp     SetBaseMOV(pc)
+                jmp     SetBaseMov(pc)
 
-    ; End of function j_SetBaseMOV
+    ; End of function j_SetBaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetBaseDEF:
+j_SetBaseDef:
                 
-                jmp     SetBaseDEF(pc)
+                jmp     SetBaseDef(pc)
 
-    ; End of function j_SetBaseDEF
+    ; End of function j_SetBaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -435,41 +435,41 @@ j_SetBaseResistance:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetBaseATT:
+j_SetBaseAtt:
                 
-                jmp     SetBaseATT(pc)
+                jmp     SetBaseAtt(pc)
 
-    ; End of function j_SetBaseATT
+    ; End of function j_SetBaseAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetBaseAGI:
+j_SetBaseAgi:
                 
-                jmp     SetBaseAGI(pc)
+                jmp     SetBaseAgi(pc)
 
-    ; End of function j_SetBaseAGI
+    ; End of function j_SetBaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetCurrentMOV:
+j_SetCurrentMov:
                 
-                jmp     SetCurrentMOV(pc)
+                jmp     SetCurrentMov(pc)
 
-    ; End of function j_SetCurrentMOV
+    ; End of function j_SetCurrentMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetCurrentMP:
+j_SetCurrentMp:
                 
-                jmp     SetCurrentMP(pc)
+                jmp     SetCurrentMp(pc)
 
-    ; End of function j_SetCurrentMP
+    ; End of function j_SetCurrentMp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -485,31 +485,31 @@ j_SetLevel:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetCurrentHP:
+j_SetCurrentHp:
                 
-                jmp     SetCurrentHP(pc)
+                jmp     SetCurrentHp(pc)
 
-    ; End of function j_SetCurrentHP
+    ; End of function j_SetCurrentHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetCurrentEXP:
+j_SetCurrentExp:
                 
-                jmp     SetCurrentEXP(pc)
+                jmp     SetCurrentExp(pc)
 
-    ; End of function j_SetCurrentEXP
+    ; End of function j_SetCurrentExp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetCurrentDEF:
+j_SetCurrentDef:
                 
-                jmp     SetCurrentDEF(pc)
+                jmp     SetCurrentDef(pc)
 
-    ; End of function j_SetCurrentDEF
+    ; End of function j_SetCurrentDef
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -535,11 +535,11 @@ j_SetCurrentResistance:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetCurrentATT:
+j_SetCurrentAtt:
                 
-                jmp     SetCurrentATT(pc)
+                jmp     SetCurrentAtt(pc)
 
-    ; End of function j_SetCurrentATT
+    ; End of function j_SetCurrentAtt
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -565,21 +565,21 @@ j_SetAiRegion:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetAiActivationFlag:
+j_SetActivationBitfield:
                 
-                jmp     SetAiActivationFlag(pc)
+                jmp     SetActivationBitfield(pc)
 
-    ; End of function j_SetAiActivationFlag
+    ; End of function j_SetActivationBitfield
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetCurrentAGI:
+j_SetCurrentAgi:
                 
-                jmp     SetCurrentAGI(pc)
+                jmp     SetCurrentAgi(pc)
 
-    ; End of function j_SetCurrentAGI
+    ; End of function j_SetCurrentAgi
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -595,81 +595,81 @@ j_SetEnemyIndex:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseMP:
+j_IncreaseMaxMp:
                 
-                jmp     IncreaseMaxMP(pc)
+                jmp     IncreaseMaxMp(pc)
 
-    ; End of function j_IncreaseMP
+    ; End of function j_IncreaseMaxMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseMaxHP:
+j_IncreaseMaxHp:
                 
-                jmp     IncreaseMaxHP(pc)
+                jmp     IncreaseMaxHp(pc)
 
-    ; End of function j_IncreaseMaxHP
+    ; End of function j_IncreaseMaxHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseBaseMOV:
+j_IncreaseBaseMov:
                 
-                jmp     IncreaseBaseMOV(pc)
+                jmp     IncreaseBaseMov(pc)
 
-    ; End of function j_IncreaseBaseMOV
+    ; End of function j_IncreaseBaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseBaseDEF:
+j_IncreaseBaseDef:
                 
-                jmp     IncreaseBaseDEF(pc)
+                jmp     IncreaseBaseDef(pc)
 
-    ; End of function j_IncreaseBaseDEF
+    ; End of function j_IncreaseBaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseBaseATT:
+j_IncreaseBaseAtt:
                 
-                jmp     IncreaseBaseATT(pc)
+                jmp     IncreaseBaseAtt(pc)
 
-    ; End of function j_IncreaseBaseATT
+    ; End of function j_IncreaseBaseAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseAGI:
+j_IncreaseBaseAgi:
                 
-                jmp     IncreaseBaseAGI(pc)
+                jmp     IncreaseBaseAgi(pc)
 
-    ; End of function j_IncreaseAGI
+    ; End of function j_IncreaseBaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseCurrentMOV:
+j_IncreaseCurrentMov:
                 
-                jmp     IncreaseCurrentMOV(pc)
+                jmp     IncreaseCurrentMov(pc)
 
-    ; End of function j_IncreaseCurrentMOV
+    ; End of function j_IncreaseCurrentMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseCurrentMP:
+j_IncreaseCurrentMp:
                 
-                jmp     IncreaseCurrentMP(pc)
+                jmp     IncreaseCurrentMp(pc)
 
-    ; End of function j_IncreaseCurrentMP
+    ; End of function j_IncreaseCurrentMp
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -685,51 +685,51 @@ j_IncreaseLevel:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseCurrentHP:
+j_IncreaseCurrentHp:
                 
-                jmp     IncreaseCurrentHP(pc)
+                jmp     IncreaseCurrentHp(pc)
 
-    ; End of function j_IncreaseCurrentHP
+    ; End of function j_IncreaseCurrentHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseEXP:
+j_IncreaseExp:
                 
-                jmp     IncreaseEXP(pc)
+                jmp     IncreaseExp(pc)
 
-    ; End of function j_IncreaseEXP
+    ; End of function j_IncreaseExp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseCurrentDEF:
+j_IncreaseCurrentDef:
                 
-                jmp     IncreaseCurrentDEF(pc)
+                jmp     IncreaseCurrentDef(pc)
 
-    ; End of function j_IncreaseCurrentDEF
+    ; End of function j_IncreaseCurrentDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseCurrentATT:
+j_IncreaseCurrentAtt:
                 
-                jmp     IncreaseCurrentATT(pc)
+                jmp     IncreaseCurrentAtt(pc)
 
-    ; End of function j_IncreaseCurrentATT
+    ; End of function j_IncreaseCurrentAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IncreaseCurrentAGI:
+j_IncreaseCurrentAgi:
                 
-                jmp     IncreaseCurrentAGI(pc)
+                jmp     IncreaseCurrentAgi(pc)
 
-    ; End of function j_IncreaseCurrentAGI
+    ; End of function j_IncreaseCurrentAgi
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -755,91 +755,91 @@ j_IncreaseDefeats:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DecreaseBaseMOV:
+j_DecreaseBaseMov:
                 
-                jmp     DecreaseBaseMOV(pc)
+                jmp     DecreaseBaseMov(pc)
 
-    ; End of function j_DecreaseBaseMOV
+    ; End of function j_DecreaseBaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DecreaseBaseDEF:
+j_DecreaseBaseDef:
                 
-                jmp     DecreaseBaseDEF(pc)
+                jmp     DecreaseBaseDef(pc)
 
-    ; End of function j_DecreaseBaseDEF
+    ; End of function j_DecreaseBaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DecreaseBaseAGI:
+j_DecreaseBaseAgi:
                 
-                jmp     DecreaseBaseAGI(pc)
+                jmp     DecreaseBaseAgi(pc)
 
-    ; End of function j_DecreaseBaseAGI
+    ; End of function j_DecreaseBaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DecreaseCurrentMOV:
+j_DecreaseCurrentMov:
                 
-                jmp     DecreaseCurrentMOV(pc)
+                jmp     DecreaseCurrentMov(pc)
 
-    ; End of function j_DecreaseCurrentMOV
+    ; End of function j_DecreaseCurrentMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DecreaseCurrentMP:
+j_DecreaseCurrentMp:
                 
-                jmp     DecreaseCurrentMP(pc)
+                jmp     DecreaseCurrentMp(pc)
 
-    ; End of function j_DecreaseCurrentMP
+    ; End of function j_DecreaseCurrentMp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DecreaseCurrentHP:
+j_DecreaseCurrentHp:
                 
-                jmp     DecreaseCurrentHP(pc)
+                jmp     DecreaseCurrentHp(pc)
 
-    ; End of function j_DecreaseCurrentHP
+    ; End of function j_DecreaseCurrentHp
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DecreaseCurrentDEF:
+j_DecreaseCurrentDef:
                 
-                jmp     DecreaseCurrentDEF(pc)
+                jmp     DecreaseCurrentDef(pc)
 
-    ; End of function j_DecreaseCurrentDEF
+    ; End of function j_DecreaseCurrentDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DecreaseCurrentATT:
+j_DecreaseCurrentAtt:
                 
-                jmp     DecreaseCurrentATT(pc)
+                jmp     DecreaseCurrentAtt(pc)
 
-    ; End of function j_DecreaseCurrentATT
+    ; End of function j_DecreaseCurrentAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DecreaseCurrentAGI:
+j_DecreaseCurrentAgi:
                 
-                jmp     DecreaseCurrentAGI(pc)
+                jmp     DecreaseCurrentAgi(pc)
 
-    ; End of function j_DecreaseCurrentAGI
+    ; End of function j_DecreaseCurrentAgi
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1095,21 +1095,21 @@ j_GetEquippableRings:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IsWeaponOrRingEquippable?:
+j_IsWeaponOrRingEquippable:
                 
-                jmp     IsWeaponOrRingEquippable?(pc)
+                jmp     IsWeaponOrRingEquippable(pc)
 
-    ; End of function j_IsWeaponOrRingEquippable?
+    ; End of function j_IsWeaponOrRingEquippable
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetEquipNewATTandDEF:
+j_GetEquipNewAttAndDef:
                 
-                jmp     GetEquipNewATTandDEF(pc)
+                jmp     GetEquipNewAttAndDef(pc)
 
-    ; End of function j_GetEquipNewATTandDEF
+    ; End of function j_GetEquipNewAttAndDef
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1125,31 +1125,31 @@ j_OrderItems:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IsItemCursed?:
+j_IsItemCursed:
                 
-                jmp     IsItemCursed?(pc)
+                jmp     IsItemCursed(pc)
 
-    ; End of function j_IsItemCursed?
+    ; End of function j_IsItemCursed
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IsItemUsableInBattle?:
+j_IsItemUsableInBattle:
                 
-                jmp     IsItemUsableInBattle?(pc)
+                jmp     IsItemUsableInBattle(pc)
 
-    ; End of function j_IsItemUsableInBattle?
+    ; End of function j_IsItemUsableInBattle
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IsItemUsableByCombatant?:
+j_IsItemUsableByCombatant:
                 
-                jmp     IsItemUsableByCombatant?(pc)
+                jmp     IsItemUsableByCombatant(pc)
 
-    ; End of function j_IsItemUsableByCombatant?
+    ; End of function j_IsItemUsableByCombatant
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1245,11 +1245,11 @@ j_GetCombatantEntryAddress_0:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetDistanceBetweenEntities:
+j_GetDistanceBetweenBattleEntities:
                 
-                jmp     GetDistanceBetweenEntities(pc)
+                jmp     GetDistanceBetweenBattleEntities(pc)
 
-    ; End of function j_GetDistanceBetweenEntities
+    ; End of function j_GetDistanceBetweenBattleEntities
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1355,21 +1355,21 @@ j_CreateItemRangeGrid:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_821C:
+j_PopulateTargetableGrid_GiveItem:
                 
-                jmp     AdjacentRange(pc)
+                jmp     PopulateTargetableGrid_GiveItem(pc)
 
-    ; End of function sub_821C
+    ; End of function j_PopulateTargetableGrid_GiveItem
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateTargetGridFromUsedItem:
+j_PopulateTargetableGrid_UseItem:
                 
-                jmp     CreateTargetGridFromUsedItem(pc)
+                jmp     PopulateTargetableGrid_UseItem(pc)
 
-    ; End of function j_CreateTargetGridFromUsedItem
+    ; End of function j_PopulateTargetableGrid_UseItem
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1377,7 +1377,7 @@ j_CreateTargetGridFromUsedItem:
 
 sub_8224:
                 
-                jmp     sub_C5FA(pc)
+                jmp     sub_C5FA(pc)    
 
     ; End of function sub_8224
 
@@ -1385,121 +1385,121 @@ sub_8224:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateTargetGridFromSpell:
+j_PopulateTargetableGrid_CastSpell:
                 
-                jmp     CreateTargetGridFromSpell(pc)
+                jmp     PopulateTargetableGrid_CastSpell(pc)
 
-    ; End of function j_CreateTargetGridFromSpell
+    ; End of function j_PopulateTargetableGrid_CastSpell
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateTargetGrid:
+j_PopulateTargetableGrid:
                 
-                jmp     CreateTargetGrid(pc)
+                jmp     PopulateTargetableGrid(pc)
 
-    ; End of function j_CreateTargetGrid
+    ; End of function j_PopulateTargetableGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MakeTargetsList:
+j_PopulateTargetsArrayWithOpponents:
                 
-                jmp     MakeTargetsList(pc)
+                jmp     PopulateTargetsArrayWithOpponents(pc)
 
-    ; End of function j_MakeTargetsList
+    ; End of function j_PopulateTargetsArrayWithOpponents
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MakeTargetsList_Allies:
+j_PopulateTargetsArrayWithAllies:
                 
-                jmp     MakeTargetsList_Allies(pc)
+                jmp     PopulateTargetsArrayWithAllies(pc)
 
-    ; End of function j_MakeTargetsList_Allies
+    ; End of function j_PopulateTargetsArrayWithAllies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MakeTargetsList_Enemies:
+j_PopulateTargetsArrayWithEnemies:
                 
-                jmp     MakeTargetsList_Enemies(pc)
+                jmp     PopulateTargetsArrayWithEnemies(pc)
 
-    ; End of function j_MakeTargetsList_Enemies
+    ; End of function j_PopulateTargetsArrayWithEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MakeTargetsList_Everybody:
+j_PopulateTargetsArrayWithAllCombatants:
                 
-                jmp     MakeTargetsList_Everybody(pc)
+                jmp     PopulateTargetsArrayWithAllCombatants(pc)
 
-    ; End of function j_MakeTargetsList_Everybody
+    ; End of function j_PopulateTargetsArrayWithAllCombatants
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateTargetsList_Allies:
+j_UpdateBattleTerrainOccupiedByAllies:
                 
-                jmp     UpdateTargetsList_Allies(pc)
+                jmp     UpdateBattleTerrainOccupiedByAllies(pc)
 
-    ; End of function j_UpdateTargetsList_Allies
+    ; End of function j_UpdateBattleTerrainOccupiedByAllies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateTargetsList_Enemies:
+j_UpdateBattleTerrainOccupiedByEnemies:
                 
-                jmp     UpdateTargetsList_Enemies(pc)
+                jmp     UpdateBattleTerrainOccupiedByEnemies(pc)
 
-    ; End of function j_UpdateTargetsList_Enemies
+    ; End of function j_UpdateBattleTerrainOccupiedByEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ConvertCoordToOffset:
+j_ConvertCoordinatesToAddress:
                 
-                jmp     ConvertCoordToOffset(pc)
+                jmp     ConvertCoordinatesToAddress(pc)
 
-    ; End of function j_ConvertCoordToOffset
+    ; End of function j_ConvertCoordinatesToAddress
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ClearMovableGrid:
+j_ClearTotalMovecostsAndMovableGridArrays:
                 
-                jmp     ClearMovableGrid(pc)
+                jmp     ClearTotalMovecostsAndMovableGridArrays(pc)
 
-    ; End of function j_ClearMovableGrid
+    ; End of function j_ClearTotalMovecostsAndMovableGridArrays
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ClearTargetGrid:
+j_ClearTargetsArray:
                 
-                jmp     ClearTargetGrid(pc)
+                jmp     ClearTargetsArray(pc)
 
-    ; End of function j_ClearTargetGrid
+    ; End of function j_ClearTargetsArray
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetTargetAtCoordOffset:
+j_GetCombatantOccupyingSpace:
                 
-                jmp     GetTargetAtCoordOffset(pc)
+                jmp     GetCombatantOccupyingSpace(pc)
 
-    ; End of function j_GetTargetAtCoordOffset
+    ; End of function j_GetCombatantOccupyingSpace
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1525,11 +1525,11 @@ j_GetCurrentTerrainType:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetMovableAtCoord:
+j_SetMovableSpace:
                 
-                jmp     SetMovableAtCoord(pc)
+                jmp     SetMovableSpace(pc)
 
-    ; End of function j_SetMovableAtCoord
+    ; End of function j_SetMovableSpace
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1595,11 +1595,11 @@ j_LeaveForce:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_IsInBattleParty?:
+j_IsInBattleParty:
                 
-                jmp     IsInBattleParty?(pc)
+                jmp     IsInBattleParty(pc)
 
-    ; End of function j_IsInBattleParty?
+    ; End of function j_IsInBattleParty
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1685,41 +1685,41 @@ j_AddAllToStack:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ExecuteAiControl:
+j_StartAiControl:
                 
-                jmp     ExecuteAiControl(pc)
+                jmp     StartAiControl(pc)
 
-    ; End of function j_ExecuteAiControl
+    ; End of function j_StartAiControl
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MakeRangeLists:
+j_PopulateMovementArrays:
                 
-                jmp     MakeRangeLists(pc)
+                jmp     PopulateMovementArrays(pc)
 
-    ; End of function j_MakeRangeLists
+    ; End of function j_PopulateMovementArrays
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GenerateTargetRangeLists:
+j_CreateMovementRangeGrid:
                 
-                jmp     GenerateTargetRangeLists(pc)
+                jmp     CreateMovementRangeGrid(pc)
 
-    ; End of function j_GenerateTargetRangeLists
+    ; End of function j_CreateMovementRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_MakeBattleEntityCancelMoveString:
+j_BuildCancelMoveString:
                 
-                jmp     MakeBattleEntityCancelMoveString(pc)
+                jmp     BuildCancelMoveString(pc)
 
-    ; End of function j_MakeBattleEntityCancelMoveString
+    ; End of function j_BuildCancelMoveString
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1737,7 +1737,7 @@ j_GetTerrain:
 
 j_SetTerrain:
                 
-                jmp     SetTerrain(pc)
+                jmp     SetTerrain(pc)  
 
     ; End of function j_SetTerrain
 
@@ -1754,14 +1754,12 @@ j_ClearAiMoveInfo:
 
 ; =============== S U B R O U T I N E =======================================
 
-; entity D0's current MOV*2, X, Y -> D0, D3, D4
 
-
-j_GetMoveInfo:
+j_InitializeMovementArrays:
                 
-                jmp     GetMoveInfo(pc) 
+                jmp     InitializeMovementArrays(pc)
 
-    ; End of function j_GetMoveInfo
+    ; End of function j_InitializeMovementArrays
 
 
 ; =============== S U B R O U T I N E =======================================

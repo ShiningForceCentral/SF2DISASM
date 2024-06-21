@@ -49,7 +49,7 @@ Map6_DescFunc0:
                 bra.s   return_54E02
 loc_54DEE:
                 
-                clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+                clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #$1A8,d0        ; {NAME} investigated.{W2}{CLEAR}
                 jsr     (DisplayText).w 
                 move.w  #$1B2,d0        ; Nothing special there.{W1}
@@ -73,7 +73,7 @@ Map6_DescFunc1:
                 bne.s   return_54E4A
                 ori.b   #0,d0
                 sndCom  SFX_FALLING
-                moveq   #$32,d0 
+                moveq   #50,d0
                 jsr     (Sleep).w       
                 chkFlg  802             ; Set after the event in the basement of Creed's Mansion
                 bne.s   loc_54E38
@@ -83,7 +83,7 @@ Map6_DescFunc1:
                 bra.s   return_54E4A
 loc_54E38:
                 
-                moveq   #$32,d0 
+                moveq   #50,d0
                 jsr     (Sleep).w       
                 sndCom  SFX_BLO
                 move.w  #$1000,d0

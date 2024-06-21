@@ -1,7 +1,7 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\fighterministatuswindowlayout.asm :
 ; 0x11AEC..0x11B46 : Fighter mini status window layout
-MiniStatusWindowLayout:
+layout_MiniStatusWindow:
                 
 ; Syntax        vdpBaseTile [VDPTILE_]enum[|MIRROR|FLIP]
 ;
@@ -28,7 +28,7 @@ MiniStatusWindowLayout:
                 vdpBaseTile UPPERCASE_P
                 vdpBaseTile UPPERCASE_P
                 vdpBaseTile H_BORDER|FLIP
-MiniStatusWindowLayout_Body:
+MiniStatusWindowLayoutBody:
                 
 ; 4th column
                 vdpBaseTile H_BORDER
@@ -36,7 +36,7 @@ MiniStatusWindowLayout_Body:
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile H_BORDER|FLIP
-MiniStatusWindowLayout_Tail:
+MiniStatusWindowLayoutTail:
                 
 ; 5th column
                 vdpBaseTile H_BORDER

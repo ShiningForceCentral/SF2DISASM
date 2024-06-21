@@ -31,7 +31,7 @@ Map42_DescFunc1:
                 bra.s   return_5FE66
 loc_5FE52:
                 
-                clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+                clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #$1A8,d0
                 jsr     (DisplayText).w 
                 move.w  #$1B2,d0
@@ -56,7 +56,7 @@ Map42_DescFunc0:
                 bra.s   return_5FE8E
 loc_5FE7A:
                 
-                clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
+                clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #$1A8,d0
                 jsr     (DisplayText).w 
                 move.w  #$1B2,d0

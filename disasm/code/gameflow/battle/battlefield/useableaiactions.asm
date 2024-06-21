@@ -6,8 +6,8 @@
 
 ; Get next attack spell usable by the caster.
 ; 
-;       In: d0.w = caster index, d3.w = starting spell slot
-;       Out: d1.w = spell index, d2.w = spell slot
+;   In: d0.w = caster index, d3.w = starting spell slot
+;   Out: d1.w = spell index, d2.w = spell slot
 
 
 GetNextUsableAttackSpell:
@@ -184,10 +184,12 @@ GetNextSupportSpell:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get the next item in combatant's inventory that can be used to cast
-;  BLAZE/FREEZE/BOLT/BLAST. <HARDCODED>
+;  BLAZE/FREEZE/BOLT/BLAST.
 ; 
 ;       In: d0.w = caster index, d3.w = starting spell slot
 ;       Out: d1.w = spell index, d2.w = spell slot
+; 
+; HARDCODED spell indexes
 
 
 GetNextUsableAttackItem:
@@ -207,7 +209,7 @@ GetNextUsableAttackItem:
                 bra.w   @Next
 @Continue:
                 
-                jsr     IsItemUsableInBattle?
+                jsr     IsItemUsableInBattle
                 bcs.w   @CheckAllowedToUse
 @Next:
                 
@@ -279,13 +281,15 @@ GetNextUsableAttackItem:
 ; =============== S U B R O U T I N E =======================================
 
 ; Get the next item in combatant's inventory that can be used to cast
-;  a healing spell. <HARDCODED>
+;  a healing spell.
 ; 
 ; This only looks for Healing Rain as a valid healing item,
 ;  unless the AI is set to use the item the in battle data.
 ; 
 ;       In: d0.w = caster index, d3.w = starting spell slot
 ;       Out: d1.w = spell index, d2.w = spell slot
+; 
+; HARDCODED item and spell indexes
 
 
 GetNextUsableHealingItem:
@@ -301,7 +305,7 @@ GetNextUsableHealingItem:
 @Continue:
                 
                 move.w  d1,d7
-                jsr     IsItemUsableInBattle?
+                jsr     IsItemUsableInBattle
                 bcc.s   @Next
                 
                 ; Is AI allowed to use item?

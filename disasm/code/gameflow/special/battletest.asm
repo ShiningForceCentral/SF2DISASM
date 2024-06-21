@@ -7,9 +7,9 @@
 
 DebugModeBattleTest:
                 
-                move.b  #$FF,((DEBUG_MODE_ACTIVATED-$1000000)).w
-                move.b  #$FF,((SPECIAL_TURBO_CHEAT-$1000000)).w
-				
+                move.b  #-1,((DEBUG_MODE_TOGGLE-$1000000)).w
+                move.b  #-1,((SPECIAL_TURBO_TOGGLE-$1000000)).w
+                
                 moveq   #ALLY_SARAH,d0
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CHESTER,d0
@@ -68,26 +68,28 @@ DebugModeBattleTest:
                 bsr.w   j_JoinForce
                 moveq   #ALLY_CLAUDE,d0
                 bsr.w   j_JoinForce
-				
-                moveq   #0,d0
-                move.w  #$63,d1 
-                bsr.w   j_SetBaseAGI
-                bsr.w   j_SetBaseATT
-                bsr.w   j_SetBaseDEF
-                bsr.w   j_SetMaxHP
-                bsr.w   j_SetCurrentAGI
-                bsr.w   j_SetCurrentATT
-                bsr.w   j_SetCurrentDEF
-                bsr.w   j_SetCurrentHP
+                
+                moveq   #ALLY_BOWIE,d0
+                move.w  #99,d1
+                bsr.w   j_SetBaseAgi
+                bsr.w   j_SetBaseAtt
+                bsr.w   j_SetBaseDef
+                bsr.w   j_SetMaxHp
+                bsr.w   j_SetCurrentAgi
+                bsr.w   j_SetCurrentAtt
+                bsr.w   j_SetCurrentDef
+                bsr.w   j_SetCurrentHp
                 sndCom  MUSIC_BATTLE_THEME_3
                 bsr.w   EnableDisplayAndInterrupts
-                bsr.w   InitDisplay
+                bsr.w   InitializeDisplay
                 bsr.w   EnableDisplayAndInterrupts
                 bsr.w   FadeInFromBlack
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_UpdateWindows
-                bsr.w   InitWindowProperties
+                bsr.w   InitializeWindowProperties
+                
+                ; Populate generic list with ally indexes [0,31]
                 move.w  #COMBATANT_ALLIES_NUMBER,(GENERIC_LIST_LENGTH).l
                 lea     (GENERIC_LIST).l,a0
                 move.l  #$10203,(a0)+
@@ -101,14 +103,16 @@ DebugModeBattleTest:
                 bsr.w   CheatModeConfiguration
 byte_77DE:
                 
+                @Start:
                 txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
-                move.w  #49,d2
+                move.w  #BATTLES_DEBUG_NUMBER,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0
-                blt.w   loc_7894
+                blt.w   @DebugLevelUp
+                
                 movem.w d0-d2,-(sp)
                 clr.w   d0
                 clr.w   d1
@@ -116,20 +120,21 @@ byte_77DE:
                 jsr     j_NumberPrompt
                 tst.w   d0
                 movem.w (sp)+,d0-d2
-                beq.s   loc_7820
+                
+                beq.s   @DebugSetFlags
                 move.w  d0,d1
                 addi.w  #BATTLE_INTRO_CUTSCENE_FLAGS_START,d1
                 jsr     j_SetFlag
-loc_7820:
+@DebugSetFlags:
                 
                 movem.w d0-d4,-(sp)
-                move.w  #$46,d0 
-                jsr     j_DebugFlagSetter
+                move.w  #FLAG_INDEX_FOLLOWERS_ASTRAL,d0 ; Astral is a follower
+                jsr     j_DebugSetFlag
                 movem.w (sp)+,d0-d4
                 clr.w   d1
                 move.b  d0,d1
-                mulu.w  #BATTLEMAPCOORDS_ENTRY_SIZE_FULL,d0
-                lea     BattleMapCoordinates(pc), a0
+                mulu.w  #BATTLEMAPCOORDINATES_ENTRY_SIZE_FULL,d0
+                lea     table_BattleMapCoordinates(pc), a0
                 nop
                 adda.w  d0,a0
                 move.b  (a0)+,d0
@@ -138,35 +143,35 @@ loc_7820:
                 move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
                 jsr     j_BattleLoop
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 txt     460             ; "Shop number?{D1}"
                 move.w  #0,d0
                 move.w  #0,d1
-                move.w  #$64,d2 
+                move.w  #SHOPS_DEBUG_MAX_INDEX,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     j_ShopMenuActions
-                jsr     j_MainMenuActions
-                jsr     j_CaravanActions
-                bra.w   byte_77DE       
-loc_7894:
+                jsr     j_ShopMenu
+                jsr     j_FieldMenu
+                jsr     j_CaravanMenu
+                bra.w   byte_77DE       ; @Start
+@DebugLevelUp:
                 
-                bsr.w   AssignStats_BattleTest
-                jsr     j_InitMemberListScreen
+                bsr.w   LoadAllyStatsDecimalDigits
+                jsr     j_InitializeMembersListScreen
                 tst.b   d0
-                bne.w   byte_77DE       
-                bpl.s   loc_78B6
+                bne.w   byte_77DE       ; @Start
+                bpl.s   @loc_4
                 movem.l d0-a6,-(sp)
-                jsr     j_ChurchMenuActions
+                jsr     j_ChurchMenu
                 movem.l (sp)+,d0-a6
-                bra.s   loc_78BA
-loc_78B6:
+                bra.s   @loc_5
+@loc_4:
                 
                 bsr.w   LevelUpWholeForce
-loc_78BA:
+@loc_5:
                 
-                bra.s   loc_7894
+                bra.s   @DebugLevelUp
 
     ; End of function DebugModeBattleTest
 
@@ -174,39 +179,40 @@ loc_78BA:
 ; =============== S U B R O U T I N E =======================================
 
 
-AssignStats_BattleTest:
+LoadAllyStatsDecimalDigits:
                 
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   d0
                 lea     (FF0000_RAM_START).l,a0
-AssignStats_Loop:
+@Loop:
                 
                 bsr.w   j_GetCurrentLevel
                 bsr.w   GetDecimalDigits
                 move.w  d1,(a0)
-                bsr.w   j_GetMaxHP
-                bsr.w   j_SetCurrentHP
+                bsr.w   j_GetMaxHp
+                bsr.w   j_SetCurrentHp
                 bsr.w   GetDecimalDigits
                 move.w  d1,2(a0)
-                bsr.w   j_GetMaxMP
-                bsr.w   j_SetCurrentMP
+                bsr.w   j_GetMaxMp
+                bsr.w   j_SetCurrentMp
                 bsr.w   GetDecimalDigits
                 move.w  d1,4(a0)
-                bsr.w   j_GetBaseATT
+                bsr.w   j_GetBaseAtt
                 bsr.w   GetDecimalDigits
                 move.w  d1,6(a0)
-                bsr.w   j_GetBaseDEF
+                bsr.w   j_GetBaseDef
                 bsr.w   GetDecimalDigits
                 move.w  d1,8(a0)
-                bsr.w   j_GetBaseAGI
+                bsr.w   j_GetBaseAgi
                 bsr.w   GetDecimalDigits
-                move.w  d1,$A(a0)
-                adda.w  #$10,a0
+                move.w  d1,10(a0)
+                adda.w  #16,a0
                 addq.w  #1,d0
-                dbf     d7,AssignStats_Loop
+                dbf     d7,@Loop
+                
                 rts
 
-    ; End of function AssignStats_BattleTest
+    ; End of function LoadAllyStatsDecimalDigits
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -234,15 +240,15 @@ GetDecimalDigits:
                 
                 move.w  d1,d2
                 ext.l   d2
-                divs.w  #100,d2 
+                divs.w  #100,d2
                 move.w  d2,d3
-                mulu.w  #$100,d3
+                mulu.w  #256,d3
                 move.w  d3,d1
                 swap    d2
                 ext.l   d2
                 divs.w  #10,d2
                 move.w  d2,d3
-                mulu.w  #$10,d3
+                mulu.w  #16,d3
                 add.w   d3,d1
                 swap    d2
                 add.w   d2,d1

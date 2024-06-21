@@ -59,17 +59,17 @@ loc_44B8E:
 ; In: d0.w = entity index
 
 
-SetUnitCursorSpeedx2:
+SetCursorEntitySpeedx2:
                 
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                move.l  #eas_UnitCursorSpeedx2,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
+                move.l  #eas_CursorSpeedx2,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
 
-    ; End of function SetUnitCursorSpeedx2
+    ; End of function SetCursorEntitySpeedx2
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,17 +77,17 @@ SetUnitCursorSpeedx2:
 ; In: d0.w = entity index
 
 
-SetUnitCursorActscript:
+SetCursorEntityActscript:
                 
                 move.w  d0,-(sp)
                 move.l  a0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                move.l  #eas_UnitCursor,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
+                move.l  #eas_Cursor,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 movea.l (sp)+,a0
                 move.w  (sp)+,d0
                 rts
 
-    ; End of function SetUnitCursorActscript
+    ; End of function SetCursorEntityActscript
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -182,7 +182,7 @@ SetEntityMovescriptToIdle:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = entity index
+; In: d0.w = entity index, d1.w, d2.w, d3.w
 
 
 AddFollower:
@@ -190,25 +190,25 @@ AddFollower:
                 movem.l a0-a1,-(sp)
                 move.w  d0,-(sp)
                 bsr.w   GetEntityEntryAddress
-                movea.l (ENTITY_WALKING_PARAMS).l,a1
+                movea.l (ENTITY_WALKING_PARAMETERS).l,a1
                 move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 lea     eas_Follower1(pc), a0
-                move.w  #$2A,d7 
+                move.w  #42,d7
                 jsr     (CopyBytes).w   
-                addi.l  #$2A,(ENTITY_WALKING_PARAMS).l 
+                addi.l  #42,(ENTITY_WALKING_PARAMETERS).l
                 move.w  d1,$1E(a1)
                 move.w  d2,$20(a1)
                 move.w  d3,$22(a1)
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
                 move.w  (sp)+,d0
 loc_44C6A:
                 
                 cmp.b   (a0),d0
                 beq.w   loc_44C7E
-                cmpi.b  #$FF,(a0)+
+                cmpi.b  #-1,(a0)+
                 bne.s   loc_44C6A
                 move.b  d0,-1(a0)
-                move.b  #$FF,(a0)
+                move.b  #-1,(a0)
 loc_44C7E:
                 
                 movem.l (sp)+,a0-a1
@@ -231,29 +231,30 @@ HideEntity:
                 move.l  (a0),ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  (sp)+,d0
                 lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
-                moveq   #$3F,d7 
-loc_44CA0:
+                moveq   #ENTITIES_TOTAL_COUNTER,d7
+@Loop_EntityEvent:
                 
                 cmp.b   (a0)+,d0
-                bne.s   loc_44CAA
-                move.b  #$FF,-1(a0)
-loc_44CAA:
+                bne.s   @NextEntity
+                move.b  #-1,-1(a0)
+@NextEntity:
                 
-                dbf     d7,loc_44CA0
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
-loc_44CB2:
+                dbf     d7,@Loop_EntityEvent
                 
-                cmpi.b  #$FF,(a0)
-                beq.w   loc_44CCA
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
+@Loop_Follower:
+                
+                cmpi.b  #-1,(a0)
+                beq.w   @Done
                 cmp.b   (a0)+,d0
-                bne.s   loc_44CB2
-loc_44CBE:
+                bne.s   @Loop_Follower
+@ShiftFollowers:
                 
                 move.b  (a0),-1(a0)
-                bmi.w   loc_44CCA
+                bmi.w   @Done
                 addq.l  #1,a0
-                bra.s   loc_44CBE
-loc_44CCA:
+                bra.s   @ShiftFollowers
+@Done:
                 
                 movem.l (sp)+,a0-a1
                 rts
@@ -271,12 +272,12 @@ SetWalkingActscript:
                 move.w  d0,-(sp)
                 movem.l a0-a1,-(sp)
                 bsr.w   GetEntityEntryAddress
-                movea.l (ENTITY_WALKING_PARAMS).l,a1
+                movea.l (ENTITY_WALKING_PARAMETERS).l,a1
                 move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 lea     eas_Walking(pc), a0
-                move.w  #$32,d7 
+                move.w  #50,d7
                 jsr     (CopyBytes).w   
-                addi.l  #$32,(ENTITY_WALKING_PARAMS).l 
+                addi.l  #50,(ENTITY_WALKING_PARAMETERS).l
                 move.w  d1,$22(a1)
                 move.w  d2,$24(a1)
                 move.w  d3,$26(a1)
@@ -298,13 +299,13 @@ sub_44D0E:
                 move.w  d0,-(sp)
                 movem.l a0-a2,-(sp)
                 bsr.w   GetEntityEntryAddress
-                movea.l (ENTITY_WALKING_PARAMS).l,a1
+                movea.l (ENTITY_WALKING_PARAMETERS).l,a1
                 move.l  a1,ENTITYDEF_OFFSET_ACTSCRIPTADDR(a0)
                 lea     eas_Walking(pc), a0
-                move.w  #$20,d7 
+                move.w  #32,d7
                 jsr     (CopyBytes).w   
-                addi.l  #$20,(ENTITY_WALKING_PARAMS).l 
-                movea.l (ENTITY_WALKING_PARAMS).l,a1
+                addi.l  #32,(ENTITY_WALKING_PARAMETERS).l
+                movea.l (ENTITY_WALKING_PARAMETERS).l,a1
                 movea.l d5,a2
                 move.l  a1,d5
 loc_44D48:
@@ -341,7 +342,7 @@ loc_44D90:
                 
                 move.w  #$34,(a1)+ 
                 move.l  d5,(a1)+
-                move.l  a1,(ENTITY_WALKING_PARAMS).l
+                move.l  a1,(ENTITY_WALKING_PARAMETERS).l
                 movem.l (sp)+,a0-a2
                 move.w  (sp)+,d0
                 rts

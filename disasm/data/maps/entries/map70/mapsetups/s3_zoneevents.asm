@@ -13,7 +13,7 @@ ms_map70_ZoneEvents:
 
 Map70_ZoneEvent0:
                 
-                move.w  #$E,d0
+                move.w  #BATTLE_SOUTHEAST_DESERT,d0
                 jsr     CheckRandomBattle
                 rts
 
@@ -29,7 +29,7 @@ Map70_DefaultZoneEvent:
                 chkFlg  510             ; Battle 10 completed - BATTLE_TO_THE_EAST                 
                 bne.s   return_4FE30
                 setFlg  410             ; Battle 10 unlocked - BATTLE_TO_THE_EAST               
-                move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
+                move.l  #MAP_EVENT_RELOADMAP,((MAP_EVENT_TYPE-$1000000)).w
 return_4FE30:
                 
                 rts

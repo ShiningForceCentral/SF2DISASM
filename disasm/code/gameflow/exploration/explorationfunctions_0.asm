@@ -28,18 +28,18 @@ loc_237A4:
                 move.b  ENTITYDEF_OFFSET_LAYER(a0,d0.w),d4
                 andi.w  #3,d3
                 move.w  d3,d5
-                lsl.w   #2,d5
+                lsl.w   #INDEX_SHIFT_COUNT,d5
 loc_237C8:
                 
                 ; convert X/Y position from pixels into an offset for the Block table
-                add.w   tbl_PixelOffsets_X(pc,d5.w),d1
-                add.w   tbl_PixelOffsets_Y(pc,d5.w),d2
+                add.w   table_PixelOffsets_X(pc,d5.w),d1
+                add.w   table_PixelOffsets_Y(pc,d5.w),d2
                 move.w  d1,d6
                 move.w  d2,d7
                 ext.l   d6
                 ext.l   d7
-                divs.w  #$180,d6
-                divs.w  #$180,d7
+                divs.w  #MAP_TILE_SIZE,d6
+                divs.w  #MAP_TILE_SIZE,d7
                 lsl.w   #6,d7
                 add.w   d6,d7
                 add.w   d7,d7
@@ -54,7 +54,7 @@ loc_237FE:
                 
                 cmp.b   ((VIEW_TARGET_ENTITY-$1000000)).w,d0
                 beq.w   loc_2382A       ; skip this entity because it's the player!
-                bsr.w   IsFollowerEntity?
+                bsr.w   IsFollowerEntity
                 bne.w   loc_2382A       ; skip this entity because it's a follower!
                 ; get distance from activated block
                 move.w  (a0),d5
@@ -70,14 +70,14 @@ loc_2381A:
 loc_23820:
                 
                 add.w   d6,d5
-                cmpi.w  #$180,d5
+                cmpi.w  #MAP_TILE_SIZE,d5
                 bcs.w   loc_2383A       ; distance is less than 1 block
 loc_2382A:
                 
                 addq.w  #1,d0
                 lea     NEXT_ENTITYDEF(a0),a0
                 dbf     d7,loc_237FE
-                moveq   #$FFFFFFFF,d0
+                moveq   #-1,d0
                 bra.w   loc_23840
 loc_2383A:
                 
@@ -97,14 +97,15 @@ loc_23840:
 ; Is entity d0.b a follower? Return CCR zero-bit set if true.
 
 
-IsFollowerEntity?:
+IsFollowerEntity:
                 
                 movem.l d0/a0,-(sp)
-                lea     ((EXPLORATION_UNITS-$1000000)).w,a0
+                lea     ((EXPLORATION_ENTITIES-$1000000)).w,a0
 @FindEntity_Loop:
                 
-                cmpi.b  #CODE_TERMINATOR_BYTE,(a0)
+                cmpi.b  #-1,(a0)
                 beq.w   @Done
+                
                 cmp.b   (a0)+,d0
                 bne.s   @FindEntity_Loop
                 
@@ -114,7 +115,7 @@ IsFollowerEntity?:
                 movem.l (sp)+,d0/a0
                 rts
 
-    ; End of function IsFollowerEntity?
+    ; End of function IsFollowerEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -130,8 +131,8 @@ CheckArea:
                 rts
 loc_2386C:
                 
-                clr.w   ((TEXT_NAME_INDEX_1-$1000000)).w
-                clr.w   ((SPEECH_SFX-$1000000)).w
+                clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
@@ -141,14 +142,14 @@ loc_2386C:
                 move.w  d2,d0
                 andi.w  #3,d3
                 move.w  d3,d5
-                lsl.w   #2,d5
-                lea     tbl_PixelOffsets_X(pc), a0
+                lsl.w   #INDEX_SHIFT_COUNT,d5
+                lea     table_PixelOffsets_X(pc), a0
                 add.w   (a0,d5.w),d0
                 add.w   2(a0,d5.w),d1
                 ext.l   d0
                 ext.l   d1
-                divs.w  #$180,d0
-                divs.w  #$180,d1
+                divs.w  #MAP_TILE_SIZE,d0
+                divs.w  #MAP_TILE_SIZE,d1
                 move.w  d0,d4
                 move.w  d1,d5
                 move.w  d1,d3
@@ -161,7 +162,7 @@ loc_2386C:
                 cmpi.w  #$1800,d3
                 bne.s   loc_238E8
                 ; block has chest flag set
-                jsr     (OpenChest).w
+                jsr     (OpenChest).w   
                 txt     403             ; "{NAME} opened the chest.{W2}{CLEAR}"
                 move.w  d2,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
@@ -233,7 +234,7 @@ byte_23994:
                 
                 ; finish up by closing windows
                 clsTxt
-                moveq   #$FFFFFFFF,d0
+                moveq   #-1,d0
 return_2399A:
                 
                 rts

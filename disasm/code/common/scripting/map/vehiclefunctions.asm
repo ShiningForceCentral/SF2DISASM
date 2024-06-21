@@ -192,14 +192,14 @@ cs_45470:       setActscriptWait 159,eas_45360
                 setSprite ALLY_BOWIE,ALLY_BOWIE
                 setActscriptWait ALLY_BOWIE,eas_4548C
                 csc_end
-byte_45488:      ac_clonePos $1F
+byte_45488:      ac_clonePos $1F        ; ENTITY_UNIT_RAFT
 eas_4548C:       ac_moveFacRelPos 0,1
                  ac_soundCommand SFX_WARP
                  ac_waitDest
 word_45498:      ac_branch
                 dc.w (eas_Idle-word_45498) & $FFFF
-word_4549C:     dc.w 384
-word_4549E:     dc.w 0
+table_4549C:    dc.w 384
+table_4549E:    dc.w 0
                 dc.w 0
                 dc.w -384
                 dc.w -384
@@ -218,9 +218,9 @@ sub_454AC:
                 move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
                 clr.w   d3
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d3
-                lsl.w   #2,d3
-                add.w   word_4549C(pc,d3.w),d0
-                add.w   word_4549E(pc,d3.w),d1
+                lsl.w   #INDEX_SHIFT_COUNT,d3
+                add.w   table_4549C(pc,d3.w),d0
+                add.w   table_4549E(pc,d3.w),d1
                 sub.w   ENTITYDEF_ENTITY32_XDEST(a0),d0
                 bpl.s   loc_454D4
                 neg.w   d0
@@ -249,8 +249,8 @@ sub_454E4:
                 move.w  ENTITYDEF_OFFSET_YDEST(a0),d1
                 ext.l   d0
                 ext.l   d1
-                divs.w  #$180,d0
-                divs.w  #$180,d1
+                divs.w  #MAP_TILE_SIZE,d0
+                divs.w  #MAP_TILE_SIZE,d1
                 move.b  ((CURRENT_MAP-$1000000)).w,((RAFT_MAP-$1000000)).w
                 move.b  d0,((RAFT_X-$1000000)).w
                 move.b  d1,((RAFT_Y-$1000000)).w
@@ -265,7 +265,7 @@ sub_454E4:
 
 ShrinkIntoCaravanBowieAndFollowers:
                 
-                move.b  #$FF,((VIEW_TARGET_ENTITY-$1000000)).w
+                move.b  #-1,((VIEW_TARGET_ENTITY-$1000000)).w
                 clr.w   d0
                 bsr.w   MakeEntityIdle  
                 moveq   #1,d0
