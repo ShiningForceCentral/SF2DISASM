@@ -1314,8 +1314,8 @@ itemEntryMaskIndex = $7F
 itemEntryMaskBrokenBit = $8000
 
     if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-itemEntryIndexAndEquippedBitOffset = 2
-itemEntrySize = 4
+itemEntryIndexAndEquippedBitOffset = itemEntryIndexAndEquippedBitOffset*2
+itemEntrySize = itemEntrySize*2
     endif
     
     if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
@@ -1328,9 +1328,9 @@ ITEMENTRY_SIZE: equ itemEntrySize
 ITEMENTRY_UPPERBIT_EQUIPPED: equ 4
 ITEMENTRY_BIT_EQUIPPED: equ itemEntryBitEquipped
 ITEMENTRY_UPPERBIT_BROKEN: equ 7
-ITEMENTRY_BIT_USABLE_BY_AI: equ $D
-ITEMENTRY_BIT_DROPPED_BY_ENEMY: equ $E
-ITEMENTRY_BIT_BROKEN: equ $F
+ITEMENTRY_BIT_USABLE_BY_AI: equ 13
+ITEMENTRY_BIT_DROPPED_BY_ENEMY: equ 14
+ITEMENTRY_BIT_BROKEN: equ 15
 ITEMENTRY_MASK_INDEX: equ itemEntryMaskIndex
 ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT: equ itemEntryMaskBrokenBit|itemEntryMaskIndex
 

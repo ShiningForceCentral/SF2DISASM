@@ -2228,20 +2228,15 @@ GetEquipNewAttAndDef:
 
 GetNewAttAndDefWithItemEquipped:
                 
+            if (STANDARD_BUILD=1)
+                include "code\common\stats\getnewattanddefwithitemequipped-standard.asm"
+            else
                 movem.l d0-d1/d4-a0,-(sp)
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d7
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,d4
-            else
                 clr.w   d4
-            endif
 @FindEquippedItem_Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d5
-            else
                 move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
-            endif
                 btst    #ITEMENTRY_BIT_EQUIPPED,d5
                 beq.s   @Next
                 movem.l d0-d1/a0,-(sp)  ; it's equipped
@@ -2254,54 +2249,26 @@ GetNewAttAndDefWithItemEquipped:
                 bne.w   @GetNewAttAndDef ; is the item type we're looking for
 @Next:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                addq.w  #ITEMENTRY_SIZE,a0
-            else
                 addq.w  #ITEMENTRY_SIZE,d4
-            endif
                 dbf     d7,@FindEquippedItem_Loop
                 
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d7
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movea.l d4,a0
-            else
                 clr.w   d4
-            endif
 @FindFirstUnequippedItem_Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d5
-            else
                 move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
-            endif
                 btst    #ITEMENTRY_BIT_EQUIPPED,d5
                 beq.w   @GetNewAttAndDef
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                addq.w  #ITEMENTRY_SIZE,a0
-            else
                 addq.w  #ITEMENTRY_SIZE,d4
-            endif
                 dbf     d7,@FindFirstUnequippedItem_Loop
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movea.l d4,a0
-            else
                 clr.w   d4              ; default to item 0
-            endif
 @GetNewAttAndDef:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d5
-            else
                 move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
-            endif
                 movem.l d4-d5/a0,-(sp)
                 bset    #ITEMENTRY_BIT_EQUIPPED,d1
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w d1,COMBATANT_OFFSET_ITEMS(a0)
-            else
                 move.w  d1,COMBATANT_OFFSET_ITEMS(a0,d4.w) ; equip item
-            endif
                 bsr.w   ApplyStatusEffectsAndItemsOnStats
                 clr.w   d2
                 move.b  COMBATANT_OFFSET_ATT_CURRENT(a0),d2
@@ -2310,16 +2277,13 @@ GetNewAttAndDefWithItemEquipped:
                 movem.l (sp)+,d4-d5/a0
                 
                 movem.w d2-d3,-(sp)
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w d5,COMBATANT_OFFSET_ITEMS(a0)
-            else
                 move.w  d5,COMBATANT_OFFSET_ITEMS(a0,d4.w) ; and unequip
-            endif
                 bsr.w   ApplyStatusEffectsAndItemsOnStats
                 movem.w (sp)+,d2-d3
                 
                 movem.l (sp)+,d0-d1/d4-a0
                 rts
+            endif
 
     ; End of function GetNewAttAndDefWithItemEquipped
 

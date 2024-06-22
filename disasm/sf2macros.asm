@@ -701,8 +701,8 @@ loadSavedMithrilWeaponOrder: macro
                 bne.w   @Next           ; check next weapon slot if current one is occupied
                 move.w  \1,(\2)
                 bra.w   @Done           ; move item index to current weapon slot in RAM, and we're done
-                move.w  #2,d0
-@Next:          adda.w  d0,a0
+@Next:          move.w  #2,d0
+                adda.w  d0,a0
             endif
         endm
     
