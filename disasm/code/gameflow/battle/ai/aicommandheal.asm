@@ -59,7 +59,7 @@ ExecuteAiCommand_Heal:
                 move.w  d0,BATTLEACTION_OFFSET_ITEM_SLOT(a1)
                 clr.w   d0
                 move.b  caster(a6),d0
-                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a1)
+                move.w  d0,BATTLEACTION_OFFSET_TARGET(a1)
                 clr.w   d1
                 move.b  itemEntry(a6),d1
                 move.w  d1,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
@@ -381,7 +381,7 @@ ExecuteAiCommand_Heal:
                 move.w  d0,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a1)
                 clr.w   d0
                 move.b  (a0,d6.w),d0
-                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a1)
+                move.w  d0,BATTLEACTION_OFFSET_TARGET(a1)
                 bra.s   @Goto_Done
 @LoadUseItemData:
                 
@@ -391,7 +391,7 @@ ExecuteAiCommand_Heal:
                 move.w  d0,BATTLEACTION_OFFSET_ITEM_SLOT(a1)
                 clr.w   d0
                 move.b  (a0,d6.w),d0
-                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a1)
+                move.w  d0,BATTLEACTION_OFFSET_TARGET(a1)
                 clr.w   d0
                 move.b  caster(a6),d0
                 move.b  itemSlot(a6),d1

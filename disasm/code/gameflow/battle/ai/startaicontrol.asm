@@ -307,7 +307,7 @@ ProcessExploderAi:
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_BURST_ROCK,(a0)
                 move.w  #SPELL_B_ROCK,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
-                move.w  d5,BATTLEACTION_OFFSET_ACTOR(a0)
+                move.w  d5,BATTLEACTION_OFFSET_TARGET(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #-1,(a0)
                 bra.w   @Done
