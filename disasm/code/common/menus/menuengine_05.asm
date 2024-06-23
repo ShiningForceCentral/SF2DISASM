@@ -470,7 +470,7 @@ loc_12D34:
                 subq.w  #1,d4
 @isLargeMapsprite:
                 
-                jsr     IsEnemySpecialSprite ; In: d1.w = entity mapsprite index, Out: CCR carry-bit clear if true
+                jsr     IsEnemySpecialSprite ; In: d1.w = entity mapsprite index, Out: CCR carry-bit clear if large sprite belongs to an enemy
                 movem.w (sp)+,d1             ; MOVEM to pull value back from the stack without affecting the CCR
             else
                 ; Subtract 1 from d4.w if mapsprite either belongs to an enemy entity, or is large
