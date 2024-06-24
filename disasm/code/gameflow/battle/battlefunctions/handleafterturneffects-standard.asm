@@ -13,12 +13,12 @@ combatant = -2
 
 ProcessAfterTurnEffects:
                 
+                clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 jsr     GetCurrentHP
                 bne.s   @Continue
                 rts                     ; skip everything if combatant is dead
                 
-@Continue:      clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
-                link    a6,#-4
+@Continue:      link    a6,#-4
                 move.w  d0,combatant(a6)
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 
