@@ -285,14 +285,15 @@ LEVELUP_ARGUMENTS: equ $FFAF82 ; arguments passed to level up messages :
                                         ;  5: Agility
                                         ;  6: learned spell index
                                         ;  7: learned spell level
-CURRENT_MEMBERSUMMARY_PAGE: equ $FFAF8C ; 0 = member
-                                        ; 1 = items
+CURRENT_MEMBERS_LIST_SUMMARY_PAGE: equ $FFAF8C ; 0 = main
+                                        ; 1 = item
                                         ; 2 = magic
 CURSOR_RADIUS: equ $FFAF8E
 BATTLE_ENTITY_CHOSEN_X: equ $FFAF90
 BATTLE_ENTITY_CHOSEN_Y: equ $FFAF91
 IS_TARGETING: equ $FFAF93 ; used to determine whether to create a second mini status window
-word_FFAF9E: equ $FFAF9E
+WINDOW_LAYOUT_SHIFT_DIRECTION: equ $FFAF9E ; members list : 0 = up, 1 = down
+                                        ; shop inventory : 0 = left, 1 = right
 byte_FFAFA0: equ $FFAFA0 ; related to sprites (64 bytes)
 BATTLESCENE_BATTLESPRITE_TOGGLE: equ $FFAFA1 ; $010101010101010101 all 9 parts shown
 BATTLESCENE_WEAPONSPRITE_TOGGLE: equ $FFAFAA ; $01010101 all 4 parts shown
@@ -347,7 +348,10 @@ word_FFB134: equ $FFB134
 DISPLAYED_MEMBERS_LIST_FIRST_ENTRY: equ $FFB136 ; first entry in currently displayed portion of member list
 DISPLAYED_MEMBERS_LIST_SELECTED_ENTRY: equ $FFB138 ; selected entry in currently displayed portion of member list
 SELECTED_ITEM_INDEX: equ $FFB13A ; currently selected item index
-byte_FFB13C: equ $FFB13C
+CURRENT_ITEM_SUBMENU_ACTION: equ $FFB13C ; 0 = use
+                                        ; 1 = give
+                                        ; 2 = drop
+                                        ; 3 = equip
 CURRENT_MEMBERS_LIST_PAGE: equ $FFB13D
 WINDOW_IS_PRESENT: equ $FFB13F ; textbox state ? 1 without window, 2 with window
 ENTITY_EVENT_INDEX_LIST: equ $FFB140 ; 1 byte holding related entity index per entity event

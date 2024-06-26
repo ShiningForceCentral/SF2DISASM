@@ -217,7 +217,7 @@ battlesceneScript_DetermineTargetsByAction:
                 bne.s   @IsCastSpell
                 
                 move.w  #1,((TARGETS_LIST_LENGTH-$1000000)).w
-                move.b  BATTLEACTION_OFFSET_TARGET(a3),((TARGETS_LIST-$1000000)).w
+                move.b  BATTLEACTION_OFFSET_ITEM_OR_SPELL_LOWER_BYTE(a3),((TARGETS_LIST-$1000000)).w
                 bra.s   @Done
 @IsCastSpell:
                 
@@ -225,7 +225,7 @@ battlesceneScript_DetermineTargetsByAction:
                 bne.s   @IsUseItem
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                move.w  BATTLEACTION_OFFSET_ACTOR(a3),d0
+                move.w  BATTLEACTION_OFFSET_TARGET(a3),d0
                 jsr     PopulateTargetableGrid_CastSpell
                 bra.s   @Done
 @IsUseItem:
@@ -234,7 +234,7 @@ battlesceneScript_DetermineTargetsByAction:
                 bne.w   @IsBurstRock
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                move.w  BATTLEACTION_OFFSET_ACTOR(a3),d0
+                move.w  BATTLEACTION_OFFSET_TARGET(a3),d0
                 jsr     PopulateTargetableGrid_UseItem
                 bra.s   @Done
 @IsBurstRock:

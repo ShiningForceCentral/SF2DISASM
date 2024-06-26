@@ -45,8 +45,8 @@ FieldMenu:
                 clsTxt
 @StartMember:
                 
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMembersListScreen
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   @ExitMember
                 
@@ -64,8 +64,8 @@ FieldMenu:
                 
                 ; MAGIC action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_BuildMembersListScreen_MagicPage
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMagicSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   @ExitMagic
                 
@@ -130,9 +130,9 @@ byte_213A8:
                 ; Cast Detox
                 txt     108             ; "Use magic on whom?{D1}"
                 clsTxt
-                move.b  #0,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,targetMember(a6)
                 cmpi.w  #-1,d0
                 beq.w   @StartMagic
@@ -210,9 +210,9 @@ byte_21468:
                 
                 ; ITEM > USE action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -267,8 +267,8 @@ byte_21468:
                 move.w  itemIndex(a6),d1 ; superfluous intructions
                 move.w  #50,d1
                 clsTxt
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMembersListScreen
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   @StartItemUse
                 
@@ -293,9 +293,9 @@ byte_2158E:
                 
                 ; ITEM > GIVE action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 bne.w   @IsGivingWeapon
                 bra.w   byte_2184E      ; Close textbox and restart item submenu
@@ -352,9 +352,9 @@ byte_2158E:
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     54              ; "Pass the {ITEM}{N}to whom?{D1}"
                 clsTxt
-                move.b  #2,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_DROP,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 bne.w   @GiveItem
                 bra.w   @StartItemGive
@@ -510,9 +510,9 @@ byte_2184E:
                 
                 ; ITEM > EQUIP action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #3,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_EQUIP,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   @Goto_ExitItemEquip
                 bra.w   @ExitItemEquip
@@ -531,9 +531,9 @@ byte_2184E:
                 
                 ; ITEM > DROP action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 bne.w   @IsItemUnsellable
                 bra.w   byte_219D0      ; Close textbox and restart item submenu

@@ -1,11 +1,11 @@
 
-; ASM FILE code\common\menus\menuengine_10.asm :
-; 0x169AE..0x16A62 : Menu engine, part 10
+; ASM FILE code\common\menus\nameunderportraitwindow.asm :
+; 0x169AE..0x16A62 : Menu engine, part 10 : Name under portrait window functions
 
 ; =============== S U B R O U T I N E =======================================
 
 
-DisplayNameUnderPortrait:
+OpenNameUnderPortraitWindow:
                 
                 movem.l d0-a1,-(sp)
                 tst.w   (ALLY_NAME_WINDOW_INDEX).l
@@ -52,7 +52,7 @@ DisplayNameUnderPortrait:
                 movem.l (sp)+,d0-a1
                 rts
 
-    ; End of function DisplayNameUnderPortrait
+    ; End of function OpenNameUnderPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================

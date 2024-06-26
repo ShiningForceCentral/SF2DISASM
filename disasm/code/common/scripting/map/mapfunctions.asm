@@ -7,6 +7,7 @@
 
 InitializeMapEntities:
                 
+                module
                 movem.l d0-a5,-(sp)
                 bra.w   loc_440E2
 
@@ -41,7 +42,7 @@ loc_440E2:
                 movem.w d1-d3,-(sp)
                 moveq   #1,d0
                 bsr.w   InitializeFollowerEntities
-loc_44104:
+@Start:
                 
                 move.b  (a0)+,d1
                 cmpi.b  #-1,d1
@@ -65,7 +66,7 @@ loc_44104:
                 move.w  #ENTITY_ENEMY_START,d6
                 bsr.w   DeclareNewEntity
                 movem.w (sp)+,d0
-                bra.s   loc_44104
+                bra.s   @Start
 @RegularSprite:
                 
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d4
@@ -96,7 +97,7 @@ loc_44172:
                 addq.w  #1,d0
 loc_4417E:
                 
-                bra.s   loc_44104
+                bra.s   @Start
 loc_44180:
                 
                 movem.w (sp)+,d1-d3
@@ -113,6 +114,7 @@ loc_44180:
 
 ; END OF FUNCTION CHUNK FOR InitializeMapEntities
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
