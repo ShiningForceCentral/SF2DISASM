@@ -31,7 +31,7 @@ cs_4D502:       stopEntity 128
                 nextSingleText $0,128   ; "Geshp has Prism Flowers.{N}He will...{W1}"
                 tintMap
                 nextSingleText $C0,129  ; "Your life is over,{N}Cameela!{W1}"
-                flashScreenWhite $2
+                flashScreenWhite 2
                 tintMap
                 setActscriptWait 128,eas_Init
                 setFacing 128,LEFT

@@ -330,7 +330,7 @@ GetEntityIndexForCombatant_0:
 GetEntityIndexForCombatant:
                 
                 move.l  a0,-(sp)
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 tst.b   d0
                 bpl.s   @Ally
                 subi.b  #ENTITY_ENEMY_INDEX_DIFFERENCE,d0
@@ -356,7 +356,7 @@ GetEntityEventIndex:
                 moveq   #BATTLE_ALL_ENTITIES_NUMBER,d7
                 move.w  d0,d1
                 clr.w   d0
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
 @GetIndex_Loop:
                 
                 cmp.b   (a0)+,d1

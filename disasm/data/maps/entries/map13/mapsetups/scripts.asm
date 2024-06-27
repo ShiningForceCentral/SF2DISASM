@@ -3,7 +3,7 @@
 ; 0x58330..0x58E18 : 
 cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 6
-                flashScreenWhite $5A
+                flashScreenWhite 90
                 setQuake 0
                 csWait 20
                 csWait 5
@@ -165,13 +165,13 @@ cs_58512:       customActscriptWait 130
                 setQuake 2
                 csWait 30
                 setQuake 0
-                animEntityFX 130,6
+                animEntityFX 130,MOSAIC_OUT
                 customActscript 130
                  ac_orientUp            ;   
                  ac_setSprite MAPSPRITE_FAIRY ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                animEntityFX 130,7
+                animEntityFX 130,MOSAIC_IN
                 csWait 40
                 setFacing 130,DOWN
                 nextSingleText $0,130   ; "(Giggle)...sorry, I had to{N}test you.{W2}{N}I'm happy to meet you.{N}He must like you.{W2}{N}Oh no, I can't tell you who{N}HE is.{N}See you later!{W1}"
@@ -183,7 +183,7 @@ cs_58512:       customActscriptWait 130
                 setActscriptWait ALLY_BOWIE,eas_Init
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 csc_end
-cs_585FE:       playSound $FD
+cs_585FE:       playSound SOUND_COMMAND_FADE_OUT
                 customActscriptWait 129
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   

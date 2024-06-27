@@ -10218,16 +10218,16 @@ UpdateStatusEffectAnimations:
                 clr.w   d0
 loc_1EFFE:
                 
-                move.b  ((ALLY_BATTLESPRITE_PROP2-$1000000)).w,d1
+                move.b  ((ALLY_BATTLESPRITE_STATUS_OFFSET_Y-$1000000)).w,d1
                 ext.w   d1
                 btst    #1,((byte_FFB56F-$1000000)).w
                 bne.s   loc_1F012
-                move.b  ((ALLY_BATTLESPRITE_PROP1-$1000000)).w,d4
+                move.b  ((ALLY_BATTLESPRITE_STATUS_OFFSET_X-$1000000)).w,d4
                 bra.s   loc_1F01A
 loc_1F012:
                 
                 move.b  #$60,d4 
-                sub.b   ((ALLY_BATTLESPRITE_PROP1-$1000000)).w,d4
+                sub.b   ((ALLY_BATTLESPRITE_STATUS_OFFSET_X-$1000000)).w,d4
 loc_1F01A:
                 
                 ext.w   d4
@@ -10254,23 +10254,23 @@ loc_1F01A:
                 clr.w   d0
 loc_1F066:
                 
-                move.b  ((ENEMY_BATTLESPRITE_PROP2-$1000000)).w,d1
+                move.b  ((ENEMY_BATTLESPRITE_STATUS_OFFSET_Y-$1000000)).w,d1
                 ext.w   d1
                 btst    #2,((byte_FFB56F-$1000000)).w
                 bne.s   loc_1F07A
-                move.b  ((ENEMY_BATTLESPRITE_PROP1-$1000000)).w,d4
+                move.b  ((ENEMY_BATTLESPRITE_STATUS_OFFSET_X-$1000000)).w,d4
                 bra.s   loc_1F082
 loc_1F07A:
                 
                 move.b  #$80,d4
-                sub.b   ((ENEMY_BATTLESPRITE_PROP1-$1000000)).w,d4
+                sub.b   ((ENEMY_BATTLESPRITE_STATUS_OFFSET_X-$1000000)).w,d4
 loc_1F082:
                 
                 ext.w   d4
                 addi.w  #$B0,d1 
-                add.w   ((word_FFB3F0-$1000000)).w,d1
+                add.w   ((BATTLESCENE_ENEMY_Y-$1000000)).w,d1
                 addi.w  #$90,d4 
-                add.w   ((word_FFB3EC-$1000000)).w,d4
+                add.w   ((BATTLESCENE_ENEMY_X-$1000000)).w,d4
                 lea     ((BATTLESCENE_ENEMY_X_SPEED-$1000000)).w,a1
                 bsr.s   sub_1F0B0
                 lea     ((SPRITE_18-$1000000)).w,a0
@@ -10368,14 +10368,14 @@ UpdateEnemyBattlespritePosition:
                 move.w  ((BATTLESCENE_ENEMY_X_SPEED-$1000000)).w,d6
                 beq.s   @loc_1
                 
-                add.w   ((word_FFB3EC-$1000000)).w,d6
+                add.w   ((BATTLESCENE_ENEMY_X-$1000000)).w,d6
                 bsr.w   MoveEnemyBattlespriteHorizontally
                 clr.w   ((BATTLESCENE_ENEMY_X_SPEED-$1000000)).w
 @loc_1:
                 
                 move.w  ((BATTLESCENE_ENEMY_Y_SPEED-$1000000)).w,d6
                 beq.s   @Return
-                add.w   ((word_FFB3F0-$1000000)).w,d6
+                add.w   ((BATTLESCENE_ENEMY_Y-$1000000)).w,d6
                 bsr.w   MoveEnemyBattlespriteVertically
                 clr.w   ((BATTLESCENE_ENEMY_Y_SPEED-$1000000)).w
 @Return:
@@ -10484,7 +10484,7 @@ loc_1F1FE:
 MoveEnemyBattlespriteHorizontally:
                 
                 movem.l d0/a0,-(sp)
-                move.w  d6,((word_FFB3EC-$1000000)).w
+                move.w  d6,((BATTLESCENE_ENEMY_X-$1000000)).w
                 cmpi.w  #ENEMYBATTLESPRITE_ZEON,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
                                                         ; HARDCODED Zeon enemy battle sprite
                 bne.s   loc_1F236
@@ -10519,7 +10519,7 @@ loc_1F23E:
 MoveEnemyBattlespriteVertically:
                 
                 movem.l d0/a0,-(sp)
-                move.w  d6,((word_FFB3F0-$1000000)).w
+                move.w  d6,((BATTLESCENE_ENEMY_Y-$1000000)).w
                 cmpi.w  #ENEMYBATTLESPRITE_ZEON,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
                                                         ; HARDCODED Zeon enemy battle sprite
                 bne.s   @Continue
@@ -10796,10 +10796,10 @@ loc_1F470:
                 move.w  d3,(a2)+
                 asr.w   #BYTE_SHIFT_COUNT,d3
                 move.w  d3,d4
-                add.w   ((word_FFB3EC-$1000000)).w,d4
+                add.w   ((BATTLESCENE_ENEMY_X-$1000000)).w,d4
                 move.w  d4,(a0)
                 neg.w   d3
-                add.w   ((word_FFB3EC-$1000000)).w,d3
+                add.w   ((BATTLESCENE_ENEMY_X-$1000000)).w,d3
                 move.w  d3,(a1)
                 subq.w  #4,a0
                 addq.w  #4,a1
@@ -10827,10 +10827,10 @@ loc_1F4A8:
                 move.w  d3,(a2)+
                 asr.w   #BYTE_SHIFT_COUNT,d3
                 move.w  d3,d4
-                add.w   ((word_FFB3F0-$1000000)).w,d4
+                add.w   ((BATTLESCENE_ENEMY_Y-$1000000)).w,d4
                 move.w  d4,(a1)
                 neg.w   d3
-                add.w   ((word_FFB3F0-$1000000)).w,d3
+                add.w   ((BATTLESCENE_ENEMY_Y-$1000000)).w,d3
                 move.w  d3,(a0)
                 subq.w  #4,a0
                 addq.w  #4,a1

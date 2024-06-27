@@ -54,7 +54,7 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
                  moveRight 1
                 endActions
                 nextSingleText $0,131   ; "If possible, I want to{N}relive my life...not as{N}a devil...next time....{W1}"
-                entityFlashWhite 131,$1E
+                entityFlashWhite 131,30
                 setPos 128,15,8,DOWN
                 entityActions 128
                  moveRight 2
@@ -105,9 +105,9 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
                 hide 129
                 csWait 8
                 hide 130
-                entityFlashWhite 131,$78
+                entityFlashWhite 131,120
                 hide 131
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 csWait 120
                 playSound MUSIC_SAD_THEME_3
                 shiver ALLY_PETER

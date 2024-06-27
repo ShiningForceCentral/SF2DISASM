@@ -28,14 +28,14 @@ csc33_setQuakeAmount:
                 andi.w  #$3FFF,d0
                 move.w  d0,d7
                 subq.w  #1,d7
-                btst    #$F,d3
+                btst    #$F,d3  ; test $8000
                 beq.s   loc_46538
                 moveq   #0,d1
                 move.w  #1,d2
                 bra.s   loc_46550
 loc_46538:
                 
-                btst    #$E,d3
+                btst    #$E,d3  ; test $4000
                 beq.s   loc_46546
                 move.w  d0,d1
                 move.w  #-1,d2
@@ -1249,7 +1249,7 @@ csc23_setEntityFacing:
 
 csc24_setCameraTargetEntity:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a5
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a5
                 move.w  (a6)+,d0
                 bmi.w   loc_46C52
                 tst.b   d0
@@ -1838,7 +1838,7 @@ csc31_moveEntityAboveEntity:
 
 GetEntityAddressFromCharacter:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a5
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a5
                 andi.w  #COMBATANT_MASK_ALL,d0
                 tst.b   d0
                 bpl.s   @Ally

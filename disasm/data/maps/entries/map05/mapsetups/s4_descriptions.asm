@@ -23,5 +23,4 @@ byte_51C38:     msDesc 9, 15, 6, 0      ; "{NAME} looked at{N}the paper.{W2}{CLE
                 msDesc 22, 11, 1, 3     ; "{NAME} investigated.{W2}{CLEAR}"
                                         ; "An old piano.{W1}"
                 msDescEnd
-                dc.b $4E 
-                dc.b $75 
+                rts

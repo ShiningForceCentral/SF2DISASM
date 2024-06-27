@@ -7,167 +7,107 @@
 
 csWait: macro
     dc.b $80
-    dc.b \1
+    dc.b \1 ; duration
     endm
 
-csc00: macro
+nextSingleText: macro
     dc.w $00
-    dc.b \1
-    dc.b \2
-    endm
-
-nextSingleText: macro ;alias
-    csc00 \1,\2
+    dc.b \1 ; portrait modifier ($0-none, $40-mirrored, $80-display on right, $FF-undisplayed)
+    dc.b \2 ; entity
     endm
     
-csc01: macro
+nextSingleTextVar: macro
     dc.w $01
-    dc.b \1
-    dc.b \2
-    dc.b \3
-    dc.b \4
-    endm
-
-nextSingleTextVar: macro ;alias
-    csc01 \1,\2,\3,\4 
+    dc.b \1 ; 
+    dc.b \2 ; 
+    dc.b \3 ; 
+    dc.b \4 ; 
     endm
     
-csc02: macro
+nextText: macro
     dc.w $02
-    dc.b \1
-    dc.b \2
+    dc.b \1 ; portrait modifier ($0-none, $40-mirrored, $80-display on right, $FF-undisplayed)
+    dc.b \2 ; entity
     endm
     
-nextText: macro ;alias
-    csc02 \1,\2
-    endm    
-    
-csc03: macro
+nextTextVar: macro
     dc.w $03
-    dc.b \1
-    dc.b \2
-    dc.b \3
-    dc.b \4
-    dc.w \5
-    endm
-
-nextTextVar: macro ;alias
-    csc03 \1,\2,\3,\4,\5 
+    dc.b \1 ; 
+    dc.b \2 ; 
+    dc.b \3 ; 
+    dc.b \4 ; 
+    dc.w \5 ; 
     endm
         
-csc04: macro
+textCursor: macro
     dc.w $04
-    dc.w \1
+    dc.w \1 ; text line to load
     endm
     
-textCursor: macro ;alias
-    csc04 \1
-    endm        
-    
-csc05: macro
+playSound: macro
     dc.w $05
-    dc.w \1
+    dc.w \1 ; music/sound/command to start
     endm
-    
-playSound: macro ;alias
-    csc05 \1
-    endm        
     
 csc06: macro
     dc.w $06
     endm
     
-csc07: macro
+warp: macro
     dc.w $07
-    dc.b \1
-    dc.b \2
-    dc.b \3
-    dc.b \4
+    dc.b \1 ; destination map
+    dc.b \2 ; X
+    dc.b \3 ; Y
+    dc.b \4 ; facing
     endm
     
-warp: macro ;alias
-    csc07 \1,\2,\3,\4
-    endm
-    
-csc08: macro
+join: macro
     dc.w $08
-    dc.w \1
+    dc.w \1 ; ally index and sad join modifier (special case: 128-Sarah & Chester)
     endm
     
-join: macro ;alias
-    csc08 \1
-    endm
-    
-csc09: macro
+hideText: macro
     dc.w $09
     endm
     
-hideText: macro ;alias
-    csc09
-    endm    
-    
-csc0A: macro
+executeSubroutine: macro
     dc.w $0A
-    dc.l \1
+    dc.l \1 ; subroutine address
     endm
     
-executeSubroutine: macro ;alias
-    csc0A \1
-    endm
-    
-csc0B: macro
+jump: macro
     dc.w $0B
-    dc.l \1
+    dc.l \1 ; address to jump to
     endm
     
-jump: macro ;alias
-    csc0B \1
-    endm    
-    
-csc0C: macro
+jumpIfFlagSet: macro
     dc.w $0C
-    dc.w \1
-    dc.l \2
+    dc.w \1 ; associated flag
+    dc.l \2 ; address to jump to
     endm
     
-jumpIfFlagSet: macro ;alias
-    csc0C \1,\2
-    endm    
-    
-csc0D: macro
+jumpIfFlagClear: macro
     dc.w $0D
-    dc.w \1
-    dc.l \2
+    dc.w \1 ; associated flag
+    dc.l \2 ; address to jump to
     endm
     
-jumpIfFlagClear: macro ;alias
-    csc0D \1,\2
-    endm    
-    
-csc0E: macro
+jumpIfDefeatedByLastAttack: macro
     dc.w $0E
-    dc.w \1
-    dc.l \2
+    dc.w \1 ; 
+    dc.l \2 ; 
     endm
     
-jumpIfDefeatedByLastAttack:	macro ;alias
-    csc0E \1,\2
-    endm    
-    
-csc0F: macro
+jumpIfDead: macro
     dc.w $0F
-    dc.w \1
-    dc.l \2
+    dc.w \1 ; 
+    dc.l \2 ; 
     endm
-    
-jumpIfDead:	macro ;alias
-    csc0F \1,\2
-    endm    
     
 csc10: macro
     dc.w $10
-    dc.w \1
-    dc.w \2
+    dc.w \1 ; associated flag
+    dc.w \2 ; set or clear
     endm
     
 setF: macro ;alias
@@ -178,36 +118,24 @@ clearF: macro ;alias
     csc10 \1,0
     endm
     
-csc11: macro
+yesNo: macro
     dc.w $11
     endm
     
-yesNo: macro ;alias
-    csc11
-    endm
-    
-csc12: macro
+menu: macro
     dc.w $12
-    dc.w \1
+    dc.w \1 ; 
     endm
     
-menu: macro ;alias
-    csc12 \1
-    endm
-    
-csc13: macro
+setStoryFlag: macro
     dc.w $13
-    dc.w \1
-    endm
-    
-setStoryFlag: macro ;alias
-    csc13 \1
+    dc.w \1 ; battle index to unlock
     endm
     
 csc14: macro
     dc.w $14
-    dc.b \1
-    dc.b \2
+    dc.b \1 ; entity to act
+    dc.b \2 ; 
     endm
     
 customActscript: macro ;alias
@@ -220,9 +148,9 @@ customActscriptWait: macro ;alias
     
 csc15: macro
     dc.w $15
-    dc.b \1
-    dc.b \2
-    dc.l \3
+    dc.b \1 ; entity to act
+    dc.b \2 ; 
+    dc.l \3 ; action script to execute
     endm
     
 setActscript: macro ;alias
@@ -233,236 +161,144 @@ setActscriptWait: macro ;alias
     csc15 \1,$FF,\2
     endm    
     
-csc16: macro
+waitIdle: macro
     dc.w $16
-    dc.w \1
+    dc.w \1 ; entity to act
     endm
     
-waitIdle: macro ;alias
-    csc16 \1
-    endm
-    
-csc17: macro
+setPosFlash: macro
     dc.w $17
-    dc.b \1
-    dc.b \2
-    dc.b \3
-    dc.b \4
+    dc.b \1 ; entity to act
+    dc.b \2 ; X
+    dc.b \3 ; Y
+    dc.b \4 ; facing
     endm
     
-setPosFlash: macro ;alias
-    csc17 \1,\2,\3,\4
-    endm
-    
-csc18: macro
+entityFlashWhite: macro
     dc.w $18
-    dc.w \1
-    dc.w \2
+    dc.w \1 ; entity to act
+    dc.w \2 ; duration
     endm
     
-entityFlashWhite: macro ;alias
-    csc18 \1,\2
-    endm    
-    
-csc19: macro
+setPos: macro
     dc.w $19
-    dc.b \1
-    dc.b \2
-    dc.b \3
-    dc.b \4
-    endm
-
-setPos: macro ;alias
-    csc19 \1,\2,\3,\4
+    dc.b \1 ; entity to act
+    dc.b \2 ; X
+    dc.b \3 ; Y
+    dc.b \4 ; facing
     endm
     
-csc1A: macro
+setSprite: macro
     dc.w $1A
-    dc.w \1
-    dc.w \2
-    endm
-
-setSprite: macro ;alias
-    csc1A \1,\2
+    dc.w \1 ; entity to act
+    dc.w \2 ; new mapsprite
     endm
     
-csc1B: macro
+startEntity: macro
     dc.w $1B
-    dc.w \1
+    dc.w \1 ; entity to act
     endm
     
-startEntity: macro ;alias
-    csc1B \1
-    endm    
-    
-csc1C: macro
+stopEntity: macro
     dc.w $1C
-    dc.w \1
+    dc.w \1 ; entity to act
     endm
     
-stopEntity: macro ;alias
-    csc1C \1
-    endm        
-    
-csc1D: macro
+showPortrait: macro
     dc.w $1D
-    dc.b \1
-    dc.b \2
+    dc.b \1 ; portrait modifier ($0-none, $40-mirrored, $80-display on right, $FF-undisplayed)
+    dc.b \2 ; entity
     endm
     
-showPortrait: macro ;alias
-    csc1D \1,\2
-    endm        
-    
-csc1E: macro
+hidePortrait: macro
     dc.w $1E
     endm
     
-hidePortrait: macro ;alias
-    csc1E
-    endm    
-    
-csc1F: macro
+allyDefeated: macro
     dc.w $1F
-    dc.w \1
+    dc.w \1 ; 
     endm
     
-allyDefeated: macro ;alias
-    csc1F \1
-    endm    
-    
-csc20: macro
+updateDefeatedAllies: macro
     dc.w $20
     endm
     
-updateDefeatedAllies: macro ;alias
-    csc20
-    endm    
-    
-csc21: macro
+reviveAlly: macro
     dc.w $21
-    dc.w \1
+    dc.w \1 ; 
     endm
     
-reviveAlly: macro ;alias
-    csc21 \1
-    endm    
-    
-csc22: macro
+animEntityFX: macro
     dc.w $22
-    dc.w \1
-    dc.w \2
-    endm
-        
-animEntityFX: macro ;alias
-    csc22 \1,\2
-    endm    
+    dc.w \1 ; entity to act
+    defineShorthand.w ENTITY_TRANSITION_,\2 ; transition type
+    endm 
     
-csc23: macro
+setFacing: macro
     dc.w $23
-    dc.b \1
-    dc.b \2
+    dc.b \1 ; entity to act
+    dc.b \2 ; facing
     endm
-        
-setFacing: macro ;alias
-    csc23 \1,\2
-    endm    
     
-csc24: macro
+setCameraEntity: macro
     dc.w $24
-    dc.w \1
+    dc.w \1 ; target entity
     endm
-        
-setCameraEntity: macro ;alias
-    csc24 \1
-    endm    
     
-csc25: macro
+cloneEntity: macro
     dc.w $25
-    dc.w \1
-    dc.w \2
+    dc.w \1 ; copied entity
+    dc.w \2 ; entity clone
     endm
-        
-cloneEntity: macro ;alias
-    csc25 \1,\2
-    endm    
     
-csc26: macro
+nod: macro
     dc.w $26
-    dc.w \1
+    dc.w \1 ; entity to act
     endm
     
-nod: macro ;alias
-    csc26 \1
-    endm    
-    
-csc27: macro
+headshake: macro
     dc.w $27
-    dc.w \1
-    endm
-    
-headshake: macro ;alias
-    csc27 \1
+    dc.w \1 ; entity to act
     endm
         
-csc28: macro
+moveNextToPlayer: macro
     dc.w $28
-    dc.w \1
-    dc.w \2
+    dc.w \1 ; entity to act
+    dc.w \2 ; direction adjacent to player
     endm
-        
-moveNextToPlayer: macro ;alias
-    csc28 \1,\2
-    endm    
     
-csc29: macro
+setDest: macro
     dc.w $29
-    dc.w \1
-    dc.w \2
-    dc.w \3
+    dc.w \1 ; entity to act
+    dc.w \2 ; X
+    dc.w \3 ; Y
     endm
-        
-setDest: macro ;alias
-    csc29 \1,\2,\3
-    endm    
     
-csc2A: macro
+shiver: macro
     dc.w $2A
-    dc.w \1
+    dc.w \1 ; entity to act
     endm
-        
-shiver: macro ;alias
-    csc2A \1
-    endm    
     
-csc2B: macro
+newEntity: macro
     dc.w $2B
-    dc.w \1
-    dc.b \2
-    dc.b \3
-    dc.b \4
-    dc.b \5
-    endm    
-    
-newEntity: macro ;alias
-    csc2B \1,\2,\3,\4,\5
-    endm    
-    
-csc2C: macro
-    dc.w $2C
-    dc.w \1
-    dc.w \2
-    dc.w \3
+    dc.w \1 ; entity number
+    dc.b \2 ; X
+    dc.b \3 ; Y
+    dc.b \4 ; facing
+    dc.b \5 ; mapsprite
     endm
-        
-followEntity: macro ;alias
-    csc2C \1,\2,\3
+    
+followEntity: macro
+    dc.w $2C
+    dc.w \1 ; follower
+    dc.w \2 ; who to follow
+    dc.w \3 ; relative place (1-, 2-behind, 3-, 5-, 6-)
     endm
     
 csc2D: macro
     dc.w $2D
-    dc.b \1
-    dc.b \2
+    dc.b \1 ; entity to act
+    dc.b \2 ; 
     endm
         
 entityActions: macro ;alias
@@ -473,426 +309,284 @@ entityActionsWait: macro ;alias
     csc2D \1,$FF
     endm
     
+hide: macro
+    dc.w $2E
+    dc.w \1 ; entity to act
+    endm
+    
+fly: macro
+    dc.w $2F
+    dc.w \1 ; entity
+    dc.w \2 ; layer priority  ($0-normal, $FFFF-roof layer)
+    endm
+    
+removeShadow: macro
+    dc.w $30
+    dc.w \1 ; target entity
+    endm
+    
+moveEntityAboveAnother: macro
+    dc.w $31
+    dc.w \1 ; 
+    dc.w \2 ; 
+    endm
+    
+setCamDest: macro
+    dc.w $32
+    dc.w \1 ; X (left border)
+    dc.w \2 ; Y (top border)
+    endm
+    
+setQuake: macro
+    dc.w $33
+    dc.w \1 ; ? ($4000-, $8000-
+    endm
+    
+setBlocks: macro
+    dc.w $34
+    dc.b \1 ; source x
+    dc.b \2 ; source y
+    dc.b \3 ; width
+    dc.b \4 ; height
+    dc.b \5 ; destination x
+    dc.b \6 ; destination y
+    endm
+    
+setBlocksVar: macro
+    dc.w $35
+    dc.b \1 ; source x
+    dc.b \2 ; source y
+    dc.b \3 ; width
+    dc.b \4 ; height
+    dc.b \5 ; destination x
+    dc.b \6 ; destination y
+    endm
+    
+resetMap: macro
+    dc.w $36
+    endm
+    
+loadMapFadeIn: macro
+    dc.w $37
+    dc.w \1 ; map
+    dc.w \2 ; camera X
+    dc.w \3 ; camera Y
+    endm
+    
+fadeInB: macro
+    dc.w $39
+    endm
+    
+fadeOutB: macro
+    dc.w $3A
+    endm
+    
+slowFadeInB: macro
+    dc.w $3B
+    endm
+    
+slowFadeOutB: macro
+    dc.w $3C
+    endm
+    
+tintMap: macro
+    dc.w $3D
+    endm
+    
+flickerOnce: macro
+    dc.w $3E
+    endm
+    
+mapFadeOutToWhite: macro
+    dc.w $3F
+    endm
+    
+mapFadeInFromWhite: macro
+    dc.w $40
+    endm
+    
+flashScreenWhite: macro
+    dc.w $41
+    dc.w \1 ; duration
+    endm
+    
+loadMapEntities: macro
+    dc.w $42
+    dc.l \1 ; address of entity table
+    endm
+    
+roofEvent: macro
+    dc.w $43
+    dc.w \1 ; trigger X
+    dc.w \2 ; trigger Y
+    endm
+    
+reloadEntities: macro
+    dc.w $44
+    dc.l \1 ; address of entity table
+    endm
+    
+cameraSpeed: macro
+    dc.w $45
+    dc.w \1 ; ($8-, $10-, $20-, $28-, $30-, $38-, $40-)
+    endm
+    
+reloadMap: macro
+    dc.w $46
+    dc.w \1 ; camera X
+    dc.w \2 ; camera Y
+    endm
+    
+stepEvent: macro
+    dc.w $47
+    dc.w \1 ; trigger X
+    dc.w \2 ; trigger Y
+    endm
+    
+mapLoad: macro
+    dc.w $48
+    dc.w \1 ; map
+    dc.w \2 ; camera X
+    dc.w \3 ; camera Y
+    endm
+    
+loadEntitiesFromMapSetup: macro
+    dc.w $49
+    dc.w \1 ; 
+    dc.w \2 ; 
+    dc.w \3 ; 
+    endm
+    
+fadeInFromBlackHalf: macro
+    dc.w $4A
+    endm
+    
+fadeOutToBlackHalf: macro
+    dc.w $4B
+    endm
+    
+setSize: macro
+    dc.w $50
+    dc.w \1 ; entity to act
+    dc.w \2 ; size in pixels
+    endm
+    
+joinBatParty: macro
+    dc.w $51
+    dc.w \1 ; entity
+    endm
+    
+faceEntity: macro
+    dc.w $52
+    dc.w \1 ; entity to act
+    dc.w \2 ; entity to face
+    endm
+    
+setPriority: macro
+    dc.w $53
+    dc.w \1 ; entity
+    dc.w \2 ; priority layer ($0 - bottom layer, $FF-top layer)
+    endm
+    
+joinForceAI: macro
+    dc.w $54
+    dc.w \1 ; entity
+    dc.w \2 ; AI status (0:on, -1:off)
+    endm
+    
+resetForceBattleStats: macro
+    dc.w $55
+    endm
+    
+addNewFollower: macro
+    dc.w $56
+    dc.w \1 ; following entity
+    endm
+    
+; 
+
 moveRight: macro
     dc.b $00
-    dc.b \1
+    dc.b \1 ; amount to move
     endm
     
 moveUp: macro
     dc.b $01
-    dc.b \1
+    dc.b \1 ; amount to move
     endm
     
 moveLeft: macro
     dc.b $02
-    dc.b \1
+    dc.b \1 ; amount to move
     endm
     
 moveDown: macro
     dc.b $03
-    dc.b \1
+    dc.b \1 ; amount to move
     endm
     
 moveUpRight: macro
     dc.b $04
-    dc.b \1
+    dc.b \1 ; amount to move
     endm
     
 moveUpLeft: macro
     dc.b $05
-    dc.b \1
+    dc.b \1 ; amount to move
     endm
     
 moveDownLeft: macro
     dc.b $06
-    dc.b \1
+    dc.b \1 ; amount to move
     endm
     
 moveDownRight: macro
     dc.b $07
-    dc.b \1
+    dc.b \1 ; amount to move
     endm
     
 faceRight: macro
     dc.b $08
-    dc.b \1
+    dc.b \1 ; duration
     endm
     
 faceUp: macro
     dc.b $09
-    dc.b \1
+    dc.b \1 ; duration
     endm
     
 faceLeft: macro
     dc.b $0A
-    dc.b \1
+    dc.b \1 ; duration
     endm
     
 faceDown: macro
     dc.b $0B
-    dc.b \1
+    dc.b \1 ; duration
     endm
     
 eaWait: macro
     dc.b $0C
-    dc.b \1
+    dc.b \1 ; duration
     endm
     
 jumpUp: macro
     dc.b $0D
-    dc.b \1
+    dc.b \1 ; duration
     endm
     
 jumpRight: macro
     dc.b $0E
-    dc.b \1
+    dc.b \1 ; duration
     endm
     
 jumpLeft: macro
     dc.b $0F
-    dc.b \1
+    dc.b \1 ; duration
     endm
 
 endActions: macro
     dc.w $8080
-    endm
-    
-csc2E: macro
-    dc.w $2E
-    dc.w \1
-    endm
-        
-hide: macro ;alias
-    csc2E \1
-    endm
-    
-csc2F: macro
-    dc.w $2F
-    dc.w \1
-    dc.w \2
-    endm
-        
-fly: macro ;alias
-    csc2F \1,\2
-    endm
-    
-csc30: macro
-    dc.w $30
-    dc.w \1
-    endm
-        
-removeShadow: macro ;alias
-    csc30 \1
-    endm
-    
-csc31: macro
-    dc.w $31
-    dc.w \1
-    dc.w \2
-    endm
-        
-moveEntityAboveAnother: macro ;alias
-    csc31 \1,\2
-    endm
-    
-csc32: macro
-    dc.w $32
-    dc.w \1
-    dc.w \2
-    endm
-        
-setCamDest: macro ;alias
-    csc32 \1,\2
-    endm
-    
-csc33: macro
-    dc.w $33
-    dc.w \1
-    endm
-        
-setQuake: macro ;alias
-    csc33 \1
-    endm
-    
-csc34: macro
-    dc.w $34
-    dc.b \1
-    dc.b \2
-    dc.b \3
-    dc.b \4
-    dc.b \5
-    dc.b \6
-    endm
-    
-setBlocks: macro ;alias
-    csc34 \1,\2,\3,\4,\5,\6
-    endm    
-    
-csc35: macro
-    dc.w $35
-    dc.b \1
-    dc.b \2
-    dc.b \3
-    dc.b \4
-    dc.b \5
-    dc.b \6
-    endm
-    
-setBlocksVar: macro ;alias
-    csc35 \1,\2,\3,\4,\5,\6
-    endm    
-    
-csc36: macro
-    dc.w $36
-    endm
-    
-resetMap: macro ;alias
-    csc36
-    endm    
-    
-csc37: macro
-    dc.w $37
-    dc.w \1
-    dc.w \2
-    dc.w \3
-    endm
-
-loadMapFadeIn: macro ;alias
-    csc37 \1,\2,\3
-    endm        
-    
-csc39: macro
-    dc.w $39
-    endm
-    
-fadeInB: macro ;alias
-    csc39
-    endm    
-    
-csc3A: macro
-    dc.w $3A
-    endm
-    
-fadeOutB: macro ;alias
-    csc3A
-    endm
-    
-csc3B: macro
-    dc.w $3B
-    endm
-    
-slowFadeInB: macro ;alias
-    csc3B
-    endm
-    
-csc3C: macro
-    dc.w $3C
-    endm
-    
-slowFadeOutB: macro ;alias
-    csc3C
-    endm
-    
-csc3D: macro
-    dc.w $3D
-    endm
-    
-tintMap: macro ;alias
-    csc3D
-    endm
-    
-csc3E: macro
-    dc.w $3E
-    endm
-    
-flickerOnce: macro ;alias
-    csc3E
-    endm
-    
-csc3F: macro
-    dc.w $3F
-    endm
-    
-mapFadeOutToWhite: macro ;alias
-    csc3F
-    endm
-    
-csc40: macro
-    dc.w $40
-    endm
-    
-mapFadeInFromWhite: macro ;alias
-    csc40
-    endm
-    
-csc41: macro
-    dc.w $41
-    dc.w \1
-    endm
-    
-flashScreenWhite: macro ;alias
-    csc41 \1
-    endm
-    
-csc42: macro
-    dc.w $42
-    dc.l \1
-    endm
-    
-loadMapEntities: macro ;alias
-    csc42 \1
-    endm
-    
-csc43: macro
-    dc.w $43
-    dc.w \1
-    dc.w \2
-    endm
-    
-roofEvent: macro ;alias
-    csc43 \1,\2
-    endm
-    
-csc44: macro
-    dc.w $44
-    dc.l \1
-    endm
-    
-reloadEntities: macro ;alias
-    csc44 \1
-    endm
-    
-csc45: macro
-    dc.w $45
-    dc.w \1
-    endm
-    
-cameraSpeed: macro ;alias
-    csc45 \1
-    endm
-    
-csc46: macro
-    dc.w $46
-    dc.w \1
-    dc.w \2
-    endm
-    
-reloadMap: macro ;alias
-    csc46 \1,\2
-    endm    
-    
-csc47: macro
-    dc.w $47
-    dc.w \1
-    dc.w \2
-    endm
-    
-stepEvent: macro ;alias
-    csc47 \1,\2
-    endm
-    
-csc48: macro
-    dc.w $48
-    dc.w \1
-    dc.w \2
-    dc.w \3
-    endm
-    
-mapLoad: macro ;alias
-    csc48 \1,\2,\3
-    endm    
-    
-csc49: macro
-    dc.w $49
-    dc.w \1
-    dc.w \2
-    dc.w \3
-    endm
-    
-loadEntitiesFromMapSetup: macro ;alias
-    csc49 \1,\2,\3
-    endm    
-    
-csc4A: macro
-    dc.w $4A
-    endm
-    
-fadeInFromBlackHalf: macro ;alias
-    csc4A
-    endm
-    
-csc4B: macro
-    dc.w $4B
-    endm
-    
-fadeOutToBlackHalf: macro ;alias
-    csc4B
-    endm
-    
-csc50: macro
-    dc.w $50
-    dc.w \1
-    dc.w \2
-    endm
-    
-setSize: macro ;alias
-    csc50 \1,\2
-    endm    
-    
-csc51: macro
-    dc.w $51
-    dc.w \1
-    endm
-    
-joinBatParty: macro ;alias
-    csc51 \1
-    endm    
-    
-csc52: macro
-    dc.w $52
-    dc.w \1
-    dc.w \2
-    endm
-    
-faceEntity: macro ;alias
-    csc52 \1,\2
-    endm    
-    
-csc53: macro
-    dc.w $53
-    dc.w \1
-    dc.w \2
-    endm
-    
-setPriority: macro ;alias
-    csc53 \1,\2
-    endm    
-    
-csc54: macro
-    dc.w $54
-    dc.w \1
-    dc.w \2
-    endm
-    
-joinForceAI: macro ;alias
-    csc54 \1,\2
-    endm    
-    
-csc55: macro
-    dc.w $55
-    endm
-    
-resetForceBattleStats: macro ;alias
-    csc55
-    endm    
-    
-csc56: macro
-    dc.w $56
-    dc.w \1
-    endm
-    
-addNewFollower: macro ;alias
-    csc56 \1
     endm
     
 cscNop: macro
@@ -906,28 +600,28 @@ csc_end: macro
 ; entity data structure
 
 mainEntity: macro
-    dc.w \1
-    dc.w \2
-    dc.w \3
+    dc.w \1 ; X
+    dc.w \2 ; Y
+    dc.w \3 ; facing
     endm
 
 entity: macro
-    dc.b \1
-    dc.b \2
-    dc.b \3
-    dc.b \4
-    dc.l \5
+    dc.b \1 ; X
+    dc.b \2 ; Y
+    dc.b \3 ; facing
+    dc.b \4 ; mapsprite
+    dc.l \5 ; action script
     endm
     
 entityRandomWalk: macro
-    dc.b \1
-    dc.b \2
-    dc.b \3
-    dc.b \4
+    dc.b \1 ; X
+    dc.b \2 ; Y
+    dc.b \3 ; facing
+    dc.b \4 ; mapsprite
     dc.b $FF
-    dc.b \5
-    dc.b \6
-    dc.b \7
+    dc.b \5 ; origin X
+    dc.b \6 ; origin Y
+    dc.b \7 ; range to walk
     endm    
     
     
@@ -939,7 +633,7 @@ ac_end: macro
 
 ac_wait: macro
     dc.w 0
-    dc.w \1
+    dc.w \1 ; duration
     endm
  
 ac_waitDest: macro
@@ -952,28 +646,28 @@ ac_controlCharacter: macro
 
 ac_follow: macro
     dc.w 3
-    dc.w \1
-    dc.w \2
-    dc.w \3
+    dc.w \1 ; entity to follow
+    dc.w \2 ; relative X (pixels)
+    dc.w \3 ; relative Y (pixels)
     endm
 
 ac_moveRel: macro
     dc.w 4
-    dc.w \1
-    dc.w \2
+    dc.w \1 ; relative X destination
+    dc.w \2 ; relative Y destination
     endm
 
 ac_moveAbs: macro
     dc.w 5
-    dc.w \1
-    dc.w \2
+    dc.w \1 ; X destination
+    dc.w \2 ; Y destination
     endm
 
 ac_randomWalk: macro
     dc.w 6
-    dc.w \1
-    dc.w \2
-    dc.w \3
+    dc.w \1 ; X speed
+    dc.w \2 ; Y speed
+    dc.w \3 ; 
     endm
 
 ac_controlRaft: macro
@@ -986,8 +680,8 @@ ac_controlCaravan: macro
 
 ac_moveFacRelPos: macro
     dc.w 9
-    dc.w \1
-    dc.w \2
+    dc.w \1 ; 
+    dc.w \2 ; 
     endm
 
 ac_updateSprite: macro
@@ -996,89 +690,89 @@ ac_updateSprite: macro
 
 ac_setSize: macro
     dc.w $B
-    dc.w \1
+    dc.w \1 ; size in pixels
     endm
 
 ac_setPos: macro
     dc.w $C
-    dc.w \1
-    dc.w \2
+    dc.w \1 ; X (in map tiles)
+    dc.w \2 ; Y (in map tiles)
     endm
 
 ac_clonePos: macro
     dc.w $D
-    dc.w \1
+    dc.w \1 ; entity to clone
     endm
 
 ac_moveEntFacRelPos: macro
     dc.w $E
-    dc.w \1
-    dc.w \2
-    dc.w \3
+    dc.w \1 ; entity
+    dc.w \2 ; 
+    dc.w \3 ; 
     endm
 
 ac_waitDestEntity: macro
     dc.w $F
-    dc.w \1
+    dc.w \1 ; 
     endm
 
 ac_setSpeed: macro
     dc.w $10
-    dc.b \1
-    dc.b \2
+    dc.b \1 ; X speed
+    dc.b \2 ; Y speed
     endm
 
 ac_accelFactors: macro
     dc.w $11
-    dc.b \1
-    dc.b \2
+    dc.b \1 ; X
+    dc.b \2 ; Y
     endm
 
 ac_acceleration: macro
     dc.w $12
-    dc.b \1&$FF
-    dc.b \2&$FF
+    dc.b \1&$FF ; 
+    dc.b \2&$FF ; 
     endm
 
 ac_deceleration: macro
     dc.w $13
-    dc.b \1&$FF
-    dc.b \2&$FF
+    dc.b \1&$FF ; 
+    dc.b \2&$FF ; 
     endm
 
 ac_motion: macro
     dc.w $14
-    dc.w \1
+    dc.w \1 ; state ON/OFF
     endm
 
 ac_autoFacing: macro
     dc.w $15
-    dc.w \1
+    dc.w \1 ; state ON/OFF
     endm
 
 ac_setId: macro
     dc.w $16
-    dc.w \1
+    dc.w \1 ; 
     endm
 
 ac_setSprite: macro
     dc.w $17
-    dc.w \1
+    dc.w \1 ; mapsprite
     endm
 
 ac_entityObstructable: macro
     dc.w $18
-    dc.w \1
+    dc.w \1 ; state ON/OFF
     endm
 
 ac_mapUncollidable: macro
     dc.w $19
-    dc.w \1
+    dc.w \1 ; state ON/OFF
     endm
 
 ac_entityUncollidable: macro
     dc.w $1A
-    dc.w \1
+    dc.w \1 ; state ON/OFF
     endm
 
 ac_orientUp: macro
@@ -1103,42 +797,42 @@ ac_orientRight: macro
 
 ac_transparency: macro
     dc.w $1C
-    dc.w \1
+    dc.w \1 ; state ON/OFF
     endm
 
 ac_setGhost: macro
     dc.w $1D
-    dc.w \1
+    dc.w \1 ; 
     endm
 
 ac_animSpeedX2: macro
     dc.w $1E
-    dc.w \1
+    dc.w \1 ; state ON/OFF
     endm
 
 ac_resizable: macro
     dc.w $1F
-    dc.w \1
+    dc.w \1 ; state ON/OFF
     endm
 
 ac_immersed: macro
     dc.w $20
-    dc.w \1
+    dc.w \1 ; state ON/OFF
     endm
 
 ac_set1Cb4: macro
     dc.w $21
-    dc.w \1
+    dc.w \1 ; 
     endm
 
 ac_setFacing: macro
     dc.w $22
-    dc.w \1
+    dc.w \1 ; facing
     endm
 
 ac_soundCommand: macro
     dc.w $23
-    dc.w \1
+    dc.w \1 ; sound
     endm
 
 ac_branch: macro
@@ -1147,7 +841,7 @@ ac_branch: macro
 
 ac_jump: macro
     dc.w $34
-    dc.l \1
+    dc.l \1 ; address
     endm
 
 ac_checkMapBlockCopy: macro
@@ -1156,7 +850,7 @@ ac_checkMapBlockCopy: macro
 
 ac_pass: macro
     dc.w $41
-    dc.w \1
+    dc.w \1 ; 
     endm
 
     

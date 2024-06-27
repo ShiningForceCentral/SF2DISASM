@@ -41,7 +41,7 @@ abcs_battle30:  textCursor 2765
                 ac_end
                 setDest 130,9,11
                 nextSingleText $0,128   ; "Oops!  The Ground Orb....{W1}"
-                entityFlashWhite 130,$3C
+                entityFlashWhite 130,60
                 mapFadeOutToWhite
                 csWait 20
                 mapFadeInFromWhite
@@ -58,7 +58,7 @@ abcs_battle30:  textCursor 2765
                 csWait 60
                 nextText $0,FOLLOWER_B  ; "Thanks to the Ground Orb, we{N}finally defeated Zalbard.{W2}"
                 nextSingleText $0,FOLLOWER_B ; "The orb released holy power{N}in it's light.{W1}"
-                entityFlashWhite 130,$3C
+                entityFlashWhite 130,60
                 setActscriptWait ALLY_PETER,eas_Jump
                 entityActionsWait ALLY_PETER
                  moveUp 2
@@ -66,7 +66,7 @@ abcs_battle30:  textCursor 2765
                 nextSingleText $0,ALLY_PETER ; "Hey, look over there!{W1}"
                 setCamDest 5,0
                 setPos 129,11,3,DOWN
-                entityFlashWhite 129,$3C
+                entityFlashWhite 129,60
                 nextSingleText $0,129   ; "Welcome!{W1}"
                 setCameraEntity 129
                 entityActionsWait 129
@@ -78,7 +78,7 @@ abcs_battle30:  textCursor 2765
                 setFacing FOLLOWER_B,LEFT
                 setFacing ALLY_PETER,LEFT
                 csWait 50
-                entityFlashWhite 129,$3C
+                entityFlashWhite 129,60
                 customActscriptWait 130
                  ac_setSpeed 56,56      ;   
                  ac_jump eas_Idle       ;   
@@ -86,7 +86,7 @@ abcs_battle30:  textCursor 2765
                 cameraSpeed $38
                 setCameraEntity 130
                 setDest 130,11,2
-                animEntityFX 130,4
+                animEntityFX 130,SLIDE_OUT
                 setCamDest 5,8
                 setFacing 129,RIGHT
                 nextText $C0,129        ; "Thank you.{W2}"
@@ -123,7 +123,7 @@ abcs_battle30:  textCursor 2765
                 csWait 60
                 setFacing 129,LEFT
                 csWait 40
-                entityFlashWhite 129,$32
+                entityFlashWhite 129,50
                 setActscript ALLY_BOWIE,eas_Jump
                 setActscript ALLY_PETER,eas_Jump
                 setActscriptWait FOLLOWER_B,eas_Jump
@@ -132,13 +132,13 @@ abcs_battle30:  textCursor 2765
                 nextSingleText $0,FOLLOWER_B ; "Are you going to abandon us,{N}as Volcanon did?{W1}"
                 nextText $C0,129        ; "Well...no.{N}I'll give you a hint.{W2}"
                 nextSingleText $C0,129  ; "Listen to the legends from{N}the storytellers before you{N}go to Grans Island.{W1}"
-                entityFlashWhite 129,$1E
+                entityFlashWhite 129,30
                 nextText $C0,129        ; "You can't kill Zeon, but{N}Volcanon and I will help you{N}if you weaken him.{W2}"
                 nextText $C0,129        ; "{LEADER}!{N}You are the chosen one.{N}You have the holy jewel.{W2}"
                 nextSingleText $C0,129  ; "We need your help to reseal{N}Zeon.{N}Find the holy sword.{W1}"
                 nextSingleText $0,FOLLOWER_B ; "Where is it?{N}How can we find it?{W1}"
                 nextSingleText $C0,129  ; "It's on Grans.{N}Your jewel will lead you to...{W1}"
-                animEntityFX 129,6
+                animEntityFX 129,MOSAIC_OUT
                 csWait 50
                 entityActionsWait FOLLOWER_B
                  moveLeft 2

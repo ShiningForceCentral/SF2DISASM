@@ -9,7 +9,7 @@ bbcs_11:        textCursor 2483
                 setCameraEntity ALLY_BOWIE
                 executeSubroutine csub_458E
                 fadeInB
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 entityActionsWait ALLY_PETER
                  moveLeft 1
                  moveUp 1
@@ -42,7 +42,7 @@ bbcs_11:        textCursor 2483
                  moveDown 1
                 endActions
                 nextSingleText $0,128   ; "Enjoy your visit because{N}you're not leaving!{W1}"
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 csc_end
 ce_4ACA0:       mainEntity 15,24,UP
                 entity 15,25,UP,ALLY_PETER,eas_Init

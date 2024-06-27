@@ -378,7 +378,7 @@ cs_50806:       textCursor 2288
                 setPos ALLY_BOWIE,0,0,DOWN
                 csWait 60
                 nextSingleText $FF,255  ; "They worked hard to build{N}their new town.{W1}"
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 resetForceBattleStats
                 warp MAP_NEW_GRANSEAL_CASTLE,11,10,UP
                 csc_end

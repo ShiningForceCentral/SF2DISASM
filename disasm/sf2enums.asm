@@ -50,6 +50,18 @@ ENABLE_VINT: equ 7
 ; ---------------------------------------------------------------------------
 
 ; enum Animation
+ENTITY_TRANSITION_SCAN_UP: equ 0
+ENTITY_TRANSITION_SCAN_DOWN: equ 1
+ENTITY_TRANSITION_WIPE_OUT: equ 2
+ENTITY_TRANSITION_WIPE_IN: equ 3
+ENTITY_TRANSITION_SLIDE_OUT: equ 4
+ENTITY_TRANSITION_SLIDE_IN: equ 5
+ENTITY_TRANSITION_MOSAIC_OUT: equ 6
+ENTITY_TRANSITION_MOSAIC_IN: equ 7
+
+; ---------------------------------------------------------------------------
+
+; enum Animation
 ANIM_SPRITE_DEATH_SPIN_DELAY: equ 3 ; number of vints to wait between sprite death spins
 ANIM_SPRITE_DEATH_SPINS_NUMBER: equ 11 ; number of sprite death spins to perform
 
@@ -728,11 +740,11 @@ EQUIPFLAG_ALL: equ $FFFFFFFF
 
 ; enum EquipEffects
 EQUIPEFFECT_NONE: equ 0
-EQUIPEFFECT_UNDEFINED1: equ 1
+EQUIPEFFECT_HP_RECOVERY: equ 1 ; does nothing
 EQUIPEFFECT_INCREASE_CRITICAL: equ 2
 EQUIPEFFECT_INCREASE_DOUBLE: equ 3
 EQUIPEFFECT_INCREASE_COUNTER: equ 4
-EQUIPEFFECT_UNDEFINED2: equ 5
+EQUIPEFFECT_MP_RECOVERY: equ 5 ; does nothing
 EQUIPEFFECT_INCREASE_ATT: equ 6
 EQUIPEFFECT_INCREASE_DEF: equ 7
 EQUIPEFFECT_INCREASE_AGI: equ 8
@@ -785,8 +797,9 @@ SHOP_ITEM_RIBBLE: equ 18
 SHOP_ITEM_POLCA: equ 19
 SHOP_ITEM_BEDOE: equ 20
 SHOP_ITEM_HASSAN: equ 21
-SHOP_MINATURES_ROOM: equ 22
+SHOP_UNUSED1: equ 22
 SHOP_ITEM_NEW_GRANSEAL_1: equ 23
+SHOP_UNUSED2: equ 24
 SHOP_ITEM_PACALON: equ 25
 SHOP_ITEM_TRISTAN: equ 26
 SHOP_ITEM_MOUN: equ 27
@@ -829,7 +842,7 @@ ITEM_HEALING_SEED: equ 1
 ITEM_HEALING_DROP: equ 2
 ITEM_ANTIDOTE: equ 3
 ITEM_ANGEL_WING: equ 4
-ITEM_FAIRY_POWDER: equ 5
+ITEM_FAIRY_POWDER: equ 5 ; cures Poison/Stun outside battle (cures only Poison in battle)
 ITEM_HEALING_WATER: equ 6
 ITEM_FAIRY_TEAR: equ 7
 ITEM_HEALING_RAIN: equ 8
@@ -1078,6 +1091,7 @@ ENTITYDEF_ENTITY32_YDEST: equ $3EE
 
 ; enum Entities
 ENTITY_PLAYER_CHARACTER: equ 0
+ENTITY_CARAVAN: equ 1
 ENTITY_CURSOR_SPRITES_COUNTER: equ 3
 ENTITY_RAFT: equ $1F
 ENTITY_ENEMY_START: equ $20
@@ -1093,6 +1107,11 @@ ENTITY_LAST_SPRITE_PLUS_ONE_WORD_ADDRESS: equ $DE80
 
 ; ---------------------------------------------------------------------------
 
+; enum cameraEntity
+CAMERA_NEUTRAL: equ $FFFF
+
+; ---------------------------------------------------------------------------
+
 ; enum SoundCommands
 SOUND_COMMAND_INIT_DRIVER: equ $20
 SOUND_COMMAND_SFX_START_MINUS_ONE: equ $40
@@ -1101,6 +1120,7 @@ SOUND_COMMAND_WAIT_MUSIC_END: equ $F0
 SOUND_COMMAND_PLAY_PREVIOUS_MUSIC: equ $FB
 SOUND_COMMAND_UPDATE_MUSIC_LEVEL: equ $FC
 SOUND_COMMAND_FADE_OUT: equ $FD
+SOUND_COMMAND_CUT_OUT: equ $FE
 SOUND_COMMAND_GET_D0_PARAMETER: equ $FFFF
 
 ; ---------------------------------------------------------------------------
@@ -1233,11 +1253,16 @@ SPELLDEFS_COUNTER: equ 99
 
 ; enum SpellAnimations (bitfield)
 SPELLANIMATION_NONE: equ 0
-SPELLANIMATION_BLAZE: equ 1
+SPELLANIMATION_BLAZE: equ 1 ; variation 1: lone flame
+                            ; variation 2: small flame/fireballs
+                            ; variation 3: large flame/fireballs
+                            ; variation 4: large flame and flame serpent
 SPELLANIMATION_FREEZE: equ 2
 SPELLANIMATION_DESOUL: equ 3
-SPELLANIMATION_HEALING_FAIRY: equ 4
-SPELLANIMATION_BLAST: equ 5
+SPELLANIMATION_HEALING_FAIRY: equ 4 ; ally caster: fairy of light
+                                    ; enemy caster: fairy of darkness
+SPELLANIMATION_BLAST: equ 5 ; variation : wind scythes
+                            ; variation 4: cyclone
 SPELLANIMATION_DETOX: equ 6
 SPELLANIMATION_BOLT: equ 7
 SPELLANIMATION_BUFF1: equ 8
@@ -1258,12 +1283,13 @@ SPELLANIMATION_ATLAS: equ $14
 SPELLANIMATION_PRISM_LASER: equ $15
 SPELLANIMATION_BUBBLE_BREATH: equ $16
 SPELLANIMATION_SNOW_BREATH: equ $17
-SPELLANIMATION_CUTOFF: equ $18
+SPELLANIMATION_CUTOFF: equ $18 ; used by Gisarme insta-kill
 SPELLANIMATION_BUFF2: equ $19
 SPELLANIMATION_ATTACK_SPELL: equ $1A ; SFCD's ATTACK spell (unused)
 SPELLANIMATION_DEBUFF2: equ $1B
 SPELLANIMATION_DEBUFF3: equ $1C
-SPELLANIMATION_PHOENIX_ATTACK: equ $1D
+SPELLANIMATION_PHOENIX_ATTACK: equ $1D ; variation 1/3: sound waves
+                                       ; variation 2/4: Blast cyclone
 SPELLANIMATION_BURST_ROCK_EXPLOSION: equ $1E
 SPELLANIMATION_ODD_EYE_BEAM: equ $1F
 SPELLANIMATION_VARIATION2: equ $20
@@ -1377,7 +1403,7 @@ SPELL_FREEZE: equ $C
 SPELL_BOLT: equ $D
 SPELL_BLAST: equ $E
 SPELL_SPOIT: equ $F ; Magic Drain
-SPELL_HEALIN: equ $10 ; Medical Herb
+SPELL_HEALIN: equ $10 ; item version of Heal (Medical Herb, Healing Seed, Healing Drop)
 SPELL_FLAME: equ $11 ; Flame Breath
 SPELL_SNOW: equ $12 ; Snow Breath
 SPELL_DEMON: equ $13 ; Demon Breath
@@ -1388,22 +1414,22 @@ SPELL_IDATEN: equ $17 ; Running Pimento
 SPELL_HEALTH: equ $18 ; Cheerful Bread
 SPELL_B_ROCK: equ $19 ; Burst Rock
 SPELL_LASER: equ $1A ; Prism laser!
-SPELL_KATON: equ $1B
-SPELL_RAIJIN: equ $1C
+SPELL_KATON: equ $1B ; Ninja version of Blaze (non-elemental)
+SPELL_RAIJIN: equ $1C ; Ninja version of Bolt (non-elemental)
 SPELL_DAO: equ $1D
 SPELL_APOLLO: equ $1E
 SPELL_NEPTUN: equ $1F
 SPELL_ATLAS: equ $20
-SPELL_POWDER: equ $21 ; Fairy Powder
+SPELL_POWDER: equ $21 ; item version of Detox (Fairy Powder)
 SPELL_G_TEAR: equ $22 ; Fairy Tear
 SPELL_HANNY: equ $23 ; Bright Honey
 SPELL_BRAVE: equ $24 ; Brave Apple
-SPELL_FBALL: equ $25 ; Shining Ball
-SPELL_BREZAD: equ $26 ; Blizzard
-SPELL_THUNDR: equ $27 ; Holy Thunder
-SPELL_AQUA: equ $28 ; Bubble Breath
+SPELL_FBALL: equ $25 ; item version of Blaze (Shining Ball)
+SPELL_BREZAD: equ $26 ; item version of Freeze (Blizzard)
+SPELL_THUNDR: equ $27 ; item version of Bolt (Holy Thunder)
+SPELL_AQUA: equ $28 ; Bubble/Aqua Breath
 SPELL_KIWI: equ $29 ; Kiwi's Flame Breath
-SPELL_SHINE: equ $2A ; Right of Hope
+SPELL_SHINE: equ $2A ; map wide MP restore (Right of Hope)
 SPELL_ODDEYE: equ $2B ; Odd-eye beam!
 SPELL_NOTHING: equ $3F
 SPELL_LV2: equ $40
@@ -1459,7 +1485,7 @@ CHANCE_TO_INFLICT_DESOUL: equ 5 ; 3/8 base chance to inflict desoul
 CHANCE_TO_INFLICT_SLOW: equ 5 ; 3/8 base chance to inflict slow
 CHANCE_TO_INFLICT_SILENCE: equ 5 ; 3/8 base chance to inflict silence
 CHANCE_TO_INFLICT_SLEEP: equ 5 ; 3/8 base chance to inflict sleep
-STATUSEFFECT_SPELL_EXP: equ 5
+STATUSEFFECT_SPELL_EXP: equ 5 ; 5 exp per target
 CHANCE_TO_CRITICAL_BUBBLE_BREATH: equ 8 ; 1/8 chance to critical hit
 CHANCE_TO_CRITICAL_BOLT: equ 8 ; 1/8 chance to critical hit (Bolt, Raijin, Atlas, Holy Thunder, Odd-eye beam)
 CHANCE_TO_CRITICAL_FLAME_BREATH: equ 16 ; 1/16 chance to critical hit (Flame Breath, Kiwi's Flame Breath)
@@ -1481,9 +1507,9 @@ INACTION_CHANCE_CURSE: equ 4 ; 1/4 chance to be unable to attack due to being cu
 INACTION_CHANCE_STUN: equ 4 ; 1/4 chance to be unable to attack due to being stunned
 CHANCE_TO_DODGE_FOR_AIRBORNE_TARGET: equ 8 ; 1/8 chance to dodge if target is flying or hovering, and attacker is not an archer
 CHANCE_TO_DODGE_DEFAULT: equ 32 ; 1/32 chance to dodge by default
-KIWI_FLAME_BREATH_UPGRADE_LEVEL1: equ 32
-KIWI_FLAME_BREATH_UPGRADE_LEVEL2: equ 40
-KIWI_FLAME_BREATH_UPGRADE_LEVEL3: equ 50
+KIWI_FLAME_BREATH_UPGRADE_LEVEL1: equ 32 ; level as MNST (not effective level)
+KIWI_FLAME_BREATH_UPGRADE_LEVEL2: equ 40 ; level as MNST (not effective level)
+KIWI_FLAME_BREATH_UPGRADE_LEVEL3: equ 50 ; level as MNST (not effective level)
 
 ; ---------------------------------------------------------------------------
 
@@ -1494,7 +1520,7 @@ MAPS_NUMBER: equ 79
 MINIMAP_TILE_SIZE: equ 96
 MAP_TILE_SIZE: equ 384
 MAP_TILE_PLUS: equ 384
-MAP_TILE_MINUS: equ 65152
+MAP_TILE_MINUS: equ 65152 ; -384
 
 ; ---------------------------------------------------------------------------
 
@@ -2249,10 +2275,10 @@ VDPTILE_ORANGE_NUMBER_SIGN: equ $9D
 VDPTILE_ORANGE_DOLLAR_SIGN: equ $9E
 VDPTILE_ORANGE_PERCENT_SIGN: equ $9F
 VDPTILE_HORIZONTAL_ARROW: equ $A0
-VDPTILE_STATUSEFFECT_ATTACK1: equ $A1
-VDPTILE_STATUSEFFECT_ATTACK2: equ $A2
-VDPTILE_STATUSEFFECT_BOOST1: equ $A3
-VDPTILE_STATUSEFFECT_BOOST2: equ $A4
+VDPTILE_STATUSEFFECT_ATTACK1: equ $A1 ; left half of icon
+VDPTILE_STATUSEFFECT_ATTACK2: equ $A2 ; right half of icon
+VDPTILE_STATUSEFFECT_BOOST1: equ $A3 ; left half of icon
+VDPTILE_STATUSEFFECT_BOOST2: equ $A4 ; right half of icon
 VDPTILE_HYPHEN: equ $A5
 VDPTILE_ORANGE_AMPERSAND: equ $A6
 VDPTILE_ORANGE_APOSTROPHE: equ $A7
@@ -2264,7 +2290,7 @@ VDPTILE_ORANGE_COMMA: equ $AC
 VDPTILE_ORANGE_MINUS_SIGN: equ $AD
 VDPTILE_ORANGE_DOT: equ $AE
 VDPTILE_ORANGE_SLASH: equ $AF
-VDPTILE_SWORD_ICON: equ $B0
+VDPTILE_SWORD_ICON: equ $B0 ; denotes active member
 VDPTILE_EQUIPPED_SYMBOL: equ $B1
 VDPTILE_ORANGE_NUMBER_0: equ $B2
 VDPTILE_ORANGE_NUMBER_1: equ $B3
@@ -2309,40 +2335,40 @@ VDPTILE_ORANGE_UPPERCASE_W: equ $D9
 VDPTILE_ORANGE_UPPERCASE_X: equ $DA
 VDPTILE_ORANGE_UPPERCASE_Y: equ $DB
 VDPTILE_ORANGE_UPPERCASE_Z: equ $DC
-VDPTILE_STATUSEFFECT_SLOW1: equ $DD
+VDPTILE_STATUSEFFECT_SLOW1: equ $DD ; left half of icon
 VDPTILE_ORANGE_BACKSLASH: equ $DE
-VDPTILE_STATUSEFFECT_SLOW2: equ $DF
-VDPTILE_MAX_SYMBOL1: equ $E0
-VDPTILE_MAX_SYMBOL2: equ $E1
-VDPTILE_STATUSEFFECT_MUDDLE1: equ $E2
-VDPTILE_STATUSEFFECT_MUDDLE2: equ $E3
-VDPTILE_STATUSEFFECT_SILENCE1: equ $E4
-VDPTILE_STATUSEFFECT_SILENCE2: equ $E5
-VDPTILE_STATUSEFFECT_SLEEP1: equ $E6
-VDPTILE_STATUSEFFECT_SLEEP2: equ $E7
-VDPTILE_STATUSEFFECT_POISON1: equ $E8
-VDPTILE_STATUSEFFECT_POISON2: equ $E9
-VDPTILE_STATUSEFFECT_STUN1: equ $EA
-VDPTILE_STATUSEFFECT_STUN2: equ $EB
-VDPTILE_STATUSEFFECT_CURSE1: equ $EC
-VDPTILE_STATUSEFFECT_CURSE2: equ $ED
+VDPTILE_STATUSEFFECT_SLOW2: equ $DF ; right half of icon
+VDPTILE_MAX_SYMBOL1: equ $E0 ; left half of icon
+VDPTILE_MAX_SYMBOL2: equ $E1 ; right half of icon
+VDPTILE_STATUSEFFECT_MUDDLE1: equ $E2 ; left half of icon
+VDPTILE_STATUSEFFECT_MUDDLE2: equ $E3 ; right half of icon
+VDPTILE_STATUSEFFECT_SILENCE1: equ $E4 ; left half of icon
+VDPTILE_STATUSEFFECT_SILENCE2: equ $E5 ; right half of icon
+VDPTILE_STATUSEFFECT_SLEEP1: equ $E6 ; left half of icon
+VDPTILE_STATUSEFFECT_SLEEP2: equ $E7 ; right half of icon
+VDPTILE_STATUSEFFECT_POISON1: equ $E8 ; left half of icon
+VDPTILE_STATUSEFFECT_POISON2: equ $E9 ; right half of icon
+VDPTILE_STATUSEFFECT_STUN1: equ $EA ; left half of icon
+VDPTILE_STATUSEFFECT_STUN2: equ $EB ; right half of icon
+VDPTILE_STATUSEFFECT_CURSE1: equ $EC ; left half of icon
+VDPTILE_STATUSEFFECT_CURSE2: equ $ED ; right half of icon
 VDPTILE_JEWEL_OF_EVIL: equ $EE
 VDPTILE_JEWEL_OF_LIGHT: equ $EF
-VDPTILE_SPELL_LEVEL1: equ $F0
-VDPTILE_SPELL_LEVEL2: equ $F1
-VDPTILE_SPELL_LEVEL3: equ $F2
-VDPTILE_SPELL_LEVEL4: equ $F3
-VDPTILE_SPELL_LEVEL5: equ $F4
-VDPTILE_SPELL_LEVEL6: equ $F5
-VDPTILE_SPELL_LEVEL7: equ $F6
-VDPTILE_SPELL_LEVEL8: equ $F7
+VDPTILE_SPELL_LEVEL1: equ $F0 ; for 1st pip start
+VDPTILE_SPELL_LEVEL2: equ $F1 ; for filled end pip
+VDPTILE_SPELL_LEVEL3: equ $F2 ; for filled-to-filled pip
+VDPTILE_SPELL_LEVEL4: equ $F3 ; 
+VDPTILE_SPELL_LEVEL5: equ $F4 ; 
+VDPTILE_SPELL_LEVEL6: equ $F5 ; for filled-to-empty pip
+VDPTILE_SPELL_LEVEL7: equ $F6 ; for empty-to-empty pip
+VDPTILE_SPELL_LEVEL8: equ $F7 ; for empty end pip
 VDPTILE_BLANK: equ $F8
 VDPTILE_PORTRAITCORNER: equ $F9
 VDPTILE_H_PORTRAITBORDER: equ $FA
 VDPTILE_V_PORTRAITBORDER: equ $FB
 VDPTILE_SHOP_PRICE_TAG_STRING: equ $FC
-VDPTILE_RED_DOT: equ $FD
-VDPTILE_GREEN_DOT: equ $FE
+VDPTILE_RED_DOT: equ $FD ; for enemy designation on minimap
+VDPTILE_GREEN_DOT: equ $FE ; for ally designation on minimap
 VDPTILE_255: equ $FF
 VDPTILE_MAP_START: equ $100
 VDPTILE_ENTITIES_FRAME_1_START: equ $380
@@ -2493,15 +2519,15 @@ VDPTILE_PALETTE1: equ 0
 ; ---------------------------------------------------------------------------
 
 ; enum VdpTiles_StatusEffects
-VDPTILES_STATUSEFFECT_ATTACK: equ $C0A1C0A2
-VDPTILES_STATUSEFFECT_BOOST: equ $C0A3C0A4
-VDPTILES_STATUSEFFECT_SLOW: equ $C0DDC0DF
-VDPTILES_STATUSEFFECT_MUDDLE: equ $C0E2C0E3
-VDPTILES_STATUSEFFECT_SILENCE: equ $C0E4C0E5
-VDPTILES_STATUSEFFECT_SLEEP: equ $C0E6C0E7
-VDPTILES_STATUSEFFECT_POISON: equ $C0E8C0E9
-VDPTILES_STATUSEFFECT_STUN: equ $C0EAC0EB
-VDPTILES_STATUSEFFECT_CURSE: equ $C0ECC0ED
+VDPTILES_STATUSEFFECT_ATTACK: equ $C0A1C0A2 ; total icon in palette 3 with priority
+VDPTILES_STATUSEFFECT_BOOST: equ $C0A3C0A4 ; total icon in palette 3 with priority
+VDPTILES_STATUSEFFECT_SLOW: equ $C0DDC0DF ; total icon in palette 3 with priority
+VDPTILES_STATUSEFFECT_MUDDLE: equ $C0E2C0E3 ; total icon in palette 3 with priority
+VDPTILES_STATUSEFFECT_SILENCE: equ $C0E4C0E5 ; total icon in palette 3 with priority
+VDPTILES_STATUSEFFECT_SLEEP: equ $C0E6C0E7 ; total icon in palette 3 with priority
+VDPTILES_STATUSEFFECT_POISON: equ $C0E8C0E9 ; total icon in palette 3 with priority
+VDPTILES_STATUSEFFECT_STUN: equ $C0EAC0EB ; total icon in palette 3 with priority
+VDPTILES_STATUSEFFECT_CURSE: equ $C0ECC0ED ; total icon in palette 3 with priority
 
 ; ---------------------------------------------------------------------------
 
@@ -2589,7 +2615,7 @@ BATTLEANIMATION_RANGED: equ 6
 ; ---------------------------------------------------------------------------
 
 ; enum AllyBattleSprites
-ALLYBATTLESPRITE_SDMN: equ 0
+ALLYBATTLESPRITE_SDMN: equ 0 ; default
 ALLYBATTLESPRITE_PRST: equ 1
 ALLYBATTLESPRITE_KNTE: equ 2
 ALLYBATTLESPRITE_WARR: equ 3
@@ -2631,10 +2657,10 @@ ALLYBATTLEANIMATION_SPECIALS_START: equ 80
 ALLYBATTLEANIMATION_SPECIAL_SPEARTHROW_KNTE: equ 80
 ALLYBATTLEANIMATION_SPECIAL_SPEARTHROW_PLDN: equ 81
 ALLYBATTLEANIMATION_SPECIAL_SPEARTHROW_PGNT: equ 82
-ALLYBATTLEANIMATION_SPECIAL_MMNK: equ 83
-ALLYBATTLEANIMATION_SPECIAL_MNST: equ 84
-ALLYBATTLEANIMATION_SPECIAL_RBT: equ 85
-ALLYBATTLEANIMATION_SPECIAL_BRGN: equ 86
+ALLYBATTLEANIMATION_SPECIAL_MMNK: equ 83 ; special crit
+ALLYBATTLEANIMATION_SPECIAL_MNST: equ 84 ; flame breath
+ALLYBATTLEANIMATION_SPECIAL_RBT: equ 85 ; laser attack
+ALLYBATTLEANIMATION_SPECIAL_BRGN: equ 86 ; unarmed attack
 
 ; ---------------------------------------------------------------------------
 
@@ -2699,8 +2725,8 @@ ENEMYBATTLESPRITE_ZEON: equ 53
 ; enum EnemyBattleAnimations
 ENEMYBATTLEANIMATION_DODGES_START: equ 60
 ENEMYBATTLEANIMATION_SPECIALS_START: equ 118
-ENEMYBATTLEANIMATION_SPECIAL_HELL_HOUND: equ 118
-ENEMYBATTLEANIMATION_SPECIAL_DEVIL_GRIFFIN: equ 119
+ENEMYBATTLEANIMATION_SPECIAL_HELL_HOUND: equ 118 ; flame breath
+ENEMYBATTLEANIMATION_SPECIAL_DEVIL_GRIFFIN: equ 119 ; flame breath
 ENEMYBATTLEANIMATION_SPECIAL_ODD_EYE: equ 120
 
 ; ---------------------------------------------------------------------------
@@ -2735,19 +2761,19 @@ WEAPONSPRITE_NONE: equ 255
 
 ; enum WeaponPalettes
 WEAPONPALETTE_SHORT_AXE: equ 0
-WEAPONPALETTE_MIDDLE_AXE: equ 1
-WEAPONPALETTE_LARGE_AXE: equ 2
+WEAPONPALETTE_MIDDLE_AXE: equ 1 ; same as Short Axe
+WEAPONPALETTE_LARGE_AXE: equ 2 ; same as Short Axe
 WEAPONPALETTE_HEAT_AXE: equ 3
-WEAPONPALETTE_ATLAS_AXE: equ 4
+WEAPONPALETTE_ATLAS_AXE: equ 4 ; same as Short Axe
 WEAPONPALETTE_GROUND_AXE: equ 5
-WEAPONPALETTE_RUNE_AXE: equ 6
+WEAPONPALETTE_RUNE_AXE: equ 6 ; same as Ground Axe
 WEAPONPALETTE_EVIL_AXE: equ 7
 WEAPONPALETTE_WOODEN_SWORD: equ 8
-WEAPONPALETTE_SHORT_SWORD: equ 9
-WEAPONPALETTE_LONG_SWORD: equ 10
+WEAPONPALETTE_SHORT_SWORD: equ 9 ; same as Wooden Sword
+WEAPONPALETTE_LONG_SWORD: equ 10 ; same as Wooden Sword
 WEAPONPALETTE_ACHILLES_SWORD: equ 11
 WEAPONPALETTE_COUNTER_SWORD: equ 12
-WEAPONPALETTE_GREAT_SWORD: equ 13
+WEAPONPALETTE_GREAT_SWORD: equ 13 ; same as Wooden Sword
 WEAPONPALETTE_LEVANTER: equ 14
 WEAPONPALETTE_CRITICAL_SWORD: equ 15
 WEAPONPALETTE_DARK_SWORD: equ 16
@@ -2755,25 +2781,25 @@ WEAPONPALETTE_KATANA: equ 17
 WEAPONPALETTE_FORCE_SWORD: equ 18
 WEAPONPALETTE_WOODEN_STICK: equ 19
 WEAPONPALETTE_BRONZE_LANCE: equ 20
-WEAPONPALETTE_STEEL_LANCE: equ 21
+WEAPONPALETTE_STEEL_LANCE: equ 21 ; same as Bronze Lance
 WEAPONPALETTE_HEAVY_LANCE: equ 22
 WEAPONPALETTE_CHROME_LANCE: equ 23
 WEAPONPALETTE_HOLY_LANCE: equ 24
 WEAPONPALETTE_EVIL_LANCE: equ 25
 WEAPONPALETTE_SPEAR: equ 26
-WEAPONPALETTE_JAVELIN: equ 27
+WEAPONPALETTE_JAVELIN: equ 27 ; same as Spear
 WEAPONPALETTE_VALKYRIE: equ 28
-WEAPONPALETTE_HALBERD: equ 29
+WEAPONPALETTE_HALBERD: equ 29 ; same as Valkyrie
 WEAPONPALETTE_WOODEN_ROD: equ 30
-WEAPONPALETTE_GUARDIAN_STAFF: equ 31
-WEAPONPALETTE_SUPPLY_STAFF: equ 32
+WEAPONPALETTE_GUARDIAN_STAFF: equ 31 ; same as Wooden Rod
+WEAPONPALETTE_SUPPLY_STAFF: equ 32 ; same as Wooden Rod
 WEAPONPALETTE_HOLY_STAFF: equ 33
 WEAPONPALETTE_FREEZE_STAFF: equ 34
 WEAPONPALETTE_GODDESS_STAFF: equ 35
 WEAPONPALETTE_MYSTERY_STAFF: equ 36
 WEAPONPALETTE_SHORT_ROD: equ 37
 WEAPONPALETTE_GREAT_ROD: equ 38
-WEAPONPALETTE_POWER_STICK: equ 39
+WEAPONPALETTE_POWER_STICK: equ 39 ; same as Great Rod
 WEAPONPALETTE_KNIFE: equ 40
 WEAPONPALETTE_DAGGER: equ 41
 
@@ -2979,7 +3005,7 @@ MAPSPRITE_ODD_EYE: equ 160
 MAPSPRITE_FILLER3: equ 161 ; Filling for ???
 MAPSPRITE_FILLER4: equ 162 ; Filling for ???
 MAPSPRITE_GALAM_ZEON: equ 163 ; go with Zeon Portrait (46)
-MAPSPRITE_GALAM_EVIL: equ 164 ; Duplicate of 164, go with Evil Galam Portrait (39)
+MAPSPRITE_GALAM_EVIL: equ 164 ; Duplicate of 163, go with Evil Galam Portrait (39)
 MAPSPRITE_FILLER5: equ 165 ; Filling for Zeon ???
 MAPSPRITE_FILLER6: equ 166 ; Filling for Zeon ???
 MAPSPRITE_FILLER7: equ 167 ; Filling for Zeon ???
@@ -3102,7 +3128,7 @@ SPECIALSPRITE_KRAKEN_5: equ 9
 
 ; ---------------------------------------------------------------------------
 
-; enum Portraits
+; enum Portraits (allies use portrait index matching their ally index, unless changed at promotion)
 PORTRAIT_BOWIE_BASE: equ 0
 PORTRAIT_SARAH: equ 1
 PORTRAIT_CHESTER: equ 2
@@ -3309,11 +3335,14 @@ BATTLESPRITESET_ENTITYOFFSET_STARTING_X: equ 1
 BATTLESPRITESET_ENTITYOFFSET_STARTING_Y: equ 2
 BATTLESPRITESET_ENTITYOFFSET_AI_COMMANDSET: equ 3
 BATTLESPRITESET_ENTITYOFFSET_ITEMS: equ 4
-BATTLESPRITESET_ENTITYOFFSET_ENTITY_TO_FOLLOW: equ 6
-BATTLESPRITESET_ENTITYOFFSET_AI_TRIGGER_REGION: equ 7
-BATTLESPRITESET_ENTITYOFFSET_MOVE_TO_POSITION: equ 8
-BATTLESPRITESET_ENTITYOFFSET_9: equ 9 ; unknown
-BATTLESPRITESET_ENTITYOFFSET_AI_ACTIVATION_FLAG: equ 10 ; also "spawn code"?
+BATTLESPRITESET_ENTITYOFFSET_PRIMARY_ORDER: equ 6
+BATTLESPRITESET_ENTITYOFFSET_PRIMARY_TRIGGER_REGION: equ 7
+BATTLESPRITESET_ENTITYOFFSET_SECONDARY_ORDER: equ 8
+BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION: equ 9 ; unknown
+BATTLESPRITESET_ENTITYOFFSET_INITIALIZATION_TYPE: equ 10 ; (2 bytes) (bitfield)
+                                                         ; 0: normal initialization
+                                                         ; 1: reinitialize if dead
+                                                         ; 2: initialize off-map, spawn with trigger region activation
 
 ; ---------------------------------------------------------------------------
 
@@ -3378,7 +3407,7 @@ LANDEFFECTSETTING_LE30: equ $20
 ; ---------------------------------------------------------------------------
 
 ; enum LandEffectSetting_Obstructed
-LANDEFFECTSETTING_OBSTRUCTED: equ $FF
+LANDEFFECTSETTING_OBSTRUCTED: equ $FF ; gives "30%" effect, displays as "225%" (Taros)
 
 ; ---------------------------------------------------------------------------
 

@@ -11,5 +11,5 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    255
-                    areaDefaultMusic 38
+                    areaDefaultMusic MUSIC_CASTLE
                 endWord

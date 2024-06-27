@@ -110,7 +110,7 @@ loc_1B132E:
                 andi.l  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
                 mulu.w  #BATTLESPRITESET_ENTITY_ENTRY_SIZE,d1
                 adda.w  d1,a0
-                move.w  BATTLESPRITESET_ENTITYOFFSET_AI_ACTIVATION_FLAG(a0),d1
+                move.w  BATTLESPRITESET_ENTITYOFFSET_INITIALIZATION_TYPE(a0),d1
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
                 cmpi.w  #2,d1
                 bge.w   loc_1B1368
@@ -127,8 +127,8 @@ loc_1B1368:
                 jsr     j_SetCombatantX
                 clr.w   d1
                 clr.w   d2
-                move.b  BATTLESPRITESET_ENTITYOFFSET_AI_TRIGGER_REGION(a0),d1
-                move.b  BATTLESPRITESET_ENTITYOFFSET_9(a0),d2
+                move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_TRIGGER_REGION(a0),d1
+                move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION(a0),d2
                 jsr     j_SetAiRegion
 loc_1B139A:
                 
@@ -228,18 +228,18 @@ InitializeEnemyStats:
                 jsr     j_SetMoveType
                 move.b  d6,d1
                 jsr     j_SetEnemyIndex
-                move.b  BATTLESPRITESET_ENTITYOFFSET_AI_TRIGGER_REGION(a0),d1
-                move.b  BATTLESPRITESET_ENTITYOFFSET_9(a0),d2
+                move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_TRIGGER_REGION(a0),d1
+                move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION(a0),d2
                 jsr     j_SetAiRegion
-                move.b  BATTLESPRITESET_ENTITYOFFSET_ENTITY_TO_FOLLOW(a0),d1
-                move.b  BATTLESPRITESET_ENTITYOFFSET_MOVE_TO_POSITION(a0),d2
+                move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_ORDER(a0),d1
+                move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_ORDER(a0),d2
                 jsr     j_SetAiSpecialMoveOrders
                 move.w  BATTLESPRITESET_ENTITYOFFSET_ITEMS(a0),d1
                 bsr.w   InitializeEnemyItems
                 jsr     j_GetActivationBitfield
                 move.w  d1,d2
                 andi.w  #WORD_UPPER_NIBBLE_MASK,d2
-                move.w  BATTLESPRITESET_ENTITYOFFSET_AI_ACTIVATION_FLAG(a0),d1
+                move.w  BATTLESPRITESET_ENTITYOFFSET_INITIALIZATION_TYPE(a0),d1
                 ror.w   #8,d1
                 andi.w  #$FFF,d1
                 or.w    d2,d1

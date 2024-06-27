@@ -24,7 +24,7 @@ cs_5F4B8:       setActscriptWait ALLY_BOWIE,eas_Init
                 playSound SFX_BIG_DOOR_RUMBLE
                 setBlocks 13,6,3,5,5,4
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 playSound SFX_BIG_DOOR_RUMBLE
                 setFacing ALLY_BOWIE,UP
                 setFacing ALLY_PETER,UP
@@ -32,9 +32,9 @@ cs_5F4B8:       setActscriptWait ALLY_BOWIE,eas_Init
                 csWait 60
                 setBlocks 13,0,3,5,5,4
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 playSound SFX_BIG_DOOR_RUMBLE
-                setQuake 16387
+                setQuake $4003
                 csWait 40
                 setActscript ALLY_BOWIE,eas_Jump
                 setActscript ALLY_PETER,eas_Jump

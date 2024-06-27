@@ -11,15 +11,15 @@ bbcs_31:        textCursor 2811
                 setPos FOLLOWER_B,22,3,DOWN
                 setActscriptWait ALLY_FRAYJA,eas_Init
                 setPos ALLY_FRAYJA,21,3,DOWN
-                animEntityFX 128,6
-                animEntityFX 129,6
+                animEntityFX 128,MOSAIC_OUT
+                animEntityFX 129,MOSAIC_OUT
                 setActscript 130,eas_AnimSpeedx2
                 playSound MUSIC_BATTLE_THEME_1
                 fadeInB
                 cameraSpeed $30
                 nextSingleText $C0,128  ; "Finally, you've left the{N}castle, Vicar {NAME;22}.{W1}"
                 setCamDest 16,5
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 nextSingleText $0,ALLY_PETER ; "Geshp!{W1}"
                 nextSingleText $C0,128  ; "So, you remember me. {W1}"
                 setCamDest 16,2
@@ -44,7 +44,7 @@ bbcs_31:        textCursor 2811
                 entityActionsWait ALLY_FRAYJA
                  moveUp 1
                 endActions
-                flashScreenWhite $2
+                flashScreenWhite 2
                 setPos 130,21,1,LEFT
                 csWait 30
                 setActscriptWait ALLY_FRAYJA,eas_Jump
@@ -57,7 +57,7 @@ bbcs_31:        textCursor 2811
                 setFacing 128,DOWN
                 nextSingleText $C0,128  ; "Cameela!  Cameeeeeela!{W1}"
                 nextSingleText $0,ALLY_PETER ; "Cameela?!  We met her in{N}Pangoat Valley.{W1}"
-                animEntityFX 129,7
+                animEntityFX 129,MOSAIC_IN
                 nextSingleText $0,129   ; "What?{W1}"
                 nextText $C0,128        ; "Ah, Cameela.  You're here.{W2}"
                 nextSingleText $C0,128  ; "Get the key for me!{W1}"
@@ -84,7 +84,7 @@ bbcs_31:        textCursor 2811
                 nextText $0,129         ; "I hate you!{N}I won't help you.{W2}"
                 nextText $0,129         ; "You want the key?{N}You get it!{N}You can use my army.{W2}"
                 nextSingleText $0,129   ; "See you later.{W1}"
-                animEntityFX 129,6
+                animEntityFX 129,MOSAIC_OUT
                 nextText $C0,128        ; "That witch!{W2}"
                 nextSingleText $C0,128  ; "Cameela!  Cameela!!{W1}"
                 nextSingleText $0,ALLY_PETER ; "They're divided....{W1}"
@@ -110,7 +110,7 @@ bbcs_31:        textCursor 2811
                 nextSingleText $0,ALLY_PETER ; "You're not staying?{W1}"
                 nextText $C0,128        ; "I'm good at using my brains,{N}not my strength.{W2}"
                 nextSingleText $C0,128  ; "I'll return by the time{N}you're defeated.{W1}"
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 csc_end
 ce_4CB92:       mainEntity 21,4,DOWN
                 entity 20,3,DOWN,ALLY_PETER,eas_Init

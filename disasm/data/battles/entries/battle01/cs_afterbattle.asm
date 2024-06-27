@@ -30,7 +30,7 @@ abcs_battle01:  textCursor 2305
                 mapFadeInFromWhite
                 csWait 30
                 mapFadeOutToWhite
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 setSprite 128,MAPSPRITE_BLANK
                 setPos 128,7,10,DOWN
                 setSprite 128,MAPSPRITE_MIST_DEMON
@@ -53,7 +53,7 @@ abcs_battle01:  textCursor 2305
                 setCamDest 2,3
                 csWait 70
                 mapFadeOutToWhite
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 setSprite 128,MAPSPRITE_BLANK
                 setPos 128,7,16,DOWN
                 setSprite 128,MAPSPRITE_MIST_DEMON
@@ -65,7 +65,7 @@ abcs_battle01:  textCursor 2305
                 entityActions 128
                  moveDown 4
                 endActions
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 csWait 20
                 hide 128
                 setCamDest 2,2

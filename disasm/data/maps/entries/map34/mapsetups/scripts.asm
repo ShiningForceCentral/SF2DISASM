@@ -5,7 +5,7 @@ cs_5B6C0:       textCursor 3207
                 setCamDest 2,4
                 nextText $80,128        ; "Yeeenn...queeen...{N}tillooora...synooora...{N}hear my voice....{W2}"
                 nextSingleText $80,128  ; "Evil Spirit, come.{W1}"
-                entityFlashWhite 128,$64
+                entityFlashWhite 128,100
                 setPos 130,7,6,DOWN
                 csWait 7
                 setPos 130,60,60,DOWN
@@ -70,11 +70,11 @@ cs_5B6C0:       textCursor 3207
                 nextSingleText $80,128  ; "I need to know anything{N}about him.  Anything!{W1}"
                 nextText $0,130         ; "I've got something.{W1}"
                 csWait 40
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 30
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 20
-                flashScreenWhite $4
+                flashScreenWhite 4
                 mapFadeOutToWhite
                 csWait 30
                 nextSingleText $0,130   ; "Hmmmm....{N}Hmmmm...mmmm....{W1}"
@@ -131,7 +131,7 @@ cs_5B6C0:       textCursor 3207
                 setActscriptWait 128,eas_StopMoving
                 stopEntity 128
                 csWait 20
-                entityFlashWhite ALLY_BOWIE,$28
+                entityFlashWhite ALLY_BOWIE,40
                 startEntity 128
                 entityActions 128
                  moveUp 1
@@ -160,7 +160,7 @@ cs_5B6C0:       textCursor 3207
                 endActions
                 setFacing 129,UP
                 nextSingleText $FF,255  ; "{LEADER} displays the{N}jewels to Evil Spirit.{W1}"
-                entityFlashWhite ALLY_BOWIE,$28
+                entityFlashWhite ALLY_BOWIE,40
                 nextText $0,130         ; "Yeah, I feel it...I feel it...!{N}I think I can do it now.{N}Let me try again.{W1}"
                 executeSubroutine csub_55EF4
                 csWait 20
@@ -207,7 +207,7 @@ cs_5B6C0:       textCursor 3207
                 executeSubroutine csub_5BFD0
                 csWait 10
                 executeSubroutine sub_5BFDA
-                flashScreenWhite $28
+                flashScreenWhite 40
                 executeSubroutine sub_5BFE4
                 setActscript ALLY_BOWIE,eas_Jump
                 setActscript ALLY_PETER,eas_Jump
@@ -235,22 +235,22 @@ cs_5B6C0:       textCursor 3207
                 nextText $0,131         ; "I'll return Elis to you in{N}exchange for the jewel.{W2}"
                 nextSingleText $0,131   ; "Come to Arc Valley...{N}Ggggooo...!{W1}"
                 csWait 40
-                flashScreenWhite $4
+                flashScreenWhite 4
                 executeSubroutine sub_5BFDA
                 csWait 8
                 executeSubroutine sub_5BFE4
                 csWait 60
-                flashScreenWhite $4
+                flashScreenWhite 4
                 executeSubroutine sub_5BFDA
                 csWait 8
                 executeSubroutine sub_5BFE4
                 csWait 40
-                flashScreenWhite $4
+                flashScreenWhite 4
                 executeSubroutine sub_5BFDA
                 csWait 8
                 executeSubroutine sub_5BFE4
                 csWait 20
-                flashScreenWhite $4
+                flashScreenWhite 4
                 executeSubroutine sub_5BFDA
                 setQuake 5
                 playSound SFX_BIG_DOOR_RUMBLE
@@ -538,7 +538,7 @@ cs_5B6C0:       textCursor 3207
                 hide 146
                 hide 147
                 hide 148
-                setQuake 16389
+                setQuake $4005
                 executeSubroutine sub_55F82
                 csWait 60
                 setFacing ALLY_BOWIE,DOWN

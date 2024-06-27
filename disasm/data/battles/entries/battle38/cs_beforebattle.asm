@@ -44,9 +44,9 @@ cs_4DDFE:       playSound MUSIC_BATTLE_THEME_1
                 nextSingleText $0,128   ; "This is my last chance.{N}I can't see him again 'til I{N}bring him your head.{W1}"
                 setQuake 4
                 playSound SFX_BOLT_SPELL
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 playSound SFX_BATTLEFIELD_DEATH
-                flashScreenWhite $32
+                flashScreenWhite 50
                 setQuake 0
                 csc_end
 ce_4DE74:       mainEntity 14,9,DOWN

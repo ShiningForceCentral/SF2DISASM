@@ -96,7 +96,7 @@ cs_5CBB4:       textCursor 4179
                 join ALLY_CLAUDE
                 addNewFollower ALLY_CLAUDE
                 csc_end
-cs_5CC26:       entityFlashWhite ALLY_BOWIE,$32
+cs_5CC26:       entityFlashWhite ALLY_BOWIE,50
                 setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 csWait 30
                 executeSubroutine FadeOutToWhite
@@ -135,11 +135,11 @@ cs_5CC26:       entityFlashWhite ALLY_BOWIE,$32
                 setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 executeSubroutine FadeInFromWhite
                 csWait 30
-                entityFlashWhite ALLY_BOWIE,$32
+                entityFlashWhite ALLY_BOWIE,50
                 setActscriptWait ALLY_BOWIE,eas_Init
                 startEntity ALLY_BOWIE
                 csc_end
-cs_5CCF6:       entityFlashWhite ALLY_BOWIE,$32
+cs_5CCF6:       entityFlashWhite ALLY_BOWIE,50
                 setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 csWait 30
                 executeSubroutine FadeOutToWhite
@@ -178,7 +178,7 @@ cs_5CCF6:       entityFlashWhite ALLY_BOWIE,$32
                 setActscript ALLY_BOWIE,eas_RotateRightHighSpeed
                 executeSubroutine FadeInFromWhite
                 csWait 30
-                entityFlashWhite ALLY_BOWIE,$32
+                entityFlashWhite ALLY_BOWIE,50
                 setActscriptWait ALLY_BOWIE,eas_Init
                 startEntity ALLY_BOWIE
                 jumpIfFlagSet 29,cs_5CDDA ; Claude joined
@@ -192,7 +192,7 @@ cs_5CDDA:       csc_end
 
 csub_5CDDC:
                 
-                move.b  #$A9,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
+                move.b  #-87,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
                 rts
 
     ; End of function csub_5CDDC
@@ -203,7 +203,7 @@ csub_5CDDC:
 
 sub_5CDE4:
                 
-                move.b  #$57,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w 
+                move.b  #87,((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w 
                 rts
 
     ; End of function sub_5CDE4

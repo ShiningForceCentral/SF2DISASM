@@ -102,7 +102,7 @@ Map9_EntityEvent8:
                 moveq   #40,d0
                 jsr     (Sleep).w       
                 move.w  #$86,d0 
-                move.b  ((byte_FFB651-$1000000)).w,d1
+                move.b  ((EVENT_RELATIVE_POSITION-$1000000)).w,d1
                 addq.w  #2,d1
                 andi.w  #3,d1
                 jsr     sub_4781A       

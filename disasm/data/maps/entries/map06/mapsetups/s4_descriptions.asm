@@ -66,7 +66,7 @@ return_54E02:
 
 Map6_DescFunc1:
                 
-                move.w  #$FFE,d0
+                move.w  #$FFE,d0        ; A well...{N}Throw something in?
                 jsr     (DisplayText).w 
                 jsr     j_YesNoPrompt
                 tst.w   d0
@@ -78,7 +78,7 @@ Map6_DescFunc1:
                 chkFlg  802             ; Set after the event in the basement of Creed's Mansion
                 bne.s   loc_54E38
                 sndCom  SFX_BLO
-                move.w  #$FFF,d0
+                move.w  #$FFF,d0        ; A lot of water.{W1}
                 jsr     (DisplayText).w 
                 bra.s   return_54E4A
 loc_54E38:
@@ -86,7 +86,7 @@ loc_54E38:
                 moveq   #50,d0
                 jsr     (Sleep).w       
                 sndCom  SFX_BLO
-                move.w  #$1000,d0
+                move.w  #$1000,d0        ; No water.{W1}
                 jsr     (DisplayText).w 
 return_54E4A:
                 

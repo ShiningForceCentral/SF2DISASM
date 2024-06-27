@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle13\cs_afterbattle.asm :
 ; 0x4ACF8..0x4ADA6 : Cutscene after battle 13
 abcs_battle13:  textCursor 2495
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 loadMapFadeIn MAP_POLCA,11,8
                 loadMapEntities ce_4AD96
                 setActscriptWait ALLY_BOWIE,eas_Init
