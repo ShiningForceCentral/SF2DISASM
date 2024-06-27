@@ -11,5 +11,5 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    254
-                    areaDefaultMusic 1
+                    areaDefaultMusic MUSIC_MAIN_THEME
                 endWord

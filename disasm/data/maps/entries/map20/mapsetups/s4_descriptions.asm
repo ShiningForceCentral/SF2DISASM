@@ -25,5 +25,4 @@ byte_5393C:     msDesc 23, 6, 4, 0      ; "{NAME} investigated{N}the book shelve
                 msDesc 17, 36, 4, 4     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                                         ; "A book...{N}MAKING A RUG{W1}"
                 msDescEnd
-                dc.b $4E 
-                dc.b $75 
+                rts

@@ -19,5 +19,4 @@ byte_557FE:     msDesc 4, 3, 4, 0       ; "{NAME} investigated{N}the book shelve
                 msDesc 3, 12, 4, 1      ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                                         ; "A book...{N}HINT BOOK{W1}"
                 msDescEnd
-                dc.b $4E 
-                dc.b $75 
+                rts

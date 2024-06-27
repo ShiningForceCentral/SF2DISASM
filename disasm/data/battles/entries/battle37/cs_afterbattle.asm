@@ -53,7 +53,7 @@ cs_4DBEE:       stopEntity ALLY_LEMON
                 nextSingleText $0,ALLY_PETER ; "Let me see him.{W1}"
                 shiver ALLY_LEMON
                 stopEntity ALLY_LEMON
-                entityFlashWhite ALLY_LEMON,$39
+                entityFlashWhite ALLY_LEMON,57
                 setActscript ALLY_PETER,eas_Jump
                 setActscript ALLY_BOWIE,eas_Jump
                 setActscriptWait FOLLOWER_B,eas_Jump

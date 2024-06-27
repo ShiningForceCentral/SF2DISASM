@@ -62,7 +62,7 @@ cs_612BE:       textCursor 3681
                 csWait 40
                 setActscript 128,eas_RotateRightHighSpeed
                 csWait 40
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 setPos 128,63,63,DOWN
                 csWait 150
                 setPriority 131,$FFFF
@@ -71,7 +71,7 @@ cs_612BE:       textCursor 3681
                 setPos 131,13,12,DOWN
                 csWait 50
                 setPos 129,13,12,UP
-                animEntityFX 129,7
+                animEntityFX 129,MOSAIC_IN
                 csWait 50
                 hide 131
                 csWait 40

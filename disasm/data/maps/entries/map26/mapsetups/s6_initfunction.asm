@@ -26,7 +26,7 @@ return_59E02:
     ; End of function ms_map26_InitFunction
 
 cs_59E04:       textCursor 1739
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 reloadMap 21,8
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

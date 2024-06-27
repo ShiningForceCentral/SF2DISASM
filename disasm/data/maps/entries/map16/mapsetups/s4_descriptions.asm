@@ -31,5 +31,4 @@ byte_51F3A:     msDesc 20, 5, 4, 0      ; "{NAME} investigated{N}the book shelve
                 msDesc 36, 21, 4, 7     ; "{NAME} investigated{N}the book shelves.{W2}{CLEAR}"
                                         ; "A book...{N}ART OF SELLING{W1}"
                 msDescEnd
-                dc.b $4E 
-                dc.b $75 
+                rts

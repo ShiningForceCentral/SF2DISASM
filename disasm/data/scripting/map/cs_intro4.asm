@@ -27,7 +27,7 @@ IntroCutscene4: textCursor 4233
                 csWait 30
                 executeSubroutine ApplyStormEffect
                 setQuake 3
-                flashScreenWhite $A
+                flashScreenWhite 10
                 mapFadeOutToWhite
                 csWait 20
                 playSound SFX_INTRO_LIGHTNING
@@ -324,10 +324,10 @@ IntroCutscene4: textCursor 4233
                 entityActions 133
                  moveDown 4
                 endActions
-                entityFlashWhite 133,$50
+                entityFlashWhite 133,80
                 waitIdle 133
                 setActscript 128,eas_RotateRightHighSpeed
-                entityFlashWhite 133,$28
+                entityFlashWhite 133,40
                 nextSingleText $80,128  ; "Aughhhh!!!{D2}"
                 hide 133
                 csWait 30

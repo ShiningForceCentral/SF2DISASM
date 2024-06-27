@@ -230,7 +230,7 @@ HideEntity:
                 move.l  #$70007000,(a0)
                 move.l  (a0),ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  (sp)+,d0
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 moveq   #ENTITIES_TOTAL_COUNTER,d7
 @Loop_EntityEvent:
                 

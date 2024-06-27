@@ -100,7 +100,7 @@ loc_CE66:
                 
                 clr.l   d0
                 move.b  d4,d0           ; d0 = attacker index
-                jsr     GetMoveType     
+                jsr     GetMoveType
                 clr.l   d3
                 move.b  d1,d3
                 lea     (pt_D9C2).l,a4  
@@ -197,7 +197,7 @@ GetHighestUsableSpellLevel:
 ;   In: d0.b = combatant index, d1.b = spell index
 ;   Out: d1.w = spell index, d2.w = slot
 
-
+;unused
 GetSlotContainingSpell:
                 
                 movem.l d0/d3-a6,-(sp)
@@ -232,7 +232,7 @@ loc_CF38:
 ;   In: d0.b = combatant index, d1.b = item index
 ;   Out: d1.w = item index, d2.w = slot
 
-
+;unused
 GetSlotContainingItem:
                 
                 movem.l d0/d3-a6,-(sp)

@@ -26,15 +26,15 @@ Map42_DescFunc1:
                  
                 chkFlg  902             ; Set after you pull the Force Sword out
                 bne.s   loc_5FE52
-                move.w  #$D06,d0
+                move.w  #$D06,d0        ; "The Holy Sword is stuck{N}deeply into the rock.{W1}"
                 jsr     (DisplayText).w 
                 bra.s   return_5FE66
 loc_5FE52:
                 
                 clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  #$1A8,d0
+                move.w  #$1A8,d0        ; "{NAME} investigated.{W2}{CLEAR}"
                 jsr     (DisplayText).w 
-                move.w  #$1B2,d0
+                move.w  #$1B2,d0        ; "Nothing special there.{W1}"
                 jsr     (DisplayText).w 
 return_5FE66:
                 
@@ -57,9 +57,9 @@ Map42_DescFunc0:
 loc_5FE7A:
                 
                 clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                move.w  #$1A8,d0
+                move.w  #$1A8,d0        ; "{NAME} investigated.{W2}{CLEAR}"
                 jsr     (DisplayText).w 
-                move.w  #$1B2,d0
+                move.w  #$1B2,d0        ; "Nothing special there.{W1}"
                 jsr     (DisplayText).w 
 return_5FE8E:
                 

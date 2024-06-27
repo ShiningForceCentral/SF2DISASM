@@ -12,9 +12,9 @@ abcs_battle36:  textCursor 2953
                 jumpIfFlagClear 76,cs_4D9F0 ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,63,62,DOWN
-cs_4D9F0:       animEntityFX 128,6
+cs_4D9F0:       animEntityFX 128,MOSAIC_OUT
                 fadeInB
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 setActscriptWait 128,eas_Jump
                 csWait 5
                 setActscript 128,eas_2xRightLeft
@@ -24,7 +24,7 @@ cs_4D9F0:       animEntityFX 128,6
                 nextSingleText $0,128   ; "My Prism Flowers!{W1}"
                 setFacing 128,UP
                 nextSingleText $0,128   ; "{LEADER}, I shall return{N}with Red Baron!{N}You'll pay for this!{W1}"
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 followEntity 129,ALLY_BOWIE,2
                 followEntity ALLY_PETER,129,1
                 followEntity FOLLOWER_B,129,3

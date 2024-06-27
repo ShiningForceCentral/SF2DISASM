@@ -492,9 +492,9 @@ loc_530C:
                 
                 add.w   d4,ENTITYDEF_OFFSET_XDEST(a0)
                 add.w   d5,ENTITYDEF_OFFSET_YDEST(a0)
-                tst.w   ((word_FFB196-$1000000)).w
+                tst.w   ((STEP_COUNTER-$1000000)).w
                 ble.s   loc_531E
-                subq.w  #1,((word_FFB196-$1000000)).w
+                subq.w  #1,((STEP_COUNTER-$1000000)).w
 loc_531E:
                 
                 bsr.w   UpdateEntitySprite

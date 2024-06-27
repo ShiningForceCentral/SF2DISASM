@@ -2,29 +2,29 @@
 ; ASM FILE data\graphics\battles\spells\entries.asm :
 ; 0x1BEEE0..0x1C46C2 : Spell Graphics
 pt_SpellGraphics:
-                dc.l SpellGraphics00
-                dc.l SpellGraphics01
-                dc.l SpellGraphics02
-                dc.l SpellGraphics03
-                dc.l SpellGraphics04
-                dc.l SpellGraphics05
-                dc.l SpellGraphics06
-                dc.l SpellGraphics07
-                dc.l SpellGraphics08
-                dc.l SpellGraphics09
-                dc.l SpellGraphics10
-                dc.l SpellGraphics11
-                dc.l SpellGraphics12
-                dc.l SpellGraphics13
-                dc.l SpellGraphics14
-                dc.l SpellGraphics15
-                dc.l SpellGraphics16
-                dc.l SpellGraphics17
-                dc.l SpellGraphics18
-                dc.l SpellGraphics19
-                dc.l SpellGraphics20
-                dc.l SpellGraphics21
-                dc.l SpellGraphics22
+                dc.l SpellGraphics00 ; Bubble Breath
+                dc.l SpellGraphics01 ; Flame Breath
+                dc.l SpellGraphics02 ; Blaze
+                dc.l SpellGraphics03 ; Dao
+                dc.l SpellGraphics04 ; Bolt
+                dc.l SpellGraphics05 ; Arrows & Spears
+                dc.l SpellGraphics06 ; Healing Fairy
+                dc.l SpellGraphics07 ; Detox
+                dc.l SpellGraphics08 ; Prism Laser
+                dc.l SpellGraphics09 ; Debuff
+                dc.l SpellGraphics10 ; OH KO
+                dc.l SpellGraphics11 ; Freeze
+                dc.l SpellGraphics12 ; Snowstorm
+                dc.l SpellGraphics13 ; Desoul
+                dc.l SpellGraphics14 ; Neptune
+                dc.l SpellGraphics15 ; Blast
+                dc.l SpellGraphics16 ; Shot Projectile
+                dc.l SpellGraphics17 ; Gunner Projectile
+                dc.l SpellGraphics18 ; Cannon Projectile
+                dc.l SpellGraphics19 ; Apollo
+                dc.l SpellGraphics20 ; Sound Waves
+                dc.l SpellGraphics21 ; Oddeye Beam
+                dc.l SpellGraphics22 ; Demon Breath
 SpellGraphics00:incbin "data/graphics/battles/spells/spellgraphics00.bin"
 SpellGraphics01:incbin "data/graphics/battles/spells/spellgraphics01.bin"
 SpellGraphics02:incbin "data/graphics/battles/spells/spellgraphics02.bin"

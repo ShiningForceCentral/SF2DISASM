@@ -96,9 +96,9 @@ Map21_DefaultZoneEvent:
                 setQuake 5
                 csWait 30
                 playSound SFX_INTRO_LIGHTNING
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 setBlocks 0,49,10,15,28,23
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 csWait 60
                 setQuake 3
                 csWait 60

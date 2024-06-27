@@ -23,9 +23,9 @@ cs_4DAB8:       fadeInB
                 cameraSpeed $30
                 nextSingleText $C0,FOLLOWER_B ; "Geshp again.{W1}"
                 setCamDest 40,44
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 setPos 128,45,47,UP
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 nextSingleText $0,128   ; "Hee, hee, hee.{W1}"
                 nextSingleText $C0,ALLY_PETER ; "Do you have another cunning{N}trap for us?{W1}"
                 nextText $0,128         ; "Would I do that?{W2}"
@@ -44,7 +44,7 @@ cs_4DAB8:       fadeInB
                 setFacing 128,UP
                 nextText $0,128         ; "Now, it's your turn.{W2}"
                 nextSingleText $0,128   ; "This will be your undoing.{W1}"
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 setCamDest 50,33
                 setFacing ALLY_PETER,UP
                 nextSingleText $C0,ALLY_PETER ; "Galam is just over there,{N}but...{W1}"

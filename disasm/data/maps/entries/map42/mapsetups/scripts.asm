@@ -28,7 +28,7 @@ cs_5FE9A:       textCursor 3337
                 nextSingleText $FF,255  ; "The jewel glows even{N}brighter.{W1}"
                 hideText
                 csWait 40
-                flashScreenWhite $14
+                flashScreenWhite 20
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 2
                 setBlocks 33,1,1,1,26,18
@@ -39,7 +39,7 @@ cs_5FE9A:       textCursor 3337
                 csc_end
 cs_5FF06:       textCursor 3335
                 hideText
-                entityFlashWhite ALLY_BOWIE,$3C
+                entityFlashWhite ALLY_BOWIE,60
                 setBlocks 33,2,1,1,39,2
                 newEntity 128,39,2,DOWN,MAPSPRITE_OBJECT3
                 setActscript 128,eas_AnimSpeedx2

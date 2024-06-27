@@ -6,7 +6,7 @@ bbcs_07:        textCursor 2357
                 loadMapFadeIn MAP_ANCIENT_TOWER_UNDERGROUND_ROOM,8,29
                 loadMapEntities ce_49F36
                 setActscriptWait ALLY_BOWIE,eas_Init
-                animEntityFX 133,4
+                animEntityFX 133,SLIDE_OUT
                 fadeInB
                 cameraSpeed $28
                 nextSingleText $C0,128  ; "Astral, you're so persistent!{W1}"
@@ -111,7 +111,7 @@ bbcs_07:        textCursor 2357
                 endActions
                 csWait 10
                 setPos 133,12,18,UP
-                animEntityFX 133,5
+                animEntityFX 133,SLIDE_IN
                 waitIdle 130
                 nextSingleText $0,133   ; "Stop, my dear!{W1}"
                 setActscriptWait 130,eas_Jump

@@ -25,11 +25,11 @@ cs_45284:       setActscriptWait FOLLOWER_A,eas_452A4
                 setPos FOLLOWER_A,64,64,DOWN
                 setActscriptWait ALLY_BOWIE,eas_45308
                 csc_end
-eas_452A4:       ac_moveEntFacRelPos 0,0,1
+eas_452A4:       ac_moveEntFacRelPos ENTITY_PLAYER_CHARACTER,0,1
                  ac_waitDest
 word_452AE:      ac_branch
                 dc.w (eas_Idle-word_452AE) & $FFFF
-eas_452B2:       ac_moveEntFacRelPos 1,0,0
+eas_452B2:       ac_moveEntFacRelPos ENTITY_CARAVAN,0,0
 eas_452BA:       ac_wait 6
                  ac_resizable ON
                  ac_soundCommand SFX_WARP
@@ -51,7 +51,7 @@ eas_452BA:       ac_wait 6
                  ac_setSize 12
                  ac_updateSprite
                  ac_waitDest
-                 ac_clonePos $1
+                 ac_clonePos ENTITY_CARAVAN
 word_45304:      ac_branch
                 dc.w (eas_Idle-word_45304) & $FFFF
 eas_45308:       ac_setSprite MAPSPRITE_CARAVAN
@@ -59,7 +59,7 @@ eas_45308:       ac_setSprite MAPSPRITE_CARAVAN
                  ac_updateSprite
 word_45312:      ac_branch
                 dc.w (eas_Idle-word_45312) & $FFFF
-byte_45316:      ac_moveEntFacRelPos 0,0,0
+byte_45316:      ac_moveEntFacRelPos ENTITY_PLAYER_CHARACTER,0,0
 word_4531E:      ac_branch
                 dc.w (eas_452BA-word_4531E) & $FFFF
 
@@ -84,10 +84,10 @@ cs_45348:       setActscriptWait FOLLOWER_A,eas_45360
                 setSprite ALLY_BOWIE,ALLY_BOWIE
                 setActscriptWait ALLY_BOWIE,eas_4536C
                 csc_end
-eas_45360:       ac_clonePos $0
+eas_45360:       ac_clonePos ENTITY_PLAYER_CHARACTER
 word_45364:      ac_branch
                 dc.w (eas_Idle-word_45364) & $FFFF
-byte_45368:      ac_clonePos $1
+byte_45368:      ac_clonePos ENTITY_CARAVAN
 eas_4536C:       ac_moveFacRelPos 0,1
                  ac_resizable ON
                  ac_soundCommand SFX_WARP
@@ -153,11 +153,11 @@ nullsub_4540A:
 
     ; End of function nullsub_4540A
 
-eas_4540C:       ac_moveEntFacRelPos 31,0,0
+eas_4540C:       ac_moveEntFacRelPos ENTITY_RAFT,0,0
 byte_45414:      ac_wait 6
                  ac_soundCommand SFX_WARP
                  ac_waitDest
-                 ac_clonePos $1F
+                 ac_clonePos ENTITY_RAFT
 word_45422:      ac_branch
                 dc.w (eas_Idle-word_45422) & $FFFF
 eas_45426:       ac_setSprite MAPSPRITE_RAFT
@@ -165,7 +165,7 @@ eas_45426:       ac_setSprite MAPSPRITE_RAFT
                  ac_updateSprite
 word_45430:      ac_branch
                 dc.w (eas_Idle-word_45430) & $FFFF
-byte_45434:      ac_moveEntFacRelPos 0,0,0
+byte_45434:      ac_moveEntFacRelPos ENTITY_PLAYER_CHARACTER,0,0
 word_4543C:      ac_branch
                 dc.w (byte_45414-word_4543C) & $FFFF
 
@@ -192,7 +192,7 @@ cs_45470:       setActscriptWait 159,eas_45360
                 setSprite ALLY_BOWIE,ALLY_BOWIE
                 setActscriptWait ALLY_BOWIE,eas_4548C
                 csc_end
-byte_45488:      ac_clonePos $1F        ; ENTITY_UNIT_RAFT
+byte_45488:      ac_clonePos ENTITY_RAFT
 eas_4548C:       ac_moveFacRelPos 0,1
                  ac_soundCommand SFX_WARP
                  ac_waitDest
@@ -285,7 +285,7 @@ ms_BowieShrinkIn:
                 setActscriptWait ALLY_BOWIE,eas_ShrinkIn
                 setPos ALLY_BOWIE,64,64,DOWN
                 csc_end
-eas_ShrinkIn:    ac_moveEntFacRelPos 1,0,0
+eas_ShrinkIn:    ac_moveEntFacRelPos ENTITY_CARAVAN,0,0
                  ac_wait 6
                  ac_resizable ON
                  ac_soundCommand SFX_WARP
@@ -307,7 +307,7 @@ eas_ShrinkIn:    ac_moveEntFacRelPos 1,0,0
                  ac_setSize 12
                  ac_updateSprite
                  ac_waitDest
-                 ac_clonePos $0
+                 ac_clonePos ENTITY_PLAYER_CHARACTER
 word_455A8:      ac_branch
                 dc.w (eas_Idle-word_455A8) & $FFFF
 
@@ -330,7 +330,7 @@ GrowOutBowieAndFollowers:
 
 ms_BowieGrowOut:setActscriptWait ALLY_BOWIE,eas_GrowOut
                 csc_end
-eas_GrowOut:     ac_clonePos $1
+eas_GrowOut:     ac_clonePos ENTITY_CARAVAN
                  ac_resizable ON
                  ac_soundCommand SFX_WARP
                  ac_setSize 12

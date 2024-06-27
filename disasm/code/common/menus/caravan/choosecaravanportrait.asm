@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\caravan\choosecaravanportrait.asm :
+; ASM FILE code\common\menus\caravan\DisplayCaravanMessageAndPortrait.asm :
 ; 0x228A8..0x228D8 : Choose Caravan Portrait function
 
 ; =============== S U B R O U T I N E =======================================

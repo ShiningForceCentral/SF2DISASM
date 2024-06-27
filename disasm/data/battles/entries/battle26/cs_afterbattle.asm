@@ -25,12 +25,12 @@ abcs_battle26:  textCursor 2637
                 setFacing ALLY_PETER,RIGHT
                 nextSingleText $0,ALLY_PETER ; "Is he alright?{W1}"
                 nextSingleText $0,FOLLOWER_B ; "We have to save him before{N}he is possessed by an evil...{W1}"
-                entityFlashWhite FOLLOWER_B,$3C
-                flashScreenWhite $1E
+                entityFlashWhite FOLLOWER_B,60
+                flashScreenWhite 30
                 setCamDest 13,9
-                animEntityFX 128,4
+                animEntityFX 128,SLIDE_OUT
                 setPos 128,18,13,DOWN
-                animEntityFX 128,5
+                animEntityFX 128,SLIDE_IN
                 setFacing ALLY_PETER,UP
                 entityActionsWait 128
                  moveUp 3

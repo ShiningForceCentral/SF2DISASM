@@ -1396,7 +1396,7 @@ sub_18D14:
                 cmpi.w  #-1,((BATTLESCENE_ENEMY-$1000000)).w
                 beq.s   loc_18D56
                 
-                move.w  ((word_FFB3EC-$1000000)).w,d0
+                move.w  ((BATTLESCENE_ENEMY_X-$1000000)).w,d0
                 cmp.w   d1,d0
                 beq.s   loc_18D56
                 bge.s   loc_18D3C
@@ -1547,8 +1547,8 @@ loc_18E30:
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  #1,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.w  ((word_FFB3EC-$1000000)).w,d4
-                move.w  ((word_FFB3F0-$1000000)).w,d5
+                move.w  ((BATTLESCENE_ENEMY_X-$1000000)).w,d4
+                move.w  ((BATTLESCENE_ENEMY_Y-$1000000)).w,d5
                 moveq   #$B,d0
 loc_18E6E:
                 
@@ -1703,8 +1703,8 @@ loc_18FC6:
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  #%10,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.w  ((word_FFB3EC-$1000000)).w,d4
-                move.w  ((word_FFB3F0-$1000000)).w,d5
+                move.w  ((BATTLESCENE_ENEMY_X-$1000000)).w,d4
+                move.w  ((BATTLESCENE_ENEMY_Y-$1000000)).w,d5
                 moveq   #$B,d0
 loc_19004:
                 

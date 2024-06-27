@@ -365,6 +365,7 @@ loc_55F34:
                 or.w    d3,d4
                 move.w  d4,(a1)+
                 dbf     d0,loc_55F06
+				
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
                 lea     (PALETTE_1_BASE).l,a0
                 jmp     (UpdateBasePalettesAndBackupCurrent).w
@@ -379,7 +380,7 @@ palette_55F6A:  dc.w $E0C
                 dc.w $C0A
                 dc.w $806
                 dc.w $402
-                dc.w 2
+                dc.w $002
                 dc.w $204
                 dc.w $608
                 dc.w $A0A

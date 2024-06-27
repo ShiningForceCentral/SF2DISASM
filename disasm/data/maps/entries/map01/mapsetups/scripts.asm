@@ -7,14 +7,14 @@ cs_5E772:       textCursor 3649
                 setDest ALLY_BOWIE,44,27
                 setActscriptWait ALLY_PETER,eas_Init
                 setActscriptWait FOLLOWER_B,eas_Init
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 csWait 30
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 setPos 136,63,62,DOWN
                 setPos ALLY_TAYA,44,26,DOWN
                 stopEntity ALLY_TAYA
                 csWait 30
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 csWait 30
                 setDest ALLY_PETER,43,27
                 setDest FOLLOWER_B,45,27

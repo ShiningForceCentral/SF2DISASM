@@ -29,7 +29,7 @@ Map67_DescFunc0:
                 txt     2590            ; "There's a wobbly rock.{W1}"
                 clsTxt
                 move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
-                move.w  #7,d0
+                move.w  #ALLY_PETER,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w

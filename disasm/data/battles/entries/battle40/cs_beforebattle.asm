@@ -90,7 +90,7 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
                 nextSingleText $0,ALLY_PETER ; "Oh, what should we do?!{W1}"
                 nextSingleText $0,FOLLOWER_B ; "We have to fight!{W1}"
                 nextSingleText $C0,129  ; "Times up!  We need space{N}to battle.{W1}"
-                entityFlashWhite 129,$1E
+                entityFlashWhite 129,30
                 tintMap
                 csWait 20
                 flickerOnce

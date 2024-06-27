@@ -2,7 +2,7 @@
 ; ASM FILE data\maps\entries\map31\mapsetups\scripts.asm :
 ; 0x5D644..0x5D756 : 
 cs_5D644:       setPos 137,8,3,LEFT
-                animEntityFX 137,5
+                animEntityFX 137,SLIDE_IN
                 csc_end
 cs_5D652:       textCursor 2024
                 nextSingleText $0,136   ; "Oh, you're cute!{N}(Cough)...well...{W1}"

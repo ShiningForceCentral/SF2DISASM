@@ -71,7 +71,7 @@ cs_540C0:       textCursor 811
                  moveRight 1
                 endActions
                 setFacing ALLY_KAZIN,UP
-                playSound $FE
+                playSound SOUND_COMMAND_CUT_OUT
                 nextSingleText $0,ALLY_KAZIN ; "Wh...who are you?{N}Oh, Sir Hawel!{W1}"
                 playSound MUSIC_ENEMY_ATTACK
                 setCamDest 2,0
@@ -134,7 +134,7 @@ cs_540C0:       textCursor 811
                 entityActionsWait ALLY_KAZIN
                  moveRight 1
                 endActions
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 nextSingleText $0,128   ; "Ohhh...{NAME;4}....{W1}"
                 entityActionsWait ALLY_KAZIN
                  moveLeft 1
@@ -171,7 +171,7 @@ cs_540C0:       textCursor 811
                 nextSingleText $0,ALLY_KAZIN ; "Stop talking, or you'll die.{W1}"
                 nextText $0,128         ; "I'm almost dead anyway...{N}(cough)...(cough)....{W2}"
                 nextSingleText $0,128   ; "{NAME;4}, look for the jewels...{N}to seal...ancient...{W1}"
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 shiver 128
                 stopEntity 128
                 setPosFlash 128,63,63,DOWN

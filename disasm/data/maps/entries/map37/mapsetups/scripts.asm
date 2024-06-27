@@ -39,7 +39,7 @@ cs_5FB6A:       textCursor 3377
                 nextSingleText $80,ALLY_PETER ; "But...but...{N}Woooooow!{W1}"
                 setCamDest 4,6
                 setFacing ALLY_BOWIE,UP
-                playSound $FE
+                playSound SOUND_COMMAND_CUT_OUT
                 playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 3
                 csWait 20

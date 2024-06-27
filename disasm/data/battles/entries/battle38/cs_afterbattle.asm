@@ -155,7 +155,7 @@ cs_4DF00:       setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 136
                  moveUp 3
                 endActions
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
                 csWait 50
@@ -202,7 +202,7 @@ cs_4DF00:       setActscriptWait 128,eas_DeactivateAutoFacing
                 csWait 10
                 setPos 135,6,14,LEFT
                 csWait 40
-                flashScreenWhite $14
+                flashScreenWhite 20
                 tintMap
                 setFacing 136,DOWN
                 setQuake 3

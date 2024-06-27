@@ -229,13 +229,13 @@ Map13_DefaultEntityEvent:
 cs_58116:       textCursor 1429
                 nextSingleText $0,137   ; "You're not aware, but{N}Volcanon has become{N}irritated...{W1}"
                 csWait 30
-                setQuake 32770
-                setQuake 16386
+                setQuake $8002
+                setQuake $4002
                 nextSingleText $0,137   ; "...like that!  And, it's getting{N}worse.{N}What's wrong you ask?{W1}"
                 csWait 60
                 playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 5
-                flashScreenWhite $46
+                flashScreenWhite 70
                 setQuake 0
                 headshake 137
                 nextText $0,137         ; "Whoa!  Mt. Volcano erupted!{W2}"

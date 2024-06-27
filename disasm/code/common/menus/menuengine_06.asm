@@ -1742,7 +1742,7 @@ loc_148BC:
                 bge.s   loc_14906
                 addq.w  #1,d0
                 sndCom  SFX_MENU_SELECTION
-                cmp.w   ((word_FFB134-$1000000)).w,d0
+                cmp.w   ((CURRENT_SHOP_PAGE_ITEMS_NUMBER-$1000000)).w,d0
                 blt.s   loc_148FA
                 addq.w  #1,((CURRENT_SHOP_PAGE-$1000000)).w
                 clr.w   ((CURRENT_SHOP_SELECTION-$1000000)).w
@@ -1810,7 +1810,7 @@ loc_1496A:
                 moveq   #ITEMS_PER_SHOP_PAGE,d1
 loc_149A8:
                 
-                move.w  d1,((word_FFB134-$1000000)).w
+                move.w  d1,((CURRENT_SHOP_PAGE_ITEMS_NUMBER-$1000000)).w
 loc_149AC:
                 
                 cmp.w   d1,d0
@@ -2063,7 +2063,7 @@ LoadItemIconsAndPriceTagTiles:
                 moveq   #ITEMS_PER_SHOP_PAGE,d1
 @loc_1:
                 
-                move.w  d1,((word_FFB134-$1000000)).w
+                move.w  d1,((CURRENT_SHOP_PAGE_ITEMS_NUMBER-$1000000)).w
                 move.w  d1,d7
                 subq.w  #1,d7
                 lea     (FF6802_LOADING_SPACE).l,a0

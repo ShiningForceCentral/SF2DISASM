@@ -145,11 +145,11 @@ cs_615E6:       textCursor 3760
                 nextSingleText $0,ALLY_LEMON ; "King Galam!{N}You're standing?!{W1}"
                 setFacing 134,LEFT
                 nextSingleText $80,134  ; "Ha, ha, ha!{N}Galam?{W1}"
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 10
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 10
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 10
                 setActscriptWait 134,eas_Init
                 setSprite 134,MAPSPRITE_GALAM_ZEON
@@ -313,13 +313,13 @@ cs_615E6:       textCursor 3760
                 nextSingleText $FF,255  ; "Zeon picks up the jewel.{W1}"
                 csWait 40
                 playSound SFX_SPELL_CAST
-                entityFlashWhite 134,$14
+                entityFlashWhite 134,20
                 csWait 20
                 playSound SFX_SPELL_CAST
-                entityFlashWhite 134,$14
+                entityFlashWhite 134,20
                 csWait 20
                 playSound SFX_SPELL_CAST
-                entityFlashWhite 134,$14
+                entityFlashWhite 134,20
                 csWait 20
                 nextSingleText $0,134   ; "Oh...oh...I feel my powers{N}returning!{W1}"
                 setFacing 133,UP
@@ -363,17 +363,17 @@ cs_615E6:       textCursor 3760
                 setFacing 134,LEFT
                 nextSingleText $0,134   ; "And you too {NAME;28}.{N}So long!{W1}"
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 20
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 20
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 20
                 playSound SFX_BIG_DOOR_RUMBLE
                 setPos 130,12,8,LEFT
-                animEntityFX 130,5
+                animEntityFX 130,SLIDE_IN
                 setFacing ALLY_LEMON,DOWN
                 nextSingleText $0,ALLY_LEMON ; "Aauugghhh!{N}I'm burning!{W1}"
                 customActscriptWait ALLY_LEMON
@@ -426,7 +426,7 @@ cs_615E6:       textCursor 3760
                 setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 setActscriptWait 133,eas_DeactivateAutoFacing
                 setActscript 134,eas_BumpRight
-                entityFlashWhite 134,$28
+                entityFlashWhite 134,40
                 playSound SFX_BLAST_SPELL
                 setCameraEntity ALLY_PETER
                 entityActions ALLY_PETER
@@ -466,7 +466,7 @@ cs_615E6:       textCursor 3760
                 endActions
                 setActscriptWait ALLY_BOWIE,eas_BumpUp
                 nextSingleText $FF,255  ; "{LEADER} slapped the jewel{N}out of Zeon's hand.{W1}"
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 setPos 129,14,8,DOWN
                 setActscriptWait 129,eas_DeactivateAutoFacing
                 entityActions 129
@@ -481,13 +481,13 @@ cs_615E6:       textCursor 3760
                 ac_end
                 setActscriptWait ALLY_BOWIE,eas_DeactivateAutoFacing
                 setActscript 134,eas_BumpDown
-                entityFlashWhite 134,$A
+                entityFlashWhite 134,10
                 playSound SFX_BLAST_SPELL
                 entityActions ALLY_BOWIE
                  moveDown 5
                 endActions
                 playSound SFX_FALLING
-                entityFlashWhite 134,$28
+                entityFlashWhite 134,40
                 waitIdle ALLY_BOWIE
                 playSound SFX_LIGHTNING_2
                 setQuake 4
@@ -524,7 +524,7 @@ cs_615E6:       textCursor 3760
                 endActions
                 setCamDest 10,6
                 setPos 128,13,14,DOWN
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 csWait 30
                 customActscriptWait 128
                  ac_setSpeed 10,10      ;   
@@ -537,7 +537,7 @@ cs_615E6:       textCursor 3760
                 csWait 30
                 playSound SFX_PRISM_LASER_FIRING
                 setPos 130,63,63,LEFT
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 playSound MUSIC_FINAL_BATTLE
                 shiver ALLY_LEMON
                 csWait 20
@@ -577,31 +577,31 @@ cs_615E6:       textCursor 3760
                 nextSingleText $80,134  ; "Die!{W1}"
                 setActscriptWait ALLY_LEMON,eas_DeactivateAutoFacing
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 20
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 20
                 entityActions ALLY_LEMON
                  moveLeft 3
                 endActions
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 20
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 20
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 20
                 waitIdle ALLY_LEMON
                 csWait 20
                 playSound SFX_BIG_DOOR_RUMBLE
                 setPos 130,10,8,LEFT
-                animEntityFX 130,5
+                animEntityFX 130,SLIDE_IN
                 setCamDest 8,6
                 setPos 128,13,14,DOWN
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 csWait 30
                 customActscriptWait 128
                  ac_setSpeed 10,10      ;   
@@ -614,7 +614,7 @@ cs_615E6:       textCursor 3760
                 csWait 30
                 playSound SFX_PRISM_LASER_FIRING
                 setPos 130,63,63,LEFT
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 csWait 40
                 setCamDest 8,3
                 nextSingleText $0,ALLY_LEMON ; "King...Galam...{W1}"
@@ -622,13 +622,13 @@ cs_615E6:       textCursor 3760
                  moveRight 1
                 endActions
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 10
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 10
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 10
                 entityActionsWait ALLY_LEMON
                  moveLeft 1
@@ -708,19 +708,19 @@ cs_615E6:       textCursor 3760
                 csWait 30
                 setQuake 2
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $14
+                flashScreenWhite 20
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $14
+                flashScreenWhite 20
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $14
+                flashScreenWhite 20
                 setBlocks 20,39,7,4,10,3
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $14
+                flashScreenWhite 20
                 playSound SFX_BLAST_SPELL
-                flashScreenWhite $14
+                flashScreenWhite 20
                 setQuake 0
                 csWait 60
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 setCameraEntity ALLY_PETER
                 csWait 60
                 setActscriptWait ALLY_PETER,eas_Init
@@ -847,7 +847,7 @@ cs_615E6:       textCursor 3760
                 nextText $80,133        ; "No. She's cold, but she's{N}breathing.{W2}"
                 nextSingleText $80,133  ; "I don't understand....{W1}"
                 csWait 50
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 nextSingleText $0,135   ; "She's in a coma.{W1}"
                 csWait 5
                 setActscript ALLY_BOWIE,eas_2xRightLeft
@@ -862,7 +862,7 @@ cs_615E6:       textCursor 3760
                 playSound MUSIC_MITULA
                 setPos 135,13,7,DOWN
                 playSound SFX_PRISM_LASER_FIRING
-                entityFlashWhite 135,$46
+                entityFlashWhite 135,70
                 setActscript ALLY_BOWIE,eas_Jump
                 setActscript 133,eas_Jump
                 setActscriptWait ALLY_PETER,eas_Jump
@@ -962,7 +962,7 @@ cs_615E6:       textCursor 3760
                 endActions
                 csWait 16
                 setActscriptWait 135,eas_StopMoving
-                entityFlashWhite 135,$28
+                entityFlashWhite 135,40
                 entityActions 135
                  moveUp 1
                 endActions
@@ -989,7 +989,7 @@ cs_615E6:       textCursor 3760
                 nextSingleText $80,135  ; "You had better leave now.{N}Arc Valley will be destroyed.{W1}"
                 setFacing 135,UP
                 csWait 30
-                entityFlashWhite 135,$3C
+                entityFlashWhite 135,60
                 nextSingleText $0,133   ; "One more thing!{W1}"
                 csWait 30
                 setFacing 135,LEFT
@@ -1021,10 +1021,10 @@ cs_615E6:       textCursor 3760
                 nextSingleText $80,135  ; "Now, I must go.{N}Good luck.{W1}"
                 setFacing 135,UP
                 csWait 30
-                entityFlashWhite 135,$64
+                entityFlashWhite 135,100
                 hide 135
                 csWait 50
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 entityActionsWait ALLY_PETER
                  moveRight 1
                 endActions
@@ -1079,7 +1079,7 @@ cs_615E6:       textCursor 3760
                 setActscript ALLY_PETER,eas_2xRightLeft
                 csWait 5
                 setActscript 133,eas_2xUpDown
-                setQuake 32771
+                setQuake $8003
                 playSound MUSIC_BOSS_ATTACK
                 nextSingleText $0,133   ; "Oops!  She's sealing the{N}tower!{W1}"
                 entityActions ALLY_BOWIE
@@ -1109,7 +1109,7 @@ cs_615E6:       textCursor 3760
                 csWait 60
 cs_62658:       setQuake 5
                 csWait 50
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 fadeOutB
                 setQuake 0
                 mapLoad MAP_GRANSEAL,0,0

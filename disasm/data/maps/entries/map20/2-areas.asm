@@ -11,7 +11,7 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    255
-                    areaDefaultMusic 38
+                    areaDefaultMusic MUSIC_CASTLE
                 
                     mainLayerStart      0, 33
                     mainLayerEnd        41, 45
@@ -22,7 +22,7 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    255
-                    areaDefaultMusic 38
+                    areaDefaultMusic MUSIC_CASTLE
                 
                     mainLayerStart      14, 47
                     mainLayerEnd        41, 60
@@ -33,5 +33,5 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    255
-                    areaDefaultMusic 38
+                    areaDefaultMusic MUSIC_CASTLE
                 endWord

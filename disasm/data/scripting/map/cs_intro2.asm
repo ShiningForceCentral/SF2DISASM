@@ -85,7 +85,7 @@ IntroCutscene2: textCursor 4202
                 nextSingleText $80,128  ; "Make sure all the doors and{N}windows are shut!{D2}"
                 playSound SFX_SPELL_CAST
                 csWait 30
-                animEntityFX 131,6
+                animEntityFX 131,MOSAIC_OUT
                 tintMap
                 csWait 5
                 setActscript 129,eas_2xRightLeft

@@ -77,7 +77,7 @@ cs_4EDE8:       stopEntity 129
                 nextSingleText $C0,128  ; "You shall never see Zeon!{N}I'll kill you before that!{W1}"
                 setQuake 3
                 playSound SFX_INTRO_LIGHTNING
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 csWait 20
                 setQuake 0
                 csc_end
