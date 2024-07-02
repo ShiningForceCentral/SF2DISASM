@@ -2381,6 +2381,7 @@ UpdateEntityProperties:
 
 UpdateEntitySprite:
                 
+                module
                 btst    #6,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 beq.w   return_6180
                 cmp.b   ENTITYDEF_OFFSET_FACING(a0),d6
@@ -2409,12 +2410,12 @@ loc_60B6:
                 movem.l a0-a1,-(sp)
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
-                bcc.w   loc_617C
+                bcc.w   @Done           ; skip changing facing direction if special sprite
                 
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
                 cmpi.b  #32,d1
-                beq.w   loc_617C
+                beq.w   @Done
                 
                 move.w  d1,-(sp)        ; push entnum
                 clr.w   d1
@@ -2477,7 +2478,7 @@ loc_615E:
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDma
                 bsr.w   EnableDmaQueueProcessing
-loc_617C:
+@Done:
                 
                 movem.l (sp)+,a0-a1
 return_6180:
@@ -2486,6 +2487,7 @@ return_6180:
 
     ; End of function ChangeEntityMapsprite
 
+                modend
 table_FacingValues_2:
                 dc.b RIGHT              ; 8 bytes holding facing values for sprites
                 dc.b UP

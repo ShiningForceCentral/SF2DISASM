@@ -156,7 +156,7 @@ loc_CECC:
 
 ; Get highest usable level of spell D1, considering current MP and highest known level.
 ; 
-;   In: d0.w = caster index, d1.w = highest known level spell entry
+;   In: d0.w = caster index, d1.w = highest known level spell entry, d4.w = spell index
 ;   Out: d1.w = highest usuable level spell entry
 
 

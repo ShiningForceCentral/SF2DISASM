@@ -285,8 +285,8 @@ ChurchMenu:
                 ; @StartPromo
                 txt     136             ; "{CLEAR}Who do you want to{N}promote?{W2}"
                 clsTxt
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMembersListScreen
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 bne.w   @CheckPromotableClass
                 txt     137             ; "Oh, I'm wrong.{W2}"

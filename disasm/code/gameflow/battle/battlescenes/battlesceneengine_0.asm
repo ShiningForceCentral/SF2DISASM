@@ -661,13 +661,12 @@ bsc02_moveEnemyBattlesprite:
 
 ; =============== S U B R O U T I N E =======================================
 
-; related to battlescene ally
-
 
 bsc05_makeAllyIdle:
                 
                 btst    #4,((byte_FFB56F-$1000000)).w
                 bne.w   loc_1A418
+                
                 cmpi.w  #-1,((BATTLESCENE_ALLY-$1000000)).w
                 beq.w   return_18698
                 
@@ -1993,26 +1992,27 @@ bsc12_closeTextBox:
 
 EndBattlescene:
                 
+                module
                 clr.w   d0
                 move.b  ((MESSAGE_SPEED-$1000000)).w,d0
                 moveq   #7,d1
                 sub.w   d0,d1
                 clr.w   d0
                 bset    d1,d0
-loc_19258:
+@WaitForInput:
                 
                 tst.b   ((PLAYER_1_INPUT-$1000000)).w
                 bne.s   byte_19266
                 jsr     (WaitForVInt).w
-                dbf     d0,loc_19258
+                dbf     d0,@WaitForInput
 byte_19266:
                 
                 sndCom  SOUND_COMMAND_FADE_OUT
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 cmpi.w  #-1,d0
-                beq.s   loc_1927A
+                beq.s   @Enemy
                 jsr     j_CloseAllyBattlesceneMiniStatusWindow
-loc_1927A:
+@Enemy:
                 
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 cmpi.w  #-1,d0
@@ -2025,6 +2025,7 @@ loc_1927A:
 
     ; End of function EndBattlescene
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

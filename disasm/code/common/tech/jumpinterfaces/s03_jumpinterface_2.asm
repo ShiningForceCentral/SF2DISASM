@@ -65,11 +65,11 @@ j_ExecuteWitchMainMenu:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_DisplayNameUnderPortrait:
+j_OpenNameUnderPortraitWindow:
                 
-                jmp     DisplayNameUnderPortrait(pc)
+                jmp     OpenNameUnderPortraitWindow(pc)
 
-    ; End of function j_DisplayNameUnderPortrait
+    ; End of function j_OpenNameUnderPortraitWindow
 
 
 ; =============== S U B R O U T I N E =======================================
