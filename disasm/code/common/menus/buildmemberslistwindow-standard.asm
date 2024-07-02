@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\writememberlisttext-standard.asm :
+; ASM FILE code\common\menus\buildmemberslistwindow-standard.asm :
 ; 
 
 ; =============== S U B R O U T I N E =======================================
@@ -7,7 +7,7 @@
 ; In: a1 = window tiles address, d0.w = selected member index
 
 
-WriteMembersListText:
+;BuildMembersListWindow:
                 
 currentMember = -8
 windowTilesAddress = -6

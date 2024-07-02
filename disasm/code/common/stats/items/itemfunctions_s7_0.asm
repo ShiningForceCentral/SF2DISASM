@@ -118,8 +118,8 @@ loc_4F596:
                 dbf     d7,loc_4F596
 loc_4F59C:
                 
-                move.b  #1,(byte_FFB13C).l
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,(CURRENT_ITEM_SUBMENU_ACTION).l
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 bne.w   loc_4F5B6
                 bra.w   loc_4F6CA

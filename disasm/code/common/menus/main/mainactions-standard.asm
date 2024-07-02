@@ -51,8 +51,8 @@ MainMenu_Member:
                 
                 bsr.w   PopulateGenericListWithCurrentForceMembers
                 clsTxt
-@StartMember:   clr.b   ((byte_FFB13C-$1000000)).w
-                jsr     InitializeMembersListScreen
+@StartMember:   clr.b   ((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     ExecuteMembersListScreenOnMainSummaryPage
                 tst.w   d0
                 bmi.s   @StartMain              ; if player pressed B on member list screen, restart main menu
                 jsr     BuildMemberScreen
@@ -62,8 +62,8 @@ MainMenu_Member:
 MainMenu_Magic:
                 
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-@StartMagic:    clr.b   ((byte_FFB13C-$1000000)).w
-                jsr     BuildMembersListScreen_MagicPage
+@StartMagic:    clr.b   ((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     ExecuteMembersListScreenOnMagicSummaryPage
                 tst.w   d0
                 bmi.s   @StartMain
                 
@@ -125,9 +125,9 @@ MainMenu_Magic:
                 ; Cast Detox
 @CastDetox:     txt     108             ; "Use magic on whom?{D1}"
                 clsTxt
-                clr.b   ((byte_FFB13C-$1000000)).w
+                clr.b   ((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     BuildMembersListScreen_NewAttAndDefPage
+                jsr     ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,targetMember(a6)
                 bmi.w   @StartMagic
                 
@@ -204,9 +204,9 @@ rjt_MainItemSubmenuActions:
 MainItemSubmenu_Use:
                 
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-@StartItemUse:  move.b  #1,((byte_FFB13C-$1000000)).w
+@StartItemUse:  move.b  #1,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     BuildMembersListScreen_NewAttAndDefPage
+                jsr     ExecuteMembersListScreenOnItemSummaryPage
                 tst.w   d0
                 bmi.w   @ExitItemSubmenuAction
                 
@@ -254,8 +254,8 @@ MainItemSubmenu_Use:
                 bra.w   @ExitItemSubmenuAction
                 
 @PickTarget:    clsTxt
-                clr.b   ((byte_FFB13C-$1000000)).w
-                jsr     InitializeMembersListScreen
+                clr.b   ((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     ExecuteMembersListScreenOnMainSummaryPage
                 tst.w   d0
                 bmi.w   @StartItemUse
                 
@@ -280,9 +280,9 @@ MainItemSubmenu_Use:
 MainItemSubmenu_Give:
                 
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-@StartItemGive: move.b  #1,((byte_FFB13C-$1000000)).w
+@StartItemGive: move.b  #1,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     BuildMembersListScreen_NewAttAndDefPage
+                jsr     ExecuteMembersListScreenOnItemSummaryPage
                 tst.w   d0
                 bmi.w   @ExitItemSubmenuAction
                 
@@ -316,9 +316,9 @@ MainItemSubmenu_Give:
 @PickRecipient: move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     54                      ; "Pass the {ITEM}{N}to whom?{D1}"
                 clsTxt
-                move.b  #2,((byte_FFB13C-$1000000)).w
+                move.b  #2,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     BuildMembersListScreen_NewAttAndDefPage
+                jsr     ExecuteMembersListScreenOnItemSummaryPage
                 tst.w   d0
                 bmi.w   @StartItemGive
                 
@@ -437,18 +437,18 @@ MainItemSubmenu_Give:
 MainItemSubmenu_Equip:
                 
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #3,((byte_FFB13C-$1000000)).w
+                move.b  #3,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
                 pea     MainMenu_Item(pc)
-                jmp     BuildMembersListScreen_NewAttAndDefPage
+                jmp     ExecuteMembersListScreenOnItemSummaryPage
 ; ---------------------------------------------------------------------------
 
 MainItemSubmenu_Drop:
                 
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-@StartItemDrop: move.b  #1,((byte_FFB13C-$1000000)).w
+@StartItemDrop: move.b  #1,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     BuildMembersListScreen_NewAttAndDefPage
+                jsr     ExecuteMembersListScreenOnItemSummaryPage
                 tst.w   d0
                 bmi.w   @ExitItemSubmenuAction
                 

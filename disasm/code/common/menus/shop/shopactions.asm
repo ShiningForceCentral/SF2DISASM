@@ -59,7 +59,7 @@ byte_200CE:
                 txt     162             ; "What do you want to buy?"
                 jsr     PopulateShopInventoryList(pc)
                 nop
-                jsr     j_BuildShopInventoryScreen
+                jsr     j_ExecuteShopScreen
                 cmpi.w  #-1,d0
                 beq.w   byte_207CC
                 
@@ -105,8 +105,8 @@ loc_2015E:
                 dbf     d7,loc_2015E
                 clsTxt
                 move.w  selectedItem(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_20118      
                 move.w  d0,member(a6)
@@ -228,9 +228,9 @@ loc_202F4:
                 move.b  (a0)+,(a1)+
                 dbf     d7,loc_202F4
                 clsTxt
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   byte_207CC
                 clr.w   rareItemFlag(a6)
@@ -343,9 +343,9 @@ loc_2046C:
                 move.b  (a0)+,(a1)+
                 dbf     d7,loc_2046C
                 clsTxt
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   byte_207CC
                 move.w  d0,member(a6)
@@ -450,7 +450,7 @@ byte_205AC:
 byte_205C8:
                 
                 txt     171             ; "You must be surprised!{D1}{N}What would you like?"
-                jsr     j_BuildShopInventoryScreen
+                jsr     j_ExecuteShopScreen
                 cmpi.w  #-1,d0
                 beq.w   byte_207CC
                 
@@ -495,8 +495,8 @@ loc_20652:
                 dbf     d7,loc_20652
                 clsTxt
                 move.w  selectedItem(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_2060C      
                 move.w  d0,member(a6)

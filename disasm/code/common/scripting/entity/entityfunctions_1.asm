@@ -177,9 +177,9 @@ DeclareNewEntity:
             if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
                 clr.w   ENTITYDEF_OFFSET_XVELOCITY(a0)
             else
-                clr.l   ENTITYDEF_OFFSET_XVELOCITY(a0)
+                clr.l   ENTITYDEF_OFFSET_XVELOCITY(a0) ; clear both X and Y velocity words
             endif
-                clr.l   ENTITYDEF_OFFSET_XTRAVEL(a0)
+                clr.l   ENTITYDEF_OFFSET_XTRAVEL(a0) ; clear both X and Y travel words
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  d3,ENTITYDEF_OFFSET_FACING(a0)

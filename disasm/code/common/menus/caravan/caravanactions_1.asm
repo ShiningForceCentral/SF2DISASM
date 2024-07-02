@@ -75,7 +75,7 @@ caravanMenu_Join:
                 ; Pick joiner
                 move.w  #15,d1          ; "Who joins the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMembersListScreen
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 move.w  d0,member(a6)
                 cmpi.w  #-1,d0
                 beq.w   byte_220E8      ; @Exit
@@ -108,7 +108,7 @@ caravanMenu_Join:
                 
                 move.w  #23,d1          ; "Choose a relief.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMembersListScreen
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_220DE      ; @CloseDialogueWindowAndRestart
                 
@@ -184,7 +184,7 @@ caravanMenu_Purge:
                 ; Pick a quitter
                 move.w  #16,d1          ; "Who quits the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMembersListScreen
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_22144      ; @Exit
                 
@@ -284,7 +284,7 @@ caravanDepotSubmenu_Look:
                 
                 move.w  #MESSAGE_CARAVAN_APPRAISE_WHICH_ITEM,d1 ; "Appraise which item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_BuildShopInventoryScreen
+                jsr     j_ExecuteShopScreen
                 move.w  d0,d2
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -488,9 +488,9 @@ caravanDepotSubmenu_Deposit:
                 bsr.w   PopulateGenericListWithMembersList
                 move.w  #MESSAGE_CARAVAN_STORE_WHOSE_ITEM,d1 ; "Store whose item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -546,7 +546,7 @@ caravanDepotSubmenu_Derive:
                 ; Pick item from storehouse
                 move.w  #MESSAGE_CARAVAN_CHOOSE_WHICH_ITEM,d1 ; "Choose which item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_BuildShopInventoryScreen
+                jsr     j_ExecuteShopScreen
                 move.w  d0,d2
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -559,9 +559,9 @@ caravanDepotSubmenu_Derive:
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_PASS_THE_ITEM_TO_WHOM,d1 ; "Pass the {ITEM}{N}to whom?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                move.b  #2,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_DROP,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,targetMember(a6)
                 move.w  d1,targetItemSlot(a6)
                 move.w  d2,targetItemIndex(a6)
@@ -661,7 +661,7 @@ caravanDepotSubmenu_Drop:
                 
                 move.w  #MESSAGE_CARAVAN_DISCARD_WHICH_ITEM,d1 ; "Discard which item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_BuildShopInventoryScreen
+                jsr     j_ExecuteShopScreen
                 move.w  d0,d2
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -776,9 +776,9 @@ caravanItemSubmenu_Use:
                 
                 moveq   #0,d1           ; all force members
                 bsr.w   PopulateGenericListWithMembersList
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -795,8 +795,8 @@ caravanItemSubmenu_Use:
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #25,d1          ; "Use the {ITEM}{N}on whom?{D1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMembersListScreen
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_225E4      ; @CancelChoice
                 
@@ -856,9 +856,9 @@ caravanItemSubmenu_Give:
                 
                 moveq   #0,d1           ; all force members
                 bsr.w   PopulateGenericListWithMembersList
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -872,9 +872,9 @@ caravanItemSubmenu_Give:
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #29,d1          ; "Pass the {ITEM}{N}to whom?{D1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                move.b  #2,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_DROP,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,targetMember(a6)
                 move.w  d1,targetItemSlot(a6)
                 move.w  d2,targetItemIndex(a6)
@@ -976,9 +976,9 @@ caravanItemSubmenu_Equip:
                 
                 moveq   #0,d1           ; all force members
                 bsr.w   PopulateGenericListWithMembersList
-                move.b  #3,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_EQUIP,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 bne.s   @Restart
                 txt     4               ; "Did you change your mind?{W2}"
@@ -1012,9 +1012,9 @@ caravanItemSubmenu_Drop:
                 
                 moveq   #0,d1           ; all force members
                 bsr.w   PopulateGenericListWithMembersList
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)

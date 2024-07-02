@@ -121,7 +121,7 @@ StartBattleTest:
             if (TEST_BUILD=1)
                 rts
             else
-                jsr     InitializeMembersListScreen
+                jsr     ExecuteMembersListScreenOnMainSummaryPage
                 tst.b   d0
                 bne.w   @Start
                 

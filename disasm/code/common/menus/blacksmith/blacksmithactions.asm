@@ -162,8 +162,8 @@ byte_21B58:
                 
                 clsTxt
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 bne.s   @IsMemberInventoryFull
                 txt     197             ; "{CLEAR}What a pity!{W2}"
@@ -318,9 +318,9 @@ byte_21CDE:
                 @StartNewOrder:
                 txt     199             ; "What kind of material do you{N}have?{D1}"
                 clsTxt
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   @Done
                 
@@ -337,9 +337,9 @@ byte_21D1A:
                 ; Pick customer
                 txt     201             ; "{CLEAR}Whose weapon should I{N}make?{D1}"
                 clsTxt
-                move.b  #0,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_21CDE      ; @StartNewOrder
                 

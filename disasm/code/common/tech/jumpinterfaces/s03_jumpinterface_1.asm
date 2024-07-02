@@ -15,41 +15,41 @@ j_ExecuteDiamondMenu:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ExecuteItemMenu:
+j_ExecuteBattlefieldItemMenu:
                 
-                jmp     ExecuteItemMenu(pc)
+                jmp     ExecuteBattlefieldItemMenu(pc)
 
-    ; End of function j_ExecuteItemMenu
+    ; End of function j_ExecuteBattlefieldItemMenu
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ExecuteItemMenu_0:
+j_ExecuteBattlefieldItemMenu_0:
                 
-                jmp     ExecuteItemMenu(pc)
+                jmp     ExecuteBattlefieldItemMenu(pc)
 
-    ; End of function j_ExecuteItemMenu_0
+    ; End of function j_ExecuteBattlefieldItemMenu_0
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ExecuteItemMenu_1:
+j_ExecuteBattlefieldItemMenu_1:
                 
-                jmp     ExecuteItemMenu(pc)
+                jmp     ExecuteBattlefieldItemMenu(pc)
 
-    ; End of function j_ExecuteItemMenu_1
+    ; End of function j_ExecuteBattlefieldItemMenu_1
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ExecuteMagicMenu:
+j_ExecuteBattlefieldMagicMenu:
                 
-                jmp     ExecuteMagicMenu(pc)
+                jmp     ExecuteBattlefieldMagicMenu(pc)
 
-    ; End of function j_ExecuteMagicMenu
+    ; End of function j_ExecuteBattlefieldMagicMenu
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -165,41 +165,41 @@ j_ClosePortraitWindow:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_InitializeMembersListScreen:
+j_ExecuteMembersListScreenOnMainSummaryPage:
                 
-                jmp     InitializeMembersListScreen(pc)
+                jmp     ExecuteMembersListScreenOnMainSummaryPage(pc)
 
-    ; End of function j_InitializeMembersListScreen
+    ; End of function j_ExecuteMembersListScreenOnMainSummaryPage
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_BuildMembersListScreen_NewAttAndDefPage:
+j_ExecuteMembersListScreenOnItemSummaryPage:
                 
-                jmp     BuildMembersListScreen_NewAttAndDefPage(pc)
+                jmp     ExecuteMembersListScreenOnItemSummaryPage(pc)
 
-    ; End of function j_BuildMembersListScreen_NewAttAndDefPage
+    ; End of function j_ExecuteMembersListScreenOnItemSummaryPage
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_BuildMembersListScreen_MagicPage:
+j_ExecuteMembersListScreenOnMagicSummaryPage:
                 
-                jmp     BuildMembersListScreen_MagicPage(pc)
+                jmp     ExecuteMembersListScreenOnMagicSummaryPage(pc)
 
-    ; End of function j_BuildMembersListScreen_MagicPage
+    ; End of function j_ExecuteMembersListScreenOnMagicSummaryPage
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_BuildShopInventoryScreen:
+j_ExecuteShopScreen:
                 
-                jmp     BuildShopInventoryScreen(pc)
+                jmp     ExecuteShopScreen(pc)
 
-    ; End of function j_BuildShopInventoryScreen
+    ; End of function j_ExecuteShopScreen
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -2518,7 +2518,7 @@ loc_60B6:
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a0),d1
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
             endif
-                bcc.w   @Done ; skip changing facing direction if special sprite
+                bcc.w   @Done           ; skip changing facing direction if special sprite
                 
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a0),d1
@@ -2599,11 +2599,11 @@ loc_615E:
 return_6180:
                 
                 rts
-                
-                modend
 
     ; End of function ChangeEntityMapsprite
 
+                modend
+                
 table_FacingValues_2:
                 dc.b RIGHT              ; 8 bytes holding facing values for sprites
                 dc.b UP

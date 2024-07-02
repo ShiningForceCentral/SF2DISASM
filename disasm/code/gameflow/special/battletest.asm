@@ -159,7 +159,7 @@ byte_77DE:
 @DebugLevelUp:
                 
                 bsr.w   LoadAllyStatsDecimalDigits
-                jsr     j_InitializeMembersListScreen
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 tst.b   d0
                 bne.w   byte_77DE       ; @Start
                 bpl.s   @loc_4

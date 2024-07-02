@@ -325,6 +325,7 @@ ProcessBattleEntityControlPlayerInput:
                 cmpi.w  #-1,d2
             endif
                 bne.s   @SearchMenu     ; if d2.w != -1, then there is an item
+                
                 moveq   #MENU_BATTLE_WITH_STAY,d2
                 bra.s   @CheckTargetReachableByAttack
 @SearchMenu:
@@ -336,6 +337,7 @@ ProcessBattleEntityControlPlayerInput:
                 jsr     j_CreateAttackRangeGrid
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.s   @TargetIsInAttackRange
+                
                 moveq   #3,d0
                 bra.s   @NoTarget
 @TargetIsInAttackRange:
@@ -350,6 +352,7 @@ ProcessBattleEntityControlPlayerInput:
                 cmpi.w  #-1,d0
                 bne.w   @CheckChoice_Attack
                 
+                ; Canceled out of menu
                 move.w  combatant(a6),d0
                 move.w  ((BATTLE_ACTOR_X-$1000000)).w,d1
                 jsr     j_SetCombatantX
@@ -435,7 +438,7 @@ ProcessBattleEntityControlPlayerInput:
                 clr.w   d0
                 lea     CreatePulsatingSpellRangeGrid(pc), a0
                 nop
-                jsr     j_ExecuteMagicMenu
+                jsr     j_ExecuteBattlefieldMagicMenu
                 cmpi.w  #-1,d0
                 bne.w   @CheckMpCost
                 
@@ -575,7 +578,7 @@ CreatePulsatingSpellRangeGrid:
                 clr.w   d1
                 lea     CreatePulsatingItemRangeGrid(pc), a0
                 nop
-                jsr     j_ExecuteItemMenu
+                jsr     j_ExecuteBattlefieldItemMenu
                 cmpi.w  #-1,d0
                 bne.w   @IsUsable
                 
@@ -825,7 +828,7 @@ sub_24C4E:
                 nop
                 move.w  d6,d1
                 move.w  d1,-(sp)
-                jsr     j_ExecuteItemMenu
+                jsr     j_ExecuteBattlefieldItemMenu
                 move.w  (sp)+,d1
                 move.w  (sp)+,d0
                 rts
@@ -965,7 +968,7 @@ loc_24D42:
                 jsr     (WaitForVInt).w
                 clr.w   d0
                 lea     (InitialStack).w,a0
-                jsr     j_ExecuteItemMenu
+                jsr     j_ExecuteBattlefieldItemMenu
                 cmpi.w  #-1,d0
                 bne.w   @IsActorCursed
                 
@@ -1046,7 +1049,7 @@ loc_24D42:
                 move.w  (sp)+,d1
                 clr.w   d0
                 lea     (InitialStack).w,a0
-                jsr     j_ExecuteItemMenu
+                jsr     j_ExecuteBattlefieldItemMenu
                 cmpi.w  #-1,d0
                 bne.w   @IsTargetCursed
                 bra.w   @ChooseTarget
@@ -1124,7 +1127,7 @@ loc_24D42:
                 clr.w   d0
                 clr.w   d1
                 lea     (InitialStack).w,a0
-                jsr     j_ExecuteItemMenu
+                jsr     j_ExecuteBattlefieldItemMenu
                 cmpi.w  #-1,d0
                 bne.w   loc_24FC2
 @ReturnToMenu:  
@@ -1295,39 +1298,43 @@ combatant = -2
 
 BattlefieldMenu:
                 
+                module
                 clr.b   ((CURSOR_RADIUS-$1000000)).w
                 clr.w   ((MOVE_SFX-$1000000)).w
                 bsr.w   ControlCursorEntity
                 btst    #INPUT_BIT_B,((PLAYER_1_INPUT-$1000000)).w
-                beq.s   loc_251B8
+                beq.s   @Continue
+                
                 move.w  combatant(a6),d0
                 rts
-loc_251B8:
+@Continue:
                 
                 moveq   #COMBATANTS_ALL_COUNTER,d7
                 clr.w   d0
-loc_251BC:
+@Loop:
                 
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                ble.w   loc_25226
+                ble.w   @loc_6
                 jsr     j_GetCombatantX
                 cmp.w   d1,d2
-                bne.w   loc_25226
+                bne.w   @loc_6
                 jsr     j_GetCombatantY
                 cmp.w   d1,d3
-                bne.w   loc_25226
+                bne.w   @loc_6
+                
                 jsr     (WaitForViewScrollEnd).w
                 btst    #INPUT_BIT_A,((PLAYER_1_INPUT-$1000000)).w
-                beq.s   loc_251F4
+                beq.s   @IsCursorOnMovingEntity
+                
                 jsr     j_BuildMemberScreen
-                bra.s   loc_2521C
-loc_251F4:
+                bra.s   @loc_5
+@IsCursorOnMovingEntity:
                 
                 cmp.w   combatant(a6),d0
-                bne.s   loc_251FC
+                bne.s   @OpenMiniStatus
                 rts
-loc_251FC:
+@OpenMiniStatus:
                 
                 move.w  d0,((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w
                 jsr     j_OpenBattlefieldMiniStatusWindow
@@ -1335,21 +1342,21 @@ loc_251FC:
                 jsr     (WaitForPlayerInput).w
                 jsr     j_CloseLandEffectWindow
                 jsr     j_CloseBattlefieldMiniStatusWindow
-loc_2521C:
+@loc_5:
                 
                 cmp.w   combatant(a6),d0
                 bne.w   BattlefieldMenu
                 rts
-loc_25226:
+@loc_6:
                 
                 addq.w  #1,d0
                 cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
-                bne.s   loc_25232
+                bne.s   @loc_7
                 move.w  #COMBATANT_ENEMIES_START,d0
-loc_25232:
+@loc_7:
                 
-                dbf     d7,loc_251BC
-loc_25236:
+                dbf     d7,@Loop
+@StartMenu:
                 
                 lea     (InitialStack).w,a0
                 moveq   #0,d0
@@ -1360,9 +1367,11 @@ loc_25236:
                 beq.w   BattlefieldMenu
                 tst.w   d0
                 bne.w   @CheckMiniMap
+                
                 jsr     j_UpdateForce
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-                beq.s   loc_25236
+                beq.s   @StartMenu
+                
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
                 move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
@@ -1370,32 +1379,35 @@ loc_25236:
                 jsr     (CopyBytes).w   
 @CreateMembersList_Loop:
                 
-                jsr     j_InitializeMembersListScreen
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 tst.b   d0
-                bmi.s   loc_25236
+                bmi.s   @StartMenu
+                
                 jsr     j_BuildMemberScreen
                 bra.s   @CreateMembersList_Loop
 @CheckMiniMap:
                 
                 cmpi.w  #1,d0
                 bne.w   @CheckOptions
+                
                 jsr     j_BuildMinimapScreen
-                bra.s   loc_25236
+                bra.s   @StartMenu
 @CheckOptions:
                 
                 cmpi.w  #2,d0
                 bne.w   @SuspendGame
+                
                 jsr     j_BuildBattlefieldSettingsScreen
-                bra.s   loc_25236
+                bra.s   @StartMenu
 @SuspendGame:
                 
                 checkSavedByte #BATTLE_VERSUS_ALL_BOSSES, CURRENT_BATTLE
-                beq.s   loc_25236
+                beq.s   @StartMenu
                 txt     0               ; "The game will be suspended.{N}OK?"
                 jsr     j_alt_YesNoPrompt
                 clsTxt
                 tst.w   d0
-                bmi.w   loc_25236
+                bmi.w   @StartMenu
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 move.l  a0,-(sp)
                 move.l  d0,-(sp)
@@ -1426,10 +1438,11 @@ byte_252F2:
                 
                 ; Finish Suspend
                 clrFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                bra.w   loc_25236
+                bra.w   @StartMenu
 
     ; End of function BattlefieldMenu
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

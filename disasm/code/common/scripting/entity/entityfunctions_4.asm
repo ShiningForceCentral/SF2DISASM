@@ -333,6 +333,8 @@ loc_45B78:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: a0, a1 = pointer to mapsprite decompressed pixel data in RAM
+
 
 ApplySpriteGhostEffect:
                 
@@ -373,6 +375,8 @@ loc_45BB0:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: a0, a1 = pointer to mapsprite decompressed pixel data in RAM
 
 
 ResizeSprite:
@@ -489,6 +493,8 @@ table_45C6A:    dc.b 0
                 dc.b $C3
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: a0, a1 = pointer to mapsprite decompressed pixel data in RAM
 
 
 ApplySpriteImmersedEffect:

@@ -132,7 +132,7 @@ RemoveItemFromCaravan:
                 beq.s   @Done
             if (FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
               if (RELOCATED_SAVED_DATA_TO_SRAM=1)
-                moveq   #ITEM_NOTHING,d6
+                move.w   #ITEM_NOTHING,d6
                 movep.w d6,0(a0)
               else
                 move.w  #ITEM_NOTHING,(a0)

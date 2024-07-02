@@ -7,7 +7,7 @@
 
 DisplayTacticalBaseQuote:
                 
-                jsr     j_DisplayNameUnderPortrait
+                jsr     j_OpenNameUnderPortraitWindow
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   @LivingMember

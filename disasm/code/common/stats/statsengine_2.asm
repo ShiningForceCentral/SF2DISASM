@@ -2046,7 +2046,7 @@ GetEquippableItemsByType:
             endif
                 lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a2
                 
-                ; Init list with default values
+                ; Initialize list with default values
                 move.l  #(ITEM_NOTHING<<WORD_SHIFT_COUNT)|4,(a2)
                 move.l  #(ITEM_NOTHING<<WORD_SHIFT_COUNT)|4,4(a2)
                 move.l  #(ITEM_NOTHING<<WORD_SHIFT_COUNT)|4,8(a2)
@@ -2166,15 +2166,20 @@ IsWeaponOrRingEquippable:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d1.w = index of new item being equipped
+; Out: d2.w, d3.w = new ATT and DEF
+
 
 GetEquipNewAttAndDef:
                 
                 movem.l d0/d4-d6/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
                 clr.w   d2
-                move.b  COMBATANT_OFFSET_ATT_CURRENT(a0),d2 ; current ATT
+                move.b  COMBATANT_OFFSET_ATT_CURRENT(a0),d2
                 clr.w   d3
-                move.b  COMBATANT_OFFSET_DEF_CURRENT(a0),d3 ; current DEF
+                move.b  COMBATANT_OFFSET_DEF_CURRENT(a0),d3 ; default to current ATT and DEF with currently equipped item
+                
+                ; Is new item equippable?
                 movem.w d0/d2-d3,-(sp)
                 move.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2
                 clr.w   d0
@@ -2201,11 +2206,14 @@ GetEquipNewAttAndDef:
             endif
                 movem.w (sp)+,d0/d2-d3
                 bcc.w   @Skip           ; skip if item is not equippable
+                
+                ; Get new item type
                 movem.l d1/a0,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 bsr.w   GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d2
                 movem.l (sp)+,d1/a0
+                
                 andi.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2 ; get weapon/ring type
                 bsr.w   GetNewAttAndDefWithItemEquipped
 @Skip:
@@ -2218,12 +2226,12 @@ GetEquipNewAttAndDef:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A0 = combatant entry address
-;     D1 = item index
-;     D2 = item type (weapon or ring)
+; In: a0 = combatant entry address
+;     d1.w = new item index
+;     d2.w = new item type (weapon or ring)
 ; 
-; Out: D2 = current ATT with item equipped
-;      D3 = current DEF with item equipped
+; Out: d2.w = current ATT with new item equipped
+;      d3.w = current DEF with new item equipped
 
 
 GetNewAttAndDefWithItemEquipped:
@@ -2236,9 +2244,10 @@ GetNewAttAndDefWithItemEquipped:
                 clr.w   d4
 @FindEquippedItem_Loop:
                 
-                move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
+                move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5 ; find currently equipped item of the same type as the new one
                 btst    #ITEMENTRY_BIT_EQUIPPED,d5
                 beq.s   @Next
+                
                 movem.l d0-d1/a0,-(sp)  ; it's equipped
                 move.w  d5,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
@@ -2246,7 +2255,7 @@ GetNewAttAndDefWithItemEquipped:
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d0
                 and.b   d2,d0
                 movem.l (sp)+,d0-d1/a0
-                bne.w   @GetNewAttAndDef ; is the item type we're looking for
+                bne.w   @GetNewAttAndDef ; is the item type we're looking for, so start with this one
 @Next:
                 
                 addq.w  #ITEMENTRY_SIZE,d4
@@ -2262,13 +2271,15 @@ GetNewAttAndDefWithItemEquipped:
                 addq.w  #ITEMENTRY_SIZE,d4
                 dbf     d7,@FindFirstUnequippedItem_Loop
                 
-                clr.w   d4              ; default to item 0
+                clr.w   d4              ; default to the first item slot
 @GetNewAttAndDef:
                 
-                move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5
+                move.w  COMBATANT_OFFSET_ITEMS(a0,d4.w),d5 ; d5.w = old equipped item index
+                
+                ; Temporarily equip the new item in place of the old one
                 movem.l d4-d5/a0,-(sp)
                 bset    #ITEMENTRY_BIT_EQUIPPED,d1
-                move.w  d1,COMBATANT_OFFSET_ITEMS(a0,d4.w) ; equip item
+                move.w  d1,COMBATANT_OFFSET_ITEMS(a0,d4.w)
                 bsr.w   ApplyStatusEffectsAndItemsOnStats
                 clr.w   d2
                 move.b  COMBATANT_OFFSET_ATT_CURRENT(a0),d2
@@ -2277,7 +2288,7 @@ GetNewAttAndDefWithItemEquipped:
                 movem.l (sp)+,d4-d5/a0
                 
                 movem.w d2-d3,-(sp)
-                move.w  d5,COMBATANT_OFFSET_ITEMS(a0,d4.w) ; and unequip
+                move.w  d5,COMBATANT_OFFSET_ITEMS(a0,d4.w) ; then re-equip the old one
                 bsr.w   ApplyStatusEffectsAndItemsOnStats
                 movem.w (sp)+,d2-d3
                 
