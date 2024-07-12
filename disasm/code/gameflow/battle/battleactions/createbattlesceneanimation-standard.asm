@@ -96,7 +96,7 @@ battlesceneScript_PerformAnimation:
                 move.w  #256,d0
                 jsr     (GenerateRandomOrDebugNumber).w
                 cmp.w   (a0)+,d0
-                bls.s   @CheckUnarmed
+                bhi.s   @CheckUnarmed
                 move.w  (a0),d5
                 st      specialCritical(a2)
                 bra.s   @Return
