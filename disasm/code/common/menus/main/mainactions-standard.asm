@@ -225,6 +225,8 @@ MainItemSubmenu_Use:
                 beq.s   @HandleNonAngelWingItems
                 
                 ; Use Angel Wing
+                move.w  member(a6),d0
+                move.w  itemSlot(a6),d1
                 jsr     RemoveItemBySlot
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
