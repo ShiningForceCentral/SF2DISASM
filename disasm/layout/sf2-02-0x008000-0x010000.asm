@@ -110,6 +110,7 @@
                 include "data\battles\global\landeffectsettingsandmovecosts.asm"    ; Land effect settings and move costs table
                 include "data\battles\global\aipriority.asm"    ; AI priority data
                 include "code\gameflow\battle\battlefield\battlefieldengine_7.asm"    ; Battlefield engine
+                includeIfStandard "data\stats\spells\specialspellproperties-standard.asm"
                 
                 ; AI engine
                 include "code\gameflow\battle\ai\startaicontrol.asm"    ; AI engine : preparatory phase
