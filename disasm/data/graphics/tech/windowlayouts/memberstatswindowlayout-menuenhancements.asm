@@ -1,6 +1,6 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\memberstatswindowlayout-menuenhancements.asm :
-; Member stats window layout : Included when patch THREE_DIGITS_STATS or FULL_CLASS_NAMES is enabled.
+; Member stats window layout : Included when patches EXTENDED_STATUS, or THREE_DIGITS_STATS, or FULL_CLASS_NAMES are enabled.
                 module
                 
 layout_MemberStatusWindow:
@@ -108,7 +108,9 @@ layout_MemberStatusWindow_Body:
                 vdpBaseTile V_BORDER|MIRROR  
             endif
                 
+            if (EXTENDED_STATUS=0)
                 @spacerLine ; 5th line
+            endif
                 
 ; 6th line
             if (THREE_DIGITS_STATS=1)
@@ -157,7 +159,9 @@ layout_MemberStatusWindow_Body:
                 vdpBaseTile V_BORDER|MIRROR
             endif
                 
+            if (EXTENDED_STATUS=0)
                 @spacerLine ; 7th line
+            endif
                 
 ; 8th line
             if (THREE_DIGITS_STATS=1)
@@ -206,7 +210,9 @@ layout_MemberStatusWindow_Body:
                 vdpBaseTile V_BORDER|MIRROR
             endif
                 
+            if (EXTENDED_STATUS=0)
                 @spacerLine ; 9th line
+            endif
                 
 ; 10th line
             if (THREE_DIGITS_STATS=1)
@@ -257,7 +263,57 @@ layout_MemberStatusWindow_Body:
                 
                 @spacerLine ; 11th line
                 
+                ; 10th and 11th lines start here is member screen is extended.
+            if (EXTENDED_STATUS=1)
+                vdpBaseTile V_BORDER
+                vdpBaseTile ELEMENT_WIND
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile ELEMENT_LIGHTNING
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile ELEMENT_STATUS
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile V_BORDER|MIRROR
+                
+                vdpBaseTile V_BORDER
+                vdpBaseTile ELEMENT_ICE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile ELEMENT_FIRE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE ; hidden element (unused #2)
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile V_BORDER|MIRROR
+            endif
+                
 layout_MemberStatusWindow_Tail:
+            if (EXTENDED_STATUS=1)
+                @spacerLine
+            endif
                 @spacerLine ; 12th line
                 
 ; 13th line

@@ -97,6 +97,7 @@ ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Read values to be displayed fr
 ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 1       ; 1 = small icons, 2 = no display
 EIGHT_CHARACTERS_MEMBER_NAMES:      equ 1       ; 
 EXTENDED_SPELL_NAMES:               equ 1       ; 
+EXTENDED_STATUS:                    equ 1       ; Display additional information on the member screen: Promotion indicator, Critical hit type and chance, Double and Counter chances, Resistance levels, and Movetype name.
 FULL_CLASS_NAMES:                   equ 1       ; 
 SHOW_ALL_SPELLS_IN_MEMBER_SCREEN:   equ 0       ; 
 SHOW_ENEMY_LEVEL:                   equ 1       ; 

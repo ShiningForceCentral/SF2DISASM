@@ -25,7 +25,7 @@
                 includeIfStandard "data\stats\enemies\enemynames.asm"    ; Enemy names
             endif
                 alignIfStandard
-            if (THREE_DIGITS_STATS|FULL_CLASS_NAMES=1)
+            if (EXTENDED_STATUS|THREE_DIGITS_STATS|FULL_CLASS_NAMES=1)
                 includeIfStandard "data\graphics\tech\windowlayouts\memberstatswindowlayout-menuenhancements.asm"
             else
                 includeIfStandard "data\graphics\tech\windowlayouts\memberstatswindowlayout.asm"    ; Member stats window layout

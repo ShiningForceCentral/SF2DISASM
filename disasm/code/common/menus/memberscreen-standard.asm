@@ -10,6 +10,7 @@
 
 portraitIndex = -12
 goldWindowSlot = -10
+currentProwess = goldWindowSlot
 kdWindowSlot = -8
 portraitWindowSlot = -6
 statusWindowSlot = -4
@@ -38,21 +39,24 @@ BuildMemberScreen:
                 move.w  #WINDOW_MEMBER_KD_DEST,d1
                 jsr     (CreateWindow).w ; kills/defeat, middle left
                 move.w  d0,kdWindowSlot(a6)
+            if (EXTENDED_STATUS=0)
+                ; Skip the gold window if displaying resistance and prowess
                 move.w  #WINDOW_MEMBER_GOLD_SIZE,d0
                 move.w  #WINDOW_MEMBER_GOLD_DEST,d1
                 jsr     (CreateWindow).w ; gold, bottom left
                 move.w  d0,goldWindowSlot(a6)
+            endif
                 move.w  member(a6),d0
                 bsr.w   GetCombatantPortrait
                 move.w  d0,portraitIndex(a6)
                 bsr.w   LoadMemberScreenWindowLayouts
                 move.w  portraitIndex(a6),d0
-                blt.s   loc_11CA6
+                blt.s   @loc_1
             if (VANILLA_BUILD=1)
                 bsr.w   GetAllyPortrait 
             endif
                 bsr.w   LoadPortrait    
-loc_11CA6:
+@loc_1:
                 
                 move.w  statusWindowSlot(a6),d0
                 move.w  #WINDOW_MEMBERSTATUS_POSITION,d1
@@ -62,20 +66,33 @@ loc_11CA6:
                 move.w  #WINDOW_MEMBER_KD_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
                 move.w  portraitIndex(a6),d0
-                blt.s   loc_11CD2
+                blt.s   @loc_2
                 move.w  portraitWindowSlot(a6),d0
                 move.w  #WINDOW_MEMBER_PORTRAIT_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
-loc_11CD2:
-                
+@loc_2:
+            if (EXTENDED_STATUS=0)
+                ; Skip the gold window if displaying resistance and prowess
                 move.w  member(a6),d0
                 tst.b   d0
-                blt.s   loc_11CE6
+                blt.s   @loc_3
                 move.w  goldWindowSlot(a6),d0
                 move.w  #WINDOW_MEMBER_GOLD_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
-loc_11CE6:
-                
+            endif
+@loc_3:
+            if (EXTENDED_STATUS=1)
+                ; DMA element icon tiles
+                lea     tiles_ElementIcons(pc),a0
+                lea     (MEMBER_SCREEN_ELEMENT_ICONS_LOADING_SPACE).l,a1
+                jsr     (LoadStackCompressedData).w
+                lea     (MEMBER_SCREEN_ELEMENT_ICONS_LOADING_SPACE).l,a0
+                moveq   #32,d2
+                movea.w d2,a1
+                move.w  #128,d0
+                moveq   #2,d1
+                jsr     (ApplyVIntVramDma).w
+            endif
                 jsr     (WaitForWindowMovementEnd).w
                 move.w  #VDPTILE_PORTRAITTILE1|VDPTILE_PALETTE2|VDPTILE_PRIORITY,((PORTRAIT_VDPTILES-$1000000)).w
                 move.w  #20,((BLINK_COUNTER-$1000000)).w
@@ -83,24 +100,24 @@ loc_11CE6:
                 trap    #VINT_FUNCTIONS
                 dc.w VINTS_ADD
                 dc.l VInt_PerformPortraitBlinking
-                move.b  #-1,((BLINK_CONTROL_TOGGLE-$1000000)).w
+                st      ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
-                bne.s   loc_11D1A
+                checkSavedByte #NOT_CURRENTLY_IN_BAttLE, CURRENT_BAttLE
+                bne.s   @loc_4
                 clr.w   d0
-                bra.s   loc_11D32
-loc_11D1A:
+                bra.s   @loc_6
+@loc_4:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentHp
+                jsr     GetCurrentHp
                 tst.w   d1
-                bne.s   loc_11D2C
+                bne.s   @loc_5
                 clr.w   d0
-                bra.s   loc_11D32
-loc_11D2C:
+                bra.s   @loc_6
+@loc_5:
                 
-                jsr     j_GetEntityIndexForCombatant
-loc_11D32:
+                jsr     GetEntityIndexForCombatant
+@loc_6:
                 
                 move.l  a1,-(sp)
                 move.w  d0,d1
@@ -118,12 +135,12 @@ loc_11D32:
                 bne.s   @MapOnForeground
                 add.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 add.w   ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
-                bra.s   loc_11D6C
+                bra.s   @loc_8
 @MapOnForeground:
                 
                 add.w   ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 add.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
-loc_11D6C:
+@loc_8:
                 
                 move.b  ENTITYDEF_OFFSET_LAYER(a0),d7
                 move.w  d7,-(sp)
@@ -136,34 +153,34 @@ loc_11D6C:
                 move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  #64,ENTITYDEF_OFFSET_LAYER(a0)
                 andi.b  #$7F,ENTITYDEF_OFFSET_FLAGS_B(a0) 
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
-                bne.s   loc_11DBC
+                checkSavedByte #NOT_CURRENTLY_IN_BAttLE, CURRENT_BAttLE
+                bne.s   @loc_9
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 move.w  member(a6),d0
-                jsr     j_GetAllyMapsprite
+                jsr     GetAllyMapsprite
                 clr.w   d0
                 moveq   #DOWN,d1
                 moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
-                bra.s   loc_11DDC
-loc_11DBC:
+                bra.s   @WaitForInput_Loop
+@loc_9:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentHp
+                jsr     GetCurrentHp
                 tst.w   d1
-                bne.s   loc_11DDC
+                bne.s   @WaitForInput_Loop
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 clr.w   d0
                 moveq   #DOWN,d1
                 moveq   #-1,d2
                 move.w  #MAPSPRITE_FLAME1,d3
                 jsr     (UpdateEntityProperties).w
-loc_11DDC:
+@WaitForInput_Loop:
                 
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
                 andi.b  #INPUT_B|INPUT_C|INPUT_A,d0
-                beq.s   loc_11DDC
+                beq.s   @WaitForInput_Loop
                 move.w  (sp)+,ENTITYDEF_OFFSET_FACING(a0)
                 move.w  (sp)+,d1
                 move.w  (sp)+,d0
@@ -178,7 +195,7 @@ loc_11DDC:
                 movea.l (sp)+,a1
                 clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 trap    #VINT_FUNCTIONS
-                dc.w VINTS_REMOVE
+                dc.w VINTS_REMovE
                 dc.l VInt_PerformPortraitBlinking
                 move.w  statusWindowSlot(a6),d0
                 move.w  #$2001,d1
@@ -188,39 +205,41 @@ loc_11DDC:
                 move.w  #$F80B,d1
                 jsr     (MoveWindowWithSfx).w
                 move.w  portraitIndex(a6),d0
-                blt.s   loc_11E40
+                blt.s   @loc_11
                 move.w  portraitWindowSlot(a6),d0
                 move.w  #$F8F6,d1
                 jsr     (MoveWindowWithSfx).w
-loc_11E40:
-                
+@loc_11:
+            if (EXTENDED_STATUS=0)
+                ; Skip the gold window if displaying resistance and prowess
                 move.w  member(a6),d0
                 tst.b   d0
-                blt.s   loc_11E54
+                blt.s   @loc_12
                 move.w  goldWindowSlot(a6),d0
                 move.w  #$F81C,d1
                 jsr     (MoveWindowWithSfx).w
-loc_11E54:
+            endif
+@loc_12:
                 
                 clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 jsr     (WaitForVInt).w
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
-                bne.s   loc_11E94
+                checkSavedByte #NOT_CURRENTLY_IN_BAttLE, CURRENT_BAttLE
+                bne.s   @loc_16
                 clr.w   d0
                 checkSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
-                bne.s   loc_11E74
-                jsr     j_GetAllyMapsprite
-                bra.s   loc_11E82
-loc_11E74:
+                bne.s   @loc_13
+                jsr     GetAllyMapsprite
+                bra.s   @loc_15
+@loc_13:
                 
                 checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 bne.s   @Raft
                 
                 move.w   #MAPSPRITE_CARAVAN,d4
-                bra.s   loc_11E82
+                bra.s   @loc_15
 @Raft:          move.w   #MAPSPRITE_RAFT,d4
                 
-loc_11E82:
+@loc_15:
                 
                 clr.w   d0
                 clr.w   d1
@@ -228,26 +247,29 @@ loc_11E82:
                 moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
-                bra.s   loc_11EBA
-loc_11E94:
+                bra.s   @loc_17
+@loc_16:
                 
                 move.w  member(a6),d0
-                jsr     j_GetCurrentHp
+                jsr     GetCurrentHp
                 tst.w   d1
-                bne.s   loc_11EBA
+                bne.s   @loc_17
                 clr.w   d0
-                jsr     j_GetAllyMapsprite
+                jsr     GetAllyMapsprite
                 clr.w   d0
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d1
                 moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
-loc_11EBA:
+@loc_17:
                 
                 jsr     (WaitForWindowMovementEnd).w
+            if (EXTENDED_STATUS=0)
+                ; Skip the gold window if displaying resistance and prowess
                 move.w  goldWindowSlot(a6),d0
                 jsr     (DeleteWindow).w
+            endif
                 move.w  kdWindowSlot(a6),d0
                 jsr     (DeleteWindow).w
                 move.w  portraitWindowSlot(a6),d0
@@ -336,23 +358,28 @@ LoadMemberScreenWindowLayouts:
                 adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
                 move.w  member(a6),d0
                 tst.b   d0
-                blt.s   @CheckDebugMode ; character index is negative (an enemy), so do not display kills
+                bmi.s   @CheckDebugMode ; do not display kills or defeats for enemies
                 
                 ; Write kills and defeats
-                jsr     j_GetKills
+                jsr     GetKills
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #WINDOW_MEMBER_KD_TEXT_KILLS_LENGTH,d7
                 bsr.w   WriteTilesFromNumber
                 adda.w  #WINDOW_MEMBER_KD_TEXT_DEFEATS_OFFSET,a1
                 move.w  member(a6),d0
-                jsr     j_GetDefeats
+                jsr     GetDefeats
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #WINDOW_MEMBER_KD_TEXT_DEFEATS_LENGTH,d7
                 bsr.w   WriteTilesFromNumber
 @CheckDebugMode:
                 
+            if (EXTENDED_STATUS=1)
+                bsr.w   WriteProwessIndicatorsAndChances
+            endif
+                
+                ; Check debug mode toggle
                 tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   @CheckPortrait
                 
@@ -399,27 +426,115 @@ LoadMemberScreenWindowLayouts:
                 jsr     (GetWindowTileAddress).w
                 move.w  #160,d7
                 jsr     (CopyBytes).w   
+            if (EXTENDED_STATUS=0)
+                ; Skip the gold window if displaying resistance and prowess
                 lea     layout_GoldWindow(pc), a0
                 move.w  goldWindowSlot(a6),d0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #64,d7
                 jsr     (CopyBytes).w   
-                adda.w  #$22,a1 
-                jsr     j_GetGold
+                adda.w  #34,a1 
+                jsr     GetGold
                 move.l  d1,d0
                 moveq   #6,d7
                 bsr.w   WriteTilesFromNumber
+            endif
 @Return:
                 
                 rts
 
     ; End of function LoadMemberScreenWindowLayouts
 
-aNA:            dc.b 'N/A',0
 
-                module
+; =============== S U B R O U T I N E =======================================
+
+
+WriteProwessIndicatorsAndChances:
                 
+                ; Write CRT indicator and chance
+                adda.w  #WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_INDICATOR,a1 ; offset from current position to CRT type indicator
+                move.w  member(a6),d0
+                jsr     GetCurrentProwess
+                move.w  d1,currentProwess(a6)
+                
+                ; Is 150% damage critical?
+                andi.w  #PROWESS_MASK_CRITICAL,d1
+                add.w   d1,d1
+                lea     table_CriticalHitDefinitions,a0
+                move.b  1(a0,d1.w),d1 ; get damage factor
+                subq.w  #1,d1
+                ble.s   @WriteAilmentTiles
+                
+                ; Write enhanced damage CRT indicator
+                move.w  #VDPTILE_PLUS_SIGN|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+@WriteAilmentTiles:
+                
+                addq.w  #2,a1 ; advance one tile
+                move.w  currentProwess(a6),d1
+                andi.w  #PROWESS_MASK_CRITICAL,d1
+                cmpi.w  #PROWESS_INFLICT_AILMENTS_START,d1
+                blo.s   @WriteCriticalChance
+                
+                ; Write ailment CRT indicator
+                subi.w  #PROWESS_INFLICT_AILMENTS_START,d1
+                add.w   d1,d1
+                move.l  table_CriticalAilmentIndicators(pc,d1.w),(a1)
+@WriteCriticalChance:
+                
+                ; Write CRT chance
+                adda.w  #WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_CHANCE,a1 ; offset from current position to CRT chance denominator
+                moveq   #2,d7 ; write two digits
+                move.w  currentProwess(a6),d1
+                andi.w  #PROWESS_MASK_CRITICAL,d1
+                add.w   d1,d1
+                move.b  (a0,d1.w),d1 ; get chance denominator
+                move.w  d1,d0
+                ext.l   d0
+                bsr.w   WriteTilesFromNumber
+
+                ; Write DBL chance
+                adda.w  #WINDOW_MEMBER_KD_OFFSET_TO_DOUBLE_CHANCE,a1 ; offset from current position to DBL chance denominator
+                moveq   #2,d7 ; write two digits
+                move.w  currentProwess(a6),d1
+                lsr.b   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d1
+                andi.w  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d1
+                move.b  table_DoubleAndCounterChanceDenominators(pc,d1.w),d1
+                move.w  d1,d0
+                ext.l   d0
+                bsr.w   WriteTilesFromNumber
+                
+                ; Write CTR chance
+                adda.w  #WINDOW_MEMBER_KD_OFFSET_TO_COUNTER_CHANCE,a1 ; offset from current position to DBL chance denominator
+                moveq   #2,d7 ; write two digits
+                move.w  currentProwess(a6),d1
+                lsr.b   #PROWESS_LOWER_COUNTER_SHIFT_COUNT,d1
+                andi.w  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d1
+                move.b  table_DoubleAndCounterChanceDenominators(pc,d1.w),d1
+                move.w  d1,d0
+                ext.l   d0
+                bra.w   WriteTilesFromNumber
+
+    ; End of function WriteProwessIndicatorsAndChances
+
+aNA:            dc.b 'N/A',0
+                
+table_CriticalAilmentIndicators:
+                dc.l VDPTILES_STATUSEFFECT_POISON
+                dc.l VDPTILES_STATUSEFFECT_SLEEP
+                dc.l VDPTILES_STATUSEFFECT_STUN
+                dc.l VDPTILES_STATUSEFFECT_MUDDLE
+                dc.l VDPTILES_STATUSEFFECT_SLOW
+                dc.l VDPTILES_STATUSEFFECT_CURSE
+                dc.l VDPTILES_STATUSEFFECT_SILENCE
+                
+table_DoubleAndCounterChanceDenominators:
+                dc.b 32, 16, 8, 4
+                
+                module
+; ---------------------------------------------------------------------------
+
+
 @writeMemberStatValue: macro
             if (FULL_CLASS_NAMES=1)
                 bsr.s   WriteMemberStatValue
@@ -442,37 +557,36 @@ aNA:            dc.b 'N/A',0
 
 BuildMemberStatusWindow:
                 
+currentResistance = -10 ; used if EXTENDED_STATUS=1
+promotionClassType = -8 ; 
 windowTilesAddress = -6
 member = -2
-
-@OFFSET_FULLCLASSNAME: equ 88
                 
                 movem.l d2-d5/a2,-(sp)
-                link    a6,#-6
+                link    a6,#-10
                 move.w  d0,member(a6)
                 move.l  a1,windowTilesAddress(a6)
                 
                 ; Copy window layout
                 getPointer p_layout_MemberStatusWindow, a0
             if (FULL_CLASS_NAMES=1)
-                move.w  #126,d7     ; window layout head bytesize
+                move.w  #WINDOW_MEMBERSTATUS_LAYOUT_HEAD_BYTESIZE,d7 ; window layout head bytesize
                 jsr     (CopyBytes).w
                 adda.w  d7,a0
                 adda.w  d7,a1
                 tst.b   d0
                 bmi.s   @CopyLayoutBody
                 suba.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a0
-@CopyLayoutBody:move.w  #336,d7     ; window layout body bytesize
+@CopyLayoutBody:move.w  #WINDOW_MEMBERSTATUS_LAYOUT_BODY_BYTESIZE,d7 ; window layout body bytesize
                 jsr     (CopyBytes).w
                 adda.w  d7,a0
                 adda.w  d7,a1
                 tst.b   d0
                 bmi.s   @CopyLayoutTail
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a0
-@CopyLayoutTail:move.w  #630,d7     ; window layout tail bytesize
+@CopyLayoutTail:move.w  #WINDOW_MEMBERSTATUS_LAYOUT_TAIL_BYTESIZE,d7 ; window layout tail bytesize
                 jsr     (CopyBytes).w
             else
-                getPointer p_layout_MemberStatusWindow, a0
                 move.w  #WINDOW_MEMBERSTATUS_LAYOUT_BYTESIZE,d7
                 jsr     (CopyBytes).w
             endif
@@ -489,7 +603,7 @@ member = -2
                 tst.b   d0
                 bmi.s   @AddStatusEffectTiles       ; skip class name if enemy
                 movea.l windowTilesAddress(a6),a1
-                adda.w  #@OFFSET_FULLCLASSNAME,a1   ; full class name offset
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_FULLCLASSNAME,a1   ; full class name offset
                 jsr     GetClassAndFullName             ; write full class name on single line
                 moveq   #0,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
@@ -559,9 +673,9 @@ member = -2
                 
 @Attack:        ; Attack
                 move.w  d1,d2
-                andi.w  #STATUSEFFECT_ATTACK,d2
+                andi.w  #STATUSEFFECT_AttACK,d2
                 beq.s   @Boost
-                move.l  #VDPTILES_STATUSEFFECT_ATTACK,d0
+                move.l  #VDPTILES_STATUSEFFECT_AttACK,d0
                 bsr.w   WriteStatusEffectTiles
                 
 @Boost:         ; Boost
@@ -579,31 +693,42 @@ member = -2
                 bsr.w   WriteStatusEffectTiles
                 
 @WriteStatValues:
+            if (EXTENDED_STATUS=1)
+                ; Write Promotion indicator
                 move.w  member(a6),d0
+                jsr     GetClassType
+                move.b  d1,promotionClassType(a6)
+                beq.s   @WriteHp
+                
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_PROMOTION_INDICATOR,a1
+                move.w  #VDPTILE_PLUS_SIGN|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+            endif
                 
                 ; Current HP
-                jsr     GetCurrentHP
+@WriteHp:       move.w  member(a6),d0
+                jsr     GetCurrentHp
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_CURRENT_HP,a1
                 @writeMemberStatValue
                 
                 ; Max HP
                 move.w  member(a6),d0
-                jsr     GetMaxHP
+                jsr     GetMaxHp
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_MAX_HP,a1
                 @writeMemberStatValue
                 
                 ; Current MP
                 move.w  member(a6),d0
-                jsr     GetCurrentMP
+                jsr     GetCurrentMp
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_CURRENT_MP,a1
                 @writeMemberStatValue
                 
                 ; Max MP
                 move.w  member(a6),d0
-                jsr     GetMaxMP
+                jsr     GetMaxMp
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_MAX_MP,a1
                 @writeMemberStatValue
@@ -615,21 +740,31 @@ member = -2
                 bmi.s   @EnemyLv
             endif
                 jsr     GetCurrentLevel
-                movea.l windowTilesAddress(a6),a1
+            if (EXTENDED_STATUS=1)
+                ; Subtract 20 levels from displayed value for enemies if they possess the enhanced spell power property
+                tst.b   d0
+                bpl.s   @WriteLv
+                
+                tst.b   promotionClassType(a6)
+                beq.s   @WriteLv
+                
+                subi.w  #CHAR_CLASS_EXTRALEVEL,d1
+            endif
+@WriteLv:       movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_LV,a1
                 @writeMemberLvOrExpValue
                 
-                ; EXP
+                ; Exp
                 move.w  member(a6),d0
             if (SHOW_ENEMY_LEVEL=1)
                 tst.b   d0
                 bmi.s   @EnemyExp
             endif
-                jsr     GetCurrentEXP
+                jsr     GetCurrentExp
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_EXP,a1
                 @writeMemberLvOrExpValue
-                bra.s   @ATT
+                bra.s   @Att
 ; ---------------------------------------------------------------------------
 
 WriteMemberLvOrExpValue:     
@@ -651,6 +786,7 @@ WriteEnemyLvOrExp:
                 lea     aNA(pc), a0     
                 moveq   #WINDOW_MEMBERSTATUS_NA_STRING_LENGTH,d7
                 bra.w   WriteTilesFromAsciiWithRegularFont
+                
 ; ---------------------------------------------------------------------------
 
 @EnemyLv:       
@@ -663,34 +799,38 @@ WriteEnemyLvOrExp:
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_EXP,a1
                 bsr.s   WriteEnemyLvOrExp
                 
-@ATT:           ; ATT
+@Att:           ; Att
                 move.w  member(a6),d0
-                jsr     GetCurrentATT
+                jsr     GetCurrentAtt
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ATT,a1
                 @writeMemberStatValue
                 
-                ; DEF
+                ; Def
                 move.w  member(a6),d0
-                jsr     GetCurrentDEF
+                jsr     GetCurrentDef
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_DEF,a1
                 @writeMemberStatValue
                 
-                ; AGI
+                ; Agi
                 move.w  member(a6),d0
-                jsr     GetCurrentAGI
-                andi.w  #DISPLAYED_AGI_VALUE_MASK,d1
+                jsr     GetCurrentAgi
+                andi.w  #DISPLAYED_Agi_VALUE_MASK,d1
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_AGI,a1
                 @writeMemberStatValue
                 
-                ; MOV
+                ; Mov
                 move.w  member(a6),d0
-                jsr     GetCurrentMOV
+                jsr     GetCurrentMov
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_MOV,a1
                 @writeMemberStatValue
+                
+            if (EXTENDED_STATUS=1)
+                bsr.w   WriteResistanceIndicatorsAndMovetypeName
+            endif
                 
                 ; Write MAGIC and ITEM sections
                 ;   D3 = current icon VDP tile
@@ -715,7 +855,7 @@ WriteEnemyLvOrExp:
             if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
                 ; Do not display spell that is not affected by silence
                 jsr     FindSpellDefAddress
-                btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
+                btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDef_OFFSET_PROPS(a0)
                 beq.w   @NextSpell      ; skip if spell is not affected by silence
             endif
                 
@@ -824,7 +964,7 @@ WriteEnemyLvOrExp:
                 beq.s   @CleanIconCorners
                 
                 getPointer p_Icons, a0
-            if (EXPANDED_ITEMS_AND_SPELLS=1)
+            if (ExpANDED_ITEMS_AND_SPELLS=1)
                 adda.l  #ICONS_OFFSET_CRACKS,a0
             else
                 lea     ICONS_OFFSET_CRACKS(a0),a0
@@ -888,8 +1028,94 @@ WriteEnemyLvOrExp:
                 rts
 
     ; End of function BuildMemberStatsWindow
+                
+                
+; =============== S U B R O U T I N E =======================================
+
+WriteResistanceIndicatorsAndMovetypeName:
+                
+                ; Write resistance indicators
+                move.w  member(a6),d0
+                jsr     GetCurrentResistance
+                
+                ; Wind
+                move.w  d1,currentResistance(a6)
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_WIND,a1
+                moveq   #SPELLELEMENT_WIND,d2
+                bsr.s   WriteResistanceIndicatorTiles
+                
+                ; Lightning
+                move.w  currentResistance(a6),d1
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_LIGHTNING,a1
+                moveq   #SPELLELEMENT_LIGHTNING,d2
+                bsr.s   WriteResistanceIndicatorTiles
+                
+                ; Ice
+                move.w  currentResistance(a6),d1
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ICE,a1
+                moveq   #SPELLELEMENT_ICE,d2
+                bsr.s   WriteResistanceIndicatorTiles
+                
+                ; Fire
+                move.w  currentResistance(a6),d1
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_FIRE,a1
+                moveq   #SPELLELEMENT_FIRE,d2
+                bsr.s   WriteResistanceIndicatorTiles
+                
+                ; Status
+                move.w  currentResistance(a6),d1
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_STATUS,a1
+                moveq   #SPELLELEMENT_STATUS,d2
+                bsr.s   WriteResistanceIndicatorTiles
+                
+                ; Hidden
+                move.w  currentResistance(a6),d1
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_HIDDEN,a1
+                moveq   #SPELLELEMENT_UNUSED2,d2
+                bsr.s   WriteResistanceIndicatorTiles
+                
+                ; Write move type name
+                move.w  member(a6),d0
+                jsr     GetMoveType
+                subq.w  #1,d1
+                bmi.s   @Return
+                
+                movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_MOVETYPE_NAME,a1
+                lea     table_MoveTypeNames(pc),a0
+                jsr     FindName
+                moveq   #-42,d1
+                bra.w   WriteTilesFromAsciiWithRegularFont
+
+    ; End of function WriteResistanceIndicatorsAndMovetypeName
 
 
+; =============== S U B R O U T I N E =======================================
+
+WriteResistanceIndicatorTiles:
+                ror.w   d2,d1
+                andi.w  #RESISTANCEENTRY_LOWERMASK_SETTING,d1
+                addq.w  #1,d1
+                
+                ; Is a status infliction element?
+                cmpi.w  #SPELLELEMENT_UNUSED2,d2
+                blo.s   @loc
+                
+                andi.w  #%11,d1
+@loc:           lea     table_ResistanceIndicators(pc),a0
+                jsr     FindName
+                moveq   #-42,d1
+                bra.w   WriteTilesFromAsciiWithRegularFont
+
+    ; End of function WriteResistanceIndicatorTiles
+                
+                
 ; =============== S U B R O U T I N E =======================================
 
 CopyMemberScreenIconsToVdpTileOrder:
@@ -978,5 +1204,30 @@ aNothing_0:     dc.b '\Nothing',0
 aEquipped_0:    dc.b '\Equipped',0
 aNothing_1:     dc.b '\Nothing',0
 aJewel:         dc.b 'JEWEL',0
+
+            if (EXTENDED_STATUS=1)
+table_ResistanceIndicators:
+                defineName "* " ; immunity
+                defineName "  " ; no resistance
+                defineName "+ " ; minor resistance
+                defineName "++" ; major resistance
+                defineName "- " ; weakness
+                
+table_MoveTypeNames:
+                className "Regular"                 ; regular
+                className "Centaur"                 ; centaur
+                className "Stealth"                 ; stealth
+                className "Machine", 13, "Archer"   ; brass gunner
+                className "Flying", 13, "High"      ; flying
+                className "Flying", 13, "Low"       ; hovering
+                className "Aquatic"                 ; aquatic
+                className "Archer"                  ; archer
+                className "Centaur", 13, "Archer"   ; centaur archer
+                className "Stealth", 13, "Archer"   ; stealth archer
+                className "Mage"                    ; mage
+                className "Healer"                  ; healer
+            endif
+
+tiles_ElementIcons: incbin "data\graphics\tech\elementtiles-standard.bin"
 
                 modend

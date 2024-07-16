@@ -37,8 +37,12 @@
                 includeIfVanilla "code\common\menus\getcombatantportrait.asm"    ; Combatant portrait index getter function
                 include "data\graphics\tech\windowborder\entries.asm"    ; Windows border compressed tiles
                 include "data\graphics\tech\windowlayouts\portraitwindowlayout.asm"    ; Portrait window layout
+            if (STANDARD_BUILD&EXTENDED_STATUS=1)
+                include "data\graphics\tech\windowlayouts\allykilldefeatwindowlayout-menuenhancements.asm"
+            else
                 include "data\graphics\tech\windowlayouts\allykilldefeatwindowlayout.asm"    ; Member screen kills and defeat window layout
                 include "data\graphics\tech\windowlayouts\goldwindowlayout.asm"    ; Member screen gold window layout
+            endif
                 include "code\common\menus\minimapscreen.asm"    ; Menu engine, part 5 : Minimap screen functions
                 include "code\common\menus\endingkiss.asm"    ; Ending kiss sequence function
                 includeIfStandard "code\specialscreens\endkiss\endkissfunctions_0.asm"    ; End kiss function
