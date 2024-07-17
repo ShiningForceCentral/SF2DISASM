@@ -2413,7 +2413,13 @@ WINDOW_BATTLEEQUIP_SIZE: equ $A09
 
 ; enum Window_Gold
 WINDOW_GOLD_SIZE: equ $904
-WINDOW_GOLD_DEST: equ $2017
+WINDOW_GOLD_DEST: equ $1617
+WINDOW_GOLD_SOURCE: equ $2017
+
+    if (EXTENDED_STATUS=1)
+WINDOW_FIELD_GOLD_DEST: equ $1601
+WINDOW_FIELD_GOLD_SOURCE: equ $2001
+    endif
 
 ; ---------------------------------------------------------------------------
 
@@ -2702,18 +2708,6 @@ WINDOW_SHOP_ITEM_NAME_AND_PRICE_SIZE: equ $A05
 WINDOW_SHOP_INVENTORY_SIZE: equ $1B06
 WINDOW_SHOP_GOLD_DEST: equ $2017
 WINDOW_SHOP_ITEM_NAME_AND_PRICE_DEST: equ $F606
-
-; ---------------------------------------------------------------------------
-
-; enum Window_Gold
-WINDOW_GOLD_SIZE: equ $904
-WINDOW_GOLD_DEST: equ $2017
-
-; ---------------------------------------------------------------------------
-
-; enum Window_HeadquartersName
-WINDOW_TACTICAL_BASE_NAME_SIZE: equ $A03
-WINDOW_TACTICAL_BASE_NAME_DEST: equ $F60B
 
 ; ---------------------------------------------------------------------------
 

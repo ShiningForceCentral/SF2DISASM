@@ -46,7 +46,8 @@
                 include "code\common\menus\minimapscreen.asm"    ; Menu engine, part 5 : Minimap screen functions
                 include "code\common\menus\endingkiss.asm"    ; Ending kiss sequence function
                 includeIfStandard "code\specialscreens\endkiss\endkissfunctions_0.asm"    ; End kiss function
-                include "code\common\menus\goldwindow.asm"    ; Gold window functions
+                includeIfStandard "code\common\menus\goldwindow-standard.asm"
+                includeIfVanilla "code\common\menus\goldwindow.asm"    ; Gold window functions
                 include "code\common\menus\memberslistscreen.asm"    ; Members list screen functions
                 include "code\common\menus\shopscreen.asm"    ; Menu engine, part 6 : Shop screen functions
 tiles_PriceTagBlank:

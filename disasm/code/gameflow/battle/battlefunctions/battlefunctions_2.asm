@@ -1357,12 +1357,17 @@ BattlefieldMenu:
                 
                 dbf     d7,@Loop
 @StartMenu:
-                
+            if (EXTENDED_STATUS=1)
+                jsr     OpenGoldWindowInFieldMenu
+            endif
                 lea     (InitialStack).w,a0
                 moveq   #0,d0
                 moveq   #0,d1
                 moveq   #MENU_BATTLEFIELD,d2
                 jsr     j_ExecuteDiamondMenu
+            if (EXTENDED_STATUS=1)
+                jsr     CloseGoldWindowInFieldMenu
+            endif
                 cmpi.w  #-1,d0
                 beq.w   BattlefieldMenu
                 tst.w   d0
@@ -1402,7 +1407,11 @@ BattlefieldMenu:
 @SuspendGame:
                 
                 checkSavedByte #BATTLE_VERSUS_ALL_BOSSES, CURRENT_BATTLE
+            if (STANDARD_BUILD=1)
+                beq.w   @StartMenu
+            else
                 beq.s   @StartMenu
+            endif
                 txt     0               ; "The game will be suspended.{N}OK?"
                 jsr     j_alt_YesNoPrompt
                 clsTxt

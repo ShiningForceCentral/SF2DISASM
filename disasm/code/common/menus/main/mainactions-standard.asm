@@ -21,12 +21,18 @@ FieldMenu:
                 module
                 movem.l d0-d6/a0,-(sp)
                 link    a6,#-22
-                
-@StartMain:     moveq   #0,d0           ; initial choice : up
+@StartMain:     
+            if (EXTENDED_STATUS=1)
+                jsr     OpenGoldWindowInFieldMenu
+            endif
+                moveq   #0,d0           ; initial choice : up
                 moveq   #0,d1           ; animate-in from bottom
                 moveq   #MENU_FIELD,d2
                 lea     (InitialStack).w,a0
                 jsr     ExecuteDiamondMenu
+            if (EXTENDED_STATUS=1)
+                jsr     CloseGoldWindowInFieldMenu
+            endif
                 tst.w   d0
                 bmi.s   @ExitMain
                 
