@@ -51,13 +51,14 @@ FIX_ELIS_DIALOGUE_ASSIGNMENT:       equ 1       ; A line of dialogue used during
 BOWIE_CAN_DIE:                      equ 0       ; Bowie's death does not cause defeat.
 BOWIE_CAN_LEAVE_BATTLE_PARTY:       equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
 CAPITALIZED_CHARACTER_NAMES:        equ 1       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
-CARAVAN_IN_TOWER:                   equ 0       ; Add access to Caravan before tower climb battle.
+CARAVAN_IN_TOWER:                   equ 1       ; Add access to Caravan before tower climb battle.
 CUTSCENE_PROTECTION:                equ 1       ; Prevent game from freezing if dead character is needed for scene after leader death (as Slade for battle 5.)
-MINIATURES_SHOP:                    equ 0       ; Place a shopworker on the desktop and floor of the Miniatures Room.
+MINIATURES_SHOP:                    equ 1       ; Place a shopworker on the desktop and floor of the Miniatures Room.
 NO_AI_JARO:                         equ 0       ; 
 NO_AI_PETER:                        equ 0       ; 
 NO_DARKNESS_IN_CAVES:               equ 0       ; The darkness gimmick in caves is disabled.
-NO_RANDOM_BATTLES:                  equ 0       ; 0 = Battles    1 = No Battles
+NO_RANDOM_BATTLES:                  equ 1       ; 0 = Battles    1 = No Battles
+RECRUIT_ALL_CREED_CHARACTERS:       equ 1       ; lets you recruit all four of them at any time after leaving Floor World.
 SKIP_SEGA_LOGO:                     equ 0
 SKIP_GAME_INTRO:                    equ 0
 SKIP_TITLE_SCREEN:                  equ 0
@@ -77,8 +78,8 @@ MUSCLE_MAGIC_STAT:                  equ 5       ; 0 = Max HP, 1 = Current HP, 2 
 PER_LEVEL_CHURCH_COST:              equ 0       ; Raise/Cure cost based on ally level (double cost per promo level.)
 PERCENT_POISON_DAMAGE:              equ 0       ; 1-100 = n% of max HP
 PLAYER_DEFEAT_IS_GAME_OVER:         equ 0       ; On player defeat, rather than halve the gold and return to town, reset the game.
-SEND_DESTROYED_ITEMS_TO_DEALS:      equ 0       ; Add item that was destroyed upon usage to shop deals if rare and if not a consumable.
-SEND_DROPPED_ITEMS_TO_CARAVAN:      equ 0       ; If character inventory is full, add dropped item to the Caravan instead of shop deals, regardless of rarity. If the Caravan itself is full, then drops follow the usual routine: go to deals if rare, or become lost completely if not rare.
+SEND_DESTROYED_ITEMS_TO_DEALS:      equ 1       ; Add item that was destroyed upon usage to shop deals if rare and if not a consumable.
+SEND_DROPPED_ITEMS_TO_CARAVAN:      equ 1       ; If character inventory is full, add dropped item to the Caravan instead of shop deals, regardless of rarity. If the Caravan itself is full, then drops follow the usual routine: go to deals if rare, or become lost completely if not rare.
 SPELLS_REFRESH_STATUS_COUNTERS:     equ 0       ; Boost, Slow, and Attack spells refresh status counters instead of failing, as long as the counter is increased by at least 1. Battle messages display the actual regained stats values.
 TRADEABLE_ITEMS:                    equ 0       ; Allow trading items in battle without full inventory.
 TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock damage with difficulty.   Normal:100%  Hard:125%  Super: 150%  Ouch: 175%
@@ -89,7 +90,7 @@ CHAPTER_SCREEN:                     equ 0       ; Patch implementation with temp
 
 
 ; AI enhancements
-HEALER_AI_ENHANCEMENTS:             equ 1       ; See SF2_AI_Healing_Rewrite.txt for more details.
+HEALER_AI_ENHANCEMENTS:             equ 0       ; See SF2_AI_Healing_Rewrite.txt for more details.
 SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options enemies can use.
 
 
