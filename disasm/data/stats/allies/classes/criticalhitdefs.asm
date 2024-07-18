@@ -4,6 +4,8 @@
 table_CriticalHitDefinitions:
                 
 ; Syntax        dc.b chance (1/n), damageFactor (additionalDamage = damage/2^n)
+;                
+;               damageFactor1 = +50%, and damageFactor2 = +25% in vanilla, but the inverse is true by default in the standard build.
                 
                 dc.b 32, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/32 chance to inflict +50% damage
                 dc.b 32, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/32 chance to inflict +25% damage

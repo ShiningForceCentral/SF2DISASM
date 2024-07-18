@@ -21,7 +21,7 @@ BuildMemberScreen:
                 module
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a2,-(sp)
-                link    a6,#-16
+                link    a6,#-12
                 move.w  d0,member(a6)
                 clr.b   ((PORTRAIT_IS_MIRRORED_TOGGLE-$1000000)).w
                 clr.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
@@ -55,10 +55,9 @@ BuildMemberScreen:
             if (VANILLA_BUILD=1)
                 bsr.w   GetAllyPortrait 
             endif
-                bsr.w   LoadPortrait    
-@loc_1:
+                bsr.w   LoadPortrait
                 
-                move.w  statusWindowSlot(a6),d0
+@loc_1:         move.w  statusWindowSlot(a6),d0
                 move.w  #WINDOW_MEMBERSTATUS_POSITION,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).w
@@ -67,6 +66,7 @@ BuildMemberScreen:
                 jsr     (MoveWindowWithSfx).w
                 move.w  portraitIndex(a6),d0
                 blt.s   @loc_2
+                
                 move.w  portraitWindowSlot(a6),d0
                 move.w  #WINDOW_MEMBER_PORTRAIT_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
@@ -76,6 +76,7 @@ BuildMemberScreen:
                 move.w  member(a6),d0
                 tst.b   d0
                 blt.s   @loc_3
+                
                 move.w  goldWindowSlot(a6),d0
                 move.w  #WINDOW_MEMBER_GOLD_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
@@ -104,22 +105,21 @@ BuildMemberScreen:
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 checkSavedByte #NOT_CURRENTLY_IN_BAttLE, CURRENT_BAttLE
                 bne.s   @loc_4
+                
                 clr.w   d0
                 bra.s   @loc_6
-@loc_4:
                 
-                move.w  member(a6),d0
+@loc_4:         move.w  member(a6),d0
                 jsr     GetCurrentHp
                 tst.w   d1
                 bne.s   @loc_5
+                
                 clr.w   d0
                 bra.s   @loc_6
-@loc_5:
                 
-                jsr     GetEntityIndexForCombatant
-@loc_6:
-                
-                move.l  a1,-(sp)
+                ; Move mapsprite to inside the K/D window
+@loc_5:         jsr     GetEntityIndexForCombatant
+@loc_6:         move.l  a1,-(sp)
                 move.w  d0,d1
                 addi.w  #16,d1
                 lea     ((byte_FFAFA0-$1000000)).w,a1
@@ -133,6 +133,7 @@ BuildMemberScreen:
                 move.w  #1856,d1
                 tst.b   ((MAP_AREA_LAYER_TYPE-$1000000)).w
                 bne.s   @MapOnForeground
+                
                 add.w   ((VIEW_PLANE_B_PIXEL_X-$1000000)).w,d0
                 add.w   ((VIEW_PLANE_B_PIXEL_Y-$1000000)).w,d1
                 bra.s   @loc_8
@@ -140,9 +141,8 @@ BuildMemberScreen:
                 
                 add.w   ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 add.w   ((VIEW_PLANE_A_PIXEL_Y-$1000000)).w,d1
-@loc_8:
                 
-                move.b  ENTITYDEF_OFFSET_LAYER(a0),d7
+@loc_8:         move.b  ENTITYDEF_OFFSET_LAYER(a0),d7
                 move.w  d7,-(sp)
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),-(sp)
                 move.w  ENTITYDEF_OFFSET_YDEST(a0),-(sp)
@@ -155,6 +155,7 @@ BuildMemberScreen:
                 andi.b  #$7F,ENTITYDEF_OFFSET_FLAGS_B(a0) 
                 checkSavedByte #NOT_CURRENTLY_IN_BAttLE, CURRENT_BAttLE
                 bne.s   @loc_9
+                
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 move.w  member(a6),d0
                 jsr     GetAllyMapsprite
@@ -164,12 +165,12 @@ BuildMemberScreen:
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
                 bra.s   @WaitForInput_Loop
-@loc_9:
                 
-                move.w  member(a6),d0
+@loc_9:         move.w  member(a6),d0
                 jsr     GetCurrentHp
                 tst.w   d1
                 bne.s   @WaitForInput_Loop
+                
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 clr.w   d0
                 moveq   #DOWN,d1
@@ -181,6 +182,7 @@ BuildMemberScreen:
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
                 andi.b  #INPUT_B|INPUT_C|INPUT_A,d0
                 beq.s   @WaitForInput_Loop
+                
                 move.w  (sp)+,ENTITYDEF_OFFSET_FACING(a0)
                 move.w  (sp)+,d1
                 move.w  (sp)+,d0
@@ -195,7 +197,7 @@ BuildMemberScreen:
                 movea.l (sp)+,a1
                 clr.b   ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 trap    #VINT_FUNCTIONS
-                dc.w VINTS_REMovE
+                dc.w VINTS_REMOVE
                 dc.l VInt_PerformPortraitBlinking
                 move.w  statusWindowSlot(a6),d0
                 move.w  #$2001,d1
@@ -206,6 +208,7 @@ BuildMemberScreen:
                 jsr     (MoveWindowWithSfx).w
                 move.w  portraitIndex(a6),d0
                 blt.s   @loc_11
+                
                 move.w  portraitWindowSlot(a6),d0
                 move.w  #$F8F6,d1
                 jsr     (MoveWindowWithSfx).w
@@ -215,45 +218,43 @@ BuildMemberScreen:
                 move.w  member(a6),d0
                 tst.b   d0
                 blt.s   @loc_12
+                
                 move.w  goldWindowSlot(a6),d0
                 move.w  #$F81C,d1
                 jsr     (MoveWindowWithSfx).w
             endif
-@loc_12:
-                
-                clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
+@loc_12:        clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 jsr     (WaitForVInt).w
                 checkSavedByte #NOT_CURRENTLY_IN_BAttLE, CURRENT_BAttLE
                 bne.s   @loc_16
+                
                 clr.w   d0
                 checkSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
                 bne.s   @loc_13
+                
                 jsr     GetAllyMapsprite
                 bra.s   @loc_15
-@loc_13:
                 
-                checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
+@loc_13:        checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 bne.s   @Raft
                 
                 move.w   #MAPSPRITE_CARAVAN,d4
                 bra.s   @loc_15
+                
 @Raft:          move.w   #MAPSPRITE_RAFT,d4
-                
-@loc_15:
-                
-                clr.w   d0
+@loc_15:        clr.w   d0
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d1
                 moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
                 bra.s   @loc_17
-@loc_16:
                 
-                move.w  member(a6),d0
+@loc_16:        move.w  member(a6),d0
                 jsr     GetCurrentHp
                 tst.w   d1
                 bne.s   @loc_17
+                
                 clr.w   d0
                 jsr     GetAllyMapsprite
                 clr.w   d0
@@ -262,9 +263,7 @@ BuildMemberScreen:
                 moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
-@loc_17:
-                
-                jsr     (WaitForWindowMovementEnd).w
+@loc_17:        jsr     (WaitForWindowMovementEnd).w
             if (EXTENDED_STATUS=0)
                 ; Skip the gold window if displaying resistance and prowess
                 move.w  goldWindowSlot(a6),d0
@@ -298,6 +297,7 @@ WriteStatusEffectTiles:
                 subq.l  #4,a1
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 beq.s   @Return
+                
             if (THREE_DIGITS_STATS|FULL_CLASS_NAMES=1)
                 addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
                 movea.l d3,a1
@@ -305,9 +305,7 @@ WriteStatusEffectTiles:
                 movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #$78,a1
             endif
-@Return:
-                
-                rts
+@Return:        rts
 
     ; End of function WriteStatusEffectTiles
 
@@ -340,22 +338,21 @@ LoadMemberScreenWindowLayouts:
                 bne.s   @SkipJewels         ; skip if anyone other than Bowie
                 move.l  a1,-(sp)
                 adda.w  #26,a1              ; offset into window layout
-                chkFlg  $180            ; Set after Bowie obtains the jewel of light/evil... whichever it is
+                chkFlg  384                 ; Set after Bowie obtains the jewel of light
                 beq.s   @CheckJewelOfEvil
                 move.w  #VDPTILE_JEWEL_OF_LIGHT|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
 @CheckJewelOfEvil:
                 
-                chkFlg  $181            ; Set after Bowie obtains King Galam's jewel
+                chkFlg  385                 ; Set after Bowie obtains the jewel of evil
                 beq.s   @SkipJewelOfEvil
+                
                 adda.w  #2,a1
                 move.w  #VDPTILE_JEWEL_OF_EVIL|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
 @SkipJewelOfEvil:
                 
                 movea.l (sp)+,a1
             endif
-@SkipJewels:
-                
-                adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
+@SkipJewels:    adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
                 move.w  member(a6),d0
                 tst.b   d0
                 bmi.s   @CheckDebugMode ; do not display kills or defeats for enemies
@@ -386,7 +383,7 @@ LoadMemberScreenWindowLayouts:
                 ; Write combatant index inside kills/defeat window in debug mode
                 move.w  kdWindowSlot(a6),d0
                 lea     layout_AllyKillDefeatWindow(pc), a0
-                move.w  #$101,d1
+                move.w  #$101,d1        ; tile coordinates 1,1
                 jsr     (GetWindowTileAddress).w
                 move.w  member(a6),d0   ; get character index from stack
                 lsr.w   #NIBBLE_SHIFT_COUNT,d0
@@ -394,11 +391,10 @@ LoadMemberScreenWindowLayouts:
                 cmpi.w  #10,d0
                 blt.s   @loc_2
                 
-                addi.w  #$C037,d0
+                addi.w  #$C037,d0 ; VDPTILE_NUMBER_7|VDPTILE_PALETTE3|VDPTILE_PRIORITY
                 bra.s   @WriteIndexFirstDigit
-@loc_2:
                 
-                addi.w  #$C030,d0
+@loc_2:         addi.w  #$C030,d0 ; VDPTILE_NUMBER_0|VDPTILE_PALETTE3|VDPTILE_PRIORITY
 @WriteIndexFirstDigit:
                 
                 move.w  d0,(a1)+
@@ -407,17 +403,14 @@ LoadMemberScreenWindowLayouts:
                 cmpi.w  #10,d0
                 blt.s   @loc_4
                 
-                addi.w  #$C037,d0
+                addi.w  #$C037,d0 ; VDPTILE_NUMBER_7|VDPTILE_PALETTE3|VDPTILE_PRIORITY
                 bra.s   @WriteIndexSecondDigit
-@loc_4:
                 
-                addi.w  #$C030,d0
+@loc_4:         addi.w  #$C030,d0 ; VDPTILE_NUMBER_0|VDPTILE_PALETTE3|VDPTILE_PRIORITY
 @WriteIndexSecondDigit:
                 
                 move.w  d0,(a1)+
-@CheckPortrait:
-                
-                move.w  portraitIndex(a6),d0
+@CheckPortrait: move.w  portraitIndex(a6),d0
                 blt.s   @Return         ; return if no portrait to display (and assume that it's an enemy, so skip drawing gold window as well)
                 
                 move.w  portraitWindowSlot(a6),d0
@@ -425,12 +418,13 @@ LoadMemberScreenWindowLayouts:
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #160,d7
-                jsr     (CopyBytes).w   
+                jsr     (CopyBytes).w
+                
             if (EXTENDED_STATUS=0)
                 ; Skip the gold window if displaying resistance and prowess
                 lea     layout_GoldWindow(pc), a0
                 move.w  goldWindowSlot(a6),d0
-                clr.w   d1
+                clr.w   d1              ; tile coordinates 0,0
                 jsr     (GetWindowTileAddress).w
                 move.w  #64,d7
                 jsr     (CopyBytes).w   
@@ -440,9 +434,7 @@ LoadMemberScreenWindowLayouts:
                 moveq   #6,d7
                 bsr.w   WriteTilesFromNumber
             endif
-@Return:
-                
-                rts
+@Return:        rts
 
     ; End of function LoadMemberScreenWindowLayouts
 
@@ -458,13 +450,13 @@ WriteProwessIndicatorsAndChances:
                 jsr     GetCurrentProwess
                 move.w  d1,currentProwess(a6)
                 
-                ; Is 150% damage critical?
+                ; Is 150% or more damage critical?
                 andi.w  #PROWESS_MASK_CRITICAL,d1
                 add.w   d1,d1
                 lea     table_CriticalHitDefinitions,a0
-                move.b  1(a0,d1.w),d1 ; get damage factor
+                move.b  1(a0,d1.w),d1 ; check if damage factor = 1
                 subq.w  #1,d1
-                ble.s   @WriteAilmentTiles
+                bne.s   @WriteAilmentTiles
                 
                 ; Write enhanced damage CRT indicator
                 move.w  #VDPTILE_PLUS_SIGN|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
@@ -478,6 +470,7 @@ WriteProwessIndicatorsAndChances:
                 
                 ; Write ailment CRT indicator
                 subi.w  #PROWESS_INFLICT_AILMENTS_START,d1
+                add.w   d1,d1
                 add.w   d1,d1
                 move.l  table_CriticalAilmentIndicators(pc,d1.w),(a1)
 @WriteCriticalChance:

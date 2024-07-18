@@ -108,7 +108,7 @@ layout_AllyKillDefeatWindow:
                 vdpBaseTile NUMBER_1
                 vdpBaseTile SLASH
                 vdpBaseTile SPACE
-                vdpBaseTile SPACE
+                vdpBaseTile QUESTION_MARK
                 vdpBaseTile V_BORDER|MIRROR
             else
                 vdpBaseTile V_BORDER
@@ -139,7 +139,7 @@ layout_AllyKillDefeatWindow:
                 vdpBaseTile NUMBER_1
                 vdpBaseTile SLASH
                 vdpBaseTile SPACE
-                vdpBaseTile SPACE
+                vdpBaseTile QUESTION_MARK
                 vdpBaseTile V_BORDER|MIRROR
                 
                 vdpBaseTile V_BORDER
@@ -157,7 +157,7 @@ layout_AllyKillDefeatWindow:
                 vdpBaseTile NUMBER_1
                 vdpBaseTile SLASH
                 vdpBaseTile SPACE
-                vdpBaseTile SPACE
+                vdpBaseTile QUESTION_MARK
                 vdpBaseTile V_BORDER|MIRROR
             endif
                 vdpBaseTile CORNER|FLIP
