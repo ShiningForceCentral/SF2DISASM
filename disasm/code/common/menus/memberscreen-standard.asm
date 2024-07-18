@@ -18,7 +18,6 @@ member = -2
 
 BuildMemberScreen:
                 
-                module
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
                 movem.l d0-a2,-(sp)
                 link    a6,#-12
@@ -282,7 +281,6 @@ BuildMemberScreen:
 
     ; End of function BuildMemberScreen
 
-                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -352,12 +350,29 @@ LoadMemberScreenWindowLayouts:
                 
                 movea.l (sp)+,a1
             endif
-@SkipJewels:    adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
+@SkipJewels:    
+            if (EXTENDED_STATUS=1)
+                bsr.w   WriteProwessIndicatorsAndChances
+                addq.w  #2,a1 ; advance one position
+                move.w  member(a6),d0
+                tst.b   d0
+                bpl.s   @WriteKd
+                
+                ; Cut the window short for enemies
+                move.w  kdWindowSlot(a6),d0
+                lea     layout_AllyKillDefeatWindowTailForEnemy(pc), a0
+                move.w  #$C,d1
+                jsr     (GetWindowTileAddress).w ; Get pointer to tile at coordinates d1.w in layout for window d0.w -> a1
+                move.w  #WINDOW_MEMBER_KD_LAYOUT_TAIL_BYTESIZE,d7
+                jsr     (CopyBytes).w
+                bra.s   @CheckDebugMode
+            else
                 move.w  member(a6),d0
                 tst.b   d0
                 bmi.s   @CheckDebugMode ; do not display kills or defeats for enemies
-                
+            endif
                 ; Write kills and defeats
+@WriteKd:       adda.w  #WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET,a1
                 jsr     GetKills
                 move.w  d1,d0
                 ext.l   d0
@@ -371,10 +386,6 @@ LoadMemberScreenWindowLayouts:
                 moveq   #WINDOW_MEMBER_KD_TEXT_DEFEATS_LENGTH,d7
                 bsr.w   WriteTilesFromNumber
 @CheckDebugMode:
-                
-            if (EXTENDED_STATUS=1)
-                bsr.w   WriteProwessIndicatorsAndChances
-            endif
                 
                 ; Check debug mode toggle
                 tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
@@ -445,7 +456,7 @@ LoadMemberScreenWindowLayouts:
 WriteProwessIndicatorsAndChances:
                 
                 ; Write CRT indicator and chance
-                adda.w  #WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_INDICATOR,a1 ; offset from current position to CRT type indicator
+                adda.w  #WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_INDICATOR,a1
                 move.w  member(a6),d0
                 jsr     GetCurrentProwess
                 move.w  d1,currentProwess(a6)
@@ -523,11 +534,20 @@ table_CriticalAilmentIndicators:
                 
 table_DoubleAndCounterChanceDenominators:
                 dc.b 32, 16, 8, 4
+
+; =============== S U B R O U T I N E =======================================
+
+; In: a1 = window tile adress, d0.w = combatant index
+
+BuildMemberStatusWindow:
+                
+currentResistance = -10 ; used if EXTENDED_STATUS=1
+promotionClassType = -8 ; 
+windowTilesAddress = -6
+member = -2
                 
                 module
-; ---------------------------------------------------------------------------
-
-
+                
 @writeMemberStatValue: macro
             if (FULL_CLASS_NAMES=1)
                 bsr.s   WriteMemberStatValue
@@ -543,17 +563,6 @@ table_DoubleAndCounterChanceDenominators:
                 bsr.w   WriteLvOrExpValue
             endif
         endm
-
-; =============== S U B R O U T I N E =======================================
-
-; In: a1 = window tile adress, d0.w = combatant index
-
-BuildMemberStatusWindow:
-                
-currentResistance = -10 ; used if EXTENDED_STATUS=1
-promotionClassType = -8 ; 
-windowTilesAddress = -6
-member = -2
                 
                 movem.l d2-d5/a2,-(sp)
                 link    a6,#-10
@@ -957,7 +966,7 @@ WriteEnemyLvOrExp:
                 beq.s   @CleanIconCorners
                 
                 getPointer p_Icons, a0
-            if (ExpANDED_ITEMS_AND_SPELLS=1)
+            if (EXPANDED_ITEMS_AND_SPELLS=1)
                 adda.l  #ICONS_OFFSET_CRACKS,a0
             else
                 lea     ICONS_OFFSET_CRACKS(a0),a0
@@ -1021,8 +1030,8 @@ WriteEnemyLvOrExp:
                 rts
 
     ; End of function BuildMemberStatsWindow
-                
-                
+
+
 ; =============== S U B R O U T I N E =======================================
 
 WriteResistanceIndicatorsAndMovetypeName:
@@ -1124,10 +1133,11 @@ CopyMemberScreenIconsToVdpTileOrder:
                 addq.w  #1,d3
                 move.w  d3,$56(a1)
                 addq.w  #1,d3
-                rts
+@Return:        rts
 
     ; End of function CopyMemberScreenIconsToVdpTileOrder
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1219,8 +1229,6 @@ table_MoveTypeNames:
                 className "Stealth", 13, "Archer"   ; stealth archer
                 className "Mage"                    ; mage
                 className "Healer"                  ; healer
-            endif
-
+                
 tiles_ElementIcons: incbin "data\graphics\tech\elementtiles-standard.bin"
-
-                modend
+            endif

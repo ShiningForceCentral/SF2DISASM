@@ -2369,7 +2369,7 @@ kdWindowSize = $80C
     if (EXTENDED_STATUS=1)
 kdTextLength = 5
 kdDefeatsOffset = 6
-kdKillsOffset = 100
+kdKillsOffset = 20
 kdLayoutBytesize = 256
 kdWindowSize = $810
     endif
@@ -2390,7 +2390,8 @@ WINDOW_MEMBER_GOLD_DEST: equ $F81C
 WINDOW_MEMBER_PORTRAIT_DEST: equ $F8F6
 
     if (EXTENDED_STATUS=1)
-WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_INDICATOR: equ 26 ; indicates whether critical hits inflict more damage, or an ailment.
+WINDOW_MEMBER_KD_LAYOUT_TAIL_BYTESIZE: equ 64
+WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_INDICATOR: equ 104 ; indicates whether critical hits inflict more damage, or an ailment.
 WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_CHANCE: equ 16
 WINDOW_MEMBER_KD_OFFSET_TO_DOUBLE_CHANCE: equ 28
 WINDOW_MEMBER_KD_OFFSET_TO_COUNTER_CHANCE: equ 28

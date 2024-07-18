@@ -7,6 +7,9 @@ layout_AllyKillDefeatWindow:
                 
 ; Notes: PALETTE3 and PRIORITY bits are always set.
 ;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+
+                module
+                
 @spacerLine: macro
                 vdpBaseTile V_BORDER
                 vdpBaseTile SPACE
@@ -36,15 +39,17 @@ layout_AllyKillDefeatWindow:
                 
 ; 7th line
             if (EXTENDED_STATUS=1)
+                ; "CRT   "
                 vdpBaseTile V_BORDER
-                vdpBaseTile UPPERCASE_K
+                vdpBaseTile UPPERCASE_C
+                vdpBaseTile UPPERCASE_R
+                vdpBaseTile UPPERCASE_T
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile QUESTION_MARK
                 vdpBaseTile V_BORDER|MIRROR
             else
+                ; "KILLS "
                 vdpBaseTile V_BORDER
                 vdpBaseTile UPPERCASE_K
                 vdpBaseTile UPPERCASE_I
@@ -57,15 +62,17 @@ layout_AllyKillDefeatWindow:
                 
 ; 8th line
             if (EXTENDED_STATUS=1)
+                ; "  1/ ?"
                 vdpBaseTile V_BORDER
-                vdpBaseTile UPPERCASE_D
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
-                vdpBaseTile SPACE
+                vdpBaseTile NUMBER_1
+                vdpBaseTile SLASH
                 vdpBaseTile SPACE
                 vdpBaseTile QUESTION_MARK
                 vdpBaseTile V_BORDER|MIRROR
             else
+                ; "     ?"
                 vdpBaseTile V_BORDER
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
@@ -77,19 +84,23 @@ layout_AllyKillDefeatWindow:
             endif
                 
 ; 9th line
+            if (EXTENDED_STATUS=0)
                 @spacerLine
+            endif
                 
 ; 10th line
             if (EXTENDED_STATUS=1)
+                ; "DBL   "
                 vdpBaseTile V_BORDER
-                vdpBaseTile UPPERCASE_C
-                vdpBaseTile UPPERCASE_R
-                vdpBaseTile UPPERCASE_T
+                vdpBaseTile UPPERCASE_D
+                vdpBaseTile UPPERCASE_B
+                vdpBaseTile UPPERCASE_L
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile V_BORDER|MIRROR
             else
+                ; "DEFEAT"
                 vdpBaseTile V_BORDER
                 vdpBaseTile UPPERCASE_D
                 vdpBaseTile UPPERCASE_E
@@ -102,6 +113,7 @@ layout_AllyKillDefeatWindow:
                 
 ; 11th line
             if (EXTENDED_STATUS=1)
+                ; "  1/ ?"
                 vdpBaseTile V_BORDER
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
@@ -111,6 +123,7 @@ layout_AllyKillDefeatWindow:
                 vdpBaseTile QUESTION_MARK
                 vdpBaseTile V_BORDER|MIRROR
             else
+                ; "     ?"
                 vdpBaseTile V_BORDER
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
@@ -122,26 +135,8 @@ layout_AllyKillDefeatWindow:
             endif
                 
 ; 12th line
-            
             if (EXTENDED_STATUS=1)
-                vdpBaseTile V_BORDER
-                vdpBaseTile UPPERCASE_D
-                vdpBaseTile UPPERCASE_B
-                vdpBaseTile UPPERCASE_L
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile V_BORDER|MIRROR
-                
-                vdpBaseTile V_BORDER
-                vdpBaseTile SPACE
-                vdpBaseTile SPACE
-                vdpBaseTile NUMBER_1
-                vdpBaseTile SLASH
-                vdpBaseTile SPACE
-                vdpBaseTile QUESTION_MARK
-                vdpBaseTile V_BORDER|MIRROR
-                
+                ; "CTR   "
                 vdpBaseTile V_BORDER
                 vdpBaseTile UPPERCASE_C
                 vdpBaseTile UPPERCASE_T
@@ -151,6 +146,7 @@ layout_AllyKillDefeatWindow:
                 vdpBaseTile SPACE
                 vdpBaseTile V_BORDER|MIRROR
                 
+; 13th line     "  1/ ?"
                 vdpBaseTile V_BORDER
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
@@ -159,7 +155,33 @@ layout_AllyKillDefeatWindow:
                 vdpBaseTile SPACE
                 vdpBaseTile QUESTION_MARK
                 vdpBaseTile V_BORDER|MIRROR
+                
+; 14th line
+                @spacerLine
+                
+; 15th line     "K    ?"
+                vdpBaseTile V_BORDER
+                vdpBaseTile UPPERCASE_K
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile QUESTION_MARK
+                vdpBaseTile V_BORDER|MIRROR
+                
+; 16th line     "D    ?"
+                vdpBaseTile V_BORDER
+                vdpBaseTile UPPERCASE_D
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile SPACE
+                vdpBaseTile QUESTION_MARK
+                vdpBaseTile V_BORDER|MIRROR
             endif
+layout_AllyKillDefeatWindowTailForEnemy:
+                
+; 14th line
                 vdpBaseTile CORNER|FLIP
                 vdpBaseTile H_BORDER|FLIP
                 vdpBaseTile H_BORDER|FLIP
@@ -168,3 +190,12 @@ layout_AllyKillDefeatWindow:
                 vdpBaseTile H_BORDER|FLIP
                 vdpBaseTile H_BORDER|FLIP
                 vdpBaseTile CORNER|MIRROR|FLIP
+                
+; lines 15-17
+            rept 3
+              rept 8
+                vdpBaseTile 0
+              endr
+            endr
+                
+                modend
