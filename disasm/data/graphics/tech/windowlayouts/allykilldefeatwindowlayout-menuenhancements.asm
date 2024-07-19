@@ -191,11 +191,4 @@ layout_AllyKillDefeatWindowTailForEnemy:
                 vdpBaseTile H_BORDER|FLIP
                 vdpBaseTile CORNER|MIRROR|FLIP
                 
-; lines 15-17
-            rept 3
-              rept 8
-                vdpBaseTile 0
-              endr
-            endr
-                
                 modend

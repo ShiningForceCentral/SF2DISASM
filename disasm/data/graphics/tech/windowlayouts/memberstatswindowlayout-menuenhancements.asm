@@ -296,7 +296,7 @@ layout_MemberStatusWindow_Body:
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
-                vdpBaseTile SPACE ; hidden element (unused #2)
+                vdpBaseTile ELEMENT_HIDDEN ; hidden element (unused)
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE
                 vdpBaseTile SPACE

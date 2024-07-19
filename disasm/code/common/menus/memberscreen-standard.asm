@@ -35,6 +35,15 @@ BuildMemberScreen:
                 addq.w  #1,d0
                 move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 move.w  #WINDOW_MEMBER_KD_SIZE,d0
+            if (EXTENDED_STATUS=1)
+                move.w  member(a6),d2
+                tst.b   d2
+                bpl.s   @CreateKdWindow
+                
+                move.w  #WINDOW_MEMBER_KD_ENEMY_SIZE,d0 ; create a shorter window for enemies
+            endif
+@CreateKdWindow:
+                
                 move.w  #WINDOW_MEMBER_KD_DEST,d1
                 jsr     (CreateWindow).w ; kills/defeat, middle left
                 move.w  d0,kdWindowSlot(a6)
@@ -329,10 +338,19 @@ LoadMemberScreenWindowLayouts:
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #WINDOW_MEMBER_KD_LAYOUT_BYTESIZE,d7
+            if (EXTENDED_STATUS=1)
+                move.w  member(a6),d0
+                tst.b   d0
+                bpl.s   @CopyKdWindowLayout
+                
+                move.w  #WINDOW_MEMBER_KD_LAYOUT_ENEMY_BYTESIZE,d7 ; 
+            endif
+@CopyKdWindowLayout:
+                
                 jsr     (CopyBytes).w   
             if (ALTERNATE_JEWEL_ICONS_DISPLAY=1)
                 ; Display small jewel icons next to Bowie's mapsprite
-                tst.w   -2(a6)
+                tst.w   member(a6)
                 bne.s   @SkipJewels         ; skip if anyone other than Bowie
                 move.l  a1,-(sp)
                 adda.w  #26,a1              ; offset into window layout
@@ -534,7 +552,9 @@ table_CriticalAilmentIndicators:
                 
 table_DoubleAndCounterChanceDenominators:
                 dc.b 32, 16, 8, 4
-
+                
+                align
+                
 ; =============== S U B R O U T I N E =======================================
 
 ; In: a1 = window tile adress, d0.w = combatant index
@@ -704,9 +724,14 @@ member = -2
                 
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_PROMOTION_INDICATOR,a1
+                tst.b   d0
+                bmi.s   @WritePromotionIndicator
+                
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
+@WritePromotionIndicator:
+                
                 move.w  #VDPTILE_PLUS_SIGN|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
             endif
-                
                 ; Current HP
 @WriteHp:       move.w  member(a6),d0
                 jsr     GetCurrentHp
@@ -739,7 +764,13 @@ member = -2
                 move.w  member(a6),d0
             if (SHOW_ENEMY_LEVEL=0)
                 tst.b   d0
+              if (EXTENDED_STATUS=1)
+                ; Skip writing the level value for enemies and overwrite the EXP field with spaces
+                bmi.s   @EraseExpFieldForEnemy
+              else
+                ; Write "N/A" as the level value
                 bmi.s   @EnemyLv
+              endif
             endif
                 jsr     GetCurrentLevel
             if (EXTENDED_STATUS=1)
@@ -760,7 +791,13 @@ member = -2
                 move.w  member(a6),d0
             if (SHOW_ENEMY_LEVEL=1)
                 tst.b   d0
+              if (EXTENDED_STATUS=1)
+                ; Skip writing the experience value for enemies and overwrite the EXP field with spaces
+                bmi.s   @EraseExpFieldForEnemy
+              else
+                ; Write "N/A" as the experience value
                 bmi.s   @EnemyExp
+              endif
             endif
                 jsr     GetCurrentExp
                 movea.l windowTilesAddress(a6),a1
@@ -791,15 +828,26 @@ WriteEnemyLvOrExp:
                 
 ; ---------------------------------------------------------------------------
 
-@EnemyLv:       
-            if (SHOW_ENEMY_LEVEL=0)  
+@EraseExpFieldForEnemy:
+                
+            if (EXTENDED_STATUS=1)
+                ; Copy tiles from the next line over the EXP field to hide it for enemies
                 movea.l windowTilesAddress(a6),a1
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_EXP_FIELD,a1
+                movea.l a1,a0
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a0
+                move.w  #WINDOW_MEMBERSTATUS_LAYOUT_EXP_FIELD_BYTESIZE,d7
+                jsr     (CopyBytes).w
+            else
+              if (SHOW_ENEMY_LEVEL=0)
+@EnemyLv:       movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_LV,a1
                 bsr.s   WriteEnemyLvOrExp
-            endif
+              endif
 @EnemyExp:      movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_ENEMY_EXP,a1
                 bsr.s   WriteEnemyLvOrExp
+            endif
                 
 @Att:           ; Att
                 move.w  member(a6),d0
@@ -1224,25 +1272,27 @@ aJewel:         dc.b 'JEWEL',0
 
             if (EXTENDED_STATUS=1)
 table_ResistanceIndicators:
-                defineName "* " ; immunity
-                defineName "  " ; no resistance
-                defineName "+ " ; minor resistance
+                defineName "*" ; immunity
+                defineName " " ; no resistance
+                defineName "+" ; minor resistance
                 defineName "++" ; major resistance
-                defineName "- " ; weakness
+                defineName "-" ; weakness
                 
 table_MoveTypeNames:
-                className "Regular"                 ; regular
+                className " "                       ; regular
                 className "Centaur"                 ; centaur
-                className "Stealth"                 ; stealth
-                className "Machine", 13, "Archer"   ; brass gunner
-                className "Flying", 13, "High"      ; flying
-                className "Flying", 13, "Low"       ; hovering
+                className "Nimble"                  ; stealth
+                className "Tank", 13, "Archer"      ; brass gunner
+                className "Flying"                  ; flying
+                className "Aerial"                  ; hovering
                 className "Aquatic"                 ; aquatic
                 className "Archer"                  ; archer
                 className "Centaur", 13, "Archer"   ; centaur archer
-                className "Stealth", 13, "Archer"   ; stealth archer
+                className "Nimble", 13, "Archer"    ; stealth archer
                 className "Mage"                    ; mage
                 className "Healer"                  ; healer
+                
+                align
                 
 tiles_ElementIcons: incbin "data\graphics\tech\elementtiles-standard.bin"
             endif
