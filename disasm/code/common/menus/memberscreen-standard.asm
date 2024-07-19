@@ -1090,7 +1090,11 @@ WriteResistanceIndicatorsAndMovetypeName:
                 
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_MOVETYPE_NAME,a1
-                lea     table_MoveTypeNames(pc),a0
+                tst.b   d0
+                bmi.s   @WriteMoveType
+                
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
+@WriteMoveType: lea     table_MoveTypeNames(pc),a0
                 jsr     FindName
                 moveq   #-42,d1
                 bra.w   WriteTilesFromAsciiWithRegularFont
@@ -1103,14 +1107,24 @@ WriteResistanceIndicatorsAndMovetypeName:
 WriteResistanceIndicatorTiles:
                 ror.w   d2,d1
                 andi.w  #RESISTANCEENTRY_LOWERMASK_SETTING,d1
-                addq.w  #1,d1
+                bne.s   @CheckStatus
+                
+                subq.w  #2,a1 ; move cursor back one position if regular resistance level to mask the icon with a space tile
+@CheckStatus:   addq.w  #1,d1
                 
                 ; Is a status infliction element?
                 cmpi.w  #SPELLELEMENT_UNUSED2,d2
-                blo.s   @loc
+                blo.s   @AdjustCursor
                 
-                andi.w  #%11,d1
-@loc:           lea     table_ResistanceIndicators(pc),a0
+                andi.w  #%11,d1 ; if a status element, setting #4 becomes #0
+@AdjustCursor:  move.w  member(a6),d0
+                tst.b   d0
+                bmi.s   @WriteIndicatorTiles
+                
+                adda.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,a1 ; write stat on next line if ally
+@WriteIndicatorTiles:
+                
+                lea     table_ResistanceIndicators(pc),a0
                 jsr     FindName
                 moveq   #-42,d1
                 bra.w   WriteTilesFromAsciiWithRegularFont
