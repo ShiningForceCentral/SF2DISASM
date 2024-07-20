@@ -19,7 +19,7 @@ OpenPortraitWindow:
                 move.w  #VDPTILE_PORTRAITTILE1|VDPTILE_PALETTE2|VDPTILE_PRIORITY,((PORTRAIT_VDPTILES-$1000000)).w
                 move.w  #20,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
-                move.w  #$80A,d0        ; portrait dimensions
+                move.w  #WINDOW_MEMBER_PORTRAIT_SIZE,d0        ; portrait dimensions
                 move.w  #$2F6,d1        ; portrait offset
                 tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
                 beq.s   @loc_1

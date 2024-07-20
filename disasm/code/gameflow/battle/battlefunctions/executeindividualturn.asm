@@ -52,7 +52,7 @@ ExecuteIndividualTurn:
                 andi.w  #STATUSEFFECT_MUDDLE,d1
                 bne.w   @Call_StartAiControl
                 jsr     j_GetActivationBitfield
-                andi.w  #4,d1
+                andi.w  #AIBITFIELD_AI_CONTROLLED,d1
                 bne.w   @Call_StartAiControl
                 tst.b   d0
                 bpl.s   @CheckAutoBattleCheat1 ; check auto battle if ally
@@ -99,7 +99,7 @@ ExecuteIndividualTurn:
                 andi.w  #STATUSEFFECT_MUDDLE,d1
                 bne.w   @Call_ExecuteAiControl
                 jsr     j_GetActivationBitfield
-                andi.w  #4,d1
+                andi.w  #AIBITFIELD_AI_CONTROLLED,d1
                 bne.w   @Call_ExecuteAiControl
                 tst.b   d0
                 bpl.s   @CheckAutoBattleCheat2
@@ -193,7 +193,7 @@ ExecuteIndividualTurn:
                 addq.w  #1,d0
 @LoadKiwiFlameBreathSpellEntry:
                 
-                lsl.w   #6,d0
+                lsl.w   #SPELLENTRY_OFFSET_LV,d0
                 ori.w   #SPELL_KIWI,d0
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
 @CheckFairyWoodsBattle:

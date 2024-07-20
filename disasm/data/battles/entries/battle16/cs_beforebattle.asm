@@ -100,4 +100,4 @@ ce_4B15C:       mainEntity 15,14,RIGHT
                 entity 63,63,DOWN,MAPSPRITE_KRAKEN_LEG,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_KRAKEN_LEG,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_KRAKEN_LEG,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

@@ -36,25 +36,25 @@ UseItemOnField:
                 bra.w   @Done
 rjt_FieldItemEffects:
                 
-                dc.w 3
+                dc.w ITEM_ANTIDOTE
                 dc.w fieldItem_CurePoison-rjt_FieldItemEffects
-                dc.w 5
+                dc.w ITEM_FAIRY_POWDER
                 dc.w fieldItem_CurePoisonAndParalysis-rjt_FieldItemEffects
-                dc.w 9
+                dc.w ITEM_POWER_WATER
                 dc.w fieldItem_IncreaseAtt-rjt_FieldItemEffects
-                dc.w $A
+                dc.w ITEM_PROTECT_MILK
                 dc.w fieldItem_IncreaseDef-rjt_FieldItemEffects
-                dc.w $B
+                dc.w ITEM_QUICK_CHICKEN
                 dc.w fieldItem_IncreaseAgi-rjt_FieldItemEffects
-                dc.w $C
+                dc.w ITEM_RUNNING_PIMENTO
                 dc.w fieldItem_IncreaseMov-rjt_FieldItemEffects
-                dc.w $D
+                dc.w ITEM_CHEERFUL_BREAD
                 dc.w fieldItem_IncreaseHp-rjt_FieldItemEffects
-                dc.w $E
+                dc.w ITEM_BRIGHT_HONEY
                 dc.w fieldItem_IncreaseMp-rjt_FieldItemEffects
-                dc.w $F
+                dc.w ITEM_BRAVE_APPLE
                 dc.w fieldItem_LevelUp-rjt_FieldItemEffects
-                dc.w $FFFF
+                dc.w -1
 @Done:
                 
                 movem.l (sp)+,d0-d1/d6-d7
@@ -125,9 +125,9 @@ loc_22AA0:
 
 fieldItem_IncreaseAtt:
                 
-                moveq   #3,d6
+                moveq   #STAT_BOOST_MAX-STAT_BOOST_MIN+1,d6
                 jsr     (GenerateRandomNumber).w
-                addq.w  #2,d7
+                addq.w  #STAT_BOOST_MIN,d7
                 clr.l   d1
                 move.w  d7,d1
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -146,9 +146,9 @@ fieldItem_IncreaseAtt:
 
 fieldItem_IncreaseDef:
                 
-                moveq   #3,d6
+                moveq   #STAT_BOOST_MAX-STAT_BOOST_MIN+1,d6
                 jsr     (GenerateRandomNumber).w
-                addq.w  #2,d7
+                addq.w  #STAT_BOOST_MIN,d7
                 clr.l   d1
                 move.w  d7,d1
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -167,9 +167,9 @@ fieldItem_IncreaseDef:
 
 fieldItem_IncreaseAgi:
                 
-                moveq   #3,d6
+                moveq   #STAT_BOOST_MAX-STAT_BOOST_MIN+1,d6
                 jsr     (GenerateRandomNumber).w
-                addq.w  #2,d7
+                addq.w  #STAT_BOOST_MIN,d7
                 clr.l   d1
                 move.w  d7,d1
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -190,12 +190,12 @@ fieldItem_IncreaseMov:
                 
                 jsr     j_GetBaseMov
                 clr.w   d7
-                cmpi.b  #9,d1
+                cmpi.b  #STAT_BOOST_MOV_CAP,d1
                 beq.w   loc_22B42
                 moveq   #1,d7
-                cmpi.b  #8,d1
+                cmpi.b  #STAT_BOOST_MOV_CAP-1,d1
                 beq.w   loc_22B42
-                moveq   #2,d7
+                moveq   #STAT_BOOST_MOV,d7
 loc_22B42:
                 
                 clr.l   d1
@@ -216,9 +216,9 @@ loc_22B42:
 
 fieldItem_IncreaseHp:
                 
-                moveq   #3,d6
+                moveq   #STAT_BOOST_MAX-STAT_BOOST_MIN+1,d6
                 jsr     (GenerateRandomNumber).w
-                addq.w  #2,d7
+                addq.w  #STAT_BOOST_MIN,d7
                 clr.l   d1
                 move.w  d7,d1
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -241,9 +241,9 @@ fieldItem_IncreaseMp:
                 jsr     j_GetMaxMp
                 tst.w   d1
                 beq.s   byte_22BBC      
-                moveq   #3,d6
+                moveq   #STAT_BOOST_MAX-STAT_BOOST_MIN+1,d6
                 jsr     (GenerateRandomNumber).w
-                addq.w  #2,d7
+                addq.w  #STAT_BOOST_MIN,d7
                 clr.l   d1
                 move.w  d7,d1
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w

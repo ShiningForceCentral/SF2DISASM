@@ -87,7 +87,7 @@ sub_5039E:
 cs_503A6:       textCursor 2239
                 resetForceBattleStats
                 reloadMap 0,0
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 loadMapEntities ce_506DE
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setBlocks 0,10,22,10,42,10
@@ -101,7 +101,7 @@ cs_503A6:       textCursor 2239
                 nextSingleText $0,129   ; "We have no choice.{W1}"
                 nextSingleText $C0,ALLY_JAHA ; "Then, let's go to the{N}continent of Parmecia!{W1}"
                 executeSubroutine sub_5036E
-                nextSingleText $FF,255  ; "And so the ship heads east{N}for Parmecia.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "And so the ship heads east{N}for Parmecia.{W1}"
                 csWait 120
                 nextSingleText $0,ALLY_SARAH ; "I feel...sick...to my...{N}stomach...ohhh....{W1}"
                 jumpIfFlagClear 6,cs_50426 ; Kiwi joined
@@ -144,7 +144,7 @@ cs_50426:       textCursor 2229
                 stopEntity 132
                 csWait 30
                 textCursor 2239
-                nextSingleText $FF,255  ; "The people of Granseal have{N}arrived at their new home.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "The people of Granseal have{N}arrived at their new home.{W1}"
                 loadMapFadeIn MAP_SHIP_DAMAGED,18,25
                 loadMapEntities ce_5072E
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -279,7 +279,7 @@ ce_506DE:       mainEntity 63,63,UP
                 entity 63,63,DOWN,MAPSPRITE_SAILOR,eas_Init
                 entity 63,63,DOWN,ALLY_SLADE,eas_Init
                 entity 5,5,RIGHT,MAPSPRITE_BOAT,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5072E:       mainEntity 0,0,UP
                 entity 23,30,DOWN,MAPSPRITE_MINISTER,eas_Init
                 entity 19,29,UP,MAPSPRITE_MAN3,eas_Init
@@ -294,7 +294,7 @@ ce_5072E:       mainEntity 0,0,UP
                 entity 26,31,UP,MAPSPRITE_MAN1,eas_Init
                 entity 24,26,UP,MAPSPRITE_WOMAN2,eas_Init
                 entity 23,27,UP,MAPSPRITE_MAN2,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5079E:       mainEntity 40,8,LEFT
                 entity 51,8,DOWN,ALLY_SARAH,eas_Init
                 entity 41,10,DOWN,ALLY_CHESTER,eas_Init
@@ -308,7 +308,7 @@ ce_5079E:       mainEntity 40,8,LEFT
                 entity 44,6,RIGHT,MAPSPRITE_OBJECT2,eas_Init
                 entity 45,6,DOWN,MAPSPRITE_OBJECT2,eas_Init
                 entity 46,6,LEFT,MAPSPRITE_OBJECT2,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 cs_50806:       textCursor 2288
                 loadMapEntities ce_5094A
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -366,7 +366,7 @@ cs_50806:       textCursor 2288
                 csWait 30
                 nextText $0,128         ; "Wow, there's our new town!{W2}"
                 nextSingleText $0,128   ; "But, our Granseal was much{N}more beautiful.{N}Cheer up!{W1}"
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 setActscriptWait 128,eas_Init
                 setActscriptWait 129,eas_Init
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -377,7 +377,7 @@ cs_50806:       textCursor 2288
                 setDest ALLY_BOWIE,29,52
                 setPos ALLY_BOWIE,0,0,DOWN
                 csWait 60
-                nextSingleText $FF,255  ; "They worked hard to build{N}their new town.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "They worked hard to build{N}their new town.{W1}"
                 playSound SOUND_COMMAND_FADE_OUT
                 resetForceBattleStats
                 warp MAP_NEW_GRANSEAL_CASTLE,11,10,UP
@@ -386,4 +386,4 @@ ce_5094A:       mainEntity 61,48,LEFT
                 entity 62,48,LEFT,MAPSPRITE_WORKER,eas_Init
                 entity 63,48,LEFT,MAPSPRITE_WORKER,eas_Init
                 entity 28,49,RIGHT,MAPSPRITE_BOAT,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

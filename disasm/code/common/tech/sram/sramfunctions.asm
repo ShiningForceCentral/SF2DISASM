@@ -17,7 +17,7 @@ CheckSram:
 @CheckSramString_Loop:
                 
                 cmpm.b  (a0)+,(a1)+
-                lea     1(a1),a1
+                lea     1(a1),a1 ; skip filler bytes
                 dbne    d7,@CheckSramString_Loop
                 
                 bne.w   @InitSram
@@ -43,6 +43,7 @@ CheckSram:
                 bclr    #1,(SAVE_FLAGS).l
 @Slot1:
                 
+                ; is slot 1 occupied ?
                 btst    #0,(SAVE_FLAGS).l
                 bne.s   @ChecksumSlot1
                 clr.w   d0
@@ -71,7 +72,7 @@ CheckSram:
 @ClearSram_Loop:
                 
                 clr.b   (a0)
-                addq.l  #2,a0
+                addq.l  #2,a0 ; skip filler bytes
                 dbf     d7,@ClearSram_Loop
                 
                 lea     SramCheckString(pc), a0
@@ -195,7 +196,7 @@ CopyBytesToSram:
                 
                 move.b  (a0),(a1)
                 add.b   (a0)+,d0
-                addq.l  #2,a1
+                addq.l  #2,a1 ; skip filler bytes
                 dbf     d7,@Loop
                 
                 movem.l (sp)+,d7-a1
@@ -218,7 +219,7 @@ CopyBytesFromSram:
                 
                 move.b  (a0),(a1)+
                 add.b   (a0),d0
-                addq.l  #2,a0
+                addq.l  #2,a0 ; skip filler bytes
                 dbf     d7,@Loop
                 
                 movem.l (sp)+,d7-a1

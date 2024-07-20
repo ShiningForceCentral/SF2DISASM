@@ -1058,7 +1058,7 @@ loc_24D42:
                 move.w  combatant(a6),d0
                 jsr     j_AddItem
                 move.w  (sp)+,d1
-                bclr    #7,d1
+                bclr    #ITEMENTRY_BIT_EQUIPPED,d1
                 move.w  itemOrSpellIndex(a6),d0
                 jsr     j_AddItem
 @EndGiveAction:
@@ -1145,11 +1145,11 @@ byte_25066:
 @CheckChoice_SearchStay:
                 
                 cmpi.w  #-1,((CHEST_CONTENTS-$1000000)).w
-                bne.w   loc_25088
+                bne.w   @ExamineContents
                 move.w  #BATTLEACTION_STAY,((CURRENT_BATTLEACTION-$1000000)).w
                 clr.w   d0
                 bra.w   @EndBattleEntityControl
-loc_25088:
+@ExamineContents:
                 
                 move.w  combatant(a6),d0
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -1175,9 +1175,9 @@ loc_250B0:
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 move.w  d1,d2
                 move.w  d0,d1
-                jsr     sub_1AC054
+                jsr     j_CheckForTrappedChest
                 cmpi.w  #-1,d0
-                beq.w   loc_250FC
+                beq.w   CheckGoldChest
                 
                 move.w  #BATTLEACTION_TRAPPED_CHEST,((CURRENT_BATTLEACTION-$1000000)).w
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
@@ -1185,7 +1185,7 @@ loc_250B0:
                 sndCom  MUSIC_CORRUPTED_SAVE
                 bsr.w   SpawnEnemySkipCamera
                 bra.w   @EndBattleEntityControl
-loc_250FC:
+CheckGoldChest:
                 
                 move.w  ((CHEST_CONTENTS-$1000000)).w,d2
                 cmpi.w  #ITEMINDEX_GOLDCHESTS_START,d2

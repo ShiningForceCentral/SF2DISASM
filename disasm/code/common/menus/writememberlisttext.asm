@@ -18,7 +18,7 @@ WriteMembersListText:
                 move.w  #WINDOW_MEMBERS_LIST_SIZE,d0
                 bsr.w   alt_WriteWindowTiles
                 movea.l windowLayoutStartAddress(a6),a1
-                move.w  #$FFC6,d1
+                move.w  #-58,d1
                 suba.w  d1,a1
                 addq.w  #4,a1
                 moveq   #WINDOW_MEMBERS_LIST_HEADER_LENGTH,d7

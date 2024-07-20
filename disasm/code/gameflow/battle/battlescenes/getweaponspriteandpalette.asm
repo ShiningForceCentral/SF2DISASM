@@ -26,9 +26,9 @@ GetWeaponspriteAndPalette:
                 lea     table_WeaponGraphics(pc), a0
                 subi.w  #ITEMINDEX_WEAPONS_START,d1 ; Same here : HARDCODED start index for weapon items with battlescene graphics
                 add.w   d1,d1
-                move.b  (a0,d1.w),d2
+                move.b  (a0,d1.w),d2  ; weapon sprite index
                 ext.w   d2
-                move.b  1(a0,d1.w),d3
+                move.b  1(a0,d1.w),d3  ; weapon palette index
                 ext.w   d3
                 movem.l (sp)+,d1/a0
                 rts

@@ -67,7 +67,7 @@ cs_5CB34:       setBlocksVar 16,53,1,1,15,54
                 csWait 1
                 csc_end
 cs_5CBB4:       textCursor 4179
-                nextSingleText $FF,255  ; "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} put the Arm of{N}Golem on the golem.{W1}"
                 setSprite ALLY_CLAUDE,ALLY_CLAUDE
                 startEntity ALLY_CLAUDE
                 nextSingleText $0,ALLY_CLAUDE ; "O...ooo...wow!{W1}"

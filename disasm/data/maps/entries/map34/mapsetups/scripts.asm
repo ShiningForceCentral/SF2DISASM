@@ -159,7 +159,7 @@ cs_5B6C0:       textCursor 3207
                  moveUp 2
                 endActions
                 setFacing 129,UP
-                nextSingleText $FF,255  ; "{LEADER} displays the{N}jewels to Evil Spirit.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} displays the{N}jewels to Evil Spirit.{W1}"
                 entityFlashWhite ALLY_BOWIE,40
                 nextText $0,130         ; "Yeah, I feel it...I feel it...!{N}I think I can do it now.{N}Let me try again.{W1}"
                 executeSubroutine csub_55EF4

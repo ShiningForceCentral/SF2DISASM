@@ -10,7 +10,7 @@ cs_5994E:       textCursor 1792
                 warp MAP_CREED_DESKTOP_WORLD,0,0,RIGHT
                 csc_end
 cs_5996E:       textCursor 1794
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 reloadMap 10,0
                 setPos ALLY_BOWIE,25,12,UP
                 setPos ALLY_PETER,24,13,UP

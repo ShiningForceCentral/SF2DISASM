@@ -662,13 +662,13 @@ PopulateTargetsListWithRespawningEnemies:
 @Main_Loop:
                 
                 jsr     j_GetActivationBitfield
-                andi.w  #WORD_LOWER_NIBBLE_MASK,d1
+                andi.w  #AIBITFIELD_INITIALIZATION_MASK,d1
                 tst.w   d1
                 bne.s   @loc_2          
                 bra.w   @Next
 @loc_2:
                 
-                cmpi.w  #$200,d1        ; 0x200 - region-triggered spawn - check if triggered and if not spawned yet
+                cmpi.w  #AIBITFIELD_HIDDEN,d1
                 bne.w   @loc_5          
                 bsr.w   UpdateEnemyActivationIfDead
                 tst.w   d0
@@ -691,7 +691,7 @@ PopulateTargetsListWithRespawningEnemies:
                 addi.w  #1,d5
 @loc_5:
                 
-                cmpi.w  #$100,d1        ; 0x100 - respawn - check if dead
+                cmpi.w  #AIBITFIELD_RESPAWN,d1
                 bne.w   @loc_7          
                 jsr     j_GetCurrentHp
                 tst.w   d1
@@ -707,7 +707,7 @@ PopulateTargetsListWithRespawningEnemies:
                 addi.w  #1,d5
 @loc_7:
                 
-                cmpi.w  #$300,d1        ; 0x300 - region-triggered respawn - check if dead and triggered
+                cmpi.w  #AIBITFIELD_HIDDEN|AIBITFIELD_RESPAWN,d1
                 bne.s   @Next
                 bsr.w   UpdateEnemyActivationIfDead
                 tst.w   d0

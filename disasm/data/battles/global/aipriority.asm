@@ -17,7 +17,7 @@ table_HealPriorityMoveTypes:
                 dc.b MOVETYPE_LOWER_AQUATIC
                 
 table_AttackPriority_Regular:
-                dc.b CLASS_SDMN
+                dc.b CLASS_SDMN  ; high priority to low
                 dc.b CLASS_HERO
                 dc.b CLASS_MAGE
                 dc.b CLASS_SORC
@@ -51,7 +51,7 @@ table_AttackPriority_Regular:
                 dc.b CLASS_MNST
                 
 table_AttackPriority_Mage:
-                dc.b CLASS_SDMN
+                dc.b CLASS_SDMN  ; high priority to low
                 dc.b CLASS_HERO
                 dc.b CLASS_TORT
                 dc.b CLASS_MNST
@@ -85,7 +85,7 @@ table_AttackPriority_Mage:
                 dc.b CLASS_BDBT
                 
 table_AttackPriority_Archer:
-                dc.b CLASS_BDMN
+                dc.b CLASS_BDMN  ; high priority to low
                 dc.b CLASS_PHNK
                 dc.b CLASS_BDBT
                 dc.b CLASS_PGNT
@@ -119,7 +119,7 @@ table_AttackPriority_Archer:
                 dc.b CLASS_MNST
                 
 table_AttackPriority_Flying:
-                dc.b CLASS_SDMN
+                dc.b CLASS_SDMN  ; high priority to low
                 dc.b CLASS_HERO
                 dc.b CLASS_MAGE
                 dc.b CLASS_SORC

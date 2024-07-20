@@ -792,7 +792,7 @@ loc_1406E:
 DmaMembersListIcon:
                 
                 moveq   #$7F,d7
-                add.w   d0,d0
+                add.w   d0,d0           ; d0 is current diamond-menu choice
                 move.w  rjt_DmaMembersListIconFunctions(pc,d0.w),d0
                 jmp     rjt_DmaMembersListIconFunctions(pc,d0.w)
 
@@ -1617,7 +1617,7 @@ sub_1474C:
 EquipNewItem:
                 
                 cmpi.w  #-1,d1
-                beq.w   @Equip
+                beq.w   @Equip          ; equip if nothing equipped
                 
                 move.w  d2,d1
                 jsr     j_UnequipItemBySlotIfNotCursed
@@ -1680,7 +1680,7 @@ inventoryWindowSlot = -2
 BuildShopInventoryScreen:
                 
                 move.w  ((CURRENT_SHOP_PAGE-$1000000)).w,d0
-                mulu.w  #6,d0
+                mulu.w  #ITEMS_PER_SHOP_PAGE,d0
                 add.w   ((CURRENT_SHOP_SELECTION-$1000000)).w,d0
                 cmp.w   ((GENERIC_LIST_LENGTH-$1000000)).w,d0
                 blt.s   loc_14814
@@ -1728,7 +1728,7 @@ loc_14814:
                 move.w  #$100,d0
                 jsr     (ApplyVIntVramDmaOnCompressedTiles).w
                 jsr     (WaitForWindowMovementEnd).l
-                bsr.w   sub_14EDE
+                bsr.w   MoveSelectedItemInfoWindow
 loc_148BC:
                 
                 move.w  ((CURRENT_SHOP_SELECTION-$1000000)).w,d0
@@ -2420,7 +2420,7 @@ loc_14EAE:
                 move.w  #$201,d1
                 moveq   #4,d2
                 jsr     (MoveWindow).l  
-                bra.s   sub_14EDE
+                bra.s   MoveSelectedItemInfoWindow
 
     ; End of function sub_14E62
 
@@ -2451,7 +2451,7 @@ sub_14EC0:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_14EDE:
+MoveSelectedItemInfoWindow:
                 
                 bsr.w   WriteItemNameAndGoldAmount
                 move.w  -8(a6),d0
@@ -2463,7 +2463,7 @@ sub_14EDE:
                 moveq   #$A,d1
                 rts
 
-    ; End of function sub_14EDE
+    ; End of function MoveSelectedItemInfoWindow
 
 tiles_PriceTagBlank:
                 incbin "data/graphics/tech/pricetagblanktiles.bin"

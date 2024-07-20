@@ -140,7 +140,7 @@ return_453F0:
     ; End of function MapEventType3
 
 cs_453F2:       setActscriptWait ALLY_BOWIE,eas_4540C
-                setPos 159,64,64,DOWN
+                setPos FOLLOWER_D,64,64,DOWN
                 setActscriptWait ALLY_BOWIE,eas_45426
                 csc_end
 
@@ -188,7 +188,7 @@ MapEventType5:
 
     ; End of function MapEventType5
 
-cs_45470:       setActscriptWait 159,eas_45360
+cs_45470:       setActscriptWait FOLLOWER_D,eas_45360
                 setSprite ALLY_BOWIE,ALLY_BOWIE
                 setActscriptWait ALLY_BOWIE,eas_4548C
                 csc_end

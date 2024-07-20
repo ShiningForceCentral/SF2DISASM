@@ -85,4 +85,4 @@ ce_4D48E:       mainEntity 29,29,LEFT
                 entity 11,10,DOWN,MAPSPRITE_CAMEELA,eas_Init
                 entity 11,6,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 30,29,LEFT,MAPSPRITE_CARAVAN,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

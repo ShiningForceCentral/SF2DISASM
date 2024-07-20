@@ -181,7 +181,7 @@ cs_53C42:       setCamDest 19,48
                 fadeInB
                 reloadMap 0,0
                 csWait 1
-                nextSingleText $FF,255  ; "Astral is exhausted.{N}He won't wake up!{W2}{N}The Minister summons the{N}soldiers to the hall to kill{N}the evil spirit.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Astral is exhausted.{N}He won't wake up!{W2}{N}The Minister summons the{N}soldiers to the hall to kill{N}the evil spirit.{W1}"
                 setF 609                ; Set after the scene where Astral exorcises the Gizmo
                 warp MAP_GRANSEAL_CASTLE_2F,29,8,UP
                 playSound MUSIC_CASTLE

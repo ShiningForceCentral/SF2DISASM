@@ -190,7 +190,7 @@ cs_540C0:       textCursor 811
                 setFacing ALLY_KAZIN,DOWN
                 nextText $0,ALLY_KAZIN  ; "Sir Hawel passed away.{W2}{N}I'm going to seal the tower.{N}It's Sir Hawel's last wish.{W2}"
                 nextSingleText $0,ALLY_KAZIN ; "{LEADER}, please!{N}His wish is related to{N}your mission, right?{W2}{N}Can you go with me and{N}seal the tower?{W1}"
-                join 32772
+                join ALLY_KAZIN|ALLY_SADJOIN
                 nextSingleText $0,ALLY_KAZIN ; "Now, let's go to the{N}Ancient Shrine!{W1}"
                 followEntity ALLY_KAZIN,ALLY_BOWIE,2
                 clearF 72               ; Kazin is a follower

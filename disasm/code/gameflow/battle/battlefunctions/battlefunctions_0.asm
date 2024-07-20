@@ -1187,12 +1187,12 @@ SetEntityPosition:
     ; End of function SetEntityPosition
 
 table_PixelOffsets_X:
-                dc.w MAP_TILE_SIZE
+                dc.w MAP_TILE_PLUS
 table_PixelOffsets_Y:
                 dc.w 0
                 dc.w 0
-                dc.w -MAP_TILE_SIZE
-                dc.w -MAP_TILE_SIZE
+                dc.w MAP_TILE_MINUS
+                dc.w MAP_TILE_MINUS
                 dc.w 0
                 dc.w 0
-                dc.w MAP_TILE_SIZE
+                dc.w MAP_TILE_PLUS

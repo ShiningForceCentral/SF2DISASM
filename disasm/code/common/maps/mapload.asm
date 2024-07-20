@@ -1345,7 +1345,7 @@ loc_2BF0:
                 bra.w   loc_2C14
 loc_2C0C:
                 
-                lea     $16(a4),a4
+                lea     $16(a4),a4  ; shift to next area data
                 bra.w   loc_2B82
 loc_2C14:
                 

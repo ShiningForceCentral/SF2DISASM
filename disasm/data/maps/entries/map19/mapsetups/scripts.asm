@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map19\mapsetups\scripts.asm :
 ; 0x53176..0x53634 : 
-cs_53176:       setCameraEntity 65535
+cs_53176:       setCameraEntity CAMERA_NEUTRAL
                 textCursor 721
                 newEntity 144,29,9,UP,MAPSPRITE_SOLDIER2
                 newEntity 145,28,9,UP,MAPSPRITE_SOLDIER1
@@ -246,7 +246,7 @@ cs_534D2:       textCursor 694
                 setFacing ALLY_LEMON,RIGHT
                 nextSingleText $0,ALLY_LEMON ; "No!....{W1}"
                 csWait 30
-                nextSingleText $FF,255  ; "Princess Elis screams{N}for help.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Princess Elis screams{N}for help.{W1}"
                 setFacing ALLY_LEMON,UP
                 nextSingleText $0,152   ; "No, no!{N}Father!  Astral!{N}Somebody please...!{W1}"
                 nextSingleText $80,130  ; "Elis!{W1}"
@@ -308,7 +308,7 @@ cs_535FA:       textCursor 690
                 nextText $0,129         ; "Oh, it's you, {LEADER}!{W2}"
                 nextSingleText $0,129   ; "King Galam took{N}Princess Elis to the{N}Ancient Tower!{W1}"
                 nextSingleText $0,130   ; "Elis is in the tower.{N}I shall go with you and{N}save my daughter.{W1}"
-                nextSingleText $FF,255  ; "King Granseal and the{N}Minister go with {LEADER}.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "King Granseal and the{N}Minister go with {LEADER}.{W1}"
                 followEntity 130,ALLY_BOWIE,2
                 followEntity 129,130,2
                 csc_end

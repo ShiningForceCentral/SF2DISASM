@@ -612,6 +612,11 @@ entity: macro
     dc.b \4 ; mapsprite
     dc.l \5 ; action script
     endm
+	
+cscEntitiesEnd:	macro
+	dc.w $FFFF
+	align
+	endm
     
 entityRandomWalk: macro
     dc.b \1 ; X

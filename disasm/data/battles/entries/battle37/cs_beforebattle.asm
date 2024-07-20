@@ -57,4 +57,4 @@ ce_4DB74:       mainEntity 55,36,LEFT
                 entity 56,37,LEFT,ALLY_PETER,eas_Init
                 entity 63,63,UP,MAPSPRITE_GESHP,eas_Init
                 entity 35,60,UP,MAPSPRITE_RED_BARON,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

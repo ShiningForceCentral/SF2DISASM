@@ -183,7 +183,7 @@ IntroCutscene4: textCursor 4233
                 endActions
                 hide 130
                 hide 129
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 csWait 30
                 setCamDest 7,5
                 setCameraEntity 128
@@ -363,4 +363,4 @@ ce_48FAA:       mainEntity 63,63,UP
                 entity 63,63,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 63,63,UP,MAPSPRITE_EFFECT6,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_EFFECT4,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

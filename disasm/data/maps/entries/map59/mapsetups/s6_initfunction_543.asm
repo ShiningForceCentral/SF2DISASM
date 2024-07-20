@@ -18,7 +18,7 @@ return_615E4:
     ; End of function ms_map59_flag543_InitFunction
 
 cs_615E6:       textCursor 3760
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 reloadMap 9,6
                 setPos ALLY_BOWIE,12,11,UP
                 setPriority ALLY_BOWIE,$0
@@ -107,7 +107,7 @@ cs_615E6:       textCursor 3760
                 endActions
                 csWait 2
                 setActscriptWait 134,eas_StopMoving
-                nextSingleText $FF,255  ; "King Galam grabbed Elis'{N}arms!{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "King Galam grabbed Elis'{N}arms!{W1}"
                 setActscriptWait 132,eas_DeactivateAutoFacing
                 customActscriptWait 134
                  ac_setSpeed 10,10      ;   
@@ -214,7 +214,7 @@ cs_615E6:       textCursor 3760
                 csWait 20
                 nextSingleText $80,ALLY_PETER ; "We have no choice....{W1}"
                 nod ALLY_BOWIE
-                nextSingleText $FF,255  ; "{LEADER} nods hopelessly.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} nods hopelessly.{W1}"
                 setFacing ALLY_PETER,UP
                 setFacing ALLY_BOWIE,UP
                 csWait 30
@@ -261,11 +261,11 @@ cs_615E6:       textCursor 3760
                 endActions
                 csWait 15
                 setActscriptWait ALLY_PETER,eas_StopMoving
-                nextSingleText $FF,255  ; "{NAME;7} tugs at the{N}jewel.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;7} tugs at the{N}jewel.{W1}"
                 csWait 20
                 nextSingleText $80,ALLY_PETER ; "Nope.  Let me try this.{W1}"
                 shiver ALLY_PETER
-                nextSingleText $FF,255  ; "{NAME;7} removed the{N}jewel from {LEADER}'s neck.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;7} removed the{N}jewel from {LEADER}'s neck.{W1}"
                 setActscriptWait ALLY_PETER,eas_DeactivateAutoFacing
                 entityActions ALLY_PETER
                  moveRight 1
@@ -291,7 +291,7 @@ cs_615E6:       textCursor 3760
                 csWait 20
                 nod ALLY_PETER
                 csWait 20
-                nextSingleText $FF,255  ; "{NAME;7} put the jewel on{N}the ground.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;7} put the jewel on{N}the ground.{W1}"
                 entityActionsWait ALLY_PETER
                  moveRight 2
                 endActions
@@ -310,7 +310,7 @@ cs_615E6:       textCursor 3760
                 setFacing 134,DOWN
                 csWait 30
                 nod 134
-                nextSingleText $FF,255  ; "Zeon picks up the jewel.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Zeon picks up the jewel.{W1}"
                 csWait 40
                 playSound SFX_SPELL_CAST
                 entityFlashWhite 134,20
@@ -331,7 +331,7 @@ cs_615E6:       textCursor 3760
                 shiver 133
                 nextSingleText $0,134   ; "You did a good job, Elis.{N}You may take a rest now.{W1}"
                 nextSingleText $80,132  ; "A rest?  Wha...{W1}"
-                nextSingleText $FF,255  ; "A black cloud envelopes{N}Elis.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "A black cloud envelopes{N}Elis.{W1}"
                 setPos 131,14,8,LEFT
                 csWait 50
                 nextSingleText $80,132  ; "Ohhh....{W1}"
@@ -465,7 +465,7 @@ cs_615E6:       textCursor 3760
                  moveUp 1
                 endActions
                 setActscriptWait ALLY_BOWIE,eas_BumpUp
-                nextSingleText $FF,255  ; "{LEADER} slapped the jewel{N}out of Zeon's hand.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} slapped the jewel{N}out of Zeon's hand.{W1}"
                 playSound SOUND_COMMAND_FADE_OUT
                 setPos 129,14,8,DOWN
                 setActscriptWait 129,eas_DeactivateAutoFacing
@@ -503,7 +503,7 @@ cs_615E6:       textCursor 3760
                 csWait 30
                 nextSingleText $0,ALLY_BOWIE ; "Ohhh....{W1}"
                 shiver ALLY_BOWIE
-                nextSingleText $FF,255  ; "{LEADER} is stunned.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} is stunned.{W1}"
                 setCamDest 10,4
                 setFacing 134,DOWN
                 stopEntity 134
@@ -774,7 +774,7 @@ cs_615E6:       textCursor 3760
                 csWait 30
                 nextSingleText $80,ALLY_PETER ; "{LEADER},  Zeon was{N}taken away by {NAME;28}.{W1}"
                 nod ALLY_BOWIE
-                nextSingleText $FF,255  ; "{LEADER} nods.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} nods.{W1}"
                 csWait 40
                 shiver 133
                 nextSingleText $80,133  ; "Oh, is she...is Princess{N}Elis OK?{W1}"
@@ -808,7 +808,7 @@ cs_615E6:       textCursor 3760
                 setActscriptWait ALLY_PETER,eas_BumpUp
                 setActscriptWait ALLY_PETER,eas_BumpUp
                 nextSingleText $80,ALLY_PETER ; "Princess!{W1}"
-                nextSingleText $FF,255  ; "{NAME;7} shakes her{N}wildly.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;7} shakes her{N}wildly.{W1}"
                 csWait 10
                 showPortrait $80,132
                 executeSubroutine csub_6269C
@@ -836,7 +836,7 @@ cs_615E6:       textCursor 3760
                 csWait 16
                 setActscriptWait 133,eas_StopMoving
                 csWait 40
-                nextSingleText $FF,255  ; "Astral examines Elis.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Astral examines Elis.{W1}"
                 csWait 40
                 entityActions 133
                  moveRight 1
@@ -968,7 +968,7 @@ cs_615E6:       textCursor 3760
                 endActions
                 csWait 16
                 setActscriptWait 135,eas_StopMoving
-                nextSingleText $FF,255  ; "Mitula took the Jewel of{N}Light from {LEADER}.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Mitula took the Jewel of{N}Light from {LEADER}.{W1}"
                 nod 135
                 nextSingleText $0,135   ; "And I need the Jewel of Evil.{W1}"
                 setActscriptWait 135,eas_InitSlow
@@ -982,7 +982,7 @@ cs_615E6:       textCursor 3760
                 csWait 30
                 nod 135
                 hide 129
-                nextSingleText $FF,255  ; "Mitula took the Jewel{N}of Evil.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Mitula took the Jewel{N}of Evil.{W1}"
                 setFacing 135,LEFT
                 csWait 20
                 nextText $80,135        ; "I have to seal Zeon before{N}he regains his power.{W2}"
@@ -1117,7 +1117,7 @@ cs_62658:       setQuake 5
                 fadeInB
                 reloadMap 0,0
                 textCursor 3908
-                nextSingleText $FF,255  ; "Two years have passed{N}since Mitula resealed Zeon.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Two years have passed{N}since Mitula resealed Zeon.{W1}"
                 nextSingleText $0,136   ; "Wow, is it true?{N}Did Elis' face turn pink?{W1}"
                 clearF 384              ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 clearF 385              ; Set after Bowie obtains King Galam's jewel

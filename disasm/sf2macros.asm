@@ -164,7 +164,7 @@ classType:  macro
                 
 itemBreakMessage: macro
                 defineShorthand.b ITEM_,\1
-                dc.b \2
+                defineShorthand.b ITEMBREAK_\2
             endm
                 
 ; Enemy item drops
@@ -545,9 +545,9 @@ initialStatus: macro
                 dcb.b 3,0
             endm
                 
-unknownWord: macro
+aiBitfield: macro
                 dcb.b 2,0
-                dc.w \1 ; activation bitfield?
+                defineBitfield.w AIBITFIELD_,\1 ; activation bitfield?
                 dcb.b 2,0
             endm
                 
@@ -670,5 +670,12 @@ vdpSprite:  macro
                 defineBitfield.w VDPSPRITESIZE_,\2
                 vdpTile \3
                 dc.w \4 ; X
+            endm
+
+vdpSpell:  macro
+                dc.w \1 ; X
+                dc.w \2 ; Y
+                vdpTile \3 ; starting tile
+                defineBitfield.w VDPGRAPHICDIMENSION_,\4
             endm
                 

@@ -173,4 +173,4 @@ ce_4C96C:       mainEntity 10,13,UP
                 entity 11,10,DOWN,MAPSPRITE_ZALBARD,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_MITULA,eas_Init
                 entity 63,63,UP,MAPSPRITE_ORB,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

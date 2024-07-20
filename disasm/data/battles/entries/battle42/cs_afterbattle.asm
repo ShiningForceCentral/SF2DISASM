@@ -212,7 +212,7 @@ cs_4EF5E:       stopEntity 128
                  moveUp 13
                 endActions
                 animEntityFX 128,MOSAIC_OUT
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 csWait 50
                 nextSingleText $C0,130  ; "Gggggrrr...you destroyed my{N}minions!{W1}"
                 nextSingleText $0,FOLLOWER_B ; "Zeon!{W1}"
@@ -276,4 +276,4 @@ ce_4F328:       mainEntity 13,17,UP
                 entity 13,19,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
                 entity 13,15,DOWN,MAPSPRITE_ELIS,eas_Init
                 entity 62,62,DOWN,MAPSPRITE_ZEON,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

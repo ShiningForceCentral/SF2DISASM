@@ -116,4 +116,4 @@ ce_4C03C:       mainEntity 1,8,RIGHT
                 entity 12,17,UP,MAPSPRITE_WORM,eas_Init
                 entity 11,22,DOWN,MAPSPRITE_WORM,eas_Init
                 entity 11,25,RIGHT,MAPSPRITE_WORM,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

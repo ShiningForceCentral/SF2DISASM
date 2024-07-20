@@ -84,4 +84,4 @@ ce_4D832:       mainEntity 43,9,LEFT
                 entity 24,25,UP,MAPSPRITE_PURPLE_WORM,eas_Init
                 entity 24,26,UP,MAPSPRITE_GRIFFIN,eas_Init
                 entity 24,27,UP,MAPSPRITE_MIST_DEMON,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

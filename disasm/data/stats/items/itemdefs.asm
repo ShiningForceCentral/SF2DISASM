@@ -75,7 +75,7 @@ table_ItemDefinitions:
                 range        0, 1
                 price        100
                 itemType     CONSUMABLE
-                useSpell     POWDER
+                useSpell     POWDER  ; should be POWDER|LV2
                 equipEffects NONE, 0, &
                              NONE, 0, &
                              NONE, 0

@@ -24,7 +24,7 @@ cs_4D502:       stopEntity 128
                 fadeInB
                 shiver 128
                 nextSingleText $0,128   ; "{LEADER}, I lost?!{N}Take this.{W1}"
-                nextSingleText $FF,255  ; "Cameela reveals the Sky Orb.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Cameela reveals the Sky Orb.{W1}"
                 setPos 131,7,10,LEFT
                 nextText $0,128         ; "This is the Sky Orb.  With{N}it, you can drive the Nazca{N}Ship.{W2}"
                 nextText $0,128         ; "Listen.  You have to be very{N}careful from now on.{W2}"
@@ -123,4 +123,4 @@ ce_4D69E:       mainEntity 7,12,UP
                 entity 63,63,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 6,12,UP,MAPSPRITE_CARAVAN,eas_Init
                 entity 63,63,LEFT,MAPSPRITE_ORB,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

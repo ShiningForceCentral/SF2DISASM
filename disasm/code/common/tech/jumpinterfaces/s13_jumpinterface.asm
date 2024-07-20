@@ -221,11 +221,11 @@ j_DetermineBattleUpgrade:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1AC054:
+j_CheckForTrappedChest:
                 
-                jmp     sub_1B16FE(pc)  
+                jmp     CheckForTrappedChest(pc)  
 
-    ; End of function sub_1AC054
+    ; End of function j_CheckForTrappedChest
 
 
 ; =============== S U B R O U T I N E =======================================

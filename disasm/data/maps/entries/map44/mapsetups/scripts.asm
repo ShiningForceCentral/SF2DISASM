@@ -31,7 +31,7 @@ Map21_DefaultZoneEvent:
                 setFacing ALLY_BOWIE,DOWN
                 setFacing FOLLOWER_B,DOWN
                 setFacing FOLLOWER_A,DOWN
-                setFacing 159,DOWN
+                setFacing FOLLOWER_D,DOWN
                 setCamDest 10,11
                 setBlocks 15,22,3,1,12,22
                 csWait 4
@@ -50,15 +50,15 @@ Map21_DefaultZoneEvent:
                 setBlocks 15,15,3,1,12,15
                 csWait 15
                 setCamDest 13,12
-                setFacing 159,RIGHT
-                nextSingleText $0,159   ; "Sir Astral, where are we{N}headed?{W1}"
+                setFacing FOLLOWER_D,RIGHT
+                nextSingleText $0,FOLLOWER_D   ; "Sir Astral, where are we{N}headed?{W1}"
                 setFacing FOLLOWER_B,LEFT
                 nextSingleText $C0,FOLLOWER_B ; "This earthquake must{N}have caused damage all{N}over the island.{W1}"
                 setFacing FOLLOWER_B,DOWN
                 nextSingleText $C0,FOLLOWER_B ; "Maybe...to the east...to...{N}Oh, yes!  To the mainland!{W1}"
-                setActscriptWait 159,eas_Jump
-                setActscriptWait 159,eas_Jump
-                nextSingleText $0,159   ; "To Parmecia?!{N}Hmmmm....{W1}"
+                setActscriptWait FOLLOWER_D,eas_Jump
+                setActscriptWait FOLLOWER_D,eas_Jump
+                nextSingleText $0,FOLLOWER_D   ; "To Parmecia?!{N}Hmmmm....{W1}"
                 setFacing FOLLOWER_A,RIGHT
                 nextSingleText $0,FOLLOWER_A ; "What?  To the mainland?{N}No!{W2}{N}What about Elis?!  No,{N}we'll stay here on Grans!{W1}"
                 setFacing FOLLOWER_A,DOWN
@@ -134,4 +134,4 @@ loc_54726:
     ; End of function csub_54714
 
 ce_54736:       mainEntity 34,33,RIGHT
-                dc.w $FFFF
+                cscEntitiesEnd

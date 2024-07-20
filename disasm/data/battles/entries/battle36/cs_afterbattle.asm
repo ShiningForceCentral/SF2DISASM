@@ -33,4 +33,4 @@ ce_4DA46:       mainEntity 11,20,DOWN
                 entity 10,19,DOWN,ALLY_PETER,eas_Init
                 entity 11,23,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 11,19,DOWN,MAPSPRITE_CARAVAN,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

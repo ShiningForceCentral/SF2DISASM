@@ -115,7 +115,7 @@ cs_53996:       textCursor 2176
                 csWait 40
                 setFacing 130,RIGHT
                 csWait 30
-                nextSingleText $FF,255  ; "Astral glares at {LEADER}.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Astral glares at {LEADER}.{W1}"
                 entityActionsWait 130
                  moveLeft 1
                 endActions

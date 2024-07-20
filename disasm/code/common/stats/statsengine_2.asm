@@ -941,7 +941,7 @@ ApplyStatusEffectsAndItemsOnStats:
                 move.w  d0,-(sp)
                 bsr.w   GetStatusEffects
                 move.w  d1,d3
-                andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d3
+                andi.w  #STATUSEFFECT_MASK-STATUSEFFECT_CURSE,d3
                 bsr.w   InitializeCurrentStats
                 bsr.w   GetCombatantEntryAddress
                 lea     COMBATANT_OFFSET_ITEMS(a0),a1
@@ -958,7 +958,7 @@ ApplyStatusEffectsAndItemsOnStats:
                 beq.s   @Next
                 bsr.w   ApplyItemOnStats
                 beq.s   @Next
-                ori.w   #4,d3
+                ori.w   #STATUSEFFECT_CURSE,d3
 @Next:
                 
                 addq.w  #ITEMENTRY_SIZE,a1
@@ -1112,12 +1112,12 @@ equipEffect_IncreaseCriticalProwess:
                 
                 move.b  (a2),d2
                 andi.b  #PROWESS_MASK_CRITICAL,d2
-                cmpi.b  #8,d2
+                cmpi.b  #PROWESS_CRITICAL_NONE,d2
                 bcc.s   @Skip           ; skip if not a regular critical hit setting
                 add.b   d1,d2
-                cmpi.b  #8,d2
+                cmpi.b  #PROWESS_CRITICAL_NONE,d2
                 bcs.s   @Skip
-                moveq   #7,d2           ; cap to highest regular critical hit setting
+                moveq   #PROWESS_CRITICAL125_1IN4,d2           ; cap to highest regular critical hit setting
 @Skip:
                 
                 andi.b  #PROWESS_MASK_DOUBLE|PROWESS_MASK_COUNTER,(a2)

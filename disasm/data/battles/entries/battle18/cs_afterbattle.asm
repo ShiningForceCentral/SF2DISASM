@@ -31,7 +31,7 @@ abcs_battle18:  textCursor 2528
                  moveUp 4
                 endActions
                 setFacing ALLY_ROHDE,RIGHT
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 setCamDest 7,1
                 csWait 30
                 setPos ALLY_ROHDE,12,6,UP
@@ -199,7 +199,7 @@ abcs_battle18:  textCursor 2528
                 setFacing ALLY_ROHDE,DOWN
                 nextSingleText $0,ALLY_ROHDE ; "I can drive this excellent{N}vehicle.  May I go with you{N}as a driver?{W1}"
                 csWait 30
-                nextSingleText $FF,255  ; "{NAME;11} the historian{N}tags along with the force.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;11} the historian{N}tags along with the force.{W1}"
                 entityActionsWait ALLY_PETER
                  moveUp 1
                 endActions
@@ -263,4 +263,4 @@ abcs_battle18:  textCursor 2528
                 csc_end
 ce_4B6BE:       mainEntity 12,9,UP
                 entity 12,5,DOWN,MAPSPRITE_CARAVAN,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

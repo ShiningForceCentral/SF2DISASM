@@ -80,4 +80,4 @@ abcs_battle01:  textCursor 2305
 ce_497F6:       mainEntity 8,6,UP
                 entity 7,4,DOWN,MAPSPRITE_MIST_DEMON,eas_Init
                 entity 7,6,RIGHT,MAPSPRITE_ASTRAL,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

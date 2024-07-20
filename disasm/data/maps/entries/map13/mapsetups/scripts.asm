@@ -55,7 +55,7 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                  moveRight 3
                 endActions
                 setFacing 133,DOWN
-                nextSingleText $FF,255  ; "The beastman checks the boy.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "The beastman checks the boy.{W1}"
                 nextSingleText $0,133   ; "Good heavens!{N}He's badly injured!{W1}"
                 csWait 30
                 setFacing 133,RIGHT
@@ -111,7 +111,7 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                 csWait 2
                 setActscriptWait 140,eas_StopMoving
                 csWait 30
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 entityActions 137
                  moveLeft 9
                 endActions
@@ -133,7 +133,7 @@ cs_58512:       customActscriptWait 130
                  ac_entityObstructable OFF ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 textCursor 1435
                 nextSingleText $0,130   ; "Help!  Help!{N}I can't...get up!{W2}{N}You, please turn me over!{W1}"
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -385,7 +385,7 @@ cs_58856:       textCursor 1487
                 setFacing 137,RIGHT
                 setFacing ALLY_LUKE,LEFT
                 csWait 30
-                nextSingleText $FF,255  ; "The mayor examines {NAME;10}{N}carefully.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "The mayor examines {NAME;10}{N}carefully.{W1}"
                 csWait 40
                 nextSingleText $0,137   ; "You're warm!  You're alive!{W1}"
                 setActscriptWait 137,eas_Jump
@@ -716,7 +716,7 @@ cs_58DD2:       textCursor 1536
                 nextText $0,140         ; "Actually, I don't remember....{W2}"
                 nextText $0,140         ; "I don't know the reason why{N}the devils are after me.{W2}"
                 nextSingleText $0,140   ; "I'm afraid I'll cause you a{N}lot of trouble.{W1}"
-                nextSingleText $FF,255  ; "{LEADER} decides to{N}take Oddler with him.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} decides to{N}take Oddler with him.{W1}"
                 csWait 30
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity 140,ALLY_PETER,2

@@ -10,7 +10,7 @@ cs_51F88:       textCursor 962
                 nextText $C0,128        ; "As you may know, my{N}messenger was killed!{W2}"
                 nextText $C0,128        ; "Granseal must have done{N}this.{W2}"
                 nextSingleText $C0,128  ; "So we're invading them to{N}retaliate!{W1}"
-                nextSingleText $FF,255  ; "Murmur...murmur....{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Murmur...murmur....{W1}"
                 csWait 20
                 setFacing ALLY_LEMON,RIGHT
                 csWait 20

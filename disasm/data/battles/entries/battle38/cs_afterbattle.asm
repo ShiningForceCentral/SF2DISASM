@@ -291,7 +291,7 @@ cs_4DF00:       setActscriptWait 128,eas_DeactivateAutoFacing
                 csWait 8
                 hide 135
                 setQuake 0
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 csWait 40
                 setSprite 136,MAPSPRITE_GESHP
                 setActscriptWait 136,eas_Die
@@ -324,4 +324,4 @@ ce_4E372:       mainEntity 8,23,DOWN
                 entity 63,63,LEFT,MAPSPRITE_EFFECT3,eas_Init
                 entity 6,27,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_FILLER4,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

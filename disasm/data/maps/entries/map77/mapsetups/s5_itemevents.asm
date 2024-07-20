@@ -42,7 +42,7 @@ cs_50ABE:       playSound SFX_BIG_DOOR_RUMBLE
                 csWait 60
                 playSound SFX_BOOST
                 flashScreenWhite 20
-                setBlocks 1,1,1,1,42,42
+                setBlocks 1,1,1,1,42,42 ; swap dry riverbed in
                 flashScreenWhite 20
                 csWait 60
                 setQuake 0

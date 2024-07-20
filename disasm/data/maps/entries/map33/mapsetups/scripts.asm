@@ -28,7 +28,7 @@ cs_5AC58:       textCursor 1804
                 stepEvent 15,20
                 setCamDest 8,12
                 csWait 30
-                nextSingleText $FF,255  ; "Servant Goliath unlocks the{N}door.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Servant Goliath unlocks the{N}door.{W1}"
                 entityActions ALLY_PETER
                  moveUp 4
                  moveLeft 3
@@ -231,7 +231,7 @@ cs_5AF36:       textCursor 1834
                 nextSingleText $0,128   ; "That is, anybody who's not{N}protected by Mr. Creed.{W1}"
                 stopEntity 128
                 csWait 20
-                nextSingleText $FF,255  ; "Goliath picks up{N}{LEADER}.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Goliath picks up{N}{LEADER}.{W1}"
                 startEntity 128
                 nextSingleText $0,128   ; "Now, you're part of the{N}collection!{W1}"
                 stepEvent 12,13
@@ -330,7 +330,7 @@ cs_5B016:       textCursor 1840
                  moveLeft 1
                 endActions
                 csWait 20
-                nextSingleText $FF,255  ; "Ah...{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Ah...{W1}"
                 csWait 5
                 setActscript 129,eas_2xRightLeft
                 nextSingleText $80,129  ; "I heard something.{W1}"
@@ -412,7 +412,7 @@ cs_5B016:       textCursor 1840
                 endActions
                 nextSingleText $0,130   ; "Did something happen to{N}Zeon?  Has he revived?{W1}"
                 nod ALLY_BOWIE
-                nextSingleText $FF,255  ; "{LEADER} nods.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} nods.{W1}"
                 csWait 5
                 setActscript 130,eas_2xRightLeft
                 nextSingleText $0,130   ; "No way!  You're kidding!{N}I can't believe it!{W1}"
@@ -433,7 +433,7 @@ cs_5B016:       textCursor 1840
                 setFacing 129,DOWN
                 nextSingleText $80,129  ; "Is what you say true?{W1}"
                 nod ALLY_BOWIE
-                nextSingleText $FF,255  ; "{LEADER} nods again.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} nods again.{W1}"
                 customActscriptWait 129
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   

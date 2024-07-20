@@ -43,7 +43,7 @@ bbcs_06:        textCursor 2342
                  moveUp 4
                 endActions
                 nextSingleText $0,128   ; "Hand it over.{N}I'll deliver it to...?{N}You!!!{W1}"
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 128
                  moveDown 1
@@ -60,4 +60,4 @@ ce_49CBA:       mainEntity 30,9,DOWN
                 entity 32,20,UP,MAPSPRITE_GALAM_SOLDIER,eas_Init
                 entity 36,13,LEFT,MAPSPRITE_GALAM_SOLDIER,eas_Init
                 entity 37,14,UP,MAPSPRITE_GALAM_ARCHER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

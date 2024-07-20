@@ -3,22 +3,22 @@
 ; 0x5A33A..0x5A646 : 
 cs_5A33A:       textCursor 1711
                 setCamDest 0,7
-                setActscriptWait 158,eas_InitSlow
+                setActscriptWait FOLLOWER_C,eas_InitSlow
                 followEntity FOLLOWER_B,ALLY_PETER,2
-                customActscriptWait 158
+                customActscriptWait FOLLOWER_C
                  ac_setSpeed 0,0        ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setDest 158,8,11
-                nextSingleText $0,158   ; "Where is the sick dwarf?{W1}"
+                setDest FOLLOWER_C,8,11
+                nextSingleText $0,FOLLOWER_C   ; "Where is the sick dwarf?{W1}"
                 csWait 5
-                setActscript 158,eas_2xRightLeft
+                setActscript FOLLOWER_C,eas_2xRightLeft
                 csWait 50
                 setCamDest 5,7
                 entityActionsWait 128
                  moveLeft 1
                 endActions
-                setFacing 158,RIGHT
+                setFacing FOLLOWER_C,RIGHT
                 nextSingleText $0,128   ; "Oh, thank goodness.{N}I sure am glad to see you.{W1}"
                 setActscriptWait 128,eas_Jump
                 setActscriptWait 128,eas_Jump
@@ -27,8 +27,8 @@ cs_5A33A:       textCursor 1711
                 endActions
                 setFacing 128,LEFT
                 nextSingleText $0,128   ; "Here, please examine him.{W1}"
-                setCameraEntity 158
-                entityActionsWait 158
+                setCameraEntity FOLLOWER_C
+                entityActionsWait FOLLOWER_C
                  moveRight 4
                  moveDown 1
                  moveRight 2
@@ -36,16 +36,16 @@ cs_5A33A:       textCursor 1711
                 setCamDest 10,7
                 setFacing 128,RIGHT
                 csWait 60
-                nextText $0,158         ; "Oh, I hope I'm not too late.{W2}"
-                nextSingleText $0,158   ; "Ok, let's see.{W1}"
+                nextText $0,FOLLOWER_C         ; "Oh, I hope I'm not too late.{W2}"
+                nextSingleText $0,FOLLOWER_C   ; "Ok, let's see.{W1}"
                 csWait 50
-                shiver 158
+                shiver FOLLOWER_C
                 csWait 30
-                shiver 158
+                shiver FOLLOWER_C
                 csWait 20
-                entityFlashWhite 158,120
+                entityFlashWhite FOLLOWER_C,120
                 mapFadeOutToWhite
-                entityFlashWhite 158,100
+                entityFlashWhite FOLLOWER_C,100
                 mapFadeInFromWhite
                 csWait 50
                 csWait 5
@@ -85,24 +85,24 @@ cs_5A33A:       textCursor 1711
                 setFacing 130,LEFT
                 setFacing 131,LEFT
                 setFacing 132,LEFT
-                setFacing 158,UP
+                setFacing FOLLOWER_C,UP
                 nextSingleText $0,128   ; "Oh, how can we thank you?{W1}"
                 nod 130
-                nextText $0,158         ; "I don't need anything.{W2}"
-                nextSingleText $0,158   ; "But, why don't you help{N}{LEADER}?{W1}"
+                nextText $0,FOLLOWER_C         ; "I don't need anything.{W2}"
+                nextSingleText $0,FOLLOWER_C   ; "But, why don't you help{N}{LEADER}?{W1}"
                 csWait 15
                 setPos FOLLOWER_B,7,11,RIGHT
                 setPos ALLY_PETER,7,10,RIGHT
                 setPos ALLY_BOWIE,8,11,RIGHT
-                setCameraEntity 158
-                entityActionsWait 158
+                setCameraEntity FOLLOWER_C
+                entityActionsWait FOLLOWER_C
                  moveLeft 2
                  moveUp 1
                  moveLeft 3
                 endActions
-                nextSingleText $0,158   ; "{LEADER}, I'm  going now.{W2}{N}I hope your journey is safe{N}and uneventful.  Bye!{W1}"
+                nextSingleText $0,FOLLOWER_C   ; "{LEADER}, I'm  going now.{W2}{N}I hope your journey is safe{N}and uneventful.  Bye!{W1}"
                 setCameraEntity CAMERA_NEUTRAL
-                entityActionsWait 158
+                entityActionsWait FOLLOWER_C
                  moveUp 2
                  moveLeft 3
                  moveDown 3
@@ -110,11 +110,11 @@ cs_5A33A:       textCursor 1711
                 setFacing ALLY_BOWIE,DOWN
                 setFacing ALLY_PETER,DOWN
                 setFacing FOLLOWER_B,DOWN
-                entityActionsWait 158
+                entityActionsWait FOLLOWER_C
                  moveRight 1
                  moveDown 5
                 endActions
-                hide 158
+                hide FOLLOWER_C
                 setCamDest 4,7
                 entityActions ALLY_BOWIE
                  moveRight 2
