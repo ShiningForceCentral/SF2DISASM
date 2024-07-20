@@ -23,7 +23,7 @@ loc_1B0EE:
                 addq.w  #8,(a0)
                 addq.w  #8,a0
                 dbf     d1,loc_1B0EE
-				
+                
                 movea.l (sp)+,a0
                 jsr     (WaitForVInt).w
                 dbf     d0,loc_1B0EA
@@ -78,7 +78,7 @@ loc_1B1A4:
                 move.w  d2,(a0)
                 jsr     (WaitForVInt).w
                 dbf     d0,loc_1B1A4
-				
+                
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #2,4(a0)

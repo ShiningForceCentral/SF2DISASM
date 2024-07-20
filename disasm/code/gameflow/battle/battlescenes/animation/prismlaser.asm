@@ -31,7 +31,7 @@ loc_1B42E:
                 addq.w  #1,d7
                 move.w  d7,2(a0)
                 dbf     d1,loc_1B42E
-				
+                
                 lea     graphic_LaserSphere(pc), a0
                 moveq   #$26,d0   ; offset to sprite_38
                 bsr.w   sub_19F5E
@@ -41,7 +41,7 @@ loc_1B456:
                 
                 move.b  #2,(a1)+
                 dbf     d0,loc_1B456
-				
+                
                 move.w  #-1,((byte_FFB404-$1000000)).w
                 move.b  #SPELLANIMATION_PRISM_LASER,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w

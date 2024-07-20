@@ -83,21 +83,21 @@ table_1AE50:    ; arrow 1
                 vdpSpell 1, 1, 0, V1|H1|0
                 
                 ; arrow 2; 
-				vdpSpell 152, 108, SPELLTILE9, V1|H1|17
-				vdpSpell 160, 108, SPELLTILE5, V1|H4|17
+                vdpSpell 152, 108, SPELLTILE9, V1|H1|17
+                vdpSpell 160, 108, SPELLTILE5, V1|H4|17
                 
-				; spear
-				vdpSpell 104, 96, SPELLTILE14, V1|H4|17
-				vdpSpell 136, 96, SPELLTILE10, V1|H4|17
+                ; spear
+                vdpSpell 104, 96, SPELLTILE14, V1|H4|17
+                vdpSpell 136, 96, SPELLTILE10, V1|H4|17
                 
                 ; arrow 1 mirror
-				vdpSpell 80, 100, SPELLTILE1, V1|H4|16
+                vdpSpell 80, 100, SPELLTILE1, V1|H4|16
                 vdpSpell 1, 1, 0, V1|H1|0
                 
                 ; arrow 2 mirror
-				vdpSpell 80, 100, SPELLTILE5, V1|H4|16
-				vdpSpell 112, 100, SPELLTILE9, V1|H1|16
+                vdpSpell 80, 100, SPELLTILE5, V1|H4|16
+                vdpSpell 112, 100, SPELLTILE9, V1|H1|16
                 
                 ; spear mirror
-				vdpSpell 80, 98, SPELLTILE10, V1|H4|16
-				vdpSpell 112, 98, SPELLTILE14, V1|H4|16
+                vdpSpell 80, 98, SPELLTILE10, V1|H4|16
+                vdpSpell 112, 98, SPELLTILE14, V1|H4|16

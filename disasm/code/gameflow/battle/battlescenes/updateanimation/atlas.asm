@@ -202,7 +202,7 @@ table_1E290:    dc.b $89
                 dc.b 0
                 dc.b 0
                 dc.b 0
-				
+                
                 dc.b $8D
                 dc.b $80
                 dc.b $8D

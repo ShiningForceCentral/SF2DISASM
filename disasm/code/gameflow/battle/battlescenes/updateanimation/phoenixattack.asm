@@ -140,7 +140,7 @@ loc_1EB7E:
     ; End of function spellanimationUpdate_PhoenixAttack
 
 table_1EB88:    vdpSpell 284, 212, SPELLTILE1, V4|H4|32
-				
+                
 table_1EB90:    dc.b 0
                 dc.b 8
                 dc.b $F
@@ -159,9 +159,9 @@ table_1EB90:    dc.b 0
                 dc.b 0
                 dc.b 0
                 dc.b $30
-				
+                
 table_1EBA2:    vdpSpell 253, 221, TILE1503, V4|H4|35
-				
+                
 graphic_BlastCyclone:
                 vdpSpell 110, 78, SPELLTILE44, V4|H4|32
                 vdpSpell 110, 110, SPELLTILE60, V4|H4|32

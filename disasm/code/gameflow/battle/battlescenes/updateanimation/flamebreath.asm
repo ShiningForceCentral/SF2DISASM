@@ -185,11 +185,11 @@ loc_1D494:
     ; End of function spellanimationUpdate_FlameBreath
 
 table_1D4A0:    vdpSpell 284, 222, SPELLTILE1, V1|H1|32
-				vdpSpell 210, 236, SPELLTILE1, V1|H1|32
-				vdpSpell 223, 214, SPELLTILE1, V1|H1|32
-				vdpSpell 208, 216, SPELLTILE1, V1|H1|32
-				vdpSpell 212, 204, SPELLTILE1, V1|H1|32
-				
+                vdpSpell 210, 236, SPELLTILE1, V1|H1|32
+                vdpSpell 223, 214, SPELLTILE1, V1|H1|32
+                vdpSpell 208, 216, SPELLTILE1, V1|H1|32
+                vdpSpell 212, 204, SPELLTILE1, V1|H1|32
+                
 table_1D4C8:    dc.b 0
                 dc.b 5
                 dc.b 0

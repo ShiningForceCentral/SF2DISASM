@@ -113,14 +113,14 @@ loc_1DDE8:
     ; End of function spellanimationUpdate_Dao
 
 table_1DE06:    ; small rock
-				vdpSpell 0, 0, VDPTILE_SPELLTILE1, V1|H1|32
-				
-				; medium rock
-				vdpSpell 0, 0, VDPTILE_SPELLTILE2, V3|H2|32
-				
-				; large rock
-				vdpSpell 0, 0, VDPTILE_SPELLTILE8, V4|H3|32
-				
+                vdpSpell 0, 0, VDPTILE_SPELLTILE1, V1|H1|32
+                
+                ; medium rock
+                vdpSpell 0, 0, VDPTILE_SPELLTILE2, V3|H2|32
+                
+                ; large rock
+                vdpSpell 0, 0, VDPTILE_SPELLTILE8, V4|H3|32
+                
 table_1DE1E:    dc.b 2
                 dc.b $48
                 dc.b 0

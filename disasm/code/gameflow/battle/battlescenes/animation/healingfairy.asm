@@ -66,7 +66,7 @@ loc_1A898:
                 movem.l (sp)+,d0-d1/a0
                 addq.w  #2,d0
                 dbf     d1,loc_1A898
-				
+                
                 move.w  #-1,((byte_FFB404-$1000000)).w
                 move.b  #SPELLANIMATION_HEALING_FAIRY,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
@@ -84,7 +84,7 @@ table_1A8F4:    dc.b 0
                 dc.b $28
                 dc.b 0
                 dc.b $34
-				
+                
 table_1A8FE:    dc.b 0
                 dc.b $35
                 dc.b 0
@@ -95,11 +95,11 @@ table_1A8FE:    dc.b 0
                 dc.b $5D
                 dc.b 0
                 dc.b $69
-				
+                
 table_HealFairy:
                 vdpSpell 256, 0, SPELLTILE17, V4|H4|32
-				vdpSpell 256, 0, SPELLTILE33, V2|H4|32
+                vdpSpell 256, 0, SPELLTILE33, V2|H4|32
                 
 table_EvilFairy:
                 vdpSpell -32, 0, SPELLTILE70, V4|H4|33
-				vdpSpell -32, 0, SPELLTILE86, V2|H4|33
+                vdpSpell -32, 0, SPELLTILE86, V2|H4|33

@@ -253,7 +253,7 @@ loc_1C7D8:
                 addq.w  #8,a4
                 lea     $C(a5),a5
                 dbf     d1,loc_1C75A
-				
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   sub_1B82A
                 rts

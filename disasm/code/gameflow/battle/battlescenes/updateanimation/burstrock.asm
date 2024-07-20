@@ -90,9 +90,9 @@ loc_1EC80:
     ; End of function spellanimationUpdate_BurstRockExplosion
 
 table_1EC9A:    vdpSpell 0, 0, SPELLTILE1, V4|H4|32
-				
+                
                 vdpSpell 0, 0, SPELLTILE65, V2|H2|32
-				
+                
 table_1ECAA:    dc.b 0
                 dc.b 5
                 dc.b $F

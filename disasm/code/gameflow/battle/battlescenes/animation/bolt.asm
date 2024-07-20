@@ -39,7 +39,7 @@ loc_1AAD4:
                 addq.w  #1,d7
                 move.w  d7,4(a0)
                 dbf     d1,loc_1AAD4
-				
+                
                 move.w  2(a1),d1
                 beq.s   loc_1AB2C
                 subq.w  #1,d1
@@ -85,12 +85,12 @@ table_1AB4E:    ; Variation 1
                 dc.l $40004
                 
 table_1AB5E:    vdpSpell 200, 192, SPELLTILE148, V4|H4|32
-				vdpSpell 152, 216, SPELLTILE164, V4|H4|32
-				vdpSpell 248, 200, SPELLTILE148, V4|H4|32
-				vdpSpell 304, 184, SPELLTILE164, V4|H4|32
+                vdpSpell 152, 216, SPELLTILE164, V4|H4|32
+                vdpSpell 248, 200, SPELLTILE148, V4|H4|32
+                vdpSpell 304, 184, SPELLTILE164, V4|H4|32
                 
                 ;mirror
-				vdpSpell 248, 200, SPELLTILE148, V4|H4|32
-				vdpSpell 304, 184, SPELLTILE164, V4|H4|32
-				vdpSpell 200, 192, SPELLTILE148, V4|H4|32
-				vdpSpell 152, 216, SPELLTILE164, V4|H4|32
+                vdpSpell 248, 200, SPELLTILE148, V4|H4|32
+                vdpSpell 304, 184, SPELLTILE164, V4|H4|32
+                vdpSpell 200, 192, SPELLTILE148, V4|H4|32
+                vdpSpell 152, 216, SPELLTILE164, V4|H4|32

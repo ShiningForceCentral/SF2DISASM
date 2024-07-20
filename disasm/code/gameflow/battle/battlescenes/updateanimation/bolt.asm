@@ -111,7 +111,7 @@ loc_1CF46:
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 addq.w  #8,a4
                 dbf     d1,loc_1CF46
-				
+                
                 movea.l (sp)+,a4
                 tst.w   ((byte_FFB404-$1000000)).w
                 bne.s   loc_1CF68
@@ -135,7 +135,7 @@ loc_1CF84:
                 lea     $28(a4),a4
                 lea     $C(a5),a5
                 dbf     d1,loc_1CE62
-				
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   sub_1B82A
                 move.w  2(a3),d1

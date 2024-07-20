@@ -63,4 +63,4 @@ table_1B794:    ; for Zynk
                 dc.l $D200CC
                 dc.w $0
                 
-				vdpSpell 210, 204, SPELLTILE5, V1|H4|32
+                vdpSpell 210, 204, SPELLTILE5, V1|H4|32

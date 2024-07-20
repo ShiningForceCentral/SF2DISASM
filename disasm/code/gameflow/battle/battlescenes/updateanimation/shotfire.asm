@@ -248,8 +248,8 @@ loc_1D9C8:
     ; End of function sub_1D9B2
 
 table_1D9CE:    vdpSpell 0, 0, SPELLTILE65, V2|H2|32  ; graphic Burst_Shot
-				vdpSpell -8, -8, SPELLTILE1, V4|H4|32 ; graphic Burst_Explosion
-				
+                vdpSpell -8, -8, SPELLTILE1, V4|H4|32 ; graphic Burst_Explosion
+                
 table_1D9DE:    dc.b 0
                 dc.b 3
                 dc.b 5

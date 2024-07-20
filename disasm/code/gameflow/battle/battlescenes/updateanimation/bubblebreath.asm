@@ -172,7 +172,7 @@ loc_1E770:
                 lea     $C(a5),a5
                 addq.w  #1,d6
                 dbf     d7,loc_1E5DC
-				
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   sub_1B82A
                 rts
@@ -180,7 +180,7 @@ loc_1E770:
     ; End of function spellanimationUpdate_BubbleBreath
 
 graphic_Bubble: vdpSpell 212, 248, SPELLTILE1, V1|H1|32
-				
+                
 table_1E78E:    ; bubble 2
                 dc.b 0
                 dc.b $A
@@ -188,7 +188,7 @@ table_1E78E:    ; bubble 2
                 dc.b 0
                 dc.b 0
                 dc.b 1  ; spell tile # offset
-				
+                
                 ; bubble 3
                 dc.b 0
                 dc.b $14
@@ -196,7 +196,7 @@ table_1E78E:    ; bubble 2
                 dc.b 0
                 dc.b 0
                 dc.b 2  ; spell tile # offset
-				
+                
                 ; bubble 4
                 dc.b 0
                 dc.b $1E
@@ -204,7 +204,7 @@ table_1E78E:    ; bubble 2
                 dc.b 0
                 dc.b 0
                 dc.b 3  ; spell tile # offset
-				
+                
                 ; bubble 5
                 dc.b 0
                 dc.b $28
@@ -212,7 +212,7 @@ table_1E78E:    ; bubble 2
                 dc.b 0
                 dc.b 0
                 dc.b 4  ; spell tile # offset
-				
+                
                 ; bubble 6
                 dc.b 0
                 dc.b $32
@@ -220,7 +220,7 @@ table_1E78E:    ; bubble 2
                 dc.b 0
                 dc.b 0
                 dc.b 8  ; spell tile # offset
-				
+                
                 ; bubble 7
                 dc.b 0
                 dc.b $3C

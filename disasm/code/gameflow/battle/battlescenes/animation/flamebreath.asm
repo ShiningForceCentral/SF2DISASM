@@ -15,7 +15,7 @@ spellanimationSetup_FlameBreath:
                 lea     ((byte_FFB532-$1000000)).w,a1
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   loc_1AD62
-				
+                
                 move.w  #$40,(a1) 
                 move.w  #$80,2(a1) 
                 bra.s   loc_1AD6A

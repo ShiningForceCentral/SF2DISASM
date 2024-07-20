@@ -134,7 +134,7 @@ loc_1DF7E:
                 addq.w  #8,a4
                 addq.w  #1,d0
                 dbf     d1,loc_1DE8A
-				
+                
                 lea     table_1DFCE(pc), a0
                 bsr.w   sub_1B8B2
                 cmpi.b  #2,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
@@ -144,8 +144,8 @@ loc_1DF7E:
     ; End of function spellanimationUpdate_Apollo
 
 table_1DFA2:    vdpSpell 274, 203, TILE1920, V2|H2|32
-				vdpSpell 286, 204, TILE1924, V2|H2|32
-				
+                vdpSpell 286, 204, TILE1924, V2|H2|32
+                
 table_1DFB2:    dc.b 0
                 dc.b $80
                 dc.b 0

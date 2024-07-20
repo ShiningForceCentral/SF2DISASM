@@ -35,7 +35,7 @@ loc_1B3D8:
                 move.b  #2,(a0)+
                 move.b  #2,(a1)+
                 dbf     d0,loc_1B3D8
-				
+                
                 move.w  #-1,((byte_FFB404-$1000000)).w
                 move.b  #SPELLANIMATION_ATLAS,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w

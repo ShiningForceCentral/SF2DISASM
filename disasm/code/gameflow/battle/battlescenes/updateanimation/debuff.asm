@@ -76,7 +76,7 @@ loc_1D0D4:
 
 graphic_DebuffCloud:
                 vdpSpell 0, 0, SPELLTILE1, V4|H4|32
-				
+                
 table_1D0F6:    dc.b 0
                 dc.b $10   ; graphic 2
                 dc.b 0

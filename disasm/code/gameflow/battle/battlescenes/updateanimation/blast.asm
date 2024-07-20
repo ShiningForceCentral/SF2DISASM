@@ -389,28 +389,28 @@ sub_1CBA6:
 table_1CBBA:    dc.w -48     ; X
                 dc.w -48     ; Y
                 dc.w 0       ; tile modifier
-				
+                
                 dc.w 48
                 dc.w -48
                 dc.w VDPTILE_MIRROR
-				
+                
                 dc.w -48
                 dc.w 48
                 dc.w VDPTILE_FLIP
-				
+                
                 dc.w 48
                 dc.w 48
                 dc.w VDPTILE_MIRROR|VDPTILE_FLIP
-				
-				; 4&5
+                
+                ; 4&5
                 dc.w -52
                 dc.w 0
                 dc.w 0
-				
+                
                 dc.w 52
                 dc.w 0
                 dc.w VDPTILE_MIRROR
-				
+                
 table_1CBDE:    dc.w 5
                 dc.w $500
                 dc.b 0
@@ -423,7 +423,7 @@ table_1CBDE:    dc.w 5
                 dc.b 5
                 dc.b 0
                 dc.b 5
-				
+                
                 dc.b 5
                 dc.b 0
                 dc.b 0
@@ -436,7 +436,7 @@ table_1CBDE:    dc.w 5
                 dc.b $1D
                 dc.b 0
                 dc.b 5
-				
+                
                 dc.b 6
                 dc.b 0
                 dc.b 0
@@ -449,7 +449,7 @@ table_1CBDE:    dc.w 5
                 dc.b $B
                 dc.b 0
                 dc.b 5
-				
+                
                 dc.b 9
                 dc.b 0
                 dc.b 0
@@ -466,63 +466,63 @@ table_1CC0E:    dc.b $C
                 dc.b $A
                 dc.b 0
                 dc.b 1
-				
+                
 table_1CC14:    dc.b $18
                 dc.b $18
                 dc.b 1
                 dc.b VDPTILE_FLIP_BYTE  ; tile modifier byte
                 dc.b 8    ; X
                 dc.b 0    ; Y
-				
+                
                 dc.b 0
                 dc.b $18
                 dc.b 0
                 dc.b 0
                 dc.b 0
                 dc.b 8
-				
+                
                 dc.b $E8
                 dc.b $18
                 dc.b 1
                 dc.b VDPTILE_MIRROR_BYTE|VDPTILE_FLIP_BYTE
                 dc.b 0
                 dc.b 0
-				
+                
                 dc.b $18
                 dc.b 0
                 dc.b 2
                 dc.b 0
                 dc.b 8
                 dc.b 8
-				
+                
                 dc.b $E8
                 dc.b 0
                 dc.b 2
                 dc.b VDPTILE_MIRROR_BYTE
                 dc.b 8
                 dc.b 8
-				
+                
                 dc.b $18
                 dc.b $E8
                 dc.b 1
                 dc.b 0
                 dc.b 8
                 dc.b 0
-				
+                
                 dc.b 0
                 dc.b $E8
                 dc.b 0
                 dc.b VDPTILE_FLIP_BYTE
                 dc.b 0
                 dc.b 0
-				
+                
                 dc.b $E8
                 dc.b $E8
                 dc.b 1
                 dc.b VDPTILE_MIRROR_BYTE
                 dc.b 0
                 dc.b 0
-				
+                
 table_1CC44:    dc.b $50
                 dc.b $97
 table_1CC46:    dc.b $70

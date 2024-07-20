@@ -156,7 +156,7 @@ loc_1D288:
                 addq.w  #8,a4
                 addq.w  #1,d0
                 dbf     d1,loc_1D10E
-				
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   sub_1B82A
                 rts
@@ -165,7 +165,7 @@ loc_1D288:
 
 graphic_DemonbreathSpirit:
                 vdpSpell 0, 0, SPELLTILE1, V4|H4|32
-				
+                
 table_1D2AA:    dc.w $20
                 dc.b $F
                 dc.b 0

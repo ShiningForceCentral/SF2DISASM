@@ -268,12 +268,12 @@ sub_1C4D8:
     ; End of function sub_1C4D8
 
 graphic_Reaper: vdpSpell 0, 0, SPELLTILE1, V4|H4|32
-				vdpSpell 0, 32, SPELLTILE17, V2|H4|32
-				vdpSpell 32, 0, SPELLTILE25, V4|H4|32
-				vdpSpell 32, 32, SPELLTILE41, V2|H4|32
-				
+                vdpSpell 0, 32, SPELLTILE17, V2|H4|32
+                vdpSpell 32, 0, SPELLTILE25, V4|H4|32
+                vdpSpell 32, 32, SPELLTILE41, V2|H4|32
+                
 graphic_ReaperMirror:
                 vdpSpell 0, 0, SPELLTILE25, V4|H4|33
-				vdpSpell 0, 32, SPELLTILE41, V2|H4|33
-				vdpSpell 32, 0, SPELLTILE1, V4|H4|33
-				vdpSpell 32, 32, SPELLTILE17, V2|H4|33
+                vdpSpell 0, 32, SPELLTILE41, V2|H4|33
+                vdpSpell 32, 0, SPELLTILE1, V4|H4|33
+                vdpSpell 32, 32, SPELLTILE17, V2|H4|33

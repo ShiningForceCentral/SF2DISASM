@@ -19,7 +19,7 @@ spellanimationSetup_Blast:
                 lea     ((byte_FFB532-$1000000)).w,a2
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   loc_1A96E
-				
+                
                 move.w  #$D0,(a2) 
                 move.w  #$E0,2(a2) 
                 cmpi.w  #3,d1
@@ -58,7 +58,7 @@ loc_1A99E:
                 move.b  d7,2(a0)
                 move.b  #2,(a1)+
                 dbf     d1,loc_1A99E
-				
+                
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #$301,2(a0)
@@ -91,5 +91,5 @@ loc_1AA06:
 
 graphic_BlastCycloneandDust:
                 vdpSpell 8, 48, SPELLTILE140, V2|H2|32  ; dust for cyclone
-				vdpSpell 0, 0, SPELLTILE44, V4|H4|32
-				vdpSpell 0, 32, SPELLTILE60, V4|H4|32
+                vdpSpell 0, 0, SPELLTILE44, V4|H4|32
+                vdpSpell 0, 32, SPELLTILE60, V4|H4|32

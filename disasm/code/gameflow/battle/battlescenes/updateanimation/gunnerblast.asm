@@ -303,16 +303,16 @@ loc_1DC80:
 
 graphic_GunnerBlast:
                 vdpSpell 0, 0, SPELLTILE9, V4|H4|32
-				vdpSpell 0, 32, SPELLTILE25, V4|H4|32
-				vdpSpell 0, 64, SPELLTILE41, V4|H4|32
-				vdpSpell 32, 0, SPELLTILE57, V4|H2|32
-				vdpSpell 32, 32, SPELLTILE65, V4|H2|32
-				vdpSpell 32, 64, SPELLTILE73, V4|H2|32
-				
-				; mirror to complete image
-				vdpSpell 48, 0, SPELLTILE57, V4|H2|33
-				vdpSpell 48, 32, SPELLTILE65, V4|H2|33
-				vdpSpell 48, 64, SPELLTILE73, V4|H2|33
-				vdpSpell 64, 0, SPELLTILE9, V4|H4|33
-				vdpSpell 64, 32, SPELLTILE25, V4|H4|33
-				vdpSpell 64, 64, SPELLTILE41, V4|H4|33
+                vdpSpell 0, 32, SPELLTILE25, V4|H4|32
+                vdpSpell 0, 64, SPELLTILE41, V4|H4|32
+                vdpSpell 32, 0, SPELLTILE57, V4|H2|32
+                vdpSpell 32, 32, SPELLTILE65, V4|H2|32
+                vdpSpell 32, 64, SPELLTILE73, V4|H2|32
+                
+                ; mirror to complete image
+                vdpSpell 48, 0, SPELLTILE57, V4|H2|33
+                vdpSpell 48, 32, SPELLTILE65, V4|H2|33
+                vdpSpell 48, 64, SPELLTILE73, V4|H2|33
+                vdpSpell 64, 0, SPELLTILE9, V4|H4|33
+                vdpSpell 64, 32, SPELLTILE25, V4|H4|33
+                vdpSpell 64, 64, SPELLTILE41, V4|H4|33

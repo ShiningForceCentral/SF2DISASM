@@ -43,7 +43,7 @@ loc_1B268:
                 jsr     (Sleep).w       
                 exg     a0,a1
                 dbf     d1,loc_1B248
-				
+                
                 moveq   #SPELLGRAPHICS_NEPTUN,d0
                 bsr.w   LoadSpellGraphicsForInvocation
                 moveq   #$26,d0 
@@ -75,7 +75,7 @@ loc_1B2BE:
                 
                 jsr     (WaitForVInt).w
                 dbf     d2,loc_1B2A0
-				
+                
                 moveq   #SPELLGRAPHICS_NEPTUN,d0
                 bsr.w   LoadSpellGraphics
                 moveq   #1,d0
@@ -96,14 +96,14 @@ loc_1B304:
                 
                 move.b  #1,(a0)+
                 dbf     d0,loc_1B304
-				
+                
                 lea     (byte_FFAFC6).l,a0
                 moveq   #21,d0
 loc_1B314:
                 
                 move.b  #1,(a0)+
                 dbf     d0,loc_1B314
-				
+                
                 moveq   #20,d0
                 jsr     (Sleep).w       
                 move.l  #table_NeptunBackgroundModification,((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w
@@ -124,14 +124,14 @@ table_1B358:    dc.b 1
                 dc.b -80
                 dc.b 0
                 dc.b 1
-				
+                
                 dc.b 0
                 dc.b 1
                 dc.b 0
                 dc.b 1
                 dc.b 0
                 dc.b 1
-				
+                
 table_1B364:    vdpSpell 296, 192, TILE1920, V3|H2|32
                 
 table_NeptunBackgroundModification:

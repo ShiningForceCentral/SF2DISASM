@@ -128,7 +128,7 @@ sub_1E0DA:
 
 graphic_NeptuneSizzle:
                 vdpSpell 128, 256, SPELLTILE31, V2|H2|32
-				
+                
 table_1E10E:    dc.b 0
                 dc.b $88
                 dc.b 0

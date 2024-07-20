@@ -258,7 +258,7 @@ loc_1C148:
                 lea     $C(a5),a5
                 addq.w  #8,a4
                 dbf     d1,loc_1BF88
-				
+                
                 subq.b  #1,$E(a3)
                 bne.s   loc_1C178
                 sndCom  SFX_TINKLING
