@@ -85,7 +85,7 @@ MainMenu_Magic:
                 
                 ; Is casting Detox?
                 cmpi.w  #SPELL_DETOX,spellIndex(a6)
-                beq.s   @CastDetox
+                beq.w   @CastDetox
                 
                 ; Cast a spell other than Detox
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -96,8 +96,11 @@ MainMenu_Magic:
                 clsTxt
                 
                 ; Is casting Egress?
-                cmpi.w  #SPELL_EGRESS,spellIndex(a6)
-                beq.s   @CurrentlyOnOverworldMap
+                lea     table_EgressSpells(pc), a0
+                move.w  spellIndex(a6),d1
+                clr.w   d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcc.s   @IsCurrentlyOnOverworldMap ; if so, check if currently on an overworld map
 @NothingHappened:
                 
                 ; Nothing happens when casting spells other than Detox and Egress,
@@ -105,7 +108,7 @@ MainMenu_Magic:
                 txt     312             ; "But nothing happened."
                 clsTxt
                 bra.w   @StartMain
-@CurrentlyOnOverworldMap:
+@IsCurrentlyOnOverworldMap:
                 
                 jsr     IsOverworldMap
                 beq.s   @NothingHappened        ; nothing happens if not an overworld map
@@ -223,14 +226,19 @@ MainItemSubmenu_Use:
                 move.w  itemIndex(a6),d1
                 jsr     GetItemDefAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
-                                
-                ; Using Angel Wing on an overworld map?
-                cmpi.w  #ITEM_ANGEL_WING,d2
-                bne.s   @HandleNonAngelWingItems
-                jsr     IsOverworldMap
-                beq.s   @HandleNonAngelWingItems
                 
-                ; Use Angel Wing
+                ; In: d1.w = item index
+                ;
+                ; Using an "Egress item" (e.g., Angel Wing) on an overworld map?
+                lea     table_EgressItems(pc), a0
+                clr.w   d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @HandleNonEgressItems
+                
+                jsr     IsOverworldMap
+                beq.s   @HandleNonEgressItems
+                
+                ; Use the Egress item
                 move.w  member(a6),d0
                 move.w  itemSlot(a6),d1
                 jsr     RemoveItemBySlot
@@ -238,7 +246,7 @@ MainItemSubmenu_Use:
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 txt     73                      ; "{NAME} used the{N}{ITEM}.{W2}"
                 bra.w   @Egress
-@HandleNonAngelWingItems:
+@HandleNonEgressItems:
                 
                 move.w  itemIndex(a6),d1
                 jsr     IsItemUsableOnField

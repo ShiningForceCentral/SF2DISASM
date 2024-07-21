@@ -162,15 +162,23 @@ ExecuteIndividualTurn:
                 ; Check if casting Egress
 @CastSpell:     move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
-                cmpi.w  #SPELL_EGRESS,d0
-                bne.s   @Continue
+                lea     table_EgressSpells(pc), a0
+                move.w  d0,d1
+                clr.w   d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @Continue
+                
                 bra.w   ExecuteBattleaction_Egress
                 
-                ; Check if using Angel Wing
+                ; Check if using an "Egress item" (e.g., Angel Wing)
 @UseItem:       move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
-                cmpi.w  #ITEM_ANGEL_WING,d0
-                bne.s   @Continue
+                lea     table_EgressItems(pc), a0
+                move.w  d0,d1
+                clr.w   d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @Continue
+                
                 bra.w   ExecuteBattleaction_AngelWing
                 
                 ; Prepare enemy attack coming out of a trapped chest 

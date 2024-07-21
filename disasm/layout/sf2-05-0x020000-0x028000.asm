@@ -40,6 +40,7 @@
                 includeIfStandard "code\gameflow\battle\battlefunctions\executeindividualturn-standard.asm"
                 includeIfStandard "code\gameflow\battle\battlefunctions\handleafterturneffects-standard.asm"
                 includeIfStandard "data\battles\global\egresspositionsforbattles-standard.asm"
+                includeIfStandard "data\stats\egressitemsandspells-standard.asm"
                 includeIfStandard "data\stats\randomattackspells-standard.asm"
                 includeIfStandard "data\battles\global\enemybattlescenemusics-standard.asm"
                 includeIfStandard "data\stats\items\afterturnrecovery-standard.asm"
