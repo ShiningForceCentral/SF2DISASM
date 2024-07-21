@@ -14,6 +14,10 @@ BattleLoop:
             if (MUSIC_RESUMING&RESUME_BATTLESCENE_MUSIC=1)
                 activateMusicResuming
             endif
+            if (STANDARD_BUILD=1)
+                ; Make sure to clear the "invulnerable enemy" flag when initializing a new battle
+                clrFlg  112             ; Currently attacking Taros with Achilles Sword
+            endif
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 chkFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 beq.s   @Initialize

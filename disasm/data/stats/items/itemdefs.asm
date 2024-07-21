@@ -702,7 +702,11 @@ table_ItemDefinitions:
                 equipFlags2  NONE
                 range        1, 1
                 price        1350
+            if (STANDARD_BUILD&ORIGINAL_TAROS_INVULNERABILITY=1)
+                itemType     WEAPON|RARE|UNSELLABLE ; prevent a potential softlock when using the Japanese version's invulnerability behavior
+            else
                 itemType     WEAPON|RARE
+            endif
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 19, &
                              NONE, 0, &

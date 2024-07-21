@@ -21,10 +21,12 @@
                 ; Battleactions engine
                 include "code\gameflow\special\debugmodebattleactions.asm"    ; Debug mode battle actions
                 include "code\gameflow\battle\battleactions\battleactionsengine_1.asm"    ; Battleactions Engine, part 1
-                include "code\gameflow\battle\battleactions\determineineffectiveattack.asm"    ; Determine ineffective attack function
+                includeIfStandard "code\gameflow\battle\battleactions\determineineffectiveattack-standard.asm"
+                includeIfVanilla "code\gameflow\battle\battleactions\determineineffectiveattack.asm"    ; Determine ineffective attack function
                 include "code\gameflow\battle\battleactions\initbattlesceneproperties.asm"    ; Init Battlescene Properties function
                 includeIfStandard "code\gameflow\battle\battleactions\createbattlescenemessage-standard.asm"
                 includeIfStandard "code\gameflow\battle\battleactions\createbattlesceneanimation-standard.asm"
+                includeIfStandard "data\stats\enemies\invulnerableenemybattles-standard.asm"
                 includeIfStandard "data\stats\spells\spellcastmessages-standard.asm"
                 includeIfStandard "data\graphics\battles\specialbattleanimations-standard.asm"
                 alignIfStandard
