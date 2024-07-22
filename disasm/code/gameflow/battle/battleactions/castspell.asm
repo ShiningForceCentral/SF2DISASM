@@ -233,8 +233,10 @@ spellEffect_Boost:
                 andi.w  #STATUSEFFECT_BOOST,d3
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 cmpi.w  #STATUSEFFECT_BOOST,d3 ; check if status counter is already at max value
-            endif
+                bne.s   @WriteScriptCommands
+            else
                 beq.s   @WriteScriptCommands
+            endif
                 moveq   #8,d2
                 bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
@@ -303,8 +305,10 @@ spellEffect_Slow:
                 andi.w  #STATUSEFFECT_SLOW,d3
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 cmpi.w  #STATUSEFFECT_SLOW,d3 ; check if status counter is already at max value
-            endif
+                bne.s   @WriteScriptCommands
+            else
                 beq.s   @WriteScriptCommands
+            endif
                 moveq   #8,d2
                 bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
@@ -369,8 +373,10 @@ spellEffect_Attack:
                 andi.w  #STATUSEFFECT_ATTACK,d3
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 cmpi.w  #STATUSEFFECT_ATTACK,d3 ; check if status counter is already at max value
-            endif
+                bne.s   @WriteScriptCommands
+            else
                 beq.s   @WriteScriptCommands
+            endif
                 moveq   #8,d2
                 bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
