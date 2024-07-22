@@ -254,27 +254,29 @@ byte_B2B6:
                 jsr     GetBaseAgi
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
-            endif
                 mulu.w  #3,d1
                 lsr.l   #3,d1
-            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 rol.w   #4,d3           ; calculate difference between full and current BOOST increase values
                 mulu.w  d3,d2
                 lsr.l   #3,d2
                 sub.w   d2,d1
-            endif
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 jsr     GetBaseDef
-            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
-            endif
                 mulu.w  #3,d1
                 lsr.l   #3,d1
-            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 mulu.w  d3,d2
                 lsr.l   #3,d2
                 sub.w   d2,d1
+            else
+                mulu.w  #3,d1
+                lsr.l   #3,d1
+                displayMessage #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
+                jsr     GetBaseDef
+                mulu.w  #3,d1
+                lsr.l   #3,d1
             endif
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_DEF_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -329,27 +331,29 @@ battlesceneScript_DisplaySlowMessages:
                 jsr     GetBaseAgi
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
-            endif
                 mulu.w  #3,d1
                 lsr.l   #3,d1
-            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 rol.w   #6,d3           ; calculate difference between full and current SLOW increase values
                 mulu.w  d3,d2
                 lsr.l   #3,d2
                 sub.w   d2,d1
-            endif
                 displayMessage #MESSAGE_BATTLE_AGILITY_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 jsr     GetBaseDef
-            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
-            endif
                 mulu.w  #3,d1
                 lsr.l   #3,d1
-            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 mulu.w  d3,d2
                 lsr.l   #3,d2
                 sub.w   d2,d1
+            else
+                mulu.w  #3,d1
+                lsr.l   #3,d1
+                displayMessage #MESSAGE_BATTLE_AGILITY_DECREASED_BY,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
+                jsr     GetBaseDef
+                mulu.w  #3,d1
+                lsr.l   #3,d1
             endif
                 displayMessage #MESSAGE_BATTLE_DEFENSE_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -394,14 +398,15 @@ byte_B3E2:
                 jsr     GetBaseAtt
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
-            endif
                 mulu.w  #3,d1
                 lsr.l   #3,d1
-            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 rol.w   #2,d3           ; calculate difference between full and current ATTACK increase values
                 mulu.w  d3,d2
                 lsr.l   #3,d2
                 sub.w   d2,d1
+            else
+                mulu.w  #3,d1
+                lsr.l   #3,d1
             endif
                 displayMessage #MESSAGE_BATTLE_ATTACK_SPELL_EFFECT,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
