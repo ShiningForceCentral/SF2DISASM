@@ -1357,7 +1357,7 @@ BattlefieldMenu:
                 
                 dbf     d7,@Loop
 @StartMenu:
-            if (EXTENDED_STATUS=1)
+            if (STANDARD_BUILD&EXTENDED_STATUS=1)
                 jsr     OpenGoldWindowInFieldMenu
             endif
                 lea     (InitialStack).w,a0
@@ -1365,7 +1365,7 @@ BattlefieldMenu:
                 moveq   #0,d1
                 moveq   #MENU_BATTLEFIELD,d2
                 jsr     j_ExecuteDiamondMenu
-            if (EXTENDED_STATUS=1)
+            if (STANDARD_BUILD&EXTENDED_STATUS=1)
                 jsr     CloseGoldWindowInFieldMenu
             endif
                 cmpi.w  #-1,d0

@@ -2366,7 +2366,7 @@ kdKillsOffset = 114
 kdLayoutBytesize = 192
 kdWindowSize = $80C
 
-    if (EXTENDED_STATUS=1)
+    if (STANDARD_BUILD&EXTENDED_STATUS=1)
 kdTextLength = 5
 kdDefeatsOffset = 6
 kdKillsOffset = 20
@@ -2389,7 +2389,7 @@ WINDOW_MEMBER_KD_DEST: equ $F80B
 WINDOW_MEMBER_GOLD_DEST: equ $F81C
 WINDOW_MEMBER_PORTRAIT_DEST: equ $F8F6
 
-    if (EXTENDED_STATUS=1)
+    if (STANDARD_BUILD&EXTENDED_STATUS=1)
 WINDOW_MEMBER_KD_LAYOUT_TAIL_BYTESIZE: equ 16
 WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_INDICATOR: equ 104 ; indicates whether critical hits inflict more damage, or an ailment.
 WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_CHANCE: equ 16
@@ -2419,7 +2419,7 @@ WINDOW_GOLD_SIZE: equ $904
 WINDOW_GOLD_DEST: equ $1617
 WINDOW_GOLD_SOURCE: equ $2017
 
-    if (EXTENDED_STATUS=1)
+    if (STANDARD_BUILD&EXTENDED_STATUS=1)
 WINDOW_FIELD_GOLD_DEST: equ $1601
 WINDOW_FIELD_GOLD_SOURCE: equ $2001
     endif
@@ -2518,7 +2518,7 @@ enemyExpOffset  = enemyExpOffset+2
 allyExpOffset   = allyExpOffset+2
     endif
 
-    if (EXTENDED_STATUS=1)
+    if (STANDARD_BUILD&EXTENDED_STATUS=1)
 currentHpOffset = currentHpOffset-lineOffset
 maxHpOffset     = maxHpOffset-lineOffset
 defOffset       = defOffset-lineOffset
