@@ -91,11 +91,8 @@ BuildMemberScreen:
             endif
 @loc_3:
             if (EXTENDED_STATUS=1)
-                ; DMA element icon tiles
+                ; DMA uncompressed element icon tiles directly from ROM
                 lea     tiles_ElementIcons(pc),a0
-                lea     (MEMBER_SCREEN_ELEMENT_ICONS_LOADING_SPACE).l,a1
-                jsr     (LoadStackCompressedData).w
-                lea     (MEMBER_SCREEN_ELEMENT_ICONS_LOADING_SPACE).l,a0
                 moveq   #32,d2
                 movea.w d2,a1
                 move.w  #128,d0

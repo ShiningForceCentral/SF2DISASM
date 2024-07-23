@@ -147,11 +147,6 @@ FF3000_MAP_TILESET_1: equ $FF3000 ; Current Map Tileset 1
 FF3800_LOADING_SPACE: equ $FF3800 ; Battle scene background tileset 2
 byte_FF4000: equ $FF4000 ; cleared up to FF4800 after loading weaponsprite
 FF4400_LOADING_SPACE: equ $FF4400 ; Total movecosts array
-
-    if (STANDARD_BUILD&EXTENDED_STATUS=1)
-MEMBER_SCREEN_ELEMENT_ICONS_LOADING_SPACE: equ FF4400_LOADING_SPACE
-    endif
-
 byte_FF4A00: equ $FF4A00
 FF4D00_LOADING_SPACE: equ $FF4D00 ; - Movable grid array (0 = movable space, -1 = not movable)
                                         ; - Exploration special sprite
