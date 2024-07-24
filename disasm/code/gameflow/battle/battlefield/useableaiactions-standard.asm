@@ -14,11 +14,11 @@ GetNextUsableAttackSpell:
                 
                 movem.l d3-d5/a0,-(sp)
                 bsr.w   CheckMuddled2   
-                move.w  d1,d5           ; remember whether caster is muddled
+                move.w  d1,d5                       ; remember whether caster is muddled
                 tst.b   d0
                 bmi.s   @Loop
-                moveq   #1,d5           ; treat ally caster as muddled
                 
+                moveq   #1,d5                       ; treat ally caster as muddled
 @Loop:          move.w  d3,d1
                 bsr.w   GetSpellAndNumberOfSpells
                 move.w  d1,d4                       ; save spell entry
@@ -26,21 +26,24 @@ GetNextUsableAttackSpell:
                 cmpi.w  #SPELL_NOTHING,d1
                 beq.s   @Next
                 
+                ; Is caster muddled?
+                tst.w   d5
+                beq.s   @CheckSpellType
+                
+                ; In: d1.w = spell index
+                ;
+                ; Is spell disallowed from being cast when the caster is confused?
+                lea     table_AiExcludedWhenConfusedAttackSpells(pc), a0
+                clr.w   d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcc.s   @Next
+@CheckSpellType:
+                
                 ; Is spell attack type?
                 bsr.w   FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
-                bne.s   @Next
-                
-                ; Is caster muddled?
-                tst.w   d5
-                bne.s   @Break
-                
-                ; Is spell excluded?
-                lea     table_AiExcludedAttackSpells(pc), a0
-                clr.w   d2
-                jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcs.s   @Break
+                beq.s   @Break                      ; break out of loop once we have found an attack type spell
                 
 @Next:          addq.w  #1,d3
                 cmpi.w  #COMBATANT_SPELLSLOTS,d3
@@ -147,13 +150,13 @@ GetNextSupportSpell:
 
 GetNextUsableAttackItem:
                 
-                movem.l d3-d5/a0,-(sp)
+                movem.l d3-d6/a0,-(sp)
                 bsr.w   CheckMuddled2   
-                move.w  d1,d5           ; remember whether caster is muddled
+                move.w  d1,d5                       ; remember whether caster is muddled
                 tst.b   d0
                 bmi.s   @Loop
-                move.w  #1,d5           ; treat ally caster as muddled
                 
+                move.w  #1,d5                       ; treat ally caster as muddled
 @Loop:          move.w  d3,d1
                 bsr.w   GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #ITEM_NOTHING,d1
@@ -164,33 +167,40 @@ GetNextUsableAttackItem:
                 bcc.s   @Next
                 
                 ; Is AI allowed to use item?
-                btst    #ITEMENTRY_BIT_EQUIPPED,d1 ; if not equipped, AI must be set to use the item in battle data
+                btst    #ITEMENTRY_BIT_EQUIPPED,d1  ; if not equipped, AI must be set to use the item in battle data
                 bne.s   @Continue
+                
                 btst    #ITEMENTRY_BIT_USABLE_BY_AI,d1
                 beq.s   @Next
                 
+                ; Get item Use Spell entry -> d1.w
 @Continue:      bsr.w   GetItemDefAddress
-                move.w  d1,d4           ; save item entry
+                move.w  d1,d4                       ; save item entry
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 
+                ; Is caster muddled?
+                tst.w   d5
+                beq.s   @CheckSpellType
+                
+                ; In: d1.w = Use Spell entry
+                ;
+                ; Is spell disallowed from being cast when the caster is confused?
+                lea     table_AiExcludedWhenConfusedItemUseAttackSpells(pc), a0
+                move.w  d1,d6                       ; save spell entry
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
+                clr.w   d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcc.s   @Next
+                
+                move.w  d6,d1                       ; restore spell entry
 @CheckSpellType:
+                
                 ; Is spell attack type?
                 bsr.w   FindSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
-                bne.s   @Next
-                
-                ; Is caster muddled?
-                tst.w   d5
-                bne.s   @Break
-                
-                ; Is spell excluded?
-                lea     table_AiExcludedItemUseAttackSpells(pc), a0
-                andi.w  #SPELLENTRY_MASK_INDEX,d1
-                clr.w   d2
-                jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcs.s   @Break
+                beq.s   @Break                      ; break out of loop once we have found an attack type spell
                 
 @Next:          addq.w  #1,d3
                 cmpi.w  #COMBATANT_ITEMSLOTS,d3
@@ -198,9 +208,10 @@ GetNextUsableAttackItem:
                 
                 move.w  #ITEM_NOTHING,d1
                 bra.s   @Done
+                
 @Break:         move.w  d3,d2
-                move.w  d4,d1           ; restore item entry
-@Done:          movem.l (sp)+,d3-d5/a0
+                move.w  d4,d1                       ; restore item entry
+@Done:          movem.l (sp)+,d3-d6/a0
                 rts
 
     ; End of function GetNextUsableAttackItem

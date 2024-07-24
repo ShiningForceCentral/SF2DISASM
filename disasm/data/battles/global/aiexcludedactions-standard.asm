@@ -1,8 +1,8 @@
 
 ; ASM FILE data\stats\items\aiexcludedactions-standard.asm :
 
-; Attack type spells which are ignored by the AI when casting.
-table_AiExcludedAttackSpells:
+; Attack type spells which are disallowed from being cast by AI-controlled combatants when they are confused (i.e., Muddle 2).
+table_AiExcludedWhenConfusedAttackSpells:
                 
                 dc.b SPELL_DESOUL
                 dc.b SPELL_FLAME
@@ -24,8 +24,8 @@ table_AiExcludedAttackSpells:
                 tableEnd.b
 
 
-; Attack type spells which are ignored by the AI when using items.
-table_AiExcludedItemUseAttackSpells:
+; Attack type Item Use Spells which are disallowed from being used by AI-controlled combatants when they are confused (i.e., Muddle 2).
+table_AiExcludedWhenConfusedItemUseAttackSpells:
                 
                 dc.b SPELL_DESOUL
                 dc.b SPELL_FLAME
