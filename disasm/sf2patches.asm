@@ -45,6 +45,7 @@ FIX_MISSING_RANDOM_BATTLES:         equ 1       ; Add zone events for random bat
 FIX_COUNT_DEFEATED_ENEMIES:         equ 1       ; Fixes the death counter that impacts "swarm AI" for battles 16, 20, 21. In vanilla, does not impact battles 16, 20, but makes 21 more aggressive.
 FIX_FIELD_ITEM_CONSUMABLE:          equ 1       ; Field items will only be consumed if the CONSUMABLE flag is set
 FIX_ELIS_DIALOGUE_ASSIGNMENT:       equ 1       ; A line of dialogue used during the cutscene in the tower underground room before Granseal's destruction is wrongly assigned to Bowie.
+FIX_KIWI_BREATH_UPGRADE_LEVELS:     equ 1       ; Kiwi's breath upgrades are based on effective rather than current level.
 
 
 ; Quality of life features
