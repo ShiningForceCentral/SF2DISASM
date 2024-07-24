@@ -46,6 +46,7 @@ FIX_COUNT_DEFEATED_ENEMIES:         equ 1       ; Fixes the death counter that i
 FIX_FIELD_ITEM_CONSUMABLE:          equ 1       ; Field items will only be consumed if the CONSUMABLE flag is set
 FIX_ELIS_DIALOGUE_ASSIGNMENT:       equ 1       ; A line of dialogue used during the cutscene in the tower underground room before Granseal's destruction is wrongly assigned to Bowie.
 FIX_KIWI_BREATH_UPGRADE_LEVELS:     equ 1       ; Kiwi's breath upgrades are based on effective rather than current level.
+FIX_KARNA_INCREASED_DOUBLE:         equ 1       ; 1 = No increased double, 2 = Sheela gets increased double instead.  An oddity in the character initialization routine causes the chance to double attack to be increased if the character happens to start knowing Heal 3.
 
 
 ; Quality of life features

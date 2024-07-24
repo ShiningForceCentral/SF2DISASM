@@ -266,7 +266,14 @@ InitializeAllyStats:
                 
                 ; Increase base double attack setting when learning Heal 3
                 ; to give Karna extra double attack as PRST
+            if (STANDARD_BUILD&FIX_KARNA_INCREASED_DOUBLE=1)
+                ; do nothing
+            else
+              if (STANDARD_BUILD&FIX_KARNA_INCREASED_DOUBLE>=2)
+                cmpi.w  #ALLY_SHEELA,d0
+              else
                 cmpi.b  #SPELL_HEAL|SPELL_LV3,d1
+              endif
                 bne.s   @LearnSpell
                 bsr.w   GetBaseProwess
                 move.w  d1,d2
@@ -282,6 +289,7 @@ InitializeAllyStats:
                 or.w    d2,d1
                 bsr.w   SetBaseProwess
                 bra.s   @Next
+            endif
 @LearnSpell:
                 
                 bsr.w   LearnSpell      
