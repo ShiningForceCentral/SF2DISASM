@@ -141,8 +141,11 @@ ExecuteAiCommand_Attack:
                 clr.l   d3
                 clr.l   d4
                 jsr     GetCombatantType
+            if (STANDARD_BUILD&FIX_AI_CLAUDE_ATTACK_RANGE=1)
+                cmpi.w  #ENEMY_KRAKEN_ARM,d1
+            else
                 cmpi.b  #ENEMY_KRAKEN_ARM,d1 ; BUG -- When getting Claude's class type, the previous routine 
-                                        ;  returns a value in the byte area that happens to be the same
+            endif                       ;  returns a value in the byte area that happens to be the same
                                         ;  as the Kraken Arm's index, causing the former to perform 
                                         ;  a ranged attack when controlled by the AI.
                                         ;                                                 
@@ -152,8 +155,11 @@ ExecuteAiCommand_Attack:
                 move.w  #1,d4           ; min range 1
                 bra.w   @FinishUnequipRange
 @CheckKrakenHead:
-                
+            if (STANDARD_BUILD&FIX_AI_CLAUDE_ATTACK_RANGE=1)
+                cmpi.w  #ENEMY_KRAKEN_HEAD,d1
+            else
                 cmpi.b  #ENEMY_KRAKEN_HEAD,d1
+            endif
                 bne.s   @BasicUnequipRange
                 move.w  #3,d3           ; max range 3
                 move.w  #1,d4           ; min range 1

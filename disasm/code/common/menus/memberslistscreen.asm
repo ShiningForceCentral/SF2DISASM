@@ -2253,7 +2253,7 @@ ExecuteExplorationMagicMenu:
                 sndCom  SFX_VALIDATION
                 lea     ((DISPLAYED_ICON_1-$1000000)).w,a0
                 moveq   #0,d1
-            if (STANDARD_BUILD=1)
+            if (STANDARD_BUILD&FIX_EXPLORATION_MAGIC_MENU_ICONS=1)
                 jsr     GetSpellAndNumberOfSpells
                 andi.w  #SPELLENTRY_MASK_INDEX,d1
                 move.w  d1,(a0)+

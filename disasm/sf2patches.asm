@@ -47,6 +47,9 @@ FIX_FIELD_ITEM_CONSUMABLE:          equ 1       ; Field items will only be consu
 FIX_ELIS_DIALOGUE_ASSIGNMENT:       equ 1       ; A line of dialogue used during the cutscene in the tower underground room before Granseal's destruction is wrongly assigned to Bowie.
 FIX_KIWI_BREATH_UPGRADE_LEVELS:     equ 1       ; Kiwi's breath upgrades are based on effective rather than current level.
 FIX_KARNA_INCREASED_DOUBLE:         equ 1       ; 1 = No increased double, 2 = Sheela gets increased double instead.  An oddity in the character initialization routine causes the chance to double attack to be increased if the character happens to start knowing Heal 3.
+FIX_EXPLORATION_MAGIC_MENU_ICONS:   equ 1       ; Applies the index mask $3F to spell entries when populating the currently displayed icons table.
+FIX_USABLE_ITEM_VALIDATION:         equ 1       ; Compares an item's Use Spell index to the "No spell" index $3F instead of $FF.
+FIX_AI_CLAUDE_ATTACK_RANGE:         equ 1       ; Corrects an oversight resulting in AI-controlled Claude to attack with the same 1-2 range as the Kraken Arm enemy.
 
 
 ; Quality of life features

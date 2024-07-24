@@ -2375,7 +2375,7 @@ IsItemUsableInBattle:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefAddress
-            if (STANDARD_BUILD=1)
+            if (STANDARD_BUILD&FIX_USABLE_ITEM_VALIDATION=1)
                 cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
             else
                 cmpi.b  #-1,ITEMDEF_OFFSET_USE_SPELL(a0) ; BUG -- should compare to $3F for 'no spell'
