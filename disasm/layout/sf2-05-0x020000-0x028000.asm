@@ -22,10 +22,11 @@
                 include "data\stats\allies\classes\blacksmitheligibleclasses.asm"    ; Blacksmith eligible classes list
                 include "code\common\menus\blacksmith\pickmithrilweapon.asm"    ; Pick Mithril Weapon function
                 include "data\stats\items\mithrilweapons.asm"    ; Mithril weapons data
-                include "code\common\menus\caravan\caravanactions_1.asm"    ; Caravan functions
+                includeIfStandard "code\common\menus\caravan\caravanactions-standard.asm"
+                includeIfVanilla "code\common\menus\caravan\caravanactions_1.asm"    ; Caravan functions
                 include "data\stats\items\specialcaravandescriptions.asm"    ; Special Caravan descriptions
-                include "code\common\menus\caravan\displaycaravanmessagewithportrait.asm"    ; Display Caravan message with portrait function
-                include "code\common\menus\caravan\caravanactions_2.asm"    ; Caravan functions
+                includeIfVanilla "code\common\menus\caravan\displaycaravanmessagewithportrait.asm"    ; Display Caravan message with portrait function
+                includeIfVanilla "code\common\menus\caravan\caravanactions_2.asm"    ; Caravan functions
                 include "code\common\stats\items\itemactions_1.asm"    ; Item functions
                 include "data\stats\items\usableoutsidebattleitems.asm"    ; Usable outside battle items
                 include "code\common\stats\items\fielditemeffects.asm"    ; Functions to perform effects from using items on an exploration field.

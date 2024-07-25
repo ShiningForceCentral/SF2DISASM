@@ -278,18 +278,16 @@ MainItemSubmenu_Use:
                 ; Use item
                 move.w  itemIndex(a6),d1
                 bsr.w   UseItemOnField
-                move.w  member(a6),d0
-                move.w  itemSlot(a6),d1
-                pea     @ExitItemSubmenuAction(pc)
-
-            if (STANDARD_BUILD&FIX_FIELD_ITEM_CONSUMABLE=1)
+            if (FIX_FIELD_ITEM_CONSUMABLE=1)
                 ; Is item consumable?
                 btst    #ITEMTYPE_BIT_CONSUMABLE,itemTypeBitfield(a6)
                 beq.w   @ExitItemSubmenuAction
 
                 ; If so, remove
             endif
-            
+                move.w  member(a6),d0
+                move.w  itemSlot(a6),d1
+                pea     @ExitItemSubmenuAction(pc)
                 jmp     RemoveItemBySlot
 ; ---------------------------------------------------------------------------
 

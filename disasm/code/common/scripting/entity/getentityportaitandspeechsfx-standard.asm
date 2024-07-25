@@ -8,6 +8,7 @@
 
 GetEntityPortaitAndSpeechSfx:
                 
+                module
                 movem.l d0/a0/a5,-(sp)
                 andi.w  #COMBATANT_MASK_ALL,d0
                 cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
@@ -39,7 +40,9 @@ GetEntityPortaitAndSpeechSfx:
                 ext.w   d1
                 move.b  MAPSPRITEDIALOGUEDEF_OFFSET_SPEECHSFX(a0),d2
                 bra.s   @Done
+GetAllyPortaitAndSpeechSfx:
                 
+                movem.l d0/a0/a5,-(sp)
 @Ally:          jsr     GetClassType        ; Get class type for ally d0.w -> d1.w
                 
                 ; Calculate offset to ally entries
@@ -60,3 +63,5 @@ GetEntityPortaitAndSpeechSfx:
                 rts
 
     ; End of function GetEntityPortaitAndSpeechSfx
+
+                modend

@@ -27,34 +27,42 @@ TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES_TOGGLE: equ 0       ; 1 = no battle messag
 
 
 ; Fixes
-FIX_SEARCH_IN_BATTLE:               equ 1       ; Restore the ability to search chests during battle.
-FIX_INCREASE_DOUBLE_RESETS_COUNTER: equ 1       ; Equipment that increases the chance to double attack also erroneously set the chance to counter attack to 1/32.
-FIX_GARBLED_HP_BAR:                 equ 1       ; Prevent drawing garbage pixels when HP is greater then 600. (Keep drawing black bars instead.)
-FIX_HIGINS_SPELL:                   equ 1       ; Prevent unequipping from possibly corrupting characters spell entries.
-FIX_MOVEMENT_GLITCH:                equ 1       ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
-FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE:equ 1       ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
-FIX_DWARVEN_MINER_VOICE:            equ 1       ; A cutscene has a fairy NPC concluding her dialogue, and when the dwarf delivers his first line, it uses the same female NPC speech sound effect until his follow-up dialogue line.
-FIX_CARAVAN_FREE_REPAIR_EXPLOIT:    equ 1       ; Preserve the broken bit when items are stored in the Caravan. (Inventory is reduced to 32 items unless SRAM is expanded.)
-FIX_GIZMO_ARRANGEMENT:              equ 1       ; Gizmos spread out into battle places during cutscene.
-FIX_CRITICAL_HIT_DEFINITIONS:       equ 1       ; Make the "Increase Critical" equipeffect never lower damage potential.
-FIX_GOLD_GIFT:                      equ 1       ; Gold increases when Minister gives you gift in New Granseal.
-FIX_CARAVAN_DESCRIPTIONS:           equ 1       ; Break up character list into chunks of 4.
-FIX_LABYRINTH_DELETION:             equ 1       ; Prevent a section of the labyrinth from being deleted due to AI region activation.
-FIX_ENEMY_BATTLE_EQUIP:             equ 1       ; Enemies will equip battle items as designated in spriteset.
-FIX_MISSING_RANDOM_BATTLES:         equ 1       ; Add zone events for random battles without.
-FIX_COUNT_DEFEATED_ENEMIES:         equ 1       ; Fixes the death counter that impacts "swarm AI" for battles 16, 20, 21. In vanilla, does not impact battles 16, 20, but makes 21 more aggressive.
-FIX_FIELD_ITEM_CONSUMABLE:          equ 1       ; Field items will only be consumed if the CONSUMABLE flag is set
-FIX_ELIS_DIALOGUE_ASSIGNMENT:       equ 1       ; A line of dialogue used during the cutscene in the tower underground room before Granseal's destruction is wrongly assigned to Bowie.
-FIX_KIWI_BREATH_UPGRADE_LEVELS:     equ 1       ; Kiwi's breath upgrades are based on effective rather than current level.
-FIX_KARNA_INCREASED_DOUBLE:         equ 1       ; 1 = No increased double, 2 = Sheela gets increased double instead.  An oddity in the character initialization routine causes the chance to double attack to be increased if the character happens to start knowing Heal 3.
-FIX_EXPLORATION_MAGIC_MENU_ICONS:   equ 1       ; Applies the index mask $3F to spell entries when populating the currently displayed icons table.
-FIX_USABLE_ITEM_VALIDATION:         equ 1       ; Compares an item's Use Spell index to the "No spell" index $3F instead of $FF.
-FIX_AI_CLAUDE_ATTACK_RANGE:         equ 1       ; Corrects an oversight resulting in AI-controlled Claude to attack with the same 1-2 range as the Kraken Arm enemy.
+;
+; Note that the following fixes are always being applied to the standard build :
+; - FIX_CARAVAN_DESCRIPTIONS
+; - FIX_CARAVAN_FREE_REPAIR_EXPLOIT -- Turning this off will reproduce the exploit, however the inventory will still be limited.
+; - FIX_SPELL_LEARNING_PROMO_CHECK
+;
+FIX_AI_CLAUDE_ATTACK_RANGE:          equ 1   ; Corrects an oversight resulting in AI-controlled Claude to attack with the same 1-2 range as the Kraken Arm enemy.
+FIX_CARAVAN_DESCRIPTIONS:            equ 1   ; Breaks up character list into chunks of 4.
+FIX_CARAVAN_FREE_REPAIR_EXPLOIT:     equ 1   ; Preserves the broken bit when items are stored in the Caravan, though as a result, inventory size must be halved to 32 items.
+FIX_COUNT_DEFEATED_ENEMIES:          equ 1   ; Fixes the death counter that impacts "swarm AI" for battles 16, 20, 21. In vanilla, does not impact battles 16, 20, but makes 21 more aggressive.
+FIX_CRITICAL_HIT_DEFINITIONS:        equ 1   ; Makes the "Increase Critical" equipeffect never lower damage potential.
+FIX_DWARVEN_MINER_VOICE:             equ 1   ; A cutscene has a fairy NPC concluding her dialogue, and when the dwarf delivers his first line, it uses the same female NPC speech sound effect until his follow-up dialogue line.
+FIX_ELIS_DIALOGUE_ASSIGNMENT:        equ 1   ; A line of dialogue used during the cutscene in the tower underground room before Granseal's destruction is wrongly assigned to Bowie.
+FIX_ENEMY_BATTLE_EQUIP:              equ 1   ; Enemies will equip battle items as designated in the battle spriteset.
+FIX_EXPLORATION_MAGIC_MENU_ICONS:    equ 1   ; Applies the index mask $3F to spell entries when populating the currently displayed icons table.
+FIX_FIELD_ITEM_CONSUMABLE:           equ 1   ; Field items will only be consumed if the CONSUMABLE flag is set.
+FIX_GARBLED_HP_BAR:                  equ 1   ; Prevents drawing garbage pixels when HP is greater then 600 by continuing to draw black bars instead.
+FIX_GIZMO_ARRANGEMENT:               equ 1   ; Moves the Gizmo enemies during the before battle cutscene to positions matching the battle formation.
+FIX_GODDESS_STAFF_DEALS_EXPLOIT:     equ 1   ; If one of the following items is sitting in the Deals section after a DEF-CON switch is activated: Quick Ring, Protect Ring, White Ring, or Running Ring; a Goddess Staff will also be added to Deals.
+FIX_GOLD_GIFT:                       equ 1   ; Gold increases when Minister gives you gift in New Granseal.
+FIX_HIGINS_SPELL:                    equ 1   ; Prevents unequipping from possibly corrupting characters spell entries.
+FIX_INCREASE_DOUBLE_RESETS_COUNTER:  equ 1   ; Equipment that increases the chance to double attack also erroneously set the chance to counter attack to 1/32.
+FIX_KARNA_INCREASED_DOUBLE:          equ 1   ; 1 = No increased double, 2 = Sheela gets increased double instead.  An oddity in the character initialization routine causes the chance to double attack to be increased if the character happens to start knowing Heal 3.
+FIX_KIWI_BREATH_UPGRADE_LEVELS:      equ 1   ; Kiwi's breath upgrades are based on effective rather than current level.
+FIX_LABYRINTH_DELETION:              equ 1   ; Prevents a section of the labyrinth from being deleted due to AI region activation.
+FIX_MISSING_RANDOM_BATTLES:          equ 1   ; Adds zone events for random battles without.
+FIX_MOVEMENT_GLITCH:                 equ 1   ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
+FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE: equ 1   ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
+FIX_SEARCH_IN_BATTLE:                equ 1   ; Restores the ability to search chests during battle.
+FIX_SPELL_LEARNING_PROMO_CHECK:      equ 1   ; Correctly determine whether a character is promoted when learning spells.
+FIX_USABLE_ITEM_VALIDATION:          equ 1   ; Compares an item's Use Spell index to the "No spell" index $3F instead of $FF.
 
 
 ; Quality of life features
-BOWIE_CAN_DIE:                      equ 0       ; Bowie's death does not cause defeat.
-BOWIE_CAN_LEAVE_BATTLE_PARTY:       equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
+NO_DEFEAT_ON_LEADER_DEATH:          equ 0       ; Death of the Force Leader character does not cause defeat.
+LEADER_CAN_LEAVE_BATTLE_PARTY:      equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
 CAPITALIZED_CHARACTER_NAMES:        equ 1       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
 CARAVAN_IN_TOWER:                   equ 1       ; Add access to Caravan before tower climb battle.
 CUTSCENE_PROTECTION:                equ 1       ; Prevent game from freezing if dead character is needed for scene after leader death (as Slade for battle 5.)

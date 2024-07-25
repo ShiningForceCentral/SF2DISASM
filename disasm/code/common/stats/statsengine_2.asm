@@ -1503,6 +1503,7 @@ AddItem:
                 bra.s   @Done
 @Break:
             if (STANDARD_BUILD&FIX_ENEMY_BATTLE_EQUIP=1)
+                ; do nothing
             else
                 andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
             endif

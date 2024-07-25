@@ -272,7 +272,7 @@ GetRemainingCombatants:
                 addq.w  #1,d0
                 dbf     d7,@Enemies_Loop
                 
-            if (STANDARD_BUILD&BOWIE_CAN_DIE=1)
+            if (STANDARD_BUILD&NO_DEFEAT_ON_LEADER_DEATH=1)
             else
                 clr.w   d0
                 jsr     j_GetCurrentHp

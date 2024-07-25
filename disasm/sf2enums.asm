@@ -1115,15 +1115,14 @@ BLACKSMITH_ORDER_COST: equ 5000
 caravanItemEntrySize = 1
 caravanMaxItemsNumber = 64
 
-    if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
-caravanItemEntrySize = 2
-        if (EXPANDED_SRAM=0)
-caravanMaxItemsNumber = 32
-        endif
-    endif
-    
-    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+    if (STANDARD_BUILD=1)
 caravanItemEntrySize = caravanItemEntrySize*2
+        if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+caravanItemEntrySize = caravanItemEntrySize*2
+        endif
+        if (EXPANDED_SRAM=0)
+caravanMaxItemsNumber = caravanMaxItemsNumber/2
+        endif
     endif
 
 CARAVAN_ITEM_ENTRY_SIZE: equ caravanItemEntrySize
@@ -4355,12 +4354,13 @@ AICOMMAND_PARAM_HEAL3: equ aiCommandParamHeal3
 longwordDealsCounter = (DEALS_ITEMS_BYTES/4)-1
 longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/4)-1
 longwordGameFlagsCounter = 31
-longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING*256)|(ITEM_NOTHING*65536)|(ITEM_NOTHING*16777216)
+longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING<<8)|(ITEM_NOTHING<<16)|(ITEM_NOTHING<<24)
 
-    if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT&EXPANDED_SRAM=1)
-        if (EXPANDED_SRAM=1)
+    if (STANDARD_BUILD&EXPANDED_SRAM=1)
 longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/2)-1
-        endif
+    endif
+    
+    if (STANDARD_BUILD=1)
 longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING*65536)
     endif
 
