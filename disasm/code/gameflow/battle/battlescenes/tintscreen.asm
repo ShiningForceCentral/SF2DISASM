@@ -619,7 +619,7 @@ LoadInvocationSpell:
 LoadInvocationSprite:
                 
                 lea     ((SPRITE_20-$1000000)).w,a1
-                tst.w   4(a0)
+                tst.w   VDPSPRITE_OFFSET_TILE(a0)
                 bne.s   loc_1A39C
                 bclr    #5,((byte_FFB56F-$1000000)).w
                 moveq   #5,d1

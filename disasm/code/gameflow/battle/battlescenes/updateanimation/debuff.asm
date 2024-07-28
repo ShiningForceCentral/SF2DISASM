@@ -66,7 +66,7 @@ loc_1D0D4:
                 movem.w (sp)+,d0-d1
                 addq.w  #1,d0
                 lea     $C(a5),a5
-                addq.w  #8,a4
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 dbf     d1,loc_1D048
                 tst.w   ((byte_FFB404-$1000000)).w
                 beq.w   sub_1B82A

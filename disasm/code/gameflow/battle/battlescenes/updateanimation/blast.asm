@@ -183,6 +183,7 @@ loc_1C9A0:
                 lea     $C(a5),a5
                 addq.w  #8,a4
                 dbf     d1,loc_1C804
+				
                 tst.w   (a5)
                 beq.w   loc_1CAA8
                 addq.w  #1,(a5)

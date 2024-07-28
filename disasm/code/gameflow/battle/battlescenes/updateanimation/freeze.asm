@@ -65,13 +65,13 @@ loc_1BF36:
 loc_1BF42:
                 
                 move.w  #1,(a4)
-                clr.l   2(a4)
+                clr.l   VDPSPRITE_OFFSET_SIZE(a4)
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 clr.w   2(a5)
 loc_1BF54:
                 
                 lea     $C(a5),a5
-                addq.w  #8,a4
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 addq.w  #1,d0
 loc_1BF5C:
                 
@@ -235,7 +235,7 @@ loc_1C110:
                 bcs.s   loc_1C136
                 clr.l   (a5)
                 move.w  #1,(a4)
-                clr.l   2(a4)
+                clr.l   VDPSPRITE_OFFSET_SIZE(a4)
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 clr.b   ((byte_FFB588-$1000000)).w
@@ -256,7 +256,7 @@ loc_1C148:
                 movem.w (sp)+,d0-d1
                 addq.w  #1,d0
                 lea     $C(a5),a5
-                addq.w  #8,a4
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 dbf     d1,loc_1BF88
                 
                 subq.b  #1,$E(a3)

@@ -94,7 +94,7 @@ loc_1C304:
                 jsr     (sub_1812).w    
                 add.w   (a3),d2
                 move.w  d2,VDPSPRITE_OFFSET_X(a4)
-                move.w  d2,$E(a4)
+                move.w  d2,NEXTVDPSPRITE_OFFSET_X(a4)
                 addi.w  #$20,d2 
                 move.w  d2,$16(a4)
                 move.w  d2,$1E(a4)
@@ -109,7 +109,7 @@ loc_1C348:
                 move.w  d2,(a4)
                 move.w  d2,$10(a4)
                 addi.w  #$20,d2 
-                move.w  d2,8(a4)
+                move.w  d2,NEXTVDPSPRITE_OFFSET_Y(a4)
                 move.w  d2,$18(a4)
                 bra.w   loc_1C43A
 loc_1C362:
@@ -119,7 +119,7 @@ loc_1C362:
                 move.w  (a3),d0
                 subi.w  #$20,d0 
                 move.w  d0,VDPSPRITE_OFFSET_X(a4)
-                move.w  d0,$E(a4)
+                move.w  d0,NEXTVDPSPRITE_OFFSET_X(a4)
                 addi.w  #$20,d0 
                 move.w  d0,$16(a4)
                 move.w  d0,$1E(a4)
@@ -128,7 +128,7 @@ loc_1C362:
                 move.w  d0,(a4)
                 move.w  d0,$10(a4)
                 addi.w  #$20,d0 
-                move.w  d0,8(a4)
+                move.w  d0,NEXTVDPSPRITE_OFFSET_Y(a4)
                 move.w  d0,$18(a4)
                 addq.w  #1,4(a3)
                 btst    #1,6(a5)
@@ -156,7 +156,7 @@ loc_1C3E6:
                 
                 moveq   #$26,d0 
                 moveq   #4,d1
-                move.w  6(a4),d2
+                move.w  VDPSPRITE_OFFSET_X(a4),d2
                 subi.w  #$80,d2 
                 move.w  (a4),d3
                 subi.w  #$70,d3 
