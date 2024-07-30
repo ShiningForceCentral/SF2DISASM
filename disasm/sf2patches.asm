@@ -38,7 +38,7 @@ FIX_CARAVAN_DESCRIPTIONS:            equ 1   ; Breaks up character list into chu
 FIX_CARAVAN_FREE_REPAIR_EXPLOIT:     equ 1   ; Preserves the broken bit when items are stored in the Caravan, though as a result, inventory size must be halved to 32 items.
 FIX_COPY_SWAP_EXPLOIT:               equ 1   ; Some game data will be carried over from a previous file to a new one when deleting a save after copying it. Known items include: Character EXP, kills and defeats, item dropped flags, and queued up Mithril items.
 FIX_COUNT_DEFEATED_ENEMIES:          equ 1   ; Fixes the death counter that impacts "swarm AI" for battles 16, 20, 21. In vanilla, does not impact battles 16, 20, but makes 21 more aggressive.
-FIX_CRITICAL_HIT_DEFINITIONS:        equ 1   ; Makes the "Increase Critical" equipeffect never lower damage potential.
+FIX_CRITICAL_HIT_DEFINITIONS:        equ 1   ; Makes the "Increase Critical" equipeffect increase chance while never impacting damage potential.
 FIX_DWARVEN_MINER_VOICE:             equ 1   ; A cutscene has a fairy NPC concluding her dialogue, and when the dwarf delivers his first line, it uses the same female NPC speech sound effect until his follow-up dialogue line.
 FIX_ELIS_DIALOGUE_ASSIGNMENT:        equ 1   ; A line of dialogue used during the cutscene in the tower underground room before Granseal's destruction is wrongly assigned to Bowie.
 FIX_ENEMY_BATTLE_EQUIP:              equ 1   ; Enemies will equip battle items as designated in the battle spriteset.

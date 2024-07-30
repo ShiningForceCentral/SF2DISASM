@@ -391,20 +391,20 @@ critical150_1in32 = 0
 critical125_1in32 = 1
 critical150_1in16 = 2
 critical125_1in16 = 3
-critical150_1in8 = 4
-critical125_1in8 = 5
-critical150_1in4 = 6
-critical125_1in4 = 7
+critical150_1in8  = 4
+critical125_1in8  = 5
+critical150_1in4  = 6
+critical125_1in4  = 7
 
     if (STANDARD_BUILD&FIX_CRITICAL_HIT_DEFINITIONS=1)
 critical125_1in32 = 0
-critical150_1in32 = 1
-critical125_1in16 = 2
-critical150_1in16 = 3
-critical125_1in8 = 4
-critical150_1in8 = 5
-critical125_1in4 = 6
-critical150_1in4 = 7
+critical125_1in16 = 1
+critical125_1in8  = 2
+critical125_1in4  = 3
+critical150_1in32 = 4
+critical150_1in16 = 5
+critical150_1in8  = 6
+critical150_1in4  = 7
     endif
 
 PROWESS_CRITICAL150_1IN32: equ critical150_1in32
@@ -459,11 +459,6 @@ CRITICALHITDEF_OFFSET_DAMAGE_FACTOR: equ 1
 
 factor1 = 1
 factor2 = 2
-
-    if (STANDARD_BUILD&FIX_CRITICAL_HIT_DEFINITIONS=1)
-factor1 = 2
-factor2 = 1
-    endif
 
 CRITICAL_HIT_DAMAGE_FACTOR_1: equ factor1
 CRITICAL_HIT_DAMAGE_FACTOR_2: equ factor2

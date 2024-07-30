@@ -1147,6 +1147,36 @@ nullsub_8B22:
 
 equipEffect_IncreaseCriticalProwess:
                 
+            if (STANDARD_BUILD&FIX_CRITICAL_HIT_DEFINITIONS=1)
+                move.b  (a2),d2
+                andi.b  #PROWESS_MASK_CRITICAL,d2
+                cmpi.b  #8,d2
+                bhs.s   @Skip           ; skip if not a critical hit setting, i.e., no critical or ailment infliction
+                
+                cmpi.b  #4,d2
+                bhs.s   @StrongerCritical
+                
+                ; Increase chance to perform a regular critical
+                add.b   d1,d2
+                cmpi.b  #4,d2
+                blo.s   @Skip
+                
+                moveq   #3,d2           ; cap to highest regular (+25%) critical hit setting
+                bra.s   @Skip
+@StrongerCritical:
+                
+                ; Increase chance to perform a stronger critical
+                add.b   d1,d2
+                cmpi.b  #8,d2
+                blo.s   @Skip
+                
+                moveq   #7,d2           ; cap to highest stronger (+50%) critical hit setting
+@Skip:
+                
+                andi.b  #PROWESS_MASK_DOUBLE|PROWESS_MASK_COUNTER,(a2)
+                or.b    d2,(a2)
+                rts
+            else
                 move.b  (a2),d2
                 andi.b  #PROWESS_MASK_CRITICAL,d2
                 cmpi.b  #8,d2
@@ -1160,6 +1190,7 @@ equipEffect_IncreaseCriticalProwess:
                 andi.b  #PROWESS_MASK_DOUBLE|PROWESS_MASK_COUNTER,(a2)
                 or.b    d2,(a2)
                 rts
+            endif
 
     ; End of function equipEffect_IncreaseCriticalProwess
 

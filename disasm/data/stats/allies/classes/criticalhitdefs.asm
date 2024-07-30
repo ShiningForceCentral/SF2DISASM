@@ -5,8 +5,18 @@ table_CriticalHitDefinitions:
                 
 ; Syntax        dc.b chance (1/n), damageFactor (additionalDamage = damage/2^n)
 ;                
-;               damageFactor1 = +50%, and damageFactor2 = +25% in vanilla, but the inverse is true by default in the standard build.
+;               damageFactor1 = +50%, and damageFactor2 = +25%
                 
+            if (STANDARD_BUILD&FIX_CRITICAL_HIT_DEFINITIONS=1)
+                dc.b 32, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/32 chance to inflict +25% damage
+                dc.b 16, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/16 chance to inflict +25% damage
+                dc.b  8, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/8 chance to inflict +25% damage
+                dc.b  4, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/4 chance to inflict +25% damage
+                dc.b 32, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/32 chance to inflict +50% damage
+                dc.b 16, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/16 chance to inflict +50% damage
+                dc.b  8, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/8 chance to inflict +50% damage
+                dc.b  4, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/4 chance to inflict +50% damage
+            else
                 dc.b 32, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/32 chance to inflict +50% damage
                 dc.b 32, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/32 chance to inflict +25% damage
                 dc.b 16, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/16 chance to inflict +50% damage
@@ -15,6 +25,7 @@ table_CriticalHitDefinitions:
                 dc.b 8, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/8 chance to inflict +25% damage
                 dc.b 4, CRITICAL_HIT_DAMAGE_FACTOR_1 ; 1/4 chance to inflict +50% damage
                 dc.b 4, CRITICAL_HIT_DAMAGE_FACTOR_2 ; 1/4 chance to inflict +25% damage
+            endif
                 dc.b 0, 0               ; No chance to inflict critical hits
                 dc.b 4, 0               ; 1/4 chance to inflict poison, no additional damage
                 dc.b 4, 0               ; 1/4 chance to inflict sleep, no additional damage
