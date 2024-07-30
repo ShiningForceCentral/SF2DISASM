@@ -36,6 +36,7 @@ TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES_TOGGLE: equ 0       ; 1 = no battle messag
 FIX_AI_CLAUDE_ATTACK_RANGE:          equ 1   ; Corrects an oversight resulting in AI-controlled Claude to attack with the same 1-2 range as the Kraken Arm enemy.
 FIX_CARAVAN_DESCRIPTIONS:            equ 1   ; Breaks up character list into chunks of 4.
 FIX_CARAVAN_FREE_REPAIR_EXPLOIT:     equ 1   ; Preserves the broken bit when items are stored in the Caravan, though as a result, inventory size must be halved to 32 items.
+FIX_COPY_SWAP_EXPLOIT:               equ 1   ; Some game data will be carried over from a previous file to a new one when deleting a save after copying it. Known items include: Character EXP, kills and defeats, item dropped flags, and queued up Mithril items.
 FIX_COUNT_DEFEATED_ENEMIES:          equ 1   ; Fixes the death counter that impacts "swarm AI" for battles 16, 20, 21. In vanilla, does not impact battles 16, 20, but makes 21 more aggressive.
 FIX_CRITICAL_HIT_DEFINITIONS:        equ 1   ; Makes the "Increase Critical" equipeffect never lower damage potential.
 FIX_DWARVEN_MINER_VOICE:             equ 1   ; A cutscene has a fairy NPC concluding her dialogue, and when the dwarf delivers his first line, it uses the same female NPC speech sound effect until his follow-up dialogue line.

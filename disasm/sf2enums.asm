@@ -4354,6 +4354,7 @@ AICOMMAND_PARAM_HEAL3: equ aiCommandParamHeal3
 longwordDealsCounter = (DEALS_ITEMS_BYTES/4)-1
 longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/4)-1
 longwordGameFlagsCounter = 31
+longwordSpellsInitValue = SPELL_NOTHING|(SPELL_NOTHING<<8)|(SPELL_NOTHING<<16)|(SPELL_NOTHING<<24)
 longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING<<8)|(ITEM_NOTHING<<16)|(ITEM_NOTHING<<24)
 
     if (STANDARD_BUILD&EXPANDED_SRAM=1)
@@ -4369,6 +4370,7 @@ LONGWORD_DEALS_INITVALUE: equ 0
 LONGWORD_DEALS_COUNTER: equ longwordDealsCounter
 LONGWORD_CARAVAN_COUNTER: equ longwordCaravanCounter
 LONGWORD_GAMEFLAGS_COUNTER: equ longwordGameFlagsCounter
+LONGWORD_SPELLS_INITVALUE: equ longwordSpellsInitValue
 LONGWORD_CARAVAN_INITVALUE: equ longwordCaravanInitValue
 
 ; ---------------------------------------------------------------------------

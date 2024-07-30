@@ -96,6 +96,11 @@ InitializeAllyCombatantEntry:
                 ext.w   d2
                 move.w  d2,-(sp)        ; -> push starting level
                 clr.w   d3
+            if (STANDARD_BUILD&FIX_COPY_SWAP_EXPLOIT=1)
+                move.b  d3,COMBATANT_OFFSET_EXP(a1)
+                setSavedWord d3, (a1), COMBATANT_OFFSET_ALLY_KILLS
+                setSavedWord d3, (a1), COMBATANT_OFFSET_ALLY_DEFEATS
+            endif
                 getStartingItem (a0)+, d3
                 setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_0
                 getStartingItem (a0)+, d3
@@ -105,10 +110,10 @@ InitializeAllyCombatantEntry:
                 getStartingItem (a0)+, d3
                 setSavedWord d3, (a1), COMBATANT_OFFSET_ITEM_3
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  #$3F3F3F3F,d3
+                move.l  #LONGWORD_SPELLS_INITVALUE,d3
                 movep.l d3,COMBATANT_OFFSET_SPELLS(a1) 
             else
-                move.l  #$3F3F3F3F,COMBATANT_OFFSET_SPELLS(a1) ; spell entries default to nothing
+                move.l  #LONGWORD_SPELLS_INITVALUE,COMBATANT_OFFSET_SPELLS(a1) ; spell entries default to nothing
             endif
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
@@ -166,6 +171,8 @@ Promote:
 
 ; Clear all flags and important game variables.
 
+mithrilOrders1and2 = MITHRIL_WEAPONS_ON_ORDER
+mithrilOrders3and4 = MITHRIL_WEAPONS_ON_ORDER+4
 
 InitializeGameSettings:
                 
@@ -203,6 +210,11 @@ InitializeGameSettings:
                 move.b  d0,SAVED_DATA_OFFSET_CURRENT_BATTLE(a0)
                 move.b  d0,SAVED_DATA_OFFSET_NO_BATTLE_MESSAGES_TOGGLE(a0)
                 move.b  d0,SAVED_DATA_OFFSET_EGRESS_MAP(a0)
+              if (STANDARD_BUILD&FIX_COPY_SWAP_EXPLOIT=1)
+                movep.l d0,SAVED_DATA_OFFSET_ENEMY_ITEM_DROPPED_FLAGS(a0)
+                movep.l d0,SAVED_DATA_OFFSET_MITHRIL_WEAPONS_ON_ORDER(a0)
+                movep.l d0,SAVED_DATA_OFFSET_MITHRIL_WEAPONS_ON_ORDER+8(a0)
+              endif
                 move.l  #359999,d0
                 movep.l d0,SAVED_DATA_OFFSET_SPECIAL_BATTLE_RECORD(a0)
                 move.b  #2,SAVED_DATA_OFFSET_MESSAGE_SPEED(a0)
@@ -214,6 +226,11 @@ InitializeGameSettings:
                 move.b  d0,((CURRENT_BATTLE-$1000000)).w
                 move.b  d0,((NO_BATTLE_MESSAGES_TOGGLE-$1000000)).w
                 move.b  d0,((EGRESS_MAP-$1000000)).w
+              if (STANDARD_BUILD&FIX_COPY_SWAP_EXPLOIT=1)
+                move.l  d0,((ENEMY_ITEM_DROPPED_FLAGS-$1000000)).w
+                move.l  d0,((mithrilOrders1and2-$1000000)).w 
+                move.l  d0,((mithrilOrders3and4-$1000000)).w 
+              endif
                 move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 move.b  #2,((MESSAGE_SPEED-$1000000)).w
             endif
