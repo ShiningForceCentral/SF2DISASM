@@ -5,7 +5,8 @@
 
 
                 includeIfVanilla "code\common\tech\pointers\s16_iconspointer.asm"    ; Game Section 16 Icons Pointer
-                include "data\graphics\icons\entries.asm"    ; Icons
+                includeIfStandard "data\graphics\icons\entries-standard.asm" 
+                includeIfVanilla "data\graphics\icons\entries.asm"    ; Icons
                 
                 ; Relocated data
                 includeIfStandard "data\maps\global\flagswitchedmaps.asm"    ; Flag-switched maps

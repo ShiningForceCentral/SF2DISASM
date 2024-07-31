@@ -11,7 +11,9 @@
                 include "code\common\menus\menuenginecommon.asm"    ; Menu engine, part 1 : Common functions
                 include "code\common\menus\diamondmenu.asm"    ; Diamond menu actions
                 include "code\common\menus\itemmenu.asm"    ; Battlefield item menu functions
-                include "code\common\menus\loadhighlightableicon.asm"    ; Load highlightable icon function
+                includeIfStandard "code\common\menus\loadhighlightableicon-standard.asm"
+                includeIfVanilla "code\common\menus\loadhighlightableicon.asm"    ; Load highlightable icon function
+                include "code\common\tech\incbins\s03_incbins_iconhighlight.asm"    ; Game Section 03 Incbin Icon Highlight Tiles
                 include "code\common\menus\magicmenu.asm"    ; Battlefield magic menu actions
                 include "data\graphics\tech\menus\diamondmenulayout.asm"    ; Diamond menu layout
             if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)

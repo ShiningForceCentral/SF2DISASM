@@ -1194,7 +1194,7 @@ BuildMemberSummaryWindowOnEquipPage:
                 moveq   #10,d7
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  d5,d1
-                cmpi.w  #ICON_UNARMED,d1
+                cmpi.w  #ITEM_UNARMED,d1
                 beq.s   @WriteNothingString
                 jsr     j_FindItemName
                 bra.s   @Continue
@@ -1393,16 +1393,13 @@ return_13B46:
 
 LoadItemIcon:
                 
+            if (STANDARD_BUILD=1)
+                include "code\common\menus\loadicon-standard.asm"
+            else
                 module  ; start of icon loading module
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 getPointer p_Icons, a0
-            if (STANDARD_BUILD=1)
-                cmpi.w  #ITEM_NOTHING,d1
-                bne.s   LoadIcon
-                bra.s   @Nothing
-            else
                 bra.w   LoadIcon
-            endif
 
     ; End of function LoadItemIcon
 
@@ -1434,7 +1431,7 @@ LoadIcon:
                 add.w   d2,d1
                 lsl.w   #6,d1
                 addIconOffset d1, a0
-                moveq   #47,d7
+                moveq   #ICON_PIXELS_LONGWORD_COUNTER,d7
 @Loop:
                 
                 move.l  (a0)+,(a1)+
@@ -1446,6 +1443,7 @@ LoadIcon:
                 ori.w   #$F000,-192(a1)
                 rts
                 modend  ; end of icon loading module
+            endif
 
 ; END OF FUNCTION CHUNK FOR LoadItemIcon
 

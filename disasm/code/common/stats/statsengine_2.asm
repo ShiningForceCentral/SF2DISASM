@@ -2082,7 +2082,7 @@ GetEquippableItemsByType:
                 move.l  #(ITEM_NOTHING<<WORD_SHIFT_COUNT)|4,(a2)
                 move.l  #(ITEM_NOTHING<<WORD_SHIFT_COUNT)|4,4(a2)
                 move.l  #(ITEM_NOTHING<<WORD_SHIFT_COUNT)|4,8(a2)
-                move.l  #(ICON_UNARMED<<WORD_SHIFT_COUNT)|4,12(a2)
+                move.l  #(ITEM_UNARMED<<WORD_SHIFT_COUNT)|4,12(a2)
                 clr.w   d0
                 moveq   #0,d4
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d5

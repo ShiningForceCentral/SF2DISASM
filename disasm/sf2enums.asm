@@ -735,40 +735,37 @@ ENEMYAI_MIN_MP_AURA4: equ 30
 
 ; ---------------------------------------------------------------------------
 
-; enum IconProperties
+; enum Icons
 
-iconTilesOffsetCracks = $6F00
+iconNothing         = 127
+iconUnarmed         = 128
+iconSpellsStart     = 130 ; HEAL
+iconJewelOfLight    = 146
+iconJewelOfEvil     = 147
+iconCracksOverlay   = 148
 
-    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-iconTilesOffsetCracks = $C0C0
+    if (STANDARD_BUILD=1)
+iconNothing         = 0 ; In the standard build, icons are grouped into 3 categories: Item, Spell, and Other
+iconUnarmed         = 1
+iconJewelOfLight    = 2
+iconJewelOfEvil     = 3
+iconCracksOverlay   = 4
     endif
 
-ICON_PIXELS_LONGWORD_COUNTER: equ $2F
-ICON_PIXELS_BYTE_COUNTER: equ $BF
-ICON_TILE_BYTESIZE: equ $C0
-ICONS_OFFSET_CRACKS: equ iconTilesOffsetCracks
+ICON_NOTHING: equ iconNothing
+ICON_UNARMED: equ iconUnarmed
+ICON_SPELLS_START: equ iconSpellsStart
+ICON_JEWEL_OF_LIGHT: equ iconJewelOfLight
+ICON_JEWEL_OF_EVIL: equ iconJewelOfEvil
+ICON_CRACKS_OVERLAY: equ iconCracksOverlay
 
 ; ---------------------------------------------------------------------------
 
-; enum Icons
-
-iconUnarmed         = 128
-iconSpellsStart     = 130
-iconJewelOfLight    = 146
-iconJewelOfEvil     = 147
-
-    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-iconUnarmed         = 256
-iconSpellsStart     = 258
-iconJewelOfLight    = 321
-iconJewelOfEvil     = 322
-    endif
-
-ICON_NOTHING: equ ITEM_NOTHING
-ICON_UNARMED: equ iconUnarmed
-ICON_SPELLS_START: equ iconSpellsStart ; HEAL
-ICON_JEWEL_OF_LIGHT: equ iconJewelOfLight
-ICON_JEWEL_OF_EVIL: equ iconJewelOfEvil
+; enum IconProperties
+ICON_PIXELS_LONGWORD_COUNTER: equ $2F
+ICON_PIXELS_BYTE_COUNTER: equ $BF
+ICON_TILE_BYTESIZE: equ $C0
+ICONS_OFFSET_CRACKS: equ ICON_CRACKS_OVERLAY*ICON_TILE_BYTESIZE
 
 ; ---------------------------------------------------------------------------
 
@@ -1268,6 +1265,11 @@ ITEM_EQUIPPED: equ itemEquipped
 ITEM_USABLE_BY_AI: equ $2000
 ITEM_UNUSED_ITEM_DROP: equ $4000
 ITEM_BROKEN: equ $8000
+
+; ---------------------------------------------------------------------------
+
+; enum ItemUnarmed
+ITEM_UNARMED:    equ ITEM_NOTHING+1
 
 ; ---------------------------------------------------------------------------
 

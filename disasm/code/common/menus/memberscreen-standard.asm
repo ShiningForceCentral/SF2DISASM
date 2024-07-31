@@ -902,7 +902,7 @@ WriteEnemyLvOrExp:
             if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
                 ; Do not display spell that is not affected by silence
                 jsr     FindSpellDefAddress
-                btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDef_OFFSET_PROPS(a0)
+                btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 beq.w   @NextSpell      ; skip if spell is not affected by silence
             endif
                 
@@ -933,10 +933,10 @@ WriteEnemyLvOrExp:
                 jsr     (CopyBytes).w   
                 
                 ; Load icon pixel data to temp space
+                moveq   #0,d1
                 move.w  d5,d1
-                andi.l  #SPELLENTRY_MASK_INDEX,d1
-                addi.w  #ICON_SPELLS_START,d1
-                getPointer p_Icons, a0
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
+                getPointer p_SpellIcons, a0
                 mulu.w  #ICON_TILE_BYTESIZE,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
@@ -996,9 +996,10 @@ WriteEnemyLvOrExp:
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 
 @LoadItemIcon:  ; Load icon pixel data to temp space
+                moveq   #0,d1
                 move.w  d5,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                getPointer p_Icons, a0
+                getPointer p_ItemIcons, a0
                 mulu.w  #ICON_TILE_BYTESIZE,d1
                 addIconOffset d1, a0
                 movea.l a2,a1
@@ -1010,12 +1011,8 @@ WriteEnemyLvOrExp:
                 btst    #ITEMENTRY_BIT_BROKEN,d1
                 beq.s   @CleanIconCorners
                 
-                getPointer p_Icons, a0
-            if (EXPANDED_ITEMS_AND_SPELLS=1)
-                adda.l  #ICONS_OFFSET_CRACKS,a0
-            else
+                getPointer p_OtherIcons, a0
                 lea     ICONS_OFFSET_CRACKS(a0),a0
-            endif
                 move.w  #ICON_PIXELS_BYTE_COUNTER,d0
                 
 @DrawCracks_Loop:
@@ -1201,6 +1198,8 @@ CopyMemberScreenIconsToVdpTileOrder:
 ; =============== S U B R O U T I N E =======================================
 
 WriteJewelIcons:
+                
+                module
             if (ALTERNATE_JEWEL_ICONS_DISPLAY=0)
                 lea     aJewel(pc), a0  
                 movea.l windowTilesAddress(a6),a1
@@ -1215,7 +1214,7 @@ WriteJewelIcons:
                 bsr.s   CopyMemberScreenIconsToVdpTileOrder
                 
                 ; Load Jewel of Light icon pixel data to temp space
-                move.w  #ICON_JEWEL_OF_LIGHT,d1
+                moveq   #ICON_JEWEL_OF_LIGHT,d1
                 bsr.s   LoadJewelIconPixels
                 adda.w  #ICON_TILE_BYTESIZE,a2
                 
@@ -1232,7 +1231,7 @@ WriteJewelIcons:
                 move.w  #VDPTILE_UPPERCASE_S|VDPTILE_PALETTE3|VDPTILE_PRIORITY,WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_END(a1)
                 
                 ; Load Jewel of Evil icon pixel data to temp space
-                move.w  #ICON_JEWEL_OF_EVIL,d1
+                moveq   #ICON_JEWEL_OF_EVIL,d1
             endif
 
     ; End of function WriteJewelIcons
@@ -1242,7 +1241,7 @@ WriteJewelIcons:
 
 LoadJewelIconPixels:
             if (ALTERNATE_JEWEL_ICONS_DISPLAY=0)
-                getPointer p_Icons, a0
+                getPointer p_OtherIcons, a0
                 move.w  d1,d2
                 add.w   d1,d1
                 add.w   d2,d1
@@ -1261,6 +1260,8 @@ CleanMemberStatsIconCorners:
 @Return:        rts
 
     ; End of function CleanMemberStatsIconCorners
+
+                modend
 
 aNothing_0:     dc.b '\Nothing',0
 aEquipped_0:    dc.b '\Equipped',0

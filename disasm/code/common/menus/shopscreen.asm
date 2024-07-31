@@ -438,7 +438,7 @@ LoadItemIconsAndPriceTagTiles:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  d7,-(sp)
-                bsr.w   LoadIconPixels  
+                bsr.w   LoadItemIconInShopScreen  
                 move.l  a0,-(sp)
                 move.w  d0,d1
                 jsr     j_GetItemDefAddress
@@ -517,14 +517,18 @@ LoadPriceTagTiles:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Load icon pixels for item d1.w to loading space in a0.
+; Load icon pixels for item d0.w to loading space in a0.
 
 
-LoadIconPixels:
+LoadItemIconInShopScreen:
                 
                 move.l  a1,-(sp)
                 move.w  d0,-(sp)
-                movea.l (p_Icons).l,a1
+            if (STANDARD_BUILD=1)
+                getPointer p_ItemIcons, a1
+            else
+                getPointer p_Icons, a1
+            endif
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
@@ -536,6 +540,7 @@ LoadIconPixels:
                 move.l  (a1)+,(a0)+
                 dbf     d7,@Loop
                 
+                ; Clean corners
                 ori.w   #$F,-2(a0)
                 ori.w   #$F000,-$24(a0)
                 ori.w   #$F,-$9E(a0)
@@ -544,7 +549,7 @@ LoadIconPixels:
                 movea.l (sp)+,a1
                 rts
 
-    ; End of function LoadIconPixels
+    ; End of function LoadItemIconInShopScreen
 
 
 ; =============== S U B R O U T I N E =======================================
