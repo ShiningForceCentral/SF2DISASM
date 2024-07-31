@@ -943,12 +943,17 @@ UpgradeRandomBattleEnemies:
                 clr.w   d0
                 
                 ; Get Bowie's effective level -> D2
+            if (STANDARD_BUILD=1)
+                jsr     CalculateEffectiveLevel
+                move.w  d1,d2
+            else
                 jsr     j_GetCurrentLevel
                 move.w  d1,d2
                 jsr     j_GetClass
                 cmpi.b  #CHAR_CLASS_LASTNONPROMOTED,d1
                 ble.s   @Continue
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d2
+            endif
 @Continue:
                 
                 loadSavedDataAddress CURRENT_BATTLE, a1

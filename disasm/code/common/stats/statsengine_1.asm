@@ -87,6 +87,30 @@ GetCurrentLevel:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Return the effective level (i.e., current + promoted extra levels) for combatant d0.b -> d1.w
+
+
+CalculateEffectiveLevel:
+                
+            if (STANDARD_BUILD=1)
+                bsr.w   GetCurrentLevel
+                tst.b   d0
+                bmi.s   @Return ; return current level for enemies
+                
+                move.w  d1,-(sp)
+                bsr.w   GetClassType
+                movem.w (sp)+,d1
+                beq.s   @Return ; return current level if ally is not promoted
+                
+                addi.w  #CHAR_CLASS_EXTRALEVEL,d1
+@Return:        rts
+            endif
+
+    ; End of function CalculateEffectiveLevel
+
+
+; =============== S U B R O U T I N E =======================================
+
 
 GetMaxHp:
                 

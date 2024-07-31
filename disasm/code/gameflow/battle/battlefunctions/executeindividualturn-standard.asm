@@ -263,15 +263,10 @@ DetermineRandomAttackSpell:
                 ; Determine spell level
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w
                 move.w  #BATTLEACTION_CAST_SPELL,((CURRENT_BATTLEACTION-$1000000)).w
-                jsr     GetCurrentLevel
             if (FIX_KIWI_BREATH_UPGRADE_LEVELS=1)
-                ; Base Kiwi's breath upgrades on effective rather than current level
-                move.w  d1,d7
-                jsr     GetClassType
-                beq.s   @NotPromoted
-                
-                addi.w  #CHAR_CLASS_EXTRALEVEL,d7
-@NotPromoted:   move.w  d7,d1
+                jsr     CalculateEffectiveLevel
+            else
+                jsr     GetCurrentLevel
             endif
                 clr.w   d0
                 

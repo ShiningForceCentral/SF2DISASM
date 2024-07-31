@@ -769,8 +769,14 @@ member = -2
                 bmi.s   @EnemyLv
               endif
             endif
-                jsr     GetCurrentLevel
+                
             if (EXTENDED_STATUS=1)
+                jsr     CalculateEffectiveLevel
+            else
+                jsr     GetCurrentLevel
+            endif
+                
+            if (EXTENDED_STATUS>=2)
                 ; Subtract 20 levels from displayed value for enemies if they possess the enhanced spell power property
                 tst.b   d0
                 bpl.s   @WriteLv
