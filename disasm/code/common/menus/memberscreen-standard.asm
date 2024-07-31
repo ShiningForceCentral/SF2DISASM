@@ -644,7 +644,7 @@ member = -2
 @AddStatusEffectTiles:
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_STATUSEFFECT_TILES,a1
-                move.l  a1,d3                   ; D3 = current window tile address
+                move.l  a1,d3                   ; d3.l = current window tile address
                 move.w  member(a6),d0
                 jsr     GetStatusEffects
                 
@@ -880,10 +880,10 @@ WriteEnemyLvOrExp:
             endif
                 
                 ; Write MAGIC and ITEM sections
-                ;   D3 = current icon VDP tile
-                ;   D4 = current window tile address
-                ;   D5 = current item or spell index
-                ;   A2 = current loading space address
+                ;   d3.w = current icon VDP tile
+                ;   d4.l = current window tile address
+                ;   d5.w = current item or spell index
+                ;   a2 = current loading space address
                 move.w  #VDPTILE_ICONS_START|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d3
                 lea     ((FF9004_LOADING_SPACE-$1000000)).w,a2
                 
@@ -899,6 +899,17 @@ WriteEnemyLvOrExp:
                 jsr     GetSpellAndNumberOfSpells
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @WriteSpells_Break          ; break out of loop if no spells learned
+                
+                ; In: d1.w = spell entry
+                ;
+                ; Skip copying the specified spell icons to the window layout
+                move.w  d1,d5                       ; backup spell entry -> d5.w
+                lea     table_NoIconSpells(pc), a0
+                andi.w  #SPELLENTRY_MASK_INDEX,d1
+                clr.w   d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcc.s   @SpellName
+                
             if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
                 ; Do not display spell that is not affected by silence
                 jsr     FindSpellDefAddress
@@ -911,7 +922,7 @@ WriteEnemyLvOrExp:
                 bsr.w   CopyMemberScreenIconsToVdpTileOrder
                 
                 ; Write spell name
-                move.w  d1,d5           ; backup spell index -> D5
+@SpellName:     move.w  d5,d1
                 jsr     FindSpellName
                 movea.l d4,a1
                 addq.w  #4,a1           ; offset to spell name relative from start
@@ -948,7 +959,7 @@ WriteEnemyLvOrExp:
 @NextSpell:     dbf     d6,@WriteSpells_Loop
                 
 @WriteSpells_Break:
-                move.l  (sp)+,d5                    ; D5 <- pop start of MAGIC section address
+                move.l  (sp)+,d5                    ; d5.l <- pop start of MAGIC section address
                 cmp.l   d5,d4           ; compare to current address to determine whether section is empty
                 bne.w   @WriteItems
                 
@@ -977,7 +988,7 @@ WriteEnemyLvOrExp:
                 bsr.w   CopyMemberScreenIconsToVdpTileOrder
                 
                 ; Write item name
-                move.w  d1,d5           ; backup item index -> D5
+                move.w  d1,d5           ; backup item index -> d5.w
                 jsr     FindItemName
                 movea.l d4,a1
                 addq.w  #4,a1           ; offset to item name relative from start
@@ -1175,6 +1186,8 @@ WriteResistanceIndicatorTiles:
                 
                 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d3.w = first icon VDP tile entry
 
 CopyMemberScreenIconsToVdpTileOrder:
                 move.w  d3,(a1)

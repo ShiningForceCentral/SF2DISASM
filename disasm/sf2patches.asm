@@ -71,7 +71,7 @@ MINIATURES_SHOP:                    equ 1       ; Place a shopworker on the desk
 NO_AI_JARO:                         equ 0       ; 
 NO_AI_PETER:                        equ 0       ; 
 NO_DARKNESS_IN_CAVES:               equ 0       ; The darkness gimmick in caves is disabled.
-NO_RANDOM_BATTLES:                  equ 1       ; 0 = Battles    1 = No Battles
+NO_RANDOM_BATTLES:                  equ 0       ; 0 = Battles    1 = No Battles
 RECRUIT_ALL_CREED_CHARACTERS:       equ 1       ; lets you recruit all four of them at any time after leaving Floor World.
 SKIP_SEGA_LOGO:                     equ 0
 SKIP_GAME_INTRO:                    equ 0
@@ -110,15 +110,15 @@ SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options
 
 
 ; Menu enhancements
-ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Read values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
+ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Reads values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
 ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 1       ; 1 = small icons, 2 = no display
-EIGHT_CHARACTERS_MEMBER_NAMES:      equ 1       ; 
-EXTENDED_SPELL_NAMES:               equ 1       ; 
+EIGHT_CHARACTERS_MEMBER_NAMES:      equ 1       ; Remodels windows and sprites to make room for an extra character in Force member names.
+EXTENDED_SPELL_NAMES:               equ 1       ; Increases the maximum number of characters in spell names from 6 to 7, and makes room for them to span 2 lines.
 EXTENDED_STATUS:                    equ 1       ; Display additional information on the member screen: Promotion indicator, Critical hit type and chance, Double and Counter chances, Resistance levels, and Movetype name.
-FULL_CLASS_NAMES:                   equ 1       ; 
-SHOW_ALL_SPELLS_IN_MEMBER_SCREEN:   equ 0       ; 
-SHOW_ENEMY_LEVEL:                   equ 1       ; 
-THREE_DIGITS_STATS:                 equ 1       ; 
+FULL_CLASS_NAMES:                   equ 1       ; Remodels the member status and members list screens in order to fit fully spelled out class names which are also displayed in dialogues, while the classic shorthands are still used in places where space is limited.
+SHOW_ALL_SPELLS_IN_MEMBER_SCREEN:   equ 1       ; All spells now appears on the member status screen regardless of whether they are affected by silence. (Without modifications to spell definitions, this impacts enemy-only spells.)
+SHOW_ENEMY_LEVEL:                   equ 1       ; The enemy's current level is shown on the member status screen.
+THREE_DIGITS_STATS:                 equ 1       ; Remodels the member status screen and mini status window to make room for 3 digits stat values.
 
 ; If standard build, and either THREE_DIGITS_STATS or FULL_CLASS_NAMES are enabled, implement a second member list stats page.
 secondMembersListPage = 0

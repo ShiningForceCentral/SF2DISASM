@@ -33,6 +33,7 @@
                 include "data\graphics\tech\windowlayouts\ministatuswindowlayout.asm"    ; Mini status window layout
                 include "code\common\menus\portraitwindow.asm"    ; Portrait window functions
                 includeIfStandard "code\common\menus\memberscreen-standard.asm"
+                includeIfStandard "data\stats\spells\noiconspells-standard.asm"
                 includeIfStandard "code\common\menus\getcombatantportrait-standard.asm"
                 includeIfVanilla "code\common\menus\memberscreen.asm"    ; Menu engine, part 4 : Member screen functions
                 includeIfVanilla "code\common\menus\unusedsub_12606.asm"    ; Unused function
