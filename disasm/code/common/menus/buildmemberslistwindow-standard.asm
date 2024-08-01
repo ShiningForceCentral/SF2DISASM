@@ -125,7 +125,11 @@ headerStringOffset = headerStringOffset+2
                 
                 ; Write LV
                 move.w  currentMember(a6),d0
+            if (SHOW_EFFECTIVE_LEVEL=1)
+                jsr     CalculateEffectiveLevel
+            else
                 jsr     GetCurrentLevel
+            endif
                 bsr.w   WriteLvOrExpValue
                 addq.w  #4,a1
                 

@@ -553,7 +553,11 @@ combatant = -2
                 bsr.w   AdjustStringLengthForSpecialCharacters
                 add.w   d7,d4
                 addq.w  #2,d4                   ; add 2 to account for space + single level digit
+            if (SHOW_EFFECTIVE_LEVEL=1)
+                jsr     CalculateEffectiveLevel
+            else
                 jsr     GetCurrentLevel
+            endif
                 cmpi.w  #10,d1
                 blt.s   @DetermineWindowWidth
                 addq.w  #1,d4                   ; add 1 if level 10 or greater
@@ -610,7 +614,11 @@ combatant = -2
                 moveq   #-WINDOW_MINISTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
+            if (SHOW_EFFECTIVE_LEVEL=1)
+                jsr     CalculateEffectiveLevel
+            else
                 jsr     GetCurrentLevel
+            endif
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #2,d7

@@ -770,13 +770,11 @@ member = -2
               endif
             endif
                 
-            if (EXTENDED_STATUS=1)
+            if (SHOW_EFFECTIVE_LEVEL=1)
                 jsr     CalculateEffectiveLevel
             else
                 jsr     GetCurrentLevel
-            endif
-                
-            if (EXTENDED_STATUS>=2)
+              if (EXTENDED_STATUS=1)
                 ; Subtract 20 levels from displayed value for enemies if they possess the enhanced spell power property
                 tst.b   d0
                 bpl.s   @WriteLv
@@ -785,7 +783,9 @@ member = -2
                 beq.s   @WriteLv
                 
                 subi.w  #CHAR_CLASS_EXTRALEVEL,d1
+              endif
             endif
+                
 @WriteLv:       movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_LV,a1
                 @writeMemberLvOrExpValue
