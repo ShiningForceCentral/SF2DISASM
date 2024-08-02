@@ -1015,7 +1015,7 @@ BuildMemberSummaryWindow:
                 ; Draw status effect tiles
                 movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSUMMARY_OFFSET_STATUSEFFECT_TILES,a1
-            if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
+            if (STANDARD_BUILD=1)
                 move.l  d3,-(sp)
                 move.l  a1,d3
             endif
@@ -1086,7 +1086,7 @@ BuildMemberSummaryWindow:
                 bsr.w   WriteStatusEffectTiles
 @CheckSummaryPage:
                 
-            if (STANDARD_BUILD&(THREE_DIGITS_STATS|FULL_CLASS_NAMES)=1)
+            if (STANDARD_BUILD=1)
                 move.l  (sp)+,d3
             endif
                 move.b  ((CURRENT_MEMBERS_LIST_SUMMARY_PAGE-$1000000)).w,d0

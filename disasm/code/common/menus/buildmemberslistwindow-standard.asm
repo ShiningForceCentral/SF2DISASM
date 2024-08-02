@@ -259,3 +259,26 @@ aAttackDefense: dc.b 'ATTACK   DEFENSE',0
             endif
 
                 align
+
+; =============== S U B R O U T I N E =======================================
+
+; In: a1 = current cursor position in the layout, d1.w = status effects, d3.l = copy of cursor position
+
+windowLayoutStartAddress = -6
+member = -2
+
+WriteStatusEffectTiles:
+                
+                move.l  d0,(a1)
+                subq.w  #4,a1
+                cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+                bne.s   @Continue
+                cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-2(a1)
+                beq.s   @Return
+                
+@Continue:      addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
+                movea.l d3,a1
+@Return:        rts
+
+    ; End of function WriteStatusEffectTiles
+

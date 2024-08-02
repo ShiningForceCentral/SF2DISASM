@@ -290,28 +290,29 @@ BuildMemberScreen:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a1 = current cursor position in the layout
+; In: a1 = current cursor position in the layout, d1.w = status effects, d3.l = copy of cursor position
 
 windowLayoutStartAddress = -6
 member = -2
 
-WriteStatusEffectTiles:
+WriteStatusEffectTilesForMemberStatusWindow:
                 
                 move.l  d0,(a1)
-                subq.l  #4,a1
+                subq.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_STATUSEFFECT,a1
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
+                bne.s   @Continue
+                cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-2(a1)
+                bne.s   @Continue
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-4(a1)
                 beq.s   @Return
-                
-            if (THREE_DIGITS_STATS|FULL_CLASS_NAMES=1)
-                addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
-                movea.l d3,a1
-            else
-                movea.l windowLayoutStartAddress(a6),a1
-                adda.w  #$78,a1
             endif
+                
+@Continue:      addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
+                movea.l d3,a1
 @Return:        rts
 
-    ; End of function WriteStatusEffectTiles
+    ; End of function WriteStatusEffectTilesForMemberStatusWindow
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -652,64 +653,154 @@ member = -2
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_CURSE,d2
                 beq.s   @Poison
+                
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                subq.w  #2,a1
+            endif
                 move.l  #VDPTILES_STATUSEFFECT_CURSE,d0
-                bsr.w   WriteStatusEffectTiles
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
                 
 @Poison:        ; Poison
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_POISON,d2
-                beq.s   @Muddle
+                beq.s   @Stun
+                
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                subq.w  #2,a1
+            endif
                 move.l  #VDPTILES_STATUSEFFECT_POISON,d0
-                bsr.w   WriteStatusEffectTiles
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+                
+@Stun:          ; Stun
+                move.w  d1,d2
+                andi.w  #STATUSEFFECT_STUN,d2
+                beq.s   @Muddle
+                
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                subq.w  #2,a1
+            endif
+                move.l  #VDPTILES_STATUSEFFECT_STUN,d0
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
                 
 @Muddle:        ; Muddle
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_MUDDLE,d2
                 beq.s   @Silence
+                
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                move.w  d1,d0
+                andi.w  #STATUSEFFECT_MUDDLE,d0
+                lsr.w   #4,d0
+                moveq   #1,d7
+                ext.l   d0
+                bsr.w   WriteTilesFromNumber
+                subq.w  #6,a1
                 move.l  #VDPTILES_STATUSEFFECT_MUDDLE,d0
-                bsr.w   WriteStatusEffectTiles
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            else
+                move.l  #VDPTILES_STATUSEFFECT_MUDDLE,d0
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            endif
                 
 @Silence:       ; Silence
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_SILENCE,d2
-                beq.s   @Stun
-                move.l  #VDPTILES_STATUSEFFECT_SILENCE,d0
-                bsr.w   WriteStatusEffectTiles
-                
-@Stun:          ; Stun
-                move.w  d1,d2
-                andi.w  #STATUSEFFECT_STUN,d2
                 beq.s   @Sleep
-                move.l  #VDPTILES_STATUSEFFECT_STUN,d0
-                bsr.w   WriteStatusEffectTiles
+                
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                move.w  d1,d0
+                andi.w  #STATUSEFFECT_SILENCE,d0
+                lsr.w   #8,d0
+                moveq   #1,d7
+                ext.l   d0
+                bsr.w   WriteTilesFromNumber
+                subq.w  #6,a1
+                move.l  #VDPTILES_STATUSEFFECT_SILENCE,d0
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            else
+                move.l  #VDPTILES_STATUSEFFECT_SILENCE,d0
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            endif
                 
 @Sleep:         ; Sleep
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_SLEEP,d2
                 beq.s   @Attack
+                
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                move.w  d1,d0
+                andi.w  #STATUSEFFECT_SLEEP,d0
+                lsr.w   #6,d0
+                moveq   #1,d7
+                ext.l   d0
+                bsr.w   WriteTilesFromNumber
+                subq.w  #6,a1
                 move.l  #VDPTILES_STATUSEFFECT_SLEEP,d0
-                bsr.w   WriteStatusEffectTiles
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            else
+                move.l  #VDPTILES_STATUSEFFECT_SLEEP,d0
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            endif
                 
 @Attack:        ; Attack
                 move.w  d1,d2
-                andi.w  #STATUSEFFECT_AttACK,d2
+                andi.w  #STATUSEFFECT_ATTACK,d2
                 beq.s   @Boost
-                move.l  #VDPTILES_STATUSEFFECT_AttACK,d0
-                bsr.w   WriteStatusEffectTiles
+                
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                move.w  d1,d0
+                andi.w  #STATUSEFFECT_ATTACK,d0
+                rol.w   #2,d0
+                moveq   #1,d7
+                ext.l   d0
+                bsr.w   WriteTilesFromNumber
+                subq.w  #6,a1
+                move.l  #VDPTILES_STATUSEFFECT_ATTACK,d0
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            else
+                move.l  #VDPTILES_STATUSEFFECT_ATTACK,d0
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            endif
                 
 @Boost:         ; Boost
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_BOOST,d2
                 beq.s   @Slow
+                
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                move.w  d1,d0
+                andi.w  #STATUSEFFECT_BOOST,d0
+                rol.w   #4,d0
+                moveq   #1,d7
+                ext.l   d0
+                bsr.w   WriteTilesFromNumber
+                subq.w  #6,a1
                 move.l  #VDPTILES_STATUSEFFECT_BOOST,d0
-                bsr.w   WriteStatusEffectTiles
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            else
+                move.l  #VDPTILES_STATUSEFFECT_BOOST,d0
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            endif
                 
 @Slow:          ; Slow
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_SLOW,d2
                 beq.s   @WriteStatValues
+                
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                move.w  d1,d0
+                andi.w  #STATUSEFFECT_SLOW,d0
+                rol.w   #6,d0
+                moveq   #1,d7
+                ext.l   d0
+                bsr.w   WriteTilesFromNumber
+                subq.w  #6,a1
                 move.l  #VDPTILES_STATUSEFFECT_SLOW,d0
-                bsr.w   WriteStatusEffectTiles
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            else
+                move.l  #VDPTILES_STATUSEFFECT_SLOW,d0
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+            endif
                 
 @WriteStatValues:
             if (EXTENDED_STATUS=1)

@@ -245,6 +245,11 @@ STATUSEFFECT_NONE: equ 0
 
 ; ---------------------------------------------------------------------------
 
+; enum StatusEffect Mask
+STATUSEFFECT_MASK: equ $FFFF
+
+; ---------------------------------------------------------------------------
+
 ; enum StatusAnimations
 STATUSANIMATION_NONE: equ 0
 STATUSANIMATION_SILENCE_CROSS: equ 1
@@ -2491,7 +2496,9 @@ WINDOW_LANDEFFECT_DEST: equ windowDest
 
 ; enum Window_MemberStatus
 
+nextStatusEffectsOffset = 4
 lineOffset      = 42
+statusEffectsOffset = 78
 enemyLvOffset   = 140
 allyLvOffset    = 142
 attOffset       = 160
@@ -2504,6 +2511,11 @@ agiOffset       = 328
 enemyExpOffset  = 392
 allyExpOffset   = 394
 movOffset       = 412
+
+    if (STANDARD_BUILD&SHOW_STATUS_EFFECT_COUNTER=1)
+nextStatusEffectsOffset = nextStatusEffectsOffset-2
+statusEffectsOffset = statusEffectsOffset+2
+    endif
 
     if (STANDARD_BUILD&THREE_DIGITS_STATS=1)
 enemyLvOffset   = enemyLvOffset+2
@@ -2527,9 +2539,10 @@ movOffset       = movOffset-(lineOffset*3)
     endif
 
 WINDOW_MEMBERSTATUS_NA_STRING_LENGTH: equ 3
+WINDOW_MEMBERSTATUS_OFFSET_NEXT_STATUSEFFECT: equ nextStatusEffectsOffset
 WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE: equ lineOffset
 WINDOW_MEMBERSTATUS_OFFSET_NAME: equ 44
-WINDOW_MEMBERSTATUS_OFFSET_STATUSEFFECT_TILES: equ 78
+WINDOW_MEMBERSTATUS_OFFSET_STATUSEFFECT_TILES: equ statusEffectsOffset
 WINDOW_MEMBERSTATUS_OFFSET_SPELL_LV_TILES: equ 88
 WINDOW_MEMBERSTATUS_OFFSET_EQUIPPED_STRING: equ 88
 WINDOW_MEMBERSTATUS_OFFSET_NEXT_SPELL: equ 126
