@@ -41,6 +41,7 @@ FIX_COUNT_DEFEATED_ENEMIES:          equ 1   ; Fixes the death counter that impa
 FIX_CRITICAL_HIT_DEFINITIONS:        equ 1   ; Makes the "Increase Critical" equipeffect increase chance while never impacting damage potential.
 FIX_DWARVEN_MINER_VOICE:             equ 1   ; A cutscene has a fairy NPC concluding her dialogue, and when the dwarf delivers his first line, it uses the same female NPC speech sound effect until his follow-up dialogue line.
 FIX_ELIS_DIALOGUE_ASSIGNMENT:        equ 1   ; A line of dialogue used during the cutscene in the tower underground room before Granseal's destruction is wrongly assigned to Bowie.
+FIX_ELIS_SPEECH_SFX:                 equ 1   ; Corrects Elis's speech SFX when using MAPSPRITE_POSE6.
 FIX_ENEMY_BATTLE_EQUIP:              equ 1   ; Enemies will equip battle items as designated in the battle spriteset.
 FIX_EXPLORATION_MAGIC_MENU_ICONS:    equ 1   ; Applies the index mask $3F to spell entries when populating the currently displayed icons table.
 FIX_FIELD_ITEM_CONSUMABLE:           equ 1   ; Field items will only be consumed if the CONSUMABLE flag is set.

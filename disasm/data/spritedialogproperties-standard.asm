@@ -133,7 +133,11 @@ table_MapspriteDialogueProperties:
                 
                 mapsprite POSE6
                 portrait ELIS
+            if (FIX_ELIS_SPEECH_SFX=1)
+                speechSfx DIALOG_BLEEP_2
+            else
                 speechSfx DIALOG_BLEEP_6
+            endif
                 
                 mapsprite POSE7
                 portrait NONE
