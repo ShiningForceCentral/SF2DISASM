@@ -652,7 +652,7 @@ member = -2
                 ; Curse
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_CURSE,d2
-                beq.s   @Poison
+                beq.s   @Stun
                 
             if (SHOW_STATUS_EFFECT_COUNTER=1)
                 subq.w  #2,a1
@@ -660,26 +660,26 @@ member = -2
                 move.l  #VDPTILES_STATUSEFFECT_CURSE,d0
                 bsr.w   WriteStatusEffectTilesForMemberStatusWindow
                 
-@Poison:        ; Poison
-                move.w  d1,d2
-                andi.w  #STATUSEFFECT_POISON,d2
-                beq.s   @Stun
-                
-            if (SHOW_STATUS_EFFECT_COUNTER=1)
-                subq.w  #2,a1
-            endif
-                move.l  #VDPTILES_STATUSEFFECT_POISON,d0
-                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
-                
 @Stun:          ; Stun
                 move.w  d1,d2
                 andi.w  #STATUSEFFECT_STUN,d2
-                beq.s   @Muddle
+                beq.s   @Poison
                 
             if (SHOW_STATUS_EFFECT_COUNTER=1)
                 subq.w  #2,a1
             endif
                 move.l  #VDPTILES_STATUSEFFECT_STUN,d0
+                bsr.w   WriteStatusEffectTilesForMemberStatusWindow
+                
+@Poison:        ; Poison
+                move.w  d1,d2
+                andi.w  #STATUSEFFECT_POISON,d2
+                beq.s   @Muddle
+                
+            if (SHOW_STATUS_EFFECT_COUNTER=1)
+                subq.w  #2,a1
+            endif
+                move.l  #VDPTILES_STATUSEFFECT_POISON,d0
                 bsr.w   WriteStatusEffectTilesForMemberStatusWindow
                 
 @Muddle:        ; Muddle
