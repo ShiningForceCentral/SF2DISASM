@@ -71,7 +71,7 @@ loc_10616:
                 checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s    @SkipItemCheck1
             endif
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_10630
 @SkipItemCheck1:
                 sndCom  SFX_MENU_SELECTION
@@ -85,7 +85,7 @@ loc_10630:
                 checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s    @SkipItemCheck2
             endif
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_1064A
 @SkipItemCheck2:
                 sndCom  SFX_MENU_SELECTION
@@ -106,7 +106,7 @@ loc_1065C:
                 checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s    @SkipItemCheck3
             endif
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_10676
 @SkipItemCheck3:
                 sndCom  SFX_MENU_SELECTION

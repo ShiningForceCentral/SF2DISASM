@@ -1126,16 +1126,19 @@ WriteEnemyLvOrExp:
 @DrawCracks_Loop:
                 move.b  (a0)+,d1
                 beq.s   @NextCrack
+                
                 andi.w  #$F0,d1
                 beq.s   @Continue1
+                
                 andi.b  #$F,(a1)
 @Continue1:     move.b  -1(a0),d1
                 andi.w  #$F,d1
                 beq.s   @Continue2
+                
                 andi.b  #$F0,(a1)
 @Continue2:     move.b  -1(a0),d1
                 or.b    d1,(a1)
-@NextCrack:     addq.l  #1,a1
+@NextCrack:     addq.w  #1,a1
                 dbf     d0,@DrawCracks_Loop
                 
                 movea.l a2,a1

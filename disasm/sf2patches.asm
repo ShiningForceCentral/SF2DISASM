@@ -112,7 +112,8 @@ SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options
 
 ; Menu enhancements
 ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Reads values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
-ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 1       ; 1 = small icons, 2 = no display
+ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 1       ; 0 = OFF, 1 = small icons in top right corner of the K/D window, 2 = no display.
+DRAW_CRACKS_OVERLAY_IN_ITEM_MENU:   equ 1       ; Draws a cracked icon for damaged items in item submenus.
 EIGHT_CHARACTERS_MEMBER_NAMES:      equ 1       ; Remodels windows and sprites to make room for an extra character in Force member names.
 EXTENDED_SPELL_NAMES:               equ 1       ; Increases the maximum number of characters in spell names from 6 to 7, and makes room for them to span 2 lines.
 EXTENDED_STATUS:                    equ 1       ; Display additional information on the member screen: Promotion indicator, Critical hit type and chance, Double and Counter chances, Resistance levels, and Movetype name.

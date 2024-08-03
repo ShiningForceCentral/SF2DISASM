@@ -14,6 +14,8 @@
 LoadHighlightableSpellIcon:
                 
                 module
+                
+                clr.w   d6
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 cmpi.w  #SPELL_NOTHING,d0
                 beq.s   LoadHighlightableNothingIcon
@@ -37,7 +39,8 @@ LoadHighlightableItemIcon:
                 moveq   #ICON_UNARMED,d0
                 bra.s   @Other
                 
-@Continue:      andi.w  #ITEMENTRY_MASK_INDEX,d0
+@Continue:      move.w  d0,d6           ; save item entry
+                andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.w  #ITEM_NOTHING,d0
                 beq.s   LoadHighlightableNothingIcon
                 
@@ -54,7 +57,8 @@ LoadHighlightableItemIcon:
 LoadHighlightableNothingIcon:
                 
                 clr.w   d0
-@Other:         getPointer p_OtherIcons, a0
+@Other:         clr.w   d6
+                getPointer p_OtherIcons, a0
 
     ; End of function LoadHighlightableNothingIcon
 
@@ -64,7 +68,10 @@ LoadHighlightableNothingIcon:
 
 LoadHighlightableIcon:
                 
+                movea.l a1,a3           ; save starting cursor position in window layout for non-highlighted icon
                 adda.w  #ICON_TILE_BYTESIZE,a1
+                movea.l a1,a4           ; save starting cursor position in window layout for highlighted icon
+                
                 mulu.w  #ICON_TILE_BYTESIZE,d0
                 addIconOffset d0, a0
                 move.w  #ICON_PIXELS_LONGWORD_COUNTER,d1 
@@ -76,7 +83,54 @@ LoadHighlightableIcon:
                 move.l  d0,(a1)+
                 dbf     d1,@Loop
                 
+            if (DRAW_CRACKS_OVERLAY_IN_ITEM_MENU=1)
+                ; Draw cracks over icon if item is broken
+                btst    #ITEMENTRY_BIT_BROKEN,d6
+                beq.s   @CleanIconCorners
+                
+                movea.l a1,a2           ; save ending cursor position in window layout
+                movea.l a3,a1           ; restore ending cursor position in window layout for non-highlighted icon
+                bsr.s   @DrawCracks
+                movea.l a1,a2           ; save ending cursor position in window layout
+                movea.l a4,a1           ; restore ending cursor position in window layout for highlighted icon
+                
+@DrawCracks:    getPointer p_OtherIcons, a0
+                lea     ICONS_OFFSET_CRACKS(a0),a0
+                move.w  #ICON_PIXELS_BYTE_COUNTER,d1
+                
+@DrawCracks_Loop:
+                move.b  (a0)+,d0
+                beq.s   @NextCrack
+                
+                andi.w  #$F0,d0
+                beq.s   @Continue1
+                
+                andi.b  #$F,(a1)
+@Continue1:     move.b  -1(a0),d0
+                andi.w  #$F,d0
+                beq.s   @Continue2
+                
+                andi.b  #$F0,(a1)
+@Continue2:     move.b  -1(a0),d0
+                or.b    d0,(a1)
+@NextCrack:     addq.w  #1,a1
+                dbf     d1,@DrawCracks_Loop
+                
+                movea.l a2,a1           ; restore ending cursor position in window layout
+            endif
+                
+@CleanIconCorners:
+                
+                ori.w   #$F,-2(a1)
+                ori.w   #$F000,-36(a1)
+                ori.w   #$F,-158(a1)
+                ori.w   #$F000,-192(a1)
+                ori.w   #$F,-194(a1)
+                ori.w   #$F000,-228(a1)
+                ori.w   #$F,-350(a1)
+                ori.w   #$F000,-384(a1)
                 rts
+
 
     ; End of function LoadHighlightableIcon
 

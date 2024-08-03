@@ -1459,6 +1459,30 @@ combatant = -2
 
 WriteItemIconsCross:
                 
+            if (STANDARD_BUILD=1)
+                lea     (FF6802_LOADING_SPACE).l,a1
+                
+                move.w  combatant(a6),d0
+                clr.w   d1
+                jsr     GetItemBySlotAndHeldItemsNumber
+                jsr     LoadItemIcon(pc)
+                
+                move.w  combatant(a6),d0
+                moveq   #1,d1
+                jsr     GetItemBySlotAndHeldItemsNumber
+                jsr     LoadItemIcon(pc)
+                
+                move.w  combatant(a6),d0
+                moveq   #2,d1
+                jsr     GetItemBySlotAndHeldItemsNumber
+                jsr     LoadItemIcon(pc)
+                
+                move.w  combatant(a6),d0
+                moveq   #3,d1
+                jsr     GetItemBySlotAndHeldItemsNumber
+                pea     DmaIconsCross(pc)
+                jmp     LoadItemIcon(pc)
+            else
                 move.w  combatant(a6),d0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 clr.w   d1
@@ -1473,7 +1497,8 @@ WriteItemIconsCross:
                 moveq   #3,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 bsr.w   LoadItemIcon
-                bra.w   loc_13C20
+                bra.w   DmaIconsCross
+            endif
 
     ; End of function WriteItemIconsCross
 
@@ -1485,6 +1510,29 @@ combatant = -2
 
 WriteMagicIconsCross:
                 
+            if (STANDARD_BUILD=1)
+                lea     (FF6802_LOADING_SPACE).l,a1
+                
+                move.w  combatant(a6),d0
+                clr.w   d1
+                jsr     GetSpellAndNumberOfSpells
+                jsr     LoadSpellIcon(pc)
+                
+                move.w  combatant(a6),d0
+                moveq   #1,d1
+                jsr     GetSpellAndNumberOfSpells
+                jsr     LoadSpellIcon(pc)
+                
+                move.w  combatant(a6),d0
+                moveq   #2,d1
+                jsr     GetSpellAndNumberOfSpells
+                jsr     LoadSpellIcon(pc)
+                
+                move.w  combatant(a6),d0
+                moveq   #3,d1
+                jsr     GetSpellAndNumberOfSpells
+                jsr     LoadSpellIcon(pc)
+            else
                 move.w  combatant(a6),d0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 clr.w   d1
@@ -1499,7 +1547,8 @@ WriteMagicIconsCross:
                 moveq   #3,d1
                 jsr     j_GetSpellAndNumberOfSpells
                 bsr.w   LoadSpellIcon
-loc_13C20:
+            endif
+DmaIconsCross:
                 
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     ($BC00).l,a1
@@ -1654,6 +1703,16 @@ LoadMemberSummaryIcons:
                 move.w  d1,(a0)+
                 clr.b   ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w
                 lea     (FF8804_LOADING_SPACE).l,a1
+            if (STANDARD_BUILD=1)
+                move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
+                bsr.w   LoadHighlightableItemIcon
+                move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
+                bsr.w   LoadHighlightableItemIcon
+                move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
+                bsr.w   LoadHighlightableItemIcon
+                move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
+                bsr.w   LoadHighlightableItemIcon
+            else
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
                 bsr.w   CleanIconCorners
@@ -1666,6 +1725,7 @@ LoadMemberSummaryIcons:
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
                 bsr.w   CleanIconCorners
+            endif
                 jsr     (WaitForVInt).w
                 moveq   #30,d6
                 
@@ -1675,7 +1735,7 @@ LoadMemberSummaryIcons:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   @CheckRight
                 moveq   #1,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   @CheckRight
                 sndCom  SFX_MENU_SELECTION
                 bra.w   @DmaIcons
@@ -1684,7 +1744,7 @@ LoadMemberSummaryIcons:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   @CheckUp
                 moveq   #2,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   @CheckUp
                 sndCom  SFX_MENU_SELECTION
                 bra.w   @DmaIcons
@@ -1700,7 +1760,7 @@ LoadMemberSummaryIcons:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   @CheckB
                 moveq   #3,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   @CheckB
                 sndCom  SFX_MENU_SELECTION
                 bra.w   @DmaIcons
@@ -2002,6 +2062,16 @@ loc_141FE:
                 jsr     j_GetStatusEffects
                 move.w  d1,statusEffects(a6)
                 lea     (FF8804_LOADING_SPACE).l,a1
+            if (STANDARD_BUILD=1)
+                move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
+                bsr.w   LoadHighlightableItemIcon
+                move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
+                bsr.w   LoadHighlightableItemIcon
+                move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
+                bsr.w   LoadHighlightableItemIcon
+                move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
+                bsr.w   LoadHighlightableItemIcon
+            else
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
                 bsr.w   LoadHighlightableIcon
                 bsr.w   CleanIconCorners
@@ -2014,6 +2084,7 @@ loc_141FE:
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableIcon
                 bsr.w   CleanIconCorners
+            endif
                 clr.w   d6
                 moveq   #$1F,d7
                 bsr.w   dmaMembersListIcon_Up
@@ -2027,7 +2098,7 @@ loc_14264:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1427E
                 moveq   #1,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_1427E
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_142FA
@@ -2036,7 +2107,7 @@ loc_1427E:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14298
                 moveq   #2,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_14298
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_142FA
@@ -2052,7 +2123,7 @@ loc_142AA:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_142C4
                 moveq   #3,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_142C4
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_142FA
@@ -2288,8 +2359,20 @@ ExecuteExplorationMagicMenu:
                 andi.w  #$7F,d1 
                 move.w  d1,(a0)+
             endif
+                
                 clr.b   ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w
                 lea     (FF8804_LOADING_SPACE).l,a1
+                
+            if (STANDARD_BUILD=1)
+                move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
+                bsr.w   LoadHighlightableSpellIcon
+                move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
+                bsr.w   LoadHighlightableSpellIcon
+                move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
+                bsr.w   LoadHighlightableSpellIcon
+                move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
+                bsr.w   LoadHighlightableSpellIcon
+            else
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
                 bsr.w   LoadHighlightableSpellIcon
                 bsr.w   CleanIconCorners
@@ -2302,6 +2385,7 @@ ExecuteExplorationMagicMenu:
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableSpellIcon
                 bsr.w   CleanIconCorners
+            endif
 @loc_1:
                 
                 jsr     (WaitForVInt).w
@@ -2492,6 +2576,7 @@ byte_145A8:
 
 CleanIconCorners:
                 
+            if (VANILLA_BUILD=1)
                 ori.w   #$F,-2(a1)
                 ori.w   #$F000,-$24(a1)
                 ori.w   #$F,-$9E(a1)
@@ -2501,6 +2586,7 @@ CleanIconCorners:
                 ori.w   #$F,-$15E(a1)
                 ori.w   #$F000,-$180(a1)
                 rts
+            endif
 
     ; End of function CleanIconCorners
 
