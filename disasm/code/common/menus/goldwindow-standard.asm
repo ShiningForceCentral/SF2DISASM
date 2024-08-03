@@ -19,7 +19,7 @@ OpenGoldWindow:
                 movem.l d0-a1,-(sp)
                 link    a6,#-32
                 move.w  #WINDOW_GOLD_SOURCE,d1
-                move.w  #WINDOW_GOLD_DEST,d1
+                move.w  #WINDOW_GOLD_DEST,d2
                 
 @Continue:      tst.w   ((GOLD_WINDOW_INDEX-$1000000)).w
                 bne.s   @Done
