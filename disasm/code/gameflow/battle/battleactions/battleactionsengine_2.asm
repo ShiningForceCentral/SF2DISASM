@@ -31,11 +31,16 @@ cutoff = -1
 
 battlesceneScript_End:
                 
+                module
                 movem.l d0-d3/a0,-(sp)
                 endAnimation
+            if (STANDARD_BUILD&FIX_RANGED_COUNTER_EXP=1)
+                ; do nothing
+            else
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
                 moveq   #3,d6
                 bsr.w   battlesceneScript_SwitchTargets
+            endif
                 lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
                 lea     ((TARGETS_LIST-$1000000)).w,a5
                 tst.b   curseInaction(a2)
@@ -50,17 +55,26 @@ battlesceneScript_End:
                 jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   loc_A3B2
-                bra.s   loc_A3AE
+                
+            if (STANDARD_BUILD&FIX_RANGED_COUNTER_EXP=1)
+                lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
+            endif
+                bra.s   @GiveExpAndGold
 loc_A396:
                 
                 cmpi.w  #BATTLEACTION_ATTACKTYPE_COUNTER,((BATTLESCENE_ATTACK_TYPE-$1000000)).w
                 bne.w   loc_A3B2
+                
                 move.b  (a5),d0
                 jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   loc_A3B2
-loc_A3AE:
+@GiveExpAndGold:
                 
+            if (STANDARD_BUILD&FIX_RANGED_COUNTER_EXP=1)
+                moveq   #3,d6
+                bsr.w   battlesceneScript_SwitchTargets
+            endif
                 bsr.w   battlesceneScript_GiveExpAndGold
 loc_A3B2:
                 
@@ -100,6 +114,7 @@ byte_A3E6:
 
     ; End of function battlesceneScript_End
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

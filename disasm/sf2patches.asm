@@ -57,6 +57,7 @@ FIX_LABYRINTH_DELETION:              equ 1   ; Prevents a section of the labyrin
 FIX_MISSING_RANDOM_BATTLES:          equ 1   ; Adds zone events for random battles without.
 FIX_MOVEMENT_GLITCH:                 equ 1   ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
 FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE: equ 1   ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
+FIX_RANGED_COUNTER_EXP:              equ 1   ; Switches focus to ally target before giving EXP if a counterattack occurred.
 FIX_SEARCH_IN_BATTLE:                equ 1   ; Restores the ability to search chests during battle.
 FIX_SPELL_LEARNING_PROMO_CHECK:      equ 1   ; Correctly determine whether a character is promoted when learning spells.
 FIX_USABLE_ITEM_VALIDATION:          equ 1   ; Compares an item's Use Spell index to the "No spell" index $3F instead of $FF.
