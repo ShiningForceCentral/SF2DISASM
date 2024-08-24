@@ -26,6 +26,9 @@ Map36_212_EntityEvent0:
                 script  cs_5DA28
                 setFlg  811             ; Set after Frayja asks to go to Moun with you
                 setFlg  82              ; Frayja is a follower
+            if (STANDARD_BUILD&FIX_BATTLE_TO_MOUN_SKIP=1)
+                setSavedByte #MAP_PACALON, EGRESS_MAP
+            endif
 return_5D968:
                 
                 rts

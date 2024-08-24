@@ -34,6 +34,7 @@ TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES_TOGGLE: equ 0       ; 1 = no battle messag
 ; - FIX_SPELL_LEARNING_PROMO_CHECK
 ;
 FIX_AI_CLAUDE_ATTACK_RANGE:          equ 1   ; Corrects an oversight resulting in AI-controlled Claude to attack with the same 1-2 range as the Kraken Arm enemy.
+FIX_BATTLE_TO_MOUN_SKIP:             equ 1   ; Sets the Egress map to Pacalon after Frayja asks to go to Moun, preventing the battle to Moun to be skipped by egressing to Tristan.
 FIX_CARAVAN_DESCRIPTIONS:            equ 1   ; Breaks up character list into chunks of 4.
 FIX_CARAVAN_FREE_REPAIR_EXPLOIT:     equ 1   ; Preserves the broken bit when items are stored in the Caravan, though as a result, inventory size must be halved to 32 items.
 FIX_COPY_SWAP_EXPLOIT:               equ 1   ; Some game data will be carried over from a previous file to a new one when deleting a save after copying it. Known items include: Character EXP, kills and defeats, item dropped flags, and queued up Mithril items.
