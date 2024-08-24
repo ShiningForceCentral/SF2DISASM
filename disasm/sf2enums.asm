@@ -2725,6 +2725,19 @@ WINDOW_SHOP_ITEM_NAME_AND_PRICE_DEST: equ $F606
 
 ; ---------------------------------------------------------------------------
 
+; enum Window_Timer
+
+windowDest = $117
+
+    if (STANDARD_BUILD&FIX_TIMER_WINDOW_POSITION=1)
+windowDest = $217
+    endif
+
+WINDOW_TIMER_DEST: equ windowDest
+WINDOW_TIMER_SIZE: equ $804
+
+; ---------------------------------------------------------------------------
+
 ; enum Stats
 
 statsDigitsNumber       = 2

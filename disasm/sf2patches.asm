@@ -62,6 +62,7 @@ FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE: equ 1   ; On Map 77, walking to the right o
 FIX_RANGED_COUNTER_EXP:              equ 1   ; Switches focus to ally target before giving EXP if a counterattack occurred.
 FIX_SEARCH_IN_BATTLE:                equ 1   ; Restores the ability to search chests during battle.
 FIX_SPELL_LEARNING_PROMO_CHECK:      equ 1   ; Correctly determine whether a character is promoted when learning spells.
+FIX_TIMER_WINDOW_POSITION:           equ 1   ; Re-positions the timer window displayed during the Fairy Woods special stage battle to perfectly overlap the gold window when viewing the member status screen.
 FIX_USABLE_ITEM_VALIDATION:          equ 1   ; Compares an item's Use Spell index to the "No spell" index $3F instead of $FF.
 
 
