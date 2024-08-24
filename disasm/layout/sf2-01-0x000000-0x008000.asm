@@ -95,12 +95,13 @@
                 includeIfVanilla "code\common\tech\sram\sramfunctions.asm"   ; SRAM functions
                 include "code\specialscreens\suspend\witchsuspend.asm"    ; Witch suspend function
                 include "code\specialscreens\witchend\witchendinit.asm"    ; Witch end function
+                includeIfStandard "code\gameflow\mainloop-standard.asm"
                 includeIfVanilla "code\gameflow\start\gameinit.asm"    ; Game init
                 includeIfVanilla "data\maps\global\debugmodemaps.asm"    ; Debug mode maps
                 alignIfVanilla
                 includeIfVanilla "code\gameflow\start\gameintro.asm"    ; Game intro
                 includeIfVanilla "code\specialscreens\witch\witchstart.asm"    ; Start witch screen
-                include "code\gameflow\mainloop.asm"    ; Main loop
+                includeIfVanilla "code\gameflow\mainloop.asm"    ; Main loop
                 include "code\common\maps\egressinit.asm"    ; Egress map init function
                 include "code\gameflow\start\basetiles.asm"    ; Base tiles loading
                 includeIfVanilla "code\gameflow\special\battletest.asm"    ; Battle test functions

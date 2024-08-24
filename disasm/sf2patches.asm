@@ -51,6 +51,7 @@ FIX_GODDESS_STAFF_DEALS_EXPLOIT:     equ 1   ; If one of the following items is 
 FIX_GOLD_GIFT:                       equ 1   ; Gold increases when Minister gives you gift in New Granseal.
 FIX_HIGINS_SPELL:                    equ 1   ; Prevents unequipping from possibly corrupting characters spell entries.
 FIX_INCREASE_DOUBLE_RESETS_COUNTER:  equ 1   ; Equipment that increases the chance to double attack also erroneously set the chance to counter attack to 1/32.
+FIX_AI_JARO_NOT_LEAVING_THE_FORCE:   equ 1   ; Resets Jaro's stats, makes him leave the battle party and the Force, and clears the flag indicating that he switched sides when leaving battle 32 (en route to Moun) before completing it.
 FIX_KARNA_INCREASED_DOUBLE:          equ 1   ; 1 = No increased double, 2 = Sheela gets increased double instead.  An oddity in the character initialization routine causes the chance to double attack to be increased if the character happens to start knowing Heal 3.
 FIX_KIWI_BREATH_UPGRADE_LEVELS:      equ 1   ; Kiwi's breath upgrades are based on effective rather than current level.
 FIX_LABYRINTH_DELETION:              equ 1   ; Prevents a section of the labyrinth from being deleted due to AI region activation.

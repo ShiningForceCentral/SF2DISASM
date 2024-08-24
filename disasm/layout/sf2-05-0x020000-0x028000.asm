@@ -56,6 +56,7 @@
                 includeIfVanilla "code\gameflow\battle\battlefunctions\turnorderfunctions.asm"    ; Battle turn order functions
                 include "code\gameflow\battle\battlefunctions\battlefunctions_3.asm"    ; Battle functions
                 includeIfStandard "code\gameflow\battle\battlefunctions\setmovesfx-standard.asm"
+                includeIfStandard "code\gameflow\battle\battlefunctions\resetaijaro-standard.asm"
                 includeIfStandard "code\gameflow\battle\battlemusic-standard.asm"
                 includeIfStandard "data\stats\allies\immortalallies-standard.asm"
                 includeIfStandard "data\battles\global\displaytimerbattles-standard.asm"
