@@ -27,10 +27,16 @@ ApplyPositionsAfterEnemyLeaderDies:
                 cmpi.w  #-1,(a0)
                 beq.w   @Done
                 cmp.w   (a0),d1
-                beq.w   @Found          ; entry first word is battle index
+            if (FIX_SLADE_EXPLODES_AFTER_BATTLE_5=1)
+                beq.w   @PreventAllyExplosions ; update the list of dead combatants to only the leader to avoid a potential graphical glitch with allies exploding after the post-battle cutscene
+            else
+                beq.w   @Found           ; entry first word is battle index
+            endif
                 adda.w  #6,a0
                 bra.s   @FindBattle_Loop
-                move.w  #$80FF,(DEAD_COMBATANTS_LIST).l ; unreachable code
+@PreventAllyExplosions:
+				
+                move.w  #$80FF,(DEAD_COMBATANTS_LIST).l ; BUG: In the original game, this bit of code was skipped, which in turn caused allies to potentially explode after the post-battle cutscene.
                 move.w  #1,(DEAD_COMBATANTS_LIST_LENGTH).l
 @Found:
                 
