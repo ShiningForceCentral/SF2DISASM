@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\items\randomattackspells-standard.asm :
+; ASM FILE data\stats\randomattackspells-standard.asm :
 
 ; Classes that have a chance to cast a spell when attacking.
 table_RandomAttackSpellsForClasses:

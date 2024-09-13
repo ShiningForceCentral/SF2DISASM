@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\items\unarmedattackranges-standard.asm :
+; ASM FILE data\stats\unarmedattackranges-standard.asm :
 
 ; Classes that use a special attack range when attacking without a weapon equipped.
 table_UnarmedAttackRangesForClasses:

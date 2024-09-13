@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\items\enemybattlescenemusics-standard.asm :
+; ASM FILE data\battles\global\enemybattlescenemusics-standard.asm :
 
 ; Enemies that use an alternate battlescene music.
 table_EnemyBattlesceneMusics:

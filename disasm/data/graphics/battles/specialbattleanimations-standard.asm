@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\items\specialbattleanimations-standard.asm :
+; ASM FILE data\graphics\battles\specialbattleanimations-standard.asm :
 
 ; Classes that have an additional chance to perform a critical hit for which a special animation is used.
 table_SpecialCriticalHitsForClasses:

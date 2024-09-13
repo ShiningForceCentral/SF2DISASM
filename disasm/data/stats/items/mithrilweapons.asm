@@ -3,7 +3,7 @@
 ; 0x21F62..0x21FD2 : Mithril weapons data
 list_MithrilWeaponClasses:
                 
-; Syntax        mithrilWeaponClass [CLASS_]enum,..[CLASS_]enum
+; Syntax        classes [CLASS_]enum,..[CLASS_]enum
                 
                 classes HERO, BDBT
                 classes PLDN, PGNT

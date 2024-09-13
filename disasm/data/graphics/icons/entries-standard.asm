@@ -1,5 +1,5 @@
 
-; ASM FILE data\graphics\icons\entries.asm :
+; ASM FILE data\graphics\icons\entries-standard.asm :
 ; 0x1D8004..0x1DFA44 : Icons
 
 ; Items

@@ -1,7 +1,7 @@
 
-; ASM FILE data\stats\allies\classes\classdefs.asm :
-; 0x1EE890..0x1EE930 : Class definitions
-table_ClassDefs:  
+; ASM FILE data\stats\allies\classes\classdefs-standard.asm :
+;
+table_ClassDefinitions:
 ; Syntax        mov        0-255 (game slows down at around 15)
 ;               resistance [RESISTANCE_]bitfield
 ;               moveType   [MOVETYPE_UPPER_]enum (or index)

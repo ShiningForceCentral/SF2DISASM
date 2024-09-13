@@ -68,7 +68,7 @@
                 includeIfStandard "data\stats\allies\stats\entries.asm"    ; Ally stats
                 alignIfStandard
                 includeIfStandard "data\stats\allies\allystartdefs.asm"    ; Ally start definitions
-                includeIfStandard "data\stats\allies\classes\classdefs.asm"    ; Class definitions
+                includeIfStandard "data\stats\allies\classes\classdefs-standard.asm"    ; Class definitions
                 includeIfStandard "code\specialscreens\jewelend\graphics.asm"    ; Jewel End Graphics
                 alignIfStandard
                 includeIfStandard "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics

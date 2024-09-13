@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\items\attackspellanimations-standard.asm :
+; ASM FILE data\graphics\battles\attackspellanimations-standard.asm :
 
                 module
 

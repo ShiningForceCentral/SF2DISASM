@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\items\spearthrowanimations-standard.asm :
+; ASM FILE data\graphics\battles\spearthrowanimations-standard.asm :
                 
 ; Knight-type battle sprites and the animations they use when attacking with a spear.
 table_KnightBattleSprites:
