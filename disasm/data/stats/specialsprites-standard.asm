@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\specialmovetypes-standard.asm :
+; ASM FILE data\stats\specialsprites-standard.asm :
 ;
 
 ; Large 2x2 mapblocks mapsprites. 

@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\items\specialcounterattackenemies-standard.asm :
+; ASM FILE data\stats\enemies\specialcounterattackenemies-standard.asm :
 
 ; Enemies that are unable to counter attack
 table_UnableToCounterEnemies:

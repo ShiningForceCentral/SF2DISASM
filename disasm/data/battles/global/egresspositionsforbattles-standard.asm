@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\items\egresspositionsforbattles-standard.asm :
+; ASM FILE data\battles\global\egresspositionsforbattles-standard.asm :
 
 ; Battles for which a specific Egress map is forced.
 table_EgressPositionsForBattles:

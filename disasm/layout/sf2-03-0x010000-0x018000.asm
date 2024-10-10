@@ -38,7 +38,6 @@
                 includeIfVanilla "code\common\menus\memberscreen.asm"    ; Menu engine, part 4 : Member screen functions
                 includeIfVanilla "code\common\menus\unusedsub_12606.asm"    ; Unused function
                 includeIfVanilla "code\common\menus\getcombatantportrait.asm"    ; Combatant portrait index getter function
-                include "data\graphics\tech\windowborder\entries.asm"    ; Windows border compressed tiles
                 include "data\graphics\tech\windowlayouts\portraitwindowlayout.asm"    ; Portrait window layout
             if (STANDARD_BUILD&EXTENDED_STATUS=1)
                 include "data\graphics\tech\windowlayouts\allykilldefeatwindowlayout-menuenhancements.asm"

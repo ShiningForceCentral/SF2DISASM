@@ -368,7 +368,7 @@ LoadMemberScreenWindowLayouts:
                 blt.s   @Return         ; return if no portrait to display (and assume that it's an enemy, so skip drawing gold window as well)
                 
                 move.w  portraitWindowSlot(a6),d0
-                lea     tiles_WindowBorder(pc), a0
+                lea     layout_PortraitWindow(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #160,d7

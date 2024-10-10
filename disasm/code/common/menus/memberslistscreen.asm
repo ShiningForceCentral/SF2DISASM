@@ -716,7 +716,7 @@ BuildMembersListScreenWindows:
                 
                 ; Load portrait window border tiles
                 move.w  portraitWindow(a6),d0
-                lea     tiles_WindowBorder(pc), a0
+                lea     layout_PortraitWindow(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
                 move.w  #160,d7

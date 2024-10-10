@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\items\immortalallies-standard.asm :
+; ASM FILE data\stats\allies\immortalallies-standard.asm :
 
 ; Allies who automatically revive after battle.
 table_ImmortalAllies:

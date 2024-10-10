@@ -1,5 +1,5 @@
 
-; ASM FILE data\stats\items\losablebattles-standard.asm :
+; ASM FILE data\battles\global\losablebattles-standard.asm :
 
 ; Battles that are completed even in case of defeat.  Use 'MAP_NONE' if no wakeup scene after battle loss.
 table_LosableBattles:
