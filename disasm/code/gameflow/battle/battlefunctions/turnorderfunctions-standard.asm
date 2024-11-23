@@ -15,6 +15,58 @@
               endif
             endm
                 
+@randomizeFirstTurnEntry: macro
+                andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
+                move.w  d1,d6
+                lsr.w   #3,d6
+                jsr     (GenerateRandomNumber).w
+                add.w   d7,d1
+                jsr     (GenerateRandomNumber).w
+                sub.w   d7,d1
+                moveq   #3,d6
+                jsr     (GenerateRandomNumber).w
+                subq.w  #1,d7
+                add.w   d7,d1
+                tst.b   d1
+                bpl.s   @AddFirstTurnEntry\@
+                moveq   #CHAR_STATCAP_AGI_CURRENT,d1    ; Cap randomized AGI to prevent skipped turns
+@AddFirstTurnEntry\@:
+                
+                @addTurnOrderEntry
+            endm
+                
+@randomizeSecondTurnEntry: macro
+                andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
+                mulu.w  #5,d1
+                divu.w  #6,d1
+                move.w  d1,d6
+                lsr.w   #3,d6
+                jsr     (GenerateRandomNumber).w
+                add.w   d7,d1
+                jsr     (GenerateRandomNumber).w
+                sub.w   d7,d1
+                tst.b   d1
+                bpl.s   @AddSecondTurnEntry\@
+                moveq   #CHAR_STATCAP_AGI_CURRENT,d1
+@AddSecondTurnEntry\@:
+                
+                @addTurnOrderEntry
+            endm
+                
+@compareEntries: macro
+                getSavedWord (a0), d0
+                getSavedWord (a0), d1, TURN_ORDER_ENTRY_SIZE
+                cmp.b   d0,d1
+                ble.s   @CompareNextPair\@
+                
+                setSavedWord d1, (a0)
+                setSavedWord d0, (a0), TURN_ORDER_ENTRY_SIZE
+@CompareNextPair\@:
+                
+                addq.w  #TURN_ORDER_ENTRY_SIZE,a0
+            endm
+                
+                
 ; =============== S U B R O U T I N E =======================================
 
 
@@ -52,15 +104,7 @@ GenerateBattleTurnOrder:
                 loadSavedDataAddress BATTLE_TURN_ORDER, a0
 @SortEntries_InnerLoop:
                 
-                getSavedWord (a0), d0
-                getSavedWord (a0), d1, TURN_ORDER_ENTRY_SIZE
-                cmp.b   d0,d1
-                ble.s   @CompareNextPair
-                setSavedWord d1, (a0)
-                setSavedWord d0, (a0), TURN_ORDER_ENTRY_SIZE
-@CompareNextPair:
-                
-                addq.w  #TURN_ORDER_ENTRY_SIZE,a0
+                @compareEntries
                 dbf     d7,@SortEntries_InnerLoop
                 dbf     d6,@SortEntries_OuterLoop
                 
@@ -82,47 +126,17 @@ AddTurnOrderEntries_Loop:
                 
                 jsr     GetCombatantX
                 bmi.s   @HandleNextCombatant
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 beq.s   @HandleNextCombatant
-                jsr     GetCurrentAGI
+                jsr     GetCurrentAgi
                 move.w  d1,d3                           ; save current AGI
-                andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
-                move.w  d1,d6
-                lsr.w   #3,d6
-                jsr     (GenerateRandomNumber).w
-                add.w   d7,d1
-                jsr     (GenerateRandomNumber).w
-                sub.w   d7,d1
-                moveq   #3,d6
-                jsr     (GenerateRandomNumber).w
-                subq.w  #1,d7
-                add.w   d7,d1
-                tst.b   d1
-                bpl.s   @AddFirstTurnEntry
-                moveq   #CHAR_STATCAP_AGI_CURRENT,d1    ; Cap randomized AGI to prevent skipped turns
-@AddFirstTurnEntry:
-                
-                @addTurnOrderEntry
+                @randomizeFirstTurnEntry
                 
                 move.b  d3,d1                           ; restore current AGI (byte only so we can branch on positive)
                 bpl.s   @HandleNextCombatant
                 
                 ; Add a second turn if current AGI > 127
-                andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
-                mulu.w  #5,d1
-                divu.w  #6,d1
-                move.w  d1,d6
-                lsr.w   #3,d6
-                jsr     (GenerateRandomNumber).w
-                add.w   d7,d1
-                jsr     (GenerateRandomNumber).w
-                sub.w   d7,d1
-                tst.b   d1
-                bpl.s   @AddSecondTurnEntry
-                moveq   #CHAR_STATCAP_AGI_CURRENT,d1
-@AddSecondTurnEntry:
-                
-                @addTurnOrderEntry
+                @randomizeSecondTurnEntry
 @HandleNextCombatant:
                 
                 addq.w  #1,d0
@@ -131,5 +145,86 @@ AddTurnOrderEntries_Loop:
                 rts
 
     ; End of function AddTurnOrderEntries_Loop
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+UpdateBattleTurnOrder:
+                
+                move.l  d4,-(sp)
+                move.l  d5,-(sp)
+                loadSavedDataAddress BATTLE_TURN_ORDER, a0
+                clr.w   d5
+                getSavedByte CURRENT_BATTLE_TURN,d5
+                adda.w  d5,a0                           ; a0 = pointer to current turn entry
+                move.l  a0,d3                           ; d3.l = copy of pointer to current turn entry
+                moveq   #0,d4                           ; d4.l = ally second turn flags
+                moveq   #0,d5                           ; d5.l = enemy second turn flags
+                
+@Loop:          move.b  (a0),d0                         ; d0.b = actor combatant
+                cmpi.b  #-1,d0
+                beq.w   @Break
+                
+                jsr     GetCombatantX
+                bmi.s   @AddNullEntry
+                
+                jsr     GetCurrentHp
+                beq.s   @AddNullEntry
+                
+                jsr     GetCurrentAgi
+                
+                ; Is ally or enemy taking a second turn?
+                tst.b   d0
+                bmi.s   @Enemy
+                
+                bset    d0,d4
+                beq.s   @FirstTurn
+                bra.s   @SecondTurn
+                
+@Enemy:         bset    d0,d5
+                bne.s   @SecondTurn
+                
+@FirstTurn:     @randomizeFirstTurnEntry
+                bra.s   @Loop
+                
+@SecondTurn:    @randomizeSecondTurnEntry
+                bra.w   @Loop
+                
+@AddNullEntry:  ; Add null entry
+            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.b  #-1,(a0)
+                move.b  #-1,2(a0)
+                addq.w  #TURN_ORDER_ENTRY_SIZE,a0
+            else
+                move.w  #-1,(a0)+
+            endif
+                bra.w   @Loop
+                
+@Break:         ; Sort entries by randomized AGI
+                clr.w   d5
+                getSavedByte CURRENT_BATTLE_TURN,d5
+            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+                lsr.w   #2,d5
+            else
+                lsr.w   #1,d5
+            endif
+                moveq   #TURN_ORDER_ENTRIES_COUNTER,d6
+                sub.w   d5,d6                           ; d6.w = outer loop counter
+                move.w  d6,d5
+                subq.w  #1,d5                           ; d5.w = inner loop counter
+                
+@OuterLoop:     move.w  d5,d7
+                movea.l d3,a0
+                
+@InnerLoop:     @compareEntries
+                dbf     d7,@InnerLoop
+                dbf     d6,@OuterLoop
+                
+                move.l  (sp)+,d5
+                move.l  (sp)+,d4
+                rts
+
+    ; End of function UpdateBattleTurnOrder
 
                 modend

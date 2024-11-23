@@ -115,6 +115,10 @@ HEALER_AI_ENHANCEMENTS:             equ 0       ; See SF2_AI_Healing_Rewrite.txt
 SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options enemies can use.
 
 
+; Turn order modifications
+UPDATE_TURN_ORDER_AFTER_EACH_TURN:  equ 1       ; Partially regenerates the turn order table after each individual turn for combatants waiting to act in order for the SLOW spell to have a more immediate impact.
+
+
 ; Menu enhancements
 ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Reads values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
 ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 1       ; 0 = OFF, 1 = small icons in top right corner of the K/D window, 2 = no display.

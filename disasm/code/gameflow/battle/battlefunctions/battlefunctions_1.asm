@@ -97,8 +97,10 @@ BattleLoop:
                 
                 clr.w   d0              ; start of individual turn execution
                 getBattleTurnActor d0
+            if (UPDATE_TURN_ORDER_AFTER_EACH_TURN=0)
                 cmpi.b  #-1,d0
-                beq.s   @Start          
+                beq.s   @Start
+            endif
                 
                 bsr.w   ExecuteIndividualTurn
                 tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
@@ -127,7 +129,18 @@ BattleLoop:
                 tst.w   d3
                 beq.w   BattleLoop_Victory
                 addToSavedByte #TURN_ORDER_ENTRY_SIZE, CURRENT_BATTLE_TURN
+                
+            if (UPDATE_TURN_ORDER_AFTER_EACH_TURN=1)
+                clr.w   d0              ; start of individual turn execution
+                getBattleTurnActor d0
+                cmpi.b  #-1,d0
+                beq.w   @Start     
+                
+                pea     @ExecuteIndividualTurns_Loop(pc)
+                jmp     UpdateBattleTurnOrder(pc)
+            else
                 bra.s   @ExecuteIndividualTurns_Loop
+            endif
 
     ; End of function BattleLoop
 
