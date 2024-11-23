@@ -116,6 +116,7 @@ SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options
 
 
 ; Turn order modifications
+DISABLE_TURN_ORDER_RANDOMIZATION:   equ 1       ; Combatants always act in the same order from highest to lowest AGI, prioritizing allies by their index and starting with the Force leader.
 UPDATE_TURN_ORDER_AFTER_EACH_TURN:  equ 1       ; Partially regenerates the turn order table after each individual turn for combatants waiting to act in order for the SLOW spell to have a more immediate impact.
 
 

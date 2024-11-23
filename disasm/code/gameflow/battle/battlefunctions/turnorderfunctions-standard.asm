@@ -1,6 +1,5 @@
 
 ; ASM FILE code\gameflow\battle\turnorderfunctions-standard.asm :
-; Standard reimplementation of battle turn order functions.
 
                 module
                 
@@ -16,6 +15,7 @@
             endm
                 
 @randomizeFirstTurnEntry: macro
+              if (DISABLE_TURN_ORDER_RANDOMIZATION=0)
                 andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
                 move.w  d1,d6
                 lsr.w   #3,d6
@@ -31,11 +31,13 @@
                 bpl.s   @AddFirstTurnEntry\@
                 moveq   #CHAR_STATCAP_AGI_CURRENT,d1    ; Cap randomized AGI to prevent skipped turns
 @AddFirstTurnEntry\@:
+              endif
                 
                 @addTurnOrderEntry
             endm
                 
 @randomizeSecondTurnEntry: macro
+              if (DISABLE_TURN_ORDER_RANDOMIZATION=0)
                 andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
                 mulu.w  #5,d1
                 divu.w  #6,d1
@@ -49,6 +51,7 @@
                 bpl.s   @AddSecondTurnEntry\@
                 moveq   #CHAR_STATCAP_AGI_CURRENT,d1
 @AddSecondTurnEntry\@:
+              endif
                 
                 @addTurnOrderEntry
             endm
@@ -149,6 +152,7 @@ AddTurnOrderEntries_Loop:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Out: d3.l = copy of pointer to current turn entry
 
 UpdateBattleTurnOrder:
                 
