@@ -28,6 +28,10 @@
                 includeIfStandard "code\specialscreens\chapter\graphics.asm"
                 alignIfStandard
             endif
+            if (CONFIGURATION_SCREEN=1)
+                includeIfStandard "code\specialscreens\configuration\configuration.asm"
+                alignIfStandard
+            endif
                 
                 includeIfVanilla "data\graphics\battles\backgrounds\entries.asm"    ; Battlescene Backgrounds
                 includeIfVanilla "data\graphics\battles\spells\invocations\entries.asm"    ; Invocation sprites

@@ -189,7 +189,11 @@ witchMenuAction_New:
             endif
                 
 @Configuration: txt     223             ; "{NAME;0}....{N}Nice name, huh?{W2}"
+            if (STANDARD_BUILD&CONFIGURATION_SCREEN=1)
+                bsr.w   Configuration
+            else
                 bsr.w   CheatModeConfiguration
+            endif
                 txt     232             ; "I'll let you decide the{N}difficulty level at this time."
                 clr.w   d0
                 moveq   #3,d1
@@ -265,7 +269,11 @@ witchMenuAction_Load:
                 setCurrentSaveSlot d0
                 jsr     (LoadGame).w
                 txt     226             ; "{NAME;0}, yes!  I knew it!{W2}"
+            if (STANDARD_BUILD&CONFIGURATION_SCREEN=1)
+                bsr.w   Configuration
+            else
                 bsr.w   CheatModeConfiguration
+            endif
                 txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
                 clsTxt
                 clr.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w

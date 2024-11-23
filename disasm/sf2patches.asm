@@ -7,7 +7,7 @@
 ; Debugging facilitations
 EASY_DEBUG_MODE:            equ 0       ; Toggle Debug Mode ON automatically when booting up the game.
 EASY_BATTLE_TEST:           equ 0       ; If Debug Mode is on, go to Battle Test instead of playing the intro cutscene.
-EASY_CONFIGURATION_MODE:    equ 0       ; Toggle Configuration Mode ON automatically, and skip checking if the Start button is pressed.
+EASY_CONFIGURATION_MODE:    equ 1       ; Toggle Configuration Mode ON automatically, and skip checking if the Start button is pressed.
 EASY_SOUND_TEST:            equ 0       ; Hold Up while entering Configuration Mode; there is no need to have set Game Completed save flag.
 EASY_RENAME_CHARACTERS:     equ 0       ; Rename all characters when starting a new game.
 
@@ -108,6 +108,7 @@ TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock dama
 
 ; Special screens
 CHAPTER_SCREEN:                     equ 0       ; Patch implementation with template SFCD screen as applicable example.
+CONFIGURATION_SCREEN:               equ 1       ; Re-implements the configuration screen featured in Final Conflict.
 
 
 ; AI enhancements
