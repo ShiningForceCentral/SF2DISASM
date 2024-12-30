@@ -55,7 +55,7 @@ CopyCaravanItems:
                 move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 subq.w  #1,d7
                 bcs.w   @Skip
-                lea     ((CARAVAN_ITEMS+2-$1000000)).w,a0
+                lea     ((CARAVAN_ITEMS-$1000000)).w,a0
                 lea     ((GENERIC_LIST-$1000000)).w,a1
 @Loop:
                 

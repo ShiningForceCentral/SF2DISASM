@@ -97,7 +97,7 @@ BattleLoop:
                 
                 clr.w   d0              ; start of individual turn execution
                 getBattleTurnActor d0
-            if (UPDATE_TURN_ORDER_AFTER_EACH_TURN=0)
+            if (STANDARD_BUILD&UPDATE_TURN_ORDER_AFTER_EACH_TURN=0)
                 cmpi.b  #-1,d0
                 beq.s   @Start
             endif
@@ -130,7 +130,7 @@ BattleLoop:
                 beq.w   BattleLoop_Victory
                 addToSavedByte #TURN_ORDER_ENTRY_SIZE, CURRENT_BATTLE_TURN
                 
-            if (UPDATE_TURN_ORDER_AFTER_EACH_TURN=1)
+            if (STANDARD_BUILD&UPDATE_TURN_ORDER_AFTER_EACH_TURN=1)
                 clr.w   d0              ; start of individual turn execution
                 getBattleTurnActor d0
                 cmpi.b  #-1,d0

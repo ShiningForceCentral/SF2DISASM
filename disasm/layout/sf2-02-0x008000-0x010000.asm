@@ -13,6 +13,9 @@
                 includeIfStandard "code\common\stats\getclasstype-standard.asm"
                 include "data\stats\allies\classes\classtypes.asm"    ; Class types table
                 include "code\common\stats\statsengine_2.asm"    ; Character stats engine, part 2
+                includeIfStandard "code\common\stats\applystatusandequipeffectsonstats-standard.asm"
+                includeIfVanilla "code\common\stats\applystatusandequipeffectsonstats.asm"    ; Functions to calculate effective stat values
+                include "code\common\stats\itemdatafunctions.asm"    ; Character stats engine, part 2
                 include "code\common\stats\levelup.asm"    ; Level Up functions
                 include "code\common\stats\statsengine_3.asm"    ; Character stats engine, part 3
                 includeIfStandard "code\common\stats\caravaninventoryfunctions-standard.asm"

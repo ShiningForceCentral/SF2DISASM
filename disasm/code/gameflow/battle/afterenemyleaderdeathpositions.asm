@@ -27,7 +27,7 @@ ApplyPositionsAfterEnemyLeaderDies:
                 cmpi.w  #-1,(a0)
                 beq.w   @Done
                 cmp.w   (a0),d1
-            if (FIX_SLADE_EXPLODES_AFTER_BATTLE_5=1)
+            if (STANDARD_BUILD&FIX_SLADE_EXPLODES_AFTER_BATTLE_5=1)
                 beq.w   @PreventAllyExplosions ; update the list of dead combatants to only the leader to avoid a potential graphical glitch with allies exploding after the post-battle cutscene
             else
                 beq.w   @Found           ; entry first word is battle index

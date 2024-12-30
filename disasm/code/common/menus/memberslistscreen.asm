@@ -997,7 +997,7 @@ BuildMemberSummaryWindow:
                 addq.w  #2,a1
                 move.w  #VDPTILE_UPPERCASE_L|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  combatant(a6),d0
-            if (SHOW_EFFECTIVE_LEVEL=1)
+            if (STANDARD_BUILD&SHOW_EFFECTIVE_LEVEL=1)
                 jsr     CalculateEffectiveLevel
             else
                 jsr     j_GetCurrentLevel
