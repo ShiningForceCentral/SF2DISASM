@@ -65,7 +65,7 @@ ApplyStatusEffectsAndItemsOnStats:
                 
                 ; Get all status effects except Curse
                 getSavedWord (a0), d3, COMBATANT_OFFSET_STATUSEFFECTS ; Get Status Effects -> d3.w
-                andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d3
+                andi.w  #($FFFF-STATUSEFFECT_CURSE),d3
                 
                 ; Initialize movetype while preserving current AI commandset
                 tst.b   d0
@@ -84,8 +84,8 @@ ApplyStatusEffectsAndItemsOnStats:
                 move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI(a0)
                 
                 ; Apply equip effects on stats
-                movea.l a0,a1
-                movea.l a0,a2
+                movea.l a0,a1 ; a1 = combatant entry + offset to item entry
+                movea.l a0,a2 ; a2 = combatant entry 
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d2
 @Loop:
                 
@@ -156,7 +156,7 @@ ApplyStatusEffectsOnStats:
                 moveq   #1,d1
                 bsr.w   DecreaseCurrentMov
                 moveq   #5,d1
-                bsr.w   DecreaseCurrentAgi
+                bra.w   DecreaseCurrentAgi
 @Return:
                 
                 rts
@@ -191,8 +191,13 @@ ApplyItemOnStats:
                 moveq   #EQUIPEFFECTS_COUNTER,d7
 @Loop:
                 
-                move.b  1(a0),d1        ; value
-                move.b  (a0),d2         ; effect code
+                ; Get effect code -> d1.b, and parameter -> d2.w
+                moveq   #EQUIPEFFECTS_COUNTER,d2
+                sub.w   d7,d2
+                move.w  d2,d1
+                add.w   d1,d1
+                move.w  EQUIPEFFECT_OFFSET_PARAMETER(a0,d1.w),d1
+                move.b  (a0,d2.w),d2
                 cmpi.b  #-1,d2
                 beq.s   @Next
                 
@@ -209,8 +214,7 @@ ApplyItemOnStats:
                 jsr     (a1)
 @Next:
                 
-                addq.w  #EQUIPEFFECTS_ENTRY_SIZE,a0
-                dbf     d7,@Loop        
+                dbf     d7,@Loop
                 
                 movem.l (sp)+,d1-d2/d7-a1
                 rtr
@@ -226,8 +230,7 @@ pt_EquipEffectFunctions:
                 dc.l equipEffect_IncreaseCriticalProwess
                 dc.l equipEffect_IncreaseDoubleAttackProwess
                 dc.l equipEffect_IncreaseCounterAttackProwess
-                dc.l equipEffect_IncreaseResistanceGroup1
-                dc.l equipEffect_IncreaseResistanceGroup2
+                dc.l equipEffect_IncreaseResistance
                 dc.l DecreaseCurrentAtt
                 dc.l DecreaseCurrentDef
                 dc.l DecreaseCurrentAgi
@@ -235,8 +238,7 @@ pt_EquipEffectFunctions:
                 dc.l equipEffect_DecreaseCriticalProwess
                 dc.l equipEffect_DecreaseDoubleAttackProwess
                 dc.l equipEffect_DecreaseCounterAttackProwess
-                dc.l equipEffect_DecreaseResistanceGroup1
-                dc.l equipEffect_DecreaseResistanceGroup2
+                dc.l equipEffect_DecreaseResistance
                 dc.l SetCurrentAtt
                 dc.l SetCurrentDef
                 dc.l SetCurrentAgi
@@ -244,9 +246,12 @@ pt_EquipEffectFunctions:
                 dc.l equipEffect_SetCriticalProwess
                 dc.l equipEffect_SetDoubleAttackProwess
                 dc.l equipEffect_SetCounterAttackProwess
-                dc.l equipEffect_SetResistanceGroup1
-                dc.l equipEffect_SetResistanceGroup2
-                dc.l equipEffect_SetStatus
+                dc.l equipEffect_SetWindResistance
+                dc.l equipEffect_SetLightningResistance
+                dc.l equipEffect_SetIceResistance
+                dc.l equipEffect_SetFireResistance
+                dc.l equipEffect_SetStatusResistance
+                dc.l equipEffect_SetStatusEffects
                 dc.l equipEffect_SetMoveType
             if (FIX_CRITICAL_HIT_DEFINITIONS=1)
                 dc.l equipEffect_SetCritical150
@@ -264,6 +269,16 @@ equipEffect_Nothing:
                 rts
 
     ; End of function equipEffect_Nothing
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+equipEffect_DecreaseCriticalProwess:
+                
+                neg.b   d1
+
+    ; End of function equipEffect_DecreaseCriticalProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -289,7 +304,7 @@ equipEffect_IncreaseCriticalProwess:
                 bra.s   @Continue
 @Min125:        
                 
-                moveq   #0,d2
+                moveq   #PROWESS_CRITICAL125_1IN32,d2
                 bra.s   @Continue
 @StrongerCritical:
                 
@@ -303,7 +318,7 @@ equipEffect_IncreaseCriticalProwess:
                 bra.s   @Continue
 @Min150:        
                 
-                moveq   #4,d2
+                moveq   #PROWESS_CRITICAL150_1IN32,d2
             else
                 move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d2
                 andi.b  #PROWESS_MASK_CRITICAL,d2
@@ -328,6 +343,17 @@ equipEffect_IncreaseCriticalProwess:
                 rts
 
     ; End of function equipEffect_IncreaseCriticalProwess
+
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+equipEffect_DecreaseDoubleAttackProwess:
+                
+                neg.b   d1
+
+    ; End of function equipEffect_DecreaseDoubleAttackProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -357,6 +383,16 @@ equipEffect_IncreaseDoubleAttackProwess:
                 rts
 
     ; End of function equipEffect_IncreaseDoubleAttackProwess
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+equipEffect_DecreaseCounterAttackProwess:
+                
+                neg.b   d1
+
+    ; End of function equipEffect_DecreaseCounterAttackProwess
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -437,187 +473,213 @@ equipEffect_SetCounterAttackProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+                module ; start of resistance modification module
 
-equipEffect_DecreaseCriticalProwess:
-                
-                neg.b   d1
-                bra.w   equipEffect_IncreaseCriticalProwess
-
-    ; End of function equipEffect_DecreaseCriticalProwess
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-equipEffect_DecreaseDoubleAttackProwess:
-                
-                neg.b   d1
-                bra.w   equipEffect_IncreaseDoubleAttackProwess
-
-    ; End of function equipEffect_DecreaseDoubleAttackProwess
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-equipEffect_DecreaseCounterAttackProwess:
-                
-                neg.b   d1
-                bra.w   equipEffect_IncreaseCounterAttackProwess
-
-    ; End of function equipEffect_DecreaseCounterAttackProwess
-
-
-; =============== S U B R O U T I N E =======================================
-
-equipEffect_IncreaseResistanceGroup2:
-
-                movem.l d0-a5,-(sp)
-                lsl.w   #8,d1
-                bra.s   equipEffect_IncreaseResistance
-
-    ; End of function equipEffect_IncreaseResistanceGroup2
-
-
-; =============== S U B R O U T I N E =======================================
-
-equipEffect_IncreaseResistanceGroup1:
-                
-                movem.l d0-a5,-(sp)
-equipEffect_IncreaseResistance:
-                moveq   #0,d4
-                moveq   #0,d2
-                moveq   #0,d3
-                move.w  d1,d2
-                moveq   #7,d5
-                
-@Loop_Elements:
-                lsl.w   #2,d4
-                getSavedWord (a2), d1, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d1.w
-                move.w  d2,d3
-                lsl.w   #1,d5
-                ror.w   d5,d3
-                andi.w  #3,d3
-                ror.w   d5,d1
-                andi.w  #3,d1
-                add.b   d3,d1
-                cmpi.b  #RESISTANCESETTING_MAJOR,d1
-                ble.s   @ValidResist
-                moveq   #RESISTANCESETTING_MAJOR,d1
-@ValidResist:
-                btst    #0,d1
-                beq.s   @TestBit1
-                bset    #0,d4
-@TestBit1:
-                
-                btst    #1,d1
-                beq.s   @NextElement
-                bset    #1,d4
-@NextElement:
-                lsr.w   #1,d5
-                dbf     d5,@Loop_Elements
-                
-                setSavedWord d4, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d4.w -> Set Current Resistance
-                movem.l (sp)+,d0-a5
-                rts
-
-    ; End of function equipEffect_IncreaseResistanceGroup1
-
-
-; =============== S U B R O U T I N E =======================================
-
-equipEffect_DecreaseResistanceGroup2:
-                
-                movem.l d0-a5,-(sp)
-                lsl.w   #8,d1
-                bra.s   equipEffect_DecreaseResistance
-
-    ; End of function equipEffect_DecreaseResistanceGroup2
-
-
-; =============== S U B R O U T I N E =======================================
-
-equipEffect_DecreaseResistanceGroup1:
-                
-                movem.l d0-a5,-(sp)
 equipEffect_DecreaseResistance:
+                
+                movem.l d0-d7,-(sp)
+                moveq   #-1,d6 ; subtract toggle
+                bra.s   equipEffect_ModifyResistance
+
+    ; End of function equipEffect_DecreaseResistance
+
+
+; =============== S U B R O U T I N E =======================================
+
+equipEffect_IncreaseResistance:
+                
+                movem.l d3-d7,-(sp)
+                clr.w   d6  ; add toggle
+                
+; In: d1.w = element modification value, d6.w = add/subtract toggle
+
+equipEffect_ModifyResistance:
+                
                 moveq   #0,d4
-                moveq   #0,d2
-                moveq   #0,d3
-                move.w  d1,d2
-                moveq   #7,d5
+                moveq   #SPELLELEMENTS_COUNTER,d7
+@Loop:
                 
-@Loop_Elements:
                 lsl.w   #2,d4
-                getSavedWord (a2), d1, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d1.w
-                move.w  d2,d3
-                lsl.w   #1,d5
+                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                move.w  d1,d3
+                move.w  d7,d5
+                add.w   d5,d5
                 ror.w   d5,d3
-                andi.w  #3,d3
-                ror.w   d5,d1
-                andi.w  #3,d1
-                sub.b   d3,d1
-                bpl.s   @ValidResist
-                moveq   #RESISTANCESETTING_WEAKNESS,d1
-@ValidResist:
-                btst    #0,d1
-                beq.s   @TestBit1
-                bset    #0,d4
-@TestBit1:
+                andi.w  #SPELLELEMENT_SETTING_MASK,d3
+                ror.w   d5,d2
+                andi.w  #SPELLELEMENT_SETTING_MASK,d2
                 
-                btst    #1,d1
-                beq.s   @NextElement
-                bset    #1,d4
-@NextElement:
-                lsr.w   #1,d5
-                dbf     d5,@Loop_Elements
+                ; Check add/substract/set toggle
+                tst.w   d6
+                beq.s   @Add
+                
+                neg.w   d3              ; subtract
+@Add:
+                ; Is damage or status element?
+                cmpi.w  #SPELLELEMENT_NEUTRAL,d5
+                bhs.s   @Status
+                
+                bra.s   equipEffect_IncreaseDamageResistance
+@Status:
+                
+                bra.s   equipEffect_IncreaseStatusResistance
+@ModifyResistance:
+                
+                or.w    d2,d4
+                dbf     d7,@Loop
                 
                 setSavedWord d4, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d4.w -> Set Current Resistance
-                movem.l (sp)+,d0-a5
+                movem.l (sp)+,d3-d7
                 rts
 
-    ; End of function equipEffect_DecreaseResistanceGroup1
+    ; End of function equipEffect_ModifyResistance
 
 
 ; =============== S U B R O U T I N E =======================================
 
-equipEffect_SetResistanceGroup2:
-                
-                movem.l d0-a5,-(sp)
-                lsl.w   #8,d1
-                ori.w   #RESIST_GROUP2_MASK,d1
-                move.w  d1,d3
-                jsr     GetCurrentResistance
-                ori.w   #RESIST_GROUP1_MASK,d1
-                bra.s   equipEffect_SetResistance
+; Increase resistance to damage elements.
+;
+; In: d2.w = resistance setting, d3.w = increase amount, Out: d2.w = new resistance setting
 
-    ; End of function equipEffect_SetResistanceGroup2
+equipEffect_IncreaseDamageResistance:
+                
+                cmpi.w  #RESISTANCESETTING_WEAKNESS,d2
+                bne.s   @Continue
+                
+                moveq   #-1,d2
+@Continue:
+                
+                add.w   d3,d2
+                bmi.s   @Weakness
+                
+                cmpi.w  #RESISTANCESETTING_MAJOR,d2
+                ble.s   @ModifyResistance
+                moveq   #RESISTANCESETTING_MAJOR,d2
+                bra.s   @ModifyResistance
+@Weakness:
+                
+                moveq   #RESISTANCESETTING_WEAKNESS,d2 ; set to 3 on negative (weakness)
+                bra.s   @ModifyResistance
+
+    ; End of function equipEffect_IncreaseDamageResistance
 
 
 ; =============== S U B R O U T I N E =======================================
 
-equipEffect_SetResistanceGroup1:
+; Increase resistance to status elements.  In: d3.w, Out: d2.w
+;
+; In: d2.w = resistance setting, d3.w = increase amount, Out: d2.w = new resistance setting
+
+equipEffect_IncreaseStatusResistance:
                 
-                movem.l d0-a5,-(sp)
-                ori.w   #RESIST_GROUP1_MASK,d1
-                move.w  d1,d3
-                getSavedWord (a2), d1, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d1.w
-                ori.w   #RESIST_GROUP2_MASK,d1
-equipEffect_SetResistance:
+                add.w   d3,d2
+                bmi.s   @Zero
                 
-                and.w   d3,d1
+                cmpi.w  #RESISTANCESETTING_STATUSEFFECT_IMMUNITY,d2
+                ble.s   @ModifyResistance
+                moveq   #RESISTANCESETTING_STATUSEFFECT_IMMUNITY,d2
+                bra.s   @ModifyResistance
+@Zero:
+                
+                moveq   #0,d2           ; clamp to zero on negative (regular resistance)
+                bra.s   @ModifyResistance
+
+    ; End of function equipEffect_IncreaseStatusResistance
+
+                modend ; end of resistance modification module
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: d1.w = element modification value
+
+equipEffect_SetWindResistance:
+                
+                andi.w  #MODIFY_WIND3,d1
+                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                andi.w  #($FFFF-MODIFY_WIND3),d2
+                or.w    d2,d1
                 setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
-                movem.l (sp)+,d0-a5
                 rts
 
-    ; End of function equipEffect_SetResistanceGroup1
+    ; End of function equipEffect_SetWindResistance
 
 
 ; =============== S U B R O U T I N E =======================================
 
-equipEffect_SetStatus:
+; In: d1.w = element modification value
+
+equipEffect_SetLightningResistance:
                 
-                bset    d1,d3
+                lsl.w   #SPELLELEMENT_LIGHTNING,d1
+                andi.w  #MODIFY_LIGHTNING3,d1
+                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                andi.w  #($FFFF-MODIFY_LIGHTNING3),d2
+                or.w    d2,d1
+                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
+                rts
+
+    ; End of function equipEffect_SetLightningResistance
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: d1.w = element modification value
+
+equipEffect_SetIceResistance:
+                
+                lsl.w   #SPELLELEMENT_ICE,d1
+                andi.w  #MODIFY_ICE3,d1
+                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                andi.w  #($FFFF-MODIFY_ICE3),d2
+                or.w    d2,d1
+                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
+                rts
+
+    ; End of function equipEffect_SetIceResistance
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: d1.w = element modification value
+
+equipEffect_SetFireResistance:
+
+                lsl.w   #SPELLELEMENT_FIRE,d1
+                andi.w  #MODIFY_FIRE3,d1
+                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                andi.w  #($FFFF-MODIFY_FIRE3),d2
+                or.w    d2,d1
+                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
+                rts
+
+    ; End of function equipEffect_SetFireResistance
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: d1.w = element modification value
+
+equipEffect_SetStatusResistance:
+                
+                rol.w   #(16-SPELLELEMENT_STATUS),d1
+                andi.w  #MODIFY_STATUS3,d1
+                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                andi.w  #($FFFF-MODIFY_STATUS3),d2
+                or.w    d2,d1
+                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
+                rts
+
+    ; End of function equipEffect_SetStatusResistance
+
+
+; =============== S U B R O U T I N E =======================================
+
+equipEffect_SetStatusEffects:
+                
+                ; Preserve all new effects except Curse
+                andi.w  #($FFFF-STATUSEFFECT_CURSE),d1
+                or.w    d1,d3
                 rts
 
     ; End of function equipEffect_SetStatus

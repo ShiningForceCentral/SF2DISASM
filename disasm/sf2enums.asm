@@ -246,6 +246,15 @@ STATUSEFFECT_NONE: equ 0
 
 ; ---------------------------------------------------------------------------
 
+; enum StatusEffects_Properties
+
+statusEffectsNumber = 10
+
+STATUSEFFECTS_COUNTER: equ statusEffectsNumber-1
+STATUSEFFECTS_NUMBER: equ statusEffectsNumber
+
+; ---------------------------------------------------------------------------
+
 ; enum StatusEffect Mask
 STATUSEFFECT_MASK: equ $FFFF
 
@@ -801,40 +810,32 @@ INPUT_BIT_START: equ 7
 
 ; enum ItemDef_Offsets
 
-maxRange = 4
-minRange = 5
-itemPrice = 6
-itemTypeOffset = 8
-useSpellOffset = 9
-equipEffectsOffset = 10
+equipFlagsSize = 4
+equipEffectsSize = 6
 
     if (STANDARD_BUILD&EXPANDED_CLASSES=1)
-maxRange = 8
-minRange = 9
-itemPrice = 10
-itemTypeOffset = 12
-useSpellOffset = 13
-equipEffectsOffset = 14
+equipFlagsSize = 8
     endif
-    
-ITEMDEF_OFFSET_EQUIPFLAGS: equ 0
-ITEMDEF_OFFSET_MAX_RANGE: equ maxRange
-ITEMDEF_OFFSET_MIN_RANGE: equ minRange
-ITEMDEF_OFFSET_PRICE: equ itemPrice
-ITEMDEF_OFFSET_TYPE: equ itemTypeOffset
-ITEMDEF_OFFSET_USE_SPELL: equ useSpellOffset
-ITEMDEF_OFFSET_EQUIPEFFECTS: equ equipEffectsOffset
+
+    if (STANDARD_BUILD=1)
+equipEffectsSize = 18
+    endif
+
+                                rsreset
+ITEMDEF_OFFSET_EQUIPFLAGS:      rs.b equipFlagsSize
+ITEMDEF_OFFSET_MAX_RANGE:       rs.b 1
+ITEMDEF_OFFSET_MIN_RANGE:       rs.b 1
+ITEMDEF_OFFSET_PRICE:           rs.b 4
+ITEMDEF_OFFSET_TYPE:            rs.b 1
+ITEMDEF_OFFSET_USE_SPELL:       rs.b 1
+ITEMDEF_OFFSET_EQUIPEFFECTS:    rs.b equipEffectsSize
 
 ; ---------------------------------------------------------------------------
 
 ; enum ItemDef_Properties
 
-itemDefSize = 16
+itemDefSize = __RS
 
-    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
-itemDefSize = 20
-    endif
-    
 ITEMDEF_SIZE: equ itemDefSize
 
 ; ---------------------------------------------------------------------------
@@ -921,40 +922,42 @@ EQUIPFLAG2_ALL: equ -1
 
 ; enum EquipEffects
     if (STANDARD_BUILD=1) ; ADDITIONAL_EQUIPEFFECTS
-EQUIPEFFECT_NONE: equ 0
+            rsreset
+EQUIPEFFECT_NONE: rs.b 1
 EQUIPEFFECT_UNDEFINED1: equ EQUIPEFFECT_NONE
 EQUIPEFFECT_UNDEFINED2: equ EQUIPEFFECT_NONE
-EQUIPEFFECT_INCREASE_ATT: equ 1
-EQUIPEFFECT_INCREASE_DEF: equ 2
-EQUIPEFFECT_INCREASE_AGI: equ 3
-EQUIPEFFECT_INCREASE_MOV: equ 4
-EQUIPEFFECT_INCREASE_CRITICAL: equ 5
-EQUIPEFFECT_INCREASE_DOUBLE: equ 6
-EQUIPEFFECT_INCREASE_COUNTER: equ 7
-EQUIPEFFECT_INCREASE_RES_WIND_ELEC_ICE_FIRE: equ 8
-EQUIPEFFECT_INCREASE_RES_NEUTRAL_STATUS: equ 9
-EQUIPEFFECT_DECREASE_ATT: equ 10
-EQUIPEFFECT_DECREASE_DEF: equ 11
-EQUIPEFFECT_DECREASE_AGI: equ 12
-EQUIPEFFECT_DECREASE_MOV: equ 13
-EQUIPEFFECT_DECREASE_CRITICAL: equ 14
-EQUIPEFFECT_DECREASE_DOUBLE: equ 15
-EQUIPEFFECT_DECREASE_COUNTER: equ 16
-EQUIPEFFECT_DECREASE_RES_WIND_ELEC_ICE_FIRE: equ 17
-EQUIPEFFECT_DECREASE_RES_NEUTRAL_STATUS: equ 18
-EQUIPEFFECT_SET_ATT: equ 19
-EQUIPEFFECT_SET_DEF: equ 20
-EQUIPEFFECT_SET_AGI: equ 21
-EQUIPEFFECT_SET_MOV: equ 22
-EQUIPEFFECT_SET_CRITICAL: equ 23
-EQUIPEFFECT_SET_DOUBLE: equ 24
-EQUIPEFFECT_SET_COUNTER: equ 25
-EQUIPEFFECT_SET_RES_WIND_ELEC_ICE_FIRE: equ 26
-EQUIPEFFECT_SET_RES_NEUTRAL_STATUS: equ 27
-EQUIPEFFECT_SET_STATUS: equ 28
-EQUIPEFFECT_SET_MOVETYPE: equ 29
-EQUIPEFFECT_SET_CRITICAL_150: equ 30
-EQUIPEFFECT_SET_CRITICAL_125: equ 31
+EQUIPEFFECT_INCREASE_ATT: rs.b 1
+EQUIPEFFECT_INCREASE_DEF: rs.b 1
+EQUIPEFFECT_INCREASE_AGI: rs.b 1
+EQUIPEFFECT_INCREASE_MOV: rs.b 1
+EQUIPEFFECT_INCREASE_CRITICAL: rs.b 1
+EQUIPEFFECT_INCREASE_DOUBLE: rs.b 1
+EQUIPEFFECT_INCREASE_COUNTER: rs.b 1
+EQUIPEFFECT_INCREASE_RESISTANCE: rs.b 1
+EQUIPEFFECT_DECREASE_ATT: rs.b 1
+EQUIPEFFECT_DECREASE_DEF: rs.b 1
+EQUIPEFFECT_DECREASE_AGI: rs.b 1
+EQUIPEFFECT_DECREASE_MOV: rs.b 1
+EQUIPEFFECT_DECREASE_CRITICAL: rs.b 1
+EQUIPEFFECT_DECREASE_DOUBLE: rs.b 1
+EQUIPEFFECT_DECREASE_COUNTER: rs.b 1
+EQUIPEFFECT_DECREASE_RESISTANCE: rs.b 1
+EQUIPEFFECT_SET_ATT: rs.b 1
+EQUIPEFFECT_SET_DEF: rs.b 1
+EQUIPEFFECT_SET_AGI: rs.b 1
+EQUIPEFFECT_SET_MOV: rs.b 1
+EQUIPEFFECT_SET_CRITICAL: rs.b 1
+EQUIPEFFECT_SET_DOUBLE: rs.b 1
+EQUIPEFFECT_SET_COUNTER: rs.b 1
+EQUIPEFFECT_SET_RESISTANCE_WIND: rs.b 1
+EQUIPEFFECT_SET_RESISTANCE_LIGHTNING: rs.b 1
+EQUIPEFFECT_SET_RESISTANCE_ICE: rs.b 1
+EQUIPEFFECT_SET_RESISTANCE_FIRE: rs.b 1
+EQUIPEFFECT_SET_RESISTANCE_STATUS: rs.b 1
+EQUIPEFFECT_SET_STATUSEFFECTS: rs.b 1
+EQUIPEFFECT_SET_MOVETYPE: rs.b 1
+EQUIPEFFECT_SET_CRITICAL_150: rs.b 1
+EQUIPEFFECT_SET_CRITICAL_125: rs.b 1
     else
 EQUIPEFFECT_NONE: equ 0 
 EQUIPEFFECT_UNDEFINED1: equ 1 
@@ -977,59 +980,47 @@ EQUIPEFFECT_SET_COUNTER: equ 16
 
 ; ---------------------------------------------------------------------------
 
+; enum EquipEffects_Properties
+
+parameterOffset = 1
+effectsNumber = 2
+totalEffects = 17
+
+    if (STANDARD_BUILD=1) ; ADDITIONAL_EQUIPEFFECTS
+parameterOffset = 6
+effectsNumber = 6
+totalEffects = __RS
+    endif
+
+EQUIPEFFECT_OFFSET_PARAMETER: equ parameterOffset
+EQUIPEFFECTS_COUNTER: equ effectsNumber-1
+EQUIPEFFECTS_NUMBER: equ effectsNumber
+EQUIPEFFECTS_ENTRY_SIZE: equ 2 ; unused in standard build
+EQUIPEFFECTS_MAX_INDEX: equ totalEffects
+
+; ---------------------------------------------------------------------------
+
 ; enum EquipEffects_ResistanceParameters (bitfield)
     if (STANDARD_BUILD=1) ; ADDITIONAL_EQUIPEFFECTS
 MODIFY_WIND1: equ $1
 MODIFY_WIND2: equ $2
 MODIFY_WIND3: equ $3
-MODIFY_ELEC1: equ $4
-MODIFY_ELEC2: equ $8
-MODIFY_ELEC3: equ $C
+MODIFY_LIGHTNING1: equ $4
+MODIFY_LIGHTNING2: equ $8
+MODIFY_LIGHTNING3: equ $C
 MODIFY_ICE1: equ $10
 MODIFY_ICE2: equ $20
 MODIFY_ICE3: equ $30
 MODIFY_FIRE1: equ $40
 MODIFY_FIRE2: equ $80
 MODIFY_FIRE3: equ $C0
-MODIFY_NEUTRAL1: equ $1
-MODIFY_NEUTRAL2: equ $2
-MODIFY_NEUTRAL3: equ $3
-MODIFY_STATUS1: equ $40
-MODIFY_STATUS2: equ $80
-MODIFY_STATUS3: equ $C0
+MODIFY_NEUTRAL1: equ $100
+MODIFY_NEUTRAL2: equ $200
+MODIFY_NEUTRAL3: equ $300
+MODIFY_STATUS1: equ $4000
+MODIFY_STATUS2: equ $8000
+MODIFY_STATUS3: equ $C000
     endif
-
-; ---------------------------------------------------------------------------
-
-; enum EquipEffects_StatusEffectParameters (bitfield)
-    if (STANDARD_BUILD=1) ; ADDITIONAL_EQUIPEFFECTS
-STATUS_STUN: equ 0
-STATUS_POISON: equ 1
-STATUS_CURSE: equ 2
-STATUS_MUDDLE2: equ 3
-STATUS_MUDDLE: equ 5
-STATUS_SLEEP: equ 7
-STATUS_SILENCE: equ 9
-STATUS_SLOW: equ 11
-STATUS_BOOST: equ 13
-STATUS_ATTACK: equ 15
-    endif
-
-; ---------------------------------------------------------------------------
-
-; enum EquipEffects_Properties
-
-effectsCounter = 1
-totalEffects = 17
-
-    if (STANDARD_BUILD=1) ; ADDITIONAL_EQUIPEFFECTS
-effectsCounter = 2
-totalEffects = 32
-    endif
-
-EQUIPEFFECTS_COUNTER: equ effectsCounter
-EQUIPEFFECTS_ENTRY_SIZE: equ 2
-EQUIPEFFECTS_MAX_INDEX: equ totalEffects
 
 ; ---------------------------------------------------------------------------
 
@@ -1828,6 +1819,16 @@ SPELLELEMENT_NEUTRAL: equ 8
 SPELLELEMENT_UNUSED1: equ 10
 SPELLELEMENT_UNUSED2: equ 12
 SPELLELEMENT_STATUS: equ 14
+
+; ---------------------------------------------------------------------------
+
+; enum SpellElements_Properties
+
+elementNumber = 8
+
+SPELLELEMENT_SETTING_MASK: equ 3
+SPELLELEMENTS_COUNTER: equ elementNumber-1
+SPELLELEMENTS_NUMBER: equ elementNumber
 
 ; ---------------------------------------------------------------------------
 

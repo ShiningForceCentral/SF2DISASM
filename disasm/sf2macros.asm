@@ -1101,13 +1101,29 @@ useSpell:   macro
             endm
     
 equipEffects: macro
+            if (STANDARD_BUILD=1)
+                ; Increase effects number from 3 to 6, and expand parameter size from byte to word
+                defineShorthand.b EQUIPEFFECT_,\1
+                defineShorthand.b EQUIPEFFECT_,\3
+                defineShorthand.b EQUIPEFFECT_,\5
+                defineShorthand.b EQUIPEFFECT_,\7
+                defineShorthand.b EQUIPEFFECT_,\9
+                defineShorthand.b EQUIPEFFECT_,\11
+                dc.w \2
+                dc.w \4
+                dc.w \6
+                dc.w \8
+                dc.w \10
+                dc.w \12
+            else
                 defineShorthand.b EQUIPEFFECT_,\1
                 dc.b \2
                 defineShorthand.b EQUIPEFFECT_,\3
                 dc.b \4
                 defineShorthand.b EQUIPEFFECT_,\5
                 dc.b \6
-            endm
+            endif
+        endm
 
 
 ; Spell definitions
