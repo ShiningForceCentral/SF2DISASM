@@ -825,7 +825,7 @@ equipEffectsSize = 18
 ITEMDEF_OFFSET_EQUIPFLAGS:      rs.b equipFlagsSize
 ITEMDEF_OFFSET_MAX_RANGE:       rs.b 1
 ITEMDEF_OFFSET_MIN_RANGE:       rs.b 1
-ITEMDEF_OFFSET_PRICE:           rs.b 4
+ITEMDEF_OFFSET_PRICE:           rs.b 2
 ITEMDEF_OFFSET_TYPE:            rs.b 1
 ITEMDEF_OFFSET_USE_SPELL:       rs.b 1
 ITEMDEF_OFFSET_EQUIPEFFECTS:    rs.b equipEffectsSize

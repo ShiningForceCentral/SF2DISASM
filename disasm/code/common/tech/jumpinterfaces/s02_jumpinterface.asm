@@ -1257,7 +1257,9 @@ j_GetDistanceBetweenBattleEntities:
 
 j_nullsub_9482:
                 
+            if (VANILLA_BUILD=1)
                 jmp     nullsub_9482(pc)
+            endif
 
     ; End of function j_nullsub_9482
 
