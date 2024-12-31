@@ -3,16 +3,18 @@
 ; 0x16EA6..0x176A6 : Item definitions
 table_ItemDefinitions:
                 
-; Syntax        equipFlags   [EQUIPFLAG_]bitfield
-;               equipFlags2  [EQUIPFLAG2_]bitfield (if EXPANDED_CLASSES is enabled)
+; Syntax        equipFlags   [EQUIPFLAG_]bitfield               ; bitfield shorthand (e.g., SDMN|HERO)
+;               equipFlags2  [EQUIPFLAG2_]bitfield              ; (if EXPANDED_CLASSES is enabled)
 ;               range        min, max 0-3
 ;               price        0-65535
-;               itemType     [ITEMTYPE_]bitfield
-;               useSpell     [SPELL_]enum[|level]
-;               equipEffects [EQUIPEFFECT_]enum, parameter, &
+;               itemType     [ITEMTYPE_]bitfield                ; bitfield shorthand (e.g., WEAPON|RARE)
+;               useSpell     [SPELL_]enum[|[SPELL_]level]       ; bitfield shorthand (e.g., BLAZE|LV2)
+;               equipEffects [EQUIPEFFECT_]enum, parameter, &   ; shorthand, parameter (e.g, INCREASE_ATT, 19)
 ;                            [EQUIPEFFECT_]enum, parameter, &
 ;                            [EQUIPEFFECT_]enum, parameter, &
-;                            [EQUIPEFFECT_]enum, parameter (standard build only)
+;                            [EQUIPEFFECT_]enum, parameter, &
+;                            [EQUIPEFFECT_]enum, parameter, &
+;                            [EQUIPEFFECT_]enum, parameter      (up to 3 effects in vanilla, 6 in standard build)
 ;
 ;        level: LV1 = 0 (default when omitted)
 ;               LV2 = $40
@@ -20,12 +22,116 @@ table_ItemDefinitions:
 ;               LV4 = $C0
 ;
 ; Notes regarding additional equip effects:
-;       Parameters for INCREASE/DECREASE_RES_ can be a combination i.e. MODIFY_FIRE1|MODIFY_WIND3
-;       Parameter for SET_RES_ should be every resistance for the byte i.e. RESISTANCE_WIND_NONE|RESISTANCE_LIGHTNING_MAJOR|RESISTANCE_ICE_WEAKNESS|RESISTANCE_FIRE_NONE
-;       Parameter for SET_STATUS should be single effect i.e. STATUS_POISON, STATUS_SILENCE, etc.
 ;
-; Notes: Equip parameter range depends on effect.
-;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+;       Parameters for INCREASE/DECREASE_RESISTANCE and SET_STATUS can be a combination,
+;       i.e., @fire1|@wind3 or @boost|@attack.
+;
+;       Parameter for LEARN_SPELL must be the full enum symbol, i.e., SPELL_name|SPELL_level.
+;
+;
+; List of Effect Codes :
+;       NONE,                   0       ; no effect
+;       UNDEFINED1,             0       ; no effect
+;       UNDEFINED2,             0       ; no effect
+;       INCREASE_ATT,           0-200   ; (vanilla stat cap)
+;       INCREASE_DEF,           ...
+;       INCREASE_AGI,
+;       INCREASE_MOV,
+;       INCREASE_CRITICAL,      0-3     ; prowess setting chances: 0 = 1/32, 1 = 1/16, 2 = 1/8, 3 = 1/4
+;       INCREASE_DOUBLE,        ...
+;       INCREASE_COUNTER,
+;       INCREASE_RESISTANCE,    [@wind1|@lightning2|@ice3|...] ; increase resistance by that amount
+;       DECREASE_ATT,
+;       DECREASE_DEF,
+;       DECREASE_AGI,
+;       DECREASE_MOV,
+;       DECREASE_CRITICAL,
+;       DECREASE_DOUBLE,
+;       DECREASE_COUNTER,
+;       DECREASE_RESISTANCE,
+;       SET_ATT,
+;       SET_DEF,
+;       SET_AGI,
+;       SET_MOV,
+;       SET_CRITICAL_150,       -1      ; set the strong critical bit while preserving current chance
+;       SET_CRITICAL_125,       -1      ; clear the strong critical bit while preserving current chance
+;       SET_CRITICAL,           @1in32/@1in16/...
+;       SET_DOUBLE,             ...
+;       SET_COUNTER,
+;       SET_RESISTANCE_WIND,    @weakness/@neutral/@minor/@major
+;       SET_RESISTANCE_LIGHTNING, ...
+;       SET_RESISTANCE_ICE
+;       SET_RESISTANCE_FIRE
+;       SET_RESISTANCE_STATUS,  @neutral/@minor/@major/@immunity/...
+;       SET_MOVETYPE,           @regular/@centaur/@stealth/...
+;       SET_STATUS,             [@stun|@poison|@confusion|...]
+;       LEARN_SPELL,            SPELL_enum[|SPELL_level]
+;       UNLEARN_ALL_SPELL,      -1
+;
+
+
+                module
+                
+; Resistance increase/decrease shorthands :
+@wind1 = MODIFY_WIND1
+@wind2 = MODIFY_WIND2
+@wind3 = MODIFY_WIND3
+@lightning1 = MODIFY_LIGHTNING1
+@lightning2 = MODIFY_LIGHTNING2
+@lightning3 = MODIFY_LIGHTNING3
+@ice1 = MODIFY_ICE1
+@ice2 = MODIFY_ICE2
+@ice3 = MODIFY_ICE3
+@fire1 = MODIFY_FIRE1
+@fire2 = MODIFY_FIRE2
+@fire3 = MODIFY_FIRE3
+@status1 = MODIFY_STATUS1
+@status2 = MODIFY_STATUS2
+@status3 = MODIFY_STATUS3
+
+
+; Prowess chance shorthands :
+@1in32 = PROWESS_1IN32
+@1in16 = PROWESS_1IN16
+@1in8 = PROWESS_1IN8
+@1in4 = PROWESS_1IN4
+
+
+; Resistance shorthands :
+@neutral = RESISTANCESETTING_NEUTRAL
+@minor = RESISTANCESETTING_MINOR
+@major = RESISTANCESETTING_MAJOR
+@weakness = RESISTANCESETTING_WEAKNESS
+@immunity = RESISTANCESETTING_IMMUNITY
+
+
+; Status effects shorthands :
+@stun = STATUSEFFECT_STUN
+@poison = STATUSEFFECT_POISON
+@confusion = STATUSEFFECT_CONFUSION
+@muddle = STATUSEFFECT_MUDDLE
+@sleep = STATUSEFFECT_SLEEP
+@silence = STATUSEFFECT_SILENCE
+@slow = STATUSEFFECT_SLOW
+@boost = STATUSEFFECT_BOOST
+@attack = STATUSEFFECT_ATTACK
+
+
+; Move type shorthands :
+@regular = MOVETYPE_LOWER_REGULAR
+@centaur = MOVETYPE_LOWER_CENTAUR
+@stealth = MOVETYPE_LOWER_STEALTH
+@brassGunner = MOVETYPE_LOWER_BRASS_GUNNER
+@flying = MOVETYPE_LOWER_FLYING
+@hovering = MOVETYPE_LOWER_HOVERING
+@aquatic = MOVETYPE_LOWER_AQUATIC
+@archer = MOVETYPE_LOWER_ARCHER
+@centaurArcher = MOVETYPE_LOWER_CENTAUR_ARCHER
+@stealthArcher = MOVETYPE_LOWER_STEALTH_ARCHER
+@mage = MOVETYPE_LOWER_MAGE
+@healer = MOVETYPE_LOWER_HEALER
+
+; ---------------------------------------------------------------------------
                 
                 ; 0: Medical Herb
                 equipFlags   NONE
@@ -3618,3 +3724,5 @@ table_ItemDefinitions:
                              NONE, 0
                 
             endif
+
+                modend

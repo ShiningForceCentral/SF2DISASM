@@ -4,44 +4,85 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a0 = pointer to combatant entry, d0.w = ally index
-; Out: d1.b = movetype index
+; In: d0.w = ally index
 
-
-GetAllyMoveTypeFromClass:
+LearnAllKnownSpells:
+                      
+                bsr.w   CalculateEffectiveLevel
+                move.w  d1,d5
+                bsr.w   GetClass
                 
-                clr.w   d1
-                move.b  COMBATANT_OFFSET_CLASS(a0),d1
-                mulu.w  #CLASSDEF_ENTRY_SIZE,d1
-                addq.w  #CLASSDEF_OFFSET_MOVETYPE,d1
-                getPointer p_table_ClassDefinitions, a2
-                adda.w  d1,a2
-                move.b  (a2),d1
-                andi.b  #BYTE_UPPER_NIBBLE_MASK,d1
+                ; Get pointer to stat block for class d1.b
+                move.w  d0,d2
+                lsl.w   #INDEX_SHIFT_COUNT,d2
+                getPointer p_pt_AllyStats, a0
+                movea.l (a0,d2.w),a0
+@FindStatsBlockForClass_Loop:
+                
+                tst.b   (a0)
+                bmi.s   @Return         ; exit function if no matching block found
+                
+                cmp.b   (a0)+,d1
+                beq.s   @Continue
+@FindNextStatsBlock_Loop:
+                
+                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,(a0)+ ; loop until we come across an "end of spell list" control code
+                bcs.s   @FindNextStatsBlock_Loop
+                bra.s   @FindStatsBlockForClass_Loop
+@Continue:
+                
+                lea     ALLYSTATS_OFFSET_SPELL_LIST_MINUS_ONE(a0),a0
+@FindAllLearnableSpells_Loop:
+                
+                bsr.s   FindNextLearnableSpell
+                tst.w   d2
+                bne.s   @Next
+                moveq   #0,d2
+@Next:          
+                
+                bpl.s   @FindAllLearnableSpells_Loop
+@Return:
+                
                 rts
 
-    ; End of function LoadAllyClassData
+    ; End of function LearnAllKnownSpells
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a0 = pointer to combatant entry, d0.w = enemy index
-; Out: d1.b = movetype index
+; In: a0 = pointer to ally spell list entry
+;     d0.w = ally index
+;     d5.w = current level
+;
+; Out: d2.w = 0: successfully learned spell
+;             1: failure : same or higher level spell already known
+;             2: failure : all spell slots already occupied
+;            -1: current level is too low, or end of spell list has been reached
 
-
-GetEnemyMoveTypeFromDefinition:
+                module
+@GetFirstSpellList:
                 
-                clr.w   d1
-                move.b  COMBATANT_OFFSET_ENEMY_INDEX(a0),d1
-                mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
-                addi.w  #COMBATANT_OFFSET_MOVETYPE_AND_AI,d1
-                getPointer p_table_EnemyDefinitions, a2
-                adda.w  d1,a2
-                move.b  (a2),d1
-                andi.b  #BYTE_UPPER_NIBBLE_MASK,d1
+                move.w  d0,d2
+                lsl.w   #INDEX_SHIFT_COUNT,d2
+                movea.l (p_pt_AllyStats).l,a0
+                movea.l (a0,d2.w),a0
+                lea     ALLYSTATS_OFFSET_SPELL_LIST(a0),a0
+FindNextLearnableSpell:
+                
+                move.b  (a0)+,d2            ; d2 = level which spell is learned at
+                move.b  (a0)+,d1            ; d1 = spell index
+                cmp.b   d2,d5
+                bhs.w   LearnSpell
+                
+                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,d2
+                beq.s   @GetFirstSpellList
+                
+                moveq   #-1,d2
                 rts
-
-    ; End of function LoadAllyClassData
+                
+                modend
+                
+    ; End of function FindNextLearnableSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -51,41 +92,69 @@ GetEnemyMoveTypeFromDefinition:
 
 ApplyStatusEffectsAndItemsOnStats:
                 
-                movem.l d0-d3/a0-a2,-(sp)
+                movem.l d0-a2,-(sp)
                 
                 ; Initialize current stats
+                ;
+                ; a0 = multi usage pointer
+                ; a1 = combatant item entry pointer
+                ; a2 = start of combatant entry pointer
+                ;
                 bsr.w   GetCombatantEntryAddress
-                move.b  COMBATANT_OFFSET_ATT_BASE(a0),COMBATANT_OFFSET_ATT_CURRENT(a0)
-                move.b  COMBATANT_OFFSET_DEF_BASE(a0),COMBATANT_OFFSET_DEF_CURRENT(a0)
-                move.b  COMBATANT_OFFSET_AGI_BASE(a0),COMBATANT_OFFSET_AGI_CURRENT(a0)
-                move.b  COMBATANT_OFFSET_MOV_BASE(a0),COMBATANT_OFFSET_MOV_CURRENT(a0)
-                getSavedWord (a0), d1, COMBATANT_OFFSET_RESIST_BASE
-                setSavedWord d1, (a0), COMBATANT_OFFSET_RESIST_CURRENT
-                move.b  COMBATANT_OFFSET_PROWESS_BASE(a0),COMBATANT_OFFSET_PROWESS_CURRENT(a0)
+                movea.l a0,a1
+                movea.l a0,a2
+                move.b  COMBATANT_OFFSET_ATT_BASE(a2),COMBATANT_OFFSET_ATT_CURRENT(a2)
+                move.b  COMBATANT_OFFSET_DEF_BASE(a2),COMBATANT_OFFSET_DEF_CURRENT(a2)
+                move.b  COMBATANT_OFFSET_AGI_BASE(a2),COMBATANT_OFFSET_AGI_CURRENT(a2)
+                move.b  COMBATANT_OFFSET_MOV_BASE(a2),COMBATANT_OFFSET_MOV_CURRENT(a2)
+                move.b  COMBATANT_OFFSET_PROWESS_BASE(a2),COMBATANT_OFFSET_PROWESS_CURRENT(a2)
+                getSavedWord (a2), d1, COMBATANT_OFFSET_RESIST_BASE
+                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT
+                
+                ; Unlearn all spells
+                move.l  #LONGWORD_SPELLS_INITVALUE,d1
+                setSavedLong d1, (a2), COMBATANT_OFFSET_SPELLS
                 
                 ; Get all status effects except Curse
-                getSavedWord (a0), d3, COMBATANT_OFFSET_STATUSEFFECTS ; Get Status Effects -> d3.w
+                getSavedWord (a2), d3, COMBATANT_OFFSET_STATUSEFFECTS ; Get Status Effects -> d3.w
                 andi.w  #($FFFF-STATUSEFFECT_CURSE),d3
                 
-                ; Initialize movetype while preserving current AI commandset
+                ; Relearn all spells, and initialize movetype while preserving current AI commandset
                 tst.b   d0
                 bmi.s   @Enemy
                 
-                bsr.s   GetAllyMoveTypeFromClass
+                ; Relearn known spells for ally and get move type from class definition
+                bsr.w   LearnAllKnownSpells
+                clr.w   d1
+                move.b  COMBATANT_OFFSET_CLASS(a2),d1
+                mulu.w  #CLASSDEF_ENTRY_SIZE,d1
+                getPointer p_table_ClassDefinitions, a0
+                adda.w  d1,a0
+                move.b  CLASSDEF_OFFSET_MOVETYPE(a0),d1
                 bra.s   @Continue
 @Enemy:
+                ; Relearn known spells and get move type from enemy definition
+                clr.w   d1
+                move.b  COMBATANT_OFFSET_ENEMY_INDEX(a2),d1
+                mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
+                getPointer p_table_EnemyDefinitions, a0
+                adda.w  d1,a0
                 
-                bsr.s   GetEnemyMoveTypeFromDefinition
+                ; Relearn known spells
+                move.l  ENEMYDEF_OFFSET_SPELLS(a0),d1
+                setSavedLong d1, (a2), COMBATANT_OFFSET_SPELLS
+                
+                ; Get move type
+                move.b  ENEMYDEF_OFFSET_SPELLS(a0),d1
 @Continue:
                 
-                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a0),d2
+                andi.b  #BYTE_UPPER_NIBBLE_MASK,d1
+                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a2),d2
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
                 or.b    d2,d1
-                move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI(a0)
+                move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI(a2)
                 
                 ; Apply equip effects on stats
-                movea.l a0,a1 ; a1 = combatant entry + offset to item entry
-                movea.l a0,a2 ; a2 = combatant entry 
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d2
 @Loop:
                 
@@ -107,7 +176,7 @@ ApplyStatusEffectsAndItemsOnStats:
                 ; Apply status effects on stats
                 bsr.s   ApplyStatusEffectsOnStats
                 setSavedWord d3, (a2), COMBATANT_OFFSET_STATUSEFFECTS ; d3.w -> Set Status Effects
-                movem.l (sp)+,d0-d3/a0-a2
+                movem.l (sp)+,d0-a2
                 rts
 
     ; End of function ApplyStatusEffectsAndItemsOnStats
@@ -243,6 +312,13 @@ pt_EquipEffectFunctions:
                 dc.l SetCurrentDef
                 dc.l SetCurrentAgi
                 dc.l SetCurrentMov
+            if (FIX_CRITICAL_HIT_DEFINITIONS=1)
+                dc.l equipEffect_SetCritical150
+                dc.l equipEffect_SetCritical125
+            else
+                dc.l equipEffect_Nothing
+                dc.l equipEffect_Nothing
+            endif
                 dc.l equipEffect_SetCriticalProwess
                 dc.l equipEffect_SetDoubleAttackProwess
                 dc.l equipEffect_SetCounterAttackProwess
@@ -251,15 +327,10 @@ pt_EquipEffectFunctions:
                 dc.l equipEffect_SetIceResistance
                 dc.l equipEffect_SetFireResistance
                 dc.l equipEffect_SetStatusResistance
-                dc.l equipEffect_SetStatusEffects
+                dc.l equipEffect_SetStatus
                 dc.l equipEffect_SetMoveType
-            if (FIX_CRITICAL_HIT_DEFINITIONS=1)
-                dc.l equipEffect_SetCritical150
-                dc.l equipEffect_SetCritical125
-            else
-                dc.l equipEffect_Nothing
-                dc.l equipEffect_Nothing
-            endif
+                dc.l LearnSpell
+                dc.l equipEffect_UnlearnAllSpells
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -427,6 +498,50 @@ equipEffect_IncreaseCounterAttackProwess:
 ; =============== S U B R O U T I N E =======================================
 
 
+equipEffect_SetCritical150:
+                
+                move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d2
+                andi.b  #PROWESS_MASK_CRITICAL,d2
+                cmpi.b  #PROWESS_CRITICAL_NONE,d2
+                bhs.s   @Continue       ; skip if not a critical hit setting, i.e., no critical or ailment infliction
+                
+                bset    #2,d2           ; put current critical in the 4-7 range
+@Continue:
+                
+                move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d1
+                andi.b  #PROWESS_MASK_DOUBLE|PROWESS_MASK_COUNTER,d1
+                or.b    d2,d1
+                move.b  d1,COMBATANT_OFFSET_PROWESS_CURRENT(a2)
+                rts
+
+    ; End of function equipEffect_SetCritical150
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+equipEffect_SetCritical125:
+                
+                move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d2
+                andi.b  #PROWESS_MASK_CRITICAL,d2
+                cmpi.b  #PROWESS_CRITICAL_NONE,d2
+                bhs.s   @Continue       ; skip if not a critical hit setting, i.e., no critical or ailment infliction
+                
+                bclr    #2,d2           ; put current critical in the 0-3 range
+@Continue:
+                
+                move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d1
+                andi.b  #PROWESS_MASK_DOUBLE|PROWESS_MASK_COUNTER,d1
+                or.b    d2,d1
+                move.b  d1,COMBATANT_OFFSET_PROWESS_CURRENT(a2)
+                rts
+
+    ; End of function equipEffect_SetCritical125
+
+
+; =============== S U B R O U T I N E =======================================
+
+
 equipEffect_SetCriticalProwess:
                 
                 andi.b  #PROWESS_MASK_CRITICAL,d1
@@ -477,7 +592,7 @@ equipEffect_SetCounterAttackProwess:
 
 equipEffect_DecreaseResistance:
                 
-                movem.l d0-d7,-(sp)
+                movem.l d3-d7,-(sp)
                 moveq   #-1,d6 ; subtract toggle
                 bra.s   equipEffect_ModifyResistance
 
@@ -519,10 +634,10 @@ equipEffect_ModifyResistance:
                 cmpi.w  #SPELLELEMENT_NEUTRAL,d5
                 bhs.s   @Status
                 
-                bra.s   equipEffect_IncreaseDamageResistance
+                bra.s   equipEffect_ModifyDamageResistance
 @Status:
                 
-                bra.s   equipEffect_IncreaseStatusResistance
+                bra.s   equipEffect_ModifyStatusResistance
 @ModifyResistance:
                 
                 or.w    d2,d4
@@ -541,7 +656,7 @@ equipEffect_ModifyResistance:
 ;
 ; In: d2.w = resistance setting, d3.w = increase amount, Out: d2.w = new resistance setting
 
-equipEffect_IncreaseDamageResistance:
+equipEffect_ModifyDamageResistance:
                 
                 cmpi.w  #RESISTANCESETTING_WEAKNESS,d2
                 bne.s   @Continue
@@ -561,7 +676,7 @@ equipEffect_IncreaseDamageResistance:
                 moveq   #RESISTANCESETTING_WEAKNESS,d2 ; set to 3 on negative (weakness)
                 bra.s   @ModifyResistance
 
-    ; End of function equipEffect_IncreaseDamageResistance
+    ; End of function equipEffect_ModifyDamageResistance
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -570,21 +685,21 @@ equipEffect_IncreaseDamageResistance:
 ;
 ; In: d2.w = resistance setting, d3.w = increase amount, Out: d2.w = new resistance setting
 
-equipEffect_IncreaseStatusResistance:
+equipEffect_ModifyStatusResistance:
                 
                 add.w   d3,d2
                 bmi.s   @Zero
                 
-                cmpi.w  #RESISTANCESETTING_STATUSEFFECT_IMMUNITY,d2
+                cmpi.w  #RESISTANCESETTING_IMMUNITY,d2
                 ble.s   @ModifyResistance
-                moveq   #RESISTANCESETTING_STATUSEFFECT_IMMUNITY,d2
+                moveq   #RESISTANCESETTING_IMMUNITY,d2
                 bra.s   @ModifyResistance
 @Zero:
                 
                 moveq   #0,d2           ; clamp to zero on negative (regular resistance)
                 bra.s   @ModifyResistance
 
-    ; End of function equipEffect_IncreaseStatusResistance
+    ; End of function equipEffect_ModifyStatusResistance
 
                 modend ; end of resistance modification module
 
@@ -675,7 +790,7 @@ equipEffect_SetStatusResistance:
 
 ; =============== S U B R O U T I N E =======================================
 
-equipEffect_SetStatusEffects:
+equipEffect_SetStatus:
                 
                 ; Preserve all new effects except Curse
                 andi.w  #($FFFF-STATUSEFFECT_CURSE),d1
@@ -702,44 +817,12 @@ equipEffect_SetMoveType:
 
 ; =============== S U B R O U T I N E =======================================
 
-
-equipEffect_SetCritical150:
+equipEffect_UnlearnAllSpells:
                 
-                move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d2
-                andi.b  #PROWESS_MASK_CRITICAL,d2
-                cmpi.b  #PROWESS_CRITICAL_NONE,d2
-                bhs.s   @Continue       ; skip if not a critical hit setting, i.e., no critical or ailment infliction
-                
-                bset    #2,d2           ; put current critical in the 4-7 range
-@Continue:
-                
-                move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d1
-                andi.b  #PROWESS_MASK_DOUBLE|PROWESS_MASK_COUNTER,d1
-                or.b    d2,d1
-                move.b  d1,COMBATANT_OFFSET_PROWESS_CURRENT(a2)
+                ; Unlearn all spells
+                move.l  #LONGWORD_SPELLS_INITVALUE,d1
+                setSavedLong d1, (a2), COMBATANT_OFFSET_SPELLS
                 rts
 
-    ; End of function equipEffect_SetCritical150
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-equipEffect_SetCritical125:
-                
-                move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d2
-                andi.b  #PROWESS_MASK_CRITICAL,d2
-                cmpi.b  #PROWESS_CRITICAL_NONE,d2
-                bhs.s   @Continue       ; skip if not a critical hit setting, i.e., no critical or ailment infliction
-                
-                bclr    #2,d2           ; put current critical in the 0-3 range
-@Continue:
-                
-                move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d1
-                andi.b  #PROWESS_MASK_DOUBLE|PROWESS_MASK_COUNTER,d1
-                or.b    d2,d1
-                move.b  d1,COMBATANT_OFFSET_PROWESS_CURRENT(a2)
-                rts
-
-    ; End of function equipEffect_SetCritical125
+    ; End of function equipEffect_UnlearnAllSpells
 

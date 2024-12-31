@@ -18,11 +18,13 @@
                 include "code\common\stats\itemstatsfunctions.asm"    ; Character stats engine, part 2
                 include "code\common\stats\spellstatsfunctions.asm"    ; Character stats engine, part 2
                 include "code\common\stats\combatantstatsfunctions.asm"    ; Character stats engine, part 2
+                includeIfStandard "code\common\stats\levelup-standard.asm"
                 includeIfVanilla "code\common\stats\unusedsub_9482.asm"    ; Unused nullsub
-                include "code\common\stats\levelup.asm"    ; Level Up functions
+                includeIfVanilla "code\common\stats\levelup.asm"    ; Level Up functions
                 include "code\common\stats\statsengine_3.asm"    ; Character stats engine, part 3
                 includeIfStandard "code\common\stats\caravaninventoryfunctions-standard.asm"
                 includeIfVanilla "code\common\stats\caravaninventoryfunctions.asm"    ; Caravan inventory management functions
+                includeIfStandard "data\stats\allies\allieswithbetterdouble-standard.asm"
                 
                 ; Battleactions engine
                 include "code\gameflow\special\debugmodebattleactions.asm"    ; Debug mode battle actions

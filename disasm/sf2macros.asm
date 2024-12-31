@@ -468,6 +468,19 @@ disp:           equs '0'
         endif
     endm
     
+getSavedLong: macro
+        if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+            if (narg>=3)
+disp:           equs '\3'
+            else
+disp:           equs '0'
+            endif
+                movep.l \disp\\1,\2
+        else
+                move.l  \3\\1,\2
+        endif
+    endm
+    
 getSavedWordWithPostIncrement: macro
         if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
             if (narg>=3)
@@ -492,6 +505,19 @@ disp:           equs '0'
                 movep.w \1,\disp\\2
         else
                 move.w  \1,\3\\2
+        endif
+    endm
+    
+setSavedLong: macro
+        if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+            if (narg>=3)
+disp:           equs '\3'
+            else
+disp:           equs '0'
+            endif
+                movep.l \1,\disp\\2
+        else
+                move.l  \1,\3\\2
         endif
     endm
     
