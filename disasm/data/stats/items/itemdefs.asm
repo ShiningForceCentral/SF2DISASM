@@ -55,16 +55,16 @@ table_ItemDefinitions:
 ;       SET_MOV,
 ;       SET_CRITICAL_150,       -1      ; set the strong critical bit while preserving current chance
 ;       SET_CRITICAL_125,       -1      ; clear the strong critical bit while preserving current chance
-;       SET_CRITICAL,           @1in32/@1in16/...
-;       SET_DOUBLE,             ...
-;       SET_COUNTER,
+;       SET_CRITICAL,           @125_1in32/@150_1in4/@stun_1in4/...
+;       SET_DOUBLE,             @1in32/@1in16/...
+;       SET_COUNTER,            ...
 ;       SET_RESISTANCE_WIND,    @weakness/@neutral/@minor/@major
 ;       SET_RESISTANCE_LIGHTNING, ...
 ;       SET_RESISTANCE_ICE
 ;       SET_RESISTANCE_FIRE
-;       SET_RESISTANCE_STATUS,  @neutral/@minor/@major/@immunity/...
-;       SET_MOVETYPE,           @regular/@centaur/@stealth/...
+;       SET_RESISTANCE_STATUS,  @neutral/@minor/@major/@immunity
 ;       SET_STATUS,             [@stun|@poison|@confusion|...]
+;       SET_MOVETYPE,           @regular/@centaur/@stealth/...
 ;       LEARN_SPELL,            SPELL_enum[|SPELL_level]
 ;       UNLEARN_ALL_SPELL,      -1
 ;
@@ -90,7 +90,26 @@ table_ItemDefinitions:
 @status3 = MODIFY_STATUS3
 
 
-; Prowess chance shorthands :
+; Critical prowess shorthands :
+@125_1in32 = PROWESS_CRITICAL125_1IN32
+@125_1in16 = PROWESS_CRITICAL125_1IN16
+@125_1in8 = PROWESS_CRITICAL125_1IN8
+@125_1in4 = PROWESS_CRITICAL125_1IN4
+@150_1in32 = PROWESS_CRITICAL150_1IN32
+@150_1in16 = PROWESS_CRITICAL150_1IN16
+@150_1in8 = PROWESS_CRITICAL150_1IN8
+@150_1in4 = PROWESS_CRITICAL150_1IN4
+@none = PROWESS_CRITICAL_NONE
+@poison_1in4 = PROWESS_CRITICAL_POISON
+@sleep_1in4 = PROWESS_CRITICAL_SLEEP
+@stun_1in4 = PROWESS_CRITICAL_STUN
+@confusion_1in4 = PROWESS_CRITICAL_MUDDLE
+@slow_1in4 = PROWESS_CRITICAL_SLOW
+@drain_1in4 = PROWESS_CRITICAL_MAGIC_DRAIN
+@silence_1in4 = PROWESS_CRITICAL_SILENCE
+
+
+; Double and counter prowess shorthands :
 @1in32 = PROWESS_1IN32
 @1in16 = PROWESS_1IN16
 @1in8 = PROWESS_1IN8
