@@ -242,22 +242,41 @@ ExecuteIndividualTurn:
 DetermineRandomAttackSpell:
                 
                 movem.l d1-d2/a0,-(sp)
-                moveq   #5,d2
                 move.w  combatant(a6),d0
-                tst.b   d0
+                
+                ; Check equipped weapon
+                jsr     GetEquippedWeapon ; -> d1.w = item entry, d2.w = slot
+                moveq   #5,d2             ; d2.w = object property bytes number
+                tst.w   d1
+                bmi.s   @IsEnemy
+                
+                lea     table_RandomAttackSpellsForWeapons(pc), a0
+                bra.s   @Continue
+                
+@IsEnemy:       tst.b   d0
                 bmi.s   @Enemy
+                
+                ; Check ally class
                 lea     table_RandomAttackSpellsForClasses(pc), a0
                 jsr     GetClass
                 bra.s   @Continue
+                
+                ; Check enemy
 @Enemy:         lea     table_RandomAttackSpellsForEnemies(pc), a0
                 jsr     GetEnemy
+                
+                ; Find object
 @Continue:      jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @Done
                 
                 ; Randomly determine if spell is cast
                 move.w  #256,d6
                 jsr     (GenerateRandomNumber).w
-                cmp.b   (a0)+,d7                     ; d6/256 chance to cast spell
+                move.b  (a0)+,d6
+                bne.s   @Compare
+                
+                move.w  #256,d6
+@Compare:       cmp.b   d6,d7             ; d6/256 chance to cast spell
                 bhs.s   @Done
                 
                 ; Determine spell level
