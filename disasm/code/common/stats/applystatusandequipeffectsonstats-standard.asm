@@ -154,24 +154,22 @@ ApplyStatusEffectsAndItemsOnStats:
                 or.b    d2,d1
                 move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI(a2)
                 
-                ; Apply equip effects on stats
-                moveq   #COMBATANT_ITEMSLOTS_COUNTER,d2
+                ; Apply equip effects on stats starting with weapon, then ring
+                moveq   #ITEMTYPE_WEAPON,d4
+                moveq   #EQUIPMENTTYPES_COUNTER,d7
 @Loop:
                 
-                getSavedWord (a1), d1, COMBATANT_OFFSET_ITEMS
-                andi.w  #ITEMENTRY_MASK_INDEX,d1
-                cmpi.w  #ITEM_NOTHING,d1
-                beq.s   @Next
+                bsr.w   GetEquippedItemByType ; -> d1.w = item entry, d2.w = slot (-1 if nothing equipped)
+                tst.w   d1
+                bmi.s   @Next
                 
-                isItemEquipped (a1)
-                beq.s   @Next
                 bsr.w   ApplyItemOnStats
                 beq.s   @Next
                 ori.w   #STATUSEFFECT_CURSE,d3
 @Next:
                 
-                addq.w  #ITEMENTRY_SIZE,a1
-                dbf     d2,@Loop
+                add.w   d4,d4
+                dbf     d7,@Loop
                 
                 ; Apply status effects on stats
                 bsr.s   ApplyStatusEffectsOnStats
@@ -236,8 +234,7 @@ ApplyStatusEffectsOnStats:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: d0.w = combatant index
-;     d1.w = item index
-
+;     d1.w = item entry
 
 ApplyItemOnStats:
                 
@@ -254,7 +251,7 @@ ApplyItemOnStats:
                 
                 move    sr,-(sp)        ; store test result
                 
-                movem.l d1-d2/d7-a1,-(sp)
+                movem.l d1-d7,-(sp)
                 lea     ITEMDEF_OFFSET_EQUIPEFFECTS(a0),a0
                 clr.w   d2
                 moveq   #EQUIPEFFECTS_COUNTER,d7
@@ -285,7 +282,7 @@ ApplyItemOnStats:
                 
                 dbf     d7,@Loop
                 
-                movem.l (sp)+,d1-d2/d7-a1
+                movem.l (sp)+,d1-d7
                 rtr
 
     ; End of function ApplyItemOnStats
@@ -348,13 +345,6 @@ equipEffect_Nothing:
 equipEffect_DecreaseCriticalProwess:
                 
                 neg.b   d1
-
-    ; End of function equipEffect_DecreaseCriticalProwess
-
-
-; =============== S U B R O U T I N E =======================================
-
-
 equipEffect_IncreaseCriticalProwess:
                 
             if (FIX_CRITICAL_HIT_DEFINITIONS=1)
@@ -423,13 +413,6 @@ equipEffect_IncreaseCriticalProwess:
 equipEffect_DecreaseDoubleAttackProwess:
                 
                 neg.b   d1
-
-    ; End of function equipEffect_DecreaseDoubleAttackProwess
-
-
-; =============== S U B R O U T I N E =======================================
-
-
 equipEffect_IncreaseDoubleAttackProwess:
                 
                 move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d2
@@ -462,13 +445,6 @@ equipEffect_IncreaseDoubleAttackProwess:
 equipEffect_DecreaseCounterAttackProwess:
                 
                 neg.b   d1
-
-    ; End of function equipEffect_DecreaseCounterAttackProwess
-
-
-; =============== S U B R O U T I N E =======================================
-
-
 equipEffect_IncreaseCounterAttackProwess:
                 
                 move.b  COMBATANT_OFFSET_PROWESS_CURRENT(a2),d2
@@ -588,26 +564,17 @@ equipEffect_SetCounterAttackProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d1.w = element modification value, d6.w = add/subtract toggle
+
                 module ; start of resistance modification module
 
 equipEffect_DecreaseResistance:
                 
-                movem.l d3-d7,-(sp)
                 moveq   #-1,d6 ; subtract toggle
                 bra.s   equipEffect_ModifyResistance
-
-    ; End of function equipEffect_DecreaseResistance
-
-
-; =============== S U B R O U T I N E =======================================
-
 equipEffect_IncreaseResistance:
                 
-                movem.l d3-d7,-(sp)
-                clr.w   d6  ; add toggle
-                
-; In: d1.w = element modification value, d6.w = add/subtract toggle
-
+                moveq   #0,d6  ; add toggle
 equipEffect_ModifyResistance:
                 
                 moveq   #0,d4
@@ -644,16 +611,9 @@ equipEffect_ModifyResistance:
                 dbf     d7,@Loop
                 
                 setSavedWord d4, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d4.w -> Set Current Resistance
-                movem.l (sp)+,d3-d7
                 rts
 
-    ; End of function equipEffect_ModifyResistance
 
-
-; =============== S U B R O U T I N E =======================================
-
-; Increase resistance to damage elements.
-;
 ; In: d2.w = resistance setting, d3.w = increase amount, Out: d2.w = new resistance setting
 
 equipEffect_ModifyDamageResistance:
@@ -661,7 +621,7 @@ equipEffect_ModifyDamageResistance:
                 cmpi.w  #RESISTANCESETTING_WEAKNESS,d2
                 bne.s   @Continue
                 
-                moveq   #-1,d2
+                moveq   #-1,d2 ; start at -1 instead of 3 if weak
 @Continue:
                 
                 add.w   d3,d2
@@ -676,13 +636,7 @@ equipEffect_ModifyDamageResistance:
                 moveq   #RESISTANCESETTING_WEAKNESS,d2 ; set to 3 on negative (weakness)
                 bra.s   @ModifyResistance
 
-    ; End of function equipEffect_ModifyDamageResistance
 
-
-; =============== S U B R O U T I N E =======================================
-
-; Increase resistance to status elements.  In: d3.w, Out: d2.w
-;
 ; In: d2.w = resistance setting, d3.w = increase amount, Out: d2.w = new resistance setting
 
 equipEffect_ModifyStatusResistance:
@@ -698,10 +652,10 @@ equipEffect_ModifyStatusResistance:
                 
                 moveq   #0,d2           ; clamp to zero on negative (regular resistance)
                 bra.s   @ModifyResistance
-
-    ; End of function equipEffect_ModifyStatusResistance
-
+                
                 modend ; end of resistance modification module
+
+    ; End of function equipEffect_ModifyResistance
 
 
 ; =============== S U B R O U T I N E =======================================

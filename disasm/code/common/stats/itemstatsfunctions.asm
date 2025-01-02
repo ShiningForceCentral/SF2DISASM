@@ -124,9 +124,15 @@ GetEquipmentType:
 
 GetEquippedWeapon:
                 
+                module
+                
                 movem.l d3-d4/a0-a1,-(sp)
                 move.w  #ITEMTYPE_WEAPON,d4
+            if (STANDARD_BUILD=1)
+                bra.s   @Continue
+            else
                 bra.s   GetEquippedItemByType
+            endif
 
     ; End of function GetEquippedWeapon
 
@@ -140,6 +146,9 @@ GetEquippedRing:
                 
                 movem.l d3-d4/a0-a1,-(sp)
                 move.w  #ITEMTYPE_RING,d4
+            if (STANDARD_BUILD=1)
+                bra.s   @Continue
+            endif
 
     ; End of function GetEquippedRing
 
@@ -147,6 +156,12 @@ GetEquippedRing:
 ; START OF FUNCTION CHUNK FOR GetEquippedWeapon
 
 GetEquippedItemByType:
+                
+            if (STANDARD_BUILD=1)
+                ; In: d4.w = item type
+                movem.l d3-d4/a0-a1,-(sp)
+@Continue:
+            endif
                 
                 bsr.w   GetCombatantEntryAddress
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
@@ -191,6 +206,7 @@ GetEquippedItemByType:
 
 ; END OF FUNCTION CHUNK FOR GetEquippedWeapon
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

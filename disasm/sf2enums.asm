@@ -1363,9 +1363,14 @@ ITEMSELLPRICE_MULTIPLIER: equ 3 ; multiply price by this, then bitshift right by
 ; ---------------------------------------------------------------------------
 
 ; enum EquipmentTypes
-EQUIPMENTTYPE_TOOL: equ 0 
+EQUIPMENTTYPE_TOOL: equ 0 ; i.e., can't be equipped
 EQUIPMENTTYPE_WEAPON: equ 1 
 EQUIPMENTTYPE_RING: equ -1
+
+; ---------------------------------------------------------------------------
+
+; enum EquipmentTypes_Properties
+EQUIPMENTTYPES_COUNTER: equ 1 ; weapon + ring
 
 ; ---------------------------------------------------------------------------
 
