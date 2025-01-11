@@ -155,15 +155,11 @@ UpdateCombatantStats:
                 mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
                 getPointer p_table_EnemyDefinitions, a0
                 adda.w  d1,a0
-                
-                ; Relearn known spells
                 move.l  ENEMYDEF_OFFSET_SPELLS(a0),d1
                 setSavedLong d1, (a2), COMBATANT_OFFSET_SPELLS
-                
-                ; Get move type
-                move.b  ENEMYDEF_OFFSET_SPELLS(a0),d1
+                move.b  ENEMYDEF_OFFSET_MOVETYPE(a0),d1
 @Continue:
-                
+                ; Set initial movetype as current
                 andi.b  #BYTE_UPPER_NIBBLE_MASK,d1
                 move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a2),d2
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
