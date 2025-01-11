@@ -1,26 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlefunctions\battlefunctions_0.asm :
-; 0x22C60..0x2379A : Battle functions
-
-; =============== S U B R O U T I N E =======================================
-
-; Get first entity's X, Y and facing -> d1.l, d2.l, d3.w
-
-
-GetPlayerEntityPosition:
-                
-                move.w  (ENTITY_DATA).l,d1
-                move.w  (ENTITY_Y).l,d2
-                move.b  (ENTITY_FACING).l,d3
-                ext.l   d1
-                divu.w  #MAP_TILE_SIZE,d1
-                ext.l   d2
-                divu.w  #MAP_TILE_SIZE,d2
-                andi.w  #DIRECTION_MASK,d3
-                rts
-
-    ; End of function GetPlayerEntityPosition
-
+; 0x22C84..0x2379A : Battle functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -350,7 +330,7 @@ GetEntityIndexForCombatant:
 ; Out: D0 = entity event index
 
 
-GetEntityEventIndex:
+InitializeNewEnemyEntityIndex:
                 
                 movem.l d1/d7-a0,-(sp)
                 moveq   #BATTLE_ALL_ENTITIES_NUMBER,d7
@@ -375,7 +355,7 @@ GetEntityEventIndex:
                 movem.l (sp)+,d1/d7-a0
                 rts
 
-    ; End of function GetEntityEventIndex
+    ; End of function InitializeNewEnemyEntityIndex
 
 table_22F76:    dc.w MAP_TILE_PLUS
                 dc.w 0

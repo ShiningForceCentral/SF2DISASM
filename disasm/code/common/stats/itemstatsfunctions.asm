@@ -377,7 +377,7 @@ EquipItemBySlot:
 @Done:
                 
                 movem.l (sp)+,d0-d1/a0
-                bra.w   ApplyStatusEffectsAndItemsOnStats
+                bra.w   UpdateCombatantStats
 
     ; End of function EquipItemBySlot
 
@@ -452,7 +452,7 @@ UnequipItemBySlotIfNotCursed:
 @Skip:
                 
                 movem.l (sp)+,d0-d1/a0
-                bra.w   ApplyStatusEffectsAndItemsOnStats
+                bra.w   UpdateCombatantStats
 
     ; End of function UnequipItemBySlotIfNotCursed
 
@@ -535,7 +535,7 @@ UnequipItemBySlot:
                 bsr.s   IsItemInSlotEquippedOrCursed
                 unequipItem (a0)
                 movem.l (sp)+,d0-d1/a0
-                bra.w   ApplyStatusEffectsAndItemsOnStats
+                bra.w   UpdateCombatantStats
 
     ; End of function UnequipItemBySlot
 
@@ -588,7 +588,7 @@ DropItemBySlot:
 @Done:
                 
                 movem.l (sp)+,d0/a0
-                bra.w   ApplyStatusEffectsAndItemsOnStats
+                bra.w   UpdateCombatantStats
 
     ; End of function DropItemBySlot
 
@@ -662,7 +662,7 @@ RemoveItemBySlot:
 @Done:
                 
                 movem.l (sp)+,d0/a0
-                bra.w   ApplyStatusEffectsAndItemsOnStats
+                bra.w   UpdateCombatantStats
 
     ; End of function RemoveItemBySlot
 
@@ -723,7 +723,7 @@ UnequipItemByType:
                 dbf     d0,@Loop
                 
                 movem.l (sp)+,d0-d2/a0-a1
-                bra.w   ApplyStatusEffectsAndItemsOnStats
+                bra.w   UpdateCombatantStats
 
 ; END OF FUNCTION CHUNK FOR UnequipWeapon
 
@@ -1019,7 +1019,7 @@ GetNewAttAndDefWithItemEquipped:
                 movem.l d4-d5/a0,-(sp)
                 bset    #ITEMENTRY_BIT_EQUIPPED,d1
                 move.w  d1,COMBATANT_OFFSET_ITEMS(a0,d4.w)
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
+                bsr.w   UpdateCombatantStats
                 clr.w   d2
                 move.b  COMBATANT_OFFSET_ATT_CURRENT(a0),d2
                 clr.w   d3
@@ -1028,7 +1028,7 @@ GetNewAttAndDefWithItemEquipped:
                 
                 movem.w d2-d3,-(sp)
                 move.w  d5,COMBATANT_OFFSET_ITEMS(a0,d4.w) ; then re-equip the old one
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
+                bsr.w   UpdateCombatantStats
                 movem.w (sp)+,d2-d3
                 
                 movem.l (sp)+,d0-d1/d4-a0
@@ -1203,7 +1203,7 @@ UnequipAllItemsIfNotCursed:
                 dbf     d0,@Loop
                 
                 movem.l (sp)+,d0-d1/a0-a1
-                bra.w   ApplyStatusEffectsAndItemsOnStats
+                bra.w   UpdateCombatantStats
 
     ; End of function UnequipAllItemsIfNotCursed
 

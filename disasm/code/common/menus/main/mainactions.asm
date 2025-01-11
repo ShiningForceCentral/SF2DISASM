@@ -182,7 +182,7 @@ byte_21468:
                 
                 clsTxt
                 jsr     j_SetStatusEffects
-                jsr     j_ApplyStatusEffectsAndItemsOnStats
+                jsr     j_UpdateCombatantStats
 @ExitMagic:
                 
                 bra.w   @Goto_StartMain

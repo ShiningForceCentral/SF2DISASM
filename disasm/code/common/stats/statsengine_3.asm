@@ -118,7 +118,7 @@ InitializeAllyCombatantEntry:
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
                 bsr.w   InitializeAllyStats
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
+                bsr.w   UpdateCombatantStats
                 movem.l (sp)+,d0-d3/a0-a1
                 rts
 
@@ -160,7 +160,7 @@ Promote:
                 movem.w d1,-(sp)
                 bsr.w   GetClass        
                 bsr.s   LoadAllyClassData
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
+                bsr.w   UpdateCombatantStats
                 movem.w (sp)+,d1
                 rts
 

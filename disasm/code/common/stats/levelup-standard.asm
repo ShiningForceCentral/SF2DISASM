@@ -11,7 +11,7 @@ LevelUp:
                 module
                 
                 ; Regular level up process : Find new learnable spell and finish with updating current stats
-                pea     ApplyStatusEffectsAndItemsOnStats(pc)
+                pea     UpdateCombatantStats(pc)
                 movem.l d0-a1,-(sp)
                 moveq   #-1,d7
                 bra.s   @Continue
@@ -231,7 +231,7 @@ CalculateStatGain:
 InitializeAllyStats:
                 
                 ; Finish with updating current stats
-                pea     ApplyStatusEffectsAndItemsOnStats(pc)
+                pea     UpdateCombatantStats(pc)
                 
                 movem.l d0-d2/a0,-(sp)
                 move.w  d1,d4           ; d4.w = copy of starting level

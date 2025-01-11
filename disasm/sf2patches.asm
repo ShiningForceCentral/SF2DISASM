@@ -116,8 +116,9 @@ SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options
 
 
 ; Turn order modifications
-DISABLE_TURN_ORDER_RANDOMIZATION:   equ 1       ; Combatants always act in the same order from highest to lowest AGI, prioritizing allies by their index and starting with the Force leader.
-UPDATE_TURN_ORDER_AFTER_EACH_TURN:  equ 1       ; Partially regenerates the turn order table after each individual turn for combatants waiting to act in order for the SLOW spell to have a more immediate impact.
+DISABLE_TURN_ORDER_RANDOMIZATION:   equ 0       ; Combatants always act in the same order from highest to lowest AGI, prioritizing allies by their index and starting with the Force leader.
+EXTENDED_BATTLE_TURN_UPDATE:        equ 1       ; Trigger regions, activate AI, spawn region activated enemies, and play region activated cutscenes after each individual turn instead of at the start of a new round.
+                                                ; Also, partially regenerates the turn order table after each turn for combatants waiting to act in order for the BOOST and SLOW spells to have an impact on the current round.
 
 
 ; Menu enhancements

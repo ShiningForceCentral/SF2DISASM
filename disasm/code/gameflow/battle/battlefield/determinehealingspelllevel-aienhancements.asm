@@ -23,7 +23,7 @@ DetermineHealingSpellLevel:
                 move.w  d1,d3               ; save caster index
                 bsr.w   GetMaxHP
                 move.w  d1,d7
-                bsr.w   GetCurrentHP
+                bsr.w   GetCurrentHp
                 sub.w   d1,d7               ; d7 = missing HP for target
                 
                 move.w  d4,d1

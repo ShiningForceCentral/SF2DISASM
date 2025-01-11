@@ -183,7 +183,7 @@ MainMenu_Magic:
                 txt     422             ; "But nothing happened.{D1}"
 @UpdateStats:   clsTxt
                 pea     @StartMain(pc)
-                pea     ApplyStatusEffectsAndItemsOnStats
+                pea     UpdateCombatantStats
                 jmp     SetStatusEffects
 ; ---------------------------------------------------------------------------
 

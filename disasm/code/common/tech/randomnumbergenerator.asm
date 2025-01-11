@@ -69,7 +69,7 @@ loc_164A:
 GenerateRandomValueUnsigned:
                 
                 movem.l d0-d5/a0-a6,-(sp)
-                lea     (RANDOM_WAITING_FOR_INPUT).l,a0
+                lea     (RANDOM_SEED_COPY).l,a0
                 clr.w   d7
                 move.w  (a0),d7
                 mulu.w  #541,d7

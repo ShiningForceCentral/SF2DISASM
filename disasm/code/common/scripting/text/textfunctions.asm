@@ -228,7 +228,7 @@ loc_6472:
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
                 bsr.w   GenerateRandomNumber
-                move.b  d7,((RANDOM_WAITING_FOR_INPUT-$1000000)).w
+                move.b  d7,((RANDOM_SEED_COPY-$1000000)).w
                 movem.l (sp)+,d6-d7
                 bsr.s   sub_64A8
                 bsr.w   WaitForVInt
@@ -376,7 +376,7 @@ loc_659C:
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
                 bsr.w   GenerateRandomNumber
-                move.b  d7,((RANDOM_WAITING_FOR_INPUT-$1000000)).w
+                move.b  d7,((RANDOM_SEED_COPY-$1000000)).w
                 movem.l (sp)+,d6-d7
                 bsr.w   WaitForVInt
 loc_65B4:

@@ -20,7 +20,7 @@ GetAllyMapsprite:
                 bne.s   @CheckJoined
                 
                 ; Check if ally is alive
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 bne.s   @CheckJoined
                 move.w  #MAPSPRITE_BLUE_FLAME,d4
                 bra.s   @Done                           ; return blue flame sprite if ally is not alive, and if we are not currently in battle

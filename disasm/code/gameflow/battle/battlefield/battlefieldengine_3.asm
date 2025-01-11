@@ -1523,7 +1523,11 @@ TargetPriorityScript3:
                 
                 movem.l d0-d5/d7-a6,-(sp)
                 moveq   #3,d6
+            if (STANDARD_BUILD=1)
+                jsr     (GenerateRandomNumberUnderD6).w
+            else
                 jsr     j_GenerateRandomNumberUnderD6
+            endif
                 tst.b   d7
                 beq.w   loc_CD3C        ; If d7=0, then check for death of target
                 move.b  d5,d0           ; Otherwise, prioritize closer targets

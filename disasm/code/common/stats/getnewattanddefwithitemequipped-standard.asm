@@ -73,7 +73,7 @@
             else
                 move.w  d1,COMBATANT_OFFSET_ITEMS(a0)
             endif
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
+                bsr.w   UpdateCombatantStats
                 movea.l d4,a0                               ; temporarily restore combatant entry address
                 clr.w   d2
                 move.b  COMBATANT_OFFSET_ATT_CURRENT(a0),d2
@@ -87,7 +87,7 @@
             else
                 move.w  d5,COMBATANT_OFFSET_ITEMS(a0)
             endif
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
+                bsr.w   UpdateCombatantStats
                 movem.w (sp)+,d2-d3
                 
                 movem.l (sp)+,d0-d1/d4-a0

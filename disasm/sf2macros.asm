@@ -439,7 +439,15 @@ setSavedByteWithPostIncrement: macro
             endif
         endm
     
-addToSavedByte: macro
+addFromSavedByte: macro
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                add.b  (\1).l,\2
+            else
+                add.b  ((\1-$1000000)).w,\2
+            endif
+        endm
+    
+addQuickToSavedByte: macro
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 addq.b  \1,(\2).l
             else
@@ -675,12 +683,37 @@ checkRaftMap: macro
 getBattleTurnActor: macro
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 lea     (BATTLE_TURN_ORDER).l,a0
-                move.b  CURRENT_BATTLE_TURN-BATTLE_TURN_ORDER(a0),\1
+                getSavedWord (a0), \1, (CURRENT_BATTLE_TURN-BATTLE_TURN_ORDER)
+                adda.w  \1,a0
+                clr.w   \1
+                move.b  (a0),\1
             else
-                move.b  ((CURRENT_BATTLE_TURN-$1000000)).w,\1
+                clr.w   \1
+                getSavedByte CURRENT_BATTLE_TURN, \1
                 lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
-            endif
                 move.b  (a0,\1.w),\1
+            endif
+        endm
+    
+incrementBattleTurn: macro
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                lea	    (CURRENT_BATTLE_TURN).l,a0
+                getSavedWord (a0), d0
+                addq.w  #TURN_ORDER_ENTRY_SIZE,d0
+                setSavedWord d0, (a0)
+            else
+                addq.w  #TURN_ORDER_ENTRY_SIZE,((CURRENT_BATTLE_TURN-$1000000)).w
+            endif
+        endm
+    
+resetBattleTurn: macro
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                clr.w   d0
+                lea	    (CURRENT_BATTLE_TURN).l,a0
+                setSavedWord d0, (a0)
+            else
+                clr.w   ((\1-$1000000)).w
+            endif
         endm
     
 addSavedByteOffset: macro
@@ -711,6 +744,17 @@ getSavedBattleMapDimensions: macro
                 movea.l (sp)+,a0
             else
                 move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,\1
+            endif
+        endm
+    
+appendSavedBattleTurnEntry: macro
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.b  \1,(\3)
+                move.b  \2,2(\3)
+                addq.w  #TURN_ORDER_ENTRY_SIZE,\3
+            else
+                move.b  \1,(\3)+
+                move.b  \2,(\3)+
             endif
         endm
     

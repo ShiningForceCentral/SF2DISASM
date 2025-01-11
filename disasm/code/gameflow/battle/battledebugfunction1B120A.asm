@@ -5,10 +5,12 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; Never called, probably what remains of some debugging code ?
-
+;
+; Unused in standard build
 
 BattleDebugFunction1B120A:
                 
+            if (VANILLA_BUILD=1)
                 moveq   #ITEM_ANGEL_WING,d1
                 jsr     j_AddItemToCaravan
                 moveq   #ITEM_FAIRY_TEAR,d1
@@ -31,12 +33,13 @@ BattleDebugFunction1B120A:
                 moveq   #0,d1
                 jsr     j_SetCombatantX
                 move.w  #$AAAA,d1
-                bsr.w   ResetEnemyStatsForRespawn
+                bsr.w   ResetSpawningEnemyStats
                 bsr.w   GetAiSpecialMoveOrderCoordinates
 loc_1B126E:
                 
                 bra.s   loc_1B126E
                 rts
+            endif
 
     ; End of function BattleDebugFunction1B120A
 

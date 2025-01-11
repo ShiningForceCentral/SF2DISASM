@@ -428,8 +428,10 @@ dword_FFB1A4: equ $FFB1A4
 WARP_SFX: equ $FFB1A8
 CONFIGURATION_MODE_OR_GAME_STAFF_POINTER: equ $FFB1AA
 AI_LAST_TARGET_TABLE: equ $FFB1AC ; Table of most recent target for each enemy
-byte_FFB1DC: equ $FFB1DC
-BATTLE_REGION_FLAGS_TO_BE_TRIGGERED: equ $FFB20C ; Region flags to be triggered at the start of next battle turn
+AI_MEMORY_TABLE: equ $FFB1DC
+PREVIOUSLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating regions triggered at the start of previous battle rounds
+                                                    ; causes issues with region triggers in the vanilla build
+                                                    ; unused otherwise in the stanard build
 
 ; Battlescene Data
 BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 ; start of battlescene data
@@ -701,7 +703,7 @@ PALETTE_1_COPY: equ $FFDF2A
 PALETTE_2_COPY: equ $FFDF4A
 FADING_TIMER_WORD: equ $FFDFAA
 FADING_TIMER_BYTE: equ $FFDFAB
-RANDOM_WAITING_FOR_INPUT: equ $FFDFB0 ; "random" value for determining AI/hit chance??
+RANDOM_SEED_COPY: equ $FFDFB0 ; Copy of RANDOM_SEED reserved exclusively for the AI. Updated during text symbol parsing and diamond menu execution.
 PLANE_B_LAYOUT: equ $FFE000
 byte_FFE0DC: equ $FFE0DC
 PLANE_B_WITCH_HEAD: equ $FFE15C

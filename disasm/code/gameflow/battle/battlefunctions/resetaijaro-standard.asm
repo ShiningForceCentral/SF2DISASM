@@ -26,7 +26,7 @@ ResetAiJaro:
                 pea     @Done(pc)
                 pea     LeaveForce
                 pea     LeaveBattleParty
-                pea     ApplyStatusEffectsAndItemsOnStats
+                pea     UpdateCombatantStats
                 pea     SetCurrentMp
                 pea     GetMaxMp
                 pea     SetCurrentHp

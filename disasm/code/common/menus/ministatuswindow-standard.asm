@@ -521,7 +521,7 @@ combatant = -2
                 move.w  d1,d2
                 jsr     GetMaxMP
                 move.w  d1,d3
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 move.w  d1,d4
                 jsr     GetMaxHP
                 move.w  d4,d0

@@ -28,7 +28,7 @@ DoesCombatantRequireHealing:
                 bne.s   @Calculate
                 lsr.w   #2,d6
 @Calculate:     andi.w  #3,d6           ; keep only the first two bits so it doesn't matter what lsr is used
-                bsr.w   GetCurrentHP
+                bsr.w   GetCurrentHp
                 move.w  d1,d2
                 add.w   d1,d2
                 add.w   d1,d2           ; d2 = current HP * 3

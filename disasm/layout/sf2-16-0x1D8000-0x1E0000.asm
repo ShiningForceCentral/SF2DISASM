@@ -54,9 +54,12 @@
                 alignIfStandard
                 includeIfStandard "code\specialscreens\endkiss\graphics.asm"    ; End Kiss Graphics
                 alignIfStandard
+                includeIfStandard "data\stats\items\chestgoldamounts.asm"    ; Chest gold amounts
                 includeIfStandard "data\battles\terrainentries.asm"    ; Battle terrain data
                 includeIfStandard "data\stats\enemies\enemydefs.asm"    ; Enemy definitions
                 includeIfStandard "data\battles\spritesets\entries.asm"    ; Battle Spritesets
+                alignIfStandard
+                includeIfStandard "data\battles\global\randombattles.asm"    ; Random battles list, and data related to enemy upgrade functions
                 alignIfStandard
                 includeIfStandard "code\specialscreens\witch\graphics.asm"    ; Witch Screen
                 alignIfStandard

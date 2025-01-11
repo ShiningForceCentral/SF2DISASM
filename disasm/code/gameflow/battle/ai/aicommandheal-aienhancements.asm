@@ -148,7 +148,7 @@ ExecuteAiCommand_Heal:
                 move.w  #COMBATANT_ENEMIES_COUNTER,d4
 @MakeTargetsList_Loop:
                 
-                bsr.w   GetCurrentHP
+                bsr.w   GetCurrentHp
                 beq.s   @NextTarget     ; move on if target is dead
                 
                 ; Insert secondary check for other spells here (such as detox, boost, or attack)

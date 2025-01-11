@@ -895,11 +895,11 @@ j_DecreaseGold:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ApplyStatusEffectsAndItemsOnStats:
+j_UpdateCombatantStats:
                 
-                jmp     ApplyStatusEffectsAndItemsOnStats(pc)
+                jmp     UpdateCombatantStats(pc)
 
-    ; End of function j_ApplyStatusEffectsAndItemsOnStats
+    ; End of function j_UpdateCombatantStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1237,7 +1237,9 @@ j_LearnSpell:
 
 j_GetCombatantEntryAddress_0:
                 
+            if (VANILLA_BUILD=1)
                 jmp     GetCombatantEntryAddress(pc)
+            endif
 
     ; End of function j_GetCombatantEntryAddress_0
 
@@ -1747,11 +1749,13 @@ j_SetTerrain:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ClearAiMoveInfo:
+j_ClearAiMemory:
                 
-                jmp     ClearAiMoveInfo(pc)
+            if (VANILLA_BUILD=1)
+                jmp     ClearAiMemory(pc)
+            endif
 
-    ; End of function j_ClearAiMoveInfo
+    ; End of function j_ClearAiMemory
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -84,9 +84,11 @@ StartAiControl:
                 
                 ; Resume normal AI scripting (end of "swarm" AI)
 @NonSwarmAi:
-                
-                lea     (BATTLE_REGION_FLAGS_TO_BE_TRIGGERED).l,a0
+            if (VANILLA_BUILD=1)
+                ; This causes issues with region triggers in the vanilla build. The RAM word is unused otherwise.
+                lea     (PREVIOUSLY_TRIGGERED_BATTLE_REGIONS).l,a0
                 move.w  #0,(a0)
+            endif
                 move.w  d7,d0
                 bsr.w   GetAiRegion     
                 cmpi.w  #15,d1
@@ -300,7 +302,11 @@ ProcessExploderAi:
                 beq.s   @DoNotExplode   ; do not explode if no target
                 
                 move.w  #6,d6
+            if (STANDARD_BUILD=1)
+                jsr     (GenerateRandomNumberUnderD6).w
+            else
                 jsr     j_GenerateRandomNumberUnderD6
+            endif
                 cmpi.b  #4,d7
                 bne.s   @DoNotExplode   ; randomly do not explode
                 

@@ -114,7 +114,7 @@ loc_22A98:
 loc_22AA0:
                 
                 jsr     j_SetStatusEffects
-                jsr     j_ApplyStatusEffectsAndItemsOnStats
+                jsr     j_UpdateCombatantStats
                 rts
 
     ; End of function fieldItem_CurePoisonAndParalysis

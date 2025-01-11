@@ -6,7 +6,7 @@
 
 battleEntity = -4
 
-sub_444A2:
+SpawnEnemyEntity:
                 
                 link    a6,#-16
                 move.w  d0,battleEntity(a6)
@@ -36,7 +36,7 @@ loc_444D6:
                 moveq   #3,d3
                 move.l  #eas_Idle,d5
                 bsr.w   GetCombatantMapsprite
-                bsr.w   GetEntityEvent  
+                bsr.w   InitializeNewEnemyEntity  
                 movem.l a0-a1,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a0
                 move.l  a0,-(sp)
@@ -59,7 +59,7 @@ loc_4450A:
                 unlk    a6
                 rts
 
-    ; End of function sub_444A2
+    ; End of function SpawnEnemyEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -67,7 +67,7 @@ loc_4450A:
 ; In: d0.w = battle entity
 
 
-GetEntityEvent:
+InitializeNewEnemyEntity:
                 
                 movem.l d0-d5/d7-a0,-(sp)
                 move.w  d0,-(sp)
@@ -98,7 +98,7 @@ GetEntityEvent:
                 movem.l (sp)+,d0-d5/d7-a0
                 rts
 
-    ; End of function GetEntityEvent
+    ; End of function InitializeNewEnemyEntity
 
 
 ; =============== S U B R O U T I N E =======================================

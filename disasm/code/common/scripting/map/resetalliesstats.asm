@@ -20,7 +20,7 @@ ResetAlliesBattleStats:
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_CURSE,d1
                 jsr     j_SetStatusEffects
-                jsr     j_ApplyStatusEffectsAndItemsOnStats
+                jsr     j_UpdateCombatantStats
                 addq.w  #1,d0
                 dbf     d7,@Loop
                 

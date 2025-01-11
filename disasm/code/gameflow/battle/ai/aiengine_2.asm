@@ -21,7 +21,11 @@ DetermineStandbyAiMovement:
                 
                 ; Determine 3/8 chance to stay put in the most roundabout way
                 move.w  #8,d6
+            if (STANDARD_BUILD=1)
+                jsr     (GenerateRandomNumberUnderD6).w
+            else
                 jsr     j_GenerateRandomNumberUnderD6
+            endif
                 cmpi.b  #2,d7
                 bne.s   @loc1
                 
@@ -88,7 +92,7 @@ DetermineStandbyAiMovement:
                 bsr.w   InitializeMovementArrays
                 bsr.w   PopulateMovementArrays
                 bsr.w   PopulateTargetsArrayWithAllCombatants
-                lea     (byte_FFB1DC).l,a0
+                lea     (AI_MEMORY_TABLE).l,a0
                 clr.w   d0
                 move.b  attacker(a6),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
@@ -101,7 +105,11 @@ DetermineStandbyAiMovement:
                 
                 clr.w   d6
                 move.w  #2,d6
+            if (STANDARD_BUILD=1)
+                jsr     (GenerateRandomNumberUnderD6).w
+            else
                 jsr     j_GenerateRandomNumberUnderD6
+            endif
                 tst.b   d7
                 bne.s   @loc7
                 
@@ -181,7 +189,7 @@ DetermineStandbyAiMovement:
                 tst.b   d7
                 bne.s   @loc16
                 
-                lea     (byte_FFB1DC).l,a0
+                lea     (AI_MEMORY_TABLE).l,a0
                 clr.w   d0
                 move.b  attacker(a6),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
@@ -208,7 +216,11 @@ DetermineStandbyAiMovement:
                 
                 move.w  d7,d5
                 move.w  d0,d6
+            if (STANDARD_BUILD=1)
+                jsr     (GenerateRandomNumberUnderD6).w
+            else
                 jsr     j_GenerateRandomNumberUnderD6
+            endif
                 clr.l   d4
                 move.b  moveCount(a6),d4
                 subi.w  #1,d4
@@ -230,7 +242,7 @@ DetermineStandbyAiMovement:
                 dbf     d4,@loc19
 @loc22:
                 
-                lea     (byte_FFB1DC).l,a0
+                lea     (AI_MEMORY_TABLE).l,a0
                 clr.w   d0
                 move.b  attacker(a6),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0

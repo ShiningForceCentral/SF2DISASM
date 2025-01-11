@@ -1556,7 +1556,7 @@ loc_18DFC:
                 
                 move.w  (a6)+,d1
                 jsr     j_SetStatusEffects
-                jsr     j_ApplyStatusEffectsAndItemsOnStats
+                jsr     j_UpdateCombatantStats
                 bsr.w   ApplyStatusEffectsToAllyAnimation
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 move.b  ((byte_FFB56F-$1000000)).w,d1
@@ -1712,7 +1712,7 @@ loc_18F92:
                 
                 move.w  (a6)+,d1
                 jsr     j_SetStatusEffects
-                jsr     j_ApplyStatusEffectsAndItemsOnStats
+                jsr     j_UpdateCombatantStats
                 bsr.w   ApplyStatusEffectsToEnemyAnimation
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 move.b  ((byte_FFB56F-$1000000)).w,d1

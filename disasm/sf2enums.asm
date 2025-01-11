@@ -4156,7 +4156,7 @@ turnOrderEntrySize = 2
 turnOrderEntriesNumber = 64
 
     if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-turnOrderEntrySize = 4
+turnOrderEntrySize = turnOrderEntrySize*2
     endif
 
 TURN_ORDER_ENTRY_SIZE: equ turnOrderEntrySize

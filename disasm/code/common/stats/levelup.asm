@@ -154,7 +154,7 @@ LevelUp:
                 move.b  d1,6(a1)
 @UpdateStats:
                 
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
+                bsr.w   UpdateCombatantStats
 @Done:
                 
                 unlk    a6

@@ -58,6 +58,7 @@
                 include "code\common\scripting\text\asciinumber.asm"    ; ASCII number function
                 includeIfStandard "code\common\tech\input-standard.asm"
                 includeIfStandard "code\common\tech\randomnumbergenerator-standard.asm"
+                includeIfStandard "code\common\tech\thinkingairng-standard.asm"
                 includeIfVanilla "code\common\tech\input.asm"    ; Input functions
                 includeIfVanilla "code\common\tech\randomnumbergenerator.asm"    ; RNG functions
                 include "code\common\tech\sound\music.asm"    ; Sound function

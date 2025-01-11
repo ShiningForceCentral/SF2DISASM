@@ -13,8 +13,8 @@
                 includeIfStandard "code\common\stats\getclasstype-standard.asm"
                 include "data\stats\allies\classes\classtypes.asm"    ; Class types table
                 include "code\common\stats\statsengine_2.asm"    ; Character stats engine, part 2
-                includeIfStandard "code\common\stats\applystatusandequipeffectsonstats-standard.asm"
-                includeIfVanilla "code\common\stats\applystatusandequipeffectsonstats.asm"    ; Functions to calculate effective stat values
+                includeIfStandard "code\common\stats\updatecombatantstats-standard.asm"
+                includeIfVanilla "code\common\stats\updatecombatantstats.asm"    ; Functions to calculate effective stat values
                 include "code\common\stats\itemstatsfunctions.asm"    ; Character stats engine, part 2
                 include "code\common\stats\spellstatsfunctions.asm"    ; Character stats engine, part 2
                 include "code\common\stats\combatantstatsfunctions.asm"    ; Character stats engine, part 2
@@ -34,7 +34,7 @@
                 include "code\gameflow\battle\battleactions\initbattlesceneproperties.asm"    ; Init Battlescene Properties function
                 includeIfStandard "code\gameflow\battle\battleactions\createbattlescenemessage-standard.asm"
                 includeIfStandard "code\gameflow\battle\battleactions\createbattlesceneanimation-standard.asm"
-                includeIfStandard "data\stats\enemies\invulnerableenemybattles-standard.asm"
+                includeIfStandard "data\battles\global\invulnerableenemybattles-standard.asm"
                 includeIfStandard "data\stats\spells\spellcastmessages-standard.asm"
                 includeIfStandard "data\graphics\battles\specialbattleanimations-standard.asm"
                 alignIfStandard
@@ -91,6 +91,8 @@
                 alignIfStandard
                 
                 ; Battlefield engine
+                include "code\gameflow\battle\battlefield\getenemydestination.asm"    ; Battlefield engine
+                includeIfVanilla "code\gameflow\battle\battleloop\clearaimemory.asm"    ; Battle loop function
                 include "code\gameflow\battle\battlefield\battlefieldengine_1.asm"    ; Battlefield engine
                 include "data\stats\spells\spellelements.asm"    ; Spell elements table
                 align
@@ -107,7 +109,7 @@
             endif
                 include "code\gameflow\battle\battlefield\battlefieldengine_4.asm"    ; Battlefield engine
                 includeIfStandard "code\gameflow\battle\battlefield\useableaiactions-standard.asm"
-                includeIfStandard "data\battles\global\aiexcludedactions-standard.asm"
+                includeIfStandard "data\stats\spells\aiexcludedspells-standard.asm"
                 alignIfStandard
                 includeIfVanilla "code\gameflow\battle\battlefield\useableaiactions.asm"    ; Usable AI actions getter functions
                 include "code\gameflow\battle\battlefield\battlefieldengine_5.asm"    ; Battlefield engine
@@ -138,7 +140,7 @@
                 include "code\gameflow\battle\ai\determineaibattleaction.asm"    ; Determine AI Battleaction function
                 include "code\gameflow\battle\ai\aicommandmove.asm"    ; AI command : Move
                 include "code\gameflow\battle\ai\aiengine_2.asm"    ; AI engine
-                include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
+                include "data\stats\enemies\krakenmovecosts.asm"    ; Kraken move costs table
                 
                 includeIfVanilla "data\stats\spells\spellnames.asm"    ; Spell names
                 includeIfVanilla "data\stats\allies\allynames.asm"    ; Ally names

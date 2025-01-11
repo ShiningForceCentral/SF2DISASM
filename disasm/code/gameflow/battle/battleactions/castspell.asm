@@ -212,7 +212,7 @@ byte_B1F4:
                 
                 move.b  (a5),d0
                 jsr     SetStatusEffects
-                jsr     ApplyStatusEffectsAndItemsOnStats
+                jsr     UpdateCombatantStats
                 rts
 
     ; End of function spellEffect_Detox
@@ -684,7 +684,7 @@ byte_B6A2:
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseAtt
-                jsr     ApplyStatusEffectsAndItemsOnStats
+                jsr     UpdateCombatantStats
                 rts
 
     ; End of function spellEffect_PowerWater
@@ -716,7 +716,7 @@ byte_B708:
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseDef
-                jsr     ApplyStatusEffectsAndItemsOnStats
+                jsr     UpdateCombatantStats
                 rts
 
     ; End of function spellEffect_ProtectMilk
@@ -748,7 +748,7 @@ byte_B76E:
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseAgi
-                jsr     ApplyStatusEffectsAndItemsOnStats
+                jsr     UpdateCombatantStats
                 rts
 
     ; End of function spellEffect_QuickChicken
@@ -786,7 +786,7 @@ byte_B802:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d2,d1
                 jsr     IncreaseBaseMov
-                jsr     ApplyStatusEffectsAndItemsOnStats
+                jsr     UpdateCombatantStats
                 rts
 
     ; End of function spellEffect_RunningPimento

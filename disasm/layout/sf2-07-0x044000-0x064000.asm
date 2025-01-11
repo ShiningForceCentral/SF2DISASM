@@ -43,26 +43,27 @@
                 include "code\common\scripting\map\resetalliesstats.asm"    ; CSC 55 function
                 include "code\common\scripting\map\headquartersfunctions.asm"    ; Headquarters functions
                 include "code\common\scripting\map\ms_empty.asm"    ; Empty mapscript
-                include "code\gameflow\battle\beforebattlecutscenesstart.asm"    ; Before battle cutscenes function start
-                include "data\battles\beforebattlecutscenes.asm"    ; Before battle cutscenes
+                include "code\gameflow\battle\cutscenes\beforebattlecutscenesstart.asm"    ; Before battle cutscenes function start
+                include "data\battles\cutscenes\beforebattlecutscenes.asm"    ; Before battle cutscenes
                 includeIfStandard "code\common\scripting\map\bbcs_11_function.asm"
-                include "code\gameflow\battle\beforebattlecutscenesend.asm"    ; Before battle cutscenes function end
-                include "code\gameflow\battle\battlestartcutscenesstart.asm"    ; Battle start cutscenes function start
-                include "data\battles\battlestartcutscenes.asm"    ; Battle start cutscenes
-                include "code\gameflow\battle\battlestartcutscenesend.asm"    ; Battle start cutscenes function end
-                include "code\gameflow\battle\battleendcutscenesstart.asm"    ; Battle end cutscenes function start
-                include "data\battles\battleendcutscenes.asm"    ; Enemy defeated cutscenes
-                include "code\gameflow\battle\battleendcutscenesend.asm"    ; Battle end cutscenes function end
+                include "code\gameflow\battle\cutscenes\beforebattlecutscenesend.asm"    ; Before battle cutscenes function end
+                include "code\gameflow\battle\cutscenes\battlestartcutscenesstart.asm"    ; Battle start cutscenes function start
+                include "data\battles\cutscenes\battlestartcutscenes.asm"    ; Battle start cutscenes
+                include "code\gameflow\battle\cutscenes\battlestartcutscenesend.asm"    ; Battle start cutscenes function end
+                include "code\gameflow\battle\cutscenes\battleendcutscenesstart.asm"    ; Battle end cutscenes function start
+                include "data\battles\cutscenes\battleendcutscenes.asm"    ; Enemy defeated cutscenes
+                include "code\gameflow\battle\cutscenes\battleendcutscenesend.asm"    ; Battle end cutscenes function end
                 include "data\battles\global\enemyleaderpresence.asm"    ; Enemy leader presence table
                 align
-                include "code\gameflow\battle\afterbattlecutscenesstart.asm"    ; After battle cutscenes function start
-                include "data\battles\afterbattlecutscenes.asm"    ; After battle cutscenes
-                include "code\gameflow\battle\afterbattlecutscenesend.asm"    ; After battle cutscenes function end
-                include "data\battles\global\afterbattlejoins.asm"    ; After battle joins (unused)
-                include "code\gameflow\battle\afterenemyleaderdeathpositions.asm"    ; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
-                include "data\battles\afterbattlepositions.asm"    ; After battle positions
-                include "code\gameflow\battle\regionactivatedcutscenes.asm"    ; Region-activated cutscenes functions
-                include "data\battles\global\regionactivatedcutscenes.asm"    ; Region-activated cutscenes data
+                include "code\gameflow\battle\cutscenes\afterbattlecutscenesstart.asm"    ; After battle cutscenes function start
+                include "data\battles\cutscenes\afterbattlecutscenes.asm"    ; After battle cutscenes
+                include "code\gameflow\battle\cutscenes\afterbattlecutscenesend.asm"    ; After battle cutscenes function end
+                include "data\battles\cutscenes\afterbattlejoins.asm"    ; After battle joins (unused)
+                include "code\gameflow\battle\cutscenes\afterenemyleaderdeathpositions.asm"    ; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
+                include "data\battles\cutscenes\afterbattlepositions.asm"    ; After battle positions
+                includeIfStandard "code\gameflow\battle\cutscenes\regionactivatedcutscenes-standard.asm"
+                includeIfVanilla "code\gameflow\battle\cutscenes\regionactivatedcutscenes.asm"    ; Region-activated cutscenes functions
+                include "data\battles\cutscenes\regionactivatedcutscenes.asm"    ; Region-activated cutscenes data
                 include "code\common\tech\graphics\flashwhite.asm"    ; Flash white function and script
                 include "data\scripting\map\cs_introendroutine.asm"    ; Subroutine launching intro and end cutscenes
                 include "data\scripting\map\cs_intro1.asm"    ; Intro cutscene 1

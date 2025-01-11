@@ -52,7 +52,7 @@ ExecuteIndividualTurn:
             endif
                 
                 ; Is actor alive?
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   @Done           ; skip turn if actor is dead
                 
@@ -189,8 +189,13 @@ ExecuteIndividualTurn:
                 
 @Attack:        bsr.w   DetermineRandomAttackSpell
                 
-@Continue:      checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check : Fairy wood secret battle
-                bne.s   @WriteBattlesceneScript
+@Continue:      movem.l d1-d2/a0,-(sp)
+                lea     table_DisplayTimerBattles(pc), a0
+                getSavedByte CURRENT_BATTLE, d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                movem.l (sp)+,d1-d2/a0
+                bcs.s   @WriteBattlesceneScript
                 jsr     CloseTimerWindow
 @WriteBattlesceneScript:
                 
@@ -272,11 +277,11 @@ DetermineRandomAttackSpell:
                 ; Randomly determine if spell is cast
                 move.w  #256,d6
                 jsr     (GenerateRandomNumber).w
-                move.b  (a0)+,d6
+                move.b  (a0)+,d1
                 bne.s   @Compare
                 
-                move.w  #256,d6
-@Compare:       cmp.b   d6,d7             ; d6/256 chance to cast spell
+                move.w  d6,d1
+@Compare:       cmp.b   d1,d7             ; d6/256 chance to cast spell
                 bhs.s   @Done
                 
                 ; Determine spell level
