@@ -32,7 +32,7 @@ BattleLoop:
                 beq.s   @Initialize
                 
                 ; Start here if game was suspended mid-battle
-                lea     (SAVED_SECONDS_COUNTER).l,a0
+                loadSavedDataAddress SAVED_SECONDS_COUNTER, a0
                 getSavedLong (a0), d0
                 move.l  d0,((SECONDS_COUNTER-$1000000)).w
                 
@@ -58,7 +58,6 @@ BattleLoop:
                 ble.s   @ClearBattleRegionFlags_Loop
                 
                 clr.w   d0              ; VIEW_TARGET_ENTITY = party leader when loading battle
-                pea     @IndividualTurn(pc)
                 pea     @StartRound(pc)
                 pea     ExecuteBattleStartCutscene
                 pea     LoadBattle(pc)
@@ -67,26 +66,26 @@ BattleLoop:
 
 ; ---------------------------------------------------------------------------
             if (EXTENDED_BATTLE_TURN_UPDATE=1)
-@StartTurn:     ; Start of individual turn
-                pea     @IndividualTurn(pc)
-                
-                ; Is end of round?
+@StartTurn:     ; Is end of round?
                 getBattleTurnActor d0
                 cmpi.b  #-1,d0
                 bne.s   @Update
                 
 @StartRound:    ; Start a new round
+                pea     @IndividualTurn(pc)
                 pea     GenerateBattleTurnOrder(pc)
                 pea     SpawnAllEnemies(pc)
                 bra.s   @Regions
                 
-@Update:        pea     UpdateBattleTurnOrder(pc)
+@Update:        ; Start of individual turn
+                pea     @IndividualTurn(pc)
+                pea     UpdateBattleTurnOrder(pc)
                 pea     SpawnRegionActivatedEnemies(pc)
 @Regions:       pea     ExecuteBattleRegionCutscene
                 jmp     TriggerRegionsAndActivateEnemies(pc)
             else
 @StartRound:    ; Start a new round
-                pea     @StartTurn(pc)
+                pea     @IndividualTurn(pc)
                 pea     GenerateBattleTurnOrder(pc)
                 pea     SpawnAllEnemies(pc)
                 pea     PrintAllActivatedDefCons(pc)
@@ -96,6 +95,7 @@ BattleLoop:
 @StartTurn:     ; Start of individual turn
             endif
                 
+; ---------------------------------------------------------------------------
 @IndividualTurn:
                 ; Is end of round?
                 getBattleTurnActor d0
