@@ -7,9 +7,6 @@
 
 InitializeCombatantsForBattle:
                 
-            if (STANDARD_BUILD=1)
-                pea     InitializeAllEnemiesBattlePositions(pc)
-            endif
 InitializeAllAlliesBattlePositions:
                 
                 movem.l d0-a6,-(sp)
@@ -204,24 +201,14 @@ InitializeEnemyStats:
                 bsr.w   UpgradeRandomBattleEnemies
                 move.w  d1,d6           ; d1.w, d6.w = upgraded enemy index
                 mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
-            if (STANDARD_BUILD=1)
-                getPointer p_table_EnemyDefinitions, a1
-            else
                 lea     table_EnemyDefinitions(pc), a1
-            endif
                 adda.w  d1,a1
                 move.l  a0,-(sp)
                 jsr     j_GetCombatantEntryAddress_0
                 moveq   #13,d7
 @Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  (a1)+,d1
-                movep.l d1,0(a0)
-                addq.w  #8,a0
-            else
                 move.l  (a1)+,(a0)+
-            endif
                 dbf     d7,@Loop
                 
                 movea.l (sp)+,a0
@@ -240,7 +227,7 @@ InitializeEnemyStats:
                 move.b  BATTLESPRITESET_ENTITYOFFSET_AI_COMMANDSET(a0),d2
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d2
                 or.w    d2,d1
-                jsr     j_SetMoveType
+                jsr     j_SetMoveTypeAndAiCommandset
                 move.b  d6,d1
                 jsr     j_SetEnemyIndex
                 move.b  BATTLESPRITESET_ENTITYOFFSET_AI_TRIGGER_REGION(a0),d1

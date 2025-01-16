@@ -511,7 +511,11 @@ byte_54C8E:
                 clsTxt
                 move.w  #ITEM_DYNAMITE,d0
                 moveq   #0,d1
+            if (STANDARD_BUILD=1)
+                jsr     ReceiveMandatoryItem
+            else
                 bsr.w   ReceiveMandatoryItem
+            endif
                 btst    #0,d0
                 bne.s   byte_54CBA      
                 setFlg  804             ; Set after the dwarf gives you dynamite

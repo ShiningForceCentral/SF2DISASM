@@ -14,7 +14,7 @@ battlesceneScript_BreakUsedItem:
                 
                 movem.l d0-d3/a0,-(sp)
                 move.w  ((BATTLESCENE_ITEM-$1000000)).w,d1  ; d1.w = item entry
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d2      ; d2.b = item type bitfield
                 btst    #ITEMTYPE_BIT_CONSUMABLE,d2
                 beq.s   @Continue                       ; continue if item is not a consumable

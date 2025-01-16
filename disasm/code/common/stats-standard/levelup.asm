@@ -1,6 +1,6 @@
 
-; ASM FILE code\common\stats\levelup-standard.asm :
-;
+; ASM FILE code\common\stats-standard\levelup.asm :
+; Level Up functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -152,32 +152,25 @@ FastLevelUp:
 CalculateStatGain:
                 
             if (LEARN_SPELL_AT_PROMOTION=1)
+                tst.b   d5
+                beq.s   @Exit           ; exit if level = 0
+            endif
                 tst.b   d2
-                bne.s   @CheckZero      ; keep going if curve type other than None
-                move.w  #0,d1           ; otherwise, stat gain value = 0
+                bne.s   @CheckProjectionLevel ; keep going if curve type other than None
+@Exit:          clr.w   d1              ; otherwise, stat gain value = 0
                 rts
                 
-@CheckZero:     tst.b   d5
-                bne.s   @EvaluateLevel  ; keep going if level other than zero
-                move.w  #0,d1           ; otherwise, stat gain value = 0
-                rts
-            else
-                tst.b   d2
-                bne.s   @EvaluateLevel  ; keep going if curve type other than None
-                move.w  #0,d1           ; otherwise, stat gain value = 0
-                rts
-            endif
-@EvaluateLevel:
+@CheckProjectionLevel:
                 
                 movem.l d0/d2-a0,-(sp)
                 movem.w d1-d5,-(sp)     ; -> push function arguments
                 cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d5 ; If current level within projection
-                blt.s   @Continue       ;  ...keep going.
+                blt.s   @CalculateGrowthPortion ;  ...keep going.
                 
                 move.w  #256,d0         ; assume 100% of projected stats reached
                 move.w  #384,d4         ; out of growth data, so assume 1.5
                 bra.s   @RandomizeStatGain
-@Continue:
+@CalculateGrowthPortion:
                 
                 andi.w  #GROWTHCURVE_MASK_INDEX,d2
                 subq.w  #1,d2

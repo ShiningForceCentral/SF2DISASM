@@ -16,7 +16,7 @@ GetAllyMapsprite:
                 
                 ; Check if we are currently in battle
                 movem.l d1-d2/a0,-(sp)
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   @CheckJoined
                 
                 ; Check if ally is alive

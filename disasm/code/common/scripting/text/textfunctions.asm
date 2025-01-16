@@ -331,7 +331,7 @@ symbol_name:
 symbol_item:
                 
                 bsr.w   GetCurrentDialogueNameIndex
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_number:
@@ -359,7 +359,7 @@ symbol_class:
                 
                 bsr.w   GetCurrentDialogueNameIndex
             if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
-                bsr.w   GetFullClassName
+                jsr     GetFullClassName
             else
                 jsr     j_GetClassName
             endif
@@ -418,7 +418,7 @@ symbol_delay3:
 symbol_spell:
                 
                 bsr.w   GetCurrentDialogueNameIndex
-                jsr     j_FindSpellName
+                jsr     j_GetSpellName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_clear:

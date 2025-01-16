@@ -17,7 +17,8 @@ GetEntityPortaitAndSpeechSfx:
                 ; Get entity d0.w mapsprite index -> d0.w
                 clr.w   d2
                 bsr.w   GetEntityAddressFromCharacter       ; -> a5
-                lea     table_MapspriteDialogueProperties(pc), a0
+                getPointer p_table_MapspriteDialogueProperties, a0
+                
             if (EXPANDED_MAPSPRITES=1)
                 move.w  ENTITYDEF_OFFSET_MAPSPRITE(a5),d0
             else
@@ -55,9 +56,10 @@ GetAllyPortaitAndSpeechSfx:
                 add.w   d1,d1
                 add.w   d1,d2
                 
-                move.b  table_AllyDialogueProperties(pc,d2.w),d1
+                getPointer p_table_AllyDialogueProperties, a0
+                move.b  (a0,d2.w),d1
                 ext.w   d1
-                move.b  table_AllyDialogueProperties+1(pc,d2.w),d2
+                move.b  1(a0,d2.w),d2
                 
 @Done:          movem.l (sp)+,d0/a0/a5
                 rts

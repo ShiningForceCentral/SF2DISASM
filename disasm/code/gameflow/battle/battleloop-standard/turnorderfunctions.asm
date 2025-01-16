@@ -22,7 +22,7 @@
 @AddFirstTurnEntry\@:
               endif
                 
-                appendSavedBattleTurnEntry d0, d1, a0
+                appendBattleTurnEntry d0, d1, a0
             endm
                 
 @randomizeSecondTurnEntry: macro
@@ -42,17 +42,17 @@
 @AddSecondTurnEntry\@:
               endif
                 
-                appendSavedBattleTurnEntry d0, d1, a0
+                appendBattleTurnEntry d0, d1, a0
             endm
                 
 @compareEntries: macro
-                getSavedWord (a0), d0
-                getSavedWord (a0), d1, TURN_ORDER_ENTRY_SIZE
+                getSavedWord a0, d0
+                getSavedWord a0, d1, TURN_ORDER_ENTRY_SIZE
                 cmp.b   d0,d1
                 ble.s   @CompareNextPair\@
                 
-                setSavedWord d1, (a0)
-                setSavedWord d0, (a0), TURN_ORDER_ENTRY_SIZE
+                setSavedWord d1, a0
+                setSavedWord d0, a0, TURN_ORDER_ENTRY_SIZE
 @CompareNextPair\@:
                 
                 addq.w  #TURN_ORDER_ENTRY_SIZE,a0
@@ -77,7 +77,10 @@ InitializeBattleTurnOrder:
                 setSavedLongWithPostIncrement d6, a0
                 dbf     d7,@InitializeTable_Loop
                 
-                resetBattleTurn
+                ; Reset battle turn
+                clr.w   d0
+                loadSavedDataAddress CURRENT_BATTLE_TURN, a0
+                setSavedWord d0, a0
                 movea.l d5,a0
                 rts
 
@@ -157,7 +160,8 @@ AddTurnOrderEntries_Loop:
 UpdateBattleTurnOrder:
                 
                 loadSavedDataAddress BATTLE_TURN_ORDER, a0
-                getSavedWord (a0), d5, (CURRENT_BATTLE_TURN-BATTLE_TURN_ORDER)
+                loadSavedDataAddress CURRENT_BATTLE_TURN, a1
+                getSavedWord a1, d5
                 adda.w  d5,a0                           ; a0 = pointer to current turn entry
                 move.l  a0,d3                           ; d3.l = copy of pointer to current turn entry
                 moveq   #0,d4                           ; d4.l = ally second turn flags
@@ -193,23 +197,13 @@ UpdateBattleTurnOrder:
                 bra.w   @Loop
                 
 @AddNullEntry:  ; Add null entry
-            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
-                moveq   #-1,d2
-                setSavedWord d2, (a0)
-                addq.w  #TURN_ORDER_ENTRY_SIZE,a0
-            else
-                move.w  #-1,(a0)+
-            endif
+                moveq   #-1,d1
+                setSavedWordWithPostIncrement d1, a0
                 bra.w   @Loop
                 
 @Break:         ; Sort entries by randomized AGI
-                loadSavedDataAddress BATTLE_TURN_ORDER, a0
-                getSavedWord (a0), d5, (CURRENT_BATTLE_TURN-BATTLE_TURN_ORDER)
-            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
-                lsr.w   #2,d5
-            else
-                lsr.w   #1,d5
-            endif
+                getSavedWord a1, d5
+                lsr.w   #(TURN_ORDER_ENTRY_SIZE>>1),d5
                 moveq   #TURN_ORDER_ENTRIES_COUNTER,d6
                 sub.w   d5,d6                           ; d6.w = outer loop counter
                 move.w  d6,d5

@@ -1,6 +1,6 @@
 
 ; ASM FILE data\stats\allies\classes\fullclassnames-standard.asm :
-; Full class names table : Included when patch FULL_CLASS_NAMES is enabled.
+; Fully spelled out class names, used in standard build for dialogue and enhanced menus
 table_FullClassNames: 
                 className "Swordsman"
                 className "Knight"

@@ -47,7 +47,7 @@ GetAttackRange:
                 bra.s   @Done
 @GetWeaponRange:
                 
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 clr.w   d3
                 clr.w   d4
                 move.b  ITEMDEF_OFFSET_MAX_RANGE(a0),d3

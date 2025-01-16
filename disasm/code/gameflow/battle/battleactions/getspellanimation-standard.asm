@@ -79,7 +79,7 @@ GetSpellAnimation:
                 bne.s   @Return
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                bsr.w   FindSpellDefAddress
+                bsr.w   GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_ANIMATION(a0),d4
 @Return:        rts
                 modend
@@ -90,12 +90,12 @@ GetSpellAnimation:
                 bsr.w   GetEquipmentType    ; ccr zero-bit set if neither a weapon or a ring
                 beq.s   @Return
                 
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 cmpi.b  #ITEM_NOTHING,d1
                 beq.s   @Return
                 
-                bsr.w   FindSpellDefAddress
+                bsr.w   GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_ANIMATION(a0),d4
 @Return:        rts
                 modend

@@ -58,6 +58,8 @@ LoadIcon:
                 
                 ; Multiply index by icon size (192)
                 move.w  d1,d2           ; save item or spell index
+                moveq   #0,d1
+                move.w  d2,d1
                 add.w   d1,d1
                 add.w   d2,d1
                 lsl.w   #6,d1

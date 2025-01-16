@@ -110,13 +110,14 @@ headerStringOffset = headerStringOffset+2
                 
                 ; Write class name
                 move.w  currentMember(a6),d0
+                jsr     GetClass
             if (FULL_CLASS_NAMES=1)
-                jsr     GetClassAndFullName
+                jsr     GetFullClassName
                 cmpi.w  #10,d7
                 blt.s   @Continue
                 lea     -WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE(a1),a1
             else
-                jsr     GetClassAndName
+                jsr     GetClassName
             endif
 @Continue:      moveq   #-WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont

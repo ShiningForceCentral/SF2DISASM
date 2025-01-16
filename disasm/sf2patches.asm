@@ -199,7 +199,6 @@ relocatedSavedData = 1
     endif
 RELOCATED_SAVED_DATA_TO_SRAM: equ relocatedSavedData
 
-
 ; Assembler optimizations
 OPTIMIZED_PC_RELATIVE_ADDRESSING:   equ 1       ; Optimize to PC relative addressing.
 OPTIMIZED_SHORT_BRANCHES:           equ 1       ; Optimize short branches.

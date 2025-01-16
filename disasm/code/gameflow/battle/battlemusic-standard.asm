@@ -10,7 +10,7 @@ PlayMapMusic:
                 movem.l d0-d2/a0,-(sp)
                 clr.w   d0
                 move.b  ((MAP_AREA_MUSIC_INDEX-$1000000)).w,d0
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 beq.s   @Continue
                 
                 lea     table_ExplorationToBattleMusics(pc), a0

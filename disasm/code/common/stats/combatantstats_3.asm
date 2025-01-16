@@ -23,16 +23,11 @@ GetCombatantEntryAddress:
 @GetAddress:
                 
                 andi.w  #BYTE_MASK,d0
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                mulu.w  #COMBATANT_DATA_ENTRY_SIZE,d0
-                lea     (COMBATANT_ENTRIES).l,a0
-            else
                 lsl.w   #3,d0           ; multiply by combatant entry size
                 move.w  d0,d1
                 lsl.w   #3,d0
                 sub.w   d1,d0
-                lea     ((COMBATANT_ENTRIES-$1000000)).w,a0
-            endif
+                lea     ((COMBATANT_DATA-$1000000)).w,a0
                 adda.w  d0,a0
                 movem.w (sp)+,d0-d1
                 rts
@@ -60,12 +55,9 @@ GetCombatantEntryAddress:
 
 SetCombatantByte:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-            else
                 bsr.s   GetCombatantEntryAddress
                 move.b  d1,(a0,d7.w)
                 rts
-            endif
 
     ; End of function SetCombatantByte
 
@@ -79,12 +71,9 @@ SetCombatantByte:
 
 SetCombatantWord:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-            else
                 bsr.s   GetCombatantEntryAddress
                 move.w  d1,(a0,d7.w)
                 rts
-            endif
 
     ; End of function SetCombatantWord
 
@@ -94,12 +83,9 @@ SetCombatantWord:
 
 SetCombatantLong:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-            else
                 bsr.s   GetCombatantEntryAddress
                 move.l  d1,(a0,d7.w)
                 rts
-            endif
 
     ; End of function SetCombatantLong
 
@@ -114,13 +100,10 @@ SetCombatantLong:
 
 GetCombatantByte:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-            else
                 bsr.s   GetCombatantEntryAddress
                 clr.w   d1
                 move.b  (a0,d7.w),d1
                 rts
-            endif
 
     ; End of function GetCombatantByte
 
@@ -135,12 +118,9 @@ GetCombatantByte:
 
 GetCombatantWord:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-            else
                 bsr.s   GetCombatantEntryAddress
                 move.w  (a0,d7.w),d1
                 rts
-            endif
 
     ; End of function GetCombatantWord
 
@@ -150,12 +130,9 @@ GetCombatantWord:
 
 dup_GetCombatantWord:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-            else
                 bsr.s   GetCombatantEntryAddress
                 move.w  (a0,d7.w),d1
                 rts
-            endif
 
     ; End of function dup_GetCombatantWord
 
@@ -193,7 +170,7 @@ IncreaseAndClampByte:
 ; =============== S U B R O U T I N E =======================================
 
 
-Clamp7BitIncreasing:
+IncreaseAndClamp7Bits:
                 
                 bsr.w   GetCombatantEntryAddress
                 movem.w d2-d3,-(sp)
@@ -222,7 +199,7 @@ loc_935C:
                 movem.w (sp)+,d2-d3
                 rts
 
-    ; End of function Clamp7BitIncreasing
+    ; End of function IncreaseAndClamp7Bits
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -265,13 +242,7 @@ DecreaseAndClampByte:
 IncreaseAndClampWord:
                 
                 bsr.w   GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                adda.w  d7,a0
-                movep.w 0(a0),d7
-                add.w   d7,d1
-            else
                 add.w   (a0,d7.w),d1
-            endif
                 bmi.s   @MakeMaxValue   ; check if overflow to negative
                 cmp.w   d6,d1
                 bcs.s   @Continue       ; check if less than max
@@ -286,11 +257,7 @@ IncreaseAndClampWord:
                 move.w  d5,d1           ; if below min, set to min
 @Done:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w d1,0(a0)
-            else
                 move.w  d1,(a0,d7.w)
-            endif
                 rts
 
     ; End of function IncreaseAndClampWord
@@ -304,12 +271,7 @@ DecreaseAndClampWord:
                 move.w  d4,-(sp)
                 bsr.w   GetCombatantEntryAddress
                 move.w  d1,d4
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                adda.w  d7,a0
-                movep.w 0(a0),d1
-            else
                 move.w  (a0,d7.w),d1
-            endif
                 sub.w   d4,d1
                 bmi.s   @MakeMinValue   ; check if less than value
                 cmp.w   d5,d1
@@ -325,11 +287,7 @@ DecreaseAndClampWord:
                 move.w  d6,d1           ; if above max, set to max
 @Continue:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w d1,0(a0)
-            else
                 move.w  d1,(a0,d7.w)
-            endif
                 move.w  (sp)+,d4
                 rts
 
@@ -344,13 +302,7 @@ DecreaseAndClampWord:
 IncreaseAndClampLong:
                 
                 bsr.w   GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                adda.w  d7,a0
-                movep.l 0(a0),d7
-                add.l   d7,d1
-            else
                 add.l   (a0,d7.w),d1
-            endif
                 bmi.s   loc_93E8
                 cmp.l   d6,d1
                 bcs.s   loc_93EC
@@ -365,11 +317,7 @@ loc_93EC:
                 move.l  d5,d1
 loc_93F2:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.l d1,0(a0)
-            else
                 move.l  d1,(a0,d7.w)
-            endif
                 rts
 
     ; End of function IncreaseAndClampLong
@@ -385,12 +333,7 @@ DecreaseAndClampLong:
                 move.l  d4,-(sp)
                 bsr.w   GetCombatantEntryAddress
                 move.l  d1,d4
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                adda.w  d7,a0
-                movep.l 0(a0),d1
-            else
                 move.l  (a0,d7.w),d1
-            endif
                 sub.l   d4,d1
                 bmi.s   loc_940C
                 cmp.l   d5,d1
@@ -406,11 +349,7 @@ loc_9410:
                 move.l  d6,d1
 loc_9416:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.l d1,0(a0)
-            else
                 move.l  d1,(a0,d7.w)
-            endif
                 move.l  (sp)+,d4
                 rts
 
@@ -427,7 +366,7 @@ loc_9416:
 ;       Out: d2.w = distance in map blocks
 
 
-GetDistanceBetweenBattleEntities:
+GetDistanceBetweenCombatants:
                 
                 movem.l d0-d1/d3-d5,-(sp)
                 move.w  d1,d5
@@ -476,5 +415,5 @@ loc_947C:
                 movem.l (sp)+,d0-d1/d3-d5
                 rts
 
-    ; End of function GetDistanceBetweenBattleEntities
+    ; End of function GetDistanceBetweenCombatants
 

@@ -66,7 +66,7 @@ GetNextUsableAttackSpell:
                 bra.w   @Next
 @CheckSpellType:
                 
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 beq.w   @Break
@@ -112,7 +112,7 @@ GetNextHealingSpell:
                 bra.w   @Next
 @Continue:
                 
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_HEAL,d2
@@ -158,7 +158,7 @@ GetNextSupportSpell:
                 bra.w   @NextSlot
 @Continue:
                 
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_SUPPORT,d2
@@ -225,7 +225,7 @@ GetNextUsableAttackItem:
                 beq.w   @Nothing
 @CheckSpellValidity:
                 
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.w  d1,d7           ; save item entry
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
@@ -260,7 +260,7 @@ GetNextUsableAttackItem:
                 bra.w   @Nothing
 @CheckSpellType:
                 
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 bne.w   @Nothing
@@ -315,11 +315,11 @@ GetNextUsableHealingItem:
                 beq.w   @Next
 @CheckSpellType:
                 
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.w  d1,d7           ; save item entry
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_HEAL,d2

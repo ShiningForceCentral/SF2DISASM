@@ -80,7 +80,7 @@ ExecuteAiCommand_Support:
 @CheckMpCost:
                 
                 move.w  d1,d6           ; d6 = copy of debuff spell entry
-                bsr.w   FindSpellDefAddress
+                bsr.w   GetSpellDefAddress
                 clr.w   d2
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d2
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d5

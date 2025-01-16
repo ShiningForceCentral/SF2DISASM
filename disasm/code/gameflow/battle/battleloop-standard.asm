@@ -33,7 +33,7 @@ BattleLoop:
                 
                 ; Start here if game was suspended mid-battle
                 loadSavedDataAddress SAVED_SECONDS_COUNTER, a0
-                getSavedLong (a0), d0
+                getSavedLong a0, d0
                 move.l  d0,((SECONDS_COUNTER-$1000000)).w
                 
                 clr.w   d0              ; VIEW_TARGET_ENTITY = party leader when loading battle
@@ -130,7 +130,11 @@ BattleLoop:
                 tst.w   d3
                 beq.s   @Victory
                 
-                incrementBattleTurn ; increment the word at CURRENT_BATTLE_TURN by TURN_ORDER_ENTRY_SIZE
+                ; Start a new round of turns
+                loadSavedDataAddress CURRENT_BATTLE_TURN, a0
+                getSavedWord a0, d0
+                addq.w  #TURN_ORDER_ENTRY_SIZE,d0
+                setSavedWord d0, a0
                 bra.w   @StartTurn
 
 ; ---------------------------------------------------------------------------

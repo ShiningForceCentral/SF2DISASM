@@ -85,7 +85,7 @@ battlesceneScript_InitializeBattlesceneProperties:
                 bne.s   @CheckCastSpell
                 move.b  (a4),d0
                 move.b  (a5),d1
-                jsr     GetDistanceBetweenBattleEntities
+                jsr     GetDistanceBetweenCombatants
                 cmpi.w  #2,d2           ; check if block distance between actor and target is >= 2
                 bcs.s   @CheckInactionCurse
                 tst.b   muddledActor(a2)
@@ -126,7 +126,7 @@ battlesceneScript_InitializeBattlesceneProperties:
                 andi.w  #SPELLENTRY_LOWERMASK_LV,d0
                 move.w  d0,((BATTLESCENE_SPELL_LEVEL-$1000000)).w
                 move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 beq.s   @Skip2
                 move.b  (a4),d0

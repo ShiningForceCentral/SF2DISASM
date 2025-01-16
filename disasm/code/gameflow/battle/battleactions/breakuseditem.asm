@@ -14,7 +14,7 @@ battlesceneScript_BreakUsedItem:
                 jsr     GetEquipmentType
                 tst.w   d2
                 beq.w   @RemoveItem     ; remove item if neither weapon or ring
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_BREAKABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   @Done           ; skip if item has no chance to break
                 btst    #COMBATANT_BIT_ENEMY,(a4)

@@ -7,24 +7,40 @@
                 include "code\common\tech\jumpinterfaces\s02_jumpinterface.asm"    ; Game Section 02 Jump Interface
                 includeIfVanilla "code\common\tech\pointers\s02_pointers.asm"    ; Game Section 02 Pointers
                 
+                ; Stats engine (standard)
+                includeIfStandard "code\common\stats-standard\gameflags.asm"    ; Game progression flags management functions
+                includeIfStandard "code\common\stats-standard\combatantstats.asm"    ; Combatant stats functions
+                includeIfStandard "code\common\stats-standard\findname.asm"    ; Find a combatant, class, item, or spell name
+                includeIfStandard "code\common\stats-standard\gold.asm"    ; Gold management functions
+                includeIfStandard "code\common\stats-standard\updatecombatantstats.asm"    ; Functions to calculate effective stat values
+                includeIfStandard "code\common\stats-standard\itemstats.asm"    ; Item stats management functions
+                includeIfStandard "code\common\stats-standard\spellstats.asm"    ; Spell stats management functions
+                includeIfStandard "code\common\stats-standard\levelup.asm"    ; Level Up functions
+                includeIfStandard "code\common\stats-standard\newgame.asm"    ; New game initialization functions
+                includeIfStandard "code\common\stats-standard\battleparty.asm"    ; Battle party management functions
+                includeIfStandard "code\common\stats-standard\iteminventory.asm"    ; Item inventory management functions
+                includeIfStandard "code\common\stats-standard\dealsinventory.asm"    ; Deals inventory management functions
+                includeIfStandard "code\common\stats-standard\caravaninventory.asm"    ; Caravan inventory management functions
+                includeIfStandard "data\stats\allies\allieswithbetterdouble-standard.asm"
+                
                 ; Stats engine
-                include "code\common\stats\statsengine_1.asm"    ; Character stats engine, part 1
-                include "code\common\stats\getcombatanttype.asm"    ; Combatant type getter function
-                includeIfStandard "code\common\stats\getclasstype-standard.asm"
-                include "data\stats\allies\classes\classtypes.asm"    ; Class types table
-                include "code\common\stats\statsengine_2.asm"    ; Character stats engine, part 2
-                includeIfStandard "code\common\stats\updatecombatantstats-standard.asm"
+                includeIfVanilla "code\common\stats\combatantstats_1.asm"    ; Read combatant stats
+                includeIfVanilla "code\common\stats\getcombatanttype.asm"    ; Combatant type getter function
+                includeIfVanilla "data\stats\allies\classes\classtypes.asm"    ; Class types table
+                includeIfVanilla "code\common\stats\combatantstats_2.asm"    ; Modify combatant stats
+                includeIfVanilla "code\common\stats\findname.asm"    ; Find a combatant, class, item, or spell name
+                includeIfVanilla "code\common\stats\gold.asm"    ; Gold management functions
                 includeIfVanilla "code\common\stats\updatecombatantstats.asm"    ; Functions to calculate effective stat values
-                include "code\common\stats\itemstatsfunctions.asm"    ; Character stats engine, part 2
-                include "code\common\stats\spellstatsfunctions.asm"    ; Character stats engine, part 2
-                include "code\common\stats\combatantstatsfunctions.asm"    ; Character stats engine, part 2
-                includeIfStandard "code\common\stats\levelup-standard.asm"
+                includeIfVanilla "code\common\stats\itemstats.asm"    ; Item stats management functions
+                includeIfVanilla "code\common\stats\spellstats.asm"    ; Spell stats management functions
+                includeIfVanilla "code\common\stats\combatantstats_3.asm"    ; Manage combatant stats
                 includeIfVanilla "code\common\stats\unusedsub_9482.asm"    ; Unused nullsub
                 includeIfVanilla "code\common\stats\levelup.asm"    ; Level Up functions
-                include "code\common\stats\statsengine_3.asm"    ; Character stats engine, part 3
-                includeIfStandard "code\common\stats\caravaninventoryfunctions-standard.asm"
-                includeIfVanilla "code\common\stats\caravaninventoryfunctions.asm"    ; Caravan inventory management functions
-                includeIfStandard "data\stats\allies\allieswithbetterdouble-standard.asm"
+                includeIfVanilla "code\common\stats\newgame.asm"    ; New game initialization functions
+                includeIfVanilla "code\common\stats\gameflags.asm"    ; Game progression flags management functions
+                includeIfVanilla "code\common\stats\battleparty.asm"    ; Battle party management functions
+                includeIfVanilla "code\common\stats\dealsinventory.asm"    ; Deals inventory management functions
+                includeIfVanilla "code\common\stats\caravaninventory.asm"    ; Caravan inventory management functions
                 
                 ; Battleactions engine
                 include "code\gameflow\special\debugmodebattleactions.asm"    ; Debug mode battle actions

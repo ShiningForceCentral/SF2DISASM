@@ -327,7 +327,7 @@ AppendSpawnedEnemyToTurnOrder:
                 
                 ; Find first null entry
                 addq.w  #TURN_ORDER_ENTRY_SIZE,a0
-                getSavedWord (a0), d1
+                getSavedWord a0, d1
                 cmpi.w  #-1,d1
                 bne.s   @Next
                 
@@ -335,12 +335,12 @@ AppendSpawnedEnemyToTurnOrder:
                 jsr     GetCurrentAgi
                 move.w  d1,d2
                 andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
-                appendSavedBattleTurnEntry d0, d1, a0
+                appendBattleTurnEntry d0, d1, a0
                 tst.b   d2
                 bpl.s   @Return
                 
                 ; Append second turn
-                appendSavedBattleTurnEntry d0, d1, a0
+                appendBattleTurnEntry d0, d1, a0
                 bra.s   @Return
                 
 @Next:          dbf     d7,@FindNullTurn_Loop

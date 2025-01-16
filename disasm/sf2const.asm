@@ -713,12 +713,8 @@ byte_FFE21E: equ $FFE21E
 byte_FFE29E: equ $FFE29E
 byte_FFE31C: equ $FFE31C
 
-    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-ALLY_NAME_LOADING_SPACE: equ $FFE800
-    endif
-
 ; Start of Saved Data
-COMBATANT_ENTRIES:          equ savedDataStart+SAVED_DATA_OFFSET_COMBATANT_ENTRIES
+COMBATANT_DATA:          equ savedDataStart+SAVED_DATA_OFFSET_COMBATANT_DATA
 CURRENT_GOLD:               equ savedDataStart+SAVED_DATA_OFFSET_CURRENT_GOLD
 DEALS_ITEMS:                equ savedDataStart+SAVED_DATA_OFFSET_DEALS_ITEMS ; amount of each item in the deals section (stacked 2 items to a byte, 4 bits per item, max 0xF amt of each item)
 CARAVAN_ITEMS_NUMBER:       equ savedDataStart+SAVED_DATA_OFFSET_CARAVAN_ITEMS_NUMBER ; number of items in caravan
@@ -743,6 +739,13 @@ SAVED_SECONDS_COUNTER:      equ savedDataStart+SAVED_DATA_OFFSET_SAVED_SECONDS_C
 SPECIAL_BATTLE_RECORD:      equ savedDataStart+SAVED_DATA_OFFSET_SPECIAL_BATTLE_RECORD
 ENEMY_ITEM_DROPPED_FLAGS:   equ savedDataStart+SAVED_DATA_OFFSET_ENEMY_ITEM_DROPPED_FLAGS
 MITHRIL_WEAPONS_ON_ORDER:   equ savedDataStart+SAVED_DATA_OFFSET_MITHRIL_WEAPONS_ON_ORDER ; current mithril weapon index (may be after too, for multiple)
+
+nameLoadingSpace = $FFF7B0
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+nameLoadingSpace = $FFE800
+    endif
+
+ALLY_NAME_LOADING_SPACE: equ nameLoadingSpace ; loading space used in the standard build
 
 ERRCODE_BYTE0: equ $FFFFF8 
 ERRCODE_BYTE1: equ $FFFFF9 

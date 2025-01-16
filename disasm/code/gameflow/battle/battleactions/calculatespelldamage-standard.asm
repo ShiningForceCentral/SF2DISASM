@@ -34,7 +34,7 @@ cutoff = -1
 battlesceneScript_CalculateSpellDamage:
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 clr.w   d6
                 move.b  SPELLDEF_OFFSET_POWER(a0),d6
                 bsr.s   AdjustSpellPower

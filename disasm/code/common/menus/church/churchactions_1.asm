@@ -151,8 +151,8 @@ ChurchMenu:
                 movem.l a0,-(sp)
                 move.w  d0,member(a6)
                 jsr     j_GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                getSavedWord (a0), d2, COMBATANT_OFFSET_STATUSEFFECTS
+            if (STANDARD_BUILD=1)
+                getSavedWord a0, d2, COMBATANT_OFFSET_STATUSEFFECTS
             else
                 lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2
@@ -231,8 +231,8 @@ ChurchMenu:
                 movem.l a0,-(sp)
                 move.w  d0,member(a6)
                 jsr     j_GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                getSavedWord (a0), d2, COMBATANT_OFFSET_STATUSEFFECTS
+            if (STANDARD_BUILD=1)
+                getSavedWord a0, d2, COMBATANT_OFFSET_STATUSEFFECTS
             else
                 lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2
@@ -254,7 +254,7 @@ ChurchMenu:
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 jsr     j_IsItemCursed
                 bcc.w   @IsNextItemCursed
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.l   d4
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d4
                 lsr.w   #2,d4           ; cure curse cost = 25% of item price

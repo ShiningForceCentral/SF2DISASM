@@ -154,28 +154,25 @@ HasJaroJoinedTheForce:
                 
                 movem.l d0/d2-a6,-(sp)
                 jsr     UpdateForce
+                clr.w   d6
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  (a0),d7
-                subq.w  #1,d7
                 lea     ((TARGETS_LIST-$1000000)).w,a0
-                clr.l   d6
-@Loop:
+                bra.s   @Find
                 
-                clr.w   d0
+@Find_Loop:     clr.w   d0
                 move.b  (a0,d6.w),d0
                 cmpi.b  #ALLY_JARO,d0
                 bne.s   @Next           ; keep checking force members until we either find Jaro or reach end of the list
                 
                 moveq   #-1,d1
                 bra.s   @Found          ; Jaro is found, so we're done
-@Next:
                 
-                addq.w  #1,d6
-                dbf     d7,@Loop
+@Next:          addq.w  #1,d6
+@Find:          dbf     d7,@Find_Loop
+                
                 clr.w   d1              ; reached end of the list without finding Jaro
-@Found:
-                
-                movem.l (sp)+,d0/d2-a6
+@Found:         movem.l (sp)+,d0/d2-a6
                 rts
 
     ; End of function HasJaroJoinedTheForce
@@ -224,7 +221,7 @@ InitializeEnemyStats:
                 move.b  BATTLESPRITESET_ENTITYOFFSET_AI_COMMANDSET(a0),d2
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d2
                 or.w    d2,d1
-                jsr     SetMoveType
+                jsr     SetMoveTypeAndAiCommandset
                 move.b  d6,d1
                 jsr     SetEnemyIndex
                 move.b  BATTLESPRITESET_ENTITYOFFSET_AI_TRIGGER_REGION(a0),d1
@@ -267,26 +264,24 @@ InitializeEnemyItems:
                 move.w  d1,d3
                 clr.w   d1
                 jsr     GetItemBySlotAndHeldItemsNumber
-                subq.w  #1,d2
+                
                 move.w  d2,d4
                 clr.w   d5
-@Loop:
+                bra.s   @Item
                 
-                move.w  d5,d1
+@Item_Loop:     move.w  d5,d1
                 jsr     GetItemBySlotAndHeldItemsNumber
                 cmp.b   d1,d3
-                bne.s   @Next
+                bne.s   @NextItem
                 
                 move.w  d5,d1
                 jsr     EquipItemBySlot
                 bra.s   @Done
-@Next:
                 
-                addq.w  #1,d5
-                dbf     d4,@Loop
-@Done:
-                
-                movem.l (sp)+,d0-a0
+@NextItem:      addq.w  #1,d5
+@Item:          dbf     d4,@Item_Loop
+
+@Done:          movem.l (sp)+,d0-a0
                 rts
 
     ; End of function InitializeEnemyItems

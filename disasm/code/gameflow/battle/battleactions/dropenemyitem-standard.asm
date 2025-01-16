@@ -79,10 +79,7 @@ battlesceneScript_DropEnemyItem:
                 move.b  ENEMYITEMDROP_OFFSET_FLAG(a1),d0
                 loadSavedDataAddress ENEMY_ITEM_DROPPED_FLAGS, a0
                 divu.w  #8,d0
-            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
-                add.w   d0,d0
-            endif
-                adda.w  d0,a0
+                addToSavedBytePointer d0, a0
                 swap    d0
                 bset    d0,(a0)
                 bne.s   @Done           ; done if item dropped flag was already set
@@ -108,7 +105,7 @@ battlesceneScript_DropEnemyItem:
                 bsr.w   AddItemToCaravan
                 bcc.s   @Done
             endif
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Done
                 bsr.w   AddItemToDeals

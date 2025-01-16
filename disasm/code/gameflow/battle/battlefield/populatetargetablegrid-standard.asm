@@ -42,10 +42,10 @@ allTargetingToggle = -1
                 bne.s   @JumpToAllies
 @JumpToEnemies: jmp     PopulateTargetsListWithEnemies(pc)
                 
-@Continue:      jsr     FindSpellDefAddress
-                moveq   #0,d2
+@Continue:      jsr     GetSpellDefAddress
+                clr.w   d2
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),d2
-                addq.b  #1,d2
+                addq.w  #1,d2
                 lea     pt_SpellRanges(pc), a1
                 move.w  d2,d4
                 lsl.w   #2,d4
@@ -58,7 +58,7 @@ allTargetingToggle = -1
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 movem.l (sp)+,d2/a0
                 bcs.s   @AvoidSelfTarget ; if not found
-                subq.b  #1,d2
+                subq.w  #1,d2
 @AvoidSelfTarget:
                 
                 moveq   #0,d5

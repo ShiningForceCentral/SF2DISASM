@@ -7,7 +7,7 @@
 
 SetMoveSfx:
                 
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   @Continue
                 clr.w   ((MOVE_SFX-$1000000)).w ; no move sfx outside battle
                 bra.s   @FindMoveSfx

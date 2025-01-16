@@ -1,5 +1,11 @@
 
 
+savedDataByteSize = 1
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+savedDataByteSize = 2
+    endif
+SAVED_DATA_BYTE_SIZE: equ savedDataByteSize
+
 ; ---------------------------------------------------------------------------
 
 ; enum Codes
@@ -146,11 +152,7 @@ COMBATANT_SPELLSLOTS: equ 4
 
 ; enum CombatantDataOffsets
 
-combatantByteSize = 1
-
-    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-combatantByteSize = 2
-    endif
+combatantByteSize = SAVED_DATA_BYTE_SIZE
 
                                             rsreset
 COMBATANT_OFFSET_NAME:                      rs.b 10*combatantByteSize
@@ -4199,7 +4201,7 @@ turnOrderEntriesNumber = TURN_ORDER_ENTRIES_NUMBER
 blacksmithMaxOrdersNumber = BLACKSMITH_MAX_ORDERS_NUMBER
 
                                             rsreset
-SAVED_DATA_OFFSET_COMBATANT_ENTRIES:        rs.b combatantEntryRealSize*combatantSlotsNumber*savedByteSize
+SAVED_DATA_OFFSET_COMBATANT_DATA:        rs.b combatantEntryRealSize*combatantSlotsNumber*savedByteSize
 SAVED_DATA_OFFSET_CURRENT_GOLD:             rs.l savedByteSize
 SAVED_DATA_OFFSET_DEALS_ITEMS:              rs.b dealsItemsBytes*savedByteSize
 SAVED_DATA_OFFSET_CARAVAN_ITEMS_NUMBER:     rs.w savedByteSize
@@ -4224,7 +4226,7 @@ SAVED_DATA_OFFSET_SAVED_SECONDS_COUNTER:    rs.l savedByteSize
 SAVED_DATA_OFFSET_SPECIAL_BATTLE_RECORD:    rs.l savedByteSize
 SAVED_DATA_OFFSET_ENEMY_ITEM_DROPPED_FLAGS: rs.l savedByteSize
 SAVED_DATA_OFFSET_MITHRIL_WEAPONS_ON_ORDER: rs.w blacksmithMaxOrdersNumber*savedByteSize
-SAVED_DATA_SIZE:                            equ __RS
+SAVED_DATA_SIZE:                            equ (__RS/4)*4 ; make into a multiple of 4
 
     if (SAVED_DATA_SIZE>5040)
         if (RELOCATED_SAVED_DATA_TO_SRAM=0)
@@ -4262,10 +4264,12 @@ SAVE_CHECKSUM_SIZE: equ 2
 SRAM_STRING_CHECK_COUNTER: equ 16
 SRAM_STRING_WRITE_COUNTER: equ 17
 SRAM_STRING_LENGTH: equ 36
-SAVE_SLOT_COUNTER: equ saveSlotRealSize-1
+SAVE_SLOT_BYTES_COUNTER: equ saveSlotRealSize-1
+SAVE_SLOT_LONGS_COUNTER: equ (saveSlotRealSize/4)-1
 SAVE_SLOT_REAL_SIZE: equ saveSlotRealSize
 SAVE_SLOT_SIZE: equ saveSlotSize
-SRAM_COUNTER: equ sramSize-1
+SRAM_BYTES_COUNTER: equ sramSize-1
+SRAM_LONGS_COUNTER: equ (sramSize/4)-1
 SRAM_SIZE: equ sramSize
 
 ; ---------------------------------------------------------------------------

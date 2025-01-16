@@ -147,9 +147,9 @@ DeclareRaftEntity:
                 
                 module
                 movem.l d0-a1,-(sp)
-                checkSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
+                compareToSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
                 beq.w   @Done
-                checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
+                compareToSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 beq.w   byte_441F0      ; no followers
                 
                 mulu.w  #MAP_TILE_SIZE,d1
@@ -178,7 +178,7 @@ byte_441F0:
                 
                 ; Is raft present on map?
                 getSavedByte CURRENT_MAP, d0
-                checkRaftMap d0
+                compareSavedByteTo RAFT_MAP, d0
                 bne.s   @RaftNotOnMap
                 
                 ; Declare raft entity
@@ -237,7 +237,7 @@ IsOverworldMap:
                 
                 move.b  (a0)+,d0
                 bmi.w   @Break
-                checkCurrentMap d0
+                compareSavedByteTo CURRENT_MAP, d0
                 bne.s   @Next
                 addq.w  #1,d1
 @Next:

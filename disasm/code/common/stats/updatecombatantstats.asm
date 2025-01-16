@@ -16,26 +16,18 @@ UpdateCombatantStats:
                 andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_POISON|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d3
                 bsr.w   InitializeCurrentStats
                 bsr.w   GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movea.l a0,a1
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0),a1
-            endif
                 lea     COMBATANT_OFFSET_PROWESS_CURRENT(a0),a2
                 bsr.w   ApplyStatusEffectsOnStats
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d2
 @Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_ITEMS(a1),d1
-            else
                 move.w  (a1),d1
-            endif
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Next
                 
-                isItemEquipped (a1)
+                isItemEquipped a1
                 beq.s   @Next
                 bsr.w   ApplyItemOnStats
                 beq.s   @Next
@@ -114,7 +106,7 @@ ApplyStatusEffectsOnStats:
 
 ApplyItemOnStats:
                 
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Enemy
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
@@ -338,12 +330,7 @@ InitializeCurrentStats:
                 move.b  COMBATANT_OFFSET_DEF_BASE(a0),COMBATANT_OFFSET_DEF_CURRENT(a0)
                 move.b  COMBATANT_OFFSET_AGI_BASE(a0),COMBATANT_OFFSET_AGI_CURRENT(a0)
                 move.b  COMBATANT_OFFSET_MOV_BASE(a0),COMBATANT_OFFSET_MOV_CURRENT(a0)
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_RESIST_BASE(a0),d1
-                movep.w d1,COMBATANT_OFFSET_RESIST_CURRENT(a0)
-            else
                 move.w  COMBATANT_OFFSET_RESIST_BASE(a0),COMBATANT_OFFSET_RESIST_CURRENT(a0)
-            endif
                 move.b  COMBATANT_OFFSET_PROWESS_BASE(a0),COMBATANT_OFFSET_PROWESS_CURRENT(a0)
                 movea.l (sp)+,a0
                 rts

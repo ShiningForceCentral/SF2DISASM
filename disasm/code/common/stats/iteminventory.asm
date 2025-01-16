@@ -1,6 +1,6 @@
 
-; ASM FILE code\common\stats\items\itemfunctions_s7_0.asm :
-; 0x4F48A..0x4F6E2 : Unidentified item functions
+; ASM FILE code\common\stats\iteminventory.asm :
+; 0x4F48A..0x4F6E2 : Item inventory management functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -129,7 +129,7 @@ loc_4F5B6:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemEntry(a6)
                 move.w  itemEntry(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_UNSELLABLE,d1

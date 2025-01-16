@@ -1200,7 +1200,7 @@ BuildMemberSummaryWindowOnEquipPage:
                 move.w  d5,d1
                 cmpi.w  #ITEM_UNARMED,d1
                 beq.s   @WriteNothingString
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 bra.s   @Continue
 @WriteNothingString:
                 
@@ -1296,7 +1296,7 @@ WriteMemberMagicList:
                 beq.w   return_13B46
                 movem.l a0-a1,-(sp)
                 movem.w d0-d1/d6-d7,-(sp)
-                jsr     j_FindSpellName
+                jsr     j_GetSpellName
                 moveq   #-42,d1
                 move.l  a1,-(sp)
                 bsr.w   WriteTilesFromAsciiWithRegularFont
@@ -1363,7 +1363,7 @@ WriteMemberItemsList:
                 beq.w   return_13B46
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movem.l (sp)+,a0-a1

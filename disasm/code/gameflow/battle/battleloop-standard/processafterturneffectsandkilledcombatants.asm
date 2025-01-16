@@ -275,7 +275,7 @@ ProcessKilledCombatants:
                 lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0 ; loop point for sprite death spin animation
                 lea     ((ENTITY_ANIMATION_COUNTER-$1000000)).w,a1
                 move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
+                bra.s   @GetDeadCombatant
 @GetDeadCombatant_Loop:
                 
                 clr.w   d0
@@ -295,6 +295,8 @@ ProcessKilledCombatants:
                 
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 move.b  #-1,(a1,d0.w)
+@GetDeadCombatant:
+                
                 dbf     d7,@GetDeadCombatant_Loop
                 
                 moveq   #ANIM_SPRITE_DEATH_SPIN_DELAY,d0
@@ -307,7 +309,7 @@ ProcessKilledCombatants:
                 
                 lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0
                 move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
+                bra.s   @UpdateDeadCombatant
 @UpdateDeadCombatant_Loop:
                 
                 clr.w   d0
@@ -331,6 +333,7 @@ ProcessKilledCombatants:
                 jsr     (WaitForVInt).w
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
 @NextDeadEntity:
+@UpdateDeadCombatant:
                 
                 dbf     d7,@UpdateDeadCombatant_Loop
                 
@@ -340,7 +343,7 @@ ProcessKilledCombatants:
                 
                 lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0
                 move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
+                bra.s   @CheckKillDefeat
 @CheckKillDefeat_Loop:
                 
                 moveq   #1,d1
@@ -369,6 +372,8 @@ ProcessKilledCombatants:
                 move.w  #$7000,d1
                 move.w  #$7000,d2
                 jsr     SetEntityPosition
+@CheckKillDefeat:
+                
                 dbf     d7,@CheckKillDefeat_Loop
                 
                 moveq   #10,d0

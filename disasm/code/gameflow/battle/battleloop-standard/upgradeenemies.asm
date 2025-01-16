@@ -17,25 +17,18 @@ IsBattleUpgradable:
                 clr.w   d6
                 getPointer p_list_RandomBattles, a0 ; point to length of table
                 move.b  (a0)+,d6        ; put length of table in d6
-                tst.b   d6
-                beq.s   @Done
-@Continue:
+                bra.s   @Find
                 
-                subq.w  #1,d6           ; d6--
-@Loop:
-                
-                move.b  (a0)+,d0        ; put next byte in d0
+@Find_Loop:     move.b  (a0)+,d0        ; put next byte in d0
                 cmp.b   d7,d0
                 bne.s   @Next           ; while d0 not battle index
                 
                 moveq   #-1,d1          ; else, battle index is in the list, put -1 in d1.w, for "true"
                 bra.s   @Done
 @Next:
-                
-                dbf     d6,@Loop
-@Done:
-                
-                movem.l (sp)+,d0/d2-a6
+@Find:          dbf     d6,@Find_Loop
+
+@Done:          movem.l (sp)+,d0/d2-a6
                 rts
 
     ; End of function IsBattleUpgradable
@@ -54,9 +47,9 @@ DetermineBattleUpgrade:
                 getPointer p_list_RandomBattles, a1 ; point to length of table
                 clr.w   d2
                 move.b  (a1),d2
-                subq.w  #1,d2
                 addq.w  #1,a1
                 clr.w   d3
+                bra.s   @FindBattle
 @FindBattle_Loop:
                 
                 clr.w   d1
@@ -70,17 +63,14 @@ DetermineBattleUpgrade:
                 
                 clr.w   d1
                 bra.s   @Done
-@AllowUpgrade:
                 
-                moveq   #-1,d1
+@AllowUpgrade:  moveq   #-1,d1
                 bra.s   @Done
-@Next:
                 
-                addq.w  #1,d3
-                dbf     d2,@FindBattle_Loop
-@Done:
+@Next:          addq.w  #1,d3
+@FindBattle:    dbf     d2,@FindBattle_Loop
                 
-                movem.l (sp)+,d0/d2-a6
+@Done:          movem.l (sp)+,d0/d2-a6
                 rts
 
     ; End of function DetermineBattleUpgrade
@@ -248,7 +238,7 @@ UpgradeRandomBattleEnemies:
                 addq.w  #3,a1           ; a1 = pointer to excluded enemies list
                 clr.w   d1
                 move.b  (a1)+,d1
-                subq.w  #1,d1           ; d1 = loop counter
+                bra.s   @FindExcludedEnemy
 @FindExcludedEnemy_Loop:
                 
                 move.b  (a1)+,d0
@@ -262,7 +252,7 @@ UpgradeRandomBattleEnemies:
                 move.w  d2,d3
                 bra.s   @UpgradeEnemy_Loop ; fall back to enemy d2 and try again one more time
 @NextEnemy:
-                
+@FindExcludedEnemy:
                 dbf     d1,@FindExcludedEnemy_Loop
                 
                 clr.w   d1

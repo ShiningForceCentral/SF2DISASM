@@ -108,7 +108,7 @@ BuildMemberScreen:
                 dc.l VInt_PerformPortraitBlinking
                 st      ((BLINK_CONTROL_TOGGLE-$1000000)).w
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                checkSavedByte #NOT_CURRENTLY_IN_BAttLE, CURRENT_BAttLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   @loc_4
                 
                 clr.w   d0
@@ -158,7 +158,7 @@ BuildMemberScreen:
                 move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  #64,ENTITYDEF_OFFSET_LAYER(a0)
                 andi.b  #$7F,ENTITYDEF_OFFSET_FLAGS_B(a0) 
-                checkSavedByte #NOT_CURRENTLY_IN_BAttLE, CURRENT_BAttLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   @loc_9
                 
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
@@ -230,17 +230,17 @@ BuildMemberScreen:
             endif
 @loc_12:        clr.w   ((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 jsr     (WaitForVInt).w
-                checkSavedByte #NOT_CURRENTLY_IN_BAttLE, CURRENT_BAttLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   @loc_16
                 
                 clr.w   d0
-                checkSavedByte #PLAYERTYPE_BOWIE, PLAYER_TYPE
+                testSavedByte PLAYER_TYPE ; 0 = player character
                 bne.s   @loc_13
                 
                 jsr     GetAllyMapsprite
                 bra.s   @loc_15
                 
-@loc_13:        checkSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
+@loc_13:        compareToSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 bne.s   @Raft
                 
                 move.w   #MAPSPRITE_CARAVAN,d4
@@ -624,13 +624,15 @@ member = -2
                 bmi.s   @AddStatusEffectTiles       ; skip class name if enemy
                 movea.l windowTilesAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_FULLCLASSNAME,a1   ; full class name offset
-                jsr     GetClassAndFullName             ; write full class name on single line
+                jsr     GetClass
+                jsr     GetFullClassName            ; write full class name on single line
                 moveq   #0,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
             else
                 tst.b   d0
                 bmi.s   @WriteMemberName            ; skip class name if enemy
-                jsr     GetClassAndName                 ; write shortened class name (original behavior)
+                jsr     GetClass
+                jsr     GetClassName                 ; write shortened class name (original behavior)
                 moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 addq.w  #2,a1
@@ -1009,7 +1011,7 @@ WriteEnemyLvOrExp:
                 
             if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
                 ; Do not display spell that is not affected by silence
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 beq.w   @NextSpell      ; skip if spell is not affected by silence
             endif
@@ -1020,7 +1022,7 @@ WriteEnemyLvOrExp:
                 
                 ; Write spell name
 @SpellName:     move.w  d5,d1
-                jsr     FindSpellName
+                jsr     GetSpellName
                 movea.l d4,a1
                 addq.w  #4,a1           ; offset to spell name relative from start
                 moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1
@@ -1086,7 +1088,7 @@ WriteEnemyLvOrExp:
                 
                 ; Write item name
                 move.w  d1,d5           ; backup item index -> d5.w
-                jsr     FindItemName
+                jsr     GetItemName
                 movea.l d4,a1
                 addq.w  #4,a1           ; offset to item name relative from start
                 moveq   #-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d1

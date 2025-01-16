@@ -13,6 +13,11 @@
                 includeIfStandard "data\battles\global\battlemapcoords.asm"    ; Battle map coords
                 includeIfStandard "data\maps\global\savepointmapcoords.asm"    ; Save point map coords
                 includeIfStandard "data\maps\global\raftresetmapcoords.asm"    ; Raft reset map coords
+                includeIfStandard "data\stats\allies\classes\classtypes.asm"    ; Class types table
+                includeIfStandard "data\stats\items\specialcaravandescriptions.asm"    ; Special Caravan descriptions
+                includeIfStandard "data\stats\items\usableoutsidebattleitems.asm"    ; Usable outside battle items
+                includeIfStandard "data\stats\allies\allydialogproperties-standard.asm"    ; Sprite dialog properties for ally entities
+                includeIfStandard "data\spritedialogproperties-standard.asm"    ; Sprite dialog properties for other entities
             if (EXTENDED_SPELL_NAMES=1)
                 includeIfStandard "data\stats\spells\extendedspellnames-standard.asm"
             else
@@ -35,10 +40,8 @@
                 includeIfStandard "data\stats\spells\spelldefs.asm"    ; Spell definitions
                 includeIfStandard "data\graphics\tech\backgroundlayout.asm"    ; Battlescene Background Layout
                 includeIfStandard "data\stats\items\itemnames.asm"    ; Item names
-                includeIfStandard "data\stats\allies\classes\classnames.asm"    ; Class names
-            if (FULL_CLASS_NAMES=1)
-                includeIfStandard "data\stats\allies\classes\fullclassnames-standard.asm"
-            endif
+                includeIfStandard "data\stats\allies\classes\classnames.asm"    ; Classic class name shorthands
+                includeIfStandard "data\stats\allies\classes\fullclassnames-standard.asm"   ; Fully spelled out class names, used in standard build for dialogue and enhanced menus
                 alignIfStandard
                 includeIfStandard "code\common\tech\incbins\s06_incbins_graphics.asm"    ; Game Section 06 Incbin Directives, part 1
                 includeIfStandard "data\scripting\gamestaff.asm"    ; Game Staff

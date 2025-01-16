@@ -369,13 +369,13 @@ WriteItemNameAndGoldAmount:
                 bsr.w   GetCurrentShopSelection
                 move.w  d0,d1
                 move.w  d1,-(sp)
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 movea.l itemNameAndPriceWindowLayoutEndAddress(a6),a1
                 adda.w  #$16,a1
                 moveq   #-20,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  (sp)+,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.l   d0
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d0
                 movea.l itemNameAndPriceWindowLayoutEndAddress(a6),a1
@@ -441,7 +441,7 @@ LoadItemIconsAndPriceTagTiles:
                 bsr.w   LoadItemIconInShopScreen  
                 move.l  a0,-(sp)
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.l   d0
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d0
                 movea.l (sp)+,a0

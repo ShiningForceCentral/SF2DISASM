@@ -11,7 +11,7 @@
 GetSpellRange:
                 
                 movem.l d0-d2/d5-a6,-(sp)
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  SPELLDEF_OFFSET_MIN_RANGE(a0),d4
                 movem.l (sp)+,d0-d2/d5-a6
@@ -29,7 +29,7 @@ GetSpellRange:
 GetItemRange:
                 
                 movem.l d0-d2/d5-a6,-(sp)
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  ITEMDEF_OFFSET_MIN_RANGE(a0),d4
                 movem.l (sp)+,d0-d2/d5-a6
@@ -143,7 +143,7 @@ CreateItemRangeGrid:
                 bsr.w   ClearTargetsArray
                 bsr.w   ClearTotalMovecostsAndMovableGridArrays
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.s   @Done
@@ -170,7 +170,7 @@ CreateSpellRangeGrid:
                 bsr.w   ClearTargetsArray
                 bsr.w   ClearTotalMovecostsAndMovableGridArrays
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   loc_C4AA
                 btst    #SPELLPROPS_BIT_TARGETING,SPELLDEF_OFFSET_PROPS(a0)
@@ -450,7 +450,7 @@ PopulateTargetableGrid_UseItem:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 cmpi.b  #-1,d1
                 beq.s   @Done
@@ -473,7 +473,7 @@ sub_C5FA:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 cmpi.b  #-1,d1
                 beq.s   @Done
@@ -518,7 +518,7 @@ PopulateTargetableGrid:
             else
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 cmpi.b  #SPELL_AURA|SPELL_LV4,d1
                 beq.w   @ChooseTargets
                 cmpi.b  #SPELL_SHINE,d1
@@ -1038,7 +1038,7 @@ PrioritizeReachableTargets:
                 move.l  (sp)+,d1        ; d1 = attack item index
                 lea     (ATTACK_COMMAND_ITEM_SLOT).l,a0
                 move.w  d2,(a0)
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 lea     ((TARGETS_REACHABLE_BY_ITEM_LIST-$1000000)).w,a0
                 lea     ((ITEM_MOVEMENT_TO_REACHABLE_TARGETS-$1000000)).w,a1
@@ -1385,7 +1385,7 @@ GetSpellPowerAdjustedForResistance:
                 
                 movem.l d0-d5/d7-a0,-(sp)
                 bsr.w   GetResistanceToSpell
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 moveq   #0,d6
                 move.b  SPELLDEF_OFFSET_POWER(a0),d6
                 move.w  d6,d3

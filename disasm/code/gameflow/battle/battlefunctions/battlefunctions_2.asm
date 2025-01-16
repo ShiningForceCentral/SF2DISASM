@@ -275,7 +275,7 @@ ProcessBattleEntityControlPlayerInput:
 @HasTarget_Spell:
                 
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 bsr.w   ControlCursorEntity_ChooseTarget
                 cmpi.w  #-1,d0
@@ -412,10 +412,10 @@ CreatePulsatingSpellRangeGrid:
 @HasTarget_Use:
                 
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 bsr.w   ControlCursorEntity_ChooseTarget
                 cmpi.w  #-1,d0
@@ -782,7 +782,7 @@ loc_24D42:
                 btst    #ITEMENTRY_BIT_EQUIPPED,d0
                 beq.w   @ChooseTarget
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   @ChooseTarget
                 sndCom  MUSIC_CURSED_ITEM
@@ -861,7 +861,7 @@ loc_24D42:
                 btst    #ITEMENTRY_BIT_EQUIPPED,d0
                 beq.w   @TradeItem
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   @TradeItem
                 sndCom  MUSIC_CURSED_ITEM
@@ -942,7 +942,7 @@ loc_24FC2:
                 btst    #ITEMENTRY_BIT_EQUIPPED,d0
                 beq.w   loc_24FFA
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   loc_24FFA
                 sndCom  MUSIC_CURSED_ITEM
@@ -954,7 +954,7 @@ loc_24FC2:
 loc_24FFA:
                 
                 move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   loc_25022
                 move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -974,7 +974,7 @@ loc_25022:
                 move.w  combatant(a6),d0
                 jsr     j_RemoveItemBySlot
                 move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   byte_25066      
                 move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,d0
@@ -1207,7 +1207,7 @@ BattlefieldMenu:
                 bra.s   @StartMenu
 @SuspendGame:
                 
-                checkSavedByte #BATTLE_VERSUS_ALL_BOSSES, CURRENT_BATTLE
+                testSavedByte CURRENT_BATTLE ; HARDCODED secret post credits battle check
             if (STANDARD_BUILD=1)
                 beq.w   @StartMenu
             else
@@ -1218,14 +1218,10 @@ BattlefieldMenu:
                 clsTxt
                 tst.w   d0
                 bmi.w   @StartMenu
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                move.l  d0,-(sp)
-                lea     (SAVED_SECONDS_COUNTER).l,a0
+            if (STANDARD_BUILD=1)
                 move.l  ((SECONDS_COUNTER-$1000000)).w,d0
-                movep.l d0,0(a0)
-                move.l  (sp)+,d0
-                movea.l (sp)+,a0
+                loadSavedDataAddress SAVED_SECONDS_COUNTER, a0
+                setSavedWord d0, a0
             else
                 move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
             endif
@@ -1310,7 +1306,7 @@ ExecuteAiControl:
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
@@ -1327,10 +1323,10 @@ ExecuteAiControl:
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
@@ -1347,7 +1343,7 @@ ExecuteAiControl:
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)

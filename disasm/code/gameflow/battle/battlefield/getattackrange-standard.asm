@@ -36,7 +36,7 @@ GetAttackRange:
                 move.b  (a0),d3
                 bra.s   @Done
                 
-@WeaponRange:   bsr.w   GetItemDefAddress
+@WeaponRange:   bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  ITEMDEF_OFFSET_MIN_RANGE(a0),d4
                 

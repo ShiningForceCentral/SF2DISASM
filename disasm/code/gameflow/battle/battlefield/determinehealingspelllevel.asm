@@ -59,7 +59,7 @@ loc_CDC2:
                                         ;   so first d4 would have to be moved before manipulated.
                 add.w   d4,d1           ; d1 = the intent here is to create the spell index corresponding to the appropriate spell level,
                                         ;  but this doesn't work due to the bugs above
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 cmp.b   SPELLDEF_OFFSET_MP_COST(a0),d3 ; check if spell cost is more than current MP
                 bcc.w   loc_CDDC
                 dbf     d2,loc_CDC2

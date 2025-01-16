@@ -1,6 +1,6 @@
 
-; ASM FILE code\common\stats\itemstatsfunctions.asm :
-; 0x8BD0..0x91C6 : Character stats engine, part 2
+; ASM FILE code\common\stats\itemstats.asm :
+; 0x8BD0..0x91C6 : Item stats management functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -9,7 +9,7 @@
 ;      D7 = length of name
 
 
-FindItemName:
+GetItemName:
                 
                 move.w  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
@@ -18,7 +18,7 @@ FindItemName:
                 move.w  (sp)+,d1
                 rts
 
-    ; End of function FindItemName
+    ; End of function GetItemName
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -26,7 +26,7 @@ FindItemName:
 ; Out: A0 = pointer to definition for item D1
 
 
-GetItemDefAddress:
+GetItemDefinitionAddress:
                 
                 move.l  d1,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
@@ -36,7 +36,7 @@ GetItemDefAddress:
                 move.l  (sp)+,d1
                 rts
 
-    ; End of function GetItemDefAddress
+    ; End of function GetItemDefinitionAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -49,23 +49,14 @@ GetItemBySlotAndHeldItemsNumber:
                 
                 movem.l d0/d3/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,d3
-                add.w   d1,d1
-                add.w   d1,d1
-                adda.w  d1,a0
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d1
-                movea.l d3,a0
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0),a0
                 add.w   d1,d1
                 move.w  (a0,d1.w),d1    ; move item d1 word in d1
-            endif
                 moveq   #0,d2
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d3
 @Loop:
                 
-                getSavedWordWithPostIncrement a0, d0, COMBATANT_OFFSET_ITEMS
+                move.w  (a0)+,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.w  #ITEM_NOTHING,d0
                 beq.s   @Nothing
@@ -88,7 +79,7 @@ GetItemBySlotAndHeldItemsNumber:
 GetEquipmentType:
                 
                 move.l  a0,-(sp)
-                bsr.s   GetItemDefAddress
+                bsr.s   GetItemDefinitionAddress
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 add.w   #ITEMDEF_OFFSET_TYPE,a0
             else
@@ -128,11 +119,7 @@ GetEquippedWeapon:
                 
                 movem.l d3-d4/a0-a1,-(sp)
                 move.w  #ITEMTYPE_WEAPON,d4
-            if (STANDARD_BUILD=1)
-                bra.s   @Continue
-            else
                 bra.s   GetEquippedItemByType
-            endif
 
     ; End of function GetEquippedWeapon
 
@@ -146,9 +133,6 @@ GetEquippedRing:
                 
                 movem.l d3-d4/a0-a1,-(sp)
                 move.w  #ITEMTYPE_RING,d4
-            if (STANDARD_BUILD=1)
-                bra.s   @Continue
-            endif
 
     ; End of function GetEquippedRing
 
@@ -157,29 +141,19 @@ GetEquippedRing:
 
 GetEquippedItemByType:
                 
-            if (STANDARD_BUILD=1)
-                ; In: d4.w = item type
-                movem.l d3-d4/a0-a1,-(sp)
-@Continue:
-            endif
-                
                 bsr.w   GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movea.l a0,a1
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0),a1
-            endif
                 clr.w   d2
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d3
 @Loop:
                 
-                getSavedWordWithPostIncrement a1, d1, COMBATANT_OFFSET_ITEMS
+                move.w  (a1)+,d1
                 btst    #ITEMENTRY_BIT_EQUIPPED,d1
                 beq.s   @Next           ; item not equipped, check next item
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Next           ; no item in slot, check next item
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d1
                 and.b   d4,d1
                 bne.s   @Break          ; found equipped item matching the given type, break out of loop
@@ -193,11 +167,7 @@ GetEquippedItemByType:
                 bra.s   @Done
 @Break:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_ITEMS-ITEMENTRY_SIZE(a1),d1
-            else
                 move.w  -(a1),d1        ; get item from previous slot
-            endif
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
 @Done:
                 
@@ -224,14 +194,11 @@ AddItem:
 @SkipMasking:
             endif
                 bsr.w   GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0),a0
-            endif
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d0
 @Loop:
                 
-                getSavedWordWithPostIncrement a0, d2, COMBATANT_OFFSET_ITEMS
+                move.w  (a0)+,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d2
                 cmpi.w  #ITEM_NOTHING,d2
                 beq.s   @Break
@@ -245,11 +212,7 @@ AddItem:
             else
                 andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
             endif
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w d1,COMBATANT_OFFSET_ITEMS-ITEMENTRY_SIZE(a0)
-            else
                 move.w  d1,-(a0)        ; move item in empty slot
-            endif
                 clr.w   d2
 @Done:
                 
@@ -272,18 +235,12 @@ BreakItemBySlot:
                 movem.l d1/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
                 add.w   d1,d1
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                add.w   d1,d1
-                adda.w  d1,a0
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d1
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1
-            endif
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Nothing
-                breakItem (a0)
+                breakItem a0
                 clr.w   d2
                 bra.s   @Done
 @Nothing:
@@ -305,28 +262,18 @@ RepairItemBySlot:
                 movem.l d1/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
                 add.w   d1,d1
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                add.w   d1,d1
-                adda.w  d1,a0
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d1
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1
-            endif
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Nothing       
-                repairItem (a0)
+                repairItem a0
                 beq.s   @NotBroken
                 clr.w   d2
                 bra.s   @Goto_Done
 @NotBroken:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                moveq   #1,d1
-            else
                 move.w  #1,d1           ; clear zero-bit if item was not broken
-            endif
 @Goto_Done:
                 
                 bra.s   @Done
@@ -352,14 +299,8 @@ EquipItemBySlot:
                 movem.l d0-d1/a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
                 add.w   d1,d1           ; item slot -> additional offset
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                add.w   d1,d1
-                adda.w  d1,a0
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d1
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1         ; get item entry
-            endif
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1 ; test if item is "nothing"
                 beq.s   @Nothing        
@@ -367,7 +308,7 @@ EquipItemBySlot:
                 cmpi.w  #1,d2
                 beq.s   @Goto_Done      ; skip if item is not equippable
                 
-                equipItem (a0)
+                equipItem a0
 @Goto_Done:
                 
                 bra.s   @Done
@@ -395,7 +336,7 @@ IsItemEquippableAndCursed:
                 bsr.w   GetCombatantEntryAddress
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
                 addq.b  #1,d0
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 move.l  a0,-(sp)
@@ -448,7 +389,7 @@ UnequipItemBySlotIfNotCursed:
                 bsr.s   IsItemInSlotEquippedOrCursed
                 tst.w   d2
                 bne.s   @Skip           ; skip if anything but equipped and not cursed
-                unequipItem (a0)
+                unequipItem a0
 @Skip:
                 
                 movem.l (sp)+,d0-d1/a0
@@ -471,31 +412,18 @@ IsItemInSlotEquippedOrCursed:
                 
                 bsr.w   GetCombatantEntryAddress
                 add.w   d1,d1
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                add.w   d1,d1
-                adda.w  d1,a0
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d1
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1
-            endif
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @EmptySlot      
-                isItemEquipped (a0)
-                beq.s   @NotEquipped    
+                isItemEquipped a0
+                beq.s   @NotEquipped
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                bsr.w   GetItemDefAddress
-                btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
-                movea.l (sp)+,a0
-            else
                 movem.l a0,-(sp)
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 movem.l (sp)+,a0
-            endif
                 bne.s   @Cursed         
                 clr.w   d2              ; not cursed
                 bra.s   @Goto_Done
@@ -533,7 +461,7 @@ UnequipItemBySlot:
                 
                 movem.l d0-d1/a0,-(sp)
                 bsr.s   IsItemInSlotEquippedOrCursed
-                unequipItem (a0)
+                unequipItem a0
                 movem.l (sp)+,d0-d1/a0
                 bra.w   UpdateCombatantStats
 
@@ -554,33 +482,20 @@ DropItemBySlot:
                 bsr.w   GetCombatantEntryAddress
                 move.w  d1,d0
                 add.w   d1,d1
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                add.w   d1,d1
-                adda.w  d1,a0
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d1
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1
-            endif
                 move.w  #3,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Done
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                bsr.w   GetItemDefAddress
-                btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
-                movea.l (sp)+,a0
-            else
                 movem.l a0,-(sp)
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 movem.l (sp)+,a0
-            endif
                 beq.s   @NotCursed
                 move.w  #2,d2           ; item cursed
-                isItemEquipped (a0)
+                isItemEquipped a0
                 bne.s   @Done           ; item equipped and cursed, so can't drop it
 @NotCursed:
                 
@@ -595,7 +510,7 @@ DropItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a0 = combatant items address (or combatant entry address if RELOCATED_SAVED_DATA_TO_SRAM is enabled)
+; In: a0 = combatant items address
 ;     d0.w = item slot
 ;
 ; Out: d2.w = 0
@@ -608,22 +523,12 @@ RemoveAndArrangeItems:
                 bmi.s   @Skip           ; no items to rearrange, so skip to removal
 @Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_ITEMS+ITEMENTRY_SIZE(a0),d0
-                movep.w d0,COMBATANT_OFFSET_ITEMS(a0)
-            else
                 move.w  ITEMENTRY_SIZE(a0),(a0) ; shift item -1 slots
-            endif
                 addq.w  #ITEMENTRY_SIZE,a0
                 dbf     d2,@Loop        
 @Skip:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.w  #ITEM_NOTHING,d0
-                movep.w d0,COMBATANT_OFFSET_ITEMS(a0)
-            else
                 move.w  #ITEM_NOTHING,(a0) ; replace item with nothing
-            endif
                 clr.w   d2
                 rts
 
@@ -642,14 +547,8 @@ RemoveItemBySlot:
                 bsr.w   GetCombatantEntryAddress
                 move.w  d1,d0
                 add.w   d1,d1
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                add.w   d1,d1
-                adda.w  d1,a0
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d1
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d1
-            endif
                 move.w  d1,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d2
                 cmpi.w  #ITEM_NOTHING,d2
@@ -695,28 +594,20 @@ UnequipRing:
 UnequipItemByType:
                 
                 bsr.w   GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movea.l a0,a1
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0),a1
-            endif
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d0
 @Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_ITEMS(a1),d1
-            else
                 move.w  (a1),d1
-            endif
                 btst    #ITEMENTRY_BIT_EQUIPPED,d1
                 beq.s   @Next
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d1
                 and.b   d2,d1
                 beq.s   @Next
                 
-                unequipItem (a1)
+                unequipItem a1
 @Next:
                 
                 addq.w  #ITEMENTRY_SIZE,a1
@@ -779,10 +670,7 @@ GetEquippableItemsByType:
                 
                 moveq   #1,d3
                 lsl.l   d0,d3           ; place class bit in long value
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0),a1
-            endif
                 lea     ((EQUIPPABLE_ITEMS-$1000000)).w,a2
                 
                 ; Initialize list with default values
@@ -795,12 +683,7 @@ GetEquippableItemsByType:
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d5
 @Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_ITEMS(a0),d1
-                addq.w  #ITEMENTRY_SIZE,a0
-            else
                 move.w  (a1)+,d1
-            endif
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Next           ; next if empty slot
@@ -836,7 +719,7 @@ IsItemEquippable:
                 
             if (STANDARD_BUILD&EXPANDED_CLASSES=1)
                 movem.l d7/a0,-(sp)
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d6
                 and.b   d2,d6
                 beq.s   @Done           ; skip if not a weapon/ring
@@ -852,7 +735,7 @@ IsItemEquippable:
                 rts
             else
                 movem.l a0,-(sp)
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d6
                 and.b   d2,d6
                 beq.s   @Done           ; skip if not a weapon/ring
@@ -949,7 +832,7 @@ GetEquipNewAttAndDef:
                 ; Get new item type
                 movem.l d1/a0,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d2
                 movem.l (sp)+,d1/a0
                 
@@ -975,9 +858,6 @@ GetEquipNewAttAndDef:
 
 GetNewAttAndDefWithItemEquipped:
                 
-            if (STANDARD_BUILD=1)
-                include "code\common\stats\getnewattanddefwithitemequipped-standard.asm"
-            else
                 movem.l d0-d1/d4-a0,-(sp)
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d7
                 clr.w   d4
@@ -990,7 +870,7 @@ GetNewAttAndDefWithItemEquipped:
                 movem.l d0-d1/a0,-(sp)  ; it's equipped
                 move.w  d5,d1
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),d0
                 and.b   d2,d0
                 movem.l (sp)+,d0-d1/a0
@@ -1033,7 +913,6 @@ GetNewAttAndDefWithItemEquipped:
                 
                 movem.l (sp)+,d0-d1/d4-a0
                 rts
-            endif
 
     ; End of function GetNewAttAndDefWithItemEquipped
 
@@ -1044,8 +923,6 @@ GetNewAttAndDefWithItemEquipped:
 OrderItems:
                 
                 ; Nullsub to free up space for relocated saved data code
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-            else
                 movem.l d0-d3/a0-a1,-(sp)
                 bsr.w   GetCombatantEntryAddress
                 lea     COMBATANT_OFFSET_ITEMS(a0),a0
@@ -1076,7 +953,6 @@ loc_90A2:
                 dbf     d1,loc_9082
                 movem.l (sp)+,d0-d3/a0-a1
                 rts
-            endif
 
     ; End of function OrderItems
 
@@ -1089,7 +965,7 @@ loc_90A2:
 IsItemCursed:
                 
                 move.l  a0,-(sp)
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @NotCursed
                 ori     #1,ccr          ; item is cursed
@@ -1113,7 +989,7 @@ IsItemCursed:
 IsItemUsableInBattle:
                 
                 move.l  a0,-(sp)
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
             if (STANDARD_BUILD&FIX_USABLE_ITEM_VALIDATION=1)
                 cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
             else
@@ -1174,29 +1050,21 @@ UnequipAllItemsIfNotCursed:
                 
                 movem.l d0-d1/a0-a1,-(sp)
                 bsr.w   GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movea.l a0,a1
-            else
                 lea     COMBATANT_OFFSET_ITEMS(a0),a1
-            endif
                 moveq   #COMBATANT_ITEMSLOTS_COUNTER,d0
 @Loop:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w COMBATANT_OFFSET_ITEMS(a1),d1
-            else
                 move.w  (a1),d1
-            endif
                 btst    #ITEMENTRY_BIT_EQUIPPED,d1
                 beq.s   @Next
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 cmpi.w  #ITEM_NOTHING,d1
                 beq.s   @Next
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Next
                 
-                unequipItem (a1)
+                unequipItem a1
 @Next:
                 
                 addq.w  #ITEMENTRY_SIZE,a1

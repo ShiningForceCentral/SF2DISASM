@@ -72,7 +72,7 @@ battlesceneScript_ValidateCounterAttack:
                 ; Check if target is in range
                 move.b  (a4),d0
                 move.b  (a5),d1
-                jsr     GetDistanceBetweenBattleEntities
+                jsr     GetDistanceBetweenCombatants
                 move.b  (a4),d0
                 jsr     GetAttackRange  
                 cmp.b   d3,d2

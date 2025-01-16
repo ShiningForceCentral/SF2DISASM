@@ -414,7 +414,7 @@ loc_5220:
                 andi.w  #$3C00,d3
                 cmpi.w  #$3800,d3
                 bne.s   loc_5256
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_5256
                 chkFlg  65              ; Caravan is unlocked
                 beq.s   loc_5256
@@ -425,7 +425,7 @@ loc_5256:
                 
                 cmpi.w  #$3C00,d3
                 bne.s   loc_5278
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   loc_5278
                 chkFlg  64              ; Raft is unlocked
                 beq.s   loc_5278
@@ -2688,7 +2688,7 @@ DmaEntityMapsprite:
 ConvertMapPixelCoordinatesToOffset:
                 
                 movem.w d0-d1,-(sp)
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   @InBattle       
                 tst.b   ENTITYDEF_OFFSET_LAYER(a0)
                 beq.s   @InBattle       

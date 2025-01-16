@@ -1,9 +1,11 @@
 
-; ASM FILE code\common\stats\statsengine_2.asm :
-; 0x855A..0x89CE : Character stats engine, part 2
+; ASM FILE code\common\stats\combatantstats_2.asm :
+; 0x8576..0x8970 : Modify combatant stats
 
 ; =============== S U B R O U T I N E =======================================
 
+; Load ally name into combatant data block.
+;
 ; In: a0 = pointer to temporarily loaded name in RAM
 
 
@@ -34,7 +36,10 @@ LoadAllyName:
 
 SetClass:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_CLASS
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_CLASS,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetClass
@@ -45,7 +50,10 @@ SetClass:
 
 SetLevel:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_LEVEL
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_LEVEL,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetLevel
@@ -56,7 +64,10 @@ SetLevel:
 
 SetMaxHp:
                 
-                setSavedCombatantWord COMBATANT_OFFSET_HP_MAX
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_HP_MAX,d7
+                bsr.w   SetCombatantWord
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetMaxHp
@@ -67,7 +78,10 @@ SetMaxHp:
 
 SetCurrentHp:
                 
-                setSavedCombatantWord COMBATANT_OFFSET_HP_CURRENT
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_HP_CURRENT,d7
+                bsr.w   SetCombatantWord
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCurrentHp
@@ -78,7 +92,10 @@ SetCurrentHp:
 
 SetMaxMp:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_MP_MAX
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_MP_MAX,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetMaxMp
@@ -89,7 +106,10 @@ SetMaxMp:
 
 SetCurrentMp:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_MP_CURRENT
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_MP_CURRENT,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCurrentMp
@@ -100,7 +120,10 @@ SetCurrentMp:
 
 SetBaseAtt:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_ATT_BASE
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_ATT_BASE,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetBaseAtt
@@ -111,7 +134,10 @@ SetBaseAtt:
 
 SetCurrentAtt:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_ATT_CURRENT
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_ATT_CURRENT,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCurrentAtt
@@ -122,7 +148,10 @@ SetCurrentAtt:
 
 SetBaseDef:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_DEF_BASE
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_DEF_BASE,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetBaseDef
@@ -133,7 +162,10 @@ SetBaseDef:
 
 SetCurrentDef:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_DEF_CURRENT
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_DEF_CURRENT,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCurrentDef
@@ -144,7 +176,10 @@ SetCurrentDef:
 
 SetBaseAgi:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_AGI_BASE
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_AGI_BASE,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetBaseAgi
@@ -155,7 +190,10 @@ SetBaseAgi:
 
 SetCurrentAgi:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_AGI_CURRENT
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_AGI_CURRENT,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCurrentAgi
@@ -165,7 +203,11 @@ SetCurrentAgi:
 
 
 SetBaseMov:
-                setSavedCombatantByte COMBATANT_OFFSET_MOV_BASE
+                
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_MOV_BASE,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetBaseMov
@@ -176,7 +218,10 @@ SetBaseMov:
 
 SetCurrentMov:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_MOV_CURRENT
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_MOV_CURRENT,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCurrentMov
@@ -187,7 +232,10 @@ SetCurrentMov:
 
 SetBaseResistance:
                 
-                setSavedCombatantWord COMBATANT_OFFSET_RESIST_BASE
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_RESIST_BASE,d7
+                bsr.w   SetCombatantWord
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetBaseResistance
@@ -198,7 +246,10 @@ SetBaseResistance:
 
 SetCurrentResistance:
                 
-                setSavedCombatantWord COMBATANT_OFFSET_RESIST_CURRENT
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_RESIST_CURRENT,d7
+                bsr.w   SetCombatantWord
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCurrentResistance
@@ -209,7 +260,10 @@ SetCurrentResistance:
 
 SetBaseProwess:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_PROWESS_BASE
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_PROWESS_BASE,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetBaseProwess
@@ -220,7 +274,10 @@ SetBaseProwess:
 
 SetCurrentProwess:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_PROWESS_CURRENT
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_PROWESS_CURRENT,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCurrentProwess
@@ -231,7 +288,10 @@ SetCurrentProwess:
 
 SetStatusEffects:
                 
-                setSavedCombatantWord COMBATANT_OFFSET_STATUSEFFECTS
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_STATUSEFFECTS,d7
+                bsr.w   SetCombatantWord
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetStatusEffects
@@ -242,7 +302,10 @@ SetStatusEffects:
 
 SetCombatantX:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_X
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_X,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCombatantX
@@ -253,7 +316,10 @@ SetCombatantX:
 
 SetCombatantY:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_Y
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_Y,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCombatantY
@@ -264,7 +330,10 @@ SetCombatantY:
 
 SetCurrentExp:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_EXP
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_EXP,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetCurrentExp
@@ -273,12 +342,15 @@ SetCurrentExp:
 ; =============== S U B R O U T I N E =======================================
 
 
-SetMoveType:
+SetMoveTypeAndAiCommandset:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_MOVETYPE_AND_AI
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetMoveType
+    ; End of function SetMoveTypeAndAiCommandset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -286,15 +358,6 @@ SetMoveType:
 
 SetAiSpecialMoveOrders:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movem.l d1-d2/a0,-(sp)
-                lsl.w   #8,d1
-                andi.w  #$FF,d2
-                or.w    d2,d1
-                bsr.w   GetCombatantEntryAddress
-                movep.w d1,COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS(a0)
-                movem.l (sp)+,d1-d2/a0
-            else
                 movem.l d1-d2/d7-a0,-(sp)
                 lsl.w   #BYTE_SHIFT_COUNT,d1
                 andi.w  #BYTE_MASK,d2
@@ -302,7 +365,6 @@ SetAiSpecialMoveOrders:
                 moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
                 bsr.w   SetCombatantWord
                 movem.l (sp)+,d1-d2/d7-a0
-            endif
                 rts
 
     ; End of function SetAiSpecialMoveOrders
@@ -313,15 +375,6 @@ SetAiSpecialMoveOrders:
 
 SetAiRegion:
                 
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movem.l d1-d2/a0,-(sp)
-                lsl.b   #4,d1
-                andi.b  #$F,d2
-                or.b    d2,d1
-                bsr.w   GetCombatantEntryAddress
-                move.b  d1,COMBATANT_OFFSET_AI_REGION(a0)
-                movem.l (sp)+,d1-d2/a0
-            else
                 movem.l d1-d2/d7-a0,-(sp)
                 lsl.b   #NIBBLE_SHIFT_COUNT,d1
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
@@ -329,7 +382,6 @@ SetAiRegion:
                 moveq   #COMBATANT_OFFSET_AI_REGION,d7
                 bsr.w   SetCombatantByte
                 movem.l (sp)+,d1-d2/d7-a0
-            endif
                 rts
 
     ; End of function SetAiRegion
@@ -340,7 +392,10 @@ SetAiRegion:
 
 SetActivationBitfield:
                 
-                setSavedCombatantWord COMBATANT_OFFSET_ACTIVATION_BITFIELD
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_ACTIVATION_BITFIELD,d7
+                bsr.w   SetCombatantWord
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetActivationBitfield
@@ -351,7 +406,10 @@ SetActivationBitfield:
 
 SetEnemyIndex:
                 
-                setSavedCombatantByte COMBATANT_OFFSET_ENEMY_INDEX
+                movem.l d7-a0,-(sp)
+                moveq   #COMBATANT_OFFSET_ENEMY_INDEX,d7
+                bsr.w   SetCombatantByte
+                movem.l (sp)+,d7-a0
                 rts
 
     ; End of function SetEnemyIndex
@@ -397,7 +455,7 @@ IncreaseCurrentHp:
                 movem.l d5-a0,-(sp)
                 clr.w   d5
                 bsr.w   GetCombatantEntryAddress
-                getSavedWord (a0), d6, COMBATANT_OFFSET_HP_MAX
+                getSavedWord a0, d6, COMBATANT_OFFSET_HP_MAX
                 moveq   #COMBATANT_OFFSET_HP_CURRENT,d7
                 bsr.w   IncreaseAndClampWord
                 movem.l (sp)+,d5-a0
@@ -512,7 +570,7 @@ IncreaseBaseAgi:
                 clr.w   d5
                 moveq   #CHAR_STATCAP_AGI_BASE,d6
                 moveq   #COMBATANT_OFFSET_AGI_BASE,d7
-                bsr.w   Clamp7BitIncreasing
+                bsr.w   IncreaseAndClamp7Bits
                 movem.l (sp)+,d5-a0
                 rts
 
@@ -528,7 +586,7 @@ IncreaseCurrentAgi:
                 clr.w   d5
                 moveq   #CHAR_STATCAP_AGI_CURRENT,d6
                 moveq   #COMBATANT_OFFSET_AGI_CURRENT,d7
-                bsr.w   Clamp7BitIncreasing
+                bsr.w   IncreaseAndClamp7Bits
                 movem.l (sp)+,d5-a0
                 rts
 
@@ -631,7 +689,7 @@ DecreaseCurrentHp:
                 movem.l d5-a0,-(sp)
                 clr.w   d5
                 bsr.w   GetCombatantEntryAddress
-                getSavedWord (a0), d6, COMBATANT_OFFSET_HP_MAX
+                getSavedWord a0, d6, COMBATANT_OFFSET_HP_MAX
                 moveq   #COMBATANT_OFFSET_HP_CURRENT,d7
                 bsr.w   DecreaseAndClampWord
                 movem.l (sp)+,d5-a0
@@ -773,155 +831,4 @@ DecreaseCurrentMov:
                 rts
 
     ; End of function DecreaseCurrentMov
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-GetClassAndFullName:
-            if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
-                bsr.w   GetClass
-GetFullClassName:
-                
-                lea     table_FullClassNames,a0
-                bra.s   FindName
-            endif
-GetClassAndName:
-            if (STANDARD_BUILD=1)
-                bsr.w   GetClass
-            endif
-GetClassName:
-                
-                getPointer p_table_ClassNames, a0
-
-    ; End of function GetClassName
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: a0 = names list pointer, d1.w = name index
-; Out: a0 = pointer to name entry, d7.w = name length
-
-
-FindName:
-                
-                move.w  d0,-(sp)
-                subq.w  #1,d1
-                bmi.s   @Done           ; done if name index = 0
-                clr.w   d0
-@Loop:
-                
-                move.b  (a0)+,d0
-                adda.w  d0,a0
-                dbf     d1,@Loop
-@Done:
-                
-                clr.w   d7
-                move.b  (a0)+,d7
-                move.w  (sp)+,d0
-                rts
-
-    ; End of function FindName
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-SetGold:
-                
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                lea     (CURRENT_GOLD).l,a0
-                movep.l d1,0(a0)
-                movea.l (sp)+,a0
-            else
-                move.l  d1,((CURRENT_GOLD-$1000000)).w
-            endif
-                rts
-
-    ; End of function SetGold
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-GetGold:
-                
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                lea     (CURRENT_GOLD).l,a0
-                movep.l 0(a0),d1
-                movea.l (sp)+,a0
-            else
-                move.l  ((CURRENT_GOLD-$1000000)).w,d1
-            endif
-                rts
-
-    ; End of function GetGold
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-IncreaseGold:
-                
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  d0,-(sp)
-                move.l  d1,d0
-                bsr.s   GetGold
-                add.l   d0,d1
-            else
-                add.l   ((CURRENT_GOLD-$1000000)).w,d1
-            endif
-                bcs.s   @CapGoldAmount
-                cmpi.l  #FORCE_MAX_GOLD,d1
-                bls.s   @Continue
-@CapGoldAmount:
-                
-                move.l  #FORCE_MAX_GOLD,d1
-@Continue:
-                
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                bsr.s   SetGold
-                move.l  (sp)+,d0
-            else
-                move.l  d1,((CURRENT_GOLD-$1000000)).w
-            endif
-                rts
-
-    ; End of function IncreaseGold
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-DecreaseGold:
-                
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  d0,-(sp)
-                move.l  d1,d0
-                bsr.s   GetGold
-                sub.l   d0,d1
-                bcc.s   @Continue
-                moveq   #0,d1
-            else
-                movem.l d0,-(sp)
-                move.l  ((CURRENT_GOLD-$1000000)).w,d0
-                sub.l   d1,d0
-                bcc.s   @Continue
-                moveq   #0,d0
-            endif
-@Continue:
-                
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                bsr.s   SetGold
-                move.l  (sp)+,d0
-            else
-                move.l  d0,((CURRENT_GOLD-$1000000)).w
-                move.l  d0,d1
-                movem.l (sp)+,d0
-            endif
-                rts
-
-    ; End of function DecreaseGold
 

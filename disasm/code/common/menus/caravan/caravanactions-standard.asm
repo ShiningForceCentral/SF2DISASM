@@ -279,7 +279,7 @@ caravanDepotSubmenu_Look:
                 
 @Ring:          txt     91              ; "It's a ring.{W2}"
 @HasUseSpell:   move.w  itemIndex(a6),d1
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
                 beq.s   @NoEffect
                 txt     93              ; "It has a special effect when{N}used in battle.{W2}"
@@ -355,7 +355,7 @@ caravanDepotSubmenu_Look:
                 
                 txt     95              ; "Everybody can equip it.{W2}"
 @IsUnsellable:  move.w  itemIndex(a6),d1
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @GetSellingPrice
                 
@@ -553,7 +553,7 @@ caravanDepotSubmenu_Drop:
                 move.w  itemSlot(a6),d1
                 jsr     RemoveItemFromCaravan
                 move.w  itemIndex(a6),d1
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Continue
                 
@@ -653,7 +653,7 @@ caravanItemSubmenu_Use:
                 bsr.w   UseItemOnField
             if (FIX_FIELD_ITEM_CONSUMABLE=1)
                 ; Is item consumable?
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CONSUMABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Restart
 
@@ -858,7 +858,7 @@ caravanItemSubmenu_Drop:
                 move.w  itemSlot(a6),d1
                 jsr     DropItemBySlot
                 move.w  itemIndex(a6),d1
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Continue
                 
@@ -892,7 +892,7 @@ DisplaySpecialCaravanDescription:
                 
                 movem.l d0-d1/a0,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
-                lea     table_SpecialCaravanDescriptions(pc), a0
+                getPointer p_table_SpecialCaravanDescriptions, a0
                 
 @FindItem_Loop: cmpi.w  #-1,(a0)
                 beq.s   @Done
@@ -942,7 +942,7 @@ DisplayCaravanMessageWithPortrait:
 @AstralIsPresent:
                 
                 ; Get portrait and speech SFX for Astral's mapsprite
-                lea     table_MapspriteDialogueProperties, a0
+                getPointer p_table_MapspriteDialogueProperties, a0
                 move.w  #MAPSPRITE_ASTRAL,d0
                 
 @Loop:          cmp.w   (a0),d0                             ; loop until we find entry matching the given map sprite
@@ -987,7 +987,7 @@ PopulateGenericListWithMembersList:
                 
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                bra.s   @PopulateList
+                bra.s   @Continue
 @CheckMemberGroup:
                 
                 cmpi.w  #1,d1
@@ -995,24 +995,22 @@ PopulateGenericListWithMembersList:
                 
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-                bra.s   @PopulateList
+                bra.s   @Continue
 @ReserveMembers:
                 
                 lea     ((RESERVE_MEMBERS-$1000000)).w,a0
                 move.w  ((OTHER_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
                 
-@PopulateList:  lea     ((GENERIC_LIST-$1000000)).w,a1
+@Continue:      lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
-                bcs.w   @SkipLoop
-                
+                bra.s   @PopulateList
 @PopulateList_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,@PopulateList_Loop
+@PopulateList:  dbf     d7,@PopulateList_Loop
                 
-@SkipLoop:      movem.l (sp)+,d7-a1
+                movem.l (sp)+,d7-a1
                 rts
 
     ; End of function PopulateGenericListWithMembersList
@@ -1020,45 +1018,25 @@ PopulateGenericListWithMembersList:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Copy caravan item indexes to generic list space.
+; Copy caravan item index bytes to generic list space. The broken bit is ignored.
 
-caravanItemsByteAddress = CARAVAN_ITEMS+2
-caravanItemsNumberOffset = CARAVAN_ITEMS_NUMBER-caravanItemsByteAddress
 
 CopyCaravanItems:
                 
-            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
                 movem.l d7-a1,-(sp)
-                lea     (caravanItemsByteAddress).l,a0
-                movep.w caravanItemsNumberOffset(a0),d7   ; d7.w = caravan items number
-                move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
-                subq.w  #1,d7
-                bcs.s   @Skip
-                
+                loadSavedDataAddress CARAVAN_ITEMS+SAVED_DATA_BYTE_SIZE, a0
+                loadSavedDataAddress CARAVAN_ITEMS_NUMBER, a1
+                getSavedWord a1, d7   ; d7.w = caravan items number
                 lea     ((GENERIC_LIST-$1000000)).w,a1
-@Loop:          move.b  (a0),(a1)+
+                move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
+                bra.s   @Copy
+                
+@Copy_Loop:     move.b  (a0),(a1)+
                 addq.w  #CARAVAN_ITEM_ENTRY_SIZE,a0
-                dbf     d7,@Loop
+@Copy:          dbf     d7,@Copy_Loop
                 
 @Skip:          movem.l (sp)+,d7-a1
                 rts
-            else
-                movem.l d7-a1,-(sp)
-                move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d7
-                move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
-                subq.w  #1,d7
-                bcs.s   @Skip
-                
-                lea     ((CARAVAN_ITEMS-$1000000)).w,a0
-                lea     ((GENERIC_LIST-$1000000)).w,a1
-                
-@Loop:          addq.w  #1,a0
-                move.b  (a0)+,(a1)+
-                dbf     d7,@Loop
-                
-@Skip:          movem.l (sp)+,d7-a1
-                rts
-            endif
                 
     ; End of function CopyCaravanItems
 
@@ -1118,7 +1096,7 @@ PlayPreviousMusicAfterCurrentOne:
 IsItemUnsellable:
                 
                 movem.l d1/a0,-(sp)
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @NotUnsellable
                 

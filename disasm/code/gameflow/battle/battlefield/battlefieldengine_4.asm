@@ -176,7 +176,7 @@ GetHighestUsableSpellLevel:
                 add.w   d2,d1
                 lsl.w   #SPELLENTRY_OFFSET_LV,d1
                 add.w   d4,d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 cmp.b   SPELLDEF_OFFSET_MP_COST(a0),d3
                 bcc.w   @Break
                 dbf     d2,@Loop

@@ -84,7 +84,7 @@ objendIfMemoryMapper: macro
                 objend
             endif
         endm
-
+    
 
 ; ---------------------------------------------------------------------------
 ; Conditional INCLUDE and INCBIN
@@ -363,391 +363,266 @@ conditionalLongAddr: macro
 ; Relocated saved data to SRAM
 ; ---------------------------------------------------------------------------
     
-loadSavedDataAddress: macro
+savedDataOperand: macro address
+operand:        equs '((\address-$1000000)).w'
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                lea     (\1).l,\2
-            else
-                lea     ((\1-$1000000)).w,\2
+operand:        equs '(\address).l'
             endif
         endm
     
-checkSavedByte: macro
+loadSavedDataAddress: macro address, pointer
+                savedDataOperand \address
+                lea     \operand, \pointer
+            endm
+    
+testSavedByte: macro address
+                savedDataOperand \address
+                tst.b   \operand
+            endm
+    
+compareToSavedByte: macro immediate, address
+                savedDataOperand \address
+                cmpi.b  \immediate,\operand
+            endm
+    
+compareSavedByteTo: macro address, data
+                savedDataOperand \address
+                cmp.b   \operand,\data
+            endm
+    
+clearSavedByte: macro address
+                savedDataOperand \address
+                clr.b   \operand
+            endm
+    
+clearSavedByteWithPostIncrement: macro pointer
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-dest:           equs '(\2).l'
+                clr.b   (\pointer)
+                addq.w  #2,\pointer
             else
-dest:           equs '((\2-$1000000)).w'
-            endif
-            if (instr('\1','#')=0)
-src:            equs '\1'
-            else
-src:            substr 2,,'\1'
-            endif
-            if (\src=0)
-                tst.b   \dest
-            else
-                cmpi.b  \1,\dest
+                clr.b   (\pointer)+
             endif
         endm
     
-clearSavedByte: macro
+copySavedByte: macro address1, address2
+                savedDataOperand \address1
+operand1:       equs '\operand'
+                savedDataOperand \address2
+operand2:       equs '\operand'
+                
+                move.b  \operand1,\operand2
+            endm
+    
+getSavedByte: macro address, data
+                savedDataOperand \address
+                move.b  \operand,\data
+        endm
+    
+getSavedByteWithPostIncrement: macro pointer, data
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                clr.b   (\1).l
+                move.b  (\pointer),\data
+                addq.w  #2,\pointer
             else
-                clr.b   ((\1-$1000000)).w
+                move.b  (\pointer)+,\data
             endif
         endm
     
-clearSavedByteWithPostIncrement: macro
+getSavedByteWithPreDecrement: macro pointer, data
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                clr.b   (\1)
-                addq.w  #2,\1
+                subq.w  #2,\pointer
+                move.b  (\pointer),\data
             else
-                clr.b   (\1)+
+                move.b  -(\pointer),\data
             endif
         endm
     
-copySavedByte: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.b  (\1).l,(\2).l
-            else
-                move.b  ((\1-$1000000)).w,((\2-$1000000)).w
-            endif
-        endm
-    
-getSavedByte: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.b  (\1).l,\2
-            else
-                move.b  ((\1-$1000000)).w,\2
-            endif
-        endm
-    
-setSavedByte: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.b  \1,(\2).l
-            else
-                move.b  \1,((\2-$1000000)).w
-            endif
-        endm
-    
-setSavedByteWithPostIncrement: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.b  \1,(\2)
-                addq.w  #2,\2
-            else
-                move.b  \1,(\2)+
-            endif
-        endm
-    
-addFromSavedByte: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                add.b  (\1).l,\2
-            else
-                add.b  ((\1-$1000000)).w,\2
-            endif
-        endm
-    
-addQuickToSavedByte: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                addq.b  \1,(\2).l
-            else
-                addq.b  \1,((\2-$1000000)).w
-            endif
-        endm
-    
-subtractSavedByte: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                sub.b   (\1).l,\2
-            else
-                sub.b   ((\1-$1000000)).w,\2
-            endif
-        endm
-    
-getSavedWord: macro
+getSavedWord: macro pointer, data, offset
         if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
             if (narg>=3)
-disp:           equs '\3'
+                movep.w \offset\(\pointer),\data
             else
-disp:           equs '0'
+                movep.w 0(\pointer),\data
             endif
-                movep.w \disp\\1,\2
         else
-                move.w  \3\\1,\2
+                move.w  \offset\(\pointer),\data
         endif
     endm
     
-getSavedLong: macro
+getSavedWordWithPostIncrement: macro pointer, data, offset
+            if (narg>=3)
+                getSavedWord \pointer, \data, \offset
+            else
+                getSavedWord \pointer, \data
+            endif
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                addq.w  #4,\pointer
+            else
+                addq.w  #2,\pointer
+            endif
+        endm
+    
+getSavedLong: macro pointer, data, offset
         if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
             if (narg>=3)
-disp:           equs '\3'
+                movep.l \offset\(\pointer),\data
             else
-disp:           equs '0'
+                movep.l 0(\pointer),\data
             endif
-                movep.l \disp\\1,\2
         else
-                move.l  \3\\1,\2
+                move.l  \offset\(\pointer),\data
         endif
     endm
     
-getSavedWordWithPostIncrement: macro
+setSavedByte: macro data, address
+                savedDataOperand \address
+                move.b  \data,\operand
+            endm
+    
+setSavedByteWithPostIncrement: macro data, pointer
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                move.b  \data,(\pointer)
+                addq.w  #2,\pointer
+            else
+                move.b  \data,(\pointer)+
+            endif
+        endm
+    
+setSavedByteWithPreDecrement: macro data, pointer
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                subq.w  #2,\pointer
+                move.b  \data,(\pointer)
+            else
+                move.b  \data,-(\pointer)
+            endif
+        endm
+    
+setSavedWord: macro data, pointer, offset
         if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
             if (narg>=3)
-disp:           equs '\3'
+                movep.w \data,\offset\(\pointer)
             else
-disp:           equs '0'
+                movep.w \data,0(\pointer)
             endif
-                movep.w \disp\(\1),\2
-                addq.w  #4,\1
         else
-                move.w  (\1)+,\2
+                move.w  \data,\offset\(\pointer)
         endif
     endm
     
-setSavedWord: macro
+setSavedWordWithPostIncrement: macro data, pointer
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                setSavedWord \data, \pointer
+                addq.w  #4,\pointer
+            else
+                move.w  \data,(\pointer)+
+            endif
+        endm
+    
+setSavedLong: macro data, pointer, offset
         if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
             if (narg>=3)
-disp:           equs '\3'
+                movep.l \data,\offset\(\pointer)
             else
-disp:           equs '0'
+                movep.l \data,0(\pointer)
             endif
-                movep.w \1,\disp\\2
         else
-                move.w  \1,\3\\2
+                move.l  \data,\offset\(\pointer)
         endif
     endm
     
-setSavedLong: macro
-        if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-            if (narg>=3)
-disp:           equs '\3'
-            else
-disp:           equs '0'
-            endif
-                movep.l \1,\disp\\2
-        else
-                move.l  \1,\3\\2
-        endif
-    endm
-    
-setSavedWordWithPostIncrement: macro
+setSavedLongWithPostIncrement: macro data, pointer
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.w \1,0(\2)
-                addq.w  #4,\2
+                setSavedLong \data, \pointer
+                addq.w  #8,\pointer
             else
-                move.w  \1,(\2)+
+                move.l  \data,(\pointer)+
             endif
         endm
     
-setSavedLongWithPostIncrement: macro
+addFromSavedByte: macro address, data
+                savedDataOperand \address
+                add.b  \operand,\data
+            endm
+    
+addFromSavedByteWithPostIncrement: macro pointer, data
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                movep.l \1,0(\2)
-                addq.w  #8,\2
+                add.b   (\pointer),\data
+                addq.w  #2,\pointer
             else
-                move.l  \1,(\2)+
+                add.b   (\pointer)+,\data
             endif
         endm
     
-getSavedCombatantByte: macro
+addToSavedBytePointer: macro data, pointer
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                bsr.w   GetCombatantEntryAddress
-                clr.w   d1
-                move.b  \1(a0),d1
-                movea.l (sp)+,a0
-            else
-                movem.l d7-a0,-(sp)
-                moveq   #\1,d7
-                bsr.w   GetCombatantByte
-                movem.l (sp)+,d7-a0
+                add.w   \data,\data
             endif
+                adda.w  \data,\pointer
         endm
     
-getSavedCombatantWord: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                bsr.w   GetCombatantEntryAddress
-                movep.w \1(a0),d1
-                tst.w   d1
-                movea.l (sp)+,a0
-            else
-                movem.l d7-a0,-(sp)
-                moveq   #\1,d7
-                bsr.w   GetCombatantWord
-                movem.l (sp)+,d7-a0
-            endif
-        endm
+addQuickToSavedByte: macro immediate, address
+                savedDataOperand \address
+                addq.b  \immediate,\operand
+            endm
     
-getSavedCombatantPosition: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                bsr.w   GetCombatantEntryAddress
-                move.b  \1(a0),d1
-                ext.w   d1
-                movea.l (sp)+,a0
-            else
-                movem.l d7-a0,-(sp)
-                moveq   #\1,d7
-                bsr.w   GetCombatantByte
-                ext.w   d1
-                movem.l (sp)+,d7-a0
-            endif
-        endm
+addQuickToSavedWord: macro immediate, address
+                savedDataOperand \address
+                addq.w  \immediate,\operand
+            endm
     
-setSavedCombatantByte: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                bsr.w   GetCombatantEntryAddress
-                move.b  d1,\1(a0)
-                movea.l (sp)+,a0
-            else
-                movem.l d7-a0,-(sp)
-                moveq   #\1,d7
-                bsr.w   SetCombatantByte
-                movem.l (sp)+,d7-a0
-            endif
-        endm
+subtractSavedByte: macro address, data
+                savedDataOperand \address
+                sub.b   \operand,\data
+            endm
     
-setSavedCombatantWord: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                bsr.w   GetCombatantEntryAddress
-                movep.w d1,\1(a0)
-                movea.l (sp)+,a0
-            else
-                movem.l d7-a0,-(sp)
-                moveq   #\1,d7
-                bsr.w   SetCombatantWord
-                movem.l (sp)+,d7-a0
-            endif
-        endm
-    
-manipulateEquippedBit: macro
+
+; Items
+;
+manipulateEquippedBit: macro instruction, pointer
+equippedBit:    equs "#ITEMENTRY_BIT_EQUIPPED"
+entryoffset:    equs "ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT"
             if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
 equippedBit:    equs "#ITEMENTRY_UPPERBIT_EQUIPPED"
 entryoffset:    equs "0"
-            else
-equippedBit:    equs "#ITEMENTRY_BIT_EQUIPPED"
-entryoffset:    equs "ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT"
             endif
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                \1    \equippedBit,COMBATANT_OFFSET_ITEMS+\entryoffset\\2
+                \instruction \equippedBit,COMBATANT_OFFSET_ITEMS+\entryoffset\(\pointer)
             else
-                \1    \equippedBit,\entryoffset\\2
+                \instruction \equippedBit,\entryoffset\(\pointer)
             endif
         endm
     
-isItemEquipped: macro
-                manipulateEquippedBit btst,\1
+isItemEquipped: macro pointer
+                manipulateEquippedBit btst,\pointer
             endm
     
-equipItem: macro
-                manipulateEquippedBit bset,\1
+equipItem: macro pointer
+                manipulateEquippedBit bset,\pointer
             endm
     
-unequipItem: macro
-                manipulateEquippedBit bclr,\1
+unequipItem: macro pointer
+                manipulateEquippedBit bclr,\pointer
             endm
     
-breakItem: macro
+breakItem: macro pointer
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                bset    #ITEMENTRY_UPPERBIT_BROKEN,COMBATANT_OFFSET_ITEMS\1
+                bset    #ITEMENTRY_UPPERBIT_BROKEN,COMBATANT_OFFSET_ITEMS(\pointer)
             else
-                bset    #ITEMENTRY_UPPERBIT_BROKEN,\1
+                bset    #ITEMENTRY_UPPERBIT_BROKEN,(\pointer)
             endif
         endm
     
-repairItem: macro
+repairItem: macro pointer
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                bclr    #ITEMENTRY_UPPERBIT_BROKEN,COMBATANT_OFFSET_ITEMS\1
+                bclr    #ITEMENTRY_UPPERBIT_BROKEN,COMBATANT_OFFSET_ITEMS(\pointer)
             else
-                bclr    #ITEMENTRY_UPPERBIT_BROKEN,\1
+                bclr    #ITEMENTRY_UPPERBIT_BROKEN,(\pointer)
             endif
         endm
     
-checkCurrentMap: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                cmp.b   (CURRENT_MAP).l,\1
-            else
-                cmp.b   ((CURRENT_MAP-$1000000)).w,\1
-            endif
-        endm
-    
-checkRaftMap: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                cmp.b   (RAFT_MAP).l,\1
-            else
-                cmp.b   ((RAFT_MAP-$1000000)).w,\1
-            endif
-        endm
-    
-getBattleTurnActor: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                lea     (BATTLE_TURN_ORDER).l,a0
-                getSavedWord (a0), \1, (CURRENT_BATTLE_TURN-BATTLE_TURN_ORDER)
-                adda.w  \1,a0
-                clr.w   \1
-                move.b  (a0),\1
-            else
-                clr.w   \1
-                getSavedByte CURRENT_BATTLE_TURN, \1
-                lea     ((BATTLE_TURN_ORDER-$1000000)).w,a0
-                move.b  (a0,\1.w),\1
-            endif
-        endm
-    
-incrementBattleTurn: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                lea	    (CURRENT_BATTLE_TURN).l,a0
-                getSavedWord (a0), d0
-                addq.w  #TURN_ORDER_ENTRY_SIZE,d0
-                setSavedWord d0, (a0)
-            else
-                addq.w  #TURN_ORDER_ENTRY_SIZE,((CURRENT_BATTLE_TURN-$1000000)).w
-            endif
-        endm
-    
-resetBattleTurn: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                clr.w   d0
-                lea	    (CURRENT_BATTLE_TURN).l,a0
-                setSavedWord d0, (a0)
-            else
-                clr.w   ((\1-$1000000)).w
-            endif
-        endm
-    
-addSavedByteOffset: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                add.w   \1,\1
-            endif
-                adda.w  \1,\2
-        endm
-    
-getSavedBattleMapCoordinates: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                lea     (BATTLE_AREA_X).l,a0
-                movep.w 0(a0),\1
-                movep.w BATTLE_AREA_WIDTH-BATTLE_AREA_X(a0),\2
-                movea.l (sp)+,a0
-            else
-                move.w  ((BATTLE_AREA_X-$1000000)).w,\1
-                move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,\2
-            endif
-        endm
-    
-getSavedBattleMapDimensions: macro
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.l  a0,-(sp)
-                lea     (BATTLE_AREA_WIDTH).l,a0
-                movep.w 0(a0),\1
-                movea.l (sp)+,a0
-            else
-                move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,\1
-            endif
-        endm
-    
-appendSavedBattleTurnEntry: macro
+
+; Battle turn order
+;
+appendBattleTurnEntry: macro
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 move.b  \1,(\3)
                 move.b  \2,2(\3)
@@ -758,7 +633,25 @@ appendSavedBattleTurnEntry: macro
             endif
         endm
     
-loadSavedMithrilWeaponOrder: macro
+getBattleTurnActor: macro
+            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+                loadSavedDataAddress BATTLE_TURN_ORDER, a0
+                getSavedWord a0, \1, CURRENT_BATTLE_TURN-BATTLE_TURN_ORDER
+                adda.w  \1,a0
+                clr.w   \1
+                move.b  (a0),\1
+            else
+                clr.w   \1
+                getSavedByte CURRENT_BATTLE_TURN, \1
+                loadSavedDataAddress BATTLE_TURN_ORDER, a0
+                move.b  (a0,\1.w),\1
+            endif
+        endm
+    
+
+; Mithril
+;
+loadMithrilWeaponOrder: macro
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 movep.w 0(\2),d0
                 tst.w   d0
@@ -776,7 +669,7 @@ loadSavedMithrilWeaponOrder: macro
             endif
         endm
     
-getSavedMithrilWeaponOrder: macro
+getMithrilWeaponOrder: macro
             if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
                 movep.w 0(\1),d0
                 addq.w  #4,\1

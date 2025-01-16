@@ -29,8 +29,6 @@
                 include "code\common\scripting\entity\entityfunctions_3.asm"    ; Entity functions
                 include "code\common\scripting\map\vehiclefunctions.asm"    ; Mapscripts and functions for Caravan and Raft
                 includeIfStandard "code\common\scripting\entity\getentityportaitandspeechsfx-standard.asm"
-                includeIfStandard "data\stats\allies\allydialogproperties-standard.asm"
-                includeIfStandard "data\spritedialogproperties-standard.asm"
                 includeIfVanilla "code\common\scripting\entity\getentityportaitandspeechsfx.asm"    ; Get entity portrait and speech sfx indexes function
                 includeIfVanilla "data\spritedialogproperties.asm"    ; Sprite dialog properties
                 include "code\common\scripting\entity\entityfunctions_4.asm"    ; Entity functions
@@ -74,7 +72,7 @@
                 include "data\scripting\map\cs_end.asm"    ; End cutscene
                 include "data\scripting\map\debugscripts.asm"    ; Debugging scripts
                 include "data\battles\entries\battlecutscenesstorage.asm"
-                include "code\common\stats\items\itemfunctions_s7_0.asm"    ; Unidentified item functions
+                includeIfVanilla "code\common\stats\iteminventory.asm"    ; Item inventory management functions
                 include "data\maps\mapsetups.asm"    ; Map setups table
                 include "data\maps\mapsetupsstorage.asm"
                 alignIfVanilla $64000

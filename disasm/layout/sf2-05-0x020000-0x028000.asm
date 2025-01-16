@@ -24,12 +24,12 @@
                 include "data\stats\items\mithrilweapons.asm"    ; Mithril weapons data
                 includeIfStandard "code\common\menus\caravan\caravanactions-standard.asm"
                 includeIfVanilla "code\common\menus\caravan\caravanactions_1.asm"    ; Caravan functions
-                include "data\stats\items\specialcaravandescriptions.asm"    ; Special Caravan descriptions
+                includeIfVanilla "data\stats\items\specialcaravandescriptions.asm"    ; Special Caravan descriptions
                 includeIfVanilla "code\common\menus\caravan\displaycaravanmessagewithportrait.asm"    ; Display Caravan message with portrait function
                 includeIfVanilla "code\common\menus\caravan\caravanactions_2.asm"    ; Caravan functions
-                include "code\common\stats\items\itemactions_1.asm"    ; Item functions
-                include "data\stats\items\usableoutsidebattleitems.asm"    ; Usable outside battle items
-                include "code\common\stats\items\fielditemeffects.asm"    ; Functions to perform effects from using items on an exploration field.
+                include "code\common\menus\item\isitemusableonfield.asm"    ; Item functions
+                includeIfVanilla "data\stats\items\usableoutsidebattleitems.asm"    ; Usable outside battle items
+                include "code\common\menus\item\fielditemeffects.asm"    ; Functions to perform effects from using items on an exploration field.
                 include "code\common\menus\getplayerentityposition.asm"    ; Main menu function
                 
                 ; Battle loop (standard)

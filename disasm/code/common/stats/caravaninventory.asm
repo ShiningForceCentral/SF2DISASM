@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\stats\caravaninventoryfunctions.asm :
+; ASM FILE code\common\stats\caravaninventory.asm :
 ; 0x9A3C..0x9A9A : Caravan inventory management functions
 
 ; =============== S U B R O U T I N E =======================================

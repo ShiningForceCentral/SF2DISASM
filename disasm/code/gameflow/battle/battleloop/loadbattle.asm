@@ -65,7 +65,7 @@ LoadBattle:
                 bcs.s   @Return
                 jmp     OpenTimerWindow
             else
-                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE ; if battle 44, then special battle !
+                compareToSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE ; if battle 44, then special battle !
                 bne.s   @Return
                 jsr     j_OpenTimerWindow
             endif

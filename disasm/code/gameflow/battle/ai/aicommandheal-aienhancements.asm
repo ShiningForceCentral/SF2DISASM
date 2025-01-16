@@ -61,7 +61,7 @@ ExecuteAiCommand_Heal:
                 bne.s   @CheckHealingSpell
                 move.b  d1,itemEntry(a6)            ; enemy 0 has less than half HP, and we have a healing rain, so use it
                 move.b  d2,itemSlot(a6)
-                bsr.w   GetItemDefAddress           ; Get pointer to item D1's definition in ROM -> A0
+                bsr.w   GetItemDefinitionAddress           ; Get pointer to item D1's definition in ROM -> A0
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),spellEntry(a6)
 @GetCasterPosition:
                 
@@ -115,7 +115,7 @@ ExecuteAiCommand_Heal:
                 beq.w   @Skip               ; if no spell healing and no item healing, skip this function
                 move.b  d1,itemEntry(a6)
                 move.b  d2,itemSlot(a6)
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),spellEntry(a6)
 @CastSpell:
                 

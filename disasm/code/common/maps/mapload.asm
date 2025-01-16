@@ -1615,9 +1615,18 @@ loc_2DD0:
                 bra.s   loc_2DA6
 loc_2DD4:
                 
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 beq.s   return_2DEA
-                getSavedBattleMapCoordinates d0, d1 ; d0.w = X, Y, d1.w = width, height
+                
+                ; Get battle map coordinates : d0.w = X, Y, d1.w = width, height
+            if (STANDARD_BUILD=1)
+                loadSavedDataAddress BATTLE_AREA_X, a0
+                getSavedWord a0, d0
+                getSavedWord a0, d1, BATTLE_AREA_WIDTH-BATTLE_AREA_X
+            else
+                move.w  ((BATTLE_AREA_X-$1000000)).w,d0
+                move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d1
+            endif
                 clr.w   d2
                 bsr.w   CopyMapBlocks
 return_2DEA:
@@ -1634,7 +1643,7 @@ return_2DEA:
 
 LoadMapArea:
                 
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   @Battle
                 
                 move.w  d0,((MAP_AREA_LAYER1_STARTX-$1000000)).w
@@ -1644,7 +1653,14 @@ LoadMapArea:
                 bra.s   @Continue
 @Battle:
                 
-                getSavedBattleMapDimensions d0 ; d0.w = width, height
+                ; Get battle map dimensions : d0.w = width, height
+            if (STANDARD_BUILD=1)
+                loadSavedDataAddress BATTLE_AREA_WIDTH, a0
+                getSavedWord a0, d0
+            else
+                move.w  ((BATTLE_AREA_WIDTH-$1000000)).w,d0
+            endif
+                
                 clr.w   d1
                 move.b  d0,d1
                 subq.w  #1,d1

@@ -1,89 +1,6 @@
 
-; ASM FILE code\common\stats\updatecombatantstats-standard.asm :
+; ASM FILE code\common\stats-standard\updatecombatantstats.asm :
 ;
-
-; =============== S U B R O U T I N E =======================================
-
-; In: d0.w = ally index
-
-LearnAllKnownSpells:
-                      
-                bsr.w   CalculateEffectiveLevel
-                move.w  d1,d5
-                bsr.w   GetClass
-                
-                ; Get pointer to stat block for class d1.b
-                move.w  d0,d2
-                lsl.w   #INDEX_SHIFT_COUNT,d2
-                getPointer p_pt_AllyStats, a0
-                movea.l (a0,d2.w),a0
-@FindStatsBlockForClass_Loop:
-                
-                tst.b   (a0)
-                bmi.s   @Return         ; exit function if no matching block found
-                
-                cmp.b   (a0)+,d1
-                beq.s   @Continue
-@FindNextStatsBlock_Loop:
-                
-                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,(a0)+ ; loop until we come across an "end of spell list" control code
-                bcs.s   @FindNextStatsBlock_Loop
-                bra.s   @FindStatsBlockForClass_Loop
-@Continue:
-                
-                lea     ALLYSTATS_OFFSET_SPELL_LIST_MINUS_ONE(a0),a0
-@FindAllLearnableSpells_Loop:
-                
-                bsr.s   FindNextLearnableSpell
-                tst.w   d2
-                bne.s   @Next
-                moveq   #0,d2
-@Next:          
-                
-                bpl.s   @FindAllLearnableSpells_Loop
-@Return:
-                
-                rts
-
-    ; End of function LearnAllKnownSpells
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: a0 = pointer to ally spell list entry
-;     d0.w = ally index
-;     d5.w = current level
-;
-; Out: d2.w = 0: successfully learned spell
-;             1: failure : same or higher level spell already known
-;             2: failure : all spell slots already occupied
-;            -1: current level is too low, or end of spell list has been reached
-
-                module
-@GetFirstSpellList:
-                
-                move.w  d0,d2
-                lsl.w   #INDEX_SHIFT_COUNT,d2
-                movea.l (p_pt_AllyStats).l,a0
-                movea.l (a0,d2.w),a0
-                lea     ALLYSTATS_OFFSET_SPELL_LIST(a0),a0
-FindNextLearnableSpell:
-                
-                move.b  (a0)+,d2            ; d2 = level which spell is learned at
-                move.b  (a0)+,d1            ; d1 = spell index
-                cmp.b   d2,d5
-                bhs.w   LearnSpell
-                
-                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,d2
-                beq.s   @GetFirstSpellList
-                
-                moveq   #-1,d2
-                rts
-                
-                modend
-                
-    ; End of function FindNextLearnableSpell
-
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -124,15 +41,15 @@ UpdateCombatantStats:
                 move.b  COMBATANT_OFFSET_AGI_BASE(a2),COMBATANT_OFFSET_AGI_CURRENT(a2)
                 move.b  COMBATANT_OFFSET_MOV_BASE(a2),COMBATANT_OFFSET_MOV_CURRENT(a2)
                 move.b  COMBATANT_OFFSET_PROWESS_BASE(a2),COMBATANT_OFFSET_PROWESS_CURRENT(a2)
-                getSavedWord (a2), d1, COMBATANT_OFFSET_RESIST_BASE
-                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT
+                getSavedWord a2, d1, COMBATANT_OFFSET_RESIST_BASE
+                setSavedWord d1, a2, COMBATANT_OFFSET_RESIST_CURRENT
                 
                 ; Unlearn all spells
                 move.l  #LONGWORD_SPELLS_INITVALUE,d1
-                setSavedLong d1, (a2), COMBATANT_OFFSET_SPELLS
+                setSavedLong d1, a2, COMBATANT_OFFSET_SPELLS
                 
                 ; Get all status effects except Curse
-                getSavedWord (a2), d3, COMBATANT_OFFSET_STATUSEFFECTS ; Get Status Effects -> d3.w
+                getSavedWord a2, d3, COMBATANT_OFFSET_STATUSEFFECTS ; Get Status Effects -> d3.w
                 andi.w  #($FFFF-STATUSEFFECT_CURSE),d3
                 
                 ; Relearn all spells, and initialize movetype while preserving current AI commandset
@@ -156,7 +73,7 @@ UpdateCombatantStats:
                 getPointer p_table_EnemyDefinitions, a0
                 adda.w  d1,a0
                 move.l  ENEMYDEF_OFFSET_SPELLS(a0),d1
-                setSavedLong d1, (a2), COMBATANT_OFFSET_SPELLS
+                setSavedLong d1, a2, COMBATANT_OFFSET_SPELLS
                 move.b  ENEMYDEF_OFFSET_MOVETYPE(a0),d1
 @Continue:
                 ; Set initial movetype as current
@@ -185,7 +102,7 @@ UpdateCombatantStats:
                 
                 ; Apply status effects on stats
                 bsr.s   ApplyStatusEffectsOnStats
-                setSavedWord d3, (a2), COMBATANT_OFFSET_STATUSEFFECTS ; d3.w -> Set Status Effects
+                setSavedWord d3, a2, COMBATANT_OFFSET_STATUSEFFECTS ; d3.w -> Set Status Effects
                 movem.l (sp)+,d0-a2
                 rts
 
@@ -250,7 +167,7 @@ ApplyStatusEffectsOnStats:
 
 ApplyItemOnStats:
                 
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 tst.b   d0
                 bmi.s   @Enemy
                 
@@ -337,7 +254,7 @@ pt_EquipEffectFunctions:
                 dc.l equipEffect_SetFireResistance
                 dc.l equipEffect_SetStatusResistance
                 dc.l equipEffect_SetStatus
-                dc.l equipEffect_SetMoveType
+                dc.l equipEffect_SetMoveTypeAndAiCommandset
                 dc.l LearnSpell
                 dc.l equipEffect_UnlearnAllSpells
 
@@ -594,7 +511,7 @@ equipEffect_ModifyResistance:
 @Loop:
                 
                 lsl.w   #2,d4
-                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                getSavedWord a2, d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
                 move.w  d1,d3
                 move.w  d7,d5
                 add.w   d5,d5
@@ -623,7 +540,7 @@ equipEffect_ModifyResistance:
                 or.w    d2,d4
                 dbf     d7,@Loop
                 
-                setSavedWord d4, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d4.w -> Set Current Resistance
+                setSavedWord d4, a2, COMBATANT_OFFSET_RESIST_CURRENT ; d4.w -> Set Current Resistance
                 rts
 
 
@@ -678,10 +595,10 @@ equipEffect_ModifyStatusResistance:
 equipEffect_SetWindResistance:
                 
                 andi.w  #MODIFY_WIND3,d1
-                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                getSavedWord a2, d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
                 andi.w  #($FFFF-MODIFY_WIND3),d2
                 or.w    d2,d1
-                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
+                setSavedWord d1, a2, COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
                 rts
 
     ; End of function equipEffect_SetWindResistance
@@ -695,10 +612,10 @@ equipEffect_SetLightningResistance:
                 
                 lsl.w   #SPELLELEMENT_LIGHTNING,d1
                 andi.w  #MODIFY_LIGHTNING3,d1
-                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                getSavedWord a2, d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
                 andi.w  #($FFFF-MODIFY_LIGHTNING3),d2
                 or.w    d2,d1
-                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
+                setSavedWord d1, a2, COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
                 rts
 
     ; End of function equipEffect_SetLightningResistance
@@ -712,10 +629,10 @@ equipEffect_SetIceResistance:
                 
                 lsl.w   #SPELLELEMENT_ICE,d1
                 andi.w  #MODIFY_ICE3,d1
-                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                getSavedWord a2, d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
                 andi.w  #($FFFF-MODIFY_ICE3),d2
                 or.w    d2,d1
-                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
+                setSavedWord d1, a2, COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
                 rts
 
     ; End of function equipEffect_SetIceResistance
@@ -729,10 +646,10 @@ equipEffect_SetFireResistance:
 
                 lsl.w   #SPELLELEMENT_FIRE,d1
                 andi.w  #MODIFY_FIRE3,d1
-                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                getSavedWord a2, d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
                 andi.w  #($FFFF-MODIFY_FIRE3),d2
                 or.w    d2,d1
-                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
+                setSavedWord d1, a2, COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
                 rts
 
     ; End of function equipEffect_SetFireResistance
@@ -746,10 +663,10 @@ equipEffect_SetStatusResistance:
                 
                 rol.w   #(16-SPELLELEMENT_STATUS),d1
                 andi.w  #MODIFY_STATUS3,d1
-                getSavedWord (a2), d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
+                getSavedWord a2, d2, COMBATANT_OFFSET_RESIST_CURRENT ; Get Current Resistance -> d2.w
                 andi.w  #($FFFF-MODIFY_STATUS3),d2
                 or.w    d2,d1
-                setSavedWord d1, (a2), COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
+                setSavedWord d1, a2, COMBATANT_OFFSET_RESIST_CURRENT ; d1.w -> Set Current Resistance
                 rts
 
     ; End of function equipEffect_SetStatusResistance
@@ -769,7 +686,7 @@ equipEffect_SetStatus:
 
 ; =============== S U B R O U T I N E =======================================
 
-equipEffect_SetMoveType:
+equipEffect_SetMoveTypeAndAiCommandset:
                 
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 lsl.b   #NIBBLE_SHIFT_COUNT,d1
@@ -779,7 +696,7 @@ equipEffect_SetMoveType:
                 move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI(a2)
                 rts
 
-    ; End of function equipEffect_SetMoveType
+    ; End of function equipEffect_SetMoveTypeAndAiCommandset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -788,7 +705,7 @@ equipEffect_UnlearnAllSpells:
                 
                 ; Unlearn all spells
                 move.l  #LONGWORD_SPELLS_INITVALUE,d1
-                setSavedLong d1, (a2), COMBATANT_OFFSET_SPELLS
+                setSavedLong d1, a2, COMBATANT_OFFSET_SPELLS
                 rts
 
     ; End of function equipEffect_UnlearnAllSpells
