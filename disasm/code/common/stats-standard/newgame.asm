@@ -121,20 +121,17 @@ InitializeAllyCombatantEntry:
 
 LoadAllyClassData:
                 
-                movem.l d0-d1/a0-a1,-(sp)
+                movem.l d0/a0-a1,-(sp)
+                bsr.s   GetClassDefinitionAddress
                 mulu.w  #COMBATANT_DATA_ENTRY_SIZE,d0
                 loadSavedDataAddress COMBATANT_DATA, a1
                 adda.w  d0,a1
-                getPointer p_table_ClassDefinitions, a0
-                andi.w  #CLASS_MASK_INDEX,d1
-                mulu.w  #CLASSDEF_ENTRY_SIZE,d1
-                adda.w  d1,a0
                 move.b  (a0)+,COMBATANT_OFFSET_MOV_BASE(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_MOVETYPE_AND_AI(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_PROWESS_BASE(a1)
-                movem.l (sp)+,d0-d1/a0-a1
+                movem.l (sp)+,d0/a0-a1
                 rts
 
     ; End of function LoadAllyClassData
@@ -142,15 +139,56 @@ LoadAllyClassData:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Out: a0 = pointer to definition for class d1
+
+
+GetClassDefinitionAddress:
+                
+                move.l  d1,-(sp)
+                andi.w  #CLASS_MASK_INDEX,d1
+                mulu.w  #CLASSDEF_ENTRY_SIZE,d1
+                getPointer p_table_ClassDefinitions, a0
+                adda.w  d1,a0
+                move.l  (sp)+,d1
+                rts
+
+    ; End of function GetClassDefinitionAddress
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = ally index, d1.w = new class, d2.w = current class
+
 
 Promote:
                 
-                move.w  d1,-(sp)
-                bsr.w   GetClass        
+                bsr.w   SetClass
+            if (MODIFY_MOV_STAT_ON_PROMOTION=1)
+                ; Calculate difference between current and new class MOV stats
+                bsr.s   GetClassDefinitionAddress
+                move.w  d2,d1
+                move.b  (a0),d2
+                bsr.s   GetClassDefinitionAddress
+                move.b  (a0),d1
+                sub.b   d2,d1
+                beq.s   @Continue
+                blt.s   @Increase
+                
+                bsr.w   DecreaseBaseMov ; modify the character's base MOV
+                bra.s   @Continue
+@Increase:
+                
+                neg.b   d1
+                bsr.w   IncreaseBaseMov
+@Continue:
+                ; Get modified base MOV and reapply it after loading class data
+                bsr.w   GetBaseMov
                 bsr.s   LoadAllyClassData
-                bsr.w   UpdateCombatantStats
-                move.w  (sp)+,d1
-                rts
+                bsr.w   SetBaseMov
+            else
+                bsr.s   LoadAllyClassData
+            endif
+                bra.w   UpdateCombatantStats
 
     ; End of function Promote
 

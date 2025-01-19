@@ -74,6 +74,7 @@ CAPITALIZED_CHARACTER_NAMES:        equ 1       ; Capitalize allies and enemies 
 CARAVAN_IN_TOWER:                   equ 1       ; Add access to Caravan before tower climb battle.
 CUTSCENE_PROTECTION:                equ 1       ; Prevent game from freezing if dead character is needed for scene after leader death (as Slade for battle 5.)
 MINIATURES_SHOP:                    equ 1       ; Place a shopworker on the desktop and floor of the Miniatures Room.
+MODIFY_MOV_STAT_ON_PROMOTION:       equ 1       ; Modify a character's MOV stat when promoting based on the difference between the current and the new class data instead of overwriting it (and losing increases from the Running Pimento in the process.)
 NO_AI_JARO:                         equ 0       ; 
 NO_AI_PETER:                        equ 0       ; 
 NO_DARKNESS_IN_CAVES:               equ 0       ; The darkness gimmick in caves is disabled.

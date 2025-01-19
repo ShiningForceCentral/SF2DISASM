@@ -473,9 +473,9 @@ ChurchMenu:
                 txt     140             ; "Now, let me conduct the{N}rite.{D1}  The light blesses...{N}{D1}{CLASS} {NAME}...{W2}{N}with a class of {CLASS}!{W2}"
                 move.w  member(a6),d0
                 move.w  newClass(a6),d1
-                jsr     j_SetClass
-                jsr     j_Promote
             if (STANDARD_BUILD=1)
+                move.w  currentClass(a6),d2
+                jsr     Promote
                 lea     table_LoseAllSpellsClasses(pc), a0
                 move.w  newClass(a6),d1
                 moveq   #1,d2
@@ -483,6 +483,8 @@ ChurchMenu:
                 bcs.s   @CheckNewWeaponTypeClasses
                 move.b  (a0),d1         ; d1.w = replacement spell entry
             else
+                jsr     j_SetClass
+                jsr     j_Promote
                 cmpi.w  #CLASS_SORC,newClass(a6)
                 bne.s   @CheckNewWeaponTypeClasses
             endif
