@@ -1107,8 +1107,15 @@ DEALS_ITEMS_COUNTER: equ (dealsItemsByteSize*2)-1
 ; ---------------------------------------------------------------------------
 
 ; enum Blacksmith
+
+maxBlacksmithOrdersNumber = 4
+
+    if (STANDARD_BUILD&SAVED_DATA_EXPANSION=1)
+maxBlacksmithOrdersNumber = 16
+    endif
+
 BLACKSMITH_ORDERS_COUNTER: equ BLACKSMITH_MAX_ORDERS_NUMBER-1
-BLACKSMITH_MAX_ORDERS_NUMBER: equ 4 ; ordered mithril weapon slots in RAM
+BLACKSMITH_MAX_ORDERS_NUMBER: equ maxBlacksmithOrdersNumber ; ordered mithril weapon slots in RAM
 BLACKSMITH_ORDER_COST: equ 5000
 
 ; ---------------------------------------------------------------------------
