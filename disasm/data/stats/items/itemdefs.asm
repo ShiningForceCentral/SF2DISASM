@@ -35,7 +35,7 @@ table_ItemDefinitions:
 ;       UNDEFINED2,             0       ; no effect
 ;       INCREASE_ATT,           0-200   ; (vanilla stat cap)
 ;       INCREASE_DEF,           ...
-;       INCREASE_AGI,
+;       INCREASE_AGI,           0-127
 ;       INCREASE_MOV,
 ;       INCREASE_CRITICAL,      0-3     ; prowess setting chances: 0 = 1/32, 1 = 1/16, 2 = 1/8, 3 = 1/4
 ;       INCREASE_DOUBLE,        ...
@@ -53,6 +53,8 @@ table_ItemDefinitions:
 ;       SET_DEF,
 ;       SET_AGI,
 ;       SET_MOV,
+;       SET_DOUBLE_TURN_ON,     -1      ; set the double turn bit while preserving current AGI
+;       SET_DOUBLE_TURN_OFF,    -1      ; clear the double turn bit while preserving current AGI
 ;       SET_CRITICAL_150,       -1      ; set the strong critical bit while preserving current chance
 ;       SET_CRITICAL_125,       -1      ; clear the strong critical bit while preserving current chance
 ;       SET_CRITICAL,           @125_1in32/@150_1in4/@stun_1in4/...

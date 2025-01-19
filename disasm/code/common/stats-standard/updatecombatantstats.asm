@@ -238,6 +238,8 @@ pt_EquipEffectFunctions:
                 dc.l SetCurrentDef
                 dc.l SetCurrentAgi
                 dc.l SetCurrentMov
+                dc.l equipEffect_SetDoubleTurnOn
+                dc.l equipEffect_SetDoubleTurnOff
             if (FIX_CRITICAL_HIT_DEFINITIONS=1)
                 dc.l equipEffect_SetCritical150
                 dc.l equipEffect_SetCritical125
@@ -254,7 +256,7 @@ pt_EquipEffectFunctions:
                 dc.l equipEffect_SetFireResistance
                 dc.l equipEffect_SetStatusResistance
                 dc.l equipEffect_SetStatus
-                dc.l equipEffect_SetMoveTypeAndAiCommandset
+                dc.l equipEffect_SetMoveType
                 dc.l LearnSpell
                 dc.l equipEffect_UnlearnAllSpells
 
@@ -398,6 +400,32 @@ equipEffect_IncreaseCounterAttackProwess:
                 rts
                 
     ; End of function equipEffect_IncreaseCounterAttackProwess
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+equipEffect_SetDoubleTurnOn:
+                
+                move.b  COMBATANT_OFFSET_AGI_CURRENT(a2),d1
+                ori.b   #TWO_TURN_THRESHOLD,d1
+                move.b  d1,COMBATANT_OFFSET_AGI_CURRENT(a2)
+                rts
+
+    ; End of function SetDoubleTurnOn
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+equipEffect_SetDoubleTurnOff:
+                
+                move.b  COMBATANT_OFFSET_AGI_CURRENT(a2),d1
+                andi.b  #TURN_AGILITY_MASK,d1
+                move.b  d1,COMBATANT_OFFSET_AGI_CURRENT(a2)
+                rts
+
+    ; End of function SetDoubleTurnOn
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -686,7 +714,7 @@ equipEffect_SetStatus:
 
 ; =============== S U B R O U T I N E =======================================
 
-equipEffect_SetMoveTypeAndAiCommandset:
+equipEffect_SetMoveType:
                 
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 lsl.b   #NIBBLE_SHIFT_COUNT,d1
@@ -696,7 +724,7 @@ equipEffect_SetMoveTypeAndAiCommandset:
                 move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI(a2)
                 rts
 
-    ; End of function equipEffect_SetMoveTypeAndAiCommandset
+    ; End of function equipEffect_SetMoveType
 
 
 ; =============== S U B R O U T I N E =======================================
