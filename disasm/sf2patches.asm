@@ -122,6 +122,12 @@ EXTENDED_BATTLE_TURN_UPDATE:        equ 1       ; Trigger regions, activate AI, 
                                                 ; Also, partially regenerates the turn order table after each turn for combatants waiting to act in order for the BOOST and SLOW spells to have an impact on the current round.
 
 
+; SF1 mechanics
+SF1_LEVELUP:                        equ 0       ; Reproduces the stat gain calculations from SF1 using SF2 ally stat blocks and growthcurves, with modified parameters to better suit SF2's higher growth values.
+SF1_LEVELUP_RNG_CAP:                equ 8       ; Randomization range = stat target value ± (stat target value / 8), capped to SF1_LEVELUP_RNG_CAP. Vanilla SF1 default = 4
+LEARN_SPELLS_BASED_ON_TOTAL_LEVEL:  equ 1       ; Considers promoted at level when learning spells from the first list (i.e., the base class's.)
+
+
 ; Menu enhancements
 ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Reads values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
 ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 1       ; 0 = OFF, 1 = small icons in top right corner of the K/D window, 2 = no display.
@@ -163,10 +169,10 @@ EXPANDED_ITEMS_AND_SPELLS:  equ 1       ; Expand number of items from 127 to 255
 EXPANDED_MAPSPRITES:        equ 1       ; Store mapsprite index in word-sized structure allowing 65k+ unique sprites.
 
 
-; ROM expansions
+; Hardware expansions
 ROM_EXPANSION:              equ 1       ; 0 = 2 MB ROM, 1 = 4 MB ROM (default), 2 = 6 MB ROM
-SRAM_EXPANSION:             equ 1       ; Expand SRAM from 8KB to 32KB.
-SAVED_DATA_EXPANSION:       equ 1       ; Relocate currently loaded saved data from system RAM to cartridge SaveRAM.
+SRAM_EXPANSION:             equ 1       ; Expands cartridge SaveRAM from 8KB to 32KB. (8-bit)
+SAVED_DATA_EXPANSION:       equ 1       ; Expands the save file size.
 
 ; If standard build, and either ROM_EXPANSION or EXPANDED_ITEMS_AND_SPELLS are enabled, build an expanded ROM.
 expandedRom = 0
@@ -186,16 +192,23 @@ memoryMapper = 1
 MEMORY_MAPPER: equ memoryMapper
 SSF_SYSTEM_ID: equ 0    ; Put "SEGA SSF" string in ROM header to activate memory mapper on Mega EverDrive cartridges.
 
-; If standard build, and either SRAM_EXPANSION, SAVED_DATA_EXPANSION, or EXPANDED_ITEMS_AND_SPELLS are enabled, expand SRAM.
+; If standard build, and either SAVED_DATA_EXPANSION, SF1_LEVELUP, or LEARN_SPELLS_BASED_ON_TOTAL_LEVEL are enabled, expand saved data.
+expandedSavedData = 0
+    if (STANDARD_BUILD&(SAVED_DATA_EXPANSION|SF1_LEVELUP|LEARN_SPELLS_BASED_ON_TOTAL_LEVEL)=1)
+expandedSavedData = 1
+    endif
+EXPANDED_SAVED_DATA: equ expandedSavedData
+
+; If standard build, and either SRAM_EXPANSION, EXPANDED_SAVED_DATA, or EXPANDED_ITEMS_AND_SPELLS are enabled, expand SRAM.
 expandedSram = 0
-    if (STANDARD_BUILD&(SRAM_EXPANSION!SAVED_DATA_EXPANSION!EXPANDED_ITEMS_AND_SPELLS)=1)
+    if (STANDARD_BUILD&(SRAM_EXPANSION!EXPANDED_SAVED_DATA!EXPANDED_ITEMS_AND_SPELLS)=1)
 expandedSram = 1
     endif
 EXPANDED_SRAM: equ expandedSram
 
-; If standard build, and SAVED_DATA_EXPANSION is enabled, relocate saved data to cartridge SaveRAM.
+; If standard build, and both EXPANDED_SAVED_DATA and EXPANDED_SRAM are enabled, relocate saved data to cartridge SaveRAM.
 relocatedSavedData = 0
-    if (STANDARD_BUILD&SAVED_DATA_EXPANSION=1)
+    if (STANDARD_BUILD&(EXPANDED_SAVED_DATA&EXPANDED_SRAM)=1)
 relocatedSavedData = 1
     endif
 RELOCATED_SAVED_DATA_TO_SRAM: equ relocatedSavedData

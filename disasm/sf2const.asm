@@ -714,7 +714,10 @@ byte_FFE29E: equ $FFE29E
 byte_FFE31C: equ $FFE31C
 
 ; Start of Saved Data
-COMBATANT_DATA:          equ savedDataStart+SAVED_DATA_OFFSET_COMBATANT_DATA
+COMBATANT_DATA:             equ savedDataStart+SAVED_DATA_OFFSET_COMBATANT_DATA
+    if (STANDARD_BUILD&EXPANDED_SAVED_DATA=1)
+PROMOTED_AT_LEVELS:         equ savedDataStart+SAVED_DATA_OFFSET_PROMOTED_AT_LEVELS
+    endif
 CURRENT_GOLD:               equ savedDataStart+SAVED_DATA_OFFSET_CURRENT_GOLD
 DEALS_ITEMS:                equ savedDataStart+SAVED_DATA_OFFSET_DEALS_ITEMS ; amount of each item in the deals section (stacked 2 items to a byte, 4 bits per item, max 0xF amt of each item)
 CARAVAN_ITEMS_NUMBER:       equ savedDataStart+SAVED_DATA_OFFSET_CARAVAN_ITEMS_NUMBER ; number of items in caravan

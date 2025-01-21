@@ -1,6 +1,6 @@
 
-; ASM FILE code\common\stats-standard\levelup.asm :
-; Level Up functions
+; ASM FILE code\common\stats-standard\levelup-sf1.asm :
+; Level Up functions reproducing the stat gain calculations from SF1 using SF2 data
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -82,7 +82,9 @@ FastLevelUp:
                 bra.w   @Done
 @CalculateStatGains:
                 
-                ; Vanilla stat gain calculations
+                ; SF1 stat gain calculations, adapted to SF2 data formats with modified parameters.
+                ; In comparison to SF1, this implementation slows the rate at which the randomization range increases
+                ;  down by half, and doubles the cap to better suit SF2's higher growth values.
                 ;
                 ; In: d5.w = current level
                 lea     (LEVELUP_ARGUMENTS).l,a1
@@ -92,38 +94,48 @@ FastLevelUp:
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
+                clr.w   d6              ; d6.w = ally stat growth entry index
                 bsr.w   GetMaxHp
-                bsr.w   CalculateStatGain
-                move.b  d1,1(a1)
-                bsr.w   IncreaseMaxHp
+                bsr.w   CalculateStatGain ; -> d1.w = stat gain value, d2.w = current stat value
+                bsr.w   IncreaseMaxHp   ; -> d1.w = stat value after increase
+                sub.w   d2,d1
+                move.b  d1,1(a1)        ; accurately display gain value in case stat cap was reached
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
+                addq.w  #1,d6
                 bsr.w   GetMaxMp
                 bsr.s   CalculateStatGain
-                move.b  d1,2(a1)
                 bsr.w   IncreaseMaxMp
+                sub.w   d2,d1
+                move.b  d1,2(a1)
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
+                addq.w  #1,d6
                 bsr.w   GetBaseAtt
                 bsr.s   CalculateStatGain
-                move.b  d1,3(a1)
                 bsr.w   IncreaseBaseAtt
+                sub.w   d2,d1
+                move.b  d1,3(a1)
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
+                addq.w  #1,d6
                 bsr.w   GetBaseDef
                 bsr.s   CalculateStatGain
-                move.b  d1,4(a1)
                 bsr.w   IncreaseBaseDef
+                sub.w   d2,d1
+                move.b  d1,4(a1)
                 move.b  (a0)+,d2
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
+                addq.w  #1,d6
                 bsr.w   GetBaseAgi
                 bsr.s   CalculateStatGain
-                move.b  d1,5(a1)
                 bsr.w   IncreaseBaseAgi
+                sub.w   d2,d1
+                move.b  d1,5(a1)
                 
                 ; Increase level
                 addq.w  #1,d5
@@ -159,8 +171,9 @@ FastLevelUp:
 ;     d3.w = starting value
 ;     d4.w = projected value
 ;     d5.w = current level
+;     d6.w = stat index (hp, mp, att, def, agi)
 ; 
-; Out: d1.w = stat gain value
+; Out: d1.w = stat gain value, d2.w = current stat value
 
 
 CalculateStatGain:
@@ -172,63 +185,171 @@ CalculateStatGain:
                 tst.b   d2
                 bne.s   @CheckProjectionLevel ; keep going if curve type other than None
                 
-@Exit:          clr.w   d1              ; otherwise, stat gain value = 0
+@Exit:          move.w  d1,d2
+                clr.w   d1              ; otherwise, stat gain value = 0
                 rts
-                
 @CheckProjectionLevel:
                 
-                movem.l d0/d2-a0,-(sp)
-                movem.w d1-d5,-(sp)     ; -> push function arguments
-                cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d5 ; If current level within projection
-                blt.s   @CalculateGrowthPortion ;  ...keep going.
+                movem.l d0/d3-a0,-(sp)
+                cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d5
+                blt.s   @Continue       ; keep going if current level is within projection
                 
-                move.w  #256,d0         ; assume 100% of projected stats reached
-                move.w  #384,d4         ; out of growth data, so assume 1.5
-                bra.s   @RandomizeStatGain
-@CalculateGrowthPortion:
+                move.w  d1,d2           ; set target stat to current value
+                moveq   #4,d6           ; get random number in the range 0-3
+                jsr     (GenerateRandomNumber).w
+                bne.s   @CalculateGain
+                
+                addq.w  #1,d2           ; if zero add one to target (i.e., 1/4 chance of increasing target by 1)
+                bra.s   @CalculateGain
+                
+@Continue:      ; Calculate stat d6.w increase amount given current value d1.w and level d5.w -> d2.w
+                bsr.s   CalculateStatTargetValue
+                
+                ; Randomization range = stat target value ± (stat target value / 8), capped to SF1_LEVELUP_RNG_CAP
+                moveq   #0,d6
+                move.w  d2,d6
+                cmpi.w  #(SF1_LEVELUP_RNG_CAP-1)*8,d6 ; (SF1_LEVELUP_RNG_CAP - 1) * 8 = stat value threshold where randomization range stops scaling
+                bls.s   @Randomize
+                
+                moveq   #(SF1_LEVELUP_RNG_CAP-1)*8,d6 ; minus 1 because the last point is considered when making final adjustments
+                
+@Randomize:     add.w   d2,d2           ; multiply stat target value by 8
+                add.w   d2,d2
+                add.w   d2,d2
+                
+                addq.w  #1,d6
+                jsr     (GenerateRandomNumber).w ; add a random number to target value
+                add.w   d7,d2
+                jsr     (GenerateRandomNumber).w ; subtract a new random number in the same range to approximate a bell curve
+                sub.w   d7,d2
+                swap    d2              ; clear upper word
+                clr.w   d2
+                swap    d2
+                divu.w  #8,d2           ; divide randomized stat value by 8
+                
+                ; Finish with making small adjustments that mostly impact the first few levels
+                ;  when stat values under 8 are still common.
+                ;
+                ; Generally, this also makes it even less likely to land on either ends of the bell curve.
+                ;
+                move.l  d2,d3
+                swap    d3              ; get remainder of previous division in the lower word position
+                beq.s   @CheckCurrentValue
+                
+                ; Add 1 point with chance = remainder / 8
+                moveq   #8,d6
+                jsr     (GenerateRandomNumber).w
+                cmp.w   d3,d7
+                bhs.s   @CheckCurrentValue
+                
+                addq.w  #1,d2
+                
+@Subtract:      ; Subtract 1 point with chance = (8 - remainder) / 8
+                subq.w  #8,d3
+                neg.w   d3
+                jsr     (GenerateRandomNumber).w
+                cmp.w   d3,d7
+                bhs.s   @CheckCurrentValue
+                
+                subq.w  #1,d2
+@CheckCurrentValue:
+                
+                cmp.w   d1,d2           ; keep highest of current and target
+                bge.s   @CalculateGain
+                
+                move.w  d1,d2
+@CalculateGain: sub.w   d1,d2
+                exg     d1,d2           ; return stat gain value -> d1.w, and current stat value -> d2.w
+                movem.l (sp)+,d0/d3-a0
+                rts
+
+    ; End of function CalculateStatGain
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Calculate total growth for stat d6.w -> d2.w
+;
+; In: d3.w = starting value, d4.w = projected value, d5.w = current level
+
+
+CalculateStatTargetValue:
+                
+                movem.l d1/d3-d4/a0,-(sp)
+                sub.w   d3,d4           ; d4.w = stat d6.w growth value
+                bsr.w   GetPromotedAtLevel ; -> d1.w
+                beq.s   @Skip           ; skip if not promoted
+                
+                bsr.s   CalculateStatInitialValue ; -> d3.w = new starting value
+@Skip:          move.w  d5,d1           ; d1.w = current level
+                bsr.s   CalculateGrowthPortion
+                add.w   d3,d2           ; add starting value to growth portion
+                movem.l (sp)+,d1/d3-d4/a0
+                rts
+
+    ; End of function CalculateStatTargetValue
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Calculate stat d6.w initial value for ally d0.w, factoring in promoted at level d1.w -> d3.w
+
+CalculateStatInitialValue:
+                
+                movem.l d2/d4-d5/a0,-(sp)
+                
+                ; Get pointer to ally d0.b's first stat block -> a0
+                move.w  d0,d2
+                lsl.w   #INDEX_SHIFT_COUNT,d2
+                getPointer p_pt_AllyStats, a0
+                movea.l (a0,d2.w),a0
+                
+                move.w  d6,d5
+                add.w   d5,d5
+                add.w   d6,d5           ; stat growth entry size = 3 bytes
+                addq.w  #1,d5           ; plus offset to start of growth data
+                adda.l  d5,a0
+                
+                moveq   #0,d2
+                moveq   #0,d3
+                moveq   #0,d4
+                move.b  (a0)+,d2        ; d2.w = stat d6.w unpromoted growth curve
+                move.b  (a0)+,d3        ; d3.w = stat d6.w unpromoted starting value
+                move.b  (a0),d4
+                sub.w   d3,d4           ; d4.w = stat d6.w unpromoted growth value
+                bsr.s   CalculateGrowthPortion
+                add.w   d2,d3           ; add growth portion to unpromoted starting value
+                movem.l (sp)+,d2/d4-d5/a0
+                rts
+
+    ; End of function CalculateStatInitialValue
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Calculate growth portion value based on current level d1.w, growthcurve d2.w, and growth value d4.w -> d2.w
+
+
+CalculateGrowthPortion:
                 
                 andi.w  #GROWTHCURVE_MASK_INDEX,d2
                 subq.w  #1,d2
                 mulu.w  #GROWTHCURVE_DEF_SIZE,d2
                 getPointer p_table_StatGrowthCurves, a0
                 adda.w  d2,a0
-                move.w  d5,d2
+                move.w  d1,d2
                 subq.w  #1,d2           ; e.g., if leveling up to 2 (still currently level 1), get first entry
                 add.w   d2,d2
                 add.w   d2,d2
                 adda.w  d2,a0
-                move.w  (a0)+,d0        ; D0 = curve_param_1 for current level
-                move.w  (a0)+,d7        ; D7 = curve_param_2 for current level
-                sub.w   d3,d4           ; D4 = projected growth (diff between initial and final)
-                mulu.w  d7,d4           ; get portion of growth for current level
-@RandomizeStatGain:
+                move.w  (a0),d2         ; d0.w = curve_param_1 for current level (portion of growth expected to have been gained by this level)
                 
-                move.w  #128,d6         ; do 2 randoms instead of 1 to approx. bell curve
-                jsr     (GenerateRandomNumber).w
-                add.w   d7,d4           ; add 0 to 0.5 to random value
-                jsr     (GenerateRandomNumber).w
-                sub.w   d7,d4           ; subtract 0 to 0.5 from random value
-                addi.w  #128,d4         ; add 0.5 so the random gain rounds properly when LSRing
-                lsr.w   #BYTE_SHIFT_COUNT,d4
-                move.w  d4,d6           ; D6 = randomized stat gain
-                movem.w (sp)+,d1-d5     ; D1-D5 <- pull function arguments
-                sub.w   d3,d4           ; D4 = projected growth (diff between initial and final)
-                mulu.w  d4,d0           ; get expected current stat based on growth/level (last byte is decimals)
-                addi.w  #128,d0         ; add 0.5 so the expected stat rounds properly when LSRing
-                lsr.w   #BYTE_SHIFT_COUNT,d0
-                add.w   d3,d0           ; D0 = expected minimum stat for current level
-                add.w   d6,d1           ; add randomized stat gain to ACTUAL current stat
-                cmp.w   d0,d1           ; If new value greater than or equal to expected minimum
-                bge.s   @Done           ;  ...we're done.
-                
-                addq.w  #1,d6           ;  Otherwise, lovingly apply "loser pity bonus."
-@Done:
-                
-                move.w  d6,d1           ; return stat gain value -> D1
-                movem.l (sp)+,d0/d2-a0
+                ; Multiply growth value by (curve_param_1 / 256) to get portion value
+                mulu.w  d4,d2
+                lsr.w   #BYTE_SHIFT_COUNT,d2
                 rts
 
-    ; End of function CalculateStatGain
+    ; End of function CalculateGrowthPortion
 
 
 ; =============== S U B R O U T I N E =======================================

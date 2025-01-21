@@ -18,8 +18,8 @@ GenerateRandomNumber:
                 add.w   d6,d6
                 mulu.w  d6,d7
                 swap    d7
-                lsr.w   #1,d7
                 move.w  (sp)+,d6
+                lsr.w   #1,d7
                 rts
 
     ; End of function GenerateRandomNumber

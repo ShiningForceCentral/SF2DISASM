@@ -1112,7 +1112,7 @@ DEALS_ITEMS_COUNTER: equ (dealsItemsByteSize*2)-1
 
 maxBlacksmithOrdersNumber = 4
 
-    if (STANDARD_BUILD&SAVED_DATA_EXPANSION=1)
+    if (STANDARD_BUILD&EXPANDED_SAVED_DATA=1)
 maxBlacksmithOrdersNumber = 16
     endif
 
@@ -4196,13 +4196,10 @@ CRAM_SIZE: equ 128
 
 ; enum SavedDataOffsets
 
-savedByteSize = 1
-    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-savedByteSize = 2
-    endif
-    
+savedByteSize = SAVED_DATA_BYTE_SIZE
 combatantEntryRealSize = COMBATANT_DATA_ENTRY_REAL_SIZE
 combatantSlotsNumber = COMBATANT_SLOTS_NUMBER
+combatantAlliesNumber = COMBATANT_ALLIES_NUMBER
 dealsItemsBytes = DEALS_ITEMS_BYTES
 caravanItemEntrySize = CARAVAN_ITEM_ENTRY_SIZE
 caravanMaxItemsNumber = CARAVAN_MAX_ITEMS_NUMBER
@@ -4210,7 +4207,10 @@ turnOrderEntriesNumber = TURN_ORDER_ENTRIES_NUMBER
 blacksmithMaxOrdersNumber = BLACKSMITH_MAX_ORDERS_NUMBER
 
                                             rsreset
-SAVED_DATA_OFFSET_COMBATANT_DATA:        rs.b combatantEntryRealSize*combatantSlotsNumber*savedByteSize
+SAVED_DATA_OFFSET_COMBATANT_DATA:           rs.b combatantEntryRealSize*combatantSlotsNumber*savedByteSize
+    if (STANDARD_BUILD&EXPANDED_SAVED_DATA=1)
+SAVED_DATA_OFFSET_PROMOTED_AT_LEVELS:       rs.b combatantAlliesNumber*savedByteSize
+    endif
 SAVED_DATA_OFFSET_CURRENT_GOLD:             rs.l savedByteSize
 SAVED_DATA_OFFSET_DEALS_ITEMS:              rs.b dealsItemsBytes*savedByteSize
 SAVED_DATA_OFFSET_CARAVAN_ITEMS_NUMBER:     rs.w savedByteSize
@@ -4227,7 +4227,7 @@ SAVED_DATA_OFFSET_RAFT_MAP:                 rs.b savedByteSize
 SAVED_DATA_OFFSET_RAFT_X:                   rs.b savedByteSize
 SAVED_DATA_OFFSET_RAFT_Y:                   rs.b 2*savedByteSize
 SAVED_DATA_OFFSET_MESSAGE_SPEED:            rs.b savedByteSize
-SAVED_DATA_OFFSET_NO_BATTLE_MESSAGES_TOGGLE:  rs.b savedByteSize
+SAVED_DATA_OFFSET_NO_BATTLE_MESSAGES_TOGGLE:rs.b savedByteSize
 SAVED_DATA_OFFSET_EGRESS_MAP:               rs.b savedByteSize
 SAVED_DATA_OFFSET_BATTLE_TURN_ORDER:        rs.w turnOrderEntriesNumber*savedByteSize
 SAVED_DATA_OFFSET_CURRENT_BATTLE_TURN:      rs.w savedByteSize
@@ -4411,6 +4411,7 @@ longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/4)-1
 longwordGameFlagsCounter = 31
 longwordSpellsInitValue = SPELL_NOTHING|(SPELL_NOTHING<<8)|(SPELL_NOTHING<<16)|(SPELL_NOTHING<<24)
 longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING<<8)|(ITEM_NOTHING<<16)|(ITEM_NOTHING<<24)
+longwordPromotedAtLevelsCounter = (COMBATANT_ALLIES_SPACE_END/4)-1
 
     if (STANDARD_BUILD&EXPANDED_SRAM=1)
 longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/2)-1
@@ -4427,6 +4428,8 @@ LONGWORD_CARAVAN_COUNTER: equ longwordCaravanCounter
 LONGWORD_GAMEFLAGS_COUNTER: equ longwordGameFlagsCounter
 LONGWORD_SPELLS_INITVALUE: equ longwordSpellsInitValue
 LONGWORD_CARAVAN_INITVALUE: equ longwordCaravanInitValue
+LONGWORD_PROMOTED_AT_LEVELS_INITVALUE: equ 0
+LONGWORD_PROMOTED_AT_LEVELS_COUNTER: equ longwordPromotedAtLevelsCounter
 
 ; ---------------------------------------------------------------------------
 

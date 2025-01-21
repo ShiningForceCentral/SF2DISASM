@@ -188,6 +188,14 @@ Promote:
             else
                 bsr.s   LoadAllyClassData
             endif
+            if (EXPANDED_SAVED_DATA=1)
+                ; Set promoted at level as current level (before promotion)
+                bsr.w   GetCurrentLevel
+                andi.w  #BYTE_MASK,d0
+                loadSavedDataAddress PROMOTED_AT_LEVELS, a0
+                addToSavedBytePointer d0, a0
+                move.b  d1,(a0)
+            endif
                 bra.w   UpdateCombatantStats
 
     ; End of function Promote
@@ -201,6 +209,7 @@ Promote:
 InitializeGameSettings:
                 
                 movem.l d0/d7-a0,-(sp)
+                
                 moveq   #LONGWORD_GAMEFLAGS_INITVALUE,d0
                 loadSavedDataAddress GAME_FLAGS, a0
                 moveq   #LONGWORD_GAMEFLAGS_COUNTER,d7
@@ -223,6 +232,16 @@ InitializeGameSettings:
                 
                 setSavedLongWithPostIncrement d0, a0
                 dbf     d7,@ClearCaravanItems_Loop
+                
+            if (EXPANDED_SAVED_DATA=1)
+                moveq   #LONGWORD_PROMOTED_AT_LEVELS_INITVALUE,d0
+                loadSavedDataAddress PROMOTED_AT_LEVELS, a0
+                moveq   #LONGWORD_PROMOTED_AT_LEVELS_COUNTER,d7
+@ClearPromotedAtLevels_Loop:
+                
+                setSavedLongWithPostIncrement d0, a0
+                dbf     d7,@ClearPromotedAtLevels_Loop
+            endif
                 
                 moveq   #0,d0
                 loadSavedDataAddress COMBATANT_DATA, a0

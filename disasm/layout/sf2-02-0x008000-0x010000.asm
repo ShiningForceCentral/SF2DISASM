@@ -15,7 +15,11 @@
                 includeIfStandard "code\common\stats-standard\updatecombatantstats.asm"    ; Functions to calculate effective stat values
                 includeIfStandard "code\common\stats-standard\itemstats.asm"    ; Item stats management functions
                 includeIfStandard "code\common\stats-standard\spellstats.asm"    ; Spell stats management functions
+            if (SF1_LEVELUP=1)
+                includeIfStandard "code\common\stats-standard\levelup-sf1.asm"    ; Level Up functions reproducing the stat gain calculations from SF1 using SF2 data 
+            else
                 includeIfStandard "code\common\stats-standard\levelup.asm"    ; Level Up functions
+            endif
                 includeIfStandard "code\common\stats-standard\newgame.asm"    ; New game initialization functions
                 includeIfStandard "code\common\stats-standard\battleparty.asm"    ; Battle party management functions
                 includeIfStandard "code\common\stats-standard\iteminventory.asm"    ; Item inventory management functions

@@ -1123,6 +1123,8 @@ IncreaseCurrentHp:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Out: d1.w = stat value after increase
+
 
 IncreaseAndClampWord:
                 

@@ -80,32 +80,69 @@ GetSpellAndNumberOfSpells:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Get ally d0's promoted at level -> d1.w (0 if not promoted)
+;
+; Out: CCR bit set accordingly to returned value
+
+GetPromotedAtLevel:
+                
+            if (EXPANDED_SAVED_DATA=1)
+                move.w  d0,-(sp)
+                andi.w  #BYTE_MASK,d0
+                loadSavedDataAddress PROMOTED_AT_LEVELS, a0
+                addToSavedBytePointer d0, a0
+                clr.w   d1
+                move.b  (a0),d1
+                movem.w  (sp)+,d0
+                rts
+            endif
+
+    ; End of function GetPromotedAtLevel
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Get ally's d0 total level (current level + promoted at level) -> d1.w
+
+CalculateTotalLevel:
+                
+            if (EXPANDED_SAVED_DATA=1)
+                movem.l d0/d2/a0,-(sp)
+                clr.w   d2
+                bsr.s   GetPromotedAtLevel ; -> d1.w
+                beq.s   @Skip
+                
+                move.w  d1,d2
+                bsr.w   GetCurrentLevel
+                add.w   d2,d1
+                bra.s   @Done
+                
+                ; Pre-promoted characters are assumed to have been promoted at level 20
+@Skip:          bsr.w   CalculateEffectiveLevel
+@Done:          movem.l (sp)+,d0/d2/a0
+                rts
+            endif
+
+    ; End of function CalculateTotalLevel
+
+
+; =============== S U B R O U T I N E =======================================
+
 ; In: d0.w = ally index
 
 LearnAllKnownSpells:
-                      
+                
+                move.w  d3,-(sp)
                 bsr.w   CalculateEffectiveLevel
                 move.w  d1,d5
                 bsr.w   GetClass
                 
-                ; Get pointer to stat block for class d1.b
+                ; Get pointer to stat block for class d3.b -> a0
                 move.w  d0,d2
-                lsl.w   #INDEX_SHIFT_COUNT,d2
-                getPointer p_pt_AllyStats, a0
-                movea.l (a0,d2.w),a0
-@FindStatsBlockForClass_Loop:
-                
-                tst.b   (a0)
-                bmi.s   @Return         ; exit function if no matching block found
-                
-                cmp.b   (a0)+,d1
-                beq.s   @Continue
-@FindNextStatsBlock_Loop:
-                
-                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,(a0)+ ; loop until we come across an "end of spell list" control code
-                bcs.s   @FindNextStatsBlock_Loop
-                bra.s   @FindStatsBlockForClass_Loop
-@Continue:
+                move.w  d1,d3
+                bsr.w   GetAllyStatsBlockAddress
+                tst.w   d3
+                bmi.s   @Done
                 
                 lea     ALLYSTATS_OFFSET_SPELL_LIST_MINUS_ONE(a0),a0
 @FindAllLearnableSpells_Loop:
@@ -113,12 +150,11 @@ LearnAllKnownSpells:
                 bsr.s   FindNextLearnableSpell
                 tst.w   d2
                 bne.s   @Next
+                
                 moveq   #0,d2
-@Next:          
+@Next:          bpl.s   @FindAllLearnableSpells_Loop
                 
-                bpl.s   @FindAllLearnableSpells_Loop
-@Return:
-                
+@Done:          move.w  (sp)+,d3
                 rts
 
     ; End of function LearnAllKnownSpells
@@ -138,6 +174,11 @@ LearnAllKnownSpells:
                 module
 @GetFirstSpellList:
                 
+            if (EXPANDED_SAVED_DATA&LEARN_SPELLS_BASED_ON_TOTAL_LEVEL=1)
+                ; Consider promoted at level when learning spells from the first list (i.e., the base class's)
+                bsr.s   CalculateTotalLevel
+                move.w  d1,d5
+            endif
                 move.w  d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
                 movea.l (p_pt_AllyStats).l,a0
