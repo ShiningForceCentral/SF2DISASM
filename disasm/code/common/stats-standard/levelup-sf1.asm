@@ -205,30 +205,35 @@ CalculateStatGain:
 @Continue:      ; Calculate stat d6.w increase amount given current value d1.w and level d5.w -> d2.w
                 bsr.s   CalculateStatTargetValue
                 
-                ; Randomization range = stat target value ± (stat target value / 8), capped to SF1_LEVELUP_RNG_CAP
-                moveq   #0,d6
+                ; (SF1_LEVELUP_RNG_CAP - 1) * SF1_LEVELUP_RNG_SCALE_RATE = stat value threshold where randomization range stops scaling, e.g., if both rate and cap are set to 8, rng scales up to stat value 56.
+                ; Subtract 1 from cap because the last point is considered separately when making final adjustments.
                 move.w  d2,d6
-                cmpi.w  #(SF1_LEVELUP_RNG_CAP-1)*8,d6 ; (SF1_LEVELUP_RNG_CAP - 1) * 8 = stat value threshold where randomization range stops scaling
+                cmpi.w  #(SF1_LEVELUP_RNG_CAP-1)*SF1_LEVELUP_RNG_SCALE_RATE,d6
                 bls.s   @Randomize
                 
-                moveq   #(SF1_LEVELUP_RNG_CAP-1)*8,d6 ; minus 1 because the last point is considered when making final adjustments
-                
-@Randomize:     add.w   d2,d2           ; multiply stat target value by 8
-                add.w   d2,d2
-                add.w   d2,d2
-                
-                addq.w  #1,d6
-                jsr     (GenerateRandomNumber).w ; add a random number to target value
+                moveq   #(SF1_LEVELUP_RNG_CAP-1)*SF1_LEVELUP_RNG_SCALE_RATE,d6
+@Randomize:
+                ; d2 = stat target value
+                ; d6 = stat target value / SF1_LEVELUP_RNG_SCALE_RATE
+                ; randomization range = d6 + 1, capped to SF1_LEVELUP_RNG_CAP
+                ; stat final value = d2 ± randomization range
+                ;
+            if (SF1_LEVELUP_RNG_SCALE_RATE=0)
+                inform 3, "SF1_LEVELUP_RNG_SCALE_RATE equates 0. The minimum allowed value is 1."
+            endif
+                mulu.w  #SF1_LEVELUP_RNG_SCALE_RATE,d2 ; multiply stat target value by SF1_LEVELUP_RNG_SCALE_RATE
+                addq.w  #1,d6                          ; generate random number in the range [0, (d6 - 1)]
+                jsr     (GenerateRandomNumber).w       ; add random number to target value
                 add.w   d7,d2
-                jsr     (GenerateRandomNumber).w ; subtract a new random number in the same range to approximate a bell curve
+                jsr     (GenerateRandomNumber).w       ; subtract a new random number in the same range to approximate a bell curve
                 sub.w   d7,d2
-                swap    d2              ; clear upper word
+                swap    d2                             ; clear d2 upper word
                 clr.w   d2
                 swap    d2
-                divu.w  #8,d2           ; divide randomized stat value by 8
+                divu.w  #SF1_LEVELUP_RNG_SCALE_RATE,d2 ; divide randomized stat value by SF1_LEVELUP_RNG_SCALE_RATE
                 
                 ; Finish with making small adjustments that mostly impact the first few levels
-                ;  when stat values under 8 are still common.
+                ;  when stat values under SF1_LEVELUP_RNG_SCALE_RATE are still common.
                 ;
                 ; Generally, this also makes it even less likely to land on either ends of the bell curve.
                 ;
@@ -236,16 +241,16 @@ CalculateStatGain:
                 swap    d3              ; get remainder of previous division in the lower word position
                 beq.s   @CheckCurrentValue
                 
-                ; Add 1 point with chance = remainder / 8
-                moveq   #8,d6
+                ; Add 1 point with chance = remainder / SF1_LEVELUP_RNG_SCALE_RATE
+                moveq   #SF1_LEVELUP_RNG_SCALE_RATE,d6
                 jsr     (GenerateRandomNumber).w
                 cmp.w   d3,d7
                 bhs.s   @CheckCurrentValue
                 
                 addq.w  #1,d2
                 
-@Subtract:      ; Subtract 1 point with chance = (8 - remainder) / 8
-                subq.w  #8,d3
+@Subtract:      ; Subtract 1 point with chance = (SF1_LEVELUP_RNG_SCALE_RATE - remainder) / SF1_LEVELUP_RNG_SCALE_RATE
+                subi.w  #SF1_LEVELUP_RNG_SCALE_RATE,d3
                 neg.w   d3
                 jsr     (GenerateRandomNumber).w
                 cmp.w   d3,d7
