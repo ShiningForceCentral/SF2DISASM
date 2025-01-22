@@ -268,7 +268,7 @@ CalculateStatGain:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Calculate total growth for stat d6.w -> d2.w
+; Calculate target value for stat at level d5.w -> d2.w
 ;
 ; In: d3.w = starting value, d4.w = projected value, d5.w = current level
 
@@ -276,11 +276,16 @@ CalculateStatGain:
 CalculateStatTargetValue:
                 
                 movem.l d1/d3-d4/a0,-(sp)
-                sub.w   d3,d4           ; d4.w = stat d6.w growth value
+                sub.w   d3,d4           ; d4.w = growth value
                 bsr.w   GetPromotedAtLevel ; -> d1.w
                 beq.s   @Skip           ; skip if not promoted
                 
-                bsr.s   CalculateStatInitialValue ; -> d3.w = new starting value
+                ; Cap promoted at level to stat gain projection level
+                cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d1
+                ble.s   @Continue
+                
+                moveq   #CHAR_STATGAIN_PROJECTIONLEVEL,d1
+@Continue:      bsr.s   CalculateStatInitialValue ; -> d3.w = new starting value
 @Skip:          move.w  d5,d1           ; d1.w = current level
                 bsr.s   CalculateGrowthPortion
                 add.w   d3,d2           ; add starting value to growth portion

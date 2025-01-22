@@ -272,11 +272,19 @@ STATUSANIMATION_STUN_LINES: equ 4
 ; ---------------------------------------------------------------------------
 
 ; enum CharDef
+
+statGainProjectionLevel = 30
+levelCapBase = 40
+
+    if (STANDARD_BUILD&SF1_LEVELUP=1)
+levelCapBase = statGainProjectionLevel
+    endif
+
 CHAR_CLASS_LASTNONPROMOTED: equ 11
 CHAR_CLASS_FIRSTPROMOTED: equ 12
 CHAR_CLASS_EXTRALEVEL: equ 20
-CHAR_STATGAIN_PROJECTIONLEVEL: equ 30
-CHAR_LEVELCAP_BASE: equ 40
+CHAR_STATGAIN_PROJECTIONLEVEL: equ statGainProjectionLevel
+CHAR_LEVELCAP_BASE: equ levelCapBase
 CHAR_LEVELCAP_PROMOTED: equ 99
 CHAR_STATCAP_AGI_BASE: equ 100
 CHAR_STATCAP_AGI_CURRENT: equ 127
