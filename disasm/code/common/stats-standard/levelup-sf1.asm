@@ -239,13 +239,12 @@ CalculateStatGain:
                 ;
                 move.l  d2,d3
                 swap    d3              ; get remainder of previous division in the lower word position
-                beq.s   @CheckCurrentValue
                 
                 ; Add 1 point with chance = remainder / SF1_LEVELUP_RNG_SCALE_RATE
                 moveq   #SF1_LEVELUP_RNG_SCALE_RATE,d6
                 jsr     (GenerateRandomNumber).w
                 cmp.w   d3,d7
-                bhs.s   @CheckCurrentValue
+                bhs.s   @Subtract
                 
                 addq.w  #1,d2
                 
