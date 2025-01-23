@@ -157,6 +157,9 @@ ExecuteAiCommand_Move:
                 
                 clr.w   d0
                 move.b  d7,d0
+            if (STANDARD_BUILD=1)
+                moveq   #0,d1           ; make sure d1 upper word is clear
+            endif
                 bsr.w   GetMoveType     
                 lea     (pt_AttackPriorityForMoveType).l,a1
                 lsl.l   #2,d1

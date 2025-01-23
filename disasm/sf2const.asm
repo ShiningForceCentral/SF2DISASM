@@ -428,8 +428,10 @@ dword_FFB1A4: equ $FFB1A4
 WARP_SFX: equ $FFB1A8
 CONFIGURATION_MODE_OR_GAME_STAFF_POINTER: equ $FFB1AA
 AI_LAST_TARGET_TABLE: equ $FFB1AC ; Table of most recent target for each enemy
-byte_FFB1DC: equ $FFB1DC
-BATTLE_REGION_FLAGS_TO_BE_TRIGGERED: equ $FFB20C ; Region flags to be triggered at the start of next battle turn
+AI_MEMORY_TABLE: equ $FFB1DC
+PREVIOUSLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating regions triggered at the start of previous battle rounds
+                                                    ; causes issues with region triggers in the vanilla build
+                                                    ; unused otherwise in the stanard build
 
 ; Battlescene Data
 BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 ; start of battlescene data
@@ -701,7 +703,7 @@ PALETTE_1_COPY: equ $FFDF2A
 PALETTE_2_COPY: equ $FFDF4A
 FADING_TIMER_WORD: equ $FFDFAA
 FADING_TIMER_BYTE: equ $FFDFAB
-RANDOM_WAITING_FOR_INPUT: equ $FFDFB0 ; "random" value for determining AI/hit chance??
+RANDOM_SEED_COPY: equ $FFDFB0 ; Copy of RANDOM_SEED reserved exclusively for the AI. Updated during text symbol parsing and diamond menu execution.
 PLANE_B_LAYOUT: equ $FFE000
 byte_FFE0DC: equ $FFE0DC
 PLANE_B_WITCH_HEAD: equ $FFE15C
@@ -711,12 +713,11 @@ byte_FFE21E: equ $FFE21E
 byte_FFE29E: equ $FFE29E
 byte_FFE31C: equ $FFE31C
 
-    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-ALLY_NAME_LOADING_SPACE: equ $FFE800
-    endif
-
 ; Start of Saved Data
-COMBATANT_ENTRIES:          equ savedDataStart+SAVED_DATA_OFFSET_COMBATANT_ENTRIES
+COMBATANT_DATA:             equ savedDataStart+SAVED_DATA_OFFSET_COMBATANT_DATA
+    if (STANDARD_BUILD&EXPANDED_SAVED_DATA=1)
+PROMOTED_AT_LEVELS:         equ savedDataStart+SAVED_DATA_OFFSET_PROMOTED_AT_LEVELS
+    endif
 CURRENT_GOLD:               equ savedDataStart+SAVED_DATA_OFFSET_CURRENT_GOLD
 DEALS_ITEMS:                equ savedDataStart+SAVED_DATA_OFFSET_DEALS_ITEMS ; amount of each item in the deals section (stacked 2 items to a byte, 4 bits per item, max 0xF amt of each item)
 CARAVAN_ITEMS_NUMBER:       equ savedDataStart+SAVED_DATA_OFFSET_CARAVAN_ITEMS_NUMBER ; number of items in caravan
@@ -741,6 +742,13 @@ SAVED_SECONDS_COUNTER:      equ savedDataStart+SAVED_DATA_OFFSET_SAVED_SECONDS_C
 SPECIAL_BATTLE_RECORD:      equ savedDataStart+SAVED_DATA_OFFSET_SPECIAL_BATTLE_RECORD
 ENEMY_ITEM_DROPPED_FLAGS:   equ savedDataStart+SAVED_DATA_OFFSET_ENEMY_ITEM_DROPPED_FLAGS
 MITHRIL_WEAPONS_ON_ORDER:   equ savedDataStart+SAVED_DATA_OFFSET_MITHRIL_WEAPONS_ON_ORDER ; current mithril weapon index (may be after too, for multiple)
+
+nameLoadingSpace = $FFF7B0
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+nameLoadingSpace = $FFE800
+    endif
+
+ALLY_NAME_LOADING_SPACE: equ nameLoadingSpace ; loading space used in the standard build
 
 ERRCODE_BYTE0: equ $FFFFF8 
 ERRCODE_BYTE1: equ $FFFFF9 

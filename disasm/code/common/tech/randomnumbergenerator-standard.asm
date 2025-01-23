@@ -9,12 +9,12 @@
 
 GenerateRandomNumber:
                 
-                move.w  (RANDOM_SEED).l,d7
-                mulu.w  #$D,d7
-                addi.w  #7,d7
-                andi.l  #$FFFF,d7
-                move.w  d7,(RANDOM_SEED).l
                 move.w  d6,-(sp)
+                move.w  ((RANDOM_SEED-$1000000)).w,d7
+                mulu.w  #13,d7
+                addi.w  #7,d7
+                andi.l  #WORD_MASK,d7
+                move.w  d7,((RANDOM_SEED-$1000000)).w
                 add.w   d6,d6
                 mulu.w  d6,d7
                 swap    d7
@@ -34,11 +34,11 @@ GenerateRandomNumber:
 
 GenerateRandomOrDebugNumber:
                 
-                move.l  d6,-(sp)
+                move.w  d6,-(sp)
                 move.l  d7,-(sp)
                 move.w  d0,d6
-                tst.b   (DEBUG_MODE_TOGGLE).l
-                beq.s   @Skip
+                tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
+                beq.s   @Skip           ; skip checking for debug values if not currently in debug mode
                 
                 moveq   #0,d0
                 btst    #INPUT_BIT_RIGHT,((PLAYER_1_INPUT-$1000000)).w
@@ -52,14 +52,12 @@ GenerateRandomOrDebugNumber:
                 moveq   #3,d0
                 btst    #INPUT_BIT_DOWN,((PLAYER_1_INPUT-$1000000)).w
                 bne.s   @Done
-@Skip:
                 
-                bsr.s   GenerateRandomNumber
+@Skip:          bsr.s   GenerateRandomNumber
                 move.w  d7,d0
-@Done:
                 
-                move.l  (sp)+,d7
-                move.l  (sp)+,d6
+@Done:          move.l  (sp)+,d7
+                move.w  (sp)+,d6
                 rts
 
     ; End of function GenerateRandomOrDebugNumber

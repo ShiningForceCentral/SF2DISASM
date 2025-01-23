@@ -67,7 +67,7 @@ PickMithrilWeapon:
                 move.w  #BLACKSMITH_ORDERS_COUNTER,d7
 @LoadIndex_Loop:
                 
-                loadSavedMithrilWeaponOrder d1, a0
+                loadMithrilWeaponOrder d1, a0
                 dbf     d7,@LoadIndex_Loop
 @Done:
                 

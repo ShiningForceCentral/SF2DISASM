@@ -23,11 +23,11 @@ DetermineHealingSpellLevel:
                 move.w  d1,d3               ; save caster index
                 bsr.w   GetMaxHP
                 move.w  d1,d7
-                bsr.w   GetCurrentHP
+                bsr.w   GetCurrentHp
                 sub.w   d1,d7               ; d7 = missing HP for target
                 
                 move.w  d4,d1
-                bsr.w   FindSpellDefAddress
+                bsr.w   GetSpellDefAddress
                 move.w  d3,d0               ; restore caster index
                 bsr.s   GetAdjustedHealingPower
                 tst.w   d5      ; check if the spell has any spell power; if not, the spell must not be a healing spell and is instead a status spell like Detox
@@ -46,7 +46,7 @@ DetermineHealingSpellLevel:
 @Loop:          move.b  SPELLDEF_OFFSET_MP_COST(a0),d6
                 subi.b  #64,d4              ; reduce spell entry by one level (this will be used in the next loop or after the MP check, but is placed here for efficiency purposes)
                 move.w  d4,d1
-                bsr.w   FindSpellDefAddress ; Load spell definition for the new, lower level
+                bsr.w   GetSpellDefAddress ; Load spell definition for the new, lower level
                 cmp.b   d6,d3               ; check if the caster has sufficient MP
                 blo.s   @Next               ; if d3 is less than d6, can't cast the given level of spell and a lower level must be selected
                 

@@ -79,7 +79,7 @@ battlesceneScript_DetermineCriticalHit:
                 move.b  (a5),d0
                 move.w  #SPELL_DESOUL,d1
                 bsr.w   GetResistanceToSpell
-                cmpi.w  #RESISTANCESETTING_STATUSEFFECT_IMMUNITY,d2
+                cmpi.w  #RESISTANCESETTING_IMMUNITY,d2
                 beq.s   @Skip           ; skip if target is immune to desoul
                 move.b  #-1,cutoff(a2)
                 clr.b   criticalHit(a2)

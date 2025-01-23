@@ -52,7 +52,7 @@ ExecuteIndividualTurn:
             endif
                 
                 ; Is actor alive?
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   @Done           ; skip turn if actor is dead
                 
@@ -189,8 +189,13 @@ ExecuteIndividualTurn:
                 
 @Attack:        bsr.w   DetermineRandomAttackSpell
                 
-@Continue:      checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check : Fairy wood secret battle
-                bne.s   @WriteBattlesceneScript
+@Continue:      movem.l d1-d2/a0,-(sp)
+                lea     table_DisplayTimerBattles(pc), a0
+                getSavedByte CURRENT_BATTLE, d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                movem.l (sp)+,d1-d2/a0
+                bcs.s   @WriteBattlesceneScript
                 jsr     CloseTimerWindow
 @WriteBattlesceneScript:
                 
@@ -242,22 +247,41 @@ ExecuteIndividualTurn:
 DetermineRandomAttackSpell:
                 
                 movem.l d1-d2/a0,-(sp)
-                moveq   #5,d2
                 move.w  combatant(a6),d0
-                tst.b   d0
+                
+                ; Check equipped weapon
+                jsr     GetEquippedWeapon ; -> d1.w = item entry, d2.w = slot
+                moveq   #5,d2             ; d2.w = object property bytes number
+                tst.w   d1
+                bmi.s   @IsEnemy
+                
+                lea     table_RandomAttackSpellsForWeapons(pc), a0
+                bra.s   @Continue
+                
+@IsEnemy:       tst.b   d0
                 bmi.s   @Enemy
+                
+                ; Check ally class
                 lea     table_RandomAttackSpellsForClasses(pc), a0
                 jsr     GetClass
                 bra.s   @Continue
+                
+                ; Check enemy
 @Enemy:         lea     table_RandomAttackSpellsForEnemies(pc), a0
                 jsr     GetEnemy
+                
+                ; Find object
 @Continue:      jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @Done
                 
                 ; Randomly determine if spell is cast
                 move.w  #256,d6
                 jsr     (GenerateRandomNumber).w
-                cmp.b   (a0)+,d7                     ; d6/256 chance to cast spell
+                move.b  (a0)+,d1
+                bne.s   @Compare
+                
+                move.w  d6,d1
+@Compare:       cmp.b   d1,d7             ; d6/256 chance to cast spell
                 bhs.s   @Done
                 
                 ; Determine spell level

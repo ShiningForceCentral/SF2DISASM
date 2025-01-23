@@ -134,7 +134,11 @@ loc_EEC2:
 loc_EEC6:
                 
                 move.b  #2,d6
+            if (STANDARD_BUILD=1)
+                jsr     (GenerateRandomNumberUnderD6).w
+            else
                 jsr     j_GenerateRandomNumberUnderD6
+            endif
                 cmpi.b  #1,d7
                 bne.s   loc_EEDC
                 bra.w   loc_EF14

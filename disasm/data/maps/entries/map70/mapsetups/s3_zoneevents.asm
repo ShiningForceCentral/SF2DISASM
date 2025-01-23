@@ -25,7 +25,7 @@ Map70_ZoneEvent0:
 
 Map70_DefaultZoneEvent:
                 
-            if (FIX_MISSING_RANDOM_BATTLES=1)
+            if (STANDARD_BUILD&FIX_MISSING_RANDOM_BATTLES=1)
                 move.w  #BATTLE_TO_THE_EAST,d0
                 jmp     CheckRandomBattle
             else

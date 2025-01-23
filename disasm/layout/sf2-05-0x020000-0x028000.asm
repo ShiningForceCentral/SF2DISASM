@@ -24,56 +24,79 @@
                 include "data\stats\items\mithrilweapons.asm"    ; Mithril weapons data
                 includeIfStandard "code\common\menus\caravan\caravanactions-standard.asm"
                 includeIfVanilla "code\common\menus\caravan\caravanactions_1.asm"    ; Caravan functions
-                include "data\stats\items\specialcaravandescriptions.asm"    ; Special Caravan descriptions
+                includeIfVanilla "data\stats\items\specialcaravandescriptions.asm"    ; Special Caravan descriptions
                 includeIfVanilla "code\common\menus\caravan\displaycaravanmessagewithportrait.asm"    ; Display Caravan message with portrait function
                 includeIfVanilla "code\common\menus\caravan\caravanactions_2.asm"    ; Caravan functions
-                include "code\common\stats\items\itemactions_1.asm"    ; Item functions
-                include "data\stats\items\usableoutsidebattleitems.asm"    ; Usable outside battle items
-                include "code\common\stats\items\fielditemeffects.asm"    ; Functions to perform effects from using items on an exploration field.
+                include "code\common\menus\item\isitemusableonfield.asm"    ; Item functions
+                includeIfVanilla "data\stats\items\usableoutsidebattleitems.asm"    ; Usable outside battle items
+                include "code\common\menus\item\fielditemeffects.asm"    ; Functions to perform effects from using items on an exploration field.
+                include "code\common\menus\getplayerentityposition.asm"    ; Main menu function
+                
+                ; Battle loop (standard)
+                includeIfStandard "code\gameflow\battle\battleloop-standard.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\loadbattle.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\killallenemies.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\heallivingandimmortalallies.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\initializecombatantsforbattle.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\upgradeenemies.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\triggerregionsandactivateenemies.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\printdefcons.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\spawnenemies.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\turnorderfunctions.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\processafterturneffectsandkilledcombatants.asm"
+                includeIfStandard "code\gameflow\battle\battleloop-standard\getegresspositionforbattle.asm"
                 
                 ; Battle functions
-                include "code\gameflow\battle\battlefunctions\battlefunctions_0.asm"    ; Battle functions
-                include "code\gameflow\exploration\explorationfunctions_0.asm"    ; Exploration functions
-                include "data\stats\items\chestgoldamounts.asm"    ; Chest gold amounts
-                include "code\gameflow\exploration\explorationfunctions_1.asm"    ; Exploration functions
-                include "code\gameflow\battle\battlefunctions\battlefunctions_1.asm"    ; Battle functions
-                includeIfStandard "code\gameflow\battle\battlefunctions\getegresspositionforbattle-standard.asm"
                 includeIfStandard "code\gameflow\battle\battlefunctions\executeindividualturn-standard.asm"
-                includeIfStandard "code\gameflow\battle\battlefunctions\handleafterturneffects-standard.asm"
-                includeIfStandard "data\battles\global\egresspositionsforbattles-standard.asm"
-                includeIfStandard "data\stats\egressitemsandspells-standard.asm"
-                includeIfStandard "data\stats\randomattackspells-standard.asm"
-                includeIfStandard "data\battles\global\enemybattlescenemusics-standard.asm"
-                includeIfStandard "data\stats\items\afterturnrecovery-standard.asm"
-                alignIfStandard
-                includeIfVanilla "code\gameflow\battle\battlefunctions\getegresspositionforbattle.asm"    ; Get Egress Position For Battle function
-                includeIfVanilla "code\gameflow\battle\battlefunctions\executeindividualturn.asm"    ; Execute Individual Turn function
-                includeIfVanilla "code\gameflow\battle\battlefunctions\handleafterturneffects.asm"    ; Handle After Turn Effects function
-                include "code\gameflow\battle\battlefunctions\battlefunctions_2.asm"    ; Battle functions
-                includeIfStandard "code\gameflow\battle\battlefunctions\updateenemyaifunctions-standard.asm"
-                includeIfStandard "code\gameflow\battle\battlefunctions\turnorderfunctions-standard.asm"
-                includeIfVanilla "code\gameflow\battle\battlefunctions\updateenemyaifunctions.asm"    ; Update Enemy AI functions
-                includeIfVanilla "code\gameflow\battle\battlefunctions\turnorderfunctions.asm"    ; Battle turn order functions
-                include "code\gameflow\battle\battlefunctions\battlefunctions_3.asm"    ; Battle functions
                 includeIfStandard "code\gameflow\battle\battlefunctions\setmovesfx-standard.asm"
                 includeIfStandard "code\gameflow\battle\battlefunctions\resetaijaro-standard.asm"
                 includeIfStandard "code\gameflow\battle\battlemusic-standard.asm"
-                includeIfStandard "data\stats\allies\immortalallies-standard.asm"
-                includeIfStandard "data\battles\global\displaytimerbattles-standard.asm"
-                includeIfStandard "data\battles\global\losablebattles-standard.asm"
-                includeIfStandard "data\stats\items\movesfxforequippedring-standard.asm"
-                includeIfStandard "data\battles\global\explorationtobattlemusics-standard.asm"
-                alignIfStandard
+                includeIfStandard "code\common\tech\graphics\findspecialsprite-standard.asm"
+                
+                include "code\gameflow\battle\battlefunctions\battlefunctions_0.asm"    ; Battle functions
+                include "code\gameflow\exploration\explorationfunctions_0.asm"    ; Exploration functions
+                includeIfVanilla "data\stats\items\chestgoldamounts.asm"    ; Chest gold amounts
+                include "code\gameflow\exploration\explorationfunctions_1.asm"    ; Exploration functions
+                includeIfVanilla "code\gameflow\battle\battleloop_1.asm"    ; Battle loop
+                includeIfVanilla "code\gameflow\battle\battleloop\killallenemies.asm"    ; Battle loop
+                includeIfVanilla "code\gameflow\battle\battleloop\heallivingandimmortalallies.asm"    ; Battle loop
+                includeIfVanilla "code\gameflow\battle\battleloop\countremainingcombatants.asm"    ; Battle loop
+                includeIfVanilla "code\gameflow\battle\battleloop_2.asm"    ; Battle loop
+                include "code\gameflow\battle\battlefunctions\battlefunctions_1.asm"    ; Battle functions
+                includeIfVanilla "code\gameflow\battle\battleloop\getegresspositionforbattle.asm"    ; Get Egress Position For Battle function
+                includeIfVanilla "code\gameflow\battle\battlefunctions\executeindividualturn.asm"    ; Execute Individual Turn function
+                includeIfVanilla "code\gameflow\battle\battleloop\processafterturneffects.asm"    ; Battle functions
+                includeIfVanilla "code\gameflow\battle\battleloop\spawnenemy.asm"    ; Battle functions
+                includeIfVanilla "code\gameflow\battle\battleloop\cleardeadcombatantslist.asm"    ; Battle functions
+                includeIfVanilla "code\gameflow\battle\battleloop\processkilledcombatants.asm"    ; Battle functions
+                include "code\gameflow\battle\battlefunctions\battlefunctions_2.asm"    ; Battle functions
+                includeIfVanilla "code\gameflow\battle\battleloop\updateenemyaifunctions.asm"    ; Update Enemy AI functions
+                includeIfVanilla "code\gameflow\battle\battleloop\turnorderfunctions.asm"    ; Battle turn order functions
+                includeIfVanilla "code\gameflow\battle\battleloop\loadbattle.asm"    ; Battle data loading function
+                include "code\gameflow\battle\battlefunctions\battlefunctions_3.asm"    ; Battle functions
+                includeIfVanilla "code\gameflow\battle\battleloop\printdefcons.asm"    ; Battle functions
                 includeIfVanilla "code\gameflow\battle\battlefunctions\setmovesfx.asm"    ; Set Move Sfx function
                 include "code\gameflow\exploration\explorationfunctions_2.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions
-                
-                includeIfStandard "code\common\tech\graphics\findspecialsprite-standard.asm"
-                includeIfStandard "data\stats\specialsprites-standard.asm"
                 include "code\common\tech\graphics\specialsprites.asm"    ; Special Sprites functions
                 include "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
                 include "code\common\tech\graphics\specialspritesanims.asm"    ; Special Sprites Animations
+                
+                includeIfStandard "data\battles\global\displaytimerbattles-standard.asm"
+                includeIfStandard "data\stats\items\afterturnrecovery-standard.asm"
+                includeIfStandard "data\stats\allies\immortalallies-standard.asm"
+                includeIfStandard "data\battles\global\egresspositionsforbattles-standard.asm"
+                includeIfStandard "data\battles\global\losablebattles-standard.asm"
+                includeIfStandard "data\stats\egressitemsandspells-standard.asm"
+                includeIfStandard "data\stats\randomattackspells-standard.asm"
+                includeIfStandard "data\stats\enemies\enemybattlescenemusics-standard.asm"
+                includeIfStandard "data\stats\items\movesfxforequippedring-standard.asm"
+                includeIfStandard "data\battles\global\explorationtobattlemusics-standard.asm"
+                includeIfStandard "data\stats\specialsprites-standard.asm"
+                alignIfStandard
+                
+                ; Witch functions
                 includeIfVanilla "code\specialscreens\suspend\suspend.asm"    ; Suspend functions
                 includeIfVanilla "code\specialscreens\witchend\witchend.asm"    ; Witch end functions
                 alignIfVanilla $28000

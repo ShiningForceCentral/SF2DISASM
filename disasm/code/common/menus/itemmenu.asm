@@ -68,7 +68,7 @@ loc_10616:
                 beq.s   loc_10630
                 moveq   #1,d1
             if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s    @SkipItemCheck1
             endif
                 cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
@@ -82,7 +82,7 @@ loc_10630:
                 beq.s   loc_1064A
                 moveq   #2,d1
             if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s    @SkipItemCheck2
             endif
                 cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
@@ -103,7 +103,7 @@ loc_1065C:
                 beq.s   loc_10676
                 moveq   #3,d1
             if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s    @SkipItemCheck3
             endif
                 cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
@@ -238,7 +238,7 @@ BuildItemMenu:
                 
                 move.w  d1,((TEMP_ITEM_OR_SPELL-$1000000)).w
                 move.w  d1,-(sp)
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 move.w  windowSlot(a6),d0
                 move.w  #MENU_ITEM_NAME_COORDS,d1
                 jsr     (GetWindowTileAddress).w

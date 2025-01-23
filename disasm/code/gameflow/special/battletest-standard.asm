@@ -12,22 +12,29 @@ DebugModeBattleTest:
                 st      ((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 
                 ; All characters join the Force
-                moveq   #1,d0
+                moveq   #ALLY_SARAH,d0
 @JoinForce_Loop:jsr     JoinForce
                 addq.w  #1,d0
                 cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
                 bhs.s   @JoinForce_Loop
                 
-                moveq   #0,d0
-                move.w  #200,d1 
-                jsr     SetBaseAgi
-                jsr     SetBaseAtt
-                jsr     SetBaseDef
+                ; Max out the leader's stats
+                move.w  #CHAR_STATCAP_HP,d1
                 jsr     SetMaxHp
-                jsr     SetCurrentAgi
-                jsr     SetCurrentAtt
-                jsr     SetCurrentDef
                 jsr     SetCurrentHp
+                move.w  #CHAR_STATCAP_MP,d1
+                jsr     SetMaxMp
+                jsr     SetCurrentMp
+                move.w  #CHAR_STATCAP_ATT,d1
+                jsr     SetBaseAtt
+                move.w  #CHAR_STATCAP_DEF,d1
+                jsr     SetBaseDef
+                move.w  #CHAR_STATCAP_AGI_BASE,d1
+                jsr     SetBaseAgi
+                moveq   #9,d1
+                jsr     SetBaseMov
+                jsr     UpdateCombatantStats
+                
                 sndCom  MUSIC_BATTLE_THEME_3
                 jsr     (EnableDisplayAndInterrupts).w
                 jsr     (InitializeDisplay).w
@@ -83,17 +90,11 @@ StartBattleTest:
                 getPointer p_table_BattleMapCoordinates, a0
                 adda.w  d0,a0
                 move.b  (a0)+,d0
-            if (RELOCATED_SAVED_DATA_TO_SRAM=1)
-                move.b  (a0)+,(BATTLE_AREA_X).l
-                move.b  (a0)+,(BATTLE_AREA_Y).l
-                move.b  (a0)+,(BATTLE_AREA_WIDTH).l
-                move.b  (a0)+,(BATTLE_AREA_HEIGHT).l
-            else
-                move.b  (a0)+,((BATTLE_AREA_X-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
-                move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
-            endif
+                setSavedByte (a0)+, BATTLE_AREA_X
+                setSavedByte (a0)+, BATTLE_AREA_Y
+                setSavedByte (a0)+, BATTLE_AREA_WIDTH
+                setSavedByte (a0)+, BATTLE_AREA_HEIGHT
+                
             if (TEST_BUILD=1)
                 move.b  #SHOP_DEBUG,((CURRENT_SHOP_INDEX-$1000000)).w
                 pea     @Start(pc)
@@ -117,7 +118,8 @@ StartBattleTest:
                 jsr     CaravanMenu
                 bra.w   @Start
             endif
-@DebugLevelUp:  
+@DebugLevelUp:
+                
             if (TEST_BUILD=1)
                 rts
             else

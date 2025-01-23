@@ -811,7 +811,7 @@ ResetCurrentMap:
 OpenDoor:
                 
                 module
-                checkSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.w   @Return
                 
                 movem.w d0-d7,-(sp)

@@ -66,7 +66,7 @@ ExecuteAiCommand_Attack:
                 move.w  (a1),d1
                 move.w  d7,d0           ; d7 --> d0 = character index (aka attacker)
                 bsr.w   GetItemBySlotAndHeldItemsNumber
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 bsr.w   GetSpellRange   
                 bsr.w   PopulateTargetsArrayWithAllCombatants
@@ -135,17 +135,20 @@ ExecuteAiCommand_Attack:
                 
                 move.l  d0,-(sp)
                 move.w  d7,d0
+            if (STANDARD_BUILD&FIX_AI_CLAUDE_ATTACK_RANGE=1)
+                bsr.w   GetAttackRange
+            else
                 jsr     GetEquippedWeapon
                 cmpi.w  #-1,d1
                 bne.s   @GetWeaponAttackRange
                 clr.l   d3
                 clr.l   d4
                 jsr     GetCombatantType
-            if (STANDARD_BUILD&FIX_AI_CLAUDE_ATTACK_RANGE=1)
+              if (STANDARD_BUILD&FIX_AI_CLAUDE_ATTACK_RANGE=1)
                 cmpi.w  #ENEMY_KRAKEN_ARM,d1
-            else
+              else
                 cmpi.b  #ENEMY_KRAKEN_ARM,d1 ; BUG -- When getting Claude's class type, the previous routine 
-            endif                       ;  returns a value in the byte area that happens to be the same
+              endif                       ;  returns a value in the byte area that happens to be the same
                                         ;  as the Kraken Arm's index, causing the former to perform 
                                         ;  a ranged attack when controlled by the AI.
                                         ;                                                 
@@ -155,11 +158,11 @@ ExecuteAiCommand_Attack:
                 move.w  #1,d4           ; min range 1
                 bra.w   @FinishUnequipRange
 @CheckKrakenHead:
-            if (STANDARD_BUILD&FIX_AI_CLAUDE_ATTACK_RANGE=1)
+              if (STANDARD_BUILD&FIX_AI_CLAUDE_ATTACK_RANGE=1)
                 cmpi.w  #ENEMY_KRAKEN_HEAD,d1
-            else
+              else
                 cmpi.b  #ENEMY_KRAKEN_HEAD,d1
-            endif
+              endif
                 bne.s   @BasicUnequipRange
                 move.w  #3,d3           ; max range 3
                 move.w  #1,d4           ; min range 1
@@ -173,10 +176,11 @@ ExecuteAiCommand_Attack:
                 bra.w   @FindTarget
 @GetWeaponAttackRange:
                 
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 moveq   #0,d3
                 move.b  ITEMDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  ITEMDEF_OFFSET_MIN_RANGE(a0),d4
+            endif
 @FindTarget:
                 
                 move.l  (sp)+,d0

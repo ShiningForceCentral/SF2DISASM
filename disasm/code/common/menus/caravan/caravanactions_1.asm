@@ -325,7 +325,7 @@ byte_221F4:
 @HasUseSpell:
                 
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
                 beq.s   byte_22210      ; @NoEffect
                 txt     93              ; "It has a special effect when{N}used in battle.{W2}"
@@ -438,7 +438,7 @@ byte_222A4:
 @IsUnsellable:
                 
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @GetSellingPrice
                 txt     102             ; "You can't sell it at a shop.{W2}"
@@ -687,7 +687,7 @@ caravanDepotSubmenu_Drop:
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemFromCaravan
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Continue
                 jsr     j_AddItemToDeals
@@ -1046,7 +1046,7 @@ caravanItemSubmenu_Drop:
                 move.w  itemSlot(a6),d1
                 jsr     j_DropItemBySlot
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Continue
                 jsr     j_AddItemToDeals
@@ -1090,7 +1090,11 @@ DisplaySpecialCaravanDescription:
                 
                 movem.l d0-d1/a0,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
+            if (STANDARD_BUILD=1)
+                getPointer p_table_SpecialCaravanDescriptions, a0
+            else
                 lea     table_SpecialCaravanDescriptions(pc), a0
+            endif
 @FindItem_Loop:
                 
                 cmpi.w  #-1,(a0)

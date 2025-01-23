@@ -61,7 +61,7 @@ loc_443FE:
 sub_44404:
                 
                 module
-                checkSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
+                compareToSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
                 bne.s   byte_44420      
                 
                 ; Player is a raft
@@ -79,7 +79,7 @@ byte_44420:
                 chkFlg  64              ; Raft is unlocked
                 beq.w   return_4446A
                 getSavedByte CURRENT_MAP, d0
-                checkRaftMap d0
+                compareSavedByteTo RAFT_MAP, d0
                 bne.w   return_4446A
                 getSavedByte RAFT_X, d1
                 getSavedByte RAFT_Y, d2

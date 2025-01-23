@@ -32,7 +32,7 @@ LevelUp:
             endif
 @FindStatsBlockForClass:
                 
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 getPointer p_pt_AllyStats, a0
                 movea.l (a0,d0.w),a0
 @FindStatsBlockForClass_Loop:
@@ -154,7 +154,7 @@ LevelUp:
                 move.b  d1,6(a1)
 @UpdateStats:
                 
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
+                bsr.w   UpdateCombatantStats
 @Done:
                 
                 unlk    a6

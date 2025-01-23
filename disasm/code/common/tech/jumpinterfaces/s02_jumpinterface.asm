@@ -84,20 +84,26 @@ j_GetStatusEffects:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_GetCurrentProwess:
                 
+            if (VANILLA_BUILD=1)
                 jmp     GetCurrentProwess(pc)
+            endif
 
     ; End of function j_GetCurrentProwess
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_GetBaseProwess:
                 
+            if (VANILLA_BUILD=1)
                 jmp     GetBaseProwess(pc)
+            endif
 
     ; End of function j_GetBaseProwess
 
@@ -124,10 +130,13 @@ j_GetBaseDef:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_GetBaseResistance:
                 
+            if (VANILLA_BUILD=1)
                 jmp     GetBaseResistance(pc)
+            endif
 
     ; End of function j_GetBaseResistance
 
@@ -214,10 +223,13 @@ j_GetCurrentDef:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_GetCurrentResistance:
                 
+            if (VANILLA_BUILD=1)
                 jmp     GetCurrentResistance(pc)
+            endif
 
     ; End of function j_GetCurrentResistance
 
@@ -284,10 +296,13 @@ j_GetEnemy:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_GetCombatantType:
                 
+            if (VANILLA_BUILD=1)
                 jmp     GetCombatantType(pc)
+            endif
 
     ; End of function j_GetCombatantType
 
@@ -334,10 +349,13 @@ j_SetCombatantY:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_SetMaxMp:
                 
+            if (VANILLA_BUILD=1)
                 jmp     SetMaxMp(pc)
+            endif
 
     ; End of function j_SetMaxMp
 
@@ -365,11 +383,11 @@ j_SetCombatantX:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetMoveType:
+j_SetMoveTypeAndAiCommandset:
                 
-                jmp     SetMoveType(pc)
+                jmp     SetMoveTypeAndAiCommandset(pc)
 
-    ; End of function j_SetMoveType
+    ; End of function j_SetMoveTypeAndAiCommandset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -404,10 +422,13 @@ j_SetBaseProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_SetBaseMov:
                 
+            if (VANILLA_BUILD=1)
                 jmp     SetBaseMov(pc)
+            endif
 
     ; End of function j_SetBaseMov
 
@@ -424,10 +445,13 @@ j_SetBaseDef:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_SetBaseResistance:
                 
+            if (VANILLA_BUILD=1)
                 jmp     SetBaseResistance(pc)
+            endif
 
     ; End of function j_SetBaseResistance
 
@@ -454,10 +478,13 @@ j_SetBaseAgi:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_SetCurrentMov:
                 
+            if (VANILLA_BUILD=1)
                 jmp     SetCurrentMov(pc)
+            endif
 
     ; End of function j_SetCurrentMov
 
@@ -524,10 +551,13 @@ j_SetClass:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_SetCurrentResistance:
                 
+            if (VANILLA_BUILD=1)
                 jmp     SetCurrentResistance(pc)
+            endif
 
     ; End of function j_SetCurrentResistance
 
@@ -674,10 +704,13 @@ j_IncreaseCurrentMp:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_IncreaseLevel:
                 
+            if (VANILLA_BUILD=1)
                 jmp     IncreaseLevel(pc)
+            endif
 
     ; End of function j_IncreaseLevel
 
@@ -754,40 +787,52 @@ j_IncreaseDefeats:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_DecreaseBaseMov:
                 
+            if (VANILLA_BUILD=1)
                 jmp     DecreaseBaseMov(pc)
+            endif
 
     ; End of function j_DecreaseBaseMov
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_DecreaseBaseDef:
                 
+            if (VANILLA_BUILD=1)
                 jmp     DecreaseBaseDef(pc)
+            endif
 
     ; End of function j_DecreaseBaseDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_DecreaseBaseAgi:
                 
+            if (VANILLA_BUILD=1)
                 jmp     DecreaseBaseAgi(pc)
+            endif
 
     ; End of function j_DecreaseBaseAgi
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_DecreaseCurrentMov:
                 
+            if (VANILLA_BUILD=1)
                 jmp     DecreaseCurrentMov(pc)
+            endif
 
     ; End of function j_DecreaseCurrentMov
 
@@ -814,30 +859,39 @@ j_DecreaseCurrentHp:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_DecreaseCurrentDef:
                 
+            if (VANILLA_BUILD=1)
                 jmp     DecreaseCurrentDef(pc)
+            endif
 
     ; End of function j_DecreaseCurrentDef
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_DecreaseCurrentAtt:
                 
+            if (VANILLA_BUILD=1)
                 jmp     DecreaseCurrentAtt(pc)
+            endif
 
     ; End of function j_DecreaseCurrentAtt
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_DecreaseCurrentAgi:
                 
+            if (VANILLA_BUILD=1)
                 jmp     DecreaseCurrentAgi(pc)
+            endif
 
     ; End of function j_DecreaseCurrentAgi
 
@@ -895,19 +949,22 @@ j_DecreaseGold:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ApplyStatusEffectsAndItemsOnStats:
+j_UpdateCombatantStats:
                 
-                jmp     ApplyStatusEffectsAndItemsOnStats(pc)
+                jmp     UpdateCombatantStats(pc)
 
-    ; End of function j_ApplyStatusEffectsAndItemsOnStats
+    ; End of function j_UpdateCombatantStats
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_ApplyItemOnStats:
                 
+            if (VANILLA_BUILD=1)
                 jmp     ApplyItemOnStats(pc)
+            endif
 
     ; End of function j_ApplyItemOnStats
 
@@ -915,21 +972,21 @@ j_ApplyItemOnStats:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_FindItemName:
+j_GetItemName:
                 
-                jmp     FindItemName(pc)
+                jmp     GetItemName(pc)
 
-    ; End of function j_FindItemName
+    ; End of function j_GetItemName
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetItemDefAddress:
+j_GetItemDefinitionAddress:
                 
-                jmp     GetItemDefAddress(pc)
+                jmp     GetItemDefinitionAddress(pc)
 
-    ; End of function j_GetItemDefAddress
+    ; End of function j_GetItemDefinitionAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -974,10 +1031,13 @@ j_GetEquippedRing:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_BreakItemBySlot:
                 
+            if (VANILLA_BUILD=1)
                 jmp     BreakItemBySlot(pc)
+            endif
 
     ; End of function j_BreakItemBySlot
 
@@ -1114,10 +1174,13 @@ j_GetEquipNewAttAndDef:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_OrderItems:
                 
+            if (VANILLA_BUILD=1)
                 jmp     OrderItems(pc)
+            endif
 
     ; End of function j_OrderItems
 
@@ -1174,10 +1237,13 @@ j_GetItemInventoryLocation:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_GetItemSlotContainingIndex:
                 
+            if (VANILLA_BUILD=1)
                 jmp     GetItemSlotContainingIndex(pc)
+            endif
 
     ; End of function j_GetItemSlotContainingIndex
 
@@ -1185,21 +1251,21 @@ j_GetItemSlotContainingIndex:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_FindSpellName:
+j_GetSpellName:
                 
-                jmp     FindSpellName(pc)
+                jmp     GetSpellName(pc)
 
-    ; End of function j_FindSpellName
+    ; End of function j_GetSpellName
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_FindSpellDefAddress:
+j_GetSpellDefAddress:
                 
-                jmp     FindSpellDefAddress(pc)
+                jmp     GetSpellDefAddress(pc)
 
-    ; End of function j_FindSpellDefAddress
+    ; End of function j_GetSpellDefAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1237,27 +1303,35 @@ j_LearnSpell:
 
 j_GetCombatantEntryAddress_0:
                 
+            if (VANILLA_BUILD=1)
                 jmp     GetCombatantEntryAddress(pc)
+            endif
 
     ; End of function j_GetCombatantEntryAddress_0
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
-j_GetDistanceBetweenBattleEntities:
+j_GetDistanceBetweenCombatants:
                 
-                jmp     GetDistanceBetweenBattleEntities(pc)
+            if (VANILLA_BUILD=1)
+                jmp     GetDistanceBetweenCombatants(pc)
+            endif
 
-    ; End of function j_GetDistanceBetweenBattleEntities
+    ; End of function j_GetDistanceBetweenCombatants
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_nullsub_9482:
                 
+            if (VANILLA_BUILD=1)
                 jmp     nullsub_9482(pc)
+            endif
 
     ; End of function j_nullsub_9482
 
@@ -1364,80 +1438,104 @@ j_PopulateTargetableGrid_GiveItem:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_PopulateTargetableGrid_UseItem:
                 
+            if (VANILLA_BUILD=1)
                 jmp     PopulateTargetableGrid_UseItem(pc)
+            endif
 
     ; End of function j_PopulateTargetableGrid_UseItem
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
-sub_8224:
+j_sub_C5FA:
                 
+            if (VANILLA_BUILD=1)
                 jmp     sub_C5FA(pc)    
+            endif
 
-    ; End of function sub_8224
+    ; End of function j_sub_C5FA
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_PopulateTargetableGrid_CastSpell:
                 
+            if (VANILLA_BUILD=1)
                 jmp     PopulateTargetableGrid_CastSpell(pc)
+            endif
 
     ; End of function j_PopulateTargetableGrid_CastSpell
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_PopulateTargetableGrid:
                 
+            if (VANILLA_BUILD=1)
                 jmp     PopulateTargetableGrid(pc)
+            endif
 
     ; End of function j_PopulateTargetableGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_PopulateTargetsArrayWithOpponents:
                 
+            if (VANILLA_BUILD=1)
                 jmp     PopulateTargetsArrayWithOpponents(pc)
+            endif
 
     ; End of function j_PopulateTargetsArrayWithOpponents
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_PopulateTargetsArrayWithAllies:
                 
+            if (VANILLA_BUILD=1)
                 jmp     PopulateTargetsArrayWithAllies(pc)
+            endif
 
     ; End of function j_PopulateTargetsArrayWithAllies
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_PopulateTargetsArrayWithEnemies:
                 
+            if (VANILLA_BUILD=1)
                 jmp     PopulateTargetsArrayWithEnemies(pc)
+            endif
 
     ; End of function j_PopulateTargetsArrayWithEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_PopulateTargetsArrayWithAllCombatants:
                 
+            if (VANILLA_BUILD=1)
                 jmp     PopulateTargetsArrayWithAllCombatants(pc)
+            endif
 
     ; End of function j_PopulateTargetsArrayWithAllCombatants
 
@@ -1484,10 +1582,13 @@ j_ClearTotalMovecostsAndMovableGridArrays:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_ClearTargetsArray:
                 
+            if (VANILLA_BUILD=1)
                 jmp     ClearTargetsArray(pc)
+            endif
 
     ; End of function j_ClearTargetsArray
 
@@ -1584,10 +1685,13 @@ j_JoinForce:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_LeaveForce:
                 
+            if (VANILLA_BUILD=1)
                 jmp     LeaveForce(pc)  
+            endif
 
     ; End of function j_LeaveForce
 
@@ -1674,10 +1778,13 @@ j_RemoveItemFromCaravan:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
 j_AddAllToStack:
                 
+            if (VANILLA_BUILD=1)
                 jmp     AddAllToStack(pc)
+            endif
 
     ; End of function j_AddAllToStack
 
@@ -1745,11 +1852,13 @@ j_SetTerrain:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ClearAiMoveInfo:
+j_ClearAiMemory:
                 
-                jmp     ClearAiMoveInfo(pc)
+            if (VANILLA_BUILD=1)
+                jmp     ClearAiMemory(pc)
+            endif
 
-    ; End of function j_ClearAiMoveInfo
+    ; End of function j_ClearAiMemory
 
 
 ; =============== S U B R O U T I N E =======================================

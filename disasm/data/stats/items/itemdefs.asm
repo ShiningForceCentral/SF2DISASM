@@ -3,15 +3,18 @@
 ; 0x16EA6..0x176A6 : Item definitions
 table_ItemDefinitions:
                 
-; Syntax        equipFlags   [EQUIPFLAG_]bitfield
-;               equipFlags2  [EQUIPFLAG2_]bitfield (if EXPANDED_CLASSES is enabled)
+; Syntax        equipFlags   [EQUIPFLAG_]bitfield               ; bitfield shorthand (e.g., SDMN|HERO)
+;               equipFlags2  [EQUIPFLAG2_]bitfield              ; (if EXPANDED_CLASSES is enabled)
 ;               range        min, max 0-3
 ;               price        0-65535
-;               itemType     [ITEMTYPE_]bitfield
-;               useSpell     [SPELL_]enum[|level]
-;               equipEffects [EQUIPEFFECT_]enum, parameter, &
+;               itemType     [ITEMTYPE_]bitfield                ; bitfield shorthand (e.g., WEAPON|RARE)
+;               useSpell     [SPELL_]enum[|[SPELL_]level]       ; bitfield shorthand (e.g., BLAZE|LV2)
+;               equipEffects [EQUIPEFFECT_]enum, parameter, &   ; shorthand, parameter (e.g, INCREASE_ATT, 19)
 ;                            [EQUIPEFFECT_]enum, parameter, &
-;                            [EQUIPEFFECT_]enum, parameter
+;                            [EQUIPEFFECT_]enum, parameter, &
+;                            [EQUIPEFFECT_]enum, parameter, &
+;                            [EQUIPEFFECT_]enum, parameter, &
+;                            [EQUIPEFFECT_]enum, parameter      (up to 3 effects in vanilla, 6 in standard build)
 ;
 ;        level: LV1 = 0 (default when omitted)
 ;               LV2 = $40
@@ -19,12 +22,137 @@ table_ItemDefinitions:
 ;               LV4 = $C0
 ;
 ; Notes regarding additional equip effects:
-;       Parameters for INCREASE/DECREASE_RES_ can be a combination i.e. MODIFY_FIRE1|MODIFY_WIND3
-;       Parameter for SET_RES_ should be every resistance for the byte i.e. RESISTANCE_WIND_NONE|RESISTANCE_LIGHTNING_MAJOR|RESISTANCE_ICE_WEAKNESS|RESISTANCE_FIRE_NONE
-;       Parameter for SET_STATUS should be single effect i.e. STATUS_POISON, STATUS_SILENCE, etc.
 ;
-; Notes: Equip parameter range depends on effect.
-;        Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+;       Parameters for INCREASE/DECREASE_RESISTANCE and SET_STATUS can be a combination,
+;       i.e., @fire1|@wind3 or @boost|@attack.
+;
+;       Parameter for LEARN_SPELL must be the full enum symbol, i.e., SPELL_name|SPELL_level.
+;
+;
+; List of Effect Codes :
+;       NONE,                   0       ; no effect
+;       UNDEFINED1,             0       ; no effect
+;       UNDEFINED2,             0       ; no effect
+;       INCREASE_ATT,           0-200   ; (vanilla stat cap)
+;       INCREASE_DEF,           ...
+;       INCREASE_AGI,           0-127
+;       INCREASE_MOV,
+;       INCREASE_CRITICAL,      0-3     ; prowess setting chances: 0 = 1/32, 1 = 1/16, 2 = 1/8, 3 = 1/4
+;       INCREASE_DOUBLE,        ...
+;       INCREASE_COUNTER,
+;       INCREASE_RESISTANCE,    [@wind1|@lightning2|@ice3|...] ; increase resistance by that amount
+;       DECREASE_ATT,
+;       DECREASE_DEF,
+;       DECREASE_AGI,
+;       DECREASE_MOV,
+;       DECREASE_CRITICAL,
+;       DECREASE_DOUBLE,
+;       DECREASE_COUNTER,
+;       DECREASE_RESISTANCE,
+;       SET_ATT,
+;       SET_DEF,
+;       SET_AGI,
+;       SET_MOV,
+;       SET_DOUBLE_TURN_ON,     -1      ; set the double turn bit while preserving current AGI
+;       SET_DOUBLE_TURN_OFF,    -1      ; clear the double turn bit while preserving current AGI
+;       SET_CRITICAL_150,       -1      ; set the strong critical bit while preserving current chance
+;       SET_CRITICAL_125,       -1      ; clear the strong critical bit while preserving current chance
+;       SET_CRITICAL,           @125_1in32/@150_1in4/@stun_1in4/...
+;       SET_DOUBLE,             @1in32/@1in16/...
+;       SET_COUNTER,            ...
+;       SET_RESISTANCE_WIND,    @weakness/@neutral/@minor/@major
+;       SET_RESISTANCE_LIGHTNING, ...
+;       SET_RESISTANCE_ICE
+;       SET_RESISTANCE_FIRE
+;       SET_RESISTANCE_STATUS,  @neutral/@minor/@major/@immunity
+;       SET_STATUS,             [@stun|@poison|@confusion|...]
+;       SET_MOVETYPE,           @regular/@centaur/@stealth/...
+;       LEARN_SPELL,            SPELL_enum[|SPELL_level]
+;       UNLEARN_ALL_SPELL,      -1
+;
+
+
+                module
+                
+; Resistance increase/decrease shorthands :
+@wind1 = MODIFY_WIND1
+@wind2 = MODIFY_WIND2
+@wind3 = MODIFY_WIND3
+@lightning1 = MODIFY_LIGHTNING1
+@lightning2 = MODIFY_LIGHTNING2
+@lightning3 = MODIFY_LIGHTNING3
+@ice1 = MODIFY_ICE1
+@ice2 = MODIFY_ICE2
+@ice3 = MODIFY_ICE3
+@fire1 = MODIFY_FIRE1
+@fire2 = MODIFY_FIRE2
+@fire3 = MODIFY_FIRE3
+@status1 = MODIFY_STATUS1
+@status2 = MODIFY_STATUS2
+@status3 = MODIFY_STATUS3
+
+
+; Critical prowess shorthands :
+@125_1in32 = PROWESS_CRITICAL125_1IN32
+@125_1in16 = PROWESS_CRITICAL125_1IN16
+@125_1in8 = PROWESS_CRITICAL125_1IN8
+@125_1in4 = PROWESS_CRITICAL125_1IN4
+@150_1in32 = PROWESS_CRITICAL150_1IN32
+@150_1in16 = PROWESS_CRITICAL150_1IN16
+@150_1in8 = PROWESS_CRITICAL150_1IN8
+@150_1in4 = PROWESS_CRITICAL150_1IN4
+@none = PROWESS_CRITICAL_NONE
+@poison_1in4 = PROWESS_CRITICAL_POISON
+@sleep_1in4 = PROWESS_CRITICAL_SLEEP
+@stun_1in4 = PROWESS_CRITICAL_STUN
+@confusion_1in4 = PROWESS_CRITICAL_MUDDLE
+@slow_1in4 = PROWESS_CRITICAL_SLOW
+@drain_1in4 = PROWESS_CRITICAL_MAGIC_DRAIN
+@silence_1in4 = PROWESS_CRITICAL_SILENCE
+
+
+; Double and counter prowess shorthands :
+@1in32 = PROWESS_1IN32
+@1in16 = PROWESS_1IN16
+@1in8 = PROWESS_1IN8
+@1in4 = PROWESS_1IN4
+
+
+; Resistance shorthands :
+@neutral = RESISTANCESETTING_NEUTRAL
+@minor = RESISTANCESETTING_MINOR
+@major = RESISTANCESETTING_MAJOR
+@weakness = RESISTANCESETTING_WEAKNESS
+@immunity = RESISTANCESETTING_IMMUNITY
+
+
+; Status effects shorthands :
+@stun = STATUSEFFECT_STUN
+@poison = STATUSEFFECT_POISON
+@confusion = STATUSEFFECT_CONFUSION
+@muddle = STATUSEFFECT_MUDDLE
+@sleep = STATUSEFFECT_SLEEP
+@silence = STATUSEFFECT_SILENCE
+@slow = STATUSEFFECT_SLOW
+@boost = STATUSEFFECT_BOOST
+@attack = STATUSEFFECT_ATTACK
+
+
+; Move type shorthands :
+@regular = MOVETYPE_LOWER_REGULAR
+@centaur = MOVETYPE_LOWER_CENTAUR
+@stealth = MOVETYPE_LOWER_STEALTH
+@brassGunner = MOVETYPE_LOWER_BRASS_GUNNER
+@flying = MOVETYPE_LOWER_FLYING
+@hovering = MOVETYPE_LOWER_HOVERING
+@aquatic = MOVETYPE_LOWER_AQUATIC
+@archer = MOVETYPE_LOWER_ARCHER
+@centaurArcher = MOVETYPE_LOWER_CENTAUR_ARCHER
+@stealthArcher = MOVETYPE_LOWER_STEALTH_ARCHER
+@mage = MOVETYPE_LOWER_MAGE
+@healer = MOVETYPE_LOWER_HEALER
+
+; ---------------------------------------------------------------------------
                 
                 ; 0: Medical Herb
                 equipFlags   NONE
@@ -34,6 +162,9 @@ table_ItemDefinitions:
                 itemType     CONSUMABLE
                 useSpell     HEALIN
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -46,6 +177,9 @@ table_ItemDefinitions:
                 useSpell     HEALIN|LV2
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 2: Healing Drop
@@ -56,6 +190,9 @@ table_ItemDefinitions:
                 itemType     CONSUMABLE
                 useSpell     HEALIN|LV3
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -68,6 +205,9 @@ table_ItemDefinitions:
                 useSpell     DETOX
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 4: Angel Wing
@@ -78,6 +218,9 @@ table_ItemDefinitions:
                 itemType     CONSUMABLE
                 useSpell     EGRESS
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -90,6 +233,9 @@ table_ItemDefinitions:
                 useSpell     POWDER
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 6: Healing Water
@@ -100,6 +246,9 @@ table_ItemDefinitions:
                 itemType     CONSUMABLE
                 useSpell     HEAL|LV4
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -112,6 +261,9 @@ table_ItemDefinitions:
                 useSpell     G_TEAR|LV2
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 8: Healing Rain
@@ -122,6 +274,9 @@ table_ItemDefinitions:
                 itemType     RARE|CONSUMABLE
                 useSpell     AURA|LV4
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -134,6 +289,9 @@ table_ItemDefinitions:
                 useSpell     POWER
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 10: Protect Milk
@@ -144,6 +302,9 @@ table_ItemDefinitions:
                 itemType     CONSUMABLE
                 useSpell     GUARD
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -156,6 +317,9 @@ table_ItemDefinitions:
                 useSpell     SPEED
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 12: Running Pimento
@@ -166,6 +330,9 @@ table_ItemDefinitions:
                 itemType     CONSUMABLE
                 useSpell     IDATEN
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -178,6 +345,9 @@ table_ItemDefinitions:
                 useSpell     HEALTH
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 14: Bright Honey
@@ -188,6 +358,9 @@ table_ItemDefinitions:
                 itemType     CONSUMABLE
                 useSpell     HANNY
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -200,6 +373,9 @@ table_ItemDefinitions:
                 useSpell     BRAVE
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 16: Shining Ball
@@ -210,6 +386,9 @@ table_ItemDefinitions:
                 itemType     RARE|CONSUMABLE
                 useSpell     FBALL
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -222,6 +401,9 @@ table_ItemDefinitions:
                 useSpell     BREZAD
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 18: Holy Thunder
@@ -232,6 +414,9 @@ table_ItemDefinitions:
                 itemType     RARE|CONSUMABLE
                 useSpell     THUNDR
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -244,6 +429,9 @@ table_ItemDefinitions:
                 useSpell     ATTACK
                 equipEffects INCREASE_ATT, 5, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 20: Protect Ring
@@ -254,6 +442,9 @@ table_ItemDefinitions:
                 itemType     RING|RARE|BREAKABLE
                 useSpell     BOOST
                 equipEffects INCREASE_DEF, 5, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -266,6 +457,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_AGI, 5, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 22: Running Ring
@@ -276,6 +470,9 @@ table_ItemDefinitions:
                 itemType     RING|RARE
                 useSpell     NOTHING
                 equipEffects INCREASE_MOV, 2, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -288,6 +485,9 @@ table_ItemDefinitions:
                 useSpell     AURA|LV2
                 equipEffects INCREASE_DEF, 10, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 24: Black Ring
@@ -298,6 +498,9 @@ table_ItemDefinitions:
                 itemType     RING|RARE|CURSED|BREAKABLE
                 useSpell     BLAZE|LV2
                 equipEffects INCREASE_ATT, 10, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -310,6 +513,9 @@ table_ItemDefinitions:
                 useSpell     BOLT|LV2
                 equipEffects INCREASE_ATT, 15, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 26: Leather Glove
@@ -320,6 +526,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 26, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -332,6 +541,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 33, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 28: Brass Knuckles
@@ -342,6 +554,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 39, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -354,6 +569,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 43, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 30: Misty Knuckles
@@ -364,6 +582,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE|BREAKABLE
                 useSpell     SPOIT
                 equipEffects INCREASE_ATT, 48, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -376,6 +597,9 @@ table_ItemDefinitions:
                 useSpell     MUDDLE
                 equipEffects INCREASE_ATT, 55, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 32: Evil Knuckles
@@ -386,6 +610,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE|CURSED
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 63, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -398,6 +625,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 5, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 34: Hand Axe
@@ -408,6 +638,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 9, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -420,6 +653,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 13, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 36: Power Axe
@@ -430,6 +666,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 17, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -442,6 +681,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 21, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 38: Large Axe
@@ -452,6 +694,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 25, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -464,6 +709,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 28, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 40: Heat Axe
@@ -474,6 +722,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE|BREAKABLE
                 useSpell     BLAZE|LV2
                 equipEffects INCREASE_ATT, 32, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -486,6 +737,9 @@ table_ItemDefinitions:
                 useSpell     BLAZE|LV3
                 equipEffects INCREASE_ATT, 35, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 42: Ground Axe
@@ -497,6 +751,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 39, &
                              INCREASE_MOV, 1, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 43: Rune Axe
@@ -508,6 +765,9 @@ table_ItemDefinitions:
                 useSpell     DETOX|LV2
                 equipEffects INCREASE_ATT, 42, &
                              INCREASE_CRITICAL, 1, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 44: Evil Axe
@@ -519,6 +779,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 50, &
                              DECREASE_DEF, 5, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 45: Wooden Arrow
@@ -529,6 +792,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 7, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -541,6 +807,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 12, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 47: Steel Arrow
@@ -551,6 +820,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 17, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -563,6 +835,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 21, &
                              INCREASE_CRITICAL, 1, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 49: Assault Shell
@@ -573,6 +848,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 25, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -585,6 +863,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 29, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 51: Nazca Cannon
@@ -596,6 +877,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 33, &
                              INCREASE_CRITICAL, 1, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 52: Buster Shot
@@ -606,6 +890,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 37, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -618,6 +905,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 40, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 54: Grand Cannon
@@ -628,6 +918,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE|BREAKABLE
                 useSpell     DISPEL
                 equipEffects INCREASE_ATT, 43, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -640,6 +933,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 51, &
                              DECREASE_DEF, 5, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 56: Wooden Stick
@@ -650,6 +946,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 3, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -662,6 +961,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 5, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 58: Middle Sword
@@ -672,6 +974,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 8, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -684,6 +989,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 12, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 60: Steel Sword
@@ -694,6 +1002,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 16, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -710,6 +1021,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 19, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 62: Broad Sword
@@ -720,6 +1034,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 22, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -732,6 +1049,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 26, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 64: Great Sword
@@ -742,6 +1062,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 29, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -754,6 +1077,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 32, &
                              INCREASE_CRITICAL, 1, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 66: Battle Sword
@@ -764,6 +1090,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 35, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -776,6 +1105,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 46, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 68: Counter Sword
@@ -787,6 +1119,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 39, &
                              INCREASE_COUNTER, 1, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 69: Levanter
@@ -797,6 +1132,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE|BREAKABLE
                 useSpell     BLAZE|LV3
                 equipEffects INCREASE_ATT, 42, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -809,6 +1147,9 @@ table_ItemDefinitions:
                 useSpell     DESOUL
                 equipEffects INCREASE_ATT, 50, &
                              DECREASE_DEF, 5, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 71: Wooden Sword
@@ -819,6 +1160,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 3, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -831,6 +1175,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 6, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 73: Bronze Lance
@@ -841,6 +1188,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 9, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -853,6 +1203,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 12, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 75: Steel Lance
@@ -863,6 +1216,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 16, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -875,6 +1231,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 20, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 77: Heavy Lance
@@ -885,6 +1244,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 23, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -897,6 +1259,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 26, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 79: Chrome Lance
@@ -907,6 +1272,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 31, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -919,6 +1287,9 @@ table_ItemDefinitions:
                 useSpell     ATTACK
                 equipEffects INCREASE_ATT, 33, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 81: Holy Lance
@@ -930,6 +1301,9 @@ table_ItemDefinitions:
                 useSpell     HEALIN
                 equipEffects INCREASE_ATT, 39, &
                              INCREASE_DEF, 5, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 82: Mist Javelin
@@ -940,6 +1314,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 42, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -952,6 +1329,9 @@ table_ItemDefinitions:
                 useSpell     BOLT
                 equipEffects INCREASE_ATT, 37, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 84: Evil Lance
@@ -963,6 +1343,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 48, &
                              DECREASE_MOV, 2, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 85: Wooden Rod
@@ -973,6 +1356,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 3, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -985,6 +1371,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 5, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 87: Bronze Rod
@@ -995,6 +1384,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 8, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1007,6 +1399,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 12, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 89: Power Stick
@@ -1017,6 +1412,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 15, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1029,6 +1427,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 19, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 91: Guardian Staff
@@ -1040,6 +1441,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 22, &
                              INCREASE_DEF, 5, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 92: Indra Staff
@@ -1050,6 +1454,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|BREAKABLE
                 useSpell     SPOIT
                 equipEffects INCREASE_ATT, 25, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1062,6 +1469,9 @@ table_ItemDefinitions:
                 useSpell     BLAZE|LV2
                 equipEffects INCREASE_ATT, 27, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 94: Wish Staff
@@ -1072,6 +1482,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE|BREAKABLE
                 useSpell     ATTACK
                 equipEffects INCREASE_ATT, 26, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1084,6 +1497,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 28, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 96: Supply Staff
@@ -1094,6 +1510,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE|BREAKABLE
                 useSpell     SPOIT
                 equipEffects INCREASE_ATT, 32, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1106,6 +1525,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 29, &
                              UNDEFINED1, 3, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 98: Freeze Staff
@@ -1116,6 +1538,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE|BREAKABLE
                 useSpell     FREEZE|LV3
                 equipEffects INCREASE_ATT, 37, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1128,6 +1553,9 @@ table_ItemDefinitions:
                 useSpell     AURA|LV2
                 equipEffects INCREASE_ATT, 31, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 100: Mystery Staff
@@ -1139,6 +1567,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 39, &
                              UNDEFINED2, 2, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 101: Demon Rod
@@ -1150,6 +1581,9 @@ table_ItemDefinitions:
                 useSpell     SPOIT
                 equipEffects INCREASE_ATT, 50, &
                              DECREASE_AGI, 10, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 102: Iron Ball
@@ -1160,6 +1594,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE|CURSED|BREAKABLE
                 useSpell     BLAZE|LV3
                 equipEffects INCREASE_ATT, 44, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1172,6 +1609,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 5, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 104: Dagger
@@ -1182,6 +1622,9 @@ table_ItemDefinitions:
                 itemType     WEAPON
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 8, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1194,6 +1637,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 12, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 106: Thieve's Dagger
@@ -1205,6 +1651,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 17, &
                              INCREASE_AGI, 5, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 107: Katana
@@ -1215,6 +1664,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 34, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1227,6 +1679,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 39, &
                              INCREASE_DOUBLE, 1, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 109: Gisarme
@@ -1238,6 +1693,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 42, &
                              SET_CRITICAL, 6, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 110: Taros Sword
@@ -1248,6 +1706,9 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE|BREAKABLE
                 useSpell     BOLT|LV2
                 equipEffects INCREASE_ATT, 32, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1260,6 +1721,9 @@ table_ItemDefinitions:
                 useSpell     SHINE
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 112: Wooden Panel
@@ -1270,6 +1734,9 @@ table_ItemDefinitions:
                 itemType     RARE|UNSELLABLE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1282,6 +1749,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 114: Cannon
@@ -1292,6 +1762,9 @@ table_ItemDefinitions:
                 itemType     RARE|UNSELLABLE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1304,6 +1777,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 116: Dynamite
@@ -1314,6 +1790,9 @@ table_ItemDefinitions:
                 itemType     RARE|UNSELLABLE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1326,6 +1805,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 118: Pegasus Wing
@@ -1336,6 +1818,9 @@ table_ItemDefinitions:
                 itemType     RARE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1348,6 +1833,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 120: Silver Tank
@@ -1358,6 +1846,9 @@ table_ItemDefinitions:
                 itemType     RARE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1370,6 +1861,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 122: Vigor Ball
@@ -1380,6 +1874,9 @@ table_ItemDefinitions:
                 itemType     RARE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1392,6 +1889,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 124: Life Ring
@@ -1402,6 +1902,9 @@ table_ItemDefinitions:
                 itemType     RING|RARE
                 useSpell     NOTHING
                 equipEffects UNDEFINED1, 5, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1414,6 +1917,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 126: Chirrup Sandals
@@ -1425,6 +1931,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 127: Empty
@@ -1435,6 +1944,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1449,6 +1961,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 129: 
@@ -1459,6 +1974,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1471,6 +1989,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 131: 
@@ -1481,6 +2002,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1493,6 +2017,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 133: 
@@ -1503,6 +2030,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1515,6 +2045,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 135: 
@@ -1525,6 +2058,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1537,6 +2073,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 137: 
@@ -1547,6 +2086,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1559,6 +2101,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 139: 
@@ -1569,6 +2114,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1581,6 +2129,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 141: 
@@ -1591,6 +2142,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1603,6 +2157,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 143: 
@@ -1613,6 +2170,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1625,6 +2185,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 145: 
@@ -1635,6 +2198,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1647,6 +2213,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 147: 
@@ -1657,6 +2226,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1669,6 +2241,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 149: 
@@ -1679,6 +2254,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1691,6 +2269,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 151: 
@@ -1701,6 +2282,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1713,6 +2297,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 153: 
@@ -1723,6 +2310,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1735,6 +2325,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 155: 
@@ -1745,6 +2338,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1757,6 +2353,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 157: 
@@ -1767,6 +2366,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1779,6 +2381,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 159: 
@@ -1789,6 +2394,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1801,6 +2409,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 161: 
@@ -1811,6 +2422,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1823,6 +2437,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 163: 
@@ -1833,6 +2450,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1845,6 +2465,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 165: 
@@ -1855,6 +2478,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1867,6 +2493,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 167: 
@@ -1877,6 +2506,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1889,6 +2521,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 169: 
@@ -1899,6 +2534,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1911,6 +2549,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 171: 
@@ -1921,6 +2562,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1933,6 +2577,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 173: 
@@ -1943,6 +2590,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1955,6 +2605,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 175: 
@@ -1965,6 +2618,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1977,6 +2633,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 177: 
@@ -1987,6 +2646,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -1999,6 +2661,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 179: 
@@ -2009,6 +2674,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2021,6 +2689,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 181: 
@@ -2031,6 +2702,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2043,6 +2717,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 183: 
@@ -2053,6 +2730,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2065,6 +2745,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 185: 
@@ -2075,6 +2758,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2087,6 +2773,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 187: 
@@ -2097,6 +2786,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2109,6 +2801,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 189: 
@@ -2119,6 +2814,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2131,6 +2829,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 191:
@@ -2141,6 +2842,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2153,6 +2857,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 193: 
@@ -2163,6 +2870,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2175,6 +2885,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 195: 
@@ -2185,6 +2898,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2197,6 +2913,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 197: 
@@ -2207,6 +2926,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2219,6 +2941,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 199: 
@@ -2229,6 +2954,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2241,6 +2969,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 201: 
@@ -2251,6 +2982,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2263,6 +2997,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 203: 
@@ -2273,6 +3010,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2285,6 +3025,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 205: 
@@ -2295,6 +3038,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2307,6 +3053,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 207: 
@@ -2317,6 +3066,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2329,6 +3081,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 209: 
@@ -2339,6 +3094,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2351,6 +3109,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 211: 
@@ -2361,6 +3122,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2373,6 +3137,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 213: 
@@ -2383,6 +3150,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2395,6 +3165,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 215: 
@@ -2405,6 +3178,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2417,6 +3193,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 217: 
@@ -2427,6 +3206,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2439,6 +3221,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 219: 
@@ -2449,6 +3234,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2461,6 +3249,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 221: 
@@ -2471,6 +3262,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2483,6 +3277,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 223: 
@@ -2493,6 +3290,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2505,6 +3305,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 225: 
@@ -2515,6 +3318,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2527,6 +3333,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 227: 
@@ -2537,6 +3346,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2549,6 +3361,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 229: 
@@ -2559,6 +3374,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2571,6 +3389,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 231: 
@@ -2581,6 +3402,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2593,6 +3417,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 233: 
@@ -2603,6 +3430,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2615,6 +3445,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 235: 
@@ -2625,6 +3458,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2637,6 +3473,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 237: 
@@ -2647,6 +3486,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2659,6 +3501,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 239: 
@@ -2669,6 +3514,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2681,6 +3529,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 241: 
@@ -2691,6 +3542,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2703,6 +3557,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 243: 
@@ -2713,6 +3570,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2725,6 +3585,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 245: 
@@ -2735,6 +3598,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2747,6 +3613,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 247: 
@@ -2757,6 +3626,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2769,6 +3641,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 249: 
@@ -2779,6 +3654,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2791,6 +3669,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 251: 
@@ -2801,6 +3682,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2813,6 +3697,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 253: 
@@ -2823,6 +3710,9 @@ table_ItemDefinitions:
                 itemType     NONE
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0, &
                              NONE, 0
                 
@@ -2835,6 +3725,9 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
                 ; 255: 
@@ -2846,6 +3739,11 @@ table_ItemDefinitions:
                 useSpell     NOTHING
                 equipEffects NONE, 0, &
                              NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
+                             NONE, 0, &
                              NONE, 0
                 
             endif
+
+                modend

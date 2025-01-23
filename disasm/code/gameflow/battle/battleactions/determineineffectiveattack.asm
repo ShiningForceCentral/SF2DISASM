@@ -32,7 +32,7 @@ cutoff = -1
 battlesceneScript_DetermineIneffectiveAttack:
                 
                 movem.l d0-d1,-(sp)
-                checkSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE
+                compareToSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE
                 bne.w   @Skip
                 clrFlg  112             ; Currently attacking Taros with Achilles Sword
                 tst.b   (a4)

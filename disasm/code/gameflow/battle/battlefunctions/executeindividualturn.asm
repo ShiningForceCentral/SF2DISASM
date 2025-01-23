@@ -21,7 +21,7 @@ ExecuteIndividualTurn:
                 bsr.w   ClearDeadCombatantsListLength
                 
                 ; Are we currently battling Taros, and is Bowie the actor?
-                checkSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE ; HARDCODED battle index
+                compareToSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE ; HARDCODED battle index
                 bne.s   @IsActorAlive
                 tst.w   combatant(a6)
                 bne.s   @IsActorAlive
@@ -197,7 +197,7 @@ ExecuteIndividualTurn:
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
 @CheckFairyWoodsBattle:
                 
-                checkSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check : Fairy wood secret battle
+                compareToSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check : Fairy wood secret battle
                 bne.s   @WriteBattlesceneScript
                 jsr     j_CloseTimerWindow
 @WriteBattlesceneScript:

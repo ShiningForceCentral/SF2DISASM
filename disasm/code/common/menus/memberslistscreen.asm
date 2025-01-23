@@ -997,7 +997,7 @@ BuildMemberSummaryWindow:
                 addq.w  #2,a1
                 move.w  #VDPTILE_UPPERCASE_L|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  combatant(a6),d0
-            if (SHOW_EFFECTIVE_LEVEL=1)
+            if (STANDARD_BUILD&SHOW_EFFECTIVE_LEVEL=1)
                 jsr     CalculateEffectiveLevel
             else
                 jsr     j_GetCurrentLevel
@@ -1200,7 +1200,7 @@ BuildMemberSummaryWindowOnEquipPage:
                 move.w  d5,d1
                 cmpi.w  #ITEM_UNARMED,d1
                 beq.s   @WriteNothingString
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 bra.s   @Continue
 @WriteNothingString:
                 
@@ -1296,7 +1296,7 @@ WriteMemberMagicList:
                 beq.w   return_13B46
                 movem.l a0-a1,-(sp)
                 movem.w d0-d1/d6-d7,-(sp)
-                jsr     j_FindSpellName
+                jsr     j_GetSpellName
                 moveq   #-42,d1
                 move.l  a1,-(sp)
                 bsr.w   WriteTilesFromAsciiWithRegularFont
@@ -1363,7 +1363,7 @@ WriteMemberItemsList:
                 beq.w   return_13B46
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movem.l (sp)+,a0-a1

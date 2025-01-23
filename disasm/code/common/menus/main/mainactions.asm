@@ -108,7 +108,7 @@ byte_21348:
 @Egress:
                 
                 move.b  spellEntry(a6),d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMp
@@ -142,7 +142,7 @@ byte_213A8:
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 clsTxt
                 move.b  spellEntry(a6),d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMp
@@ -182,7 +182,7 @@ byte_21468:
                 
                 clsTxt
                 jsr     j_SetStatusEffects
-                jsr     j_ApplyStatusEffectsAndItemsOnStats
+                jsr     j_UpdateCombatantStats
 @ExitMagic:
                 
                 bra.w   @Goto_StartMain
@@ -543,7 +543,7 @@ byte_2184E:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_UNSELLABLE,d1

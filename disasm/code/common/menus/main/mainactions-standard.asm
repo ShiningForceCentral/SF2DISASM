@@ -114,7 +114,7 @@ MainMenu_Magic:
                 beq.s   @NothingHappened        ; nothing happens if not an overworld map
                 
 @Egress:        move.b  spellEntry(a6),d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     DecreaseCurrentMP
@@ -146,7 +146,7 @@ MainMenu_Magic:
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 clsTxt
                 move.b  spellEntry(a6),d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     DecreaseCurrentMP
@@ -183,7 +183,7 @@ MainMenu_Magic:
                 txt     422             ; "But nothing happened.{D1}"
 @UpdateStats:   clsTxt
                 pea     @StartMain(pc)
-                pea     ApplyStatusEffectsAndItemsOnStats
+                pea     UpdateCombatantStats
                 jmp     SetStatusEffects
 ; ---------------------------------------------------------------------------
 
@@ -224,7 +224,7 @@ MainItemSubmenu_Use:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 move.w  itemIndex(a6),d1
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 
                 ; In: d1.w = item index
@@ -471,7 +471,7 @@ MainItemSubmenu_Drop:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 move.w  itemIndex(a6),d1
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 
                 ; Is item unsellable?
@@ -553,10 +553,10 @@ PopulateGenericListWithCurrentForceMembers:
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,((GENERIC_LIST_LENGTH-$1000000)).w
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
+                bra.s   @Copy
                 
-@Loop:          move.b  (a0)+,(a1)+
-                dbf     d7,@Loop
+@Copy_Loop:     move.b  (a0)+,(a1)+
+@Copy:          dbf     d7,@Copy_Loop
                 
                 movem.l (sp)+,d7-a1
                 rts

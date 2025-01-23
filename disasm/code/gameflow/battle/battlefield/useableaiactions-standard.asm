@@ -40,7 +40,7 @@ GetNextUsableAttackSpell:
 @CheckSpellType:
                 
                 ; Is spell attack type?
-                bsr.w   FindSpellDefAddress
+                bsr.w   GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 beq.s   @Break                      ; break out of loop once we have found an attack type spell
@@ -81,7 +81,7 @@ GetNextHealingSpell:
                 beq.s   @Next
                 
                 ; Is spell heal type?
-                bsr.w   FindSpellDefAddress
+                bsr.w   GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_HEAL,d2
@@ -120,7 +120,7 @@ GetNextSupportSpell:
                 beq.s   @Next
                 
                 ; Is spell support type?
-                bsr.w   FindSpellDefAddress
+                bsr.w   GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_SUPPORT,d2
@@ -174,7 +174,7 @@ GetNextUsableAttackItem:
                 beq.s   @Next
                 
                 ; Get item Use Spell entry -> d1.w
-@Continue:      bsr.w   GetItemDefAddress
+@Continue:      bsr.w   GetItemDefinitionAddress
                 move.w  d1,d4                       ; save item entry
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
@@ -197,7 +197,7 @@ GetNextUsableAttackItem:
 @CheckSpellType:
                 
                 ; Is spell attack type?
-                bsr.w   FindSpellDefAddress
+                bsr.w   GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 beq.s   @Break                      ; break out of loop once we have found an attack type spell
@@ -251,11 +251,11 @@ GetNextUsableHealingItem:
                 btst    #ITEMENTRY_BIT_USABLE_BY_AI,d1
                 beq.s   @Next
                 
-@Continue:      bsr.w   GetItemDefAddress
+@Continue:      bsr.w   GetItemDefinitionAddress
                 move.w  d1,d4                           ; save item entry
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                bsr.w   FindSpellDefAddress
+                bsr.w   GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_HEAL,d2

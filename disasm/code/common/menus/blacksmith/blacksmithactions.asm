@@ -88,7 +88,7 @@ ProcessBlacksmithOrders:
                 loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 @FulfillOrders_Loop:
                 
-                getSavedMithrilWeaponOrder a0, itemIndex(a6)
+                getMithrilWeaponOrder a0, itemIndex(a6)
                 beq.s   @Next
                 move.w  d7,ordersCounter(a6)
                 addi.w  #1,ordersCounter(a6)
@@ -477,7 +477,7 @@ CountPendingAndReadyToFulfillOrders:
                 loadSavedDataAddress MITHRIL_WEAPONS_ON_ORDER, a0
 @Loop:
                 
-                getSavedMithrilWeaponOrder a0, d1
+                getMithrilWeaponOrder a0, d1
                 beq.w   @Next
                 cmpi.w  #1,fulfillOrdersFlag(a6)
                 bne.s   @IncrementPlacedOrders

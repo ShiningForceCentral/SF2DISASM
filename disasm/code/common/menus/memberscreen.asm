@@ -647,7 +647,7 @@ BuildMemberStatusWindow:
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @Break          ; break out of loop if no spells learned
                 movem.l d1/a0,-(sp)
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 movem.l (sp)+,d1/a0
                 beq.w   @NextSpell
@@ -658,7 +658,7 @@ BuildMemberStatusWindow:
                 ; Write spell name
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
-                jsr     j_FindSpellName
+                jsr     j_GetSpellName
                 addq.w  #4,a1           ; offset to spell name relative from start
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
@@ -724,7 +724,7 @@ BuildMemberStatusWindow:
                 ; Write item name
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 addq.w  #4,a1           ; offset to item name relative from start
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
@@ -813,7 +813,7 @@ aJewel:
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @LoadItemIcons
                 movem.l d1/a0,-(sp)
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 movem.l (sp)+,d1/a0
                 beq.s   @NextSpellIcon

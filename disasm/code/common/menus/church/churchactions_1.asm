@@ -151,8 +151,8 @@ ChurchMenu:
                 movem.l a0,-(sp)
                 move.w  d0,member(a6)
                 jsr     j_GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                getSavedWord (a0), d2, COMBATANT_OFFSET_STATUSEFFECTS
+            if (STANDARD_BUILD=1)
+                getSavedWord a0, d2, COMBATANT_OFFSET_STATUSEFFECTS
             else
                 lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2
@@ -231,8 +231,8 @@ ChurchMenu:
                 movem.l a0,-(sp)
                 move.w  d0,member(a6)
                 jsr     j_GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                getSavedWord (a0), d2, COMBATANT_OFFSET_STATUSEFFECTS
+            if (STANDARD_BUILD=1)
+                getSavedWord a0, d2, COMBATANT_OFFSET_STATUSEFFECTS
             else
                 lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2
@@ -254,7 +254,7 @@ ChurchMenu:
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 jsr     j_IsItemCursed
                 bcc.w   @IsNextItemCursed
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.l   d4
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d4
                 lsr.w   #2,d4           ; cure curse cost = 25% of item price
@@ -473,9 +473,9 @@ ChurchMenu:
                 txt     140             ; "Now, let me conduct the{N}rite.{D1}  The light blesses...{N}{D1}{CLASS} {NAME}...{W2}{N}with a class of {CLASS}!{W2}"
                 move.w  member(a6),d0
                 move.w  newClass(a6),d1
-                jsr     j_SetClass
-                jsr     j_Promote
             if (STANDARD_BUILD=1)
+                move.w  currentClass(a6),d2
+                jsr     Promote
                 lea     table_LoseAllSpellsClasses(pc), a0
                 move.w  newClass(a6),d1
                 moveq   #1,d2
@@ -483,6 +483,8 @@ ChurchMenu:
                 bcs.s   @CheckNewWeaponTypeClasses
                 move.b  (a0),d1         ; d1.w = replacement spell entry
             else
+                jsr     j_SetClass
+                jsr     j_Promote
                 cmpi.w  #CLASS_SORC,newClass(a6)
                 bne.s   @CheckNewWeaponTypeClasses
             endif

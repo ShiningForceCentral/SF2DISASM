@@ -228,7 +228,7 @@ loc_6472:
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
                 bsr.w   GenerateRandomNumber
-                move.b  d7,((RANDOM_WAITING_FOR_INPUT-$1000000)).w
+                move.b  d7,((RANDOM_SEED_COPY-$1000000)).w
                 movem.l (sp)+,d6-d7
                 bsr.s   sub_64A8
                 bsr.w   WaitForVInt
@@ -331,7 +331,7 @@ symbol_name:
 symbol_item:
                 
                 bsr.w   GetCurrentDialogueNameIndex
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_number:
@@ -359,7 +359,7 @@ symbol_class:
                 
                 bsr.w   GetCurrentDialogueNameIndex
             if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
-                bsr.w   GetFullClassName
+                jsr     GetFullClassName
             else
                 jsr     j_GetClassName
             endif
@@ -376,7 +376,7 @@ loc_659C:
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
                 bsr.w   GenerateRandomNumber
-                move.b  d7,((RANDOM_WAITING_FOR_INPUT-$1000000)).w
+                move.b  d7,((RANDOM_SEED_COPY-$1000000)).w
                 movem.l (sp)+,d6-d7
                 bsr.w   WaitForVInt
 loc_65B4:
@@ -418,7 +418,7 @@ symbol_delay3:
 symbol_spell:
                 
                 bsr.w   GetCurrentDialogueNameIndex
-                jsr     j_FindSpellName
+                jsr     j_GetSpellName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_clear:

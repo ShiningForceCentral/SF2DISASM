@@ -7,7 +7,9 @@
 
 j_LoadBattleTerrainData:
                 
+            if (VANILLA_BUILD=1)
                 jmp     LoadBattleTerrainData(pc)
+            endif
 
     ; End of function j_LoadBattleTerrainData
 
@@ -17,7 +19,9 @@ j_LoadBattleTerrainData:
 
 j_InitializeAllAlliesBattlePositions:
                 
+            if (VANILLA_BUILD=1)
                 jmp     InitializeAllAlliesBattlePositions(pc)
+            endif
 
     ; End of function j_InitializeAllAlliesBattlePositions
 
@@ -27,7 +31,9 @@ j_InitializeAllAlliesBattlePositions:
 
 j_InitializeAllEnemiesBattlePositions:
                 
+            if (VANILLA_BUILD=1)
                 jmp     InitializeAllEnemiesBattlePositions(pc)
+            endif
 
     ; End of function j_InitializeAllEnemiesBattlePositions
 
@@ -35,11 +41,13 @@ j_InitializeAllEnemiesBattlePositions:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ResetEnemyStatsForRespawn:
+j_ResetSpawningEnemyStats:
                 
-                jmp     ResetEnemyStatsForRespawn(pc)
+            if (VANILLA_BUILD=1)
+                jmp     ResetSpawningEnemyStats(pc)
+            endif
 
-    ; End of function j_ResetEnemyStatsForRespawn
+    ; End of function j_ResetSpawningEnemyStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -47,7 +55,10 @@ j_ResetEnemyStatsForRespawn:
 
 j_InitializeEnemyList:
                 
+            if (VANILLA_BUILD=1)
                 jmp     InitializeEnemyList(pc)
+            endif
+                
 
     ; End of function j_InitializeEnemyList
 
@@ -152,9 +163,11 @@ j_ClearBattleTerrainArrayObstructionFlags:
 ; AI-related
 
 
-sub_1AC038:
+j_IsRegionTriggered:
                 
-                jmp     sub_1AC9FC(pc)  
+            if (VANILLA_BUILD=1)
+                jmp     IsRegionTriggered(pc)
+            endif
 
     ; End of function sub_1AC038
 
@@ -162,21 +175,25 @@ sub_1AC038:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateTriggeredRegionsAndAi:
+j_TriggerRegionsAndActivateEnemies:
                 
-                jmp     UpdateTriggeredRegionsAndAi(pc)
+            if (VANILLA_BUILD=1)
+                jmp     TriggerRegionsAndActivateEnemies(pc)
+            endif
 
-    ; End of function j_UpdateTriggeredRegionsAndAi
+    ; End of function j_TriggerRegionsAndActivateEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_PopulateTargetsListWithRespawningEnemies:
+j_PopulateTargetsListWithSpawningEnemies:
                 
-                jmp     PopulateTargetsListWithRespawningEnemies(pc)
+            if (VANILLA_BUILD=1)
+                jmp     PopulateTargetsListWithSpawningEnemies(pc)
+            endif
 
-    ; End of function j_PopulateTargetsListWithRespawningEnemies
+    ; End of function j_PopulateTargetsListWithSpawningEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -184,7 +201,9 @@ j_PopulateTargetsListWithRespawningEnemies:
 
 j_GenerateRandomNumberUnderD6:
                 
+            if (VANILLA_BUILD=1)
                 jmp     GenerateRandomNumberUnderD6(pc)
+            endif
 
     ; End of function j_GenerateRandomNumberUnderD6
 
@@ -194,7 +213,9 @@ j_GenerateRandomNumberUnderD6:
 
 j_IsBattleUpgradable:
                 
+            if (VANILLA_BUILD=1)
                 jmp     IsBattleUpgradable(pc)
+            endif
 
     ; End of function j_IsBattleUpgradable
 
@@ -204,7 +225,9 @@ j_IsBattleUpgradable:
 
 j_UpgradeBattle:
                 
+            if (VANILLA_BUILD=1)
                 jmp     UpgradeBattle(pc)
+            endif
 
     ; End of function j_UpgradeBattle
 
@@ -214,7 +237,9 @@ j_UpgradeBattle:
 
 j_DetermineBattleUpgrade:
                 
+            if (VANILLA_BUILD=1)
                 jmp     DetermineBattleUpgrade(pc)
+            endif
 
     ; End of function j_DetermineBattleUpgrade
 
@@ -224,7 +249,7 @@ j_DetermineBattleUpgrade:
 
 sub_1AC054:
                 
-                jmp     sub_1B16FE(pc)  
+                jmp     RegionTriggeredSpawn(pc)  
 
     ; End of function sub_1AC054
 
@@ -234,7 +259,9 @@ sub_1AC054:
 
 j_CheckTriggerRegionFlag:
                 
+            if (VANILLA_BUILD=1)
                 jmp     CheckTriggerRegionFlag(pc)
+            endif
 
     ; End of function j_CheckTriggerRegionFlag
 

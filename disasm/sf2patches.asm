@@ -74,6 +74,7 @@ CAPITALIZED_CHARACTER_NAMES:        equ 1       ; Capitalize allies and enemies 
 CARAVAN_IN_TOWER:                   equ 1       ; Add access to Caravan before tower climb battle.
 CUTSCENE_PROTECTION:                equ 1       ; Prevent game from freezing if dead character is needed for scene after leader death (as Slade for battle 5.)
 MINIATURES_SHOP:                    equ 1       ; Place a shopworker on the desktop and floor of the Miniatures Room.
+MODIFY_MOV_STAT_ON_PROMOTION:       equ 1       ; Modify a character's MOV stat when promoting based on the difference between the current and the new class data instead of overwriting it (and losing increases from the Running Pimento in the process.)
 NO_AI_JARO:                         equ 0       ; 
 NO_AI_PETER:                        equ 0       ; 
 NO_DARKNESS_IN_CAVES:               equ 0       ; The darkness gimmick in caves is disabled.
@@ -86,7 +87,7 @@ SKIP_WITCH_DIALOGUE:                equ 0
 
 
 ; Misc. features
-ADDITIONAL_EQUIPEFFECTS:            equ 1       ; Add new equipeffects to offer more options (Set ATT, Increase Resistance, Decrease Double...)
+;ADDITIONAL_EQUIPEFFECTS:            equ 1       ; Add new equipeffects to offer more options (Set ATT, Increase Resistance, Decrease Double...)
 AGILITY_AFFECTS_CHANCE_TO_DODGE:    equ 0       ; Adjust chance to dodge proportionally to the difference between the attacker's and the target's current AGI.
 ALL_ALLIES_JOINED:                  equ 0       ; All allies join from the beginning
 DIAGONAL_LASERS:                    equ 0       ; Allows laser based enemies to fire in 8 directions (Up, Up-Left, Left, Down-Left, etc).
@@ -114,6 +115,19 @@ CONFIGURATION_SCREEN:               equ 1       ; Re-implements the configuratio
 ; AI enhancements
 HEALER_AI_ENHANCEMENTS:             equ 0       ; See SF2_AI_Healing_Rewrite.txt for more details.
 SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options enemies can use.
+
+
+; Turn order modifications
+DISABLE_TURN_ORDER_RANDOMIZATION:   equ 0       ; Combatants always act in the same order from highest to lowest AGI, prioritizing allies by their index and starting with the Force leader.
+EXTENDED_BATTLE_TURN_UPDATE:        equ 1       ; Trigger regions, activate AI, spawn region activated enemies, and play region activated cutscenes after each individual turn instead of at the start of a new round.
+                                                ; Also, partially regenerates the turn order table after each turn for combatants waiting to act in order for the BOOST and SLOW spells to have an impact on the current round.
+
+
+; SF1 mechanics
+SF1_LEVELUP:                        equ 0       ; Reproduces the stat gain calculations from SF1 using SF2 ally stat blocks and growthcurves, with modified parameters to better suit SF2's higher growth values.
+SF1_LEVELUP_RNG_SCALE_RATE:         equ 8       ; Determines the rate at which the randomization range scales relative to stat value. Higher value = slower rate (minimum = 1.) Starting at stat target value ± 1, range increases by ± 1 for every n points in a stat. Vanilla SF1 default = 4
+SF1_LEVELUP_RNG_CAP:                equ 8       ; Caps the randomization range to stat target value ± n. Vanilla SF1 default = 4
+LEARN_SPELLS_BASED_ON_TOTAL_LEVEL:  equ 1       ; Considers promoted at level when learning spells from the first list (i.e., the base class's.)
 
 
 ; Menu enhancements
@@ -157,10 +171,10 @@ EXPANDED_ITEMS_AND_SPELLS:  equ 1       ; Expand number of items from 127 to 255
 EXPANDED_MAPSPRITES:        equ 1       ; Store mapsprite index in word-sized structure allowing 65k+ unique sprites.
 
 
-; ROM expansions
+; Hardware expansions
 ROM_EXPANSION:              equ 1       ; 0 = 2 MB ROM, 1 = 4 MB ROM (default), 2 = 6 MB ROM
-SRAM_EXPANSION:             equ 1       ; Expand SRAM from 8KB to 32KB.
-SAVED_DATA_EXPANSION:       equ 1       ; Relocate currently loaded saved data from system RAM to cartridge SaveRAM.
+SRAM_EXPANSION:             equ 1       ; Expands cartridge SaveRAM from 8KB to 32KB. (8-bit)
+SAVED_DATA_EXPANSION:       equ 1       ; Expands the save file size.
 
 ; If standard build, and either ROM_EXPANSION or EXPANDED_ITEMS_AND_SPELLS are enabled, build an expanded ROM.
 expandedRom = 0
@@ -180,20 +194,26 @@ memoryMapper = 1
 MEMORY_MAPPER: equ memoryMapper
 SSF_SYSTEM_ID: equ 0    ; Put "SEGA SSF" string in ROM header to activate memory mapper on Mega EverDrive cartridges.
 
-; If standard build, and either SRAM_EXPANSION, SAVED_DATA_EXPANSION, or EXPANDED_ITEMS_AND_SPELLS are enabled, expand SRAM.
+; If standard build, and either SAVED_DATA_EXPANSION, SF1_LEVELUP, or LEARN_SPELLS_BASED_ON_TOTAL_LEVEL are enabled, expand saved data.
+expandedSavedData = 0
+    if (STANDARD_BUILD&(SAVED_DATA_EXPANSION|SF1_LEVELUP|LEARN_SPELLS_BASED_ON_TOTAL_LEVEL)=1)
+expandedSavedData = 1
+    endif
+EXPANDED_SAVED_DATA: equ expandedSavedData
+
+; If standard build, and either SRAM_EXPANSION, EXPANDED_SAVED_DATA, or EXPANDED_ITEMS_AND_SPELLS are enabled, expand SRAM.
 expandedSram = 0
-    if (STANDARD_BUILD&(SRAM_EXPANSION!SAVED_DATA_EXPANSION!EXPANDED_ITEMS_AND_SPELLS)=1)
+    if (STANDARD_BUILD&(SRAM_EXPANSION!EXPANDED_SAVED_DATA!EXPANDED_ITEMS_AND_SPELLS)=1)
 expandedSram = 1
     endif
 EXPANDED_SRAM: equ expandedSram
 
-; If standard build, and SAVED_DATA_EXPANSION is enabled, relocate saved data to cartridge SaveRAM.
+; If standard build, and both EXPANDED_SAVED_DATA and EXPANDED_SRAM are enabled, relocate saved data to cartridge SaveRAM.
 relocatedSavedData = 0
-    if (STANDARD_BUILD&SAVED_DATA_EXPANSION=1)
+    if (STANDARD_BUILD&(EXPANDED_SAVED_DATA&EXPANDED_SRAM)=1)
 relocatedSavedData = 1
     endif
 RELOCATED_SAVED_DATA_TO_SRAM: equ relocatedSavedData
-
 
 ; Assembler optimizations
 OPTIMIZED_PC_RELATIVE_ADDRESSING:   equ 1       ; Optimize to PC relative addressing.

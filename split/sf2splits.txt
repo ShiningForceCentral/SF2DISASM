@@ -395,7 +395,7 @@
 #split	0x1784D0,0x179C56,data/graphics/battles/battlesprites/enemies/enemybattlesprite50.bin
 #split	0x179C56,0x17B61A,data/graphics/battles/battlesprites/enemies/enemybattlesprite51.bin
 #split	0x17B61A,0x17D7F0,data/graphics/battles/battlesprites/enemies/enemybattlesprite52.bin
-#split	0x17D7F0,0x17FE4F,data/graphics/battles/battlesprites/enemies/enemybattlesprite53.bin
+#split	0x17D7F0,0x17FE50,data/graphics/battles/battlesprites/enemies/enemybattlesprite53.bin
 #split	0x18009C,0x18130A,data/graphics/battles/battlesprites/allies/allybattlesprite00.bin
 #split	0x18130A,0x182168,data/graphics/battles/battlesprites/allies/allybattlesprite01.bin
 #split	0x182168,0x183870,data/graphics/battles/battlesprites/allies/allybattlesprite02.bin

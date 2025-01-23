@@ -242,8 +242,8 @@ Church_CureStun:
                 movem.l a0,-(sp)
                 move.w  d0,member(a6)
                 jsr     j_GetCombatantEntryAddress
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                getSavedWord (a0), d2, COMBATANT_OFFSET_STATUSEFFECTS
+            if (STANDARD_BUILD=1)
+                getSavedWord a0, d2, COMBATANT_OFFSET_STATUSEFFECTS
             else
                 lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2

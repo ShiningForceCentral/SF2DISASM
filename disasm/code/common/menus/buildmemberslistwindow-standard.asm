@@ -88,7 +88,7 @@ headerStringOffset = headerStringOffset+2
 @DetermineNameColor:
                 move.l  a1,-(sp)
                 move.w  currentMember(a6),d0
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 move.w  d1,d2
                 jsr     GetCombatantName
                 moveq   #-WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE,d1
@@ -110,13 +110,14 @@ headerStringOffset = headerStringOffset+2
                 
                 ; Write class name
                 move.w  currentMember(a6),d0
+                jsr     GetClass
             if (FULL_CLASS_NAMES=1)
-                jsr     GetClassAndFullName
+                jsr     GetFullClassName
                 cmpi.w  #10,d7
                 blt.s   @Continue
                 lea     -WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE(a1),a1
             else
-                jsr     GetClassAndName
+                jsr     GetClassName
             endif
 @Continue:      moveq   #-WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
@@ -143,7 +144,7 @@ headerStringOffset = headerStringOffset+2
                 cmpi.b  #WINDOW_MEMBERS_LIST_PAGE_HPMP,((CURRENT_MEMBERS_LIST_PAGE-$1000000)).w
                 bne.s   @WriteEntry_Stats2
                 move.w  currentMember(a6),d0              ; Write current HP
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 bsr.w   WriteStatValue
                 move.w  #VDPTILE_SLASH|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  currentMember(a6),d0              ; Write max HP
@@ -164,7 +165,7 @@ headerStringOffset = headerStringOffset+2
                 bne.w   @WriteEntry_Unequippable
             if (SECOND_MEMBERS_LIST_PAGE=0)
                 move.w  currentMember(a6),d0    ; Write current HP
-                jsr     GetCurrentHP
+                jsr     GetCurrentHp
                 bsr.w   WriteStatValue
                 addq.w  #2,a1
                 move.w  currentMember(a6),d0    ; Write current MP

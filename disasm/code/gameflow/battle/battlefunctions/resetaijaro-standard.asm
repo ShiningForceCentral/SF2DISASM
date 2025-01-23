@@ -11,7 +11,7 @@
 ResetAiJaro:      
                 
                 movem.w d0-d1,-(sp)
-                checkSavedByte #BATTLE_TO_MOUN, CURRENT_BATTLE
+                compareToSavedByte #BATTLE_TO_MOUN, CURRENT_BATTLE
                 bne.s   @Done
                 
                 move.w  #BATTLE_COMPLETED_FLAGS_START+BATTLE_TO_MOUN,d1
@@ -26,7 +26,7 @@ ResetAiJaro:
                 pea     @Done(pc)
                 pea     LeaveForce
                 pea     LeaveBattleParty
-                pea     ApplyStatusEffectsAndItemsOnStats
+                pea     UpdateCombatantStats
                 pea     SetCurrentMp
                 pea     GetMaxMp
                 pea     SetCurrentHp

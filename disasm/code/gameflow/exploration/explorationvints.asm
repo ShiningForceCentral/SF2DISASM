@@ -87,7 +87,7 @@ loc_25BAA:
                 bsr.w   GetActivatedEntity
                 tst.w   d0
                 blt.s   loc_25BC0       
-                bsr.w   GetEntityEventIndex
+                bsr.w   InitializeNewEnemyEntityIndex
                 jsr     j_RunMapSetupEntityEvent
                 bra.w   return_25BF2
 loc_25BC0:
