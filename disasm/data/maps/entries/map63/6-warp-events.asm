@@ -3,7 +3,7 @@
 ; 0xBB040..0xBB062 : 
                 mWarp 37, 58
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
+                  warpMap    MAP_OVERWORLD_GRANSEAL_KINGDOM
                   warpDest   40, 8
                   warpFacing DOWN
                 mWarp 17, 2

@@ -3,42 +3,42 @@
 ; 0xA2EBA..0xA2F2C : 
                 mWarp 11, 9
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE
+                  warpMap    MAP_GALAM
                   warpDest   17, 15
                   warpFacing DOWN
                 mWarp 5, 10
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE
+                  warpMap    MAP_GALAM
                   warpDest   10, 16
                   warpFacing DOWN
                 mWarp 2, 3
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE
+                  warpMap    MAP_GALAM
                   warpDest   8, 5
                   warpFacing RIGHT
                 mWarp 17, 3
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE
+                  warpMap    MAP_GALAM
                   warpDest   23, 5
                   warpFacing RIGHT
                 mWarp 41, 29
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE
+                  warpMap    MAP_GALAM
                   warpDest   39, 3
                   warpFacing RIGHT
                 mWarp 53, 29
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE
+                  warpMap    MAP_GALAM
                   warpDest   51, 3
                   warpFacing RIGHT
                 mWarp 51, 31
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE
+                  warpMap    MAP_GALAM
                   warpDest   49, 10
                   warpFacing DOWN
                 mWarp 15, 1
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE
+                  warpMap    MAP_GALAM
                   warpDest   21, 3
                   warpFacing LEFT
                 mWarp 16, 9

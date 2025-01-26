@@ -3,7 +3,7 @@
 ; 0xA8CD2..0xA8CEC : 
                 mWarp 59, 3
                   warpNoScroll
-                  warpMap    MAP_CREED_WILLARD_CAVE
+                  warpMap    MAP_WILLARD_BURROW
                   warpDest   2, 7
                   warpFacing UP
                 mWarp 32, 11

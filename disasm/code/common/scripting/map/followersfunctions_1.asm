@@ -20,9 +20,9 @@ InitializeFollowerEntities:
                 movem.l (sp)+,d1-d2/a0
                 bcc.w   @Return
             else
-                compareToSavedByte #MAP_NEW_GRANSEAL_HQ, CURRENT_MAP    ; HARDCODED maps with no followers
+                compareToSavedByte #MAP_TACTICAL_BASE, CURRENT_MAP    ; HARDCODED maps with no followers
                 beq.w   @Return
-                compareToSavedByte #MAP_NAZCA_SHIP_INTERIOR, CURRENT_MAP
+                compareToSavedByte #MAP_NAZCA_SHIP, CURRENT_MAP
                 beq.w   @Return
             endif
                 

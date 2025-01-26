@@ -3,7 +3,7 @@
 ; 0xA9C6C..0xA9C7E : 
                 mWarp 255, 15
                   warpNoScroll
-                  warpMap    MAP_ODDEYE_ARENA
+                  warpMap    MAP_ODD_EYE_BATTLEFIELD
                   warpDest   16, 41
                   warpFacing UP
                 mWarp 255, 31

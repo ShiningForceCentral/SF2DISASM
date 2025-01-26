@@ -9,7 +9,7 @@ table_EgressPositionsForBattles:
                 dc.b BATTLE_TO_ANCIENT_SHRINE, 255
                 dc.b BATTLE_VERSUS_KRAKEN, MAP_POLCA
                 dc.b BATTLE_TO_TAROS_SHRINE, MAP_HASSAN
-                dc.b BATTLE_POLCA_VILLAGE, MAP_MOUNT_VOLCANON
+                dc.b BATTLE_POLCA_VILLAGE, MAP_BEDOE
                 dc.b BATTLE_PACALON, MAP_PACALON_CASTLE
                 dc.b BATTLE_TO_MOUN, MAP_PACALON
                 

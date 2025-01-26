@@ -28,12 +28,12 @@
                   warpFacing DOWN
                 mWarp 31, 8
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE_EXIT
+                  warpMap    MAP_GALAM_DRAWBRIDGE
                   warpDest   9, 28
                   warpFacing UP
                 mWarp 32, 5
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE
+                  warpMap    MAP_GALAM
                   warpDest   45, 1
                   warpFacing DOWN
                 mWarp 35, 28
@@ -48,7 +48,7 @@
                   warpFacing UP
                 mWarp 255, 0
                   warpScroll UP
-                  warpMap    MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE
+                  warpMap    MAP_OVERWORLD_GALAM_KINGDOM
                   warpDest   255, 62
                   warpFacing UP
                 endWord

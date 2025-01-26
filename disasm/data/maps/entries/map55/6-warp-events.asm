@@ -3,22 +3,22 @@
 ; 0xB790C..0xB792E : 
                 mWarp 0, 255
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
+                  warpMap    MAP_OVERWORLD_NAZCA_REGION
                   warpDest   46, 19
                   warpFacing DOWN
                 mWarp 31, 255
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
+                  warpMap    MAP_OVERWORLD_NAZCA_REGION
                   warpDest   46, 19
                   warpFacing DOWN
                 mWarp 255, 0
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
+                  warpMap    MAP_OVERWORLD_NAZCA_REGION
                   warpDest   46, 19
                   warpFacing DOWN
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
+                  warpMap    MAP_OVERWORLD_NAZCA_REGION
                   warpDest   46, 19
                   warpFacing DOWN
                 endWord

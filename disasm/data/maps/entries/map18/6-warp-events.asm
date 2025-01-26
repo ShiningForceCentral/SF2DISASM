@@ -13,12 +13,12 @@
                   warpFacing RIGHT
                 mWarp 255, 29
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
+                  warpMap    MAP_OVERWORLD_GRANSEAL_KINGDOM
                   warpDest   31, 9
                   warpFacing DOWN
                 mWarp 255, 9
                   warpNoScroll
-                  warpMap    MAP_GALAM_CASTLE
+                  warpMap    MAP_GALAM
                   warpDest   26, 30
                   warpFacing UP
                 endWord

@@ -35,7 +35,7 @@ loc_23E82:
                 
                 cmpi.b  #BATTLE_POLCA_VILLAGE,d7
                 bne.s   loc_23E8E
-                moveq   #MAP_MOUNT_VOLCANON,d0
+                moveq   #MAP_BEDOE,d0
                 bra.w   loc_23EAA
 loc_23E8E:
                 

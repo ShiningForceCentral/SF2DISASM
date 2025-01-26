@@ -8,22 +8,22 @@
                   warpFacing UP
                 mWarp 51, 22
                   warpNoScroll
-                  warpMap    MAP_UNDERGROUND_PATH_1
+                  warpMap    MAP_FAIRY_CAVE
                   warpDest   2, 3
                   warpFacing RIGHT
                 mWarp 57, 23
                   warpNoScroll
-                  warpMap    MAP_UNDERGROUND_PATH_1
+                  warpMap    MAP_FAIRY_CAVE
                   warpDest   29, 3
                   warpFacing LEFT
                 mWarp 57, 25
                   warpNoScroll
-                  warpMap    MAP_HARPY_POOL
+                  warpMap    MAP_HARPIES_POND
                   warpDest   10, 24
                   warpFacing UP
                 mWarp 63, 255
                   warpScroll RIGHT
-                  warpMap    MAP_OVERWORLD_AROUND_ELVEN_VILLAGE
+                  warpMap    MAP_OVERWORLD_SOUTHWEST_PARMECIA
                   warpDest   1, 255
                   warpFacing RIGHT
                 endWord

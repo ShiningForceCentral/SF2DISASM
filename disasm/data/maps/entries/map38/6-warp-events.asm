@@ -43,7 +43,7 @@
                   warpFacing LEFT
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_RETURN_PATH
+                  warpMap    MAP_OVERWORLD_ROFT_REGION
                   warpDest   8, 48
                   warpFacing DOWN
                 endWord
