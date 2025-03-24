@@ -85,5 +85,11 @@
                 alignIfStandard
                 includeIfStandard "layout\sf2-expanded-19.asm"
             endif
+            
+                alignIfStandard $1D8000
+                incbinIfStandard "data/sound/seegaaa.pcm"
+                alignIfStandard $1000
+                incbinIfStandard "data/sound/segascream.pcm"
+                alignIfStandard
                 
                 align $1E0000

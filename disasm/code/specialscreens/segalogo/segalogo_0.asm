@@ -79,6 +79,9 @@ DisplaySegaLogo:
                 moveq   #10,d0
                 jsr     (Sleep).w       
                 move.w  #40,d0
+                
+                sndCom  $79             ; SEEGAAA/SEGA!
+                
 @Continue:
                 
                 lea     SegaLogoColors+4(pc,d0.w),a0 ; lea     segaLogoColors(pc,d0.w),a0

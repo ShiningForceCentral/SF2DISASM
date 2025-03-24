@@ -62,7 +62,9 @@ pt_SFX:
     dw Sfx_53
     dw Sfx_54
     dw Sfx_55
-    dw Sfx_56               ; end of SFX pointer table
+    dw Sfx_56
+    dw Sfx_57               ; SEGA SFX
+                            ; end of SFX pointer table
 Sfx_1:          db 2                    ; sound 1 data
     dw Sfx_1_Channel_5
     dw Sfx_1_Channel_4
@@ -1413,3 +1415,12 @@ Sfx_52_Channel_4:
     dw byte_1F1D
     dw byte_1F1D
     dw byte_1F1D
+Sfx_57:         db 2
+    dw Sfx_57_Channel_4
+    dw Sfx_57_Channel_4
+    dw Sfx_57_Channel_5
+Sfx_57_Channel_5:
+            sampleL 17,120    ; SEEGAAA/SEGA! sample
+    channel_end
+Sfx_57_Channel_4:
+    channel_end
