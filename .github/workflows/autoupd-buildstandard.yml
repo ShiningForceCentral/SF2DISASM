@@ -13,8 +13,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-	    with:
-	      ssh-key: ${{ secrets.DEPLOY_KEY }}
+      with:
+        ssh-key: ${{ secrets.DEPLOY_KEY }}
     - name: Auto merge on branch 'build/standard'
       uses: robotology/gh-action-nightly-merge@v1.3.3
       with:
