@@ -11,8 +11,8 @@ OpenTimerWindow:
                 tst.w   ((TIMER_WINDOW_INDEX-$1000000)).w
                 bne.s   @Skip
                 
-                move.w  #WINDOW_TIMER_SIZE,d0        ; width height
-                move.w  #WINDOW_TIMER_DEST,d1        ; X-Y screen pos
+                move.w  #WINDOW_TIMER_SIZE,d0 ; width height
+                move.w  #WINDOW_TIMER_DEST,d1 ; X-Y screen pos
                 jsr     (CreateWindow).l
                 bsr.w   WriteTimerDigits
                 move.w  #$8080,d1

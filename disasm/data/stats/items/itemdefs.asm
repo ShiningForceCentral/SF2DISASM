@@ -1524,7 +1524,7 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 29, &
-                             UNDEFINED1, 3, &
+                             HP_RECOVERY, 3, &
                              NONE, 0, &
                              NONE, 0, &
                              NONE, 0, &
@@ -1566,7 +1566,7 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 39, &
-                             UNDEFINED2, 2, &
+                             MP_RECOVERY, 2, &
                              NONE, 0, &
                              NONE, 0, &
                              NONE, 0, &
@@ -1901,7 +1901,7 @@ table_ItemDefinitions:
                 price        5000
                 itemType     RING|RARE
                 useSpell     NOTHING
-                equipEffects UNDEFINED1, 5, &
+                equipEffects HP_RECOVERY, 5, &
                              NONE, 0, &
                              NONE, 0, &
                              NONE, 0, &

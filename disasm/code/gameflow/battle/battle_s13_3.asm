@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battle_s13_3.asm :
-; 0x1B15F8..0x1B1780 : Battle init, terrain, AI stuff to split more properly
+; 0x1B15F8..0x1B1780 : Battle initialization, terrain, AI stuff to split more properly
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -177,12 +177,12 @@ loc_1B1724:
                 cmp.b   d2,d7
                 bne.s   loc_1B176A
                 jsr     j_GetActivationBitfield
-                cmpi.w  #$200,d1
+                cmpi.w  #$200,d1        ; ; $200 - region-triggered spawn
                 bne.s   loc_1B176A
                 jsr     j_GetAiRegion
-                cmpi.w  #$F,d1
+                cmpi.w  #15,d1
                 bne.s   loc_1B176A
-                cmpi.w  #$F,d2
+                cmpi.w  #15,d2
                 bne.s   loc_1B176A
                 jsr     j_GetMaxHp
                 tst.w   d1

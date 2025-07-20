@@ -6,7 +6,7 @@ table_SavepointMapCoordinates:
                 savePointMapCoordinates MAP_GRANSEAL, 32, 13, UP
                 savePointMapCoordinates MAP_GRANSEAL_EARTHQUAKE, 29, 2, DOWN
                 savePointMapCoordinates MAP_YEEL, 11, 6, UP
-                savePointMapCoordinates MAP_GALAM, 27, 7, UP
+                savePointMapCoordinates MAP_GALAM_CASTLE, 27, 7, UP
                 savePointMapCoordinates MAP_NEW_GRANSEAL, 11, 22, UP
                 savePointMapCoordinates MAP_RIBBLE, 22, 22, UP
                 savePointMapCoordinates MAP_POLCA, 18, 25, UP

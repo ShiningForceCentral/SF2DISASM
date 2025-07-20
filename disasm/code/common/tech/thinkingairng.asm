@@ -4,6 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; Modify the lower byte of RANDOM_SEED_COPY.
+; 
+; Out: d7.w
+
 
 GenerateRandomValueSigned:
                 
@@ -24,6 +28,11 @@ GenerateRandomValueSigned:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Return 0, or a random number in the range 2, d6.w-1
+; 
+; Execution takes a variable amount of time, simulating "thinking" by the AI.
+; A copy of RANDOM_SEED is updated during text symbol parsing and diamond menu execution.
+
 
 GenerateRandomNumberUnderD6:
                 
@@ -37,10 +46,10 @@ loc_1AD0BA:
                 bpl.s   loc_1AD0C8
 loc_1AD0C4:
                 
-                bra.w   loc_1AD0D4
+                bra.w   loc_1AD0D4      
 loc_1AD0C8:
                 
-                cmp.b   d1,d7
+                cmp.b   d1,d7           ; return random number in the range 2, d6.w-1
                 bcs.s   loc_1AD0CE
                 bra.s   loc_1AD0BA
 loc_1AD0CE:
@@ -49,7 +58,7 @@ loc_1AD0CE:
                 rts
 loc_1AD0D4:
                 
-                clr.b   d7
+                clr.b   d7              ; return 0 if d6.w enters in the range -128, 1
                 movem.l (sp)+,d0-d5/a0-a6
                 rts
 

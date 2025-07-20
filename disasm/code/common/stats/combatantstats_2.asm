@@ -1,11 +1,11 @@
 
 ; ASM FILE code\common\stats\combatantstats_2.asm :
-; 0x8576..0x8970 : Modify combatant stats
+; 0x855A..0x8970 : Modify combatant stats
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Load ally name into combatant data block.
-;
+; 
 ; In: a0 = pointer to temporarily loaded name in RAM
 
 
@@ -340,6 +340,8 @@ SetCurrentExp:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Set combined movetype and ai commandset when initializing an enemy.
 
 
 SetMoveTypeAndAiCommandset:

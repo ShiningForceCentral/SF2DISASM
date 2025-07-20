@@ -653,10 +653,10 @@ PopulateGenericListWithCurrentForceMembers:
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,((GENERIC_LIST_LENGTH-$1000000)).w
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-@Loop:
+@Copy_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,@Loop
+                dbf     d7,@Copy_Loop
                 
                 movem.l (sp)+,d7-a1
                 rts

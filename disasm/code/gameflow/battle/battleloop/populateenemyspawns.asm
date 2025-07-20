@@ -22,7 +22,7 @@ PopulateTargetsListWithSpawningEnemies:
                 bra.w   @Next
 @loc_2:
                 
-                cmpi.w  #$200,d1        ; 0x200 - region-triggered spawn - check if triggered and if not spawned yet
+                cmpi.w  #$200,d1        ; $200 - region-triggered spawn - check if triggered and if not spawned yet
                 bne.w   @loc_5          
                 bsr.w   UpdateEnemyActivationIfDead
                 tst.w   d0
@@ -45,7 +45,7 @@ PopulateTargetsListWithSpawningEnemies:
                 addi.w  #1,d5
 @loc_5:
                 
-                cmpi.w  #$100,d1        ; 0x100 - respawn - check if dead
+                cmpi.w  #$100,d1        ; $100 - respawn - check if dead
                 bne.w   @loc_7          
                 jsr     j_GetCurrentHp
                 tst.w   d1
@@ -61,7 +61,7 @@ PopulateTargetsListWithSpawningEnemies:
                 addi.w  #1,d5
 @loc_7:
                 
-                cmpi.w  #$300,d1        ; 0x300 - region-triggered respawn - check if dead and triggered
+                cmpi.w  #$300,d1        ; $300 - region-triggered respawn - check if dead and triggered
                 bne.s   @Next
                 bsr.w   UpdateEnemyActivationIfDead
                 tst.w   d0
@@ -92,10 +92,10 @@ PopulateTargetsListWithSpawningEnemies:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = character index
-;     D4 = character index (same as D0)
+; In: d0.w = character index
+;     d4.w = copy character index
 ; 
-; Out: D0 = 0000 if activated and dead, $FFFF if not
+; Out: d0.w = 0 if activated and dead, -1 if not
 
 
 UpdateEnemyActivationIfDead:
@@ -103,45 +103,45 @@ UpdateEnemyActivationIfDead:
                 movem.l d1-a6,-(sp)
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                beq.s   loc_1AD014
-                bra.w   loc_1AD07E
-loc_1AD014:
+                beq.s   @loc_1
+                bra.w   @loc_3
+@loc_1:
                 
                 jsr     j_GetAiRegion
                 cmpi.b  #15,d1
-                beq.s   loc_1AD044
+                beq.s   @loc_2
                 move.w  d1,d6
                 addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
-                beq.s   loc_1AD044
+                beq.s   @loc_2
                 move.w  d4,d0
                 jsr     j_GetActivationBitfield
                 bset    #0,d1
                 jsr     j_SetActivationBitfield
-                bra.w   loc_1AD088
-loc_1AD044:
+                bra.w   @loc_4
+@loc_2:
                 
                 move.w  d4,d0
                 jsr     j_GetAiRegion
                 cmpi.b  #15,d2
-                beq.w   loc_1AD07E
+                beq.w   @loc_3
                 move.w  d2,d6
                 move.w  d2,d1
                 addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
-                beq.s   loc_1AD07E
+                beq.s   @loc_3
                 move.w  d4,d0
                 jsr     j_GetActivationBitfield
                 bset    #0,d1
                 bset    #1,d1
                 jsr     j_SetActivationBitfield
-                bra.w   loc_1AD088
-loc_1AD07E:
+                bra.w   @loc_4
+@loc_3:
                 
                 move.w  #-1,d0
                 movem.l (sp)+,d1-a6
                 rts
-loc_1AD088:
+@loc_4:
                 
                 clr.w   d0
                 movem.l (sp)+,d1-a6

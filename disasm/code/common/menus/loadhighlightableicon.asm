@@ -1,14 +1,14 @@
 
 ; ASM FILE code\common\menus\loadhighlightableicon.asm :
-; 0x10940..0x10A4A : Load highlightable icon function
+; 0x10940..0x1098A : Load highlightable icon function
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Load spell icon with red border overlay.
-;
+; 
 ;       In: a1 = destination in RAM
 ;           d0.w = spell index
-;
+; 
 ;       Out: a1 = end of affected section after copy
 
 
@@ -30,6 +30,8 @@ LoadHighlightableSpellIcon:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; Same as above, but for items.
 
 
 LoadHighlightableItemIcon:

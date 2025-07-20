@@ -19,7 +19,7 @@ Start:
                 movem.l (a5)+,a0-a4     ; copy adresses
                 move.b  -$10FF(a1),d0   ; get HW Info at 0xA10001
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d0
-                beq.s   @SkipSecurity         
+                beq.s   @SkipSecurity
                 move.l  #'SEGA',$2F00(a1) ; move "SEGA" to TMSS register at $A14000
 @SkipSecurity:
                 
@@ -33,7 +33,7 @@ Start:
                 move.b  (a5)+,d5        ; set each VDP register with initial parameters
                 move.w  d5,(a4)
                 add.w   d7,d5
-                dbf     d1,@VdpInit_Loop      
+                dbf     d1,@VdpInit_Loop
                 
                 move.l  (a5)+,(a4)
                 move.w  d0,(a3)         ; move 0 to VDP data port
@@ -47,15 +47,15 @@ Start:
 @Z80Init_Loop:
                 
                 move.b  (a5)+,(a0)+     ; copy bytes to Z80 ram
-                dbf     d2,@Z80Init_Loop      
+                dbf     d2,@Z80Init_Loop
                 
-                move.w  d0,(a2)         ; 
+                move.w  d0,(a2)
                 move.w  d0,(a1)         ; start the Z80
                 move.w  d7,(a2)         ; reset the Z80
 @ClearRam_Loop:
                 
                 move.l  d0,-(a6)
-                dbf     d6,@ClearRam_Loop      
+                dbf     d6,@ClearRam_Loop
                 
                 move.l  (a5)+,(a4)      ; disable DMA, increment data bias number : 2
                 move.l  (a5)+,(a4)      ; address set : CRAM write
@@ -63,22 +63,22 @@ Start:
 @ClearCram_Loop:
                 
                 move.l  d0,(a3)
-                dbf     d3,@ClearCram_Loop      
+                dbf     d3,@ClearCram_Loop
                 
                 move.l  (a5)+,(a4)      ; VSRAM write
                 moveq   #19,d4
 @ClearVsram_Loop:
                 
                 move.l  d0,(a3)
-                dbf     d4,@ClearVsram_Loop      
+                dbf     d4,@ClearVsram_Loop
                 
                 moveq   #3,d5
 @PsgInit_Loop:
                 
                 move.b  (a5)+,$11(a3)   ; set PSG volume to 0
-                dbf     d5,@PsgInit_Loop      
+                dbf     d5,@PsgInit_Loop
                 
-                move.w  d0,(a2)         ; 
+                move.w  d0,(a2)
                 movem.l (a6),d0-a6      ; clear registers
                 move    #$2700,sr       ; Move $2700 into Status Register, which now has these set: no trace, a7 is Interrupt Stack Pointer, no interrupts, clear condition code bits
 @SkipSetup:
@@ -87,9 +87,9 @@ Start:
 table_StartParameters:
                 
                 dc.w $8000              ; VDP register set base word
-                dc.w $3FFF
+                dc.w $3FFF              ; (RAM byte size / 4) - 1
                 dc.w $100               ; VDP register set word to add for next register
-                dc.l Z80_Memory
+                dc.l Z80_Memory         ; start of Z80 RAM
                 dc.l Z80BusReq          ; Z80 bus request
                 dc.l Z80BusReset        ; Z80 bus reset
                 dc.l VDP_Data           ; VDP data port
@@ -176,9 +176,10 @@ table_StartParameters:
                 bra.w   InitializeSystem
 
     ; End of function Start
-                
+
                 modend
-                
+
+            if (VANILLA_BUILD=1)
                 dc.b $F3                ; Unused Z80 code
                 dc.b $31                ; di
                 dc.b $F0                ; ld      sp, 1FF0h
@@ -187,3 +188,4 @@ table_StartParameters:
                 dc.b 0
                 dc.b 0
                 dc.b 0
+            endif

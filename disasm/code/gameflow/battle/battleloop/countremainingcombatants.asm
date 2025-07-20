@@ -1,10 +1,10 @@
 
 ; ASM FILE code\gameflow\battle\battleloop\countremainingcombatants.asm :
-; 0x23C58..0x23CBA : Battle loop
+; 0x23C58..0x23CBA : Battle loop function
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get number of allies living, number of enemies living -> D2, D3
+; Count number of allies living, number of enemies living -> d2.w, d3.w
 
 
 CountRemainingCombatants:

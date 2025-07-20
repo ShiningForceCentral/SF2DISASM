@@ -35,6 +35,7 @@ CheckBattle:
                 
                 cmp.b   (a0),d0
                 bne.s   @Next
+                
                 move.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 add.w   d7,d1
                 jsr     j_CheckFlag
@@ -61,6 +62,7 @@ CheckBattle:
                 addi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
                 jsr     j_CheckFlag
                 beq.s   @TriggerBattle
+                
                 subi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
                 jsr     j_ClearFlag
 @TriggerBattle:

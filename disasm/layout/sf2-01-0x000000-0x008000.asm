@@ -97,16 +97,16 @@
                 include "code\specialscreens\suspend\witchsuspend.asm"    ; Witch suspend function
                 include "code\specialscreens\witchend\witchendinit.asm"    ; Witch end function
                 includeIfStandard "code\gameflow\mainloop-standard.asm"
-                includeIfVanilla "code\gameflow\start\gameinit.asm"    ; Game init
+                includeIfVanilla "code\gameflow\start\gameinit.asm"    ; Game initialization
                 includeIfVanilla "data\maps\global\debugmodemaps.asm"    ; Debug mode maps
                 alignIfVanilla
                 includeIfVanilla "code\gameflow\start\gameintro.asm"    ; Game intro
                 includeIfVanilla "code\specialscreens\witch\witchstart.asm"    ; Start witch screen
                 includeIfVanilla "code\gameflow\mainloop.asm"    ; Main loop
-                include "code\common\maps\egressinit.asm"    ; Egress map init function
+                include "code\common\maps\egressinit.asm"    ; Egress map initialization function
                 includeIfVanilla "code\gameflow\start\basetiles.asm"    ; Base tiles loading
                 includeIfVanilla "code\gameflow\special\battletest.asm"    ; Battle test functions
-                include "code\common\maps\mapinit_0.asm"    ; Map init functions
+                include "code\common\maps\mapinit_0.asm"    ; Map initialization functions
                 includeIfVanilla "data\maps\global\flagswitchedmaps.asm"    ; Flag-switched maps
                 include "code\common\maps\getbattle.asm"    ; GetNextBattleOnMap function
                 includeIfVanilla "data\battles\global\battlemapcoords.asm"    ; Battle map coords

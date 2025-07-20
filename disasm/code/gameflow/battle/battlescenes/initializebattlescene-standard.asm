@@ -47,8 +47,8 @@ InitializeBattlescene:
                 sndCom  SOUND_COMMAND_FADE_OUT
                 
                 ; Clear battlescene data table in RAM
-                lea     ((BATTLESCENE_GROUND_MODIFICATION_POINTER-$1000000)).w,a0
-                move.l  #((BATTLESCENE_DATA_END-BATTLESCENE_GROUND_MODIFICATION_POINTER)/4)-1,d2 ; battle scene data longwords counter
+                lea     ((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w,a0
+                move.l  #((BATTLESCENE_DATA_END-BATTLESCENE_BACKGROUND_MODIFICATION_POINTER)/4)-1,d2 ; battle scene data longwords counter
                 
 @ClearBattlesceneData_Loop:
                 
@@ -140,7 +140,7 @@ alt_InitializeBattlescene:
                 jsr     (ApplyImmediateVramDma).w
                 
                 ; Load background palette
-                lea     ((BATTLESCENE_GROUND_PALETTE-$1000000)).w,a0
+                lea     ((BATTLESCENE_BACKGROUND_PALETTE-$1000000)).w,a0
                 lea     ((PALETTE_4_BASE-$1000000)).w,a1
                 moveq   #7,d0
 @LoadBackgroundPalette_Loop:

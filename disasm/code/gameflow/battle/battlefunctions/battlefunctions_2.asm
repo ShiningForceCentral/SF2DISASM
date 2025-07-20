@@ -1023,7 +1023,7 @@ loc_250B0:
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 move.w  d1,d2
                 move.w  d0,d1
-                jsr     sub_1AC054
+                jsr     j_RegionTriggeredSpawn
                 cmpi.w  #-1,d0
                 beq.w   loc_250FC
                 

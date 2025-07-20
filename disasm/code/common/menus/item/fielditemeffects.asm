@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\stats\items\fielditemeffects.asm :
+; ASM FILE code\common\menus\item\fielditemeffects.asm :
 ; 0x229EC..0x22C60 : Functions to perform effects from using items on the exploration field
 
 ; =============== S U B R O U T I N E =======================================

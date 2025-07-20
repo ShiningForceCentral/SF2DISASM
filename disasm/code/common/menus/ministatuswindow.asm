@@ -282,10 +282,10 @@ DrawColoredStatBar:
                 clr.w   d6
                 swap    d0              ; D0 = remainder of current value / 100
                 cmpi.w  #100,d1
-                ble.s   @DrawStatBarContent ; stat bar content capped at 100 columns
+                ble.s   @StatBar        ; stat bar content capped at 100 columns
                 moveq   #99,d3
                 bra.s   @DrawStatBarContent_Loop
-@DrawStatBarContent:
+@StatBar:
                 
                 move.w  d1,d3
                 subq.w  #1,d3
@@ -293,10 +293,10 @@ DrawColoredStatBar:
 @DrawStatBarContent_Loop:
                 
                 cmp.w   d0,d6
-                blt.s   @Continue
+                blt.s   @Column
                 subq.w  #1,d4           ; when done drawing remainder of current value, start drawing underlying color
                 move.w  #999,d0
-@Continue:
+@Column:
                 
                 bsr.w   WriteStatBarColumn
                 addq.w  #1,d6
@@ -462,7 +462,9 @@ WriteStatBarColumn:
 
 ; =============== S U B R O U T I N E =======================================
 
-; ; Check ASCII name at a0 for two special characters.
+; Check ASCII name at a0 for two special characters.
+; 
+; In: d7.w = name length
 
 
 AdjustStringLengthForSpecialCharacters:
@@ -470,7 +472,7 @@ AdjustStringLengthForSpecialCharacters:
                 movem.w d0/a0,-(sp)
                 move.w  d7,d0
                 subq.w  #1,d0
-                bmi.w   @Return
+                bmi.w   @Return         ; BUG - Should be returning to movem.w (sp)+,d0/a0
 @Loop:
                 
                 cmpi.b  #VDPTILE_ORANGE_DOLLAR_SIGN,(a0)
@@ -553,7 +555,7 @@ BuildMiniStatusWindow:
                 bsr.w   AdjustStringLengthForSpecialCharacters
                 add.w   d7,d4
                 addq.w  #4,d4
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 cmpi.w  #10,d1
                 blt.s   @Continue
                 addq.w  #1,d4
@@ -619,7 +621,7 @@ BuildMiniStatusWindow:
                 move.w  #-44,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  combatant(a6),d0
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 move.w  d1,d0
                 ext.l   d0
                 moveq   #LV_DIGITS_NUMBER,d7

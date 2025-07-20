@@ -4,38 +4,47 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; executes cutscenes activated by regions
+; Execute cutscenes activated by regions.
 
 
 ExecuteBattleRegionCutscene:
                 
+                module
                 movem.l d0-d1/a0,-(sp)
                 lea     table_BattleRegionCutscenes-8(pc), a0
-loc_47E8A:
+@Loop:
                 
                 addq.w  #8,a0
-                cmpi.w  #-1,(a0)
-                beq.w   loc_47EC2
+                cmpi.w  #TERMINATOR_WORD,(a0)
+                beq.w   @Done
                 
+                ; Are there any cutscenes for the current battle?
                 getSavedByte CURRENT_BATTLE, d1
                 cmp.b   (a0),d1
-                bne.s   loc_47E8A
+                bne.s   @Loop
+                
+                ; Has cutscene already been played?
                 move.w  2(a0),d1
                 jsr     j_CheckFlag
-                bne.s   loc_47E8A
+                bne.s   @Loop
+                
+                ; Is region triggered?
                 clr.w   d0
                 move.b  1(a0),d0
                 jsr     j_CheckTriggerRegionFlag
-                beq.s   loc_47E8A
+                beq.s   @Loop
+                
+                ; Play cutscene
                 jsr     j_SetFlag
                 movea.l 4(a0),a0
 loc_47EC0:
                 
                 trap    #MAPSCRIPT
-loc_47EC2:
+@Done:
                 
                 movem.l (sp)+,d0-d1/a0
                 rts
 
     ; End of function ExecuteBattleRegionCutscene
 
+                modend

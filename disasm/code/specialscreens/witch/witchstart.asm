@@ -163,6 +163,7 @@ witchMenuAction_New:
                 jsr     j_ExecuteWitchMainMenu
                 tst.w   d0
                 bmi.s   byte_73C2       
+                
                 subq.w  #1,d0
                 setCurrentSaveSlot d0
                 jsr     j_NewGame

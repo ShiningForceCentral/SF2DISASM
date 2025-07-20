@@ -4,10 +4,10 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
+; In: d0.b = combatant index
 ; 
-; Out: A0 = address of name
-;      D7 = length of name
+; Out: a0 = address of name
+;      d7.w = length of name
 
 
 GetCombatantName:
@@ -15,6 +15,7 @@ GetCombatantName:
                 movem.l d0-d1,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Enemy
+                
                 bsr.w   GetCombatantEntryAddress
                 moveq   #ALLYNAME_CHARACTERS_COUNTER,d0
                 clr.w   d7
@@ -22,6 +23,7 @@ GetCombatantName:
                 
                 tst.b   (a0,d7.w)
                 beq.s   @Break          ; break out of loop upon reaching end of name
+                
                 addq.w  #1,d7
                 dbf     d0,@CountNameLength_Loop
 @Break:
@@ -62,7 +64,7 @@ GetClass:
 ; Get current level for combatant d0.b -> d1.w
 
 
-GetCurrentLevel:
+GetLevel:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_LEVEL,d7
@@ -70,7 +72,7 @@ GetCurrentLevel:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetCurrentLevel
+    ; End of function GetLevel
 
 
 ; =============== S U B R O U T I N E =======================================

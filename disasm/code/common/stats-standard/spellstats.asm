@@ -113,7 +113,7 @@ CalculateTotalLevel:
                 beq.s   @Skip
                 
                 move.w  d1,d2
-                bsr.w   GetCurrentLevel
+                bsr.w   GetLevel
                 add.w   d2,d1
                 bra.s   @Done
                 

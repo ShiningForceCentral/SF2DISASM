@@ -22,6 +22,7 @@ InitializeFollowerEntities:
             else
                 compareToSavedByte #MAP_TACTICAL_BASE, CURRENT_MAP    ; HARDCODED maps with no followers
                 beq.w   @Return
+                
                 compareToSavedByte #MAP_NAZCA_SHIP, CURRENT_MAP
                 beq.w   @Return
             endif

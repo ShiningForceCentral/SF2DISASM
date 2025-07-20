@@ -160,17 +160,17 @@ return_4706:
 WaitForViewScrollEnd:
                 
                 move.w  d7,-(sp)
-loc_470A:
+@loc_1:
                 
                 bsr.w   IsMapScrollingToViewTarget
-                beq.s   loc_4716
+                beq.s   @loc_2
                 bsr.w   WaitForVInt
-                bra.s   loc_470A
-loc_4716:
+                bra.s   @loc_1
+@loc_2:
                 
                 bsr.w   WaitForVInt
                 bsr.w   IsMapScrollingToViewTarget
-                bne.s   loc_470A
+                bne.s   @loc_1
                 bsr.w   WaitForVInt
                 move.w  (sp)+,d7
                 rts

@@ -22,9 +22,9 @@ LevelUp:
                 bsr.w   GetClassType
                 bne.s   @Promoted
                 moveq   #CHAR_LEVELCAP_BASE,d2
-@Promoted:      bsr.w   GetCurrentLevel 
+@Promoted:      bsr.w   GetLevel 
             else
-                bsr.w   GetCurrentLevel 
+                bsr.w   GetLevel 
                 moveq   #CHAR_LEVELCAP_PROMOTED,d2
                 cmpi.w  #CHAR_CLASS_FIRSTPROMOTED,d3
                 bge.s   @FindStatsBlockForClass
@@ -65,7 +65,7 @@ LevelUp:
                 
                 lea     (LEVELUP_ARGUMENTS).l,a1
                 move.w  ally(a6),d0
-                bsr.w   GetCurrentLevel 
+                bsr.w   GetLevel 
                 move.w  d1,d5
                 moveq   #0,d2
                 moveq   #0,d3

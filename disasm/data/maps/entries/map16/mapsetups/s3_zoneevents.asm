@@ -31,7 +31,7 @@ Map16_ZoneEvent1:
                  
                 chkFlg  505             ; Battle 5 completed - BATTLE_GALAM_CASTLE                 
                 bne.s   return_51F26
-                setSavedByte #MAP_GALAM, EGRESS_MAP
+                setSavedByte #MAP_GALAM_CASTLE, EGRESS_MAP
                 chkFlg  664             ; Set after the Galam guards catch you sneaking around, but before battle
                 bne.s   byte_51F20
                 script  cs_521BA

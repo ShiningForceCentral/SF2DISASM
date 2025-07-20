@@ -44,7 +44,7 @@ table_Promotions:
 table_PromotionItems:
                 ; Item, base classes section, promoted classes section
                 dc.b ITEM_PEGASUS_WING, 2, 3
-                dc.b ITEM_WARRIORS_PRIDE, 4, 5
+                dc.b ITEM_WARRIOR_PRIDE, 4, 5
                 dc.b ITEM_SECRET_BOOK, 6, 7
                 dc.b ITEM_VIGOR_BALL, 8, 9
                 dc.b ITEM_SILVER_TANK, 10, 11

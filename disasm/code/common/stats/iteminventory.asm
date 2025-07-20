@@ -71,6 +71,8 @@ ReceiveMandatoryItem:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Out: d0.w = -1 if item was not found
+
 
 RemoveItemFromInventory:
                 
@@ -94,8 +96,7 @@ RemoveItemFromInventory:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D1 = item slot
-;     D2 = item index
+; In: d1.w = item slot, d2.w = item index
 
 itemTypeBitfield = -10
 itemSlot = -6
@@ -112,18 +113,18 @@ DiscardItem:
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,(GENERIC_LIST_LENGTH).l
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-loc_4F596:
+@Copy_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,loc_4F596
-loc_4F59C:
+                dbf     d7,@Copy_Loop
+@loc_2:
                 
                 move.b  #ITEM_SUBMENU_ACTION_GIVE,(CURRENT_ITEM_SUBMENU_ACTION).l
                 jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
-                bne.w   loc_4F5B6
-                bra.w   loc_4F6CA
-loc_4F5B6:
+                bne.w   @loc_3
+                bra.w   @loc_8
+@loc_3:
                 
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
@@ -134,57 +135,57 @@ loc_4F5B6:
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_UNSELLABLE,d1
                 cmpi.b  #0,d1
-                beq.s   loc_4F5F0
+                beq.s   @loc_4
                 move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     37              ; "{LEADER}!  You can't{N}discard the {ITEM}!{W2}"
-                bra.w   loc_4F6CA
-loc_4F5F0:
+                bra.w   @loc_8
+@loc_4:
                 
                 move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     44              ; "The {ITEM} will be{N}discarded.  Are you sure?"
                 jsr     j_alt_YesNoPrompt
                 clsTxt
                 cmpi.w  #0,d0
-                beq.w   loc_4F610
-                bra.s   loc_4F59C
-loc_4F610:
+                beq.w   @loc_5
+                bra.s   @loc_2
+@loc_5:
                 
                 move.w  itemEntry(a6),d1
                 jsr     j_GetEquipmentType
                 cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
-                bne.s   loc_4F65C
+                bne.s   @loc_6
                 move.w  member(a6),d0
                 jsr     j_GetEquippedWeapon
                 cmpi.w  #-1,d1
-                beq.w   loc_4F69C
+                beq.w   @loc_7
                 
                 cmp.w   itemSlot(a6),d2
-                bne.w   loc_4F69C
+                bne.w   @loc_7
                 move.w  itemEntry(a6),d1
                 jsr     j_IsItemCursed
-                bcc.w   loc_4F69C
+                bcc.w   @loc_7
                 move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
                 clsTxt
-                bra.w   loc_4F6CA
-loc_4F65C:
+                bra.w   @loc_8
+@loc_6:
                 
                 cmpi.w  #0,d2
-                beq.w   loc_4F69C
+                beq.w   @loc_7
                 move.w  member(a6),d0
                 jsr     j_GetEquippedRing
                 cmpi.w  #-1,d1
-                beq.w   loc_4F69C
+                beq.w   @loc_7
                 
                 cmp.w   itemSlot(a6),d2
-                bne.w   loc_4F69C
+                bne.w   @loc_7
                 move.w  itemEntry(a6),d1
                 jsr     j_IsItemCursed
-                bcc.w   loc_4F69C
+                bcc.w   @loc_7
                 move.w  itemEntry(a6),(DIALOGUE_NAME_INDEX_1).l
                 txt     30              ; "{LEADER}!  You can't{N}remove the {ITEM}!{N}It's cursed!{W2}"
-                bra.w   loc_4F6CA
-loc_4F69C:
+                bra.w   @loc_8
+@loc_7:
                 
                 move.w  member(a6),d0
                 move.w  itemSlot(a6),d1
@@ -193,13 +194,13 @@ loc_4F69C:
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_RARE,d1
                 cmpi.b  #0,d1
-                beq.s   loc_4F6CE
+                beq.s   @loc_9
                 move.w  itemEntry(a6),d1
                 jsr     j_AddItemToDeals
-loc_4F6CA:
+@loc_8:
                 
-                bra.w   loc_4F59C
-loc_4F6CE:
+                bra.w   @loc_2
+@loc_9:
                 
                 move.w  member(a6),d0
                 move.w  itemSlot(a6),d1

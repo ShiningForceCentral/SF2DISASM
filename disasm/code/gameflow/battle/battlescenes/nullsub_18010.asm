@@ -6,7 +6,9 @@
 
 ; unused
 
+
 nullsub_18010:
+                
                 rts
 
     ; End of function nullsub_18010

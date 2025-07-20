@@ -95,7 +95,7 @@ WriteBattlesceneScript:
                 bra.w   @End
 @Continue:
                 
-                bsr.w   battlesceneScript_DisplayMessage
+                bsr.w   battlesceneScript_DisplayActionMessage
                 bsr.w   battlesceneScript_PerformAnimation
                 tst.b   silencedActor(a2)
                 beq.s   @NotSilenced
@@ -145,7 +145,7 @@ WriteBattlesceneScript:
                 exg     a4,a5
                 bsr.w   battlesceneScript_SwitchTargets
                 exg     a4,a5
-                bsr.w   battlesceneScript_DisplayMessage
+                bsr.w   battlesceneScript_DisplayActionMessage
                 bsr.w   battlesceneScript_PerformAnimation
                 bsr.w   battlesceneScript_SwitchTargets
                 bsr.w   battlesceneScript_ApplyActionEffect
@@ -174,7 +174,7 @@ WriteBattlesceneScript:
                 bsr.w   battlesceneScript_SwitchTargets
                 exg     a4,a5
                 lea     ((BATTLESCENE_ACTOR-$1000000)).w,a5
-                bsr.w   battlesceneScript_DisplayMessage
+                bsr.w   battlesceneScript_DisplayActionMessage
                 bsr.w   battlesceneScript_PerformAnimation
                 bsr.w   battlesceneScript_SwitchTargets
                 bsr.w   battlesceneScript_ApplyActionEffect

@@ -44,7 +44,7 @@ GetItemRange:
 ; Out: D1 = whether combatant is inflicted with MUDDLE 2 (0=no, 1=yes)
 
 
-CheckMuddled2:
+IsConfused:
                 
                 movem.l d0/d2-a6,-(sp)
                 bsr.w   GetStatusEffects
@@ -72,7 +72,7 @@ CheckMuddled2:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function CheckMuddled2
+    ; End of function IsConfused
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1010,7 +1010,7 @@ PrioritizeReachableTargets:
                 bne.s   @EnemyItemUser
                 
                 ; Ally item user
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledAllyItemUser
                 bsr.w   PopulateTargetsArrayWithEnemies
@@ -1023,7 +1023,7 @@ PrioritizeReachableTargets:
                 bra.s   @PopulateItemPrioritiesList
 @EnemyItemUser:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledEnemyItemUser
                 bsr.w   PopulateTargetsArrayWithAllies
@@ -1066,7 +1066,7 @@ PrioritizeReachableTargets:
                 bne.s   @EnemySpellCaster
                 
                 ; Ally spell caster
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledAllySpellCaster
                 bsr.w   PopulateTargetsArrayWithEnemies
@@ -1079,7 +1079,7 @@ PrioritizeReachableTargets:
                 bra.s   @PopulateSpellPrioritiesList
 @EnemySpellCaster:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledEnemySpellCaster
                 bsr.w   PopulateTargetsArrayWithAllies
@@ -1116,7 +1116,7 @@ PrioritizeReachableTargets:
                 bne.s   @EnemyAttacker
                 
                 ; Ally attacker
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledAllyAttacker
                 bsr.w   PopulateTargetsArrayWithEnemies
@@ -1129,7 +1129,7 @@ PrioritizeReachableTargets:
                 bra.s   @PopulateAttackPrioritiesList
 @EnemyAttacker:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledEnemyAttacker
                 bsr.w   PopulateTargetsArrayWithAllies

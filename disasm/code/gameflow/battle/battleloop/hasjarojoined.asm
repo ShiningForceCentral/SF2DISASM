@@ -16,7 +16,7 @@ HasJaroJoinedTheForce:
                 subi.w  #1,d7
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 clr.l   d6
-@Loop:
+@Find_Loop:
                 
                 clr.w   d0
                 move.b  (a0,d6.w),d0
@@ -27,7 +27,7 @@ HasJaroJoinedTheForce:
 @Next:
                 
                 addi.w  #1,d6
-                dbf     d7,@Loop
+                dbf     d7,@Find_Loop
                 clr.w   d1              ; reached end of the list without finding Jaro
 @Found:
                 

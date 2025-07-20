@@ -8,9 +8,9 @@ ms_map44_ZoneEvents:
 ; =============== S U B R O U T I N E =======================================
 
 
-nullsub_5445C:
+Map44_DefaultZoneEvent:
                 
                 rts
 
-    ; End of function nullsub_5445C
+    ; End of function Map44_DefaultZoneEvent
 

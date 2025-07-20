@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\maps\egressinit.asm :
-; 0x75EC..0x764E : Egress map init function
+; 0x75EC..0x764E : Egress map initialization function
 
 ; =============== S U B R O U T I N E =======================================
 

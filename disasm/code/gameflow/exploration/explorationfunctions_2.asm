@@ -11,9 +11,9 @@ ExplorationLoop:
             if (MUSIC_RESUMING=1)
                 activateMusicResuming
             endif
-                subi.w  #20000,((word_FFB196-$1000000)).w
+                subi.w  #20000,((STEP_COUNTER-$1000000)).w
                 bge.s   loc_257D0
-                clr.w   ((word_FFB196-$1000000)).w
+                clr.w   ((STEP_COUNTER-$1000000)).w
 loc_257D0:
                 
                 jsr     HealLivingAndImmortalAllies

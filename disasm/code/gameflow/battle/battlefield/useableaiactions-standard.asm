@@ -13,7 +13,7 @@
 GetNextUsableAttackSpell:
                 
                 movem.l d3-d5/a0,-(sp)
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused
                 move.w  d1,d5                       ; remember whether caster is muddled
                 tst.b   d0
                 bmi.s   @Loop
@@ -151,7 +151,7 @@ GetNextSupportSpell:
 GetNextUsableAttackItem:
                 
                 movem.l d3-d6/a0,-(sp)
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused
                 move.w  d1,d5                       ; remember whether caster is muddled
                 tst.b   d0
                 bmi.s   @Loop

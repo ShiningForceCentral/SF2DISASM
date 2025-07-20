@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\stats\updatecombatantstats.asm :
-; 0x89CE..0x8BD0 : Functions to calculate effective stat values
+; 0x89CE..0x8BD0 : Functions to apply equip and status effects on stats
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -31,7 +31,7 @@ UpdateCombatantStats:
                 beq.s   @Next
                 bsr.w   ApplyItemOnStats
                 beq.s   @Next
-                ori.w   #4,d3
+                ori.w   #STATUSEFFECT_CURSE,d3
 @Next:
                 
                 addq.w  #ITEMENTRY_SIZE,a1
@@ -101,7 +101,7 @@ ApplyStatusEffectsOnStats:
 
 ; In: a2 = prowess entry pointer
 ;     d0.w = combatant index
-;     d1.w = item index
+;     d1.w = item entry
 
 
 ApplyItemOnStats:
@@ -132,7 +132,7 @@ ApplyItemOnStats:
                 bcs.s   @ExecuteEquipEffectFunction
 @InfiniteLoop:
                 
-                bra.s   @InfiniteLoop   ; caught in an inifinite loop if equip effect index is too high
+                bra.s   @InfiniteLoop   ; caught in an infinite loop if equip effect index is too high
 @ExecuteEquipEffectFunction:
                 
                 lsl.w   #INDEX_SHIFT_COUNT,d2
@@ -164,9 +164,9 @@ pt_EquipEffectFunctions:
                 dc.l DecreaseCurrentDef
                 dc.l DecreaseCurrentAgi
                 dc.l DecreaseCurrentMov
-                dc.l EquipEffect_SetCriticalProwess
-                dc.l EquipEffect_SetDoubleAttackProwess
-                dc.l EquipEffect_SetCounterAttackProwess
+                dc.l equipEffect_SetCriticalProwess
+                dc.l equipEffect_SetDoubleAttackProwess
+                dc.l equipEffect_SetCounterAttackProwess
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -277,6 +277,7 @@ equipEffect_IncreaseCounterAttackProwess:
                 rts
 
     ; End of function equipEffect_IncreaseCounterAttackProwess
+
 
 ; =============== S U B R O U T I N E =======================================
 

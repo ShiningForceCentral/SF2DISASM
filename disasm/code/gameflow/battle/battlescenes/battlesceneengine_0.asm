@@ -869,7 +869,7 @@ loc_18A96:
                 bsr.w   sub_1EF2E
 loc_18AAC:
                 
-                lea     ((BATTLESCENE_GROUND_PALETTE-$1000000)).w,a0
+                lea     ((BATTLESCENE_BACKGROUND_PALETTE-$1000000)).w,a0
                 lea     ((PALETTE_4_BASE-$1000000)).w,a1
                 moveq   #7,d0
 loc_18AB6:
@@ -1111,7 +1111,7 @@ sub_18D14:
                 cmpi.w  #-1,((BATTLESCENE_ENEMY-$1000000)).w
                 beq.s   loc_18D56
                 
-                move.w  ((word_FFB3EC-$1000000)).w,d0
+                move.w  ((BATTLESCENE_ENEMY_X-$1000000)).w,d0
                 cmp.w   d1,d0
                 beq.s   loc_18D56
                 bge.s   loc_18D3C
@@ -1262,8 +1262,8 @@ loc_18E30:
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  #1,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.w  ((word_FFB3EC-$1000000)).w,d4
-                move.w  ((word_FFB3F0-$1000000)).w,d5
+                move.w  ((BATTLESCENE_ENEMY_X-$1000000)).w,d4
+                move.w  ((BATTLESCENE_ENEMY_Y-$1000000)).w,d5
                 moveq   #$B,d0
 loc_18E6E:
                 
@@ -1418,8 +1418,8 @@ loc_18FC6:
                 clr.b   ((FADING_POINTER-$1000000)).w
                 move.b  #%10,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
-                move.w  ((word_FFB3EC-$1000000)).w,d4
-                move.w  ((word_FFB3F0-$1000000)).w,d5
+                move.w  ((BATTLESCENE_ENEMY_X-$1000000)).w,d4
+                move.w  ((BATTLESCENE_ENEMY_Y-$1000000)).w,d5
                 moveq   #$B,d0
 loc_19004:
                 
@@ -1545,7 +1545,7 @@ bsc0F_giveExp:
                 jsr     j_IncreaseExp
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  (sp)+,d1
-                btst    #$F,d1
+                btst    #15,d1
                 bne.s   loc_1910C
                 move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     263             ; "{NAME} earned {#}{N}EXP. points.{D1}"
@@ -1553,7 +1553,7 @@ loc_1910C:
                 
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 jsr     j_GetCurrentExp
-                subi.w  #$64,d1 
+                subi.w  #100,d1
                 bcs.w   return_191DE
                 jsr     j_SetCurrentExp
                 jsr     j_LevelUp
@@ -2208,8 +2208,6 @@ UpdateBattlesceneWeaponVdpSprites:
 
 
 ; =============== S U B R O U T I N E =======================================
-
-; related to battlescene weapon VDP sprites
 
 
 LoadBattlesceneWeaponVdpSprites:

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleloop\killallenemies.asm :
-; 0x23BB4..0x23BFC : Battle loop
+; 0x23BB4..0x23BFC : Battle loop function
 
 ; =============== S U B R O U T I N E =======================================
 

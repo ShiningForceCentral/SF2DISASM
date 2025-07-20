@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\stats\items\isitemusableonfield.asm :
+; ASM FILE code\common\menus\item\isitemusableonfield.asm :
 ; 0x229CA..0x229E2 : Item menu function
 
 ; =============== S U B R O U T I N E =======================================

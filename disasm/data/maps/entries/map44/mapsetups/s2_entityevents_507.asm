@@ -207,7 +207,7 @@ Map44_1FB_EntityEvent7:
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     1009            ; "{LEADER}, are you ready{N}to leave port?{W1}"
                 jsr     j_YesNoPrompt
                 bne.s   byte_5454A      

@@ -224,7 +224,7 @@ LoadEnemyBattlespritePropertiesAndPalette:
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((BATTLESCENE_ENEMYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w
-                move.w  (a0)+,((ENEMY_BATTLESPRITE_PROP1-$1000000)).w
+                move.w  (a0)+,((ENEMY_BATTLESPRITE_STATUS_OFFSET_X-$1000000)).w
                 move.w  (a0),d0
                 adda.w  d0,a0           ; a0 = pointer to palettes
                 lsl.w   #5,d1
@@ -300,7 +300,7 @@ LoadAllyBattlespritePropertiesAndPalette:
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 move.w  (a0)+,((BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_SPEED-$1000000)).w
-                move.w  (a0)+,((ALLY_BATTLESPRITE_PROP1-$1000000)).w
+                move.w  (a0)+,((ALLY_BATTLESPRITE_STATUS_OFFSET_X-$1000000)).w
                 move.w  (a0),d0
                 adda.w  d0,a0           ; a0 = pointer to palettes
                 lsl.w   #5,d1
@@ -571,7 +571,7 @@ LoadBattlesceneBackground:
                 
                 move.w  (a2),d0
                 lea     (a2,d0.w),a0
-                lea     ((BATTLESCENE_GROUND_PALETTE-$1000000)).w,a1
+                lea     ((BATTLESCENE_BACKGROUND_PALETTE-$1000000)).w,a1
                 addq.w  #2,a0
                 clr.w   (a1)+
                 moveq   #14,d0

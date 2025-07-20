@@ -129,7 +129,7 @@ headerStringOffset = headerStringOffset+2
             if (SHOW_EFFECTIVE_LEVEL=1)
                 jsr     CalculateEffectiveLevel
             else
-                jsr     GetCurrentLevel
+                jsr     GetLevel
             endif
                 bsr.w   WriteLvOrExpValue
                 addq.w  #4,a1

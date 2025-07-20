@@ -75,7 +75,7 @@ GetClassType:
 
 CalculateEffectiveLevel:
                 
-                bsr.s   GetCurrentLevel
+                bsr.s   GetLevel
                 tst.b   d0
                 bmi.s   @Return ; return current level for enemies
                 
@@ -159,7 +159,7 @@ GetClass:
 ; Get current level for combatant d0.b -> d1.w
 
 
-GetCurrentLevel:
+GetLevel:
                 
                 move.l  a0,-(sp)
                 bsr.s   GetCombatantEntryAddress
@@ -168,7 +168,7 @@ GetCurrentLevel:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function GetCurrentLevel
+    ; End of function GetLevel
 
 
 ; =============== S U B R O U T I N E =======================================

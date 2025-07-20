@@ -15,7 +15,7 @@ table_DebugModeAvailableMaps:
                 dc.b MAP_POLCA
                 dc.b MAP_SHIP_DAMAGED
                 dc.b MAP_TRISTAN
-                dc.b MAP_GALAM
+                dc.b MAP_GALAM_CASTLE
                 dc.b MAP_GALAM_INTERIORS
                 dc.b MAP_GALAM_DRAWBRIDGE
                 dc.b MAP_GRANSEAL_CASTLE_2F
@@ -32,7 +32,7 @@ table_DebugModeAvailableMaps:
                 dc.b MAP_GRANSEAL
                 dc.b MAP_DWARVEN_VILLAGE_INTERIOR
                 dc.b MAP_MOUN
-                dc.b MAP_FAIRY_CAVE
+                dc.b MAP_FAIRY_CAVE     
                 dc.b MAP_CREED_MANSION
                 dc.b MAP_EVIL_SPIRIT_SHRINE
                 dc.b MAP_TRISTAN_CAVES
@@ -41,7 +41,7 @@ table_DebugModeAvailableMaps:
                 dc.b MAP_ROFT
                 dc.b MAP_MOUN_UNDERGROUND
                 dc.b MAP_ANCIENT_TOWER_EXTERIOR
-                dc.b MAP_DEVILS_HEAD
+                dc.b MAP_DEVILS_HEAD    
                 dc.b MAP_FORCE_SWORD_SHRINE
                 dc.b MAP_HAWEL_HOUSE
                 dc.b MAP_GRANSEAL_DOCKS_AND_SHIP

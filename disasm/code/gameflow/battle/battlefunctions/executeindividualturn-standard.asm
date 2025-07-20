@@ -290,7 +290,7 @@ DetermineRandomAttackSpell:
             if (FIX_KIWI_BREATH_UPGRADE_LEVELS=1)
                 jsr     CalculateEffectiveLevel
             else
-                jsr     GetCurrentLevel
+                jsr     GetLevel
             endif
                 clr.w   d0
                 

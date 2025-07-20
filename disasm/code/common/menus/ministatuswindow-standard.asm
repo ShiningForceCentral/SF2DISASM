@@ -557,7 +557,7 @@ combatant = -2
             if (SHOW_EFFECTIVE_LEVEL=1)
                 jsr     CalculateEffectiveLevel
             else
-                jsr     GetCurrentLevel
+                jsr     GetLevel
             endif
                 cmpi.w  #10,d1
                 blt.s   @DetermineWindowWidth
@@ -619,7 +619,7 @@ combatant = -2
             if (SHOW_EFFECTIVE_LEVEL=1)
                 jsr     CalculateEffectiveLevel
             else
-                jsr     GetCurrentLevel
+                jsr     GetLevel
             endif
                 move.w  d1,d0
                 ext.l   d0

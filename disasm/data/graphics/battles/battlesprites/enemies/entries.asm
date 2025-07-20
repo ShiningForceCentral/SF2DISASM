@@ -1,6 +1,6 @@
 
 ; ASM FILE data\graphics\battles\battlesprites\enemies\entries.asm :
-; 0x130004..0x17FE4F : Enemy battlesprites
+; 0x130004..0x17FE50 : Enemy battlesprites
 pt_EnemyBattlesprites:
                 dc.l EnemyBattlesprite00
                 dc.l EnemyBattlesprite01

@@ -1322,8 +1322,8 @@ InitializeActionTest:
                 bsr.s   InitializeActionTestEnemyStats
                 
                 ; Clear battlescene data table in RAM
-                lea     ((BATTLESCENE_GROUND_MODIFICATION_POINTER-$1000000)).w,a0
-                move.l  #((BATTLESCENE_DATA_END-BATTLESCENE_GROUND_MODIFICATION_POINTER)/4)-1,d2 ; battle scene data longwords counter
+                lea     ((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w,a0
+                move.l  #((BATTLESCENE_DATA_END-BATTLESCENE_BACKGROUND_MODIFICATION_POINTER)/4)-1,d2 ; battle scene data longwords counter
                 
 @ClearBattlesceneData_Loop:
                 

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\stats\findname.asm :
-; 0x8970..0x89CE : Find a combatant, class, item, or spell name
+; 0x8970..0x898E : Find an item, spell, or class name
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -24,11 +24,11 @@ FindName:
                 subq.w  #1,d1
                 bmi.s   @Done           ; done if name index = 0
                 clr.w   d0
-@Loop:
+@Find_Loop:
                 
                 move.b  (a0)+,d0
                 adda.w  d0,a0
-                dbf     d1,@Loop
+                dbf     d1,@Find_Loop
 @Done:
                 
                 clr.w   d7

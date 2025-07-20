@@ -40,7 +40,7 @@ loc_444D6:
                 movem.l a0-a1,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a0
                 move.l  a0,-(sp)
-                move.w  #$8F,d7 
+                move.w  #143,d7
 loc_4450A:
                 
                 clr.l   (a0)+
@@ -71,7 +71,7 @@ InitializeNewEnemyEntity:
                 
                 movem.l d0-d5/d7-a0,-(sp)
                 move.w  d0,-(sp)
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 clr.w   d0
                 moveq   #ENTITIES_TOTAL_COUNTER,d7
 @CheckEntityEvent_Loop:
@@ -91,7 +91,7 @@ InitializeNewEnemyEntity:
                 subi.w  #ENTITY_ENEMY_INDEX_DIFFERENCE,d7
 @Ally:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 move.b  d0,(a0,d7.w)
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
@@ -113,9 +113,9 @@ InitializeNewEntity:
                 bsr.w   GetAllyMapsprite
 loc_4457E:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 clr.w   d0
-                moveq   #$3E,d7 
+                moveq   #62,d7
 loc_44586:
                 
                 cmp.b   (a0),d0
@@ -134,7 +134,7 @@ loc_4458C:
                 subi.w  #ENTITY_ENEMY_INDEX_DIFFERENCE,d7
 @Ally:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 adda.w  d7,a0
                 move.w  (sp)+,d7
                 move.b  d0,(a0)
@@ -252,7 +252,7 @@ loc_44666:
                 clr.l   (a0)+
                 dbf     d7,loc_44666    
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 moveq   #15,d7
 loc_44688:
                 
@@ -276,7 +276,7 @@ PositionBattleEntities:
                 movem.l d0-a1,-(sp)
                 link    a6,#-16
                 bsr.s   ClearEntities
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a1
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   battleEntity(a6)
                 clr.w   d0
@@ -334,7 +334,7 @@ PositionBattleEntities:
                 addq.w  #1,battleEntity(a6)
                 dbf     d7,@PositionAllies_Loop
                 
-                lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
+                lea     ((ENTITY_INDEX_LIST_ENEMIES-$1000000)).w,a1
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
                 move.w  #COMBATANT_ENEMIES_START,battleEntity(a6)
 @PositionEnemies_Loop:
@@ -425,9 +425,9 @@ PositionBattleEntities:
                 
                 ; Position neutral entities
             if (STANDARD_BUILD=1)
-                lea     ((ENTITY_EVENT_ENEMY_END-$1000000)).w,a1 ; neutral entities occupy enemy combatant slots to accommodate expanded force members
+                lea     ((ENTITY_EVENT_ENEMIES_END-$1000000)).w,a1 ; neutral entities occupy enemy combatant slots to accommodate expanded force members
             else
-                lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
+                lea     ((ENTITY_INDEX_LIST_ENEMIES-$1000000)).w,a1
             endif
                 lea     table_NeutralBattleEntities(pc), a0
                 clr.w   d1

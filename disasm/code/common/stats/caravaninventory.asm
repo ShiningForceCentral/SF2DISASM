@@ -13,6 +13,7 @@ AddItemToCaravan:
                 moveq   #CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE,d0
                 cmp.w   ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
                 bcs.s   @Skip           ; skip adding item if no room
+                
                 lea     ((CARAVAN_ITEMS-$1000000)).w,a0
                 move.w  ((CARAVAN_ITEMS_NUMBER-$1000000)).w,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d1

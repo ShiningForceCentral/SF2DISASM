@@ -130,7 +130,7 @@ rjt_cutsceneScriptCommands:
                 dc.w (csc51_joinBattleParty-rjt_cutsceneScriptCommands) & $FFFF
                 dc.w (csc52_faceEntity-rjt_cutsceneScriptCommands) & $FFFF
                 dc.w (csc53_setPriority-rjt_cutsceneScriptCommands) & $FFFF
-                dc.w (csc54_joinForceAI-rjt_cutsceneScriptCommands) & $FFFF
+                dc.w (csc54_joinForceAi-rjt_cutsceneScriptCommands) & $FFFF
                 dc.w (csc55_resetCharacterBattleStats-rjt_cutsceneScriptCommands) & $FFFF
                 dc.w (csc56_addFollower-rjt_cutsceneScriptCommands) & $FFFF
                 dc.w csc_doNothing-rjt_cutsceneScriptCommands

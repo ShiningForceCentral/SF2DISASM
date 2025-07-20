@@ -18,7 +18,7 @@
                   warpFacing DOWN
                 mWarp 255, 9
                   warpNoScroll
-                  warpMap    MAP_GALAM
+                  warpMap    MAP_GALAM_CASTLE
                   warpDest   26, 30
                   warpFacing UP
                 endWord

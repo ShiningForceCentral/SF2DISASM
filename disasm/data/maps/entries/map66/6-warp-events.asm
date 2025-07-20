@@ -33,7 +33,7 @@
                   warpFacing UP
                 mWarp 32, 5
                   warpNoScroll
-                  warpMap    MAP_GALAM
+                  warpMap    MAP_GALAM_CASTLE
                   warpDest   45, 1
                   warpFacing DOWN
                 mWarp 35, 28

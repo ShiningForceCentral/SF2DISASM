@@ -10,9 +10,9 @@
 
 InitializeBattlescene:
                 
-                lea     ((BATTLESCENE_GROUND_MODIFICATION_POINTER-$1000000)).w,a0
-                move.l  #BATTLESCENE_DATA_END,d2 
-                subi.l  #BATTLESCENE_GROUND_MODIFICATION_POINTER,d2
+                lea     ((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w,a0
+                move.l  #BATTLESCENE_DATA_END,d2
+                subi.l  #BATTLESCENE_BACKGROUND_MODIFICATION_POINTER,d2
                 lsr.l   #2,d2
                 subq.w  #1,d2
 @ClearBattlesceneData_Loop:
@@ -20,6 +20,7 @@ InitializeBattlescene:
                 clr.l   (a0)+
                 dbf     d2,@ClearBattlesceneData_Loop
                 
+                ; Get enemy graphics information
                 move.w  d1,-(sp)
                 move.w  d0,((BATTLESCENE_ENEMY-$1000000)).w
                 bsr.w   GetBattlespriteAndPalette
@@ -27,6 +28,8 @@ InitializeBattlescene:
                 move.w  d2,((BATTLESCENE_ENEMYBATTLEPALETTE-$1000000)).w
                 move.w  d3,((BATTLESCENE_ENEMYBATTLEANIMATION-$1000000)).w
                 move.w  (sp)+,d0
+                
+                ; Get ally graphics information
                 move.w  d0,((BATTLESCENE_ALLY-$1000000)).w
                 bsr.w   GetBattlespriteAndPalette
                 move.w  d1,((BATTLESCENE_ALLYBATTLESPRITE-$1000000)).w
@@ -36,8 +39,11 @@ InitializeBattlescene:
                 move.w  d2,((BATTLESCENE_WEAPONSPRITE-$1000000)).w
                 move.w  d3,((BATTLESCENE_WEAPONPALETTE-$1000000)).w
                 move.b  #-1,((BATTLESCENE_GROUND-$1000000)).w
+                
                 bsr.w   FadeOutToBlackForBattlescene
                 sndCom  SOUND_COMMAND_FADE_OUT
+                
+                ; Get background
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 bpl.s   @Continue
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
@@ -104,7 +110,7 @@ InitializeBattlescene:
                 jsr     (ApplyImmediateVramDma).w
                 
                 ; Load background palette
-                lea     ((BATTLESCENE_GROUND_PALETTE-$1000000)).w,a0
+                lea     ((BATTLESCENE_BACKGROUND_PALETTE-$1000000)).w,a0
                 lea     ((PALETTE_4_BASE-$1000000)).w,a1
                 moveq   #7,d0
 @LoadBackgroundPalette_Loop:
@@ -117,7 +123,7 @@ InitializeBattlescene:
                 cmpi.w  #-1,((BATTLESCENE_ENEMY-$1000000)).w
                 beq.w   @LoadAllyVdpSprite
                 
-                bsr.w   DmaBattlesceneEnemyLayout       
+                bsr.w   DmaBattlesceneEnemyLayout
                 bset    #3,((byte_FFB56E-$1000000)).w
                 bset    #5,((byte_FFB56E-$1000000)).w
                 move.w  ((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w,d0
@@ -135,6 +141,7 @@ InitializeBattlescene:
                 
                 cmpi.w  #-1,((BATTLESCENE_ALLY-$1000000)).w
                 beq.w   @StatusAnimationTilesToVram
+                
                 lea     sprite_BattlesceneAlly(pc), a0
                 lea     ((SPRITE_01-$1000000)).w,a1
                 lea     (BATTLESCENE_BATTLESPRITE_TOGGLE).l,a2
@@ -160,6 +167,7 @@ InitializeBattlescene:
                 move.w  ((BATTLESCENE_ALLYBATTLEPALETTE-$1000000)).w,d1
                 bsr.w   LoadAllyBattlespritePropertiesAndPalette
                 
+                ; Get ground platform for ally
                 restoreRomBanksAndEnableSram
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 bsr.w   GetBattlesceneGround
@@ -228,7 +236,7 @@ InitializeBattlescene:
                 lsr.w   #1,d0
                 move.w  d0,((BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_COUNTER-$1000000)).w
                 clr.b   ((byte_FFB581-$1000000)).w
-                move.b  #$20,((byte_FFB580-$1000000)).w 
+                move.b  #32,((byte_FFB580-$1000000)).w
                 jsr     (EnableInterrupts).w
                 clr.w   d6
                 jsr     (UpdateForegroundHScrollData).w
@@ -256,6 +264,7 @@ InitializeBattlescene:
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
                 cmpi.w  #-1,d0
                 beq.s   @CheckAllyBattlesceneWindow
+                
                 clr.w   d1
                 jsr     j_OpenEnemyBattlesceneMiniStatusWindow
 @CheckAllyBattlesceneWindow:
@@ -263,14 +272,17 @@ InitializeBattlescene:
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 cmpi.w  #-1,d0
                 beq.w   @StartFadeInAndPlayMusic
+                
                 clr.w   d1
                 jsr     j_OpenAllyBattlesceneMiniStatusWindow
                 
                 move.w  #22,d0
                 clr.w   d1
+                
                 movem.w d0-d1,-(sp)
                 bsr.w   LoadBattlesceneAllyAndWeaponVdpSprites
                 movem.w (sp)+,d0-d1
+                
                 bsr.w   LoadBattlesceneGroundVdpSprites
 @StartFadeInAndPlayMusic:
                 

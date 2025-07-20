@@ -850,7 +850,7 @@ csc17_setEntityPosAndFacingWithFlash:
                 move.b  (a6),d0
                 bsr.w   GetEntityAddressFromCharacter
                 move.w  (a5),d1
-                move.w  #MAP_TILE_MINUS,d2
+                move.w  #$FE80,d2
                 moveq   #30,d7
 loc_469BA:
                 
@@ -884,11 +884,11 @@ csc18_flashEntityWhite:
                 lsr.w   #2,d7
 loc_469E8:
                 
-                ori.b   #4,ENTITYDEF_OFFSET_FLAGS_B(a5) ; set bit 2
+                ori.b   #%100,ENTITYDEF_OFFSET_FLAGS_B(a5) ; set bit 2
                 bsr.w   UpdateEntitySprite_0
                 jsr     (WaitForVInt).w
                 jsr     (WaitForVInt).w
-                andi.b  #$FB,ENTITYDEF_OFFSET_FLAGS_B(a5) ; clear bit 2
+                andi.b  #%11111011,ENTITYDEF_OFFSET_FLAGS_B(a5) ; clear bit 2
                 bsr.w   UpdateEntitySprite_0
                 jsr     (WaitForVInt).w
                 jsr     (WaitForVInt).w
@@ -1257,7 +1257,7 @@ csc23_setEntityFacing:
 
 csc24_setCameraTargetEntity:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a5
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a5
                 move.w  (a6)+,d0
                 bmi.w   loc_46C52
                 tst.b   d0
@@ -1499,7 +1499,7 @@ csc2A_entityShiver:
                 moveq   #2,d7
 @Loop:
                 
-                ori.b   #8,ENTITYDEF_OFFSET_FLAGS_B(a5)
+                ori.b   #%1000,ENTITYDEF_OFFSET_FLAGS_B(a5)
                 bsr.w   UpdateEntitySprite_0
                 moveq   #5,d0
                 jsr     (Sleep).w       
@@ -1649,7 +1649,7 @@ csc50_setEntitySize:
                 bsr.w   GetEntityAddressFromCharacter
                 move.w  ((SPRITE_SIZE-$1000000)).w,d6
                 move.w  (a6)+,((SPRITE_SIZE-$1000000)).w
-                ori.b   #8,ENTITYDEF_OFFSET_FLAGS_B(a5)
+                ori.b   #%1000,ENTITYDEF_OFFSET_FLAGS_B(a5)
                 bsr.w   UpdateEntitySprite_0
                 jsr     (WaitForVInt).w
                 move.w  d6,((SPRITE_SIZE-$1000000)).w
@@ -1784,7 +1784,7 @@ return_46FDA:
 ; =============== S U B R O U T I N E =======================================
 
 
-csc54_joinForceAI:
+csc54_joinForceAi:
                 
                 move.w  (a6)+,d0
                 jsr     j_GetActivationBitfield
@@ -1801,7 +1801,7 @@ loc_46FF8:
                 jsr     j_SetActivationBitfield
                 rts
 
-    ; End of function csc54_joinForceAI
+    ; End of function csc54_joinForceAi
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1867,7 +1867,7 @@ csc31_moveEntityAboveEntity:
 
 GetEntityAddressFromCharacter:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a5
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a5
                 andi.w  #COMBATANT_MASK_ALL,d0
                 tst.b   d0
                 bpl.s   @Ally

@@ -717,10 +717,11 @@ ProcessMapTransition:
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
                 cmpi.b  #-1,d0
-                beq.s   loc_25E8
+                beq.s   @loc_1
             else
-                blt.s   loc_25E8
+                blt.s   @loc_1
             endif
+                
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     ($2000).w,a1
@@ -728,7 +729,7 @@ ProcessMapTransition:
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDmaOnCompressedTiles
                 bsr.w   WaitForDmaQueueProcessing
-loc_25E8:
+@loc_1:
                 
                 addq.l  #1,a5
                 getPointer p_pt_MapTilesets, a0
@@ -736,10 +737,11 @@ loc_25E8:
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
                 cmpi.b  #-1,d0
-                beq.s   loc_260E
+                beq.s   @loc_2
             else
-                blt.s   loc_260E
+                blt.s   @loc_2
             endif
+                
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     ($4000).w,a1
@@ -747,17 +749,18 @@ loc_25E8:
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDmaOnCompressedTiles
                 bsr.w   WaitForDmaQueueProcessing
-loc_260E:
+@loc_2:
                 
                 getPointer p_pt_MapTilesets, a0
                 clr.w   d0
                 move.b  (a5)+,d0
             if (STANDARD_BUILD=1)
                 cmpi.b  #-1,d0
-                beq.s   loc_2632
+                beq.s   @loc_3
             else
-                blt.s   loc_2632
+                blt.s   @loc_3
             endif
+                
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 lea     ($5000).w,a1
@@ -765,7 +768,7 @@ loc_260E:
                 moveq   #2,d1
                 bsr.w   ApplyVIntVramDmaOnCompressedTiles
                 bsr.w   WaitForDmaQueueProcessing
-loc_2632:
+@loc_3:
                 
                 addq.l  #1,a5
                 trap    #VINT_FUNCTIONS
@@ -801,7 +804,7 @@ loc_2632:
 ApplyOverworldMapTransition:
                 
                 move.b  ((MAP_EVENT_PARAM_1-$1000000)).w,d0
-                andi.w  #3,d0           ; Facing
+                andi.w  #DIRECTION_MASK,d0
                 add.w   d0,d0
                 move.w  rjt_OverworldMapTransitions(pc,d0.w),d0
                 jmp     rjt_OverworldMapTransitions(pc,d0.w)
@@ -1259,6 +1262,7 @@ ReloadCurrentMap:
             endif
 LoadMap:
                 
+                module
                 move.l  ((VIEW_PLANE_A_PIXEL_X_DEST-$1000000)).w,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
                 move.l  ((VIEW_PLANE_B_PIXEL_X_DEST-$1000000)).w,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
                 clr.l   ((PLANE_A_SCROLL_SPEED_X-$1000000)).w
@@ -1269,7 +1273,7 @@ LoadMap:
                 bsr.w   InitializeDisplay
                 move.w  (sp)+,d1
                 ext.w   d1
-                bpl.s   loc_2ACC
+                bpl.s   @LoadNewMap
                 
                 ; Reload current map
                 clr.w   d1              ; If D1<0, re-load current map
@@ -1278,8 +1282,8 @@ LoadMap:
                 lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a5,d1.w),a5
                 lea     MAPDATA_OFFSET_AREAS(a5),a5 ; get address 02 - map properties
-                bra.w   loc_2B80        
-loc_2ACC:
+                bra.w   @loc_7          
+@LoadNewMap:
                 
                 clr.w   ((word_FFAF42-$1000000)).w ; Load new map D1
                 setSavedByte d1, CURRENT_MAP  
@@ -1297,84 +1301,88 @@ loc_2ACC:
                 clr.w   (PALETTE_1_BASE).l
             if (STANDARD_BUILD=1)
                 cmpi.b  #-1,(a5)+
-                beq.s   loc_2B1C
+                beq.s   @loc_2
             else
                 tst.b   (a5)+
-                blt.s   loc_2B1C
+                blt.s   @loc_2
             endif
+                
                 lea     (FF3000_MAP_TILESET_1).l,a0
                 lea     ($2000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-loc_2B1C:
+@loc_2:
                 
             if (STANDARD_BUILD=1)
                 cmpi.b  #-1,(a5)+
-                beq.s   loc_2B34
+                beq.s   @loc_3
             else
                 tst.b   (a5)+
-                blt.s   loc_2B34
+                blt.s   @loc_3
             endif
+                
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     ($3000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-loc_2B34:
+@loc_3:
                 
             if (STANDARD_BUILD=1)
                 cmpi.b  #-1,(a5)+
-                beq.s   loc_2B4C
+                beq.s   @loc_4
             else
                 tst.b   (a5)+
-                blt.s   loc_2B4C
+                blt.s   @loc_4
             endif
+                
                 lea     (FF0000_RAM_START).l,a0
                 lea     ($4000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-loc_2B4C:
+@loc_4:
                 
             if (STANDARD_BUILD=1)
                 cmpi.b  #-1,(a5)+
-                beq.s   loc_2B64
+                beq.s   @loc_5
             else
                 tst.b   (a5)+
-                blt.s   loc_2B64
+                blt.s   @loc_5
             endif
+                
                 lea     (FF1000_MAP_TILESET_4).l,a0
                 lea     ($5000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
-loc_2B60:
-                
                 bsr.w   ApplyImmediateVramDma
-loc_2B64:
+@loc_5:
                 
             if (STANDARD_BUILD=1)
                 cmpi.b  #-1,(a5)+
-                beq.s   loc_2B7C
+                beq.s   @loc_6
             else
                 tst.b   (a5)+
-                blt.s   loc_2B7C
+                blt.s   @loc_6
             endif     
+                
                 lea     (FF2000_LOADING_SPACE).l,a0
                 lea     ($6000).w,a1
                 move.w  #$800,d0
                 moveq   #2,d1
                 bsr.w   ApplyImmediateVramDma
-loc_2B7C:
+@loc_6:
                 
-                bsr.w   LoadMapBlocksAndLayout ; load blocks and layout ?
-loc_2B80:
+                bsr.w   LoadMapBlocksAndLayout
+@loc_7:
                 
                 movea.l (a5)+,a4        ; move map properties address to A4
-loc_2B82:
+@loc_8:
                 
                 move.w  (a4)+,d0
-                bpl.s   loc_2BA6
+                bpl.s   @loc_9
+                
                 movea.l -4(a5),a4
                 move.w  (a4)+,d0
                 move.w  (a4)+,d1
@@ -1384,8 +1392,8 @@ loc_2B82:
                 mulu.w  #MAP_TILE_SIZE,d1
                 mulu.w  #MAP_TILE_SIZE,d2
                 mulu.w  #MAP_TILE_SIZE,d3
-                bra.w   loc_2C14
-loc_2BA6:
+                bra.w   @loc_14
+@loc_9:
                 
                 move.w  (a4)+,d1
                 move.w  (a4)+,d2
@@ -1396,15 +1404,15 @@ loc_2BA6:
                 mulu.w  #MAP_TILE_SIZE,d3
                 move.w  (sp)+,d4
                 move.w  d4,-(sp)
-loc_2BC0:
-                
                 cmpi.w  #-1,d4
-                bne.s   loc_2BE6
+                bne.s   @loc_11
+                
                 move.l  a0,-(sp)
                 move.b  ((VIEW_TARGET_ENTITY-$1000000)).w,d4
-                bpl.s   loc_2BD0
+                bpl.s   @loc_10
+                
                 clr.w   d4
-loc_2BD0:
+@loc_10:
                 
                 andi.w  #$3F,d4 
                 lsl.w   #ENTITYDEF_SIZE_BITS,d4
@@ -1412,35 +1420,35 @@ loc_2BD0:
                 move.w  ENTITYDEF_OFFSET_Y(a0,d4.w),d5
                 move.w  (a0,d4.w),d4
                 movea.l (sp)+,a0
-                bra.s   loc_2BF0
-loc_2BE6:
+                bra.s   @loc_12
+@loc_11:
                 
                 clr.w   d5
                 move.b  d4,d5
                 lsr.w   #BYTE_SHIFT_COUNT,d4
                 lsl.w   #7,d4
                 lsl.w   #7,d5
-loc_2BF0:
+@loc_12:
                 
                 cmp.w   d0,d4
-                blt.w   loc_2C0C
+                blt.w   @loc_13
                 cmp.w   d1,d5
-                blt.w   loc_2C0C
+                blt.w   @loc_13
                 cmp.w   d2,d4
-                bgt.w   loc_2C0C
+                bgt.w   @loc_13
                 cmp.w   d3,d5
-                bgt.w   loc_2C0C
-                bra.w   loc_2C14
-loc_2C0C:
+                bgt.w   @loc_13
+                bra.w   @loc_14
+@loc_13:
                 
                 lea     $16(a4),a4
-                bra.w   loc_2B82
-loc_2C14:
+                bra.w   @loc_8
+@loc_14:
                 
                 bsr.w   LoadMapArea
                 move.w  (sp)+,d0
                 cmpi.w  #-1,d0
-                bne.s   loc_2C70
+                bne.s   @loc_19
                 move.w  d4,d0
                 move.w  d5,d1
                 move.w  d0,d2
@@ -1450,32 +1458,36 @@ loc_2C14:
                 addi.w  #1920,d2
                 addi.w  #1536,d3
                 cmp.w   ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
-                bge.s   loc_2C42
+                bge.s   @loc_15
+                
                 move.w  ((MAP_AREA_LAYER1_STARTX-$1000000)).w,d0
-loc_2C42:
+@loc_15:
                 
                 cmp.w   ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d2
-                ble.s   loc_2C50
+                ble.s   @loc_16
+                
                 move.w  ((MAP_AREA_LAYER1_ENDX-$1000000)).w,d0
                 subi.w  #3840,d0
-loc_2C50:
+@loc_16:
                 
                 cmp.w   ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
-                bge.s   loc_2C5A
+                bge.s   @loc_17
+                
                 move.w  ((MAP_AREA_LAYER1_STARTY-$1000000)).w,d1
-loc_2C5A:
+@loc_17:
                 
                 cmp.w   ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d3
-                ble.s   loc_2C68
+                ble.s   @loc_18
+                
                 move.w  ((MAP_AREA_LAYER1_ENDY-$1000000)).w,d1
                 subi.w  #3456,d1
-loc_2C68:
+@loc_18:
                 
                 lsr.w   #7,d0
                 lsr.w   #7,d1
                 lsl.w   #BYTE_SHIFT_COUNT,d0
                 or.w    d1,d0
-loc_2C70:
+@loc_19:
                 
                 clr.w   d1
                 move.b  d0,d1
@@ -1512,24 +1524,28 @@ loc_2C70:
                 move.w  d3,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
                 bsr.w   sub_38C0
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
-                beq.s   loc_2CD8
+                beq.s   @loc_20
+                
                 move.w  d0,((VIEW_PLANE_A_PIXEL_X-$1000000)).w
-loc_2CD8:
+@loc_20:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_Y-$1000000)).w
-                beq.s   loc_2CE2
+                beq.s   @loc_21
+                
                 move.w  d1,((VIEW_PLANE_A_PIXEL_Y-$1000000)).w
-loc_2CE2:
+@loc_21:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
-                beq.s   loc_2CEC
+                beq.s   @loc_22
+                
                 move.w  d0,((VIEW_PLANE_B_PIXEL_X-$1000000)).w
-loc_2CEC:
+@loc_22:
                 
                 tst.b   ((MAP_AREA_LAYER2_AUTOSCROLL_Y-$1000000)).w
-                beq.s   loc_2CF6
+                beq.s   @loc_23
+                
                 move.w  d1,((VIEW_PLANE_B_PIXEL_Y-$1000000)).w
-loc_2CF6:
+@loc_23:
                 
                 move.w  ((VIEW_PLANE_A_PIXEL_X-$1000000)).w,d0
                 lsr.w   #NIBBLE_SHIFT_COUNT,d0
@@ -1563,6 +1579,7 @@ loc_2CF6:
 
     ; End of function LoadMap
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1576,47 +1593,51 @@ LoadMapBlocksAndLayout:
                 lea     (FF0000_RAM_START).l,a1
                 bsr.w   LoadMapLayoutData
                 movea.l 4(a5),a0
-loc_2D74:
+@loc_1:
                 
                 move.w  (a0),d1
                 cmpi.w  #-1,d1
-                beq.w   loc_2D9C
+                beq.w   @loc_3
+                
                 jsr     j_CheckFlag
-                beq.w   loc_2D98
+                beq.w   @loc_2
+                
                 move.w  2(a0),d0
                 move.w  4(a0),d1
                 move.w  6(a0),d2
                 bsr.w   CopyMapBlocks
-loc_2D98:
+@loc_2:
                 
                 addq.l  #8,a0
-                bra.s   loc_2D74
-loc_2D9C:
+                bra.s   @loc_1
+@loc_3:
                 
                 lea     (FF0000_RAM_START).l,a1
                 movea.l $14(a5),a0
-loc_2DA6:
+@loc_4:
                 
                 cmpi.w  #-1,(a0)
-                beq.w   loc_2DD4
+                beq.w   @loc_6
+                
                 clr.w   d1
                 move.b  2(a0),d1
                 jsr     j_CheckFlag
-                beq.w   loc_2DD0
+                beq.w   @loc_5
+                
                 clr.w   d0
                 move.b  1(a0),d0
                 lsl.w   #6,d0
                 add.b   (a0),d0
                 add.w   d0,d0
                 move.w  #$D802,(a1,d0.w)
-loc_2DD0:
+@loc_5:
                 
                 addq.l  #4,a0
-                bra.s   loc_2DA6
-loc_2DD4:
+                bra.s   @loc_4
+@loc_6:
                 
                 compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
-                beq.s   return_2DEA
+                beq.s   @Return
                 
                 ; Get battle map coordinates : d0.w = X, Y, d1.w = width, height
             if (STANDARD_BUILD=1)
@@ -1629,7 +1650,7 @@ loc_2DD4:
             endif
                 clr.w   d2
                 bsr.w   CopyMapBlocks
-return_2DEA:
+@Return:
                 
                 rts
 

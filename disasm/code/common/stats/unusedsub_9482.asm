@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\stats\unusedsub_9482.asm :
-; 0x8BD0..0x9484 : Unused nullsub
+; 0x9482..0x9484 : Unused nullsub
 
 ; =============== S U B R O U T I N E =======================================
 

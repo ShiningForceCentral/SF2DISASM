@@ -50,7 +50,7 @@ GetTargetsReachableBySpell:
                 move.b  SPELLDEF_OFFSET_MIN_RANGE(a0),d4
 MakeReachableTargetsList:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 beq.s   loc_D23A
                 eori.b  #COMBATANT_MASK_ENEMY_BIT,d0 ; flip enemy bit, to get the opposite type when muddled

@@ -26,7 +26,7 @@ loc_237A4:
                 move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d2
                 move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3
                 move.b  ENTITYDEF_OFFSET_LAYER(a0,d0.w),d4
-                andi.w  #3,d3
+                andi.w  #DIRECTION_MASK,d3
                 move.w  d3,d5
                 lsl.w   #INDEX_SHIFT_COUNT,d5
 loc_237C8:

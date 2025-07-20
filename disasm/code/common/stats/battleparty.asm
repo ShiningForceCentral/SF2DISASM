@@ -16,14 +16,14 @@ UpdateForce:
                 moveq   #0,d2
                 moveq   #0,d3
                 moveq   #0,d4
-                moveq   #0,d0
+                moveq   #COMBATANT_ALLIES_START,d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
 @MemberStatus_Loop:
                 
                 move.w  d0,d1
                 addi.w  #FORCEMEMBER_JOINED_FLAGS_START,d1
                 bsr.s   CheckFlag
-                beq.w   @CheckNextMember
+                beq.w   @NextMember
                 move.b  d0,(a2)+
                 addq.w  #1,d2
                 move.w  d0,d1
@@ -32,12 +32,12 @@ UpdateForce:
                 beq.s   @InReserve
                 move.b  d0,(a3)+
                 addq.w  #1,d3
-                bra.s   @CheckNextMember
+                bra.s   @NextMember
 @InReserve:
                 
                 move.b  d0,(a4)+
                 addq.w  #1,d4
-@CheckNextMember:
+@NextMember:
                 
                 addq.b  #1,d0
                 dbf     d7,@MemberStatus_Loop
@@ -53,7 +53,7 @@ UpdateForce:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = ally index
+; In: d0.b = ally index
 
 
 JoinForce:
@@ -77,7 +77,7 @@ JoinForce:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = ally index
+; In: d0.b = ally index
 
 
 LeaveForce:
@@ -115,7 +115,7 @@ IsInBattleParty:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = ally index
+; In: d0.b = ally index
 
 
 JoinBattleParty:
@@ -133,7 +133,7 @@ JoinBattleParty:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = ally index
+; In: d0.b = ally index
 
 
 LeaveBattleParty:

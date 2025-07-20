@@ -22,7 +22,7 @@ CheckFlag:
 SetFlag:
                 
                 movem.l d0-d1/a0,-(sp)
-                bsr.w   GetFlag          
+                bsr.w   GetFlag         
                 or.b    d0,(a0)
                 movem.l (sp)+,d0-d1/a0
                 rts

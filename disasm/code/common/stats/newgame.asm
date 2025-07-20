@@ -95,7 +95,8 @@ InitializeAllyCombatantEntry:
                 setSavedWord d3, a1, COMBATANT_OFFSET_ITEM_2
                 getStartingItem (a0)+, d3
                 setSavedWord d3, a1, COMBATANT_OFFSET_ITEM_3
-                move.l  #LONGWORD_SPELLS_INITVALUE,COMBATANT_OFFSET_SPELLS(a1) ; spell entries default to nothing
+                move.l  #LONGWORD_SPELLS_INITVALUE,COMBATANT_OFFSET_SPELLS(a1) 
+                                                        ; spell entries default to nothing
                 bsr.w   LoadAllyClassData
                 move.w  (sp)+,d1        ; D1 <- pull starting level
                 bsr.w   InitializeAllyStats

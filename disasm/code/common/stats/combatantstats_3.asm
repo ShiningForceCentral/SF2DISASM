@@ -1,10 +1,10 @@
 
-; ASM FILE code\common\stats\combatantstatsfunctions.asm :
-; 0x928E..0x9482 : Character stats engine, part 2
+; ASM FILE code\common\stats\combatantstats_3.asm :
+; 0x928E..0x9482 : Manage combatant stats
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get pointer to combatant D0's entry in RAM -> A0
+; Get pointer to combatant d0.b's entry in RAM -> a0
 
 
 GetCombatantEntryAddress:
@@ -139,7 +139,7 @@ dup_GetCombatantWord:
 
 ; =============== S U B R O U T I N E =======================================
 
-; clamp byte D7 of entity D0's information + D1 between D5 and D6
+; Clamp d7.b of combatant d0's data + d1.b between d5.b and d6.b
 
 
 IncreaseAndClampByte:
@@ -176,22 +176,22 @@ IncreaseAndClamp7Bits:
                 movem.w d2-d3,-(sp)
                 move.b  (a0,d7.w),d2
                 move.b  d2,d3
-                andi.b  #$80,d3
-                andi.b  #$7F,d2 
+                andi.b  #TWO_TURN_THRESHOLD,d3
+                andi.b  #TURN_AGILITY_MASK,d2
                 add.b   d2,d1
-                bcs.s   loc_9352
+                bcs.s   @loc_1
                 cmp.b   d6,d1
-                bcs.s   loc_9356
-loc_9352:
+                bcs.s   @loc_2
+@loc_1:
                 
                 move.b  d6,d1
-                bra.s   loc_935C
-loc_9356:
+                bra.s   @loc_3
+@loc_2:
                 
                 cmp.b   d5,d1
-                bcc.s   loc_935C
+                bcc.s   @loc_3
                 move.b  d5,d1
-loc_935C:
+@loc_3:
                 
                 or.b    d3,d1
                 move.b  d1,(a0,d7.w)
@@ -204,7 +204,7 @@ loc_935C:
 
 ; =============== S U B R O U T I N E =======================================
 
-; clamp byte D7 of entity D0's information - D1 between D5 and D6
+; Clamp d7.b of combatant d0's data - d1.b between d5.b and d6.b
 
 
 DecreaseAndClampByte:
@@ -360,10 +360,10 @@ loc_9416:
 
 ; Get distance between two combatants on the battlefield (simple X and Y calculation, no obstructions.)
 ; 
-;       In: d0.w = actor entity
-;           d1.w = target entity
+;       In: d0.w = actor combatant
+;           d1.w = target combatant
 ; 
-;       Out: d2.w = distance in map blocks
+;       Out: d2.w = distance in map blocks, or -1 if either combatant is positioned out of the battlefield
 
 
 GetDistanceBetweenCombatants:
@@ -376,41 +376,41 @@ GetDistanceBetweenCombatants:
                 clr.w   d4
                 bsr.w   GetCombatantX
                 cmpi.b  #-1,d1
-                beq.w   loc_9478
+                beq.w   @loc_3
                 
-                move.w  d1,d2           ; keep 1st entity X position
+                move.w  d1,d2           ; d2.w = actor X
                 bsr.w   GetCombatantY
                 cmpi.b  #-1,d1
-                beq.w   loc_9478
+                beq.w   @loc_3
                 
-                move.w  d1,d3           ; keep 1st entity Y position
+                move.w  d1,d3           ; d3.w = actor Y
                 move.w  d5,d0
                 bsr.w   GetCombatantX
                 cmpi.b  #-1,d1
-                beq.w   loc_9478
+                beq.w   @loc_3
                 
-                move.w  d1,d4
+                move.w  d1,d4           ; d4.w = target X
                 bsr.w   GetCombatantY
                 cmpi.b  #-1,d1
-                beq.w   loc_9478
+                beq.w   @loc_3
                 
-                move.w  d1,d5
+                move.w  d1,d5           ; d5.w = target Y
                 sub.w   d4,d2
-                bcc.s   loc_946C
+                bcc.s   @loc_1
                 neg.w   d2
-loc_946C:
+@loc_1:
                 
                 sub.w   d5,d3
-                bcc.s   loc_9472
+                bcc.s   @loc_2
                 neg.w   d3
-loc_9472:
+@loc_2:
                 
                 add.w   d3,d2
-                bra.w   loc_947C
-loc_9478:
+                bra.w   @Done
+@loc_3:
                 
                 move.w  #-1,d2
-loc_947C:
+@Done:
                 
                 movem.l (sp)+,d0-d1/d3-d5
                 rts

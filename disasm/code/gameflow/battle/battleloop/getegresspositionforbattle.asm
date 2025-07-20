@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleloop\getegresspositionforbattle.asm :
-; 0x23E50..0x23EB0 : Get Egress Position For Battle function
+; 0x23E50..0x23EB0 : Battle loop : Get Egress Position For Battle function
 
 ; =============== S U B R O U T I N E =======================================
 

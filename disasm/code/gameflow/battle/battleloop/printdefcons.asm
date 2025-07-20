@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleloop\printdefcons.asm :
-; 0x2572A..0x25790 : Battle functions
+; 0x2572A..0x25790 : Battle loop : Debug messages
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -40,6 +40,7 @@ PrintActivatedDefCon:
                 move.w  d1,-(sp)
                 jsr     j_CheckFlag
                 beq.s   @RegionInactive
+                
                 subi.w  #BATTLE_REGION_FLAGS_START,d1
                 ext.l   d1
                 move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
