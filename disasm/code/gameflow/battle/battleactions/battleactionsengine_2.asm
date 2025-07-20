@@ -37,27 +37,29 @@ battlesceneScript_End:
             if (STANDARD_BUILD&FIX_RANGED_COUNTER_EXP=1)
                 ; do nothing
             else
-                lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
+                lea     ((BATTLESCENE_ACTOR-$1000000)).w,a5
                 moveq   #3,d6
                 bsr.w   battlesceneScript_SwitchTargets
             endif
-                lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
+                lea     ((BATTLESCENE_ACTOR-$1000000)).w,a4
                 lea     ((TARGETS_LIST-$1000000)).w,a5
                 tst.b   curseInaction(a2)
-                bne.w   loc_A3B2
+                bne.w   loc_A3B2        ; skip giving EXP if actor was unable to act
                 tst.b   silencedActor(a2)
                 bne.w   loc_A3B2
                 tst.b   stunInaction(a2)
                 bne.w   loc_A3B2
+                
                 move.b  (a4),d0
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_A396
+                bne.s   loc_A396        ; if actor is an enemy, check whether a counterattack occured
+                
                 jsr     GetCurrentHp
                 tst.w   d1
-                beq.w   loc_A3B2
+                beq.w   loc_A3B2        ; skip giving EXP if ally actor is dead
                 
             if (STANDARD_BUILD&FIX_RANGED_COUNTER_EXP=1)
-                lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
+                lea     ((BATTLESCENE_ACTOR-$1000000)).w,a5
             endif
                 bra.s   @GiveExpAndGold
 loc_A396:

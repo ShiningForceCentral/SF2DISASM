@@ -48,11 +48,11 @@ return_59C9C:
 cs_StartSpecialBattle:
                 
                 setStoryFlag 44         ; Battle 44 unlocked - BATTLE_FAIRY_WOODS               
-                warp MAP_SECRET_MONK_FOREST_BATTLEFIELD,1,24,LEFT
+                warp MAP_ELVEN_VILLAGE_BATTLEFIELD,1,24,LEFT
                 csc_end
 cs_LeaveSpecialBattle:
                 
-                warp MAP_SECRET_MONK_FOREST,30,24,LEFT
+                warp MAP_ELVEN_VILLAGE,30,24,LEFT
                 csc_end
 loc_59CB2:
                 

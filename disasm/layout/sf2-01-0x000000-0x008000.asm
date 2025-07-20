@@ -26,10 +26,10 @@
                 includeIfStandard "code\common\tech\pointers\s16_iconspointer.asm"                      ; Game Section 16 Icons Pointer
                 includeIfStandard "code\common\tech\pointers\s17_pointers.asm"                          ; Game Section 17 Pointers
                 
-                include "code\gameflow\start\systeminit.asm"    ; System init functions
+                include "code\gameflow\start\systeminit.asm"    ; System initialization functions
                 include "code\gameflow\start\gamestart.asm"    ; Start function
                 includeIfStandard "code\gameflow\start\z80init-standard.asm"
-                includeIfVanilla "code\gameflow\start\z80init.asm"    ; Z80 init function
+                includeIfVanilla "code\gameflow\start\z80init.asm"    ; Z80 initialization function
                 include "code\common\tech\interrupts\trap0_soundcommand.asm"    ; Trap 0 - Sound Command
                 include "code\common\tech\interrupts\errors.asm"    ; Error interrupts
                 include "code\common\tech\interrupts\trap5_textbox.asm"    ; Trap 5 - Text Box
@@ -97,16 +97,16 @@
                 include "code\specialscreens\suspend\witchsuspend.asm"    ; Witch suspend function
                 include "code\specialscreens\witchend\witchendinit.asm"    ; Witch end function
                 includeIfStandard "code\gameflow\mainloop-standard.asm"
-                includeIfVanilla "code\gameflow\start\gameinit.asm"    ; Game init
+                includeIfVanilla "code\gameflow\start\gameinit.asm"    ; Game initialization
                 includeIfVanilla "data\maps\global\debugmodemaps.asm"    ; Debug mode maps
                 alignIfVanilla
                 includeIfVanilla "code\gameflow\start\gameintro.asm"    ; Game intro
                 includeIfVanilla "code\specialscreens\witch\witchstart.asm"    ; Start witch screen
                 includeIfVanilla "code\gameflow\mainloop.asm"    ; Main loop
-                include "code\common\maps\egressinit.asm"    ; Egress map init function
+                include "code\common\maps\egressinit.asm"    ; Egress map initialization function
                 include "code\gameflow\start\basetiles.asm"    ; Base tiles loading
                 includeIfVanilla "code\gameflow\special\battletest.asm"    ; Battle test functions
-                include "code\common\maps\mapinit_0.asm"    ; Map init functions
+                include "code\common\maps\mapinit_0.asm"    ; Map initialization functions
                 includeIfVanilla "data\maps\global\flagswitchedmaps.asm"    ; Flag-switched maps
                 include "code\common\maps\getbattle.asm"    ; GetNextBattleOnMap function
                 includeIfVanilla "data\battles\global\battlemapcoords.asm"    ; Battle map coords

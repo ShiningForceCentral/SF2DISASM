@@ -169,7 +169,7 @@ j_IsRegionTriggered:
                 jmp     IsRegionTriggered(pc)
             endif
 
-    ; End of function sub_1AC038
+    ; End of function j_IsRegionTriggered
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -247,11 +247,11 @@ j_DetermineBattleUpgrade:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1AC054:
+j_RegionTriggeredSpawn:
                 
-                jmp     RegionTriggeredSpawn(pc)  
+                jmp     RegionTriggeredSpawn(pc)
 
-    ; End of function sub_1AC054
+    ; End of function j_RegionTriggeredSpawn
 
 
 ; =============== S U B R O U T I N E =======================================

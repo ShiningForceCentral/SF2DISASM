@@ -866,7 +866,7 @@ member = -2
             if (SHOW_EFFECTIVE_LEVEL=1)
                 jsr     CalculateEffectiveLevel
             else
-                jsr     GetCurrentLevel
+                jsr     GetLevel
               if (EXTENDED_STATUS=1)
                 ; Subtract 20 levels from displayed value for enemies if they possess the enhanced spell power property
                 tst.b   d0

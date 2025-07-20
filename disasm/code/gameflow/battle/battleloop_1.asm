@@ -60,7 +60,7 @@ BattleLoop:
                 jsr     j_ExecuteBattleStartCutscene
 @Start:
                 
-                bsr.w   UpdateAllEnemiesAi ; start of battle loop
+                bsr.w   UpdateAllRegionActivatedEnemiesAi ; start of battle loop
                 jsr     j_ExecuteBattleRegionCutscene
                 tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.s   @SpawnEnemies

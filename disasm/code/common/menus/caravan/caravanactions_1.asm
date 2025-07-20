@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\caravan\caravanactions_1.asm :
-; 0x21FD2..0x228A2 : Caravan functions
+; 0x21FD2..0x228A2 : Caravan menu functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -31,6 +31,7 @@ CaravanMenu:
                 jsr     j_ExecuteDiamondMenu
                 cmpi.w  #-1,d0
                 beq.w   @ExitCaravan
+                
                 add.w   d0,d0
                 move.w  rjt_CaravanMenu(pc,d0.w),d0
                 jsr     rjt_CaravanMenu(pc,d0.w)
@@ -45,7 +46,7 @@ rjt_CaravanMenu:
                 
                 moveq   #0,d0
                 moveq   #0,d1
-                move.w  #10,d1          ; "{LEADER}, take it easy!{W1}"
+                move.w  #MESSAGE_CARAVAN_TAKE_IT_EASY,d1 ; "{LEADER}, take it easy!{W1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 unlk    a6
                 movem.l (sp)+,d0-a5

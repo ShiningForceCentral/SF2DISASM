@@ -821,7 +821,7 @@ BuildMembersListWindow:
                 
                 ; Write LV
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 moveq   #LV_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -1000,7 +1000,7 @@ BuildMemberSummaryWindow:
             if (STANDARD_BUILD&SHOW_EFFECTIVE_LEVEL=1)
                 jsr     CalculateEffectiveLevel
             else
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
             endif
                 moveq   #2,d7
                 move.w  d1,d0

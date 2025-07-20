@@ -40,7 +40,7 @@ CountPromotableMembers:
                 bsr.w   GetPromotionData
                 cmpi.w  #0,cannotPromoteFlag(a6)
                 bne.w   @Next
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 cmpi.w  #CHURCHMENU_MIN_PROMOTABLE_LEVEL,d1
                 bcs.w   @Next
                 addi.w  #1,promotableMembersCount(a6)
@@ -256,7 +256,7 @@ Church_CureStun:
                 txt     132             ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
                 
             if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
-                jsr     GetCurrentLevel
+                jsr     GetLevel
                 mulu.w  #CHURCHMENU_PER_LEVEL_CURE_STUN_COST,d1
                 move.l  d1,actionCost(a6)
                 jsr     GetClass

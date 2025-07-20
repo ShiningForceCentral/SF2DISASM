@@ -24,7 +24,7 @@ GetSpellName:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Find pointer to definition entry for spell D1 -> A0
+; Find pointer to definition entry for spell d1.b -> a0
 
 
 GetSpellDefAddress:
@@ -32,12 +32,12 @@ GetSpellDefAddress:
                 move.l  d0,-(sp)
                 getPointer p_table_SpellDefinitions, a0
                 getSpellDefsCounter d0
-@Loop:
+@Find_Loop:
                 
                 cmp.b   (a0),d1
                 beq.s   @Found
                 lea     SPELLDEF_ENTRY_SIZE(a0),a0
-                dbf     d0,@Loop
+                dbf     d0,@Find_Loop
                 
                 ; Default to first entry if not found
                 getPointer p_table_SpellDefinitions, a0
@@ -51,11 +51,9 @@ GetSpellDefAddress:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = spell slot
+; In: d0.b = combatant index, d1.w = spell slot
 ; 
-; Out: D1 = first spell entry
-;      D2 = number of spells learned
+; Out: d1.b = first spell entry, d2.w = number of spells learned
 
 
 GetSpellAndNumberOfSpells:
@@ -85,10 +83,9 @@ GetSpellAndNumberOfSpells:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = ally index
-;     D1 = spell entry
+; In: d0.b = ally index, d1.w = spell entry
 ; 
-; Out: D2 = result (0 = success, 1 = failure : same or higher level known, 2 = failure : no room)
+; Out: d2 = result (0 = success, 1 = failure : same or higher level known, 2 = failure : no room)
 
 
 LearnSpell:
@@ -113,9 +110,8 @@ LearnSpell:
                 lsr.b   #SPELLENTRY_OFFSET_LV,d0
                 cmp.b   d0,d5
                 bls.s   @Done
-                
                 move.b  d1,(a0)         ; replace existing spell with new one (higher level)
-                bra.s   @Success
+                bra.s   @Success        
 @Next:
                 
                 dbf     d3,@FindKnownSpell_Loop
@@ -123,7 +119,7 @@ LearnSpell:
                 moveq   #COMBATANT_SPELLSLOTS_COUNTER,d3
 @FindEmptySlot_Loop:
                 
-                move.b  (a0)+,d0
+                move.b  (a0)+,d0        ; loop through spells to find the next empty slot
                 andi.b  #SPELLENTRY_MASK_INDEX,d0
                 cmpi.b  #SPELL_NOTHING,d0
                 beq.s   @LearnNewSpell
@@ -147,7 +143,7 @@ LearnSpell:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get spell D1's MP cost -> D1
+; Get spell d1.b's MP cost -> d1.w
 
 
 GetSpellCost:

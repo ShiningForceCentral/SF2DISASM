@@ -36,7 +36,7 @@ loc_440E2:
                 mulu.w  #MAP_TILE_SIZE,d1
                 mulu.w  #MAP_TILE_SIZE,d2
                 bsr.w   ClearEntities
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a1
                 lea     NEXT_ENTITYDEF(a1),a2
                 lea     ((EXPLORATION_ENTITIES-$1000000)).w,a3
                 movem.w d1-d3,-(sp)
@@ -197,7 +197,7 @@ byte_441F0:
             endif
                 move.l  #eas_Standing,d5
                 clr.w   d6
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 move.b  d0,$3F(a0)
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
@@ -209,7 +209,7 @@ byte_441F0:
                 bra.s   @Done
 @RaftNotOnMap:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 clr.b   $3F(a0)
                 lea     ((ENTITY_RAFT_DATA-$1000000)).w,a0
                 move.l  #$70007000,(a0)

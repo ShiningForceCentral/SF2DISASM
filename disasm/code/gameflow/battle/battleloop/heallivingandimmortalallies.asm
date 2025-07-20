@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleloop\heallivingandimmortalallies.asm :
-; 0x23BFC..0x23C58 : Battle loop
+; 0x23BFC..0x23C58 : Battle loop function
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -167,7 +167,7 @@ battlesceneScript_GetKillExp:
             if (STANDARD_BUILD=1)
                 jsr     CalculateEffectiveLevel
             else
-                jsr     GetCurrentLevel 
+                jsr     GetLevel 
             endif
                 move.w  d1,d2
                 move.b  (a4),d0
@@ -176,7 +176,7 @@ battlesceneScript_GetKillExp:
             else
                 jsr     GetClass        
                 move.w  d1,d3
-                jsr     GetCurrentLevel 
+                jsr     GetLevel        
                 cmpi.b  #CHAR_CLASS_FIRSTPROMOTED,d3
                 bcs.s   @Continue
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d1

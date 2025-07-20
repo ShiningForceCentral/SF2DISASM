@@ -8,7 +8,7 @@
                   warpFacing DOWN
                 mWarp 255, 0
                   warpNoScroll
-                  warpMap    MAP_ANCIENT_TOWER_CLIMB
+                  warpMap    MAP_ANCIENT_TOWER_ASCENT
                   warpDest   16, 48
                   warpFacing UP
                 endWord

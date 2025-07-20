@@ -88,5 +88,5 @@ cs_57D22:       textCursor 3197
                 entityActionsWait FOLLOWER_B
                  moveDown 5
                 endActions
-                warp MAP_OVERWORLD_AROUND_ELVEN_VILLAGE,55,44,DOWN
+                warp MAP_OVERWORLD_SOUTHWEST_PARMECIA,55,44,DOWN
                 csc_end

@@ -310,7 +310,7 @@ GetEntityIndexForCombatant_0:
 GetEntityIndexForCombatant:
                 
                 move.l  a0,-(sp)
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 tst.b   d0
                 bpl.s   @Ally
                 subi.b  #ENTITY_ENEMY_INDEX_DIFFERENCE,d0
@@ -336,7 +336,7 @@ InitializeNewEnemyEntityIndex:
                 moveq   #BATTLE_ALL_ENTITIES_NUMBER,d7
                 move.w  d0,d1
                 clr.w   d0
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
 @GetIndex_Loop:
                 
                 cmp.b   (a0)+,d1
@@ -360,8 +360,8 @@ InitializeNewEnemyEntityIndex:
 table_22F76:    dc.w MAP_TILE_PLUS
                 dc.w 0
                 dc.w 0
-                dc.w MAP_TILE_MINUS
-                dc.w MAP_TILE_MINUS
+                dc.w $FE80
+                dc.w $FE80
                 dc.w 0
                 dc.w 0
                 dc.w MAP_TILE_PLUS
@@ -404,7 +404,7 @@ loc_22FE8:
                 cmpi.b  #-1,d0
                 beq.w   loc_2308E
                 
-                andi.w  #3,d0
+                andi.w  #DIRECTION_MASK,d0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 move.l  a0,-(sp)
                 lea     table_22F76(pc), a0
@@ -921,7 +921,7 @@ SetEntityBlinkingFlag:
                 bsr.w   GetEntityIndexForCombatant
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                bset    #7,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
+                bset    #ENTITYDEF_FLAGS_B_BLINKING,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
                 movem.l (sp)+,d0/a0
                 rts
 
@@ -937,7 +937,7 @@ ClearEntityBlinkingFlag:
                 bsr.w   GetEntityIndexForCombatant
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                bclr    #7,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
+                bclr    #ENTITYDEF_FLAGS_B_BLINKING,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
                 movem.l (sp)+,d0/a0
                 rts
 

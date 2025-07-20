@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleloop\processkilledcombatants.asm :
-; 0x24518..0x24642 : Battle functions
+; 0x24518..0x24642 : Battle loop functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -23,7 +23,7 @@ ProcessKilledCombatants:
                 move.b  (a0)+,d0
                 jsr     GetEntityIndexForCombatant
                 move.w  d6,d1
-                andi.w  #3,d1
+                andi.w  #DIRECTION_MASK,d1
                 clr.w   d2
                 moveq   #-1,d3
                 jsr     (UpdateEntityProperties).l

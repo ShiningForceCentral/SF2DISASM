@@ -101,9 +101,9 @@ byte_21348:
                 
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
+                cmpi.w  #MAP_OVERWORLD_GRANSEAL_KINGDOM,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.s   byte_21348      
-                cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
+                cmpi.w  #MAP_OVERWORLD_PACALON_KINGDOM,d0
                 bgt.s   byte_21348      ; nothing happens if not an overworld map
 @Egress:
                 
@@ -226,9 +226,9 @@ byte_21468:
                 ; Currently on overworld map?
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
+                cmpi.w  #MAP_OVERWORLD_GRANSEAL_KINGDOM,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.w   @HandleNonAngelWingItems
-                cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
+                cmpi.w  #MAP_OVERWORLD_PACALON_KINGDOM,d0
                 bgt.w   @HandleNonAngelWingItems
                 
                 ; Use Angel Wing
@@ -653,10 +653,10 @@ PopulateGenericListWithCurrentForceMembers:
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,((GENERIC_LIST_LENGTH-$1000000)).w
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-@Loop:
+@Copy_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,@Loop
+                dbf     d7,@Copy_Loop
                 
                 movem.l (sp)+,d7-a1
                 rts

@@ -41,6 +41,7 @@ battlesceneScript_DetermineCriticalHit:
                 clr.w   d0
                 move.b  (a0),d0
                 beq.s   @Return
+                
                 tst.b   specialCritical(a2)
                 beq.s   @CheckDebugCritical
                 moveq   #1,d0
@@ -63,6 +64,7 @@ battlesceneScript_DetermineCriticalHit:
                 
                 cmpi.w  #PROWESS_INFLICT_AILMENTS_START,d1
                 bcc.s   @SetInflictAilment
+                
                 move.b  #-1,criticalHit(a2)
                 move.b  (a4),d0
                 jsr     GetEquippedWeapon

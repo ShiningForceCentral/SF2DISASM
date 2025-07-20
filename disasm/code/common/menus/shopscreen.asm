@@ -91,7 +91,7 @@ ExecuteShopScreen:
                 
                 addq.w  #1,d0
                 sndCom  SFX_MENU_SELECTION
-                cmp.w   ((word_FFB134-$1000000)).w,d0
+                cmp.w   ((CURRENT_SHOP_PAGE_ITEMS_NUMBER-$1000000)).w,d0
                 blt.s   @loc_3
                 
                 addq.w  #1,((CURRENT_SHOP_PAGE-$1000000)).w
@@ -165,7 +165,7 @@ ExecuteShopScreen:
                 moveq   #ITEMS_PER_SHOP_PAGE,d1
 @loc_8:
                 
-                move.w  d1,((word_FFB134-$1000000)).w
+                move.w  d1,((CURRENT_SHOP_PAGE_ITEMS_NUMBER-$1000000)).w
 @loc_9:
                 
                 cmp.w   d1,d0
@@ -427,7 +427,7 @@ LoadItemIconsAndPriceTagTiles:
                 moveq   #ITEMS_PER_SHOP_PAGE,d1
 @loc_1:
                 
-                move.w  d1,((word_FFB134-$1000000)).w
+                move.w  d1,((CURRENT_SHOP_PAGE_ITEMS_NUMBER-$1000000)).w
                 move.w  d1,d7
                 subq.w  #1,d7
                 lea     (FF6802_LOADING_SPACE).l,a0
@@ -438,7 +438,7 @@ LoadItemIconsAndPriceTagTiles:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  d7,-(sp)
-                bsr.w   LoadItemIconInShopScreen  
+                bsr.w   LoadItemIconInShopScreen
                 move.l  a0,-(sp)
                 move.w  d0,d1
                 jsr     j_GetItemDefinitionAddress
@@ -542,9 +542,9 @@ LoadItemIconInShopScreen:
                 
                 ; Clean corners
                 ori.w   #$F,-2(a0)
-                ori.w   #$F000,-$24(a0)
-                ori.w   #$F,-$9E(a0)
-                ori.w   #$F000,-$C0(a0)
+                ori.w   #$F000,-36(a0)
+                ori.w   #$F,-158(a0)
+                ori.w   #$F000,-192(a0)
                 move.w  (sp)+,d0
                 movea.l (sp)+,a1
                 rts

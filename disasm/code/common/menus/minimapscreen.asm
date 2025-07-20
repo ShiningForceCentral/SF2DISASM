@@ -397,7 +397,7 @@ sub_12CB0:
                 
                 module
                 moveq   #20,d6
-loc_12CB2:
+@loc_1:
                 
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 move.b  ((FRAME_COUNTER-$1000000)).w,d0
@@ -406,47 +406,48 @@ loc_12CB2:
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 adda.w  d0,a0
                 lea     (SPRITE_16).l,a1
-                moveq   #$2F,d7 
+                moveq   #47,d7
                 move.w  var_10(a6),d4
                 lsr.w   #2,d4
                 lsl.w   #3,d4
-                move.w  #$F8,d2 
+                move.w  #248,d2
                 sub.w   d4,d2
                 move.w  var_8(a6),d4
                 lsr.w   #2,d4
                 lsl.w   #3,d4
-                move.w  #$E7,d3 
+                move.w  #231,d3
                 sub.w   d4,d3
                 tst.b   ((HIDE_WINDOWS_TOGGLE-$1000000)).w
-                beq.s   loc_12CF0
+                beq.s   @loc_2
                 moveq   #1,d6
-loc_12CF0:
+@loc_2:
                 
                 move.l  a1,d0
                 cmpi.w  #ENTITY_LAST_SPRITE_PLUS_ONE_WORD_ADDRESS,d0
-                beq.w   loc_12D82
+                beq.w   @loc_10
                 cmpi.w  #1,(a1)
-                beq.s   loc_12D04
+                beq.s   @loc_3
                 addq.l  #8,a1
-                bra.s   loc_12CF0
-loc_12D04:
+                bra.s   @loc_2
+@loc_3:
                 
                 cmpi.w  #7,d6
-                blt.w   loc_12D6E
+                blt.w   @loc_8
+                
                 cmpa.w  #ENTITY_SPECIAL_SPRITE_WORD_ADDRESS,a0
-                bne.s   loc_12D26
+                bne.s   @loc_4
                 move.w  var_32(a6),d0
                 cmpi.w  #$7000,d0
-                beq.w   loc_12D6E
+                beq.w   @loc_8
                 move.w  var_30(a6),d1
-                bra.w   loc_12D34       
-loc_12D26:
+                bra.w   @loc_5          
+@loc_4:
                 
                 move.w  (a0),d0
                 cmpi.w  #$7000,d0
-                beq.w   loc_12D6E
+                beq.w   @loc_8
                 move.w  ENTITYDEF_OFFSET_Y(a0),d1
-loc_12D34:
+@loc_5:
                 
                 ext.l   d0              ; show combatants on minimap
                 ext.l   d1
@@ -487,73 +488,73 @@ loc_12D34:
                 
                 cmpi.b  #MAPSPRITES_SPECIALS_START,ENTITYDEF_OFFSET_MAPSPRITE(a0)
             endif
-                bcs.s   loc_12D64
+                bcs.s   @loc_7
                 subq.w  #1,d4           ; also subtract 1 if using a large sprite, assuming they must be an enemy too
-loc_12D64:
+@loc_7:
                 
                 move.w  d1,(a1)+
                 clr.b   (a1)+
                 tst.b   (a1)+
                 move.w  d4,(a1)+
                 move.w  d0,(a1)+
-loc_12D6E:
+@loc_8:
                 
                 lea     NEXT_ENTITYDEF(a0),a0
                 move.l  a0,d0
                 cmpi.w  #ENTITY_CURSOR_WORD_ADDRESS,d0
-                bne.s   loc_12D7E
+                bne.s   @loc_9
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-loc_12D7E:
+@loc_9:
                 
-                dbf     d7,loc_12CF0
-loc_12D82:
+                dbf     d7,@loc_2
+@loc_10:
                 
                 movem.l d0-d2/d7-a0,-(sp)
                 lea     (SPRITE_TABLE).l,a0
                 move.w  #56,d0
                 moveq   #47,d7
                 move.w  #16,d1          ; sprites 16-63
-loc_12D96:
+@loc_11:
                 
                 move.w  d1,d2
                 lsl.w   #3,d2
                 tst.b   VDPSPRITE_OFFSET_SIZE(a0,d2.w)
-                bne.s   loc_12DA8
+                bne.s   @loc_12
                 move.b  d1,VDPSPRITE_OFFSET_LINK(a0,d0.w)
                 move.w  d1,d0
                 lsl.w   #3,d0
-loc_12DA8:
+@loc_12:
                 
                 addq.w  #1,d1
-                dbf     d7,loc_12D96
+                dbf     d7,@loc_11
                 
                 moveq   #47,d7
                 move.w  #16,d1          ; sprites 16-63
-loc_12DB4:
+@loc_13:
                 
                 move.w  d1,d2
                 lsl.w   #3,d2
                 tst.b   VDPSPRITE_OFFSET_SIZE(a0,d2.w)
-                beq.s   loc_12DC6
+                beq.s   @loc_14
                 move.b  d1,VDPSPRITE_OFFSET_LINK(a0,d0.w)
                 move.w  d1,d0
                 lsl.w   #3,d0
-loc_12DC6:
+@loc_14:
                 
                 addq.w  #1,d1
-                dbf     d7,loc_12DB4
+                dbf     d7,@loc_13
                 
                 clr.b   VDPSPRITE_OFFSET_LINK(a0,d0.w)
                 movem.l (sp)+,d0-d2/d7-a0
                 jsr     (WaitForVInt).w
                 subq.w  #1,d6
-                bne.s   loc_12DDE
+                bne.s   @loc_15
                 moveq   #20,d6
-loc_12DDE:
+@loc_15:
                 
                 move.b  ((PLAYER_1_INPUT-$1000000)).w,d0
                 andi.b  #INPUT_B|INPUT_C|INPUT_A,d0
-                beq.w   loc_12CB2
+                beq.w   @loc_1
                 rts
 
     ; End of function sub_12CB0

@@ -33,7 +33,7 @@ byte_549D0:
                 
                 chkFlg  802             ; Set after the event in the basement of Creed's Mansion
                 bne.s   loc_549F2
-                cmpi.b  #1,((byte_FFB651-$1000000)).w
+                cmpi.b  #1,((EVENT_RELATIVE_POSITION-$1000000)).w
                 bne.s   byte_549EC      
                 move.b  #SHOP_ITEM_NEW_GRANSEAL_0,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenu
@@ -46,7 +46,7 @@ loc_549F0:
                 bra.s   return_54A0C
 loc_549F2:
                 
-                cmpi.b  #1,((byte_FFB651-$1000000)).w
+                cmpi.b  #1,((EVENT_RELATIVE_POSITION-$1000000)).w
                 bne.s   byte_54A08      
                 move.b  #SHOP_ITEM_NEW_GRANSEAL_1,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenu
@@ -190,7 +190,7 @@ loc_54AB8:
                 bra.s   loc_54ACE
 loc_54ABA:
                 
-                cmpi.b  #1,((byte_FFB651-$1000000)).w
+                cmpi.b  #1,((EVENT_RELATIVE_POSITION-$1000000)).w
                 bne.s   byte_54ACA      
                 jsr     j_ChurchMenu
                 bra.s   loc_54ACE
@@ -233,7 +233,7 @@ byte_54AF4:
                 
                 chkFlg  802             ; Set after the event in the basement of Creed's Mansion
                 bne.s   loc_54B1A
-                cmpi.b  #1,((byte_FFB651-$1000000)).w
+                cmpi.b  #1,((EVENT_RELATIVE_POSITION-$1000000)).w
                 bne.s   byte_54B10      
                 move.b  #SHOP_WEAPON_NEW_GRANSEAL_0,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenu
@@ -247,7 +247,7 @@ loc_54B18:
                 bra.s   return_54B34
 loc_54B1A:
                 
-                cmpi.b  #1,((byte_FFB651-$1000000)).w
+                cmpi.b  #1,((EVENT_RELATIVE_POSITION-$1000000)).w
                 bne.s   byte_54B30      
                 move.b  #SHOP_WEAPON_NEW_GRANSEAL_1,((CURRENT_SHOP_INDEX-$1000000)).w
                 jsr     j_ShopMenu
@@ -497,7 +497,7 @@ loc_54C4C:
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     1117            ; "It's too dangerous to use it{N}as it is.{W2}"
                 txt     1118            ; "We need some way to{N}detonate the dynamite{N}safely.{W1}"
                 clsTxt

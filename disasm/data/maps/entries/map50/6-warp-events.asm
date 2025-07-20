@@ -8,7 +8,7 @@
                   warpFacing RIGHT
                 mWarp 14, 23
                   warpNoScroll
-                  warpMap    MAP_SHRINE_NEAR_RIBBLE_EXTERIOR
+                  warpMap    MAP_RIBBLE_SHRINE_EXTERIOR
                   warpDest   5, 7
                   warpFacing DOWN
                 mWarp 42, 24

@@ -24,7 +24,7 @@ IsBattleUpgradable:
 @Continue:
                 
                 subi.w  #1,d6           ; d6--
-@Loop:
+@Find_Loop:
                 
                 move.b  (a0)+,d0        ; put next byte in d0
                 cmp.b   d7,d0
@@ -33,7 +33,7 @@ IsBattleUpgradable:
                 bra.w   @Done
 @Next:
                 
-                dbf     d6,@Loop
+                dbf     d6,@Find_Loop   
 @Done:
                 
                 movem.l (sp)+,d0/d2-a6
@@ -247,7 +247,7 @@ UpgradeRandomBattleEnemies:
 @GetLeaderEffectiveLevel:
                 
                 clr.w   d3
-                move.b  d5,d3           ; D3 = original enemy index backup
+                move.b  d5,d3           ; d3 = original enemy index backup
                 clr.w   d2
                 clr.w   d0
                 
@@ -256,7 +256,7 @@ UpgradeRandomBattleEnemies:
                 jsr     CalculateEffectiveLevel
                 move.w  d1,d2
             else
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 move.w  d1,d2
                 jsr     j_GetClass
                 cmpi.b  #CHAR_CLASS_LASTNONPROMOTED,d1
@@ -274,7 +274,7 @@ UpgradeRandomBattleEnemies:
                 bne.s   @Default2
                 move.w  #1,d4
                 bra.s   @GetLeaderEffectiveLevel
-                bra.s   @CheckPositive
+                bra.s   @CheckPositive  ; unreachable code
 @Default2:
                 
                 move.w  d5,d1
@@ -285,15 +285,15 @@ UpgradeRandomBattleEnemies:
                 tst.w   d4
                 bne.s   @Default3
                 move.w  #1,d4
-                bra.s   @GetLeaderEffectiveLevel ; if less than 1, do it all over again once more for laughs !
-                bra.s   @CalculateUpgradeMultiplier
+                bra.s   @GetLeaderEffectiveLevel ; if less than 1, do it all over again for nothing
+                bra.s   @CalculateUpgradeMultiplier ; unreachable code
 @Default3:
                 
                 move.w  d5,d1
                 bra.w   @Done
 @CalculateUpgradeMultiplier:
                 
-                divu.w  #10,d2          ; D2 = bowie_level - battle_index / 10
+                divu.w  #10,d2          ; d2 = bowie_level - battle_index / 10
                 andi.l  #BYTE_MASK,d2
                 tst.w   d2
                 bne.s   @CalculateUpgradeRange
@@ -302,7 +302,7 @@ UpgradeRandomBattleEnemies:
 @CalculateUpgradeRange:
                 
                 clr.w   d6
-                move.b  (a0),d6         ; D6 = base upgrade range
+                move.b  (a0),d6         ; d6 = base upgrade range
                 cmpi.b  #5,d6
                 bne.s   @GetStrongestEnemy
                 mulu.w  d6,d2           ; apply upgrade multiplier D2
@@ -310,7 +310,7 @@ UpgradeRandomBattleEnemies:
 @GetStrongestEnemy:
                 
                 add.w   d2,d3
-                move.w  d3,d2           ; strongest enemy upgrade currently allowed -> D2
+                move.w  d3,d2           ; strongest enemy upgrade currently allowed -> d2
                 addi.w  #1,d6
 @UpgradeEnemy_Loop:
                 
@@ -322,8 +322,8 @@ UpgradeRandomBattleEnemies:
                 bne.s   @Default4
                 move.w  #1,d4
                 move.w  d2,d3
-                bra.s   @UpgradeEnemy_Loop ; fall back to enemy D2 and try again one more time
-                bra.s   @IsEnemyUpgradable
+                bra.s   @UpgradeEnemy_Loop ; fall back to enemy d2 and try again one more time
+                bra.s   @IsEnemyUpgradable ; unreachable code
 @Default4:
                 
                 move.w  d5,d1
@@ -336,8 +336,8 @@ UpgradeRandomBattleEnemies:
                 bne.s   @Default5
                 move.w  #1,d4
                 move.w  d2,d3
-                bra.s   @UpgradeEnemy_Loop ; fall back to enemy D2 and try again one more time
-                bra.s   @CheckExcludedEnemies
+                bra.s   @UpgradeEnemy_Loop ; fall back to enemy d2 and try again one more time
+                bra.s   @CheckExcludedEnemies ; unreachable code
 @Default5:
                 
                 move.w  d5,d1
@@ -345,10 +345,10 @@ UpgradeRandomBattleEnemies:
 @CheckExcludedEnemies:
                 
                 movea.l a0,a1
-                adda.w  #3,a1           ; A1 = pointer to excluded enemies list
+                adda.w  #3,a1           ; a1 = pointer to excluded enemies list
                 clr.w   d1
                 move.b  (a1)+,d1
-                subi.w  #1,d1           ; D1 = loop counter
+                subi.w  #1,d1           ; d1 = loop counter
 @FindExcludedEnemy_Loop:
                 
                 move.b  (a1)+,d0
@@ -359,7 +359,7 @@ UpgradeRandomBattleEnemies:
                 move.w  #1,d4
                 move.w  d2,d3
                 bra.s   @UpgradeEnemy_Loop ; fall back to enemy D2 and try again one more time
-                bra.s   @Next
+                bra.s   @Next           ; unreachable code
 @Default6:
                 
                 move.w  d5,d1
@@ -369,7 +369,7 @@ UpgradeRandomBattleEnemies:
                 dbf     d1,@FindExcludedEnemy_Loop
                 
                 clr.w   d1
-                move.b  d3,d1           ; D1 = upgraded enemy index
+                move.b  d3,d1           ; d1 = upgraded enemy index
 @Done:
                 
                 movem.l (sp)+,d0/d2-a6

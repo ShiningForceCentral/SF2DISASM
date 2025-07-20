@@ -73,7 +73,7 @@ BattleLoop_Defeat:
                 clrFlg  404             ; Battle 4 unlocked - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS
                 setFlg  504             ; Battle 4 completed - BATTLE_AMBUSHED_BY_GALAM_SOLDIERS   
                 jsr     j_UpgradeBattle
-                moveq   #MAP_GALAM_CASTLE_INNER,d0
+                moveq   #MAP_GALAM_INTERIORS,d0
                 clr.w   d4
 @Return:
                 

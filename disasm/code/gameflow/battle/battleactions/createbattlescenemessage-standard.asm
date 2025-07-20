@@ -9,7 +9,7 @@
 ;       In: a3 = action type index in RAM
 ;           a4 = actor index in RAM
 
-battlesceneScript_DisplayMessage:
+battlesceneScript_DisplayActionMessage:
                 
                 movem.l d0-d3/a0,-(sp)
                 

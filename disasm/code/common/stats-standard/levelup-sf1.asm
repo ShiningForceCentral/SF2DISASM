@@ -53,7 +53,7 @@ FastLevelUp:
                 
                 bsr.w   GetClass        
                 move.w  d1,d3           ; d3.w = class
-                bsr.w   GetCurrentLevel
+                bsr.w   GetLevel
                 move.w  d1,d5           ; d5.w = current level
                 
                 ; Determine level cap for class type

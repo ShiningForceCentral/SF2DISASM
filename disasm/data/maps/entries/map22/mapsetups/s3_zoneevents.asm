@@ -25,7 +25,7 @@ Map22_ZoneEvent0:
                 beq.s   return_59600
                 chkFlg  522             ; Battle 22 completed - BATTLE_CHESSBOARD                  
                 bne.s   return_59600
-                setSavedByte #MAP_CREED_DESKTOP_WORLD, EGRESS_MAP
+                setSavedByte #MAP_DESKTOP_KINGDOM, EGRESS_MAP
                 script  cs_5994E
 return_59600:
                 

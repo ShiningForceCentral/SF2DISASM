@@ -1,10 +1,9 @@
 
-; ASM FILE code\gameflow\battle\battlefield\clearaimemory.asm :
-; 0xC070..0xC09A : Battlefield engine
+; ASM FILE code\gameflow\battle\battleloop\clearaimemory.asm :
+; 0xC070..0xC09A : Battle loop function
 
 ; =============== S U B R O U T I N E =======================================
 
-; Unused in standard build
 
 ClearAiMemory:
                 

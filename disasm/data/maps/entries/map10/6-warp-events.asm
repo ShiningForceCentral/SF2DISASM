@@ -173,7 +173,7 @@
                   warpFacing RIGHT
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    MAP_PATH_TO_MOUNT_VOLCANON
+                  warpMap    MAP_MOUNT_VOLCANO
                   warpDest   28, 7
                   warpFacing DOWN
                 mWarp 45, 50

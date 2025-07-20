@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleloop\updateenemyaifunctions.asm :
-; 0x2550C..0x25544 : Update Enemy AI functions
+; 0x2550C..0x25544 : Battle loop : Update Enemy AI functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -14,38 +14,41 @@
 ; End function with a RTS intruction to fix
 
 
-UpdateAllEnemiesAi:
+UpdateAllRegionActivatedEnemiesAi:
                 
                 move.w  #COMBATANT_ENEMIES_START,d0
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
 @Loop:
                 
                 move.w  d7,-(sp)
-                bsr.w   UpdateEnemyAi
+                bsr.w   UpdateRegionActivatedEnemyAi
                 move.w  (sp)+,d7
                 addq.w  #1,d0
                 dbf     d7,@Loop
 
-    ; End of function UpdateAllEnemiesAi
+    ; End of function UpdateAllRegionActivatedEnemiesAi
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-UpdateEnemyAi:
+UpdateRegionActivatedEnemyAi:
                 
                 jsr     j_GetCombatantX
                 tst.b   d1
                 bmi.w   @Return
+                
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.w   @Return
+                
                 tst.b   d0
                 bpl.s   @Return
+                
                 jsr     j_TriggerRegionsAndActivateEnemies
 @Return:
                 
                 rts
 
-    ; End of function UpdateEnemyAi
+    ; End of function UpdateRegionActivatedEnemyAi
 

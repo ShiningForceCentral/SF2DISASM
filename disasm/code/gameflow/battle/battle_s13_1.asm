@@ -1,10 +1,12 @@
 
 ; ASM FILE code\gameflow\battle\battle_s13_1.asm :
-; 0x1AC38E..0x1AC9B8 : Battle init, terrain, AI stuff to split more properly
+; 0x1AC38E..0x1AC9B8 : Battle initialization, terrain, AI stuff to split more properly
 
 ; =============== S U B R O U T I N E =======================================
 
 ; AI-related
+; 
+; Out: d1.b
 
 
 sub_1AC38E:
@@ -389,7 +391,7 @@ ClearBattleTerrainArrayObstructionFlags:
 
 ; =============== S U B R O U T I N E =======================================
 
-; AI-related
+; related to AI command : Special Move
 
 
 sub_1AC69A:

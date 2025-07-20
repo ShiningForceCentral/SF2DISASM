@@ -190,7 +190,7 @@ Promote:
             endif
             if (EXPANDED_SAVED_DATA=1)
                 ; Set promoted at level as current level (before promotion)
-                bsr.w   GetCurrentLevel
+                bsr.w   GetLevel
                 andi.w  #BYTE_MASK,d0
                 loadSavedDataAddress PROMOTED_AT_LEVELS, a0
                 addToSavedBytePointer d0, a0

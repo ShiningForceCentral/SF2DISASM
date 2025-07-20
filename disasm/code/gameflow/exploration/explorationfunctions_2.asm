@@ -11,9 +11,9 @@ ExplorationLoop:
             if (MUSIC_RESUMING=1)
                 activateMusicResuming
             endif
-                subi.w  #20000,((word_FFB196-$1000000)).w
+                subi.w  #20000,((STEP_COUNTER-$1000000)).w
                 bge.s   loc_257D0
-                clr.w   ((word_FFB196-$1000000)).w
+                clr.w   ((STEP_COUNTER-$1000000)).w
 loc_257D0:
                 
                 jsr     HealLivingAndImmortalAllies
@@ -269,11 +269,11 @@ loc_259CC:
                 clr.w   d0
                 jsr     j_MakeEntityIdle
                 move.b  ((MAP_EVENT_PARAM_2-$1000000)).w,d0
-                cmpi.b  #MAP_OVERWORLD_AROUND_PACALON,d0
+                cmpi.b  #MAP_OVERWORLD_PACALON_KINGDOM_DROUGHT,d0
                 bne.s   @Continue       ; HARDCODED check if map is overworld pacalon, switch if water not restored
                 chkFlg  530             ; Battle 30 completed - BATTLE_VERSUS_ZALBARD              
                 beq.s   @Continue
-                move.w  #MAP_OVERWORLD_PACALON_2,d0
+                move.w  #MAP_OVERWORLD_PACALON_KINGDOM,d0
 @Continue:
                 
                 setSavedByte d0, CURRENT_MAP

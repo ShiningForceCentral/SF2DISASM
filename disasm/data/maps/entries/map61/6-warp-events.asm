@@ -8,7 +8,7 @@
                   warpFacing UP
                 mWarp 5, 16
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_PATH_TO_RIBBLE
+                  warpMap    MAP_OVERWORLD_SOUTH_PARMECIA
                   warpDest   43, 31
                   warpFacing DOWN
                 endWord

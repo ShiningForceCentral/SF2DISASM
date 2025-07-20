@@ -1,60 +1,55 @@
 
-; ASM FILE code\gameflow\battle\battleloop-standard\initializecombatantsforbattle.asm :
-;
+; ASM FILE code\gameflow\battle\battleloop\initializecombatants.asm :
+; 0x1B1272..0x1B15F8 : Battle loop functions
 
 ; =============== S U B R O U T I N E =======================================
 
 
-InitializeCombatantsForBattle:
-                
-                pea     InitializeAllEnemiesBattlePositions(pc)
 InitializeAllAlliesBattlePositions:
                 
                 movem.l d0-a6,-(sp)
                 moveq   #COMBATANT_ALLIES_START,d0
-                moveq   #-1,d1
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
+                move.w  #-1,d1
 @ResetPositions_Loop:
                 
-                jsr     SetCombatantX
+                jsr     j_SetCombatantX
                 addq.b  #1,d0
                 dbf     d7,@ResetPositions_Loop
                 
-                jsr     UpdateForce
+                jsr     j_UpdateForce
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a1
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d6
                 subq.w  #1,d6
                 moveq   #BATTLESPRITESET_SUBSECTION_SIZES,d1
-                jsr     GetBattleSpritesetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 clr.w   d7
                 move.b  (a0),d7
                 subq.w  #1,d7
-                blo.s   @Done
-                
+                bcs.w   @Done
                 lea     BATTLESPRITESET_OFFSET_ALLY_ENTRIES(a0),a0
 @InitPositions_Loop:
                 
-                move.b  (a1),d0         ; D0 = ally index from battle party members table
-                jsr     GetCurrentHp
+                move.b  (a1),d0         ; d0.b = ally index from battle party members table
+                jsr     j_GetCurrentHp
+                tst.w   d1
                 beq.s   @Skip           ; skip positioning if ally is dead
-                
                 clr.w   d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_X(a0),d1
-                jsr     SetCombatantX
+                jsr     j_SetCombatantX
                 move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_Y(a0),d1
-                jsr     SetCombatantY
+                jsr     j_SetCombatantY
                 lea     NEXT_BATTLESPRITESET_ENTITY(a0),a0
 @Skip:
                 
-                addq.w  #1,a1
+                addq.l  #1,a1
                 subq.w  #1,d6
-                blo.s   @Done
-                
+                bcs.w   @Done
                 dbf     d7,@InitPositions_Loop
 @LeaveBattleParty_Loop:
                 
                 move.b  (a1)+,d0
-                jsr     LeaveBattleParty
+                jsr     j_LeaveBattleParty
                 dbf     d6,@LeaveBattleParty_Loop
 @Done:
                 
@@ -74,7 +69,7 @@ InitializeAllEnemiesBattlePositions:
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
 @InitPositions_Loop:
                 
-                bsr.s   InitializeEnemyBattlePosition
+                bsr.w   InitializeEnemyBattlePosition
                 addq.b  #1,d0
                 dbf     d7,@InitPositions_Loop
                 
@@ -96,47 +91,45 @@ InitializeEnemyBattlePosition:
                 move.b  (a0),d1
                 cmpi.b  #BATTLE_TO_MOUN,d1
                 bne.s   @loc_1
-                
                 cmpi.b  #COMBATANT_ENEMY_INDEX_15,d0
                 bne.s   @loc_1
-                
-                bsr.s   HasJaroJoinedTheForce ; HARDCODED check for Jaro in battle 32
-                bne.s   @loc_3          ; skip positioning enemy 15 in battle 32 if Jaro has joined the Force
+                bsr.w   HasJaroJoinedTheForce ; HARDCODED check for Jaro in battle 32
+                tst.w   d1
+                beq.s   @loc_1
+                bra.w   @loc_3          ; skip positioning enemy 15 in battle 32 if Jaro has joined the Force
 @loc_1:
                 
                 moveq   #BATTLESPRITESET_SUBSECTION_ENEMIES,d1
-                jsr     GetBattleSpritesetSubsection
+                bsr.w   GetBattleSpritesetSubsection
                 move.w  d1,d2
                 bset    #COMBATANT_BIT_ENEMY,d2
                 clr.w   d1
                 cmp.b   d2,d0
-                bhs.s   @loc_2
-                
+                bcc.w   @loc_2
                 move.b  d0,d1
                 andi.l  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
                 mulu.w  #BATTLESPRITESET_ENTITY_ENTRY_SIZE,d1
                 adda.w  d1,a0
-                move.w  BATTLESPRITESET_ENTITYOFFSET_AI_ACTIVATION_FLAG(a0),d1
+                move.w  BATTLESPRITESET_ENTITYOFFSET_INITIALIZATION_TYPE(a0),d1
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
                 cmpi.w  #2,d1
-                bge.s   @loc_2
-                
-                bsr.s   InitializeEnemyStats
-                bra.s   @loc_3
+                bge.w   @loc_2
+                bsr.w   InitializeEnemyStats
+                bra.w   @loc_3
 @loc_2:
                 
                 lsl.w   #BYTE_SHIFT_COUNT,d1
-                jsr     SetActivationBitfield
+                jsr     j_SetActivationBitfield
                 clr.w   d1
-                jsr     SetMaxHp
-                jsr     SetCurrentHp
-                moveq   #-1,d1
-                jsr     SetCombatantX
+                jsr     j_SetMaxHp
+                jsr     j_SetCurrentHp
+                move.w  #-1,d1
+                jsr     j_SetCombatantX
                 clr.w   d1
                 clr.w   d2
-                move.b  BATTLESPRITESET_ENTITYOFFSET_AI_TRIGGER_REGION(a0),d1
-                move.b  BATTLESPRITESET_ENTITYOFFSET_9(a0),d2
-                jsr     SetAiRegion
+                move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_TRIGGER_REGION(a0),d1
+                move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION(a0),d2
+                jsr     j_SetAiRegion
 @loc_3:
                 
                 movem.l (sp)+,d0-a6
@@ -147,35 +140,49 @@ InitializeEnemyBattlePosition:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Has Jaro joined the Force? Return d1.w = -1 if true.
+; In: d0.w = combatant index
+;     d1.w = AI activation bitfield
+; 
+; Out: CCR carry-bit set if spawn position is occupied
 
 
-HasJaroJoinedTheForce:
+ResetSpawningEnemyStats:
                 
-                movem.l d0/d2-a6,-(sp)
-                jsr     UpdateForce
-                clr.w   d6
-                lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
-                move.w  (a0),d7
-                lea     ((TARGETS_LIST-$1000000)).w,a0
-                bra.s   @Find
+                movem.l d0-a6,-(sp)
+                move.w  d1,d2
+                moveq   #BATTLESPRITESET_SUBSECTION_ENEMIES,d1
+                bsr.w   GetBattleSpritesetSubsection
+                bset    #7,d1
+                cmp.b   d1,d0
+                bcc.w   @PositionEnemyOffscreen
+                move.b  d0,d1
+                andi.l  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
+                mulu.w  #BATTLESPRITESET_ENTITY_ENTRY_SIZE,d1
+                adda.w  d1,a0
+                clr.w   d3
+                clr.w   d4
+                move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_X(a0),d3
+                move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_Y(a0),d4
+                bsr.w   IsEnemyStartingPositionOccupied
+                bcs.w   @PositionEnemyOffscreen
+                bsr.w   InitializeEnemyStats
+                move.w  d2,d1
+                jsr     j_SetActivationBitfield
+                bra.w   @Done
+@PositionEnemyOffscreen:
                 
-@Find_Loop:     clr.w   d0
-                move.b  (a0,d6.w),d0
-                cmpi.b  #ALLY_JARO,d0
-                bne.s   @Next           ; keep checking force members until we either find Jaro or reach end of the list
+                clr.w   d1
+                jsr     j_SetMaxHp
+                jsr     j_SetCurrentHp
+                move.w  #-1,d1
+                jsr     j_SetCombatantX
+                ori     #1,ccr
+@Done:
                 
-                moveq   #-1,d1
-                bra.s   @Found          ; Jaro is found, so we're done
-                
-@Next:          addq.w  #1,d6
-@Find:          dbf     d7,@Find_Loop
-                
-                clr.w   d1              ; reached end of the list without finding Jaro
-@Found:         movem.l (sp)+,d0/d2-a6
+                movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function HasJaroJoinedTheForce
+    ; End of function ResetSpawningEnemyStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -192,60 +199,87 @@ InitializeEnemyStats:
                 bsr.w   UpgradeRandomBattleEnemies
                 move.w  d1,d6           ; d1.w, d6.w = upgraded enemy index
                 mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
-                getPointer p_table_EnemyDefinitions, a1
+                lea     table_EnemyDefinitions(pc), a1
                 adda.w  d1,a1
-                
                 move.l  a0,-(sp)
-                jsr     GetCombatantEntryAddress
-                moveq   #13,d7
+                jsr     j_GetCombatantEntryAddress_0
+                moveq   #ENEMYDEF_LONGWORDS_COUNTER,d7
 @Loop:
                 
-                move.l  (a1)+,d1
-                setSavedLongWithPostIncrement d1, a0
+                move.l  (a1)+,(a0)+
                 dbf     d7,@Loop
                 
                 movea.l (sp)+,a0
-                
-                jsr     GetMaxHp
-                jsr     SetCurrentHp
-                jsr     GetMaxMp
-                jsr     SetCurrentMp
+                jsr     j_GetMaxHp
+                jsr     j_SetCurrentHp
+                jsr     j_GetMaxMp
+                jsr     j_SetCurrentMp
                 clr.w   d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_X(a0),d1
-                jsr     SetCombatantX
+                jsr     j_SetCombatantX
                 move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_Y(a0),d1
-                jsr     SetCombatantY
-                jsr     GetMoveType
+                jsr     j_SetCombatantY
+                jsr     j_GetMoveType
                 lsl.w   #NIBBLE_SHIFT_COUNT,d1
                 andi.w  #BYTE_UPPER_NIBBLE_MASK,d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_AI_COMMANDSET(a0),d2
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d2
                 or.w    d2,d1
-                jsr     SetMoveTypeAndAiCommandset
+                jsr     j_SetMoveTypeAndAiCommandset
                 move.b  d6,d1
-                jsr     SetEnemyIndex
-                move.b  BATTLESPRITESET_ENTITYOFFSET_AI_TRIGGER_REGION(a0),d1
-                move.b  BATTLESPRITESET_ENTITYOFFSET_9(a0),d2
-                jsr     SetAiRegion
-                move.b  BATTLESPRITESET_ENTITYOFFSET_ENTITY_TO_FOLLOW(a0),d1
-                move.b  BATTLESPRITESET_ENTITYOFFSET_MOVE_TO_POSITION(a0),d2
-                jsr     SetAiSpecialMoveOrders
+                jsr     j_SetEnemyIndex
+                move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_TRIGGER_REGION(a0),d1
+                move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION(a0),d2
+                jsr     j_SetAiRegion
+                move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_ORDER(a0),d1
+                move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_ORDER(a0),d2
+                jsr     j_SetAiSpecialMoveOrders
                 move.w  BATTLESPRITESET_ENTITYOFFSET_ITEMS(a0),d1
-                bsr.s   InitializeEnemyItems
-                jsr     GetActivationBitfield
+                bsr.w   InitializeEnemyItems
+                jsr     j_GetActivationBitfield
                 move.w  d1,d2
                 andi.w  #WORD_UPPER_NIBBLE_MASK,d2
-                move.w  BATTLESPRITESET_ENTITYOFFSET_AI_ACTIVATION_FLAG(a0),d1
+                move.w  BATTLESPRITESET_ENTITYOFFSET_INITIALIZATION_TYPE(a0),d1
                 ror.w   #8,d1
                 andi.w  #$FFF,d1
                 or.w    d2,d1
-                jsr     SetActivationBitfield
-                bsr.s   AdjustEnemyBaseAttForDifficulty
-                jsr     UpdateCombatantStats
+                jsr     j_SetActivationBitfield
+                bsr.w   AdjustEnemyBaseAttForDifficulty
+                jsr     j_UpdateCombatantStats
                 movem.l (sp)+,d0-a1
                 rts
 
     ; End of function InitializeEnemyStats
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Unused in standard build
+
+InitializeEnemyList:
+                
+            if (VANILLA_BUILD=1)
+                movem.l d1/a0-a1,-(sp)
+                lea     ((ENEMY_LIST-$1000000)).w,a1
+                moveq   #7,d1
+@Clear_Loop:
+                
+                clr.l   (a1)+
+                dbf     d1,@Clear_Loop
+                moveq   #BATTLESPRITESET_SUBSECTION_ENEMIES,d1
+                bsr.w   GetBattleSpritesetSubsection
+                subq.w  #1,d1
+                lea     ((ENEMY_LIST-$1000000)).w,a1
+@Populate_Loop:
+                
+                move.b  (a0),(a1)+
+                adda.w  #BATTLESPRITESET_ENTITY_ENTRY_SIZE,a0
+                dbf     d1,@Populate_Loop
+                movem.l (sp)+,d1/a0-a1
+                rts
+            endif
+
+    ; End of function InitializeEnemyList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -255,33 +289,33 @@ InitializeEnemyItems:
                 
                 movem.l d0-a0,-(sp)
                 cmpi.w  #ITEM_NOTHING,d1
-                beq.s   @Done
-                
-                jsr     AddItem
+                beq.w   @Done
+                jsr     j_AddItem
                 btst    #ITEMENTRY_BIT_EQUIPPED,d1
                 beq.s   @Done
                 
                 move.w  d1,d3
                 clr.w   d1
-                jsr     GetItemBySlotAndHeldItemsNumber
-                
+                jsr     j_GetItemBySlotAndHeldItemsNumber
+                subi.w  #1,d2
                 move.w  d2,d4
                 clr.w   d5
-                bra.s   @Item
-                
-@Item_Loop:     move.w  d5,d1
-                jsr     GetItemBySlotAndHeldItemsNumber
-                cmp.b   d1,d3
-                bne.s   @NextItem
+@Item_Loop:
                 
                 move.w  d5,d1
-                jsr     EquipItemBySlot
-                bra.s   @Done
+                jsr     j_GetItemBySlotAndHeldItemsNumber
+                cmp.b   d1,d3
+                bne.s   @NextItem
+                move.w  d5,d1
+                jsr     j_EquipItemBySlot
+                bra.w   @Done
+@NextItem:
                 
-@NextItem:      addq.w  #1,d5
-@Item:          dbf     d4,@Item_Loop
-
-@Done:          movem.l (sp)+,d0-a0
+                addi.w  #1,d5
+                dbf     d4,@Item_Loop
+@Done:
+                
+                movem.l (sp)+,d0-a0
                 rts
 
     ; End of function InitializeEnemyItems
@@ -289,9 +323,59 @@ InitializeEnemyItems:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Is enemy starting position d3.w,d4.w curently occupied?
+; Return CCR carry-bit set if true.
+
+
+IsEnemyStartingPositionOccupied:
+                
+                movem.l d0-d2/d7,-(sp)
+                moveq   #COMBATANT_ALLIES_START,d0
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
+@AlliesLoop:
+                
+                jsr     j_GetCombatantX
+                cmp.w   d1,d3
+                bne.s   @NextAlly
+                jsr     j_GetCombatantY
+                cmp.w   d1,d4
+                ori     #1,ccr
+                beq.w   @Done
+@NextAlly:
+                
+                addq.w  #1,d0
+                dbf     d7,@AlliesLoop
+                
+                move.w  #COMBATANT_ENEMIES_START,d0
+                moveq   #COMBATANT_ENEMIES_COUNTER,d7
+@EnemiesLoop:
+                
+                jsr     j_GetCombatantX
+                cmp.w   d1,d3
+                bne.s   @NextEnemy
+                jsr     j_GetCombatantY
+                cmp.w   d1,d4
+                ori     #1,ccr
+                beq.w   @Done
+@NextEnemy:
+                
+                addq.w  #1,d0
+                dbf     d7,@EnemiesLoop
+                
+                tst.b   d0
+@Done:
+                
+                movem.l (sp)+,d0-d2/d7
+                rts
+
+    ; End of function IsEnemyStartingPositionOccupied
+
+
+; =============== S U B R O U T I N E =======================================
+
 ; Adjust enemy base ATT according to difficulty.
 ; If DIFFICULTY_FACTORS is enabled, adjust DEF and AGI as well.
-;
+; 
 ;   In: d0.b = combatant index
 
 

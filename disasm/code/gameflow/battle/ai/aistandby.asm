@@ -1,6 +1,6 @@
 
-; ASM FILE code\gameflow\battle\ai\aiengine_2.asm :
-; 0xF522..0xF9B4 : AI engine
+; ASM FILE code\gameflow\battle\ai\aistandby.asm :
+; 0xF522..0xF9B4 : AI engine : standby movement
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -76,7 +76,7 @@ ChurchMenu:
                 addi.w  #1,deadMembersCount(a6)
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     129             ; "Gosh!  {NAME} is{N}exhausted!{W2}"
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 mulu.w  #CHURCHMENU_PER_LEVEL_RAISE_COST,d1
                 move.l  d1,actionCost(a6)
                 jsr     j_GetClass
@@ -164,7 +164,7 @@ ChurchMenu:
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     121             ; "Gosh!  {NAME} is{N}poisoned!{W2}"
             if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
-                jsr     GetCurrentLevel
+                jsr     GetLevel
                 mulu.w  #CHURCHMENU_PER_LEVEL_CURE_POISON_COST,d1
                 move.l  d1,actionCost(a6)
                 jsr     GetClass
@@ -337,7 +337,7 @@ ChurchMenu:
                 bra.w   @RestartPromo
 @CheckPromotableLevel:
                 
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 cmpi.w  #CHURCHMENU_MIN_PROMOTABLE_LEVEL,d1
                 bcc.w   @ConfirmPromo
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w

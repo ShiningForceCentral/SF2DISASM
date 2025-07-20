@@ -299,13 +299,13 @@ ENTITY_SPECIAL_SPRITE_DESTINATION: equ ENTITY_SPECIAL_SPRITE_DATA+ENTITYDEF_OFFS
 ENTITY_SPECIAL_SPRITE_LAYER: equ ENTITY_SPECIAL_SPRITE_DATA+ENTITYDEF_OFFSET_LAYER
 ENTITY_CURSOR_DATA: equ ENTITY_DATA+NEXT_ENTITYDEF*ENTITY_CURSOR
 
-EXPLORATION_ENTITIES: equ $FFAF22
+EXPLORATION_ENTITIES: equ $FFAF22 ; list of controlled entity and followers
 FOLLOWERS_LIST: equ $FFAF23 ; list of entities following player, $FF ends
 byte_FFAF26: equ $FFAF26
-word_FFAF42: equ $FFAF42
+word_FFAF42: equ $FFAF42 ; related to map block copy
 SPRITE_SIZE: equ $FFAF44
 MAP_AREA_LAYER_TYPE: equ $FFAF46 ; 0 = Map on background (Plane B), 1 = Map on foreground (Plane A)
-byte_FFAF47: equ $FFAF47
+byte_FFAF47: equ $FFAF47 ; unused 32 byte table for ally combatants
 SPRITES_TO_LOAD_NUMBER: equ $FFAF67 ; cleared on update of entities
                                         ; looks like it can reach a maximum of 7 sprite graphics to update per VInt
 SPRITES_FRAME_COUNTER: equ $FFAF69
@@ -333,6 +333,7 @@ LEVELUP_ARGUMENTS: equ $FFAF82 ; arguments passed to level up messages :
 CURRENT_MEMBERS_LIST_SUMMARY_PAGE: equ $FFAF8C ; 0 = main
                                         ; 1 = item
                                         ; 2 = magic
+                                        ; 3+ = equip
 CURSOR_RADIUS: equ $FFAF8E
 BATTLE_ENTITY_CHOSEN_X: equ $FFAF90
 BATTLE_ENTITY_CHOSEN_Y: equ $FFAF91
@@ -357,11 +358,11 @@ BLINK_COUNTER: equ $FFB03C
 MOUTH_TILES_NUMBER: equ $FFB03E ; holds number of tiles to change for mouth animation
 MOUTH_DATA: equ $FFB040 ; start of mouth animation data (x pos, y pos, new tile index (2 bytes))
 word_FFB07C: equ $FFB07C
-PORTRAIT_VDPTILES: equ $FFB07E
+PORTRAIT_VDPTILES: equ $FFB07E ; data used to update portraits; always set to VDPTILE_PORTRAIT1|VDPTILE_PALETTE2|VDPTILE_PRIORITY when not 0
 PORTRAIT_WINDOW_INDEX: equ $FFB080
 BLINK_CONTROL_TOGGLE: equ $FFB082 ; handle portrait blinking during VInt if true
 CURRENTLY_TYPEWRITING: equ $FFB083 ; flag for whether or not we're done with typewritering
-PORTRAIT_IS_MIRRORED_TOGGLE: equ $FFB084
+PORTRAIT_IS_MIRRORED_TOGGLE: equ $FFB084 ; only effects updated tiles (not entire portrait)
 PORTRAIT_IS_ON_RIGHT_TOGGLE: equ $FFB085
 GOLD_WINDOW_INDEX: equ $FFB086
 LAND_EFFECT_WINDOW_INDEX: equ $FFB088
@@ -392,9 +393,9 @@ CONFIGURATION_MODE_TOGGLE: equ $FFB0AC
 MAP_AREA_MUSIC_INDEX: equ $FFB0AD
 GENERIC_LIST: equ $FFB0AE ; generic index list space
 GENERIC_LIST_LENGTH: equ $FFB12E ; number of entries in the generic index list
-CURRENT_SHOP_PAGE: equ $FFB130
+CURRENT_SHOP_PAGE: equ $FFB130 ; also used for Caravan depot
 CURRENT_SHOP_SELECTION: equ $FFB132
-word_FFB134: equ $FFB134
+CURRENT_SHOP_PAGE_ITEMS_NUMBER: equ $FFB134
 DISPLAYED_MEMBERS_LIST_FIRST_ENTRY: equ $FFB136 ; first entry in currently displayed portion of member list
 DISPLAYED_MEMBERS_LIST_SELECTED_ENTRY: equ $FFB138 ; selected entry in currently displayed portion of member list
 SELECTED_ITEM_INDEX: equ $FFB13A ; currently selected item index
@@ -404,11 +405,12 @@ CURRENT_ITEM_SUBMENU_ACTION: equ $FFB13C ; 0 = use
                                         ; 3 = equip
 CURRENT_MEMBERS_LIST_PAGE: equ $FFB13D
 WINDOW_IS_PRESENT: equ $FFB13F ; textbox state ? 1 without window, 2 with window
-ENTITY_EVENT_INDEX_LIST: equ $FFB140 ; 1 byte holding related entity index per entity event
-ENTITY_EVENT_ALLY_JARO: equ $FFB157
-ENTITY_EVENT_ENEMY_START: equ $FFB160
-ENTITY_EVENT_ENEMY_JAR: equ $FFB16F
-ENTITY_EVENT_ENEMY_END: equ $FFB17F
+ENTITY_INDEX_LIST: equ $FFB140 ; 1 byte holding related entity index per entity during exploration (64 bytes)
+                                        ; during combat (32 bytes) (noncombatants included iterating from slots 32 to 0)
+ENTITY_INDEX_ALLY_JARO: equ $FFB157
+ENTITY_INDEX_LIST_ENEMIES: equ $FFB160 ; 1 byte holding related entity index per entity during combat (32 bytes) (special sprites are always index 32)
+ENTITY_INDEX_ENEMY_JAR: equ $FFB16F
+ENTITY_EVENT_ENEMIES_END: equ ENTITY_INDEX_LIST_ENEMIES+32
 CHEST_CONTENTS: equ $FFB180 ; item index
 BATTLESCENE_MUSIC_INDEX: equ $FFB188
 MOVING_BATTLE_ENTITY_INDEX: equ $FFB18A
@@ -417,7 +419,7 @@ TEMP_ITEM_OR_SPELL: equ $FFB18C ; Usage :
                                         ; - item or spell, for the purpose of creating range grid
 BATTLE_EQUIP_WINDOW_SLOT: equ $FFB18E
 VIEW_SCROLLING_SPEED: equ $FFB194
-word_FFB196: equ $FFB196
+STEP_COUNTER: equ $FFB196 ; able to enter battles when 0 (set to 30,000 after battle)(warping removes 20,000)
 MOUTH_CONTROL_TOGGLE: equ $FFB198
 DEACTIVATE_WINDOW_HIDING: equ $FFB199
 HIDE_WINDOWS_TOGGLE: equ $FFB19A ; also set when scrolling
@@ -428,13 +430,12 @@ dword_FFB1A4: equ $FFB1A4
 WARP_SFX: equ $FFB1A8
 CONFIGURATION_MODE_OR_GAME_STAFF_POINTER: equ $FFB1AA
 AI_LAST_TARGET_TABLE: equ $FFB1AC ; Table of most recent target for each enemy
-AI_MEMORY_TABLE: equ $FFB1DC
+AI_MEMORY_TABLE: equ $FFB1DC ; related to standby AI movement
 PREVIOUSLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating regions triggered at the start of previous battle rounds
-                                                    ; causes issues with region triggers in the vanilla build
-                                                    ; unused otherwise in the stanard build
+                                        ; causes issues with region triggers in the vanilla build
 
 ; Battlescene Data
-BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 ; start of battlescene data
+BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 ; battlescene block; cleared when scene intializes
 word_FFB3C4: equ $FFB3C4
 BATTLESCENE_BATTLESPRITE_MODIFICATION_POINTER: equ $FFB3C6
 word_FFB3CA: equ $FFB3CA
@@ -455,9 +456,9 @@ BATTLESCENE_ALLYBATTLESPRITE_ANIMATION_COUNTER: equ $FFB3E4 ; battlesprite anima
 BATTLESCENE_ENEMYBATTLEANIMATION: equ $FFB3E6 ; battle animation index of current enemy in battlescene
 BATTLESCENE_ALLYBATTLEANIMATION: equ $FFB3E8 ; battle animation index of current ally in battlescene
 word_FFB3EA: equ $FFB3EA
-word_FFB3EC: equ $FFB3EC
+BATTLESCENE_ENEMY_X: equ $FFB3EC
 word_FFB3EE: equ $FFB3EE
-word_FFB3F0: equ $FFB3F0
+BATTLESCENE_ENEMY_Y: equ $FFB3F0
 BATTLESCENE_ALLY_X: equ $FFB3F2
 BATTLESCENE_ALLY_Y: equ $FFB3F4
 BATTLESCENE_ENEMY_X_SPEED: equ $FFB3F6
@@ -499,10 +500,10 @@ WEAPON_IDLE_FRAME1_X: equ $FFB576
 WEAPON_IDLE_FRAME1_Y: equ $FFB577
 WEAPON_IDLE_FRAME2_X: equ $FFB578
 WEAPON_IDLE_FRAME2_Y: equ $FFB579
-ALLY_BATTLESPRITE_PROP1: equ $FFB57A ; ally battlesprite second word, first byte
-ALLY_BATTLESPRITE_PROP2: equ $FFB57B ; ally battlesprite second word, first byte
-ENEMY_BATTLESPRITE_PROP1: equ $FFB57C ; enemy battlesprite second word
-ENEMY_BATTLESPRITE_PROP2: equ $FFB57D ; enemy battlesprite second word, first byte
+ALLY_BATTLESPRITE_STATUS_OFFSET_X: equ $FFB57A ; ally battlesprite second word, upper byte
+ALLY_BATTLESPRITE_STATUS_OFFSET_Y: equ $FFB57B ; ally battlesprite second word, lower byte
+ENEMY_BATTLESPRITE_STATUS_OFFSET_X: equ $FFB57C ; enemy battlesprite second word, upper byte
+ENEMY_BATTLESPRITE_STATUS_OFFSET_Y: equ $FFB57D ; enemy battlesprite second word, lower byte
 BATTLESCENE_ALLY_STATUS_ANIMATION: equ $FFB57E ; status effect sprite displayed in battlescene for ally :
                                         ;     0 = none
                                         ;     1 = silence
@@ -517,7 +518,7 @@ BATTLESCENE_ENEMY_STATUS_ANIMATION: equ $FFB57F ; status effect sprite displayed
                                         ;     4 = stun
 byte_FFB580: equ $FFB580
 byte_FFB581: equ $FFB581
-BATTLESCENE_BACKGROUND: equ $FFB582
+BATTLESCENE_GROUND: equ $FFB582
 byte_FFB583: equ $FFB583
 UPDATE_SPELLANIMATION_TOGGLE: equ $FFB584
 byte_FFB585: equ $FFB585
@@ -526,7 +527,7 @@ CURRENT_SPELLANIMATION: equ $FFB587
 byte_FFB588: equ $FFB588
 BATTLESCENE_ACTOR_SWITCH_STATE: equ $FFB589 ; battlescene actor switching state: 1 = waiting, 2 = currently switching, 3 = done
 DEAD_COMBATANTS_LIST: equ $FFB58A
-byte_FFB59A: equ $FFB59A ; end of battlescene data
+BATTLESCENE_DATA_END: equ $FFB59A ; end of battlescene data
 BATTLESCENE_GOLD: equ $FFB62A
 BATTLESCENE_EXP: equ $FFB62C
 CURRENT_BATTLEACTION: equ $FFB62E ; Refer to enum Battleactions
@@ -546,14 +547,14 @@ BATTLESCENE_FIRST_ALLY: equ $FFB64A
 BATTLESCENE_LAST_ALLY: equ $FFB64B
 BATTLESCENE_FIRST_ENEMY: equ $FFB64C
 BATTLESCENE_LAST_ENEMY: equ $FFB64D
-BATTLESCENE_ATTACKER: equ $FFB64E
-BATTLESCENE_ATTACKER_COPY: equ $FFB64F
-byte_FFB651: equ $FFB651 ; related to entity facing ?
+BATTLESCENE_ACTOR: equ $FFB64E
+BATTLESCENE_ACTOR_COPY: equ $FFB64F
+EVENT_RELATIVE_POSITION: equ $FFB651 ; whether the player character is vertically/horizontally aligned with entity when speaking
 TARGETS_LIST: equ $FFB652 ; - indexes of currently available targets in battle
                                         ; - chosen targets during battlescene
                                         ; - character indexes that can equip an item when asking about it in the caravan
                                         ; 
-OTHER_FORCE_MEMBERS_LIST: equ $FFB653
+OTHER_FORCE_MEMBERS_LIST: equ $FFB653 ; units that can be passed an item from chests
 BATTLE_PARTY_MEMBERS: equ $FFB682 ; indexes of party members currently in battle party
 RESERVE_MEMBERS: equ $FFB68E ; indexes of party members currently not in battle party
 ENEMY_LIST: equ $FFB6A2 ; unused
@@ -585,21 +586,21 @@ byte_FFB852: equ $FFB852
 PLANE_A_MAP_LAYOUT: equ $FFC000 ; Plane A layout
 byte_FFC180: equ $FFC180
 byte_FFC1B8: equ $FFC1B8
-byte_FFC286: equ $FFC286
-byte_FFC350: equ $FFC350
+REGION_CHECK_STRING_1: equ $FFC286
+REGION_CHECK_STRING_2: equ $FFC350
 byte_FFC358: equ $FFC358
 byte_FFC398: equ $FFC398
-byte_FFC41A: equ $FFC41A
+REGION_CHECK_STRING_3: equ $FFC41A
 PRESS_START_BUTTON_LAYOUT: equ $FFC480 ; "PRESS START BUTTON" string displayed on the title screen
 PLANE_A_MAP_AND_WINDOWS_LAYOUT: equ $FFC800
 byte_FFCC86: equ $FFCC86
-PALETTE_1_CURRENT: equ $FFD000
+PALETTE_1_CURRENT: equ $FFD000 ; used for ally battlesprite, map,
 PALETTE_1_CURRENT_01: equ $FFD002
 PALETTE_1_CURRENT_02: equ $FFD004
-PALETTE_2_CURRENT: equ $FFD020
-PALETTE_3_CURRENT: equ $FFD040
+PALETTE_2_CURRENT: equ $FFD020 ; used for portrait, witch screen bubble, enemy battlesprite, pulsing range
+PALETTE_3_CURRENT: equ $FFD040 ; used for UI, groundsprite, spell graphic
 PALETTE_3_CURRENT_02: equ $FFD044
-PALETTE_4_CURRENT: equ $FFD060
+PALETTE_4_CURRENT: equ $FFD060 ; used for special sprite, background
 PALETTE_1_BASE: equ $FFD080
 PALETTE_1_BASE_01: equ $FFD082
 PALETTE_1_BASE_02: equ $FFD084

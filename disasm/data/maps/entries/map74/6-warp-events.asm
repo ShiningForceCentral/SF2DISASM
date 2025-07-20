@@ -28,17 +28,17 @@
                   warpFacing LEFT
                 mWarp 255, 63
                   warpScroll DOWN
-                  warpMap    MAP_OVERWORLD_AROUND_PACALON
+                  warpMap    MAP_OVERWORLD_PACALON_KINGDOM_DROUGHT
                   warpDest   255, 1
                   warpFacing DOWN
                 mWarp 255, 63
                   warpScroll DOWN
-                  warpMap    MAP_OVERWORLD_AROUND_PACALON
+                  warpMap    MAP_OVERWORLD_PACALON_KINGDOM_DROUGHT
                   warpDest   255, 1
                   warpFacing DOWN
                 mWarp 0, 255
                   warpScroll LEFT
-                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
+                  warpMap    MAP_OVERWORLD_NAZCA_REGION
                   warpDest   62, 255
                   warpFacing LEFT
                 endWord

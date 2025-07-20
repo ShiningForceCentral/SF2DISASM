@@ -11,5 +11,5 @@ SoundTest:
                 
                 rts
 
-    ; End of function SoundTest
+    ; End of function j_SoundTest
 

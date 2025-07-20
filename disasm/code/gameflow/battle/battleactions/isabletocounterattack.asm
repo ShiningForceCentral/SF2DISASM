@@ -5,6 +5,9 @@
 ; =============== S U B R O U T I N E =======================================
 
 ; In: a2 = battlescene script stack frame
+;     a4 = pointer to target index
+;     a5 = pointer to actor index
+; 
 ; Out: -12(a2) = 0 if false, otherwise true
 
 allCombatantsCurrentHpTable = -24
@@ -42,7 +45,7 @@ battlesceneScript_ValidateCounterAttack:
                 tst.b   targetIsOnSameSide(a2)
                 bne.w   @ClearCounterToggle
                 
-                ; Check status effects
+                ; Check target's status effects
                 move.b  (a4),d0
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_SLEEP,d1

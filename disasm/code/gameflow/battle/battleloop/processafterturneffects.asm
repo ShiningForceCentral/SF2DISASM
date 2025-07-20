@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleloop\processafterturneffects.asm :
-; 0x24242..0x2448A : Battle functions
+; 0x24242..0x2448A : Battle loop functions
 
 ; =============== S U B R O U T I N E =======================================
 

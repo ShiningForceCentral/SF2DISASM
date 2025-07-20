@@ -21,7 +21,7 @@ ExecuteAiCommand_Heal:
                 link    a6,#-6
                 move.b  d0,caster(a6)
                 move.b  d1,option(a6)   ; unused
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 beq.s   @Continue
                 bra.w   @Skip           ; skip this function if combatant is inflicted with muddle 2

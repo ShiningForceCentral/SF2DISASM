@@ -86,7 +86,7 @@ AdjustTargetPriorityForAlly:
                 bra.w   loc_CE90
 loc_CE4A:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 beq.s   loc_CE56        ; if attacker is not inflicted with Muddle2
                 bra.w   loc_CE90

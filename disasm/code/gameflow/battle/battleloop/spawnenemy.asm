@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleloop\spawnenemy.asm :
-; 0x2448A..0x24512 : Battle functions
+; 0x2448A..0x24512 : Battle loop functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -15,7 +15,7 @@ SpawnEnemySkipCamera:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant
+; In: d0.w = combatant
 
 combatant = -2
 
@@ -52,7 +52,7 @@ SpawnEnemy:
                 bsr.w   GetEntityIndexForCombatant
                 move.w  d7,d1
                 addq.w  #3,d1
-                andi.w  #3,d1
+                andi.w  #DIRECTION_MASK,d1
                 moveq   #-1,d2
                 moveq   #-1,d3
                 jsr     (UpdateEntityProperties).l

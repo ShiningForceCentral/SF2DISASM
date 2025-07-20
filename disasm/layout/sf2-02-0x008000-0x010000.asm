@@ -159,7 +159,7 @@
                 include "code\gameflow\battle\ai\aicommandsupport.asm"    ; AI command : Support
                 include "code\gameflow\battle\ai\determineaibattleaction.asm"    ; Determine AI Battleaction function
                 include "code\gameflow\battle\ai\aicommandmove.asm"    ; AI command : Move
-                include "code\gameflow\battle\ai\aiengine_2.asm"    ; AI engine
+                include "code\gameflow\battle\ai\aistandby.asm"    ; AI engine : standby movement
                 include "data\stats\enemies\krakenmovecosts.asm"    ; Kraken move costs table
                 
                 includeIfVanilla "data\stats\spells\spellnames.asm"    ; Spell names

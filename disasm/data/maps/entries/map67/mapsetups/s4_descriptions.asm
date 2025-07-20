@@ -35,7 +35,7 @@ Map67_DescFunc0:
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 chkFlg  13              ; Elric joined
                 bne.s   loc_4FD22
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     2591            ; "That rock looks{N}suspicious....{W1}"
                 bra.s   loc_4FD3A
 loc_4FD22:
@@ -44,7 +44,7 @@ loc_4FD22:
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   loc_4FD3A
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     2592            ; "Maybe {NAME;13} can{N}help us.{W1}"
 loc_4FD3A:
                 

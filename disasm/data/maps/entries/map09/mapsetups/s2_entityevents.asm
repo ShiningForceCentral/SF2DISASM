@@ -102,9 +102,9 @@ Map9_EntityEvent8:
                 moveq   #40,d0
                 jsr     (Sleep).w       
                 move.w  #$86,d0 
-                move.b  ((byte_FFB651-$1000000)).w,d1
+                move.b  ((EVENT_RELATIVE_POSITION-$1000000)).w,d1
                 addq.w  #2,d1
-                andi.w  #3,d1
+                andi.w  #DIRECTION_MASK,d1
                 jsr     sub_4781A       
                 txt     1366            ; "He is eccentric.{N}He hates talking, but...{W2}{N}a historical topic may{N}interest him.{W1}"
                 bra.s   return_567C6

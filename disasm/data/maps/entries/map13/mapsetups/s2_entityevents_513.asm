@@ -113,7 +113,7 @@ byte_581E4:
                 script  cs_58856
                 setFlg  716             ; Set after your raft-giving conversation with the mayor in Polca
                 setFlg  64              ; Raft is unlocked
-                setSavedByte #MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION, RAFT_MAP
+                setSavedByte #MAP_OVERWORLD_BEDOE_KINGDOM, RAFT_MAP
                 setSavedByte #43, RAFT_X
                 setSavedByte #48, RAFT_Y
 loc_58204:

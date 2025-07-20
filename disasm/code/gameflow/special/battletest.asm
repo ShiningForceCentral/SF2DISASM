@@ -187,7 +187,7 @@ LoadAllyStatsDecimalDigits:
                 lea     (FF0000_RAM_START).l,a0
 @Loop:
                 
-                bsr.w   j_GetCurrentLevel
+                bsr.w   j_GetLevel
                 bsr.w   GetDecimalDigits
                 move.w  d1,(a0)
                 bsr.w   j_GetMaxHp

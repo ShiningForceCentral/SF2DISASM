@@ -23,7 +23,7 @@ GetItemName:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: A0 = pointer to definition for item D1
+; Out: a0 = pointer to definition for item d1
 
 
 GetItemDefinitionAddress:
@@ -159,7 +159,7 @@ GetEquippedItemByType:
                 bne.s   @Break          ; found equipped item matching the given type, break out of loop
 @Next:
                 
-                addq.w  #1,d2           ; return item slot in D2
+                addq.w  #1,d2           ; return item slot in d2
                 dbf     d3,@Loop
                 
                 move.w  #-1,d1
@@ -212,6 +212,7 @@ AddItem:
             else
                 andi.w  #ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT,d1
             endif
+                
                 move.w  d1,-(a0)        ; move item in empty slot
                 clr.w   d2
 @Done:
@@ -224,10 +225,8 @@ AddItem:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item slot
-; 
-; Out: D2 = 3 if item slot is empty
+; In: d0.b = combatant index, d1.w = item slot
+; Out: d2 = -1 if item slot was empty
 
 
 BreakItemBySlot:
@@ -255,6 +254,9 @@ BreakItemBySlot:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; In: d0.b = combatant index, d1.w = item slot
+; Out: d2 = 1 if item was not broken, -1 if item slot was empty
 
 
 RepairItemBySlot:
@@ -451,10 +453,8 @@ IsItemInSlotEquippedOrCursed:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item slot
-; 
-; Out: D2 = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if nothing
+; In: d0.b = combatant index, d1.w = item slot
+; Out: d2.w = 0 if equipped, 1 if not equipped, 2 if equipped and cursed, 3 if nothing
 
 
 UnequipItemBySlot:
@@ -470,10 +470,8 @@ UnequipItemBySlot:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = combatant index
-;     D1 = item slot
-; 
-; Out: D2 = 2 if not dropped, 3 if dropped or nothing
+; In: d0.b = combatant index, d1.w = item slot
+; Out: d2.w = 2 if not dropped, 3 if dropped or nothing
 
 
 DropItemBySlot:
@@ -512,7 +510,7 @@ DropItemBySlot:
 
 ; In: a0 = combatant items address
 ;     d0.w = item slot
-;
+; 
 ; Out: d2.w = 0
 
 
@@ -621,8 +619,8 @@ UnequipItemByType:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: A0 = pointer to equippable items list
-;      D1 = equippable weapons count
+; Out: a0 = pointer to equippable items list
+;      d1.w = equippable weapons count
 
 
 GetEquippableWeapons:
@@ -637,8 +635,8 @@ GetEquippableWeapons:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Out: A0 = pointer to equippable items list
-;      D1 = equippable rings count
+; Out: a0 = pointer to equippable items list
+;      d1.w = equippable rings count
 
 
 GetEquippableRings:
@@ -944,10 +942,10 @@ loc_9088:
                 move.w  d0,(a3)         ; why use a3 there ? unused bugged subroutine ?
                 move.w  d3,(a0)
 loc_90A0:
-            
+                
                 addq.w  #ITEMENTRY_SIZE,a1
 loc_90A2:
-            
+                
                 dbf     d2,loc_9088
                 addq.w  #ITEMENTRY_SIZE,a0
                 dbf     d1,loc_9082
@@ -967,7 +965,7 @@ IsItemCursed:
                 move.l  a0,-(sp)
                 bsr.w   GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
-                beq.s   @NotCursed
+                beq.s   @NotCursed      
                 ori     #1,ccr          ; item is cursed
                 bra.s   @Done
 @NotCursed:

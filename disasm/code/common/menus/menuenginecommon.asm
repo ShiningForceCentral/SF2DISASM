@@ -43,7 +43,6 @@ WriteTilesFromNumber:
 ; =============== S U B R O U T I N E =======================================
 
 ; Write tiles from ASCII from A0 into A1 D7 letters, window width D1
-; 
 
 useOrangeFont = -2
 
@@ -62,57 +61,57 @@ WriteTilesFromAscii:
                 movem.l d2/a2,-(sp)
                 movea.l a1,a2
                 subq.w  #1,d7
-loc_100F2:
+@loc_1:
                 
                 clr.w   d0
                 move.b  (a0)+,d0
-                beq.w   loc_10186
+                beq.w   @loc_12
                 ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 cmpi.b  #TEXT_CODE_MOVEDOWN,d0
-                beq.s   loc_1016A
+                beq.s   @loc_8
                 cmpi.b  #TEXT_CODE_TOGGLEFONTCOLOR,d0
-                beq.s   loc_10174       
+                beq.s   @loc_9          
                 cmpi.b  #TEXT_CODE_NEWLINE,d0
-                beq.s   loc_1017C
+                beq.s   @loc_10
                 tst.b   d0
-                bpl.s   loc_10118
-                subi.w  #$40,d0 
-loc_10118:
+                bpl.s   @loc_2
+                subi.w  #64,d0
+@loc_2:
                 
                 cmpi.b  #VDPTILE_CORNER,d0
-                blt.s   loc_10122       
-                addi.w  #$20,d0 
-loc_10122:
+                blt.s   @loc_3          
+                addi.w  #32,d0
+@loc_3:
                 
                 tst.w   useOrangeFont(a6) ; test if we're using the orange font
-                beq.s   loc_10156
-                cmpi.b  #$30,d0 
-                bcc.s   loc_10140       ; branch if number
+                beq.s   @loc_7
+                cmpi.b  #VDPTILE_NUMBER_0,d0
+                bcc.s   @loc_4          ; branch if number
                 move.w  d1,-(sp)
                 clr.w   d1
                 move.b  d0,d1
-                subi.b  #$20,d1 
+                subi.b  #32,d1
                 move.b  table_MainFontAlternateSymbols(pc,d1.w),d0
                 move.w  (sp)+,d1
-                bra.s   loc_10156
-loc_10140:
+                bra.s   @loc_7
+@loc_4:
                 
                 tst.b   d0
-                bpl.s   loc_10152
-                subi.w  #$1A,d0
-                cmpi.b  #$70,d0 
-                bhi.s   loc_10150
+                bpl.s   @loc_6
+                subi.w  #26,d0
+                cmpi.b  #VDPTILE_V_BORDER,d0
+                bhi.s   @loc_5
                 subq.w  #1,d0
-loc_10150:
+@loc_5:
                 
-                bra.s   loc_10156
-loc_10152:
+                bra.s   @loc_7
+@loc_6:
                 
-                addi.w  #$82,d0 
-loc_10156:
+                addi.w  #130,d0
+@loc_7:
                 
                 move.w  d0,(a1)+
-                bra.s   loc_10182
+                bra.s   @loc_11
 
 ; END OF FUNCTION CHUNK FOR WriteTilesFromAsciiWithOrangeFont
 
@@ -136,32 +135,32 @@ table_MainFontAlternateSymbols:
 
 ; START OF FUNCTION CHUNK FOR WriteTilesFromAsciiWithOrangeFont
 
-loc_1016A:
+@loc_8:
             if (STANDARD_BUILD&FULL_CLASS_NAMES=1)
                 tst.w   d1
                 bne.s   @Continue
                 move.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
-                bra.s   loc_10156
+                bra.s   @loc_7
             endif
 @Continue:
                 
                 lea     2(a2),a1
                 suba.w  d1,a1
                 movea.l a1,a2
-                bra.s   loc_10182
-loc_10174:
+                bra.s   @loc_11
+@loc_9:
                 
                 eori.w  #$FFFF,useOrangeFont(a6) ; 0x5C: toggle to/from orange font
-                bra.s   loc_10182
-loc_1017C:
+                bra.s   @loc_11
+@loc_10:
                 
                 movea.l a2,a1
                 suba.w  d1,a1
                 movea.l a1,a2
-loc_10182:
+@loc_11:
                 
-                dbf     d7,loc_100F2
-loc_10186:
+                dbf     d7,@loc_1
+@loc_12:
                 
                 movem.l (sp)+,d2/a2
                 unlk    a6

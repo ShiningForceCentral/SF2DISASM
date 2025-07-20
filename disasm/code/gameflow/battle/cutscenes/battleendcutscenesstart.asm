@@ -8,7 +8,7 @@
 ExecuteBattleCutscene_Defeated:
                 
                 movem.l d0-d1/d7-a0,-(sp)
-                moveq   #0,d0
+                moveq   #ALLY_BOWIE,d0
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.w   loc_47C88

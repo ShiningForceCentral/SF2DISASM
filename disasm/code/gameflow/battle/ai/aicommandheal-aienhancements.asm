@@ -21,7 +21,7 @@ ExecuteAiCommand_Heal:
                 link    a6,#-6
                 move.b  d0,caster(a6)
                 move.b  d1,healingThresholds(a6)
-                bsr.w   CheckMuddled2   ; returns zero bit clear if true
+                bsr.w   IsConfused      ; returns zero bit clear if true
                 bne.w   @Skip           ; skip this function if combatant is inflicted with muddle 2
                 
                 ; HEALING RAIN AND AURA 4 SECTION
