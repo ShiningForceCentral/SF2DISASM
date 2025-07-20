@@ -5,7 +5,7 @@ list_RandomBattles:
                 
 ; List of battles prefixed with length.
 ;
-; Syntax        randomBattles [BATTLE_]enum,..[BATTLE_]enum
+; Syntax        battles [BATTLE_]enum,..[BATTLE_]enum
 ;
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 

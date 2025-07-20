@@ -18,11 +18,6 @@ align:  macro
                 dcb.b \1-(*%\1),\2
             endcase
         endm
-                
-wordAlign:  macro ;alias
-                align
-                inform 0,"INFO: 'wordAlign' macro is obsolete. Please use 'align' with no arguments instead."
-            endm
     
 declareRomEnd: macro
             if (EXPANDED_ROM=0)
@@ -293,17 +288,8 @@ enemyEntity: macro
                 dc.b \1+128
             endm
                 
-itemDrop:   macro ;alias
-                item \1
-            endm
-                
 droppedFlag: macro
                 dc.b \1
-            endm
-                
-dropFlag:   macro ;alias
-                droppedFlag \1
-                inform 0,"INFO: 'dropFlag' macro is obsolete. Please use 'droppedFlag' instead."
             endm
                 
 spellElement: macro
@@ -531,10 +517,6 @@ shopInventory: macro
             endr
         endm
                 
-shopDef:    macro ;alias
-                shopInventory \_
-            endm
-                
 promotionSection: macro
                 dc.b narg
             rept narg
@@ -559,14 +541,6 @@ classes: macro
             endr
         endm
                 
-blacksmithClasses: macro                ;alias
-                classes \1
-            endm
-                
-mithrilWeaponClass: macro   ;alias
-                classes \1
-            endm
-                
 mithrilWeapons: macro
                 dc.b \1
                 item \2
@@ -582,10 +556,6 @@ specialCaravanDescription: macro
                 item \1
                 dc.b \2
                 defineShorthand.w MESSAGE_CARAVANDESC_,\3
-            endm
-                
-usableOutsideBattleItem: macro  ;alias
-                item \1
             endm
                 
 input:      macro
@@ -611,12 +581,8 @@ speechSfx:  macro
                 defineShorthand.b SFX_,\1
                 dc.b 0
             endm
-                
-speechSound: macro ;alias
-                speechSfx \1
-                inform 0,"INFO: 'speechSound' macro is obsolete. Please use 'speechSfx' instead."
-            endm
-                
+            
+
 ; Enemy definitions
                 
 unknownByte: macro
@@ -642,11 +608,6 @@ maxMp:      macro
                 
 baseAtt:    macro
                 dc.b \1,0
-            endm
-                
-baseAtk:    macro ;alias
-                baseAtt \1
-                inform 0,"INFO: 'baseAtk' macro is obsolete. Please use 'baseAtt' instead."
             endm
                 
 baseDef:    macro
@@ -696,10 +657,6 @@ unknownWord: macro
                 dcb.b 2,0
             endm
                 
-randomBattles: macro ;alias
-                battles
-            endm
-                
 upgradeRange: macro
                 dc.b \1
                 defineShorthand.b ENEMY_,\2
@@ -731,10 +688,6 @@ mpGrowth:   macro
                 
 attGrowth:  macro
                 defineStatGrowth \1,\2,\3
-            endm
-                
-atkGrowth:  macro ;alias
-                attGrowth \1,\2,\3
             endm
                 
 defGrowth:  macro
