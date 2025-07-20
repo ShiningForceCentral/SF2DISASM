@@ -3,12 +3,12 @@
 ; 0xBE680..0xBE6C2 : 
                 mWarp 28, 51
                   warpNoScroll
-                  warpMap    MAP_KRAKEN_RAFT
+                  warpMap    MAP_KRAKEN_BATTLEFIELD
                   warpDest   15, 16
                   warpFacing UP
                 mWarp 43, 31
                   warpNoScroll
-                  warpMap    MAP_SHRINE_NEAR_RIBBLE_EXTERIOR
+                  warpMap    MAP_RIBBLE_SHRINE_EXTERIOR
                   warpDest   5, 15
                   warpFacing UP
                 mWarp 26, 55
@@ -23,12 +23,12 @@
                   warpFacing UP
                 mWarp 41, 15
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION
+                  warpMap    MAP_OVERWORLD_BEDOE_KINGDOM
                   warpDest   40, 61
                   warpFacing UP
                 mWarp 0, 255
                   warpScroll LEFT
-                  warpMap    MAP_OVERWORLD_AROUND_ELVEN_VILLAGE
+                  warpMap    MAP_OVERWORLD_SOUTHWEST_PARMECIA
                   warpDest   62, 255
                   warpFacing LEFT
                 mWarp 63, 255
@@ -38,7 +38,7 @@
                   warpFacing RIGHT
                 mWarp 255, 0
                   warpScroll UP
-                  warpMap    MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION
+                  warpMap    MAP_OVERWORLD_BEDOE_KINGDOM
                   warpDest   255, 62
                   warpFacing UP
                 endWord

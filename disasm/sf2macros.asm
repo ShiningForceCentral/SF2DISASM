@@ -54,6 +54,7 @@ conditionalRomExpand: macro
 conditionalPc: macro
             if (EXPANDED_ROM=0)
                 \1 \2(pc),\3
+                \4
             else
                 \1 \2,\3
             endif

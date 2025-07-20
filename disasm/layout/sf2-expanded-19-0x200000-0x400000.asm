@@ -1,7 +1,7 @@
 
 ; GAME SECTION 19 : ROM EXPANSION.
 
-		include "data\battles\spritesetentries.asm"
+		include "data\battles\spritesets\entries.asm"
 		align $210000
 		include "code\specialscreens\title\graphics.asm"		; Title Screen Graphics
         include "data\graphics\specialscreens\titlescreen\titlescreenlayouts.asm"    ; Title Screen Layouts

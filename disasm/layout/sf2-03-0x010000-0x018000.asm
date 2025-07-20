@@ -12,6 +12,7 @@
                 include "code\common\menus\diamondmenu.asm"    ; Diamond menu actions
                 include "code\common\menus\itemmenu.asm"    ; Battlefield item menu functions
                 include "code\common\menus\loadhighlightableicon.asm"    ; Load highlightable icon function
+                include "code\common\tech\incbins\s03_incbins_iconhighlight.asm"    ; Game Section 03 Incbin Icon Highlight Tiles
                 include "code\common\menus\magicmenu.asm"    ; Battlefield magic menu actions
                 include "data\graphics\tech\menus\diamondmenulayout.asm"    ; Diamond menu layout
                 include "data\graphics\tech\menus\magicmenulayout.asm"    ; Magic menu layout
@@ -28,8 +29,7 @@
                 include "code\common\menus\memberscreen.asm"    ; Menu engine, part 4 : Member screen functions
                 include "code\common\menus\unusedsub_12606.asm"    ; Unused function
                 include "code\common\menus\getcombatantportrait.asm"    ; Combatant portrait index getter function
-                include "data\graphics\tech\windowborder\entries.asm"    ; Windows border compressed tiles
-                include "data\graphics\tech\windowlayouts\portraitwindowlayout.asm"    ; Portrait window layout
+                include "data\graphics\tech\windowlayouts\portraitwindowlayout.asm"    ; Portrait window layouts (regular and mirrored
                 include "data\graphics\tech\windowlayouts\allykilldefeatwindowlayout.asm"    ; Member screen kills and defeat window layout
                 include "data\graphics\tech\windowlayouts\goldwindowlayout.asm"    ; Member screen gold window layout
                 include "code\common\menus\minimapscreen.asm"    ; Menu engine, part 5 : Minimap screen functions

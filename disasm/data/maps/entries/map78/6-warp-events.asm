@@ -13,7 +13,7 @@
                   warpFacing UP
                 mWarp 255, 0
                   warpScroll UP
-                  warpMap    MAP_OVERWORLD_MOUN_AND_MITULA
+                  warpMap    MAP_OVERWORLD_NORTH_PARMECIA
                   warpDest   255, 62
                   warpFacing UP
                 mWarp 255, 63
@@ -23,7 +23,7 @@
                   warpFacing DOWN
                 mWarp 0, 255
                   warpScroll LEFT
-                  warpMap    MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION
+                  warpMap    MAP_OVERWORLD_BEDOE_KINGDOM
                   warpDest   62, 255
                   warpFacing LEFT
                 endWord

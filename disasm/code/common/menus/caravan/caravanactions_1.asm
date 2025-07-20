@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\caravan\caravanactions_1.asm :
-; 0x21FD2..0x228A2 : Caravan functions
+; 0x21FD2..0x228A2 : Caravan menu functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -31,6 +31,7 @@ CaravanMenu:
                 jsr     j_ExecuteDiamondMenu
                 cmpi.w  #-1,d0
                 beq.w   @ExitCaravan
+                
                 add.w   d0,d0
                 move.w  rjt_CaravanMenuActions(pc,d0.w),d0
                 jsr     rjt_CaravanMenuActions(pc,d0.w)
@@ -45,7 +46,7 @@ rjt_CaravanMenuActions:
                 
                 moveq   #0,d0
                 moveq   #0,d1
-                move.w  #10,d1          ; "{LEADER}, take it easy!{W1}"
+                move.w  #MESSAGE_CARAVAN_TAKE_IT_EASY,d1 ; "{LEADER}, take it easy!{W1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 unlk    a6
                 movem.l (sp)+,d0-a5
@@ -311,7 +312,7 @@ byte_221F4:
 @HasUseSpell:
                 
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
                 beq.s   byte_22210      ; @NoEffect
                 txt     93              ; "It has a special effect when{N}used in battle.{W2}"
@@ -349,6 +350,7 @@ byte_22210:
                 move.b  (a0)+,d0
                 jsr     j_IsWeaponOrRingEquippable
                 bcc.s   @NextMember
+                
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     98              ; "{DICT}{NAME},"
                 addq.w  #1,d6
@@ -381,7 +383,7 @@ byte_222A4:
 @IsUnsellable:
                 
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @GetSellingPrice
                 txt     102             ; "You can't sell it at a shop.{W2}"
@@ -620,7 +622,7 @@ caravanDepotSubmenu_Drop:
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemFromCaravan
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Continue
                 jsr     j_AddItemToDeals
@@ -979,7 +981,7 @@ caravanItemSubmenu_Drop:
                 move.w  itemSlot(a6),d1
                 jsr     j_DropItemBySlot
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Continue
                 jsr     j_AddItemToDeals

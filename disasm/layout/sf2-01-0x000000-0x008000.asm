@@ -5,9 +5,9 @@
 
 
                 include "code\romheader.asm"    ; ROM Header
-                include "code\gameflow\start\systeminit.asm"    ; System init functions
+                include "code\gameflow\start\systeminit.asm"    ; System initialization functions
                 include "code\gameflow\start\gamestart.asm"    ; Start function
-                include "code\gameflow\start\z80init.asm"    ; Z80 init function
+                include "code\gameflow\start\z80init.asm"    ; Z80 initialization function
                 include "code\common\tech\interrupts\trap0_soundcommand.asm"    ; Trap 0 - Sound Command
                 include "code\common\tech\interrupts\errors.asm"    ; Error interrupts
                 include "code\common\tech\interrupts\trap5_textbox.asm"    ; Trap 5 - Text Box
@@ -61,16 +61,16 @@
                 include "code\common\tech\sram\sramfunctions.asm"    ; SRAM functions
                 include "code\specialscreens\suspend\witchsuspend.asm"    ; Witch suspend function
                 include "code\specialscreens\witchend\witchendinit.asm"    ; Witch end function
-                include "code\gameflow\start\gameinit.asm"    ; Game init
+                include "code\gameflow\start\gameinit.asm"    ; Game initialization
                 include "data\maps\global\debugmodemaps.asm"    ; Debug mode maps
                 align                   
                 include "code\gameflow\start\gameintro.asm"    ; Game intro
                 include "code\specialscreens\witch\witchstart.asm"    ; Start witch screen
                 include "code\gameflow\mainloop.asm"    ; Main loop
-                include "code\common\maps\egressinit.asm"    ; Egress map init function
+                include "code\common\maps\egressinit.asm"    ; Egress map initialization function
                 include "code\gameflow\start\basetiles.asm"    ; Base tiles loading
                 include "code\gameflow\special\battletest.asm"    ; Battle test functions
-                include "code\common\maps\mapinit_0.asm"    ; Map init functions
+                include "code\common\maps\mapinit_0.asm"    ; Map initialization functions
                 include "data\maps\global\flagswitchedmaps.asm"    ; Flag-switched maps
                 include "code\common\maps\getbattle.asm"    ; GetNextBattleOnMap function
                 includeIfVanillaRom "data\battles\global\battlemapcoords.asm"    ; Battle map coords

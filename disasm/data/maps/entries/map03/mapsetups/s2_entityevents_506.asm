@@ -166,7 +166,7 @@ Map3_1FA_EntityEvent15:
                 txt     676             ; "{LEADER} named him{N}{NAME;6} and beckoned.{W1}"
                 clsTxt
                 move.w  ((SPEECH_SFX_COPY-$1000000)).w,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     677             ; "Oooo!  Ooooo!{W1}"
                 clsTxt
                 jsr     j_ClosePortraitWindow

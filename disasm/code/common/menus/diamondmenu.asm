@@ -165,7 +165,7 @@ ExecuteDiamondMenu:
                 movem.l d6-d7,-(sp)
                 move.w  #$100,d6
                 jsr     (GenerateRandomNumber).w
-                move.b  d7,((RANDOM_WAITING_FOR_INPUT-$1000000)).w
+                move.b  d7,((RANDOM_SEED_COPY-$1000000)).w
                 movem.l (sp)+,d6-d7
                 jsr     (WaitForVInt).w
                 bra.w   @loc_6

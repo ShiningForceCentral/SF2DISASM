@@ -13,12 +13,12 @@
                   warpFacing DOWN
                 mWarp 255, 43
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
+                  warpMap    MAP_OVERWORLD_GRANSEAL_KINGDOM
                   warpDest   19, 24
                   warpFacing DOWN
                 mWarp 255, 0
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
+                  warpMap    MAP_OVERWORLD_GRANSEAL_KINGDOM
                   warpDest   18, 21
                   warpFacing DOWN
                 mWarp 4, 64

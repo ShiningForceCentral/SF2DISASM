@@ -26,9 +26,9 @@ GetTargetsReachableByItem:
                 lea     ((TARGETS_REACHABLE_BY_ITEM_NUMBER-$1000000)).w,a1
                 lea     ((TARGETS_REACHABLE_BY_ITEM_LIST-$1000000)).w,a2
                 lea     ((ITEM_MOVEMENT_TO_REACHABLE_TARGETS-$1000000)).w,a3
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  SPELLDEF_OFFSET_MIN_RANGE(a0),d4
                 bra.w   MakeReachableTargetsList
@@ -45,12 +45,12 @@ GetTargetsReachableBySpell:
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a1
                 lea     ((TARGETS_REACHABLE_BY_SPELL_LIST-$1000000)).w,a2
                 lea     ((SPELL_MOVEMENT_TO_REACHABLE_TARGETS-$1000000)).w,a3
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  SPELLDEF_OFFSET_MIN_RANGE(a0),d4
 MakeReachableTargetsList:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 beq.s   loc_D23A
                 eori.b  #COMBATANT_MASK_ENEMY_BIT,d0 ; flip enemy bit, to get the opposite type when muddled

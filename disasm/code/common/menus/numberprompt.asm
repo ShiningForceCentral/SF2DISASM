@@ -4,11 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = default number
-;     D1 = min number
-;     D2 = max number
-; 
-; Out: D0 = chosen number
+; In: d0.w = default number, d1.w = min number, d2.w = max number
+; Out: d0.w = chosen number
 
 numberMax = -12
 numberMin = -10
@@ -43,25 +40,25 @@ NumberPrompt:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   @CheckInput_Left
                 moveq   #1,d3           ; add 1
-                bsr.w   ModifyPromptNumber
+                bsr.w   UpdatePromptNumber
 @CheckInput_Left:
                 
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   @CheckInput_Down
                 moveq   #-1,d3          ; subtract 1
-                bsr.w   ModifyPromptNumber
+                bsr.w   UpdatePromptNumber
 @CheckInput_Down:
                 
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   @CheckInput_Up
                 moveq   #10,d3          ; add 10
-                bsr.w   ModifyPromptNumber
+                bsr.w   UpdatePromptNumber
 @CheckInput_Up:
                 
                 btst    #INPUT_BIT_UP,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   @CheckRemainingInputs
                 moveq   #-10,d3         ; subtract 10
-                bsr.w   ModifyPromptNumber
+                bsr.w   UpdatePromptNumber
 @CheckRemainingInputs:
                 
                 btst    #INPUT_BIT_B,((CURRENT_PLAYER_INPUT-$1000000)).w
@@ -70,8 +67,10 @@ NumberPrompt:
                 bne.w   @ReturnChosenNumber
                 btst    #INPUT_BIT_A,((CURRENT_PLAYER_INPUT-$1000000)).w
                 bne.w   @ReturnChosenNumber
+                
+                ; Update RNG seed every frame while checking player input
                 movem.l d6-d7,-(sp)
-                move.w  #$100,d6
+                move.w  #256,d6
                 jsr     (GenerateRandomNumber).w
                 movem.l (sp)+,d6-d7
                 jsr     (WaitForVInt).w
@@ -98,7 +97,7 @@ NumberPrompt:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A6 = number prompt window stack
+; In: a6 = number prompt window stack
 
 numberMax = -12
 numberMin = -10
@@ -115,7 +114,7 @@ WriteNumberPromptDigits:
                 adda.w  #WINDOW_NUMBERPROMPT_DIGITS_OFFSET,a1
                 move.w  numberEntry(a6),d0
                 ext.l   d0
-                moveq   #$FFFFFFF2,d1
+                moveq   #-14,d1
                 moveq   #WINDOW_NUMBERPROMPT_DIGITS_NUMBER,d7
                 bra.w   WriteTilesFromNumber
 
@@ -124,7 +123,7 @@ WriteNumberPromptDigits:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: A6 = number prompt window stack
+; In: a6 = number prompt window stack
 
 numberMax = -12
 numberMin = -10
@@ -132,7 +131,7 @@ numberEntry = -8
 windowSlot = -6
 windowLayoutEndAddress = -4
 
-ModifyPromptNumber:
+UpdatePromptNumber:
                 
                 move.w  numberEntry(a6),d0
                 add.w   d3,d0
@@ -150,5 +149,5 @@ ModifyPromptNumber:
                 sndCom  SFX_MENU_SELECTION
                 rts
 
-    ; End of function ModifyPromptNumber
+    ; End of function UpdatePromptNumber
 

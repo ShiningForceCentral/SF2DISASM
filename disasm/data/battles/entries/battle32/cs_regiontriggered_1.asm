@@ -47,7 +47,7 @@ csub_JaroJoinForce:
                 jsr     j_JoinForce
                 moveq   #ALLY_JARO,d0
                 jsr     j_JoinBattleParty
-                move.b  (ENTITY_EVENT_ENEMY_JAR).l,(ENTITY_EVENT_ALLY_JARO).l
+                move.b  (ENTITY_INDEX_ENEMY_JAR).l,(ENTITY_INDEX_ALLY_JARO).l
                 rts
 
     ; End of function csub_JaroJoinForce

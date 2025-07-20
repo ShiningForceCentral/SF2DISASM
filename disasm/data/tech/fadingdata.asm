@@ -2,8 +2,8 @@
 ; ASM FILE data\tech\fadingdata.asm :
 ; 0xB1E..0xB96 : Fading data table
 table_FadingData:
-                ; 80 : end
-                ; 8x : go x backward
+                ; $80 : end
+                ; $8x : go x backward
                 dc.b $FA, $FB, $FC, $FD, $FE, $FF, 0, $80
                 dc.b $FF, $FE, $FD, $FC, $FB, $FA, $F9, $80
                 dc.b 6, 5, 4, 3, 2, 1, 0, $80
