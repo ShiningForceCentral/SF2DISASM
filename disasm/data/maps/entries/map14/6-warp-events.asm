@@ -3,7 +3,7 @@
 ; 0x9FBE6..0x9FC50 : 
                 mWarp 255, 20
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION
+                  warpMap    MAP_OVERWORLD_BEDOE_KINGDOM
                   warpDest   1, 1
                   warpFacing UP
                 mWarp 12, 11

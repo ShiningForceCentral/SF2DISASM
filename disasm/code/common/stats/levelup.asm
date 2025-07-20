@@ -17,14 +17,14 @@ LevelUp:
                 move.w  d1,d3
                 
                 ; Determine level cap for class
-                bsr.w   GetCurrentLevel 
+                bsr.w   GetLevel        
                 moveq   #CHAR_LEVELCAP_PROMOTED,d2
                 cmpi.w  #CHAR_CLASS_FIRSTPROMOTED,d3
                 bge.s   @FindStatsBlockForClass
                 moveq   #CHAR_LEVELCAP_BASE,d2
 @FindStatsBlockForClass:
                 
-                lsl.w   #2,d0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (p_pt_AllyStats).l,a0
                 movea.l (a0,d0.w),a0
 @FindStatsBlockForClass_Loop:
@@ -57,7 +57,7 @@ LevelUp:
                 
                 lea     (LEVELUP_ARGUMENTS).l,a1
                 move.w  ally(a6),d0
-                bsr.w   GetCurrentLevel 
+                bsr.w   GetLevel        
                 move.w  d1,d5
                 moveq   #0,d2
                 moveq   #0,d3
@@ -141,7 +141,7 @@ LevelUp:
                 move.b  d1,6(a1)
 @UpdateStats:
                 
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
+                bsr.w   UpdateCombatantStats
 @Done:
                 
                 unlk    a6
@@ -162,7 +162,7 @@ InitializeAllyStats:
                 movem.l d0-d2/a0,-(sp)
                 move.w  d1,-(sp)        ; -> push starting level
                 
-                ; Get ally stats entry address -> A0
+                ; Get ally stats entry address -> a0
                 move.w  d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
                 movea.l (p_pt_AllyStats).l,a0
@@ -250,7 +250,7 @@ InitializeAllyStats:
                 bne.s   @LearnSpell
                 bsr.w   GetBaseProwess
                 move.w  d1,d2
-                andi.w  #PROWESS_MASK_CRITICAL,d1
+                andi.w  #PROWESS_MASK_CRITICAL,d1 ; mask should be PROWESS_MASK_CRITICAL|PROWESS_MASK_COUNTER
                 lsr.w   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2 ; shift double and counter attack settings into lower nibble position
                 addq.w  #1,d2
                 cmpi.w  #8,d2
@@ -298,20 +298,20 @@ InitializeAllyStats:
 CalculateStatGain:
                 
                 tst.b   d2
-                bne.s   @EvaluateLevel  ; keep going if curve type other than None
+                bne.s   @CheckProjectionLevel ; keep going if curve type other than None
                 move.w  #0,d1           ; otherwise, stat gain value = 0
                 rts
-@EvaluateLevel:
+@CheckProjectionLevel:
                 
                 movem.l d0/d2-a0,-(sp)
                 movem.w d1-d5,-(sp)     ; -> push function arguments
                 cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d5 ; If current level within projection
-                blt.s   @Continue       ;  ...keep going.
+                blt.s   @CalculateGrowthPortion ;  ...keep going.
                 
                 move.w  #256,d0         ; assume 100% of projected stats reached
                 move.w  #384,d4         ; out of growth data, so assume 1.5
                 bra.s   @RandomizeStatGain
-@Continue:
+@CalculateGrowthPortion:
                 
                 andi.w  #GROWTHCURVE_MASK_INDEX,d2
                 subq.w  #1,d2

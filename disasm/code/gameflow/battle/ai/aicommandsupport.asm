@@ -26,7 +26,7 @@ ExecuteAiCommand_Support:
                 bra.w   @Done
 @Enemy:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 beq.s   @CheckSupportSpell ; Does caster know any support spell?
                 
@@ -73,7 +73,7 @@ ExecuteAiCommand_Support:
 @CheckMpCost:
                 
                 move.w  d1,d6           ; d6 = copy of debuff spell entry
-                bsr.w   FindSpellDefAddress
+                bsr.w   GetSpellDefAddress
                 clr.w   d2
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d2
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d5
@@ -96,7 +96,7 @@ ExecuteAiCommand_Support:
                 btst    #SPELLPROPS_BIT_TARGETING,d5
                 move.w  #-1,d3
                 bne.s   @TargetTeammates1
-                bsr.w   UpdateBattleTerrainOccupiedByEnemies ; made unreachable by the preceding move.w #$FFFF,d3 instruction
+                bsr.w   UpdateBattleTerrainOccupiedByEnemies ; made unreachable by the preceding move.w #-1,d3 instruction
                 bra.s   @CheckTargetingGroup2
 @TargetTeammates1:
                 

@@ -16,7 +16,7 @@ CheatModeConfiguration:
                 beq.s   @IsConfigurationModeOn
                 
                 btst    #7,(SAVE_FLAGS).l
-                bne.w   SoundTest       
+                bne.w   j_SoundTest     
 @IsConfigurationModeOn:
                 
                 tst.b   ((CONFIGURATION_MODE_TOGGLE-$1000000)).w

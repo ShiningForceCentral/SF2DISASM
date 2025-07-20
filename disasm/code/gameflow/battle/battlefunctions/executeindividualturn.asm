@@ -176,7 +176,7 @@ ExecuteIndividualTurn:
                 bne.s   @CheckFairyWoodsBattle
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w
                 move.w  #BATTLEACTION_CAST_SPELL,((CURRENT_BATTLEACTION-$1000000)).w
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 clr.w   d0
                 cmpi.w  #KIWI_FLAME_BREATH_UPGRADE_LEVEL1,d1
                 blt.s   @CheckUpgradeLevel2

@@ -217,7 +217,7 @@ BuildMagicMenu:
                 move.w  (a0,d0.w),d1
                 move.w  d1,((TEMP_ITEM_OR_SPELL-$1000000)).w
                 move.w  d1,-(sp)
-                jsr     j_FindSpellName
+                jsr     j_GetSpellName
                 move.w  windowSlot(a6),d0
                 move.w  #MENU_MAGIC_SPELL_NAME_COORDS,d1
                 jsr     (GetWindowTileAddress).w

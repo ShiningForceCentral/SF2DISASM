@@ -101,14 +101,14 @@ byte_21348:
                 
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
+                cmpi.w  #MAP_OVERWORLD_GRANSEAL_KINGDOM,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.s   byte_21348      
-                cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
+                cmpi.w  #MAP_OVERWORLD_PACALON_KINGDOM,d0
                 bgt.s   byte_21348      ; nothing happens if not an overworld map
 @Egress:
                 
                 move.b  spellEntry(a6),d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMp
@@ -142,7 +142,7 @@ byte_213A8:
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 clsTxt
                 move.b  spellEntry(a6),d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMp
@@ -182,7 +182,7 @@ byte_21468:
                 
                 clsTxt
                 jsr     j_SetStatusEffects
-                jsr     j_ApplyStatusEffectsAndItemsOnStats
+                jsr     j_UpdateCombatantStats
 @ExitMagic:
                 
                 bra.w   @Goto_StartMain
@@ -226,9 +226,9 @@ byte_21468:
                 ; Currently on overworld map?
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
+                cmpi.w  #MAP_OVERWORLD_GRANSEAL_KINGDOM,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.w   @HandleNonAngelWingItems
-                cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
+                cmpi.w  #MAP_OVERWORLD_PACALON_KINGDOM,d0
                 bgt.w   @HandleNonAngelWingItems
                 
                 ; Use Angel Wing
@@ -543,7 +543,7 @@ byte_2184E:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_UNSELLABLE,d1
@@ -653,10 +653,10 @@ PopulateGenericListWithCurrentForceMembers:
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,((GENERIC_LIST_LENGTH-$1000000)).w
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-@Loop:
+@Copy_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,@Loop
+                dbf     d7,@Copy_Loop
                 
                 movem.l (sp)+,d7-a1
                 rts

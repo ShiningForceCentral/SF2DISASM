@@ -3,7 +3,7 @@
 ; 0x9BBBC..0x9BBDE : 
                 mWarp 255, 31
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_PATH_TO_RIBBLE
+                  warpMap    MAP_OVERWORLD_SOUTH_PARMECIA
                   warpDest   44, 8
                   warpFacing DOWN
                 mWarp 18, 5

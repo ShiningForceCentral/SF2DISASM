@@ -9,12 +9,12 @@ table_KrakenMovecosts:
                 dc.b 4
                 dc.b 3
                 dc.b 3
-                dc.b $FF
+                dc.b -1
                 dc.b 2
-                dc.b $FF
-                dc.b $FF
-                dc.b $FF
-                dc.b $FF
-                dc.b $FF
-                dc.b $FF
-                dc.b $FF
+                dc.b -1
+                dc.b -1
+                dc.b -1
+                dc.b -1
+                dc.b -1
+                dc.b -1
+                dc.b -1

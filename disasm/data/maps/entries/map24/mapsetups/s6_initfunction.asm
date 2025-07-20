@@ -43,11 +43,11 @@ return_59C9C:
 cs_StartSpecialBattle:
                 
                 setStoryFlag 44         ; Battle 44 unlocked - BATTLE_FAIRY_WOODS               
-                warp MAP_SECRET_MONK_FOREST_BATTLEFIELD,1,24,LEFT
+                warp MAP_ELVEN_VILLAGE_BATTLEFIELD,1,24,LEFT
                 csc_end
 cs_LeaveSpecialBattle:
                 
-                warp MAP_SECRET_MONK_FOREST,30,24,LEFT
+                warp MAP_ELVEN_VILLAGE,30,24,LEFT
                 csc_end
 loc_59CB2:
                 
@@ -67,7 +67,7 @@ loc_59CB2:
                 txt     477             ; "Congratulations!{N}You made it!"
                 move.l  d0,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 sndCom  MUSIC_ITEM
-                jsr     j_FadeOut_WaitForP1Input ; fade out music and wait for P2 input ?!
+                jsr     j_FadeOut_WaitForP1Input
                 bra.s   byte_59CF4      
 byte_59CF0:
                 

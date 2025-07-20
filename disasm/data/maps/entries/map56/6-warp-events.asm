@@ -3,12 +3,12 @@
 ; 0xB7D30..0xB7DA2 : 
                 mWarp 255, 49
                   warpNoScroll
-                  warpMap    MAP_ODDEYE_ARENA
+                  warpMap    MAP_ODD_EYE_BATTLEFIELD
                   warpDest   16, 1
                   warpFacing DOWN
                 mWarp 255, 5
                   warpNoScroll
-                  warpMap    MAP_ANCIENT_TOWER_UNDERGROUND_STAIRS
+                  warpMap    MAP_ANCIENT_TOWER_STAIRWAY
                   warpDest   57, 24
                   warpFacing UP
                 mWarp 44, 47

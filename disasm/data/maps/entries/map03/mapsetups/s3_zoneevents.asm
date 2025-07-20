@@ -145,7 +145,7 @@ Map3_ZoneEvent7:
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     513             ; "Mmm...aahh...{N}Oh, yeah!  It must be....{N}No, it's not a....{W1}"
                 bra.s   return_50ED0
 byte_50E96:
@@ -157,7 +157,7 @@ byte_50E96:
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     514             ; "By the way, {LEADER},{N}what did you think of the{N}storm last night?{W2}"
                 txt     515             ; "Did you feel something evil,{N}or anything?{W2}"
                 txt     516             ; "No, nothing?!{N}Perhaps it was just my{N}imagination.  Sorry.{W1}"

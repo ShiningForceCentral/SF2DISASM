@@ -8,7 +8,7 @@
                 include "layout\sf2-01-0x000000-0x008000.asm"    ; 0x000000..0x008000 : Technical Layer, Low Level Game Engine, Map/Exploration Engine, Entity Script Commands, Witch Functions
                 include "layout\sf2-02-0x008000-0x010000.asm"    ; 0x008000..0x010000 : Character Stats Engine, Battle engine, Item Effects Engine, Enemy AI Engine
                 include "layout\sf2-03-0x010000-0x018000.asm"    ; 0x010000..0x018000 : Menu Engine
-                include "layout\sf2-04-0x018000-0x020000.asm"    ; 0x018000..0x020000 : BattleScene Engine
+                include "layout\sf2-04-0x018000-0x020000.asm"    ; 0x018000..0x020000 : Battlescene Engine
                 include "layout\sf2-05-0x020000-0x028000.asm"    ; 0x020000..0x028000 : Battle Engine, Special Sprites, Shop/Church/Blacksmith/Caravan engine, Battle Engine, Exploration Engine, Special Sprites
                 include "layout\sf2-06-0x028000-0x044000.asm"    ; 0x028000..0x044000 : Fonts, Menu Tiles, Text Decoding Functions, SEGA Logo, Game Staff, Conf/Debug modes, End Kiss Sequence, Text Huffman Trees, Textbanks
                 include "layout\sf2-07-0x044000-0x064000.asm"    ; 0x044000..0x064000 : Entity ActScripts, CutScene Scripts, Battle CutScenes, Intro cutscene, End cutscene, Map Setups

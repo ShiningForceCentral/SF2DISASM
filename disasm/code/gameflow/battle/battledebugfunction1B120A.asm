@@ -31,7 +31,7 @@ BattleDebugFunction1B120A:
                 moveq   #0,d1
                 jsr     j_SetCombatantX
                 move.w  #$AAAA,d1
-                bsr.w   ResetEnemyStatsForRespawn
+                bsr.w   ResetSpawningEnemyStats
                 bsr.w   GetAiSpecialMoveOrderCoordinates
 loc_1B126E:
                 

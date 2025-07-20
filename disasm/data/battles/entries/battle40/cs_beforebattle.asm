@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle40\cs_beforebattle.asm :
 ; 0x4E4DC..0x4E8A8 : Cutscene before battle 40
 bbcs_40:        textCursor 3036
-                loadMapFadeIn MAP_ODDEYE_ARENA,11,34
+                loadMapFadeIn MAP_ODD_EYE_BATTLEFIELD,11,34
                 loadMapEntities ce_4E878
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

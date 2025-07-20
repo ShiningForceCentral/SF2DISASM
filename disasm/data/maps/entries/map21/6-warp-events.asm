@@ -8,7 +8,7 @@
                   warpFacing RIGHT
                 mWarp 9, 1
                   warpNoScroll
-                  warpMap    MAP_ANCIENT_TOWER_OUTSIDE
+                  warpMap    MAP_ANCIENT_TOWER_EXTERIOR
                   warpDest   4, 30
                   warpFacing UP
                 endWord

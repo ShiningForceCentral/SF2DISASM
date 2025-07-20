@@ -3,12 +3,12 @@
 ; 0x16EA6..0x176A6 : Item definitions
 table_ItemDefinitions:
                 
-; Syntax        equipFlags   [EQUIPFLAG_]bitfield
+; Syntax        equipFlags   [EQUIPFLAG_]bitfield               ; bitfield shorthand (e.g., SDMN|HERO)
 ;               range        min, max 0-3
 ;               price        0-65535
-;               itemType     [ITEMTYPE_]bitfield
-;               useSpell     [SPELL_]enum[|level]
-;               equipEffects [EQUIPEFFECT_]enum, parameter, &
+;               itemType     [ITEMTYPE_]bitfield                ; bitfield shorthand (e.g., WEAPON|RARE)
+;               useSpell     [SPELL_]enum[|[SPELL_]level]       ; bitfield shorthand (e.g., BLAZE|LV2)
+;               equipEffects [EQUIPEFFECT_]enum, parameter, &   ; shorthand, parameter (e.g, INCREASE_ATT, 19)
 ;                            [EQUIPEFFECT_]enum, parameter, &
 ;                            [EQUIPEFFECT_]enum, parameter
 ;
@@ -997,7 +997,7 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 29, &
-                             UNDEFINED1, 3, &
+                             HP_RECOVERY, 3, &
                              NONE, 0
                 
                 ; 98: Freeze Staff
@@ -1027,7 +1027,7 @@ table_ItemDefinitions:
                 itemType     WEAPON|RARE
                 useSpell     NOTHING
                 equipEffects INCREASE_ATT, 39, &
-                             UNDEFINED2, 2, &
+                             MP_RECOVERY, 2, &
                              NONE, 0
                 
                 ; 101: Demon Rod
@@ -1266,7 +1266,7 @@ table_ItemDefinitions:
                 price        5000
                 itemType     RING|RARE
                 useSpell     NOTHING
-                equipEffects UNDEFINED1, 5, &
+                equipEffects HP_RECOVERY, 5, &
                              NONE, 0, &
                              NONE, 0
                 

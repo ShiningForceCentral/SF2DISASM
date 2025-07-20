@@ -117,7 +117,7 @@ battlesceneScript_DropEnemyItem:
 @AddRareItemToDeals:
                 
                 move.w  d3,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Done
                 jsr     AddItemToDeals  

@@ -37,7 +37,7 @@ ExecuteAiCommand_Move:
                 bsr.w   PopulateMovementArrays
                 bsr.w   PopulateTargetsArrayWithAllCombatants
                 move.w  d7,d0
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 beq.s   @NotMuddled
                 btst    #COMBATANT_BIT_ENEMY,d0

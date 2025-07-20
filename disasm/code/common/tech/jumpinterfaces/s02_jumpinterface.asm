@@ -84,6 +84,8 @@ j_GetStatusEffects:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_GetCurrentProwess:
                 
@@ -93,6 +95,8 @@ j_GetCurrentProwess:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_GetBaseProwess:
@@ -123,6 +127,8 @@ j_GetBaseDef:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_GetBaseResistance:
@@ -175,11 +181,11 @@ j_GetCurrentMp:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetCurrentLevel:
+j_GetLevel:
                 
-                jmp     GetCurrentLevel(pc)
+                jmp     GetLevel(pc)    
 
-    ; End of function j_GetCurrentLevel
+    ; End of function j_GetLevel
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -213,6 +219,8 @@ j_GetCurrentDef:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_GetCurrentResistance:
@@ -284,6 +292,8 @@ j_GetEnemy:
 
 ; =============== S U B R O U T I N E =======================================
 
+; ; unused
+
 
 j_GetCombatantType:
                 
@@ -334,6 +344,8 @@ j_SetCombatantY:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_SetMaxMp:
                 
@@ -365,11 +377,11 @@ j_SetCombatantX:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetMoveType:
+j_SetMoveTypeAndAiCommandset:
                 
-                jmp     SetMoveType(pc)
+                jmp     SetMoveTypeAndAiCommandset(pc)
 
-    ; End of function j_SetMoveType
+    ; End of function j_SetMoveTypeAndAiCommandset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -404,6 +416,8 @@ j_SetBaseProwess:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_SetBaseMov:
                 
@@ -423,6 +437,8 @@ j_SetBaseDef:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_SetBaseResistance:
@@ -453,6 +469,8 @@ j_SetBaseAgi:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_SetCurrentMov:
@@ -523,6 +541,8 @@ j_SetClass:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_SetCurrentResistance:
@@ -674,6 +694,8 @@ j_IncreaseCurrentMp:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_IncreaseLevel:
                 
@@ -754,6 +776,8 @@ j_IncreaseDefeats:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_DecreaseBaseMov:
                 
@@ -763,6 +787,8 @@ j_DecreaseBaseMov:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_DecreaseBaseDef:
@@ -774,6 +800,8 @@ j_DecreaseBaseDef:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_DecreaseBaseAgi:
                 
@@ -783,6 +811,8 @@ j_DecreaseBaseAgi:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_DecreaseCurrentMov:
@@ -814,6 +844,8 @@ j_DecreaseCurrentHp:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_DecreaseCurrentDef:
                 
@@ -824,6 +856,8 @@ j_DecreaseCurrentDef:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_DecreaseCurrentAtt:
                 
@@ -833,6 +867,8 @@ j_DecreaseCurrentAtt:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_DecreaseCurrentAgi:
@@ -895,14 +931,16 @@ j_DecreaseGold:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ApplyStatusEffectsAndItemsOnStats:
+j_UpdateCombatantStats:
                 
-                jmp     ApplyStatusEffectsAndItemsOnStats(pc)
+                jmp     UpdateCombatantStats(pc)
 
-    ; End of function j_ApplyStatusEffectsAndItemsOnStats
+    ; End of function j_UpdateCombatantStats
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_ApplyItemOnStats:
@@ -915,21 +953,21 @@ j_ApplyItemOnStats:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_FindItemName:
+j_GetItemName:
                 
-                jmp     FindItemName(pc)
+                jmp     GetItemName(pc) 
 
-    ; End of function j_FindItemName
+    ; End of function j_GetItemName
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetItemDefAddress:
+j_GetItemDefinitionAddress:
                 
-                jmp     GetItemDefAddress(pc)
+                jmp     GetItemDefinitionAddress(pc)
 
-    ; End of function j_GetItemDefAddress
+    ; End of function j_GetItemDefinitionAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -973,6 +1011,8 @@ j_GetEquippedRing:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_BreakItemBySlot:
@@ -1174,6 +1214,8 @@ j_GetItemInventoryLocation:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_GetItemSlotContainingIndex:
                 
@@ -1185,21 +1227,21 @@ j_GetItemSlotContainingIndex:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_FindSpellName:
+j_GetSpellName:
                 
-                jmp     FindSpellName(pc)
+                jmp     GetSpellName(pc)
 
-    ; End of function j_FindSpellName
+    ; End of function j_GetSpellName
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_FindSpellDefAddress:
+j_GetSpellDefAddress:
                 
-                jmp     FindSpellDefAddress(pc)
+                jmp     GetSpellDefAddress(pc)
 
-    ; End of function j_FindSpellDefAddress
+    ; End of function j_GetSpellDefAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1244,15 +1286,19 @@ j_GetCombatantEntryAddress_0:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
-j_GetDistanceBetweenBattleEntities:
+
+j_GetDistanceBetweenCombatants:
                 
-                jmp     GetDistanceBetweenBattleEntities(pc)
+                jmp     GetDistanceBetweenCombatants(pc)
 
-    ; End of function j_GetDistanceBetweenBattleEntities
+    ; End of function j_GetDistanceBetweenCombatants
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_nullsub_9482:
@@ -1364,6 +1410,8 @@ j_PopulateTargetableGrid_GiveItem:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_PopulateTargetableGrid_UseItem:
                 
@@ -1374,15 +1422,19 @@ j_PopulateTargetableGrid_UseItem:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
 
-sub_8224:
+
+j_sub_C5FA:
                 
                 jmp     sub_C5FA(pc)    
 
-    ; End of function sub_8224
+    ; End of function j_sub_C5FA
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_PopulateTargetableGrid_CastSpell:
@@ -1394,6 +1446,8 @@ j_PopulateTargetableGrid_CastSpell:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_PopulateTargetableGrid:
                 
@@ -1403,6 +1457,8 @@ j_PopulateTargetableGrid:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_PopulateTargetsArrayWithOpponents:
@@ -1414,6 +1470,8 @@ j_PopulateTargetsArrayWithOpponents:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_PopulateTargetsArrayWithAllies:
                 
@@ -1424,6 +1482,8 @@ j_PopulateTargetsArrayWithAllies:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_PopulateTargetsArrayWithEnemies:
                 
@@ -1433,6 +1493,8 @@ j_PopulateTargetsArrayWithEnemies:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_PopulateTargetsArrayWithAllCombatants:
@@ -1483,6 +1545,8 @@ j_ClearTotalMovecostsAndMovableGridArrays:
 
 
 ; =============== S U B R O U T I N E =======================================
+
+; unused
 
 
 j_ClearTargetsArray:
@@ -1584,6 +1648,8 @@ j_JoinForce:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_LeaveForce:
                 
@@ -1674,6 +1740,8 @@ j_RemoveItemFromCaravan:
 
 ; =============== S U B R O U T I N E =======================================
 
+; unused
+
 
 j_AddAllToStack:
                 
@@ -1745,11 +1813,11 @@ j_SetTerrain:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ClearAiMoveInfo:
+j_ClearAiMemory:
                 
-                jmp     ClearAiMoveInfo(pc)
+                jmp     ClearAiMemory(pc)
 
-    ; End of function j_ClearAiMoveInfo
+    ; End of function j_ClearAiMemory
 
 
 ; =============== S U B R O U T I N E =======================================
