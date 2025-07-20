@@ -11,15 +11,16 @@ CheckRegion:
                 andi.b  #$C0,d0
                 cmpi.b  #$80,d0
                 beq.w   @Return
+                
                 bsr.w   EnableDisplayAndInterrupts
                 lea     aDevelopedForUseOnlyWith(pc), a0
-                lea     (byte_FFC286).l,a1
+                lea     (REGION_CHECK_STRING_1).l,a1
                 bsr.w   LoadRegionCheckString
                 lea     aNtscGenesys(pc), a0
-                lea     (byte_FFC350).l,a1
+                lea     (REGION_CHECK_STRING_2).l,a1
                 bsr.w   LoadRegionCheckString
                 lea     aSystems_(pc), a0
-                lea     (byte_FFC41A).l,a1
+                lea     (REGION_CHECK_STRING_3).l,a1
                 bsr.w   LoadRegionCheckString
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
                 lea     ($C000).l,a1

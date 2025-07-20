@@ -8,13 +8,23 @@
                 include "code\common\tech\pointers\s02_pointers.asm"    ; Game Section 02 Pointers
                 
                 ; Stats engine
-                include "code\common\stats\statsengine_1.asm"    ; Character stats engine, part 1
+                include "code\common\stats\combatantstats_1.asm"    ; Read combatant stats
                 include "code\common\stats\getcombatanttype.asm"    ; Combatant type getter function
                 include "data\stats\allies\classes\classtypes.asm"    ; Class types table
-                include "code\common\stats\statsengine_2.asm"    ; Character stats engine, part 2
+                include "code\common\stats\combatantstats_2.asm"    ; Modify combatant stats
+                include "code\common\stats\findname.asm"    ; Find an item, spell, or class name
+                include "code\common\stats\gold.asm"    ; Gold management functions
+                include "code\common\stats\updatecombatantstats.asm"    ; Functions to apply equip and status effects on stats
+                include "code\common\stats\itemstats.asm"    ; Item stats management functions
+                include "code\common\stats\spellstats.asm"    ; Spell stats management functions
+                include "code\common\stats\combatantstats_3.asm"    ; Manage combatant stats
+                include "code\common\stats\unusedsub_9482.asm"    ; Unused nullsub
                 include "code\common\stats\levelup.asm"    ; Level Up functions
-                include "code\common\stats\statsengine_3.asm"    ; Character stats engine, part 3
-                include "code\common\stats\caravaninventoryfunctions.asm"    ; Caravan inventory management functions
+                include "code\common\stats\newgame.asm"    ; New game initialization functions
+                include "code\common\stats\gameflags.asm"    ; Game progression flags management functions
+                include "code\common\stats\battleparty.asm"    ; Join or Leave Force and battle party management functions
+                include "code\common\stats\dealsinventory.asm"    ; Deals inventory management functions
+                include "code\common\stats\caravaninventory.asm"    ; Caravan inventory management functions
                 
                 ; Battleactions engine
                 include "code\gameflow\special\debugmodebattleactions.asm"    ; Debug mode battle actions
@@ -54,6 +64,8 @@
                 include "data\stats\enemies\enemygold.asm"    ; Enemy gold amounts
                 
                 ; Battlefield engine
+                include "code\gameflow\battle\battlefield\getenemydestination.asm"    ; Battlefield engine
+                include "code\gameflow\battle\battleloop\clearaimemory.asm"    ; Battle loop function
                 include "code\gameflow\battle\battlefield\battlefieldengine_1.asm"    ; Battlefield engine
                 include "data\stats\spells\spellelements.asm"    ; Spell elements table
                 align
@@ -81,7 +93,7 @@
                 include "code\gameflow\battle\ai\aicommandsupport.asm"    ; AI command : Support
                 include "code\gameflow\battle\ai\determineaibattleaction.asm"    ; Determine AI Battleaction function
                 include "code\gameflow\battle\ai\aicommandmove.asm"    ; AI command : Move
-                include "code\gameflow\battle\ai\aiengine_2.asm"    ; AI engine
+                include "code\gameflow\battle\ai\aistandby.asm"    ; AI engine : standby movement
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
                 
                 include "data\stats\spells\spellnames.asm"    ; Spell names

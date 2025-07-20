@@ -3,7 +3,7 @@
 ; 0xB93AC..0xB93B6 : 
                 mWarp 255, 37
                   warpNoScroll
-                  warpMap    MAP_ANCIENT_TOWER_UNDERGROUND_STAIRS
+                  warpMap    MAP_ANCIENT_TOWER_STAIRWAY
                   warpDest   8, 52
                   warpFacing RIGHT
                 endWord

@@ -222,13 +222,13 @@ loc_6462:
                 move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
                 move.w  d2,-(sp)
                 clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
-                moveq   #$14,d2
+                moveq   #20,d2
 loc_6472:
                 
                 movem.l d6-d7,-(sp)
-                move.w  #$100,d6
+                move.w  #256,d6
                 bsr.w   GenerateRandomNumber
-                move.b  d7,((RANDOM_WAITING_FOR_INPUT-$1000000)).w
+                move.b  d7,((RANDOM_SEED_COPY-$1000000)).w
                 movem.l (sp)+,d6-d7
                 bsr.s   sub_64A8
                 bsr.w   WaitForVInt
@@ -331,7 +331,7 @@ symbol_name:
 symbol_item:
                 
                 bsr.w   GetCurrentDialogueNameIndex
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_number:
@@ -366,13 +366,13 @@ symbol_wait1:
                 move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
                 move.w  d2,-(sp)
                 clr.b   ((CURRENTLY_TYPEWRITING-$1000000)).w
-                moveq   #$14,d2
+                moveq   #20,d2
 loc_659C:
                 
                 movem.l d6-d7,-(sp)
-                move.w  #$100,d6
+                move.w  #256,d6
                 bsr.w   GenerateRandomNumber
-                move.b  d7,((RANDOM_WAITING_FOR_INPUT-$1000000)).w
+                move.b  d7,((RANDOM_SEED_COPY-$1000000)).w
                 movem.l (sp)+,d6-d7
                 bsr.w   WaitForVInt
 loc_65B4:
@@ -385,7 +385,7 @@ loc_65B4:
                 bra.w   loc_62CA
 symbol_delay1:
                 
-                move.w  #$15,d0
+                move.w  #21,d0
 loc_65CC:
                 
                 move.b  ((CURRENTLY_TYPEWRITING-$1000000)).w,d2
@@ -409,12 +409,12 @@ loc_65F0:
                 bra.w   loc_62CA
 symbol_delay3:
                 
-                move.w  #$77,d0 
+                move.w  #119,d0
                 bra.s   loc_65CC
 symbol_spell:
                 
                 bsr.w   GetCurrentDialogueNameIndex
-                jsr     j_FindSpellName
+                jsr     j_GetSpellName
                 bsr.w   CopyAsciiBytesForDialogueString
                 bra.w   loc_62CA
 symbol_clear:

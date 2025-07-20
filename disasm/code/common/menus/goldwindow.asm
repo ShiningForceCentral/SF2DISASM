@@ -10,10 +10,11 @@ OpenGoldWindow:
                 
                 tst.w   ((GOLD_WINDOW_INDEX-$1000000)).w
                 bne.w   return_12F5C
+                
                 movem.l d0-a1,-(sp)
                 link    a6,#-32
                 move.w  #WINDOW_GOLD_SIZE,d0
-                move.w  #WINDOW_GOLD_DEST,d1
+                move.w  #WINDOW_GOLD_SOURCE,d1
                 jsr     (CreateWindow).l
                 addq.w  #1,d0
                 move.w  d0,((GOLD_WINDOW_INDEX-$1000000)).w
@@ -21,7 +22,7 @@ OpenGoldWindow:
                 bsr.w   WriteGoldAmount 
                 move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
-                move.w  #$1617,d1
+                move.w  #WINDOW_GOLD_DEST,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 jsr     (WaitForWindowMovementEnd).l
@@ -42,6 +43,7 @@ HideGoldWindow:
                 
                 tst.w   ((GOLD_WINDOW_INDEX-$1000000)).w
                 beq.s   return_12F5C
+                
                 movem.l d0-a1,-(sp)
                 link    a6,#-32
                 move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
@@ -68,14 +70,16 @@ CloseGoldWindow:
                 
                 tst.w   ((GOLD_WINDOW_INDEX-$1000000)).w
                 beq.s   return_12F5C
+                
                 movem.l d0-a1,-(sp)
                 move.w  ((GOLD_WINDOW_INDEX-$1000000)).w,d0
                 subq.w  #1,d0
-                move.w  #$2017,d1
+                move.w  #WINDOW_GOLD_SOURCE,d1
                 moveq   #4,d2
                 jsr     (MoveWindowWithSfx).l
                 move.w  ((DIALOGUE_WINDOW_INDEX-$1000000)).w,d0
                 beq.s   @Skip
+                
                 subq.w  #1,d0
                 move.w  #$8080,d1
                 moveq   #4,d2

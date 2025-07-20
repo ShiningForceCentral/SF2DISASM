@@ -223,7 +223,7 @@ loc_5042:
                 beq.s   loc_505E
                 cmp.w   mapAreaLayerOneStartY(a6),d1
                 ble.s   loc_505E
-                move.w  #MAP_TILE_MINUS,d5
+                move.w  #$FE80,d5
                 move.b  ENTITYDEF_OFFSET_YSPEED(a0),d3
                 ext.w   d3
                 neg.w   d3
@@ -244,7 +244,7 @@ loc_5078:
                 beq.s   loc_5094
                 cmp.w   mapAreaLayerOneStartX(a6),d0
                 ble.s   loc_5094
-                move.w  #MAP_TILE_MINUS,d4
+                move.w  #$FE80,d4
                 move.b  ENTITYDEF_OFFSET_XSPEED(a0),d2
                 ext.w   d2
                 neg.w   d2
@@ -294,7 +294,7 @@ loc_50D6:
                 andi.w  #$C000,d0
                 cmp.w   d0,d1
                 bne.s   loc_5124
-                move.w  #MAP_TILE_MINUS,d5
+                move.w  #$FE80,d5
                 move.b  ENTITYDEF_OFFSET_YSPEED(a0),d3
                 ext.w   d3
                 neg.w   d3
@@ -339,7 +339,7 @@ loc_5178:
                 andi.w  #$C000,d0
                 cmp.w   d0,d1
                 bne.s   loc_51A0
-                move.w  #MAP_TILE_MINUS,d5
+                move.w  #$FE80,d5
                 move.b  ENTITYDEF_OFFSET_YSPEED(a0),d3
                 ext.w   d3
                 neg.w   d3
@@ -492,9 +492,9 @@ loc_530C:
                 
                 add.w   d4,ENTITYDEF_OFFSET_XDEST(a0)
                 add.w   d5,ENTITYDEF_OFFSET_YDEST(a0)
-                tst.w   ((word_FFB196-$1000000)).w
+                tst.w   ((STEP_COUNTER-$1000000)).w
                 ble.s   loc_531E
-                subq.w  #1,((word_FFB196-$1000000)).w
+                subq.w  #1,((STEP_COUNTER-$1000000)).w
 loc_531E:
                 
                 bsr.w   UpdateEntitySprite
@@ -723,7 +723,7 @@ loc_54CC:
                 andi.w  #$C000,d0
                 cmp.w   d0,d1
                 bne.s   loc_5526
-                move.w  #MAP_TILE_MINUS,d7
+                move.w  #$FE80,d7
                 bra.w   loc_5592
 loc_5526:
                 
@@ -761,7 +761,7 @@ loc_556E:
                 andi.w  #$C000,d0
                 cmp.w   d0,d1
                 bne.s   loc_558E
-                move.w  #MAP_TILE_MINUS,d7
+                move.w  #$FE80,d7
                 bra.w   loc_5592
 loc_558E:
                 
@@ -915,7 +915,7 @@ esc07_controlRaft:
                 ble.s   @CheckInput_Down
                 
                 ; Pressed Up
-                move.w  #MAP_TILE_MINUS,d5
+                move.w  #$FE80,d5
                 move.b  ENTITYDEF_OFFSET_YSPEED(a0),d3
                 ext.w   d3
                 neg.w   d3
@@ -936,7 +936,7 @@ esc07_controlRaft:
                 beq.s   @CheckInput_Right
                 cmp.w   mapAreaLayerOneStartX(a6),d0
                 ble.s   @CheckInput_Right
-                move.w  #MAP_TILE_MINUS,d4
+                move.w  #$FE80,d4
                 move.b  ENTITYDEF_OFFSET_XSPEED(a0),d2
                 ext.w   d2
                 neg.w   d2
@@ -1080,7 +1080,7 @@ esc08_controlCaravan:
                 cmp.w   mapAreaLayerOneStartY(a6),d1
                 ble.s   @CheckInput_Down
                 
-                move.w  #MAP_TILE_MINUS,d5
+                move.w  #$FE80,d5
                 move.b  ENTITYDEF_OFFSET_YSPEED(a0),d3
                 ext.w   d3
                 neg.w   d3
@@ -1101,7 +1101,7 @@ esc08_controlCaravan:
                 beq.s   @CheckInput_Right
                 cmp.w   mapAreaLayerOneStartX(a6),d0
                 ble.s   @CheckInput_Right
-                move.w  #MAP_TILE_MINUS,d4
+                move.w  #$FE80,d4
                 move.b  ENTITYDEF_OFFSET_XSPEED(a0),d2
                 ext.w   d2
                 neg.w   d2
@@ -1225,12 +1225,12 @@ esc09_moveToFacingRelativePosition:
                 movem.l d2-d3,-(sp)
                 move.w  2(a1),d2
                 move.w  4(a1),d3
-                move.b  ENTITYDEF_OFFSET_FACING(a0),d0 ; facing
+                move.b  ENTITYDEF_OFFSET_FACING(a0),d0
                 move.w  d0,d1
                 andi.w  #4,d0
-                andi.w  #3,d1
+                andi.w  #DIRECTION_MASK,d1
                 add.w   d1,d2
-                andi.w  #3,d2
+                andi.w  #DIRECTION_MASK,d2
                 or.w    d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
                 move.w  table_59AC(pc,d2.w),d0
@@ -1249,16 +1249,16 @@ table_59AE:
                 
                 dc.w 0
                 dc.w 0
-                dc.w MAP_TILE_MINUS
-                dc.w MAP_TILE_MINUS
+                dc.w $FE80
+                dc.w $FE80
                 dc.w 0
                 dc.w 0
                 dc.w MAP_TILE_PLUS
                 dc.w MAP_TILE_PLUS
-                dc.w MAP_TILE_MINUS
-                dc.w MAP_TILE_MINUS
-                dc.w MAP_TILE_MINUS
-                dc.w MAP_TILE_MINUS
+                dc.w $FE80
+                dc.w $FE80
+                dc.w $FE80
+                dc.w $FE80
                 dc.w MAP_TILE_PLUS
                 dc.w MAP_TILE_PLUS
                 dc.w MAP_TILE_PLUS
@@ -1281,9 +1281,9 @@ esc0E_moveToEntityFacingRelativePosition:
                 move.b  ENTITYDEF_OFFSET_FACING(a1),d0 ; other entity facing
                 move.w  d0,d1
                 andi.w  #4,d0
-                andi.w  #3,d1
+                andi.w  #DIRECTION_MASK,d1
                 add.w   d1,d2
-                andi.w  #3,d2
+                andi.w  #DIRECTION_MASK,d2
                 or.w    d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
                 move.w  table_59AC(pc,d2.w),d0
@@ -1510,11 +1510,11 @@ esc15_setAutoFacing:
                 
                 tst.w   2(a1)
                 bne.s   loc_5B64
-                bclr    #6,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bclr    #ENTITYDEF_FLAGS_B_AUTO_FACING,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 bra.s   loc_5B6A
 loc_5B64:
                 
-                bset    #6,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bset    #ENTITYDEF_FLAGS_B_AUTO_FACING,ENTITYDEF_OFFSET_FLAGS_B(a0)
 loc_5B6A:
                 
                 addq.l  #4,a1
@@ -1615,8 +1615,8 @@ loc_5BD0:
 esc1B_setEntityOrientation:
                 
                 move.w  2(a1),d0
-                andi.w  #3,d0
-                andi.b  #$FC,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                andi.w  #DIRECTION_MASK,d0
+                andi.b  #(BYTE_MASK-DIRECTION_MASK),ENTITYDEF_OFFSET_FLAGS_B(a0)
                 or.b    d0,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 addq.l  #4,a1
                 bra.w   esc_clearTimerGoToNextCommand
@@ -1631,11 +1631,11 @@ esc1C_setEntityTransparency:
                 
                 tst.w   2(a1)
                 bne.s   loc_5BFC
-                bclr    #7,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bclr    #ENTITYDEF_FLAGS_B_BLINKING,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 bra.s   loc_5C02
 loc_5BFC:
                 
-                bset    #7,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bset    #ENTITYDEF_FLAGS_B_BLINKING,ENTITYDEF_OFFSET_FLAGS_B(a0)
 loc_5C02:
                 
                 addq.l  #4,a1
@@ -1651,11 +1651,11 @@ esc1D_setEntityGhost:
                 
                 tst.w   2(a1)
                 bne.s   loc_5C16
-                bclr    #2,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bclr    #ENTITYDEF_FLAGS_B_GHOST,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 bra.s   loc_5C1C
 loc_5C16:
                 
-                bset    #2,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bset    #ENTITYDEF_FLAGS_B_GHOST,ENTITYDEF_OFFSET_FLAGS_B(a0)
 loc_5C1C:
                 
                 addq.l  #4,a1
@@ -1671,11 +1671,11 @@ esc1E_setEntityAnimSpeedx2:
                 
                 tst.w   2(a1)
                 bne.s   loc_5C30
-                bclr    #4,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bclr    #ENTITYDEF_FLAGS_B_2X_ANIMATION_SPEED,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 bra.s   loc_5C36
 loc_5C30:
                 
-                bset    #4,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bset    #ENTITYDEF_FLAGS_B_2X_ANIMATION_SPEED,ENTITYDEF_OFFSET_FLAGS_B(a0)
 loc_5C36:
                 
                 addq.l  #4,a1
@@ -1691,11 +1691,11 @@ esc1F_setResizable:
                 
                 tst.w   2(a1)
                 bne.s   loc_5C4A
-                bclr    #3,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bclr    #ENTITYDEF_FLAGS_B_RESIZE,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 bra.s   loc_5C50
 loc_5C4A:
                 
-                bset    #3,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bset    #ENTITYDEF_FLAGS_B_RESIZE,ENTITYDEF_OFFSET_FLAGS_B(a0)
 loc_5C50:
                 
                 addq.l  #4,a1
@@ -1711,11 +1711,11 @@ esc20_setImmersed:
                 
                 tst.w   2(a1)
                 bne.s   loc_5C64
-                bclr    #5,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bclr    #ENTITYDEF_FLAGS_B_IMMERSED,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 bra.s   loc_5C6A
 loc_5C64:
                 
-                bset    #5,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bset    #ENTITYDEF_FLAGS_B_IMMERSED,ENTITYDEF_OFFSET_FLAGS_B(a0)
 loc_5C6A:
                 
                 addq.l  #4,a1
@@ -2189,16 +2189,16 @@ loc_5F5E:
                 move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d1
                 cmpi.w  #$3400,d0
                 bne.s   loc_5F70
-                bset    #5,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bset    #ENTITYDEF_FLAGS_B_IMMERSED,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 bra.s   loc_5F76
 loc_5F70:
                 
-                bclr    #5,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                bclr    #ENTITYDEF_FLAGS_B_IMMERSED,ENTITYDEF_OFFSET_FLAGS_B(a0)
 loc_5F76:
                 
                 move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d2
                 eor.b   d2,d1
-                btst    #5,d1
+                btst    #ENTITYDEF_FLAGS_B_IMMERSED,d1
                 beq.s   loc_5F8A
                 move.b  ENTITYDEF_OFFSET_FACING(a0),d6
                 bsr.w   ChangeEntityMapsprite
@@ -2357,8 +2357,8 @@ UpdateEntityProperties:
                 adda.w  d0,a0
                 cmpi.b  #-1,d2
                 beq.s   @CheckMapsprite
-                andi.w  #$7F,d2 
-                andi.b  #$80,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                andi.w  #%1111111,d2
+                andi.b  #%10000000,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 or.b    d2,ENTITYDEF_OFFSET_FLAGS_B(a0)
 @CheckMapsprite:
                 
@@ -2367,8 +2367,8 @@ UpdateEntityProperties:
                 move.b  d3,ENTITYDEF_OFFSET_MAPSPRITE(a0)
 @ChangeDirection:
                 
-                move.w  d1,d6
-                andi.w  #3,d6
+                move.w  d1,d6           ; d6.w = new facing direction
+                andi.w  #DIRECTION_MASK,d6
                 bsr.w   ChangeEntityMapsprite
                 movem.l (sp)+,d0-a2
                 rts
@@ -2382,11 +2382,11 @@ UpdateEntityProperties:
 UpdateEntitySprite:
                 
                 module
-                btst    #6,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                btst    #ENTITYDEF_FLAGS_B_AUTO_FACING,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 beq.w   return_6180
                 cmp.b   ENTITYDEF_OFFSET_FACING(a0),d6
                 beq.w   return_6180
-                cmpi.b  #7,((SPRITES_TO_LOAD_NUMBER-$1000000)).w
+                cmpi.b  #GFX_MAX_SPRITES_TO_LOAD,((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 bge.w   return_6180
 
     ; End of function UpdateEntitySprite
@@ -2439,30 +2439,30 @@ loc_60B6:
                 jsr     (LoadBasicCompressedData).w
                 movea.l a1,a0
                 move.w  (sp)+,d1        ; pull flags B
-                btst    #5,d1
+                btst    #ENTITYDEF_FLAGS_B_IMMERSED,d1
                 beq.s   loc_6124
                 jsr     j_ApplySpriteImmersedEffect
 loc_6124:
                 
-                btst    #3,d1
+                btst    #ENTITYDEF_FLAGS_B_RESIZE,d1
                 beq.s   loc_6134
                 move.w  ((SPRITE_SIZE-$1000000)).w,d0
                 jsr     j_ResizeSprite
 loc_6134:
                 
-                btst    #2,d1
+                btst    #ENTITYDEF_FLAGS_B_GHOST,d1
                 beq.s   loc_6140
                 jsr     j_ApplySpriteGhostEffect
 loc_6140:
                 
-                andi.w  #3,d1
-                cmpi.w  #1,d1
+                andi.w  #ORIENTATION_MASK,d1
+                cmpi.w  #ORIENTATION_LEFT,d1
                 bne.s   loc_6152
                 jsr     j_OrientSpriteLeft
                 bra.s   loc_615E
 loc_6152:
                 
-                cmpi.w  #3,d1
+                cmpi.w  #ORIENTATION_RIGHT,d1
                 bne.s   loc_615E
                 jsr     j_OrientSpriteRight
 loc_615E:

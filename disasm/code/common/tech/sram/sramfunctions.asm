@@ -95,7 +95,7 @@ CheckSram:
 SaveGame:
                 
                 movem.l d0-d1/d7-a2,-(sp)
-                lea     (COMBATANT_ENTRIES).l,a0
+                lea     (COMBATANT_DATA).l,a0
                 tst.b   d0
                 bne.s   @Slot2
                 lea     (SAVE1_DATA).l,a1
@@ -125,7 +125,7 @@ SaveGame:
 LoadGame:
                 
                 movem.l d0-d1/d7-a2,-(sp)
-                lea     (COMBATANT_ENTRIES).l,a1
+                lea     (COMBATANT_DATA).l,a1
                 tst.b   d0
                 bne.s   @Slot2
                 lea     (SAVE1_DATA).l,a0

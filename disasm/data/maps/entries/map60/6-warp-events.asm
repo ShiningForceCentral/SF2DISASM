@@ -3,7 +3,7 @@
 ; 0xB9F50..0xBA00A : 
                 mWarp 53, 1
                   warpNoScroll
-                  warpMap    MAP_ANCIENT_TOWER_FIRST_ROOM
+                  warpMap    MAP_ANCIENT_TOWER_ENTRANCE
                   warpDest   7, 4
                   warpFacing DOWN
                 mWarp 255, 51
@@ -113,7 +113,7 @@
                   warpFacing LEFT
                 mWarp 255, 26
                   warpNoScroll
-                  warpMap    MAP_ANCIENT_TOWER_CLIMB
+                  warpMap    MAP_ANCIENT_TOWER_ASCENT
                   warpDest   15, 6
                   warpFacing DOWN
                 endWord

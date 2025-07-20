@@ -180,7 +180,7 @@ loc_25D56:
                 lea     table_2786C(pc), a2
 loc_25D5A:
                 
-                btst    #4,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                btst    #ENTITYDEF_FLAGS_B_2X_ANIMATION_SPEED,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 beq.s   loc_25D64
                 addq.b  #2,d2
 loc_25D64:

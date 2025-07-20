@@ -11,10 +11,10 @@
 
 InitializeFollowerEntities:
                 
-                cmpi.b  #MAP_NEW_GRANSEAL_HQ,((CURRENT_MAP-$1000000)).w 
+                cmpi.b  #MAP_TACTICAL_BASE,((CURRENT_MAP-$1000000)).w 
                                                         ; HARDCODED maps with no followers
                 beq.w   @Return
-                cmpi.b  #MAP_NAZCA_SHIP_INTERIOR,((CURRENT_MAP-$1000000)).w
+                cmpi.b  #MAP_NAZCA_SHIP,((CURRENT_MAP-$1000000)).w
                 beq.w   @Return
                 
                 movem.l a6,-(sp)

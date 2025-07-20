@@ -3,12 +3,12 @@
 ; 0xB8612..0xB8624 : 
                 mWarp 255, 4
                   warpNoScroll
-                  warpMap    MAP_ANCIENT_TOWER_UNDERGROUND_STAIRS
+                  warpMap    MAP_ANCIENT_TOWER_STAIRWAY
                   warpDest   53, 1
                   warpFacing RIGHT
                 mWarp 255, 19
                   warpNoScroll
-                  warpMap    MAP_ANCIENT_TOWER_OUTSIDE
+                  warpMap    MAP_ANCIENT_TOWER_EXTERIOR
                   warpDest   15, 13
                   warpFacing DOWN
                 endWord

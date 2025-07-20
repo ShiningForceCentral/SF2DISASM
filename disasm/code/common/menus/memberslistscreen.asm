@@ -711,7 +711,7 @@ BuildMembersListScreenWindows:
                 
                 ; Load portrait window border tiles
                 move.w  portraitWindow(a6),d0
-                lea     tiles_WindowBorder(pc), a0
+                lea     layout_PortraitWindow(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).l
                 move.w  #160,d7
@@ -797,23 +797,24 @@ BuildMembersListWindow:
 @WriteEntry_ClassLevExp:
                 
                 movea.l (sp)+,a1
+                
                 lea     WINDOW_MEMBERS_LIST_OFFSET_ENTRY_START(a1),a1
                 tst.b   ((CURRENT_MEMBERS_LIST_PAGE-$1000000)).w
                 bne.s   @WriteEntry_Stats
-                move.l  a1,-(sp)
                 
                 ; Write class name
+                move.l  a1,-(sp)
                 move.w  currentMember(a6),d0
                 jsr     j_GetClass
                 jsr     j_GetClassName
                 moveq   #-58,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movea.l (sp)+,a1
-                lea     WINDOW_MEMBERS_LIST_OFFSET_ENTRY_LEVEL(a1),a1
                 
                 ; Write LV
+                lea     WINDOW_MEMBERS_LIST_OFFSET_ENTRY_LEVEL(a1),a1
                 move.w  currentMember(a6),d0
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 moveq   #LV_DIGITS_NUMBER,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -893,7 +894,7 @@ BuildMembersListWindow:
                 move.w  currentMember(a6),d0
                 move.w  ((SELECTED_ITEM_INDEX-$1000000)).w,d1
                 jsr     j_IsWeaponOrRingEquippable
-                bcs.s   @WriteEntry_NewATTandDEF
+                bcs.s   @WriteEntry_NewAttAndDef
                 
                 lea     aUnequippable(pc), a0
                 addq.l  #WINDOW_MEMBERS_LIST_OFFSET_ENTRY_UNEQUIPPABLE,a1
@@ -901,7 +902,7 @@ BuildMembersListWindow:
                 moveq   #-58,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 bra.s   @NextEntry      
-@WriteEntry_NewATTandDEF:
+@WriteEntry_NewAttAndDef:
                 
                 jsr     j_GetEquipNewAttAndDef
                 addq.l  #2,a1
@@ -988,7 +989,7 @@ BuildMemberSummaryWindow:
                 addq.w  #2,a1
                 move.w  #VDPTILE_UPPERCASE_L|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)+
                 move.w  combatant(a6),d0
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 moveq   #2,d7
                 move.w  d1,d0
                 ext.l   d0
@@ -1180,7 +1181,7 @@ BuildMemberSummaryWindowOnEquipPage:
                 move.w  d5,d1
                 cmpi.w  #ICON_UNARMED,d1
                 beq.s   @WriteNothingString
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 bra.s   @Continue
 @WriteNothingString:
                 
@@ -1268,7 +1269,7 @@ WriteMemberMagicList:
                 beq.w   return_13B46
                 movem.l a0-a1,-(sp)
                 movem.w d0-d1/d6-d7,-(sp)
-                jsr     j_FindSpellName
+                jsr     j_GetSpellName
                 moveq   #-42,d1
                 move.l  a1,-(sp)
                 bsr.w   WriteTilesFromAsciiWithRegularFont
@@ -1329,7 +1330,7 @@ WriteMemberItemsList:
                 beq.w   return_13B46
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 movem.l (sp)+,a0-a1
@@ -1365,7 +1366,7 @@ LoadItemIcon:
                 
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
                 movea.l (p_Icons).l,a0
-                bra.w   LoadIcon
+                bra.w   LoadIcon        
 
     ; End of function LoadItemIcon
 
@@ -1380,7 +1381,7 @@ LoadSpellIcon:
                 cmpi.w  #SPELL_NOTHING,d1
                 bne.s   @Spell
                 move.w  #ICON_NOTHING,d1
-                bra.s   LoadIcon
+                bra.s   LoadIcon        
 @Spell:
                 
                 addi.w  #ICON_SPELLS_START,d1
@@ -1388,7 +1389,10 @@ LoadSpellIcon:
     ; End of function LoadSpellIcon
 
 
-; START OF FUNCTION CHUNK FOR LoadItemIcon
+; =============== S U B R O U T I N E =======================================
+
+; In: a1 = loading space address, d1.w = item or spell index
+
 
 LoadIcon:
                 
@@ -1397,19 +1401,20 @@ LoadIcon:
                 add.w   d2,d1
                 lsl.w   #6,d1
                 adda.w  d1,a0           ; icon offset
-                moveq   #47,d7
-@Loop:
+                moveq   #ICON_PIXELS_LONGWORD_COUNTER,d7
+loc_13B8E:
                 
                 move.l  (a0)+,(a1)+
-                dbf     d7,@Loop
+                dbf     d7,loc_13B8E
                 
+                ; Clean corners
                 ori.w   #$F,-2(a1)
                 ori.w   #$F000,-36(a1)
                 ori.w   #$F,-158(a1)
                 ori.w   #$F000,-192(a1)
                 rts
 
-; END OF FUNCTION CHUNK FOR LoadItemIcon
+    ; End of function LoadIcon
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1433,7 +1438,7 @@ WriteItemIconsCross:
                 moveq   #3,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 bsr.w   LoadItemIcon
-                bra.w   loc_13C20
+                bra.w   DmaIconsCross
 
     ; End of function WriteItemIconsCross
 
@@ -1459,7 +1464,14 @@ WriteMagicIconsCross:
                 moveq   #3,d1
                 jsr     j_GetSpellAndNumberOfSpells
                 bsr.w   LoadSpellIcon
-loc_13C20:
+
+    ; End of function WriteMagicIconsCross
+
+
+; =============== S U B R O U T I N E =======================================
+
+
+DmaIconsCross:
                 
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     ($BC00).l,a1
@@ -1468,7 +1480,7 @@ loc_13C20:
                 jsr     (ApplyVIntVramDma).w
 loc_13C36:
                 
-                movea.l windowLayoutStartAddress(a6),a1
+                movea.l -6(a6),a1
                 move.l  #$C5E0C5E1,$DC(a1) ; longword-packed VDP tile entries
                 move.l  #$C5E2C5E3,$106(a1)
                 move.l  #$C5E4C5E5,$130(a1)
@@ -1483,7 +1495,7 @@ loc_13C36:
                 move.l  #$C5F6C5F7,$1D8(a1)
                 rts
 
-    ; End of function WriteMagicIconsCross
+    ; End of function DmaIconsCross
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1614,16 +1626,16 @@ LoadMemberSummaryIcons:
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableItemIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 jsr     (WaitForVInt).w
                 moveq   #30,d6
                 
@@ -1633,7 +1645,7 @@ LoadMemberSummaryIcons:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   @CheckRight
                 moveq   #1,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   @CheckRight
                 sndCom  SFX_MENU_SELECTION
                 bra.w   @DmaIcons
@@ -1642,7 +1654,7 @@ LoadMemberSummaryIcons:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   @CheckUp
                 moveq   #2,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   @CheckUp
                 sndCom  SFX_MENU_SELECTION
                 bra.w   @DmaIcons
@@ -1658,7 +1670,7 @@ LoadMemberSummaryIcons:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   @CheckB
                 moveq   #3,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   @CheckB
                 sndCom  SFX_MENU_SELECTION
                 bra.w   @DmaIcons
@@ -1962,30 +1974,30 @@ loc_141FE:
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
                 bsr.w   LoadHighlightableIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
                 bsr.w   LoadHighlightableIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
                 bsr.w   LoadHighlightableIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 clr.w   d6
-                moveq   #$1F,d7
+                moveq   #31,d7
                 bsr.w   dmaMembersListIcon_Up
                 bsr.w   dmaMembersListIcon_Left
                 bsr.w   dmaMembersListIcon_Right
                 bsr.w   dmaMembersListIcon_Down
                 jsr     (WaitForWindowMovementEnd).w
-                moveq   #$1E,d6
+                moveq   #30,d6
 loc_14264:
                 
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1427E
                 moveq   #1,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_1427E
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_142FA
@@ -1994,7 +2006,7 @@ loc_1427E:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_14298
                 moveq   #2,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_14298
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_142FA
@@ -2010,7 +2022,7 @@ loc_142AA:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_142C4
                 moveq   #3,d1
-                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
+                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_142C4
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_142FA
@@ -2072,18 +2084,18 @@ loc_1434A:
                 move.w  memberSummaryWindow(a6),d0
                 move.w  #$8080,d1
                 jsr     (SetWindowDestination).w
-                moveq   #$1D,d6
+                moveq   #29,d6
 loc_14366:
                 
                 clr.w   d0
                 move.b  ((CURRENT_DIAMOND_MENU_CHOICE-$1000000)).w,d0
                 bsr.w   DmaMembersListIcon
-                moveq   #$14,d1
+                moveq   #20,d1
                 bsr.w   LoadMemberSummaryHighlightSprites
                 move.b  #16,(SPRITE_NAME_HIGHLIGHT_LINK).l
                 subq.w  #1,d6
                 bne.s   loc_14384
-                moveq   #$1E,d6
+                moveq   #30,d6
 loc_14384:
                 
                 jsr     (WaitForVInt).w
@@ -2228,16 +2240,16 @@ ExecuteExplorationMagicMenu:
                 lea     (FF8804_LOADING_SPACE).l,a1
                 move.w  ((DISPLAYED_ICON_1-$1000000)).w,d0
                 bsr.w   LoadHighlightableSpellIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 move.w  ((DISPLAYED_ICON_2-$1000000)).w,d0
                 bsr.w   LoadHighlightableSpellIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 move.w  ((DISPLAYED_ICON_3-$1000000)).w,d0
                 bsr.w   LoadHighlightableSpellIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
                 move.w  ((DISPLAYED_ICON_4-$1000000)).w,d0
                 bsr.w   LoadHighlightableSpellIcon
-                bsr.w   CleanIconCorners
+                bsr.w   CleanHighlightableIconCorners
 @loc_1:
                 
                 jsr     (WaitForVInt).w
@@ -2426,19 +2438,19 @@ byte_145A8:
 ; =============== S U B R O U T I N E =======================================
 
 
-CleanIconCorners:
+CleanHighlightableIconCorners:
                 
                 ori.w   #$F,-2(a1)
-                ori.w   #$F000,-$24(a1)
-                ori.w   #$F,-$9E(a1)
-                ori.w   #$F000,-$C0(a1)
-                ori.w   #$F,-$C2(a1)
-                ori.w   #$F000,-$E4(a1)
-                ori.w   #$F,-$15E(a1)
-                ori.w   #$F000,-$180(a1)
+                ori.w   #$F000,-36(a1)
+                ori.w   #$F,-158(a1)
+                ori.w   #$F000,-192(a1)
+                ori.w   #$F,-194(a1)
+                ori.w   #$F000,-228(a1)
+                ori.w   #$F,-350(a1)
+                ori.w   #$F000,-384(a1)
                 rts
 
-    ; End of function CleanIconCorners
+    ; End of function CleanHighlightableIconCorners
 
 
 ; =============== S U B R O U T I N E =======================================

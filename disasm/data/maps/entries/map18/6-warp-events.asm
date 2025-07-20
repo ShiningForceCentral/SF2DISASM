@@ -13,7 +13,7 @@
                   warpFacing RIGHT
                 mWarp 255, 29
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
+                  warpMap    MAP_OVERWORLD_GRANSEAL_KINGDOM
                   warpDest   31, 9
                   warpFacing DOWN
                 mWarp 255, 9

@@ -8,17 +8,17 @@
                   warpFacing UP
                 mWarp 57, 24
                   warpNoScroll
-                  warpMap    MAP_SECRET_DWARVEN_VILLAGE_INSIDE
+                  warpMap    MAP_DWARVEN_VILLAGE_INTERIOR
                   warpDest   8, 20
                   warpFacing UP
                 mWarp 48, 30
                   warpNoScroll
-                  warpMap    MAP_SECRET_MONK_FOREST
+                  warpMap    MAP_ELVEN_VILLAGE
                   warpDest   22, 29
                   warpFacing RIGHT
                 mWarp 255, 0
                   warpScroll UP
-                  warpMap    MAP_OVERWORLD_NEW_GRANSEAL_SHORE
+                  warpMap    MAP_OVERWORLD_NEW_GRANSEAL_KINGDOM
                   warpDest   255, 62
                   warpFacing UP
                 mWarp 0, 255
@@ -28,7 +28,7 @@
                   warpFacing LEFT
                 mWarp 63, 255
                   warpScroll RIGHT
-                  warpMap    MAP_OVERWORLD_PATH_TO_RIBBLE
+                  warpMap    MAP_OVERWORLD_SOUTH_PARMECIA
                   warpDest   1, 255
                   warpFacing RIGHT
                 endWord

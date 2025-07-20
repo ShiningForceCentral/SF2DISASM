@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\maps\mapinit_0.asm :
-; 0x7956..0x7988 : Map init functions
+; 0x7956..0x7988 : Map initialization functions
 
 ; =============== S U B R O U T I N E =======================================
 

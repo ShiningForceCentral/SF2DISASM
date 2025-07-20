@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle30\cs_beforebattle.asm :
 ; 0x4C5E6..0x4C6A8 : Cutscene before battle 30
 bbcs_30:        textCursor 2760
-                loadMapFadeIn MAP_INSIDE_MITULA,7,21
+                loadMapFadeIn MAP_MITULA_SHRINE_INTERIOR,7,21
                 loadMapEntities ce_4C690
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

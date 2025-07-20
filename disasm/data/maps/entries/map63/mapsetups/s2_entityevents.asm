@@ -22,7 +22,7 @@ Map63_EntityEvent0:
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     4177            ; "Olooooo...Oloo....{N}Have you seen my arm?{W2}"
                 txt     4178            ; "I can't move...without my{N}arm...oloooo....{W1}"
                 clsTxt

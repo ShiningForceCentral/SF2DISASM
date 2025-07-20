@@ -242,7 +242,7 @@ cs_5AF36:       textCursor 1834
                 endActions
                 setActscriptWait 128,eas_Jump
                 csWait 20
-                warp MAP_CREED_DESKTOP_WORLD,0,0,DOWN
+                warp MAP_DESKTOP_KINGDOM,0,0,DOWN
                 csc_end
 cs_5B016:       textCursor 1840
                 reloadMap 12,2

@@ -13,10 +13,11 @@
 GetNextUsableAttackSpell:
                 
                 movem.l d0/d3-a6,-(sp)
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 move.w  d1,d7           ; remember whether caster is muddled
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Loop
+                
                 move.w  #1,d7           ; treat ally caster as muddled
 @Loop:
                 
@@ -31,6 +32,7 @@ GetNextUsableAttackSpell:
                 
                 tst.b   d7
                 beq.s   @CheckSpellType
+                
                 move.w  d1,d5
                 andi.b  #SPELLENTRY_MASK_INDEX,d5
                 cmpi.b  #SPELL_BLAZE,d5 ; HARDCODED spell indexes
@@ -66,7 +68,7 @@ GetNextUsableAttackSpell:
                 bra.w   @Next
 @CheckSpellType:
                 
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 beq.w   @Break
@@ -112,7 +114,7 @@ GetNextHealingSpell:
                 bra.w   @Next
 @Continue:
                 
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_HEAL,d2
@@ -158,7 +160,7 @@ GetNextSupportSpell:
                 bra.w   @NextSlot
 @Continue:
                 
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_SUPPORT,d2
@@ -187,7 +189,7 @@ GetNextSupportSpell:
 ;  BLAZE/FREEZE/BOLT/BLAST.
 ; 
 ;       In: d0.w = caster index, d3.w = starting spell slot
-;       Out: d1.w = spell index, d2.w = spell slot
+;       Out: d1.w = spell entry, d2.w = item slot
 ; 
 ; HARDCODED spell indexes
 
@@ -195,10 +197,11 @@ GetNextSupportSpell:
 GetNextUsableAttackItem:
                 
                 movem.l d0/d3-a6,-(sp)
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 move.w  d1,d6           ; remember whether caster is muddled
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @Loop
+                
                 move.w  #1,d6           ; treat ally caster as muddled
 @Loop:
                 
@@ -220,12 +223,13 @@ GetNextUsableAttackItem:
 @CheckAllowedToUse:
                 
                 btst    #ITEMENTRY_BIT_EQUIPPED,d1 ; if not equipped, AI must be set to use the item in battle data
-                bne.w   @CheckSpellValidity
+                bne.w   @GetItemUseSpell
+                
                 btst    #ITEMENTRY_BIT_USABLE_BY_AI,d1
                 beq.w   @Nothing
-@CheckSpellValidity:
+@GetItemUseSpell:
                 
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.w  d1,d7           ; save item entry
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
@@ -233,6 +237,7 @@ GetNextUsableAttackItem:
                 ; Is caster muddled?
                 tst.b   d6
                 beq.s   @CheckSpellType
+                
                 move.w  d1,d5
                 andi.b  #SPELLENTRY_MASK_INDEX,d5
                 
@@ -260,10 +265,11 @@ GetNextUsableAttackItem:
                 bra.w   @Nothing
 @CheckSpellType:
                 
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 bne.w   @Nothing
+                
                 move.w  d3,d2
                 move.w  d7,d1           ; restore item entry
                 bra.w   @Done
@@ -315,11 +321,11 @@ GetNextUsableHealingItem:
                 beq.w   @Next
 @CheckSpellType:
                 
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.w  d1,d7           ; save item entry
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_PROPS(a0),d2
                 andi.b  #SPELLPROPS_MASK_TYPE,d2
                 cmpi.b  #SPELLPROPS_TYPE_HEAL,d2

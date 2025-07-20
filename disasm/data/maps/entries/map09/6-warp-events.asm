@@ -3,7 +3,7 @@
 ; 0x9C83A..0x9C864 : 
                 mWarp 255, 0
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_PATH_TO_RIBBLE
+                  warpMap    MAP_OVERWORLD_SOUTH_PARMECIA
                   warpDest   26, 54
                   warpFacing DOWN
                 mWarp 6, 16

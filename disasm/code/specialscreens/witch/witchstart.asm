@@ -163,6 +163,7 @@ witchMenuAction_New:
                 jsr     j_ExecuteWitchMainMenu
                 tst.w   d0
                 bmi.s   byte_73C2       
+                
                 subq.w  #1,d0
                 move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
                 jsr     j_NewGame
@@ -173,6 +174,7 @@ witchMenuAction_New:
                 beq.w   byte_7476       ; @Configuration
                 btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.w   byte_7476       ; @Configuration
+                
                 moveq   #1,d0
                 moveq   #COMBATANT_ALLIES_MINUS_PLAYER_AND_CREATURE_COUNTER,d7
 @NameAlly_Loop:

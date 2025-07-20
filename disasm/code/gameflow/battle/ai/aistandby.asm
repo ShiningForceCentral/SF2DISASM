@@ -1,6 +1,6 @@
 
-; ASM FILE code\gameflow\battle\ai\aiengine_2.asm :
-; 0xF522..0xF9B4 : AI engine
+; ASM FILE code\gameflow\battle\ai\aistandby.asm :
+; 0xF522..0xF9B4 : AI engine : standby movement
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -88,7 +88,7 @@ DetermineStandbyAiMovement:
                 bsr.w   InitializeMovementArrays
                 bsr.w   PopulateMovementArrays
                 bsr.w   PopulateTargetsArrayWithAllCombatants
-                lea     (byte_FFB1DC).l,a0
+                lea     (AI_MEMORY_TABLE).l,a0
                 clr.w   d0
                 move.b  attacker(a6),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
@@ -181,7 +181,7 @@ DetermineStandbyAiMovement:
                 tst.b   d7
                 bne.s   @loc16
                 
-                lea     (byte_FFB1DC).l,a0
+                lea     (AI_MEMORY_TABLE).l,a0
                 clr.w   d0
                 move.b  attacker(a6),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0
@@ -230,7 +230,7 @@ DetermineStandbyAiMovement:
                 dbf     d4,@loc19
 @loc22:
                 
-                lea     (byte_FFB1DC).l,a0
+                lea     (AI_MEMORY_TABLE).l,a0
                 clr.w   d0
                 move.b  attacker(a6),d0
                 andi.b  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d0

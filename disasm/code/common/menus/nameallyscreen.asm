@@ -562,7 +562,7 @@ sub_1604A:
                 movea.l entryWindowLayoutEndAddress(a6),a1
                 move.w  #42,d7
                 jsr     (CopyBytes).w   
-                lea     tiles_WindowBorder(pc), a0
+                lea     layout_PortraitWindow(pc), a0
                 movea.l portraitWindowLayoutEndAddress(a6),a1
                 move.w  #160,d7
                 jsr     (CopyBytes).w   

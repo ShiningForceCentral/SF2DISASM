@@ -66,7 +66,7 @@ ExecuteAiCommand_Attack:
                 move.w  (a1),d1
                 move.w  d7,d0           ; d7 --> d0 = character index (aka attacker)
                 bsr.w   GetItemBySlotAndHeldItemsNumber
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 bsr.w   GetSpellRange   
                 bsr.w   PopulateTargetsArrayWithAllCombatants
@@ -167,7 +167,7 @@ ExecuteAiCommand_Attack:
                 bra.w   @FindTarget
 @GetWeaponAttackRange:
                 
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 moveq   #0,d3
                 move.b  ITEMDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  ITEMDEF_OFFSET_MIN_RANGE(a0),d4
