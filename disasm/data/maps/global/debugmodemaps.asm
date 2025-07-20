@@ -2,18 +2,6 @@
 ; ASM FILE data\maps\global\debugmodemaps.asm :
 ; 0x7186..0x71C0 : Debug mode maps
 table_DebugModeAvailableMaps:
-                
-@declareAllMaps: macro
-i: = 0
-            rept MAPS_NUMBER
-                dc.b i
-i: = i+1
-            endr
-        endm
-                
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                @declareAllMaps
-            else
                 dc.b MAP_GRANSEAL
                 dc.b MAP_GRANSEAL_EARTHQUAKE
                 dc.b MAP_YEEL
@@ -71,4 +59,3 @@ i: = i+1
                 dc.b MAP_OVERWORLD_NAZCA_REGION
                 dc.b MAP_ZEON_BATTLEFIELD
                 dc.b MAP_OVERWORLD_NEW_GRANSEAL_KINGDOM
-            endif

@@ -107,7 +107,7 @@ byte_77DE:
                 txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
-                move.w  #BATTLES_DEBUG_NUMBER,d2
+                move.w  #BATTLES_DEBUG_MAX_INDEX,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0

@@ -434,7 +434,7 @@ PREVIOUSLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating regions t
                                                     ; unused otherwise in the stanard build
 
 ; Battlescene Data
-BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 ; start of battlescene data
+BATTLESCENE_GROUND_MODIFICATION_POINTER: equ $FFB3C0 ; start of battlescene data
 word_FFB3C4: equ $FFB3C4
 BATTLESCENE_BATTLESPRITE_MODIFICATION_POINTER: equ $FFB3C6
 word_FFB3CA: equ $FFB3CA
@@ -474,7 +474,7 @@ byte_FFB496: equ $FFB496
 byte_FFB532: equ $FFB532 ; related to spellanimations
 dword_FFB536: equ $FFB536
 byte_FFB53A: equ $FFB53A
-BATTLESCENE_BACKGROUND_PALETTE: equ $FFB542
+BATTLESCENE_GROUND_PALETTE: equ $FFB542
 word_FFB562: equ $FFB562
 byte_FFB568: equ $FFB568
 byte_FFB569: equ $FFB569
@@ -517,7 +517,7 @@ BATTLESCENE_ENEMY_STATUS_ANIMATION: equ $FFB57F ; status effect sprite displayed
                                         ;     4 = stun
 byte_FFB580: equ $FFB580
 byte_FFB581: equ $FFB581
-BATTLESCENE_BACKGROUND: equ $FFB582
+BATTLESCENE_GROUND: equ $FFB582
 byte_FFB583: equ $FFB583
 UPDATE_SPELLANIMATION_TOGGLE: equ $FFB584
 byte_FFB585: equ $FFB585
@@ -526,7 +526,7 @@ CURRENT_SPELLANIMATION: equ $FFB587
 byte_FFB588: equ $FFB588
 BATTLESCENE_ACTOR_SWITCH_STATE: equ $FFB589 ; battlescene actor switching state: 1 = waiting, 2 = currently switching, 3 = done
 DEAD_COMBATANTS_LIST: equ $FFB58A
-byte_FFB59A: equ $FFB59A ; end of battlescene data
+BATTLESCENE_DATA_END: equ $FFB59A ; end of battlescene data
 BATTLESCENE_GOLD: equ $FFB62A
 BATTLESCENE_EXP: equ $FFB62C
 CURRENT_BATTLEACTION: equ $FFB62E ; Refer to enum Battleactions
@@ -546,8 +546,8 @@ BATTLESCENE_FIRST_ALLY: equ $FFB64A
 BATTLESCENE_LAST_ALLY: equ $FFB64B
 BATTLESCENE_FIRST_ENEMY: equ $FFB64C
 BATTLESCENE_LAST_ENEMY: equ $FFB64D
-BATTLESCENE_ATTACKER: equ $FFB64E
-BATTLESCENE_ATTACKER_COPY: equ $FFB64F
+BATTLESCENE_ACTOR: equ $FFB64E
+BATTLESCENE_ACTOR_COPY: equ $FFB64F
 byte_FFB651: equ $FFB651 ; related to entity facing ?
 TARGETS_LIST: equ $FFB652 ; - indexes of currently available targets in battle
                                         ; - chosen targets during battlescene
@@ -557,11 +557,9 @@ OTHER_FORCE_MEMBERS_LIST: equ $FFB653
 BATTLE_PARTY_MEMBERS: equ $FFB682 ; indexes of party members currently in battle party
 RESERVE_MEMBERS: equ $FFB68E ; indexes of party members currently not in battle party
 ENEMY_LIST: equ $FFB6A2 ; unused
-
-    if (TEST_BUILD=1)
-TEST_BUILD_CURRENT_MESSAGE: equ $FFB6C0
+    if (STANDARD_BUILD=1)
+DEBUG_MODE_CURRENT_MESSAGE: equ $FFB6C0
     endif
-
 MOVECOSTS_TABLE: equ $FFB6C2 ; table of 16 move cost values for currently moving battle entity, corresponding to terrain types
 CURRENT_SHOP_INDEX: equ $FFB6D2
 DIALOGUE_TYPEWRITING_CURRENT_X: equ $FFB6D4

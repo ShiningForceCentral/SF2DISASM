@@ -70,7 +70,7 @@ StartWitchScreen:
                 jsr     FadeOut_WaitForP1Input
 @StartWitchDialogue:
                 
-            if (STANDARD_BUILD&SKIP_WITCH_DIALOGUE=1)
+            if (SKIP_WITCH_DIALOGUE=1)
                 bra.w   @SkipWitchDialogue
             else
                 btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
@@ -166,18 +166,15 @@ witchMenuAction_New:
                 clsTxt
                 clr.w   d0
                 jsr     NameAlly
-            if (STANDARD_BUILD&EASY_RENAME_CHARACTERS=1)
-                ; skip conditions
+            if (UNLOCK_RENAME_CHARACTERS=1)
+                ; Skip checking game completed flag
             else
                 btst    #7,(SAVE_FLAGS).l ; "Game completed" bit
                 beq.w   @Configuration
+            endif
                 btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.w   @Configuration
-            endif
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                bsr.s   RenameAllAllies
-            else
                 moveq   #1,d0
                 moveq   #COMBATANT_ALLIES_MINUS_PLAYER_COUNTER-1,d7
                 
@@ -186,14 +183,9 @@ witchMenuAction_New:
                 cmpi.w  #ALLY_KIWI,d0
                 beq.s   @loc_11
                 dbf     d7,@NameAlly_Loop
-            endif
                 
 @Configuration: txt     223             ; "{NAME;0}....{N}Nice name, huh?{W2}"
-            if (STANDARD_BUILD&CONFIGURATION_SCREEN=1)
-                bsr.w   Configuration
-            else
                 bsr.w   CheatModeConfiguration
-            endif
                 txt     232             ; "I'll let you decide the{N}difficulty level at this time."
                 clr.w   d0
                 moveq   #3,d1
@@ -229,18 +221,6 @@ witchMenuAction_New:
 
     ; End of function witchMenuAction_New
 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-RenameAllAllies:
-                
-                moveq   #0,d0
-                moveq   #COMBATANT_ALLIES_COUNTER,d7
-                
-@Loop:          jsr     NameAlly
-                addq.w  #1,d0
-                dbf     d7,@Loop
-                
-                rts
-            endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -269,11 +249,7 @@ witchMenuAction_Load:
                 setCurrentSaveSlot d0
                 jsr     (LoadGame).w
                 txt     226             ; "{NAME;0}, yes!  I knew it!{W2}"
-            if (STANDARD_BUILD&CONFIGURATION_SCREEN=1)
-                bsr.w   Configuration
-            else
                 bsr.w   CheatModeConfiguration
-            endif
                 txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
                 clsTxt
                 clr.b   ((DEACTIVATE_WINDOW_HIDING-$1000000)).w
@@ -281,6 +257,9 @@ witchMenuAction_Load:
                 beq.s   @loc_18
                 
                 pea     (alt_MainLoopEntry).w
+            if (FIX_AI_JARO_NOT_LEAVING_THE_FORCE=1)
+                pea     ResetAiJaro
+            endif
                 jmp     BattleLoop
                 
 @loc_18:        clr.w   d0

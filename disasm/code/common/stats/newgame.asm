@@ -15,9 +15,6 @@ NewGame:
                 moveq   #COMBATANT_ALLIES_COUNTER,d0
                 sub.w   d7,d0
                 bsr.w   InitializeAllyCombatantEntry
-            if (STANDARD_BUILD&(TEST_BUILD|ALL_ALLIES_JOINED)=1)
-                bsr.w   JoinForce
-            endif
                 dbf     d7,@Loop
                 
                 moveq   #GAMESTART_GOLD,d1 ; starting gold value
@@ -81,9 +78,6 @@ InitializeAllyCombatantEntry:
                 move.b  (a0)+,d1
                 move.b  d1,COMBATANT_OFFSET_CLASS(a1)
                 move.b  (a0)+,d2
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                moveq   #TEST_BUILD_ALLIES_START_LEVEL,d2
-            endif
                 move.b  d2,COMBATANT_OFFSET_LEVEL(a1)
                 ext.w   d2
                 move.w  d2,-(sp)        ; -> push starting level

@@ -79,6 +79,8 @@
                 alignIfStandard
                 includeIfStandard "code\specialscreens\suspend\graphics.asm"    ; Suspend String Graphics
                 alignIfStandard
+                includeIfStandard "data\newnames-standard.asm"    ; Additional names for game concepts
+                alignIfStandard
                 includeIfStandard "code\common\tech\incbins\s17_incbins_basetiles.asm"    ; Game Section 17 Incbin Directives
                 
             if (EXPANDED_ROM=0)

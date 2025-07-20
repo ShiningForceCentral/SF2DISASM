@@ -37,11 +37,11 @@ battlesceneScript_End:
             if (STANDARD_BUILD&FIX_RANGED_COUNTER_EXP=1)
                 ; do nothing
             else
-                lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
+                lea     ((BATTLESCENE_ACTOR-$1000000)).w,a5
                 moveq   #3,d6
                 bsr.w   battlesceneScript_SwitchTargets
             endif
-                lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
+                lea     ((BATTLESCENE_ACTOR-$1000000)).w,a4
                 lea     ((TARGETS_LIST-$1000000)).w,a5
                 tst.b   curseInaction(a2)
                 bne.w   loc_A3B2
@@ -57,7 +57,7 @@ battlesceneScript_End:
                 beq.w   loc_A3B2
                 
             if (STANDARD_BUILD&FIX_RANGED_COUNTER_EXP=1)
-                lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
+                lea     ((BATTLESCENE_ACTOR-$1000000)).w,a5
             endif
                 bra.s   @GiveExpAndGold
 loc_A396:

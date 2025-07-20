@@ -57,14 +57,27 @@ UpdateForce:
 
 ; In: d0.b = ally index
 
-
+JoinForceSkipBattleParty:
+                
+                module
+                
+                move.w  d1,-(sp)
+                move.l  d2,-(sp)
+                moveq   #-1,d2          ; set skip join battle party toggle
+                bra.s   @Continue
 JoinForce:
                 
                 move.w  d1,-(sp)
-                clr.w   d1
+                move.l  d2,-(sp)
+                clr.w   d2              ; clear skip join battle party toggle
+                
+@Continue:      clr.w   d1
                 move.b  d0,d1
                 addi.w  #FORCEMEMBER_JOINED_FLAGS_START,d1
                 bsr.w   SetFlag
+                tst.w   d2
+                bmi.s   @SkipActiveForce
+                
                 bsr.s   UpdateForce
                 cmpi.w  #FORCE_MAX_SIZE,((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w
                 bhs.s   @SkipActiveForce
@@ -72,11 +85,13 @@ JoinForce:
                 bsr.s   JoinBattleParty 
 @SkipActiveForce:
                 
+                move.l  (sp)+,d2
                 move.w  (sp)+,d1
                 rts
 
     ; End of function JoinForce
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

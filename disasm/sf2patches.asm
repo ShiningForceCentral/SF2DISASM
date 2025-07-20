@@ -1,29 +1,32 @@
 
 ; 0 = OFF, 1 = ON
 
+; Initial configuration settings
+ALL_ALLIES_JOINED:          equ 0       ; All allies join from the beginning at level 1.
+INITIAL_SPECIAL_TURBO:      equ -1      ; -1 = toggle ON
+INITIAL_DEBUG_MODE:         equ 0       ; -1 = toggle ON
+INITIAL_CONTROL_OPPONENT:   equ 0       ; -1 = toggle ON
+INITIAL_AUTO_BATTLE:        equ 0       ; -1 = toggle ON
+INITIAL_CONFIGURATION_MODE: equ 0       ; -1 = toggle ON
+INITIAL_GAME_COMPLETED:     equ 0
+INITIAL_MESSAGE_SPEED:      equ 3       ; [0, 3]
+INITIAL_NO_BATTLE_MESSAGES: equ 0       ; 1 = no battle messages display ON
+
+
 ; TEST_BUILD: Game starts by applying all TEST_BUILD features below.
 ;   This is determined by whether standard.bat or standard-test.bat is used when building.
 
-; Debugging facilitations
-EASY_DEBUG_MODE:            equ 0       ; Toggle Debug Mode ON automatically when booting up the game.
-EASY_BATTLE_TEST:           equ 0       ; If Debug Mode is on, go to Battle Test instead of playing the intro cutscene.
-EASY_CONFIGURATION_MODE:    equ 1       ; Toggle Configuration Mode ON automatically, and skip checking if the Start button is pressed.
-EASY_SOUND_TEST:            equ 0       ; Hold Up while entering Configuration Mode; there is no need to have set Game Completed save flag.
-EASY_RENAME_CHARACTERS:     equ 0       ; Rename all characters when starting a new game.
-
-
-; Debug build configuration
-TEST_BUILD_SKIP_TO_NEW_GRANSEAL:            equ 1
-TEST_BUILD_SKIP_NEW_GRANSEAL_CUTSCENE:      equ 1
-TEST_BUILD_ALLIES_START_LEVEL:              equ 24
-TEST_BUILD_INITIAL_DEBUG_MODE:              equ -1      ; -1 = toggle ON
-TEST_BUILD_INITIAL_CONFIGURATION_MODE:      equ 0       ; -1 = toggle ON
-TEST_BUILD_INITIAL_SPECIAL_TURBO:           equ -1      ; -1 = toggle ON
-TEST_BUILD_INITIAL_CONTROL_OPPONENT:        equ 0       ; -1 = toggle ON
-TEST_BUILD_INITIAL_AUTO_BATTLE:             equ 0       ; -1 = toggle ON
-TEST_BUILD_INITIAL_GAME_COMPLETED:          equ 1
-TEST_BUILD_INITIAL_MESSAGE_SPEED:           equ 3       ; [0, 3]
-TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES_TOGGLE: equ 0       ; 1 = no battle messages display ON
+; Test build configuration settings
+TEST_BUILD_ALL_ALLIES_JOINED:           equ 1
+TEST_BUILD_ALLIES_START_LEVEL:          equ 24      ; Starting level for all characters if TEST_BUILD_ALL_ALLIES_JOINED is ON
+TEST_BUILD_INITIAL_SPECIAL_TURBO:       equ -1      ; -1 = toggle ON
+TEST_BUILD_INITIAL_DEBUG_MODE:          equ -1      ; -1 = toggle ON
+TEST_BUILD_INITIAL_CONTROL_OPPONENT:    equ 0       ; -1 = toggle ON
+TEST_BUILD_INITIAL_AUTO_BATTLE:         equ 0       ; -1 = toggle ON
+TEST_BUILD_INITIAL_CONFIGURATION_MODE:  equ 0       ; -1 = toggle ON
+TEST_BUILD_INITIAL_GAME_COMPLETED:      equ 1
+TEST_BUILD_INITIAL_MESSAGE_SPEED:       equ 3       ; [0, 3]
+TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES:  equ 0       ; 1 = no battle messages display ON
 
 
 ; Fixes
@@ -68,30 +71,32 @@ FIX_SLADE_EXPLODES_AFTER_BATTLE_5:   equ 1   ; Fixes the bug where at the end of
 
 
 ; Quality of life features
-NO_DEFEAT_ON_LEADER_DEATH:          equ 0       ; Death of the Force Leader character does not cause defeat.
-LEADER_CAN_LEAVE_BATTLE_PARTY:      equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
+AUTO_CONFIGURATION_MODE:            equ 1       ; Hold Start when leaving the witch screen to execute the Configuration sequence without having to enter the input sequence.
+AUTO_DEBUG_MODE:                    equ 0       ; Hold Start when starting the game to enable debug mode and execute the Configuration sequence without having to enter the input sequence.
 CAPITALIZED_CHARACTER_NAMES:        equ 1       ; Capitalize allies and enemies names, as well as change "JAR" and the Chess Army's "DARK BISHOP" to "Jaro" and "Bishop".
 CARAVAN_IN_TOWER:                   equ 1       ; Add access to Caravan before tower climb battle.
 CUTSCENE_PROTECTION:                equ 1       ; Prevent game from freezing if dead character is needed for scene after leader death (as Slade for battle 5.)
+LEADER_CAN_LEAVE_BATTLE_PARTY:      equ 0       ; Player is required to leave at least one member in the party. Message #20 should be edited to reflect this new rule.
 MINIATURES_SHOP:                    equ 1       ; Place a shopworker on the desktop and floor of the Miniatures Room.
 MODIFY_MOV_STAT_ON_PROMOTION:       equ 1       ; Modify a character's MOV stat when promoting based on the difference between the current and the new class data instead of overwriting it (and losing increases from the Running Pimento in the process.)
 NO_AI_JARO:                         equ 0       ; 
 NO_AI_PETER:                        equ 0       ; 
 NO_DARKNESS_IN_CAVES:               equ 0       ; The darkness gimmick in caves is disabled.
-NO_RANDOM_BATTLES:                  equ 0       ; 0 = Battles    1 = No Battles
+NO_DEFEAT_ON_LEADER_DEATH:          equ 0       ; Death of the Force Leader character does not cause defeat.
+NO_RANDOM_BATTLES:                  equ 1       ; 0 = Battles    1 = No Battles
 RECRUIT_ALL_CREED_CHARACTERS:       equ 1       ; lets you recruit all four of them at any time after leaving Floor World.
 SKIP_SEGA_LOGO:                     equ 0
 SKIP_GAME_INTRO:                    equ 0
 SKIP_TITLE_SCREEN:                  equ 0
 SKIP_WITCH_DIALOGUE:                equ 0
+UNLOCK_RENAME_CHARACTERS:           equ 1       ; Hold Start while confirming the leader's name to rename all characters when starting a new game.
+UNLOCK_SOUND_TEST:                  equ 1       ; Hold Up while entering Configuration Mode; there is no need to have set Game Completed save flag.
 
 
 ; Misc. features
-;ADDITIONAL_EQUIPEFFECTS:            equ 1       ; Add new equipeffects to offer more options (Set ATT, Increase Resistance, Decrease Double...)
 AGILITY_AFFECTS_CHANCE_TO_DODGE:    equ 0       ; Adjust chance to dodge proportionally to the difference between the attacker's and the target's current AGI.
-ALL_ALLIES_JOINED:                  equ 0       ; All allies join from the beginning
 DIAGONAL_LASERS:                    equ 0       ; Allows laser based enemies to fire in 8 directions (Up, Up-Left, Left, Down-Left, etc).
-DIFFICULTY_FACTORS:                 equ 0       ; Allow 4 distinct difficulties.
+DIFFICULTY_FACTORS:                 equ 0       ; Allows 4 distinct difficulties.
 EXPANDED_RANGES:                    equ 1       ; Weapons/spells can have ranges up to 7 and spell radii up to 4.
 LEARN_SPELL_AT_PROMOTION:           equ 0       ; Allow learning 1 spell immediately upon promotion.
 MUSCLE_MAGIC:                       equ 0       ; 0 = OFF, 1-256 = spell power increased by (muscleMagicStat * n) / 256

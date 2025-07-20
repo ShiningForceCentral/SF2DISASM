@@ -65,9 +65,10 @@ local.properties
 
 # Build results
 
-[Dd]ebug/
-[Rr]elease/
-x64/
+# BNC : removed all VS-related build folders. not relevant to us!
+# [Dd]ebug/
+# [Rr]elease/
+# x64/
 # wizardwhosaysni : removed build/ from default config file
 # build/ 
 [Bb]in/

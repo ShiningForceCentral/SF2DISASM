@@ -1,10 +1,13 @@
 
 ; GAME SECTION 04 :
-; 0x018000..0x020000 : BattleScene Engine
+; 0x018000..0x020000 : Battlescene Engine
 ; FREE SPACE : 532 bytes.
 
 
                 include "code\common\tech\jumpinterfaces\s04_jumpinterface.asm"    ; Game Section 04 Jump Interface
+                includeIfStandard "code\gameflow\battle\battlescenes\initializebattlescene-standard.asm"    ; Battlescene engine
+                includeIfVanilla "code\gameflow\battle\battlescenes\nullsub_18010.asm"    ; Battlescene engine
+                includeIfVanilla "code\gameflow\battle\battlescenes\initializebattlescene.asm"    ; Battlescene engine
                 include "code\gameflow\battle\battlescenes\battlesceneengine_0.asm"    ; Battlescene engine
                 includeIfStandard "code\gameflow\battle\battlescenes\getallyanimation-standard.asm"
                 includeIfStandard "data\graphics\battles\battlesprites\spearthrowanimations-standard.asm"

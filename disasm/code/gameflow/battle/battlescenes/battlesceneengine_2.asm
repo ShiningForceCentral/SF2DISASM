@@ -10,18 +10,38 @@
 
 GetBattlesceneGround:
                 
+            if (STANDARD_BUILD=1)
+                tst.b   d0
+                bmi.s   @Skip           ; skip if enemy
+                
+                ; Skip if ally is flying or hovering
+                lea     table_AirborneMovetypes,a0
+                jsr     GetMoveType
+                moveq   #0,d2           ; zero property bytes
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcc.s   @Skip
+                
+                bra.w   GetBattlesceneBackground
+@Skip:
+                
+                moveq   #-1,d1
+                rts
+            else
                 cmpi.w  #COMBATANT_ENEMIES_START,d0
                 bcc.w   @Skip           ; skip if enemy
+                
                 jsr     j_GetMoveType
                 cmpi.w  #MOVETYPE_LOWER_FLYING,d1
                 beq.w   @Skip           ; skip if ally is flying or hovering
                 cmpi.w  #MOVETYPE_LOWER_HOVERING,d1
                 beq.w   @Skip
+                
                 bra.w   GetBattlesceneBackground
 @Skip:
                 
                 move.w  #-1,d1
                 rts
+            endif
 
     ; End of function GetBattlesceneGround
 
@@ -1503,7 +1523,7 @@ loc_1A786:
                 addq.w  #2,d2
 loc_1A7E2:
                 
-                move.l  #table_DesoulBackgroundModification,((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w
+                move.l  #table_DesoulBackgroundModification,((BATTLESCENE_GROUND_MODIFICATION_POINTER-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.b  #5,((byte_FFB583-$1000000)).w
                 move.w  #-1,((byte_FFB404-$1000000)).w
@@ -2683,7 +2703,7 @@ loc_1B040:
                 clr.l   (a0)+
                 dbf     d0,@ClearLoadingSpace_Loop
                 
-                move.l  #table_DaoBackgroundModification,((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w
+                move.l  #table_DaoBackgroundModification,((BATTLESCENE_GROUND_MODIFICATION_POINTER-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.l  #table_DaoBattlespriteModification,((BATTLESCENE_BATTLESPRITE_MODIFICATION_POINTER-$1000000)).w
                 move.w  #$A,((word_FFB3CA-$1000000)).w
@@ -2786,7 +2806,7 @@ loc_1B1A4:
                 move.w  #2,4(a0)
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
-                move.l  #table_ApolloBackgroundModification,((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w
+                move.l  #table_ApolloBackgroundModification,((BATTLESCENE_GROUND_MODIFICATION_POINTER-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.b  #5,((byte_FFB583-$1000000)).w
                 move.w  #-1,((byte_FFB404-$1000000)).w
@@ -2932,7 +2952,7 @@ loc_1B314:
                 dbf     d0,loc_1B314
                 moveq   #20,d0
                 jsr     (Sleep).w       
-                move.l  #table_NeptunBackgroundModification,((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w
+                move.l  #table_NeptunBackgroundModification,((BATTLESCENE_GROUND_MODIFICATION_POINTER-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.b  #5,((byte_FFB583-$1000000)).w
                 move.w  #-1,((byte_FFB404-$1000000)).w
@@ -3182,7 +3202,7 @@ loc_1B55A:
                 bra.s   loc_1B570
 @NotMirrored:
                 
-                cmpi.b  #BATTLEBACKGROUND_OVERWORLD,((BATTLESCENE_BACKGROUND-$1000000)).w
+                cmpi.b  #BATTLEBACKGROUND_OVERWORLD,((BATTLESCENE_GROUND-$1000000)).w
                 bne.s   @OverworldBackground
                 rts
 @OverworldBackground:
@@ -3659,7 +3679,7 @@ sub_1B90C:
                 tst.w   d5
                 beq.s   loc_1B92C
                 add.w   ((word_FFB3EE-$1000000)).w,d6
-                bsr.w   sub_1F1F0
+                bsr.w   MoveBackgroundVertically
                 subq.b  #1,((byte_FFB56A-$1000000)).w
 loc_1B92C:
                 
@@ -10107,7 +10127,7 @@ sub_1EF2E:
 ; related to loading enemy plane layout to VRAM
 
 
-sub_1EF36:
+DmaBattlesceneEnemyLayout:
                 
                 bsr.w   LoadBattlesceneEnemyLayout
                 lea     (PLANE_B_LAYOUT).l,a0
@@ -10116,7 +10136,7 @@ sub_1EF36:
                 moveq   #2,d1
                 jmp     (ApplyImmediateVramDma).w
 
-    ; End of function sub_1EF36
+    ; End of function DmaBattlesceneEnemyLayout
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10435,7 +10455,7 @@ UpdateAllyBattlespritePosition:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1F1CC:
+MoveBackgroundHorizontally:
                 
                 movem.l d0/a0,-(sp)
                 move.w  d6,((word_FFB3EA-$1000000)).w
@@ -10452,13 +10472,13 @@ sub_1F1CC:
                 movem.l (sp)+,d0/a0
                 rts
 
-    ; End of function sub_1F1CC
+    ; End of function MoveBackgroundHorizontally
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1F1F0:
+MoveBackgroundVertically:
                 
                 movem.l d0/a0,-(sp)
                 move.w  d6,((word_FFB3EE-$1000000)).w
@@ -10475,7 +10495,7 @@ loc_1F1FE:
                 movem.l (sp)+,d0/a0
                 rts
 
-    ; End of function sub_1F1F0
+    ; End of function MoveBackgroundVertically
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -10557,7 +10577,7 @@ sub_1F282:
                 beq.s   return_1F2F4
                 lea     ((HORIZONTAL_SCROLL_DATA-$1000000)).w,a3
                 lea     ((VERTICAL_SCROLL_DATA-$1000000)).w,a4
-                lea     ((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w,a5
+                lea     ((BATTLESCENE_GROUND_MODIFICATION_POINTER-$1000000)).w,a5
                 bra.s   loc_1F2D0
 loc_1F2AE:
                 
@@ -10602,11 +10622,11 @@ sub_1F2F6:
                 clr.b   ((byte_FFB56B-$1000000)).w
                 clr.w   ((word_FFB3C4-$1000000)).w
                 clr.w   ((word_FFB3CA-$1000000)).w
-                clr.l   ((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w
+                clr.l   ((BATTLESCENE_GROUND_MODIFICATION_POINTER-$1000000)).w
                 clr.l   ((BATTLESCENE_BATTLESPRITE_MODIFICATION_POINTER-$1000000)).w
                 clr.w   d6
-                bsr.w   sub_1F1CC
-                bsr.w   sub_1F1F0
+                bsr.w   MoveBackgroundHorizontally
+                bsr.w   MoveBackgroundVertically
                 btst    #2,((byte_FFB56F-$1000000)).w
                 beq.s   loc_1F32A
                 moveq   #96,d6

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\start\systeminit.asm :
-; 0x200..0x2DE : System init functions
+; 0x200..0x2DE : System initialization functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -8,25 +8,8 @@
 InitializeSystem:
                 
                 bsr.s   InitializeVdp   ; and clear 68K RAM
-                
-            if (STANDARD_BUILD&MEMORY_MAPPER=1)
-                bsr.w   InitializeMapper
-            elseif (EXPANDED_ROM=1)
-                enableSram              ; make sure that SRAM is enabled now, in case we need to init saved data
-            endif
-                
-            if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
-                bsr.w   InitializeSavedData
-            endif
-                
                 bsr.w   InitializeZ80   ; and load sound driver to Z80 RAM
-                
-            if (STANDARD_BUILD=1)
-                bsr.w   InitializeVdpData
-            else
                 bsr.s   InitializeVdpData
-            endif
-                
                 jmp     (InitializeGame).l
 
     ; End of function InitializeSystem
@@ -57,12 +40,8 @@ InitializeVdp:
                 clr.w   d0
                 clr.w   d1
                 clr.w   d2
-            if (STANDARD_BUILD=1)
-                include "code\common\tech\interrupts\applyvramdmafill.asm"
-            else
                 bsr.w   ApplyVramDmaFill
                 rts
-            endif
 
     ; End of function InitializeVdp
 
@@ -103,18 +82,11 @@ InitializeVdpData:
                 clr.w   (a0)+           ; clear palette replicas ?
                 dbf     d1,@ClearPalettes_Loop  
                 
-            if (STANDARD_BUILD=1)
-                pea     EnableDmaQueueProcessing(pc)
-                pea     UpdateVdpVScrollData(pc)
-                pea     UpdateVdpHScrollData(pc)
-                bra.w   ClearSpriteTable
-            else
                 bsr.w   ClearSpriteTable
                 bsr.w   UpdateVdpHScrollData
                 bsr.w   UpdateVdpVScrollData
                 bsr.w   EnableDmaQueueProcessing
                 rts
-            endif
 
     ; End of function InitializeVdpData
 

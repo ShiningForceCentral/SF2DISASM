@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\stats\newgame.asm :
+; ASM FILE code\common\stats-standard\newgame.asm :
 ; 0x9736..0x98B4 : New game initialization functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -14,13 +14,13 @@ NewGame:
                 
                 moveq   #COMBATANT_ALLIES_COUNTER,d0
                 sub.w   d7,d0
-                bsr.w   InitializeAllyCombatantEntry
-            if (TEST_BUILD|ALL_ALLIES_JOINED=1)
-                bsr.w   JoinForce
+                bsr.s   InitializeAllyCombatantEntry
+            if (ALL_ALLIES_JOINED|(TEST_BUILD&TEST_BUILD_ALL_ALLIES_JOINED)=1)
+                bsr.w   JoinForceSkipBattleParty
             endif
                 dbf     d7,@Loop
                 
-                moveq   #GAMESTART_GOLD,d1 ; starting gold value
+                move.l  #GAMESTART_GOLD,d1 ; starting gold value
                 bsr.w   SetGold
                 moveq   #ALLY_BOWIE,d0  ; starting character
                 bsr.w   JoinForce       
@@ -79,7 +79,9 @@ InitializeAllyCombatantEntry:
                 move.b  (a0)+,d1
                 move.b  d1,COMBATANT_OFFSET_CLASS(a1)
                 move.b  (a0)+,d2
-            if (TEST_BUILD=1)
+            if (ALL_ALLIES_JOINED=1)
+                moveq   #1,d2
+            elseif (TEST_BUILD&TEST_BUILD_ALL_ALLIES_JOINED=1)
                 moveq   #TEST_BUILD_ALLIES_START_LEVEL,d2
             endif
                 move.b  d2,COMBATANT_OFFSET_LEVEL(a1)

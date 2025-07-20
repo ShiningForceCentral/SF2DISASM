@@ -205,7 +205,7 @@ InitializeEnemyStats:
                 adda.w  d1,a1
                 move.l  a0,-(sp)
                 jsr     j_GetCombatantEntryAddress_0
-                moveq   #13,d7
+                moveq   #ENEMYDEF_LONGWORDS_COUNTER,d7
 @Loop:
                 
                 move.l  (a1)+,(a0)+

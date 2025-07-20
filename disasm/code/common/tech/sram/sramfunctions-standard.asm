@@ -243,22 +243,3 @@ ClearSaveSlotFlag:
 
     ; End of function ClearSaveSlotFlag
 
-
-; =============== S U B R O U T I N E =======================================
-
-; Clear active saved data slot during system initialization if RELOCATED_SAVED_DATA_TO_SRAM is enabled.
-
-
-InitializeSavedData:
-                
-                loadSavedDataAddress COMBATANT_DATA, a0
-                move.w  #SAVE_SLOT_LONGS_COUNTER,d0
-                moveq   #0,d1
-                
-@Loop:          setSavedLongWithPostIncrement d1, a0
-                dbf     d0,@Loop
-                
-                rts
-
-    ; End of function ClearSavedData
-

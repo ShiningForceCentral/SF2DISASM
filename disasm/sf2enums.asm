@@ -95,7 +95,8 @@ COMBATANTS_ALL_COUNTER: equ combatantAlliesNumber+combatantEnemiesNumber-1
 COMBATANT_SLOTS_NUMBER: equ combatantSlotsNumber
 COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END: equ combatantEnemiesStart-combatantAlliesSpaceEnd
 COMBATANT_ENEMIES_START: equ combatantEnemiesStart
-COMBATANT_ENEMY_INDEX_15: equ combatantEnemiesStart+15
+COMBATANT_ENEMY_INDEX_15: equ combatantEnemiesStart+15 ; Jaro's enemy index during the battle to Moun
+COMBATANT_ENEMY_INDEX_20: equ combatantEnemiesStart+20 ; battlescene test enemy index (unused during regular battles)
 COMBATANT_ENEMIES_END: equ combatantEnemiesStart+combatantEnemiesNumber-1
 COMBATANT_ENEMIES_SPACE_END: equ combatantEnemiesStart+combatantEnemiesNumber
 
@@ -705,11 +706,15 @@ ENEMY_BLUE_SHAMAN_0: equ 102
 
 ; ---------------------------------------------------------------------------
 
+enemyDefEntrySize = 56
+enemyDefLongwordsCounter = (enemyDefEntrySize/4)-1
+
 ; enum EnemyDef
 ENEMYDEF_OFFSET_SPELLPOWER: equ 10
+ENEMYDEF_LONGWORDS_COUNTER: equ enemyDefLongwordsCounter
 ENEMYDEF_OFFSET_SPELLS: equ 40
 ENEMYDEF_OFFSET_MOVETYPE: equ 49
-ENEMYDEF_ENTRY_SIZE: equ 56
+ENEMYDEF_ENTRY_SIZE: equ enemyDefEntrySize
 
 ; ---------------------------------------------------------------------------
 
@@ -1048,10 +1053,15 @@ MODIFY_STATUS3: equ $C000
 ; enum ShopProperties
 
 shopsNumber: = 31
+
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+shopsNumber: = shopsNumber+1
+    endif
+
 shopsMaxIndex: = shopsNumber-1
 shopsDebugMaxIndex: = 100
 
-    if (STANDARD_BUILD&TEST_BUILD=1)
+    if (STANDARD_BUILD=1)
 shopsDebugMaxIndex: = shopsMaxIndex
     endif
 
@@ -1096,6 +1106,9 @@ SHOP_ITEM_ROFT: equ 28
 SHOP_ITEM_GALAM_1: equ 29
 SHOP_YEEL_UNDERGROUND: equ 29
 SHOP_DEBUG: equ 30
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+SHOP_DEBUG_EXTENDED: equ 31                     ; additional debug shop for extended items
+    endif
 
 ; ---------------------------------------------------------------------------
 
@@ -2019,15 +2032,15 @@ MAP_CURRENT: equ 255 ; reload current map
 
 battlesNumber: = 45
 battlesMaxIndex: = battlesNumber-1
-battlesDebugNumber: = 49
+battlesDebugMaxIndex: = 49
 
-    if (STANDARD_BUILD&TEST_BUILD=1)
-battlesDebugNumber: = battlesMaxIndex
+    if (STANDARD_BUILD=1)
+battlesDebugMaxIndex: = battlesMaxIndex
     endif
 
 BATTLES_MAX_INDEX: equ battlesMaxIndex
 BATTLES_NUMBER:  equ battlesNumber
-BATTLES_DEBUG_NUMBER: equ battlesDebugNumber
+BATTLES_DEBUG_MAX_INDEX: equ battlesDebugMaxIndex
 
 ; ---------------------------------------------------------------------------
 
@@ -4449,12 +4462,8 @@ gamestartSavepointX = 56
 gamestartSavepointY = 3
 gamestartFacing = DOWN
 
-    if (STANDARD_BUILD&TEST_BUILD&TEST_BUILD_SKIP_TO_NEW_GRANSEAL=1)
-gamestartGold = -1
-gamestartMap = MAP_NEW_GRANSEAL_CASTLE
-gamestartSavepointX = 19
-gamestartSavepointY = 3
-gamestartFacing = UP
+    if (STANDARD_BUILD&TEST_BUILD=1)
+gamestartGold = 500000
     endif
     
 GAMESTART_MAP:          equ gamestartMap
@@ -4471,3 +4480,28 @@ soundDriverByteSize = 8064
 
 SOUND_DRIVER_LONG_SIZE: equ soundDriverByteSize/4
 SOUND_DRIVER_BYTE_SIZE: equ soundDriverByteSize
+
+; ---------------------------------------------------------------------------
+
+; enum ConfigurationScreenActions
+
+            rsreset
+CONFIGURATION_END: rs.b 1
+CONFIGURATION_GAME_FLAGS: rs.b 1
+CONFIGURATION_MAP_SELECT: rs.b 1
+CONFIGURATION_BATTLE_TEST: rs.b 1
+CONFIGURATION_MENU_SELECT: rs.b 1
+CONFIGURATION_PARTY_SELECT: rs.b 1
+CONFIGURATION_LEVEL_UP: rs.b 1
+CONFIGURATION_NAME_CHARACTER: rs.b 1
+CONFIGURATION_SPECIAL_TURBO: rs.b 1
+CONFIGURATION_DEBUG_MODE: rs.b 1
+CONFIGURATION_CONTROL_TOGGLES: rs.b 1
+CONFIGURATION_DIFFICULTY_SELCT: rs.b 1
+CONFIGURATION_GAME_COMPLETED: rs.b 1
+CONFIGURATION_GIVE_MONEY: rs.b 1
+CONFIGURATION_BATTLESCENE_TEST: rs.b 1
+CONFIGURATION_MESSAGE_TEST: rs.b 1
+CONFIGURATION_SOUND_TEST: rs.b 1
+CONFIGURATION_RESET: rs.b 1
+CONFIGURATION_SAVED_DATA: rs.b 1

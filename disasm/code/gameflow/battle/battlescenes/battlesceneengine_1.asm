@@ -571,7 +571,7 @@ LoadBattlesceneBackground:
                 
                 move.w  (a2),d0
                 lea     (a2,d0.w),a0
-                lea     ((BATTLESCENE_BACKGROUND_PALETTE-$1000000)).w,a1
+                lea     ((BATTLESCENE_GROUND_PALETTE-$1000000)).w,a1
                 addq.w  #2,a0
                 clr.w   (a1)+
                 moveq   #14,d0

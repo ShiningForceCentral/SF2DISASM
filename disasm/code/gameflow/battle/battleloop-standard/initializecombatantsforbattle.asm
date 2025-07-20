@@ -187,7 +187,7 @@ HasJaroJoinedTheForce:
 InitializeEnemyStats:
                 
                 movem.l d0-a1,-(sp)
-                clr.l   d1
+                clr.w   d1
                 move.b  (a0),d1
                 bsr.w   UpgradeRandomBattleEnemies
                 move.w  d1,d6           ; d1.w, d6.w = upgraded enemy index
@@ -197,7 +197,7 @@ InitializeEnemyStats:
                 
                 move.l  a0,-(sp)
                 jsr     GetCombatantEntryAddress
-                moveq   #13,d7
+                moveq   #ENEMYDEF_LONGWORDS_COUNTER,d7
 @Loop:
                 
                 move.l  (a1)+,d1

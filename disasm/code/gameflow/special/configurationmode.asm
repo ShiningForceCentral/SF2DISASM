@@ -9,36 +9,13 @@ CheatModeConfiguration:
                 
                 module
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                ; Default TEST_BUILD configuration settings
-                move.b  #TEST_BUILD_INITIAL_DEBUG_MODE,((DEBUG_MODE_TOGGLE-$1000000)).w
-                move.b  #TEST_BUILD_INITIAL_SPECIAL_TURBO,((SPECIAL_TURBO_TOGGLE-$1000000)).w
-                move.b  #TEST_BUILD_INITIAL_CONTROL_OPPONENT,((CONTROL_OPPONENT_TOGGLE-$1000000)).w
-                move.b  #TEST_BUILD_INITIAL_AUTO_BATTLE,((AUTO_BATTLE_TOGGLE-$1000000)).w
-                setSavedByte #TEST_BUILD_INITIAL_MESSAGE_SPEED, MESSAGE_SPEED
-                setSavedByte #TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES_TOGGLE, NO_BATTLE_MESSAGES_TOGGLE
-              if (TEST_BUILD_INITIAL_GAME_COMPLETED=1)
-                bset    #7,(SAVE_FLAGS).l
-              else
-                bclr    #7,(SAVE_FLAGS).l
-              endif
-            endif
-            
-            if (STANDARD_BUILD&EASY_CONFIGURATION_MODE=1)
-                ; Do not check input
-            else
                 btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.w   @Return
-            endif
                 
                 ; Start sound test if pressing Up and game completed flag is set
                 btst    #INPUT_BIT_UP,((PLAYER_1_INPUT-$1000000)).w
-            if (STANDARD_BUILD&EASY_SOUND_TEST=1)
-                ; Do not check input
-            else
                 beq.s   @IsConfigurationModeOn
                 btst    #7,(SAVE_FLAGS).l
-            endif
                 bne.w   SoundTest
 @IsConfigurationModeOn:
                 

@@ -193,12 +193,8 @@ Map46_EntityEvent13:
 
 Map46_EntityEvent14:
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                jmp     SoundTest
-            else
                 moveq   #ALLY_KARNA,d0
                 jmp     DisplayTacticalBaseQuote
-            endif
 
     ; End of function Map46_EntityEvent14
 
@@ -208,22 +204,8 @@ Map46_EntityEvent14:
 
 Map46_EntityEvent15:
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                move.w  ((TEST_BUILD_CURRENT_MESSAGE-$1000000)).w,d0
-                cmpi.w  #MESSAGES_MAX_INDEX,d0
-                bls.s   @Continue
-                move.w  #MESSAGES_MAX_INDEX,d0
-@Continue:      moveq   #0,d1
-                move.w  #MESSAGES_MAX_INDEX,d2
-                jsr     NumberPrompt
-                bmi.s   @Return
-                move.w  d0,((TEST_BUILD_CURRENT_MESSAGE-$1000000)).w
-                jsr     (DisplayText).w
-@Return:        rts
-            else
                 moveq   #ALLY_RANDOLF,d0
                 jmp     DisplayTacticalBaseQuote
-            endif
 
     ; End of function Map46_EntityEvent15
 
@@ -266,12 +248,8 @@ Map46_EntityEvent18:
 
 Map46_EntityEvent19:
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                jmp     RenameAllAllies
-            else
                 moveq   #ALLY_SKREECH,d0
                 jmp     DisplayTacticalBaseQuote
-            endif
 
     ; End of function Map46_EntityEvent19
 
@@ -281,12 +259,8 @@ Map46_EntityEvent19:
 
 Map46_EntityEvent20:
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                jmp     StartMapTest
-            else
                 moveq   #ALLY_TAYA,d0
                 jmp     DisplayTacticalBaseQuote
-            endif
 
     ; End of function Map46_EntityEvent20
 
@@ -329,12 +303,8 @@ Map46_EntityEvent23:
 
 Map46_EntityEvent24:
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                jmp     StartBattleTest
-            else
                 moveq   #ALLY_SHEELA,d0
                 jmp     DisplayTacticalBaseQuote
-            endif
 
     ; End of function Map46_EntityEvent24
 
@@ -344,12 +314,8 @@ Map46_EntityEvent24:
 
 Map46_EntityEvent25:
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                jmp     StartConfiguration
-            else
                 moveq   #ALLY_ZYNK,d0
                 jmp     DisplayTacticalBaseQuote
-            endif
 
     ; End of function Map46_EntityEvent25
 
@@ -392,21 +358,8 @@ Map46_EntityEvent28:
 
 Map46_EntityEvent29:
                 
-            if (STANDARD_BUILD&TEST_BUILD=1)
-                jsr     CaravanMenu
-                txt     460             ; "Shop number?{D1}"
-                moveq   #SHOP_DEBUG,d0
-                moveq   #0,d1
-                moveq   #SHOPS_MAX_INDEX,d2
-                jsr     NumberPrompt
-                bmi.s   @Skip
-                move.b  d0,((CURRENT_SHOP_INDEX-$1000000)).w
-                jsr     ShopMenu
-@Skip:          jmp     ChurchMenu
-            else
                 txt     11              ; "{LEADER}, take it easy!{W1}"
                 rts
-            endif
 
     ; End of function Map46_EntityEvent29
 
