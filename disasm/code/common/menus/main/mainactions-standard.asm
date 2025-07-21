@@ -306,6 +306,7 @@ MainItemSubmenu_Give:
                 move.w  d2,itemIndex(a6)
                 
                 ; Check equipment type
+                move.w  itemIndex(a6),d1
                 jsr     GetEquipmentType
                 beq.s   @PickRecipient          ; immediately pick recipient if neither a weapon or a ring
                 bmi.s   @GiveRing               ; otherwise, giving a ring?
