@@ -1,11 +1,11 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\shotfire.asm :
-; 0x1AF0A..0x1AF8C : Battlescene engine
+; 0x1AF0A..0x1AF8C : 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-spellanimationSetup_ShotProjectile:
+spellanimationSetup_ShotFire:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellanimationProperties
@@ -35,7 +35,7 @@ loc_1AF2C:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-    ; End of function spellanimationSetup_ShotProjectile
+    ; End of function spellanimationSetup_ShotFire
 
 table_1AF64:    dc.l $F400FFC0
                 dc.l $18000E8

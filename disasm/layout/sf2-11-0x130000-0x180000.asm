@@ -4,6 +4,6 @@
 ; FREE SPACE : 429 bytes.
 
 
-                include "code\common\tech\pointers\s11_enemybattlespritespointer.asm"    ; Game Section 11 Enemy Battlesprites Pointer
-                include "data\graphics\battles\battlesprites\enemies\entries.asm"    ; Enemy battlesprites
-                align $8000
+                includeIfVanilla "code\common\tech\pointers\s11_enemybattlespritespointer.asm"    ; Game Section 11 Enemy Battlesprites Pointer
+                includeIfVanilla "data\graphics\battles\battlesprites\enemies\entries.asm"    ; Enemy battlesprites
+                alignIfVanilla $180000

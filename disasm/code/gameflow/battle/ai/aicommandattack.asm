@@ -48,7 +48,7 @@ ExecuteAiCommand_Attack:
                 move.w  #BATTLEACTION_USE_ITEM,(a0)
                 lea     ((ATTACK_COMMAND_ITEM_SLOT-$1000000)).w,a1
                 move.w  (a1),BATTLEACTION_OFFSET_ITEM_SLOT(a0)
-                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a0)
+                move.w  d0,BATTLEACTION_OFFSET_TARGET(a0)
                 move.w  d7,d0           ; d7 --> d0 = character index (aka attacker)
                 move.w  (a1),d1         ; d1 = item slot of the attack item
                 bsr.w   GetItemBySlotAndHeldItemsNumber
@@ -66,12 +66,12 @@ ExecuteAiCommand_Attack:
                 move.w  (a1),d1
                 move.w  d7,d0           ; d7 --> d0 = character index (aka attacker)
                 bsr.w   GetItemBySlotAndHeldItemsNumber
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 bsr.w   GetSpellRange   
                 bsr.w   PopulateTargetsArrayWithAllCombatants
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
-                move.w  BATTLEACTION_OFFSET_ACTOR(a0),d0
+                move.w  BATTLEACTION_OFFSET_TARGET(a0),d0
                 jsr     GetCombatantY
                 move.w  d1,d2
                 jsr     GetCombatantX
@@ -93,7 +93,7 @@ ExecuteAiCommand_Attack:
                 move.w  #BATTLEACTION_CAST_SPELL,(a0)
                 lea     ((ATTACK_COMMAND_SPELL-$1000000)).w,a1
                 move.w  (a1),BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
-                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a0)
+                move.w  d0,BATTLEACTION_OFFSET_TARGET(a0)
                 lea     ((AI_LAST_TARGET_TABLE-$1000000)).w,a2
                 move.w  d7,d1
                 btst    #COMBATANT_BIT_ENEMY,d1
@@ -135,14 +135,20 @@ ExecuteAiCommand_Attack:
                 
                 move.l  d0,-(sp)
                 move.w  d7,d0
+            if (STANDARD_BUILD&FIX_AI_CLAUDE_ATTACK_RANGE=1)
+                bsr.w   GetAttackRange
+            else
                 jsr     GetEquippedWeapon
                 cmpi.w  #-1,d1
                 bne.s   @GetWeaponAttackRange
                 clr.l   d3
                 clr.l   d4
                 jsr     GetCombatantType
+              if (STANDARD_BUILD&FIX_AI_CLAUDE_ATTACK_RANGE=1)
+                cmpi.w  #ENEMY_KRAKEN_ARM,d1
+              else
                 cmpi.b  #ENEMY_KRAKEN_ARM,d1 ; BUG -- When getting Claude's class type, the previous routine 
-                                        ;  returns a value in the byte area that happens to be the same
+              endif                       ;  returns a value in the byte area that happens to be the same
                                         ;  as the Kraken Arm's index, causing the former to perform 
                                         ;  a ranged attack when controlled by the AI.
                                         ;                                                 
@@ -152,8 +158,11 @@ ExecuteAiCommand_Attack:
                 move.w  #1,d4           ; min range 1
                 bra.w   @FinishUnequipRange
 @CheckKrakenHead:
-                
+              if (STANDARD_BUILD&FIX_AI_CLAUDE_ATTACK_RANGE=1)
+                cmpi.w  #ENEMY_KRAKEN_HEAD,d1
+              else
                 cmpi.b  #ENEMY_KRAKEN_HEAD,d1
+              endif
                 bne.s   @BasicUnequipRange
                 move.w  #3,d3           ; max range 3
                 move.w  #1,d4           ; min range 1
@@ -167,10 +176,11 @@ ExecuteAiCommand_Attack:
                 bra.w   @FindTarget
 @GetWeaponAttackRange:
                 
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 moveq   #0,d3
                 move.b  ITEMDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  ITEMDEF_OFFSET_MIN_RANGE(a0),d4
+            endif
 @FindTarget:
                 
                 move.l  (sp)+,d0

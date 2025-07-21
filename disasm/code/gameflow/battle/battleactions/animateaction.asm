@@ -65,7 +65,7 @@ battlesceneScript_SwitchTargets:
                 jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   @Done           ; skip if target is dead
-                bscHideTextBox
+                bscCloseDialogueWindow
                 move.w  d6,d1
                 tst.b   targetIsOnSameSide(a2)
                 bne.w   @Continue

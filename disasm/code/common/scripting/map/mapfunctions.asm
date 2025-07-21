@@ -7,6 +7,7 @@
 
 InitializeMapEntities:
                 
+                module
                 movem.l d0-a5,-(sp)
                 bra.w   loc_440E2
 
@@ -41,7 +42,7 @@ loc_440E2:
                 movem.w d1-d3,-(sp)
                 moveq   #1,d0
                 bsr.w   InitializeFollowerEntities
-loc_44104:
+@Start:
                 
                 move.b  (a0)+,d1
                 cmpi.b  #-1,d1
@@ -51,9 +52,21 @@ loc_44104:
                 move.b  (a0)+,d2
                 andi.w  #$3F,d2 
                 muls.w  #MAP_TILE_SIZE,d2
+            if (STANDARD_BUILD=1)
+                ; Get word-sized facing direction value -> d3.w, and mapsprite index -> d4.w
+                move.w  (a0)+,d3        ; EXPANDED_MAPSPRITES
+                move.w  (a0)+,d4
+                
+                move.w  d1,-(sp)
+                move.w  d4,d1
+                jsr     IsSpecialSprite ; Out: CCR carry-bit clear if true
+                movem.w (sp)+,d1        ; MOVEM to pull value back from the stack without affecting the CCR
+            else
                 move.b  (a0)+,d3
                 move.b  (a0)+,d4
+                
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d4
+            endif
                 bcs.s   @RegularSprite
                 
                 ; Declare a new special sprite
@@ -65,16 +78,24 @@ loc_44104:
                 move.w  #ENTITY_ENEMY_START,d6
                 bsr.w   DeclareNewEntity
                 movem.w (sp)+,d0
-                bra.s   loc_44104
+                bra.s   @Start
 @RegularSprite:
                 
+            if (STANDARD_BUILD=1)
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d4 ; EXPANDED_MAPSPRITES
+            else
                 cmpi.b  #COMBATANT_ALLIES_NUMBER,d4
+            endif
                 bcc.s   loc_44170
                 ext.w   d4
                 tst.b   (a1,d4.w)
                 beq.s   loc_4415A
                 move.l  (a0)+,d5
-                bra.w   loc_4417E
+            if (STANDARD_BUILD=1)
+                bra.s   @Start ; optimization
+            else
+                bra.w   @goto_start
+            endif
 loc_4415A:
                 
                 move.b  d0,(a1,d4.w)
@@ -94,9 +115,13 @@ loc_44172:
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
                 addq.w  #1,d0
-loc_4417E:
+@goto_start:
                 
-                bra.s   loc_44104
+            if (STANDARD_BUILD=1)
+                bra.w   @Start ; to accomodate expanded code
+            else
+                bra.s   @Start
+            endif
 loc_44180:
                 
                 movem.w (sp)+,d1-d3
@@ -113,6 +138,7 @@ loc_44180:
 
 ; END OF FUNCTION CHUNK FOR InitializeMapEntities
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -121,9 +147,9 @@ DeclareRaftEntity:
                 
                 module
                 movem.l d0-a1,-(sp)
-                cmpi.b  #PLAYERTYPE_RAFT,((PLAYER_TYPE-$1000000)).w
+                compareToSavedByte #PLAYERTYPE_RAFT, PLAYER_TYPE
                 beq.w   @Done
-                cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
+                compareToSavedByte #PLAYERTYPE_CARAVAN, PLAYER_TYPE
                 beq.w   byte_441F0      ; no followers
                 
                 mulu.w  #MAP_TILE_SIZE,d1
@@ -151,20 +177,24 @@ byte_441F0:
                 beq.w   @Done
                 
                 ; Is raft present on map?
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmp.b   ((RAFT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
+                compareSavedByteTo RAFT_MAP, d0
                 bne.s   @RaftNotOnMap
                 
                 ; Declare raft entity
-                move.b  ((RAFT_X-$1000000)).w,d1
-                move.b  ((RAFT_Y-$1000000)).w,d2
+                getSavedByte RAFT_X, d1
+                getSavedByte RAFT_Y, d2
                 move.w  #ENTITY_RAFT,d0
                 andi.w  #$7F,d1
                 muls.w  #MAP_TILE_SIZE,d1
                 andi.w  #$7F,d2
                 muls.w  #MAP_TILE_SIZE,d2
                 moveq   #LEFT,d3        ; facing
+            if (STANDARD_BUILD=1)
+                move.w  #MAPSPRITE_RAFT,d4 ; EXPANDED_MAPSPRITES
+            else
                 moveq   #MAPSPRITE_RAFT,d4
+            endif
                 move.l  #eas_Standing,d5
                 clr.w   d6
                 lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
@@ -207,7 +237,7 @@ IsOverworldMap:
                 
                 move.b  (a0)+,d0
                 bmi.w   @Break
-                cmp.b   ((CURRENT_MAP-$1000000)).w,d0
+                compareSavedByteTo CURRENT_MAP, d0
                 bne.s   @Next
                 addq.w  #1,d1
 @Next:

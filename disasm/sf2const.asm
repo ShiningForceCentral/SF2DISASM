@@ -1,8 +1,21 @@
 ; SF2CONST.ASM INCLUDED AT START OF SF2.ASM
 
+saveSlotSize   = SAVE_SLOT_SIZE
+savedDataStart = $FFE800
+saveSlotsStart = $2000B1
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+savedDataStart = $2000B1
+saveSlotsStart = savedDataStart+saveSlotSize
+    endif
+
 ; START OF SEGMENT SRAM OFFSETS FROM SRAM:00200000 TO 0:00204000
 byte_200000: equ $200000
 SRAM_START: equ $200001
+
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)
+SRAM_TEST_SPACE: equ $200061
+    endif
+
 SAVED_ERRCODE_BYTE0: equ $200081
 SAVED_ERRCODE_BYTE1: equ $200083
 SAVED_ERRCODE_BYTE2: equ $200085
@@ -11,18 +24,34 @@ SAVED_ERRCODE_BYTE4: equ $200089
 SAVED_ERRCODE_BYTE5: equ $20008B
 SAVED_ERRCODE_BYTE6: equ $20008D
 SAVED_ERRCODE_BYTE7: equ $20008F
-SAVE1_DATA: equ $2000B1
-SRAM_STRING: equ $202011
-SAVE_FLAGS: equ $202035 ; bits 0-1: busy save slots flags
-                                        ; bit 7: game completed
-SAVE1_CHECKSUM: equ $202037
-SAVE2_CHECKSUM: equ $202039
-SAVE2_DATA: equ $20203B
+
+                rsset saveSlotsStart
+SAVE1_DATA:     rs.b SAVE_SLOT_SIZE
+SRAM_STRING:    rs.b SRAM_STRING_LENGTH
+SAVE_FLAGS:     rs.b SAVE_FLAGS_SIZE ; bits 0-1: busy save slots flags, bit 7: game completed
+SAVE1_CHECKSUM: rs.b SAVE_CHECKSUM_SIZE
+SAVE2_CHECKSUM: rs.b SAVE_CHECKSUM_SIZE
+SAVE2_DATA:     rs.b SAVE_SLOT_SIZE
+
+savedDataTotalSize = (__RS-saveSlotsStart)/2
+
+SAVED_DATA_TOTAL_SIZE: equ savedDataTotalSize
+
+    if (SAVED_DATA_TOTAL_SIZE>SRAM_SIZE)
+        inform 3,"Fatal error: Excessive SRAM usage. Current=%d Max=%d",SAVED_DATA_TOTAL_SIZE,SRAM_SIZE
+    endif
+
 ; END OF SEGMENT SRAM OFFSETS FROM SRAM:00200000 TO 0:00204000
 
 ; START OF SEGMENT Z80 OFFSETS FROM Z80:A00000 TO 0:00A0FFFF
 Z80_Memory: equ $A00000
-Z80_CHANNEL_1_NOT_IN_USE: equ $A01383
+
+z80Channel1NotInUse = $A01383
+    if (STANDARD_BUILD=1)
+z80Channel1NotInUse = $A01813
+    endif
+Z80_CHANNEL_1_NOT_IN_USE: equ z80Channel1NotInUse
+
 Z80_SoundDriverFadeInData: equ $A01FFC
 Z80_SoundDriverMusicLevel: equ $A01FFD
 Z80_SoundDriverCommand: equ $A01FFF
@@ -88,6 +117,19 @@ Z80BusReq: equ $A11100 ; D8 ( W)   0: BUSREQ CANCEL
 Z80BusReset: equ $A11200 ; D8 ( W)   0: RESET REQUEST
                                         ;           1: RESET CANCEL
 ; END OF SEGMENT Control OFFSETS FROM Control:A11000 TO 0:00A11FFF
+
+; START OF SEGMENT Mapper
+EXTENDED_SSF_IO_STATUS: equ $A130E4
+EXTENDED_SSF_CTRL0: equ $A130F0
+SEGA_MAPPER_CTRL0: equ $A130F1
+ROM_BANK1: equ $A130F3  ; bank for $080000-$0FFFFF
+ROM_BANK2: equ $A130F5  ; bank for $100000-$17FFFF
+ROM_BANK3: equ $A130F7  ; bank for $180000-$1FFFFF
+ROM_BANK4: equ $A130F9  ; bank for $200000-$27FFFF
+ROM_BANK5: equ $A130FB  ; bank for $280000-$2FFFFF
+ROM_BANK6: equ $A130FD  ; bank for $300000-$37FFFF
+ROM_BANK7: equ $A130FF  ; bank for $380000-$3FFFFF
+; END OF SEGMENT Mapper
 
 ; START OF SEGMENT VDP OFFSETS FROM VDP:00C00000 TO 0:00C00012
 VDP_Data: equ $C00000
@@ -241,23 +283,26 @@ WINDOW_ENTRIES: equ $FFA87E ; 16-byte entries : layout pointer, width, height, X
 FIX_WINDOWS_POSITIONS_TOGGLE: equ $FFA8FE
 UPDATE_WINDOWS_TOGGLE: equ $FFA8FF ; set true to update VDP Plane A during VInt
 MOVING_WINDOWS_BITFIELD: equ $FFA900
+
+; Entity Data
 ENTITY_DATA: equ $FFA902
-ENTITY_Y: equ $FFA904
-ENTITY_X_DEST: equ $FFA90E
-ENTITY_Y_DEST: equ $FFA910
-ENTITY_FACING: equ $FFA912
-ENTITY_MAPSPRITE: equ $FFA915
-ENTITY_ANIMATION_COUNTER: equ $FFA920
-OTHER_ENTITIES_DATA: equ $FFA922 ; Start of entities after first one (Bowie)
-ENTITY_RAFT_DATA: equ $FFACE2
-ENTITY_SPECIAL_SPRITE_DATA: equ $FFAEE2
-ENTITY_SPECIAL_SPRITE_DESTINATION: equ $FFAEEE
-ENTITY_SPECIAL_SPRITE_LAYER: equ $FFAEF3
-ENTITY_CURSOR_DATA: equ $FFAF02
+ENTITY_Y: equ ENTITY_DATA+ENTITYDEF_OFFSET_Y
+ENTITY_X_DEST: equ ENTITY_DATA+ENTITYDEF_OFFSET_XDEST
+ENTITY_Y_DEST: equ ENTITY_DATA+ENTITYDEF_OFFSET_YDEST
+ENTITY_FACING: equ ENTITY_DATA+ENTITYDEF_OFFSET_FACING
+ENTITY_MAPSPRITE: equ ENTITY_DATA+ENTITYDEF_OFFSET_MAPSPRITE
+ENTITY_ANIMATION_COUNTER: equ ENTITY_DATA+ENTITYDEF_OFFSET_ANIMCOUNTER
+OTHER_ENTITIES_DATA: equ ENTITY_DATA+NEXT_ENTITYDEF ; Start of entities after first one (Bowie)
+ENTITY_RAFT_DATA: equ ENTITY_DATA+NEXT_ENTITYDEF*ENTITY_RAFT
+ENTITY_SPECIAL_SPRITE_DATA: equ ENTITY_DATA+NEXT_ENTITYDEF*ENTITY_SPECIAL_SPRITE
+ENTITY_SPECIAL_SPRITE_DESTINATION: equ ENTITY_SPECIAL_SPRITE_DATA+ENTITYDEF_OFFSET_XDEST
+ENTITY_SPECIAL_SPRITE_LAYER: equ ENTITY_SPECIAL_SPRITE_DATA+ENTITYDEF_OFFSET_LAYER
+ENTITY_CURSOR_DATA: equ ENTITY_DATA+NEXT_ENTITYDEF*ENTITY_CURSOR
+
 EXPLORATION_ENTITIES: equ $FFAF22 ; list of controlled entity and followers
 FOLLOWERS_LIST: equ $FFAF23 ; list of entities following player, $FF ends
 byte_FFAF26: equ $FFAF26
-word_FFAF42: equ $FFAF42
+word_FFAF42: equ $FFAF42 ; related to map block copy
 SPRITE_SIZE: equ $FFAF44
 MAP_AREA_LAYER_TYPE: equ $FFAF46 ; 0 = Map on background (Plane B), 1 = Map on foreground (Plane A)
 byte_FFAF47: equ $FFAF47 ; unused 32 byte table for ally combatants
@@ -285,14 +330,16 @@ LEVELUP_ARGUMENTS: equ $FFAF82 ; arguments passed to level up messages :
                                         ;  5: Agility
                                         ;  6: learned spell index
                                         ;  7: learned spell level
-CURRENT_MEMBERSUMMARY_PAGE: equ $FFAF8C ; 0 = member
-                                        ; 1 = items
+CURRENT_MEMBERS_LIST_SUMMARY_PAGE: equ $FFAF8C ; 0 = main
+                                        ; 1 = item
                                         ; 2 = magic
+                                        ; 3+ = equip
 CURSOR_RADIUS: equ $FFAF8E
 BATTLE_ENTITY_CHOSEN_X: equ $FFAF90
 BATTLE_ENTITY_CHOSEN_Y: equ $FFAF91
 IS_TARGETING: equ $FFAF93 ; used to determine whether to create a second mini status window
-word_FFAF9E: equ $FFAF9E
+WINDOW_LAYOUT_SHIFT_DIRECTION: equ $FFAF9E ; members list : 0 = up, 1 = down
+                                        ; shop inventory : 0 = left, 1 = right
 byte_FFAFA0: equ $FFAFA0 ; related to sprites (64 bytes)
 BATTLESCENE_BATTLESPRITE_TOGGLE: equ $FFAFA1 ; $010101010101010101 all 9 parts shown
 BATTLESCENE_WEAPONSPRITE_TOGGLE: equ $FFAFAA ; $01010101 all 4 parts shown
@@ -328,6 +375,11 @@ BATTLE_TARGET_X: equ $FFB094
 MINISTATUS_WINDOW_WIDTH: equ $FFB096
 MOVE_SFX: equ $FFB098
 CURRENT_SAVE_SLOT: equ $FFB09A
+
+    if (STANDARD_BUILD&MEMORY_MAPPER=1)     ; Tested working SRAM control type :
+SRAM_CONTROL: equ $FFB09B                   ;  -1: EverDrive Extended SSF mapper
+    endif                                   ;   0: SEGA mapper
+                                            ;   1: Memory mapping error
 CURRENT_SPEECH_SFX: equ $FFB09C
 SPEECH_SFX_COPY: equ $FFB09E
 CURRENT_PORTRAIT: equ $FFB0A0
@@ -341,13 +393,16 @@ CONFIGURATION_MODE_TOGGLE: equ $FFB0AC
 MAP_AREA_MUSIC_INDEX: equ $FFB0AD
 GENERIC_LIST: equ $FFB0AE ; generic index list space
 GENERIC_LIST_LENGTH: equ $FFB12E ; number of entries in the generic index list
-CURRENT_SHOP_PAGE: equ $FFB130 ; also used for Caravan depot 
+CURRENT_SHOP_PAGE: equ $FFB130 ; also used for Caravan depot
 CURRENT_SHOP_SELECTION: equ $FFB132
 CURRENT_SHOP_PAGE_ITEMS_NUMBER: equ $FFB134
 DISPLAYED_MEMBERS_LIST_FIRST_ENTRY: equ $FFB136 ; first entry in currently displayed portion of member list
 DISPLAYED_MEMBERS_LIST_SELECTED_ENTRY: equ $FFB138 ; selected entry in currently displayed portion of member list
 SELECTED_ITEM_INDEX: equ $FFB13A ; currently selected item index
-byte_FFB13C: equ $FFB13C
+CURRENT_ITEM_SUBMENU_ACTION: equ $FFB13C ; 0 = use
+                                         ; 1 = give
+                                         ; 2 = drop
+                                         ; 3 = equip
 CURRENT_MEMBERS_LIST_PAGE: equ $FFB13D
 WINDOW_IS_PRESENT: equ $FFB13F ; textbox state ? 1 without window, 2 with window
 ENTITY_INDEX_LIST: equ $FFB140 ; 1 byte holding related entity index per entity during exploration (64 bytes)
@@ -355,6 +410,7 @@ ENTITY_INDEX_LIST: equ $FFB140 ; 1 byte holding related entity index per entity 
 ENTITY_INDEX_ALLY_JARO: equ $FFB157
 ENTITY_INDEX_LIST_ENEMIES: equ $FFB160 ; 1 byte holding related entity index per entity during combat (32 bytes) (special sprites are always index 32)
 ENTITY_INDEX_ENEMY_JAR: equ $FFB16F
+ENTITY_EVENT_ENEMIES_END: equ ENTITY_INDEX_LIST_ENEMIES+32
 CHEST_CONTENTS: equ $FFB180 ; item index
 BATTLESCENE_MUSIC_INDEX: equ $FFB188
 MOVING_BATTLE_ENTITY_INDEX: equ $FFB18A
@@ -374,11 +430,12 @@ dword_FFB1A4: equ $FFB1A4
 WARP_SFX: equ $FFB1A8
 CONFIGURATION_MODE_OR_GAME_STAFF_POINTER: equ $FFB1AA
 AI_LAST_TARGET_TABLE: equ $FFB1AC ; Table of most recent target for each enemy
-byte_FFB1DC: equ $FFB1DC
-BATTLE_REGION_FLAGS_TO_BE_TRIGGERED: equ $FFB20C ; Region flags to be triggered at the start of next battle turn
+AI_MEMORY_TABLE: equ $FFB1DC ; related to standby AI movement
+PREVIOUSLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating regions triggered at the start of previous battle rounds
+                                        ; causes issues with region triggers in the vanilla build
 
-; battlescene block; cleared when scene intializes
-BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 ; start of battlescene data
+; Battlescene Data -- cleared when scene initializes
+BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0
 word_FFB3C4: equ $FFB3C4
 BATTLESCENE_BATTLESPRITE_MODIFICATION_POINTER: equ $FFB3C6
 word_FFB3CA: equ $FFB3CA
@@ -443,10 +500,10 @@ WEAPON_IDLE_FRAME1_X: equ $FFB576
 WEAPON_IDLE_FRAME1_Y: equ $FFB577
 WEAPON_IDLE_FRAME2_X: equ $FFB578
 WEAPON_IDLE_FRAME2_Y: equ $FFB579
-ALLY_BATTLESPRITE_STATUS_OFFSET_X: equ $FFB57A ; ally battlesprite second word, first byte
-ALLY_BATTLESPRITE_STATUS_OFFSET_Y: equ $FFB57B ; ally battlesprite second word, first byte
-ENEMY_BATTLESPRITE_STATUS_OFFSET_X: equ $FFB57C ; enemy battlesprite second word
-ENEMY_BATTLESPRITE_STATUS_OFFSET_Y: equ $FFB57D ; enemy battlesprite second word, first byte
+ALLY_BATTLESPRITE_STATUS_OFFSET_X: equ $FFB57A ; ally battlesprite second word, upper byte
+ALLY_BATTLESPRITE_STATUS_OFFSET_Y: equ $FFB57B ; ally battlesprite second word, lower byte
+ENEMY_BATTLESPRITE_STATUS_OFFSET_X: equ $FFB57C ; enemy battlesprite second word, upper byte
+ENEMY_BATTLESPRITE_STATUS_OFFSET_Y: equ $FFB57D ; enemy battlesprite second word, lower byte
 BATTLESCENE_ALLY_STATUS_ANIMATION: equ $FFB57E ; status effect sprite displayed in battlescene for ally :
                                         ;     0 = none
                                         ;     1 = silence
@@ -470,7 +527,7 @@ CURRENT_SPELLANIMATION: equ $FFB587
 byte_FFB588: equ $FFB588
 BATTLESCENE_ACTOR_SWITCH_STATE: equ $FFB589 ; battlescene actor switching state: 1 = waiting, 2 = currently switching, 3 = done
 DEAD_COMBATANTS_LIST: equ $FFB58A
-byte_FFB59A: equ $FFB59A ; end of battlescene data
+BATTLESCENE_DATA_END: equ $FFB59A ; end of battlescene data
 
 BATTLESCENE_GOLD: equ $FFB62A
 BATTLESCENE_EXP: equ $FFB62C
@@ -491,9 +548,9 @@ BATTLESCENE_FIRST_ALLY: equ $FFB64A
 BATTLESCENE_LAST_ALLY: equ $FFB64B
 BATTLESCENE_FIRST_ENEMY: equ $FFB64C
 BATTLESCENE_LAST_ENEMY: equ $FFB64D
-BATTLESCENE_ATTACKER: equ $FFB64E
-BATTLESCENE_ATTACKER_COPY: equ $FFB64F
-EVENT_RELATIVE_POSITION: equ $FFB651 ; are you vertically/horizontally aligned with entity when speaking
+BATTLESCENE_ACTOR: equ $FFB64E
+BATTLESCENE_ACTOR_COPY: equ $FFB64F
+EVENT_RELATIVE_POSITION: equ $FFB651 ; indicates whether the player character is vertically or horizontally aligned with entity when speaking
 TARGETS_LIST: equ $FFB652 ; - indexes of currently available targets in battle
                                         ; - chosen targets during battlescene
                                         ; - character indexes that can equip an item when asking about it in the caravan
@@ -502,6 +559,9 @@ OTHER_FORCE_MEMBERS_LIST: equ $FFB653 ; units that can be passed an item from ch
 BATTLE_PARTY_MEMBERS: equ $FFB682 ; indexes of party members currently in battle party
 RESERVE_MEMBERS: equ $FFB68E ; indexes of party members currently not in battle party
 ENEMY_LIST: equ $FFB6A2 ; unused
+    if (STANDARD_BUILD=1)
+DEBUG_MODE_CURRENT_MESSAGE: equ $FFB6C0
+    endif
 MOVECOSTS_TABLE: equ $FFB6C2 ; table of 16 move cost values for currently moving battle entity, corresponding to terrain types
 CURRENT_SHOP_INDEX: equ $FFB6D2
 DIALOGUE_TYPEWRITING_CURRENT_X: equ $FFB6D4
@@ -525,11 +585,11 @@ byte_FFB852: equ $FFB852
 PLANE_A_MAP_LAYOUT: equ $FFC000 ; Plane A layout
 byte_FFC180: equ $FFC180
 byte_FFC1B8: equ $FFC1B8
-byte_FFC286: equ $FFC286
-byte_FFC350: equ $FFC350
+REGION_CHECK_STRING_1: equ $FFC286
+REGION_CHECK_STRING_2: equ $FFC350
 byte_FFC358: equ $FFC358
 byte_FFC398: equ $FFC398
-byte_FFC41A: equ $FFC41A
+REGION_CHECK_STRING_3: equ $FFC41A
 PRESS_START_BUTTON_LAYOUT: equ $FFC480 ; "PRESS START BUTTON" string displayed on the title screen
 PLANE_A_MAP_AND_WINDOWS_LAYOUT: equ $FFC800
 byte_FFCC86: equ $FFCC86
@@ -576,6 +636,7 @@ SPRITE_BATTLE_CURSOR: equ $FFDCC0 ; 08-15: battle cursor
                                         ; 08-12: name highlight
 SPRITE_NAME_HIGHLIGHT_LINK: equ $FFDCCB ; last name highlight sprite +3
 SPRITE_BATTLESCENE_WEAPON: equ $FFDCD0 ; 10-13: battlescene weapon
+SPRITE_NAME_HIGHLIGHT_LINK_NEW: equ $FFDCD3 ; last name highlight sprite link if EIGHT_CHARACTERS_MEMBER_NAMES=1
 SPRITE_BATTLESCENE_GROUND: equ $FFDCF0 ; 14-16: battlescene ground
 SPRITE_BATTLESCENE_GROUND_VDPTILE: equ $FFDCF4 ; 14
 SPRITE_BATTLESCENE_GROUND_X: equ $FFDCF6 ; 14
@@ -642,7 +703,7 @@ PALETTE_1_COPY: equ $FFDF2A
 PALETTE_2_COPY: equ $FFDF4A
 FADING_TIMER_WORD: equ $FFDFAA
 FADING_TIMER_BYTE: equ $FFDFAB
-RANDOM_WAITING_FOR_INPUT: equ $FFDFB0 ; "random" value for determining AI/hit chance??
+RANDOM_SEED_COPY: equ $FFDFB0 ; Copy of RANDOM_SEED reserved exclusively for the AI. Updated during text symbol parsing and diamond menu execution.
 PLANE_B_LAYOUT: equ $FFE000
 byte_FFE0DC: equ $FFE0DC
 PLANE_B_WITCH_HEAD: equ $FFE15C
@@ -651,38 +712,51 @@ byte_FFE19C: equ $FFE19C
 byte_FFE21E: equ $FFE21E
 byte_FFE29E: equ $FFE29E
 byte_FFE31C: equ $FFE31C
-COMBATANT_ENTRIES: equ $FFE800 ; Start of Saved Data
-CURRENT_GOLD: equ $FFF600
-DEALS_ITEMS: equ $FFF604 ; amount of each item in the deals section (stacked 2 items to a byte, 4 bits per item, max 0xF amt of each item)
-CARAVAN_ITEMS_NUMBER: equ $FFF644 ; number of items in caravan
-CARAVAN_ITEMS: equ $FFF646 ; indexes of items in caravan (1 byte each, $7F for no item, 64 items)
-GAME_FLAGS: equ $FFF686
-BATTLE_AREA_X: equ $FFF706 ; camera lock x1
-BATTLE_AREA_Y: equ $FFF707
-BATTLE_AREA_WIDTH: equ $FFF708 ; camera lock x2
-BATTLE_AREA_HEIGHT: equ $FFF709
-PLAYER_TYPE: equ $FFF710 ; holds which player entity type we are (00=BOWIE, 01=caravan, 02=raft)
-CURRENT_MAP: equ $FFF711 ; holds which map index we're currently using
-CURRENT_BATTLE: equ $FFF712 ; holds which battle we're currently doing
-RAFT_MAP: equ $FFF713
-RAFT_X: equ $FFF714
-RAFT_Y: equ $FFF715
-MESSAGE_SPEED: equ $FFF717 ; [0, 3]
-NO_BATTLE_MESSAGES_TOGGLE: equ $FFF718 ; 1 = no battle messages
-EGRESS_MAP: equ $FFF719 ; holds which map index to teleport back to after we EGRESS or lose
-BATTLE_TURN_ORDER: equ $FFF71A ; current turn order 2 byte pairs (index, altered agility score)
-CURRENT_BATTLE_TURN: equ $FFF79A ; current turn index * 2 (i.e., current byte of BATTLE_TURN_ORDER)
-SAVED_SECONDS_COUNTER: equ $FFF79C
-SPECIAL_BATTLE_RECORD: equ $FFF7A0
-ENEMY_ITEM_DROPPED_FLAGS: equ $FFF7A4
-MITHRIL_WEAPONS_ON_ORDER: equ $FFF7A8 ; current mithril weapon index (may be after too, for multiple)
-ERRCODE_BYTE0: equ $FFFFF8
-ERRCODE_BYTE1: equ $FFFFF9
-ERRCODE_BYTE2: equ $FFFFFA
-ERRCODE_BYTE3: equ $FFFFFB
-ERRCODE_BYTE4: equ $FFFFFC
-ERRCODE_BYTE5: equ $FFFFFD
-ERRCODE_BYTE6: equ $FFFFFE
-ERRCODE_BYTE7: equ $FFFFFF
+
+; Start of Saved Data
+COMBATANT_DATA:             equ savedDataStart+SAVED_DATA_OFFSET_COMBATANT_DATA
+    if (STANDARD_BUILD&EXPANDED_SAVED_DATA=1)
+PROMOTED_AT_LEVELS:         equ savedDataStart+SAVED_DATA_OFFSET_PROMOTED_AT_LEVELS
+    endif
+CURRENT_GOLD:               equ savedDataStart+SAVED_DATA_OFFSET_CURRENT_GOLD
+DEALS_ITEMS:                equ savedDataStart+SAVED_DATA_OFFSET_DEALS_ITEMS ; amount of each item in the deals section (stacked 2 items to a byte, 4 bits per item, max 0xF amt of each item)
+CARAVAN_ITEMS_NUMBER:       equ savedDataStart+SAVED_DATA_OFFSET_CARAVAN_ITEMS_NUMBER ; number of items in caravan
+CARAVAN_ITEMS:              equ savedDataStart+SAVED_DATA_OFFSET_CARAVAN_ITEMS ; indexes of items in caravan (1 byte each, $7F for no item, 64 items)
+GAME_FLAGS:                 equ savedDataStart+SAVED_DATA_OFFSET_GAME_FLAGS
+BATTLE_AREA_X:              equ savedDataStart+SAVED_DATA_OFFSET_BATTLE_AREA_X ; camera lock x1
+BATTLE_AREA_Y:              equ savedDataStart+SAVED_DATA_OFFSET_BATTLE_AREA_Y
+BATTLE_AREA_WIDTH:          equ savedDataStart+SAVED_DATA_OFFSET_BATTLE_AREA_WIDTH ; camera lock x2
+BATTLE_AREA_HEIGHT:         equ savedDataStart+SAVED_DATA_OFFSET_BATTLE_AREA_HEIGHT
+PLAYER_TYPE:                equ savedDataStart+SAVED_DATA_OFFSET_PLAYER_TYPE ; holds which player entity type we are (00=BOWIE, 01=caravan, 02=raft)
+CURRENT_MAP:                equ savedDataStart+SAVED_DATA_OFFSET_CURRENT_MAP ; holds which map index we're currently using
+CURRENT_BATTLE:             equ savedDataStart+SAVED_DATA_OFFSET_CURRENT_BATTLE ; holds which battle we're currently doing
+RAFT_MAP:                   equ savedDataStart+SAVED_DATA_OFFSET_RAFT_MAP
+RAFT_X:                     equ savedDataStart+SAVED_DATA_OFFSET_RAFT_X
+RAFT_Y:                     equ savedDataStart+SAVED_DATA_OFFSET_RAFT_Y
+MESSAGE_SPEED:              equ savedDataStart+SAVED_DATA_OFFSET_MESSAGE_SPEED ; [0, 3]
+NO_BATTLE_MESSAGES_TOGGLE:  equ savedDataStart+SAVED_DATA_OFFSET_NO_BATTLE_MESSAGES_TOGGLE ; 1 = no battle messages
+EGRESS_MAP:                 equ savedDataStart+SAVED_DATA_OFFSET_EGRESS_MAP ; holds which map index to teleport back to after we EGRESS or lose
+BATTLE_TURN_ORDER:          equ savedDataStart+SAVED_DATA_OFFSET_BATTLE_TURN_ORDER ; current turn order 2 byte pairs (index, altered agility score)
+CURRENT_BATTLE_TURN:        equ savedDataStart+SAVED_DATA_OFFSET_CURRENT_BATTLE_TURN ; current turn index * 2  current turn index * 2 (i.e., current byte of BATTLE_TURN_ORDER)
+SAVED_SECONDS_COUNTER:      equ savedDataStart+SAVED_DATA_OFFSET_SAVED_SECONDS_COUNTER
+SPECIAL_BATTLE_RECORD:      equ savedDataStart+SAVED_DATA_OFFSET_SPECIAL_BATTLE_RECORD
+ENEMY_ITEM_DROPPED_FLAGS:   equ savedDataStart+SAVED_DATA_OFFSET_ENEMY_ITEM_DROPPED_FLAGS
+MITHRIL_WEAPONS_ON_ORDER:   equ savedDataStart+SAVED_DATA_OFFSET_MITHRIL_WEAPONS_ON_ORDER ; current mithril weapon index (may be after too, for multiple)
+
+nameLoadingSpace = $FFF7B0
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+nameLoadingSpace = $FFE800
+    endif
+
+ALLY_NAME_LOADING_SPACE: equ nameLoadingSpace ; loading space used in the standard build
+
+ERRCODE_BYTE0: equ $FFFFF8 
+ERRCODE_BYTE1: equ $FFFFF9 
+ERRCODE_BYTE2: equ $FFFFFA 
+ERRCODE_BYTE3: equ $FFFFFB 
+ERRCODE_BYTE4: equ $FFFFFC 
+ERRCODE_BYTE5: equ $FFFFFD 
+ERRCODE_BYTE6: equ $FFFFFE 
+ERRCODE_BYTE7: equ $FFFFFF 
 ; END OF SEGMENT RAM OFFSETS FROM RAM:FF0000 TO 0:01000000
 

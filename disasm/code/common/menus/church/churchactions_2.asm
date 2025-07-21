@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\church\churchactions_2.asm :
+; ASM FILE code\common\menus\church\ChurchMenu_2.asm :
 ; 0x21072..0x2127E : Church functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -40,7 +40,7 @@ CountPromotableMembers:
                 bsr.w   GetPromotionData
                 cmpi.w  #0,cannotPromoteFlag(a6)
                 bne.w   @Next
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 cmpi.w  #CHURCHMENU_MIN_PROMOTABLE_LEVEL,d1
                 bcs.w   @Next
                 addi.w  #1,promotableMembersCount(a6)
@@ -138,6 +138,7 @@ FindPromotionSection:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: a6 = church actions stack
+;     d1.w = replacement spell entry (if STANDARD_BUILD is enabled)
 
 cannotPromoteFlag = -36
 promotionSectionLength = -34
@@ -164,13 +165,17 @@ ReplaceSpellsWithSorcDefaults:
                 move.w  #COMBATANT_SPELLSLOTS_COUNTER,d7
 @Loop:
                 
-                move.b  #SPELL_NOTHING,(a0)+
+                setSavedByteWithPostIncrement #SPELL_NOTHING, a0
                 dbf     d7,@Loop
                 
+            if (STANDARD_BUILD=1)
+                jmp     LearnSpell
+            else
                 move.w  member(a6),d0
                 move.w  #SPELL_DAO,d1
                 jsr     j_LearnSpell
                 rts
+            endif
 
     ; End of function ReplaceSpellsWithSorcDefaults
 
@@ -237,15 +242,36 @@ Church_CureStun:
                 movem.l a0,-(sp)
                 move.w  d0,member(a6)
                 jsr     j_GetCombatantEntryAddress
+            if (STANDARD_BUILD=1)
+                getSavedWord a0, d2, COMBATANT_OFFSET_STATUSEFFECTS
+            else
                 lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2
+            endif
                 move.w  d2,d3
                 andi.w  #STATUSEFFECT_STUN,d3
                 beq.w   @Next
                 addi.w  #1,stunnedMembersCount(a6)
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     132             ; "Gosh!  {NAME} is{N}paralyzed.{W2}"
+                
+            if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+                jsr     GetLevel
+                mulu.w  #CHURCHMENU_PER_LEVEL_CURE_STUN_COST,d1
+                move.l  d1,actionCost(a6)
+                jsr     GetClass
+                move.w  #0,d2
+                bsr.w   GetPromotionData
+                tst.w   cannotPromoteFlag(a6)
+                beq.s   @CureParalysis_Unpromoted
+                
+                move.l  actionCost(a6),d1
+                addi.l  #CHURCHMENU_CURE_STUN_COST_EXTRA_WHEN_PROMOTED,d1
+                add.l   d1,actionCost(a6)
+@CureParalysis_Unpromoted:
+            else
                 move.l  #CHURCHMENU_CURE_STUN_COST,actionCost(a6)
+            endif
                 move.l  actionCost(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
                 jsr     j_OpenGoldWindow

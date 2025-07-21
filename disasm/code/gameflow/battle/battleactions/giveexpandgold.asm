@@ -38,7 +38,7 @@ battlesceneScript_GiveExpAndGold:
                 bne.w   @RandomizeExp1
                 
                 ; Should EXP be halved?
-                move.b  ((CURRENT_BATTLE-$1000000)).w,d0
+                getSavedByte CURRENT_BATTLE, d0
                 lea     table_HalvedExpEarnedBattles(pc), a0
 @FindBattle_Loop:
                 

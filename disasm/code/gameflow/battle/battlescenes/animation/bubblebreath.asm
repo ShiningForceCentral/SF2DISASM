@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\bubblebreath.asm :
-; 0x1B488..0x1B4F6 : Battlescene engine
+; 0x1B488..0x1B4F6 : 
 
 ; =============== S U B R O U T I N E =======================================
 

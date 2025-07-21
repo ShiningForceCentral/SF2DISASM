@@ -19,15 +19,15 @@ UpdatePlayerInputs:
                 nop
                 nop
                 move.b  (a6),d6
-                move.b  #$40,(a6) 
+                move.b  #$40,(a6)
                 lsl.b   #2,d6
                 andi.b  #$C0,d6
                 move.b  (a6),d7
                 move.b  #0,(a6)
-                andi.b  #$3F,d7 
+                andi.b  #$3F,d7
                 or.b    d7,d6
                 move.b  (a6),d7
-                move.b  #$40,(a6) 
+                move.b  #$40,(a6)
                 not.b   d6
                 move.b  d6,(a5)+        ; state A
                 move.b  (a6),d7
@@ -35,15 +35,15 @@ UpdatePlayerInputs:
                 nop
                 nop
                 move.b  (a6),d6
-                move.b  #$40,(a6) 
+                move.b  #$40,(a6)
                 lsl.b   #2,d6
                 andi.b  #$C0,d6
                 move.b  (a6),d7
                 move.b  #0,(a6)
-                andi.b  #$3F,d7 
+                andi.b  #$3F,d7
                 or.b    d7,d6
                 move.b  (a6),d7
-                move.b  #$40,(a6) 
+                move.b  #$40,(a6)
                 not.b   d6
                 move.b  d6,(a5)+        ; state B
                 move.b  (a6),d7
@@ -66,6 +66,8 @@ WaitForPlayerInput:
                 rts
 
     ; End of function WaitForPlayerInput
+
+
 
 
 ; =============== S U B R O U T I N E =======================================

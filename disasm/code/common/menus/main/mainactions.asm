@@ -45,8 +45,8 @@ FieldMenu:
                 clsTxt
 @StartMember:
                 
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMembersListScreen
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   @ExitMember
                 
@@ -64,8 +64,8 @@ FieldMenu:
                 
                 ; MAGIC action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_BuildMembersListScreen_MagicPage
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMagicSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   @ExitMagic
                 
@@ -101,19 +101,19 @@ byte_21348:
                 
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
+                cmpi.w  #MAP_OVERWORLD_GRANSEAL_KINGDOM,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.s   byte_21348      
-                cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
+                cmpi.w  #MAP_OVERWORLD_PACALON_KINGDOM,d0
                 bgt.s   byte_21348      ; nothing happens if not an overworld map
 @Egress:
                 
                 move.b  spellEntry(a6),d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMp
                 jsr     j_ExecuteFlashScreenScript
-                move.b  ((EGRESS_MAP-$1000000)).w,d0
+                getSavedByte EGRESS_MAP, d0
                 jsr     (GetSavepointForMap).w
                 lea     ((MAP_EVENT_TYPE-$1000000)).w,a0
                 move.w  #1,(a0)+
@@ -122,7 +122,7 @@ byte_21348:
                 move.b  d1,(a0)+
                 move.b  d2,(a0)+
                 move.b  d3,(a0)+
-                clr.b   ((PLAYER_TYPE-$1000000)).w
+                clearSavedByte PLAYER_TYPE
                 bra.w   @ExitMain
 byte_213A8:
                 
@@ -130,9 +130,9 @@ byte_213A8:
                 ; Cast Detox
                 txt     108             ; "Use magic on whom?{D1}"
                 clsTxt
-                move.b  #0,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,targetMember(a6)
                 cmpi.w  #-1,d0
                 beq.w   @StartMagic
@@ -142,7 +142,7 @@ byte_213A8:
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 clsTxt
                 move.b  spellEntry(a6),d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMp
@@ -182,7 +182,7 @@ byte_21468:
                 
                 clsTxt
                 jsr     j_SetStatusEffects
-                jsr     j_ApplyStatusEffectsAndItemsOnStats
+                jsr     j_UpdateCombatantStats
 @ExitMagic:
                 
                 bra.w   @Goto_StartMain
@@ -210,9 +210,9 @@ byte_21468:
                 
                 ; ITEM > USE action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -226,9 +226,9 @@ byte_21468:
                 ; Currently on overworld map?
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
-                cmpi.w  #MAP_OVERWORLD_GRANS_GRANSEAL,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
+                cmpi.w  #MAP_OVERWORLD_GRANSEAL_KINGDOM,d0 ; HARDCODED map indexes from 66 to 78 : overworld maps
                 blt.w   @HandleNonAngelWingItems
-                cmpi.w  #MAP_OVERWORLD_PACALON_2,d0
+                cmpi.w  #MAP_OVERWORLD_PACALON_KINGDOM,d0
                 bgt.w   @HandleNonAngelWingItems
                 
                 ; Use Angel Wing
@@ -244,7 +244,7 @@ byte_21468:
                 move.w  itemIndex(a6),d1
                 jsr     IsItemUsableOnField
                 tst.w   d2
-                beq.w   @PickTarget     
+                beq.w   @PickTarget
                 
                 ; Check map events
                 bsr.w   GetPlayerEntityPosition ; Get first entity's X, Y and facing -> d1.l, d2.l, d3.w
@@ -267,8 +267,8 @@ byte_21468:
                 move.w  itemIndex(a6),d1 ; superfluous intructions
                 move.w  #50,d1
                 clsTxt
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMembersListScreen
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   @StartItemUse
                 
@@ -293,9 +293,9 @@ byte_2158E:
                 
                 ; ITEM > GIVE action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 bne.w   @IsGivingWeapon
                 bra.w   byte_2184E      ; Close textbox and restart item submenu
@@ -352,9 +352,9 @@ byte_2158E:
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     54              ; "Pass the {ITEM}{N}to whom?{D1}"
                 clsTxt
-                move.b  #2,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_DROP,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 bne.w   @GiveItem
                 bra.w   @StartItemGive
@@ -510,9 +510,9 @@ byte_2184E:
                 
                 ; ITEM > EQUIP action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #3,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_EQUIP,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   @Goto_ExitItemEquip
                 bra.w   @ExitItemEquip
@@ -531,9 +531,9 @@ byte_2184E:
                 
                 ; ITEM > DROP action
                 bsr.w   PopulateGenericListWithCurrentForceMembers
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 bne.w   @IsItemUnsellable
                 bra.w   byte_219D0      ; Close textbox and restart item submenu
@@ -543,7 +543,7 @@ byte_2184E:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 move.b  itemTypeBitfield(a6),d1
                 andi.b  #ITEMTYPE_UNSELLABLE,d1
@@ -653,10 +653,10 @@ PopulateGenericListWithCurrentForceMembers:
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,((GENERIC_LIST_LENGTH-$1000000)).w
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
-@Loop:
+@Copy_Loop:
                 
                 move.b  (a0)+,(a1)+
-                dbf     d7,@Loop
+                dbf     d7,@Copy_Loop
                 
                 movem.l (sp)+,d7-a1
                 rts

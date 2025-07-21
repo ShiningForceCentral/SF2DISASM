@@ -26,7 +26,7 @@ loc_25B02:
                 beq.s   loc_25B40       
                 btst    #INPUT_BIT_B,((PLAYER_2_INPUT-$1000000)).w ; If Debug Mode and P1 C pushed while P2 B pushed, access Debug Flag Setter and then Chuch Actions
                 beq.s   loc_25B22
-                move.w  #$258,d0
+                move.w  #600,d0
                 jsr     j_DebugSetFlag
                 jsr     j_ChurchMenu
                 rts
@@ -42,7 +42,11 @@ loc_25B22:
 loc_25B40:
                 
                 lea     ((ENTITY_DATA-$1000000)).w,a0 ; Not in debug mode
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                cmpi.w  #MAPSPRITE_CARAVAN,ENTITYDEF_SECOND_ENTITY_MAPSPRITE(a0)
+            else
                 cmpi.b  #MAPSPRITE_CARAVAN,ENTITYDEF_SECOND_ENTITY_MAPSPRITE(a0)
+            endif
                 bne.s   loc_25BAA
                 move.w  ENTITYDEF_OFFSET_XDEST(a0),d0
                 sub.w   ENTITYDEF_SECOND_ENTITY_XDEST(a0),d0
@@ -83,7 +87,7 @@ loc_25BAA:
                 bsr.w   GetActivatedEntity
                 tst.w   d0
                 blt.s   loc_25BC0       
-                bsr.w   GetEntityEventIndex
+                bsr.w   InitializeNewEnemyEntityIndex
                 jsr     j_RunMapSetupEntityEvent
                 bra.w   return_25BF2
 loc_25BC0:

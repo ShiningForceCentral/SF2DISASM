@@ -59,13 +59,13 @@ byte_200CE:
                 txt     162             ; "What do you want to buy?"
                 jsr     PopulateShopInventoryList(pc)
                 nop
-                jsr     j_BuildShopInventoryScreen
+                jsr     j_ExecuteShopScreen
                 cmpi.w  #-1,d0
                 beq.w   byte_207CC
                 
                 move.w  d0,selectedItem(a6)
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.w  selectedItem(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 clr.l   ((DIALOGUE_NUMBER-$1000000)).w
@@ -105,8 +105,8 @@ loc_2015E:
                 dbf     d7,loc_2015E
                 clsTxt
                 move.w  selectedItem(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_20118      
                 move.w  d0,member(a6)
@@ -228,9 +228,9 @@ loc_202F4:
                 move.b  (a0)+,(a1)+
                 dbf     d7,loc_202F4
                 clsTxt
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   byte_207CC
                 clr.w   rareItemFlag(a6)
@@ -238,7 +238,7 @@ loc_202F4:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,selectedItem(a6)
                 move.w  selectedItem(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 clr.l   d0
@@ -343,16 +343,16 @@ loc_2046C:
                 move.b  (a0)+,(a1)+
                 dbf     d7,loc_2046C
                 clsTxt
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.w   byte_207CC
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,selectedItem(a6)
                 move.w  selectedItem(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.w  itemPrice(a6),d0
                 lsr.w   #2,d0           ; repair is 25% item price
@@ -361,8 +361,13 @@ loc_2046C:
                 jsr     j_GetCombatantEntryAddress
                 move.w  itemSlot(a6),d1
                 add.w   d1,d1
+            if (STANDARD_BUILD=1)
+                addToSavedBytePointer d1, a0
+                getSavedWord a0, d2, COMBATANT_OFFSET_ITEMS
+            else
                 lea     COMBATANT_OFFSET_ITEMS(a0,d1.w),a0
                 move.w  (a0),d2
+            endif
                 btst    #ITEMENTRY_BIT_BROKEN,d2
                 bne.w   loc_204DC
                 txt     188             ; "It's not damaged.{W2}"
@@ -444,13 +449,13 @@ byte_205AC:
 byte_205C8:
                 
                 txt     171             ; "You must be surprised!{D1}{N}What would you like?"
-                jsr     j_BuildShopInventoryScreen
+                jsr     j_ExecuteShopScreen
                 cmpi.w  #-1,d0
                 beq.w   byte_207CC
                 
                 move.w  d0,selectedItem(a6)
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.w  selectedItem(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 clr.l   ((DIALOGUE_NUMBER-$1000000)).w
@@ -489,8 +494,8 @@ loc_20652:
                 dbf     d7,loc_20652
                 clsTxt
                 move.w  selectedItem(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_2060C      
                 move.w  d0,member(a6)
@@ -651,7 +656,11 @@ DetermineDealsItemsNotInCurrentShop:
                 lea     ((GENERIC_LIST-$1000000)).w,a0
                 clr.w   ((GENERIC_LIST_LENGTH-$1000000)).w
                 clr.w   d1
+            if (DEALS_ITEMS_COUNTER>127)
+                move.w  #DEALS_ITEMS_COUNTER,d7
+            else
                 moveq   #DEALS_ITEMS_COUNTER,d7
+            endif
 @Loop:
                 
                 jsr     j_GetDealsItemAmount

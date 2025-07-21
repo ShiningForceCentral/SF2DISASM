@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\detox.asm :
-; 0x1AA40..0x1AA90 : Battlescene engine
+; 0x1AA40..0x1AA90 : 
 
 ; =============== S U B R O U T I N E =======================================
 

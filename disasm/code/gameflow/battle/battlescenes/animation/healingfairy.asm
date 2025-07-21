@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\healingfairy.asm :
-; 0x1A848..0x1A928 : Battlescene engine
+; 0x1A848..0x1A928 : 
 
 ; =============== S U B R O U T I N E =======================================
 

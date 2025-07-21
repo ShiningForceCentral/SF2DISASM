@@ -301,4 +301,3 @@ list_ShopInventories:
                               ANTIDOTE, &
                               FAIRY_POWDER, &
                               ANGEL_WING
-                

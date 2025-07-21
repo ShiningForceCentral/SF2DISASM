@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\debuff.asm :
-; 0x1ABF4..0x1ACD8 : Battlescene engine
+; 0x1ABF4..0x1ACD8 : 
 
 ; =============== S U B R O U T I N E =======================================
 

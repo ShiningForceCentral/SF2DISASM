@@ -18,7 +18,7 @@ cs_4934A:       entityFlashWhite ALLY_BOWIE,180
                 showPortrait $0,ALLY_BOWIE
                 setQuake $8002
                 setQuake $4002
-                loadMapFadeIn MAP_OUTSIDE_MITULA,13,13
+                loadMapFadeIn MAP_MITULA_SHRINE_EXTERIOR,13,13
                 flashScreenWhite 60
                 csc_end
                 flashScreenWhite 60

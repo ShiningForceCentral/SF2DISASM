@@ -1,26 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlefunctions\battlefunctions_0.asm :
-; 0x22C60..0x2379A : Battle functions
-
-; =============== S U B R O U T I N E =======================================
-
-; Get first entity's X, Y and facing -> d1.l, d2.l, d3.w
-
-
-GetPlayerEntityPosition:
-                
-                move.w  (ENTITY_DATA).l,d1
-                move.w  (ENTITY_Y).l,d2
-                move.b  (ENTITY_FACING).l,d3
-                ext.l   d1
-                divu.w  #MAP_TILE_SIZE,d1
-                ext.l   d2
-                divu.w  #MAP_TILE_SIZE,d2
-                andi.w  #DIRECTION_MASK,d3
-                rts
-
-    ; End of function GetPlayerEntityPosition
-
+; 0x22C84..0x2379A : Battle functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -350,7 +330,7 @@ GetEntityIndexForCombatant:
 ; Out: D0 = entity event index
 
 
-GetEntityEventIndex:
+InitializeNewEnemyEntityIndex:
                 
                 movem.l d1/d7-a0,-(sp)
                 moveq   #BATTLE_ALL_ENTITIES_NUMBER,d7
@@ -375,13 +355,13 @@ GetEntityEventIndex:
                 movem.l (sp)+,d1/d7-a0
                 rts
 
-    ; End of function GetEntityEventIndex
+    ; End of function InitializeNewEnemyEntityIndex
 
 table_22F76:    dc.w MAP_TILE_PLUS
                 dc.w 0
                 dc.w 0
-                dc.w MAP_TILE_MINUS
-                dc.w MAP_TILE_MINUS
+                dc.w $FE80
+                dc.w $FE80
                 dc.w 0
                 dc.w 0
                 dc.w MAP_TILE_PLUS
@@ -424,7 +404,7 @@ loc_22FE8:
                 cmpi.b  #-1,d0
                 beq.w   loc_2308E
                 
-                andi.w  #3,d0
+                andi.w  #DIRECTION_MASK,d0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 move.l  a0,-(sp)
                 lea     table_22F76(pc), a0
@@ -467,8 +447,13 @@ loc_23044:
                 move.b  -1(a0),d0
                 cmp.b   -2(a0),d0
                 beq.s   loc_2306A
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a1)
+                move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a1)
+            else
                 move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a1)
                 move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a1)
+            endif
                 ori.b   #3,ENTITYDEF_OFFSET_FLAGS_A(a1)
 loc_2306A:
                 
@@ -915,8 +900,13 @@ loc_23448:
                 
                 move.w  d0,ENTITYDEF_OFFSET_XTRAVEL(a0)
                 move.w  d1,ENTITYDEF_OFFSET_YTRAVEL(a0)
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
+                move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a0)
+            else
                 move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a0)
                 move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a0)
+            endif
                 rts
 
     ; End of function sub_23414
@@ -931,7 +921,7 @@ SetEntityBlinkingFlag:
                 bsr.w   GetEntityIndexForCombatant
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                bset    #7,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
+                bset    #ENTITYDEF_FLAGS_B_BLINKING,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
                 movem.l (sp)+,d0/a0
                 rts
 
@@ -947,7 +937,7 @@ ClearEntityBlinkingFlag:
                 bsr.w   GetEntityIndexForCombatant
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
-                bclr    #7,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
+                bclr    #ENTITYDEF_FLAGS_B_BLINKING,ENTITYDEF_OFFSET_FLAGS_B(a0,d0.w)
                 movem.l (sp)+,d0/a0
                 rts
 
@@ -1003,16 +993,35 @@ UpdateBattleEntityMapsprite:
                 addq.w  #2,d6
 @Continue:
                 
+            if (STANDARD_BUILD=1)
+              if (EXPANDED_MAPSPRITES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+              else
+                clr.w   d1
+                move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+              endif
+                bsr.w   IsSpecialSprite ; Out: CCR carry-bit clear if true
+                bcc.s   @Done
+                
+                clr.w   d1 ; clear register lower word before moving a byte from memory as good practice
+            else
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
                 cmpi.b  #MAPSPRITES_SPECIALS_START,d1
-                bcc.s   @Done
+                bhs.s   @Done
+            endif
                 move.b  ENTITYDEF_OFFSET_ENTNUM(a1),d1
                 cmpi.b  #32,d1
                 beq.s   @Done
+                
                 move.w  d1,-(sp)        ; push entnum
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+            else
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a1),d1
+            endif
+                
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1
@@ -1096,7 +1105,8 @@ loc_23572:
 
     ; End of function UpdateCursorSprites
 
-sprite_Cursor:  ; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
+sprite_Cursor: 
+; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpTile, x
 ;
 ;      vdpTile: [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
 ;
@@ -1136,6 +1146,28 @@ sprite_Cursor:  ; Syntax        vdpSprite y, [VDPSPRITESIZE_]bitfield|link, vdpT
                 vdpSprite 86, V4|H4|14, 1712|MIRROR|PALETTE3, 153
                 vdpSprite 146, V4|H4|15, 1712|FLIP|PALETTE3, 95
                 vdpSprite 146, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 153
+                
+            if (STANDARD_BUILD&EXPANDED_RANGES=1)
+                ; Cursor radius 3
+                vdpSprite 38, V4|H4|9, 1680|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 52
+                vdpSprite 200, V4|H4|11, 1680|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 196
+                vdpSprite 56, V4|H4|13, 1712|PALETTE3, 95
+                vdpSprite 56, V4|H4|14, 1712|MIRROR|PALETTE3, 153
+                vdpSprite 176, V4|H4|15, 1712|FLIP|PALETTE3, 95
+                vdpSprite 176, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 153
+                
+                ; Cursor radius 4
+                vdpSprite 14, V4|H4|9, 1680|PALETTE3, 124
+                vdpSprite 116, V4|H4|10, 1696|PALETTE3, 28
+                vdpSprite 230, V4|H4|11, 1680|FLIP|PALETTE3, 124
+                vdpSprite 116, V4|H4|12, 1696|MIRROR|PALETTE3, 220
+                vdpSprite 56, V4|H4|13, 1712|PALETTE3, 71
+                vdpSprite 56, V4|H4|14, 1712|MIRROR|PALETTE3, 177
+                vdpSprite 176, V4|H4|15, 1712|FLIP|PALETTE3, 71
+                vdpSprite 176, V4|H4|16, 1712|MIRROR|FLIP|PALETTE3, 177
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -5,7 +5,7 @@
 ; ---------------------------------------------------------------------------
 
 
-msMap:	macro
+msMap: macro
 	dc.w \1 ; map index
 	dc.l \2 ; address of map pointer table
 	endm
@@ -15,39 +15,54 @@ msFlag:	macro
 	dc.l \2 ; address of variant pointer table
 	endm
 
-msMapEnd:	macro
-	dc.w $FFFD
-	endm
-	
-msEnd:	macro
-	dc.w $FFFF
+msMapEnd: macro
+    dc.w $FFFD
+    endm
+    
+msEnd: macro
+    dc.w $FFFF
+    endm
+
+msFixedEntity:	macro x, y, facing, mapsprite, actionScript
+	dc.b \x
+	dc.b \y
+    if (STANDARD_BUILD=1) ; EXPANDED_MAPSPRITES
+    dc.w \facing
+    dc.w \mapsprite
+    else
+    dc.b \facing
+    dc.b \mapsprite
+    endif
+	dc.l \actionScript
 	endm
 
-msFixedEntity:	macro
-	dc.b \1 ; X
-	dc.b \2 ; Y
-	dc.b \3 ; facing
-	dc.b \4 ; mapsprite
-	dc.l \5 ; action script
-	endm
-
-msSequencedEntity:	macro
-	dc.b \1 ; X
-	dc.b \2 ; Y
-	dc.b \3 ; facing
-	dc.b \4 ; mapsprite
-	dc.l \5+$FE000000 ; action script 
-	endm
+msSequencedEntity: macro x, y, facing, mapsprite, actionScript
+	dc.b \x
+	dc.b \y
+    if (STANDARD_BUILD=1) ; EXPANDED_MAPSPRITES
+    dc.w \facing
+    dc.w \mapsprite
+    else
+    dc.b \facing
+    dc.b \mapsprite
+    endif
+    dc.l \actionScript+$FE000000
+    endm
 	
-msWalkingEntity:	macro
-	dc.b \1 ; X
-	dc.b \2 ; Y
-	dc.b \3 ; facing
-	dc.b \4 ; mapsprite
+msWalkingEntity: macro x, y, facing, mapsprite, originX, originY, range
+	dc.b \x
+	dc.b \y
+    if (STANDARD_BUILD=1) ; EXPANDED_MAPSPRITES
+    dc.w \facing
+    dc.w \mapsprite
+    else
+    dc.b \facing
+    dc.b \mapsprite
+    endif
 	dc.b $FF
-	dc.b \5 ; origin X
-	dc.b \6 ; origin Y
-	dc.b \7 ; range
+	dc.b \originX
+	dc.b \originY
+	dc.b \range
 	endm
 	
 msEntitiesEnd:	macro

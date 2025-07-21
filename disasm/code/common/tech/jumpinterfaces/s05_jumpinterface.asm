@@ -157,11 +157,11 @@ j_BattleLoop_0:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetEntityEventIndex:
+j_InitializeNewEnemyEntityIndex:
                 
-                jmp     GetEntityEventIndex(pc)
+                jmp     InitializeNewEnemyEntityIndex(pc)
 
-    ; End of function j_GetEntityEventIndex
+    ; End of function j_InitializeNewEnemyEntityIndex
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -238,8 +238,9 @@ j_AnimateSpecialSprite:
 
 
 j_EndGame:
-                
+            if (VANILLA_BUILD=1)
                 jmp     EndGame(pc)
+            endif
 
     ; End of function j_EndGame
 
@@ -248,8 +249,9 @@ j_EndGame:
 
 
 j_SuspendGame:
-                
+            if (VANILLA_BUILD=1)
                 jmp     SuspendGame(pc)
+            endif
 
     ; End of function j_SuspendGame
 

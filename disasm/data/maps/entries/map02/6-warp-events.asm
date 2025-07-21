@@ -18,7 +18,7 @@
                   warpFacing UP
                 mWarp 255, 31  ; south exit
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_AROUND_PACALON
+                  warpMap    MAP_OVERWORLD_PACALON_KINGDOM_DROUGHT
                   warpDest   22, 16
                   warpFacing DOWN
                 endWord

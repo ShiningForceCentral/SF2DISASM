@@ -7,4 +7,8 @@ ms_map33_flag786:
                 dc.l ms_map33_ZoneEvents
                 dc.l ms_map33_AreaDescriptions
                 dc.l ms_map33_Section5
+            if (STANDARD_BUILD&RECRUIT_ALL_CREED_CHARACTERS=1)
+                dc.l ms_map33_InitFunction
+            else
                 dc.l ms_map33_flag312_InitFunction
+            endif

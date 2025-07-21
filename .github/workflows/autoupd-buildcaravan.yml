@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
+      with:
+        ssh-key: ${{ secrets.DEPLOY_KEY }}
     - name: Auto merge on branch 'build/caravan'
       uses: robotology/gh-action-nightly-merge@v1.3.3
       with:

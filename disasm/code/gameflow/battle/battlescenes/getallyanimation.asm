@@ -51,7 +51,7 @@ GetAllyAnimation:
                 add.w   ((BATTLESCENE_ALLYBATTLEANIMATION-$1000000)).w,d1
 @GetAnimationPointer:
                 
-                movea.l (p_pt_AllyAnimations).l,a0
+                getPointer p_pt_AllyAnimations, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a0,d1.w),a0
                 movem.l (sp)+,d1-d2

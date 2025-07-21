@@ -1,5 +1,5 @@
 
-; ASM FILE code\common\menus\church\churchactions_1.asm :
+; ASM FILE code\common\menus\church\ChurchMenu_1.asm :
 ; 0x20A02..0x21046 : Church functions
 
 ; =============== S U B R O U T I N E =======================================
@@ -76,7 +76,7 @@ ChurchMenu:
                 addi.w  #1,deadMembersCount(a6)
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     129             ; "Gosh!  {NAME} is{N}exhausted!{W2}"
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 mulu.w  #CHURCHMENU_PER_LEVEL_RAISE_COST,d1
                 move.l  d1,actionCost(a6)
                 jsr     j_GetClass
@@ -84,7 +84,15 @@ ChurchMenu:
                 bsr.w   GetPromotionData
                 cmpi.w  #0,cannotPromoteFlag(a6)
                 beq.w   @ConfirmRaise
+                
+            if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+                ; Twice as expansive per level cost when promoted
+                move.l  actionCost(a6),d1
+                addi.l  #CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED,d1
+                add.l   d1,actionCost(a6)
+            else
                 addi.l  #CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED,actionCost(a6)
+            endif
 @ConfirmRaise:
                 
                 move.l  actionCost(a6),((DIALOGUE_NUMBER-$1000000)).w
@@ -143,15 +151,35 @@ ChurchMenu:
                 movem.l a0,-(sp)
                 move.w  d0,member(a6)
                 jsr     j_GetCombatantEntryAddress
+            if (STANDARD_BUILD=1)
+                getSavedWord a0, d2, COMBATANT_OFFSET_STATUSEFFECTS
+            else
                 lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2
+            endif
                 move.w  d2,d3
                 andi.w  #STATUSEFFECT_POISON,d3
                 beq.w   @CureNextPoisonedMember
                 addi.w  #1,poisonedMembersCount(a6)
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     121             ; "Gosh!  {NAME} is{N}poisoned!{W2}"
+            if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+                jsr     GetLevel
+                mulu.w  #CHURCHMENU_PER_LEVEL_CURE_POISON_COST,d1
+                move.l  d1,actionCost(a6)
+                jsr     GetClass
+                move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
+                bsr.w   GetPromotionData
+                tst.w   cannotPromoteFlag(a6)
+                beq.s   @CurePoison_Unpromoted
+                
+                move.l  actionCost(a6),d1
+                addi.l  #CHURCHMENU_CURE_POISON_COST_EXTRA_WHEN_PROMOTED,d1
+                add.l   d1,actionCost(a6)
+@CurePoison_Unpromoted:
+            else
                 move.l  #CHURCHMENU_CURE_POISON_COST,actionCost(a6)
+            endif
                 move.l  actionCost(a6),((DIALOGUE_NUMBER-$1000000)).w
                 txt     123             ; "But I can treat you.{N}It will cost {#} gold{N}coins.  OK?"
                 jsr     j_OpenGoldWindow
@@ -203,8 +231,12 @@ ChurchMenu:
                 movem.l a0,-(sp)
                 move.w  d0,member(a6)
                 jsr     j_GetCombatantEntryAddress
+            if (STANDARD_BUILD=1)
+                getSavedWord a0, d2, COMBATANT_OFFSET_STATUSEFFECTS
+            else
                 lea     COMBATANT_OFFSET_STATUSEFFECTS(a0),a0
                 move.w  (a0),d2
+            endif
                 andi.w  #STATUSEFFECT_CURSE,d2
                 beq.w   @CureNextCursedMember
                 addi.w  #1,cursedMembersCount(a6)
@@ -222,7 +254,7 @@ ChurchMenu:
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 jsr     j_IsItemCursed
                 bcc.w   @IsNextItemCursed
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.l   d4
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d4
                 lsr.w   #2,d4           ; cure curse cost = 25% of item price
@@ -285,8 +317,8 @@ ChurchMenu:
                 ; @StartPromo
                 txt     136             ; "{CLEAR}Who do you want to{N}promote?{W2}"
                 clsTxt
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMembersListScreen
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 bne.w   @CheckPromotableClass
                 txt     137             ; "Oh, I'm wrong.{W2}"
@@ -305,7 +337,7 @@ ChurchMenu:
                 bra.w   @RestartPromo
 @CheckPromotableLevel:
                 
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 cmpi.w  #CHURCHMENU_MIN_PROMOTABLE_LEVEL,d1
                 bcc.w   @ConfirmPromo
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -323,6 +355,9 @@ ChurchMenu:
                 bra.w   @RestartPromo
 @CheckSpecialPromo:
                 
+            if (STANDARD_BUILD=1)
+                include "code\common\menus\church\checkspecialpromo-standard.asm"
+            else
                 move.w  currentClass(a6),d1
                 move.w  #PROMOTIONSECTION_SPECIAL_BASE,d2
                 bsr.w   GetPromotionData
@@ -406,6 +441,7 @@ ChurchMenu:
                 move.w  itemsHeldNumber(a6),d1 ; temporary variable : item slot
                 jsr     j_RemoveItemBySlot
                 bra.w   @DoPromo
+            endif
 @CheckRegularPromo:
                 
                 move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
@@ -437,18 +473,37 @@ ChurchMenu:
                 txt     140             ; "Now, let me conduct the{N}rite.{D1}  The light blesses...{N}{D1}{CLASS} {NAME}...{W2}{N}with a class of {CLASS}!{W2}"
                 move.w  member(a6),d0
                 move.w  newClass(a6),d1
+            if (STANDARD_BUILD=1)
+                move.w  currentClass(a6),d2
+                jsr     Promote
+                lea     table_LoseAllSpellsClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #1,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @CheckNewWeaponTypeClasses
+                move.b  (a0),d1         ; d1.w = replacement spell entry
+            else
                 jsr     j_SetClass
                 jsr     j_Promote
                 cmpi.w  #CLASS_SORC,newClass(a6)
                 bne.s   @CheckNewWeaponTypeClasses
+            endif
                 bsr.w   ReplaceSpellsWithSorcDefaults
 @CheckNewWeaponTypeClasses:
                 
+            if (STANDARD_BUILD=1)
+                lea     table_DifferentWeaponTypeClasses(pc), a0
+                move.w  newClass(a6),d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @sndCom_PromotionMusic
+            else
                 cmpi.w  #CLASS_MMNK,newClass(a6)
                 beq.s   @UnequipWeapon  
                 cmpi.w  #CLASS_NINJ,newClass(a6)
                 beq.s   @UnequipWeapon  
                 bra.w   @sndCom_PromotionMusic
+            endif
 @UnequipWeapon:
                 
                 move.w  member(a6),d0   ; new class uses a different type of weapon, so unequip weapon
@@ -486,8 +541,8 @@ ChurchMenu:
                 bra.w   @ExitSave
 @DoSaveGame:
                 
-                move.b  ((CURRENT_MAP-$1000000)).w,((EGRESS_MAP-$1000000)).w
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                copySavedByte CURRENT_MAP, EGRESS_MAP
+                getCurrentSaveSlot d0
                 setFlg  399             ; Set after first battle's cutscene OR first save? Checked at witch screens
                 jsr     (SaveGame).w
                 sndCom  MUSIC_SAVE

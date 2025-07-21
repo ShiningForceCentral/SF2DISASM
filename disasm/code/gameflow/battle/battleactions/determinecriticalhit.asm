@@ -41,6 +41,7 @@ battlesceneScript_DetermineCriticalHit:
                 clr.w   d0
                 move.b  (a0),d0
                 beq.s   @Return
+                
                 tst.b   specialCritical(a2)
                 beq.s   @CheckDebugCritical
                 moveq   #1,d0
@@ -63,15 +64,24 @@ battlesceneScript_DetermineCriticalHit:
                 
                 cmpi.w  #PROWESS_INFLICT_AILMENTS_START,d1
                 bcc.s   @SetInflictAilment
+                
                 move.b  #-1,criticalHit(a2)
                 move.b  (a4),d0
                 jsr     GetEquippedWeapon
+            if (STANDARD_BUILD=1)
+                bmi.s   @Return
+                lea     table_CutOffWeapons(pc), a0
+                clr.w   d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @Return
+            else
                 cmpi.w  #ITEM_GISARME,d1
                 bne.s   @Skip
+            endif
                 move.b  (a5),d0
                 move.w  #SPELL_DESOUL,d1
                 bsr.w   GetResistanceToSpell
-                cmpi.w  #RESISTANCESETTING_STATUSEFFECT_IMMUNITY,d2
+                cmpi.w  #RESISTANCESETTING_IMMUNITY,d2
                 beq.s   @Skip           ; skip if target is immune to desoul
                 move.b  #-1,cutoff(a2)
                 clr.b   criticalHit(a2)

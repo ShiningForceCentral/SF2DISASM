@@ -53,12 +53,12 @@
                   warpFacing DOWN
                 mWarp 15, 22
                   warpNoScroll
-                  warpMap    MAP_OUTSIDE_MITULA
+                  warpMap    MAP_MITULA_SHRINE_EXTERIOR
                   warpDest   14, 34
                   warpFacing DOWN
                 mWarp 16, 22
                   warpNoScroll
-                  warpMap    MAP_OUTSIDE_MITULA
+                  warpMap    MAP_MITULA_SHRINE_EXTERIOR
                   warpDest   15, 34
                   warpFacing DOWN
                 endWord

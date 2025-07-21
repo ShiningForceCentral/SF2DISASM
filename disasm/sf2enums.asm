@@ -1,4 +1,11 @@
 
+    include "enums\vdp.asm"
+
+savedDataByteSize = 1
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+savedDataByteSize = 2
+    endif
+SAVED_DATA_BYTE_SIZE: equ savedDataByteSize
 
 ; ---------------------------------------------------------------------------
 
@@ -7,6 +14,7 @@ INDEX_SHIFT_COUNT: equ 2
 NIBBLE_SHIFT_COUNT: equ 4
 BYTE_SHIFT_COUNT: equ 8
 BYTE_LOWER_NIBBLE_MASK: equ $F
+WORD_SHIFT_COUNT: equ 16
 BYTE_UPPER_NIBBLE_MASK: equ $F0
 NOTHING_BYTE: equ $FF
 TERMINATOR_BYTE: equ $FF
@@ -49,6 +57,18 @@ ENABLE_VINT: equ 7
 
 ; ---------------------------------------------------------------------------
 
+; enum EntityTransitions
+ENTITY_TRANSITION_SCAN_UP: equ 0
+ENTITY_TRANSITION_SCAN_DOWN: equ 1
+ENTITY_TRANSITION_WIPE_OUT: equ 2
+ENTITY_TRANSITION_WIPE_IN: equ 3
+ENTITY_TRANSITION_SLIDE_OUT: equ 4
+ENTITY_TRANSITION_SLIDE_IN: equ 5
+ENTITY_TRANSITION_MOSAIC_OUT: equ 6
+ENTITY_TRANSITION_MOSAIC_IN: equ 7
+
+; ---------------------------------------------------------------------------
+
 ; enum Animation
 ENTITY_TRANSITION_SCAN_UP: equ 0
 ENTITY_TRANSITION_SCAN_DOWN: equ 1
@@ -75,34 +95,54 @@ GFX_DIAMOND_MENU_ICON_PIXELS_NUMBER: equ 576
 ; ---------------------------------------------------------------------------
 
 ; enum Combatant
+
+combatantAlliesNumber = 30
+combatantAlliesSpaceEnd = 32
+combatantEnemiesNumber = 32
+combatantSlotsNumber = 64
+combatantEnemiesStart = 128
+
+    if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
+combatantAlliesNumber = 32
+    endif
+
 COMBATANT_ALLIES_START: equ 0
-COMBATANT_ALLIES_MINUS_PLAYER_AND_CREATURE_COUNTER: equ 27
-COMBATANT_ALLIES_MINUS_PLAYER_COUNTER: equ 28
-COMBATANT_ALLIES_COUNTER: equ 29
-COMBATANT_ALLIES_END: equ 29
-COMBATANT_ALLIES_NUMBER: equ 30
-COMBATANT_ENEMIES_COUNTER: equ 31
-COMBATANT_ALLIES_SPACE_END_MINUS_ONE: equ 31
-COMBATANT_ENEMIES_NUMBER: equ 32
-COMBATANT_ALLIES_SPACE_END: equ 32
-COMBATANTS_ALL_COUNTER: equ 61
-COMBATANT_SLOTS_NUMBER: equ 64
-COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END: equ 96
-COMBATANT_ENEMIES_START: equ 128
-COMBATANT_ENEMY_INDEX_15: equ 143
-COMBATANT_ENEMIES_END: equ 159
-COMBATANT_ENEMIES_SPACE_END: equ 160
+COMBATANT_ALLIES_MINUS_PLAYER_AND_CREATURE_COUNTER: equ combatantAlliesNumber-3 ; exclude Bowie and Kiwi
+COMBATANT_ALLIES_MINUS_PLAYER_COUNTER: equ combatantAlliesNumber-2 ; exclude Bowie
+COMBATANT_ALLIES_COUNTER: equ combatantAlliesNumber-1
+COMBATANT_ALLIES_END: equ combatantAlliesNumber-1
+COMBATANT_ALLIES_NUMBER: equ combatantAlliesNumber
+COMBATANT_ENEMIES_COUNTER: equ combatantEnemiesNumber-1
+COMBATANT_ALLIES_SPACE_END_MINUS_ONE: equ combatantAlliesSpaceEnd-1
+COMBATANT_ENEMIES_NUMBER: equ combatantEnemiesNumber
+COMBATANT_ALLIES_SPACE_END: equ combatantAlliesSpaceEnd
+COMBATANTS_ALL_COUNTER: equ combatantAlliesNumber+combatantEnemiesNumber-1
+COMBATANT_SLOTS_NUMBER: equ combatantSlotsNumber
+COMBATANT_ENEMIES_START_MINUS_ALLIES_SPACE_END: equ combatantEnemiesStart-combatantAlliesSpaceEnd
+COMBATANT_ENEMIES_START: equ combatantEnemiesStart
+COMBATANT_ENEMY_INDEX_15: equ combatantEnemiesStart+15 ; Jaro's enemy index during the battle to Moun
+COMBATANT_ENEMY_INDEX_20: equ combatantEnemiesStart+20 ; battlescene test enemy index (unused during regular battles)
+COMBATANT_ENEMIES_END: equ combatantEnemiesStart+combatantEnemiesNumber-1
+COMBATANT_ENEMIES_SPACE_END: equ combatantEnemiesStart+combatantEnemiesNumber
 
 ; ---------------------------------------------------------------------------
 
 ; enum BattleEntity
-BATTLE_NEUTRAL_ENTITY_SIZE: equ 8
-BATTLE_ENEMY_ENTITIES_COUNTER: equ 29
-BATTLE_ALLY_ENTITIES_COUNTER: equ 31
+
+entrySize = 8
+
+    if (STANDARD_BUILD=1)
+entrySize = entrySize+2 ; EXPANDED_MAPSPRITES
+    endif
+
+BATTLE_NEUTRAL_ENTITIES_NUMBER: equ 2
+BATTLE_NEUTRAL_ENTITY_SIZE: equ entrySize
+BATTLE_ENEMY_ENTITIES_COUNTER: equ (BATTLE_ENEMY_ENTITIES_NUMBER-BATTLE_NEUTRAL_ENTITIES_NUMBER)-1
+BATTLE_ALLY_ENTITIES_COUNTER: equ BATTLE_ALLY_ENTITIES_NUMBER-1
 BATTLE_ENEMY_ENTITIES_NUMBER: equ 32
 BATTLE_ALLY_ENTITIES_NUMBER: equ 32
-BATTLE_ALL_ENTITIES_COUNTER: equ 63
-BATTLE_ALL_ENTITIES_NUMBER: equ 64
+BATTLE_ALL_ENTITIES_COUNTER: equ BATTLE_ALL_ENTITIES_NUMBER-1
+BATTLE_ALL_ENTITIES_NUMBER: equ BATTLE_ENEMY_ENTITIES_NUMBER+BATTLE_ALLY_ENTITIES_NUMBER
 
 ; ---------------------------------------------------------------------------
 
@@ -137,50 +177,63 @@ COMBATANT_SPELLSLOTS: equ 4
 ; ---------------------------------------------------------------------------
 
 ; enum CombatantDataOffsets
-COMBATANT_OFFSET_NAME: equ 0
-COMBATANT_OFFSET_CLASS: equ 10
-COMBATANT_OFFSET_LEVEL: equ 11
-COMBATANT_OFFSET_HP_MAX: equ 12
-COMBATANT_OFFSET_HP_CURRENT: equ 14
-COMBATANT_OFFSET_MP_MAX: equ 16
-COMBATANT_OFFSET_MP_CURRENT: equ 17
-COMBATANT_OFFSET_ATT_BASE: equ 18
-COMBATANT_OFFSET_ATT_CURRENT: equ 19
-COMBATANT_OFFSET_DEF_BASE: equ 20
-COMBATANT_OFFSET_DEF_CURRENT: equ 21
-COMBATANT_OFFSET_AGI_BASE: equ 22
-COMBATANT_OFFSET_AGI_CURRENT: equ 23
-COMBATANT_OFFSET_MOV_BASE: equ 24
-COMBATANT_OFFSET_MOV_CURRENT: equ 25
-COMBATANT_OFFSET_RESIST_BASE: equ 26
-COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE: equ 27
-COMBATANT_OFFSET_RESIST_CURRENT: equ 28
-COMBATANT_OFFSET_PROWESS_BASE: equ 30
-COMBATANT_OFFSET_PROWESS_CURRENT: equ 31
-COMBATANT_OFFSET_ITEMS: equ 32
-COMBATANT_OFFSET_ITEM_0: equ 32
-COMBATANT_OFFSET_ITEM_1: equ 34
-COMBATANT_OFFSET_ITEM_2: equ 36
-COMBATANT_OFFSET_ITEM_3: equ 38
-COMBATANT_OFFSET_SPELLS: equ 40
-COMBATANT_OFFSET_SPELLS_END: equ 44
-COMBATANT_OFFSET_STATUSEFFECTS: equ 44
-COMBATANT_OFFSET_X: equ 46
-COMBATANT_OFFSET_Y: equ 47
-COMBATANT_OFFSET_EXP: equ 48
-COMBATANT_OFFSET_MOVETYPE_AND_AI: equ 49 ; upper nibble holds move type, lower nibble holds AI commandset
-COMBATANT_OFFSET_ALLY_KILLS: equ 50
-COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS: equ 50 ; upper byte holds combatant index to follow or first AI point if bit 6 is set, lower byte holds second AI point
-COMBATANT_OFFSET_ACTIVATION_BITFIELD: equ 52 ; set to 1 when AI is activated (some battles/enemies have a unique value)
-COMBATANT_OFFSET_ALLY_DEFEATS: equ 54
-COMBATANT_OFFSET_AI_REGION: equ 54 ; upper nibble holds activation region index 1, lower nibble holds activation region index 2
-COMBATANT_OFFSET_ENEMY_INDEX: equ 55
+
+combatantByteSize = SAVED_DATA_BYTE_SIZE
+
+                                            rsreset
+COMBATANT_OFFSET_NAME:                      rs.b 10*combatantByteSize
+COMBATANT_OFFSET_CLASS:                     rs.b combatantByteSize
+COMBATANT_OFFSET_LEVEL:                     rs.b combatantByteSize
+COMBATANT_OFFSET_HP_MAX:                    rs.w combatantByteSize
+COMBATANT_OFFSET_HP_CURRENT:                rs.w combatantByteSize
+COMBATANT_OFFSET_MP_MAX:                    rs.b combatantByteSize
+COMBATANT_OFFSET_MP_CURRENT:                rs.b combatantByteSize
+COMBATANT_OFFSET_ATT_BASE:                  rs.b combatantByteSize
+COMBATANT_OFFSET_ATT_CURRENT:               rs.b combatantByteSize
+COMBATANT_OFFSET_DEF_BASE:                  rs.b combatantByteSize
+COMBATANT_OFFSET_DEF_CURRENT:               rs.b combatantByteSize
+COMBATANT_OFFSET_AGI_BASE:                  rs.b combatantByteSize
+COMBATANT_OFFSET_AGI_CURRENT:               rs.b combatantByteSize
+COMBATANT_OFFSET_MOV_BASE:                  rs.b combatantByteSize
+COMBATANT_OFFSET_MOV_CURRENT:               rs.b combatantByteSize
+COMBATANT_OFFSET_RESIST_BASE:               rs.b combatantByteSize
+COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE:      rs.b combatantByteSize
+COMBATANT_OFFSET_RESIST_CURRENT:            rs.w combatantByteSize
+COMBATANT_OFFSET_PROWESS_BASE:              rs.b combatantByteSize
+COMBATANT_OFFSET_PROWESS_CURRENT:           rs.b combatantByteSize
+COMBATANT_OFFSET_ITEMS:                     equ __RS
+COMBATANT_OFFSET_ITEM_0:                    rs.w combatantByteSize
+COMBATANT_OFFSET_ITEM_1:                    rs.w combatantByteSize
+COMBATANT_OFFSET_ITEM_2:                    rs.w combatantByteSize
+COMBATANT_OFFSET_ITEM_3:                    rs.w combatantByteSize
+COMBATANT_OFFSET_SPELLS:                    rs.b 4*combatantByteSize
+COMBATANT_OFFSET_SPELLS_END:                equ __RS
+COMBATANT_OFFSET_STATUSEFFECTS:             rs.w combatantByteSize
+COMBATANT_OFFSET_X:                         rs.b combatantByteSize
+COMBATANT_OFFSET_Y:                         rs.b combatantByteSize
+COMBATANT_OFFSET_EXP:                       rs.b combatantByteSize
+COMBATANT_OFFSET_MOVETYPE_AND_AI:           rs.b combatantByteSize ; upper nibble holds move type, lower nibble holds AI commandset
+COMBATANT_OFFSET_ALLY_KILLS:                equ __RS
+COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS:    rs.w combatantByteSize ; upper byte holds combatant index to follow or first AI point if bit 6 is set, lower byte holds second AI point
+COMBATANT_OFFSET_ACTIVATION_BITFIELD:        rs.w combatantByteSize ; bits 0 and 1 = %01 if region #1 is activated, or %10 if region #2
+COMBATANT_OFFSET_ALLY_DEFEATS:              equ __RS
+COMBATANT_OFFSET_AI_REGION:                 rs.b combatantByteSize ; upper nibble holds activation region index 1, lower nibble holds activation region index 2
+COMBATANT_OFFSET_ENEMY_INDEX:               rs.b combatantByteSize
+COMBATANT_DATA_ENTRY_SIZE:                  equ __RS
 
 ; ---------------------------------------------------------------------------
 
 ; enum CombatantDataSize
-COMBATANT_DATA_ENTRY_SIZE: equ 56 ; data appears twice as large to the CPU when read from an 8-bit peripheral (i.e., the SaveRAM)
-COMBATANT_DATA_ENTRY_REAL_SIZE: equ 56
+
+combatantEntrySize = COMBATANT_DATA_ENTRY_SIZE
+combatantEntryRealSize = combatantEntrySize
+
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+combatantEntryRealSize = combatantEntryRealSize/2
+    endif
+
+COMBATANT_DATA_ENTRY_SIZE: equ combatantEntrySize ; data appears twice as large to the CPU when read from an 8-bit peripheral (i.e., the SaveRAM)
+COMBATANT_DATA_ENTRY_REAL_SIZE: equ combatantEntryRealSize
 
 ; ---------------------------------------------------------------------------
 
@@ -207,6 +260,7 @@ STATUSEFFECT_POISON: equ 2
 STATUSEFFECT_CURSE: equ 4
 STATUSEFFECT_MUDDLE2: equ 8
 STATUSEFFECT_MUDDLE: equ $30
+STATUSEFFECT_CONFUSION: equ STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE
 STATUSEFFECT_SLEEP: equ $C0
 STATUSEFFECT_SILENCE: equ $300
 STATUSEFFECT_SLOW: equ $C00
@@ -217,6 +271,15 @@ STATUSEFFECT_ATTACK: equ $C000
 
 ; enum StatusEffect_None
 STATUSEFFECT_NONE: equ 0
+
+; ---------------------------------------------------------------------------
+
+; enum StatusEffects_Properties
+
+statusEffectsNumber = 10
+
+STATUSEFFECTS_COUNTER: equ statusEffectsNumber-1
+STATUSEFFECTS_NUMBER: equ statusEffectsNumber
 
 ; ---------------------------------------------------------------------------
 
@@ -235,11 +298,19 @@ STATUSANIMATION_STUN_LINES: equ 4
 ; ---------------------------------------------------------------------------
 
 ; enum CharDef
+
+statGainProjectionLevel = 30
+levelCapBase = 40
+
+    if (STANDARD_BUILD&SF1_LEVELUP=1)
+levelCapBase = statGainProjectionLevel
+    endif
+
 CHAR_CLASS_LASTNONPROMOTED: equ 11
 CHAR_CLASS_FIRSTPROMOTED: equ 12
 CHAR_CLASS_EXTRALEVEL: equ 20
-CHAR_STATGAIN_PROJECTIONLEVEL: equ 30
-CHAR_LEVELCAP_BASE: equ 40
+CHAR_STATGAIN_PROJECTIONLEVEL: equ statGainProjectionLevel
+CHAR_LEVELCAP_BASE: equ levelCapBase
 CHAR_LEVELCAP_PROMOTED: equ 99
 CHAR_STATCAP_AGI_BASE: equ 100
 CHAR_STATCAP_AGI_CURRENT: equ 127
@@ -318,14 +389,17 @@ RESISTANCE_STATUS_NONE: equ 0
 RESISTANCEENTRY_LOWERMASK_SETTING: equ 3
 RESISTANCEENTRY_MASK_ALL: equ $C0FF
 
+RESIST_GROUP1_MASK: equ $FF00
+RESIST_GROUP2_MASK: equ $FF
+
 ; ---------------------------------------------------------------------------
 
 ; enum ResistanceSettings
 RESISTANCESETTING_NEUTRAL: equ 0
 RESISTANCESETTING_MINOR: equ 1
 RESISTANCESETTING_MAJOR: equ 2
-RESISTANCESETTING_WEAKNESS: equ 3
-RESISTANCESETTING_STATUSEFFECT_IMMUNITY: equ 3
+RESISTANCESETTING_WEAKNESS: equ 3 ; weak to damage
+RESISTANCESETTING_IMMUNITY: equ 3 ; immune to status effects
 
 ; ---------------------------------------------------------------------------
 
@@ -363,14 +437,35 @@ MOVETYPE_TOTAL: equ 13
 ; ---------------------------------------------------------------------------
 
 ; enum Prowess (bitfield)
-PROWESS_CRITICAL150_1IN32: equ 0
-PROWESS_CRITICAL125_1IN32: equ 1
-PROWESS_CRITICAL150_1IN16: equ 2
-PROWESS_CRITICAL125_1IN16: equ 3
-PROWESS_CRITICAL150_1IN8: equ 4
-PROWESS_CRITICAL125_1IN8: equ 5
-PROWESS_CRITICAL150_1IN4: equ 6
-PROWESS_CRITICAL125_1IN4: equ 7
+
+critical150_1in32 = 0
+critical125_1in32 = 1
+critical150_1in16 = 2
+critical125_1in16 = 3
+critical150_1in8  = 4
+critical125_1in8  = 5
+critical150_1in4  = 6
+critical125_1in4  = 7
+
+    if (STANDARD_BUILD&FIX_CRITICAL_HIT_DEFINITIONS=1)
+critical125_1in32 = 0
+critical125_1in16 = 1
+critical125_1in8  = 2
+critical125_1in4  = 3
+critical150_1in32 = 4
+critical150_1in16 = 5
+critical150_1in8  = 6
+critical150_1in4  = 7
+    endif
+
+PROWESS_CRITICAL150_1IN32: equ critical150_1in32
+PROWESS_CRITICAL125_1IN32: equ critical125_1in32
+PROWESS_CRITICAL150_1IN16: equ critical150_1in16
+PROWESS_CRITICAL125_1IN16: equ critical125_1in16
+PROWESS_CRITICAL150_1IN8: equ critical150_1in8
+PROWESS_CRITICAL125_1IN8: equ critical125_1in8
+PROWESS_CRITICAL150_1IN4: equ critical150_1in4
+PROWESS_CRITICAL125_1IN4: equ critical125_1in4
 PROWESS_CRITICAL_NONE: equ 8
 PROWESS_CRITICAL_POISON: equ 9
 PROWESS_CRITICAL_SLEEP: equ $A
@@ -387,6 +482,14 @@ PROWESS_COUNTER_1IN32: equ 0
 PROWESS_COUNTER_1IN16: equ $40
 PROWESS_COUNTER_1IN8: equ $80
 PROWESS_COUNTER_1IN4: equ $C0
+
+; ---------------------------------------------------------------------------
+
+; enum Prowess_Chances
+PROWESS_1IN32: equ 0
+PROWESS_1IN16: equ 1
+PROWESS_1IN8: equ 2
+PROWESS_1IN4: equ 3
 
 ; ---------------------------------------------------------------------------
 
@@ -412,8 +515,12 @@ CRITICALHITDEF_OFFSET_DAMAGE_FACTOR: equ 1
 ; ---------------------------------------------------------------------------
 
 ; enum CriticalHitDamageFactors
-CRITICAL_HIT_DAMAGE_FACTOR_1: equ 1
-CRITICAL_HIT_DAMAGE_FACTOR_2: equ 2
+
+factor1 = 1
+factor2 = 2
+
+CRITICAL_HIT_DAMAGE_FACTOR_1: equ factor1
+CRITICAL_HIT_DAMAGE_FACTOR_2: equ factor2
 
 ; ---------------------------------------------------------------------------
 
@@ -450,13 +557,56 @@ CLASS_MNST: equ 28
 CLASS_RBT: equ 29
 CLASS_GLM: equ 30
 CLASS_RDBN: equ 31
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+CLASS_32: equ 32
+CLASS_33: equ 33
+CLASS_34: equ 34
+CLASS_35: equ 35
+CLASS_36: equ 36
+CLASS_37: equ 37
+CLASS_38: equ 38
+CLASS_39: equ 39
+CLASS_40: equ 40
+CLASS_41: equ 41
+CLASS_42: equ 42
+CLASS_43: equ 43
+CLASS_44: equ 44
+CLASS_45: equ 45
+CLASS_46: equ 46
+CLASS_47: equ 47
+CLASS_48: equ 48
+CLASS_49: equ 49
+CLASS_50: equ 50
+CLASS_51: equ 51
+CLASS_52: equ 52
+CLASS_53: equ 53
+CLASS_54: equ 54
+CLASS_55: equ 55
+CLASS_56: equ 56
+CLASS_57: equ 57
+CLASS_58: equ 58
+CLASS_59: equ 59
+CLASS_60: equ 60
+CLASS_61: equ 61
+CLASS_62: equ 62
+CLASS_63: equ 63
+    endif
 CLASS_NONE: equ 255
 
 ; ---------------------------------------------------------------------------
 
 ; enum ClassIndex
-CLASS_MASK_INDEX: equ $1F
-CLASS_NUMBER_TOTAL: equ $20
+
+classTotal = 32
+classMask = $1F
+
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+classTotal = 64
+classMask = $3F
+    endif
+    
+CLASS_MASK_INDEX: equ classMask
+CLASS_NUMBER_TOTAL: equ classTotal
 
 ; ---------------------------------------------------------------------------
 
@@ -581,10 +731,15 @@ ENEMY_BLUE_SHAMAN_0: equ 102
 
 ; ---------------------------------------------------------------------------
 
+enemyDefEntrySize = 56
+enemyDefLongwordsCounter = (enemyDefEntrySize/4)-1
+
 ; enum EnemyDef
 ENEMYDEF_OFFSET_SPELLPOWER: equ 10
+ENEMYDEF_LONGWORDS_COUNTER: equ enemyDefLongwordsCounter
+ENEMYDEF_OFFSET_SPELLS: equ 40
 ENEMYDEF_OFFSET_MOVETYPE: equ 49
-ENEMYDEF_ENTRY_SIZE: equ 56
+ENEMYDEF_ENTRY_SIZE: equ enemyDefEntrySize
 
 ; ---------------------------------------------------------------------------
 
@@ -594,7 +749,7 @@ SPELLPOWER_ENHANCED: equ 99 ; spell power increased by 25%
 
 ; ---------------------------------------------------------------------------
 
-; enum AiBitfield
+; enum AiBitfield (bitfield)
 AIBITFIELD_PRIMARY_ACTIVE: equ $1  ; Activated for primary order
 AIBITFIELD_SECONDARY_ACTIVE: equ $2  ; Activated for secondary order
 AIBITFIELD_AI_CONTROLLED: equ $4  ; AI control
@@ -618,7 +773,10 @@ AIBITFIELD_PRIORITYMOD_3: equ $3000  ; Healer enemy
 AIBITFIELD_BIT14: equ $4000  ; 
 AIBITFIELD_BIT15: equ $8000  ; 
 
-AIBITFIELD_INITIALIZATION_MASK: equ $F00
+; ---------------------------------------------------------------------------
+
+; enum AiBitfield_Mask
+AIBITFIELD_INITIALIZATION_MASK: equ WORD_LOWER_NIBBLE_MASK
 
 ; ---------------------------------------------------------------------------
 
@@ -672,20 +830,37 @@ ENEMYAI_MIN_MP_AURA4: equ 30
 
 ; ---------------------------------------------------------------------------
 
+; enum Icons
+
+iconNothing         = 127
+iconUnarmed         = 128
+iconSpellsStart     = 130 ; HEAL
+iconJewelOfLight    = 146
+iconJewelOfEvil     = 147
+iconCracksOverlay   = 148
+
+    if (STANDARD_BUILD=1)
+iconNothing         = 0 ; In the standard build, icons are grouped into 3 categories: Item, Spell, and Other
+iconUnarmed         = 1
+iconJewelOfLight    = 2
+iconJewelOfEvil     = 3
+iconCracksOverlay   = 4
+    endif
+
+ICON_NOTHING: equ iconNothing
+ICON_UNARMED: equ iconUnarmed
+ICON_SPELLS_START: equ iconSpellsStart ; HEAL
+ICON_JEWEL_OF_LIGHT: equ iconJewelOfLight
+ICON_JEWEL_OF_EVIL: equ iconJewelOfEvil
+ICON_CRACKS_OVERLAY: equ iconCracksOverlay
+
+; ---------------------------------------------------------------------------
+
 ; enum IconProperties
 ICON_PIXELS_LONGWORD_COUNTER: equ $2F
 ICON_PIXELS_BYTE_COUNTER: equ $BF
 ICON_TILE_BYTESIZE: equ $C0
-ICONS_OFFSET_CRACKS: equ $6F00
-
-; ---------------------------------------------------------------------------
-
-; enum Icons
-ICON_NOTHING: equ 127
-ICON_UNARMED: equ 128
-ICON_SPELLS_START: equ 130 ; HEAL
-ICON_JEWEL_OF_LIGHT: equ 146
-ICON_JEWEL_OF_EVIL: equ 147
+ICONS_OFFSET_CRACKS: equ ICON_CRACKS_OVERLAY*ICON_TILE_BYTESIZE
 
 ; ---------------------------------------------------------------------------
 
@@ -714,18 +889,34 @@ INPUT_BIT_START: equ 7
 ; ---------------------------------------------------------------------------
 
 ; enum ItemDef_Offsets
-ITEMDEF_OFFSET_EQUIPFLAGS: equ 0
-ITEMDEF_OFFSET_MAX_RANGE: equ 4
-ITEMDEF_OFFSET_MIN_RANGE: equ 5
-ITEMDEF_OFFSET_PRICE: equ 6
-ITEMDEF_OFFSET_TYPE: equ 8
-ITEMDEF_OFFSET_USE_SPELL: equ 9
-ITEMDEF_OFFSET_EQUIPEFFECTS: equ 10
+
+equipFlagsSize = 4
+equipEffectsSize = 6
+
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+equipFlagsSize = 8
+    endif
+
+    if (STANDARD_BUILD=1)
+equipEffectsSize = 18
+    endif
+
+                                rsreset
+ITEMDEF_OFFSET_EQUIPFLAGS:      rs.b equipFlagsSize
+ITEMDEF_OFFSET_MAX_RANGE:       rs.b 1
+ITEMDEF_OFFSET_MIN_RANGE:       rs.b 1
+ITEMDEF_OFFSET_PRICE:           rs.b 2
+ITEMDEF_OFFSET_TYPE:            rs.b 1
+ITEMDEF_OFFSET_USE_SPELL:       rs.b 1
+ITEMDEF_OFFSET_EQUIPEFFECTS:    rs.b equipEffectsSize
 
 ; ---------------------------------------------------------------------------
 
 ; enum ItemDef_Properties
-ITEMDEF_SIZE: equ 16
+
+itemDefSize = __RS
+
+ITEMDEF_SIZE: equ itemDefSize
 
 ; ---------------------------------------------------------------------------
 
@@ -762,40 +953,164 @@ EQUIPFLAG_MNST: equ $10000000
 EQUIPFLAG_RBT: equ $20000000
 EQUIPFLAG_GLM: equ $40000000
 EQUIPFLAG_RDBN: equ $80000000
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+EQUIPFLAG2_32: equ $1
+EQUIPFLAG2_33: equ $2
+EQUIPFLAG2_34: equ $4
+EQUIPFLAG2_35: equ $8
+EQUIPFLAG2_36: equ $10
+EQUIPFLAG2_37: equ $20
+EQUIPFLAG2_38: equ $40
+EQUIPFLAG2_39: equ $80
+EQUIPFLAG2_40: equ $100
+EQUIPFLAG2_41: equ $200
+EQUIPFLAG2_42: equ $400
+EQUIPFLAG2_43: equ $800
+EQUIPFLAG2_44: equ $1000
+EQUIPFLAG2_45: equ $2000
+EQUIPFLAG2_46: equ $4000
+EQUIPFLAG2_47: equ $8000
+EQUIPFLAG2_48: equ $10000
+EQUIPFLAG2_49: equ $20000
+EQUIPFLAG2_50: equ $40000
+EQUIPFLAG2_51: equ $80000
+EQUIPFLAG2_52: equ $100000
+EQUIPFLAG2_53: equ $200000
+EQUIPFLAG2_54: equ $400000
+EQUIPFLAG2_55: equ $800000
+EQUIPFLAG2_56: equ $1000000
+EQUIPFLAG2_57: equ $2000000
+EQUIPFLAG2_58: equ $4000000
+EQUIPFLAG2_59: equ $8000000
+EQUIPFLAG2_60: equ $10000000
+EQUIPFLAG2_61: equ $20000000
+EQUIPFLAG2_62: equ $40000000
+EQUIPFLAG2_63: equ $80000000
+    endif
 
 ; ---------------------------------------------------------------------------
 
 ; enum EquipFlags_Other
 EQUIPFLAG_NONE: equ 0
-EQUIPFLAG_ALL: equ $FFFFFFFF
+EQUIPFLAG_ALL: equ -1
+    if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+EQUIPFLAG2_NONE: equ 0
+EQUIPFLAG2_ALL: equ -1
+    endif
 
 ; ---------------------------------------------------------------------------
 
 ; enum EquipEffects
-EQUIPEFFECT_NONE: equ 0
+    if (STANDARD_BUILD=1) ; ADDITIONAL_EQUIPEFFECTS
+            rsreset
+EQUIPEFFECT_NONE: rs.b 1
+EQUIPEFFECT_HP_RECOVERY: equ EQUIPEFFECT_NONE
+EQUIPEFFECT_MP_RECOVERY: equ EQUIPEFFECT_NONE
+EQUIPEFFECT_INCREASE_ATT: rs.b 1
+EQUIPEFFECT_INCREASE_DEF: rs.b 1
+EQUIPEFFECT_INCREASE_AGI: rs.b 1
+EQUIPEFFECT_INCREASE_MOV: rs.b 1
+EQUIPEFFECT_INCREASE_CRITICAL: rs.b 1
+EQUIPEFFECT_INCREASE_DOUBLE: rs.b 1
+EQUIPEFFECT_INCREASE_COUNTER: rs.b 1
+EQUIPEFFECT_INCREASE_RESISTANCE: rs.b 1
+EQUIPEFFECT_DECREASE_ATT: rs.b 1
+EQUIPEFFECT_DECREASE_DEF: rs.b 1
+EQUIPEFFECT_DECREASE_AGI: rs.b 1
+EQUIPEFFECT_DECREASE_MOV: rs.b 1
+EQUIPEFFECT_DECREASE_CRITICAL: rs.b 1
+EQUIPEFFECT_DECREASE_DOUBLE: rs.b 1
+EQUIPEFFECT_DECREASE_COUNTER: rs.b 1
+EQUIPEFFECT_DECREASE_RESISTANCE: rs.b 1
+EQUIPEFFECT_SET_ATT: rs.b 1
+EQUIPEFFECT_SET_DEF: rs.b 1
+EQUIPEFFECT_SET_AGI: rs.b 1
+EQUIPEFFECT_SET_MOV: rs.b 1
+EQUIPEFFECT_SET_DOUBLE_TURN_ON: rs.b 1
+EQUIPEFFECT_SET_DOUBLE_TURN_OFF: rs.b 1
+EQUIPEFFECT_SET_CRITICAL_150: rs.b 1
+EQUIPEFFECT_SET_CRITICAL_125: rs.b 1
+EQUIPEFFECT_SET_CRITICAL: rs.b 1
+EQUIPEFFECT_SET_DOUBLE: rs.b 1
+EQUIPEFFECT_SET_COUNTER: rs.b 1
+EQUIPEFFECT_SET_RESISTANCE_WIND: rs.b 1
+EQUIPEFFECT_SET_RESISTANCE_LIGHTNING: rs.b 1
+EQUIPEFFECT_SET_RESISTANCE_ICE: rs.b 1
+EQUIPEFFECT_SET_RESISTANCE_FIRE: rs.b 1
+EQUIPEFFECT_SET_RESISTANCE_STATUS: rs.b 1
+EQUIPEFFECT_SET_STATUS: rs.b 1
+EQUIPEFFECT_SET_MOVETYPE: rs.b 1
+EQUIPEFFECT_LEARN_SPELL: rs.b 1
+EQUIPEFFECT_UNLEARN_ALL_SPELLS: rs.b 1
+    else
+EQUIPEFFECT_NONE: equ 0 
 EQUIPEFFECT_HP_RECOVERY: equ 1 ; does nothing
 EQUIPEFFECT_INCREASE_CRITICAL: equ 2
 EQUIPEFFECT_INCREASE_DOUBLE: equ 3
 EQUIPEFFECT_INCREASE_COUNTER: equ 4
 EQUIPEFFECT_MP_RECOVERY: equ 5 ; does nothing
-EQUIPEFFECT_INCREASE_ATT: equ 6
-EQUIPEFFECT_INCREASE_DEF: equ 7
-EQUIPEFFECT_INCREASE_AGI: equ 8
-EQUIPEFFECT_INCREASE_MOV: equ 9
-EQUIPEFFECT_DECREASE_ATT: equ 10
-EQUIPEFFECT_DECREASE_DEF: equ 11
-EQUIPEFFECT_DECREASE_AGI: equ 12
-EQUIPEFFECT_DECREASE_MOV: equ 13
-EQUIPEFFECT_SET_CRITICAL: equ 14
-EQUIPEFFECT_SET_DOUBLE: equ 15
-EQUIPEFFECT_SET_COUNTER: equ 16
+EQUIPEFFECT_INCREASE_ATT: equ 6 
+EQUIPEFFECT_INCREASE_DEF: equ 7 
+EQUIPEFFECT_INCREASE_AGI: equ 8 
+EQUIPEFFECT_INCREASE_MOV: equ 9 
+EQUIPEFFECT_DECREASE_ATT: equ 10 
+EQUIPEFFECT_DECREASE_DEF: equ 11 
+EQUIPEFFECT_DECREASE_AGI: equ 12 
+EQUIPEFFECT_DECREASE_MOV: equ 13 
+EQUIPEFFECT_SET_CRITICAL: equ 14 
+EQUIPEFFECT_SET_DOUBLE: equ 15 
+EQUIPEFFECT_SET_COUNTER: equ 16 
+    endif
 
 ; ---------------------------------------------------------------------------
 
 ; enum EquipEffects_Properties
-EQUIPEFFECTS_COUNTER: equ 1
-EQUIPEFFECTS_ENTRY_SIZE: equ 2
-EQUIPEFFECTS_MAX_INDEX: equ 17
+
+parameterOffset = 1
+effectsNumber = 2
+totalEffects = 17
+
+    if (STANDARD_BUILD=1) ; ADDITIONAL_EQUIPEFFECTS
+parameterOffset = 6
+effectsNumber = 6
+totalEffects = __RS
+    endif
+
+EQUIPEFFECT_OFFSET_PARAMETER: equ parameterOffset
+EQUIPEFFECTS_COUNTER: equ effectsNumber-1
+EQUIPEFFECTS_NUMBER: equ effectsNumber
+EQUIPEFFECTS_ENTRY_SIZE: equ 2 ; unused in standard build
+EQUIPEFFECTS_MAX_INDEX: equ totalEffects
+
+; ---------------------------------------------------------------------------
+
+; enum EquipEffects_ResistanceParameters (bitfield)
+MODIFY_WIND1: equ $1 ; ADDITIONAL_EQUIPEFFECTS
+MODIFY_WIND2: equ $2
+MODIFY_WIND3: equ $3
+MODIFY_LIGHTNING1: equ $4
+MODIFY_LIGHTNING2: equ $8
+MODIFY_LIGHTNING3: equ $C
+MODIFY_ICE1: equ $10
+MODIFY_ICE2: equ $20
+MODIFY_ICE3: equ $30
+MODIFY_FIRE1: equ $40
+MODIFY_FIRE2: equ $80
+MODIFY_FIRE3: equ $C0
+MODIFY_NEUTRAL1: equ $100
+MODIFY_NEUTRAL2: equ $200
+MODIFY_NEUTRAL3: equ $300
+MODIFY_STATUS1: equ $4000
+MODIFY_STATUS2: equ $8000
+MODIFY_STATUS3: equ $C000
+
+; ---------------------------------------------------------------------------
+
+; enum ItemStatBoosters
+STAT_BOOST_MIN: equ 2
+STAT_BOOST_MOV: equ 2
+STAT_BOOST_MAX: equ 4
+STAT_BOOST_MOV_CAP: equ 9
 
 ; ---------------------------------------------------------------------------
 
@@ -808,10 +1123,24 @@ STAT_BOOST_MOV_CAP: equ 9
 ; ---------------------------------------------------------------------------
 
 ; enum ShopProperties
+
+shopsNumber: = 31
+
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+shopsNumber: = shopsNumber+1
+    endif
+
+shopsMaxIndex: = shopsNumber-1
+shopsDebugMaxIndex: = 100
+
+    if (STANDARD_BUILD=1)
+shopsDebugMaxIndex: = shopsMaxIndex
+    endif
+
 ITEMS_PER_SHOP_PAGE: equ 6
-SHOPS_MAX_INDEX: equ 30
-SHOPS_NUMBER: equ 31
-SHOPS_DEBUG_MAX_INDEX: equ 100
+SHOPS_MAX_INDEX: equ shopsMaxIndex
+SHOPS_NUMBER:  equ shopsNumber
+SHOPS_DEBUG_MAX_INDEX: equ shopsDebugMaxIndex
 
 ; ---------------------------------------------------------------------------
 
@@ -850,34 +1179,40 @@ SHOP_ITEM_ROFT: equ 28
 SHOP_ITEM_GALAM_1: equ 29
 SHOP_YEEL_UNDERGROUND: equ 29
 SHOP_DEBUG: equ 30
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+SHOP_DEBUG_EXTENDED: equ 31                     ; additional debug shop for extended items
+    endif
+SHOP_MINATURES_ROOM: equ SHOP_UNUSED1 ; made available in the Desktop Kingdom if MINIATURES_SHOP=1
 
 ; ---------------------------------------------------------------------------
 
 ; enum Deals
+
+dealsItemsByteSize = 64
+
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+dealsItemsByteSize = 128
+    endif
+
 DEALS_ADD_AMOUNT_ODD: equ 1
 DEALS_MAX_NUMBER_PER_ITEM: equ $F
 DEALS_BIT_REMAINDER: equ $10 ; since deals are stacked 2 to a byte, this is the bit index that stores whether we are an even or odd item index
 DEALS_ADD_AMOUNT_EVEN: equ $10
-DEALS_ITEMS_BYTES: equ $40
-DEALS_ITEMS_COUNTER: equ $7F
-
-; ---------------------------------------------------------------------------
-
-; enum Blacksmith
-BLACKSMITH_ORDERS_COUNTER: equ 3
-BLACKSMITH_MAX_ORDERS_NUMBER: equ 4 ; ordered mithril weapon slots in RAM
-BLACKSMITH_ORDER_COST: equ 5000
-
-; ---------------------------------------------------------------------------
-
-; enum Caravan
-CARAVAN_ITEM_ENTRY_SIZE: equ 1
-CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE: equ 63
-CARAVAN_MAX_ITEMS_NUMBER: equ 64
+DEALS_ITEMS_BYTES: equ dealsItemsByteSize
+DEALS_ITEMS_COUNTER: equ (dealsItemsByteSize*2)-1
 
 ; ---------------------------------------------------------------------------
 
 ; enum Items (bitfield)
+
+itemNothing     = $7F
+itemEquipped    = $80
+
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+itemNothing     = $FF
+itemEquipped    = $1000
+    endif
+
 ITEM_MEDICAL_HERB: equ 0
 ITEM_HEALING_SEED: equ 1
 ITEM_HEALING_DROP: equ 2
@@ -997,7 +1332,7 @@ ITEM_DRY_STONE: equ $73
 ITEM_DYNAMITE: equ $74
 ITEM_ARM_OF_GOLEM: equ $75
 ITEM_PEGASUS_WING: equ $76
-ITEM_WARRIORS_PRIDE: equ $77
+ITEM_WARRIOR_PRIDE: equ $77
 ITEM_SILVER_TANK: equ $78
 ITEM_SECRET_BOOK: equ $79
 ITEM_VIGOR_BALL: equ $7A
@@ -1005,11 +1340,16 @@ ITEM_MITHRIL: equ $7B
 ITEM_LIFE_RING: equ $7C
 ITEM_COTTON_BALLOON: equ $7D
 ITEM_CHIRRUP_SANDALS: equ $7E
-ITEM_NOTHING: equ $7F
-ITEM_EQUIPPED: equ $80
+ITEM_NOTHING: equ itemNothing
+ITEM_EQUIPPED: equ itemEquipped
 ITEM_USABLE_BY_AI: equ $2000
 ITEM_UNUSED_ITEM_DROP: equ $4000
 ITEM_BROKEN: equ $8000
+
+; ---------------------------------------------------------------------------
+
+; enum ItemUnarmed
+ITEM_UNARMED: equ ITEM_NOTHING+1
 
 ; ---------------------------------------------------------------------------
 
@@ -1042,23 +1382,48 @@ ITEMTYPE_BIT_BREAKABLE: equ 7
 ; ---------------------------------------------------------------------------
 
 ; enum ItemEntry
-ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT: equ 1
-ITEMENTRY_SIZE: equ 2
-ITEMENTRY_BIT_EQUIPPED: equ 7
+
+itemEntryIndexAndEquippedBitOffset = 1
+itemEntrySize = 2
+itemEntryBitEquipped = 7
+itemEntryMaskIndex = $7F
+itemEntryMaskBrokenBit = $8000
+
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+itemEntryIndexAndEquippedBitOffset = itemEntryIndexAndEquippedBitOffset*2
+itemEntrySize = itemEntrySize*2
+    endif
+    
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+itemEntryBitEquipped = 12
+itemEntryMaskIndex = $FF
+    endif
+
+ITEMENTRY_OFFSET_INDEX_AND_EQUIPPED_BIT: equ itemEntryIndexAndEquippedBitOffset
+ITEMENTRY_SIZE: equ itemEntrySize
+ITEMENTRY_UPPERBIT_EQUIPPED: equ 4
+ITEMENTRY_BIT_EQUIPPED: equ itemEntryBitEquipped
 ITEMENTRY_UPPERBIT_BROKEN: equ 7
-ITEMENTRY_BIT_USABLE_BY_AI: equ $D
-ITEMENTRY_BIT_DROPPED_BY_ENEMY: equ $E
-ITEMENTRY_BIT_BROKEN: equ $F
-ITEMENTRY_MASK_INDEX: equ $7F
-ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT: equ $807F
+ITEMENTRY_BIT_USABLE_BY_AI: equ 13
+ITEMENTRY_BIT_DROPPED_BY_ENEMY: equ 14
+ITEMENTRY_BIT_BROKEN: equ 15
+ITEMENTRY_MASK_INDEX: equ itemEntryMaskIndex
+ITEMENTRY_MASK_INDEX_AND_BROKEN_BIT: equ itemEntryMaskBrokenBit|itemEntryMaskIndex
 
 ; ---------------------------------------------------------------------------
 
 ; enum ItemIndex_Properties
+
+itemIndexMax = 127
+
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+itemIndexMax = 255
+    endif
+
 ITEMINDEX_WEAPONS_START: equ 26 ; Leather Glove
 ITEMINDEX_WEAPONS_END: equ 109 ; Gisarme
-ITEMINDEX_MAX: equ 127
-ITEMINDEX_GOLDCHESTS_START: equ 128
+ITEMINDEX_MAX: equ itemIndexMax
+ITEMINDEX_GOLDCHESTS_START: equ itemIndexMax+1
 
 ; ---------------------------------------------------------------------------
 
@@ -1070,7 +1435,7 @@ ITEMSELLPRICE_MULTIPLIER: equ 3 ; multiply price by this, then bitshift right by
 
 ; enum ItemBreakTypes
 ITEMBREAK_FLAMES: equ 0
-ITEMBREAK_PIECES: equ 1 
+ITEMBREAK_PIECES: equ 1
 ITEMBREAK_SPLIT: equ 2
 ITEMBREAK_MANGLED: equ 3
 ITEMBREAK_RUSTED: equ 4
@@ -1078,14 +1443,64 @@ ITEMBREAK_RUSTED: equ 4
 ; ---------------------------------------------------------------------------
 
 ; enum EquipmentTypes
-EQUIPMENTTYPE_TOOL: equ 0
-EQUIPMENTTYPE_WEAPON: equ 1
-EQUIPMENTTYPE_RING: equ $FFFF
+EQUIPMENTTYPE_TOOL: equ 0 ; i.e., can't be equipped
+EQUIPMENTTYPE_WEAPON: equ 1 
+EQUIPMENTTYPE_RING: equ -1
+
+; ---------------------------------------------------------------------------
+
+; enum EquipmentTypes_Properties
+EQUIPMENTTYPES_COUNTER: equ 1 ; weapon + ring
+
+; ---------------------------------------------------------------------------
+
+; enum Blacksmith
+
+maxBlacksmithOrdersNumber = 4
+
+    if (STANDARD_BUILD&EXPANDED_SAVED_DATA=1)
+maxBlacksmithOrdersNumber = 16
+    endif
+
+BLACKSMITH_ORDERS_COUNTER: equ BLACKSMITH_MAX_ORDERS_NUMBER-1
+BLACKSMITH_MAX_ORDERS_NUMBER: equ maxBlacksmithOrdersNumber ; ordered mithril weapon slots in RAM
+BLACKSMITH_MITHRIL_ITEM: equ 123 ; ITEM_MITHRIL
+BLACKSMITH_ORDER_COST: equ 5000
+
+; ---------------------------------------------------------------------------
+
+; enum Caravan
+
+caravanItemEntrySize = 1
+caravanMaxItemsNumber = 64
+
+    if (STANDARD_BUILD=1)
+caravanItemEntrySize = caravanItemEntrySize*2
+        if (RELOCATED_SAVED_DATA_TO_SRAM=1)
+caravanItemEntrySize = caravanItemEntrySize*2
+        endif
+        if (EXPANDED_SRAM=0)
+caravanMaxItemsNumber = caravanMaxItemsNumber/2
+        endif
+    endif
+
+CARAVAN_ITEM_ENTRY_SIZE: equ caravanItemEntrySize
+CARAVAN_ROHDE_PORTRAIT: equ 11
+CARAVAN_ASTRAL_PORTRAIT: equ 31
+CARAVAN_MAX_ITEMS_NUMBER_MINUS_ONE: equ caravanMaxItemsNumber-1
+CARAVAN_MAX_ITEMS_NUMBER: equ caravanMaxItemsNumber
 
 ; ---------------------------------------------------------------------------
 
 ; enum MithrilWeaponsProperties
-MITHRIL_WEAPON_ORDER_SLOT_SIZE: equ 2
+
+mithrilWeaponSlotSize = 2
+
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+mithrilWeaponSlotSize = 4
+    endif
+
+MITHRIL_WEAPON_ORDER_SLOT_SIZE: equ mithrilWeaponSlotSize
 MITHRIL_WEAPONS_PER_CLASS_COUNTER: equ 3
 MITHRIL_WEAPON_CLASSES_COUNTER: equ 7
 
@@ -1102,23 +1517,37 @@ MAP_NULLPOSITION: equ $FFFF
 ; ---------------------------------------------------------------------------
 
 ; enum Map_Entity
+
+entityVelocityYOffset = 6
+entityVelocityYLowerByteOffset = entityVelocityYOffset+1
+entityDestinationXOffset = 12
+entityDestinationYOffset = 14
+entityMapspriteOffset = 19
+entitySize = 32
+
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+entityVelocityYOffset = 5
+entityVelocityYLowerByteOffset = entityVelocityYOffset
+entityMapspriteOffset = 6
+    endif
+
 ENTITYDEF_OFFSET_X: equ 0
 ENTITYDEF_OFFSET_Y: equ 2
 ENTITYDEF_OFFSET_Y_LOWERBYTE: equ 3
 ENTITYDEF_OFFSET_XVELOCITY: equ 4
 ENTITYDEF_SIZE_BITS: equ 5
-ENTITYDEF_OFFSET_YVELOCITY: equ 6
-ENTITYDEF_OFFSET_YVELOCITY_LOWERBYTE: equ 7
+ENTITYDEF_OFFSET_YVELOCITY: equ entityVelocityYOffset
+ENTITYDEF_OFFSET_YVELOCITY_LOWERBYTE: equ entityVelocityYLowerByteOffset
 ENTITYDEF_OFFSET_XTRAVEL: equ 8
 ENTITYDEF_OFFSET_YTRAVEL: equ $A
-ENTITYDEF_OFFSET_YTRAVEL_LOWERBYTE: equ $B
-ENTITYDEF_OFFSET_XDEST: equ $C
-ENTITYDEF_OFFSET_YDEST: equ $E
-ENTITYDEF_OFFSET_YDEST_LOWERBYTE: equ $F
+ENTITYDEF_OFFSET_YTRAVEL_LOWERBYTE: equ ENTITYDEF_OFFSET_YTRAVEL+1
+ENTITYDEF_OFFSET_XDEST: equ entityDestinationXOffset
+ENTITYDEF_OFFSET_YDEST: equ entityDestinationYOffset
+ENTITYDEF_OFFSET_YDEST_LOWERBYTE: equ ENTITYDEF_OFFSET_YDEST+1
 ENTITYDEF_OFFSET_FACING: equ $10
 ENTITYDEF_OFFSET_LAYER: equ $11
 ENTITYDEF_OFFSET_ENTNUM: equ $12
-ENTITYDEF_OFFSET_MAPSPRITE: equ $13
+ENTITYDEF_OFFSET_MAPSPRITE: equ entityMapspriteOffset
 ENTITYDEF_OFFSET_ACTSCRIPTADDR: equ $14
 ENTITYDEF_OFFSET_23: equ $17
 ENTITYDEF_OFFSET_XACCEL: equ $18
@@ -1126,16 +1555,32 @@ ENTITYDEF_OFFSET_YACCEL: equ $19
 ENTITYDEF_OFFSET_XSPEED: equ $1A
 ENTITYDEF_OFFSET_YSPEED: equ $1B
 ENTITYDEF_OFFSET_FLAGS_A: equ $1C
-ENTITYDEF_OFFSET_FLAGS_B: equ $1D
+ENTITYDEF_OFFSET_FLAGS_B: equ $1D ; 0-1: facing direction
+                                        ; 2: ghost
+                                        ; 3: resize
+                                        ; 4: 2x animation speed
+                                        ; 5: immersed
+                                        ; 6: auto-facing
+                                        ; 7: blinking
 ENTITYDEF_OFFSET_ANIMCOUNTER: equ $1E
 ENTITYDEF_OFFSET_ACTSCRIPTWAITTIMER: equ $1F
-ENTITYDEF_SIZE: equ $20
-NEXT_ENTITYDEF: equ $20
-ENTITYDEF_SECOND_ENTITY_XDEST: equ $2C
-ENTITYDEF_SECOND_ENTITY_YDEST: equ $2E
-ENTITYDEF_SECOND_ENTITY_MAPSPRITE: equ $33
-ENTITYDEF_ENTITY32_XDEST: equ $3EC
-ENTITYDEF_ENTITY32_YDEST: equ $3EE
+ENTITYDEF_SIZE: equ entitySize
+NEXT_ENTITYDEF: equ entitySize
+ENTITYDEF_SECOND_ENTITY_XDEST: equ entitySize+entityDestinationXOffset
+ENTITYDEF_SECOND_ENTITY_YDEST: equ entitySize+entityDestinationYOffset
+ENTITYDEF_SECOND_ENTITY_MAPSPRITE: equ entitySize+entityMapspriteOffset
+ENTITYDEF_ENTITY32_XDEST: equ 31*entitySize+entityDestinationXOffset
+ENTITYDEF_ENTITY32_YDEST: equ 31*entitySize+entityDestinationYOffset
+
+; ---------------------------------------------------------------------------
+
+; enum EntityDef_FlagsB
+ENTITYDEF_FLAGS_B_GHOST: equ 2
+ENTITYDEF_FLAGS_B_RESIZE: equ 3
+ENTITYDEF_FLAGS_B_2X_ANIMATION_SPEED: equ 4
+ENTITYDEF_FLAGS_B_IMMERSED: equ 5
+ENTITYDEF_FLAGS_B_AUTO_FACING: equ 6
+ENTITYDEF_FLAGS_B_BLINKING: equ 7
 
 ; ---------------------------------------------------------------------------
 
@@ -1143,18 +1588,24 @@ ENTITYDEF_ENTITY32_YDEST: equ $3EE
 ENTITY_PLAYER_CHARACTER: equ 0
 ENTITY_CARAVAN: equ 1
 ENTITY_CURSOR_SPRITES_COUNTER: equ 3
-ENTITY_RAFT: equ $1F
-ENTITY_ENEMY_START: equ $20
-ENTITY_SPECIAL_SPRITE: equ $2F
-ENTITIES_COUNTER_MINUS_ONE: equ $2F
-ENTITY_CURSOR: equ $30
-ENTITIES_COUNTER: equ $30
-ENTITIES_TOTAL_COUNTER: equ $3F
-ENTITY_ENEMY_INDEX_DIFFERENCE: equ $60
+ENTITY_RAFT: equ 31
+ENTITY_ENEMY_START: equ 32
+ENTITY_SPECIAL_SPRITE: equ 47
+ENTITIES_COUNTER_MINUS_ONE: equ 47
+ENTITY_CURSOR: equ 48
+ENTITIES_COUNTER: equ 48
+ENTITIES_TOTAL_COUNTER: equ 63
+ENTITY_ENEMY_INDEX_DIFFERENCE: equ 96
 ENTITY_NONE: equ 255
-ENTITY_SPECIAL_SPRITE_WORD_ADDRESS: equ $AEE2
+
+ENTITY_SPECIAL_SPRITE_WORD_ADDRESS: equ ENTITY_SPECIAL_SPRITE_DATA-FF0000_RAM_START ; $AEE2
 ENTITY_CURSOR_WORD_ADDRESS: equ $AF02
-ENTITY_LAST_SPRITE_PLUS_ONE_WORD_ADDRESS: equ $DE80
+ENTITY_LAST_SPRITE_PLUS_ONE_WORD_ADDRESS: equ SPRITE_63+VDP_SPRITE_ENTRY_SIZE-FF0000_RAM_START
+
+; ---------------------------------------------------------------------------
+
+; enum CameraEntity
+CAMERA_NEUTRAL: equ $FFFF
 
 ; ---------------------------------------------------------------------------
 
@@ -1173,6 +1624,10 @@ SOUND_COMMAND_UPDATE_MUSIC_LEVEL: equ $FC
 SOUND_COMMAND_FADE_OUT: equ $FD
 SOUND_COMMAND_CUT_OUT: equ $FE
 SOUND_COMMAND_GET_D0_PARAMETER: equ $FFFF
+    if (STANDARD_BUILD=1)
+SOUND_COMMAND_DEACTIVATE_RESUMING: equ $F9
+SOUND_COMMAND_ACTIVATE_RESUMING: equ $FA
+    endif
 
 ; ---------------------------------------------------------------------------
 
@@ -1297,23 +1752,29 @@ SPELLDEF_OFFSET_POWER: equ 7
 ; ---------------------------------------------------------------------------
 
 ; enum SpellDef_Properties
+
+spellDefsCounter = 99
+
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+spellDefsCounter = 251
+    endif
+
 SPELLDEF_ENTRY_SIZE: equ 8
-SPELLDEFS_COUNTER: equ 99
+SPELLDEFS_COUNTER: equ spellDefsCounter
 
 ; ---------------------------------------------------------------------------
 
 ; enum SpellAnimations (bitfield)
 SPELLANIMATION_NONE: equ 0
-SPELLANIMATION_BLAZE: equ 1 ; variation 1: lone flame
-                            ; variation 2: small flame/fireballs
-                            ; variation 3: large flame/fireballs
-                            ; variation 4: large flame and flame serpent
+SPELLANIMATION_BLAZE: equ 1                 ; variation 1: lone flame
+                                            ; variation 2: small flame/fireballs
+                                            ; variation 3: large flame/fireballs
+                                            ; variation 4: large flame and flame serpent
 SPELLANIMATION_FREEZE: equ 2
 SPELLANIMATION_DESOUL: equ 3
-SPELLANIMATION_HEALING_FAIRY: equ 4 ; ally caster: fairy of light
-                                    ; enemy caster: fairy of darkness
-SPELLANIMATION_BLAST: equ 5 ; variation : wind scythes
-                            ; variation 4: cyclone
+SPELLANIMATION_HEALING_FAIRY: equ 4         ; ally caster: fairy of light
+                                            ; enemy caster: fairy of darkness
+SPELLANIMATION_BLAST: equ 5
 SPELLANIMATION_DETOX: equ 6
 SPELLANIMATION_BOLT: equ 7
 SPELLANIMATION_BUFF1: equ 8
@@ -1321,12 +1782,12 @@ SPELLANIMATION_DEBUFF1: equ 9
 SPELLANIMATION_ABSORB: equ $A
 SPELLANIMATION_DEMON_BREATH: equ $B
 SPELLANIMATION_FLAME_BREATH: equ $C
-SPELLANIMATION_ARROWS_AND_SPEARS: equ $D ; variation 1: Wooden, Iron, and Steel Arrow
-                                        ; variation 2: Robin Arrow, Assault Shell
-                                        ; variation 3: Spears
-SPELLANIMATION_CANNON_PROJECTILE: equ $E ; Nazca, Hyper, and Grand Cannon
-SPELLANIMATION_SHOT_PROJECTILE: equ $F ; Great, Buster, and Evil Shot
-SPELLANIMATION_GUNNER_PROJECTILE: equ $10 ; BRGN class and Dark Gunner enemy attacks
+SPELLANIMATION_ARROWS_AND_SPEARS: equ $D    ; variation 1: Wooden, Iron, and Steel Arrow
+                                            ; variation 2: Robin Arrow, Assault Shell
+                                            ; variation 3: Spears
+SPELLANIMATION_CANNON_PROJECTILE: equ $E    ; Nazca, Hyper, and Grand Cannon
+SPELLANIMATION_SHOT_PROJECTILE: equ $F      ; Great, Buster, and Evil Shot
+SPELLANIMATION_GUNNER_PROJECTILE: equ $10   ; BRGN class and Dark Gunner enemy attacks
 SPELLANIMATION_DAO: equ $11
 SPELLANIMATION_APOLLO: equ $12
 SPELLANIMATION_NEPTUN: equ $13
@@ -1334,13 +1795,13 @@ SPELLANIMATION_ATLAS: equ $14
 SPELLANIMATION_PRISM_LASER: equ $15
 SPELLANIMATION_BUBBLE_BREATH: equ $16
 SPELLANIMATION_SNOW_BREATH: equ $17
-SPELLANIMATION_CUTOFF: equ $18 ; used by Gisarme insta-kill
+SPELLANIMATION_CUTOFF: equ $18              ; used by Gisarme insta-kill
 SPELLANIMATION_BUFF2: equ $19
-SPELLANIMATION_ATTACK_SPELL: equ $1A ; SFCD's ATTACK spell (unused)
+SPELLANIMATION_ATTACK_SPELL: equ $1A        ; SFCD's ATTACK spell (unused)
 SPELLANIMATION_DEBUFF2: equ $1B
 SPELLANIMATION_DEBUFF3: equ $1C
-SPELLANIMATION_PHOENIX_ATTACK: equ $1D ; variation 1/3: sound waves
-                                       ; variation 2/4: Blast cyclone
+SPELLANIMATION_PHOENIX_ATTACK: equ $1D      ; variation 1/3: sound waves
+                                            ; variation 2/4: Blast cyclone
 SPELLANIMATION_BURST_ROCK_EXPLOSION: equ $1E
 SPELLANIMATION_ODD_EYE_BEAM: equ $1F
 SPELLANIMATION_VARIATION2: equ $20
@@ -1528,6 +1989,16 @@ SPELLELEMENT_STATUS: equ 14
 
 ; ---------------------------------------------------------------------------
 
+; enum SpellElements_Properties
+
+elementNumber = 8
+
+SPELLELEMENT_SETTING_MASK: equ 3
+SPELLELEMENTS_COUNTER: equ elementNumber-1
+SPELLELEMENTS_NUMBER: equ elementNumber
+
+; ---------------------------------------------------------------------------
+
 ; enum BattleActionEngine_SpellEffects
 CHANCE_TO_CRITICAL_DEMON_BREATH: equ 0 ; no chance to critical hit
 CHANCE_TO_INFLICT_MUDDLE1: equ 5 ; 3/8 base chance to inflict muddle 1
@@ -1539,6 +2010,7 @@ CHANCE_TO_INFLICT_SLEEP: equ 5 ; 3/8 base chance to inflict sleep
 STATUSEFFECT_SPELL_EXP: equ 5 ; 5 exp per target
 CHANCE_TO_CRITICAL_BUBBLE_BREATH: equ 8 ; 1/8 chance to critical hit
 CHANCE_TO_CRITICAL_BOLT: equ 8 ; 1/8 chance to critical hit (Bolt, Raijin, Atlas, Holy Thunder, Odd-eye beam)
+HEALING_SPELL_EXP_MIN: equ 10
 CHANCE_TO_CRITICAL_FLAME_BREATH: equ 16 ; 1/16 chance to critical hit (Flame Breath, Kiwi's Flame Breath)
 CHANCE_TO_CRITICAL_NEPTUN: equ 16 ; 1/16 chance to critical hit
 HEALING_SPELL_EXP_MIN: equ 10
@@ -1552,14 +2024,25 @@ PER_ACTION_EXP_CAP: equ 49
 ; ---------------------------------------------------------------------------
 
 ; enum BattleActionEngine_Properties
-CHANCE_TO_DODGE_FOR_MUDDLED_ATTACKER: equ 2 ; 1/2 chance to dodge if attacker is muddled
+
+chanceToDodgeForMuddledAttacker = 2     ; 1/2
+chanceToDodgeForAirborneTarget = 8      ; 1/8
+chanceToDodgeDefault = 32               ; 1/32
+
+    if (STANDARD_BUILD=1)
+chanceToDodgeForMuddledAttacker = 128   ; n/256
+chanceToDodgeForAirborneTarget = 32     ; 
+chanceToDodgeDefault = 8                ; 
+    endif
+
+CHANCE_TO_DODGE_FOR_MUDDLED_ATTACKER: equ chanceToDodgeForMuddledAttacker ; 1/2 chance to dodge if attacker is muddled
 CHANCE_TO_INFLICT_CURSE_DAMAGE: equ 2 ; 1/2 chance to inflict curse damage
 CHANCE_TO_BREAK_USED_ITEM: equ 4 ; 1/4 chance to break used item
 CHANCE_TO_PERFORM_KIWI_FLAME_BREATH: equ 4 ; 1/4 chance to perform Kiwi's Flame Breath
 INACTION_CHANCE_CURSE: equ 4 ; 1/4 chance to be unable to attack due to being cursed
 INACTION_CHANCE_STUN: equ 4 ; 1/4 chance to be unable to attack due to being stunned
-CHANCE_TO_DODGE_FOR_AIRBORNE_TARGET: equ 8 ; 1/8 chance to dodge if target is flying or hovering, and attacker is not an archer
-CHANCE_TO_DODGE_DEFAULT: equ 32 ; 1/32 chance to dodge by default
+CHANCE_TO_DODGE_FOR_AIRBORNE_TARGET: equ chanceToDodgeForAirborneTarget ; 1/8 chance to dodge if target is flying or hovering, and attacker is not an archer
+CHANCE_TO_DODGE_DEFAULT: equ chanceToDodgeDefault ; 1/32 chance to dodge by default
 KIWI_FLAME_BREATH_UPGRADE_LEVEL1: equ 32 ; level as MNST (not effective level)
 KIWI_FLAME_BREATH_UPGRADE_LEVEL2: equ 40 ; level as MNST (not effective level)
 KIWI_FLAME_BREATH_UPGRADE_LEVEL3: equ 50 ; level as MNST (not effective level)
@@ -1567,19 +2050,27 @@ KIWI_FLAME_BREATH_UPGRADE_LEVEL3: equ 50 ; level as MNST (not effective level)
 ; ---------------------------------------------------------------------------
 
 ; enum MapProperties
-MAPS_DEBUG_MAX_INDEX: equ 56
-MAPS_MAX_INDEX: equ 78
-MAPS_NUMBER: equ 79
+mapsNumber: = 79
+mapsMaxIndex: = mapsNumber-1
+mapsDebugMaxIndex: = 56
+
+    if (STANDARD_BUILD=1)
+mapsDebugMaxIndex: = mapsMaxIndex
+    endif
+
+MAPS_DEBUG_MAX_INDEX: equ mapsDebugMaxIndex
+MAPS_MAX_INDEX: equ mapsMaxIndex
+MAPS_NUMBER: equ mapsNumber
 MINIMAP_TILE_SIZE: equ 96
-MAP_TILE_SIZE: equ 384
-MAP_TILE_PLUS: equ 384
-MAP_TILE_MINUS: equ 65152 ; -384
+MAP_TILE_SIZE:   equ 384
+MAP_TILE_PLUS:   equ 384
+MAP_TILE_MINUS:  equ -384
 
 ; ---------------------------------------------------------------------------
 
 ; enum Maps
-MAP_OUTSIDE_MITULA: equ 0
-MAP_INSIDE_MITULA: equ 1
+MAP_MITULA_SHRINE_EXTERIOR: equ 0
+MAP_MITULA_SHRINE_INTERIOR: equ 1
 MAP_PACALON: equ 2
 MAP_GRANSEAL: equ 3
 MAP_GRANSEAL_EARTHQUAKE: equ 4
@@ -1588,83 +2079,92 @@ MAP_NEW_GRANSEAL: equ 6
 MAP_NEW_GRANSEAL_CASTLE: equ 7
 MAP_RIBBLE: equ 8
 MAP_HASSAN: equ 9
-MAP_MOUNT_VOLCANON: equ 10
+MAP_BEDOE: equ 10
 MAP_VOLCANON_SHRINE: equ 11
 MAP_TAROS_SHRINE: equ 12
 MAP_POLCA: equ 13
 MAP_SHIP_DAMAGED: equ 14
 MAP_TRISTAN: equ 15
 MAP_GALAM_CASTLE: equ 16
-MAP_GALAM_CASTLE_INNER: equ 17
-MAP_GALAM_CASTLE_EXIT: equ 18
+MAP_GALAM_INTERIORS: equ 17 ; castle interiors, jail, underground tunnel
+MAP_GALAM_DRAWBRIDGE: equ 18
 MAP_GRANSEAL_CASTLE_2F: equ 19
 MAP_GRANSEAL_CASTLE_1F: equ 20
 MAP_GRANSEAL_CASTLE_3F: equ 21
-MAP_CREED_DESKTOP_WORLD: equ 22
-MAP_SECRET_MONK_FOREST: equ 23
-MAP_SECRET_MONK_FOREST_BATTLEFIELD: equ 24
+MAP_DESKTOP_KINGDOM: equ 22
+MAP_ELVEN_VILLAGE: equ 23
+MAP_ELVEN_VILLAGE_BATTLEFIELD: equ 24
 MAP_KETTO: equ 25
-MAP_CREED_FLOOR_WORLD: equ 26
-MAP_CREED_WILLARD_CAVE: equ 27
+MAP_FLOOR_WORLD: equ 26
+MAP_WILLARD_BURROW: equ 27
 MAP_DEVILS_HEAD_LABYRINTH: equ 28
-MAP_SECRET_DWARVEN_VILLAGE_OUTSIDE: equ 29
-MAP_SECRET_DWARVEN_VILLAGE_INSIDE: equ 30
+MAP_DWARVEN_VILLAGE_EXTERIOR: equ 29
+MAP_DWARVEN_VILLAGE_INTERIOR: equ 30
 MAP_MOUN: equ 31
-MAP_UNDERGROUND_PATH_1: equ 32
+MAP_FAIRY_CAVE: equ 32 ; connects Southwest Parmecia to Devil's Tail
 MAP_CREED_MANSION: equ 33
 MAP_EVIL_SPIRIT_SHRINE: equ 34
-MAP_UNDERGROUND_PATH_2: equ 35
+MAP_TRISTAN_CAVES: equ 35
 MAP_PACALON_CASTLE: equ 36
-MAP_NAZCA_SHIP_INTERIOR: equ 37
+MAP_NAZCA_SHIP: equ 37
 MAP_ROFT: equ 38
 MAP_MOUN_UNDERGROUND: equ 39
-MAP_ANCIENT_TOWER_OUTSIDE: equ 40
-MAP_DEVILS_HEAD: equ 41
+MAP_ANCIENT_TOWER_EXTERIOR: equ 40
+MAP_DEVILS_HEAD: equ 41 ; includes Force Sword Shrine exterior
 MAP_FORCE_SWORD_SHRINE: equ 42
 MAP_HAWEL_HOUSE: equ 43
 MAP_GRANSEAL_DOCKS_AND_SHIP: equ 44
 MAP_DOJO: equ 45
-MAP_NEW_GRANSEAL_HQ: equ 46
+MAP_TACTICAL_BASE: equ 46
 MAP_PANGOAT_VALLEY_BRIDGE: equ 47
-MAP_CAVERNS_OF_DARKNESS: equ 48
-MAP_KRAKEN_RAFT: equ 49
+MAP_DARK_CAVES: equ 48 ; includes the Cave of Darkness and the cave connecting North and South Parmecia (i.e., the two caves that employ the "darkness gimmick")
+MAP_KRAKEN_BATTLEFIELD: equ 49
 MAP_ACHILLES_SHRINES: equ 50
-MAP_HARPY_POOL: equ 51
-MAP_PATH_TO_MOUNT_VOLCANON: equ 52
-MAP_PRISM_FLOWERS_FIELD: equ 53
-MAP_ODDEYE_ARENA: equ 54
-MAP_CAMEELA_ARENA: equ 55
-MAP_ANCIENT_TOWER_CLIMB: equ 56
-MAP_ANCIENT_TOWER_FIRST_ROOM: equ 57
+MAP_HARPIES_POND: equ 51
+MAP_MOUNT_VOLCANO: equ 52
+MAP_PRISM_FLOWERS_BATTLEFIELD: equ 53
+MAP_ODD_EYE_BATTLEFIELD: equ 54
+MAP_NAZCA_BATTLEFIELD: equ 55
+MAP_ANCIENT_TOWER_ASCENT: equ 56
+MAP_ANCIENT_TOWER_ENTRANCE: equ 57 ; Gizmo battlefield
 MAP_ANCIENT_TOWER_UNDERGROUND_ROOM: equ 58
-MAP_ZEON_ARENA: equ 59
-MAP_ANCIENT_TOWER_UNDERGROUND_STAIRS: equ 60
-MAP_SHRINE_NEAR_RIBBLE_EXTERIOR: equ 61
+MAP_ZEON_BATTLEFIELD: equ 59
+MAP_ANCIENT_TOWER_STAIRWAY: equ 60
+MAP_RIBBLE_SHRINE_EXTERIOR: equ 61
 MAP_EAST_SHRINE: equ 62
 MAP_MAGIC_TUNNEL_HUB: equ 63
 MAP_MAGIC_TUNNEL_PIPE: equ 64
 MAP_GRANSEAL_CASTLE: equ 65
-MAP_OVERWORLD_GRANS_GRANSEAL: equ 66
-MAP_OVERWORLD_DEVILS_TAIL: equ 67
-MAP_OVERWORLD_AROUND_ELVEN_VILLAGE: equ 68
-MAP_OVERWORLD_PATH_TO_RIBBLE: equ 69
-MAP_OVERWORLD_SOUTHEAST_PARMECIA: equ 70
-MAP_OVERWORLD_AROUND_PACALON: equ 71
-MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION: equ 72
-MAP_OVERWORLD_NEW_GRANSEAL_SHORE: equ 73
-MAP_OVERWORLD_MOUN_AND_MITULA: equ 74
-MAP_OVERWORLD_GRANS_NORTH_SHORE: equ 75
-MAP_OVERWORLD_GRANS_RETURN_PATH: equ 76
-MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE: equ 77
-MAP_OVERWORLD_PACALON_2: equ 78
+MAP_OVERWORLD_GRANSEAL_KINGDOM: equ 66 ; includes Yeel and connects to the Galam Kingdom
+MAP_OVERWORLD_DEVILS_TAIL: equ 67 ; location of Creed's Mansion
+MAP_OVERWORLD_SOUTHWEST_PARMECIA: equ 68 ; includes Taros's Shrine, the Dwarf Miners Cave, and the Elven Village
+MAP_OVERWORLD_SOUTH_PARMECIA: equ 69 ; includes Ribble and Hassan
+MAP_OVERWORLD_SOUTHEAST_PARMECIA: equ 70 ; includes the East Shrine
+MAP_OVERWORLD_PACALON_KINGDOM_DROUGHT: equ 71 ; replaced with map 78 after Mitula is saved
+MAP_OVERWORLD_BEDOE_KINGDOM: equ 72 ; includes Polca, North Cliff, and Ketto
+MAP_OVERWORLD_NEW_GRANSEAL_KINGDOM: equ 73
+MAP_OVERWORLD_NORTH_PARMECIA: equ 74 ; includes Moun and Tristan
+MAP_OVERWORLD_NAZCA_REGION: equ 75 ; includes the Nazca Ship's crash site and the dojo
+MAP_OVERWORLD_ROFT_REGION: equ 76
+MAP_OVERWORLD_GALAM_KINGDOM: equ 77 ; includes the Dwarven Village
+MAP_OVERWORLD_PACALON_KINGDOM: equ 78 ; includes part of the path leading to the Cave of Darkness
 MAP_CURRENT: equ 255 ; reload current map
 
 ; ---------------------------------------------------------------------------
 
 ; enum BattleProperties
-BATTLES_MAX_INDEX: equ 44
-BATTLES_NUMBER: equ 45
-BATTLES_DEBUG_NUMBER: equ 49
+
+battlesNumber: = 45
+battlesMaxIndex: = battlesNumber-1
+battlesDebugMaxIndex: = 49
+
+    if (STANDARD_BUILD=1)
+battlesDebugMaxIndex: = battlesMaxIndex
+    endif
+
+BATTLES_MAX_INDEX: equ battlesMaxIndex
+BATTLES_NUMBER:  equ battlesNumber
+BATTLES_DEBUG_MAX_INDEX: equ battlesDebugMaxIndex
 
 ; ---------------------------------------------------------------------------
 
@@ -1733,8 +2233,8 @@ BATTLEACTION_TRAPPED_CHEST: equ 128
 ; enum Battleaction_Offsets
 BATTLEACTION_OFFSET_TYPE: equ 0
 BATTLEACTION_OFFSET_ITEM_OR_SPELL: equ 2
-BATTLEACTION_OFFSET_TARGET: equ 3
-BATTLEACTION_OFFSET_ACTOR: equ 4
+BATTLEACTION_OFFSET_ITEM_OR_SPELL_LOWER_BYTE: equ 3 ; target of regular attack
+BATTLEACTION_OFFSET_TARGET: equ 4 ; target of spell or item
 BATTLEACTION_OFFSET_ITEM_SLOT: equ 6
 
 ; ---------------------------------------------------------------------------
@@ -1753,7 +2253,14 @@ BATTLEACTION_ATTACKTYPE_COUNTER: equ 2
 ; ---------------------------------------------------------------------------
 
 ; enum Battlescene
-BATTLESCENE_STACK_NEGSIZE: equ $FF68
+
+battlesceneStackNegsize = -152
+
+    if (STANDARD_BUILD=1)
+battlesceneStackNegsize = -156
+    endif
+
+BATTLESCENE_STACK_NEGSIZE: equ battlesceneStackNegsize
 
 ; ---------------------------------------------------------------------------
 
@@ -1853,12 +2360,31 @@ MENU_ITEM_EQUIPPED_STRING_COORDS: equ $904
 
 ; ---------------------------------------------------------------------------
 
+; enum ItemSubmenuActions
+ITEM_SUBMENU_ACTION_USE: equ 0
+ITEM_SUBMENU_ACTION_GIVE: equ 1
+ITEM_SUBMENU_ACTION_DROP: equ 2
+ITEM_SUBMENU_ACTION_EQUIP: equ 3
+
+; ---------------------------------------------------------------------------
+
 ; enum Menu_Magic
-MENU_MAGIC_OFFSET_MP_COST: equ $2A ; relative to spell level tiles
+
+mpCostOffset    = 42
+spellNameCoords = $902
+mpCostCoords    = $C04
+
+    if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+mpCostOffset    = mpCostOffset+2
+spellNameCoords = $901
+mpCostCoords    = $B04
+    endif
+
+MENU_MAGIC_OFFSET_MP_COST: equ mpCostOffset ; relative to spell level tiles
 MENU_MAGIC_LAYOUT_BYTESIZE: equ $D8
-MENU_MAGIC_SPELL_NAME_COORDS: equ $902
+MENU_MAGIC_SPELL_NAME_COORDS: equ spellNameCoords
 MENU_MAGIC_SPELL_LEVEL_TILES_COORDS: equ $903
-MENU_MAGIC_MP_COST_COORDS: equ $C04
+MENU_MAGIC_MP_COST_COORDS: equ mpCostCoords
 
 ; ---------------------------------------------------------------------------
 
@@ -1867,7 +2393,13 @@ CHURCHMENU_PER_LEVEL_RAISE_COST: equ 10
 CHURCHMENU_CURE_POISON_COST: equ 10
 CHURCHMENU_MIN_PROMOTABLE_LEVEL: equ 20
 CHURCHMENU_CURE_STUN_COST: equ 20
-CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED: equ 200
+CHURCHMENU_RAISE_COST_EXTRA_WHEN_PROMOTED: equ CHURCHMENU_PER_LEVEL_RAISE_COST*CHAR_CLASS_EXTRALEVEL
+    if (STANDARD_BUILD&PER_LEVEL_CHURCH_COST=1)
+CHURCHMENU_PER_LEVEL_CURE_POISON_COST: equ 3
+CHURCHMENU_CURE_POISON_COST_EXTRA_WHEN_PROMOTED: equ CHURCHMENU_PER_LEVEL_CURE_POISON_COST*CHAR_CLASS_EXTRALEVEL
+CHURCHMENU_PER_LEVEL_CURE_STUN_COST: equ 5
+CHURCHMENU_CURE_STUN_COST_EXTRA_WHEN_PROMOTED: equ CHURCHMENU_PER_LEVEL_CURE_STUN_COST*CHAR_CLASS_EXTRALEVEL
+    endif
 
 ; ---------------------------------------------------------------------------
 
@@ -1881,13 +2413,18 @@ PROMOTIONSECTION_SPECIAL_ITEM: equ 4
 ; ---------------------------------------------------------------------------
 
 ; enum MessageProperties
-MESSAGES_MAX_INDEX: equ 4266
-MESSAGES_NUMBER: equ 4267
+
+messagesNumber: = 4267
+messagesMaxIndex: = messagesNumber-1
+
+MESSAGES_MAX_INDEX: equ messagesMaxIndex
+MESSAGES_NUMBER: equ messagesNumber
 
 ; ---------------------------------------------------------------------------
 
 ; enum Messages
 MESSAGE_CHANGEYOURMIND: equ 4
+MESSAGE_CARAVAN_TAKE_IT_EASY: equ 10
 MESSAGE_ITEMMENU_ITEM_IS_EXCHANGED_FOR: equ 41
 MESSAGE_ITEMMENU_DISCARDED_THE_ITEM: equ 42
 MESSAGE_HQ: equ 46
@@ -1999,32 +2536,70 @@ WINDOW_ENTRIES_LONGWORD_COUNTER: equ $1F
 ; ---------------------------------------------------------------------------
 
 ; enum Window_Member
-WINDOW_MEMBER_KD_TEXT_DEFEATS_LENGTH: equ 6
-WINDOW_MEMBER_KD_TEXT_KILLS_LENGTH: equ 6
-WINDOW_MEMBER_KD_TEXT_DEFEATS_OFFSET: equ $24
-WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET: equ $72
-WINDOW_MEMBER_KD_LAYOUT_BYTESIZE: equ $C0
+
+kdTextLength = 6
+kdDefeatsOffset = 36
+kdKillsOffset = 114
+kdLayoutBytesize = 192
+kdWindowSize = $80C
+
+    if (STANDARD_BUILD&EXTENDED_STATUS=1)
+kdTextLength = 5
+kdDefeatsOffset = 6
+kdKillsOffset = 20
+kdLayoutBytesize = 256
+kdWindowSize = $810
+    endif
+
+WINDOW_MEMBER_KD_TEXT_DEFEATS_LENGTH: equ kdTextLength
+WINDOW_MEMBER_KD_TEXT_KILLS_LENGTH: equ kdTextLength
+WINDOW_MEMBER_KD_TEXT_DEFEATS_OFFSET: equ kdDefeatsOffset
+WINDOW_MEMBER_KD_TEXT_KILLS_OFFSET: equ kdKillsOffset
+WINDOW_MEMBER_KD_LAYOUT_BYTESIZE: equ kdLayoutBytesize
 WINDOW_MEMBER_PORTRAIT_POSITION: equ $201
 WINDOW_MEMBER_KD_POSITION: equ $20B
 WINDOW_MEMBER_GOLD_POSITION: equ $217
 WINDOW_MEMBER_PORTRAIT_SIZE: equ $80A
-WINDOW_MEMBER_KD_SIZE: equ $80C
+WINDOW_MEMBER_KD_SIZE: equ kdWindowSize
 WINDOW_MEMBER_GOLD_SIZE: equ $80C
 WINDOW_MEMBER_KD_DEST: equ $F80B
 WINDOW_MEMBER_GOLD_DEST: equ $F81C
 WINDOW_MEMBER_PORTRAIT_DEST: equ $F8F6
 
+    if (STANDARD_BUILD&EXTENDED_STATUS=1)
+WINDOW_MEMBER_KD_LAYOUT_TAIL_BYTESIZE: equ 16
+WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_INDICATOR: equ 104 ; indicates whether critical hits inflict more damage, or an ailment.
+WINDOW_MEMBER_KD_OFFSET_TO_CRITICAL_CHANCE: equ 16
+WINDOW_MEMBER_KD_OFFSET_TO_DOUBLE_CHANCE: equ 28
+WINDOW_MEMBER_KD_OFFSET_TO_COUNTER_CHANCE: equ 28
+WINDOW_MEMBER_KD_LAYOUT_ENEMY_BYTESIZE: equ 208
+WINDOW_MEMBER_KD_ENEMY_SIZE: equ $80D
+    endif
+
 ; ---------------------------------------------------------------------------
 
 ; enum Window_BattleEquip_Stats
-WINDOW_BATTLEEQUIP_STATS_TILE_COORDS: equ $701
+
+statsTileCoords = $701
+
+    if (STANDARD_BUILD&THREE_DIGITS_STATS=1)
+statsTileCoords = statsTileCoords-$100
+    endif
+
+WINDOW_BATTLEEQUIP_STATS_TILE_COORDS: equ statsTileCoords
 WINDOW_BATTLEEQUIP_SIZE: equ $A09
 
 ; ---------------------------------------------------------------------------
 
 ; enum Window_Gold
 WINDOW_GOLD_SIZE: equ $904
-WINDOW_GOLD_DEST: equ $2017
+WINDOW_GOLD_DEST: equ $1617
+WINDOW_GOLD_SOURCE: equ $2017
+
+    if (STANDARD_BUILD=1)
+WINDOW_FIELD_GOLD_DEST: equ $1601
+WINDOW_FIELD_GOLD_SOURCE: equ $2001
+    endif
 
 ; ---------------------------------------------------------------------------
 
@@ -2035,131 +2610,269 @@ WINDOW_TACTICAL_BASE_NAME_DEST: equ $F60B
 ; ---------------------------------------------------------------------------
 
 ; enum Window_MiniStatus
-WINDOW_MINISTATUS_OFFSET_MAX_HP: equ 6
+
+maxHpOffset                 = 6
+sideColumnsNumberPlusOne    = 9 ; used to calculate CopyMiddleColumns loop counter
+minWidth                    = 10
+statValuesOffset            = 12
+maxWidth                    = 22
+nextLineOffset              = 44
+longwordCounter             = 54
+windowSize                  = $1605
+
+    if (STANDARD_BUILD&THREE_DIGITS_STATS=1)
+maxHpOffset                 = maxHpOffset+2
+sideColumnsNumberPlusOne    = sideColumnsNumberPlusOne+1
+minWidth                    = minWidth+2
+statValuesOffset            = statValuesOffset+4
+maxWidth                    = maxWidth+2
+nextLineOffset              = nextLineOffset+4
+longwordCounter             = longwordCounter+5
+windowSize                  = $1805
+    endif
+
+WINDOW_MINISTATUS_OFFSET_MAX_HP: equ maxHpOffset
 WINDOW_MINISTATUS_OFFSET_STATBARS_START: equ 6
-WINDOW_MINISTATUS_SIDECOLUMNS_NUMBER_PLUS_ONE: equ 9 ; used to calculate CopyMiddleColumns loop counter
-WINDOW_MINISTATUS_MIN_WIDTH: equ $A
-WINDOW_MINISTATUS_OFFSET_STAT_VALUES: equ $C
-WINDOW_MINISTATUS_MAX_WIDTH: equ $16
-WINDOW_MINISTATUS_OFFSET_NEXT_LINE: equ $2C
-WINDOW_MINISTATUS_LONGWORD_COUNTER: equ $36
-WINDOW_MINISTATUS_OFFSET_NEXT_TWO_LINES: equ $58
-WINDOW_MINISTATUS_MAX_STATBAR_LENGTH: equ $64 ; HP or MP value
-WINDOW_MINISTATUS_SIZE: equ $1605
+WINDOW_MINISTATUS_SIDECOLUMNS_NUMBER_PLUS_ONE: equ sideColumnsNumberPlusOne
+WINDOW_MINISTATUS_MIN_WIDTH: equ minWidth
+WINDOW_MINISTATUS_OFFSET_STAT_VALUES: equ statValuesOffset
+WINDOW_MINISTATUS_MAX_WIDTH: equ maxWidth
+WINDOW_MINISTATUS_OFFSET_NEXT_LINE: equ nextLineOffset
+WINDOW_MINISTATUS_LONGWORD_COUNTER: equ longwordCounter
+WINDOW_MINISTATUS_OFFSET_NEXT_TWO_LINES: equ nextLineOffset*2
+WINDOW_MINISTATUS_MAX_STATBAR_LENGTH: equ 100 ; HP or MP value
+WINDOW_MINISTATUS_SIZE: equ windowSize
 WINDOW_MINISTATUS_DEST: equ $2001
 
 ; ---------------------------------------------------------------------------
 
 ; enum Window_LandEffect
-WINDOW_LANDEFFECT_TEXT_HEADER_LENGTH: equ $F
-WINDOW_LANDEFFECT_TEXT_HEADER_OFFSET: equ $12
-WINDOW_LANDEFFECT_TEXT_VALUE_OFFSET: equ $38
-WINDOW_LANDEFFECT_SIZE: equ $805
-WINDOW_LANDEFFECT_DEST: equ $F801
 
-; ---------------------------------------------------------------------------
+headerLength    = 15
+headerOffset    = 18
+valueOffset     = 56
+windowSize      = $805
+windowDest      = $F801
 
-; enum Window_Timer
+    if (STANDARD_BUILD&THREE_DIGITS_STATS=1)
+headerLength    = 2
+headerOffset    = 14
+valueOffset     = 40
+windowSize      = $605
+windowDest      = $FA01
+    endif
 
-WINDOW_TIMER_SIZE: equ $804
-WINDOW_TIMER_DEST: equ $117
+WINDOW_LANDEFFECT_TEXT_HEADER_LENGTH: equ headerLength
+WINDOW_LANDEFFECT_TEXT_HEADER_OFFSET: equ headerOffset
+WINDOW_LANDEFFECT_TEXT_VALUE_OFFSET: equ valueOffset
+WINDOW_LANDEFFECT_SIZE: equ windowSize
+WINDOW_LANDEFFECT_DEST: equ windowDest
 
 ; ---------------------------------------------------------------------------
 
 ; enum Window_MemberStatus
+
+nextStatusEffectsOffset = 4
+lineOffset      = 42
+statusEffectsOffset = 78
+enemyLvOffset   = 140
+allyLvOffset    = 142
+attOffset       = 160
+currentHpOffset = 220
+maxHpOffset     = 226
+defOffset       = 244
+currentMpOffset = 304
+maxMpOffset     = 310
+agiOffset       = 328
+enemyExpOffset  = 392
+allyExpOffset   = 394
+movOffset       = 412
+
+    if (STANDARD_BUILD&SHOW_STATUS_EFFECT_COUNTER=1)
+nextStatusEffectsOffset = nextStatusEffectsOffset-2
+statusEffectsOffset = statusEffectsOffset+2
+    endif
+
+    if (STANDARD_BUILD&THREE_DIGITS_STATS=1)
+enemyLvOffset   = enemyLvOffset+2
+allyLvOffset    = allyLvOffset+2
+currentHpOffset = currentHpOffset-2
+currentMpOffset = currentMpOffset-2
+enemyExpOffset  = enemyExpOffset+2
+allyExpOffset   = allyExpOffset+2
+    endif
+
+    if (STANDARD_BUILD&EXTENDED_STATUS=1)
+currentHpOffset = currentHpOffset-lineOffset
+maxHpOffset     = maxHpOffset-lineOffset
+defOffset       = defOffset-lineOffset
+currentMpOffset = currentMpOffset-(lineOffset*2)
+maxMpOffset     = maxMpOffset-(lineOffset*2)
+agiOffset       = agiOffset-(lineOffset*2)
+enemyExpOffset  = enemyExpOffset-(lineOffset*3)
+allyExpOffset   = allyExpOffset-(lineOffset*3)
+movOffset       = movOffset-(lineOffset*3)
+    endif
+
 WINDOW_MEMBERSTATUS_NA_STRING_LENGTH: equ 3
-WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE: equ $2A
-WINDOW_MEMBERSTATUS_OFFSET_NAME: equ $2C
-WINDOW_MEMBERSTATUS_OFFSET_STATUSEFFECT_TILES: equ $4E
-WINDOW_MEMBERSTATUS_OFFSET_SPELL_LV_TILES: equ $58
-WINDOW_MEMBERSTATUS_OFFSET_EQUIPPED_STRING: equ $58
-WINDOW_MEMBERSTATUS_OFFSET_NEXT_SPELL: equ $7E
-WINDOW_MEMBERSTATUS_OFFSET_NEXT_ITEM: equ $7E
-WINDOW_MEMBERSTATUS_OFFSET_ENEMY_LV: equ $8C
-WINDOW_MEMBERSTATUS_OFFSET_LV: equ $8E
-WINDOW_MEMBERSTATUS_OFFSET_ATT: equ $A0
-WINDOW_MEMBERSTATUS_OFFSET_CURRENT_HP: equ $DC
-WINDOW_MEMBERSTATUS_OFFSET_MAX_HP: equ $E2
-WINDOW_MEMBERSTATUS_OFFSET_DEF: equ $F4
-WINDOW_MEMBERSTATUS_OFFSET_CURRENT_MP: equ $130
-WINDOW_MEMBERSTATUS_OFFSET_MAX_MP: equ $136
-WINDOW_MEMBERSTATUS_OFFSET_AGI: equ $148
-WINDOW_MEMBERSTATUS_OFFSET_ENEMY_EXP: equ $188
-WINDOW_MEMBERSTATUS_OFFSET_EXP: equ $18A
-WINDOW_MEMBERSTATUS_OFFSET_MOV: equ $19C
-WINDOW_MEMBERSTATUS_OFFSET_MAGIC_START: equ $224
-WINDOW_MEMBERSTATUS_OFFSET_ITEM_START: equ $236
-WINDOW_MEMBERSTATUS_OFFSET_MAGIC_NOTHING_STRING: equ $250
-WINDOW_MEMBERSTATUS_OFFSET_ITEM_NOTHING_STRING: equ $262
-WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_START: equ $374
-WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_END: equ $37E
-WINDOW_MEMBERSTATUS_OFFSET_JEWEL_OF_LIGHT: equ $39E
-WINDOW_MEMBERSTATUS_OFFSET_JEWEL_OF_EVIL: equ $3A2
-WINDOW_MEMBERSTATUS_LAYOUT_BYTESIZE: equ $444
+WINDOW_MEMBERSTATUS_OFFSET_NEXT_STATUSEFFECT: equ nextStatusEffectsOffset
+WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE: equ lineOffset
+WINDOW_MEMBERSTATUS_OFFSET_NAME: equ 44
+WINDOW_MEMBERSTATUS_OFFSET_STATUSEFFECT_TILES: equ statusEffectsOffset
+WINDOW_MEMBERSTATUS_OFFSET_SPELL_LV_TILES: equ 88
+WINDOW_MEMBERSTATUS_OFFSET_EQUIPPED_STRING: equ 88
+WINDOW_MEMBERSTATUS_OFFSET_NEXT_SPELL: equ 126
+WINDOW_MEMBERSTATUS_OFFSET_NEXT_ITEM: equ 126
+WINDOW_MEMBERSTATUS_OFFSET_ENEMY_LV: equ enemyLvOffset
+WINDOW_MEMBERSTATUS_OFFSET_LV: equ allyLvOffset
+WINDOW_MEMBERSTATUS_OFFSET_ATT: equ attOffset
+WINDOW_MEMBERSTATUS_OFFSET_CURRENT_HP: equ currentHpOffset
+WINDOW_MEMBERSTATUS_OFFSET_MAX_HP: equ maxHpOffset
+WINDOW_MEMBERSTATUS_OFFSET_DEF: equ defOffset
+WINDOW_MEMBERSTATUS_OFFSET_CURRENT_MP: equ currentMpOffset
+WINDOW_MEMBERSTATUS_OFFSET_MAX_MP: equ maxMpOffset
+WINDOW_MEMBERSTATUS_OFFSET_AGI: equ agiOffset
+WINDOW_MEMBERSTATUS_OFFSET_ENEMY_EXP: equ enemyExpOffset
+WINDOW_MEMBERSTATUS_OFFSET_EXP: equ allyExpOffset
+WINDOW_MEMBERSTATUS_OFFSET_MOV: equ movOffset
+WINDOW_MEMBERSTATUS_OFFSET_MAGIC_START: equ 548
+WINDOW_MEMBERSTATUS_OFFSET_ITEM_START: equ 566
+WINDOW_MEMBERSTATUS_OFFSET_MAGIC_NOTHING_STRING: equ 592
+WINDOW_MEMBERSTATUS_OFFSET_ITEM_NOTHING_STRING: equ 610
+WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_START: equ 884
+WINDOW_MEMBERSTATUS_OFFSET_JEWEL_STRING_END: equ 894
+WINDOW_MEMBERSTATUS_OFFSET_JEWEL_OF_LIGHT: equ 926
+WINDOW_MEMBERSTATUS_OFFSET_JEWEL_OF_EVIL: equ 930
+WINDOW_MEMBERSTATUS_LAYOUT_BYTESIZE: equ 1092
 WINDOW_MEMBERSTATUS_POSITION: equ $A01
 WINDOW_MEMBERSTATUS_SIZE: equ $151A
 WINDOW_MEMBERSTATUS_DEST: equ $2001
 
+    if (STANDARD_BUILD=1)
+WINDOW_MEMBERSTATUS_OFFSET_FULLCLASSNAME: equ 88
+WINDOW_MEMBERSTATUS_OFFSET_PROMOTION_INDICATOR: equ 132
+WINDOW_MEMBERSTATUS_OFFSET_EXP_FIELD: equ 254
+WINDOW_MEMBERSTATUS_OFFSET_WIND: equ 340
+WINDOW_MEMBERSTATUS_OFFSET_LIGHTNING: equ 348
+WINDOW_MEMBERSTATUS_OFFSET_STATUS: equ 356
+WINDOW_MEMBERSTATUS_OFFSET_MOVETYPE_NAME: equ 362
+WINDOW_MEMBERSTATUS_OFFSET_ICE: equ 382
+WINDOW_MEMBERSTATUS_OFFSET_FIRE: equ 390
+WINDOW_MEMBERSTATUS_OFFSET_HIDDEN: equ 398
+WINDOW_MEMBERSTATUS_LAYOUT_EXP_FIELD_BYTESIZE: equ 20
+WINDOW_MEMBERSTATUS_LAYOUT_HEAD_BYTESIZE: equ (lineOffset*3)
+WINDOW_MEMBERSTATUS_LAYOUT_BODY_BYTESIZE: equ (lineOffset*8)
+WINDOW_MEMBERSTATUS_LAYOUT_TAIL_BYTESIZE: equ (lineOffset*15)
+    endif
+
 ; ---------------------------------------------------------------------------
 
 ; enum Window_MembersList
-WINDOW_MEMBERS_LIST_HIGHLIGHTSPRITES_COUNTER: equ 1
-WINDOW_MEMBERS_LIST_PAGE_STATS: equ 1
-WINDOW_MEMBERS_LIST_PAGE_NEWATTANDDEF: equ 2
+
+highlightSpritesCounter = 1
+memberslistDownArrow    = 11
+hpMpPage                = 255
+statsPage               = 1
+newAttAndDefPage        = 2
+newAttAndDefEntryOffset = 8
+entryStartOffset        = 16
+levelEntryOffset        = 22
+
+    if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
+highlightSpritesCounter = highlightSpritesCounter+1
+memberslistDownArrow    = memberslistDownArrow+1
+    endif
+
+    if (SECOND_MEMBERS_LIST_PAGE=1)
+hpMpPage                = 1
+statsPage               = 2
+newAttAndDefPage        = 3
+newAttAndDefEntryOffset = newAttAndDefEntryOffset-4
+levelEntryOffset        = levelEntryOffset-2
+    endif
+
+    if (SECOND_MEMBERS_LIST_PAGE|(STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES)=1)
+entryStartOffset        = entryStartOffset+2
+    endif
+
+WINDOW_MEMBERS_LIST_HIGHLIGHTSPRITES_COUNTER: equ highlightSpritesCounter
+WINDOW_MEMBERS_LIST_PAGE_HPMP: equ hpMpPage
+WINDOW_MEMBERS_LIST_PAGE_STATS: equ statsPage
+WINDOW_MEMBERS_LIST_PAGE_NEWATTANDDEF: equ newAttAndDefPage
 WINDOW_MEMBERS_LIST_ENTRIES_COUNTER: equ 4
 WINDOW_MEMBERS_LIST_OFFSET_ENTRY_EXP: equ 4
 WINDOW_MEMBERS_LIST_OFFSET_ENTRY_UNEQUIPPABLE: equ 4
-WINDOW_MEMBERS_LIST_OFFSET_ENTRY_NEWDEFENSE: equ 8
-WINDOW_MEMBERS_LIST_SPRITELINK_DOWNARROW: equ $B
-WINDOW_MEMBERS_LIST_ENTRY_UNEQUIPPABLE_LENGTH: equ $10
-WINDOW_MEMBERS_LIST_OFFSET_ENTRY_START: equ $10
-WINDOW_MEMBERS_LIST_SPRITELINK_UPARROW: equ $10
-WINDOW_MEMBERS_LIST_OFFSET_ENTRY_LEVEL: equ $16
-WINDOW_MEMBERS_LIST_HEADER_LENGTH: equ $1E
-WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE: equ $3A
-WINDOW_MEMBERS_LIST_OFFSET_NEXT_ENTRY: equ $74
-WINDOW_MEMBERS_LIST_OFFSET_ENTRY_NAME: equ $B2
+WINDOW_MEMBERS_LIST_OFFSET_ENTRY_NEWDEFENSE: equ newAttAndDefEntryOffset
+WINDOW_MEMBERS_LIST_SPRITELINK_DOWNARROW: equ memberslistDownArrow
+WINDOW_MEMBERS_LIST_ENTRY_UNEQUIPPABLE_LENGTH: equ 16
+WINDOW_MEMBERS_LIST_OFFSET_ENTRY_START: equ entryStartOffset
+WINDOW_MEMBERS_LIST_SPRITELINK_UPARROW: equ 16
+WINDOW_MEMBERS_LIST_OFFSET_ENTRY_LEVEL: equ levelEntryOffset
+WINDOW_MEMBERS_LIST_HEADER_LENGTH: equ 30
+WINDOW_MEMBERS_LIST_OFFSET_NEXT_LINE: equ 58
+WINDOW_MEMBERS_LIST_OFFSET_NEXT_ENTRY: equ 116
+WINDOW_MEMBERS_LIST_OFFSET_ENTRY_NAME: equ 178
 WINDOW_MEMBERS_LIST_DEST: equ $220
 WINDOW_MEMBERS_LIST_SIZE: equ $1D0D
 
 ; ---------------------------------------------------------------------------
 
 ; enum Window_MemberSummary
-WINDOW_MEMBERSUMMARY_PAGE_MEMBER: equ 0
-WINDOW_MEMBERSUMMARY_PAGE_ITEMS: equ 1
+
+spellLevelOffset            = 44
+memberPageMagicListOffset   = 172
+magicPageMagicListOffset    = 192
+
+    if (STANDARD_BUILD&EXTENDED_SPELL_NAMES=1)
+spellLevelOffset            = 16
+memberPageMagicListOffset   = memberPageMagicListOffset-2
+magicPageMagicListOffset    = magicPageMagicListOffset-2
+    endif
+
+WINDOW_MEMBERSUMMARY_PAGE_MAIN: equ 0
+WINDOW_MEMBERSUMMARY_PAGE_ITEM: equ 1
 WINDOW_MEMBERSUMMARY_PAGE_MAGIC: equ 2
 WINDOW_MEMBERSUMMARY_HIGHLIGHTSPRITES_COUNTER: equ 2
 WINDOW_MEMBERSUMMARY_PAGE_EQUIP: equ 3
 WINDOW_MEMBERSUMMARY_OFFSET_NEXT_LINE: equ $2A
 WINDOW_MEMBERSUMMARY_OFFSET_NAME: equ $2C
-WINDOW_MEMBERSUMMARY_OFFSET_SPELL_LEVEL: equ $2C
+WINDOW_MEMBERSUMMARY_OFFSET_SPELL_LEVEL: equ spellLevelOffset
 WINDOW_MEMBERSUMMARY_OFFSET_STATUSEFFECT_TILES: equ $4E
 WINDOW_MEMBERSUMMARY_OFFSET_NEXT_ITEM: equ $54
 WINDOW_MEMBERSUMMARY_OFFSET_NEXT_SPELL: equ $54
-WINDOW_MEMBERSUMMARY_MEMBERPAGE_OFFSET_MAGICITEM_STRING: equ $80
-WINDOW_MEMBERSUMMARY_ITEMSPAGE_OFFSET_ITEM_STRING: equ $82
-WINDOW_MEMBERSUMMARY_MAGICPAGE_OFFSET_MAGIC_STRING: equ $82
-WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_EQUIPMENT_STRING: equ $82
-WINDOW_MEMBERSUMMARY_MEMBERPAGE_OFFSET_MAGICLIST_START: equ $AC
-WINDOW_MEMBERSUMMARY_MEMBERPAGE_OFFSET_ITEMSLIST_START: equ $C0
-WINDOW_MEMBERSUMMARY_ITEMSPAGE_OFFSET_ITEMSLIST_START: equ $C0
-WINDOW_MEMBERSUMMARY_MAGICPAGE_OFFSET_MAGICLIST_START: equ $C0
-WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_ATT_STRING: equ $EA
-WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_DEF_STRING: equ $13E
-WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_AGI_STRING: equ $192
-WINDOW_MEMBERSUMMARY_EQUIPPAGE_OFFSET_MOV_STRING: equ $1E6
+WINDOW_MEMBERSUMMARY_MAIN_PAGE_OFFSET_MAGICITEM_STRING: equ $80
+WINDOW_MEMBERSUMMARY_ITEM_PAGE_OFFSET_ITEM_STRING: equ $82
+WINDOW_MEMBERSUMMARY_MAGIC_PAGE_OFFSET_MAGIC_STRING: equ $82
+WINDOW_MEMBERSUMMARY_EQUIP_PAGE_OFFSET_EQUIPMENT_STRING: equ $82
+WINDOW_MEMBERSUMMARY_MAIN_PAGE_OFFSET_MAGICLIST_START: equ memberPageMagicListOffset
+WINDOW_MEMBERSUMMARY_MAIN_PAGE_OFFSET_ITEMSLIST_START: equ $C0
+WINDOW_MEMBERSUMMARY_ITEM_PAGE_OFFSET_ITEMSLIST_START: equ $C0
+WINDOW_MEMBERSUMMARY_MAGIC_PAGE_OFFSET_MAGICLIST_START: equ magicPageMagicListOffset
+WINDOW_MEMBERSUMMARY_EQUIP_PAGE_OFFSET_ATT_STRING: equ $EA
+WINDOW_MEMBERSUMMARY_EQUIP_PAGE_OFFSET_DEF_STRING: equ $13E
+WINDOW_MEMBERSUMMARY_EQUIP_PAGE_OFFSET_AGI_STRING: equ $192
+WINDOW_MEMBERSUMMARY_EQUIP_PAGE_OFFSET_MOV_STRING: equ $1E6
 WINDOW_MEMBERSUMMARY_SIZE: equ $150D
 WINDOW_MEMBERSUMMARY_DEST: equ $20F3
 
 ; ---------------------------------------------------------------------------
 
 ; enum Window_NameAlly
-WINDOW_NAMEALLY_OFFSET_ENTRY: equ $14
+
+nameEntryOffset = 20
+windowSize      = $903
+
+    if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
+nameEntryOffset = nameEntryOffset+2
+windowSize      = $A03
+    endif
+
+WINDOW_NAMEALLY_OFFSET_ENTRY: equ nameEntryOffset
 WINDOW_NAMEALLY_PORTRAIT_POSITION: equ $201
 WINDOW_NAMEALLY_ALPHABET_POSITION: equ $20B
 WINDOW_NAMEALLY_ALPHABET_DEST: equ $21C
 WINDOW_NAMEALLY_PORTRAIT_SIZE: equ $80A
-WINDOW_NAMEALLY_ENTRY_SIZE: equ $903
+WINDOW_NAMEALLY_ENTRY_SIZE: equ windowSize
 WINDOW_NAMEALLY_ENTRY_POSITION: equ $A08
 WINDOW_NAMEALLY_ALPHABET_SIZE: equ $1C07
 WINDOW_NAMEALLY_ENTRY_DEST: equ $2008
@@ -2188,12 +2901,34 @@ WINDOW_SHOP_ITEM_NAME_AND_PRICE_DEST: equ $F606
 
 ; ---------------------------------------------------------------------------
 
+; enum Window_Timer
+
+windowDest = $117
+
+    if (STANDARD_BUILD&FIX_TIMER_WINDOW_POSITION=1)
+windowDest = $217
+    endif
+
+WINDOW_TIMER_DEST: equ windowDest
+WINDOW_TIMER_SIZE: equ $804
+
+; ---------------------------------------------------------------------------
+
 ; enum Stats
+
+statsDigitsNumber       = 2
+unknownValueThreshold   = 100
+
+    if (STANDARD_BUILD&THREE_DIGITS_STATS=1)
+statsDigitsNumber       = 3
+unknownValueThreshold   = 400
+    endif
+
 LV_DIGITS_NUMBER: equ 2
 EXP_DIGITS_NUMBER: equ 2
 MOV_DIGITS_NUMBER: equ 2
-STATS_DIGITS_NUMBER: equ 2
-UNKNOWN_STAT_VALUE_THRESHOLD: equ $64
+STATS_DIGITS_NUMBER: equ statsDigitsNumber
+UNKNOWN_STAT_VALUE_THRESHOLD: equ unknownValueThreshold
 DISPLAYED_AGI_VALUE_MASK: equ $7F
 
 ; ---------------------------------------------------------------------------
@@ -2202,6 +2937,12 @@ DISPLAYED_AGI_VALUE_MASK: equ $7F
 TEXT_CODE_NEWLINE: equ $B
 TEXT_CODE_MOVEDOWN: equ $D
 TEXT_CODE_TOGGLEFONTCOLOR: equ $5C
+
+; ---------------------------------------------------------------------------
+
+; enum Gold
+GOLD_STARTING_AMOUNT: equ $3C
+GOLD_GIFT: equ $64
 
 ; ---------------------------------------------------------------------------
 
@@ -2256,17 +2997,37 @@ DIRECTION_MASK: equ 3
 ; ---------------------------------------------------------------------------
 
 ; enum Orientation
-ORIENTATION_INVERTED: equ 2
+ORIENTATION_REGULAR: equ 0
+ORIENTATION_LEFT: equ 1
+ORIENTATION_FLIPPED: equ 2
+ORIENTATION_RIGHT: equ 3
+
+; ---------------------------------------------------------------------------
+
+; enum OrientationMask
 ORIENTATION_MASK: equ 3
 
 ; ---------------------------------------------------------------------------
 
 ; enum LaserFacing
-LASER_RIGHT: equ 0
-LASER_UP: equ 1
-LASER_LEFT: equ 2
-LASER_DOWN: equ 3
-LASER_NONE: equ $FF
+
+laserRight = 0
+laserUp    = 1
+laserLeft  = 2
+laserDown  = 3
+
+    if (STANDARD_BUILD&DIAGONAL_LASERS=1) ; change to bitfield
+laserRight = 1
+laserUp    = 2
+laserLeft  = 4
+laserDown  = 8
+    endif
+
+LASER_RIGHT: equ laserRight
+LASER_UP: equ laserUp
+LASER_LEFT: equ laserLeft
+LASER_DOWN: equ laserDown
+LASER_NONE: equ NO_DIRECTION
 
 ; ---------------------------------------------------------------------------
 
@@ -2750,12 +3511,12 @@ MAPSPRITE_BIRDMAN: equ 236
 MAPSPRITE_END_LIST: equ 237 ; to use 2 more sprite this one should become 239
 MAPSPRITE_FREE_SPOT1: equ 238
 MAPSPRITE_FREE_SPOT2: equ 239
-MAPSPRITE_SPECIAL0: equ 240
-MAPSPRITE_SPECIAL1: equ 241
-MAPSPRITE_SPECIAL2: equ 242
-MAPSPRITE_SPECIAL3: equ 243
-MAPSPRITE_SPECIAL4: equ 244
-MAPSPRITE_SPECIAL5: equ 245
+MAPSPRITE_SPECIAL0: equ 240 ; special sprites 0-5 are free to use as regular sprites in a standard build
+MAPSPRITE_SPECIAL1: equ 241 ;
+MAPSPRITE_SPECIAL2: equ 242 ;
+MAPSPRITE_SPECIAL3: equ 243 ;
+MAPSPRITE_SPECIAL4: equ 244 ;
+MAPSPRITE_SPECIAL5: equ 245 ;
 MAPSPRITE_SPECIAL6: equ 246
 MAPSPRITE_SPECIAL7: equ 247
 MAPSPRITE_SPECIAL8: equ 248
@@ -2797,8 +3558,8 @@ SPECIALSPRITE_KRAKEN_5: equ 9
 
 ; ---------------------------------------------------------------------------
 
-; enum Portraits (allies use portrait index matching their ally index, unless changed at promotion)
-PORTRAIT_BOWIE_BASE: equ 0
+; enum Portraits
+PORTRAIT_BOWIE_BASE: equ 0 ; allies use portrait index matching their ally index, unless changed at promotion
 PORTRAIT_SARAH: equ 1
 PORTRAIT_CHESTER: equ 2
 PORTRAIT_JAHA: equ 3
@@ -2856,10 +3617,21 @@ PORTRAIT_DEFAULT: equ 65535
 ; ---------------------------------------------------------------------------
 
 ; enum MapspriteDialogueDefinition
-MAPSPRITEDIALOGUEDEF_OFFSET_MAPSPRITE: equ 0
-MAPSPRITEDIALOGUEDEF_OFFSET_PORTRAIT: equ 1
-MAPSPRITEDIALOGUEDEF_OFFSET_SPEECHSFX: equ 2
-MAPSPRITEDIALOGUEDEF_OFFSET_ALIGNER: equ 3
+
+defStart = 0
+portraitOffset = defStart+1
+sfxOffset = defStart+2
+
+    if (STANDARD_BUILD=1)
+; Push items forward to accommodate a word-sized mapsprite index
+portraitOffset = portraitOffset+1
+sfxOffset = sfxOffset+1
+    endif
+
+MAPSPRITEDIALOGUEDEF_OFFSET_MAPSPRITE: equ defStart
+MAPSPRITEDIALOGUEDEF_OFFSET_PORTRAIT: equ portraitOffset
+MAPSPRITEDIALOGUEDEF_OFFSET_SPEECHSFX: equ sfxOffset
+MAPSPRITEDIALOGUEDEF_OFFSET_ALIGNER: equ 3 ; unused if standard build
 MAPSPRITEDIALOGUEDEF_ENTRY_SIZE: equ 4
 
 ; ---------------------------------------------------------------------------
@@ -2895,6 +3667,9 @@ ALLY_ZYNK: equ 26
 ALLY_CHAZ: equ 27
 ALLY_LEMON: equ 28
 ALLY_CLAUDE: equ 29
+ALLY_30: equ 30
+ALLY_31: equ 31
+ALLY_SADJOIN: equ $8000
 
 ALLY_SADJOIN: equ $8000
 
@@ -2906,11 +3681,27 @@ ALLY_MASK_INDEX: equ $1F
 ; ---------------------------------------------------------------------------
 
 ; enum Followers
-FOLLOWER_ENTITY_SIZE: equ 4
-FOLLOWER_A: equ 30
-FOLLOWER_B: equ 31
-FOLLOWER_C: equ 158
-FOLLOWER_D: equ 159
+
+followerA = 30
+followerB = 31
+followerSize = 4
+
+    if (STANDARD_BUILD&EXPANDED_FORCE_MEMBERS=1)
+; Use enemy combatant slots to accommodate expanded force members
+followerA = COMBATANT_MASK_ENEMY_BIT|28
+followerB = COMBATANT_MASK_ENEMY_BIT|29
+    endif
+
+    if (STANDARD_BUILD=1)
+; Increase follower entry size to accommodate expanded mapsrites
+followerSize = followerSize+2 ; EXPANDED_MAPSPRITES
+    endif
+
+FOLLOWER_ENTITY_SIZE: equ followerSize
+FOLLOWER_A: equ followerA 
+FOLLOWER_B: equ followerB
+FOLLOWER_C: equ COMBATANT_MASK_ENEMY_BIT|30
+FOLLOWER_D: equ COMBATANT_MASK_ENEMY_BIT|31
 
 ; ---------------------------------------------------------------------------
 
@@ -2931,21 +3722,36 @@ GROWTHCURVE_DEF_SIZE: equ 116
 ; ---------------------------------------------------------------------------
 
 ; enum AllyName
-ALLYNAME_MAX_DISPLAYED_LENGTH: equ 7
-ALLYNAME_CHARACTERS_COUNTER: equ 9
-ALLYNAME_MAX_LENGTH: equ 10
+
+allyNameMaxDisplayLength = 7
+allyNameMaxLength = 10
+
+    if (STANDARD_BUILD&EIGHT_CHARACTERS_MEMBER_NAMES=1)
+allyNameMaxDisplayLength = allyNameMaxDisplayLength+1
+    endif
+
+ALLYNAME_MAX_DISPLAYED_LENGTH: equ allyNameMaxDisplayLength
+ALLYNAME_CHARACTERS_COUNTER: equ allyNameMaxLength-1
+ALLYNAME_MAX_LENGTH: equ allyNameMaxLength
 
 ; ---------------------------------------------------------------------------
 
 ; enum AllyStartDefinition_Properties
-ALLYSTARTDEF_ENTRY_SIZE: equ 6
+
+allyStartDefEntrySize = 6
+
+    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+allyStartDefEntrySize = 10
+    endif
+
+ALLYSTARTDEF_ENTRY_SIZE: equ allyStartDefEntrySize
 
 ; ---------------------------------------------------------------------------
 
 ; enum AllyStats
 ALLYSTATS_OFFSET_NEXT_STAT: equ 2
 ALLYSTATS_OFFSET_STARTING_HP: equ 2
-ALLYSTATS_OFFSET_SPELL_LIST_MINUS_ONE: equ 15
+ALLYSTATS_OFFSET_SPELL_LIST_MINUS_ONE: equ ALLYSTATS_OFFSET_SPELL_LIST-1
 ALLYSTATS_OFFSET_SPELL_LIST: equ 16
 ALLYSTATS_CODE_USE_FIRST_SPELL_LIST: equ 254
 ALLYSTATS_CODE_END_OF_SPELL_LIST: equ 255
@@ -2962,7 +3768,14 @@ LIFE_RING_HP_RECOVERY: equ 5
 ; ---------------------------------------------------------------------------
 
 ; enum BattleMapCoordinatesProperties
-BATTLEMAPCOORDINATES_ENTRY_SIZE: equ 5 ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
+
+battleMapCoordsEntrySize = 5
+
+    if (STANDARD_BUILD&FIX_SEARCH_IN_BATTLE=1)
+battleMapCoordsEntrySize = 7
+    endif
+
+BATTLEMAPCOORDINATES_ENTRY_SIZE: equ battleMapCoordsEntrySize ; US/EU "Open chest in battle" bug here ! Should be 7, not 5 !
 BATTLEMAPCOORDINATES_ENTRY_SIZE_FULL: equ 7
 
 ; ---------------------------------------------------------------------------
@@ -3009,7 +3822,7 @@ BATTLESPRITESET_ENTITYOFFSET_ITEMS: equ 4
 BATTLESPRITESET_ENTITYOFFSET_PRIMARY_ORDER: equ 6
 BATTLESPRITESET_ENTITYOFFSET_PRIMARY_TRIGGER_REGION: equ 7
 BATTLESPRITESET_ENTITYOFFSET_SECONDARY_ORDER: equ 8
-BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION: equ 9 ; unknown
+BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION: equ 9
 BATTLESPRITESET_ENTITYOFFSET_INITIALIZATION_TYPE: equ 10 ; (2 bytes) (bitfield)
                                                          ; 0: normal initialization
                                                          ; 1: reinitialize if dead
@@ -3038,6 +3851,22 @@ DIFFICULTY_NORMAL: equ 0
 DIFFICULTY_HARD: equ 1
 DIFFICULTY_SUPER: equ 2
 DIFFICULTY_OUCH: equ 3
+
+; ---------------------------------------------------------------------------
+
+; enum DifficultyModifiers
+
+    if (STANDARD_BUILD&DIFFICULTY_FACTORS=1)
+NORMAL_TO_HARD_ATT: equ 5   ; modifier * 25%
+NORMAL_TO_HARD_DEF: equ 4
+NORMAL_TO_HARD_AGI: equ 4
+HARD_TO_SUPER_ATT: equ 5
+HARD_TO_SUPER_DEF: equ 4
+HARD_TO_SUPER_AGI: equ 4
+SUPER_TO_OUCH_ATT: equ 4
+SUPER_TO_OUCH_DEF: equ 4
+SUPER_TO_OUCH_AGI: equ 6
+    endif
 
 ; ---------------------------------------------------------------------------
 
@@ -3083,10 +3912,18 @@ LANDEFFECTSETTING_OBSTRUCTED: equ $FF ; gives "30%" effect, displays as "225%" (
 ; ---------------------------------------------------------------------------
 
 ; enum TurnOrderProperties
-TURN_ORDER_ENTRY_SIZE: equ 2
-TURN_ORDER_ENTRIES_MINUS_ONE_COUNTER: equ 62
-TURN_ORDER_ENTRIES_COUNTER: equ 63
-TURN_ORDER_ENTRIES_NUMBER: equ 64
+
+turnOrderEntrySize = 2
+turnOrderEntriesNumber = 64
+
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+turnOrderEntrySize = turnOrderEntrySize*2
+    endif
+
+TURN_ORDER_ENTRY_SIZE: equ turnOrderEntrySize
+TURN_ORDER_ENTRIES_MINUS_ONE_COUNTER: equ turnOrderEntriesNumber-2
+TURN_ORDER_ENTRIES_COUNTER: equ turnOrderEntriesNumber-1
+TURN_ORDER_ENTRIES_NUMBER: equ turnOrderEntriesNumber
 
 ; ---------------------------------------------------------------------------
 
@@ -3107,6 +3944,58 @@ CRAM_SIZE: equ 128
 
 ; ---------------------------------------------------------------------------
 
+; enum SavedDataOffsets
+
+savedByteSize = SAVED_DATA_BYTE_SIZE
+combatantEntryRealSize = COMBATANT_DATA_ENTRY_REAL_SIZE
+combatantSlotsNumber = COMBATANT_SLOTS_NUMBER
+combatantAlliesNumber = COMBATANT_ALLIES_NUMBER
+dealsItemsBytes = DEALS_ITEMS_BYTES
+caravanItemEntrySize = CARAVAN_ITEM_ENTRY_SIZE
+caravanMaxItemsNumber = CARAVAN_MAX_ITEMS_NUMBER
+turnOrderEntriesNumber = TURN_ORDER_ENTRIES_NUMBER
+blacksmithMaxOrdersNumber = BLACKSMITH_MAX_ORDERS_NUMBER
+
+                                            rsreset
+SAVED_DATA_OFFSET_COMBATANT_DATA:           rs.b combatantEntryRealSize*combatantSlotsNumber*savedByteSize
+    if (STANDARD_BUILD&EXPANDED_SAVED_DATA=1)
+SAVED_DATA_OFFSET_PROMOTED_AT_LEVELS:       rs.b combatantAlliesNumber*savedByteSize
+    endif
+SAVED_DATA_OFFSET_CURRENT_GOLD:             rs.l savedByteSize
+SAVED_DATA_OFFSET_DEALS_ITEMS:              rs.b dealsItemsBytes*savedByteSize
+SAVED_DATA_OFFSET_CARAVAN_ITEMS_NUMBER:     rs.w savedByteSize
+SAVED_DATA_OFFSET_CARAVAN_ITEMS:            rs.b caravanItemEntrySize*caravanMaxItemsNumber*savedByteSize
+SAVED_DATA_OFFSET_GAME_FLAGS:               rs.b 128*savedByteSize
+SAVED_DATA_OFFSET_BATTLE_AREA_X:            rs.b savedByteSize
+SAVED_DATA_OFFSET_BATTLE_AREA_Y:            rs.b savedByteSize
+SAVED_DATA_OFFSET_BATTLE_AREA_WIDTH:        rs.b savedByteSize
+SAVED_DATA_OFFSET_BATTLE_AREA_HEIGHT:       rs.b 7*savedByteSize
+SAVED_DATA_OFFSET_PLAYER_TYPE:              rs.b savedByteSize
+SAVED_DATA_OFFSET_CURRENT_MAP:              rs.b savedByteSize
+SAVED_DATA_OFFSET_CURRENT_BATTLE:           rs.b savedByteSize
+SAVED_DATA_OFFSET_RAFT_MAP:                 rs.b savedByteSize
+SAVED_DATA_OFFSET_RAFT_X:                   rs.b savedByteSize
+SAVED_DATA_OFFSET_RAFT_Y:                   rs.b 2*savedByteSize
+SAVED_DATA_OFFSET_MESSAGE_SPEED:            rs.b savedByteSize
+SAVED_DATA_OFFSET_NO_BATTLE_MESSAGES_TOGGLE:rs.b savedByteSize
+SAVED_DATA_OFFSET_EGRESS_MAP:               rs.b savedByteSize
+SAVED_DATA_OFFSET_BATTLE_TURN_ORDER:        rs.w turnOrderEntriesNumber*savedByteSize
+SAVED_DATA_OFFSET_CURRENT_BATTLE_TURN:      rs.w savedByteSize
+SAVED_DATA_OFFSET_SAVED_SECONDS_COUNTER:    rs.l savedByteSize
+SAVED_DATA_OFFSET_SPECIAL_BATTLE_RECORD:    rs.l savedByteSize
+SAVED_DATA_OFFSET_ENEMY_ITEM_DROPPED_FLAGS: rs.l savedByteSize
+SAVED_DATA_OFFSET_MITHRIL_WEAPONS_ON_ORDER: rs.w blacksmithMaxOrdersNumber*savedByteSize
+SAVED_DATA_SIZE:                            equ (__RS/4)*4 ; make into a multiple of 4
+
+    if (SAVED_DATA_SIZE>5040)
+        if (RELOCATED_SAVED_DATA_TO_SRAM=0)
+            inform 0,"Warning: Saved data is large enough that it risks being overwritten by the stack."
+            inform 1,"Patch RELOCATED_SAVED_DATA_TO_SRAM should be enabled."
+        endif
+    endif
+
+; ---------------------------------------------------------------------------
+
 ; enum ColorProperties
 COLOR_R_CHANNEL_MASK: equ $F
 COLOR_G_CHANNEL_MASK: equ $F0
@@ -3115,14 +4004,32 @@ COLOR_B_CHANNEL_MASK: equ $F00
 ; ---------------------------------------------------------------------------
 
 ; enum Sram
+
+saveSlotRealSize = SAVED_DATA_SIZE
+saveSlotSize = SAVED_DATA_SIZE*2
+sramSize = 8192
+
+    if (STANDARD_BUILD&RELOCATED_SAVED_DATA_TO_SRAM=1)
+saveSlotRealSize = saveSlotRealSize/2
+saveSlotSize = saveSlotSize/2
+    endif
+
+    if (EXPANDED_SRAM=1)
+sramSize = 32768
+    endif
+
 SAVE_FLAGS_SIZE: equ 2
 SAVE_CHECKSUM_SIZE: equ 2
 SRAM_STRING_CHECK_COUNTER: equ 16
 SRAM_STRING_WRITE_COUNTER: equ 17
 SRAM_STRING_LENGTH: equ 36
-SAVE_SLOT_REAL_SIZE: equ 4016
-SAVE_SLOT_SIZE: equ 8032
-SRAM_COUNTER: equ 8191
+SAVE_SLOT_BYTES_COUNTER: equ saveSlotRealSize-1
+SAVE_SLOT_LONGS_COUNTER: equ (saveSlotRealSize/4)-1
+SAVE_SLOT_REAL_SIZE: equ saveSlotRealSize
+SAVE_SLOT_SIZE: equ saveSlotSize
+SRAM_BYTES_COUNTER: equ sramSize-1
+SRAM_LONGS_COUNTER: equ (sramSize/4)-1
+SRAM_SIZE: equ sramSize
 
 ; ---------------------------------------------------------------------------
 
@@ -3184,30 +4091,114 @@ AICOMMAND_SPECIAL_MOVE5: equ 19
 ; ---------------------------------------------------------------------------
 
 ; enum AiCommand_Params
-AICOMMAND_PARAM_HEAL: equ 0
-AICOMMAND_PARAM_HEAL2: equ 1
-AICOMMAND_PARAM_HEAL3: equ 2
+
+; The following applies when patch HEALER_AI_ENHANCEMENTS is enabled.
+;
+; Healing instructions are composed of a single byte split into 4 parts (two bits each part).
+;   Bits 0-1 = healing rule for all other targets
+;   Bits 2-3 = healing rule for targeting self
+;   Bits 4-5 = healing rule for targeting Monster Zero (the first monster on the map, i.e. the boss)
+;   Bits 6-7 = healing rule for targeting AI 14,15
+;
+; Healing rules are as follows:
+;   %00 = never heal the target
+;   %01 = only heal if the target is at 33% health or less
+;   %10 = only heal if the target is at 66% health or less (default SF2 healing instruction)
+;   %11 = heal if the target is missing any health
+
+aiCommandParamHeal  = 0
+aiCommandParamHeal2 = 1
+aiCommandParamHeal3 = 2
+
+    if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
+aiCommandParamHeal  = %10101010                     ; %10 = only heal if the target is at 66% health or less
+aiCommandParamHeal2 = aiCommandParamHeal            ;   (default SF2 healing threshold)
+aiCommandParamHeal3 = aiCommandParamHeal
+    endif
+
+AICOMMAND_PARAM_HEAL: equ aiCommandParamHeal
+AICOMMAND_PARAM_HEAL2: equ aiCommandParamHeal2
+AICOMMAND_PARAM_HEAL3: equ aiCommandParamHeal3
 
 ; ---------------------------------------------------------------------------
 
 ; enum GameSettings
+
+longwordDealsCounter = (DEALS_ITEMS_BYTES/4)-1
+longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/4)-1
+longwordGameFlagsCounter = 31
+longwordSpellsInitValue = SPELL_NOTHING|(SPELL_NOTHING<<8)|(SPELL_NOTHING<<16)|(SPELL_NOTHING<<24)
+longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING<<8)|(ITEM_NOTHING<<16)|(ITEM_NOTHING<<24)
+longwordPromotedAtLevelsCounter = (COMBATANT_ALLIES_SPACE_END/4)-1
+
+    if (STANDARD_BUILD&EXPANDED_SRAM=1)
+longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/2)-1
+    endif
+    
+    if (STANDARD_BUILD=1)
+longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING*65536)
+    endif
+
 LONGWORD_GAMEFLAGS_INITVALUE: equ 0
 LONGWORD_DEALS_INITVALUE: equ 0
-LONGWORD_DEALS_COUNTER: equ $F
-LONGWORD_CARAVAN_COUNTER: equ $F
-LONGWORD_GAMEFLAGS_COUNTER: equ $1F
-LONGWORD_CARAVAN_INITVALUE: equ $7F7F7F7F
+LONGWORD_DEALS_COUNTER: equ longwordDealsCounter ; $F
+LONGWORD_CARAVAN_COUNTER: equ longwordCaravanCounter ; $F
+LONGWORD_GAMEFLAGS_COUNTER: equ longwordGameFlagsCounter ; $1F
+LONGWORD_SPELLS_INITVALUE: equ longwordSpellsInitValue ; $3F3F3F3F
+LONGWORD_CARAVAN_INITVALUE: equ longwordCaravanInitValue ; $7F7F7F7F
+LONGWORD_PROMOTED_AT_LEVELS_INITVALUE: equ 0
+LONGWORD_PROMOTED_AT_LEVELS_COUNTER: equ longwordPromotedAtLevelsCounter
 
 ; ---------------------------------------------------------------------------
 
 ; enum GameStartValues
-GAMESTART_MAP: equ 3
-GAMESTART_SAVEPOINT_Y: equ 3
-GAMESTART_FACING: equ 3
-GAMESTART_SAVEPOINT_X: equ 56
-GAMESTART_GOLD: equ 60
+
+gamestartGold = 60
+gamestartMap = MAP_GRANSEAL
+gamestartSavepointX = 56
+gamestartSavepointY = 3
+gamestartFacing = DOWN
+
+    if (STANDARD_BUILD&TEST_BUILD=1)
+gamestartGold = 500000
+    endif
+    
+GAMESTART_MAP:          equ gamestartMap
+GAMESTART_SAVEPOINT_Y:  equ gamestartSavepointY
+GAMESTART_FACING:       equ gamestartFacing
+GAMESTART_SAVEPOINT_X:  equ gamestartSavepointX
+GAMESTART_GOLD:         equ gamestartGold
 
 ; ---------------------------------------------------------------------------
 
 ; enum SoundDriverProperties
-SOUND_DRIVER_BYTE_SIZE: equ 8064
+
+soundDriverByteSize = 8064
+
+SOUND_DRIVER_LONG_SIZE: equ soundDriverByteSize/4
+SOUND_DRIVER_BYTE_SIZE: equ soundDriverByteSize
+
+; ---------------------------------------------------------------------------
+
+; enum ConfigurationScreenActions
+
+            rsreset
+CONFIGURATION_END: rs.b 1
+CONFIGURATION_GAME_FLAGS: rs.b 1
+CONFIGURATION_MAP_SELECT: rs.b 1
+CONFIGURATION_BATTLE_TEST: rs.b 1
+CONFIGURATION_MENU_SELECT: rs.b 1
+CONFIGURATION_PARTY_SELECT: rs.b 1
+CONFIGURATION_LEVEL_UP: rs.b 1
+CONFIGURATION_NAME_CHARACTER: rs.b 1
+CONFIGURATION_SPECIAL_TURBO: rs.b 1
+CONFIGURATION_DEBUG_MODE: rs.b 1
+CONFIGURATION_CONTROL_TOGGLES: rs.b 1
+CONFIGURATION_DIFFICULTY_SELCT: rs.b 1
+CONFIGURATION_GAME_COMPLETED: rs.b 1
+CONFIGURATION_GIVE_MONEY: rs.b 1
+CONFIGURATION_BATTLESCENE_TEST: rs.b 1
+CONFIGURATION_MESSAGE_TEST: rs.b 1
+CONFIGURATION_SOUND_TEST: rs.b 1
+CONFIGURATION_RESET: rs.b 1
+CONFIGURATION_SAVED_DATA: rs.b 1

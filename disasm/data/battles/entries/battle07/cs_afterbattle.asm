@@ -427,7 +427,11 @@ abcs_battle07:  textCursor 2385
                 nextSingleText $C0,130  ; "You're still there?{W1}"
                 setCameraEntity ALLY_BOWIE
                 setCameraEntity CAMERA_NEUTRAL
+            if (STANDARD_BUILD&FIX_ELIS_DIALOGUE_ASSIGNMENT=1)
+                nextSingleText $0,132 ; "Wow!  He's so brave.  Hmmm....{W1}"
+            else
                 nextSingleText $0,ALLY_BOWIE ; "Wow!  He's so brave.  Hmmm....{W1}"
+            endif
                 setCameraEntity ALLY_BOWIE
                 setCameraEntity CAMERA_NEUTRAL
                 nextSingleText $C0,130  ; "I've almost got you now!{W1}"

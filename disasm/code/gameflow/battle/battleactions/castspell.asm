@@ -66,7 +66,27 @@ rjt_SpellEffects:
                 dc.w spellEffect_FlameBreath-rjt_SpellEffects ; KIWI
                 dc.w spellEffect_FairyTear-rjt_SpellEffects ; SHINE
                 dc.w spellEffect_Bolt-rjt_SpellEffects ; ODDEYE
-                
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell44
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell45
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell46
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell47
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell48
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell49
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell50
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell51
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell52
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell53
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell54
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell55
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell56
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell57
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell58
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell59
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell60
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell61
+                dc.w spellEffect_None-rjt_SpellEffects       ; spell62
+            endif
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -80,7 +100,7 @@ spellEffect_Heal:
                 jsr     GetCurrentHp
                 sub.w   d1,d2           ; D2 = target's missing HP
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 clr.w   d6
                 move.b  SPELLDEF_OFFSET_POWER(a0),d6
                 cmpi.b  #255,d6
@@ -192,7 +212,7 @@ byte_B1F4:
                 
                 move.b  (a5),d0
                 jsr     SetStatusEffects
-                jsr     ApplyStatusEffectsAndItemsOnStats
+                jsr     UpdateCombatantStats
                 rts
 
     ; End of function spellEffect_Detox
@@ -211,7 +231,12 @@ spellEffect_Boost:
                 ori.w   #STATUSEFFECT_BOOST,d1
                 jsr     SetStatusEffects
                 andi.w  #STATUSEFFECT_BOOST,d3
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                cmpi.w  #STATUSEFFECT_BOOST,d3 ; check if status counter is already at max value
+                bne.s   @WriteScriptCommands
+            else
                 beq.s   @WriteScriptCommands
+            endif
                 moveq   #8,d2
                 bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
@@ -227,6 +252,24 @@ byte_B2B6:
                 
                 bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 jsr     GetBaseAgi
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                move.w  d1,d2
+                mulu.w  #3,d1
+                lsr.l   #3,d1
+                rol.w   #4,d3           ; calculate difference between full and current BOOST increase values
+                mulu.w  d3,d2
+                lsr.l   #3,d2
+                sub.w   d2,d1
+                displayMessage #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
+                jsr     GetBaseDef
+                move.w  d1,d2
+                mulu.w  #3,d1
+                lsr.l   #3,d1
+                mulu.w  d3,d2
+                lsr.l   #3,d2
+                sub.w   d2,d1
+            else
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,d0,#0,d1 
@@ -234,6 +277,7 @@ byte_B2B6:
                 jsr     GetBaseDef
                 mulu.w  #3,d1
                 lsr.l   #3,d1
+            endif
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_DEF_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
@@ -261,7 +305,12 @@ spellEffect_Slow:
                 ori.w   #STATUSEFFECT_SLOW,d1
                 jsr     SetStatusEffects
                 andi.w  #STATUSEFFECT_SLOW,d3
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                cmpi.w  #STATUSEFFECT_SLOW,d3 ; check if status counter is already at max value
+                bne.s   @WriteScriptCommands
+            else
                 beq.s   @WriteScriptCommands
+            endif
                 moveq   #8,d2
                 bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
@@ -280,6 +329,24 @@ byte_B350:
 battlesceneScript_DisplaySlowMessages:
                 
                 jsr     GetBaseAgi
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                move.w  d1,d2
+                mulu.w  #3,d1
+                lsr.l   #3,d1
+                rol.w   #6,d3           ; calculate difference between full and current SLOW increase values
+                mulu.w  d3,d2
+                lsr.l   #3,d2
+                sub.w   d2,d1
+                displayMessage #MESSAGE_BATTLE_AGILITY_DECREASED_BY,d0,#0,d1 
+                                                        ; Message, Combatant, Item or Spell, Number
+                jsr     GetBaseDef
+                move.w  d1,d2
+                mulu.w  #3,d1
+                lsr.l   #3,d1
+                mulu.w  d3,d2
+                lsr.l   #3,d2
+                sub.w   d2,d1
+            else
                 mulu.w  #3,d1
                 lsr.l   #3,d1
                 displayMessage #MESSAGE_BATTLE_AGILITY_DECREASED_BY,d0,#0,d1 
@@ -287,6 +354,7 @@ battlesceneScript_DisplaySlowMessages:
                 jsr     GetBaseDef
                 mulu.w  #3,d1
                 lsr.l   #3,d1
+            endif
                 displayMessage #MESSAGE_BATTLE_DEFENSE_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
@@ -307,7 +375,12 @@ spellEffect_Attack:
                 ori.w   #STATUSEFFECT_ATTACK,d1
                 jsr     SetStatusEffects
                 andi.w  #STATUSEFFECT_ATTACK,d3
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                cmpi.w  #STATUSEFFECT_ATTACK,d3 ; check if status counter is already at max value
+                bne.s   @WriteScriptCommands
+            else
                 beq.s   @WriteScriptCommands
+            endif
                 moveq   #8,d2
                 bsr.w   battlesceneScript_DetermineSpellEffectiveness
 @WriteScriptCommands:
@@ -323,8 +396,18 @@ byte_B3E2:
                 
                 bsr.w   battlesceneScript_AddStatusEffectSpellExp
                 jsr     GetBaseAtt
+            if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
+                move.w  d1,d2
                 mulu.w  #3,d1
                 lsr.l   #3,d1
+                rol.w   #2,d3           ; calculate difference between full and current ATTACK increase values
+                mulu.w  d3,d2
+                lsr.l   #3,d2
+                sub.w   d2,d1
+            else
+                mulu.w  #3,d1
+                lsr.l   #3,d1
+            endif
                 displayMessage #MESSAGE_BATTLE_ATTACK_SPELL_EFFECT,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 rts
@@ -558,7 +641,7 @@ byte_B642:
 @DetermineMessage:
                 
                 bsr.w   battlesceneScript_AddStatusEffectSpellExp
-                bscHideTextBox
+                bscCloseDialogueWindow
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyMessage
                 move.w  #MESSAGE_BATTLE_ABSORBED_MAGIC_POINTS,d1 ; ally message
@@ -601,7 +684,7 @@ byte_B6A2:
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseAtt
-                jsr     ApplyStatusEffectsAndItemsOnStats
+                jsr     UpdateCombatantStats
                 rts
 
     ; End of function spellEffect_PowerWater
@@ -633,7 +716,7 @@ byte_B708:
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseDef
-                jsr     ApplyStatusEffectsAndItemsOnStats
+                jsr     UpdateCombatantStats
                 rts
 
     ; End of function spellEffect_ProtectMilk
@@ -665,7 +748,7 @@ byte_B76E:
                 move.w  d0,d1
                 move.b  (a5),d0
                 jsr     IncreaseBaseAgi
-                jsr     ApplyStatusEffectsAndItemsOnStats
+                jsr     UpdateCombatantStats
                 rts
 
     ; End of function spellEffect_QuickChicken
@@ -703,7 +786,7 @@ byte_B802:
                                                         ; Message, Combatant, Item or Spell, Number
                 move.w  d2,d1
                 jsr     IncreaseBaseMov
-                jsr     ApplyStatusEffectsAndItemsOnStats
+                jsr     UpdateCombatantStats
                 rts
 
     ; End of function spellEffect_RunningPimento
@@ -879,7 +962,7 @@ spellEffect_FairyTear:
                 jsr     GetCurrentMp
                 sub.w   d1,d2
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 clr.w   d6
                 move.b  SPELLDEF_OFFSET_POWER(a0),d6
                 cmpi.b  #255,d6         ; full recovery if spell power is 255

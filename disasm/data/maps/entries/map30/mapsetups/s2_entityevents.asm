@@ -99,7 +99,12 @@ Map30_DefaultEntityEvent:
 
 sub_5A278:
                 
-                 
+            if (STANDARD_BUILD&FIX_DWARVEN_MINER_VOICE=1)
+                move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
+                move.w  #128,d0
+                jsr     GetEntityPortaitAndSpeechSfx
+                move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
+            endif
                 txt     1726            ; "Thanks to you, he recovered.{W2}"
                 txt     1727            ; "We all thank you.{N}Take this gift.{W1}"
                 moveq   #0,d0

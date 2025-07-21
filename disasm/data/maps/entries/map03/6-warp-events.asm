@@ -8,7 +8,7 @@
                   warpFacing UP
                 mWarp 0, 255  ; west exit
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
+                  warpMap    MAP_OVERWORLD_GRANSEAL_KINGDOM
                   warpDest   29, 32
                   warpFacing DOWN
                 mWarp 50, 23  ; exit to docks

@@ -85,18 +85,18 @@ Map25_EntityEvent5:
                  
                 chkFlg  800             ; Set after the merchant in Ketto runs to his store
                 bne.s   loc_5D2C4
-                move.b  ((MESSAGE_SPEED-$1000000)).w,d0
+                getSavedByte MESSAGE_SPEED, d0
                 movem.l d0,-(sp)
-                move.b  #0,((MESSAGE_SPEED-$1000000)).w
+                setSavedByte #0, MESSAGE_SPEED
                 txt     1966            ; "Blast!  I hate devils....{W1}"
-                move.b  #1,((MESSAGE_SPEED-$1000000)).w
+                setSavedByte #1, MESSAGE_SPEED
                 txt     1967            ; "Ah, are you a customer?{N}Wow!{W2}"
-                move.b  #2,((MESSAGE_SPEED-$1000000)).w
+                setSavedByte #2, MESSAGE_SPEED
                 txt     1968            ; "It's a secret, OK?{N}I have very good weapons.{N}Hee, hee.{W2}"
-                move.b  #3,((MESSAGE_SPEED-$1000000)).w
+                setSavedByte #3, MESSAGE_SPEED
                 txt     1969            ; "Do you want to buy one?{N}Oh, you do?!  OK, come to my{N}shop!{W1}"
                 movem.l (sp)+,d0
-                move.b  d0,((MESSAGE_SPEED-$1000000)).w
+                setSavedByte d0, MESSAGE_SPEED
                 setFlg  800             ; Set after the merchant in Ketto runs to his store
                 script  cs_5D3B8
                 bra.s   return_5D2D0

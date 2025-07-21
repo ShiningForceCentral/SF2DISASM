@@ -21,7 +21,7 @@ LoadBaseTiles:
                 bsr.w   SetVdpReg
                 move.w  #$8D3B,d0       ; H Scroll table VRAM address : EC00
                 jsr     (SetVdpReg).w
-                movea.l (p_tiles_Base).l,a0
+                getPointer p_tiles_Base, a0
                 lea     (0).w,a1
                 move.w  #4096,d0
                 moveq   #2,d1

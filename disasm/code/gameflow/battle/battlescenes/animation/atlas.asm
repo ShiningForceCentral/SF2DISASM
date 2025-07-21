@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\atlas.asm :
-; 0x1B37C..0x1B406 : Battlescene engine
+; 0x1B37C..0x1B406 : 
 
 ; =============== S U B R O U T I N E =======================================
 

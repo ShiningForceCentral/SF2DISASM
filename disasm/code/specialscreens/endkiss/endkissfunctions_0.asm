@@ -7,7 +7,7 @@
 
 DisplayEndingKissPicture:
                 
-                movea.l (p_tiles_EndingKiss).l,a0
+                getPointer p_tiles_EndingKiss, a0
                 lea     (FF6802_LOADING_SPACE).l,a1
                 jsr     (LoadStackCompressedData).w
                 lea     (FF6802_LOADING_SPACE).l,a0
@@ -28,7 +28,7 @@ loc_2C5A6:
                 move.w  #870,d0         ; wait for 14.5 seconds
                 jsr     (Sleep).w       
                 lea     (PALETTE_1_BASE).l,a0
-                moveq   #$1F,d7
+                moveq   #31,d7
 loc_2C5CC:
                 
                 clr.l   (a0)+

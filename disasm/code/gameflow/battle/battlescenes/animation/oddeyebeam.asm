@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\oddeyebeam.asm :
-; 0x1B716..0x1B7B0 : Battlescene engine
+; 0x1B716..0x1B7B0 : 
 
 ; =============== S U B R O U T I N E =======================================
 

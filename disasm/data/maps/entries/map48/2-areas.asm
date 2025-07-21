@@ -5,7 +5,11 @@
                     mainLayerStart      0, 0
                     mainLayerEnd        26, 31
                     scndLayerFgndStart  0, 0
+                if (STANDARD_BUILD&NO_DARKNESS_IN_CAVES=1)
+                    scndLayerBgndStart  0, 33
+                else
                     scndLayerBgndStart  28, 33
+                endif
                     mainLayerParallax   256, 256
                     scndLayerParallax   256, 256
                     mainLayerAutoscroll 0, 0
@@ -16,7 +20,11 @@
                     mainLayerStart      28, 0
                     mainLayerEnd        59, 31
                     scndLayerFgndStart  0, 0
+                if (STANDARD_BUILD&NO_DARKNESS_IN_CAVES=1)
+                    scndLayerBgndStart  0, 33
+                else
                     scndLayerBgndStart  28, 33
+                endif
                     mainLayerParallax   256, 256
                     scndLayerParallax   256, 256
                     mainLayerAutoscroll 0, 0

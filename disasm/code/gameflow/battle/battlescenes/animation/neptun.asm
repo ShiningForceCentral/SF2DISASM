@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\neptun.asm :
-; 0x1B21A..0x1B37C : Battlescene engine
+; 0x1B21A..0x1B37C : 
 
 ; =============== S U B R O U T I N E =======================================
 

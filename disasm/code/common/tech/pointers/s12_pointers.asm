@@ -6,7 +6,7 @@ p_pt_AllyBattlesprites:
 p_tiles_StatusAnimation:
                 dc.l tiles_StatusAnimation
 p_pt_tiles_BattlesceneTransition:
-                dc.l pt_BattlesceneTransitionTiles
+                dc.l pt_tiles_BattlesceneTransition
 p_BoltAnimData_A:
                 dc.l BoltAnimData_A
 p_BoltAnimData_B:

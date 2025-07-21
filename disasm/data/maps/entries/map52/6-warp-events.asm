@@ -3,7 +3,7 @@
 ; 0xB60D2..0xB60E4 : 
                 mWarp 28, 6
                   warpNoScroll
-                  warpMap    MAP_MOUNT_VOLCANON
+                  warpMap    MAP_BEDOE
                   warpDest   12, 30
                   warpFacing UP
                 mWarp 0, 255

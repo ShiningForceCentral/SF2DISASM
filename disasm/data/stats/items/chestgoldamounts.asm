@@ -1,7 +1,7 @@
 
 ; ASM FILE data\stats\items\chestgoldamounts.asm :
 ; 0x239AE..0x239C8 : Chest gold amounts
-ChestGoldAmounts:
+table_ChestGoldAmounts:
                 dc.w 10
                 dc.w 20
                 dc.w 30

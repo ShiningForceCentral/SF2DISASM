@@ -1,15 +1,15 @@
 
 ; ASM FILE code\common\menus\loadhighlightableicon.asm :
-; 0x10940..0x10A4A : Load highlightable icon function
+; 0x10940..0x1098A : Load highlightable icon function
 
 ; =============== S U B R O U T I N E =======================================
 
-; Copy spell icon to RAM
+; Load spell icon with red border overlay.
 ; 
-;       In: A1 = destination in RAM
-;           D0 = spell index
+;       In: a1 = destination in RAM
+;           d0.w = spell index
 ; 
-;       Out: A1 = end of affected section after copy
+;       Out: a1 = end of affected section after copy
 
 
 LoadHighlightableSpellIcon:
@@ -31,10 +31,12 @@ LoadHighlightableSpellIcon:
 
 ; =============== S U B R O U T I N E =======================================
 
+; Same as above, but for items.
+
 
 LoadHighlightableItemIcon:
                 
-                cmpi.w  #ICON_UNARMED,d0
+                cmpi.w  #ITEM_UNARMED,d0
                 beq.s   LoadHighlightableIcon
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
 
@@ -48,9 +50,9 @@ LoadHighlightableIcon:
                 
                 adda.w  #ICON_TILE_BYTESIZE,a1
                 mulu.w  #ICON_TILE_BYTESIZE,d0
-                movea.l (p_Icons).l,a0
-                adda.w  d0,a0           ; icon offset
-                move.w  #$2F,d1 
+                getPointer p_Icons, a0
+                addIconOffset d0, a0
+                move.w  #ICON_PIXELS_LONGWORD_COUNTER,d1 
                 lea     tiles_IconHighlight(pc), a2
 @Loop:
                 
@@ -64,5 +66,3 @@ LoadHighlightableIcon:
 
     ; End of function LoadHighlightableIcon
 
-tiles_IconHighlight:
-                incbin "data/graphics/tech/iconhighlighttiles.bin"

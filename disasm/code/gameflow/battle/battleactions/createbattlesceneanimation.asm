@@ -60,7 +60,7 @@ byte_A238:
                 cmpi.w  #BATTLEACTION_MUDDLED,(a3)
                 beq.w   @Skip           ; skip if action type is "muddled"
                 
-                bscHideTextBox
+                bscCloseDialogueWindow
                 bsr.w   battlesceneScript_GetSpellanimation
                 moveq   #BATTLEANIMATION_ATTACK,d5
                 tst.w   (a3)

@@ -20,7 +20,7 @@ InitializeWindowProperties:
                 move.w  (sp)+,d7
                 movea.l (sp)+,a0
                 clr.b   ((WINDOW_IS_PRESENT-$1000000)).w
-                cmpi.b  #MAP_CURRENT,((CURRENT_MAP-$1000000)).w
+                compareToSavedByte #MAP_CURRENT, CURRENT_MAP
                 beq.s   @Continue
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
 @Continue:
@@ -150,7 +150,7 @@ FixWindowsPositions:
 
 
 sub_48BE:
-                
+            if (VANILLA_BUILD=1)
                 move.l  a0,-(sp)
                 move.w  d0,-(sp)
                 bsr.w   GetWindowEntryAddress
@@ -158,6 +158,7 @@ sub_48BE:
                 move.w  (sp)+,d0
                 movea.l (sp)+,a0
                 rts
+            endif
 
     ; End of function sub_48BE
 
@@ -573,7 +574,8 @@ sub_4BEA:
                 add.w   d1,d6
                 add.w   d6,d6
                 cmpi.w  #VDPTILE_SCREEN_BLACK_BAR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(SPRITE_00_VDPTILE).l
-                bne.s   return_4C36
+                bne.s   @Return
+                
                 move.w  (VERTICAL_SCROLL_DATA).l,d1
                 addq.w  #4,d1
                 lsr.w   #3,d1
@@ -588,9 +590,10 @@ sub_4BEA:
                 sub.w   d1,d6
                 eor.w   d6,d7
                 btst    #6,d7
-                beq.s   return_4C36
-                addi.w  #$40,d6 
-return_4C36:
+                beq.s   @Return
+                
+                addi.w  #$40,d6
+@Return:
                 
                 rts
 

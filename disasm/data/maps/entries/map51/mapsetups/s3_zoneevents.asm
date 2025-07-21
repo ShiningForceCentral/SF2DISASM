@@ -71,7 +71,7 @@ cs_5C312:       textCursor 2555
                 setActscript 129,eas_Jump
                 setActscriptWait 130,eas_Jump
                 setStoryFlag 20         ; Battle 20 unlocked - BATTLE_HARPIES_POND              
-                warp MAP_HARPY_POOL,0,0,RIGHT
+                warp MAP_HARPIES_POND,0,0,RIGHT
                 csc_end
 cs_5C3AA:       textCursor 2565
                 nextSingleText $0,ALLY_PETER ; "{LEADER}, we have to{N}save him!{W1}"

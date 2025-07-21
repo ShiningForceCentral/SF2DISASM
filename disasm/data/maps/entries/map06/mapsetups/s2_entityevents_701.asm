@@ -497,7 +497,7 @@ loc_54C4C:
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     1117            ; "It's too dangerous to use it{N}as it is.{W2}"
                 txt     1118            ; "We need some way to{N}detonate the dynamite{N}safely.{W1}"
                 clsTxt
@@ -511,7 +511,11 @@ byte_54C8E:
                 clsTxt
                 move.w  #ITEM_DYNAMITE,d0
                 moveq   #0,d1
+            if (STANDARD_BUILD=1)
+                jsr     ReceiveMandatoryItem
+            else
                 bsr.w   ReceiveMandatoryItem
+            endif
                 btst    #0,d0
                 bne.s   byte_54CBA      
                 setFlg  804             ; Set after the dwarf gives you dynamite

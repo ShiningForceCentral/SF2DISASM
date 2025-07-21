@@ -1,0 +1,11 @@
+
+; ASM FILE code\common\tech\pointers\s00_pointers-standard.asm :
+p_table_FlagSwitchedMaps: dc.l table_FlagSwitchedMaps
+p_table_BattleMapCoordinates: dc.l table_BattleMapCoordinates
+p_table_SavepointMapCoordinates: dc.l table_SavepointMapCoordinates
+p_table_RaftResetMapCoordinates: dc.l table_RaftResetMapCoordinates
+p_table_ClassTypes: dc.l table_ClassTypes
+p_table_SpecialCaravanDescriptions: dc.l table_SpecialCaravanDescriptions
+p_table_UsableOnFieldItems: dc.l table_UsableOnFieldItems
+p_table_AllyDialogueProperties: dc.l table_AllyDialogueProperties
+p_table_MapspriteDialogueProperties: dc.l table_MapspriteDialogueProperties

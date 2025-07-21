@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle36\cs_beforebattle.asm :
 ; 0x4D88A..0x4D9A4 : Cutscene before battle 36
 bbcs_36:        textCursor 2946
-                loadMapFadeIn MAP_PRISM_FLOWERS_FIELD,15,0
+                loadMapFadeIn MAP_PRISM_FLOWERS_BATTLEFIELD,15,0
                 loadMapEntities ce_4D964
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

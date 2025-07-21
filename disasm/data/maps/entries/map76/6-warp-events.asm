@@ -8,12 +8,12 @@
                   warpFacing UP
                 mWarp 0, 255
                   warpScroll LEFT
-                  warpMap    MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE
+                  warpMap    MAP_OVERWORLD_GALAM_KINGDOM
                   warpDest   62, 255
                   warpFacing LEFT
                 mWarp 63, 255
                   warpScroll RIGHT
-                  warpMap    MAP_OVERWORLD_GRANS_NORTH_SHORE
+                  warpMap    MAP_OVERWORLD_NAZCA_REGION
                   warpDest   1, 255
                   warpFacing RIGHT
                 endWord

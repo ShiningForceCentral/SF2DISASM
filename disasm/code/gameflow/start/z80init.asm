@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\start\z80init.asm :
-; 0x3F6..0x45C : Z80 init function
+; 0x3F6..0x45C : Z80 initialization function
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -68,7 +68,7 @@ p_Start:        dc.l Start              ; Program Start Address
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
                 dc.l Int_OtherError     ; Reserved
-aSegaGenesis:   dc.b 'SEGA GENESIS    '
+aSegaGenesis:   declareSystemId
 aCSega1994_jul: dc.b '(C)SEGA 1994.JUL'
 aShiningForce2: dc.b 'SHINING FORCE 2 '
                 dc.b '                '
@@ -77,16 +77,16 @@ aShiningForce_0:dc.b 'SHINING FORCE 2 '
                 dc.b '                '
                 dc.b '                '
 aGmMk13150:     dc.b 'GM MK-1315 -00'   ; Serial Number
-                dc.w $8921              ; checksum
+                declareChecksum         ; checksum
 aJ:             dc.b 'J               '
                 dc.l 0                  ; ROM Start Address
-RomEndAddress:  dc.l $1FFFFF            ; ROM End Address
+RomEndAddress:  declareRomEnd           ; ROM End Address
                 dc.l $FF0000            ; RAM Start Address
                 dc.l $FFFFFF            ; RAM End Address
                 dc.l $5241F820          ; SRAM data
                 dc.l $200001            ; SRAM Start Address
-                dc.l $203FFF            ; SRAM End Address
+                declareSramEnd          ; SRAM End Address
                 dc.b '            '     ; Modem data
                 dc.b '                    ' ; Memo
                 dc.b '                    '
-aU:             dc.b 'U               ' ; Countries codes
+aU:             declareRegionSupport    ; Countries codes

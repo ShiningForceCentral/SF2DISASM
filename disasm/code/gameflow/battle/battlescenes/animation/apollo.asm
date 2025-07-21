@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\apollo.asm :
-; 0x1B0D0..0x1B21A : Battlescene engine
+; 0x1B0D0..0x1B21A : 
 
 ; =============== S U B R O U T I N E =======================================
 

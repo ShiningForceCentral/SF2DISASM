@@ -196,7 +196,7 @@ loc_4765E:
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 blt.s   loc_47670
-                bsr.w   LoadAndDisplayCurrentPortrait
+                bsr.w   DisplayCurrentPortrait
 loc_47670:
                 
                 ; get entity index that will trigger this event
@@ -214,7 +214,7 @@ loc_47670:
                 beq.s   loc_476A8
                 jsr     (WaitForVInt).w
                 addi.w  #2,d2
-                andi.w  #3,d2
+                andi.w  #DIRECTION_MASK,d2
                 move.w  d2,d1
                 moveq   #-1,d2
                 moveq   #-1,d3
@@ -264,10 +264,10 @@ sub_476DC:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get index of current portrait for dialogue window and load it
+; Get index of current portrait for dialogue window and display it.
 
 
-LoadAndDisplayCurrentPortrait:
+DisplayCurrentPortrait:
                 
                 movem.w d0-d2,-(sp)
                 move.w  ((CURRENT_PORTRAIT-$1000000)).w,d0
@@ -280,7 +280,7 @@ loc_476FC:
                 movem.w (sp)+,d0-d2
                 rts
 
-    ; End of function LoadAndDisplayCurrentPortrait
+    ; End of function DisplayCurrentPortrait
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -336,7 +336,7 @@ loc_4774C:
                 move.b  4(a0,d7.w),d0   ; byte 4 : Investigation line index
                 clr.w   d1
                 move.b  5(a0,d7.w),d1   ; byte 5 : Description line index
-                addi.w  #$1A7,d0        ; HARDCODED investigation line start index
+                addi.w  #423,d0         ; HARDCODED investigation line start index
                                         ; "{NAME} investigated{N}the area.{W2}{CLEAR}"
                                         ; Followed by all other "investigation" lines
                 jsr     (DisplayText).w 
@@ -392,8 +392,12 @@ GetCurrentMapSetup:
                 
                 movem.l d0-d1/a1,-(sp)
                 clr.w   d0
-                move.b  ((CURRENT_MAP-$1000000)).w,d0
+                getSavedByte CURRENT_MAP, d0
+            if (STANDARD_BUILD=1)
+                getPointer p_MapSetups, a1
+            else
                 lea     MapSetups(pc), a1
+            endif
 @NextMap_Loop:
                 
                 cmpi.w  #-1,(a1)
@@ -491,7 +495,7 @@ GetRhodeFacing:
                 jsr     j_GetEntityIndexForCombatant
                 move.b  ((EVENT_RELATIVE_POSITION-$1000000)).w,d1
                 addi.w  #2,d1
-                andi.w  #3,d1
+                andi.w  #DIRECTION_MASK,d1
                 moveq   #-1,d2
                 moveq   #-1,d3
                 jsr     (UpdateEntityProperties).w
@@ -508,6 +512,9 @@ GetRhodeFacing:
 
 CheckRandomBattle:
                 
+            if (STANDARD_BUILD&NO_RANDOM_BATTLES=1)
+                ; Do nothing
+            else
                 movem.l d1/d6-d7,-(sp)
                 move.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 add.w   d0,d1
@@ -543,7 +550,7 @@ loc_47896:
                 move.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 add.w   d0,d1
                 jsr     j_SetFlag
-                move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
+                move.l  #MAP_EVENT_RELOADMAP,((MAP_EVENT_TYPE-$1000000)).w
                 move.w  #30000,((STEP_COUNTER-$1000000)).w
                 jsr     (WaitForViewScrollEnd).w
                 sndCom  SFX_BOOST
@@ -551,6 +558,7 @@ loc_47896:
 loc_478C0:
                 
                 movem.l (sp)+,d1/d6-d7
+            endif
                 rts
 
     ; End of function CheckRandomBattle

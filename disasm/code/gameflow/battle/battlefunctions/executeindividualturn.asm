@@ -21,8 +21,7 @@ ExecuteIndividualTurn:
                 bsr.w   ClearDeadCombatantsListLength
                 
                 ; Are we currently battling Taros, and is Bowie the actor?
-                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED battle index
+                compareToSavedByte #BATTLE_VERSUS_TAROS, CURRENT_BATTLE ; HARDCODED battle index
                 bne.s   @IsActorAlive
                 tst.w   combatant(a6)
                 bne.s   @IsActorAlive
@@ -176,7 +175,7 @@ ExecuteIndividualTurn:
                 bne.s   @CheckFairyWoodsBattle
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w
                 move.w  #BATTLEACTION_CAST_SPELL,((CURRENT_BATTLEACTION-$1000000)).w
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 clr.w   d0
                 cmpi.w  #KIWI_FLAME_BREATH_UPGRADE_LEVEL1,d1
                 blt.s   @CheckUpgradeLevel2
@@ -198,8 +197,7 @@ ExecuteIndividualTurn:
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
 @CheckFairyWoodsBattle:
                 
-                cmpi.b  #BATTLE_FAIRY_WOODS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED Battle check : Fairy wood secret battle
+                compareToSavedByte #BATTLE_FAIRY_WOODS, CURRENT_BATTLE   ; HARDCODED Battle check : Fairy wood secret battle
                 bne.s   @WriteBattlesceneScript
                 jsr     j_CloseTimerWindow
 @WriteBattlesceneScript:

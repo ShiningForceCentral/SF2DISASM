@@ -11,14 +11,14 @@ IsMapScrollingToViewTarget:
                 
                 move.b  ((VIEW_SCROLLING_PLANES_BITFIELD-$1000000)).w,d7
                 tst.w   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
-                beq.s   loc_4736
+                beq.s   @loc_1
                 andi.b  #3,d7
-loc_4736:
+@loc_1:
                 
                 tst.w   ((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
-                beq.s   loc_4740
+                beq.s   @loc_2
                 andi.b  #$C,d7
-loc_4740:
+@loc_2:
                 
                 tst.b   d7
                 rts
@@ -68,7 +68,7 @@ VInt_UpdateMapAnimations:
                 
                 clr.w   d0
                 move.b  (TILE_ANIMATION_MAP_INDEX).l,d0
-                movea.l (p_pt_MapData).l,a0
+                getPointer p_pt_MapData, a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
                 movea.l (a0,d0.w),a0
                 movea.l MAPDATA_OFFSET_ANIMATIONS(a0),a0

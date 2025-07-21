@@ -8,19 +8,21 @@
 CheatModeConfiguration:
                 
                 module
+                
                 btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
                 beq.w   @Return
                 
                 ; Start sound test if pressing Up and game completed flag is set
                 btst    #INPUT_BIT_UP,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @IsConfigurationModeOn
-                
                 btst    #7,(SAVE_FLAGS).l
-                bne.w   SoundTest       
+                bne.w   SoundTest
 @IsConfigurationModeOn:
                 
                 tst.b   ((CONFIGURATION_MODE_TOGGLE-$1000000)).w
                 beq.w   @Return
+StartConfiguration:
+                
                 txt     448             ; "Configuration....{D3}"
                 txt     450             ; "{CLEAR}Special Turbo"
                 jsr     j_alt_YesNoPrompt

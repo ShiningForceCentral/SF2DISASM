@@ -144,7 +144,10 @@ cs_57AAA:       textCursor 3151
                 nextSingleText $0,ALLY_PETER ; "{LEADER}, we'll defeat{N}that devil by ourselves!{W1}"
                 nextSingleText $0,ALLY_PETER ; "I didn't know he was such a{N}cold-hearted god.{W2}"
                 nextSingleText $0,ALLY_PETER ; "OK, I'll help you!  I'll{N}go with you to reseal the{N}devil!{W1}"
+            if (STANDARD_BUILD&NO_AI_PETER=1)
+            else
                 join ALLY_PETER
                 joinForceAI ALLY_PETER,$0 ; 0054 JOIN FORCE WITH AI
+            endif
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 csc_end

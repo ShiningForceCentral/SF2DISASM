@@ -100,7 +100,11 @@ csc35_setBlocksVar:
 csc36_resetMap:
                 
                 move.l  a6,-(sp)
+            if (STANDARD_BUILD=1)
+                jsr     (ReloadCurrentMap).w
+            else
                 jsr     (ResetCurrentMap).l
+            endif
                 movea.l (sp)+,a6
                 rts
 
@@ -846,7 +850,7 @@ csc17_setEntityPosAndFacingWithFlash:
                 move.b  (a6),d0
                 bsr.w   GetEntityAddressFromCharacter
                 move.w  (a5),d1
-                move.w  #MAP_TILE_MINUS,d2
+                move.w  #$FE80,d2
                 moveq   #30,d7
 loc_469BA:
                 
@@ -880,11 +884,11 @@ csc18_flashEntityWhite:
                 lsr.w   #2,d7
 loc_469E8:
                 
-                ori.b   #4,ENTITYDEF_OFFSET_FLAGS_B(a5) ; set bit 2
+                ori.b   #%100,ENTITYDEF_OFFSET_FLAGS_B(a5) ; set bit 2
                 bsr.w   UpdateEntitySprite_0
                 jsr     (WaitForVInt).w
                 jsr     (WaitForVInt).w
-                andi.b  #$FB,ENTITYDEF_OFFSET_FLAGS_B(a5) ; clear bit 2
+                andi.b  #%11111011,ENTITYDEF_OFFSET_FLAGS_B(a5) ; clear bit 2
                 bsr.w   UpdateEntitySprite_0
                 jsr     (WaitForVInt).w
                 jsr     (WaitForVInt).w
@@ -937,7 +941,11 @@ csc1A_setEntitySprite:
                 move.w  d4,d0
 @NotAlly:
                 
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.w  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
+            else
                 move.b  d0,ENTITYDEF_OFFSET_MAPSPRITE(a5)
+            endif
                 jsr     (WaitForVInt).w
                 bsr.w   UpdateEntitySprite_0
                 rts
@@ -1394,7 +1402,11 @@ loc_46D4C:
 loc_46D5C:
                 
                 move.w  d1,ENTITYDEF_OFFSET_XTRAVEL(a5)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d4,ENTITYDEF_OFFSET_XVELOCITY(a5)
+            else
                 move.w  d4,ENTITYDEF_OFFSET_XVELOCITY(a5)
+            endif
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a5)
                 move.w  #48,d5
                 sub.w   ENTITYDEF_OFFSET_Y(a5),d2
@@ -1404,7 +1416,11 @@ loc_46D5C:
 loc_46D76:
                 
                 move.w  d2,ENTITYDEF_OFFSET_YTRAVEL(a5)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d5,ENTITYDEF_OFFSET_YVELOCITY(a5)
+            else
                 move.w  d5,ENTITYDEF_OFFSET_YVELOCITY(a5)
+            endif
                 bsr.w   WaitForEntityToStopMoving
                 addq.w  #2,d3           ; entity has opposite facing
                 andi.b  #DIRECTION_MASK,d3
@@ -1441,7 +1457,11 @@ csc29_setEntityDest:
 loc_46DC4:
                 
                 move.w  d1,ENTITYDEF_OFFSET_XTRAVEL(a5)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d3,ENTITYDEF_OFFSET_XVELOCITY(a5)
+            else
                 move.w  d3,ENTITYDEF_OFFSET_XVELOCITY(a5)
+            endif
                 move.w  #32,d3
                 sub.w   ENTITYDEF_OFFSET_Y(a5),d2
                 bpl.s   loc_46DDA
@@ -1450,7 +1470,11 @@ loc_46DC4:
 loc_46DDA:
                 
                 move.w  d2,ENTITYDEF_OFFSET_YTRAVEL(a5)
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.b  d3,ENTITYDEF_OFFSET_YVELOCITY(a5)
+            else
                 move.w  d3,ENTITYDEF_OFFSET_YVELOCITY(a5)
+            endif
                 btst    #$F,d6
                 bne.s   return_46DEC
                 bsr.w   WaitForEntityToStopMoving
@@ -1475,7 +1499,7 @@ csc2A_entityShiver:
                 moveq   #2,d7
 @Loop:
                 
-                ori.b   #8,ENTITYDEF_OFFSET_FLAGS_B(a5)
+                ori.b   #%1000,ENTITYDEF_OFFSET_FLAGS_B(a5)
                 bsr.w   UpdateEntitySprite_0
                 moveq   #5,d0
                 jsr     (Sleep).w       
@@ -1504,8 +1528,13 @@ csc2B_initializeNewEntity:
                 clr.w   d4
                 move.b  (a6)+,d1
                 move.b  (a6)+,d2
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.w  (a6)+,d3
+                move.w  (a6)+,d4
+            else
                 move.b  (a6)+,d3
                 move.b  (a6)+,d4
+            endif
                 move.l  #eas_Init,d5
                 jsr     InitializeNewEntity
                 rts
@@ -1620,7 +1649,7 @@ csc50_setEntitySize:
                 bsr.w   GetEntityAddressFromCharacter
                 move.w  ((SPRITE_SIZE-$1000000)).w,d6
                 move.w  (a6)+,((SPRITE_SIZE-$1000000)).w
-                ori.b   #8,ENTITYDEF_OFFSET_FLAGS_B(a5)
+                ori.b   #%1000,ENTITYDEF_OFFSET_FLAGS_B(a5)
                 bsr.w   UpdateEntitySprite_0
                 jsr     (WaitForVInt).w
                 move.w  d6,((SPRITE_SIZE-$1000000)).w
@@ -1755,7 +1784,7 @@ return_46FDA:
 ; =============== S U B R O U T I N E =======================================
 
 
-csc54_joinForceAI:
+csc54_joinForceAi:
                 
                 move.w  (a6)+,d0
                 jsr     j_GetActivationBitfield
@@ -1772,7 +1801,7 @@ loc_46FF8:
                 jsr     j_SetActivationBitfield
                 rts
 
-    ; End of function csc54_joinForceAI
+    ; End of function csc54_joinForceAi
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1934,8 +1963,12 @@ LoadMapsprite:
                 moveq   #2,d6
 @Continue:
                 
+            if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+                move.w  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
+            else
                 clr.w   d1
                 move.b  ENTITYDEF_OFFSET_MAPSPRITE(a5),d1
+            endif
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1

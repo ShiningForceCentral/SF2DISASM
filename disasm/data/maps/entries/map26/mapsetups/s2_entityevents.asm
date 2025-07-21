@@ -8,6 +8,9 @@ ms_map26_EntityEvents:
                 msEntityEvent 129, UP, Map26_EntityEvent3-ms_map26_EntityEvents
                 msEntityEvent 133, DOWN, Map26_EntityEvent4-ms_map26_EntityEvents
                 msEntityEvent 134, RIGHT, Map26_EntityEvent5-ms_map26_EntityEvents
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                msEntityEvent 135, RIGHT, Map26_EntityEvent6-ms_map26_EntityEvents
+            endif
                 msDefaultEntityEvent Map26_EntityEvent3-ms_map26_EntityEvents
 
 ; =============== S U B R O U T I N E =======================================
@@ -74,6 +77,13 @@ Map26_EntityEvent5:
 ; =============== S U B R O U T I N E =======================================
 
 
+Map26_EntityEvent6:
+                
+            if (STANDARD_BUILD&MINIATURES_SHOP=1)
+                move.b  #SHOP_MINATURES_ROOM,((CURRENT_SHOP_INDEX-$1000000)).w
+                jmp     ShopMenu
+            endif
+                
 Map26_EntityEvent3:
                 
                 rts

@@ -19,10 +19,10 @@ PopulateMovementArrays:
                 lea     (a6),a1
                 move.w  #15,d5
                 move.l  #$40004000,d1
-@InitStackFrame_Loop:
+@InitialStackFrame_Loop:
                 
                 move.l  d1,-(a1)
-                dbf     d5,@InitStackFrame_Loop
+                dbf     d5,@InitialStackFrame_Loop
                 
                 lea     (a3),a1
                 move.w  #143,d5
@@ -460,6 +460,8 @@ AddAllToStack:
 
 ; =============== S U B R O U T I N E =======================================
 
+; (should be combined with following subroutine)
+; 
 ; In: a2, a3 = pointers to total movecosts and movable grid arrays
 ;     d0.w, d1.w = starting X, Y
 ;     d3.w = move value (MOV*2)

@@ -75,7 +75,7 @@ byte_AFE4:
 byte_AFF4:
                 
                 @Message:
-                bscHideTextBox
+                bscCloseDialogueWindow
                 displayMessage #MESSAGE_BATTLE_IS_CURSED_AND_DAMAGED,d0,#0,d3 
                                                         ; Message, Combatant, Item or Spell, Number
 @Return:

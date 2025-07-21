@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\absorb.asm :
-; 0x1ACD8..0x1ACE4 : Battlescene engine
+; 0x1ACD8..0x1ACE4 : 
 
 ; =============== S U B R O U T I N E =======================================
 

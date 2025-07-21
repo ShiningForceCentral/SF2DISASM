@@ -279,13 +279,18 @@ shiver: macro
     dc.w \1 ; entity to act
     endm
     
-newEntity: macro
+newEntity: macro entityNumber, x, y, facing, mapsprite
     dc.w $2B
-    dc.w \1 ; entity number
-    dc.b \2 ; X
-    dc.b \3 ; Y
-    dc.b \4 ; facing
-    dc.b \5 ; mapsprite
+    dc.w \entityNumber
+    dc.b \x
+    dc.b \y
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+    dc.w \facing
+    dc.w \mapsprite
+    else
+    dc.b \facing
+    dc.b \mapsprite
+    endif
     endm
     
 followEntity: macro
@@ -605,12 +610,17 @@ mainEntity: macro
     dc.w \3 ; facing
     endm
 
-entity: macro
-    dc.b \1 ; X
-    dc.b \2 ; Y
-    dc.b \3 ; facing
-    dc.b \4 ; mapsprite
-    dc.l \5 ; action script
+entity: macro x, y, facing, mapsprite, actionScript
+    dc.b \x
+    dc.b \y
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+    dc.w \facing
+    dc.w \mapsprite
+    else
+    dc.b \facing
+    dc.b \mapsprite
+    endif
+    dc.l \actionScript
     endm
 	
 cscEntitiesEnd:	macro
@@ -618,15 +628,20 @@ cscEntitiesEnd:	macro
 	align
 	endm
     
-entityRandomWalk: macro
-    dc.b \1 ; X
-    dc.b \2 ; Y
-    dc.b \3 ; facing
-    dc.b \4 ; mapsprite
+entityRandomWalk: macro x, y, facing, mapsprite, originX, originY, walkRange
+    dc.b \x
+    dc.b \y
+    if (STANDARD_BUILD&EXPANDED_MAPSPRITES=1)
+    dc.w \facing
+    dc.w \mapsprite
+    else
+    dc.b \facing
+    dc.b \mapsprite
+    endif
     dc.b $FF
-    dc.b \5 ; origin X
-    dc.b \6 ; origin Y
-    dc.b \7 ; range to walk
+    dc.b \originX
+    dc.b \originY
+    dc.b \walkRange
     endm    
     
     

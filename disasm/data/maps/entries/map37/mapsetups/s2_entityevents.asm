@@ -312,7 +312,6 @@ sub_5F9A0:
 
 Map37_EntityEvent24:
                 
-                 
                 txt     3376            ; "You can start the ship by{N}placing the Sky Orb into{N}the cockpit.{W1}"
                 rts
 
@@ -369,7 +368,6 @@ sub_5F9C6:
 
 Map37_EntityEvent26:
                 
-                 
                 txt     11              ; "{LEADER}, take it easy!{W1}"
 Map37_EntityEvent27:
                 

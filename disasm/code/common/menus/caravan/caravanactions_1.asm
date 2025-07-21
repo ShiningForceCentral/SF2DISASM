@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\menus\caravan\caravanactions_1.asm :
-; 0x21FD2..0x228A2 : Caravan functions
+; 0x21FD2..0x228A2 : Caravan menu functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -31,21 +31,22 @@ CaravanMenu:
                 jsr     j_ExecuteDiamondMenu
                 cmpi.w  #-1,d0
                 beq.w   @ExitCaravan
-                add.w   d0,d0
-                move.w  rjt_CaravanMenuActions(pc,d0.w),d0
-                jsr     rjt_CaravanMenuActions(pc,d0.w)
-                bra.s   @RestartCaravan 
-rjt_CaravanMenuActions:
                 
-                dc.w caravanMenu_Join-rjt_CaravanMenuActions
-                dc.w caravanMenu_Depot-rjt_CaravanMenuActions
-                dc.w caravanMenu_Item-rjt_CaravanMenuActions
-                dc.w caravanMenu_Purge-rjt_CaravanMenuActions
+                add.w   d0,d0
+                move.w  rjt_CaravanMenu(pc,d0.w),d0
+                jsr     rjt_CaravanMenu(pc,d0.w)
+                bra.s   @RestartCaravan 
+rjt_CaravanMenu:
+                
+                dc.w caravanMenu_Join-rjt_CaravanMenu
+                dc.w caravanMenu_Depot-rjt_CaravanMenu
+                dc.w caravanMenu_Item-rjt_CaravanMenu
+                dc.w caravanMenu_Purge-rjt_CaravanMenu
 @ExitCaravan:
                 
                 moveq   #0,d0
                 moveq   #0,d1
-                move.w  #10,d1          ; "{LEADER}, take it easy!{W1}"
+                move.w  #MESSAGE_CARAVAN_TAKE_IT_EASY,d1 ; "{LEADER}, take it easy!{W1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
                 unlk    a6
                 movem.l (sp)+,d0-a5
@@ -75,7 +76,7 @@ caravanMenu_Join:
                 ; Pick joiner
                 move.w  #15,d1          ; "Who joins the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMembersListScreen
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 move.w  d0,member(a6)
                 cmpi.w  #-1,d0
                 beq.w   byte_220E8      ; @Exit
@@ -95,7 +96,7 @@ caravanMenu_Join:
                 moveq   #1,d1           ; battle party members
                 bsr.w   PopulateGenericListWithMembersList
                 cmpi.w  #FORCE_MAX_SIZE,((GENERIC_LIST_LENGTH-$1000000)).w
-                bcc.s   @ChooseRelief   
+                bcc.s   @ChooseRelief
                 
                 ; If force max size not reached, join immediately
                 move.w  member(a6),d0
@@ -108,13 +109,17 @@ caravanMenu_Join:
                 
                 move.w  #23,d1          ; "Choose a relief.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMembersListScreen
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_220DE      ; @CloseDialogueWindowAndRestart
                 
                 ; Is leader leaving the battle party?
+            if (STANDARD_BUILD&LEADER_CAN_LEAVE_BATTLE_PARTY=1)
+                ; Do nothing
+            else
                 tst.w   d0
                 beq.s   @LeaderCannotLeave
+            endif
                 
                 ; 
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -124,11 +129,15 @@ caravanMenu_Join:
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  #17,d1          ; "{NAME} returns to the{N}Caravan.{W2}{N}{NAME} joins the battle{N}party.{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
+            if (STANDARD_BUILD&LEADER_CAN_LEAVE_BATTLE_PARTY=1)
+                ; Do nothing
+            else
                 bra.s   @Goto_RestartJoin
 @LeaderCannotLeave:
                 
                 move.w  #20,d1          ; "{LEADER}!  What will they{N}do without you?!{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
+            endif
 @Goto_RestartJoin:
                 
                 bra.s   @Goto_Restart
@@ -176,13 +185,19 @@ caravanMenu_Purge:
                 ; Pick a quitter
                 move.w  #16,d1          ; "Who quits the battle party?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_InitializeMembersListScreen
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_22144      ; @Exit
                 
+            if (STANDARD_BUILD&LEADER_CAN_LEAVE_BATTLE_PARTY=1)
+                ; Is there only 1 battle party member remaining?
+                cmpi.w  #1,((GENERIC_LIST_LENGTH-$1000000)).w
+                bls.s   @LeaderCannotLeave
+            else
                 ; Is leader leaving the battle party?
                 tst.w   d0
                 beq.s   @LeaderCannotLeave
+            endif
                 jsr     j_LeaveBattleParty
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #22,d1          ; "{NAME}, why don't you{N}take a rest now?{W2}"
@@ -270,7 +285,7 @@ caravanDepotSubmenu_Look:
                 
                 move.w  #MESSAGE_CARAVAN_APPRAISE_WHICH_ITEM,d1 ; "Appraise which item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_BuildShopInventoryScreen
+                jsr     j_ExecuteShopScreen
                 move.w  d0,d2
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -311,7 +326,7 @@ byte_221F4:
 @HasUseSpell:
                 
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 cmpi.b  #SPELL_NOTHING,ITEMDEF_OFFSET_USE_SPELL(a0)
                 beq.s   byte_22210      ; @NoEffect
                 txt     93              ; "It has a special effect when{N}used in battle.{W2}"
@@ -343,28 +358,71 @@ byte_22210:
                 subq.w  #1,d7
                 bcs.w   @IsUnsellable
                 lea     ((TARGETS_LIST-$1000000)).w,a0
+                
+        if (STANDARD_BUILD&FIX_CARAVAN_DESCRIPTIONS=1)
+                clr.w   d3
+@ClearCount:    clr.w   d6
+@EquippableMessage_Loop:
+                
+                cmpi.w  #4,d6
+                beq.s   @ClearCount
+                
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.l  d7,-(sp)
+                move.b  (a0)+,d0
+                jsr     IsWeaponOrRingEquippable
+                movem.l (sp)+,d7
+            else
+                move.b  (a0)+,d0
+                jsr     IsWeaponOrRingEquippable
+            endif
+                bcc.s   @NextMember
+                
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
+                txt     98              ; "{DICT}{NAME},"
+                addq.w  #1,d6
+                moveq   #2,d3
+                cmpi.w  #4,d6
+                bne.s   @NextMember
+                
+                txt     99              ; "{N}"
+@NextMember:    dbf     d7,@EquippableMessage_Loop
+
+                tst.w   d3
+        else
                 clr.w   d6
 @EquippableMessage_Loop:
                 
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                move.l  d7,-(sp)
+                move.b  (a0)+,d0
+                jsr     IsWeaponOrRingEquippable
+                movem.l (sp)+,d7
+            else
                 move.b  (a0)+,d0
                 jsr     j_IsWeaponOrRingEquippable
+            endif
                 bcc.s   @NextMember
+                
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w ; argument (character index) for trap #5 using a {NAME} command
                 txt     98              ; "{DICT}{NAME},"
                 addq.w  #1,d6
                 cmpi.w  #1,d6
                 bne.s   @Skip
+                
                 txt     99              ; "{N}"
 @Skip:
                 
                 cmpi.w  #4,d6
                 bne.s   @NextMember
+                
                 txt     99              ; "{N}"
 @NextMember:
                 
                 dbf     d7,@EquippableMessage_Loop
                 
                 tst.w   d6
+        endif
                 bne.s   byte_2229C      
                 txt     97              ; "nobody so far.{W2}"
                 bra.s   @Goto_IsUnsellable
@@ -381,7 +439,7 @@ byte_222A4:
 @IsUnsellable:
                 
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @GetSellingPrice
                 txt     102             ; "You can't sell it at a shop.{W2}"
@@ -437,9 +495,9 @@ caravanDepotSubmenu_Deposit:
                 bsr.w   PopulateGenericListWithMembersList
                 move.w  #MESSAGE_CARAVAN_STORE_WHOSE_ITEM,d1 ; "Store whose item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -495,7 +553,7 @@ caravanDepotSubmenu_Derive:
                 ; Pick item from storehouse
                 move.w  #MESSAGE_CARAVAN_CHOOSE_WHICH_ITEM,d1 ; "Choose which item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_BuildShopInventoryScreen
+                jsr     j_ExecuteShopScreen
                 move.w  d0,d2
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -508,9 +566,9 @@ caravanDepotSubmenu_Derive:
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_PASS_THE_ITEM_TO_WHOM,d1 ; "Pass the {ITEM}{N}to whom?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                move.b  #2,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_DROP,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,targetMember(a6)
                 move.w  d1,targetItemSlot(a6)
                 move.w  d2,targetItemIndex(a6)
@@ -524,10 +582,16 @@ caravanDepotSubmenu_Derive:
                 beq.s   @Exchange
                 
                 ; Derive item
+            if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                move.w  itemSlot(a6),d1
+                jsr     RemoveItemFromCaravan
+                jsr     AddItem
+            else
                 move.w  itemIndex(a6),d1
                 jsr     j_AddItem
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemFromCaravan
+            endif
                 move.w  targetMember(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
                 move.w  #MESSAGE_CARAVAN_CHARACTER_NOW_HAS_THE_ITEM,d1 
@@ -547,7 +611,11 @@ caravanDepotSubmenu_Derive:
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemFromCaravan
                 move.w  targetMember(a6),d0
+            if (STANDARD_BUILD&FIX_CARAVAN_FREE_REPAIR_EXPLOIT=1)
+                ; Do nothing
+            else
                 move.w  itemIndex(a6),d1
+            endif
                 jsr     j_AddItem
                 move.w  targetItemIndex(a6),d1
                 jsr     j_AddItemToCaravan
@@ -600,7 +668,7 @@ caravanDepotSubmenu_Drop:
                 
                 move.w  #MESSAGE_CARAVAN_DISCARD_WHICH_ITEM,d1 ; "Discard which item?{W2}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                jsr     j_BuildShopInventoryScreen
+                jsr     j_ExecuteShopScreen
                 move.w  d0,d2
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -620,7 +688,7 @@ caravanDepotSubmenu_Drop:
                 move.w  itemSlot(a6),d1
                 jsr     j_RemoveItemFromCaravan
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Continue
                 jsr     j_AddItemToDeals
@@ -715,9 +783,9 @@ caravanItemSubmenu_Use:
                 
                 moveq   #0,d1           ; all force members
                 bsr.w   PopulateGenericListWithMembersList
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -734,8 +802,8 @@ caravanItemSubmenu_Use:
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #25,d1          ; "Use the {ITEM}{N}on whom?{D1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMembersListScreen
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 beq.s   byte_225E4      ; @CancelChoice
                 
@@ -795,9 +863,9 @@ caravanItemSubmenu_Give:
                 
                 moveq   #0,d1           ; all force members
                 bsr.w   PopulateGenericListWithMembersList
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -811,9 +879,9 @@ caravanItemSubmenu_Give:
                 move.w  itemIndex(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.w  #29,d1          ; "Pass the {ITEM}{N}to whom?{D1}"
                 bsr.w   DisplayCaravanMessageWithPortrait
-                move.b  #2,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_DROP,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  itemIndex(a6),((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,targetMember(a6)
                 move.w  d1,targetItemSlot(a6)
                 move.w  d2,targetItemIndex(a6)
@@ -915,9 +983,9 @@ caravanItemSubmenu_Equip:
                 
                 moveq   #0,d1           ; all force members
                 bsr.w   PopulateGenericListWithMembersList
-                move.b  #3,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_EQUIP,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
                 bne.s   @Restart
                 txt     4               ; "Did you change your mind?{W2}"
@@ -951,9 +1019,9 @@ caravanItemSubmenu_Drop:
                 
                 moveq   #0,d1           ; all force members
                 bsr.w   PopulateGenericListWithMembersList
-                move.b  #1,((byte_FFB13C-$1000000)).w
+                move.b  #ITEM_SUBMENU_ACTION_GIVE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 move.w  #ITEM_NOTHING,((SELECTED_ITEM_INDEX-$1000000)).w
-                jsr     j_BuildMembersListScreen_NewAttAndDefPage
+                jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 move.w  d0,member(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
@@ -979,7 +1047,7 @@ caravanItemSubmenu_Drop:
                 move.w  itemSlot(a6),d1
                 jsr     j_DropItemBySlot
                 move.w  itemIndex(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Continue
                 jsr     j_AddItemToDeals
@@ -1023,7 +1091,11 @@ DisplaySpecialCaravanDescription:
                 
                 movem.l d0-d1/a0,-(sp)
                 andi.w  #ITEMENTRY_MASK_INDEX,d1
+            if (STANDARD_BUILD=1)
+                getPointer p_table_SpecialCaravanDescriptions, a0
+            else
                 lea     table_SpecialCaravanDescriptions(pc), a0
+            endif
 @FindItem_Loop:
                 
                 cmpi.w  #-1,(a0)

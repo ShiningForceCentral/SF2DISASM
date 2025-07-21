@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle32\cs_afterbattle.asm :
 ; 0x4CDB4..0x4CF0C : Cutscene after battle 32
 abcs_battle32:  textCursor 2853
-                loadMapFadeIn MAP_OVERWORLD_MOUN_AND_MITULA,5,20
+                loadMapFadeIn MAP_OVERWORLD_NORTH_PARMECIA,5,20
                 loadMapEntities ce_4CEEC
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -49,8 +49,11 @@ abcs_battle32:  textCursor 2853
                 setFacing FOLLOWER_B,DOWN
                 nextSingleText $0,FOLLOWER_B ; "{LEADER}, don't you want{N}{NAME;23} to join our{N}force?{W1}"
                 nod ALLY_BOWIE
+            if (STANDARD_BUILD&NO_AI_JARO=1)
+            else
                 join ALLY_JARO
                 joinForceAI ALLY_JARO,$0 ; 0054 JOIN FORCE WITH AI
+            endif
                 entityActionsWait ALLY_JARO
                  moveDown 1
                 endActions

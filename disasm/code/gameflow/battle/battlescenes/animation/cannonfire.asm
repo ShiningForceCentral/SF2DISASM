@@ -1,11 +1,11 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\cannonfire.asm :
-; 0x1AEB0..0x1AF0A : Battlescene engine
+; 0x1AEB0..0x1AF0A : 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-spellanimationSetup_CannonProjectile:
+spellanimationSetup_CannonFire:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellanimationProperties
@@ -30,7 +30,7 @@ loc_1AECA:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-    ; End of function spellanimationSetup_CannonProjectile
+    ; End of function spellanimationSetup_CannonFire
 
 table_1AEFA:    dc.l $F300FFC0
                 dc.l $18000E8

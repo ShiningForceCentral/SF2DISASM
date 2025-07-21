@@ -7,7 +7,7 @@
 
 SetMoveSfx:
                 
-                cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
+                compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 bne.s   @Continue
                 
                 clr.w   ((MOVE_SFX-$1000000)).w ; no move sfx outside battle

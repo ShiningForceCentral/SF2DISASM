@@ -1,6 +1,7 @@
 
 # No rom files or game content on the repository
 *.bin
+!*-standard.bin
 
 # No symbols or listings files
 *.lst
@@ -64,9 +65,10 @@ local.properties
 
 # Build results
 
-[Dd]ebug/
-[Rr]elease/
-x64/
+# BNC : removed all VS-related build folders. not relevant to us!
+# [Dd]ebug/
+# [Rr]elease/
+# x64/
 # wizardwhosaysni : removed build/ from default config file
 # build/ 
 [Bb]in/
@@ -306,3 +308,7 @@ disasm/data/maps/entries/map*/*layoutflags*.txt
 disasm/code/common/menus/getallyportrait-expanded.asm
 disasm/code/common/scripting/entity/getallymapsprite-expanded.asm
 disasm/code/gameflow/special/battletest-expanded.asm
+
+# CHAPTER_SCREEN
+!**/chapterscreen/*.bin
+!**/chapterscreen/*.png

@@ -12,7 +12,7 @@
 ; HARDCODED enemy and message indexes
 
 
-battlesceneScript_DisplayMessage:
+battlesceneScript_DisplayActionMessage:
                 
                 module
                 movem.l d0-d3/a0,-(sp)
@@ -137,6 +137,6 @@ byte_A1E6:
                 movem.l (sp)+,d0-d3/a0
                 rts
 
-    ; End of function battlesceneScript_DisplayMessage
+    ; End of function battlesceneScript_DisplayActionMessage
 
                 modend

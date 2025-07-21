@@ -5,6 +5,10 @@ p_table_ItemNames:
                 dc.l table_ItemNames
 p_table_ClassNames:
                 dc.l table_ClassNames
+p_table_FullClassNames
+            if (STANDARD_BUILD=1)
+                dc.l table_FullClassNames
+            endif
 p_table_ItemDefinitions:
                 dc.l table_ItemDefinitions
 p_table_SpellDefinitions:

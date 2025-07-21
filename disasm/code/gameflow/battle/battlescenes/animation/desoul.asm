@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\desoul.asm :
-; 0x1A73A..0x1A848 : Battlescene engine
+; 0x1A73A..0x1A848 : 
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -70,7 +70,6 @@ loc_1A7E2:
     ; End of function spellanimationSetup_Desoul
 
 table_1A810:    vdpSpell 1, 1, SPELLTILE97, V2|H2|32
-                
                 vdpSpell 1, 1, SPELLTILE101, V2|H2|33
                 
 table_DesoulBackgroundModification:

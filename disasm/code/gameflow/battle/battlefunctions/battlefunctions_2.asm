@@ -1,202 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlefunctions\battlefunctions_2.asm :
-; 0x2448A..0x2550C : Battle functions
-
-; =============== S U B R O U T I N E =======================================
-
-
-SpawnEnemySkipCamera:
-                
-                moveq   #1,d1
-                bra.w   SpawnEnemy
-
-    ; End of function SpawnEnemySkipCamera
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: D0 = combatant
-
-combatant = -2
-
-SpawnEnemyWithCamera:
-                
-                clr.w   d1
-SpawnEnemy:
-                
-                movem.l d7-a0,-(sp)
-                link    a6,#-16
-                move.w  d1,-(sp)
-                move.w  d0,combatant(a6)
-                move.w  combatant(a6),d0
-                jsr     sub_440B8
-                move.w  (sp)+,d1
-                bne.s   @SkipCamera
-                
-                ; Move cursor to combatant's position
-                clr.b   ((CURSOR_RADIUS-$1000000)).w
-                move.w  combatant(a6),d0
-                bsr.w   GetEntityIndexForCombatant
-                move.b  d0,((VIEW_TARGET_ENTITY-$1000000)).w
-                move.w  combatant(a6),d0
-                bsr.w   SetCursorDestinationToNextCombatant
-                bsr.w   WaitForCursorToStopMoving
-                jsr     (WaitForViewScrollEnd).w
-                bsr.w   HideCursorEntity
-@SkipCamera:
-                
-                moveq   #11,d7
-@Loop:
-                
-                move.w  combatant(a6),d0
-                bsr.w   GetEntityIndexForCombatant
-                move.w  d7,d1
-                addq.w  #3,d1
-                andi.w  #3,d1
-                moveq   #-1,d2
-                moveq   #-1,d3
-                jsr     (UpdateEntityProperties).l
-                moveq   #3,d0
-                jsr     (Sleep).w       
-                dbf     d7,@Loop
-                
-                sndCom  SFX_SPAWN
-                move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                txt     397             ; "{CLEAR}{NAME} appeared!{D3}"
-                clsTxt
-                unlk    a6
-                movem.l (sp)+,d7-a0
-                rts
-
-    ; End of function SpawnEnemyWithCamera
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-ClearDeadCombatantsListLength:
-                
-                clr.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
-                rts
-
-    ; End of function ClearDeadCombatantsListLength
-
-
-; =============== S U B R O U T I N E =======================================
-
-
-ProcessKilledCombatants:
-                
-                tst.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
-                beq.w   @NoneKilled
-                movem.l d0-a2/a6,-(sp)
-                moveq   #ANIM_SPRITE_DEATH_SPINS_NUMBER,d6
-@DeathSpin_Loop:
-                
-                lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0 ; loop point for sprite death spin animation
-                lea     ((ENTITY_ANIMATION_COUNTER-$1000000)).w,a1
-                move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
-@GetDeadCombatant_Loop:
-                
-                clr.w   d0
-                move.b  (a0)+,d0
-                jsr     GetEntityIndexForCombatant
-                move.w  d6,d1
-                andi.w  #3,d1
-                clr.w   d2
-                moveq   #-1,d3
-                jsr     (UpdateEntityProperties).l
-                cmpi.b  #GFX_MAX_SPRITES_TO_LOAD,((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-                blt.s   @Continue
-                jsr     (WaitForVInt).w
-                clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-@Continue:
-                
-                lsl.w   #ENTITYDEF_SIZE_BITS,d0
-                move.b  #-1,(a1,d0.w)
-                dbf     d7,@GetDeadCombatant_Loop
-                
-                moveq   #ANIM_SPRITE_DEATH_SPIN_DELAY,d0
-                jsr     (Sleep).w       
-                dbf     d6,@DeathSpin_Loop
-                
-                sndCom  SFX_BATTLEFIELD_DEATH
-                moveq   #2,d6
-@DeathSound_Loop:
-                
-                lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0
-                move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
-@UpdateDeadCombatant_Loop:
-                
-                clr.w   d0
-                move.b  (a0)+,d0
-                jsr     GetEntityIndexForCombatant
-                cmpi.b  #ENTITY_SPECIAL_SPRITE,d0
-                bne.s   @NormalEntity
-                move.l  #$60006000,((ENTITY_SPECIAL_SPRITE_DATA-$1000000)).w
-                move.l  #$60006000,((ENTITY_SPECIAL_SPRITE_DESTINATION-$1000000)).w
-@NormalEntity:
-                
-                move.w  #DOWN,d1
-                sub.w   d6,d1
-                clr.w   d2
-                move.w  #MAPSPRITE_EFFECT1,d3
-                jsr     (UpdateEntityProperties).l
-                cmpi.b  #GFX_MAX_SPRITES_TO_LOAD,((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-                blt.s   @NextDeadEntity
-                jsr     (WaitForVInt).w
-                clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
-@NextDeadEntity:
-                
-                dbf     d7,@UpdateDeadCombatant_Loop
-                
-                moveq   #8,d0
-                jsr     (Sleep).w       
-                dbf     d6,@DeathSound_Loop
-                
-                lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0
-                move.w  ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w,d7
-                subq.w  #1,d7
-@CheckKillDefeat_Loop:
-                
-                moveq   #1,d1
-                clr.w   d0
-                move.b  (a0)+,d0
-                blt.s   @IncreaseKills
-                jsr     j_IncreaseDefeats
-                bra.s   @ClearDeadCombatant
-@IncreaseKills:
-                
-                movem.l d0,-(sp)
-                clr.w   d0
-                move.b  ((BATTLESCENE_FIRST_ALLY-$1000000)).w,d0
-                jsr     j_IncreaseKills
-                movem.l (sp)+,d0
-@ClearDeadCombatant:
-                
-                moveq   #-1,d1
-                jsr     j_SetCombatantX
-                jsr     j_SetCombatantY
-                clr.w   d1
-                jsr     j_SetStatusEffects
-                jsr     j_ApplyStatusEffectsAndItemsOnStats
-                jsr     GetEntityIndexForCombatant
-                move.w  #$7000,d1
-                move.w  #$7000,d2
-                jsr     SetEntityPosition
-                dbf     d7,@CheckKillDefeat_Loop
-                
-                moveq   #10,d0
-                jsr     (Sleep).w       
-                movem.l (sp)+,d0-a2/a6
-@NoneKilled:
-                
-                rts
-
-    ; End of function ProcessKilledCombatants
-
+; 0x24642..0x2550C : Battle functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -314,8 +118,15 @@ ProcessBattleEntityControlPlayerInput:
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 jsr     (CheckChestItem).w
                 move.w  d2,((CHEST_CONTENTS-$1000000)).w
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                move.w  #-1,d0
+                andi.b  #ITEMENTRY_MASK_INDEX,d0
+                cmp.w   d0,d2
+            else
                 cmpi.w  #-1,d2
+            endif
                 bne.s   @SearchMenu     ; if d2.w != -1, then there is an item
+                
                 moveq   #MENU_BATTLE_WITH_STAY,d2
                 bra.s   @CheckTargetReachableByAttack
 @SearchMenu:
@@ -327,6 +138,7 @@ ProcessBattleEntityControlPlayerInput:
                 jsr     j_CreateAttackRangeGrid
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.s   @TargetIsInAttackRange
+                
                 moveq   #3,d0
                 bra.s   @NoTarget
 @TargetIsInAttackRange:
@@ -341,6 +153,7 @@ ProcessBattleEntityControlPlayerInput:
                 cmpi.w  #-1,d0
                 bne.w   @CheckChoice_Attack
                 
+                ; Canceled out of menu
                 move.w  combatant(a6),d0
                 move.w  ((BATTLE_ACTOR_X-$1000000)).w,d1
                 jsr     j_SetCombatantX
@@ -426,7 +239,7 @@ ProcessBattleEntityControlPlayerInput:
                 clr.w   d0
                 lea     CreatePulsatingSpellRangeGrid(pc), a0
                 nop
-                jsr     j_ExecuteMagicMenu
+                jsr     j_ExecuteBattlefieldMagicMenu
                 cmpi.w  #-1,d0
                 bne.w   @CheckMpCost
                 
@@ -462,7 +275,7 @@ ProcessBattleEntityControlPlayerInput:
 @HasTarget_Spell:
                 
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 bsr.w   ControlCursorEntity_ChooseTarget
                 cmpi.w  #-1,d0
@@ -515,10 +328,15 @@ CreatePulsatingSpellRangeGrid:
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 tst.w   d2
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                ; Skip ahead to Give action if no item held
+                beq.w   @StartGiveAction
+            else
                 bne.w   @HasItemToUse
                 txt     438             ; "You have no item.{W1}"
                 clsTxt
                 bra.w   @StartBattleMenu
+            endif
 @HasItemToUse:
                 
                 clr.w   d1
@@ -561,7 +379,7 @@ CreatePulsatingSpellRangeGrid:
                 clr.w   d1
                 lea     CreatePulsatingItemRangeGrid(pc), a0
                 nop
-                jsr     j_ExecuteItemMenu
+                jsr     j_ExecuteBattlefieldItemMenu
                 cmpi.w  #-1,d0
                 bne.w   @IsUsable
                 
@@ -594,10 +412,10 @@ CreatePulsatingSpellRangeGrid:
 @HasTarget_Use:
                 
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 bsr.w   ControlCursorEntity_ChooseTarget
                 cmpi.w  #-1,d0
@@ -790,7 +608,7 @@ sub_24C4E:
                 moveq   #DOWN,d1        ; set menu initial choice to down slot
 @Goto_ExecuteMenu:
                 
-                bra.s   @ExecuteMenu
+                bra.s   @ExecuteDiamondMenu
 @GetMenuInitialChoice:
                 
                 move.l  a0,-(sp)
@@ -804,14 +622,14 @@ sub_24C4E:
                 cmp.w   d2,d4
                 dbeq    d7,@Loop
                 movea.l (sp)+,a0
-@ExecuteMenu:
+@ExecuteDiamondMenu:
                 
                 move.b  d1,d0
                 lea     CreatePulsatingAttackRangeGrid(pc), a0
                 nop
                 move.w  d6,d1
                 move.w  d1,-(sp)
-                jsr     j_ExecuteItemMenu
+                jsr     j_ExecuteBattlefieldItemMenu
                 move.w  (sp)+,d1
                 move.w  (sp)+,d0
                 rts
@@ -843,6 +661,10 @@ EquipNewItemInBattle:
 @Equip:
                 
                 move.w  d4,d1
+            if (STANDARD_BUILD&FIX_HIGINS_SPELL=1)
+                cmpi.w  #COMBATANT_ITEMSLOTS,d1
+                bge.s   @Return
+            endif
                 jsr     j_EquipItemBySlot
                 cmpi.w  #2,d2
                 bne.w   @Return         ; return if not cursed
@@ -947,7 +769,7 @@ loc_24D42:
                 jsr     (WaitForVInt).w
                 clr.w   d0
                 lea     (InitialStack).w,a0
-                jsr     j_ExecuteItemMenu
+                jsr     j_ExecuteBattlefieldItemMenu
                 cmpi.w  #-1,d0
                 bne.w   @IsActorCursed
                 
@@ -960,7 +782,7 @@ loc_24D42:
                 btst    #ITEMENTRY_BIT_EQUIPPED,d0
                 beq.w   @ChooseTarget
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   @ChooseTarget
                 sndCom  MUSIC_CURSED_ITEM
@@ -971,6 +793,9 @@ loc_24D42:
                 bra.s   @HasTarget_Give
 @ChooseTarget:
                 
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                clsTxt
+            endif
                 clr.b   ((CURSOR_RADIUS-$1000000)).w
                 move.w  combatant(a6),d0
                 bsr.w   ControlCursorEntity_ChooseTarget
@@ -988,6 +813,10 @@ loc_24D42:
                 jsr     j_CloseBattlefieldMiniStatusWindow
                 clr.w   d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                ; Always trade items
+            else
+                ; Trade items if target's inventory is full
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
                 beq.w   @ChooseItemToTrade
                 
@@ -1000,6 +829,7 @@ loc_24D42:
                 bclr    #ITEMENTRY_BIT_EQUIPPED,d1
                 jsr     j_AddItem
                 bra.w   @EndGiveAction
+            endif
 @ChooseItemToTrade:
                 
                 move.w  itemOrSpellIndex(a6),d0
@@ -1021,7 +851,7 @@ loc_24D42:
                 move.w  (sp)+,d1
                 clr.w   d0
                 lea     (InitialStack).w,a0
-                jsr     j_ExecuteItemMenu
+                jsr     j_ExecuteBattlefieldItemMenu
                 cmpi.w  #-1,d0
                 bne.w   @IsTargetCursed
                 bra.w   @ChooseTarget
@@ -1032,7 +862,7 @@ loc_24D42:
                 btst    #ITEMENTRY_BIT_EQUIPPED,d0
                 beq.w   @TradeItem
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   @TradeItem
                 sndCom  MUSIC_CURSED_ITEM
@@ -1067,7 +897,18 @@ loc_24D42:
                 clr.w   d0
                 bra.w   @EndBattleEntityControl
 @ItemMenuChoice_Drop:
+            if (STANDARD_BUILD&TRADEABLE_ITEMS=1)
+                move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
+                jsr     GetItemBySlotAndHeldItemsNumber
+                tst.w   d2
+                bne.s   @ChooseDiscard
                 
+                txt     438             ; "You have no item.{W1}"
+                clsTxt
+                bra.s   @ReturnToMenu
+@ChooseDiscard:
+            endif
+            
                 move.w  combatant(a6),d0
                 bsr.w   HideCursorEntity
                 move.w  d1,-(sp)
@@ -1088,9 +929,11 @@ loc_24D42:
                 clr.w   d0
                 clr.w   d1
                 lea     (InitialStack).w,a0
-                jsr     j_ExecuteItemMenu
+                jsr     j_ExecuteBattlefieldItemMenu
                 cmpi.w  #-1,d0
                 bne.w   loc_24FC2
+@ReturnToMenu:  
+                
                 moveq   #-1,d1
                 bra.w   @ChooseItemSubmenuAction
 loc_24FC2:
@@ -1100,7 +943,7 @@ loc_24FC2:
                 btst    #ITEMENTRY_BIT_EQUIPPED,d0
                 beq.w   loc_24FFA
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_CURSED,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   loc_24FFA
                 sndCom  MUSIC_CURSED_ITEM
@@ -1112,7 +955,7 @@ loc_24FC2:
 loc_24FFA:
                 
                 move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_UNSELLABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   loc_25022
                 move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -1132,7 +975,7 @@ loc_25022:
                 move.w  combatant(a6),d0
                 jsr     j_RemoveItemBySlot
                 move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   byte_25066      
                 move.w  ((BATTLEACTION_ITEM_SLOT-$1000000)).w,d0
@@ -1144,8 +987,14 @@ byte_25066:
                 bra.w   @StartBattleMenu
 @CheckChoice_SearchStay:
                 
+            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
+                move.w  #-1,d0
+                andi.b  #ITEMENTRY_MASK_INDEX,d0
+                cmp.w   ((CHEST_CONTENTS-$1000000)).w,d0
+            else
                 cmpi.w  #-1,((CHEST_CONTENTS-$1000000)).w
                 bne.w   @ExamineContents
+            endif
                 move.w  #BATTLEACTION_STAY,((CURRENT_BATTLEACTION-$1000000)).w
                 clr.w   d0
                 bra.w   @EndBattleEntityControl
@@ -1177,7 +1026,7 @@ loc_250B0:
                 move.w  d0,d1
                 jsr     j_CheckForTrappedChest
                 cmpi.w  #-1,d0
-                beq.w   CheckGoldChest
+                beq.w   @CheckForGoldChest
                 
                 move.w  #BATTLEACTION_TRAPPED_CHEST,((CURRENT_BATTLEACTION-$1000000)).w
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
@@ -1185,7 +1034,7 @@ loc_250B0:
                 sndCom  MUSIC_CORRUPTED_SAVE
                 bsr.w   SpawnEnemySkipCamera
                 bra.w   @EndBattleEntityControl
-CheckGoldChest:
+@CheckForGoldChest:
                 
                 move.w  ((CHEST_CONTENTS-$1000000)).w,d2
                 cmpi.w  #ITEMINDEX_GOLDCHESTS_START,d2
@@ -1251,39 +1100,43 @@ combatant = -2
 
 BattlefieldMenu:
                 
+                module
                 clr.b   ((CURSOR_RADIUS-$1000000)).w
                 clr.w   ((MOVE_SFX-$1000000)).w
                 bsr.w   ControlCursorEntity
                 btst    #INPUT_BIT_B,((PLAYER_1_INPUT-$1000000)).w
-                beq.s   loc_251B8
+                beq.s   @Continue
+                
                 move.w  combatant(a6),d0
                 rts
-loc_251B8:
+@Continue:
                 
                 moveq   #COMBATANTS_ALL_COUNTER,d7
                 clr.w   d0
-loc_251BC:
+@Loop:
                 
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                ble.w   loc_25226
+                ble.w   @loc_6
                 jsr     j_GetCombatantX
                 cmp.w   d1,d2
-                bne.w   loc_25226
+                bne.w   @loc_6
                 jsr     j_GetCombatantY
                 cmp.w   d1,d3
-                bne.w   loc_25226
+                bne.w   @loc_6
+                
                 jsr     (WaitForViewScrollEnd).w
                 btst    #INPUT_BIT_A,((PLAYER_1_INPUT-$1000000)).w
-                beq.s   loc_251F4
+                beq.s   @IsCursorOnMovingEntity
+                
                 jsr     j_BuildMemberScreen
-                bra.s   loc_2521C
-loc_251F4:
+                bra.s   @loc_5
+@IsCursorOnMovingEntity:
                 
                 cmp.w   combatant(a6),d0
-                bne.s   loc_251FC
+                bne.s   @OpenMiniStatus
                 rts
-loc_251FC:
+@OpenMiniStatus:
                 
                 move.w  d0,((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w
                 jsr     j_OpenBattlefieldMiniStatusWindow
@@ -1291,34 +1144,41 @@ loc_251FC:
                 jsr     (WaitForPlayerInput).w
                 jsr     j_CloseLandEffectWindow
                 jsr     j_CloseBattlefieldMiniStatusWindow
-loc_2521C:
+@loc_5:
                 
                 cmp.w   combatant(a6),d0
                 bne.w   BattlefieldMenu
                 rts
-loc_25226:
+@loc_6:
                 
                 addq.w  #1,d0
                 cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
-                bne.s   loc_25232
+                bne.s   @loc_7
                 move.w  #COMBATANT_ENEMIES_START,d0
-loc_25232:
+@loc_7:
                 
-                dbf     d7,loc_251BC
-loc_25236:
-                
+                dbf     d7,@Loop
+@StartMenu:
+            if (STANDARD_BUILD&EXTENDED_STATUS=1)
+                jsr     OpenGoldWindowInFieldMenu
+            endif
                 lea     (InitialStack).w,a0
                 moveq   #0,d0
                 moveq   #0,d1
                 moveq   #MENU_BATTLEFIELD,d2
                 jsr     j_ExecuteDiamondMenu
+            if (STANDARD_BUILD&EXTENDED_STATUS=1)
+                jsr     CloseGoldWindowInFieldMenu
+            endif
                 cmpi.w  #-1,d0
                 beq.w   BattlefieldMenu
                 tst.w   d0
                 bne.w   @CheckMiniMap
+                
                 jsr     j_UpdateForce
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
-                beq.s   loc_25236
+                beq.s   @StartMenu
+                
                 move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
                 move.w  d7,((GENERIC_LIST_LENGTH-$1000000)).w
                 lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
@@ -1326,35 +1186,48 @@ loc_25236:
                 jsr     (CopyBytes).w   
 @CreateMembersList_Loop:
                 
-                jsr     j_InitializeMembersListScreen
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 tst.b   d0
-                bmi.s   loc_25236
+                bmi.s   @StartMenu
+                
                 jsr     j_BuildMemberScreen
                 bra.s   @CreateMembersList_Loop
 @CheckMiniMap:
                 
                 cmpi.w  #1,d0
                 bne.w   @CheckOptions
+                
                 jsr     j_BuildMinimapScreen
-                bra.s   loc_25236
+                bra.s   @StartMenu
 @CheckOptions:
                 
                 cmpi.w  #2,d0
                 bne.w   @SuspendGame
+                
                 jsr     j_BuildBattlefieldSettingsScreen
-                bra.s   loc_25236
+                bra.s   @StartMenu
 @SuspendGame:
                 
-                tst.b   ((CURRENT_BATTLE-$1000000)).w
-                beq.s   loc_25236
+                testSavedByte CURRENT_BATTLE ; HARDCODED secret post credits battle check
+            if (STANDARD_BUILD=1)
+                beq.w   @StartMenu
+            else
+                beq.s   @StartMenu
+            endif
                 txt     0               ; "The game will be suspended.{N}OK?"
                 jsr     j_alt_YesNoPrompt
                 clsTxt
                 tst.w   d0
-                bmi.w   loc_25236
+                bmi.w   @StartMenu
+            if (STANDARD_BUILD=1)
+                move.l  ((SECONDS_COUNTER-$1000000)).w,d0
+                loadSavedDataAddress SAVED_SECONDS_COUNTER, a0
+                setSavedWord d0, a0
+            else
                 move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
+            endif
                 setFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                move.w  ((CURRENT_SAVE_SLOT-$1000000)).w,d0
+                getCurrentSaveSlot d0
                 jsr     (SaveGame).l
                 tst.b   ((DEBUG_MODE_TOGGLE-$1000000)).w
                 beq.w   byte_252E6
@@ -1372,10 +1245,11 @@ byte_252F2:
                 
                 ; Finish Suspend
                 clrFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
-                bra.w   loc_25236
+                bra.w   @StartMenu
 
     ; End of function BattlefieldMenu
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -1433,7 +1307,7 @@ ExecuteAiControl:
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
@@ -1450,10 +1324,10 @@ ExecuteAiControl:
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
@@ -1470,7 +1344,7 @@ ExecuteAiControl:
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)

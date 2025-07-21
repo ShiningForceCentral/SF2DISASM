@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\buff.asm :
-; 0x1AB9E..0x1ABF4 : Battlescene engine
+; 0x1AB9E..0x1ABF4 : 
 
 ; =============== S U B R O U T I N E =======================================
 

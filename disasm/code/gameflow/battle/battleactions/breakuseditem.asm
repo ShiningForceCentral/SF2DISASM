@@ -14,7 +14,7 @@ battlesceneScript_BreakUsedItem:
                 jsr     GetEquipmentType
                 tst.w   d2
                 beq.w   @RemoveItem     ; remove item if neither weapon or ring
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_BREAKABLE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.w   @Done           ; skip if item has no chance to break
                 btst    #COMBATANT_BIT_ENEMY,(a4)
@@ -27,7 +27,7 @@ battlesceneScript_BreakUsedItem:
                 tst.b   d0
                 bne.s   @Goto_Done      ; skip if item does not break
                 moveq   #0,d0
-                jsr     GetItemBreakMessage(pc)
+                jsr     battlesceneScript_GetItemBreakMessage(pc)
                 nop
                 displayMessage d3,d1,#0,#0 ; Message, Combatant, Item or Spell, Number
                 move.b  (a4),d0
@@ -39,7 +39,7 @@ battlesceneScript_BreakUsedItem:
 @DestroyItem:
                 
                 moveq   #1,d0
-                jsr     GetItemBreakMessage(pc)
+                jsr     battlesceneScript_GetItemBreakMessage(pc)
                 nop
                 displayMessage d3,d1,#0,#0 ; Message, Combatant, Item or Spell, Number
                 move.b  (a4),d0
@@ -89,7 +89,7 @@ criticalHit = -3
 inflictAilment = -2
 cutoff = -1
 
-GetItemBreakMessage:
+battlesceneScript_GetItemBreakMessage:
                 
                 movem.l d0/a0,-(sp)
                 tst.b   d0
@@ -140,5 +140,5 @@ GetItemBreakMessage:
                 movem.l (sp)+,d0/a0
                 rts
 
-    ; End of function GetItemBreakMessage
+    ; End of function battlesceneScript_GetItemBreakMessage
 

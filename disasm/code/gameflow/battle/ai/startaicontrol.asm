@@ -35,7 +35,7 @@ StartAiControl:
                 bra.w   @NonSwarmAi     ; if AI #15 but not at full HP, then immediately activate and attack normally
 @FindSwarmBattle:
                 
-                lea     ((CURRENT_BATTLE-$1000000)).w,a0
+                loadSavedDataAddress CURRENT_BATTLE, a0
                 clr.w   d6
                 move.b  (a0),d6
                 lea     list_SwarmBattles(pc), a0
@@ -84,9 +84,11 @@ StartAiControl:
                 
                 ; Resume normal AI scripting (end of "swarm" AI)
 @NonSwarmAi:
-                
-                lea     (BATTLE_REGION_FLAGS_TO_BE_TRIGGERED).l,a0
+            if (VANILLA_BUILD=1)
+                ; This causes issues with region triggers in the vanilla build. The RAM word is unused otherwise.
+                lea     (PREVIOUSLY_TRIGGERED_BATTLE_REGIONS).l,a0
                 move.w  #0,(a0)
+            endif
                 move.w  d7,d0
                 bsr.w   GetAiRegion     
                 cmpi.w  #15,d1
@@ -129,7 +131,8 @@ StartAiControl:
                 bsr.w   ProcessLineAttackerAi
                 bra.w   @Done
 @IsBurstRock:
-                
+
+                ; Check if exploding attacker
                 cmpi.w  #ENEMY_BURST_ROCK,d1
                 bne.s   @CheckSpecialMoveOrders
                 bsr.w   ProcessExploderAi
@@ -212,8 +215,11 @@ StartAiControl:
 CountDefeatedEnemies:
                 
                 movem.l d0/d2-a6,-(sp)
+            if (STANDARD_BUILD&FIX_COUNT_DEFEATED_ENEMIES=1)
+                move.w  #BATTLESPRITESET_SUBSECTION_ENEMIES,d1 ; properly checks all monsters in the battle
+            else
                 move.w  #BATTLESPRITESET_SUBSECTION_ALLIES,d1 ; BUG -- incorrectly limits the counting of dead monsters to the ally battle slot count
-                                        ; first operand should be #BATTLESPRITESET_SUBSECTION_ENEMIES
+            endif                       ; first operand should be #BATTLESPRITESET_SUBSECTION_ENEMIES
                 jsr     j_GetBattleSpritesetSubsection
                 move.w  d1,d2
                 subi.w  #2,d2
@@ -296,14 +302,18 @@ ProcessExploderAi:
                 beq.s   @DoNotExplode   ; do not explode if no target
                 
                 move.w  #6,d6
+            if (STANDARD_BUILD=1)
+                jsr     (GenerateRandomNumberUnderD6).w
+            else
                 jsr     j_GenerateRandomNumberUnderD6
+            endif
                 cmpi.b  #4,d7
                 bne.s   @DoNotExplode   ; randomly do not explode
                 
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_BURST_ROCK,(a0)
                 move.w  #SPELL_B_ROCK,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
-                move.w  d5,BATTLEACTION_OFFSET_ACTOR(a0)
+                move.w  d5,BATTLEACTION_OFFSET_TARGET(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #-1,(a0)
                 bra.w   @Done

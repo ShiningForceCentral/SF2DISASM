@@ -27,13 +27,14 @@ WaitDmaEnd:
 
 
 GetVdpRegStatus:
-                
+            if (VANILLA_BUILD=1)
                 movem.l a0,-(sp)
                 lea     (VDP_REG00_STATUS).l,a0
                 add.w   d0,d0
                 move.w  (a0,d0.w),d0
                 movem.l (sp)+,a0
                 rts
+            endif
 
     ; End of function GetVdpRegStatus
 

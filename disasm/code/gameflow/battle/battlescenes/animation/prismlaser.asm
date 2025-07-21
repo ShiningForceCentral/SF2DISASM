@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\prismlaser.asm :
-; 0x1B406..0x1B488 : Battlescene engine
+; 0x1B406..0x1B488 : 
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -13,6 +13,7 @@ spellanimationSetup_PrismLaser:
                 moveq   #1,d0
                 jsr     sub_1A2F6(pc)   
                 cmpi.w  #ENEMYBATTLESPRITE_PRISM_FLOWER,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
+                                                        ; HARDCODED Prism Flower enemy battle sprite
                 bne.s   loc_1B426
                 move.w  #$28,4(a0) 
                 bra.s   loc_1B42C

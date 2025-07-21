@@ -16,7 +16,12 @@ ms_map24_InitFunction:
                 txt     467             ; "Welcome to the fairy woods{N}special stage!{W2}"
                 txt     468             ; "How quickly can you defeat{N}all the hidden monsters?{W2}"
                 txt     469             ; "Now, set a new record.{W2}"
+            if (STANDARD_BUILD=1)
+                loadSavedDataAddress SPECIAL_BATTLE_RECORD, a0
+                getSavedWord a0, d0
+            else
                 move.l  ((SPECIAL_BATTLE_RECORD-$1000000)).w,d0
+            endif
                 divs.w  #$3C,d0 
                 move.w  d0,d1
                 ext.l   d1
@@ -43,11 +48,11 @@ return_59C9C:
 cs_StartSpecialBattle:
                 
                 setStoryFlag 44         ; Battle 44 unlocked - BATTLE_FAIRY_WOODS               
-                warp MAP_SECRET_MONK_FOREST_BATTLEFIELD,1,24,LEFT
+                warp MAP_ELVEN_VILLAGE_BATTLEFIELD,1,24,LEFT
                 csc_end
 cs_LeaveSpecialBattle:
                 
-                warp MAP_SECRET_MONK_FOREST,30,24,LEFT
+                warp MAP_ELVEN_VILLAGE,30,24,LEFT
                 csc_end
 loc_59CB2:
                 
@@ -61,13 +66,27 @@ loc_59CB2:
                 ext.l   d0
                 move.l  d0,((DIALOGUE_NUMBER-$1000000)).w
                 txt     476             ; "{DICT} {#} sec.{W2}"
+            if (STANDARD_BUILD=1)
+                loadSavedDataAddress SPECIAL_BATTLE_RECORD, a0
+                getSavedWord a0, d0
+                cmp.l   ((SPECIAL_BATTLE_TIME-$1000000)).w,d0
+                blo.s   byte_59CF0  
+            else
                 move.l  ((SPECIAL_BATTLE_TIME-$1000000)).w,d0
                 cmp.l   ((SPECIAL_BATTLE_RECORD-$1000000)).w,d0
-                bcc.s   byte_59CF0      
+                bhs.s   byte_59CF0  
+            endif
+                
                 txt     477             ; "Congratulations!{N}You made it!"
+                
+            if (STANDARD_BUILD=1)
+                loadSavedDataAddress SPECIAL_BATTLE_RECORD, a0
+                setSavedWord d0, a0
+            else
                 move.l  d0,((SPECIAL_BATTLE_RECORD-$1000000)).w
+            endif
                 sndCom  MUSIC_ITEM
-                jsr     j_FadeOut_WaitForP1Input ; fade out music and wait for P2 input ?!
+                jsr     j_FadeOut_WaitForP1Input
                 bra.s   byte_59CF4      
 byte_59CF0:
                 

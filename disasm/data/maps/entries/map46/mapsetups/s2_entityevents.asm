@@ -358,7 +358,6 @@ Map46_EntityEvent28:
 
 Map46_EntityEvent29:
                 
-                 
                 txt     11              ; "{LEADER}, take it easy!{W1}"
                 rts
 

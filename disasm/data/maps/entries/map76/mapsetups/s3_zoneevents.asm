@@ -9,7 +9,10 @@ ms_map76_ZoneEvents:
 
 Map76_DefaultZoneEvent:
                 
-                 
+            if (STANDARD_BUILD&FIX_MISSING_RANDOM_BATTLES=1)
+                move.w  #BATTLE_TO_ROFT,d0
+                jmp     CheckRandomBattle
+            else
                 chkFlg  535             ; Battle 35 completed - BATTLE_TO_ROFT                     
                 bne.s   return_50A3A
                 setFlg  435             ; Battle 35 unlocked - BATTLE_TO_ROFT                   
@@ -17,6 +20,7 @@ Map76_DefaultZoneEvent:
 return_50A3A:
                 
                 rts
+            endif
 
     ; End of function Map76_DefaultZoneEvent
 

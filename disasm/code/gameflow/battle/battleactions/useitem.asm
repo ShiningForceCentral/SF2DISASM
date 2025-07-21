@@ -8,7 +8,7 @@
 battlesceneScript_UseItem:
                 
                 move.w  ((BATTLESCENE_ITEM-$1000000)).w,d1
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d0
                 move.w  d0,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3)
                 andi.w  #SPELLENTRY_MASK_INDEX,d0

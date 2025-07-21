@@ -168,3 +168,167 @@ table_ClassDefinitions:
                 moveType   REGULAR
                 prowess    CRITICAL150_1IN8|DOUBLE_1IN32|COUNTER_1IN8
                 
+            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+                    
+                mov 6                   ; 32: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 33: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 34: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 35: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 36: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 37: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 38: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 39: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 40: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 41: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 42: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 43: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 44: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 45: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 46: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 47: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 48: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 49: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 50: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 51: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 52: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 53: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 54: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 55: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 56: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 57: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 58: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 59: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 60: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 61: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 62: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                    
+                mov 6                   ; 63: 
+                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
+                moveType   REGULAR
+                prowess    CRITICAL_NONE|DOUBLE_1IN32|COUNTER_1IN32
+                
+            endif
+                

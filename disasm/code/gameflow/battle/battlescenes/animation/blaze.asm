@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\blaze.asm :
-; 0x1A47A..0x1A654 : Battlescene engine
+; 0x1A47A..0x1A654 : 
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -95,7 +95,7 @@ loc_1A552:
                 lea     graphic_BlazeDragon(pc), a0
                 bsr.w   sub_19FAA       
 loc_1A56E:
-                ; variaton 4
+                ; Variation 4
                 move.w  #-1,((byte_FFB404-$1000000)).w
                 move.b  #SPELLANIMATION_BLAZE,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w

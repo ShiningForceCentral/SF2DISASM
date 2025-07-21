@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\start\systeminit.asm :
-; 0x200..0x2DE : System init functions
+; 0x200..0x2DE : System initialization functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -80,7 +80,7 @@ InitializeVdpData:
 @ClearPalettes_Loop:
                 
                 clr.w   (a0)+           ; clear palette replicas ?
-                dbf     d1,@ClearPalettes_Loop
+                dbf     d1,@ClearPalettes_Loop  
                 
                 bsr.w   ClearSpriteTable
                 bsr.w   UpdateVdpHScrollData
@@ -110,3 +110,4 @@ table_VdpInitializationParameters:
                 dc.w $9000              ; scroll size : V32 cell, H32 cell
                 dc.w $9194              ; window is 20 cells from right
                 dc.w $929C              ; window is 28 cells from bottom
+                

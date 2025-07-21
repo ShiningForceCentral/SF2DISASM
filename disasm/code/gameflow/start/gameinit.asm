@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\start\gameinit.asm :
-; 0x70D2..0x7186 : Game init
+; 0x70D2..0x7186 : Game initialization
 
 ; =============== S U B R O U T I N E =======================================
 

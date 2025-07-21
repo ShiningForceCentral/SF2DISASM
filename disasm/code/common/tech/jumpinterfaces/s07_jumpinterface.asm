@@ -467,11 +467,11 @@ j_RunMapSetupAreaDescription:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_440B8:
+j_SpawnEnemyEntity:
                 
-                jmp     sub_444A2(pc)
+                jmp     SpawnEnemyEntity(pc)
 
-    ; End of function sub_440B8
+    ; End of function j_SpawnEnemyEntity
 
 
 ; =============== S U B R O U T I N E =======================================

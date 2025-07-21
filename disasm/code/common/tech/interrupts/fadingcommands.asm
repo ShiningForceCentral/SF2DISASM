@@ -60,8 +60,12 @@ ExecuteFading:
                 tst.b   ((FADING_SETTING-$1000000)).w ; wait until fade end
                 bne.s   @Wait
                 
+            if (STANDARD_BUILD=1)
+                bra.w   WaitForVInt
+            else
                 bsr.w   WaitForVInt
                 rts
+            endif
 
     ; End of function ExecuteFading
 

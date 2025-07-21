@@ -5,4 +5,4 @@
 
 
                 include "data\graphics\mapsprites\entries.asm"    ; Map sprites
-                align $8000
+                alignIfVanilla $100000

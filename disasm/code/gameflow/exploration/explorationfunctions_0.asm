@@ -26,7 +26,7 @@ loc_237A4:
                 move.w  ENTITYDEF_OFFSET_Y(a0,d0.w),d2
                 move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),d3
                 move.b  ENTITYDEF_OFFSET_LAYER(a0,d0.w),d4
-                andi.w  #3,d3
+                andi.w  #DIRECTION_MASK,d3
                 move.w  d3,d5
                 lsl.w   #INDEX_SHIFT_COUNT,d5
 loc_237C8:
@@ -244,7 +244,7 @@ return_2399A:
 
 ; =============== S U B R O U T I N E =======================================
 
-; get amount of gold (D2 - 0x80) as an offset from the gold table (see constants)
+; Get amount of gold (d2.w - offset) -> d1.l
 
 
 GetChestGoldAmount:
@@ -252,7 +252,12 @@ GetChestGoldAmount:
                 subi.w  #ITEMINDEX_GOLDCHESTS_START,d2
                 andi.w  #ITEMENTRY_MASK_INDEX,d2
                 add.w   d2,d2
-                move.w  ChestGoldAmounts(pc,d2.w),d1
+            if (STANDARD_BUILD=1)
+                getPointer p_table_ChestGoldAmounts, a0
+                move.w  (a0,d2.w),d1
+            else
+                move.w  table_ChestGoldAmounts(pc,d2.w),d1
+            endif
                 ext.l   d1
                 rts
 

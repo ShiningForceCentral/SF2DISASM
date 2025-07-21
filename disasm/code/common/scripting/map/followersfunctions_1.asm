@@ -11,11 +11,21 @@
 
 InitializeFollowerEntities:
                 
-                cmpi.b  #MAP_NEW_GRANSEAL_HQ,((CURRENT_MAP-$1000000)).w 
-                                                        ; HARDCODED maps with no followers
+            if (STANDARD_BUILD=1)
+                movem.l d1-d2/a0,-(sp)
+                lea     table_MapsWithNoFollowers(pc), a0
+                getSavedByte CURRENT_MAP, d1
+                moveq   #0,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                movem.l (sp)+,d1-d2/a0
+                bcc.w   @Return
+            else
+                compareToSavedByte #MAP_TACTICAL_BASE, CURRENT_MAP    ; HARDCODED maps with no followers
                 beq.w   @Return
-                cmpi.b  #MAP_NAZCA_SHIP_INTERIOR,((CURRENT_MAP-$1000000)).w
+                
+                compareToSavedByte #MAP_NAZCA_SHIP, CURRENT_MAP
                 beq.w   @Return
+            endif
                 
                 movem.l a6,-(sp)
                 lea     table_Followers(pc), a4
@@ -51,7 +61,11 @@ InitializeFollowerEntities:
 @NonAlly:
                 
                 clr.w   d4
+            if (STANDARD_BUILD=1)
+                move.w  2(a4),d4        ; EXPANDED_MAPSPRITES
+            else
                 move.b  2(a4),d4        ; optional mapsprite index for non-force members
+            endif
 @AdjustEntityIndex:
                 
                 move.w  (sp)+,d0
@@ -62,7 +76,11 @@ InitializeFollowerEntities:
                 subi.w  #96,d6
 @SetPriority:
                 
+            if (STANDARD_BUILD=1)
+                move.b  4(a4),(a5,d0.w) ;  ; EXPANDED_MAPSPRITES (offset should be labeled and patched at the enum level)
+            else
                 move.b  3(a4),(a5,d0.w)
+            endif
                 move.b  d0,(a1,d6.w)
                 move.w  d0,d6
                 move.l  (a6)+,d5

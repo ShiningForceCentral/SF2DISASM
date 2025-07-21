@@ -92,14 +92,14 @@ DebugModeBattleTest:
                 ; Populate generic list with ally indexes [0,31]
                 move.w  #COMBATANT_ALLIES_NUMBER,(GENERIC_LIST_LENGTH).l
                 lea     (GENERIC_LIST).l,a0
-                move.l  #$10203,(a0)+
-                move.l  #$4050607,(a0)+
-                move.l  #$8090A0B,(a0)+
-                move.l  #$C0D0E0F,(a0)+
-                move.l  #$10111213,(a0)+
-                move.l  #$14151617,(a0)+
-                move.l  #$18191A1B,(a0)+
-                move.l  #$1C1D1E1F,(a0)+
+                move.l  #$10203,(a0)+     ; ally indexes 0-3
+                move.l  #$4050607,(a0)+   ; ally indexes 4-7
+                move.l  #$8090A0B,(a0)+   ; ally indexes 8-11
+                move.l  #$C0D0E0F,(a0)+   ; ally indexes 12-15
+                move.l  #$10111213,(a0)+  ; ally indexes 16-19
+                move.l  #$14151617,(a0)+  ; ally indexes 20-23
+                move.l  #$18191A1B,(a0)+  ; ally indexes 24-27
+                move.l  #$1C1D1E1F,(a0)+  ; ally indexes 28-31
                 bsr.w   CheatModeConfiguration
 byte_77DE:
                 
@@ -107,7 +107,7 @@ byte_77DE:
                 txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
-                move.w  #BATTLES_DEBUG_NUMBER,d2
+                move.w  #BATTLES_DEBUG_MAX_INDEX,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0
@@ -142,6 +142,7 @@ byte_77DE:
                 move.b  (a0)+,((BATTLE_AREA_Y-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_WIDTH-$1000000)).w
                 move.b  (a0)+,((BATTLE_AREA_HEIGHT-$1000000)).w
+                
                 jsr     j_BattleLoop
                 jsr     j_ChurchMenu
                 txt     460             ; "Shop number?{D1}"
@@ -158,7 +159,7 @@ byte_77DE:
 @DebugLevelUp:
                 
                 bsr.w   LoadAllyStatsDecimalDigits
-                jsr     j_InitializeMembersListScreen
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 tst.b   d0
                 bne.w   byte_77DE       ; @Start
                 bpl.s   @loc_4
@@ -186,7 +187,7 @@ LoadAllyStatsDecimalDigits:
                 lea     (FF0000_RAM_START).l,a0
 @Loop:
                 
-                bsr.w   j_GetCurrentLevel
+                bsr.w   j_GetLevel
                 bsr.w   GetDecimalDigits
                 move.w  d1,(a0)
                 bsr.w   j_GetMaxHp

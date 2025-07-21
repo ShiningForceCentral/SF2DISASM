@@ -3,17 +3,17 @@
 ; 0xB150A..0xB1534 : 
                 mWarp 23, 15
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
+                  warpMap    MAP_OVERWORLD_GRANSEAL_KINGDOM
                   warpDest   33, 44
                   warpFacing DOWN
                 mWarp 24, 15
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
+                  warpMap    MAP_OVERWORLD_GRANSEAL_KINGDOM
                   warpDest   33, 44
                   warpFacing DOWN
                 mWarp 6, 15
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_GRANSEAL
+                  warpMap    MAP_OVERWORLD_GRANSEAL_KINGDOM
                   warpDest   36, 28
                   warpFacing DOWN
                 mWarp 23, 4

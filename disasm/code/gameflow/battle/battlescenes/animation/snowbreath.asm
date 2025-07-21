@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\snowbreath.asm :
-; 0x1B660..0x1B6A8 : Battlescene engine
+; 0x1B660..0x1B6A8 : 
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\common\maps\mapinit_0.asm :
-; 0x7956..0x7988 : Map init functions
+; 0x7956..0x7988 : Map initialization functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -12,7 +12,11 @@
 SwitchMap:
                 
                 movem.l d1-d2/a0,-(sp)
+            if (STANDARD_BUILD=1)
+                getPointer p_table_FlagSwitchedMaps, a0
+            else
                 lea     table_FlagSwitchedMaps(pc), a0
+            endif
 @Loop:
                 
                 move.w  (a0),d2

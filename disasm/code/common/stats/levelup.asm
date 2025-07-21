@@ -17,15 +17,23 @@ LevelUp:
                 move.w  d1,d3
                 
                 ; Determine level cap for class
-                bsr.w   GetCurrentLevel 
+            if (STANDARD_BUILD=1)
+                moveq   #CHAR_LEVELCAP_PROMOTED,d2
+                bsr.w   GetClassType
+                bne.s   @Promoted
+                moveq   #CHAR_LEVELCAP_BASE,d2
+@Promoted:      bsr.w   GetLevel 
+            else
+                bsr.w   GetLevel 
                 moveq   #CHAR_LEVELCAP_PROMOTED,d2
                 cmpi.w  #CHAR_CLASS_FIRSTPROMOTED,d3
                 bge.s   @FindStatsBlockForClass
                 moveq   #CHAR_LEVELCAP_BASE,d2
+            endif
 @FindStatsBlockForClass:
                 
-                lsl.w   #2,d0
-                movea.l (p_pt_AllyStats).l,a0
+                lsl.w   #INDEX_SHIFT_COUNT,d0
+                getPointer p_pt_AllyStats, a0
                 movea.l (a0,d0.w),a0
 @FindStatsBlockForClass_Loop:
                 
@@ -57,7 +65,7 @@ LevelUp:
                 
                 lea     (LEVELUP_ARGUMENTS).l,a1
                 move.w  ally(a6),d0
-                bsr.w   GetCurrentLevel 
+                bsr.w   GetLevel 
                 move.w  d1,d5
                 moveq   #0,d2
                 moveq   #0,d3
@@ -105,10 +113,15 @@ LevelUp:
                 move.b  d5,(a1)
                 
                 ; Add extra levels if promoted
+            if (STANDARD_BUILD=1)
+                bsr.w   GetClassType
+                beq.s   @FindLearnableSpell
+            else
                 bsr.w   GetClass        
                 cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUG -- TORT class is being wrongfully treated as promoted here
                                         ;  Should either compare to first promoted class, or change branch condition to "lower than or equal".
                 blt.s   @FindLearnableSpell
+            endif
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5
 @FindLearnableSpell:
                 
@@ -123,7 +136,7 @@ LevelUp:
                 ; Get pointer to previous stats block
                 move.w  d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
-                movea.l (p_pt_AllyStats).l,a0
+                getPointer p_pt_AllyStats, a0
                 movea.l (a0,d2.w),a0
                 lea     ALLYSTATS_OFFSET_SPELL_LIST(a0),a0
                 bra.s   @FindLearnableSpell_Loop
@@ -141,7 +154,7 @@ LevelUp:
                 move.b  d1,6(a1)
 @UpdateStats:
                 
-                bsr.w   ApplyStatusEffectsAndItemsOnStats
+                bsr.w   UpdateCombatantStats
 @Done:
                 
                 unlk    a6
@@ -165,7 +178,7 @@ InitializeAllyStats:
                 ; Get ally stats entry address -> A0
                 move.w  d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
-                movea.l (p_pt_AllyStats).l,a0
+                getPointer p_pt_AllyStats, a0
                 movea.l (a0,d2.w),a0
                 
                 ; Set starting values
@@ -197,16 +210,23 @@ InitializeAllyStats:
                 ; Determine effective level
                 move.w  (sp)+,d4        ; D4 <- pull starting level
                 move.w  d4,d5           ; D5 = effective level (takes additional levels into account if promoted for the purpose of spell learning)
+            if (STANDARD_BUILD=1)
+                bsr.w   GetClassType
+                beq.s   @FindStatsBlockForClass
+            else
                 bsr.w   GetClass        
                 cmpi.w  #CHAR_CLASS_LASTNONPROMOTED,d1 ; BUG -- TORT class is being wrongfully treated as promoted here
                                         ;  Should either compare to first promoted class, or change branch condition to "lower than or equal".
                 blt.s   @FindStatsBlockForClass
+            endif
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d5 ; add 20 to effective level if promoted
 @FindStatsBlockForClass:
-                
+            if (STANDARD_BUILD=1)
+                bsr.w   GetClass
+            endif
                 move.w  d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
-                movea.l (p_pt_AllyStats).l,a0
+                getPointer p_pt_AllyStats, a0
                 movea.l (a0,d2.w),a0
 @FindStatsBlockForClass_Loop:
                 
@@ -232,7 +252,7 @@ InitializeAllyStats:
                 ; Get pointer to previous stats block
                 move.w  d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
-                movea.l (p_pt_AllyStats).l,a0
+                getPointer p_pt_AllyStats, a0
                 movea.l (a0,d2.w),a0
                 lea     ALLYSTATS_OFFSET_SPELL_LIST(a0),a0
                 bra.s   @FindLearnableSpell_Loop
@@ -246,7 +266,14 @@ InitializeAllyStats:
                 
                 ; Increase base double attack setting when learning Heal 3
                 ; to give Karna extra double attack as PRST
+            if (STANDARD_BUILD&FIX_KARNA_INCREASED_DOUBLE=1)
+                ; do nothing
+            else
+              if (STANDARD_BUILD&FIX_KARNA_INCREASED_DOUBLE>=2)
+                cmpi.w  #ALLY_SHEELA,d0
+              else
                 cmpi.b  #SPELL_HEAL|SPELL_LV3,d1
+              endif
                 bne.s   @LearnSpell
                 bsr.w   GetBaseProwess
                 move.w  d1,d2
@@ -262,6 +289,7 @@ InitializeAllyStats:
                 or.w    d2,d1
                 bsr.w   SetBaseProwess
                 bra.s   @Next
+            endif
 @LearnSpell:
                 
                 bsr.w   LearnSpell      
@@ -297,10 +325,22 @@ InitializeAllyStats:
 
 CalculateStatGain:
                 
+            if (STANDARD_BUILD&LEARN_SPELL_AT_PROMOTION=1)
+                tst.b   d2
+                bne.s   @CheckZero      ; keep going if curve type other than None
+                move.w  #0,d1           ; otherwise, stat gain value = 0
+                rts
+                
+@CheckZero:     tst.b   d5
+                bne.s   @EvaluateLevel  ; keep going if level other than zero
+                move.w  #0,d1           ; otherwise, stat gain value = 0
+                rts
+            else
                 tst.b   d2
                 bne.s   @EvaluateLevel  ; keep going if curve type other than None
                 move.w  #0,d1           ; otherwise, stat gain value = 0
                 rts
+            endif
 @EvaluateLevel:
                 
                 movem.l d0/d2-a0,-(sp)
@@ -316,7 +356,7 @@ CalculateStatGain:
                 andi.w  #GROWTHCURVE_MASK_INDEX,d2
                 subq.w  #1,d2
                 muls.w  #GROWTHCURVE_DEF_SIZE,d2
-                movea.l (p_table_StatGrowthCurves).l,a0
+                getPointer p_table_StatGrowthCurves, a0
                 adda.w  d2,a0
                 move.w  d5,d2
                 subq.w  #1,d2
