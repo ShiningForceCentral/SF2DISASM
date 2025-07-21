@@ -288,8 +288,10 @@ CalculateStatTargetValue:
                 cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d1
                 ble.s   @Continue
                 
-                moveq   #CHAR_STATGAIN_PROJECTIONLEVEL,d1
-@Continue:      bsr.s   CalculateStatInitialValue ; -> d3.w = new starting value
+                moveq   #CHAR_STATGAIN_PROJECTIONLEVEL,d1 ; cap to growth projection level
+                                                          ; (default is 30, so promotions received at levels 31-40 result in no gains to initial stats)
+@Continue:      subq.w  #1,d1
+                bsr.s   CalculateStatInitialValue ; -> d3.w = new starting value
 @Skip:          move.w  d5,d1           ; d1.w = current level
                 bsr.s   CalculateGrowthPortion
                 add.w   d3,d2           ; add starting value to growth portion
@@ -443,14 +445,14 @@ IncreaseAllyBaseDouble:
                 addq.w  #1,d2
                 bmi.s   @Zero           ; clamp to zero on negative
                 
-                cmpi.w  #4,d2
-                bne.s   @Continue
+                cmpi.w  #PROWESS_1IN4,d2
+                bls.s   @Continue
                 
-                moveq   #3,d2
+                moveq   #PROWESS_1IN4,d2 ; otherwise, cap to highest chance
                 bra.s   @Continue
 @Zero:          
                 
-                moveq   #0,d2
+                moveq   #PROWESS_1IN32,d2
 @Continue:
                 
                 lsl.w   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
