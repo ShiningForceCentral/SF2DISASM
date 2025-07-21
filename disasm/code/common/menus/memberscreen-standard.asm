@@ -302,11 +302,11 @@ WriteStatusEffectTilesForMemberStatusWindow:
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 bne.s   @Continue
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-2(a1)
-                bne.s   @Continue
             if (SHOW_STATUS_EFFECT_COUNTER=1)
+                bne.s   @Continue
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,-4(a1)
-                beq.s   @Return
             endif
+                beq.s   @Return
                 
 @Continue:      addi.w  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_LINE,d3
                 movea.l d3,a1
@@ -1169,7 +1169,7 @@ WriteEnemyLvOrExp:
                 bne.s   @DmaIcons       ; skip if anyone other than Bowie
                 chkFlg  384             ; Set after Bowie obtains the jewel of light/evil... whichever it is
                 beq.s   @DmaIcons       ; skip if we haven't obtained Jewel of Light
-                bsr.s   WriteJewelIcons
+                bsr.w   WriteJewelIcons
             endif
                 
 @DmaIcons:      ; DMA icons pixel data
@@ -1383,7 +1383,7 @@ aEquipped_0:    dc.b '\Equipped',0
 aNothing_1:     dc.b '\Nothing',0
 aJewel:         dc.b 'JEWEL',0
 
-            if (EXTENDED_STATUS=1)
+                ; EXTENDED_STATUS
 table_ResistanceIndicators:
                 defineName "*" ; immunity
                 defineName " " ; no resistance
@@ -1408,4 +1408,3 @@ table_MoveTypeNames:
                 align
                 
 tiles_ElementIcons: incbin "data\graphics\tech\elementtiles-standard.bin"
-            endif
