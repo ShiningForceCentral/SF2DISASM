@@ -45,4 +45,4 @@ ce_4989E:       mainEntity 5,9,DOWN
                 entity 11,18,UP,MAPSPRITE_GALAM_SOLDIER,eas_Init
                 entity 12,18,UP,MAPSPRITE_GALAM_SOLDIER,eas_Init
                 entity 14,16,UP,MAPSPRITE_GALAM_SOLDIER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

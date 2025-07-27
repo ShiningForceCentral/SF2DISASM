@@ -25,10 +25,8 @@ byte_60558:     msDesc 9, 15, 6, 0      ; "{NAME} looked at{N}the paper.{W2}{CLE
                 msDescFunction 22, 11, Map5_212_DescFunc0-byte_60558
                 msDescFunction 19, 33, Map5_212_DescFunc1-byte_60558
                 msDescEnd
-                dc.b $4E 
-                dc.b $75 
-                dc.b $4E 
-                dc.b $75 
+                rts
+                rts
 
 ; =============== S U B R O U T I N E =======================================
 

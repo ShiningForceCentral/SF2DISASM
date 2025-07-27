@@ -178,7 +178,7 @@ ChurchMenu:
                 jsr     j_DecreaseGold
                 move.w  member(a6),d0
                 move.w  d2,d1
-                andi.w  #STATUSEFFECT_STUN|STATUSEFFECT_CURSE|STATUSEFFECT_MUDDLE2|STATUSEFFECT_MUDDLE|STATUSEFFECT_SLEEP|STATUSEFFECT_SILENCE|STATUSEFFECT_SLOW|STATUSEFFECT_BOOST|STATUSEFFECT_ATTACK,d1
+                andi.w  #(STATUSEFFECT_MASK-STATUSEFFECT_POISON),d1
                 jsr     j_SetStatusEffects
                 sndCom  MUSIC_CURE
                 jsr     WaitForMusicResumeAndPlayerInput(pc)

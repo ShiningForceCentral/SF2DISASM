@@ -39,16 +39,16 @@ loc_7428:
                 btst    #INPUT_BIT_START,((P1_INPUT-$1000000)).w
                 beq.w   byte_7476       
                 moveq   #1,d0
-                moveq   #$1B,d7
-loc_7464:
+                moveq   #COMBATANT_ALLIES_COUNTER_MINUS_TWO,d7
+@NameAlly_Loop:
                 
                 jsr     j_NameAlly
-loc_746A:
+@SkipNaming:
                 
                 addq.w  #1,d0
-                cmpi.w  #6,d0
-                beq.s   loc_746A
-                dbf     d7,loc_7464
+                cmpi.w  #ALLY_KIWI,d0
+                beq.s   @SkipNaming
+                dbf     d7,@NameAlly_Loop
 byte_7476:
                 
                 txt     223             ; "{NAME;0}....{N}Nice name, huh?{W2}"
@@ -84,10 +84,10 @@ loc_74B4:
                 bsr.w   SaveGame
                 disableSram
                 clsTxt
-                move.b  #MAP_GRANSEAL,d0 ; HARDCODED new game starting map
-                move.w  #56,d1          ; HARDCODED main entity starting X
-                move.w  #3,d2           ; HARDCODED main entity starting Y
-                move.w  #DOWN,d3        ; HARDCODED main entity starting facing
+                move.b  #MAP_GRANSEAL,d0       ; HARDCODED new game starting map
+                move.w  #GAMESTART_SAVE_X,d1   ; HARDCODED main entity starting X
+                move.w  #GAMESTART_SAVE_Y,d2   ; HARDCODED main entity starting Y
+                move.w  #DOWN,d3               ; HARDCODED main entity starting facing
                 moveq   #1,d4
 loc_74DE:
                 

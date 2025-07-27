@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\detox.asm :
-; 0x1AA40..0x1AA90 : 
+; 0x1AA40..0x1AA90 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -18,7 +18,7 @@ spellanimationSetup_Detox:
                 bsr.w   sub_1A2F6       
                 move.w  #1,4(a0)
                 lea     table_1AA88(pc), a0
-                moveq   #$26,d0 
+                moveq   #$26,d0   ; offset to sprite_38
                 bsr.w   sub_19F5E
                 move.w  #-1,((byte_FFB404-$1000000)).w
                 move.b  #SPELLANIMATION_DETOX,((CURRENT_SPELLANIMATION-$1000000)).w
@@ -28,11 +28,4 @@ spellanimationSetup_Detox:
 
     ; End of function spellanimationSetup_Detox
 
-table_1AA88:    dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $3B
-                dc.b 0
-                dc.b $20
+table_1AA88:    vdpSpell 0, 0, SPELLTILE28, V1|H1|32

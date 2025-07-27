@@ -60,7 +60,7 @@ bbcs_01:        textCursor 2292
                 setFacing 135,UP
                 setCamDest 2,1
                 setPos 128,7,4,DOWN
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 setActscriptWait 128,eas_DeactivateAutoFacing
                 setActscriptWait 135,eas_DeactivateAutoFacing
                 entityActionsWait 135
@@ -138,4 +138,4 @@ ce_49694:       mainEntity 7,16,UP
                 entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
                 entity 7,11,UP,MAPSPRITE_ASTRAL,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

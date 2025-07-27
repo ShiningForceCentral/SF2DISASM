@@ -191,12 +191,12 @@ cs_4EF5E:       stopEntity 128
                 csWait 30
                 playSound SFX_INTRO_LIGHTNING
                 setBlocks 12,54,7,4,10,3
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 setPos 130,13,6,DOWN
                 tintMap
                 csWait 40
                 setQuake 0
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 csWait 90
                 setCameraEntity 128
                 customActscriptWait 128
@@ -211,8 +211,8 @@ cs_4EF5E:       stopEntity 128
                 entityActionsWait 128
                  moveUp 13
                 endActions
-                animEntityFX 128,6
-                setCameraEntity 65535
+                animEntityFX 128,MOSAIC_OUT
+                setCameraEntity CAMERA_NEUTRAL
                 csWait 50
                 nextSingleText $C0,130  ; "Gggggrrr...you destroyed my{N}minions!{W1}"
                 nextSingleText $0,FOLLOWER_B ; "Zeon!{W1}"
@@ -228,7 +228,7 @@ cs_4EF5E:       stopEntity 128
                 ac_end
                 setQuake 3
                 playSound SFX_INTRO_LIGHTNING
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 tintMap
                 setQuake 0
                 csWait 50
@@ -276,4 +276,4 @@ ce_4F328:       mainEntity 13,17,UP
                 entity 13,19,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
                 entity 13,15,DOWN,MAPSPRITE_ELIS,eas_Init
                 entity 62,62,DOWN,MAPSPRITE_ZEON,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

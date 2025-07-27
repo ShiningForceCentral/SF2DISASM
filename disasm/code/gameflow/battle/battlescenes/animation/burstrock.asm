@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\burstrock.asm :
-; 0x1B6EA..0x1B716 : 
+; 0x1B6EA..0x1B716 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

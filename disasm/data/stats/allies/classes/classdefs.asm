@@ -9,132 +9,132 @@ table_ClassDefinitions:
 ;               prowess    [PROWESS_]bitfield
                 
                 mov 6                   ; 0: SDMN
-                resistance 0
+                resistance NONE
                 moveType   REGULAR
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 7                   ; 1: KNTE
-                resistance 0
+                resistance NONE
                 moveType   CENTAUR
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 5                   ; 2: WARR
-                resistance 0
+                resistance NONE
                 moveType   REGULAR
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 5                   ; 3: MAGE
-                resistance 0
+                resistance NONE
                 moveType   MAGE
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 5                   ; 4: PRST
-                resistance 0
+                resistance NONE
                 moveType   HEALER
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 5                   ; 5: ACHR
-                resistance 0
+                resistance NONE
                 moveType   ARCHER
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 6                   ; 6: BDMN
-                resistance 0
+                resistance NONE
                 moveType   FLYING
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 5                   ; 7: WFMN
-                resistance 0
+                resistance NONE
                 moveType   STEALTH
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 6                   ; 8: RNGR
-                resistance 0
+                resistance NONE
                 moveType   CENTAUR_ARCHER
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 6                   ; 9: PHNK
-                resistance 0
+                resistance NONE
                 moveType   HOVERING
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 7                   ; 10: THIF
-                resistance 0
+                resistance NONE
                 moveType   REGULAR
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN16|COUNTER_1IN32
                 
                 mov 5                   ; 11: TORT
-                resistance 0
+                resistance NONE
                 moveType   STEALTH
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN32
                 
                 mov 6                   ; 12: HERO
-                resistance 0
+                resistance NONE
                 moveType   REGULAR
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN16|COUNTER_1IN8
                 
                 mov 7                   ; 13: PLDN
-                resistance 0
+                resistance NONE
                 moveType   CENTAUR
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 7                   ; 14: PGNT
-                resistance 0
+                resistance NONE
                 moveType   FLYING
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 5                   ; 15: GLDT
-                resistance 0
+                resistance NONE
                 moveType   REGULAR
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 6                   ; 16: BRN
-                resistance 0
+                resistance NONE
                 moveType   REGULAR
                 prowess    CRITICAL150_1IN8|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 5                   ; 17: WIZ
-                resistance 0
+                resistance NONE
                 moveType   MAGE
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 5                   ; 18: SORC
-                resistance 0
+                resistance NONE
                 moveType   MAGE
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 5                   ; 19: VICR
-                resistance 0
+                resistance NONE
                 moveType   HEALER
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 5                   ; 20: MMNK
-                resistance 0
+                resistance NONE
                 moveType   REGULAR
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN8
                 
                 mov 6                   ; 21: SNIP
-                resistance 0
+                resistance NONE
                 moveType   ARCHER
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 5                   ; 22: BRGN
-                resistance 0
+                resistance NONE
                 moveType   BRASS_GUNNER
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 6                   ; 23: BDBT
-                resistance 0
+                resistance NONE
                 moveType   FLYING
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 5                   ; 24: WFBR
-                resistance 0
+                resistance NONE
                 moveType   STEALTH
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN8
                 
                 mov 6                   ; 25: BWNT
-                resistance 0
+                resistance NONE
                 moveType   CENTAUR_ARCHER
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
@@ -144,7 +144,7 @@ table_ClassDefinitions:
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 7                   ; 27: NINJ
-                resistance 0
+                resistance NONE
                 moveType   STEALTH
                 prowess    CRITICAL150_1IN8|DOUBLE_1IN16|COUNTER_1IN8
                 
@@ -164,7 +164,7 @@ table_ClassDefinitions:
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 6                   ; 31: RDBN
-                resistance 0
+                resistance NONE
                 moveType   REGULAR
                 prowess    CRITICAL150_1IN8|DOUBLE_1IN32|COUNTER_1IN8
                 

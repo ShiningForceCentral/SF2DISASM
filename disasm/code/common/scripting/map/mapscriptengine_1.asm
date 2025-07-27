@@ -28,14 +28,14 @@ csc33_setQuakeAmount:
                 andi.w  #$3FFF,d0
                 move.w  d0,d7
                 subq.w  #1,d7
-                btst    #$F,d3
+                btst    #$F,d3  ; test $8000
                 beq.s   loc_46538
                 moveq   #0,d1
                 move.w  #1,d2
                 bra.s   loc_46550
 loc_46538:
                 
-                btst    #$E,d3
+                btst    #$E,d3  ; test $4000
                 beq.s   loc_46546
                 move.w  d0,d1
                 move.w  #-1,d2

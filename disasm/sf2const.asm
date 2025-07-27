@@ -382,7 +382,10 @@ AI_LAST_TARGET_TABLE: equ $FFB1AC ; Table of most recent target for each enemy
 AI_MEMORY_TABLE: equ $FFB1DC ; related to standby AI movement
 PREVIOUSLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating regions triggered at the start of previous battle rounds
                                         ; causes issues with region triggers in the vanilla build
-BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 ; battlescene block; cleared when scene intializes
+
+
+; Battlescene block -- cleared when scene intializes
+BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 
 word_FFB3C4: equ $FFB3C4
 BATTLESCENE_BATTLESPRITE_MODIFICATION_POINTER: equ $FFB3C6
 word_FFB3CA: equ $FFB3CA
@@ -475,6 +478,8 @@ byte_FFB588: equ $FFB588
 BATTLESCENE_ACTOR_SWITCH_STATE: equ $FFB589 ; battlescene actor switching state: 1 = waiting, 2 = currently switching, 3 = done
 DEAD_COMBATANTS_LIST: equ $FFB58A
 BATTLESCENE_DATA_END: equ $FFB59A ; end of battlescene data
+
+
 BATTLESCENE_GOLD: equ $FFB62A
 BATTLESCENE_EXP: equ $FFB62C
 CURRENT_BATTLEACTION: equ $FFB62E ; Refer to enum Battleactions

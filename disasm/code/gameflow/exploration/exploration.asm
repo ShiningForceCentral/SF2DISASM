@@ -781,7 +781,7 @@ ResetCurrentMap:
                 move.l  #$C0F8C0F8,(a2)+
                 move.l  #$C0F8C0F8,(a2)+
                 move.l  #$C0F8C0F8,(a2)+
-                move.w  #$C0F8,(a2)+
+                move.w  #VDPTILE_PALETTE3|VDPTILE_PRIORITY|VDPTILE_BLANK,(a2)+
                 clr.w   d0
                 moveq   #-1,d1          ; reload current map
                 bra.w   LoadMap         
@@ -1373,6 +1373,8 @@ GetItem:
 
 ; =============== S U B R O U T I N E =======================================
 
+;warpType = 2
+;warpFacing = 6 
 
 WarpIfSetAtPoint:
                 
@@ -1388,21 +1390,22 @@ WarpIfSetAtPoint:
                 lsl.w   #INDEX_SHIFT_COUNT,d7
                 movea.l (a2,d7.w),a2
                 movea.l MAPDATA_OFFSET_EVENT_WARP(a2),a2
-loc_4302:
+@CheckWarp:
                 
+				; compare X
                 cmpi.w  #-1,(a2)
                 beq.w   @Done
-                tst.b   (a2)
-                blt.s   loc_4314
-                cmp.b   (a2),d0
+                tst.b   (a2) ; if 255 any value works
+                blt.s   @CompareY
+                cmp.b   (a2),d0 ; check exact X
                 bne.w   @NextPoint
-loc_4314:
+@CompareY:
                 
-                tst.b   1(a2)
-                blt.s   loc_4322
-                cmp.b   1(a2),d1
+                tst.b   1(a2) ; if 255 any value works
+                blt.s   @SetWarpElements
+                cmp.b   1(a2),d1 ; check exact Y
                 bne.w   @NextPoint
-loc_4322:
+@SetWarpElements:
                 
                 move.w  #MAP_EVENT_WARP,((MAP_EVENT_TYPE-$1000000)).w
                 move.l  2(a2),((MAP_EVENT_PARAM_1-$1000000)).w
@@ -1415,7 +1418,7 @@ loc_4322:
 @NextPoint:
                 
                 addq.l  #8,a2
-                bra.s   loc_4302
+                bra.s   @CheckWarp
 
     ; End of function WarpIfSetAtPoint
 

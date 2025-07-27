@@ -394,36 +394,36 @@ GetCurrentMapSetup:
                 clr.w   d0
                 move.b  ((CURRENT_MAP-$1000000)).w,d0
                 lea     MapSetups(pc), a1
-loc_477AC:
+@NextMap_Loop:
                 
                 cmpi.w  #-1,(a1)
-                bne.s   loc_477BA
+                bne.s   @Continue
                 
                 lea     ms_Void(pc), a0
-                bra.w   loc_477E2
-loc_477BA:
+                bra.w   @Return
+@Continue:
                 
                 cmp.w   (a1)+,d0
-                bne.s   loc_477DA
+                bne.s   @CheckNextWord
                 movea.l (a1)+,a0
-loc_477C0:
+@CheckFlag_Loop:
                 
                 move.w  (a1)+,d1
                 cmpi.w  #$FFFD,d1
-                beq.w   loc_477E2
+                beq.w   @Return
                 jsr     j_CheckFlag
-                beq.s   loc_477D4
+                beq.s   @NextFlag
                 movea.l (a1),a0
-loc_477D4:
+@NextFlag:
                 
                 adda.w  #4,a1
-                bra.s   loc_477C0
-loc_477DA:
+                bra.s   @CheckFlag_Loop
+@CheckNextWord:
                 
                 cmpi.w  #$FFFD,(a1)+
-                bne.s   loc_477DA
-                bra.s   loc_477AC
-loc_477E2:
+                bne.s   @CheckNextWord
+                bra.s   @NextMap_Loop
+@Return:
                 
                 movem.l (sp)+,d0-d1/a1
                 rts
@@ -467,7 +467,7 @@ MakeEntityWalk:
 ; reset entity flags and sprite
 
 
-sub_4781A:
+ChangeEntityFacing:
                 
                 movem.l d0-d3,-(sp)
                 jsr     j_GetEntityIndexForCombatant
@@ -477,7 +477,7 @@ sub_4781A:
                 movem.l (sp)+,d0-d3
                 rts
 
-    ; End of function sub_4781A
+    ; End of function ChangeEntityFacing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -485,7 +485,7 @@ sub_4781A:
 ; reset entity flags and sprite and facing ?
 
 
-sub_47832:
+GetRhodeFacing:
                 
                 movem.l d0-d3,-(sp)
                 jsr     j_GetEntityIndexForCombatant
@@ -498,7 +498,7 @@ sub_47832:
                 movem.l (sp)+,d0-d3
                 rts
 
-    ; End of function sub_47832
+    ; End of function GetRhodeFacing
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -544,7 +544,7 @@ loc_47896:
                 add.w   d0,d1
                 jsr     j_SetFlag
                 move.l  #$100FF,((MAP_EVENT_TYPE-$1000000)).w
-                move.w  #$7530,((STEP_COUNTER-$1000000)).w
+                move.w  #30000,((STEP_COUNTER-$1000000)).w
                 jsr     (WaitForViewScrollEnd).w
                 sndCom  SFX_BOOST
                 bsr.w   ExecuteFlashScreenScript

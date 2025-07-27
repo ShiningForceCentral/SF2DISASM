@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\debuff.asm :
-; 0x1D038..0x1D0FE : 
+; 0x1D038..0x1D0FE : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -42,7 +42,7 @@ loc_1D090:
                 move.w  #5,4(a5)
                 subq.w  #1,d1
                 bne.w   loc_1D0C2
-                lea     table_1D0EE(pc), a0
+                lea     graphic_DebuffCloud(pc), a0
                 moveq   #1,d1
                 moveq   #$20,d6 
                 jsr     (GenerateRandomNumber).w
@@ -66,7 +66,7 @@ loc_1D0D4:
                 movem.w (sp)+,d0-d1
                 addq.w  #1,d0
                 lea     $C(a5),a5
-                addq.w  #8,a4
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 dbf     d1,loc_1D048
                 tst.w   ((byte_FFB404-$1000000)).w
                 beq.w   sub_1B82A
@@ -74,19 +74,14 @@ loc_1D0D4:
 
     ; End of function spellanimationUpdate_Debuff
 
-table_1D0EE:    dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $20
-                dc.b $F
-                dc.b $20
+graphic_DebuffCloud:
+                vdpSpell 0, 0, SPELLTILE1, V4|H4|32
+                
 table_1D0F6:    dc.b 0
-                dc.b $10
+                dc.b $10   ; graphic 2
                 dc.b 0
-                dc.b $20
+                dc.b $20   ; graphic 3
                 dc.b 0
-                dc.b $10
+                dc.b $10   ; graphic 2
                 dc.b 0
-                dc.b 0
+                dc.b 0     ; graphic 1

@@ -12,7 +12,7 @@ bbcs_34:        textCursor 2895
                 jumpIfFlagClear 76,cs_4D38E ; Zynk is a follower
                 setActscriptWait ALLY_ZYNK,eas_Init
                 setPos ALLY_ZYNK,31,29,LEFT
-cs_4D38E:       animEntityFX 129,6
+cs_4D38E:       animEntityFX 129,MOSAIC_OUT
                 playSound MUSIC_BATTLE_THEME_1
                 fadeInB
                 cameraSpeed $30
@@ -38,7 +38,7 @@ cs_4D3C6:       entityActionsWait FOLLOWER_B
                 nextText $0,128         ; "Remember?  I promised that I{N}would see you again.{W2}"
                 nextSingleText $0,128   ; "Come on.  Let's party!{W1}"
                 setCamDest 7,4
-                animEntityFX 129,7
+                animEntityFX 129,MOSAIC_IN
                 nextSingleText $C0,129  ; "Stop!  You need my war plan!{W1}"
                 setFacing 128,UP
                 nextSingleText $0,128   ; "You again, Geshp?  Why don't{N}you leave me alone?{W1}"
@@ -57,7 +57,7 @@ cs_4D3C6:       entityActionsWait FOLLOWER_B
                  moveUp 4
                 endActions
                 csWait 10
-                animEntityFX 129,6
+                animEntityFX 129,MOSAIC_OUT
                 waitIdle 128
                 setFacing 128,DOWN
                 csWait 30
@@ -85,4 +85,4 @@ ce_4D48E:       mainEntity 29,29,LEFT
                 entity 11,10,DOWN,MAPSPRITE_CAMEELA,eas_Init
                 entity 11,6,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 30,29,LEFT,MAPSPRITE_CARAVAN,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

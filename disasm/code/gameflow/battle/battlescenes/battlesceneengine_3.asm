@@ -131,7 +131,7 @@ LoadInvocationSpell:
 LoadInvocationSprite:
                 
                 lea     ((SPRITE_20-$1000000)).w,a1
-                tst.w   4(a0)
+                tst.w   VDPSPRITE_OFFSET_TILE(a0)
                 bne.s   loc_1A39C
                 bclr    #5,((byte_FFB56F-$1000000)).w
                 moveq   #5,d1
@@ -159,10 +159,10 @@ loc_1A3C0:
                 move.w  d4,d3
 loc_1A3C6:
                 
-                move.w  d2,(a1)+
-                move.w  #$F00,(a1)+
-                move.w  (a2)+,(a1)+
-                move.w  d0,(a1)+
+                move.w  d2,(a1)+     ; move y
+                move.w  #$F00,(a1)+  ; move V4|H4|0
+                move.w  (a2)+,(a1)+  ; move tile
+                move.w  d0,(a1)+     ; move x
                 move.b  #2,(a3)+
                 addi.w  #$20,d2 
                 dbf     d3,loc_1A3C6

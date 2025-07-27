@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\bubblebreath.asm :
-; 0x1B488..0x1B4F6 : 
+; 0x1B488..0x1B4F6 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -17,7 +17,7 @@ spellanimationSetup_BubbleBreath:
                 andi.w  #7,d1
                 cmpi.w  #2,d1
                 bcs.s   loc_1B4CE
-                lea     table_1B4F0(pc), a0
+                lea     palette_1B4F0(pc), a0
                 lea     ((PALETTE_3_CURRENT-$1000000)).w,a1
                 lea     ((PALETTE_3_BASE-$1000000)).w,a2
                 move.w  (a0),$12(a1)
@@ -38,10 +38,5 @@ loc_1B4CE:
 
     ; End of function spellanimationSetup_BubbleBreath
 
-table_1B4F0:    dc.b $C
-                dc.b $BF
-                dc.b $B
-                dc.b $9A
-                dc.b $B
-                dc.b $46
+palette_1B4F0:  dc.w $CBF, $B9A, $B46
                 

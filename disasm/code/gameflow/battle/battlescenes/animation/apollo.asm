@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\apollo.asm :
-; 0x1B0D0..0x1B21A : 
+; 0x1B0D0..0x1B21A : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -23,6 +23,7 @@ loc_1B0EE:
                 addq.w  #8,(a0)
                 addq.w  #8,a0
                 dbf     d1,loc_1B0EE
+                
                 movea.l (sp)+,a0
                 jsr     (WaitForVInt).w
                 dbf     d0,loc_1B0EA
@@ -62,7 +63,7 @@ loc_1B0EE:
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
                 jsr     (WaitForDmaQueueProcessing).w
-                moveq   #$26,d0 
+                moveq   #$26,d0 ; offset to sprite_38
                 lea     table_1B1FA(pc), a0
                 bsr.w   sub_19F5E
                 jsr     (WaitForVInt).w
@@ -77,6 +78,7 @@ loc_1B1A4:
                 move.w  d2,(a0)
                 jsr     (WaitForVInt).w
                 dbf     d0,loc_1B1A4
+                
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #2,4(a0)
@@ -94,14 +96,8 @@ loc_1B1A4:
 
     ; End of function spellanimationSetup_Apollo
 
-table_1B1FA:    dc.b 1
-                dc.b 18
-                dc.b 0
-                dc.b -53
-                dc.b 7
-                dc.b -128
-                dc.b 5
-                dc.b 32
+table_1B1FA:    vdpSpell 274, 203, TILE1920, V2|H2|32
+                
 table_ApolloBackgroundModification:
                 dc.b 0
                 dc.b 56

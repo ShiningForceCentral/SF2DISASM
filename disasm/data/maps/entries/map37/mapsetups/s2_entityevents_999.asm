@@ -13,10 +13,13 @@ byte_5F9D6:     msEntityEvent 128, UP, Map37_3E7_EntityEvent1-ms_map37_flag999_E
 
 Map37_DefaultEntityEvent:
                 
-                moveq   #(byte_5F9D6-ms_map37_flag999_EntityEvents),d6
+                moveq   #4,d6
                 jsr     (GenerateRandomNumber).w
                 move.w  #$EAC,d0
-                add.w   d7,d0
+                add.w   d7,d0 ; Uuhhh....{W1}
+                              ; Oh, my twinkling stars....{W1}
+                              ; What a ride!{W1}
+                              ; Ouch!  Oh....{W1}
                 jsr     (DisplayText).w 
 Map37_3E7_EntityEvent2:
                 

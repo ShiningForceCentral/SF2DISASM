@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\buff.asm :
-; 0x1CFFC..0x1D038 : 
+; 0x1CFFC..0x1D038 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

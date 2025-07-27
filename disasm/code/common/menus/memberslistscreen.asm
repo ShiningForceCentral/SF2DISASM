@@ -1747,8 +1747,8 @@ LoadMemberSummaryIcons:
 
 DmaMembersListIcon:
                 
-                moveq   #$7F,d7         ; unused icon index mask (?)
-                add.w   d0,d0
+                moveq   #ITEMENTRY_MASK_INDEX,d7 ; unused icon index mask
+                add.w   d0,d0           ; d0 is current diamond-menu choice
                 move.w  rjt_DmaMembersListIconFunctions(pc,d0.w),d0
                 jmp     rjt_DmaMembersListIconFunctions(pc,d0.w)
 
@@ -2585,7 +2585,7 @@ WriteSpellLevel:
 EquipNewItem:
                 
                 cmpi.w  #-1,d1
-                beq.w   @Equip
+                beq.w   @Equip          ; equip if nothing equipped
                 
                 move.w  d2,d1
                 jsr     j_UnequipItemBySlotIfNotCursed

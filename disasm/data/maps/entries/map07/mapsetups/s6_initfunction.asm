@@ -152,4 +152,4 @@ ce_559AE:       mainEntity 11,7,UP
                 entity 11,8,UP,ALLY_SARAH,eas_Init
                 entity 11,9,UP,ALLY_KAZIN,eas_Init
                 entity 11,10,UP,ALLY_CHESTER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

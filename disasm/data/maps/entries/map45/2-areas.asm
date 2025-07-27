@@ -11,7 +11,7 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    0
-                    areaDefaultMusic 33
+                    areaDefaultMusic MUSIC_BATTLE_THEME_3
                 
                     mainLayerStart      0, 49
                     mainLayerEnd        17, 63
@@ -22,5 +22,5 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    255
-                    areaDefaultMusic 33
+                    areaDefaultMusic MUSIC_BATTLE_THEME_3
                 endWord

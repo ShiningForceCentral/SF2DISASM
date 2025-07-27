@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\cannonfire.asm :
-; 0x1D5C6..0x1D786 : 
+; 0x1D5C6..0x1D786 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -19,7 +19,7 @@ loc_1D5D6:
                 beq.w   loc_1D748
                 move.w  2(a5),d1
                 bne.w   loc_1D612
-                lea     table_1D776(pc), a0
+                lea     graphic_CannonShots(pc), a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1D5F6
                 addq.w  #8,a0
@@ -167,6 +167,7 @@ loc_1D748:
                 addq.w  #8,a4
                 lea     $C(a5),a5
                 dbf     d1,loc_1D5D6
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   sub_1B82A
                 rts
@@ -189,19 +190,6 @@ return_1D774:
 
     ; End of function sub_1D762
 
-table_1D776:    dc.b 1
-                dc.b $14
-                dc.b 0
-                dc.b $E8
-                dc.b 5
-                dc.b $20
-                dc.b $C
-                dc.b $10
-                dc.b 0
-                dc.b $D0
-                dc.b 0
-                dc.b $E0
-                dc.b 5
-                dc.b $20
-                dc.b $C
-                dc.b $11
+graphic_CannonShots:
+                vdpSpell 276, 232, SPELLTILE1, V1|H4|16
+                vdpSpell 208, 224, SPELLTILE1, V1|H4|17

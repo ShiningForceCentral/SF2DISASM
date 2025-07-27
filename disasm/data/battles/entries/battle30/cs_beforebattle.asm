@@ -43,9 +43,9 @@ bbcs_30:        textCursor 2760
                 endActions
                 nextSingleText $0,128   ; "Are you ready to die?{W1}"
                 playSound SFX_INTRO_LIGHTNING
-                flashScreenWhite $28
+                flashScreenWhite 40
                 csc_end
 ce_4C690:       mainEntity 11,26,UP
                 entity 11,28,UP,ALLY_PETER,eas_Init
                 entity 13,4,DOWN,MAPSPRITE_ZALBARD,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

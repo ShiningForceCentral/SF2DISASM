@@ -62,10 +62,10 @@ UpdateBattleUnlockedFlag:
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
                 addi.w  #BATTLE_COMPLETED_FLAGS_START,d1
-                jsr     j_CheckFlag     ; Check whether current battle is marked as completed
+                jsr     j_CheckFlag     ; Check whether current battle was random/repeat battle
                 beq.s   @Return
                 subi.w  #BATTLE_UNLOCKED_TO_COMPLETED_FLAGS_OFFSET,d1
-                jsr     j_ClearFlag     ; ...and if so, mark it as "locked".
+                jsr     j_ClearFlag     ; if so, disperse battle
 @Return:
                 
                 rts

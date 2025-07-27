@@ -41,4 +41,4 @@ abcs_battle20:  textCursor 2566
                 csc_end
 ce_4B780:       mainEntity 6,10,UP
                 entity 6,8,DOWN,ALLY_ELRIC,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

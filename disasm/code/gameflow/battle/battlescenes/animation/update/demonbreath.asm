@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\demonbreath.asm :
-; 0x1D0FE..0x1D2E6 : 
+; 0x1D0FE..0x1D2E6 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -29,7 +29,7 @@ loc_1D10E:
                 subi.w  #$300,d7
                 move.w  d7,6(a5)
                 clr.l   8(a5)
-                lea     table_1D2A2(pc), a0
+                lea     graphic_DemonbreathSpirit(pc), a0
                 bsr.w   sub_19F5E
                 move.w  (a3),VDPSPRITE_OFFSET_X(a4)
                 move.w  2(a3),(a4)
@@ -81,14 +81,14 @@ loc_1D1B6:
                 add.w   d0,(a4)
                 cmpi.w  #$E,(a5)
                 bne.s   loc_1D1C8
-                move.w  #$530|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
+                move.w  #VDPTILE_SPELLTILE17|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
 loc_1D1C8:
                 
-                move.w  4(a4),d0
+                move.w  VDPSPRITE_OFFSET_TILE(a4),d0
                 move.w  d0,d1
                 addi.w  #$800,d0
-                andi.w  #$1800,d0
-                andi.w  #$E7FF,d1
+                andi.w  #VDPTILE_MIRROR|VDPTILE_FLIP,d0
+                andi.w  #VDPTILE_INDEX_MASK|VDPTILE_PALETTE4|VDPTILE_PRIORITY,d1
                 or.w    d1,d0
                 move.w  d0,VDPSPRITE_OFFSET_TILE(a4)
                 cmpi.w  #$C,(a5)
@@ -110,7 +110,7 @@ loc_1D208:
                 move.w  d7,2(a5)
                 clr.w   4(a5)
                 clr.l   8(a5)
-                move.w  #$540|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
+                move.w  #VDPTILE_SPELLTILE33|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
                 bra.w   loc_1D288
 loc_1D22E:
                 
@@ -156,20 +156,16 @@ loc_1D288:
                 addq.w  #8,a4
                 addq.w  #1,d0
                 dbf     d1,loc_1D10E
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   sub_1B82A
                 rts
 
     ; End of function spellanimationUpdate_DemonBreath
 
-table_1D2A2:    dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $20
-                dc.b $F
-                dc.b $20
+graphic_DemonbreathSpirit:
+                vdpSpell 0, 0, SPELLTILE1, V4|H4|32
+                
 table_1D2AA:    dc.w $20
                 dc.b $F
                 dc.b 0

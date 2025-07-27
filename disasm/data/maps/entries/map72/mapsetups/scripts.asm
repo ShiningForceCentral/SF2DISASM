@@ -13,9 +13,9 @@ cs_4FFDA:       textCursor 3341
                 setActscriptWait 128,eas_DeactivateAutoFacing
                 setActscriptWait 129,eas_DeactivateAutoFacing
                 setCamDest 21,33
-                setDest 32798,27,39
-                setDest 32799,28,37
-                setDest 32775,25,37
+                setDest (FOLLOWER_A+$8000),27,39
+                setDest (FOLLOWER_B+$8000),28,37
+                setDest (ALLY_PETER+$8000),25,37
                 setDest ALLY_BOWIE,26,37
                 csWait 60
                 setPos 128,27,36,LEFT
@@ -41,7 +41,7 @@ cs_4FFDA:       textCursor 3341
                 setFacing ALLY_PETER,DOWN
                 setFacing ALLY_ROHDE,UP
                 nod ALLY_BOWIE
-                nextSingleText $FF,255  ; "{NAME;11} gets the dynamite{N}from {LEADER}.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;11} gets the dynamite{N}from {LEADER}.{W1}"
                 entityActionsWait ALLY_ROHDE
                  moveRight 1
                  moveUp 1
@@ -144,9 +144,9 @@ cs_5023E:       textCursor 3357
                 setActscriptWait FOLLOWER_B,eas_Init
                 setActscriptWait FOLLOWER_A,eas_Init
                 setCamDest 21,33
-                setDest 32798,27,39
-                setDest 32799,28,37
-                setDest 32775,25,37
+                setDest (FOLLOWER_A+$8000),27,39
+                setDest (FOLLOWER_B+$8000),28,37
+                setDest (ALLY_PETER+$8000),25,37
                 setDest ALLY_BOWIE,26,37
                 waitIdle FOLLOWER_A
                 waitIdle FOLLOWER_B

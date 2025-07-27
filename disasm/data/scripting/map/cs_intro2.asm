@@ -57,7 +57,7 @@ IntroCutscene2: textCursor 4202
                  moveUp 1
                 endActions
                 hide 130
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 csWait 30
                 setCamDest 7,2
                 csWait 40
@@ -85,7 +85,7 @@ IntroCutscene2: textCursor 4202
                 nextSingleText $80,128  ; "Make sure all the doors and{N}windows are shut!{D2}"
                 playSound SFX_SPELL_CAST
                 csWait 30
-                animEntityFX 131,6
+                animEntityFX 131,MOSAIC_OUT
                 tintMap
                 csWait 5
                 setActscript 129,eas_2xRightLeft
@@ -115,4 +115,4 @@ ce_48510:       mainEntity 63,63,UP
                 entity 12,13,UP,MAPSPRITE_SOLDIER1,eas_Init
                 entity 9,6,LEFT,MAPSPRITE_EFFECT6,eas_Init
                 entity 15,6,LEFT,MAPSPRITE_EFFECT6,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

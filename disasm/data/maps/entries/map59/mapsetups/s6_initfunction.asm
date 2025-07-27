@@ -53,7 +53,7 @@ loc_5EB3C:
     ; End of function csub_5EB34
 
 cs_5EB44:       textCursor 3699
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 reloadMap 8,2
                 loadMapEntities ce_5F19E
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -80,10 +80,10 @@ cs_5EB44:       textCursor 3699
                 nextSingleText $80,129  ; "Thank you, sir.{W1}"
                 nextSingleText $0,128   ; "They'll be passing over the{N}cape soon.  Go!{W1}"
                 nextSingleText $80,129  ; "Yes, sir!{W1}"
-                animEntityFX 129,6
+                animEntityFX 129,MOSAIC_OUT
                 nextSingleText $0,130   ; "That Geshp!  He wants{N}everything.{W1}"
                 setPos 130,9,9,DOWN
-                animEntityFX 130,7
+                animEntityFX 130,MOSAIC_IN
                 entityActionsWait 130
                  moveRight 4
                  moveUp 1
@@ -147,7 +147,7 @@ cs_5EBFC:       loadMapFadeIn MAP_PRISM_FLOWERS_BATTLEFIELD,8,14
                 nextSingleText $0,128   ; "Finish the preparations{N}before the Nazca Ship flies{N}over the cape!{W1}"
                 setCamDest 10,14
                 setPos 129,15,16,DOWN
-                animEntityFX 129,7
+                animEntityFX 129,MOSAIC_IN
                 nextSingleText $80,129  ; "How are the Prism Flowers?{W1}"
                 nextSingleText $0,128   ; "They're ready!{W1}"
                 nextSingleText $80,129  ; "Excellent!{W1}"
@@ -231,7 +231,7 @@ cs_5EDB8:       textCursor 3737
                 entityActions 133
                  moveUpRight 10
                 endActions
-                flashScreenWhite $2
+                flashScreenWhite 2
                 setPos 134,13,15,UP
                 entityActions 134
                  moveUpRight 10
@@ -246,7 +246,7 @@ cs_5EDB8:       textCursor 3737
                 entityActions 135
                  moveUpRight 10
                 endActions
-                flashScreenWhite $2
+                flashScreenWhite 2
                 setPos 136,14,16,UP
                 entityActions 136
                  moveUpRight 10
@@ -260,7 +260,7 @@ cs_5EDB8:       textCursor 3737
                 entityActions 137
                  moveUpRight 10
                 endActions
-                flashScreenWhite $2
+                flashScreenWhite 2
                 setPos 138,15,18,UP
                 entityActions 138
                  moveUpRight 10
@@ -275,7 +275,7 @@ cs_5EDB8:       textCursor 3737
                 entityActions 139
                  moveUpRight 10
                 endActions
-                flashScreenWhite $2
+                flashScreenWhite 2
                 setPos 140,16,19,UP
                 entityActions 140
                  moveUpRight 10
@@ -289,7 +289,7 @@ cs_5EDB8:       textCursor 3737
                 entityActions 139
                  moveUpRight 10
                 endActions
-                flashScreenWhite $2
+                flashScreenWhite 2
                 setPos 140,13,15,UP
                 entityActionsWait 140
                  moveUpRight 10
@@ -322,7 +322,7 @@ cs_5EF60:       textCursor 3739
                 nextSingleText $0,128   ; "What is it?{W1}"
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
-                flashScreenWhite $14
+                flashScreenWhite 20
                 setQuake 1
                 csWait 10
                 setQuake 0
@@ -341,14 +341,14 @@ cs_5EF60:       textCursor 3739
                 nextSingleText $80,ALLY_ZYNK ; "I can't control the ship!{W1}"
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
-                flashScreenWhite $14
+                flashScreenWhite 20
                 setQuake 1
                 csWait 10
                 setQuake 0
                 csWait 10
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
-                flashScreenWhite $14
+                flashScreenWhite 20
                 setQuake 1
                 csWait 10
                 nextText $80,ALLY_ZYNK  ; "We've sustained damage to{N}the engine!{W2}"
@@ -362,12 +362,12 @@ cs_5EF60:       textCursor 3739
                 nextSingleText $80,ALLY_ZYNK ; "Geshp's trap!  Darn!{W1}"
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
-                flashScreenWhite $14
+                flashScreenWhite 20
                 setQuake 1
                 csWait 10
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
-                flashScreenWhite $14
+                flashScreenWhite 20
                 setQuake 1
                 csWait 10
                 setActscriptWait ALLY_PETER,eas_Jump
@@ -378,13 +378,13 @@ cs_5EF60:       textCursor 3739
                 nextSingleText $80,ALLY_ZYNK ; "I'm not sure,{W2}"
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
-                flashScreenWhite $14
+                flashScreenWhite 20
                 setQuake 1
                 csWait 10
                 nextSingleText $80,ALLY_ZYNK ; "but I'll try.{W1}"
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
-                flashScreenWhite $14
+                flashScreenWhite 20
                 setQuake 1
                 csWait 10
                 setQuake 3
@@ -407,11 +407,11 @@ cs_5EF60:       textCursor 3739
                 fadeInB
                 executeSubroutine sub_5FD92
                 csWait 150
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 executeSubroutine sub_5F16C
                 setQuake 1
                 playSound SFX_INTRO_LIGHTNING
-                flashScreenWhite $3C
+                flashScreenWhite 60
                 waitIdle 128
                 setBlocks 56,59,4,5,12,17
                 csWait 120
@@ -455,15 +455,15 @@ loc_5F16E:
     ; End of function sub_5F16C
 
 palette_NazcaShip:
-                dc.w 0
+                dc.w $000
                 dc.w $C40
                 dc.w $E84
-                dc.w $26
-                dc.w $6A
+                dc.w $026
+                dc.w $06A
                 dc.w $2AE
-                dc.w $42
-                dc.w $C4
-                dc.w 0
+                dc.w $042
+                dc.w $0C4
+                dc.w $000
                 dc.w $222
                 dc.w $666
                 dc.w $AAA
@@ -475,13 +475,13 @@ ce_5F19E:       mainEntity 0,0,UP
                 entity 13,4,UP,MAPSPRITE_ZEON,eas_Init
                 entity 13,8,UP,MAPSPRITE_GESHP,eas_Init
                 entity 13,25,UP,MAPSPRITE_ODD_EYE,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5F1BE:       mainEntity 63,63,UP
                 entity 5,5,UP,MAPSPRITE_NAZCA_SHIP,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5F1CE:       mainEntity 63,63,UP
                 entity 25,19,UP,MAPSPRITE_NAZCA_SHIP,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5F1DE:       mainEntity 0,0,UP
                 entity 11,19,UP,MAPSPRITE_EXECUTIONER,eas_Init
                 entity 63,63,RIGHT,MAPSPRITE_GESHP,eas_Init
@@ -494,7 +494,7 @@ ce_5F1DE:       mainEntity 0,0,UP
                 entity 11,16,LEFT,MAPSPRITE_DRAGONEWT,eas_Init
                 entity 15,19,DOWN,MAPSPRITE_CHAOS_WIZARD,eas_Init
                 entity 13,19,RIGHT,MAPSPRITE_CHAOS_WIZARD,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5F23E:       mainEntity 0,0,UP
                 entity 12,16,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 16,18,RIGHT,MAPSPRITE_GESHP,eas_Init
@@ -505,7 +505,7 @@ ce_5F23E:       mainEntity 0,0,UP
                 entity 12,17,RIGHT,MAPSPRITE_CHAOS_WIZARD,eas_Init
                 entity 13,19,RIGHT,MAPSPRITE_DRAGONEWT,eas_Init
                 entity 14,20,RIGHT,MAPSPRITE_CHAOS_WIZARD,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 ce_5F28E:       mainEntity 0,0,UP
                 entity 11,16,RIGHT,MAPSPRITE_DRAGONEWT,eas_Init
                 entity 16,18,RIGHT,MAPSPRITE_GESHP,eas_Init
@@ -524,14 +524,14 @@ ce_5F28E:       mainEntity 0,0,UP
                 entity 13,17,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 14,19,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 15,20,RIGHT,MAPSPRITE_PRISM_FLOWER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
 
 ; =============== S U B R O U T I N E =======================================
 
 
 sub_5F31E:
                 
-                move.b  #$F0,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
+                move.b  #-16,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
                 nop
 csub_5F326:
                 
@@ -546,7 +546,7 @@ csub_5F326:
 
 sub_5F32E:
                 
-                move.b  #$F8,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
+                move.b  #-8,((MAP_AREA_LAYER2_AUTOSCROLL_X-$1000000)).w
                 nop
                 rts
 

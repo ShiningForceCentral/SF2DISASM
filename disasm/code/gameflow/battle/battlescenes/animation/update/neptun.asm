@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\neptun.asm :
-; 0x1DFD4..0x1E134 : 
+; 0x1DFD4..0x1E134 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -42,7 +42,7 @@ loc_1E01C:
                 bne.w   loc_1E05E
                 subq.w  #1,4(a5)
                 bne.w   loc_1E0C0
-                lea     table_1E106(pc), a0
+                lea     graphic_NeptuneSizzle(pc), a0
                 bsr.w   sub_19F5E
                 move.w  #$100,d6
                 jsr     (GenerateRandomNumber).w
@@ -113,27 +113,22 @@ sub_1E0DA:
                 jsr     (GenerateRandomNumber).w
                 addi.w  #$98,d7 
                 move.w  d7,(a4)+
-                move.w  #$700,(a4)+
-                move.w  #$C532,(a4)+
+                move.w  #VDPGRAPHICDIMENSION_V4|VDPGRAPHICDIMENSION_H2,(a4)+
+                move.w  #VDPTILE_SPELLTILE19|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a4)+
                 move.w  (a0),(a4)+
                 addi.w  #$20,d7 
                 move.w  d7,(a4)+
-                move.w  #$500,(a4)+
-                move.w  #$C53A,(a4)+
+                move.w  #VDPGRAPHICDIMENSION_V2|VDPGRAPHICDIMENSION_H2,(a4)+
+                move.w  #VDPTILE_SPELLTILE27|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a4)+
                 move.w  (a0)+,(a4)+
                 dbf     d0,sub_1E0DA
                 rts
 
     ; End of function sub_1E0DA
 
-table_1E106:    dc.b 0
-                dc.b $80
-                dc.b 1
-                dc.b 0
-                dc.b 5
-                dc.b $3E
-                dc.b 5
-                dc.b $20
+graphic_NeptuneSizzle:
+                vdpSpell 128, 256, SPELLTILE31, V2|H2|32
+                
 table_1E10E:    dc.b 0
                 dc.b $88
                 dc.b 0

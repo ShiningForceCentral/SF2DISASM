@@ -11,7 +11,7 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    255
-                    areaDefaultMusic 10
+                    areaDefaultMusic MUSIC_WITCH
                 
                     mainLayerStart      19, 25
                     mainLayerEnd        29, 34
@@ -22,5 +22,5 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    255
-                    areaDefaultMusic 10
+                    areaDefaultMusic MUSIC_WITCH
                 endWord

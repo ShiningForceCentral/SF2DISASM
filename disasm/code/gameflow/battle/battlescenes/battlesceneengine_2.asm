@@ -130,7 +130,7 @@ rjt_SpellanimationSetups:
                 dc.w spellanimationSetup_PrismLaser-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_BubbleBreath-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_SnowBreath-rjt_SpellanimationSetups
-                dc.w spellanimationSetup_CutOff-rjt_SpellanimationSetups
+                dc.w spellanimationSetup_CutOffAndDodge-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_Buff2-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_AttackSpell-rjt_SpellanimationSetups 
                                                         ; SFCD's ATTACK spell (unused)
@@ -153,27 +153,27 @@ sub_19F5E:
                 
                 movem.l d1/a1,-(sp)
                 lea     (byte_FFAFA0).l,a1
-                move.b  7(a0),d1
+                move.b  VDPSPELL_OFFSET_LINK(a0),d1
                 lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 move.b  d1,(a1,d0.w)
                 lea     ((SPRITE_TABLE-$1000000)).w,a1
                 move.w  d0,d1
-                lsl.w   #3,d1
+                lsl.w   #VDP_SPRITE_SHIFT_COUNT,d1
                 adda.w  d1,a1
-                move.w  2(a0),(a1)+
+                move.w  VDPSPELL_OFFSET_Y(a0),(a1)+
                 clr.w   d1
-                move.b  6(a0),d1
+                move.b  VDPSPELL_OFFSET_SIZE(a0),d1
                 lsl.w   #BYTE_SHIFT_COUNT,d1
                 move.w  d1,(a1)+
-                move.b  7(a0),d1
+                move.b  VDPSPELL_OFFSET_LINK(a0),d1
                 andi.w  #3,d1
                 ror.w   #5,d1
-                or.w    4(a0),d1
-                ori.w   #$C000,d1
+                or.w    VDPSPELL_OFFSET_GRAPHIC(a0),d1
+                ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d1
                 move.w  d1,(a1)+
                 move.w  (a0),(a1)
                 movem.l (sp)+,d1/a1
-                addq.w  #8,a0
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
                 addq.w  #1,d0
                 rts
 
@@ -217,7 +217,7 @@ loc_19FC8:
                 move.b  7(a0),d0
                 lsr.b   #NIBBLE_SHIFT_COUNT,d0
                 move.b  d0,(a2)+
-                addq.w  #8,a0
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
                 dbf     d1,loc_19FC8
                 
                 movem.l (sp)+,d0-d3/a1-a2

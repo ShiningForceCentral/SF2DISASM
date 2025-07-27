@@ -110,7 +110,7 @@ cs_56A70:       textCursor 1391
                 jump cs_56AD4
 cs_56A82:       textCursor 1394
                 nextSingleText $C0,ALLY_ROHDE ; "Great!  Good lad!{W1}"
-                nextSingleText $FF,255  ; "{CLEAR}{LEADER} decides to take{N}Dr. {NAME;11} with him.{W1}{CLEAR}"
+                nextSingleText $FF,ENTITY_NONE  ; "{CLEAR}{LEADER} decides to take{N}Dr. {NAME;11} with him.{W1}{CLEAR}"
                 setActscriptWait ALLY_ROHDE,eas_Init
                 setPriority ALLY_ROHDE,$FFFF
                 setPriority ALLY_BOWIE,$0

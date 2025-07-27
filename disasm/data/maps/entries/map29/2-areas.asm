@@ -11,7 +11,7 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    255
-                    areaDefaultMusic 37
+                    areaDefaultMusic MUSIC_MITHRIL_DIGGERS
                 
                     mainLayerStart      32, 0
                     mainLayerEnd        63, 21
@@ -22,5 +22,5 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    255
-                    areaDefaultMusic 37
+                    areaDefaultMusic MUSIC_MITHRIL_DIGGERS
                 endWord

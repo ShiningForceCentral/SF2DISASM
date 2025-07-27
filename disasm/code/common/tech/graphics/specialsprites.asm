@@ -96,7 +96,7 @@ specialSprite_Exploration:
 AnimateSpecialSprite:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                conditionalPc lea,(SpecialSprites_EvilSpirit+$20),a0
+                conditionalPc lea,(SpecialSprites_EvilSpirit+CRAM_PALETTE_SIZE),a0
                 tst.w   d0
                 beq.s   @Continue
                 cmpi.b  #1,d0
@@ -105,7 +105,7 @@ AnimateSpecialSprite:
                 bra.s   @Continue
 @Zeon:
                 
-                conditionalPc lea,(SpecialSprites_Zeon+$20),a0
+                conditionalPc lea,(SpecialSprites_Zeon+CRAM_PALETTE_SIZE),a0
 @Continue:
                 
                 lea     (FF6802_LOADING_SPACE).l,a1

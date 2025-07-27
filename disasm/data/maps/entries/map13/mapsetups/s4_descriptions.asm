@@ -23,5 +23,4 @@ byte_582BC:     msDesc 17, 2, 4, 0      ; "{NAME} investigated{N}the book shelve
                 msDesc 7, 9, 2, 3       ; "{NAME} investigated{N}the sign.{W2}{CLEAR}"
                                         ; "ITEMS{W1}"
                 msDescEnd
-                dc.b $4E 
-                dc.b $75 
+                rts

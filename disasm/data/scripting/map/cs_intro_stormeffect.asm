@@ -42,15 +42,15 @@ loc_49022:
     ; End of function ApplyStormEffect
 
 palette_IntroStormEffect:
-                dc.w 0
+                dc.w $000
                 dc.w $C40
                 dc.w $E84
-                dc.w $24
-                dc.w $48
+                dc.w $024
+                dc.w $048
                 dc.w $48C
                 dc.w $688
                 dc.w $AAC
-                dc.w 0
+                dc.w $000
                 dc.w $222
                 dc.w $666
                 dc.w $AAA

@@ -12,7 +12,7 @@
                 include "code\gameflow\battle\battlescenes\battlesceneengine_1.asm"    ; Battlescene engine
                 include "code\gameflow\battle\battlescenes\getweaponspriteandpalette.asm"    ; Weapon sprite and palette getter function
                 include "code\gameflow\battle\battlescenes\getbattlescenebackground.asm"    ; Get battlescene background function
-                include "data\battles\global\terrainbackgrounds.asm"    ; Terrain backgrounds table
+                include "data\battles\global\terrainbackgrounds.asm"    ; Terrain backgrounds table   ; Battlescene engine
                 include "code\gameflow\battle\battlescenes\battlesceneengine_2.asm"    ; Battlescene engine
                 include "code\gameflow\battle\battlescenes\tintscreen.asm"    ; Battlescene engine
                 include "code\gameflow\battle\battlescenes\battlesceneengine_3.asm"    ; Battlescene engine
@@ -39,7 +39,7 @@
                 include "code\gameflow\battle\battlescenes\animation\atlas.asm"    ; 
                 include "code\gameflow\battle\battlescenes\animation\prismlaser.asm"    ; 
                 include "code\gameflow\battle\battlescenes\animation\bubblebreath.asm"    ; 
-                include "code\gameflow\battle\battlescenes\animation\cutoff.asm"    ; 
+                include "code\gameflow\battle\battlescenes\animation\cutoffanddodge.asm"    ; 
                 include "code\gameflow\battle\battlescenes\animation\attackspell.asm"    ; 
                 include "code\gameflow\battle\battlescenes\animation\snowbreath.asm"    ; 
                 include "code\gameflow\battle\battlescenes\animation\phoenixattack.asm"    ; 

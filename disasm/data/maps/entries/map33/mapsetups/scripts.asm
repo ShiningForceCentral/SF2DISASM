@@ -28,7 +28,7 @@ cs_5AC58:       textCursor 1804
                 stepEvent 15,20
                 setCamDest 8,12
                 csWait 30
-                nextSingleText $FF,255  ; "Servant Goliath unlocks the{N}door.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Servant Goliath unlocks the{N}door.{W1}"
                 entityActions ALLY_PETER
                  moveUp 4
                  moveLeft 3
@@ -131,9 +131,9 @@ cs_5AC58:       textCursor 1804
                  moveUp 3
                 endActions
                 csWait 10
-                animEntityFX 128,2
+                animEntityFX 128,WIPE_OUT
                 setPos 128,17,12,DOWN
-                animEntityFX 128,3
+                animEntityFX 128,WIPE_IN
                 waitIdle ALLY_BOWIE
                 setActscript ALLY_PETER,eas_BumpUp
                 setActscript FOLLOWER_B,eas_BumpUp
@@ -202,11 +202,11 @@ cs_5AF36:       textCursor 1834
                 endActions
                 setCameraEntity 128
                 nextSingleText $0,128   ; "No, don't go in there!{N}That door is...!{W1}"
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 40
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 30
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 5
                 setActscript ALLY_BOWIE,eas_2xRightLeft
                 csWait 5
@@ -214,9 +214,9 @@ cs_5AF36:       textCursor 1834
                 csWait 5
                 setActscript FOLLOWER_B,eas_2xRightLeft
                 csWait 20
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 10
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 setActscript ALLY_BOWIE,eas_TwirlShrinkDisappear
                 setActscript ALLY_PETER,eas_TwirlShrinkDisappear
                 setActscript FOLLOWER_B,eas_TwirlShrinkDisappear
@@ -231,7 +231,7 @@ cs_5AF36:       textCursor 1834
                 nextSingleText $0,128   ; "That is, anybody who's not{N}protected by Mr. Creed.{W1}"
                 stopEntity 128
                 csWait 20
-                nextSingleText $FF,255  ; "Goliath picks up{N}{LEADER}.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Goliath picks up{N}{LEADER}.{W1}"
                 startEntity 128
                 nextSingleText $0,128   ; "Now, you're part of the{N}collection!{W1}"
                 stepEvent 12,13
@@ -330,7 +330,7 @@ cs_5B016:       textCursor 1840
                  moveLeft 1
                 endActions
                 csWait 20
-                nextSingleText $FF,255  ; "Ah...{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Ah...{W1}"
                 csWait 5
                 setActscript 129,eas_2xRightLeft
                 nextSingleText $80,129  ; "I heard something.{W1}"
@@ -365,15 +365,15 @@ cs_5B016:       textCursor 1840
                 shiver 129
                 csWait 20
                 nextSingleText $80,129  ; "Abra kadabra!  1-2-3!{W1}"
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 40
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 30
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 20
-                flashScreenWhite $4
+                flashScreenWhite 4
                 csWait 10
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 setPos ALLY_BOWIE,16,9,DOWN
                 setActscript ALLY_BOWIE,eas_TwirlGrow
                 setPos ALLY_PETER,15,9,DOWN
@@ -412,7 +412,7 @@ cs_5B016:       textCursor 1840
                 endActions
                 nextSingleText $0,130   ; "Did something happen to{N}Zeon?  Has he revived?{W1}"
                 nod ALLY_BOWIE
-                nextSingleText $FF,255  ; "{LEADER} nods.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} nods.{W1}"
                 csWait 5
                 setActscript 130,eas_2xRightLeft
                 nextSingleText $0,130   ; "No way!  You're kidding!{N}I can't believe it!{W1}"
@@ -433,7 +433,7 @@ cs_5B016:       textCursor 1840
                 setFacing 129,DOWN
                 nextSingleText $80,129  ; "Is what you say true?{W1}"
                 nod ALLY_BOWIE
-                nextSingleText $FF,255  ; "{LEADER} nods again.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} nods again.{W1}"
                 customActscriptWait 129
                  ac_setSpeed 16,16      ;   
                  ac_jump eas_Idle       ;   

@@ -31,7 +31,7 @@ cs_5247C:       setBlocks 48,7,1,1,48,8
                 setBlocks 57,7,1,1,57,8
                 setBlocks 62,20,1,2,57,20
                 csc_end
-cs_5249E:       playSound $FD
+cs_5249E:       playSound SOUND_COMMAND_FADE_OUT
                 resetForceBattleStats
                 resetMap
                 loadEntitiesFromMapSetup 0,0,RIGHT

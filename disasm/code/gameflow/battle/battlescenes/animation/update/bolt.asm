@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\bolt.asm :
-; 0x1CE50..0x1CFFC : 
+; 0x1CE50..0x1CFFC : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -55,7 +55,7 @@ loc_1CEBE:
                 move.w  d1,d2
                 lsl.w   #2,d1
                 add.w   d2,d1
-                adda.w  d1,a0
+                adda.w  d1,a0  ; offset by 40x 
                 moveq   #5,d1
                 move.w  6(a5),d2
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
@@ -111,6 +111,7 @@ loc_1CF46:
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 addq.w  #8,a4
                 dbf     d1,loc_1CF46
+                
                 movea.l (sp)+,a4
                 tst.w   ((byte_FFB404-$1000000)).w
                 bne.s   loc_1CF68
@@ -134,6 +135,7 @@ loc_1CF84:
                 lea     $28(a4),a4
                 lea     $C(a5),a5
                 dbf     d1,loc_1CE62
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   sub_1B82A
                 move.w  2(a3),d1

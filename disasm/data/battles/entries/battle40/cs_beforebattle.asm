@@ -90,7 +90,7 @@ cs_4E544:       setBlocks 11,6,11,29,44,0
                 nextSingleText $0,ALLY_PETER ; "Oh, what should we do?!{W1}"
                 nextSingleText $0,FOLLOWER_B ; "We have to fight!{W1}"
                 nextSingleText $C0,129  ; "Times up!  We need space{N}to battle.{W1}"
-                entityFlashWhite 129,$1E
+                entityFlashWhite 129,30
                 tintMap
                 csWait 20
                 flickerOnce
@@ -220,4 +220,4 @@ ce_4E878:       mainEntity 16,39,UP
                 entity 16,41,UP,MAPSPRITE_CARAVAN,eas_Init
                 entity 16,4,DOWN,MAPSPRITE_ODD_EYE,eas_Init
                 entity 63,63,UP,MAPSPRITE_EFFECT3,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

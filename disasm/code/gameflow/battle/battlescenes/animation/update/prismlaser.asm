@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\prismlaser.asm :
-; 0x1E2D4..0x1E5D0 : 
+; 0x1E2D4..0x1E5D0 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -138,8 +138,8 @@ sub_1E454:
                 lsl.w   #3,d2
                 adda.w  d2,a4
                 move.w  #$D4,(a4)+ 
-                move.w  #$F00,(a4)+
-                move.w  #$C573,(a4)+
+                move.w  #VDPGRAPHICDIMENSION_V4|VDPGRAPHICDIMENSION_H4,(a4)+
+                move.w  #VDPTILE_SPELLTILE84|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a4)+
                 lsl.w   #2,d2
                 add.w   d2,d3
                 move.w  d3,(a4)+
@@ -147,8 +147,8 @@ sub_1E454:
 loc_1E476:
                 
                 move.w  #$D4,(a4)+ 
-                move.w  #$F00,(a4)+
-                move.w  #$C583,(a4)+
+                move.w  #VDPGRAPHICDIMENSION_V4|VDPGRAPHICDIMENSION_H4,(a4)+
+                move.w  #VDPTILE_SPELLTILE100|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a4)+
                 move.w  d3,(a4)
                 addq.w  #1,6(a5)
                 rts

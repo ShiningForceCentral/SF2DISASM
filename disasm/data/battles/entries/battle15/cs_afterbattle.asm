@@ -31,11 +31,11 @@ abcs_battle15:  textCursor 2506
                 fadeInB
                 nextText $0,FOLLOWER_A  ; "Why is this door closed?{N}That's strange...{W2}"
                 nextSingleText $0,FOLLOWER_A ; "Oh well, let's go in.{W1}"
-                entityFlashWhite FOLLOWER_A,$28
+                entityFlashWhite FOLLOWER_A,40
                 csWait 60
                 setActscriptWait FOLLOWER_A,eas_Jump
                 nextSingleText $0,FOLLOWER_A ; "What?  Let me try again.{W1}"
-                entityFlashWhite FOLLOWER_A,$32
+                entityFlashWhite FOLLOWER_A,50
                 setQuake 1
                 csWait 20
                 setQuake 0
@@ -83,4 +83,4 @@ abcs_battle15:  textCursor 2506
                 warp MAP_ACHILLES_SHRINES,27,11,UP
                 csc_end
 ce_4AFB6:       mainEntity 14,5,DOWN
-                dc.w $FFFF
+                cscEntitiesEnd

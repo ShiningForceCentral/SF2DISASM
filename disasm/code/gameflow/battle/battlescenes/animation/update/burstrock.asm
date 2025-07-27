@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\burstrock.asm :
-; 0x1EBBA..0x1ECC8 : 
+; 0x1EBBA..0x1ECC8 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -89,22 +89,10 @@ loc_1EC80:
 
     ; End of function spellanimationUpdate_BurstRockExplosion
 
-table_1EC9A:    dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $20
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $60
-                dc.b 5
-                dc.b $20
+table_1EC9A:    vdpSpell 0, 0, SPELLTILE1, V4|H4|32
+                
+                vdpSpell 0, 0, SPELLTILE65, V2|H2|32
+                
 table_1ECAA:    dc.b 0
                 dc.b 5
                 dc.b $F

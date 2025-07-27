@@ -95,7 +95,7 @@ abcs_battle07:  textCursor 2385
                  moveUp 1
                 endActions
                 nextSingleText $0,134   ; "Princess Elis...I'll save{N}you!{W1}"
-                nextSingleText $FF,255  ; "King Galam murmurs a{N}magic spell.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "King Galam murmurs a{N}magic spell.{W1}"
                 setFacing 132,RIGHT
                 csWait 40
                 setActscriptWait 132,eas_Jump
@@ -180,9 +180,9 @@ abcs_battle07:  textCursor 2385
                 nextSingleText $C0,130  ; "You really want to know?{N}Ha, ha!  OK, I'll tell you.{W1}"
                 setCamDest 8,13
                 setFacing 130,UP
-                nextSingleText $FF,255  ; "King Galam displays the{N}Jewel of Evil.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "King Galam displays the{N}Jewel of Evil.{W1}"
                 nextSingleText $C0,130  ; "I'll open the door to the{N}Evil World!{N}Observe!{W1}"
-                entityFlashWhite 130,$32
+                entityFlashWhite 130,50
                 csWait 60
                 mapFadeOutToWhite
                 csWait 20
@@ -213,17 +213,17 @@ abcs_battle07:  textCursor 2385
                 nextSingleText $0,131   ; "Why?  What's inside?{W1}"
                 nextSingleText $C0,130  ; "You'll find out soon enough.{W1}"
                 setFacing 130,UP
-                entityFlashWhite 130,$28
+                entityFlashWhite 130,40
                 nextSingleText $0,133   ; "What's he doing now??{W1}"
                 nextSingleText $C0,130  ; "Here they come!{N}Ha, ha, ha!{W1}"
                 nextSingleText $0,131   ; "What?{W1}"
                 setCamDest 8,3
                 setSprite 128,MAPSPRITE_OBJECT3
                 setPos 128,12,5,UP
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 setSprite 129,MAPSPRITE_OBJECT3
                 setPos 129,13,5,UP
-                animEntityFX 129,7
+                animEntityFX 129,MOSAIC_IN
                 customActscriptWait 128
                  ac_setSpeed 32,32      ;   
                  ac_jump eas_Idle       ;   
@@ -406,50 +406,50 @@ abcs_battle07:  textCursor 2385
                 endActions
                 csWait 20
                 setQuake 0
-                nextSingleText $FF,255  ; "{LEADER} grasped the{N}Jewel of Evil.{W1}"
-                setCameraEntity 65535
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} grasped the{N}Jewel of Evil.{W1}"
+                setCameraEntity CAMERA_NEUTRAL
                 nextText $C0,130        ; "What are you doing?{W2}"
                 setCameraEntity ALLY_BOWIE
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 nextSingleText $C0,130  ; "Don't touch my jewel!{N}Don't touch it!{W1}"
                 setCameraEntity ALLY_BOWIE
                 shiver ALLY_BOWIE
                 stopEntity ALLY_BOWIE
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 nextText $C0,130        ; "I said, don't touch it!{W2}"
                 setCameraEntity ALLY_BOWIE
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 nextSingleText $C0,130  ; "I'll shake you off!{W1}"
                 setCameraEntity ALLY_BOWIE
                 shiver ALLY_BOWIE
                 stopEntity ALLY_BOWIE
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 nextSingleText $C0,130  ; "You're still there?{W1}"
                 setCameraEntity ALLY_BOWIE
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 nextSingleText $0,ALLY_BOWIE ; "Wow!  He's so brave.  Hmmm....{W1}"
                 setCameraEntity ALLY_BOWIE
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 nextSingleText $C0,130  ; "I've almost got you now!{W1}"
                 setCameraEntity ALLY_BOWIE
                 shiver ALLY_BOWIE
                 stopEntity ALLY_BOWIE
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 nextSingleText $0,132   ; "No, you'll fall if you{N}open your hands now!{W1}"
                 setCameraEntity ALLY_BOWIE
-                setCameraEntity 65535
-                nextSingleText $FF,255  ; "{LEADER}'s jewel suddenly{N}flared!{W1}"
+                setCameraEntity CAMERA_NEUTRAL
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER}'s jewel suddenly{N}flared!{W1}"
                 setCameraEntity ALLY_BOWIE
-                entityFlashWhite ALLY_BOWIE,$14
+                entityFlashWhite ALLY_BOWIE,20
                 playSound SFX_VALIDATION
                 mapFadeOutToWhite
                 csWait 10
                 mapFadeInFromWhite
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 nextSingleText $C0,130  ; "Whoa!  The light...the{N}light!{W1}"
                 setCameraEntity ALLY_BOWIE
-                setCameraEntity 65535
-                nextSingleText $FF,255  ; "The Jewel of Evil fused{N}to {LEADER}'s neck.{W1}"
+                setCameraEntity CAMERA_NEUTRAL
+                nextSingleText $FF,ENTITY_NONE  ; "The Jewel of Evil fused{N}to {LEADER}'s neck.{W1}"
                 setCameraEntity ALLY_BOWIE
                 cameraSpeed $38
                 customActscriptWait ALLY_BOWIE
@@ -511,18 +511,18 @@ abcs_battle07:  textCursor 2385
                 shiver ALLY_BOWIE
                 stopEntity ALLY_BOWIE
                 csWait 30
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 cameraSpeed $28
-                nextSingleText $FF,255  ; "The two jewels merge{N}together.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "The two jewels merge{N}together.{W1}"
                 setF 385                ; Set after Bowie obtains King Galam's jewel
                 setCamDest 8,3
                 waitIdle 130
                 setFacing 130,DOWN
                 setFacing 132,DOWN
-                animEntityFX 129,6
+                animEntityFX 129,MOSAIC_OUT
                 nextSingleText $C0,130  ; "I have to go back and get{N}my jewel....{N}Noooooooo!{W1}"
                 setActscript 130,eas_TwirlShrinkDisappear
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 nextSingleText $0,132   ; "Father...{N}{LEADER}...help meeeeee!{W1}"
                 setActscriptWait 132,eas_TwirlShrinkDisappear
                 setActscriptWait 131,eas_Init
@@ -539,7 +539,7 @@ abcs_battle07:  textCursor 2385
                  ac_setSpeed 32,32      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 csWait 60
                 setCamDest 8,17
                 playSound MUSIC_SAD_THEME_1
@@ -552,14 +552,14 @@ abcs_battle07:  textCursor 2385
                 headshake ALLY_BOWIE
                 nextSingleText $C0,ALLY_BOWIE ; "(Sigh)....{W1}"
                 nextSingleText $0,131   ; "{LEADER}, why do you{N}have two jewels?{W1}"
-                nextSingleText $FF,255  ; "{LEADER} explains{N}what happened.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} explains{N}what happened.{W1}"
                 nod 131
                 nod ALLY_BOWIE
                 nextSingleText $0,131   ; "Indeed, perhaps...these{N}jewels are the key to{N}solving this....{W1}"
                 setQuake 2
                 csWait 5
                 setActscript 134,eas_2xRightLeft
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 csWait 120
                 setQuake 0
                 csWait 60
@@ -586,7 +586,7 @@ abcs_battle07:  textCursor 2385
                 nextSingleText $C0,133  ; "But, Sir Astral...{W1}"
                 setFacing 131,DOWN
                 nextSingleText $0,131   ; "He won't budge.{N}We'll have to carry him.{W1}"
-                nextSingleText $FF,255  ; "The Minister nods.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "The Minister nods.{W1}"
                 nod 131
                 entityActions 131
                  moveLeft 1
@@ -650,4 +650,4 @@ ce_4A912:       mainEntity 13,23,UP
                 entity 12,14,DOWN,MAPSPRITE_ELIS,eas_Init
                 entity 12,27,UP,MAPSPRITE_GRANSEAL_KING,eas_Init
                 entity 14,27,UP,MAPSPRITE_MINISTER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

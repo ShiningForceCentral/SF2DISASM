@@ -13,7 +13,7 @@ cs_5DA28:       textCursor 3323
                 nextText $0,ALLY_PETER  ; "We have to go through Moun{N}to get to Nazka, right?{W2}"
                 nextSingleText $0,ALLY_PETER ; "{LEADER}, let's go{N}together.{W1}"
                 nextSingleText $0,ALLY_FRAYJA ; "Alright.{W1}"
-                nextSingleText $FF,255  ; "{LEADER} decides to take{N}{NAME;22} with him.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} decides to take{N}{NAME;22} with him.{W1}"
                 nextSingleText $0,ALLY_FRAYJA ; "Thank you very much.{W1}"
                 followEntity ALLY_FRAYJA,FOLLOWER_B,2
                 setStoryFlag 31         ; Battle 31 unlocked - BATTLE_PACALON                   

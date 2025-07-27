@@ -584,7 +584,7 @@ cs_5779C:       textCursor 1686
                 setActscriptWait 153,eas_Jump
                 csWait 20
                 setFacing 153,UP
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 setActscriptWait 152,eas_Jump
                 setActscriptWait 152,eas_Jump
                 nextSingleText $0,152   ; "Thank you!  Thank you!{N}{NAME;20} is OK.{W1}"

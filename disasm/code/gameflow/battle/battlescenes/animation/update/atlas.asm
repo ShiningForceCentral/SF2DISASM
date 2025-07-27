@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\atlas.asm :
-; 0x1E134..0x1E2D4 : 
+; 0x1E134..0x1E2D4 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -153,7 +153,7 @@ loc_1E26C:
 loc_1E26E:
                 
                 move.w  d2,(a4)+
-                move.w  #$F00,(a4)+
+                move.w  #VDPGRAPHICDIMENSION_V4|VDPGRAPHICDIMENSION_H4,(a4)+
                 move.w  (a0)+,(a4)+
                 move.w  d0,(a4)+
                 addi.w  #$20,d2 
@@ -202,6 +202,7 @@ table_1E290:    dc.b $89
                 dc.b 0
                 dc.b 0
                 dc.b 0
+                
                 dc.b $8D
                 dc.b $80
                 dc.b $8D

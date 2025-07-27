@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\blaze.asm :
-; 0x1B93C..0x1BE9E : 
+; 0x1B93C..0x1BE9E : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

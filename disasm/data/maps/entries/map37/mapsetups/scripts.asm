@@ -39,7 +39,7 @@ cs_5FB6A:       textCursor 3377
                 nextSingleText $80,ALLY_PETER ; "But...but...{N}Woooooow!{W1}"
                 setCamDest 4,6
                 setFacing ALLY_BOWIE,UP
-                playSound $FE
+                playSound SOUND_COMMAND_CUT_OUT
                 playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 3
                 csWait 20
@@ -67,7 +67,7 @@ cs_5FB6A:       textCursor 3377
                 nextSingleText $80,ALLY_ZYNK ; "We're going higher and{N}higher....{W1}"
                 csWait 40
                 fadeOutB
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 mapLoad MAP_OVERWORLD_NAZCA_REGION,40,12
                 loadMapEntities ce_5FDD4
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -235,4 +235,4 @@ palette_5FDB4:  dc.w 0
                 dc.w $EEE
 ce_5FDD4:       mainEntity 0,0,DOWN
                 entity 45,17,RIGHT,MAPSPRITE_NAZCA_SHIP,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

@@ -228,9 +228,9 @@ tableEnd: macro
         endm
                 
 flagSwitchedMap: macro
-                dc.w \1
-                dc.w \2
-                dc.w \3
+                dc.w \1 ; original map
+                dc.w \2 ; flag
+                dc.w \3 ; replacement map
             endm
 
 flagSwitchedMapsEnd: macro
@@ -238,27 +238,27 @@ flagSwitchedMapsEnd: macro
             endm
                 
 battleMapCoordinates: macro
-                dc.b \1
-                dc.b \2
-                dc.b \3
-                dc.b \4
-                dc.b \5
-                dc.b \6
-                dc.b \7
+                dc.b \1 ; map
+                dc.b \2 ; area start X
+                dc.b \3 ; area start Y
+                dc.b \4 ; area width
+                dc.b \5 ; area height
+                dc.b \6 ; trigger X (255 = any)
+                dc.b \7 ; trigger Y (255 = any)
             endm
                 
 savePointMapCoordinates: macro
-                dc.b \1
-                dc.b \2
-                dc.b \3
-                dc.b \4
+                dc.b \1 ; map
+                dc.b \2 ; X
+                dc.b \3 ; Y
+                dc.b \4 ; facing
             endm
                 
 raftResetMapCoordinates: macro
-                dc.b \1
-                dc.b \2
-                dc.b \3
-                dc.b \4
+                dc.b \1 ; egress map
+                dc.b \2 ; raft map
+                dc.b \3 ; raft X
+                dc.b \4 ; raft Y
             endm
                 
 item:       macro
@@ -271,7 +271,7 @@ classType:  macro
                 
 itemBreakMessage: macro
                 defineShorthand.b ITEM_,\1
-                dc.b \2
+                defineShorthand.b ITEMBREAK_\2
             endm
                 
 ; Enemy item drops
@@ -325,8 +325,8 @@ enemyFacing: macro
             endm
                 
 position:   macro
-                dc.b \1
-                dc.b \2
+                dc.b \1 ; 
+                dc.b \2 ; 
             endm
                 
 facing:     macro
@@ -336,15 +336,15 @@ facing:     macro
 ; Battle spriteset definitions
                 
 allyCombatant: macro
-                dc.b \1
-                dc.b \2
-                dc.b \3
+                dc.b \1 ; entity index
+                dc.b \2 ; X
+                dc.b \3 ; Y
             endm
                 
 enemyCombatant: macro
-                defineShorthand.b ENEMY_,\1
-                dc.b \2
-                dc.b \3
+                defineShorthand.b ENEMY_,\1 ; enemy index
+                dc.b \2 ; X
+                dc.b \3 ; Y
             endm
                 
 combatantAiAndItem: macro
@@ -353,12 +353,12 @@ combatantAiAndItem: macro
             endm
                 
 combatantBehavior: macro
-                defineBitfield.b AIORDER_,\1
-                dc.b \2
-                defineBitfield.b AIORDER_,\3
-                dc.b \4
-                dc.b \5
-                defineBitfield.b SPAWN_,\6
+                defineBitfield.b AIORDER_,\1 ; primary order
+                dc.b \2 ; region to activate primary order
+                defineBitfield.b AIORDER_,\3 ; secondary order
+                dc.b \4 ; region to activate secondary order
+                dc.b \5 ; filler byte
+                defineBitfield.b SPAWN_,\6 ; initialization type
             endm
                 
 ; Names
@@ -430,21 +430,17 @@ useSpell:   macro
                 
 equipEffects: macro
                 defineShorthand.b EQUIPEFFECT_,\1
-                dc.b \2
+                dc.b \2 ; parameter for effect 1
                 defineShorthand.b EQUIPEFFECT_,\3
-                dc.b \4
-                defineShorthand.b EQUIPEFFECT_,\5
-                dc.b \6
+                dc.b \4 ; parameter for effect 2
+                defineShorthand.b EQUIPEFFECT_,\5 ; unused effect
+                dc.b \6 ; parameter for effect 3
             endm
                 
 ; Spell definitions
                 
 entry:      macro
                 defineBitfield.b SPELL_,\1
-            endm
-                
-index:      macro ;alias
-                entry \1
             endm
                 
 mpCost:     macro
@@ -473,10 +469,7 @@ forClass:   macro
                 
 allyBattleSprite: macro
                 defineShorthand.b ALLYBATTLESPRITE_,\1
-            if (narg=2) ; legacy support for old ally battle sprite and palette
-                dc.b \2
-            endif
-        endm
+            endm
                 
 allyBattleSprAndPlt: macro
                 forClass \1
@@ -486,10 +479,7 @@ allyBattleSprAndPlt: macro
                 
 enemyBattleSprite: macro
                 defineShorthand.b ENEMYBATTLESPRITE_,\1
-            if (narg=2) ; legacy support for old enemy battle sprite and palette
-                dc.b \2
-            endif
-        endm
+            endm
                 
 enemyBattleSprAndPlt: macro
                 enemyBattleSprite \1
@@ -542,20 +532,20 @@ classes: macro
         endm
                 
 mithrilWeapons: macro
-                dc.b \1
+                dc.b \1 ; 1/x chance
                 item \2
-                dc.b \3
+                dc.b \3 ; 1/x chance
                 item \4
-                dc.b \5
+                dc.b \5 ; 1/x chance
                 item \6
-                dc.b \7
+                dc.b \7 ; 1/x chance
                 item \8
             endm
                 
 specialCaravanDescription: macro
                 item \1
-                dc.b \2
-                defineShorthand.w MESSAGE_CARAVANDESC_,\3
+                dc.b \2 ; # of text lines
+                defineShorthand.w MESSAGE_CARAVANDESC_,\3 ; starting text line
             endm
                 
 input:      macro
@@ -563,10 +553,10 @@ input:      macro
             endm
                 
 follower:   macro
-                dc.b \1
-                dc.b \2
-                dc.b \3
-                dc.b \4
+                dc.b \1 ; flag
+                dc.b \2 ; entity
+                dc.b \3 ; mapsprite
+                dc.b \4 ; 
             endm
                 
 mapsprite:  macro
@@ -586,7 +576,7 @@ speechSfx:  macro
 ; Enemy definitions
                 
 unknownByte: macro
-                dc.b \1
+                dc.b \1 ; 
                 dcb.b 9,0                                                                ; ...and define placeholder zeros while we're at it
             endm
                 
@@ -651,14 +641,14 @@ initialStatus: macro
                 dcb.b 3,0
             endm
                 
-unknownWord: macro
+aiBitfield: macro
                 dcb.b 2,0
-                dc.w \1
+                defineBitfield.w AIBITFIELD_,\1 ; activation bitfield?
                 dcb.b 2,0
             endm
                 
 upgradeRange: macro
-                dc.b \1
+                dc.b \1 ; upgrade factor/step
                 defineShorthand.b ENEMY_,\2
                 defineShorthand.b ENEMY_,\3
             endm
@@ -699,8 +689,8 @@ agiGrowth:  macro
             endm
                 
 spellList: macro
-            rept narg/2
-                dc.b \1
+            rept narg/2 ; # of spells
+                dc.b \1 ; spell learn level
                 defineBitfield.b SPELL_,\2
                 shift
                 shift
@@ -764,9 +754,16 @@ vdpBaseTile: macro
 ; VDP sprites
 
 vdpSprite:  macro
-                dc.w \1
+                dc.w \1 ; Y
                 defineBitfield.w VDPSPRITESIZE_,\2
                 vdpTile \3
-                dc.w \4
+                dc.w \4 ; X
+            endm
+
+vdpSpell:  macro
+                dc.w \1 ; X
+                dc.w \2 ; Y
+                vdpTile \3 ; starting tile
+                defineBitfield.w VDPGRAPHICDIMENSION_,\4
             endm
                 

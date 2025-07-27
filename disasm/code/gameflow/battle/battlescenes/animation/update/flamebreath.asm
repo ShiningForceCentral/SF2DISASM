@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\flamebreath.asm :
-; 0x1D2E6..0x1D4E6 : 
+; 0x1D2E6..0x1D4E6 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -25,13 +25,13 @@ loc_1D2F6:
                 beq.w   loc_1D33C
                 addq.w  #8,a0
                 move.w  ((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w,d2
-                cmpi.w  #$E,d2
+                cmpi.w  #ENEMYBATTLESPRITE_CERBERUS,d2
                 beq.w   loc_1D33C
                 addq.w  #8,a0
-                cmpi.w  #$13,d2
+                cmpi.w  #ENEMYBATTLESPRITE_HYDRA,d2
                 beq.w   loc_1D33C
                 addq.w  #8,a0
-                cmpi.w  #$1A,d2
+                cmpi.w  #ENEMYBATTLESPRITE_WYVERN,d2
                 beq.w   loc_1D33C
                 addq.w  #8,a0
 loc_1D33C:
@@ -184,46 +184,12 @@ loc_1D494:
 
     ; End of function spellanimationUpdate_FlameBreath
 
-table_1D4A0:    dc.b 1
-                dc.b $1C
-                dc.b 0
-                dc.b $DE
-                dc.b 5
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b $D2
-                dc.b 0
-                dc.b $EC
-                dc.b 5
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b $DF
-                dc.b 0
-                dc.b $D6
-                dc.b 5
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b $D0
-                dc.b 0
-                dc.b $D8
-                dc.b 5
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b $D4
-                dc.b 0
-                dc.b $CC
-                dc.b 5
-                dc.b $20
-                dc.b 0
-                dc.b $20
+table_1D4A0:    vdpSpell 284, 222, SPELLTILE1, V1|H1|32  ; ally
+                vdpSpell 210, 236, SPELLTILE1, V1|H1|32  ; enemy
+                vdpSpell 223, 214, SPELLTILE1, V1|H1|32  ; cerberus
+                vdpSpell 208, 216, SPELLTILE1, V1|H1|32  ; hydra
+                vdpSpell 212, 204, SPELLTILE1, V1|H1|32  ; wyvern
+                
 table_1D4C8:    dc.b 0
                 dc.b 5
                 dc.b 0

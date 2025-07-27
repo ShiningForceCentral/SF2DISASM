@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\detox.asm :
-; 0x1CC56..0x1CE50 : 
+; 0x1CC56..0x1CE50 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -156,6 +156,7 @@ loc_1CDF2:
                 addq.w  #8,a4
                 addq.w  #1,d0
                 dbf     d1,loc_1CD7A
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   sub_1B82A
                 rts
@@ -222,11 +223,5 @@ table_1CE2A:    dc.b 0
                 dc.b 0
                 dc.b 0
                 dc.b $1B
-table_1CE48:    dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $3C
-                dc.b 0
-                dc.b $20
+                
+table_1CE48:    vdpSpell 0, 0, SPELLTILE29, V1|H1|32

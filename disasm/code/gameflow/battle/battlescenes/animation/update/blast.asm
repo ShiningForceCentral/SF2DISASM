@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\blast.asm :
-; 0x1C7F6..0x1CC56 : 
+; 0x1C7F6..0x1CC56 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -62,7 +62,7 @@ loc_1C872:
                 add.w   d7,d7
                 add.w   d0,d7
                 lea     table_1CBBA(pc), a0
-                adda.w  d7,a0
+                adda.w  d7,a0  ; offset by 6x random value
                 moveq   #$20,d6 
                 jsr     (GenerateRandomNumber).w
                 subi.w  #$10,d7
@@ -183,6 +183,7 @@ loc_1C9A0:
                 lea     $C(a5),a5
                 addq.w  #8,a4
                 dbf     d1,loc_1C804
+				
                 tst.w   (a5)
                 beq.w   loc_1CAA8
                 addq.w  #1,(a5)
@@ -380,48 +381,37 @@ sub_1CBA6:
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
-                adda.w  d0,a0
+                adda.w  d0,a0  ; offset by 6x
                 move.w  (sp)+,d0
                 rts
 
     ; End of function sub_1CBA6
 
-table_1CBBA:    dc.b $FF
-                dc.b $D0
-                dc.b $FF
-                dc.b $D0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $30
-                dc.b $FF
-                dc.b $D0
-                dc.b 8
-                dc.b 0
-                dc.b $FF
-                dc.b $D0
-                dc.b 0
-                dc.b $30
-                dc.b $10
-                dc.b 0
-                dc.b 0
-                dc.b $30
-                dc.b 0
-                dc.b $30
-                dc.b $18
-                dc.b 0
-                dc.b $FF
-                dc.b $CC
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $34
-                dc.b 0
-                dc.b 0
-                dc.b 8
-                dc.b 0
+table_1CBBA:    dc.w -48     ; X
+                dc.w -48     ; Y
+                dc.w 0       ; tile modifier
+                
+                dc.w 48
+                dc.w -48
+                dc.w VDPTILE_MIRROR
+                
+                dc.w -48
+                dc.w 48
+                dc.w VDPTILE_FLIP
+                
+                dc.w 48
+                dc.w 48
+                dc.w VDPTILE_MIRROR|VDPTILE_FLIP
+                
+                ; 4&5
+                dc.w -52
+                dc.w 0
+                dc.w 0
+                
+                dc.w 52
+                dc.w 0
+                dc.w VDPTILE_MIRROR
+                
 table_1CBDE:    dc.w 5
                 dc.w $500
                 dc.b 0
@@ -434,6 +424,7 @@ table_1CBDE:    dc.w 5
                 dc.b 5
                 dc.b 0
                 dc.b 5
+                
                 dc.b 5
                 dc.b 0
                 dc.b 0
@@ -446,6 +437,7 @@ table_1CBDE:    dc.w 5
                 dc.b $1D
                 dc.b 0
                 dc.b 5
+                
                 dc.b 6
                 dc.b 0
                 dc.b 0
@@ -458,6 +450,7 @@ table_1CBDE:    dc.w 5
                 dc.b $B
                 dc.b 0
                 dc.b 5
+                
                 dc.b 9
                 dc.b 0
                 dc.b 0
@@ -474,54 +467,63 @@ table_1CC0E:    dc.b $C
                 dc.b $A
                 dc.b 0
                 dc.b 1
+                
 table_1CC14:    dc.b $18
                 dc.b $18
                 dc.b 1
-                dc.b $10
-                dc.b 8
-                dc.b 0
+                dc.b VDPTILE_FLIP_BYTE  ; tile modifier byte
+                dc.b 8    ; X
+                dc.b 0    ; Y
+                
                 dc.b 0
                 dc.b $18
                 dc.b 0
                 dc.b 0
                 dc.b 0
                 dc.b 8
+                
                 dc.b $E8
                 dc.b $18
                 dc.b 1
-                dc.b $18
+                dc.b VDPTILE_MIRROR_BYTE|VDPTILE_FLIP_BYTE
                 dc.b 0
                 dc.b 0
+                
                 dc.b $18
                 dc.b 0
                 dc.b 2
                 dc.b 0
                 dc.b 8
                 dc.b 8
+                
                 dc.b $E8
                 dc.b 0
                 dc.b 2
+                dc.b VDPTILE_MIRROR_BYTE
                 dc.b 8
                 dc.b 8
-                dc.b 8
+                
                 dc.b $18
                 dc.b $E8
                 dc.b 1
                 dc.b 0
                 dc.b 8
                 dc.b 0
+                
                 dc.b 0
                 dc.b $E8
                 dc.b 0
-                dc.b $10
+                dc.b VDPTILE_FLIP_BYTE
                 dc.b 0
                 dc.b 0
+                
                 dc.b $E8
                 dc.b $E8
                 dc.b 1
-                dc.b 8
+                dc.b VDPTILE_MIRROR_BYTE
                 dc.b 0
                 dc.b 0
+                
 table_1CC44:    dc.b $50
                 dc.b $97
 table_1CC46:    dc.b $70

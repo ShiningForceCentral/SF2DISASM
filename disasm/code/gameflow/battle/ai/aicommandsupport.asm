@@ -43,7 +43,7 @@ ExecuteAiCommand_Support:
                 clr.w   d3
                 bsr.w   GetNextSupportSpell
                 cmpi.w  #SPELL_NOTHING,d1
-                bne.s   @CheckMuddle    
+                bne.s   @CheckMuddle
                 
                 ; If no known status spell, do nothing
                 move.w  #-1,d1

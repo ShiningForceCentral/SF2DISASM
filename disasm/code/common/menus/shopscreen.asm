@@ -74,7 +74,7 @@ ExecuteShopScreen:
                 move.w  #$100,d0
                 jsr     (ApplyVIntVramDmaOnCompressedTiles).w
                 jsr     (WaitForWindowMovementEnd).l
-                bsr.w   UpdateShopItemNameAndPriceWindow
+                bsr.w   MoveSelectedItemInfoWindow
                 
 @CheckRight:
                 
@@ -438,7 +438,7 @@ LoadItemIconsAndPriceTagTiles:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  d7,-(sp)
-                bsr.w   LoadItemIconInShopScreen
+                bsr.w   LoadIconPixelsInShopScreen
                 move.l  a0,-(sp)
                 move.w  d0,d1
                 jsr     j_GetItemDefinitionAddress
@@ -520,7 +520,7 @@ LoadPriceTagTiles:
 ; Load icon pixels for item d0.w to loading space in a0.
 
 
-LoadItemIconInShopScreen:
+LoadIconPixelsInShopScreen:
                 
                 move.l  a1,-(sp)
                 move.w  d0,-(sp)
@@ -545,7 +545,7 @@ LoadItemIconInShopScreen:
                 movea.l (sp)+,a1
                 rts
 
-    ; End of function LoadItemIconInShopScreen
+    ; End of function LoadIconPixelsInShopScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -789,7 +789,7 @@ loc_14EAE:
                 move.w  #$201,d1
                 moveq   #4,d2
                 jsr     (MoveWindow).l  
-                bra.s   UpdateShopItemNameAndPriceWindow
+                bra.s   MoveSelectedItemInfoWindow
 
     ; End of function ShiftShopInventoryWindowLayout
 
@@ -829,7 +829,7 @@ itemNameAndPriceWindowSlot = -8
 inventoryWindowLayoutEndAddress = -6
 inventoryWindowSlot = -2
 
-UpdateShopItemNameAndPriceWindow:
+MoveSelectedItemInfoWindow:
                 
                 bsr.w   WriteItemNameAndGoldAmount
                 move.w  itemNameAndPriceWindowSlot(a6),d0
@@ -841,5 +841,5 @@ UpdateShopItemNameAndPriceWindow:
                 moveq   #10,d1
                 rts
 
-    ; End of function UpdateShopItemNameAndPriceWindow
+    ; End of function MoveSelectedItemInfoWindow
 

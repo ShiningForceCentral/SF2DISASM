@@ -9,8 +9,8 @@ PlayEndingKissSequence:
                 
                 move.b  #-1,(DEACTIVATE_WINDOW_HIDING).l
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                move.w  #$120E,d0
-                move.w  #$707,d1
+                move.w  #$120E,d0    ; window dimensions
+                move.w  #$707,d1    ; window offset
                 jsr     (CreateWindow).w
                 move.w  d0,d4
                 move.w  #$A640,d5

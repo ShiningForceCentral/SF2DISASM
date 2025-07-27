@@ -294,14 +294,14 @@ PositionBattleEntities:
                 jsr     j_GetMoveType
                 clr.w   d6
                 cmpi.b  #MOVETYPE_LOWER_FLYING,d1
-                bne.s   @loc_2
+                bne.s   @CheckHovering_Ally
                 addq.w  #1,d6
-@loc_2:
+@CheckHovering_Ally:
                 
                 cmpi.b  #MOVETYPE_LOWER_HOVERING,d1
-                bne.s   @loc_3
+                bne.s   @NotAerial_Ally
                 addq.w  #1,d6
-@loc_3:
+@NotAerial_Ally:
                 
                 swap    d6
                 movem.w (sp)+,d0-d1
@@ -357,14 +357,14 @@ PositionBattleEntities:
                 jsr     j_GetMoveType
                 clr.w   d6
                 cmpi.b  #MOVETYPE_LOWER_FLYING,d1
-                bne.s   @loc_7
+                bne.s   @CheckHovering_Enemy
                 addq.w  #1,d6
-@loc_7:
+@CheckHovering_Enemy:
                 
                 cmpi.b  #MOVETYPE_LOWER_HOVERING,d1
-                bne.s   @loc_8
+                bne.s   @NotAerial_Enemy
                 addq.w  #1,d6
-@loc_8:
+@NotAerial_Enemy:
                 
                 swap    d6
                 movem.w (sp)+,d0-d1
@@ -413,16 +413,16 @@ PositionBattleEntities:
                 lea     table_NeutralBattleEntities(pc), a0
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
-@loc_12:
+@CheckForNeutralEntity_Loop:
                 
                 cmpi.w  #-1,(a0)
-                beq.w   @Done
+                beq.w   @Done  ; battle does not contain neutral entity
                 cmp.w   (a0)+,d1
-                beq.s   @Continue
+                beq.s   @Continue ; battle found in list
 @loc_13:
                 
                 cmpi.w  #-1,(a0)+
-                beq.s   @loc_12
+                beq.s   @CheckForNeutralEntity_Loop
                 bra.s   @loc_13
 @Continue:
                 

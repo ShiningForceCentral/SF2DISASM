@@ -3,7 +3,7 @@
 ; 0x58330..0x58E18 : 
 cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 6
-                flashScreenWhite $5A
+                flashScreenWhite 90
                 setQuake 0
                 csWait 20
                 csWait 5
@@ -55,7 +55,7 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                  moveRight 3
                 endActions
                 setFacing 133,DOWN
-                nextSingleText $FF,255  ; "The beastman checks the boy.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "The beastman checks the boy.{W1}"
                 nextSingleText $0,133   ; "Good heavens!{N}He's badly injured!{W1}"
                 csWait 30
                 setFacing 133,RIGHT
@@ -111,7 +111,7 @@ cs_58330:       playSound SFX_BIG_DOOR_RUMBLE
                 csWait 2
                 setActscriptWait 140,eas_StopMoving
                 csWait 30
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 entityActions 137
                  moveLeft 9
                 endActions
@@ -133,7 +133,7 @@ cs_58512:       customActscriptWait 130
                  ac_entityObstructable OFF ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 textCursor 1435
                 nextSingleText $0,130   ; "Help!  Help!{N}I can't...get up!{W2}{N}You, please turn me over!{W1}"
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -165,13 +165,13 @@ cs_58512:       customActscriptWait 130
                 setQuake 2
                 csWait 30
                 setQuake 0
-                animEntityFX 130,6
+                animEntityFX 130,MOSAIC_OUT
                 customActscript 130
                  ac_orientUp            ;   
                  ac_setSprite MAPSPRITE_FAIRY ;   
                  ac_jump eas_Idle       ;   
                 ac_end
-                animEntityFX 130,7
+                animEntityFX 130,MOSAIC_IN
                 csWait 40
                 setFacing 130,DOWN
                 nextSingleText $0,130   ; "(Giggle)...sorry, I had to{N}test you.{W2}{N}I'm happy to meet you.{N}He must like you.{W2}{N}Oh no, I can't tell you who{N}HE is.{N}See you later!{W1}"
@@ -183,7 +183,7 @@ cs_58512:       customActscriptWait 130
                 setActscriptWait ALLY_BOWIE,eas_Init
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 csc_end
-cs_585FE:       playSound $FD
+cs_585FE:       playSound SOUND_COMMAND_FADE_OUT
                 customActscriptWait 129
                  ac_setSpeed 48,48      ;   
                  ac_jump eas_Idle       ;   
@@ -385,7 +385,7 @@ cs_58856:       textCursor 1487
                 setFacing 137,RIGHT
                 setFacing ALLY_LUKE,LEFT
                 csWait 30
-                nextSingleText $FF,255  ; "The mayor examines {NAME;10}{N}carefully.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "The mayor examines {NAME;10}{N}carefully.{W1}"
                 csWait 40
                 nextSingleText $0,137   ; "You're warm!  You're alive!{W1}"
                 setActscriptWait 137,eas_Jump
@@ -716,7 +716,7 @@ cs_58DD2:       textCursor 1536
                 nextText $0,140         ; "Actually, I don't remember....{W2}"
                 nextText $0,140         ; "I don't know the reason why{N}the devils are after me.{W2}"
                 nextSingleText $0,140   ; "I'm afraid I'll cause you a{N}lot of trouble.{W1}"
-                nextSingleText $FF,255  ; "{LEADER} decides to{N}take Oddler with him.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} decides to{N}take Oddler with him.{W1}"
                 csWait 30
                 followEntity ALLY_PETER,ALLY_BOWIE,2
                 followEntity 140,ALLY_PETER,2

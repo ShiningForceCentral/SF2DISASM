@@ -30,8 +30,8 @@ EndGame:
                 moveq   #2,d1
                 jsr     (ApplyImmediateVramDma).w
                 lea     (PLANE_A_MAP_LAYOUT).l,a0
-                move.l  #$21382139,$21E(a0)
-                move.l  #$21422143,$25E(a0)
+                move.l  #$21382139,$21E(a0)  ; 68th tile x, 69th y
+                move.l  #$21422143,$25E(a0)  ; 76th tile x, 77th y
                 lea     ($C000).l,a1
                 move.w  #$380,d0
                 moveq   #2,d1

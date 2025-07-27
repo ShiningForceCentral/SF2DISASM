@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\bubblebreath.asm :
-; 0x1E5D0..0x1E7B2 : 
+; 0x1E5D0..0x1E7B2 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -27,7 +27,7 @@ loc_1E5DC:
                 subi.w  #$200,d7
                 move.w  d7,4(a5)
                 movem.w (sp)+,d6-d7
-                lea     table_1E786(pc), a0
+                lea     graphic_Bubble(pc), a0
                 move.w  d6,d0
                 bsr.w   sub_19F5E
                 sndCom  SFX_SPAWN
@@ -168,57 +168,63 @@ loc_1E76A:
                 bset    #3,VDPSPRITE_OFFSET_TILE(a4)
 loc_1E770:
                 
-                addq.w  #8,a4
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 lea     $C(a5),a5
                 addq.w  #1,d6
                 dbf     d7,loc_1E5DC
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   sub_1B82A
                 rts
 
     ; End of function spellanimationUpdate_BubbleBreath
 
-table_1E786:    dc.b 0
-                dc.b $D4
+graphic_Bubble: vdpSpell 212, 248, SPELLTILE1, V1|H1|32
+                
+table_1E78E:    ; bubble 2
                 dc.b 0
-                dc.b $F8
-                dc.b 5
-                dc.b $20
-                dc.b 0
-                dc.b $20
-table_1E78E:    dc.b 0
                 dc.b $A
+                dc.b 0   ; dimensions 1x1
                 dc.b 0
                 dc.b 0
-                dc.b 0
-                dc.b 1
+                dc.b 1  ; spell tile # offset
+                
+                ; bubble 3
                 dc.b 0
                 dc.b $14
+                dc.b 0   ; dimensions 1x1
                 dc.b 0
                 dc.b 0
-                dc.b 0
-                dc.b 2
+                dc.b 2  ; spell tile # offset
+                
+                ; bubble 4
                 dc.b 0
                 dc.b $1E
+                dc.b 0   ; dimensions 1x1
                 dc.b 0
                 dc.b 0
-                dc.b 0
-                dc.b 3
+                dc.b 3  ; spell tile # offset
+                
+                ; bubble 5
                 dc.b 0
                 dc.b $28
-                dc.b 5
+                dc.b 5  ; dimensions 2x2
                 dc.b 0
                 dc.b 0
-                dc.b 4
+                dc.b 4  ; spell tile # offset
+                
+                ; bubble 6
                 dc.b 0
                 dc.b $32
-                dc.b $A
+                dc.b $A  ; dimensions 3x3
                 dc.b 0
                 dc.b 0
-                dc.b 8
+                dc.b 8  ; spell tile # offset
+                
+                ; bubble 7
                 dc.b 0
                 dc.b $3C
-                dc.b $F
+                dc.b $F  ; dimensions 4x4
                 dc.b 0
                 dc.b 0
-                dc.b $11
+                dc.b 17  ; spell tile # offset

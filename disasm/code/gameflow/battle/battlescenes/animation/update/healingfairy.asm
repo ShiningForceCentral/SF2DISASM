@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\healingfairy.asm :
-; 0x1C53E..0x1C7F6 : 
+; 0x1C53E..0x1C7F6 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -120,7 +120,7 @@ loc_1C652:
 loc_1C660:
                 
                 add.w   d0,VDPSPRITE_OFFSET_X(a4)
-                add.w   d0,$E(a4)
+                add.w   d0,NEXTVDPSPRITE_OFFSET_X(a4)
                 swap    d1
                 muls.w  d2,d1
                 asr.l   #BYTE_SHIFT_COUNT,d1
@@ -182,12 +182,12 @@ loc_1C6F2:
                 addq.w  #1,d7
                 move.w  d7,8(a5)
                 move.w  (a0),VDPSPRITE_OFFSET_X(a4)
-                move.w  (a0)+,$E(a4)
+                move.w  (a0)+,NEXTVDPSPRITE_OFFSET_X(a4)
                 moveq   #$20,d6 
                 jsr     (GenerateRandomNumber).w
                 add.w   (a0),d7
                 move.w  d7,(a4)
-                move.w  d7,8(a4)
+                move.w  d7,NEXTVDPSPRITE_OFFSET_Y(a4)
                 bchg    #3,VDPSPRITE_OFFSET_TILE(a4)
                 bchg    #3,$C(a4)
 loc_1C720:
@@ -207,6 +207,7 @@ loc_1C73E:
                 lea     $10(a4),a4
                 lea     $18(a5),a5
                 dbf     d1,loc_1C552
+				
                 moveq   #$18,d1
                 move.w  $A(a3),d2
                 add.w   d2,d2
@@ -250,20 +251,18 @@ loc_1C7A4:
 loc_1C7D8:
                 
                 addq.w  #1,d0
-                addq.w  #8,a4
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 lea     $C(a5),a5
                 dbf     d1,loc_1C75A
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   sub_1B82A
                 rts
 
     ; End of function spellanimationUpdate_HealingFairy
 
-table_1C7EE:    dc.b 0
-                dc.b $60
-                dc.b 0
-                dc.b $80
-                dc.b 1
-                dc.b $80
-                dc.b 0
-                dc.b $80
+table_1C7EE:    dc.w $60
+                dc.w $80
+				
+                dc.w $180
+                dc.w $80

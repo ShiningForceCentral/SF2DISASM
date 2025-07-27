@@ -16,8 +16,8 @@ byte_582EC:
                 chkFlg  716             ; Set after your raft-giving conversation with the mayor in Polca
                 beq.s   byte_582FE      
                 move.w  #$89,d0 
-                moveq   #3,d1
-                jsr     sub_4781A       
+                moveq   #DOWN,d1
+                jsr     ChangeEntityFacing       
 byte_582FE:
                 
                 chkFlg  718             ; Set after Oddler runs after you as you leave Polca, and tags along

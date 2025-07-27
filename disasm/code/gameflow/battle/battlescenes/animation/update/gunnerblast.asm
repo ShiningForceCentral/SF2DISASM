@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\gunnerblast.asm :
-; 0x1D9FC..0x1DCE8 : 
+; 0x1D9FC..0x1DCE8 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -185,20 +185,20 @@ loc_1DBBC:
                 bra.s   loc_1DBDE
 loc_1DBD6:
                 
-                move.w  #$FF81,d2
-                move.w  #$FF81,d3
+                move.w  #-127,d2
+                move.w  #-127,d3
 loc_1DBDE:
                 
                 moveq   #$26,d0 
-                moveq   #$C,d1
-                lea     table_1DC88(pc), a0
+                moveq   #$C,d1  ; graphic made of 12 elements
+                lea     graphic_GunnerBlast(pc), a0
                 bsr.w   sub_19FAA       
                 moveq   #4,d0
                 moveq   #$B,d1
 loc_1DBEE:
                 
                 add.w   d4,(a4,d0.w)
-                addq.w  #8,d0
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,d0
                 dbf     d1,loc_1DBEE
 loc_1DBF8:
                 
@@ -301,99 +301,18 @@ loc_1DC80:
 
     ; End of function LoadPalette1FromFFB41E
 
-table_1DC88:    dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $28
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $20
-                dc.b 5
-                dc.b $38
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $40
-                dc.b 5
-                dc.b $48
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $58
-                dc.b 7
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 5
-                dc.b $60
-                dc.b 7
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b $40
-                dc.b 5
-                dc.b $68
-                dc.b 7
-                dc.b $20
-                dc.b 0
-                dc.b $30
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $58
-                dc.b 7
-                dc.b $21
-                dc.b 0
-                dc.b $30
-                dc.b 0
-                dc.b $20
-                dc.b 5
-                dc.b $60
-                dc.b 7
-                dc.b $21
-                dc.b 0
-                dc.b $30
-                dc.b 0
-                dc.b $40
-                dc.b 5
-                dc.b $68
-                dc.b 7
-                dc.b $21
-                dc.b 0
-                dc.b $40
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $28
-                dc.b $F
-                dc.b $21
-                dc.b 0
-                dc.b $40
-                dc.b 0
-                dc.b $20
-                dc.b 5
-                dc.b $38
-                dc.b $F
-                dc.b $21
-                dc.b 0
-                dc.b $40
-                dc.b 0
-                dc.b $40
-                dc.b 5
-                dc.b $48
-                dc.b $F
-                dc.b $21
+graphic_GunnerBlast:
+                vdpSpell 0, 0, SPELLTILE9, V4|H4|32
+                vdpSpell 0, 32, SPELLTILE25, V4|H4|32
+                vdpSpell 0, 64, SPELLTILE41, V4|H4|32
+                vdpSpell 32, 0, SPELLTILE57, V4|H2|32
+                vdpSpell 32, 32, SPELLTILE65, V4|H2|32
+                vdpSpell 32, 64, SPELLTILE73, V4|H2|32
+                
+                ; mirror to complete image
+                vdpSpell 48, 0, SPELLTILE57, V4|H2|33
+                vdpSpell 48, 32, SPELLTILE65, V4|H2|33
+                vdpSpell 48, 64, SPELLTILE73, V4|H2|33
+                vdpSpell 64, 0, SPELLTILE9, V4|H4|33
+                vdpSpell 64, 32, SPELLTILE25, V4|H4|33
+                vdpSpell 64, 64, SPELLTILE41, V4|H4|33

@@ -182,7 +182,7 @@ PopulatePrioritiesListForSpell_Boost2:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
-                move.w  #SPELL_DISPEL|SPELL_LV2,d1
+                move.w  #SPELL_DISPEL|SPELL_LV2,d1  ; should move SPELL_BOOST|SPELL_LV2 instead
                 bsr.w   GetTargetsReachableBySpell
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  (a0),d0
@@ -213,7 +213,7 @@ loc_D52E:
                 
                 clr.w   d0
                 move.b  (a1,d4.w),d0
-                move.w  #SPELL_DISPEL|SPELL_LV2,d1
+                move.w  #SPELL_DISPEL|SPELL_LV2,d1  ; should move SPELL_BOOST|SPELL_LV2 instead
                 bsr.w   PopulateTargetableGrid
                 bsr.w   CalculateTargetPriorityForSpell_Boost
                 tst.w   d1

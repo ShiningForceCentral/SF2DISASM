@@ -33,5 +33,4 @@ byte_5406C:     msDesc 3, 2, 4, 0       ; "{NAME} investigated{N}the book shelve
                 msDesc 15, 10, 5, 8     ; "{NAME} looked into{N}the well.{W2}{CLEAR}"
                                         ; "A deep, and dirty well.{W1}"
                 msDescEnd
-                dc.b $4E 
-                dc.b $75 
+                rts 

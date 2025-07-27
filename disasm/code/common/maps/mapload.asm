@@ -1353,7 +1353,7 @@ LoadMap:
                 bra.w   @loc_14
 @loc_13:
                 
-                lea     $16(a4),a4
+                lea     $16(a4),a4  ; shift to next area data
                 bra.w   @loc_8
 @loc_14:
                 

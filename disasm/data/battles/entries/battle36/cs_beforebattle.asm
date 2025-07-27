@@ -56,4 +56,4 @@ ce_4D964:       mainEntity 19,1,DOWN
                 entity 13,17,UP,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 14,19,LEFT,MAPSPRITE_PRISM_FLOWER,eas_Init
                 entity 15,20,UP,MAPSPRITE_PRISM_FLOWER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

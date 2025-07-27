@@ -59,4 +59,4 @@ ce_4CCC0:       mainEntity 15,44,UP
                 entity 14,24,DOWN,MAPSPRITE_DEVIL_SOLDIER,eas_Init
                 entity 16,24,DOWN,MAPSPRITE_CERBERUS,eas_Init
                 entity 18,23,DOWN,MAPSPRITE_NECROMANCER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\shotfire.asm :
-; 0x1D786..0x1D9FC : 
+; 0x1D786..0x1D9FC : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -247,22 +247,9 @@ loc_1D9C8:
 
     ; End of function sub_1D9B2
 
-table_1D9CE:    dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $60
-                dc.b 5
-                dc.b $20
-                dc.b $FF
-                dc.b $F8
-                dc.b $FF
-                dc.b $F8
-                dc.b 5
-                dc.b $20
-                dc.b $F
-                dc.b $20
+table_1D9CE:    vdpSpell 0, 0, SPELLTILE65, V2|H2|32  ; graphic Burst_Shot
+                vdpSpell -8, -8, SPELLTILE1, V4|H4|32 ; graphic Burst_Explosion
+                
 table_1D9DE:    dc.b 0
                 dc.b 3
                 dc.b 5

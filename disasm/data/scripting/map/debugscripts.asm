@@ -10,7 +10,7 @@ dms_01:         faceEntity 134,ALLY_BOWIE
                 csc_end
                 setCameraEntity ALLY_BOWIE
                 setActscript ALLY_BOWIE,eas_ControlledCharacter
-cs_4934A:       entityFlashWhite ALLY_BOWIE,$B4
+cs_4934A:       entityFlashWhite ALLY_BOWIE,180
                 jump cs_4934A
                 csc_end
                 textCursor 322
@@ -21,7 +21,7 @@ cs_4934A:       entityFlashWhite ALLY_BOWIE,$B4
                 loadMapFadeIn MAP_MITULA_SHRINE_EXTERIOR,13,13
                 flashScreenWhite $3C
                 csc_end
-                flashScreenWhite $3C
+                flashScreenWhite 60
                 csc_end
                 stopEntity ALLY_KAZIN
                 csc15 ALLY_SARAH,$1,eas_493A2
@@ -88,7 +88,7 @@ sub_493EC:
                 hide ALLY_BOWIE
                 setPos ALLY_KIWI,13,23,DOWN
                 entityFlashWhite ALLY_KIWI,$28
-                animEntityFX ALLY_KIWI,7
+                animEntityFX ALLY_KIWI,MOSAIC_IN
                 playSound MUSIC_PROMOTED_ATTACK_LOOP
                 csc_end
 DebuggingScript:incbin "data/scripting/map/debuggingscript.bin" ; Unused cutscene with parsing mistake here and below, letting it unformatted.

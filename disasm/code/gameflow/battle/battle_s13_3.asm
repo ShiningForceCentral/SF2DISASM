@@ -150,7 +150,7 @@ GetCombatantStartingPosition:
 ; In: d1.w, d2.w = x, y
 
 
-RegionTriggeredSpawn:
+CheckForTrappedChest:
                 
                 movem.l d1-a6,-(sp)
                 move.w  d2,d7
@@ -161,41 +161,41 @@ RegionTriggeredSpawn:
                 subi.w  #1,d5
                 move.w  #COMBATANT_ENEMIES_START,d0
                 tst.w   d1
-                bne.s   loc_1B1724
+                bne.s   @CheckTrappedEnemy_Loop
                 move.w  #-1,d0
-                bra.w   loc_1B177A
-loc_1B1724:
+                bra.w   @Done
+@CheckTrappedEnemy_Loop:
                 
                 move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_X(a0),d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_Y(a0),d2
                 cmp.b   d1,d6
-                bne.s   loc_1B176A
+                bne.s   @NextEnemy
                 cmp.b   d2,d7
-                bne.s   loc_1B176A
+                bne.s   @NextEnemy
                 jsr     j_GetActivationBitfield
-                cmpi.w  #$200,d1        ; ; $200 - region-triggered spawn
-                bne.s   loc_1B176A
+                cmpi.w  #AIBITFIELD_HIDDEN,d1 ; $200 - region-triggered spawn
+                bne.s   @NextEnemy
                 jsr     j_GetAiRegion
                 cmpi.w  #15,d1
-                bne.s   loc_1B176A
+                bne.s   @NextEnemy
                 cmpi.w  #15,d2
-                bne.s   loc_1B176A
+                bne.s   @NextEnemy
                 jsr     j_GetMaxHp
                 tst.w   d1
-                bne.s   loc_1B176A
+                bne.s   @NextEnemy
                 jsr     j_GetActivationBitfield
                 bsr.w   ResetSpawningEnemyStats
-                bra.w   loc_1B177A
-loc_1B176A:
+                bra.w   @Done
+@NextEnemy:
                 
                 addi.w  #1,d0
                 adda.w  #BATTLESPRITESET_ENTITY_ENTRY_SIZE,a0
-                dbf     d5,loc_1B1724
+                dbf     d5,@CheckTrappedEnemy_Loop
                 move.w  #-1,d0
-loc_1B177A:
+@Done:
                 
                 movem.l (sp)+,d1-a6
                 rts
 
-    ; End of function RegionTriggeredSpawn
+    ; End of function CheckForTrappedChest
 

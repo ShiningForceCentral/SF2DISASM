@@ -44,7 +44,7 @@ cs_5E320:       mapLoad MAP_OVERWORLD_NAZCA_REGION,8,14
                 fadeInB
                 csc_end
 ce_5E33E:       mainEntity 12,19,DOWN
-                dc.w $FFFF
+                cscEntitiesEnd
 cs_5E346:       textCursor 3371
                 setActscriptWait ALLY_BOWIE,eas_Init
                 entityActionsWait ALLY_BOWIE

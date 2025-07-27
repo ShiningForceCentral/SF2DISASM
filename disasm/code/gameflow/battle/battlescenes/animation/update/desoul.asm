@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\desoul.asm :
-; 0x1C248..0x1C53E : 
+; 0x1C248..0x1C53E : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -45,7 +45,7 @@ loc_1C288:
                 bset    #1,6(a5)
 loc_1C2B4:
                 
-                lea     table_1C51E(pc), a0
+                lea     graphic_ReaperMirror(pc), a0
                 moveq   #2,d4
                 bsr.w   sub_1C4D8
 loc_1C2BE:
@@ -60,7 +60,7 @@ loc_1C2C0:
                 bclr    #1,6(a5)
 loc_1C2D2:
                 
-                lea     table_1C4FE(pc), a0
+                lea     graphic_Reaper(pc), a0
                 moveq   #1,d4
                 bsr.w   sub_1C4D8
 loc_1C2DC:
@@ -94,7 +94,7 @@ loc_1C304:
                 jsr     (sub_1812).w    
                 add.w   (a3),d2
                 move.w  d2,VDPSPRITE_OFFSET_X(a4)
-                move.w  d2,$E(a4)
+                move.w  d2,NEXTVDPSPRITE_OFFSET_X(a4)
                 addi.w  #$20,d2 
                 move.w  d2,$16(a4)
                 move.w  d2,$1E(a4)
@@ -109,7 +109,7 @@ loc_1C348:
                 move.w  d2,(a4)
                 move.w  d2,$10(a4)
                 addi.w  #$20,d2 
-                move.w  d2,8(a4)
+                move.w  d2,NEXTVDPSPRITE_OFFSET_Y(a4)
                 move.w  d2,$18(a4)
                 bra.w   loc_1C43A
 loc_1C362:
@@ -119,7 +119,7 @@ loc_1C362:
                 move.w  (a3),d0
                 subi.w  #$20,d0 
                 move.w  d0,VDPSPRITE_OFFSET_X(a4)
-                move.w  d0,$E(a4)
+                move.w  d0,NEXTVDPSPRITE_OFFSET_X(a4)
                 addi.w  #$20,d0 
                 move.w  d0,$16(a4)
                 move.w  d0,$1E(a4)
@@ -128,7 +128,7 @@ loc_1C362:
                 move.w  d0,(a4)
                 move.w  d0,$10(a4)
                 addi.w  #$20,d0 
-                move.w  d0,8(a4)
+                move.w  d0,NEXTVDPSPRITE_OFFSET_Y(a4)
                 move.w  d0,$18(a4)
                 addq.w  #1,4(a3)
                 btst    #1,6(a5)
@@ -148,7 +148,7 @@ loc_1C3C4:
                 bne.w   loc_1C42A
                 subq.b  #1,5(a5)
                 bne.w   loc_1C43A
-                lea     table_1C4FE(pc), a0
+                lea     graphic_Reaper(pc), a0
                 btst    #1,6(a5)
                 beq.s   loc_1C3E6
                 lea     $20(a0),a0
@@ -156,15 +156,15 @@ loc_1C3E6:
                 
                 moveq   #$26,d0 
                 moveq   #4,d1
-                move.w  6(a4),d2
+                move.w  VDPSPRITE_OFFSET_X(a4),d2
                 subi.w  #$80,d2 
                 move.w  (a4),d3
                 subi.w  #$70,d3 
                 bsr.w   sub_19FAA       
-                addi.w  #$30,VDPSPRITE_OFFSET_TILE(a4) 
-                addi.w  #$30,$C(a4) 
-                addi.w  #$30,$14(a4) 
-                addi.w  #$30,$1C(a4) 
+                addi.w  #GRAPHIC_DESOUL_REAPER1,VDPSPELL_OFFSET_GRAPHIC(a4) 
+                addi.w  #GRAPHIC_DESOUL_REAPER1,(VDPSPELL_OFFSET_GRAPHIC+VDP_SPRITE_ENTRY_SIZE)(a4) 
+                addi.w  #GRAPHIC_DESOUL_REAPER1,(VDPSPELL_OFFSET_GRAPHIC+VDP_SPRITE_ENTRY_SIZE*2)(a4) 
+                addi.w  #GRAPHIC_DESOUL_REAPER1,(VDPSPELL_OFFSET_GRAPHIC+VDP_SPRITE_ENTRY_SIZE*3)(a4) 
                 addq.w  #1,4(a3)
                 move.b  #$20,5(a5) 
                 sndCom  SFX_DESOUL
@@ -267,66 +267,13 @@ sub_1C4D8:
 
     ; End of function sub_1C4D8
 
-table_1C4FE:    dc.w 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $20
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $20
-                dc.b 5
-                dc.b $30
-                dc.b $D
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $38
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 5
-                dc.b $48
-                dc.b $D
-                dc.b $20
-table_1C51E:    dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $38
-                dc.b $F
-                dc.b $21
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $20
-                dc.b 5
-                dc.b $48
-                dc.b $D
-                dc.b $21
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $20
-                dc.b $F
-                dc.b $21
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 5
-                dc.b $30
-                dc.b $D
-                dc.b $21
+graphic_Reaper: vdpSpell 0, 0, SPELLTILE1, V4|H4|32
+                vdpSpell 0, 32, SPELLTILE17, V2|H4|32
+                vdpSpell 32, 0, SPELLTILE25, V4|H4|32
+                vdpSpell 32, 32, SPELLTILE41, V2|H4|32
+                
+graphic_ReaperMirror:
+                vdpSpell 0, 0, SPELLTILE25, V4|H4|33
+                vdpSpell 0, 32, SPELLTILE41, V2|H4|33
+                vdpSpell 32, 0, SPELLTILE1, V4|H4|33
+                vdpSpell 32, 32, SPELLTILE17, V2|H4|33

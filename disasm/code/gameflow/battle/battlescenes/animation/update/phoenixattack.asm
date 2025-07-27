@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\phoenixattack.asm :
-; 0x1EA0C..0x1EBBA : 
+; 0x1EA0C..0x1EBBA : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -82,7 +82,7 @@ loc_1EAD4:
                 moveq   #2,d1
                 clr.w   d2
                 clr.w   d3
-                lea     table_1EBAA(pc), a0
+                lea     graphic_BlastCyclone(pc), a0
                 bsr.w   sub_19FAA       
                 sndCom  SFX_DESOUL_HOVERING
                 addq.w  #1,2(a5)
@@ -139,14 +139,8 @@ loc_1EB7E:
 
     ; End of function spellanimationUpdate_PhoenixAttack
 
-table_1EB88:    dc.b 1
-                dc.b $1C
-                dc.b 0
-                dc.b $D4
-                dc.b 5
-                dc.b $20
-                dc.b $F
-                dc.b $20
+table_1EB88:    vdpSpell 284, 212, SPELLTILE1, V4|H4|32
+                
 table_1EB90:    dc.b 0
                 dc.b 8
                 dc.b $F
@@ -165,27 +159,9 @@ table_1EB90:    dc.b 0
                 dc.b 0
                 dc.b 0
                 dc.b $30
-table_1EBA2:    dc.b 0
-                dc.b $FD
-                dc.b 0
-                dc.b $DD
-                dc.b 5
-                dc.b $DF
-                dc.b $F
-                dc.b $23
-table_1EBAA:    dc.b 0
-                dc.b $6E
-                dc.b 0
-                dc.b $4E
-                dc.b 5
-                dc.b $4B
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b $6E
-                dc.b 0
-                dc.b $6E
-                dc.b 5
-                dc.b $5B
-                dc.b $F
-                dc.b $20
+                
+table_1EBA2:    vdpSpell 253, 221, TILE1503, V4|H4|35
+                
+graphic_BlastCyclone:
+                vdpSpell 110, 78, SPELLTILE44, V4|H4|32
+                vdpSpell 110, 110, SPELLTILE60, V4|H4|32

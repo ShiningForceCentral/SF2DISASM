@@ -10,12 +10,12 @@ ms_map20_flag501_ZoneEvents:
 
 Map20_1F5_ZoneEvent0:
                 
-                moveq   #1,d0
+                moveq   #1,d0  ; revive Sarah
                 jsr     j_GetMaxHp
                 jsr     j_SetCurrentHp
                 jsr     j_GetMaxMp
                 jsr     j_SetCurrentMp
-                moveq   #2,d0
+                moveq   #2,d0  ; revive Chester
                 jsr     j_GetMaxHp
                 jsr     j_SetCurrentHp
                 jsr     j_GetMaxMp

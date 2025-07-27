@@ -39,7 +39,7 @@ bbcs_26:        textCursor 2596
                  moveUp 3
                 endActions
                 csWait 5
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 waitIdle 133
                 csWait 5
                 setActscript 133,eas_2xRightLeft
@@ -67,7 +67,7 @@ bbcs_26:        textCursor 2596
                 setActscriptWait 133,eas_Die
                 setCamDest 13,13
                 setPos 128,18,19,UP
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 nextSingleText $0,128   ; "Pacalon soldiers have no{N}honor.  They attack while{N}my back is turned!{W1}"
                 setActscriptWait 134,eas_Jump
                 setFacing ALLY_HIGINS,DOWN
@@ -122,16 +122,16 @@ bbcs_26:        textCursor 2596
                 nextText $C0,ALLY_HIGINS ; "Now, tell me the reason why{N}"
                 nextSingleText $C0,ALLY_HIGINS ; "you're keeping me alive.{W1}"
                 nextSingleText $0,128   ; "Ha, ha!  You're smart!{W1}"
-                animEntityFX 132,4
-                entityFlashWhite 128,$1E
+                animEntityFX 132,SLIDE_OUT
+                entityFlashWhite 128,30
                 setCamDest 13,11
                 setPos 132,18,12,DOWN
-                animEntityFX 132,5
+                animEntityFX 132,SLIDE_IN
                 nextSingleText $C0,ALLY_HIGINS ; "What did you do?{W1}"
                 entityActionsWait 132
                  moveDown 1
                 endActions
-                animEntityFX 132,4
+                animEntityFX 132,SLIDE_OUT
                 nextSingleText $C0,ALLY_HIGINS ; "I...can't...!{N}My body won't...{W1}"
                 shiver ALLY_HIGINS
                 stopEntity ALLY_HIGINS
@@ -182,7 +182,7 @@ bbcs_26:        textCursor 2596
                 nextSingleText $0,128   ; "Devil soldiers!  Stop that{N}force from Granseal!{W1}"
                 setFacing 128,DOWN
                 setActscript 129,eas_Jump
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 csc_end
 ce_4BC5A:       mainEntity 7,25,RIGHT
                 entity 6,26,RIGHT,ALLY_PETER,eas_Init
@@ -194,4 +194,4 @@ ce_4BC5A:       mainEntity 7,25,RIGHT
                 entity 63,63,DOWN,MAPSPRITE_EVIL_CLOUD,eas_Init
                 entity 17,15,UP,MAPSPRITE_PACALON_SOLDIER,eas_Init
                 entity 19,15,UP,MAPSPRITE_PACALON_SOLDIER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

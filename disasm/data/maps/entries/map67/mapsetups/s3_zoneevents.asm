@@ -35,7 +35,7 @@ Map67_ZoneEvent0:
                 bne.s   return_4FB56
                 chkFlg  13              ; Elric joined
                 beq.s   return_4FB56
-                move.w  #$D,d0
+                move.w  #ALLY_ELRIC,d0
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.s   return_4FB56

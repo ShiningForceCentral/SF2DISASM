@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\attackspell.asm :
-; 0x1E958..0x1EA0C : 
+; 0x1E958..0x1EA0C : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

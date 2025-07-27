@@ -11,5 +11,5 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 1
                     mainLayerType    255
-                    areaDefaultMusic 40
+                    areaDefaultMusic MUSIC_MITULA_SHRINE
                 endWord

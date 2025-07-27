@@ -46,9 +46,9 @@ Map72_ZoneEvent3:
                 jsr     j_GetItemInventoryLocation
                 cmpi.w  #-1,d0
                 beq.s   loc_4FEE6
-                moveq   #$72,d0 
+                moveq   #ITEM_CANNON,d0 
                 jsr     RemoveItemFromInventory
-                moveq   #$74,d0 
+                moveq   #ITEM_DYNAMITE,d0 
                 jsr     RemoveItemFromInventory
                 script  cs_4FFDA
                 setFlg  750             ; Set after Rohde clears the blockage at the North Cliff cave

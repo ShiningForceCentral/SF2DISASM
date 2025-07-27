@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\bolt.asm :
-; 0x1AA90..0x1AB9E : 
+; 0x1AA90..0x1AB9E : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -16,16 +16,16 @@ spellanimationSetup_Bolt:
                 moveq   #SPELLGRAPHICS_BOLT,d0
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
-                lea     loc_1AB4A(pc), a1
+                lea     (table_1AB4E-4)(pc), a1
                 andi.w  #7,d1
                 lsl.w   #2,d1
-                adda.w  d1,a1
+                adda.w  d1,a1 ; offset 4x variation #
                 move.l  (a1),((byte_FFB532-$1000000)).w
                 moveq   #$10,d0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
-                beq.s   loc_1AACC
+                beq.s   @Mirrored
                 addi.w  #$80,d0 
-loc_1AACC:
+@Mirrored:
                 
                 move.w  d0,((dword_FFB536-$1000000)).w
                 move.w  (a1),d1
@@ -39,12 +39,13 @@ loc_1AAD4:
                 addq.w  #1,d7
                 move.w  d7,4(a0)
                 dbf     d1,loc_1AAD4
+                
                 move.w  2(a1),d1
                 beq.s   loc_1AB2C
                 subq.w  #1,d1
                 move.w  (a1),d0
                 mulu.w  #5,d0
-                addi.w  #$26,d0 
+                addi.w  #$26,d0 ; add offset to sprite_38
                 lea     table_1AB5E(pc), a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1AB0C
@@ -67,89 +68,29 @@ loc_1AB2C:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  1(a1),((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-loc_1AB4A:
-                
                 bra.w   sub_1A028
 
     ; End of function spellanimationSetup_Bolt
 
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 2
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 3
-                dc.b 0
-                dc.b 2
-                dc.b 0
-                dc.b 4
-                dc.b 0
-                dc.b 4
-table_1AB5E:    dc.b 0
-                dc.b $C8
-                dc.b 0
-                dc.b $C0
-                dc.b 5
-                dc.b $B3
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b $98
-                dc.b 0
-                dc.b $D8
-                dc.b 5
-                dc.b $C3
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b $F8
-                dc.b 0
-                dc.b $C8
-                dc.b 5
-                dc.b $B3
-                dc.b $F
-                dc.b $20
-                dc.b 1
-                dc.b $30
-                dc.b 0
-                dc.b $B8
-                dc.b 5
-                dc.b $C3
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b $F8
-                dc.b 0
-                dc.b $C8
-                dc.b 5
-                dc.b $B3
-                dc.b $F
-                dc.b $20
-                dc.b 1
-                dc.b $30
-                dc.b 0
-                dc.b $B8
-                dc.b 5
-                dc.b $C3
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b $C8
-                dc.b 0
-                dc.b $C0
-                dc.b 5
-                dc.b $B3
-                dc.b $F
-                dc.b $20
-                dc.b 0
-                dc.b $98
-                dc.b 0
-                dc.b $D8
-                dc.b 5
-                dc.b $C3
-                dc.b $F
-                dc.b $20
+table_1AB4E:    ; Variation 1
+                dc.l $10000
+                
+                ; Variation 2
+                dc.l $20001
+                
+                ; Variation 3
+                dc.l $30002
+                
+                ; Variation 4
+                dc.l $40004
+                
+table_1AB5E:    vdpSpell 200, 192, SPELLTILE148, V4|H4|32
+                vdpSpell 152, 216, SPELLTILE164, V4|H4|32
+                vdpSpell 248, 200, SPELLTILE148, V4|H4|32
+                vdpSpell 304, 184, SPELLTILE164, V4|H4|32
+                
+                ;mirror
+                vdpSpell 248, 200, SPELLTILE148, V4|H4|32
+                vdpSpell 304, 184, SPELLTILE164, V4|H4|32
+                vdpSpell 200, 192, SPELLTILE148, V4|H4|32
+                vdpSpell 152, 216, SPELLTILE164, V4|H4|32

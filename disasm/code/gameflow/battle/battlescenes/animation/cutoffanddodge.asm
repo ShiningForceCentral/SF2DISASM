@@ -1,20 +1,26 @@
 
-; ASM FILE code\gameflow\battle\battlescenes\animation\cutoff.asm :
-; 0x1B4F6..0x1B618 : 
+; ASM FILE code\gameflow\battle\battlescenes\animation\execution.asm :
+; 0x1B4F6..0x1B618 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
 
-spellanimationSetup_CutOff:
+spellanimationSetup_CutOffAndDodge:
                 
                 module
                 andi.w  #7,d1
                 subq.w  #1,d1
-                beq.w   loc_1B508
+                beq.w   SetupCutoff
                 subq.w  #1,d1
-                beq.w   loc_1B53E
+                beq.w   SetupDodge
                 rts
-loc_1B508:
+
+    ; End of function spellanimationSetup_CutOffandDodge
+
+; =============== S U B R O U T I N E =======================================
+
+
+SetupCutoff:
                 
                 bclr    #3,((byte_FFB56E-$1000000)).w
                 move.w  #CUTOFF_FLASH_COLOR,d0
@@ -30,7 +36,8 @@ loc_1B52A:
                 clr.b   ((byte_FFB583-$1000000)).w
                 rts
 
-    ; End of function spellanimationSetup_CutOff
+    ; End of function SetupCutOff
+
 
 table_CutOffBattlespriteModification:
                 dc.b 1
@@ -38,14 +45,15 @@ table_CutOffBattlespriteModification:
                 dc.b 104
                 dc.b 24
 
-; START OF FUNCTION CHUNK FOR spellanimationSetup_CutOff
 
-loc_1B53E:
+; =============== S U B R O U T I N E =======================================
+
+
+SetupDodge:
                 
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   @NotMirrored
                 cmpi.w  #ENEMYBATTLESPRITE_ZEON,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
-                                                        ; HARDCODED Zeon enemy battle sprite
                 bne.s   @Continue
                 rts
 @Continue:
@@ -81,7 +89,7 @@ loc_1B570:
 @NotMirroredGraphics:
                 
                 move.w  2(a0),6(a5)
-                moveq   #$26,d0 
+                moveq   #$26,d0  ; offset to sprite_38
                 bsr.w   sub_19F5E
                 jsr     (sub_1942).w    
                 sndCom  SFX_PSHHH
@@ -123,15 +131,10 @@ loc_1B604:
                 
                 bra.w   sub_1A00A
 
-; END OF FUNCTION CHUNK FOR spellanimationSetup_CutOff
+    ; End of function SetupDodge
 
                 modend
                 
-table_1B608:    dc.w $138
-                dc.w $110
-                dc.w $520
-                dc.w $520
-                dc.w $C0
-                dc.w $100
-                dc.w $520
-                dc.w $520
+table_1B608:    vdpSpell 312, 272, SPELLTILE1, V2|H2|32
+                
+                vdpSpell 192, 256, SPELLTILE1, V2|H2|32

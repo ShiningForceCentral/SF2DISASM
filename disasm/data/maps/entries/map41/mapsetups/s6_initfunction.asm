@@ -17,5 +17,5 @@ return_5F4AC:
 
     ; End of function ms_map41_InitFunction
 
-cs_5F4AE:       setBlocks 13,0,3,5,5,4
+cs_5F4AE:       setBlocks 13,0,3,5,5,4  ; replace Devil's Head with mouth-open version
                 csc_end

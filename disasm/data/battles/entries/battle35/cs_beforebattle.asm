@@ -30,10 +30,10 @@ cs_4D728:       fadeInB
                 nextSingleText $C0,FOLLOWER_B ; "We have to kill him now!{W1}"
                 csWait 40
                 nextSingleText $0,128   ; "I'm very sorry, but I have{N}to go.{W1}"
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 setCamDest 22,20
                 setPos 128,28,24,DOWN
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 csWait 40
                 setFacing 129,DOWN
                 setFacing 130,DOWN
@@ -59,7 +59,7 @@ cs_4D728:       fadeInB
                 setActscript 134,eas_Jump
                 setActscript 135,eas_Jump
                 setActscript 136,eas_Jump
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 csWait 50
                 setCamDest 37,5
                 entityActionsWait ALLY_PETER
@@ -84,4 +84,4 @@ ce_4D832:       mainEntity 43,9,LEFT
                 entity 24,25,UP,MAPSPRITE_PURPLE_WORM,eas_Init
                 entity 24,26,UP,MAPSPRITE_GRIFFIN,eas_Init
                 entity 24,27,UP,MAPSPRITE_MIST_DEMON,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

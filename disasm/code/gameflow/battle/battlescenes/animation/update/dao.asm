@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\dao.asm :
-; 0x1DCE8..0x1DE24 : 
+; 0x1DCE8..0x1DE24 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -112,30 +112,15 @@ loc_1DDE8:
 
     ; End of function spellanimationUpdate_Dao
 
-table_1DE06:    dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $21
-                dc.b 6
-                dc.b $20
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b $27
-                dc.b $B
-                dc.b $20
+table_1DE06:    ; small rock
+                vdpSpell 0, 0, VDPTILE_SPELLTILE1, V1|H1|32
+                
+                ; medium rock
+                vdpSpell 0, 0, VDPTILE_SPELLTILE2, V3|H2|32
+                
+                ; large rock
+                vdpSpell 0, 0, VDPTILE_SPELLTILE8, V4|H3|32
+                
 table_1DE1E:    dc.b 2
                 dc.b $48
                 dc.b 0

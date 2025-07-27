@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\cannonfire.asm :
-; 0x1AEB0..0x1AF0A : 
+; 0x1AEB0..0x1AF0A : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -13,7 +13,7 @@ spellanimationSetup_CannonFire:
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d0
                 lea     table_1AEFA(pc), a1
-                btst    #7,d0
+                btst    #SPELLANIMATION_BIT_MIRRORED,d0
                 beq.s   loc_1AECA
                 addq.w  #8,a1
 loc_1AECA:
@@ -32,19 +32,9 @@ loc_1AECA:
 
     ; End of function spellanimationSetup_CannonFire
 
-table_1AEFA:    dc.b $F3
-                dc.b 0
-                dc.b $FF
-                dc.b $C0
-                dc.b 1
-                dc.b $80
-                dc.b 0
-                dc.b $E8
-                dc.b $D
-                dc.b 0
-                dc.b 0
-                dc.b $40
-                dc.b 0
-                dc.b $70
-                dc.b 0
-                dc.b $F0
+table_1AEFA:    dc.l $F300FFC0
+                dc.l $18000E8
+                
+                ; mirror
+                dc.l $D000040
+                dc.l $07000F0

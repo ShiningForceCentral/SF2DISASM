@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\prismlaser.asm :
-; 0x1B406..0x1B488 : 
+; 0x1B406..0x1B488 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -32,8 +32,9 @@ loc_1B42E:
                 addq.w  #1,d7
                 move.w  d7,2(a0)
                 dbf     d1,loc_1B42E
-                lea     table_1B480(pc), a0
-                moveq   #$26,d0 
+                
+                lea     graphic_LaserSphere(pc), a0
+                moveq   #$26,d0   ; offset to sprite_38
                 bsr.w   sub_19F5E
                 lea     (byte_FFAFC6).l,a1
                 moveq   #$F,d0
@@ -41,6 +42,7 @@ loc_1B456:
                 
                 move.b  #2,(a1)+
                 dbf     d0,loc_1B456
+                
                 move.w  #-1,((byte_FFB404-$1000000)).w
                 move.b  #SPELLANIMATION_PRISM_LASER,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
@@ -50,11 +52,5 @@ loc_1B456:
 
     ; End of function spellanimationSetup_PrismLaser
 
-table_1B480:    dc.b 0
-                dc.b $B8
-                dc.b 0
-                dc.b $D4
-                dc.b 5
-                dc.b $23
-                dc.b $F
-                dc.b $20
+graphic_LaserSphere:
+                vdpSpell 184, 212, SPELLTILE4, V4|H4|32

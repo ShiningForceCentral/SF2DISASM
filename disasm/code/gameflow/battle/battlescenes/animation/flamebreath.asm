@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\flamebreath.asm :
-; 0x1AD3E..0x1ADA4 : 
+; 0x1AD3E..0x1ADA4 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -13,8 +13,9 @@ spellanimationSetup_FlameBreath:
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a1
-                bclr    #7,d1
+                bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   loc_1AD62
+                
                 move.w  #$40,(a1) 
                 move.w  #$80,2(a1) 
                 bra.s   loc_1AD6A

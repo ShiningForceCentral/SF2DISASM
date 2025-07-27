@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\update\arrowsandspears.asm :
-; 0x1D4E6..0x1D5C6 : 
+; 0x1D4E6..0x1D5C6 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

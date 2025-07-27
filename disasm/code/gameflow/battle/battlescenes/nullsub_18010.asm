@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\nullsub_18010.asm :
-; 0x18010..0x18012 : Battlescene engine
+; 0x18010..0x18012 : Empty battlescene engine function
 
 ; =============== S U B R O U T I N E =======================================
 

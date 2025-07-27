@@ -67,7 +67,7 @@ loc_10616:
                 btst    #INPUT_BIT_LEFT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10630
                 moveq   #1,d1
-                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_2-$1000000)).w
                 beq.s   loc_10630
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -76,7 +76,7 @@ loc_10630:
                 btst    #INPUT_BIT_RIGHT,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_1064A
                 moveq   #2,d1
-                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_3-$1000000)).w
                 beq.s   loc_1064A
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -92,7 +92,7 @@ loc_1065C:
                 btst    #INPUT_BIT_DOWN,((CURRENT_PLAYER_INPUT-$1000000)).w
                 beq.s   loc_10676
                 moveq   #3,d1
-                cmpi.w  #ITEM_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
+                cmpi.w  #ICON_NOTHING,((DISPLAYED_ICON_4-$1000000)).w
                 beq.s   loc_10676
                 sndCom  SFX_MENU_SELECTION
                 bra.w   loc_106B4
@@ -208,7 +208,7 @@ BuildItemMenu:
                 andi.w  #3,d0
                 lsl.w   #1,d0
                 move.w  (a0,d0.w),d1
-                cmpi.w  #ITEM_UNARMED,d1
+                cmpi.w  #ICON_UNARMED,d1
                 bne.s   @WriteItemName
                 move.w  #ITEM_NOTHING,((TEMP_ITEM_OR_SPELL-$1000000)).w
                 move.w  windowSlot(a6),d0

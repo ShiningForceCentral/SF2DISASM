@@ -97,15 +97,15 @@ Map9_EntityEvent8:
                 bne.s   byte_567C2      
                 txt     1365            ; "Dr. {NAME;11} lives in the{N}house over there.{W2}"
                 move.w  #$86,d0 
-                moveq   #3,d1
-                jsr     sub_4781A       
+                moveq   #DOWN,d1
+                jsr     ChangeEntityFacing       
                 moveq   #40,d0
                 jsr     (Sleep).w       
                 move.w  #$86,d0 
                 move.b  ((EVENT_RELATIVE_POSITION-$1000000)).w,d1
                 addq.w  #2,d1
                 andi.w  #DIRECTION_MASK,d1
-                jsr     sub_4781A       
+                jsr     ChangeEntityFacing       
                 txt     1366            ; "He is eccentric.{N}He hates talking, but...{W2}{N}a historical topic may{N}interest him.{W1}"
                 bra.s   return_567C6
 byte_567C2:
@@ -190,8 +190,8 @@ byte_5682A:
                 
                 chkFlg  725             ; Set after telling Rohde that you're going to get the Caravan
                 bne.s   return_56840
-                move.w  #$B,d0
-                jsr     sub_47832       
+                move.w  #ALLY_ROHDE,d0
+                jsr     GetRhodeFacing       
                 script  cs_56AE6
 return_56840:
                 

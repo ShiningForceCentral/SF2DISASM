@@ -71,7 +71,7 @@ cs_540C0:       textCursor 811
                  moveRight 1
                 endActions
                 setFacing ALLY_KAZIN,UP
-                playSound $FE
+                playSound SOUND_COMMAND_CUT_OUT
                 nextSingleText $0,ALLY_KAZIN ; "Wh...who are you?{N}Oh, Sir Hawel!{W1}"
                 playSound MUSIC_ENEMY_ATTACK
                 setCamDest 2,0
@@ -134,7 +134,7 @@ cs_540C0:       textCursor 811
                 entityActionsWait ALLY_KAZIN
                  moveRight 1
                 endActions
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 nextSingleText $0,128   ; "Ohhh...{NAME;4}....{W1}"
                 entityActionsWait ALLY_KAZIN
                  moveLeft 1
@@ -171,7 +171,7 @@ cs_540C0:       textCursor 811
                 nextSingleText $0,ALLY_KAZIN ; "Stop talking, or you'll die.{W1}"
                 nextText $0,128         ; "I'm almost dead anyway...{N}(cough)...(cough)....{W2}"
                 nextSingleText $0,128   ; "{NAME;4}, look for the jewels...{N}to seal...ancient...{W1}"
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 shiver 128
                 stopEntity 128
                 setPosFlash 128,63,63,DOWN
@@ -190,7 +190,7 @@ cs_540C0:       textCursor 811
                 setFacing ALLY_KAZIN,DOWN
                 nextText $0,ALLY_KAZIN  ; "Sir Hawel passed away.{W2}{N}I'm going to seal the tower.{N}It's Sir Hawel's last wish.{W2}"
                 nextSingleText $0,ALLY_KAZIN ; "{LEADER}, please!{N}His wish is related to{N}your mission, right?{W2}{N}Can you go with me and{N}seal the tower?{W1}"
-                join 32772
+                join ALLY_KAZIN|ALLY_SADJOIN
                 nextSingleText $0,ALLY_KAZIN ; "Now, let's go to the{N}Ancient Shrine!{W1}"
                 followEntity ALLY_KAZIN,ALLY_BOWIE,2
                 clearF 72               ; Kazin is a follower

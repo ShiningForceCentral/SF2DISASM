@@ -221,11 +221,11 @@ j_DetermineBattleUpgrade:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_RegionTriggeredSpawn:
+j_CheckForTrappedChest:
                 
-                jmp     RegionTriggeredSpawn(pc)
+                jmp     CheckForTrappedChest(pc)  
 
-    ; End of function j_RegionTriggeredSpawn
+    ; End of function j_CheckForTrappedChest
 
 
 ; =============== S U B R O U T I N E =======================================

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\desoul.asm :
-; 0x1A73A..0x1A848 : 
+; 0x1A73A..0x1A848 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -18,7 +18,7 @@ spellanimationSetup_Desoul:
                 bsr.w   LoadSpellGraphics
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a0
-                bclr    #7,d1
+                bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   loc_1A778
                 move.w  #$C0,(a0) 
                 move.w  #$98,2(a0) 
@@ -51,7 +51,7 @@ loc_1A786:
                 move.w  #$20,2(a0) 
                 move.w  #$14,4(a0)
                 move.w  #$301,6(a0)
-                moveq   #$2A,d0 
+                moveq   #$2A,d0   ; offset to sprite_42
                 lea     table_1A810(pc), a0
                 bsr.w   sub_19F5E
                 bsr.w   sub_19F5E
@@ -69,22 +69,10 @@ loc_1A7E2:
 
     ; End of function spellanimationSetup_Desoul
 
-table_1A810:    dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 5
-                dc.b $80
-                dc.b 5
-                dc.b $20
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 5
-                dc.b $84
-                dc.b 5
-                dc.b $21
+table_1A810:    vdpSpell 1, 1, SPELLTILE97, V2|H2|32
+                
+                vdpSpell 1, 1, SPELLTILE101, V2|H2|33
+                
 table_DesoulBackgroundModification:
                 dc.b 0
                 dc.b $38

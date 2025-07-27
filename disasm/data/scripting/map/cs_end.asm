@@ -185,4 +185,4 @@ ce_492CC:       mainEntity 63,63,DOWN
                 entity 21,39,RIGHT,MAPSPRITE_GRANSEAL_KING,eas_Init
                 entity 22,38,RIGHT,MAPSPRITE_MINISTER,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_ELIS,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

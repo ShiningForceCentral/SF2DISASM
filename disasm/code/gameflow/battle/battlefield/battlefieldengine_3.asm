@@ -1145,22 +1145,29 @@ pt_TargetPriorityScripts:
 ;
 ; Out: D6 = priority of the action
                 
-                dc.l TargetPriorityScript1
-                dc.l TargetPriorityScript2
-                dc.l TargetPriorityScript3
-                dc.l TargetPriorityScript4
-                dc.l TargetPriorityScript1
-                dc.l TargetPriorityScript2
-                dc.l TargetPriorityScript1
-                dc.l TargetPriorityScript4
-                dc.l TargetPriorityScript2
-                dc.l TargetPriorityScript2
-                dc.l TargetPriorityScript2
-                dc.l TargetPriorityScript2
-                dc.l TargetPriorityScript2
-                dc.l TargetPriorityScript2
-                dc.l TargetPriorityScript2
-                dc.l TargetPriorityScript2
+				; Normal
+                dc.l TargetPriorityScript1 ; Dark Smoke & Willard
+                dc.l TargetPriorityScript2 ; Healers
+                dc.l TargetPriorityScript3 ; Attackers
+                dc.l TargetPriorityScript4 ; Bosses
+				
+				; Hard
+                dc.l TargetPriorityScript1 ; Dark Smoke & Willard
+                dc.l TargetPriorityScript2 ; Healers
+                dc.l TargetPriorityScript1 ; Attackers
+                dc.l TargetPriorityScript4 ; Bosses
+				
+				; Super
+                dc.l TargetPriorityScript2 ; Dark Smoke & Willard
+                dc.l TargetPriorityScript2 ; Healers
+                dc.l TargetPriorityScript2 ; Attackers
+                dc.l TargetPriorityScript2 ; Bosses
+				
+				; Ouch
+                dc.l TargetPriorityScript2 ; Dark Smoke & Willard
+                dc.l TargetPriorityScript2 ; Healers
+                dc.l TargetPriorityScript2 ; Attackers
+                dc.l TargetPriorityScript2 ; Bosses
 
 ; =============== S U B R O U T I N E =======================================
 
