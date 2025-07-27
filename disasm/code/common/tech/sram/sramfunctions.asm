@@ -68,7 +68,7 @@ CheckSram:
 @InitSram:
                 
                 lea     (SRAM_START).l,a0
-                move.w  #SRAM_COUNTER,d7
+                move.w  #SRAM_BYTES_COUNTER,d7
 @ClearSram_Loop:
                 
                 clr.b   (a0)

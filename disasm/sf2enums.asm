@@ -3195,7 +3195,7 @@ SRAM_STRING_WRITE_COUNTER: equ 17
 SRAM_STRING_LENGTH: equ 36
 SAVE_SLOT_REAL_SIZE: equ 4016
 SAVE_SLOT_SIZE: equ 8032
-SRAM_COUNTER: equ 8191
+SRAM_BYTES_COUNTER: equ 8191
 
 ; ---------------------------------------------------------------------------
 
