@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle41\cs_beforebattle.asm :
 ; 0x4ED0E..0x4ED8E : Cutscene before battle 41
 bbcs_41:        textCursor 3083
-                loadMapFadeIn MAP_ANCIENT_TOWER_CLIMB,12,21
+                loadMapFadeIn MAP_ANCIENT_TOWER_ASCENT,12,21
                 loadMapEntities ce_4ED76
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setPos ALLY_PETER,16,24,RIGHT

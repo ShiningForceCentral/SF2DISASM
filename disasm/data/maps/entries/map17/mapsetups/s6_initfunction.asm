@@ -51,7 +51,7 @@ cs_5249E:       playSound SOUND_COMMAND_FADE_OUT
                 nextSingleText $0,ALLY_CHESTER ; "What is Ground Seal?{N}Please tell me!{W1}"
                 nextText $C0,132        ; "I heard King Galam say{N}those words.{W2}"
                 nextSingleText $C0,132  ; "I just know that something{N}is being concealed.{W1}"
-                loadMapFadeIn MAP_GALAM_CASTLE_INNER,52,1
+                loadMapFadeIn MAP_GALAM_INTERIORS,52,1
                 csWait 1
                 playSound MUSIC_CASTLE
                 fadeInB

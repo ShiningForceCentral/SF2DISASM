@@ -13,12 +13,12 @@
                   warpFacing DOWN
                 mWarp 255, 31  ; south exit
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION
+                  warpMap    MAP_OVERWORLD_BEDOE_KINGDOM
                   warpDest   43, 47
                   warpFacing DOWN
                 mWarp 31, 255  ; east exit
                   warpNoScroll
-                  warpMap    MAP_PATH_TO_MOUNT_VOLCANON
+                  warpMap    MAP_MOUNT_VOLCANO
                   warpDest   1, 28
                   warpFacing RIGHT
                 endWord

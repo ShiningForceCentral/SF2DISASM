@@ -22,4 +22,4 @@ table_Promotions:
                     PGNT, BRN, SORC, MMNK, BRGN
                 
                 promotionItems &        ; Special promotion items
-                    PEGASUS_WING, WARRIORS_PRIDE, SECRET_BOOK, VIGOR_BALL, SILVER_TANK
+                    PEGASUS_WING, WARRIOR_PRIDE, SECRET_BOOK, VIGOR_BALL, SILVER_TANK

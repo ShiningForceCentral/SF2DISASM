@@ -156,12 +156,12 @@ battlesceneScript_GetKillExp:
                 
                 movem.l d0-d3/a0,-(sp)
                 move.b  (a5),d0
-                jsr     GetCurrentLevel 
+                jsr     GetLevel        
                 move.w  d1,d2
                 move.b  (a4),d0
                 jsr     GetClass        
                 move.w  d1,d3
-                jsr     GetCurrentLevel 
+                jsr     GetLevel        
                 cmpi.b  #CHAR_CLASS_FIRSTPROMOTED,d3
                 bcs.s   @Continue
                 addi.w  #CHAR_CLASS_EXTRALEVEL,d1

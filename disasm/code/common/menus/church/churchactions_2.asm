@@ -40,7 +40,7 @@ CountPromotableMembers:
                 bsr.w   GetPromotionData
                 cmpi.w  #0,cannotPromoteFlag(a6)
                 bne.w   @Next
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 cmpi.w  #CHURCHMENU_MIN_PROMOTABLE_LEVEL,d1
                 bcs.w   @Next
                 addi.w  #1,promotableMembersCount(a6)

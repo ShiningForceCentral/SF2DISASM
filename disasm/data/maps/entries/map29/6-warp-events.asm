@@ -3,12 +3,12 @@
 ; 0xAA930..0xAA9C2 : 
                 mWarp 255, 0
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE
+                  warpMap    MAP_OVERWORLD_GALAM_KINGDOM
                   warpDest   41, 42
                   warpFacing DOWN
                 mWarp 255, 21
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE
+                  warpMap    MAP_OVERWORLD_GALAM_KINGDOM
                   warpDest   41, 42
                   warpFacing DOWN
                 mWarp 3, 3

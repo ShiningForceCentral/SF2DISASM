@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-spellanimationSetup_GunnerProjectile:
+spellanimationSetup_GunnerBlast:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellanimationProperties
@@ -36,7 +36,7 @@ loc_1AFAE:
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
-    ; End of function spellanimationSetup_GunnerProjectile
+    ; End of function spellanimationSetup_GunnerBlast
 
 table_1AFEA:    dc.l $F3000000
                 dc.l $18000E8

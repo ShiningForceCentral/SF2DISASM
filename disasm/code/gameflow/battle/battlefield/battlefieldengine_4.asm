@@ -86,7 +86,7 @@ AdjustTargetPriorityForAlly:
                 bra.w   loc_CE90
 loc_CE4A:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 beq.s   loc_CE56        ; if attacker is not inflicted with Muddle2
                 bra.w   loc_CE90
@@ -156,7 +156,7 @@ loc_CECC:
 
 ; Get highest usable level of spell D1, considering current MP and highest known level.
 ; 
-;   In: d0.w = caster index, d1.w = highest known level spell entry
+;   In: d0.w = caster index, d1.w = highest known level spell entry, d4.w = spell index
 ;   Out: d1.w = highest usuable level spell entry
 
 
@@ -176,7 +176,7 @@ GetHighestUsableSpellLevel:
                 add.w   d2,d1
                 lsl.w   #SPELLENTRY_OFFSET_LV,d1
                 add.w   d4,d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 cmp.b   SPELLDEF_OFFSET_MP_COST(a0),d3
                 bcc.w   @Break
                 dbf     d2,@Loop

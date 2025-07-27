@@ -16,10 +16,10 @@ cs_4934A:       entityFlashWhite ALLY_BOWIE,180
                 textCursor 322
                 csc15 ALLY_SARAH,$1,eas_ControlledCharacter
                 showPortrait $0,ALLY_BOWIE
-                setQuake $8002
-                setQuake $4002
-                loadMapFadeIn MAP_OUTSIDE_MITULA,13,13
-                flashScreenWhite 60
+                setQuake 32770
+                setQuake 16386
+                loadMapFadeIn MAP_MITULA_SHRINE_EXTERIOR,13,13
+                flashScreenWhite $3C
                 csc_end
                 flashScreenWhite 60
                 csc_end

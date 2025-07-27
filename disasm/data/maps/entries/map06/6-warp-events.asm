@@ -8,12 +8,12 @@
                   warpFacing UP
                 mWarp 255, 31  ; south exit
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_NEW_GRANSEAL_SHORE
+                  warpMap    MAP_OVERWORLD_NEW_GRANSEAL_KINGDOM
                   warpDest   29, 53
                   warpFacing DOWN
                 mWarp 31, 14  ; unusable warp
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_NEW_GRANSEAL_SHORE
+                  warpMap    MAP_OVERWORLD_NEW_GRANSEAL_KINGDOM
                   warpDest   29, 53
                   warpFacing DOWN
                 endWord

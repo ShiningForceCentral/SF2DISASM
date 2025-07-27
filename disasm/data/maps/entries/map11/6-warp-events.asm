@@ -13,7 +13,7 @@
                   warpFacing UP
                 mWarp 8, 34  ; stairs down to Bedoe
                   warpNoScroll
-                  warpMap    MAP_MOUNT_VOLCANON
+                  warpMap    MAP_BEDOE
                   warpDest   45, 50
                   warpFacing DOWN
                 endWord

@@ -1,11 +1,11 @@
 
 ; ASM FILE data\battles\global\randombattles.asm :
-; 0x1B6DB0..0x1B6DDA : Random battles list, and data related to UpgradeEnemyIndex function
+; 0x1B6DB0..0x1B6DDA : Random battles list, and data related to enemy upgrade functions
 list_RandomBattles:
                 
 ; List of battles prefixed with length.
 ;
-; Syntax        randomBattles [BATTLE_]enum,..[BATTLE_]enum
+; Syntax        battles [BATTLE_]enum,..[BATTLE_]enum
 ;
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 

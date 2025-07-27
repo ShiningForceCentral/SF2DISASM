@@ -3,7 +3,7 @@
 ; 0xA8230..0xA823A : 
                 mWarp 0, 27
                   warpNoScroll
-                  warpMap    MAP_SECRET_MONK_FOREST
+                  warpMap    MAP_ELVEN_VILLAGE
                   warpDest   30, 24
                   warpFacing LEFT
                 endWord

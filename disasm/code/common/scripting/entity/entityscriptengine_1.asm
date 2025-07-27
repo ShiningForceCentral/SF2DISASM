@@ -65,7 +65,7 @@ VInt_UpdateSprites:
                 bgt.w   @MoveSpriteOffScreen
                 
                 ; Is entity blinking?
-                btst    #7,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                btst    #ENTITYDEF_FLAGS_B_BLINKING,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 beq.s   @IsSpecialSprite
                 tst.b   d6
                 bge.w   @MoveSpriteOffScreen ; move sprite off-screen to produce blinking effect
@@ -93,7 +93,7 @@ VInt_UpdateSprites:
                 addq.b  #1,d4           ; increment counter if so
                 
                 ; Is 2x animation speed?
-                btst    #4,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                btst    #ENTITYDEF_FLAGS_B_2X_ANIMATION_SPEED,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 beq.s   @CheckCounterEnd
                 addq.b  #2,d4
 @CheckCounterEnd:
@@ -124,8 +124,10 @@ VInt_UpdateSprites:
                 move.w  d6,VDPSPRITE_OFFSET_SIZE(a1)
                 ori.w   #VDPTILE_PALETTE3,d5
                 move.b  ENTITYDEF_OFFSET_FLAGS_B(a0),d0
+                
+                ; Is sprite upside down?
                 andi.w  #ORIENTATION_MASK,d0
-                cmpi.w  #ORIENTATION_INVERTED,d0
+                cmpi.w  #ORIENTATION_FLIPPED,d0
                 bne.s   loc_4DA0
                 ori.w   #VDPTILE_FLIP,d5
 loc_4DA0:

@@ -497,7 +497,7 @@ loc_54C4C:
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     1117            ; "It's too dangerous to use it{N}as it is.{W2}"
                 txt     1118            ; "We need some way to{N}detonate the dynamite{N}safely.{W1}"
                 clsTxt

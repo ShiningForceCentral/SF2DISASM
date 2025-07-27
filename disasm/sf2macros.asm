@@ -18,11 +18,6 @@ align:  macro
                 dcb.b \1-(*%\1),\2
             endcase
         endm
-                
-wordAlign:  macro ;alias
-                align
-                inform 0,"INFO: 'wordAlign' macro is obsolete. Please use 'align' with no arguments instead."
-            endm
 
 
 ; ---------------------------------------------------------------------------
@@ -424,14 +419,6 @@ classes: macro
             endr
         endm
                 
-blacksmithClasses: macro                ;alias
-                classes \1
-            endm
-                
-mithrilWeaponClass: macro   ;alias
-                classes \1
-            endm
-                
 mithrilWeapons: macro
                 dc.b \1 ; 1/x chance
                 item \2
@@ -447,10 +434,6 @@ specialCaravanDescription: macro
                 item \1
                 dc.b \2 ; # of text lines
                 defineShorthand.w MESSAGE_CARAVANDESC_,\3 ; starting text line
-            endm
-                
-usableOutsideBattleItem: macro  ;alias
-                item \1
             endm
                 
 input:      macro
@@ -476,7 +459,8 @@ speechSfx:  macro
                 defineShorthand.b SFX_,\1
                 dc.b 0
             endm
-                
+            
+
 ; Enemy definitions
                 
 unknownByte: macro
@@ -551,10 +535,6 @@ aiBitfield: macro
                 dcb.b 2,0
             endm
                 
-randomBattles: macro ;alias
-                battles
-            endm
-                
 upgradeRange: macro
                 dc.b \1 ; upgrade factor/step
                 defineShorthand.b ENEMY_,\2
@@ -586,10 +566,6 @@ mpGrowth:   macro
                 
 attGrowth:  macro
                 defineStatGrowth \1,\2,\3
-            endm
-                
-atkGrowth:  macro ;alias
-                attGrowth \1,\2,\3
             endm
                 
 defGrowth:  macro

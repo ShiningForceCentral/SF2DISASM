@@ -61,7 +61,7 @@ abcs_battle43:  setCamDest 8,2
                 mapFadeOutToWhite
                 csWait 40
                 mapFadeInFromWhite
-                warp MAP_ZEON_ARENA,12,11,UP
+                warp MAP_ZEON_BATTLEFIELD,12,11,UP
                 setQuake 0
                 clearF 67               ; Peter is a follower
                 clearF 70               ; Astral is a follower

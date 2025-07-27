@@ -76,7 +76,7 @@ loc_1A99E:
                 move.b  #$1E,4(a0)
                 moveq   #$2F,d0 
                 moveq   #3,d1
-                lea     graphic_BlastCycloneandDust(pc), a0
+                lea     graphic_BlastCycloneAndDust(pc), a0
                 bsr.w   sub_19FAA       
 loc_1AA06:
                 
@@ -89,7 +89,7 @@ loc_1AA06:
 
     ; End of function spellanimationSetup_Blast
 
-graphic_BlastCycloneandDust:
+graphic_BlastCycloneAndDust:
                 vdpSpell 8, 48, SPELLTILE140, V2|H2|32  ; dust for cyclone
                 vdpSpell 0, 0, SPELLTILE44, V4|H4|32
                 vdpSpell 0, 32, SPELLTILE60, V4|H4|32

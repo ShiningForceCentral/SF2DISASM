@@ -11,7 +11,7 @@
 GetSpellRange:
                 
                 movem.l d0-d2/d5-a6,-(sp)
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 move.b  SPELLDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  SPELLDEF_OFFSET_MIN_RANGE(a0),d4
                 movem.l (sp)+,d0-d2/d5-a6
@@ -29,7 +29,7 @@ GetSpellRange:
 GetItemRange:
                 
                 movem.l d0-d2/d5-a6,-(sp)
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  ITEMDEF_OFFSET_MIN_RANGE(a0),d4
                 movem.l (sp)+,d0-d2/d5-a6
@@ -44,7 +44,7 @@ GetItemRange:
 ; Out: D1 = whether combatant is inflicted with MUDDLE 2 (0=no, 1=yes)
 
 
-CheckMuddled2:
+IsConfused:
                 
                 movem.l d0/d2-a6,-(sp)
                 bsr.w   GetStatusEffects
@@ -72,7 +72,7 @@ CheckMuddled2:
                 movem.l (sp)+,d0/d2-a6
                 rts
 
-    ; End of function CheckMuddled2
+    ; End of function IsConfused
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -143,7 +143,7 @@ CreateItemRangeGrid:
                 bsr.w   ClearTargetsArray
                 bsr.w   ClearTotalMovecostsAndMovableGridArrays
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.s   @Done
@@ -170,7 +170,7 @@ CreateSpellRangeGrid:
                 bsr.w   ClearTargetsArray
                 bsr.w   ClearTotalMovecostsAndMovableGridArrays
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   loc_C4AA
                 btst    #SPELLPROPS_BIT_TARGETING,SPELLDEF_OFFSET_PROPS(a0)
@@ -342,7 +342,7 @@ PopulateTargetableGrid_UseItem:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 cmpi.b  #-1,d1
                 beq.s   @Done
@@ -365,7 +365,7 @@ sub_C5FA:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 cmpi.b  #-1,d1
                 beq.s   @Done
@@ -407,7 +407,7 @@ PopulateTargetableGrid:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 cmpi.b  #SPELL_AURA|SPELL_LV4,d1
                 beq.w   @ChooseTargets
                 cmpi.b  #SPELL_SHINE,d1
@@ -898,7 +898,7 @@ PrioritizeReachableTargets:
                 bne.s   @EnemyItemUser
                 
                 ; Ally item user
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledAllyItemUser
                 bsr.w   PopulateTargetsArrayWithEnemies
@@ -911,7 +911,7 @@ PrioritizeReachableTargets:
                 bra.s   @PopulateItemPrioritiesList
 @EnemyItemUser:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledEnemyItemUser
                 bsr.w   PopulateTargetsArrayWithAllies
@@ -926,7 +926,7 @@ PrioritizeReachableTargets:
                 move.l  (sp)+,d1        ; d1 = attack item index
                 lea     (ATTACK_COMMAND_ITEM_SLOT).l,a0
                 move.w  d2,(a0)
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 lea     ((TARGETS_REACHABLE_BY_ITEM_LIST-$1000000)).w,a0
                 lea     ((ITEM_MOVEMENT_TO_REACHABLE_TARGETS-$1000000)).w,a1
@@ -954,7 +954,7 @@ PrioritizeReachableTargets:
                 bne.s   @EnemySpellCaster
                 
                 ; Ally spell caster
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledAllySpellCaster
                 bsr.w   PopulateTargetsArrayWithEnemies
@@ -967,7 +967,7 @@ PrioritizeReachableTargets:
                 bra.s   @PopulateSpellPrioritiesList
 @EnemySpellCaster:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledEnemySpellCaster
                 bsr.w   PopulateTargetsArrayWithAllies
@@ -1004,7 +1004,7 @@ PrioritizeReachableTargets:
                 bne.s   @EnemyAttacker
                 
                 ; Ally attacker
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledAllyAttacker
                 bsr.w   PopulateTargetsArrayWithEnemies
@@ -1017,7 +1017,7 @@ PrioritizeReachableTargets:
                 bra.s   @PopulateAttackPrioritiesList
 @EnemyAttacker:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 bne.s   @MuddledEnemyAttacker
                 bsr.w   PopulateTargetsArrayWithAllies
@@ -1280,7 +1280,7 @@ GetSpellPowerAdjustedForResistance:
                 
                 movem.l d0-d5/d7-a0,-(sp)
                 bsr.w   GetResistanceToSpell
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 moveq   #0,d6
                 move.b  SPELLDEF_OFFSET_POWER(a0),d6
                 move.w  d6,d3

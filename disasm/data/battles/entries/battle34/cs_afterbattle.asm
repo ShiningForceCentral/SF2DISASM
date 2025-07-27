@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle34\cs_afterbattle.asm :
 ; 0x4D4B6..0x4D6CE : Cutscene after battle 34
 abcs_battle34:  textCursor 2911
-                loadMapFadeIn MAP_CAMEELA_ARENA,2,7
+                loadMapFadeIn MAP_NAZCA_BATTLEFIELD,2,7
                 loadMapEntities ce_4D69E
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

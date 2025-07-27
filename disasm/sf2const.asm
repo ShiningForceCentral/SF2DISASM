@@ -257,7 +257,7 @@ ENTITY_CURSOR_DATA: equ $FFAF02
 EXPLORATION_ENTITIES: equ $FFAF22 ; list of controlled entity and followers
 FOLLOWERS_LIST: equ $FFAF23 ; list of entities following player, $FF ends
 byte_FFAF26: equ $FFAF26
-word_FFAF42: equ $FFAF42
+word_FFAF42: equ $FFAF42 ; related to map block copy
 SPRITE_SIZE: equ $FFAF44
 MAP_AREA_LAYER_TYPE: equ $FFAF46 ; 0 = Map on background (Plane B), 1 = Map on foreground (Plane A)
 byte_FFAF47: equ $FFAF47 ; unused 32 byte table for ally combatants
@@ -285,14 +285,16 @@ LEVELUP_ARGUMENTS: equ $FFAF82 ; arguments passed to level up messages :
                                         ;  5: Agility
                                         ;  6: learned spell index
                                         ;  7: learned spell level
-CURRENT_MEMBERSUMMARY_PAGE: equ $FFAF8C ; 0 = member
-                                        ; 1 = items
+CURRENT_MEMBERS_LIST_SUMMARY_PAGE: equ $FFAF8C ; 0 = main
+                                        ; 1 = item
                                         ; 2 = magic
+                                        ; 3+ = equip
 CURSOR_RADIUS: equ $FFAF8E
 BATTLE_ENTITY_CHOSEN_X: equ $FFAF90
 BATTLE_ENTITY_CHOSEN_Y: equ $FFAF91
 IS_TARGETING: equ $FFAF93 ; used to determine whether to create a second mini status window
-word_FFAF9E: equ $FFAF9E
+WINDOW_LAYOUT_SHIFT_DIRECTION: equ $FFAF9E ; members list : 0 = up, 1 = down
+                                        ; shop inventory : 0 = left, 1 = right
 byte_FFAFA0: equ $FFAFA0 ; related to sprites (64 bytes)
 BATTLESCENE_BATTLESPRITE_TOGGLE: equ $FFAFA1 ; $010101010101010101 all 9 parts shown
 BATTLESCENE_WEAPONSPRITE_TOGGLE: equ $FFAFAA ; $01010101 all 4 parts shown
@@ -341,17 +343,20 @@ CONFIGURATION_MODE_TOGGLE: equ $FFB0AC
 MAP_AREA_MUSIC_INDEX: equ $FFB0AD
 GENERIC_LIST: equ $FFB0AE ; generic index list space
 GENERIC_LIST_LENGTH: equ $FFB12E ; number of entries in the generic index list
-CURRENT_SHOP_PAGE: equ $FFB130 ; also used for Caravan depot 
+CURRENT_SHOP_PAGE: equ $FFB130 ; also used for Caravan depot
 CURRENT_SHOP_SELECTION: equ $FFB132
 CURRENT_SHOP_PAGE_ITEMS_NUMBER: equ $FFB134
 DISPLAYED_MEMBERS_LIST_FIRST_ENTRY: equ $FFB136 ; first entry in currently displayed portion of member list
 DISPLAYED_MEMBERS_LIST_SELECTED_ENTRY: equ $FFB138 ; selected entry in currently displayed portion of member list
 SELECTED_ITEM_INDEX: equ $FFB13A ; currently selected item index
-byte_FFB13C: equ $FFB13C
+CURRENT_ITEM_SUBMENU_ACTION: equ $FFB13C ; 0 = use
+                                        ; 1 = give
+                                        ; 2 = drop
+                                        ; 3 = equip
 CURRENT_MEMBERS_LIST_PAGE: equ $FFB13D
 WINDOW_IS_PRESENT: equ $FFB13F ; textbox state ? 1 without window, 2 with window
 ENTITY_INDEX_LIST: equ $FFB140 ; 1 byte holding related entity index per entity during exploration (64 bytes)
-                               ; during combat (32 bytes) (noncombatants included iterating from slots 32 to 0)
+                                        ; during combat (32 bytes) (noncombatants included iterating from slots 32 to 0)
 ENTITY_INDEX_ALLY_JARO: equ $FFB157
 ENTITY_INDEX_LIST_ENEMIES: equ $FFB160 ; 1 byte holding related entity index per entity during combat (32 bytes) (special sprites are always index 32)
 ENTITY_INDEX_ENEMY_JAR: equ $FFB16F
@@ -374,11 +379,13 @@ dword_FFB1A4: equ $FFB1A4
 WARP_SFX: equ $FFB1A8
 CONFIGURATION_MODE_OR_GAME_STAFF_POINTER: equ $FFB1AA
 AI_LAST_TARGET_TABLE: equ $FFB1AC ; Table of most recent target for each enemy
-byte_FFB1DC: equ $FFB1DC
-BATTLE_REGION_FLAGS_TO_BE_TRIGGERED: equ $FFB20C ; Region flags to be triggered at the start of next battle turn
+AI_MEMORY_TABLE: equ $FFB1DC ; related to standby AI movement
+PREVIOUSLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating regions triggered at the start of previous battle rounds
+                                        ; causes issues with region triggers in the vanilla build
 
-; battlescene block; cleared when scene intializes
-BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 ; start of battlescene data
+
+; Battlescene block -- cleared when scene intializes
+BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 
 word_FFB3C4: equ $FFB3C4
 BATTLESCENE_BATTLESPRITE_MODIFICATION_POINTER: equ $FFB3C6
 word_FFB3CA: equ $FFB3CA
@@ -443,10 +450,10 @@ WEAPON_IDLE_FRAME1_X: equ $FFB576
 WEAPON_IDLE_FRAME1_Y: equ $FFB577
 WEAPON_IDLE_FRAME2_X: equ $FFB578
 WEAPON_IDLE_FRAME2_Y: equ $FFB579
-ALLY_BATTLESPRITE_STATUS_OFFSET_X: equ $FFB57A ; ally battlesprite second word, first byte
-ALLY_BATTLESPRITE_STATUS_OFFSET_Y: equ $FFB57B ; ally battlesprite second word, first byte
-ENEMY_BATTLESPRITE_STATUS_OFFSET_X: equ $FFB57C ; enemy battlesprite second word
-ENEMY_BATTLESPRITE_STATUS_OFFSET_Y: equ $FFB57D ; enemy battlesprite second word, first byte
+ALLY_BATTLESPRITE_STATUS_OFFSET_X: equ $FFB57A ; ally battlesprite second word, upper byte
+ALLY_BATTLESPRITE_STATUS_OFFSET_Y: equ $FFB57B ; ally battlesprite second word, lower byte
+ENEMY_BATTLESPRITE_STATUS_OFFSET_X: equ $FFB57C ; enemy battlesprite second word, upper byte
+ENEMY_BATTLESPRITE_STATUS_OFFSET_Y: equ $FFB57D ; enemy battlesprite second word, lower byte
 BATTLESCENE_ALLY_STATUS_ANIMATION: equ $FFB57E ; status effect sprite displayed in battlescene for ally :
                                         ;     0 = none
                                         ;     1 = silence
@@ -461,7 +468,7 @@ BATTLESCENE_ENEMY_STATUS_ANIMATION: equ $FFB57F ; status effect sprite displayed
                                         ;     4 = stun
 byte_FFB580: equ $FFB580
 byte_FFB581: equ $FFB581
-BATTLESCENE_BACKGROUND: equ $FFB582
+BATTLESCENE_GROUND: equ $FFB582
 byte_FFB583: equ $FFB583
 UPDATE_SPELLANIMATION_TOGGLE: equ $FFB584
 byte_FFB585: equ $FFB585
@@ -470,7 +477,8 @@ CURRENT_SPELLANIMATION: equ $FFB587
 byte_FFB588: equ $FFB588
 BATTLESCENE_ACTOR_SWITCH_STATE: equ $FFB589 ; battlescene actor switching state: 1 = waiting, 2 = currently switching, 3 = done
 DEAD_COMBATANTS_LIST: equ $FFB58A
-byte_FFB59A: equ $FFB59A ; end of battlescene data
+BATTLESCENE_DATA_END: equ $FFB59A ; end of battlescene data
+
 
 BATTLESCENE_GOLD: equ $FFB62A
 BATTLESCENE_EXP: equ $FFB62C
@@ -491,9 +499,9 @@ BATTLESCENE_FIRST_ALLY: equ $FFB64A
 BATTLESCENE_LAST_ALLY: equ $FFB64B
 BATTLESCENE_FIRST_ENEMY: equ $FFB64C
 BATTLESCENE_LAST_ENEMY: equ $FFB64D
-BATTLESCENE_ATTACKER: equ $FFB64E
-BATTLESCENE_ATTACKER_COPY: equ $FFB64F
-EVENT_RELATIVE_POSITION: equ $FFB651 ; are you vertically/horizontally aligned with entity when speaking
+BATTLESCENE_ACTOR: equ $FFB64E
+BATTLESCENE_ACTOR_COPY: equ $FFB64F
+EVENT_RELATIVE_POSITION: equ $FFB651 ; whether the player character is vertically/horizontally aligned with entity when speaking
 TARGETS_LIST: equ $FFB652 ; - indexes of currently available targets in battle
                                         ; - chosen targets during battlescene
                                         ; - character indexes that can equip an item when asking about it in the caravan
@@ -525,21 +533,21 @@ byte_FFB852: equ $FFB852
 PLANE_A_MAP_LAYOUT: equ $FFC000 ; Plane A layout
 byte_FFC180: equ $FFC180
 byte_FFC1B8: equ $FFC1B8
-byte_FFC286: equ $FFC286
-byte_FFC350: equ $FFC350
+REGION_CHECK_STRING_1: equ $FFC286
+REGION_CHECK_STRING_2: equ $FFC350
 byte_FFC358: equ $FFC358
 byte_FFC398: equ $FFC398
-byte_FFC41A: equ $FFC41A
+REGION_CHECK_STRING_3: equ $FFC41A
 PRESS_START_BUTTON_LAYOUT: equ $FFC480 ; "PRESS START BUTTON" string displayed on the title screen
 PLANE_A_MAP_AND_WINDOWS_LAYOUT: equ $FFC800
 byte_FFCC86: equ $FFCC86
-PALETTE_1_CURRENT: equ $FFD000      ; used for ally battlesprite, map, 
+PALETTE_1_CURRENT: equ $FFD000 ; used for ally battlesprite, map,
 PALETTE_1_CURRENT_01: equ $FFD002
 PALETTE_1_CURRENT_02: equ $FFD004
-PALETTE_2_CURRENT: equ $FFD020      ; used for portrait, witch screen bubble, enemy battlesprite, pulsing range
-PALETTE_3_CURRENT: equ $FFD040      ; used for UI, groundsprite, spell graphic
+PALETTE_2_CURRENT: equ $FFD020 ; used for portrait, witch screen bubble, enemy battlesprite, pulsing range
+PALETTE_3_CURRENT: equ $FFD040 ; used for UI, groundsprite, spell graphic
 PALETTE_3_CURRENT_02: equ $FFD044
-PALETTE_4_CURRENT: equ $FFD060      ; used for special sprite, background
+PALETTE_4_CURRENT: equ $FFD060 ; used for special sprite, background
 PALETTE_1_BASE: equ $FFD080
 PALETTE_1_BASE_01: equ $FFD082
 PALETTE_1_BASE_02: equ $FFD084
@@ -642,7 +650,7 @@ PALETTE_1_COPY: equ $FFDF2A
 PALETTE_2_COPY: equ $FFDF4A
 FADING_TIMER_WORD: equ $FFDFAA
 FADING_TIMER_BYTE: equ $FFDFAB
-RANDOM_WAITING_FOR_INPUT: equ $FFDFB0 ; "random" value for determining AI/hit chance??
+RANDOM_SEED_COPY: equ $FFDFB0 ; Copy of RANDOM_SEED reserved exclusively for the AI. Updated during text symbol parsing and diamond menu execution.
 PLANE_B_LAYOUT: equ $FFE000
 byte_FFE0DC: equ $FFE0DC
 PLANE_B_WITCH_HEAD: equ $FFE15C
@@ -651,7 +659,7 @@ byte_FFE19C: equ $FFE19C
 byte_FFE21E: equ $FFE21E
 byte_FFE29E: equ $FFE29E
 byte_FFE31C: equ $FFE31C
-COMBATANT_ENTRIES: equ $FFE800 ; Start of Saved Data
+COMBATANT_DATA: equ $FFE800 ; Start of Saved Data
 CURRENT_GOLD: equ $FFF600
 DEALS_ITEMS: equ $FFF604 ; amount of each item in the deals section (stacked 2 items to a byte, 4 bits per item, max 0xF amt of each item)
 CARAVAN_ITEMS_NUMBER: equ $FFF644 ; number of items in caravan

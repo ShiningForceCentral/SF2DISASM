@@ -48,7 +48,7 @@ ExecuteAiCommand_Attack:
                 move.w  #BATTLEACTION_USE_ITEM,(a0)
                 lea     ((ATTACK_COMMAND_ITEM_SLOT-$1000000)).w,a1
                 move.w  (a1),BATTLEACTION_OFFSET_ITEM_SLOT(a0)
-                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a0)
+                move.w  d0,BATTLEACTION_OFFSET_TARGET(a0)
                 move.w  d7,d0           ; d7 --> d0 = character index (aka attacker)
                 move.w  (a1),d1         ; d1 = item slot of the attack item
                 bsr.w   GetItemBySlotAndHeldItemsNumber
@@ -66,12 +66,12 @@ ExecuteAiCommand_Attack:
                 move.w  (a1),d1
                 move.w  d7,d0           ; d7 --> d0 = character index (aka attacker)
                 bsr.w   GetItemBySlotAndHeldItemsNumber
-                bsr.w   GetItemDefAddress
+                bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
                 bsr.w   GetSpellRange   
                 bsr.w   PopulateTargetsArrayWithAllCombatants
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a0
-                move.w  BATTLEACTION_OFFSET_ACTOR(a0),d0
+                move.w  BATTLEACTION_OFFSET_TARGET(a0),d0
                 jsr     GetCombatantY
                 move.w  d1,d2
                 jsr     GetCombatantX
@@ -93,7 +93,7 @@ ExecuteAiCommand_Attack:
                 move.w  #BATTLEACTION_CAST_SPELL,(a0)
                 lea     ((ATTACK_COMMAND_SPELL-$1000000)).w,a1
                 move.w  (a1),BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
-                move.w  d0,BATTLEACTION_OFFSET_ACTOR(a0)
+                move.w  d0,BATTLEACTION_OFFSET_TARGET(a0)
                 lea     ((AI_LAST_TARGET_TABLE-$1000000)).w,a2
                 move.w  d7,d1
                 btst    #COMBATANT_BIT_ENEMY,d1
@@ -167,7 +167,7 @@ ExecuteAiCommand_Attack:
                 bra.w   @FindTarget
 @GetWeaponAttackRange:
                 
-                jsr     GetItemDefAddress
+                jsr     GetItemDefinitionAddress
                 moveq   #0,d3
                 move.b  ITEMDEF_OFFSET_MAX_RANGE(a0),d3
                 move.b  ITEMDEF_OFFSET_MIN_RANGE(a0),d4

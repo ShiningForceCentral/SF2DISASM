@@ -33,7 +33,7 @@ Map37_ItemEvent0:
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     3374            ; "Well, {LEADER}.  Let's go{N}back to look for someone{N}who knows about this ship.{W1}"
                 bra.s   loc_5FA84
 byte_5FA76:

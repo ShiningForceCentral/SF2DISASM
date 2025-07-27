@@ -21,7 +21,7 @@ Map18_EntityEvent0:
                 clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     871             ; "The trader tried to remove{N}the jewel.{W1}"
                 clsTxt
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 move.w  ((SPEECH_SFX_COPY-$1000000)).w,((CURRENT_SPEECH_SFX-$1000000)).w
                 txt     872             ; "I can't remove it!  Blast!{N}How did you attach it{N}so firmly?{W1}"
                 rts

@@ -11,12 +11,14 @@
 GetBattlesceneGround:
                 
                 cmpi.w  #COMBATANT_ENEMIES_START,d0
-                bcc.w   @Skip           ; skip if enemy
+                bcc.w   @Skip           ; skip if no ally present
+                
                 jsr     j_GetMoveType
                 cmpi.w  #MOVETYPE_LOWER_FLYING,d1
                 beq.w   @Skip           ; skip if ally is flying or hovering
                 cmpi.w  #MOVETYPE_LOWER_HOVERING,d1
                 beq.w   @Skip
+                
                 bra.w   GetBattlesceneBackground
 @Skip:
                 
@@ -118,9 +120,9 @@ rjt_SpellanimationSetups:
                 dc.w spellanimationSetup_DemonBreath-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_FlameBreath-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_ArrowsAndSpears-rjt_SpellanimationSetups
-                dc.w spellanimationSetup_CannonProjectile-rjt_SpellanimationSetups
-                dc.w spellanimationSetup_ShotProjectile-rjt_SpellanimationSetups
-                dc.w spellanimationSetup_GunnerProjectile-rjt_SpellanimationSetups
+                dc.w spellanimationSetup_CannonFire-rjt_SpellanimationSetups
+                dc.w spellanimationSetup_ShotFire-rjt_SpellanimationSetups
+                dc.w spellanimationSetup_GunnerBlast-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_Dao-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_Apollo-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_Neptun-rjt_SpellanimationSetups
@@ -128,7 +130,7 @@ rjt_SpellanimationSetups:
                 dc.w spellanimationSetup_PrismLaser-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_BubbleBreath-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_SnowBreath-rjt_SpellanimationSetups
-                dc.w spellanimationSetup_CutOffandDodge-rjt_SpellanimationSetups
+                dc.w spellanimationSetup_CutOffAndDodge-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_Buff2-rjt_SpellanimationSetups
                 dc.w spellanimationSetup_AttackSpell-rjt_SpellanimationSetups 
                                                         ; SFCD's ATTACK spell (unused)
@@ -251,4 +253,3 @@ table_1A020:    dc.b 0
                 dc.b 0
                 dc.b 0
                 dc.b 0
-

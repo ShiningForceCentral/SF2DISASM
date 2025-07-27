@@ -76,7 +76,7 @@ ChurchMenu:
                 addi.w  #1,deadMembersCount(a6)
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 txt     129             ; "Gosh!  {NAME} is{N}exhausted!{W2}"
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 mulu.w  #CHURCHMENU_PER_LEVEL_RAISE_COST,d1
                 move.l  d1,actionCost(a6)
                 jsr     j_GetClass
@@ -222,7 +222,7 @@ ChurchMenu:
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 jsr     j_IsItemCursed
                 bcc.w   @IsNextItemCursed
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.l   d4
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d4
                 lsr.w   #2,d4           ; cure curse cost = 25% of item price
@@ -285,8 +285,8 @@ ChurchMenu:
                 ; @StartPromo
                 txt     136             ; "{CLEAR}Who do you want to{N}promote?{W2}"
                 clsTxt
-                move.b  #0,((byte_FFB13C-$1000000)).w
-                jsr     j_InitializeMembersListScreen
+                move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
+                jsr     j_ExecuteMembersListScreenOnMainSummaryPage
                 cmpi.w  #-1,d0
                 bne.w   @CheckPromotableClass
                 txt     137             ; "Oh, I'm wrong.{W2}"
@@ -305,7 +305,7 @@ ChurchMenu:
                 bra.w   @RestartPromo
 @CheckPromotableLevel:
                 
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 cmpi.w  #CHURCHMENU_MIN_PROMOTABLE_LEVEL,d1
                 bcc.w   @ConfirmPromo
                 move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w

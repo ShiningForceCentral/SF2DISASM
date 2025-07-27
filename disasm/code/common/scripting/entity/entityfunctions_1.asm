@@ -6,7 +6,7 @@
 
 battleEntity = -4
 
-sub_444A2:
+SpawnEnemyEntity:
                 
                 link    a6,#-16
                 move.w  d0,battleEntity(a6)
@@ -40,7 +40,7 @@ loc_444D6:
                 movem.l a0-a1,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a0
                 move.l  a0,-(sp)
-                move.w  #$8F,d7 
+                move.w  #143,d7
 loc_4450A:
                 
                 clr.l   (a0)+
@@ -59,7 +59,7 @@ loc_4450A:
                 unlk    a6
                 rts
 
-    ; End of function sub_444A2
+    ; End of function SpawnEnemyEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -115,7 +115,7 @@ loc_4457E:
                 
                 lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 clr.w   d0
-                moveq   #$3E,d7 
+                moveq   #62,d7
 loc_44586:
                 
                 cmp.b   (a0),d0
@@ -174,8 +174,8 @@ DeclareNewEntity:
                 move.w  (sp)+,d0
                 move.w  d1,(a0)
                 move.w  d2,ENTITYDEF_OFFSET_Y(a0)
-                clr.l   ENTITYDEF_OFFSET_XVELOCITY(a0)
-                clr.l   ENTITYDEF_OFFSET_XTRAVEL(a0)
+                clr.l   ENTITYDEF_OFFSET_XVELOCITY(a0) ; clear both X and Y velocity words
+                clr.l   ENTITYDEF_OFFSET_XTRAVEL(a0) ; clear both X and Y travel words
                 move.w  d1,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d2,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  d3,ENTITYDEF_OFFSET_FACING(a0)

@@ -7,9 +7,9 @@
 ; Function is missing in US version.
 
 
-SoundTest:
+j_SoundTest:
                 
                 rts
 
-    ; End of function SoundTest
+    ; End of function j_SoundTest
 

@@ -8,12 +8,12 @@
                   warpFacing UP
                 mWarp 0, 255
                   warpScroll LEFT
-                  warpMap    MAP_OVERWORLD_PATH_TO_RIBBLE
+                  warpMap    MAP_OVERWORLD_SOUTH_PARMECIA
                   warpDest   62, 255
                   warpFacing LEFT
                 mWarp 255, 0
                   warpScroll UP
-                  warpMap    MAP_OVERWORLD_AROUND_PACALON
+                  warpMap    MAP_OVERWORLD_PACALON_KINGDOM_DROUGHT
                   warpDest   255, 62
                   warpFacing UP
                 endWord

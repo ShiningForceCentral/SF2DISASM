@@ -61,7 +61,7 @@ sub_156CE:
 
     ; End of function sub_156CE
 
-layout_15706:   dc.w $C080
+layout_15706:   dc.w $C080              ; unused layout
                 dc.w $C081
                 dc.w $C081
                 dc.w $C081

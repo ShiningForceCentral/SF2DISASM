@@ -14,6 +14,7 @@ spellanimationSetup_DemonBreath:
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a1
                 cmpi.w  #ENEMYBATTLESPRITE_ZEON,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
+                                                        ; HARDCODED Zeon enemy battle sprite
                 bne.s   loc_1AD0C
                 move.l  #$B000EA,(a1)
                 move.w  #1,4(a1)

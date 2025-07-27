@@ -3,12 +3,12 @@
 ; 0x16EA6..0x176A6 : Item definitions
 table_ItemDefinitions:
                 
-; Syntax        equipFlags   [EQUIPFLAG_]bitfield
+; Syntax        equipFlags   [EQUIPFLAG_]bitfield               ; bitfield shorthand (e.g., SDMN|HERO)
 ;               range        min, max 0-3
 ;               price        0-65535
-;               itemType     [ITEMTYPE_]bitfield
-;               useSpell     [SPELL_]enum[|level]
-;               equipEffects [EQUIPEFFECT_]enum, parameter, &
+;               itemType     [ITEMTYPE_]bitfield                ; bitfield shorthand (e.g., WEAPON|RARE)
+;               useSpell     [SPELL_]enum[|[SPELL_]level]       ; bitfield shorthand (e.g., BLAZE|LV2)
+;               equipEffects [EQUIPEFFECT_]enum, parameter, &   ; shorthand, parameter (e.g, INCREASE_ATT, 19)
 ;                            [EQUIPEFFECT_]enum, parameter, &
 ;                            [EQUIPEFFECT_]enum, parameter
 ;

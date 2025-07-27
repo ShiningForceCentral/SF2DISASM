@@ -31,35 +31,39 @@ cutoff = -1
 
 battlesceneScript_End:
                 
+                module
                 movem.l d0-d3/a0,-(sp)
                 endAnimation
-                lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a5
+                lea     ((BATTLESCENE_ACTOR-$1000000)).w,a5
                 moveq   #3,d6
                 bsr.w   battlesceneScript_SwitchTargets
-                lea     ((BATTLESCENE_ATTACKER-$1000000)).w,a4
+                lea     ((BATTLESCENE_ACTOR-$1000000)).w,a4
                 lea     ((TARGETS_LIST-$1000000)).w,a5
                 tst.b   curseInaction(a2)
-                bne.w   loc_A3B2
+                bne.w   loc_A3B2        ; skip giving EXP if actor was unable to act
                 tst.b   silencedActor(a2)
                 bne.w   loc_A3B2
                 tst.b   stunInaction(a2)
                 bne.w   loc_A3B2
+                
                 move.b  (a4),d0
                 btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   loc_A396
+                bne.s   loc_A396        ; if actor is an enemy, check whether a counterattack occured
+                
                 jsr     GetCurrentHp
                 tst.w   d1
-                beq.w   loc_A3B2
-                bra.s   loc_A3AE
+                beq.w   loc_A3B2        ; skip giving EXP if ally actor is dead
+                bra.s   @GiveExpAndGold
 loc_A396:
                 
                 cmpi.w  #BATTLEACTION_ATTACKTYPE_COUNTER,((BATTLESCENE_ATTACK_TYPE-$1000000)).w
                 bne.w   loc_A3B2
+                
                 move.b  (a5),d0
                 jsr     GetCurrentHp
                 tst.w   d1
                 beq.w   loc_A3B2
-loc_A3AE:
+@GiveExpAndGold:
                 
                 bsr.w   battlesceneScript_GiveExpAndGold
 loc_A3B2:
@@ -100,6 +104,7 @@ byte_A3E6:
 
     ; End of function battlesceneScript_End
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

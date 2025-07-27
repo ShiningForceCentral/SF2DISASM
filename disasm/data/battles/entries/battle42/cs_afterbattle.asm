@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle42\cs_afterbattle.asm :
 ; 0x4EF04..0x4F358 : Cutscene after battle 42
 abcs_battle42:  textCursor 3106
-                loadMapFadeIn MAP_ZEON_ARENA,8,13
+                loadMapFadeIn MAP_ZEON_BATTLEFIELD,8,13
                 loadMapEntities ce_4F328
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init

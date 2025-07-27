@@ -17,7 +17,7 @@ spellanimationSetup_HealingFairy:
                 move.w  (sp)+,d1
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   @Enemy
-                lea     table_HealFairy(pc), a0
+                lea     table_LightFairy(pc), a0
                 lea     table_1A8F4(pc), a1
                 moveq   #7,d4
                 bra.s   loc_1A87E
@@ -96,7 +96,7 @@ table_1A8FE:    dc.b 0
                 dc.b 0
                 dc.b $69
                 
-table_HealFairy:
+table_LightFairy:
                 vdpSpell 256, 0, SPELLTILE17, V4|H4|32
                 vdpSpell 256, 0, SPELLTILE33, V2|H4|32
                 

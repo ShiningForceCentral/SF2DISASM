@@ -3,7 +3,7 @@
 ; 0x9AFF6..0x9B008 : 
                 mWarp 19, 2  ; entrance to headquarters
                   warpNoScroll
-                  warpMap    MAP_NEW_GRANSEAL_HQ
+                  warpMap    MAP_TACTICAL_BASE
                   warpDest   19, 22
                   warpFacing UP
                 mWarp 255, 23  ; south exit

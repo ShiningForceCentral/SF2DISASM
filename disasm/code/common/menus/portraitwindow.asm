@@ -31,11 +31,11 @@ OpenPortraitWindow:
                 move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 tst.b   ((PORTRAIT_IS_MIRRORED_TOGGLE-$1000000)).w
                 bne.s   @loc_2
-                lea     tiles_WindowBorder(pc), a0
+                lea     layout_PortraitWindow(pc), a0
                 bra.s   @loc_3
 @loc_2:
                 
-                lea     layout_PortraitWindow(pc), a0
+                lea     layout_PortraitWindowMirrored(pc), a0
 @loc_3:
                 
                 move.w  #160,d7

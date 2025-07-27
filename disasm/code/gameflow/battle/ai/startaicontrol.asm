@@ -85,7 +85,7 @@ StartAiControl:
                 ; Resume normal AI scripting (end of "swarm" AI)
 @NonSwarmAi:
                 
-                lea     (BATTLE_REGION_FLAGS_TO_BE_TRIGGERED).l,a0
+                lea     (PREVIOUSLY_TRIGGERED_BATTLE_REGIONS).l,a0
                 move.w  #0,(a0)
                 move.w  d7,d0
                 bsr.w   GetAiRegion     
@@ -303,7 +303,7 @@ ProcessExploderAi:
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_BURST_ROCK,(a0)
                 move.w  #SPELL_B_ROCK,BATTLEACTION_OFFSET_ITEM_OR_SPELL(a0)
-                move.w  d5,BATTLEACTION_OFFSET_ACTOR(a0)
+                move.w  d5,BATTLEACTION_OFFSET_TARGET(a0)
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a0
                 move.b  #-1,(a0)
                 bra.w   @Done

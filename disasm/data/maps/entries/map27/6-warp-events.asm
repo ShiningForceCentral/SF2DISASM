@@ -3,7 +3,7 @@
 ; 0xA93F6..0xA9438 : 
                 mWarp 2, 8
                   warpNoScroll
-                  warpMap    MAP_CREED_FLOOR_WORLD
+                  warpMap    MAP_FLOOR_WORLD
                   warpDest   59, 4
                   warpFacing DOWN
                 mWarp 11, 10

@@ -8,12 +8,12 @@
                   warpFacing UP
                 mWarp 63, 255
                   warpScroll RIGHT
-                  warpMap    MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION
+                  warpMap    MAP_OVERWORLD_BEDOE_KINGDOM
                   warpDest   1, 255
                   warpFacing RIGHT
                 mWarp 255, 63
                   warpScroll DOWN
-                  warpMap    MAP_OVERWORLD_AROUND_ELVEN_VILLAGE
+                  warpMap    MAP_OVERWORLD_SOUTHWEST_PARMECIA
                   warpDest   255, 1
                   warpFacing DOWN
                 endWord

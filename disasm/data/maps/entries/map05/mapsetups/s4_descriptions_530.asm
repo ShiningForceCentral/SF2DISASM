@@ -58,7 +58,7 @@ Map5_212_DescFunc1:
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     3483            ; "I can't believe it!{N}I want to die, but I can't!{W1}"
                 setFlg  945             ; Set after recruiting Lemon in Yeel
                 bra.s   return_60604
@@ -71,7 +71,7 @@ byte_605C4:
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     3483            ; "I can't believe it!{N}I want to die, but I can't!{W1}"
                 bra.s   return_60604
 loc_605EE:
