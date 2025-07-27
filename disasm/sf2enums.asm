@@ -255,6 +255,7 @@ STATUSEFFECTCOUNTER_ATTACK: equ $4000
 ; ---------------------------------------------------------------------------
 
 ; enum StatusEffects (bitfield)
+STATUSEFFECT_NONE: equ 0
 STATUSEFFECT_STUN: equ 1
 STATUSEFFECT_POISON: equ 2
 STATUSEFFECT_CURSE: equ 4
@@ -266,11 +267,6 @@ STATUSEFFECT_SILENCE: equ $300
 STATUSEFFECT_SLOW: equ $C00
 STATUSEFFECT_BOOST: equ $3000
 STATUSEFFECT_ATTACK: equ $C000
-
-; ---------------------------------------------------------------------------
-
-; enum StatusEffect_None
-STATUSEFFECT_NONE: equ 0
 
 ; ---------------------------------------------------------------------------
 
@@ -750,28 +746,28 @@ SPELLPOWER_ENHANCED: equ 99 ; spell power increased by 25%
 ; ---------------------------------------------------------------------------
 
 ; enum AiBitfield (bitfield)
-AIBITFIELD_PRIMARY_ACTIVE: equ $1  ; Activated for primary order
-AIBITFIELD_SECONDARY_ACTIVE: equ $2  ; Activated for secondary order
-AIBITFIELD_AI_CONTROLLED: equ $4  ; AI control
-AIBITFIELD_BIT3: equ $8  ; 
+AIBITFIELD_PRIMARY_ACTIVE: equ 1 ; Activated for primary order
+AIBITFIELD_SECONDARY_ACTIVE: equ 2 ; Activated for secondary order
+AIBITFIELD_AI_CONTROLLED: equ 4 ; AI control toggle
+AIBITFIELD_BIT3: equ 8
 
-AIBITFIELD_BIT4: equ $10  ; 
-AIBITFIELD_BIT5: equ $20  ; 
-AIBITFIELD_BIT6: equ $40  ; 
-AIBITFIELD_BIT7: equ $80  ; 
+AIBITFIELD_BIT4: equ $10
+AIBITFIELD_BIT5: equ $20
+AIBITFIELD_BIT6: equ $40
+AIBITFIELD_BIT7: equ $80
 
-AIBITFIELD_RESPAWN: equ $100  ; Respawning
-AIBITFIELD_HIDDEN: equ $200  ; Hidden
-AIBITFIELD_BIT10: equ $400  ; 
-AIBITFIELD_BIT11: equ $800  ; 
+AIBITFIELD_RESPAWN: equ $100 ; Respawning
+AIBITFIELD_HIDDEN: equ $200 ; Hidden
+AIBITFIELD_BIT10: equ $400
+AIBITFIELD_BIT11: equ $800
 
-AIBITFIELD_PRIORITYMOD_0: equ $0  ; Dark Smoke and Willard
-AIBITFIELD_PRIORITYMOD_1: equ $1000  ; Bosses
-AIBITFIELD_PRIORITYMOD_2: equ $2000  ; Fighters
-AIBITFIELD_PRIORITYMOD_3: equ $3000  ; Healer enemy
+AIBITFIELD_PRIORITYMOD_0: equ 0 ; Dark Smoke and Willard
+AIBITFIELD_PRIORITYMOD_1: equ $1000 ; Bosses
+AIBITFIELD_PRIORITYMOD_2: equ $2000 ; Fighters
+AIBITFIELD_PRIORITYMOD_3: equ $3000 ; Healer enemy
 
-AIBITFIELD_BIT14: equ $4000  ; 
-AIBITFIELD_BIT15: equ $8000  ; 
+AIBITFIELD_BIT14: equ $4000
+AIBITFIELD_BIT15: equ $8000
 
 ; ---------------------------------------------------------------------------
 
@@ -1107,17 +1103,9 @@ MODIFY_STATUS3: equ $C000
 ; ---------------------------------------------------------------------------
 
 ; enum ItemStatBoosters
-STAT_BOOST_MIN: equ 2
 STAT_BOOST_MOV: equ 2
-STAT_BOOST_MAX: equ 4
-STAT_BOOST_MOV_CAP: equ 9
-
-; ---------------------------------------------------------------------------
-
-; enum ItemStatBoosters
 STAT_BOOST_MIN: equ 2
 STAT_BOOST_MAX: equ 4
-STAT_BOOST_MOV: equ 2
 STAT_BOOST_MOV_CAP: equ 9
 
 ; ---------------------------------------------------------------------------
@@ -1609,11 +1597,6 @@ CAMERA_NEUTRAL: equ $FFFF
 
 ; ---------------------------------------------------------------------------
 
-; enum cameraEntity
-CAMERA_NEUTRAL: equ $FFFF
-
-; ---------------------------------------------------------------------------
-
 ; enum SoundCommands
 SOUND_COMMAND_INIT_DRIVER: equ $20
 SOUND_COMMAND_SFX_START_MINUS_ONE: equ $40
@@ -1766,14 +1749,14 @@ SPELLDEFS_COUNTER: equ spellDefsCounter
 
 ; enum SpellAnimations (bitfield)
 SPELLANIMATION_NONE: equ 0
-SPELLANIMATION_BLAZE: equ 1                 ; variation 1: lone flame
-                                            ; variation 2: small flame/fireballs
-                                            ; variation 3: large flame/fireballs
-                                            ; variation 4: large flame and flame serpent
+SPELLANIMATION_BLAZE: equ 1             ; variation 1: lone flame
+                                        ; variation 2: small flame/fireballs
+                                        ; variation 3: large flame/fireballs
+                                        ; variation 4: large flame and flame serpent
 SPELLANIMATION_FREEZE: equ 2
 SPELLANIMATION_DESOUL: equ 3
-SPELLANIMATION_HEALING_FAIRY: equ 4         ; ally caster: fairy of light
-                                            ; enemy caster: fairy of darkness
+SPELLANIMATION_HEALING_FAIRY: equ 4     ; ally caster: fairy of light
+                                        ; enemy caster: fairy of darkness
 SPELLANIMATION_BLAST: equ 5
 SPELLANIMATION_DETOX: equ 6
 SPELLANIMATION_BOLT: equ 7
@@ -1795,13 +1778,13 @@ SPELLANIMATION_ATLAS: equ $14
 SPELLANIMATION_PRISM_LASER: equ $15
 SPELLANIMATION_BUBBLE_BREATH: equ $16
 SPELLANIMATION_SNOW_BREATH: equ $17
-SPELLANIMATION_CUTOFF: equ $18              ; used by Gisarme insta-kill
+SPELLANIMATION_CUTOFF_AND_DODGE: equ $18    ; used by Gisarme insta-kill
 SPELLANIMATION_BUFF2: equ $19
-SPELLANIMATION_ATTACK_SPELL: equ $1A        ; SFCD's ATTACK spell (unused)
+SPELLANIMATION_ATTACK_SPELL: equ $1A        ; ATTACK spell animation used in SFCD, but unused in SF2
 SPELLANIMATION_DEBUFF2: equ $1B
 SPELLANIMATION_DEBUFF3: equ $1C
-SPELLANIMATION_PHOENIX_ATTACK: equ $1D      ; variation 1/3: sound waves
-                                            ; variation 2/4: Blast cyclone
+SPELLANIMATION_PHOENIX_ATTACK: equ $1D  ; variation 1/3: sound waves
+                                        ; variation 2/4: Blast cyclone
 SPELLANIMATION_BURST_ROCK_EXPLOSION: equ $1E
 SPELLANIMATION_ODD_EYE_BEAM: equ $1F
 SPELLANIMATION_VARIATION2: equ $20
@@ -1999,6 +1982,15 @@ SPELLELEMENTS_NUMBER: equ elementNumber
 
 ; ---------------------------------------------------------------------------
 
+; enum BattleActionEngine_ExpValues
+STATUSEFFECT_SPELL_EXP: equ 5 ; 5 exp per target
+HEALING_SPELL_EXP_MIN: equ 10
+HEALING_SPELL_EXP_MAX: equ 25
+HEALING_ACTION_EXP_CAP: equ 25
+PER_ACTION_EXP_CAP: equ 49
+
+; ---------------------------------------------------------------------------
+
 ; enum BattleActionEngine_SpellEffects
 CHANCE_TO_CRITICAL_DEMON_BREATH: equ 0 ; no chance to critical hit
 CHANCE_TO_INFLICT_MUDDLE1: equ 5 ; 3/8 base chance to inflict muddle 1
@@ -2007,19 +1999,13 @@ CHANCE_TO_INFLICT_DESOUL: equ 5 ; 3/8 base chance to inflict desoul
 CHANCE_TO_INFLICT_SLOW: equ 5 ; 3/8 base chance to inflict slow
 CHANCE_TO_INFLICT_SILENCE: equ 5 ; 3/8 base chance to inflict silence
 CHANCE_TO_INFLICT_SLEEP: equ 5 ; 3/8 base chance to inflict sleep
-STATUSEFFECT_SPELL_EXP: equ 5 ; 5 exp per target
 CHANCE_TO_CRITICAL_BUBBLE_BREATH: equ 8 ; 1/8 chance to critical hit
 CHANCE_TO_CRITICAL_BOLT: equ 8 ; 1/8 chance to critical hit (Bolt, Raijin, Atlas, Holy Thunder, Odd-eye beam)
-HEALING_SPELL_EXP_MIN: equ 10
 CHANCE_TO_CRITICAL_FLAME_BREATH: equ 16 ; 1/16 chance to critical hit (Flame Breath, Kiwi's Flame Breath)
 CHANCE_TO_CRITICAL_NEPTUN: equ 16 ; 1/16 chance to critical hit
-HEALING_SPELL_EXP_MIN: equ 10
-HEALING_SPELL_EXP_MAX: equ 25
-HEALING_ACTION_EXP_CAP: equ 25
 CHANCE_TO_CRITICAL_BLAZE: equ 32 ; 1/32 chance to critical hit (Blaze, Katon, Apollo, Shining Ball)
 CHANCE_TO_CRITICAL_FREEZE: equ 32 ; 1/32 chance to critical hit (Freeze, Snow Breath, Blizzard)
 CHANCE_TO_CRITICAL_BLAST: equ 32 ; 1/32 chance to critical hit (Blast, Dao)
-PER_ACTION_EXP_CAP: equ 49
 
 ; ---------------------------------------------------------------------------
 
@@ -2063,8 +2049,8 @@ MAPS_MAX_INDEX: equ mapsMaxIndex
 MAPS_NUMBER: equ mapsNumber
 MINIMAP_TILE_SIZE: equ 96
 MAP_TILE_SIZE:   equ 384
-MAP_TILE_PLUS:   equ 384
-MAP_TILE_MINUS:  equ -384
+MAP_TILE_PLUS: equ MAP_TILE_SIZE
+MAP_TILE_MINUS: equ -MAP_TILE_SIZE
 
 ; ---------------------------------------------------------------------------
 
@@ -3906,7 +3892,7 @@ LANDEFFECTSETTING_LE30: equ $20
 ; ---------------------------------------------------------------------------
 
 ; enum LandEffectSetting_Obstructed
-LANDEFFECTSETTING_OBSTRUCTED: equ $FF ; gives "30%" effect, displays as "225%" (Taros)
+LANDEFFECTSETTING_OBSTRUCTED: equ $FF ; gives "30%" effect, displays as "25%" (Taros)
 
 ; ---------------------------------------------------------------------------
 

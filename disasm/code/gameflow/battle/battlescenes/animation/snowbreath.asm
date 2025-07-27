@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\snowbreath.asm :
-; 0x1B660..0x1B6A8 : 
+; 0x1B660..0x1B6A8 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -14,11 +14,11 @@ spellanimationSetup_SnowBreath:
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   @Enemy
                 move.w  #$50,(a1) 
-                bra.s   loc_1B680
+                bra.s   @Continue
 @Enemy:
                 
                 move.w  #$D0,(a1) 
-loc_1B680:
+@Continue:
                 
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       

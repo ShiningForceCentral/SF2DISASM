@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\prismlaser.asm :
-; 0x1B406..0x1B488 : 
+; 0x1B406..0x1B488 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

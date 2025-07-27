@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\desoul.asm :
-; 0x1A73A..0x1A848 : 
+; 0x1A73A..0x1A848 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

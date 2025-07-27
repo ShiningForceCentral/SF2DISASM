@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\bolt.asm :
-; 0x1AA90..0x1AB9E : 
+; 0x1AA90..0x1AB9E : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -1837,8 +1837,12 @@ LoadMemberSummaryIcons:
 
 DmaMembersListIcon:
                 
-                moveq   #$7F,d7         ; unused icon index mask (?)
-                add.w   d0,d0
+            if (STANDARD_BUILD=1)
+                ; do nothing
+            else
+                moveq   #ITEMENTRY_MASK_INDEX,d7 ; unused icon index mask
+            endif
+                add.w   d0,d0           ; d0 is current diamond-menu choice
                 move.w  rjt_DmaMembersListIconFunctions(pc,d0.w),d0
                 jmp     rjt_DmaMembersListIconFunctions(pc,d0.w)
 

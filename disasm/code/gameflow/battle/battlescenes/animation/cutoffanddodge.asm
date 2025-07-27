@@ -66,7 +66,7 @@ loc_1B55A:
                 bra.s   loc_1B570
 @NotMirrored:
                 
-                cmpi.b  #BATTLEBACKGROUND_OVERWORLD,((BATTLESCENE_BACKGROUND-$1000000)).w
+                cmpi.b  #BATTLEBACKGROUND_OVERWORLD,((BATTLESCENE_GROUND-$1000000)).w
                 bne.s   @OverworldBackground
                 rts
 @OverworldBackground:

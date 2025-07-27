@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\blast.asm :
-; 0x1A928..0x1AA40 : 
+; 0x1A928..0x1AA40 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

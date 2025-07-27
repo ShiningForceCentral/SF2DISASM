@@ -406,7 +406,7 @@ CURRENT_ITEM_SUBMENU_ACTION: equ $FFB13C ; 0 = use
 CURRENT_MEMBERS_LIST_PAGE: equ $FFB13D
 WINDOW_IS_PRESENT: equ $FFB13F ; textbox state ? 1 without window, 2 with window
 ENTITY_INDEX_LIST: equ $FFB140 ; 1 byte holding related entity index per entity during exploration (64 bytes)
-                               ; during combat (32 bytes) (noncombatants included iterating from slots 32 to 0)
+                                        ; during combat (32 bytes) (noncombatants included iterating from slots 32 to 0)
 ENTITY_INDEX_ALLY_JARO: equ $FFB157
 ENTITY_INDEX_LIST_ENEMIES: equ $FFB160 ; 1 byte holding related entity index per entity during combat (32 bytes) (special sprites are always index 32)
 ENTITY_INDEX_ENEMY_JAR: equ $FFB16F
@@ -434,8 +434,9 @@ AI_MEMORY_TABLE: equ $FFB1DC ; related to standby AI movement
 PREVIOUSLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating regions triggered at the start of previous battle rounds
                                         ; causes issues with region triggers in the vanilla build
 
-; Battlescene Data -- cleared when scene initializes
-BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0
+
+; Battlescene block -- cleared when scene initializes
+BATTLESCENE_BACKGROUND_MODIFICATION_POINTER: equ $FFB3C0 
 word_FFB3C4: equ $FFB3C4
 BATTLESCENE_BATTLESPRITE_MODIFICATION_POINTER: equ $FFB3C6
 word_FFB3CA: equ $FFB3CA
@@ -518,7 +519,7 @@ BATTLESCENE_ENEMY_STATUS_ANIMATION: equ $FFB57F ; status effect sprite displayed
                                         ;     4 = stun
 byte_FFB580: equ $FFB580
 byte_FFB581: equ $FFB581
-BATTLESCENE_BACKGROUND: equ $FFB582
+BATTLESCENE_GROUND: equ $FFB582
 byte_FFB583: equ $FFB583
 UPDATE_SPELLANIMATION_TOGGLE: equ $FFB584
 byte_FFB585: equ $FFB585
@@ -528,6 +529,7 @@ byte_FFB588: equ $FFB588
 BATTLESCENE_ACTOR_SWITCH_STATE: equ $FFB589 ; battlescene actor switching state: 1 = waiting, 2 = currently switching, 3 = done
 DEAD_COMBATANTS_LIST: equ $FFB58A
 BATTLESCENE_DATA_END: equ $FFB59A ; end of battlescene data
+
 
 BATTLESCENE_GOLD: equ $FFB62A
 BATTLESCENE_EXP: equ $FFB62C
@@ -593,13 +595,13 @@ REGION_CHECK_STRING_3: equ $FFC41A
 PRESS_START_BUTTON_LAYOUT: equ $FFC480 ; "PRESS START BUTTON" string displayed on the title screen
 PLANE_A_MAP_AND_WINDOWS_LAYOUT: equ $FFC800
 byte_FFCC86: equ $FFCC86
-PALETTE_1_CURRENT: equ $FFD000      ; used for ally battlesprite, map, 
+PALETTE_1_CURRENT: equ $FFD000 ; used for ally battlesprite, map,
 PALETTE_1_CURRENT_01: equ $FFD002
 PALETTE_1_CURRENT_02: equ $FFD004
-PALETTE_2_CURRENT: equ $FFD020      ; used for portrait, witch screen bubble, enemy battlesprite, pulsing range
-PALETTE_3_CURRENT: equ $FFD040      ; used for UI, groundsprite, spell graphic
+PALETTE_2_CURRENT: equ $FFD020 ; used for portrait, witch screen bubble, enemy battlesprite, pulsing range
+PALETTE_3_CURRENT: equ $FFD040 ; used for UI, groundsprite, spell graphic
 PALETTE_3_CURRENT_02: equ $FFD044
-PALETTE_4_CURRENT: equ $FFD060      ; used for special sprite, background
+PALETTE_4_CURRENT: equ $FFD060 ; used for special sprite, background
 PALETTE_1_BASE: equ $FFD080
 PALETTE_1_BASE_01: equ $FFD082
 PALETTE_1_BASE_02: equ $FFD084

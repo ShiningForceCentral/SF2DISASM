@@ -438,7 +438,7 @@ LoadItemIconsAndPriceTagTiles:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  d7,-(sp)
-                bsr.w   LoadItemIconInShopScreen
+                bsr.w   LoadIconPixelsInShopScreen
                 move.l  a0,-(sp)
                 move.w  d0,d1
                 jsr     j_GetItemDefinitionAddress
@@ -520,7 +520,7 @@ LoadPriceTagTiles:
 ; Load icon pixels for item d0.w to loading space in a0.
 
 
-LoadItemIconInShopScreen:
+LoadIconPixelsInShopScreen:
                 
                 move.l  a1,-(sp)
                 move.w  d0,-(sp)
@@ -549,7 +549,7 @@ LoadItemIconInShopScreen:
                 movea.l (sp)+,a1
                 rts
 
-    ; End of function LoadItemIconInShopScreen
+    ; End of function LoadIconPixelsInShopScreen
 
 
 ; =============== S U B R O U T I N E =======================================

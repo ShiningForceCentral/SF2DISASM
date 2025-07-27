@@ -1338,7 +1338,7 @@ InitializeActionTest:
                 jsr     GetAllyGraphicsInformation
                 
                 ; Get ground platform for ally
-                st      ((BATTLESCENE_BACKGROUND-$1000000)).w
+                st      ((BATTLESCENE_GROUND-$1000000)).w
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 tst.b   d0
                 bmi.s   @Skip
@@ -1350,7 +1350,7 @@ InitializeActionTest:
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcc.s   @Skip
                 
-                move.w  battleBackground(a2),((BATTLESCENE_BACKGROUND-$1000000)).w
+                move.w  battleBackground(a2),((BATTLESCENE_GROUND-$1000000)).w
                 
                 ; Get background
 @Skip:          move.w  battleBackground(a2),d1

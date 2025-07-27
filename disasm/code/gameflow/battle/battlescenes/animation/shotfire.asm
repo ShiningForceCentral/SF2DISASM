@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\shotfire.asm :
-; 0x1AF0A..0x1AF8C : 
+; 0x1AF0A..0x1AF8C : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

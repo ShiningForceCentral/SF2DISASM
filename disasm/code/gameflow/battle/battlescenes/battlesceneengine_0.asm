@@ -575,7 +575,7 @@ loc_187BC:
                 jsr     (WaitForDmaQueueProcessing).w
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 bsr.w   GetBattlesceneGround
-                move.b  d1,((BATTLESCENE_BACKGROUND-$1000000)).w
+                move.b  d1,((BATTLESCENE_GROUND-$1000000)).w
                 cmpi.w  #-1,d1
                 beq.s   loc_18818
                 
@@ -685,7 +685,7 @@ SwitchAllyBattlesprite:
 @UpdateSpeed:
                 
                 move.w  d0,((BATTLESCENE_ALLY_X_SPEED-$1000000)).w
-                cmpi.b  #-1,((BATTLESCENE_BACKGROUND-$1000000)).w
+                cmpi.b  #-1,((BATTLESCENE_GROUND-$1000000)).w
                 beq.s   @loc_6
                 lea     ((SPRITE_BATTLESCENE_GROUND_X-$1000000)).w,a0
                 moveq   #2,d2
@@ -2145,7 +2145,7 @@ sub_194FE:
 
 LoadBattlesceneGroundVdpSprites:
                 
-                cmpi.b  #-1,((BATTLESCENE_BACKGROUND-$1000000)).w
+                cmpi.b  #-1,((BATTLESCENE_GROUND-$1000000)).w
                 beq.s   @Return
                 
                 lea     sprite_BattlesceneGround(pc), a0

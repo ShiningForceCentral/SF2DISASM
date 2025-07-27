@@ -88,7 +88,7 @@ loc_1D1C8:
                 move.w  d0,d1
                 addi.w  #$800,d0
                 andi.w  #VDPTILE_MIRROR|VDPTILE_FLIP,d0
-                andi.w  #VDPTILE_MASK|VDPTILE_PALETTE4|VDPTILE_PRIORITY,d1
+                andi.w  #VDPTILE_INDEX_MASK|VDPTILE_PALETTE4|VDPTILE_PRIORITY,d1
                 or.w    d1,d0
                 move.w  d0,VDPSPRITE_OFFSET_TILE(a4)
                 cmpi.w  #$C,(a5)

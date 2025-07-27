@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\arrowsandspears.asm :
-; 0x1ADA4..0x1AEB0 : 
+; 0x1ADA4..0x1AEB0 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -14,7 +14,7 @@ VDPTILE_ELEMENT_STATUS: equ 8
 
 ; ---------------------------------------------------------------------------
 
-; enum General VdpTiles (bitfield)
+; enum VdpTiles_General (bitfield)
 VDPTILE_SPACE: equ $20
 VDPTILE_EXCLAMATION_MARK: equ $21
 VDPTILE_QUOTATION_MARK: equ $22
@@ -242,7 +242,7 @@ VDPTILE_255: equ $FF
 
 ; ---------------------------------------------------------------------------
 
-; enum Map&Menu VdpTiles (bitfield)
+; enum VdpTiles_MapAndMenu (bitfield)
 
 VDPTILE_MAP_START: equ $100
 VDPTILE_ENTITIES_FRAME_1_START: equ $380
@@ -382,7 +382,7 @@ VDPTILE_PORTRAITTILE64: equ $7FF
 
 ; ---------------------------------------------------------------------------
 
-; enum Battlescene VdpTiles (bitfield)
+; enum VdpTiles_Battlescene (bitfield)
 VDPTILE_ALLYBATTLESPRITE1: equ $100
 VDPTILE_ALLYBATTLESPRITE17: equ $110
 VDPTILE_ALLYBATTLESPRITE33: equ $120
@@ -459,8 +459,8 @@ VDPTILE_TILE1924: equ $784
 
 ; ---------------------------------------------------------------------------
 
-; enum VdpTile masks (bitfield)
-VDPTILE_MASK: equ $7FF
+; enum VdpTile_Masks
+VDPTILE_INDEX_MASK: equ $7FF
 VDPTILE_PALETTES_MASK: equ $6000
 VDPTILE_PROPERTIES_MASK: equ $F800
 
@@ -493,13 +493,6 @@ VDPTILES_STATUSEFFECT_CURSE: equ $C0ECC0ED ; total icon in palette 3 with priori
 
 ; ---------------------------------------------------------------------------
 
-; enum VdpSprite properties
-VDP_SPRITE_SHIFT_COUNT: equ 3
-VDP_SPRITE_ENTRY_SIZE: equ 8
-VDP_SPRITES_COUNTER: equ 63
-
-; ---------------------------------------------------------------------------
-
 ; enum VdpSprite_Offsets
 VDPSPRITE_OFFSET_Y: equ 0
 VDPSPRITE_OFFSET_SIZE: equ 2
@@ -511,6 +504,13 @@ NEXTVDPSPRITE_OFFSET_SIZE: equ 10
 NEXTVDPSPRITE_OFFSET_LINK: equ 11
 NEXTVDPSPRITE_OFFSET_TILE: equ 12
 NEXTVDPSPRITE_OFFSET_X: equ 14
+
+; ---------------------------------------------------------------------------
+
+; enum VdpSprite_Properties
+VDP_SPRITE_SHIFT_COUNT: equ 3
+VDP_SPRITE_ENTRY_SIZE: equ 8
+VDP_SPRITES_COUNTER: equ 63
 
 ; ---------------------------------------------------------------------------
 

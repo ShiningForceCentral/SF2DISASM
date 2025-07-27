@@ -38,7 +38,7 @@ InitializeBattlescene:
                 bsr.w   GetWeaponspriteAndPalette
                 move.w  d2,((BATTLESCENE_WEAPONSPRITE-$1000000)).w
                 move.w  d3,((BATTLESCENE_WEAPONPALETTE-$1000000)).w
-                move.b  #-1,((BATTLESCENE_BACKGROUND-$1000000)).w
+                move.b  #-1,((BATTLESCENE_GROUND-$1000000)).w
                 
                 bsr.w   FadeOutToBlackForBattlescene
                 sndCom  SOUND_COMMAND_FADE_OUT
@@ -171,7 +171,7 @@ InitializeBattlescene:
                 restoreRomBanksAndEnableSram
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 bsr.w   GetBattlesceneGround
-                move.b  d1,((BATTLESCENE_BACKGROUND-$1000000)).w
+                move.b  d1,((BATTLESCENE_GROUND-$1000000)).w
                 
                 disableSram
                 cmpi.w  #-1,d1
@@ -299,7 +299,7 @@ InitializeBattlescene:
                 bsr.w   MoveBackgroundHorizontally
                 move.w  #1,((BATTLESCENE_ENEMY_X_SPEED-$1000000)).w
                 move.w  #-1,((BATTLESCENE_ALLY_X_SPEED-$1000000)).w
-                cmpi.b  #-1,((BATTLESCENE_BACKGROUND-$1000000)).w
+                cmpi.b  #-1,((BATTLESCENE_GROUND-$1000000)).w
                 beq.s   @WaitForNextFrame
                 
                 lea     ((SPRITE_BATTLESCENE_GROUND_X-$1000000)).w,a0

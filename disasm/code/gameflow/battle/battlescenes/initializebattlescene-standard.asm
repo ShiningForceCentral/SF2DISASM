@@ -65,7 +65,7 @@ InitializeBattlescene:
                 
                 ; Get ground platform for ally d0.w
                 bsr.w   GetBattlesceneGround
-                move.b  d1,((BATTLESCENE_BACKGROUND-$1000000)).w
+                move.b  d1,((BATTLESCENE_GROUND-$1000000)).w
                 
                 ; Get background
                 move.w  ((BATTLESCENE_ENEMY-$1000000)).w,d0
@@ -200,7 +200,7 @@ alt_InitializeBattlescene:
                 ; Get ground platform -> d1.w
                 restoreRomBanks
                 clr.w   d1
-                move.b  ((BATTLESCENE_BACKGROUND-$1000000)).w,d1
+                move.b  ((BATTLESCENE_GROUND-$1000000)).w,d1
                 cmpi.b  #-1,d1
                 beq.s   @CheckWeaponsprite
                 
@@ -326,7 +326,7 @@ alt_InitializeBattlescene:
                 bsr.w   MoveBackgroundHorizontally
                 move.w  #1,((BATTLESCENE_ENEMY_X_SPEED-$1000000)).w
                 move.w  #-1,((BATTLESCENE_ALLY_X_SPEED-$1000000)).w
-                cmpi.b  #-1,((BATTLESCENE_BACKGROUND-$1000000)).w
+                cmpi.b  #-1,((BATTLESCENE_GROUND-$1000000)).w
                 beq.s   @WaitForNextFrame
                 
                 lea     ((SPRITE_BATTLESCENE_GROUND_X-$1000000)).w,a0

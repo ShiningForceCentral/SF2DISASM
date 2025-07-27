@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\freeze.asm :
-; 0x1A654..0x1A73A : 
+; 0x1A654..0x1A73A : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -40,7 +40,7 @@ loc_1A680:
                 move.b  #2,(byte_FFAFC6).l
                 addq.w  #1,d1
 loc_1A6B4:
-                ; Variation 4
+                ; variation 4
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #-1,((byte_FFB404-$1000000)).w

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\dao.asm :
-; 0x1B012..0x1B0D0 : 
+; 0x1B012..0x1B0D0 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

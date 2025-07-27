@@ -79,7 +79,7 @@ battlesceneScript_InflictDamage:
                 jsr     battlesceneScript_CalculateDamageExp
                 tst.b   cutoff(a2)
                 beq.s   @CheckTargetDies
-                move.w  #SPELLANIMATION_CUTOFF,d4
+                move.w  #SPELLANIMATION_CUTOFF_AND_DODGE,d4
                 move.w  #-1,d5
                 bsr.w   battlesceneScript_AnimateAction
                 move.w  #$8000,d6

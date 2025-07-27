@@ -1,10 +1,10 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\oddeyebeam.asm :
-; 0x1B716..0x1B7B0 : 
+; 0x1B716..0x1B7B0 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
-; and maybe Zynk's beam too ?
+; Is also used as Zynk's beam.
 
 
 spellanimationSetup_OddEyeBeam:

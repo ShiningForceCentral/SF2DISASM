@@ -270,4 +270,3 @@ table_1A020:    dc.b 0
                 dc.b 0
                 dc.b 0
                 dc.b 0
-

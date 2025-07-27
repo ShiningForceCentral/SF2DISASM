@@ -1,14 +1,14 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\debuff.asm :
-; 0x1ABF4..0x1ACD8 : 
+; 0x1ABF4..0x1ACD8 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
 
 spellanimationSetup_Debuff1:
                 
-                lea     plt_Debuff1(pc), a0
-                bra.w   loc_1AC08
+                lea     palette_Debuff1(pc), a0
+                bra.w   spellanimationSetup_Debuff
 
     ; End of function spellanimationSetup_Debuff1
 
@@ -18,8 +18,8 @@ spellanimationSetup_Debuff1:
 
 spellanimationSetup_Debuff2:
                 
-                lea     plt_Debuff2(pc), a0
-                bra.w   loc_1AC08
+                lea     palette_Debuff2(pc), a0
+                bra.w   spellanimationSetup_Debuff
 
     ; End of function spellanimationSetup_Debuff2
 
@@ -29,14 +29,17 @@ spellanimationSetup_Debuff2:
 
 spellanimationSetup_Debuff3:
                 
-                lea     plt_Debuff3(pc), a0
+                lea     palette_Debuff3(pc), a0
 
     ; End of function spellanimationSetup_Debuff3
 
 
-; START OF FUNCTION CHUNK FOR spellanimationSetup_Debuff1
+; =============== S U B R O U T I N E =======================================
 
-loc_1AC08:
+; In: a0 = palette location
+
+
+spellanimationSetup_Debuff:
                 
                 move.l  a0,-(sp)
                 sndCom  SFX_SPELL_CAST
@@ -60,12 +63,12 @@ loc_1AC08:
                 bne.s   @Mirror
                 move.w  #$40,(a0)+ 
                 move.w  #$20,(a0) 
-                bra.s   loc_1AC64
+                bra.s   @loc_2
 @Mirror:
                 
                 move.w  #$A8,(a0)+ 
                 move.w  #$30,(a0) 
-loc_1AC64:
+@loc_2:
                 
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
@@ -94,16 +97,8 @@ loc_1AC64:
                 move.b  #4,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bra.w   sub_1A028
 
-; END OF FUNCTION CHUNK FOR spellanimationSetup_Debuff1
+    ; End of function spellanimationSetup_Debuff
 
-plt_Debuff1:    dc.w $888
-                dc.w $BBB
-                dc.w $DDD
-                
-plt_Debuff2:    dc.w $84E
-                dc.w $EC6
-                dc.w $FDA
-                
-plt_Debuff3:    dc.w $84E
-                dc.w $98E
-                dc.w $DBF
+palette_Debuff1: dc.w $888, $BBB, $DDD
+palette_Debuff2: dc.w $84E, $EC6, $FDA
+palette_Debuff3: dc.w $84E, $98E, $DBF

@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\flamebreath.asm :
-; 0x1AD3E..0x1ADA4 : 
+; 0x1AD3E..0x1ADA4 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 

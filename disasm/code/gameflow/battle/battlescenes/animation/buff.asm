@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battlescenes\animation\buff.asm :
-; 0x1AB9E..0x1ABF4 : 
+; 0x1AB9E..0x1ABF4 : Battlescene engine
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -9,7 +9,7 @@ spellanimationSetup_Buff1:
                 
                 move.w  #-2,d0
                 moveq   #30,d1
-                bra.w   loc_1ABAC
+                bra.w   spellanimationSetup_Buff
 
     ; End of function spellanimationSetup_Buff1
 
@@ -25,9 +25,10 @@ spellanimationSetup_Buff2:
     ; End of function spellanimationSetup_Buff2
 
 
-; START OF FUNCTION CHUNK FOR spellanimationSetup_Buff1
+; =============== S U B R O U T I N E =======================================
 
-loc_1ABAC:
+
+spellanimationSetup_Buff:
                 
                 movem.w d0-d1,-(sp)
                 sndCom  SFX_SPELL_CAST
@@ -46,5 +47,5 @@ loc_1ABAC:
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bra.w   sub_1A028
 
-; END OF FUNCTION CHUNK FOR spellanimationSetup_Buff1
+    ; End of function spellanimationSetup_Buff
 
