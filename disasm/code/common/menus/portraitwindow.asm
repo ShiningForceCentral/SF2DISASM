@@ -19,7 +19,7 @@ OpenPortraitWindow:
                 move.w  #VDPTILE_PORTRAITTILE1|VDPTILE_PALETTE2|VDPTILE_PRIORITY,((PORTRAIT_VDPTILES-$1000000)).w
                 move.w  #20,((BLINK_COUNTER-$1000000)).w
                 move.w  #6,((word_FFB07C-$1000000)).w
-                move.w  #$80A,d0        ; portrait dimensions
+                move.w  #WINDOW_MEMBER_PORTRAIT_SIZE,d0        ; portrait dimensions
                 move.w  #$2F6,d1        ; portrait offset
                 tst.b   ((PORTRAIT_IS_ON_RIGHT_TOGGLE-$1000000)).w
                 beq.s   @loc_1
@@ -31,11 +31,11 @@ OpenPortraitWindow:
                 move.w  d0,((PORTRAIT_WINDOW_INDEX-$1000000)).w
                 tst.b   ((PORTRAIT_IS_MIRRORED_TOGGLE-$1000000)).w
                 bne.s   @loc_2
-                lea     tiles_WindowBorder(pc), a0
+                lea     layout_PortraitWindow(pc), a0
                 bra.s   @loc_3
 @loc_2:
                 
-                lea     layout_PortraitWindow(pc), a0
+                lea     layout_PortraitWindowMirrored(pc), a0
 @loc_3:
                 
                 move.w  #160,d7

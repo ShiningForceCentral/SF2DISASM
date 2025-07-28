@@ -34,19 +34,24 @@ battlesceneScript_DetermineIneffectiveAttack:
                 movem.l d0-d1,-(sp)
                 cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w
                 bne.w   @Skip
+                
                 clrFlg  112             ; Currently attacking Taros with Achilles Sword
                 tst.b   (a4)
                 bne.w   @CheckFlag
+                
                 cmpi.w  #BATTLEACTION_ATTACK,(a3)
                 bne.w   @CheckFlag
+                
                 move.b  (a5),d0
                 jsr     GetEnemy        
                 cmpi.w  #ENEMY_TAROS,d1
                 bne.w   @CheckFlag
+                
                 move.b  (a4),d0
                 jsr     GetEquippedWeapon
                 cmpi.w  #ITEM_ACHILLES_SWORD,d1
                 bne.w   @CheckFlag
+                
                 setFlg  112             ; Currently attacking Taros with Achilles Sword
 @CheckFlag:
                 
@@ -54,6 +59,7 @@ battlesceneScript_DetermineIneffectiveAttack:
                 jsr     GetEnemy        
                 cmpi.w  #ENEMY_TAROS,d1
                 bne.s   @Skip
+                
                 chkFlg  112             ; Currently attacking Taros with Achilles Sword
                 bne.s   @Skip
                 move.b  #-1,ineffectiveAttackToggle(a2)

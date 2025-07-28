@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle34\cs_afterbattle.asm :
 ; 0x4D4B6..0x4D6CE : Cutscene after battle 34
 abcs_battle34:  textCursor 2911
-                loadMapFadeIn MAP_CAMEELA_ARENA,2,7
+                loadMapFadeIn MAP_NAZCA_BATTLEFIELD,2,7
                 loadMapEntities ce_4D69E
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -24,14 +24,14 @@ cs_4D502:       stopEntity 128
                 fadeInB
                 shiver 128
                 nextSingleText $0,128   ; "{LEADER}, I lost?!{N}Take this.{W1}"
-                nextSingleText $FF,255  ; "Cameela reveals the Sky Orb.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Cameela reveals the Sky Orb.{W1}"
                 setPos 131,7,10,LEFT
                 nextText $0,128         ; "This is the Sky Orb.  With{N}it, you can drive the Nazca{N}Ship.{W2}"
                 nextText $0,128         ; "Listen.  You have to be very{N}careful from now on.{W2}"
                 nextSingleText $0,128   ; "Geshp has Prism Flowers.{N}He will...{W1}"
                 tintMap
                 nextSingleText $C0,129  ; "Your life is over,{N}Cameela!{W1}"
-                flashScreenWhite $2
+                flashScreenWhite 2
                 tintMap
                 setActscriptWait 128,eas_Init
                 setFacing 128,LEFT
@@ -123,4 +123,4 @@ ce_4D69E:       mainEntity 7,12,UP
                 entity 63,63,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 6,12,UP,MAPSPRITE_CARAVAN,eas_Init
                 entity 63,63,LEFT,MAPSPRITE_ORB,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

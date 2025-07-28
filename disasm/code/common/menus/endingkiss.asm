@@ -9,36 +9,40 @@ PlayEndingKissSequence:
                 
                 move.b  #-1,(DEACTIVATE_WINDOW_HIDING).l
                 addq.b  #1,((WINDOW_IS_PRESENT-$1000000)).w
-                move.w  #$120E,d0
-                move.w  #$707,d1
+                move.w  #$120E,d0    ; window dimensions
+                move.w  #$707,d1    ; window offset
                 jsr     (CreateWindow).w
                 move.w  d0,d4
                 move.w  #$A640,d5
-                moveq   #$F,d7
+                moveq   #15,d7
                 move.w  #$E000,(a1)+
-loc_12E10:
+@loc_1:
                 
                 move.w  #$E000,(a1)+
-                dbf     d7,loc_12E10
+                dbf     d7,@loc_1
+                
                 move.w  #$E800,(a1)+
-                moveq   #$B,d6
-loc_12E1E:
+                moveq   #11,d6
+@loc_2:
                 
-                moveq   #$F,d7
+                moveq   #15,d7
                 move.w  #$E000,(a1)+
-loc_12E24:
+@loc_3:
                 
                 move.w  d5,(a1)+
                 addq.w  #1,d5
-                dbf     d7,loc_12E24
+                dbf     d7,@loc_3
+                
                 move.w  #$E800,(a1)+
-                dbf     d6,loc_12E1E
-                moveq   #$F,d7
+                dbf     d6,@loc_2
+                
+                moveq   #15,d7
                 move.w  #$F000,(a1)+
-loc_12E3A:
+@loc_4:
                 
                 move.w  #$F000,(a1)+
-                dbf     d7,loc_12E3A
+                dbf     d7,@loc_4
+                
                 move.w  #$F800,(a1)+
                 move.b  #5,((FADING_COUNTER_MAX-$1000000)).w
                 lea     (PALETTE_3_CURRENT).l,a0
@@ -61,12 +65,13 @@ loc_12E3A:
                 move.w  #CRAM_SIZE,d7
                 jsr     (CopyBytes).w   
                 lea     (FF6802_LOADING_SPACE).l,a1
-                move.w  #$5FF,d0
+                move.w  #1535,d0
                 moveq   #0,d1
-loc_12EB4:
+@loc_5:
                 
                 move.l  d1,(a1)+
-                dbf     d0,loc_12EB4
+                dbf     d0,@loc_5
+                
                 lea     (FF6802_LOADING_SPACE).l,a0
                 lea     ($C800).l,a1
                 move.w  #$600,d0

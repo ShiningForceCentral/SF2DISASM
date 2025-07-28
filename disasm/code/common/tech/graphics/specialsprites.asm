@@ -96,7 +96,7 @@ specialSprite_Exploration:
 AnimateSpecialSprite:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                lea     (SpecialSprites_EvilSpirit+$20)(pc), a0
+                lea     (SpecialSprites_EvilSpirit+CRAM_PALETTE_SIZE)(pc), a0
                 tst.w   d0
                 beq.s   @Continue
                 cmpi.b  #1,d0
@@ -105,7 +105,7 @@ AnimateSpecialSprite:
                 bra.s   @Continue
 @Zeon:
                 
-                lea     (SpecialSprites_Zeon+$20)(pc), a0
+                lea     (SpecialSprites_Zeon+CRAM_PALETTE_SIZE)(pc), a0
 @Continue:
                 
                 lea     (FF6802_LOADING_SPACE).l,a1
@@ -180,7 +180,7 @@ loc_25D56:
                 lea     table_2786C(pc), a2
 loc_25D5A:
                 
-                btst    #4,ENTITYDEF_OFFSET_FLAGS_B(a0)
+                btst    #ENTITYDEF_FLAGS_B_2X_ANIMATION_SPEED,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 beq.s   loc_25D64
                 addq.b  #2,d2
 loc_25D64:

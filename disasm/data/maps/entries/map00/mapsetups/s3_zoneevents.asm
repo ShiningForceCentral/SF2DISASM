@@ -37,7 +37,7 @@ cs_5E3C2:       textCursor 2731
                 setFacing FOLLOWER_B,UP
                 nextSingleText $0,FOLLOWER_B ; "I heard a voice from the{N}other side of the door.{W1}"
                 setFacing ALLY_BOWIE,UP
-                setDest 32799,13,12
+                setDest ($8000+FOLLOWER_B),13,12
                 setDest ALLY_PETER,16,12
                 setFacing FOLLOWER_B,UP
                 setFacing ALLY_PETER,UP

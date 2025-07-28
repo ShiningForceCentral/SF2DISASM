@@ -1,7 +1,7 @@
 
 ; ASM FILE data\maps\entries\map20\mapsetups\scripts_1.asm :
 ; 0x53B66..0x53E18 : 
-cs_53B66:       playSound $FD
+cs_53B66:       playSound SOUND_COMMAND_FADE_OUT
                 textCursor 2197
                 setActscriptWait 130,eas_DeactivateAutoFacing
                 setActscriptWait 128,eas_DeactivateAutoFacing
@@ -89,7 +89,7 @@ cs_53C42:       setCamDest 19,48
                 shiver 130
                 csWait 20
                 playSound SFX_SPELL_CAST
-                entityFlashWhite 130,$78
+                entityFlashWhite 130,120
                 entityActions 130
                  moveLeft 2
                 endActions
@@ -97,7 +97,7 @@ cs_53C42:       setCamDest 19,48
                  eaWait 20
                  moveLeft 2
                 endActions
-                entityFlashWhite 130,$78
+                entityFlashWhite 130,120
                 playSound SFX_SPELL_CAST
                 setPos 136,24,53,LEFT
                 nextSingleText $80,130  ; "Evil spirit inside the King,{N}begone, HAAA!{W1}"
@@ -136,7 +136,7 @@ cs_53C42:       setCamDest 19,48
                 shiver 128
                 stopEntity 128
                 setPos 135,21,52,DOWN
-                animEntityFX 135,5
+                animEntityFX 135,SLIDE_IN
                 nextSingleText $80,130  ; "Did it work?{W1}"
                 shiver 135
                 setActscriptWait 135,eas_DeactivateAutoFacing
@@ -174,14 +174,14 @@ cs_53C42:       setCamDest 19,48
                 ac_end
                 nextSingleText $80,130  ; "(Sigh){W1}"
                 nextSingleText $0,128   ; "Astral!{W1}"
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 csWait 30
                 fadeOutB
                 resetMap
                 fadeInB
                 reloadMap 0,0
                 csWait 1
-                nextSingleText $FF,255  ; "Astral is exhausted.{N}He won't wake up!{W2}{N}The Minister summons the{N}soldiers to the hall to kill{N}the evil spirit.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Astral is exhausted.{N}He won't wake up!{W2}{N}The Minister summons the{N}soldiers to the hall to kill{N}the evil spirit.{W1}"
                 setF 609                ; Set after the scene where Astral exorcises the Gizmo
                 warp MAP_GRANSEAL_CASTLE_2F,29,8,UP
                 playSound MUSIC_CASTLE

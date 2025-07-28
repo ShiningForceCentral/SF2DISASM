@@ -155,7 +155,7 @@ cs_6093A:       textCursor 3396
                 setActscriptWait 128,eas_Jump
                 nextText $80,128        ; "Ah, devils finally found the{N}hidden door.{W1}"
                 nextSingleText $80,128  ; "I must give the people time{N}to escape!{W1}"
-                nextSingleText $FF,255  ; "The priest pulls out a holy{N}symbol.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "The priest pulls out a holy{N}symbol.{W1}"
                 setPriority 131,$FFFF
                 setPriority 128,$0
                 playSound SFX_LANDSTALKER_ITEM
@@ -340,7 +340,7 @@ cs_60C42:       textCursor 3442
                 setPos FOLLOWER_B,27,53,LEFT
                 setPos 128,26,50,DOWN
                 setPos ALLY_CHAZ,25,53,RIGHT
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 reloadMap 19,48
                 fadeInB
                 csWait 60
@@ -542,7 +542,7 @@ cs_60F18:       textCursor 3471
                 followEntity ALLY_CHAZ,ALLY_BOWIE,5
                 csc_end
 cs_60F64:       textCursor 3480
-                nextText $FF,255        ; "It's a fine-looking piano.{N}Will you play it?{W1}"
+                nextText $FF,ENTITY_NONE        ; "It's a fine-looking piano.{N}Will you play it?{W1}"
                 yesNo
                 jumpIfFlagClear 89,cs_60FA4 ; YES/NO prompt answer
                 textCursor 3481
@@ -553,10 +553,10 @@ cs_60F64:       textCursor 3480
                 csWait 90
                 setQuake 0
                 csWait 30
-                nextSingleText $FF,255  ; "Something opened somewhere.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Something opened somewhere.{W1}"
                 setBlocks 32,45,1,1,11,4
                 setF 940                ; Set after playing the piano in Yeel (during the late game)
                 csc_end
 cs_60FA4:       textCursor 3482
-                nextSingleText $FF,255  ; "{LEADER}, can't you play?{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER}, can't you play?{W1}"
                 csc_end

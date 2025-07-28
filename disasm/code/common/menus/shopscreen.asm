@@ -74,7 +74,7 @@ ExecuteShopScreen:
                 move.w  #$100,d0
                 jsr     (ApplyVIntVramDmaOnCompressedTiles).w
                 jsr     (WaitForWindowMovementEnd).l
-                bsr.w   UpdateShopItemNameAndPriceWindow
+                bsr.w   MoveSelectedItemInfoWindow
                 
 @CheckRight:
                 
@@ -91,7 +91,7 @@ ExecuteShopScreen:
                 
                 addq.w  #1,d0
                 sndCom  SFX_MENU_SELECTION
-                cmp.w   ((word_FFB134-$1000000)).w,d0
+                cmp.w   ((CURRENT_SHOP_PAGE_ITEMS_NUMBER-$1000000)).w,d0
                 blt.s   @loc_3
                 
                 addq.w  #1,((CURRENT_SHOP_PAGE-$1000000)).w
@@ -165,7 +165,7 @@ ExecuteShopScreen:
                 moveq   #ITEMS_PER_SHOP_PAGE,d1
 @loc_8:
                 
-                move.w  d1,((word_FFB134-$1000000)).w
+                move.w  d1,((CURRENT_SHOP_PAGE_ITEMS_NUMBER-$1000000)).w
 @loc_9:
                 
                 cmp.w   d1,d0
@@ -369,13 +369,13 @@ WriteItemNameAndGoldAmount:
                 bsr.w   GetCurrentShopSelection
                 move.w  d0,d1
                 move.w  d1,-(sp)
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 movea.l itemNameAndPriceWindowLayoutEndAddress(a6),a1
                 adda.w  #$16,a1
                 moveq   #-20,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
                 move.w  (sp)+,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.l   d0
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d0
                 movea.l itemNameAndPriceWindowLayoutEndAddress(a6),a1
@@ -427,7 +427,7 @@ LoadItemIconsAndPriceTagTiles:
                 moveq   #ITEMS_PER_SHOP_PAGE,d1
 @loc_1:
                 
-                move.w  d1,((word_FFB134-$1000000)).w
+                move.w  d1,((CURRENT_SHOP_PAGE_ITEMS_NUMBER-$1000000)).w
                 move.w  d1,d7
                 subq.w  #1,d7
                 lea     (FF6802_LOADING_SPACE).l,a0
@@ -438,10 +438,10 @@ LoadItemIconsAndPriceTagTiles:
                 clr.w   d0
                 move.b  (a1)+,d0
                 move.w  d7,-(sp)
-                bsr.w   LoadIconPixels  
+                bsr.w   LoadIconPixelsInShopScreen
                 move.l  a0,-(sp)
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 clr.l   d0
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d0
                 movea.l (sp)+,a0
@@ -517,10 +517,10 @@ LoadPriceTagTiles:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Load icon pixels for item d1.w to loading space in a0.
+; Load icon pixels for item d0.w to loading space in a0.
 
 
-LoadIconPixels:
+LoadIconPixelsInShopScreen:
                 
                 move.l  a1,-(sp)
                 move.w  d0,-(sp)
@@ -536,15 +536,16 @@ LoadIconPixels:
                 move.l  (a1)+,(a0)+
                 dbf     d7,@Loop
                 
+                ; Clean corners
                 ori.w   #$F,-2(a0)
-                ori.w   #$F000,-$24(a0)
-                ori.w   #$F,-$9E(a0)
-                ori.w   #$F000,-$C0(a0)
+                ori.w   #$F000,-36(a0)
+                ori.w   #$F,-158(a0)
+                ori.w   #$F000,-192(a0)
                 move.w  (sp)+,d0
                 movea.l (sp)+,a1
                 rts
 
-    ; End of function LoadIconPixels
+    ; End of function LoadIconPixelsInShopScreen
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -788,7 +789,7 @@ loc_14EAE:
                 move.w  #$201,d1
                 moveq   #4,d2
                 jsr     (MoveWindow).l  
-                bra.s   UpdateShopItemNameAndPriceWindow
+                bra.s   MoveSelectedItemInfoWindow
 
     ; End of function ShiftShopInventoryWindowLayout
 
@@ -828,7 +829,7 @@ itemNameAndPriceWindowSlot = -8
 inventoryWindowLayoutEndAddress = -6
 inventoryWindowSlot = -2
 
-UpdateShopItemNameAndPriceWindow:
+MoveSelectedItemInfoWindow:
                 
                 bsr.w   WriteItemNameAndGoldAmount
                 move.w  itemNameAndPriceWindowSlot(a6),d0
@@ -840,5 +841,5 @@ UpdateShopItemNameAndPriceWindow:
                 moveq   #10,d1
                 rts
 
-    ; End of function UpdateShopItemNameAndPriceWindow
+    ; End of function MoveSelectedItemInfoWindow
 

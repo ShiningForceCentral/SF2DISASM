@@ -39,7 +39,7 @@ cs_5FB6A:       textCursor 3377
                 nextSingleText $80,ALLY_PETER ; "But...but...{N}Woooooow!{W1}"
                 setCamDest 4,6
                 setFacing ALLY_BOWIE,UP
-                playSound $FE
+                playSound SOUND_COMMAND_CUT_OUT
                 playSound SFX_BIG_DOOR_RUMBLE
                 setQuake 3
                 csWait 20
@@ -67,8 +67,8 @@ cs_5FB6A:       textCursor 3377
                 nextSingleText $80,ALLY_ZYNK ; "We're going higher and{N}higher....{W1}"
                 csWait 40
                 fadeOutB
-                setCameraEntity 65535
-                mapLoad MAP_OVERWORLD_GRANS_NORTH_SHORE,40,12
+                setCameraEntity CAMERA_NEUTRAL
+                mapLoad MAP_OVERWORLD_NAZCA_REGION,40,12
                 loadMapEntities ce_5FDD4
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setBlocks 60,59,4,5,44,15
@@ -78,7 +78,7 @@ cs_5FB6A:       textCursor 3377
                 nextSingleText $0,FOLLOWER_B ; "I've never experienced{N}anything like this in my{N}seventy years of life!{W1}"
                 csWait 60
                 fadeOutB
-                mapLoad MAP_NAZCA_SHIP_INTERIOR,4,6
+                mapLoad MAP_NAZCA_SHIP,4,6
                 loadEntitiesFromMapSetup 9,11,RIGHT
                 csWait 1
                 setActscriptWait ALLY_PETER,eas_Init
@@ -101,7 +101,7 @@ cs_5FB6A:       textCursor 3377
                 nextSingleText $80,ALLY_ZYNK ; "Oh, thank you very much.{W1}"
                 csWait 60
                 fadeOutB
-                mapLoad MAP_OVERWORLD_GRANS_NORTH_SHORE,40,12
+                mapLoad MAP_OVERWORLD_NAZCA_REGION,40,12
                 loadMapEntities ce_5FDD4
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setBlocks 60,59,4,5,44,15
@@ -117,7 +117,7 @@ cs_5FB6A:       textCursor 3377
                 csWait 15
                 executeSubroutine sub_5FD66
                 csWait 120
-                warp MAP_ZEON_ARENA,63,63,RIGHT
+                warp MAP_ZEON_BATTLEFIELD,63,63,RIGHT
                 csc_end
 
 ; =============== S U B R O U T I N E =======================================
@@ -235,4 +235,4 @@ palette_5FDB4:  dc.w 0
                 dc.w $EEE
 ce_5FDD4:       mainEntity 0,0,DOWN
                 entity 45,17,RIGHT,MAPSPRITE_NAZCA_SHIP,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle13\cs_afterbattle.asm :
 ; 0x4ACF8..0x4ADA6 : Cutscene after battle 13
 abcs_battle13:  textCursor 2495
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 loadMapFadeIn MAP_POLCA,11,8
                 loadMapEntities ce_4AD96
                 setActscriptWait ALLY_BOWIE,eas_Init
@@ -33,10 +33,10 @@ abcs_battle13:  textCursor 2495
                 nextText $C0,ALLY_LUKE  ; "He'll learn.{W2}"
                 nextSingleText $C0,ALLY_LUKE ; "Let's go see the mayor and{N}get a raft!{W1}"
                 setFacing ALLY_LUKE,UP
-                nextSingleText $FF,255  ; "{CLEAR}{LEADER} decides to take{N}{NAME;10} the BDMN with him.{W1}{CLEAR}"
+                nextSingleText $FF,ENTITY_NONE  ; "{CLEAR}{LEADER} decides to take{N}{NAME;10} the BDMN with him.{W1}{CLEAR}"
                 setF 75                 ; Luke is a follower
                 warp MAP_POLCA,16,12,DOWN
                 csc_end
 ce_4AD96:       mainEntity 16,12,DOWN
                 entity 16,13,DOWN,ALLY_LUKE,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

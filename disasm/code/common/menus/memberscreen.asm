@@ -48,6 +48,7 @@ BuildMemberScreen:
                 bsr.w   LoadMemberScreenWindowLayouts
                 move.w  portraitIndex(a6),d0
                 blt.s   @loc_1
+                
                 bsr.w   GetAllyPortrait 
                 bsr.w   LoadPortrait    
 @loc_1:
@@ -61,6 +62,7 @@ BuildMemberScreen:
                 jsr     (MoveWindowWithSfx).w
                 move.w  portraitIndex(a6),d0
                 blt.s   @loc_2
+                
                 move.w  portraitWindowSlot(a6),d0
                 move.w  #WINDOW_MEMBER_PORTRAIT_POSITION,d1
                 jsr     (MoveWindowWithSfx).w
@@ -85,6 +87,7 @@ BuildMemberScreen:
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   @loc_4
+                
                 clr.w   d0
                 bra.s   @loc_6
 @loc_4:
@@ -93,11 +96,12 @@ BuildMemberScreen:
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   @loc_5
+                
                 clr.w   d0
                 bra.s   @loc_6
 @loc_5:
                 
-                jsr     j_GetEntityIndexForCombatant
+                jsr     j_GetEntityIndexForCombatant ; move mapsprite to inside the K/D window
 @loc_6:
                 
                 move.l  a1,-(sp)
@@ -133,9 +137,10 @@ BuildMemberScreen:
                 move.w  d0,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d1,ENTITYDEF_OFFSET_YDEST(a0)
                 move.b  #64,ENTITYDEF_OFFSET_LAYER(a0)
-                andi.b  #$7F,ENTITYDEF_OFFSET_FLAGS_B(a0) 
+                andi.b  #%1111111,ENTITYDEF_OFFSET_FLAGS_B(a0)
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   @loc_9
+                
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 move.w  member(a6),d0
                 jsr     j_GetAllyMapsprite
@@ -144,24 +149,25 @@ BuildMemberScreen:
                 moveq   #-1,d2
                 move.w  d4,d3
                 jsr     (UpdateEntityProperties).w
-                bra.s   @waitForInput_Loop
+                bra.s   @WaitForInput_Loop
 @loc_9:
                 
                 move.w  member(a6),d0
                 jsr     j_GetCurrentHp
                 tst.w   d1
-                bne.s   @waitForInput_Loop
+                bne.s   @WaitForInput_Loop
+                
                 clr.b   ((SPRITES_TO_LOAD_NUMBER-$1000000)).w
                 clr.w   d0
                 moveq   #DOWN,d1
                 moveq   #-1,d2
                 move.w  #MAPSPRITE_FLAME1,d3
                 jsr     (UpdateEntityProperties).w
-@waitForInput_Loop:
+@WaitForInput_Loop:
                 
                 move.b  ((CURRENT_PLAYER_INPUT-$1000000)).w,d0
                 andi.b  #INPUT_B|INPUT_C|INPUT_A,d0
-                beq.s   @waitForInput_Loop
+                beq.s   @WaitForInput_Loop
                 
                 move.w  (sp)+,ENTITYDEF_OFFSET_FACING(a0)
                 move.w  (sp)+,d1
@@ -188,6 +194,7 @@ BuildMemberScreen:
                 jsr     (MoveWindowWithSfx).w
                 move.w  portraitIndex(a6),d0
                 blt.s   @loc_11
+                
                 move.w  portraitWindowSlot(a6),d0
                 move.w  #$F8F6,d1
                 jsr     (MoveWindowWithSfx).w
@@ -205,18 +212,20 @@ BuildMemberScreen:
                 jsr     (WaitForVInt).w
                 cmpi.b  #NOT_CURRENTLY_IN_BATTLE,((CURRENT_BATTLE-$1000000)).w
                 bne.s   @loc_16
+                
                 clr.w   d0
                 tst.b   ((PLAYER_TYPE-$1000000)).w
                 bne.s   @loc_13
+                
                 jsr     j_GetAllyMapsprite
                 bra.s   @loc_15
 @loc_13:
                 
                 cmpi.b  #PLAYERTYPE_CARAVAN,((PLAYER_TYPE-$1000000)).w
-                bne.s   @loc_14
+                bne.s   @Raft
                 moveq   #MAPSPRITE_CARAVAN,d4
                 bra.s   @loc_15
-@loc_14:
+@Raft:
                 
                 moveq   #MAPSPRITE_RAFT,d4
 @loc_15:
@@ -234,6 +243,7 @@ BuildMemberScreen:
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   @loc_17
+                
                 clr.w   d0
                 jsr     j_GetAllyMapsprite
                 clr.w   d0
@@ -273,11 +283,11 @@ member = -2
 WriteStatusEffectTiles:
                 
                 move.l  d0,(a1)
-                subq.l  #4,a1
+                subq.l  #WINDOW_MEMBERSTATUS_OFFSET_NEXT_STATUSEFFECT,a1
                 cmpi.w  #VDPTILE_SPACE|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a1)
                 beq.s   @Return
                 movea.l windowLayoutStartAddress(a6),a1
-                adda.w  #$78,a1 
+                adda.w  #120,a1
 @Return:
                 
                 rts
@@ -368,7 +378,7 @@ LoadMemberScreenWindowLayouts:
                 blt.s   @Return         ; return if no portrait to display (and assume that it's an enemy, so skip drawing gold window as well)
                 
                 move.w  portraitWindowSlot(a6),d0
-                lea     tiles_WindowBorder(pc), a0
+                lea     layout_PortraitWindow(pc), a0
                 clr.w   d1
                 jsr     (GetWindowTileAddress).w
                 move.w  #160,d7
@@ -379,7 +389,7 @@ LoadMemberScreenWindowLayouts:
                 jsr     (GetWindowTileAddress).w
                 move.w  #64,d7
                 jsr     (CopyBytes).w   
-                adda.w  #$22,a1 
+                adda.w  #34,a1
                 jsr     j_GetGold
                 move.l  d1,d0
                 moveq   #6,d7
@@ -551,7 +561,7 @@ BuildMemberStatusWindow:
                 move.w  member(a6),d0
                 tst.b   d0
                 blt.s   @WriteEnemyLVandEXP
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 movea.l windowLayoutStartAddress(a6),a1
                 adda.w  #WINDOW_MEMBERSTATUS_OFFSET_LV,a1
                 moveq   #LV_DIGITS_NUMBER,d7
@@ -647,7 +657,7 @@ BuildMemberStatusWindow:
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @Break          ; break out of loop if no spells learned
                 movem.l d1/a0,-(sp)
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 movem.l (sp)+,d1/a0
                 beq.w   @NextSpell
@@ -658,7 +668,7 @@ BuildMemberStatusWindow:
                 ; Write spell name
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
-                jsr     j_FindSpellName
+                jsr     j_GetSpellName
                 addq.w  #4,a1           ; offset to spell name relative from start
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
@@ -724,7 +734,7 @@ BuildMemberStatusWindow:
                 ; Write item name
                 movem.w d0-d1/d6-d7,-(sp)
                 movem.l a0-a1,-(sp)
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 addq.w  #4,a1           ; offset to item name relative from start
                 moveq   #-42,d1
                 bsr.w   WriteTilesFromAsciiWithRegularFont
@@ -813,7 +823,7 @@ aJewel:
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @LoadItemIcons
                 movem.l d1/a0,-(sp)
-                jsr     j_FindSpellDefAddress
+                jsr     j_GetSpellDefAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 movem.l (sp)+,d1/a0
                 beq.s   @NextSpellIcon
@@ -859,6 +869,7 @@ aJewel:
                 move.w  (sp)+,d1
                 btst    #ITEMENTRY_BIT_BROKEN,d1
                 beq.s   @CleanIconCorners
+                
                 movem.l d2-d3/a0-a1,-(sp)
                 movea.l (p_Icons).l,a0
                 lea     ICONS_OFFSET_CRACKS(a0),a0

@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle40\cs_afterbattle.asm :
 ; 0x4EA94..0x4ED0E : Cutscene after battle 40
 abcs_battle40:  textCursor 3065
-                loadMapFadeIn MAP_ODDEYE_ARENA,10,4
+                loadMapFadeIn MAP_ODD_EYE_BATTLEFIELD,10,4
                 loadMapEntities ce_4ECD6
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -54,7 +54,7 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
                  moveRight 1
                 endActions
                 nextSingleText $0,131   ; "If possible, I want to{N}relive my life...not as{N}a devil...next time....{W1}"
-                entityFlashWhite 131,$1E
+                entityFlashWhite 131,30
                 setPos 128,15,8,DOWN
                 entityActions 128
                  moveRight 2
@@ -105,9 +105,9 @@ cs_4EAEE:       setBlocks 11,6,11,29,44,0
                 hide 129
                 csWait 8
                 hide 130
-                entityFlashWhite 131,$78
+                entityFlashWhite 131,120
                 hide 131
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 csWait 120
                 playSound MUSIC_SAD_THEME_3
                 shiver ALLY_PETER
@@ -150,4 +150,4 @@ ce_4ECD6:       mainEntity 15,10,UP
                 entity 63,63,DOWN,MAPSPRITE_OBJECT1,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_OBJECT1,eas_Init
                 entity 15,8,DOWN,MAPSPRITE_ODD_EYE,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

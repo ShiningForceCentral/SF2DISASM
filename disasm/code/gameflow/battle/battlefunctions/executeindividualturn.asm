@@ -52,7 +52,7 @@ ExecuteIndividualTurn:
                 andi.w  #STATUSEFFECT_MUDDLE,d1
                 bne.w   @Call_StartAiControl
                 jsr     j_GetActivationBitfield
-                andi.w  #4,d1
+                andi.w  #AIBITFIELD_AI_CONTROLLED,d1
                 bne.w   @Call_StartAiControl
                 tst.b   d0
                 bpl.s   @CheckAutoBattleCheat1 ; check auto battle if ally
@@ -99,7 +99,7 @@ ExecuteIndividualTurn:
                 andi.w  #STATUSEFFECT_MUDDLE,d1
                 bne.w   @Call_ExecuteAiControl
                 jsr     j_GetActivationBitfield
-                andi.w  #4,d1
+                andi.w  #AIBITFIELD_AI_CONTROLLED,d1
                 bne.w   @Call_ExecuteAiControl
                 tst.b   d0
                 bpl.s   @CheckAutoBattleCheat2
@@ -176,7 +176,7 @@ ExecuteIndividualTurn:
                 bne.s   @CheckFairyWoodsBattle
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w
                 move.w  #BATTLEACTION_CAST_SPELL,((CURRENT_BATTLEACTION-$1000000)).w
-                jsr     j_GetCurrentLevel
+                jsr     j_GetLevel
                 clr.w   d0
                 cmpi.w  #KIWI_FLAME_BREATH_UPGRADE_LEVEL1,d1
                 blt.s   @CheckUpgradeLevel2
@@ -193,7 +193,7 @@ ExecuteIndividualTurn:
                 addq.w  #1,d0
 @LoadKiwiFlameBreathSpellEntry:
                 
-                lsl.w   #6,d0
+                lsl.w   #SPELLENTRY_OFFSET_LV,d0
                 ori.w   #SPELL_KIWI,d0
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
 @CheckFairyWoodsBattle:

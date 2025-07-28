@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle29\cs_beforebattle.asm :
 ; 0x4C3DC..0x4C5E6 : Cutscene before battle 29
 bbcs_29:        textCursor 2718
-                loadMapFadeIn MAP_OUTSIDE_MITULA,10,28
+                loadMapFadeIn MAP_MITULA_SHRINE_EXTERIOR,10,28
                 loadMapEntities ce_4C5AE
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -79,23 +79,23 @@ bbcs_29:        textCursor 2718
                 waitIdle ALLY_PETER
                 nextText $0,128         ; "Wait, wait.  You must not{N}enter the holy shrine.{W2}"
                 nextSingleText $0,128   ; "So be it!  Let the truth be{N}known!{W1}"
-                playSound $FD
-                animEntityFX 128,6
+                playSound SOUND_COMMAND_FADE_OUT
+                animEntityFX 128,MOSAIC_OUT
                 setCamDest 12,19
                 setPos 128,16,23,DOWN
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 csWait 40
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 setCamDest 8,15
                 setPos 128,12,18,DOWN
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 csWait 40
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 setCamDest 9,9
                 setPos 128,14,13,DOWN
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 csWait 40
-                entityFlashWhite 128,$1E
+                entityFlashWhite 128,30
                 playSound MUSIC_BATTLE_THEME_1
                 stopEntity 128
                 setSprite 128,MAPSPRITE_EFFECT2
@@ -126,4 +126,4 @@ ce_4C5AE:       mainEntity 15,33,UP
                 entity 63,63,DOWN,MAPSPRITE_ORC_LORD,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_WIZARD,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_WORM,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

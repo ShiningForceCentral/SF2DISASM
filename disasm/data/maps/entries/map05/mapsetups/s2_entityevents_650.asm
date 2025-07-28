@@ -34,11 +34,11 @@ Map5_EntityEvent0:
                 txt     786             ; "{CLEAR}{LEADER} decided to{N}follow {NAME;4}.{W1}{CLEAR}"
                 clsTxt
                 move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
-                move.w  #4,d0
+                move.w  #PORTRAIT_KAZIN,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     787             ; "Sir Hawel lives just outside{N}of this village.{W1}"
                 script  cs_51B14
                 setFlg  72              ; Kazin is a follower

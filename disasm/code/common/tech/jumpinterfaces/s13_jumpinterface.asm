@@ -35,11 +35,11 @@ j_InitializeAllEnemiesBattlePositions:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ResetEnemyStatsForRespawn:
+j_ResetSpawningEnemyStats:
                 
-                jmp     ResetEnemyStatsForRespawn(pc)
+                jmp     ResetSpawningEnemyStats(pc)
 
-    ; End of function j_ResetEnemyStatsForRespawn
+    ; End of function j_ResetSpawningEnemyStats
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -151,31 +151,31 @@ j_ClearBattleTerrainArrayObstructionFlags:
 ; AI-related
 
 
-sub_1AC038:
+j_IsRegionTriggered:
                 
-                jmp     sub_1AC9FC(pc)  
+                jmp     IsRegionTriggered(pc)
 
-    ; End of function sub_1AC038
+    ; End of function j_IsRegionTriggered
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateTriggeredRegionsAndAi:
+j_TriggerRegionsAndActivateEnemies:
                 
-                jmp     UpdateTriggeredRegionsAndAi(pc)
+                jmp     TriggerRegionsAndActivateEnemies(pc)
 
-    ; End of function j_UpdateTriggeredRegionsAndAi
+    ; End of function j_TriggerRegionsAndActivateEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_PopulateTargetsListWithRespawningEnemies:
+j_PopulateTargetsListWithSpawningEnemies:
                 
-                jmp     PopulateTargetsListWithRespawningEnemies(pc)
+                jmp     PopulateTargetsListWithSpawningEnemies(pc)
 
-    ; End of function j_PopulateTargetsListWithRespawningEnemies
+    ; End of function j_PopulateTargetsListWithSpawningEnemies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -221,11 +221,11 @@ j_DetermineBattleUpgrade:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1AC054:
+j_CheckForTrappedChest:
                 
-                jmp     sub_1B16FE(pc)  
+                jmp     CheckForTrappedChest(pc)  
 
-    ; End of function sub_1AC054
+    ; End of function j_CheckForTrappedChest
 
 
 ; =============== S U B R O U T I N E =======================================

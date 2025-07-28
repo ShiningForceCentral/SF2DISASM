@@ -3,13 +3,13 @@
 ; 0x4ABFE..0x4ACC8 : Cutscene before battle 11
 bbcs_11:        textCursor 2483
                 setCameraEntity ALLY_BOWIE
-                loadMapFadeIn MAP_CAVERNS_OF_DARKNESS,8,19
+                loadMapFadeIn MAP_DARK_CAVES,8,19
                 loadMapEntities ce_4ACA0
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setCameraEntity ALLY_BOWIE
                 executeSubroutine csub_458E
                 fadeInB
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 entityActionsWait ALLY_PETER
                  moveLeft 1
                  moveUp 1
@@ -42,11 +42,11 @@ bbcs_11:        textCursor 2483
                  moveDown 1
                 endActions
                 nextSingleText $0,128   ; "Enjoy your visit because{N}you're not leaving!{W1}"
-                playSound $FD
+                playSound SOUND_COMMAND_FADE_OUT
                 csc_end
 ce_4ACA0:       mainEntity 15,24,UP
                 entity 15,25,UP,ALLY_PETER,eas_Init
                 entity 15,3,DOWN,MAPSPRITE_HOBGOBLIN,eas_Init
                 entity 16,4,DOWN,MAPSPRITE_VAMPIRE_BAT,eas_Init
                 entity 14,4,DOWN,MAPSPRITE_WITCH,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

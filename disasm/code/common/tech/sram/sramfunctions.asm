@@ -17,7 +17,7 @@ CheckSram:
 @CheckSramString_Loop:
                 
                 cmpm.b  (a0)+,(a1)+
-                lea     1(a1),a1
+                lea     1(a1),a1 ; skip filler bytes
                 dbne    d7,@CheckSramString_Loop
                 
                 bne.w   @InitSram
@@ -43,6 +43,7 @@ CheckSram:
                 bclr    #1,(SAVE_FLAGS).l
 @Slot1:
                 
+                ; is slot 1 occupied ?
                 btst    #0,(SAVE_FLAGS).l
                 bne.s   @ChecksumSlot1
                 clr.w   d0
@@ -67,11 +68,11 @@ CheckSram:
 @InitSram:
                 
                 lea     (SRAM_START).l,a0
-                move.w  #SRAM_COUNTER,d7
+                move.w  #SRAM_BYTES_COUNTER,d7
 @ClearSram_Loop:
                 
                 clr.b   (a0)
-                addq.l  #2,a0
+                addq.l  #2,a0 ; skip filler bytes
                 dbf     d7,@ClearSram_Loop
                 
                 lea     SramCheckString(pc), a0
@@ -95,7 +96,7 @@ CheckSram:
 SaveGame:
                 
                 movem.l d0-d1/d7-a2,-(sp)
-                lea     (COMBATANT_ENTRIES).l,a0
+                lea     (COMBATANT_DATA).l,a0
                 tst.b   d0
                 bne.s   @Slot2
                 lea     (SAVE1_DATA).l,a1
@@ -125,7 +126,7 @@ SaveGame:
 LoadGame:
                 
                 movem.l d0-d1/d7-a2,-(sp)
-                lea     (COMBATANT_ENTRIES).l,a1
+                lea     (COMBATANT_DATA).l,a1
                 tst.b   d0
                 bne.s   @Slot2
                 lea     (SAVE1_DATA).l,a0
@@ -195,7 +196,7 @@ CopyBytesToSram:
                 
                 move.b  (a0),(a1)
                 add.b   (a0)+,d0
-                addq.l  #2,a1
+                addq.l  #2,a1 ; skip filler bytes
                 dbf     d7,@Loop
                 
                 movem.l (sp)+,d7-a1
@@ -218,7 +219,7 @@ CopyBytesFromSram:
                 
                 move.b  (a0),(a1)+
                 add.b   (a0),d0
-                addq.l  #2,a0
+                addq.l  #2,a0 ; skip filler bytes
                 dbf     d7,@Loop
                 
                 movem.l (sp)+,d7-a1

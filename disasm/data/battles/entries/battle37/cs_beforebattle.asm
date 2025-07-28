@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle37\cs_beforebattle.asm :
 ; 0x4DA66..0x4DB94 : Cutscene before battle 37
 bbcs_37:        textCursor 2956
-                loadMapFadeIn MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE,50,33
+                loadMapFadeIn MAP_OVERWORLD_GALAM_KINGDOM,50,33
                 loadMapEntities ce_4DB74
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -23,9 +23,9 @@ cs_4DAB8:       fadeInB
                 cameraSpeed $30
                 nextSingleText $C0,FOLLOWER_B ; "Geshp again.{W1}"
                 setCamDest 40,44
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 setPos 128,45,47,UP
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 nextSingleText $0,128   ; "Hee, hee, hee.{W1}"
                 nextSingleText $C0,ALLY_PETER ; "Do you have another cunning{N}trap for us?{W1}"
                 nextText $0,128         ; "Would I do that?{W2}"
@@ -44,7 +44,7 @@ cs_4DAB8:       fadeInB
                 setFacing 128,UP
                 nextText $0,128         ; "Now, it's your turn.{W2}"
                 nextSingleText $0,128   ; "This will be your undoing.{W1}"
-                animEntityFX 128,6
+                animEntityFX 128,MOSAIC_OUT
                 setCamDest 50,33
                 setFacing ALLY_PETER,UP
                 nextSingleText $C0,ALLY_PETER ; "Galam is just over there,{N}but...{W1}"
@@ -57,4 +57,4 @@ ce_4DB74:       mainEntity 55,36,LEFT
                 entity 56,37,LEFT,ALLY_PETER,eas_Init
                 entity 63,63,UP,MAPSPRITE_GESHP,eas_Init
                 entity 35,60,UP,MAPSPRITE_RED_BARON,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

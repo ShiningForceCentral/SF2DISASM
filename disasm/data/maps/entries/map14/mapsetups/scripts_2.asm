@@ -56,7 +56,7 @@ cs_58FA4:       textCursor 2262
                 entityActionsWait 134
                  moveDown 1
                 endActions
-                nextSingleText $FF,255  ; "{LEADER} hands over{N}the plank.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{LEADER} hands over{N}the plank.{W1}"
                 csWait 30
                 nextSingleText $0,130   ; "We need a lot of planks{N}for our new town!{W1}"
                 entityActions 130
@@ -186,7 +186,7 @@ cs_59142:       textCursor 2278
                 nextText $0,131         ; "And...{W2}"
                 nextSingleText $0,131   ; "It would be safer if we came{N}along.  Let's go.{W1}"
                 csWait 60
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 entityActions 131
                  moveDown 7
                 endActions
@@ -212,7 +212,7 @@ cs_59142:       textCursor 2278
                  moveDown 7
                 endActions
                 setStoryFlag 8          ; Battle 8 unlocked - BATTLE_NORTH_CLIFF               
-                warp MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,1,1,DOWN
+                warp MAP_OVERWORLD_BEDOE_KINGDOM,1,1,DOWN
                 csc_end
 ce_59270:       mainEntity 13,11,DOWN
                 entity 12,20,UP,ALLY_JAHA,eas_Init
@@ -228,4 +228,4 @@ ce_59270:       mainEntity 13,11,DOWN
                 entity 12,11,RIGHT,MAPSPRITE_OBJECT2,eas_InitFixedSprite
                 entity 13,11,DOWN,MAPSPRITE_OBJECT2,eas_InitFixedSprite
                 entity 14,11,LEFT,MAPSPRITE_OBJECT2,eas_InitFixedSprite
-                dc.w $FFFF
+                cscEntitiesEnd

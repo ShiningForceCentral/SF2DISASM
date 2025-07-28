@@ -145,7 +145,7 @@ IntroCutscene1: textCursor 4186
                 endActions
                 playSound SFX_WARP
                 fadeOutToBlackHalf
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 setPos ALLY_SLADE,19,3,DOWN
                 setPos 128,19,3,DOWN
                 setPos 129,19,3,DOWN
@@ -201,12 +201,12 @@ IntroCutscene1: textCursor 4186
                 setCamDest 15,5
                 shiver ALLY_SLADE
                 nextSingleText $80,ALLY_SLADE ; "I wonder if they're here?{D2}"
-                nextSingleText $FF,255  ; "{NAME;5} the thief opened{N}the chest.{D2}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;5} the thief opened{N}the chest.{D2}"
                 setBlocks 7,3,1,1,19,10
-                nextSingleText $FF,255  ; "He found Power Water.{D2}"
+                nextSingleText $FF,ENTITY_NONE  ; "He found Power Water.{D2}"
                 headshake ALLY_SLADE
                 nextSingleText $80,ALLY_SLADE ; "No, I don't want this!{D2}"
-                nextSingleText $FF,255  ; "{NAME;5} discarded the{N}Power Water.{D2}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;5} discarded the{N}Power Water.{D2}"
                 setBlocks 4,3,1,1,19,10
                 csWait 30
                 setActscriptWait ALLY_SLADE,eas_Init
@@ -261,4 +261,4 @@ ce_48340:       mainEntity 63,63,UP
                 entity 63,63,LEFT,MAPSPRITE_EFFECT4,eas_Init
                 entity 63,63,UP,MAPSPRITE_EFFECT4,eas_Init
                 entity 63,63,UP,MAPSPRITE_EFFECT4,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

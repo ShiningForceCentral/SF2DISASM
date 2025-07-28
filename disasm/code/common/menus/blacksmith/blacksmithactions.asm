@@ -331,7 +331,7 @@ byte_21CDE:
                 move.w  d0,clientMember(a6)
                 move.w  d1,itemSlot(a6)
                 move.w  d2,itemIndex(a6)
-                cmpi.w  #ITEM_MITHRIL,d2 ; HARDCODED mithril item index
+                cmpi.w  #BLACKSMITH_MITHRIL_ITEM,d2 ; HARDCODED mithril item index
                 beq.w   byte_21D1A      ; @ProcessOrder
                 txt     200             ; "Sorry, I've never worked{N}with that before....{W1}"
                 bra.s   byte_21CDE      ; @StartNewOrder

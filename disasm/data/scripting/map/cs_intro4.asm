@@ -27,7 +27,7 @@ IntroCutscene4: textCursor 4233
                 csWait 30
                 executeSubroutine ApplyStormEffect
                 setQuake 3
-                flashScreenWhite $A
+                flashScreenWhite 10
                 mapFadeOutToWhite
                 csWait 20
                 playSound SFX_INTRO_LIGHTNING
@@ -183,7 +183,7 @@ IntroCutscene4: textCursor 4233
                 endActions
                 hide 130
                 hide 129
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 csWait 30
                 setCamDest 7,5
                 setCameraEntity 128
@@ -324,10 +324,10 @@ IntroCutscene4: textCursor 4233
                 entityActions 133
                  moveDown 4
                 endActions
-                entityFlashWhite 133,$50
+                entityFlashWhite 133,80
                 waitIdle 133
                 setActscript 128,eas_RotateRightHighSpeed
-                entityFlashWhite 133,$28
+                entityFlashWhite 133,40
                 nextSingleText $80,128  ; "Aughhhh!!!{D2}"
                 hide 133
                 csWait 30
@@ -363,4 +363,4 @@ ce_48FAA:       mainEntity 63,63,UP
                 entity 63,63,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 63,63,UP,MAPSPRITE_EFFECT6,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_EFFECT4,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

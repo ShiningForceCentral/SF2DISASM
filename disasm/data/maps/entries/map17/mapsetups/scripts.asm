@@ -132,7 +132,7 @@ cs_52530:       textCursor 901
                  moveDown 1
                 endActions
                 setFacing ALLY_SLADE,DOWN
-                nextSingleText $FF,255  ; "{NAME;5} sticks a short wire{N}into the keyhole.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;5} sticks a short wire{N}into the keyhole.{W1}"
                 playSound SFX_SECRET_PATH_ROCK
                 setBlocks 48,7,1,1,48,8
                 setBlocks 62,20,1,2,48,20
@@ -142,7 +142,7 @@ cs_52530:       textCursor 901
                  moveRight 9
                 endActions
                 setFacing ALLY_SLADE,UP
-                nextSingleText $FF,255  ; "{NAME;5} sticks a short wire{N}into the keyhole.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;5} sticks a short wire{N}into the keyhole.{W1}"
                 playSound SFX_SECRET_PATH_ROCK
                 setBlocks 57,7,1,1,57,8
                 setBlocks 62,20,1,2,57,20
@@ -262,7 +262,7 @@ cs_528D4:       textCursor 947
                  moveUp 4
                 endActions
                 csWait 30
-                nextSingleText $FF,255  ; "{NAME;5} pulls up some tiles{N}with a short wire.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;5} pulls up some tiles{N}with a short wire.{W1}"
                 csWait 30
                 playSound SFX_DOOR_OPEN
                 setBlocks 63,2,1,1,57,4
@@ -283,7 +283,7 @@ cs_52938:       textCursor 952
                 nextText $0,ALLY_SLADE  ; "You're right.  I did it.{W2}"
                 nextText $0,ALLY_SLADE  ; "But, I didn't know all this{N}would happen.{W2}"
                 nextSingleText $0,ALLY_SLADE ; "Please take me with you.{W1}"
-                nextSingleText $FF,255  ; "{CLEAR}{LEADER} decides to take{N}{NAME;5} with him.{W1}{CLEAR}"
+                nextSingleText $FF,ENTITY_NONE  ; "{CLEAR}{LEADER} decides to take{N}{NAME;5} with him.{W1}{CLEAR}"
                 setActscriptWait ALLY_SLADE,eas_Jump
                 setActscript ALLY_SLADE,eas_Jump
                 nextText $0,ALLY_SLADE  ; "Thanks.  I promise to help{N}you.{W2}"
@@ -317,7 +317,7 @@ cs_52938:       textCursor 952
                 ac_end
                 setActscript ALLY_BOWIE,eas_RotateRight
                 setActscript ALLY_SLADE,eas_RotateRight
-                setDest 32768,29,18
+                setDest (ALLY_BOWIE+$8000),29,18
                 setDest ALLY_SLADE,29,17
                 setFacing ALLY_BOWIE,DOWN
                 setFacing ALLY_SLADE,DOWN

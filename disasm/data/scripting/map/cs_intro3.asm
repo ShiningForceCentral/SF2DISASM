@@ -138,7 +138,7 @@ IntroCutscene3: textCursor 4215
                 setActscriptWait ALLY_SLADE,eas_StopMoving
                 setFacing ALLY_SLADE,DOWN
                 setSprite ALLY_SLADE,MAPSPRITE_EFFECT6
-                nextSingleText $FF,255  ; "{NAME;5} the thief{N}grabbed the two jewels.{D2}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;5} the thief{N}grabbed the two jewels.{D2}"
                 csWait 20
                 nextSingleText $80,ALLY_SLADE ; "One...two...{D2}"
                 shiver ALLY_SLADE
@@ -352,4 +352,4 @@ ce_48A50:       mainEntity 63,63,UP
                 entity 26,5,UP,MAPSPRITE_WORKER,eas_Init
                 entity 27,6,UP,MAPSPRITE_WORKER,eas_Init
                 entity 26,4,DOWN,MAPSPRITE_OBJECT1,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

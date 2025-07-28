@@ -1,6 +1,6 @@
 
 ; ASM FILE data\graphics\tech\windowlayouts\portraitwindowlayout.asm :
-; 0x126EE..0x1278E : Portrait window layout
+; 0x1264E..0x1278E : Portrait window layouts (regular and mirrored
 layout_PortraitWindow:
                 
 ; Syntax        vdpTile [VDPTILE_]enum[|MIRROR|FLIP|palette|PRIORITY]
@@ -11,6 +11,108 @@ layout_PortraitWindow:
 ;               PALETTE4 = $6000
 ;
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
+                
+; 1st line
+                vdpTile PORTRAITCORNER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAITCORNER|MIRROR|PALETTE3|PRIORITY
+                
+; 2nd line
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAITTILE1|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE2|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE3|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE4|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE5|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE6|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
+                
+; 3rd line
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAITTILE9|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE10|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE11|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE12|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE13|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE14|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
+                
+; 4th line
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAITTILE17|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE18|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE19|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE20|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE21|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE22|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
+                
+; 5th line
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAITTILE25|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE26|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE27|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE28|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE29|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE30|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
+                
+; 6th line
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAITTILE33|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE34|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE35|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE36|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE37|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE38|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
+                
+; 7th line
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAITTILE41|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE42|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE43|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE44|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE45|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE46|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
+                
+; 8th line
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAITTILE49|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE50|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE51|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE52|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE53|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE54|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
+                
+; 9th line
+                vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
+                vdpTile PORTRAITTILE57|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE58|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE59|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE60|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE61|PALETTE2|PRIORITY
+                vdpTile PORTRAITTILE62|PALETTE2|PRIORITY
+                vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
+                
+; 10th line
+                vdpTile PORTRAITCORNER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
+                vdpTile PORTRAITCORNER|MIRROR|FLIP|PALETTE3|PRIORITY
+                
+layout_PortraitWindowMirrored:
                 
 ; 1st line
                 vdpTile PORTRAITCORNER|PALETTE3|PRIORITY
@@ -92,7 +194,7 @@ layout_PortraitWindow:
                 vdpTile PORTRAITTILE49|MIRROR|PALETTE2|PRIORITY
                 vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
                 
-; 8th line
+; 9th line
                 vdpTile V_PORTRAITBORDER|PALETTE3|PRIORITY
                 vdpTile PORTRAITTILE62|MIRROR|PALETTE2|PRIORITY
                 vdpTile PORTRAITTILE61|MIRROR|PALETTE2|PRIORITY
@@ -102,7 +204,7 @@ layout_PortraitWindow:
                 vdpTile PORTRAITTILE57|MIRROR|PALETTE2|PRIORITY
                 vdpTile V_PORTRAITBORDER|MIRROR|PALETTE3|PRIORITY
                 
-; 9th line
+; 10th line
                 vdpTile PORTRAITCORNER|FLIP|PALETTE3|PRIORITY
                 vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY
                 vdpTile H_PORTRAITBORDER|FLIP|PALETTE3|PRIORITY

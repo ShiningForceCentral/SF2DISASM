@@ -29,13 +29,13 @@ Map67_DescFunc0:
                 txt     2590            ; "There's a wobbly rock.{W1}"
                 clsTxt
                 move.w  ((CURRENT_SPEECH_SFX-$1000000)).w,((SPEECH_SFX_COPY-$1000000)).w
-                move.w  #7,d0
+                move.w  #ALLY_PETER,d0
                 jsr     GetEntityPortaitAndSpeechSfx
                 move.w  d1,((CURRENT_PORTRAIT-$1000000)).w
                 move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
                 chkFlg  13              ; Elric joined
                 bne.s   loc_4FD22
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     2591            ; "That rock looks{N}suspicious....{W1}"
                 bra.s   loc_4FD3A
 loc_4FD22:
@@ -44,7 +44,7 @@ loc_4FD22:
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 bne.s   loc_4FD3A
-                jsr     LoadAndDisplayCurrentPortrait
+                jsr     DisplayCurrentPortrait
                 txt     2592            ; "Maybe {NAME;13} can{N}help us.{W1}"
 loc_4FD3A:
                 

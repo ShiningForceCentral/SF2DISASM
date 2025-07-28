@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle20\cs_afterbattle.asm :
 ; 0x4B6CE..0x4B790 : Cutscene after battle 20
 abcs_battle20:  textCursor 2566
-                loadMapFadeIn MAP_HARPY_POOL,2,6
+                loadMapFadeIn MAP_HARPIES_POND,2,6
                 loadMapEntities ce_4B780
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -41,4 +41,4 @@ abcs_battle20:  textCursor 2566
                 csc_end
 ce_4B780:       mainEntity 6,10,UP
                 entity 6,8,DOWN,ALLY_ELRIC,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

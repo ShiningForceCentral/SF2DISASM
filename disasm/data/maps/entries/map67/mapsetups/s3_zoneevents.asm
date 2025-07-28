@@ -35,7 +35,7 @@ Map67_ZoneEvent0:
                 bne.s   return_4FB56
                 chkFlg  13              ; Elric joined
                 beq.s   return_4FB56
-                move.w  #$D,d0
+                move.w  #ALLY_ELRIC,d0
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.s   return_4FB56
@@ -98,7 +98,7 @@ cs_4FB64:       textCursor 2543
                 setPos ALLY_PETER,63,63,DOWN
                 setDest ALLY_BOWIE,57,25
                 setPos ALLY_BOWIE,63,63,DOWN
-                warp MAP_HARPY_POOL,11,22,UP
+                warp MAP_HARPIES_POND,11,22,UP
                 csc_end
 cs_4FC32:       textCursor 2593
                 newEntity ALLY_ELRIC,57,25,UP,NOTHING_BYTE
@@ -139,5 +139,5 @@ cs_4FC32:       textCursor 2593
                 entityActions ALLY_BOWIE
                  moveUp 1
                 endActions
-                warp MAP_UNDERGROUND_PATH_1,29,3,LEFT
+                warp MAP_FAIRY_CAVE,29,3,LEFT
                 csc_end

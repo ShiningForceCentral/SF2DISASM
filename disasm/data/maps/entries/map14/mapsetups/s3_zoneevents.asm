@@ -20,7 +20,7 @@ Map14_DefaultZoneEvent:
     ; End of function Map14_ZoneEvent0
 
 cs_58E5C:       textCursor 2261
-                nextText $FF,255        ; "Bring up the plank?"
+                nextText $FF,ENTITY_NONE        ; "Bring up the plank?"
                 yesNo
                 jumpIfFlagClear 89,cs_58EB8 ; YES/NO prompt answer
                 hideText

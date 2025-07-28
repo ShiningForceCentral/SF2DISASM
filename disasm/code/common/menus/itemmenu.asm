@@ -223,7 +223,7 @@ BuildItemMenu:
                 
                 move.w  d1,((TEMP_ITEM_OR_SPELL-$1000000)).w
                 move.w  d1,-(sp)
-                jsr     j_FindItemName
+                jsr     j_GetItemName
                 move.w  windowSlot(a6),d0
                 move.w  #MENU_ITEM_NAME_COORDS,d1
                 jsr     (GetWindowTileAddress).w

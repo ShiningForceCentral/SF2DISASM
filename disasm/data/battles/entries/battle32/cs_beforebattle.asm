@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle32\cs_beforebattle.asm :
 ; 0x4CBE2..0x4CD10 : Cutscene before battle 32
 bbcs_32:        textCursor 2845
-                loadMapFadeIn MAP_OVERWORLD_MOUN_AND_MITULA,10,38
+                loadMapFadeIn MAP_OVERWORLD_NORTH_PARMECIA,10,38
                 loadMapEntities ce_4CCC0
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -59,4 +59,4 @@ ce_4CCC0:       mainEntity 15,44,UP
                 entity 14,24,DOWN,MAPSPRITE_DEVIL_SOLDIER,eas_Init
                 entity 16,24,DOWN,MAPSPRITE_CERBERUS,eas_Init
                 entity 18,23,DOWN,MAPSPRITE_NECROMANCER,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

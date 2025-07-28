@@ -8,30 +8,30 @@ table_ItemBreakMessages:
 ; Notes: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
 ;        messageOffset is added to base message index, refer to GetItemBreakMessage for implementation details.
                 
-                itemBreakMessage POWER_RING, 1
-                itemBreakMessage PROTECT_RING, 1
-                itemBreakMessage QUICK_RING, 1
-                itemBreakMessage RUNNING_RING, 1
-                itemBreakMessage WHITE_RING, 1
-                itemBreakMessage BLACK_RING, 1
-                itemBreakMessage EVIL_RING, 1
-                itemBreakMessage MISTY_KNUCKLES, 1
-                itemBreakMessage GIANT_KNUCKLES, 1
-                itemBreakMessage HEAT_AXE, 0
-                itemBreakMessage ATLAS_AXE, 0
-                itemBreakMessage RUNE_AXE, 4
-                itemBreakMessage GRAND_CANNON, 2
-                itemBreakMessage LEVANTER, 0
-                itemBreakMessage DARK_SWORD, 4
-                itemBreakMessage VALKYRIE, 2
-                itemBreakMessage HOLY_LANCE, 2
-                itemBreakMessage HALBERD, 2
-                itemBreakMessage INDRA_STAFF, 3
-                itemBreakMessage MAGE_STAFF, 0
-                itemBreakMessage WISH_STAFF, 3
-                itemBreakMessage SUPPLY_STAFF, 3
-                itemBreakMessage FREEZE_STAFF, 3
-                itemBreakMessage GODDESS_STAFF, 3
-                itemBreakMessage DEMON_ROD, 3
+                itemBreakMessage POWER_RING, PIECES
+                itemBreakMessage PROTECT_RING, PIECES
+                itemBreakMessage QUICK_RING, PIECES
+                itemBreakMessage RUNNING_RING, PIECES
+                itemBreakMessage WHITE_RING, PIECES
+                itemBreakMessage BLACK_RING, PIECES
+                itemBreakMessage EVIL_RING, PIECES
+                itemBreakMessage MISTY_KNUCKLES, PIECES
+                itemBreakMessage GIANT_KNUCKLES, PIECES
+                itemBreakMessage HEAT_AXE, FLAMES
+                itemBreakMessage ATLAS_AXE, FLAMES
+                itemBreakMessage RUNE_AXE, RUSTED
+                itemBreakMessage GRAND_CANNON, SPLIT
+                itemBreakMessage LEVANTER, FLAMES
+                itemBreakMessage DARK_SWORD, RUSTED
+                itemBreakMessage VALKYRIE, SPLIT
+                itemBreakMessage HOLY_LANCE, SPLIT
+                itemBreakMessage HALBERD, SPLIT
+                itemBreakMessage INDRA_STAFF, MANGLED
+                itemBreakMessage MAGE_STAFF, FLAMES
+                itemBreakMessage WISH_STAFF, MANGLED
+                itemBreakMessage SUPPLY_STAFF, MANGLED
+                itemBreakMessage FREEZE_STAFF, MANGLED
+                itemBreakMessage GODDESS_STAFF, MANGLED
+                itemBreakMessage DEMON_ROD, MANGLED
                 
                 tableEnd.w

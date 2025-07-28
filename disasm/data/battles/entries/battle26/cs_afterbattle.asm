@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle26\cs_afterbattle.asm :
 ; 0x4BCAA..0x4BE6A : Cutscene after battle 26
 abcs_battle26:  textCursor 2637
-                loadMapFadeIn MAP_OVERWORLD_NORTH_SOUTH_PARMECIA_JUNCTION,13,11
+                loadMapFadeIn MAP_OVERWORLD_BEDOE_KINGDOM,13,11
                 loadMapEntities ce_4BE4A
                 setActscriptWait ALLY_BOWIE,eas_Init
                 customActscriptWait ALLY_HIGINS
@@ -25,12 +25,12 @@ abcs_battle26:  textCursor 2637
                 setFacing ALLY_PETER,RIGHT
                 nextSingleText $0,ALLY_PETER ; "Is he alright?{W1}"
                 nextSingleText $0,FOLLOWER_B ; "We have to save him before{N}he is possessed by an evil...{W1}"
-                entityFlashWhite FOLLOWER_B,$3C
-                flashScreenWhite $1E
+                entityFlashWhite FOLLOWER_B,60
+                flashScreenWhite 30
                 setCamDest 13,9
-                animEntityFX 128,4
+                animEntityFX 128,SLIDE_OUT
                 setPos 128,18,13,DOWN
-                animEntityFX 128,5
+                animEntityFX 128,SLIDE_IN
                 setFacing ALLY_PETER,UP
                 entityActionsWait 128
                  moveUp 3
@@ -100,4 +100,4 @@ ce_4BE4A:       mainEntity 19,16,UP
                 entity 17,14,DOWN,ALLY_PETER,eas_Init
                 entity 18,14,DOWN,ALLY_HIGINS,eas_Init
                 entity 63,63,UP,MAPSPRITE_EVIL_CLOUD,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

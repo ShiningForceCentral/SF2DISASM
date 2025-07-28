@@ -20,13 +20,13 @@ edcs_battle5:   textCursor 2323
                 endActions
                 setFacing ALLY_SLADE,LEFT
                 csWait 30
-                nextSingleText $FF,255  ; "{NAME;5} searched the tool{N}bag of the Galam Knight.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;5} searched the tool{N}bag of the Galam Knight.{W1}"
                 csWait 40
                 setFacing ALLY_SLADE,DOWN
                 setActscriptWait ALLY_SLADE,eas_Jump
                 setActscript ALLY_SLADE,eas_Jump
                 nextSingleText $0,ALLY_SLADE ; "Yes!  I found one!{W1}"
-                nextSingleText $FF,255  ; "{NAME;5} has the Jewel{N}of Light.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "{NAME;5} has the Jewel{N}of Light.{W1}"
                 setFacing ALLY_SLADE,LEFT
                 csWait 20
                 setActscriptWait ALLY_SLADE,eas_BumpLeft

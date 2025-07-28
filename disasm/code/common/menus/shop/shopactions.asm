@@ -65,7 +65,7 @@ byte_200CE:
                 
                 move.w  d0,selectedItem(a6)
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.w  selectedItem(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 clr.l   ((DIALOGUE_NUMBER-$1000000)).w
@@ -238,7 +238,7 @@ loc_202F4:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,selectedItem(a6)
                 move.w  selectedItem(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 clr.l   d0
@@ -352,7 +352,7 @@ loc_2046C:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,selectedItem(a6)
                 move.w  selectedItem(a6),d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.w  itemPrice(a6),d0
                 lsr.w   #2,d0           ; repair is 25% item price
@@ -450,7 +450,7 @@ byte_205C8:
                 
                 move.w  d0,selectedItem(a6)
                 move.w  d0,d1
-                jsr     j_GetItemDefAddress
+                jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.w  selectedItem(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 clr.l   ((DIALOGUE_NUMBER-$1000000)).w

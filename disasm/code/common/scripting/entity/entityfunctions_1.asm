@@ -6,7 +6,7 @@
 
 battleEntity = -4
 
-sub_444A2:
+SpawnEnemyEntity:
                 
                 link    a6,#-16
                 move.w  d0,battleEntity(a6)
@@ -40,7 +40,7 @@ loc_444D6:
                 movem.l a0-a1,-(sp)
                 lea     (FF6802_LOADING_SPACE).l,a0
                 move.l  a0,-(sp)
-                move.w  #$8F,d7 
+                move.w  #143,d7
 loc_4450A:
                 
                 clr.l   (a0)+
@@ -59,7 +59,7 @@ loc_4450A:
                 unlk    a6
                 rts
 
-    ; End of function sub_444A2
+    ; End of function SpawnEnemyEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -71,7 +71,7 @@ GetEntityEvent:
                 
                 movem.l d0-d5/d7-a0,-(sp)
                 move.w  d0,-(sp)
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 clr.w   d0
                 moveq   #ENTITIES_TOTAL_COUNTER,d7
 @CheckEntityEvent_Loop:
@@ -91,7 +91,7 @@ GetEntityEvent:
                 subi.w  #ENTITY_ENEMY_INDEX_DIFFERENCE,d7
 @Ally:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 move.b  d0,(a0,d7.w)
                 move.w  d0,d6
                 bsr.w   DeclareNewEntity
@@ -113,9 +113,9 @@ InitializeNewEntity:
                 bsr.w   GetAllyMapsprite
 loc_4457E:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 clr.w   d0
-                moveq   #$3E,d7 
+                moveq   #62,d7
 loc_44586:
                 
                 cmp.b   (a0),d0
@@ -134,7 +134,7 @@ loc_4458C:
                 subi.w  #ENTITY_ENEMY_INDEX_DIFFERENCE,d7
 @Ally:
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 adda.w  d7,a0
                 move.w  (sp)+,d7
                 move.b  d0,(a0)
@@ -244,7 +244,7 @@ loc_44666:
                 clr.l   (a0)+
                 dbf     d7,loc_44666    
                 
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a0
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a0
                 moveq   #15,d7
 loc_44688:
                 
@@ -268,7 +268,7 @@ PositionBattleEntities:
                 movem.l d0-a1,-(sp)
                 link    a6,#-16
                 bsr.s   ClearEntities
-                lea     ((ENTITY_EVENT_INDEX_LIST-$1000000)).w,a1
+                lea     ((ENTITY_INDEX_LIST-$1000000)).w,a1
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
                 clr.w   battleEntity(a6)
                 clr.w   d0
@@ -294,14 +294,14 @@ PositionBattleEntities:
                 jsr     j_GetMoveType
                 clr.w   d6
                 cmpi.b  #MOVETYPE_LOWER_FLYING,d1
-                bne.s   @loc_2
+                bne.s   @CheckHovering_Ally
                 addq.w  #1,d6
-@loc_2:
+@CheckHovering_Ally:
                 
                 cmpi.b  #MOVETYPE_LOWER_HOVERING,d1
-                bne.s   @loc_3
+                bne.s   @NotAerial_Ally
                 addq.w  #1,d6
-@loc_3:
+@NotAerial_Ally:
                 
                 swap    d6
                 movem.w (sp)+,d0-d1
@@ -326,7 +326,7 @@ PositionBattleEntities:
                 addq.w  #1,battleEntity(a6)
                 dbf     d7,@PositionAllies_Loop
                 
-                lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
+                lea     ((ENTITY_INDEX_LIST_ENEMIES-$1000000)).w,a1
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
                 move.w  #COMBATANT_ENEMIES_START,battleEntity(a6)
 @PositionEnemies_Loop:
@@ -357,14 +357,14 @@ PositionBattleEntities:
                 jsr     j_GetMoveType
                 clr.w   d6
                 cmpi.b  #MOVETYPE_LOWER_FLYING,d1
-                bne.s   @loc_7
+                bne.s   @CheckHovering_Enemy
                 addq.w  #1,d6
-@loc_7:
+@CheckHovering_Enemy:
                 
                 cmpi.b  #MOVETYPE_LOWER_HOVERING,d1
-                bne.s   @loc_8
+                bne.s   @NotAerial_Enemy
                 addq.w  #1,d6
-@loc_8:
+@NotAerial_Enemy:
                 
                 swap    d6
                 movem.w (sp)+,d0-d1
@@ -409,20 +409,20 @@ PositionBattleEntities:
                 bne.w   @Done
                 
                 ; Position neutral entities
-                lea     ((ENTITY_EVENT_ENEMY_START-$1000000)).w,a1
+                lea     ((ENTITY_INDEX_LIST_ENEMIES-$1000000)).w,a1
                 lea     table_NeutralBattleEntities(pc), a0
                 clr.w   d1
                 move.b  ((CURRENT_BATTLE-$1000000)).w,d1
-@loc_12:
+@CheckForNeutralEntity_Loop:
                 
                 cmpi.w  #-1,(a0)
-                beq.w   @Done
+                beq.w   @Done  ; battle does not contain neutral entity
                 cmp.w   (a0)+,d1
-                beq.s   @Continue
+                beq.s   @Continue ; battle found in list
 @loc_13:
                 
                 cmpi.w  #-1,(a0)+
-                beq.s   @loc_12
+                beq.s   @CheckForNeutralEntity_Loop
                 bra.s   @loc_13
 @Continue:
                 

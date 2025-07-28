@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle38\cs_afterbattle.asm :
 ; 0x4DE8C..0x4E3D2 : Cutscene after battle 38
 abcs_battle38:  textCursor 3012
-                loadMapFadeIn MAP_OVERWORLD_GRANS_GRANSEAL,3,22
+                loadMapFadeIn MAP_OVERWORLD_GRANSEAL_KINGDOM,3,22
                 loadMapEntities ce_4E372
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -155,7 +155,7 @@ cs_4DF00:       setActscriptWait 128,eas_DeactivateAutoFacing
                 entityActionsWait 136
                  moveUp 3
                 endActions
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 playSound SFX_BATTLEFIELD_DEATH
                 setQuake 3
                 csWait 50
@@ -202,7 +202,7 @@ cs_4DF00:       setActscriptWait 128,eas_DeactivateAutoFacing
                 csWait 10
                 setPos 135,6,14,LEFT
                 csWait 40
-                flashScreenWhite $14
+                flashScreenWhite 20
                 tintMap
                 setFacing 136,DOWN
                 setQuake 3
@@ -291,7 +291,7 @@ cs_4DF00:       setActscriptWait 128,eas_DeactivateAutoFacing
                 csWait 8
                 hide 135
                 setQuake 0
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 csWait 40
                 setSprite 136,MAPSPRITE_GESHP
                 setActscriptWait 136,eas_Die
@@ -324,4 +324,4 @@ ce_4E372:       mainEntity 8,23,DOWN
                 entity 63,63,LEFT,MAPSPRITE_EFFECT3,eas_Init
                 entity 6,27,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_FILLER4,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

@@ -3,6 +3,6 @@
 ; 0x4F47A..0x4F48A : Cutscene after battle 0
 abcs_battle00:  textCursor 466
                 playSound MUSIC_ITEM
-                nextSingleText $FF,255  ; "Game over!{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Game over!{W1}"
                 hideText
                 csc_end

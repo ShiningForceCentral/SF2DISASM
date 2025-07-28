@@ -13,17 +13,17 @@
                   warpFacing LEFT
                 mWarp 0, 255
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_MOUN_AND_MITULA
+                  warpMap    MAP_OVERWORLD_NORTH_PARMECIA
                   warpDest   2, 25
                   warpFacing DOWN
                 mWarp 31, 255
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_MOUN_AND_MITULA
+                  warpMap    MAP_OVERWORLD_NORTH_PARMECIA
                   warpDest   5, 25
                   warpFacing DOWN
                 mWarp 255, 38
                   warpNoScroll
-                  warpMap    MAP_OVERWORLD_MOUN_AND_MITULA
+                  warpMap    MAP_OVERWORLD_NORTH_PARMECIA
                   warpDest   5, 25
                   warpFacing DOWN
                 endWord

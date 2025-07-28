@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle01\cs_beforebattle.asm :
 ; 0x494BC..0x496DC : Cutscene before battle 1
 bbcs_01:        textCursor 2292
-                loadMapFadeIn MAP_ANCIENT_TOWER_FIRST_ROOM,2,10
+                loadMapFadeIn MAP_ANCIENT_TOWER_ENTRANCE,2,10
                 loadMapEntities ce_49694
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setPos ALLY_SARAH,8,17,UP
@@ -60,7 +60,7 @@ bbcs_01:        textCursor 2292
                 setFacing 135,UP
                 setCamDest 2,1
                 setPos 128,7,4,DOWN
-                animEntityFX 128,7
+                animEntityFX 128,MOSAIC_IN
                 setActscriptWait 128,eas_DeactivateAutoFacing
                 setActscriptWait 135,eas_DeactivateAutoFacing
                 entityActionsWait 135
@@ -138,4 +138,4 @@ ce_49694:       mainEntity 7,16,UP
                 entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GIZMO,eas_Init
                 entity 7,11,UP,MAPSPRITE_ASTRAL,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

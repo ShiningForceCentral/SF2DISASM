@@ -11,7 +11,7 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    0
-                    areaDefaultMusic 8
+                    areaDefaultMusic MUSIC_TOWN
                 
                     mainLayerStart      51, 0
                     mainLayerEnd        61, 9
@@ -22,7 +22,7 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    0
-                    areaDefaultMusic 8
+                    areaDefaultMusic MUSIC_TOWN
                 
                     mainLayerStart      51, 10
                     mainLayerEnd        61, 19
@@ -33,5 +33,5 @@
                     mainLayerAutoscroll 0, 0
                     scndLayerAutoscroll 0, 0
                     mainLayerType    0
-                    areaDefaultMusic 8
+                    areaDefaultMusic MUSIC_TOWN
                 endWord

@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle42\cs_beforebattle.asm :
 ; 0x4ED8E..0x4EF04 : Cutscene before battle 42
 bbcs_42:        textCursor 3088
-                loadMapFadeIn MAP_ZEON_ARENA,8,29
+                loadMapFadeIn MAP_ZEON_BATTLEFIELD,8,29
                 loadMapEntities ce_4EEDC
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -77,7 +77,7 @@ cs_4EDE8:       stopEntity 129
                 nextSingleText $C0,128  ; "You shall never see Zeon!{N}I'll kill you before that!{W1}"
                 setQuake 3
                 playSound SFX_INTRO_LIGHTNING
-                flashScreenWhite $1E
+                flashScreenWhite 30
                 csWait 20
                 setQuake 0
                 csc_end
@@ -86,4 +86,4 @@ ce_4EEDC:       mainEntity 13,35,UP
                 entity 13,36,UP,ALLY_LEMON,eas_Init
                 entity 13,18,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
                 entity 13,15,DOWN,MAPSPRITE_ELIS,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

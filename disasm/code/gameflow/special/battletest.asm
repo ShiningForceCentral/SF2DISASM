@@ -107,7 +107,7 @@ byte_77DE:
                 txt     456             ; "Battle number?{D1}"
                 clr.w   d0
                 clr.w   d1
-                move.w  #BATTLES_DEBUG_NUMBER,d2
+                move.w  #BATTLES_DEBUG_MAX_INDEX,d2
                 jsr     j_NumberPrompt
                 clsTxt
                 tst.w   d0
@@ -186,7 +186,7 @@ LoadAllyStatsDecimalDigits:
                 lea     (FF0000_RAM_START).l,a0
 @Loop:
                 
-                bsr.w   j_GetCurrentLevel
+                bsr.w   j_GetLevel
                 bsr.w   GetDecimalDigits
                 move.w  d1,(a0)
                 bsr.w   j_GetMaxHp

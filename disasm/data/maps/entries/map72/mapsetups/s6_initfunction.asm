@@ -19,6 +19,7 @@ return_4FF40:
 
     ; End of function ms_map72_InitFunction
 
+                ; unused suspend scene
                 resetMap
                 reloadMap 0,0
                 playSound MUSIC_SAD_THEME_3
@@ -26,6 +27,7 @@ return_4FF40:
                 textCursor 240
                 nextSingleText $0,ALLY_BOWIE ; "That's it for today?{W2}{N}Yes, you had better take a{N}rest now.{N}Come back again.{W1}"
                 csc_end
+				
 cs_4FF5A:       textCursor 1556
                 newEntity ALLY_LUKE,43,47,DOWN,NOTHING_BYTE
                 csWait 1

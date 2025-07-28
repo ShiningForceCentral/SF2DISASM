@@ -86,7 +86,7 @@ AdjustTargetPriorityForAlly:
                 bra.w   loc_CE90
 loc_CE4A:
                 
-                bsr.w   CheckMuddled2   
+                bsr.w   IsConfused      
                 tst.b   d1
                 beq.s   loc_CE56        ; if attacker is not inflicted with Muddle2
                 bra.w   loc_CE90
@@ -100,7 +100,7 @@ loc_CE66:
                 
                 clr.l   d0
                 move.b  d4,d0           ; d0 = attacker index
-                jsr     GetMoveType     
+                jsr     GetMoveType
                 clr.l   d3
                 move.b  d1,d3
                 lea     (pt_D9C2).l,a4  
@@ -176,7 +176,7 @@ GetHighestUsableSpellLevel:
                 add.w   d2,d1
                 lsl.w   #SPELLENTRY_OFFSET_LV,d1
                 add.w   d4,d1
-                jsr     FindSpellDefAddress
+                jsr     GetSpellDefAddress
                 cmp.b   SPELLDEF_OFFSET_MP_COST(a0),d3
                 bcc.w   @Break
                 dbf     d2,@Loop
@@ -197,7 +197,7 @@ GetHighestUsableSpellLevel:
 ;   In: d0.b = combatant index, d1.b = spell index
 ;   Out: d1.w = spell index, d2.w = slot
 
-
+;unused
 GetSlotContainingSpell:
                 
                 movem.l d0/d3-a6,-(sp)
@@ -232,7 +232,7 @@ loc_CF38:
 ;   In: d0.b = combatant index, d1.b = item index
 ;   Out: d1.w = item index, d2.w = slot
 
-
+;unused
 GetSlotContainingItem:
                 
                 movem.l d0/d3-a6,-(sp)

@@ -10,7 +10,7 @@ ms_map24_InitFunction:
                  
                 sndCom  MUSIC_HEADQUARTERS
                 jsr     (FadeInFromBlack).w
-                move.w  #$46,((CURRENT_SPEECH_SFX-$1000000)).w 
+                move.w  #SFX_DIALOG_BLEEP_2,((CURRENT_SPEECH_SFX-$1000000)).w 
                 chkFlg  544             ; Battle 44 completed - BATTLE_FAIRY_WOODS                 
                 bne.w   loc_59CB2
                 txt     467             ; "Welcome to the fairy woods{N}special stage!{W2}"
@@ -43,16 +43,16 @@ return_59C9C:
 cs_StartSpecialBattle:
                 
                 setStoryFlag 44         ; Battle 44 unlocked - BATTLE_FAIRY_WOODS               
-                warp MAP_SECRET_MONK_FOREST_BATTLEFIELD,1,24,LEFT
+                warp MAP_ELVEN_VILLAGE_BATTLEFIELD,1,24,LEFT
                 csc_end
 cs_LeaveSpecialBattle:
                 
-                warp MAP_SECRET_MONK_FOREST,30,24,LEFT
+                warp MAP_ELVEN_VILLAGE,30,24,LEFT
                 csc_end
 loc_59CB2:
                 
                 move.l  ((SPECIAL_BATTLE_TIME-$1000000)).w,d0
-                divs.w  #$3C,d0 
+                divs.w  #60,d0 ; determine # min/sec
                 move.w  d0,d1
                 ext.l   d1
                 move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
@@ -67,7 +67,7 @@ loc_59CB2:
                 txt     477             ; "Congratulations!{N}You made it!"
                 move.l  d0,((SPECIAL_BATTLE_RECORD-$1000000)).w
                 sndCom  MUSIC_ITEM
-                jsr     j_FadeOut_WaitForP1Input ; fade out music and wait for P2 input ?!
+                jsr     j_FadeOut_WaitForP1Input
                 bra.s   byte_59CF4      
 byte_59CF0:
                 

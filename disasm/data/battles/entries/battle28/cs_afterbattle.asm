@@ -84,8 +84,8 @@ abcs_battle28:  textCursor 2670
                 nextSingleText $0,ALLY_PETER ; "Why not?{W1}"
                 nextSingleText $0,128   ; "Because of me!{W1}"
                 setCamDest 8,25
-                entityFlashWhite 128,$28
-                flashScreenWhite $14
+                entityFlashWhite 128,40
+                flashScreenWhite 20
                 setPos 128,11,30,RIGHT
                 setSprite 128,MAPSPRITE_EFFECT2
                 setFacing 128,UP
@@ -124,7 +124,7 @@ abcs_battle28:  textCursor 2670
                 setActscriptWait 128,eas_Jump
                 nextSingleText $C0,128  ; "Of course.{W1}"
                 nextSingleText $0,FOLLOWER_B ; "HA!{W1}"
-                entityFlashWhite FOLLOWER_B,$28
+                entityFlashWhite FOLLOWER_B,40
                 setActscriptWait 128,eas_Jump
                 nextSingleText $C0,128  ; "Ooops!{W1}"
                 setActscriptWait 128,eas_DeactivateAutoFacing
@@ -170,7 +170,7 @@ abcs_battle28:  textCursor 2670
                  moveUp 10
                 endActions
                 csWait 40
-                setCameraEntity 65535
+                setCameraEntity CAMERA_NEUTRAL
                 setCamDest 8,26
                 setFacing ALLY_BOWIE,UP
                 setFacing ALLY_PETER,UP
@@ -215,4 +215,4 @@ ce_4C3B4:       mainEntity 12,28,DOWN
                 entity 13,28,DOWN,ALLY_PETER,eas_Init
                 entity 12,27,DOWN,MAPSPRITE_CARAVAN,eas_Init
                 entity 63,63,LEFT,MAPSPRITE_EFFECT3,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd

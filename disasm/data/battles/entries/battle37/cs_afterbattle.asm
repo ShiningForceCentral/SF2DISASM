@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\entries\battle37\cs_afterbattle.asm :
 ; 0x4DB94..0x4DDA4 : Cutscene after battle 37
 abcs_battle37:  textCursor 2972
-                loadMapFadeIn MAP_OVERWORLD_GRANS_AROUND_DWARF_VILLAGE,31,54
+                loadMapFadeIn MAP_OVERWORLD_GALAM_KINGDOM,31,54
                 loadMapEntities ce_4DD8C
                 setActscriptWait ALLY_BOWIE,eas_Init
                 setActscriptWait ALLY_PETER,eas_Init
@@ -38,7 +38,7 @@ cs_4DBEE:       stopEntity ALLY_LEMON
                 csWait 30
                 setFacing ALLY_PETER,RIGHT
                 nextSingleText $0,FOLLOWER_B ; "I think I've seen his style{N}of fighting before.{N}Let's see his face.{W1}"
-                nextSingleText $FF,255  ; "Astral removes the mask.{W1}"
+                nextSingleText $FF,ENTITY_NONE  ; "Astral removes the mask.{W1}"
                 nextSingleText $C0,ALLY_LEMON ; "Huh?{W1}"
                 setActscript ALLY_PETER,eas_Jump
                 setActscriptWait FOLLOWER_B,eas_Jump
@@ -53,7 +53,7 @@ cs_4DBEE:       stopEntity ALLY_LEMON
                 nextSingleText $0,ALLY_PETER ; "Let me see him.{W1}"
                 shiver ALLY_LEMON
                 stopEntity ALLY_LEMON
-                entityFlashWhite ALLY_LEMON,$39
+                entityFlashWhite ALLY_LEMON,57
                 setActscript ALLY_PETER,eas_Jump
                 setActscript ALLY_BOWIE,eas_Jump
                 setActscriptWait FOLLOWER_B,eas_Jump
@@ -118,4 +118,4 @@ cs_4DBEE:       stopEntity ALLY_LEMON
 ce_4DD8C:       mainEntity 36,57,DOWN
                 entity 33,59,RIGHT,ALLY_PETER,eas_Init
                 entity 35,59,DOWN,ALLY_LEMON,eas_Init
-                dc.w $FFFF
+                cscEntitiesEnd
