@@ -36,6 +36,10 @@ It should be possible to start from this disassembly to modify the game's data a
 - The game's code can be edited in the disassembly. Beware : ASM 68k writing skills required !
 
 
+## Editor tool requirements :
+
+The provided tools are Java applications (.jar). In order to ensure that they work correctly, you will need to install Java SE v17 or higher https://www.oracle.com/java/technologies/downloads/. NOTE: Some have experienced conficts if they already had older versions of Java installed. You may need to uninstall old versions of Java https://www.java.com/en/download/uninstalltool.jsp.
+
 ## Naming conventions :
 
 - Functions : DoSomethingLikeThis
