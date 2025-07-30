@@ -59,6 +59,7 @@ FIX_AI_JARO_NOT_LEAVING_THE_FORCE:   equ 1   ; Resets Jaro's stats, makes him le
 FIX_KARNA_INCREASED_DOUBLE:          equ 1   ; 1 = No increased double, 2 = Sheela gets increased double instead.  An oddity in the character initialization routine causes the chance to double attack to be increased if the character happens to start knowing Heal 3.
 FIX_KIWI_BREATH_UPGRADE_LEVELS:      equ 1   ; Kiwi's breath upgrades are based on effective rather than current level.
 FIX_LABYRINTH_DELETION:              equ 1   ; Prevents a section of the labyrinth from being deleted due to AI region activation.
+FIX_MEMBER_GOLD_MENU_GLITCH:         equ 1   ; The gold window displayed on the member status screen should only be 4 tiles tall rather than 12. This fixes a visual glitch in the lower-left corner of screen.
 FIX_MISSING_RANDOM_BATTLES:          equ 1   ; Adds zone events for random battles without.
 FIX_MOVEMENT_GLITCH:                 equ 1   ; The movement glitch is used in battles to reach places which are out of the controlled character's moving boundaries.
 FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE: equ 1   ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.

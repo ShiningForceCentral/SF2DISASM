@@ -2523,11 +2523,16 @@ WINDOW_ENTRIES_LONGWORD_COUNTER: equ $1F
 
 ; enum Window_Member
 
+goldWindowSize = $80C
 kdTextLength = 6
 kdDefeatsOffset = 36
 kdKillsOffset = 114
 kdLayoutBytesize = 192
 kdWindowSize = $80C
+
+    if (STANDARD_BUILD&FIX_MEMBER_GOLD_MENU_GLITCH=1)
+goldWindowSize = $804 ; The gold menu should only be 4 tiles tall rather than 12. This fixes a visual glitch in the lower-left corner of the member status screen.
+    endif
 
     if (STANDARD_BUILD&EXTENDED_STATUS=1)
 kdTextLength = 5
@@ -2547,7 +2552,7 @@ WINDOW_MEMBER_KD_POSITION: equ $20B
 WINDOW_MEMBER_GOLD_POSITION: equ $217
 WINDOW_MEMBER_PORTRAIT_SIZE: equ $80A
 WINDOW_MEMBER_KD_SIZE: equ kdWindowSize
-WINDOW_MEMBER_GOLD_SIZE: equ $80C
+WINDOW_MEMBER_GOLD_SIZE: equ goldWindowSize
 WINDOW_MEMBER_KD_DEST: equ $F80B
 WINDOW_MEMBER_GOLD_DEST: equ $F81C
 WINDOW_MEMBER_PORTRAIT_DEST: equ $F8F6
