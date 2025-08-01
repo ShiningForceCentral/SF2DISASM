@@ -13,8 +13,8 @@ spellanimationSetup_Blaze:
                 move.w  #BLAZE_FLASH_COLOR,d0
                 bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_BLAZE,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_BLAZE,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d1
                 btst    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   @Mirrored
@@ -22,7 +22,7 @@ spellanimationSetup_Blaze:
                 bra.s   @Continue
 @Mirrored:
                 
-                lea     table_1A5B2(pc), a1
+                lea     (table_1A5BC-10)(pc), a1
 @Continue:
                 
                 andi.w  #7,d1
@@ -50,7 +50,7 @@ spellanimationSetup_Blaze:
                 adda.w  d0,a0
                 moveq   #$26,d0 ; offset to sprite_38
                 moveq   #2,d1
-                bsr.w   sub_19FAA       
+                bsr.w   ConstructComplexGraphic       
                 clr.w   d1
                 move.b  5(a1),d1
                 beq.s   loc_1A52A
@@ -93,7 +93,7 @@ loc_1A552:
                 moveq   #$2C,d0 ; offset to sprite_44
                 moveq   #8,d1
                 lea     graphic_BlazeDragon(pc), a0
-                bsr.w   sub_19FAA       
+                bsr.w   ConstructComplexGraphic       
 loc_1A56E:
                 ; variaton 4
                 move.w  #-1,((byte_FFB404-$1000000)).w
@@ -102,8 +102,6 @@ loc_1A56E:
                 move.b  5(a1),d0
                 addq.b  #1,d0
                 move.b  d0,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-loc_1A58A:
-                
                 move.b  #1,((byte_FFB588-$1000000)).w
                 bra.w   sub_1A028
 
@@ -152,7 +150,7 @@ table_1A594:    ; Variation 1
                 dc.b 0
                 
                 ; Variation 4
-table_1A5B2:    dc.b 2
+                dc.b 2
                 dc.b $40
                 dc.b $50
                 dc.b $70
@@ -165,7 +163,7 @@ table_1A5B2:    dc.b 2
                 dc.b $20
                 dc.b 0
                 
-                ; Variation 1 Mirrored
+table_1A5BC:    ; Variation 1 Mirrored
                 dc.b 0
                 dc.b $B0
                 dc.b $80
@@ -222,23 +220,23 @@ table_1A5B2:    dc.b 2
                 dc.b 0
                 
 table_1A5E4:    ; Variation 1
-                vdpSpell 0, 0, SPELLTILE34, V4|H2|32
-                vdpSpell 0, 0, SPELLTILE34, V4|H2|32  ; bug: should be SPELLTILE42
+                vdpSpell 0, 0, SPELLTILE34, V4|H2|VALUE2
+                vdpSpell 0, 0, SPELLTILE34, V4|H2|VALUE2  ; bug: should be SPELLTILE42
                 
                 ; Variation 2
-                vdpSpell 0, 0, SPELLTILE50, V4|H3|32
-                vdpSpell 0, 32, SPELLTILE62, V2|H3|32
+                vdpSpell 0, 0, SPELLTILE50, V4|H3|VALUE2
+                vdpSpell 0, 32, SPELLTILE62, V2|H3|VALUE2
                 
                 ; Variation 3&4
-                vdpSpell 0, 0, SPELLTILE86, V4|H4|32
-                vdpSpell 0, 32, SPELLTILE102, V4|H4|32
+                vdpSpell 0, 0, SPELLTILE86, V4|H4|VALUE2
+                vdpSpell 0, 32, SPELLTILE102, V4|H4|VALUE2
                 
 graphic_BlazeDragon:
-                vdpSpell 0, 0, SPELLTILE18, V4|H4|32
-                vdpSpell 0, 0, SPELLTILE9, V3|H3|32
-                vdpSpell 0, 0, SPELLTILE9, V3|H3|32
-                vdpSpell 0, 0, SPELLTILE9, V3|H3|32
-                vdpSpell 0, 0, SPELLTILE9, V3|H3|32
-                vdpSpell 0, 0, SPELLTILE9, V3|H3|32
-                vdpSpell 0, 0, SPELLTILE5, V2|H2|32
-                vdpSpell 0, 0, SPELLTILE1, V2|H2|32
+                vdpSpell 0, 0, SPELLTILE18, V4|H4|VALUE2
+                vdpSpell 0, 0, SPELLTILE9, V3|H3|VALUE2
+                vdpSpell 0, 0, SPELLTILE9, V3|H3|VALUE2
+                vdpSpell 0, 0, SPELLTILE9, V3|H3|VALUE2
+                vdpSpell 0, 0, SPELLTILE9, V3|H3|VALUE2
+                vdpSpell 0, 0, SPELLTILE9, V3|H3|VALUE2
+                vdpSpell 0, 0, SPELLTILE5, V2|H2|VALUE2
+                vdpSpell 0, 0, SPELLTILE1, V2|H2|VALUE2

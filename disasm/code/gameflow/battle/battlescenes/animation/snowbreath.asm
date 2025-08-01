@@ -8,8 +8,8 @@
 spellanimationSetup_SnowBreath:
                 
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_SNOW_BREATH,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_SNOW_BREATH,d0
+                bsr.w   LoadSpellTileset
                 lea     ((byte_FFB532-$1000000)).w,a1
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   @Enemy

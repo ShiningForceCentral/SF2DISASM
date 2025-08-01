@@ -27,7 +27,7 @@ SetupCutoff:
                 bsr.w   ExecuteSpellcastFlashEffect
                 move.l  #table_CutOffBattlespriteModification,((BATTLESCENE_BATTLESPRITE_MODIFICATION_POINTER-$1000000)).w
                 move.w  #1,((word_FFB3CA-$1000000)).w
-                move.b  #$A,((byte_FFB583-$1000000)).w
+                move.b  #10,((byte_FFB583-$1000000)).w
 loc_1B52A:
                 
                 tst.w   ((word_FFB3CA-$1000000)).w
@@ -66,10 +66,10 @@ loc_1B55A:
                 bra.s   loc_1B570
 @NotMirrored:
                 
-                cmpi.b  #BATTLEBACKGROUND_OVERWORLD,((BATTLESCENE_GROUND-$1000000)).w
-                bne.s   @OverworldBackground
+                cmpi.b  #-1,((BATTLESCENE_GROUND-$1000000)).w
+                bne.s   @SpriteOnGround
                 rts
-@OverworldBackground:
+@SpriteOnGround:
                 
                 btst    #1,((byte_FFB56F-$1000000)).w
                 beq.s   loc_1B570
@@ -77,20 +77,20 @@ loc_1B55A:
 loc_1B570:
                 
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_CUTOFF,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_CUTOFF,d0
+                bsr.w   LoadSpellTileset
                 lea     ((SPELLANIMATION_PROPERTIES-$1000000)).w,a5
                 lea     ((BATTLESCENE_ALLY_X_SPEED-$1000000)).w,a3
                 lea     table_1B608(pc), a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   @NotMirroredGraphics
-                addq.w  #8,a0
+                addq.w  #VDP_SPELL_ENTRY_SIZE,a0
                 lea     ((BATTLESCENE_ENEMY_X_SPEED-$1000000)).w,a3
 @NotMirroredGraphics:
                 
-                move.w  2(a0),6(a5)
-                moveq   #$26,d0  ; offset to sprite_38
-                bsr.w   sub_19F5E
+                move.w  VDPSPELL_OFFSET_Y(a0),6(a5)
+                moveq   #38,d0  ; offset to sprite_38
+                bsr.w   ConstructSimpleGraphic
                 jsr     (sub_1942).w    
                 sndCom  SFX_PSHHH
                 move.w  #5,4(a5)
@@ -129,12 +129,12 @@ loc_1B5E4:
                 bra.s   loc_1B5B2
 loc_1B604:
                 
-                bra.w   sub_1A00A
+                bra.w   ClearSpellGraphics
 
     ; End of function SetupDodge
 
                 modend
                 
-table_1B608:    vdpSpell 312, 272, SPELLTILE1, V2|H2|32
+table_1B608:    vdpSpell 312, 272, SPELLTILE1, V2|H2|VALUE2
                 
-                vdpSpell 192, 256, SPELLTILE1, V2|H2|32
+                vdpSpell 192, 256, SPELLTILE1, V2|H2|VALUE2

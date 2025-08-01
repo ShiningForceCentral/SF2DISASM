@@ -9,8 +9,8 @@ spellanimationSetup_CannonFire:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_CANNON_PROJECTILE,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_CANNON_PROJECTILE,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d0
                 lea     table_1AEFA(pc), a1
                 btst    #SPELLANIMATION_BIT_MIRRORED,d0

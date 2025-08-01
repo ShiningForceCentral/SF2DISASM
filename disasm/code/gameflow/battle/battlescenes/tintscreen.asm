@@ -136,8 +136,8 @@ sub_1A0C4:
                 movem.l a0-a1,-(sp)
                 lea     ((PALETTE_3_CURRENT-$1000000)).w,a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
-                move.w  $12(a0),$12(a1)
-                move.l  $1A(a0),$1A(a1)
+                move.w  $12(a0),$12(a1) ; color 9
+                move.l  $1A(a0),$1A(a1) ; color 13/14
                 movem.l (sp)+,a0-a1
                 rts
 
@@ -154,8 +154,8 @@ PreserveBasePaletteEntries:
                 movem.l a0-a1,-(sp)
                 lea     ((PALETTE_3_CURRENT-$1000000)).w,a0
                 lea     ((PALETTE_3_BASE-$1000000)).w,a1
-                move.w  $12(a1),$12(a0)
-                move.l  $1A(a1),$1A(a0)
+                move.w  $12(a1),$12(a0) ; color 9
+                move.l  $1A(a1),$1A(a0) ; color 13/14
                 movem.l (sp)+,a0-a1
                 rts
 
@@ -176,7 +176,7 @@ ProduceDarkenedPalettes:
                 
                 move.w  (a0),d6
                 lsr.w   #1,d6
-                andi.w  #$777,d6
+                andi.w  #HALF_COLOR_MASK,d6
                 move.w  d6,(a0)+
                 dbf     d7,@Loop
                 
@@ -213,7 +213,7 @@ ProduceDimmedPalettes:
                 lsr.w   #1,d6
                 move.w  d6,d5
                 lsr.w   #1,d5
-                andi.w  #$333,d5
+                andi.w  #QUARTER_COLOR_MASK,d5
                 add.w   d5,d6
                 move.w  d6,(a0)+
                 dbf     d7,@Loop
@@ -306,9 +306,9 @@ ProduceBlueMonochromePalettes:
                 
                 move.w  (a0),d0
                 move.w  d0,d1
-                andi.w  #$E00,d0        ; isolate blue component
-                lsr.w   #1,d1           ; and halve the others
-                andi.w  #$EE,d1 
+                andi.w  #COLOR_MASK_BLUE,d0  ; isolate blue component
+                lsr.w   #1,d1                ; and halve the others
+                andi.w  #(FULL_COLOR_MASK-COLOR_MASK_BLUE),d1 
                 or.w    d1,d0
                 move.w  d0,(a0)+
                 dbf     d7,@Loop
@@ -346,9 +346,9 @@ ProduceGreenMonochromePalettes:
                 
                 move.w  (a0),d0
                 move.w  d0,d1
-                andi.w  #$E0,d0 ; isolate green component
-                lsr.w   #1,d1           ; and halve the others
-                andi.w  #$E0E,d1
+                andi.w  #COLOR_MASK_GREEN,d0   ; isolate green component
+                lsr.w   #1,d1    	           ; and halve the others
+                andi.w  #(FULL_COLOR_MASK-COLOR_MASK_GREEN),d1
                 or.w    d1,d0
                 move.w  d0,(a0)+
                 dbf     d7,@Loop
@@ -386,9 +386,9 @@ ProduceRedMonochromePalettes:
                 
                 move.w  (a0),d0
                 move.w  d0,d1
-                andi.w  #$E,d0          ; isolate red component
-                lsr.w   #1,d1           ; and halve the others
-                andi.w  #$EE0,d1
+                andi.w  #COLOR_MASK_RED,d0  ; isolate red component
+                lsr.w   #1,d1               ; and halve the others
+                andi.w  #(FULL_COLOR_MASK-COLOR_MASK_RED),d1
                 or.w    d1,d0
                 move.w  d0,(a0)+
                 dbf     d7,@Loop
@@ -421,7 +421,7 @@ tint_Apollo:
                 bsr.s   ProduceRedMonochromePalettes
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 lea     ((PALETTE_1_BASE-$1000000)).w,a1
-                moveq   #7,d0
+                moveq   #CRAM_PALETTE_LONGWORDS_COUNTER,d0
 @Palette1_Loop:
                 
                 move.l  (a1)+,(a0)+     ; restore palette 1
@@ -429,7 +429,7 @@ tint_Apollo:
                 
                 lea     NEXT_PALETTE(a0),a0
                 lea     NEXT_PALETTE(a1),a1
-                moveq   #7,d0
+                moveq   #CRAM_PALETTE_LONGWORDS_COUNTER,d0
 @Palette3_Loop:
                 
                 move.l  (a1)+,(a0)+     ; restore palette 3

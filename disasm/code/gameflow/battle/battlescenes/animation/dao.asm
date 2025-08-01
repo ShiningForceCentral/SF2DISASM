@@ -35,11 +35,11 @@ loc_1B040:
                 addq.w  #1,d1
                 dbf     d2,loc_1B026
                 
-                moveq   #SPELLGRAPHICS_DAO,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_DAO,d0
+                bsr.w   LoadSpellTileset
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
-                move.w  #$5A,((byte_FFB532-$1000000)).w 
+                move.w  #90,((byte_FFB532-$1000000)).w 
                 lea     (FF8804_LOADING_SPACE).l,a0
                 move.w  #1023,d0
 @ClearLoadingSpace_Loop:
@@ -50,8 +50,8 @@ loc_1B040:
                 move.l  #table_DaoBackgroundModification,((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.l  #table_DaoBattlespriteModification,((BATTLESCENE_BATTLESPRITE_MODIFICATION_POINTER-$1000000)).w
-                move.w  #$A,((word_FFB3CA-$1000000)).w
-                move.b  #$F,((byte_FFB583-$1000000)).w
+                move.w  #10,((word_FFB3CA-$1000000)).w
+                move.b  #15,((byte_FFB583-$1000000)).w
                 move.b  #1,((byte_FFB56B-$1000000)).w
                 bclr    #3,((byte_FFB56E-$1000000)).w
                 move.w  #-1,((byte_FFB404-$1000000)).w

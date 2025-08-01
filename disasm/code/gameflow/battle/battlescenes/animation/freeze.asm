@@ -13,10 +13,10 @@ spellanimationSetup_Freeze:
                 move.w  #FREEZE_FLASH_COLOR,d0
                 bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_FREEZE,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_FREEZE,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d1
-                lea     (table_1A6DA-12)(pc), a0 ; need to fix that ugly offset reference with the true data begin label
+                lea     (table_1A6DA-12)(pc), a0
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 beq.s   loc_1A680
                 lea     $30(a0),a0

@@ -46,8 +46,8 @@ spellanimationSetup_Debuff:
                 move.w  #DEBUFF_FLASH_COLOR,d0
                 bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_DEBUFF,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_DEBUFF,d0
+                bsr.w   LoadSpellTileset
                 movea.l (sp)+,a0
                 lea     ((PALETTE_3_CURRENT-$1000000)).w,a1
                 lea     ((PALETTE_3_BASE-$1000000)).w,a2

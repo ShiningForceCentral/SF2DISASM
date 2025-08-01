@@ -68,7 +68,7 @@ sub_1A2F6:
                 movem.l d6-d7,-(sp)
                 lea     ((SPELLANIMATION_PROPERTIES-$1000000)).w,a0
                 clr.w   d6
-                moveq   #$18,d7
+                moveq   #24,d7
 loc_1A302:
                 
                 tst.w   (a0)
@@ -76,11 +76,11 @@ loc_1A302:
                 move.w  d0,(a0)
                 clr.l   2(a0)
                 clr.l   6(a0)
-                clr.w   $A(a0)
+                clr.w   10(a0)
                 bra.s   loc_1A324
 loc_1A316:
                 
-                lea     $C(a0),a0
+                lea     12(a0),a0
                 addq.w  #1,d6
                 dbf     d7,loc_1A302
                 move.w  #-1,d6
@@ -148,7 +148,7 @@ loc_1A3AC:
                 
                 btst    #6,((byte_FFB56E-$1000000)).w
                 beq.s   loc_1A3B8
-                lea     $24(a2),a2
+                lea     36(a2),a2
 loc_1A3B8:
                 
                 lea     (byte_FFAFB4).l,a3
@@ -159,15 +159,15 @@ loc_1A3C0:
                 move.w  d4,d3
 loc_1A3C6:
                 
-                move.w  d2,(a1)+     ; move y
-                move.w  #$F00,(a1)+  ; move V4|H4|0
-                move.w  (a2)+,(a1)+  ; move tile
-                move.w  d0,(a1)+     ; move x
+                move.w  d2,(a1)+                                  ; move y
+                move.w  #VDPSPRITESIZE_V4|VDPSPRITESIZE_H4,(a1)+  ; move V4|H4|0
+                move.w  (a2)+,(a1)+                               ; move tile
+                move.w  d0,(a1)+                                  ; move x
                 move.b  #2,(a3)+
-                addi.w  #$20,d2 
+                addi.w  #32,d2 
                 dbf     d3,loc_1A3C6
                 
-                addi.w  #$20,d0 
+                addi.w  #32,d0 
                 dbf     d1,loc_1A3C0
                 
                 jmp     (sub_1942).w    
@@ -182,20 +182,20 @@ sub_1A3E8:
                 
                 lea     ((SPRITE_20_VDPTILE-$1000000)).w,a0
                 lea     (table_1F776).l,a1
-                moveq   #$11,d0
+                moveq   #17,d0
                 btst    #5,((byte_FFB56F-$1000000)).w
                 beq.s   loc_1A402
-                lea     $48(a1),a1
-                moveq   #$F,d0
+                lea     72(a1),a1
+                moveq   #15,d0
 loc_1A402:
                 
                 btst    #6,((byte_FFB56E-$1000000)).w
                 beq.s   loc_1A40E
-                lea     $24(a1),a1
+                lea     36(a1),a1
 loc_1A40E:
                 
                 move.w  (a1)+,(a0)
-                addq.w  #8,a0
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
                 dbf     d0,loc_1A40E
                 rts
 

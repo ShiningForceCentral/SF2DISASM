@@ -9,15 +9,15 @@ spellanimationSetup_GunnerBlast:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_GUNNER_PROJECTILE,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_GUNNER_PROJECTILE,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d0
                 lea     table_1B002(pc), a0
                 lea     table_1AFEA(pc), a1
                 btst    #SPELLANIMATION_BIT_MIRRORED,d0
                 beq.s   loc_1AFAE
-                addq.w  #8,a0
-                lea     $C(a1),a1
+                addq.w  #VDP_SPELL_ENTRY_SIZE,a0
+                lea     12(a1),a1
 loc_1AFAE:
                 
                 lea     ((byte_FFB532-$1000000)).w,a2
@@ -25,7 +25,7 @@ loc_1AFAE:
                 move.l  (a1)+,(a2)+
                 move.l  (a1),(a2)
                 moveq   #$26,d0   ; offset to sprite_38
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 bsr.w   CopyPalettes
@@ -47,7 +47,7 @@ table_1AFEA:    dc.l $F3000000
                 dc.l $7000F0
                 dc.l $880048
                 
-table_1B002:    vdpSpell 318, 250, SPELLTILE1, V2|H2|16
+table_1B002:    vdpSpell 318, 250, SPELLTILE1, V2|H2|VALUE1
                 
                 ; mirror
-                vdpSpell 208, 224, SPELLTILE1, V2|H2|16
+                vdpSpell 208, 224, SPELLTILE1, V2|H2|VALUE1

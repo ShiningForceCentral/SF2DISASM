@@ -8,8 +8,8 @@
 spellanimationSetup_BurstRockExplosion:
                 
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_EXPLOSION,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_EXPLOSION,d0
+                bsr.w   LoadSpellTileset
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #-1,((byte_FFB404-$1000000)).w

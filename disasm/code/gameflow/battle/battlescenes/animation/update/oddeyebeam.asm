@@ -35,7 +35,7 @@ loc_1ED06:
                 bne.s   loc_1ED42
                 move.w  2(a3),(a4)
                 move.w  #VDPSPRITESIZE_V1|VDPSPRITESIZE_H4,VDPSPRITE_OFFSET_SIZE(a4)
-                move.w  #$C524,d0
+                move.w  #VDPTILE_SPELLTILE5|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 or.w    4(a3),d0
                 move.w  d0,VDPSPRITE_OFFSET_TILE(a4)
                 move.w  (a3),VDPSPRITE_OFFSET_X(a4)
@@ -48,7 +48,7 @@ loc_1ED42:
                 cmpi.w  #6,4(a5)
                 bcs.w   return_1EDDA
                 addq.b  #1,2(a5)
-                move.b  #$1E,3(a5)
+                move.b  #30,3(a5)
                 clr.b   ((byte_FFB588-$1000000)).w
                 bra.w   return_1EDDA
 loc_1ED64:
@@ -77,12 +77,12 @@ loc_1ED84:
 loc_1EDB2:
                 
                 tst.w   ((byte_FFB404-$1000000)).w
-                beq.w   sub_1B82A
+                beq.w   ReinitializeSceneAfterSpell
                 cmpi.b  #3,((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
                 bne.w   return_1EDDA
                 move.b  #1,((byte_FFB588-$1000000)).w
                 move.b  #1,((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
-                move.w  #$102,2(a5)
+                move.w  #258,2(a5)
                 clr.w   4(a5)
 return_1EDDA:
                 
@@ -97,7 +97,7 @@ return_1EDDA:
 sub_1EDDC:
                 
                 move.w  4(a5),d0
-                moveq   #$20,d1 
+                moveq   #32,d1 ; pixel width of graphic
                 tst.w   4(a3)
                 beq.s   loc_1EDEA
                 neg.w   d1
@@ -105,7 +105,7 @@ loc_1EDEA:
                 
                 muls.w  d0,d1
                 add.w   d2,d1
-                lsl.w   #3,d0
+                lsl.w   #VDP_SPRITE_SHIFT_COUNT,d0
                 lea     (a4,d0.w),a0
                 cmpi.w  #2,4(a5)
                 bcs.s   loc_1EE00
@@ -113,8 +113,8 @@ loc_1EDEA:
 loc_1EE00:
                 
                 move.w  2(a3),(a0)+
-                move.w  #$C00,(a0)+
-                move.w  #$C52C,d0
+                move.w  #VDPSPELLPROP_V1|VDPSPELLPROP_H4,(a0)+
+                move.w  #VDPTILE_SPELLTILE13|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 or.w    4(a3),d0
                 move.w  d0,(a0)+
                 move.w  d1,(a0)+
@@ -130,7 +130,7 @@ loc_1EE00:
 sub_1EE1A:
                 
                 move.w  4(a5),d0
-                lsl.w   #3,d0
+                lsl.w   #VDP_SPRITE_SHIFT_COUNT,d0
                 move.w  #1,(a4,d0.w)
                 addq.w  #1,4(a5)
                 rts

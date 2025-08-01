@@ -8,14 +8,14 @@
 spellanimationSetup_PrismLaser:
                 
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_PRSIM_LASER,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_PRSIM_LASER,d0
+                bsr.w   LoadSpellTileset
                 moveq   #1,d0
                 jsr     sub_1A2F6(pc)   
                 cmpi.w  #ENEMYBATTLESPRITE_PRISM_FLOWER,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
                                                         ; HARDCODED Prism Flower enemy battle sprite
                 bne.s   loc_1B426
-                move.w  #$28,4(a0) 
+                move.w  #40,4(a0) 
                 bra.s   loc_1B42C
 loc_1B426:
                 
@@ -27,17 +27,17 @@ loc_1B42E:
                 
                 moveq   #1,d0
                 jsr     sub_1A2F6(pc)   
-                moveq   #$10,d6
+                moveq   #16,d6
                 jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,2(a0)
                 dbf     d1,loc_1B42E
                 
                 lea     graphic_LaserSphere(pc), a0
-                moveq   #$26,d0   ; offset to sprite_38
-                bsr.w   sub_19F5E
+                moveq   #38,d0   ; offset to sprite_38
+                bsr.w   ConstructSimpleGraphic
                 lea     (byte_FFAFC6).l,a1
-                moveq   #$F,d0
+                moveq   #15,d0
 loc_1B456:
                 
                 move.b  #2,(a1)+
@@ -53,4 +53,4 @@ loc_1B456:
     ; End of function spellanimationSetup_PrismLaser
 
 graphic_LaserSphere:
-                vdpSpell 184, 212, SPELLTILE4, V4|H4|32
+                vdpSpell 184, 212, SPELLTILE4, V4|H4|VALUE2

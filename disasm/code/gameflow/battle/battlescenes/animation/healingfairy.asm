@@ -12,19 +12,19 @@ spellanimationSetup_HealingFairy:
                 move.w  #HEALING_FLASH_COLOR,d0
                 bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_HEALING,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_HEALING,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d1
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   @Enemy
                 lea     table_LightFairy(pc), a0
-                lea     table_1A8F4(pc), a1
+                lea     table_LightFairy_offsets(pc), a1
                 moveq   #7,d4
                 bra.s   loc_1A87E
 @Enemy:
                 
                 lea     table_EvilFairy(pc), a0
-                lea     table_1A8FE(pc), a1
+                lea     table_EvilFairy_offsets(pc), a1
                 moveq   #3,d4
 loc_1A87E:
                 
@@ -37,29 +37,29 @@ loc_1A87E:
                 moveq   #1,d1
 loc_1A88E:
                 
-                move.w  d1,(a2)
+                move.w  d1,(a2) ; number of fairies
                 move.b  d1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 subq.w  #1,d1
-                moveq   #$26,d0   ; offset to sprite_38
+                moveq   #38,d0   ; offset to sprite_38
 loc_1A898:
                 
                 movem.l d0-d1/a0,-(sp)
                 moveq   #2,d1
                 clr.w   d2
-                moveq   #$20,d6 
+                moveq   #32,d6 
                 jsr     (GenerateRandomNumber).w
                 move.w  d7,d3
-                bsr.w   sub_19FAA       
+                bsr.w   ConstructComplexGraphic       
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  d4,2(a0)
-                moveq   #$1E,d6
+                moveq   #30,d6
                 jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,8(a0)
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
-                moveq   #$C,d6
+                moveq   #12,d6
                 jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,4(a0)
@@ -74,32 +74,24 @@ loc_1A898:
 
     ; End of function spellanimationSetup_HealingFairy
 
-table_1A8F4:    dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $10
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b $28
-                dc.b 0
-                dc.b $34
+table_LightFairy_offsets:
+                dc.w 0     ; fairy graphic 1
+                dc.w $10   ; fairy graphic 2
+                dc.w $20   ; wings graphic 1
+                dc.w $28   ; wings graphic 2
+                dc.w $34   ; dust graphic 5
                 
-table_1A8FE:    dc.b 0
-                dc.b $35
-                dc.b 0
-                dc.b $45
-                dc.b 0
-                dc.b $55
-                dc.b 0
-                dc.b $5D
-                dc.b 0
-                dc.b $69
+table_EvilFairy_offsets:
+                dc.w $35
+                dc.w $45
+                dc.w $55
+                dc.w $5D
+                dc.w $69
                 
 table_LightFairy:
-                vdpSpell 256, 0, SPELLTILE17, V4|H4|32
-                vdpSpell 256, 0, SPELLTILE33, V2|H4|32
+                vdpSpell 256, 0, SPELLTILE17, V4|H4|VALUE2
+                vdpSpell 256, 0, SPELLTILE33, V2|H4|VALUE2
                 
 table_EvilFairy:
-                vdpSpell -32, 0, SPELLTILE70, V4|H4|33
-                vdpSpell -32, 0, SPELLTILE86, V2|H4|33
+                vdpSpell -32, 0, SPELLTILE70, V4|H4|VALUE2|MIRRORED
+                vdpSpell -32, 0, SPELLTILE86, V2|H4|VALUE2|MIRRORED

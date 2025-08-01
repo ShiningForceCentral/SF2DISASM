@@ -9,8 +9,8 @@ spellanimationSetup_DemonBreath:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_DEMON_BREATH,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_DEMON_BREATH,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a1
                 cmpi.w  #ENEMYBATTLESPRITE_ZEON,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
