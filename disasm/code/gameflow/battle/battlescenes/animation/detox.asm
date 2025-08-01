@@ -12,14 +12,14 @@ spellanimationSetup_Detox:
                 move.w  #DETOX_FLASH_COLOR,d0
                 bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_DETOX,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_DETOX,d0
+                bsr.w   LoadSpellTileset
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #1,4(a0)
                 lea     table_1AA88(pc), a0
                 moveq   #$26,d0   ; offset to sprite_38
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 move.w  #-1,((byte_FFB404-$1000000)).w
                 move.b  #SPELLANIMATION_DETOX,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
@@ -28,4 +28,4 @@ spellanimationSetup_Detox:
 
     ; End of function spellanimationSetup_Detox
 
-table_1AA88:    vdpSpell 0, 0, SPELLTILE28, V1|H1|32
+table_1AA88:    vdpSpell 0, 0, SPELLTILE28, V1|H1|VALUE2

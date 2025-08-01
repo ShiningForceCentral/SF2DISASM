@@ -9,8 +9,8 @@ spellanimationSetup_FlameBreath:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_FLAME_BREATH,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_FLAME_BREATH,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a1
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1

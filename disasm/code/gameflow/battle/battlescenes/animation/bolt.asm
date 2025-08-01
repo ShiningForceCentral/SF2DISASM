@@ -13,8 +13,8 @@ spellanimationSetup_Bolt:
                 move.w  #BOLT_FLASH_COLOR,d0
                 bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_BOLT,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_BOLT,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d1
                 lea     (table_1AB4E-4)(pc), a1
                 andi.w  #7,d1
@@ -34,7 +34,7 @@ loc_1AAD4:
                 
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
-                moveq   #$20,d6 
+                moveq   #32,d6 
                 jsr     (GenerateRandomNumber).w
                 addq.w  #1,d7
                 move.w  d7,4(a0)
@@ -45,7 +45,7 @@ loc_1AAD4:
                 subq.w  #1,d1
                 move.w  (a1),d0
                 mulu.w  #5,d0
-                addi.w  #$26,d0 ; add offset to sprite_38
+                addi.w  #38,d0 ; add offset to sprite_38
                 lea     table_1AB5E(pc), a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1AB0C
@@ -59,7 +59,7 @@ loc_1AB0C:
                 jsr     (GenerateRandomNumber).w
                 move.w  d7,2(a0)
                 movem.l (sp)+,d0/a0
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 dbf     d1,loc_1AB0C
 loc_1AB2C:
                 
@@ -84,13 +84,13 @@ table_1AB4E:    ; Variation 1
                 ; Variation 4
                 dc.l $40004
                 
-table_1AB5E:    vdpSpell 200, 192, SPELLTILE148, V4|H4|32
-                vdpSpell 152, 216, SPELLTILE164, V4|H4|32
-                vdpSpell 248, 200, SPELLTILE148, V4|H4|32
-                vdpSpell 304, 184, SPELLTILE164, V4|H4|32
+table_1AB5E:    vdpSpell 200, 192, SPELLTILE148, V4|H4|VALUE2
+                vdpSpell 152, 216, SPELLTILE164, V4|H4|VALUE2
+                vdpSpell 248, 200, SPELLTILE148, V4|H4|VALUE2
+                vdpSpell 304, 184, SPELLTILE164, V4|H4|VALUE2
                 
-                ;mirror
-                vdpSpell 248, 200, SPELLTILE148, V4|H4|32
-                vdpSpell 304, 184, SPELLTILE164, V4|H4|32
-                vdpSpell 200, 192, SPELLTILE148, V4|H4|32
-                vdpSpell 152, 216, SPELLTILE164, V4|H4|32
+                ; mirror animation
+                vdpSpell 248, 200, SPELLTILE148, V4|H4|VALUE2
+                vdpSpell 304, 184, SPELLTILE164, V4|H4|VALUE2
+                vdpSpell 200, 192, SPELLTILE148, V4|H4|VALUE2
+                vdpSpell 152, 216, SPELLTILE164, V4|H4|VALUE2

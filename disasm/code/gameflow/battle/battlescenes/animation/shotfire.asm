@@ -9,8 +9,8 @@ spellanimationSetup_ShotFire:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_EXPLOSION,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_EXPLOSION,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d0
                 lea     graphic_BurstShots(pc), a0
                 lea     table_1AF64(pc), a1
@@ -25,7 +25,7 @@ loc_1AF2C:
                 move.l  (a1)+,(a2)+
                 move.l  (a1),(a2)
                 moveq   #$26,d0   ; offset to sprite_38
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #$11D,((byte_FFB404-$1000000)).w
@@ -47,6 +47,6 @@ table_1AF64:    dc.l $F400FFC0
                 dc.l $B80070
                 
 graphic_BurstShots:
-                vdpSpell 288, 232, SPELLTILE77, V2|H2|16
+                vdpSpell 288, 232, SPELLTILE77, V2|H2|VALUE1
                 
-                vdpSpell 200, 224, SPELLTILE77, V2|H2|17
+                vdpSpell 200, 224, SPELLTILE77, V2|H2|VALUE1|MIRRORED

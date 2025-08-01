@@ -168,11 +168,11 @@ LoadBattlesceneEnemyLayout:
                 lea     (BATTLESCENE_ENEMY_LAYOUT).l,a1
                 bchg    #2,((byte_FFB56E-$1000000)).w
                 beq.s   @loc1
-                move.w  #$220|VDPTILE_PALETTE2|VDPTILE_PRIORITY,d0
+                move.w  #VDPTILE_ENEMYBATTLESPRITE1|VDPTILE_PALETTE2|VDPTILE_PRIORITY,d0   ; frame 1 start
                 bra.s   @loc2
 @loc1:
                 
-                move.w  #$2E0|VDPTILE_PALETTE2|VDPTILE_PRIORITY,d0
+                move.w  #VDPTILE_ENEMYBATTLESPRITE193|VDPTILE_PALETTE2|VDPTILE_PRIORITY,d0 ; frame 2 start
 @loc2:
                 
                 btst    #2,((byte_FFB56F-$1000000)).w
@@ -196,7 +196,7 @@ LoadBattlesceneEnemyLayout:
                 bra.s   @return
 @loc5:
                 
-                bset    #11,d0
+                bset    #VDPTILE_MIRROR_BIT,d0
                 lea     32(a1),a1
                 moveq   #11,d7
 @loc6:
@@ -615,15 +615,15 @@ loc_1F2D0:
                 addq.w  #1,4(a5)
                 movea.l (a5),a0
                 move.b  (a0),d0
-                beq.w   loc_1F338
+                beq.w   loc_1F338 ; 0
                 subq.b  #1,d0
-                beq.w   loc_1F384
+                beq.w   loc_1F384 ; 1
                 subq.b  #1,d0
-                beq.w   loc_1F3DC
+                beq.w   loc_1F3DC ; 2
                 subq.b  #1,d0
-                beq.w   loc_1F3E0
+                beq.w   loc_1F3E0 ; 3
                 subq.b  #1,d0
-                beq.w   loc_1F4D2
+                beq.w   loc_1F4D2 ; 4
 return_1F2F4:
                 
                 rts
@@ -697,7 +697,7 @@ loc_1F368:
                 cmp.w   d2,d1
                 bls.s   loc_1F378
                 clr.w   d1
-                lea     (a2),a1
+                lea     (a2),a1 ; restore address to table start
 loc_1F378:
                 
                 dbf     d0,loc_1F368
@@ -706,7 +706,7 @@ loc_1F378:
 loc_1F384:
                 
                 move.w  4(a5),d0
-                cmpi.w  #$10,d0
+                cmpi.w  #16,d0
                 bcc.s   loc_1F3C8
                 move.b  table_1F3CE-2(pc,d0.w),d0
                 movea.l (a5),a2
@@ -928,27 +928,28 @@ loc_1F524:
 
 table_1F528:    dc.b 0
                 dc.b 2
-                dc.b $FF
+                dc.b -1
                 dc.b 0
                 dc.b 0
-                dc.b $FE
+                dc.b -2
                 dc.b 1
                 dc.b 0
-table_1F530:    dc.b $FF
+				
+table_1F530:    dc.b -1
                 dc.b 2
-                dc.b $FD
+                dc.b -3
                 dc.b 0
                 dc.b 1
                 dc.b 0
                 dc.b 2
                 dc.b 0
                 dc.b 1
-                dc.b $FE
+                dc.b -2
                 dc.b 3
                 dc.b 0
-                dc.b $FF
+                dc.b -1
                 dc.b 0
-                dc.b $FE
+                dc.b -2
                 dc.b 0
 
 ; =============== S U B R O U T I N E =======================================
@@ -1013,25 +1014,25 @@ sprite_BattlesceneAlly:
                 vdpSprite 256, V4|H4|0, ALLYBATTLESPRITE129|MIRROR|PALETTE1|PRIORITY, 264
                 
 sprite_BattlesceneWeapon:
-                ; Weapon frame 0
+                ; Weapon configuration 0
                 vdpSprite 192, V4|H4|0, WEAPON1|PALETTE1|PRIORITY, 264
                 vdpSprite 224, V4|H4|0, WEAPON17|PALETTE1|PRIORITY, 264
                 vdpSprite 192, V4|H4|0, WEAPON33|PALETTE1|PRIORITY, 296
                 vdpSprite 224, V4|H4|0, WEAPON49|PALETTE1|PRIORITY, 296
                 
-                ; Weapon frame 1
+                ; Weapon configuration 1 (mirrored)
                 vdpSprite 192, V4|H4|0, WEAPON1|MIRROR|PALETTE1|PRIORITY, 296
                 vdpSprite 224, V4|H4|0, WEAPON17|MIRROR|PALETTE1|PRIORITY, 296
                 vdpSprite 192, V4|H4|0, WEAPON33|MIRROR|PALETTE1|PRIORITY, 264
                 vdpSprite 224, V4|H4|0, WEAPON49|MIRROR|PALETTE1|PRIORITY, 264
                 
-                ; Weapon frame 2
+                ; Weapon configuration 2 (flipped)
                 vdpSprite 224, V4|H4|0, WEAPON1|FLIP|PALETTE1|PRIORITY, 264
                 vdpSprite 192, V4|H4|0, WEAPON17|FLIP|PALETTE1|PRIORITY, 264
                 vdpSprite 224, V4|H4|0, WEAPON33|FLIP|PALETTE1|PRIORITY, 296
                 vdpSprite 192, V4|H4|0, WEAPON49|FLIP|PALETTE1|PRIORITY, 296
                 
-                ; Weapon frame 3
+                ; Weapon configuration 3 (mirrored and flipped)
                 vdpSprite 224, V4|H4|0, WEAPON1|MIRROR|FLIP|PALETTE1|PRIORITY, 296
                 vdpSprite 192, V4|H4|0, WEAPON17|MIRROR|FLIP|PALETTE1|PRIORITY, 296
                 vdpSprite 224, V4|H4|0, WEAPON33|MIRROR|FLIP|PALETTE1|PRIORITY, 264
@@ -1051,283 +1052,104 @@ sprite_BattlesceneGround:
 ; enemy battlesprite is made of 12 vdpSprites
 ;
 layout_BattlesceneEnemy:
-                dc.b 0
-                dc.b 4
-                dc.b 8
-                dc.b $C
+                ; 1st row tiles
+                dc.b 0, 4, 8, $C
+                dc.b $30, $34, $38, $3C
+                dc.b $60, $64, $68, $6C
+                dc.b $90, $94, $98, $9C
 				
-                dc.b $30
-                dc.b $34
-                dc.b $38
-                dc.b $3C
+                ; 2nd row tiles
+                dc.b 1, 5, 9, $D
+                dc.b $31, $35, $39, $3D
+                dc.b $61, $65, $69, $6D
+                dc.b $91, $95, $99, $9D
 				
-                dc.b $60
-                dc.b $64
-                dc.b $68
-                dc.b $6C
+                ; 3rd row tiles
+                dc.b 2, 6, $A, $E
+                dc.b $32, $36, $3A, $3E
+                dc.b $62, $66, $6A, $6E
+                dc.b $92, $96, $9A, $9E
 				
-                dc.b $90
-                dc.b $94
-                dc.b $98
-                dc.b $9C
+                ; 4th row tiles
+                dc.b 3, 7, $B, $F
+                dc.b $33, $37, $3B, $3F
+                dc.b $63, $67, $6B, $6F
+                dc.b $93, $97, $9B, $9F
 				
-				; 
-                dc.b 1
-                dc.b 5
-                dc.b 9
-                dc.b $D
+                ; 5th row tiles
+                dc.b $10, $14, $18, $1C
+                dc.b $40, $44, $48, $4C
+                dc.b $70, $74, $78, $7C
+                dc.b $A0, $A4, $A8, $AC
 				
-                dc.b $31
-                dc.b $35
-                dc.b $39
-                dc.b $3D
+                ; 6th row tiles
+                dc.b $11, $15, $19, $1D
+                dc.b $41, $45, $49, $4D
+                dc.b $71, $75, $79, $7D
+                dc.b $A1, $A5, $A9, $AD
 				
-                dc.b $61
-                dc.b $65
-                dc.b $69
-                dc.b $6D
+                ; 7th row tiles
+                dc.b $12, $16, $1A, $1E
+                dc.b $42, $46, $4A, $4E
+                dc.b $72, $76, $7A, $7E
+                dc.b $A2, $A6, $AA, $AE
 				
-                dc.b $91
-                dc.b $95
-                dc.b $99
-                dc.b $9D
+                ; 8th row tiles
+                dc.b $13, $17, $1B, $1F
+                dc.b $43, $47, $4B, $4F
+                dc.b $73, $77, $7B, $7F
+                dc.b $A3, $A7, $AB, $AF
 				
-				; 
-                dc.b 2
-                dc.b 6
-                dc.b $A
-                dc.b $E
+                ; 9th row tiles 
+                dc.b $20, $24, $28, $2C
+                dc.b $50, $54, $58, $5C
+                dc.b $80, $84, $88, $8C
+                dc.b $B0, $B4, $B8, $BC
 				
-                dc.b $32
-                dc.b $36
-                dc.b $3A
-                dc.b $3E
+                ; 10th row tiles
+                dc.b $21, $25, $29, $2D
+                dc.b $51, $55, $59, $5D
+                dc.b $81, $85, $89, $8D
+                dc.b $B1, $B5, $B9, $BD
 				
-                dc.b $62
-                dc.b $66
-                dc.b $6A
-                dc.b $6E
+                ; 11th row tiles
+                dc.b $22, $26, $2A, $2E
+                dc.b $52, $56, $5A, $5E
+                dc.b $82, $86, $8A, $8E
+                dc.b $B2, $B6, $BA, $BE
 				
-                dc.b $92
-                dc.b $96
-                dc.b $9A
-                dc.b $9E
+                ; 12th row tiles
+                dc.b $23, $27, $2B, $2F
+                dc.b $53, $57, $5B, $5F
+                dc.b $83, $87, $8B, $8F
+                dc.b $B3, $B7, $BB, $BF
 				
-				; 
-                dc.b 3
-                dc.b 7
-                dc.b $B
-                dc.b $F
+                ; battlesprite arrangement
+table_1F776:    dc.w VDPTILE_ALLYBATTLESPRITE1|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE17|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE33|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
-                dc.b $33
-                dc.b $37
-                dc.b $3B
-                dc.b $3F
+                dc.w VDPTILE_ALLYBATTLESPRITE49|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE65|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE81|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
-                dc.b $63
-                dc.b $67
-                dc.b $6B
-                dc.b $6F
+                dc.w VDPTILE_ALLYBATTLESPRITE97|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE113|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE129|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
-                dc.b $93
-                dc.b $97
-                dc.b $9B
-                dc.b $9F
+                dc.w VDPTILE_ALLYBATTLESPRITE145|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE161|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE177|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
-				; 
-                dc.b $10
-                dc.b $14
-                dc.b $18
-                dc.b $1C
+                dc.w VDPTILE_ALLYBATTLESPRITE193|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE209|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE225|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
-                dc.b $40
-                dc.b $44
-                dc.b $48
-                dc.b $4C
+                dc.w VDPTILE_ALLYBATTLESPRITE241|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE257|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE273|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
-                dc.b $70
-                dc.b $74
-                dc.b $78
-                dc.b $7C
-				
-                dc.b $A0
-                dc.b $A4
-                dc.b $A8
-                dc.b $AC
-				
-				; 
-                dc.b $11
-                dc.b $15
-                dc.b $19
-                dc.b $1D
-				
-                dc.b $41
-                dc.b $45
-                dc.b $49
-                dc.b $4D
-				
-                dc.b $71
-                dc.b $75
-                dc.b $79
-                dc.b $7D
-				
-                dc.b $A1
-                dc.b $A5
-                dc.b $A9
-                dc.b $AD
-				
-				; 
-                dc.b $12
-                dc.b $16
-                dc.b $1A
-                dc.b $1E
-				
-                dc.b $42
-                dc.b $46
-                dc.b $4A
-                dc.b $4E
-				
-                dc.b $72
-                dc.b $76
-                dc.b $7A
-                dc.b $7E
-				
-                dc.b $A2
-                dc.b $A6
-                dc.b $AA
-                dc.b $AE
-				
-				; 
-                dc.b $13
-                dc.b $17
-                dc.b $1B
-                dc.b $1F
-				
-                dc.b $43
-                dc.b $47
-                dc.b $4B
-                dc.b $4F
-				
-                dc.b $73
-                dc.b $77
-                dc.b $7B
-                dc.b $7F
-				
-                dc.b $A3
-                dc.b $A7
-                dc.b $AB
-                dc.b $AF
-				
-				; 
-                dc.b $20
-                dc.b $24
-                dc.b $28
-                dc.b $2C
-				
-                dc.b $50
-                dc.b $54
-                dc.b $58
-                dc.b $5C
-				
-                dc.b $80
-                dc.b $84
-                dc.b $88
-                dc.b $8C
-				
-                dc.b $B0
-                dc.b $B4
-                dc.b $B8
-                dc.b $BC
-				
-				; 
-                dc.b $21
-                dc.b $25
-                dc.b $29
-                dc.b $2D
-				
-                dc.b $51
-                dc.b $55
-                dc.b $59
-                dc.b $5D
-				
-                dc.b $81
-                dc.b $85
-                dc.b $89
-                dc.b $8D
-				
-                dc.b $B1
-                dc.b $B5
-                dc.b $B9
-                dc.b $BD
-				
-				; 
-                dc.b $22
-                dc.b $26
-                dc.b $2A
-                dc.b $2E
-				
-                dc.b $52
-                dc.b $56
-                dc.b $5A
-                dc.b $5E
-				
-                dc.b $82
-                dc.b $86
-                dc.b $8A
-                dc.b $8E
-				
-                dc.b $B2
-                dc.b $B6
-                dc.b $BA
-                dc.b $BE
-				
-				; 
-                dc.b $23
-                dc.b $27
-                dc.b $2B
-                dc.b $2F
-				
-                dc.b $53
-                dc.b $57
-                dc.b $5B
-                dc.b $5F
-				
-                dc.b $83
-                dc.b $87
-                dc.b $8B
-                dc.b $8F
-				
-                dc.b $B3
-                dc.b $B7
-                dc.b $BB
-                dc.b $BF
-				
-				
-table_1F776:    dc.w $100|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $110|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $120|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-				
-                dc.w $130|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $140|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $150|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-				
-                dc.w $160|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $170|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $180|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-				
-                dc.w $190|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $1A0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $1B0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-				
-                dc.w $1C0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $1D0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $1E0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-				
-                dc.w $1F0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $200|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $210|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-				
-				; 
+                ; 
                 dc.w $520|VDPTILE_PALETTE1|VDPTILE_PRIORITY
                 dc.w $530|VDPTILE_PALETTE1|VDPTILE_PRIORITY
                 dc.w $540|VDPTILE_PALETTE1|VDPTILE_PRIORITY
@@ -1352,31 +1174,31 @@ table_1F776:    dc.w $100|VDPTILE_PALETTE1|VDPTILE_PRIORITY
                 dc.w $6E0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
                 dc.w $6F0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
+                ; invocation arrangement
+table_1F7BE:    dc.w VDPTILE_ALLYBATTLESPRITE1|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE17|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE145|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE161|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
-table_1F7BE:    dc.w $100|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $110|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $190|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $1A0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE33|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE49|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE177|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE193|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
-                dc.w $120|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $130|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $1B0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $1C0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE65|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE81|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE209|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE225|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
-                dc.w $140|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $150|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $1D0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $1E0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-				
-                dc.w $160|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $170|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $1F0|VDPTILE_PALETTE1|VDPTILE_PRIORITY
-                dc.w $200|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE97|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE113|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE241|VDPTILE_PALETTE1|VDPTILE_PRIORITY
+                dc.w VDPTILE_ALLYBATTLESPRITE257|VDPTILE_PALETTE1|VDPTILE_PRIORITY
 				
                 dc.w 0  ; spacer byte
                 dc.w 0  ; spacer byte
 				
-				
+                ;
                 dc.w $520|VDPTILE_PALETTE1|VDPTILE_PRIORITY
                 dc.w $530|VDPTILE_PALETTE1|VDPTILE_PRIORITY
                 dc.w $5B0|VDPTILE_PALETTE1|VDPTILE_PRIORITY

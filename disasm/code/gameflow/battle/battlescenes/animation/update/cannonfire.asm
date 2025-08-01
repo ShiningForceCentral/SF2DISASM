@@ -10,7 +10,7 @@ spellanimationUpdate_CannonFire:
                 lea     ((SPELLANIMATION_PROPERTIES-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
-                moveq   #$26,d0 
+                moveq   #38,d0 
                 moveq   #7,d1
 loc_1D5D6:
                 
@@ -22,11 +22,11 @@ loc_1D5D6:
                 lea     graphic_CannonShots(pc), a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1D5F6
-                addq.w  #8,a0
+                addq.w  #VDP_SPELL_ENTRY_SIZE,a0
 loc_1D5F6:
                 
-                bsr.w   sub_19F5E
-                moveq   #$10,d6
+                bsr.w   ConstructSimpleGraphic
+                moveq   #16,d6
                 jsr     (GenerateRandomNumber).w
                 subq.w  #8,d7
                 add.w   d7,(a4)
@@ -88,7 +88,7 @@ loc_1D668:
                 addq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
 loc_1D68A:
                 
-                cmpi.w  #$13,(a5)
+                cmpi.w  #19,(a5)
                 bcs.w   loc_1D748
                 move.w  #1,(a5)
                 addq.w  #1,2(a5)
@@ -97,10 +97,10 @@ loc_1D69E:
                 
                 subq.w  #1,d1
                 bne.w   loc_1D6D0
-                cmpi.w  #$20,(a5) 
+                cmpi.w  #32,(a5) 
                 bcs.w   loc_1D748
                 move.w  4(a3),VDPSPRITE_OFFSET_X(a4)
-                moveq   #$10,d6
+                moveq   #16,d6
                 jsr     (GenerateRandomNumber).w
                 subq.w  #8,d7
                 add.w   6(a3),d7
@@ -152,7 +152,7 @@ loc_1D71E:
                 move.w  d1,8(a5)
                 add.w   d0,(a4)
                 bsr.w   sub_1D762
-                cmpi.w  #$10,(a5)
+                cmpi.w  #16,(a5)
                 bcs.w   loc_1D748
                 move.w  #1,(a4)
                 clr.l   VDPSPRITE_OFFSET_SIZE(a4) ; clear size, link, and tile
@@ -165,11 +165,11 @@ loc_1D748:
                 movem.w (sp)+,d0-d1
                 addq.w  #1,d0
                 addq.w  #8,a4
-                lea     $C(a5),a5
+                lea     12(a5),a5
                 dbf     d1,loc_1D5D6
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                beq.w   sub_1B82A
+                beq.w   ReinitializeSceneAfterSpell
                 rts
 
     ; End of function spellanimationUpdate_CannonFire
@@ -191,5 +191,5 @@ return_1D774:
     ; End of function sub_1D762
 
 graphic_CannonShots:
-                vdpSpell 276, 232, SPELLTILE1, V1|H4|16
-                vdpSpell 208, 224, SPELLTILE1, V1|H4|17
+                vdpSpell 276, 232, SPELLTILE1, V1|H4|VALUE1
+                vdpSpell 208, 224, SPELLTILE1, V1|H4|VALUE1|MIRRORED

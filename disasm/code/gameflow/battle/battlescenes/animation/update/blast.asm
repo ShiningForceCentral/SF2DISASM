@@ -28,12 +28,12 @@ loc_1C804:
                 tst.w   6(a3)
                 bne.s   loc_1C83A
                 clr.w   d1
-                move.w  #$C520,d2
+                move.w  #VDPTILE_SPELLTILE1|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
                 bra.s   loc_1C842
 loc_1C83A:
                 
                 move.w  #$500,d1
-                move.w  #$C521,d2
+                move.w  #VDPTILE_SPELLTILE2|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
 loc_1C842:
                 
                 move.w  #$680,d3
@@ -45,12 +45,12 @@ loc_1C84C:
                 tst.w   6(a3)
                 bne.s   loc_1C862
                 move.w  #$100,d1
-                move.w  #$C537,d2
+                move.w  #VDPTILE_SPELLTILE24|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
                 bra.s   loc_1C86A
 loc_1C862:
                 
                 move.w  #$500,d1
-                move.w  #$C539,d2
+                move.w  #VDPTILE_SPELLTILE26|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d2
 loc_1C86A:
                 
                 move.w  #$780,d3
@@ -61,24 +61,24 @@ loc_1C872:
                 move.w  d7,d0
                 add.w   d7,d7
                 add.w   d0,d7
-                lea     table_1CBBA(pc), a0
+                lea     table_Graphic_SlashOrange_Properties(pc), a0
                 adda.w  d7,a0  ; offset by 6x random value
-                moveq   #$20,d6 
+                moveq   #32,d6 
                 jsr     (GenerateRandomNumber).w
-                subi.w  #$10,d7
+                subi.w  #16,d7
                 add.w   2(a0),d7
                 add.w   2(a3),d7
                 move.w  d7,(a4)
                 move.w  d1,VDPSPRITE_OFFSET_SIZE(a4)
                 or.w    4(a0),d2
                 move.w  d2,VDPSPRITE_OFFSET_TILE(a4)
-                moveq   #$20,d6 
+                moveq   #32,d6 
                 jsr     (GenerateRandomNumber).w
-                subi.w  #$10,d7
+                subi.w  #16,d7
                 add.w   (a0),d7
                 add.w   (a3),d7
                 move.w  d7,VDPSPRITE_OFFSET_X(a4)
-                move.w  #$100,d6
+                move.w  #256,d6
                 jsr     (GenerateRandomNumber).w
                 add.w   d3,d7
                 tst.w   (a0)
@@ -87,7 +87,7 @@ loc_1C872:
 loc_1C8C2:
                 
                 move.w  d7,4(a5)
-                move.w  #$100,d6
+                move.w  #256,d6
                 jsr     (GenerateRandomNumber).w
                 add.w   d4,d7
                 tst.w   2(a0)
@@ -103,17 +103,17 @@ loc_1C8D8:
 loc_1C8EC:
                 
                 addq.w  #1,(a5)
-                cmpi.w  #$A,(a5)
+                cmpi.w  #10,(a5)
                 bcc.w   loc_1C918
                 lea     table_1CBDE(pc), a0
                 tst.w   6(a3)
                 beq.s   loc_1C904
-                lea     $18(a0),a0
+                lea     24(a0),a0
 loc_1C904:
                 
                 tst.b   3(a5)
                 beq.s   loc_1C90E
-                lea     $C(a0),a0
+                lea     12(a0),a0
 loc_1C90E:
                 
                 moveq   #2,d0
@@ -142,7 +142,7 @@ loc_1C93C:
                 move.w  d1,8(a5)
                 add.w   d0,VDPSPRITE_OFFSET_X(a4)
                 move.w  6(a5),d0
-                add.w   $A(a5),d0
+                add.w   10(a5),d0
                 tst.w   d0
                 bmi.s   loc_1C95A
                 move.w  d0,d1
@@ -159,9 +159,9 @@ loc_1C95A:
                 neg.w   d0
 loc_1C968:
                 
-                move.w  d1,$A(a5)
+                move.w  d1,10(a5)
                 add.w   d0,(a4)
-                cmpi.w  #$12,(a5)
+                cmpi.w  #18,(a5)
                 bcs.w   loc_1C9A0
                 move.w  #1,(a4)
                 clr.l   VDPSPRITE_OFFSET_SIZE(a4) ; clear size, link, and tile
@@ -180,7 +180,7 @@ loc_1C994:
 loc_1C9A0:
                 
                 move.w  (sp)+,d1
-                lea     $C(a5),a5
+                lea     12(a5),a5
                 addq.w  #8,a4
                 dbf     d1,loc_1C804
 				
@@ -204,7 +204,7 @@ loc_1C9A0:
                 move.w  d7,d1
                 lsr.w   #3,d1
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
-                subi.w  #$10,d1
+                subi.w  #16,d1
                 move.b  1(a0),d2
                 ext.w   d2
                 add.w   d2,d1
@@ -212,19 +212,19 @@ loc_1C9A0:
                 move.w  d1,(a4)
                 lsr.w   #7,d7
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d7
-                subi.w  #$18,d7
+                subi.w  #24,d7
                 move.b  (a0),d2
                 ext.w   d2
                 add.w   d2,d7
                 add.w   (a3),d7
                 move.w  d7,VDPSPRITE_OFFSET_X(a4)
-                lea     table_1CC44(pc), a1
+                lea     table_1CC44(pc), a1  ; Slash start
                 bra.w   loc_1CA76
 loc_1CA22:
                 
                 subq.w  #1,d0
                 bne.w   loc_1CA38
-                lea     table_1CC46(pc), a1
+                lea     (table_1CC44+2)(pc), a1  ; Slash middle
                 move.w  4(a5),d0
                 bsr.w   sub_1CBA6
                 bra.w   loc_1CA76
@@ -239,7 +239,7 @@ loc_1CA38:
                 add.w   d1,VDPSPRITE_OFFSET_X(a4)
                 move.b  5(a0),d1
                 add.w   d1,(a4)
-                lea     table_1CC48(pc), a1
+                lea     (table_1CC44+4)(pc), a1  ; Slash end
                 bra.w   loc_1CA76
 loc_1CA5E:
                 
@@ -256,14 +256,14 @@ loc_1CA76:
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
-                adda.w  d0,a1
+                adda.w  d0,a1  ; offset 6x
                 clr.w   d0
                 move.b  (a1),d0
                 lsl.w   #NIBBLE_SHIFT_COUNT,d0
                 move.w  d0,VDPSPRITE_OFFSET_SIZE(a4)
                 clr.w   d0
                 move.b  1(a1),d0
-                addi.w  #-$3AE0,d0
+                addi.w  #SPELLTILE_START|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 clr.w   d1
                 move.b  3(a0),d1
                 lsl.w   #BYTE_SHIFT_COUNT,d1
@@ -273,8 +273,8 @@ loc_1CAA8:
                 
                 tst.w   4(a3)
                 beq.w   loc_1CB94
-                lea     $C(a5),a5
-                addq.w  #8,a4
+                lea     12(a5),a5
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 tst.w   (a5)
                 beq.w   loc_1CB00
                 addq.w  #1,(a5)
@@ -296,7 +296,7 @@ loc_1CAE6:
                 beq.s   loc_1CAFC
                 move.w  4(a5),(a4)
                 lsl.w   #2,d0
-                addi.w  #-$3A59,d0
+                addi.w  #SPELLTILE_START+135|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0 ; offsets to cyclone dust cloud graphics
                 move.w  d0,VDPSPRITE_OFFSET_TILE(a4)
                 bra.s   loc_1CB00
 loc_1CAFC:
@@ -304,7 +304,7 @@ loc_1CAFC:
                 move.w  #1,(a4)
 loc_1CB00:
                 
-                lea     $C(a5),a5
+                lea     12(a5),a5
                 addq.w  #8,a4
                 tst.w   (a5)
                 beq.w   loc_1CB94
@@ -322,13 +322,13 @@ loc_1CB2C:
                 
                 move.b  d0,2(a5)
                 lsl.w   #5,d0
-                addi.w  #-$3AB5,d0
+                addi.w  #SPELLTILE_START+43|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 move.w  d0,VDPSPRITE_OFFSET_TILE(a4)
-                addi.w  #$10,d0
+                addi.w  #16,d0
                 move.w  d0,$C(a4)
 loc_1CB42:
                 
-                move.w  #$C0,d0 
+                move.w  #192,d0 
                 tst.b   5(a5)
                 beq.s   loc_1CB4E
                 neg.w   d0
@@ -353,18 +353,18 @@ loc_1CB6E:
                 
                 move.w  d1,6(a5)
                 add.w   d0,VDPSPRITE_OFFSET_X(a4)
-                add.w   d0,$E(a4)
+                add.w   d0,NEXTVDPSPRITE_OFFSET_X(a4)
                 move.w  VDPSPRITE_OFFSET_X(a4),4(a3)
                 subq.b  #1,4(a5)
                 bne.w   loc_1CB94
-                move.b  #$3C,4(a5) 
+                move.b  #60,4(a5) 
                 bchg    #0,5(a5)
 loc_1CB94:
                 
                 lea     table_1CC0E(pc), a0
                 bsr.w   sub_1B8B2
                 tst.w   ((byte_FFB404-$1000000)).w
-                beq.w   sub_1B82A
+                beq.w   ReinitializeSceneAfterSpell
                 rts
 
     ; End of function spellanimationUpdate_Blast
@@ -387,7 +387,8 @@ sub_1CBA6:
 
     ; End of function sub_1CBA6
 
-table_1CBBA:    dc.w -48     ; X
+table_Graphic_SlashOrange_Properties:
+                dc.w -48     ; X
                 dc.w -48     ; Y
                 dc.w 0       ; tile modifier
                 
@@ -413,132 +414,109 @@ table_1CBBA:    dc.w -48     ; X
                 dc.w VDPTILE_MIRROR
                 
 table_1CBDE:    dc.w 5
-                dc.w $500
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 9
-                dc.b 6
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b 0
-                dc.b 5
-                
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b $19
-                dc.b 0
-                dc.b 9
-                dc.b 9
-                dc.b 0
-                dc.b 0
-                dc.b $1D
-                dc.b 0
-                dc.b 5
-                
-                dc.b 6
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b 0
-                dc.b 9
-                dc.b $B
-                dc.b 0
-                dc.b 0
-                dc.b $B
-                dc.b 0
-                dc.b 5
-                
-                dc.b 9
-                dc.b 0
-                dc.b 0
-                dc.b $1D
-                dc.b 0
-                dc.b 9
-                dc.b $D
-                dc.b 0
-                dc.b 0
-                dc.b $23
-table_1CC0E:    dc.b $C
-                dc.b $C4
-                dc.b 0
-                dc.b $A
-                dc.b 0
-                dc.b 1
-                
-table_1CC14:    dc.b $18
-                dc.b $18
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 1
+				
+                dc.w 9
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H2
+                dc.w 5
+				
+				; 
+                dc.w 5
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 25
+				
+                dc.w 9
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H3
+                dc.w 29
+				
+				; 
+                dc.w 5
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H2
+                dc.w 5
+				
+                dc.w 9
+                dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H3
+                dc.w 11
+				
+				; 
+                dc.w 5
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H3
+                dc.w 29
+				
+                dc.w 9
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H4
+                dc.w 35
+				
+table_1CC0E:    dc.w $CC4
+                dc.w 10
+                dc.w 1
+				
+table_1CC14:    dc.b 24
+                dc.b 24
                 dc.b 1
                 dc.b VDPTILE_FLIP_BYTE  ; tile modifier byte
                 dc.b 8    ; X
                 dc.b 0    ; Y
                 
                 dc.b 0
-                dc.b $18
+                dc.b 24
                 dc.b 0
                 dc.b 0
                 dc.b 0
                 dc.b 8
                 
-                dc.b $E8
-                dc.b $18
+                dc.b -24
+                dc.b 24
                 dc.b 1
                 dc.b VDPTILE_MIRROR_BYTE|VDPTILE_FLIP_BYTE
                 dc.b 0
                 dc.b 0
                 
-                dc.b $18
+                dc.b 24
                 dc.b 0
                 dc.b 2
                 dc.b 0
                 dc.b 8
                 dc.b 8
                 
-                dc.b $E8
+                dc.b -24
                 dc.b 0
                 dc.b 2
                 dc.b VDPTILE_MIRROR_BYTE
                 dc.b 8
                 dc.b 8
                 
-                dc.b $18
-                dc.b $E8
+                dc.b 24
+                dc.b -24
                 dc.b 1
                 dc.b 0
                 dc.b 8
                 dc.b 0
                 
                 dc.b 0
-                dc.b $E8
+                dc.b -24
                 dc.b 0
                 dc.b VDPTILE_FLIP_BYTE
                 dc.b 0
                 dc.b 0
                 
-                dc.b $E8
-                dc.b $E8
+                dc.b -24
+                dc.b -24
                 dc.b 1
                 dc.b VDPTILE_MIRROR_BYTE
                 dc.b 0
                 dc.b 0
                 
-table_1CC44:    dc.b $50
-                dc.b $97
-table_1CC46:    dc.b $70
-                dc.b $9B
-table_1CC48:    dc.b $60
-                dc.b $A3
-                dc.b $50
-                dc.b $A9
-                dc.b $D0
-                dc.b $AD
-                dc.b $90
-                dc.b $B5
-                dc.b $50
-                dc.b $BB
-                dc.b $F0
-                dc.b $BF
-                dc.b $60
-                dc.b $CF
+				; dc.b [dimensions],[tile offset]
+table_1CC44:    dc.b $50,$97 ; Vertical
+                dc.b $70,$9B
+                dc.b $60,$A3
+				
+                dc.b $50,$A9 ; Horizontal
+                dc.b $D0,$AD
+                dc.b $90,$B5
+				
+                dc.b $50,$BB ; Angled
+                dc.b $F0,$BF
+                dc.b $60,$CF

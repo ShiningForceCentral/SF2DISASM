@@ -10,7 +10,7 @@ spellanimationSetup_BubbleBreath:
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellanimationProperties
                 clr.w   d0
-                bsr.w   LoadSpellGraphics
+                bsr.w   LoadSpellTileset
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  (sp)+,d1
@@ -29,7 +29,7 @@ spellanimationSetup_BubbleBreath:
                 jsr     (ApplyVIntCramDma).w
 loc_1B4CE:
                 
-                move.w  #$E4,((byte_FFB404-$1000000)).w 
+                move.w  #228,((byte_FFB404-$1000000)).w 
                 move.b  #SPELLANIMATION_BUBBLE_BREATH,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w

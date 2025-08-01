@@ -13,22 +13,22 @@ spellanimationSetup_Desoul:
                 move.w  #DESOUL_FLASH_COLOR,d0
                 bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellanimationProperties
-                bsr.w   sub_1A00A
-                moveq   #SPELLGRAPHICS_DESOUL,d0
-                bsr.w   LoadSpellGraphics
+                bsr.w   ClearSpellGraphics
+                moveq   #SPELLTILESET_DESOUL,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d1
                 lea     ((byte_FFB532-$1000000)).w,a0
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   loc_1A778
-                move.w  #$C0,(a0) 
-                move.w  #$98,2(a0) 
-                move.w  #$80,d2 
+                move.w  #192,(a0) 
+                move.w  #152,2(a0) 
+                move.w  #128,d2 
                 moveq   #2,d3
                 bra.s   loc_1A786
 loc_1A778:
                 
-                move.w  #$110,(a0)
-                move.w  #$A8,2(a0) 
+                move.w  #272,(a0)
+                move.w  #168,2(a0) 
                 clr.w   d2
                 clr.b   d3
 loc_1A786:
@@ -43,18 +43,18 @@ loc_1A786:
                 bcs.s   loc_1A7E2
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
-                move.w  #$20,2(a0) 
-                move.w  #$1E,4(a0)
+                move.w  #32,2(a0) 
+                move.w  #30,4(a0)
                 move.w  #3,6(a0)
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
-                move.w  #$20,2(a0) 
-                move.w  #$14,4(a0)
+                move.w  #32,2(a0) 
+                move.w  #20,4(a0)
                 move.w  #$301,6(a0)
-                moveq   #$2A,d0   ; offset to sprite_42
+                moveq   #42,d0   ; offset to sprite_42
                 lea     table_1A810(pc), a0
-                bsr.w   sub_19F5E
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
+                bsr.w   ConstructSimpleGraphic
                 addq.w  #2,d2
 loc_1A7E2:
                 
@@ -69,48 +69,30 @@ loc_1A7E2:
 
     ; End of function spellanimationSetup_Desoul
 
-table_1A810:    vdpSpell 1, 1, SPELLTILE97, V2|H2|32
+table_1A810:    vdpSpell 1, 1, SPELLTILE97, V2|H2|VALUE2
                 
-                vdpSpell 1, 1, SPELLTILE101, V2|H2|33
+                vdpSpell 1, 1, SPELLTILE101, V2|H2|VALUE2|MIRRORED
                 
 table_DesoulBackgroundModification:
                 dc.b 0
                 dc.b $38
-                dc.b $10
+                dc.b 16  ; number of entries
                 dc.b $60
-                dc.b 0
-                dc.b 1
-                dc.b $A8
-                dc.b $28
-                dc.b 0
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 3
-                dc.b 0
-                dc.b 0
-                dc.b $FF
-                dc.b $FD
-                dc.b 0
-                dc.b 0
-                dc.b $FF
-                dc.b $FB
-                dc.b 0
-                dc.b 0
-                dc.b $FF
-                dc.b $FB
-                dc.b 0
-                dc.b 0
-                dc.b $FF
-                dc.b $FD
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 3
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 5
-                dc.b 0
-                dc.b 0
+                dc.l table_1A828
+table_1A828:
+                dc.w 5
+                dc.w 0
+                dc.w 3
+                dc.w 0
+                dc.w -3
+                dc.w 0
+                dc.w -5
+                dc.w 0
+                dc.w -5
+                dc.w 0
+                dc.w -3
+                dc.w 0
+                dc.w 3
+                dc.w 0
+                dc.w 5
+                dc.w 0

@@ -20,7 +20,7 @@ spellanimationUpdate_AttackSpell:
                 lea     table_1CE0C(pc), a0
                 moveq   #5,d0
                 bsr.w   sub_1B884
-                cmpi.w  #$26,(a5) 
+                cmpi.w  #38,(a5) 
                 bcs.w   loc_1E9B4
                 move.w  #1,(a3)
                 bra.w   loc_1E9B4
@@ -29,7 +29,7 @@ loc_1E994:
                 lea     table_1CE2A(pc), a0
                 moveq   #5,d0
                 bsr.w   sub_1B884
-                cmpi.w  #$26,(a5) 
+                cmpi.w  #38,(a5) 
                 bcs.w   loc_1E9B4
                 clr.w   (a5)
                 move.w  #1,(a4)
@@ -41,11 +41,11 @@ loc_1E9B4:
                 beq.s   loc_1E9D0
                 btst    #2,((byte_FFB56F-$1000000)).w
                 bne.s   loc_1E9CA
-                move.w  #$D0,d3 
+                move.w  #208,d3 
                 bra.s   loc_1E9CE
 loc_1E9CA:
                 
-                move.w  #$130,d3
+                move.w  #304,d3
 loc_1E9CE:
                 
                 bra.s   loc_1E9E2
@@ -53,11 +53,11 @@ loc_1E9D0:
                 
                 btst    #1,((byte_FFB56F-$1000000)).w
                 bne.s   loc_1E9DE
-                move.w  #$138,d3
+                move.w  #312,d3
                 bra.s   loc_1E9E2
 loc_1E9DE:
                 
-                move.w  #$C8,d3 
+                move.w  #200,d3 
 loc_1E9E2:
                 
                 move.w  2(a5),d0
@@ -69,7 +69,7 @@ loc_1E9E2:
                 add.w   d3,d2
                 move.w  d2,VDPSPRITE_OFFSET_X(a4)
                 swap    d2
-                addi.w  #$D0,d2 
+                addi.w  #208,d2 
                 move.w  d2,(a4)
                 bra.w   loc_1CD10
 
