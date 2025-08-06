@@ -454,56 +454,56 @@ table_1CC0E:    dc.w $CC4
 				
 table_1CC14:    dc.b 24
                 dc.b 24
-                dc.b 1
+                dc.b 1 ; horizontal
                 dc.b VDPTILE_FLIP_BYTE  ; tile modifier byte
                 dc.b 8    ; X
                 dc.b 0    ; Y
                 
                 dc.b 0
                 dc.b 24
-                dc.b 0
+                dc.b 0 ; vertical
                 dc.b 0
                 dc.b 0
                 dc.b 8
                 
                 dc.b -24
                 dc.b 24
-                dc.b 1
+                dc.b 1 ; horizontal
                 dc.b VDPTILE_MIRROR_BYTE|VDPTILE_FLIP_BYTE
                 dc.b 0
                 dc.b 0
                 
                 dc.b 24
                 dc.b 0
-                dc.b 2
+                dc.b 2 ; angled
                 dc.b 0
                 dc.b 8
                 dc.b 8
                 
                 dc.b -24
                 dc.b 0
-                dc.b 2
+                dc.b 2 ; angled
                 dc.b VDPTILE_MIRROR_BYTE
                 dc.b 8
                 dc.b 8
                 
                 dc.b 24
                 dc.b -24
-                dc.b 1
+                dc.b 1 ; horizontal
                 dc.b 0
                 dc.b 8
                 dc.b 0
                 
                 dc.b 0
                 dc.b -24
-                dc.b 0
+                dc.b 0 ; vertical
                 dc.b VDPTILE_FLIP_BYTE
                 dc.b 0
                 dc.b 0
                 
                 dc.b -24
                 dc.b -24
-                dc.b 1
+                dc.b 1 ; horizontal
                 dc.b VDPTILE_MIRROR_BYTE
                 dc.b 0
                 dc.b 0

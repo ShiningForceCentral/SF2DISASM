@@ -241,7 +241,7 @@ loc_1C110:
                 clr.b   ((byte_FFB588-$1000000)).w
 loc_1C136:
                 
-                bchg    #0,$D(a3)
+                bchg    #0,13(a3)
                 bne.s   loc_1C144
                 move.w  #1,(a4)
                 bra.s   loc_1C148

@@ -16,7 +16,7 @@ spellanimationSetup_DemonBreath:
                 cmpi.w  #ENEMYBATTLESPRITE_ZEON,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
                                                         ; HARDCODED Zeon enemy battle sprite
                 bne.s   loc_1AD0C
-                move.l  #$B000EA,(a1)
+                move.l  #$B000EA,(a1) ; word-size x/y parameters
                 move.w  #1,4(a1)
                 bra.s   loc_1AD16
 loc_1AD0C:
@@ -32,7 +32,7 @@ loc_1AD16:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_DemonBreath
 

@@ -136,14 +136,14 @@ LoadInvocationSprite:
                 bclr    #5,((byte_FFB56F-$1000000)).w
                 moveq   #5,d1
                 moveq   #2,d4
-                lea     (table_1F776).l,a2
+                lea     (layout_Battlesprite).l,a2
                 bra.s   loc_1A3AC
 loc_1A39C:
                 
                 bset    #5,((byte_FFB56F-$1000000)).w
                 moveq   #3,d1
                 moveq   #3,d4
-                lea     (table_1F7BE).l,a2
+                lea     (layout_Invocation).l,a2
 loc_1A3AC:
                 
                 btst    #6,((byte_FFB56E-$1000000)).w
@@ -181,13 +181,14 @@ loc_1A3C6:
 sub_1A3E8:
                 
                 lea     ((SPRITE_20_VDPTILE-$1000000)).w,a0
-                lea     (table_1F776).l,a1
+                lea     (layout_Battlesprite).l,a1
                 moveq   #17,d0
                 btst    #5,((byte_FFB56F-$1000000)).w
-                beq.s   loc_1A402
+                beq.s   @BattlespriteArrangement
+				; Invocation arangement
                 lea     72(a1),a1
                 moveq   #15,d0
-loc_1A402:
+@BattlespriteArrangement:
                 
                 btst    #6,((byte_FFB56E-$1000000)).w
                 beq.s   loc_1A40E

@@ -34,18 +34,24 @@ loc_1AFAE:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_GunnerBlast
 
-table_1AFEA:    dc.l $F3000000
-                dc.l $18000E8
-                dc.l $200038
+table_1AFEA:    dc.w -$D00 ; x parameter
+                dc.w 0     ; y parameter
+                dc.w $180  ; x parameter
+                dc.w $E8   ; y parameter
+                dc.w $20   ; x parameter blast flash
+                dc.w $38   ; y parameter blast flash
                 
                 ; mirror
-                dc.l $D000000
-                dc.l $7000F0
-                dc.l $880048
+                dc.w $D00
+                dc.w 0
+                dc.w $70
+                dc.w $F0
+                dc.w $88
+                dc.w $48
                 
 table_1B002:    vdpSpell 318, 250, SPELLTILE1, V2|H2|VALUE1
                 

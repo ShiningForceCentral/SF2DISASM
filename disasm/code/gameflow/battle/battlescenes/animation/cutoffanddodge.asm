@@ -81,7 +81,7 @@ loc_1B570:
                 bsr.w   LoadSpellTileset
                 lea     ((SPELLANIMATION_PROPERTIES-$1000000)).w,a5
                 lea     ((BATTLESCENE_ALLY_X_SPEED-$1000000)).w,a3
-                lea     table_1B608(pc), a0
+                lea     graphic_DustCloud(pc), a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   @NotMirroredGraphics
                 addq.w  #VDP_SPELL_ENTRY_SIZE,a0
@@ -135,6 +135,8 @@ loc_1B604:
 
                 modend
                 
-table_1B608:    vdpSpell 312, 272, SPELLTILE1, V2|H2|VALUE2
+graphic_DustCloud:
+                vdpSpell 312, 272, SPELLTILE1, V2|H2|VALUE2
                 
+				; mirror
                 vdpSpell 192, 256, SPELLTILE1, V2|H2|VALUE2

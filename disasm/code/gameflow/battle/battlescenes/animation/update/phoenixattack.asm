@@ -10,9 +10,9 @@ spellanimationUpdate_PhoenixAttack:
                 lea     ((SPELLANIMATION_PROPERTIES-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
                 btst    #0,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
-                beq.w   loc_1EAB2
+                beq.w   AnimatePhoenixCyclone
                 moveq   #38,d0 
-                moveq   #2,d1
+                moveq   #2,d1 ; counter for waves
 loc_1EA22:
                 
                 movem.w d0-d1,-(sp)
@@ -61,7 +61,7 @@ loc_1EA98:
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 rts
-loc_1EAB2:
+AnimatePhoenixCyclone:
                 
                 tst.w   (a5)
                 beq.w   loc_1EB7E

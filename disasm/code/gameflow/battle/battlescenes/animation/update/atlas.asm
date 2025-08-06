@@ -37,14 +37,14 @@ sub_1E160:
                 tst.w   8(a5)
                 bne.s   loc_1E17C
                 lea     ((byte_FFB532-$1000000)).w,a3
-                lea     table_1E290(pc), a0
+                lea     layout_Invocation_Mirror(pc), a0
                 move.w  #16,d0
                 bra.s   loc_1E188
 loc_1E17C:
                 
                 lea     ((dword_FFB536-$1000000)).w,a3
-                lea     table_1F7BE(pc), a0
-                move.w  #$130,d0
+                lea     layout_Invocation(pc), a0
+                move.w  #304,d0
 loc_1E188:
                 
                 move.w  2(a5),d1
@@ -54,13 +54,13 @@ loc_1E188:
                 move.w  #1,(a5)
                 addq.w  #1,2(a5)
                 clr.l   4(a5)
-                moveq   #$18,d6
+                moveq   #24,d6
                 jsr     (GenerateRandomNumber).w
-                add.w   d7,d0
-                moveq   #$30,d6 
+                add.w   d7,d0 ; random x
+                moveq   #48,d6 
                 jsr     (GenerateRandomNumber).w
-                move.w  d7,d2
-                addi.w  #$10,d2
+                move.w  d7,d2 ; random y
+                addi.w  #16,d2
                 bra.w   loc_1E268
 loc_1E1BC:
                 
@@ -106,7 +106,7 @@ loc_1E210:
                 
                 move.w  d1,6(a5)
                 add.w   (a4),d2
-                cmpi.w  #$C,(a5)
+                cmpi.w  #12,(a5)
                 bcs.s   loc_1E224
                 addq.w  #1,2(a5)
                 lea     $24(a0),a0
@@ -147,21 +147,21 @@ loc_1E268:
                 
                 move.l  a4,-(sp)
                 moveq   #3,d1
-loc_1E26C:
+@MoveInvocation_OuterLoop:
                 
                 moveq   #3,d3
-loc_1E26E:
+@MoveInvocation_InnerLoop:
                 
                 move.w  d2,(a4)+
                 move.w  #VDPSPELLPROP_V4|VDPSPELLPROP_H4,(a4)+
                 move.w  (a0)+,(a4)+
                 move.w  d0,(a4)+
                 addi.w  #32,d2 
-                dbf     d3,loc_1E26E
+                dbf     d3,@MoveInvocation_InnerLoop
 				
                 addi.w  #32,d0 
                 subi.w  #128,d2 
-                dbf     d1,loc_1E26C
+                dbf     d1,@MoveInvocation_OuterLoop
 				
                 movea.l (sp)+,a4
                 rts
@@ -169,7 +169,8 @@ loc_1E26E:
     ; End of function sub_1E160
 
                 ; Reverse invocation layout
-table_1E290:    dc.w $160|VDPTILE_PRIORITY|VDPTILE_MIRROR
+layout_Invocation_Mirror:
+                dc.w $160|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $170|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $1F0|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $200|VDPTILE_PRIORITY|VDPTILE_MIRROR

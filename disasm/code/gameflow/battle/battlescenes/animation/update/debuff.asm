@@ -78,7 +78,7 @@ loc_1D0D4:
 graphic_DebuffCloud:
                 vdpSpell 0, 0, SPELLTILE1, V4|H4|VALUE2
                 
-table_1D0F6:    dc.w $10   ; graphic 2
-                dc.w $20   ; graphic 3
-                dc.w $10   ; graphic 2
-                dc.w 0     ; graphic 1
+table_1D0F6:    dc.w $10   ; graphic 2 offset
+                dc.w $20   ; graphic 3 offset
+                dc.w $10   ; graphic 2 offset
+                dc.w 0     ; graphic 1 offset

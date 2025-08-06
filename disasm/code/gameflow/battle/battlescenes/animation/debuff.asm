@@ -61,8 +61,9 @@ spellanimationSetup_Debuff:
                 lea     ((byte_FFB532-$1000000)).w,a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   @Mirror
-                move.w  #$40,(a0)+ 
-                move.w  #$20,(a0) 
+				
+                move.w  #$40,(a0)+ ; x parameter
+                move.w  #$20,(a0)  ; y parameter
                 bra.s   @loc_2
 @Mirror:
                 
@@ -83,7 +84,7 @@ spellanimationSetup_Debuff:
                 bsr.w   sub_1A2F6       
                 moveq   #4,d6
                 jsr     (GenerateRandomNumber).w
-                addi.w  #$C,d7
+                addi.w  #12,d7
                 move.w  d7,4(a0)
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
@@ -95,7 +96,7 @@ spellanimationSetup_Debuff:
                 move.b  #SPELLANIMATION_DEBUFF1,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #4,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Debuff
 

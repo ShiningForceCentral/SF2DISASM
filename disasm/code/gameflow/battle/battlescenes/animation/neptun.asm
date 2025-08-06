@@ -20,29 +20,29 @@ spellanimationSetup_Neptun:
                 moveq   #9,d2
                 lea     table_1B358(pc), a0
                 lea     6(a0),a1
-loc_1B248:
+@BlinkInInvocation_Loop:
                 
                 movem.l d1-d2/a0-a1,-(sp)
                 bsr.w   LoadInvocationSprite
                 movem.l (sp)+,d1-d2/a0-a1
                 swap    d2
                 tst.w   d2
-                bne.s   loc_1B25E
+                bne.s   @GetBlinkDuration
                 moveq   #1,d0
-                bra.s   loc_1B268
-loc_1B25E:
+                bra.s   @Continue
+@GetBlinkDuration:
                 
                 subq.w  #1,d2
-                bne.s   loc_1B266
+                bne.s   @NotLastBlink
                 move.w  #1,d2
-loc_1B266:
+@NotLastBlink:
                 
                 move.w  d2,d0
-loc_1B268:
+@Continue:
                 
                 jsr     (Sleep).w       
                 exg     a0,a1
-                dbf     d1,loc_1B248
+                dbf     d1,@BlinkInInvocation_Loop
                 
                 moveq   #SPELLTILESET_NEPTUN,d0
                 bsr.w   LoadSpellTilesetForInvocation
@@ -114,7 +114,7 @@ loc_1B314:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #4,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Neptun
 

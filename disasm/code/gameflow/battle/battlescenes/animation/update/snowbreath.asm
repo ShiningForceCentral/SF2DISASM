@@ -121,7 +121,7 @@ loc_1E8D6:
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
-                bra.w   loc_1D45C
+                bra.w   AnimateBreath
 
     ; End of function spellanimationUpdate_SnowBreath
 

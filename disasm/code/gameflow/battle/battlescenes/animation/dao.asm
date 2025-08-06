@@ -13,19 +13,19 @@ spellanimationSetup_Dao:
                 bsr.w   LoadInvocationSpell
                 moveq   #1,d1
                 moveq   #6,d2
-loc_1B026:
+@ManifestInvocation_Loop:
                 
                 movem.w d1-d2,-(sp)
                 cmpi.w  #1,d2
-                beq.s   byte_1B036
+                beq.s   @HoldOnFrame
                 jsr     (WaitForVInt).w
-                bra.s   loc_1B040
-byte_1B036:
+                bra.s   @Continue
+@HoldOnFrame:
                 
                 sndCom  SFX_INTRO_LIGHTNING
                 moveq   #20,d0
                 jsr     (Sleep).w       
-loc_1B040:
+@Continue:
                 
                 clr.w   d0
                 bsr.w   LoadInvocationSpriteFrameToVram
@@ -33,7 +33,7 @@ loc_1B040:
                 bsr.w   sub_1A3E8
                 movem.w (sp)+,d1-d2
                 addq.w  #1,d1
-                dbf     d2,loc_1B026
+                dbf     d2,@ManifestInvocation_Loop
                 
                 moveq   #SPELLTILESET_DAO,d0
                 bsr.w   LoadSpellTileset
@@ -59,7 +59,7 @@ loc_1B040:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Dao
 

@@ -23,7 +23,7 @@ spellanimationSetup_ArrowsAndSpears:
                 
                 cmpi.b  #2,d0
                 bcs.s   loc_1ADDA
-                addq.w  #1,d1
+                addq.w  #1,d1 ; uses 2 sprites
                 cmpi.b  #3,d0
                 bcs.s   loc_1ADDA
                 moveq   #3,d0
@@ -49,14 +49,14 @@ loc_1ADDA:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_ArrowsAndSpears
 
 table_1AE20:    ; Variation 1
                 dc.w -$E00
-                dc.w $190  ; first sprite x
-                dc.w $1    ; second sprite x
+                dc.w $190  ; first sprite x start
+                dc.w $1    ; second sprite x start
                 dc.w $E8   ; y offset
 
                 ; Variation 2

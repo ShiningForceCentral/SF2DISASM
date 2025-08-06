@@ -35,7 +35,7 @@ loc_1D526:
                 
                 move.w  d1,6(a5)
                 add.w   d0,VDPSPRITE_OFFSET_X(a4)
-                tst.w   (a3) ; arrow or spear?
+                tst.w   (a3)
                 beq.s   loc_1D536
                 add.w   d0,NEXTVDPSPRITE_OFFSET_X(a4)
 loc_1D536:

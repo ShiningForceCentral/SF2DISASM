@@ -20,8 +20,8 @@ spellanimationSetup_Blast:
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   loc_1A96E
                 
-                move.w  #208,(a2) 
-                move.w  #224,2(a2) 
+                move.w  #208,(a2)  ; x value
+                move.w  #224,2(a2) ; y value
                 cmpi.w  #3,d1
                 bcs.s   loc_1A96C
 				
@@ -33,8 +33,8 @@ loc_1A96C:
                 bra.s   loc_1A98A
 loc_1A96E:
                 
-                move.w  #312,(a2)
-                move.w  #240,2(a2) 
+                move.w  #312,(a2)  ; x value
+                move.w  #240,2(a2) ; y value
                 cmpi.w  #3,d1
                 bcs.s   loc_1A98A
 				
@@ -87,7 +87,7 @@ loc_1AA06:
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Blast
 

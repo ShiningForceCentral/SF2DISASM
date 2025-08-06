@@ -14,19 +14,19 @@ spellanimationSetup_Apollo:
                 sndCom  SFX_INTRO_LIGHTNING
                 lea     ((SPRITE_20-$1000000)).w,a0
                 moveq   #21,d0
-loc_1B0EA:
+@LowerInvocation_OuterLoop:
                 
                 move.l  a0,-(sp)
                 moveq   #15,d1
-loc_1B0EE:
+@LowerInvocation_InnerLoop:
                 
                 addq.w  #8,(a0) ; add 1 tile height to y
                 addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
-                dbf     d1,loc_1B0EE
+                dbf     d1,@LowerInvocation_InnerLoop
                 
                 movea.l (sp)+,a0
                 jsr     (WaitForVInt).w
-                dbf     d0,loc_1B0EA
+                dbf     d0,@LowerInvocation_OuterLoop
                 
                 moveq   #SUMMON_APOLLO,d0
                 moveq   #1,d1
@@ -64,21 +64,24 @@ loc_1B0EE:
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
                 jsr     (WaitForDmaQueueProcessing).w
+				
                 moveq   #38,d0 ; offset to sprite_38
                 lea     table_1B1FA(pc), a0
                 bsr.w   ConstructSimpleGraphic
                 jsr     (WaitForVInt).w
                 sndCom  SFX_BATTLEFIELD_DEATH
+				
                 lea     ((SPRITE_38-$1000000)).w,a0
                 moveq   #19,d0
                 moveq   #1,d1
-loc_1B1A4:
+@BuoyInvocation_Loop:
                 
+				; bob up/down
                 move.w  (a0),d2
                 exg     d1,d2
                 move.w  d2,(a0)
                 jsr     (WaitForVInt).w
-                dbf     d0,loc_1B1A4
+                dbf     d0,@BuoyInvocation_Loop
                 
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
@@ -93,7 +96,7 @@ loc_1B1A4:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #2,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Apollo
 

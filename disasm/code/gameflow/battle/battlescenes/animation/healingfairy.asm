@@ -41,7 +41,7 @@ loc_1A88E:
                 move.b  d1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 subq.w  #1,d1
                 moveq   #38,d0   ; offset to sprite_38
-loc_1A898:
+@GenerateFairy_Loop:
                 
                 movem.l d0-d1/a0,-(sp)
                 moveq   #2,d1
@@ -65,12 +65,12 @@ loc_1A898:
                 move.w  d7,4(a0)
                 movem.l (sp)+,d0-d1/a0
                 addq.w  #2,d0
-                dbf     d1,loc_1A898
+                dbf     d1,@GenerateFairy_Loop
                 
                 move.w  #-1,((byte_FFB404-$1000000)).w
                 move.b  #SPELLANIMATION_HEALING_FAIRY,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_HealingFairy
 

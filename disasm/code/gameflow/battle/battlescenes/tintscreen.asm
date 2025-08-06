@@ -5,13 +5,13 @@
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1A028:
+StoreBattlespritePalette:
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   tint_None
                 bsr.w   CopyPalettes
 
-    ; End of function sub_1A028
+    ; End of function StoreBattlespritePalette
 
 
 ; =============== S U B R O U T I N E =======================================

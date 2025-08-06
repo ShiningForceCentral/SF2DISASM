@@ -17,14 +17,14 @@ spellanimationSetup_ShotFire:
                 btst    #SPELLANIMATION_BIT_MIRRORED,d0
                 beq.s   loc_1AF2C
                 addq.w  #8,a0
-                lea     $C(a1),a1
+                lea     12(a1),a1
 loc_1AF2C:
                 
                 lea     ((byte_FFB532-$1000000)).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
                 move.l  (a1),(a2)
-                moveq   #$26,d0   ; offset to sprite_38
+                moveq   #38,d0   ; offset to sprite_38
                 bsr.w   ConstructSimpleGraphic
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
@@ -33,18 +33,24 @@ loc_1AF2C:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_ShotFire
 
-table_1AF64:    dc.l $F400FFC0
-                dc.l $18000E8
-                dc.l $500060
+table_1AF64:    dc.w -$C00 ; x parameter
+                dc.w -$40  ; y parameter
+                dc.w $180  ; x offset
+                dc.w $E8   ; y offset
+                dc.w $50   ; x parameter
+                dc.w $60   ; y parameter
                 
                 ; mirror
-                dc.l $C000040
-                dc.l $7000F0
-                dc.l $B80070
+                dc.w $C00
+                dc.w $40
+                dc.w $70
+                dc.w $F0
+                dc.w $B8
+                dc.w $70
                 
 graphic_BurstShots:
                 vdpSpell 288, 232, SPELLTILE77, V2|H2|VALUE1

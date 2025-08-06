@@ -20,8 +20,9 @@ spellanimationSetup_Desoul:
                 lea     ((byte_FFB532-$1000000)).w,a0
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   loc_1A778
-                move.w  #192,(a0) 
-                move.w  #152,2(a0) 
+				
+                move.w  #192,(a0)  ; x parameter
+                move.w  #152,2(a0) ; y parameter
                 move.w  #128,d2 
                 moveq   #2,d3
                 bra.s   loc_1A786
@@ -40,23 +41,27 @@ loc_1A786:
                 move.b  d3,6(a0)
                 moveq   #1,d2
                 cmpi.b  #2,d1
-                bcs.s   loc_1A7E2
+                bcs.s   @Continue ; variation 1 has no extra sprites
+				
+				; soul sprite animation data
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #32,2(a0) 
                 move.w  #30,4(a0)
                 move.w  #3,6(a0)
+				
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #32,2(a0) 
                 move.w  #20,4(a0)
                 move.w  #$301,6(a0)
+				
                 moveq   #42,d0   ; offset to sprite_42
                 lea     table_1A810(pc), a0
                 bsr.w   ConstructSimpleGraphic
                 bsr.w   ConstructSimpleGraphic
                 addq.w  #2,d2
-loc_1A7E2:
+@Continue:
                 
                 move.l  #table_DesoulBackgroundModification,((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
@@ -65,7 +70,7 @@ loc_1A7E2:
                 move.b  #SPELLANIMATION_DESOUL,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  d2,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Desoul
 

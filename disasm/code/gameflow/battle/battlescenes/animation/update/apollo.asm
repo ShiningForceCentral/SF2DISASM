@@ -90,7 +90,7 @@ loc_1DEFC:
                 bne.w   loc_1DF24
                 tst.w   ((byte_FFB404-$1000000)).w
                 beq.w   loc_1DF7E
-                cmpi.b  #$15,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
+                cmpi.b  #21,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.w   loc_1DF7E
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       

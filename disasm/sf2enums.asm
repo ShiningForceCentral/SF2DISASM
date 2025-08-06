@@ -1349,13 +1349,13 @@ SPELLDEFS_COUNTER: equ 99
 ; enum SpellAnimations (bitfield)
 SPELLANIMATION_NONE: equ 0
 SPELLANIMATION_BLAZE: equ 1 ; variation 1: lone flame
-                                        ; variation 2: small flame/fireballs
-                                        ; variation 3: large flame/fireballs
-                                        ; variation 4: large flame and flame serpent
+                            ; variation 2: small flame/fireballs
+                            ; variation 3: large flame/fireballs
+                            ; variation 4: large flame and flame serpent
 SPELLANIMATION_FREEZE: equ 2
 SPELLANIMATION_DESOUL: equ 3
 SPELLANIMATION_HEALING_FAIRY: equ 4 ; ally caster: fairy of light
-                                        ; enemy caster: fairy of darkness
+                                    ; enemy caster: fairy of darkness
 SPELLANIMATION_BLAST: equ 5
 SPELLANIMATION_DETOX: equ 6
 SPELLANIMATION_BOLT: equ 7
@@ -1383,7 +1383,7 @@ SPELLANIMATION_ATTACK_SPELL: equ $1A ; SFCD's ATTACK spell (unused)
 SPELLANIMATION_DEBUFF2: equ $1B
 SPELLANIMATION_DEBUFF3: equ $1C
 SPELLANIMATION_PHOENIX_ATTACK: equ $1D ; variation 1/3: sound waves
-                                        ; variation 2/4: Blast cyclone
+                                       ; variation 2/4: Blast cyclone
 SPELLANIMATION_BURST_ROCK_EXPLOSION: equ $1E
 SPELLANIMATION_ODD_EYE_BEAM: equ $1F
 SPELLANIMATION_VARIATION2: equ $20

@@ -103,23 +103,23 @@ loc_1A56E:
                 addq.b  #1,d0
                 move.b  d0,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Blaze
 
 table_1A594:    ; Variation 1
-                dc.b 0
-                dc.b $48
-                dc.b $70
-                dc.b $70
+                dc.b 0    ; groundflame graphic index
+                dc.b $48  ; x offset
+                dc.b $70  ; y offset
+                dc.b $70  ; second sprite y offset
                 
-                dc.b 0
-                dc.b 0
-                dc.b $50
-                dc.b 0
+                dc.b 0    ; 0: small meteor/explosion  1: large meteor/explosion
+                dc.b 0    ; # of meteors
+                dc.b $50  ; meteor x offset start
+                dc.b 0    ; compare to dragon x
                 
-                dc.b 0
-                dc.b 0
+                dc.b 0    ; compare to dragon y
+                dc.b 0    ; spacer
                 
                 ; Variation 2
                 dc.b 1

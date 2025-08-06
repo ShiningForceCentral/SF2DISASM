@@ -19,6 +19,8 @@ spellanimationUpdate_GunnerBlast:
                 add.w   6(a5),d0
                 tst.w   d0
                 bmi.s   loc_1DA2E
+				
+				; mirrored
                 move.w  d0,d1
                 andi.w  #BYTE_MASK,d1
                 asr.w   #BYTE_SHIFT_COUNT,d0
@@ -193,7 +195,7 @@ loc_1DBDE:
                 moveq   #12,d1  ; graphic made of 12 elements
                 lea     graphic_GunnerBlast(pc), a0
                 bsr.w   ConstructComplexGraphic       
-                moveq   #4,d0
+                moveq   #4,d0 ; shot graphic size
                 moveq   #11,d1
 loc_1DBEE:
                 

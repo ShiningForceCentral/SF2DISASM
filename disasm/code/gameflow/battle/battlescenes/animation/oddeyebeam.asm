@@ -49,18 +49,20 @@ loc_1B764:
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_OddEyeBeam
 
 table_1B794:    ; for Zynk
-                dc.l $10400E9
-                dc.w $800
+                dc.w $104  ; x parameter
+                dc.w $E9   ; y parameter
+                dc.w $800  ; Mirror bitfield value
                 
                 vdpSpell 284, 229, SPELLTILE1, V2|H2|VALUE2|MIRRORED
                 
                 ; for Oddeye
-                dc.l $D200CC
+                dc.w $D2
+                dc.w $CC
                 dc.w $0
                 
                 vdpSpell 210, 204, SPELLTILE5, V1|H4|VALUE2

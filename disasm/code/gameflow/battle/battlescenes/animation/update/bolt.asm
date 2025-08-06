@@ -81,7 +81,7 @@ loc_1CEF6:
                 move.w  #1,(a4)
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
-                dbf     d1,loc_1CEF6
+                dbf     d1,loc_1CEF6 ; something to reset data?
                 
                 movea.l (sp)+,a4
                 clr.b   ((byte_FFB588-$1000000)).w
@@ -111,7 +111,7 @@ loc_1CF46:
                 move.w  #1,(a4)
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
-                dbf     d1,loc_1CF46
+                dbf     d1,loc_1CF46 ; something to reset data?
                 
                 movea.l (sp)+,a4
                 tst.w   ((byte_FFB404-$1000000)).w
@@ -123,7 +123,7 @@ loc_1CF68:
                 
                 move.b  ((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w,d6
                 andi.w  #7,d6
-                lsl.w   #2,d6
+                lsl.w   #2,d6 ; 4x animation variant
                 jsr     (GenerateRandomNumber).w
                 addq.w  #2,d7
                 clr.w   2(a5)
@@ -135,17 +135,17 @@ loc_1CF84:
                 addq.w  #5,d0
                 lea     $28(a4),a4  ; offset of 5x sprite size
                 lea     12(a5),a5
-                dbf     d1,loc_1CE62
+                dbf     d1,loc_1CE62 ; BoltStrike_Loop
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 move.w  2(a3),d1
                 beq.w   loc_1CFEA
                 subq.w  #1,d1
-loc_1CFA8:
+@BoltOrb_Loop:
                 
                 tst.w   (a5)
-                beq.w   loc_1CFDE
+                beq.w   @NextEntry_Orb
                 addq.w  #1,(a5)
                 move.w  2(a5),d2
                 addq.w  #1,d2
@@ -153,27 +153,27 @@ loc_1CFA8:
                 move.w  d2,2(a5)
                 move.w  #VDPTILE_SPELLTILE148|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d3
                 lsr.w   #1,d2
-                bcc.s   loc_1CFCA
+                bcc.s   @NotMirrored_Orb
                 bset    #VDPTILE_MIRROR_BIT,d3
-loc_1CFCA:
+@NotMirrored_Orb:
                 
                 lsr.w   #1,d2
-                bcc.s   loc_1CFD2
-                addi.w  #16,d3
-loc_1CFD2:
+                bcc.s   @Continue_Orb
+                addi.w  #16,d3 ; frame 2
+@Continue_Orb:
                 
                 lsr.w   #1,d2
-                bcc.s   loc_1CFDA
+                bcc.s   @NotFlipped_Orb
                 bset    #VDPTILE_FLIP_BIT,d3
-loc_1CFDA:
+@NotFlipped_Orb:
                 
                 move.w  d3,VDPSPRITE_OFFSET_TILE(a4)
-loc_1CFDE:
+@NextEntry_Orb:
                 
                 addq.w  #1,d0
                 addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
-                lea     12(a5),a5
-                dbf     d1,loc_1CFA8
+                lea     12(a5),a5 ; offset to next animation event
+                dbf     d1,@BoltOrb_Loop
 loc_1CFEA:
                 
                 bsr.w   sub_1B90C       

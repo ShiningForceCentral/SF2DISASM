@@ -15,7 +15,7 @@ spellanimationSetup_PrismLaser:
                 cmpi.w  #ENEMYBATTLESPRITE_PRISM_FLOWER,((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w 
                                                         ; HARDCODED Prism Flower enemy battle sprite
                 bne.s   loc_1B426
-                move.w  #40,4(a0) 
+                move.w  #40,4(a0) ; a0 references some iteration of SPELLANIMATION_PROPERTIES
                 bra.s   loc_1B42C
 loc_1B426:
                 
@@ -48,7 +48,7 @@ loc_1B456:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_PrismLaser
 

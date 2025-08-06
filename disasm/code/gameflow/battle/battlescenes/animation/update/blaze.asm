@@ -401,12 +401,12 @@ loc_1BD28:
                 move.b  #1,14(a5)
 loc_1BD2E:
                 
-                bclr    #3,VDPSPRITE_OFFSET_TILE(a4)
+                bclr    #3,VDPSPRITE_OFFSET_TILE(a4) ; make medium tail fireball into small tail fireball
                 cmpi.w  #64,2(a5) 
                 bcs.s   return_1BD4A
                 cmpi.w  #192,2(a5) 
                 bcc.s   return_1BD4A
-                bset    #3,VDPSPRITE_OFFSET_TILE(a4)
+                bset    #3,VDPSPRITE_OFFSET_TILE(a4) ; make small tail fireball into medium tail fireball
 return_1BD4A:
                 
                 rts
@@ -470,7 +470,7 @@ sub_1BDA0:
                 clr.w   d2
                 move.b  8(a3),d2
                 addi.w  #128,d2 
-                move.w  6(a4),d3
+                move.w  VDPSPRITE_OFFSET_X(a4),d3
                 move.w  (a4),d4
                 clr.w   d5
                 clr.w   d6
@@ -539,23 +539,23 @@ table_1BE1C:    dc.b 0
                 dc.b $50
                 dc.b $FF
 				
-table_1BE2A:    dc.w 33  ; small flame frame 1
-                dc.w 33  ; small flame frame 1
+table_1BE2A:    dc.w 33  ; small flame frame 1 offset
+                dc.w 33  ; small flame frame 1 offset
 				
-                dc.w 41  ; small flame frame 2
-                dc.w 41  ; small flame frame 2
+                dc.w 41  ; small flame frame 2 offset
+                dc.w 41  ; small flame frame 2 offset
 				
-                dc.w 49  ; medium flame frame 1 top
-                dc.w 61  ; medium flame frame 1 bottom
+                dc.w 49  ; medium flame frame 1 top offset
+                dc.w 61  ; medium flame frame 1 bottom offset
 				
-                dc.w 67  ; medium flame frame 2 top
-                dc.w 79  ; medium flame frame 2 bottom
+                dc.w 67  ; medium flame frame 2 top offset
+                dc.w 79  ; medium flame frame 2 bottom offset
 				
-                dc.w 85  ; large flame frame 1 top
-                dc.w 101 ; large flame frame 1 bottom
+                dc.w 85  ; large flame frame 1 top offset
+                dc.w 101 ; large flame frame 1 bottom offset
 				
-                dc.w 117 ; large flame frame 2 top
-                dc.w 133 ; large flame frame 2 bottom
+                dc.w 117 ; large flame frame 2 top offset
+                dc.w 133 ; large flame frame 2 bottom offset
 				
 table_1BE42:    vdpSpell 128, 96, SPELLTILE150, V2|H2|VALUE2  ; small meteor frame 1
                 vdpSpell 128, 96, SPELLTILE154, V2|H2|VALUE2  ; small meteor frame 2

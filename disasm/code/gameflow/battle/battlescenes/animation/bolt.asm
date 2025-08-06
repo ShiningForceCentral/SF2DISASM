@@ -68,21 +68,25 @@ loc_1AB2C:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  1(a1),((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Bolt
 
 table_1AB4E:    ; Variation 1
-                dc.l $10000
+                dc.w $1 ; max concurrent bolt strikes
+                dc.w $0 ; number of lightning orbs
                 
                 ; Variation 2
-                dc.l $20001
+                dc.w $2
+                dc.w $1
                 
                 ; Variation 3
-                dc.l $30002
+                dc.w $3
+                dc.w $2
                 
                 ; Variation 4
-                dc.l $40004
+                dc.w $4
+                dc.w $4
                 
 table_1AB5E:    vdpSpell 200, 192, SPELLTILE148, V4|H4|VALUE2
                 vdpSpell 152, 216, SPELLTILE164, V4|H4|VALUE2

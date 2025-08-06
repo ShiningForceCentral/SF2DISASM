@@ -121,8 +121,8 @@ loc_1C362:
                 move.w  d0,VDPSPRITE_OFFSET_X(a4)
                 move.w  d0,NEXTVDPSPRITE_OFFSET_X(a4)
                 addi.w  #32,d0 
-                move.w  d0,$16(a4)
-                move.w  d0,$1E(a4)
+                move.w  d0,$16(a4) ; X offset of next-next-sprite
+                move.w  d0,$1E(a4) ; X offset of next-next-next-sprite
                 move.w  2(a3),d0
                 addi.w  #16,d0
                 move.w  d0,(a4)

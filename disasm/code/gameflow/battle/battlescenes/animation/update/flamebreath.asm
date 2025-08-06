@@ -20,7 +20,7 @@ loc_1D2F6:
                 addq.w  #1,(a5)
                 cmpi.w  #2,(a5)
                 bne.w   loc_1D348
-                lea     table_1D4A0(pc), a0
+                lea     graphic_FlameBreathParticle(pc), a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.w   loc_1D33C
                 addq.w  #VDP_SPELL_ENTRY_SIZE,a0
@@ -139,34 +139,34 @@ loc_1D424:
                 bsr.w   sub_1B884
                 btst    #2,1(a5)
                 bne.s   loc_1D43E
-                bclr    #3,VDPSPRITE_OFFSET_TILE(a4)
+                bclr    #3,VDPSPRITE_OFFSET_TILE(a4) ; subtract 8
                 bra.s   loc_1D444
 loc_1D43E:
                 
-                bset    #3,VDPSPRITE_OFFSET_TILE(a4)
+                bset    #3,VDPSPRITE_OFFSET_TILE(a4) ; add 8
 loc_1D444:
                 
                 movem.w (sp)+,d0-d1
                 lea     12(a5),a5
-                addq.w  #8,a4
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 addq.w  #1,d0
                 dbf     d1,loc_1D2F6
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
-loc_1D45C:
+AnimateBreath:
                 
                 lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((SPELLANIMATION_PROPERTIES-$1000000)).w,a5
                 moveq   #23,d0
-loc_1D466:
+@UpdateParticle_OuterLoop:
                 
                 tst.w   (a5)
-                bne.s   loc_1D494
-                lea     (a4),a0
-                lea     (a5),a1
+                bne.s   @NextEvent
+                lea     (a4),a0 ; copy sprite address
+                lea     (a5),a1 ; copy animation properties address
                 move.w  d0,d1
-loc_1D470:
+@UpdateParticle_InnerLoop:
                 
                 move.l  NEXTVDPSPRITE_OFFSET_Y(a0),(a0)
                 move.l  NEXTVDPSPRITE_OFFSET_TILE(a0),VDPSPRITE_OFFSET_TILE(a0)
@@ -175,17 +175,18 @@ loc_1D470:
                 move.l  20(a1),8(a1)
                 addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
                 lea     12(a1),a1
-                dbf     d1,loc_1D470
-loc_1D494:
+                dbf     d1,@UpdateParticle_InnerLoop
+@NextEvent:
                 
                 addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 lea     12(a5),a5
-                dbf     d0,loc_1D466
+                dbf     d0,@UpdateParticle_OuterLoop
                 rts
 
     ; End of function spellanimationUpdate_FlameBreath
 
-table_1D4A0:    vdpSpell 284, 222, SPELLTILE1, V1|H1|32  ; ally
+graphic_FlameBreathParticle:
+                vdpSpell 284, 222, SPELLTILE1, V1|H1|32  ; ally
                 vdpSpell 210, 236, SPELLTILE1, V1|H1|32  ; cerberus
                 vdpSpell 223, 214, SPELLTILE1, V1|H1|32  ; hydra
                 vdpSpell 208, 216, SPELLTILE1, V1|H1|32  ; wyvern
